@@ -11,6 +11,8 @@ The two screens **complement, never compete**: abstract idea ↔ concrete receip
 
 ---
 
+> **Before you build:** every reel is **storyboarded first** (STAGE 6 — scope the visuals before designing them). See `storyboards/41-slash.md` for the worked example with the design reasoning per scene, and memory `reel-storyboard-process` for the process.
+
 ## 1. When to use it
 
 Use the split-screen for **SPOKEN-PROMPT FOLLOW-ALONG** reels (see the Script Factory, matrix branch 1): broad-consumer, doable-tonight, prompt-shaped topics where you want to (a) keep it fun/kinetic AND (b) show the real Claude UI + a real receipt for credibility. It is the standing template for tutorial-style reels.
