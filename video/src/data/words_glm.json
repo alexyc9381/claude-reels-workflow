@@ -1,0 +1,956 @@
+[
+{
+"word": "Stop",
+"start": 0,
+"end": 0.27,
+"line": 0
+},
+{
+"word": "overpaying",
+"start": 0.27,
+"end": 0.95,
+"line": 0
+},
+{
+"word": "for",
+"start": 0.95,
+"end": 1.21,
+"line": 0
+},
+{
+"word": "Claude",
+"start": 1.21,
+"end": 1.62,
+"line": 0
+},
+{
+"word": "Code.",
+"start": 1.62,
+"end": 1.88,
+"line": 0
+},
+{
+"word": "There's",
+"start": 1.88,
+"end": 2.21,
+"line": 0
+},
+{
+"word": "a",
+"start": 2.21,
+"end": 2.22,
+"line": 0
+},
+{
+"word": "model",
+"start": 2.22,
+"end": 2.44,
+"line": 0
+},
+{
+"word": "that",
+"start": 2.44,
+"end": 2.61,
+"line": 0
+},
+{
+"word": "does",
+"start": 2.61,
+"end": 2.78,
+"line": 0
+},
+{
+"word": "the",
+"start": 2.78,
+"end": 2.91,
+"line": 0
+},
+{
+"word": "same",
+"start": 2.91,
+"end": 3.08,
+"line": 0
+},
+{
+"word": "thing",
+"start": 3.08,
+"end": 3.34,
+"line": 0
+},
+{
+"word": "for",
+"start": 3.34,
+"end": 3.48,
+"line": 0
+},
+{
+"word": "a",
+"start": 3.48,
+"end": 3.52,
+"line": 0
+},
+{
+"word": "fifth",
+"start": 3.52,
+"end": 3.75,
+"line": 0
+},
+{
+"word": "of",
+"start": 3.75,
+"end": 3.9,
+"line": 0
+},
+{
+"word": "the",
+"start": 3.9,
+"end": 3.98,
+"line": 0
+},
+{
+"word": "price.",
+"start": 3.98,
+"end": 4.38,
+"line": 0
+},
+{
+"word": "It's",
+"start": 3.98,
+"end": 4.24,
+"line": 1
+},
+{
+"word": "called",
+"start": 4.24,
+"end": 4.63,
+"line": 1
+},
+{
+"word": "GLM",
+"start": 4.63,
+"end": 4.87,
+"line": 1
+},
+{
+"word": "5.2.",
+"start": 4.87,
+"end": 5.42,
+"line": 1
+},
+{
+"word": "And",
+"start": 5.42,
+"end": 5.58,
+"line": 1
+},
+{
+"word": "on",
+"start": 5.58,
+"end": 5.69,
+"line": 1
+},
+{
+"word": "real",
+"start": 5.69,
+"end": 5.91,
+"line": 1
+},
+{
+"word": "coding",
+"start": 5.91,
+"end": 6.24,
+"line": 1
+},
+{
+"word": "and",
+"start": 6.24,
+"end": 6.4,
+"line": 1
+},
+{
+"word": "agent",
+"start": 6.4,
+"end": 6.69,
+"line": 1
+},
+{
+"word": "tasks,",
+"start": 6.69,
+"end": 6.98,
+"line": 1
+},
+{
+"word": "it's",
+"start": 6.98,
+"end": 7.22,
+"line": 1
+},
+{
+"word": "going",
+"start": 7.22,
+"end": 7.54,
+"line": 1
+},
+{
+"word": "toe",
+"start": 7.54,
+"end": 7.7,
+"line": 1
+},
+{
+"word": "to",
+"start": 7.7,
+"end": 7.87,
+"line": 1
+},
+{
+"word": "toe",
+"start": 7.87,
+"end": 8.02,
+"line": 1
+},
+{
+"word": "with",
+"start": 8.02,
+"end": 8.26,
+"line": 1
+},
+{
+"word": "Opus",
+"start": 8.26,
+"end": 8.5,
+"line": 1
+},
+{
+"word": "for",
+"start": 8.5,
+"end": 8.63,
+"line": 1
+},
+{
+"word": "a",
+"start": 8.63,
+"end": 8.67,
+"line": 1
+},
+{
+"word": "fraction",
+"start": 8.67,
+"end": 9.06,
+"line": 1
+},
+{
+"word": "of",
+"start": 9.06,
+"end": 9.12,
+"line": 1
+},
+{
+"word": "the",
+"start": 9.12,
+"end": 9.25,
+"line": 1
+},
+{
+"word": "price.",
+"start": 9.25,
+"end": 9.5,
+"line": 1
+},
+{
+"word": "And",
+"start": 9.5,
+"end": 9.66,
+"line": 1
+},
+{
+"word": "it",
+"start": 9.66,
+"end": 9.77,
+"line": 1
+},
+{
+"word": "runs",
+"start": 9.77,
+"end": 9.99,
+"line": 1
+},
+{
+"word": "inside",
+"start": 9.99,
+"end": 10.39,
+"line": 1
+},
+{
+"word": "the",
+"start": 10.39,
+"end": 10.49,
+"line": 1
+},
+{
+"word": "same",
+"start": 10.49,
+"end": 10.7,
+"line": 1
+},
+{
+"word": "Claude",
+"start": 10.7,
+"end": 11.03,
+"line": 1
+},
+{
+"word": "Code",
+"start": 11.03,
+"end": 11.3,
+"line": 1
+},
+{
+"word": "you",
+"start": 11.3,
+"end": 11.44,
+"line": 1
+},
+{
+"word": "already",
+"start": 11.44,
+"end": 11.77,
+"line": 1
+},
+{
+"word": "use.",
+"start": 11.77,
+"end": 12.06,
+"line": 1
+},
+{
+"word": "Here's",
+"start": 12.06,
+"end": 12.41,
+"line": 2
+},
+{
+"word": "a",
+"start": 12.41,
+"end": 12.47,
+"line": 2
+},
+{
+"word": "swap.",
+"start": 12.47,
+"end": 12.9,
+"line": 2
+},
+{
+"word": "Grab",
+"start": 12.9,
+"end": 13.06,
+"line": 2
+},
+{
+"word": "a",
+"start": 13.06,
+"end": 13.1,
+"line": 2
+},
+{
+"word": "GLM",
+"start": 13.1,
+"end": 13.23,
+"line": 2
+},
+{
+"word": "coding",
+"start": 13.23,
+"end": 13.47,
+"line": 2
+},
+{
+"word": "key.",
+"start": 13.47,
+"end": 13.74,
+"line": 2
+},
+{
+"word": "It's",
+"start": 13.74,
+"end": 13.92,
+"line": 2
+},
+{
+"word": "a",
+"start": 13.92,
+"end": 13.96,
+"line": 2
+},
+{
+"word": "few",
+"start": 13.96,
+"end": 14.1,
+"line": 2
+},
+{
+"word": "dollars",
+"start": 14.1,
+"end": 14.43,
+"line": 2
+},
+{
+"word": "a",
+"start": 14.43,
+"end": 14.47,
+"line": 2
+},
+{
+"word": "month",
+"start": 14.47,
+"end": 14.74,
+"line": 2
+},
+{
+"word": "instead",
+"start": 14.74,
+"end": 15.05,
+"line": 2
+},
+{
+"word": "of",
+"start": 15.05,
+"end": 15.16,
+"line": 2
+},
+{
+"word": "$200.",
+"start": 15.16,
+"end": 15.54,
+"line": 2
+},
+{
+"word": "Then,",
+"start": 15.74,
+"end": 16.01,
+"line": 3
+},
+{
+"word": "point",
+"start": 16.01,
+"end": 16.3,
+"line": 3
+},
+{
+"word": "Claude",
+"start": 16.3,
+"end": 16.47,
+"line": 3
+},
+{
+"word": "Code",
+"start": 16.47,
+"end": 16.65,
+"line": 3
+},
+{
+"word": "at",
+"start": 16.65,
+"end": 16.74,
+"line": 3
+},
+{
+"word": "it.",
+"start": 16.74,
+"end": 17.02,
+"line": 3
+},
+{
+"word": "Two",
+"start": 17.02,
+"end": 17.17,
+"line": 3
+},
+{
+"word": "environment",
+"start": 17.17,
+"end": 17.73,
+"line": 3
+},
+{
+"word": "variables,",
+"start": 17.73,
+"end": 18.3,
+"line": 3
+},
+{
+"word": "the",
+"start": 18.3,
+"end": 18.52,
+"line": 3
+},
+{
+"word": "base",
+"start": 18.52,
+"end": 18.86,
+"line": 3
+},
+{
+"word": "URL",
+"start": 18.86,
+"end": 19.04,
+"line": 3
+},
+{
+"word": "to",
+"start": 19.04,
+"end": 19.19,
+"line": 3
+},
+{
+"word": "GLM's",
+"start": 19.19,
+"end": 19.57,
+"line": 3
+},
+{
+"word": "endpoint,",
+"start": 19.57,
+"end": 20.18,
+"line": 3
+},
+{
+"word": "and",
+"start": 20.18,
+"end": 20.33,
+"line": 3
+},
+{
+"word": "your",
+"start": 20.33,
+"end": 20.53,
+"line": 3
+},
+{
+"word": "key",
+"start": 20.53,
+"end": 20.74,
+"line": 3
+},
+{
+"word": "as",
+"start": 20.74,
+"end": 20.8,
+"line": 3
+},
+{
+"word": "a",
+"start": 20.8,
+"end": 20.83,
+"line": 3
+},
+{
+"word": "token.",
+"start": 20.83,
+"end": 21.26,
+"line": 3
+},
+{
+"word": "Run",
+"start": 21.04,
+"end": 21.4,
+"line": 4
+},
+{
+"word": "it,",
+"start": 21.4,
+"end": 21.93,
+"line": 4
+},
+{
+"word": "and",
+"start": 21.93,
+"end": 22.02,
+"line": 4
+},
+{
+"word": "Claude",
+"start": 22.02,
+"end": 22.31,
+"line": 4
+},
+{
+"word": "Code",
+"start": 22.31,
+"end": 22.46,
+"line": 4
+},
+{
+"word": "is",
+"start": 22.46,
+"end": 22.54,
+"line": 4
+},
+{
+"word": "now",
+"start": 22.54,
+"end": 22.68,
+"line": 4
+},
+{
+"word": "on",
+"start": 22.68,
+"end": 22.77,
+"line": 4
+},
+{
+"word": "GLM",
+"start": 22.77,
+"end": 22.9,
+"line": 4
+},
+{
+"word": "5.2.",
+"start": 22.9,
+"end": 23.52,
+"line": 4
+},
+{
+"word": "Same",
+"start": 23.52,
+"end": 23.85,
+"line": 4
+},
+{
+"word": "agents,",
+"start": 23.85,
+"end": 24.41,
+"line": 4
+},
+{
+"word": "same",
+"start": 24.41,
+"end": 24.55,
+"line": 4
+},
+{
+"word": "commands,",
+"start": 24.55,
+"end": 25.04,
+"line": 4
+},
+{
+"word": "same",
+"start": 25.04,
+"end": 25.22,
+"line": 4
+},
+{
+"word": "workflow.",
+"start": 25.22,
+"end": 25.72,
+"line": 4
+},
+{
+"word": "Your",
+"start": 25.72,
+"end": 25.89,
+"line": 4
+},
+{
+"word": "build",
+"start": 25.89,
+"end": 26.11,
+"line": 4
+},
+{
+"word": "just",
+"start": 26.11,
+"end": 26.28,
+"line": 4
+},
+{
+"word": "dropped",
+"start": 26.28,
+"end": 26.61,
+"line": 4
+},
+{
+"word": "about",
+"start": 26.61,
+"end": 26.81,
+"line": 4
+},
+{
+"word": "80%.",
+"start": 26.81,
+"end": 27.28,
+"line": 4
+},
+{
+"word": "Run",
+"start": 27.35,
+"end": 27.55,
+"line": 5
+},
+{
+"word": "the",
+"start": 27.55,
+"end": 27.75,
+"line": 5
+},
+{
+"word": "same",
+"start": 27.75,
+"end": 28.01,
+"line": 5
+},
+{
+"word": "build",
+"start": 28.01,
+"end": 28.34,
+"line": 5
+},
+{
+"word": "side",
+"start": 28.34,
+"end": 28.62,
+"line": 5
+},
+{
+"word": "by",
+"start": 28.62,
+"end": 28.77,
+"line": 5
+},
+{
+"word": "side,",
+"start": 28.77,
+"end": 29.03,
+"line": 5
+},
+{
+"word": "and",
+"start": 29.09,
+"end": 29.17,
+"line": 5
+},
+{
+"word": "you",
+"start": 29.17,
+"end": 29.36,
+"line": 5
+},
+{
+"word": "genuinely",
+"start": 29.36,
+"end": 29.73,
+"line": 5
+},
+{
+"word": "can't",
+"start": 29.73,
+"end": 29.95,
+"line": 5
+},
+{
+"word": "tell",
+"start": 29.95,
+"end": 30.14,
+"line": 5
+},
+{
+"word": "which",
+"start": 30.14,
+"end": 30.45,
+"line": 5
+},
+{
+"word": "is",
+"start": 30.45,
+"end": 30.46,
+"line": 5
+},
+{
+"word": "which.",
+"start": 30.46,
+"end": 30.87,
+"line": 5
+},
+{
+"word": "So",
+"start": 30.87,
+"end": 30.94,
+"line": 5
+},
+{
+"word": "if",
+"start": 30.94,
+"end": 31.01,
+"line": 5
+},
+{
+"word": "you're",
+"start": 31.01,
+"end": 31.23,
+"line": 5
+},
+{
+"word": "hitting",
+"start": 31.23,
+"end": 31.49,
+"line": 5
+},
+{
+"word": "limits",
+"start": 31.49,
+"end": 31.75,
+"line": 5
+},
+{
+"word": "or",
+"start": 31.75,
+"end": 31.83,
+"line": 5
+},
+{
+"word": "burning",
+"start": 31.83,
+"end": 32.13,
+"line": 5
+},
+{
+"word": "through",
+"start": 32.13,
+"end": 32.43,
+"line": 5
+},
+{
+"word": "credits",
+"start": 32.43,
+"end": 32.73,
+"line": 5
+},
+{
+"word": "on",
+"start": 32.73,
+"end": 32.81,
+"line": 5
+},
+{
+"word": "Claude,",
+"start": 32.81,
+"end": 33.15,
+"line": 5
+},
+{
+"word": "this",
+"start": 33.15,
+"end": 33.36,
+"line": 5
+},
+{
+"word": "is",
+"start": 33.36,
+"end": 33.48,
+"line": 5
+},
+{
+"word": "the",
+"start": 33.48,
+"end": 33.61,
+"line": 5
+},
+{
+"word": "move.",
+"start": 33.61,
+"end": 33.99,
+"line": 5
+},
+{
+"word": "Put",
+"start": 33.92,
+"end": 34.05,
+"line": 6
+},
+{
+"word": "the",
+"start": 34.05,
+"end": 34.18,
+"line": 6
+},
+{
+"word": "exact",
+"start": 34.18,
+"end": 34.39,
+"line": 6
+},
+{
+"word": "setup",
+"start": 34.39,
+"end": 34.6,
+"line": 6
+},
+{
+"word": "in",
+"start": 34.6,
+"end": 34.68,
+"line": 6
+},
+{
+"word": "a",
+"start": 34.68,
+"end": 34.72,
+"line": 6
+},
+{
+"word": "free",
+"start": 34.72,
+"end": 34.88,
+"line": 6
+},
+{
+"word": "doc.",
+"start": 34.88,
+"end": 35.24,
+"line": 6
+},
+{
+"word": "Comment,",
+"start": 35.24,
+"end": 35.8,
+"line": 6
+},
+{
+"word": "swap,",
+"start": 35.8,
+"end": 36.13,
+"line": 6
+},
+{
+"word": "and",
+"start": 36.13,
+"end": 36.22,
+"line": 6
+},
+{
+"word": "I'll",
+"start": 36.22,
+"end": 36.4,
+"line": 6
+},
+{
+"word": "send",
+"start": 36.4,
+"end": 36.66,
+"line": 6
+},
+{
+"word": "it",
+"start": 36.66,
+"end": 36.68,
+"line": 6
+},
+{
+"word": "over.",
+"start": 36.68,
+"end": 37.04,
+"line": 6
+}
+]

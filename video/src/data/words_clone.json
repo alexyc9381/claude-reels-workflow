@@ -1,0 +1,807 @@
+[
+{
+"word": "Comment",
+"start": 0.04,
+"end": 0.28
+},
+{
+"word": "CLONE",
+"start": 0.16,
+"end": 0.4
+},
+{
+"word": "and",
+"start": 0.42,
+"end": 0.58
+},
+{
+"word": "I'll",
+"start": 0.6,
+"end": 0.66
+},
+{
+"word": "send",
+"start": 0.68,
+"end": 0.82
+},
+{
+"word": "it",
+"start": 0.84,
+"end": 0.94
+},
+{
+"word": "to",
+"start": 0.96,
+"end": 1.08
+},
+{
+"word": "you.",
+"start": 1.08,
+"end": 1.22
+},
+{
+"word": "You",
+"start": 1.45,
+"end": 1.54
+},
+{
+"word": "have",
+"start": 1.54,
+"end": 1.68
+},
+{
+"word": "about",
+"start": 1.68,
+"end": 1.86
+},
+{
+"word": "24",
+"start": 1.86,
+"end": 2.32
+},
+{
+"word": "hours",
+"start": 2.32,
+"end": 2.58
+},
+{
+"word": "of",
+"start": 2.58,
+"end": 2.76
+},
+{
+"word": "free",
+"start": 2.76,
+"end": 3.1
+},
+{
+"word": "Fable",
+"start": 3.1,
+"end": 3.32
+},
+{
+"word": "5",
+"start": 3.32,
+"end": 3.6
+},
+{
+"word": "left",
+"start": 3.6,
+"end": 3.88
+},
+{
+"word": "before",
+"start": 3.88,
+"end": 4.24
+},
+{
+"word": "it",
+"start": 4.24,
+"end": 4.4
+},
+{
+"word": "goes",
+"start": 4.4,
+"end": 4.56
+},
+{
+"word": "pay-per",
+"start": 4.56,
+"end": 4.88
+},
+{
+"word": "token,",
+"start": 4.88,
+"end": 5.26
+},
+{
+"word": "but",
+"start": 5.44,
+"end": 5.56
+},
+{
+"word": "before",
+"start": 5.56,
+"end": 5.8
+},
+{
+"word": "it",
+"start": 5.8,
+"end": 5.96
+},
+{
+"word": "goes",
+"start": 5.96,
+"end": 6.14
+},
+{
+"word": "you",
+"start": 6.14,
+"end": 6.32
+},
+{
+"word": "can",
+"start": 6.32,
+"end": 6.5
+},
+{
+"word": "clone",
+"start": 6.5,
+"end": 6.72
+},
+{
+"word": "its",
+"start": 6.72,
+"end": 6.88
+},
+{
+"word": "brain",
+"start": 6.88,
+"end": 7.08
+},
+{
+"word": "into",
+"start": 7.08,
+"end": 7.32
+},
+{
+"word": "the",
+"start": 7.32,
+"end": 7.48
+},
+{
+"word": "cheaper",
+"start": 7.48,
+"end": 7.74
+},
+{
+"word": "models",
+"start": 7.74,
+"end": 8.08
+},
+{
+"word": "and",
+"start": 8.08,
+"end": 8.3
+},
+{
+"word": "it",
+"start": 8.3,
+"end": 8.4
+},
+{
+"word": "only",
+"start": 8.4,
+"end": 8.58
+},
+{
+"word": "takes",
+"start": 8.58,
+"end": 8.9
+},
+{
+"word": "one",
+"start": 8.9,
+"end": 9.24
+},
+{
+"word": "evening.",
+"start": 9.24,
+"end": 9.62
+},
+{
+"word": "Open",
+"start": 9.92,
+"end": 10.2
+},
+{
+"word": "Claude",
+"start": 10.2,
+"end": 10.38
+},
+{
+"word": "Code",
+"start": 10.38,
+"end": 10.6
+},
+{
+"word": "in",
+"start": 10.6,
+"end": 10.72
+},
+{
+"word": "your",
+"start": 10.72,
+"end": 10.84
+},
+{
+"word": "main",
+"start": 10.84,
+"end": 11.0
+},
+{
+"word": "work",
+"start": 11.0,
+"end": 11.26
+},
+{
+"word": "folder",
+"start": 11.26,
+"end": 11.48
+},
+{
+"word": "so",
+"start": 11.48,
+"end": 11.68
+},
+{
+"word": "it",
+"start": 11.68,
+"end": 11.76
+},
+{
+"word": "can",
+"start": 11.76,
+"end": 11.9
+},
+{
+"word": "see",
+"start": 11.9,
+"end": 12.08
+},
+{
+"word": "how",
+"start": 12.08,
+"end": 12.26
+},
+{
+"word": "you",
+"start": 12.26,
+"end": 12.38
+},
+{
+"word": "actually",
+"start": 12.38,
+"end": 12.68
+},
+{
+"word": "work,",
+"start": 12.68,
+"end": 12.96
+},
+{
+"word": "and",
+"start": 13.22,
+"end": 13.38
+},
+{
+"word": "give",
+"start": 13.38,
+"end": 13.52
+},
+{
+"word": "it",
+"start": 13.52,
+"end": 13.66
+},
+{
+"word": "this",
+"start": 13.66,
+"end": 13.86
+},
+{
+"word": "prompt.",
+"start": 13.86,
+"end": 14.18
+},
+{
+"word": "It",
+"start": 14.54,
+"end": 14.72
+},
+{
+"word": "studies",
+"start": 14.72,
+"end": 14.94
+},
+{
+"word": "your",
+"start": 14.94,
+"end": 15.1
+},
+{
+"word": "projects",
+"start": 15.1,
+"end": 15.4
+},
+{
+"word": "and",
+"start": 15.4,
+"end": 15.68
+},
+{
+"word": "finds",
+"start": 15.68,
+"end": 15.94
+},
+{
+"word": "every",
+"start": 15.94,
+"end": 16.36
+},
+{
+"word": "task",
+"start": 16.36,
+"end": 16.68
+},
+{
+"word": "you",
+"start": 16.68,
+"end": 16.9
+},
+{
+"word": "repeat",
+"start": 16.9,
+"end": 17.22
+},
+{
+"word": "every",
+"start": 17.22,
+"end": 17.64
+},
+{
+"word": "week.",
+"start": 17.64,
+"end": 17.9
+},
+{
+"word": "But",
+"start": 18.28,
+"end": 18.42
+},
+{
+"word": "here's",
+"start": 18.42,
+"end": 18.62
+},
+{
+"word": "the",
+"start": 18.62,
+"end": 18.76
+},
+{
+"word": "part",
+"start": 18.76,
+"end": 18.9
+},
+{
+"word": "everyone",
+"start": 18.9,
+"end": 19.24
+},
+{
+"word": "misses.",
+"start": 19.24,
+"end": 19.56
+},
+{
+"word": "The",
+"start": 20.02,
+"end": 20.18
+},
+{
+"word": "audit",
+"start": 20.18,
+"end": 20.36
+},
+{
+"word": "is",
+"start": 20.36,
+"end": 20.54
+},
+{
+"word": "not",
+"start": 20.54,
+"end": 20.74
+},
+{
+"word": "the",
+"start": 20.74,
+"end": 20.88
+},
+{
+"word": "point,",
+"start": 20.88,
+"end": 21.1
+},
+{
+"word": "the",
+"start": 21.3,
+"end": 21.4
+},
+{
+"word": "handoff",
+"start": 21.4,
+"end": 21.78
+},
+{
+"word": "is.",
+"start": 21.78,
+"end": 22.04
+},
+{
+"word": "Have",
+"start": 22.52,
+"end": 22.7
+},
+{
+"word": "Fable",
+"start": 22.7,
+"end": 23.0
+},
+{
+"word": "turn",
+"start": 23.0,
+"end": 23.22
+},
+{
+"word": "every",
+"start": 23.22,
+"end": 23.54
+},
+{
+"word": "repeated",
+"start": 23.54,
+"end": 23.84
+},
+{
+"word": "task",
+"start": 23.84,
+"end": 24.2
+},
+{
+"word": "into",
+"start": 24.2,
+"end": 24.46
+},
+{
+"word": "a",
+"start": 24.46,
+"end": 24.68
+},
+{
+"word": "skill",
+"start": 24.68,
+"end": 24.86
+},
+{
+"word": "file",
+"start": 24.86,
+"end": 25.14
+},
+{
+"word": "it",
+"start": 25.14,
+"end": 25.32
+},
+{
+"word": "saves",
+"start": 25.32,
+"end": 25.58
+},
+{
+"word": "into",
+"start": 25.58,
+"end": 25.92
+},
+{
+"word": "your",
+"start": 25.92,
+"end": 26.08
+},
+{
+"word": "folder.",
+"start": 26.08,
+"end": 26.36
+},
+{
+"word": "Then",
+"start": 26.66,
+"end": 26.86
+},
+{
+"word": "have",
+"start": 26.86,
+"end": 27.04
+},
+{
+"word": "it",
+"start": 27.04,
+"end": 27.18
+},
+{
+"word": "write",
+"start": 27.18,
+"end": 27.32
+},
+{
+"word": "one",
+"start": 27.32,
+"end": 27.58
+},
+{
+"word": "instructions",
+"start": 27.58,
+"end": 27.96
+},
+{
+"word": "file",
+"start": 27.96,
+"end": 28.36
+},
+{
+"word": "with",
+"start": 28.36,
+"end": 28.52
+},
+{
+"word": "everything",
+"start": 28.52,
+"end": 28.9
+},
+{
+"word": "it",
+"start": 28.9,
+"end": 29.1
+},
+{
+"word": "learned",
+"start": 29.1,
+"end": 29.26
+},
+{
+"word": "about",
+"start": 29.26,
+"end": 29.48
+},
+{
+"word": "how",
+"start": 29.48,
+"end": 29.74
+},
+{
+"word": "you",
+"start": 29.74,
+"end": 29.9
+},
+{
+"word": "work.",
+"start": 29.9,
+"end": 30.04
+},
+{
+"word": "Any",
+"start": 30.04,
+"end": 30.5
+},
+{
+"word": "model",
+"start": 30.5,
+"end": 30.74
+},
+{
+"word": "you",
+"start": 30.74,
+"end": 30.9
+},
+{
+"word": "run",
+"start": 30.9,
+"end": 31.08
+},
+{
+"word": "after",
+"start": 31.08,
+"end": 31.34
+},
+{
+"word": "the",
+"start": 31.34,
+"end": 31.5
+},
+{
+"word": "deadline",
+"start": 31.5,
+"end": 31.8
+},
+{
+"word": "starts",
+"start": 31.8,
+"end": 32.14
+},
+{
+"word": "from",
+"start": 32.14,
+"end": 32.34
+},
+{
+"word": "those",
+"start": 32.34,
+"end": 32.56
+},
+{
+"word": "files,",
+"start": 32.56,
+"end": 32.88
+},
+{
+"word": "so",
+"start": 33.2,
+"end": 33.28
+},
+{
+"word": "Opus",
+"start": 33.28,
+"end": 33.54
+},
+{
+"word": "picks",
+"start": 33.54,
+"end": 33.8
+},
+{
+"word": "up",
+"start": 33.8,
+"end": 34.02
+},
+{
+"word": "right",
+"start": 34.02,
+"end": 34.28
+},
+{
+"word": "where",
+"start": 34.28,
+"end": 34.46
+},
+{
+"word": "Fable",
+"start": 34.46,
+"end": 34.68
+},
+{
+"word": "left",
+"start": 34.68,
+"end": 34.9
+},
+{
+"word": "off,",
+"start": 34.9,
+"end": 35.18
+},
+{
+"word": "surprisingly",
+"start": 35.36,
+"end": 35.82
+},
+{
+"word": "close.",
+"start": 35.82,
+"end": 36.34
+},
+{
+"word": "I",
+"start": 36.8,
+"end": 36.88
+},
+{
+"word": "made",
+"start": 36.88,
+"end": 36.98
+},
+{
+"word": "a",
+"start": 36.98,
+"end": 37.14
+},
+{
+"word": "step",
+"start": 37.14,
+"end": 37.28
+},
+{
+"word": "by",
+"start": 37.28,
+"end": 37.4
+},
+{
+"word": "step",
+"start": 37.4,
+"end": 37.64
+},
+{
+"word": "guide",
+"start": 37.64,
+"end": 37.82
+},
+{
+"word": "with",
+"start": 37.82,
+"end": 37.98
+},
+{
+"word": "the",
+"start": 37.98,
+"end": 38.12
+},
+{
+"word": "exact",
+"start": 38.12,
+"end": 38.48
+},
+{
+"word": "prompts.",
+"start": 38.48,
+"end": 38.94
+},
+{
+"word": "Comment",
+"start": 39.46,
+"end": 39.58
+},
+{
+"word": "clone",
+"start": 39.58,
+"end": 39.84
+},
+{
+"word": "and",
+"start": 39.84,
+"end": 40.02
+},
+{
+"word": "I'll",
+"start": 40.02,
+"end": 40.1
+},
+{
+"word": "send",
+"start": 40.1,
+"end": 40.26
+},
+{
+"word": "it",
+"start": 40.26,
+"end": 40.38
+},
+{
+"word": "to",
+"start": 40.38,
+"end": 40.5
+},
+{
+"word": "you.",
+"start": 40.5,
+"end": 40.62
+}
+]

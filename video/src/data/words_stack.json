@@ -1,0 +1,847 @@
+[
+{
+"word": "I",
+"start": 0.0,
+"end": 0.2
+},
+{
+"word": "get",
+"start": 0.2,
+"end": 0.36
+},
+{
+"word": "Fable",
+"start": 0.36,
+"end": 0.58
+},
+{
+"word": "5",
+"start": 0.58,
+"end": 0.76
+},
+{
+"word": "answers",
+"start": 0.76,
+"end": 1.06
+},
+{
+"word": "at",
+"start": 1.06,
+"end": 1.28
+},
+{
+"word": "Haiku",
+"start": 1.28,
+"end": 1.54
+},
+{
+"word": "prices.",
+"start": 1.54,
+"end": 1.94
+},
+{
+"word": "And",
+"start": 2.38,
+"end": 2.48
+},
+{
+"word": "Anthropic",
+"start": 2.48,
+"end": 2.94
+},
+{
+"word": "doesn't",
+"start": 2.94,
+"end": 3.26
+},
+{
+"word": "advertise",
+"start": 3.26,
+"end": 3.66
+},
+{
+"word": "this",
+"start": 3.66,
+"end": 3.84
+},
+{
+"word": "setup",
+"start": 3.84,
+"end": 4.06
+},
+{
+"word": "anywhere.",
+"start": 4.06,
+"end": 4.54
+},
+{
+"word": "I",
+"start": 4.9,
+"end": 5.06
+},
+{
+"word": "call",
+"start": 5.06,
+"end": 5.26
+},
+{
+"word": "it",
+"start": 5.26,
+"end": 5.36
+},
+{
+"word": "the",
+"start": 5.36,
+"end": 5.46
+},
+{
+"word": "pyramid",
+"start": 5.46,
+"end": 5.7
+},
+{
+"word": "stack.",
+"start": 5.7,
+"end": 6.06
+},
+{
+"word": "3",
+"start": 6.42,
+"end": 6.64
+},
+{
+"word": "Claudes,",
+"start": 6.64,
+"end": 6.98
+},
+{
+"word": "3",
+"start": 7.18,
+"end": 7.36
+},
+{
+"word": "jobs,",
+"start": 7.36,
+"end": 7.68
+},
+{
+"word": "and",
+"start": 7.84,
+"end": 8.04
+},
+{
+"word": "a",
+"start": 8.04,
+"end": 8.16
+},
+{
+"word": "90",
+"start": 8.16,
+"end": 8.42
+},
+{
+"word": "%",
+"start": 8.42,
+"end": 8.74
+},
+{
+"word": "less",
+"start": 8.74,
+"end": 8.98
+},
+{
+"word": "cost.",
+"start": 8.98,
+"end": 9.34
+},
+{
+"word": "But",
+"start": 9.68,
+"end": 9.86
+},
+{
+"word": "here's",
+"start": 9.86,
+"end": 10.06
+},
+{
+"word": "the",
+"start": 10.06,
+"end": 10.16
+},
+{
+"word": "part",
+"start": 10.16,
+"end": 10.32
+},
+{
+"word": "everyone",
+"start": 10.32,
+"end": 10.68
+},
+{
+"word": "misses.",
+"start": 10.68,
+"end": 10.98
+},
+{
+"word": "The",
+"start": 11.32,
+"end": 11.52
+},
+{
+"word": "magic",
+"start": 11.52,
+"end": 11.76
+},
+{
+"word": "isn't",
+"start": 11.76,
+"end": 12.12
+},
+{
+"word": "the",
+"start": 12.12,
+"end": 12.22
+},
+{
+"word": "models,",
+"start": 12.22,
+"end": 12.5
+},
+{
+"word": "it's",
+"start": 12.72,
+"end": 12.9
+},
+{
+"word": "the",
+"start": 12.9,
+"end": 13.02
+},
+{
+"word": "gate",
+"start": 13.02,
+"end": 13.18
+},
+{
+"word": "between",
+"start": 13.18,
+"end": 13.5
+},
+{
+"word": "them.",
+"start": 13.5,
+"end": 13.78
+},
+{
+"word": "Here's",
+"start": 13.94,
+"end": 14.22
+},
+{
+"word": "the",
+"start": 14.22,
+"end": 14.32
+},
+{
+"word": "build.",
+"start": 14.32,
+"end": 14.5
+},
+{
+"word": "Haiku",
+"start": 15.02,
+"end": 15.18
+},
+{
+"word": "sits",
+"start": 15.18,
+"end": 15.34
+},
+{
+"word": "at",
+"start": 15.34,
+"end": 15.48
+},
+{
+"word": "the",
+"start": 15.48,
+"end": 15.58
+},
+{
+"word": "bottom,",
+"start": 15.58,
+"end": 15.8
+},
+{
+"word": "the",
+"start": 16.04,
+"end": 16.12
+},
+{
+"word": "worker.",
+"start": 16.12,
+"end": 16.34
+},
+{
+"word": "Every",
+"start": 16.74,
+"end": 17.06
+},
+{
+"word": "job",
+"start": 17.06,
+"end": 17.28
+},
+{
+"word": "sits",
+"start": 17.28,
+"end": 17.48
+},
+{
+"word": "there,",
+"start": 17.48,
+"end": 17.8
+},
+{
+"word": "and",
+"start": 17.98,
+"end": 18.06
+},
+{
+"word": "it",
+"start": 18.06,
+"end": 18.14
+},
+{
+"word": "costs",
+"start": 18.14,
+"end": 18.38
+},
+{
+"word": "pennies.",
+"start": 18.38,
+"end": 18.9
+},
+{
+"word": "Opus",
+"start": 19.3,
+"end": 19.46
+},
+{
+"word": "sits",
+"start": 19.46,
+"end": 19.6
+},
+{
+"word": "in",
+"start": 19.6,
+"end": 19.76
+},
+{
+"word": "the",
+"start": 19.76,
+"end": 19.82
+},
+{
+"word": "middle,",
+"start": 19.82,
+"end": 19.98
+},
+{
+"word": "who",
+"start": 20.22,
+"end": 20.32
+},
+{
+"word": "is",
+"start": 20.32,
+"end": 20.42
+},
+{
+"word": "a",
+"start": 20.42,
+"end": 20.56
+},
+{
+"word": "judge.",
+"start": 20.56,
+"end": 20.74
+},
+{
+"word": "It",
+"start": 21.12,
+"end": 21.26
+},
+{
+"word": "reviews",
+"start": 21.26,
+"end": 21.5
+},
+{
+"word": "the",
+"start": 21.5,
+"end": 21.64
+},
+{
+"word": "work",
+"start": 21.64,
+"end": 21.8
+},
+{
+"word": "and",
+"start": 21.8,
+"end": 21.94
+},
+{
+"word": "decides",
+"start": 21.94,
+"end": 22.22
+},
+{
+"word": "what",
+"start": 22.22,
+"end": 22.44
+},
+{
+"word": "is",
+"start": 22.44,
+"end": 22.56
+},
+{
+"word": "good",
+"start": 22.56,
+"end": 22.68
+},
+{
+"word": "enough",
+"start": 22.68,
+"end": 22.84
+},
+{
+"word": "to",
+"start": 22.84,
+"end": 23.02
+},
+{
+"word": "ship.",
+"start": 23.02,
+"end": 23.22
+},
+{
+"word": "Fable",
+"start": 23.66,
+"end": 23.88
+},
+{
+"word": "5",
+"start": 23.88,
+"end": 24.16
+},
+{
+"word": "sits",
+"start": 24.16,
+"end": 24.36
+},
+{
+"word": "at",
+"start": 24.36,
+"end": 24.5
+},
+{
+"word": "the",
+"start": 24.5,
+"end": 24.62
+},
+{
+"word": "top,",
+"start": 24.62,
+"end": 24.82
+},
+{
+"word": "the",
+"start": 25.06,
+"end": 25.16
+},
+{
+"word": "wizard,",
+"start": 25.16,
+"end": 25.34
+},
+{
+"word": "and",
+"start": 25.56,
+"end": 25.64
+},
+{
+"word": "it",
+"start": 25.64,
+"end": 25.74
+},
+{
+"word": "never",
+"start": 25.74,
+"end": 25.9
+},
+{
+"word": "sees",
+"start": 25.9,
+"end": 26.1
+},
+{
+"word": "a",
+"start": 26.1,
+"end": 26.26
+},
+{
+"word": "job",
+"start": 26.26,
+"end": 26.44
+},
+{
+"word": "unless",
+"start": 26.44,
+"end": 26.66
+},
+{
+"word": "it",
+"start": 26.66,
+"end": 26.86
+},
+{
+"word": "clears",
+"start": 26.86,
+"end": 27.06
+},
+{
+"word": "the",
+"start": 27.06,
+"end": 27.22
+},
+{
+"word": "escalation",
+"start": 27.22,
+"end": 27.58
+},
+{
+"word": "gate.",
+"start": 27.58,
+"end": 27.86
+},
+{
+"word": "The",
+"start": 28.26,
+"end": 28.42
+},
+{
+"word": "gate",
+"start": 28.42,
+"end": 28.6
+},
+{
+"word": "is",
+"start": 28.6,
+"end": 28.78
+},
+{
+"word": "a",
+"start": 28.78,
+"end": 28.94
+},
+{
+"word": "two",
+"start": 28.94,
+"end": 29.1
+},
+{
+"word": "-line",
+"start": 29.1,
+"end": 29.24
+},
+{
+"word": "rule",
+"start": 29.24,
+"end": 29.42
+},
+{
+"word": "I",
+"start": 29.42,
+"end": 29.58
+},
+{
+"word": "give",
+"start": 29.58,
+"end": 29.7
+},
+{
+"word": "at",
+"start": 29.7,
+"end": 29.84
+},
+{
+"word": "every",
+"start": 29.84,
+"end": 30.1
+},
+{
+"word": "level.",
+"start": 30.1,
+"end": 30.34
+},
+{
+"word": "It",
+"start": 30.56,
+"end": 30.7
+},
+{
+"word": "keeps",
+"start": 30.7,
+"end": 30.88
+},
+{
+"word": "the",
+"start": 30.88,
+"end": 31.02
+},
+{
+"word": "bill",
+"start": 31.02,
+"end": 31.16
+},
+{
+"word": "down",
+"start": 31.16,
+"end": 31.36
+},
+{
+"word": "and",
+"start": 31.36,
+"end": 31.5
+},
+{
+"word": "it",
+"start": 31.5,
+"end": 31.6
+},
+{
+"word": "makes",
+"start": 31.6,
+"end": 31.72
+},
+{
+"word": "the",
+"start": 31.72,
+"end": 31.9
+},
+{
+"word": "wizard",
+"start": 31.9,
+"end": 32.06
+},
+{
+"word": "smarter,",
+"start": 32.06,
+"end": 32.46
+},
+{
+"word": "because",
+"start": 32.66,
+"end": 32.94
+},
+{
+"word": "Fable",
+"start": 32.94,
+"end": 33.16
+},
+{
+"word": "only",
+"start": 33.16,
+"end": 33.46
+},
+{
+"word": "ever",
+"start": 33.46,
+"end": 33.64
+},
+{
+"word": "sees",
+"start": 33.64,
+"end": 33.88
+},
+{
+"word": "the",
+"start": 33.88,
+"end": 34.02
+},
+{
+"word": "hard",
+"start": 34.02,
+"end": 34.16
+},
+{
+"word": "problems",
+"start": 34.16,
+"end": 34.52
+},
+{
+"word": "with",
+"start": 34.52,
+"end": 34.8
+},
+{
+"word": "the",
+"start": 34.8,
+"end": 34.94
+},
+{
+"word": "easy",
+"start": 34.94,
+"end": 35.14
+},
+{
+"word": "parts",
+"start": 35.14,
+"end": 35.46
+},
+{
+"word": "already",
+"start": 35.46,
+"end": 35.76
+},
+{
+"word": "stripped",
+"start": 35.76,
+"end": 36.06
+},
+{
+"word": "out.",
+"start": 36.06,
+"end": 36.28
+},
+{
+"word": "The",
+"start": 36.58,
+"end": 36.7
+},
+{
+"word": "full",
+"start": 36.7,
+"end": 36.88
+},
+{
+"word": "build",
+"start": 36.88,
+"end": 37.04
+},
+{
+"word": "is",
+"start": 37.04,
+"end": 37.18
+},
+{
+"word": "in",
+"start": 37.18,
+"end": 37.28
+},
+{
+"word": "my",
+"start": 37.28,
+"end": 37.42
+},
+{
+"word": "guide.",
+"start": 37.42,
+"end": 37.64
+},
+{
+"word": "The",
+"start": 37.94,
+"end": 37.94
+},
+{
+"word": "gate",
+"start": 37.94,
+"end": 38.1
+},
+{
+"word": "rule,",
+"start": 38.1,
+"end": 38.32
+},
+{
+"word": "the",
+"start": 38.52,
+"end": 38.58
+},
+{
+"word": "settings",
+"start": 38.58,
+"end": 38.8
+},
+{
+"word": "file,",
+"start": 38.8,
+"end": 39.1
+},
+{
+"word": "and",
+"start": 39.22,
+"end": 39.26
+},
+{
+"word": "the",
+"start": 39.26,
+"end": 39.38
+},
+{
+"word": "task",
+"start": 39.38,
+"end": 39.62
+},
+{
+"word": "table.",
+"start": 39.62,
+"end": 40.0
+},
+{
+"word": "Comment",
+"start": 40.46,
+"end": 40.54
+},
+{
+"word": "STACK",
+"start": 40.54,
+"end": 40.82
+},
+{
+"word": "and",
+"start": 40.82,
+"end": 41.0
+},
+{
+"word": "I'll",
+"start": 41.0,
+"end": 41.1
+},
+{
+"word": "send",
+"start": 41.1,
+"end": 41.22
+},
+{
+"word": "it",
+"start": 41.22,
+"end": 41.34
+},
+{
+"word": "to",
+"start": 41.34,
+"end": 41.44
+},
+{
+"word": "you.",
+"start": 41.44,
+"end": 41.54
+}
+]

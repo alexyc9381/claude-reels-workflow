@@ -1,0 +1,704 @@
+[
+{
+"word": "Claude",
+"start": 0,
+"end": 0.3,
+"line": 0
+},
+{
+"word": "can",
+"start": 0.3,
+"end": 0.45,
+"line": 0
+},
+{
+"word": "now",
+"start": 0.45,
+"end": 0.61,
+"line": 0
+},
+{
+"word": "design",
+"start": 0.61,
+"end": 0.94,
+"line": 0
+},
+{
+"word": "the",
+"start": 0.94,
+"end": 1.1,
+"line": 0
+},
+{
+"word": "brand",
+"start": 1.1,
+"end": 1.37,
+"line": 0
+},
+{
+"word": "visuals",
+"start": 1.37,
+"end": 1.83,
+"line": 0
+},
+{
+"word": "agencies",
+"start": 1.83,
+"end": 2.27,
+"line": 0
+},
+{
+"word": "charge",
+"start": 2.27,
+"end": 2.62,
+"line": 0
+},
+{
+"word": "five",
+"start": 2.62,
+"end": 2.86,
+"line": 0
+},
+{
+"word": "grand",
+"start": 2.86,
+"end": 3.18,
+"line": 0
+},
+{
+"word": "for,",
+"start": 3.18,
+"end": 3.43,
+"line": 0
+},
+{
+"word": "and",
+"start": 3.12,
+"end": 3.19,
+"line": 1
+},
+{
+"word": "I'm",
+"start": 3.19,
+"end": 3.29,
+"line": 1
+},
+{
+"word": "not",
+"start": 3.29,
+"end": 3.44,
+"line": 1
+},
+{
+"word": "talking",
+"start": 3.44,
+"end": 3.79,
+"line": 1
+},
+{
+"word": "basic",
+"start": 3.79,
+"end": 4.13,
+"line": 1
+},
+{
+"word": "AI",
+"start": 4.13,
+"end": 4.23,
+"line": 1
+},
+{
+"word": "looking",
+"start": 4.23,
+"end": 4.67,
+"line": 1
+},
+{
+"word": "templates,",
+"start": 4.67,
+"end": 5.37,
+"line": 1
+},
+{
+"word": "I",
+"start": 5.37,
+"end": 5.42,
+"line": 1
+},
+{
+"word": "mean",
+"start": 5.42,
+"end": 5.67,
+"line": 1
+},
+{
+"word": "actual",
+"start": 5.67,
+"end": 6.05,
+"line": 1
+},
+{
+"word": "premium",
+"start": 6.05,
+"end": 6.5,
+"line": 1
+},
+{
+"word": "on-brand",
+"start": 6.5,
+"end": 7.01,
+"line": 1
+},
+{
+"word": "graphics.",
+"start": 7.01,
+"end": 7.77,
+"line": 1
+},
+{
+"word": "You",
+"start": 7.78,
+"end": 7.92,
+"line": 2
+},
+{
+"word": "give",
+"start": 7.92,
+"end": 8.12,
+"line": 2
+},
+{
+"word": "your",
+"start": 8.12,
+"end": 8.27,
+"line": 2
+},
+{
+"word": "brand",
+"start": 8.27,
+"end": 8.5,
+"line": 2
+},
+{
+"word": "once,",
+"start": 8.5,
+"end": 8.77,
+"line": 2
+},
+{
+"word": "your",
+"start": 8.77,
+"end": 8.95,
+"line": 2
+},
+{
+"word": "logo,",
+"start": 8.95,
+"end": 9.22,
+"line": 2
+},
+{
+"word": "your",
+"start": 9.22,
+"end": 9.4,
+"line": 2
+},
+{
+"word": "colors,",
+"start": 9.4,
+"end": 9.76,
+"line": 2
+},
+{
+"word": "your",
+"start": 9.76,
+"end": 9.93,
+"line": 2
+},
+{
+"word": "style,",
+"start": 9.93,
+"end": 10.27,
+"line": 2
+},
+{
+"word": "and",
+"start": 10.27,
+"end": 10.39,
+"line": 2
+},
+{
+"word": "it",
+"start": 10.39,
+"end": 10.49,
+"line": 2
+},
+{
+"word": "becomes",
+"start": 10.49,
+"end": 10.8,
+"line": 2
+},
+{
+"word": "your",
+"start": 10.8,
+"end": 11.0,
+"line": 2
+},
+{
+"word": "designer",
+"start": 11.0,
+"end": 11.46,
+"line": 2
+},
+{
+"word": "on",
+"start": 11.46,
+"end": 11.64,
+"line": 2
+},
+{
+"word": "demand.",
+"start": 11.64,
+"end": 12.46,
+"line": 2
+},
+{
+"word": "Ask",
+"start": 12.38,
+"end": 12.55,
+"line": 3
+},
+{
+"word": "for",
+"start": 12.55,
+"end": 12.72,
+"line": 3
+},
+{
+"word": "a",
+"start": 12.72,
+"end": 12.77,
+"line": 3
+},
+{
+"word": "week",
+"start": 12.77,
+"end": 12.99,
+"line": 3
+},
+{
+"word": "of",
+"start": 12.99,
+"end": 13.1,
+"line": 3
+},
+{
+"word": "social",
+"start": 13.1,
+"end": 13.46,
+"line": 3
+},
+{
+"word": "posts",
+"start": 13.46,
+"end": 13.72,
+"line": 3
+},
+{
+"word": "and",
+"start": 13.72,
+"end": 13.89,
+"line": 3
+},
+{
+"word": "it",
+"start": 13.89,
+"end": 14.0,
+"line": 3
+},
+{
+"word": "designs",
+"start": 14.0,
+"end": 14.4,
+"line": 3
+},
+{
+"word": "all",
+"start": 14.4,
+"end": 14.57,
+"line": 3
+},
+{
+"word": "of",
+"start": 14.57,
+"end": 14.68,
+"line": 3
+},
+{
+"word": "them",
+"start": 14.68,
+"end": 14.9,
+"line": 3
+},
+{
+"word": "on",
+"start": 14.9,
+"end": 15.01,
+"line": 3
+},
+{
+"word": "brand.",
+"start": 15.01,
+"end": 15.54,
+"line": 3
+},
+{
+"word": "Need",
+"start": 15.52,
+"end": 15.73,
+"line": 4
+},
+{
+"word": "an",
+"start": 15.73,
+"end": 15.86,
+"line": 4
+},
+{
+"word": "ad",
+"start": 15.86,
+"end": 15.93,
+"line": 4
+},
+{
+"word": "creative?",
+"start": 15.93,
+"end": 16.52,
+"line": 4
+},
+{
+"word": "It",
+"start": 16.52,
+"end": 16.66,
+"line": 4
+},
+{
+"word": "lays",
+"start": 16.66,
+"end": 16.76,
+"line": 4
+},
+{
+"word": "out",
+"start": 16.76,
+"end": 16.89,
+"line": 4
+},
+{
+"word": "the",
+"start": 16.89,
+"end": 17.0,
+"line": 4
+},
+{
+"word": "graphic",
+"start": 17.0,
+"end": 17.29,
+"line": 4
+},
+{
+"word": "and",
+"start": 17.29,
+"end": 17.41,
+"line": 4
+},
+{
+"word": "writes",
+"start": 17.41,
+"end": 17.66,
+"line": 4
+},
+{
+"word": "the",
+"start": 17.66,
+"end": 17.78,
+"line": 4
+},
+{
+"word": "copy.",
+"start": 17.78,
+"end": 18.12,
+"line": 4
+},
+{
+"word": "Thumbnails,",
+"start": 18.12,
+"end": 18.76,
+"line": 4
+},
+{
+"word": "one-pagers,",
+"start": 18.76,
+"end": 19.37,
+"line": 4
+},
+{
+"word": "pitch",
+"start": 19.37,
+"end": 19.63,
+"line": 4
+},
+{
+"word": "slide,",
+"start": 19.63,
+"end": 19.99,
+"line": 4
+},
+{
+"word": "it",
+"start": 19.99,
+"end": 20.09,
+"line": 4
+},
+{
+"word": "designs",
+"start": 20.09,
+"end": 20.46,
+"line": 4
+},
+{
+"word": "those",
+"start": 20.46,
+"end": 20.72,
+"line": 4
+},
+{
+"word": "too,",
+"start": 20.72,
+"end": 20.98,
+"line": 4
+},
+{
+"word": "all",
+"start": 20.98,
+"end": 21.14,
+"line": 4
+},
+{
+"word": "in",
+"start": 21.14,
+"end": 21.24,
+"line": 4
+},
+{
+"word": "your",
+"start": 21.24,
+"end": 21.46,
+"line": 4
+},
+{
+"word": "exact",
+"start": 21.46,
+"end": 21.71,
+"line": 4
+},
+{
+"word": "style",
+"start": 21.71,
+"end": 21.97,
+"line": 4
+},
+{
+"word": "in",
+"start": 21.97,
+"end": 22.07,
+"line": 4
+},
+{
+"word": "minutes.",
+"start": 22.07,
+"end": 22.76,
+"line": 4
+},
+{
+"word": "A",
+"start": 22.71,
+"end": 22.76,
+"line": 5
+},
+{
+"word": "designer",
+"start": 22.76,
+"end": 23.18,
+"line": 5
+},
+{
+"word": "charges",
+"start": 23.18,
+"end": 23.54,
+"line": 5
+},
+{
+"word": "hundreds",
+"start": 23.54,
+"end": 23.96,
+"line": 5
+},
+{
+"word": "for",
+"start": 23.96,
+"end": 24.11,
+"line": 5
+},
+{
+"word": "one",
+"start": 24.11,
+"end": 24.29,
+"line": 5
+},
+{
+"word": "of",
+"start": 24.29,
+"end": 24.36,
+"line": 5
+},
+{
+"word": "these",
+"start": 24.36,
+"end": 24.62,
+"line": 5
+},
+{
+"word": "and",
+"start": 24.62,
+"end": 24.77,
+"line": 5
+},
+{
+"word": "takes",
+"start": 24.77,
+"end": 25.03,
+"line": 5
+},
+{
+"word": "a",
+"start": 25.03,
+"end": 25.08,
+"line": 5
+},
+{
+"word": "week.",
+"start": 25.08,
+"end": 25.51,
+"line": 5
+},
+{
+"word": "Claude",
+"start": 25.51,
+"end": 25.85,
+"line": 5
+},
+{
+"word": "can",
+"start": 25.85,
+"end": 26.0,
+"line": 5
+},
+{
+"word": "do",
+"start": 26.0,
+"end": 26.11,
+"line": 5
+},
+{
+"word": "the",
+"start": 26.11,
+"end": 26.27,
+"line": 5
+},
+{
+"word": "whole",
+"start": 26.27,
+"end": 26.59,
+"line": 5
+},
+{
+"word": "set",
+"start": 26.59,
+"end": 26.7,
+"line": 5
+},
+{
+"word": "in",
+"start": 26.7,
+"end": 26.81,
+"line": 5
+},
+{
+"word": "one",
+"start": 26.81,
+"end": 26.97,
+"line": 5
+},
+{
+"word": "chat.",
+"start": 26.97,
+"end": 27.39,
+"line": 5
+},
+{
+"word": "Comment",
+"start": 27.56,
+"end": 27.9,
+"line": 6
+},
+{
+"word": "design",
+"start": 27.9,
+"end": 28.13,
+"line": 6
+},
+{
+"word": "and",
+"start": 28.13,
+"end": 28.25,
+"line": 6
+},
+{
+"word": "I'll",
+"start": 28.25,
+"end": 28.43,
+"line": 6
+},
+{
+"word": "send",
+"start": 28.43,
+"end": 28.64,
+"line": 6
+},
+{
+"word": "you",
+"start": 28.64,
+"end": 28.74,
+"line": 6
+},
+{
+"word": "the",
+"start": 28.74,
+"end": 28.87,
+"line": 6
+},
+{
+"word": "exact",
+"start": 28.87,
+"end": 29.14,
+"line": 6
+},
+{
+"word": "setup.",
+"start": 29.14,
+"end": 29.4,
+"line": 6
+}
+]

@@ -1,0 +1,812 @@
+[
+{
+"word": "Claude",
+"line": 0,
+"start": 0.0,
+"end": 0.35
+},
+{
+"word": "can",
+"line": 0,
+"start": 0.35,
+"end": 0.52
+},
+{
+"word": "do",
+"line": 0,
+"start": 0.52,
+"end": 0.65
+},
+{
+"word": "8",
+"line": 0,
+"start": 0.65,
+"end": 0.99
+},
+{
+"word": "hours",
+"line": 0,
+"start": 0.99,
+"end": 1.23
+},
+{
+"word": "of",
+"line": 0,
+"start": 1.23,
+"end": 1.29
+},
+{
+"word": "work",
+"line": 0,
+"start": 1.29,
+"end": 1.6
+},
+{
+"word": "while",
+"line": 0,
+"start": 1.6,
+"end": 1.87
+},
+{
+"word": "you",
+"line": 0,
+"start": 1.87,
+"end": 2.06
+},
+{
+"word": "sleep",
+"line": 0,
+"start": 2.06,
+"end": 2.46
+},
+{
+"word": "and",
+"line": 0,
+"start": 2.46,
+"end": 2.63
+},
+{
+"word": "have",
+"line": 0,
+"start": 2.63,
+"end": 2.9
+},
+{
+"word": "it",
+"line": 0,
+"start": 2.9,
+"end": 3.04
+},
+{
+"word": "on",
+"line": 0,
+"start": 3.04,
+"end": 3.18
+},
+{
+"word": "one",
+"line": 0,
+"start": 3.18,
+"end": 3.39
+},
+{
+"word": "page",
+"line": 0,
+"start": 3.39,
+"end": 3.66
+},
+{
+"word": "by",
+"line": 0,
+"start": 3.66,
+"end": 3.8
+},
+{
+"word": "7am.",
+"line": 0,
+"start": 3.8,
+"end": 4.58
+},
+{
+"word": "Here's",
+"line": 1,
+"start": 4.58,
+"end": 4.81
+},
+{
+"word": "the",
+"line": 1,
+"start": 4.81,
+"end": 5.03
+},
+{
+"word": "exact",
+"line": 1,
+"start": 5.03,
+"end": 5.4
+},
+{
+"word": "setup",
+"line": 1,
+"start": 5.4,
+"end": 5.87
+},
+{
+"word": "with",
+"line": 1,
+"start": 5.87,
+"end": 6.06
+},
+{
+"word": "three",
+"line": 1,
+"start": 6.06,
+"end": 6.46
+},
+{
+"word": "jobs",
+"line": 1,
+"start": 6.46,
+"end": 6.86
+},
+{
+"word": "it",
+"line": 1,
+"start": 6.86,
+"end": 7.1
+},
+{
+"word": "should",
+"line": 1,
+"start": 7.1,
+"end": 7.36
+},
+{
+"word": "run",
+"line": 1,
+"start": 7.36,
+"end": 7.55
+},
+{
+"word": "every",
+"line": 1,
+"start": 7.55,
+"end": 7.89
+},
+{
+"word": "night.",
+"line": 1,
+"start": 7.89,
+"end": 8.58
+},
+{
+"word": "First,",
+"line": 2,
+"start": 8.58,
+"end": 9.14
+},
+{
+"word": "it",
+"line": 2,
+"start": 9.14,
+"end": 9.22
+},
+{
+"word": "should",
+"line": 2,
+"start": 9.22,
+"end": 9.63
+},
+{
+"word": "check",
+"line": 2,
+"start": 9.63,
+"end": 9.65
+},
+{
+"word": "your",
+"line": 2,
+"start": 9.65,
+"end": 9.87
+},
+{
+"word": "competitors",
+"line": 2,
+"start": 9.87,
+"end": 10.46
+},
+{
+"word": "pricing,",
+"line": 2,
+"start": 10.46,
+"end": 10.87
+},
+{
+"word": "changelog",
+"line": 2,
+"start": 10.87,
+"end": 11.51
+},
+{
+"word": "and",
+"line": 2,
+"start": 11.51,
+"end": 11.56
+},
+{
+"word": "job",
+"line": 2,
+"start": 11.56,
+"end": 11.75
+},
+{
+"word": "posts",
+"line": 2,
+"start": 11.75,
+"end": 12.12
+},
+{
+"word": "and",
+"line": 2,
+"start": 12.12,
+"end": 12.33
+},
+{
+"word": "flag",
+"line": 2,
+"start": 12.33,
+"end": 12.5
+},
+{
+"word": "whatever",
+"line": 2,
+"start": 12.5,
+"end": 13.0
+},
+{
+"word": "moved",
+"line": 2,
+"start": 13.0,
+"end": 13.31
+},
+{
+"word": "overnight.",
+"line": 2,
+"start": 13.31,
+"end": 14.34
+},
+{
+"word": "Then",
+"line": 3,
+"start": 14.34,
+"end": 14.48
+},
+{
+"word": "it",
+"line": 3,
+"start": 14.48,
+"end": 14.62
+},
+{
+"word": "should",
+"line": 3,
+"start": 14.62,
+"end": 15.09
+},
+{
+"word": "clear",
+"line": 3,
+"start": 15.09,
+"end": 15.5
+},
+{
+"word": "your",
+"line": 3,
+"start": 15.5,
+"end": 15.71
+},
+{
+"word": "inbox",
+"line": 3,
+"start": 15.71,
+"end": 16.0
+},
+{
+"word": "down",
+"line": 3,
+"start": 16.0,
+"end": 16.22
+},
+{
+"word": "to",
+"line": 3,
+"start": 16.22,
+"end": 16.34
+},
+{
+"word": "the",
+"line": 3,
+"start": 16.34,
+"end": 16.42
+},
+{
+"word": "few",
+"line": 3,
+"start": 16.42,
+"end": 16.86
+},
+{
+"word": "emails",
+"line": 3,
+"start": 16.86,
+"end": 17.14
+},
+{
+"word": "that",
+"line": 3,
+"start": 17.14,
+"end": 17.26
+},
+{
+"word": "actually",
+"line": 3,
+"start": 17.26,
+"end": 17.74
+},
+{
+"word": "need",
+"line": 3,
+"start": 17.74,
+"end": 17.98
+},
+{
+"word": "a",
+"line": 3,
+"start": 17.98,
+"end": 18.22
+},
+{
+"word": "decision,",
+"line": 3,
+"start": 18.22,
+"end": 18.78
+},
+{
+"word": "each",
+"line": 3,
+"start": 18.78,
+"end": 19.27
+},
+{
+"word": "with",
+"line": 3,
+"start": 19.27,
+"end": 19.37
+},
+{
+"word": "a",
+"line": 3,
+"start": 19.37,
+"end": 19.51
+},
+{
+"word": "reply",
+"line": 3,
+"start": 19.51,
+"end": 19.88
+},
+{
+"word": "already",
+"line": 3,
+"start": 19.88,
+"end": 20.35
+},
+{
+"word": "drafted.",
+"line": 3,
+"start": 20.35,
+"end": 21.34
+},
+{
+"word": "Third,",
+"line": 4,
+"start": 21.34,
+"end": 22.02
+},
+{
+"word": "it",
+"line": 4,
+"start": 22.02,
+"end": 22.15
+},
+{
+"word": "turns",
+"line": 4,
+"start": 22.15,
+"end": 22.48
+},
+{
+"word": "yesterday's",
+"line": 4,
+"start": 22.48,
+"end": 23.21
+},
+{
+"word": "notes",
+"line": 4,
+"start": 23.21,
+"end": 23.54
+},
+{
+"word": "into",
+"line": 4,
+"start": 23.54,
+"end": 23.94
+},
+{
+"word": "today's",
+"line": 4,
+"start": 23.94,
+"end": 24.35
+},
+{
+"word": "social",
+"line": 4,
+"start": 24.35,
+"end": 24.73
+},
+{
+"word": "media",
+"line": 4,
+"start": 24.73,
+"end": 25.11
+},
+{
+"word": "carousel",
+"line": 4,
+"start": 25.11,
+"end": 25.77
+},
+{
+"word": "posts",
+"line": 4,
+"start": 25.77,
+"end": 26.1
+},
+{
+"word": "in",
+"line": 4,
+"start": 26.1,
+"end": 26.31
+},
+{
+"word": "your",
+"line": 4,
+"start": 26.31,
+"end": 26.55
+},
+{
+"word": "voice.",
+"line": 4,
+"start": 26.55,
+"end": 27.22
+},
+{
+"word": "So",
+"line": 5,
+"start": 27.22,
+"end": 27.32
+},
+{
+"word": "you",
+"line": 5,
+"start": 27.32,
+"end": 27.59
+},
+{
+"word": "don't",
+"line": 5,
+"start": 27.59,
+"end": 27.82
+},
+{
+"word": "wake",
+"line": 5,
+"start": 27.82,
+"end": 28.21
+},
+{
+"word": "up",
+"line": 5,
+"start": 28.21,
+"end": 28.23
+},
+{
+"word": "to",
+"line": 5,
+"start": 28.23,
+"end": 28.34
+},
+{
+"word": "100",
+"line": 5,
+"start": 28.34,
+"end": 28.93
+},
+{
+"word": "unread",
+"line": 5,
+"start": 28.93,
+"end": 29.32
+},
+{
+"word": "tabs,",
+"line": 5,
+"start": 29.32,
+"end": 29.74
+},
+{
+"word": "you",
+"line": 5,
+"start": 29.74,
+"end": 29.95
+},
+{
+"word": "wake",
+"line": 5,
+"start": 29.95,
+"end": 30.23
+},
+{
+"word": "up",
+"line": 5,
+"start": 30.23,
+"end": 30.41
+},
+{
+"word": "to",
+"line": 5,
+"start": 30.41,
+"end": 30.55
+},
+{
+"word": "one",
+"line": 5,
+"start": 30.55,
+"end": 30.82
+},
+{
+"word": "page",
+"line": 5,
+"start": 30.82,
+"end": 31.26
+},
+{
+"word": "with",
+"line": 5,
+"start": 31.26,
+"end": 31.69
+},
+{
+"word": "what",
+"line": 5,
+"start": 31.69,
+"end": 31.98
+},
+{
+"word": "changed,",
+"line": 5,
+"start": 31.98,
+"end": 32.43
+},
+{
+"word": "what",
+"line": 5,
+"start": 32.43,
+"end": 32.72
+},
+{
+"word": "to",
+"line": 5,
+"start": 32.72,
+"end": 33.03
+},
+{
+"word": "decide,",
+"line": 5,
+"start": 33.03,
+"end": 33.43
+},
+{
+"word": "what",
+"line": 5,
+"start": 33.43,
+"end": 33.72
+},
+{
+"word": "to",
+"line": 5,
+"start": 33.72,
+"end": 33.86
+},
+{
+"word": "ship,",
+"line": 5,
+"start": 33.86,
+"end": 34.35
+},
+{
+"word": "already",
+"line": 5,
+"start": 34.35,
+"end": 34.94
+},
+{
+"word": "hours",
+"line": 5,
+"start": 34.94,
+"end": 35.29
+},
+{
+"word": "ahead",
+"line": 5,
+"start": 35.29,
+"end": 35.58
+},
+{
+"word": "of",
+"line": 5,
+"start": 35.58,
+"end": 35.68
+},
+{
+"word": "everyone",
+"line": 5,
+"start": 35.68,
+"end": 36.18
+},
+{
+"word": "else.",
+"line": 5,
+"start": 36.18,
+"end": 36.86
+},
+{
+"word": "It's",
+"line": 6,
+"start": 36.86,
+"end": 36.94
+},
+{
+"word": "one",
+"line": 6,
+"start": 36.94,
+"end": 37.15
+},
+{
+"word": "scheduled",
+"line": 6,
+"start": 37.15,
+"end": 37.91
+},
+{
+"word": "agent",
+"line": 6,
+"start": 37.91,
+"end": 38.15
+},
+{
+"word": "you",
+"line": 6,
+"start": 38.15,
+"end": 38.34
+},
+{
+"word": "set",
+"line": 6,
+"start": 38.34,
+"end": 38.58
+},
+{
+"word": "up",
+"line": 6,
+"start": 38.58,
+"end": 38.73
+},
+{
+"word": "once",
+"line": 6,
+"start": 38.73,
+"end": 38.98
+},
+{
+"word": "and",
+"line": 6,
+"start": 38.98,
+"end": 39.23
+},
+{
+"word": "it",
+"line": 6,
+"start": 39.23,
+"end": 39.38
+},
+{
+"word": "runs",
+"line": 6,
+"start": 39.38,
+"end": 39.54
+},
+{
+"word": "itself",
+"line": 6,
+"start": 39.54,
+"end": 39.94
+},
+{
+"word": "every",
+"line": 6,
+"start": 39.94,
+"end": 40.4
+},
+{
+"word": "night.",
+"line": 6,
+"start": 40.4,
+"end": 41.06
+},
+{
+"word": "Comment",
+"line": 7,
+"start": 41.06,
+"end": 41.2
+},
+{
+"word": "night",
+"line": 7,
+"start": 41.2,
+"end": 41.47
+},
+{
+"word": "and",
+"line": 7,
+"start": 41.47,
+"end": 41.55
+},
+{
+"word": "I'll",
+"line": 7,
+"start": 41.55,
+"end": 41.73
+},
+{
+"word": "send",
+"line": 7,
+"start": 41.73,
+"end": 42.05
+},
+{
+"word": "you",
+"line": 7,
+"start": 42.05,
+"end": 42.11
+},
+{
+"word": "the",
+"line": 7,
+"start": 42.11,
+"end": 42.19
+},
+{
+"word": "whole",
+"line": 7,
+"start": 42.19,
+"end": 42.46
+},
+{
+"word": "setup.",
+"line": 7,
+"start": 42.46,
+"end": 43.02
+}
+]

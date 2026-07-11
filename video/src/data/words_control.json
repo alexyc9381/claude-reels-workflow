@@ -1,0 +1,626 @@
+[
+{
+"word": "Claude",
+"start": 0.0,
+"end": 0.3,
+"line": 0
+},
+{
+"word": "can",
+"start": 0.3,
+"end": 0.46,
+"line": 0
+},
+{
+"word": "now",
+"start": 0.46,
+"end": 0.62,
+"line": 0
+},
+{
+"word": "take",
+"start": 0.62,
+"end": 0.92,
+"line": 0
+},
+{
+"word": "over",
+"start": 0.92,
+"end": 1.14,
+"line": 0
+},
+{
+"word": "your",
+"start": 1.14,
+"end": 1.34,
+"line": 0
+},
+{
+"word": "screen",
+"start": 1.34,
+"end": 1.58,
+"line": 0
+},
+{
+"word": "and",
+"start": 1.58,
+"end": 1.82,
+"line": 0
+},
+{
+"word": "do",
+"start": 1.82,
+"end": 1.98,
+"line": 0
+},
+{
+"word": "your",
+"start": 1.98,
+"end": 2.14,
+"line": 0
+},
+{
+"word": "busy",
+"start": 2.14,
+"end": 2.44,
+"line": 0
+},
+{
+"word": "work",
+"start": 2.44,
+"end": 2.64,
+"line": 0
+},
+{
+"word": "for",
+"start": 2.64,
+"end": 2.86,
+"line": 0
+},
+{
+"word": "you.",
+"start": 2.86,
+"end": 3.08,
+"line": 0
+},
+{
+"word": "Not",
+"start": 3.42,
+"end": 3.62,
+"line": 1
+},
+{
+"word": "just",
+"start": 3.62,
+"end": 3.8,
+"line": 1
+},
+{
+"word": "answer",
+"start": 3.8,
+"end": 4.12,
+"line": 1
+},
+{
+"word": "questions,",
+"start": 4.12,
+"end": 4.62,
+"line": 1
+},
+{
+"word": "it",
+"start": 4.86,
+"end": 5.02,
+"line": 1
+},
+{
+"word": "actually",
+"start": 5.02,
+"end": 5.44,
+"line": 1
+},
+{
+"word": "moves",
+"start": 5.44,
+"end": 5.82,
+"line": 1
+},
+{
+"word": "your",
+"start": 5.82,
+"end": 6.02,
+"line": 1
+},
+{
+"word": "cursor,",
+"start": 6.02,
+"end": 6.38,
+"line": 1
+},
+{
+"word": "clicks",
+"start": 6.78,
+"end": 6.98,
+"line": 1
+},
+{
+"word": "through",
+"start": 6.98,
+"end": 7.22,
+"line": 1
+},
+{
+"word": "websites,",
+"start": 7.22,
+"end": 7.54,
+"line": 1
+},
+{
+"word": "and",
+"start": 7.8,
+"end": 7.86,
+"line": 1
+},
+{
+"word": "fills",
+"start": 7.86,
+"end": 8.16,
+"line": 1
+},
+{
+"word": "things",
+"start": 8.16,
+"end": 8.46,
+"line": 1
+},
+{
+"word": "in",
+"start": 8.46,
+"end": 8.68,
+"line": 1
+},
+{
+"word": "like",
+"start": 8.68,
+"end": 8.82,
+"line": 1
+},
+{
+"word": "a",
+"start": 8.82,
+"end": 8.96,
+"line": 1
+},
+{
+"word": "real",
+"start": 8.96,
+"end": 9.18,
+"line": 1
+},
+{
+"word": "person.",
+"start": 9.18,
+"end": 9.62,
+"line": 1
+},
+{
+"word": "Here's",
+"start": 10.08,
+"end": 10.5,
+"line": 2
+},
+{
+"word": "where",
+"start": 10.5,
+"end": 10.62,
+"line": 2
+},
+{
+"word": "it",
+"start": 10.62,
+"end": 10.68,
+"line": 2
+},
+{
+"word": "gets",
+"start": 10.68,
+"end": 10.84,
+"line": 2
+},
+{
+"word": "crazy.",
+"start": 10.84,
+"end": 11.16,
+"line": 2
+},
+{
+"word": "The",
+"start": 11.56,
+"end": 11.72,
+"line": 2
+},
+{
+"word": "boring",
+"start": 11.72,
+"end": 12.08,
+"line": 2
+},
+{
+"word": "multi",
+"start": 12.08,
+"end": 12.44,
+"line": 2
+},
+{
+"word": "-step",
+"start": 12.44,
+"end": 12.78,
+"line": 2
+},
+{
+"word": "stuff",
+"start": 12.78,
+"end": 13.08,
+"line": 2
+},
+{
+"word": "that",
+"start": 13.08,
+"end": 13.32,
+"line": 2
+},
+{
+"word": "eats",
+"start": 13.32,
+"end": 13.52,
+"line": 2
+},
+{
+"word": "your",
+"start": 13.52,
+"end": 13.7,
+"line": 2
+},
+{
+"word": "whole",
+"start": 13.7,
+"end": 14.0,
+"line": 2
+},
+{
+"word": "afternoon.",
+"start": 14.0,
+"end": 14.46,
+"line": 2
+},
+{
+"word": "Filling",
+"start": 14.9,
+"end": 15.2,
+"line": 3
+},
+{
+"word": "out",
+"start": 15.2,
+"end": 15.38,
+"line": 3
+},
+{
+"word": "forms.",
+"start": 15.38,
+"end": 15.78,
+"line": 3
+},
+{
+"word": "Digging",
+"start": 16.28,
+"end": 16.52,
+"line": 3
+},
+{
+"word": "numbers",
+"start": 16.52,
+"end": 16.72,
+"line": 3
+},
+{
+"word": "out",
+"start": 16.72,
+"end": 16.96,
+"line": 3
+},
+{
+"word": "of",
+"start": 16.96,
+"end": 17.06,
+"line": 3
+},
+{
+"word": "a",
+"start": 17.06,
+"end": 17.2,
+"line": 3
+},
+{
+"word": "dozen",
+"start": 17.2,
+"end": 17.46,
+"line": 3
+},
+{
+"word": "dashboards.",
+"start": 17.46,
+"end": 18.06,
+"line": 3
+},
+{
+"word": "Checking",
+"start": 18.38,
+"end": 18.58,
+"line": 3
+},
+{
+"word": "every",
+"start": 18.58,
+"end": 18.92,
+"line": 3
+},
+{
+"word": "competitor's",
+"start": 18.92,
+"end": 19.54,
+"line": 3
+},
+{
+"word": "pricing.",
+"start": 19.54,
+"end": 19.84,
+"line": 3
+},
+{
+"word": "It",
+"start": 20.24,
+"end": 20.38,
+"line": 4
+},
+{
+"word": "just",
+"start": 20.38,
+"end": 20.6,
+"line": 4
+},
+{
+"word": "runs",
+"start": 20.6,
+"end": 20.84,
+"line": 4
+},
+{
+"word": "through",
+"start": 20.84,
+"end": 21.08,
+"line": 4
+},
+{
+"word": "all",
+"start": 21.08,
+"end": 21.28,
+"line": 4
+},
+{
+"word": "of",
+"start": 21.28,
+"end": 21.38,
+"line": 4
+},
+{
+"word": "it",
+"start": 21.38,
+"end": 21.5,
+"line": 4
+},
+{
+"word": "while",
+"start": 21.5,
+"end": 21.68,
+"line": 4
+},
+{
+"word": "you",
+"start": 21.68,
+"end": 21.82,
+"line": 4
+},
+{
+"word": "sit",
+"start": 21.82,
+"end": 21.96,
+"line": 4
+},
+{
+"word": "there",
+"start": 21.96,
+"end": 22.18,
+"line": 4
+},
+{
+"word": "and",
+"start": 22.18,
+"end": 22.32,
+"line": 4
+},
+{
+"word": "watch.",
+"start": 22.32,
+"end": 22.56,
+"line": 4
+},
+{
+"word": "And",
+"start": 23.02,
+"end": 23.16,
+"line": 5
+},
+{
+"word": "barely",
+"start": 23.16,
+"end": 23.58,
+"line": 5
+},
+{
+"word": "anyone",
+"start": 23.58,
+"end": 24.0,
+"line": 5
+},
+{
+"word": "knows",
+"start": 24.0,
+"end": 24.28,
+"line": 5
+},
+{
+"word": "about",
+"start": 24.28,
+"end": 24.52,
+"line": 5
+},
+{
+"word": "this",
+"start": 24.52,
+"end": 24.72,
+"line": 5
+},
+{
+"word": "yet.",
+"start": 24.72,
+"end": 25.0,
+"line": 5
+},
+{
+"word": "The",
+"start": 25.22,
+"end": 25.4,
+"line": 5
+},
+{
+"word": "people",
+"start": 25.4,
+"end": 25.64,
+"line": 5
+},
+{
+"word": "who",
+"start": 25.64,
+"end": 25.86,
+"line": 5
+},
+{
+"word": "do",
+"start": 25.86,
+"end": 26.06,
+"line": 5
+},
+{
+"word": "are",
+"start": 26.06,
+"end": 26.38,
+"line": 5
+},
+{
+"word": "quietly",
+"start": 26.38,
+"end": 26.76,
+"line": 5
+},
+{
+"word": "getting",
+"start": 26.76,
+"end": 27.04,
+"line": 5
+},
+{
+"word": "hours",
+"start": 27.04,
+"end": 27.46,
+"line": 5
+},
+{
+"word": "of",
+"start": 27.46,
+"end": 27.66,
+"line": 5
+},
+{
+"word": "their",
+"start": 27.66,
+"end": 27.78,
+"line": 5
+},
+{
+"word": "week",
+"start": 27.78,
+"end": 27.94,
+"line": 5
+},
+{
+"word": "back.",
+"start": 27.94,
+"end": 28.24,
+"line": 5
+},
+{
+"word": "Comment",
+"start": 28.24,
+"end": 28.92,
+"line": 6
+},
+{
+"word": "control",
+"start": 28.92,
+"end": 29.32,
+"line": 6
+},
+{
+"word": "and",
+"start": 29.32,
+"end": 29.5,
+"line": 6
+},
+{
+"word": "I'll",
+"start": 29.5,
+"end": 29.62,
+"line": 6
+},
+{
+"word": "send",
+"start": 29.62,
+"end": 29.72,
+"line": 6
+},
+{
+"word": "you",
+"start": 29.72,
+"end": 29.84,
+"line": 6
+},
+{
+"word": "the",
+"start": 29.84,
+"end": 29.92,
+"line": 6
+},
+{
+"word": "exact",
+"start": 29.92,
+"end": 30.16,
+"line": 6
+},
+{
+"word": "setup.",
+"start": 30.16,
+"end": 30.52,
+"line": 6
+}
+]

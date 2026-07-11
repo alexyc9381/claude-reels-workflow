@@ -1,0 +1,69 @@
+---
+name: script-factory-pipeline
+description: ⛔ MASTER STANDING PIPELINE — load BEFORE any reel topic/hook/script/caption work; every video passes Stages 0-5 with a per-reel factory log; no complete factory log = no recording
+metadata: 
+  node_type: memory
+  type: feedback
+  originSessionId: fd2a64f7-8d2a-4a40-a1dc-da7f726a2785
+---
+
+# THE SCRIPT FACTORY (v1, 2026-07-09 — adversarially validated, 31 findings patched)
+
+**Why it exists:** script/topic quality varied wildly (VAULT died at 5s avg after skipping gates that already existed). Root fix = one mandatory staged pipeline where **logs are load-bearing**: each stage writes an artifact, the next stage's first action is READING it (hard stop if missing), and the next reel's gates read this reel's ledger. Skipping logging today breaks tomorrow's gate. **Ship rule: no complete factory log, no recording.** Under time pressure, cut SCOPE (fewer reels), never stages.
+
+**Per-reel factory log:** create `memory/reels/<reel-name>-factory-log.md` at Stage 0. Fixed schema: `STAGE0{door, comp_link, comp_views, baseline_median, views_per_day, capture_date, transfer_hypothesis, deadline_batch?}` · `STAGE1{rule1..9: PASS/FAIL + evidence quote + demanded artifact, audience_score_arithmetic, kill_or_pass}` · `STAGE2{structure_comp, template, target_seconds, deviations[]}` · `STAGE3{word_count, hook_variants+per-check scores, truth_required_claims[]}` · `STAGE4{3 critic reports, 6-dim scorecard, SHIP verdict}` · `STAGE4.5{evidence paths}` · `STAGE5{checklist}` · `POST{3s_hold, avg_watch, comments — added 48-72h after posting}`.
+
+## STAGE 0 — SOURCE GATE (topics enter through 3 doors only)
+- **Door A — found comp:** a post that is **≤14 days old AND ≥2x the median views of that creator's recent posts** (exclude the candidate from the median). TWO FEEDS: (1) **the OUTLIER ENGINE at `~/Downloads/outlier-engine/`** (run `python3 scan.py` weekly / before each topic pick) — auto-scans the YouTube watchlist incl. ADJACENT niches (money, time), scores `views/channel-median × recency boost × Alex-lane transfer modifiers` (+money/+time/+consumer-input/+follow-along, −tech-terms/−cerebral-nouns/−deadline — the kill-gate as arithmetic), outputs `runs/<date>/RANKED.md` with Door-A eligibility flags; (2) IG creators (Nate Herk, Ray Fu, cindiezhu, Nick Saraev) via claude-in-chrome grid scrape: last 10 posts' views + dates → median + views/day. Log all numbers + capture date. REQUIRED FIELD: a one-sentence **transfer hypothesis** — why it overperformed AND why that mechanism survives transfer to a faceless mascot/UI reel (charisma/trend-audio wins do NOT transfer → reject). The engine RANKS candidates; it never green-lights — Stage 1 still gates every one.
+- **Door B — Alex sends anything:** transcribe it first (yt-dlp --cookies-from-browser chrome → tx.py), extract its beat structure. It becomes the `structure_comp`. No velocity verification required.
+- **Door C — gated backlog idea** ([[fable-idea-backlog]]): a prior kill-gate pass is PROVISIONAL — Stage 1 always re-runs fresh at script time. Door C must still attach a `structure_comp` before entering Stage 1. **⛔ DOOR C DEMOTED (Alex, 2026-07-09):** backlog rank alone is no longer a valid source — every Door C idea must ALSO attach outlier evidence (an Outlier Engine hit or a proven overperformer comp on the same premise) AND pass the harsh audience reading ≥8. Outlier-first: when picking the next topic, read the latest `outlier-engine/runs/<date>/RANKED.md` BEFORE opening the backlog.
+- **BANNED:** brainstorm topics with no comp attached (the VAULT door). Check the KILL-LIST (bottom of [[fable-idea-backlog]]) before any topic enters — killed shapes don't re-enter without a receipts-first reframe.
+- Topics originating from any deadline/urgency-themed brainstorm get a `deadline_batch` flag → audience sign-off threshold rises from <7 to <8.
+
+## STAGE 1 — TOPIC KILL-GATE
+Apply the **FULL rule text** in [[vault-reel-premise-autopsy]] (the 9 PRE-BUILD KILL-RULES) — shorthand is an index, not the rule. Each log line must include the artifact the rule demands (rule 1: the mocked screenshot description; rule 4: the one-breath restate sentence; rule 8: the enumerated qualifier list).
+- **Cerebral-payoff = FUNCTIONAL test** (the noun list insight/rules/judgment/map/patterns/profile/playbook/audit/scan/framework is examples only): *can the payoff be shown as a visually legible on-screen artifact changing state in under 2 seconds, sound off?* Needs reading/explaining = KILL.
+- **Lever cooldown reads the ledger**, never memory: check `memory/reel-lever-ledger.md` (last 2 entries). Same opening lever as either = FAIL. Taxonomy: deadline/free-window · price-hike · going-away/nerf · competitor-fear · new-release-FOMO · none. **Lever "none" is exempt from cooldown** — an absent urgency lever cannot fatigue; rotation applies to urgency levers only (hook-FAMILY freshness, rule 10 of the hook gate, still applies).
+- **AUDIENCE-SIZE is computed, not felt:** start 10; −2 per qualifier needed to feel the stake; −3 if payoff requires owning a business or desktop-only tooling; −2 if the value noun isn't money, time, or a screenshot-able deliverable; floor 1. Log the arithmetic. **⛔ HARSH-READING RULE (Alex, 2026-07-09, GHOST kill):** when two readings of the qualifier count exist, the HARSHER one is binding — never argue a premise up with a generous reading. Any stake that typically implies selling/clients/invoicing/CRM = business context = the −3 applies. Score <8 on the harsh reading = Alex sign-off required (GHOST shipped a gated script at generous-8/harsh-6 and was killed at premise level — the gate must kill it first).
+- **Kills are recorded:** append to the backlog kill-list (`NAME — KILLED, rules N,M, date`).
+- **OVERRIDE PROTOCOL:** when an Alex-sourced topic fails, present the exact failed rule numbers + at least one reframe that passes. If Alex says override → log `OVERRIDE-BY-ALEX: [rules, date]` and continue. Alex always wins, never invisibly.
+
+## STAGE 2 — STRUCTURE (inherit, don't invent)
+**Default: STRUCTURE = the structure_comp's beat structure.** Transcribe/beat-map it and inherit. Only if the comp's structure is unusable, apply the matrix top-to-bottom, first match wins (log which branch fired):
+1. Broad consumer + doable-tonight + prompt-shaped → **SPOKEN-PROMPT FOLLOW-ALONG** (question hook → "I tried it and [result]" proof → 3-4 spoken mini-prompts with reaction beats, one "here's the trick", one "best part" → "want all N word-for-word? follow + comment KEYWORD"; real chat UI on screen). Source: the DaS-IcjjqNt erase-footprint teardown.
+2. Multiple tips/items → **TREND-JACK CURATION LISTICLE** ([[creator-video-structure-templates]]).
+3. Technical capability for normal people → **CINDIEZHU PERSONA ENGINE** ([[cindiezhu-style-reference]]).
+4. System/build story → **WINNING-FORMULA SPINE** ([[reel-winning-formula]] incl. the 2026-07-09 amendment).
+Fallback when nothing fits: spine, flagged for review. **Each deviation from the inherited structure needs a logged one-line hypothesis; ≥3 deviations = re-select or Alex sign-off.** Set `target_seconds` here: comp length ±20% (no comp length → 35-45s).
+
+## STAGE 3 — DRAFT (hard constraints, all logged)
+- Words ≤ target_seconds × 4.3. Value noun by ~word 12. Zero jargon (12-year-old parse test). Zero em dashes. but/so causality. CTA at the very end, hard cut on the keyword.
+- **HOOKS per the full HOOK GATE** ([[claude-reel-hook-library]]): draft 10+ first lines, score each against all 10 checks, select top 2-3 across ≥2 families; log per-check results. Top two within 1 point → present both to Alex.
+- **GATE THE HOW** ([[gate-the-how-in-scripts]]): the VO names the artifact and sells the result, never a complete replicable method. SPOKEN-PROMPT exception, precisely: rough partial prompts spoken aloud ARE the value; the full word-for-word set is always gated behind the comment.
+- Any first-person "I tried it / it found me X" claim → flag **TRUTH-REQUIRED** with what run would prove it. If it can't actually be run, reword out of first person NOW, not at the mic.
+
+## STAGE 4 — ADVERSARIAL GATE (the saved template, verbatim)
+Run `~/Downloads/matchtern-longform/script-factory/script-gate-template.js` via the Workflow tool — **fresh subagent contexts, no drafting history.** Inputs per critic: RULES LOGGER gets script + factory log + full rule texts; COLD VIEWER gets the script ONLY (cold); COMP FIDELITY gets script + the structure_comp beat map. Forced-effort outputs: COLD VIEWER must return a per-second swipe-probability table for 0-10s + its top-3 weakest moments EVEN ON A PASS (zero criticisms = lazy run, rejected); COMP FIDELITY hard-fails (blocker) if no structure_comp is logged.
+**Scorecard ownership:** RULES LOGGER → gate-integrity, concreteness · COLD VIEWER → hook, believability, topic-breadth · COMP FIDELITY → structure-fidelity. **SHIP BAR: all six ≥8/10 + zero blockers + zero Stage-1 FAILs.**
+**Re-runs:** re-spawn the same critics with their previous verdict + a diff; RULES LOGGER always re-runs in full; any change to the hook or beat order forces a full 3-critic re-run.
+
+## STAGE 4.5 — TRUTH EVIDENCE (own step, not a checkbox)
+Every TRUTH-REQUIRED claim logs a **file path to the actual run's screenshot/output in the reel's folder**. The path must exist on disk (RULES LOGGER re-checks). Missing evidence = blocker → route back to Stage 3 for the out-of-first-person reword → re-gate the diff. Never patched at the mic.
+
+## STAGE 5 — PRE-RECORD CHECKLIST (genuinely mechanical)
+Word count re-counted vs budget · keyword-cut ending present · caption sketched (comment-first per [[caption-structure]]) · gated guide contents sketched and OVER-delivering vs the video (video shows N → guide holds >N) · visual proof-shots listed (real screens by second 10) · lever-ledger line appended (reel #, keyword, opening lever, hook family, template, date).
+
+
+## RENDER-SIDE GATES (v1.1, from the VAULT rendered-video forensic — required numeric log fields, run on the FINAL render/WAV)
+R1. **Delivered-VO speed:** measure wps per 5s window on the final WAV. Hook window (0-10s) ≤4.0 wps (CLONE anchor 3.96); ANY window >4.5 = re-record or reduce the speedup. Log natural wps + speedup multiplier.
+R2. **Pace, not pauses** (corrected by measurement 2026-07-09 — the "pause floor in the hook" hypothesis was FALSIFIED: CLONE has ZERO gaps ≥0.35s in its first 10s, first gap @14.2s; VAULT actually had one @5.5s): the hook runs CONTINUOUS but ≤4.0 wps (R1 carries the audio signal). Body breathing gaps (~0.4-0.65s) cluster every 10-15s mid-body in winners AND the failure = style constant, keep but don't credit. Log gap count from words.json anyway.
+R3. **CLAIM-BEFORE-SPECTACLE** (refined by the own-winners decomposition — supersedes a raw motion ceiling): (a) a mute-readable CLAIM (subject name + stake) is fully on screen at **frame 0** — readable-claim latency 0.0s, no fade-in, no empty stage; (b) 0-2s motion avg ≤ ~2.8; (c) NO pre-claim frame >7 motion, and the video's max-energy frame never fires before the claim has read ≥0.8-1.0s. (CLONE 0.0s latency/0.57x = gold standard; BLUEPRINT 0.0s latency won even at 2.79 hook motion because its 7.49 spike fired AFTER 1.4s of claim time; VAULT ~1.3s latency + 9.97 spike @1.0s = died.) Full rules in `winner-lab/corpus/HOOK-DOCTRINE.md`.
+R4. **Channel simultaneity (0-5s):** exactly ONE channel carries meaning at a time — during a motion peak the VO is at/below body pace or silent; burned text NEVER repeats what the VO just said. Enforced as a required per-second row in the COLD VIEWER swipe table.
+R5. **Mute-read = VALUE, not lever:** the frame-1 number/contrast must be about the payoff (artifact/money/before-after). A deadline/countdown stamp does NOT satisfy mute-readability (VAULT's "3 DAYS" loophole, closed).
+R6. **First-noun-on-render timestamps:** log when the value noun is first SPOKEN and first SHOWN in the actual render — both ≤5s or route back to Stage 3.
+R7. **Real-screen frame verification:** the listed proof-shot must exist in the render at its stated timestamp — frame grab attached to the factory log (render-side enforcement of kill-rule 1).
+
+## POST-PUBLISH AUTOPSY (closes the loop — this is what makes the rubric learn)
+48-72h after posting: append actual 3-second hold, average watch time, comment count next to the predicted scorecard in the factory log. Monthly: recalibrate any rubric anchor whose predictions diverge from outcomes. A reel that underperforms badly (like VAULT) triggers a full postmortem panel and possible new kill-rules.
+
+**INTEGRATION:** Script Factory Stages 0-5 REPLACE step 1 ("script/hook self-gate") of [[reel-ship-gate-pipeline]]; a Stage-5 pass hands off to its build/render/critic stages. Pairs with [[vault-reel-premise-autopsy]], [[reel-winning-formula]], [[claude-reel-hook-library]], [[ig-reels-scriptwriting-principles]], [[no-anecdote-value-first-scripts]].

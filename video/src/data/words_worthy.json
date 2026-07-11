@@ -1,0 +1,957 @@
+[
+{
+"word": "Claude",
+"start": 0.0,
+"end": 0.42
+},
+{
+"word": "just",
+"start": 0.42,
+"end": 0.58
+},
+{
+"word": "labeled",
+"start": 0.58,
+"end": 0.84
+},
+{
+"word": "a",
+"start": 0.84,
+"end": 1.0
+},
+{
+"word": "user",
+"start": 1.0,
+"end": 1.22
+},
+{
+"word": "too",
+"start": 1.22,
+"end": 1.62
+},
+{
+"word": "dumb",
+"start": 1.62,
+"end": 1.94
+},
+{
+"word": "to",
+"start": 1.94,
+"end": 2.14
+},
+{
+"word": "use",
+"start": 2.14,
+"end": 2.36
+},
+{
+"word": "Fable",
+"start": 2.36,
+"end": 2.64
+},
+{
+"word": "5.",
+"start": 2.64,
+"end": 2.98
+},
+{
+"word": "One",
+"start": 3.24,
+"end": 3.6
+},
+{
+"word": "word",
+"start": 3.6,
+"end": 3.8
+},
+{
+"word": "you're",
+"start": 3.8,
+"end": 4.06
+},
+{
+"word": "using",
+"start": 4.06,
+"end": 4.34
+},
+{
+"word": "in",
+"start": 4.34,
+"end": 4.48
+},
+{
+"word": "your",
+"start": 4.48,
+"end": 4.6
+},
+{
+"word": "prompts",
+"start": 4.6,
+"end": 4.86
+},
+{
+"word": "every",
+"start": 4.86,
+"end": 5.3
+},
+{
+"word": "single",
+"start": 5.3,
+"end": 5.62
+},
+{
+"word": "day",
+"start": 5.62,
+"end": 5.88
+},
+{
+"word": "could",
+"start": 5.88,
+"end": 6.0
+},
+{
+"word": "earn",
+"start": 6.0,
+"end": 6.18
+},
+{
+"word": "you",
+"start": 6.18,
+"end": 6.36
+},
+{
+"word": "that",
+"start": 6.36,
+"end": 6.5
+},
+{
+"word": "tag.",
+"start": 6.5,
+"end": 6.78
+},
+{
+"word": "Reports",
+"start": 7.22,
+"end": 7.46
+},
+{
+"word": "say",
+"start": 7.46,
+"end": 7.72
+},
+{
+"word": "a",
+"start": 7.72,
+"end": 7.86
+},
+{
+"word": "router",
+"start": 7.86,
+"end": 8.0
+},
+{
+"word": "quietly",
+"start": 8.0,
+"end": 8.38
+},
+{
+"word": "swaps",
+"start": 8.38,
+"end": 8.76
+},
+{
+"word": "Fable",
+"start": 8.76,
+"end": 9.12
+},
+{
+"word": "5",
+"start": 9.12,
+"end": 9.42
+},
+{
+"word": "for",
+"start": 9.42,
+"end": 9.62
+},
+{
+"word": "4",
+"start": 9.62,
+"end": 9.82
+},
+{
+"word": ".8",
+"start": 9.82,
+"end": 10.2
+},
+{
+"word": "when",
+"start": 10.2,
+"end": 10.36
+},
+{
+"word": "certain",
+"start": 10.36,
+"end": 10.62
+},
+{
+"word": "words",
+"start": 10.62,
+"end": 10.88
+},
+{
+"word": "are",
+"start": 10.88,
+"end": 11.04
+},
+{
+"word": "used,",
+"start": 11.04,
+"end": 11.36
+},
+{
+"word": "but",
+"start": 11.52,
+"end": 11.7
+},
+{
+"word": "here's",
+"start": 11.7,
+"end": 11.92
+},
+{
+"word": "the",
+"start": 11.92,
+"end": 12.04
+},
+{
+"word": "part",
+"start": 12.04,
+"end": 12.18
+},
+{
+"word": "everyone",
+"start": 12.18,
+"end": 12.48
+},
+{
+"word": "misses.",
+"start": 12.48,
+"end": 12.8
+},
+{
+"word": "Most",
+"start": 13.22,
+"end": 13.42
+},
+{
+"word": "people",
+"start": 13.42,
+"end": 13.62
+},
+{
+"word": "getting",
+"start": 13.62,
+"end": 13.82
+},
+{
+"word": "downgraded",
+"start": 13.82,
+"end": 14.32
+},
+{
+"word": "have",
+"start": 14.32,
+"end": 14.56
+},
+{
+"word": "no",
+"start": 14.56,
+"end": 14.9
+},
+{
+"word": "idea,",
+"start": 14.9,
+"end": 15.34
+},
+{
+"word": "but",
+"start": 15.58,
+"end": 15.8
+},
+{
+"word": "there's",
+"start": 15.8,
+"end": 15.96
+},
+{
+"word": "a",
+"start": 15.96,
+"end": 16.08
+},
+{
+"word": "five",
+"start": 16.08,
+"end": 16.34
+},
+{
+"word": "second",
+"start": 16.34,
+"end": 16.64
+},
+{
+"word": "check",
+"start": 16.64,
+"end": 16.94
+},
+{
+"word": "that",
+"start": 16.94,
+"end": 17.14
+},
+{
+"word": "will",
+"start": 17.14,
+"end": 17.26
+},
+{
+"word": "prove",
+"start": 17.26,
+"end": 17.48
+},
+{
+"word": "it.",
+"start": 17.48,
+"end": 17.66
+},
+{
+"word": "One",
+"start": 17.66,
+"end": 17.78
+},
+{
+"word": "developer",
+"start": 17.78,
+"end": 18.06
+},
+{
+"word": "paying",
+"start": 18.06,
+"end": 18.36
+},
+{
+"word": "$200",
+"start": 18.36,
+"end": 18.98
+},
+{
+"word": "a",
+"start": 18.98,
+"end": 19.32
+},
+{
+"word": "month",
+"start": 19.32,
+"end": 19.42
+},
+{
+"word": "found",
+"start": 19.42,
+"end": 19.68
+},
+{
+"word": "the",
+"start": 19.68,
+"end": 19.84
+},
+{
+"word": "tag.",
+"start": 19.84,
+"end": 20.1
+},
+{
+"word": "Type",
+"start": 20.48,
+"end": 20.54
+},
+{
+"word": "slash",
+"start": 20.54,
+"end": 20.9
+},
+{
+"word": "status",
+"start": 20.9,
+"end": 21.32
+},
+{
+"word": "in",
+"start": 21.32,
+"end": 21.52
+},
+{
+"word": "Claude",
+"start": 21.52,
+"end": 21.68
+},
+{
+"word": "Code",
+"start": 21.68,
+"end": 21.96
+},
+{
+"word": "and",
+"start": 21.96,
+"end": 22.18
+},
+{
+"word": "read",
+"start": 22.18,
+"end": 22.4
+},
+{
+"word": "the",
+"start": 22.4,
+"end": 22.54
+},
+{
+"word": "response.",
+"start": 22.54,
+"end": 22.88
+},
+{
+"word": "A",
+"start": 23.16,
+"end": 23.26
+},
+{
+"word": "response",
+"start": 23.26,
+"end": 23.54
+},
+{
+"word": "in",
+"start": 23.54,
+"end": 23.74
+},
+{
+"word": "five",
+"start": 23.74,
+"end": 23.92
+},
+{
+"word": "seconds,",
+"start": 23.92,
+"end": 24.28
+},
+{
+"word": "it",
+"start": 24.48,
+"end": 24.58
+},
+{
+"word": "means",
+"start": 24.58,
+"end": 24.74
+},
+{
+"word": "Opus,",
+"start": 24.74,
+"end": 25.16
+},
+{
+"word": "and",
+"start": 25.36,
+"end": 25.44
+},
+{
+"word": "your",
+"start": 25.44,
+"end": 25.56
+},
+{
+"word": "$200",
+"start": 25.56,
+"end": 26.0
+},
+{
+"word": "just",
+"start": 26.0,
+"end": 26.54
+},
+{
+"word": "bought",
+"start": 26.54,
+"end": 26.82
+},
+{
+"word": "the",
+"start": 26.82,
+"end": 26.98
+},
+{
+"word": "old",
+"start": 26.98,
+"end": 27.12
+},
+{
+"word": "model.",
+"start": 27.12,
+"end": 27.4
+},
+{
+"word": "Now",
+"start": 27.82,
+"end": 27.92
+},
+{
+"word": "why",
+"start": 27.92,
+"end": 28.08
+},
+{
+"word": "does",
+"start": 28.08,
+"end": 28.2
+},
+{
+"word": "this",
+"start": 28.2,
+"end": 28.3
+},
+{
+"word": "happen?",
+"start": 28.3,
+"end": 28.58
+},
+{
+"word": "Users",
+"start": 28.58,
+"end": 29.36
+},
+{
+"word": "are",
+"start": 29.36,
+"end": 29.6
+},
+{
+"word": "reporting",
+"start": 29.6,
+"end": 29.92
+},
+{
+"word": "that",
+"start": 29.92,
+"end": 30.1
+},
+{
+"word": "certain",
+"start": 30.1,
+"end": 30.44
+},
+{
+"word": "words",
+"start": 30.44,
+"end": 30.74
+},
+{
+"word": "trip",
+"start": 30.74,
+"end": 31.12
+},
+{
+"word": "the",
+"start": 31.12,
+"end": 31.28
+},
+{
+"word": "algorithm.",
+"start": 31.28,
+"end": 31.66
+},
+{
+"word": "Stuff",
+"start": 31.98,
+"end": 32.04
+},
+{
+"word": "like",
+"start": 32.04,
+"end": 32.36
+},
+{
+"word": "vulnerable,",
+"start": 32.36,
+"end": 33.02
+},
+{
+"word": "unsafe,",
+"start": 33.38,
+"end": 33.68
+},
+{
+"word": "even",
+"start": 33.96,
+"end": 34.14
+},
+{
+"word": "hook.",
+"start": 34.14,
+"end": 34.44
+},
+{
+"word": "So",
+"start": 34.94,
+"end": 34.98
+},
+{
+"word": "don't",
+"start": 34.98,
+"end": 35.22
+},
+{
+"word": "tell",
+"start": 35.22,
+"end": 35.46
+},
+{
+"word": "Claude",
+"start": 35.46,
+"end": 35.66
+},
+{
+"word": "to",
+"start": 35.66,
+"end": 35.84
+},
+{
+"word": "fix",
+"start": 35.84,
+"end": 36.04
+},
+{
+"word": "your",
+"start": 36.04,
+"end": 36.2
+},
+{
+"word": "weak",
+"start": 36.2,
+"end": 36.4
+},
+{
+"word": "hook.",
+"start": 36.4,
+"end": 36.62
+},
+{
+"word": "Tell",
+"start": 37.12,
+"end": 37.2
+},
+{
+"word": "it",
+"start": 37.2,
+"end": 37.32
+},
+{
+"word": "what",
+"start": 37.32,
+"end": 37.4
+},
+{
+"word": "you",
+"start": 37.4,
+"end": 37.5
+},
+{
+"word": "actually",
+"start": 37.5,
+"end": 37.82
+},
+{
+"word": "want.",
+"start": 37.82,
+"end": 38.14
+},
+{
+"word": "Something",
+"start": 38.66,
+"end": 38.8
+},
+{
+"word": "like",
+"start": 38.8,
+"end": 39.1
+},
+{
+"word": "rewrite",
+"start": 39.1,
+"end": 39.48
+},
+{
+"word": "the",
+"start": 39.48,
+"end": 39.72
+},
+{
+"word": "first",
+"start": 39.72,
+"end": 39.9
+},
+{
+"word": "line",
+"start": 39.9,
+"end": 40.1
+},
+{
+"word": "of",
+"start": 40.1,
+"end": 40.22
+},
+{
+"word": "the",
+"start": 40.22,
+"end": 40.36
+},
+{
+"word": "sales",
+"start": 40.36,
+"end": 40.58
+},
+{
+"word": "page",
+"start": 40.58,
+"end": 40.82
+},
+{
+"word": "so",
+"start": 40.82,
+"end": 41.04
+},
+{
+"word": "people",
+"start": 41.04,
+"end": 41.3
+},
+{
+"word": "stop",
+"start": 41.3,
+"end": 41.58
+},
+{
+"word": "scrolling.",
+"start": 41.58,
+"end": 42.02
+},
+{
+"word": "This",
+"start": 42.4,
+"end": 42.5
+},
+{
+"word": "is",
+"start": 42.5,
+"end": 42.6
+},
+{
+"word": "the",
+"start": 42.6,
+"end": 42.74
+},
+{
+"word": "same",
+"start": 42.74,
+"end": 42.96
+},
+{
+"word": "request,",
+"start": 42.96,
+"end": 43.34
+},
+{
+"word": "different",
+"start": 43.8,
+"end": 43.98
+},
+{
+"word": "wording,",
+"start": 43.98,
+"end": 44.3
+},
+{
+"word": "and",
+"start": 44.68,
+"end": 44.78
+},
+{
+"word": "that",
+"start": 44.78,
+"end": 44.92
+},
+{
+"word": "version",
+"start": 44.92,
+"end": 45.24
+},
+{
+"word": "reportedly",
+"start": 45.24,
+"end": 45.74
+},
+{
+"word": "stays",
+"start": 45.74,
+"end": 46.06
+},
+{
+"word": "on",
+"start": 46.06,
+"end": 46.26
+},
+{
+"word": "Fable.",
+"start": 46.26,
+"end": 46.56
+},
+{
+"word": "Save",
+"start": 46.98,
+"end": 47.24
+},
+{
+"word": "this",
+"start": 47.24,
+"end": 47.42
+},
+{
+"word": "before",
+"start": 47.42,
+"end": 47.7
+},
+{
+"word": "your",
+"start": 47.7,
+"end": 47.84
+},
+{
+"word": "next",
+"start": 47.84,
+"end": 48.0
+},
+{
+"word": "prompt.",
+"start": 48.0,
+"end": 48.32
+},
+{
+"word": "I",
+"start": 48.78,
+"end": 48.9
+},
+{
+"word": "made",
+"start": 48.9,
+"end": 49.02
+},
+{
+"word": "a",
+"start": 49.02,
+"end": 49.18
+},
+{
+"word": "step",
+"start": 49.18,
+"end": 49.3
+},
+{
+"word": "by",
+"start": 49.3,
+"end": 49.42
+},
+{
+"word": "step",
+"start": 49.42,
+"end": 49.64
+},
+{
+"word": "guide",
+"start": 49.64,
+"end": 49.86
+},
+{
+"word": "with",
+"start": 49.86,
+"end": 49.98
+},
+{
+"word": "the",
+"start": 49.98,
+"end": 50.12
+},
+{
+"word": "trigger",
+"start": 50.12,
+"end": 50.3
+},
+{
+"word": "words",
+"start": 50.3,
+"end": 50.62
+},
+{
+"word": "and",
+"start": 50.62,
+"end": 50.78
+},
+{
+"word": "rephrase",
+"start": 50.78,
+"end": 51.12
+},
+{
+"word": "patterns.",
+"start": 51.12,
+"end": 51.62
+},
+{
+"word": "Comment",
+"start": 52.1,
+"end": 52.2
+},
+{
+"word": "worthy",
+"start": 52.2,
+"end": 52.46
+},
+{
+"word": "and",
+"start": 52.46,
+"end": 52.7
+},
+{
+"word": "I'll",
+"start": 52.7,
+"end": 52.84
+},
+{
+"word": "send",
+"start": 52.84,
+"end": 52.98
+},
+{
+"word": "it",
+"start": 52.98,
+"end": 53.1
+},
+{
+"word": "to",
+"start": 53.1,
+"end": 53.22
+},
+{
+"word": "you.",
+"start": 53.22,
+"end": 53.38
+}
+]

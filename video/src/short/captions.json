@@ -1,0 +1,444 @@
+[
+{
+"from": 0,
+"to": 34,
+"words": [
+{
+"text": "THIS",
+"t": 0
+},
+{
+"text": "IS",
+"t": 10
+},
+{
+"text": "THE",
+"t": 16
+},
+{
+"text": "COLD",
+"t": 23
+}
+]
+},
+{
+"from": 34,
+"to": 65,
+"words": [
+{
+"text": "EMAIL",
+"t": 34
+},
+{
+"text": "THAT",
+"t": 48
+},
+{
+"text": "GOT",
+"t": 54
+},
+{
+"text": "A",
+"t": 61
+}
+]
+},
+{
+"from": 65,
+"to": 124,
+"words": [
+{
+"text": "16-YEAR-OLD",
+"t": 65
+},
+{
+"text": "INTO",
+"t": 97
+},
+{
+"text": "A",
+"t": 106
+},
+{
+"text": "RESEARCH",
+"t": 107
+}
+]
+},
+{
+"from": 124,
+"to": 137,
+"words": [
+{
+"text": "LAB.",
+"t": 124
+}
+]
+},
+{
+"from": 137,
+"to": 187,
+"words": [
+{
+"text": "SUBJECT",
+"t": 137
+},
+{
+"text": "LINE,",
+"t": 157
+},
+{
+"text": "HIGH",
+"t": 169
+},
+{
+"text": "SCHOOL",
+"t": 176
+}
+]
+},
+{
+"from": 187,
+"to": 235,
+"words": [
+{
+"text": "STUDENT,",
+"t": 187
+},
+{
+"text": "FREE",
+"t": 200
+},
+{
+"text": "HELP,",
+"t": 210
+},
+{
+"text": "THREE",
+"t": 224
+}
+]
+},
+{
+"from": 235,
+"to": 266,
+"words": [
+{
+"text": "HOURS",
+"t": 235
+},
+{
+"text": "A",
+"t": 248
+},
+{
+"text": "WEEK.",
+"t": 249
+}
+]
+},
+{
+"from": 266,
+"to": 321,
+"words": [
+{
+"text": "FIRST",
+"t": 266
+},
+{
+"text": "LINE,",
+"t": 280
+},
+{
+"text": "NAME",
+"t": 296
+},
+{
+"text": "THEIR",
+"t": 307
+}
+]
+},
+{
+"from": 321,
+"to": 354,
+"words": [
+{
+"text": "LAB",
+"t": 321
+},
+{
+"text": "AND",
+"t": 330
+},
+{
+"text": "ONE",
+"t": 338
+},
+{
+"text": "PAPER",
+"t": 343
+}
+]
+},
+{
+"from": 354,
+"to": 395,
+"words": [
+{
+"text": "YOU",
+"t": 354
+},
+{
+"text": "ACTUALLY",
+"t": 361
+},
+{
+"text": "READ.",
+"t": 379
+}
+]
+},
+{
+"from": 395,
+"to": 452,
+"words": [
+{
+"text": "SECOND",
+"t": 395
+},
+{
+"text": "LINE,",
+"t": 415
+},
+{
+"text": "NAME",
+"t": 429
+},
+{
+"text": "YOUR",
+"t": 442
+}
+]
+},
+{
+"from": 452,
+"to": 527,
+"words": [
+{
+"text": "SKILL,",
+"t": 452
+},
+{
+"text": "CODING,",
+"t": 470
+},
+{
+"text": "DATA,",
+"t": 497
+},
+{
+"text": "OR",
+"t": 523
+}
+]
+},
+{
+"from": 527,
+"to": 549,
+"words": [
+{
+"text": "LAB",
+"t": 527
+},
+{
+"text": "WORK.",
+"t": 534
+}
+]
+},
+{
+"from": 560,
+"to": 596,
+"words": [
+{
+"text": "THIRD",
+"t": 560
+},
+{
+"text": "LINE,",
+"t": 560
+},
+{
+"text": "ASK",
+"t": 581
+},
+{
+"text": "FOR",
+"t": 587
+}
+]
+},
+{
+"from": 596,
+"to": 655,
+"words": [
+{
+"text": "15",
+"t": 596
+},
+{
+"text": "MINUTES,",
+"t": 615
+},
+{
+"text": "NOT",
+"t": 643
+},
+{
+"text": "A",
+"t": 652
+}
+]
+},
+{
+"from": 655,
+"to": 687,
+"words": [
+{
+"text": "POSITION.",
+"t": 655
+}
+]
+},
+{
+"from": 687,
+"to": 719,
+"words": [
+{
+"text": "KEEP",
+"t": 687
+},
+{
+"text": "IT",
+"t": 696
+},
+{
+"text": "UNDER",
+"t": 701
+},
+{
+"text": "SIX",
+"t": 712
+}
+]
+},
+{
+"from": 719,
+"to": 749,
+"words": [
+{
+"text": "SENTENCES.",
+"t": 719
+}
+]
+},
+{
+"from": 749,
+"to": 805,
+"words": [
+{
+"text": "EMAIL",
+"t": 749
+},
+{
+"text": "20",
+"t": 760
+},
+{
+"text": "PROFESSORS,",
+"t": 772
+},
+{
+"text": "NOT",
+"t": 798
+}
+]
+},
+{
+"from": 805,
+"to": 818,
+"words": [
+{
+"text": "TWO.",
+"t": 805
+}
+]
+},
+{
+"from": 818,
+"to": 863,
+"words": [
+{
+"text": "COMMENT",
+"t": 818
+},
+{
+"text": "RESEARCH",
+"t": 832
+},
+{
+"text": "BELOW",
+"t": 848
+},
+{
+"text": "AND",
+"t": 856
+}
+]
+},
+{
+"from": 863,
+"to": 894,
+"words": [
+{
+"text": "I'LL",
+"t": 863
+},
+{
+"text": "SEND",
+"t": 868
+},
+{
+"text": "YOU",
+"t": 876
+},
+{
+"text": "THE",
+"t": 883
+}
+]
+},
+{
+"from": 894,
+"to": 946,
+"words": [
+{
+"text": "EXACT",
+"t": 894
+},
+{
+"text": "TEMPLATE",
+"t": 901
+},
+{
+"text": "RIGHT",
+"t": 917
+},
+{
+"text": "NOW.",
+"t": 928
+}
+]
+}
+]

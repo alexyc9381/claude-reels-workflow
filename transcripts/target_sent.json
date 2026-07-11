@@ -1,0 +1,626 @@
+{
+	"systeminfo": "WHISPER : COREML = 0 | OPENVINO = 0 | MTL : EMBED_LIBRARY = 1 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | MATMUL_INT8 = 1 | DOTPROD = 1 | SME = 1 | ACCELERATE = 1 | REPACK = 1 | ",
+	"model": {
+		"type": "small",
+		"multilingual": false,
+		"vocab": 51864,
+		"audio": {
+			"ctx": 1500,
+			"state": 768,
+			"head": 12,
+			"layer": 12
+		},
+		"text": {
+			"ctx": 448,
+			"state": 768,
+			"head": 12,
+			"layer": 12
+		},
+		"mels": 80,
+		"ftype": 1
+	},
+	"params": {
+		"model": "tools/whisper.cpp/models/ggml-small.en.bin",
+		"language": "en",
+		"translate": false
+	},
+	"result": {
+		"language": "en"
+	},
+	"transcription": [
+		{
+			"timestamps": {
+				"from": "00:00:00,000",
+				"to": "00:00:06,000"
+			},
+			"offsets": {
+				"from": 0,
+				"to": 6000
+			},
+			"text": " Every single year over 35,000 students score above 1500 on the SAT."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:06,000",
+				"to": "00:00:12,360"
+			},
+			"offsets": {
+				"from": 6000,
+				"to": 12360
+			},
+			"text": " Harvard alone gets over 50,000 applications, Stanford, MIT, Columbia, the same thing and"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:12,360",
+				"to": "00:00:17,360"
+			},
+			"offsets": {
+				"from": 12360,
+				"to": 17360
+			},
+			"text": " many of these applicants have 1500+ SATs with stellar grades to match."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:17,360",
+				"to": "00:00:21,880"
+			},
+			"offsets": {
+				"from": 17360,
+				"to": 21880
+			},
+			"text": " Obviously a child needs to have good grades and good SAT score but most students applying"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:21,880",
+				"to": "00:00:24,560"
+			},
+			"offsets": {
+				"from": 21880,
+				"to": 24560
+			},
+			"text": " to elite universities already have that."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:24,560",
+				"to": "00:00:28,560"
+			},
+			"offsets": {
+				"from": 24560,
+				"to": 28560
+			},
+			"text": " Good grades and good score alone are not going to make your child stand out."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:28,560",
+				"to": "00:00:32,800"
+			},
+			"offsets": {
+				"from": 28560,
+				"to": 32800
+			},
+			"text": " So no matter how good your child essay is, even if it's the best essay and admission"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:32,800",
+				"to": "00:00:37,360"
+			},
+			"offsets": {
+				"from": 32800,
+				"to": 37360
+			},
+			"text": " officer read that entire year, if you don't have the experience to back it up, they will"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:37,360",
+				"to": "00:00:38,360"
+			},
+			"offsets": {
+				"from": 37360,
+				"to": 38360
+			},
+			"text": " not get it."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:38,360",
+				"to": "00:00:42,480"
+			},
+			"offsets": {
+				"from": 38360,
+				"to": 42480
+			},
+			"text": " Think about it like a job, you could write the best cover letter or use the best resume"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:42,480",
+				"to": "00:00:43,480"
+			},
+			"offsets": {
+				"from": 42480,
+				"to": 43480
+			},
+			"text": " template."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:43,480",
+				"to": "00:00:46,620"
+			},
+			"offsets": {
+				"from": 43480,
+				"to": 46620
+			},
+			"text": " But if you don't have the credentials, you are not getting hired."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:46,620",
+				"to": "00:00:48,840"
+			},
+			"offsets": {
+				"from": 46620,
+				"to": 48840
+			},
+			"text": " College admissions work the exact same way."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:48,840",
+				"to": "00:00:51,560"
+			},
+			"offsets": {
+				"from": 48840,
+				"to": 51560
+			},
+			"text": " Your child needs a standout extracurricular."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:51,560",
+				"to": "00:00:55,840"
+			},
+			"offsets": {
+				"from": 51560,
+				"to": 55840
+			},
+			"text": " Without it, they look exactly everyone else and the longer they go without it, the harder"
+		},
+		{
+			"timestamps": {
+				"from": "00:00:55,840",
+				"to": "00:00:58,520"
+			},
+			"offsets": {
+				"from": 55840,
+				"to": 58520
+			},
+			"text": " it is to stand out before applications are due."
+		},
+		{
+			"timestamps": {
+				"from": "00:00:58,520",
+				"to": "00:01:03,640"
+			},
+			"offsets": {
+				"from": 58520,
+				"to": 63640
+			},
+			"text": " Madsen places high school students at venture-backed companies where they work on real projects"
+		},
+		{
+			"timestamps": {
+				"from": "00:01:03,640",
+				"to": "00:01:05,320"
+			},
+			"offsets": {
+				"from": 63640,
+				"to": 65320
+			},
+			"text": " alongside real team."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:05,320",
+				"to": "00:01:09,000"
+			},
+			"offsets": {
+				"from": 65320,
+				"to": 69000
+			},
+			"text": " No shadowing, no busy work, actual enriching work."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:09,000",
+				"to": "00:01:13,320"
+			},
+			"offsets": {
+				"from": 69000,
+				"to": 73320
+			},
+			"text": " We train your child first, covering how to think like an executive professional, project"
+		},
+		{
+			"timestamps": {
+				"from": "00:01:13,320",
+				"to": "00:01:18,040"
+			},
+			"offsets": {
+				"from": 73320,
+				"to": 78040
+			},
+			"text": " management, career-specific training for their field of interest and how to deliver results"
+		},
+		{
+			"timestamps": {
+				"from": "00:01:18,040",
+				"to": "00:01:20,200"
+			},
+			"offsets": {
+				"from": 78040,
+				"to": 80200
+			},
+			"text": " in a real business environment."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:20,200",
+				"to": "00:01:25,320"
+			},
+			"offsets": {
+				"from": 80200,
+				"to": 85320
+			},
+			"text": " Then we place them at the company that fit their interests and a goal for a 3-month internship."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:25,320",
+				"to": "00:01:27,880"
+			},
+			"offsets": {
+				"from": 85320,
+				"to": 87880
+			},
+			"text": " They walk away with real professional experience."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:27,880",
+				"to": "00:01:29,880"
+			},
+			"offsets": {
+				"from": 87880,
+				"to": 89880
+			},
+			"text": " They have a reference from their supervisor."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:29,880",
+				"to": "00:01:32,400"
+			},
+			"offsets": {
+				"from": 89880,
+				"to": 92400
+			},
+			"text": " They have a portfolio piece they can point to."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:32,400",
+				"to": "00:01:36,060"
+			},
+			"offsets": {
+				"from": 92400,
+				"to": 96060
+			},
+			"text": " And they have a story that no other applicant in their school has."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:36,060",
+				"to": "00:01:41,240"
+			},
+			"offsets": {
+				"from": 96060,
+				"to": 101240
+			},
+			"text": " This is what makes your child stand out applicant, not just any other name in the pile of 50,000,"
+		},
+		{
+			"timestamps": {
+				"from": "00:01:41,240",
+				"to": "00:01:45,760"
+			},
+			"offsets": {
+				"from": 101240,
+				"to": 105760
+			},
+			"text": " but someone with a massive advantage over every other student applying to the same school."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:45,760",
+				"to": "00:01:50,240"
+			},
+			"offsets": {
+				"from": 105760,
+				"to": 110240
+			},
+			"text": " When an admission officer sees that higher scholar worked at a real company on a real"
+		},
+		{
+			"timestamps": {
+				"from": "00:01:50,240",
+				"to": "00:01:55,280"
+			},
+			"offsets": {
+				"from": 110240,
+				"to": 115280
+			},
+			"text": " team and delivered real results, the ad changes how they read everything else on the application."
+		},
+		{
+			"timestamps": {
+				"from": "00:01:55,280",
+				"to": "00:01:59,960"
+			},
+			"offsets": {
+				"from": 115280,
+				"to": 119960
+			},
+			"text": " It gives your child something concrete to write about it in their essays, something"
+		},
+		{
+			"timestamps": {
+				"from": "00:01:59,960",
+				"to": "00:02:04,320"
+			},
+			"offsets": {
+				"from": 119960,
+				"to": 124320
+			},
+			"text": " specific to talk about it in an interview and something that makes an admission officer"
+		},
+		{
+			"timestamps": {
+				"from": "00:02:04,320",
+				"to": "00:02:06,240"
+			},
+			"offsets": {
+				"from": 124320,
+				"to": 126240
+			},
+			"text": " stop and pay attention."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:06,240",
+				"to": "00:02:10,920"
+			},
+			"offsets": {
+				"from": 126240,
+				"to": 130920
+			},
+			"text": " The earlier your child does this, the bigger the advantage and it carries them beyond college."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:10,920",
+				"to": "00:02:14,520"
+			},
+			"offsets": {
+				"from": 130920,
+				"to": 134520
+			},
+			"text": " They will have better negotiation power in future career opportunities."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:14,520",
+				"to": "00:02:16,800"
+			},
+			"offsets": {
+				"from": 134520,
+				"to": 136800
+			},
+			"text": " They will stand out in every job application."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:16,800",
+				"to": "00:02:21,400"
+			},
+			"offsets": {
+				"from": 136800,
+				"to": 141400
+			},
+			"text": " They will earn more because they already have real professional experience while everyone"
+		},
+		{
+			"timestamps": {
+				"from": "00:02:21,400",
+				"to": "00:02:22,800"
+			},
+			"offsets": {
+				"from": 141400,
+				"to": 142800
+			},
+			"text": " else is starting from scratch."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:22,800",
+				"to": "00:02:27,360"
+			},
+			"offsets": {
+				"from": 142800,
+				"to": 147360
+			},
+			"text": " We don't accept everyone, my son is selective because the companies we work with trust us"
+		},
+		{
+			"timestamps": {
+				"from": "00:02:27,360",
+				"to": "00:02:32,240"
+			},
+			"offsets": {
+				"from": 147360,
+				"to": 152240
+			},
+			"text": " to send them students who are CS motivated and ready to do real work."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:32,240",
+				"to": "00:02:35,960"
+			},
+			"offsets": {
+				"from": 152240,
+				"to": 155960
+			},
+			"text": " This isn't for students who are looking for a certificate to pad their resume in."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:35,960",
+				"to": "00:02:39,440"
+			},
+			"offsets": {
+				"from": 155960,
+				"to": 159440
+			},
+			"text": " This is for students who actually want to do something meaningful and are willing to"
+		},
+		{
+			"timestamps": {
+				"from": "00:02:39,440",
+				"to": "00:02:40,440"
+			},
+			"offsets": {
+				"from": 159440,
+				"to": 160440
+			},
+			"text": " put in the effort."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:40,440",
+				"to": "00:02:44,680"
+			},
+			"offsets": {
+				"from": 160440,
+				"to": 164680
+			},
+			"text": " If your child already has strong grades and has demonstrated potential in their intended"
+		},
+		{
+			"timestamps": {
+				"from": "00:02:44,680",
+				"to": "00:02:48,400"
+			},
+			"offsets": {
+				"from": 164680,
+				"to": 168400
+			},
+			"text": " major through their extracurriculars, we invite them to apply."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:48,400",
+				"to": "00:02:50,920"
+			},
+			"offsets": {
+				"from": 168400,
+				"to": 170920
+			},
+			"text": " Click below and fill out short application."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:50,920",
+				"to": "00:02:54,360"
+			},
+			"offsets": {
+				"from": 170920,
+				"to": 174360
+			},
+			"text": " If your child looks like a good fit, we will invite them for an interview."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:54,360",
+				"to": "00:02:58,680"
+			},
+			"offsets": {
+				"from": 174360,
+				"to": 178680
+			},
+			"text": " We also offer a satisfaction guarantee that lasts throughout the entire program."
+		},
+		{
+			"timestamps": {
+				"from": "00:02:58,680",
+				"to": "00:03:02,320"
+			},
+			"offsets": {
+				"from": 178680,
+				"to": 182320
+			},
+			"text": " If at any point you are not satisfied, you will get your money back."
+		},
+		{
+			"timestamps": {
+				"from": "00:03:02,320",
+				"to": "00:03:06,560"
+			},
+			"offsets": {
+				"from": 182320,
+				"to": 186560
+			},
+			"text": " We take on the risk because we are confident in the student we accept and we believe in"
+		},
+		{
+			"timestamps": {
+				"from": "00:03:06,560",
+				"to": "00:03:07,800"
+			},
+			"offsets": {
+				"from": 186560,
+				"to": 187800
+			},
+			"text": " their potential."
+		},
+		{
+			"timestamps": {
+				"from": "00:03:07,800",
+				"to": "00:03:10,240"
+			},
+			"offsets": {
+				"from": 187800,
+				"to": 190240
+			},
+			"text": " We can only work with limited number of students."
+		},
+		{
+			"timestamps": {
+				"from": "00:03:10,240",
+				"to": "00:03:13,080"
+			},
+			"offsets": {
+				"from": 190240,
+				"to": 193080
+			},
+			"text": " Click below and let's make your child stand out applicant."
+		}
+	]
+}

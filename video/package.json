@@ -1,0 +1,21 @@
+{
+  "name": "matchtern-longform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "render": "remotion render src/index.ts MatchternLongform out/Matchtern_Alex_Edit.mp4 --codec h264",
+    "still": "remotion still src/index.ts MatchternLongform",
+    "studio": "remotion studio src/index.ts"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@remotion/cli": "4.0.370",
+    "@remotion/google-fonts": "4.0.370",
+    "@remotion/three": "^4.0.370",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.370",
+    "three": "^0.169.0"
+  }
+}

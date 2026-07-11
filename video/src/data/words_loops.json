@@ -1,0 +1,512 @@
+[
+  {
+    "word": "You're",
+    "start": 0,
+    "end": 0.232,
+    "line": 0
+  },
+  {
+    "word": "not",
+    "start": 0.255,
+    "end": 0.36,
+    "line": 0
+  },
+  {
+    "word": "supposed",
+    "start": 0.406,
+    "end": 0.836,
+    "line": 0
+  },
+  {
+    "word": "to",
+    "start": 0.882,
+    "end": 0.952,
+    "line": 0
+  },
+  {
+    "word": "prompt",
+    "start": 1.045,
+    "end": 1.358,
+    "line": 0
+  },
+  {
+    "word": "Claude.",
+    "start": 1.416,
+    "end": 1.927,
+    "line": 0
+  },
+  {
+    "word": "You're",
+    "start": 2.252,
+    "end": 2.473,
+    "line": 1
+  },
+  {
+    "word": "supposed",
+    "start": 2.508,
+    "end": 2.902,
+    "line": 1
+  },
+  {
+    "word": "to",
+    "start": 2.937,
+    "end": 2.995,
+    "line": 1
+  },
+  {
+    "word": "build",
+    "start": 3.053,
+    "end": 3.239,
+    "line": 1
+  },
+  {
+    "word": "a",
+    "start": 3.286,
+    "end": 3.309,
+    "line": 1
+  },
+  {
+    "word": "system",
+    "start": 3.379,
+    "end": 3.762,
+    "line": 1
+  },
+  {
+    "word": "that",
+    "start": 3.82,
+    "end": 3.947,
+    "line": 1
+  },
+  {
+    "word": "prompts",
+    "start": 4.017,
+    "end": 4.354,
+    "line": 1
+  },
+  {
+    "word": "itself.",
+    "start": 4.4,
+    "end": 4.957,
+    "line": 1
+  },
+  {
+    "word": "It's",
+    "start": 5.341,
+    "end": 5.55,
+    "line": 2
+  },
+  {
+    "word": "called",
+    "start": 5.608,
+    "end": 5.898,
+    "line": 2
+  },
+  {
+    "word": "a",
+    "start": 5.956,
+    "end": 5.991,
+    "line": 2
+  },
+  {
+    "word": "loop",
+    "start": 6.06,
+    "end": 6.281,
+    "line": 2
+  },
+  {
+    "word": "—",
+    "start": 6.432,
+    "end": 6.478,
+    "line": 2
+  },
+  {
+    "word": "and",
+    "start": 6.629,
+    "end": 6.769,
+    "line": 2
+  },
+  {
+    "word": "most",
+    "start": 6.838,
+    "end": 7.07,
+    "line": 2
+  },
+  {
+    "word": "people",
+    "start": 7.14,
+    "end": 7.465,
+    "line": 2
+  },
+  {
+    "word": "build",
+    "start": 7.512,
+    "end": 7.709,
+    "line": 2
+  },
+  {
+    "word": "it",
+    "start": 7.755,
+    "end": 7.814,
+    "line": 2
+  },
+  {
+    "word": "wrong.",
+    "start": 7.848,
+    "end": 8.255,
+    "line": 2
+  },
+  {
+    "word": "First,",
+    "start": 8.951,
+    "end": 9.439,
+    "line": 3
+  },
+  {
+    "word": "a",
+    "start": 9.52,
+    "end": 9.59,
+    "line": 3
+  },
+  {
+    "word": "memory",
+    "start": 9.671,
+    "end": 9.95,
+    "line": 3
+  },
+  {
+    "word": "file,",
+    "start": 10.019,
+    "end": 10.519,
+    "line": 3
+  },
+  {
+    "word": "so",
+    "start": 10.762,
+    "end": 10.89,
+    "line": 3
+  },
+  {
+    "word": "it",
+    "start": 10.96,
+    "end": 11.018,
+    "line": 3
+  },
+  {
+    "word": "never",
+    "start": 11.064,
+    "end": 11.273,
+    "line": 3
+  },
+  {
+    "word": "starts",
+    "start": 11.32,
+    "end": 11.633,
+    "line": 3
+  },
+  {
+    "word": "from",
+    "start": 11.68,
+    "end": 11.842,
+    "line": 3
+  },
+  {
+    "word": "zero.",
+    "start": 11.912,
+    "end": 12.481,
+    "line": 3
+  },
+  {
+    "word": "Then",
+    "start": 12.806,
+    "end": 13.003,
+    "line": 4
+  },
+  {
+    "word": "subagents",
+    "start": 13.119,
+    "end": 13.746,
+    "line": 4
+  },
+  {
+    "word": "that",
+    "start": 13.781,
+    "end": 13.932,
+    "line": 4
+  },
+  {
+    "word": "split",
+    "start": 14.002,
+    "end": 14.315,
+    "line": 4
+  },
+  {
+    "word": "the",
+    "start": 14.35,
+    "end": 14.419,
+    "line": 4
+  },
+  {
+    "word": "work",
+    "start": 14.466,
+    "end": 14.651,
+    "line": 4
+  },
+  {
+    "word": "in",
+    "start": 14.709,
+    "end": 14.768,
+    "line": 4
+  },
+  {
+    "word": "parallel.",
+    "start": 14.826,
+    "end": 15.476,
+    "line": 4
+  },
+  {
+    "word": "And",
+    "start": 15.754,
+    "end": 15.894,
+    "line": 5
+  },
+  {
+    "word": "a",
+    "start": 15.952,
+    "end": 15.975,
+    "line": 5
+  },
+  {
+    "word": "stop",
+    "start": 16.021,
+    "end": 16.312,
+    "line": 5
+  },
+  {
+    "word": "condition,",
+    "start": 16.381,
+    "end": 17.055,
+    "line": 5
+  },
+  {
+    "word": "so",
+    "start": 17.298,
+    "end": 17.6,
+    "line": 5
+  },
+  {
+    "word": "it",
+    "start": 17.775,
+    "end": 17.925,
+    "line": 5
+  },
+  {
+    "word": "doesn't",
+    "start": 18.007,
+    "end": 18.32,
+    "line": 5
+  },
+  {
+    "word": "run",
+    "start": 18.343,
+    "end": 18.459,
+    "line": 5
+  },
+  {
+    "word": "all",
+    "start": 18.506,
+    "end": 18.61,
+    "line": 5
+  },
+  {
+    "word": "night",
+    "start": 18.668,
+    "end": 18.808,
+    "line": 5
+  },
+  {
+    "word": "billing",
+    "start": 18.843,
+    "end": 19.075,
+    "line": 5
+  },
+  {
+    "word": "you.",
+    "start": 19.121,
+    "end": 19.353,
+    "line": 5
+  },
+  {
+    "word": "Typing",
+    "start": 19.795,
+    "end": 20.213,
+    "line": 6
+  },
+  {
+    "word": "one",
+    "start": 20.294,
+    "end": 20.456,
+    "line": 6
+  },
+  {
+    "word": "prompt",
+    "start": 20.503,
+    "end": 20.781,
+    "line": 6
+  },
+  {
+    "word": "at",
+    "start": 20.816,
+    "end": 20.886,
+    "line": 6
+  },
+  {
+    "word": "a",
+    "start": 20.921,
+    "end": 20.944,
+    "line": 6
+  },
+  {
+    "word": "time",
+    "start": 21.002,
+    "end": 21.432,
+    "line": 6
+  },
+  {
+    "word": "is",
+    "start": 21.583,
+    "end": 21.757,
+    "line": 6
+  },
+  {
+    "word": "the",
+    "start": 21.815,
+    "end": 21.896,
+    "line": 6
+  },
+  {
+    "word": "slowest",
+    "start": 21.989,
+    "end": 22.453,
+    "line": 6
+  },
+  {
+    "word": "way",
+    "start": 22.511,
+    "end": 22.639,
+    "line": 6
+  },
+  {
+    "word": "to",
+    "start": 22.686,
+    "end": 22.732,
+    "line": 6
+  },
+  {
+    "word": "use",
+    "start": 22.802,
+    "end": 22.953,
+    "line": 6
+  },
+  {
+    "word": "Claude.",
+    "start": 22.999,
+    "end": 23.44,
+    "line": 6
+  },
+  {
+    "word": "Build",
+    "start": 23.765,
+    "end": 24.044,
+    "line": 7
+  },
+  {
+    "word": "the",
+    "start": 24.079,
+    "end": 24.148,
+    "line": 7
+  },
+  {
+    "word": "system",
+    "start": 24.195,
+    "end": 24.532,
+    "line": 7
+  },
+  {
+    "word": "once.",
+    "start": 24.624,
+    "end": 25.089,
+    "line": 7
+  },
+  {
+    "word": "Let",
+    "start": 25.414,
+    "end": 25.588,
+    "line": 7
+  },
+  {
+    "word": "it",
+    "start": 25.634,
+    "end": 25.692,
+    "line": 7
+  },
+  {
+    "word": "run",
+    "start": 25.739,
+    "end": 25.867,
+    "line": 7
+  },
+  {
+    "word": "itself.",
+    "start": 25.913,
+    "end": 26.494,
+    "line": 7
+  },
+  {
+    "word": "Comment",
+    "start": 26.819,
+    "end": 27.225,
+    "line": 8
+  },
+  {
+    "word": "LOOP",
+    "start": 27.283,
+    "end": 27.492,
+    "line": 8
+  },
+  {
+    "word": "and",
+    "start": 27.562,
+    "end": 27.655,
+    "line": 8
+  },
+  {
+    "word": "I'll",
+    "start": 27.701,
+    "end": 27.829,
+    "line": 8
+  },
+  {
+    "word": "send",
+    "start": 27.864,
+    "end": 28.014,
+    "line": 8
+  },
+  {
+    "word": "you",
+    "start": 28.061,
+    "end": 28.142,
+    "line": 8
+  },
+  {
+    "word": "my",
+    "start": 28.189,
+    "end": 28.27,
+    "line": 8
+  },
+  {
+    "word": "setup.",
+    "start": 28.328,
+    "end": 28.932,
+    "line": 8
+  }
+]

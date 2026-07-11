@@ -1,0 +1,1062 @@
+[
+{
+"start": 0.0,
+"end": 0.2,
+"word": "You've"
+},
+{
+"start": 0.2,
+"end": 0.291,
+"word": "got"
+},
+{
+"start": 0.291,
+"end": 0.509,
+"word": "three"
+},
+{
+"start": 0.509,
+"end": 0.655,
+"word": "days"
+},
+{
+"start": 0.655,
+"end": 0.8,
+"word": "left"
+},
+{
+"start": 0.8,
+"end": 0.964,
+"word": "of"
+},
+{
+"start": 0.964,
+"end": 1.218,
+"word": "free"
+},
+{
+"start": 1.218,
+"end": 1.436,
+"word": "Fable"
+},
+{
+"start": 1.436,
+"end": 1.727,
+"word": "5,"
+},
+{
+"start": 1.891,
+"end": 1.927,
+"word": "and"
+},
+{
+"start": 1.927,
+"end": 2.0,
+"word": "the"
+},
+{
+"start": 2.0,
+"end": 2.218,
+"word": "smartest"
+},
+{
+"start": 2.218,
+"end": 2.491,
+"word": "move"
+},
+{
+"start": 2.491,
+"end": 2.873,
+"word": "isn't"
+},
+{
+"start": 2.873,
+"end": 3.073,
+"word": "making"
+},
+{
+"start": 3.073,
+"end": 3.273,
+"word": "something"
+},
+{
+"start": 3.273,
+"end": 3.527,
+"word": "new"
+},
+{
+"start": 3.527,
+"end": 3.673,
+"word": "with"
+},
+{
+"start": 3.673,
+"end": 3.745,
+"word": "it."
+},
+{
+"start": 4.073,
+"end": 4.436,
+"word": "Everyone's"
+},
+{
+"start": 4.436,
+"end": 4.6,
+"word": "spending"
+},
+{
+"start": 4.6,
+"end": 4.8,
+"word": "their"
+},
+{
+"start": 4.8,
+"end": 4.964,
+"word": "three"
+},
+{
+"start": 4.964,
+"end": 5.218,
+"word": "days"
+},
+{
+"start": 5.218,
+"end": 5.455,
+"word": "building."
+},
+{
+"start": 5.909,
+"end": 6.0,
+"word": "The"
+},
+{
+"start": 6.0,
+"end": 6.127,
+"word": "one"
+},
+{
+"start": 6.127,
+"end": 6.273,
+"word": "thing"
+},
+{
+"start": 6.273,
+"end": 6.418,
+"word": "you'll"
+},
+{
+"start": 6.418,
+"end": 6.636,
+"word": "kick"
+},
+{
+"start": 6.636,
+"end": 6.909,
+"word": "yourself"
+},
+{
+"start": 6.909,
+"end": 7.055,
+"word": "for"
+},
+{
+"start": 7.055,
+"end": 7.236,
+"word": "skipping"
+},
+{
+"start": 7.236,
+"end": 7.473,
+"word": "is"
+},
+{
+"start": 7.473,
+"end": 7.691,
+"word": "pointing"
+},
+{
+"start": 7.691,
+"end": 8.018,
+"word": "at"
+},
+{
+"start": 8.018,
+"end": 8.236,
+"word": "what"
+},
+{
+"start": 8.236,
+"end": 8.491,
+"word": "you've"
+},
+{
+"start": 8.491,
+"end": 8.618,
+"word": "already"
+},
+{
+"start": 8.618,
+"end": 8.891,
+"word": "done,"
+},
+{
+"start": 9.091,
+"end": 9.273,
+"word": "while"
+},
+{
+"start": 9.273,
+"end": 9.382,
+"word": "the"
+},
+{
+"start": 9.382,
+"end": 9.564,
+"word": "best"
+},
+{
+"start": 9.564,
+"end": 9.818,
+"word": "model"
+},
+{
+"start": 9.818,
+"end": 9.945,
+"word": "on"
+},
+{
+"start": 9.945,
+"end": 10.091,
+"word": "Earth"
+},
+{
+"start": 10.091,
+"end": 10.2,
+"word": "is"
+},
+{
+"start": 10.2,
+"end": 10.491,
+"word": "still"
+},
+{
+"start": 10.491,
+"end": 10.745,
+"word": "free."
+},
+{
+"start": 11.145,
+"end": 11.309,
+"word": "Here's"
+},
+{
+"start": 11.309,
+"end": 11.364,
+"word": "the"
+},
+{
+"start": 11.364,
+"end": 11.491,
+"word": "move."
+},
+{
+"start": 12.127,
+"end": 12.157,
+"word": "You"
+},
+{
+"start": 12.127,
+"end": 12.255,
+"word": "hand"
+},
+{
+"start": 12.255,
+"end": 12.418,
+"word": "Fable"
+},
+{
+"start": 12.418,
+"end": 12.618,
+"word": "5"
+},
+{
+"start": 12.618,
+"end": 12.909,
+"word": "every"
+},
+{
+"start": 12.909,
+"end": 13.127,
+"word": "good"
+},
+{
+"start": 13.127,
+"end": 13.327,
+"word": "call"
+},
+{
+"start": 13.327,
+"end": 13.491,
+"word": "you've"
+},
+{
+"start": 13.491,
+"end": 13.655,
+"word": "ever"
+},
+{
+"start": 13.655,
+"end": 13.873,
+"word": "made,"
+},
+{
+"start": 14.036,
+"end": 14.164,
+"word": "the"
+},
+{
+"start": 14.164,
+"end": 14.345,
+"word": "choices"
+},
+{
+"start": 14.345,
+"end": 14.509,
+"word": "that"
+},
+{
+"start": 14.509,
+"end": 14.636,
+"word": "worked"
+},
+{
+"start": 14.636,
+"end": 14.818,
+"word": "out"
+},
+{
+"start": 14.818,
+"end": 14.964,
+"word": "and"
+},
+{
+"start": 14.964,
+"end": 15.055,
+"word": "the"
+},
+{
+"start": 15.055,
+"end": 15.218,
+"word": "times"
+},
+{
+"start": 15.218,
+"end": 15.345,
+"word": "you"
+},
+{
+"start": 15.345,
+"end": 15.564,
+"word": "trusted"
+},
+{
+"start": 15.564,
+"end": 15.764,
+"word": "your"
+},
+{
+"start": 15.764,
+"end": 15.909,
+"word": "gut"
+},
+{
+"start": 15.909,
+"end": 15.939,
+"word": "and"
+},
+{
+"start": 15.909,
+"end": 16.164,
+"word": "nailed"
+},
+{
+"start": 16.164,
+"end": 16.382,
+"word": "it,"
+},
+{
+"start": 16.564,
+"end": 16.764,
+"word": "and"
+},
+{
+"start": 16.764,
+"end": 16.818,
+"word": "it"
+},
+{
+"start": 16.818,
+"end": 17.182,
+"word": "back-solves"
+},
+{
+"start": 17.182,
+"end": 17.382,
+"word": "the"
+},
+{
+"start": 17.382,
+"end": 17.6,
+"word": "private"
+},
+{
+"start": 17.6,
+"end": 17.855,
+"word": "rules"
+},
+{
+"start": 17.855,
+"end": 18.036,
+"word": "you"
+},
+{
+"start": 18.036,
+"end": 18.109,
+"word": "were"
+},
+{
+"start": 18.109,
+"end": 18.4,
+"word": "following"
+},
+{
+"start": 18.4,
+"end": 18.636,
+"word": "behind"
+},
+{
+"start": 18.636,
+"end": 18.8,
+"word": "every"
+},
+{
+"start": 18.8,
+"end": 18.964,
+"word": "one,"
+},
+{
+"start": 19.345,
+"end": 19.473,
+"word": "the"
+},
+{
+"start": 19.473,
+"end": 19.6,
+"word": "hidden"
+},
+{
+"start": 19.6,
+"end": 19.836,
+"word": "logic"
+},
+{
+"start": 19.836,
+"end": 20.091,
+"word": "you"
+},
+{
+"start": 20.091,
+"end": 20.309,
+"word": "decide"
+},
+{
+"start": 20.309,
+"end": 20.545,
+"word": "by"
+},
+{
+"start": 20.545,
+"end": 20.691,
+"word": "but"
+},
+{
+"start": 20.691,
+"end": 20.818,
+"word": "could"
+},
+{
+"start": 20.818,
+"end": 21.018,
+"word": "never"
+},
+{
+"start": 21.018,
+"end": 21.255,
+"word": "put"
+},
+{
+"start": 21.255,
+"end": 21.364,
+"word": "into"
+},
+{
+"start": 21.364,
+"end": 21.509,
+"word": "words"
+},
+{
+"start": 21.509,
+"end": 21.673,
+"word": "yourself."
+},
+{
+"start": 22.018,
+"end": 22.109,
+"word": "But"
+},
+{
+"start": 22.109,
+"end": 22.327,
+"word": "here's"
+},
+{
+"start": 22.327,
+"end": 22.4,
+"word": "the"
+},
+{
+"start": 22.4,
+"end": 22.545,
+"word": "part"
+},
+{
+"start": 22.545,
+"end": 22.836,
+"word": "everyone"
+},
+{
+"start": 22.836,
+"end": 23.091,
+"word": "misses."
+},
+{
+"start": 23.6,
+"end": 23.655,
+"word": "A"
+},
+{
+"start": 23.655,
+"end": 23.782,
+"word": "cheap"
+},
+{
+"start": 23.782,
+"end": 24.018,
+"word": "model"
+},
+{
+"start": 24.018,
+"end": 24.364,
+"word": "can't"
+},
+{
+"start": 24.364,
+"end": 24.636,
+"word": "back-solve"
+},
+{
+"start": 24.636,
+"end": 24.909,
+"word": "judgment"
+},
+{
+"start": 24.909,
+"end": 25.291,
+"word": "this"
+},
+{
+"start": 25.291,
+"end": 25.509,
+"word": "good,"
+},
+{
+"start": 25.818,
+"end": 25.982,
+"word": "only"
+},
+{
+"start": 25.982,
+"end": 26.109,
+"word": "the"
+},
+{
+"start": 26.109,
+"end": 26.327,
+"word": "flagship"
+},
+{
+"start": 26.327,
+"end": 26.636,
+"word": "can."
+},
+{
+"start": 26.636,
+"end": 26.982,
+"word": "And"
+},
+{
+"start": 26.982,
+"end": 27.073,
+"word": "only"
+},
+{
+"start": 27.073,
+"end": 27.218,
+"word": "for"
+},
+{
+"start": 27.218,
+"end": 27.455,
+"word": "three"
+},
+{
+"start": 27.455,
+"end": 27.6,
+"word": "more"
+},
+{
+"start": 27.6,
+"end": 27.836,
+"word": "days"
+},
+{
+"start": 27.836,
+"end": 28.182,
+"word": "for"
+},
+{
+"start": 28.182,
+"end": 28.364,
+"word": "free,"
+},
+{
+"start": 28.764,
+"end": 28.8,
+"word": "so"
+},
+{
+"start": 28.8,
+"end": 28.909,
+"word": "you"
+},
+{
+"start": 28.909,
+"end": 29.0,
+"word": "do"
+},
+{
+"start": 29.0,
+"end": 29.073,
+"word": "it"
+},
+{
+"start": 29.073,
+"end": 29.255,
+"word": "once"
+},
+{
+"start": 29.255,
+"end": 29.418,
+"word": "and"
+},
+{
+"start": 29.418,
+"end": 29.491,
+"word": "it"
+},
+{
+"start": 29.491,
+"end": 29.709,
+"word": "turns"
+},
+{
+"start": 29.709,
+"end": 29.836,
+"word": "those"
+},
+{
+"start": 29.836,
+"end": 30.091,
+"word": "rules"
+},
+{
+"start": 30.091,
+"end": 30.345,
+"word": "into"
+},
+{
+"start": 30.345,
+"end": 30.4,
+"word": "a"
+},
+{
+"start": 30.4,
+"end": 30.655,
+"word": "single"
+},
+{
+"start": 30.655,
+"end": 30.982,
+"word": "file"
+},
+{
+"start": 30.982,
+"end": 31.182,
+"word": "I"
+},
+{
+"start": 31.182,
+"end": 31.436,
+"word": "call"
+},
+{
+"start": 31.436,
+"end": 31.709,
+"word": "the"
+},
+{
+"start": 31.709,
+"end": 31.927,
+"word": "Judgment"
+},
+{
+"start": 31.927,
+"end": 32.182,
+"word": "Vault."
+},
+{
+"start": 32.836,
+"end": 32.891,
+"word": "And"
+},
+{
+"start": 32.891,
+"end": 32.982,
+"word": "the"
+},
+{
+"start": 32.982,
+"end": 33.2,
+"word": "timing"
+},
+{
+"start": 33.2,
+"end": 33.4,
+"word": "is"
+},
+{
+"start": 33.4,
+"end": 33.473,
+"word": "the"
+},
+{
+"start": 33.473,
+"end": 33.655,
+"word": "whole"
+},
+{
+"start": 33.655,
+"end": 33.945,
+"word": "trick."
+},
+{
+"start": 34.364,
+"end": 34.394,
+"word": "The"
+},
+{
+"start": 34.382,
+"end": 34.618,
+"word": "second"
+},
+{
+"start": 34.618,
+"end": 34.836,
+"word": "Fable"
+},
+{
+"start": 34.836,
+"end": 35.036,
+"word": "goes"
+},
+{
+"start": 35.036,
+"end": 35.273,
+"word": "paid,"
+},
+{
+"start": 35.473,
+"end": 35.545,
+"word": "the"
+},
+{
+"start": 35.545,
+"end": 35.655,
+"word": "vault"
+},
+{
+"start": 35.655,
+"end": 35.836,
+"word": "is"
+},
+{
+"start": 35.836,
+"end": 36.0,
+"word": "already"
+},
+{
+"start": 36.0,
+"end": 36.218,
+"word": "done."
+},
+{
+"start": 36.655,
+"end": 36.764,
+"word": "Every"
+},
+{
+"start": 36.764,
+"end": 36.909,
+"word": "cheap"
+},
+{
+"start": 36.909,
+"end": 37.127,
+"word": "model"
+},
+{
+"start": 37.127,
+"end": 37.345,
+"word": "you"
+},
+{
+"start": 37.345,
+"end": 37.491,
+"word": "run"
+},
+{
+"start": 37.491,
+"end": 37.636,
+"word": "for"
+},
+{
+"start": 37.636,
+"end": 37.709,
+"word": "the"
+},
+{
+"start": 37.709,
+"end": 37.873,
+"word": "next"
+},
+{
+"start": 37.873,
+"end": 38.109,
+"word": "year"
+},
+{
+"start": 38.109,
+"end": 38.418,
+"word": "reads"
+},
+{
+"start": 38.418,
+"end": 38.564,
+"word": "it"
+},
+{
+"start": 38.564,
+"end": 38.618,
+"word": "and"
+},
+{
+"start": 38.618,
+"end": 38.782,
+"word": "makes"
+},
+{
+"start": 38.782,
+"end": 39.018,
+"word": "calls"
+},
+{
+"start": 39.018,
+"end": 39.109,
+"word": "at"
+},
+{
+"start": 39.109,
+"end": 39.182,
+"word": "your"
+},
+{
+"start": 39.182,
+"end": 39.455,
+"word": "level"
+},
+{
+"start": 39.455,
+"end": 39.655,
+"word": "for"
+},
+{
+"start": 39.655,
+"end": 39.982,
+"word": "pennies."
+},
+{
+"start": 40.582,
+"end": 40.709,
+"word": "You"
+},
+{
+"start": 40.709,
+"end": 40.927,
+"word": "save"
+},
+{
+"start": 40.927,
+"end": 41.109,
+"word": "your"
+},
+{
+"start": 41.109,
+"end": 41.473,
+"word": "sharpest"
+},
+{
+"start": 41.473,
+"end": 41.655,
+"word": "self"
+},
+{
+"start": 41.655,
+"end": 41.891,
+"word": "into"
+},
+{
+"start": 41.891,
+"end": 42.055,
+"word": "a"
+},
+{
+"start": 42.055,
+"end": 42.255,
+"word": "file"
+},
+{
+"start": 42.255,
+"end": 42.455,
+"word": "in"
+},
+{
+"start": 42.455,
+"end": 42.6,
+"word": "three"
+},
+{
+"start": 42.6,
+"end": 42.8,
+"word": "days"
+},
+{
+"start": 42.8,
+"end": 42.964,
+"word": "and"
+},
+{
+"start": 42.964,
+"end": 43.036,
+"word": "it"
+},
+{
+"start": 43.036,
+"end": 43.236,
+"word": "keeps"
+},
+{
+"start": 43.236,
+"end": 43.545,
+"word": "deciding"
+},
+{
+"start": 43.545,
+"end": 43.818,
+"word": "like"
+},
+{
+"start": 43.818,
+"end": 43.945,
+"word": "you"
+},
+{
+"start": 43.945,
+"end": 44.164,
+"word": "long"
+},
+{
+"start": 44.164,
+"end": 44.4,
+"word": "after"
+},
+{
+"start": 44.4,
+"end": 44.582,
+"word": "the"
+},
+{
+"start": 44.582,
+"end": 44.727,
+"word": "free"
+},
+{
+"start": 44.727,
+"end": 45.036,
+"word": "window's"
+},
+{
+"start": 45.036,
+"end": 45.218,
+"word": "gone."
+},
+{
+"start": 45.218,
+"end": 45.927,
+"word": "Save"
+},
+{
+"start": 45.927,
+"end": 46.109,
+"word": "this"
+},
+{
+"start": 46.109,
+"end": 46.364,
+"word": "video"
+},
+{
+"start": 46.364,
+"end": 46.527,
+"word": "and"
+},
+{
+"start": 46.527,
+"end": 46.782,
+"word": "comment"
+},
+{
+"start": 46.782,
+"end": 46.982,
+"word": "Vault."
+}
+]

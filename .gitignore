@@ -1,0 +1,25 @@
+# deps + build (reinstall / regenerate — never commit)
+node_modules/
+video/out/
+tools/whisper.cpp/
+dist/
+.DS_Store
+
+# heavy media lives in the Google Drive "Claude Reels" engine zip, not git
+*.wav
+*.m4a
+*.mp3
+*.aac
+*.mp4
+*.mov
+video/public/vo_work/
+audio/
+sf_audio/
+jr_audio/
+
+# per-reel study frame dumps (regenerable)
+frames_ref/
+frames_ref_dense/
+frames_target/
+sf_frames/
+jr_frames/

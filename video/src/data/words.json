@@ -1,0 +1,578 @@
+[
+  {
+    "word": "Anthropic",
+    "start": 0,
+    "end": 0.673,
+    "line": 0
+  },
+  {
+    "word": "just",
+    "start": 0.731,
+    "end": 0.917,
+    "line": 0
+  },
+  {
+    "word": "dropped",
+    "start": 0.952,
+    "end": 1.231,
+    "line": 0
+  },
+  {
+    "word": "something",
+    "start": 1.254,
+    "end": 1.579,
+    "line": 0
+  },
+  {
+    "word": "that",
+    "start": 1.637,
+    "end": 1.765,
+    "line": 0
+  },
+  {
+    "word": "should",
+    "start": 1.8,
+    "end": 1.997,
+    "line": 0
+  },
+  {
+    "word": "make",
+    "start": 2.043,
+    "end": 2.194,
+    "line": 0
+  },
+  {
+    "word": "Figma",
+    "start": 2.229,
+    "end": 2.496,
+    "line": 0
+  },
+  {
+    "word": "nervous.",
+    "start": 2.531,
+    "end": 3.03,
+    "line": 0
+  },
+  {
+    "word": "It's",
+    "start": 3.355,
+    "end": 3.553,
+    "line": 1
+  },
+  {
+    "word": "called",
+    "start": 3.599,
+    "end": 3.924,
+    "line": 1
+  },
+  {
+    "word": "Claude",
+    "start": 4.075,
+    "end": 4.516,
+    "line": 1
+  },
+  {
+    "word": "Design.",
+    "start": 4.551,
+    "end": 5.236,
+    "line": 1
+  },
+  {
+    "word": "You",
+    "start": 5.619,
+    "end": 5.747,
+    "line": 2
+  },
+  {
+    "word": "describe",
+    "start": 5.817,
+    "end": 6.258,
+    "line": 2
+  },
+  {
+    "word": "what",
+    "start": 6.293,
+    "end": 6.409,
+    "line": 2
+  },
+  {
+    "word": "you",
+    "start": 6.455,
+    "end": 6.536,
+    "line": 2
+  },
+  {
+    "word": "want",
+    "start": 6.618,
+    "end": 6.92,
+    "line": 2
+  },
+  {
+    "word": "—",
+    "start": 7.036,
+    "end": 7.082,
+    "line": 2
+  },
+  {
+    "word": "a",
+    "start": 7.361,
+    "end": 7.43,
+    "line": 2
+  },
+  {
+    "word": "landing",
+    "start": 7.546,
+    "end": 7.93,
+    "line": 2
+  },
+  {
+    "word": "page,",
+    "start": 7.999,
+    "end": 8.371,
+    "line": 2
+  },
+  {
+    "word": "a",
+    "start": 8.394,
+    "end": 8.417,
+    "line": 2
+  },
+  {
+    "word": "deck,",
+    "start": 8.487,
+    "end": 8.824,
+    "line": 2
+  },
+  {
+    "word": "a",
+    "start": 8.847,
+    "end": 8.882,
+    "line": 2
+  },
+  {
+    "word": "prototype",
+    "start": 8.94,
+    "end": 9.636,
+    "line": 2
+  },
+  {
+    "word": "—",
+    "start": 9.659,
+    "end": 9.706,
+    "line": 2
+  },
+  {
+    "word": "and",
+    "start": 10.031,
+    "end": 10.194,
+    "line": 3
+  },
+  {
+    "word": "Claude",
+    "start": 10.275,
+    "end": 10.623,
+    "line": 3
+  },
+  {
+    "word": "designs",
+    "start": 10.658,
+    "end": 11.111,
+    "line": 3
+  },
+  {
+    "word": "it.",
+    "start": 11.157,
+    "end": 11.389,
+    "line": 3
+  },
+  {
+    "word": "Polished,",
+    "start": 11.714,
+    "end": 12.365,
+    "line": 3
+  },
+  {
+    "word": "on-brand,",
+    "start": 12.434,
+    "end": 13.375,
+    "line": 3
+  },
+  {
+    "word": "in",
+    "start": 13.758,
+    "end": 13.955,
+    "line": 3
+  },
+  {
+    "word": "seconds.",
+    "start": 14.071,
+    "end": 14.745,
+    "line": 3
+  },
+  {
+    "word": "But",
+    "start": 15.07,
+    "end": 15.232,
+    "line": 4
+  },
+  {
+    "word": "here's",
+    "start": 15.279,
+    "end": 15.523,
+    "line": 4
+  },
+  {
+    "word": "the",
+    "start": 15.558,
+    "end": 15.627,
+    "line": 4
+  },
+  {
+    "word": "part",
+    "start": 15.674,
+    "end": 15.894,
+    "line": 4
+  },
+  {
+    "word": "nobody's",
+    "start": 15.987,
+    "end": 16.428,
+    "line": 4
+  },
+  {
+    "word": "ready",
+    "start": 16.475,
+    "end": 16.661,
+    "line": 4
+  },
+  {
+    "word": "for.",
+    "start": 16.719,
+    "end": 17.055,
+    "line": 4
+  },
+  {
+    "word": "You",
+    "start": 17.438,
+    "end": 17.589,
+    "line": 5
+  },
+  {
+    "word": "can",
+    "start": 17.647,
+    "end": 17.787,
+    "line": 5
+  },
+  {
+    "word": "import",
+    "start": 17.856,
+    "end": 18.286,
+    "line": 5
+  },
+  {
+    "word": "your",
+    "start": 18.321,
+    "end": 18.449,
+    "line": 5
+  },
+  {
+    "word": "entire",
+    "start": 18.507,
+    "end": 18.89,
+    "line": 5
+  },
+  {
+    "word": "design",
+    "start": 18.936,
+    "end": 19.308,
+    "line": 5
+  },
+  {
+    "word": "system",
+    "start": 19.377,
+    "end": 19.726,
+    "line": 5
+  },
+  {
+    "word": "—",
+    "start": 19.877,
+    "end": 19.923,
+    "line": 5
+  },
+  {
+    "word": "straight",
+    "start": 20.306,
+    "end": 20.666,
+    "line": 5
+  },
+  {
+    "word": "from",
+    "start": 20.712,
+    "end": 20.852,
+    "line": 5
+  },
+  {
+    "word": "GitHub",
+    "start": 20.921,
+    "end": 21.351,
+    "line": 5
+  },
+  {
+    "word": "or",
+    "start": 21.409,
+    "end": 21.548,
+    "line": 5
+  },
+  {
+    "word": "your",
+    "start": 21.873,
+    "end": 22.024,
+    "line": 5
+  },
+  {
+    "word": "design",
+    "start": 22.071,
+    "end": 22.431,
+    "line": 5
+  },
+  {
+    "word": "files",
+    "start": 22.5,
+    "end": 22.872,
+    "line": 5
+  },
+  {
+    "word": "—",
+    "start": 23.023,
+    "end": 23.093,
+    "line": 5
+  },
+  {
+    "word": "and",
+    "start": 23.603,
+    "end": 23.754,
+    "line": 6
+  },
+  {
+    "word": "Claude",
+    "start": 23.824,
+    "end": 24.195,
+    "line": 6
+  },
+  {
+    "word": "builds",
+    "start": 24.254,
+    "end": 24.544,
+    "line": 6
+  },
+  {
+    "word": "with",
+    "start": 24.567,
+    "end": 24.683,
+    "line": 6
+  },
+  {
+    "word": "your",
+    "start": 24.73,
+    "end": 24.846,
+    "line": 6
+  },
+  {
+    "word": "components,",
+    "start": 24.904,
+    "end": 25.705,
+    "line": 6
+  },
+  {
+    "word": "checks",
+    "start": 25.879,
+    "end": 26.192,
+    "line": 6
+  },
+  {
+    "word": "its",
+    "start": 26.239,
+    "end": 26.355,
+    "line": 6
+  },
+  {
+    "word": "own",
+    "start": 26.401,
+    "end": 26.576,
+    "line": 6
+  },
+  {
+    "word": "work,",
+    "start": 26.634,
+    "end": 27.04,
+    "line": 6
+  },
+  {
+    "word": "and",
+    "start": 27.214,
+    "end": 27.365,
+    "line": 6
+  },
+  {
+    "word": "fixes",
+    "start": 27.446,
+    "end": 27.818,
+    "line": 6
+  },
+  {
+    "word": "the",
+    "start": 27.864,
+    "end": 27.934,
+    "line": 6
+  },
+  {
+    "word": "mistakes",
+    "start": 27.992,
+    "end": 28.398,
+    "line": 6
+  },
+  {
+    "word": "before",
+    "start": 28.445,
+    "end": 28.7,
+    "line": 6
+  },
+  {
+    "word": "you",
+    "start": 28.735,
+    "end": 28.816,
+    "line": 6
+  },
+  {
+    "word": "ever",
+    "start": 28.886,
+    "end": 29.048,
+    "line": 6
+  },
+  {
+    "word": "see",
+    "start": 29.106,
+    "end": 29.281,
+    "line": 6
+  },
+  {
+    "word": "them.",
+    "start": 29.315,
+    "end": 29.629,
+    "line": 6
+  },
+  {
+    "word": "The",
+    "start": 30.14,
+    "end": 30.256,
+    "line": 7
+  },
+  {
+    "word": "question",
+    "start": 30.314,
+    "end": 30.72,
+    "line": 7
+  },
+  {
+    "word": "isn't",
+    "start": 30.79,
+    "end": 31.057,
+    "line": 7
+  },
+  {
+    "word": "\"can",
+    "start": 31.15,
+    "end": 31.405,
+    "line": 7
+  },
+  {
+    "word": "AI",
+    "start": 31.498,
+    "end": 31.893,
+    "line": 7
+  },
+  {
+    "word": "design\"",
+    "start": 31.986,
+    "end": 32.381,
+    "line": 7
+  },
+  {
+    "word": "anymore.",
+    "start": 32.404,
+    "end": 32.926,
+    "line": 7
+  },
+  {
+    "word": "It's",
+    "start": 33.367,
+    "end": 33.565,
+    "line": 8
+  },
+  {
+    "word": "what",
+    "start": 33.6,
+    "end": 33.739,
+    "line": 8
+  },
+  {
+    "word": "you'll",
+    "start": 33.774,
+    "end": 33.96,
+    "line": 8
+  },
+  {
+    "word": "do",
+    "start": 34.006,
+    "end": 34.099,
+    "line": 8
+  },
+  {
+    "word": "with",
+    "start": 34.145,
+    "end": 34.285,
+    "line": 8
+  },
+  {
+    "word": "all",
+    "start": 34.319,
+    "end": 34.447,
+    "line": 8
+  },
+  {
+    "word": "the",
+    "start": 34.494,
+    "end": 34.563,
+    "line": 8
+  },
+  {
+    "word": "time",
+    "start": 34.61,
+    "end": 34.83,
+    "line": 8
+  },
+  {
+    "word": "you",
+    "start": 34.853,
+    "end": 34.935,
+    "line": 8
+  },
+  {
+    "word": "just",
+    "start": 35.016,
+    "end": 35.179,
+    "line": 8
+  },
+  {
+    "word": "got",
+    "start": 35.213,
+    "end": 35.364,
+    "line": 8
+  },
+  {
+    "word": "back.",
+    "start": 35.422,
+    "end": 36.131,
+    "line": 8
+  }
+]

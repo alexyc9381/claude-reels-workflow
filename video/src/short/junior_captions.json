@@ -1,0 +1,406 @@
+[
+{
+"from": 0,
+"to": 24,
+"words": [
+{
+"text": "IF",
+"t": 0
+},
+{
+"text": "YOU'RE",
+"t": 3
+},
+{
+"text": "A",
+"t": 13
+},
+{
+"text": "JUNIOR",
+"t": 14
+}
+]
+},
+{
+"from": 24,
+"to": 50,
+"words": [
+{
+"text": "WITH",
+"t": 24
+},
+{
+"text": "ONLY",
+"t": 31
+},
+{
+"text": "CLUBS",
+"t": 37
+},
+{
+"text": "ON",
+"t": 46
+}
+]
+},
+{
+"from": 50,
+"to": 120,
+"words": [
+{
+"text": "YOUR",
+"t": 50
+},
+{
+"text": "APPLICATION,",
+"t": 59
+},
+{
+"text": "STOP",
+"t": 81
+},
+{
+"text": "SCROLLING.",
+"t": 92
+}
+]
+},
+{
+"from": 120,
+"to": 160,
+"words": [
+{
+"text": "CLUBS",
+"t": 120
+},
+{
+"text": "AND",
+"t": 130
+},
+{
+"text": "VOLUNTEERING",
+"t": 134
+},
+{
+"text": "ARE",
+"t": 155
+}
+]
+},
+{
+"from": 160,
+"to": 211,
+"words": [
+{
+"text": "NOT",
+"t": 160
+},
+{
+"text": "EXTRACURRICULARS",
+"t": 165
+},
+{
+"text": "ANYMORE.",
+"t": 193
+}
+]
+},
+{
+"from": 211,
+"to": 248,
+"words": [
+{
+"text": "THEY",
+"t": 211
+},
+{
+"text": "ARE",
+"t": 219
+},
+{
+"text": "EXPECTED.",
+"t": 225
+}
+]
+},
+{
+"from": 248,
+"to": 304,
+"words": [
+{
+"text": "ADMISSIONS",
+"t": 248
+},
+{
+"text": "OFFICERS",
+"t": 268
+},
+{
+"text": "READ",
+"t": 285
+},
+{
+"text": "80",
+"t": 292
+}
+]
+},
+{
+"from": 304,
+"to": 343,
+"words": [
+{
+"text": "APPLICATIONS",
+"t": 304
+},
+{
+"text": "A",
+"t": 329
+},
+{
+"text": "DAY.",
+"t": 330
+}
+]
+},
+{
+"from": 343,
+"to": 420,
+"words": [
+{
+"text": "IDENTICAL",
+"t": 343
+},
+{
+"text": "LISTS",
+"t": 368
+},
+{
+"text": "GET",
+"t": 382
+},
+{
+"text": "SKIMMED.",
+"t": 391
+}
+]
+},
+{
+"from": 420,
+"to": 460,
+"words": [
+{
+"text": "THE",
+"t": 420
+},
+{
+"text": "FIX",
+"t": 427
+},
+{
+"text": "BEFORE",
+"t": 433
+},
+{
+"text": "SENIOR",
+"t": 446
+}
+]
+},
+{
+"from": 460,
+"to": 512,
+"words": [
+{
+"text": "YEAR",
+"t": 460
+},
+{
+"text": "IS",
+"t": 468
+},
+{
+"text": "REAL",
+"t": 472
+},
+{
+"text": "PROFESSIONAL",
+"t": 481
+}
+]
+},
+{
+"from": 512,
+"to": 539,
+"words": [
+{
+"text": "EXPERIENCE.",
+"t": 512
+}
+]
+},
+{
+"from": 539,
+"to": 569,
+"words": [
+{
+"text": "A",
+"t": 539
+},
+{
+"text": "PLACEMENT",
+"t": 541
+},
+{
+"text": "AT",
+"t": 563
+},
+{
+"text": "A",
+"t": 567
+}
+]
+},
+{
+"from": 569,
+"to": 631,
+"words": [
+{
+"text": "VENTURE",
+"t": 569
+},
+{
+"text": "BACKED",
+"t": 585
+},
+{
+"text": "COMPANY",
+"t": 599
+},
+{
+"text": "MAKES",
+"t": 620
+}
+]
+},
+{
+"from": 631,
+"to": 655,
+"words": [
+{
+"text": "THEM",
+"t": 631
+},
+{
+"text": "STOP.",
+"t": 637
+}
+]
+},
+{
+"from": 655,
+"to": 727,
+"words": [
+{
+"text": "MATCHTERN",
+"t": 655
+},
+{
+"text": "DOES",
+"t": 682
+},
+{
+"text": "JUST",
+"t": 694
+},
+{
+"text": "THAT.",
+"t": 706
+}
+]
+},
+{
+"from": 727,
+"to": 766,
+"words": [
+{
+"text": "COMMENT",
+"t": 727
+},
+{
+"text": "JUNIOR",
+"t": 740
+},
+{
+"text": "BELOW",
+"t": 751
+},
+{
+"text": "AND",
+"t": 761
+}
+]
+},
+{
+"from": 766,
+"to": 792,
+"words": [
+{
+"text": "I'LL",
+"t": 766
+},
+{
+"text": "SEND",
+"t": 773
+},
+{
+"text": "YOU",
+"t": 781
+},
+{
+"text": "THE",
+"t": 786
+}
+]
+},
+{
+"from": 792,
+"to": 829,
+"words": [
+{
+"text": "FULL",
+"t": 792
+},
+{
+"text": "JUNIOR",
+"t": 800
+},
+{
+"text": "YEAR",
+"t": 810
+},
+{
+"text": "ACTION",
+"t": 819
+}
+]
+},
+{
+"from": 829,
+"to": 857,
+"words": [
+{
+"text": "PLAN",
+"t": 829
+},
+{
+"text": "RIGHT",
+"t": 838
+},
+{
+"text": "NOW.",
+"t": 845
+}
+]
+}
+]

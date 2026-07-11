@@ -1,0 +1,626 @@
+[
+{
+"word": "Stop",
+"line": 0,
+"start": 0.0,
+"end": 0.17
+},
+{
+"word": "giving",
+"line": 0,
+"start": 0.17,
+"end": 0.54
+},
+{
+"word": "Claude",
+"line": 0,
+"start": 0.54,
+"end": 0.81
+},
+{
+"word": "instructions,",
+"line": 0,
+"start": 0.81,
+"end": 1.64
+},
+{
+"word": "make",
+"line": 0,
+"start": 1.64,
+"end": 1.85
+},
+{
+"word": "it",
+"line": 0,
+"start": 1.85,
+"end": 1.95
+},
+{
+"word": "ask",
+"line": 0,
+"start": 1.95,
+"end": 2.15
+},
+{
+"word": "you",
+"line": 0,
+"start": 2.15,
+"end": 2.32
+},
+{
+"word": "20",
+"line": 0,
+"start": 2.32,
+"end": 2.72
+},
+{
+"word": "questions",
+"line": 0,
+"start": 2.72,
+"end": 3.12
+},
+{
+"word": "first,",
+"line": 0,
+"start": 3.12,
+"end": 3.75
+},
+{
+"word": "because",
+"line": 1,
+"start": 3.75,
+"end": 4.03
+},
+{
+"word": "right",
+"line": 1,
+"start": 4.03,
+"end": 4.18
+},
+{
+"word": "now",
+"line": 1,
+"start": 4.18,
+"end": 4.26
+},
+{
+"word": "you",
+"line": 1,
+"start": 4.26,
+"end": 4.45
+},
+{
+"word": "give",
+"line": 1,
+"start": 4.45,
+"end": 4.7
+},
+{
+"word": "it",
+"line": 1,
+"start": 4.7,
+"end": 4.82
+},
+{
+"word": "one",
+"line": 1,
+"start": 4.82,
+"end": 5.01
+},
+{
+"word": "line,",
+"line": 1,
+"start": 5.01,
+"end": 5.4
+},
+{
+"word": "and",
+"line": 1,
+"start": 5.4,
+"end": 5.57
+},
+{
+"word": "it",
+"line": 1,
+"start": 5.57,
+"end": 5.75
+},
+{
+"word": "confidently",
+"line": 1,
+"start": 5.75,
+"end": 6.39
+},
+{
+"word": "builds",
+"line": 1,
+"start": 6.39,
+"end": 6.79
+},
+{
+"word": "the",
+"line": 1,
+"start": 6.79,
+"end": 6.96
+},
+{
+"word": "wrong",
+"line": 1,
+"start": 6.96,
+"end": 7.26
+},
+{
+"word": "thing,",
+"line": 1,
+"start": 7.26,
+"end": 7.7
+},
+{
+"word": "and",
+"line": 1,
+"start": 7.7,
+"end": 8.07
+},
+{
+"word": "you",
+"line": 1,
+"start": 8.07,
+"end": 8.09
+},
+{
+"word": "burn",
+"line": 1,
+"start": 8.09,
+"end": 8.35
+},
+{
+"word": "five",
+"line": 1,
+"start": 8.35,
+"end": 8.66
+},
+{
+"word": "rounds",
+"line": 1,
+"start": 8.66,
+"end": 9.06
+},
+{
+"word": "fixing",
+"line": 1,
+"start": 9.06,
+"end": 9.6
+},
+{
+"word": "it.",
+"line": 1,
+"start": 9.6,
+"end": 10.06
+},
+{
+"word": "The",
+"line": 2,
+"start": 10.06,
+"end": 10.26
+},
+{
+"word": "fix",
+"line": 2,
+"start": 10.26,
+"end": 10.46
+},
+{
+"word": "is",
+"line": 2,
+"start": 10.46,
+"end": 10.59
+},
+{
+"word": "one",
+"line": 2,
+"start": 10.59,
+"end": 10.79
+},
+{
+"word": "skill,",
+"line": 2,
+"start": 10.79,
+"end": 11.26
+},
+{
+"word": "the",
+"line": 2,
+"start": 11.26,
+"end": 11.46
+},
+{
+"word": "interrogation",
+"line": 2,
+"start": 11.46,
+"end": 12.36
+},
+{
+"word": "skill.",
+"line": 2,
+"start": 12.36,
+"end": 12.98
+},
+{
+"word": "Before",
+"line": 3,
+"start": 12.98,
+"end": 13.28
+},
+{
+"word": "Claude",
+"line": 3,
+"start": 13.28,
+"end": 13.53
+},
+{
+"word": "writes",
+"line": 3,
+"start": 13.53,
+"end": 13.83
+},
+{
+"word": "anything,",
+"line": 3,
+"start": 13.83,
+"end": 14.34
+},
+{
+"word": "it",
+"line": 3,
+"start": 14.34,
+"end": 14.47
+},
+{
+"word": "interviews",
+"line": 3,
+"start": 14.47,
+"end": 14.95
+},
+{
+"word": "you.",
+"line": 3,
+"start": 14.95,
+"end": 15.3
+},
+{
+"word": "It",
+"line": 3,
+"start": 15.3,
+"end": 15.42
+},
+{
+"word": "asks",
+"line": 3,
+"start": 15.42,
+"end": 15.69
+},
+{
+"word": "who",
+"line": 3,
+"start": 15.69,
+"end": 15.86
+},
+{
+"word": "it's",
+"line": 3,
+"start": 15.86,
+"end": 16.1
+},
+{
+"word": "really",
+"line": 3,
+"start": 16.1,
+"end": 16.48
+},
+{
+"word": "for,",
+"line": 3,
+"start": 16.48,
+"end": 16.79
+},
+{
+"word": "what",
+"line": 3,
+"start": 16.79,
+"end": 17.04
+},
+{
+"word": "done",
+"line": 3,
+"start": 17.04,
+"end": 17.29
+},
+{
+"word": "actually",
+"line": 3,
+"start": 17.29,
+"end": 17.83
+},
+{
+"word": "looks",
+"line": 3,
+"start": 17.83,
+"end": 18.09
+},
+{
+"word": "like,",
+"line": 3,
+"start": 18.09,
+"end": 18.47
+},
+{
+"word": "your",
+"line": 3,
+"start": 18.47,
+"end": 18.72
+},
+{
+"word": "constraints,",
+"line": 3,
+"start": 18.72,
+"end": 19.53
+},
+{
+"word": "and",
+"line": 3,
+"start": 19.53,
+"end": 19.82
+},
+{
+"word": "the",
+"line": 3,
+"start": 19.82,
+"end": 20.06
+},
+{
+"word": "one",
+"line": 3,
+"start": 20.06,
+"end": 20.08
+},
+{
+"word": "thing",
+"line": 3,
+"start": 20.08,
+"end": 20.45
+},
+{
+"word": "you",
+"line": 3,
+"start": 20.45,
+"end": 20.58
+},
+{
+"word": "do",
+"line": 3,
+"start": 20.58,
+"end": 20.73
+},
+{
+"word": "not",
+"line": 3,
+"start": 20.73,
+"end": 20.9
+},
+{
+"word": "want",
+"line": 3,
+"start": 20.9,
+"end": 21.2
+},
+{
+"word": "it",
+"line": 3,
+"start": 21.2,
+"end": 21.28
+},
+{
+"word": "to",
+"line": 3,
+"start": 21.28,
+"end": 21.42
+},
+{
+"word": "do.",
+"line": 3,
+"start": 21.42,
+"end": 21.78
+},
+{
+"word": "20",
+"line": 4,
+"start": 21.78,
+"end": 22.17
+},
+{
+"word": "sharp",
+"line": 4,
+"start": 22.17,
+"end": 22.48
+},
+{
+"word": "questions,",
+"line": 4,
+"start": 22.48,
+"end": 23.18
+},
+{
+"word": "then",
+"line": 4,
+"start": 23.18,
+"end": 23.43
+},
+{
+"word": "it",
+"line": 4,
+"start": 23.43,
+"end": 23.55
+},
+{
+"word": "builds,",
+"line": 4,
+"start": 23.55,
+"end": 24.05
+},
+{
+"word": "and",
+"line": 4,
+"start": 24.05,
+"end": 24.31
+},
+{
+"word": "because",
+"line": 4,
+"start": 24.31,
+"end": 24.69
+},
+{
+"word": "it",
+"line": 4,
+"start": 24.69,
+"end": 24.81
+},
+{
+"word": "finally",
+"line": 4,
+"start": 24.81,
+"end": 25.26
+},
+{
+"word": "has",
+"line": 4,
+"start": 25.26,
+"end": 25.59
+},
+{
+"word": "the",
+"line": 4,
+"start": 25.59,
+"end": 25.68
+},
+{
+"word": "full",
+"line": 4,
+"start": 25.68,
+"end": 25.89
+},
+{
+"word": "picture,",
+"line": 4,
+"start": 25.89,
+"end": 26.46
+},
+{
+"word": "it",
+"line": 4,
+"start": 26.46,
+"end": 26.58
+},
+{
+"word": "nails",
+"line": 4,
+"start": 26.58,
+"end": 27.08
+},
+{
+"word": "at",
+"line": 4,
+"start": 27.08,
+"end": 27.21
+},
+{
+"word": "the",
+"line": 4,
+"start": 27.21,
+"end": 27.49
+},
+{
+"word": "first",
+"line": 4,
+"start": 27.49,
+"end": 27.97
+},
+{
+"word": "time.",
+"line": 4,
+"start": 27.97,
+"end": 28.67
+},
+{
+"word": "5",
+"line": 5,
+"start": 28.67,
+"end": 28.88
+},
+{
+"word": "rounds",
+"line": 5,
+"start": 28.88,
+"end": 29.4
+},
+{
+"word": "become",
+"line": 5,
+"start": 29.4,
+"end": 29.8
+},
+{
+"word": "1.",
+"line": 5,
+"start": 29.8,
+"end": 30.29
+},
+{
+"word": "Comment,",
+"line": 6,
+"start": 30.29,
+"end": 30.61
+},
+{
+"word": "ask,",
+"line": 6,
+"start": 30.61,
+"end": 30.83
+},
+{
+"word": "and",
+"line": 6,
+"start": 30.83,
+"end": 30.91
+},
+{
+"word": "I'll",
+"line": 6,
+"start": 30.91,
+"end": 31.03
+},
+{
+"word": "send",
+"line": 6,
+"start": 31.03,
+"end": 31.18
+},
+{
+"word": "you",
+"line": 6,
+"start": 31.18,
+"end": 31.29
+},
+{
+"word": "the",
+"line": 6,
+"start": 31.29,
+"end": 31.4
+},
+{
+"word": "skill.",
+"line": 6,
+"start": 31.4,
+"end": 31.96
+}
+]

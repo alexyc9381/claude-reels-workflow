@@ -1,0 +1,82 @@
+# Memory Index
+
+- [⛔ Winner Lab pipeline](winner-lab-pipeline.md) — decompose viral winners frame-by-frame (~/Downloads/winner-lab): cut rhythm + motion curves + hook bursts → EDL + moves library + house numbers; gate our renders against winner metrics
+- [⛔⭐ SCRIPT FACTORY pipeline](script-factory-pipeline.md) — MASTER STANDING: load BEFORE any topic/hook/script/caption work; Stages 0-5 (source gate → kill-gate → inherit-comp structure → constrained draft → fresh-critic adversarial gate → truth evidence → checklist) + per-reel factory log in memory/reels/ + [lever ledger](reel-lever-ledger.md); no complete factory log = no recording
+- [⛔ Outlier Engine](outlier-engine.md) — comp discovery at scale (~/Downloads/outlier-engine): weekly scan.py sweep scores in-niche + adjacent shorts (views/median × recency × Alex-lane transfer modifiers) into Door-A candidates for the Script Factory
+- [⛔ VAULT reel premise autopsy](vault-reel-premise-autopsy.md) — STANDING pre-build kill-rules from reel 38's 5s-avg failure (cerebral insight-file payoff, no real artifact, input-doesn't-exist, 3rd consecutive deadline open); run on EVERY premise before scripting
+- [⛔ Style cloning pipeline](style-cloning-pipeline.md) — STANDING: one example video → exact reusable style pack (5-phase kit at ~/Downloads/style-cloning-kit: ingest → teardown → scaffold → side-by-side match-gate → memory pack)
+- [Matchtern long-form video style](matchtern-longform-video-style.md) — 16:9 YouTube/VSL edits (captions + overlay graphics + full-screen cutaways)
+- [Matchtern short-form video style](matchtern-shortform-video-style.md) — 9:16 TikTok/Reels UGC edits (instant word-by-word captions + content-matched UI motion)
+- [Greg Isenberg reel style](greg-isenberg-reel-style.md) — his real editing style (cream bg, editorial serif, muted green, smooth graphics) + Remotion replica
+- [Claude/AI reel workflow](claude-ai-reel-workflow.md) — ⛔ MANDATORY standing spec: load BEFORE any hook/script/idea/caption AND before any edit/render (premium-polish + visual ship-gate rules)
+- [⛔ Reel ship-gate pipeline](reel-ship-gate-pipeline.md) — STANDING autonomous self-gating pipeline + adversarial critic subagent + full ship-gate checklist; fix all fails before delivering
+- [Reel retention + hook teardown](reel-retention-hook-teardown.md) — why reels drop @1-2s + real cindiezhu/Nate hook mechanics + broad-stake/curiosity/real-first-frame fix
+- [⛔ Reel knockoff references](reel-knockoff-references.md) — STANDING: knockoff real brands/UIs/characters in scenes (Coke-ish, Robinhood-ish, GEKKO insurance), cameo fly-bys, living-world gags, meme-video slots (Alex's library pending), boom/pop/sparkle SFX variety
+- [Reel scene motion + depth](reel-scene-motion-depth.md) — ⛔ STANDING: every scene ESCALATES + carries depth (z-layer/parallax/stacked shadows) + respect occlusion
+- [Reel hook-header](reel-hook-header.md) — ⛔ STANDING: raycfu-style big top-third hook-header (mute-readable title) on every reel
+- [Nate Herk style reference](nateherk-style-reference.md) — @nateherk hook structures + topic lane + YouTube-transcript scrape method (top model creator)
+- [Nick Saraev style reference](nick-saraev-style-reference.md) — @nicksaraev money-receipts lane + ⛔ STANDING sourcing rule (model each reel on a ≤2wk-old overperformer)
+- [mavgpt style reference](mavgpt-style-reference.md) — @mavgpt (1M IG) verbatim follow-along formula from his 716K/440K winners ("What happens when you ask X to Y" → full prompts spoken → "here's the trick" → bonus → follow+comment) + visual formula (result-claim sticker ≠ spoken question, ~80% real Claude UI recordings, sticker-swap re-hooks) + the no-login TikTok scrape method
+- [cindiezhu style reference](cindiezhu-style-reference.md) — accessible no-jargon formula (technical→persona + plain-English outcome, real screen, one loop)
+- [Claude reel hook library](claude-reel-hook-library.md) — 6 viral hook families + ⛔ HOOK GATE (10 checks, deliver 2-3 across ≥2 families) + starter library
+- [⛔ IG Reels scriptwriting principles](ig-reels-scriptwriting-principles.md) — STANDING script bible (hook rules, retention arc, buzzword-kill, GATE THE VALUE); apply to every script
+- [VAULT reel](vault-reel.md) — reel 38 VAULT "The Judgment Vault" (Fable 5 deadline; CTA VAULT) + ⛔ style pivot (single-subject cinematic, filled vault-room chamber) + costumed-sprite roster + StatusZip/seal fixes
+- [Fable idea backlog](fable-idea-backlog.md) — RE-RANKED by the VAULT kill-gate: XRAY (build next) → GHOST → HOLSTER → BLACKBOX (fix-angle-first, script retracted) → CODEX (killed)
+- [Trial reels repost method](trial-reels-repost-method.md) — anti-fingerprint ffmpeg recipe (zoom+speed+eq, vary per video) + Trial Reels folders in Final & Drive
+- [⛔ Reel build gotchas](reel-build-gotchas.md) — HARD: scene bodies are PANEL-LOCAL 0..792 (clip >792) + over() start is FRAMES not seconds — check before first render
+- [FACTORY reel](factory-reel.md) — reel 37 FACTORY "The Assembly Line" (Sol/Terra/Luna 3-tier line: Sol specs, Terra drafts, Luna stamps 50, Sol QA-gates; CTA FACTORY; cloned from GptSolReel via python-splice)
+- [GPT-5.6 SOL reel](gpt-sol-reel.md) — reel 36 SOL (first ChatGPT/OpenAI reel: 3 GPT-5.6 Sol power-workflows — ultra-mode swarm / Sol+Luna cost stack / agent; CTA SOL) + reusable SolMascot (sun) + LunaMascot (moon)
+- [ARENA reel](arena-reel.md) — reel 35 ARENA (Fable 5 as a ruthless JUDGE: runs 20 versions of your ad/hook through a tournament BRACKET, crowns a champion; CTA ARENA) + colosseum/bracket build via parallel scene-authoring workflow; first reel that gates the HOW correctly; guide doc pending
+- [MINT reel](mint-reel.md) — reel 34 MINT (Fable drives your browser: jobs/posts/CRM; CTA MINT); final = sprite-driven; guide doc BUILT
+- [CREW reel](crew-reel.md) — reel 33 CREW (6 named AI execs) + STANDING style (no neon, movie-ref scenes, ExecScene system)
+- [⭐ Reel winning formula](reel-winning-formula.md) — STANDING from Alex's results (hot-model subject + deadline line-1 + viewer-hero + named artifact + outlasts payoff; comment at END; GATE THE PAYOFF)
+- [⛔ Gate the HOW in scripts](gate-the-how-in-scripts.md) — STANDING: VO sells RESULT + names ARTIFACT, never the copy-pasteable HOW (MINT anti-example; CLONE/BLUEPRINT gated it and went viral)
+- [Short-form scripting playbook](shortform-scripting-playbook.md) — STANDING scripting rules (hook-on-mute, specificity, but/so loops, peak-end, cut dead air) + panel upgrades
+- [No-anecdote value-first scripts](no-anecdote-value-first-scripts.md) — ⛔ STANDING: value DIRECTLY (the result), NO invented characters / "I did X" story framing
+- [Creator video-structure templates](creator-video-structure-templates.md) — beat-by-beat structures of Greg Isenberg / Nate Herk / Mino Lee
+- [Reel storytelling playbook](reel-storytelling-playbook.md) — STANDING: apply story structure (3-act / Story Circle / Chekhov) as a problem→tension→payoff arc
+- [Claude reel topic engine](claude-reel-topic-engine.md) — 5 repeatable series + trend angles + stay-fresh process
+- [Matchtern design system](matchtern-design-system.md) — brand colors, fonts, logo location, copy rules
+- [⛔ Alex VO recordings](alex-vo-recordings.md) — HARD: transcribe attached m4a FULLY (it's often his real VO, not just instructions); NEVER clone/process his voice (no compression/EQ) — RAW only + splice cut-cut retakes
+- [Video editing toolchain](video-editing-toolchain.md) — working ffmpeg/whisper.cpp/Remotion setup on this Mac
+- [SFX library](sfx-library.md) — ~/Downloads/sfx-library: 55 labeled real-source SFX mp3s in 5 category folders + README reel-mapping + no-API-key sourcing method (Mixkit/Freesound/Myinstants)
+- [venture-style pipeline](venture-style-pipeline.md) — no-API-key faceless founder-story video generator at ~/Downloads/venture-style
+- [theventure style teardown](theventure-style-teardown.md) — frame-by-frame spec of @theventure's TikTok style
+- [1609plus style replica](1609plus-style-replica.md) — dark UI-mockup IG carousel style + render pipeline
+- [Matchtern static ad pipeline](matchtern-static-ad-pipeline.md) — HTML→PNG headless-Chrome render, 4:5 FB/IG image ads at ~/Downloads/matchtern-fb-ads
+- [Matchtern Meta campaign builder](matchtern-meta-campaign-builder.md) — no-publish Marketing-API script builds the whole Meta lead campaign PAUSED
+- [Matchtern apply landing page](matchtern-apply-landing-page.md) — apply.matchtern.org funnel source + Netlify deploy (site incredible-fairy-880c30) + Cal.com wiring
+- [No em dashes in copy](no-em-dashes-in-copy.md) — ⛔ STANDING: ZERO em dashes in ANY Matchtern copy + pre-ship grep
+- [Matchtern ad economics](matchtern-ad-economics.md) — Meta ~$50/opt-in; $2k cold offer at $50/day ≈ 0.4x ROAS; needs tripwire / higher budget
+- [FB ads compliance skill](fb-ads-compliance-skill.md) — ⛔ STANDING: invoke /fb-ads-compliance before ANY Meta/FB ad work
+- [Ivy.insider pipeline](ivy-insider-pipeline.md) — green CollegeTierList-style carousel generator at ~/Downloads/ivy-insider
+- [Matchtern ad imagery representation](matchtern-ad-imagery-representation.md) — feature South Asian + Asian people in Matchtern imagery
+- [Matchtern primary messaging](matchtern-primary-messaging.md) — current primary message "stand out in admissions"; "10 days guaranteed" retired
+- [Social assets to camera roll](social-assets-to-camera-roll.md) — ⛔ RETIRED for Claude reels; deliver to Final + Drive only (script kept for one-offs)
+- [Social assets to Google Drive](social-assets-to-gdrive.md) — STANDING: auto-copy Matchtern social assets to the matching Drive folder
+- [Share images as links](share-images-as-links.md) — STANDING: always include clickable file links/paths when showing samples
+- [Reel IG-feed safe zone](reel-ig-feed-safezone.md) — STANDING: IG feed chrome eats top ~250 / bottom ~340 / right ~120; pull content down
+- [Reel progress-bar reward](reel-progress-bar-reward.md) — STANDING: top progress bar ends in a REWARD seal that unlocks at the CTA (stay-to-end lever)
+- [⛔ Caption sync gate](caption-sync-gate.md) — HARD: anchor captions to WAV-measured onset + 0.10s lead + drift-gate (never raw whisper times)
+- [⛔ Post caption structure](caption-structure.md) — HARD: the POST caption OPENS with "Comment [KEYWORD]" then "👇 READ BELOW", THEN value (recurring mistake — CTA first, never buried)
+- [Behance real images](behance-real-images.md) — STANDING: use real behance.net design screenshots in reels + the curl/crop/composite method
+- [Reel VO pacing](reel-vo-pacing.md) — STANDING: tighten every reel VO (~7% speedup + pause-trim; uniform whole-mp4 speedup for finished ones)
+- [Design reel + real samples](design-reel-real-samples.md) — reel 16 DESIGN + reusable DesignSamples.tsx + one-pass silenceremove method
+- [Screen reel + GitHub capture](screen-reel-github-capture.md) — reel 17 + headless-Chrome page-screenshot method + Nick-Saraev annotation system
+- [Lead-magnet docs](lead-magnet-docs.md) — per-reel "comment KEYWORD → setup" .docx giveaways + the clone-a-docx-and-regen-XML build method
+- [Nightshift reel](nightshift-reel.md) — reel 19 (scheduled overnight agent, CTA NIGHTSHIFT) + night→morning color-arc Background
+- [Fable reel](fable-reel.md) — reel 22 "wasting 90% of Fable 5 tokens" (4-tip guide, CTA FABLE) + reusable OPEN-LOOP retention system
+- [Sharp reel](sharp-reel.md) — reel 23 SHARP "3 Fable 5 mistakes" (CTA SHARP) + caption-fragment pre-merge fix
+- [Unlock reel](unlock-reel.md) — reel 24 UNLOCK (trend-jack curation listicle, 3 named moves + steal-this-prompt, CTA UNLOCK)
+- [Attack reel](attack-reel.md) — reel 25 ATTACK (yes-man → harshest editor, CTA ATTACK) + reusable animated Claude MASCOT component
+- [Store reel script](store-reel-script.md) — reel 26 STORE GATED ("$99 text file": sell Claude Skills, CTA STORE); verify Doser receipt before guide
+- [Autopilot reel script](autopilot-reel-script.md) — reel 32 AUTOPILOT (Meta Ads MCP = run FB ads by texting Claude, CTA AUTOPILOT); gated guide
+- [Blueprint reel script](midnight-reel-script.md) — reel 31 BLUEPRINT 'Blueprint Vault' GATED (planner mass-produces specs cheap models execute, CTA BLUEPRINT)
+- [Stack reel script](stack-reel-script.md) — reel 30 STACK GATED (worker/judge/wizard model-stack, CTA STACK) + ranked backlog
+- [Marathon reel script](marathon-reel-script.md) — reel 29 MARATHON GATED (one goal + GOAL CONTRACT, walk away, CTA MARATHON) + backlog
+- [Clone reel script](clone-reel-script.md) — reel 28 CLONE GATED (clone Fable's brain into cheap models via audit→skills→instructions handoff, CTA CLONE)
+- [Worthy reel script](worthy-reel-script.md) — reel 27 WORTHY GATED (router-drama reaction reel, CTA WORTHY); capture real Dax screenshots first
+- [Leads reel](leads-reel.md) — reel 20 "Free Lead Machine" (Claude Code + free scraper → local leads w/ emails, CTA LEADS)
+- [Books reel](books-reel.md) — reel 21 "Claude did my books for $0" (folder of statements → clean P&L, CTA BOOKS)
+- [GLM swap reel + setup](glm-swap-reel-and-setup.md) — reel 18 SWAP (GLM-5.2 = Opus in Claude Code at 1/5 price, CTA SWAP) + verified settings
+- [Claude Max spin-to-win giveaway](claude-max-spin-giveaway.md) — ~/Downloads/claude-max-spin email-capture spin-wheel app + config/deploy

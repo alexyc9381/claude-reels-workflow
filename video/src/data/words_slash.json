@@ -1,0 +1,787 @@
+[
+ {
+  "word": "Claude",
+  "start": 0,
+  "end": 0.09
+ },
+ {
+  "word": "can",
+  "start": 0.09,
+  "end": 0.29
+ },
+ {
+  "word": "help",
+  "start": 0.29,
+  "end": 0.43
+ },
+ {
+  "word": "you",
+  "start": 0.43,
+  "end": 0.55
+ },
+ {
+  "word": "lower",
+  "start": 0.55,
+  "end": 0.69
+ },
+ {
+  "word": "your",
+  "start": 0.69,
+  "end": 0.83
+ },
+ {
+  "word": "bills",
+  "start": 0.83,
+  "end": 0.99
+ },
+ {
+  "word": "by",
+  "start": 0.99,
+  "end": 1.23
+ },
+ {
+  "word": "$500",
+  "start": 1.23,
+  "end": 1.73
+ },
+ {
+  "word": "a",
+  "start": 1.73,
+  "end": 2.29
+ },
+ {
+  "word": "year.",
+  "start": 2.29,
+  "end": 2.45
+ },
+ {
+  "word": "Give",
+  "start": 2.83,
+  "end": 3.01
+ },
+ {
+  "word": "it",
+  "start": 3.01,
+  "end": 3.09
+ },
+ {
+  "word": "your",
+  "start": 3.09,
+  "end": 3.19
+ },
+ {
+  "word": "last",
+  "start": 3.19,
+  "end": 3.35
+ },
+ {
+  "word": "three",
+  "start": 3.35,
+  "end": 3.59
+ },
+ {
+  "word": "bills,",
+  "start": 3.59,
+  "end": 3.85
+ },
+ {
+  "word": "internet,",
+  "start": 4.07,
+  "end": 4.19
+ },
+ {
+  "word": "phone,",
+  "start": 4.45,
+  "end": 4.61
+ },
+ {
+  "word": "insurance.",
+  "start": 4.81,
+  "end": 4.99
+ },
+ {
+  "word": "It",
+  "start": 5.36,
+  "end": 5.4
+ },
+ {
+  "word": "digs",
+  "start": 5.4,
+  "end": 5.54
+ },
+ {
+  "word": "up",
+  "start": 5.54,
+  "end": 5.66
+ },
+ {
+  "word": "what",
+  "start": 5.66,
+  "end": 5.78
+ },
+ {
+  "word": "each",
+  "start": 5.78,
+  "end": 5.96
+ },
+ {
+  "word": "company",
+  "start": 5.96,
+  "end": 6.3
+ },
+ {
+  "word": "gives",
+  "start": 6.3,
+  "end": 6.58
+ },
+ {
+  "word": "new",
+  "start": 6.58,
+  "end": 6.76
+ },
+ {
+  "word": "customers",
+  "start": 6.76,
+  "end": 7.14
+ },
+ {
+  "word": "for",
+  "start": 7.14,
+  "end": 7.44
+ },
+ {
+  "word": "the",
+  "start": 7.44,
+  "end": 7.54
+ },
+ {
+  "word": "exact",
+  "start": 7.54,
+  "end": 7.66
+ },
+ {
+  "word": "same",
+  "start": 7.66,
+  "end": 8.14
+ },
+ {
+  "word": "thing,",
+  "start": 8.14,
+  "end": 8.36
+ },
+ {
+  "word": "and",
+  "start": 8.64,
+  "end": 8.76
+ },
+ {
+  "word": "puts",
+  "start": 8.76,
+  "end": 8.9
+ },
+ {
+  "word": "the",
+  "start": 8.9,
+  "end": 9.06
+ },
+ {
+  "word": "two",
+  "start": 9.06,
+  "end": 9.18
+ },
+ {
+  "word": "prices",
+  "start": 9.18,
+  "end": 9.42
+ },
+ {
+  "word": "side",
+  "start": 9.42,
+  "end": 9.78
+ },
+ {
+  "word": "-by",
+  "start": 9.78,
+  "end": 9.94
+ },
+ {
+  "word": "-side",
+  "start": 9.94,
+  "end": 10.26
+ },
+ {
+  "word": "like",
+  "start": 10.26,
+  "end": 10.46
+ },
+ {
+  "word": "this.",
+  "start": 10.46,
+  "end": 10.66
+ },
+ {
+  "word": "But",
+  "start": 11.1,
+  "end": 11.18
+ },
+ {
+  "word": "here's",
+  "start": 11.18,
+  "end": 11.36
+ },
+ {
+  "word": "the",
+  "start": 11.36,
+  "end": 11.44
+ },
+ {
+  "word": "part",
+  "start": 11.44,
+  "end": 11.56
+ },
+ {
+  "word": "everyone",
+  "start": 11.56,
+  "end": 11.88
+ },
+ {
+  "word": "misses.",
+  "start": 11.88,
+  "end": 12.2
+ },
+ {
+  "word": "Prices",
+  "start": 12.68,
+  "end": 12.92
+ },
+ {
+  "word": "creep",
+  "start": 12.92,
+  "end": 13.22
+ },
+ {
+  "word": "up",
+  "start": 13.22,
+  "end": 13.42
+ },
+ {
+  "word": "every",
+  "start": 13.42,
+  "end": 13.72
+ },
+ {
+  "word": "year,",
+  "start": 13.72,
+  "end": 13.92
+ },
+ {
+  "word": "so",
+  "start": 14.02,
+  "end": 14.14
+ },
+ {
+  "word": "you",
+  "start": 14.14,
+  "end": 14.26
+ },
+ {
+  "word": "end",
+  "start": 14.26,
+  "end": 14.34
+ },
+ {
+  "word": "up",
+  "start": 14.34,
+  "end": 14.44
+ },
+ {
+  "word": "paying",
+  "start": 14.44,
+  "end": 14.64
+ },
+ {
+  "word": "$89",
+  "start": 14.64,
+  "end": 15.1
+ },
+ {
+  "word": "for",
+  "start": 15.1,
+  "end": 15.58
+ },
+ {
+  "word": "the",
+  "start": 15.58,
+  "end": 15.66
+ },
+ {
+  "word": "same",
+  "start": 15.66,
+  "end": 15.86
+ },
+ {
+  "word": "internet",
+  "start": 15.86,
+  "end": 16.1
+ },
+ {
+  "word": "plan",
+  "start": 16.1,
+  "end": 16.36
+ },
+ {
+  "word": "they",
+  "start": 16.36,
+  "end": 16.58
+ },
+ {
+  "word": "sell",
+  "start": 16.58,
+  "end": 16.72
+ },
+ {
+  "word": "new",
+  "start": 16.72,
+  "end": 16.88
+ },
+ {
+  "word": "customers",
+  "start": 16.88,
+  "end": 17.16
+ },
+ {
+  "word": "for",
+  "start": 17.16,
+  "end": 17.5
+ },
+ {
+  "word": "$49.",
+  "start": 17.5,
+  "end": 17.84
+ },
+ {
+  "word": "Your",
+  "start": 18.18,
+  "end": 18.38
+ },
+ {
+  "word": "insurance",
+  "start": 18.38,
+  "end": 18.62
+ },
+ {
+  "word": "renewal",
+  "start": 18.62,
+  "end": 19.0
+ },
+ {
+  "word": "does",
+  "start": 19.0,
+  "end": 19.22
+ },
+ {
+  "word": "the",
+  "start": 19.22,
+  "end": 19.32
+ },
+ {
+  "word": "same",
+  "start": 19.32,
+  "end": 19.58
+ },
+ {
+  "word": "thing.",
+  "start": 19.58,
+  "end": 19.84
+ },
+ {
+  "word": "So",
+  "start": 20.64,
+  "end": 20.7
+ },
+ {
+  "word": "Claude",
+  "start": 20.7,
+  "end": 20.86
+ },
+ {
+  "word": "ranks",
+  "start": 20.86,
+  "end": 21.08
+ },
+ {
+  "word": "your",
+  "start": 21.08,
+  "end": 21.24
+ },
+ {
+  "word": "bills,",
+  "start": 21.24,
+  "end": 21.42
+ },
+ {
+  "word": "biggest",
+  "start": 21.94,
+  "end": 21.94
+ },
+ {
+  "word": "gap",
+  "start": 21.94,
+  "end": 22.16
+ },
+ {
+  "word": "first,",
+  "start": 22.16,
+  "end": 22.44
+ },
+ {
+  "word": "and",
+  "start": 22.62,
+  "end": 22.66
+ },
+ {
+  "word": "tells",
+  "start": 22.66,
+  "end": 22.82
+ },
+ {
+  "word": "you",
+  "start": 22.82,
+  "end": 22.96
+ },
+ {
+  "word": "which",
+  "start": 22.96,
+  "end": 23.12
+ },
+ {
+  "word": "call",
+  "start": 23.12,
+  "end": 23.38
+ },
+ {
+  "word": "to",
+  "start": 23.38,
+  "end": 23.52
+ },
+ {
+  "word": "make",
+  "start": 23.52,
+  "end": 23.62
+ },
+ {
+  "word": "tonight.",
+  "start": 23.62,
+  "end": 23.78
+ },
+ {
+  "word": "Now",
+  "start": 24.36,
+  "end": 24.62
+ },
+ {
+  "word": "here's",
+  "start": 24.62,
+  "end": 24.84
+ },
+ {
+  "word": "the",
+  "start": 24.84,
+  "end": 24.96
+ },
+ {
+  "word": "trick.",
+  "start": 24.96,
+  "end": 25.12
+ },
+ {
+  "word": "It",
+  "start": 25.25,
+  "end": 25.31
+ },
+ {
+  "word": "writes",
+  "start": 25.31,
+  "end": 25.43
+ },
+ {
+  "word": "the",
+  "start": 25.43,
+  "end": 25.61
+ },
+ {
+  "word": "word",
+  "start": 25.61,
+  "end": 25.81
+ },
+ {
+  "word": "-for",
+  "start": 25.81,
+  "end": 25.99
+ },
+ {
+  "word": "-word",
+  "start": 25.99,
+  "end": 26.19
+ },
+ {
+  "word": "script,",
+  "start": 26.19,
+  "end": 26.45
+ },
+ {
+  "word": "down",
+  "start": 26.65,
+  "end": 26.89
+ },
+ {
+  "word": "to",
+  "start": 26.89,
+  "end": 27.05
+ },
+ {
+  "word": "the",
+  "start": 27.05,
+  "end": 27.15
+ },
+ {
+  "word": "threaten",
+  "start": 27.15,
+  "end": 27.43
+ },
+ {
+  "word": "to",
+  "start": 27.43,
+  "end": 27.59
+ },
+ {
+  "word": "cancel",
+  "start": 27.59,
+  "end": 27.85
+ },
+ {
+  "word": "line",
+  "start": 27.85,
+  "end": 28.03
+ },
+ {
+  "word": "that",
+  "start": 28.03,
+  "end": 28.17
+ },
+ {
+  "word": "gets",
+  "start": 28.17,
+  "end": 28.31
+ },
+ {
+  "word": "the",
+  "start": 28.31,
+  "end": 28.43
+ },
+ {
+  "word": "price",
+  "start": 28.43,
+  "end": 28.59
+ },
+ {
+  "word": "dropped.",
+  "start": 28.59,
+  "end": 28.83
+ },
+ {
+  "word": "You",
+  "start": 28.61,
+  "end": 29.0
+ },
+ {
+  "word": "just",
+  "start": 29.0,
+  "end": 29.14
+ },
+ {
+  "word": "have",
+  "start": 29.14,
+  "end": 29.2
+ },
+ {
+  "word": "to",
+  "start": 29.2,
+  "end": 29.3
+ },
+ {
+  "word": "read",
+  "start": 29.3,
+  "end": 29.44
+ },
+ {
+  "word": "it",
+  "start": 29.44,
+  "end": 29.56
+ },
+ {
+  "word": "out",
+  "start": 29.56,
+  "end": 29.66
+ },
+ {
+  "word": "loud.",
+  "start": 29.66,
+  "end": 29.86
+ },
+ {
+  "word": "And",
+  "start": 30.55,
+  "end": 30.57
+ },
+ {
+  "word": "the",
+  "start": 30.57,
+  "end": 30.65
+ },
+ {
+  "word": "best",
+  "start": 30.65,
+  "end": 30.79
+ },
+ {
+  "word": "part,",
+  "start": 30.79,
+  "end": 31.03
+ },
+ {
+  "word": "it",
+  "start": 31.15,
+  "end": 31.21
+ },
+ {
+  "word": "re-checks",
+  "start": 31.21,
+  "end": 31.51
+ },
+ {
+  "word": "every",
+  "start": 31.51,
+  "end": 31.77
+ },
+ {
+  "word": "bill",
+  "start": 31.77,
+  "end": 32.05
+ },
+ {
+  "word": "every",
+  "start": 32.05,
+  "end": 32.37
+ },
+ {
+  "word": "month",
+  "start": 32.37,
+  "end": 32.65
+ },
+ {
+  "word": "because",
+  "start": 32.65,
+  "end": 33.11
+ },
+ {
+  "word": "these",
+  "start": 33.11,
+  "end": 33.29
+ },
+ {
+  "word": "prices",
+  "start": 33.29,
+  "end": 33.55
+ },
+ {
+  "word": "always",
+  "start": 33.55,
+  "end": 33.99
+ },
+ {
+  "word": "creep",
+  "start": 33.99,
+  "end": 34.21
+ },
+ {
+  "word": "back",
+  "start": 34.21,
+  "end": 34.45
+ },
+ {
+  "word": "up.",
+  "start": 34.45,
+  "end": 34.65
+ },
+ {
+  "word": "Want",
+  "start": 35.04,
+  "end": 35.14
+ },
+ {
+  "word": "four",
+  "start": 35.14,
+  "end": 35.34
+ },
+ {
+  "word": "prompts",
+  "start": 35.34,
+  "end": 35.62
+ },
+ {
+  "word": "and",
+  "start": 35.62,
+  "end": 35.84
+ },
+ {
+  "word": "the",
+  "start": 35.84,
+  "end": 35.92
+ },
+ {
+  "word": "call",
+  "start": 35.92,
+  "end": 36.08
+ },
+ {
+  "word": "scripts",
+  "start": 36.08,
+  "end": 36.34
+ },
+ {
+  "word": "word",
+  "start": 36.34,
+  "end": 36.54
+ },
+ {
+  "word": "-for",
+  "start": 36.54,
+  "end": 36.7
+ },
+ {
+  "word": "-word?",
+  "start": 36.7,
+  "end": 36.92
+ },
+ {
+  "word": "Follow",
+  "start": 37.15,
+  "end": 37.31
+ },
+ {
+  "word": "and",
+  "start": 37.31,
+  "end": 37.45
+ },
+ {
+  "word": "comment",
+  "start": 37.45,
+  "end": 37.69
+ },
+ {
+  "word": "SLASH.",
+  "start": 37.69,
+  "end": 37.89
+ }
+]

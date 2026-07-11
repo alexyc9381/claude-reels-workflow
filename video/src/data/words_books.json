@@ -1,0 +1,782 @@
+[
+{
+"word": "A",
+"start": 0,
+"end": 0.14,
+"line": 0
+},
+{
+"word": "guy",
+"start": 0.08,
+"end": 0.26,
+"line": 0
+},
+{
+"word": "on",
+"start": 0.2,
+"end": 0.44,
+"line": 0
+},
+{
+"word": "Reddit",
+"start": 0.38,
+"end": 0.58,
+"line": 0
+},
+{
+"word": "dropped",
+"start": 0.52,
+"end": 0.92,
+"line": 0
+},
+{
+"word": "his",
+"start": 0.86,
+"end": 1.12,
+"line": 0
+},
+{
+"word": "tax",
+"start": 1.06,
+"end": 1.4,
+"line": 0
+},
+{
+"word": "folder",
+"start": 1.34,
+"end": 1.72,
+"line": 0
+},
+{
+"word": "into",
+"start": 1.66,
+"end": 1.98,
+"line": 0
+},
+{
+"word": "Claude,",
+"start": 1.92,
+"end": 2.2,
+"line": 0
+},
+{
+"word": "typed",
+"start": 2.26,
+"end": 2.58,
+"line": 0
+},
+{
+"word": "two",
+"start": 2.52,
+"end": 2.86,
+"line": 0
+},
+{
+"word": "words,",
+"start": 2.8,
+"end": 3.16,
+"line": 0
+},
+{
+"word": "and",
+"start": 3.24,
+"end": 3.4,
+"line": 0
+},
+{
+"word": "15",
+"start": 3.34,
+"end": 3.68,
+"line": 0
+},
+{
+"word": "minutes",
+"start": 3.62,
+"end": 3.92,
+"line": 0
+},
+{
+"word": "later,",
+"start": 3.86,
+"end": 4.24,
+"line": 0
+},
+{
+"word": "his",
+"start": 4.18,
+"end": 4.4,
+"line": 0
+},
+{
+"word": "whole",
+"start": 4.34,
+"end": 4.6,
+"line": 0
+},
+{
+"word": "return",
+"start": 4.54,
+"end": 4.92,
+"line": 0
+},
+{
+"word": "was",
+"start": 4.86,
+"end": 5.1,
+"line": 0
+},
+{
+"word": "done.",
+"start": 5.04,
+"end": 5.28,
+"line": 0
+},
+{
+"word": "No",
+"start": 5.34,
+"end": 5.52,
+"line": 0
+},
+{
+"word": "accountant,",
+"start": 5.46,
+"end": 5.8,
+"line": 0
+},
+{
+"word": "no",
+"start": 6.0,
+"end": 6.16,
+"line": 0
+},
+{
+"word": "TurboTax.",
+"start": 6.1,
+"end": 6.6,
+"line": 0
+},
+{
+"word": "You",
+"start": 6.62,
+"end": 6.76,
+"line": 1
+},
+{
+"word": "can",
+"start": 6.7,
+"end": 6.88,
+"line": 1
+},
+{
+"word": "do",
+"start": 6.82,
+"end": 6.98,
+"line": 1
+},
+{
+"word": "the",
+"start": 6.92,
+"end": 7.12,
+"line": 1
+},
+{
+"word": "same",
+"start": 7.06,
+"end": 7.32,
+"line": 1
+},
+{
+"word": "thing",
+"start": 7.26,
+"end": 7.5,
+"line": 1
+},
+{
+"word": "with",
+"start": 7.44,
+"end": 7.64,
+"line": 1
+},
+{
+"word": "your",
+"start": 7.58,
+"end": 7.8,
+"line": 1
+},
+{
+"word": "books",
+"start": 7.74,
+"end": 7.98,
+"line": 1
+},
+{
+"word": "any",
+"start": 7.92,
+"end": 8.26,
+"line": 1
+},
+{
+"word": "month",
+"start": 8.2,
+"end": 8.52,
+"line": 1
+},
+{
+"word": "of",
+"start": 8.46,
+"end": 8.66,
+"line": 1
+},
+{
+"word": "the",
+"start": 8.6,
+"end": 8.76,
+"line": 1
+},
+{
+"word": "year.",
+"start": 8.7,
+"end": 8.96,
+"line": 1
+},
+{
+"word": "Right",
+"start": 9.0,
+"end": 9.18,
+"line": 2
+},
+{
+"word": "now,",
+"start": 9.12,
+"end": 9.4,
+"line": 2
+},
+{
+"word": "you're",
+"start": 9.4,
+"end": 9.56,
+"line": 2
+},
+{
+"word": "either",
+"start": 9.5,
+"end": 9.7,
+"line": 2
+},
+{
+"word": "paying",
+"start": 9.64,
+"end": 9.96,
+"line": 2
+},
+{
+"word": "a",
+"start": 9.9,
+"end": 10.12,
+"line": 2
+},
+{
+"word": "bookkeeper",
+"start": 10.06,
+"end": 10.42,
+"line": 2
+},
+{
+"word": "a",
+"start": 10.36,
+"end": 10.56,
+"line": 2
+},
+{
+"word": "few",
+"start": 10.5,
+"end": 10.74,
+"line": 2
+},
+{
+"word": "hundred",
+"start": 10.68,
+"end": 11.04,
+"line": 2
+},
+{
+"word": "a",
+"start": 10.98,
+"end": 11.16,
+"line": 2
+},
+{
+"word": "month",
+"start": 11.1,
+"end": 11.28,
+"line": 2
+},
+{
+"word": "or",
+"start": 11.22,
+"end": 11.48,
+"line": 2
+},
+{
+"word": "dodging",
+"start": 11.42,
+"end": 11.78,
+"line": 2
+},
+{
+"word": "a",
+"start": 11.72,
+"end": 11.98,
+"line": 2
+},
+{
+"word": "shoebox",
+"start": 11.92,
+"end": 12.56,
+"line": 2
+},
+{
+"word": "of",
+"start": 12.5,
+"end": 12.74,
+"line": 2
+},
+{
+"word": "receipts",
+"start": 12.68,
+"end": 12.96,
+"line": 2
+},
+{
+"word": "until",
+"start": 12.9,
+"end": 13.18,
+"line": 2
+},
+{
+"word": "April.",
+"start": 13.12,
+"end": 13.42,
+"line": 2
+},
+{
+"word": "Instead,",
+"start": 13.46,
+"end": 13.82,
+"line": 3
+},
+{
+"word": "drop",
+"start": 13.9,
+"end": 14.14,
+"line": 3
+},
+{
+"word": "your",
+"start": 14.08,
+"end": 14.28,
+"line": 3
+},
+{
+"word": "bank",
+"start": 14.22,
+"end": 14.44,
+"line": 3
+},
+{
+"word": "statements,",
+"start": 14.38,
+"end": 14.8,
+"line": 3
+},
+{
+"word": "receipts,",
+"start": 15.0,
+"end": 15.28,
+"line": 3
+},
+{
+"word": "and",
+"start": 15.38,
+"end": 15.5,
+"line": 3
+},
+{
+"word": "exports",
+"start": 15.44,
+"end": 15.82,
+"line": 3
+},
+{
+"word": "into",
+"start": 15.76,
+"end": 16.06,
+"line": 3
+},
+{
+"word": "one",
+"start": 16.0,
+"end": 16.3,
+"line": 3
+},
+{
+"word": "folder.",
+"start": 16.24,
+"end": 16.48,
+"line": 3
+},
+{
+"word": "Point",
+"start": 16.52,
+"end": 16.7,
+"line": 4
+},
+{
+"word": "Claude",
+"start": 16.64,
+"end": 16.92,
+"line": 4
+},
+{
+"word": "at",
+"start": 16.86,
+"end": 17.08,
+"line": 4
+},
+{
+"word": "it",
+"start": 17.02,
+"end": 17.18,
+"line": 4
+},
+{
+"word": "and",
+"start": 17.12,
+"end": 17.34,
+"line": 4
+},
+{
+"word": "say,",
+"start": 17.28,
+"end": 17.52,
+"line": 4
+},
+{
+"word": "categorize",
+"start": 17.68,
+"end": 18.22,
+"line": 4
+},
+{
+"word": "everything.",
+"start": 18.16,
+"end": 18.64,
+"line": 4
+},
+{
+"word": "It",
+"start": 18.68,
+"end": 18.82,
+"line": 5
+},
+{
+"word": "reconciles",
+"start": 18.76,
+"end": 19.4,
+"line": 5
+},
+{
+"word": "every",
+"start": 19.34,
+"end": 19.66,
+"line": 5
+},
+{
+"word": "transaction,",
+"start": 19.6,
+"end": 20.24,
+"line": 5
+},
+{
+"word": "sorts",
+"start": 20.46,
+"end": 20.66,
+"line": 5
+},
+{
+"word": "them",
+"start": 20.6,
+"end": 20.84,
+"line": 5
+},
+{
+"word": "the",
+"start": 20.78,
+"end": 20.96,
+"line": 5
+},
+{
+"word": "way",
+"start": 20.9,
+"end": 21.08,
+"line": 5
+},
+{
+"word": "an",
+"start": 21.02,
+"end": 21.18,
+"line": 5
+},
+{
+"word": "accountant",
+"start": 21.12,
+"end": 21.48,
+"line": 5
+},
+{
+"word": "would,",
+"start": 21.42,
+"end": 21.74,
+"line": 5
+},
+{
+"word": "and",
+"start": 21.74,
+"end": 21.88,
+"line": 5
+},
+{
+"word": "hands",
+"start": 21.82,
+"end": 22.12,
+"line": 5
+},
+{
+"word": "you",
+"start": 22.06,
+"end": 22.26,
+"line": 5
+},
+{
+"word": "clean",
+"start": 22.2,
+"end": 22.54,
+"line": 5
+},
+{
+"word": "profit",
+"start": 22.48,
+"end": 22.86,
+"line": 5
+},
+{
+"word": "and",
+"start": 22.8,
+"end": 23.0,
+"line": 5
+},
+{
+"word": "loss",
+"start": 22.94,
+"end": 23.16,
+"line": 5
+},
+{
+"word": "you",
+"start": 23.1,
+"end": 23.28,
+"line": 5
+},
+{
+"word": "can",
+"start": 23.22,
+"end": 23.38,
+"line": 5
+},
+{
+"word": "actually",
+"start": 23.32,
+"end": 23.7,
+"line": 5
+},
+{
+"word": "file.",
+"start": 23.64,
+"end": 24.0,
+"line": 5
+},
+{
+"word": "That's",
+"start": 24.06,
+"end": 24.24,
+"line": 6
+},
+{
+"word": "a",
+"start": 24.18,
+"end": 24.34,
+"line": 6
+},
+{
+"word": "few",
+"start": 24.28,
+"end": 24.5,
+"line": 6
+},
+{
+"word": "hundred",
+"start": 24.44,
+"end": 24.82,
+"line": 6
+},
+{
+"word": "dollar",
+"start": 24.76,
+"end": 25.04,
+"line": 6
+},
+{
+"word": "job",
+"start": 24.98,
+"end": 25.32,
+"line": 6
+},
+{
+"word": "done",
+"start": 25.26,
+"end": 25.52,
+"line": 6
+},
+{
+"word": "for",
+"start": 25.46,
+"end": 25.68,
+"line": 6
+},
+{
+"word": "almost",
+"start": 25.62,
+"end": 25.92,
+"line": 6
+},
+{
+"word": "nothing,",
+"start": 25.86,
+"end": 26.24,
+"line": 6
+},
+{
+"word": "in",
+"start": 26.28,
+"end": 26.42,
+"line": 6
+},
+{
+"word": "the",
+"start": 26.36,
+"end": 26.52,
+"line": 6
+},
+{
+"word": "time",
+"start": 26.46,
+"end": 26.7,
+"line": 6
+},
+{
+"word": "it",
+"start": 26.64,
+"end": 26.84,
+"line": 6
+},
+{
+"word": "takes",
+"start": 26.78,
+"end": 27.0,
+"line": 6
+},
+{
+"word": "to",
+"start": 26.94,
+"end": 27.2,
+"line": 6
+},
+{
+"word": "make",
+"start": 27.14,
+"end": 27.32,
+"line": 6
+},
+{
+"word": "coffee.",
+"start": 27.26,
+"end": 27.62,
+"line": 6
+},
+{
+"word": "Comment",
+"start": 27.56,
+"end": 27.94,
+"line": 7
+},
+{
+"word": "books,",
+"start": 27.88,
+"end": 28.24,
+"line": 7
+},
+{
+"word": "and",
+"start": 28.34,
+"end": 28.4,
+"line": 7
+},
+{
+"word": "I'll",
+"start": 28.34,
+"end": 28.52,
+"line": 7
+},
+{
+"word": "send",
+"start": 28.46,
+"end": 28.66,
+"line": 7
+},
+{
+"word": "you",
+"start": 28.6,
+"end": 28.8,
+"line": 7
+},
+{
+"word": "the",
+"start": 28.74,
+"end": 28.92,
+"line": 7
+},
+{
+"word": "exact",
+"start": 28.86,
+"end": 29.2,
+"line": 7
+},
+{
+"word": "prompt",
+"start": 29.14,
+"end": 29.44,
+"line": 7
+},
+{
+"word": "and",
+"start": 29.38,
+"end": 29.64,
+"line": 7
+},
+{
+"word": "setup.",
+"start": 29.58,
+"end": 29.8,
+"line": 7
+}
+]
