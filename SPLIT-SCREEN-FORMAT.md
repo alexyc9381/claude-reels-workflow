@@ -128,7 +128,7 @@ The whole interrupt lands inside the first second, the claim reads the entire ti
 1. **Panel-local coords are 0..420 tall** (half the single-panel reels). Re-check every `top:` — clipping is the #1 bug.
 2. **Two screens must COMPLEMENT.** Sample a frame per beat: the top and bottom must never show contradictory numbers, and neither should be empty while the other is busy. Keep the number spine identical across both ($89.99 / $49.99 / $40 / $73/mo / $876/yr).
 3. **Edge safety:** fly-ins/bursts must stay in-bounds or be intentional off-panel motion (a cameo flyby). SLASH's "hidden gap" bills originally clipped the left edge — fan them across center instead.
-4. **Bottom UI = professional + smooth.** Real claude.ai chrome (window dots, model selector, compose bar), eased entrances (translateY, not scale-pops), a real blinking caret. Alex flags jank here hard.
+4. **Bottom UI = professional + smooth + GLANCEABLE, minimal text.** Real claude.ai chrome (window dots, model selector, compose bar), eased entrances (translateY, not scale-pops), a real blinking caret. **Do NOT crowd it or make the viewer READ** - one big focal element per scene, big numbers, tiny labels, no sub-text rows, no document-in-a-document. Any graph is a SMOOTH curve (Catmull-Rom path drawn via pathLength), never a choppy point-by-point polyline. Alex flags crowding + jank here hard.
 5. **VO / timing** is identical to every reel: splice out `cut cut` flubs, ~1.04–1.10× speed-up, cut pauses >0.5s, measured-onset captions, derive `L[]`, set `durationInFrames`. A re-record can flub the **very first words** too — word-transcribe + energy-scan the opening.
 
 ---

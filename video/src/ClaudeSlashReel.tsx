@@ -553,6 +553,10 @@ const BillDoc: React.FC<{ lf: number; circleAt?: number; sticker?: boolean; grap
   const gp = graph ? over(lf, fr(0.5), fr(2.2), Easing.inOut(Easing.cubic)) : 0;
   const pts = [[0, 49], [1, 59], [2, 69], [3, 79], [4, 89]];
   const gx = (i: number) => 30 + i * 118, gy = (v: number) => 118 - (v - 45) * 1.8;
+  const GP = pts.map(([i, v]) => [gx(i), gy(v)]);
+  const smoothD = (() => { let d = `M ${GP[0][0]} ${GP[0][1]}`; for (let i = 0; i < GP.length - 1; i++) { const p0 = GP[i - 1] || GP[i], p1 = GP[i], p2 = GP[i + 1], p3 = GP[i + 2] || p2; d += ` C ${p1[0] + (p2[0] - p0[0]) / 6} ${p1[1] + (p2[1] - p0[1]) / 6} ${p2[0] - (p3[0] - p1[0]) / 6} ${p2[1] - (p3[1] - p1[1]) / 6} ${p2[0]} ${p2[1]}`; } return d; })();
+  const seg = Math.min(GP.length - 1.0001, Math.max(0, gp) * (GP.length - 1)), ek = Math.floor(seg), ef = seg - ek;
+  const endDot = [GP[ek][0] + (GP[ek + 1][0] - GP[ek][0]) * ef, GP[ek][1] + (GP[ek + 1][1] - GP[ek][1]) * ef];
   return (
     <div style={{ position: "relative", width: w, borderRadius: 18, overflow: "hidden", background: "#FDFBF6", border: "2px solid #D8D0BE", boxShadow: NAVYSH }}>
       <div style={{ height: 56, background: "#121212", display: "flex", alignItems: "center", padding: "0 22px", gap: 10 }}>
@@ -583,9 +587,8 @@ const BillDoc: React.FC<{ lf: number; circleAt?: number; sticker?: boolean; grap
         {graph && (
           <div style={{ marginTop: 10, borderRadius: 12, background: "#F4EEDF", border: "1.5px solid #E2D9C2", padding: "8px 10px 4px", position: "relative" }}>
             <svg width={w - 66} height="140" viewBox={`0 0 ${w - 66} 140`}>
-              <polyline points={pts.slice(0, Math.max(2, Math.ceil(gp * 5))).map(([i, v]) => `${gx(i)},${gy(v)}`).join(" ")} fill="none" stroke={RED} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 2px 6px rgba(196,74,58,0.4))" }} />
-              {pts.map(([i, v], k) => gp > k / 5 ? <circle key={k} cx={gx(i)} cy={gy(v)} r="7" fill={k === 4 ? RED : "#D9906B"} /> : null)}
-              {graph && [1, 2, 3, 4].map((k) => { const pk = Math.min(1, Math.max(0, (gp - k / 5) * 6)); return pk > 0 && pk < 1 ? <text key={`p${k}`} x={gx(k)} y={gy(pts[k][1]) - 16 - pk * 14} textAnchor="middle" fontFamily={mono} fontWeight="800" fontSize="15" fill="#B0552F" opacity={1 - pk}>+$10</text> : null; })}
+              <path d={smoothD} fill="none" stroke={RED} strokeWidth="7" strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - gp} style={{ filter: "drop-shadow(0 2px 6px rgba(196,74,58,0.4))" }} />
+              {gp > 0.03 && <circle cx={endDot[0]} cy={endDot[1]} r={gp >= 0.99 ? 8 : 7} fill={RED} style={{ filter: "drop-shadow(0 0 8px rgba(196,74,58,0.85))" }} />}
               {pts.map(([i], k) => <text key={`t${k}`} x={gx(i)} y="136" textAnchor="middle" fontFamily={mono} fontSize="14" fill="#8A8272">{2022 + k}</text>)}
               {gp > 0.05 && <text x={gx(0)} y={gy(49) - 12} textAnchor="middle" fontFamily={mono} fontWeight="800" fontSize="17" fill={GREEN}>$49</text>}
               {gp > 0.92 && <text x={gx(4)} y={gy(89) - 12} textAnchor="middle" fontFamily={mono} fontWeight="900" fontSize="19" fill={RED}>$89</text>}
@@ -975,10 +978,6 @@ const B0: React.FC<{ lf: number }> = ({ lf }) => (
     <div style={{ position: "absolute", left: 506 - 340, top: 44 }}>
       <BillDoc lf={lf} sticker w={680} />
     </div>
-    {/* micro-beat at 2.0s: paid-36-months amber tag */}
-    {(() => { const paid = over(lf, fr(2.0), fr(0.35), Easing.out(Easing.cubic)); return (
-      <div style={{ position: "absolute", left: 60, top: 328, transform: `rotate(-4deg) scale(${0.8 + paid * 0.2})`, opacity: paid, padding: "6px 14px", borderRadius: 10, background: grad("#3A2E20", "#241B10"), border: `2.5px solid ${AMBER}`, boxShadow: "0 10px 24px -8px rgba(0,0,0,0.6)", fontFamily: mono, fontWeight: 700, fontSize: 19, color: "#F0CB63", zIndex: 5 }}>paid 36 months straight</div>); })()}
-    <div style={{ position: "absolute", right: 30, bottom: 22, opacity: over(lf, fr(1.2), fr(0.5)), fontFamily: mono, fontSize: 17, color: "rgba(235,215,190,0.55)" }}>your real statement →</div>
   </>
 );
 
@@ -991,24 +990,16 @@ const B1: React.FC<{ lf: number }> = ({ lf }) => {
     <>
       <MoveChip lf={lf} n={1} at={2.7} label="find the gap" />
       <ChatWindow lf={lf} prompt="Compare every charge on these 3 bills to the price new customers get, then " gatedFrom={48} h={388} w={680} x={166}>
-        <div style={{ display: "flex", gap: 9, marginTop: 2, position: "relative" }}>
-          {files.map(([n, t], i) => { const p = over(lf, fr(t), fr(0.4), Easing.out(Easing.back(1.8))); return (
-            <div key={i} style={{ transform: `scale(${p})`, display: "inline-flex", alignItems: "center", gap: 7, padding: "6px 12px", borderRadius: 10, background: "linear-gradient(158deg, #352F27, #241F19)", border: "1.5px solid #4A4238", boxShadow: "inset 0 1.5px 0 rgba(255,241,220,0.10), 0 6px 14px -6px rgba(0,0,0,0.5)" }}>
-              <span style={{ fontSize: 16 }}>📄</span><span style={{ fontFamily: mono, fontSize: 16, color: "#D8CDBA" }}>{n}</span><span style={{ color: "#8FE0B0", fontSize: 15, display: "inline-block", transform: `scale(${over(lf, fr(t + 0.55), fr(0.3), Easing.out(Easing.back(2)))})`, textShadow: "0 0 8px rgba(143,224,176,0.8)" }}>✓</span>
-            </div>); })}
-          <div style={{ position: "absolute", top: -4, bottom: -4, width: 60, left: -80 + over(lf, fr(1.7), fr(1.5), Easing.inOut(Easing.cubic)) * 740, background: "linear-gradient(100deg, transparent, rgba(240,200,140,0.16), transparent)", pointerEvents: "none" }} />
-        </div>
         {cmp > 0.02 && (
           <div style={{ marginTop: 6, opacity: cmp, transform: `translateY(${(1 - cmp) * 16}px)` }}>
             <div style={{ display: "flex", gap: 12 }}>
               {[["YOUR BILL", "$89.99", "#D96A55", "Blast! Internet · 400 Mbps"], ["NEW CUSTOMERS", "$49.99", "#57B884", "same plan · xfinity.com/deals"]].map(([h, pr, c, sub], i) => (
-                <div key={i} style={{ flex: 1, position: "relative", overflow: i === 1 ? "hidden" : undefined, borderRadius: 12, background: "linear-gradient(158deg, #2B251E, #1A1611)", border: `2.5px solid ${c}`, padding: "6px 12px", boxShadow: flash > 0.05 && i === 1 ? `inset 0 1.5px 0 rgba(255,241,220,0.08), 0 10px 22px -10px rgba(0,0,0,0.6), 0 0 ${22 * flash}px rgba(87,184,132,0.8)` : "inset 0 1.5px 0 rgba(255,241,220,0.08), 0 10px 22px -10px rgba(0,0,0,0.6)", transform: `scale(${1 + (i === 1 ? flash * 0.05 : 0)})` }}>
+                <div key={i} style={{ flex: 1, position: "relative", overflow: i === 1 ? "hidden" : undefined, borderRadius: 12, background: "linear-gradient(158deg, #2B251E, #1A1611)", border: `2.5px solid ${c}`, padding: "12px 16px", boxShadow: flash > 0.05 && i === 1 ? `inset 0 1.5px 0 rgba(255,241,220,0.08), 0 10px 22px -10px rgba(0,0,0,0.6), 0 0 ${22 * flash}px rgba(87,184,132,0.8)` : "inset 0 1.5px 0 rgba(255,241,220,0.08), 0 10px 22px -10px rgba(0,0,0,0.6)", transform: `scale(${1 + (i === 1 ? flash * 0.05 : 0)})` }}>
                   <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 15, color: c as string, marginBottom: 3 }}>{h}</div>
-                  <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 32, color: "#F3EADB", lineHeight: 1, position: "relative" }}>
+                  <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 44, color: "#F3EADB", lineHeight: 1, position: "relative" }}>
                     {pr}
                     {i === 0 && <div style={{ position: "absolute", left: 0, top: "52%", height: 4, borderRadius: 2, width: `${flash * 100}%`, background: "#D96A55", transform: "rotate(-4deg)", boxShadow: "0 0 8px rgba(217,106,85,0.7)" }} />}
                   </div>
-                  <div style={{ fontFamily: mono, fontSize: 13.5, color: "rgba(220,205,180,0.6)", marginTop: 2 }}>{sub}</div>
                   {i === 1 && flash > 0.02 && <div style={{ position: "absolute", top: -6, bottom: -6, width: 44, left: -60 + flash * 380, background: "linear-gradient(105deg, transparent, rgba(255,255,255,0.22), transparent)" }} />}
                 </div>
               ))}
@@ -1031,38 +1022,20 @@ const B2: React.FC<{ lf: number }> = ({ lf }) => {
     <>
       {/* L0 bloom + L1 parallax $ glyphs filling the right void */}
       <div style={{ position: "absolute", left: 90, top: 70, width: 560, height: 340, borderRadius: "50%", background: "radial-gradient(closest-side, rgba(214,150,90,0.13), transparent 70%)", zIndex: 0 }} />
-      <div style={{ position: "absolute", left: 756, top: 70 - lf * 0.14, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 150, color: "rgba(240,203,99,0.09)", filter: "blur(5px)", opacity: (1 - ins) * 0.9, pointerEvents: "none" }}>$</div>
-      <div style={{ position: "absolute", left: 872, top: 260 - lf * 0.22, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 110, color: "rgba(240,203,99,0.09)", filter: "blur(5px)", opacity: (1 - ins) * 0.9, pointerEvents: "none" }}>$</div>
       <div style={{ position: "absolute", left: 66, top: 20, transform: `translateX(${ins * -36}px)` }}>
         <BillDoc lf={lf} graph circleAt={3.4} w={600} />
       </div>
-      {/* insurance renewal letter */}
-      {ins > 0.02 && (
-        <div style={{ position: "absolute", right: 44, top: 66, width: 300, opacity: ins, transform: `translateX(${(1 - ins) * 90}px) rotate(3deg)` }}>
-          <div style={{ borderRadius: 14, background: "linear-gradient(158deg, #FFFDF8, #F0E9D6)", border: "2px solid #D8D0BE", boxShadow: `${NAVYSH}, inset 0 1.5px 0 rgba(255,255,255,0.85), inset 0 0 0 1px rgba(255,255,255,0.35)`, overflow: "hidden", position: "relative" }}>
-            <div style={{ height: 44, background: "#1D6B4F", display: "flex", alignItems: "center", padding: "0 16px" }}>
-              <span style={{ fontSize: 20, marginRight: 7 }}>🦎</span><span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 19, color: "#fff", letterSpacing: 0.5 }}>GEKKO <span style={{ fontWeight: 600, opacity: 0.85 }}>insurance</span></span>
+      {/* insurance = one simple chip (not a whole document) */}
+      {ins > 0.02 && (() => { const tk = over(lf, fr(6.5), fr(0.7)); return (
+        <div style={{ position: "absolute", right: 66, top: 150, transform: `translateX(${(1 - ins) * 80}px) rotate(-3deg) scale(${0.86 + ins * 0.14})`, opacity: ins, zIndex: 3 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 12, padding: "16px 22px", borderRadius: 18, background: grad("#2E4636", "#1B2E22"), border: `3px solid ${RED}`, boxShadow: `0 16px 32px -12px rgba(0,0,0,0.6), 0 0 ${10 + 6 * Math.sin(lf / 7)}px rgba(196,74,58,0.4)` }}>
+            <span style={{ fontSize: 40 }}>🦎</span>
+            <div>
+              <div style={{ fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 19, color: "#EFE7DA" }}>insurance too</div>
+              <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 34, color: "#F0B4A6" }}>{`+$${Math.round(tk * 25)}/mo`}</div>
             </div>
-            <div style={{ padding: "12px 16px" }}>
-              <div style={{ fontFamily: mono, fontSize: 14, color: "#8A8272" }}>RENEWAL NOTICE · sample</div>
-              <div style={{ display: "flex", justifyContent: "space-between", marginTop: 8 }}>
-                <span style={{ fontFamily: inter.fontFamily, fontWeight: 700, fontSize: 18, color: "#5E5640" }}>last year</span>
-                <span style={{ fontFamily: mono, fontWeight: 700, fontSize: 19, color: "#5E5640" }}>$118/mo</span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6 }}>
-                <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 18, color: "#20180E" }}>this year</span>
-                {(() => { const tk = over(lf, fr(6.5), fr(0.9)); return (
-                  <span style={{ fontFamily: mono, fontWeight: 900, fontSize: 21, color: RED, display: "inline-block", transform: `scale(${1 + (tk > 0 && tk < 1 ? 0.22 * Math.abs(Math.sin(tk * Math.PI * 5)) : 0)})`, transformOrigin: "right center" }}>{`$${Math.round(118 + tk * 25)}/mo`}</span>); })()}
-              </div>
-              {(() => { const sp = over(lf, fr(6.8), fr(0.35), Easing.out(Easing.back(2.4))); return (
-                <div style={{ marginTop: 10, display: "inline-block", transform: `rotate(-4deg) scale(${sp})`, padding: "5px 13px", borderRadius: 9, background: "rgba(196,74,58,0.14)", border: `2.5px solid ${RED}`, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 21, color: RED, boxShadow: `0 0 ${8 + 6 * Math.sin(lf / 7)}px rgba(196,74,58,0.4)` }}>+$25/mo · same coverage</div>); })()}
-            </div>
-            {/* glint sweep on reveal */}
-            {(() => { const g = over(lf, fr(7.5), fr(0.6)); return g > 0 && g < 1 ? (
-              <div style={{ position: "absolute", top: -20, bottom: -20, width: 70, left: -80 + g * 440, background: "linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent)", filter: "blur(6px)", pointerEvents: "none" }} />) : null; })()}
           </div>
-        </div>
-      )}
+        </div>); })()}
     </>
   );
 };
@@ -1071,9 +1044,9 @@ const B2: React.FC<{ lf: number }> = ({ lf }) => {
 const B3: React.FC<{ lf: number }> = ({ lf }) => {
   const sortP = over(lf, fr(0.7), fr(0.8), Easing.inOut(Easing.cubic));
   const rows = [
-    ["🌐", "xfinity internet", "$40/mo over", 0, "#D96A55"],
-    ["🦎", "GEKKO insurance", "$25/mo over", 1, "#CF9544"],
-    ["📱", "Vorizon phone", "$8/mo over", 2, "#8FA8C8"],
+    ["🌐", "xfinity", "$40/mo", 0, "#D96A55"],
+    ["🦎", "GEKKO", "$25/mo", 1, "#CF9544"],
+    ["📱", "Vorizon", "$8/mo", 2, "#8FA8C8"],
   ] as const;
   const startOrder = [1, 2, 0];  // pre-sort order → sorted
   const flag = over(lf, fr(2.55), fr(0.4), Easing.out(Easing.back(2)));
@@ -1084,8 +1057,6 @@ const B3: React.FC<{ lf: number }> = ({ lf }) => {
       <MoveChip lf={lf} n={2} at={0.25} label="rank the damage" />
       {/* L0 bloom + L1 parallax $ glyphs */}
       <div style={{ position: "absolute", left: 506 - 410, top: 20, width: 820, height: 380, background: "radial-gradient(ellipse at center, rgba(207,149,68,0.10), transparent 70%)", zIndex: 0 }} />
-      <span style={{ position: "absolute", left: 60 - lf * 0.18, top: 52, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 96, color: "#EFE7DA", opacity: 0.07, filter: "blur(6px)", zIndex: 0 }}>$</span>
-      <span style={{ position: "absolute", left: 920 + lf * 0.14, top: 292, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 96, color: "#EFE7DA", opacity: 0.07, filter: "blur(6px)", zIndex: 0 }}>$</span>
       <div style={{ position: "absolute", left: 506 - 390, top: 30, width: 780, zIndex: 2 }}>
         <div style={{ borderRadius: 18, background: grad("#26231F", "#1B1815"), border: "2px solid #3A342C", boxShadow: NAVYSH, overflow: "hidden" }}>
           <div style={{ height: 52, background: "#211E1A", borderBottom: "1px solid #38322A", display: "flex", alignItems: "center", gap: 10, padding: "0 18px" }}>
@@ -1128,10 +1099,8 @@ const B3: React.FC<{ lf: number }> = ({ lf }) => {
 // B4 — Claude drafts the call script (gated blur on the money line)
 const B4: React.FC<{ lf: number }> = ({ lf }) => {
   const lines = [
-    ["Hi, I'm calling about my internet bill.", 0.42, false],
-    ["I see new customers pay $49.99 for my exact plan.", 1.6, false],
-    ["I'd like to cancel my service today, unless…", 2.7, true],
-    ["████ ██ █████ ███████ ████ █████ ██████", 3.6, true],
+    ["New customers pay $49.99 for my plan.", 0.5, false],
+    ["I'd like to cancel today, unless…", 1.5, true],
   ] as const;
   return (
     <>
@@ -1145,19 +1114,19 @@ const B4: React.FC<{ lf: number }> = ({ lf }) => {
             <span style={{ fontFamily: inter.fontFamily, fontWeight: 700, fontSize: 14, color: "#8C8578", padding: "4px 11px", borderRadius: 999, background: "#2E2A24", border: "1px solid #3E382F" }}>word-for-word</span>
           </div>
           <div style={{ padding: "14px 20px 12px" }}>
-            {lf < fr(0.42) && <div style={{ display: "flex", gap: 6, padding: "4px 2px 10px" }}>{[0, 1, 2].map((k) => <span key={k} style={{ width: 10, height: 10, borderRadius: "50%", background: "#B8AE9C", opacity: 0.35 + 0.6 * Math.abs(Math.sin(lf / 6 + k)) }} />)}</div>}
-            {lines.map(([txt, at, gated], i) => { const p = over(lf, fr(at as number), fr(0.45)); const hl = i === 2; return (
+            {lf < fr(0.5) && <div style={{ display: "flex", gap: 6, padding: "4px 2px 12px" }}>{[0, 1, 2].map((k) => <span key={k} style={{ width: 11, height: 11, borderRadius: "50%", background: "#B8AE9C", opacity: 0.35 + 0.6 * Math.abs(Math.sin(lf / 6 + k)) }} />)}</div>}
+            {lines.map(([txt, at, gated], i) => { const p = over(lf, fr(at as number), fr(0.45)); const hl = i === 1; return (
               <div key={i} style={{ marginBottom: 9, opacity: p, transform: `translateY(${(1 - p) * 10}px)`, position: "relative", padding: hl ? "8px 12px" : "2px 0", borderRadius: 10, background: hl ? "rgba(233,180,76,0.14)" : "transparent", border: hl ? "2px solid rgba(233,180,76,0.65)" : "none" }}>
-                <span style={{ fontFamily: mono, fontSize: 20, lineHeight: 1.45, color: gated && !hl ? "#B8AE9C" : "#E9E0D2", filter: i === 3 ? "blur(6px)" : hl ? "blur(0px)" : "none" }}>
+                <span style={{ fontFamily: mono, fontSize: hl ? 24 : 21, lineHeight: 1.5, color: gated && !hl ? "#B8AE9C" : "#E9E0D2" }}>
                   {hl ? (<>
-                    <span>I'd like to cancel my service today, unless </span>
-                    <span style={{ filter: "blur(5px)", color: "#E9B44C" }}>you can march the new</span>
+                    <span>I'd like to cancel today, unless </span>
+                    <span style={{ filter: "blur(5px)", color: "#E9B44C" }}>you match the new price</span>
                   </>) : txt}
                 </span>
                 {hl && p > 0.7 && <div style={{ position: "absolute", right: -12, top: -16, transform: "rotate(4deg)", padding: "3px 10px", borderRadius: 999, background: grad("#E9B44C", "#C98A20"), fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 14, color: "#3A2705" }}>the magic line 🔒</div>}
               </div>); })}
-            {(() => { const p = over(lf, fr(4.3), fr(0.4)); return (
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 999, background: "rgba(217,119,87,0.16)", opacity: p, transform: `scale(${0.8 + p * 0.2})` }}>
+            {(() => { const p = over(lf, fr(2.6), fr(0.4)); return (
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "8px 16px", borderRadius: 999, background: "rgba(217,119,87,0.16)", marginTop: 6, opacity: p, transform: `scale(${0.8 + p * 0.2})` }}>
                 <span style={{ fontSize: 15 }}>🔒</span>
                 <span style={{ fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 16, color: "#D97757" }}>full scripts in the guide · comment SLASH</span>
               </div>); })()}
@@ -1190,9 +1159,8 @@ const B5: React.FC<{ lf: number }> = ({ lf }) => {
             <div style={{ position: "absolute", left: 16, right: 16, top: 12 + Math.min(1, scanP) * 156, height: 40, borderRadius: 10, background: "linear-gradient(180deg, rgba(143,224,176,0.14), transparent)", borderTop: "2px solid rgba(143,224,176,0.7)", opacity: scanP < 1 ? 1 : 0.25 }} />
             {rows.map(([n, pr, st, tone], i) => { const creep = i === 2; return (
               <div key={i} style={{ height: 56, borderRadius: 12, background: creep && catchP > 0.3 ? "rgba(196,74,58,0.13)" : "#221E19", border: `2px solid ${creep && catchP > 0.3 ? RED : "#3A342C"}`, display: "flex", alignItems: "center", gap: 12, padding: "0 16px", marginBottom: 8 }}>
-                <span style={{ fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 20, color: "#EFE7DA" }}>{n}</span>
+                <span style={{ fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 23, color: "#EFE7DA" }}>{n}</span>
                 <div style={{ flex: 1 }} />
-                <span style={{ fontFamily: mono, fontWeight: 700, fontSize: 19, color: creep ? (fixP > 0.5 ? "#8FE0B0" : "#F0B4A6") : "#B8AE9C" }}>{creep && fixP > 0.5 ? "$26 restored" : pr}</span>
                 <span style={{ padding: "3px 11px", borderRadius: 999, background: creep ? (fixP > 0.5 ? "rgba(76,175,125,0.18)" : "rgba(196,74,58,0.18)") : "rgba(76,175,125,0.12)", border: `2px solid ${creep ? (fixP > 0.5 ? GREEN : RED) : "rgba(76,175,125,0.5)"}`, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 15, color: creep ? (fixP > 0.5 ? "#8FE0B0" : "#F0B4A6") : "#8FE0B0", transform: creep ? `scale(${1 + Math.max(catchP - 0.5, 0) * (1 - fixP) * 0.25})` : "none" }}>{creep ? (fixP > 0.5 ? "re-filed ✓" : "creep!") : st}</span>
               </div>); })}
             <div style={{ display: "flex", justifyContent: "center", marginTop: 2, opacity: over(lf, fr(3.9), fr(0.4)) }}>

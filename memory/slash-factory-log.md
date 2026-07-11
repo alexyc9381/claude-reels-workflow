@@ -133,4 +133,17 @@ Alex: "not just internet bill, do diff bills in general, or like insurance... an
 - ⛔ LESSON → [[alex-vo-recordings]]: a re-record can have a "cut cut" flub at the VERY FIRST words too (not just mid-VO); transcribe with word timestamps + fine energy scan and check the opening for a doubled restart. The coarse 16kHz pass MISSED the leading flub; the 48kHz word-level pass caught it.
 - v9 rendering → caption-sync frame-verify → deliver.
 
+## v10 — NINJA + PRO CHATWINDOW + MEME SFX + DOCS (Alex, 2026-07-10)
+- **Ninja mascot** in the hook: red headband (knot + flapping tails) + dark eye-mask hint over the katana-wielding shades-less mascot. Reads clearly as a ninja slashing the villain bill.
+- **Bottom UI more professional (ChatWindow rebuilt = real claude.ai):** window-dot controls + centered Claude wordmark + `Fable 5 ▾` model selector + right-aligned user bubble w/ smooth blinking caret + gated-prompt blur + a **"Reply to Claude…" compose bar** w/ send button. Smoother eased entrances (translateY, no scale-pops).
+- **Meme SFX:** synthesized `public/sfx/vine_boom.wav` (deep BWAAM) + `boing.wav`; placed vine-boom on the slash impact / GEKKO villain land / podium crown / CTA slam, boings on the lunge + creep growth + sentry catch. Still 0 click events.
+- **DELIVERED v10 2026-07-10:** `41_Claude-fable5-slash.mp4` (35.99s, 11.2MB, 0 clicks) → Final + Drive.
+- **SPLIT-SCREEN FORMAT DOCUMENTED to the GitHub repo** `~/Downloads/claude-reels-workflow`: new `SPLIT-SCREEN-FORMAT.md` (full two-screen spec) + synced ClaudeSlashReel.tsx/Root.tsx/words_slash.json + README pointer, committed (71fe8f0). ⚠️ Repo has NO git remote yet — commit is LOCAL; Alex must `git remote add` + push to GitHub.
+
+## v11 — DECLUTTER BOTTOM + SMOOTH GRAPH + common-words rule (Alex, 2026-07-10)
+- **Bottom (PROOF) screens were too crowded / text-heavy.** Simplified all: B0 (removed the "paid 36 months" tag + "your real statement" note); B1 (dropped the 3 file chips + the card sub-labels, bumped the $89.99/$49.99 cards to 44px = the hero); B2 (replaced the full GEKKO renewal DOCUMENT with a single "🦎 insurance too +$25/mo" chip + removed parallax $ glyphs); B3 (dropped "/mo over"→"/mo", removed $ glyphs); B4 (call script 4 lines→2, one visible line + the blurred magic line); B5 (dropped the price-number column, name + status badge only). Standing rule: **bottom screen = glanceable, big, minimal text — nothing the viewer has to READ.**
+- **Smooth graph:** the "prices creep up" chart was a choppy point-by-point polyline → rebuilt as a **Catmull-Rom smooth path** drawn continuously via `pathLength=1` + `strokeDashoffset`, with a dot riding the end. Removed the +$10 popups.
+- **Common-words scripting rule** added to [[ig-reels-scriptwriting-principles]]: write with the highest-frequency, plainest everyday words + common speech patterns (buy not purchase, use not utilize, help not assist, "the same thing" not "the exact same thing"); read every line aloud — if you wouldn't casually say it to a friend, rewrite plainer. Applies at Stage-3 draft + on-screen text. (SLASH VO is Alex's own recording so already natural; rule is for future scripts + UI text.)
+- v11 rendering → deliver.
+
 ## POST — [48-72h after publish]
