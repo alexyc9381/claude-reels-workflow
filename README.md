@@ -11,6 +11,8 @@ The version-controlled half of the Greg-Isenberg-style AI/Claude IG-reel system:
 
 Read `CLAUDE-REELS-PLAYBOOK.md` — it is the complete production manual.
 
+For **tutorial/guide reels** built in the **two-screen stacked** layout (top = abstract sprite story, bottom = real claude.ai UI + receipts), read `SPLIT-SCREEN-FORMAT.md` — the format is used in `video/src/ClaudeSlashReel.tsx` (reel 41 SLASH).
+
 ## What's here
 - `video/` — the Remotion project. `src/` has 62 reel `.tsx` files + `Root.tsx` (registers
   every reel) + `data/` (46 word-timed caption JSONs). `public/` here holds only the small

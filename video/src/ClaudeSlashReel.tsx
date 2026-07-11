@@ -16,9 +16,9 @@ const NAVYSH = "0 34px 66px -22px rgba(18,28,58,0.55), 0 10px 24px rgba(18,28,58
 
 
 // beat onsets (sec, measured from slash_vo.wav): hook / feed+compare / creep / rank / script / monthly / cta
-const L = [0.0, 2.83, 11.1, 20.64, 24.36, 30.55, 35.04];
+const L = [0.0, 2.71, 10.87, 19.13, 22.81, 28.27, 33.37];
 const Lf = L.map(fr);
-const CUT = 38.0;
+const CUT = 35.9;
 
 
 const over = (f: number, start: number, dur: number, ease = Easing.out(Easing.cubic)) =>
@@ -354,29 +354,38 @@ const ChatWindow: React.FC<{ lf: number; prompt: string; gatedFrom: number; chil
   const shown = prompt.slice(0, typed);
   const sent = lf <= 0 ? 1 : Math.max(0.85, over(lf, 0, fr(0.22), Easing.out(Easing.cubic)));  // reply zone present at open
   return (
-    <div style={{ position: "absolute", left: x, top: 18, transform: `scale(${0.92 + winP * 0.08})`, width: w, height: h, borderRadius: 24, background: grad("#26231F", "#1B1815"), border: "2px solid #3A342C", boxShadow: NAVYSH, overflow: "hidden", opacity: winP, zIndex: 5 }}>
-      <div style={{ height: 62, background: "#211E1A", borderBottom: "1px solid #38322A", display: "flex", alignItems: "center", padding: "0 22px", gap: 12 }}>
-        <ClaudeLogo lf={lf} size={30} />
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 24, color: "#EFE7DA" }}>Claude</span>
-        <div style={{ flex: 1 }} />
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 700, fontSize: 16, color: "#8C8578", padding: "5px 13px", borderRadius: 999, background: "#2E2A24", border: "1px solid #3E382F" }}>Fable 5</span>
-      </div>
-      <div style={{ padding: "20px 22px 8px", display: "flex", justifyContent: "flex-end" }}>
-        <div style={{ maxWidth: 560, padding: "14px 18px", borderRadius: 18, borderTopRightRadius: 5, background: "#38332B" }}>
-          <span style={{ fontFamily: mono, fontSize: 19, lineHeight: 1.4, color: "#E9E0D2" }}>
-            {shown.split("").map((ch, i) => i >= gatedFrom ? "" : ch).join("")}
-            {typed > gatedFrom && <span style={{ filter: "blur(5px)", color: "#B8AE9C" }}>{shown.slice(gatedFrom)}</span>}
-            {typed < prompt.length && <span style={{ opacity: lf % 16 < 8 ? 1 : 0.2, color: "#D97757" }}>&#9613;</span>}
-          </span>
-          {typed >= prompt.length && <div style={{ marginTop: 8, display: "inline-flex", alignItems: "center", gap: 7, padding: "4px 12px", borderRadius: 999, background: "rgba(217,119,87,0.16)" }}><span style={{ fontSize: 14 }}>&#128274;</span><span style={{ fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 14, color: "#D97757" }}>full prompt in the guide &middot; comment SLASH</span></div>}
+    <div style={{ position: "absolute", left: x, top: 14, transform: `translateY(${(1 - winP) * 12}px)`, width: w, height: h, borderRadius: 20, background: "#211F1C", border: "1.5px solid #35322C", boxShadow: NAVYSH, overflow: "hidden", opacity: winP, zIndex: 5 }}>
+      {/* claude.ai top bar: window dots + centered wordmark + model selector */}
+      <div style={{ height: 50, background: "#1A1917", borderBottom: "1px solid #302D28", display: "flex", alignItems: "center", padding: "0 16px", gap: 10 }}>
+        <div style={{ display: "flex", gap: 7 }}>{["#E86C5A", "#E0A94A", "#4CAF7D"].map((c, i) => <div key={i} style={{ width: 11, height: 11, borderRadius: "50%", background: c, opacity: 0.9 }} />)}</div>
+        <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", gap: 8 }}>
+          <ClaudeLogo lf={lf} size={22} />
+          <span style={{ fontFamily: inter.fontFamily, fontWeight: 700, fontSize: 19, color: "#D8D1C4" }}>Claude</span>
         </div>
+        <span style={{ fontFamily: inter.fontFamily, fontWeight: 600, fontSize: 14, color: "#9A9384", padding: "5px 11px", borderRadius: 9, background: "#2A2723", border: "1px solid #3A362F", display: "inline-flex", gap: 6, alignItems: "center" }}>Fable 5 <span style={{ fontSize: 10, color: "#6E685C" }}>&#9662;</span></span>
       </div>
-      {sent > 0.05 && <div style={{ padding: "6px 22px", opacity: sent }}>
-        <div style={{ display: "flex", gap: 12 }}>
-          <ClaudeLogo lf={lf} size={26} />
+      {/* conversation */}
+      <div style={{ padding: "16px 20px 0" }}>
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 13 }}>
+          <div style={{ maxWidth: 546, padding: "12px 16px", borderRadius: 16, borderBottomRightRadius: 5, background: "#302D27", border: "1px solid #3C382F", boxShadow: "0 4px 12px -6px rgba(0,0,0,0.4)" }}>
+            <span style={{ fontFamily: inter.fontFamily, fontSize: 18, lineHeight: 1.46, color: "#EDE6D8" }}>
+              {shown.slice(0, gatedFrom)}
+              {typed > gatedFrom && <span style={{ filter: "blur(5px)", color: "#B8AE9C" }}>{shown.slice(gatedFrom)}</span>}
+              {typed < prompt.length && <span style={{ opacity: (lf % 18) < 10 ? 1 : 0.12, color: "#D97757", fontWeight: 700 }}>|</span>}
+            </span>
+            {typed >= prompt.length && <div style={{ marginTop: 8, display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 11px", borderRadius: 999, background: "rgba(217,119,87,0.15)" }}><span style={{ fontSize: 13 }}>&#128274;</span><span style={{ fontFamily: inter.fontFamily, fontWeight: 700, fontSize: 14, color: "#D97757" }}>full prompt in the guide &middot; comment SLASH</span></div>}
+          </div>
+        </div>
+        {sent > 0.05 && <div style={{ display: "flex", gap: 12, opacity: sent, transform: `translateY(${(1 - sent) * 8}px)` }}>
+          <div style={{ flexShrink: 0, marginTop: 2 }}><ClaudeLogo lf={lf} size={26} /></div>
           <div style={{ flex: 1 }}>{children}</div>
-        </div>
-      </div>}
+        </div>}
+      </div>
+      {/* compose bar (realism) */}
+      <div style={{ position: "absolute", left: 16, right: 16, bottom: 13, height: 42, borderRadius: 13, background: "#262420", border: "1.5px solid #38342C", display: "flex", alignItems: "center", padding: "0 14px", gap: 10 }}>
+        <span style={{ fontFamily: inter.fontFamily, fontSize: 15, color: "#6E685C", flex: 1 }}>Reply to Claude&hellip;</span>
+        <div style={{ width: 29, height: 29, borderRadius: 9, background: grad("#E9825C", "#C7541F"), display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 15, fontWeight: 900 }}>&uarr;</div>
+      </div>
     </div>
   );
 };
@@ -667,7 +676,17 @@ const A0: React.FC<{ lf: number }> = ({ lf }) => {
       {/* dash streak behind the mascot */}
       {dash > 0.02 && dash < 1 && <div style={{ position: "absolute", left: 820 + (1 - dash) * 220, top: 250, width: 260 * (1 - dash), height: 44, borderRadius: 22, background: "linear-gradient(90deg, transparent, rgba(240,203,99,0.5))", filter: "blur(3px)", zIndex: 7 }} />}
       <div style={{ position: "absolute", left: 785, top: 168, zIndex: 8, transform: `translateX(${(1 - dash) * 300}px) rotate(${(1 - slice) * -14 + slice * 6}deg) translateY(${hopY}px)` }}>
-        <Mascot lf={lf} size={185} gaze={-2} cheer={split} nodAmp={2.5} glasses={1} />
+        <Mascot lf={lf} size={185} gaze={-2} cheer={split} nodAmp={2.5} />
+        {/* NINJA headband (red band + knot + flapping tails) */}
+        {(() => { const S = 185; return (
+          <div style={{ position: "absolute", left: S * 0.05, top: S * 0.15, zIndex: 3, pointerEvents: "none" }}>
+            <div style={{ width: S * 0.6, height: S * 0.13, borderRadius: 4, background: grad("#D23B2A", "#8E1F12"), boxShadow: "inset 0 -2px 0 rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.35)" }} />
+            {/* dark ninja mask across the eyes hint */}
+            <div style={{ position: "absolute", left: 0, top: S * 0.13, width: S * 0.6, height: S * 0.07, background: "rgba(20,10,6,0.28)" }} />
+            {/* knot + two flapping tails trailing back-right */}
+            <div style={{ position: "absolute", right: -S * 0.03, top: -S * 0.01, width: S * 0.11, height: S * 0.15, borderRadius: 4, background: grad("#D23B2A", "#8E1F12") }} />
+            {[0, 1].map((k) => <div key={k} style={{ position: "absolute", right: -S * 0.06, top: S * 0.02 + k * S * 0.05, width: S * 0.36, height: S * 0.045, borderRadius: 3, background: grad("#D23B2A", "#8E1F12"), transformOrigin: "left center", transform: `rotate(${10 + k * 7 + Math.sin(lf / 4.5 + k * 1.4) * 13}deg)`, boxShadow: "0 1px 2px rgba(0,0,0,0.3)" }} />)}
+          </div>); })()}
         {/* glowing katana in-hand, swings on the slash */}
         {lf < fr(2.0) && (() => { const sw = -58 + slice * 122; return (
           <div style={{ position: "absolute", left: 4, top: 104, transformOrigin: "right center", transform: `rotate(${sw}deg)`, zIndex: 9 }}>
@@ -751,13 +770,13 @@ const A1: React.FC<{ lf: number }> = ({ lf }) => {
 const A2: React.FC<{ lf: number }> = ({ lf }) => {
   const steps = [0.28, 0.42, 0.56, 0.70].map((t, i) => over(lf, fr(1.7 + i * 0.62), fr(0.4), Easing.out(Easing.back(1.6))));
   const growth = 1 + steps.reduce((a, b) => a + b, 0) * 0.26;
-  const ins = over(lf, fr(7.1), fr(0.7), Easing.out(Easing.back(1.4)));   // "insurance renewal" 18.4 abs ≈ 7.2 local
-  const insGrow = 1 + over(lf, fr(7.7), fr(1.3), Easing.out(Easing.cubic)) * 0.5;
+  const ins = over(lf, fr(6.0), fr(0.7), Easing.out(Easing.back(1.4)));   // insurance renewal (creep tightened)
+  const insGrow = 1 + over(lf, fr(6.6), fr(1.2), Easing.out(Easing.cubic)) * 0.5;
   const ghost = over(lf, fr(3.1), fr(0.5), Easing.out(Easing.cubic));    // $49 ghost twin
   const wHero = 132 * growth ** 0.78;                                     // hero bill width, bottom-anchored
-  const fl = Math.sin(over(lf, fr(7.25), fr(0.55)) * Math.PI);            // GEKKO-landing flinch
-  const tt = Math.sin(over(lf, fr(9.0), fr(0.5)) * Math.PI);              // synchronized smug puff-up
-  const dp = over(lf, fr(7.35), fr(0.6), Easing.out(Easing.cubic));       // landing dust
+  const fl = Math.sin(over(lf, fr(6.15), fr(0.55)) * Math.PI);            // GEKKO-landing flinch
+  const tt = Math.sin(over(lf, fr(7.6), fr(0.5)) * Math.PI);              // synchronized smug puff-up
+  const dp = over(lf, fr(6.25), fr(0.6), Easing.out(Easing.cubic));       // landing dust
   return (
     <>
       <Kicker lf={lf} text="IT CREEPS UP" tone={RED} />
@@ -793,7 +812,7 @@ const A2: React.FC<{ lf: number }> = ({ lf }) => {
       {dp > 0.01 && dp < 1 && [-1, 0, 1].map((s) => (
         <div key={s} style={{ position: "absolute", left: 728 + s * 36 * dp - 13, top: 384, width: 26 * (0.5 + dp), height: 10, borderRadius: "50%", background: "rgba(215,185,145,0.55)", opacity: (1 - dp) * 0.8, filter: "blur(1px)", zIndex: 4 }} />))}
       {/* hero flyby gag (background cameo) */}
-      {(() => { const fp = over(lf, fr(5.3), fr(1.35), Easing.inOut(Easing.cubic)); if (fp <= 0.01 || fp >= 1) return null; const hx = -80 + fp * 1150; const hy = 84 - Math.sin(fp * Math.PI) * 26; return (
+      {(() => { const fp = over(lf, fr(4.6), fr(1.2), Easing.inOut(Easing.cubic)); if (fp <= 0.01 || fp >= 1) return null; const hx = -80 + fp * 1150; const hy = 84 - Math.sin(fp * Math.PI) * 26; return (
         <div style={{ position: "absolute", left: hx, top: hy, zIndex: 2, transform: "rotate(8deg)" }}>
           <div style={{ position: "absolute", left: -74, top: 12, width: 74, height: 6, borderRadius: 3, background: "linear-gradient(90deg, transparent, rgba(240,203,99,0.8))", filter: "blur(1px)" }} />
           <div style={{ width: 30, height: 20, borderRadius: 6, background: grad("#C0392B", "#8E1F12"), border: "1.5px solid rgba(255,200,120,0.6)" }} />
@@ -1007,7 +1026,7 @@ const B1: React.FC<{ lf: number }> = ({ lf }) => {
 
 // B2 — price-creep graph ON the bill + insurance renewal stamp
 const B2: React.FC<{ lf: number }> = ({ lf }) => {
-  const ins = over(lf, fr(7.1), fr(0.6), Easing.out(Easing.cubic));
+  const ins = over(lf, fr(6.0), fr(0.6), Easing.out(Easing.cubic));
   return (
     <>
       {/* L0 bloom + L1 parallax $ glyphs filling the right void */}
@@ -1032,10 +1051,10 @@ const B2: React.FC<{ lf: number }> = ({ lf }) => {
               </div>
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6 }}>
                 <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 18, color: "#20180E" }}>this year</span>
-                {(() => { const tk = over(lf, fr(7.6), fr(0.9)); return (
+                {(() => { const tk = over(lf, fr(6.5), fr(0.9)); return (
                   <span style={{ fontFamily: mono, fontWeight: 900, fontSize: 21, color: RED, display: "inline-block", transform: `scale(${1 + (tk > 0 && tk < 1 ? 0.22 * Math.abs(Math.sin(tk * Math.PI * 5)) : 0)})`, transformOrigin: "right center" }}>{`$${Math.round(118 + tk * 25)}/mo`}</span>); })()}
               </div>
-              {(() => { const sp = over(lf, fr(7.9), fr(0.35), Easing.out(Easing.back(2.4))); return (
+              {(() => { const sp = over(lf, fr(6.8), fr(0.35), Easing.out(Easing.back(2.4))); return (
                 <div style={{ marginTop: 10, display: "inline-block", transform: `rotate(-4deg) scale(${sp})`, padding: "5px 13px", borderRadius: 9, background: "rgba(196,74,58,0.14)", border: `2.5px solid ${RED}`, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 21, color: RED, boxShadow: `0 0 ${8 + 6 * Math.sin(lf / 7)}px rgba(196,74,58,0.4)` }}>+$25/mo · same coverage</div>); })()}
             </div>
             {/* glint sweep on reveal */}
@@ -1260,12 +1279,12 @@ const HeroHeader: React.FC<{ f: number }> = ({ f }) => {
 const ProgressBar: React.FC = () => {
   const f = useCurrentFrame();
   const t = f / FPS;
-  const VIRT = 35.04;
+  const VIRT = 33.37;
   const p = Math.min(1, t / VIRT);
-  const marks = [11.1, 20.64, 30.55];
-  const STARS = [4.0, 15.0, 24.4, 41.0];
+  const marks = [10.87, 19.13, 28.27];
+  const STARS = [3.8, 14.5, 23.0, 40.0];
   const TOTAL = VIRT;
-  const PELLETS = [3, 7, 13, 17, 22, 27, 32, 40];
+  const PELLETS = [3, 7, 13, 16, 21, 26, 31, 40];
   const score = PELLETS.filter((pt) => t >= pt).length + marks.filter((m) => t >= m).length * 3 + STARS.filter((m) => t >= m).length * 2;
   const incTimes = [...PELLETS, ...marks, ...STARS].filter((x) => t >= x);
   const lastInc = incTimes.length ? Math.max(...incTimes) : -9;
@@ -1305,8 +1324,8 @@ const ProgressBar: React.FC = () => {
           </div>); })}
       {/* reward gift wakes as the CTA nears */}
       {(() => {
-        const wake = interpolate(t, [32.6, 35.04], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-        const opened = t >= 35.3; const od = Math.max(0, t - 35.3);
+        const wake = interpolate(t, [30.9, 33.37], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+        const opened = t >= 33.6; const od = Math.max(0, t - 33.6);
         const rattle = wake * Math.sin(t * 26) * 4;
         return (
           <div style={{ position: "absolute", right: -24, top: -22, width: 96, height: 96, transform: `translate(${rattle}px, ${Math.sin(t * 2.4) * 3 - wake * 3}px) rotate(${rattle * 0.6}deg)`, zIndex: 131 }}>
@@ -1376,10 +1395,12 @@ export const ClaudeSlashReel: React.FC = () => {
       <Sfx at={0} src="lib_deep_whoosh.wav" v={0.72} dur={0.9} />
       <Sfx at={0.16} src="lib_boom.wav" v={0.5} dur={1.4} />
       <Sfx at={0.05} src="lib_whoosh.wav" v={0.4} dur={0.5} />
+      <Sfx at={0.02} src="boing.wav" v={0.34} dur={0.5} />
       <Sfx at={0.62} src="slash.wav" v={0.62} dur={0.5} />
       <Sfx at={0.62} src="lib_whoosh_fast.wav" v={0.44} dur={0.4} />
       <Sfx at={0.9} src="crash.wav" v={0.4} dur={0.7} />
       <Sfx at={0.9} src="lib_cinematic_hit.wav" v={0.42} dur={0.9} />
+      <Sfx at={0.78} src="vine_boom.wav" v={0.6} dur={0.9} />
       <Sfx at={0.85} src="lib_pop.wav" v={0.36} dur={0.6} />
       <Sfx at={1.0} src="sparkle.wav" v={0.3} dur={0.7} />
       <Sfx at={1.2} src="cash-register.mp3" v={0.4} dur={1.2} />
@@ -1393,7 +1414,7 @@ export const ClaudeSlashReel: React.FC = () => {
       <Sfx at={L[1] + 4.7} src="cash-register.mp3" v={0.36} dur={1.2} />
       <Sfx at={L[1] + 7.4} src="lib_magic_reveal.wav" v={0.44} dur={1.0} /><Sfx at={L[1] + 7.5} src="ding.wav" v={0.32} />
       {/* S2: creep steps tick + insurance stamp */}
-      <Sfx at={L[2] + 7.15} src="boom.wav" v={0.3} dur={1.0} />
+      <Sfx at={L[2] + 6.05} src="vine_boom.wav" v={0.4} dur={0.9} />
       <Sfx at={L[2] + 0.5} src="digital-loading.wav" v={0.18} dur={2.4} />
       <Sfx at={L[2] + 7.1} src="lib_whoosh.wav" v={0.36} dur={0.5} />
       <Sfx at={L[2] + 7.9} src="lib_pop.wav" v={0.34} dur={0.6} />
@@ -1403,6 +1424,7 @@ export const ClaudeSlashReel: React.FC = () => {
       <Sfx at={L[3] + 1.2} src="crowd_cheers2.wav" v={0.2} dur={1.4} />
       {[1.35, 1.95].map((d, i) => <Sfx key={`pz${i}`} at={L[3] + d} src="lib_camera_shutter.wav" v={0.2} dur={0.45} />)}
       <Sfx at={L[3] + 2.55} src="lib_cinematic_hit.wav" v={0.34} />
+      <Sfx at={L[3] + 1.2} src="vine_boom.wav" v={0.4} dur={0.9} />
       {/* S4: script typing + waves + price-drop ding */}
       <Sfx at={L[4] + 0.3} src="lib_mactype.wav" v={0.34} dur={3.6} />
       <Sfx at={L[4] + 3.9} src="lib_whoosh_fast.wav" v={0.36} dur={0.4} />
@@ -1411,11 +1433,12 @@ export const ClaudeSlashReel: React.FC = () => {
       <Sfx at={L[5] + 0.4} src="digital-loading.wav" v={0.16} dur={2.0} />
       <Sfx at={L[5] + 2.85} src="lib_whoosh_fast.wav" v={0.34} dur={0.3} />
       <Sfx at={L[5] + 2.95} src="bonk.mp3" v={0.4} dur={0.9} />
+      <Sfx at={L[5] + 3.0} src="boing.wav" v={0.3} dur={0.4} />
       <Sfx at={L[5] + 3.15} src="lib_correct.wav" v={0.34} dur={0.5} />
       <Sfx at={L[5] + 3.3} src="sparkle.wav" v={0.24} dur={0.6} />
       {/* CTA */}
       <Sfx at={L[6] + 0.1} src="lib_magic_reveal.wav" v={0.46} dur={1.1} />
-      <Sfx at={L[6] + 0.62} src="boom.wav" v={0.4} dur={1.1} />
+      <Sfx at={L[6] + 0.62} src="vine_boom.wav" v={0.5} dur={0.9} />
       <Sfx at={L[6] + 0.8} src="lib_whoosh_fast.wav" v={0.36} dur={0.4} />
       {[0.95, 1.25, 1.55].map((d, i) => <Sfx key={`k${i}`} at={L[6] + d} src="ding.wav" v={0.32} dur={0.4} />)}
       <Sfx at={L[6] + 1.55} src="sparkle.wav" v={0.32} dur={0.8} />
