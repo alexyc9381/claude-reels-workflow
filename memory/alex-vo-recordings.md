@@ -1,8 +1,10 @@
 ---
 name: alex-vo-recordings
 description: "⛔ HARD: when Alex attaches an m4a, TRANSCRIBE THE FULL AUDIO first — it is often his actual VO recording (reading the script), not just spoken instructions. Never clone/replace his voice, and never apply tonal processing (compression/EQ) to it — use RAW."
-metadata:
+metadata: 
+  node_type: memory
   type: feedback
+  originSessionId: fd2a64f7-8d2a-4a40-a1dc-da7f726a2785
 ---
 
 **⛔ Two hard rules Alex enforced 2026-07-10 (he was furious the ERASE reel shipped with a processed clone):**
@@ -14,3 +16,12 @@ metadata:
 3. His single-take recordings contain **"cut cut" self-corrections** — always splice them out (find real silence boundaries, cut from the original wav) and re-verify the transcript has zero "cut" markers before building. His real numbers/wording override the drafted script (e.g. ERASE = "10 sites", he says "Claude" not "Fable 5").
 
 Pairs with [[video-editing-toolchain]] (CUT-CUT method, ~/Downloads Untitled-m4a glob) + [[claude-ai-reel-workflow]] (voice: his ElevenLabs clone id is ONLY a fallback when no real recording exists).
+
+
+**⛔⛔ MULTI-TAKE SPLICE — map EVERY take against the script, then RE-TRANSCRIBE the cut to VERIFY (IMPRINT shipped broken twice, 2026-07-11).** IMPRINT's VO went out with WRONG takes + leftover "cut cut" fragments + a spoken instruction still audible ("I'm going to re-say this part...") because I selected keep-blocks by rough gap-grouping without verifying. The recording had SIX false starts + retakes for ~9 sentences (one long continuous good run of 4 sentences, plus 2 sentences each recorded 2-3x, plus a spoken direction to delete a line). **The reliable method:** (1) convert raw m4a→wav, transcribe FULL with `word_timestamps=True`; (2) print the transcript grouped by >0.45s gaps so every take + "cut cut" + spoken-instruction is visible; (3) write out the intended SCRIPT and MAP each sentence to its CORRECT final take's exact word-start/word-end (the last clean take of that sentence; skip all false starts, retakes Alex verbally overrode, and instructions); (4) extract each keep-segment with start/end RMS-SNAPPED to the quietest 5ms window inside the surrounding silence (avoids clipping a word or catching the plosive onset of the next false-start), 8ms fade at each boundary, and insert ~0.3-0.4s silence between sentences for natural pacing; (5) **RE-TRANSCRIBE the finished wav and assert it contains ZERO "cut", zero instruction words, and matches the script** — this verification is non-negotiable, it is the only thing that would have caught the bad ships. Then derive captions + L from the CLEAN wav. Full worked example: scratchpad raw_words.json + the segment table in [[imprint-factory-log]] BUILD v4.
+
+**⛔ SPLICED-VO PACING: measure PERCEIVED gaps + don't clip the last word (IMPRINT, 2026-07-11).** After concatenating keep-segments, the audible pause between two sentences is NOT just the gap you inserted — it is `inserted_gap + segmentA_trailing_silence + segmentB_leading_silence`. IMPRINT shipped with a 0.74s pause (felt "way too long between scenes") from a 0.40 inserted gap + soft word tails, and the word "scary" sounded cut off because the end-snap landed at 39.325 while "scary" actually ended at 39.34 (clipped the last ~15ms of the trailing vowel → whisper then heard "skipped"). **Fix method:** (1) snap each segment's start/end TIGHT to the speech (small window ~[-0.09,+0.04]s) so there's minimal padding, but for the END snap in a window that stays strictly AFTER the last word's true end (verify the silence-run starts after it) so you never clip the trailing vowel; (2) insert only a small controlled gap (~0.10-0.16s); (3) AFTER building, run a silence-run detector (rms<pctile30-3dB, runs>0.18s) on the finished wav and read the ACTUAL gap durations — target ~0.30-0.40s at sentence/scene boundaries, and if any is >0.5s, trim padding or shrink the inserted gap. Don't trust the inserted-gap number alone.
+
+**⛔ HOOK SFX MUST SIT UNDER THE VO (Alex, 2026-07-11).** He couldn't hear the hook voiceover because the hook SFX stack was at v=0.5-0.9 (whooshes/booms/liftoff). The VO is the priority: keep SFX accents at ~0.2-0.36 under a ~0.9-peak raw VO + 0.15-0.17 music bed. Big visual moments (rocket liftoff) still get layered SFX but LOW enough that the spoken line cuts through. [[sfx-library]].
+
+**⛔ CHECK THE VERY FIRST WORDS for a cut-cut restart (SLASH re-record, 2026-07-10).** A re-record can flub the OPENING and restart: 'Claude can help you cut cut. Claude can help you lower...'. The coarse 16kHz base.en pass MERGED/missed it; only the 48kHz WORD-LEVEL transcription + a fine per-20ms energy scan of the first ~4s exposed the doubled 'Claude...cut cut...Claude'. ALWAYS word-transcribe + energy-scan the opening and trim to the SECOND (real) take start. Multiple cut-cuts per recording are normal (SLASH had 3: start, mid-creep, mid-rank).

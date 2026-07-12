@@ -126,4 +126,33 @@ Alex: "not just internet bill, do diff bills in general, or like insurance... an
 - **SLASH SFX added:** synthesized `public/sfx/slash.wav` (filtered-noise katana swipe) + `lib_whoosh_fast` at the sweep + `crash`+`cinematic_hit` at impact. Confirmed audible (slash-window RMS 0.169) + 0 click events.
 - **DELIVERED v8 2026-07-10:** `41_Claude-fable5-slash.mp4` (38.04s, 11.8MB, 0 clicks, leading audio present, faststart) → Final + Drive.
 
+## v9 — NEW VO (re-recorded) + 1.04x speedup (Alex, 2026-07-10)
+- Alex re-recorded (`Untitled 1 - 7:10:26, 9.21 PM.m4a`, 55s) with **THREE "cut cut" retakes**: (1) at the very START "Claude can help you cut cut" → real take; (2) "Prices creep up every year…$89 cut cut" → retake "…each year…for $49"; (3) "…which to call cut cut" → retake "…which call to make tonight". Spliced out all three at energy-measured silences (verified joins clean, no clipped words, no leftover "cut").
+- Applied **atempo=1.04** speedup (per Alex), then comprehensive pause-cut (trim 1.35s lead, cap every gap ≤0.3s, trim trailing). Final `public/slash_vo.wav` = **36.33s** RAW (linear loudnorm only, no tonal). No pauses >0.5s remain.
+- Re-derived words_slash.json (measured-onset) + **L = [0.0, 2.71, 10.87, 19.13, 22.81, 28.27, 33.37]**, CUT 35.9, durationInFrames 1078. Creep scene (S2) tightened ~1.3s → pulled the GEKKO/insurance beats ~1.1s earlier in A2/B2 to stay synced.
+- ⛔ LESSON → [[alex-vo-recordings]]: a re-record can have a "cut cut" flub at the VERY FIRST words too (not just mid-VO); transcribe with word timestamps + fine energy scan and check the opening for a doubled restart. The coarse 16kHz pass MISSED the leading flub; the 48kHz word-level pass caught it.
+- v9 rendering → caption-sync frame-verify → deliver.
+
+## v10 — NINJA + PRO CHATWINDOW + MEME SFX + DOCS (Alex, 2026-07-10)
+- **Ninja mascot** in the hook: red headband (knot + flapping tails) + dark eye-mask hint over the katana-wielding shades-less mascot. Reads clearly as a ninja slashing the villain bill.
+- **Bottom UI more professional (ChatWindow rebuilt = real claude.ai):** window-dot controls + centered Claude wordmark + `Fable 5 ▾` model selector + right-aligned user bubble w/ smooth blinking caret + gated-prompt blur + a **"Reply to Claude…" compose bar** w/ send button. Smoother eased entrances (translateY, no scale-pops).
+- **Meme SFX:** synthesized `public/sfx/vine_boom.wav` (deep BWAAM) + `boing.wav`; placed vine-boom on the slash impact / GEKKO villain land / podium crown / CTA slam, boings on the lunge + creep growth + sentry catch. Still 0 click events.
+- **DELIVERED v10 2026-07-10:** `41_Claude-fable5-slash.mp4` (35.99s, 11.2MB, 0 clicks) → Final + Drive.
+- **SPLIT-SCREEN FORMAT DOCUMENTED to the GitHub repo** `~/Downloads/claude-reels-workflow`: new `SPLIT-SCREEN-FORMAT.md` (full two-screen spec) + synced ClaudeSlashReel.tsx/Root.tsx/words_slash.json + README pointer, committed (71fe8f0). ⚠️ Repo has NO git remote yet — commit is LOCAL; Alex must `git remote add` + push to GitHub.
+
+## v11 — DECLUTTER BOTTOM + SMOOTH GRAPH + common-words rule (Alex, 2026-07-10)
+- **Bottom (PROOF) screens were too crowded / text-heavy.** Simplified all: B0 (removed the "paid 36 months" tag + "your real statement" note); B1 (dropped the 3 file chips + the card sub-labels, bumped the $89.99/$49.99 cards to 44px = the hero); B2 (replaced the full GEKKO renewal DOCUMENT with a single "🦎 insurance too +$25/mo" chip + removed parallax $ glyphs); B3 (dropped "/mo over"→"/mo", removed $ glyphs); B4 (call script 4 lines→2, one visible line + the blurred magic line); B5 (dropped the price-number column, name + status badge only). Standing rule: **bottom screen = glanceable, big, minimal text — nothing the viewer has to READ.**
+- **Smooth graph:** the "prices creep up" chart was a choppy point-by-point polyline → rebuilt as a **Catmull-Rom smooth path** drawn continuously via `pathLength=1` + `strokeDashoffset`, with a dot riding the end. Removed the +$10 popups.
+- **Common-words scripting rule** added to [[ig-reels-scriptwriting-principles]]: write with the highest-frequency, plainest everyday words + common speech patterns (buy not purchase, use not utilize, help not assist, "the same thing" not "the exact same thing"); read every line aloud — if you wouldn't casually say it to a friend, rewrite plainer. Applies at Stage-3 draft + on-screen text. (SLASH VO is Alex's own recording so already natural; rule is for future scripts + UI text.)
+- **DELIVERED v11 2026-07-10:** `41_Claude-fable5-slash.mp4` (35.99s, 11MB, 0 clicks) → Final + Drive.
+- **LEAD MAGNET + CAPTION built:** `SLASH - The Slash Guide.docx` (4 word-for-word prompts + internet/phone/insurance call scripts + negotiability cheat-table + have-on-hand + honest note; ZERO em/en dashes verified) → Final + Drive. `slash_caption.txt` (comment-first, gates the prompts, ZERO em dashes) → Final.
+- **Storyboard workflow upgraded** ([[reel-storyboard-process]]): must be ONE engaging story arc (rising retention, scene-to-next hooks, a laugh/surprise every scene) + a RECURRING POP-CULTURE parody cast + living-world gags + an iterative improvement loop before any build. Committed to the repo (d6bea81).
+
+## HOOK A/B TRIAL (Alex, 2026-07-10) — 2 alternate hooks, same recorded VO
+- Wired a `hook` INPUT PROP (`getInputProps().hook`) into ClaudeSlashReel: A0 swaps to A0B/A0C, render with `--props='{"hook":"B"}'`. Header + VO + B0 real bill stay identical; only the top storytelling hook changes.
+- **Hook A (default):** ninja mascot katana-slashes the villain bill (action).
+- **Hook B (MONEY LEAK):** your bill is a leaking pipe gushing cash; construction-hat mascot patches the valve and the saved money flies into a "YOU" jar; "+$500/yr saved" chip. (stakes/recovery)
+- **Hook C (PRICE-TAG RIP):** a giant red "$89.99/mo YOUR BILL" price tag gets ripped in half revealing a green "$49.99/mo NEW CUSTOMERS" tag underneath + "−$40/mo · $500/yr". (satisfying/tactile — cleanest of the three)
+- Delivered to **Trial Reels** (Final + Drive): `41_Claude-slash_hookB-money-leak.mp4`, `41_Claude-slash_hookC-price-tag-rip.mp4`. Retention riser + decluttered bottom + smooth graph all inherited.
+
 ## POST — [48-72h after publish]

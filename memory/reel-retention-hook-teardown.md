@@ -22,7 +22,9 @@ Alex's Meta-ads reel (14) got **50% retention @1s, 22% @2s** — a hook failure,
 1. **Novelty trigger "now"/"just"** — frames it as NEWS ("you didn't know this yet"), the curiosity engine. (Alex said "Claude *can* run…" = a feature, not "*now* / *just*" = an event.)
 2. **A QUESTION or a SHOCK claim, never a topic label.** "Did you know…?" (brain auto-answers, can't scroll) or "X just replaced half of what Y does."
 3. **Universal hook or money/status stake** — your face, your room, a $10k website, your career, "thousands of dollars and hours." Even their *ads* hook leads with the PAIN, not the feature.
-4. **Numbers + social proof instantly** — "out of 10", "30 seconds", "people pay hundreds for this", "$10,000", "$3k/mo agency". Then immediate payoff: *"so all you do is…"* — wow in second 2, not second 6.
+4. **Numbers + social proof instantly** — "out of 10", "30 seconds", "people pay hundreds for this", "$10,000", "$3k/mo agency". Then immediate payoff: *"so all you do is…"* — wow in second 2, not second 6. (This is the [[specificity-effect]] in the hook: a specific figure/time reads as real, a vague claim reads as selling.)
+
+The mechanics above are systematized as the 6-rung [[dopamine-ladder]] (L1 stun-gun → L2 loop → L3 anticipation → L4 non-obvious payoff → L5/L6 brand-face) — that memory is the gated vocabulary; this teardown is the worked example.
 
 **THE VISUAL HALF (probably the biggest lever):** their first frame is a **talking-head FACE** or the **real SCREEN showing the thing happen**, with burned word-by-word captions and fast cuts. A face is the strongest scroll-stop that exists. Alex's title-card motion-graphic format quietly works against retention. FIX for faceless reels: open on a **real screen** (a Google SERP, the actual tool working), not a branded title card — and ideally put Alex's **face in the first 1-2s**.
 

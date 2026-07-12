@@ -262,6 +262,28 @@ npx remotion still  src/index.ts Claude<Name>Reel out/f.png --frame=120   # chec
 npx remotion render src/index.ts Claude<Name>Reel out/raw.mp4 --codec h264
 ```
 
+### I2. OVERHAUL — mandatory, never deliver the first render ⛔
+**The first full render is a WIREFRAME, not a deliverable.** It gets the structure right (beats, VO sync, captions); it is always visually under‑baked and its hook is always a placeholder. Every reel runs the overhaul before encode. (Full rule: `memory/reel-overhaul-stage.md`. Reusable workflow: `script-factory/overhaul-workflow-template.js`.)
+
+Two gates, looped until both pass on every scene:
+
+- **Gate A — HOOK PATTERN‑INTERRUPT (0–5 s).** Rebuild the first 1–5 s to contain a genuine pattern interrupt: something unexpected and physically surprising by ~frame 15–30 (object bursts/crashes/drops into frame, a first‑person POV rush at the lens, a hard slam/stamp, a character invasion, a fake‑out). Earned by the topic, mute‑readable in <2 s, escalates by ~3 s with no dead/empty frames, a recognizable/funny (pop‑culture) element on screen, professional eased motion with depth + motion blur. **Auto‑fail openers:** title fade‑in, slow zoom on a static graphic, a lone graphic on an empty panel, a dead first ~0.5 s.
+- **Gate B — VISUAL OVERHAUL (every scene).** Upgrade each scene to App‑Store‑feature quality: vibrant layered backgrounds (never flat), *more going on* (multiple animated elements, not one static graphic), shaded premium props + real iOS device frames + a real camera viewfinder for capture beats (use the shared kit: `Bg` + `PCProp` + `PhoneUI`/`ListingCard`/`SoldStamp`/`Toast`), and pop‑culture comment‑bait woven throughout.
+
+Loop:
+```bash
+# 1) render first draft (step I)  2) extract a frame grid, one per scene beat:
+for t in 0.4 2 4.4 6.4 9.6 13.5 20 27 32.6 37.5 45.6; do \
+  $FF -y -ss $t -i out/raw.mp4 -frames:v 1 out/grid/$t.jpg; done
+# 3) montage + adversarial critic (is the hook a real pattern interrupt? which scene is flat/empty/static/cheap? where's the pop-culture?)
+# 4) run the overhaul workflow (foundation: reuse shared Bg/PCProp/UI kit; then per-scene rebuild against Gate A/B) -> splice -> re-render
+# 5) re-grid, re-review; LOOP until Gate A + Gate B pass everywhere.
+# 6) SFX PASS (memory/reel-sfx-pass.md): densify library SFX everywhere a beat can carry one —
+#    ALWAYS a hook RISER into the first slam + a click/tap on every UI interaction (biggest retention lever)
+#    + impacts/money/notif/counter sounds + ~1-3 meme stingers (Among Us on a sus reveal, bruh on a fail) + CTA burst.
+#    Copy any missing sound from ~/Downloads/sfx-library into public/sfx first. THEN encode (step J).
+```
+
 ### J. Delivery encode (exact settings)
 ```bash
 $FF -y -i out/raw.mp4 -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -r 30 \
@@ -285,7 +307,8 @@ cp ~/Downloads/Claude-Reels-Final/NN_Claude-fable5-<slug>.mp4 \
 
 These live in the `memory/` files and are applied to every reel:
 
-- **Hook (first 1 s, on mute):** subject + promise legible instantly; deadline in line 1 when relevant; a single strong subject / cinematic moment beats a busy dashboard. Fill the panel with a rendered *environment*, never a hero floating in a black void.
+- **Overhaul (mandatory, every reel):** the first full render is a WIREFRAME — never delivered. Auto‑run the overhaul (Gate A hook pattern‑interrupt + Gate B per‑scene visual overhaul), loop until both pass, then SFX/encode/deliver. Do not wait to be asked. (§6.I2 + `memory/reel-overhaul-stage.md`.)
+- **Hook (first 1 s, on mute):** subject + promise legible instantly; deadline in line 1 when relevant; a single strong subject / cinematic moment beats a busy dashboard. Fill the panel with a rendered *environment*, never a hero floating in a black void. **After the first render the hook MUST carry a real pattern interrupt** (see §6.I2 Gate A) — a placeholder open never ships.
 - **Retention:** top ProgressBar with a reward that unlocks at the CTA; escalate every scene; "save this for later" seal; open loops ("but here's the part everyone misses").
 - **Gate the HOW:** the VO sells the *result* and *names the artifact*; the copy‑pasteable how‑to lives in the gated guide, not on screen. Never print the actual deliverable (e.g. real rules) uncredacted.
 - **Character:** the clay **Claude Mascot** on Fable/Claude reels; the **Sol/Terra/Luna** sun/moon/earth mascots only on GPT‑5.6 reels.
@@ -303,9 +326,10 @@ Full detail is in the memory files listed in §10.
 With `ultracode` on, Claude Code runs **multi‑agent Workflows**:
 - **Design panels** — N independent concepts (e.g. hook ideas) generated + judged → a merged spec (used to design the VAULT crash hook).
 - **Adversarial critic gate** — parallel critics read the rendered still frames and score/flag against a premium bar + the standing rules; confirmed blockers are fixed before delivery.
-- **Iterate**: render stills → critic → fix → re‑render → deliver. Never ship on the first render.
+- **The Overhaul workflow** (`script-factory/overhaul-workflow-template.js`) — the muscle behind §6.I2. A FOUNDATION phase authors/reuses the shared kit (vibrant `Bg`, the `PCProp` pop‑culture library, the iOS `PhoneUI`/`ListingCard`/`SoldStamp`/`Toast`), then a per‑scene REBUILD phase rewrites each scene against Gate A (hook pattern‑interrupt) and Gate B (visual overhaul); agents return code, spliced deterministically, re‑rendered, re‑reviewed. Proven on reel 46 FLIP.
+- **Iterate**: render → grid → critic → overhaul workflow → re‑render → loop until Gate A + Gate B pass → SFX → deliver. **Never ship on the first render.**
 
-To reproduce on a new account: keep ultracode on and prompt Claude to "run a design panel for the hook" and "run an adversarial ship‑gate critic on the rendered frames," then fix confirmed findings.
+To reproduce on a new account: keep ultracode on and prompt Claude to "run the overhaul workflow" — it fills the foundation + rebuilds every scene against the hook pattern‑interrupt gate and the per‑scene visual overhaul gate, then loops the critic until both pass.
 
 ---
 
@@ -353,10 +377,13 @@ $FF -i vo48.wav -af silencedetect=noise=-33dB:d=0.18 -f null - 2>&1 | grep silen
 $FF -y -i vo48.wav -af "aselect='between(t,A,B)+between(t,C,D)',asetpts=N/SR/TB,highpass=f=75,alimiter=limit=0.93,loudnorm=I=-16:TP=-1.5:LRA=11" -ar 48000 -ac 1 -sample_fmt s16 clean1x.wav
 $FF -y -i clean1x.wav -filter:a "atempo=1.10" -ar 48000 -ac 1 -sample_fmt s16 $V/public/vo_x.wav
 
-# render
+# render (FIRST DRAFT = wireframe)
 cd $V
 npx remotion still  src/index.ts ClaudeXReel out/f.png --frame=120
 npx remotion render src/index.ts ClaudeXReel out/raw.mp4 --codec h264
+
+# ⛔ OVERHAUL — never ship the first render (§6.I2): grid + hook 0-2s burst → fresh critic →
+#   overhaul workflow (Gate A hook pattern-interrupt + Gate B per-scene visual overhaul) → re-render → loop → THEN encode.
 
 # deliver encode
 $FF -y -i out/raw.mp4 -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -r 30 -c:a aac -b:a 256k -ar 48000 -ac 2 -movflags +faststart ~/Downloads/Claude-Reels-Final/NN_Claude-fable5-x.mp4
@@ -368,5 +395,5 @@ $FF -y -i out/raw.mp4 -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 18 -r 3
 1. Copy `matchtern-longform/` + the `memory/` folder + your Drive folder.
 2. Install Node, `npm install` in `video/` and `tools/`, `pip install faster-whisper`, save `/tmp/tx.py`.
 3. Open the project in **Claude Code with ultracode on**, point it at the `memory/` brain.
-4. Record a VO → let the pipeline (§6) run → render → ship to Final + Drive.
-5. Always: spot‑check stills before full render, run the critic gate, gate the how, zero em dashes, deliver to both folders.
+4. Record a VO → let the pipeline (§6) run → render first draft → **OVERHAUL (§6.I2 — never ship the first render)** → ship to Final + Drive.
+5. Always: spot‑check stills before full render; **run the overhaul (hook pattern‑interrupt gate + per‑scene visual overhaul) — the first render is a wireframe, never delivered**; gate the how; zero em dashes; deliver to both folders.

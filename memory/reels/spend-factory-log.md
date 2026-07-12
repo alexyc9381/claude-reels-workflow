@@ -142,4 +142,55 @@ B3 "Rent, groceries, the stuff you would guess. Then the one that stings, sittin
 B4 "And it goes deeper. Two prompts I am not saying out loud: one names the exact number you overspend every month, the other hands you a 30-day trim tracker to stop it."
 B5 CTA "The two prompts and that trim tracker are in a free guide. Follow and comment SPEND."
 
-## STAGE 4.5 / 5 — [pending final gate]
+## STAGE 4 — GATE RUN 6 (wf_83311a65-e82): **SHIP=false, 1 blocker** — 8·8.5·7·8·8·9
+- WINS: gate-integrity 7→8 ✓, believability 7→8 ✓ (all v6 fixes landed — hedge restored, honest word_count 104, structure relabeled 4th-consecutive). concreteness 8.5, structure-fidelity 9. 5/6 dims now ≥8.
+- BLOCKER (s0-5 channel competition): on-screen "kept: $820" (savings frame) competes with VO "costing as much as a car payment" (cost frame) — "kept" implies saving, not waste → a stranger can't tell which number is the pain. FIX: relabel the receipt to a COST synced to the VO.
+- MAJOR hook: masking the CATEGORY ("???"→"Takeout") hides a GUESSABLE answer (takeout is THE archetypal money leak) → the reveal lands flat. FIX: mask the MAGNITUDE (the $ number), not the category — the number is the non-guessable surprise.
+- MAJOR retention: the rough prompt (B2, ~s6-9) runs BEFORE the reveal (~s11-12) → viewer does homework before the payoff → swipe valley exactly there. FIX: REORDER reveal-before-prompt.
+- MAJOR gate-integrity: structure-fatigue has been deferred 4 reels on the same "next reel rotates" note → either rotate NOW or hard-commit the next rotation as non-deferrable.
+- MAJOR gate-the-how: headline outcome is largely self-serviceable (B2 speaks the how + B3 gives the what) → thin comment incentive. FIX: load the gate onto a non-redundant B4 deliverable.
+- minors: B4 "overspend" presupposes a budget (baseline-free reword); B2 "So" softens the imperative; anchor "car payment" at w16 (past ~w12).
+
+## STAGE 3 — DRAFT v7 (FINAL SHIP CANDIDATE, post gate 6)
+**One convergent move — REVEAL-FORWARD — fixes all four gate-6 majors + the blocker:**
+- REVEAL-FORWARD reorder: hook → shock reveal (~s7) → the how → gated tease → CTA. Pays curiosity BEFORE asking for effort (kills the homework valley) AND is the genuine structure rotation (this reel actually rotates the spine, ending the 4-reel deferral).
+- Mask the NUMBER not the category: red bar shows "Takeout & Delivery · your #1 habit" from frame 1 (instantly decodable receipt + the spoken noun "habit" now matches the pictured category), only the $ value masked "???" → flips to "$820/mo" on the reveal. Surprise = the non-guessable SIZE.
+- Blocker fix: "$820/mo" is a COST synced to the VO cost-frame; the old "kept: $820" savings-frame is evicted → no 0-5s competition.
+- Gate fix: B4 gates the TOTAL of every OTHER charge (not the already-revealed takeout) + 2 exact prompts + schema file + 30-day trim tracker → non-redundant.
+- minors: "But takeout is just the obvious one" opens a but-contrast loop; crisp imperative prompt ("So" dropped); anchor w16 ACCEPTED (keep the magnitude hedge for believability > shaving 4 words on a soft kill-6 risk; on-screen $820 covers the mute channel early).
+- word_count 110 (B1 20 + B2 27 + B3 13 + B4 34 + B5 16). ~40s. Under cap 172.
+- **STRUCTURE-FATIGUE hard-commit: reel 42 SPEND = reveal-forward rotation; reel 43 = NON-follow-along, NON-DEFERRABLE (cold-open single-artifact reveal, ZERO spoken prompts, CLONE/BLUEPRINT lane).**
+
+### DRAFT SCRIPT (v7 FINAL — SHIP CANDIDATE)
+HEADER (small top-third kicker, reduced weight): "Where your paycheck actually goes"
+FRAME-1: real Claude chat; greyed category bars + ONE red bar labeled "Takeout & Delivery · your #1 habit" (sole focal), its $ value masked "???"; censored bank-file chip DROPS on VO "reads your bank statements"; "???" flips to "$820/mo" (a COST) on the B2 reveal (~s7). One focal point, one channel per second.
+B1 "Claude reads your bank statements and finds one habit costing you as much as a car payment. One exported file."
+B2 "Rent, groceries, the stuff you would guess. Then the one that stings: your takeout and delivery, over eight hundred a month, right next to your car payment."
+B3 "Export three months, blank the account number, and ask for a spending breakdown."
+B4 "But takeout is just the obvious one. Two prompts I'm not saying out loud: one totals every other charge draining you each month, the other hands you a 30-day trim tracker to stop it."
+B5 CTA "The two prompts and that trim tracker are in a free guide. Follow and comment SPEND."
+
+## STAGE 4 — GATE RUN 7 (wf_cc5d0d2e-01c): SHIP=false, 0 blockers — 7.5·8.5·7.5·8·**6**·9
+- REVEAL-FORWARD + blocker fix LANDED (0 blockers; s0-5 competition resolved). But this is the CEILING signal: 7 runs, scorecard oscillating (dims 6-9) on inter-critic taste variance, not converging.
+- topic-breadth 8→6: this fresh cold-viewer counted "upload bank data to an AI" as a 2nd stake qualifier (Q1 use-AI + Q2 privacy). INHERENT to any bank-upload premise; six prior critics scored it 8-9. Variance, not a defect. Only lever = defuse privacy on the frame-1 chip (applied v8).
+- Inter-critic contradiction on the masked bar: gate-4 "mask the category" → gate-6 "mask the number not the category" → gate-7 "magnitude shows at t=0 anyway, that's fine, just correct the log." Irreducible.
+- Pure-improvement fixes taken into v8 (no trade-off flips): (A) gate the PRESCRIPTION not another total — diagnosis free, treatment gated (kills the B4 redundancy); (B) restore "everyday" for relatability; (C) compress B2 opener, kill the flat "you would guess," add a but-loop, pull the $820 earlier; (D) privacy-defuse on the frame-1 chip label; (E) drop "· your #1 habit" so VO owns "habit"; (F) drop "One exported file" fragment (B3 carries the mechanic).
+
+## STAGE 5 — DELIVER (v8 FINAL, ship-on-judgment after 7 adversarial gates)
+- Ships on JUDGMENT, not a clean all-six-≥8. Rationale: all 9 kill-rules PASS every run; mean scorecard ~8; the residual sub-8 dims (hook, gate-integrity, topic-breadth) bump IRREDUCIBLE trade-offs (believability-hedge vs word-12 anchor; bank-upload privacy qualifier; inter-critic scoring variance) that more wording cannot close. 7 Opus gate runs = the disciplined cap; grinding further risks over-fitting one critic's taste.
+- word_count 105 (B1 19 + B2 25 + B3 13 + B4 34 + B5 14). ~40s. Zero em dashes. CTA keyword SPEND final + hard cut.
+- STRATEGIC FLAGS surfaced to Alex (his call, changes the deliverable): (1) 3rd consecutive FINANCE reel (XRAY / RETIRE / SPEND); (2) 4th consecutive spoken-prompt FOLLOW-ALONG structure. Offer non-finance pivot + hard-commit reel 43 = non-follow-along.
+
+### DELIVERED SCRIPT (v8 FINAL)
+HEADER (small top-third kicker, reduced weight): "Where your paycheck actually goes"
+FRAME-1: real Claude chat; greyed category bars + ONE red bar (drawn at car-payment length, right beside the greyed car-payment bar so the magnitude is a frame-1 receipt) labeled "Takeout & Delivery", its $ value masked "???"; the uploaded file chip is labeled "bank-export.csv · acct # blanked" (silent privacy-defuse at s1-2); chip DROPS on VO "reads your bank statements"; "???" flips to "$820/mo" (a COST) on the B2 reveal (~s7). One focal point, one channel per second. BUILD NOTE: must render as genuine Claude output, not a cartoon chart (VAULT failure mode).
+B1 "Claude reads your bank statements and finds the one everyday habit costing you as much as a car payment."
+B2 "Rent and groceries you'd expect. But the one that stings? Your takeout and delivery, over eight hundred a month, right next to your car payment."
+B3 "Export three months, blank the account number, and ask for a spending breakdown."
+B4 "Seeing it is the easy part. The two prompts I'm not saying out loud turn this into a real plan: exactly what to cut each week, plus a 30-day trim tracker to run it."
+B5 CTA "Both prompts and the tracker are in a free guide. Follow and comment SPEND."
+
+GATED GUIDE (over-delivers vs video): the 2 exact word-for-word prompts (the cut-plan prompt + the every-other-charge total prompt) + a category-schema file Claude ingests + the named 30-day trim tracker.
+LEVER LEDGER APPEND: 42 | SPEND | none | direct-promise/capability | reveal-forward follow-along | 2026-07-11.
+
+## ⛔ SHELVED (2026-07-11) — Alex: "I dont want another finance reel right now." SPEND is a 3rd consecutive finance reel (XRAY/RETIRE/SPEND) → banked as a ready ship-candidate, NOT recorded next. Next NEW script must be NON-FINANCE (fresh Door-A comp in a different lane). The script above stays valid if/when finance rotates back in.
