@@ -1,0 +1,49 @@
+{
+  "creator": "nicksaraev",
+  "who": "Nick Saraev (@nicksaraev YouTube 457K) \u2014 Claude Code / Codex / n8n / money-receipts lane; specific $ result + 'I built it with Claude' + 'here's the exact system'",
+  "source": "YouTube auto-captions (official), cleaned. Views/titles from channel listing 2026-07-12. (Multi-hour 'FULL COURSE' videos excluded \u2014 off short-form format.)",
+  "videos": [
+    {
+      "id": "ZfYvv-0l9NA",
+      "views": 314000,
+      "title": "Claude Code + Nano Banana 2 + Kling = $15K Animated Sites",
+      "len": "14min"
+    },
+    {
+      "id": "czLrUyA_Bh4",
+      "views": 254000,
+      "title": "Gemini 3.1 Pro + Antigravity Destroys Every Site Designer",
+      "len": "10min"
+    },
+    {
+      "id": "j3aXJNu9804",
+      "views": 210000,
+      "title": "Claude Routines Just Dropped, And It's Perfect",
+      "len": "18min"
+    },
+    {
+      "id": "esXXuejofgk",
+      "views": 194000,
+      "title": "Clawdbot Sucks, Actually",
+      "len": "9min"
+    },
+    {
+      "id": "Ob5Vu-gD3mo",
+      "views": 176000,
+      "title": "Claude Managed Agents Just Dropped, And It Kills n8n",
+      "len": "17min"
+    },
+    {
+      "id": "4Cb_l2LJAW8",
+      "views": 168000,
+      "title": "Claude Code + Karpathy Autoresearch = The New Meta",
+      "len": "25min"
+    },
+    {
+      "id": "qKU-e0x2EmE",
+      "views": 162000,
+      "title": "Stop Fixing Your Claude Skills. Autoresearch Does It For You",
+      "len": "17min"
+    }
+  ]
+}

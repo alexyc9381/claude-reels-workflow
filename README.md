@@ -21,7 +21,12 @@ For **tutorial/guide reels** built in the **two-screen stacked** layout (top = a
   `ffmpeg-static` + `ffprobe-static`. (The 532 MB `whisper.cpp` checkout is excluded; the
   pipeline uses Python `faster-whisper` — see playbook §3.3.)
 - `script-factory/` + `build_captions*.py` — the ideation/caption tooling.
-- `memory/` — the AI brain: 82 `.md` rule/style/per-reel files + `MEMORY.md` index. Point
+- `script-style-replicator/` — replicate any top AI creator's **script voice/hook/structure** from
+  their real transcripts. Per-creator Script DNA (`creators/*-dna.md`) for raycfu · mavgpt · nateherk ·
+  nicksaraev · cindiezhu, matched topic ideas (`topic-ideas/*.md`), the `CREATOR-MATRIX.md` fusion
+  protocol + router, and a free `ingest/` toolkit (yt-dlp + faster-whisper) to add new creators.
+  Start at `script-style-replicator/SKILL.md`.
+- `memory/` — the AI brain: 83 `.md` rule/style/per-reel files + `MEMORY.md` index. Point
   Claude Code at this.
 - `transcripts/` — reference VO transcripts.
 

@@ -1,0 +1,55 @@
+{
+  "creator": "cindiezhu",
+  "who": "Cindy Zhu (@cindiezhu ~55K IG, TikTok mirror) \u2014 accessible no-jargon AI-for-non-technical lane; persona + plain-English outcome, show the real thing, friendly-friend voice, one-word comment gate",
+  "source": "TikTok mirror @cindiezhu, downloaded no-login via yt-dlp, transcribed faster-whisper base.en (light ASR noise on proper nouns: Remotion/Nanobanana/Claude). Her median ~2-3K, so 292K/25K/12K are large outliers.",
+  "videos": [
+    {
+      "id": "7636813735398575367",
+      "views": 292400,
+      "title": "7 Claude skills to run an entire creative studio",
+      "len": ""
+    },
+    {
+      "id": "7641300267593469202",
+      "views": 25600,
+      "title": "The 4 Skills that make your resume unrejectable",
+      "len": ""
+    },
+    {
+      "id": "7632761208482909448",
+      "views": 12300,
+      "title": "Claude x Nanobanana can redesign your entire house now",
+      "len": ""
+    },
+    {
+      "id": "7634806651534544136",
+      "views": 7564,
+      "title": "How people are creating these 10/10 carousels",
+      "len": ""
+    },
+    {
+      "id": "7656321897537293584",
+      "views": 5828,
+      "title": "Build a $10k-looking website with no coding",
+      "len": ""
+    },
+    {
+      "id": "7657682702983793927",
+      "views": 5645,
+      "title": "I let Claude run overnight and woke up to 50 studio-level assets",
+      "len": ""
+    },
+    {
+      "id": "7648954435200240914",
+      "views": 2693,
+      "title": "How to turn Claude into an actual intellectual sparring partner",
+      "len": ""
+    },
+    {
+      "id": "7659909192626605330",
+      "views": 2280,
+      "title": "How to recreate any site you love with Claude Code",
+      "len": ""
+    }
+  ]
+}
