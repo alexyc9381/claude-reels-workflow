@@ -13,8 +13,11 @@ reads, so it produces the same quality every time, for any topic, forever.
 ## Step 0 — Get a topic
 Any of: Alex names one · pull the top unused idea from `topic-ideas/<creator>.md` · take the freshest
 Door-A hit from the Outlier Engine (`~/Downloads/outlier-engine/`, `python3 scan.py`).
-**Every topic must clear the bar:** breadth litmus (a freelancer, a Shopify seller, a coach, AND a
-founder can all use it) · frontier not evergreen · outcome-framed (money / hours / customers).
+**Every topic must clear the bar:** breadth litmus (a student, an employee, a parent, a freelancer,
+AND a founder can all use it — huge TAM, NOT business-owners-only) · frontier not evergreen ·
+outcome-framed (money / hours / customers). **Then grep it against `KILL-LIST.md`** (+ the hook-library
+killed patterns): a match is dropped, or reframed with a receipts-first angle that names why the new
+version beats the dead one. Log new flops back into `KILL-LIST.md` after each post-autopsy.
 
 ## Step 1 — Route to a creator  → `CREATOR-MATRIX.md` §5
 Match the topic's shape to the creator whose proven formula fits:
