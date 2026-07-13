@@ -1,0 +1,49 @@
+{
+  "creator": "rileybrown",
+  "who": "Riley Brown (@rileybrownai YouTube / @rileybrown.ai TikTok ~1M) \u2014 vibe-coding live-build demos; 'Oh my... this shouldn't be possible' awe-reaction hooks over a real screen building an app in minutes. High-volume reposter.",
+  "source": "TikTok (@rileybrown.ai, faster-whisper base.en) + YouTube shorts (official captions). Views/titles from listings 2026-07-12. (One 503K TikTok dropped: corrupt audio stream.)",
+  "videos": [
+    {
+      "id": "7605369643275963679",
+      "views": 1000000,
+      "title": "Oh my.. this shouldn't be possible (Tinder/Hinge profile generator)",
+      "len": "TikTok"
+    },
+    {
+      "id": "7608016811770137886",
+      "views": 704700,
+      "title": "What happens when you give OpenClaw access to Blender",
+      "len": "TikTok"
+    },
+    {
+      "id": "7598674903839165726",
+      "views": 357200,
+      "title": "Claude Code is now my video editor",
+      "len": "TikTok"
+    },
+    {
+      "id": "GZxjs8FD3Ck",
+      "views": 183000,
+      "title": "Claude is so much better when you use MCP",
+      "len": "short"
+    },
+    {
+      "id": "7608421193951087902",
+      "views": 154300,
+      "title": "You need to learn OpenClaw",
+      "len": "TikTok"
+    },
+    {
+      "id": "pDsd2FiMUt8",
+      "views": 142000,
+      "title": "With Codex and GPT 5.5 you can just do things",
+      "len": "short"
+    },
+    {
+      "id": "uhVEIJXXvU4",
+      "views": 116000,
+      "title": "OpenClaw Blender part 2",
+      "len": "short"
+    }
+  ]
+}

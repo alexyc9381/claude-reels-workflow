@@ -14,12 +14,15 @@ metadata:
 their **real video transcripts** (not eyeballing). This is scriptwriting only; the visual/edit layer
 is [[style-cloning-pipeline]] + the playbook. Feeds, does not replace, [[script-factory-pipeline]].
 
-**The 5 creators + their voice (full router in `script-style-replicator/CREATOR-MATRIX.md`):**
+**The 8 creators + their voice (full router in `script-style-replicator/CREATOR-MATRIX.md`):**
 - **mavgpt** — spoken-prompt consumer follow-along ("What happens when you ask Claude to [scary thing]?" → prompts → "here's the trick" → bonus).
 - **raycfu** — named-module money system ("Most people don't realize…" → "The Scanner." "The Surgeon." each what→why→number).
 - **nateherk** — frontier capability / news-react (result-first "Here's how to [outcome]…" → screen walkthrough).
 - **nicksaraev** — receipts / $-result build (news-peg + skeptic-deflate + hard numbers "$8K→$2").
 - **cindiezhu** — persona + no-jargon outcome ("Did you know Claude can now…?" → named personas + "which means…").
+- **gregisenberg** — numbered-promise setup ("Why pay for Claude to use 10% of it? Here's the setup" / "N .md files that 10x it").
+- **rileybrown** — live vibe-coding awe-demo ("Oh my… this shouldn't be possible" narrating a real build in minutes).
+- **sabrinaramonov** — make-money-with-AI sequence/playbook ("If you've tried X and nothing stuck, you're doing the sequence wrong").
 
 **How to use:** pick creator via the router (or Alex names one) → open `creators/<name>-dna.md` → fire
 its §11 generation template on the topic + salt in §5 phrase-bank lines → run the **FUSION PROTOCOL**

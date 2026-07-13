@@ -23,7 +23,8 @@ script-style-replicator/
   perf/                    # compute_transfer_scores.py + log_reel.py (roll the log into router signal)
   ingest/                  # the free toolkit to add a NEW creator (yt-dlp + whisper + compilation)
 ```
-Creators covered: **raycfu · mavgpt · nateherk · nicksaraev · cindiezhu** (their transcripts live in
+Creators covered (8): **raycfu · mavgpt · nateherk · nicksaraev · cindiezhu · gregisenberg ·
+rileybrown · sabrinaramonov** (source transcripts live in `transcripts/<creator>/` here, and in
 `~/Downloads/<creator>-transcripts/`, each with a `<creator>-top-transcripts.md` compilation).
 
 ## HOW TO USE — replicate a creator's script for a new video
@@ -34,6 +35,9 @@ Creators covered: **raycfu · mavgpt · nateherk · nicksaraev · cindiezhu** (t
    - frontier capability / news-reaction / "N things every Claude user needs" → **nateherk**
    - receipts-first $-result build ("$15K sites", "kills n8n") → **nicksaraev**
    - persona + plain-English outcome, no jargon ("the diagnoser reads 1,000 job posts") → **cindiezhu**
+   - numbered-promise setup / "N things that [outcome]" listicle → **gregisenberg**
+   - live vibe-coding awe-demo ("oh my, this shouldn't be possible") → **rileybrown**
+   - make-money-with-AI sequence / business playbook → **sabrinaramonov**
 2. **Load that creator's DNA** (`creators/<name>-dna.md`) and fire its **Section 11 generation
    template**, filling the slots with the topic. For the opening line, pull a proven shape from
    `HOOK-BANK.md` (41 real openers ranked by views, tagged by family) and refit it to the topic.
@@ -68,7 +72,8 @@ See `ingest/README.md` for exact commands. Short version:
 5. Add the creator to `CREATOR-MATRIX.md` and the router.
 
 ## Provenance
-Profiles built 2026-07-12 from 41 real transcripts (raycfu 8 · mavgpt 7 · nateherk 11 · nicksaraev 7
-· cindiezhu 8). YouTube = official auto-captions; TikTok = faster-whisper base.en ASR. The prior
-hand-written `memory/<creator>-style-reference.md` refs were reconciled and upgraded with the
-transcript evidence (transcripts win on conflict).
+Profiles built 2026-07-12 from 65 real transcripts across 8 creators (raycfu 8 · mavgpt 7 · nateherk 11
+· nicksaraev 7 · cindiezhu 8 · gregisenberg 8 · rileybrown 7 · sabrinaramonov 9). YouTube = official
+auto-captions; TikTok = faster-whisper base.en ASR. Where a prior hand-written
+`memory/<creator>-style-reference.md` ref existed it was reconciled and upgraded with the transcript
+evidence (transcripts win on conflict); greg/riley/sabrina are transcript-only first profiles.
