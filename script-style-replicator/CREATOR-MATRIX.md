@@ -116,6 +116,12 @@ Read the topic's *shape*, then borrow that creator's DNA. The spine (§3) is con
 - **Contrarian / "your AI is lying to you" / "the hyped thing is theater"** → nick (Lane D, evidenced skeptic-deflate) or cindie (Sub-lane D, "stop the yes-man" behavior fix). nick for a public wave; cindie for a personal behavior config.
 - **Skills / slash-command roundups** → cindie (persona listicle) or raycfu (category/numbered grammar). cindie for breadth; raycfu when each skill needs a "why it matters."
 
+**⭐ Measured tie-breaker (once data exists):** the topic-shape rules above are the *prior*. As soon as
+`perf/TRANSFER-SCORES.md` has n≥3 for a creator (built from `PERFORMANCE-LOG.md`), it becomes the
+primary tie-breaker: when two creators fit a topic, pick the one with the higher measured avg-watch on
+Alex's own account. Raw creator views prove the style worked for THEM; the transfer score proves it
+works for Alex's faceless mascot. Re-run `perf/compute_transfer_scores.py` after each post autopsy.
+
 **Router one-liner:** *spoken-prompt consumer follow-along → mavgpt · named-module money system → raycfu · frontier capability / news-react → nateherk · receipts / $-result build → nicksaraev · persona + no-jargon outcome → cindiezhu.*
 
 ---

@@ -18,6 +18,9 @@ script-style-replicator/
   CREATOR-MATRIX.md        # ⭐ comparison table · universal spine · FUSION PROTOCOL · CREATOR ROUTER
   creators/<name>-dna.md   # per-creator Script DNA (hook formula, beats, phrase bank, CTA, gen template)
   topic-ideas/<name>.md    # 12–15 topic ideas in that creator's lane × Alex's niche (Stage-0 candidates)
+  HOOK-BANK.md             # ⭐ swipe file: 41 proven opener lines, tagged by family + ranked by views
+  PERFORMANCE-LOG.md       # feedback loop: log shipped reels' retention → learn what performs for Alex
+  perf/                    # compute_transfer_scores.py + log_reel.py (roll the log into router signal)
   ingest/                  # the free toolkit to add a NEW creator (yt-dlp + whisper + compilation)
 ```
 Creators covered: **raycfu · mavgpt · nateherk · nicksaraev · cindiezhu** (their transcripts live in
@@ -32,13 +35,17 @@ Creators covered: **raycfu · mavgpt · nateherk · nicksaraev · cindiezhu** (t
    - receipts-first $-result build ("$15K sites", "kills n8n") → **nicksaraev**
    - persona + plain-English outcome, no jargon ("the diagnoser reads 1,000 job posts") → **cindiezhu**
 2. **Load that creator's DNA** (`creators/<name>-dna.md`) and fire its **Section 11 generation
-   template**, filling the slots with the topic.
+   template**, filling the slots with the topic. For the opening line, pull a proven shape from
+   `HOOK-BANK.md` (41 real openers ranked by views, tagged by family) and refit it to the topic.
 3. **Apply Alex's HARD RULES** (the FUSION PROTOCOL in CREATOR-MATRIX.md spells out each transform):
    no em-dashes · no first-person anecdote (swap to a third-person receipt) · gate the how ·
    cut hard on the keyword · value noun by ~word 12 · zero jargon.
 4. **Gate it** through the Script Factory ([[script-factory-pipeline]]): Stage-1 kill-gate,
    Stage-3 hook gate ([[claude-reel-hook-library]]), then the adversarial Stage-4 critics.
 5. Output the finished 35–45s script (listicles 55–70s).
+6. **After it posts,** log it to `PERFORMANCE-LOG.md` (`python3 perf/log_reel.py …`) and fill the
+   retention numbers 48–72h later. Run `perf/compute_transfer_scores.py` to update which creator
+   style actually performs for Alex's audience — that measured signal tie-breaks the router (step 1).
 
 ## HOW TO PLUG INTO THE SCRIPT FACTORY
 - **Stage 0 (source):** `topic-ideas/<name>.md` are ranked Door-C candidates. They are HYPOTHESES —

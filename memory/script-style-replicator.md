@@ -34,6 +34,12 @@ hard rules) — use it as the pattern.
 Outlier Engine evidence + a fresh Stage-1 kill-gate pass before scripting (Door C is demoted, see
 [[script-factory-pipeline]]).
 
+**Hook bank + feedback loop:** `HOOK-BANK.md` = a swipe file of all 41 real openers, tagged by hook
+family + ranked by views (pull a proven shape for any hook). `PERFORMANCE-LOG.md` + `perf/` = the
+feedback loop: log each shipped reel's retention (`perf/log_reel.py`), roll it into per-creator/per-family
+**transfer scores** (`perf/compute_transfer_scores.py`) that tie-break the router by what actually
+performs for Alex's audience, not just raw creator views.
+
 **Add a new creator (stays fresh):** `script-style-replicator/ingest/` has the free toolkit
 (`fetch_yt_loop.sh` + `clean_json3.py` for YouTube official captions; `fetch_tiktok.sh` +
 `transcribe_whisper.py` for TikTok ASR via faster-whisper; `build_compilations.py`). Fetch their top
