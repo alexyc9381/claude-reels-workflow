@@ -37,7 +37,14 @@ hard rules) — use it as the pattern.
 Outlier Engine evidence + a fresh Stage-1 kill-gate pass before scripting (Door C is demoted, see
 [[script-factory-pipeline]]).
 
-**Hook bank + feedback loop:** `HOOK-BANK.md` = a swipe file of all 41 real openers, tagged by hook
+**Viral video teardowns (forensic):** `teardowns/<creator>.md` dissects each creator's TOP viral
+videos line-by-line AND word-by-word (33 videos across 8 creators): verbatim annotated beats, the exact
+word/diction choices + why, an extracted fill-in-the-blank formula per video, virality mechanics, and a
+hard-rule-clean "COPY IT" example. `teardowns/README.md` = the index + **11 UNIVERSAL VIRAL LAWS** that
+repeat across all 33 hits. Three fidelity layers: DNA = the creator's *voice*, HOOK-BANK = a proven
+*opener*, teardowns = an entire *proven video* to refit. Use teardowns to clone a SPECIFIC viral hit.
+
+**Hook bank + feedback loop:** `HOOK-BANK.md` = a swipe file of all 65 real openers, tagged by hook
 family + ranked by views (pull a proven shape for any hook). `PERFORMANCE-LOG.md` + `perf/` = the
 feedback loop: log each shipped reel's retention (`perf/log_reel.py`), roll it into per-creator/per-family
 **transfer scores** (`perf/compute_transfer_scores.py`) that tie-break the router by what actually

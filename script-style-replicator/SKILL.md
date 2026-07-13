@@ -16,7 +16,8 @@ edit layer is handled elsewhere ([[style-cloning-pipeline]], CLAUDE-REELS-PLAYBO
 script-style-replicator/
   SHARED-CONTEXT.md        # standards: Alex's rules + the DNA schema every profile follows
   CREATOR-MATRIX.md        # ⭐ comparison table · universal spine · FUSION PROTOCOL · CREATOR ROUTER
-  creators/<name>-dna.md   # per-creator Script DNA (hook formula, beats, phrase bank, CTA, gen template)
+  creators/<name>-dna.md   # per-creator Script DNA (aggregate: hook formula, beats, phrase bank, gen template)
+  teardowns/<name>.md      # ⭐ forensic per-video autopsies of each creator's biggest hits (line + word level)
   topic-ideas/<name>.md    # 12–15 topic ideas in that creator's lane × Alex's niche (Stage-0 candidates)
   HOOK-BANK.md             # ⭐ swipe file: 41 proven opener lines, tagged by family + ranked by views
   PERFORMANCE-LOG.md       # feedback loop: log shipped reels' retention → learn what performs for Alex
@@ -40,7 +41,11 @@ rileybrown · sabrinaramonov** (source transcripts live in `transcripts/<creator
    - make-money-with-AI sequence / business playbook → **sabrinaramonov**
 2. **Load that creator's DNA** (`creators/<name>-dna.md`) and fire its **Section 11 generation
    template**, filling the slots with the topic. For the opening line, pull a proven shape from
-   `HOOK-BANK.md` (41 real openers ranked by views, tagged by family) and refit it to the topic.
+   `HOOK-BANK.md` (65 real openers ranked by views, tagged by family) and refit it to the topic.
+   - **To clone a SPECIFIC proven viral video** (not just the aggregate style), open
+     `teardowns/<name>.md`, find the target hit, and copy its **extracted fill-in-the-blank formula** +
+     its exact transitional phrases. Three layers, increasing fidelity: DNA = the creator's *voice*,
+     hook bank = a proven *opener*, teardown = an entire *proven video* refitted to your topic.
 3. **Apply Alex's HARD RULES** (the FUSION PROTOCOL in CREATOR-MATRIX.md spells out each transform):
    no em-dashes · no first-person anecdote (swap to a third-person receipt) · gate the how ·
    cut hard on the keyword · value noun by ~word 12 · zero jargon.
