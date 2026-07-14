@@ -19,6 +19,15 @@ Zip `matchtern-longform/` and the `memory/` folder, move them, and re‑install 
 
 ---
 
+## Editing styles (pick one per reel)
+
+A reel's **script/VO/captions** are style-agnostic; the **look-and-feel + audio skin** is a selectable *editing style*. Pick one at build time — see [`editing-styles/STYLES.md`](editing-styles/STYLES.md) for the menu.
+
+- **Default — Cinematic Blueprint** (house style): clay Claude mascot + dark game-screen panel + premium shaded props, warm brand palette, cinematic riser/boom SFX. Use for most reels, and always for credibility-first / money / serious topics.
+- **Game-World Theme Remake** ([`editing-styles/game-world-remake.md`](editing-styles/game-world-remake.md), reference build = reel 51 SKILLS / Super Mario): re-skin the whole reel into a recognizable game world with a persistent game HUD as the retention spine + an original chiptune audio layer. Use for **listicle / count-up** and playful broad-consumer topics. Don't use it for somber topics.
+
+---
+
 ## 2. Mental model of the pipeline
 
 ```
