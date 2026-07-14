@@ -12,12 +12,13 @@ transcripts**, not eyeballed. This is script craft only (spoken words, hooks, be
 edit layer is handled elsewhere ([[style-cloning-pipeline]], CLAUDE-REELS-PLAYBOOK §6).
 
 ## What's in here
-**▶ To just make a viral script, follow `GENERATE.md` — the repeatable topic-in → script-out runbook.**
-Everything below is the library it draws on.
+**▶ Alex's SIGNATURE repeatable series is `SERIES-PLAYBOOK.md` — "I turned Claude into ___" (the persona
+series). Run it on repeat. To make a one-off script, follow `GENERATE.md`.** Everything below is the library.
 
 ```
 script-style-replicator/
-  GENERATE.md              # ▶ START HERE: the repeatable viral-script process (topic → shipped script)
+  SERIES-PLAYBOOK.md       # ⭐⭐ the signature repeatable series ("I turned Claude into ___") + episode lineup
+  GENERATE.md              # ▶ the repeatable viral-script process (topic → shipped script)
   SHARED-CONTEXT.md        # standards: Alex's rules + the DNA schema every profile follows
   CREATOR-MATRIX.md        # ⭐ comparison table · universal spine · FUSION PROTOCOL · CREATOR ROUTER
   creators/<name>-dna.md   # per-creator Script DNA (aggregate: hook formula, beats, phrase bank, gen template)
