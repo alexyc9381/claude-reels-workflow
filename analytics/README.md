@@ -12,6 +12,14 @@ The rubric predicts virality; this closes the loop by pulling what actually happ
 
 > Note on tools: **Blotato does NOT return watch time / retention** — only views/reach/likes/comments. So it can't power this loop on its own; the retention number must come from the direct Graph API below.
 
+## ⚠️ The per-second RETENTION CURVE — where it actually comes from
+Avg watch time ≠ the retention curve. They are different data:
+- **Instagram: the curve does NOT exist.** Not in the Graph API, not in the app. IG Reel insights are aggregate only (avg/total watch time). No third-party tool can give it either (they all read the same API). For IG, **avg % watched is the ceiling.**
+- **YouTube Shorts: the curve exists AND is pullable.** YT Studio shows the real audience-retention graph, and the **YouTube Analytics API** returns it: metric `audienceWatchRatio` (+ `relativeRetentionPerformance`) over dimension `elapsedVideoTimeRatio` = ~100 points across the video = the exact drop-off. Needs OAuth (`yt-analytics.readonly` + a Google Cloud project).
+- **TikTok:** retention rate + a partial in-app graph; per-second via API is unreliable → screenshot.
+
+**Strategy: cross-post every reel to YouTube Shorts and use YouTube as the retention lab.** It's the only place you can automatically pull *which second people leave* and map it to the beat that lost them. (A YT Analytics puller is the natural companion to `pull_ig_insights.py` — build it once cross-posting is on.)
+
 ## One-time setup
 1. IG must be a **Business or Creator** account connected to a Facebook Page.
 2. Reuse the **Meta app** from the Matchtern ads Marketing API; add scopes `instagram_manage_insights`, `instagram_basic`, `pages_read_engagement` and mint a long-lived (or system-user) token.
