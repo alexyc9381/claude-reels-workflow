@@ -23,16 +23,29 @@ render draft ─► extract evidence ─► FRESH critic ─► flags? ─┬─
 4. **Loop until an independent critic returns ZERO flags** on the hook and every scene — typically **2–3 rounds** (each round a fresh set of eyes on the real pixels finds new things). Then SFX → encode → deliver.
 
 ## Each pass RATCHETS UP — not just "fix what's broken"
-A pass is not done when the obvious bugs are gone; it's done when the reel is *richer* than last pass. On every loop, actively push these up wherever possible:
+A pass is not done when the obvious bugs are gone; it's done when the reel is *richer* than last pass.
 
-- **⬆ More detail** — richer, more alive backgrounds; more concurrently-animated layers; more depth (z-layers, parallax, stacked shadows). Governed by the **detail budget** (`game-world-remake.md` §1b, generalizes to all styles): **detail goes in the background (dimmed, behind), the foreground stays a single clean hero.** "Richer" = deeper shapes, not more competing foreground objects. Hard floor: **≥3–4 concurrently animated layers per scene**; never one static graphic on a panel.
-- **⬆ More pop-culture references, wherever possible** — recognizable + funny comment-bait. **Hard floor: ≥1 per scene; push for more where it fits naturally.** Sources: knockoff real brands/UIs (a "GEKKO PROPERTIES" landlord, a Robinhood-ish app), meme cameos (Doge, Gigachad-as-"Chad-Claude", moai, Shrek, Grogu, Messi kit), living-world gags, recognizable props/posters. **"Nothing fit" is NOT a passing answer** — if a scene has none, invent a reason to add one (a poster on the wall, a prop on the desk, a cameo fly-by). This is the single most-flagged omission.
-- **⬆ More polish** — every shape premium-shaded (gradient + rim/inner highlight + layered shadow + rounded); rich **matte** palette, NO neon glow / NO low-opacity content washes; eased, weighty motion with overshoot (never linear/robotic); the Claude sprite as protagonist, dressed in a distinct, recognizable (often pop-culture) outfit per scene.
-- **⬆ More SFX density** (final pass, once visuals lock) — a beat that can carry a sound gets one: hook riser, click/tap on every UI interaction, impacts/money/notification/counter sounds, 1–3 meme stingers at sus/shock beats, a CTA burst. Volume discipline: clicks ~0.13–0.18 under the VO.
+### ⭐ The three Alex flags the most — HARD FLOORS, check every single scene
+The recurring notes across DROP (v1→v9), SKILLS, HIRED, FLIP. These are **blocking**, not nice-to-have — every overhaul pass must visibly push all three UP:
 
-## The two gates the critic judges
+1. **Detailed, ALIVE backgrounds.** Every scene's background is a designed, moving world — **≥3–4 concurrently animated layers** + ambient life (something walking / drifting / bobbing / particles / parallax), *never* a flat panel or a hero floating in a void. Detail lives HERE — dimmed and behind — so the foreground can stay one clean hero (the detail budget, `game-world-remake.md` §1b). **"The background is plain / boring / empty" = auto-fail.** Each pass adds depth + motion + life to the world, not just to the hero.
+2. **Dressed sprite — a distinct, recognizable OUTFIT per scene.** The Claude sprite is the protagonist and it is **costumed, never a plain critter**. Give it an `outfit` matched to the beat, and make **several overtly pop-culture** (Neo/Matrix, Squid Game track, Sherlock, Mario, chef, crown-champion…). Keep the base Claude face untouched (costume = head-top + body props only; silhouette stays the rounded Claude critter, never a human bust). **Spread outfits — don't repeat adjacent.** "Boring / plain sprite" = fix it.
+3. **Pop-culture references — MORE, wherever possible.** Floor is **≥1 per scene**, but actively push for more: knockoff brands/UIs (a "GEKKO PROPERTIES" landlord, a Robinhood-ish app), meme cameos drawn as Claude sprites/props (Doge, "Chad-Claude", moai, Shrek, Grogu, Messi kit — **never generic humans**), recognizable posters/props, living-world gags. **"Nothing fit" is NOT a passing answer** — invent a reason to plant one. The single most-flagged omission; over-index on it.
+
+### Also ratchet every pass
+- **⬆ Polish** — every shape premium-shaded (gradient + rim/inner highlight + layered shadow + rounded); rich **matte** palette, NO neon glow / NO low-opacity content washes; eased, weighty motion with overshoot (never linear/robotic).
+- **⬆ SFX density** (final pass, once visuals lock) — a beat that can carry a sound gets one: hook riser, click/tap per UI interaction, impacts/money/notification/counter sounds, 1–3 meme stingers, CTA burst. Clicks ~0.13–0.18 under the VO.
+
+## The gates the critic judges
+- **Gate 0 — cover frame / thumbnail (frame 0):** the first frame is the IG thumbnail AND the mute scroll-stopper — design it deliberately, don't inherit it. Solid at frame 0 (no fade-in / no half-drawn state), the hook or payoff mute-readable in <2s, the dressed sprite + ≥1 pop-culture element present. If frame 0 wouldn't stop YOU mid-scroll, it fails.
 - **Gate A — hook pattern-interrupt (0–5s):** something physically surprising lands by ~0.5–1s (a drop/slam/burst/POV-rush/fake-out), earned by the topic, mute-readable in <2s, escalating with **no dead air**, ≥1 pop-culture element. Judge on the **0–2s motion burst**, not one still.
-- **Gate B — per-scene visual overhaul (every scene):** rich matte background + ≥3–4 animated layers + premium-shaded props + Claude sprite protagonist + **≥1 pop-culture item** + escalation. No scene is exempt or "already fine."
+- **Gate B — per-scene visual overhaul (every scene):** the three hard floors above — **alive background (≥3–4 animated layers) + dressed/pop-culture sprite + ≥1 pop-culture reference** — plus premium-shaded props, the Claude sprite as protagonist, and escalation. No scene is exempt or "already fine."
+
+## Faster loops WITHOUT lowering the bar (#3)
+The quality bar never drops — but interim rounds can be cheap so you afford MORE of them:
+- **Interim critic rounds render at half-res** (`remotion render --scale 0.5`) and/or only the changed scenes' frames. The critic judges layout, occlusion, dead-air, background richness, outfits, pop-culture, escalation — none need full resolution. Faster renders = more loops, not fewer.
+- **The FINAL pre-delivery critic pass + the delivery render are ALWAYS full-res** (1080×1920). Nothing ships judged on a proxy; fine-text legibility + final polish are verified at full quality.
+- Net: speed buys iterations; the last word is always a full-quality render an independent critic signs off on. **A faster loop must never mean a looser loop.**
 
 ## Three principles that make the loop honest
 1. **Fresh critic every round, judging the RENDER — not the author, not the code.** No self-certifying, no "good enough for a flat scene."
@@ -40,7 +53,7 @@ A pass is not done when the obvious bugs are gone; it's done when the reel is *r
 3. **Not waivable** — cut the number of loops under time pressure, never the loop itself. Log the hook before/after + per-gate verdict (no evidence logged = not deliverable).
 
 ## Stop condition
-A fresh critic that did not build the reel finds **zero** open flags on Gate A and every scene's Gate B, AND the pass added detail + pop-culture + polish over the previous one. Only then: SFX pass → mac-safe encode → deliver (audit audio onset 0.0s, `volumedetect max_volume < 0 dB`).
+A fresh critic that did not build the reel finds **zero** open flags on Gate 0, Gate A, and every scene's Gate B, AND the pass visibly raised the **three hard floors** (alive backgrounds · dressed pop-culture sprite · ≥1 reference per scene) over the previous one. Only then: SFX pass → mac-safe encode → deliver (audit audio onset 0.0s, `volumedetect max_volume < 0 dB`). *(This final sign-off pass is always a full-res render, per "Faster loops without lowering the bar".)*
 
 ## After posting — close the loop (don't optimize blind)
 Delivery is not the end. 48–72h after a reel posts, pull the real numbers and park them next to the *predicted* Stage-4 scorecard: run `analytics/pull_ig_insights.py` (auto: views/reach/saves/shares/comments + **avg % watched**, the retention KPI) and add one screenshot for the app-only **3s-hold % + retention curve** (`analytics/PERFORMANCE-TEMPLATE.md`). Where the curve cliffs ↔ which beat, and which gate predictions actually held, become the next kill-rules (`script-factory-pipeline` POST-PUBLISH AUTOPSY). See `analytics/README.md`.
