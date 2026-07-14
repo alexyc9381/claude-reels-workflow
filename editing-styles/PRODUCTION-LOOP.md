@@ -42,5 +42,8 @@ A pass is not done when the obvious bugs are gone; it's done when the reel is *r
 ## Stop condition
 A fresh critic that did not build the reel finds **zero** open flags on Gate A and every scene's Gate B, AND the pass added detail + pop-culture + polish over the previous one. Only then: SFX pass → mac-safe encode → deliver (audit audio onset 0.0s, `volumedetect max_volume < 0 dB`).
 
+## After posting — close the loop (don't optimize blind)
+Delivery is not the end. 48–72h after a reel posts, pull the real numbers and park them next to the *predicted* Stage-4 scorecard: run `analytics/pull_ig_insights.py` (auto: views/reach/saves/shares/comments + **avg % watched**, the retention KPI) and add one screenshot for the app-only **3s-hold % + retention curve** (`analytics/PERFORMANCE-TEMPLATE.md`). Where the curve cliffs ↔ which beat, and which gate predictions actually held, become the next kill-rules (`script-factory-pipeline` POST-PUBLISH AUTOPSY). See `analytics/README.md`.
+
 ---
 *Cross-refs: `CLAUDE-REELS-PLAYBOOK.md` (§6–§8), `editing-styles/game-world-remake.md` §1b (detail budget), `STYLES.md` (pick a style first). This loop runs the same regardless of which editing style is chosen.*
