@@ -22,8 +22,10 @@ script-style-replicator/
   CREATOR-MATRIX.md        # ⭐ comparison table · universal spine · FUSION PROTOCOL · CREATOR ROUTER
   creators/<name>-dna.md   # per-creator Script DNA (aggregate: hook formula, beats, phrase bank, gen template)
   teardowns/<name>.md      # ⭐ forensic per-video autopsies of each creator's biggest hits (line + word level)
+  workflows/<name>.md      # ⭐ the buildable AI WORKFLOWS behind the mega-hits (what you gate + deliver for real)
   topic-ideas/<name>.md    # 12–15 topic ideas in that creator's lane × Alex's niche (Stage-0 candidates)
-  HOOK-BANK.md             # ⭐ swipe file: 41 proven opener lines, tagged by family + ranked by views
+  HOOK-BANK.md             # ⭐ swipe file: 65 proven opener lines, tagged by family + ranked by views
+  KILL-LIST.md             # angles that flopped or are banned — checked before any topic enters
   PERFORMANCE-LOG.md       # feedback loop: log shipped reels' retention → learn what performs for Alex
   perf/                    # compute_transfer_scores.py + log_reel.py (roll the log into router signal)
   ingest/                  # the free toolkit to add a NEW creator (yt-dlp + whisper + compilation)
