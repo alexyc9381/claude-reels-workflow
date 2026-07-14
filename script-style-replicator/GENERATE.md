@@ -13,6 +13,9 @@ reads, so it produces the same quality every time, for any topic, forever.
 ## Step 0 — Get a topic
 Any of: Alex names one · pull the top unused idea from `topic-ideas/<creator>.md` · take the freshest
 Door-A hit from the Outlier Engine (`~/Downloads/outlier-engine/`, `python3 scan.py`).
+**⛔ If the topic is modeled on a creator's video, that video must be an OUTLIER for THEM** — lift ≥ ~2x
+their own median (check `OUTLIER-RANKING.md`), not merely high raw views. A video that only did average
+for its creator carries no signal worth copying. Prefer the highest-lift videos even at lower raw counts.
 **Every topic must clear the bar:** breadth litmus (a student, an employee, a parent, a freelancer,
 AND a founder can all use it — huge TAM, NOT business-owners-only) · frontier not evergreen ·
 outcome-framed (money / hours / customers). **Then grep it against `KILL-LIST.md`** (+ the hook-library

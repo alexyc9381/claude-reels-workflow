@@ -28,11 +28,22 @@ visuals, or thumbnails.
 7. **Breadth litmus:** could a freelance designer, a Shopify store owner, a coach, AND a founder all
    immediately use this? If only a technical founder can, it's too deep.
 
+## ⛔ Video selection — OUTLIERS, not raw views (STANDING, Alex 2026-07-12)
+When choosing which of a creator's videos to model / teardown / mine for workflows or topic ideas, rank
+by **OUTLIER LIFT, not absolute views.** Lift = `video views ÷ that creator's recent median` (× a
+recency boost, same math as `~/Downloads/outlier-engine/`). A video only qualifies as a source if it
+**overperformed for THAT creator** (≥ ~2x their own median). A 300K view on a creator who averages 300K
+is baseline noise; a 25K view on a creator who averages 3K is a real signal worth copying. Always report
+the **lift multiple** next to raw views (e.g. "292K, 44x median"), and prefer the high-lift videos even
+when their raw count is lower. Baseline medians live in `OUTLIER-RANKING.md`; recompute them when a
+creator's catalog is re-fetched (medians drift as a creator grows).
+
 ## Source material
 - Transcripts live in `~/Downloads/<creator>-transcripts/`. Each creator has a compiled
-  `<creator>-top-transcripts.md` with **view counts + titles as section headers** (these are the
-  creator's outliers — weight the highest-view videos most). Individual `<id>.txt` files are the raw
-  verbatim transcripts.
+  `<creator>-top-transcripts.md` with **view counts + titles as section headers**. These were pulled as
+  the creator's top videos; cross-check each against `OUTLIER-RANKING.md` and **weight by lift over the
+  creator's median, not by raw views** (see the outlier rule above). Individual `<id>.txt` files are the
+  raw verbatim transcripts.
 - The repo already has hand-written style refs in `memory/<creator>-style-reference.md`. **Read yours
   as prior art to reconcile and UPGRADE with hard transcript evidence — do not just restate it.** If
   the transcripts contradict or sharpen the old ref, the transcripts win (say so).

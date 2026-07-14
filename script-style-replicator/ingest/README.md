@@ -25,7 +25,11 @@ python3 -m yt_dlp --flat-playlist --playlist-end 30 \
   --print "%(view_count)s|%(id)s|%(title).60s" \
   "https://www.tiktok.com/@HANDLE" | sort -t'|' -k1 -rn | head -15
 ```
-Pick the ~8–10 highest-view videos (their outliers), plus a couple of their shortest for hook density.
+Pick the ~8–10 genuine OUTLIERS — **not raw top views. Compute lift = each video's views ÷ the median
+of that same catalog pull, and keep only videos ≥ ~2x the creator's median** (a 300K on a 300K-median
+channel is noise; a 25K on a 3K-median channel is a 8x signal). Add each video's lift to
+`../OUTLIER-RANKING.md`. If a creator has almost no ≥2x videos, they are not an outlier creator worth
+modeling — skip them (see sabrinaramonov).
 
 ## 2a. YouTube — official auto-captions (fast, no ASR)
 ```bash
