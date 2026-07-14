@@ -11,6 +11,8 @@ Each style keeps the invariant chassis (1080×1920 @30fps, the 3-font role syste
 
 **⛔ Don't mix a style with the wrong topic.** The game-world style reads as *fun* — great for a skills listicle, wrong for a serious money/credibility reel (use the default there). When unsure, default to Cinematic Blueprint.
 
+**The loop is the same for every style.** Whichever style you pick, the reel goes through [`PRODUCTION-LOOP.md`](PRODUCTION-LOOP.md): the first render is a wireframe, then a fresh critic tears it apart on the rendered frames and it's fixed + re-rendered 2–3× — each pass ratcheting up detail, pop-culture references, and polish — until an independent critic finds zero flaws.
+
 ### How to add a new style
 1. Ship one reel in the new look, iterate to a shipped result.
 2. Decompose it into a `<style-name>.md` pack: the invariant chassis it keeps, then each dimension (world/background, HUD, mascot, prop kit, scene mapping, typography+color, motion+SFX+music) with **exact values from the source**, a re-theme/swap template, an apply-to-a-new-video checklist, and the gotchas.
