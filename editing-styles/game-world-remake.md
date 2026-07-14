@@ -36,6 +36,38 @@ Render the game world **twice, nested**: an outer full-frame `Bg` shows in the ~
 
 ---
 
+## 1b. Scene detail & density — the "detail budget"
+
+**The one rule that resolves "make it richer" vs "it's too cluttered":** put the DETAIL in the **background**, keep the **foreground** disciplined. Richness lives in the always-alive world *behind* the message; the message itself is one loud, clean hero. Almost every "this scene is boring / this scene is a mess" note is really a violation of this split (boring = dead background; messy = crowded foreground).
+
+Think of every scene as **three stacked layers**, each with its own detail budget:
+
+| Layer | z | Detail budget | Contrast | Motion |
+|---|---|---|---|---|
+| **World (background)** | low | **6–10 concurrently animated elements** — parallax sky/clouds/hills/bushes/ground + *ambient life* (a distant Goomba walking, a bobbing `?`-block, drifting coins, floating particles, the running-HUD mascot). No corner is ever dead. | **muted / dimmed / soft** — it must recede | always moving (sway + drift), but slow & low-amplitude |
+| **Hero + artifact (foreground)** | high | **≤4 things total: 1 mascot action + ≤1 premium artifact (RepoCard / HudBox / search bar / before→after panel) + 1 big number-or-label + 1 `MSlug` title plate.** That's the ceiling. | **full contrast, brightest accent** | escalates + climaxes on the payoff beat |
+| **Persistent HUD** | top | the two global rows (§2) — **doesn't count** against the scene budget | full | steady (outside the zoom wrapper) |
+
+**"Detailed" = DEPTH, not more objects.** You add richness by making each shape *deeper*, never by adding competing foreground things:
+- Every shape gets the premium treatment — **gradient fill + rim/inner highlight + layered drop shadow + rounded corners** (the §4 shading recipe). NO flat single-tone shapes (they read cheap).
+- Depth via **z-layering + parallax + stacked shadows + occlusion** (things correctly pass in front of / behind each other).
+- Low opacity is allowed **only** for background depth washes (sun bloom, glow), **never** for foreground content — content is solid and readable (no ghosted 15%-opacity artifacts).
+- **No emoji pictographs** on screen — draw the shape (a coin, a star, a checkmark glyph in the mono face), don't paste 🪙⭐✅.
+
+**Escalation, not stasis.** A scene should *build*: elements enter/animate and the payoff (number, before→after, seal) lands on a riser→boom beat, not sit static for 6 seconds. If a scene is one still image the whole time, it's under-built.
+
+**How much is too much? Four gate tests (run on the RENDERED frame, not the code):**
+1. **Mute test** — a stranger decodes the payoff (the number / before→after) in **< 2s, sound off**. If your eye goes to the background before the hero number, the background is too loud → dim/blur it more.
+2. **One-hero test** — you can point to the single thing the scene is about. If you can't, you've overloaded the *foreground* → move detail to the background layer or cut it (don't add a second hero).
+3. **Zoning test** — every foreground element sits in its **own non-overlapping rectangle**; nothing overlaps text. If two touch, separate them or drop one. (§5.⛔2)
+4. **Grounded test** — props sit on the world's floor line (~y700), not floating mid-panel. (§5.⛔3)
+
+**Worked example (R3 "UI-UX Pro Max"):** *background* = the full alive Mario world (parallax layers + a twinkling Super Star) kept dim; *foreground* = exactly one before→after (the ugly `AI SLOP` panel slides **fully** out → a clean `PRO GRADE` app card locks in) + the mascot going rainbow-invincible + the `MSlug` title + one stat trio (`98 / A+ / 100`). Rich and alive, but the eye lands on the transform in under a second.
+
+**Origin of the rule:** the DROP reel got flagged first for "backgrounds too boring" (→ push richness into the background) and then for "too much going on" (→ strip the foreground to one hero). Both notes are satisfied by the same split, which is why it's the budget for every scene.
+
+---
+
 ## 2. The Level-HUD + step-tracker — the signature retention spine
 
 **Two global overlay rows pinned to the top band, above every scene** (`zIndex 120` & `115`), driven purely off `f` and `L`. Together they turn watching into *progressing through a level*. **Both must be SOLID at frame 0** (thumbnail / mute scroll-stopper) — floor opacity to 1, animate only a translateY settle.
