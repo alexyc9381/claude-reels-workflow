@@ -1,0 +1,20 @@
+### cindiezhu | DYM3m_Gp4B4 | 1.1M | 62d-BREAKOUT
+CAPTION: Here are 4 prompts that actually work:  🔍 the diagnoser. scans your resume like a real applicant tracking system and tells you exactly what’s broken.  🕵️ the recruiter. reads 1,000 live job posts in your field and gives you the top keywords and skills you’re missing.  ✏️ the rewriter. rewrites every bullet using Google’s XYZ formula, the same one top candidates use to land at Met
+TRANSCRIPT:
+Did you know that Claude can now make your resume basically unrejectable?
+Most people are just pacing their resume into chat GPT and then just saying,
+make this better. That's why it's not working.
+So before you send another resume into the void and wonder why no one's calling you back
+or why you're not getting good offers, try this.
+First, the diagnosis. So this skill scans your resume like a real applicant tracking system would,
+flag the exact sections that trip it up and tells you how to fix them.
+Number two, the recruiter. This skill analyzes your resume against
+1,000 similar job descriptions in your field and then gives you the top key words and skills
+you're missing. And number three, the rewriter. So this skill rewrites your experience using
+the Google XYZ formula, which is accomplished X as measured by Y by doing Z.
+It applies the principles that top applicants use to land meta, Google and Fortune 500 roles.
+And number four, the hiring manager. This one turns Claude into an actual hiring manager
+for the role. It conducts a life-like interview, asks you the hardest technical questions in your
+field and then rates your answers out of 10. Honestly, the best interview prep there is.
+So that's the whole loop. Diagnose, score, rewrite and prep.
+Come and resume and I'll send you the full setup guide for the four skills.

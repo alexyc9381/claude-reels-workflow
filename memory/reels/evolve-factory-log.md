@@ -65,3 +65,11 @@ B3 HERO (visible catch, "So" causality) "So the next time that mistake creeps in
 B4 COMPOUNDING (shown as a growing rulebook) "Correct it once, it is handled for good, and its list of your fixes just keeps growing."
 B5 CTA "The setup that makes it self-correct is in a free guide. Follow and comment EVOLVE."
 - word_count ~74 (~30s). Zero em dashes. Keyword EVOLVE final + hard cut. GATE-THE-HOW: rough mechanism spoken; the exact self-improve hook + reflection prompt (append only verified learnings) + regression check gated. TRUTH-REQUIRED: the 3 captures above (Stage 4.5, pre-record).
+
+## ALT EVOLUTION HOOKS (2026-07-13, Alex-directed trial variants)
+Two swappable hook variants on the EVOLVE solo chassis (ClaudeEvolveSolo.tsx `variant` prop; comps ClaudeEvolveSoloEvoA/EvoB in Root.tsx; rest of reel byte-identical). Built the "tiny -> bigger -> bigger" evolution Alex asked for, then rebuilt FUNNY after his note (headers must not say "the evolution of AI" BS; every form must be a gag):
+- Shared `EvoForm` component, 5 funny forms: v1 "confidently wrong" (wobbling dunce cap) -> v2 "panic-googling" (sweat + trembling coffee) -> v3 "ok it's cooking" (shades + flame) -> v4 "galaxy brain" (brain hat + orbiting planets) -> v5 "FINAL BOSS" (crown + halo + lightning + cape + fireworks, oxblood label).
+- Hook A "WAIT FOR THE FINAL FORM": single hero levels up 44->262px center stage, FORM x/5 counter, IQ meter pinning to infinity, aura rings, per-stage white flash + chime + riser into a crash MEGA slam.
+- Hook B "FROM INTERN TO FINAL BOSS": march-of-progress line of all 5 forms lit L->R by a spotlight sweep, rising gold dashed arrow, cave-dark -> tech-bright backdrop, funny label pills per form.
+- LESSONS: (1) never fire the evolution white-flash at t=0 - it washes the stun-gun frame (flash on evolution beats only, tS.slice(1)); (2) critic scored the first pass 5-6/10 for shallow escalation + generic header + plateau climax - fixed with steeper size curve, distinct MEGA terminal form, pre-filled meter, funny per-form labels.
+- Delivered: Trial Reels/EVOLVE_evoHookA_powerup_REVIEW.mp4 + EVOLVE_evoHookB_march_REVIEW.mp4 (58.11s, onset 0.0) + Drive/45 EVOLVE/ same names.

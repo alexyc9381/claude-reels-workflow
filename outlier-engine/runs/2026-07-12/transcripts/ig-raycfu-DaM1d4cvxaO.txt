@@ -1,0 +1,40 @@
+### raycfu | DaM1d4cvxaO | 186K | 12d
+CAPTION: How I built a $2k/month client automation portal #ai #tech @rocketdotnew 
+TRANSCRIPT:
+Most food will realize that every agency and freelancer is managing their clients through
+email and spreadsheets when they could have a fully automated portal.
+I built one and sold it to companies for $50 each.
+Here's how I did it.
+I added this prompt here to build a client automation portal where each client can log
+in and see their project status, upcoming deliverables, invoices, and messages all in one
+dashboard.
+I chose to create a using rocket-dash to do such build because it actually creates
+the full stack using a super-based backend, strike webhook, authentication, and even email
+notifications.
+This normally takes more than 5 AI tools combined together to do.
+On my side, I have an admin panel where I can manage each client, update their project
+status, trigger automated emails with milestones or hit, and track payments through strike webhook
+in real time.
+So when a client pays an invoice, strike an update to webhook, and the portal gets updated
+automatically, and then the client sees it reflected instantly.
+Then I refine it more to make it worth paying for.
+I added an onboarding flow so users get a welcome email.
+I also added automated weekly status updates that post from their project data directly and
+emails the client every week.
+Here's the part that made the big difference for me.
+When I was working on the project, I hit a problem with the strike webhook integration,
+where I needed a client sale to trigger the email to send an automation.
+I couldn't figure out for a few hours of rocket.new success support team stepped in to
+figure it out within minutes.
+A real person helped me work through the integration without me even sending an email.
+This made the process so much smoother because I not only got a block faster, I also
+didn't have to waste any time trying various flows that could break my automation.
+Every person running a service business has the same problem.
+Clients constantly emailing asking for updates, invoicing getting lost in onboarding taking
+way too long.
+To get leads, I've linked on LinkedIn sales navigator and filtered for freelancers
+and agencies.
+Then I showed them a demo by sending it to their LinkedIn or their email.
+I created a step-by-step detail guide with the exact prompt in order to build this out.
+If you want to just like the video and comment portal and I'll send it to you.
+Follow for more ways to make money and run your business with tech and AI.

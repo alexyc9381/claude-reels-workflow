@@ -1,37 +1,77 @@
 ---
 name: reel-sfx-pass
-description: "⛔ STANDING SFX pass — after the visuals are locked (end of the overhaul stage, before encode), densify sound effects from the SFX library wherever a beat can carry one, to maximize retention; ALWAYS a hook RISER + click/tap on every UI interaction + impacts/money/meme stingers"
-metadata: 
+description: "⛔ STANDING Phase-D SOUND DESIGN (not a cue-sprinkle): one designer agent per scene synced to PHYSICAL ACTION, hero hits layered 3-deep, ⛔ RISERS HARD-CAPPED AT 2 PER REEL (overrides the old every-transition rule), synthesize what the library lacks; + music bed rules (cut on the phrase onset, MEASURE the bed and compute the gain, duck the CTA)"
+metadata:
   node_type: memory
   type: feedback
-  originSessionId: 34c266ae-aeaf-4063-b27a-b16a33164df3
+  originSessionId: 09be9b49-efa9-49b2-9cf0-94de2619c452
 ---
 
-⛔ STANDING — runs on EVERY reel as the last step of the [[reel-overhaul-stage]], after the visuals are locked and before the delivery encode. Alex (2026-07-12): "add more sound effects throughout... more clicking... Among Us... maximize retention," and "add the SFX process into the official workflow so it adds sounds from my library wherever possible."
+⛔ STANDING — runs on EVERY reel as the last step of [[reel-overhaul-stage]], after the visuals are locked and before the delivery encode. Wire via `<Sfx at={sec} src="file.ext" v={vol} dur={sec} />`.
 
-# The SFX pass
+# ⛔⛔ THE RISER RULE CHANGED (Alex, reel 52) — THIS OVERRIDES THE OLD ONE
 
-**Goal:** every meaningful beat carries a sound. Dense, satisfying audio feedback = retention. Pull from the [[sfx-library]] (`~/Downloads/sfx-library`, 5 category folders) + `video/public/sfx/`. If a needed sound isn't in `public/sfx/`, copy it in from the library first. Wire via `<Sfx at={sec} src="file.ext" v={vol} dur={sec} />` (times are L-relative to each scene so they survive re-timing).
+> *"dont have too many like riser sound effects it gets kind of annoying"*
 
-## ⛔ ALWAYS (non-negotiable)
-- **HOOK RISER:** the hook MUST have a RISER building into its first big impact/slam (`metal_riser.wav` / `lib_riser.wav`, dur tuned so it PEAKS at the slam). Every reel. (Alex flagged a missing hook riser on reel 46/44.)
-- **Scene cuts:** a whoosh on every cut (`lib_whoosh.wav`).
-- **UI micro-interactions:** a click/tap on EVERY interaction — each item detected/scanned, each chip flipping, each card sliding in, each button/logo, each keyword. Use `click.mp3 / lib_click.wav / ui_tap.mp3 / mouse_click.mp3 / soft_pop.mp3` (low vol 0.13–0.18, they're texture). This is the biggest retention lever.
+**HARD CAP: 2 RISERS PER REEL.** One into the hook/first turn, one into the payoff. That is all.
+- ❌ **RETIRED:** "the hook MUST have a riser, every reel" + "riser accents into any payoff". Those rules produced the spam.
+- ⛔ The Factory/Sol chassis contains a `{/* metallic RISERS peaking into EVERY scene transition */}` map that fires **7**. **Grep and kill it on every clone.**
+- A **suspense bed** (low drone + tremolo + accelerating heartbeat) is NOT a riser and does not count — use it where tension is needed instead.
 
-## The mapping (menu — apply wherever the beat exists)
-- **Impacts / slams / stamps:** `lib_boom.wav / boom.wav / impact.wav / thock.wav`.
-- **Typing:** `lib_typing.wav / lib_mactype.wav`. **Confirm / correct / check:** `lib_confirm.wav / lib_correct.wav / ding.wav`.
-- **Money / SOLD / payout:** `cash-register.mp3` + coin chimes `chimehi.wav / chimelo.wav`.
-- **Messages / notifications:** `lib_notif.wav`. **Counters ticking / rolls:** `glitch_counter.mp3 / data.wav`.
-- **Reveals / magic:** `lib_magic_reveal.wav / sparkle.wav / shimmer.wav`. **Record-scratch pattern interrupt:** `screech.wav`.
-- **Riser accents into any payoff** (not just the hook): `lib_riser.wav / swooshup.wav`.
-- **MEME stingers for engagement (sparingly, ~1–3 per reel, at fun/sus/fail/shock beats):** `among_us.mp3` (sus reveal), `bruh.mp3` (fail/lazy), `vine_boom.wav` (shock), `boing.wav` (comedic). Alex likes Among Us — use it on a scary/sus reveal.
-- **CTA:** `lib_boom.wav` + `sparkle.wav` + `cash-register.mp3` + `crowd_cheer.wav` + coin chimes.
+# SOUND DESIGN PASS — a design pass, not a cue-sprinkle
 
-## Discipline
-- **Volumes:** VO full; music bed ≤ 0.11; SFX 0.12–0.44 — clicks/taps 0.13–0.18, impacts/risers 0.30–0.44, meme stingers ~0.20–0.26. Layer UNDER the VO; SFX are texture, not noise.
-- **De-click:** if a sound clips harshly, trim/fade in the source; keep dur short.
-- **Verify against the tight timeline:** all `at=` within their scene bounds (SFX are L-relative; they shift with re-timing — recheck offsets don't exceed shortened scenes).
-- **No silent gaps:** the ambient SFX + music keep the bed alive under [[caption-sync-gate]] / [[reel-vo-pacing]] tightened VO.
+> Alex, reel 52: *"i need to see better SFX sound design for this video throughout here to take it one level higher"*
+> Reel 52 went **9 cues → 82**. That is the gap between a wireframe and a reel.
 
-Cross-links: [[sfx-library]] (the catalog + sourcing method), [[reel-overhaul-stage]] (this pass is its final step), [[claude-ai-reel-workflow]] (audio rules). Proven: reels 44 HIRED + 46 FLIP got dense click/tap layers + Among Us stingers + hook risers (2026-07-12).
+## The method
+1. **INVENTORY FIRST.** `ls public/sfx/` + `find ~/Downloads/sfx-library`. Copy anything missing into `public/sfx/`.
+   ⛔ **Grep for the specific sounds the action needs BEFORE designing.** Reel 52 needed zip / suspense / crying and **none of the three existed anywhere.**
+2. **SYNTHESIZE WHAT DOESN'T EXIST** — numpy only, zero copyright (`video/tools/gen_missing_sfx.py`). Proven recipes:
+   - **zipline** = descending whine + rattling band-passed noise + a doppler drop as it passes the lens
+   - **suspense bed** = low drone + unease tremolo + an *accelerating heartbeat*
+   - **cry** = descending pitch + sob wobble + 2nd harmonic (cartoon, never a real human sample)
+3. **ONE DESIGNER AGENT PER SCENE** (parallel Workflow). Each gets: the scene's **on-screen physical action with relative timings**, its absolute window, the **exact filename list**, and the volume bands. Returns `{at, src, v, dur, why}` with ABSOLUTE times.
+4. ⛔ **VALIDATE BEFORE SPLICING** — agents hallucinate filenames (reel 52: `glitch_counter.wav`; the real file is `.mp3`). Drop any cue whose file is missing, whose `at` is past the hard cut, or that adds a riser.
+5. **Re-render, then MEASURE:** peak < 1.0 · transient density ~1-2.5/s (deliberate impacts, not popping).
+
+## The rules the cues must obey
+- ⛔ **SYNC TO THE PHYSICAL ACTION, NOT THE BEAT GRID.** A sound fires when an OBJECT does something (a stamp lands, a slug is struck, a glove connects). Silence is fine. Do not carpet the scene.
+- ⛔ **LAYER THE HERO HIT 3 DEEP: attack + low-end body + texture.** One thin pop is the #1 thing that makes a reel read cheap. (Reel 52 layers the stamp SLAM = impact+boom+thock, the press SLAM, punch 4, the INTERVIEW flip.)
+- **Every visible action gets its sound** — a zip for a zipline, typing for letters being struck, a per-item click for each thing igniting.
+- **UI micro-interactions** — a click/tap on every interaction (item scanned, chip flipping, card sliding, keyword seating). Still the biggest retention lever. Low volume; they are texture.
+
+## The mapping (menu — apply where the beat exists)
+- **Impacts / slams / stamps:** `impact.wav · lib_boom.wav · boom.wav · thock.wav · hit.mp3 · cinematic-impact.mp3 · m_stomp.wav · m_bump.wav`
+- **Movement:** `lib_whoosh.wav · lib_whoosh_fast.wav · whoosh-2-fast.mp3 · swish.wav · fling.wav · zipline.wav`
+- **Typing:** `keyboard-typing.mp3 · mac-typing.mp3 · lib_mactype.wav` · **Confirm:** `lib_confirm.wav · lib_correct.wav · ding.wav`
+- **Money:** `cash-register.mp3` + `chimehi.wav / chimelo.wav` · **Notifications:** `lib_notif.wav` · **Counters:** `glitch_counter.mp3 · data.wav`
+- **Reveals:** `lib_magic_reveal.wav · sparkle.wav · shimmer.wav` · **Pattern interrupt:** `screech.wav`
+- **Tension:** `suspense_approach.wav · heartbeat.mp3 · sub.wav` (⛔ use these instead of a riser)
+- **Hurt/comedy:** `cry_whimper.wav · roblox-oof.mp3 · bonk.mp3 · downer.mp3`
+- **MEME stingers (~1-3 per reel, only where earned):** `among_us.mp3` (sus reveal) · `bruh.mp3` (fail) · `vine_boom.wav` (shock) · `huh.mp3` (realization) · `boing.wav`
+- **CTA:** `lib_magic_reveal.wav + lib_correct.wav + crash.wav + sparkle.wav` (+ `crowd_cheer.wav` low)
+
+## Volume discipline (the VO is king)
+UI clicks **0.13-0.18** · impacts **0.30-0.45** · ambience/crowd **0.10-0.16** · meme stingers **0.18-0.30** · music bed effective ~**0.011-0.022**.
+All `at=` inside their scene bounds; recheck after any re-timing.
+
+---
+
+# MUSIC BED
+
+- ⛔ **Check [[sfx-library]] `SOUNDTRACKS.md` FIRST.** Commercial tracks burned into the export routinely get the reel **muted or reach-capped**; adding the same song natively in IG's audio picker is licensed AND counts as trending-audio signal. Prefer that unless Alex directs otherwise (he did on reel 52: his own licensed file).
+- ⛔ **CUT ON THE PHRASE ONSET, NEVER A ROUND NUMBER.** Find the peak, walk back to ~12% of it, cut there — so the music **lands on frame 0**.
+  *Reel 52: cut at a round 8.0s → opened mid-decay of a dying note = fragment, gap, then the real phrase at 1.4s. Alex heard it instantly ("the music only comes in at 1 second"). It ALSO collided with the hook's stamp slam 0.7s earlier. Cutting at the measured onset (9.34s) fixed both.*
+- ⛔ **AUDIBLE FROM FRAME 1.** IG autoplays; a thin first second makes the hook feel like it hasn't started.
+- ⛔⛔ **MEASURE THE BED, COMPUTE THE GAIN. NEVER EYEBALL IT.** (Wrong twice on reel 52.) A song swings ~15x across a 45s window, so a flat gain = inaudible at the start, deafening at the end.
+  ```
+  bed_rms[t] = per-second RMS of the extracted bed
+  gain[t]    = target_effective[t] / bed_rms[t]
+  target: ~0.015 early → ~0.022 mid → ~0.011 at the CTA
+  ```
+  This **rides the gain AGAINST the song's own swell** — perceived level rises gently while the raw track explodes.
+- ⛔ **DUCK HARD FOR THE CTA**; verify by measuring the composite at the keyword.
+- **Pick the window that builds most** (scan per-second RMS for the best `end − start` delta). Don't guess.
+- No suitable bed? Synthesize an original (`video/tools/gen_piano_bed.py`) — builds by adding voices over time, zero copyright.
+
+Cross-links: [[sfx-library]] · [[reel-overhaul-stage]] (this is its final step) · [[reel-never-dual-screen]] · [[reel-vo-pacing]] · [[claude-ai-reel-workflow]] · CLAUDE-REELS-PLAYBOOK §D2/§D3.

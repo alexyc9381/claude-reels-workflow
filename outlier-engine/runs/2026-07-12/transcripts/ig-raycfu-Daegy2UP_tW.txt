@@ -1,0 +1,27 @@
+### raycfu | Daegy2UP_tW | 193K | 5d
+CAPTION: How to build a one person company using Claude Cowork #ai #tech 
+TRANSCRIPT:
+Nobody talks about this, but you can set up three files in Claude cowork that make it work as an employee and run your company.
+Claude always gives you generic output because that has no idea who you are.
+Create a folder called Claude cowork on your computer with three subfolders, about me, outputs, and templates.
+Then you build three files in the about me folder.
+The first one is called aboutme.md instead of trying to write it yourself, you'll let Claude interview you.
+You paste in this prompt that tells you to ask you 20 questions about what you do, who you work with, what great work looks like to you and what you hate.
+In order to do this, I used a voice dictation tool like Whisper Flow because I found out that it's saying my words out loud makes me more honest.
+The second file is called anti-AI writing style.md. This is basically a list of things that Claude is never allowed to do when it writes for you.
+Band words, band sentence patterns, paragraph link limits, you can add on more to this over time.
+The third file is called mycompany.md. This covers your business goals, strategies, and what you're focused on this quarter.
+Stop writing these long and complicated problems, trying to get Claude to understand what you want.
+The only part that you ever need is in this format.
+I want to, whatever the task, so that what success looks like.
+Remind about me folder first, then use the ask user question to clarify before you start.
+Instead of Claude just guessing what you meant when you're pumped is vague, it actually stops and generates this clickable form with options that you can tap through in 60 seconds.
+The whole thing feels like you're briefing a smart employee who asked the right questions before they start working instead of guessing.
+Now you've set up three scheduled sessions I've run your work day without you doing anything.
+The 7 a.m. when you wake up, Claude has already went through your emails and sorted everything by urgency,
+paragraph responses for two messages, hold your calendar for the day, and bridge and prep notes for every single meeting.
+New and your brief coworker and whatever cast you want to handle that afternoon and execute them while you work on handling the clients in the meetings.
+At 5 p.m. cowork reviews, everything that happened, what got handled and what is still pending, and what carries over to tomorrow.
+This ended in a document becoming the context for tomorrow morning's briefing, so it runs as a continuous loop.
+Criticized that by some guy with the exact prompts in order to build this out, if you want to just like the video and comment goal and I'll send it to you.
+I'll offer more ways to make money and run your business with tech and AI.

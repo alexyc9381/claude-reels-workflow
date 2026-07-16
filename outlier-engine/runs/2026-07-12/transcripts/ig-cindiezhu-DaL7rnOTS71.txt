@@ -1,0 +1,22 @@
+### cindiezhu | DaL7rnOTS71 | 163K | 13d
+CAPTION: here’s how to recreate any site you like with claude code (as inspiration, not a clone tho!) - you just the style guide from the website plus a full page screenshot (so Claude has something to cross reference) 👀   comment “BUILD” for the full guide 🌱  #claude #claudeai #aitips #claudecode #learnai 
+TRANSCRIPT:
+Have you ever landed on a website that you absolutely loved and you just thought,
+wow, I wish I could make something like this? Well, now you can.
+Here's how to recreate any site you like with Claude code and you don't have to be a developer.
+Quick heads up, treat this as inspiration, not copying. Remember to make it unique to you.
+Number one, download an IDE like VS code or anti-gravity. Number two, install Claude code.
+Make sure to sign in if you're on the paid Claude plan. Number three, go to the website you love,
+right click anywhere and hit inspect to open the developer tools. While you're there,
+right click the body tag and hit copy styles. Now that you've copied it,
+paste it into Claude code but don't send anything yet. Okay, now go back to the website,
+set the screen to full desktop width and take a screenshot of the entire page using this Chrome
+extension. So this grabs the entire page top to bottom as one image. Okay, next, go to an image compressor
+and shrink that screenshot down so it's not that bulky. Once that's done, take that screenshot and
+go back to Claude code. Okay, so now you have the screenshot and the styles. This is the fun part.
+Tell Claude code to rebuild the website using your own content and make sure to double check your work.
+Basically, Claude will rebuild the website using the style guide and screenshot. It'll take
+screenshots of its own work and compares it to the original and will keep fixing it itself
+until it's almost identical. The only limitation of this is that it's not that great with websites
+that have animations and motion graphics. Since the input is a screenshot, comment build and
+I'll send you the full guide on how to do this.

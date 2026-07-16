@@ -1,0 +1,37 @@
+### raycfu | DahCoW1Pfyo | 152K | 4d
+CAPTION: How Quants use Loop Engineering to create a trading bot with alpha #ai #tech 
+TRANSCRIPT:
+Most people don't realize that quantators never trust a strategy the first time that it works.
+They run into a loop that tests each strategy over and over again until they find one that sticks.
+Here's how to build this out. Most people come up with an idea, back test is once,
+and then once it looks great, they go live in two weeks later they are bleeding money.
+That strategy died because it was one guest with nothing iterating on it.
+It quant runs a loop testing strategy instead.
+You generate a strategy, back test it, score it against a specific metric,
+read wide failed, feed that information back in, and then you generate a better version.
+Then you test that version, score it, read the failures, and run it again.
+Each round keeps a variance that scored well and refines the ones that it did not.
+The whole edge in quant trading is the iteration and most people don't iterate at all.
+The loop also needs a way to score each strategy or else it just wonders.
+The metric that quants uses is called ICIR, and all it measures is how
+consistent your strategy performs over time.
+A strategy that makes a little bit money every single week completely beats out a strategy
+that makes a lot of money and one week loses it all in the next.
+That consistent scores what the loop optimizes towards.
+And here's the second check that most people skip.
+Even a real strategy has a shelf life.
+In the signal decays in two days, you are basically just paying fees to chase noise.
+If in the case in 50 days, you have a real traceable edge.
+The loop rejects the short-lived signals automatically.
+And this is the most important part.
+A loop that optimizes the insane data that was built on does not find better strategies faster.
+It just finds pretty or noise faster.
+Every extra iteration is just another chance to accidentally fit the past data.
+The fix that quant uses is called an out-of-sample gate.
+Every strategy that survives a loop gets tested one final time on fresh data that is never seen.
+If the consistency data holds on fresh data, then the score is real.
+If it does not, it gets thrown out no matter how good it looked before.
+I created a step as I've got it and exactly how to build this loop system
+to help you build trading bots that find alpha.
+Just like the video and comment quant and I'll send it to you.
+Both for more ways to make money and run your business with tech and AI.

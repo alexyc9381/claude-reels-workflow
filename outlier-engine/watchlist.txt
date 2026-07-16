@@ -1,0 +1,36 @@
+# platform,handle,lane
+#   yt = auto-scanned by scan.py (needs the bgutil POT server running)
+#   ig = scanned by ig_scan.py (private JSON API, no browser):
+#        python3 ig_scan.py --json runs/ig_<date>.json cindiezhu raycfu mavgpt gregisenberg
+
+# ── IG lane (the TRANSFERABLE comps: consumer-input artifact reveals) ──────────────
+# ⭐ mavgpt = the richest vein we have. 1.04M followers, ~254K median, outliers at 4.6M/18.8x,
+#    and EVERY Door-A hit is a comment-keyword lead-magnet = our exact mechanic. We have had
+#    mavgpt-dna.md all along (DROP-49 + SKILLS-51 are built on his named-skill formula) but he
+#    was MISSING from this watchlist until 2026-07-15 — the sweeps could not see him. His vein
+#    maps 1:1 onto our shipped list (Resume→CALLBACK-58, Identity→ERASE-40, Stack→STACK-30),
+#    which is exactly why he predicts what to build next.
+ig,mavgpt,in-niche-consumer
+ig,cindiezhu,in-niche-consumer
+ig,raycfu,in-niche-business
+ig,gregisenberg,adjacent-startup
+
+# ⛔ These IG handles are WRONG or DORMANT — verified 2026-07-15, do not trust their zeros:
+#   ig,rileybrown    → 224 followers    = wrong handle (he is a big creator; find the real one)
+#   ig,nicksaraev    → 445 followers    = wrong handle / not his IG
+#   ig,nateherk      → 6,291 followers  = dormant on IG (his lane is YT only)
+#   ig,sabrinaramonov → unresolvable
+# A handle that returns ~0 videos is a SOURCING BUG, not a finding. Verify before concluding "no comps".
+
+# ── YT lane ───────────────────────────────────────────────────────────────────────
+# ⚠️ The 2026-07-12 YT sweep was a full 9/9 KILL: these skew founder/commentator, and
+#    host/news-driven wins do NOT transfer to a faceless mascot reel. Keep, but weight low.
+yt,nateherk,in-niche
+yt,NickSaraev,in-niche
+yt,GregIsenberg,adjacent-startup
+yt,aliabdaal,adjacent-time
+yt,ramitsethi,adjacent-money
+yt,indydevdan,in-niche-builder
+yt,aijasonz,in-niche-builder
+yt,davidondrej,in-niche-builder
+yt,matthew_berman,in-niche-builder

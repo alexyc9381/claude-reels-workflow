@@ -1,0 +1,34 @@
+### raycfu | DY0-8VuvjTm | 2.8M | 46d-BREAKOUT
+CAPTION: How to create an AI Agent team with Openclaw and Hermes using the supervisor builder stack on my laptop powered by @snapdragonofficial #ai #tech #sponsoredbysnapdragon #snapdragonxseries 
+TRANSCRIPT:
+Well, people don't realize that you can set up a team of AI agents that run 24-7,
+and know your emails, monitor your socials, and get smarter every time they complete a task.
+I have this setup running on my laptop powered by Snapdragon because it's powerful CPU,
+let's me run multi-agent workflows in parallel.
+I'm partnering with them to show you how you can do it too.
+Install OpenCloud and choose GPT 5.5 as your model because it's the best for agent use.
+Connect it to Telegram, go to Cloud Hub, and choose skills that your agents will use.
+For me, these include email monitoring, content scheduling, and content research agents.
+Install their Mes, agent from NOS Research, and use Cloud Sonic 4.6 as your model.
+The best structure to run the OpenCloud MS, that is a Supervisor Builder workflow.
+OpenCloud is your Supervisor that plans and delegates.
+Mes is the executor agent that does the work and learns from each iteration.
+This means that every time your MS agent finishes a task,
+it analyzes what it did and saves the workflow as a you reusable skill automatically.
+Give your agent team a real workflow with a self-learning loop.
+Tell your Mes to check your inbox every morning at 9am,
+summarize what needs a response, pull your counter-events for the day,
+and set you over the briefing on Telegram.
+The first time your MS agent runs this briefing,
+it tries to figure out the workflow from scratch.
+Over time, it will start catching patterns that you didn't ask for,
+plugging emails from specific contacts as high priority because you always respond to those first.
+Now stack the next workflows, content monitoring,
+agent that scans trending topics underneath,
+and a client outreach agent that drafts follow-ups.
+Each one runs in parallel on your Snapdragon laptop,
+and each one self-improving with every single run.
+I made a step-by-step beginner's gun at how to build the stack out,
+just comment, snap, and I'll send it to you.
+Follow it from her news,
+unpackable advice I'm building with AI.
