@@ -2225,7 +2225,16 @@ const gone  = f >= fps*10.23;                              // hard clear, no fad
 
 ## Chapter 10 — Sound Design & Mix
 
-The edit chapters found a creator who varies his cut rate 10x across formats. The mix does the opposite. **Every audio parameter I could measure is a creator constant**, and most of them are constant to within a fraction of a dB across six videos, two rooms, three camera rigs and 121 minutes. This is the most invariant layer of his entire craft.
+> **[Editor's note]** This chapter's opening sentence was written against the pre-correction brief and its
+> premise is **retracted**: the cut rate does *not* vary 10× across formats. That spread was the browser, not
+> the editor (Ch.2 §2.6) — the true talking-head edit rate is **1 per 25.5s, spread 1.64×, itself a creator
+> constant**. The chapter's own measurements are unaffected; only the contrast it opens with is. Left visible
+> rather than silently rewritten, since a stale premise surviving into a finished chapter is exactly the
+> failure this book is about.
+
+~~The edit chapters found a creator who varies his cut rate 10x across formats.~~ The mix is **the most
+invariant layer of his entire craft**: **every audio parameter I could measure is a creator constant**, most
+of them constant to within a fraction of a dB across six videos, two rooms, three camera rigs and 121 minutes.
 
 It is also the shortest chapter to specify, because the dominant findings are absences. There is no music. There are no sound effects. There is no ducking, because there is nothing to duck. The mix is one mono voice, gated, leveled, EQ'd, and slammed into a limiter at -1.0 dBFS — and then nothing else, for two hours.
 
