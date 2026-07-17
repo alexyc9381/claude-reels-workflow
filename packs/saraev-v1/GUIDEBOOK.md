@@ -1,7 +1,7 @@
 # The Saraev Edit — a guidebook
 
 How @nicksaraev **edits**. Reverse-engineered from a 6-video / **121-minute** corpus of his long-form
-YouTube, measured frame by frame. 11 chapters, each written against the raw artifacts (cut maps,
+YouTube, measured frame by frame. 12 chapters, each written against the raw artifacts (cut maps,
 frame bursts, motion curves, loudness, transcripts) and required to cite its measurements.
 
 > ## ⛔ Read this before any number in this book
@@ -50,6 +50,7 @@ frame bursts, motion curves, loudness, transcripts) and required to cite its mea
 9. [Chapter 9 — Receipts, Proof & Inserts](#chapter-9)
 10. [Chapter 10 — Sound Design & Mix](#chapter-10)
 11. [Chapter 11 — Retention Architecture & Pacing](#chapter-11)
+12. [Chapter 12 — The Moves Library](#chapter-12)
 
 ---
 
@@ -2226,15 +2227,13 @@ const gone  = f >= fps*10.23;                              // hard clear, no fad
 ## Chapter 10 — Sound Design & Mix
 
 > **[Editor's note]** This chapter's opening sentence was written against the pre-correction brief and its
-> premise is **retracted**: the cut rate does *not* vary 10× across formats. That spread was the browser, not
-> the editor (Ch.2 §2.6) — the true talking-head edit rate is **1 per 25.5s, spread 1.64×, itself a creator
+> premise is **retracted**: the cut rate does *not* vary 10x across formats. That spread was the browser, not
+> the editor (Ch.2 6.2.6) - the true talking-head edit rate is **1 per 25.5s, spread 1.64x, itself a creator
 > constant**. The chapter's own measurements are unaffected; only the contrast it opens with is. Left visible
 > rather than silently rewritten, since a stale premise surviving into a finished chapter is exactly the
 > failure this book is about.
 
-~~The edit chapters found a creator who varies his cut rate 10x across formats.~~ The mix is **the most
-invariant layer of his entire craft**: **every audio parameter I could measure is a creator constant**, most
-of them constant to within a fraction of a dB across six videos, two rooms, three camera rigs and 121 minutes.
+~~The edit chapters found a creator who varies his cut rate 10x across formats.~~ The mix does the opposite. **Every audio parameter I could measure is a creator constant**, and most of them are constant to within a fraction of a dB across six videos, two rooms, three camera rigs and 121 minutes. This is the most invariant layer of his entire craft.
 
 It is also the shortest chapter to specify, because the dominant findings are absences. There is no music. There are no sound effects. There is no ducking, because there is nothing to duck. The mix is one mono voice, gated, leveled, EQ'd, and slammed into a limiter at -1.0 dBFS — and then nothing else, for two hours.
 
@@ -2876,3 +2875,333 @@ Ranked by how much of the corpus backs them.
 | **"Pacing curve"** | **do not author** | no shape is shared by any two of six videos |
 
 **The instruction to the compiler:** stop trying to pace the picture. Lock the voice — gapless, 3.4–3.9 wps, −16 LUFS, no bed — put a numbered card on screen every ~100–220 seconds carrying the exact sentence being spoken, let the demo churn at whatever speed the demo churns, and then freeze on his face for the last fifth of the runtime and sell. Everything the viewer experiences as pace was produced at record time by a mouse.
+
+---
+
+<a id="chapter-12"></a>
+
+## Chapter 12 — The Moves Library
+
+Thirteen named moves, extracted from the six-video corpus. Each one is (a) measured, not inferred, (b) liftable by a creator who is not Nick Saraev, and (c) implementable in ffmpeg or Remotion.
+
+**What I sampled.** All six `ydif_raw.txt` (396 detected events, 121 min at 30fps, per the house `YDIF>20 / collapse ≤3f` calibration — my counts reproduce the manifest's: 90/107/136/26/20/17). All six `words.json` (26,401 words). All six audio tracks through `silencedetect=noise=-32dB:d=0.12` (3,385 silence intervals). Two full webcam-inset `signalstats` crops (`fable-websites`, `sol-ads`, 1.6M metadata lines). Roughly 190 frames read visually: 2 full `hook_burst/` strips, 3 `cut_bursts/`, 52 frame-pairs across all 26 `kimi-k3` events, 24 random `contact/` frames from 4 videos, 6 final frames, and targeted extractions. Plus one synthetic control I rendered myself (§12.10). I did not watch 121 minutes; every claim below points at the artifact it came from.
+
+---
+
+### 12.1 THE ZERO-FRAME COLD OPEN
+**CREATOR CONSTANT — 6/6, the single most reproducible fact in the corpus.**
+
+**Where.** Every video. `words.json[0].start` = **0.00s** in all six.
+
+| video | first word | `start` |
+|---|---|---|
+| `fable-websites` | "So" | 0.00 |
+| `sol-ads` | "So" | 0.00 |
+| `fable-tokens` | "So" | 0.00 |
+| `agent-workflow` | "So" | 0.00 |
+| `kimi-k3` | "Boyo" | 0.00 |
+| `solo-20k` | "Hey," | 0.00 |
+
+**Mechanically.** There is no head. No intro sting, no logo, no channel bumper, no "what's up guys", no beat of silence. Frame 0 carries the first phoneme of the first word. Four of six open on the literal discourse marker **"So"** — the video starts as if you walked in on a sentence already running.
+
+**Why it works.** The retention graph's first cliff is the intro. He has deleted the surface the cliff sits on. The "So" is doing structural work: it presupposes a preceding clause the viewer never heard, which is a cheap and total commitment device.
+
+**Recipe.** Trim so the first sample of speech is sample 0. Not "trim close" — exact:
+```
+# find the true onset, then cut to it
+ffmpeg -i vo.wav -af silencedetect=noise=-32dB:d=0.05 -f null -   # read first silence_end
+ffmpeg -ss <first_silence_end> -i master.mp4 -c copy out.mp4
+```
+In Remotion: `startFrom={Math.round(onset*fps)}` on the source `<OffthreadVideo>`; no `<Sequence>` offset, no fade-in on frame 0.
+
+---
+
+### 12.2 THE RECEIPT CUT
+**FORMAT VARIABLE (build-demo / receipts formats) — but the highest-leverage move in the book.**
+
+**Where.** `fable-websites @ 1.667s` — the first cut of the video (`cut_times.txt` line 1; `cut_bursts/c1_*.png`).
+
+**Mechanically.** He is on full-frame talking-head saying *"So given that we all have an additional **five** days of Claude Fable 5…"*. The word "five" spans **1.20–1.80s** (`words.json`). The cut fires at **1.667s — inside the word "five"** — to a browser showing the @Claude post: *"We're extending access to Claude Fable 5 on all paid plans through July 12."* (`cut_bursts/c1_07.png`). The claim and its proof are on screen 0.47 seconds apart, and the picture change lands on the load-bearing syllable, not after the sentence.
+
+The other three solo formats do the same thing harder — they **skip the face entirely and cold-open on the receipt**:
+
+| video | frame 0 shows | seconds before the first face |
+|---|---|---|
+| `sol-ads` | a finished ad page, "Twenty products. Now in motion." (`hook_burst/h001.png`) | 20s |
+| `kimi-k3` | a benchmark table — DeepSWE / Terminal Bench / SWE Bench, blue bars, Fable 5 vs Kimi K3 vs Opus 4.5 vs GPT 5.2 (`hook_burst/h001.png`) | 13s |
+| `fable-tokens` | screen | 26s |
+
+**Why it works.** The hook is not a sentence, it is a document. A viewer can verify a screenshot in 400ms; they cannot verify a claim at all. Three of five solo videos never ask for the benefit of the doubt because they never make an unproven statement.
+
+**Recipe.** Hard cut, no transition, placed at the onset of the claim's noun/number — not at the end of the clause:
+```
+cutFrame = Math.round(wordOnset("five") * 30)   // from words.json, never eyeballed
+```
+Sequence: `<TalkingHead until={cutFrame}/><Receipt from={cutFrame}/>`. The receipt must be the **unretouched source document** (a real post, a real benchmark page, a real dashboard) — see §12.13 for why you must not rebuild it as a graphic.
+
+---
+
+### 12.3 THE HARD CUT, ALWAYS
+**CREATOR CONSTANT — n=0 dissolves in 396 events.**
+
+**Where.** Every detected event in the corpus. Width histogram (frames above YDIF 20 per collapsed event):
+
+| video | width 1 | width ≥2 | note on the ≥2s |
+|---|---|---|---|
+| `solo-20k` | **136/136 (100%)** | 0 | 136 camera switches, zero ramps |
+| `sol-ads` | 83 | 24 | page-load animations inside SCREEN |
+| `fable-websites` | 74 | 16 | page-load animations inside SCREEN |
+| `kimi-k3` | 21 | 5 | " |
+| `fable-tokens` | 19 | 1 | " |
+| `agent-workflow` | 17 | 0 | |
+| **total** | **350/396 (88%)** | 46 | |
+
+`solo-20k` is the clean proof: it has no screen recording, so every event is a real edit, and **all 136 are single-frame**. A 6-frame dissolve would produce a 6-wide elevated run with a ramp shape. There are none. The multi-frame events in the screen-heavy videos are the browser animating (`cut_bursts/c3_*.png`: "The Fallen Order" starfield → a pixel-art landing page, with the site's own particle motion elevating adjacent frames), not the editor cross-fading.
+
+**Why it works.** A dissolve is a claim that two shots are related. A hard cut is a claim that the next thing is the point. His grammar has one verb.
+
+**Recipe.** Concatenate. No `<TransitionSeries>`, no `fade`, no `xfade`. In Remotion this is literally the absence of a component — adjacent `<Sequence>`s with abutting frame ranges.
+
+---
+
+### 12.4 THE GAP CUT (dead-air excision)
+**CREATOR CONSTANT for solo formats (2.1–7.8x lift); explicitly ABSENT in the interview.**
+
+**Where.** All six, measured against `silencedetect=noise=-32dB:d=0.12`, cut allowed ±0.05s slop.
+
+| video | silence share of runtime | cuts landing in silence | **lift over chance** |
+|---|---|---|---|
+| `fable-tokens` | 7.0% | 11/20 = 55% | **7.8x** |
+| `agent-workflow` | 11.0% | 8/17 = 47% | **4.3x** |
+| `kimi-k3` | 9.8% | 9/26 = 35% | **3.5x** |
+| `fable-websites` | 8.6% | 20/90 = 22% | 2.6x |
+| `sol-ads` | 14.2% | 32/107 = 30% | 2.1x |
+| `solo-20k` *(interview)* | 25.0% | 48/136 = 35% | **1.4x — chance** |
+
+**Mechanically.** In the solo videos the cut is *caused by* the gap: he stops talking, the pause is deleted, and the picture change is the seam. In the interview it is the opposite — camera switches are driven by who is speaking, so they fall on speech at exactly the base rate. **Two different edits, one creator.** The `fable-websites` / `sol-ads` lifts are understated because most of their detected events are tab switches, not edits (see §12.13).
+
+The result is the audible constant:
+
+| video | longest silence anywhere | median silence |
+|---|---|---|
+| `fable-tokens` | **0.77s** (over 901s) | 0.19s |
+| `kimi-k3` | **0.82s** (over 592s) | 0.22s |
+| `agent-workflow` | 1.47s | 0.27s |
+| `solo-20k` | 1.97s (over 46 min) | 0.31s |
+| `sol-ads` | 2.41s | 0.32s |
+| `fable-websites` | 4.44s — **one deliberate exception, §12.5** | 0.22s |
+
+Second-longest silence in `fable-websites`: **0.71s**. In a 10½-minute video he pauses for more than three quarters of a second exactly once, on purpose.
+
+**Recipe.** Detect, don't eyeball. This is the house rule and his edit obeys it:
+```
+ffmpeg -i vo.wav -af silencedetect=noise=-32dB:d=0.12 -f null -
+# delete every gap > ~0.35s down to ~0.20s; place the picture change at the seam
+```
+Target: median inter-word silence 0.19–0.32s, hard ceiling ~0.8s.
+
+---
+
+### 12.5 THE ARTIFACT DWELL
+**CREATOR CONSTANT in kind (the corpus's only deliberate silence), n=1 in strength.**
+
+**Where.** `fable-websites @ 531.05s`, duration **4.44s** — the longest silence in the corpus and **6.3x** the next-longest silence in that video.
+
+**Mechanically.** He says *"If you play one of these, it'll actually change the audio vis preview."* Then he shuts up for four and a half seconds while the NADIR "EVENT HORIZON" page animates its own reactive ring, unaided (frames extracted at 529 / 531 / 533 / 535s — the ring visibly evolves across all four; his inset face is watching, not talking). Then he resumes: *"I could for sure see people using that…"* and cuts back to the gallery grid at ~537s.
+
+Audio in the dwell: **mean −62.4 dB, peak −40.0 dB**, against a speech reference of −19.8 dB in the same video. Forty-two decibels below his voice. Nothing is filling the hole.
+
+**Why it works.** Everywhere else the VO is the load-bearing member; here he removes it, and the artifact has to carry four seconds on its own. That is a proof, not a demo. It only works because §12.4 made silence expensive — after ten minutes where the longest pause is 0.71s, 4.44s of nothing is a siren.
+
+**Recipe.** Reserve exactly one per video. Structure: **claim → cut nothing → dwell 3.5–5.0s at the audio noise floor → resume mid-thought.** Do not add music, a counter, or a caption to the dwell. In Remotion: a `<Sequence>` with the artifact live and no `<Audio>` under it. Budget: one dwell per ~10 minutes; two makes the video slow, zero makes it a claim.
+
+---
+
+### 12.6 THE LIVE WHITEBOARD CARD
+**CREATOR CONSTANT in mechanism; FORMAT VARIABLE in share (0–25.6% of runtime, per Ch. 2).**
+
+**Where.** `fable-websites @ 336s / 409s / 419s` (verified by my own extractions).
+
+**Mechanically.** His title cards are not graphics. They are **excalidraw.com in a Chrome tab**, and I can prove the zoom: the bottom-left zoom chip reads **203%** (cropped from `@336s` at `crop=400:120:0:600`). At `@409s` the canvas reads *"For better results, give it tools."* in the Excalidraw hand font, with two hand-drawn arrows labelled **"Higgsfield MCP"** and **"Pinterest"** — annotations he adds live, on camera, while talking. By `@419s` the canvas has **panned**, not cut, to a fresh area reading *"Finally, give it a /goal."*; the previous text is still visible, shrunk, at the top of the frame. The Excalidraw left toolbar is visible at 409s and gone by 419s. Nothing here was post-produced.
+
+`agent-workflow` runs the same move as a clean full-bleed slide. Measured at `@799s`: frame is **85.1% near-white**; the plate occupies **x 18–1235, y 17–701** of the 1280x720 frame (~2% margin all round); the headline **"3. Evals"** occupies a single dark band at **y 325–372 (48px glyph height = 6.7% of frame height), x 463–701**; the only other dark pixels in the interior are a 10px mouse cursor at y 522–540. One line of text. That is the entire card.
+
+**Why it works.** A drawn arrow appearing while he says the words is proof of thought in real time. An After Effects lower-third labelled "Higgsfield MCP" is proof of a budget. The card also does structural work — Ch. 2's transition matrix has **CARD → SCREEN at 91% (20/22)**: the card names the claim, the screen pays it off, immediately, every time.
+
+**Recipe.** Two options, both cheap:
+- *Native:* open Excalidraw/FigJam in a tab at **~200% zoom** (135% for FigJam-style, per Ch. 2's `fable-tokens` measurement), record it in the same capture as everything else, and draw during the take.
+- *Compositor:* `background: #fff`, one line, ~48px cap-height (6.7% of frame height), centred, plain sans or a hand font, **zero** decoration, plate inset 2% with the same webcam inset composited over it (§12.9). Hold **median 24s** (Ch. 2, n=22). Then cut to the screen, not to the face.
+
+---
+
+### 12.7 THE TAB RACK
+**CREATOR CONSTANT — the shot list lives in Chrome.**
+
+**Where.** `fable-websites @ 409s` — the tab bar carries roughly 15 tabs: *Paper · FABLE · EXCO · SPIRIT · GLYPH · …ard · AURUM · Tabled · SONRU · How to · FABLE · Excali · (9) Pin · Higgsf*, plus an "Ask Gemini" chip. Each one is a shot.
+
+**Mechanically.** Ch. 2 established the consequence numerically: **95–97% of the YDIF events inside his screen segments are tab switches, not edit cuts** (`fable-websites` 4/82 have a discontinuous face; `sol-ads` 3/101). My own inset-crop `signalstats` on both videos returns a face-jump baseline of **median YDIF 0.35 / p99 12.97** (`fable-websites`) and **0.41 / p99 9.27** (`sol-ads`) — the inset is live and continuous straight through the page changes. `cut_bursts/c3_*.png` shows it plainly: dark starfield site → pixel-art site, one frame, and his face in the corner never blinks out of continuity.
+
+**Why it works.** He is not editing a montage of websites; he is **flipping through a rack he loaded before he hit record**. The pacing you read as "snappy editing" (`fable-websites` fires an event every 5.5s inside SCREEN) is Cmd-1 through Cmd-9. Zero post time. This is the highest ROI move in the chapter for anyone with no editor.
+
+**Recipe.** Pre-load every artifact into its own tab, in narrative order, before the take. Record one continuous screen capture with a live webcam inset. The "edit" is your left hand. If you must reproduce it in a compositor, cross-cut full-frame screenshots on hard cuts and **keep the inset webcam running continuously across them** — the continuity of the face is what makes it read as one take.
+
+---
+
+### 12.8 THE ONE-CAMERA RHYTHM (talking-head cadence)
+**CREATOR CONSTANT — 1 cut per 25.5s, 1.64x spread across five videos (Ch. 2, n=43 cuts over 1095s of TH).**
+
+**Where.** All five solo videos. Range: `fable-websites` 1/18.4s … `sol-ads` 1/30.2s.
+
+**Mechanically.** Roughly one jump cut every 25 seconds of face time, and — critically — **the framing never changes across the cut**. I extracted before/after frames for all 26 `kimi-k3` YDIF events; the talking-head shots are identical in framing every time (same chair, same shoulder height, same room, same lens). The cut moves his head, not the camera.
+
+**Why it works.** The jump cut is a *byproduct* of §12.4, not a rhythm device. He is not cutting to add energy; he is cutting because he deleted a pause. That is why the rate is a constant while everything else in his edit is a variable.
+
+**Recipe.** One camera, locked off, no reframe. Cut only where a gap was removed. **Do not** insert a punch-in to "hide" the jump (see §12.12) — he never does, in 121 minutes.
+
+---
+
+### 12.9 THE PERMANENT INSET
+**CREATOR CONSTANT in area (~24.7% x 25.0% of frame, ±1px across videos shot months apart); FORMAT VARIABLE in corner and aspect.**
+
+**Where.** Every screen frame in five videos. Ch. 2's frozen-inset test: across **4,501 seconds of SCREEN + CARD time, zero stretches ≥2s where the inset is static. n=0.** The face is live in 100% of screen time.
+
+| video | inset box (1280x720) | anchor |
+|---|---|---|
+| `fable-websites`, `sol-ads` | 316x180 @ (943,529) / (942,532) | bottom-right |
+| `fable-tokens` | 315x173 @ (14,538) | bottom-**left** |
+| `agent-workflow`, `kimi-k3` | 176x301 @ (1088,210) | right edge, vertically centred |
+
+**Why it works.** There is no shot in his vocabulary where you cannot see him react. That is the entire trust mechanism of a demo — the demo is not being narrated from off-stage, it is being *watched* by a person you can see.
+
+**Recipe.** Screen-Studio-style plate over a gradient, drop shadow, rounded corners:
+```
+ffmpeg -i screen.mp4 -i cam.mp4 -filter_complex \
+ "[0:v]scale=1228:691,pad=1280:720:26:15:color=0x0d2b2e[bg]; \
+  [1:v]scale=316:180[pip];[bg][pip]overlay=943:531" out.mp4
+```
+Hold the inset at ~25% of frame width. Never cut it out. Never freeze it.
+
+---
+
+### 12.10 THE FROZEN FRAME (no Ken Burns)
+**CREATOR CONSTANT — n=0 continuous geometric transforms in 121 minutes.**
+
+**Where.** All six. **Control experiment I ran:** I took a real static screen frame from `fable-tokens @ 640s` and rendered a gentle 1%/s Ken Burns push over it (`zoompan=z='1+0.01*on/30'`, 150 frames), then measured its YDIF the same way I measure his:
+
+> synthetic 1%/s push on his own frame → **median YDIF 1.29** (min 0.00, max 2.86, n=150)
+
+Now his actual distribution:
+
+| video | p50 YDIF | p75 | p90 |
+|---|---|---|---|
+| `fable-tokens` | **0.056** | 0.101 | 0.817 |
+| `fable-websites` | 0.124 | 1.098 | 3.728 |
+| `sol-ads` | 0.128 | 1.154 | 3.279 |
+| `agent-workflow` | 0.166 | 0.783 | 3.017 |
+| `solo-20k` | 0.327 | 0.613 | 1.009 |
+| `kimi-k3` | 0.923 | 2.031 | 3.234 |
+
+**More than 90% of `fable-tokens` frames sit below the floor that the gentlest possible push would generate.** Same for `agent-workflow` at p75. Whatever else is moving in his frame, the *frame itself* never is. No push-ins, no drift, no reframe, no stabilisation wobble.
+
+**Why it works.** Motion in his videos is always diegetic — a page loading, a hand moving, a cursor. Nothing moves because an editor decided the shot was boring. The absence is what makes §12.5's dwell legible: when the picture holds still and the audio drops out, the viewer knows to look.
+
+**Recipe.** Set `zoompan` z=1. Delete every keyframe on scale/position. If a shot is boring, cut it — do not push in on it.
+
+---
+
+### 12.11 THE NAKED AUDIO
+**CREATOR CONSTANT — n=0 music beds, n=0 transition SFX.**
+
+**Where.** All six. Mean volume inside each video's longest silence, against a speech reference at t=200s:
+
+| video | inside longest silence | speech reference | delta |
+|---|---|---|---|
+| `solo-20k` @1574.9s | **−91.0 dB** (peak −72.2) | −22.3 dB | **69 dB** |
+| `agent-workflow` @461.9s | −66.4 dB (peak −43.6) | −18.4 dB | 48 dB |
+| `sol-ads` @1057.8s | −65.6 dB (peak −38.9) | −18.0 dB | 48 dB |
+| `fable-websites` @531.2s | −62.4 dB (peak −40.0) | −19.8 dB | 43 dB |
+
+`solo-20k` at −91 dB is *digital* silence — the room tone has been gated out entirely, not merely ducked. There is no bed, no ambience, no pad. And **128 of his cuts land inside a ≥0.12s window that never exceeds −32 dB** (§12.4 table, summed) — meaning at 128 cuts there is provably no whoosh, no riser, no stinger, no click. n=0.
+
+Loudness is nonetheless normalised and consistent: `agent-workflow` I = **−15.9 LUFS, LRA 5.7 LU** — mastered, just not scored.
+
+**Why it works.** A music bed is a tell. It says someone in post decided this needed help. His audio says: this is a guy talking into a microphone about something true.
+
+**Recipe.** No bed. Master to **−16 ± 1 LUFS integrated, LRA ≤6 LU**. Gate the room. Let the gaps be −60 dB or lower.
+
+---
+
+### 12.12 THE CLIFF ENDING
+**CREATOR CONSTANT — 6/6, tail 0.1–0.5s.**
+
+**Where.** Every video. `words.json[-1].end` vs container duration:
+
+| video | last word ends | duration | **tail** |
+|---|---|---|---|
+| `fable-websites` | 635.4 | 635.5 | **0.2s** |
+| `sol-ads` | 1212.0 | 1212.2 | **0.2s** |
+| `solo-20k` | 2763.5 | 2763.6 | **0.1s** |
+| `kimi-k3` | 591.8 | 592.0 | **0.2s** |
+| `fable-tokens` | 900.6 | 900.8 | **0.2s** |
+| `agent-workflow` | 1160.5 | 1161.1 | 0.5s (`blackdetect` finds 1160.77→1160.97 black — a 0.2s fade-to-black, the corpus's only one) |
+
+**Mechanically.** The final word ends and the file ends, median **0.2s** later. I extracted the last frame of all six: four are his face mid-expression, one (`solo-20k`) is the two-shot with both men laughing, one (`agent-workflow`) is black. Ch. 2: all five solo videos end on a full-frame talking-head, with final-TH runs of 33 / 78 / 245 / 63 / 220 seconds. `solo-20k`'s final shot after its last cut is 10.7s.
+
+**No end card. No subscribe animation. No "link in the description" graphic. No outro music. No next-video thumbnail. n=0, six videos.**
+
+**Why it works.** He ends on the longest uninterrupted shot in the video (up to 245 seconds of unbroken face — `solo-20k`) and then stops dead. The last thing you see is a person finishing a thought, not an ad for the channel.
+
+**Recipe.** `durationInFrames = Math.round(lastWordEnd*30) + 6`. Nothing after.
+
+---
+
+### 12.13 THE TWO-SHOT HOME BASE *(interview format only)*
+**FORMAT VARIABLE — `solo-20k` is a different edit and must never be pooled with the other five.**
+
+**Where.** `solo-20k`, 134 segments over 46 minutes. Ch. 2's shares: GUEST 46.3% / SPLIT 31.5% / NICK 21.7% / COLD 0.4%; SPLIT touches **108 of 133** transitions.
+
+**Mechanically.** SPLIT — both faces side-by-side in one frame — is the neutral state the edit returns to between single-camera pushes. Its rhythm, measured from the 136 camera switches:
+
+| stat | value |
+|---|---|
+| n shots | 135 |
+| min | **1.67s** |
+| p10 / p25 | 5.0s / 11.1s |
+| **median** | **14.9s** |
+| p75 / p90 | 28.7s / 45.0s |
+| max | **53.3s** |
+| shots < 5s | 5 / 135 (3.7%) |
+| shots > 60s | **0** |
+| first cut | 12.03s (after a 12s cold open of Nick alone) |
+
+No shot is shorter than 1.67s and none is longer than 53.3s. There is no rapid-fire montage anywhere in 46 minutes, and no unbroken 60-second stretch either — the window is 5–45 seconds and it never leaves it. Combined with §12.4: these cuts land on speech at chance (1.4x lift), i.e. they follow the conversation, not the waveform.
+
+**Why it works.** The two-shot is a reset. Every time the exchange gets abstract, the edit shows you two people in a room, which is the only thing in an interview that is inarguably real.
+
+**Recipe.** Three sources: cam A, cam B, and a side-by-side composite of both. Default state = the composite. Push to a single when one person owns a thought; return to the composite within ~15s (median). Ceiling 53s, floor 5s. Hard cuts only. Cut on the conversation, not on the gaps.
+
+---
+
+## ANTI-PATTERNS — what he conspicuously never does
+
+Every line is an n=0 across the sampled evidence, with the measurement that establishes it.
+
+| Anti-pattern | Evidence | n |
+|---|---|---|
+| **Dissolves / cross-fades / wipes** | `solo-20k`: 136/136 events are single-frame. Corpus-wide 350/396 (88%); the 46 wide events are in-page animation, verified in `cut_bursts/c3_*.png`. | **0** |
+| **Zoom / whip / glitch transitions** | Same signal. A transition of any duration produces a multi-frame ramp. There are none in the one video with no browser confound. | **0** |
+| **Ken Burns / push-ins / drift** | Synthetic control: 1%/s push on his own frame → median YDIF 1.29. His `fable-tokens` p90 = 0.817, p75 = 0.101. | **0** |
+| **Punch-in to hide a jump cut** | 52 before/after frames across all 26 `kimi-k3` events: talking-head framing identical every time. | **0** |
+| **Music bed / ambience / pads** | Longest-silence floor −62.4 / −65.6 / −66.4 / **−91.0** dB vs speech −18 to −22 dB. | **0** |
+| **Whooshes, risers, stingers, clicks at cuts** | 128 cuts land inside ≥0.12s windows that never exceed −32 dB. | **0** |
+| **Burned-in captions / subtitles** | ~190 frames read across all six videos (2 hook strips, 3 cut bursts, 52 event pairs, 24 random `contact/` frames from 4 videos, 6 final frames). No text overlay of any kind. | **0** |
+| **Lower thirds / name plates / logos / watermarks / progress bars** | Same 190-frame sample. | **0** |
+| **B-roll, stock footage, memes, reaction cutaways, chart inserts** | Ch. 2's 36-frame outlier audit (the 6 frames furthest from centroid in each video) returns only TH / SCREEN / CARD / SPLIT. Reinforced by the frozen-inset test: **no full-bleed insert lasting ≥2s exists**, because the webcam is live across 100% of 4,501s of screen time. | **0** |
+| **Intro / bumper / channel sting** | `words.json[0].start = 0.00s`, 6/6. | **0** |
+| **End card / outro / subscribe screen** | Last word → EOF: 0.1–0.5s, 6/6. Last frame is his face. | **0** |
+| **A pause longer than ~2.5s** | Longest silence: 0.77 / 0.82 / 1.47 / 1.97 / 2.41s. The one 4.44s exception is §12.5 and is deliberate. | **1 (intentional)** |
+| **A frozen or dropped webcam inset** | 0 stretches ≥2s of static inset in 4,501s of screen time (Ch. 2). | **0** |
+
+**The compiler's summary:** his edit is a hard cut, a locked frame, a live face, and a real document — and it is defined at least as much by the twelve things above that he refuses to add as by the thirteen he does.
+
+**One warning inherited from Ch. 2 and confirmed here:** do not measure his screen segments with a scene detector. The `fable-websites` "1 cut per 5.5s inside SCREEN" is not editing — it is §12.7, a man pressing Cmd-Tab. Measure the face.

@@ -7,6 +7,13 @@ thing the *editor* does, not a thing the *browser* does.
 > ⛔ **Two moves in this file's first draft were browser behaviour, not edits.** They are listed at the
 > bottom under RETRACTED rather than deleted, because the failure mode is the most useful thing in the pack.
 
+> **This is the short list.** [`GUIDEBOOK.md` Chapter 12 — The Moves Library](GUIDEBOOK.md#chapter-12) is the
+> fuller treatment (13 moves, independently derived): the Zero-Frame Cold Open, the Receipt Cut, the Hard Cut
+> Always, **the Gap Cut** (dead-air excision — invisible to a full-frame detector), the Artifact Dwell, the
+> Live Whiteboard Card, **the Tab Rack**, the One-Camera Rhythm, the Permanent Inset, the Frozen Frame, the
+> Naked Audio, the Cliff Ending, and the Two-Shot Home Base. The two files were derived independently and
+> agree — the Live Whiteboard Card (M2 here) was found by both.
+
 ---
 
 ## M1 · Circle-Then-Say ⭐
