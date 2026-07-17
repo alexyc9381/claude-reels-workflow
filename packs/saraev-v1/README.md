@@ -13,10 +13,17 @@ Built from a 6-video / **121-minute** corpus of his long-form YouTube, decompose
 | File | What it is |
 |---|---|
 | **[`THE-MEASURED-SPINE.md`](THE-MEASURED-SPINE.md)** | **Start here.** Every finding, its evidence, its retractions, and what is still unresolved. |
+| [`GUIDEBOOK.md`](GUIDEBOOK.md) | The book — **12 chapters, 237k chars**, each written against the raw artifacts and required to cite its measurements. |
+| [`VERIFICATION.md`](VERIFICATION.md) | An adversarial pass tasked with **falsifying** the book: 20 numeric claim clusters re-derived from the raw artifacts, per-chapter verdicts, exact text to strike. |
 | [`MOVES.md`](MOVES.md) | The named, reproducible moves with recipes. Two retracted moves kept at the bottom on purpose. |
 | [`HOUSE-NUMBERS.json`](HOUSE-NUMBERS.json) | Machine-readable targets for a compiler. Carries `method`, `CORRECTIONS`, `UNRESOLVED`. |
 | [`exemplars/`](exemplars/) | Frame evidence, so claims can be verified rather than trusted. |
 | [`provenance.json`](provenance.json) | Content hashes + a declared, unrecoverable gap. |
+
+**Known open items** (from `VERIFICATION.md`, left visible rather than quietly fixed): Ch.4 and Ch.6
+disagree on the TH→TH jump-cut count (10 vs 3) and one of them is wrong; Ch.11 claims a detector match it did
+not perform; Ch.8 ships a plate-geometry recipe ~19px short; Ch.4's chance baselines run ~4pp low, so its
+"5.7×" should read "~4×". The findings survive; the specs need a pass.
 
 ---
 

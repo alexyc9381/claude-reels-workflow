@@ -96,7 +96,28 @@ every container tag, and no URL was saved — unrecoverable, so it was **declare
 back-filled**. `INGEST.sh` now takes a source URL as arg 3 and writes `source.url` + `source.sha256`.
 **Never invent a URL to fill the hole.**
 
-⭐ **The structural lesson:** the fan-out caught the error, not me. An agent given the raw artifacts and told
-CAPTURE BEFORE CLAIM built a detector I hadn't thought of and overturned my headline finding — which I then
-replicated exactly (9/94, 14/113). **Adversarial verification against raw data is not ceremony; it is the
-only reason this pack is not confidently wrong.**
+## ⛔ RULE 6 — "collapse within N frames" is AMBIGUOUS; say which you mean
+
+Two readings differ by ~4% and both look right:
+- **`runs`** — break only on a >N-frame gap in the **raw** series → 90/107/136/26/20/17 ✅ **use this**
+- **`chain`** — gap from the last **kept** event → 94/113/136/30/20/17 ❌ a sustained multi-frame transition
+  re-fires every N+1 frames and splits into several events
+
+One transition should collapse to **one** event. Two independent analysts silently used different readings
+and each thought the other's count was unreproducible. Specify it in the method or the numbers won't reconcile.
+
+⭐ **The structural lesson — it took FOUR passes, and each caught the one before:**
+1. I measured confidently and was wrong (7 findings, all from calling a browser signal an edit).
+2. A chapter agent, given the raw artifacts and told CAPTURE BEFORE CLAIM, built the **inset detector** I
+   hadn't thought of and overturned my headline. I then replicated it exactly.
+3. A *different* chapter agent (framing) independently cross-validated the taxonomy with a different
+   instrument (YuNet face landmarks vs k-means) — TH totals agreed **to within 1 second on all five videos**
+   — and corrected one of its examples.
+4. The **adversarial verifier** re-derived 20 claim clusters from raw artifacts and caught the rest: a false
+   "my counts reproduce the brief" claim, an irreconcilable 10-vs-3 between two chapters, a shipped ffmpeg
+   recipe 19px short, and **my own over-generalisation** — I wrote "the cards are browser tabs" from 2 of 4
+   carded videos, *inside the retraction that was supposed to fix a single-video generalisation.*
+
+> **Two independent passes are not enough when the claim is one you want to be true.** Adversarial
+> verification against raw data is not ceremony — it is the only reason this pack is not confidently wrong.
+> Build every future pack with a falsification pass that re-derives numbers rather than reading prose.
