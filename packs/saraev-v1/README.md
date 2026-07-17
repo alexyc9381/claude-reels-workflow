@@ -54,6 +54,17 @@ table, because the failure mode is the most transferable thing here.
 
 ---
 
+> ## ⛔ This pack has a companion that re-scopes two of its claims
+>
+> [`saraev-shorts-v1`](../saraev-shorts-v1/) measures the same creator's short-form (19 videos). It is a
+> **natural experiment**: whatever holds across both formats is the person; whatever changes is the format.
+>
+> - **Speaking rate is NOT a creator constant** — it is format-bound (era-matched p=0.0238). Re-scoped below.
+> - **Loudness IS a creator constant** — it holds across formats (Δ0.067 LU, p=0.44). Confirmed.
+> - **The thesis below is true of his LONG-FORM, not of him.** In short-form he captions 19/19 (91% of
+>   frames), cuts to B-roll, and runs graphics — all `n=0` here. The edit's silence is a long-form choice.
+> - **Genuinely him, both formats:** speech at 0.00s (25/25), locked camera, no punch-ins, no music, no SFX.
+
 ## The thesis
 
 > **The edit is not a source of information.**
@@ -77,9 +88,9 @@ working.**
 
 | | |
 |---|---|
-| Speaking rate | **3.76 wps** (3.41–3.94, spread 1.16×) |
+| ~~Speaking rate~~ | ~~3.76 wps~~ — ⛔ **RE-SCOPED: this is FORMAT-BOUND, not the person.** His shorts run 4.18 median, 17/19 above this ceiling (era-matched p=0.0238). See [`saraev-shorts-v1`](../saraev-shorts-v1/) |
 | Speech density | **83.9–90.1%** of runtime (25 min of the corpus has *not one second* of silence) |
-| Loudness | **−16 LUFS**, LRA ~6 |
+| Loudness | **−16 LUFS**, LRA ~6 — ✅ **CONFIRMED across formats** (era-matched Δ0.067 LU, p=0.44). Holds *within an epoch* |
 | Talking-head edit rate | **1 cut per 25.5s** (spread 1.64×) |
 | Face on screen | **100%** of screen time (n=0 frozen-inset stretches) |
 | Webcam inset area | **~24.7% × 25.0%** of frame (±1px across videos months apart) |
