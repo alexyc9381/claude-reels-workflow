@@ -50,7 +50,7 @@
 - [⛔ Outlier Engine](outlier-engine.md) — comp discovery (~/Downloads/outlier-engine): weekly scan.py → Door-A candidates
 - [⛔ Outlier transcript tooling](outlier-transcript-tooling.md) — YouTube needs a PO token (bgutil server); IG lane via claude-in-chrome DOM extractor + yt-dlp + faster_whisper
 - [⛔ Winner Lab pipeline](winner-lab-pipeline.md) — decompose winners frame-by-frame → EDL + moves + house numbers; gate our renders against them
-- [⛔⭐ Creator edit-pack method](creator-edit-pack-method.md) — how to build packs/<creator>-v1 so the numbers are TRUE: split CREATOR CONSTANTS from FORMAT VARIABLES (a global mean is correct for no video) · the unit-of-analysis trap (63% of shots = 15% of runtime) · check the FILE before theorising about an outlier (Saraev's lone anomaly was a mis-slugged interview) · absolute not relative thresholds · record provenance at ingest or lose it
+- [⛔⭐ Creator edit-pack method](creator-edit-pack-method.md) — how to build packs/<creator>-v1 so the numbers are TRUE: ⭐ASK WHAT PRODUCED THE PIXELS — a scene detector on screen-recordings counts BROWSING (~90% false; the inset test separates them) · split CREATOR CONSTANTS from FORMAT VARIABLES · check the FILE before theorising about an outlier · say UNRESOLVED when it is · record failed tests + provenance-at-ingest
 - [⛔ Style cloning pipeline](style-cloning-pipeline.md) — one example video → reusable style pack (~/Downloads/style-cloning-kit)
 - [cindiezhu style](cindiezhu-style-reference.md) — no-jargon persona + plain-English outcome, real screen, one loop
 - [mavgpt style](mavgpt-style-reference.md) — follow-along formula + visual formula + TikTok scrape method
