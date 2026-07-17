@@ -35,28 +35,55 @@
     "loudness_LRA": {
       "target": 6.0
     },
-    "burst_shape": {
-      "median_len_s": 7.1,
-      "median_shots": 6,
-      "observed_in": [
-        "saraev-fable-websites",
-        "saraev-sol-ads",
-        "saraev-kimi-k3"
-      ],
-      "note": "when a burst occurs its SHAPE is near-identical across videos (7.4/7.2/6.8s); only the COUNT varies",
-      "why_absent_from_interview": "a burst is rapid cutting BETWEEN things to look at. The interview format has no screen recording and no B-roll \u2014 there is nothing to cut to \u2014 so it records 0 bursts. This is a CONSEQUENCE of the format, not a counterexample to the burst rule. Bursts appear in every video that has cuttable screen material (8, 8, 1)."
+    "th_edit_cut_rate": {
+      "sec_per_cut": 25.5,
+      "spread": 1.64,
+      "n_cuts": 43,
+      "th_seconds": 1095,
+      "n_videos": 5,
+      "per_video": {
+        "fable-websites": 18.4,
+        "kimi-k3": 22.8,
+        "fable-tokens": 23.4,
+        "agent-workflow": 28.9,
+        "sol-ads": 30.2
+      },
+      "note": "inset-corrected and conditioned on TALKING-HEAD. This replaces the retracted 10x 'format variable' cut rate."
     },
-    "cuts_ignore_speech": {
-      "median_cut_to_pause_dist_s": 1.46,
-      "lift_vs_chance": [
-        2.6,
-        1.63,
-        1.09,
-        1.96,
-        3.23,
-        2.01
-      ],
-      "rule": "cuts are NOT motivated by speech rhythm; VO is a continuous take and picture cuts underneath it"
+    "speech_density": {
+      "min": 0.839,
+      "max": 0.901,
+      "spread": 1.07,
+      "note": "tighter than wps. kimi-k3 + fable-tokens = 25 min with NOT ONE SECOND of silence (longest gap 0.98s / 0.94s)."
+    },
+    "face_never_off_screen": {
+      "value": "100% of 4501s of screen time",
+      "n_exceptions": 0,
+      "note": "zero stretches >=2s where the webcam inset is frozen. The webcam is live in every screen segment."
+    },
+    "webcam_inset_area": {
+      "pct_of_frame_w": 24.7,
+      "pct_of_frame_h": 25.0,
+      "note": "within 1px across videos shot months apart \u2014 a rig constant. CORNER and ASPECT are format variables."
+    },
+    "ends_on_full_frame_talking_head": {
+      "value": "5/5",
+      "final_th_durations_s": [
+        33,
+        78,
+        245,
+        63,
+        220
+      ]
+    },
+    "card_to_screen_handoff": {
+      "value": 0.91,
+      "n": "20/22",
+      "note": "a CARD is never a destination; it names the claim and the screen pays it off"
+    },
+    "no_third_source": {
+      "value": "n=0 B-roll / stock / memes / chart-inserts / reaction cutaways in 121 min",
+      "note": "there is a camera and a screen. That is the entire vocabulary."
     }
   },
   "FORMAT_VARIABLES": {
@@ -72,7 +99,8 @@
         "review": 19.7,
         "cost-breakdown": 45.0,
         "teaching": 68.3
-      }
+      },
+      "\u26d4 RETRACTED": "this 10x spread measured browser churn, not editing. See th_edit_cut_rate. Kept only so the error is legible."
     },
     "burst_count": {
       "by_format": {
@@ -93,6 +121,29 @@
         "cost-breakdown": 0.11,
         "teaching": 0.137
       }
+    },
+    "screen_churn": {
+      "range_sec_per_event": [
+        5.5,
+        85.1
+      ],
+      "spread": "15.5x",
+      "\u26d4": "NOT AN EDIT PARAMETER. This is how fast the demo changes pages \u2014 a property of the subject matter. This is what the retracted 10x 'cut rate' was actually measuring."
+    },
+    "screen_share": {
+      "min": 0.498,
+      "max": 0.712,
+      "note": "narrow \u2014 every solo video is at least half screen"
+    },
+    "inset_corner": {
+      "values": [
+        "bottom-right",
+        "bottom-right",
+        "right-centred-portrait",
+        "right-centred-portrait",
+        "bottom-left"
+      ],
+      "note": "per-video choice, held for the whole video. Do not hard-code."
     }
   },
   "THE_UNIT_OF_ANALYSIS_TRAP": {
@@ -271,6 +322,48 @@
       "how_caught": "9-frame montage across the video showed two visibly distinct people in two different rooms; the taxonomy analyst independently segmented it GUEST/NICK/SPLIT and measured 1753s of guest; the transcript names Justin Lobb",
       "why_it_mattered": "this single video was the sole outlier on EVERY structural test \u2014 the only non-clustered edit (0.6x vs 3.2-3.5x Poisson), the only burst-free video, the only one with cut-to-pause lift below chance. Had it stayed mislabeled as a solo talking head, the pack would have taught that 'his long talking-heads abandon the burst grammar' \u2014 a rule derived entirely from a mislabeled file.",
       "lesson": "the outlier was not a subtle stylistic truth. It was a filing error wearing one."
+    },
+    {
+      "claim": "cut rate is a FORMAT VARIABLE with a 10x spread (6.8s-68.3s); the burst (~7s, 5-6 shots) is the atomic unit and a creator constant",
+      "status": "RETRACTED 2026-07-16 before publication",
+      "reality": "~90% of the detected events are browser churn. Real edit rate: 1/62.5s pooled (2.9x spread); conditioned on talking-head 1/25.5s (1.64x) = a CREATOR CONSTANT. ALL 8 'bursts' in fable-websites come from churn; ZERO come from real edit cuts.",
+      "how_caught": "the segment-taxonomy analyst built an inset-crop detector: a real cut replaces the face box, a tab switch does not. Independently replicated \u2014 both methods return 9/94 and 14/113 exactly.",
+      "why_it_mattered": "the pack would have taught a compositor to cut every 7 seconds in bursts. That is not an edit he has ever made \u2014 it is a description of how fast he clicks through a browser. '1 cut per 7.1s' for fable-websites was reporting HOW MANY WEBSITES HE BUILT.",
+      "lesson": "the measurements were accurate; the INTERPRETATION was invented. Always ask what physically produced the pixels before calling a signal an edit."
+    },
+    {
+      "claim": "he cuts to purpose-built sketch diagrams and slide cards \u2014 'the production value is in the ARTIFACTS, not the EDIT'",
+      "status": "RETRACTED 2026-07-16 before publication",
+      "reality": "the cards are excalidraw.com and FigJam in a browser tab \u2014 fable-tokens' is a FigJam doc titled 'Nick Saraev Scratch Sheet' at 135% zoom; fable-websites' is excalidraw at 203% with the tab bar visible. Live whiteboards captured in the same screen recording, not designed assets.",
+      "lesson": "I 'corrected' a right thesis into a wrong one. The original reading \u2014 he adds nothing \u2014 was correct."
     }
-  ]
+  ],
+  "\u26d4\u26d4 READ FIRST": {
+    "the_detector_counts_browsing_not_editing": "full-frame YDIF>20 detects VISUAL DISCONTINUITY. ~90% of those events in this corpus are NOT edits \u2014 they are the browser changing what it shows while the camera keeps rolling. Replicated two ways, agreeing exactly: fable-websites 9 real / 94 raw (10%); sol-ads 14 / 113 (12%).",
+    "the_correct_test": "every solo video carries a LIVE webcam inset in a fixed box. A real edit cut replaces the whole frame INCLUDING the face; a tab switch leaves the face continuous. real_edit_cut := full-frame YDIF>20 AND inset-crop YDIF>20 within 0.25s.",
+    "it_also_misses_cuts": "agent-workflow has 26 true cuts vs 17 raw; kimi-k3 has 7 internal jump cuts the full-frame signal scores as 0 (the face is ~6% of frame). Dead air removed behind a static document is invisible to it.",
+    "rule": "NEVER measure his screen segments with a scene detector. Measure the face."
+  },
+  "UNRESOLVED": {
+    "do_cuts_land_on_speech": {
+      "status": "NOT ESTABLISHED \u2014 do not encode a rule in either direction",
+      "evidence_at_chance": {
+        "video": "solo-20k interview (every event is a real editorial camera switch, no screen to contaminate)",
+        "n": 136,
+        "result": "14.0% land in silence vs 15.7% chance = exactly chance",
+        "weight": "strong"
+      },
+      "evidence_weak_association": {
+        "videos": [
+          "fable-websites",
+          "sol-ads"
+        ],
+        "n": 23,
+        "result": "6/23 within 300ms of a pause, 2.3x lift, p=0.042",
+        "weight": "weak, marginal, would not survive correction for multiple hypotheses"
+      },
+      "not_comparable": "the two use different tests (inside-a-gap vs within-300ms-of-a-gap-midpoint)",
+      "\u26d4 the confound": "CHURN correlates with pauses \u2014 he stops talking briefly to click. That is exactly why the contaminated data showed a confident 2x 'lift'."
+    }
+  }
 }
