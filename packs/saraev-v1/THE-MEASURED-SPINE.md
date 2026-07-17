@@ -172,9 +172,10 @@ from montages of a single video. Frame 0 of all six refutes it:
 | `sol-ads` | bottom-right | stable across 9 sampled frames |
 | `kimi-k3` | **top-right** | frame 0 |
 | `fable-tokens` | **bottom-left** | frame 0 |
+| `agent-workflow` | **top-right** | stable across 6 frames spanning 48–318s |
 
-**Within-video stability is verified for 2 of 4** (the two with montage coverage). Across videos the corner
-moves. Do not hard-code bottom-right; pick a corner per video and hold it.
+**Four different corners across five videos**, with within-video stability verified for 3 of 5. Do not
+hard-code bottom-right; pick a corner per video and hold it for the whole video.
 
 *Two automated tests for this failed and are recorded so no one re-derives them: corner-luma voting is
 confounded by bright screen content (margins of ~5 luma, 50-73% agreement — it cannot see the PIP), as is the
@@ -248,6 +249,88 @@ Set against §5, this is the precise sync grammar of the style:
 
 **Recipe:** artifact on screen first → hand-draw a circle around the figure over ~1.5s → finish ~0.7s before
 speaking the number → hold ~5s → erase. Freehand stroke on the live screen, not a graphic, not a lower-third.
+
+---
+
+## 10. Sound: there is no bed
+
+| Test | Result |
+|---|---|
+| Speech level | −16.7 to −21.4 dB RMS |
+| Level inside speech gaps ≥0.6s | **−29 to −34 dB** |
+| Speech-to-gap delta | only **12–15 dB** |
+| Bass(60–250Hz) − hiss(>4kHz) **inside gaps** | **0.6 – 8.6 dB** → bass-poor, broadband |
+| *Control:* same measure **during speech** | **+11.7 dB** → voice fundamentals present, method validated |
+
+**No music bed (n=0).** The gaps are loud not because something is playing but because the noise floor is
+lifted — room tone plus heavy compression. A bed would put real energy in 60–250Hz; it isn't there, and the
+speech control proves the measurement can see bass when bass exists.
+
+> ⚠️ **A test I got wrong, recorded so it isn't repeated.** My first pass thresholded *gap loudness* alone
+> (>−45dB ⇒ "bed") and confidently returned **"MUSIC BED present" for all five videos.** That was an invented
+> threshold, not a discriminator. The spectral test with a validated control overturned it. A −33dB gap is a
+> compressed room, not a song.
+
+## 11. ⭐ The thesis: the style is defined by what is absent
+
+Assembled from the n=0 findings, the post-production profile is extraordinarily sparse:
+
+| Element | Present? |
+|---|---|
+| Burned captions | **No** (n=0) |
+| Music bed | **No** (n=0) |
+| Cleanup of his own mistakes | **No** — *"Sorry, this is just my Chrome DevTools MCP making that pop up"*, left in |
+| Cuts synced to speech | **No** — median cut lands 1–3s from the nearest pause |
+| Receipts for credential claims | **No** — the $400k claim gets 16 unbroken seconds of face |
+| Cold open / title card / music runway | **No** — speech starts at 0.00s in all 6 |
+
+What *is* present: a voice at a metronomic **3.76 wps**, a screen, a face in a PIP, a freehand annotation
+tool, and a mix mastered to **−16 LUFS**.
+
+### The correction: it isn't that he doesn't produce — it's *where* he spends
+
+An earlier draft of this section concluded *"the edit's job is to disappear."* That is too clean, and the
+frames refute it. `agent-workflow` cuts to **purpose-built assets**: numbered slide cards (*"1. Shared AI &
+Human Workspace"*) and hand-drawn concept diagrams (WORKSPACE CONTEXT / KNOWLEDGE BASE / CREDENTIALS →
+FABLE 5 → WORK DONE, captioned *"ONE TRIGGER. FULL CONTEXT. REAL OUTPUT."*). `sol-ads` has the same
+vocabulary (the PLATFORMS card). These are designed, consistent, and clearly took real work — a sketch-style
+visual language on white ground.
+
+So the thesis is sharper than "no production":
+
+> **The production value is in the ARTIFACTS, not in the EDIT.** He spends on things worth *looking at* —
+> diagrams, slides, the built demo, the annotated bill — and spends nothing on cutting, captions, music,
+> motion, or cleanup. The result reads as a competent person showing you their screen, because the effort
+> went into what is on the screen rather than into what happens between shots.
+
+Every measurement in this pack is downstream of that division. The bursts are him moving between things worth
+looking at. The un-synced cuts are him not stopping to edit. The uncut glitch is the proof it's real.
+
+The dangerous inference for a compositor: *absence is cheap to reproduce and easy to overdo.* Adding
+captions, a bed, or beat-synced cuts does not make a video "more Saraev" — each one moves it measurably
+further away. But stripping the diagrams does too. **Copy the restraint and the assets, not just the
+restraint.**
+
+## 12. Camera motion: n=0
+
+**There are no punch-ins, no zooms, no reframes, and no camera motion of any kind.**
+
+Tested on `agent-workflow` (the slowest-cutting video: 17 cuts across 1161s, mostly talking head — where a
+punch-in would be most needed to sustain attention). Every one of its first four cuts is a **source switch**,
+never a scale change on the same subject:
+
+| Cut | Before → After |
+|---|---|
+| 48.7s | full-frame face → slide card *"1. Shared AI & Human Workspace"* |
+| 73.2s | same slide, now **underlined live by hand** → LeftClick/Linear board |
+| 249.9s | Linear board → hand-drawn concept diagram |
+| 317.5s | diagram → Linear issue detail |
+
+The camera is **locked**. He sustains a 19-minute talking-head video with **17 cuts and zero camera moves** —
+attention is held by *changing what is on screen*, never by moving the frame.
+
+The freehand annotation tool recurs here (underlines under "AI" and "Human", timed to the words), confirming
+**Circle-Then-Say** as a general move rather than a one-off in `fable-tokens`.
 
 ---
 
