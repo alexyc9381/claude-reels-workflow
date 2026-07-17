@@ -1,14 +1,28 @@
 #!/bin/zsh
-# INGEST.sh <video.mp4> <winner-slug> — decompose a winner into analyzable artifacts
+# INGEST.sh <video.mp4> <winner-slug> [source-url] — decompose a winner into analyzable artifacts
+#
+# The saraev-v1 corpus shipped with unrecoverable provenance: the mp4s were re-encoded before
+# ingest, stripping every container tag, and no URL was written alongside them. The measurements
+# survive (content hashes), but the chain back to the originals is gone and cannot be rebuilt.
+# Pass the source URL as $3 so that never happens again.
 set -e
 # ffmpeg: prefer the project ffmpeg-static, fall back to brew/PATH so this kit survives a project move
 FF=~/Downloads/matchtern-longform/tools/node_modules/ffmpeg-static/ffmpeg
 [[ -x "$FF" ]] || FF=/opt/homebrew/bin/ffmpeg
 [[ -x "$FF" ]] || FF=$(command -v ffmpeg) || { echo "no ffmpeg found" >&2; exit 1; }
-VID="$1"; SLUG="$2"
+VID="$1"; SLUG="$2"; SRC_URL="${3:-}"
 OUT=~/Downloads/winner-lab/corpus/"$SLUG"
 mkdir -p "$OUT"/{hook_burst,cut_bursts,contact}
 cp "$VID" "$OUT/source.mp4"
+
+# provenance: record it now or lose it forever (see header)
+if [[ -n "$SRC_URL" ]]; then
+  print -r -- "$SRC_URL" > "$OUT/source.url"
+else
+  print -r -- "⚠️  no source URL supplied to INGEST.sh — provenance is UNRECOVERABLE for this slug" > "$OUT/source.url"
+  print -u2 "⚠️  INGEST: no source URL passed (arg 3). Ingesting anyway, but this corpus entry will have no chain back to the original."
+fi
+shasum -a 256 "$OUT/source.mp4" | awk '{print $1}' > "$OUT/source.sha256"
 
 # probe
 "$FF" -i "$VID" -hide_banner 2>&1 | grep -E "Duration|Stream" > "$OUT/probe.txt" </dev/null

@@ -1,0 +1,276 @@
+{
+  "pack": "saraev-v1",
+  "subject": "@nicksaraev \u2014 long-form YouTube EDIT style",
+  "corpus": {
+    "videos": 6,
+    "total_runtime_s": 7264.8,
+    "total_words": 26401
+  },
+  "method": {
+    "cut_detection": "absolute YDIF>20 on per-frame signalstats @30fps, events collapsed within 3 frames",
+    "why_absolute": "median YDIF is 0.06-0.92, so relative thresholds (e.g. 15x median) sit at ~2/255 and fire on noise; verified against scene-detect@0.22 and motion-curve spikes",
+    "speech": "faster-whisper word timings; pause := inter-word gap >= 0.30s",
+    "caveat": "YDIF>20 counts VISUAL DISCONTINUITY. A hard cut between two near-identical talking-head frames is under-counted; a fast pan/zoom inside one take can over-count. Treat +/-10% as noise."
+  },
+  "CREATOR_CONSTANTS": {
+    "_note": "hold these fixed across every format \u2014 this is the person, not the video",
+    "speaking_rate_wps": {
+      "min": 3.41,
+      "max": 3.94,
+      "spread": 1.16,
+      "target": 3.76,
+      "n_videos": 5,
+      "excludes": [
+        "saraev-solo-20k"
+      ],
+      "why_excluded": "63% guest speech \u2014 see per_video.saraev-solo-20k",
+      "robustness": "including the interview moves the mean only 3.76->3.70 and the spread 1.16x->1.17x; the constant holds either way, but it is excluded on principle because it does not measure Nick."
+    },
+    "loudness_I_lufs": {
+      "min": -16.5,
+      "max": -15.7,
+      "spread_LU": 0.8,
+      "target": -16.0
+    },
+    "loudness_LRA": {
+      "target": 6.0
+    },
+    "burst_shape": {
+      "median_len_s": 7.1,
+      "median_shots": 6,
+      "observed_in": [
+        "saraev-fable-websites",
+        "saraev-sol-ads",
+        "saraev-kimi-k3"
+      ],
+      "note": "when a burst occurs its SHAPE is near-identical across videos (7.4/7.2/6.8s); only the COUNT varies",
+      "why_absent_from_interview": "a burst is rapid cutting BETWEEN things to look at. The interview format has no screen recording and no B-roll \u2014 there is nothing to cut to \u2014 so it records 0 bursts. This is a CONSEQUENCE of the format, not a counterexample to the burst rule. Bursts appear in every video that has cuttable screen material (8, 8, 1)."
+    },
+    "cuts_ignore_speech": {
+      "median_cut_to_pause_dist_s": 1.46,
+      "lift_vs_chance": [
+        2.6,
+        1.63,
+        1.09,
+        1.96,
+        3.23,
+        2.01
+      ],
+      "rule": "cuts are NOT motivated by speech rhythm; VO is a continuous take and picture cuts underneath it"
+    }
+  },
+  "FORMAT_VARIABLES": {
+    "_note": "NEVER use a global mean for these \u2014 condition on format or the number is correct for no video",
+    "sec_per_cut": {
+      "min": 6.8,
+      "max": 68.3,
+      "spread": "10.0x",
+      "by_format": {
+        "build-demo": 6.8,
+        "receipts": 10.7,
+        "guest-interview-case-study": 20.3,
+        "review": 19.7,
+        "cost-breakdown": 45.0,
+        "teaching": 68.3
+      }
+    },
+    "burst_count": {
+      "by_format": {
+        "build-demo": 8,
+        "receipts": 8,
+        "guest-interview-case-study": 0,
+        "review": 1,
+        "cost-breakdown": 0,
+        "teaching": 0
+      }
+    },
+    "silence_share": {
+      "by_format": {
+        "build-demo": 0.127,
+        "receipts": 0.149,
+        "guest-interview-case-study": 0.161,
+        "review": 0.099,
+        "cost-breakdown": 0.11,
+        "teaching": 0.137
+      }
+    }
+  },
+  "THE_UNIT_OF_ANALYSIS_TRAP": {
+    "finding": "counting SHOTS and counting SECONDS give opposite answers about the same video",
+    "example": {
+      "saraev-fable-websites": {
+        "pct_shots_under_4s": 0.634,
+        "pct_runtime_in_shots_under_4s": 0.146,
+        "pct_runtime_in_shots_over_16s": 0.503
+      },
+      "saraev-sol-ads": {
+        "pct_shots_under_4s": 0.545,
+        "pct_runtime_in_shots_under_4s": 0.078,
+        "pct_runtime_in_shots_over_16s": 0.714
+      }
+    },
+    "implication": "targeting 'median shot length' produces a metronomic edit that resembles none of his videos. Target LONG TAKES + PUNCTUATING BURSTS instead."
+  },
+  "per_video": {
+    "saraev-fable-websites": {
+      "format": "build-demo",
+      "duration_s": 635.5,
+      "cuts": 94,
+      "sec_per_cut": 6.8,
+      "shot_median_s": 2.6,
+      "shot_mean_s": 6.5,
+      "shot_max_s": 91.0,
+      "pct_shots_under_4s": 0.634,
+      "pct_runtime_in_shots_under_4s": 0.146,
+      "pct_runtime_in_shots_over_16s": 0.503,
+      "bursts": 8,
+      "burst_median_len_s": 7.4,
+      "burst_median_shots": 5,
+      "words": 2494,
+      "wps": 3.93,
+      "median_word_gap_s": 0.26,
+      "silence_share": 0.127,
+      "cuts_within_300ms_of_pause": 0.223,
+      "cut_pause_lift_vs_chance": 2.6,
+      "median_cut_to_pause_dist_s": 1.43,
+      "loudness_I_lufs": -15.7,
+      "loudness_LRA": 6.1
+    },
+    "saraev-sol-ads": {
+      "format": "receipts",
+      "duration_s": 1212.1,
+      "cuts": 113,
+      "sec_per_cut": 10.7,
+      "shot_median_s": 3.1,
+      "shot_mean_s": 10.8,
+      "shot_max_s": 133.6,
+      "pct_shots_under_4s": 0.545,
+      "pct_runtime_in_shots_under_4s": 0.078,
+      "pct_runtime_in_shots_over_16s": 0.714,
+      "bursts": 8,
+      "burst_median_len_s": 7.2,
+      "burst_median_shots": 6,
+      "words": 4779,
+      "wps": 3.94,
+      "median_word_gap_s": 0.3,
+      "silence_share": 0.149,
+      "cuts_within_300ms_of_pause": 0.186,
+      "cut_pause_lift_vs_chance": 1.63,
+      "median_cut_to_pause_dist_s": 1.26,
+      "loudness_I_lufs": -16.3,
+      "loudness_LRA": 7.0
+    },
+    "saraev-solo-20k": {
+      "format": "guest-interview-case-study",
+      "duration_s": 2763.5,
+      "cuts": 136,
+      "sec_per_cut": 20.3,
+      "shot_median_s": 14.9,
+      "shot_mean_s": 20.3,
+      "shot_max_s": 53.3,
+      "pct_shots_under_4s": 0.03,
+      "pct_runtime_in_shots_under_4s": 0.004,
+      "pct_runtime_in_shots_over_16s": 0.755,
+      "bursts": 0,
+      "burst_median_len_s": null,
+      "burst_median_shots": null,
+      "words": 9322,
+      "wps": 3.37,
+      "median_word_gap_s": 0.26,
+      "silence_share": 0.161,
+      "cuts_within_300ms_of_pause": 0.118,
+      "cut_pause_lift_vs_chance": 1.09,
+      "median_cut_to_pause_dist_s": 1.5,
+      "loudness_I_lufs": -16.5,
+      "loudness_LRA": 6.4,
+      "\u26d4 speaker_metrics_invalid": {
+        "why": "63% of on-screen time (1753s/2764s) is the GUEST, Justin Lobb \u2014 a Maker School member Nick interviews about hitting $20k/mo. The transcript opens in Nick's voice: 'a brief conversation I had with Justin Lobb\u2026 a maker school member', answered by 'Hey, Nick. Good to see you again.'",
+        "consequence": "wps=3.37 for this slug averages TWO speakers and is NOT Nick's delivery rate. Excluded from speaking_rate_wps.",
+        "still_valid_for": "edit-side metrics (cut placement, shot length, layout grammar) \u2014 this IS Nick's channel and Nick's edit, in his interview format.",
+        "slug_is_misleading": "'solo-20k' reads as a solo video about earning $20k. It is neither solo nor Nick's earnings. Renaming deferred: the slug is referenced across cached artifacts."
+      }
+    },
+    "saraev-kimi-k3": {
+      "format": "review",
+      "duration_s": 591.9,
+      "cuts": 30,
+      "sec_per_cut": 19.7,
+      "shot_median_s": 4.6,
+      "shot_mean_s": 11.5,
+      "shot_max_s": 75.1,
+      "pct_shots_under_4s": 0.414,
+      "pct_runtime_in_shots_under_4s": 0.04,
+      "pct_runtime_in_shots_over_16s": 0.771,
+      "bursts": 1,
+      "burst_median_len_s": 6.8,
+      "burst_median_shots": 7,
+      "words": 2019,
+      "wps": 3.41,
+      "median_word_gap_s": 0.26,
+      "silence_share": 0.099,
+      "cuts_within_300ms_of_pause": 0.133,
+      "cut_pause_lift_vs_chance": 1.96,
+      "median_cut_to_pause_dist_s": 2.12,
+      "loudness_I_lufs": -15.8,
+      "loudness_LRA": 5.5
+    },
+    "saraev-fable-tokens": {
+      "format": "cost-breakdown",
+      "duration_s": 900.8,
+      "cuts": 20,
+      "sec_per_cut": 45.0,
+      "shot_median_s": 35.8,
+      "shot_mean_s": 42.7,
+      "shot_max_s": 102.5,
+      "pct_shots_under_4s": 0.0,
+      "pct_runtime_in_shots_under_4s": 0.0,
+      "pct_runtime_in_shots_over_16s": 0.949,
+      "bursts": 0,
+      "burst_median_len_s": null,
+      "burst_median_shots": null,
+      "words": 3337,
+      "wps": 3.71,
+      "median_word_gap_s": 0.3,
+      "silence_share": 0.11,
+      "cuts_within_300ms_of_pause": 0.4,
+      "cut_pause_lift_vs_chance": 3.23,
+      "median_cut_to_pause_dist_s": 3.0,
+      "loudness_I_lufs": -15.8,
+      "loudness_LRA": 5.6
+    },
+    "saraev-agent-workflow": {
+      "format": "teaching",
+      "duration_s": 1161.0,
+      "cuts": 17,
+      "sec_per_cut": 68.3,
+      "shot_median_s": 44.7,
+      "shot_mean_s": 69.5,
+      "shot_max_s": 188.5,
+      "pct_shots_under_4s": 0.0,
+      "pct_runtime_in_shots_under_4s": 0.0,
+      "pct_runtime_in_shots_over_16s": 0.979,
+      "bursts": 0,
+      "burst_median_len_s": null,
+      "burst_median_shots": null,
+      "words": 4450,
+      "wps": 3.83,
+      "median_word_gap_s": 0.34,
+      "silence_share": 0.137,
+      "cuts_within_300ms_of_pause": 0.294,
+      "cut_pause_lift_vs_chance": 2.01,
+      "median_cut_to_pause_dist_s": 1.0,
+      "loudness_I_lufs": -15.9,
+      "loudness_LRA": 5.7
+    }
+  },
+  "CORRECTIONS": [
+    {
+      "claim": "saraev-solo-20k is a long solo talking-head by Nick Saraev",
+      "status": "WRONG \u2014 corrected 2026-07-16 before publication",
+      "reality": "a two-camera remote guest interview; Nick is on screen ~20-37% of it",
+      "how_caught": "9-frame montage across the video showed two visibly distinct people in two different rooms; the taxonomy analyst independently segmented it GUEST/NICK/SPLIT and measured 1753s of guest; the transcript names Justin Lobb",
+      "why_it_mattered": "this single video was the sole outlier on EVERY structural test \u2014 the only non-clustered edit (0.6x vs 3.2-3.5x Poisson), the only burst-free video, the only one with cut-to-pause lift below chance. Had it stayed mislabeled as a solo talking head, the pack would have taught that 'his long talking-heads abandon the burst grammar' \u2014 a rule derived entirely from a mislabeled file.",
+      "lesson": "the outlier was not a subtle stylistic truth. It was a filing error wearing one."
+    }
+  ]
+}

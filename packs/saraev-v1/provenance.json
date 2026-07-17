@@ -1,0 +1,66 @@
+{
+  "pack": "saraev-v1",
+  "captured": "2026-07-16",
+  "\u26d4 KNOWN GAP": {
+    "what": "source URLs were NOT recorded at ingest time and are unrecoverable \u2014 the mp4 containers were re-encoded and stripped of all metadata (verified: no title/purl/comment tags on any of the 6).",
+    "impact": "every measurement in this pack is reproducible from the local files (sha256 below), but the chain back to the original YouTube videos rests on the slug names alone.",
+    "fixed_forward": "INGEST.sh now writes source.url + source.info.json at fetch time. This gap applies to the saraev-v1 corpus only.",
+    "do_not": "do not invent or back-fill URLs for these six \u2014 an unverified URL is worse than a missing one."
+  },
+  "videos": {
+    "saraev-fable-websites": {
+      "sha256": "86a0a0b72714eff7e357e4448063f03bd65f3987aab60a6da35812d4141f4b50",
+      "bytes": 42313048,
+      "resolution": "1280x720",
+      "fps": "30",
+      "duration": "00:10:35.55",
+      "source_url": null,
+      "verified": "content-hash only"
+    },
+    "saraev-sol-ads": {
+      "sha256": "ab9ad1c58df79fd2acf525dfaac515b4b40a50385ae5ecf04ca8668754d02479",
+      "bytes": 64362477,
+      "resolution": "1280x720",
+      "fps": "30",
+      "duration": "00:20:12.20",
+      "source_url": null,
+      "verified": "content-hash only"
+    },
+    "saraev-solo-20k": {
+      "sha256": "b4cb8bbcc728dfdc3ce38b6c11ad43281cbec8d5af6cefa21c5c36c578f68683",
+      "bytes": 122199236,
+      "resolution": "1280x720",
+      "fps": "30",
+      "duration": "00:46:03.59",
+      "source_url": null,
+      "verified": "content-hash only"
+    },
+    "saraev-kimi-k3": {
+      "sha256": "72721573cdf4b5154853beb4ebc885a70c59348d41083bc2cd5ac4f9fc07a52c",
+      "bytes": 36205053,
+      "resolution": "1280x720",
+      "fps": "30",
+      "duration": "00:09:51.99",
+      "source_url": null,
+      "verified": "content-hash only"
+    },
+    "saraev-fable-tokens": {
+      "sha256": "9d962169d1bc20508dcee7da80739a565bef3ae75eb53d65ce519602460c654d",
+      "bytes": 35588030,
+      "resolution": "1280x720",
+      "fps": "30",
+      "duration": "00:15:00.82",
+      "source_url": null,
+      "verified": "content-hash only"
+    },
+    "saraev-agent-workflow": {
+      "sha256": "20340fdaf4f72360e34807625848ce1482bb33bd469e09ba35e3bec847ab2ced",
+      "bytes": 52236861,
+      "resolution": "1280x720",
+      "fps": "30",
+      "duration": "00:19:21.07",
+      "source_url": null,
+      "verified": "content-hash only"
+    }
+  }
+}
