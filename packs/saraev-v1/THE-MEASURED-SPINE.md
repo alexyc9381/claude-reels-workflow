@@ -139,16 +139,35 @@ Speech begins at **0.00s in all six**. Four of six open on the literal word **"S
 arrived. Three open full-frame face already gesturing; three open cold on the artifact (`sol-ads` → the candle
 ad; `kimi-k3` → the benchmark; `fable-tokens` → a bill reading **$2,409.88**, 20/13/26s before the first face).
 
-### Receipts: the naive rule is wrong
+### Receipts: he never stages proof (n=22 claim moments checked)
 
-| Claim | On screen |
+**He is sold as the receipts guy. He does not stage proof at all.** There are no inserts — no cut-to-the-
+dashboard, no callout graphic, no animated counter. The artifact is already on screen in its own application
+chrome and the voice reads it aloud.
+
+> **The number of times he states a figure and then cuts to a receipt is ZERO. Latency is never positive.**
+
+**Coverage is not one number — it is 93% or 0%, and which one you get is fully determined by who produced
+the figure:**
+
+| Claim class | Definition | Receipt? |
+|---|---|---|
+| **DEMO-RESULT** | a figure **the on-screen artifact produced in this session** | **~93% ✓** — already on screen at the claim word |
+| **BUSINESS / AUTHORITY** | a figure about him, his company, his audience | **0% ✗** |
+| **FORECAST** | a figure about the viewer's future | **0% ✗** |
+
+| Claim | On screen at the claim word |
 |---|---|
+| *"I spent over **$1,400**"* (`fable-tokens` @5.4s) | the claude.ai billing page reading **"$2,409.88 spent"**, hand-ellipsed |
+| *"seven turns, 1,028 tokens, 18 seconds, 16 cents"* (@786.5s) | terminal: `turns: 7 \| output tokens: 1028 \| 18s \| $0.160` |
+| *"865 words … 211"* (@239.1s) | ASCII table `Words 865 \| 211 \| 75.6%`, with **"865" text-selected** |
 | *"My business is gonna do over **$400,000** this month"* (`agent-workflow` @27.4s) | **nothing** — full-frame face, 16 unbroken seconds |
-| *"I spent over **$1,400**"* (`fable-tokens` @5.4s) | the actual billing page, **from frame 0**, annotated live |
+| *"finished by over 10,000 people"* (@1155.4s) | **nothing** — closing talking-head |
+| *"reduce … by at least 50%"* (`fable-tokens` @37.6s) | **nothing** — forecast |
 
-**Subject vs credential:** when the artifact *is* the subject, it is on screen from frame 0 and annotated
-live. When a number is a credential dropped in passing, it gets **no visual support at all**. The biggest
-dollar figure in the corpus has zero receipt.
+The biggest dollar figure in the corpus has zero receipt. The rule is not "show the number" — it is **only
+the machine's own output is ever shown, and it is already there when he says it.** He never cuts to proof
+because proof is not something he cuts to; it is the thing he was already looking at.
 
 > The money-receipts lane in [[nick-saraev-style-reference]] describes his **script/topic** selection. It does
 > **not** describe his edit. Do not transfer it across.
