@@ -49,9 +49,16 @@ slight wobble — it must look hand-drawn. Complete **0.7s before** the word. Ho
 `fable-websites` @336s (excalidraw.com, handwriting font, 203% zoom, **tab bar visible**); `agent-workflow`
 @73s, @249s (full-bleed slides with pagination dots).
 
-**What:** His "title cards" and "concept diagrams" look post-produced. **They are not.** They are a browser
-tab — a live whiteboard — captured inside the same screen recording, carrying the same webcam inset in the
-same corner. He types and draws on them live.
+**What:** His "title cards" and "concept diagrams" look post-produced. **In at least two videos they are
+not** — they are a browser tab, a live whiteboard, captured inside the same screen recording, carrying the
+same webcam inset in the same corner. He types and draws on them live.
+
+> ⚠️ **Scope, corrected by the adversarial verifier.** The live-whiteboard mechanism is *proven* in
+> `fable-websites` (excalidraw.com — tab bar, 203% zoom chip, live arrows) and `fable-tokens` (FigJam,
+> *"Nick Saraev Scratch Sheet"*, 135% zoom). **`sol-ads` @202s and `agent-workflow` @799s show no chrome at
+> all** — clean full-bleed plates, indistinguishable from a rendered slide (`agent-workflow`'s has pagination
+> dots, suggesting a live presentation app, but that is inference). **Card medium is a format variable.**
+> Do not build a compiler that assumes excalidraw.
 
 **Why it matters:** this is the move most likely to be mis-copied. Building these as designed assets in After
 Effects produces something that looks *more* polished and is *less* like him. The visible tab bar is not

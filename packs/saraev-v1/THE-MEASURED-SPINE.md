@@ -14,8 +14,15 @@ Findings derived directly from the corpus. This file is the reference the chapte
 >
 > | Video | raw YDIF events | **real edit cuts** | churn |
 > |---|---|---|---|
-> | `fable-websites` | 94 | **9 (10%)** | 85 |
-> | `sol-ads` | 113 | **14 (12%)** | 99 |
+> | `fable-websites` | 90 | **9 (10%)** | 81 |
+> | `sol-ads` | 107 | **14 (13%)** | 93 |
+>
+> **⚠️ "Collapse within 3 frames" is ambiguous, and the two readings differ by ~4%.** *Runs* (break only on a
+> >3-frame gap in the raw series) gives 90/107/136/26/20/17. *Chain* (gap from the last **kept** event) gives
+> 94/113/136/30/20/17, because a sustained multi-frame transition re-fires every 4th frame and splits into
+> several events. **Use `runs`** — one transition should collapse to one event. An earlier draft of this file
+> used `chain`; the real-cut counts (9, 14) and the zero-burst result are **identical** either way, so only
+> the denominators moved. Specify which you mean.
 >
 > **The test:** every solo video carries a *live* webcam inset in a fixed box. A real edit cut replaces the
 > whole frame **including the face**. A tab switch changes the screen and leaves the face continuous. So
@@ -45,13 +52,34 @@ Recorded in full, because the errors are more instructive than the survivors and
 | R2 | *"The burst is the atomic unit — ~7s, 5–6 shots, a creator constant"* | **All 8 bursts in `fable-websites` come from churn. Zero come from real edit cuts.** The "burst" was him clicking through finished websites. The 3.2–3.5× Poisson clustering is real — but it clusters *browsing*, not cutting. |
 | R3 | *"The unit-of-analysis trap: 63% of shots run under 4s but hold 15% of runtime"* | Those weren't shots. They were churn events. The trap is real as a principle but the numbers measured page loads. |
 | R4 | *"M2 The Payoff Montage — 14 shots at 84%"* | **Not a montage.** One continuous screen recording of him scrolling through the finished sites. This is *why* the DevTools glitch survives inside it — there is no edit there to remove it. |
-| R5 | *"M7 The Designed Insert — purpose-built sketch diagrams"* | The cards are **excalidraw.com and FigJam in a browser tab** (`fable-tokens`' is a FigJam doc literally titled *"Nick Saraev Scratch Sheet"*, 135% zoom; `fable-websites`' is excalidraw at 203% with the tab bar visible). Not designed assets — **live whiteboards, captured in the same screen recording**. |
+| R5 | *"M7 The Designed Insert — purpose-built sketch diagrams"* | Retracted for **2 of the 4 carded videos**: `fable-websites`' card is **excalidraw.com** (203% zoom chip, tab bar, live arrows) and `fable-tokens`' is **FigJam**, the doc titled *"Nick Saraev Scratch Sheet"* (135% zoom) — **live whiteboards captured in the same screen recording**. ⚠️ But see the hedge below: `sol-ads` and `agent-workflow` show **no chrome at all**. |
 | R6 | *"The production value is in the ARTIFACTS, not the EDIT"* | This was my "correction" to the thesis, and it was wrong for the same reason as R5. He isn't producing diagram cards. The **original** reading was right: he adds nothing. |
 | R7 | *"Cuts ignore speech — the pointer leads, the cuts ignore it"* | Measured on churn. See **UNRESOLVED** below — the honest state is *not established*, and the epigram is withdrawn. |
 
 **The pattern in all seven:** every one came from trusting a detector's output as an *edit* signal without
 asking what physically produced the pixels. The measurements were accurate. The **interpretation** was
 invented.
+
+### ⚠️ A hedge on R5/R6 — caught by the adversarial verifier, in *this file*
+
+R5 said "the cards are browser tabs" and R6 leaned the thesis on it. **That is proven for 2 of the 4 carded
+videos, not the corpus.** The verifier read the frames:
+
+| Video | Card medium | Chrome visible? |
+|---|---|---|
+| `fable-websites` @336/409s | **excalidraw.com** | yes — tab bar, 203% zoom chip, live annotation |
+| `fable-tokens` @626s | **FigJam** *"Nick Saraev Scratch Sheet"* | yes — toolbar, 135% zoom chip |
+| `sol-ads` @202s | full-bleed white plate, one line of bold | **no** — indistinguishable from a rendered slide |
+| `agent-workflow` @799s | full-bleed white plate, pagination dots | **no** |
+
+**Card medium is a FORMAT VARIABLE, not a creator constant.** The honest claim: *the card is demonstrably
+live in `fable-websites` and `fable-tokens`; in the other two it is indistinguishable from a slide and the
+mechanism is unproven either way.* The pagination dots do suggest a live presentation app rather than a
+post-produced graphic — which keeps R6's direction — but that is inference, not measurement.
+
+> This is the same single-video generalisation the pack warns against, committed **in the retraction that
+> was supposed to fix a single-video generalisation.** It took a fourth party reading the actual frames to
+> catch it. Two independent passes is not enough when the claim is one you *want* to be true.
 
 ---
 

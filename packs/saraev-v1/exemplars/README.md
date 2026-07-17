@@ -51,7 +51,9 @@ Never encode "stage a receipt for every numeric claim."
 
 Top: `fable-websites` @336s. Bottom: `fable-tokens` @626s.
 
-His "designed title cards" and "concept diagrams" are **live browser tabs**:
+His "designed title cards" and "concept diagrams" are **live browser tabs** — in *these two videos*
+(`sol-ads` and `agent-workflow` show no chrome and are indistinguishable from slides; card medium is a
+**format variable**):
 
 - **Top** — the URL bar reads **`excalidraw.com`**. ~15 tabs across the top, the excalidraw toolbar, the zoom
   control, the "Excalidraw+ / Share" buttons. The copy (*"Then just let it iterate + test."*) is in
