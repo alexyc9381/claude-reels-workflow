@@ -83,7 +83,7 @@ precisely why the contaminated data showed a confident 2× "lift".
 | **Speaking rate** | **3.41–3.94 wps** (spread 1.16×, target **3.76**) | n=5, interview excluded (its 3.37 averages two speakers) |
 | **Speech density** | **83.9–90.1% of runtime** (spread 1.07×) | tighter than wps. `kimi-k3` + `fable-tokens` = 25 min with **not one second of silence** (longest hole 0.98s / 0.94s) |
 | **Integrated loudness** | **−15.7 to −16.5 LUFS** (0.8 LU spread), LRA ~6 | all six |
-| **TH edit cut rate** | **1 per 25.5s** (spread 1.64×, n=43 cuts / 1095s / 5 videos) | inset-corrected |
+| **TH edit cut rate** | **1 per 25.5s** (spread 1.64×, n=43 cuts / 1095s / 5 videos) | inset-corrected; the underlying segment classification independently spot-checked **6/6** (see below) |
 | **The face is never off screen** | **100% of 4,501s** of screen time, **n=0** frozen-inset stretches ≥2s | the webcam is live in every screen segment |
 | **Webcam inset area** | **~24.7% × 25.0%** of frame, within **1px** across videos shot months apart | a rig constant |
 | **Every video ends on full-frame talking-head** | **5/5** (final TH: 33s, 78s, 245s, 63s, 220s) | the most reliable structural fact in the corpus |
@@ -236,3 +236,18 @@ whiteboard, the annotated bill). He just spends nothing on **what happens betwee
     aliases every probe above it. Use ffmpeg's filters.
 - **Sampling honesty:** the layout grammar rests on ~150 sampled frames, not all 121 minutes. Segment shares
   are from full 1fps classification and are solid.
+
+### Independent verification performed on this pack
+
+Because the headline constant (**1 edit cut per 25.5s**) rests on someone else's segment classification, and
+because a previous headline turned out to be an artifact, both load-bearing pieces were re-derived from
+scratch by a second party:
+
+| Claim | Check | Result |
+|---|---|---|
+| ~90% of YDIF events are browser churn, not edits | inset-intersection re-implemented independently | **exact agreement**: 9/94 (`fable-websites`), 14/113 (`sol-ads`) |
+| The segment timeline (which underpins the 1/25.5s rate) | 6 frames probed at the midpoints of claimed TH / SCREEN / CARD blocks in `fable-websites` (t = 30, 80, 195, 200, 340, 610) | **6/6 match** — TH frames are full-frame face, SCREEN frames are apps |
+
+Two things this does **not** establish: the CARD share and the transition matrix were not independently
+re-derived, and the `solo-20k` interview timeline was checked only visually (two people, two rooms), not
+segment-by-segment.
