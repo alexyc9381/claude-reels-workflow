@@ -1,7 +1,7 @@
 # The Saraev Short-Form Edit — a guidebook
 
 How @nicksaraev's **short-form** vertical videos are edited. Companion to [`saraev-v1`](../saraev-v1/) (his
-long-form). 6 chapters, each written against the raw artifacts and required to cite measurements.
+long-form). 7 chapters, each written against the raw artifacts and required to cite measurements.
 
 **Corpus:** his **entire** shorts catalogue — 19 videos, 11.6 min, 1080×1920, every one with a live source
 URL + sha256 in [`provenance.json`](provenance.json).
@@ -55,6 +55,7 @@ cold open, ever. That is him.
 4. [Chapter 4 — Framing, Punch-ins & Camera Motion](#chapter-4)
 5. [Chapter 5 — The Hook (first 3 seconds)](#chapter-5)
 6. [Chapter 6 — Sound & Mix](#chapter-6)
+7. [Chapter 7 — The Transfer Table](#chapter-7)
 
 ---
 
@@ -1173,3 +1174,233 @@ ffmpeg -i cut.wav -af silencedetect=n=-40dB:d=0.15 -f null -   # then cut to ≤
 ### One finding for the editor, outside this chapter's scope
 
 `ydif_raw.txt` is **native-fps, not 30fps** as the brief states. It holds for the 16 batch videos (all exactly 30fps) but breaks on the 3 stragglers: MTVpRn8nCP4 is **24fps** (795 lines = 33.13s × 24), aIflIQMacV4 is **60fps** (789 lines = 13.15s × 60), On_DVAjnkRY is 29.97. Dividing those indices by 30 mis-times every cut in those files. Corrected, **aIflIQMacV4 is 10 cuts / 13.15s = 1.32 s/cut** — the fastest in the corpus, beating the brief's stated minimum of 1.9. The `sec/cut` figures for those three shorts should be re-derived pack-wide.
+
+---
+
+<a id="chapter-7"></a>
+
+## Chapter 7 — The Transfer Table
+
+### 7.0 The only clean cell in the experiment
+
+This pack was sold as a natural experiment: same creator, two formats, whatever holds is the person. That framing has a hole in it, and the hole is the whole chapter.
+
+**Format and era are confounded almost everywhere.** 16 of 19 shorts are the Sept-Oct 2024 agency-advice burst. All 6 long-forms are the 2025-26 AI-tooling lane. Comparing those two blocks measures *format + 18 months of rig drift + a change of editor*, and cannot attribute the difference to any one of them. Every chapter before this one said so; none of them could do anything about it.
+
+But there is one cell that *is* clean. **Three shorts are era-matched to the long-form corpus:**
+
+| id | date | LUFS | wps | speech density |
+|---|---|---|---|---|
+| `On_DVAjnkRY` | 2025-04-27 | -15.9 | 4.17 | 90.6% |
+| `aIflIQMacV4` | 2025-07-25 | -16.7 | 4.15 | 84.7% |
+| `MTVpRn8nCP4` | 2026-01-06 | -15.2 | 4.56 | 90.1% |
+| **long-form (n=6)** | 2025-26 | **-15.7 … -16.5** | **3.37 … 3.94** | **83.9 … 90.1%** |
+
+Three sessions is a miserable sample. But they are three *independent* sessions running three *different rigs* (whiteboard-stacked / full-bleed 60fps / letterboxed repost), which is the best available control: if they agree with each other *despite* the rig differences, the agreement is not a rig artifact.
+
+**So this chapter runs one test on every disputed parameter: era-matched, stragglers vs long-form, exact permutation on all C(9,3)=84 splits.** At n=3 vs 6 the smallest achievable p is 1/84 = 0.0119 — perfect separation. That is the ceiling. Anything at 0.0119 is as significant as this corpus can ever get; anything above it is not separated.
+
+The result is the finding of the pack, and it **contradicts the brief that commissioned it.**
+
+| parameter | brief's expectation | era-matched obs | exact p | verdict |
+|---|---|---|---|---|
+| **speaking rate** | "the constant breaks" | +0.595 wps | **0.0119** (ceiling) | ✅ **breaks — FORMAT DEMAND** |
+| **integrated loudness** | "the constant breaks (0.8 → 10 LU)" | **+0.067 LU** | **0.4405** | ❌ **does not break on format** |
+| speech density | — | +1.53 pp | 0.2381 | holds |
+
+**The loudness "break" is not a format effect. It is a time effect.** Straggler mean **-15.93 LUFS**, long-form mean **-16.00 LUFS** — a **0.07 LU** difference, when the long-form's celebrated constant is 0.8 LU wide. The 10 LU spread the brief flagged lives *entirely* inside the 2024 batch (`nmal1JTOrWI` -14.4, `tBQRJBKHwKc` -14.4 vs `sCj0UajQ86M` -24.5). Chapter 6 found the same thing from the other end — 5 of 6 cluster-C shorts within **0.10 LU** of each other. Both roads lead to: **he is invariant within an epoch, and his current epoch masters to -16 in both formats.**
+
+This matters because the two "broken constants" in the brief look like the same finding and are not. One is the format acting on the man. The other is 2024-Nick and 2026-Nick being different people at the mixing stage. **A compositor who treats them alike will target -19.6 LUFS because "that's what his shorts measure," and will be 3.6 LU below where he actually masters today.**
+
+---
+
+### 7.1 THE TRANSFER TABLE
+
+Every measurable parameter in the pack. `n=0` means measured absent, not unexamined. **"era-matched"** in the evidence column means the verdict survived the 3-straggler control; **"batch-only"** means it did not, and is therefore a claim about one afternoon.
+
+#### Layer 1 — THE PERSON AT THE LENS (what he does before anyone edits)
+
+| parameter | LONG-FORM | SHORT-FORM | verdict | evidence |
+|---|---|---|---|---|
+| **speech begins at 0.00s** | 6/6 | **19/19** | ⭐ **CREATOR CONSTANT** | 25/25, both formats, 2 years, 4 rigs. True PCM onset 0.03-0.13s; first 3 windows are -99 dBFS AAC priming, not a pause (Ch5) |
+| **locked camera — no drift** | median rot 0.0058°, trans 0.005% diag | median rot **0.0096°**, trans **0.173%** diag | ⭐ **CREATOR CONSTANT** | Ch4, one instrument on both corpora, ±0.15% scale resolution |
+| **punch-in / zoom / scale ramp** | **n=0** | **n=0** | ⭐ **CREATOR CONSTANT** | Ch4: 2 verified same-camera cuts, max deviation **0.11%** |
+| **music bed** | **n=0** | **n=0 / 19** | ⭐ **CREATOR CONSTANT** | Ch6, three independent kills: -inf dBFS window; side channel collapses -29.6 dB with speech; floor spectrum static & non-tonal |
+| **SFX / whooshes / stingers on cuts** | n=0 | **n=0** | ⭐ **CREATOR CONSTANT** | Ch6: n=30 cuts, cut-minus-control hiss **-0.01 dB**, 95% CI [-4.5,+4.5] |
+| **dead-air intolerance** | density 83.9-90.1% | density **79.6-98.0%, median 89.0%** | **CREATOR CONSTANT** | era-matched p=0.238; **1.83s** of ≥0.15s silence in the entire 11.6-min corpus; 15/19 have none |
+| **integrated loudness ≈ -16 LUFS** | -15.7 … -16.5 (0.8 LU) | **stragglers -15.2 … -16.7** | **CREATOR CONSTANT — within an epoch** | **Δ0.07 LU era-matched, p=0.44.** 2024 batch sits 4-8 LU below: **EPOCH DEMAND, not format** |
+| **crest factor / limiter chain** | 18.23 dB, sample peak sd **0.04 dB** | stragglers **18.2 dB** | **CREATOR CONSTANT — current epoch** | Ch6: ~4σ from the 2024 batch's 21.02, zero overlap |
+| **opens on a question** | 0/2 quoted | **0/19** | UNRESOLVED (no LF opener corpus) | Ch5 |
+| **speaking rate** | **3.37-3.94 wps** (median 3.77) | **3.68-4.86, median 4.18**; 17/19 above the LF max | 🔴 **FORMAT DEMAND** | **era-matched p=0.0119 (ceiling).** Drop the podcast repost: still p=0.0357 |
+| **the "So" opener tic** | 4/6 (66.7%) | **1/19 (5.3%)** | **UNRESOLVED, leaning FORMAT DEMAND** | Fisher p=0.0055 naive; **p=0.076** with the batch collapsed to 1 session. All 4 sessions agree in direction |
+| **face size / eyeline** | eyeline 41.6% H (saraev-v1) | — | **UNRESOLVED** | Ch4's skin estimator **failed validation** (reported 74.3% face height; fired on hands and a stock family photo). No face model on this machine |
+| **mic rig: mono+gated vs stereo+room** | M-S **52-53 dB**, floor **-104 … -212 dBFS** | M-S **13-37 dB**, floor median **-45.5 dBFS** | 🔴 **FORMAT DEMAND** | Ch6; **holds era-matched** (`MTVpRn8nCP4` 2026: M-S 21.2, floor -35.6). Zero overlap, 19 vs 6 |
+
+#### Layer 2 — THE EDIT (what happens after he leaves the room)
+
+| parameter | LONG-FORM | SHORT-FORM | verdict | evidence |
+|---|---|---|---|---|
+| **burned captions** | **n=0 / 7,266 frames** | **19/19**, median **91% of frames**, all present by 0.233s | 🔴 **FORMAT DEMAND** ⭐ | The pack's cleanest result. Verified against `words.json`, not pixels alone (Ch2). **Holds across all 4 sessions, 2024→2026, 3 unrelated rigs** — the one edit-layer parameter that is format, not era |
+| **B-roll / stock / third source** | **n=0** — "a camera and a screen, nothing else" | **19/19**; hand-labelled **38%** of events | 🔴 **FORMAT DEMAND** | Ch1 (694 frames, 100% of runtime), Ch3 (63 hand-labelled events) |
+| **graphic cards / motion graphics** | **n=0** | **52%** of labelled events | 🔴 **FORMAT DEMAND** | Ch3 |
+| **face on screen** | **100%** of runtime | **~60-65%** (hand-counted, 282 frames) | 🔴 **FORMAT DEMAND** | Ch1. Two frames in five of a Saraev short contain no Saraev |
+| **screen recording** | **50-71% of runtime** | **1/19** (a whiteboard, not an app) | 🔴 **FORMAT DEMAND** | Ch1. The inversion is total |
+| **webcam inset over screen** | the entire grammar | **0/19** | 🔴 **FORMAT DEMAND** | Ch1 |
+| **cut rate** | 1 per **25.5s** | median **4.33 s/event** merged (3.48 raw) | 🔴 **FORMAT+ERA DEMAND, confounded** | ⚠️ **not the same quantity** — §7.2 |
+| **talking-head cut rate** | 1 per 25.5s | **masked by the overlay layer** | ⚫ **UNRESOLVED — unmeasurable from pixels** | Ch3: 90% of YDIF events are overlay; a jump cut under a graphic card is invisible |
+| **transition shape** | **136/136 exactly 1 frame** | **57.5%** 1-frame; **42.5%** multi-frame flashes; max **63 frames (2.1s)** | 🔴 **FORMAT DEMAND** | Ch4 positive control: luma ramps 99→249→224 (optical), vs a true cut's single step 63→103 |
+| **cuts prefer speech gaps** | UNRESOLVED | **2.4-3.3x enrichment, perm p<2e-4** | **SETTLED for shorts; cross-format UNRESOLVED** | Ch3, 5,000 permutations. But ~82% of cuts still land *on* speech — an enrichment, not a rule |
+| **cut density over position** | — | **decelerates**, mean pos 0.421, p<2e-4; hook 1.4x denser | 🔴 **FORMAT DEMAND** | Ch3 |
+| **Ken Burns on stills** | n=0 (no stills exist) | **n=1**, +5.23%/s, pure scale | 🔴 **FORMAT DEMAND** | Ch4. He moves stock images; he never moves himself |
+| **lower thirds** | **n=0** | **n=0-1 / 19** | **CREATOR CONSTANT** | Ch2 |
+| **progress bar** | n=0 | **n=0 / 19** | **CREATOR CONSTANT** | Ch2 |
+| **end card / CTA / subscribe** | n=0 | **1/19** (a serif "go down." — **no CTA in any of the 19**) | **CREATOR CONSTANT** | Ch2. He never asks for the follow |
+| **LRA** | 6.05 | 3.02 raw → **+1.77 LU** after duration control | 🔴 **FORMAT DEMAND (attenuated)** | Ch6: **42% of the naive 3.03 LU effect is a duration artifact**; 20/30 duration-matched LF windows fall inside the shorts' range |
+| **caption case / size / colour / w-per-card** | n/a | **all 3 stragglers contradict all 16 batch videos** | ⚫ **ERA-CONFOUNDED — one afternoon** | Ch2 |
+| **caption x = centre, y frozen per video** | n/a | x **49.91%**, y IQR **0.10%**, all 4 sessions | **CONSTANT within short-form** | Ch2 |
+| **caption y value** | n/a | **50.6-83.0% — no house value exists** | ⚫ **n=0. There is nothing to clone** | Ch2 |
+| **caption lead vs onset** | n/a | -0.057s, n=10, IQR spans zero | ⚫ **UNRESOLVED** | Ch2. The nearest-onset test is **vacuous** — a random null reproduces it (73% vs 60-73%) |
+
+---
+
+### 7.2 Question 1 — which long-form "creator constants" break?
+
+Four `saraev-v1` claims must be re-scoped or withdrawn. Two are the ones the brief flagged; **one of those two is flagged for the wrong reason**, and two more break that the brief did not anticipate.
+
+**① "Speaking rate 3.41-3.94 wps (median 3.76, spread 1.16x)" — RE-SCOPE, and CORRECT.**
+
+Two problems. The range is **wrong**: `saraev-solo-20k` is **3.37 wps**, not 3.41. Re-derive it. And it does not transfer: shorts median **4.18**, **17/19 above the long-form maximum**, era-matched **p=0.0119** — the significance ceiling for this design.
+
+Re-scope to: *"3.37-3.94 wps **in long-form**. In short-form he runs ~4.2 and the two distributions do not touch."*
+
+⚠️ **Adversarial check I ran on my own headline.** `MTVpRn8nCP4` is a repurposed podcast clip (Ch1: a 1:1 card template; Ch4: letterboxed repost chrome). Its 4.56 wps might be *conversational register*, not *short-form demand* — including it would smuggle a third format into a two-format experiment. Dropping it: `On_DVAjnkRY` 4.17 and `aIflIQMacV4` 4.15 still exceed the long-form maximum of 3.94, **p=0.0357**. The finding survives its own strongest objection at n=2.
+
+**② "Integrated loudness -15.7 to -16.5 LUFS (0.8 LU spread)" — RE-SCOPE, but NOT the way the brief thinks.**
+
+The brief cites 10 LU across the shorts as proof the constant breaks. **It doesn't break on format.** Era-matched, the stragglers mean **-15.93** against long-form's **-16.00** — Δ **0.07 LU**, exact **p=0.4405**. The 10 LU is three historical export presets inside a 14-day burst, five of which sit within **0.10 LU of each other** (Ch6).
+
+Re-scope to: *"-16.0 LUFS ± 0.4, **current epoch, both formats**. The 2024 shorts predate the chain and sit 4-8 LU below."*
+
+The corollary is the sharper claim: **the long-form pack's thesis — "the most invariant layer of his entire craft" — is right about the man and wrong about the unit.** He is invariant *within a session*, not across a catalogue. The long-form corpus sampled one epoch and mistook a batch constant for a person constant. The shorts, spanning three epochs, expose it.
+
+**③ "Dissolves / wipes / fades: n=0. 136/136 events exactly 1 frame wide." — WITHDRAW for short-form.**
+
+The long-form's most beautiful number. In shorts, **42.5% of events are multi-frame** (Ch4), 16/19 videos contain at least one, and `aIflIQMacV4 @0.05s` runs a **13-frame light-leak wipe** that alone contains more non-hard-cut frames than the entire long-form corpus. **FORMAT DEMAND.**
+
+**④ "Burned captions n=0 / 7,266 frames (verified with a positive control)." — TRUE, AND THE MOST MISLEADING NUMBER IN THE PACK.**
+
+It is correct and it does not generalise one inch. **19/19 shorts carry word-level speech-synced burned captions on a median 91% of frames**, verified against `words.json` in all three eras (Ch2, Ch5). This is the single parameter where the era confound does *not* bite: it holds across 2024, 2025, and 2026, across three unrelated rigs and three incompatible caption styles. **Captions are not a Saraev refusal. They are a tax the vertical format collects, and he pays it every time.**
+
+**A fifth claim is not broken but is not what it appears: cut rate.** "Shorts cut 7x faster" compares an **overlay-layer rate** against a **talking-head cut rate** (Ch3). ~90% of short-form YDIF events are a graphic card or B-roll entering, not Nick cutting his own take. And the merged rate — after collapsing the ~23% double-fires the calibrated `runs` rule produces on animated transitions — is **4.33 s/event**, not 3.5. One of his four sessions (`On_DVAjnkRY`, **16.98 s/cut, zero face→face cuts in 50.95s**) is within striking distance of the long-form's 25.5s. **The cut rate is not stable across his own sessions (1.31 / 2.76 / 16.98). It is not a constant in either direction.**
+
+---
+
+### 7.3 Question 2 — the irreducible core
+
+Strip everything the format explains, everything the era explains, and everything the instruments couldn't resolve. **Here is what is left. It is a short list, and it has a shape.**
+
+| # | the constant | measured | n |
+|---|---|---|---|
+| 1 | **Speech at frame 1. No runway, no logo, no breath, no "hey guys."** | true PCM onset 0.03-0.13s | **25/25** |
+| 2 | **The camera never moves.** No punch-in, no push, no drift, no ramp. | median scale **1.0000**, median rotation **0.0096°** | 25/25 |
+| 3 | **No music. Ever.** | -inf dBFS windows; side collapses with speech; non-tonal static floor | 25/25 |
+| 4 | **No SFX, no whooshes, no stingers.** | n=30 cuts, **-0.01 dB**, CI [-4.5,+4.5] | 25/25 |
+| 5 | **He does not tolerate dead air.** | **1.83s** of silence in 11.6 min; density ~87-89% both formats | 25/25 |
+| 6 | **No lower thirds, no progress bar, no CTA, no subscribe card.** | n=0 / n=0 / 1-of-19 | 25/25 |
+| 7 | **-16.0 LUFS, ~-1 dBTP, crest ~18** *(current epoch only)* | Δ0.07 LU era-matched, p=0.44 | 9/9 in-epoch |
+
+**Now look at what that list is.** Every single item is a property of *the room* — the mic, the tripod, the mouth, the master bus. **Not one of them is a property of the edit.**
+
+And look at what broke. Captions, B-roll, graphic cards, flash wipes, cut rate, Ken Burns, face-on-screen share, screen recording, webcam inset. **Every single one is a property of the edit.**
+
+So the natural experiment does not cleanly separate *person* from *format*. **It separates the person from his post-production vendor.** The evidence that the 2024 shorts were not edited by the man in them is direct and independent of my synthesis: the captions are auto-generated and unproofed — `FRh_8qv8850` renders **"MANEGERIAL"**, `XhRJiAG4s5U` renders **"SO BASED OF"** for spoken "So basically the…" (Ch5). A person editing his own words does not ship those. Add Chapter 2's finding that the batch's entire caption system is one template's parameters, and Chapter 1's finding that the batch spans **≥4 wardrobe changes** — one editor, one preset, several shoot days.
+
+**With one honest exception, and it is the interesting one: speaking rate.** That is a performance parameter — it happens at the lens, in Layer 1 — and it is the *only* Layer-1 parameter that moves with format (p=0.0119). He physically talks faster at a vertical camera. Everything else he does in the room, he does identically; his *register* is the one thing the format reaches through the lens and changes.
+
+**So the honest three-layer model is:**
+
+| layer | what it is | verdict |
+|---|---|---|
+| **Layer 1a — the rig and the reflexes** | tripod, mic, no music, no dead air, speech at 0, master chain | **HIM. Transfers intact.** |
+| **Layer 1b — the register** | speaking rate ~3.8 long / ~4.2 short; possibly the "So" tic | **HIM, responding to the format.** |
+| **Layer 2 — the post** | captions, B-roll, graphics, transitions, cut rate | **Not attributable to him at all.** Format × era × editor, three-way confounded |
+
+**Is it "two different crafts by the same person"?** Nearly — but that framing over-credits him. It is **one craft (Layer 1, remarkably invariant) shipped through two different post-production pipelines, only one of which he plausibly ran himself.** The long-form pack's "a camera and a screen, nothing else" is not an aesthetic. It is what his work looks like when nobody else touches it.
+
+---
+
+### 7.4 Question 3 — what a compositor does with this
+
+A user pastes a short-form Saraev reference. Here is the triage.
+
+#### 🔴 DISCARD OUTRIGHT — these saraev-v1 numbers are actively wrong for vertical
+
+| discard | why |
+|---|---|
+| `burned captions: n=0` | **19/19 shorts have them.** Shipping a vertical Saraev clone without word-level burned captions reproduces zero of his shorts |
+| `B-roll / stock / third source: n=0` | 19/19 have it; ~40% of frames |
+| `face on screen: 100%` | measured **~60-65%** |
+| `dissolves/wipes/fades: n=0` | **42.5%** of short-form transitions are multi-frame flashes |
+| `screen-recording 50-71% + webcam inset` | **0/19.** The grammar does not survive the format |
+| `cut rate: 1 per 25.5s` | do not run a 25.5s cut rate in a vertical hook — 16/18 shorts cut inside 3.5s |
+| `lower thirds: n=0` | keep — but see below |
+
+#### 🟡 RE-SCOPE — right number, wrong scope
+
+| parameter | long-form value | vertical value |
+|---|---|---|
+| speaking rate | 3.37-3.94 (correct the 3.41) | **~4.2 wps**, target 4.1-4.6 |
+| integrated loudness | -16.0 | **-16.0 — unchanged.** Do NOT clone the shorts' measured -19.6 median; that is a dead 2024 preset |
+| LRA | 6.05 | **3-5 LU** (only +1.77 LU of the naive 3.03 survives duration control) |
+| transitions | 100% hard cut | **~57% hard cut, ~43% flash wipe** (4-9 frames, luma to ~249) |
+| cut/overlay rate | 1/25.5s | **1 overlay event per ~4.3s** — and it is an *overlay* track, not a cut track |
+
+#### 🟢 TRANSFER INTACT — these are him, and they are the whole clone
+
+```
+speech starts at frame 1                     25/25   ← the one hard law
+camera scale = 1.0, rotation = 0, no drift   25/25   ← NEVER interpolate scale
+music bed: none                              25/25
+SFX / whooshes / stingers: none              25/25
+silence >0.7s: none. Target zero.            25/25
+lower third / progress bar / CTA card: none  25/25
+master: -16.0 LUFS, -1.0 dBTP, crest ~18     9/9 in-epoch
+```
+
+#### ⛔ THE FOUR THINGS A COMPOSITOR MUST NOT CLONE
+
+1. **The caption y position.** There is no house value. It ranges **50.6-83.0%** across the corpus and **60.8-83.0% within the single 2024 batch**. What he actually does is *pick one per video and freeze it* (IQR **0.10%**). Clone the freezing, not the number.
+
+2. **The caption style.** ALL-CAPS + yellow/cyan keyword + 2.5% glyph height describes **one afternoon in October 2024**, contradicted by all three later videos (all lowercase, all outside the batch's size range, zero keyword colour). Clone that and you clone a dead template, not a creator.
+
+3. **The measured -19.6 LUFS median.** See above. His current chain is -16.
+
+4. **"A cut every 3.5s."** It is 4.33 after the double-fires are collapsed, and **90% of those events are graphics, not cuts.** Build an overlay track over a nearly-uncut talking head — do not chop the head every 3.5s. That would produce something he has never made.
+
+#### The one build note that outranks the numbers
+
+**The emphasis is not carried by a push-in — it is carried by a cutaway.** He never zooms (n=0, both formats, ±0.11%). Short-form convention says punch in on the emphasis word; **he refuses, and cuts away to a graphic card instead.** Chapter 4 found the structural reason: **12/19 shorts contain no two shots sharing a background** — the slot where a punch-in would live is already occupied. If you want Saraev emphasis in a vertical frame, the move is a full-frame graphic replacement on the emphasis word, over a locked, unzoomed head.
+
+---
+
+### 7.5 The verifier's short list
+
+Five numbers carry this chapter. Re-derive these and you will find any error in it:
+
+| # | claim | re-derive |
+|---|---|---|
+| 1 | **wps era-matched p=0.0119** | `wps` from the 3 stragglers' `vo_metrics.json` (4.17/4.15/4.56) vs 6 long-form (3.83/3.71/3.93/3.41/3.94/3.37); exact permutation over all C(9,3)=84 splits. Robustness: drop `MTVpRn8nCP4` → p=0.0357 |
+| 2 | **LUFS era-matched p=0.4405, Δ0.07 LU** | last `I:` line of each `loudness.log`; stragglers -15.9/-16.7/-15.2 vs -15.9/-15.8/-15.7/-15.8/-16.3/-16.5 |
+| 3 | **long-form wps min is 3.37, not 3.41** | `saraev-solo-20k/vo_metrics.json` |
+| 4 | **shortest short is 13.15s, not 21s** | `nsshort-aIflIQMacV4/probe.txt`. Corpus range **13.15-58.77s**, mean **36.58s** |
+| 5 | **`ydif_raw.txt` is native-fps, not 30** | `MTVpRn8nCP4` = **24fps**, `aIflIQMacV4` = **60fps**, `On_DVAjnkRY` = 29.97. The brief's `t=i/30` mis-times every cut in 3 of 19 files. Three chapters found this independently |
+
+### 7.6 The caveat that governs the whole table
+
+**Effective sample: ~7 sessions in short-form (≥4 wardrobe setups inside the 2024 batch + 3 stragglers), 6 videos in long-form, and exactly 3 short-form sessions era-matched to the long-form corpus.**
+
+Every ⭐ CREATOR CONSTANT above was checked against the stragglers and holds there. Every 🔴 FORMAT DEMAND in Layer 2 should be read as **FORMAT-OR-ERA-OR-EDITOR DEMAND** — three-way confounded, unresolvable from this corpus — **with one exception: captions**, which hold across 2024, 2025 and 2026 and are therefore format.
+
+He abandoned short-form after Oct 2024. The shorts are agency/business advice; the long-form is AI tooling. **The single measurement that would collapse most of the remaining confound is upload dates:** `yt-dlp --print "%(id)s %(upload_date)s"` on the 19 IDs would test whether Chapter 6's three loudness clusters track shoot days, and would tell you whether the 2024 "batch" is one editor's engagement or three.
+
+Until then, the honest summary is one sentence: **what he does in the room is his, and it barely moves; what happens to the footage afterwards is the format's, the era's, and somebody else's.**

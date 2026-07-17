@@ -230,7 +230,8 @@
     },
     "no_music_bed": {
       "value": "n=0 both",
-      "evidence": "three independent kills incl. side-channel collapse of -29.6 dB with speech"
+      "evidence": "three independent kills incl. side-channel collapse of -29.6 dB with speech",
+      "\u26a0\ufe0f one proof struck": "Ch6's headline proof (a) \u2014 'two videos reach true digital silence, -inf dBFS, no bed can coexist' \u2014 is a FILE-TAIL ARTIFACT. Both windows are the last few hundred ms of the encode (trailing zeros); a music bed would stop there too. The verifier noted Ch6 stated the 'ask what physically produced the samples' rule and then failed to apply it to its own headline. The n=0 verdict SURVIVES on proofs (b) side-channel collapse -29.6 dB with speech and (c) non-tonal static floor spectrum."
     },
     "no_SFX_on_cuts": {
       "value": "n=0 both",
@@ -238,7 +239,8 @@
     },
     "dead_air_intolerance": {
       "value": "1.83s of >=0.15s silence in the ENTIRE 11.6-min shorts corpus; 15/19 have none",
-      "era_matched_p": 0.238
+      "era_matched_p": 0.238,
+      "\u26a0\ufe0f UNREPRODUCIBLE": "Ch6 claimed 1.83s of >=0.15s silence and 15/19 with none. The verifier re-derived **7.17s and 10/19**. The direction holds (he is silence-intolerant in both formats) but the specific numbers are NOT reproducible \u2014 do not quote them."
     },
     "loudness_-16_LUFS": {
       "value": "holds era-matched, delta 0.067 LU, p=0.44",
@@ -255,12 +257,23 @@
       "long_form": "3.37-3.94 wps (median 3.77)",
       "shorts": "3.68-4.86 (median 4.18), 17/19 above the LF max",
       "era_matched_p": 0.0119,
-      "note": "0.0119 is the CEILING \u2014 perfect separation on all 84 permutations. Drop the podcast repost: still p=0.0357"
+      "note": "0.0119 is the CEILING \u2014 perfect separation on all 84 permutations. Drop the podcast repost: still p=0.0357",
+      "era_matched_p_ONE_TAILED": 0.0119,
+      "\u26a0\ufe0f era_matched_p_TWO_TAILED": 0.0238,
+      "\u26a0\ufe0f robustness_FAILS": "drop the podcast repost (On_DVAjnkRY) and it is p=0.0357 one-tailed but **0.0714 two-tailed \u2014 fails 0.05**. The finding is significant on the full 3-straggler sample and FRAGILE to dropping any one of the three.",
+      "disclosure": "the chapter reported 0.0119 without stating it was one-tailed. Caught by the adversarial verifier. Two-tailed is the honest number.",
+      "sample": "n=3 era-matched shorts vs n=6 long-form. Tiny. The direction is consistent across all 4 sessions, but do not oversell the p."
     },
     "mic_rig": {
       "long_form": "M-S 52-53 dB, floor -104..-212 dBFS (mono+gated)",
       "shorts": "M-S 13-37 dB, floor median -45.5 dBFS (stereo+room)",
       "note": "holds era-matched (MTVpRn8nCP4 2026: M-S 21.2, floor -35.6). Zero overlap, 19 vs 6"
     }
-  }
+  },
+  "KNOWN_OPEN_ITEMS": [
+    "Ch1's framing recipe ('head ~75-80% of frame height, zero headroom, hair clipped') is CONTRADICTED by the frames and by Ch4. Do not build to it.",
+    "Ch3 and Ch4 report different transition widths (142/67/12 vs 127/43/51) \u2014 both reproduce exactly, but under different methods (run-at-event-start vs event-span). Unreconciled; the book should say which it means.",
+    "Ch6's silence census is unreproducible (see dead_air_intolerance).",
+    "Face size / eyeline is UNRESOLVED \u2014 Ch4's skin estimator failed validation (fired on hands and a stock family photo); no face model on this machine."
+  ]
 }
