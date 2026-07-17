@@ -200,6 +200,57 @@ the first word of a sentence that sounds like it started before you arrived.
 
 ---
 
+## 8. ⛔ Receipts: the naive rule is WRONG
+
+The Saraev reputation is "money receipts", and it is tempting to encode *always show the number*. **His edit
+does not do that.** Two cases, opposite treatment:
+
+| Claim | Video | On screen | Treatment |
+|---|---|---|---|
+| *"My business is gonna do over **$400,000** this month"* | `agent-workflow` @27.4s | **nothing** | full-frame face, **16 unbroken seconds** (20s→36s), no cutaway, no graphic, no dashboard |
+| *"I spent over **$1,400**"* | `fable-tokens` @5.4s | the actual Claude billing page, **from frame 0** | live hand-drawn annotation, synced |
+
+**The rule is subject-vs-credential, not "receipts always":**
+
+- When the artifact **is the subject** of the video (`fable-tokens` = *what Fable cost me*), the artifact is
+  on screen from frame 0 and gets annotated live.
+- When a number is a **credential dropped in passing** (`$400k/mo` as authority-building), it gets **no
+  visual support whatsoever** — he says it to camera and moves on.
+
+The biggest dollar figure in the entire corpus has zero receipt. Encoding "stage a receipt for every numeric
+claim" would produce something he has never made.
+
+> The money-receipts lane in [[nick-saraev-style-reference]] describes his **script/topic** selection. It does
+> **not** describe his edit. Do not transfer it across.
+
+## 9. ⭐ The move: Circle-Then-Say
+
+`fable-tokens`, the $1,400 claim. Cyan-stroke pixel count across the frame (baseline ~400px is UI chrome —
+blue links, the "On" toggle; the annotation adds ~200px, a 50% lift):
+
+| t | cyan px | event |
+|---|---|---|
+| 2.0 – 2.9s | ~400 | baseline, no annotation |
+| **3.2s** | 440 | **stroke begins** |
+| 3.8 – 4.4s | 535 → 579 | drawing |
+| **4.7s** | 581 | **ellipse complete** (~1.5s to draw) |
+| **5.4s** | 580 | ← **he says "$1,400"** |
+| 4.7 – 10.1s | 578 – 636 | held |
+| **10.4s** | 416 | **erased** |
+
+**The annotation leads the voice.** The circle completes **0.7s before** the number is spoken and begins
+**2.2s before** it. The viewer's eye is already parked on the figure when the claim lands. Lifetime ≈ 7.1s,
+then wiped.
+
+Set against §5, this is the precise sync grammar of the style:
+
+> **The pointer leads the voice. The cuts ignore it.**
+
+**Recipe:** artifact on screen first → hand-draw a circle around the figure over ~1.5s → finish ~0.7s before
+speaking the number → hold ~5s → erase. Freehand stroke on the live screen, not a graphic, not a lower-third.
+
+---
+
 ## Method + caveats
 
 - **Cut detection:** absolute **YDIF > 20** on per-frame `signalstats` @30fps, events collapsed within 3
