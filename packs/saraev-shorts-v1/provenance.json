@@ -1,0 +1,209 @@
+{
+  "pack": "saraev-shorts-v1",
+  "captured": "2026-07-17",
+  "subject": "@nicksaraev SHORT-FORM (vertical) edit \u2014 companion to saraev-v1 (long-form)",
+  "\u2705 provenance": "COMPLETE \u2014 unlike saraev-v1. INGEST.sh (patched 2026-07-16) recorded source.url + source.sha256 for every video at fetch time. Every measurement traces to a live URL.",
+  "corpus": {
+    "videos": 19,
+    "total_runtime_s": 694,
+    "note": "his ENTIRE shorts catalogue \u2014 there are only 19"
+  },
+  "\u26d4 SAMPLING CAVEATS": {
+    "batch_confound": "16 of 19 were uploaded 2024-09-24 \u2192 2024-10-07, a 14-day burst = almost certainly ONE batch-recorded session. Effective sample is ~4 sessions, not 19 videos. A 'creator constant' from the 2024 batch is a claim about one afternoon.",
+    "era_confound": "18 of 19 shorts are from his 2024 AGENCY-ADVICE era. The long-form corpus is 2026 AI-tooling. Format is confounded with era for almost the whole sample.",
+    "\u2b50 the era control": "MTVpRn8nCP4 (2026-01-06) is the ONE era-matched short. Same person, same month as the long-form corpus, opposite edit (captions + movie b-roll + title card vs none of it). It breaks the era confound for the caption/b-roll findings.",
+    "abandoned_lane": "he effectively stopped after Oct 2024 \u2014 2 shorts in 2025, 1 in 2026."
+  },
+  "videos": {
+    "4TY92yLmhN4": {
+      "source_url": "https://www.youtube.com/shorts/4TY92yLmhN4",
+      "sha256": "0a56ad5fb3bfec132c84aa12faaa20edd10f4a9c4d7a4ac1e842507613260187",
+      "resolution": "1080x1920",
+      "upload_date": "20240925",
+      "duration_s": "45",
+      "views": "3034",
+      "title": "How my content agency differs from a traditio",
+      "session": "2024-batch"
+    },
+    "6Q1KopZ4WTk": {
+      "source_url": "https://www.youtube.com/shorts/6Q1KopZ4WTk",
+      "sha256": "3f24872a55978471b4d2b142d08adc4883ba9162b8806500a9d62387f54e39ae",
+      "resolution": "1080x1920",
+      "upload_date": "20241001",
+      "duration_s": "38",
+      "views": "17839",
+      "title": "Why I like B2B tech as a target niche for aut",
+      "session": "2024-batch"
+    },
+    "BFMkSvzkjFg": {
+      "source_url": "https://www.youtube.com/shorts/BFMkSvzkjFg",
+      "sha256": "20dfd9f4e9bf78b95b111aa686a9ca3933999fdf032270762d42ca247d805eb1",
+      "resolution": "1080x1920",
+      "upload_date": "20241003",
+      "duration_s": "35",
+      "views": "6232",
+      "title": "Hiring full-time employees vs. contractors fo",
+      "session": "2024-batch"
+    },
+    "EzG5lBwXKIM": {
+      "source_url": "https://www.youtube.com/shorts/EzG5lBwXKIM",
+      "sha256": "c9a0042d51a25f60a69a529bcd4e6c959da125ebff4885cc7c9258ca01e00c2e",
+      "resolution": "1080x1920",
+      "upload_date": "20241004",
+      "duration_s": "33",
+      "views": "6727",
+      "title": "1on1s with employees should be simple and pro",
+      "session": "2024-batch"
+    },
+    "FRh_8qv8850": {
+      "source_url": "https://www.youtube.com/shorts/FRh_8qv8850",
+      "sha256": "48a332722835f8cb2c8c9802a4b5d9f4e32fcae3b3e0e6efd4b4808f6de30c43",
+      "resolution": "1080x1920",
+      "upload_date": "20241005",
+      "duration_s": "47",
+      "views": "11457",
+      "title": "Tracking daily progress has been one of the e",
+      "session": "2024-batch"
+    },
+    "MTVpRn8nCP4": {
+      "source_url": "https://www.youtube.com/shorts/MTVpRn8nCP4",
+      "sha256": "f32bb2efee7e43b00d34b9e57b97acf035fdc1a8bcf9900ad162393ae5427417",
+      "resolution": "1080x1920",
+      "upload_date": "20260106",
+      "duration_s": "33",
+      "views": "14149",
+      "title": "How to Overcome Limiting Beliefs",
+      "session": "straggler"
+    },
+    "N-CYWceoXUI": {
+      "source_url": "https://www.youtube.com/shorts/N-CYWceoXUI",
+      "sha256": "725523c1f4c29cb4c0f97fd15b6f1a127110f15ba4acdaf539c7aade0c51b172",
+      "resolution": "1080x1920",
+      "upload_date": "20240926",
+      "duration_s": "54",
+      "views": "11409",
+      "title": "How I run one of my businesses \ud83d\udcca",
+      "session": "2024-batch"
+    },
+    "OWxvKcNahJE": {
+      "source_url": "https://www.youtube.com/shorts/OWxvKcNahJE",
+      "sha256": "9e9b423acea7fba9a2be74f0f7c5b0aef4b5ae820debfda32708af13c91c7c18",
+      "resolution": "1080x1920",
+      "upload_date": "20240924",
+      "duration_s": "37",
+      "views": "6772",
+      "title": "You don't have to be a genius to make money o",
+      "session": "2024-batch"
+    },
+    "On_DVAjnkRY": {
+      "source_url": "https://www.youtube.com/shorts/On_DVAjnkRY",
+      "sha256": "e894147a06e24fc5f7a002b40b41901e34c5066991a38e8a07e6405426424d12",
+      "resolution": "1080x1920",
+      "upload_date": "20250427",
+      "duration_s": "51",
+      "views": "42439",
+      "title": "AI automation is just like any other business",
+      "session": "straggler"
+    },
+    "XhRJiAG4s5U": {
+      "source_url": "https://www.youtube.com/shorts/XhRJiAG4s5U",
+      "sha256": "eccf08f764e0a400f58c83037a4e631a76f6fe5ec988f76bdc283ab776365305",
+      "resolution": "1080x1920",
+      "upload_date": "20240927",
+      "duration_s": "44",
+      "views": "2559",
+      "title": "Why The Theory of Constraints is so important",
+      "session": "2024-batch"
+    },
+    "YfYv0_TEJ3g": {
+      "source_url": "https://www.youtube.com/shorts/YfYv0_TEJ3g",
+      "sha256": "fa6d19b0d43dc1c598cc5d155a28ed2fece8bac1b79c3ac640d16f3320defb30",
+      "resolution": "1080x1920",
+      "upload_date": "20240928",
+      "duration_s": "43",
+      "views": "27100",
+      "title": "My take on making money. What're your guys th",
+      "session": "2024-batch"
+    },
+    "aIflIQMacV4": {
+      "source_url": "https://www.youtube.com/shorts/aIflIQMacV4",
+      "sha256": "6cf2e739834f6fc22cb7f467568d02a61d139f3d2ee8dd31daace2edd31cfad4",
+      "resolution": "1080x1920",
+      "upload_date": "20250725",
+      "duration_s": "13",
+      "views": "46270",
+      "title": "Why Saturation Doesn't Matter",
+      "session": "straggler"
+    },
+    "bz7EnmzYEAM": {
+      "source_url": "https://www.youtube.com/shorts/bz7EnmzYEAM",
+      "sha256": "39db1ba20c0a2d6a8da581206678edfbd9909fd1dfc6e7164af1ce4eff967eec",
+      "resolution": "1080x1920",
+      "upload_date": "20240926",
+      "duration_s": "59",
+      "views": "6393",
+      "title": "How I pitch different sized companies \ud83d\udcde",
+      "session": "2024-batch"
+    },
+    "kR5iNc2wiy8": {
+      "source_url": "https://www.youtube.com/shorts/kR5iNc2wiy8",
+      "sha256": "6e559967a134a5c25c07e15b5ee85225bc36b1b45bf11c74e1ec31a2b1a9f212",
+      "resolution": "1080x1920",
+      "upload_date": "20241002",
+      "duration_s": "29",
+      "views": "4622",
+      "title": "Don't default to hiring in your business \u274c",
+      "session": "2024-batch"
+    },
+    "keJniazAhQY": {
+      "source_url": "https://www.youtube.com/shorts/keJniazAhQY",
+      "sha256": "5bd320fab2c814516960ace10c6973019a61704aa95a63f6974d050074427cfb",
+      "resolution": "1080x1920",
+      "upload_date": "20241007",
+      "duration_s": "31",
+      "views": "23021",
+      "title": "This piece of information changed my perspect",
+      "session": "2024-batch"
+    },
+    "nmal1JTOrWI": {
+      "source_url": "https://www.youtube.com/shorts/nmal1JTOrWI",
+      "sha256": "42275e43a469c9cb51a3f4d7bbe04d7f5e1a39a9ae52d9e51bfd945bda1425ad",
+      "resolution": "1080x1920",
+      "upload_date": "20240925",
+      "duration_s": "37",
+      "views": "10506",
+      "title": "Explaining buyer awareness \ud83e\uddd0",
+      "session": "2024-batch"
+    },
+    "oKA-7pjkCuE": {
+      "source_url": "https://www.youtube.com/shorts/oKA-7pjkCuE",
+      "sha256": "f9d7723f48672488d494c759ccd4047759fdbae3d9d7b3b37e291abc9194e175",
+      "resolution": "1080x1920",
+      "upload_date": "20241006",
+      "duration_s": "22",
+      "views": "9758",
+      "title": "How I break down business tasks",
+      "session": "2024-batch"
+    },
+    "sCj0UajQ86M": {
+      "source_url": "https://www.youtube.com/shorts/sCj0UajQ86M",
+      "sha256": "53bbfad054e0c32d5ce4a3eb6392c9c521c9595becdb930d6136e1e04e997cf4",
+      "resolution": "1080x1920",
+      "upload_date": "20240929",
+      "duration_s": "21",
+      "views": "2641",
+      "title": "Why hiring in a business should increase your",
+      "session": "2024-batch"
+    },
+    "tBQRJBKHwKc": {
+      "source_url": "https://www.youtube.com/shorts/tBQRJBKHwKc",
+      "sha256": "9783e43b8376545f0faeaaf505824da9d8f5583d9d5418b4ea3341bf942a124a",
+      "resolution": "1080x1920",
+      "upload_date": "20240930",
+      "duration_s": "22",
+      "views": "4788",
+      "title": "One of the things I look for when picking a n",
+      "session": "2024-batch"
+    }
+  }
+}
