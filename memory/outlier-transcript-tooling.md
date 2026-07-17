@@ -9,6 +9,8 @@ metadata:
 
 # ⛔ INSTAGRAM = `outlier-engine/ig_scan.py` (private JSON API, no browser) — Alex, 2026-07-15
 
+⛔⛔ **Upgraded to an ABSOLUTE BAN 2026-07-16: [[no-browser-agents-instagram]] — no browser agent touches Instagram ever again, for any purpose.**
+
 > *"instead of just clicking thru, is there a way to get the data thru an api instead of using browseruse"* — yes, and it is strictly better.
 
 ```bash
@@ -43,6 +45,15 @@ Also: never return raw `href`s/cursors from `javascript_tool` — the extension 
 (0.94x, 0.77x, 0.48x, 0.40x, 0.37x, 0.32x, 0.28x). The topic carried it, not her momentum — that is a transfer signal.*
 Also use **comments** to detect the CTA mechanic: raycfu's 296K news roundup has **15 comments** (0.005%) = no keyword
 lead-magnet, whereas SCROLL's 12,259 on 518K (2.4%) = a working comment-gate.
+
+## ⛔ VIDEO DOWNLOADS: use the STANDALONE yt-dlp binary at `~/.local/bin/yt-dlp` (2026-07-16)
+The pip yt-dlp (2025.10.14, pinned by system Python 3.9) FAILS on YouTube video downloads three ways:
+SABR-blocked web formats ("downloaded file is empty"), empty HLS streams, and tv-client "page needs to be
+reloaded". Fix = the standalone macOS binary (bundles its own Python): `curl -sL
+https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos -o ~/.local/bin/yt-dlp && chmod +x`.
+Works first try with `--cookies-from-browser chrome` + `--ffmpeg-location <ffmpeg-static dir>` at
+`-f "bv*[height<=720][ext=mp4]+ba[ext=m4a]/b[height<=720]"`. Keep pip yt-dlp for transcripts/metadata; use
+the binary for media. Re-download the binary when it ages (~months, not years).
 
 ## YouTube (captions + audio) still needs a PO token
 Plain `yt-dlp` gets `403` / "PO token was not provided". Fix = **bgutil POT provider** at `~/Downloads/bgutil-ytdlp-pot-provider/`:

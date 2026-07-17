@@ -107,3 +107,34 @@ This produced captions with every word at/just-before the voice across the whole
 
 
 **RETENTION RISER at the ~1s mark (Alex, 2026-07-10, SLASH):** add a metallic RISER that starts around the 1-second mark and CLIMAXES on the first scene cut, to build tension through the hook and pull the viewer past it (max retention). Use the real `public/sfx/metal_riser.wav` (dur 1.95s, peaks ~1.72s): measure its peak, then `at = L[1] - peak` so the climax lands on the transition (SLASH: at=0.99 -> peak on the 2.71s cut). ⚠️ The raw metallic riser has sharp >5kHz sizzle that a click-scan flags at the loud climax; pre-process a `metal_riser_smooth.wav` = `lowpass=f=5200,acompressor=threshold=-14dB:ratio=4,afade out,loudnorm` to tame the peak (a loud climax transient ~0.30 is the riser, NOT the every-second boundary-click bug — verify the flagged transient is a lone cluster AT the climax, not spread across the video). Skip the redundant transition-riser into that same first cut. Pairs with the metal_riser doctrine already in this file.
+## ⛔⛔ THE EXPORT GATE - a raw Remotion render is NEVER the deliverable (reel 63, 2026-07-16)
+Alex: *"the preview doesnt work for those mp4 video there"*. I had copied Remotion's raw `out/*.mp4` straight to
+Drive. TWO defects shipped, both invisible until measured:
+1. **`pix_fmt=yuvj420p` / `color_range=pc`** (deprecated full-range) - what Remotion emits. **Google Drive's
+   preview transcoder chokes on it and IG shifts its colour.** The known-good delivered reel (58 CALLBACK) is
+   **`yuv420p` / `tv`**. Diagnose by diffing against a reel whose preview works:
+   `ffprobe -select_streams v:0 -show_entries stream=pix_fmt,color_range -of csv=p=0 <file>`
+2. **42.7ms of digital silence at the head** - the AAC encoder priming this file already warns about. I skipped
+   the documented post-trim, so the reel opened on dead air, violating the zero-leading-silence rule above.
+
+⛔ **THE ONE COMMAND. Run it on EVERY reel before Drive/Final. Never deliver `out/<slug>_vN.mp4` directly.**
+```bash
+ffmpeg -y -i out/<slug>_vN.mp4 \
+  -af "atrim=start=0.0427,asetpts=PTS-STARTPTS" \
+  -vf "scale=in_range=full:out_range=tv" \
+  -c:v libx264 -profile:v high -level 4.0 -pix_fmt yuv420p -color_range tv \
+  -colorspace bt709 -color_primaries bt709 -color_trc bt709 -crf 16 -preset slow \
+  -c:a aac -b:a 256k -movflags +faststart out/NN_Claude-<slug>.mp4
+```
+`scale=in_range=full:out_range=tv` is load-bearing: it CONVERTS the levels. Tagging `tv` without converting
+washes the picture out. crf 16 measured visually identical to the source render (frames compared directly).
+
+⛔ **VERIFY, do not assume** (each of these caught a real defect):
+- first audible sample **< 12ms** (decode the audio, scan 10ms RMS windows - `volumedetect` on a 0.02s slice
+  returns EMPTY and tells you nothing)
+- `pix_fmt=yuv420p`, `color_range=tv`
+- **faststart**: parse the top-level atoms, `moov` MUST precede `mdat` or no browser can stream-preview it
+- peak still < 0 dBFS, 0 clipped samples
+- ⭐ **verify the upload against the CLOUD** (`search_files` with `parentId`), not the mount: `fileSize` must
+  equal the local byte count. Same file id on overwrite = the share link stays stable.
+

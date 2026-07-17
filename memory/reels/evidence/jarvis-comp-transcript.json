@@ -1,0 +1,1392 @@
+[
+{
+"w": "Hey",
+"start": 0.58,
+"end": 0.98
+},
+{
+"w": "Jarvis,",
+"start": 0.98,
+"end": 1.38
+},
+{
+"w": "wake",
+"start": 1.6,
+"end": 1.68
+},
+{
+"w": "up",
+"start": 1.68,
+"end": 1.98
+},
+{
+"w": "Daddy's",
+"start": 1.98,
+"end": 2.52
+},
+{
+"w": "song,",
+"start": 2.52,
+"end": 2.6
+},
+{
+"w": "how's",
+"start": 2.8,
+"end": 3.0
+},
+{
+"w": "the",
+"start": 3.0,
+"end": 3.12
+},
+{
+"w": "app",
+"start": 3.12,
+"end": 3.2
+},
+{
+"w": "doing?",
+"start": 3.2,
+"end": 3.52
+},
+{
+"w": "For",
+"start": 4.14,
+"end": 4.2
+},
+{
+"w": "that",
+"start": 4.2,
+"end": 4.36
+},
+{
+"w": "dashboard,",
+"start": 4.36,
+"end": 4.82
+},
+{
+"w": "give",
+"start": 5.18,
+"end": 5.36
+},
+{
+"w": "Claude",
+"start": 5.36,
+"end": 5.68
+},
+{
+"w": "a",
+"start": 5.68,
+"end": 5.8
+},
+{
+"w": "reference",
+"start": 5.8,
+"end": 6.06
+},
+{
+"w": "image",
+"start": 6.06,
+"end": 6.34
+},
+{
+"w": "of",
+"start": 6.34,
+"end": 6.48
+},
+{
+"w": "what",
+"start": 6.48,
+"end": 6.58
+},
+{
+"w": "you",
+"start": 6.58,
+"end": 6.68
+},
+{
+"w": "want",
+"start": 6.68,
+"end": 6.92
+},
+{
+"w": "and",
+"start": 6.92,
+"end": 7.16
+},
+{
+"w": "it'll",
+"start": 7.16,
+"end": 7.34
+},
+{
+"w": "pretty",
+"start": 7.34,
+"end": 7.5
+},
+{
+"w": "much",
+"start": 7.5,
+"end": 7.74
+},
+{
+"w": "one",
+"start": 7.74,
+"end": 7.9
+},
+{
+"w": "shot",
+"start": 7.9,
+"end": 8.12
+},
+{
+"w": "it.",
+"start": 8.12,
+"end": 8.28
+},
+{
+"w": "Like",
+"start": 8.6,
+"end": 8.72
+},
+{
+"w": "this",
+"start": 8.72,
+"end": 9.08
+},
+{
+"w": "took",
+"start": 9.08,
+"end": 9.24
+},
+{
+"w": "me",
+"start": 9.24,
+"end": 9.38
+},
+{
+"w": "five",
+"start": 9.38,
+"end": 9.64
+},
+{
+"w": "minutes",
+"start": 9.64,
+"end": 9.8
+},
+{
+"w": "to",
+"start": 9.8,
+"end": 10.0
+},
+{
+"w": "create.",
+"start": 10.0,
+"end": 10.3
+},
+{
+"w": "Good",
+"start": 10.66,
+"end": 10.9
+},
+{
+"w": "evening,",
+"start": 10.9,
+"end": 11.1
+},
+{
+"w": "sir.",
+"start": 11.24,
+"end": 11.46
+},
+{
+"w": "Voice",
+"start": 12.18,
+"end": 12.32
+},
+{
+"w": "mode",
+"start": 12.32,
+"end": 12.46
+},
+{
+"w": "to",
+"start": 12.46,
+"end": 12.64
+},
+{
+"w": "talk",
+"start": 12.64,
+"end": 12.88
+},
+{
+"w": "instead",
+"start": 12.88,
+"end": 13.2
+},
+{
+"w": "of",
+"start": 13.2,
+"end": 13.38
+},
+{
+"w": "type,",
+"start": 13.38,
+"end": 13.56
+},
+{
+"w": "which",
+"start": 13.7,
+"end": 13.82
+},
+{
+"w": "is",
+"start": 13.82,
+"end": 13.92
+},
+{
+"w": "a",
+"start": 13.92,
+"end": 13.98
+},
+{
+"w": "huge",
+"start": 13.98,
+"end": 14.24
+},
+{
+"w": "boost",
+"start": 14.24,
+"end": 14.6
+},
+{
+"w": "in",
+"start": 14.6,
+"end": 14.74
+},
+{
+"w": "productivity.",
+"start": 14.74,
+"end": 15.26
+},
+{
+"w": "Connect",
+"start": 15.72,
+"end": 15.86
+},
+{
+"w": "the",
+"start": 15.86,
+"end": 16.04
+},
+{
+"w": "11",
+"start": 16.04,
+"end": 16.26
+},
+{
+"w": "labs",
+"start": 16.26,
+"end": 16.44
+},
+{
+"w": "if",
+"start": 16.44,
+"end": 16.64
+},
+{
+"w": "you",
+"start": 16.64,
+"end": 16.7
+},
+{
+"w": "really",
+"start": 16.7,
+"end": 16.96
+},
+{
+"w": "want",
+"start": 16.96,
+"end": 17.14
+},
+{
+"w": "that",
+"start": 17.14,
+"end": 17.32
+},
+{
+"w": "British",
+"start": 17.32,
+"end": 17.72
+},
+{
+"w": "Jarvis",
+"start": 17.72,
+"end": 18.16
+},
+{
+"w": "voice",
+"start": 18.16,
+"end": 18.44
+},
+{
+"w": "and",
+"start": 18.44,
+"end": 18.86
+},
+{
+"w": "become",
+"start": 18.86,
+"end": 19.08
+},
+{
+"w": "Tony",
+"start": 19.08,
+"end": 19.38
+},
+{
+"w": "Stark.",
+"start": 19.38,
+"end": 19.66
+},
+{
+"w": "Pulling",
+"start": 19.94,
+"end": 20.28
+},
+{
+"w": "up",
+"start": 20.28,
+"end": 20.38
+},
+{
+"w": "our",
+"start": 20.38,
+"end": 20.6
+},
+{
+"w": "app",
+"start": 20.6,
+"end": 20.72
+},
+{
+"w": "stats",
+"start": 20.72,
+"end": 20.96
+},
+{
+"w": "now.",
+"start": 20.96,
+"end": 21.44
+},
+{
+"w": "Claude",
+"start": 21.68,
+"end": 21.9
+},
+{
+"w": "and",
+"start": 21.9,
+"end": 22.0
+},
+{
+"w": "Chrome",
+"start": 22.0,
+"end": 22.14
+},
+{
+"w": "to",
+"start": 22.14,
+"end": 22.26
+},
+{
+"w": "give",
+"start": 22.26,
+"end": 22.36
+},
+{
+"w": "it",
+"start": 22.36,
+"end": 22.48
+},
+{
+"w": "access",
+"start": 22.48,
+"end": 22.74
+},
+{
+"w": "to",
+"start": 22.74,
+"end": 22.94
+},
+{
+"w": "your",
+"start": 22.94,
+"end": 23.04
+},
+{
+"w": "browser.",
+"start": 23.04,
+"end": 23.3
+},
+{
+"w": "Over",
+"start": 23.62,
+"end": 23.74
+},
+{
+"w": "the",
+"start": 23.74,
+"end": 23.82
+},
+{
+"w": "last",
+"start": 23.82,
+"end": 23.92
+},
+{
+"w": "seven",
+"start": 23.92,
+"end": 24.12
+},
+{
+"w": "days,",
+"start": 24.12,
+"end": 24.24
+},
+{
+"w": "we",
+"start": 24.26,
+"end": 24.46
+},
+{
+"w": "have",
+"start": 24.46,
+"end": 24.52
+},
+{
+"w": "2459",
+"start": 24.52,
+"end": 25.82
+},
+{
+"w": "new",
+"start": 25.82,
+"end": 26.08
+},
+{
+"w": "downloads",
+"start": 26.08,
+"end": 26.42
+},
+{
+"w": "and",
+"start": 26.42,
+"end": 26.78
+},
+{
+"w": "generated",
+"start": 26.78,
+"end": 26.98
+},
+{
+"w": "4",
+"start": 26.98,
+"end": 27.3
+},
+{
+"w": ",280",
+"start": 27.3,
+"end": 28.14
+},
+{
+"w": "million",
+"start": 28.14,
+"end": 28.34
+},
+{
+"w": "dollars",
+"start": 28.34,
+"end": 28.54
+},
+{
+"w": "in",
+"start": 28.54,
+"end": 28.66
+},
+{
+"w": "revenue.",
+"start": 28.66,
+"end": 28.86
+},
+{
+"w": "Revenue",
+"start": 28.86,
+"end": 29.48
+},
+{
+"w": "cat",
+"start": 29.48,
+"end": 29.74
+},
+{
+"w": "MCP",
+"start": 29.74,
+"end": 30.22
+},
+{
+"w": "to",
+"start": 30.22,
+"end": 30.36
+},
+{
+"w": "track",
+"start": 30.36,
+"end": 30.56
+},
+{
+"w": "your",
+"start": 30.56,
+"end": 30.74
+},
+{
+"w": "app",
+"start": 30.74,
+"end": 30.88
+},
+{
+"w": "revenue.",
+"start": 30.88,
+"end": 31.24
+},
+{
+"w": "For",
+"start": 31.38,
+"end": 31.46
+},
+{
+"w": "organic",
+"start": 31.46,
+"end": 31.68
+},
+{
+"w": "content,",
+"start": 31.68,
+"end": 31.98
+},
+{
+"w": "I'm",
+"start": 32.2,
+"end": 32.28
+},
+{
+"w": "still",
+"start": 32.28,
+"end": 32.4
+},
+{
+"w": "posting",
+"start": 32.4,
+"end": 32.68
+},
+{
+"w": "three",
+"start": 32.68,
+"end": 32.94
+},
+{
+"w": "short",
+"start": 32.94,
+"end": 33.2
+},
+{
+"w": "form",
+"start": 33.2,
+"end": 33.34
+},
+{
+"w": "videos",
+"start": 33.34,
+"end": 33.58
+},
+{
+"w": "today.",
+"start": 33.58,
+"end": 33.92
+},
+{
+"w": "And",
+"start": 34.34,
+"end": 34.5
+},
+{
+"w": "bought",
+"start": 34.5,
+"end": 34.68
+},
+{
+"w": "for",
+"start": 34.68,
+"end": 34.84
+},
+{
+"w": "MCP",
+"start": 34.84,
+"end": 35.2
+},
+{
+"w": "to",
+"start": 35.2,
+"end": 35.36
+},
+{
+"w": "publish",
+"start": 35.36,
+"end": 35.64
+},
+{
+"w": "to",
+"start": 35.64,
+"end": 35.82
+},
+{
+"w": "all",
+"start": 35.82,
+"end": 36.02
+},
+{
+"w": "platforms",
+"start": 36.02,
+"end": 36.38
+},
+{
+"w": "in",
+"start": 36.38,
+"end": 36.58
+},
+{
+"w": "a",
+"start": 36.58,
+"end": 36.66
+},
+{
+"w": "single",
+"start": 36.66,
+"end": 36.92
+},
+{
+"w": "command.",
+"start": 36.92,
+"end": 37.3
+},
+{
+"w": "On",
+"start": 37.56,
+"end": 37.7
+},
+{
+"w": "ads,",
+"start": 37.7,
+"end": 37.9
+},
+{
+"w": "you",
+"start": 38.12,
+"end": 38.18
+},
+{
+"w": "spent",
+"start": 38.18,
+"end": 38.32
+},
+{
+"w": "$475",
+"start": 38.32,
+"end": 39.22
+},
+{
+"w": "as",
+"start": 39.22,
+"end": 39.7
+},
+{
+"w": "a",
+"start": 39.7,
+"end": 39.74
+},
+{
+"w": "1",
+"start": 39.74,
+"end": 39.9
+},
+{
+"w": ".5",
+"start": 39.9,
+"end": 40.32
+},
+{
+"w": "return",
+"start": 40.32,
+"end": 40.62
+},
+{
+"w": "on",
+"start": 40.62,
+"end": 40.78
+},
+{
+"w": "ads",
+"start": 40.78,
+"end": 40.94
+},
+{
+"w": "then.",
+"start": 40.94,
+"end": 41.1
+},
+{
+"w": "Metal",
+"start": 41.3,
+"end": 41.52
+},
+{
+"w": "launch",
+"start": 41.52,
+"end": 41.82
+},
+{
+"w": "on",
+"start": 41.82,
+"end": 41.9
+},
+{
+"w": "official",
+"start": 41.9,
+"end": 42.18
+},
+{
+"w": "ads",
+"start": 42.18,
+"end": 42.42
+},
+{
+"w": "MCP",
+"start": 42.42,
+"end": 42.96
+},
+{
+"w": "so",
+"start": 42.96,
+"end": 43.24
+},
+{
+"w": "you",
+"start": 43.24,
+"end": 43.32
+},
+{
+"w": "can",
+"start": 43.32,
+"end": 43.44
+},
+{
+"w": "run",
+"start": 43.44,
+"end": 43.62
+},
+{
+"w": "more",
+"start": 43.62,
+"end": 43.82
+},
+{
+"w": "campaigns",
+"start": 43.82,
+"end": 44.22
+},
+{
+"w": "and",
+"start": 44.22,
+"end": 44.4
+},
+{
+"w": "give",
+"start": 44.4,
+"end": 44.52
+},
+{
+"w": "them",
+"start": 44.52,
+"end": 44.64
+},
+{
+"w": "more",
+"start": 44.64,
+"end": 44.9
+},
+{
+"w": "of",
+"start": 44.9,
+"end": 45.08
+},
+{
+"w": "your",
+"start": 45.08,
+"end": 45.2
+},
+{
+"w": "money.",
+"start": 45.2,
+"end": 45.48
+},
+{
+"w": "Throughout",
+"start": 45.72,
+"end": 45.94
+},
+{
+"w": "the",
+"start": 45.94,
+"end": 46.08
+},
+{
+"w": "week,",
+"start": 46.08,
+"end": 46.18
+},
+{
+"w": "you've",
+"start": 46.36,
+"end": 46.52
+},
+{
+"w": "seen",
+"start": 46.52,
+"end": 46.6
+},
+{
+"w": "16",
+"start": 46.6,
+"end": 47.0
+},
+{
+"w": "customer",
+"start": 47.0,
+"end": 47.42
+},
+{
+"w": "emails.",
+"start": 47.42,
+"end": 47.66
+},
+{
+"w": "Gmail",
+"start": 48.02,
+"end": 48.24
+},
+{
+"w": "MCP?",
+"start": 48.24,
+"end": 48.8
+},
+{
+"w": "I",
+"start": 48.98,
+"end": 49.2
+},
+{
+"w": "was",
+"start": 49.2,
+"end": 49.28
+},
+{
+"w": "on",
+"start": 49.28,
+"end": 49.36
+},
+{
+"w": "13",
+"start": 49.36,
+"end": 49.68
+},
+{
+"w": "automatically,",
+"start": 49.68,
+"end": 50.12
+},
+{
+"w": "mostly",
+"start": 50.38,
+"end": 50.58
+},
+{
+"w": "common",
+"start": 50.58,
+"end": 50.78
+},
+{
+"w": "questions",
+"start": 50.78,
+"end": 51.1
+},
+{
+"w": "and",
+"start": 51.1,
+"end": 51.32
+},
+{
+"w": "account",
+"start": 51.32,
+"end": 51.5
+},
+{
+"w": "issues.",
+"start": 51.5,
+"end": 51.72
+},
+{
+"w": "Organize",
+"start": 52.06,
+"end": 52.46
+},
+{
+"w": "all",
+"start": 52.46,
+"end": 52.66
+},
+{
+"w": "of",
+"start": 52.66,
+"end": 52.78
+},
+{
+"w": "your",
+"start": 52.78,
+"end": 52.9
+},
+{
+"w": "FAQs",
+"start": 52.9,
+"end": 53.38
+},
+{
+"w": "and",
+"start": 53.38,
+"end": 53.48
+},
+{
+"w": "mark",
+"start": 53.48,
+"end": 53.62
+},
+{
+"w": "down",
+"start": 53.62,
+"end": 53.88
+},
+{
+"w": "and",
+"start": 53.88,
+"end": 54.14
+},
+{
+"w": "Claude",
+"start": 54.14,
+"end": 54.38
+},
+{
+"w": "will",
+"start": 54.38,
+"end": 54.48
+},
+{
+"w": "handle",
+"start": 54.48,
+"end": 54.7
+},
+{
+"w": "90",
+"start": 54.7,
+"end": 55.02
+},
+{
+"w": "%",
+"start": 55.02,
+"end": 55.3
+},
+{
+"w": "of",
+"start": 55.3,
+"end": 55.44
+},
+{
+"w": "customer",
+"start": 55.44,
+"end": 55.68
+},
+{
+"w": "service.",
+"start": 55.68,
+"end": 56.04
+},
+{
+"w": "Since",
+"start": 56.32,
+"end": 56.52
+},
+{
+"w": "you",
+"start": 56.52,
+"end": 56.62
+},
+{
+"w": "would",
+"start": 56.62,
+"end": 56.7
+},
+{
+"w": "already",
+"start": 56.7,
+"end": 56.86
+},
+{
+"w": "approve",
+"start": 56.86,
+"end": 57.08
+},
+{
+"w": "that",
+"start": 57.08,
+"end": 57.28
+},
+{
+"w": "direction,",
+"start": 57.28,
+"end": 57.56
+},
+{
+"w": "I",
+"start": 57.82,
+"end": 57.88
+},
+{
+"w": "handed",
+"start": 57.88,
+"end": 58.02
+},
+{
+"w": "it",
+"start": 58.02,
+"end": 58.16
+},
+{
+"w": "to",
+"start": 58.16,
+"end": 58.28
+},
+{
+"w": "Tom.",
+"start": 58.28,
+"end": 58.44
+},
+{
+"w": "Define",
+"start": 59.54,
+"end": 59.94
+},
+{
+"w": "custom",
+"start": 59.94,
+"end": 60.3
+},
+{
+"w": "sub",
+"start": 60.3,
+"end": 60.58
+},
+{
+"w": "-asians",
+"start": 60.58,
+"end": 60.84
+},
+{
+"w": "and",
+"start": 60.84,
+"end": 61.1
+},
+{
+"w": "equip",
+"start": 61.1,
+"end": 61.3
+},
+{
+"w": "them",
+"start": 61.3,
+"end": 61.46
+},
+{
+"w": "with",
+"start": 61.46,
+"end": 61.58
+},
+{
+"w": "proper",
+"start": 61.58,
+"end": 61.8
+},
+{
+"w": "skills",
+"start": 61.8,
+"end": 62.16
+},
+{
+"w": "and",
+"start": 62.16,
+"end": 62.44
+},
+{
+"w": "connectors.",
+"start": 62.44,
+"end": 62.96
+},
+{
+"w": "Then",
+"start": 63.28,
+"end": 63.4
+},
+{
+"w": "your",
+"start": 63.4,
+"end": 63.54
+},
+{
+"w": "main",
+"start": 63.54,
+"end": 63.76
+},
+{
+"w": "agent",
+"start": 63.76,
+"end": 64.12
+},
+{
+"w": "can",
+"start": 64.12,
+"end": 64.38
+},
+{
+"w": "hand",
+"start": 64.38,
+"end": 64.56
+},
+{
+"w": "off",
+"start": 64.56,
+"end": 64.72
+},
+{
+"w": "work",
+"start": 64.72,
+"end": 64.88
+},
+{
+"w": "to",
+"start": 64.88,
+"end": 65.04
+},
+{
+"w": "the",
+"start": 65.04,
+"end": 65.14
+},
+{
+"w": "proper",
+"start": 65.14,
+"end": 65.44
+},
+{
+"w": "sub",
+"start": 65.44,
+"end": 65.72
+},
+{
+"w": "-agent.",
+"start": 65.72,
+"end": 66.2
+},
+{
+"w": "Set",
+"start": 74.1,
+"end": 74.5
+},
+{
+"w": "this",
+"start": 74.5,
+"end": 74.68
+},
+{
+"w": "entire",
+"start": 74.68,
+"end": 74.92
+},
+{
+"w": "daily",
+"start": 74.92,
+"end": 75.3
+},
+{
+"w": "brief",
+"start": 75.3,
+"end": 75.46
+},
+{
+"w": "as",
+"start": 75.46,
+"end": 75.66
+},
+{
+"w": "a",
+"start": 75.66,
+"end": 75.76
+},
+{
+"w": "routine,",
+"start": 75.76,
+"end": 76.08
+},
+{
+"w": "and",
+"start": 76.5,
+"end": 76.58
+},
+{
+"w": "Claude",
+"start": 76.58,
+"end": 76.86
+},
+{
+"w": "will",
+"start": 76.86,
+"end": 76.96
+},
+{
+"w": "have",
+"start": 76.96,
+"end": 77.1
+},
+{
+"w": "this",
+"start": 77.1,
+"end": 77.22
+},
+{
+"w": "ready",
+"start": 77.22,
+"end": 77.44
+},
+{
+"w": "for",
+"start": 77.44,
+"end": 77.62
+},
+{
+"w": "you",
+"start": 77.62,
+"end": 77.72
+},
+{
+"w": "by",
+"start": 77.72,
+"end": 77.84
+},
+{
+"w": "the",
+"start": 77.84,
+"end": 77.94
+},
+{
+"w": "time",
+"start": 77.94,
+"end": 78.1
+},
+{
+"w": "you",
+"start": 78.1,
+"end": 78.22
+},
+{
+"w": "sit",
+"start": 78.22,
+"end": 78.34
+},
+{
+"w": "down",
+"start": 78.34,
+"end": 78.54
+},
+{
+"w": "to",
+"start": 78.54,
+"end": 78.68
+},
+{
+"w": "work.",
+"start": 78.68,
+"end": 78.88
+},
+{
+"w": "Comment",
+"start": 79.18,
+"end": 79.34
+},
+{
+"w": "Jarvis",
+"start": 79.34,
+"end": 79.74
+},
+{
+"w": "for",
+"start": 79.74,
+"end": 79.96
+},
+{
+"w": "a",
+"start": 79.96,
+"end": 80.08
+},
+{
+"w": "compiled",
+"start": 80.08,
+"end": 80.34
+},
+{
+"w": "list",
+"start": 80.34,
+"end": 80.64
+},
+{
+"w": "of",
+"start": 80.64,
+"end": 80.82
+},
+{
+"w": "everything",
+"start": 80.82,
+"end": 81.12
+},
+{
+"w": "that",
+"start": 81.12,
+"end": 81.28
+},
+{
+"w": "was",
+"start": 81.28,
+"end": 81.38
+},
+{
+"w": "mentioned.",
+"start": 81.38,
+"end": 81.66
+}
+]

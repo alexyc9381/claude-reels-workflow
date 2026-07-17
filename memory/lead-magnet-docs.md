@@ -34,6 +34,23 @@ Each Claude reel's CTA promises a free doc ("comment KEYWORD and I'll send you t
 
 - `BALL - The Fable 6 Setup.docx` (reel 52 BALL, keyword BALL, built 2026-07-14) — delivers the VO's "the exact setup is the whole trick / comment ball and I'll send you the full setup". Grounded in REAL Claude Code features (not invented). Cover "The Fable 6 Setup" / "The exact system that makes today's Claude run like the model that isn't out yet" → build-in-this-order callout → **UPGRADE 1 MEMORY**: `~/.claude/CLAUDE.md` (global) vs `./CLAUDE.md` (project), `/init` + `/memory` box, the `#`-prefix add-a-memory-in-one-line box, a starter global CLAUDE.md box → **UPGRADE 2 MCP**: `claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem ~/work` + github + `claude mcp list`, the Settings>Connectors no-terminal note, and the "when no server exists, tell Claude to WRITE one" prompt + a scope-it/read-only-first safety callout → **UPGRADE 3 SUB AGENTS**: a real `.claude/agents/reviewer.md` frontmatter file (name/description/tools) + the fan-out prompt + the "goal not a script" rule → **UPGRADE 4 THE LOOP**: a self-verify block for CLAUDE.md (audit claims vs tool results) + a real `.claude/settings.json` PostToolUse hook running lint+test → **THE OVERNIGHT RUN** (the one prompt that plans/splits/fixes/ships) → 5-row Plain-Claude-vs-the-System cmp table → honest notes (not a different model; sub agents cost more tokens; start read only; features move fast). Build script `build_ball_doc.js` in scratchpad — **rebuilt the premium helper set from scratch** (kicker/h1/body/bullet/promptBox/callout/cmp/rule/footer) because prior sessions' scripts live in expired scratchpads; reuse THIS one going forward. VERIFIED: document.xml + footer1.xml well-formed, 162 paras / 16 tables, ZERO em/en dashes, key strings present. Caption `BALL - caption.txt` (comment-first). See [[pokeball-factory-log]].
 
+- `CAROUSEL - The Carousel Project.docx` (reel 63 CAROUSEL, keyword CAROUSEL, built 2026-07-16) — delivers the VO's gate
+  *"The prompt is what makes it build real designs instead of text."* Hero = ONE ~3.2k-char prompt saved as **project
+  instructions**. Its load-bearing move: a **TOKENS object + a single SLIDES data array + ONE template function**, so
+  consistency across 10 slides is mechanical, not the model trying hard. Also pins 1080x1350 hard-coded, a system font
+  stack (artifacts are CSP-locked, Google Fonts fail SILENTLY), no fake PNG-download button (sandbox blocks the
+  trigger, so it looks right and does nothing = the #1 "it doesn't work"), and an **`@media print` block with
+  `break-after: page`** — without which a click-through carousel prints as ONE page, because hidden slides are
+  `display:none` and `display:none` does not print. Sections: save-it-or-it-dies / the prompt / topic line / fix line /
+  brand / getting it out / into Canva + 11 honest notes. ⛔ **All 6 VO claims came back REFUTED (5 major) from the
+  adversarial pass** — the doc ships the corrected versions: you cannot Cmd+P from claude.ai (prints the chat; artifact
+  panel comes out collapsed), `.pptx` is a SEPARATE python-pptx output (editable but plainer, so "same colors and fonts
+  carry down" does NOT survive the Canva boundary), Canva swaps any font it doesn't stock, and a screenshot imports FLAT.
+  Free plan genuinely works (5 projects, rolling 5h window). Build script `build_carousel_doc.js` in scratchpad —
+  **has a hard DASH GATE that refuses to emit the file if any em/en dash survives**; reuse it. VERIFIED: XML
+  well-formed, 140 paras / 8 tables, ZERO em/en dashes, HTML-mirror screenshot eyeballed. Caption `CAROUSEL_caption.txt`
+  (comment-first). See [[carousel-factory-log]] + [[sfx-root-timeline-trap]].
+
 **STILL MISSING (offered to build):** BRAIN (reel 17 second brain), SWAP (reel 18 GLM, content ready in [[glm-swap-reel-and-setup]]: the settings.json env block), COUNCIL (scripted reel).
 
 ⚠️ Em-dash rule ([[no-em-dashes-in-copy]]): the DESIGN/SEO/SITE docs were built BEFORE the rule and still contain em dashes (—) in step labels etc.; BOOKS is the first fully em-dash-free doc. If Alex reuses the older three, grep + strip their "—" first.

@@ -2,8 +2,11 @@
 
 - [📶 Mac mini "bad internet"](mac-mini-wifi-not-claude.md) — it's 2.4GHz Wi-Fi (Ethernet unplugged), NOT Claude; chats use zero bandwidth. Fix: Ethernet → 5GHz split SSID → DNS 1.1.1.1
 - [🧊 Claude Code freeze = transcript bloat](claude-code-freeze-transcript-bloat.md) — reel sessions embed images → 150MB+ transcripts. Fix: archive to ~/claude-transcript-archive; durable fix = stop using ~/Downloads as project root
+- [💀 Claude "random crash" = macOS jetsam OOM](claude-crash-jetsam-oom.md) — NOT a crash (zero .ips files): one claude proc hit 8.9GB + 54 node MCP procs = 10.2GB on a 16GB mini → 126 procs jettisoned. Trigger = xhigh + workflow fan-outs. THREE separate faults — never conflate crash / freeze / wifi
 
 ## ⛔ Standing script/topic rules (load before any script work)
+- [⛔⛔ NEVER browser agents on Instagram + RATE DISCIPLINE](no-browser-agents-instagram.md) — ABSOLUTE (Alex 2026-07-16): no claude-in-chrome / Browser pane / Playwright / computer-use on IG, ever, for anything; IG = ig_scan.py (JSON API) or yt-dlp CLI or ask Alex. ⛔ **+ the volume half**: ~16 scans in one night throttled Alex's session from INSIDE the legal lane — budget the handle list first, scan @nocodealex FIRST, STOP on the first `feed failed` (never retry), a starved scan is a BUG not a finding (it produced a confident false one), and **exhaust the data already on disk before any API call**
+- [⛔⛔ FACTORY LOG FIRST](factory-log-first.md) — OPEN memory/reels/<name>-factory-log.md at STAGE 0, before the first idea is spoken. Writing it IS the work; never retroactive. No comp = no entry · not gated = not recorded · CAPTURE BEFORE CLAIM · calibrate the gate on the WHOLE shipped catalogue, never one winner
 - [⛔⭐ SCRIPT FACTORY pipeline](script-factory-pipeline.md) — MASTER: load BEFORE any topic/hook/script/caption; Stages 0-7 + per-reel log in memory/reels/ + [lever ledger](reel-lever-ledger.md); no log = no recording
 - [⛔⭐ Creator lane ceilings](creator-lane-ceilings.md) — ARENA-CONFIRMED routing: ARTIFACT-FIRST wins (universal input → real artifact builds itself → shareable link); the artifact must BE the payoff; raycfu caps on BREADTH (mid-funnel only), nicksaraev on BELIEVABILITY (spice not spine); strip creators' on-camera verbal tics
 - [⛔ VAULT premise autopsy](vault-reel-premise-autopsy.md) — the 9 pre-build kill-rules from reel 38's 5s-avg failure; run on EVERY premise before scripting
@@ -31,6 +34,7 @@
 - [⛔ Reel build gotchas](reel-build-gotchas.md) — scene bodies are PANEL-LOCAL 0..792; over() start is FRAMES not seconds
 - [⛔ NO emoji / NO low-opacity](reel-no-emoji-no-lowopacity.md) — no emoji pictographs on screen, no low-opacity content, richer per-scene bgs, no overlapping components
 - [⛔ Declutter / single hero](reel-declutter-single-hero.md) — "not up to par" = DECLUTTER to ONE cinematic hero per scene, not more stuff
+- [⛔⛔ SFX ROOT-TIMELINE TRAP](sfx-root-timeline-trap.md) — scene bodies are NOT Sequence-wrapped, so `<Sfx at={}>` is ROOT seconds: a scene-local `at` in C2+ typechecks, renders, and is SILENT (95 dead cues on reel 59). Emit `L[i] + local`; DELETE a cloned chassis's root cue map (Factory's metronome was carpeting C4)
 - [⛔ Reel SFX pass](reel-sfx-pass.md) — overhaul's last step: densify SFX (hook riser, clicks, impacts, meme stingers, CTA burst) + vol discipline
 - [⛔ Scene motion + depth](reel-scene-motion-depth.md) — every scene ESCALATES + carries depth (z-layer/parallax/shadows)
 - [⛔ Reel hook-header](reel-hook-header.md) — raycfu-style big top-third mute-readable header on every reel
@@ -56,6 +60,7 @@
 - [theventure teardown](theventure-style-teardown.md) · [1609plus replica](1609plus-style-replica.md) · [venture-style pipeline](venture-style-pipeline.md)
 
 ## Per-reel factory logs
+- [⭐ JARVIS](reels/jarvis-factory-log.md) — reel 62 candidate, Stage 0 ONLY (opened 2026-07-16, NOT gated). ⭐ Biggest keyword-gated comp ever sourced (chandlerintelligence 3.14M/**32.43x**/0.837% + cindiezhu 2.30x cross-confirm); RECAST pre-check passes trivially (both comps are already Claude/MCP reels). ⛔ Lives or dies on **R10** — unresolved, Alex's call. Also logs: watchlist blindness (chandler was invisible), raycfu/mavgpt unscanned, and reels 55/57/61 shipped with NO logs or numbers
 - [CALLBACK](reels/callback-factory-log.md) — resume beats the ATS bot (41%→96%); CLEAN gated SHIP (all six ≥8, audience 8, no override) — the workflow's objective top script
 - [⛔ FOREMAN](reels/foreman-factory-log.md) — reel 52 KILLED 2026-07-15 (never built): rule 10 voided both overrides. The worked example of a gate pass EXPIRING when a rule is added + a hook the gate never graded + a penalty cheated by staying conditional
 - [BRAND](reels/brand-factory-log.md) — nicksaraev replica ($4k brand kit from one free repo); Nick-fidelity 9.5 but caps at believability 7 / breadth 6-7; ⛔ pre-record cost check
@@ -70,6 +75,7 @@
 - [ATTACK](attack-reel.md) 25 (+ reusable MASCOT) · [UNLOCK](unlock-reel.md) 24 · [SHARP](sharp-reel.md) 23 · [FABLE](fable-reel.md) 22 (+ OPEN-LOOP system) · [BOOKS](books-reel.md) 21 · [LEADS](leads-reel.md) 20 · [NIGHTSHIFT](nightshift-reel.md) 19 · [SWAP](glm-swap-reel-and-setup.md) 18 · [SCREEN](screen-reel-github-capture.md) 17 · [DESIGN](design-reel-real-samples.md) 16
 
 ## Assets, delivery + tooling
+- [Alex AI storefront](alex-ai-storefront.md) — ~/Downloads/alex-ai-site (Creator Vault, $9-$37 packs, reel-chassis theme); Stripe links + form endpoint + deliverable files still TODO
 - [Video editing toolchain](video-editing-toolchain.md) — working ffmpeg/whisper/Remotion setup on this Mac
 - [SFX library](sfx-library.md) — ~/Downloads/sfx-library: 55 labeled SFX + README mapping + no-API-key sourcing
 - [Lead-magnet docs](lead-magnet-docs.md) — per-reel "comment KEYWORD → setup" .docx + the clone-and-regen-XML build method

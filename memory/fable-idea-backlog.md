@@ -105,6 +105,23 @@ winning formula without ever seeing it.
 - Auto-rejected without a gate cycle: raycfu Daq51yAz64H (297K/6.18x, "Everything OpenAI just launched" — news
   roundup, **15 comments** = no keyword mechanic) · gregisenberg Dal9I7KRA1L (1.77M/**89.46x**, "Giant robots are
   coming?" — 6,214 shares vs 888 comments = share-driven news virality, not a lead-magnet).
+- **FAMILY — KILLED, rule 5, 2026-07-15** (reel 59 candidate; comp = mavgpt Da0lBJuKi__, 679,457 / 2.56x / 0.4d /
+  **11,337 comments = 1.67%**, the best comp numbers any candidate has brought). **All 10 rules PASSED — rules 8
+  and 10 affirmed** — and it still died, on **tool receipts not judgment**: genealogy's hard problem is record
+  **LINKAGE, not retrieval**, and every corroborating index is walled to Claude (FamilySearch sign-in wall it
+  cannot create an account to pass · Ancestry paywall · 1950 census JS-shell · FindAGrave 403 · Chronicling
+  America 403). **Claude retrieves the name and GENERATES the kinship — it hallucinates the relationship, and the
+  relationship is the product.** Observed unprompted default: one query → four same-named strangers across four
+  states 1925–1951 + *"the year might be slightly different"* (constraint-relaxation-until-match); a 1930 census
+  calling an **adopted** child "daughter". **PARASITISM:** it only works where a human already finished and
+  published the research — i.e. never on *your* family, which is the whole premise. **INVISIBLE FAILURE:** unlike
+  a bad face or resume, you cannot see a fabricated tree is wrong → we'd ship the Ancestry "hint" without the
+  confirm step to 11,337 people. ⛔ **Do not resurrect the ancestor/discovery angle** — the discovery is
+  simultaneously the only thing that wows and the only thing Claude cannot do. **SALVAGE = the tree-rendering
+  chassis + artifact-first spine** (untouched, real) on a premise whose CONTENT the viewer already owns and can
+  verify at a glance; re-enters at A1 with its own comp. **Falsifiable re-entry:** if a capture ever shows Claude
+  returning *"no records found"* on a control line instead of relaxing constraints, the mechanism is falsified and
+  FAMILY re-enters at A1.5. See [[family-factory-log]].
 
 ⭐⭐ **THE LESSON (now playbook §A1.5, two PRE-CHECKS):** all four burned a full 3-critic gate (~350k tokens) on
 things a 10-minute check catches. **(1) RECAST PRE-CHECK** — does the comp's FIRST prompt name a capability Claude

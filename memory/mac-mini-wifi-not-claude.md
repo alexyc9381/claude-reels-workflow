@@ -19,4 +19,8 @@ Measured 2026-07-14 on the mini (Mac mini M4, 16 GB):
 
 **Fixes, in order:** (1) plug an Ethernet cable into the mini — it's a stationary desktop, this solves it outright; (2) if Wi-Fi only, split the SSID so 5 GHz has its own name and join that; (3) set DNS to 1.1.1.1 / 8.8.8.8 instead of the router.
 
-Note: the mini had TWO simultaneous problems that felt like one — this Wi-Fi issue (network) and 158 MB mega-chats freezing the app (see [[claude-code-freeze-transcript-bloat]]). Keep them separate when diagnosing.
+**Re-checked 2026-07-16 — STILL UNFIXED, none of the three applied.** `en0` still `status: inactive` (cable still not plugged in). Still 2.4 GHz ch 4 / 20 MHz, now **MCS Index 0** (the slowest modulation the radio can pick) at −67 dBm. Neighbours squat on ch 6 and ch 11, which overlap ch 4. Three 5 GHz networks visible (ch 48, 153, 157); the radio supports 5 **and** 6 GHz.
+
+⭐ **Best single diagnostic — ping the gateway, not the internet:** `ping -c 10 192.168.1.1` → min 2.9 ms / **max 131 ms / stddev 46.6 ms**. That's one hop, same room. A healthy link is a flat 2–5 ms. A 45x spread to your OWN router proves the fault is the wireless hop — not the ISP, not Anthropic, not Claude. Use this instead of a speedtest; throughput can look fine (~29 Mbps, 0% loss) while the link is still unusable-jittery, so a speedtest alone will mislead. DNS latency had recovered by 07-16 (0.045 s), so fix (3) is now the least urgent.
+
+Note: the mini has **THREE** simultaneous problems that feel like one — this Wi-Fi issue (network), mega-chats freezing the app ([[claude-code-freeze-transcript-bloat]]), and macOS jetsam OOM-killing Claude ([[claude-crash-jetsam-oom]]). Keep all three separate when diagnosing. This Wi-Fi fault causes stalls/timeouts but does NOT cause the "crashes."
