@@ -193,6 +193,74 @@
       "claim": "shorts cut 7x faster than long-form",
       "reality": "compares a graphics-layer rate to a talking-head cut rate \u2014 two different quantities. The browser trap, in a new costume.",
       "status": "RETRACTED"
+    },
+    {
+      "claim": "loudness is a FORMAT DEMAND \u2014 the long-form's 0.8 LU 'creator constant' breaks in short-form (10 LU spread)",
+      "reality": "it does NOT break on format. Era-matched p=0.44, delta 0.067 LU. The 10 LU is an epoch effect confined to the 2024 batch. His current epoch masters to -16 LUFS in BOTH formats \u2014 the constant HOLDS.",
+      "status": "RETRACTED \u2014 see GUIDEBOOK Ch.7 (The Transfer Table)",
+      "how_caught": "the transfer analyst ran an exact permutation test on all C(9,3)=84 era-matched splits rather than comparing block means. The brief (mine) told it loudness breaks; it checked and contradicted the brief.",
+      "lesson": "I compared a 2024-heavy block against a 2026 block and attributed the difference to FORMAT. Two of the three confounds I had declared up front (era, batch) were the actual cause \u2014 I declared them and then reasoned as if they weren't there."
+    },
+    {
+      "claim": "the shorts use word-by-word karaoke captions",
+      "reality": "NOT karaoke. Phrase cards, median 1.89 words, ONE pre-assigned keyword colour per card, replaced wholesale. The highlight never sweeps within a card (verified at 10fps: 'AGENCY WHERE' holds AGENCY yellow across all 13 frames).",
+      "status": "CORRECTED \u2014 see GUIDEBOOK Ch.2"
     }
-  ]
+  ],
+  "\u26d4\u26d4 LOUDNESS \u2014 DO NOT TARGET THE SHORTS MEDIAN": {
+    "the trap": "the 19-short median is -19.6 LUFS. Targeting it puts you 3.6 LU BELOW where he actually masters today.",
+    "why": "the 10 LU spread is an EPOCH effect, not a format effect. Era-matched (3 stragglers 2025-04/2025-07/2026-01 vs the 6 long-forms), loudness differs by +0.067 LU, exact permutation p=0.44 \u2014 no separation. Straggler mean -15.93 vs long-form -16.00.",
+    "the spread lives inside the 2024 batch": "nmal1JTOrWI -14.4 and tBQRJBKHwKc -14.4 vs sCj0UajQ86M -24.5. Ch.6 found the same from the other end: 5 of 6 cluster-C shorts within 0.10 LU of each other \u2014 three tight batches at three gains.",
+    "\u2705 THE TARGET": "-16 LUFS. He is invariant WITHIN an epoch, and his current epoch masters to -16 in BOTH formats.",
+    "the distinction that matters": "speaking rate breaking and loudness 'breaking' look like the same finding and are not. One is the format acting on the man; the other is 2024-Nick and 2026-Nick being different people at the mixing stage."
+  },
+  "VERIFIED_CREATOR_CONSTANTS_across_both_formats": {
+    "_note": "these survived the era-matched control \u2014 they are the man, not the format or the epoch",
+    "speech_begins_at_0.00s": {
+      "value": "25/25 across both formats, 2 years, 4 rigs",
+      "\u2b50 nuance": "true PCM onset 0.03-0.13s; the first 3 windows are -99 dBFS AAC priming, NOT a pause"
+    },
+    "locked_camera_no_drift": {
+      "long_form": "median rot 0.0058 deg",
+      "shorts": "median rot 0.0096 deg"
+    },
+    "no_punch_in_zoom_or_scale_ramp": {
+      "value": "n=0 both formats",
+      "caveat": "only 2 verified same-camera cuts exist in the shorts corpus (26 of 30 transitions are B-roll) \u2014 max deviation 0.11%"
+    },
+    "no_music_bed": {
+      "value": "n=0 both",
+      "evidence": "three independent kills incl. side-channel collapse of -29.6 dB with speech"
+    },
+    "no_SFX_on_cuts": {
+      "value": "n=0 both",
+      "evidence": "n=30 cuts, cut-minus-control hiss -0.01 dB, 95% CI [-4.5,+4.5]"
+    },
+    "dead_air_intolerance": {
+      "value": "1.83s of >=0.15s silence in the ENTIRE 11.6-min shorts corpus; 15/19 have none",
+      "era_matched_p": 0.238
+    },
+    "loudness_-16_LUFS": {
+      "value": "holds era-matched, delta 0.067 LU, p=0.44",
+      "scope": "within an epoch"
+    }
+  },
+  "VERIFIED_FORMAT_DEMANDS": {
+    "burned_captions": {
+      "long_form": "n=0 / 7,266 frames",
+      "shorts": "19/19, median 91% of frames, all present by 0.233s",
+      "note": "the pack's cleanest result"
+    },
+    "speaking_rate": {
+      "long_form": "3.37-3.94 wps (median 3.77)",
+      "shorts": "3.68-4.86 (median 4.18), 17/19 above the LF max",
+      "era_matched_p": 0.0119,
+      "note": "0.0119 is the CEILING \u2014 perfect separation on all 84 permutations. Drop the podcast repost: still p=0.0357"
+    },
+    "mic_rig": {
+      "long_form": "M-S 52-53 dB, floor -104..-212 dBFS (mono+gated)",
+      "shorts": "M-S 13-37 dB, floor median -45.5 dBFS (stereo+room)",
+      "note": "holds era-matched (MTVpRn8nCP4 2026: M-S 21.2, floor -35.6). Zero overlap, 19 vs 6"
+    }
+  }
 }
