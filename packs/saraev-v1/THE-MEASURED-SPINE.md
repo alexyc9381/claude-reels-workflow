@@ -148,12 +148,11 @@ DevTools MCP making that pop up."* There is no cleanup pass.
 
 ---
 
-## 6. Layout grammar (n=27 frames sampled across 3 videos)
+## 6. Layout grammar (n=27 montage frames across 3 videos + frame 0 of all 6)
 
 - **No burned captions.** Zero, across every frame sampled in all three videos. An **n=0** finding, and a
   major one — the shorts-adapted version of this pack cannot inherit it.
-- **Dominant layout:** screen recording **full-frame**, face in a **small PIP locked bottom-right**
-  (~1/8 frame width). Stable across `sol-ads` and `fable-websites`.
+- **Dominant layout:** screen recording **full-frame**, face in a **small PIP** (~1/8 frame width).
 - **Occasional:** full-frame face — used at the open.
 - **Inserts:** designed statement cards (white ground, large type — *"Ideation is what AI is great at."*)
   and hand-drawn-style diagrams (the PLATFORMS card with arrow annotations).
@@ -161,6 +160,43 @@ DevTools MCP making that pop up."* There is no cleanup pass.
 
 This is a **screen-first** editor with a face PIP — not a talking head with B-roll. Which is exactly why
 cuts ignore speech: he is cutting the *screen* while talking continuously over it.
+
+### ⛔ PIP position is a PER-VIDEO choice, not a creator constant
+
+A correction to this file's own first draft, which claimed the PIP is "locked bottom-right" — generalised
+from montages of a single video. Frame 0 of all six refutes it:
+
+| Video | PIP corner | evidence |
+|---|---|---|
+| `fable-websites` | bottom-right | stable across 9 sampled frames |
+| `sol-ads` | bottom-right | stable across 9 sampled frames |
+| `kimi-k3` | **top-right** | frame 0 |
+| `fable-tokens` | **bottom-left** | frame 0 |
+
+**Within-video stability is verified for 2 of 4** (the two with montage coverage). Across videos the corner
+moves. Do not hard-code bottom-right; pick a corner per video and hold it.
+
+*Two automated tests for this failed and are recorded so no one re-derives them: corner-luma voting is
+confounded by bright screen content (margins of ~5 luma, 50-73% agreement — it cannot see the PIP), as is the
+left-third luma test in the caveats below. The table above rests on direct observation.*
+
+---
+
+## 7. The hook: no runway
+
+| Finding | Evidence | Verdict |
+|---|---|---|
+| Speech begins at **0.00s** in **all 6** | `words.json` first word start = 0.00 in every video | **CREATOR CONSTANT** |
+| **4 of 6** open on the literal word **"So"** | *"So given that…"*, *"So to test…"*, *"So as you know…"*, *"So the way…"* | **CREATOR CONSTANT** |
+| **3 of 6** open **on the artifact**, not the face | `sol-ads` → the finished candle ad; `kimi-k3` → the benchmark chart; `fable-tokens` → a bill reading **"$2,409.88 spent"** | strong tendency |
+| **3 of 6** open **full-frame face**, mid-gesture | `fable-websites` (finger raised), `agent-workflow`, `solo-20k` | strong tendency |
+
+There is **no cold open, no title card, no music runway, no settling**. The video starts already in motion —
+mid-thought, and often mid-gesture. `fable-tokens` opens on the receipt *before* any claim: the number is the
+hook.
+
+**Recipe:** first frame is either his face already gesturing or the finished artifact. First audio sample is
+the first word of a sentence that sounds like it started before you arrived.
 
 ---
 
