@@ -1,0 +1,198 @@
+{
+  "pack": "saraev-shorts-v1",
+  "subject": "@nicksaraev SHORT-FORM (vertical) edit \u2014 companion to saraev-v1 (long-form)",
+  "corpus": {
+    "videos": 19,
+    "runtime_s": 695.0,
+    "resolution": "1080x1920 all"
+  },
+  "\u26d4 CORPUS DEFECT \u2014 fps is NOT uniform": {
+    "finding": "ydif_raw.txt is sampled at each video's NATIVE fps, not 30. Three of 19 are not 30fps: MTVpRn8nCP4=24, On_DVAjnkRY=29.97, aIflIQMacV4=60.",
+    "consequence": "a flat t=i/30 corrupts them. aIflIQMacV4 (60fps) read as 26.3s when it is 13.15s \u2014 2x wrong, and every cut timestamp in it was 2x too late.",
+    "second_order": "a fixed 3-FRAME collapse is 100ms at 30fps but only 50ms at 60fps, so the 60fps video's cut count was inflated (10 -> 7 once corrected).",
+    "fix": "read fps per video; t = i/fps; collapse on a fixed TIME window (100ms), not a frame count.",
+    "caught_by": "the Cut Grammar and What-Is-On-Screen analysts, independently. My first pass had the bug.",
+    "\u2b50 unforced gift": "fps partitions the corpus EXACTLY along the date split \u2014 all 16 batch videos are exactly 30fps, all 3 stragglers are 24/29.97/60. Independent confirmation the batch shares one delivery pipeline."
+  },
+  "SHORTS_NUMBERS_corrected": {
+    "sec_per_cut": {
+      "median": 3.48,
+      "min": 1.87,
+      "max": 16.98,
+      "\u26d4 WARNING": "this is a GRAPHICS-LAYER rate, NOT a talking-head cut rate. ~90% of these YDIF events are a graphics/B-roll overlay appearing, not Nick cutting. Comparing it to long-form's 1-per-25.5s (a talking-head rate) compares two different quantities. See GUIDEBOOK Ch.3."
+    },
+    "wps": {
+      "median": 4.18,
+      "min": 3.68,
+      "max": 4.86,
+      "vs_long_form": "long-form 3.41-3.94 (median 3.76). 17/19 shorts EXCEED the long-form max -> the wps 'creator constant' in saraev-v1 is FORMAT-BOUND and must be re-scoped."
+    },
+    "per_video": {
+      "4TY92yLmhN4": {
+        "fps": 30.0,
+        "dur_s": 45.37,
+        "events": 15,
+        "sec_per_event": 3.02,
+        "wps": 3.82
+      },
+      "6Q1KopZ4WTk": {
+        "fps": 30.0,
+        "dur_s": 38.33,
+        "events": 16,
+        "sec_per_event": 2.4,
+        "wps": 4.18
+      },
+      "BFMkSvzkjFg": {
+        "fps": 30.0,
+        "dur_s": 34.87,
+        "events": 9,
+        "sec_per_event": 3.87,
+        "wps": 4.28
+      },
+      "EzG5lBwXKIM": {
+        "fps": 30.0,
+        "dur_s": 32.87,
+        "events": 7,
+        "sec_per_event": 4.7,
+        "wps": 4.86
+      },
+      "FRh_8qv8850": {
+        "fps": 30.0,
+        "dur_s": 46.63,
+        "events": 12,
+        "sec_per_event": 3.89,
+        "wps": 4.15
+      },
+      "MTVpRn8nCP4": {
+        "fps": 24.0,
+        "dur_s": 33.12,
+        "events": 12,
+        "sec_per_event": 2.76,
+        "wps": 4.56
+      },
+      "N-CYWceoXUI": {
+        "fps": 30.0,
+        "dur_s": 54.0,
+        "events": 15,
+        "sec_per_event": 3.6,
+        "wps": 4.59
+      },
+      "OWxvKcNahJE": {
+        "fps": 30.0,
+        "dur_s": 37.33,
+        "events": 20,
+        "sec_per_event": 1.87,
+        "wps": 4.81
+      },
+      "On_DVAjnkRY": {
+        "fps": 29.97,
+        "dur_s": 50.95,
+        "events": 3,
+        "sec_per_event": 16.98,
+        "wps": 4.17
+      },
+      "XhRJiAG4s5U": {
+        "fps": 30.0,
+        "dur_s": 43.77,
+        "events": 9,
+        "sec_per_event": 4.86,
+        "wps": 4.16
+      },
+      "YfYv0_TEJ3g": {
+        "fps": 30.0,
+        "dur_s": 43.2,
+        "events": 14,
+        "sec_per_event": 3.09,
+        "wps": 4.13
+      },
+      "aIflIQMacV4": {
+        "fps": 60.0,
+        "dur_s": 13.15,
+        "events": 7,
+        "sec_per_event": 1.88,
+        "wps": 4.15
+      },
+      "bz7EnmzYEAM": {
+        "fps": 30.0,
+        "dur_s": 58.77,
+        "events": 28,
+        "sec_per_event": 2.1,
+        "wps": 4.52
+      },
+      "kR5iNc2wiy8": {
+        "fps": 30.0,
+        "dur_s": 29.13,
+        "events": 6,
+        "sec_per_event": 4.86,
+        "wps": 4.11
+      },
+      "keJniazAhQY": {
+        "fps": 30.0,
+        "dur_s": 31.3,
+        "events": 9,
+        "sec_per_event": 3.48,
+        "wps": 4.23
+      },
+      "nmal1JTOrWI": {
+        "fps": 30.0,
+        "dur_s": 37.33,
+        "events": 17,
+        "sec_per_event": 2.2,
+        "wps": 4.56
+      },
+      "oKA-7pjkCuE": {
+        "fps": 30.0,
+        "dur_s": 21.63,
+        "events": 8,
+        "sec_per_event": 2.7,
+        "wps": 3.98
+      },
+      "sCj0UajQ86M": {
+        "fps": 30.0,
+        "dur_s": 21.17,
+        "events": 5,
+        "sec_per_event": 4.23,
+        "wps": 4.67
+      },
+      "tBQRJBKHwKc": {
+        "fps": 30.0,
+        "dur_s": 22.1,
+        "events": 6,
+        "sec_per_event": 3.68,
+        "wps": 3.68
+      }
+    }
+  },
+  "CORRECTIONS_TO_MY_FIRST_PASS": [
+    {
+      "claim": "aIflIQMacV4 is 26s, 10 cuts, 2.6 s/cut",
+      "reality": "13.15s, 7 events, 1.88 s/event \u2014 60fps video read as 30fps",
+      "status": "CORRECTED"
+    },
+    {
+      "claim": "MTVpRn8nCP4 is 26s, 2.2 s/cut",
+      "reality": "33.13s, 2.76 s/event \u2014 24fps read as 30fps",
+      "status": "CORRECTED"
+    },
+    {
+      "claim": "shorts are 21-59s",
+      "reality": "13.15-58.77s",
+      "status": "CORRECTED"
+    },
+    {
+      "claim": "his shorts mastering is scattered/sloppy (10 LU spread)",
+      "reality": "THREE tightly-rendered batches at three different gains. Within-batch spread 0.10-0.70 LU \u2014 one group is 20x TIGHTER than long-form's celebrated 0.8 LU. The 10 LU lives BETWEEN groups, not within them.",
+      "status": "RETRACTED \u2014 see GUIDEBOOK Ch.6"
+    },
+    {
+      "claim": "the 16-video batch is one recording session",
+      "reality": ">=4 distinct set/wardrobe setups inside the batch. It is one DELIVERY pipeline (uniform 30fps), not one session.",
+      "status": "CORRECTED"
+    },
+    {
+      "claim": "shorts cut 7x faster than long-form",
+      "reality": "compares a graphics-layer rate to a talking-head cut rate \u2014 two different quantities. The browser trap, in a new costume.",
+      "status": "RETRACTED"
+    }
+  ]
+}
