@@ -50,7 +50,7 @@
 - [⛔ Outlier Engine](outlier-engine.md) — comp discovery (~/Downloads/outlier-engine): weekly scan.py → Door-A candidates
 - [⛔ Outlier transcript tooling](outlier-transcript-tooling.md) — YouTube needs a PO token (bgutil server); IG lane via claude-in-chrome DOM extractor + yt-dlp + faster_whisper
 - [⛔ Winner Lab pipeline](winner-lab-pipeline.md) — decompose winners frame-by-frame → EDL + moves + house numbers; gate our renders against them
-- [⛔⭐ Creator edit-pack method](creator-edit-pack-method.md) — how to build packs/<creator>-v1 so the numbers are TRUE: ⭐ASK WHAT PRODUCED THE PIXELS — a scene detector on screen-recordings counts BROWSING (~90% false; the inset test separates them) · split CREATOR CONSTANTS from FORMAT VARIABLES · check the FILE before theorising about an outlier · say UNRESOLVED when it is · record failed tests + provenance-at-ingest
+- [⛔⭐ Creator edit-pack method](creator-edit-pack-method.md) — how to build packs/<creator>-v1 so the numbers are TRUE: ⭐**BUILD PACKS IN PAIRS** (one format can't tell the person from the format — saraev-v1 called wps + loudness 'creator constants'; the shorts pack broke one and confirmed the other) · ⭐**declaring a confound ≠ controlling for it** (I called an EPOCH effect a FORMAT effect) · ASK WHAT PRODUCED THE PIXELS (a scene detector on screen-recordings counts BROWSING, ~90% false) · check fps · disclose your tails
 - [⛔ Style cloning pipeline](style-cloning-pipeline.md) — one example video → reusable style pack (~/Downloads/style-cloning-kit)
 - [cindiezhu style](cindiezhu-style-reference.md) — no-jargon persona + plain-English outcome, real screen, one loop
 - [mavgpt style](mavgpt-style-reference.md) — follow-along formula + visual formula + TikTok scrape method
@@ -76,6 +76,7 @@
 - [ATTACK](attack-reel.md) 25 (+ reusable MASCOT) · [UNLOCK](unlock-reel.md) 24 · [SHARP](sharp-reel.md) 23 · [FABLE](fable-reel.md) 22 (+ OPEN-LOOP system) · [BOOKS](books-reel.md) 21 · [LEADS](leads-reel.md) 20 · [NIGHTSHIFT](nightshift-reel.md) 19 · [SWAP](glm-swap-reel-and-setup.md) 18 · [SCREEN](screen-reel-github-capture.md) 17 · [DESIGN](design-reel-real-samples.md) 16
 
 ## Assets, delivery + tooling
+- [Carousel format concepts](carousel-format-concepts.md) — 6 carousel style mockups (2026-07-17, CarouselConcepts.tsx) awaiting Alex's pick; ⛔ no carousel comps scanned yet, strategy = hypothesis; recycle proven reel topics as the sourcing door
 - [Alex AI storefront](alex-ai-storefront.md) — ~/Downloads/alex-ai-site (Creator Vault, $9-$37 packs, reel-chassis theme); Stripe links + form endpoint + deliverable files still TODO
 - [Video editing toolchain](video-editing-toolchain.md) — working ffmpeg/whisper/Remotion setup on this Mac
 - [SFX library](sfx-library.md) — ~/Downloads/sfx-library: 55 labeled SFX + README mapping + no-API-key sourcing

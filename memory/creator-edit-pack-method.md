@@ -84,6 +84,64 @@ says **exactly chance** (14.0% vs 15.7%); an n=23 inset-verified solo sample say
 not survive multiple-comparison correction). Different tests, not comparable. **Encode neither direction.**
 Note the confound that fooled the first pass: **churn correlates with pauses** — he stops talking to click.
 
+## ⛔⭐ RULE 7 — BUILD PACKS IN PAIRS. A single-format pack cannot tell the person from the format.
+
+**This is the biggest lesson of the whole project.** `saraev-v1` (long-form, 6 videos, 121 min) called
+speaking rate and loudness **CREATOR CONSTANTS**. Both were measured correctly. Both conclusions were
+unsafe — because with one format you cannot tell "the person" from "the person *in that format*."
+
+Building `saraev-shorts-v1` (his entire shorts catalogue: 19 videos, 11.6 min, 1080x1920) made it a **natural
+experiment** — same creator, two formats. It settled both, in opposite directions:
+
+| long-form claim | verdict | evidence |
+|---|---|---|
+| speaking rate 3.37-3.94 wps = constant | 🔴 **FORMAT DEMAND** | shorts median 4.18, 17/19 above the LF max; era-matched **p=0.0238 two-tailed** |
+| loudness -16 LUFS (0.8 LU) = constant | ✅ **CONFIRMED** | era-matched **Δ0.067 LU, p=0.44** |
+| *"the edit is not a source of information"* | true of his **long-form**, not of **him** | he captions **19/19** shorts (91% of frames) vs **n=0** in long-form; B-roll + graphics likewise |
+
+**Genuinely him (survive the control):** speech at **0.00s in 25/25** across both formats · locked camera ·
+no punch-ins · no music bed · no SFX · dead-air intolerance · -16 LUFS *within an epoch*.
+
+## ⛔⛔ RULE 8 — declaring a confound is not controlling for it
+
+My worst error of the project, and it was **structural, not arithmetic**. I declared the era and batch
+confounds *at the top of the brief* — then compared a 2024-heavy block against a 2026 block and attributed
+the difference to **FORMAT**. The transfer analyst ignored my framing, found the **3 era-matched shorts**
+(2025-04 / 2025-07 / 2026-01), and ran an exact permutation test on all C(9,3)=84 splits.
+
+Result: the loudness "break" is **an EPOCH effect, not a format effect**. The 10 LU spread lives entirely
+inside the 2024 batch; his current epoch masters to **-16 in both formats**. Straggler mean -15.93 vs
+long-form -16.00.
+
+> **Two effects can look identical and have opposite causes.** One was the format acting on the man; the
+> other was 2024-Nick and 2026-Nick being different people at the mixing stage. A compositor targeting the
+> shorts median (**-19.6 LUFS**) lands **3.6 LU below where he actually masters today** — which is exactly
+> what my own HOUSE-NUMBERS would have caused.
+
+**So: find the era-matched cell and test it. If you can't, say UNRESOLVED — do not compare block means.**
+
+## ⛔ RULE 9 — the corpus itself lies: check fps, and disclose your tails
+
+- **`ydif_raw.txt` is sampled at NATIVE fps, not 30.** A flat `t = i/30` read a 60fps short as 26.3s when it
+  is **13.15s** — 2x wrong, every cut timestamp 2x late. Second-order: a fixed **3-FRAME** collapse is 100ms
+  at 30fps but **50ms at 60fps**, inflating that video's count (10 -> 7). **Read fps per video; collapse on a
+  fixed TIME window.** ⭐ Gift: fps partitioned the shorts corpus *exactly* along the date split (all 16 batch
+  = 30fps; the 3 stragglers = 24/29.97/60) — independent proof the batch shared one delivery pipeline.
+- **One-tailed p-values must be labelled.** The wps result shipped as `p=0.0119` without saying one-tailed;
+  two-tailed is **0.0238** (still significant) but the robustness check goes **0.0357 -> 0.0714 and FAILS**.
+  The adversarial verifier caught it. Always state the tail.
+- **Band position cannot identify a caption.** A lower-third text detector run on the long-form (verified n=0
+  captions) fires on **11-86%** of frames — that's browser and code text. Anyone counting "text in the lower
+  third" finds captions in a corpus that has none.
+
+## ⭐ What a pack pair is actually *for*
+
+Not always "clone this." `saraev-shorts-v1`'s most actionable finding is **don't clone it**: his shorts are a
+contracted clipper applying the generic 2024 motivational template (Blade Runner b-roll, phrase-card
+captions, a burned-in typo *"THE SOLLUTION"*, stacked layouts he never uses, a mic floor 60+ dB above his
+own). He **abandoned the lane after Oct 2024**. The pack's value is as **a measurement of what the vertical
+format demands**, using a creator whose long-form we know cold.
+
 ## Pack layout + provenance
 
 `HOUSE-NUMBERS.json` (machine-readable; carries `method`, caveats, an explicit `CORRECTIONS` block and an
