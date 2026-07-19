@@ -1,0 +1,22 @@
+{
+  "name": "cover-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Instagram reel grid cover system for @nocodealex - Remotion stills at 1080x1920",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion still src/index.ts",
+    "verify": "python3 tools/verify_cover.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.370",
+    "@remotion/google-fonts": "4.0.370",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.370"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.0",
+    "typescript": "5.9.3"
+  }
+}

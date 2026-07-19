@@ -1,0 +1,4 @@
+# For tools/verify_cover.py and the index-sheet generator.
+# Both are stdlib + these two.
+pillow>=10.0
+numpy>=1.26
