@@ -1,133 +1,49 @@
-# The Cover System
+# cover-system — reproducible design system for @nocodealex Instagram reel grid covers
 
-A complete, reproducible system for designing **Instagram reel grid covers** for
-[@nocodealex](https://instagram.com/nocodealex). 23 covers shipped. Every rule here was
-learned by shipping a bug or by direct client feedback, and almost every rule is
-machine-checkable.
-
-> **Naming, once, so it is not confusing later:** these are **covers**, the still image
-> that represents a reel in the profile grid. They are not carousels. The brief that
-> produced this system sometimes said "carousel", but nothing here is a swipeable
-> multi-slide post. For carousels see `memory/carousel-format-concepts.md`.
-
----
+Craft discipline for building the still image that represents a reel in the profile grid (23 shipped). Touch it whenever making a new cover, handing cover-building to an agent, or reproducing the pipeline. Note: these are **covers**, not carousels — nothing here is a swipeable multi-slide post (for carousels see `../memory/carousel-format-concepts.md`).
 
 ## Start here
+- **Making one cover?** Read `01-SPEC.md` (geometry), write copy with `02-COPY-SYSTEM.md`, build against `03-SCENE-CONTRACT.md`, then run `python3 tools/verify_cover.py out/POWERS_cover.png --tile`.
+- **Handing this to an AI agent?** `03-SCENE-CONTRACT.md` is written to be pasted into a prompt verbatim — the accumulated contract from three fan-out rounds, each rule there earned by an agent getting it wrong.
+- **Something looks wrong and you can't name why?** `06-FAILURE-MODES.md`, scan by symptom; it also decodes what the client's phrasings actually mean.
+- **Reproducing the whole thing?** `05-PIPELINE.md` end to end, then `src/README-src.md`.
 
-**Making one cover?** Read `01-SPEC.md` (geometry), write copy with `02-COPY-SYSTEM.md`,
-build the scene against `03-SCENE-CONTRACT.md`, then run `tools/verify_cover.py`.
-
-**Handing this to an AI agent?** `03-SCENE-CONTRACT.md` is written to be pasted into a
-prompt verbatim. It is the accumulated contract from three fan-out rounds, and each rule
-in it exists because an agent got it wrong without it.
-
-**Something looks wrong and you cannot name why?** Go to `06-FAILURE-MODES.md` and scan
-by symptom. It also decodes what the client's phrasings actually mean.
-
-**Reproducing the whole thing?** `05-PIPELINE.md` end to end, then `src/README-src.md`.
-
-| File | What it is |
+## Layout
+| path | what |
 |---|---|
-| `01-SPEC.md` | The hard geometry. Canvas, crop math, the locked header slot, the quiet zone, optical fitting, palette. All numbers. |
-| `02-COPY-SYSTEM.md` | How headlines are written. The promise formula, naming the subject, the question technique, all 23 shipped headlines. |
-| `03-SCENE-CONTRACT.md` | The scene-authoring contract. Copy-pasteable into an agent prompt. Ends with what "polished" measurably means here. |
-| `04-VERIFICATION.md` | Every automated check, what bug it catches, and the calibration lesson. |
-| `05-PIPELINE.md` | End to end: research the reel, write, build, render, verify, deliver. Includes the multi-agent workflow shape that worked. |
-| `06-FAILURE-MODES.md` | Every bug hit, indexed by symptom. Plus the client-feedback decoder. |
-| `07-CATALOG.md` | All 23 covers: headline, scene, source file, and status flags. |
-| `src/` | The real Remotion source that produced them, plus wiring notes. |
-| `tools/verify_cover.py` | Runnable. Gates a build. |
-| `reference/` | `COVER_INDEX.png` (all 23 labeled) and five worked examples. |
+| `01-SPEC.md` | Hard geometry — canvas, crop math, locked header slot, quiet zone, optical fitting, palette. All numbers. |
+| `02-COPY-SYSTEM.md` | How headlines are written: promise formula, naming the subject, question technique, all 23 shipped headlines. |
+| `03-SCENE-CONTRACT.md` | Scene-authoring contract, copy-pasteable into an agent prompt; ends with what "polished" measurably means. |
+| `04-VERIFICATION.md` | Every automated check, the bug it catches, and the calibration lesson. |
+| `05-PIPELINE.md` | End to end: research, write, build, render, verify, deliver — plus the multi-agent workflow shape that worked. |
+| `06-FAILURE-MODES.md` | Every bug hit, indexed by symptom, plus the client-feedback decoder. |
+| `07-CATALOG.md` | All 23 covers: headline, scene, source file, status flags; maps every keyword to its canonical file. |
+| `src/` | Real Remotion source that produced the covers (`ReelCovers*.tsx`, `Root.tsx`, `fonts.ts`, `data/`) plus `README-src.md` wiring notes. |
+| `tools/verify_cover.py` | Runnable gate on a build. |
+| `tools/build_cover_index.py` | Builds the labeled `COVER_INDEX.png`. |
+| `reference/` | `COVER_INDEX.png` (all 23 labeled) plus five worked half-size examples and `POWERS_cover.png`. |
+| `package.json` · `requirements.txt` | Remotion / Python deps. |
 
----
+## Conventions
+- Canonical filename is `<KEYWORD>_cover.png`. Three current covers use versioned names instead — `51_SKILLS_cover_v2.png`, `52_BALL_cover_v3.png`, `HERMES_cover_v2.png`; `07-CATALOG.md` maps keyword → canonical file.
+- `SceneCover` (the locked header slot) is **imported** by all three source files, never duplicated — a duplicated chassis is how the slot drifts.
+- Header slot is locked: `line1` top 434 size 78, `giant` top 514 size 158; measured rows land y445..652 on every cover.
 
 ## The five things that matter most
+1. **Compose for the tile, not the file.** Uploads at 1080x1920 but the grid shows only the centre **4:5 tile, y285..y1635**; the 285px top/bottom bands are bleed. Keep everything load-bearing inside the tile.
+2. **The header slot is locked, in ONE place** (see Conventions). Client raised header consistency twice.
+3. **Nothing structural above y780** — the quiet zone. Header "inconsistency" was really one scene's columns rising into the band so its type sat on architecture, not clean sky: same coordinates, different perceived position.
+4. **At 150px, detail is noise.** The tile renders ~130-150px wide in a 3-up grid. One giant claim + one unmistakable hero shape; stat bars/captions/labels are the reward for tapping, never the read. Test for real: crop to 4:5, downscale to 150px, look.
+5. **Measure, don't eyeball.** Every rule is a number and `tools/verify_cover.py` checks all of them (header slot, giant margins, quiet zone, bottom band, composition). It passes all 23 shipped covers — that's its regression test.
 
-If you read nothing else:
+## Gotchas
+- **A detector that flags every item is broken, not the work.** Happened three times, including inside `verify_cover.py`: a quiet-zone check reported 8/8 FAIL measuring the headline, then the paper-grain overlay; a composition check false-positived CALLBACK by reading the deliberate header/scene gap as a void. Always calibrate against a sample already verified by eye.
+- **Point the verifier at the right files.** `out/reel-covers/` also holds superseded renders; use `07-CATALOG.md` to find canonical files.
+- **Retired card-era `*_FINAL.png` renders FAIL the verifier** (quiet-zone steps 209..211 vs a 21..24 floor). Correct behaviour — they're the rejected chassis and double as the repo's known-bad sample.
+- **No performance data.** 23 shipped as a set; none A/B tested vs a plain frame grab. "This works" means "survived review", not "converts".
+- **Some covers back reels that don't exist or failed.** Five are VO-only (HERMES, OS, TAKES, PURGE, PLUGINS), one backs an unshipped reel (EVOLVE), one backs a confirmed failure (VAULT, ~10% avg watch). Two are OpenAI reels, not Claude (FACTORY, SOL) — deliberately no Claude mascot. See `07-CATALOG.md`.
 
-**1. Compose for the tile, not the file.**
-A cover uploads at 1080x1920 but is almost never seen at 9:16. The profile grid shows the
-centre **4:5 tile, y285..y1635**. Everything load-bearing lives inside it. The 285px bands
-top and bottom are bleed.
-
-**2. The header slot is locked, and it is locked in ONE place.**
-`line1` at top 434 size 78, `giant` at top 514 size 158. Measured text rows land at
-y445..652 on every cover. `SceneCover` is **imported** by all three source files and never
-duplicated, because a duplicated chassis is how the slot drifts. The client raised header
-consistency twice.
-
-**3. Nothing structural above y780.**
-The quiet zone. When the client said the headers looked inconsistent, measurement showed
-placement was already pixel-identical: one scene's columns rose into the band, so its type
-sat on architecture while every other cover's sat on clean sky. Same coordinates, different
-perceived position.
-
-**4. At 150px, detail is noise.**
-The tile renders about 130-150px wide in a 3-up grid. A cover gets **one giant claim and
-one unmistakable hero shape**. Stat bars, captions and fine labels turn to mush; keep them
-as the reward for tapping, never as the read. Test it for real: crop to 4:5, downscale to
-150px, and look.
-
-**5. Measure, do not eyeball.**
-Every rule above is a number, and `tools/verify_cover.py` checks all of them:
-
-```bash
-python3 tools/verify_cover.py out/POWERS_cover.png --tile
-```
-
-```
-POWERS_cover.png
-  PASS  header slot     slot y=445..604
-  PASS  giant margins   margins 123/120 (min 110), width 837
-  PASS  quiet zone      max step 23 (limit 40, grain floor ~23)
-  PASS  bottom band     bottom row rgb [160 124  76]
-  PASS  composition     content y=800..1631, largest in-scene void 180px
-```
-
-It passes all 23 shipped covers, which is its regression test. Be careful which files
-you point it at: `out/reel-covers/` also holds superseded renders, and three of the
-current set use versioned filenames (`51_SKILLS_cover_v2.png`, `52_BALL_cover_v3.png`,
-`HERMES_cover_v2.png`) rather than the plain `<KEYWORD>_cover.png` convention.
-`07-CATALOG.md` maps every keyword to its canonical file.
-
-The retired card-era renders (`*_FINAL.png`) **fail** this verifier, with quiet-zone
-steps of 209..211 against a 21..24 floor. That is correct behaviour, not a bug: they
-are the chassis the client rejected, and they double as the repo's known-bad sample.
-
----
-
-## The one meta-lesson
-
-**A detector that flags every item is broken, not the work.**
-
-This happened three separate times during the build, including once inside
-`verify_cover.py` itself while writing this repo. Twice a quiet-zone check reported 8/8
-FAIL with near-identical numbers: first it was measuring the headline, then it was reading
-the paper-grain overlay. A third time the composition check false-positived CALLBACK, one
-of the covers the client holds up as the polish bar, because it was measuring the
-deliberate gap between header and scene as a void.
-
-Every time, the fix was to calibrate against a sample already verified by eye. If a check
-fails uniformly across everything, suspect the metric before suspecting the work.
-
----
-
-## Honest status
-
-- **The covers have no performance data.** 23 shipped as a set; none has been A/B tested
-  against a plain frame grab. Everything here is craft discipline and client judgment, not
-  measured lift. Treat "this works" as "this survived review", not "this converts".
-- **Five covers back reels that do not exist** (HERMES, OS, TAKES, PURGE, PLUGINS are VO
-  recordings only), one backs a reel that was never shipped (EVOLVE), and one backs a
-  confirmed failure (VAULT, ~10% average watch). See `07-CATALOG.md`. A cover cannot rescue
-  a dead premise, and the catalogue says so per reel.
-- **Two covers are for OpenAI reels**, not Claude (FACTORY, SOL). They deliberately carry
-  no Claude mascot.
-
----
-
-Built 2026-07-18/19. Source of record for the insights: `memory/reel-grid-covers.md`.
-
----
-keywords: instagram reel cover, grid cover, profile tile, 4:5 crop, 1080x1920, header slot,
-quiet zone, optical fit, remotion still, nocodealex, cover design system, verify_cover
+## Related
+- `../memory/reel-grid-covers.md` — source of record for the insights (built 2026-07-18/19).
+- `../memory/house-builder-cover-rich-scene.md` · `../memory/carousel-format-concepts.md` · `../memory/trial-reels-not-for-carousels.md`
+- `../memory/MEMORY.md` — master index.

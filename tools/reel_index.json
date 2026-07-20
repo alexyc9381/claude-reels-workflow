@@ -1,0 +1,731 @@
+{
+  "counts": {
+    "reels_with_code": 44,
+    "reels_total": 65,
+    "factory_logs": 24,
+    "storyboards": 6,
+    "caption_jsons": 46,
+    "memory_md": 133,
+    "creators": 8,
+    "packs": 2
+  },
+  "reels": [
+    {
+      "key": "ads",
+      "name": "Ads",
+      "number": null,
+      "code": "video/src/ClaudeAdsReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_ads.json",
+        "video/src/data/words_leads.json"
+      ]
+    },
+    {
+      "key": "arena",
+      "name": "Arena",
+      "number": null,
+      "code": "video/src/ClaudeArenaReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_arena.json"
+      ]
+    },
+    {
+      "key": "ask",
+      "name": "Ask",
+      "number": null,
+      "code": "video/src/ClaudeAskReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_ask.json"
+      ]
+    },
+    {
+      "key": "attack",
+      "name": "Attack",
+      "number": null,
+      "code": "video/src/ClaudeAttackReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_attack.json"
+      ]
+    },
+    {
+      "key": "autopilot",
+      "name": "Autopilot",
+      "number": null,
+      "code": "video/src/ClaudeAutopilotReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_autopilot.json"
+      ]
+    },
+    {
+      "key": "blueprint",
+      "name": "Blueprint",
+      "number": null,
+      "code": "video/src/ClaudeBlueprintReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_blueprint.json"
+      ]
+    },
+    {
+      "key": "books",
+      "name": "Books",
+      "number": null,
+      "code": "video/src/ClaudeBooksReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_books.json"
+      ]
+    },
+    {
+      "key": "brain",
+      "name": "Brain",
+      "number": null,
+      "code": "video/src/ClaudeBrainReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_brain.json"
+      ]
+    },
+    {
+      "key": "carousel2",
+      "name": "Carousel2",
+      "number": null,
+      "code": "video/src/ClaudeCarousel2Reel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_carousel2.json"
+      ]
+    },
+    {
+      "key": "channel",
+      "name": "Channel",
+      "number": null,
+      "code": "video/src/ClaudeChannelReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_channel.json"
+      ]
+    },
+    {
+      "key": "clone",
+      "name": "Clone",
+      "number": null,
+      "code": "video/src/ClaudeCloneReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_clone.json"
+      ]
+    },
+    {
+      "key": "content",
+      "name": "Content",
+      "number": null,
+      "code": "video/src/ClaudeContentReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_content.json"
+      ]
+    },
+    {
+      "key": "control",
+      "name": "Control",
+      "number": null,
+      "code": "video/src/ClaudeControlReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_control.json"
+      ]
+    },
+    {
+      "key": "council",
+      "name": "Council",
+      "number": null,
+      "code": "video/src/ClaudeCouncilReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_council.json"
+      ]
+    },
+    {
+      "key": "crew",
+      "name": "Crew",
+      "number": null,
+      "code": "video/src/ClaudeCrewReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_crew.json"
+      ]
+    },
+    {
+      "key": "design",
+      "name": "Design",
+      "number": null,
+      "code": "video/src/ClaudeDesignReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_design.json"
+      ]
+    },
+    {
+      "key": "designer",
+      "name": "Designer",
+      "number": null,
+      "code": "video/src/ClaudeDesignerReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "fable",
+      "name": "Fable",
+      "number": null,
+      "code": "video/src/ClaudeFableReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_fable.json"
+      ]
+    },
+    {
+      "key": "factory",
+      "name": "Factory",
+      "number": null,
+      "code": "video/src/ClaudeFactoryReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_factory.json"
+      ]
+    },
+    {
+      "key": "glm",
+      "name": "Glm",
+      "number": null,
+      "code": "video/src/ClaudeGlmReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_glm.json"
+      ]
+    },
+    {
+      "key": "leads",
+      "name": "Leads",
+      "number": null,
+      "code": "video/src/ClaudeLeadsReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_leads.json"
+      ]
+    },
+    {
+      "key": "listicle",
+      "name": "Listicle",
+      "number": null,
+      "code": "video/src/ClaudeListicleReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_listicle.json"
+      ]
+    },
+    {
+      "key": "loops",
+      "name": "Loops",
+      "number": null,
+      "code": "video/src/ClaudeLoopsReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_loops.json",
+        "video/src/data/words_loops_alex.json"
+      ]
+    },
+    {
+      "key": "loopsreal",
+      "name": "LoopsReal",
+      "number": null,
+      "code": "video/src/ClaudeLoopsRealReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "md",
+      "name": "Md",
+      "number": null,
+      "code": "video/src/ClaudeMdReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_md.json"
+      ]
+    },
+    {
+      "key": "mint",
+      "name": "Mint",
+      "number": null,
+      "code": "video/src/ClaudeMintReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_mint.json"
+      ]
+    },
+    {
+      "key": "night",
+      "name": "Night",
+      "number": null,
+      "code": "video/src/ClaudeNightReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_night.json",
+        "video/src/data/words_nightshift.json"
+      ]
+    },
+    {
+      "key": "nightshift",
+      "name": "Nightshift",
+      "number": null,
+      "code": "video/src/ClaudeNightshiftReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_nightshift.json"
+      ]
+    },
+    {
+      "key": "offer",
+      "name": "Offer",
+      "number": null,
+      "code": "video/src/ClaudeOfferReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_offer.json"
+      ]
+    },
+    {
+      "key": "prompts",
+      "name": "Prompts",
+      "number": null,
+      "code": "video/src/ClaudePromptsReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_prompts.json",
+        "video/src/data/words_promptsv2.json"
+      ]
+    },
+    {
+      "key": "promptsv2",
+      "name": "PromptsV2",
+      "number": null,
+      "code": "video/src/ClaudePromptsV2Reel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_promptsv2.json"
+      ]
+    },
+    {
+      "key": "seo",
+      "name": "Seo",
+      "number": null,
+      "code": "video/src/ClaudeSeoReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_seo.json"
+      ]
+    },
+    {
+      "key": "sharp",
+      "name": "Sharp",
+      "number": null,
+      "code": "video/src/ClaudeSharpReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_sharp.json"
+      ]
+    },
+    {
+      "key": "site",
+      "name": "Site",
+      "number": null,
+      "code": "video/src/ClaudeSiteReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_site.json"
+      ]
+    },
+    {
+      "key": "stack",
+      "name": "Stack",
+      "number": null,
+      "code": "video/src/ClaudeStackReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_stack.json"
+      ]
+    },
+    {
+      "key": "swarm",
+      "name": "Swarm",
+      "number": null,
+      "code": "video/src/ClaudeSwarmReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_swarm.json"
+      ]
+    },
+    {
+      "key": "unlock",
+      "name": "Unlock",
+      "number": null,
+      "code": "video/src/ClaudeUnlockReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_unlock.json"
+      ]
+    },
+    {
+      "key": "vault",
+      "name": "Vault",
+      "number": null,
+      "code": "video/src/ClaudeVaultReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_vault.json"
+      ]
+    },
+    {
+      "key": "words",
+      "name": "Words",
+      "number": null,
+      "code": "video/src/ClaudeWordsReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_ads.json",
+        "video/src/data/words_arena.json",
+        "video/src/data/words_ask.json",
+        "video/src/data/words_attack.json",
+        "video/src/data/words_autopilot.json",
+        "video/src/data/words_blueprint.json",
+        "video/src/data/words_books.json",
+        "video/src/data/words_brain.json",
+        "video/src/data/words_carousel.json",
+        "video/src/data/words_carousel2.json",
+        "video/src/data/words_channel.json",
+        "video/src/data/words_clone.json",
+        "video/src/data/words_content.json",
+        "video/src/data/words_control.json",
+        "video/src/data/words_council.json",
+        "video/src/data/words_crew.json",
+        "video/src/data/words_design.json",
+        "video/src/data/words_erase.json",
+        "video/src/data/words_fable.json",
+        "video/src/data/words_factory.json",
+        "video/src/data/words_glm.json",
+        "video/src/data/words_leads.json",
+        "video/src/data/words_listicle.json",
+        "video/src/data/words_loops.json",
+        "video/src/data/words_loops_alex.json",
+        "video/src/data/words_md.json",
+        "video/src/data/words_mint.json",
+        "video/src/data/words_night.json",
+        "video/src/data/words_nightshift.json",
+        "video/src/data/words_offer.json",
+        "video/src/data/words_prompts.json",
+        "video/src/data/words_promptsv2.json",
+        "video/src/data/words_retire.json",
+        "video/src/data/words_seo.json",
+        "video/src/data/words_sharp.json",
+        "video/src/data/words_site.json",
+        "video/src/data/words_slash.json",
+        "video/src/data/words_sol.json",
+        "video/src/data/words_stack.json",
+        "video/src/data/words_swarm.json",
+        "video/src/data/words_unlock.json",
+        "video/src/data/words_vault.json",
+        "video/src/data/words_words.json",
+        "video/src/data/words_worthy.json"
+      ]
+    },
+    {
+      "key": "worthy",
+      "name": "Worthy",
+      "number": null,
+      "code": "video/src/ClaudeWorthyReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_worthy.json"
+      ]
+    },
+    {
+      "key": "arcade",
+      "name": "arcade",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/arcade-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "brand",
+      "name": "brand",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/brand-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "drop",
+      "name": "drop",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/drop-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "erase",
+      "name": "erase",
+      "number": null,
+      "code": "video/src/ClaudeEraseReel.tsx",
+      "log": "memory/reels/erase-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_erase.json"
+      ]
+    },
+    {
+      "key": "family",
+      "name": "family",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/family-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "flip",
+      "name": "flip",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/flip-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "foreman",
+      "name": "foreman",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/foreman-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "ghost",
+      "name": "ghost",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/ghost-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "grid",
+      "name": "grid",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/grid-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "hired",
+      "name": "hired",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/hired-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "imprint",
+      "name": "imprint",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/imprint-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "jarvis",
+      "name": "jarvis",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/jarvis-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "opps",
+      "name": "opps",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/opps-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "pokeball",
+      "name": "pokeball",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/pokeball-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "recall",
+      "name": "recall",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/recall-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "retire",
+      "name": "retire",
+      "number": null,
+      "code": "video/src/ClaudeRetireReel.tsx",
+      "log": "memory/reels/retire-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_retire.json"
+      ]
+    },
+    {
+      "key": "spend",
+      "name": "spend",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/spend-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "swipe",
+      "name": "swipe",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/swipe-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "xray",
+      "name": "xray",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/xray-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "slash",
+      "name": "slash",
+      "number": 41,
+      "code": "video/src/ClaudeSlashReel.tsx",
+      "log": "memory/reels/slash-factory-log.md",
+      "storyboard": "storyboards/41-slash.md",
+      "captions": [
+        "video/src/data/words_slash.json"
+      ]
+    },
+    {
+      "key": "evolve",
+      "name": "evolve",
+      "number": 45,
+      "code": null,
+      "log": "memory/reels/evolve-factory-log.md",
+      "storyboard": "storyboards/45-evolve.md",
+      "captions": []
+    },
+    {
+      "key": "callback",
+      "name": "callback",
+      "number": 52,
+      "code": null,
+      "log": "memory/reels/callback-factory-log.md",
+      "storyboard": "storyboards/52-callback.md",
+      "captions": []
+    },
+    {
+      "key": "carousel",
+      "name": "carousel",
+      "number": 59,
+      "code": "video/src/ClaudeCarouselReel.tsx",
+      "log": "memory/reels/carousel-factory-log.md",
+      "storyboard": "storyboards/59-carousel.md",
+      "captions": [
+        "video/src/data/words_carousel.json",
+        "video/src/data/words_carousel2.json"
+      ]
+    },
+    {
+      "key": "dynasty",
+      "name": "dynasty",
+      "number": 59,
+      "code": null,
+      "log": "memory/reels/dynasty-factory-log.md",
+      "storyboard": "storyboards/59-dynasty.md",
+      "captions": []
+    },
+    {
+      "key": "roots",
+      "name": "roots",
+      "number": 59,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/59-roots.md",
+      "captions": []
+    }
+  ]
+}

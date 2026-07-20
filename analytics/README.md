@@ -1,43 +1,32 @@
-# analytics/ — the performance feedback loop
+# analytics — the performance feedback loop that pulls real post metrics back next to each reel's prediction
 
-The rubric predicts virality; this closes the loop by pulling what actually happened and parking it next to each reel's prediction. **This is the highest-leverage improvement to the workflow** — without it we optimize blind.
+Pulls what actually happened on a posted reel (views, watch time, retention) and parks it beside the rubric's Stage-4 prediction so the workflow stops optimizing blind. Touch this after a reel is live, or when building the metrics puller. **This is the highest-leverage improvement to the workflow.**
 
-## What's automatable vs not (Instagram)
-| Signal | Source | Auto? |
-|---|---|---|
-| views, reach, saves, shares, comments, likes | Graph API | ✅ `pull_ig_insights.py` |
-| **avg watch time → avg % watched** (the retention KPI) | Graph API (`ig_reels_avg_watch_time`) | ✅ |
-| **per-second retention curve + 3s-hold %** | IG app only — no API exposes it | ❌ screenshot (`PERFORMANCE-TEMPLATE.md`) |
-| comment-keyword → DM-guide conversions | a DM tool (ManyChat-style) | ⚙️ if wired |
+## Start here
+Open `pull_ig_insights.py` — it's the puller that fetches IG insights via the Graph API. Then read `PERFORMANCE-TEMPLATE.md`, the per-reel file you copy into a reel's folder for the one retention screenshot the API can't give you.
 
-> Note on tools: **Blotato does NOT return watch time / retention** — only views/reach/likes/comments. So it can't power this loop on its own; the retention number must come from the direct Graph API below.
+## Layout
+| path | what |
+|---|---|
+| `pull_ig_insights.py` | Graph API puller: views/reach/saves/shares/comments/likes + `ig_reels_avg_watch_time`; writes `PERFORMANCE.md`, computes `% watched` from `--durations` |
+| `PERFORMANCE-TEMPLATE.md` | per-reel template copied into each reel folder; holds the one retention-curve screenshot |
+| `durations.json` | maps reel keyword → exact length in seconds (we build the reels, so we know these), e.g. `{"SKILLS": 52.22, "DROP": 37.1}` |
 
-## ⚠️ The per-second RETENTION CURVE — where it actually comes from
-Avg watch time ≠ the retention curve. They are different data:
-- **Instagram: the curve does NOT exist.** Not in the Graph API, not in the app. IG Reel insights are aggregate only (avg/total watch time). No third-party tool can give it either (they all read the same API). For IG, **avg % watched is the ceiling.**
-- **YouTube Shorts: the curve exists AND is pullable.** YT Studio shows the real audience-retention graph, and the **YouTube Analytics API** returns it: metric `audienceWatchRatio` (+ `relativeRetentionPerformance`) over dimension `elapsedVideoTimeRatio` = ~100 points across the video = the exact drop-off. Needs OAuth (`yt-analytics.readonly` + a Google Cloud project).
+## Conventions
+- Run 48–72h after each post, or weekly: `python3 analytics/pull_ig_insights.py --limit 25 --out analytics/PERFORMANCE.md --durations analytics/durations.json`.
+- One-time setup: IG must be a **Business or Creator** account linked to a Facebook Page; reuse the **Meta app** from the Matchtern ads Marketing API, add scopes `instagram_manage_insights`, `instagram_basic`, `pages_read_engagement`, mint a long-lived (or system-user) token; find the IG business user id via `GET https://graph.facebook.com/v21.0/me/accounts?fields=instagram_business_account,name&access_token=TOKEN`; then `export IG_TOKEN=...` and `export IG_USER_ID=...`.
+- After each pull, copy `PERFORMANCE-TEMPLATE.md` into the reel's folder and add its retention screenshot.
+- The loop learns by comparing `avg % watched` + the cliff-second against the reel's **predicted** Stage-4 scorecard; patterns become new kill-rules via the `script-factory-pipeline` POST-PUBLISH AUTOPSY.
+
+## Gotchas
+- **The per-second retention CURVE is not the same data as avg watch time.** On **Instagram the curve does not exist** — not in the Graph API, not in the app, and no third-party tool can give it (they all read the same API). For IG, **avg % watched is the ceiling**; the curve only arrives as a manual screenshot.
+- **Blotato does NOT return watch time / retention** — only views/reach/likes/comments. It can't power this loop; the retention number must come from the direct Graph API.
+- **YouTube Shorts is the retention lab.** Its curve exists AND is pullable — YT Studio shows it and the **YouTube Analytics API** returns `audienceWatchRatio` (+ `relativeRetentionPerformance`) over `elapsedVideoTimeRatio` (~100 points = exact drop-off; needs OAuth `yt-analytics.readonly` + a Google Cloud project). **Cross-post every reel to YouTube Shorts** to learn which second people leave. A YT Analytics puller is the natural companion to `pull_ig_insights.py` — build it once cross-posting is on.
 - **TikTok:** retention rate + a partial in-app graph; per-second via API is unreliable → screenshot.
+- Comment-keyword → DM-guide conversions are only trackable if a ManyChat-style DM tool is wired in.
+- **Status:** script + templates shipped, but untested against the live API — needs a live `IG_TOKEN`/`IG_USER_ID` to run. Verify the metric names on first run; Meta occasionally renames reel metrics.
 
-**Strategy: cross-post every reel to YouTube Shorts and use YouTube as the retention lab.** It's the only place you can automatically pull *which second people leave* and map it to the beat that lost them. (A YT Analytics puller is the natural companion to `pull_ig_insights.py` — build it once cross-posting is on.)
-
-## One-time setup
-1. IG must be a **Business or Creator** account connected to a Facebook Page.
-2. Reuse the **Meta app** from the Matchtern ads Marketing API; add scopes `instagram_manage_insights`, `instagram_basic`, `pages_read_engagement` and mint a long-lived (or system-user) token.
-3. Find the IG business user id:
-   ```
-   GET https://graph.facebook.com/v21.0/me/accounts?fields=instagram_business_account,name&access_token=TOKEN
-   ```
-4. `export IG_TOKEN=...` and `export IG_USER_ID=...`
-
-## Run it (48–72h after each post, or weekly)
-```
-python3 analytics/pull_ig_insights.py --limit 25 --out analytics/PERFORMANCE.md \
-        --durations analytics/durations.json
-```
-- `durations.json` maps a reel keyword → exact length in seconds (we know these, we build the reels), so `% watched` is computed. e.g. `{"SKILLS": 52.22, "DROP": 37.1}`.
-- Then, per reel, copy `PERFORMANCE-TEMPLATE.md` into the reel's folder and add the one retention screenshot.
-
-## Then the loop learns
-Compare `avg % watched` + the cliff-second against the reel's **predicted** Stage-4 scorecard in its factory log. Patterns (e.g. "hooks that scored 9 but held <30% share this trait") become new kill-rules via the `script-factory-pipeline` POST-PUBLISH AUTOPSY.
-
-*Status: script + templates shipped; needs a live `IG_TOKEN`/`IG_USER_ID` to run (untested against the live API until then — verify the metric names on first run, Meta occasionally renames reel metrics).*
+## Related
+- [`../script-factory/`](../script-factory/) — the pipeline whose POST-PUBLISH AUTOPSY consumes this data; see memory `script-factory-pipeline`.
+- [`../memory/MEMORY.md`](../memory/MEMORY.md) — rules index; per-reel factory logs hold the Stage-4 predictions this loop scores against.
+- [`../docs/CONVENTIONS.md`](../docs/CONVENTIONS.md) — the shared README skeleton and naming rules.
