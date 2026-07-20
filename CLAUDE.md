@@ -37,7 +37,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 | **replicate a creator's *edit* style** | [`packs/`](packs/) — measured, verified edit packs |
 | **decompose a viral winner into numbers** | [`winner-lab/`](winner-lab/) |
 | **build a post cover** | [`cover-system/`](cover-system/) |
-| **storyboard a reel before building** | [`storyboards/`](storyboards/) |
+| **storyboard a reel before building** | [`storyboards/STORYBOARD-SPEC.md`](storyboards/STORYBOARD-SPEC.md) — the mandatory contract + camera/arc/set libraries |
 | **know naming rules / how to keep things consistent** | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | **run ffmpeg/whisper/motion tooling** | [`tools/`](tools/) |
 

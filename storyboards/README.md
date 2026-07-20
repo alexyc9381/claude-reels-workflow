@@ -2,12 +2,20 @@
 
 The pre-build design doc for each reel: the arc, the per-scene shot cards, the locked VO/beat map (`L`), the number spine, and the WHY behind each visual choice — written before any Remotion code. An agent touches this whenever it starts a new reel or reworks an existing one's structure (memory rule `reel-storyboard-process`).
 
+**Why the spec exists:** reel quality is 50/50 because cinematic craft is *remembered, not enforced* — half the boards are richly built, half are "shapes floating on black." The spec + libraries below make the standard the best boards already hit **mandatory**, so every board clears it. They're an **execution floor**, not a template — they dictate how completely a scene is specified, never what the scene is.
+
 ## Start here
-Open the board for the reel you're building, e.g. [`68-chart.md`](68-chart.md) (cinematic-blueprint arc) or [`59-roots.md`](59-roots.md) (arc + number spine + running gag). To find which reels have a board and how it joins to code + factory log, use the generated registry [`../REELS.md`](../REELS.md). The process itself lives in memory `reel-storyboard-process`.
+- **Boarding a new reel?** Read [`STORYBOARD-SPEC.md`](STORYBOARD-SPEC.md) — the mandatory contract (header + per-scene skeleton + the three floors + the adversarial critic pass). Then pull from the three libraries as you fill each scene card.
+- **The worked example** is [`52-callback.md`](52-callback.md) — the best board in the repo; read it as the spec made real (a villain with a rule, detailed sets, named camera moves, its own critic).
+- To find which reels have a board and how it joins to code + factory log, use [`../REELS.md`](../REELS.md).
 
 ## Layout
 | path | what |
 |---|---|
+| [`STORYBOARD-SPEC.md`](STORYBOARD-SPEC.md) | **the mandatory boarding contract** — header, per-scene skeleton, the three quality floors, the adversarial critic pass, how it feeds the build + ship-gate |
+| [`CAMERA-GRAMMAR.md`](CAMERA-GRAMMAR.md) | shot sizes/angles/moves + the "not overdone" discipline (a cut is free, a move is rationed; ~60-70% of scenes locked) |
+| [`STORY-ARCS.md`](STORY-ARCS.md) | the arc selector (villain / transformation / underdog / discovery / quest / **none→value-first**) + each arc's beats, intensity curve, and rules |
+| [`SET-AND-LIGHT.md`](SET-AND-LIGHT.md) | building a real place with 4–6 depth planes + lighting — the #1 fix for "boring" |
 | `<number>-<name>.md` | one reel's storyboard — e.g. `59-roots.md`, `68-chart.md` |
 | `59-roots.md` / `59-dynasty.md` / `59-carousel.md` | multiple concepts can share a reel number (competing takes) |
 | `69-arsenal.md` / `69-arsenal-v2.md` | a `-v2` suffix is a re-storyboard of the same concept |
