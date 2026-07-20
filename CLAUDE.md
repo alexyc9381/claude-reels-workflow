@@ -30,6 +30,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 | **understand the whole reel pipeline** | [`CLAUDE-REELS-PLAYBOOK.md`](CLAUDE-REELS-PLAYBOOK.md) — the production manual |
 | **find a specific reel's files** (code/log/storyboard/captions) | [`REELS.md`](REELS.md) — the generated registry |
 | **build or edit a reel** | [`video/`](video/) (the Remotion project) — start at `video/src/Root.tsx` |
+| **ship a reel / check a finished render is complete** | [`tools/verify_reel.py`](tools/verify_reel.py) — the ship-gate (VO@0, soundtrack audible@0, cues fire, captions match). Exit 1 = don't ship |
 | **know the rules / not repeat a past mistake** | [`memory/MEMORY.md`](memory/MEMORY.md) |
 | **pick the next topic / write a script** | [`script-factory/`](script-factory/) + memory `script-factory-pipeline` |
 | **replicate a creator's *script* voice** | [`script-style-replicator/`](script-style-replicator/) — start at its `SKILL.md` |

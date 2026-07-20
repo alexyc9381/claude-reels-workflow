@@ -1,19 +1,20 @@
 # tools — build + audit toolchain
 
-Small stdlib/ffmpeg utilities that support building a reel: the repo **index generator**, per-reel
-motion/dead-air auditors, and a scratch-VO helper. An agent touches this when regenerating the repo's
-navigation indexes or measuring a rendered reel for static stretches.
+Small stdlib/ffmpeg utilities that support building a reel: the **ship-gate** that checks a finished reel
+is actually complete, the repo **index generator**, per-reel motion/dead-air auditors, and a scratch-VO
+helper. An agent touches this before delivering a reel, or when regenerating the repo's navigation indexes.
 
 ## Start here
-`build_repo_index.py` — **THE index generator**. Read its docstring: it unions each reel across code
-(`video/src/Claude<Name>Reel.tsx`), log (`memory/reels/`), storyboard (`storyboards/`) and writes
-[`../REELS.md`](../REELS.md) + `reel_index.json`, and refreshes the auto-count blocks in
-`../CLAUDE.md` / `../README.md`. Run `npm install` here once so the `motion_audit*` / `scratch_vo`
-ffmpeg binary paths resolve.
+`verify_reel.py` — **THE ship-gate. Run it on the finished mp4 before delivery.** A render succeeding does
+not prove the content is in the pixels/audio; this measures the output and FAILS if the VO/soundtrack
+doesn't actually start at 0, the music goes silent, captions drifted, a VO flub survived, SFX cues are
+dead, or there's dead air at the end. Read its docstring for the check list; `--emit-manifest` prints the
+intent schema. For the repo's navigation indexes instead, use `build_repo_index.py`.
 
 ## Layout
 | path | what |
 |---|---|
+| `verify_reel.py` | **the ship-gate**: checks a finished reel against what it should contain (VO@0, soundtrack AUDIBLE@0, music continuous, captions match, no VO flub, SFX cues fire, ends tight). Exit 1 = do not ship. Tested on real deliveries |
 | `build_repo_index.py` | THE index generator: rebuilds `../REELS.md`, `reel_index.json`, and the `<!-- INDEX:AUTO -->` count blocks in `../CLAUDE.md`/`../README.md`. `--check` exits 1 if stale (CI/pre-commit) |
 | `reel_index.json` | machine-readable output of the above (the reel registry) |
 | `motion_audit.py` | crop-to-panel dead-air auditor; scene boundaries hard-coded per reel (this copy = SIMULATE) |
@@ -30,6 +31,10 @@ ffmpeg binary paths resolve.
   `~/Downloads/matchtern-longform/tools/node_modules/ffmpeg-static/ffmpeg`.
 
 ## Gotchas
+- **`verify_reel.py` measures the FINISHED file, not the code** — it exists precisely because so many bugs
+  (dead SFX cues, a silent-intro soundtrack, drifted captions, a buried VO flub) render and typecheck
+  clean. "The render succeeded" is not "done"; a clean `verify_reel` pass is. Pass the pre-mix `--music`
+  bed to catch a soundtrack that's placed at 0 but not audible until later (the VO masks it in the mix).
 - **Never deliver a reel on the scratch VO** — `scratch_vo.sh` is a TTS stand-in for timing only; splice
   in Alex's real recording and re-run caption alignment before any delivery render.
 - **The motion metric misses small movers** — it scores pixel change, so confetti/counters/occluded
