@@ -1,0 +1,186 @@
+{
+  "pack": "board-punchin-v1",
+  "built": "2026-07-27",
+  "method": "frame-accurate teardown of 2 reels; region-aware cut detection (full-frame diff AND talking-head-card diff), optical caption timing, phase-correlation camera test, multi-scale 2D registration, spectral audio tests",
+  "corpus": {
+    "n_videos": 2,
+    "A": {
+      "file": "video.mp4",
+      "sha256": "ce8acc949b741428b4c61194c05814287b15c140dfdba5a69f1ce51ee5e16eca",
+      "w": 720, "h": 1280, "fps": 24.0, "duration_s": 62.54, "frames": 1501,
+      "codec": "h264 High yuv420p bt709", "audio": "HE-AAC 44100 stereo 63kb/s",
+      "board_theme": "light", "topic": "Claude /analyze for social research"
+    },
+    "B": {
+      "file": "SnapInsta.to_AQM2mo2bEQj3l75AgJl__OcyssV3cdSC9lQ6TQHMRNgIqTghDtyXJhw2f7Yj1YQfOUpsN7we6fN_FkSISIBHk-DHNDGAsX3wu-QUiwo.mp4",
+      "sha256": "b56701d96d762685f747ad7e30b0a91f90dd5367f0afdbd281c4c1241eae21eb",
+      "w": 720, "h": 1280, "fps": 23.976, "duration_s": 101.77, "frames": 2440,
+      "codec": "h264 High yuv420p bt709", "audio": "HE-AAC 44100 stereo 64kb/s",
+      "board_theme": "dark", "topic": "6 hook power words"
+    },
+    "caveats": [
+      "Both files are Instagram delivery re-encodes at 720x1280, NOT masters. Master is near-certainly 1080x1920.",
+      "Source fps is 24 / 23.976 - NOT 30. Any frames@30 value is a conversion (seconds*30), not a measurement.",
+      "Colour/grain/loudness measurements include Instagram's transcode.",
+      "Source URLs not captured; creator identity unknown and deliberately not guessed. '@Kallawaymarketing' appears INSIDE video A's hook graphic as the demonstrated account - not evidence of authorship."
+    ]
+  },
+
+  "CONSTANTS": {
+    "_note": "held across BOTH videos - safe to encode",
+    "structure": {
+      "modes": ["BOARD", "FULL_BLEED_TALKING_HEAD"],
+      "alternation": "strict ABAB, zero exceptions in 33 shots",
+      "board_to_fullbleed_duration_ratio": 1.9,
+      "board_share_of_runtime": [0.688, 0.723]
+    },
+    "cuts": {
+      "type": "hard cut only",
+      "transition_frames": 1,
+      "dissolves": 0,
+      "whip_pans": 0,
+      "slide_transitions": 0,
+      "zoom_transitions": 0,
+      "dissolve_test_k_vs_k1_over_jump": {"A": 0.021, "B": 0.160, "dissolve_would_be": "~1.0"}
+    },
+    "camera": {
+      "translation_dx_dy_on_every_fullbleed_run": [0, 0],
+      "punch_ins_animated": 0,
+      "shake": 0,
+      "drift": 0,
+      "board_static_residual_0_255": [0.37, 0.51],
+      "_note": "the ONLY scale change is the hard-cut mode switch"
+    },
+    "geometry_pct": {
+      "_basis": "fractions of frame width/height - authoritative, resolution independent",
+      "th_card": {"left": 0.0625, "right": 0.936, "width": 0.875, "top": 0.728, "bottom": "bleeds off frame", "corner_radius_of_width": 0.035},
+      "grid_pitch_of_width": 0.039,
+      "headline_band_y": [0.016, 0.117],
+      "artifact_zone_y": [0.12, 0.62],
+      "caption_center_y": [0.650, 0.669],
+      "caption_cap_height_of_height": 0.023
+    },
+    "geometry_px_at_720x1280": {
+      "th_card": {"x0": 45, "x1": 674, "width": 630, "top_y": 936, "corner_radius": 24},
+      "grid_pitch": 28,
+      "caption_center_y": {"A": 832, "B": 856}
+    },
+    "palette": {
+      "board_light": "#E0E0E0",
+      "board_dark": "#070707",
+      "ink": "#0F0D0F",
+      "card_white": "#F7F7F7",
+      "accent_red": "#B80808",
+      "accent_red_variants": ["#A80808", "#C80808"],
+      "subject_brand_orange_video_A_only": "#D87757",
+      "accent_red_share_of_board_px": [0.0137, 0.0150]
+    },
+    "grade": {
+      "footage_luma_p1": [8.7, 8.7],
+      "footage_luma_p5": [10.7, 10.0],
+      "footage_luma_p50": [34.3, 27.7],
+      "footage_luma_p95": [138.3, 131.3],
+      "footage_saturation_mean": [0.279, 0.286],
+      "board_saturation_mean": [0.093, 0.091],
+      "character": "crushed blacks, low-key, high contrast footage against flat desaturated graphics"
+    },
+    "captions": {
+      "words_per_card": 1,
+      "entry_animation": "none",
+      "exit_animation": "none",
+      "swap_frames": 1,
+      "alignment": "centred, single line, never wraps",
+      "hold_equals": "spoken duration of that word",
+      "colour_rule": "white on dark, #0F0D0F on light board"
+    },
+    "audio": {
+      "integrated_lufs": [-14.3, -14.1],
+      "loudness_range_lu": [3.3, 2.9],
+      "true_peak_dbfs": 0.0,
+      "speech_starts_s": 0.0,
+      "longest_silence_s": [0.22, 0.27],
+      "speech_rate_wps": [3.84, 3.70],
+      "music_bed": "none detectable",
+      "music_bed_evidence": {"bass_onset_autocorr_peak": [0.105, 0.118], "harmonic_lag_series": false, "noise_floor_min_db": [-47.5, -48.3]}
+    },
+    "typography": {
+      "headline_rule": "bold grotesque + ONE italic-serif word + ONE red-accent phrase",
+      "headline_alignment": "centred on final string width",
+      "caption_weight": "heavy/black grotesque, tight tracking, soft dark shadow over footage"
+    },
+    "cta": {"form": "one-word comment keyword", "position": "very end", "typeset": "italic serif in quotes"}
+  },
+
+  "VARIABLES": {
+    "_note": "DIFFERED between the two videos - per-video decisions, do NOT average",
+    "board_theme": {"A": "light #E0E0E0", "B": "dark #070707"},
+    "cut_rate_s": {"A": 3.91, "B": 6.78},
+    "headline_entry": {"A": "opacity fade ~10f@24 + draw-on underline", "B": "per-character type-on"},
+    "popout_cutout": {"A": true, "B": false},
+    "caption_median_hold_s": {"A": 0.208, "B": 0.292},
+    "pacing_curve": {"A": "flat (3.47/5.21/3.47 s per third)", "B": "decelerating (5.65/5.65/11.31 s)"},
+    "mode_switch_scale": {"A": 2.25, "B": 2.70, "ncc": [0.31, 0.47]}
+  },
+
+  "TIMING": {
+    "layout_cuts": {"A": 16, "B": 15},
+    "graphic_only_beats": {"A": 11, "B": 20},
+    "combined_visual_event_rate_s": {"A": 2.32, "B": 2.91},
+    "caption_changes": {"A": 221, "B": 291},
+    "caption_rate_per_s": {"A": 3.53, "B": 2.86},
+    "caption_hold_s": {
+      "A": {"p10": 0.125, "p25": 0.167, "median": 0.208, "p75": 0.333, "p90": 0.504},
+      "B": {"p10": 0.167, "p25": 0.209, "median": 0.292, "p75": 0.459, "p90": 0.584}
+    },
+    "caption_hold_frames": {"A": {"at24": 5, "at30": 6}, "B": {"at24": 7, "at30": 9}},
+    "shot_duration_s": {
+      "A": {"board": {"n": 9, "median": 4.50, "mean": 4.78, "min": 1.88, "max": 9.04},
+            "fullbleed": {"n": 8, "median": 2.40, "mean": 2.44, "min": 0.83, "max": 4.00}},
+      "B": {"board": {"n": 8, "median": 6.74, "mean": 9.20, "min": 2.09, "max": 26.90},
+            "fullbleed": {"n": 8, "median": 3.52, "mean": 3.52, "min": 1.84, "max": 6.17}}
+    }
+  },
+
+  "MOTION_DURATIONS": {
+    "_units": "frames at source fps (24) unless noted",
+    "hard_cut": 1,
+    "post_cut_board_settle": [6, 8],
+    "element_reveal_median": 10,
+    "headline_typeon_18_chars": 15,
+    "headline_typeon_range": [15, 30],
+    "typeon_chars_per_frame": 1.4,
+    "typeon_chars_per_second": 29,
+    "headline_fade_A": 10,
+    "chart_curve_draw_s": 1.0,
+    "counter_countup_s": 1.2,
+    "hook_card_slide_up": 6,
+    "easing": "ease-out into settle; NO spring, NO overshoot, NO bounce anywhere"
+  },
+
+  "PRIMITIVES": [
+    {"name": "Board", "role": "flat canvas + 28px grid + slots header/artifact/caption/card"},
+    {"name": "TalkingHeadCard", "role": "bottom-anchored rounded card bleeding off-frame + optional background-removed pop-out layer breaking the top edge"},
+    {"name": "WordCaption", "role": "one word, centred, hard swap, zero animation, colour inverts with board"},
+    {"name": "Headline", "role": "grotesque + italic-serif word + red phrase; type-on or fade"},
+    {"name": "RevealList", "role": "numbered rows, 3 states: revealed / active (red chip + highlight box) / unrevealed (gaussian blur)"},
+    {"name": "DrawOn", "role": "stroke-dashoffset path reveal + optional group scale-up"},
+    {"name": "ArtifactCard", "role": "secondary - white/dark UI mock shell"},
+    {"name": "TypeInto", "role": "secondary - text with live | cursor"},
+    {"name": "CountUpBadge", "role": "secondary - stepped red pill counter"},
+    {"name": "PhoneMock", "role": "secondary - static device frame, hard-cutting inner clip"}
+  ],
+
+  "UNRESOLVED": [
+    "SFX layer: HF transients land within 120ms of a cut on 4/16 (A) and 7/15 (B) vs ~20% chance. B's excess is suggestive but confounded - cuts land on word onsets, which contain plosives/sibilants. Not separable at 63kb/s HE-AAC.",
+    "Caption detection recovers 92% (A) / 77% (B) of spoken words. Whether the residual is detector miss or genuine word-grouping is not separable at this resolution.",
+    "Whether -14 LUFS is the creator's master or Instagram's normalisation.",
+    "Master resolution, source URLs, creator identity - unknown, not back-filled."
+  ],
+
+  "FAILED_TESTS": [
+    "Naive top-anchored centre-aligned scale matching between card and full-bleed returned ncc~0.00 and a meaningless 2.4x. Full 2D registration (scale x translation) required.",
+    "Raw Whisper word timings drift to 90s on a 62.5s file - unusable. All caption timing measured optically from the picture.",
+    "Luma-only frame-diff cut detection fires on graphics, not edits. Must gate on the talking-head-card region changing too.",
+    "Silence detection at -32dB found ZERO silence in either file - a music-bed test based on gap loudness alone would have been a false positive."
+  ]
+}

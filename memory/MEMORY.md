@@ -23,6 +23,7 @@
 - [Claude reel topic engine](claude-reel-topic-engine.md) · [Fable idea backlog](fable-idea-backlog.md) — ranked next ideas + kill-list
 
 ## ⛔ Standing build/visual rules
+- [⛔⛔ THEME must MAP to the mechanic](reel-theme-must-map-to-mechanic.md) — write the element→meaning table before building; Fury Road failed (cars = nothing), Severance passed (cabinets = your history). Recognizable AND about the subject
 - [⛔⛔ CINEMATIC not abstract](reel-chassis-cinematic-not-abstract.md) — reel 68 (Alex FURIOUS): every scene is a real PLACE (room+floor+light+depth+Claude sprites acting), like CALLBACK's shredder room, NOT nodes/objects floating on black. Clone CALLBACK/Factory/GptSol (Cinematic Blueprint = DEFAULT), never SimulateReel. When Alex names a reference reel, clone THAT. Read CLAUDE-REELS-PLAYBOOK phase-by-phase, don't self-invent the process
 - [⛔⭐ Reel quality ENFORCED by gates](reel-quality-enforced-by-gates.md) — the 50/50 fix: consistency is enforced by CODE now, not remembering. RUN them: `tools/verify_reel.py` (ship-gate on the finished mp4 — VO/soundtrack actually-audible@0, cues fire, captions match) + `storyboards/STORYBOARD-SPEC.md` (mandatory board contract + camera/arc/set libraries). The floor is orthogonal to the idea — polices execution, never content
 - [⛔ Claude/AI reel workflow](claude-ai-reel-workflow.md) — MANDATORY spec: load before any idea AND any edit/render
@@ -47,6 +48,7 @@
 - [⛔⭐ Dead air = MEASURE it + LARGE movers](reel-dead-air-motion-audit.md) — `tools/motion_audit.py`: crop to the PANEL, 10fps mean |frame delta| per 1s bucket; median ~2.1 = static, bar every bucket ≥4. ⭐ small motion (confetti/counters) does NOT register — need ≥40,000px² travelling ≥6px/frame
 - [⛔⭐ MORE SCENES, not longer takes](reel-multishot-structure.md) — "too long / boring / needs storyline" = cut it into 3-4 distinct SHOTS with different compositions, each advancing the story
 - [⛔ Scene motion + depth](reel-scene-motion-depth.md) · [⛔⭐ Cinematic leg-up](reel-cinematic-legup.md) — camera move + light + 4-6 parallax planes + rich bg; ground it in a REAL idea
+- [⛔⭐ Scene headers NAME THE MOMENT](reel-scene-headers-name-the-moment.md) — header = the command/claim being spoken right then, never the set ("Corner Office" ✗, `/model opusplan` ✓); commands in the mono face
 - [⛔ Reel hook-header](reel-hook-header.md) — big top-third mute-readable header
 - [Reel knockoff references](reel-knockoff-references.md) · [IG-feed safe zone](reel-ig-feed-safezone.md) (top ~250 / bottom ~340 / right ~120) · [Progress-bar reward](reel-progress-bar-reward.md)
 - [⛔ Caption sync gate](caption-sync-gate.md) — anchor to WAV onset + 0.10s lead + drift-gate, never raw whisper times

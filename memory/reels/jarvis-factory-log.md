@@ -209,8 +209,109 @@ Mining all-time keyword-gated outliers (≥3x + comment-CTA + >0.4% cmt-rate) ou
 with `n_videos: None` — never scanned.** That is the standing sourcing backlog.
 
 ## STAGE 1 — TOPIC KILL-GATE
-**NOT RUN, and should not run on this comp.** Per A1.5, the checks above are the 10-minute checks that exist
-precisely so a ~350k-token gate cycle is not spent learning this. All 10 rules to be logged with evidence +
+**NOT RUN.** ⛔ **OVERRIDE-BY-ALEX 2026-07-16: build without the gate** ("its okay just continue editing the
+video here"). Recorded, not hidden. The premise that is actually being built is **not** the exhausted comp
+above — it is Alex's own **NO-CODE reframe** (Door B), which fixes the two wounds the comp could not:
+"@nocodealex builds JARVIS without code" is a claim neither lukebuildsai (an AI engineer) nor
+chandlerintelligence (his repaint) can make, and dropping Claude Code drops the R8 −3.
+
+## STAGE 3 — VO (Alex RAW, delivered 2026-07-16)
+Source `JARVIS Day 1.m4a` (90.65s) → `video/public/vo_jarvis1.wav` (**46.413s · 48kHz mono · RAW**, no EQ,
+no compression, no clone, per [[alex-vo-recordings]]).
+- **8 cut-cut markers, 6 takes of one line.** Full take map + keep table in this session; 13 keep-segments
+  spliced from the ORIGINAL wav (never compounded), 8ms fades, lead-in → 0.00s, every gap capped 0.32s.
+- ⭐ **Alex's SPOKEN INSTRUCTION, executed:** *"Cut cut. Cut out the entire part that says three links, 10
+  seconds each, no terminal."* → that beat is gone, and **storyboard S6 (the friction strip) dies with it.**
+  ⚠️ **Consequence, logged:** the hook claims *"without writing a single line of code"* and **nothing in the
+  VO now pays that claim.** It must be paid VISUALLY (the mute header `NO CODE`) or not at all.
+- ⚠️ **"Because a JARVIS that doesn't know you is just a chatbot with an accent" NEVER GOT A CLEAN TAKE** —
+  attempted once at 11.08s, cut-cut, never completed. **It is not in the reel.** That line was carrying the
+  **R10 defence** (saying out loud that the 2016 voice-butler reveal is not the wow) + storyboard S2's
+  bowler-hat gag. S2 rebuilt as "the empty brain cavity". ⛔ The R10 defence is now unspoken.
+- ⭐ **The bug the verification caught:** whisper gave "First" a **degenerate 24.26–24.26 timestamp**, so the
+  RMS snap sliced the word off. A 20ms energy scan found the truth ("...brain" ends 23.78, silence to 23.96,
+  then "First") → the two takes are **one continuous line**, merged not spliced. This is the
+  [[alex-vo-recordings]] HIRED failure mode exactly: *a short word with an absurd (here, zero) duration.*
+- **VERIFY (re-transcribed the finished wav, non-negotiable):** 0 cut markers · 0 instruction words · 0
+  hidden flubs (no word >0.8s) · "First" present · lead-in 0.00 · all gaps ≤0.32s. Evidence:
+  `memory/reels/evidence/jarvis1-vo-words-RAW.json`.
+
+### ⛔ R1 DELIVERED-VO SPEED — **FAILS. Overridden by Alex.**
+| window | wps | bar |
+|---|---|---|
+| 0-5s | **5.40** | >4.5 = hard fail |
+| 35-40s | **5.00** | >4.5 = hard fail |
+| HOOK 0-10s | **4.70** | 4.0 |
+His **raw untouched hook take is 4.92 wps**; the CLONE winner anchor is **3.96**. The hook is delivered ~25%
+faster than the reel that won. ⛔ **Unfixable in the edit, and this is why:** R2 requires the hook run
+CONTINUOUS (CLONE has zero gaps ≥0.35s in its first 10s), so padding the hook to satisfy R1 breaks R2;
+slowing the audio is banned tonal processing; and there is no speedup to reduce. **The only real fix is a
+slower hook re-record (~7.5s instead of 6.1s).** Alex chose to proceed. `OVERRIDE-BY-ALEX: R1, 2026-07-16`.
+⛔ **DO NOT apply the standard ~7% speedup to this VO** ([[reel-vo-pacing]] is void here — it is already over).
+
+## ⛔ STAGE 7 — COMIC-STORY OVERHAUL (Alex, 2026-07-16, referencing CALLBACK)
+Alex rejected the abstract-effects cut ("just boring... each scene should be a whole story, a villain,
+fighting the villain, the whole armor out"). Directed to **build it like CALLBACK-58** (his cleanest ship):
+each scene is a RICH CINEMATIC WORLD with characters acting out a story beat + a gag, NOT abstract particles.
+CALLBACK's discipline (from its storyboard): a **villain with a face + a lair, UNDEFEATED until the peak**,
+distinct settings per scene, a hero cast that ESCALATES, rising intensity, no base-object repeats.
+
+**THE STORY (hero's journey, 12 beats):**
+- Hero = **IRON CLAUDE** (full crimson+gold armor, chest ARC REACTOR = his memory of you; blazing only when full).
+- Villain = **GENERIC-9000** (soulless grey AI droid, speaks AI-slop; undefeated until S8/S9).
+- S0 hook: Iron Claude ASSEMBLES + bursts out. · S1: the world/mission (city at dawn, he flies). · S2: reactor
+  DARK + Generic-9000 looms and MOCKS him (villain established, winning). · S3-S5: he ABSORBS 3 memory
+  power-cores (Obsidian vault / Fireflies swarm / Gmail SENT), reactor charging 1/3 -> 2/3 -> BLAZING. · S6:
+  showdown begins, villain ATTACKS. · S7: he answers in YOUR voice (twin waveform), lands the FIRST blow;
+  villain glitches on AI-slop. · S8 PEAK: pulls out your 8-month-old note, villain STAGGERS (it has no memory,
+  no self). · S9: writes in your hand, Generic-9000 SHATTERS. · S10: claims the gauntlets for Part 2. · S11:
+  victory + DAY 1 SETUP doc + comment JARVIS.
+- Shared characters built once (no drift): `IronClaude` (poses idle/fly/blast/punch/charge/victory/point,
+  core 0..1) + `Generic9000` (poses loom/attack/stagger/shatter/mock, menace 0..1). Villain intensity floor:
+  it WINS in S2 and only starts losing at S7, so the peak has release (CALLBACK's "villain loses 8 times" bug).
+
+## STAGE 6/7 — BUILD (in progress)
+**v1** (helmet-on-bench): REJECTED — boring diorama, helmet drifted (12 agents each drew their own).
+**v2** (abstract kinetic stage): REJECTED — motion but no story/characters; "just boring".
+**v3** (comic story): shared `IronClaude` + `Generic9000` characters (defined ONCE = no drift), villain arc.
+**v4** (enrichment overhaul): art-director→coder per scene; layered vibrant backgrounds. Still "boring".
+**v5** (dynamize): DIAGNOSED the real boring = passive hero + repeated source-left/hero-right layout + static
+camera (NOT background detail; verified by sampling frames mid-scene — scenes DO evolve). Fixed: pattern-
+interrupt hook (black reactor closeup → ignite → smash-zoom-out), ACTIVE hero, distinct camera per scene.
+**v6** (SFX): hand-authored 62-cue story-synced sound design (3-deep hero hits, 2 risers MAX, silent note
+peak); fixed the Sfx primitive anti-click end-fade; mix peak −3.0dB, note-peak −27.7dB. + S5 SENT rebuilt
+(grey inbox swatted / gold SENT drawer). ⛔ S7 voice-duel rebuild FAILED on session limit (still the blast).
+**v7** (polish): ⛔ TEXT-EDGE FIX — SceneHeader now length-responsive + nowrap + safe margins (long headers
+like "THE PART EVERYONE MISSES" no longer clip the panel edges). + CHARACTER ELEVATION — IronClaude +
+Generic9000 redrawn with multi-stop gradients, specular edges, AO seams, rivets, a multi-ring arc reactor,
+grounding shadows (SAME pose API preserved, no scene breakage).
+
+## ⛔ OUTSTANDING (not blocked by visuals; carry forward)
+1. **S7 "sounds like you" voice-duel rebuild** — Alex named it; failed on session limit (resets 4:30pm PT).
+   Concept ready in `jarvis_elevate.js` S7 spec: villain speaks grey AI-slop, hero waveform MORPHS to mirror
+   YOUR voice, locks identical, shatters the villain's generic wave. Re-run or hand-author.
+2. **Music bed** — still a flat `seo_music.wav` @ 0.10; needs the measure-RMS→compute-gain→duck-CTA pass.
+3. **R1 hook pacing** — 4.70 wps vs 4.0 bar; needs a slower hook re-record (unfixable in edit).
+4. **"sent folder" vs "set folder"** caption — needs Alex's ear before final caption burn.
+5. **GATE A never run** — no 3-critic script gate. Building proceeded on OVERRIDE-BY-ALEX.
+6. ⚠️ **Speech-bubble edge clip** (S7 "AN AI…" bubble kisses the left panel edge) — will resolve on the S7 rebuild.
+⭐ **META (7 build cycles):** every "make it better" round produced a real fix, but convergence is slow
+without a REFERENCE for the target look. Cartoon-SVG has a sophistication ceiling below 3D/footage; if that
+gap is what reads as "not sophisticated," a different tool is needed, not more SVG passes. Flagged to Alex.
+`src/ClaudeJarvisReel.tsx` · SOLO chassis, ONE dark panel · chrome cloned from Factory, Mascot ported from
+Blueprint + a new `iron` faceplate prop · registered in Root, **durationInFrames 1392** (46.413 × 30).
+**L (from real WAV onsets, never guessed):**
+`[0.0, 3.28, 6.14, 7.64, 13.46, 18.32, 23.30, 24.48, 30.32, 35.60, 40.92, 44.54]` · CUT 46.413.
+- ⛔ **The cloned Factory ROOT SFX cue map was DELETED** ([[sfx-root-timeline-trap]]); every cue re-emitted
+  as `L[i] + local`. Factory's metronome would have carpeted S8, the one beat that needs silence.
+- ⛔ **Found and removed an EMOJI PICTOGRAPH in the ported Mascot** — it rendered a 💧 on `shock > 0.4`, and
+  S8 uses `shock={0.6}`, so the peak scene would have shipped with an emoji on it, violating
+  [[reel-no-emoji-no-lowopacity]]. Replaced with a CSS bead.
+- Captions `src/data/words_jarvis1.json` — 206 words, 0.10s lead ([[caption-sync-gate]]). **Hand-corrected**
+  whisper mishears: `half-finished` (was "half -finished") · `it's read` (was "it spread") · `Your sent
+  folder,` (was "You're setfolded,") · `Ask it` (was "Ask you") · `pulled out` (was "pull out").
+  ⚠️ **"sent folder" needs Alex's ear** — whisper hears "set folder" even in isolation. If he really said
+  "set", the burned caption contradicts the audio. All 10 rules to be logged with evidence +
 the audience-size arithmetic on the HARSH reading.
 
 Known items Stage 1 must handle:

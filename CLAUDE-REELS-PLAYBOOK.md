@@ -206,6 +206,27 @@ premise can score 8s across the board. **Re-run every unbuilt gated script again
 > **No approved storyboard = no visual build.** This exists because we used to author scenes, render, and only
 > then discover the metaphor was boring/repeated/clipping. Design decisions belong on paper where they're cheap.
 
+## ⛔ B0. THE OPEN IS ITS OWN BUILD → [`docs/THE-OPEN.md`](docs/THE-OPEN.md)
+
+Scene 0 is not "the first scene" — it is the only part of the reel guaranteed to be seen, and
+it is authored to its own spec. **Never storyboard the open as a single establishing wide.**
+
+The short version (full process, gate and worked example in the doc):
+- Frame 0 is **bright, saturated, has the subject in it**, and shows something the viewer
+  already dreads with zero setup. Recognition beats motion.
+- ⛔ Never dim the scene to make an overlay pop — that wins the composition and loses the feed.
+- **≥ 3 hard-cut shots in the first 5s**, camera locked in all of them, each advancing the
+  problem. Shot count is a retention lever the motion audit can see: reel 78 went 2.0 → 6.85
+  first-5s motion from recutting alone, no new elements.
+- **Every cut gets a transient on the cut frame**, and frame 0 is the loudest hit of the open.
+- **The FIRST build step is hook concepts as VARIANTS, not scene 0.** Produce 3 to 5 genuinely
+  different worlds, render frame 0 of each at full quality, get one picked, then build. Reel 78
+  built a whole Fury Road open before showing anything and threw all of it away.
+- **The theme must MAP to the mechanic, element by element** (`memory/reel-theme-must-map-to-mechanic.md`).
+  Write the on-screen → what-it-actually-is table before building; every row must fill in.
+  Recognizable is only half of it — a theme the viewer cannot connect to the audio works against
+  the hook. Put the literal thing (real UI, the actual command) on screen alongside it.
+
 ## B1. Beat-map + one card per scene
 Split the final VO by its `L[]` onsets. One scene = one VO line = one idea. Per card:
 **LINE+DUR · THE ONE TAKEAWAY · STORY metaphor + WHY (+ ≥1 rejected alternative) · PROOF (real UI + the number)

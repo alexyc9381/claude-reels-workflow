@@ -9,6 +9,11 @@ metadata:
 
 # Creator-lane ceilings (arena-confirmed, 2026-07-12)
 
+> ⛔ **PARTIALLY OVERRIDDEN by Alex 2026-07-17 — see [[raycfu-lane-preferred]].** Alex WANTS the raycfu builder lane and
+> finds universal-artifact ideas "too basic / too universal." The breadth-cap below was an arena prior on hypothetical
+> scripts; raycfu's real comps run 10–56x. **Down-weight the R8-breadth kill for builder premises.** The rest of this
+> file (the artifact-must-be-the-payoff discriminator, nicksaraev believability cap, strip verbal tics) still holds.
+
 Two head-to-head arena rounds (8 candidates, then 4 raycfu/nicksaraev challengers vs the champion), 3 independent judges each, scoring hook · believability · breadth · artifact/receipt · transfer · freshness. Result: **the same formula won twice, and the challenger lanes lost on structure, not wording.**
 
 ## ⭐ THE FORMULA THAT WINS (confirmed twice)

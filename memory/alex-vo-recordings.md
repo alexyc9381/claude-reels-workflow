@@ -27,3 +27,17 @@ Pairs with [[video-editing-toolchain]] (CUT-CUT method, ~/Downloads Untitled-m4a
 **⛔ A "cut cut" RESTART CAN SURVIVE TO THE SHIPPED VO, AND WHISPER HIDES IT (reel 44 HIRED, Alex caught it in the delivered video, 2026-07-12).** A mid-reel flub+restart ("...and say, rewrite my [flub] — [restart] now stay in the same chat... — rewrite my resume to hit...") stayed in the final `public/hired_vo.wav`. Whisper EMITTED NO "cut"/"stay-again" tokens — it silently STRETCHED the neighboring real words across the ~2.3s garbled region (word "my" 21.8→23.2, "resume" →23.6, "to" →24.9). So a `grep -v cut` "zero markers" check FALSE-PASSES. **The tell = a short word with an absurd duration** (a 1–1.5s "to"/"my"/"resume" in `word_timestamps`). **Method to locate + excise:** (1) print word timestamps, flag any word whose duration >~0.8s; (2) `ffmpeg -ss/-to` ISOLATE each suspicious sub-region and transcribe it ALONE — the isolation reveals the true content (one sub-region transcribed as a RESTART "now stay in the same chat", the next as the clean take "rewrite my resume to hit"); (3) cut from the silence after the last good pre-flub word to the onset of the clean take (6ms equal-power crossfade at the join), re-transcribe to confirm it reads clean. **Then propagate the cut everywhere:** the reel's `L[]` scene-starts + all SFX (both are `L`-relative, so shift only the L entries AFTER the cut by −Δ), the CUT-scene's INTERNAL hardcoded beat frames (−round(Δ*fps), but leave continuous `sin(lf/…)` oscillations alone), the H4-style SFX with big fixed offsets past the cut (−Δ), `durationInFrames` in Root.tsx (=round(newCUT*30)), and RE-DERIVE `words_<reel>.json` captions (transcribe new wav → difflib-align to the OLD json's clean word TEXT → new onsets − 0.10 lead). Full worked example in this session's HIRED v10 edits.
 
 **⛔ CHECK THE VERY FIRST WORDS for a cut-cut restart (SLASH re-record, 2026-07-10).** A re-record can flub the OPENING and restart: 'Claude can help you cut cut. Claude can help you lower...'. The coarse 16kHz base.en pass MERGED/missed it; only the 48kHz WORD-LEVEL transcription + a fine per-20ms energy scan of the first ~4s exposed the doubled 'Claude...cut cut...Claude'. ALWAYS word-transcribe + energy-scan the opening and trim to the SECOND (real) take start. Multiple cut-cuts per recording are normal (SLASH had 3: start, mid-creep, mid-rank).
+
+## Levelling the VO is allowed; processing it is not
+
+"Raw only" means no cloning, no compression, no EQ, no effects — it does not mean
+shipping it quiet. Reel 78's VO sat at **−23.3 LUFS**, which reads as "too quiet" on
+a phone. ⛔ **Measure before boosting**: its true peak was already **−0.0 dBTP** (a
+23.5 dB crest factor — isolated transients far above the body of the voice), so a
+straight gain would have clipped. The safe move is gain plus a peak limiter that only
+touches those transients:
+
+    volume=11dB,alimiter=limit=0.88:attack=4:release=60:level=disabled
+
+That took it to −15.9 LUFS / −1.0 dBTP with the timbre intact. Always confirm the
+**duration is unchanged** afterwards, or every caption and scene onset drifts.

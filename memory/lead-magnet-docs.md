@@ -51,6 +51,47 @@ Each Claude reel's CTA promises a free doc ("comment KEYWORD and I'll send you t
   well-formed, 140 paras / 8 tables, ZERO em/en dashes, HTML-mirror screenshot eyeballed. Caption `CAROUSEL_caption.txt`
   (comment-first). See [[carousel-factory-log]] + [[sfx-root-timeline-trap]].
 
+- `JARVIS - The Day 1 Setup Guide.docx` (reel 64 JARVIS, keyword JARVIS, built 2026-07-18) — delivers the VO's
+  "comment Jarvis and I'll send you the day one setup guide". Part 1 = the BRAIN: Obsidian vault, Fireflies
+  meetings, Gmail SENT folder, plus STEP 4 the voice profile. Researched by 5 agents then hammered by 3
+  adversarial refuters: **33 of 65 claims needed correction**, so the doc ships walk-backs of the reel itself.
+  The load-bearing corrections: (1) NO route reads a whole vault, they all search (a 2k-note vault ~1.3M tokens
+  exceeds even the 1M ceiling); (2) "no code" holds for Fireflies + Gmail only, Obsidian needs a sideloaded
+  .mcpb or Node + JSON (+ a Python bridge on Windows); (3) **connecting the tools does NOT produce the voice** -
+  connectors give retrieval, voice is a separate step 4 (the single biggest misreading, now the caption's hook);
+  (4) the Obsidian step CANNOT use the Connectors screen at all (Anthropic requires public reachability, vaults
+  are on 127.0.0.1); (5) Gmail `from:me` is the documented operator, `in:sent` is undocumented, and the connector
+  DRAFTS BUT CANNOT SEND. Obsidian Route A = MCP Connector plugin (mcp-tools-istefox, unreviewed, 28 stars) ->
+  Download .mcpb -> Claude Desktop Settings > Extensions > Advanced > Extension Developer > Install Extension.
+  Route B = Local REST API plugin (2,661 stars, now ships its own /mcp/ server) + `mcp-remote@latest` in
+  claude_desktop_config.json. Step 4 = a 3-pass voice build (profile from 5 samples w/ XML tags + quote-before-
+  conclude, then persist as a SKILL, then a calibration loop against 3 held-back emails) + an always-on backstop
+  instruction because Skills only load when Claude judges them relevant. Build script `build_jarvis_doc.js` in
+  scratchpad — marker-driven ([TITLE]/[SECTION]/[BOX]/[CALLOUT]/[TABLE]/[HONEST]) with a **hard DASH GATE**;
+  reuse it. VERIFIED: XML well-formed, 314 paras / 15 tables, ZERO em/en dashes rendered. Caption
+  `JARVIS_caption.txt` (comment-first). Delivered to `Claude Reels/64 - JARVIS/`. See [[jarvis-factory-log]].
+
+- `SIMULATE - The Simulation Workflow.docx` (reel 65 SIMULATE, keyword SIMULATE, built 2026-07-18) — delivers the VO's
+  "I'll send you the full workflow and prompts for the simulation". A pure PROMPTING workflow (no tools, any plan,
+  all five steps pasted in ONE chat so the world model carries forward). **STEP 1 build the world** (cast + what each
+  group wants + environment + every assumption it is forced to invent, labelled + the 10 likeliest failure modes;
+  "do not evaluate the idea yet") → **STEP 2 play it out** (fixed steps, real numbers, consequences compound, "do not
+  rescue the idea", stop at the exact breaking step) → **STEP 3 run it 20 more times** varying only the flagged
+  assumptions, failures ranked by frequency AND by cost, anything breaking >25% of runs flagged structural not bad
+  luck → **STEP 4 one root cause, one change** (not a list; with its cost, what it does NOT fix, and the one number
+  to watch in 2 weeks) → **STEP 5 stress the fix** (re-run 20x: does the original mode vanish, what NEW mode is now
+  top, "is it better or just differently broken"). Then **MAKE IT HONEST** = the 5 anti-sycophancy lines that make the
+  whole thing work ("assume this idea fails, explain why before anything good"; "you are not helping me by being
+  encouraging, you are helping me by being right") + a guessing-vs-simulating cmp table + honest notes (assumptions
+  in = confident fantasy out; it does not know your local market; the FAILURE MODES are the reliable output, the
+  revenue numbers are the least reliable; calibrate it on a decision you already know the outcome of).
+  Build script `build_simulate_doc.js` in scratchpad — helper set rebuilt fresh (kicker/h1/body/bullet/promptBox/
+  callout/cmp/footer) with a **hard DASH GATE**. ⛔ GATE GOTCHA: write the dash chars as `String.fromCharCode(0x2014)`,
+  not as regex literals, or the gate trips on ITS OWN pattern when it scans `__filename` (cost me a build).
+  VERIFIED: XML well-formed (document.xml + footer1.xml), 8 tables, ZERO em/en dashes RENDERED, all key strings present.
+  Caption `SIMULATE_caption.txt` (comment-first). Delivered to `Claude Reels/65 - SIMULATE/`, cloud-verified via the
+  Drive MCP (non-zero fileSize on all 3). See [[reels/simulate-factory-log]].
+
 **STILL MISSING (offered to build):** BRAIN (reel 17 second brain), SWAP (reel 18 GLM, content ready in [[glm-swap-reel-and-setup]]: the settings.json env block), COUNCIL (scripted reel).
 
 ⚠️ Em-dash rule ([[no-em-dashes-in-copy]]): the DESIGN/SEO/SITE docs were built BEFORE the rule and still contain em dashes (—) in step labels etc.; BOOKS is the first fully em-dash-free doc. If Alex reuses the older three, grep + strip their "—" first.

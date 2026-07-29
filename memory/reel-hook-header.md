@@ -57,3 +57,60 @@ metadata:
 **⛔ IG FRAMING BALANCE — don't go top-heavy (Alex, 2026-06-22, on the Loops reel: "put the graphics down more, make the header slightly bigger and move it slightly down, the framing isn't good — improve the overall framing"):** the `Scene` wrapper's `translateY(-250px)` shoved every graphic into the UPPER THIRD and left the bottom half empty (top-heavy). Fix = a balanced 1080×1920 layout: **HEADER** in the eye-rest zone (`top ≈ 390`, fontSize **~76** — slightly bigger than the 68 default; bigger+lower reads better than small+high), **HERO GRAPHIC centered near frame-center** (reduced the Scene shift `-250 → -110`, graphic center ≈ y880–960), **CAPTIONS in the lower third** (`top ≈ 1250`, was 1175). Verify the hook frame ON MUTE: header top-third (below IG chrome ~top 13%), graphic dead-center, caption lower-third (above IG buttons ~bottom 18%), nothing crammed at the very top or floating over an empty bottom. When you move the graphic down, move captions down too so they still clear it (mind any bottom-anchored sub-label like a loop-counter). Likely applies to the whole backlog (shared Scene/HeroHeader pattern) — offer to propagate.
 
 **REFERENCE IMPL:** `ClaudeNightReel.tsx` `HeroHeader` (original) and `ClaudeCarouselReel.tsx` `HeroHeader` (added 2026-06-22). Build pattern: define `const HeroHeader` before the composition; render `<HeroHeader />` after the scenes, before `<Captions />`, inside the zoom `AbsoluteFill`. Ties to [[nateherk-style-reference]] (raycfu) + [[claude-reel-hook-library]] HOOK GATE + the [[claude-ai-reel-workflow]] engagement bar.
+
+---
+
+## ⛔⛔ I BUILT AN OBJECT HOOK THREE TIMES RUNNING — THE HOOK IS CHARACTER THEATRE (reel 66, 2026-07-19)
+> Alex, after the third rejected hook: *"the beginning scenes it's too static and not interesting and I
+> should see a Claude sprite since the beginning, like one with a funny costume. And the beginning needs
+> WAY MORE PATTERN INTERRUPT — there's no pattern interrupt for this video here........"*
+
+**This rule was already written above** ("the hook must STAR THE MASCOT CHARACTERS doing things, not just
+abstract objects") **and I did not apply it, three times:**
+1. a chalkboard reading $30,000 → a brown satchel → the same number (boring, monochrome);
+2. four identical shop phones in a tidy row, grids filling left to right (polite, symmetrical);
+3. a phone + a brass cash machine with its bin already overflowing (still just objects on a street).
+
+Every one was a well-lit OBJECT COMPOSITION. None had a character, a costume, or a joke. Each round I
+"fixed" the previous hook on the axis he had last named (colour, then symmetry, then mid-event staging)
+without ever questioning the FORM. **When the same element is rejected three times, the problem is the
+form, not the execution — stop iterating and change what kind of thing it is.**
+
+⭐ **PATTERN INTERRUPT ≠ a striking composition.** It is an ABSURDITY the viewer arrives in the middle of.
+The reliable generator: take the claim's joke and make it physical with the mascot in costume. Reel 66's
+line is "people get paid a fortune to do nothing" → Claude in holiday gear, sunglasses and a drink, being
+buried by a cash avalanche he does not even look up at. Character + costume + absurdity at frame 0.
+
+⭐ It also answers "too static" without reintroducing chaos: ONE enormous continuous mover (the money) with
+a still character as the anchor satisfies both [[reel-motion-hierarchy]] and the scroll-stop bar.
+
+## ⭐⭐⭐ YOU CANNOT INTERRUPT A PATTERN YOU NEVER ESTABLISHED (reel 66, four rejected hooks)
+Alex rejected FOUR hooks in a row for having "no pattern interrupt", the last one being genuinely
+well-crafted: Claude in sunglasses and a cocktail, buried to the waist, banknotes raining across the whole
+panel, with four escalating beats inside it (a sack hurled from a shop door, a beach parasol popping open,
+the pile surging, the board striking $30,000). His words: *"there isn't right now, it's just money falling
+from sky THROUGHOUT here."*
+
+**The structural error, common to all four: they OPEN AT MAXIMUM.** Already raining, already buried,
+already overflowing. With no "before", spectacle is not an interrupt — it is a CONSTANT, and **a constant
+becomes wallpaper in about a second however good it looks.** Frame 0 and frame 166 were the same image.
+
+⚠️ Note what he never said across four rounds: not ugly, not unclear, not badly drawn. The craft was fine
+every time. **The structure was wrong, and I kept fixing the surface** (colour, then symmetry, then
+mid-event staging, then adding beats). Four rounds of surface fixes on a structural fault.
+
+**A pattern interrupt is a DISCONTINUITY, and it needs three parts:**
+1. **~0.6-1.0s of ORDINARY** — a legible, unremarkable, *deliberately unspectacular* state that sets an
+   expectation. This is the part I kept skipping because it feels like "wasting" the opening second.
+2. **A hard, fast VIOLATION of it** — one event, loud, ~f18-30. Not a build; a break.
+3. **A visibly DIFFERENT after-state** — if the frame looks the same either side, nothing was interrupted.
+
+**Diagnostic before building any hook:** put frame 0 and the last frame side by side. If they read as the
+same image, there is no interrupt — no amount of internal beats will supply one.
+
+Mechanisms that actually produce discontinuity: violation of the mundane · violent arrival from outside
+frame · register/genre shift (the viewer realises they misread what they were looking at) · direct address
+(the character notices the viewer) · frame violation · scale violation.
+
+Pairs with [[reel-motion-hierarchy]] (sequential events ≠ an interrupt; both are needed) and the
+character-theatre rule above.

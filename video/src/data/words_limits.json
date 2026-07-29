@@ -1,0 +1,687 @@
+[
+ {
+  "word": "If",
+  "start": 0.0,
+  "end": 0.22
+ },
+ {
+  "word": "your",
+  "start": 0.22,
+  "end": 0.34
+ },
+ {
+  "word": "Claude",
+  "start": 0.34,
+  "end": 0.56
+ },
+ {
+  "word": "code",
+  "start": 0.56,
+  "end": 0.76
+ },
+ {
+  "word": "keeps",
+  "start": 0.76,
+  "end": 1.04
+ },
+ {
+  "word": "hitting",
+  "start": 1.04,
+  "end": 1.38
+ },
+ {
+  "word": "usage",
+  "start": 1.38,
+  "end": 1.6
+ },
+ {
+  "word": "limits,",
+  "start": 1.6,
+  "end": 1.84
+ },
+ {
+  "word": "here",
+  "start": 2.08,
+  "end": 2.12
+ },
+ {
+  "word": "are",
+  "start": 2.12,
+  "end": 2.28
+ },
+ {
+  "word": "three",
+  "start": 2.28,
+  "end": 2.48
+ },
+ {
+  "word": "tricks",
+  "start": 2.48,
+  "end": 2.74
+ },
+ {
+  "word": "to",
+  "start": 2.74,
+  "end": 2.9
+ },
+ {
+  "word": "make",
+  "start": 2.9,
+  "end": 3.0
+ },
+ {
+  "word": "it",
+  "start": 3.0,
+  "end": 3.1
+ },
+ {
+  "word": "run",
+  "start": 3.1,
+  "end": 3.26
+ },
+ {
+  "word": "way",
+  "start": 3.26,
+  "end": 3.5
+ },
+ {
+  "word": "more",
+  "start": 3.5,
+  "end": 3.7
+ },
+ {
+  "word": "efficiently.",
+  "start": 3.7,
+  "end": 4.02
+ },
+ {
+  "word": "First,",
+  "start": 4.42,
+  "end": 4.58
+ },
+ {
+  "word": "run",
+  "start": 4.76,
+  "end": 4.84
+ },
+ {
+  "word": "slash",
+  "start": 4.84,
+  "end": 5.06
+ },
+ {
+  "word": "compact",
+  "start": 5.06,
+  "end": 5.46
+ },
+ {
+  "word": "whenever",
+  "start": 5.46,
+  "end": 5.72
+ },
+ {
+  "word": "your",
+  "start": 5.72,
+  "end": 5.94
+ },
+ {
+  "word": "chat",
+  "start": 5.94,
+  "end": 6.12
+ },
+ {
+  "word": "gets",
+  "start": 6.12,
+  "end": 6.28
+ },
+ {
+  "word": "long.",
+  "start": 6.28,
+  "end": 6.58
+ },
+ {
+  "word": "Claude",
+  "start": 7.06,
+  "end": 7.1
+ },
+ {
+  "word": "rereads",
+  "start": 7.1,
+  "end": 7.56
+ },
+ {
+  "word": "your",
+  "start": 7.56,
+  "end": 7.72
+ },
+ {
+  "word": "entire",
+  "start": 7.72,
+  "end": 8.08
+ },
+ {
+  "word": "history",
+  "start": 8.08,
+  "end": 8.54
+ },
+ {
+  "word": "on",
+  "start": 8.54,
+  "end": 8.68
+ },
+ {
+  "word": "every",
+  "start": 8.68,
+  "end": 8.98
+ },
+ {
+  "word": "message,",
+  "start": 8.98,
+  "end": 9.3
+ },
+ {
+  "word": "so",
+  "start": 9.42,
+  "end": 9.52
+ },
+ {
+  "word": "compact",
+  "start": 9.52,
+  "end": 9.94
+ },
+ {
+  "word": "squashes",
+  "start": 9.94,
+  "end": 10.46
+ },
+ {
+  "word": "it",
+  "start": 10.46,
+  "end": 10.62
+ },
+ {
+  "word": "all",
+  "start": 10.62,
+  "end": 10.74
+ },
+ {
+  "word": "into",
+  "start": 10.74,
+  "end": 10.92
+ },
+ {
+  "word": "a",
+  "start": 10.92,
+  "end": 11.06
+ },
+ {
+  "word": "tight",
+  "start": 11.06,
+  "end": 11.24
+ },
+ {
+  "word": "summary",
+  "start": 11.24,
+  "end": 11.48
+ },
+ {
+  "word": "and",
+  "start": 11.48,
+  "end": 11.66
+ },
+ {
+  "word": "you",
+  "start": 11.66,
+  "end": 11.78
+ },
+ {
+  "word": "keep",
+  "start": 11.78,
+  "end": 11.94
+ },
+ {
+  "word": "going",
+  "start": 11.94,
+  "end": 12.16
+ },
+ {
+  "word": "without",
+  "start": 12.16,
+  "end": 12.38
+ },
+ {
+  "word": "losing",
+  "start": 12.38,
+  "end": 12.58
+ },
+ {
+  "word": "the",
+  "start": 12.58,
+  "end": 12.76
+ },
+ {
+  "word": "important",
+  "start": 12.76,
+  "end": 13.0
+ },
+ {
+  "word": "part.",
+  "start": 13.0,
+  "end": 13.32
+ },
+ {
+  "word": "Second,",
+  "start": 13.7,
+  "end": 13.96
+ },
+ {
+  "word": "switch",
+  "start": 14.2,
+  "end": 14.32
+ },
+ {
+  "word": "to",
+  "start": 14.32,
+  "end": 14.52
+ },
+ {
+  "word": "slash",
+  "start": 14.52,
+  "end": 14.76
+ },
+ {
+  "word": "model",
+  "start": 14.76,
+  "end": 15.06
+ },
+ {
+  "word": "opus",
+  "start": 15.06,
+  "end": 15.34
+ },
+ {
+  "word": "plan.",
+  "start": 15.34,
+  "end": 15.54
+ },
+ {
+  "word": "That",
+  "start": 15.82,
+  "end": 16.04
+ },
+ {
+  "word": "puts",
+  "start": 16.04,
+  "end": 16.22
+ },
+ {
+  "word": "opus",
+  "start": 16.22,
+  "end": 16.48
+ },
+ {
+  "word": "5",
+  "start": 16.48,
+  "end": 16.62
+ },
+ {
+  "word": "on",
+  "start": 16.62,
+  "end": 16.78
+ },
+ {
+  "word": "planning",
+  "start": 16.78,
+  "end": 17.06
+ },
+ {
+  "word": "and",
+  "start": 17.06,
+  "end": 17.26
+ },
+ {
+  "word": "sonnet",
+  "start": 17.26,
+  "end": 17.48
+ },
+ {
+  "word": "5",
+  "start": 17.48,
+  "end": 17.64
+ },
+ {
+  "word": "on",
+  "start": 17.64,
+  "end": 17.78
+ },
+ {
+  "word": "everything",
+  "start": 17.78,
+  "end": 18.02
+ },
+ {
+  "word": "else.",
+  "start": 18.02,
+  "end": 18.28
+ },
+ {
+  "word": "Opus",
+  "start": 18.54,
+  "end": 18.68
+ },
+ {
+  "word": "burns",
+  "start": 18.68,
+  "end": 18.88
+ },
+ {
+  "word": "tokens",
+  "start": 18.88,
+  "end": 19.18
+ },
+ {
+  "word": "fast,",
+  "start": 19.18,
+  "end": 19.44
+ },
+ {
+  "word": "and",
+  "start": 19.6,
+  "end": 19.68
+ },
+ {
+  "word": "for",
+  "start": 19.68,
+  "end": 19.8
+ },
+ {
+  "word": "actual",
+  "start": 19.8,
+  "end": 20.1
+ },
+ {
+  "word": "coding,",
+  "start": 20.1,
+  "end": 20.4
+ },
+ {
+  "word": "sonnet",
+  "start": 20.54,
+  "end": 20.7
+ },
+ {
+  "word": "5",
+  "start": 20.7,
+  "end": 20.84
+ },
+ {
+  "word": "is",
+  "start": 20.84,
+  "end": 20.96
+ },
+ {
+  "word": "more",
+  "start": 20.96,
+  "end": 21.1
+ },
+ {
+  "word": "than",
+  "start": 21.1,
+  "end": 21.26
+ },
+ {
+  "word": "enough.",
+  "start": 21.26,
+  "end": 21.5
+ },
+ {
+  "word": "And",
+  "start": 21.9,
+  "end": 22.02
+ },
+ {
+  "word": "third,",
+  "start": 22.02,
+  "end": 22.16
+ },
+ {
+  "word": "before",
+  "start": 22.28,
+  "end": 22.38
+ },
+ {
+  "word": "any",
+  "start": 22.38,
+  "end": 22.6
+ },
+ {
+  "word": "complex",
+  "start": 22.6,
+  "end": 22.94
+ },
+ {
+  "word": "task,",
+  "start": 22.94,
+  "end": 23.28
+ },
+ {
+  "word": "add",
+  "start": 23.34,
+  "end": 23.48
+ },
+ {
+  "word": "the",
+  "start": 23.48,
+  "end": 23.58
+ },
+ {
+  "word": "word",
+  "start": 23.58,
+  "end": 23.72
+ },
+ {
+  "word": "ultrathink",
+  "start": 23.72,
+  "end": 24.16
+ },
+ {
+  "word": "to",
+  "start": 24.16,
+  "end": 24.32
+ },
+ {
+  "word": "the",
+  "start": 24.32,
+  "end": 24.36
+ },
+ {
+  "word": "end",
+  "start": 24.36,
+  "end": 24.46
+ },
+ {
+  "word": "of",
+  "start": 24.46,
+  "end": 24.54
+ },
+ {
+  "word": "your",
+  "start": 24.54,
+  "end": 24.64
+ },
+ {
+  "word": "prompt.",
+  "start": 24.64,
+  "end": 24.84
+ },
+ {
+  "word": "It",
+  "start": 25.2,
+  "end": 25.34
+ },
+ {
+  "word": "forces",
+  "start": 25.34,
+  "end": 25.52
+ },
+ {
+  "word": "Claude",
+  "start": 25.52,
+  "end": 25.78
+ },
+ {
+  "word": "to",
+  "start": 25.78,
+  "end": 25.9
+ },
+ {
+  "word": "think",
+  "start": 25.9,
+  "end": 26.02
+ },
+ {
+  "word": "through",
+  "start": 26.02,
+  "end": 26.16
+ },
+ {
+  "word": "the",
+  "start": 26.16,
+  "end": 26.28
+ },
+ {
+  "word": "whole",
+  "start": 26.28,
+  "end": 26.5
+ },
+ {
+  "word": "problem",
+  "start": 26.5,
+  "end": 26.74
+ },
+ {
+  "word": "through",
+  "start": 26.74,
+  "end": 26.98
+ },
+ {
+  "word": "before",
+  "start": 26.98,
+  "end": 27.18
+ },
+ {
+  "word": "it",
+  "start": 27.18,
+  "end": 27.32
+ },
+ {
+  "word": "writes",
+  "start": 27.32,
+  "end": 27.42
+ },
+ {
+  "word": "a",
+  "start": 27.42,
+  "end": 27.56
+ },
+ {
+  "word": "single",
+  "start": 27.56,
+  "end": 27.8
+ },
+ {
+  "word": "line.",
+  "start": 27.8,
+  "end": 28.1
+ },
+ {
+  "word": "So",
+  "start": 28.1,
+  "end": 28.62
+ },
+ {
+  "word": "you",
+  "start": 28.62,
+  "end": 28.68
+ },
+ {
+  "word": "stop",
+  "start": 28.68,
+  "end": 28.84
+ },
+ {
+  "word": "burning",
+  "start": 28.84,
+  "end": 29.08
+ },
+ {
+  "word": "10",
+  "start": 29.08,
+  "end": 29.36
+ },
+ {
+  "word": "more",
+  "start": 29.36,
+  "end": 29.52
+ },
+ {
+  "word": "messages",
+  "start": 29.52,
+  "end": 29.82
+ },
+ {
+  "word": "fixing",
+  "start": 29.82,
+  "end": 30.08
+ },
+ {
+  "word": "what",
+  "start": 30.08,
+  "end": 30.34
+ },
+ {
+  "word": "it",
+  "start": 30.34,
+  "end": 30.44
+ },
+ {
+  "word": "got",
+  "start": 30.44,
+  "end": 30.54
+ },
+ {
+  "word": "wrong.",
+  "start": 30.54,
+  "end": 30.82
+ },
+ {
+  "word": "For",
+  "start": 31.12,
+  "end": 31.24
+ },
+ {
+  "word": "the",
+  "start": 31.24,
+  "end": 31.36
+ },
+ {
+  "word": "full",
+  "start": 31.36,
+  "end": 31.5
+ },
+ {
+  "word": "list,",
+  "start": 31.5,
+  "end": 31.74
+ },
+ {
+  "word": "comment",
+  "start": 31.86,
+  "end": 32.0
+ },
+ {
+  "word": "Claude.",
+  "start": 32.0,
+  "end": 32.22
+ }
+]

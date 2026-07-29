@@ -1,0 +1,11 @@
+{
+  "name": "sfx-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MCP server for reel SFX — Openverse (no key) by default, Freesound optional",
+  "type": "module",
+  "bin": { "sfx-mcp": "server.js" },
+  "main": "server.js",
+  "license": "MIT",
+  "dependencies": { "@modelcontextprotocol/sdk": "^1.25.3" }
+}

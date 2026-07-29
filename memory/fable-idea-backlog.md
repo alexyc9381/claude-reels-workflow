@@ -134,6 +134,18 @@ video model Claude doesn't run, a build tutorial the gate forbids. **A comp's nu
 it does not tell you they reacted to the part you can keep.** And a fresh comp on a stale reveal means they reacted
 to something other than novelty — ask what. *Transgression is not novelty; recognition is not discovery.*
 
+---
+# ⛔ 2026-07-16 — SWARM KILLED (assistant-proposed in a brainstorm; 5-agent Stage-0 autopsy, unanimous)
+Premise floated: "one Claude spawns many parallel agents to attack one job; they verify each other." Both prosecutor agents returned **KILL**; full output in `tasks/w9r7zxaw7.output`.
+- **R10 RERUN (terminal):** the multi-agent-swarm / agents-debating reveal is a **2023** demo (AutoGPT + BabyAGI Mar-Apr 2023, MIT multi-agent-debate May 2023, AutoGen/MetaGPT/ChatDev). ~3 yrs stale, unfixable.
+- **R9:** a swarm is a MECHANISM, not a first-order task — no money receipt, no screenshot-able artifact. Any reframe that adds a real artifact demotes the swarm to invisible plumbing (strip-test: if the reel survives without the word "swarm," the swarm was never the point).
+- **R1/R4/R5:** the only honest on-screen proof is a terminal of parallel agent panes = process, not a decodable payoff.
+- **INTERNAL COLLISION — quadruple, plus TWO already shipped:** FACTORY-37 (planner→N-executors) · BALL-52 (the 20-at-once loop, shipped) · ARENA-35 (agents verify/bracket) · CREW-33 (multi-agent cooperation) · ⛔ **`ClaudeSwarmReel.tsx` already BUILT** (swarm→conveyor eats a ticket backlog, Alex's VO) · ⛔ **GRID-47** (lead spawns 4 → 5-pane grid ships 5 PRs). **The swarm lane is CLOSED — shipped twice.**
+- Surviving reframes and why each still fails FOR ALEX: ROSTER (fill a CRM w/ verified contacts) = collides with **LEADS-20**. SHELVES (fill a whole store's listings live, spec-verified) = the only clean-vs-catalogue one (STORE-26 was *selling* skill files, different) but is an e-comm-seller stake, not universal-consumer → fights the 07-12 mandate (prioritize photos/inbox/bills/life-documents over raycfu builder premises that keep failing R8). 50-repo PR swarm = GRID-47 scaled up + narrow R8.
+⛔ **Do not resurrect the swarm/parallel-agents framing.** If the live-filling-grid VISUAL is wanted, it re-enters at A1 as a *task* reel (SHELVES-class) with its own universal-TAM comp, never as "a swarm."
+⭐ LESSON re-confirmed: when a brainstormed idea has "nothing left to reveal," it's usually a reveal the audience already owns — here, one Alex already SHIPPED. Comps ship; brainstormed mechanisms burn tokens (this one burned ~303k to reach a kill a 2-minute grep of Root.tsx for `SwarmReel`/`GRID` would have flagged).
+
+---
 ⚠️ **The honest counter-risk (the head judge flagged it against itself):** a gate that kills everything is
 indistinguishable from a broken one. The defense is that these are four DIFFERENT independently-checkable mechanisms,
 not one rule fired four times, and CALLBACK cleared this same bar cleanly on 07-15 with zero overrides. **If the NEXT

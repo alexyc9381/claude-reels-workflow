@@ -110,3 +110,10 @@ what must be on screen.
 - [`README.md`](README.md) — the subsystem overview.
 - memory: `reel-storyboard-process` (Stage 6), `reel-chassis-cinematic-not-abstract`, `reel-motion-hierarchy`,
   `reel-multishot-structure`, `dopamine-ladder`, `reel-winning-formula`.
+
+## ⛔ Scene 0 is authored to a separate spec → [`../docs/THE-OPEN.md`](../docs/THE-OPEN.md)
+
+A board whose scene 0 is a single establishing wide is **void**, regardless of how well the
+rest of it scores. The open needs ≥ 3 hard-cut shots in the first 5s, a bright and populated
+frame 0, and a transient on every cut. Author it against `docs/THE-OPEN.md` and carry that
+doc's checklist into the board's own gate.

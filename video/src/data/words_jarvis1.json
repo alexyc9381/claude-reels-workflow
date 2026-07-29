@@ -1,0 +1,1032 @@
+[
+ {
+  "start": 0,
+  "end": 0.05,
+  "word": "I"
+ },
+ {
+  "start": 0.02,
+  "end": 0.2,
+  "word": "turned"
+ },
+ {
+  "start": 0.2,
+  "end": 0.44,
+  "word": "Claude"
+ },
+ {
+  "start": 0.44,
+  "end": 0.62,
+  "word": "into"
+ },
+ {
+  "start": 0.62,
+  "end": 0.82,
+  "word": "Iron"
+ },
+ {
+  "start": 0.82,
+  "end": 1.08,
+  "word": "Man's"
+ },
+ {
+  "start": 1.08,
+  "end": 1.32,
+  "word": "Jarvis"
+ },
+ {
+  "start": 1.32,
+  "end": 1.66,
+  "word": "without"
+ },
+ {
+  "start": 1.66,
+  "end": 1.9,
+  "word": "writing"
+ },
+ {
+  "start": 1.9,
+  "end": 2.06,
+  "word": "a"
+ },
+ {
+  "start": 2.06,
+  "end": 2.3,
+  "word": "single"
+ },
+ {
+  "start": 2.3,
+  "end": 2.52,
+  "word": "line"
+ },
+ {
+  "start": 2.52,
+  "end": 2.64,
+  "word": "of"
+ },
+ {
+  "start": 2.64,
+  "end": 2.92,
+  "word": "code."
+ },
+ {
+  "start": 3.18,
+  "end": 3.24,
+  "word": "This"
+ },
+ {
+  "start": 3.24,
+  "end": 3.44,
+  "word": "is"
+ },
+ {
+  "start": 3.44,
+  "end": 3.52,
+  "word": "part"
+ },
+ {
+  "start": 3.52,
+  "end": 3.76,
+  "word": "one,"
+ },
+ {
+  "start": 3.88,
+  "end": 3.9,
+  "word": "and"
+ },
+ {
+  "start": 3.9,
+  "end": 4.02,
+  "word": "by"
+ },
+ {
+  "start": 4.02,
+  "end": 4.14,
+  "word": "the"
+ },
+ {
+  "start": 4.14,
+  "end": 4.28,
+  "word": "end"
+ },
+ {
+  "start": 4.28,
+  "end": 4.38,
+  "word": "it"
+ },
+ {
+  "start": 4.38,
+  "end": 4.5,
+  "word": "runs"
+ },
+ {
+  "start": 4.5,
+  "end": 4.66,
+  "word": "my"
+ },
+ {
+  "start": 4.66,
+  "end": 4.84,
+  "word": "whole"
+ },
+ {
+  "start": 4.84,
+  "end": 5.08,
+  "word": "morning"
+ },
+ {
+  "start": 5.08,
+  "end": 5.28,
+  "word": "before"
+ },
+ {
+  "start": 5.28,
+  "end": 5.46,
+  "word": "I'm"
+ },
+ {
+  "start": 5.46,
+  "end": 5.66,
+  "word": "awake."
+ },
+ {
+  "start": 6.04,
+  "end": 6.06,
+  "word": "Part"
+ },
+ {
+  "start": 6.06,
+  "end": 6.2,
+  "word": "one"
+ },
+ {
+  "start": 6.2,
+  "end": 6.3,
+  "word": "of"
+ },
+ {
+  "start": 6.3,
+  "end": 6.4,
+  "word": "the"
+ },
+ {
+  "start": 6.4,
+  "end": 6.56,
+  "word": "setup"
+ },
+ {
+  "start": 6.56,
+  "end": 6.76,
+  "word": "is"
+ },
+ {
+  "start": 6.76,
+  "end": 6.9,
+  "word": "the"
+ },
+ {
+  "start": 6.9,
+  "end": 7.08,
+  "word": "brain."
+ },
+ {
+  "start": 7.54,
+  "end": 7.64,
+  "word": "First"
+ },
+ {
+  "start": 7.64,
+  "end": 8.12,
+  "word": "obsidian,"
+ },
+ {
+  "start": 8.26,
+  "end": 8.36,
+  "word": "your"
+ },
+ {
+  "start": 8.36,
+  "end": 8.58,
+  "word": "whole"
+ },
+ {
+  "start": 8.58,
+  "end": 8.78,
+  "word": "vault."
+ },
+ {
+  "start": 9.14,
+  "end": 9.3,
+  "word": "Every"
+ },
+ {
+  "start": 9.3,
+  "end": 9.54,
+  "word": "note,"
+ },
+ {
+  "start": 9.7,
+  "end": 9.84,
+  "word": "every"
+ },
+ {
+  "start": 9.84,
+  "end": 10.4,
+  "word": "half-finished"
+ },
+ {
+  "start": 10.4,
+  "end": 10.74,
+  "word": "idea"
+ },
+ {
+  "start": 10.74,
+  "end": 10.9,
+  "word": "you"
+ },
+ {
+  "start": 10.9,
+  "end": 11.1,
+  "word": "typed"
+ },
+ {
+  "start": 11.1,
+  "end": 11.24,
+  "word": "at"
+ },
+ {
+  "start": 11.24,
+  "end": 11.58,
+  "word": "2am"
+ },
+ {
+  "start": 11.58,
+  "end": 11.82,
+  "word": "and"
+ },
+ {
+  "start": 11.82,
+  "end": 12.04,
+  "word": "forgot"
+ },
+ {
+  "start": 12.04,
+  "end": 12.28,
+  "word": "about,"
+ },
+ {
+  "start": 12.38,
+  "end": 12.44,
+  "word": "it's"
+ },
+ {
+  "start": 12.44,
+  "end": 12.62,
+  "word": "read"
+ },
+ {
+  "start": 12.62,
+  "end": 12.86,
+  "word": "all"
+ },
+ {
+  "start": 12.86,
+  "end": 12.96,
+  "word": "of"
+ },
+ {
+  "start": 12.96,
+  "end": 13.14,
+  "word": "it."
+ },
+ {
+  "start": 13.36,
+  "end": 13.54,
+  "word": "Then"
+ },
+ {
+  "start": 13.54,
+  "end": 13.98,
+  "word": "fireflies,"
+ },
+ {
+  "start": 14.24,
+  "end": 14.42,
+  "word": "every"
+ },
+ {
+  "start": 14.42,
+  "end": 14.62,
+  "word": "meeting"
+ },
+ {
+  "start": 14.62,
+  "end": 14.82,
+  "word": "you've"
+ },
+ {
+  "start": 14.82,
+  "end": 14.98,
+  "word": "sat"
+ },
+ {
+  "start": 14.98,
+  "end": 15.16,
+  "word": "in"
+ },
+ {
+  "start": 15.16,
+  "end": 15.64,
+  "word": "transcribed"
+ },
+ {
+  "start": 15.64,
+  "end": 15.84,
+  "word": "so"
+ },
+ {
+  "start": 15.84,
+  "end": 15.94,
+  "word": "it"
+ },
+ {
+  "start": 15.94,
+  "end": 16.1,
+  "word": "knows"
+ },
+ {
+  "start": 16.1,
+  "end": 16.52,
+  "word": "everything"
+ },
+ {
+  "start": 16.52,
+  "end": 16.76,
+  "word": "you"
+ },
+ {
+  "start": 16.76,
+  "end": 16.94,
+  "word": "said"
+ },
+ {
+  "start": 16.94,
+  "end": 17.18,
+  "word": "you'd"
+ },
+ {
+  "start": 17.18,
+  "end": 17.32,
+  "word": "do"
+ },
+ {
+  "start": 17.32,
+  "end": 17.48,
+  "word": "and"
+ },
+ {
+  "start": 17.48,
+  "end": 17.66,
+  "word": "never"
+ },
+ {
+  "start": 17.66,
+  "end": 17.9,
+  "word": "did."
+ },
+ {
+  "start": 18.22,
+  "end": 18.38,
+  "word": "Then"
+ },
+ {
+  "start": 18.38,
+  "end": 18.62,
+  "word": "Gmail,"
+ },
+ {
+  "start": 18.86,
+  "end": 18.96,
+  "word": "not"
+ },
+ {
+  "start": 18.96,
+  "end": 19.06,
+  "word": "your"
+ },
+ {
+  "start": 19.06,
+  "end": 19.3,
+  "word": "inbox,"
+ },
+ {
+  "start": 19.52,
+  "end": 19.68,
+  "word": "everyone"
+ },
+ {
+  "start": 19.68,
+  "end": 19.92,
+  "word": "does"
+ },
+ {
+  "start": 19.92,
+  "end": 20.18,
+  "word": "that."
+ },
+ {
+  "start": 20.44,
+  "end": 20.6,
+  "word": "Your"
+ },
+ {
+  "start": 20.6,
+  "end": 20.87,
+  "word": "sent"
+ },
+ {
+  "start": 20.87,
+  "end": 21.2,
+  "word": "folder,"
+ },
+ {
+  "start": 21.34,
+  "end": 21.52,
+  "word": "which"
+ },
+ {
+  "start": 21.52,
+  "end": 21.68,
+  "word": "means"
+ },
+ {
+  "start": 21.68,
+  "end": 21.8,
+  "word": "it"
+ },
+ {
+  "start": 21.8,
+  "end": 21.96,
+  "word": "now"
+ },
+ {
+  "start": 21.96,
+  "end": 22.14,
+  "word": "knows"
+ },
+ {
+  "start": 22.14,
+  "end": 22.3,
+  "word": "how"
+ },
+ {
+  "start": 22.3,
+  "end": 22.4,
+  "word": "you"
+ },
+ {
+  "start": 22.4,
+  "end": 22.72,
+  "word": "actually"
+ },
+ {
+  "start": 22.72,
+  "end": 22.96,
+  "word": "talk."
+ },
+ {
+  "start": 23.2,
+  "end": 23.3,
+  "word": "But"
+ },
+ {
+  "start": 23.3,
+  "end": 23.46,
+  "word": "here's"
+ },
+ {
+  "start": 23.46,
+  "end": 23.56,
+  "word": "the"
+ },
+ {
+  "start": 23.56,
+  "end": 23.66,
+  "word": "part"
+ },
+ {
+  "start": 23.66,
+  "end": 23.92,
+  "word": "everyone"
+ },
+ {
+  "start": 23.92,
+  "end": 24.18,
+  "word": "misses."
+ },
+ {
+  "start": 24.38,
+  "end": 24.52,
+  "word": "Ask"
+ },
+ {
+  "start": 24.52,
+  "end": 24.66,
+  "word": "it"
+ },
+ {
+  "start": 24.66,
+  "end": 24.8,
+  "word": "something"
+ },
+ {
+  "start": 24.8,
+  "end": 25.06,
+  "word": "now"
+ },
+ {
+  "start": 25.06,
+  "end": 25.16,
+  "word": "and"
+ },
+ {
+  "start": 25.16,
+  "end": 25.28,
+  "word": "it"
+ },
+ {
+  "start": 25.28,
+  "end": 25.5,
+  "word": "doesn't"
+ },
+ {
+  "start": 25.5,
+  "end": 25.74,
+  "word": "answer"
+ },
+ {
+  "start": 25.74,
+  "end": 25.9,
+  "word": "like"
+ },
+ {
+  "start": 25.9,
+  "end": 26.12,
+  "word": "Claude,"
+ },
+ {
+  "start": 26.26,
+  "end": 26.32,
+  "word": "it"
+ },
+ {
+  "start": 26.32,
+  "end": 26.5,
+  "word": "answers"
+ },
+ {
+  "start": 26.5,
+  "end": 26.74,
+  "word": "like"
+ },
+ {
+  "start": 26.74,
+  "end": 27.0,
+  "word": "you."
+ },
+ {
+  "start": 27.0,
+  "end": 27.5,
+  "word": "Your"
+ },
+ {
+  "start": 27.5,
+  "end": 27.74,
+  "word": "words,"
+ },
+ {
+  "start": 27.96,
+  "end": 28.02,
+  "word": "your"
+ },
+ {
+  "start": 28.02,
+  "end": 28.3,
+  "word": "opinions,"
+ },
+ {
+  "start": 28.46,
+  "end": 28.66,
+  "word": "pulled"
+ },
+ {
+  "start": 28.66,
+  "end": 28.78,
+  "word": "out"
+ },
+ {
+  "start": 28.78,
+  "end": 28.88,
+  "word": "of"
+ },
+ {
+  "start": 28.88,
+  "end": 29.06,
+  "word": "stuff"
+ },
+ {
+  "start": 29.06,
+  "end": 29.26,
+  "word": "you"
+ },
+ {
+  "start": 29.26,
+  "end": 29.5,
+  "word": "forgot"
+ },
+ {
+  "start": 29.5,
+  "end": 29.64,
+  "word": "you"
+ },
+ {
+  "start": 29.64,
+  "end": 29.84,
+  "word": "wrote."
+ },
+ {
+  "start": 30.22,
+  "end": 30.26,
+  "word": "I"
+ },
+ {
+  "start": 30.26,
+  "end": 30.48,
+  "word": "asked"
+ },
+ {
+  "start": 30.48,
+  "end": 30.64,
+  "word": "it"
+ },
+ {
+  "start": 30.64,
+  "end": 30.76,
+  "word": "what"
+ },
+ {
+  "start": 30.76,
+  "end": 30.86,
+  "word": "I"
+ },
+ {
+  "start": 30.86,
+  "end": 31.02,
+  "word": "thought"
+ },
+ {
+  "start": 31.02,
+  "end": 31.22,
+  "word": "about"
+ },
+ {
+  "start": 31.22,
+  "end": 31.52,
+  "word": "pricing"
+ },
+ {
+  "start": 31.52,
+  "end": 31.74,
+  "word": "and"
+ },
+ {
+  "start": 31.74,
+  "end": 31.82,
+  "word": "it"
+ },
+ {
+  "start": 31.82,
+  "end": 32.0,
+  "word": "quoted"
+ },
+ {
+  "start": 32.0,
+  "end": 32.24,
+  "word": "a"
+ },
+ {
+  "start": 32.24,
+  "end": 32.38,
+  "word": "note"
+ },
+ {
+  "start": 32.38,
+  "end": 32.64,
+  "word": "I"
+ },
+ {
+  "start": 32.64,
+  "end": 32.86,
+  "word": "made"
+ },
+ {
+  "start": 32.86,
+  "end": 33.19,
+  "word": "8"
+ },
+ {
+  "start": 33.19,
+  "end": 33.45,
+  "word": "months"
+ },
+ {
+  "start": 33.45,
+  "end": 33.77,
+  "word": "ago."
+ },
+ {
+  "start": 34.09,
+  "end": 34.21,
+  "word": "I"
+ },
+ {
+  "start": 34.21,
+  "end": 34.36,
+  "word": "don't"
+ },
+ {
+  "start": 34.36,
+  "end": 34.54,
+  "word": "remember"
+ },
+ {
+  "start": 34.54,
+  "end": 34.82,
+  "word": "writing"
+ },
+ {
+  "start": 34.82,
+  "end": 35.06,
+  "word": "it."
+ },
+ {
+  "start": 35.3,
+  "end": 35.4,
+  "word": "And"
+ },
+ {
+  "start": 35.4,
+  "end": 35.58,
+  "word": "now"
+ },
+ {
+  "start": 35.58,
+  "end": 35.72,
+  "word": "when"
+ },
+ {
+  "start": 35.72,
+  "end": 35.8,
+  "word": "it"
+ },
+ {
+  "start": 35.8,
+  "end": 35.92,
+  "word": "writes"
+ },
+ {
+  "start": 35.92,
+  "end": 36.1,
+  "word": "something"
+ },
+ {
+  "start": 36.1,
+  "end": 36.34,
+  "word": "for"
+ },
+ {
+  "start": 36.34,
+  "end": 36.46,
+  "word": "me,"
+ },
+ {
+  "start": 36.58,
+  "end": 36.62,
+  "word": "it"
+ },
+ {
+  "start": 36.62,
+  "end": 36.94,
+  "word": "doesn't"
+ },
+ {
+  "start": 36.94,
+  "end": 37.12,
+  "word": "sound"
+ },
+ {
+  "start": 37.12,
+  "end": 37.26,
+  "word": "like"
+ },
+ {
+  "start": 37.26,
+  "end": 37.46,
+  "word": "AI,"
+ },
+ {
+  "start": 37.72,
+  "end": 37.8,
+  "word": "it"
+ },
+ {
+  "start": 37.8,
+  "end": 37.94,
+  "word": "sounds"
+ },
+ {
+  "start": 37.94,
+  "end": 38.12,
+  "word": "like"
+ },
+ {
+  "start": 38.12,
+  "end": 38.34,
+  "word": "me."
+ },
+ {
+  "start": 38.62,
+  "end": 38.84,
+  "word": "Because"
+ },
+ {
+  "start": 38.84,
+  "end": 39.04,
+  "word": "it's"
+ },
+ {
+  "start": 39.04,
+  "end": 39.16,
+  "word": "got"
+ },
+ {
+  "start": 39.16,
+  "end": 39.36,
+  "word": "years"
+ },
+ {
+  "start": 39.36,
+  "end": 39.5,
+  "word": "of"
+ },
+ {
+  "start": 39.5,
+  "end": 39.6,
+  "word": "me"
+ },
+ {
+  "start": 39.6,
+  "end": 39.72,
+  "word": "to"
+ },
+ {
+  "start": 39.72,
+  "end": 39.94,
+  "word": "copy"
+ },
+ {
+  "start": 39.94,
+  "end": 40.26,
+  "word": "from."
+ },
+ {
+  "start": 40.62,
+  "end": 40.7,
+  "word": "Part"
+ },
+ {
+  "start": 40.7,
+  "end": 40.9,
+  "word": "two"
+ },
+ {
+  "start": 40.9,
+  "end": 41.04,
+  "word": "I"
+ },
+ {
+  "start": 41.04,
+  "end": 41.14,
+  "word": "give"
+ },
+ {
+  "start": 41.14,
+  "end": 41.28,
+  "word": "it"
+ },
+ {
+  "start": 41.28,
+  "end": 41.56,
+  "word": "hands,"
+ },
+ {
+  "start": 41.7,
+  "end": 41.8,
+  "word": "it"
+ },
+ {
+  "start": 41.8,
+  "end": 42.1,
+  "word": "stops"
+ },
+ {
+  "start": 42.1,
+  "end": 42.34,
+  "word": "knowing"
+ },
+ {
+  "start": 42.34,
+  "end": 42.58,
+  "word": "things"
+ },
+ {
+  "start": 42.58,
+  "end": 42.72,
+  "word": "and"
+ },
+ {
+  "start": 42.72,
+  "end": 42.94,
+  "word": "starts"
+ },
+ {
+  "start": 42.94,
+  "end": 43.34,
+  "word": "actually"
+ },
+ {
+  "start": 43.34,
+  "end": 43.58,
+  "word": "doing"
+ },
+ {
+  "start": 43.58,
+  "end": 43.88,
+  "word": "them."
+ },
+ {
+  "start": 44.24,
+  "end": 44.38,
+  "word": "Comment"
+ },
+ {
+  "start": 44.38,
+  "end": 44.66,
+  "word": "Jarvis"
+ },
+ {
+  "start": 44.66,
+  "end": 44.84,
+  "word": "and"
+ },
+ {
+  "start": 44.84,
+  "end": 44.94,
+  "word": "I'll"
+ },
+ {
+  "start": 44.94,
+  "end": 45.04,
+  "word": "send"
+ },
+ {
+  "start": 45.04,
+  "end": 45.16,
+  "word": "you"
+ },
+ {
+  "start": 45.16,
+  "end": 45.26,
+  "word": "the"
+ },
+ {
+  "start": 45.26,
+  "end": 45.38,
+  "word": "day"
+ },
+ {
+  "start": 45.38,
+  "end": 45.56,
+  "word": "one"
+ },
+ {
+  "start": 45.56,
+  "end": 45.72,
+  "word": "setup"
+ },
+ {
+  "start": 45.72,
+  "end": 46.0,
+  "word": "guide."
+ }
+]
