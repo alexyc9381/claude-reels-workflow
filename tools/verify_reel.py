@@ -114,7 +114,7 @@ def check_vo_and_audio(mp4, words, tol):
                         f"any sound must be audible by {tol*1000:.0f}ms of frame 0"))
     if words:
         try:
-            w = [x for x in json.load(open(words)) if "start" in x]
+            w = load_words(words)
             first = w[0]["start"] if w else None
             checks.append(Check("VO_ONSET_0", first is not None and first <= tol,
                                 f"{first:.3f}s" if first is not None else "—",
@@ -124,6 +124,22 @@ def check_vo_and_audio(mp4, words, tol):
     else:
         checks.append(skip("VO_ONSET_0", "no --words given"))
     return checks
+
+
+# ---- caption schema normaliser -------------------------------------------------
+# Two caption schemas ship in this repo and the gate must read BOTH, or it silently
+# finds zero words and blocks on VO_ONSET_0 for a reel whose VO is perfectly fine:
+#   {"word","start","end"}  build_captions.py / faster-whisper dumps
+#   {"w","s","e"}           SlopKit KaraokeCaption (every reel cloned from SlopKit)
+def load_words(path):
+    raw = json.load(open(path))
+    out = []
+    for x in raw:
+        if "start" in x and "end" in x:
+            out.append({"word": x.get("word", x.get("w", "")), "start": x["start"], "end": x["end"]})
+        elif "s" in x and "e" in x:
+            out.append({"word": x.get("w", ""), "start": x["s"], "end": x["e"]})
+    return out
 
 def check_music(music, tol, min_silence_gap=2.0):
     if not music or not os.path.exists(music):
@@ -159,7 +175,7 @@ def check_ends_tight(mp4, tol_end):
 def check_vo_flub(words, max_word_s):
     if not words: return [skip("VO_NO_FLUB", "no --words given")]
     try:
-        w = [x for x in json.load(open(words)) if "start" in x and "end" in x]
+        w = load_words(words)
     except Exception as e:
         return [skip("VO_NO_FLUB", f"words unreadable: {e}")]
     bad = [(x.get("word", "?"), x["end"] - x["start"]) for x in w
@@ -173,7 +189,7 @@ def check_captions(words, script, drift_tol):
     if not words:
         return [skip("CAPTION_DRIFT", "no --words"), skip("CAPTION_TEXT", "no --script")]
     try:
-        w = [x for x in json.load(open(words)) if "start" in x]
+        w = load_words(words)
     except Exception as e:
         return [skip("CAPTION_DRIFT", f"words unreadable: {e}"), skip("CAPTION_TEXT", "words unreadable")]
     # drift within a caption line is checked elsewhere in the pipeline against measured onsets;

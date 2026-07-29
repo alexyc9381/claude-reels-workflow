@@ -6,7 +6,7 @@ import {
   INK, CLAY, RED, GREEN, MUTE, CO, GOLD, SKY, MONO, grad, hexA,
 } from "./SlopKit";
 import {
-  ArcadeRoom, Cabinet, Prize, Meter, Bar, Bubble, FeedTile, GuideCard, GithubPage, REPOS,
+  ArcadeRoom, ArcadeCounter, Cabinet, Prize, Meter, Bar, Bubble, FeedTile, GuideCard, GithubPage, REPOS,
   PINK, PURPLE, CAB_R, CAB_RD,
 } from "./OpenArcade";
 import { DemoCaveman, DemoTaste, DemoAgency, DemoMemory, DemoFeeds, DemoMontage, DemoOrca } from "./OpenDemos";
@@ -356,7 +356,7 @@ const ToolScene: React.FC<{
   cab?: { x: number; y: number; w: number; h: number }; side?: React.ReactNode;
 }> = ({ f, repo, title, accent, badge, badgeColor, shift, header, glow, flipAt, demo, cab, side }) => {
   const r = REPOS[repo];
-  const box = cab || { x: 40, y: 100, w: 932, h: 604 };
+  const box = cab || { x: 40, y: 84, w: 932, h: 566 };
   const load = E(f, 4, 30, 0, 1, OUT);
   const starP = E(f, 12, 42, 0, 1, OUT);
   const flip = E(f, flipAt, flipAt + 20, 0, 1, IO);
@@ -371,6 +371,7 @@ const ToolScene: React.FC<{
             front={<><GithubPage f={f} repo={r} load={load} starP={starP} scroll={E(f, Math.max(30, flipAt - 34), flipAt, 0, 26, IO)} /><Crt f={f} /></>}
             back={<><div style={{ position: "absolute", inset: 0, background: "#EDE7DA" }}>{demo}</div><Crt f={f} /></>} />
         </Cabinet>
+        <ArcadeCounter f={f} />
         {side}
       </Panel>
     </AbsoluteFill>
@@ -391,18 +392,18 @@ export const S2Caveman: React.FC = () => {
       header={<SectionHeader f={f} badge={<span style={{ fontSize: 44 }}>🪨</span>} l1="1 · Caveman" l2={<span style={{ color: CLAY }}>cuts 65% of tokens</span>} size={42} />}
       demo={<DemoCaveman f={f} flip={FLIP} smashed={smashed} tok={tok} />}
       side={<>
-        <div style={{ position: "absolute", left: 44, top: 522, filter: "drop-shadow(0 18px 24px rgba(0,0,0,0.75))", zIndex: 9 }}>
-          <Mascot lf={f} size={252} cheer={smashed ? 0.5 : 0} gaze={-2} nodAmp={2} nodSpeed={12} />
+        <div style={{ position: "absolute", left: 322, top: 500, filter: "drop-shadow(0 20px 26px rgba(0,0,0,0.8))", zIndex: 9 }}>
+          <Mascot lf={f} size={300} cheer={smashed ? 0.5 : 0} gaze={-2} nodAmp={2} nodSpeed={12} />
         </div>
-        <div style={{ position: "absolute", left: 246, top: 566, width: 150, height: 34, opacity: E(f, FLIP - 6, FLIP + 8, 0, 1, OUT), transform: `rotate(${-70 + swing * 78}deg)`, transformOrigin: "10% 50%" }}>
+        <div style={{ position: "absolute", left: 540, top: 548, width: 172, height: 38, opacity: E(f, FLIP - 6, FLIP + 8, 0, 1, OUT), transform: `rotate(${-70 + swing * 78}deg)`, transformOrigin: "10% 50%" }}>
           <div style={{ position: "absolute", left: 0, top: 10, width: 104, height: 15, borderRadius: 4, background: grad("#7A5433", "#4E3117") }} />
           <div style={{ position: "absolute", left: 96, top: -8, width: 54, height: 50, borderRadius: 12, background: grad("#8E96A8", "#5D6577"), border: "3px solid #444C5C" }} />
         </div>
-        <div style={{ position: "absolute", left: 618, top: 620, zIndex: 9 }}><Mascot lf={f + 40} size={128} tint="#8E96A8" cheer={laugh ? 0.6 : 0} shock={laugh ? 0 : 0.6} nodSpeed={9} /></div>
-        <div style={{ position: "absolute", left: 712, top: 652, zIndex: 9 }}><Mascot lf={f + 80} size={112} tint="#7C88A2" cheer={laugh ? 0.6 : 0} shock={laugh ? 0 : 0.6} nodSpeed={11} /></div>
-        <div style={{ opacity: laugh ? 1 : 0 }}><Bubble x={584} y={604} text="ha ha" s={0.85} rot={-4} /></div>
-        <div style={{ opacity: laugh ? 0 : 1 }}><Bubble x={584} y={604} text="oh." s={0.9} c="#FFE9A8" rot={-3} /></div>
-        <WonPrize f={f} at={196} x={572} y={716} />
+        <div style={{ position: "absolute", left: 646, top: 540, zIndex: 9 }}><Mascot lf={f + 40} size={178} tint="#8E96A8" cheer={laugh ? 0.6 : 0} shock={laugh ? 0 : 0.6} nodSpeed={9} /></div>
+        <div style={{ position: "absolute", left: 752, top: 568, zIndex: 9 }}><Mascot lf={f + 80} size={158} tint="#7C88A2" cheer={laugh ? 0.6 : 0} shock={laugh ? 0 : 0.6} nodSpeed={11} /></div>
+        <div style={{ opacity: laugh ? 1 : 0 }}><Bubble x={630} y={516} text="ha ha" s={0.85} rot={-4} /></div>
+        <div style={{ opacity: laugh ? 0 : 1 }}><Bubble x={630} y={516} text="oh." s={0.9} c="#FFE9A8" rot={-3} /></div>
+        <WonPrize f={f} at={196} x={572} y={560} />
       </>} />
   );
 };
@@ -420,16 +421,16 @@ export const S3Taste: React.FC = () => {
       header={<SectionHeader f={f} badge={<span style={{ fontSize: 44 }}>🎨</span>} l1="2 · UI/UX Pro Max" l2={<span style={{ color: CLAY }}>kills the purple slop</span>} size={40} />}
       demo={<DemoTaste f={f} wipe={wipe} />}
       side={<>
-        <Meter x={640} y={718} w={330} label="DESIGN TASTE" val={taste} c={PINK} />
-        <div style={{ position: "absolute", left: 56, top: 526, filter: "drop-shadow(0 18px 24px rgba(0,0,0,0.75))", zIndex: 9 }}>
-          <Mascot lf={f} size={250} cheer={wipe > 0.8 ? 0.7 : 0.15} gaze={-2} nodAmp={2.4} nodSpeed={11} />
+        <Meter x={648} y={604} w={318} label="DESIGN TASTE" val={taste} c={PINK} />
+        <div style={{ position: "absolute", left: 336, top: 502, filter: "drop-shadow(0 20px 26px rgba(0,0,0,0.8))", zIndex: 9 }}>
+          <Mascot lf={f} size={296} cheer={wipe > 0.8 ? 0.7 : 0.15} gaze={-2} nodAmp={2.4} nodSpeed={11} />
         </div>
         {[0, 1, 2].map((i) => (
-          <div key={i} style={{ position: "absolute", left: 300 + i * 66, top: 668 + (i % 2) * 18 + osc(f, 30, 3, i), width: 62, height: 62, borderRadius: 10, background: "linear-gradient(150deg,#6D3BD6,#B14BE8)", border: "3px solid #4A2A8E", transform: `rotate(${(i - 1) * 14}deg)`, opacity: 0.85 }}>
+          <div key={i} style={{ position: "absolute", left: 92 + i * 62, top: 596 + (i % 2) * 14 + osc(f, 30, 3, i), width: 62, height: 62, borderRadius: 10, background: "linear-gradient(150deg,#6D3BD6,#B14BE8)", border: "3px solid #4A2A8E", transform: `rotate(${(i - 1) * 14}deg)`, opacity: 0.85 }}>
             <div style={{ position: "absolute", left: -4, right: -4, top: 27, height: 6, background: RED, transform: "rotate(-24deg)" }} />
           </div>
         ))}
-        <WonPrize f={f} at={152} x={520} y={720} />
+        <WonPrize f={f} at={152} x={520} y={560} />
       </>} />
   );
 };
@@ -445,7 +446,7 @@ export const S4Agents: React.FC = () => {
   ];
   return (
     <ToolScene f={f} repo="agency" title="AGENCY AGENTS" accent="#C74E43" shift={480} glow={hexA(GOLD, 0.3)} flipAt={FLIP}
-      badge={`${n}`} badgeColor={GOLD} cab={{ x: 40, y: 100, w: 932, h: 604 }}
+      badge={`${n}`} badgeColor={GOLD} cab={{ x: 40, y: 84, w: 932, h: 566 }}
       header={<SectionHeader f={f} badge={<span style={{ fontSize: 44 }}>🎯</span>} l1="3 · Agency Agents" l2={<span style={{ color: CLAY }}>267 expert roles</span>} size={42} />}
       demo={<DemoAgency f={f} flip={FLIP} n={n} />}
       side={<>
@@ -454,7 +455,7 @@ export const S4Agents: React.FC = () => {
           const open = E(f, st + 14, st + 28, 0, 1, BACK);
           const roll = E(f, st, st + 16, 0, 1, OUT);
           return (
-            <div key={i} style={{ position: "absolute", left: 232 + i * 132, top: 590, zIndex: 9 }}>
+            <div key={i} style={{ position: "absolute", left: 96 + i * 118, top: 556, zIndex: 9 }}>
               <div style={{ position: "absolute", left: (1 - roll) * -320, top: 0, opacity: roll }}>
                 <div style={{ position: "absolute", left: 6, top: 54, width: 92, height: 46, borderRadius: "0 0 46px 46px", background: [CLAY, GOLD, GREEN, SKY][i], transform: `translateY(${open * 22}px)` }} />
                 <div style={{ position: "absolute", left: 6, top: 6, width: 92, height: 46, borderRadius: "46px 46px 0 0", background: [CLAY, GOLD, GREEN, SKY][i], opacity: 1 - open, transform: `translateY(${-open * 44}px) rotate(${open * -24}deg)` }} />
@@ -468,8 +469,8 @@ export const S4Agents: React.FC = () => {
             </div>
           );
         })}
-        <div style={{ position: "absolute", left: 200, top: 742, right: 60, height: 12, borderRadius: 6, background: "#26324C" }} />
-        <WonPrize f={f} at={168} x={54} y={716} />
+        <div style={{ position: "absolute", left: 84, top: 690, right: 84, height: 10, borderRadius: 6, background: "#26324C" }} />
+        <WonPrize f={f} at={168} x={54} y={560} />
       </>} />
   );
 };
@@ -482,25 +483,25 @@ export const S5Memory: React.FC = () => {
   const DAYS = ["MON", "TUE", "WED", "THU", "FRI"];
   return (
     <ToolScene f={f} repo="memory" title="AGENT MEMORY" accent="#2F5DA8" shift={640} glow={hexA(SKY, 0.3)} flipAt={FLIP}
-      badge="SAVED" badgeColor={GREEN} cab={{ x: 40, y: 100, w: 932, h: 604 }}
+      badge="SAVED" badgeColor={GREEN} cab={{ x: 40, y: 84, w: 932, h: 566 }}
       header={<SectionHeader f={f} badge={<span style={{ fontSize: 44 }}>💾</span>} l1="4 · Agent Memory" l2={<span style={{ color: CLAY }}>stop re-explaining</span>} size={42} />}
       demo={<DemoMemory f={f} flip={FLIP} />}
       side={<>
-        <div style={{ position: "absolute", left: 700 - insert * 96, top: 646, width: 132, height: 96, borderRadius: 10, background: grad("#C9D2E6", "#7C88A2"), border: "4px solid #4E5C7E", boxShadow: `0 0 ${18 + insert * 26}px ${hexA(SKY, 0.75)}` }}>
+        <div style={{ position: "absolute", left: 96 - insert * 40, top: 588, width: 132, height: 96, borderRadius: 10, background: grad("#C9D2E6", "#7C88A2"), border: "4px solid #4E5C7E", boxShadow: `0 0 ${18 + insert * 26}px ${hexA(SKY, 0.75)}` }}>
           <div style={{ position: "absolute", left: 12, top: 12, right: 12, height: 30, borderRadius: 5, background: "#3A4560" }} />
           {[0, 1, 2].map((i) => <div key={i} style={{ position: "absolute", left: 14 + i * 36, bottom: 12, width: 26, height: 18, borderRadius: 3, background: GOLD }} />)}
         </div>
         {[0, 1, 2].map((i) => (
-          <div key={i} style={{ position: "absolute", left: 246 + i * 34, top: 632 + i * 26, width: 190, height: 54, borderRadius: 8, background: "#22293C", border: "2px solid #39435C", transform: `rotate(${(i - 1) * 7}deg) translateY(${osc(f, 34, 3, i)}px)`, opacity: 0.9 }}>
+          <div key={i} style={{ position: "absolute", left: 636 + i * 30, top: 574 + i * 24, width: 190, height: 54, borderRadius: 8, background: "#22293C", border: "2px solid #39435C", transform: `rotate(${(i - 1) * 7}deg) translateY(${osc(f, 34, 3, i)}px)`, opacity: 0.9 }}>
             <div style={{ position: "absolute", left: 12, top: 14, width: 120, height: 10, borderRadius: 3, background: "#4E5C7E" }} />
             <div style={{ position: "absolute", left: 12, top: 32, width: 84, height: 8, borderRadius: 3, background: "#3A4560" }} />
             <div style={{ position: "absolute", left: -6, right: -6, top: 24, height: 5, background: RED, transform: "rotate(-8deg)", boxShadow: "0 10px 22px rgba(26,24,19,0.34)" }} />
           </div>
         ))}
-        <div style={{ position: "absolute", left: 44, top: 566, filter: "drop-shadow(0 18px 24px rgba(0,0,0,0.75))", zIndex: 9 }}>
-          <Mascot lf={f} size={210} cheer={0.5} gaze={-1} nodAmp={2.4} nodSpeed={10} />
+        <div style={{ position: "absolute", left: 356, top: 508, filter: "drop-shadow(0 20px 26px rgba(0,0,0,0.8))", zIndex: 9 }}>
+          <Mascot lf={f} size={288} cheer={0.5} gaze={-1} nodAmp={2.4} nodSpeed={10} />
         </div>
-        <WonPrize f={f} at={160} x={880} y={716} />
+        <WonPrize f={f} at={160} x={880} y={560} />
       </>} />
   );
 };
@@ -513,14 +514,14 @@ export const S6Feeds: React.FC = () => {
   const card = E(f, FLIP + 46, FLIP + 66, 0, 1, BACK);
   return (
     <ToolScene f={f} repo="last30" title="LAST 30 DAYS" accent="#2E7D5B" shift={790} glow={hexA(GREEN, 0.26)} flipAt={FLIP}
-      badge="1 DOC" badgeColor={GREEN} cab={{ x: 40, y: 100, w: 932, h: 604 }}
+      badge="1 DOC" badgeColor={GREEN} cab={{ x: 40, y: 84, w: 932, h: 566 }}
       header={<SectionHeader f={f} badge={<span style={{ fontSize: 44 }}>📡</span>} l1="5 · Last 30 Days" l2={<span style={{ color: CLAY }}>4 feeds, 1 summary</span>} size={42} />}
       demo={<DemoFeeds f={f} flip={FLIP} card={card} />}
       side={<>
-        <div style={{ position: "absolute", left: 60, top: 588, filter: "drop-shadow(0 18px 24px rgba(0,0,0,0.75))", zIndex: 9 }}>
-          <Mascot lf={f} size={192} glasses={1} cheer={0.4} gaze={-2} nodAmp={2.2} nodSpeed={10} />
+        <div style={{ position: "absolute", left: 352, top: 512, filter: "drop-shadow(0 20px 26px rgba(0,0,0,0.8))", zIndex: 9 }}>
+          <Mascot lf={f} size={284} glasses={1} cheer={0.4} gaze={-2} nodAmp={2.2} nodSpeed={10} />
         </div>
-        <WonPrize f={f} at={152} x={860} y={716} />
+        <WonPrize f={f} at={152} x={860} y={560} />
       </>} />
   );
 };
@@ -532,10 +533,10 @@ export const S7Montage: React.FC = () => {
   const belt = (f * 3.6) % 120;
   return (
     <ToolScene f={f} repo="montage" title="OPEN MONTAGE" accent="#5A3FA0" shift={940} glow={hexA(PURPLE, 0.3)} flipAt={FLIP}
-      badge="RENDER" badgeColor={PINK} cab={{ x: 40, y: 100, w: 932, h: 604 }}
+      badge="RENDER" badgeColor={PINK} cab={{ x: 40, y: 84, w: 932, h: 566 }}
       header={<SectionHeader f={f} badge={<span style={{ fontSize: 44 }}>🎬</span>} l1="6 · Open Montage" l2={<span style={{ color: CLAY }}>video, run by agents</span>} size={42} />}
       demo={<DemoMontage f={f} flip={FLIP} />}
-      side={<WonPrize f={f} at={88} x={462} y={730} />} />
+      side={<WonPrize f={f} at={88} x={462} y={560} />} />
   );
 };
 
@@ -546,14 +547,14 @@ export const S8Orca: React.FC = () => {
   const LANES = 8;
   return (
     <ToolScene f={f} repo="orca" title="ORCA · PARALLEL" accent="#26547C" shift={1090} glow={hexA(SKY, 0.34)} flipAt={FLIP}
-      badge={`×${LANES}`} badgeColor={SKY} cab={{ x: 40, y: 100, w: 932, h: 604 }}
+      badge={`×${LANES}`} badgeColor={SKY} cab={{ x: 40, y: 84, w: 932, h: 566 }}
       header={<SectionHeader f={f} badge={<span style={{ fontSize: 44 }}>🐋</span>} l1="7 · Orca" l2={<span style={{ color: CLAY }}>a whole fleet at once</span>} size={42} />}
       demo={<DemoOrca f={f} flip={FLIP} />}
       side={<>
-        <div style={{ position: "absolute", left: 396, top: 574, filter: "drop-shadow(0 18px 24px rgba(0,0,0,0.75))", zIndex: 9 }}>
-          <Mascot lf={f} size={206} cheer={0.85} gaze={0} nodAmp={2.6} nodSpeed={10} />
+        <div style={{ position: "absolute", left: 366, top: 506, filter: "drop-shadow(0 20px 26px rgba(0,0,0,0.8))", zIndex: 9 }}>
+          <Mascot lf={f} size={292} cheer={0.85} gaze={0} nodAmp={2.6} nodSpeed={10} />
         </div>
-        <WonPrize f={f} at={146} x={836} y={726} />
+        <WonPrize f={f} at={146} x={836} y={560} />
       </>} />
   );
 };

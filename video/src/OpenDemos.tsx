@@ -56,7 +56,7 @@ export const DemoCaveman: React.FC<{ f: number; flip: number; smashed: boolean; 
     <div style={{ position: "absolute", left: 12, top: 44, width: PW, bottom: 62, borderRadius: 9, background: mix(RED), border: `2px solid ${RED}`, overflow: "hidden" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "6px 10px", background: mix(RED, 0.72), borderBottom: `1px solid ${RED}` }}>
         <span style={{ fontFamily: MONO, fontWeight: 900, fontSize: 14, color: RED }}>−</span>
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 12, color: "#F0B4AC", letterSpacing: 1.4 }}>CLAUDE, NORMALLY</span>
+        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 12, color: "#8E3125", letterSpacing: 1.4 }}>CLAUDE, NORMALLY</span>
         <div style={{ flex: 1 }} />
         <span style={{ fontFamily: MONO, fontSize: 12, color: RED }}>1,240 tok</span>
       </div>
@@ -71,13 +71,13 @@ export const DemoCaveman: React.FC<{ f: number; flip: number; smashed: boolean; 
     <div style={{ position: "absolute", right: 12, top: 44, width: PW, bottom: 62, borderRadius: 9, background: mix(GREEN), border: `3px solid ${smashed ? GREEN : UI_LINE}`, overflow: "hidden", boxShadow: "0 8px 16px rgba(26,24,19,0.22)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "6px 10px", background: mix(GREEN, 0.72), borderBottom: `1px solid ${GREEN}` }}>
         <span style={{ fontFamily: MONO, fontWeight: 900, fontSize: 14, color: GREEN }}>+</span>
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 12, color: "#B6E3CD", letterSpacing: 1.4 }}>CLAUDE, CAVEMAN</span>
+        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 12, color: "#1F5140", letterSpacing: 1.4 }}>CLAUDE, CAVEMAN</span>
         <div style={{ flex: 1 }} />
         <span style={{ fontFamily: MONO, fontSize: 12, color: GREEN }}>{smashed ? "434 tok" : "—"}</span>
       </div>
       {AFTER.map((t, i) => (
         <div key={t} style={{ position: "absolute", left: 30, top: 42 + i * 44, opacity: E(f, flip + 30 + i * 7, flip + 42 + i * 7, 0, 1, OUT), transform: `translateX(${(1 - E(f, flip + 30 + i * 7, flip + 42 + i * 7, 0, 1, BACK)) * 22}px)` }}>
-          <span style={{ fontFamily: MONO, fontWeight: 900, fontSize: 30, color: "#CFE6DA" }}>{t}</span>
+          <span style={{ fontFamily: MONO, fontWeight: 900, fontSize: 30, color: "#1F5140" }}>{t}</span>
         </div>
       ))}
       {!smashed && <div style={{ position: "absolute", left: 30, top: 60, fontFamily: MONO, fontSize: 15, color: GREEN }}>waiting…</div>}
@@ -202,7 +202,7 @@ export const DemoMemory: React.FC<{ f: number; flip: number }> = ({ f, flip }) =
           <div key={d} style={{ position: "absolute", left: 0, right: 0, top: 24 + i * 58, height: 50, borderRadius: 9, background: lit ? mix(GREEN, 0.72) : PAPER2, border: `2px solid ${lit ? GREEN : UI_LINE}`, display: "flex", alignItems: "center", gap: 11, padding: "0 11px", transform: `translateX(${lit ? 0 : -6}px)` }}>
             <span style={{ fontFamily: MONO, fontWeight: 900, fontSize: 15, color: lit ? GREEN : "#4E5C7E", width: 40 }}>{d}</span>
             <div style={{ flex: 1 }}>
-              <div style={{ fontFamily: inter.fontFamily, fontWeight: 700, fontSize: 13, color: lit ? "#CFE6DA" : "#41506E" }}>{note}</div>
+              <div style={{ fontFamily: inter.fontFamily, fontWeight: 700, fontSize: 13, color: lit ? "#1F5140" : "#41506E" }}>{note}</div>
               <Line x={0} y={22} w={lit ? 210 : 150} h={6} c={lit ? GREEN : "#31405C"} />
             </div>
             <span style={{ fontSize: 16, opacity: lit ? 1 : 0.25 }}>{lit ? "✅" : "⬜"}</span>
@@ -226,7 +226,7 @@ export const DemoMemory: React.FC<{ f: number; flip: number }> = ({ f, flip }) =
       <svg width={296} height={54} style={{ position: "absolute", left: 12, bottom: 44 }}>
         <polyline points={Array.from({ length: 22 }, (_, i) => `${i * 14},${40 - (12 + osc(f + i * 9, 7, 10) + i * 0.7)}`).join(" ")} fill="none" stroke={GREEN} strokeWidth={2.5} opacity={0.85} />
       </svg>
-      <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, padding: "7px 0", borderRadius: 7, background: mix(GREEN, 0.72), border: `2px solid ${GREEN}`, textAlign: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 13, color: "#CFE6DA" }}>still loaded</div>
+      <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, padding: "7px 0", borderRadius: 7, background: mix(GREEN, 0.72), border: `2px solid ${GREEN}`, textAlign: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 13, color: "#1F5140" }}>still loaded</div>
     </div>
   </>);
 };

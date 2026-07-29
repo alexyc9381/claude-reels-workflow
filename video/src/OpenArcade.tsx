@@ -48,6 +48,23 @@ export const ArcadeRoom: React.FC<{ f: number; shift?: number; tint?: string }> 
         </div>
       );
     })}
+    {/* wall furniture: a high-score board and a hand-painted poster */}
+    <div style={{ position: "absolute", left: 8, top: 196, width: 118, height: 168, borderRadius: 8, background: "#2F3B45", border: "5px solid #24303A", boxShadow: SOFT_SH }}>
+      <div style={{ position: "absolute", left: 8, top: 8, right: 8, height: 26, borderRadius: 4, background: GOLD, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 13, color: "#5A4310" }}>HIGH SCORES</div>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <div key={i} style={{ position: "absolute", left: 10, right: 10, top: 44 + i * 23, display: "flex", justifyContent: "space-between" }}>
+          <span style={{ fontFamily: MONO, fontSize: 12, color: "#9FB0BC" }}>{i + 1}. CLD</span>
+          <span style={{ fontFamily: MONO, fontSize: 12, color: GOLD }}>{(9 - i) * 1100}</span>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", right: 8, top: 208, width: 116, height: 150, borderRadius: 6, background: PAPER2, border: "5px solid #8A6242", transform: "rotate(2deg)", boxShadow: SOFT_SH }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 14, textAlign: "center", fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 26, color: CLAYD, lineHeight: 1 }}>FREE<br />PLAY</div>
+      <div style={{ position: "absolute", left: 20, right: 20, top: 82, height: 5, background: "#C2B69E" }} />
+      {[0, 1].map((i) => <div key={i} style={{ position: "absolute", left: 20, right: 20 + i * 26, top: 96 + i * 14, height: 6, borderRadius: 3, background: "#C2B69E" }} />)}
+      <div style={{ position: "absolute", left: 32, right: 32, bottom: 12, height: 20, borderRadius: 4, background: GREEN }} />
+    </div>
+
     {/* warm carpet with a solid printed pattern */}
     <div style={{ position: "absolute", left: 0, right: 0, top: 596, height: 196, background: "#7A4A3E" }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: 596, height: 10, background: "#5E362D" }} />
@@ -314,3 +331,37 @@ export const GithubPage: React.FC<{ f: number; repo: Repo; load?: number; starP?
     </div>
   );
 };
+
+/* ---- the prize counter that runs along the FRONT of every scene. Drawn AFTER
+   the cabinet so it reads as a foreground plane: cabinet behind, counter in
+   front, character standing at it. Without this the bottom band is bare carpet. ---- */
+export const ArcadeCounter: React.FC<{ f: number; tickets?: boolean }> = ({ f, tickets = true }) => (<>
+  {/* counter top + front panel */}
+  <div style={{ position: "absolute", left: -20, right: -20, top: 648, height: 26, borderRadius: 6, background: WOOD_L, boxShadow: "0 -4px 0 rgba(255,255,255,0.14) inset" }} />
+  <div style={{ position: "absolute", left: -20, right: -20, top: 672, bottom: 0, background: WOOD }} />
+  <div style={{ position: "absolute", left: -20, right: -20, top: 674, height: 8, background: WOOD_D }} />
+  {Array.from({ length: 9 }, (_, i) => (
+    <div key={i} style={{ position: "absolute", left: 4 + i * 118, top: 690, width: 96, height: 76, borderRadius: 5, background: WOOD_D, opacity: 0.45 }} />
+  ))}
+  {/* a token cup with coins standing proud of the counter */}
+  <div style={{ position: "absolute", left: 62, top: 588, width: 84, height: 66, borderRadius: "8px 8px 16px 16px", background: "#B4534A", border: "4px solid #7A2F2A", boxShadow: SOFT_SH }}>
+    <div style={{ position: "absolute", left: 6, top: 6, right: 6, height: 12, borderRadius: 4, background: "#8E3B34" }} />
+  </div>
+  {[0, 1, 2, 3].map((i) => (
+    <div key={i} style={{ position: "absolute", left: 72 + i * 15, top: 572 - (i % 2) * 7 + Math.sin(f / 22 + i) * 1.5, width: 30, height: 30, borderRadius: "50%", background: "#E9B84A", border: "3px solid #A87C22" }} />
+  ))}
+  {/* a ticket spool paying out */}
+  {tickets && (<>
+    <div style={{ position: "absolute", right: 22, top: 566, width: 74, height: 74, borderRadius: "50%", background: PAPER2, border: `6px solid ${CLAY}`, boxShadow: SOFT_SH }}>
+      <div style={{ position: "absolute", left: 27, top: 27, width: 24, height: 24, borderRadius: "50%", background: CLAY }} />
+    </div>
+    {[0, 1, 2, 3, 4].map((i) => (
+      <div key={i} style={{ position: "absolute", right: 16 + i * 11, top: 632 + i * 9 + Math.sin(f / 18 + i) * 2, width: 56, height: 20, borderRadius: 3, background: PAPER, border: "2px solid #C2B69E", transform: `rotate(${(i % 2 ? 1 : -1) * (6 + i * 2)}deg)` }} />
+    ))}
+  </>)}
+  {/* a paper cup for life */}
+  <div style={{ position: "absolute", left: 218, top: 596, width: 46, height: 58, borderRadius: "4px 4px 10px 10px", background: PAPER, border: "3px solid #C2B69E", boxShadow: SOFT_SH }}>
+    <div style={{ position: "absolute", left: -3, right: -3, top: -6, height: 12, borderRadius: 4, background: CLAY }} />
+    <div style={{ position: "absolute", left: 20, top: -26, width: 7, height: 26, background: "#7A4A3E", transform: "rotate(9deg)" }} />
+  </div>
+</>);
