@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Sequence, Audio, staticFile, useCurrentFrame, interpolate, Easing } from "remotion";
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx } from "./SlopKit";
+import { Cue, SfxTrack, LEVELS, layer, repeat, db } from "./SoundKit";
 import { S0Hook, S1Turn, S2Caveman, S3Taste, S4Agents, S5Memory, S6Feeds, S7Montage, S8Orca, S9Cta } from "./OpenScenes";
 import words from "./data/words_open_103.json";
 
@@ -53,140 +54,146 @@ function xform(i: number, f: number) {
   return { x, sc, rot };
 }
 
-const Sfx: React.FC<{ at: number; src: string; v?: number; dur?: number }> = ({ at, src, v = 0.4, dur = 0.4 }) => (
-  <Sequence from={fr(at)} durationInFrames={Math.max(1, fr(dur))} layout="none">
-    <Audio src={staticFile(`sfx/${src}`)} volume={v} />
-  </Sequence>
-);
-
 /* ============================================================================
-   SOUND DESIGN — sourced from the house pack at
-   Google Drive · Claude Reels/Face/Sound Effects  (copied to public/sfx/pack/).
-   Every cue is keyed to a real beat in the animation, not sprinkled: the claw
-   motor, the slam, the MISS, each whip-pan, each cabinet powering on, each
-   screen flip, each prize won, and the CTA payoff.
-   `dur` TRUNCATES long one-shots (impact-boom is 7.4s, applause 5.9s) — always
-   set it, or a tail will run under the next scene.
+   SOUND DESIGN — house SoundKit (docs/SOUND-DESIGN.md).
+   Source: the AM Creator SFX Collection (Drive · Claude Reels/Face/Sound
+   Effects), copied to public/sfx/am/.
+
+   Applied principles:
+     LAYER      every cue is a MOVEMENT + a TEXTURE, never one bare sound
+     PITCH      repeats reuse ONE file with drifting rate, not new files
+     J-CUT      cues land ~3 frames before the visual (SoundKit LEAD_FRAMES)
+     HIERARCHY  only the primary action of a scene is sounded
+     LEVELS     dialogue -6 / music -20 / sfx -10..-20, via LEVELS.*
    ========================================================================== */
-const K = "pack/";
-const SFX_ALL: { at: number; src: string; v: number; dur: number }[] = [
-  /* ---------- HOOK (0-5.18): slam f14 · MISS f17 · pan f30 · burst f44 · carousel f60 ---------- */
-  { at: 0.06, src: K + "coin-drop.wav", v: 0.52, dur: 0.66 },        // the coin goes in
-  { at: 0.22, src: K + "gear-stutter.wav", v: 0.40, dur: 0.8 },      // the claw motor tracks
-  { at: 0.47, src: K + "impact-boom.wav", v: 0.66, dur: 1.1 },       // THE SLAM
-  { at: 0.47, src: K + "punch.wav", v: 0.50, dur: 0.16 },
-  { at: 0.60, src: K + "coin-spin.wav", v: 0.40, dur: 0.9 },         // coins jump off the stack
-  { at: 0.95, src: K + "error-take.wav", v: 0.56, dur: 0.21 },       // MISS stamp
-  { at: 1.02, src: K + "crowd-laugh.wav", v: 0.20, dur: 1.3 },       // the arcade laughs at you
-  { at: 1.40, src: K + "whoosh-fast.wav", v: 0.60, dur: 0.41 },      // whip-pan to the crate
-  { at: 1.92, src: K + "unlock.wav", v: 0.52, dur: 0.91 },           // the crate BURSTS
-  { at: 1.92, src: K + "riser-sharp.wav", v: 0.34, dur: 0.73 },
-  { at: 2.02, src: K + "whoosh-swoosh.wav", v: 0.40, dur: 0.5 },     // into the prize-select carousel
-  // seven selector snaps, one per repo, alternating so it reads mechanical
-  { at: 2.20, src: K + "snap-1.wav", v: 0.44, dur: 0.19 },
-  { at: 2.57, src: K + "snap-2.wav", v: 0.42, dur: 0.24 },
-  { at: 2.93, src: K + "snap-1.wav", v: 0.42, dur: 0.19 },
-  { at: 3.30, src: K + "snap-2.wav", v: 0.40, dur: 0.24 },
-  { at: 3.67, src: K + "snap-1.wav", v: 0.40, dur: 0.19 },
-  { at: 4.03, src: K + "snap-2.wav", v: 0.38, dur: 0.24 },
-  { at: 4.40, src: K + "snap-1.wav", v: 0.38, dur: 0.19 },
-  { at: 4.58, src: K + "positive-chime.wav", v: 0.34, dur: 0.9 },    // the star total lands
+const A = "am/";
 
-  /* ---------- S1 · tens of thousands of stars (5.18) ---------- */
-  { at: 5.02, src: K + "riser-metal.wav", v: 0.36, dur: 1.33 },
-  { at: 5.40, src: K + "crowd-wow.wav", v: 0.34, dur: 1.5 },
-  { at: 5.60, src: K + "cash-register.wav", v: 0.26, dur: 1.1 },
+// a cabinet powering up + its GitHub page painting in — shared by all 7 tool scenes
+const cabinetOn = (t: number): Cue[] => [
+  ...layer(t, { src: A + "lights-on.wav", v: LEVELS.SFX_MID, dur: 0.78 },
+              { src: A + "ui-click.wav", dur: 0.3 }),
+  ...layer(t + 0.30, { src: A + "terminal-soft.wav", v: LEVELS.SFX_TEXTURE, dur: 1.1 },
+                     { src: A + "keys-macbook.wav", dur: 0.9, rate: 1.08 }),
+];
+// the screen flipping from the GitHub page to the demo: a whoosh with a page-turn on it
+const screenFlip = (t: number, rate = 1): Cue[] =>
+  layer(t, { src: A + "whoosh-choppy.wav", v: LEVELS.SFX_MID, dur: 0.6, rate },
+           { src: A + "page-turn.wav", dur: 0.5, rate });
+// a repo won
+const prizeWon = (t: number): Cue[] =>
+  layer(t, { src: A + "check-pop.wav", v: LEVELS.SFX_MID, dur: 0.63 },
+           { src: A + "click-light.wav", dur: 0.3 });
 
-  /* ---------- S2 · #1 CAVEMAN (7.61) ---------- */
-  { at: 7.68, src: K + "lights-on.wav", v: 0.42, dur: 0.78 },        // cabinet powers up
-  { at: 7.95, src: K + "terminal-soft.wav", v: 0.26, dur: 1.2 },     // the GitHub page paints in
-  { at: 10.68, src: K + "whoosh-choppy.wav", v: 0.40, dur: 0.5 },    // screen flips to the demo
-  { at: 11.21, src: K + "punch.wav", v: 0.60, dur: 0.16 },           // the club smash
-  { at: 11.21, src: K + "impact-boom.wav", v: 0.40, dur: 0.8 },
-  { at: 13.45, src: K + "crowd-wow.wav", v: 0.30, dur: 1.4 },        // the laughing stops
-  { at: 14.14, src: K + "check-pop.wav", v: 0.44, dur: 0.63 },       // prize won
+const SFX_ALL: Cue[] = [
+  /* ---------- HOOK · slam f14 · MISS f17 · pan f30 · burst f44 · carousel f60 ---------- */
+  ...layer(0.06, { src: A + "coin-drop.wav", v: LEVELS.SFX_MID, dur: 0.66 },
+                 { src: A + "click-mouse.wav", dur: 0.2 }),
+  ...layer(0.22, { src: A + "gear-mech.wav", v: LEVELS.SFX_TEXTURE, dur: 0.9 },
+                 { src: A + "gear-stutter.wav", dur: 1.0, rate: 0.9 }),
+  // THE SLAM — the hero impact the whole hook is built on
+  ...layer(0.47, { src: A + "hit-boom.wav", v: LEVELS.SFX_HERO, dur: 1.1 },
+                 { src: A + "ring-low.wav", v: LEVELS.SFX_MID, dur: 1.2 }),
+  { at: 0.47, src: A + "punch.wav", v: LEVELS.SFX_MID, dur: 0.16 },
+  { at: 0.62, src: A + "coin-spin.wav", v: LEVELS.SFX_TEXTURE, dur: 0.9 },
+  ...layer(0.95, { src: A + "error-take.wav", v: LEVELS.SFX_MID, dur: 0.21 },
+                 { src: A + "click-hard.wav", v: LEVELS.SFX_MID, dur: 0.3, rate: 0.85 }),
+  { at: 1.02, src: A + "crowd-laugh.wav", v: LEVELS.SFX_BED, dur: 1.3 },
+  ...layer(1.40, { src: A + "whoosh-fast.wav", v: LEVELS.SFX_HERO, dur: 0.41 },
+                 { src: A + "whoosh-flyby.wav", dur: 0.7 }),
+  ...layer(1.92, { src: A + "unlock.wav", v: LEVELS.SFX_MID, dur: 0.91 },
+                 { src: A + "paper-rustle.wav", dur: 0.8 }),
+  { at: 1.92, src: A + "riser-sharp.wav", v: LEVELS.SFX_TEXTURE, dur: 0.73 },
+  { at: 2.02, src: A + "whoosh-swoosh.wav", v: LEVELS.SFX_MID, dur: 0.5 },
+  // seven selector snaps — ONE file, pitch drifting across the run
+  ...repeat(7, 2.20, 0.365, { src: A + "snap.wav", v: LEVELS.SFX_MID, dur: 0.22 }, 0.055),
+  ...repeat(7, 2.20, 0.365, { src: A + "counter-tick.wav", v: LEVELS.SFX_TEXTURE, dur: 0.22 }, 0.06),
+  { at: 4.58, src: A + "positive-chime.wav", v: LEVELS.SFX_MID, dur: 0.9 },
 
-  /* ---------- S3 · #2 UI/UX PRO MAX (15.69) ---------- */
-  { at: 15.76, src: K + "lights-on.wav", v: 0.40, dur: 0.78 },
-  { at: 16.02, src: K + "terminal-soft.wav", v: 0.24, dur: 1.2 },
-  { at: 18.16, src: K + "whoosh-choppy.wav", v: 0.38, dur: 0.5 },
-  { at: 18.76, src: K + "highlighter.wav", v: 0.52, dur: 0.45 },     // the paint roller sweeps
-  { at: 19.20, src: K + "highlighter.wav", v: 0.34, dur: 0.45 },
-  { at: 20.76, src: K + "check-pop.wav", v: 0.42, dur: 0.63 },
+  /* ---------- S1 · tens of thousands of stars ---------- */
+  { at: 5.02, src: A + "riser-metal.wav", v: LEVELS.SFX_MID, dur: 1.33 },
+  ...layer(5.40, { src: A + "crowd-wow.wav", v: LEVELS.SFX_MID, dur: 1.5 },
+                 { src: A + "cash-register.wav", dur: 1.1 }),
 
-  /* ---------- S4 · #3 AGENCY AGENTS (21.46) ---------- */
-  { at: 21.53, src: K + "lights-on.wav", v: 0.40, dur: 0.78 },
-  { at: 21.79, src: K + "terminal-soft.wav", v: 0.24, dur: 1.2 },
-  { at: 24.13, src: K + "whoosh-choppy.wav", v: 0.38, dur: 0.5 },
-  { at: 24.66, src: K + "coin-drop.wav", v: 0.40, dur: 0.5 },        // capsules drop
-  { at: 24.72, src: K + "bubble-pop.wav", v: 0.46, dur: 0.11 },      // and pop open
-  { at: 25.19, src: K + "coin-drop.wav", v: 0.38, dur: 0.5 },
-  { at: 25.25, src: K + "bubble-pop.wav", v: 0.44, dur: 0.11 },
-  { at: 25.73, src: K + "coin-drop.wav", v: 0.36, dur: 0.5 },
-  { at: 25.79, src: K + "bubble-pop.wav", v: 0.42, dur: 0.11 },
-  { at: 26.26, src: K + "bubble-pop.wav", v: 0.40, dur: 0.11 },
-  { at: 27.06, src: K + "check-pop.wav", v: 0.42, dur: 0.63 },
+  /* ---------- S2 · CAVEMAN (7.61) ---------- */
+  ...cabinetOn(7.68),
+  ...screenFlip(10.68),
+  ...layer(11.21, { src: A + "hit-boom.wav", v: LEVELS.SFX_HERO, dur: 0.8 },
+                  { src: A + "punch.wav", v: LEVELS.SFX_MID, dur: 0.16 }),
+  { at: 13.45, src: A + "crowd-wow.wav", v: LEVELS.SFX_TEXTURE, dur: 1.4, rate: 0.95 },
+  ...prizeWon(14.14),
 
-  /* ---------- S5 · #4 AGENT MEMORY (28.08) ---------- */
-  { at: 28.15, src: K + "lights-on.wav", v: 0.40, dur: 0.78 },
-  { at: 28.41, src: K + "terminal-soft.wav", v: 0.24, dur: 1.2 },
-  { at: 30.61, src: K + "whoosh-choppy.wav", v: 0.38, dur: 0.5 },
-  { at: 31.15, src: K + "ping.wav", v: 0.34, dur: 0.13 },            // one per save slot lighting
-  { at: 31.51, src: K + "ping.wav", v: 0.33, dur: 0.13 },
-  { at: 31.88, src: K + "ping.wav", v: 0.32, dur: 0.13 },
-  { at: 32.25, src: K + "ping.wav", v: 0.31, dur: 0.13 },
-  { at: 32.61, src: K + "ping.wav", v: 0.30, dur: 0.13 },
-  { at: 31.68, src: K + "unlock.wav", v: 0.44, dur: 0.91 },          // the memory card seats
-  { at: 33.41, src: K + "check-pop.wav", v: 0.42, dur: 0.63 },
+  /* ---------- S3 · UI/UX PRO MAX (15.69) ---------- */
+  ...cabinetOn(15.76),
+  ...screenFlip(18.16, 1.06),
+  // the roller sweep — highlighter over a real marker stroke
+  ...layer(18.76, { src: A + "highlighter.wav", v: LEVELS.SFX_MID, dur: 0.5 },
+                  { src: A + "marker-stroke.wav", v: LEVELS.SFX_MID, dur: 0.9 }),
+  ...prizeWon(20.76),
 
-  /* ---------- S6 · #5 LAST 30 DAYS (34.39) ---------- */
-  { at: 34.46, src: K + "lights-on.wav", v: 0.40, dur: 0.78 },
-  { at: 34.72, src: K + "terminal-soft.wav", v: 0.24, dur: 1.2 },
-  { at: 36.79, src: K + "whoosh-choppy.wav", v: 0.38, dur: 0.5 },
-  { at: 36.92, src: K + "ping.wav", v: 0.36, dur: 0.13 },            // each feed comes online
-  { at: 37.12, src: K + "ping.wav", v: 0.35, dur: 0.13 },
-  { at: 37.32, src: K + "ping.wav", v: 0.34, dur: 0.13 },
-  { at: 37.52, src: K + "ping.wav", v: 0.33, dur: 0.13 },
-  { at: 38.32, src: K + "success-jingle.wav", v: 0.34, dur: 1.1 },   // the one summary lands
-  { at: 39.46, src: K + "check-pop.wav", v: 0.42, dur: 0.63 },
+  /* ---------- S4 · AGENCY AGENTS (21.46) ---------- */
+  ...cabinetOn(21.53),
+  ...screenFlip(24.13, 0.96),
+  ...repeat(4, 24.66, 0.535, { src: A + "coin-drop.wav", v: LEVELS.SFX_MID, dur: 0.5 }, 0.07),
+  ...repeat(4, 24.72, 0.535, { src: A + "bubble-pop.wav", v: LEVELS.SFX_MID, dur: 0.2 }, 0.08),
+  ...prizeWon(27.06),
 
-  /* ---------- S7 · #6 OPEN MONTAGE (40.23) ---------- */
-  { at: 40.30, src: K + "lights-on.wav", v: 0.40, dur: 0.78 },
-  { at: 41.10, src: K + "whoosh-choppy.wav", v: 0.38, dur: 0.5 },
-  { at: 41.28, src: K + "film-roll.wav", v: 0.50, dur: 0.18 },       // the timeline rolls
-  { at: 41.52, src: K + "loading-loop.wav", v: 0.26, dur: 1.5 },     // render progress
-  { at: 43.16, src: K + "check-pop.wav", v: 0.42, dur: 0.63 },
+  /* ---------- S5 · AGENT MEMORY (28.08) ---------- */
+  ...cabinetOn(28.15),
+  ...screenFlip(30.61, 1.03),
+  ...layer(31.68, { src: A + "unlock.wav", v: LEVELS.SFX_MID, dur: 0.91 },
+                  { src: A + "click-mac.wav", v: LEVELS.SFX_MID, dur: 0.3 }),
+  ...repeat(5, 31.15, 0.365, { src: A + "ping.wav", v: LEVELS.SFX_TEXTURE, dur: 0.2 }, 0.07),
+  ...prizeWon(33.41),
 
-  /* ---------- S8 · #7 ORCA (43.49) ---------- */
-  { at: 43.56, src: K + "lights-on.wav", v: 0.40, dur: 0.78 },
-  { at: 43.82, src: K + "terminal-soft.wav", v: 0.24, dur: 1.2 },
-  { at: 45.69, src: K + "whoosh-choppy.wav", v: 0.38, dur: 0.5 },
-  { at: 45.86, src: K + "digital-countdown.wav", v: 0.30, dur: 2.0 },// eight lanes spin up
-  { at: 48.36, src: K + "check-pop.wav", v: 0.44, dur: 0.63 },
-  { at: 48.56, src: K + "riser-metal.wav", v: 0.32, dur: 1.0 },      // into the CTA
+  /* ---------- S6 · LAST 30 DAYS (34.39) ---------- */
+  ...cabinetOn(34.46),
+  ...screenFlip(36.79, 0.98),
+  ...repeat(4, 36.92, 0.20, { src: A + "ping-msg.wav", v: LEVELS.SFX_TEXTURE, dur: 0.25 }, 0.09),
+  ...layer(38.32, { src: A + "success-jingle.wav", v: LEVELS.SFX_MID, dur: 1.1 },
+                  { src: A + "paper-slide.wav", dur: 0.7 }),
+  ...prizeWon(39.46),
+
+  /* ---------- S7 · OPEN MONTAGE (40.23) ---------- */
+  ...cabinetOn(40.30),
+  ...screenFlip(41.10, 1.08),
+  // the timeline rolling — film roll over a projector bed
+  ...layer(41.28, { src: A + "film-roll.wav", v: LEVELS.SFX_MID, dur: 0.25 },
+                  { src: A + "film-projector.wav", v: LEVELS.SFX_BED, dur: 1.9 }),
+  { at: 41.60, src: A + "loading-loop.wav", v: LEVELS.SFX_TEXTURE, dur: 1.4 },
+  ...prizeWon(43.16),
+
+  /* ---------- S8 · ORCA (43.49) ---------- */
+  ...cabinetOn(43.56),
+  ...screenFlip(45.69, 1.01),
+  // eight lanes spinning up — countdown over a ticking counter
+  ...layer(45.86, { src: A + "digital-countdown.wav", v: LEVELS.SFX_MID, dur: 2.0 },
+                  { src: A + "counter-tick.wav", v: LEVELS.SFX_TEXTURE, dur: 2.0, rate: 1.3 }),
+  ...layer(48.36, { src: A + "check-pop.wav", v: LEVELS.SFX_MID, dur: 0.63 },
+                  { src: A + "crowd-cheer.wav", v: LEVELS.SFX_TEXTURE, dur: 1.4 }),
+  { at: 48.56, src: A + "riser-metal.wav", v: LEVELS.SFX_TEXTURE, dur: 1.0 },
 
   /* ---------- S9 · CTA (49.05) ---------- */
-  { at: 49.12, src: K + "success-jingle.wav", v: 0.40, dur: 2.4 },
-  { at: 49.20, src: K + "crowd-applause.wav", v: 0.30, dur: 3.4 },
-  { at: 49.98, src: K + "cash-register.wav", v: 0.44, dur: 1.13 },   // $49.99 -> $0.00
-  { at: 50.60, src: K + "positive-chime.wav", v: 0.30, dur: 1.2 },
+  ...layer(49.12, { src: A + "success-jingle.wav", v: LEVELS.SFX_HERO, dur: 2.4 },
+                  { src: A + "crowd-applause.wav", v: LEVELS.SFX_MID, dur: 3.4 }),
+  ...layer(49.98, { src: A + "cash-register.wav", v: LEVELS.SFX_MID, dur: 1.13 },
+                  { src: A + "wheel-spin.wav", dur: 1.0 }),
 ];
 
 export const OpenReel: React.FC = () => {
   const f = useCurrentFrame();
-  const music = interpolate(f, [0, 14, OPEN_TOTAL - 28, OPEN_TOTAL], [0.22, 0.32, 0.32, 0],
+  const music = interpolate(f, [0, 14, OPEN_TOTAL - 28, OPEN_TOTAL], [db(-13), db(-10), db(-10), 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <AbsoluteFill>
       <Audio src={staticFile("open_vo_103.wav")} />
-      <Audio src={staticFile("powers_bed.wav")} volume={music} />
+      <Audio src={staticFile("open_bed_ducked.wav")} volume={music} />
       {/* a whoosh on every panel push */}
       {IN.slice(1).map((t, i) => (
         <Sequence key={"wh" + i} from={t - 2} durationInFrames={16} layout="none">
-          <Audio src={staticFile("sfx/pack/whoosh-fast.wav")} volume={0.46} />
+          <Audio src={staticFile("sfx/am/whoosh-fast.wav")} volume={LEVELS.SFX_MID} />
         </Sequence>
       ))}
-      {SFX_ALL.map((s, i) => <Sfx key={"sfx" + i} at={s.at} src={s.src} v={s.v} dur={s.dur} />)}
+      <SfxTrack cues={SFX_ALL} />
 
       <Bg />
 
