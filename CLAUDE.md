@@ -32,6 +32,8 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 | **build or edit a reel** | [`video/`](video/) (the Remotion project) — start at `video/src/Root.tsx` |
 | **ship a reel / check a finished render is complete** | [`tools/verify_reel.py`](tools/verify_reel.py) — the ship-gate (VO@0, soundtrack audible@0, cues fire, captions match). Exit 1 = don't ship |
 | **know the rules / not repeat a past mistake** | [`memory/MEMORY.md`](memory/MEMORY.md) |
+| **not repeat a past mistake, with the reasoning** | [`REEL-BUILD-LEARNINGS.md`](REEL-BUILD-LEARNINGS.md) — 12 indexed sections (colour · hook · layout · real data · VO · audio · Remotion · toolchain · process · sound · delivery · **how to diagnose**). §12 is the one to read when you are about to "fix" something |
+| **place a single sound effect** | [`docs/SOUND-DESIGN.md`](docs/SOUND-DESIGN.md) — layer / pitch-vary / J-cut / hierarchy / dB levels + the sidechain frequency pocket. Code: [`video/src/SoundKit.tsx`](video/src/SoundKit.tsx) |
 | **pick the next topic / write a script** | [`script-factory/`](script-factory/) + memory `script-factory-pipeline` |
 | **replicate a creator's *script* voice** | [`script-style-replicator/`](script-style-replicator/) — start at its `SKILL.md` |
 | **replicate a creator's *edit* style** | [`packs/`](packs/) — measured, verified edit packs |

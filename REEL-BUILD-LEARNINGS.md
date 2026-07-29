@@ -21,6 +21,9 @@ render, or a re-record. Read the section that matches what you are about to do.
 | 7 | [Remotion gotchas](#7-remotion-gotchas) | write animation code |
 | 8 | [Toolchain & environment](#8-toolchain--environment) | run whisper, ffmpeg or a render |
 | 9 | [Working process](#9-working-process) | start a new reel |
+| 10 | [Sound design](#10-sound-design) | place a single SFX cue |
+| 11 | [Delivery](#11-delivery) | put anything in Drive |
+| 12 | [**How to diagnose**](#12-how-to-diagnose-the-reasoning-not-the-rules) | you are about to "fix" something |
 
 ---
 
@@ -53,9 +56,49 @@ that instinct as the bug.
 
 **Self-check before every render — both must be 0:**
 ```bash
-grep -c "0 0 [0-9]*px" src/<Reel>*.tsx     # coloured glows
+grep -c "0 0 [0-9]*px" src/<Reel>*.tsx      # coloured glows
 grep -c "hexA(\w*, 0\.[01]" src/<Reel>*.tsx # low-opacity washes
 ```
+
+### Why this keeps happening (so you can catch yourself)
+Neon is not a style choice you make; it is where you *land* by default whenever the subject is a
+screen, a terminal, an arcade, a dashboard or anything "tech". The instinct goes: dark background reads
+as a device, so accents must glow to be visible on it. That is the bug. **If you notice yourself
+reaching for a dark background because the subject is technological, stop and pick a warm painted
+interior instead.**
+
+### The concrete palette
+| role | value |
+|---|---|
+| wall / back | `#3E4E5C`, `#33414D`, `#48596A` |
+| wood / floor | `#8A6242`, `#6E4A30`, `#A87C4C` |
+| carpet | `#7A4A3E` (with `#5E362D` skirting) |
+| paper / screens | `#F7F5F0`, `#EDE7DA`, `#DED5C4`, `#CDC2AB` |
+| accents | clay `#D2724E` · gold `#E7B24C` · green `#3F9E74` · red `#C44A3A` · sky `#5AA0DE` |
+| desaturated only | pink `#C4708E` · purple `#6B5A8E` — never `#F06E9A` / `#7C6BE8` |
+| shadow | `0 10px 22px rgba(26,24,19,0.34)` · inset `inset 0 -5px 0 rgba(26,24,19,0.12)` |
+
+### Tinting without washing
+When you need a lighter version of an accent, **mix it toward paper and emit a solid value** rather
+than dropping opacity:
+```ts
+const mix = (hex: string, k = 0.82) => {
+  const n = parseInt(hex.slice(1), 16);
+  const m = (v: number) => Math.round(v + (247 - v) * k);
+  return `rgb(${m((n >> 16) & 255)},${m((n >> 8) & 255)},${m(n & 255)})`;
+};
+```
+
+### ⛔ A palette change is a TWO-SIDED edit
+Lightening backgrounds without darkening the type is how a whole panel goes pale-on-pale and
+unreadable. After any colour sweep, **render one still and actually read the text on it.** Light-on-dark
+tokens (`#CFE6DA`, `#F0B4AC`, `#CBD8EE`) must become dark inks (`#1F5140`, `#8E3125`, `#2B2620`) at the
+same time.
+
+### ⛔ Regex sweeps eat object keys
+Stripping glows with a broad regex removed the `boxShadow:` key and left a bare string in a style
+object. esbuild reports it as `Expected ":" but found "}"`, which does not obviously point at colour.
+After any bulk style edit, grep for orphaned values and render one still before a full render.
 
 **Other standing style rules**
 - House chassis is mandatory: cream `#ECE9E2` bg, dark `Panel` card, top retention rail, karaoke
@@ -232,6 +275,120 @@ running process keeps the old denial.
 - Deliver finished MP4s to the Google Drive `Claude Reels/` folder only.
 - Be your own harshest critic — Alex should not have to re-flag neon, dead scenes, occlusion or
   desync every time.
+
+---
+
+## 10. Sound design
+
+Full system in [`docs/SOUND-DESIGN.md`](docs/SOUND-DESIGN.md); implementation in
+[`video/src/SoundKit.tsx`](video/src/SoundKit.tsx). The five rules in one line each:
+
+- **LAYER** every cue = a MOVEMENT (whoosh/boom/riser) + a TEXTURE (paper/tick/marker/gear/keys).
+- **PITCH** repeats reuse ONE file at a drifting rate. Never source a second file for the same action.
+- **J-CUT** cues land ~3 frames BEFORE the visual. Write `at` as the visual beat; the kit subtracts.
+- **HIERARCHY** sound the primary action only. >~4 distinct events per scene is clutter.
+- **LEVELS in dB** dialogue -6 / music -20 / sfx -10..-20, via `LEVELS.*` and `db()`. No bare floats.
+
+**⛔ The frequency pocket.** Do not just turn the music down; that makes it thin and it still masks the
+voice. Notch 450 / 1400 / 2800 Hz out of the bed, `sidechaincompress` it against the VO, then
+`loudnorm` so the level is predictable. A pocketed bed runs ~10 dB **hotter** without masking.
+
+**⛔ ALWAYS set `dur`.** Long one-shots are normal (a bass boom is 7.4 s, applause 5.9 s). Without a
+duration the tail runs under the next scene.
+
+**⛔ A missing `staticFile()` path fails SILENTLY.** The cue just never plays. Verify every referenced
+file exists before rendering, and prove the cues fired afterwards with `verify_reel.py --manifest`.
+
+Library: Drive `Claude Reels/Face/Sound Effects`. **Use the AM Creator collection** (156 files) as the
+default source. Alex rejected the Vox pack: "isn't really the sound design I want."
+
+---
+
+## 11. Delivery
+
+**⛔ Claim the reel number IMMEDIATELY BEFORE delivering, not at the start of the session.**
+`ls -d` the Drive `Faceless/` folder and take the next FREE number. Other agents ship concurrently: on
+this build a parallel session created `79 - PLUGINS` 36 minutes before delivery, so what began as reel
+79 had to be renamed to 80 after the fact.
+
+**A `.docx` copied into the Drive mount gets re-saved by Drive** and its byte size can jump many times
+over (14 KB to 659 KB). That is normal rehydration, not corruption and not another session overwriting
+you.
+
+**Verify a delivered file by hash, not by listing it.** `shasum` the Drive copy against the local
+render. A file can exist at the path and still be the wrong build.
+
+**If the Drive web UI shows an empty folder**, check the local files for a real
+`com.google.drivefs.item-id` xattr. A real cloud ID in the same format as an already-synced file means
+it uploaded and the browser view is stale. Open the folder by ID to bypass the cache:
+`https://drive.google.com/drive/folders/<id>`.
+
+---
+
+## 12. How to diagnose (the reasoning, not the rules)
+
+The rules above are outcomes. These are the *habits* that produced them. Most bad hours on this project
+came from fixing the wrong thing confidently.
+
+### Measure before you believe a subjective complaint
+"The music is too quiet" sounds like taste. It was arithmetic: `volumedetect` showed the bed and the VO
+both at ~-20 dB mean while the bed gain was `0.10`, putting music 20 dB under the voice. Inaudible by
+construction. **Whenever a complaint has a number behind it, go get the number** before touching a
+creative decision.
+
+### When a gate fails, verify the gate against the source of truth before "fixing" the work
+`verify_reel.py` ship-blocked on `VO_ONSET_0`. The tempting move is to go re-cut the VO. Instead:
+measure the audio. The VO started at 0.078 s with the first word at 0.000 s. The gate was reading
+`{"word","start","end"}` while SlopKit reels write `{"w","s","e"}`, so it matched zero words and
+reported a missing voice. **The tool was wrong, not the reel** — and the same bug would have
+mis-blocked every future SlopKit reel. A failing check is a hypothesis, not a verdict.
+
+### A false negative from a search is not evidence of absence
+A delivered `.docx` looked overwritten: the size had jumped 46x and searching `document.xml` for
+"Comment OPEN" and "The 7 Free Repos" found neither. Both conclusions were wrong. Word splits text
+**across `<w:t>` runs**, so whole-phrase substring search fails on text that is plainly there, and the
+footer lives in a different XML part entirely. **Extract the runs and search the reconstructed text.**
+Before alleging that something was clobbered, prove it with a method that could actually see it.
+
+### When output looks sparse, check whether a container changed and its contents did not
+"Not centred / not detailed enough" was not a design taste problem. The cabinets had been enlarged and
+every screen was still laid out for the old, smaller box, so all seven sat in the left ~65% with dead
+space at the right. **Resizing a container is not a layout change.** Recompute child geometry against
+the new box, every time.
+
+### Separate "the screen is dense" from "the frame is dense"
+A later pass produced screens that were genuinely detailed while the reel still felt empty. The cause
+was the surrounding world: the cabinet filled almost the whole panel, leaving a bare strip and one
+small character. The fix was a **foreground plane** (`ArcadeCounter`) drawn after the cabinet, so each
+scene reads at three depths: prop behind / counter in front / character standing at it. **Density is a
+property of the composition, not of the busiest element in it.**
+
+### Contrast survives a palette change only if you re-check the text
+The matte conversion lightened every panel but left the old light-on-dark type, so a whole diff panel
+went pale-on-pale and unreadable. **A colour system change is a two-sided edit**: backgrounds *and*
+foregrounds. Re-render one still and actually read it.
+
+### Never invent a fact that will appear on screen, and ask when you cannot confirm it
+Six of the seven repos were confirmable from the GitHub API. The seventh had no candidate above 50
+stars, which would have put a visibly false claim on screen against a VO saying "tens of thousands of
+stars". The correct move was to stop and ask for the URL, not to pick the closest match. **On-screen
+facts are claims you are making on the user's behalf.**
+
+### Check for prior work before rebuilding
+Two rounds of hook variants exist for this reel because a fresh session rebuilt them blind. Grep the
+memory index and the output directory first.
+
+### Prefer the failure that is loud
+The docx builder has a **dash gate** that refuses to emit the file if an em or en dash survives. It
+caught five in its own source on the first run. Build gates that stop you, and write them with unicode
+escapes so a later find-and-replace cannot silently disarm the gate itself (this happened: a bulk
+replace rewrote the gate's own regex and it started matching plain hyphens).
+
+### Do not let a cheap habit corrupt the environment
+`cd`-ing into a Google Drive folder that later lost permission left the shell's working directory
+pointing at an unreadable inode. Every subsequent `git` and `npx` failed with `EPERM: uv_cwd`, even
+after `cd`-ing away, because they call `getcwd()` at startup. `pwd` returning `.` is the tell, and only
+a fresh process fixes it. **Read cloud folders with absolute paths; never `cd` into them.**
 
 ---
 
