@@ -55,6 +55,10 @@
 - [⛔ Post caption structure](caption-structure.md) — OPEN with "Comment [KEYWORD]", then value
 - [Reel VO pacing](reel-vo-pacing.md) — tighten every VO (~7% speedup + pause-trim)
 - [⛔ Alex VO recordings](alex-vo-recordings.md) — transcribe attached m4a FULLY; NEVER clone/process his voice, RAW only
+- [⛔⛔ Locations LIBRARY ≠ locations USED](reel-locations-library-vs-used.md) — "it doesn't flip through new scenes, they're just standing and the tv changes": nine sets existed and all six hook shots used ONE. Count `len(set(locations))` vs shot count BEFORE rendering; each location gets its own palette so every cut is a colour change too
+- [⛔ Info goes in the GRAPHIC, not in type](reel-graphical-not-textual.md) — a number should MOVE to its value (needle sweeps · split-flap flips · bar fills · ring pulses), never be typeset at it; budget ONE text chip per shot in a band nothing else occupies; "not detailed enough" is countable — under ~8 objects reads as a diagram, approved scenes sit at 12-18
+- [⛔ CTA graphic gets its own column](reel-graphical-not-textual.md) — the ship gate passes a buried CTA happily; reel 82's BORIS seal shipped 9/9 with the astronaut's shadow across it. Render the still and LOOK before delivering
+- [⛔ Label hook-preview artifacts](reel-hook-preview-artifacts.md) — a solo hook comp has placeholder captions, a comp-length retention rail and NO audio by construction; say so when sending one or the round is spent reporting non-defects
 
 ## Sourcing + creator styles
 - [⛔ Outlier Engine](outlier-engine.md) — comp discovery (~/Downloads/outlier-engine): weekly scan.py → Door-A candidates
@@ -66,6 +70,8 @@
 - [Creator structure templates](creator-video-structure-templates.md) · [theventure](theventure-style-teardown.md) · [1609plus](1609plus-style-replica.md) · [venture pipeline](venture-style-pipeline.md)
 
 ## Per-reel factory logs
+
+- [**82 BORIS** ✅ delivered](reels/boris-factory-log.md) — 3 things 99% get wrong; MISSION CONTROL world, 7-world hook; 8 rounds: graphical-not-textual · benchmark cuts off the approved reel · locations-library-vs-used · the `*VOs` glob trap · buried CTA
 - [ARSENAL](reels/arsenal-factory-log.md) — reel 69, FIRST PASS delivered 2026-07-19 (4 free GitHub repos that upgrade Claude: Code Router/Repomix/Graphiti/Task Master, all star-counts VERIFIED live; keyword ARSENAL). Cinematic "gear-up/loadout" arc cloned from CALLBACK; VO cut-cut spliced + dead-air trimmed + 1.04x → 38.5s; ELBM soundtrack at 0s. ⭐ motion-lift doubled median 0.55→1.02 but still calmer than target — if Alex wants more energy, split the 6-7s rooms into more SHOTS, not more jitter. Awaiting feedback; not on Drive
 - [⛔⭐ CHART](reel-chassis-cinematic-not-abstract.md) — reel 68 SHIPPED 2026-07-19 to Drive `68 - CHART/` (mp4 + cover + caption + [agent-graph guide docx]). Adversarial agent graph: builder + attacker + rebuild loop → bulletproof work; keyword CHART. FIRST pass REJECTED (cloned SimulateReel = abstract nodes on black); rebuilt cinematic on the CALLBACK chassis (see the linked memory). Then a full LOGIC-FIX pass on Alex's punch-list: header z-order occlusion (→[[reel-build-gotchas]]), C1 reworked (lonely open → blast → decluttered, depth-correct walker), C4 builders grounded off the belt + work on the anvil, C5 BULLETPROOF stamp contained, C6 foundry reads behind the CTA w/ real mascot workers. Motion median 6.74, no dead air. Cover = standalone case-file (`CoverChart`), NOT a Boring Million episode (`CoverAgentEp3` is a different topic, the AI caller)
 - [⭐ DESIGN (Street Fighter)](reels/design-sf-factory-log.md) — reel 68 built 2026-07-19: 5 AI design tools as ranked arcade fighters (tier badges + star scores + output-screen props), V0 champion + golden buzzer; keyword DESIGN. On a pre-recorded Alex "panel" VO (not premise-gated). ⛔ words_design.json name-collision broke the WHOLE bundle. STAGED, not yet on Drive
@@ -94,6 +100,7 @@
 - [Lead-magnet docs](lead-magnet-docs.md) · [Trial reels repost method](trial-reels-repost-method.md) · [Behance real images](behance-real-images.md)
 - [Social assets → Google Drive](social-assets-to-gdrive.md) · [→ camera roll](social-assets-to-camera-roll.md) (⛔ RETIRED for reels) · [Share images as links](share-images-as-links.md)
 - [Claude Max spin giveaway](claude-max-spin-giveaway.md)
+- [Lead-magnet .docx builder](reel-lead-magnet-builder.md) — `tools/make_lead_magnet.py`, zero-dependency OOXML (python-docx is NOT installed); hard-fails on em-dashes, on a Matchtern footer, and on a missing keyword line
 
 ## Matchtern
 - [Design system](matchtern-design-system.md) — brand colors, fonts, logo, copy rules

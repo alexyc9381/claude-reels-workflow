@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 49,
-    "reels_total": 86,
-    "factory_logs": 44,
+    "reels_with_code": 51,
+    "reels_total": 88,
+    "factory_logs": 46,
     "storyboards": 18,
-    "caption_jsons": 55,
-    "memory_md": 177,
+    "caption_jsons": 56,
+    "memory_md": 183,
     "creators": 8,
     "packs": 3
   },
@@ -410,6 +410,7 @@
         "video/src/data/words_autopilot.json",
         "video/src/data/words_blueprint.json",
         "video/src/data/words_books.json",
+        "video/src/data/words_boris.json",
         "video/src/data/words_brain.json",
         "video/src/data/words_carousel.json",
         "video/src/data/words_carousel2.json",
@@ -476,6 +477,17 @@
       "log": "memory/reels/arcade-factory-log.md",
       "storyboard": null,
       "captions": []
+    },
+    {
+      "key": "boris",
+      "name": "boris",
+      "number": null,
+      "code": "video/src/ClaudeBorisReel.tsx",
+      "log": "memory/reels/boris-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_boris.json"
+      ]
     },
     {
       "key": "brand",
@@ -548,7 +560,7 @@
       "key": "delete",
       "name": "delete",
       "number": null,
-      "code": null,
+      "code": "video/src/ClaudeDeleteReel.tsx",
       "log": "memory/reels/delete-factory-log.md",
       "storyboard": null,
       "captions": [
@@ -710,6 +722,15 @@
       "number": null,
       "code": null,
       "log": "memory/reels/remote-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "rent",
+      "name": "rent",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/rent-factory-log.md",
       "storyboard": null,
       "captions": []
     },

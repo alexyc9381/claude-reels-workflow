@@ -9,6 +9,11 @@ metadata:
 
 **Reel 33 CREW** (keyword CREW, ~50s, `src/ClaudeCrewReel.tsx`, delivered `33_Claude-fable5-crew.mp4`). VO recorded by Alex. Script + rules live in [[reel-winning-formula]] (the CREW section). Premise: "You've got 5 days of free Fable 5 left. Before it's gone, split it into 6 AI employees…" → the C-suite → outlast payoff → Comment CREW. Rides the real Fable-5 July-12 extension.
 
+## ⚠️ TWO different CREW reels exist — do not confuse them
+- **v1 (6-exec, Fable-5 hire):** the ORIGINAL above. Delivered `33 CREW/33_Claude-fable5-crew.mp4` + `CREW - The 6 Employee Setup.docx` (Jul 7). Movie-reference anime C-suite (Mia/Jack/Max/Ben/Kate/Leo). Its 6-exec VO is NOT on disk anymore.
+- **v2 (3-agent, POWERS-style) — built 2026-07-13.** Alex asked to "edit the CREW SETUP video, structure it like the claude code POWERS video." The only available VO is `CREW SETUP.m4a` → `public/vo_crew.wav` (`src/data/words_crew.json`, 170 words), which is a DIFFERENT script: "three cloud agents turn one idea into a whole week of content while you sleep." So v2 is a fresh reel, not a re-edit of v1. Delivered `33 CREW/33_Claude-crew-setup.mp4` (POWERS engine cloned into `ClaudeCrewReel.tsx`, orig backed up as `ClaudeCrewReel_ORIG_backup.tsx`). L=[0,5.16,6.24,13.2,19.88,31.9,37.74,40.8], CUT=44.21 (1326 frames). Scenes: idea-bulb hook → "HERE'S THE SETUP" rehook → **Researcher** (glasses, detective trend-board+magnifier, "ANGLES WORKING NOW") → **Writer** (typewriter firing post-cards) → **Scheduler** (suit, launch-control with one held "HOLD FOR YOU" post) → **Handoff** (3-agent relay passing "ONE SHARED FILE") → **Payoff** (sleeping founder + sunrise, "A WEEK, ALREADY QUEUED") → **CTA** (CREW wordmark + 3 costumed agents, hard-cut on keyword). Added girl/cop/prof costumes to `Mascot`. No new lead-magnet docx built yet for v2 (the 6-Employee one does not fit 3 agents).
+- NOTE: fixing a corrupted `ClaudeCheatsReel.tsx` (a duplicate `ClaudeMark`/`Mascot` block, renamed to `CMark`/`CMascot`) was required to get the shared bundle to compile.
+
 ## Structure (L = [0,6.88,10.1,14.88,19.28,24.66,30.5,35.6,40.1,47.96], CUT 50.3)
 Hook → Rehook → Mia(CMO) → Ben(COO) → Kate(Chief of Staff) → Leo(CSO) → Max(CTO) → Jack(VP Sales) → Outlast → CTA. Employee order = VO order (best-first). Names easy to say (Alex rejected Cass/Vic/Sol).
 

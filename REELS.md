@@ -3,7 +3,7 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 49 reels with code · 44 factory logs · 18 storyboards · 55 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 51 reels with code · 46 factory logs · 18 storyboards · 56 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
@@ -33,6 +33,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **AUTOPILOT** | [✓](video/src/ClaudeAutopilotReel.tsx) | [1](video/src/data/words_autopilot.json) | · | · | code, no log |
 | · | **BLUEPRINT** | [✓](video/src/ClaudeBlueprintReel.tsx) | [1](video/src/data/words_blueprint.json) | · | · | code, no log |
 | · | **BOOKS** | [✓](video/src/ClaudeBooksReel.tsx) | [1](video/src/data/words_books.json) | · | · | code, no log |
+| · | **BORIS** | [✓](video/src/ClaudeBorisReel.tsx) | [1](video/src/data/words_boris.json) | [✓](memory/reels/boris-factory-log.md) | · | built |
 | · | **BRAIN** | [✓](video/src/ClaudeBrainReel.tsx) | [1](video/src/data/words_brain.json) | · | · | code, no log |
 | · | **BRAND** | · | · | [✓](memory/reels/brand-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **CAROUSEL2** | [✓](video/src/ClaudeCarousel2Reel.tsx) | [1](video/src/data/words_carousel2.json) | · | · | code, no log |
@@ -46,7 +47,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **CREW** | [✓](video/src/ClaudeCrewReel.tsx) | [1](video/src/data/words_crew.json) | · | · | code, no log |
 | · | **DEALS** | · | · | [✓](memory/reels/deals-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **DECK** | · | · | [✓](memory/reels/deck-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
-| · | **DELETE** | · | [1](video/src/data/words_delete.json) | [✓](memory/reels/delete-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
+| · | **DELETE** | [✓](video/src/ClaudeDeleteReel.tsx) | [1](video/src/data/words_delete.json) | [✓](memory/reels/delete-factory-log.md) | · | built |
 | · | **DESIGN** | [✓](video/src/ClaudeDesignReel.tsx) | [1](video/src/data/words_design.json) | · | · | code, no log |
 | · | **DESIGN SF** | · | · | [✓](memory/reels/design-sf-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **DESIGNER** | [✓](video/src/ClaudeDesignerReel.tsx) | · | · | · | code, no log |
@@ -80,6 +81,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **PROMPTSV2** | [✓](video/src/ClaudePromptsV2Reel.tsx) | [1](video/src/data/words_promptsv2.json) | · | · | code, no log |
 | · | **RECALL** | · | · | [✓](memory/reels/recall-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **REMOTE** | · | · | [✓](memory/reels/remote-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
+| · | **RENT** | · | · | [✓](memory/reels/rent-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **RETIRE** | [✓](video/src/ClaudeRetireReel.tsx) | [1](video/src/data/words_retire.json) | [✓](memory/reels/retire-factory-log.md) | · | built |
 | · | **SEO** | [✓](video/src/ClaudeSeoReel.tsx) | [1](video/src/data/words_seo.json) | · | · | code, no log |
 | · | **SHARP** | [✓](video/src/ClaudeSharpReel.tsx) | [1](video/src/data/words_sharp.json) | · | · | code, no log |
@@ -90,7 +92,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **SWIPE** | · | · | [✓](memory/reels/swipe-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **UNLOCK** | [✓](video/src/ClaudeUnlockReel.tsx) | [1](video/src/data/words_unlock.json) | · | · | code, no log |
 | · | **VAULT** | [✓](video/src/ClaudeVaultReel.tsx) | [1](video/src/data/words_vault.json) | · | · | code, no log |
-| · | **WORDS** | [✓](video/src/ClaudeWordsReel.tsx) | [52](video/src/data/words_ads.json) | · | · | code, no log |
+| · | **WORDS** | [✓](video/src/ClaudeWordsReel.tsx) | [53](video/src/data/words_ads.json) | · | · | code, no log |
 | · | **WORTHY** | [✓](video/src/ClaudeWorthyReel.tsx) | [1](video/src/data/words_worthy.json) | · | · | code, no log |
 | · | **XRAY** | · | · | [✓](memory/reels/xray-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 

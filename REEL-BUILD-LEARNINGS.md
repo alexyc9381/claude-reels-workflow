@@ -217,6 +217,28 @@ Rules that fall out of this:
 4. **A rigid box character cannot sell a deep lean.** Keep the body near-upright and let the props do
    it (taut chain + skid marks + dust). A 20° tilt on a box reads as *falling over*, not *straining*.
 
+### Reel 82 · benchmark the cut times off the APPROVED reel, don't re-derive a feel
+
+When a hook is called boring, do not reason about pacing from scratch. **Open the last approved reel
+and read its cut frames.** Reel 81's ninja hook cuts first at **f22 = 0.73s**; reel 82 was sitting on
+its first shot until f30 and read as slow. Recut to `12 · 26 · 44 · 68 · 100 · 136` — three cuts inside
+1.5s, then the shots lengthen. **Dense at the front interrupts, settling at the back retains.**
+
+Corollary to §9's shot-count floor: the floor is 0.7s *in the body*. A hard staccato open of two or
+three sub-0.5s shots IS the interrupt, provided the shots then get longer instead of staying choppy.
+
+### ⛔ Count DISTINCT LOCATIONS across the hook's shots before you render
+
+Having a location library is not the same as using it. `MissionWorld.tsx` shipped with **nine**
+locations and then all six hook shots used **one** of them — the control room — changing only what was
+on the screen. The user's words: *"it doesn't flip through new scenes it's just them standing and the
+tv changes."* Six shots in one room scores as **one** location no matter how much the props change.
+
+The check is mechanical, so do it: list each shot's location component, `len(set(...))`. If it is not
+close to the shot count, the hook is redressed, not varied. Each location also needs **its own
+palette** — pale grey-blue → amber → violet → teal → orange dust → gold — so every cut is a colour
+change as well as a place change.
+
 ## 3. Scene & screen layout
 
 **⛔ Enlarging a container does NOT re-lay-out its contents.** Reel 79's cabinets were scaled up and
@@ -417,6 +439,37 @@ labels *over* the hero buried it; the beat read as a pile of signs, not a charac
 hero's face clear — strap the props to the **lower body** so the eyes stay above the prop line.
 
 ---
+
+### Reel 82 · a number should MOVE to its value, not be typeset at it
+
+*"less text and more graphical animation, but also hierarchical, and make sure stuff isn't covering on
+top of each other."* Shot A had **seven** text elements. The fix is not smaller type, it is moving the
+information out of type entirely:
+
+| instead of… | draw |
+|---|---|
+| a labelled value | `Gauge` — a needle sweeps to it, red danger arc |
+| a headline | `Flap` — split-flap cells physically flip, letter by letter |
+| a percentage | `BarMeter` — a segmented bar fills |
+| an emphasis word | `Pulse` — a ring expands from the thing |
+| "it is running" | `Sweep` — a radar arm turns |
+
+Three needles slamming into the red beat three text chips reading `94%`. Budget **one** text chip per
+shot, in a band nothing else occupies.
+
+### Counting objects is how you tell "not detailed enough" from a taste complaint
+
+*"the scenes need to be way more detailed"* is measurable. Render the still and count distinct objects.
+Under ~8 reads as a diagram; the approved ninja scenes sit at **12 to 18**. Reel 82's M1 went from a
+shelf and a figure to two stripped shelves + a rolling ladder + a pile of pulled pages on the deck;
+M3 gained a specimen with a Claude patch, SVG cabling, a hazard stripe and a wall clipboard.
+
+### ⛔ The CTA graphic gets its own column. The gate will not catch a buried CTA.
+
+Reel 82's `BORIS` seal sat at x 566 with the astronaut ending at x 568 — so the crew's body and drop
+shadow covered its left edge. It is the single most important graphic in the reel (it is the comment
+prompt) and it shipped through 9/9 checks looking like a scrap of red behind someone's arm. Give the
+CTA asset a column no other element enters, then **render the still and look at it before delivering**.
 
 ## 4. Real-world data (logos, repos, brands)
 
@@ -626,6 +679,19 @@ running process keeps the old denial.
 
 ---
 
+### ⛔ A literal `*` in a path defeats every glob you type
+
+`BORIS.m4a` was in Drive the whole time, at:
+
+```
+.../My Drive/Claude Reels/Faceless/*VOs/BORIS.m4a
+```
+
+The folder is *named* `*VOs`. Every `find`/`ls` I ran globbed the asterisk, matched nothing, and I told
+the user four times that their file did not exist — until they sent a screenshot. Quote the path, or
+`find <parent> -maxdepth 2 -name 'BORIS*'` from the parent and read the real names. See §12: a failed
+search is not proof of absence, and I wrote that rule before breaking it.
+
 ## 9. Working process
 
 - **The first full render is a WIREFRAME, never a deliverable.** Always run the overhaul (hook
@@ -662,6 +728,27 @@ per scene, stack them with `hstack`/`vstack`, and look at it. Every defect in th
 a contact sheet, not in code review.
 
 ---
+
+### ⛔ Label the preview artifacts, or the reviewer spends a round reporting non-defects
+
+A standalone hook composition is not a small reel; three things are wrong with it *by construction*:
+
+| the reviewer sees | why | what to say |
+|---|---|---|
+| captions are gibberish / four repeated words | real caption data needs the VO, so the solo comp renders a hardcoded placeholder | "captions are placeholder" |
+| the retention rail races to full in 5s | `ProgressBar` sweeps across the *composition's* duration, and the hook comp is 171 frames | "the rail is comp-length; the ROOT owns it in the assembly" |
+| there is no audio at all | the VO/bed are wired at the assembly level | "the hook comp is silent by design" |
+
+All three got reported on reel 82 as bugs. They were correct observations of a preview I sent without
+context. **Send a hook preview with the caveat line attached**, every time.
+
+### Ship the tool, not the one-off script
+
+The reel-81 lead magnet was built by an ad-hoc OOXML writer that lived in a scratchpad and was gone by
+reel 82. It is now `tools/make_lead_magnet.py` — zero dependencies (stock `python3`, no `python-docx`),
+takes a plain-text spec, and **fails hard** on an em-dash or a "Powered by Matchtern" footer, because
+both of those are house rules that have shipped wrong before. If you write a generator twice, it
+belongs in `tools/`.
 
 ## 10. Sound design
 
