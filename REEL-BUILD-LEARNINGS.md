@@ -265,6 +265,30 @@ the screen."* Three separate mistakes stacked:
 Also give the swinger a wind-up and a follow-through (`rot` negative before the cut frame, positive
 after). A static figure beside a moving blade does not read as the one swinging it.
 
+**⛔ An inline box wider than its container does NOT centre — and a `scale()` then locks the offset in.**
+The house karaoke caption was `display: inline-flex` inside a centred parent. When a phrase exceeded the
+container, inline layout put it at the content edge and overflowed **right only**, so
+`transform: scale(shrink)` about `50% 50%` shrank it around its own displaced centre. Measured: the widest
+line sat **80 px right of frame centre**. A block-level flex spills symmetrically:
+```tsx
+// ⛔ display: "inline-flex"        → overflows right, scale locks the offset
+// ✅ display: "flex", width: "100%" + justifyContent: "center" → stays centred
+```
+
+**Calibrate a text-width estimator against a real render, not from memory.** The same caption's
+"force one line" shrink used **41 px/char**; measured off a rendered frame, Fraunces 900 @74px is
+**44.1**. A 7% under-read meant the widest line still overran after shrinking. Measure it by scanning the
+rendered caption band for ink:
+```python
+cols=[x for x in range(W) if any((px[x,y][0]-px[x,y][2])>34 and px[x,y][0]>120 for y in range(0,H,2))]
+print(min(cols), max(cols), max(cols)-min(cols), (min(cols)+max(cols))//2)   # extent, width, centre
+```
+⚠️ Only judge centring on a **complete** karaoke line — a partially-revealed one measures left-biased
+because unspoken words are `color: transparent` but still occupy layout.
+
+**Captions get a real margin.** `SAFE` was 992 of 1080 px (92% of the frame) with a 20 px container
+inset, so a long line ran edge to edge and read as cramped. Now 856 px with a 112 px inset.
+
 **⛔ Text overflows in TWO ways, and both look like the same bug to the viewer.**
 
 1. **Past its own box.** Reel 81's `CLAUDE.md` plate: the box was narrowed from `W0-32` to `W0-104`

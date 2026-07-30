@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 44,
-    "reels_total": 65,
-    "factory_logs": 24,
-    "storyboards": 6,
-    "caption_jsons": 46,
-    "memory_md": 134,
+    "reels_with_code": 49,
+    "reels_total": 85,
+    "factory_logs": 43,
+    "storyboards": 18,
+    "caption_jsons": 55,
+    "memory_md": 176,
     "creators": 8,
     "packs": 3
   },
@@ -111,17 +111,6 @@
       ]
     },
     {
-      "key": "channel",
-      "name": "Channel",
-      "number": null,
-      "code": "video/src/ClaudeChannelReel.tsx",
-      "log": null,
-      "storyboard": null,
-      "captions": [
-        "video/src/data/words_channel.json"
-      ]
-    },
-    {
       "key": "clone",
       "name": "Clone",
       "number": null,
@@ -152,17 +141,6 @@
       "storyboard": null,
       "captions": [
         "video/src/data/words_control.json"
-      ]
-    },
-    {
-      "key": "council",
-      "name": "Council",
-      "number": null,
-      "code": "video/src/ClaudeCouncilReel.tsx",
-      "log": null,
-      "storyboard": null,
-      "captions": [
-        "video/src/data/words_council.json"
       ]
     },
     {
@@ -396,17 +374,6 @@
       ]
     },
     {
-      "key": "swarm",
-      "name": "Swarm",
-      "number": null,
-      "code": "video/src/ClaudeSwarmReel.tsx",
-      "log": null,
-      "storyboard": null,
-      "captions": [
-        "video/src/data/words_swarm.json"
-      ]
-    },
-    {
       "key": "unlock",
       "name": "Unlock",
       "number": null,
@@ -452,12 +419,15 @@
         "video/src/data/words_control.json",
         "video/src/data/words_council.json",
         "video/src/data/words_crew.json",
+        "video/src/data/words_delete.json",
         "video/src/data/words_design.json",
         "video/src/data/words_erase.json",
         "video/src/data/words_fable.json",
         "video/src/data/words_factory.json",
         "video/src/data/words_glm.json",
+        "video/src/data/words_jarvis1.json",
         "video/src/data/words_leads.json",
+        "video/src/data/words_limits.json",
         "video/src/data/words_listicle.json",
         "video/src/data/words_loops.json",
         "video/src/data/words_loops_alex.json",
@@ -466,16 +436,21 @@
         "video/src/data/words_night.json",
         "video/src/data/words_nightshift.json",
         "video/src/data/words_offer.json",
+        "video/src/data/words_open.json",
+        "video/src/data/words_open_103.json",
         "video/src/data/words_prompts.json",
         "video/src/data/words_promptsv2.json",
         "video/src/data/words_retire.json",
         "video/src/data/words_seo.json",
+        "video/src/data/words_serena.json",
         "video/src/data/words_sharp.json",
+        "video/src/data/words_simulate.json",
         "video/src/data/words_site.json",
         "video/src/data/words_slash.json",
         "video/src/data/words_sol.json",
         "video/src/data/words_stack.json",
         "video/src/data/words_swarm.json",
+        "video/src/data/words_tested.json",
         "video/src/data/words_unlock.json",
         "video/src/data/words_vault.json",
         "video/src/data/words_words.json",
@@ -508,6 +483,73 @@
       "number": null,
       "code": null,
       "log": "memory/reels/brand-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "channel",
+      "name": "channel",
+      "number": null,
+      "code": "video/src/ClaudeChannelReel.tsx",
+      "log": "memory/reels/channel-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_channel.json"
+      ]
+    },
+    {
+      "key": "codes",
+      "name": "codes",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/codes-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "council",
+      "name": "council",
+      "number": null,
+      "code": "video/src/ClaudeCouncilReel.tsx",
+      "log": "memory/reels/council-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_council.json"
+      ]
+    },
+    {
+      "key": "court",
+      "name": "court",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/court-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "deals",
+      "name": "deals",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/deals-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "deck",
+      "name": "deck",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/deck-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "designsf",
+      "name": "design-sf",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/design-sf-factory-log.md",
       "storyboard": null,
       "captions": []
     },
@@ -568,6 +610,15 @@
       "captions": []
     },
     {
+      "key": "graphloops",
+      "name": "graphloops",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/graphloops-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
       "key": "grid",
       "name": "grid",
       "number": null,
@@ -598,8 +649,20 @@
       "key": "jarvis",
       "name": "jarvis",
       "number": null,
-      "code": null,
+      "code": "video/src/ClaudeJarvisReel.tsx",
       "log": "memory/reels/jarvis-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/duck_jarvis1.json",
+        "video/src/data/words_jarvis1.json"
+      ]
+    },
+    {
+      "key": "lean",
+      "name": "lean",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/lean-factory-log.md",
       "storyboard": null,
       "captions": []
     },
@@ -631,6 +694,15 @@
       "captions": []
     },
     {
+      "key": "remote",
+      "name": "remote",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/remote-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
       "key": "retire",
       "name": "retire",
       "number": null,
@@ -649,6 +721,17 @@
       "log": "memory/reels/spend-factory-log.md",
       "storyboard": null,
       "captions": []
+    },
+    {
+      "key": "swarm",
+      "name": "swarm",
+      "number": null,
+      "code": "video/src/ClaudeSwarmReel.tsx",
+      "log": "memory/reels/swarm-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_swarm.json"
+      ]
     },
     {
       "key": "swipe",
@@ -726,6 +809,122 @@
       "log": null,
       "storyboard": "storyboards/59-roots.md",
       "captions": []
+    },
+    {
+      "key": "jarvispart1",
+      "name": "jarvis-part1",
+      "number": 62,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/62-jarvis-part1.md",
+      "captions": []
+    },
+    {
+      "key": "simulate",
+      "name": "simulate",
+      "number": 62,
+      "code": "video/src/ClaudeSimulateReel.tsx",
+      "log": "memory/reels/simulate-factory-log.md",
+      "storyboard": "storyboards/62-simulate.md",
+      "captions": [
+        "video/src/data/words_simulate.json"
+      ]
+    },
+    {
+      "key": "tool",
+      "name": "tool",
+      "number": 65,
+      "code": null,
+      "log": "memory/reels/tool-factory-log.md",
+      "storyboard": "storyboards/65-tool.md",
+      "captions": []
+    },
+    {
+      "key": "posts",
+      "name": "posts",
+      "number": 66,
+      "code": null,
+      "log": "memory/reels/posts-factory-log.md",
+      "storyboard": "storyboards/66-posts.md",
+      "captions": []
+    },
+    {
+      "key": "chart",
+      "name": "chart",
+      "number": 68,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/68-chart.md",
+      "captions": []
+    },
+    {
+      "key": "arsenal",
+      "name": "arsenal",
+      "number": 69,
+      "code": null,
+      "log": "memory/reels/arsenal-factory-log.md",
+      "storyboard": "storyboards/69-arsenal.md",
+      "captions": []
+    },
+    {
+      "key": "arsenalv2",
+      "name": "arsenal-v2",
+      "number": 69,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/69-arsenal-v2.md",
+      "captions": []
+    },
+    {
+      "key": "serena",
+      "name": "serena",
+      "number": 69,
+      "code": "video/src/ClaudeSerenaReel.tsx",
+      "log": "memory/reels/serena-factory-log.md",
+      "storyboard": "storyboards/69-serena.md",
+      "captions": [
+        "video/src/data/words_serena.json"
+      ]
+    },
+    {
+      "key": "assembly",
+      "name": "assembly",
+      "number": 70,
+      "code": null,
+      "log": "memory/reels/assembly-factory-log.md",
+      "storyboard": "storyboards/70-assembly.md",
+      "captions": []
+    },
+    {
+      "key": "silos",
+      "name": "silos",
+      "number": 76,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/76-silos.md",
+      "captions": []
+    },
+    {
+      "key": "tested",
+      "name": "tested",
+      "number": 77,
+      "code": "video/src/ClaudeTestedReel.tsx",
+      "log": "memory/reels/tested-factory-log.md",
+      "storyboard": "storyboards/77-tested.md",
+      "captions": [
+        "video/src/data/words_tested.json"
+      ]
+    },
+    {
+      "key": "limits",
+      "name": "limits",
+      "number": 78,
+      "code": "video/src/ClaudeLimitsReel.tsx",
+      "log": "memory/reels/limits-factory-log.md",
+      "storyboard": "storyboards/78-limits.md",
+      "captions": [
+        "video/src/data/words_limits.json"
+      ]
     }
   ]
 }

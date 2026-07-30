@@ -289,7 +289,7 @@ export const NinjaHook: React.FC = () => {
         })}
         {flash > 0.02 && <div style={{ position: "absolute", inset: 0, background: PAPER_HI, opacity: flash * 0.5, zIndex: 41 }} />}
       </Panel>
-      <SoloCaption words={["And", "Anthropic", "just", "told"]} hot={1} />
+      <SoloCaption words={["Anthropic", "just", "told"]} hot={1} />
     </AbsoluteFill>
   );
 };
