@@ -19,14 +19,14 @@ import words from "./data/words_delete.json";
    is opaque on the cut frame. See NinjaTransitions.tsx.
 
    Scene starts are locked to the de-flubbed, de-gapped VO
-   (public/delete_vo_v4.wav — 33.58s).
+   (public/delete_vo_v5.wav — 33.58s).
 
    ⛔ The VO is tightened by MEASURED SILENCE plus atempo, never by whisper's word
    `end` times. Whisper's ends run ~150-200ms early, so cutting to them slices
-   speech: an earlier pass took 134ms out of the middle of "anymore". Every cut
-   here sits inside a -40 dB silence with a 45ms margin (0.21s total), and the
-   pace comes from atempo=1.05, which removes duration without removing a single
-   phoneme. See REEL-BUILD-LEARNINGS §5.
+   speech: an earlier pass took 134ms out of the middle of "anymore". Cuts here
+   come from a 20ms ENERGY ENVELOPE scan, not silencedetect alone — the 0.72s
+   hole at 13s was a BREATH sitting at -30 dB, invisible to a -40 dB silence
+   gate. Pace comes from atempo=1.05. See REEL-BUILD-LEARNINGS §5.
    ========================================================================== */
 
 const FPS = 30;
@@ -34,17 +34,17 @@ const fr = (s: number) => Math.round(s * FPS);
 
 const SCENES: { C: React.FC; s: number; label: string; cut: Kind }[] = [
   { C: NinjaHook, s: 0.00,  cut: "smoke", label: "hook · the sealed scroll, chained, cut free" },
-  { C: N1Armory,  s: 4.74,  cut: "smoke", label: "the armory · they strap more iron on" },
-  { C: N2Master,  s: 7.16,  cut: "star",  label: "bamboo forest · the master cuts every chain" },
-  { C: N3Founder, s: 9.54,  cut: "slash", label: "the scroll hall · he is named, his clip hangs" },
-  { C: N4Yards,   s: 13.66, cut: "ink",   label: "two yards · snowy 2024 vs night 2026" },
-  { C: N5Short,   s: 17.88, cut: "star",  label: "rooftop range · the throw falls short" },
-  { C: N6Reset,   s: 20.72, cut: "smoke", label: "the waterfall · six moons, the chains go in" },
-  { C: N7Summit,  s: 24.98, cut: "slash", label: "the summit · dawn, carrying nothing" },
-  { C: N8Market,  s: 27.22, cut: "ink",   label: "the night market · six brand new sets" },
-  { C: N9Gate,    s: 31.30, cut: "smoke", label: "the torii gate · comment DELETE" },
+  { C: N1Armory,  s: 4.66,  cut: "smoke", label: "the armory · they strap more iron on" },
+  { C: N2Master,  s: 7.08,  cut: "star",  label: "bamboo forest · the master cuts every chain" },
+  { C: N3Founder, s: 9.48,  cut: "slash", label: "the scroll hall · he is named, his clip hangs" },
+  { C: N4Yards,   s: 13.36, cut: "ink",   label: "two yards · snowy 2024 vs night 2026" },
+  { C: N5Short,   s: 17.28, cut: "star",  label: "rooftop range · the throw falls short" },
+  { C: N6Reset,   s: 20.16, cut: "smoke", label: "the waterfall · six moons, the chains go in" },
+  { C: N7Summit,  s: 24.44, cut: "slash", label: "the summit · dawn, carrying nothing" },
+  { C: N8Market,  s: 26.70, cut: "ink",   label: "the night market · six brand new sets" },
+  { C: N9Gate,    s: 30.84, cut: "smoke", label: "the torii gate · comment DELETE" },
 ];
-const END_S = 33.68;                      // ⛔ the reel ENDS on the word "DELETE" (ends 33.58). No hold.
+const END_S = 33.16;                      // ⛔ the reel ENDS on the word "DELETE" (ends 33.06). No hold.
 export const DELETE_TOTAL = Math.round(END_S * FPS);
 
 /* the incoming scene is alive 3 frames early, under the clearing graphic */
@@ -210,8 +210,8 @@ export const DeleteReel: React.FC = () => {
     f < 12 ? db(-12) : f > DELETE_TOTAL - 10 ? db(-10) * Math.max(0, (DELETE_TOTAL - f) / 10) : db(-10);
   return (
     <AbsoluteFill>
-      <Audio src={staticFile("delete_vo_v4.wav")} />
-      <Audio src={staticFile("delete_bed_v3.wav")} volume={music} />
+      <Audio src={staticFile("delete_vo_v5.wav")} />
+      <Audio src={staticFile("delete_bed_v4.wav")} volume={music} />
       <SfxTrack cues={SFX_ALL} />
 
       <Bg />

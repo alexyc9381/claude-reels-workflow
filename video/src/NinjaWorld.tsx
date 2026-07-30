@@ -1,5 +1,5 @@
 import React from "react";
-import { Easing, interpolate, Img, staticFile } from "remotion";
+import { Easing, interpolate, Img, OffthreadVideo, staticFile } from "remotion";
 import { inter, fraunces } from "./fonts";
 import { Mascot, INK, CLAYD } from "./SlopKit";
 
@@ -12,7 +12,7 @@ import { Mascot, INK, CLAYD } from "./SlopKit";
    OPAQUE bands in progressively lighter tints, the way cel backgrounds do it.
    ========================================================================= */
 
-export const HAS_CLIP = false;
+export const HAS_CLIP = true;
 export const CLIP_SRC = "delete_clip.mp4";
 
 /* ---- night ---- */
@@ -817,7 +817,9 @@ export const ClipScreen: React.FC<{ f: number; x: number; y: number; w: number; 
       <div style={{ position: "absolute", left: -18, top: h + 4, width: w + 36, height: 26, borderRadius: 5, background: WOOD_D, boxShadow: SH }} />
       <div style={{ position: "absolute", inset: 0, background: "#3A3A3A", border: `9px solid ${WOOD}`, boxShadow: SH_D, overflow: "hidden" }}>
         {HAS_CLIP ? (
-          <Img src={staticFile(CLIP_SRC)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          /* the real talk footage. muted — the VO owns the audio track. */
+          <OffthreadVideo src={staticFile(CLIP_SRC)} muted
+            style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         ) : (<>
           {/* placeholder: a talk-stage plate until the real recording lands */}
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,#4A4A4A 0%,#333333 100%)" }} />

@@ -339,6 +339,22 @@ hero's face clear — strap the props to the **lower body** so the eyes stay abo
 
 ## 4. Real-world data (logos, repos, brands)
 
+**⛔ `<Img>` cannot play a video.** A clip slot wired with `Img src={staticFile("clip.mp4")}` renders
+nothing and fails silently. Use `OffthreadVideo`, and `muted` — the VO owns the audio track:
+```tsx
+<OffthreadVideo src={staticFile(CLIP_SRC)} muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+```
+Gate a clip slot behind a `HAS_CLIP` flag with a hand-drawn placeholder behind it, so the reel renders
+and ships before the footage exists and flips over with a one-line change.
+
+**Pulling a source clip:** `python3 -m yt_dlp` (memory `feedback_no_browser_agents_instagram`). It picks
+separate video/audio streams and then cannot merge them, because the project ffmpeg is not on its PATH —
+merge yourself with `ffmpeg -i v.mp4 -i a.m4a -c copy -shortest out.mp4`. To choose the segment, probe
+stills across the middle to confirm the subject is on camera, then transcribe candidate windows with
+word timestamps and take the **longest run with no inter-word gap over 0.35s** — that is an
+uninterrupted sentence, which is what reads as "speaking" when the clip is muted.
+
+
 - **Never invent a repo, owner, star count or logo.** Pull real values from the GitHub API and store
   them in one map:
   ```bash
@@ -383,6 +399,31 @@ ffmpeg -hide_banner -i vo.wav -af "silencedetect=noise=-40dB:d=0.12" -f null -
 ```
 Then cut only the middle of each detected silence, keeping ~0.10 s of air and never cutting within
 45 ms of either edge.
+
+**⛔ A BREATH is not silence. `silencedetect` alone will miss the worst gaps.** After the safe-cut pass
+above, Alex still found one: *"there is an extra long pause gap between 13-14 seconds."* Measuring it:
+
+```
+ 13.10  -13.4 dB   ###...   end of "Combinator."
+ 13.20  -35.4 dB   ##
+ 13.30  -39.4 dB   #
+ 13.40  -29.2 dB   ###      <-- a BREATH. Not silence, not speech.
+ 13.60  -30.1 dB   ###
+ 13.80  -39.8 dB   #
+ 13.90  -12.7 dB   ###...   "His"
+```
+A 0.72s hole, of which a `-40 dB` gate saw only 0.19s — because the middle sat at −30 dB. Speech peaks
+at −5 to −15 dB, so anything under about −26 dB for a sustained stretch is breath or room, never a vowel.
+
+**Scan the ENERGY ENVELOPE, don't just ask silencedetect.** A 20 ms peak envelope over the whole file,
+then every run below −26 dB lasting ≥0.28s is a removable hole. Cut the middle, keep ~0.15s, stay 60 ms
+off each edge, and **assert** that no cut window contains a frame above −22 dB — that assertion is what
+makes the pass safe to run unattended:
+```python
+assert max(env[int(ca/0.02):int(cb/0.02)]) < -22, "cut touches speech"
+```
+Reel 81: two holes found (0.34s and 0.72s), 0.52s removed, assertion green, sentence transcribes
+identically across the splice.
 
 **And expect less room than you think.** Measured properly, this VO had **0.21 s** of removable
 silence, not the 2.43 s the word-gap method claimed. The pauses a listener perceives are often
