@@ -149,6 +149,18 @@ shot A became a BRIGHT extreme close on the literal `CLAUDE.md` file, padlocked 
 across it, cream filling the panel, the filename at 148px so it reads on mute, and the ninja already
 in frame. Then hard cut to the night wide. Six shots at 0.50 / 1.03 / 1.57 / 2.03 / 2.50s.
 
+**⛔ Winning the luma gate must not cost you the theme.** The first fix for reel 81's dark open was a
+bright cream "file" card with `CLAUDE.md` on it. It passed at 196/255 and was rejected immediately:
+*"the first scene is not ninja themed so its too boring."* A gate is a floor, not a brief.
+
+The version that holds both is a **sealed ninja technique scroll** — timber rollers with iron caps, a
+red side-band, washi with laid fibre lines, the filename brushed in sumi ink, the five techniques
+listed as scroll entries, a red hanko seal, and the chain and padlock across it. Paper is the
+brightest thing that world owns, so the bar is cleared *from inside the theme* (178/255).
+
+**When a gate and the theme seem to conflict, look for the bright thing the world already contains**
+— paper, snow, dawn, lantern light, a backlit shoji screen, fire. Do not import a neutral card.
+
 Do not put a slow camera drift inside a hook shot and call it motion — the doc is explicit that the
 camera does not move and every change is a hard cut to a different *framing* of the same world. A
 drifting single wide still scores as one shot.

@@ -5,7 +5,7 @@ import { Bg, Panel, ProgressBar, HookHeader, Caption, AssemblyCtx, INK, hexA } f
 import {
   Rooftops, Ninja, Anchor, Chain, Smoke, Slash, Streaks, SpeedLines,
   NIGHT, NIGHT_D, NIGHT_L, NIGHT_LL, TILE, TILE_D, TILE_L, MOON, PAPER, PAPER_HI, PAPER_LO,
-  IRON, IRON_D, IRON_L, SASH, SASH_D, SMOKE_L, CLAY, CARD, CARD2, CARD3, WOOD_D, SNOW,
+  IRON, IRON_D, IRON_L, SASH, SASH_D, SMOKE_L, CLAY, CARD, CARD2, CARD3, WOOD, WOOD_D, SNOW,
   E, osc, rnd, OUT, IO, IN_Q, BACK, SH, SH_D,
 } from "./NinjaWorld";
 
@@ -19,9 +19,9 @@ const SoloCaption: React.FC<{ words: string[]; hot?: number }> = (p) =>
    a bar of 140 (a night reel opening dark loses the feed), and ONE shot across
    4.5s against a bar of three. Both are recut problems, not new-element ones.
 
-     A  f0-15   BRIGHT EXTREME CLOSE on the CLAUDE.md file, padlocked shut.
-                Cream fills the panel · the literal thing the VO names ·
-                readable on mute · the ninja already in frame.
+     A  f0-15   THE SEALED SCROLL. A ninja technique scroll unrolled to fill
+                the panel, CLAUDE.md brushed in ink, chained shut. Bright washi
+                clears the luma bar without leaving the world.
      B  f15-31  HARD CUT to the wide. This is the roof it is chained to.
      C  f31-47  HARD CUT in and low. The chain yanks it off its feet.
      D  f47-61  HARD CUT to the blade. One stroke, the link parts.
@@ -37,49 +37,102 @@ const SoloCaption: React.FC<{ words: string[]; hot?: number }> = (p) =>
 const RIDGE = 548;
 export const HOOK_CUTS = [15, 31, 47, 61, 75];
 
-/* ---------- SHOT A · the file itself, big enough to read on mute ---------- */
+/* ---------- SHOT A · THE SEALED SCROLL ----------------------------------
+   Bright frame 0 without leaving the world: a ninja's technique scroll
+   (makimono) unrolled to fill the panel — timber rollers, cream washi, the
+   filename brushed in sumi ink, the five techniques listed under it, a red
+   hanko seal, and an iron chain padlocking the whole thing shut. Paper is the
+   brightest thing a ninja owns, so this clears the luma bar AND stays ninja.
+   Pop culture: the sealed forbidden-technique scroll.
+   ---------------------------------------------------------------------- */
 const ShotA: React.FC<{ f: number }> = ({ f }) => {
   const snap = f >= 6 && f < 12 ? 1 - (f - 6) / 6 : 0;      // the chain jerks taut
   const jx = snap * Math.sin(f * 5.2) * 9;
   const set = E(f, 0, 6, 0, 1, OUT);
+  const TECH = ["SKILLS", "HOOKS", "MCP", "RULES", "MEMORY"];
   return (
-    <div style={{ position: "absolute", inset: 0, background: CARD2 }}>
-      {/* a bright paper field: this is what makes frame 0 win the feed */}
-      <div style={{ position: "absolute", inset: 0,
-        background: `radial-gradient(ellipse at 46% 42%, #FFFFFF 0%, ${CARD} 46%, ${CARD3} 100%)` }} />
-      {/* faint rules, so it reads as a FILE and not a card */}
-      {Array.from({ length: 11 }, (_, i) => (
-        <div key={i} style={{ position: "absolute", left: 60, right: 60, top: 96 + i * 62, height: 4,
-          borderRadius: 2, background: "rgba(42,38,32,0.09)" }} />
+    <div style={{ position: "absolute", inset: 0, background: WOOD_D }}>
+      {/* the washi field */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 62, bottom: 62, background: PAPER }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 62, bottom: 62,
+        background: `radial-gradient(ellipse at 44% 38%, #FFFDF4 0%, ${PAPER} 52%, ${PAPER_LO} 100%)` }} />
+      {/* paper fibre: fine vertical laid lines, the way washi reads */}
+      {Array.from({ length: 34 }, (_, i) => (
+        <div key={i} style={{ position: "absolute", left: 8 + i * 30, top: 62, bottom: 62, width: 2,
+          background: "rgba(96,74,44,0.07)" }} />
       ))}
-      <div style={{ position: "absolute", inset: 0, transform: `translateX(${jx}px)` }}>
-        <div style={{ position: "absolute", left: 44, top: 140, width: 924 }}>
-          <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 30, letterSpacing: "0.22em", color: SASH }}>YOUR SETUP</div>
-          <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 148, lineHeight: 1.0,
-            letterSpacing: "-0.04em", color: INK }}>CLAUDE.md</div>
-          <div style={{ marginTop: 20, display: "flex", gap: 12, flexWrap: "wrap" }}>
-            {["SKILLS", "HOOKS", "MCP", "RULES", "MEMORY"].map((t, i) => (
-              <span key={t} style={{ padding: "10px 20px", borderRadius: 6, background: IRON, color: "#EFEAE0",
-                fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 27, letterSpacing: "0.06em",
-                opacity: E(f, 2 + i, 6 + i, 0, 1, OUT), boxShadow: SH }}>{t}</span>
-            ))}
-          </div>
+      {/* the timber rollers, top and bottom */}
+      {[0, 1].map((k) => (
+        <div key={k} style={{ position: "absolute", left: -30, right: -30, top: k ? undefined : 0, bottom: k ? 0 : undefined, height: 66 }}>
+          <div style={{ position: "absolute", inset: 0, borderRadius: 8, background: WOOD }} />
+          <div style={{ position: "absolute", left: 0, right: 0, top: k ? 0 : 44, height: 22, background: WOOD_D }} />
+          <div style={{ position: "absolute", left: 0, right: 0, top: k ? 46 : 6, height: 9, background: "#8A6236" }} />
+          {/* the roller caps */}
+          {[26, 984].map((cx, ci) => (
+            <div key={ci} style={{ position: "absolute", left: cx, top: 6, width: 46, height: 54, borderRadius: 8, background: IRON_D }} />
+          ))}
         </div>
-        {/* the chain padlocking it shut, straight across the middle */}
-        <Chain x1={-60} y1={498} x2={1080} y2={566} s={1.7} slack={0} z={12} />
-        <div style={{ position: "absolute", left: 396, top: 470, width: 168, height: 168, borderRadius: 20,
+      ))}
+      {/* a red side-band, brushed */}
+      <div style={{ position: "absolute", left: 0, top: 62, width: 26, bottom: 62, background: SASH }} />
+      <div style={{ position: "absolute", right: 0, top: 62, width: 14, bottom: 62, background: SASH_D }} />
+
+      <div style={{ position: "absolute", inset: 0, transform: `translateX(${jx}px)` }}>
+        {/* brushed heading + the filename, big enough to read on mute */}
+        <div style={{ position: "absolute", left: 62, top: 126, width: 900 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <span style={{ width: 34, height: 8, borderRadius: 4, background: SASH }} />
+            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 29, letterSpacing: "0.24em", color: SASH }}>THE SEALED SCROLL</span>
+          </div>
+          <div style={{ marginTop: 6, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 144, lineHeight: 1.0,
+            letterSpacing: "-0.045em", color: "#1B1814" }}>CLAUDE.md</div>
+          {/* the ink stroke under the title */}
+          <div style={{ marginTop: 4, width: 700, height: 13, borderRadius: 7, background: "#1B1814",
+            clipPath: "polygon(0 20%, 96% 0, 100% 74%, 3% 100%)" }} />
+        </div>
+
+        {/* the techniques it seals, listed like scroll entries */}
+        <div style={{ position: "absolute", left: 74, top: 342, display: "flex", flexDirection: "column", gap: 5 }}>
+          {TECH.map((t, i) => (
+            <div key={t} style={{ display: "flex", alignItems: "center", gap: 14,
+              opacity: E(f, 2 + i, 7 + i, 0, 1, OUT), transform: `translateX(${(1 - E(f, 2 + i, 7 + i, 0, 1, OUT)) * -22}px)` }}>
+              <span style={{ width: 22, height: 22, borderRadius: "50%", background: "#1B1814" }} />
+              <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 37, letterSpacing: "0.05em", color: "#2A2620" }}>{t}</span>
+              <span style={{ width: 196 - i * 24, height: 6, borderRadius: 3, background: "rgba(27,24,20,0.16)" }} />
+            </div>
+          ))}
+        </div>
+
+        {/* the hanko seal */}
+        <div style={{ position: "absolute", right: 76, top: 302, width: 168, height: 168, borderRadius: 14,
+          border: `16px solid ${SASH}`, transform: "rotate(-7deg)", opacity: 0.94 }}>
+          <div style={{ position: "absolute", left: 22, top: 20, right: 22, height: 30, background: SASH }} />
+          <div style={{ position: "absolute", left: 22, top: 66, right: 22, height: 30, background: SASH }} />
+          <div style={{ position: "absolute", left: 22, top: 112, right: 60, height: 30, background: SASH }} />
+        </div>
+
+        {/* the chain and lock across the whole thing */}
+        <Chain x1={-60} y1={636} x2={1080} y2={694} s={1.7} slack={0} z={12} />
+        <div style={{ position: "absolute", left: 258, top: 610, width: 148, height: 148, borderRadius: 20,
           background: IRON, border: `12px solid ${IRON_D}`, boxShadow: SH_D, zIndex: 13,
           transform: `rotate(${-8 + snap * 7}deg)` }}>
-          <div style={{ position: "absolute", left: 48, top: -48, width: 72, height: 76, borderRadius: "36px 36px 0 0",
-            border: `16px solid ${IRON_L}`, borderBottom: "none" }} />
-          <div style={{ position: "absolute", left: 58, top: 56, width: 30, height: 30, borderRadius: "50%", background: IRON_D }} />
-          <div style={{ position: "absolute", left: 66, top: 82, width: 14, height: 42, background: IRON_D }} />
+          <div style={{ position: "absolute", left: 42, top: -44, width: 66, height: 70, borderRadius: "34px 34px 0 0",
+            border: `15px solid ${IRON_L}`, borderBottom: "none" }} />
+          <div style={{ position: "absolute", left: 52, top: 50, width: 28, height: 28, borderRadius: "50%", background: IRON_D }} />
+          <div style={{ position: "absolute", left: 59, top: 74, width: 13, height: 38, background: IRON_D }} />
         </div>
       </div>
-      {/* THE SUBJECT IS IN IT at frame 0 — leaning in from the corner */}
-      <div style={{ position: "absolute", left: 22, top: 512, transform: `translateY(${(1 - set) * 44}px)`, zIndex: 14 }}>
-        <Ninja f={f} x={0} y={0} size={318} hero gaze={2} shock={0.4} nodAmp={0.8} nodSpeed={24} z={14} />
+
+      {/* THE SUBJECT IS IN IT at frame 0 — gripping the scroll's bottom roller */}
+      <div style={{ position: "absolute", left: 704, top: 520, transform: `translateY(${(1 - set) * 46}px)`, zIndex: 14 }}>
+        <Ninja f={f} x={0} y={0} size={306} hero flip gaze={-2} shock={0.45} nodAmp={0.7} nodSpeed={26} z={14} />
       </div>
+      {/* dust off the jerk */}
+      {snap > 0.05 && Array.from({ length: 7 }, (_, i) => (
+        <div key={i} style={{ position: "absolute", left: 120 + i * 116, top: 622 + (i % 3) * 14,
+          width: 54 + (1 - snap) * 60, height: 18, borderRadius: 10, background: SMOKE_L,
+          opacity: snap * 0.75, zIndex: 15 }} />
+      ))}
     </div>
   );
 };
