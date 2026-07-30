@@ -161,6 +161,19 @@ brightest thing that world owns, so the bar is cleared *from inside the theme* (
 **When a gate and the theme seem to conflict, look for the bright thing the world already contains**
 — paper, snow, dawn, lantern light, a backlit shoji screen, fire. Do not import a neutral card.
 
+**⛔ Shot count is a FLOOR to clear, not a number to maximise.** Having cleared the ≥3 bar, reel 81's
+open went to SIX shots in 4.5s — and five of them were dark rooftop at four different zooms. Alex:
+*"the cut in between the scenes i have no idea whats going on so i would scroll like its too
+confusing, like i dont really see much."* Rapid scale jumps around the same dark set give the eye
+nothing to settle on, and a shot where the only content is smoke is a shot where nothing is legible.
+
+The fix was **fewer, longer, brighter**: five shots, each ≥0.73s, the smoke folded into the end of the
+blade shot so no shot is empty, and **the whole night palette lifted ~1.5 stops** (`#2B3A52` → `#3F5273`,
+tiles `#4A5568` → `#5E6C84`). Still matte, still night, now readable at feed size.
+
+Rule of thumb: **no shot under ~0.7s unless it is a flash, and never two consecutive shots that differ
+only in zoom.** Change what is IN the frame, not just how close you are to it.
+
 Do not put a slow camera drift inside a hook shot and call it motion — the doc is explicit that the
 camera does not move and every change is a hard cut to a different *framing* of the same world. A
 drifting single wide still scores as one shot.
@@ -326,23 +339,49 @@ hero's face clear — strap the props to the **lower body** so the eyes stay abo
 
 ## 5. Voiceover pipeline
 
-**Dead air is TWO different measurements. Run both.** "The audio has pauses" on reel 81 was 3.68s of
-dead air in a 35.5s VO, and neither tool alone found all of it:
-- `silencedetect` finds *acoustic* silence, including breaths **inside** a word's span.
-- inter-word gaps from the words JSON find *timing* gaps between tokens.
+**⛔⛔ NEVER cut a VO to whisper's word times. Cut to MEASURED SILENCE.** This is the single most
+expensive mistake made on reel 81 and it shipped four times before Alex caught it: *"the word
+'anymore' at 3 seconds is prematurely cutoff."*
 
-Whisper stretches a word's `end` across a following breath, so a 0.26s mid-sentence pause is invisible
-to the word-gap pass and only `silencedetect` sees it. Reel 81 needed two passes: ten inter-word gaps
-first, then two `silencedetect`-only breaths in the tightened file.
-```bash
-ffmpeg -hide_banner -i vo.wav -af "silencedetect=noise=-34dB:d=0.16" -f null -   # pass 1 + pass 2
+Whisper's word `end` runs **150-200 ms early** — it marks where the *phoneme* is recognisable, not
+where the sound stops. So an inter-word "gap" computed from the words JSON is not a gap; it is a gap
+plus the tail of the word before it. The receipts:
+
 ```
-Targets that read as tight: **0.14-0.18s** at a sentence boundary, **~0.09s** mid-phrase. Cut from the
-MIDDLE of each gap (keep `k/2` either side) so the splice lands in silence, then **re-transcribe** and
-rebuild the words JSON rather than shifting timings by hand — and diff the transcript of each cut
-window against the same window of the original, because whisper mis-hearings look exactly like splice
-damage. (Reel 81: "weekend trying" → "we can try" was whisper, not the cut. The original transcribed
-the same way.)
+whisper said "anymore." ended at   4.60
+silencedetect says silence began   4.81       <-- 210 ms of word still sounding
+the cut that was made              4.68 -> 4.90
+                                   ^^^^ 134 ms sliced out of the middle of the word
+```
+
+Five of ten cuts damaged speech that way — three word tails and one word *onset* ("His").
+
+**The rule:** the only valid cut boundary is `silencedetect`, at a **conservative** threshold, with a
+margin inside it.
+```bash
+# -40 dB is SAFER than -34: a lower threshold counts quieter audio as SOUND, so the
+# detected silence starts later and ends earlier. Narrower window, no speech in it.
+ffmpeg -hide_banner -i vo.wav -af "silencedetect=noise=-40dB:d=0.12" -f null -
+```
+Then cut only the middle of each detected silence, keeping ~0.10 s of air and never cutting within
+45 ms of either edge.
+
+**And expect less room than you think.** Measured properly, this VO had **0.21 s** of removable
+silence, not the 2.43 s the word-gap method claimed. The pauses a listener perceives are often
+delivery pace, not silence.
+
+**For pace, TIME-STRETCH — do not splice.** `atempo` removes duration without removing a single
+phoneme:
+```bash
+ffmpeg -i vo_trimmed.wav -af "atempo=1.05" out.wav     # -5% length, zero words touched
+```
+Reel 81 landed on 0.21 s of safe silence trim + `atempo=1.05`: 35.64 s → 33.73 s, the same pace as the
+broken version with nothing clipped. Reel 80 used 1.03x the same way.
+
+Then **re-transcribe** the final file and rebuild the words JSON rather than shifting timings by hand.
+Diff each cut window against the same window of the ORIGINAL before blaming the cut — whisper
+mis-hearings look exactly like splice damage ("weekend trying" → "we can try" was whisper; the
+original transcribed the same way).
 
 **⛔ whisper.cpp `-ml 1` SILENTLY DROPS CONTENT.** It lost the first ~8s of a 14s chunk and the final
 line of a take. **Use `faster-whisper` for word timings** (playbook §3.3):

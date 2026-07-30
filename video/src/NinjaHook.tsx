@@ -19,14 +19,19 @@ const SoloCaption: React.FC<{ words: string[]; hot?: number }> = (p) =>
    a bar of 140 (a night reel opening dark loses the feed), and ONE shot across
    4.5s against a bar of three. Both are recut problems, not new-element ones.
 
-     A  f0-15   THE SEALED SCROLL. A ninja technique scroll unrolled to fill
-                the panel, CLAUDE.md brushed in ink, chained shut. Bright washi
-                clears the luma bar without leaving the world.
-     B  f15-31  HARD CUT to the wide. This is the roof it is chained to.
-     C  f31-47  HARD CUT in and low. The chain yanks it off its feet.
-     D  f47-61  HARD CUT to the blade. One stroke, the link parts.
-     E  f61-75  Smoke.
-     F  f75+    Wide. The block alone with a cut chain. It is already gone.
+     A  f0-22    THE SEALED SCROLL. A ninja technique scroll unrolled to fill
+                 the panel, CLAUDE.md brushed in ink, chained shut, the clan
+                 seal stamped on it. Bright washi clears the luma bar from
+                 INSIDE the world.
+     B  f22-52   HARD CUT to the wide. This is the roof it is chained to.
+     C  f52-80   HARD CUT in. The chain yanks it off its feet.
+     D  f80-106  The master cuts the chain, then smoke.
+     E  f106+    Wide. The block alone with a cut chain. It is already gone.
+
+   ⛔ SIX shots across 4.5s was too many when five of them were dark — the eye
+   never settled and it read as "I can't see what's happening". FIVE shots, each
+   >= 0.73s, and the night palette lifted ~1.5 stops. Shot count is a floor to
+   clear, not a number to maximise.
 
    ⛔ The camera does NOT drift inside a shot — every change is a hard cut to a
    different framing of the same world (THE-OPEN, "three to four shots, never
@@ -35,7 +40,7 @@ const SoloCaption: React.FC<{ words: string[]; hot?: number }> = (p) =>
    Every one of them is scored in DeleteReel.tsx: whoosh in, transient on.
    ========================================================================= */
 const RIDGE = 548;
-export const HOOK_CUTS = [15, 31, 47, 61, 75];
+export const HOOK_CUTS = [22, 52, 80, 106];
 
 /* ---------- SHOT A · THE SEALED SCROLL ----------------------------------
    Bright frame 0 without leaving the world: a ninja's technique scroll
@@ -159,7 +164,7 @@ const World: React.FC<{ f: number; frame: string; children?: React.ReactNode }> 
 
 export const NinjaHook: React.FC = () => {
   const f = useCurrentFrame();
-  const [CA, CB, CC, CD, CE] = HOOK_CUTS;          // 15 · 31 · 47 · 61 · 75
+  const [CA, CB, CC, CD] = HOOK_CUTS;              // 22 · 52 · 80 · 106
   const HS = 330, AX = 636, AY = RIDGE - 288;
 
   /* shot B · straining (shot-local frames, so each shot animates from its own 0) */
@@ -182,7 +187,7 @@ export const NinjaHook: React.FC = () => {
   const flash = d >= 5 && d < 12 ? 1 - (d - 5) / 7 : 0;
 
   /* shot F · gone */
-  const out = E(f, 92, 118, 0, 1, OUT);
+  const out = E(f, 118, 142, 0, 1, OUT);
 
   return (
     <AbsoluteFill>
@@ -230,13 +235,15 @@ export const NinjaHook: React.FC = () => {
           </World>
         )}
 
-        {/* ---- D · hard cut to the blade. ONE stroke, and someone swings it. ----
+        {/* ---- D · the master cuts it, and the smoke takes him out. ONE stroke,
+             with an author. Folding the smoke in here removes the shot where
+             nothing was legible. ----
              The old version drew two white bars crossing in empty sky with
              nobody in frame, which read as random sticks. A cut needs an
              author: the master lands in shot, mid-swing, and the arc follows
              HIS blade. See REEL-BUILD-LEARNINGS §3. */}
         {f >= CC && f < CD && (
-          <World f={f} frame="scale(1.3) translate(60px, 30px)">
+          <World f={f} frame="scale(1.22) translate(48px, 24px)">
             <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0} z={8} />
             <Chain x1={AX - 6} y1={AY + 78} x2={AX - 330} y2={AY + 196} s={1.2} slack={40}
                    cut={E(d, 4, 11, 0, 0.6, OUT)} z={11} />
@@ -257,22 +264,13 @@ export const NinjaHook: React.FC = () => {
           </World>
         )}
 
-        {/* ---- E · smoke ---- */}
-        {f >= CD && f < CE && (
-          <World f={f} frame="scale(1.16) translate(-20px, 24px)">
-            <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0} z={8} />
-            <Chain x1={AX - 6} y1={AY + 78} x2={AX - 150} y2={AY + 208} s={1.15} slack={26} z={9} />
-            <Smoke f={f} at={CD} x={300} y={RIDGE - 150} r={360} life={16} z={22} />
-          </World>
-        )}
-
-        {/* ---- F · the block is alone. It is already gone. ---- */}
-        {f >= CE && (
+        {/* ---- E · the block is alone. It is already gone. ---- */}
+        {f >= CD && (
           <World f={f} frame="scale(1) translateX(0px)">
             <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0} z={8} />
             <Chain x1={AX - 6} y1={AY + 78} x2={AX - 150} y2={AY + 208} s={1.15} slack={26} z={9} />
             <Streaks f={f} on={0.8} n={15} />
-            <SpeedLines f={f} cx={280} cy={RIDGE - 200} n={15} on={E(f, CE, CE + 10, 0, 1, OUT)} />
+            <SpeedLines f={f} cx={280} cy={RIDGE - 200} n={15} on={E(f, CD, CD + 10, 0, 1, OUT)} />
             {[-66, 64].map((dx, i) => (
               <Ninja key={i} f={f - 3 - i * 3} x={230 + dx - out * 260} y={RIDGE - HS * 0.94} size={HS}
                      cheer={0.92} nodAmp={3.4} nodSpeed={6} flip z={5} />

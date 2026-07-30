@@ -19,25 +19,32 @@ import words from "./data/words_delete.json";
    is opaque on the cut frame. See NinjaTransitions.tsx.
 
    Scene starts are locked to the de-flubbed, de-gapped VO
-   (public/delete_vo_v2.wav — 33.04s of speech, 2.43s of dead air removed).
+   (public/delete_vo_v4.wav — 33.58s).
+
+   ⛔ The VO is tightened by MEASURED SILENCE plus atempo, never by whisper's word
+   `end` times. Whisper's ends run ~150-200ms early, so cutting to them slices
+   speech: an earlier pass took 134ms out of the middle of "anymore". Every cut
+   here sits inside a -40 dB silence with a 45ms margin (0.21s total), and the
+   pace comes from atempo=1.05, which removes duration without removing a single
+   phoneme. See REEL-BUILD-LEARNINGS §5.
    ========================================================================== */
 
 const FPS = 30;
 const fr = (s: number) => Math.round(s * FPS);
 
 const SCENES: { C: React.FC; s: number; label: string; cut: Kind }[] = [
-  { C: NinjaHook, s: 0.00,  cut: "smoke", label: "hook · chained to CLAUDE.md, yanked over, cut free" },
-  { C: N1Armory,  s: 4.48,  cut: "smoke", label: "the armory · they strap more iron on" },
-  { C: N2Master,  s: 6.78,  cut: "star",  label: "bamboo forest · the master cuts every chain" },
-  { C: N3Founder, s: 9.24,  cut: "slash", label: "the scroll hall · he is named, his clip hangs" },
-  { C: N4Yards,   s: 13.00, cut: "ink",   label: "two yards · snowy 2024 vs night 2026" },
-  { C: N5Short,   s: 17.10, cut: "star",  label: "rooftop range · the throw falls short" },
-  { C: N6Reset,   s: 19.90, cut: "smoke", label: "the waterfall · six moons, the chains go in" },
-  { C: N7Summit,  s: 24.34, cut: "slash", label: "the summit · dawn, carrying nothing" },
-  { C: N8Market,  s: 26.32, cut: "ink",   label: "the night market · six brand new sets" },
-  { C: N9Gate,    s: 30.74, cut: "smoke", label: "the torii gate · comment DELETE" },
+  { C: NinjaHook, s: 0.00,  cut: "smoke", label: "hook · the sealed scroll, chained, cut free" },
+  { C: N1Armory,  s: 4.74,  cut: "smoke", label: "the armory · they strap more iron on" },
+  { C: N2Master,  s: 7.16,  cut: "star",  label: "bamboo forest · the master cuts every chain" },
+  { C: N3Founder, s: 9.54,  cut: "slash", label: "the scroll hall · he is named, his clip hangs" },
+  { C: N4Yards,   s: 13.66, cut: "ink",   label: "two yards · snowy 2024 vs night 2026" },
+  { C: N5Short,   s: 17.88, cut: "star",  label: "rooftop range · the throw falls short" },
+  { C: N6Reset,   s: 20.72, cut: "smoke", label: "the waterfall · six moons, the chains go in" },
+  { C: N7Summit,  s: 24.98, cut: "slash", label: "the summit · dawn, carrying nothing" },
+  { C: N8Market,  s: 27.22, cut: "ink",   label: "the night market · six brand new sets" },
+  { C: N9Gate,    s: 31.30, cut: "smoke", label: "the torii gate · comment DELETE" },
 ];
-const END_S = 33.14;                      // ⛔ the reel ENDS on the word "DELETE" (ends 33.04). No hold.
+const END_S = 33.68;                      // ⛔ the reel ENDS on the word "DELETE" (ends 33.58). No hold.
 export const DELETE_TOTAL = Math.round(END_S * FPS);
 
 /* the incoming scene is alive 3 frames early, under the clearing graphic */
@@ -84,118 +91,117 @@ const cutSfx = (t: number, kind: Kind): Cue[] =>
 const amb = (t: number, dur: number, src: string, rate = 1, v: number = LEVELS.SFX_BED): Cue[] =>
   [{ at: t, src: A + src, v, dur, rate, lead: 0 }];
 
+/* Scene starts, so every cue below is written RELATIVE to its scene. When the VO
+   is re-timed, only this table changes — no cue times get hand-shifted. */
+const [S1, S2, S3, S4, S5, S6, S7, S8, S9] = SCENES.slice(1).map((x) => x.s);
+/* the open's five shots (NinjaHook.HOOK_CUTS 22/52/80/106, at 30fps) */
+const [HA, HB, HC, HD] = [22, 52, 80, 106].map((f) => f / FPS);
+
 const SFX_ALL: Cue[] = [
-  /* ======================= THE OPEN · six shots, every cut scored ==========
-     Frame 0 carries the HEAVIEST stack in the reel — it is the interrupt.
-     Five simultaneous cues: the lock slamming, the movement, the metal snap,
-     a keyboard texture (recognition: this is a file you have), and room tone. */
+  /* ======================= THE OPEN · five shots, every cut scored ==========
+     Frame 0 carries the HEAVIEST stack in the reel — it is the interrupt. */
   { at: 0.00, src: A + "hit-boom.wav",     v: LEVELS.SFX_HERO,    dur: 2.0,  lead: 0 },
   { at: 0.00, src: A + "whoosh-fast.wav",  v: LEVELS.SFX_MID,     dur: 0.41, lead: 0, rate: 0.9 },
   { at: 0.02, src: A + "snap.wav",         v: LEVELS.SFX_MID,     dur: 0.19, lead: 0 },
   { at: 0.00, src: A + "keys-macbook.wav", v: LEVELS.SFX_TEXTURE, dur: 0.85, lead: 0 },
-  { at: 0.00, src: A + "room-tone.wav",    v: LEVELS.SFX_BED,     dur: 4.6,  lead: 0 },
-  /* the chain jerks taut inside shot A */
-  ...layer(0.20, { src: A + "riser-metal.wav", v: LEVELS.SFX_MID, dur: 1.33 },
-                 { src: A + "click-hard.wav", dur: 0.42 }),
+  { at: 0.00, src: A + "room-tone.wav",    v: LEVELS.SFX_BED,     dur: 4.8,  lead: 0 },
+  ...layer(0.22, { src: A + "riser-metal.wav", v: LEVELS.SFX_MID, dur: 1.33 },
+                 { src: A + "click-hard.wav", dur: 0.42 }),                       // the chain jerks taut
+  ...scoreCut(HA, "whoosh-swoosh.wav", "hit-boom.wav", { texture: "paper-rustle.wav" }),        // to the wide
+  ...scoreCut(HB, "whoosh-choppy.wav", "hit-boom.wav", { rate: 0.9, texture: "gear-stutter.wav" }), // the yank
+  ...scoreCut(HC, "whoosh-fast.wav", "snap.wav", { rate: 1.1, texture: "riser-metal.wav" }),    // the blade
+  { at: HC + 0.47, src: A + "whoosh-swoosh.wav", v: LEVELS.SFX_HERO, dur: 0.76 },              // smoke
+  ...scoreCut(HD, "whoosh-flyby.wav", "unlock.wav", { texture: "positive-chime.wav" }),         // free
+  { at: HD + 0.40, src: A + "whoosh-flyby.wav", v: LEVELS.SFX_MID, dur: 1.2 },                 // gone
 
-  /* the five hard cuts of the open: 0.50 / 1.03 / 1.57 / 2.03 / 2.50 */
-  ...scoreCut(0.50, "whoosh-swoosh.wav", "hit-boom.wav", { texture: "paper-rustle.wav" }),   // to the wide
-  ...scoreCut(1.03, "whoosh-choppy.wav", "hit-boom.wav", { rate: 0.9, texture: "gear-stutter.wav" }), // the yank
-  ...scoreCut(1.57, "whoosh-fast.wav", "snap.wav", { rate: 1.1, texture: "riser-metal.wav" }),  // the blade
-  ...scoreCut(2.03, "whoosh-swoosh.wav", "punch.wav", { texture: "paper-rustle.wav" }),      // smoke
-  ...scoreCut(2.50, "whoosh-flyby.wav", "unlock.wav", { texture: "positive-chime.wav" }),    // free
-  { at: 3.10, src: A + "whoosh-flyby.wav", v: LEVELS.SFX_MID, dur: 1.2 },                    // gone
+  /* ======================= N1 · THE ARMORY ================================ */
+  ...cutSfx(S1 - 0.10, "smoke"),
+  ...amb(S1 - 0.06, S2 - S1 + 0.06, "room-tone.wav", 1.0),
+  ...amb(S1 - 0.06, S2 - S1, "gear-stutter.wav", 0.8),                             // forge hum
+  ...layer(S1 + 0.27, { src: A + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.0 }, { src: A + "click-hard.wav", dur: 0.42 }),
+  ...layer(S1 + 0.80, { src: A + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.0, rate: 0.94 }, { src: A + "click-hard.wav", dur: 0.42 }),
+  ...layer(S1 + 1.33, { src: A + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.2, rate: 0.88 },
+                      { src: A + "gear-mech.wav", v: LEVELS.SFX_TEXTURE, dur: 1.03 }),
+  ...repeat(3, S1 + 0.42, 0.53, { src: A + "ui-click.wav", v: LEVELS.SFX_TEXTURE, dur: 0.23 }, 0.06),
 
-  /* ======================= N1 · THE ARMORY (4.48) ========================= */
-  ...cutSfx(4.38, "smoke"),
-  ...amb(4.42, 2.40, "room-tone.wav", 1.0),
-  ...amb(4.42, 2.30, "gear-stutter.wav", 0.8, LEVELS.SFX_BED),                 // forge hum
-  ...layer(4.75, { src: A + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.0 }, { src: A + "click-hard.wav", dur: 0.42 }),
-  ...layer(5.28, { src: A + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.0, rate: 0.94 }, { src: A + "click-hard.wav", dur: 0.42 }),
-  ...layer(5.81, { src: A + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.2, rate: 0.88 },
-                 { src: A + "gear-mech.wav", v: LEVELS.SFX_TEXTURE, dur: 1.03 }),
-  ...repeat(3, 4.90, 0.53, { src: A + "ui-click.wav", v: LEVELS.SFX_TEXTURE, dur: 0.23 }, 0.06),  // the load rail filling
+  /* ======================= N2 · BAMBOO FOREST ============================ */
+  ...cutSfx(S2 - 0.10, "star"),
+  ...amb(S2 - 0.06, S3 - S2 + 0.06, "room-tone.wav", 0.72),                        // wind through cane
+  { at: S2 + 0.33, src: A + "paper-rustle.wav", v: LEVELS.SFX_TEXTURE, dur: 1.50 },
+  ...layer(S2 + 0.87, { src: A + "riser-metal.wav", v: LEVELS.SFX_MID, dur: 1.33 },
+                      { src: A + "highlighter.wav", dur: 0.45 }),                  // the draw
+  ...layer(S2 + 1.13, { src: A + "whoosh-fast.wav", v: LEVELS.SFX_HERO, dur: 0.41 },
+                      { src: A + "snap.wav", v: LEVELS.SFX_MID, dur: 0.19 }),      // the cut
+  ...repeat(4, S2 + 1.27, 0.15, { src: A + "click-hard.wav", v: LEVELS.SFX_TEXTURE, dur: 0.42 }, -0.06),
 
-  /* ======================= N2 · BAMBOO FOREST (6.78) ===================== */
-  ...cutSfx(6.68, "star"),
-  ...amb(6.72, 2.56, "room-tone.wav", 0.72),                                   // wind through cane
-  { at: 7.11, src: A + "paper-rustle.wav", v: LEVELS.SFX_TEXTURE, dur: 1.50 }, // he steps out
-  ...layer(7.65, { src: A + "riser-metal.wav", v: LEVELS.SFX_MID, dur: 1.33 },
-                 { src: A + "highlighter.wav", dur: 0.45 }),                   // the draw
-  ...layer(7.91, { src: A + "whoosh-fast.wav", v: LEVELS.SFX_HERO, dur: 0.41 },
-                 { src: A + "snap.wav", v: LEVELS.SFX_MID, dur: 0.19 }),       // the cut
-  ...repeat(4, 8.05, 0.15, { src: A + "click-hard.wav", v: LEVELS.SFX_TEXTURE, dur: 0.42 }, -0.06), // iron on soil
+  /* ======================= N3 · THE SCROLL HALL ========================== */
+  ...cutSfx(S3 - 0.10, "slash"),
+  ...amb(S3 - 0.06, S4 - S3 + 0.06, "room-tone.wav", 0.9),
+  ...layer(S3 + 0.20, { src: A + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.63 }, { src: A + "page-turn.wav", dur: 0.50 }),
+  { at: S3 + 0.73, src: A + "ping.wav", v: LEVELS.SFX_TEXTURE, dur: 0.13 },
+  ...layer(S3 + 1.00, { src: A + "positive-chime.wav", v: LEVELS.SFX_TEXTURE, dur: 1.6 },
+                      { src: A + "check-pop.wav", dur: 0.63 }),
+  { at: S3 + 2.06, src: A + "paper-rustle.wav", v: LEVELS.SFX_TEXTURE, dur: 1.50, rate: 0.9 },
 
-  /* ======================= N3 · THE SCROLL HALL (9.24) =================== */
-  ...cutSfx(9.14, "slash"),
-  ...amb(9.18, 3.72, "room-tone.wav", 0.9),
-  ...layer(9.44, { src: A + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.63 }, { src: A + "page-turn.wav", dur: 0.50 }),
-  { at: 9.97, src: A + "ping.wav", v: LEVELS.SFX_TEXTURE, dur: 0.13 },
-  ...layer(10.24, { src: A + "positive-chime.wav", v: LEVELS.SFX_TEXTURE, dur: 1.6 },
-                  { src: A + "check-pop.wav", dur: 0.63 }),
-  { at: 11.30, src: A + "paper-rustle.wav", v: LEVELS.SFX_TEXTURE, dur: 1.50, rate: 0.9 },  // he kneels
+  /* ======================= N4 · TWO TRAINING YARDS ======================= */
+  ...cutSfx(S4 - 0.10, "ink"),
+  ...amb(S4 - 0.06, S5 - S4 + 0.06, "room-tone.wav", 0.66),
+  ...layer(S4 + 0.20, { src: A + "paper-slide.wav", v: LEVELS.SFX_TEXTURE, dur: 0.63 }, { src: A + "click-light.wav", dur: 0.08 }),
+  ...layer(S4 + 0.93, { src: A + "paper-slide.wav", v: LEVELS.SFX_TEXTURE, dur: 0.63, rate: 1.06 }, { src: A + "click-light.wav", dur: 0.08 }),
+  ...layer(S4 + 2.20, { src: A + "whoosh-choppy.wav", v: LEVELS.SFX_MID, dur: 0.78 },
+                      { src: A + "hit-boom.wav", v: LEVELS.SFX_TEXTURE, dur: 0.9 }),
+  { at: S4 + 3.10, src: A + "gear-stutter.wav", v: LEVELS.SFX_BED, dur: 1.03, rate: 0.85 },
 
-  /* ======================= N4 · TWO TRAINING YARDS (13.00) ============== */
-  ...cutSfx(12.90, "ink"),
-  ...amb(12.94, 4.16, "room-tone.wav", 0.66),
-  ...layer(13.20, { src: A + "paper-slide.wav", v: LEVELS.SFX_TEXTURE, dur: 0.63 }, { src: A + "click-light.wav", dur: 0.08 }),
-  ...layer(13.93, { src: A + "paper-slide.wav", v: LEVELS.SFX_TEXTURE, dur: 0.63, rate: 1.06 }, { src: A + "click-light.wav", dur: 0.08 }),
-  ...layer(15.20, { src: A + "whoosh-choppy.wav", v: LEVELS.SFX_MID, dur: 0.78 },
-                  { src: A + "hit-boom.wav", v: LEVELS.SFX_TEXTURE, dur: 0.9 }),            // the iron slides off
-  { at: 16.10, src: A + "gear-stutter.wav", v: LEVELS.SFX_BED, dur: 1.03, rate: 0.85 },     // 2024 straining
+  /* ======================= N5 · THE ROOFTOP RANGE ======================== */
+  ...cutSfx(S5 - 0.10, "star"),
+  ...amb(S5 - 0.06, S6 - S5 + 0.06, "room-tone.wav", 0.8),
+  ...layer(S5 + 0.27, { src: A + "riser-sharp.wav", v: LEVELS.SFX_TEXTURE, dur: 0.73 },
+                      { src: A + "highlighter.wav", dur: 0.45 }),
+  ...layer(S5 + 0.73, { src: A + "whoosh-flyby.wav", v: LEVELS.SFX_MID, dur: 1.2 }, { src: A + "snap.wav", dur: 0.19 }),
+  { at: S5 + 1.18, src: A + "riser-metal.wav", v: LEVELS.SFX_TEXTURE, dur: 1.0, rate: 0.8 },
+  ...layer(S5 + 1.47, { src: A + "error-take.wav", v: LEVELS.SFX_MID, dur: 0.21 },
+                      { src: A + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.3, rate: 0.86 }),
 
-  /* ======================= N5 · THE ROOFTOP RANGE (17.10) =============== */
-  ...cutSfx(17.00, "star"),
-  ...amb(17.04, 2.86, "room-tone.wav", 0.8),
-  ...layer(17.37, { src: A + "riser-sharp.wav", v: LEVELS.SFX_TEXTURE, dur: 0.73 },
-                  { src: A + "highlighter.wav", dur: 0.45 }),                               // wind up
-  ...layer(17.83, { src: A + "whoosh-flyby.wav", v: LEVELS.SFX_MID, dur: 1.2 }, { src: A + "snap.wav", dur: 0.19 }),
-  { at: 18.28, src: A + "riser-metal.wav", v: LEVELS.SFX_TEXTURE, dur: 1.0, rate: 0.8 },    // the chain drags it
-  ...layer(18.57, { src: A + "error-take.wav", v: LEVELS.SFX_MID, dur: 0.21 },
-                  { src: A + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.3, rate: 0.86 }),    // into the tiles
+  /* ======================= N6 · THE WATERFALL ============================ */
+  ...cutSfx(S6 - 0.10, "smoke"),
+  ...amb(S6 - 0.06, 3.90, "wheel-spin.wav", 0.55, LEVELS.SFX_TEXTURE),
+  ...amb(S6 + 3.84, S7 - S6 - 3.84, "wheel-spin.wav", 0.55, LEVELS.SFX_TEXTURE),
+  ...repeat(6, S6 + 0.53, 0.30, { src: A + "counter-tick.wav", v: LEVELS.SFX_TEXTURE, dur: 0.6 }, 0.07),
+  ...repeat(6, S6 + 0.72, 0.30, { src: A + "bubble-pop.wav", v: LEVELS.SFX_MID, dur: 0.11 }, -0.05),
+  ...layer(S6 + 2.53, { src: A + "ring-low.wav", v: LEVELS.SFX_HERO, dur: 0.76 },
+                      { src: A + "positive-chime.wav", v: LEVELS.SFX_TEXTURE, dur: 1.8 }),
+  ...layer(S6 + 2.73, { src: A + "unlock.wav", v: LEVELS.SFX_MID, dur: 0.91 },
+                      { src: A + "check-pop.wav", v: LEVELS.SFX_TEXTURE, dur: 0.63 }),
+  { at: S6 + 3.50, src: A + "whoosh-flyby.wav", v: LEVELS.SFX_MID, dur: 1.1 },
 
-  /* ======================= N6 · THE WATERFALL (19.90) =================== */
-  ...cutSfx(19.80, "smoke"),
-  ...amb(19.84, 3.90, "wheel-spin.wav", 0.55, LEVELS.SFX_TEXTURE),             // the falls
-  ...amb(23.70, 0.64, "wheel-spin.wav", 0.55, LEVELS.SFX_TEXTURE),
-  ...repeat(6, 20.43, 0.30, { src: A + "counter-tick.wav", v: LEVELS.SFX_TEXTURE, dur: 0.6 }, 0.07),   // six moons
-  ...repeat(6, 20.62, 0.30, { src: A + "bubble-pop.wav", v: LEVELS.SFX_MID, dur: 0.11 }, -0.05),        // each one hits the pool
-  ...layer(22.43, { src: A + "ring-low.wav", v: LEVELS.SFX_HERO, dur: 0.76 },
-                  { src: A + "positive-chime.wav", v: LEVELS.SFX_TEXTURE, dur: 1.8 }),      // the shrine bell
-  ...layer(22.63, { src: A + "unlock.wav", v: LEVELS.SFX_MID, dur: 0.91 },
-                  { src: A + "check-pop.wav", v: LEVELS.SFX_TEXTURE, dur: 0.63 }),
-  { at: 23.40, src: A + "whoosh-flyby.wav", v: LEVELS.SFX_MID, dur: 1.1 },                  // blur speed
+  /* ======================= N7 · THE SUMMIT =============================== */
+  ...cutSfx(S7 - 0.10, "slash"),
+  ...amb(S7 - 0.06, S8 - S7 + 0.06, "room-tone.wav", 0.6),
+  ...layer(S7 + 0.13, { src: A + "lights-on.wav", v: LEVELS.SFX_MID, dur: 0.78 },
+                      { src: A + "crowd-wow.wav", v: LEVELS.SFX_TEXTURE, dur: 1.71 }),
+  ...layer(S7 + 0.53, { src: A + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.63 },
+                      { src: A + "click-hard.wav", dur: 0.42 }),
 
-  /* ======================= N7 · THE SUMMIT (24.34) ====================== */
-  ...cutSfx(24.24, "slash"),
-  ...amb(24.28, 2.04, "room-tone.wav", 0.6),
-  ...layer(24.47, { src: A + "lights-on.wav", v: LEVELS.SFX_MID, dur: 0.78 },
-                  { src: A + "crowd-wow.wav", v: LEVELS.SFX_TEXTURE, dur: 1.71 }),          // dawn
-  ...layer(24.87, { src: A + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.63 },
-                  { src: A + "click-hard.wav", dur: 0.42 }),                                // the banner planted
+  /* ======================= N8 · THE NIGHT MARKET ========================= */
+  ...cutSfx(S8 - 0.10, "ink"),
+  ...amb(S8 - 0.06, S9 - S8 + 0.06, "crowd-laugh.wav", 0.85),
+  ...layer(S8 + 0.20, { src: A + "paper-slide.wav", v: LEVELS.SFX_TEXTURE, dur: 0.63 },
+                      { src: A + "loading-loop.wav", v: LEVELS.SFX_BED, dur: 2.27 }),
+  ...layer(S8 + 1.13, { src: A + "cash-register.wav", v: LEVELS.SFX_MID, dur: 1.13 }, { src: A + "coin-drop.wav", dur: 0.66 }),
+  ...layer(S8 + 1.48, { src: A + "hit-boom.wav", v: LEVELS.SFX_TEXTURE, dur: 0.9, rate: 0.8 },
+                      { src: A + "gear-stutter.wav", dur: 1.03 }),
+  ...layer(S8 + 2.07, { src: A + "cash-register.wav", v: LEVELS.SFX_MID, dur: 1.13, rate: 0.92 }, { src: A + "coin-drop.wav", dur: 0.66 }),
+  ...layer(S8 + 2.53, { src: A + "whoosh-choppy.wav", v: LEVELS.SFX_MID, dur: 0.78 }, { src: A + "click-light.wav", dur: 0.08 }),
+  { at: S8 + 3.58, src: A + "whoosh-flyby.wav", v: LEVELS.SFX_TEXTURE, dur: 1.1, rate: 1.1 },
 
-  /* ======================= N8 · THE NIGHT MARKET (26.32) =============== */
-  ...cutSfx(26.22, "ink"),
-  ...amb(26.26, 4.48, "crowd-laugh.wav", 0.85, LEVELS.SFX_BED),                // market chatter
-  ...layer(26.52, { src: A + "paper-slide.wav", v: LEVELS.SFX_TEXTURE, dur: 0.63 },
-                  { src: A + "loading-loop.wav", v: LEVELS.SFX_BED, dur: 2.27 }),
-  ...layer(27.45, { src: A + "cash-register.wav", v: LEVELS.SFX_MID, dur: 1.13 }, { src: A + "coin-drop.wav", dur: 0.66 }),
-  ...layer(27.80, { src: A + "hit-boom.wav", v: LEVELS.SFX_TEXTURE, dur: 0.9, rate: 0.8 },
-                  { src: A + "gear-stutter.wav", dur: 1.03 }),                              // the buyer sags
-  ...layer(28.39, { src: A + "cash-register.wav", v: LEVELS.SFX_MID, dur: 1.13, rate: 0.92 }, { src: A + "coin-drop.wav", dur: 0.66 }),
-  ...layer(28.85, { src: A + "whoosh-choppy.wav", v: LEVELS.SFX_MID, dur: 0.78 },
-                  { src: A + "click-light.wav", dur: 0.08 }),                               // the hero walks past
-  { at: 29.90, src: A + "whoosh-flyby.wav", v: LEVELS.SFX_TEXTURE, dur: 1.1, rate: 1.1 },
-
-  /* ======================= N9 · THE TORII GATE (30.74) ================= */
-  ...cutSfx(30.64, "smoke"),
-  ...amb(30.68, 2.46, "crowd-cheer.wav", 0.9, LEVELS.SFX_BED),
-  ...layer(30.94, { src: A + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.63 }, { src: A + "page-turn.wav", dur: 0.50 }),
-  ...layer(31.61, { src: A + "marker-stroke.wav", v: LEVELS.SFX_MID, dur: 0.9 },
-                  { src: A + "snap.wav", dur: 0.19 }),                                      // DELETE burns in
-  ...layer(32.07, { src: A + "success-jingle.wav", v: LEVELS.SFX_HERO, dur: 0.95 },
-                  { src: A + "crowd-applause.wav", v: LEVELS.SFX_TEXTURE, dur: 1.0 }),
-  { at: 32.58, src: A + "check-pop.wav", v: LEVELS.SFX_MID, dur: 0.55 },                    // the seal stamps
+  /* ======================= N9 · THE TORII GATE ========================== */
+  ...cutSfx(S9 - 0.10, "smoke"),
+  ...amb(S9 - 0.06, 2.44, "crowd-cheer.wav", 0.9),
+  ...layer(S9 + 0.20, { src: A + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.63 }, { src: A + "page-turn.wav", dur: 0.50 }),
+  ...layer(S9 + 0.87, { src: A + "marker-stroke.wav", v: LEVELS.SFX_MID, dur: 0.9 }, { src: A + "snap.wav", dur: 0.19 }),
+  ...layer(S9 + 1.33, { src: A + "success-jingle.wav", v: LEVELS.SFX_HERO, dur: 0.95 },
+                      { src: A + "crowd-applause.wav", v: LEVELS.SFX_TEXTURE, dur: 1.0 }),
+  { at: S9 + 1.84, src: A + "check-pop.wav", v: LEVELS.SFX_MID, dur: 0.55 },
 ];
 
 export const DeleteReel: React.FC = () => {
@@ -204,8 +210,8 @@ export const DeleteReel: React.FC = () => {
     f < 12 ? db(-12) : f > DELETE_TOTAL - 10 ? db(-10) * Math.max(0, (DELETE_TOTAL - f) / 10) : db(-10);
   return (
     <AbsoluteFill>
-      <Audio src={staticFile("delete_vo_v2.wav")} />
-      <Audio src={staticFile("delete_bed_v2.wav")} volume={music} />
+      <Audio src={staticFile("delete_vo_v4.wav")} />
+      <Audio src={staticFile("delete_bed_v3.wav")} volume={music} />
       <SfxTrack cues={SFX_ALL} />
 
       <Bg />

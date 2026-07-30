@@ -16,10 +16,12 @@ export const HAS_CLIP = false;
 export const CLIP_SRC = "delete_clip.mp4";
 
 /* ---- night ---- */
-export const NIGHT = "#2B3A52", NIGHT_D = "#1E2A3D", NIGHT_L = "#3E5170", NIGHT_LL = "#586E8F";
+/* the night was too dark to read at feed size — every value lifted ~1.5 stops.
+   Still a night palette, still matte; you can just SEE it now. */
+export const NIGHT = "#3F5273", NIGHT_D = "#2C3B55", NIGHT_L = "#5A6F94", NIGHT_LL = "#7A92B5";
 export const MOON = "#F5EFD8", MOON_D = "#E2D6AE";
 /* ---- built things ---- */
-export const TILE = "#4A5568", TILE_D = "#374254", TILE_L = "#5F6E85";
+export const TILE = "#5E6C84", TILE_D = "#48556C", TILE_L = "#7887A0";
 export const STONE = "#6E6A60", STONE_D = "#55524A", STONE_L = "#8A857A";
 export const WOOD = "#5C3D28", WOOD_D = "#402A1B", WOOD_L = "#7A5537";
 export const PAPER = "#F6EBCF", PAPER_HI = "#FFF6DF", PAPER_LO = "#E0CFA6";
