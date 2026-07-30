@@ -3,7 +3,7 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 49 reels with code · 43 factory logs · 18 storyboards · 55 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 49 reels with code · 44 factory logs · 18 storyboards · 55 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
@@ -46,6 +46,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **CREW** | [✓](video/src/ClaudeCrewReel.tsx) | [1](video/src/data/words_crew.json) | · | · | code, no log |
 | · | **DEALS** | · | · | [✓](memory/reels/deals-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **DECK** | · | · | [✓](memory/reels/deck-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
+| · | **DELETE** | · | [1](video/src/data/words_delete.json) | [✓](memory/reels/delete-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **DESIGN** | [✓](video/src/ClaudeDesignReel.tsx) | [1](video/src/data/words_design.json) | · | · | code, no log |
 | · | **DESIGN SF** | · | · | [✓](memory/reels/design-sf-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **DESIGNER** | [✓](video/src/ClaudeDesignerReel.tsx) | · | · | · | code, no log |

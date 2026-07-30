@@ -265,6 +265,41 @@ the screen."* Three separate mistakes stacked:
 Also give the swinger a wind-up and a follow-through (`rot` negative before the cut frame, positive
 after). A static figure beside a moving blade does not read as the one swinging it.
 
+**⛔ Captions have a CANONICAL builder. Use it — do not re-improvise the method.**
+`tools/build_captions.py` implements playbook C4 + `memory/caption-sync-gate.md`:
+```bash
+python3 tools/build_captions.py video/public/vo_FINAL.wav video/src/data/script_REEL.txt \
+                                video/src/data/words_REEL.json
+```
+Reel 81 hand-rolled this three separate times and got it wrong three ways, all of which that memory
+already warned about:
+
+1. **⛔ Never patch whisper's mishears word by word.** I wrote an edit map (`Thorpe`→`Anthropic`,
+   `Cloud MD`→`CLAUDE.md`, …) and had to re-derive it on every re-transcription because whisper mangles
+   *different* words each run — `Thorpe` one run, `Thorpek` the next. Instead keep the **exact script**
+   in `src/data/script_<reel>.txt` as the source of truth for the WORDS, transcribe the final wav for
+   TIMING only, and align the two with `difflib.SequenceMatcher` on normalised tokens. Then
+   `assert emitted == script.split()` before render.
+2. **⛔ Never ship raw whisper starts.** Whisper's per-line bias is ±0.1-0.4s of *scatter*, not a
+   constant. Measure each caption LINE's real speech onset from the wav (10 ms RMS, quiet→loud rising
+   edge within ±0.25s) and anchor the line's first word to it, shifting the rest of the line by the same
+   constant delta. Reel 81's 56 lines all anchored. Then a global −0.10s lead so captions never lag.
+3. **The renderer must accept the canonical shape.** C4.4 specifies `[{start,end,word}]`, but
+   `KaraokeCaption` only ever read `[{w,s,e}]` — so a spec-correct file crashed the render with
+   `Cannot read properties of undefined (reading 'trim')`. It now normalises both.
+
+**Line structure is a fixed point, not a single pass.** "Never end a line on a dangling word" needs more
+than the carry-forward rule, which is skipped once a line hits 4 words:
+- hand a trailing connector to the FRONT of the next line, and **repeat until stable** — popping `the`
+  off "Every guide on the" exposes `on` underneath it;
+- then **split any line over 4 words** (a hand-off had produced "on the internet is telling" at 1054px,
+  needing a 0.81× shrink) and re-settle the danglers;
+- the dangler list must include the **possessive determiners** — `their CLAUDE.md and their` was ending
+  on one because `their|its|our|his|her|with|from` were missing.
+
+Result on reel 81: 56 lines, **0** ending on a connector, **0** over four words, widest needing only
+0.92×, and 6/6 spot-checked words already on screen at their own onset frame.
+
 **⛔ An inline box wider than its container does NOT centre — and a `scale()` then locks the offset in.**
 The house karaoke caption was `display: inline-flex` inside a centred parent. When a phrase exceeded the
 container, inline layout put it at the content edge and overflowed **right only**, so

@@ -1,11 +1,11 @@
 {
   "counts": {
     "reels_with_code": 49,
-    "reels_total": 85,
-    "factory_logs": 43,
+    "reels_total": 86,
+    "factory_logs": 44,
     "storyboards": 18,
     "caption_jsons": 55,
-    "memory_md": 176,
+    "memory_md": 177,
     "creators": 8,
     "packs": 3
   },
@@ -543,6 +543,17 @@
       "log": "memory/reels/deck-factory-log.md",
       "storyboard": null,
       "captions": []
+    },
+    {
+      "key": "delete",
+      "name": "delete",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/delete-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_delete.json"
+      ]
     },
     {
       "key": "designsf",

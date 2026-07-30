@@ -301,7 +301,9 @@ Default is **×1.10** (`memory/reel-vo-pacing.md`). But measure first — **R1 i
 > Reel 52: hook + "so you build four Claude agents" held at **1.0×**; body at **×1.05** (1.10 failed at 4.6).
 > Result: worst window 4.4, overall 3.93. When gap-trimming tightens density, the tempo must come DOWN.
 
-## C4. Captions (drift-proof) → `memory/caption-sync-gate.md`
+## C4. Captions (drift-proof) → **`tools/build_captions.py`** + `memory/caption-sync-gate.md`
+⛔ **Run the tool, do not re-implement these steps by hand** (reel 81 re-improvised them 3× and shipped
+hand-patched mishears + raw whisper starts): `python3 tools/build_captions.py FINAL.wav SCRIPT.txt OUT.json`
 1. Define **CANON** = the corrected caption text (fix whisper mishears: "cloud"→"Claude", "week"→"weak", brand words).
 2. Align CANON → whisper word times with `difflib.SequenceMatcher`, borrowing each word's start/end.
 3. **If tempo was uniform**, divide times by the factor. **If tempo was piecewise, transcribe the FINAL wav and align to it** (self-consistent, no division assumption).

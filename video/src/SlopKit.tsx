@@ -315,11 +315,17 @@ export const HookHeader: React.FC<{ big: string; hot: string; f?: number }> = ({
 );
 
 // KARAOKE caption driven by VO word timings [{w,s,e}] + a sliding window, house style.
-export const KaraokeCaption: React.FC<{ words: { w: string; s: number; e: number }[]; fps?: number; top?: number; win?: number }> = (props) => {
+type CapWord = { w: string; s: number; e: number };
+/** The canonical on-disk shape is `[{start,end,word}]` (playbook C4.4); older reels
+    hold `[{w,s,e}]`. Accept either so a spec-correct file cannot crash a render. */
+const asCapWords = (ws: any[]): CapWord[] =>
+  ws.map((x) => ("w" in x ? x : { w: String(x.word ?? ""), s: Number(x.start ?? 0), e: Number(x.end ?? 0) }));
+
+export const KaraokeCaption: React.FC<{ words: any[]; fps?: number; top?: number; win?: number }> = (props) => {
   if (React.useContext(AssemblyCtx)) return null; // ROOT owns ONE karaoke track across the reel
-  return <KaraokeCaptionInner {...props} />;
+  return <KaraokeCaptionInner {...props} words={asCapWords(props.words)} />;
 };
-const KaraokeCaptionInner: React.FC<{ words: { w: string; s: number; e: number }[]; fps?: number; top?: number; win?: number }> = ({ words, fps = 30, top = 1268 }) => {
+const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: number; win?: number }> = ({ words, fps = 30, top = 1268 }) => {
   const f = useCurrentFrame();
   const t = f / fps;
   const lead = 0.12;
@@ -329,7 +335,7 @@ const KaraokeCaptionInner: React.FC<{ words: { w: string; s: number; e: number }
   const clines = React.useMemo(() => {
     const out: { words: typeof words; start: number; end: number }[] = [];
     let cur: typeof words = [];
-    const DANGLE = /^(i|a|an|the|to|of|and|or|you|your|for|is|it|in|on|so|my|as|at|but|if)$/i;
+    const DANGLE = /^(i|a|an|the|to|of|and|or|you|your|for|is|it|in|on|so|my|as|at|but|if|their|its|our|his|her|with|from)$/i;
     words.forEach((w, i) => {
       cur.push(w);
       const next = words[i + 1];
@@ -344,6 +350,51 @@ const KaraokeCaptionInner: React.FC<{ words: { w: string; s: number; e: number }
       }
     });
     if (cur.length) out.push({ words: cur, start: cur[0].s, end: cur[cur.length - 1].e });
+    // The carry-forward above is skipped once a line reaches 4 words, which let
+    // "Every guide on the" ship. Playbook C4.5 is absolute, so post-pass: any line
+    // still ending on a connector hands that word to the FRONT of the next line.
+    // Repeat to a FIXED POINT — handing off "the" from "Every guide on the" exposes
+    // "on" underneath it, so one pass is not enough.
+    for (let pass = 0; pass < 4; pass++) {
+      let changed = false;
+      for (let i = 0; i < out.length - 1; i++) {
+        const ln = out[i];
+        if (ln.words.length < 2) continue;
+        const last = ln.words[ln.words.length - 1].w.trim();
+        if (/[.!?]$/.test(last) || !DANGLE.test(last.replace(/[.,!?]+$/, ""))) continue;
+        const moved = ln.words.pop()!;
+        out[i + 1].words.unshift(moved);
+        ln.end = ln.words[ln.words.length - 1].e;
+        out[i + 1].start = moved.s;
+        changed = true;
+      }
+      if (!changed) break;
+    }
+    // A hand-off can push a line to 5 words ("on the internet is telling" = 1054px,
+    // needing a 0.81x shrink). Split anything over 4, then settle the danglers again.
+    for (let pass = 0; pass < 3; pass++) {
+      let split = false;
+      for (let i = 0; i < out.length; i++) {
+        if (out[i].words.length <= 4) continue;
+        const ln = out[i]; const half = Math.ceil(ln.words.length / 2);
+        const tailWords = ln.words.slice(half);
+        ln.words = ln.words.slice(0, half); ln.end = ln.words[ln.words.length - 1].e;
+        out.splice(i + 1, 0, { words: tailWords, start: tailWords[0].s, end: tailWords[tailWords.length - 1].e });
+        split = true;
+      }
+      for (let i = 0; i < out.length - 1; i++) {
+        const ln = out[i];
+        if (ln.words.length < 2) continue;
+        const last = ln.words[ln.words.length - 1].w.trim();
+        if (/[.!?]$/.test(last) || !DANGLE.test(last.replace(/[.,!?]+$/, ""))) continue;
+        const moved = ln.words.pop()!;
+        out[i + 1].words.unshift(moved);
+        ln.end = ln.words[ln.words.length - 1].e;
+        out[i + 1].start = moved.s;
+        split = true;
+      }
+      if (!split) break;
+    }
     return out;
   }, [words]);
   let cur = clines[0];

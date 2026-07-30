@@ -1,812 +1,812 @@
 [
 {
-"w": "Anthropic",
-"s": 0.0,
-"e": 0.46
+"start": 0.0,
+"end": 0.45,
+"word": " Anthropic"
 },
 {
-"w": "just",
-"s": 0.46,
-"e": 0.58
+"start": 0.45,
+"end": 0.57,
+"word": " just"
 },
 {
-"w": "told",
-"s": 0.58,
-"e": 0.74
+"start": 0.57,
+"end": 0.73,
+"word": " told"
 },
 {
-"w": "everyone",
-"s": 0.74,
-"e": 0.98
+"start": 0.57,
+"end": 0.64,
+"word": " everyone"
 },
 {
-"w": "to",
-"s": 0.98,
-"e": 1.18
+"start": 0.64,
+"end": 0.84,
+"word": " to"
 },
 {
-"w": "delete",
-"s": 1.18,
-"e": 1.4
+"start": 0.84,
+"end": 1.06,
+"word": " delete"
 },
 {
-"w": "their",
-"s": 1.4,
-"e": 1.56
+"start": 1.2,
+"end": 1.36,
+"word": " their"
 },
 {
-"w": "CLAUDE.md",
-"s": 1.56,
-"e": 1.88
+"start": 1.36,
+"end": 1.68,
+"word": " CLAUDE.md"
 },
 {
-"w": "and",
-"s": 1.88,
-"e": 2.18
+"start": 1.62,
+"end": 1.92,
+"word": " and"
 },
 {
-"w": "their",
-"s": 2.18,
-"e": 2.32
+"start": 1.92,
+"end": 2.06,
+"word": " their"
 },
 {
-"w": "skills.",
-"s": 2.32,
-"e": 2.5
+"start": 2.06,
+"end": 2.24,
+"word": " skills."
 },
 {
-"w": "The",
-"s": 2.92,
-"e": 2.96
+"start": 2.83,
+"end": 2.87,
+"word": " The"
 },
 {
-"w": "model",
-"s": 2.96,
-"e": 3.1
+"start": 2.87,
+"end": 3.01,
+"word": " model"
 },
 {
-"w": "you're",
-"s": 3.1,
-"e": 3.3
+"start": 3.01,
+"end": 3.21,
+"word": " you're"
 },
 {
-"w": "using",
-"s": 3.3,
-"e": 3.52
+"start": 3.06,
+"end": 3.28,
+"word": " using"
 },
 {
-"w": "does",
-"s": 3.52,
-"e": 3.68
+"start": 3.28,
+"end": 3.44,
+"word": " does"
 },
 {
-"w": "not",
-"s": 3.68,
-"e": 3.9
+"start": 3.44,
+"end": 3.66,
+"word": " not"
 },
 {
-"w": "need",
-"s": 3.9,
-"e": 4.06
+"start": 3.64,
+"end": 3.8,
+"word": " need"
 },
 {
-"w": "them",
-"s": 4.06,
-"e": 4.18
+"start": 3.8,
+"end": 3.92,
+"word": " them"
 },
 {
-"w": "anymore.",
-"s": 4.18,
-"e": 4.36
+"start": 3.92,
+"end": 4.1,
+"word": " anymore."
 },
 {
-"w": "Every",
-"s": 4.66,
-"e": 4.82
+"start": 4.38,
+"end": 4.56,
+"word": " Every"
 },
 {
-"w": "guide",
-"s": 4.82,
-"e": 4.98
+"start": 4.56,
+"end": 4.74,
+"word": " guide"
 },
 {
-"w": "on",
-"s": 4.98,
-"e": 5.14
+"start": 4.72,
+"end": 4.84,
+"word": " on"
 },
 {
-"w": "the",
-"s": 5.14,
-"e": 5.22
+"start": 4.84,
+"end": 4.92,
+"word": " the"
 },
 {
-"w": "internet",
-"s": 5.22,
-"e": 5.38
+"start": 4.92,
+"end": 5.08,
+"word": " internet"
 },
 {
-"w": "is",
-"s": 5.38,
-"e": 5.6
+"start": 5.14,
+"end": 5.36,
+"word": " is"
 },
 {
-"w": "telling",
-"s": 5.6,
-"e": 5.82
+"start": 5.36,
+"end": 5.58,
+"word": " telling"
 },
 {
-"w": "you",
-"s": 5.82,
-"e": 5.94
+"start": 5.51,
+"end": 5.63,
+"word": " you"
 },
 {
-"w": "to",
-"s": 5.94,
-"e": 5.94
+"start": 5.63,
+"end": 5.67,
+"word": " to"
 },
 {
-"w": "build",
-"s": 5.94,
-"e": 6.14
+"start": 5.63,
+"end": 5.83,
+"word": " build"
 },
 {
-"w": "a",
-"s": 6.14,
-"e": 6.26
+"start": 5.98,
+"end": 6.1,
+"word": " a"
 },
 {
-"w": "bigger",
-"s": 6.26,
-"e": 6.48
+"start": 6.1,
+"end": 6.32,
+"word": " bigger"
 },
 {
-"w": "setup.",
-"s": 6.48,
-"e": 6.74
+"start": 6.32,
+"end": 6.58,
+"word": " setup."
 },
 {
-"w": "The",
-"s": 7.08,
-"e": 7.12
+"start": 7.01,
+"end": 7.05,
+"word": " The"
 },
 {
-"w": "guy",
-"s": 7.12,
-"e": 7.22
+"start": 7.05,
+"end": 7.15,
+"word": " guy"
 },
 {
-"w": "who",
-"s": 7.22,
-"e": 7.32
+"start": 7.15,
+"end": 7.25,
+"word": " who"
 },
 {
-"w": "actually",
-"s": 7.32,
-"e": 7.5
+"start": 7.15,
+"end": 7.19,
+"word": " actually"
 },
 {
-"w": "builds",
-"s": 7.5,
-"e": 7.82
+"start": 7.19,
+"end": 7.51,
+"word": " builds"
 },
 {
-"w": "Claude",
-"s": 7.82,
-"e": 7.993
+"start": 7.51,
+"end": 7.73,
+"word": " Claude"
 },
 {
-"w": "Code",
-"s": 7.993,
-"e": 8.167
+"start": 7.78,
+"end": 7.94,
+"word": " Code"
 },
 {
-"w": "is",
-"s": 8.167,
-"e": 8.34
+"start": 7.94,
+"end": 8.08,
+"word": " is"
 },
 {
-"w": "telling",
-"s": 8.34,
-"e": 8.52
+"start": 8.08,
+"end": 8.26,
+"word": " telling"
 },
 {
-"w": "you",
-"s": 8.52,
-"e": 8.66
+"start": 8.4,
+"end": 8.54,
+"word": " you"
 },
 {
-"w": "to",
-"s": 8.66,
-"e": 8.68
+"start": 8.54,
+"end": 8.58,
+"word": " to"
 },
 {
-"w": "throw",
-"s": 8.68,
-"e": 8.88
+"start": 8.56,
+"end": 8.76,
+"word": " throw"
 },
 {
-"w": "yours",
-"s": 8.88,
-"e": 9.02
+"start": 8.72,
+"end": 8.86,
+"word": " yours"
 },
 {
-"w": "out.",
-"s": 9.02,
-"e": 9.24
+"start": 8.86,
+"end": 9.08,
+"word": " out."
 },
 {
-"w": "That",
-"s": 9.48,
-"e": 9.56
+"start": 9.4,
+"end": 9.48,
+"word": " That"
 },
 {
-"w": "is",
-"s": 9.56,
-"e": 9.66
+"start": 9.48,
+"end": 9.58,
+"word": " is"
 },
 {
-"w": "Boris",
-"s": 9.66,
-"e": 9.82
+"start": 9.58,
+"end": 9.74,
+"word": " Boris"
 },
 {
-"w": "Cherny,",
-"s": 9.82,
-"e": 10.28
+"start": 9.68,
+"end": 10.14,
+"word": " Cherny,"
 },
 {
-"w": "the",
-"s": 10.42,
-"e": 10.42
+"start": 10.28,
+"end": 10.32,
+"word": " the"
 },
 {
-"w": "lead",
-"s": 10.42,
-"e": 10.58
+"start": 10.28,
+"end": 10.44,
+"word": " lead"
 },
 {
-"w": "engineer",
-"s": 10.58,
-"e": 10.82
+"start": 10.29,
+"end": 10.53,
+"word": " engineer"
 },
 {
-"w": "on",
-"s": 10.82,
-"e": 11.06
+"start": 10.53,
+"end": 10.77,
+"word": " on"
 },
 {
-"w": "Claude",
-"s": 11.06,
-"e": 11.24
+"start": 10.77,
+"end": 10.95,
+"word": " Claude"
 },
 {
-"w": "Code",
-"s": 11.24,
-"e": 11.42
+"start": 11.12,
+"end": 11.36,
+"word": " Code"
 },
 {
-"w": "at",
-"s": 11.42,
-"e": 11.6
+"start": 11.36,
+"end": 11.48,
+"word": " at"
 },
 {
-"w": "Anthropic",
-"s": 11.6,
-"e": 12.02
+"start": 11.48,
+"end": 11.9,
+"word": " Anthropic"
 },
 {
-"w": "on",
-"s": 12.02,
-"e": 12.18
+"start": 11.72,
+"end": 11.88,
+"word": " on"
 },
 {
-"w": "stage",
-"s": 12.18,
-"e": 12.36
+"start": 11.88,
+"end": 12.06,
+"word": " stage"
 },
 {
-"w": "at",
-"s": 12.36,
-"e": 12.52
+"start": 12.06,
+"end": 12.22,
+"word": " at"
 },
 {
-"w": "Y",
-"s": 12.52,
-"e": 12.77
+"start": 12.22,
+"end": 12.47,
+"word": " Y"
 },
 {
-"w": "Combinator.",
-"s": 12.77,
-"e": 13.02
+"start": 12.6,
+"end": 12.85,
+"word": " Combinator."
 },
 {
-"w": "His",
-"s": 13.36,
-"e": 13.42
+"start": 13.15,
+"end": 13.21,
+"word": " His"
 },
 {
-"w": "point",
-"s": 13.42,
-"e": 13.6
+"start": 13.21,
+"end": 13.39,
+"word": " point"
 },
 {
-"w": "is",
-"s": 13.6,
-"e": 13.76
+"start": 13.39,
+"end": 13.55,
+"word": " is"
 },
 {
-"w": "simple,",
-"s": 13.76,
-"e": 13.94
+"start": 13.55,
+"end": 13.73,
+"word": " simple,"
 },
 {
-"w": "almost",
-"s": 14.06,
-"e": 14.22
+"start": 13.83,
+"end": 13.99,
+"word": " almost"
 },
 {
-"w": "every",
-"s": 14.22,
-"e": 14.48
+"start": 13.99,
+"end": 14.25,
+"word": " every"
 },
 {
-"w": "rule",
-"s": 14.48,
-"e": 14.82
+"start": 14.25,
+"end": 14.59,
+"word": " rule"
 },
 {
-"w": "you",
-"s": 14.82,
-"e": 14.92
+"start": 14.62,
+"end": 14.72,
+"word": " you"
 },
 {
-"w": "saved",
-"s": 14.92,
-"e": 15.1
+"start": 14.72,
+"end": 14.9,
+"word": " saved"
 },
 {
-"w": "was",
-"s": 15.1,
-"e": 15.3
+"start": 14.9,
+"end": 15.1,
+"word": " was"
 },
 {
-"w": "written",
-"s": 15.3,
-"e": 15.48
+"start": 15.14,
+"end": 15.32,
+"word": " written"
 },
 {
-"w": "for",
-"s": 15.48,
-"e": 15.68
+"start": 15.32,
+"end": 15.52,
+"word": " for"
 },
 {
-"w": "an",
-"s": 15.68,
-"e": 15.74
+"start": 15.52,
+"end": 15.58,
+"word": " an"
 },
 {
-"w": "older",
-"s": 15.74,
-"e": 15.88
+"start": 15.58,
+"end": 15.72,
+"word": " older"
 },
 {
-"w": "model",
-"s": 15.88,
-"e": 16.16
+"start": 15.58,
+"end": 15.84,
+"word": " model"
 },
 {
-"w": "that",
-"s": 16.16,
-"e": 16.32
+"start": 15.84,
+"end": 16.0,
+"word": " that"
 },
 {
-"w": "needed",
-"s": 16.32,
-"e": 16.48
+"start": 16.0,
+"end": 16.16,
+"word": " needed"
 },
 {
-"w": "the",
-"s": 16.48,
-"e": 16.62
+"start": 16.18,
+"end": 16.32,
+"word": " the"
 },
 {
-"w": "handholding.",
-"s": 16.62,
-"e": 16.94
+"start": 16.32,
+"end": 16.64,
+"word": " handholding."
 },
 {
-"w": "Opus",
-"s": 17.28,
-"e": 17.54
+"start": 17.26,
+"end": 17.52,
+"word": " Opus"
 },
 {
-"w": "5",
-"s": 17.54,
-"e": 17.74
+"start": 17.52,
+"end": 17.72,
+"word": " 5"
 },
 {
-"w": "does",
-"s": 17.74,
-"e": 17.9
+"start": 17.72,
+"end": 17.88,
+"word": " does"
 },
 {
-"w": "not,",
-"s": 17.9,
-"e": 18.06
+"start": 17.72,
+"end": 17.76,
+"word": " not,"
 },
 {
-"w": "so",
-"s": 18.18,
-"e": 18.24
+"start": 17.84,
+"end": 17.9,
+"word": " so"
 },
 {
-"w": "these",
-"s": 18.24,
-"e": 18.34
+"start": 17.9,
+"end": 18.0,
+"word": " these"
 },
 {
-"w": "instructions",
-"s": 18.34,
-"e": 18.64
+"start": 18.02,
+"end": 18.32,
+"word": " instructions"
 },
 {
-"w": "are",
-"s": 18.64,
-"e": 18.96
+"start": 18.32,
+"end": 18.64,
+"word": " are"
 },
 {
-"w": "just",
-"s": 18.96,
-"e": 19.06
+"start": 18.64,
+"end": 18.74,
+"word": " just"
 },
 {
-"w": "sitting",
-"s": 19.06,
-"e": 19.24
+"start": 18.71,
+"end": 18.89,
+"word": " sitting"
 },
 {
-"w": "there",
-"s": 19.24,
-"e": 19.42
+"start": 18.89,
+"end": 19.07,
+"word": " there"
 },
 {
-"w": "getting",
-"s": 19.42,
-"e": 19.56
+"start": 19.07,
+"end": 19.21,
+"word": " getting"
 },
 {
-"w": "in",
-"s": 19.56,
-"e": 19.72
+"start": 19.43,
+"end": 19.59,
+"word": " in"
 },
 {
-"w": "the",
-"s": 19.72,
-"e": 19.78
+"start": 19.59,
+"end": 19.65,
+"word": " the"
 },
 {
-"w": "way.",
-"s": 19.78,
-"e": 19.94
+"start": 19.65,
+"end": 19.81,
+"word": " way."
 },
 {
-"w": "He",
-"s": 20.16,
-"e": 20.28
+"start": 19.92,
+"end": 20.04,
+"word": " He"
 },
 {
-"w": "says",
-"s": 20.28,
-"e": 20.38
+"start": 20.04,
+"end": 20.14,
+"word": " says"
 },
 {
-"w": "delete",
-"s": 20.38,
-"e": 20.54
+"start": 20.14,
+"end": 20.38,
+"word": " delete"
 },
 {
-"w": "your",
-"s": 20.54,
-"e": 20.7
+"start": 20.37,
+"end": 20.45,
+"word": " your"
 },
 {
-"w": "MD",
-"s": 20.7,
-"e": 20.82
+"start": 20.45,
+"end": 20.57,
+"word": " MD"
 },
 {
-"w": "file",
-"s": 20.82,
-"e": 21.06
+"start": 20.57,
+"end": 20.81,
+"word": " file"
 },
 {
-"w": "every",
-"s": 21.06,
-"e": 21.28
+"start": 20.76,
+"end": 20.98,
+"word": " every"
 },
 {
-"w": "6",
-"s": 21.28,
-"e": 21.54
+"start": 20.98,
+"end": 21.24,
+"word": " 6"
 },
 {
-"w": "months",
-"s": 21.54,
-"e": 21.68
+"start": 21.24,
+"end": 21.38,
+"word": " months"
 },
 {
-"w": "and",
-"s": 21.68,
-"e": 21.9
+"start": 21.37,
+"end": 21.59,
+"word": " and"
 },
 {
-"w": "watch",
-"s": 21.9,
-"e": 22.08
+"start": 21.59,
+"end": 21.77,
+"word": " watch"
 },
 {
-"w": "what",
-"s": 22.08,
-"e": 22.22
+"start": 21.77,
+"end": 21.91,
+"word": " what"
 },
 {
-"w": "the",
-"s": 22.22,
-"e": 22.32
+"start": 21.91,
+"end": 22.01,
+"word": " the"
 },
 {
-"w": "model",
-"s": 22.32,
-"e": 22.46
+"start": 22.01,
+"end": 22.15,
+"word": " model"
 },
 {
-"w": "does",
-"s": 22.46,
-"e": 22.66
+"start": 22.15,
+"end": 22.35,
+"word": " does"
 },
 {
-"w": "on",
-"s": 22.66,
-"e": 22.84
+"start": 22.52,
+"end": 22.7,
+"word": " on"
 },
 {
-"w": "its",
-"s": 22.84,
-"e": 22.94
+"start": 22.7,
+"end": 22.8,
+"word": " its"
 },
 {
-"w": "own,",
-"s": 22.94,
-"e": 23.12
+"start": 22.8,
+"end": 22.98,
+"word": " own,"
 },
 {
-"w": "it",
-"s": 23.24,
-"e": 23.3
+"start": 23.05,
+"end": 23.11,
+"word": " it"
 },
 {
-"w": "might",
-"s": 23.3,
-"e": 23.42
+"start": 23.11,
+"end": 23.23,
+"word": " might"
 },
 {
-"w": "actually",
-"s": 23.42,
-"e": 23.7
+"start": 23.23,
+"end": 23.51,
+"word": " actually"
 },
 {
-"w": "surprise",
-"s": 23.7,
-"e": 23.92
+"start": 23.55,
+"end": 23.77,
+"word": " surprise"
 },
 {
-"w": "you.",
-"s": 23.92,
-"e": 24.26
+"start": 23.77,
+"end": 24.11,
+"word": " you."
 },
 {
-"w": "And",
-"s": 24.44,
-"e": 24.54
+"start": 24.18,
+"end": 24.28,
+"word": " And"
 },
 {
-"w": "he",
-"s": 24.54,
-"e": 24.64
+"start": 24.28,
+"end": 24.38,
+"word": " he"
 },
 {
-"w": "recommends",
-"s": 24.64,
-"e": 24.84
+"start": 24.38,
+"end": 24.58,
+"word": " recommends"
 },
 {
-"w": "trying",
-"s": 24.84,
-"e": 25.24
+"start": 24.54,
+"end": 24.94,
+"word": " trying"
 },
 {
-"w": "it",
-"s": 25.24,
-"e": 25.4
+"start": 24.94,
+"end": 25.1,
+"word": " it"
 },
 {
-"w": "for",
-"s": 25.4,
-"e": 25.52
+"start": 25.1,
+"end": 25.22,
+"word": " for"
 },
 {
-"w": "Opus",
-"s": 25.52,
-"e": 25.8
+"start": 25.22,
+"end": 25.5,
+"word": " Opus"
 },
 {
-"w": "5",
-"s": 25.8,
-"e": 26.02
+"start": 25.51,
+"end": 25.73,
+"word": " 5"
 },
 {
-"w": "specifically.",
-"s": 26.02,
-"e": 26.3
+"start": 25.73,
+"end": 26.01,
+"word": " specifically."
 },
 {
-"w": "So",
-"s": 26.7,
-"e": 26.98
+"start": 26.36,
+"end": 26.64,
+"word": " So"
 },
 {
-"w": "before",
-"s": 26.98,
-"e": 27.16
+"start": 26.64,
+"end": 26.82,
+"word": " before"
 },
 {
-"w": "you",
-"s": 27.16,
-"e": 27.3
+"start": 26.82,
+"end": 26.96,
+"word": " you"
 },
 {
-"w": "spend",
-"s": 27.3,
-"e": 27.44
+"start": 26.96,
+"end": 27.1,
+"word": " spend"
 },
 {
-"w": "another",
-"s": 27.44,
-"e": 27.673
+"start": 27.1,
+"end": 27.3,
+"word": " another"
 },
 {
-"w": "weekend",
-"s": 27.673,
-"e": 27.907
+"start": 27.44,
+"end": 27.62,
+"word": " weekend"
 },
 {
-"w": "trying",
-"s": 27.907,
-"e": 28.14
+"start": 27.62,
+"end": 27.8,
+"word": " trying"
 },
 {
-"w": "to",
-"s": 28.14,
-"e": 28.28
+"start": 28.02,
+"end": 28.16,
+"word": " to"
 },
 {
-"w": "install",
-"s": 28.28,
-"e": 28.56
+"start": 28.16,
+"end": 28.44,
+"word": " install"
 },
 {
-"w": "the",
-"s": 28.56,
-"e": 28.64
+"start": 28.44,
+"end": 28.52,
+"word": " the"
 },
 {
-"w": "next",
-"s": 28.64,
-"e": 28.74
+"start": 28.52,
+"end": 28.62,
+"word": " next"
 },
 {
-"w": "6",
-"s": 28.74,
-"e": 29.0
+"start": 28.52,
+"end": 28.68,
+"word": " 6"
 },
 {
-"w": "best",
-"s": 29.0,
-"e": 29.16
+"start": 28.68,
+"end": 28.84,
+"word": " best"
 },
 {
-"w": "skills,",
-"s": 29.16,
-"e": 29.44
+"start": 28.84,
+"end": 29.12,
+"word": " skills,"
 },
 {
-"w": "try",
-"s": 29.56,
-"e": 29.7
+"start": 29.28,
+"end": 29.42,
+"word": " try"
 },
 {
-"w": "deleting",
-"s": 29.7,
-"e": 29.92
+"start": 29.42,
+"end": 29.64,
+"word": " deleting"
 },
 {
-"w": "them",
-"s": 29.92,
-"e": 30.2
+"start": 29.64,
+"end": 29.92,
+"word": " them"
 },
 {
-"w": "first.",
-"s": 30.2,
-"e": 30.46
+"start": 30.05,
+"end": 30.31,
+"word": " first."
 },
 {
-"w": "Want",
-"s": 30.84,
-"e": 30.88
+"start": 30.71,
+"end": 30.75,
+"word": " Want"
 },
 {
-"w": "the",
-"s": 30.88,
-"e": 31.02
+"start": 30.75,
+"end": 30.89,
+"word": " the"
 },
 {
-"w": "full",
-"s": 31.02,
-"e": 31.16
+"start": 30.89,
+"end": 31.03,
+"word": " full"
 },
 {
-"w": "breakdown",
-"s": 31.16,
-"e": 31.4
+"start": 30.89,
+"end": 31.12,
+"word": " breakdown"
 },
 {
-"w": "of",
-"s": 31.4,
-"e": 31.6
+"start": 31.12,
+"end": 31.32,
+"word": " of"
 },
 {
-"w": "what",
-"s": 31.6,
-"e": 31.7
+"start": 31.32,
+"end": 31.42,
+"word": " what"
 },
 {
-"w": "to",
-"s": 31.7,
-"e": 31.8
+"start": 31.56,
+"end": 31.66,
+"word": " to"
 },
 {
-"w": "delete",
-"s": 31.8,
-"e": 31.98
+"start": 31.66,
+"end": 31.84,
+"word": " delete"
 },
 {
-"w": "and",
-"s": 31.98,
-"e": 32.12
+"start": 31.84,
+"end": 31.98,
+"word": " and"
 },
 {
-"w": "what",
-"s": 32.12,
-"e": 32.22
+"start": 31.98,
+"end": 32.08,
+"word": " what"
 },
 {
-"w": "to",
-"s": 32.22,
-"e": 32.3
+"start": 32.15,
+"end": 32.23,
+"word": " to"
 },
 {
-"w": "keep,",
-"s": 32.3,
-"e": 32.46
+"start": 32.23,
+"end": 32.39,
+"word": " keep,"
 },
 {
-"w": "comment",
-"s": 32.62,
-"e": 32.84
+"start": 32.55,
+"end": 32.73,
+"word": " comment"
 },
 {
-"w": "DELETE.",
-"s": 32.84,
-"e": 33.06
+"start": 32.55,
+"end": 32.79,
+"word": " DELETE."
 }
 ]
