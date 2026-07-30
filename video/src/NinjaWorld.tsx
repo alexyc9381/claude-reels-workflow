@@ -234,8 +234,8 @@ export const Chain: React.FC<{ x1: number; y1: number; x2: number; y2: number; s
 
 /** THE ANCHOR: one big iron block, labelled, with the rest bolted onto it.
     This is the hook's whole idea in one object — you are chained to your setup. */
-export const Anchor: React.FC<{ f: number; x: number; y: number; s?: number; shiver?: number; z?: number }> =
-  ({ f, x, y, s = 1, shiver = 0, z = 8 }) => {
+export const Anchor: React.FC<{ f: number; x: number; y: number; s?: number; shiver?: number; z?: number; label?: boolean }> =
+  ({ f, x, y, s = 1, shiver = 0, z = 8, label = true }) => {
   const jx = shiver * Math.sin(f * 3.7) * 4;
   const W0 = 300, H0 = 236;
   const BOLTED: [string, number, number, number][] = [
@@ -255,15 +255,19 @@ export const Anchor: React.FC<{ f: number; x: number; y: number; s?: number; shi
         <div key={i} style={{ position: "absolute", left: bx as number, top: by as number, width: 16, height: 16, borderRadius: "50%", background: IRON_D }} />
       ))}
       {/* the clan crest, stamped on the block — this iron belongs to Claude */}
-      <ClanMon x={W0 - 78} y={36} d={62} c={SASH_D} z={4} />
+      {label && <ClanMon x={W0 - 68} y={170} d={54} c={SASH_D} z={4} />}
       {/* the tow ring the chain comes off */}
       <div style={{ position: "absolute", left: -30, top: 44, width: 44, height: 34, borderRadius: 18, border: `9px solid ${IRON_L}` }} />
-      {/* the big label */}
-      <div style={{ position: "absolute", left: 16, top: 34, width: W0 - 104, height: 72, borderRadius: 5,
-        background: CARD, border: `5px solid ${IRON_D}`, display: "flex", alignItems: "center", justifyContent: "center",
-        fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40, letterSpacing: "-0.01em", color: INK }}>CLAUDE.md</div>
-      {/* everything else, bolted to the same block */}
-      {BOLTED.filter(([, , , w]) => w > 0).map(([l, bx, by, w]) => (
+      {/* the big label. `overflow: hidden` + nowrap so it can never spill its box
+          again, and the box now gets the block's full width (it was shrunk for the
+          crest and the 38px type no longer fitted — REEL-BUILD-LEARNINGS §3). */}
+      {label && (
+        <div style={{ position: "absolute", left: 16, top: 34, width: W0 - 32, height: 72, borderRadius: 5,
+          background: CARD, border: `5px solid ${IRON_D}`, display: "flex", alignItems: "center", justifyContent: "center",
+          overflow: "hidden", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 38,
+          letterSpacing: "-0.015em", color: INK, whiteSpace: "nowrap" }}>CLAUDE.md</div>
+      )}
+      {label && BOLTED.filter(([, , , w]) => w > 0).map(([l, bx, by, w]) => (
         <div key={l as string} style={{ position: "absolute", left: bx as number, top: by as number, width: w as number, height: 34,
           borderRadius: 4, background: IRON_D, border: `3px solid ${IRON_L}`, display: "flex", alignItems: "center", justifyContent: "center",
           fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 18, letterSpacing: "0.05em", color: "#E8E3D6" }}>{l as string}</div>

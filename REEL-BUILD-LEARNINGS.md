@@ -265,6 +265,28 @@ the screen."* Three separate mistakes stacked:
 Also give the swinger a wind-up and a follow-through (`rot` negative before the cut frame, positive
 after). A static figure beside a moving blade does not read as the one swinging it.
 
+**⛔ Text overflows in TWO ways, and both look like the same bug to the viewer.**
+
+1. **Past its own box.** Reel 81's `CLAUDE.md` plate: the box was narrowed from `W0-32` to `W0-104`
+   to make room for the clan crest, and the 40px type was left alone — so it spilled straight through
+   the white border. This is the *enlarging a container does not re-lay-out its contents* rule (top of
+   this section) running in reverse, and it is easier to miss because nothing looks empty. Always set
+   `overflow: hidden` + `whiteSpace: nowrap` on a fixed-width text box so a future resize clips
+   instead of spilling, and re-check the type size whenever the box changes.
+
+   A cheap audit that catches the whole class, run over the scene files:
+   ```python
+   # approximate advance width: Inter 900 ~0.60em/char, Fraunces 900 ~0.56em, +0.06em per cap
+   need = size * (0.60*len(txt) + 0.06*caps)
+   if need > box - 14: print("may overflow:", txt, box, size)
+   ```
+
+2. **Past the FRAME.** A 300px-wide prop cannot show its label inside a 1.2-1.4x shot without the panel
+   edge cutting a word in half — and a half-word at the frame edge reads as broken even though the box
+   is fine. Give the prop a `label` flag and show **bare** in any framing that crops it. Reel 81's block
+   carries its label in the two wide shots and is plain iron in the two tight ones; the name was
+   already established, so nothing is lost.
+
 **⛔ A `transform` on an unpositioned wrapper flings its absolute child across the frame.** In reel 81
 a plate was animated with `<div style={{transform: "translate(...) rotate(64deg)"}}><Weight x={112} …/></div>`.
 The wrapper is `position: static`, so it is a full-panel-wide, **zero-height** block, and the rotation

@@ -215,7 +215,7 @@ export const NinjaHook: React.FC = () => {
         {/* ---- C · hard cut IN and LOW: it loses ---- */}
         {f >= CB && f < CC && (
           <World f={f} frame={`scale(1.42) translate(${-40 + shake}px, 74px)`}>
-            <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0.5} z={8} />
+            <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0.5} label={false} z={8} />
             <Chain x1={AX - 6} y1={AY + 78} x2={cx + HS * 0.9} y2={cy + HS * 0.6} s={1.2} slack={50} z={11} />
             <Ninja f={f} x={cx} y={cy} size={HS} hero mon flip rot={yank * 78} shock={0.8}
                    nodAmp={0.3} nodSpeed={28} z={10} />
@@ -244,7 +244,7 @@ export const NinjaHook: React.FC = () => {
              HIS blade. See REEL-BUILD-LEARNINGS §3. */}
         {f >= CC && f < CD && (
           <World f={f} frame="scale(1.22) translate(48px, 24px)">
-            <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0} z={8} />
+            <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0} label={false} z={8} />
             <Chain x1={AX - 6} y1={AY + 78} x2={AX - 330} y2={AY + 196} s={1.2} slack={40}
                    cut={E(d, 4, 11, 0, 0.6, OUT)} z={11} />
             {/* the swordsman, in follow-through */}
