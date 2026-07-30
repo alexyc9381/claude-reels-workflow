@@ -20,7 +20,7 @@ render, or a re-record. Read the section that matches what you are about to do.
 | 6 | [Audio mix](#6-audio-mix) | set music or SFX levels |
 | 7 | [Remotion gotchas](#7-remotion-gotchas) | write animation code |
 | 8 | [Toolchain & environment](#8-toolchain--environment) | run whisper, ffmpeg or a render |
-| 9 | [Working process](#9-working-process) | start a new reel |
+| 9 | [Working process](#9-working-process) | start a new reel, or invent a world |
 | 10 | [Sound design](#10-sound-design) | place a single SFX cue |
 | 11 | [Delivery](#11-delivery) | put anything in Drive |
 | 12 | [**How to diagnose**](#12-how-to-diagnose-the-reasoning-not-the-rules) | you are about to "fix" something |
@@ -152,6 +152,32 @@ right. Alex flagged it as "not centred". **Recompute child layouts against the n
 - Draw order matters: to put a character *behind* a prop, render the character first.
 - A whip-pan will expose unpainted void unless you lay a backdrop **wider than the panel** behind it.
 
+**⛔ A `transform` on an unpositioned wrapper flings its absolute child across the frame.** In reel 81
+a plate was animated with `<div style={{transform: "translate(...) rotate(64deg)"}}><Weight x={112} …/></div>`.
+The wrapper is `position: static`, so it is a full-panel-wide, **zero-height** block, and the rotation
+pivots about *its* centre (506, 0), not the plate's. The plate landed in the neighbouring bay. Put the
+transform on a `position: absolute` wrapper and give the child `x={0} y={0}`:
+```tsx
+<div style={{ position: "absolute", left: X + dx, top: Y + dy, transformOrigin: "50% 50%" }}>
+  <Weight x={0} y={0} rot={t * 64} />
+</div>
+```
+
+**⛔ `inset` / `bottom` collapse to nothing inside an unsized parent.** A board backing written as
+`{position:absolute, inset:0}` inside `<div style={{left:96, top:150, width:470}}>` (no `height`, all
+children absolute) rendered as a sliver — the parent's height was 0. Any container you hang a *backing
+plate* on needs an explicit `height`.
+
+**⛔ Figure and ground must differ in VALUE, not just be on-palette.** A trainee tinted `#9A6A55`
+standing in a bay painted `PLASTER #8E6A4E` was invisible — both matte, both correct paints, same
+value. Matte-palette compliance is not contrast. Squint-test every character against what is directly
+behind it, and prefer light ground for a dark figure (see §1's two-sided rule).
+
+**Compose in columns when two things must both be legible.** The reel-81 hook only worked once the
+frame split: creator's clip + nameplate on the left, the fighter and its iron on the right. Layering
+labels *over* the hero buried it; the beat read as a pile of signs, not a character. Also keep the
+hero's face clear — strap the props to the **lower body** so the eyes stay above the prop line.
+
 ---
 
 ## 4. Real-world data (logos, repos, brands)
@@ -250,6 +276,17 @@ After any bulk edit, grep for orphaned values and re-render one still before a f
 - whisper.cpp build + `ggml-medium.en.bin` live under `~/Downloads/matchtern-video/whisper.cpp`.
 - `faster-whisper` is installed (1.2.1) — prefer it for word timings.
 - macOS has no `timeout` command.
+- **`tools/verify_reel.py` resolves `ffmpeg`/`ffprobe` from `PATH`**, not from `ffmpeg-static`. Export
+  first or the gate dies on `FileNotFoundError: 'ffmpeg'` and looks like a broken render:
+  ```bash
+  export PATH="$PWD/tools/node_modules/ffmpeg-static:$PWD/tools/node_modules/ffprobe-static/bin/darwin/arm64:$PATH"
+  ```
+- **zsh arrays are 1-indexed.** A bash-style `for i in {0..7}` over `IDS=(a b c …)` silently renders an
+  empty name for `i=0` and skips the last item. Iterate the values (`for id in "${IDS[@]}"`) or use
+  `{1..N}`. Also: `set -- $pair` inside a `for … in "$@"` loop clobbers the list you are iterating.
+- **`soffice` and `pdftoppm` are not installed here**, so the docx skill's render-and-look verification
+  is unavailable. Verify a generated `.docx` by reading it back with `python3 -c "import docx"` and
+  asserting on paragraph/table counts plus the house rules (0 em-dashes, no Matchtern footer).
 
 **⛔ Never `cd` into a Google Drive / cloud-storage folder.** If access is later denied, the shell's
 cwd points at an inode it cannot stat and **every subsequent command fails** with
@@ -275,6 +312,27 @@ running process keeps the old denial.
 - Deliver finished MP4s to the Google Drive `Claude Reels/` folder only.
 - Be your own harshest critic — Alex should not have to re-flag neon, dead scenes, occlusion or
   desync every time.
+
+---
+
+**⛔ A world must be a STORY, not a themed backdrop.** Reel 81's first build (THE STUDY: binders,
+shelves, desk lamps) was rejected outright: *"the scene concepts are just way too boring, it's just
+books and stuff like that and libraries."* A room full of on-topic props labels the subject; nothing
+happens in it, so there is no reason to watch frame 400 after frame 40.
+
+Before building any world, finish these four sentences. If you cannot, you have a backdrop:
+1. The hero is ____ and it wants ____.
+2. What blocks it is ____ (the topic's villain, made physical).
+3. The turn is ____ (who or what changes the situation).
+4. The payoff you SEE is ____.
+
+Reel 81's answer: a fighter buried in labelled iron plates / the weight everyone told it to strap on /
+the man who built the dojo cuts the straps / it moves at blur speed. Then check the pop-culture anchor
+is geometric (dojo, factory, arcade, shredder) rather than organic.
+
+**Show the concept before rebuilding all of it.** Render a 5-frame beat strip of the hook and one still
+per scene, stack them with `hstack`/`vstack`, and look at it. Every defect in this section was found in
+a contact sheet, not in code review.
 
 ---
 
