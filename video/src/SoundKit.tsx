@@ -53,13 +53,23 @@ export type Cue = {
   lead?: number;
   /** start this many seconds into the file, to skip a slow attack */
   from?: number;
+  /** frames of tail ramp so a truncated cue decays instead of clicking (default 5) */
+  fade?: number;
 };
 
-export const Sfx: React.FC<Cue> = ({ at, src, v, dur, rate = 1, lead = LEAD_FRAMES, from = 0 }) => {
+export const Sfx: React.FC<Cue> = ({ at, src, v, dur, rate = 1, lead = LEAD_FRAMES, from = 0, fade = 5 }) => {
   const start = Math.max(0, Math.round(at * FPS) - lead);
+  const n = Math.max(1, Math.round(dur * FPS));
+  /* `dur` cuts the Sequence HARD. Files here run 0.08s to 57s, so any cue set
+     shorter than its file used to stop mid-decay and click — the "chopped tails
+     sound cheap" gotcha. A short tail ramp lets a cue be as long as the EDIT
+     needs without smearing the next beat or clicking. */
+  const vol = fade > 0 && n > fade + 2
+    ? (fr: number) => v * Math.min(1, (n - fr) / fade)
+    : v;
   return (
-    <Sequence from={start} durationInFrames={Math.max(1, Math.round(dur * FPS))} layout="none">
-      <Audio src={staticFile(`sfx/${src}`)} volume={v} playbackRate={rate} startFrom={Math.round(from * FPS)} />
+    <Sequence from={start} durationInFrames={n} layout="none">
+      <Audio src={staticFile(`sfx/${src}`)} volume={vol} playbackRate={rate} startFrom={Math.round(from * FPS)} />
     </Sequence>
   );
 };

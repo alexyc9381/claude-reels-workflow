@@ -135,6 +135,24 @@ After any bulk style edit, grep for orphaned values and render one still before 
 
 ---
 
+**Run the THE-OPEN gate on the open, do not eyeball it.** Reel 81's ninja open *looked* fine and
+failed two hard bars from `docs/THE-OPEN.md`:
+
+| check | bar | reel 81 before | after |
+|---|---|---|---|
+| frame-0 panel mean luma | ≥ 140/255 | **100** | **196** |
+| shot count in first 5s | ≥ 3 | **1** | **6** |
+| transient within 300ms of every cut | all | 1 cut only | all 6 |
+
+Both were **recut** problems, not new-element problems. A night-set reel cannot open on the night:
+shot A became a BRIGHT extreme close on the literal `CLAUDE.md` file, padlocked shut with a chain
+across it, cream filling the panel, the filename at 148px so it reads on mute, and the ninja already
+in frame. Then hard cut to the night wide. Six shots at 0.50 / 1.03 / 1.57 / 2.03 / 2.50s.
+
+Do not put a slow camera drift inside a hook shot and call it motion — the doc is explicit that the
+camera does not move and every change is a hard cut to a different *framing* of the same world. A
+drifting single wide still scores as one shot.
+
 **⛔ "I'm confused what's even going on" means the hook has no single readable OBJECT.** Reel 81's
 first ninja hook was a rooftop chase: sprint, leap the gap, get yanked out of the air by chains, crash
 short. Every beat was there and it still failed, because
@@ -425,6 +443,27 @@ Full system in [`docs/SOUND-DESIGN.md`](docs/SOUND-DESIGN.md); implementation in
 **⛔ The frequency pocket.** Do not just turn the music down; that makes it thin and it still masks the
 voice. Notch 450 / 1400 / 2800 Hz out of the bed, `sidechaincompress` it against the VO, then
 `loudnorm` so the level is predictable. A pocketed bed runs ~10 dB **hotter** without masking.
+
+**`dur` cuts the Sequence HARD, so the fix for chopped tails is a tail RAMP, not a longer `dur`.**
+The AM pack runs 0.08s to 57s. `hit-boom` is 7.45s; giving it its true length on three armory hits
+0.5s apart is mud, and giving it 0.8s used to stop it mid-decay and click. `SoundKit.Sfx` now ramps
+the last few frames of every cue, so `dur` can be as long as the EDIT needs:
+```tsx
+const vol = fade > 0 && n > fade + 2 ? (fr: number) => v * Math.min(1, (n - fr) / fade) : v;
+```
+Default `fade` is 5 frames (~0.17s). Measure the library once and keep the numbers in the reel file so
+future edits reason against real lengths, not guesses.
+
+**Score every cut and give every LOCATION its own ambience.** "Better SFX design throughout" on reel
+81 came from three moves, not from louder cues:
+1. `scoreCut(t, movement, impact, {texture})` — a whoosh starting 0.12s BEFORE the cut, a transient ON
+   it, a texture 1 frame after. Applied to all 9 scene cuts and all 5 open cuts.
+2. **Frame 0 gets the heaviest stack in the reel** — five simultaneous cues (boom, whoosh, snap, a
+   keyboard texture for recognition, room tone).
+3. `amb(t, dur, src, rate, v)` — a bed per world, at `SFX_BED`: room tone for interiors, room tone
+   pitched to 0.72 for wind in the bamboo, `wheel-spin` at 0.55 for the waterfall, `crowd-laugh` at
+   0.85 for market chatter. Beds are deliberately **not** declared in the intent manifest: at −24 dB
+   under a −16 LUFS VO they are not transients, and declaring them makes `SFX_CUES` a coin flip.
 
 **⛔ ALWAYS set `dur`.** Long one-shots are normal (a bass boom is 7.4 s, applause 5.9 s). Without a
 duration the tail runs under the next scene.
