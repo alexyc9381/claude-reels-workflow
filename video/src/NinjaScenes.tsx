@@ -63,7 +63,7 @@ export const N1Armory: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <Tag f={f} icon="⛓️" word="STRAP MORE ON" c={FLAME} />
+      <Tag f={f} icon="📈" word="EVERY GUIDE SAYS ADD MORE" c={FLAME} />
       <Panel glow={hexA(FLAME, 0.24)}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shake}px) ${cam(f, 69, 0)}`, transformOrigin: "50% 58%" }}>
           <Armory f={f} floor={FLOOR} />
@@ -134,7 +134,7 @@ export const N2Master: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <Tag f={f} icon="🗡️" word="HE SAYS CUT IT" c={SASH} />
+      <Tag f={f} logo word="THROW YOUR SETUP OUT" c={SASH} />
       <Panel glow={hexA(SASH, 0.26)}>
         <div style={{ position: "absolute", inset: 0, transform: cam(f, 74, 3), transformOrigin: "50% 58%" }}>
           <Bamboo f={f} floor={FLOOR} />
@@ -189,7 +189,7 @@ export const N3Founder: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <Tag f={f} icon="🎴" word="HE BUILT THE ART" c="#6E4257" />
+      <Tag f={f} logo word="BORIS CHERNY · ANTHROPIC" c="#6E4257" />
       <Panel glow={hexA(PAPER_LO, 0.3)}>
         <div style={{ position: "absolute", inset: 0, transform: cam(f, 113, 1), transformOrigin: "50% 58%" }}>
           <ScrollHall f={f} floor={FLOOR} />
@@ -253,7 +253,7 @@ export const N4Yards: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <Tag f={f} icon="📜" word="WRITTEN FOR THE OLD ONE" c="#2F6B63" />
+      <Tag f={f} icon="📄" word="WRITTEN FOR AN OLDER MODEL" c="#2F6B63" />
       <Panel glow={hexA("#2F6B63", 0.24)}>
         <div style={{ position: "absolute", inset: 0, transform: cam(f, 123, 4), transformOrigin: "50% 58%" }}>
           {/* 2024: a small ninja that genuinely cannot stand without the iron */}
@@ -303,7 +303,7 @@ export const N5Short: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <Tag f={f} icon="🎯" word="IT PULLS YOU SHORT" c={SASH} />
+      <Tag f={f} logo word="OPUS 5 DOESN'T NEED IT" c={SASH} />
       <Panel glow={hexA(SASH, 0.24)}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shk}px) ${cam(f, 84, 2)}`, transformOrigin: "50% 58%" }}>
           <Range f={f} floor={FLOOR} />
@@ -365,7 +365,7 @@ export const N6Reset: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <Tag f={f} icon="🌙" word="EVERY SIX MONTHS" c={WATER} />
+      <Tag f={f} icon="🗓️" word="DELETE IT EVERY 6 MONTHS" c={WATER} />
       <Panel glow={hexA(WATER, 0.26)}>
         <div style={{ position: "absolute", inset: 0, transform: cam(f, 133, 0), transformOrigin: "50% 58%" }}>
           <Waterfall f={f} floor={FLOOR} />
@@ -431,7 +431,7 @@ export const N7Summit: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <Tag f={f} icon="⛰️" word="TRY IT ON OPUS 5" c={DAWN_LO} />
+      <Tag f={f} logo word="TEST IT ON OPUS 5" c={DAWN_LO} />
       <Panel glow={hexA(DAWN, 0.3)}>
         <div style={{ position: "absolute", inset: 0, transform: cam(f, 59, 4), transformOrigin: "50% 58%" }}>
           <Summit f={f} floor={FLOOR} />
@@ -470,7 +470,7 @@ export const N8Market: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <Tag f={f} icon="🏮" word="SIX MORE, EVERY WEEK" c="#6E4257" />
+      <Tag f={f} icon="🧩" word="STOP INSTALLING MORE SKILLS" c="#6E4257" />
       <Panel glow={hexA("#6E4257", 0.26)}>
         <div style={{ position: "absolute", inset: 0, transform: cam(f, 133, 3), transformOrigin: "50% 58%" }}>
           <Market f={f} floor={FLOOR} />

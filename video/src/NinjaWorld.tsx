@@ -772,15 +772,28 @@ export const Torii: React.FC<{ f: number; floor?: number }> = ({ f, floor = 626 
 /* =========================================================================
    CARDS — the only type the world carries
    ========================================================================= */
-export const Tag: React.FC<{ f: number; icon: string; word: string; c?: string }> = ({ f, icon, word, c = SASH }) => {
+export const Tag: React.FC<{ f: number; icon?: string; word: string; c?: string; logo?: boolean }> =
+  ({ f, icon, word, c = SASH, logo }) => {
   const p = E(f, 0, 9, 0, 1, BACK);
+  /* ⛔ The header says WHAT IS BEING CLAIMED, in the subject's own words —
+     CLAUDE.md, skills, Opus 5, Anthropic. It is NOT a place for theme flavour;
+     the pictures carry the theme. See REEL-BUILD-LEARNINGS §2.
+     Auto-scaled so a longer, plainer line still fits on one row. */
+  const size = word.length > 24 ? 40 : word.length > 20 ? 45 : 50;
   return (
     <div style={{ position: "absolute", left: 0, right: 0, top: 322, display: "flex", justifyContent: "center", zIndex: 200,
       opacity: Math.min(1, p), transform: `translateY(${(1 - p) * -14}px) scale(${0.92 + p * 0.08})` }}>
-      <div style={{ display: "inline-flex", alignItems: "center", gap: 14, padding: "12px 30px 12px 14px", borderRadius: 10,
-        background: CARD, borderLeft: `12px solid ${c}`, boxShadow: "0 24px 52px -14px rgba(14,20,32,0.6)" }}>
-        <span style={{ width: 72, height: 72, borderRadius: 8, background: c, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 38 }}>{icon}</span>
-        <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 50, color: INK, whiteSpace: "nowrap", letterSpacing: "-0.01em" }}>{word}</span>
+      <div style={{ display: "inline-flex", alignItems: "center", gap: 14, padding: "12px 28px 12px 13px", borderRadius: 10,
+        background: CARD, borderLeft: `12px solid ${c}`, boxShadow: "0 24px 52px -14px rgba(14,20,32,0.6)", maxWidth: 1000 }}>
+        {logo ? (
+          <span style={{ width: 72, height: 72, borderRadius: 8, background: "#FFFFFF", border: `3px solid ${CARD3}`,
+            display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Img src={staticFile("claude_logo.png")} style={{ width: 54, height: 54, objectFit: "contain" }} />
+          </span>
+        ) : (
+          <span style={{ width: 72, height: 72, borderRadius: 8, background: c, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 38 }}>{icon}</span>
+        )}
+        <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: size, color: INK, whiteSpace: "nowrap", letterSpacing: "-0.015em" }}>{word}</span>
       </div>
     </div>
   );

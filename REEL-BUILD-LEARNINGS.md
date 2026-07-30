@@ -161,6 +161,24 @@ brightest thing that world owns, so the bar is cleared *from inside the theme* (
 **When a gate and the theme seem to conflict, look for the bright thing the world already contains**
 — paper, snow, dawn, lantern light, a backlit shoji screen, fire. Do not import a neutral card.
 
+**⛔ The header states the CLAIM, not the theme.** Reel 81's headers were written in ninja: STRAP MORE
+ON, HE SAYS CUT IT, HE BUILT THE ART, IT PULLS YOU SHORT. Alex: *"the headers should be about what im
+talking about, not trying to make it on 'theme' ... it should be related to claude and stuff."*
+
+| the VO line | ⛔ themed | ✅ the claim |
+|---|---|---|
+| "every guide is telling you to build a bigger setup" | STRAP MORE ON | EVERY GUIDE SAYS ADD MORE |
+| "the guy who builds Claude Code says throw yours out" | HE SAYS CUT IT | THROW YOUR SETUP OUT |
+| "that is Boris Cherny, lead engineer ... at Anthropic" | HE BUILT THE ART | BORIS CHERNY · ANTHROPIC |
+| "Opus 5 does not, so these instructions get in the way" | IT PULLS YOU SHORT | OPUS 5 DOESN'T NEED IT |
+
+The picture is already carrying the theme. The header is the reel's one **literal** channel, so
+spending it on metaphor means the viewer has to decode before they can orient — and that costs exactly
+the second the scene had to earn. Write each header from its own VO line, use the product's nouns
+(CLAUDE.md, skills, hooks, MCP, Opus 5, Anthropic, the person's name), and put the **Claude mark** in
+the badge rather than a themed emoji wherever the line is about Claude (`Tag`'s `logo` prop). Auto-scale
+the type so a longer plain line still fits one row — never shorten a header into metaphor to make it fit.
+
 **⛔ Shot count is a FLOOR to clear, not a number to maximise.** Having cleared the ≥3 bar, reel 81's
 open went to SIX shots in 4.5s — and five of them were dark rooftop at four different zooms. Alex:
 *"the cut in between the scenes i have no idea whats going on so i would scroll like its too

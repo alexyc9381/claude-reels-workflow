@@ -192,7 +192,7 @@ export const NinjaHook: React.FC = () => {
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <HookHeader f={f + 12} big="CLAUDE CODE'S CREATOR" hot="CUT THE CHAIN" />
+      <HookHeader f={f + 12} big="CLAUDE CODE'S CREATOR" hot="DELETE YOUR CLAUDE.md" />
       <Panel glow={hexA(CLAY, 0.3)}>
         {/* ---- A · bright, close, and the thing itself ---- */}
         {f < CA && <ShotA f={f} />}
