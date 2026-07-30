@@ -214,6 +214,26 @@ export const cam = (f: number, dur: number, kind: number): string => { … }   /
 ```
 Combine it with any existing shake by concatenating the transform strings, not replacing them.
 
+**⛔ An action needs an AUTHOR on screen, or it reads as a floating shape.** Reel 81's cuts were
+white rectangles crossing an empty sky — twice in the first 8 seconds, in shots where no character was
+even present. Alex: *"im kind of confused whats going on with the slices and stuff when they appear on
+the screen."* Three separate mistakes stacked:
+
+1. **No hand.** A blade with nobody holding it is a stick. Put the swordsman in the shot, mid-swing,
+   with the weapon's pivot at his **hands** — not his head, which is where a first pass usually lands
+   it because that is the vertical centre of a box mascot.
+2. **Two strokes at once.** The shot drew a "blade" bar AND a full-frame `Slash`, at different angles.
+   They read as scattered sticks. **One stroke per cut.**
+3. **A rectangle is not a blade, and a rectangle is not an arc.** Both need shape:
+   - `Katana` — dark wrapped tsuka, a brass tsuba, a blade tapered with `clipPath` and a hamon line.
+   - `SwordArc` — a crescent built from a polygon whose width tapers to nothing at both ends, swept
+     along the swing. A constant-width bar across the frame reads as a scratch.
+4. **An arc FLASHES.** Decay it over ~7 frames. Left up for the whole shot it stops being motion and
+   becomes scenery.
+
+Also give the swinger a wind-up and a follow-through (`rot` negative before the cut frame, positive
+after). A static figure beside a moving blade does not read as the one swinging it.
+
 **⛔ A `transform` on an unpositioned wrapper flings its absolute child across the frame.** In reel 81
 a plate was animated with `<div style={{transform: "translate(...) rotate(64deg)"}}><Weight x={112} …/></div>`.
 The wrapper is `position: static`, so it is a full-panel-wide, **zero-height** block, and the rotation

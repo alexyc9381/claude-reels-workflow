@@ -5,7 +5,7 @@ import { Bg, Panel, ProgressBar, INK, hexA } from "./SlopKit";
 import {
   Rooftops, Armory, Bamboo, ScrollHall, Grounds, Range, Waterfall, Summit, Market, Torii,
   Ninja, IronTag, Shuriken, Smoke, Slash, Streaks, SpeedLines, Moon, Torch, Lantern,
-  HangScroll, ShrineBell, Target, MistBand, Snowfall, Fireflies, Embers,
+  HangScroll, ShrineBell, Target, MistBand, Snowfall, Fireflies, Embers, Katana, SwordArc,
   Tag, Nameplate, ClipScreen,
   NIGHT, NIGHT_D, NIGHT_L, NIGHT_LL, MOON, MOON_D, TILE, TILE_D, TILE_L,
   STONE, STONE_D, STONE_L, WOOD, WOOD_D, WOOD_L, PAPER, PAPER_HI, PAPER_LO,
@@ -160,17 +160,19 @@ export const N2Master: React.FC = () => {
           {/* the master, stepping out of the canes */}
           <div style={{ opacity: app }}>
             <Ninja f={f} x={620 + (1 - app) * 90} y={FLOOR - 372 * 0.94} size={372} master
-                   wrap="#3A3040" band="#8A7A46" stern={0.95} gaze={-2} nodAmp={1} nodSpeed={20} tails={0} z={10} />
+                   wrap="#3A3040" band="#8A7A46" stern={0.95} gaze={-2} nodAmp={1} nodSpeed={20} tails={0}
+                   rot={-E(f, DRAW, CUT, 0, 7, IO) + E(f, CUT, CUT + 8, 0, 13, OUT)} z={10} />
           </div>
 
-          {/* the drawn blade, then the slash */}
-          {blade > 0.05 && f < CUT + 6 && (
-            <div style={{ position: "absolute", left: 618, top: 322, width: 236 * blade, height: 14, borderRadius: 7,
-              background: "#E8ECEF", transform: `rotate(${-54 + blade * 34}deg)`, transformOrigin: "0% 50%", boxShadow: SH, zIndex: 12 }} />
-          )}
-          <Slash f={f} at={CUT} y={324} deg={17} life={9} />
-          {f >= CUT && f < CUT + 7 && (
-            <div style={{ position: "absolute", inset: 0, background: PAPER_HI, opacity: (1 - (f - CUT) / 7) * 0.44, zIndex: 22 }} />
+          {/* his katana, and the arc it leaves. ONE stroke with a visible author —
+              no free-floating white bars (REEL-BUILD-LEARNINGS §3). */}
+          {app > 0.6 && f < CUT + 12 && (<>
+            <Katana x={640} y={FLOOR - 224} len={300} rot={-72 + blade * 104} z={13} flip />
+            <SwordArc cx={640} cy={FLOOR - 224} r={292} from={196} to={104} p={Math.max(0.02, blade)} w={30} z={12}
+                      o={1 - E(f, CUT + 4, CUT + 12, 0, 1, OUT)} />
+          </>)}
+          {f >= CUT && f < CUT + 6 && (
+            <div style={{ position: "absolute", inset: 0, background: PAPER_HI, opacity: (1 - (f - CUT) / 6) * 0.38, zIndex: 22 }} />
           )}
         </div>
       </Panel>

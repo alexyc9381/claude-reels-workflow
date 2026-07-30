@@ -3,7 +3,7 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { inter, fraunces } from "./fonts";
 import { Bg, Panel, ProgressBar, HookHeader, Caption, AssemblyCtx, INK, hexA } from "./SlopKit";
 import {
-  Rooftops, Ninja, Anchor, Chain, Smoke, Slash, Streaks, SpeedLines,
+  Rooftops, Ninja, Anchor, Chain, Katana, SwordArc, Smoke, Streaks, SpeedLines,
   NIGHT, NIGHT_D, NIGHT_L, NIGHT_LL, TILE, TILE_D, TILE_L, MOON, PAPER, PAPER_HI, PAPER_LO,
   IRON, IRON_D, IRON_L, SASH, SASH_D, SMOKE_L, CLAY, CARD, CARD2, CARD3, WOOD, WOOD_D, SNOW,
   E, osc, rnd, OUT, IO, IN_Q, BACK, SH, SH_D,
@@ -227,21 +227,30 @@ export const NinjaHook: React.FC = () => {
           </World>
         )}
 
-        {/* ---- D · hard cut to the blade. One stroke. ---- */}
+        {/* ---- D · hard cut to the blade. ONE stroke, and someone swings it. ----
+             The old version drew two white bars crossing in empty sky with
+             nobody in frame, which read as random sticks. A cut needs an
+             author: the master lands in shot, mid-swing, and the arc follows
+             HIS blade. See REEL-BUILD-LEARNINGS §3. */}
         {f >= CC && f < CD && (
-          <World f={f} frame="scale(1.66) translate(96px, 40px)">
+          <World f={f} frame="scale(1.3) translate(60px, 30px)">
             <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0} z={8} />
             <Chain x1={AX - 6} y1={AY + 78} x2={AX - 330} y2={AY + 196} s={1.2} slack={40}
                    cut={E(d, 4, 11, 0, 0.6, OUT)} z={11} />
-            <div style={{ position: "absolute", left: 120, top: RIDGE - 250, width: 470 * blade, height: 20, borderRadius: 10,
-              background: "#F2F5F7", transform: `rotate(${-40 + blade * 44}deg)`, transformOrigin: "0% 50%",
-              boxShadow: SH_D, zIndex: 21 }} />
+            {/* the swordsman, in follow-through */}
+            <Ninja f={f} x={96} y={RIDGE - 330 * 0.94} size={330} master wrap="#3A3040" band="#8A7A46"
+                   stern={0.95} gaze={-2} nodAmp={0.6} nodSpeed={26} tails={0} rot={-6 + blade * 12} z={18} />
+            {/* his katana, swinging through the chain */}
+            <Katana x={276} y={RIDGE - 176} len={318} rot={-64 + blade * 96} z={21} />
+            {/* the arc it leaves, tapered at both ends */}
+            <SwordArc cx={276} cy={RIDGE - 176} r={300} from={-70} to={34} p={blade} w={30} z={20}
+                      o={1 - E(d, 7, 14, 0, 1, OUT)} />
+            {/* the severed link, spinning off */}
             {d >= 5 && (
-              <div style={{ position: "absolute", left: 300 + (d - 5) * 13, top: RIDGE - 210 + (d - 5) * (d - 5) * 1.6,
-                width: 52, height: 38, borderRadius: 18, border: `13px solid ${IRON_L}`,
-                transform: `rotate(${(d - 5) * 24}deg)`, zIndex: 22 }} />
+              <div style={{ position: "absolute", left: 470 + (d - 5) * 15, top: RIDGE - 200 + (d - 5) * (d - 5) * 1.7,
+                width: 54, height: 40, borderRadius: 19, border: `14px solid ${IRON_L}`,
+                transform: `rotate(${(d - 5) * 26}deg)`, zIndex: 22 }} />
             )}
-            <Slash f={f} at={CC + 2} y={RIDGE - 260} deg={15} life={9} />
           </World>
         )}
 

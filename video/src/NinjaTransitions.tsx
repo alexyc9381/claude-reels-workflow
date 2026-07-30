@@ -85,8 +85,10 @@ const SlashCut: React.FC<{ k: number }> = ({ k }) => {
       <div style={{ position: "absolute", left: 0, top: off, width: "100%", height: "100%", background: NIGHT_D,
         clipPath: "polygon(0 62%, 100% 46%, 100% 100%, 0 100%)" }} />
       {/* the blade line, brightest right on the cut */}
-      <div style={{ position: "absolute", left: -60, top: 402 - off * 0.02, width: 1160, height: 17, borderRadius: 9,
-        background: "#FFFFFF", transform: "rotate(-8deg)", opacity: c }} />
+      {/* a tapered stroke: a plain rectangle reads as a scratch */}
+      <div style={{ position: "absolute", left: -70, top: 396 - off * 0.02, width: 1180, height: 30,
+        background: "#FFFFFF", transform: "rotate(-8deg)", opacity: c,
+        clipPath: "polygon(0 46%, 12% 12%, 62% 0, 100% 40%, 62% 100%, 12% 88%)" }} />
       <div style={{ position: "absolute", inset: 0, background: PAPER_HI, opacity: Math.max(0, (c - 0.78) / 0.22) * 0.42 }} />
     </div>
   );

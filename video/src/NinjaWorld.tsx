@@ -239,6 +239,53 @@ export const Shuriken: React.FC<{ f: number; x: number; y: number; s?: number; s
   </div>
 );
 
+/** A KATANA, not a white bar. A bar reads as a stick; this reads as a weapon:
+    dark wrapped tsuka, a brass tsuba, and a tapered bright blade. */
+export const Katana: React.FC<{ x: number; y: number; len?: number; rot?: number; z?: number; flip?: boolean }> =
+  ({ x, y, len = 300, rot = 0, z = 21, flip = false }) => (
+  <div style={{ position: "absolute", left: x, top: y, zIndex: z,
+    transform: `rotate(${rot}deg) scaleX(${flip ? -1 : 1})`, transformOrigin: "0% 50%" }}>
+    {/* tsuka: the wrapped grip */}
+    <div style={{ position: "absolute", left: -74, top: -9, width: 74, height: 19, borderRadius: 4, background: "#241E1A" }} />
+    {[0, 1, 2, 3].map((i) => (
+      <div key={i} style={{ position: "absolute", left: -68 + i * 17, top: -9, width: 8, height: 19,
+        background: "rgba(232,227,214,0.28)", transform: "skewX(-22deg)" }} />
+    ))}
+    {/* tsuba: the guard */}
+    <div style={{ position: "absolute", left: -6, top: -18, width: 14, height: 37, borderRadius: 3, background: "#A88A3E" }} />
+    {/* the blade, tapered to a point */}
+    <div style={{ position: "absolute", left: 8, top: -8, width: len, height: 17,
+      background: "linear-gradient(180deg, #FFFFFF 0%, #E4EAEF 46%, #A8B4C0 100%)",
+      clipPath: "polygon(0 0, 92% 4%, 100% 50%, 92% 96%, 0 100%)", boxShadow: "0 3px 10px rgba(14,20,32,0.45)" }} />
+    {/* the hamon line down the edge */}
+    <div style={{ position: "absolute", left: 14, top: 1, width: len - 26, height: 3, background: "rgba(255,255,255,0.85)" }} />
+  </div>
+);
+
+/** The arc a blade leaves. THIS is what makes a cut legible — a crescent that
+    tapers at both ends, drawn along the swing, not a rectangle across the sky. */
+export const SwordArc: React.FC<{ cx: number; cy: number; r?: number; from?: number; to?: number; p?: number; w?: number; z?: number; o?: number }> =
+  ({ cx, cy, r = 300, from = -140, to = 20, p = 1, w = 26, z = 20, o = 1 }) => {
+  const a0 = (from * Math.PI) / 180;
+  const a1 = (from + (to - from) * Math.max(0.001, p)) * Math.PI / 180;
+  const pt = (a: number, rr: number) => `${cx + Math.cos(a) * rr},${cy + Math.sin(a) * rr}`;
+  const N = 18;
+  const outer: string[] = [], inner: string[] = [];
+  for (let i = 0; i <= N; i++) {
+    const t = i / N;
+    const a = a0 + (a1 - a0) * t;
+    const taper = Math.sin(Math.min(1, t * 1.05) * Math.PI) * 0.85 + 0.15;   // thin at both ends
+    outer.push(pt(a, r + (w * taper) / 2));
+    inner.unshift(pt(a, r - (w * taper) / 2));
+  }
+  return (
+    <svg width={1012} height={792} style={{ position: "absolute", inset: 0, zIndex: z, overflow: "visible" }}>
+      <polygon points={[...outer, ...inner].join(" ")} fill="#FFFFFF" opacity={0.92 * o} />
+      <polygon points={[...outer, ...inner].join(" ")} fill="none" stroke="#DCE6EE" strokeWidth={2} opacity={0.7 * o} />
+    </svg>
+  );
+};
+
 /** a smoke-bomb burst: opaque puffs, no wash */
 export const Smoke: React.FC<{ f: number; at: number; x: number; y: number; r?: number; life?: number; z?: number }> =
   ({ f, at, x, y, r = 260, life = 22, z = 20 }) => {
