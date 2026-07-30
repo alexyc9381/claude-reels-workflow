@@ -59,6 +59,11 @@ const W = 1012, HT = 792;   // panel-local
 /** A camera move for a scene. `kind` varies the gesture so consecutive scenes
     never feel like the same shot. The Panel already clips, so this is safe to
     put straight on a scene's world container. */
+/** Trial-reel variants shift every scene's camera gesture, so two cuts of the
+    same reel never share a frame trajectory. 0 = the original. */
+export const CamOffset = React.createContext(0);
+export const useCam = () => React.useContext(CamOffset);
+
 export const cam = (f: number, dur: number, kind: number): string => {
   const t = dur <= 1 ? 1 : Math.min(1, f / dur);
   const e = t * t * (3 - 2 * t);                      // smoothstep

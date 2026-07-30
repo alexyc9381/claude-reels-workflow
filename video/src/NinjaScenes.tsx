@@ -12,7 +12,7 @@ import {
   CARD, CARD2, CARD3, BAMBOO_D, BAMBOO_L, WATER, WATER_D, WATER_L, SNOW, SNOW_D,
   DAWN, DAWN_HI, DAWN_LO, CLOUD, CLOUD_D, IRON, IRON_D, IRON_L,
   FLAME, FLAME_HI, SASH, SASH_D, SMOKE, SMOKE_L, CLAY,
-  E, osc, rnd, cam, OUT, IO, IN_Q, BACK, SH, SH_D,
+  E, osc, rnd, cam, useCam, OUT, IO, IN_Q, BACK, SH, SH_D,
 } from "./NinjaWorld";
 
 /* =========================================================================
@@ -49,6 +49,7 @@ const Placard: React.FC<{ x: number; y: number; w?: number; kick?: string; big: 
 /* ============ N1 · THE ARMORY — they strap MORE iron on (4.48) ============= */
 export const N1Armory: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const FLOOR = 610;
   const HITS = [8, 24, 40];
   const worn = HITS.filter((h) => f >= h).length;
@@ -65,7 +66,7 @@ export const N1Armory: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="📈" word="EVERY GUIDE SAYS ADD MORE" c={FLAME} />
       <Panel glow={hexA(FLAME, 0.24)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shake}px) ${cam(f, 69, 0)}`, transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shake}px) ${cam(f, 69, 0 + co)}`, transformOrigin: "50% 58%" }}>
           <Armory f={f} floor={FLOOR} />
 
           {/* the hero, sinking under every new set */}
@@ -123,6 +124,7 @@ export const N1Armory: React.FC = () => {
 /* ====== N2 · BAMBOO FOREST — the master cuts every chain (6.78) =========== */
 export const N2Master: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const FLOOR = 636;
   const APPEAR = 10, DRAW = 26, CUT = 34;
   const app = E(f, APPEAR, APPEAR + 14, 0, 1, OUT);
@@ -136,7 +138,7 @@ export const N2Master: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} logo word="THROW YOUR SETUP OUT" c={SASH} />
       <Panel glow={hexA(SASH, 0.26)}>
-        <div style={{ position: "absolute", inset: 0, transform: cam(f, 74, 3), transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 74, 3 + co), transformOrigin: "50% 58%" }}>
           <Bamboo f={f} floor={FLOOR} />
 
           {/* the hero, still chained */}
@@ -183,6 +185,7 @@ export const N2Master: React.FC = () => {
 /* ====== N3 · THE SCROLL HALL — he is named (9.24) ======================== */
 export const N3Founder: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const FLOOR = 640;
   const rise = E(f, 6, 24, 0, 1, BACK);
   const plate = E(f, 22, 36, 0, 1, OUT);
@@ -191,7 +194,7 @@ export const N3Founder: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} logo word="BORIS CHERNY · ANTHROPIC" c="#6E4257" />
       <Panel glow={hexA(PAPER_LO, 0.3)}>
-        <div style={{ position: "absolute", inset: 0, transform: cam(f, 113, 1), transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 113, 1 + co), transformOrigin: "50% 58%" }}>
           <ScrollHall f={f} floor={FLOOR} />
           <Lantern f={f} x={22} y={92} s={0.76} />
           <Lantern f={f + 24} x={916} y={88} s={0.72} ph={1.3} />
@@ -223,6 +226,7 @@ export const N3Founder: React.FC = () => {
 /* == N4 · TWO TRAINING YARDS — 2024 needed it, 2026 doesn't (13.00) ======== */
 export const N4Yards: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const left = E(f, 6, 22, 0, 1, OUT);
   const right = E(f, 28, 46, 0, 1, OUT);
   const slip = E(f, 66, 90, 0, 1, IN_Q);
@@ -255,7 +259,7 @@ export const N4Yards: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="📄" word="WRITTEN FOR AN OLDER MODEL" c="#2F6B63" />
       <Panel glow={hexA("#2F6B63", 0.24)}>
-        <div style={{ position: "absolute", inset: 0, transform: cam(f, 123, 4), transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 123, 4 + co), transformOrigin: "50% 58%" }}>
           {/* 2024: a small ninja that genuinely cannot stand without the iron */}
           <Yard side={0} p={left} snow year="2024" note="needed the iron">
             {/* a snow-capped training post, so the yard is not an empty field */}
@@ -288,6 +292,7 @@ export const N4Yards: React.FC = () => {
 /* == N5 · THE ROOFTOP RANGE — the chain drags the throw short (17.10) ====== */
 export const N5Short: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const FLOOR = 588;
   const WIND = 8, THROW = 22, PULL = 28, STICK = 44;
   const wind = E(f, WIND, THROW, 0, 1, IO);
@@ -305,7 +310,7 @@ export const N5Short: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} logo word="OPUS 5 DOESN'T NEED IT" c={SASH} />
       <Panel glow={hexA(SASH, 0.24)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shk}px) ${cam(f, 84, 2)}`, transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shk}px) ${cam(f, 84, 2 + co)}`, transformOrigin: "50% 58%" }}>
           <Range f={f} floor={FLOOR} />
 
           {/* the target it was aiming at, never touched */}
@@ -354,6 +359,7 @@ export const N5Short: React.FC = () => {
 /* == N6 · THE WATERFALL — six moons, the bell, the chains go in (19.90) ==== */
 export const N6Reset: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const FLOOR = 618;
   const T0 = 16, STEP = 9;
   const gone = (i: number) => f >= T0 + i * STEP;
@@ -367,7 +373,7 @@ export const N6Reset: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="🗓️" word="DELETE IT EVERY 6 MONTHS" c={WATER} />
       <Panel glow={hexA(WATER, 0.26)}>
-        <div style={{ position: "absolute", inset: 0, transform: cam(f, 133, 0), transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 133, 0 + co), transformOrigin: "50% 58%" }}>
           <Waterfall f={f} floor={FLOOR} />
           {/* the training rock under the falls — the iconic place to stand */}
           <div style={{ position: "absolute", left: 208, top: FLOOR - 116, width: 300, height: 74, borderRadius: 14,
@@ -425,6 +431,7 @@ export const N6Reset: React.FC = () => {
 /* == N7 · THE SUMMIT — dawn, above the clouds, carrying nothing (24.34) === */
 export const N7Summit: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const FLOOR = 604;
   const rise = E(f, 4, 22, 0, 1, OUT);
   const banner = E(f, 16, 34, 0, 1, BACK);
@@ -433,7 +440,7 @@ export const N7Summit: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} logo word="TEST IT ON OPUS 5" c={DAWN_LO} />
       <Panel glow={hexA(DAWN, 0.3)}>
-        <div style={{ position: "absolute", inset: 0, transform: cam(f, 59, 4), transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 59, 4 + co), transformOrigin: "50% 58%" }}>
           <Summit f={f} floor={FLOOR} />
           {/* the banner planted at the peak */}
           <div style={{ position: "absolute", left: 664, top: 176, opacity: banner,
@@ -460,6 +467,7 @@ export const N7Summit: React.FC = () => {
 /* == N8 · THE NIGHT MARKET — a stall selling brand new iron (26.32) ======== */
 export const N8Market: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const FLOOR = 626;
   const stall = E(f, 6, 24, 0, 1, BACK);
   const BUY = [34, 62];
@@ -472,7 +480,7 @@ export const N8Market: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="🧩" word="STOP INSTALLING MORE SKILLS" c="#6E4257" />
       <Panel glow={hexA("#6E4257", 0.26)}>
-        <div style={{ position: "absolute", inset: 0, transform: cam(f, 133, 3), transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 133, 3 + co), transformOrigin: "50% 58%" }}>
           <Market f={f} floor={FLOOR} />
 
           {/* the stall */}
@@ -530,6 +538,7 @@ export const N8Market: React.FC = () => {
 /* == N9 · THE TORII GATE — the scroll, the bow, comment DELETE (30.74) ==== */
 export const N9Gate: React.FC = () => {
   const f = useCurrentFrame();
+  const co = useCam();
   const FLOOR = 626;
   const unroll = E(f, 6, 28, 0, 1, OUT);
   const brand = E(f, 26, 38, 0, 1, OUT);
@@ -540,7 +549,7 @@ export const N9Gate: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="💬" word='COMMENT "DELETE"' c={SASH} />
       <Panel glow={hexA(DAWN_HI, 0.3)}>
-        <div style={{ position: "absolute", inset: 0, transform: cam(f, 101, 1), transformOrigin: "50% 58%" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 101, 1 + co), transformOrigin: "50% 58%" }}>
           <Torii f={f} floor={FLOOR} />
 
           {/* the scroll unrolls under the gate */}

@@ -196,6 +196,44 @@ Every SFX cue is written **relative to its scene start** (`S1..S9`, `HA..HD` in 
 re-time is one table edit. Two full re-times landed all 70 transients on the first try. Before this, a
 re-time meant hand-shifting ~70 numbers and chasing drift.
 
+## Trial-reel variants (A / B / C)
+
+Instagram is flagging near-duplicates, so a second and third cut cannot be a re-render. Each variant
+differs on every axis a perceptual hash or an audio fingerprint actually samples:
+
+| | A · sealed scroll | B · bounty board | C · frozen stele |
+|---|---|---|---|
+| frame-0 object | cream washi scroll | torchlit paper notice | carved stone marker |
+| palette | cool cream + night roof | warm stone + torchlight | cold snowfield + dawn |
+| the bind | chain to an iron block | rope to timber posts | rope to a stele |
+| what frees it | katana, then a smoke bomb | a thrown star, notice tears | katana, then a snow-burst |
+| transitions | smoke star slash ink star smoke slash ink smoke | ink smoke star slash smoke ink star slash star | star slash smoke star ink slash ink smoke slash |
+| bed | `ebm_bed` @12s | `powers_bed` @6s | `roast_bed` @10s |
+| camera offset | 0 | +2 | +3 (all nine scenes move differently) |
+| caption band | y1268 | y1232 | y1300 |
+| duration | 33.22s | 33.26s | 33.28s |
+| frame-0 luma | 176 | 146 | 174 |
+
+**Measured difference** (mean abs luma delta, 11 frames sampled across the reel):
+
+```
+        A vs B   A vs C   B vs C
+hook      16-28    29-31    24-33
+mid        3-14     6-15     5-17
+mean      12.0     16.9     17.6
+```
+
+⚠️ **The middle is the weak half.** Scenes N1-N9 share the same nine worlds across all three cuts, so
+mid-reel deltas run 3-15 where the hook runs 16-33. The hook carries the differentiation. If a future
+variant needs to be safer still, the next lever is swapping WHICH world each scene uses (the scenes are
+independent components, so it is a scene-table edit, not a rebuild) — that was out of scope here.
+
+The VO is the same recording and cannot change; the bed and the per-variant cut sounds carry the
+audio-side difference.
+
+Build: `makeReel(V_A|V_B|V_C)` in `DeleteReel.tsx`; hooks in `NinjaHook.tsx` / `NinjaHookB.tsx` /
+`NinjaHookC.tsx`; the camera offset rides a `CamOffset` context that all nine scenes read.
+
 ## Still open
 
 The clip slot is live (`HAS_CLIP = true`, `public/delete_clip.mp4`, 6 s from the YC talk). Nothing else.

@@ -712,6 +712,36 @@ default source. Alex rejected the Vox pack: "isn't really the sound design I wan
 
 ## 11. Delivery
 
+**⛔ A trial-reel variant is not a re-render.** Instagram flags near-duplicates, so a second cut has to
+differ on every axis a perceptual hash or an audio fingerprint actually samples. Reel 81's three cuts
+vary, in rough order of how much each one buys:
+
+1. **A completely different animated HOOK** — different world, prop, action AND exit. Not a restyle:
+   scroll/chain/smoke vs notice-board/rope/tear vs stele/rope/snow-burst. This is most of the signal,
+   because the first seconds are sampled hardest.
+2. **A different music BED from a different source track.** The VO is the same recording and cannot
+   change, so the bed is the only real audio-fingerprint lever.
+3. **A CAMERA OFFSET applied to every scene.** A `CamOffset` context that each scene adds to its `cam()`
+   kind, so all nine scenes travel on a different trajectory — this moves pixels in frames the hook
+   never touches.
+4. **A different TRANSITION at every boundary**, with the cut SOUND rebuilt to follow the graphic
+   (`buildSfx(variant.cuts)`, not a shared bank).
+5. **A different caption band Y** — cheap, and it changes pixels in literally every frame.
+6. A slightly different end hold.
+
+Build it as a factory, not a copy: `makeReel(variant)` keeps one scene set, one SFX table and one
+caption file, so a fix still lands in all three cuts at once.
+
+**Measure it, do not assume it.** Mean absolute luma delta on downscaled frames sampled across the reel:
+```python
+d = ImageStat.Stat(ImageChops.difference(a.convert("L"), b.convert("L"))).mean[0]
+```
+Reel 81 landed at a mean of 12.0 / 16.9 / 17.6 between pairs, with the hook at 16-33 and the shared
+middle at 3-15. **Be honest about which half is doing the work** — if the scenes are shared, the middle
+is the weak half, and the next lever is swapping which world each scene uses.
+
+
+
 **End the reel ON the CTA keyword, with no hold.** Alex on reel 81: *"the video needs to end
 immediately when i say the word delete."* Read the last word's `end` out of the words JSON and set
 `END_S = last.end + 0.10` (the release, not a beat of silence). Then shorten any closing SFX so the
