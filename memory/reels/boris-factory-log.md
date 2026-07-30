@@ -167,6 +167,51 @@ line above `BORIS`; the crew shrinks to 228 and moves left; the dish moves out o
 
 **This is why a contact sheet is rendered before delivery.** The gate passes a buried CTA happily.
 
+### Round 9 — "they look like theyre on the ship... i want to see them walking on the planets"
+
+*"each of these scenes are not good like they look like theyre on the ship first of all and theyre
+not detailed enough like most of hte scenes are just them with a screen with waves on the wall which
+is so boring... needs to say way more interesting stuff not just like them on the ship seeing the
+whole planet i want to also see them walking on the planets etc."*
+
+⛔⛔ **Round 3 fixed the HOOK's locations and I left the nine body scenes exactly as they were.**
+Measured before touching anything, which turned the note into a spec:
+
+| | before | after |
+|---|---|---|
+| interior scenes | **7 / 9** | 0 / 9 |
+| distinct worlds | 7 (TestStand and ShakeBay each used twice, back to back) | 9 / 9 |
+| scenes with a wall oscilloscope (`Trace`) | 3 | 0 |
+| median object count | **9** | 19 (min 15, max 28) |
+
+The median of 9 is against the 12-18 target I had written into the learnings doc the previous day.
+
+**New file `MissionSurfaces.tsx`** — one parameterized `Surface` taking a `WorldKind`, supplying sky,
+sun, three parallax ridge bands, ground, lip and grit. That is 6-9 objects before a prop lands. Nine
+worlds: ice plain under two suns · dust dunes · strata canyon · volcanic fissure · shattered violet
+plain · methane shore · cratered moon under a ringed giant · night camp under an aurora · summit at
+dawn. Field props: `Rover` `Crates` `Drill` `SampleBench` `Mast` `Lander` `Hab` `Tally` `Flagpole`
+`Prints` `Kick` `Arc` `SkyWorld` `Aurora`.
+
+**`Astro` learned to walk.** The Mascot is a rigid box so it cannot lean, but the two leg groups can
+swing in opposition on `sin(ph)` / `sin(ph + PI)` with the body bobbing on `|cos(ph)|`. Plus `pack`
+(life support) and `kneel` (crouch at a sample or a landing leg).
+
+**Crew staged on DEPTH, not as bookends.** M5, M6 and M7 each had one figure at the left edge and one
+at the right, both the same size. Restaged: one large in the near foreground, one small back near the
+horizon.
+
+**A real bug the contact sheet caught:** `Crates` stripped the pile from the FLOOR up, leaving the top
+row hovering with nothing beneath it. `idx` counted from the bottom; it now strips top-down. Also
+added a dashed ghost outline of the original stack, because "80% gone" is only legible if you can see
+what was there.
+
+Other fixes from the same sheet: the derelict rover was buried so deep it read as a grey lump (bury
+0.34 → 0.14, scale up, dune moved behind it); the lander read as a bench (heavier body, thicker legs,
+a bell nozzle); the aurora read as three hard diagonal flags (now five curved SVG curtains).
+
+Gate 9/9, 43/43 transients, unchanged runtime. Previous cut kept at `Versions/82_BORIS_v1-interiors.mp4`.
+
 ---
 
 ## Final spec
@@ -174,7 +219,7 @@ line above `BORIS`; the crew shrinks to 228 and moves left; the dish moves out o
 | | |
 |---|---|
 | runtime | 35.71s · 1070 frames · 30fps |
-| scenes | hook (7 worlds) + M1..M9 |
+| scenes | hook (7 worlds) + M1..M9, **all nine body scenes exterior, 9 distinct worlds** |
 | audio | `boris_vo_final.wav` 35.86s · `boris_bed.wav` (EQ pocket + sidechain, head −3.0 dB) |
 | captions | `words_boris.json` — 175 words, 61 lines, 58 measured-onset anchored, built by `tools/build_captions.py` |
 | transients | 43 declared in `boris.intent.json`, 43 fire |

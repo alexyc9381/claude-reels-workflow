@@ -239,6 +239,57 @@ close to the shot count, the hook is redressed, not varied. Each location also n
 palette** — pale grey-blue → amber → violet → teal → orange dust → gold — so every cut is a colour
 change as well as a place change.
 
+### ⛔⛔ The location rule governs the BODY, not just the hook — and INTERIORS all count as one place
+
+Reel 82 round 3 fixed the hook so its shots travelled six worlds. Round 9 came back:
+
+> "each of these scenes are not good, they look like theyre on the ship first of all and theyre
+> not detailed enough, most of the scenes are just them with a screen with waves on the wall which
+> is so boring... i want to also see them walking on the planets."
+
+Measured before touching anything, which is what turned a taste note into a spec:
+
+| | before | after |
+|---|---|---|
+| interior scenes | **7 / 9** | 0 / 9 |
+| distinct worlds | 7 (two used twice, back to back) | 9 / 9 |
+| scenes with a wall oscilloscope | 3 | 0 |
+| median object count | **9** | 19 |
+
+Three things this makes explicit that the earlier rule did not:
+
+1. **Fixing the hook does not fix the reel.** I varied the hook's locations and left nine body
+   scenes exactly as they were. Run the location count over the BODY scenes too.
+2. **Differently-named interiors are ONE location.** A plan bay, a creche bay, a test stand and a
+   shake bay are four names for "inside the ship". If the viewer cannot tell them apart from the
+   light and the palette, they have not been to four places.
+3. **A screen on a wall is not an event.** Three scenes were a figure beside a panel with a
+   waveform on it. Information belongs in the world (a mast that snaps, a leg that gets shimmed,
+   crates that lift away), not on a monitor the character is looking at.
+
+**The default for a body scene is EXTERIOR, with the character doing something physical in it.**
+Reel 82 now walks an ice plain, dust dunes, a strata canyon, a volcanic fissure, a shattered plain,
+a methane shore, a cratered moon, a night camp under an aurora and a summit at dawn. Interiors are
+allowed, but each one spends the budget for a whole location.
+
+**Build one parameterized `Surface` rather than nine bespoke backdrops.** `MissionSurfaces.tsx`
+takes a `WorldKind` and supplies sky, sun, three parallax ridge bands, ground, lip and grit — 6 to 9
+objects before any prop lands, which is most of the way to the 12-18 target on its own.
+
+### A rigid mascot CAN walk: swing the legs in opposition, bob on the plant
+
+The Mascot is a box, so it cannot lean (§2). It can walk. `Astro` now takes `step`: the two leg
+groups translate on `sin(ph)` and `sin(ph + PI)`, the body bobs on `|cos(ph)|`, and boot prints plus
+a dust kick trail behind. That plus `pack` (a life-support pack) and `kneel` (crouch at a sample or
+a landing leg) is the difference between "them standing" and a crew working a surface.
+
+### Stage the crew on DEPTH, not as bookends
+
+Three scenes had one figure at the left edge and one at the right, both the same size. That reads as
+a stage line, and it is another way to look like nothing is happening. Put one large in the near
+foreground (feet low in frame, often cropped) and one small back near the horizon. Same two
+characters, and suddenly the frame has space in it.
+
 ## 3. Scene & screen layout
 
 **⛔ Enlarging a container does NOT re-lay-out its contents.** Reel 79's cabinets were scaled up and

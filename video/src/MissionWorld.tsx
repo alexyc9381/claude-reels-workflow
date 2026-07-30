@@ -70,10 +70,19 @@ export const Astro: React.FC<{
   f: number; x: number; y: number; size?: number; suitC?: string; z?: number;
   gaze?: number; shock?: number; cheer?: number; stern?: number; nodAmp?: number; nodSpeed?: number;
   rot?: number; flip?: boolean; helmet?: boolean; patch?: boolean; old?: boolean;
+  step?: number; pack?: boolean; kneel?: number;
 }> = ({ f, x, y, size = 300, suitC = "#EDEDE7", z = 10, gaze = 0, shock = 0, cheer = 0, stern = 0,
-        nodAmp = 2.4, nodSpeed = 12, rot = 0, flip = false, helmet = true, patch = true, old = false }) => (
+        nodAmp = 2.4, nodSpeed = 12, rot = 0, flip = false, helmet = true, patch = true, old = false,
+        step = 0, pack = false, kneel = 0 }) => {
+  /* WALK: the legs swing in opposition and the body bobs on the plant.
+     `step` is the stride amplitude in viewBox units (0 = standing). */
+  const ph = f * 0.34;
+  const swA = step ? Math.sin(ph) * step : 0;
+  const swB = step ? Math.sin(ph + Math.PI) * step : 0;
+  const bob = step ? Math.abs(Math.cos(ph)) * -2.2 : 0;
+  return (
   <div style={{ position: "absolute", left: x, top: y, zIndex: z,
-    transform: `rotate(${rot}deg) scaleX(${flip ? -1 : 1})`, transformOrigin: "50% 90%",
+    transform: `translateY(${bob + kneel * size * 0.10}px) rotate(${rot}deg) scaleX(${flip ? -1 : 1})`, transformOrigin: "50% 90%",
     filter: `drop-shadow(0 ${Math.round(size * 0.05)}px ${Math.round(size * 0.07)}px rgba(26,30,40,0.38))` }}>
     <Mascot lf={f} size={size} tint={old ? "#9E8E86" : undefined} gaze={gaze} shock={shock}
             cheer={cheer} stern={stern} nodAmp={nodAmp} nodSpeed={nodSpeed} />
@@ -86,11 +95,20 @@ export const Astro: React.FC<{
       <rect x={34} y={126} width={132} height={9} fill={old ? "#8C7F78" : AMBER} />
       <rect x={8} y={92} width={26} height={9} fill={suitC} />
       <rect x={166} y={92} width={26} height={9} fill={suitC} />
-      {/* legs, so the silhouette is one figure */}
-      <rect x={52} y={146} width={17} height={34} fill={suitC} />
-      <rect x={131} y={146} width={17} height={34} fill={suitC} />
-      <rect x={48} y={176} width={25} height={12} fill="#3A4048" />
-      <rect x={127} y={176} width={25} height={12} fill="#3A4048" />
+      {pack && <>
+        <rect x={2} y={96} width={34} height={62} rx={7} fill="#8E9AA6" />
+        <rect x={6} y={104} width={26} height={9} fill="#6E7B88" />
+        <rect x={6} y={122} width={26} height={9} fill="#6E7B88" />
+      </>}
+      {/* legs, so the silhouette is one figure. They swing when `step` is set. */}
+      <g transform={`translate(${swA} 0)`}>
+        <rect x={52} y={146 - kneel * 22} width={17} height={34 + kneel * 22} fill={suitC} />
+        <rect x={48} y={176} width={25} height={12} fill="#3A4048" />
+      </g>
+      <g transform={`translate(${swB} 0)`}>
+        <rect x={131} y={146 - kneel * 22} width={17} height={34 + kneel * 22} fill={suitC} />
+        <rect x={127} y={176} width={25} height={12} fill="#3A4048" />
+      </g>
       {helmet && <>
         {/* the bubble + the gold visor band, leaving the eyes visible */}
         <rect x={22} y={30} width={156} height={80} rx={26} fill="rgba(236,244,250,0.30)" stroke="#C6D2DC" strokeWidth={6} />
@@ -107,7 +125,8 @@ export const Astro: React.FC<{
       </div>
     )}
   </div>
-);
+  );
+};
 
 /* =========================================================================
    SHARED PROPS
