@@ -3,7 +3,7 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { inter, fraunces } from "./fonts";
 import { Bg, Panel, ProgressBar, HookHeader, Caption, AssemblyCtx, INK, hexA } from "./SlopKit";
 import {
-  Rooftops, Ninja, Anchor, Chain, Katana, SwordArc, Smoke, Streaks, SpeedLines,
+  Rooftops, Ninja, Anchor, Chain, Katana, SwordArc, Smoke, Streaks, SpeedLines, ClanMon, ClanBanner,
   NIGHT, NIGHT_D, NIGHT_L, NIGHT_LL, TILE, TILE_D, TILE_L, MOON, PAPER, PAPER_HI, PAPER_LO,
   IRON, IRON_D, IRON_L, SASH, SASH_D, SMOKE_L, CLAY, CARD, CARD2, CARD3, WOOD, WOOD_D, SNOW,
   E, osc, rnd, OUT, IO, IN_Q, BACK, SH, SH_D,
@@ -82,7 +82,7 @@ const ShotA: React.FC<{ f: number }> = ({ f }) => {
         <div style={{ position: "absolute", left: 62, top: 126, width: 900 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
             <span style={{ width: 34, height: 8, borderRadius: 4, background: SASH }} />
-            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 29, letterSpacing: "0.24em", color: SASH }}>THE SEALED SCROLL</span>
+            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 29, letterSpacing: "0.24em", color: SASH }}>CLAUDE CODE · SEALED SCROLL</span>
           </div>
           <div style={{ marginTop: 6, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 144, lineHeight: 1.0,
             letterSpacing: "-0.045em", color: "#1B1814" }}>CLAUDE.md</div>
@@ -103,12 +103,13 @@ const ShotA: React.FC<{ f: number }> = ({ f }) => {
           ))}
         </div>
 
-        {/* the hanko seal */}
-        <div style={{ position: "absolute", right: 76, top: 302, width: 168, height: 168, borderRadius: 14,
-          border: `16px solid ${SASH}`, transform: "rotate(-7deg)", opacity: 0.94 }}>
-          <div style={{ position: "absolute", left: 22, top: 20, right: 22, height: 30, background: SASH }} />
-          <div style={{ position: "absolute", left: 22, top: 66, right: 22, height: 30, background: SASH }} />
-          <div style={{ position: "absolute", left: 22, top: 112, right: 60, height: 30, background: SASH }} />
+        {/* the clan seal: the Claude crest, stamped like a hanko */}
+        <div style={{ position: "absolute", left: 726, top: 288, width: 186, height: 224, transform: "rotate(-7deg)" }}>
+          <div style={{ position: "absolute", left: 0, top: 0, width: 186, height: 186, borderRadius: 16,
+            border: `15px solid ${SASH}`, opacity: 0.95 }} />
+          <ClanMon x={30} y={30} d={126} c={SASH} z={16} o={0.96} />
+          <div style={{ position: "absolute", left: 0, top: 194, width: 186, textAlign: "center",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 21, letterSpacing: "0.16em", color: SASH }}>CLAUDE CODE</div>
         </div>
 
         {/* the chain and lock across the whole thing */}
@@ -125,7 +126,7 @@ const ShotA: React.FC<{ f: number }> = ({ f }) => {
 
       {/* THE SUBJECT IS IN IT at frame 0 — gripping the scroll's bottom roller */}
       <div style={{ position: "absolute", left: 704, top: 520, transform: `translateY(${(1 - set) * 46}px)`, zIndex: 14 }}>
-        <Ninja f={f} x={0} y={0} size={306} hero flip gaze={-2} shock={0.45} nodAmp={0.7} nodSpeed={26} z={14} />
+        <Ninja f={f} x={0} y={0} size={306} hero mon flip gaze={-2} shock={0.45} nodAmp={0.7} nodSpeed={26} z={14} />
       </div>
       {/* dust off the jerk */}
       {snap > 0.05 && Array.from({ length: 7 }, (_, i) => (
@@ -150,6 +151,8 @@ const World: React.FC<{ f: number; frame: string; children?: React.ReactNode }> 
     <div style={{ position: "absolute", left: 42, top: RIDGE - 228, width: 56, height: 72, borderRadius: "24px 24px 18px 18px", background: PAPER_HI, boxShadow: SH, zIndex: 3 }} />
     <div style={{ position: "absolute", left: -60, top: RIDGE - 246, width: 240, height: 260, borderRadius: "50%", zIndex: 2,
       background: `radial-gradient(circle, ${PAPER_HI} 0%, rgba(255,246,223,0.2) 42%, rgba(255,246,223,0) 70%)` }} />
+    {/* the clan's own banner, planted on the roof */}
+    <ClanBanner f={f} x={196} y={RIDGE - 312} h={318} s={0.92} z={3} />
     {children}
   </div>
 );
@@ -194,7 +197,7 @@ export const NinjaHook: React.FC = () => {
           <World f={f} frame="scale(1) translateX(0px)">
             <Anchor f={f} x={AX} y={AY} s={1.22} shiver={lean * 0.9} z={8} />
             <Chain x1={AX - 6} y1={AY + 78} x2={bx + HS * 0.9} y2={by + HS * 0.6} s={1.2} slack={64 - lean * 30} z={11} />
-            <Ninja f={f} x={bx} y={by} size={HS} hero flip rot={-(4 + lean * 4) + osc(f, 4, 1.4)}
+            <Ninja f={f} x={bx} y={by} size={HS} hero mon flip rot={-(4 + lean * 4) + osc(f, 4, 1.4)}
                    shock={0.2 + lean * 0.3} nodAmp={1.1} nodSpeed={22} z={10} />
             {Array.from({ length: 5 }, (_, i) => {
               const t = (f * 0.09 + i * 0.2) % 1;
@@ -209,7 +212,7 @@ export const NinjaHook: React.FC = () => {
           <World f={f} frame={`scale(1.42) translate(${-40 + shake}px, 74px)`}>
             <Anchor f={f} x={AX} y={AY} s={1.22} shiver={0.5} z={8} />
             <Chain x1={AX - 6} y1={AY + 78} x2={cx + HS * 0.9} y2={cy + HS * 0.6} s={1.2} slack={50} z={11} />
-            <Ninja f={f} x={cx} y={cy} size={HS} hero flip rot={yank * 78} shock={0.8}
+            <Ninja f={f} x={cx} y={cy} size={HS} hero mon flip rot={yank * 78} shock={0.8}
                    nodAmp={0.3} nodSpeed={28} z={10} />
             {yank > 0.5 && (<>
               {[0, 1, 2, 3].map((i) => {
@@ -274,7 +277,7 @@ export const NinjaHook: React.FC = () => {
               <Ninja key={i} f={f - 3 - i * 3} x={230 + dx - out * 260} y={RIDGE - HS * 0.94} size={HS}
                      cheer={0.92} nodAmp={3.4} nodSpeed={6} flip z={5} />
             ))}
-            <Ninja f={f} x={230 - out * 260} y={RIDGE - HS * 0.94} size={HS} hero
+            <Ninja f={f} x={230 - out * 260} y={RIDGE - HS * 0.94} size={HS} hero mon
                    cheer={0.94} gaze={-2} nodAmp={3.4} nodSpeed={6} flip z={10} />
           </World>
         )}

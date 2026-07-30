@@ -245,6 +245,23 @@ transform on a `position: absolute` wrapper and give the child `x={0} y={0}`:
 </div>
 ```
 
+**⛔ Say CLAUDE inside the theme's own vocabulary, not on top of it.** Alex on reel 81: *"have slightly
+more stuff that shows that this video is about claude in the beginning... but also not completely
+removing the ninja theme."* The wrong answer is a Claude logo card pasted over the scene. The right
+answer is the vocabulary the world already has for identity — a **clan**:
+
+| ninja idiom | carries the brand |
+|---|---|
+| the clan crest (mon) on the gi | the Claude starburst, worn by the hero in every scene |
+| the clan seal stamped like a hanko | the crest in a red seal box, "CLAUDE CODE" under it |
+| the clan banner (nobori) on the roof | the crest flying beside the hero's position |
+| property marked with the clan stamp | the crest on the CLAUDE.md iron block |
+
+Four brand touchpoints in the open, zero of them foreign to the world. Reusable components:
+`ClanMon` (the logo on a coloured field, `filter: brightness(0) invert(1)` to knock it white) and
+`ClanBanner`. Every theme has this slot: livery on a car, a logo on a jersey, a sigil on a shield, a
+stamp on a crate. Find it before reaching for an overlay.
+
 **⛔ `inset` / `bottom` collapse to nothing inside an unsized parent.** A board backing written as
 `{position:absolute, inset:0}` inside `<div style={{left:96, top:150, width:470}}>` (no `height`, all
 children absolute) rendered as a sliver — the parent's height was 0. Any container you hang a *backing
@@ -271,6 +288,12 @@ const PANEL = { left: 34, top: 384, width: 1012, height: 792, radius: 40 };  // 
 <div style={{ position: "absolute", ...PANEL, overflow: "hidden", zIndex: 260 }}>{graphic}</div>
 ```
 Coordinates authored against the full frame also need retargeting to panel-local when you do this.
+
+The same trap wears a second hat: **a `right:`-anchored container with no `width` is a zero-width box**,
+so a child at `left: 0` extends RIGHT from that right edge — straight off the frame. It has cost three
+separate fixes on this reel (a rank board, a scroll seal, a crest on a block). Whenever you hang an
+absolutely-positioned child inside a wrapper, give the wrapper explicit `width`/`height`, or position
+the child directly and skip the wrapper.
 
 **A cover that reaches opacity 1 reads as a blank card, not as smoke.** Cap the solid core around
 0.86 and draw the texture (puffs, blots) *on top* of it. The cut is still masked; the transition still

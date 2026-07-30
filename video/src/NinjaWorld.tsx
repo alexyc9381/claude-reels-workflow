@@ -76,9 +76,9 @@ export const cam = (f: number, dur: number, kind: number): string => {
 export const Ninja: React.FC<{
   f: number; x: number; y: number; size?: number; skin?: string; wrap?: string; band?: string;
   gaze?: number; shock?: number; cheer?: number; stern?: number; nodAmp?: number; nodSpeed?: number;
-  rot?: number; flip?: boolean; master?: boolean; tails?: number; z?: number; hero?: boolean;
+  rot?: number; flip?: boolean; master?: boolean; tails?: number; z?: number; hero?: boolean; mon?: boolean;
 }> = ({ f, x, y, size = 320, skin = CLAY, wrap = "#242C3A", band = SASH, gaze = 0, shock = 0, cheer = 0,
-        stern = 0, nodAmp = 3.2, nodSpeed = 9, rot = 0, flip = false, master = false, tails = 1, z = 6, hero }) => {
+        stern = 0, nodAmp = 3.2, nodSpeed = 9, rot = 0, flip = false, master = false, tails = 1, z = 6, hero, mon }) => {
   /* The WHOLE mascot is painted as the gi, so arms and legs belong to the
      silhouette. Only the eye slit is skin, and the eyes are redrawn on top of
      it (the Mascot's own eyes sit under the slit band). */
@@ -123,7 +123,7 @@ export const Ninja: React.FC<{
         <rect x={48} y={176} width={25} height={12} fill="#15181F" />
         <rect x={127} y={176} width={25} height={12} fill="#15181F" />
         {hero && <>
-          {/* the hero's shoulder crest, so you can tell him from the crowd */}
+          {/* the hero's shoulder ties */}
           <rect x={38} y={104} width={18} height={14} fill={band} />
           <rect x={144} y={104} width={18} height={14} fill={band} />
         </>}
@@ -137,6 +137,15 @@ export const Ninja: React.FC<{
           <rect x={84} y={142} width={32} height={14} fill="#DCD2C0" />
         </>}
       </svg>
+      {/* THE CLAN CREST on the gi. A ninja wears his clan's mon; this one's clan
+          is Claude, so the crest is the Claude starburst. It rides above the svg
+          so it is never buried by a costume layer. */}
+      {mon && (
+        <div style={{ position: "absolute", left: size * 0.5 - size * 0.085, top: size * 0.545,
+          pointerEvents: "none" }}>
+          <ClanMon x={0} y={0} d={size * 0.17} c={band} z={2} />
+        </div>
+      )}
     </div>
   );
 };
@@ -165,6 +174,37 @@ export const IronTag: React.FC<{ x: number; y: number; label: string; w?: number
     </div>
   );
 };
+
+/** THE CLAN MON. The Claude starburst used the way a ninja clan crest is used —
+    stamped on a seal, flown on a banner, worn on the gi. This is how the reel
+    says "Claude" without stepping outside the world. */
+export const ClanMon: React.FC<{ x: number; y: number; d?: number; c?: string; ring?: boolean; z?: number; o?: number }> =
+  ({ x, y, d = 88, c = SASH, ring = true, z = 15, o = 1 }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: d, height: d, zIndex: z, opacity: o }}>
+    {ring && <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: c }} />}
+    <Img src={staticFile("claude_logo.png")}
+      style={{ position: "absolute", left: d * 0.13, top: d * 0.13, width: d * 0.74, height: d * 0.74,
+        objectFit: "contain", filter: ring ? "brightness(0) invert(1)" : "none" }} />
+  </div>
+);
+
+/** A NOBORI: the tall clan banner planted beside a ninja position. Carries the mon. */
+export const ClanBanner: React.FC<{ f: number; x: number; y: number; h?: number; s?: number; z?: number }> =
+  ({ f, x, y, h = 300, s = 1, z = 3 }) => (
+  <div style={{ position: "absolute", left: x, top: y, zIndex: z, transform: `scale(${s})`, transformOrigin: "50% 100%" }}>
+    <div style={{ position: "absolute", left: 0, top: 0, width: 13, height: h, background: WOOD_D }} />
+    <div style={{ position: "absolute", left: -8, top: -10, width: 30, height: 14, borderRadius: 4, background: IRON_D }} />
+    <div style={{ position: "absolute", left: 13, top: 10, width: 92, height: h * 0.72, background: SASH, boxShadow: SH,
+      clipPath: "polygon(0 0, 100% 0, 100% 94%, 50% 100%, 0 94%)",
+      transform: `skewY(${osc(f, 46, 1.1)}deg)`, transformOrigin: "0% 0%" }}>
+      <ClanMon x={16} y={20} d={60} c="#FFFFFF" ring={false} z={4} />
+      {[0, 1, 2].map((i) => (
+        <div key={i} style={{ position: "absolute", left: 26, top: 100 + i * 34, width: 40, height: 9,
+          borderRadius: 4, background: "rgba(255,243,228,0.62)" }} />
+      ))}
+    </div>
+  </div>
+);
 
 /** a real chain between two points — the thing that makes "tied down" readable */
 export const Chain: React.FC<{ x1: number; y1: number; x2: number; y2: number; s?: number; slack?: number; cut?: number; z?: number }> =
@@ -212,10 +252,12 @@ export const Anchor: React.FC<{ f: number; x: number; y: number; s?: number; shi
       {[[14, 20], [W0 - 30, 20], [14, H0 - 46], [W0 - 30, H0 - 46]].map(([bx, by], i) => (
         <div key={i} style={{ position: "absolute", left: bx as number, top: by as number, width: 16, height: 16, borderRadius: "50%", background: IRON_D }} />
       ))}
+      {/* the clan crest, stamped on the block — this iron belongs to Claude */}
+      <ClanMon x={W0 - 78} y={36} d={62} c={SASH_D} z={4} />
       {/* the tow ring the chain comes off */}
       <div style={{ position: "absolute", left: -30, top: 44, width: 44, height: 34, borderRadius: 18, border: `9px solid ${IRON_L}` }} />
       {/* the big label */}
-      <div style={{ position: "absolute", left: 16, top: 34, width: W0 - 32, height: 72, borderRadius: 5,
+      <div style={{ position: "absolute", left: 16, top: 34, width: W0 - 104, height: 72, borderRadius: 5,
         background: CARD, border: `5px solid ${IRON_D}`, display: "flex", alignItems: "center", justifyContent: "center",
         fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40, letterSpacing: "-0.01em", color: INK }}>CLAUDE.md</div>
       {/* everything else, bolted to the same block */}

@@ -69,7 +69,7 @@ export const N1Armory: React.FC = () => {
           <Armory f={f} floor={FLOOR} />
 
           {/* the hero, sinking under every new set */}
-          <Ninja f={f} x={332} y={hy} size={350} hero shock={0.3 + Math.min(0.4, sink / 90)}
+          <Ninja f={f} x={332} y={hy} size={350} hero mon shock={0.3 + Math.min(0.4, sink / 90)}
                  nodAmp={0.8} nodSpeed={26} z={9} />
           {CH.slice(0, 3).map(([l, w], i) => (
             <IronTag key={l} x={230 + i * 158} y={hy + 250 + (i % 2) * 26} label={l} w={w} chain={54} rot={i % 2 ? 5 : -5} z={8} />
@@ -140,7 +140,7 @@ export const N2Master: React.FC = () => {
           <Bamboo f={f} floor={FLOOR} />
 
           {/* the hero, still chained */}
-          <Ninja f={f} x={196} y={hy} size={330} hero shock={fall > 0.5 ? 0.1 : 0.5}
+          <Ninja f={f} x={196} y={hy} size={330} hero mon shock={fall > 0.5 ? 0.1 : 0.5}
                  gaze={2} nodAmp={fall > 0.5 ? 3 : 1} nodSpeed={fall > 0.5 ? 8 : 24} z={9} />
           {!landed && CH.map(([l, w], i) => {
             const t = Math.max(0, Math.min(1, (fall - i * 0.04) / (1 - i * 0.04)));
@@ -271,7 +271,7 @@ export const N4Yards: React.FC = () => {
 
           {/* 2026: the same iron just falls off it */}
           <Yard side={1} p={right} snow={false} year="2026" note="already stronger">
-            <Ninja f={f} x={HALF / 2 - 148} y={FLOOR - 296 * 0.94} size={296} hero cheer={0.85}
+            <Ninja f={f} x={HALF / 2 - 148} y={FLOOR - 296 * 0.94} size={296} hero mon cheer={0.85}
                    nodAmp={3.2} nodSpeed={8} z={9} />
             <div style={{ position: "absolute", left: 154 + slip * 60, top: FLOOR - 210 + slip * slip * 200, zIndex: 10,
               opacity: 1 - slip * 0.3 }}>
@@ -313,7 +313,7 @@ export const N5Short: React.FC = () => {
           <Placard x={700} y={168} w={268} kick="TARGET" big="untouched" />
 
           {/* the hero, mid-throw, still chained at the wrist */}
-          <Ninja f={f} x={196} y={FLOOR - 340 * 0.94} size={340} hero
+          <Ninja f={f} x={196} y={FLOOR - 340 * 0.94} size={340} hero mon
                  rot={wind * -4 + thr * 5} shock={stuck ? 0.6 : 0.15} nodAmp={1.1} nodSpeed={22} z={9} />
           <IronTag x={168} y={FLOOR - 172} label="RULES" w={140} chain={70} rot={-6} z={8} />
 
@@ -388,7 +388,7 @@ export const N6Reset: React.FC = () => {
           </div>
 
           {/* the hero stands on the ledge and lets the whole bundle go */}
-          <Ninja f={f} x={318} y={hy} size={356} hero shock={free > 0.3 ? 0 : 0.3}
+          <Ninja f={f} x={318} y={hy} size={356} hero mon shock={free > 0.3 ? 0 : 0.3}
                  cheer={free > 0.3 ? 0.95 : 0} nodAmp={free > 0.3 ? 3.6 : 1} nodSpeed={free > 0.3 ? 7 : 24} z={9} />
           {CH.map(([l, w], i) => {
             const t = gone(i) ? Math.min(1, (f - (T0 + i * STEP)) / 16) : 0;
@@ -447,7 +447,7 @@ export const N7Summit: React.FC = () => {
           </div>
           {/* the hero, on the peak, unloaded */}
           <div style={{ opacity: rise, transform: `translateY(${(1 - rise) * 30}px)` }}>
-            <Ninja f={f} x={286} y={FLOOR - 376 * 0.94} size={376} hero cheer={0.95} gaze={2}
+            <Ninja f={f} x={286} y={FLOOR - 376 * 0.94} size={376} hero mon cheer={0.95} gaze={2}
                    nodAmp={3.6} nodSpeed={7} z={9} />
           </div>
           <SpeedLines f={f} cx={474} cy={FLOOR - 220} n={12} on={rise * 0.55} c={CLOUD} />
@@ -518,7 +518,7 @@ export const N8Market: React.FC = () => {
 
           {/* the hero walks straight past, carrying nothing */}
           <div style={{ position: "absolute", left: 640 + walk * 240, top: FLOOR - 330 * 0.94, zIndex: 12 }}>
-            <Ninja f={f} x={0} y={0} size={330} hero cheer={0.9} gaze={2} nodAmp={3.4} nodSpeed={7} z={12} />
+            <Ninja f={f} x={0} y={0} size={330} hero mon cheer={0.9} gaze={2} nodAmp={3.4} nodSpeed={7} z={12} />
           </div>
           {walk > 0.2 && <Streaks f={f} on={walk * 0.6} n={9} c={PAPER_HI} />}
         </div>
@@ -563,7 +563,7 @@ export const N9Gate: React.FC = () => {
           {/* the hero bows under the gate */}
           <div style={{ position: "absolute", left: 606, top: FLOOR - 330 * 0.94, zIndex: 12,
             transform: `rotate(${E(f, 44, 62, 0, 11, IO)}deg)`, transformOrigin: "50% 96%" }}>
-            <Ninja f={f} x={0} y={0} size={330} hero cheer={0.9} nodAmp={3} nodSpeed={9} z={12} />
+            <Ninja f={f} x={0} y={0} size={330} hero mon cheer={0.9} nodAmp={3} nodSpeed={9} z={12} />
           </div>
 
           {/* a red seal stamped on the scroll once the word is burned in */}
