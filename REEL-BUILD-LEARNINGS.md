@@ -173,6 +173,27 @@ standing in a bay painted `PLASTER #8E6A4E` was invisible — both matte, both c
 value. Matte-palette compliance is not contrast. Squint-test every character against what is directly
 behind it, and prefer light ground for a dark figure (see §1's two-sided rule).
 
+**⛔ Know where your character's FEET are.** The SlopKit `Mascot` draws legs to y184 and tabi to y188 of
+its 200-unit box, so the lowest painted pixel is at **`size * 0.94`**, not `0.86`. Positioning with
+`top = FLOOR - size * 0.86` plants every figure 8% of its own height *below* the floor line, and on a
+340px character that is a visible 27px of leg buried in the ground. Reel 81 shipped this bug into 17
+placements before a zoomed still caught it. One constant, used everywhere.
+
+**⛔ A full-frame transition overlay destroys the house chassis.** Reel 81's ninja cuts (smoke / thrown
+star / blade slash / ink swipe) were authored as `position:absolute; inset:0` over the 1080x1920 frame,
+so every cut also blanked the cream background, the retention rail and the karaoke line — the three
+things that are supposed to be *continuous*. Clip the graphic to the Panel's rect and give it the same
+radius:
+```tsx
+const PANEL = { left: 34, top: 384, width: 1012, height: 792, radius: 40 };  // SlopKit Panel
+<div style={{ position: "absolute", ...PANEL, overflow: "hidden", zIndex: 260 }}>{graphic}</div>
+```
+Coordinates authored against the full frame also need retargeting to panel-local when you do this.
+
+**A cover that reaches opacity 1 reads as a blank card, not as smoke.** Cap the solid core around
+0.86 and draw the texture (puffs, blots) *on top* of it. The cut is still masked; the transition still
+looks like a thing rather than a colour flash.
+
 **Compose in columns when two things must both be legible.** The reel-81 hook only worked once the
 frame split: creator's clip + nameplate on the left, the fighter and its iron on the right. Layering
 labels *over* the hero buried it; the beat read as a pile of signs, not a character. Also keep the
@@ -199,6 +220,24 @@ hero's face clear — strap the props to the **lower body** so the eyes stay abo
 ---
 
 ## 5. Voiceover pipeline
+
+**Dead air is TWO different measurements. Run both.** "The audio has pauses" on reel 81 was 3.68s of
+dead air in a 35.5s VO, and neither tool alone found all of it:
+- `silencedetect` finds *acoustic* silence, including breaths **inside** a word's span.
+- inter-word gaps from the words JSON find *timing* gaps between tokens.
+
+Whisper stretches a word's `end` across a following breath, so a 0.26s mid-sentence pause is invisible
+to the word-gap pass and only `silencedetect` sees it. Reel 81 needed two passes: ten inter-word gaps
+first, then two `silencedetect`-only breaths in the tightened file.
+```bash
+ffmpeg -hide_banner -i vo.wav -af "silencedetect=noise=-34dB:d=0.16" -f null -   # pass 1 + pass 2
+```
+Targets that read as tight: **0.14-0.18s** at a sentence boundary, **~0.09s** mid-phrase. Cut from the
+MIDDLE of each gap (keep `k/2` either side) so the splice lands in silence, then **re-transcribe** and
+rebuild the words JSON rather than shifting timings by hand — and diff the transcript of each cut
+window against the same window of the original, because whisper mis-hearings look exactly like splice
+damage. (Reel 81: "weekend trying" → "we can try" was whisper, not the cut. The original transcribed
+the same way.)
 
 **⛔ whisper.cpp `-ml 1` SILENTLY DROPS CONTENT.** It lost the first ~8s of a 14s chunk and the final
 line of a take. **Use `faster-whisper` for word timings** (playbook §3.3):
@@ -281,6 +320,10 @@ After any bulk edit, grep for orphaned values and re-render one still before a f
   ```bash
   export PATH="$PWD/tools/node_modules/ffmpeg-static:$PWD/tools/node_modules/ffprobe-static/bin/darwin/arm64:$PATH"
   ```
+- **`verify_reel.py`'s manifest carries its own inputs.** `sfx_cues_s`, `music_bed`, `words_json` and
+  `script` all live INSIDE `reel.intent.json` — a hand-rolled `{"cues":[{"at":…}]}` silently skips four
+  checks and still prints a green "all blocking checks passed". Always start from
+  `python3 tools/verify_reel.py --emit-manifest` and confirm the summary says **9/9, 0 skipped**.
 - **zsh arrays are 1-indexed.** A bash-style `for i in {0..7}` over `IDS=(a b c …)` silently renders an
   empty name for `i=0` and skips the last item. Iterate the values (`for id in "${IDS[@]}"`) or use
   `{1..N}`. Also: `set -- $pair` inside a `for … in "$@"` loop clobbers the list you are iterating.
