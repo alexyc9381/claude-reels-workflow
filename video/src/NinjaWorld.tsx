@@ -54,6 +54,21 @@ export const rnd = (i: number, k = 1) => {
 
 const W = 1012, HT = 792;   // panel-local
 
+/** A camera move for a scene. `kind` varies the gesture so consecutive scenes
+    never feel like the same shot. The Panel already clips, so this is safe to
+    put straight on a scene's world container. */
+export const cam = (f: number, dur: number, kind: number): string => {
+  const t = dur <= 1 ? 1 : Math.min(1, f / dur);
+  const e = t * t * (3 - 2 * t);                      // smoothstep
+  switch (kind % 5) {
+    case 0: return `scale(${1 + e * 0.11}) translate(${-e * 14}px, ${-e * 8}px)`;   // push in
+    case 1: return `scale(${1.1 - e * 0.09}) translate(${e * 16}px, ${e * 6}px)`;   // pull back
+    case 2: return `scale(${1.05 + e * 0.05}) translate(${34 - e * 62}px, 0px)`;    // pan right
+    case 3: return `scale(${1.04 + e * 0.07}) translate(${-30 + e * 56}px, ${-e * 10}px)`; // pan left + in
+    default: return `scale(${1.02 + e * 0.09}) translate(0px, ${18 - e * 34}px)`;   // tilt up + in
+  }
+};
+
 /* =========================================================================
    THE CAST — an actual ninja: hood, eye slit, face wrap, scarf tails.
    Drawn in the Mascot's own 200x200 space so it tracks the hop and squash.
@@ -147,6 +162,68 @@ export const IronTag: React.FC<{ x: number; y: number; label: string; w?: number
       </div>
       <div style={{ position: "absolute", left: 6, top: 4, width: w - 12, height: 6, borderRadius: 3, background: IRON_L }} />
       {snapped && <div style={{ position: "absolute", left: w / 2 - 12, top: -13, width: 24, height: 6, borderRadius: 3, background: SASH }} />}
+    </div>
+  );
+};
+
+/** a real chain between two points — the thing that makes "tied down" readable */
+export const Chain: React.FC<{ x1: number; y1: number; x2: number; y2: number; s?: number; slack?: number; cut?: number; z?: number }> =
+  ({ x1, y1, x2, y2, s = 1, slack = 0, cut = 0, z = 7 }) => {
+  const dx = x2 - x1, dy = y2 - y1;
+  const len = Math.hypot(dx, dy);
+  const step = 30 * s;
+  const n = Math.max(2, Math.round(len / step));
+  const ang = (Math.atan2(dy, dx) * 180) / Math.PI;
+  return (<>
+    {Array.from({ length: n }, (_, i) => {
+      const t = i / (n - 1);
+      if (cut > 0 && t > 1 - cut) return null;                 // the far half is gone once it is cut
+      const sag = Math.sin(t * Math.PI) * slack;
+      return (
+        <div key={i} style={{ position: "absolute", left: x1 + dx * t - 16 * s, top: y1 + dy * t + sag - 12 * s,
+          width: 32 * s, height: 24 * s, borderRadius: 12 * s, zIndex: z,
+          border: `${8 * s}px solid ${i % 2 ? "#8E897C" : "#6E6A5F"}`,
+          boxShadow: "0 3px 6px rgba(14,20,32,0.5)",
+          transform: `rotate(${ang + (i % 2 ? 0 : 84)}deg)` }} />
+      );
+    })}
+  </>);
+};
+
+/** THE ANCHOR: one big iron block, labelled, with the rest bolted onto it.
+    This is the hook's whole idea in one object — you are chained to your setup. */
+export const Anchor: React.FC<{ f: number; x: number; y: number; s?: number; shiver?: number; z?: number }> =
+  ({ f, x, y, s = 1, shiver = 0, z = 8 }) => {
+  const jx = shiver * Math.sin(f * 3.7) * 4;
+  const W0 = 300, H0 = 236;
+  const BOLTED: [string, number, number, number][] = [
+    ["SKILLS", 16, 128, 128], ["HOOKS", 158, 128, 122],
+    ["MCP", 16, 172, 96], ["RULES", 122, 172, 106], ["MEMORY", 236, 172, 0],
+  ];
+  return (
+    <div style={{ position: "absolute", left: x + jx, top: y, width: W0 * s, height: H0 * s, zIndex: z,
+      transform: `scale(${s})`, transformOrigin: "0 100%",
+      filter: "drop-shadow(0 22px 26px rgba(14,20,32,0.6))" }}>
+      {/* the block */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: W0, height: H0, borderRadius: 8, background: IRON }} />
+      <div style={{ position: "absolute", left: 0, top: 0, width: W0, height: 16, borderRadius: 8, background: IRON_L }} />
+      <div style={{ position: "absolute", left: 0, top: H0 - 26, width: W0, height: 26, borderRadius: 6, background: IRON_D }} />
+      {/* corner rivets */}
+      {[[14, 20], [W0 - 30, 20], [14, H0 - 46], [W0 - 30, H0 - 46]].map(([bx, by], i) => (
+        <div key={i} style={{ position: "absolute", left: bx as number, top: by as number, width: 16, height: 16, borderRadius: "50%", background: IRON_D }} />
+      ))}
+      {/* the tow ring the chain comes off */}
+      <div style={{ position: "absolute", left: -30, top: 44, width: 44, height: 34, borderRadius: 18, border: `9px solid ${IRON_L}` }} />
+      {/* the big label */}
+      <div style={{ position: "absolute", left: 16, top: 34, width: W0 - 32, height: 72, borderRadius: 5,
+        background: CARD, border: `5px solid ${IRON_D}`, display: "flex", alignItems: "center", justifyContent: "center",
+        fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40, letterSpacing: "-0.01em", color: INK }}>CLAUDE.md</div>
+      {/* everything else, bolted to the same block */}
+      {BOLTED.filter(([, , , w]) => w > 0).map(([l, bx, by, w]) => (
+        <div key={l as string} style={{ position: "absolute", left: bx as number, top: by as number, width: w as number, height: 34,
+          borderRadius: 4, background: IRON_D, border: `3px solid ${IRON_L}`, display: "flex", alignItems: "center", justifyContent: "center",
+          fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 18, letterSpacing: "0.05em", color: "#E8E3D6" }}>{l as string}</div>
+      ))}
     </div>
   );
 };

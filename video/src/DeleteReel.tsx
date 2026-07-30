@@ -26,7 +26,7 @@ const FPS = 30;
 const fr = (s: number) => Math.round(s * FPS);
 
 const SCENES: { C: React.FC; s: number; label: string; cut: Kind }[] = [
-  { C: NinjaHook, s: 0.00,  cut: "smoke", label: "hook · the rooftop run, the fall, the cut" },
+  { C: NinjaHook, s: 0.00,  cut: "smoke", label: "hook · chained to CLAUDE.md, yanked over, cut free" },
   { C: N1Armory,  s: 4.48,  cut: "smoke", label: "the armory · they strap more iron on" },
   { C: N2Master,  s: 6.78,  cut: "star",  label: "bamboo forest · the master cuts every chain" },
   { C: N3Founder, s: 9.24,  cut: "slash", label: "the scroll hall · he is named, his clip hangs" },
@@ -37,7 +37,7 @@ const SCENES: { C: React.FC; s: number; label: string; cut: Kind }[] = [
   { C: N8Market,  s: 26.32, cut: "ink",   label: "the night market · six brand new sets" },
   { C: N9Gate,    s: 30.74, cut: "smoke", label: "the torii gate · comment DELETE" },
 ];
-const END_S = 34.1;                       // speech ends 33.04, hold ~1.05s on the CTA
+const END_S = 33.14;                      // ⛔ the reel ENDS on the word "DELETE" (ends 33.04). No hold.
 export const DELETE_TOTAL = Math.round(END_S * FPS);
 
 /* the incoming scene is alive 3 frames early, under the clearing graphic */
@@ -150,14 +150,14 @@ const SFX_ALL: Cue[] = [
   /* ---------- N9 · the scroll, the brand, the CTA ---------- */
   ...layer(30.94, { src: A + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.7 }, { src: A + "page-turn.wav", dur: 0.5 }),
   ...layer(31.61, { src: A + "marker-stroke.wav", v: LEVELS.SFX_MID, dur: 0.7 }, { src: A + "snap.wav", dur: 0.3 }),
-  ...layer(32.07, { src: A + "success-jingle.wav", v: LEVELS.SFX_HERO, dur: 2.0 },
-                  { src: A + "crowd-applause.wav", v: LEVELS.SFX_TEXTURE, dur: 2.0 }),
+  ...layer(32.07, { src: A + "success-jingle.wav", v: LEVELS.SFX_HERO, dur: 0.95 },
+                  { src: A + "crowd-applause.wav", v: LEVELS.SFX_TEXTURE, dur: 1.0 }),
 ];
 
 export const DeleteReel: React.FC = () => {
   const f = useCurrentFrame();
   const music =
-    f < 12 ? db(-12) : f > DELETE_TOTAL - 24 ? db(-10) * Math.max(0, (DELETE_TOTAL - f) / 24) : db(-10);
+    f < 12 ? db(-12) : f > DELETE_TOTAL - 10 ? db(-10) * Math.max(0, (DELETE_TOTAL - f) / 10) : db(-10);
   return (
     <AbsoluteFill>
       <Audio src={staticFile("delete_vo_v2.wav")} />

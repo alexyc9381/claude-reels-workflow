@@ -135,6 +135,27 @@ After any bulk style edit, grep for orphaned values and render one still before 
 
 ---
 
+**⛔ "I'm confused what's even going on" means the hook has no single readable OBJECT.** Reel 81's
+first ninja hook was a rooftop chase: sprint, leap the gap, get yanked out of the air by chains, crash
+short. Every beat was there and it still failed, because
+
+- there was **no baseline to break** — frame 0 was already mid-action, so nothing read as *wrong*;
+- **six labels floating near a figure never say "attached"** — proximity is not connection;
+- a **jump needs both roofs and the gap legible in one frame**, which at 1012px wide they were not.
+
+The rebuild works because it is ONE object: a ninja straining forward on a visible chain that runs
+back to a single huge iron block with `CLAUDE.md` on its face and every other bit of config *bolted
+onto the same block*. Strain → dig in → the chain yanks it over → a blade → smoke → gone.
+
+Rules that fall out of this:
+1. **One object carries the idea.** If you cannot name the hook's single prop, there isn't one.
+2. **Show the connection, not the adjacency.** Draw the actual chain/rope/cable. And check it is not
+   occluded — reel 81's chain spanned the 10px between the hero and the block, so it was hidden under
+   the hero for 30 frames. Move the figure until there is a real span of visible link.
+3. **Establish, then break.** Spend the first ~0.5s on a stable, legible state so the reversal lands.
+4. **A rigid box character cannot sell a deep lean.** Keep the body near-upright and let the props do
+   it (taut chain + skid marks + dust). A 20° tilt on a box reads as *falling over*, not *straining*.
+
 ## 3. Scene & screen layout
 
 **⛔ Enlarging a container does NOT re-lay-out its contents.** Reel 79's cabinets were scaled up and
@@ -151,6 +172,17 @@ right. Alex flagged it as "not centred". **Recompute child layouts against the n
   prop large and the frame full.
 - Draw order matters: to put a character *behind* a prop, render the character first.
 - A whip-pan will expose unpainted void unless you lay a backdrop **wider than the panel** behind it.
+
+**Every scene gets a camera move, and they must not all be the same move.** "The animations need to
+be way more interesting" on reel 81 was largely *the frame not moving*. A shared helper fixed all nine
+scenes at once, varied so consecutive shots differ (push in / pull back / pan right / pan left+in /
+tilt up+in):
+```ts
+export const cam = (f: number, dur: number, kind: number): string => { … }   // NinjaWorld.tsx
+// safe to put straight on a scene's world container — SlopKit's Panel already clips
+<div style={{ position: "absolute", inset: 0, transform: cam(f, 113, 1), transformOrigin: "50% 58%" }}>
+```
+Combine it with any existing shake by concatenating the transform strings, not replacing them.
 
 **⛔ A `transform` on an unpositioned wrapper flings its absolute child across the frame.** In reel 81
 a plate was animated with `<div style={{transform: "translate(...) rotate(64deg)"}}><Weight x={112} …/></div>`.
@@ -406,6 +438,16 @@ default source. Alex rejected the Vox pack: "isn't really the sound design I wan
 ---
 
 ## 11. Delivery
+
+**End the reel ON the CTA keyword, with no hold.** Alex on reel 81: *"the video needs to end
+immediately when i say the word delete."* Read the last word's `end` out of the words JSON and set
+`END_S = last.end + 0.10` (the release, not a beat of silence). Then shorten any closing SFX so the
+stack finishes inside the new end, or `ENDS_TIGHT` passes while the jingle is audibly chopped mid-ring:
+```
+DELETE: last word ends 33.04 -> END_S 33.14; success-jingle dur 2.0 -> 0.95, applause 2.0 -> 1.0
+```
+Verify by transcribing the last 0.6s — a *whole* mis-heard word ("to leave" for "delete") means the
+audio is intact; a truncated fragment means you cut too early.
 
 **⛔ Claim the reel number IMMEDIATELY BEFORE delivering, not at the start of the session.**
 `ls -d` the Drive `Faceless/` folder and take the next FREE number. Other agents ship concurrently: on

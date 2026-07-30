@@ -3,8 +3,9 @@ import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { inter } from "./fonts";
 import { Bg, Panel, ProgressBar, HookHeader, Caption, AssemblyCtx, hexA } from "./SlopKit";
 import {
-  Rooftops, Ninja, IronTag, Shuriken, Smoke, Slash, Streaks, SpeedLines, Moon,
-  NIGHT, NIGHT_D, NIGHT_L, TILE, TILE_D, TILE_L, MOON, PAPER_HI, IRON, IRON_L, SASH, SMOKE_L, CLAY,
+  Rooftops, Ninja, Anchor, Chain, IronTag, Smoke, Slash, Streaks, SpeedLines, Moon,
+  NIGHT, NIGHT_D, NIGHT_L, NIGHT_LL, TILE, TILE_D, TILE_L, MOON, PAPER_HI,
+  IRON, IRON_D, IRON_L, SASH, SMOKE_L, CLAY, CARD, WOOD_D,
   E, osc, rnd, OUT, IO, IN_Q, BACK, SH, SH_D,
 } from "./NinjaWorld";
 
@@ -12,146 +13,144 @@ const SoloCaption: React.FC<{ words: string[]; hot?: number }> = (p) =>
   React.useContext(AssemblyCtx) ? null : <Caption {...p} />;
 
 /* =========================================================================
-   HOOK · THE ROOFTOP RUN. Motion from frame 0, then a fall, a slash, a poof.
-     f0    already sprinting. Streaks, chained iron tags dragging behind.
-     f16   it LEAPS the gap between roofs.
-     f26   mid-air the chains snap taut and YANK it out of the air.
-     f42   it slams short, into the tiles. The far roof is still ahead.
-     f58   one blade slash. Every chain lets go.
-     f64   smoke bomb.
-     f78   it is standing on the FAR roof, free, moon behind it.
-     f92   gone again, at speed.
-   Pop culture: the Naruto rooftop chase / Dragon Ball weighted training gear.
+   HOOK · CHAINED TO YOUR OWN SETUP.
+
+   The previous version was a rooftop jump and it did not read: there was no
+   baseline to break, and six labels floating near a figure never say
+   "attached". So this is ONE readable image instead — a ninja straining
+   forward on a chain that runs back to a single huge iron block with
+   CLAUDE.md on its face and every other bit of config bolted onto it.
+
+     f0-18   STRAIN. It leans into the chain. Feet skid, dust. It goes nowhere.
+     f18-30  It digs in HARDER. The block shivers and stays put.
+     f30-42  The chain snaps taut and yanks it off its feet, onto its back.
+     f46-56  A blade crosses the frame. The chain parts.
+     f56-70  Smoke.
+     f70+    The block sits alone with a cut chain. It is already gone.
+
+   The camera pushes in the whole time, so no frame is static.
    ========================================================================= */
-const RIDGE = 560;
+const RIDGE = 548;
 
 export const NinjaHook: React.FC = () => {
   const f = useCurrentFrame();
-  const LEAP = 16, YANK = 26, CRASH = 42, CUT = 58, POOF = 63, LAND = 80, GO = 96;
+  const DIG = 18, YANK = 30, DOWN = 38, CUT = 46, POOF = 56, GONE = 70, EXIT = 92;
 
-  /* ---- the run: the world slides past, the hero holds frame ---- */
-  const runA = E(f, 0, LEAP, 0, 1, IO);                    // approach
-  const runB = E(f, GO, GO + 34, 0, 1, IN_Q);              // exit
-  const cam = runA * 210 + runB * 520;
+  /* ---- the camera never sits still ---- */
+  const push = 1 + E(f, 0, 134, 0, 0.13, IO);
+  const panX = -E(f, 0, 134, 0, 40, IO);
 
-  /* ---- the jump arc, collapsed by the chains ---- */
-  const air = E(f, LEAP, CRASH, 0, 1);                      // 0..1 across the whole jump
-  const lift = Math.sin(air * Math.PI) * 210;               // the arc it wanted
-  const drag = E(f, YANK, CRASH, 0, 1, IN_Q);               // what the iron did to it
-  const hy = -lift + drag * 300;                            // net vertical
-  const hx = E(f, LEAP, CRASH, 0, 216, OUT);                // it only gets part way
+  /* ---- beats 1-2 · straining against it ---- */
+  const lean = E(f, 0, DIG, 0, 1, OUT);                       // settle into the pull
+  const dig = E(f, DIG, YANK, 0, 1, IO);                      // then really pull
+  const strainX = lean * 26 + dig * 22 + osc(f, 3.2, 3) * Math.max(0, 1 - (f - YANK) / 8);
+  const shiver = dig * 0.9;
 
-  const crashed = f >= CRASH && f < POOF;
-  const shake = f >= CRASH && f < CRASH + 14 ? (1 - (f - CRASH) / 14) * Math.sin(f * 4.3) * 20 : 0;
+  /* ---- beat 3 · it loses ---- */
+  const yank = E(f, YANK, DOWN, 0, 1, IN_Q);                  // dragged back off its feet
+  const down = f >= DOWN && f < POOF;
+  const shake = f >= DOWN && f < DOWN + 12 ? (1 - (f - DOWN) / 12) * Math.sin(f * 4.6) * 18 : 0;
+
+  /* ---- beats 4-6 · cut, smoke, gone ---- */
   const cut = f >= CUT && f < CUT + 8;
-  const free = f >= LAND;
-  const go = E(f, GO, GO + 22, 0, 1, OUT);
+  const chainCut = f >= CUT + 2 ? E(f, CUT + 2, CUT + 12, 0, 0.66, OUT) : 0;
+  const gone = f >= GONE;
+  const out = E(f, EXIT, EXIT + 26, 0, 1, OUT);
 
-  /* the chained iron: worn on the run, taut in the air, gone after the cut */
-  const TAGS: [string, number, number][] = [
-    ["CLAUDE.md", -186, 96], ["SKILLS", -138, 172], ["HOOKS", -244, 40],
-    ["MCP", -96, 214], ["RULES", -286, 148], ["MEMORY", -206, 246],
-  ];
+  /* the hero: standing and pulling, then flat on its back */
+  const HS = 330;
+  const hx = 150 + strainX * 1.5 - yank * 130;
+  const hy = RIDGE - HS * 0.94 + yank * 84;
+  const hrot = down ? -74 : 5 + lean * 2 + dig * 3 + osc(f, 4, 1.4) * dig - yank * 56;
 
-  const heroX = 300 + hx - (free ? 0 : 0);
-  const heroY = RIDGE - 336 * 0.94 + hy;
+  const AX = 636, AY = RIDGE - 288;                            // the block, planted on the tiles
 
   return (
     <AbsoluteFill>
       <Bg /><ProgressBar />
-      <HookHeader f={f + 12} big="CLAUDE CODE'S CREATOR" hot="CUT THE WEIGHT" />
+      <HookHeader f={f + 12} big="CLAUDE CODE'S CREATOR" hot="CUT THE CHAIN" />
       <Panel glow={hexA(CLAY, 0.3)}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
-          {/* ---- the world, sliding past ---- */}
-          <div style={{ position: "absolute", inset: 0, transform: `translate(${-cam * 0.42 + shake}px, 0)` }}>
+          <div style={{ position: "absolute", inset: 0, transform: `scale(${push}) translateX(${panX + shake}px)`,
+            transformOrigin: "46% 62%" }}>
             <Rooftops f={f} ridge={RIDGE} />
+            {/* rooftop dressing: a ridge cap, a chimney stack, a lantern pole */}
+            <div style={{ position: "absolute", left: -40, right: -40, top: RIDGE + 92, height: 20, background: TILE_L, zIndex: 2 }} />
+            <div style={{ position: "absolute", left: 862, top: RIDGE - 152, width: 86, height: 156, background: TILE_D, zIndex: 3 }} />
+            <div style={{ position: "absolute", left: 846, top: RIDGE - 168, width: 118, height: 24, borderRadius: 4, background: TILE_L, zIndex: 3 }} />
+            <div style={{ position: "absolute", left: 878, top: RIDGE - 186, width: 22, height: 22, borderRadius: 11, background: SMOKE_L, opacity: 0.8, zIndex: 3 }} />
+            <div style={{ position: "absolute", left: 62, top: RIDGE - 236, width: 15, height: 240, background: WOOD_D, zIndex: 3 }} />
+            <div style={{ position: "absolute", left: 34, top: RIDGE - 246, width: 72, height: 17, borderRadius: 4, background: WOOD_D, zIndex: 3 }} />
+            <div style={{ position: "absolute", left: 42, top: RIDGE - 228, width: 56, height: 72, borderRadius: "24px 24px 18px 18px", background: "#FFF6DF", boxShadow: SH, zIndex: 3 }} />
+            <div style={{ position: "absolute", left: 42, top: RIDGE - 202, width: 56, height: 5, background: "rgba(168,58,46,0.5)", zIndex: 3 }} />
+            <div style={{ position: "absolute", left: -60, top: RIDGE - 246, width: 240, height: 260, borderRadius: "50%", zIndex: 2,
+              background: "radial-gradient(circle, #FFF6DF 0%, rgba(255,246,223,0.2) 42%, rgba(255,246,223,0) 70%)" }} />
+
+            {/* ---- the block it is chained to: the whole idea, one object ---- */}
+            <Anchor f={f} x={AX} y={AY} s={1.22} shiver={gone ? 0 : shiver} z={8} />
+            {gone && <Chain x1={AX - 8} y1={AY + 76} x2={AX - 150} y2={AY + 208} s={1.15} slack={26} z={9} />}
+
+            {/* ---- the chain, from the block's ring to the hero's sash ---- */}
+            {!gone && (
+              <Chain x1={AX - 6} y1={AY + 78} x2={hx + HS * 0.9} y2={hy + HS * 0.6} s={1.2}
+                     slack={down ? 54 : 66 - lean * 28 - dig * 32} cut={chainCut} z={11} />
+            )}
+
+            {/* ---- the hero ---- */}
+            {!gone && (<>
+              <Ninja f={f} x={hx} y={hy} size={HS} hero flip
+                     rot={down ? 74 : -(5 + lean * 2 + dig * 3 + osc(f, 4, 1.4) * dig) + yank * 56}
+                     shock={down ? 0.8 : 0.15 + dig * 0.35}
+                     nodAmp={down ? 0.3 : 1.1} nodSpeed={down ? 28 : 22} z={10} />
+              {/* the feet are skidding, not walking */}
+              {!down && Array.from({ length: 5 }, (_, i) => {
+                const t = (f * 0.09 + i * 0.2) % 1;
+                return <div key={i} style={{ position: "absolute", left: hx + 250 + t * 130, top: RIDGE - 20 + (i % 3) * 11,
+                  width: 44 + t * 52, height: 15, borderRadius: 8, background: SMOKE_L,
+                  opacity: (1 - t) * (0.45 + dig * 0.5), zIndex: 11 }} />;
+              })}
+            </>)}
+
+            {/* the yank landing: dust and loosened tiles */}
+            {down && (<>
+              {[0, 1, 2, 3].map((i) => {
+                const t = Math.min(1, (f - DOWN) / 15);
+                return <div key={i} style={{ position: "absolute", left: 90 + i * 74 + t * 60 * (i - 1.5), top: RIDGE - 24 - t * 90 + t * t * 150,
+                  width: 50, height: 20, borderRadius: 4, background: i % 2 ? TILE_L : TILE_D,
+                  transform: `rotate(${t * 200 * (i % 2 ? 1 : -1)}deg)`, zIndex: 12 }} />;
+              })}
+              {Array.from({ length: 9 }, (_, i) => {
+                const t = Math.min(1, (f - DOWN) / 17);
+                return <div key={`d${i}`} style={{ position: "absolute", left: 60 + i * 50 + t * 34 * (i % 3), top: RIDGE - 26 + (i % 3) * 13,
+                  width: 48 + t * 62, height: 20, borderRadius: 11, background: SMOKE_L, opacity: (1 - t) * 0.9, zIndex: 12 }} />;
+              })}
+            </>)}
+
+            {/* ---- the blade that ends it ---- */}
+            {f >= CUT - 5 && f < CUT + 5 && (
+              <div style={{ position: "absolute", left: 250, top: RIDGE - 290, width: 300, height: 15, borderRadius: 8,
+                background: "#E8ECEF", transform: `rotate(${-44 + (f - CUT + 5) * 9}deg)`, boxShadow: SH, zIndex: 21 }} />
+            )}
+            <Slash f={f} at={CUT} y={RIDGE - 210} deg={16} life={9} />
+
+            {/* ---- smoke, then it is simply not there ---- */}
+            <Smoke f={f} at={POOF} x={300} y={RIDGE - 150} r={340} life={20} z={22} />
+
+            {/* ---- gone, at speed ---- */}
+            {gone && (<>
+              <Streaks f={f} on={0.75} n={14} />
+              <SpeedLines f={f} cx={300} cy={RIDGE - 200} n={14} on={E(f, GONE, GONE + 12, 0, 1, OUT)} />
+              {[-64, 62].map((dx, i) => (
+                <Ninja key={i} f={f - 3 - i * 3} x={228 + dx - out * 250} y={RIDGE - HS * 0.94} size={HS}
+                       cheer={0.92} nodAmp={3.4} nodSpeed={6} flip z={5} />
+              ))}
+              <Ninja f={f} x={228 - out * 250} y={RIDGE - HS * 0.94} size={HS} hero
+                     cheer={0.94} gaze={-2} nodAmp={3.4} nodSpeed={6} flip z={10} />
+            </>)}
           </div>
-          {/* the near roof edge it launches from, and the one it is aiming at */}
-          <div style={{ position: "absolute", inset: 0, transform: `translate(${-cam + shake}px, 0)` }}>
-            <div style={{ position: "absolute", left: -260, top: RIDGE - 16, width: 700, height: 260, background: TILE_D }} />
-            <div style={{ position: "absolute", left: -260, top: RIDGE - 16, width: 700, height: 22, background: TILE_L,
-              clipPath: "polygon(1% 0, 99% 0, 100% 100%, 0 100%)" }} />
-            <div style={{ position: "absolute", left: 686, top: RIDGE - 70, width: 760, height: 320, background: TILE }} />
-            <div style={{ position: "absolute", left: 686, top: RIDGE - 70, width: 760, height: 24, background: TILE_L,
-              clipPath: "polygon(1% 0, 99% 0, 100% 100%, 0 100%)" }} />
-            {Array.from({ length: 9 }, (_, i) => (
-              <div key={i} style={{ position: "absolute", left: 700 + i * 84, top: RIDGE - 46, width: 12, height: 300, background: TILE_D }} />
-            ))}
-          </div>
 
-          {/* ---- speed: only when it is actually moving fast ---- */}
-          {(f < LEAP || f > GO) && <Streaks f={f} on={f < LEAP ? runA : go} n={13} />}
-
-          {/* ---- the chained iron, trailing then taut ---- */}
-          {!free && TAGS.map(([label, dx, dy], i) => {
-            const swing = osc(f, 6 + i, 16, i);                 // flailing on the run
-            const taut = E(f, YANK, YANK + 8, 0, 1, OUT);        // snapped straight down
-            const tx = heroX + dx * (1 - taut * 0.55) + swing * (1 - taut);
-            const ty = heroY + dy + taut * 128;
-            return (
-              <div key={label} style={{ position: "absolute", zIndex: 7 }}>
-                <IronTag x={tx} y={ty} label={label} w={i === 0 ? 196 : 132 + i * 6}
-                         rot={(i % 2 ? 1 : -1) * (8 + swing * 0.6) * (1 - taut)}
-                         chain={70 + taut * 90} snapped={false} z={7} />
-              </div>
-            );
-          })}
-
-          {/* ---- the hero ---- */}
-          {!free && (
-            <Ninja f={f} x={heroX} y={heroY} size={336}
-                   rot={crashed ? 16 : air > 0 && air < 1 ? -10 + drag * 40 : osc(f, 5, 4)}
-                   shock={crashed ? 0.75 : drag > 0.4 ? 0.5 : 0.1}
-                   nodAmp={crashed ? 0.4 : 2.6} nodSpeed={crashed ? 26 : 5} hero z={9} />
-          )}
-
-          {/* ---- the crash: tiles kicked loose, dust, and the gap still unclosed ---- */}
-          {crashed && (<>
-            {[0, 1, 2, 3, 4].map((i) => {
-              const t = Math.min(1, (f - CRASH) / 16);
-              return <div key={i} style={{ position: "absolute", left: 420 + i * 62 + t * 70 * (i - 2), top: RIDGE - 30 - t * 120 + t * t * 190,
-                width: 54, height: 22, borderRadius: 4, background: i % 2 ? TILE_L : TILE_D,
-                transform: `rotate(${t * 220 * (i % 2 ? 1 : -1)}deg)`, zIndex: 10 }} />;
-            })}
-            {Array.from({ length: 10 }, (_, i) => {
-              const t = Math.min(1, (f - CRASH) / 18);
-              return <div key={`d${i}`} style={{ position: "absolute", left: 380 + i * 48 + t * 40 * (i % 3), top: RIDGE - 34 + (i % 3) * 14,
-                width: 46 + t * 60, height: 20, borderRadius: 11, background: SMOKE_L, opacity: (1 - t) * 0.9, zIndex: 10 }} />;
-            })}
-          </>)}
-
-          {/* ---- one slash, and every chain lets go ---- */}
-          <Slash f={f} at={CUT} y={352} deg={19} life={9} />
+          {/* the cut flash sits above the camera move so it fills the panel */}
           {cut && <div style={{ position: "absolute", inset: 0, background: PAPER_HI, opacity: (1 - (f - CUT) / 8) * 0.5, zIndex: 23 }} />}
-          {f >= CUT && f < LAND && TAGS.map(([label], i) => {
-            const t = E(f, CUT + 2, CUT + 16, 0, 1, IN_Q);
-            return (
-              <div key={`fall${label}`} style={{ position: "absolute", zIndex: 8, opacity: 1 - t * 0.5 }}>
-                <IronTag x={452 + (i - 2.5) * 34 + t * (i - 2.5) * 132} y={RIDGE - 176 + rnd(i, 4) * 60 + t * t * 380}
-                         label={label} w={132} rot={t * (i % 2 ? 210 : -210)} snapped z={8} />
-              </div>
-            );
-          })}
-
-          {/* ---- smoke bomb ---- */}
-          <Smoke f={f} at={POOF} x={470} y={RIDGE - 130} r={340} life={19} z={22} />
-
-          {/* ---- it is on the far roof now, and it is fast ---- */}
-          {free && (<>
-            <SpeedLines f={f} cx={700} cy={RIDGE - 240} n={16} on={E(f, LAND, LAND + 12, 0, 1, OUT)} />
-            {go > 0.15 && [-70, 66].map((dx, i) => (
-              <Ninja key={i} f={f - 3 - i * 3} x={620 + dx} y={RIDGE - 70 - 336 * 0.94} size={336}
-                     cheer={0.9} nodAmp={3.4} nodSpeed={6} z={5} />
-            ))}
-            <Ninja f={f} x={620} y={RIDGE - 70 - 336 * 0.94} size={336}
-                   cheer={0.92} gaze={2} nodAmp={3.4} nodSpeed={6} hero z={9} />
-          </>)}
-
-          {/* the blade, for one beat, so the slash has a source */}
-          {f >= CUT - 6 && f < CUT + 6 && (
-            <div style={{ position: "absolute", left: 470, top: RIDGE - 250, width: 260, height: 15, borderRadius: 8,
-              background: "#E8ECEF", transform: `rotate(${-38 + (f - CUT + 6) * 9}deg)`, boxShadow: SH, zIndex: 21 }} />
-          )}
         </div>
       </Panel>
       <SoloCaption words={["And", "Anthropic", "just", "told"]} hot={1} />

@@ -12,7 +12,7 @@ import {
   CARD, CARD2, CARD3, BAMBOO_D, BAMBOO_L, WATER, WATER_D, WATER_L, SNOW, SNOW_D,
   DAWN, DAWN_HI, DAWN_LO, CLOUD, CLOUD_D, IRON, IRON_D, IRON_L,
   FLAME, FLAME_HI, SASH, SASH_D, SMOKE, SMOKE_L, CLAY,
-  E, osc, rnd, OUT, IO, IN_Q, BACK, SH, SH_D,
+  E, osc, rnd, cam, OUT, IO, IN_Q, BACK, SH, SH_D,
 } from "./NinjaWorld";
 
 /* =========================================================================
@@ -65,7 +65,7 @@ export const N1Armory: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="⛓️" word="STRAP MORE ON" c={FLAME} />
       <Panel glow={hexA(FLAME, 0.24)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shake}px)` }}>
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shake}px) ${cam(f, 69, 0)}`, transformOrigin: "50% 58%" }}>
           <Armory f={f} floor={FLOOR} />
 
           {/* the hero, sinking under every new set */}
@@ -136,7 +136,7 @@ export const N2Master: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="🗡️" word="HE SAYS CUT IT" c={SASH} />
       <Panel glow={hexA(SASH, 0.26)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 74, 3), transformOrigin: "50% 58%" }}>
           <Bamboo f={f} floor={FLOOR} />
 
           {/* the hero, still chained */}
@@ -189,7 +189,7 @@ export const N3Founder: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="🎴" word="HE BUILT THE ART" c="#6E4257" />
       <Panel glow={hexA(PAPER_LO, 0.3)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 113, 1), transformOrigin: "50% 58%" }}>
           <ScrollHall f={f} floor={FLOOR} />
           <Lantern f={f} x={22} y={92} s={0.76} />
           <Lantern f={f + 24} x={916} y={88} s={0.72} ph={1.3} />
@@ -253,7 +253,7 @@ export const N4Yards: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="📜" word="WRITTEN FOR THE OLD ONE" c="#2F6B63" />
       <Panel glow={hexA("#2F6B63", 0.24)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 123, 4), transformOrigin: "50% 58%" }}>
           {/* 2024: a small ninja that genuinely cannot stand without the iron */}
           <Yard side={0} p={left} snow year="2024" note="needed the iron">
             {/* a snow-capped training post, so the yard is not an empty field */}
@@ -303,7 +303,7 @@ export const N5Short: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="🎯" word="IT PULLS YOU SHORT" c={SASH} />
       <Panel glow={hexA(SASH, 0.24)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shk}px)` }}>
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden", transform: `translateX(${shk}px) ${cam(f, 84, 2)}`, transformOrigin: "50% 58%" }}>
           <Range f={f} floor={FLOOR} />
 
           {/* the target it was aiming at, never touched */}
@@ -365,7 +365,7 @@ export const N6Reset: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="🌙" word="EVERY SIX MONTHS" c={WATER} />
       <Panel glow={hexA(WATER, 0.26)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 133, 0), transformOrigin: "50% 58%" }}>
           <Waterfall f={f} floor={FLOOR} />
           {/* the training rock under the falls — the iconic place to stand */}
           <div style={{ position: "absolute", left: 208, top: FLOOR - 116, width: 300, height: 74, borderRadius: 14,
@@ -431,7 +431,7 @@ export const N7Summit: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="⛰️" word="TRY IT ON OPUS 5" c={DAWN_LO} />
       <Panel glow={hexA(DAWN, 0.3)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 59, 4), transformOrigin: "50% 58%" }}>
           <Summit f={f} floor={FLOOR} />
           {/* the banner planted at the peak */}
           <div style={{ position: "absolute", left: 664, top: 176, opacity: banner,
@@ -470,7 +470,7 @@ export const N8Market: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="🏮" word="SIX MORE, EVERY WEEK" c="#6E4257" />
       <Panel glow={hexA("#6E4257", 0.26)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 133, 3), transformOrigin: "50% 58%" }}>
           <Market f={f} floor={FLOOR} />
 
           {/* the stall */}
@@ -538,7 +538,7 @@ export const N9Gate: React.FC = () => {
       <Bg /><ProgressBar />
       <Tag f={f} icon="💬" word='COMMENT "DELETE"' c={SASH} />
       <Panel glow={hexA(DAWN_HI, 0.3)}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, transform: cam(f, 101, 1), transformOrigin: "50% 58%" }}>
           <Torii f={f} floor={FLOOR} />
 
           {/* the scroll unrolls under the gate */}
