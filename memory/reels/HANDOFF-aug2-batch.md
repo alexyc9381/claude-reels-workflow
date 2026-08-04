@@ -68,6 +68,32 @@ crashes, all recovered, ~28 min for 1542 frames).
 **Next improvement:** render the matte at 1080 wide, not 1440 — it is only ever
 shown at 1210, so it costs nothing visually and halves the decode again.
 
+## ⛔⛔ I NEVER OPENED `docs/THE-OPEN.md` — AND THE HOOK FAILS IT, MEASURABLY
+The repo's own `CLAUDE.md` points at it: *"build the opening 5 seconds (pattern
+interrupt) → docs/THE-OPEN.md"*. I built four rounds of hooks without reading it.
+Against its four laws, the shipped ARMY open fails three:
+
+| law | ARMY v4 | verdict |
+|---|---|---|
+| **1. BRIGHT and SATURATED** — "a dark frame loses before anything on it is read" | **frame-0 panel luma 57/255** | ⛔ **reel 78's REJECTED draft measured 72; the accepted rebuild measured 162.** Ours is darker than the one that was thrown away |
+| 2. the subject is in frame 0 | Claude sprites present | ✓ |
+| **3. RECOGNITION, NOT MOTION** — "the strongest interrupt is the viewer seeing a thing they personally DREAD, instantly, no narration" | an army formation — aspirational, not dreaded | ⛔ |
+| 4. mute-readable | "67 AGENTS" large | ✓ |
+| **structure: 3-4 hard cuts, never one** — A failure-close / B wide / C the number | ONE continuous 6.7s shot | ⛔ |
+
+```bash
+ffmpeg -y -v error -i REEL.mp4 -vframes 1 -vf "crop=1012:792:34:384" /tmp/f0.png
+python3 -c "from PIL import Image;import statistics as s;p=Image.open('/tmp/f0.png').convert('L').load();print(s.mean([p[x,y] for y in range(0,792,8) for x in range(0,1012,8)]))"
+```
+
+⚠️ **AND AN HONEST TENSION TO RAISE WITH ALEX.** Law 3's worked example is *the
+literal Claude Code usage-limit error* — which is almost exactly the round-2
+hook he rejected as *"not text visual animation... way more creative objects."*
+The doc and his stated preference point opposite ways. **That needs deciding
+out loud, not guessed at.** THE-OPEN also says the reel's FIRST build step is
+N hook concepts rendered at full quality for approval — which is the one part
+of this I did do.
+
 ## VIDEO 2 — WHERE IT ACTUALLY IS
 `out/86_army_v4.mp4`. Chrome cloned (chassis_diff ✓), figure cut out against the
 plate with the crown breaking the card, captions white and under the figure,
