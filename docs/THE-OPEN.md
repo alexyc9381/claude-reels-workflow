@@ -1,6 +1,8 @@
 # THE OPEN — building a pattern-interrupt first five seconds
 
 **Status:** process doc. Read before authoring scene 0 of any reel.
+**Companion doc:** [`MEASURING.md`](MEASURING.md) — how to measure frame 0 ink and band motion
+so the score means something.
 **Companion rules:** `memory/reel-multishot-structure.md` · `memory/reel-motion-hierarchy.md` ·
 `memory/sfx-dur-truncates-tails.md` · `memory/sfx-root-timeline-trap.md` ·
 `memory/reel-dead-air-motion-audit.md`
@@ -117,6 +119,24 @@ usage-limit error: `usage limit reached`, `0% context left`, context bar pegged 
 has hit that error recognises it in under a second, and recognition is what buys the next four.
 
 Ask: *what does my target viewer already fear, and can I put it on screen with no setup?*
+
+> #### ⛔ THE DREADED THING IS NOT NECESSARILY A UI SCREENSHOT — ALEX RULED ON THIS 2026-08-03
+>
+> Read literally, reel 78's worked example says "put the real error dialog in frame 0", and that
+> collides head-on with Alex's standing rejection of exactly that. On reel 86's round-2 hook he
+> killed a text/UI open with *"not text visual animation… way more creative objects"*, and the
+> same note appears on reels 85 and 68 (*"object scenes not UI"*).
+>
+> **Asked directly which wins, he chose his preference: CREATIVE OBJECTS.** So:
+>
+> **Law 3 is about RECOGNITION, and the usage-limit screenshot is one way to get it, not the
+> requirement.** Build the dreaded thing as a drawn OBJECT or a staged scene whenever you can —
+> the test is still *"does the target viewer recognise this in under a second, with no
+> narration?"*, not *"is this literal product UI?"*
+>
+> ⚠️ Do not re-litigate this per reel. It cost reel 86 a full hook round.
+
+
 
 ### 4. MUTE-READABLE
 

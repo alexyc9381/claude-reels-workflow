@@ -9,6 +9,7 @@ The cross-cutting rules and design decisions for the whole repo: the naming/READ
 | path | what |
 |---|---|
 | `CONVENTIONS.md` | the repo's legibility rules — nav contract, README skeleton, reel/pack naming, generated files |
+| `AUDIT-FIRST.md` | the 5 whole-reel audits to run before the first review, the six times the symptom was in a different place from the cause, and the ceiling/measurement traps that cost reel 86 nine rounds |
 | `specs/` | dated design docs for cross-cutting changes, one per decision |
 | `specs/2026-07-16-reel-consistency-defaults-design.md` | the "defaults fix" — make the correct visual choice the *ergonomic* one (eased `over()`, `costume` type, `lift()` matte, `reel-floors.js`, a delivery gate) |
 
