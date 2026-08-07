@@ -1,0 +1,43 @@
+TITLE The 3 Things 99% Get Wrong
+SUB From the person who built Claude Code. A short, practical guide.
+
+P The three fixes below came from one talk by Boris Cherny, who built Claude Code. None of them are settings. All three are about how you set the job up before the model ever runs.
+
+RULE
+
+H 1. Delete most of your instructions
+P He deleted roughly 80% of Claude Code's system prompt, and the tool got better. Long instruction files are usually a museum of old problems. Most lines were written to babysit a weaker model, and that model is gone.
+P What to do this week:
+NUM Open your CLAUDE.md and read it as if you wrote it for a new hire who is already excellent.
+NUM Delete every line that exists to stop a mistake you have not actually seen in the last month.
+NUM Delete every line that explains something the model can read from the code itself.
+NUM Keep only what is true, specific and impossible to infer: your stack, your conventions, your hard rules.
+QUOTE If a line would embarrass you to say out loud to a senior engineer, cut it.
+P A good target is a single screen. If yours is longer, you are probably describing the model instead of your project.
+
+H 2. Stop wording. Start experimenting.
+P Rewriting a prompt over and over is guessing. The faster move is to treat it like an experiment: change one thing, run it, watch where it actually breaks.
+P The loop:
+NUM Run the task and let it fail.
+NUM Find the exact step it went wrong, not the general vibe that it was bad.
+NUM Ask what the model was missing at that step: a file, a command, a way to check its own work.
+NUM Give it that one thing. Run again.
+P Most failures are not phrasing problems. They are setup problems. The model could not see the file, could not run the tests, or had no way to tell whether it had finished. Fix the setup, not the wording.
+
+H 3. Your tasks are far too small
+P Most people hand over a task that takes ten minutes, then watch it the whole time. He handed it one instruction and it ran for two weeks and built an entire app.
+P Scale up on purpose:
+NUM Give it an outcome, not a step. "Ship the billing page" beats "add a button here".
+NUM Give it a way to check itself: tests, a linter, a build, a script that says pass or fail.
+NUM Give it permission to keep going when a check passes.
+NUM Come back at the end, not every two minutes.
+P The limit on what you get is almost never the model. It is the size of the job you were willing to hand over.
+
+RULE
+
+H The one page version
+B Cut your instruction file down to what only you could know.
+B Debug the setup, not the sentence.
+B Hand over outcomes, and give it a way to know it is done.
+
+KEY Comment BORIS on the reel for this guide
