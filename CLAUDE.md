@@ -40,6 +40,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 | **build a post cover** | [`cover-system/`](cover-system/) |
 | **build the opening 5 seconds (pattern interrupt)** | [`docs/THE-OPEN.md`](docs/THE-OPEN.md) — the 4 laws of frame 0, the multi-shot structure, scoring the cuts, and the gate |
 | **storyboard a reel before building** | [`storyboards/STORYBOARD-SPEC.md`](storyboards/STORYBOARD-SPEC.md) — the mandatory contract + camera/arc/set libraries |
+| **write a gate / audit, or trust a number** | [`docs/MEASURING.md`](docs/MEASURING.md) — the 7 laws of making a measurement mean something, and the 8 times on one reel a correct calculation over the wrong signal produced a confident false answer |
 | **know naming rules / how to keep things consistent** | [`docs/CONVENTIONS.md`](docs/CONVENTIONS.md) |
 | **run ffmpeg/whisper/motion tooling** | [`tools/`](tools/) |
 

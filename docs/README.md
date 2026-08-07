@@ -5,11 +5,14 @@ The cross-cutting rules and design decisions for the whole repo: the naming/READ
 ## Start here
 [`CONVENTIONS.md`](CONVENTIONS.md) — the navigation contract, the exact README skeleton this and every subsystem README follows, the reel-keyword crosswalk, and the generated-file do-not-touch list. Read it before creating or renaming any file.
 
+Then [`MEASURING.md`](MEASURING.md) if you are about to write a gate, an audit, or the word "verified" — it is the counterpart to `CONVENTIONS.md` for anything that prints a number.
+
 ## Layout
 | path | what |
 |---|---|
 | `CONVENTIONS.md` | the repo's legibility rules — nav contract, README skeleton, reel/pack naming, generated files |
 | `AUDIT-FIRST.md` | the 5 whole-reel audits to run before the first review, the six times the symptom was in a different place from the cause, and the ceiling/measurement traps that cost reel 86 nine rounds |
+| `MEASURING.md` | the 7 laws of measurement — compare like with like, match the window, solo the bus; plus the reel-86 catalogue of wrong-signal answers |
 | `specs/` | dated design docs for cross-cutting changes, one per decision |
 | `specs/2026-07-16-reel-consistency-defaults-design.md` | the "defaults fix" — make the correct visual choice the *ergonomic* one (eased `over()`, `costume` type, `lift()` matte, `reel-floors.js`, a delivery gate) |
 
