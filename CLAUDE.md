@@ -27,6 +27,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 
 | I want to… | Go to |
 |---|---|
+| **start a new reel** | [`docs/KICKOFF-PROMPT.md`](docs/KICKOFF-PROMPT.md) — the canonical opening message, clause by clause: what each part triggers, the three transcription errors it always has, and what it does NOT say and therefore still has to be checked |
 | **understand the whole reel pipeline** | [`CLAUDE-REELS-PLAYBOOK.md`](CLAUDE-REELS-PLAYBOOK.md) — the production manual |
 | **find a specific reel's files** (code/log/storyboard/captions) | [`REELS.md`](REELS.md) — the generated registry |
 | **build or edit a reel** | [`video/`](video/) (the Remotion project) — start at `video/src/Root.tsx` |
