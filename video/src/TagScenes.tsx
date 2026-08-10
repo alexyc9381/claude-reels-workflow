@@ -84,7 +84,6 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
   const punch = pf < 0 ? 1 : 1 + Math.sin(Math.min(1, pf / 9) * Math.PI) * 0.22;
   const strike = ff < 0 ? 0 : E(ff, 2, 11, 0, 1, OUT);
   const rise = hook ? 1 : E(f, 0, 9, 0, 1, OUT);
-  const spot = LX + (RX - LX) * pull;
   /* the puller dips into it, then the cloth goes */
   const dip = ff < 0 ? 0 : Math.max(0, Math.sin(Math.min(1, ff / 7) * Math.PI) * 7);
   /* ⭐ THE RUMBLE. A small idle tremble all the way through (there is something
@@ -93,7 +92,19 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
      start there — anticipation that arrives with the payoff is not
      anticipation. */
   const build = ff < 0 ? Math.max(0, 1 + ff / 20) : Math.max(0, 1 - ff / 6);
-  const shake = Math.min(1, 0.16 + build * 0.88);
+  /* ⭐ THE HOOK SHAKES HARDER AND FOR LONGER. Round 9: *"shake more at the hook
+     beginning scene."*  Scene 0 is the only part of the reel guaranteed to be
+     seen, so its curtain is straining from frame 0 rather than picking up in the
+     last two thirds of a second: a 40-frame ramp instead of 20, and 1.75x the
+     amplitude. Frame 0 stays settled and readable — a tremble is not a move. */
+  const hookBuild = hook ? Math.max(0, 0.35 + 0.65 * Math.min(1, (f + 6) / 40)) : 0;
+  const shake = Math.min(1.75, (hook ? 1.75 : 1) * Math.min(1, 0.16 + Math.max(build, hookBuild) * 0.88));
+  /* ⭐ AND THE LIGHT LOOKS AT IT BEFORE IT GOES. This is why the curtain was not
+     popping: the spot sat on the PAID side through the whole rumble, so the
+     thing being shaken was the one thing in the room that was unlit. The head
+     swings 85% of the way across during the build and completes on the pull. */
+  const attention = ff < 0 ? Math.max(0, (ff + 20) / 20) * 0.85 : Math.max(0.85, pull);
+  const spot = LX + (RX - LX) * Math.max(pull, attention);
 
   return (
     <Stage i={i} push={push ?? [0, 70, 1.135]} dust vig={T.vig}>

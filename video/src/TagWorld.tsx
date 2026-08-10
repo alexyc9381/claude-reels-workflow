@@ -479,11 +479,24 @@ export const Drape: React.FC<{ cx: number; base: number; pull: number; cloth: st
           <div key={"gt" + i} style={{ position: "absolute", left: 4 + i * (w - 8) / 12, top: 4,
             width: (w - 8) / 20, height: 22, borderRadius: 6, background: dark(cloth, 0.44) }} />
         ))}
+        {/* ⛔ THE WORD HAS TO SURVIVE THE FOLDS. Cream letters straight onto
+            gradient-folded cloth sat at the same value as the fold highlights
+            and read as texture. It is printed on a PANEL — which is also how a
+            real event drape carries a word — so the letters have one flat
+            ground instead of six alternating ones. */}
+        {/* ⛔ 132px OVERFLOWED BOTH THE PANEL AND THE CLOTH. "FREE" in Fraunces
+            900 runs about 2.5x its font size, so 132 is ~330px inside a 374px
+            drape whose printed panel is only 322 — the letters hung off the
+            right edge of the curtain. 106 measures ~265 and sits inside both. */}
+        <div style={{ position: "absolute", left: "5%", right: "5%", top: "27%", height: "34%",
+          borderRadius: 10, background: dark(cloth, 0.58) }} />
+        <div style={{ position: "absolute", left: "5%", right: "5%", top: "27%", height: "34%",
+          borderRadius: 10, border: `4px solid ${mix(cloth, 0.36)}` }} />
         <div style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0,
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 104,
-          letterSpacing: "0.02em", color: "#F7F1E2",
-          textShadow: "0 5px 0 rgba(0,0,0,0.28)" }}>FREE</div>
+          fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 98,
+          letterSpacing: "0.01em", color: "#FFFBF0", whiteSpace: "nowrap",
+          textShadow: "0 6px 0 rgba(0,0,0,0.34)" }}>FREE</div>
       </div>
       {/* the scalloped hem, waving a little while it hangs */}
       {Array.from({ length: 8 }, (_, i) => (
@@ -1170,15 +1183,15 @@ const MARBLE: RoomP[] = ROOMS.map((r, i) => {
 
 export const THEMES: Theme[] = [
   { id: "gallery", label: "THE GALLERY · behind glass, behind a rope",
-    rooms: ROOMS, accent: "#C8A465", vig: 0.80, cloth: "#245E48",
+    rooms: ROOMS, accent: "#C8A465", vig: 0.80, cloth: "#2E9C6E",
     Dress: Wing, Barrier: VitrineBarrier, Fixture: TrackFixture },
   { id: "reading", label: "THE READING ROOM · chained to the lectern",
-    rooms: OAK, accent: "#C08A3E", vig: 0.84, cloth: "#6E2530",
+    rooms: OAK, accent: "#C08A3E", vig: 0.84, cloth: "#AE3543",
     Dress: OakDress, Barrier: ChainBarrier, Fixture: ShadeFixture },
   { id: "coinop", label: "THE COIN-OP · feed the slot",
-    rooms: STEEL, accent: "#A8B0B8", vig: 0.86, cloth: "#1F4A63",
+    rooms: STEEL, accent: "#A8B0B8", vig: 0.86, cloth: "#2A80AC",
     Dress: SteelDress, Barrier: CoinBarrier, Fixture: BattenFixture },
   { id: "odyssey", label: "THE ODYSSEY · lashed to the column, the drape pulled off",
-    rooms: MARBLE, accent: "#C8A465", vig: 0.82, cloth: "#5B2A62", crew: true,
+    rooms: MARBLE, accent: "#C8A465", vig: 0.82, cloth: "#8E44A0", crew: true,
     Dress: MarbleDress, Barrier: LashBarrier, Fixture: BrazierFixture },
 ];

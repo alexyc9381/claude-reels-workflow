@@ -189,6 +189,20 @@ const SFX: Cue[] = [
     dur: 0.86, rate: 0.97 + i * 0.006, lead: 0,
   })),
 
+  /* ---- the cloth shiver: the shake made audible ---------------------------
+     ⭐ Round 9: *"have some sort of slight shaking sound effect as well
+     playing."*  Synthesized (the pack has no rustle but paper-rustle, which is
+     paper). Band-passed noise with a 15 Hz flutter: fabric under strain is a
+     broadband stutter, not a tone.
+     ⛔ THE HOOK GETS ITS OWN, LONGER AND LOUDER, because the hook shakes from
+     frame 0 and a sound that starts two thirds of a second in would contradict
+     the picture. */
+  { at: 0, src: A_ + "cloth-shiver.wav", v: LEVELS.SFX_TEXTURE, dur: 1.90, rate: 0.94, lead: 0 },
+  ...FREE.slice(1).map((f, i): Cue => ({
+    at: (f - 22) / FPS, src: A_ + "cloth-shiver.wav", v: LEVELS.SFX_BED,
+    dur: 0.78, rate: 1.02 + i * 0.008, lead: 0,
+  })),
+
   /* ---- the ten FREE flips: the lock bursting + the money coming back ------- */
   ...FREE.flatMap((f, i): Cue[] => {
     const r = 0.95 + i * 0.017;
