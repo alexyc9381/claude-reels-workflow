@@ -275,6 +275,10 @@ export const VARIANTS: Variant[] = [
     bed: "free_bed_c.wav", seed: 9, pal: 0, trans: "punch", capTop: 1300, endHold: 0 },
   { id: "d", label: "THE ODYSSEY · lashed to the column, raised on shoulders", theme: 3,
     bed: "free_bed_d.wav", seed: 13, pal: 0, trans: "slide", capTop: 1256, endHold: 0 },
+  { id: "e", label: "THE GLASSHOUSE · under a locked cloche", theme: 4,
+    bed: "free_bed_e.wav", seed: 5, pal: 0, trans: "flash", capTop: 1272, endHold: 0 },
+  { id: "f", label: "THE CAGE · behind bars, padlocked", theme: 5,
+    bed: "free_bed_f.wav", seed: 21, pal: 0, trans: "bars", capTop: 1288, endHold: 0 },
 ];
 
 /** ⛔ A DIFFERENT TRANSITION PER CUT, so the boundary frames — where a
@@ -367,3 +371,5 @@ export const FreeReel  = makeReel(VARIANTS[0]);
 export const FreeReelB = makeReel(VARIANTS[1]);
 export const FreeReelC = makeReel(VARIANTS[2]);
 export const FreeReelD = makeReel(VARIANTS[3]);
+export const FreeReelE = makeReel(VARIANTS[4]);
+export const FreeReelF = makeReel(VARIANTS[5]);

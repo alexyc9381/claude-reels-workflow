@@ -1,6 +1,6 @@
 import React from "react";
 import { Composition, registerRoot } from "remotion";
-import { FreeReel, FreeReelB, FreeReelC, FreeReelD, FREE_TOTAL, VARIANTS } from "./ClaudeFreeReel";
+import { FreeReel, FreeReelB, FreeReelC, FreeReelD, FreeReelE, FreeReelF, FREE_TOTAL, VARIANTS } from "./ClaudeFreeReel";
 import { S1Hook, S2, S11Cta } from "./TagScenes";
 
 /* Reel 97 "FREE". Board: storyboards/97-free.md.
@@ -18,6 +18,12 @@ const Root: React.FC = () => (<>
 
   <Composition id="FreeReelD" component={FreeReelD}
     durationInFrames={FREE_TOTAL + VARIANTS[3].endHold} {...V} />
+
+  <Composition id="FreeReelE" component={FreeReelE}
+    durationInFrames={FREE_TOTAL + VARIANTS[4].endHold} {...V} />
+
+  <Composition id="FreeReelF" component={FreeReelF}
+    durationInFrames={FREE_TOTAL + VARIANTS[5].endHold} {...V} />
 
   <Composition id="freeHook" component={S1Hook} durationInFrames={65} {...V} />
   <Composition id="freeS2"   component={S2}     durationInFrames={70} {...V} />

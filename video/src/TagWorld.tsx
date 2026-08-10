@@ -1220,6 +1220,217 @@ export const Hoplite: React.FC<{ x: number; y: number; s?: number; f: number; z?
   </div>);
 };
 
+/* ---- E · THE GLASSHOUSE --------------------------------------------------
+   ⭐ The paid tool is under a locked BELL-JAR CLOCHE on a potting bench; the free
+   one is growing in the open bed beside it. You can see it perfectly. You cannot
+   reach it. A cloche is the only barrier in this set you could mistake for care.
+   ------------------------------------------------------------------------ */
+const GlassDress: React.FC<{ p: RoomP; f: number }> = ({ p, f }) => (<>
+  {/* the glazing: a pitched roof and a wall of panes, with the night behind */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: 40, height: p.hz - 40,
+    background: `linear-gradient(176deg, ${dark(p.wall, 0.62)} 0%, ${mix(p.wall, 0.10)} 100%)`,
+    zIndex: 2 }} />
+  {Array.from({ length: 7 }, (_, i) => (
+    <div key={"gz" + i} style={{ position: "absolute", left: 6 + i * 145, top: 44, width: 10,
+      height: p.hz - 44, background: mix(p.lip, 0.16), zIndex: 4 }} />
+  ))}
+  {Array.from({ length: 4 }, (_, r) => (
+    <div key={"gh" + r} style={{ position: "absolute", left: 0, right: 0, top: 44 + r * 112,
+      height: 9, background: mix(p.lip, 0.14), zIndex: 4 }} />
+  ))}
+  {/* the ridge and two rafters */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: 30, height: 16,
+    background: mix(p.lip, 0.26), zIndex: 6 }} />
+  {[240, 772].map((x, i) => (
+    <div key={"rf" + i} style={{ position: "absolute", left: x - 5, top: 46, width: 10,
+      height: 120, background: mix(p.lip, 0.20), transform: `rotate(${i ? -14 : 14}deg)`,
+      transformOrigin: "50% 0%", zIndex: 6 }} />
+  ))}
+  {/* the potting bench and the open bed the free one grows in */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: p.hz - 20, height: 20,
+    background: dark(p.lip, 0.62), zIndex: 7 }} />
+  <div style={{ position: "absolute", left: 0, right: 0, top: p.hz, bottom: 0,
+    background: g(p.floor, p.floor2, 178), zIndex: 7 }} />
+  {/* terracotta pots along the back, and foliage */}
+  {[70, 168, 862, 956].map((x, i) => (
+    <div key={"pt" + i} style={{ position: "absolute", left: x - 34, top: p.hz - 84, zIndex: 9 }}>
+      <div style={{ position: "absolute", left: 0, top: 26, width: 68, height: 58,
+        borderRadius: "6px 6px 14px 14px", background: "linear-gradient(180deg,#A85C36,#6E3A22)" }} />
+      <div style={{ position: "absolute", left: -4, top: 20, width: 76, height: 14,
+        borderRadius: 5, background: "#B96A3E" }} />
+      {[0, 1, 2].map((k) => (
+        <div key={k} style={{ position: "absolute", left: 10 + k * 18,
+          top: -14 + Math.sin(f / 23 + i + k) * 3, width: 20, height: 40,
+          borderRadius: "12px 12px 3px 3px", background: ["#3E7A46", "#4E9256", "#356B3C"][k] }} />
+      ))}
+    </div>
+  ))}
+  {/* a hose coiled on the wall, because a glasshouse is a working room */}
+  {[0, 1, 2].map((k) => (
+    <div key={"hs" + k} style={{ position: "absolute", left: 452 - k * 9, top: 128 - k * 9,
+      width: 96 + k * 18, height: 96 + k * 18, borderRadius: "50%",
+      border: `7px solid ${k % 2 ? "#2E5E3E" : "#264E34"}`, zIndex: 8 }} />
+  ))}
+</>);
+
+/** a hanging grow lamp on a chain, sliding along the ridge */
+const GrowFixture: Fixture = ({ x, c }) => (
+  <div style={{ position: "absolute", left: x - 58, top: 46, zIndex: 26 }}>
+    {[0, 1, 2, 3].map((k) => (
+      <div key={k} style={{ position: "absolute", left: 54, top: k * 13, width: 10, height: 10,
+        borderRadius: 5, border: "3px solid #7E8A72" }} />
+    ))}
+    <div style={{ position: "absolute", left: 0, top: 54, width: 116, height: 34,
+      borderRadius: "8px 8px 30px 30px",
+      background: "linear-gradient(180deg,#5E6E52,#33402C)" }} />
+    <div style={{ position: "absolute", left: 10, top: 84, width: 96, height: 12, borderRadius: 6,
+      background: c, opacity: 0.94 }} />
+  </div>
+);
+
+/** ⛔ THE CLOCHE IS A DOME, AND A DOME OVER A RECTANGLE IS THE WHOLE POINT — it
+    is obviously an added thing rather than part of the card. Two hard highlight
+    streaks and a faint tint, same glass grammar as the vitrine, never a blur. */
+const ClocheBarrier: Barrier = ({ cx, base, w, h, dim }) => {
+  const W2 = w + 46, H2 = h + 40, L = cx - W2 / 2, T = base - H2;
+  return (<>
+    <div style={{ position: "absolute", left: L - 14, top: base + 2, width: W2 + 28, height: 26,
+      borderRadius: 7, background: "linear-gradient(180deg,#8E5E3A,#5E3C22)", zIndex: 89 }} />
+    <div style={{ position: "absolute", left: L, top: T, width: W2, height: H2,
+      borderRadius: `${W2 / 2}px ${W2 / 2}px 14px 14px`, background: "#CFE6DA",
+      opacity: 0.11 + dim * 0.13, zIndex: 90 }} />
+    <div style={{ position: "absolute", left: L, top: T, width: W2, height: H2,
+      borderRadius: `${W2 / 2}px ${W2 / 2}px 14px 14px`, overflow: "hidden", zIndex: 91 }}>
+      <div style={{ position: "absolute", left: W2 * 0.10, top: -30, width: W2 * 0.16,
+        height: H2 + 90, background: "#F0FBF4", opacity: 0.15, transform: "rotate(11deg)" }} />
+      <div style={{ position: "absolute", left: W2 * 0.34, top: -30, width: W2 * 0.07,
+        height: H2 + 90, background: "#F0FBF4", opacity: 0.10, transform: "rotate(11deg)" }} />
+    </div>
+    <div style={{ position: "absolute", left: L - 5, top: T, width: W2 + 10, height: H2,
+      borderRadius: `${W2 / 2}px ${W2 / 2}px 14px 14px`,
+      border: "6px solid #9A7A3E", zIndex: 92 }} />
+    {/* the finial and the hasp: a cloche you cannot lift */}
+    <div style={{ position: "absolute", left: cx - 17, top: T - 26, width: 34, height: 32,
+      borderRadius: 16, background: "linear-gradient(180deg,#D8B569,#8E7132)", zIndex: 93 }} />
+    <div style={{ position: "absolute", left: cx + W2 / 2 - 20, top: base - 54, width: 34,
+      height: 46, borderRadius: 6, background: "#8E7132", zIndex: 93 }} />
+    <div style={{ position: "absolute", left: cx + W2 / 2 - 12, top: base - 44, width: 18,
+      height: 18, borderRadius: 9, background: "#2E2A20", zIndex: 94 }} />
+  </>);
+};
+
+/* ---- F · THE CAGE -------------------------------------------------------
+   ⭐ The paid tool is behind IRON BARS with a padlock on them, in a back room of
+   brick and straw. The bluntest barrier in the set: no glass, no ceremony, you
+   simply cannot get to it.
+   ------------------------------------------------------------------------ */
+const CageDress: React.FC<{ p: RoomP; f: number }> = ({ p, f }) => (<>
+  {/* brick courses, offset every other row */}
+  {Array.from({ length: 7 }, (_, r) => (
+    <div key={"br" + r} style={{ position: "absolute", left: 0, right: 0, top: 56 + r * 62,
+      height: 58, zIndex: 3 }}>
+      {Array.from({ length: 9 }, (_, i) => (
+        <div key={i} style={{ position: "absolute", left: -60 + i * 120 + (r % 2 ? 60 : 0),
+          top: 0, width: 112, height: 50, borderRadius: 3,
+          background: (i + r) % 3 ? mix(p.wall, 0.05) : dark(p.wall, 0.86) }} />
+      ))}
+    </div>
+  ))}
+  {/* the iron framework the cage hangs off */}
+  {[0, 1].map((k) => (
+    <div key={"fr" + k} style={{ position: "absolute", left: k ? undefined : 30,
+      right: k ? 30 : undefined, top: 60, width: 18, height: p.hz - 40,
+      background: "linear-gradient(90deg,#2A2C2E,#4A4E52,#232527)", zIndex: 10 }} />
+  ))}
+  <div style={{ position: "absolute", left: 22, right: 22, top: 60, height: 20,
+    background: "linear-gradient(180deg,#4A4E52,#232527)", zIndex: 10 }} />
+  {/* the straw floor */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: p.hz, bottom: 0,
+    background: g(p.floor, p.floor2, 178), zIndex: 7 }} />
+  {Array.from({ length: 40 }, (_, i) => {
+    const r = (k: number) => { const v = Math.sin(i * 33.1 + k * 8.7) * 4371.7; return v - Math.floor(v); };
+    return (<div key={"sw" + i} style={{ position: "absolute", left: r(1) * 1000,
+      top: p.hz + 8 + r(2) * (H - p.hz - 20), width: 26 + r(3) * 22, height: 4,
+      borderRadius: 2, background: mix(p.floor, 0.22), opacity: 0.55,
+      transform: `rotate(${r(4) * 60 - 30}deg)`, zIndex: 8 }} />);
+  })}
+  {/* a hanging chain and a bucket, so the room has a job */}
+  {Array.from({ length: 8 }, (_, k) => (
+    <div key={"ch" + k} style={{ position: "absolute", left: 906, top: 80 + k * 15, width: 13,
+      height: 13, borderRadius: 6, border: "4px solid #4A4E52", zIndex: 11 }} />
+  ))}
+  <div style={{ position: "absolute", left: 880, top: 200, width: 64, height: 52,
+    borderRadius: "4px 4px 12px 12px", background: "linear-gradient(180deg,#5A5E62,#33373A)",
+    zIndex: 11 }} />
+</>);
+
+/** a caged work lamp swinging on its hook */
+const CagedFixture: Fixture = ({ x, c }) => (
+  <div style={{ position: "absolute", left: x - 34, top: 74, zIndex: 26 }}>
+    <div style={{ position: "absolute", left: 30, top: -14, width: 8, height: 42,
+      background: "#3A3E42" }} />
+    <div style={{ position: "absolute", left: 0, top: 28, width: 68, height: 40,
+      borderRadius: "34px 34px 8px 8px",
+      background: "linear-gradient(180deg,#5A5E62,#2A2E32)" }} />
+    <div style={{ position: "absolute", left: 12, top: 62, width: 44, height: 14, borderRadius: 7,
+      background: c, opacity: 0.94 }} />
+    {[0, 1, 2].map((k) => (
+      <div key={k} style={{ position: "absolute", left: 8 + k * 22, top: 30, width: 4, height: 44,
+        borderRadius: 2, background: "#23272A" }} />
+    ))}
+  </div>
+);
+
+/** ⛔⛔ THE FRONT FACE OF THE CAGE IS OPEN, AND IT HAS TO BE. Nine vertical bars
+    across the card chopped "Midjourney", "STANDARD" and "$30/mo" into slices —
+    the exact mistake the odyssey rope already made once, made again because
+    "vertical bars only" sounded like it avoided it. A bar across a card IS
+    across its face, whichever way it runs.
+
+    So the cage is drawn as an ENCLOSURE seen from its open side: bars down both
+    flanks in perspective, a barred roof over the top, rails front and back, and
+    the padlock on a hasp at the foot. The only thing crossing the card is a pair
+    of bars over the PAID banner, which carries one word and can spare it. */
+const BarsBarrier: Barrier = ({ cx, base, w, h, dim }) => {
+  const top = base - h, o = 0.97 - dim * 0.30;
+  const L = cx - w / 2 - 26, R = cx + w / 2 + 26;
+  const bar = (x: number, y: number, ww: number, hh: number, k: string, rot = 0) => (
+    <div key={k} style={{ position: "absolute", left: x, top: y, width: ww, height: hh,
+      borderRadius: Math.min(ww, hh) / 2,
+      background: ww < hh ? "linear-gradient(90deg,#23272A,#6A6E72 40%,#2A2E32)"
+                          : "linear-gradient(180deg,#6A6E72,#23272A)",
+      opacity: o, transform: rot ? `rotate(${rot}deg)` : undefined,
+      transformOrigin: "50% 100%", zIndex: 92 }} />
+  );
+  return (<>
+    {/* the frame: top rail, foot rail, two corner posts */}
+    {bar(L - 10, top - 30, R - L + 20, 20, "tr")}
+    {bar(L - 10, base - 4, R - L + 20, 20, "fr")}
+    {bar(L - 10, top - 26, 20, h + 34, "cl")}
+    {bar(R - 10, top - 26, 20, h + 34, "cr")}
+    {/* the flanks, in perspective — four bars a side, leaning inward */}
+    {[0, 1, 2, 3].map((i) => (<React.Fragment key={"fl" + i}>
+      {bar(L + 6 + i * 7, top - 22, 11, h + 26, "l" + i, 1.6 + i * 0.7)}
+      {bar(R - 17 - i * 7, top - 22, 11, h + 26, "r" + i, -1.6 - i * 0.7)}
+    </React.Fragment>))}
+    {/* the barred roof */}
+    {Array.from({ length: 9 }, (_, i) =>
+      bar(L + 4 + i * ((R - L - 8) / 8) - 5, top - 30, 11, 26, "rf" + i))}
+    /* ⛔ AND NOT EVEN OVER THE BANNER. Two bars there cut "PAID" into "PAI  D".
+       The flanks, the roof and the padlock already say caged; a bar over the one
+       word the banner carries buys nothing and costs the word. NOTHING crosses
+       the card. */
+    {/* the padlock on its hasp at the foot */}
+    <div style={{ position: "absolute", left: cx - 24, top: base + 16, width: 48, height: 36,
+      borderRadius: 6, background: "linear-gradient(180deg,#C9A45C,#7E6630)", zIndex: 94 }} />
+    <div style={{ position: "absolute", left: cx - 14, top: base - 6, width: 28, height: 30,
+      borderRadius: "14px 14px 0 0", border: "7px solid #8E7132", borderBottom: "none",
+      zIndex: 93 }} />
+    <div style={{ position: "absolute", left: cx - 5, top: base + 26, width: 10, height: 13,
+      borderRadius: 3, background: "#3A3222", zIndex: 95 }} />
+  </>);
+};
+
 /* ---- the room sets each world runs on ---------------------------------- */
 const OAK: RoomP[] = ROOMS.map((r, i) => {
   const HX = ["#3E2C1E", "#332616", "#43301F", "#2C2114", "#3A2A1A", "#2E2418",
@@ -1233,6 +1444,26 @@ const STEEL: RoomP[] = ROOMS.map((r, i) => {
               "#2C353E", "#1E2730", "#2A343C", "#212932", "#262F38"][i];
   return { wall: HX, wall2: dark(HX, 0.54), seam: mix(HX, 0.18), floor: "#2E363E",
            floor2: "#141A20", lip: "#8894A0", key: "#DCEAF6", hz: r.hz };
+});
+
+const FERN: RoomP[] = ROOMS.map((r, i) => {
+  /* ⛔ FERN IS DELIBERATELY THE BRIGHT ROOM OF THE SIX. Its first palette sat at
+     almost exactly OAK's luma (48 vs 48) — a different HUE and the same VALUE —
+     and the B/E divergence measured 19.0 against a bar of 20. The variant metric
+     is mean |LUMA delta|, so **the lever is value, not hue**; two rooms can look
+     nothing alike and still fail it. A glasshouse at night with the lamp on is
+     the one room in the set that has a reason to be pale. */
+  const HX = ["#2E5A46", "#274E3E", "#356248", "#224636", "#2F5A44", "#275040",
+              "#335E46", "#234A3A", "#2F5C46", "#254E3E", "#2C5844"][i];
+  return { wall: HX, wall2: dark(HX, 0.56), seam: mix(HX, 0.22), floor: "#4E4232",
+           floor2: "#241C13", lip: "#A8B48E", key: "#EFFBE2", hz: r.hz };
+});
+
+const BRICK: RoomP[] = ROOMS.map((r, i) => {
+  const HX = ["#4A2E24", "#3E271E", "#523226", "#36221A", "#472C22", "#3A2620",
+              "#4E3026", "#33211A", "#482D23", "#392420", "#432A21"][i];
+  return { wall: HX, wall2: dark(HX, 0.52), seam: mix(HX, 0.16), floor: "#4E4028",
+           floor2: "#241C12", lip: "#9A7A4E", key: "#F6DCA0", hz: r.hz };
 });
 
 const MARBLE: RoomP[] = ROOMS.map((r, i) => {
@@ -1255,4 +1486,10 @@ export const THEMES: Theme[] = [
   { id: "odyssey", label: "THE ODYSSEY · lashed to the column, the drape pulled off",
     rooms: MARBLE, accent: "#C8A465", vig: 0.82, cloth: "#8E44A0", crew: true,
     Dress: MarbleDress, Barrier: LashBarrier, Fixture: BrazierFixture },
+  { id: "glasshouse", label: "THE GLASSHOUSE · under a locked cloche",
+    rooms: FERN, accent: "#8E9E72", vig: 0.80, cloth: "#C4842E",
+    Dress: GlassDress, Barrier: ClocheBarrier, Fixture: GrowFixture },
+  { id: "cage", label: "THE CAGE · behind bars, padlocked",
+    rooms: BRICK, accent: "#9A7A4E", vig: 0.84, cloth: "#1F7E86",
+    Dress: CageDress, Barrier: BarsBarrier, Fixture: CagedFixture },
 ];
