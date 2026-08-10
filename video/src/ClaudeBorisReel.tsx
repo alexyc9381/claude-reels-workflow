@@ -3,6 +3,7 @@ import { AbsoluteFill, Sequence, Audio, staticFile, useCurrentFrame } from "remo
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx } from "./SlopKit";
 import { Cue, SfxTrack, LEVELS, layer, repeat, db } from "./SoundKit";
 import { MissionHook, HOOK_CUTS } from "./MissionHook";
+import { MissionHookB, HOOK_CUTS_B, MissionHookC, HOOK_CUTS_C } from "./MissionHooksBC";
 import { M1Deleted, M2Babysit, M3Scientist, M4TooHard, M5Breaks, M6Setup, M7TooSmall, M8LongBurn, M9Cta } from "./MissionScenes";
 import { MissionCut, MKind } from "./MissionTransitions";
 import words from "./data/words_boris.json";
@@ -67,7 +68,25 @@ const amb = (t: number, dur: number, src: string, rate = 1, v: number = LEVELS.S
   [{ at: t, src: A + src, v, dur, rate, lead: 0 }];
 
 const [S1, S2, S3, S4, S5, S6, S7, S8, S9] = SCENES.slice(1).map((x) => x.s);
-const [HA, HB, HC, HD, HE, HF] = HOOK_CUTS.map((f) => f / FPS);
+
+/* Every hook cut needs a transient, and each VARIANT cuts at different frames —
+   so score the list, never hard-coded times. The palette rotates so a 9- or
+   11-cut hook does not repeat the same hit twice in a row. */
+const HOOK_KIT: [string, string, string, number][] = [
+  ["whoosh-fast.wav",   "hit-boom.wav",       "gear-stutter.wav", 1.06],
+  ["whoosh-swoosh.wav", "hit-up.wav",         "riser-sharp.wav",  1.00],
+  ["whoosh-flyby.wav",  "snap.wav",           "riser-metal.wav",  1.10],
+  ["whoosh-choppy.wav", "hit-boom.wav",       "paper-rustle.wav", 0.92],
+  ["whoosh-fast.wav",   "punch.wav",          "gear-mech.wav",    1.00],
+  ["whoosh-swoosh.wav", "positive-chime.wav", "unlock.wav",       1.00],
+  ["whoosh-flyby.wav",  "punch.wav",          "gear-stutter.wav", 1.14],
+  ["whoosh-choppy.wav", "hit-up.wav",         "riser-sharp.wav",  0.96],
+];
+const hookCues = (cuts: number[]): Cue[] =>
+  cuts.flatMap((cf, i) => {
+    const [mv, imp, tex, rate] = HOOK_KIT[i % HOOK_KIT.length];
+    return scoreCut(cf / FPS, mv, imp, tex, rate);
+  });
 
 const SFX_ALL: Cue[] = [
   /* ---- THE OPEN. Frame 0 carries the heaviest stack in the reel. ---- */
@@ -76,12 +95,14 @@ const SFX_ALL: Cue[] = [
   { at: 0.02, src: A + "snap.wav",         v: LEVELS.SFX_MID,     dur: 0.19, lead: 0 },
   { at: 0.00, src: A + "keys-macbook.wav", v: LEVELS.SFX_TEXTURE, dur: 0.85, lead: 0 },
   { at: 0.00, src: A + "room-tone.wav",    v: LEVELS.SFX_BED,     dur: 5.3,  lead: 0 },
-  ...scoreCut(HA, "whoosh-fast.wav",   "hit-boom.wav",       "gear-stutter.wav", 1.06),
-  ...scoreCut(HB, "whoosh-swoosh.wav", "hit-up.wav",         "riser-sharp.wav"),
-  ...scoreCut(HC, "whoosh-flyby.wav",  "snap.wav",           "riser-metal.wav", 1.1),
-  ...scoreCut(HD, "whoosh-choppy.wav", "hit-boom.wav",       "paper-rustle.wav", 0.92),
-  ...scoreCut(HE, "whoosh-fast.wav",   "punch.wav",          "gear-mech.wav"),
-  ...scoreCut(HF, "whoosh-swoosh.wav", "positive-chime.wav", "unlock.wav"),
+
+  /* ---- internal cuts inside M1 and M2. A scene that runs past ~2.5s is cut
+     into shots, and every one of those cuts needs a transient or the edit
+     reads soft exactly where it just got more interesting. ---- */
+  ...scoreCut(S1 + 40 / FPS, "whoosh-fast.wav",   "snap.wav",     "paper-rustle.wav", 1.05),
+  ...scoreCut(S1 + 76 / FPS, "whoosh-choppy.wav", "hit-up.wav",   "gear-stutter.wav", 0.95),
+  ...scoreCut(S2 + 46 / FPS, "whoosh-swoosh.wav", "snap.wav",     "paper-slide.wav", 1.1),
+  ...scoreCut(S2 + 94 / FPS, "whoosh-fast.wav",   "hit-boom.wav", "gear-mech.wav", 0.92),
 
   /* ---- M1 · the plan bay: five binders pulled ---- */
   ...cutSfx(S1 - 0.10, "static"),
@@ -152,15 +173,41 @@ const SFX_ALL: Cue[] = [
                       { src: A + "crowd-applause.wav", v: LEVELS.SFX_TEXTURE, dur: 0.9 }),
 ];
 
-export const BorisReel: React.FC = () => {
+/* ============================================================================
+   TRIAL-REEL VARIANTS.
+
+   ⛔ Instagram flags near-duplicates, so a variant that only swaps its music is
+   a wasted post (memory `feedback_trial_reel_variants`). Each variant below
+   changes FIVE things, and the first two do most of the work:
+
+     1. the HOOK — a different cold-open world, order and cut rhythm
+     2. the BED — a different track, not the same track re-EQd
+     3. per-scene CAMERA OFFSET, so the shared body is not frame-identical
+     4. the TRANSITION kinds between scenes
+     5. the CAPTION band position
+
+   The luma delta between variants is MEASURED after render, not assumed.
+   ========================================================================== */
+type Variant = {
+  Hook: React.FC;
+  hookCuts: number[];
+  bed: string;
+  cuts: MKind[];          // per-scene transition kind, overrides the table
+  camScale: number;       // body framing, per variant
+  camDx: number;
+  capTop: number;
+};
+
+const makeReel = (V: Variant): React.FC => () => {
   const f = useCurrentFrame();
   const music =
     f < 12 ? db(-12) : f > BORIS_TOTAL - 12 ? db(-11) * Math.max(0, (BORIS_TOTAL - f) / 12) : db(-11);
+  const CUES = [...hookCues(V.hookCuts), ...SFX_ALL];
   return (
     <AbsoluteFill>
       <Audio src={staticFile("boris_vo_final.wav")} />
-      <Audio src={staticFile("boris_bed.wav")} volume={music} />
-      <SfxTrack cues={SFX_ALL} />
+      <Audio src={staticFile(V.bed)} volume={music} />
+      <SfxTrack cues={CUES} />
 
       <Bg />
 
@@ -168,19 +215,45 @@ export const BorisReel: React.FC = () => {
         {SCENES.map((sc, i) => {
           const from = IN[i];
           const to = i < SCENES.length - 1 ? IN[i + 1] : BORIS_TOTAL;
-          const C = sc.C;
+          const C = i === 0 ? V.Hook : sc.C;
+          /* the shared body gets a per-variant, per-scene framing nudge. The hook
+             is left alone — it is already a different edit. */
+          const k = i === 0 ? 0 : ((i % 3) - 1);
+          const t = i === 0 ? "none"
+            : `scale(${V.camScale + k * 0.012}) translateX(${V.camDx * k}px)`;
           return (
             <Sequence key={i} from={from} durationInFrames={to - from} layout="none">
-              <AbsoluteFill><C /></AbsoluteFill>
+              <AbsoluteFill style={{ transform: t, transformOrigin: "50% 56%" }}><C /></AbsoluteFill>
             </Sequence>
           );
         })}
       </AssemblyCtx.Provider>
 
-      {SCENES.slice(1).map((sc, i) => <MissionCut key={"c" + i} at={IN[i + 1]} kind={sc.cut} />)}
+      {SCENES.slice(1).map((sc, i) => (
+        <MissionCut key={"c" + i} at={IN[i + 1]} kind={V.cuts[i % V.cuts.length]} />
+      ))}
 
       <ProgressBar />
-      <KaraokeCaption words={words as any} fps={FPS} top={1268} />
+      <KaraokeCaption words={words as any} fps={FPS} top={V.capTop} />
     </AbsoluteFill>
   );
 };
+
+export const BorisReel = makeReel({
+  Hook: MissionHook, hookCuts: HOOK_CUTS, bed: "boris_bed.wav",
+  cuts: SCENES.slice(1).map((x) => x.cut), camScale: 1, camDx: 0, capTop: 1268,
+});
+
+/* B — opens on the BREAK: violet, dark, a failure in the first frame. */
+export const BorisReelB = makeReel({
+  Hook: MissionHookB, hookCuts: HOOK_CUTS_B, bed: "boris_bed_b.wav",
+  cuts: ["iris", "sweep", "static", "iris", "sweep", "static", "iris", "sweep", "static"],
+  camScale: 1.035, camDx: 14, capTop: 1244,
+});
+
+/* C — opens on the BURN: amber, bright, full thrust in the first frame. */
+export const BorisReelC = makeReel({
+  Hook: MissionHookC, hookCuts: HOOK_CUTS_C, bed: "boris_bed_c.wav",
+  cuts: ["static", "iris", "sweep", "static", "iris", "sweep", "static", "iris", "sweep"],
+  camScale: 1.02, camDx: -18, capTop: 1292,
+});

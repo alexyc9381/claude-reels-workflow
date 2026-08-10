@@ -1,0 +1,1 @@
+Because of one GitHub repo almost nobody knows about, you might never have to pay for an API again. It lists 134 free APIs from over 40 providers, Gemini, Grok, and NVIDIA, all with a permanent free tier. One click setup, right inside Cursor, Claude Code or Codex. Everyone else hits their paid limits while you run the same models for free. Comment KEY and I'll send you the repo.

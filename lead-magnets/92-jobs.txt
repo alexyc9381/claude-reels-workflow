@@ -1,0 +1,54 @@
+TITLE   The Job Search System
+SUB     The open source setup that reads every posting for you, flags the fake ones, finds the human behind the portal, and writes your negotiation
+
+H       What this is
+P       career-ops is an open source job search project by Santiago Fernandez de Valderrama Aparicio, published on GitHub under the MIT licence. MIT is the permissive one: you can use it, change it, and use it commercially, as long as you keep the licence notice.
+P       It runs locally inside an AI coding tool you already have open. It does not log into job boards for you, it does not fill in application forms, and it does not send anything. It reads, judges, drafts, and hands the result back to you.
+P       Every number and claim below was read from the project's own repository on 6 August 2026. Anything that could not be confirmed from a primary source is marked as such instead of repeated.
+
+H       The facts, and where each one comes from
+B       Repository: github.com/santifer/career-ops
+B       Roughly 63,000 stars, read from the repository on 6 August 2026. The video says 62,000, which is what it read when the voiceover was recorded. It moves.
+B       Licence: MIT, stated in the repository
+B       The author's own track record with it, from the README: 740 or more job listings evaluated, 100 or more tailored CVs, one role landed, a Head of Applied AI position
+B       Scoring: every listing graded A to F, mapped onto a 1.0 to 5.0 score across ten weighted criteria
+B       Ghost job detection: a posting legitimacy check that flags scams and listings nobody is hiring for
+B       Outreach: it identifies the hiring manager you should contact and drafts the email, with a subject line, source backed fit points and an attachment checklist
+B       Negotiation: salary frameworks, competing offer leverage, and geographic discount pushback
+B       Offer stage: a contract reading companion that walks the clauses and produces a question list for a lawyer
+
+H       The four things, in the order you will actually use them
+NUM     THE READ. Point it at the listings you were going to apply to. It grades each one against your real background before you spend an evening on any of them. The output you want is not the grade, it is the reason: the specific line in the posting that makes it an A or an F for you.
+NUM     THE LEGITIMACY CHECK. Run it before you write anything. A posting that has been live for eleven months, reposted every few weeks, with no named hiring manager and a job title that reads like three jobs stapled together, is the pattern you are looking for. You did not fail those interviews. There were no interviews.
+NUM     THE HUMAN. This is the step people skip and it is the one that changes the reply rate. The portal is a queue. A named person with a real title is a conversation. Have it draft the email, then rewrite the first sentence yourself so it sounds like you.
+NUM     THE NEGOTIATION. Only run this once a number exists. Before that it is anxiety with extra steps. When the number does exist, the thing you want out of it is the counter-sentence and the reason attached to it, not a range.
+
+H       The part the video does not have room for: why your file never got read
+P       Most large employers run an applicant tracking system. Before a person sees your application, software parses your file into fields: name, employer, dates, titles, skills. Then it ranks you.
+P       If the parse fails, you do not get a rejection for being unqualified. You get filtered, and the filter has no opinion about you at all. These are the formatting choices that quietly break a parse, and none of them are about the writing.
+B       Multi column layouts. The parser reads across, not down, so a two column CV can interleave your job titles with your skills list into nonsense.
+B       Text inside a text box, header or footer. Plenty of parsers never look inside those, so a name and phone number placed in a header can simply vanish.
+B       Tables used for layout. Same problem as columns, and harder to spot because the borders are usually invisible.
+B       Graphics that carry information. Skill bars, rating dots, icons instead of labels. A parser sees an image and moves on.
+B       Non standard section headings. "Where I have worked" instead of "Experience". The parser is matching known words.
+B       Dates written only as years, or as ranges the parser cannot split. Use a month and a year, consistently, both sides of the dash.
+B       Uncommon fonts, or a PDF exported as an image. If you cannot select the text with your cursor, neither can the software.
+P       The fix is boring and it works: one column, real text, standard headings, month and year dates, and a file you can select text in.
+
+H       Running it yourself
+NUM     Open github.com/santifer/career-ops and read the README on the day you install it. It is the only description of the project that is current by definition.
+NUM     Follow the setup in that README rather than any blog post, this one included. Install steps for a fast moving project go stale in weeks.
+NUM     Give it your real CV and one real posting first. Judge it on a case where you already know the answer before you trust it on one where you do not.
+NUM     Check what it wants access to before you point it at anything sensitive. Your CV, your salary expectations and your employer history are the private parts of your life.
+
+H       One rule, and it is not optional
+P       Never let it invent a number.
+P       Any figure it puts on your CV or in your outreach has to be one you can defend out loud, in a room, without notes. If it writes "grew revenue 34 percent" and you do not know what that 34 percent was measured against, that sentence is a trap you set for yourself in the interview. Make it ask you for the figure instead of guessing, and if you do not have the figure, use the one you do have.
+P       The same rule applies to the negotiation output. A counter you cannot explain is worse than no counter.
+
+H       Honest limits of this guide
+P       This is a walkthrough of a project, not an endorsement of any outcome. The author's own results are the author's own results, and one person landing one role is not evidence about what will happen to you.
+P       It cannot make an employer reply. It removes the failure modes you control, which is a real advantage and a smaller one than the star count implies.
+P       Nothing here is legal advice. The contract reading step produces questions for a lawyer. It is not a substitute for one.
+
+KEY     JOBS

@@ -1,0 +1,42 @@
+TITLE   280 Automations You Do Not Have To Build
+SUB     A free GitHub repo of ready made n8n workflows. Import one file and it runs.
+
+H       What this actually is
+P       Most automation advice tells you to learn a tool and then build the thing yourself. This skips both steps. It is a folder of 280 finished n8n workflows, sorted into 18 categories. You download one file, import it, connect your accounts, and it runs.
+P       There is no builder to learn first. The wiring is already done.
+
+H       The repo
+P       github.com/enescingoz/awesome-n8n-templates
+B       24,302 stars
+B       280+ ready to use workflow templates
+B       18 categories
+B       Free, and no account needed to browse it
+
+H       The 18 categories
+P       Gmail and email automation, Telegram, Google Drive and Sheets, WordPress, PDF and document processing, Discord, database and storage, DevOps, Airtable, Notion, Slack, OpenAI and LLMs, WhatsApp, social media, other integrations, forms and surveys, AI research and RAG, and a catch all for the rest.
+P       One correction worth making, because you will notice it: the video says Stripe. Stripe is not in this repo. Every other integration named is, and there are 280 templates without it.
+
+H       Import your first one in about four minutes
+NUM     Open the repo and pick a category folder. Gmail and email automation is the easiest place to start, it has 29 templates.
+NUM     Open a .json file and click the raw button, then copy everything.
+NUM     In n8n, open a new workflow, click the three dots in the top right, and choose Import from Clipboard. Paste.
+NUM     The nodes appear already wired. Click each one that shows a warning triangle and connect your own account.
+NUM     Hit Execute Workflow once to test it, then toggle Active.
+
+H       Five worth importing first
+B       Gmail: auto label and sort incoming mail by intent
+B       WhatsApp: reply to inbound leads with a qualifying question
+B       Notion: turn a form submission into a database page
+B       Slack: post a daily digest of anything that changed
+B       OpenAI: summarise long documents into a short brief
+
+H       The three things that go wrong
+NUM     You skip the credential step. Almost every failed import is an unconnected account, not a broken template.
+NUM     You activate before testing. Run it manually once first, or you will not know which node failed.
+NUM     You import twenty at once. Do one, watch it work for a day, then add the next.
+
+H       The honest limitation
+P       These are templates, not products. They assume the tools you already use, and some will need a field renamed or a filter adjusted to fit your setup. What you are saving is the building, not the thinking. If you do not know what you want automated, a folder of 280 workflows will not tell you.
+
+RULE
+KEY     AUTO

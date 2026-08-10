@@ -1,0 +1,657 @@
+[
+{
+"start": 0.0,
+"end": 0.11,
+"word": " There"
+},
+{
+"start": 0.11,
+"end": 0.23,
+"word": " is"
+},
+{
+"start": 0.23,
+"end": 0.31,
+"word": " a"
+},
+{
+"start": 0.31,
+"end": 0.51,
+"word": " GitHub"
+},
+{
+"start": 0.32,
+"end": 0.5,
+"word": " repo"
+},
+{
+"start": 0.5,
+"end": 0.74,
+"word": " with"
+},
+{
+"start": 0.74,
+"end": 0.92,
+"word": " over"
+},
+{
+"start": 0.88,
+"end": 1.74,
+"word": " 18,000"
+},
+{
+"start": 1.74,
+"end": 1.96,
+"word": " stars"
+},
+{
+"start": 1.96,
+"end": 2.18,
+"word": " that"
+},
+{
+"start": 2.31,
+"end": 2.49,
+"word": " quietly"
+},
+{
+"start": 2.49,
+"end": 2.83,
+"word": " hands"
+},
+{
+"start": 2.83,
+"end": 2.99,
+"word": " you"
+},
+{
+"start": 2.99,
+"end": 3.33,
+"word": " 268"
+},
+{
+"start": 3.13,
+"end": 4.15,
+"word": " experts."
+},
+{
+"start": 4.94,
+"end": 5.02,
+"word": " An"
+},
+{
+"start": 5.02,
+"end": 5.36,
+"word": " engineer,"
+},
+{
+"start": 5.5,
+"end": 5.56,
+"word": " a"
+},
+{
+"start": 5.56,
+"end": 5.78,
+"word": " designer,"
+},
+{
+"start": 6.04,
+"end": 6.08,
+"word": " a"
+},
+{
+"start": 6.04,
+"end": 6.42,
+"word": " marketer,"
+},
+{
+"start": 6.42,
+"end": 6.52,
+"word": " a"
+},
+{
+"start": 6.52,
+"end": 6.72,
+"word": " lawyer,"
+},
+{
+"start": 7.05,
+"end": 7.17,
+"word": " 20"
+},
+{
+"start": 7.17,
+"end": 7.41,
+"word": " different"
+},
+{
+"start": 7.41,
+"end": 7.79,
+"word": " departments."
+},
+{
+"start": 7.98,
+"end": 8.06,
+"word": " Each"
+},
+{
+"start": 8.06,
+"end": 8.2,
+"word": " one"
+},
+{
+"start": 8.2,
+"end": 8.38,
+"word": " already"
+},
+{
+"start": 8.34,
+"end": 8.56,
+"word": " knows"
+},
+{
+"start": 8.56,
+"end": 8.68,
+"word": " its"
+},
+{
+"start": 8.68,
+"end": 8.86,
+"word": " job"
+},
+{
+"start": 9.0,
+"end": 9.12,
+"word": " and"
+},
+{
+"start": 9.12,
+"end": 9.28,
+"word": " what"
+},
+{
+"start": 9.28,
+"end": 9.38,
+"word": " it"
+},
+{
+"start": 9.38,
+"end": 9.48,
+"word": " should"
+},
+{
+"start": 9.65,
+"end": 9.79,
+"word": " give"
+},
+{
+"start": 9.79,
+"end": 10.01,
+"word": " back"
+},
+{
+"start": 10.01,
+"end": 10.19,
+"word": " to"
+},
+{
+"start": 10.19,
+"end": 10.33,
+"word": " you."
+},
+{
+"start": 10.56,
+"end": 10.66,
+"word": " It"
+},
+{
+"start": 10.66,
+"end": 10.76,
+"word": " works"
+},
+{
+"start": 10.76,
+"end": 10.96,
+"word": " in"
+},
+{
+"start": 10.96,
+"end": 11.12,
+"word": " Claude"
+},
+{
+"start": 10.96,
+"end": 11.22,
+"word": " Code,"
+},
+{
+"start": 11.52,
+"end": 11.56,
+"word": " Cursor,"
+},
+{
+"start": 11.78,
+"end": 12.08,
+"word": " Copilot,"
+},
+{
+"start": 12.36,
+"end": 12.54,
+"word": " 18"
+},
+{
+"start": 12.54,
+"end": 12.76,
+"word": " tools"
+},
+{
+"start": 12.76,
+"end": 12.94,
+"word": " in"
+},
+{
+"start": 12.94,
+"end": 13.1,
+"word": " total."
+},
+{
+"start": 13.76,
+"end": 13.82,
+"word": " Ask"
+},
+{
+"start": 13.82,
+"end": 13.94,
+"word": " it"
+},
+{
+"start": 13.94,
+"end": 14.02,
+"word": " for"
+},
+{
+"start": 14.02,
+"end": 14.2,
+"word": " something"
+},
+{
+"start": 14.12,
+"end": 14.36,
+"word": " like"
+},
+{
+"start": 14.36,
+"end": 14.46,
+"word": " a"
+},
+{
+"start": 14.46,
+"end": 14.6,
+"word": " landing"
+},
+{
+"start": 14.59,
+"end": 14.87,
+"word": " page"
+},
+{
+"start": 14.87,
+"end": 15.05,
+"word": " and"
+},
+{
+"start": 15.05,
+"end": 15.13,
+"word": " the"
+},
+{
+"start": 15.13,
+"end": 15.41,
+"word": " designer,"
+},
+{
+"start": 15.69,
+"end": 15.77,
+"word": " the"
+},
+{
+"start": 15.77,
+"end": 15.95,
+"word": " writer"
+},
+{
+"start": 15.82,
+"end": 16.1,
+"word": " and"
+},
+{
+"start": 16.1,
+"end": 16.22,
+"word": " the"
+},
+{
+"start": 16.22,
+"end": 16.48,
+"word": " engineer"
+},
+{
+"start": 16.67,
+"end": 16.95,
+"word": " all"
+},
+{
+"start": 16.95,
+"end": 17.15,
+"word": " show"
+},
+{
+"start": 17.06,
+"end": 17.2,
+"word": " up"
+},
+{
+"start": 17.2,
+"end": 17.3,
+"word": " and"
+},
+{
+"start": 17.3,
+"end": 17.46,
+"word": " split"
+},
+{
+"start": 17.36,
+"end": 17.52,
+"word": " the"
+},
+{
+"start": 17.52,
+"end": 17.66,
+"word": " work"
+},
+{
+"start": 17.66,
+"end": 17.9,
+"word": " between"
+},
+{
+"start": 17.92,
+"end": 18.16,
+"word": " them."
+},
+{
+"start": 18.86,
+"end": 18.92,
+"word": " You"
+},
+{
+"start": 18.92,
+"end": 19.02,
+"word": " never"
+},
+{
+"start": 19.02,
+"end": 19.22,
+"word": " have"
+},
+{
+"start": 19.05,
+"end": 19.17,
+"word": " to"
+},
+{
+"start": 19.17,
+"end": 19.39,
+"word": " explain"
+},
+{
+"start": 19.39,
+"end": 19.59,
+"word": " what"
+},
+{
+"start": 19.5,
+"end": 19.58,
+"word": " a"
+},
+{
+"start": 19.58,
+"end": 19.74,
+"word": " good"
+},
+{
+"start": 19.74,
+"end": 20.02,
+"word": " designer"
+},
+{
+"start": 20.05,
+"end": 20.25,
+"word": " would"
+},
+{
+"start": 20.25,
+"end": 20.39,
+"word": " do"
+},
+{
+"start": 20.39,
+"end": 20.59,
+"word": " since"
+},
+{
+"start": 20.66,
+"end": 20.86,
+"word": " one"
+},
+{
+"start": 20.86,
+"end": 21.0,
+"word": " is"
+},
+{
+"start": 21.0,
+"end": 21.18,
+"word": " already"
+},
+{
+"start": 21.17,
+"end": 21.37,
+"word": " in"
+},
+{
+"start": 21.37,
+"end": 21.51,
+"word": " there."
+},
+{
+"start": 21.93,
+"end": 21.97,
+"word": " While"
+},
+{
+"start": 21.97,
+"end": 22.25,
+"word": " everyone"
+},
+{
+"start": 22.25,
+"end": 22.47,
+"word": " else"
+},
+{
+"start": 22.6,
+"end": 22.88,
+"word": " opens"
+},
+{
+"start": 22.88,
+"end": 23.04,
+"word": " an"
+},
+{
+"start": 23.04,
+"end": 23.24,
+"word": " empty"
+},
+{
+"start": 23.04,
+"end": 23.18,
+"word": " chat"
+},
+{
+"start": 23.18,
+"end": 23.34,
+"word": " and"
+},
+{
+"start": 23.34,
+"end": 23.46,
+"word": " burns"
+},
+{
+"start": 23.58,
+"end": 23.88,
+"word": " five"
+},
+{
+"start": 23.88,
+"end": 24.16,
+"word": " minutes"
+},
+{
+"start": 24.16,
+"end": 24.5,
+"word": " describing"
+},
+{
+"start": 24.36,
+"end": 24.56,
+"word": " the"
+},
+{
+"start": 24.56,
+"end": 24.8,
+"word": " person"
+},
+{
+"start": 24.8,
+"end": 24.98,
+"word": " they"
+},
+{
+"start": 25.03,
+"end": 25.21,
+"word": " wish"
+},
+{
+"start": 25.21,
+"end": 25.39,
+"word": " they"
+},
+{
+"start": 25.39,
+"end": 25.45,
+"word": " were"
+},
+{
+"start": 25.48,
+"end": 25.68,
+"word": " talking"
+},
+{
+"start": 25.68,
+"end": 25.94,
+"word": " to,"
+},
+{
+"start": 26.0,
+"end": 26.12,
+"word": " you"
+},
+{
+"start": 26.12,
+"end": 26.2,
+"word": " already"
+},
+{
+"start": 26.2,
+"end": 26.38,
+"word": " have"
+},
+{
+"start": 26.38,
+"end": 26.6,
+"word": " all"
+},
+{
+"start": 26.59,
+"end": 26.73,
+"word": " of"
+},
+{
+"start": 26.73,
+"end": 26.79,
+"word": " the"
+},
+{
+"start": 26.79,
+"end": 27.03,
+"word": " experts"
+},
+{
+"start": 27.05,
+"end": 27.29,
+"word": " in"
+},
+{
+"start": 27.29,
+"end": 27.39,
+"word": " one"
+},
+{
+"start": 27.29,
+"end": 27.54,
+"word": " place."
+},
+{
+"start": 27.6,
+"end": 28.08,
+"word": " Comment"
+},
+{
+"start": 28.08,
+"end": 28.26,
+"word": " ROLES"
+},
+{
+"start": 28.26,
+"end": 28.364,
+"word": " and"
+},
+{
+"start": 28.364,
+"end": 28.468,
+"word": " I'll"
+},
+{
+"start": 28.364,
+"end": 28.464,
+"word": " send"
+},
+{
+"start": 28.464,
+"end": 28.568,
+"word": " you"
+},
+{
+"start": 28.568,
+"end": 28.672,
+"word": " the"
+},
+{
+"start": 28.672,
+"end": 28.872,
+"word": " repo."
+}
+]

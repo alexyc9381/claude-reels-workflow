@@ -1,0 +1,52 @@
+TITLE Open Generative AI
+SUB 400+ AI image and video models in one free desktop app, and how to drive them from Claude Code
+
+H What this actually is
+P Anil Matcha's Open Generative AI is an MIT licensed desktop app that puts 400+ image and video models behind one interface. Verified 2026-08-07: 25,757 stars, 4,527 forks, 400+ models across 14 studios.
+P There is no subscription, because you supply the key. That is the part the video does not have time to explain, and it is the whole reason the thing is free.
+
+H The three ways to run it
+NUM Desktop app. One click installers for macOS, Windows and Linux. No Node.js and no terminal required.
+NUM Hosted in your browser. Every studio, no install, no Node.js, no setup. You sign up for a free account.
+NUM Self hosted. It is MIT, so you can host it yourself and customise the whole app.
+
+H Setup, step by step
+NUM Open the repo at github.com/Anil-matcha/Open-Generative-AI
+NUM Download the installer for your OS from the Releases page.
+NUM Windows only: SmartScreen will warn you because the installer is not code signed yet. Click "More info", then "Run anyway".
+NUM Open the app and add your API key, or install the bundled sd.cpp engine to run image models locally on your own GPU.
+NUM Pick a studio, pick a model, type your prompt, hit generate.
+
+H Why it costs nothing
+P Two independent routes, and you can mix them.
+B Bring your own key. The app stores your API key locally and calls the model provider directly, so you pay the provider's rate and nothing else.
+B Run locally. sd.cpp ships bundled and runs on the same machine as the app. Metal GPU on Apple Silicon, CUDA, Vulkan or ROCm on Linux and Windows. Image models only.
+
+H Cinema Studio, the part most people miss
+P Most AI video tools give you a prompt box. Cinema Studio gives you a camera.
+B 11 lenses, including Classic Anamorphic, Vintage Prime, Swirl Bokeh Portrait and Halation Diffusion
+B 6 focal lengths: 8mm ultra wide, 14mm, 24mm, 35mm, 50mm, 85mm
+B An aperture control, so depth of field is a setting rather than a hope
+P Picking a 85mm at a wide aperture gets you the shot. Typing the word "cinematic" does not.
+
+H The 14 studios
+P Image, Video, Audio, AI Clipping, Vibe Motion, Lip Sync, Recast, Cinema, Marketing, Workflow, Agent, Design Agent, Apps, AI Influencer, plus MCP and CLI access.
+
+H The second repo, and the real unlock
+P Generative-Media-Skills is a separate free library at github.com/SamurAIGPT/Generative-Media-Skills
+P It lets coding agents like Claude Code and Codex drive 200+ image and video models end to end, straight from your terminal: prompt, generate, edit, stitch. No interface at all.
+QUOTE That is the difference between a tool you open and a pipeline that runs while you do something else.
+
+H A workflow worth stealing
+NUM Write your shot list as a plain text file.
+NUM Point Claude Code at it with the skills library installed.
+NUM Let it generate each shot, pick the best take, and stitch the sequence.
+NUM Open the desktop app only for the shots you want to art direct by hand in Cinema Studio.
+
+H Honest notes
+B The Windows installer is not code signed yet. The SmartScreen warning is expected.
+B The bundled local engine handles image models. Video models go through your API key.
+B The repo names 400+ models in its README. Its description says 500+ and an internal count says 420+. The 400+ figure is the one used here because it is the README's own headline.
+
+RULE
+KEY Comment VIDEO on the reel and I will send you both repos plus this guide.

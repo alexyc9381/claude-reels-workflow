@@ -1,0 +1,31 @@
+Comment "TOOLS" and I'll send you the repo.
+
+👇 READ BELOW
+
+Every AI chatbot gets a set of hidden instructions before your first message ever reaches it. Someone has been collecting them. 184 of them, captured verbatim, and released into the public domain.
+
+asgeirtj/system_prompts_leaks. 62,597 stars, 10,288 forks, CC0.
+
+★ Anthropic: Claude Fable 5, Opus 5, Sonnet 5, Claude Code, and Claude Design with 53 tools and 22 skills
+★ OpenAI: ChatGPT GPT-5.6 Sol and Codex
+★ Google: Gemini 3.5 Flash, 3.1 Pro, Antigravity
+★ xAI: Grok 4.5 and Grok Build
+★ Plus Cursor, Copilot, Perplexity, Kimi, DeepSeek, Mistral, Notion AI, Qwen and more across 18 companies
+
+CC0 is the part most people miss. That is not MIT. It is a public domain dedication: no licence terms, no attribution, nothing to comply with. You can paste any of it anywhere.
+
+There is nothing to install. No app, no CLI, no skill. It is 184 markdown files and you clone the folder.
+
+The part nobody mentions: a system prompt is written for a specific model with specific tools. Pasting Claude's instructions into a small open model gives you Claude's INSTRUCTIONS, not Claude's capabilities. Strip every line that references a tool your model does not have, keep the skeleton, and test it against your own task before you believe anything.
+
+And even if you never swap a model, read three of these back to back. They are the most carefully edited prompts in the industry, written by teams with millions of users and real liability. Watch how few refusal rules there are, how early the output format is pinned, and how much of each one is spent on what NOT to do.
+
+The Washington Post built an interactive story on this repo. That is how real the contents are.
+
+Comment "TOOLS" and I'll send you the repo plus the guide.
+
+.
+.
+.
+
+#promptengineering #systemprompt #aitools #chatgpt #claudeai #gemini #grok #opensource #github #llm #aiengineering #devtools #freetools #aiworkflow #buildinpublic #codingtips #generativeai #airesearch

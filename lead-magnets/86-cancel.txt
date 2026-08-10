@@ -1,0 +1,67 @@
+TITLE   Cancel All Five
+SUB     The open source replacements for five apps you pay for every month, with the install command for each
+
+H       What this is
+P       Five subscriptions you are probably paying for right now have full open source replacements. Not free tiers with the good parts removed. The whole application, on your machine, with the source in the open.
+P       Between them the five projects below have 176,656 stars on GitHub. Every number in this guide was read from the GitHub API on 31 July 2026, and every install line was taken from the project's own README, not from a blog post about it.
+
+H       The five, ranked by stars
+B       AppFlowy, 74,690 stars, replaces Notion
+B       OpenMontage, 44,388 stars, replaces HiggsField
+B       Jan, 43,792 stars, replaces ChatGPT Plus
+B       Presenton, 9,268 stars, replaces Canva
+B       OpenPencil, 4,518 stars, replaces Figma
+
+H       1. AppFlowy, instead of Notion
+P       github.com/AppFlowy-IO/AppFlowy
+P       Docs, wikis, databases and boards, with the data in a local database instead of someone else's account. There is a desktop build for macOS, Windows and Linux, so this is the easiest of the five to move to.
+NUM     Download the desktop app from github.com/AppFlowy-IO/AppFlowy/releases
+NUM     Or install from a store channel: FlatHub, Snapcraft or Sourceforge all carry it.
+NUM     If you want it on your own server rather than your laptop, the self hosting guide is at appflowy.com/docs, under Step by step Self Hosting Guide.
+P       The migration nobody mentions: export your Notion workspace as Markdown and CSV first, while you still have a paid account. Notion export is a paid feature on some plans, so do it before you cancel, not after.
+
+H       2. OpenMontage, instead of HiggsField
+P       github.com/calesthio/OpenMontage
+P       An agentic video production system. You describe the video you want and it plans, generates and assembles the whole thing. It is a Python project, so it wants a little more setup than a desktop app.
+NUM     Install Python and ffmpeg first. Both are prerequisites the README names explicitly.
+NUM     git clone https://github.com/calesthio/OpenMontage.git
+NUM     cd OpenMontage
+NUM     python -m backlot open
+P       That last command opens the library view, which is every project on disk. To watch one run without setting up a production first, the repo ships a simulation: python scripts/backlot_simulate_run.py
+
+H       3. Jan, instead of ChatGPT Plus
+P       github.com/janhq/jan
+P       A desktop chat app that runs models locally. No account, no monthly bill, and it keeps working with the wifi off, which is the part that actually changes how you use it.
+NUM     Download the desktop build from jan.ai. The direct links are app.jan.ai/download/latest/mac-universal for macOS and app.jan.ai/download/latest/win-x64 for Windows.
+NUM     Open it and pull a model from the built in hub.
+NUM     If you would rather build from source: git clone https://github.com/janhq/jan, then cd jan, then make dev
+P       Worth knowing before you switch: a local model runs at the speed of your machine, not a data centre. On a laptop with 16GB of memory, pick a smaller model first and move up. The gap closes fast, and nothing you type leaves the room.
+
+H       4. Presenton, instead of Canva
+P       github.com/presenton/presenton
+P       Generates presentations from a prompt, and exposes an API so you can call it from something else. It runs as a container, which sounds like more work than it is.
+NUM     Install Docker Desktop if you do not have it.
+NUM     Run the container the README gives, on one line: docker run -it --name presenton -p 5001:80 -e AUTH_USERNAME=admin -e AUTH_PASSWORD=change-this-password -v "./app_data:/app_data" ghcr.io/presenton/presenton:latest
+NUM     Open localhost:5001 and log in with the username and password you just set.
+NUM     To stop and remove it later: docker stop presenton then docker rm presenton
+P       Change that password before you run it, not after. The command above is the README's example and it ships with a placeholder on purpose.
+
+H       5. OpenPencil, instead of Figma
+P       github.com/ZSeven-W/openpencil
+P       An AI native vector design tool. The newest of the five and the smallest, so treat it as the one to try rather than the one to bet a client project on this week.
+NUM     On macOS with Homebrew: brew tap zseven-w/openpencil
+NUM     Then: brew install --cask openpencil
+NUM     On anything else, take the build from github.com/ZSeven-W/openpencil/releases
+
+H       The thing the video did not have time for
+P       The reason to move is not the money. It is that a subscription owns the door to your own work. Stop paying and the files are still there, they are just behind a login you no longer have. Every tool in this list keeps its files on your disk in a format you can open with something else, which means leaving costs you nothing and you never have to make this decision under pressure.
+P       So the order matters. Export from the paid tool first, while the account is still live. Import into the open source one. Use both for a fortnight. Then cancel. Doing it the other way round is how people end up paying for another month just to get their own documents out.
+
+H       Before you switch anything
+NUM     Export everything from the paid tool while your account still works.
+NUM     Run the open source one alongside it for two weeks. Do not migrate and cancel on the same day.
+NUM     Check the licence if this is for client work. All five are open source, but open source is not one licence, and the terms differ.
+NUM     Star the repo you end up keeping. It is the only currency these projects run on, and it is what put the number in the video.
+
+RULE
+KEY     CANCEL

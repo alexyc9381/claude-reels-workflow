@@ -1,0 +1,56 @@
+TITLE The Agency
+SUB 270 specialist AI agents across 17 divisions, free and MIT licensed, installed into Claude Code in one click
+
+H What this actually is
+P The Agency is msitarzewski/agency-agents on GitHub: a library of AI agent personas, each one a written specialist rather than a generic prompt template. Verified 2026-08-08: 139,604 stars, 22,798 forks, MIT licence.
+P The README's own headline figure is "230+ agents across every division". Counting the roster tables in the README today gives 270 named agents across 17 divisions. Both numbers are the repo's, and the gap is just the README's headline lagging the roster.
+P It began as a Reddit thread about agent specialisation. Contributors have been adding to it ever since, which is why the roster keeps moving.
+
+H The 17 divisions, and how deep each one goes
+B Engineering 58 · Specialized 56 · Marketing 36 · Game Development 21
+B GIS 13 · Security 12 · Design 10 · Sales 10 · Testing 9
+B Paid Media 7 · Project Management 7 · Support 6 · Spatial Computing 6 · Academic 6
+B Product 5 · Finance 5 · Healthcare 3
+P Engineering and Specialized alone are 114 agents, so if you only ever install two divisions, those are the two that cover the most ground.
+
+H The three agents from the video, and where to find them
+NUM Frontend Developer, in the Engineering division. React, Vue and Angular, UI implementation, Core Web Vitals.
+NUM Ad Creative Strategist, in the Paid Media division, alongside a PPC Campaign Strategist, a Search Query Analyst and a Paid Media Auditor.
+NUM Reddit Community Builder, in the Marketing division. Its own line in the repo: you are not marketing on Reddit, you are becoming a valued community member who happens to represent a brand.
+
+H Install it, four ways
+NUM The desktop app, which is the fastest route. It is a second free repo, msitarzewski/agency-agents-app, native for macOS, Windows and Linux. It browses the whole roster and installs into your tools for you, then keeps them updated. No clone, no scripts.
+NUM Homebrew on a Mac: brew install --cask msitarzewski/agency-agents/agency-agents
+NUM Claude Code from the repo: ./scripts/install.sh --tool claude-code
+NUM Copy a single division by hand: cp engineering/*.md ~/.claude/agents/
+
+H Do not install all 270 at once
+P The install script takes a division filter, and using it is the difference between a roster you can navigate and 270 files you never read.
+B ./scripts/install.sh --tool claude-code --division engineering,security
+B ./scripts/install.sh --tool cursor --agent frontend-developer,ui-designer
+B ./scripts/install.sh --list teams shows every team and its agent count before you commit to anything.
+B Add --dry-run to any of the above to see what it would write.
+
+H It is not just Claude Code
+P The same agents convert to 13 other tools. Run ./scripts/convert.sh once, then ./scripts/install.sh --tool with any of these: GitHub Copilot, Antigravity, Gemini CLI, OpenCode, OpenClaw, Cursor, Aider, Windsurf, Kimi Code, Codex, Osaurus, Hermes, Mistral Vibe.
+
+H What is actually inside one agent file
+B An identity and a set of personality traits, so the voice is consistent across a session
+B A core mission and the workflow it follows
+B Technical deliverables with code examples
+B Success metrics, which is the part most prompt libraries skip
+P That last one is why these behave differently from a pasted system prompt. The agent has a definition of done.
+
+H How to actually use one
+NUM Install the division you need, not the whole roster.
+NUM Name the agent at the start of the session: activate Frontend Developer mode and help me build this component.
+NUM Give it the deliverable, not the task. These agents are written around outputs.
+NUM Chain them in the order a real agency would: Trend Researcher, then UI Designer, then Frontend Developer, then Reality Checker.
+
+H Honest notes
+B OpenCode's runtime currently registers only about 119 agents and silently drops the rest. Installing a subset with --division keeps you under that limit, and the installer warns you when a selection would exceed it.
+B The roster is community contributed, so quality varies by division. The older divisions, Engineering and Design, are the most battle tested.
+B MIT means you can fork it, ship it, edit any agent to your own house style, and sell the work. That is the part "free" undersells.
+
+RULE
+KEY Comment AGENCY on the reel and I will send you the repo plus this guide.

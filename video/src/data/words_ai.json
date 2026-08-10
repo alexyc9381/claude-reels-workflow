@@ -1,0 +1,637 @@
+[
+{
+"start": 0.0,
+"end": 0.21,
+"word": " 99%"
+},
+{
+"start": 0.55,
+"end": 0.65,
+"word": " of"
+},
+{
+"start": 0.65,
+"end": 0.77,
+"word": " Claude"
+},
+{
+"start": 0.67,
+"end": 0.93,
+"word": " users"
+},
+{
+"start": 0.93,
+"end": 1.33,
+"word": " don't"
+},
+{
+"start": 1.33,
+"end": 1.43,
+"word": " know"
+},
+{
+"start": 1.57,
+"end": 1.65,
+"word": " this"
+},
+{
+"start": 1.65,
+"end": 1.89,
+"word": " exists."
+},
+{
+"start": 2.22,
+"end": 2.26,
+"word": " I"
+},
+{
+"start": 2.26,
+"end": 2.36,
+"word": " just"
+},
+{
+"start": 2.36,
+"end": 2.52,
+"word": " gave"
+},
+{
+"start": 2.47,
+"end": 2.67,
+"word": " Claude"
+},
+{
+"start": 2.67,
+"end": 2.93,
+"word": " infinite"
+},
+{
+"start": 2.93,
+"end": 3.33,
+"word": " memory"
+},
+{
+"start": 3.23,
+"end": 3.41,
+"word": " for"
+},
+{
+"start": 3.41,
+"end": 3.57,
+"word": " basically"
+},
+{
+"start": 3.57,
+"end": 4.09,
+"word": " zero"
+},
+{
+"start": 4.38,
+"end": 4.72,
+"word": " tokens."
+},
+{
+"start": 4.86,
+"end": 5.0,
+"word": " Here's"
+},
+{
+"start": 5.0,
+"end": 5.08,
+"word": " the"
+},
+{
+"start": 5.08,
+"end": 5.3,
+"word": " problem."
+},
+{
+"start": 5.83,
+"end": 5.89,
+"word": " Every"
+},
+{
+"start": 5.89,
+"end": 6.13,
+"word": " new"
+},
+{
+"start": 6.13,
+"end": 6.33,
+"word": " chat"
+},
+{
+"start": 6.25,
+"end": 6.45,
+"word": " starts"
+},
+{
+"start": 6.45,
+"end": 6.63,
+"word": " from"
+},
+{
+"start": 6.63,
+"end": 6.87,
+"word": " zero"
+},
+{
+"start": 7.15,
+"end": 7.37,
+"word": " again,"
+},
+{
+"start": 7.57,
+"end": 7.61,
+"word": " so"
+},
+{
+"start": 7.61,
+"end": 7.69,
+"word": " you"
+},
+{
+"start": 7.69,
+"end": 7.93,
+"word": " basically"
+},
+{
+"start": 7.69,
+"end": 7.93,
+"word": " burn"
+},
+{
+"start": 7.93,
+"end": 8.07,
+"word": " those"
+},
+{
+"start": 8.07,
+"end": 8.27,
+"word": " tokens"
+},
+{
+"start": 8.31,
+"end": 8.61,
+"word": " just"
+},
+{
+"start": 8.61,
+"end": 9.03,
+"word": " reloading"
+},
+{
+"start": 9.03,
+"end": 9.13,
+"word": " the"
+},
+{
+"start": 9.13,
+"end": 9.31,
+"word": " same"
+},
+{
+"start": 9.58,
+"end": 9.96,
+"word": " context"
+},
+{
+"start": 9.96,
+"end": 10.36,
+"word": " over"
+},
+{
+"start": 10.36,
+"end": 10.48,
+"word": " and"
+},
+{
+"start": 10.48,
+"end": 10.66,
+"word": " over"
+},
+{
+"start": 10.53,
+"end": 10.75,
+"word": " again."
+},
+{
+"start": 10.93,
+"end": 11.03,
+"word": " But"
+},
+{
+"start": 11.03,
+"end": 11.11,
+"word": " when"
+},
+{
+"start": 11.11,
+"end": 11.19,
+"word": " you"
+},
+{
+"start": 11.19,
+"end": 11.37,
+"word": " connect"
+},
+{
+"start": 11.27,
+"end": 11.59,
+"word": " Claude"
+},
+{
+"start": 11.59,
+"end": 11.75,
+"word": " to"
+},
+{
+"start": 11.75,
+"end": 12.17,
+"word": " NotebookLM"
+},
+{
+"start": 12.58,
+"end": 12.74,
+"word": " something"
+},
+{
+"start": 12.74,
+"end": 13.06,
+"word": " crazy"
+},
+{
+"start": 13.06,
+"end": 13.56,
+"word": " happens."
+},
+{
+"start": 13.43,
+"end": 13.67,
+"word": " Claude"
+},
+{
+"start": 13.67,
+"end": 14.05,
+"word": " suddenly"
+},
+{
+"start": 14.05,
+"end": 14.23,
+"word": " gets"
+},
+{
+"start": 14.19,
+"end": 14.31,
+"word": " a"
+},
+{
+"start": 14.31,
+"end": 14.59,
+"word": " second"
+},
+{
+"start": 14.59,
+"end": 14.79,
+"word": " brain"
+},
+{
+"start": 14.83,
+"end": 14.99,
+"word": " that"
+},
+{
+"start": 14.99,
+"end": 15.15,
+"word": " never"
+},
+{
+"start": 15.15,
+"end": 15.65,
+"word": " forgets,"
+},
+{
+"start": 16.01,
+"end": 16.17,
+"word": " so"
+},
+{
+"start": 16.17,
+"end": 16.23,
+"word": " you"
+},
+{
+"start": 16.23,
+"end": 16.33,
+"word": " get"
+},
+{
+"start": 16.28,
+"end": 16.5,
+"word": " persistent"
+},
+{
+"start": 16.5,
+"end": 17.0,
+"word": " memory"
+},
+{
+"start": 17.0,
+"end": 17.18,
+"word": " across"
+},
+{
+"start": 17.4,
+"end": 17.68,
+"word": " every"
+},
+{
+"start": 17.68,
+"end": 18.08,
+"word": " session,"
+},
+{
+"start": 18.26,
+"end": 18.34,
+"word": " way"
+},
+{
+"start": 18.26,
+"end": 18.33,
+"word": " lower"
+},
+{
+"start": 18.33,
+"end": 18.57,
+"word": " token"
+},
+{
+"start": 18.57,
+"end": 18.85,
+"word": " costs,"
+},
+{
+"start": 19.36,
+"end": 19.48,
+"word": " plus"
+},
+{
+"start": 19.48,
+"end": 19.78,
+"word": " free"
+},
+{
+"start": 19.78,
+"end": 20.2,
+"word": " infographics,"
+},
+{
+"start": 20.21,
+"end": 20.61,
+"word": " cinematic"
+},
+{
+"start": 20.61,
+"end": 21.11,
+"word": " videos,"
+},
+{
+"start": 21.29,
+"end": 21.33,
+"word": " and"
+},
+{
+"start": 21.31,
+"end": 21.51,
+"word": " deep"
+},
+{
+"start": 21.61,
+"end": 21.89,
+"word": " research"
+},
+{
+"start": 21.89,
+"end": 22.15,
+"word": " all"
+},
+{
+"start": 22.15,
+"end": 22.39,
+"word": " inside"
+},
+{
+"start": 22.46,
+"end": 22.62,
+"word": " of"
+},
+{
+"start": 22.62,
+"end": 23.06,
+"word": " NotebookLM."
+},
+{
+"start": 23.43,
+"end": 23.47,
+"word": " The"
+},
+{
+"start": 23.47,
+"end": 23.69,
+"word": " secret"
+},
+{
+"start": 23.51,
+"end": 23.71,
+"word": " is"
+},
+{
+"start": 23.71,
+"end": 23.79,
+"word": " a"
+},
+{
+"start": 23.79,
+"end": 24.09,
+"word": " wrap-up"
+},
+{
+"start": 24.09,
+"end": 24.31,
+"word": " skill."
+},
+{
+"start": 24.74,
+"end": 24.98,
+"word": " After"
+},
+{
+"start": 24.98,
+"end": 25.24,
+"word": " each"
+},
+{
+"start": 25.24,
+"end": 25.54,
+"word": " session"
+},
+{
+"start": 25.34,
+"end": 25.56,
+"word": " it"
+},
+{
+"start": 25.56,
+"end": 25.68,
+"word": " saves"
+},
+{
+"start": 25.68,
+"end": 25.84,
+"word": " the"
+},
+{
+"start": 25.84,
+"end": 26.12,
+"word": " entire"
+},
+{
+"start": 26.16,
+"end": 26.58,
+"word": " conversation"
+},
+{
+"start": 26.58,
+"end": 26.96,
+"word": " into"
+},
+{
+"start": 26.96,
+"end": 27.5,
+"word": " NotebookLM."
+},
+{
+"start": 27.48,
+"end": 28.0,
+"word": " Then"
+},
+{
+"start": 28.0,
+"end": 28.2,
+"word": " Claude"
+},
+{
+"start": 28.2,
+"end": 28.36,
+"word": " just"
+},
+{
+"start": 28.28,
+"end": 28.46,
+"word": " pulls"
+},
+{
+"start": 28.46,
+"end": 28.76,
+"word": " whatever"
+},
+{
+"start": 28.76,
+"end": 28.94,
+"word": " it"
+},
+{
+"start": 28.94,
+"end": 29.06,
+"word": " needs"
+},
+{
+"start": 29.05,
+"end": 29.19,
+"word": " with"
+},
+{
+"start": 29.19,
+"end": 29.43,
+"word": " semantic"
+},
+{
+"start": 29.43,
+"end": 29.77,
+"word": " search."
+},
+{
+"start": 30.41,
+"end": 30.49,
+"word": " This"
+},
+{
+"start": 30.49,
+"end": 30.71,
+"word": " one"
+},
+{
+"start": 30.71,
+"end": 30.95,
+"word": " setup"
+},
+{
+"start": 30.91,
+"end": 31.21,
+"word": " changes"
+},
+{
+"start": 31.21,
+"end": 31.63,
+"word": " everything."
+},
+{
+"start": 32.11,
+"end": 32.27,
+"word": " Comment"
+},
+{
+"start": 32.27,
+"end": 32.49,
+"word": " AI"
+},
+{
+"start": 32.49,
+"end": 32.71,
+"word": " below"
+},
+{
+"start": 32.64,
+"end": 32.78,
+"word": " and"
+},
+{
+"start": 32.78,
+"end": 32.86,
+"word": " I'll"
+},
+{
+"start": 32.86,
+"end": 33.0,
+"word": " send"
+},
+{
+"start": 32.87,
+"end": 32.97,
+"word": " you"
+},
+{
+"start": 32.97,
+"end": 33.07,
+"word": " the"
+},
+{
+"start": 33.07,
+"end": 33.19,
+"word": " exact"
+},
+{
+"start": 33.35,
+"end": 33.77,
+"word": " guide."
+}
+]

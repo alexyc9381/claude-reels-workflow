@@ -1,0 +1,997 @@
+[
+{
+"start": 0.0,
+"end": 0.18,
+"word": " I"
+},
+{
+"start": 0.18,
+"end": 0.4,
+"word": " turned"
+},
+{
+"start": 0.4,
+"end": 0.7,
+"word": " Haaland"
+},
+{
+"start": 0.7,
+"end": 0.96,
+"word": " into"
+},
+{
+"start": 0.96,
+"end": 1.24,
+"word": " a"
+},
+{
+"start": 1.24,
+"end": 1.28,
+"word": " Claude"
+},
+{
+"start": 1.28,
+"end": 1.5,
+"word": " code"
+},
+{
+"start": 1.5,
+"end": 1.78,
+"word": " agent,"
+},
+{
+"start": 1.94,
+"end": 2.0,
+"word": " and"
+},
+{
+"start": 2.0,
+"end": 2.16,
+"word": " it's"
+},
+{
+"start": 2.16,
+"end": 2.48,
+"word": " honestly"
+},
+{
+"start": 2.48,
+"end": 2.62,
+"word": " a"
+},
+{
+"start": 2.62,
+"end": 2.8,
+"word": " little"
+},
+{
+"start": 2.8,
+"end": 3.3,
+"word": " terrifying."
+},
+{
+"start": 3.52,
+"end": 3.66,
+"word": " On"
+},
+{
+"start": 3.66,
+"end": 3.76,
+"word": " the"
+},
+{
+"start": 3.76,
+"end": 3.94,
+"word": " field,"
+},
+{
+"start": 4.08,
+"end": 4.1,
+"word": " he"
+},
+{
+"start": 4.1,
+"end": 4.36,
+"word": " charges"
+},
+{
+"start": 4.36,
+"end": 4.54,
+"word": " at"
+},
+{
+"start": 4.54,
+"end": 4.8,
+"word": " defenders"
+},
+{
+"start": 4.8,
+"end": 4.98,
+"word": " like"
+},
+{
+"start": 4.98,
+"end": 5.12,
+"word": " a"
+},
+{
+"start": 5.12,
+"end": 5.24,
+"word": " freight"
+},
+{
+"start": 5.24,
+"end": 5.5,
+"word": " train"
+},
+{
+"start": 5.5,
+"end": 5.62,
+"word": " and"
+},
+{
+"start": 5.62,
+"end": 5.76,
+"word": " runs"
+},
+{
+"start": 5.76,
+"end": 6.14,
+"word": " straight"
+},
+{
+"start": 6.14,
+"end": 6.36,
+"word": " through"
+},
+{
+"start": 6.36,
+"end": 6.54,
+"word": " them."
+},
+{
+"start": 6.68,
+"end": 6.76,
+"word": " He"
+},
+{
+"start": 6.76,
+"end": 6.88,
+"word": " hits"
+},
+{
+"start": 6.88,
+"end": 7.0,
+"word": " the"
+},
+{
+"start": 7.0,
+"end": 7.1,
+"word": " ball"
+},
+{
+"start": 7.1,
+"end": 7.36,
+"word": " so"
+},
+{
+"start": 7.36,
+"end": 7.58,
+"word": " hard"
+},
+{
+"start": 7.58,
+"end": 7.7,
+"word": " it"
+},
+{
+"start": 7.7,
+"end": 7.92,
+"word": " nearly"
+},
+{
+"start": 7.92,
+"end": 8.28,
+"word": " drags"
+},
+{
+"start": 8.28,
+"end": 8.4,
+"word": " the"
+},
+{
+"start": 8.4,
+"end": 8.58,
+"word": " keeper"
+},
+{
+"start": 8.58,
+"end": 8.88,
+"word": " into"
+},
+{
+"start": 8.88,
+"end": 9.08,
+"word": " the"
+},
+{
+"start": 9.08,
+"end": 9.2,
+"word": " net"
+},
+{
+"start": 9.2,
+"end": 9.36,
+"word": " with"
+},
+{
+"start": 9.36,
+"end": 9.54,
+"word": " it."
+},
+{
+"start": 9.62,
+"end": 9.76,
+"word": " No"
+},
+{
+"start": 9.76,
+"end": 10.08,
+"word": " emotion,"
+},
+{
+"start": 10.26,
+"end": 10.3,
+"word": " no"
+},
+{
+"start": 10.3,
+"end": 10.52,
+"word": " chill,"
+},
+{
+"start": 10.62,
+"end": 10.68,
+"word": " he"
+},
+{
+"start": 10.68,
+"end": 10.8,
+"word": " just"
+},
+{
+"start": 10.8,
+"end": 11.04,
+"word": " scores"
+},
+{
+"start": 11.04,
+"end": 11.22,
+"word": " and"
+},
+{
+"start": 11.22,
+"end": 11.5,
+"word": " immediately"
+},
+{
+"start": 11.5,
+"end": 11.88,
+"word": " wants"
+},
+{
+"start": 11.88,
+"end": 12.02,
+"word": " the"
+},
+{
+"start": 12.02,
+"end": 12.16,
+"word": " next"
+},
+{
+"start": 12.16,
+"end": 12.4,
+"word": " one."
+},
+{
+"start": 12.6,
+"end": 12.82,
+"word": " So"
+},
+{
+"start": 12.82,
+"end": 12.92,
+"word": " I"
+},
+{
+"start": 12.92,
+"end": 13.04,
+"word": " built"
+},
+{
+"start": 13.04,
+"end": 13.2,
+"word": " a"
+},
+{
+"start": 13.2,
+"end": 13.36,
+"word": " Claude"
+},
+{
+"start": 13.36,
+"end": 13.66,
+"word": " agent,"
+},
+{
+"start": 13.82,
+"end": 14.0,
+"word": " called"
+},
+{
+"start": 14.0,
+"end": 14.12,
+"word": " it"
+},
+{
+"start": 14.12,
+"end": 14.34,
+"word": " Haaland,"
+},
+{
+"start": 14.48,
+"end": 14.54,
+"word": " and"
+},
+{
+"start": 14.54,
+"end": 14.66,
+"word": " gave"
+},
+{
+"start": 14.66,
+"end": 14.78,
+"word": " it"
+},
+{
+"start": 14.78,
+"end": 14.9,
+"word": " that"
+},
+{
+"start": 14.9,
+"end": 15.26,
+"word": " exact"
+},
+{
+"start": 15.26,
+"end": 15.62,
+"word": " brain."
+},
+{
+"start": 15.78,
+"end": 15.9,
+"word": " And"
+},
+{
+"start": 15.9,
+"end": 16.02,
+"word": " the"
+},
+{
+"start": 16.02,
+"end": 16.28,
+"word": " second"
+},
+{
+"start": 16.28,
+"end": 16.44,
+"word": " I"
+},
+{
+"start": 16.44,
+"end": 16.54,
+"word": " put"
+},
+{
+"start": 16.54,
+"end": 16.64,
+"word": " it"
+},
+{
+"start": 16.64,
+"end": 16.72,
+"word": " to"
+},
+{
+"start": 16.72,
+"end": 16.9,
+"word": " work,"
+},
+{
+"start": 17.0,
+"end": 17.08,
+"word": " it"
+},
+{
+"start": 17.08,
+"end": 17.18,
+"word": " was"
+},
+{
+"start": 17.18,
+"end": 17.3,
+"word": " a"
+},
+{
+"start": 17.3,
+"end": 17.64,
+"word": " completely"
+},
+{
+"start": 17.64,
+"end": 17.94,
+"word": " different"
+},
+{
+"start": 17.94,
+"end": 18.28,
+"word": " animal."
+},
+{
+"start": 18.52,
+"end": 18.72,
+"word": " Normal"
+},
+{
+"start": 18.72,
+"end": 19.0,
+"word": " Claude"
+},
+{
+"start": 19.0,
+"end": 19.2,
+"word": " writes"
+},
+{
+"start": 19.2,
+"end": 19.4,
+"word": " half"
+},
+{
+"start": 19.4,
+"end": 19.52,
+"word": " a"
+},
+{
+"start": 19.52,
+"end": 19.7,
+"word": " feature"
+},
+{
+"start": 19.7,
+"end": 19.88,
+"word": " and"
+},
+{
+"start": 19.88,
+"end": 20.06,
+"word": " goes,"
+},
+{
+"start": 20.24,
+"end": 20.34,
+"word": " want"
+},
+{
+"start": 20.34,
+"end": 20.44,
+"word": " me"
+},
+{
+"start": 20.44,
+"end": 20.54,
+"word": " to"
+},
+{
+"start": 20.54,
+"end": 20.66,
+"word": " keep"
+},
+{
+"start": 20.66,
+"end": 20.96,
+"word": " going?"
+},
+{
+"start": 21.18,
+"end": 21.4,
+"word": " Haaland"
+},
+{
+"start": 21.4,
+"end": 21.72,
+"word": " never"
+},
+{
+"start": 21.72,
+"end": 21.94,
+"word": " asked"
+},
+{
+"start": 21.94,
+"end": 22.12,
+"word": " me"
+},
+{
+"start": 22.12,
+"end": 22.34,
+"word": " once."
+},
+{
+"start": 22.52,
+"end": 22.64,
+"word": " A"
+},
+{
+"start": 22.64,
+"end": 22.84,
+"word": " bug"
+},
+{
+"start": 22.84,
+"end": 23.02,
+"word": " showed"
+},
+{
+"start": 23.02,
+"end": 23.16,
+"word": " up"
+},
+{
+"start": 23.16,
+"end": 23.28,
+"word": " and"
+},
+{
+"start": 23.28,
+"end": 23.4,
+"word": " it"
+},
+{
+"start": 23.4,
+"end": 23.62,
+"word": " treated"
+},
+{
+"start": 23.62,
+"end": 23.8,
+"word": " it"
+},
+{
+"start": 23.8,
+"end": 23.88,
+"word": " like"
+},
+{
+"start": 23.88,
+"end": 24.0,
+"word": " a"
+},
+{
+"start": 24.0,
+"end": 24.3,
+"word": " defender"
+},
+{
+"start": 24.3,
+"end": 24.5,
+"word": " to"
+},
+{
+"start": 24.5,
+"end": 24.78,
+"word": " eliminate"
+},
+{
+"start": 24.78,
+"end": 25.38,
+"word": " immediately."
+},
+{
+"start": 25.78,
+"end": 25.92,
+"word": " A"
+},
+{
+"start": 25.92,
+"end": 26.08,
+"word": " test"
+},
+{
+"start": 26.08,
+"end": 26.26,
+"word": " went"
+},
+{
+"start": 26.26,
+"end": 26.5,
+"word": " red,"
+},
+{
+"start": 26.64,
+"end": 26.72,
+"word": " and"
+},
+{
+"start": 26.72,
+"end": 26.86,
+"word": " it"
+},
+{
+"start": 26.86,
+"end": 27.12,
+"word": " buried"
+},
+{
+"start": 27.12,
+"end": 27.36,
+"word": " it."
+},
+{
+"start": 27.36,
+"end": 27.56,
+"word": " It"
+},
+{
+"start": 27.56,
+"end": 27.74,
+"word": " closed"
+},
+{
+"start": 27.74,
+"end": 27.98,
+"word": " one"
+},
+{
+"start": 27.98,
+"end": 28.28,
+"word": " task"
+},
+{
+"start": 28.28,
+"end": 28.48,
+"word": " and"
+},
+{
+"start": 28.48,
+"end": 28.78,
+"word": " instantly"
+},
+{
+"start": 28.78,
+"end": 29.24,
+"word": " sprinted"
+},
+{
+"start": 29.24,
+"end": 29.36,
+"word": " to"
+},
+{
+"start": 29.36,
+"end": 29.44,
+"word": " the"
+},
+{
+"start": 29.44,
+"end": 29.6,
+"word": " next"
+},
+{
+"start": 29.6,
+"end": 29.78,
+"word": " like"
+},
+{
+"start": 29.78,
+"end": 29.88,
+"word": " it"
+},
+{
+"start": 29.88,
+"end": 29.96,
+"word": " was"
+},
+{
+"start": 29.96,
+"end": 30.14,
+"word": " chasing"
+},
+{
+"start": 30.14,
+"end": 30.34,
+"word": " a"
+},
+{
+"start": 30.34,
+"end": 30.46,
+"word": " hat"
+},
+{
+"start": 30.46,
+"end": 30.68,
+"word": " trick."
+},
+{
+"start": 30.96,
+"end": 30.98,
+"word": " I"
+},
+{
+"start": 30.98,
+"end": 31.1,
+"word": " left"
+},
+{
+"start": 31.1,
+"end": 31.24,
+"word": " it"
+},
+{
+"start": 31.24,
+"end": 31.46,
+"word": " running,"
+},
+{
+"start": 31.54,
+"end": 31.7,
+"word": " came"
+},
+{
+"start": 31.7,
+"end": 31.94,
+"word": " back,"
+},
+{
+"start": 32.04,
+"end": 32.04,
+"word": " and"
+},
+{
+"start": 32.04,
+"end": 32.14,
+"word": " my"
+},
+{
+"start": 32.14,
+"end": 32.44,
+"word": " whole"
+},
+{
+"start": 32.44,
+"end": 32.6,
+"word": " list"
+},
+{
+"start": 32.6,
+"end": 32.76,
+"word": " of"
+},
+{
+"start": 32.76,
+"end": 33.0,
+"word": " tasks"
+},
+{
+"start": 33.0,
+"end": 33.18,
+"word": " were"
+},
+{
+"start": 33.18,
+"end": 33.36,
+"word": " done."
+},
+{
+"start": 33.54,
+"end": 33.68,
+"word": " Then,"
+},
+{
+"start": 33.76,
+"end": 33.8,
+"word": " it"
+},
+{
+"start": 33.8,
+"end": 34.1,
+"word": " basically"
+},
+{
+"start": 34.1,
+"end": 34.6,
+"word": " demanded"
+},
+{
+"start": 34.6,
+"end": 34.9,
+"word": " more"
+},
+{
+"start": 34.9,
+"end": 35.18,
+"word": " work."
+},
+{
+"start": 35.4,
+"end": 35.46,
+"word": " And"
+},
+{
+"start": 35.46,
+"end": 35.72,
+"word": " honestly,"
+},
+{
+"start": 35.84,
+"end": 35.92,
+"word": " the"
+},
+{
+"start": 35.92,
+"end": 36.08,
+"word": " whole"
+},
+{
+"start": 36.08,
+"end": 36.24,
+"word": " thing"
+},
+{
+"start": 36.24,
+"end": 36.4,
+"word": " came"
+},
+{
+"start": 36.4,
+"end": 36.6,
+"word": " down"
+},
+{
+"start": 36.6,
+"end": 36.72,
+"word": " to"
+},
+{
+"start": 36.72,
+"end": 36.94,
+"word": " one"
+},
+{
+"start": 36.94,
+"end": 37.26,
+"word": " paragraph"
+},
+{
+"start": 37.26,
+"end": 37.46,
+"word": " I"
+},
+{
+"start": 37.46,
+"end": 37.62,
+"word": " dropped"
+},
+{
+"start": 37.62,
+"end": 37.94,
+"word": " into"
+},
+{
+"start": 37.94,
+"end": 38.06,
+"word": " its"
+},
+{
+"start": 38.06,
+"end": 38.48,
+"word": " instructions."
+},
+{
+"start": 38.82,
+"end": 38.9,
+"word": " I"
+},
+{
+"start": 38.9,
+"end": 39.02,
+"word": " put"
+},
+{
+"start": 39.02,
+"end": 39.16,
+"word": " that"
+},
+{
+"start": 39.16,
+"end": 39.44,
+"word": " exact"
+},
+{
+"start": 39.44,
+"end": 39.84,
+"word": " paragraph,"
+},
+{
+"start": 40.02,
+"end": 40.08,
+"word": " the"
+},
+{
+"start": 40.08,
+"end": 40.24,
+"word": " full"
+},
+{
+"start": 40.24,
+"end": 40.46,
+"word": " agent"
+},
+{
+"start": 40.46,
+"end": 40.7,
+"word": " setup,"
+},
+{
+"start": 40.88,
+"end": 41.02,
+"word": " and"
+},
+{
+"start": 41.02,
+"end": 41.14,
+"word": " the"
+},
+{
+"start": 41.14,
+"end": 41.38,
+"word": " prompts"
+},
+{
+"start": 41.38,
+"end": 41.54,
+"word": " I"
+},
+{
+"start": 41.54,
+"end": 41.7,
+"word": " used"
+},
+{
+"start": 41.7,
+"end": 41.86,
+"word": " in"
+},
+{
+"start": 41.86,
+"end": 42.0,
+"word": " one"
+},
+{
+"start": 42.0,
+"end": 42.22,
+"word": " guide,"
+},
+{
+"start": 42.42,
+"end": 42.54,
+"word": " comment"
+},
+{
+"start": 42.54,
+"end": 42.78,
+"word": " Haaland."
+}
+]

@@ -308,11 +308,19 @@ export const SectionHeader: React.FC<{ f?: number; badge: React.ReactNode; l1: R
 };
 
 // the HOOK header = a BIGGER hero SectionHeader with the OFFICIAL orange Claude logo on a WHITE badge.
-export const HookHeader: React.FC<{ big: string; hot: string; f?: number }> = ({ big, hot, f = 0 }) => (
-  <SectionHeader f={f} hero size={56} badgeBg="#FFFFFF" badgeBorder="#EDE7DB"
-    badge={<Img src={staticFile("claude_logo.png")} style={{ width: 84, height: 84, objectFit: "contain" }} />}
-    l1={<span>{big}</span>} l2={<span style={{ color: CLAY }}>{hot}</span>} />
-);
+export const HookHeader: React.FC<{ big: string; hot: string; f?: number }> = ({ big, hot, f = 0 }) => {
+  /* ⛔ AUTO-FIT. At size 56 the header holds about 22 characters before it runs
+     off the panel — "THE MAN WHO BUILT CLAUDE CODE" (29) was clipped mid-word on
+     the very first frame. Scale to the longer of the two lines rather than
+     re-checking a character budget by hand every time the wording changes. */
+  const longest = Math.max(big.length, hot.length);
+  const size = Math.round(Math.max(38, Math.min(56, 56 * 22 / longest)));
+  return (
+    <SectionHeader f={f} hero size={size} badgeBg="#FFFFFF" badgeBorder="#EDE7DB"
+      badge={<Img src={staticFile("claude_logo.png")} style={{ width: 84, height: 84, objectFit: "contain" }} />}
+      l1={<span>{big}</span>} l2={<span style={{ color: CLAY }}>{hot}</span>} />
+  );
+};
 
 // KARAOKE caption driven by VO word timings [{w,s,e}] + a sliding window, house style.
 type CapWord = { w: string; s: number; e: number };
@@ -407,14 +415,25 @@ const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: numb
   // FORCE ONE LINE: rough-measure the phrase and scale the whole row down if it would overflow.
   /* 45 px/char measured off a real render (Fraunces 900 @74px is 44.1); the old
      41 under-read by ~7%, so the widest line still overran after shrinking. */
-  const rough = cur.words.reduce((a, w) => a + w.w.trim().length, 0) * 45 + (cur.words.length - 1) * 16;
   /* Captions used to be allowed 992 of 1080 px — 92% of the frame, so a long
      line ran edge to edge and read as cramped. 856 leaves a real margin on
      both sides and matches the container inset below. */
-  const SAFE = 856;
-  const shrink = rough > SAFE ? SAFE / rough : 1;
+  const SAFE = 904;
+  /* ⛔ This shrink used to be computed PER LINE, so the caption physically
+     changed size as the reel played — Alex: "caption size shouldn't decrease at
+     times". Type that resizes mid-sentence reads as a bug, not as a fit.
+     It is now measured once against the WIDEST line in the whole track, so the
+     size is constant for the entire reel. Grouping is deliberately untouched:
+     tools/build_captions.py reproduces this exact grouping to anchor each line
+     to a measured onset, and changing it here would desync the anchors. */
+  const measure = (ws: CapWord[]) =>
+    ws.reduce((a, w) => a + w.w.trim().length, 0) * 45 + (ws.length - 1) * 16;
+  const shrink = React.useMemo(() => {
+    const widest = clines.reduce((m, l) => Math.max(m, measure(l.words)), 0);
+    return widest > SAFE ? SAFE / widest : 1;
+  }, [clines]);
   return (
-    <div style={{ position: "absolute", left: 112, right: 112, top, textAlign: "center", zIndex: 90 }}>
+    <div style={{ position: "absolute", left: 88, right: 88, top, textAlign: "center", zIndex: 90 }}>
       <div style={{ display: "flex", width: "100%", flexWrap: "nowrap", whiteSpace: "nowrap", justifyContent: "center", alignItems: "baseline", gap: "0 16px", transform: `scale(${shrink})`, transformOrigin: "50% 50%" }}>
         {cur.words.map((w, i) => { const on = done || t + lead >= w.s; const active = !done && on && (i === cur.words.length - 1 || t + lead < cur.words[i + 1].s); return (
           <span key={i} style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 74, lineHeight: 1.12, letterSpacing: "-0.01em", color: on ? (active ? "#B8501F" : CLAY) : "transparent", transform: active ? "translateY(-3px) scale(1.04)" : "none", display: "inline-block", textShadow: "0 2px 12px rgba(255,251,244,0.9), 0 1px 2px rgba(120,56,26,0.35)" }}>{w.w.trim()}</span>); })}

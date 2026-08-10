@@ -1,0 +1,352 @@
+[
+{
+"start": 0.0,
+"end": 0.14,
+"word": " Because"
+},
+{
+"start": 0.14,
+"end": 0.28,
+"word": " of"
+},
+{
+"start": 0.28,
+"end": 0.5,
+"word": " one"
+},
+{
+"start": 0.3,
+"end": 0.56,
+"word": " GitHub"
+},
+{
+"start": 0.56,
+"end": 0.76,
+"word": " repo"
+},
+{
+"start": 0.76,
+"end": 1.2,
+"word": " almost"
+},
+{
+"start": 1.2,
+"end": 1.52,
+"word": " nobody"
+},
+{
+"start": 1.52,
+"end": 1.92,
+"word": " knows"
+},
+{
+"start": 1.92,
+"end": 2.14,
+"word": " about,"
+},
+{
+"start": 2.24,
+"end": 2.28,
+"word": " you"
+},
+{
+"start": 2.26,
+"end": 2.38,
+"word": " might"
+},
+{
+"start": 2.38,
+"end": 2.66,
+"word": " never"
+},
+{
+"start": 2.73,
+"end": 2.99,
+"word": " have"
+},
+{
+"start": 2.99,
+"end": 3.11,
+"word": " to"
+},
+{
+"start": 3.11,
+"end": 3.27,
+"word": " pay"
+},
+{
+"start": 3.24,
+"end": 3.4,
+"word": " for"
+},
+{
+"start": 3.4,
+"end": 3.44,
+"word": " an"
+},
+{
+"start": 3.44,
+"end": 3.58,
+"word": " API"
+},
+{
+"start": 3.57,
+"end": 4.07,
+"word": " again."
+},
+{
+"start": 4.69,
+"end": 4.75,
+"word": " It"
+},
+{
+"start": 4.75,
+"end": 4.95,
+"word": " lists"
+},
+{
+"start": 4.95,
+"end": 5.31,
+"word": " 134"
+},
+{
+"start": 5.13,
+"end": 5.97,
+"word": " free"
+},
+{
+"start": 5.97,
+"end": 6.35,
+"word": " APIs"
+},
+{
+"start": 6.35,
+"end": 6.65,
+"word": " from"
+},
+{
+"start": 6.65,
+"end": 6.75,
+"word": " over"
+},
+{
+"start": 6.75,
+"end": 7.11,
+"word": " 40"
+},
+{
+"start": 7.11,
+"end": 7.45,
+"word": " providers,"
+},
+{
+"start": 8.1,
+"end": 8.18,
+"word": " Gemini,"
+},
+{
+"start": 8.38,
+"end": 8.58,
+"word": " Grok,"
+},
+{
+"start": 8.7,
+"end": 8.74,
+"word": " and"
+},
+{
+"start": 8.72,
+"end": 9.04,
+"word": " NVIDIA,"
+},
+{
+"start": 9.29,
+"end": 9.33,
+"word": " all"
+},
+{
+"start": 9.31,
+"end": 9.49,
+"word": " with"
+},
+{
+"start": 9.49,
+"end": 9.57,
+"word": " a"
+},
+{
+"start": 9.57,
+"end": 9.87,
+"word": " permanent"
+},
+{
+"start": 9.71,
+"end": 9.97,
+"word": " free"
+},
+{
+"start": 9.97,
+"end": 10.17,
+"word": " tier."
+},
+{
+"start": 10.71,
+"end": 10.79,
+"word": " One"
+},
+{
+"start": 10.79,
+"end": 10.97,
+"word": " click"
+},
+{
+"start": 10.97,
+"end": 11.29,
+"word": " setup,"
+},
+{
+"start": 11.43,
+"end": 11.47,
+"word": " right"
+},
+{
+"start": 11.47,
+"end": 11.69,
+"word": " inside"
+},
+{
+"start": 11.69,
+"end": 11.91,
+"word": " Cursor,"
+},
+{
+"start": 12.09,
+"end": 12.27,
+"word": " Claude"
+},
+{
+"start": 12.27,
+"end": 12.47,
+"word": " Code"
+},
+{
+"start": 12.47,
+"end": 12.59,
+"word": " or"
+},
+{
+"start": 12.59,
+"end": 13.13,
+"word": " Codex."
+},
+{
+"start": 13.38,
+"end": 13.52,
+"word": " Everyone"
+},
+{
+"start": 13.52,
+"end": 13.74,
+"word": " else"
+},
+{
+"start": 13.74,
+"end": 13.92,
+"word": " hits"
+},
+{
+"start": 13.78,
+"end": 13.96,
+"word": " their"
+},
+{
+"start": 13.96,
+"end": 14.16,
+"word": " paid"
+},
+{
+"start": 14.16,
+"end": 14.4,
+"word": " limits"
+},
+{
+"start": 14.39,
+"end": 14.59,
+"word": " while"
+},
+{
+"start": 14.59,
+"end": 14.73,
+"word": " you"
+},
+{
+"start": 14.73,
+"end": 14.83,
+"word": " run"
+},
+{
+"start": 14.94,
+"end": 15.06,
+"word": " the"
+},
+{
+"start": 15.06,
+"end": 15.24,
+"word": " same"
+},
+{
+"start": 15.24,
+"end": 15.54,
+"word": " models"
+},
+{
+"start": 15.74,
+"end": 15.92,
+"word": " for"
+},
+{
+"start": 15.92,
+"end": 16.16,
+"word": " free."
+},
+{
+"start": 16.35,
+"end": 16.39,
+"word": " Comment"
+},
+{
+"start": 16.35,
+"end": 16.61,
+"word": " KEY"
+},
+{
+"start": 16.61,
+"end": 16.77,
+"word": " and"
+},
+{
+"start": 16.77,
+"end": 16.87,
+"word": " I'll"
+},
+{
+"start": 17.1,
+"end": 17.22,
+"word": " send"
+},
+{
+"start": 17.22,
+"end": 17.32,
+"word": " you"
+},
+{
+"start": 17.32,
+"end": 17.4,
+"word": " the"
+},
+{
+"start": 17.4,
+"end": 17.54,
+"word": " repo."
+}
+]

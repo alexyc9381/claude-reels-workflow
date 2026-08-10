@@ -1,0 +1,66 @@
+TITLE   The Claude Skills Shelf
+SUB     164 skills, 11 categories, one repo. Which ones to take first, and which to leave.
+
+P       Everything below is checked against github.com/ComposioHQ/awesome-claude-skills as of 9 August 2026: Apache-2.0, 72,138 stars, 8,183 forks, 164 linked skills across 11 category sections. Star counts move. The categories and the skill names do not.
+
+RULE
+
+H       What a Claude skill actually is
+P       A skill is a folder with a SKILL.md file in it. That file has a name, a description, and a set of instructions in plain Markdown. It can bundle scripts, reference documents and assets alongside it, but none of that is required.
+P       The description is the important part. It is what Claude reads when it decides whether this skill is relevant to what you just asked. A vague description means the skill never fires. A precise one means it fires when it should.
+P       That simple format is the reason a list like this can exist at all. A skill is portable text, so anyone can publish one and anyone can read one before they run it.
+
+H       The 11 categories, verbatim
+B       Document Processing
+B       Development and Code Tools
+B       Data and Analysis
+B       Business and Marketing
+B       Communication and Writing
+B       Creative and Media
+B       Productivity and Organization
+B       Collaboration and Project Management
+B       Security and Systems
+B       Assistive Technology
+B       App Automation via Composio
+
+H       Ten real ones, and what each is for
+NUM     Brand Guidelines. Applies Anthropic's official brand colours and typography to whatever you generate, so artifacts come out consistent instead of improvised.
+NUM     Brand Build Skills. A 59-skill library covering the full website lifecycle: brand, design, content, SEO, dev, ops, growth and research. Stack agnostic, and it includes a meta-skill for writing your own.
+NUM     Competitive Ads Extractor. Pulls competitors' ads out of ad libraries and analyses the messaging and creative angles that are working.
+NUM     Domain Name Brainstormer. Generates domain ideas and checks availability across .com, .io, .dev and .ai.
+NUM     Lead Research Assistant. Reads your product, finds target companies, qualifies them and proposes outreach.
+NUM     Canvas Design. Produces actual visual work as PNG and PDF: posters, layouts, static pieces, built on stated design principles rather than vibes.
+NUM     Theme Factory. Applies professional font and colour themes to slides, docs, reports and HTML pages, with ten presets.
+NUM     Image Enhancer. Improves resolution, sharpness and clarity on screenshots and images headed for a deck or a doc.
+NUM     Slack GIF Creator. Builds animated GIFs sized for Slack, with validators for the size limits.
+NUM     Video Downloader. Pulls video from YouTube and other platforms for offline editing or archive.
+
+H       Where "branding" actually lives
+P       The list has no Branding category. Brand Guidelines and Brand Build Skills both sit inside Business and Marketing. If you go looking for a branding section you will not find one, and that is not an omission, it is how the shelf is organised.
+
+H       How to install one
+NUM     On claude.ai, open Settings, then Capabilities, and add the skill there.
+NUM     In Claude Code, put the skill folder in your project's .claude/skills directory, or in ~/.claude/skills to make it available everywhere.
+NUM     Via the API, pass the skill as part of your request configuration.
+P       In every case you are copying a folder. There is no package manager and nothing compiles.
+
+H       Read this before you install anything
+P       This is a curated list, not a census. There are at least four separate repositories called some version of awesome-claude-skills and none of them contains every Claude skill in existence. Curation is the value here. Treat it as a well kept shelf, not a complete catalogue.
+P       The repository is Apache-2.0, but the repository's own README says individual skills may carry different licences. The skills that link out to other people's GitHub repos are governed by those repos. If what you are building is commercial, open the folder you actually took and read its licence.
+P       A skill you did not write is instructions you did not write. Skills can bundle scripts. Read the SKILL.md before you run it, the same way you would read a shell script someone sent you.
+
+H       The mistake almost everyone makes
+P       Do not install all 164.
+P       Skills are selected by their descriptions, and every skill you add is another description competing to be picked. Load thirty and you have not given Claude thirty capabilities, you have given it a crowded menu and a harder decision. This is the most common reason people report that Claude got worse after they set skills up.
+QUOTE   Take three that match work you are actually doing this week. Use them until you know what they do. Then add more.
+
+H       A first week that works
+NUM     Day one. Pick one skill from a category you work in daily and install only that one.
+NUM     Day two. Run it on a real task, not a test. Note where it helped and where you corrected it.
+NUM     Day three. Open its SKILL.md and read the instructions that produced that behaviour.
+NUM     Day four. Edit one line of that file and watch what changes.
+NUM     Day five. Write your own SKILL.md for something you repeat every week. This is the point of the whole exercise. The list is a teaching set as much as a toolbox.
+
+RULE
+
+KEY     Comment AWESOME on the reel and I will send you the repo.

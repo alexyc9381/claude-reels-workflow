@@ -1,0 +1,54 @@
+TITLE The Free AI API List
+SUB 134+ free LLM APIs from 40+ providers, and how to point your editor at them.
+
+P This is the repo from the reel, plus the exact settings that connect it to Claude Code, Cursor and Codex. Everything here is on a permanent free tier, not a trial with credits that run out.
+
+H The repo
+P github.com/open-free-llm-api/awesome-freellm-apis
+P It is a directory of free LLM APIs with the rate limit, the context window and a direct link to get a key for each one. It is updated continuously, so treat it as the source of truth rather than anything you copy out of it once.
+QUOTE Providers listed include Google Gemini, NVIDIA NIM, Groq, Mistral, Cohere, Cerebras, DeepSeek, Hugging Face, SambaNova, xAI and OpenRouter.
+
+RULE
+
+H 1. Pick a provider before you pick a model
+P Four things decide whether a free tier is actually usable for what you are doing. Check them in this order:
+NUM Rate limit. Requests per minute and per day. A generous daily cap is useless if the per-minute limit stalls an agent mid-run.
+NUM Context window. Agent work eats context far faster than chat does.
+NUM Whether it needs a card or a phone number. Some free tiers verify, some do not.
+NUM OpenAI SDK compatibility. If the endpoint speaks the OpenAI format, every tool below will accept it with no code changes.
+
+H 2. Point Claude Code at it
+P Claude Code reads two environment variables. Set them and it will route through the provider instead of the default endpoint:
+B ANTHROPIC_BASE_URL, set to the provider's base URL
+B ANTHROPIC_AUTH_TOKEN, set to your key from that provider
+P Set them in your shell profile if you want it permanent, or inline for a single session so you can switch providers per project.
+
+H 3. Point Cursor at it
+P Cursor takes it through the interface rather than the environment:
+NUM Settings, then Models, then Add Model.
+NUM Enter the model name exactly as the provider writes it. A near miss here is the most common reason a working key looks broken.
+NUM Enter the base URL and the API key.
+P Cursor will then offer that model alongside the built in ones.
+
+H 4. Point Codex at it
+P The Codex CLI uses the OpenAI variable names:
+B OPENAI_BASE_URL, set to the provider's base URL
+B OPENAI_API_KEY, set to your key
+P This is why OpenAI SDK compatibility matters. Any provider that speaks that format drops straight in.
+
+RULE
+
+H What to watch for
+P Being straight with you about the limits, because a guide that only lists upsides is not useful:
+B Free tiers change. Rate limits get cut and models get retired with little notice. Check the repo again before you rely on one.
+B Do not put a free tier under production traffic. They are for building, testing and personal work.
+B Rate limits are the real ceiling, not price. An agent that runs for an hour will hit a per minute cap long before it hits a daily one.
+B Keep keys out of git. Use environment variables or a secrets file that is ignored, even for a free key.
+B Model names must match the provider exactly, including any prefix.
+
+H The one page version
+B Open the repo, sort by rate limit, not by name recognition.
+B Claude Code and Codex are two environment variables. Cursor is three fields in a settings panel.
+B Prefer an OpenAI compatible endpoint and you can switch providers without touching code.
+
+KEY Comment KEY on the reel for this guide

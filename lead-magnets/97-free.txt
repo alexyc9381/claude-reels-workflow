@@ -1,0 +1,56 @@
+TITLE   The 10 Free Replacements
+SUB     Ten AI tools people pay for, and the free version of each. Every price checked 9 August 2026.
+
+P       Every paid tool below has a free alternative that does the same job for most people. The ten from the reel are first, then five more that did not fit, then how to actually make the swap without breaking anything.
+P       Read this before you cancel anything. Free usually means a free tier, not unlimited. Run the free tool for a full week on real work first. A tool you genuinely use is worth paying for.
+
+RULE
+
+H       The ten from the reel
+P       Each paid tool below is priced on its SECOND paid tier, the plan you move to when the entry plan stops being enough. That is the number in the reel. The entry price is in brackets so you can see both.
+NUM     IMAGE CREATION. Midjourney Standard, 30 dollars a month (Basic is 10), to Nano Banana. gemini.google.com. Googles image model, free inside the Gemini app. No card, no queue.
+NUM     AI RESEARCH. Perplexity Max, 200 dollars a month (Pro is 20), to Consensus. consensus.app. Searches actual peer reviewed papers instead of the open web and shows how many studies support the answer. Free tier.
+NUM     AVATAR CREATION. HeyGen Pro, 99 dollars a month (Creator is 29), to Hedra. hedra.com. Talking avatars from one photo plus a script. Free credits refresh monthly.
+NUM     CODE GENERATION. GitHub Copilot Pro+, 39 dollars a month (Pro is 10), to Cursor. cursor.com. The Hobby plan is 0 dollars with no card and no time limit. Limited agent requests and tab completions.
+NUM     VIDEO GENERATION. Higgsfield Plus, 39 dollars a month (Starter is 15), to Hailuo. hailuoai.video. Free credits every day, roughly 3 to 5 clips, topped up on sign in.
+NUM     IMAGE EDITING. Adobe Firefly Pro, 30 dollars a month (Standard is 10), to Photoroom. photoroom.com. Background removal and product shots. Free plan exports up to 250 images a month with a watermark.
+NUM     SOCIAL SCHEDULING. Buffer Team, 12 dollars a month per channel (Essentials is 6), to Publer. publer.com. Free plan covers 3 accounts with 10 scheduled posts each.
+NUM     WEBSITE BUILDER. Framer Pro, 30 dollars a month (Basic is 10), to Lovable. lovable.dev. Free plan gives 5 credits a day up to 30 a month and publishes live to a lovable.app subdomain. No card.
+NUM     VIDEO EDITING. CapCut Pro, 20 dollars a month, to Edits. instagram.com/edits. Instagrams own editor. Genuinely free, no watermark. CapCut has only one paid tier for individuals, so this row is the same at either end.
+NUM     VOICE GENERATION. ElevenLabs Creator, 22 dollars a month (Starter is 5), to MiniMax. minimaxi.com. Free text to speech credits across many languages.
+
+RULE
+
+H       What that adds up to
+P       On the second paid tier the ten come to 521 dollars a month, which is 6,252 dollars a year. On the entry tier of each they come to 136 dollars a month, or 1,632 a year. Both figures are the sum of the ten plans listed above, and the reel shows the 521.
+P       Nobody pays for all ten. The point of the number is the shape of it. Most people carry three or four of these and never look at the total, and the free replacement for each one is a link away.
+
+RULE
+
+H       Five more that did not fit
+B       TRANSCRIPTION. Otter to Whisper. github.com/openai/whisper. Open source, runs on your own machine, free forever.
+B       DESIGN AND PROTOTYPING. Figma to Penpot. penpot.app. Open source, free, self hostable.
+B       SCREEN RECORDING. Loom to OBS Studio. obsproject.com. The standard for recording and streaming, free.
+B       AUTOMATION. Zapier to n8n. n8n.io. Self host it and every workflow is free.
+B       IMAGE UPSCALING. Topaz to Upscayl. upscayl.org. Free, open source, runs offline.
+
+RULE
+
+H       How to actually do the swap
+NUM     Start with the subscription you are least happy with, not the most expensive one.
+NUM     Run the free replacement for one full week on real work, not a test file. Exports and sharing are where free tiers usually bite, so try those on day one.
+NUM     Check whether the limit actually reaches you. For most people it does not.
+NUM     Only then cancel, and cancel at the end of the billing period so you keep what you already paid for.
+NUM     Keep paying for the one or two that genuinely earn it. This is about cutting waste, not going free on principle.
+
+RULE
+
+H       Honest notes
+B       Pricing moves constantly. Every figure here was checked on 9 August 2026 against the vendor's own pricing page. Check again before you cancel anything.
+B       The reel prices each tool on its second paid tier, applied to all ten the same way. It is stated here so you can price your own stack on whichever plan you are actually on. Firefly Pro is 29.99 and CapCut Pro is 19.99; both are shown to the nearest dollar and the total rounds from 520.98.
+B       Three of the paid tools have free tiers of their own. Buffer's free plan covers 3 channels, GitHub Copilot has a free tier, and CapCut has a free version. Naming the plan on screen is deliberate: the number is what that specific tier costs, never a claim that the tool has no free option.
+B       Free tier and open source are not the same thing. A free tier can change or disappear. Whisper, Penpot, OBS Studio, n8n and Upscayl are open source, which means free forever if you run them yourself.
+B       Some free plans carry a watermark or a badge. Photoroom watermarks free exports, Framer's free sites carry a Made in Framer badge, and Lovable's carry an Edit with Lovable badge. Edits does not watermark.
+B       Links are the official sites. Nothing here is sponsored and none of these are affiliate links.
+
+KEY     Comment FREE on the reel and I will send this list.

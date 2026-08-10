@@ -1,0 +1,43 @@
+TITLE   ONE FILE, 60 AI MODELS
+SUB     The single HTML file that runs ChatGPT, Claude, Gemini and Grok side by side in your browser
+
+H       What it actually is
+P       G0DM0D3 is one file. Not an app, not an install, not an account. The whole interface is a single index.html of about 774 KB that you open the way you would open any web page, and it talks to more than 60 models.
+P       Everything runs client side. Your chat history lives in your browser's localStorage, so nothing is stored on somebody else's server. Model calls themselves still go out to whichever provider you point it at, which matters, so read the setup section below before you decide it is fully offline.
+RULE
+
+H       Set it up in four steps
+NUM     Go to the repo at github.com/elder-plinius/G0DM0D3 and download the file called index.html from the root of the project.
+NUM     Double click it. It opens in whatever browser you already use. There is no build step, no npm install, no terminal.
+NUM     Open settings and paste in a key. OpenRouter is the usual choice because one key reaches the whole catalogue. Venice works too.
+NUM     Pick a model from the sidebar and send a message. That is the entire setup.
+RULE
+
+H       Classic Mode, the part worth the download
+P       Classic Mode is the reason people share this thing. You type one prompt, and five model plus prompt combinations run at the same time, in parallel, in five panes.
+P       You are not guessing which model is better for your task. You watch five answers arrive next to each other and pick the one that actually solved it. On a question you care about, that is a genuinely different way to work.
+B       Five run at once, not sixty. The five are preselected combinations, each pairing a model with its own prompt strategy.
+B       Results land side by side, so comparing is reading, not remembering.
+B       The slowest pane still finishes in about a second, so the whole comparison costs you one wait instead of five.
+RULE
+
+H       What it costs
+P       The interface is free and open source under AGPL-3.0. There is no subscription to G0DM0D3 and no account to create.
+P       The models are not free. You bring your own key, and you pay whatever your provider charges per call. OpenRouter is pay as you go rather than a monthly fee, and it does carry some free tier models, so the running cost can be very low or zero depending on what you pick.
+P       If you want it genuinely free and genuinely local, point it at Ollama, LM Studio, llama.cpp or vLLM instead. Then the models run on your own machine and nothing leaves it.
+RULE
+
+H       Read this before you use it
+P       This project is built by a jailbreak researcher and it describes itself as liberated AI chat. Classic Mode pairs each model with a jailbreak style prompt by design.
+P       That is worth knowing up front. If you want it purely as a fast multi model comparison tool, use your own prompts and pick your own models rather than the preset combinations, and it behaves like any other client.
+P       It is also a single file with no review gate between you and it. Read what you download, the same as you would with any script you run on your own machine.
+RULE
+
+H       Who it is for
+B       Anyone paying for two or more AI subscriptions who wants to find out whether they need both.
+B       Anyone who wants a model comparison without ten browser tabs.
+B       Anyone who wants their chat history on their own machine instead of in an account.
+B       Anyone who wants a local only setup and already runs Ollama or LM Studio.
+RULE
+
+KEY     Comment FILE and I will send you the link.

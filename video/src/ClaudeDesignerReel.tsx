@@ -186,12 +186,21 @@ const CTA: React.FC<{ s: number }> = ({ s }) => { const f = useCurrentFrame(); c
 
 // ===== Captions =====
 type Word = { word: string; start: number; end: number; line: number };
-const WORDS = wordsData as Word[];
+// Normalize each record so a data/shape mismatch degrades gracefully instead of throwing at
+// module-load time. This file is imported by the shared Root, so a throw in the CHUNKS IIFE below
+// takes down the whole bundle (studio + every composition), not just this reel. Tolerates the
+// alternate {w,...} caption schema and a missing `line` (defaults to line 0).
+const WORDS: Word[] = (wordsData as Array<Partial<Word> & { w?: string }>).map((r) => ({
+  word: r.word ?? r.w ?? "",
+  start: typeof r.start === "number" ? r.start : 0,
+  end: typeof r.end === "number" ? r.end : 0,
+  line: typeof r.line === "number" ? r.line : 0,
+}));
 const cleanw = (w: string) => w.toLowerCase().replace(/[^a-z0-9'$]/g, "");
 const EMPH = new Set(["claude", "design", "designs", "designer", "brand", "visuals", "agencies", "grand", "premium", "graphics", "social", "posts", "ad", "creative", "thumbnails", "one-pagers", "pitch", "slides", "minutes", "week", "comment", "setup", "style"]);
 const CHUNKS = (() => { const byLine: Record<number, Word[]> = {}; for (const w of WORDS) (byLine[w.line] ||= []).push(w);
   const out: { words: Word[]; start: number; line: number }[] = [];
-  for (const li of Object.keys(byLine).map(Number).sort((a, b) => a - b)) { const ws = byLine[li]; for (let i = 0; i < ws.length; i += 3) { const g = ws.slice(i, i + 3); out.push({ words: g, start: g[0].start, line: li }); } }
+  for (const li of Object.keys(byLine).map(Number).sort((a, b) => a - b)) { const ws = byLine[li]; if (!ws || ws.length === 0) continue; for (let i = 0; i < ws.length; i += 3) { const g = ws.slice(i, i + 3); out.push({ words: g, start: g[0].start, line: li }); } }
   const aE = Math.max(...WORDS.map((w) => w.end)); return out.map((c, i) => ({ ...c, end: i + 1 < out.length ? out[i + 1].start : aE + 0.4 })); })();
 const Captions: React.FC = () => { const frame = useCurrentFrame();
   return (<>{CHUNKS.map((c, i) => { if (frame < fr(c.start) || frame >= fr(c.end)) return null; if (c.line === 6) return null;

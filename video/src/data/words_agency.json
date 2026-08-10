@@ -1,0 +1,412 @@
+[
+{
+"start": 0.0,
+"end": 0.24,
+"word": " So"
+},
+{
+"start": 0.24,
+"end": 0.5,
+"word": " someone"
+},
+{
+"start": 0.5,
+"end": 0.68,
+"word": " built"
+},
+{
+"start": 0.53,
+"end": 0.67,
+"word": " an"
+},
+{
+"start": 0.67,
+"end": 0.99,
+"word": " entire"
+},
+{
+"start": 0.99,
+"end": 1.27,
+"word": " AI"
+},
+{
+"start": 1.27,
+"end": 1.63,
+"word": " agency"
+},
+{
+"start": 1.63,
+"end": 1.91,
+"word": " and"
+},
+{
+"start": 1.91,
+"end": 2.07,
+"word": " open"
+},
+{
+"start": 2.13,
+"end": 2.37,
+"word": " sourced"
+},
+{
+"start": 2.37,
+"end": 2.61,
+"word": " it."
+},
+{
+"start": 2.76,
+"end": 2.8,
+"word": " It's"
+},
+{
+"start": 2.8,
+"end": 2.96,
+"word": " called"
+},
+{
+"start": 2.96,
+"end": 3.08,
+"word": " The"
+},
+{
+"start": 3.08,
+"end": 3.32,
+"word": " Agency,"
+},
+{
+"start": 3.18,
+"end": 3.46,
+"word": " with"
+},
+{
+"start": 3.46,
+"end": 3.68,
+"word": " over"
+},
+{
+"start": 3.68,
+"end": 4.76,
+"word": " 124,000"
+},
+{
+"start": 4.75,
+"end": 5.01,
+"word": " stars"
+},
+{
+"start": 5.01,
+"end": 5.13,
+"word": " on"
+},
+{
+"start": 5.13,
+"end": 5.29,
+"word": " GitHub."
+},
+{
+"start": 5.95,
+"end": 6.01,
+"word": " So"
+},
+{
+"start": 6.01,
+"end": 6.13,
+"word": " this"
+},
+{
+"start": 6.13,
+"end": 6.23,
+"word": " has"
+},
+{
+"start": 6.13,
+"end": 6.23,
+"word": " a"
+},
+{
+"start": 6.23,
+"end": 6.45,
+"word": " full"
+},
+{
+"start": 6.45,
+"end": 6.69,
+"word": " roster"
+},
+{
+"start": 6.81,
+"end": 7.09,
+"word": " of"
+},
+{
+"start": 7.09,
+"end": 7.31,
+"word": " specialist"
+},
+{
+"start": 7.31,
+"end": 7.77,
+"word": " agents,"
+},
+{
+"start": 7.98,
+"end": 8.06,
+"word": " front"
+},
+{
+"start": 8.06,
+"end": 8.14,
+"word": " end"
+},
+{
+"start": 8.14,
+"end": 8.34,
+"word": " designers,"
+},
+{
+"start": 8.73,
+"end": 8.77,
+"word": " ad"
+},
+{
+"start": 8.75,
+"end": 8.95,
+"word": " writers,"
+},
+{
+"start": 9.23,
+"end": 9.27,
+"word": " Reddit"
+},
+{
+"start": 9.29,
+"end": 9.51,
+"word": " community"
+},
+{
+"start": 9.51,
+"end": 9.85,
+"word": " wizards,"
+},
+{
+"start": 10.11,
+"end": 10.19,
+"word": " each"
+},
+{
+"start": 10.11,
+"end": 10.21,
+"word": " with"
+},
+{
+"start": 10.21,
+"end": 10.35,
+"word": " its"
+},
+{
+"start": 10.35,
+"end": 10.43,
+"word": " own"
+},
+{
+"start": 10.49,
+"end": 10.93,
+"word": " personality"
+},
+{
+"start": 10.93,
+"end": 11.37,
+"word": " and"
+},
+{
+"start": 11.37,
+"end": 11.75,
+"word": " process."
+},
+{
+"start": 12.4,
+"end": 12.44,
+"word": " It"
+},
+{
+"start": 12.42,
+"end": 12.54,
+"word": " plugs"
+},
+{
+"start": 12.54,
+"end": 12.94,
+"word": " straight"
+},
+{
+"start": 12.91,
+"end": 13.09,
+"word": " into"
+},
+{
+"start": 13.09,
+"end": 13.29,
+"word": " Claude"
+},
+{
+"start": 13.29,
+"end": 13.55,
+"word": " Code"
+},
+{
+"start": 13.49,
+"end": 13.61,
+"word": " and"
+},
+{
+"start": 13.61,
+"end": 13.73,
+"word": " there's"
+},
+{
+"start": 13.73,
+"end": 13.91,
+"word": " even"
+},
+{
+"start": 14.2,
+"end": 14.28,
+"word": " a"
+},
+{
+"start": 14.28,
+"end": 14.52,
+"word": " desktop"
+},
+{
+"start": 14.52,
+"end": 14.76,
+"word": " app"
+},
+{
+"start": 14.52,
+"end": 14.56,
+"word": " that"
+},
+{
+"start": 14.53,
+"end": 14.77,
+"word": " installs"
+},
+{
+"start": 14.77,
+"end": 14.95,
+"word": " your"
+},
+{
+"start": 14.95,
+"end": 15.13,
+"word": " dream"
+},
+{
+"start": 15.27,
+"end": 15.49,
+"word": " team"
+},
+{
+"start": 15.49,
+"end": 15.61,
+"word": " in"
+},
+{
+"start": 15.61,
+"end": 15.83,
+"word": " one"
+},
+{
+"start": 16.06,
+"end": 16.32,
+"word": " click."
+},
+{
+"start": 16.64,
+"end": 16.7,
+"word": " You"
+},
+{
+"start": 16.7,
+"end": 16.78,
+"word": " just"
+},
+{
+"start": 16.78,
+"end": 16.96,
+"word": " became"
+},
+{
+"start": 16.84,
+"end": 17.0,
+"word": " an"
+},
+{
+"start": 17.0,
+"end": 17.16,
+"word": " AI"
+},
+{
+"start": 17.16,
+"end": 17.46,
+"word": " agency"
+},
+{
+"start": 17.51,
+"end": 17.75,
+"word": " owner"
+},
+{
+"start": 17.75,
+"end": 17.97,
+"word": " for"
+},
+{
+"start": 17.97,
+"end": 18.21,
+"word": " free."
+},
+{
+"start": 18.5,
+"end": 18.54,
+"word": " Comment"
+},
+{
+"start": 18.52,
+"end": 18.82,
+"word": " AGENCY"
+},
+{
+"start": 18.82,
+"end": 19.2,
+"word": " and"
+},
+{
+"start": 19.2,
+"end": 19.24,
+"word": " I'll"
+},
+{
+"start": 19.2,
+"end": 19.3,
+"word": " send"
+},
+{
+"start": 19.3,
+"end": 19.4,
+"word": " you"
+},
+{
+"start": 19.4,
+"end": 19.48,
+"word": " the"
+},
+{
+"start": 19.48,
+"end": 19.62,
+"word": " repo."
+}
+]

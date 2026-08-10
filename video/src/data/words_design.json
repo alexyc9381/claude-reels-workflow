@@ -1,704 +1,572 @@
 [
 {
-"word": "Claude",
-"start": 0,
-"end": 0.3,
-"line": 0
+"w": "Five",
+"start": 0.34,
+"end": 0.82
 },
 {
-"word": "can",
-"start": 0.3,
-"end": 0.45,
-"line": 0
+"w": "AI",
+"start": 0.82,
+"end": 0.98
 },
 {
-"word": "now",
-"start": 0.45,
-"end": 0.61,
-"line": 0
+"w": "design",
+"start": 0.98,
+"end": 1.2
 },
 {
-"word": "design",
-"start": 0.61,
-"end": 0.94,
-"line": 0
+"w": "tools.",
+"start": 1.2,
+"end": 1.44
 },
 {
-"word": "the",
-"start": 0.94,
-"end": 1.1,
-"line": 0
+"w": "The",
+"start": 1.66,
+"end": 1.68
 },
 {
-"word": "brand",
-"start": 1.1,
-"end": 1.37,
-"line": 0
+"w": "judges",
+"start": 1.68,
+"end": 1.84
 },
 {
-"word": "visuals",
-"start": 1.37,
-"end": 1.83,
-"line": 0
+"w": "only",
+"start": 1.84,
+"end": 2.12
 },
 {
-"word": "agencies",
-"start": 1.83,
-"end": 2.27,
-"line": 0
+"w": "care",
+"start": 2.12,
+"end": 2.32
 },
 {
-"word": "charge",
-"start": 2.27,
-"end": 2.62,
-"line": 0
+"w": "if",
+"start": 2.32,
+"end": 2.42
 },
 {
-"word": "five",
-"start": 2.62,
-"end": 2.86,
-"line": 0
+"w": "it",
+"start": 2.42,
+"end": 2.46
 },
 {
-"word": "grand",
-"start": 2.86,
-"end": 3.18,
-"line": 0
+"w": "looks",
+"start": 2.46,
+"end": 2.58
 },
 {
-"word": "for,",
-"start": 3.18,
-"end": 3.43,
-"line": 0
+"w": "professional.",
+"start": 2.58,
+"end": 2.92
 },
 {
-"word": "and",
-"start": 3.12,
-"end": 3.19,
-"line": 1
+"w": "It",
+"start": 3.08,
+"end": 3.08
 },
 {
-"word": "I'm",
-"start": 3.19,
-"end": 3.29,
-"line": 1
+"w": "plays",
+"start": 3.08,
+"end": 3.26
 },
 {
-"word": "not",
-"start": 3.29,
-"end": 3.44,
-"line": 1
+"w": "Canva",
+"start": 3.26,
+"end": 3.6
 },
 {
-"word": "talking",
-"start": 3.44,
-"end": 3.79,
-"line": 1
+"w": "AI.",
+"start": 3.6,
+"end": 3.8
 },
 {
-"word": "basic",
-"start": 3.79,
-"end": 4.13,
-"line": 1
+"w": "Instant",
+"start": 4.24,
+"end": 4.28
 },
 {
-"word": "AI",
-"start": 4.13,
-"end": 4.23,
-"line": 1
+"w": "but",
+"start": 4.28,
+"end": 4.72
 },
 {
-"word": "looking",
-"start": 4.23,
-"end": 4.67,
-"line": 1
+"w": "everything",
+"start": 4.72,
+"end": 4.92
 },
 {
-"word": "templates,",
-"start": 4.67,
-"end": 5.37,
-"line": 1
+"w": "it",
+"start": 4.92,
+"end": 4.92
 },
 {
-"word": "I",
-"start": 5.37,
-"end": 5.42,
-"line": 1
+"w": "makes",
+"start": 4.92,
+"end": 5.24
 },
 {
-"word": "mean",
+"w": "looks",
+"start": 5.24,
+"end": 5.42
+},
+{
+"w": "like",
 "start": 5.42,
-"end": 5.67,
-"line": 1
+"end": 5.56
 },
 {
-"word": "actual",
-"start": 5.67,
-"end": 6.05,
-"line": 1
+"w": "everyone",
+"start": 5.56,
+"end": 5.72
 },
 {
-"word": "premium",
-"start": 6.05,
-"end": 6.5,
-"line": 1
+"w": "else's",
+"start": 5.72,
+"end": 6.04
 },
 {
-"word": "on-brand",
-"start": 6.5,
-"end": 7.01,
-"line": 1
+"w": "one",
+"start": 6.04,
+"end": 6.26
 },
 {
-"word": "graphics.",
-"start": 7.01,
-"end": 7.77,
-"line": 1
+"w": "star.",
+"start": 6.26,
+"end": 6.5
 },
 {
-"word": "You",
-"start": 7.78,
-"end": 7.92,
-"line": 2
+"w": "Fourth,",
+"start": 6.84,
+"end": 7.0
 },
 {
-"word": "give",
-"start": 7.92,
-"end": 8.12,
-"line": 2
+"w": "Uizer.",
+"start": 7.26,
+"end": 7.4
 },
 {
-"word": "your",
+"w": "Turns",
+"start": 7.8,
+"end": 7.84
+},
+{
+"w": "your",
+"start": 7.84,
+"end": 7.98
+},
+{
+"w": "words",
+"start": 7.98,
+"end": 8.12
+},
+{
+"w": "into",
 "start": 8.12,
-"end": 8.27,
-"line": 2
+"end": 8.32
 },
 {
-"word": "brand",
-"start": 8.27,
-"end": 8.5,
-"line": 2
+"w": "a",
+"start": 8.32,
+"end": 8.4
 },
 {
-"word": "once,",
-"start": 8.5,
-"end": 8.77,
-"line": 2
+"w": "screen",
+"start": 8.4,
+"end": 8.58
 },
 {
-"word": "your",
-"start": 8.77,
-"end": 8.95,
-"line": 2
+"w": "and",
+"start": 8.58,
+"end": 8.72
 },
 {
-"word": "logo,",
-"start": 8.95,
-"end": 9.22,
-"line": 2
+"w": "the",
+"start": 8.72,
+"end": 8.8
 },
 {
-"word": "your",
-"start": 9.22,
-"end": 9.4,
-"line": 2
+"w": "screen",
+"start": 8.8,
+"end": 8.98
 },
 {
-"word": "colors,",
-"start": 9.4,
-"end": 9.76,
-"line": 2
+"w": "is",
+"start": 8.98,
+"end": 9.18
 },
 {
-"word": "your",
-"start": 9.76,
-"end": 9.93,
-"line": 2
+"w": "an",
+"start": 9.18,
+"end": 9.26
 },
 {
-"word": "style,",
-"start": 9.93,
-"end": 10.27,
-"line": 2
+"w": "hour",
+"start": 9.26,
+"end": 9.44
 },
 {
-"word": "and",
-"start": 10.27,
-"end": 10.39,
-"line": 2
+"w": "of",
+"start": 9.44,
+"end": 9.54
 },
 {
-"word": "it",
-"start": 10.39,
-"end": 10.49,
-"line": 2
+"w": "cleanup.",
+"start": 9.54,
+"end": 9.68
 },
 {
-"word": "becomes",
-"start": 10.49,
-"end": 10.8,
-"line": 2
+"w": "One",
+"start": 10.04,
+"end": 10.06
 },
 {
-"word": "your",
-"start": 10.8,
-"end": 11.0,
-"line": 2
+"w": "star.",
+"start": 10.06,
+"end": 10.24
 },
 {
-"word": "designer",
-"start": 11.0,
-"end": 11.46,
-"line": 2
+"w": "Third,",
+"start": 10.76,
+"end": 10.76
 },
 {
-"word": "on",
-"start": 11.46,
-"end": 11.64,
-"line": 2
+"w": "Framer.",
+"start": 11.16,
+"end": 11.3
 },
 {
-"word": "demand.",
-"start": 11.64,
-"end": 12.46,
-"line": 2
+"w": "Just",
+"start": 11.6,
+"end": 11.6
 },
 {
-"word": "Ask",
-"start": 12.38,
-"end": 12.55,
-"line": 3
+"w": "publish",
+"start": 11.6,
+"end": 11.88
 },
 {
-"word": "for",
-"start": 12.55,
-"end": 12.72,
-"line": 3
+"w": "it",
+"start": 11.88,
+"end": 12.02
 },
 {
-"word": "a",
-"start": 12.72,
-"end": 12.77,
-"line": 3
+"w": "in",
+"start": 12.02,
+"end": 12.1
 },
 {
-"word": "week",
-"start": 12.77,
-"end": 12.99,
-"line": 3
+"w": "one",
+"start": 12.1,
+"end": 12.22
 },
 {
-"word": "of",
-"start": 12.99,
-"end": 13.1,
-"line": 3
+"w": "click,",
+"start": 12.22,
+"end": 12.4
 },
 {
-"word": "social",
-"start": 13.1,
-"end": 13.46,
-"line": 3
+"w": "but",
+"start": 12.56,
+"end": 12.58
 },
 {
-"word": "posts",
-"start": 13.46,
-"end": 13.72,
-"line": 3
+"w": "you're",
+"start": 12.58,
+"end": 12.64
 },
 {
-"word": "and",
-"start": 13.72,
-"end": 13.89,
-"line": 3
+"w": "stuck",
+"start": 12.64,
+"end": 12.8
 },
 {
-"word": "it",
-"start": 13.89,
-"end": 14.0,
-"line": 3
+"w": "on",
+"start": 12.8,
+"end": 12.96
 },
 {
-"word": "designs",
-"start": 14.0,
-"end": 14.4,
-"line": 3
+"w": "the",
+"start": 12.96,
+"end": 13.0
 },
 {
-"word": "all",
-"start": 14.4,
-"end": 14.57,
-"line": 3
+"w": "platform",
+"start": 13.0,
+"end": 13.18
 },
 {
-"word": "of",
-"start": 14.57,
-"end": 14.68,
-"line": 3
+"w": "forever.",
+"start": 13.18,
+"end": 13.48
 },
 {
-"word": "them",
-"start": 14.68,
-"end": 14.9,
-"line": 3
+"w": "Two",
+"start": 13.78,
+"end": 13.8
 },
 {
-"word": "on",
-"start": 14.9,
-"end": 15.01,
-"line": 3
+"w": "stars.",
+"start": 13.8,
+"end": 14.0
 },
 {
-"word": "brand.",
-"start": 15.01,
-"end": 15.54,
-"line": 3
+"w": "In",
+"start": 14.28,
+"end": 14.28
 },
 {
-"word": "Need",
-"start": 15.52,
-"end": 15.73,
-"line": 4
+"w": "Figma,",
+"start": 14.28,
+"end": 14.62
 },
 {
-"word": "an",
-"start": 15.73,
-"end": 15.86,
-"line": 4
+"w": "the",
+"start": 14.74,
+"end": 14.78
 },
 {
-"word": "ad",
-"start": 15.86,
-"end": 15.93,
-"line": 4
+"w": "tool",
+"start": 14.78,
+"end": 14.92
 },
 {
-"word": "creative?",
-"start": 15.93,
-"end": 16.52,
-"line": 4
+"w": "the",
+"start": 14.92,
+"end": 15.02
 },
 {
-"word": "It",
-"start": 16.52,
-"end": 16.66,
-"line": 4
+"w": "pros",
+"start": 15.02,
+"end": 15.14
 },
 {
-"word": "lays",
-"start": 16.66,
-"end": 16.76,
-"line": 4
+"w": "actually",
+"start": 15.14,
+"end": 15.42
 },
 {
-"word": "out",
-"start": 16.76,
-"end": 16.89,
-"line": 4
+"w": "use",
+"start": 15.42,
+"end": 15.74
 },
 {
-"word": "the",
-"start": 16.89,
-"end": 17.0,
-"line": 4
+"w": "also",
+"start": 15.74,
+"end": 16.0
 },
 {
-"word": "graphic",
-"start": 17.0,
-"end": 17.29,
-"line": 4
+"w": "stops",
+"start": 16.0,
+"end": 16.3
 },
 {
-"word": "and",
-"start": 17.29,
-"end": 17.41,
-"line": 4
+"w": "at",
+"start": 16.3,
+"end": 16.46
 },
 {
-"word": "writes",
-"start": 17.41,
-"end": 17.66,
-"line": 4
+"w": "a",
+"start": 16.46,
+"end": 16.46
 },
 {
-"word": "the",
-"start": 17.66,
-"end": 17.78,
-"line": 4
+"w": "picture",
+"start": 16.46,
+"end": 16.68
 },
 {
-"word": "copy.",
-"start": 17.78,
-"end": 18.12,
-"line": 4
+"w": "you",
+"start": 16.68,
+"end": 16.68
 },
 {
-"word": "Thumbnails,",
-"start": 18.12,
-"end": 18.76,
-"line": 4
+"w": "still",
+"start": 16.68,
+"end": 16.98
 },
 {
-"word": "one-pagers,",
-"start": 18.76,
-"end": 19.37,
-"line": 4
+"w": "have",
+"start": 16.98,
+"end": 17.1
 },
 {
-"word": "pitch",
-"start": 19.37,
-"end": 19.63,
-"line": 4
+"w": "to",
+"start": 17.1,
+"end": 17.16
 },
 {
-"word": "slide,",
-"start": 19.63,
-"end": 19.99,
-"line": 4
+"w": "build.",
+"start": 17.16,
+"end": 17.32
 },
 {
-"word": "it",
-"start": 19.99,
-"end": 20.09,
-"line": 4
+"w": "Two",
+"start": 17.48,
+"end": 17.56
 },
 {
-"word": "designs",
-"start": 20.09,
-"end": 20.46,
-"line": 4
+"w": "stars.",
+"start": 17.56,
+"end": 17.8
 },
 {
-"word": "those",
-"start": 20.46,
-"end": 20.72,
-"line": 4
+"w": "In",
+"start": 18.08,
+"end": 18.08
 },
 {
-"word": "too,",
-"start": 20.72,
-"end": 20.98,
-"line": 4
+"w": "your",
+"start": 18.08,
+"end": 18.16
 },
 {
-"word": "all",
-"start": 20.98,
-"end": 21.14,
-"line": 4
+"w": "winner,",
+"start": 18.16,
+"end": 18.34
 },
 {
-"word": "in",
-"start": 21.14,
-"end": 21.24,
-"line": 4
+"w": "V0.",
+"start": 18.5,
+"end": 18.76
 },
 {
-"word": "your",
-"start": 21.24,
-"end": 21.46,
-"line": 4
+"w": "Describe",
+"start": 19.0,
+"end": 19.16
 },
 {
-"word": "exact",
-"start": 21.46,
-"end": 21.71,
-"line": 4
+"w": "what",
+"start": 19.16,
+"end": 19.26
 },
 {
-"word": "style",
-"start": 21.71,
-"end": 21.97,
-"line": 4
+"w": "you",
+"start": 19.26,
+"end": 19.32
 },
 {
-"word": "in",
-"start": 21.97,
-"end": 22.07,
-"line": 4
+"w": "want",
+"start": 19.32,
+"end": 19.48
 },
 {
-"word": "minutes.",
-"start": 22.07,
-"end": 22.76,
-"line": 4
+"w": "and",
+"start": 19.48,
+"end": 19.6
 },
 {
-"word": "A",
-"start": 22.71,
-"end": 22.76,
-"line": 5
+"w": "it",
+"start": 19.6,
+"end": 19.7
 },
 {
-"word": "designer",
-"start": 22.76,
-"end": 23.18,
-"line": 5
+"w": "hands",
+"start": 19.7,
+"end": 19.84
 },
 {
-"word": "charges",
-"start": 23.18,
-"end": 23.54,
-"line": 5
+"w": "you",
+"start": 19.84,
+"end": 19.96
 },
 {
-"word": "hundreds",
-"start": 23.54,
-"end": 23.96,
-"line": 5
+"w": "a",
+"start": 19.96,
+"end": 20.0
 },
 {
-"word": "for",
-"start": 23.96,
-"end": 24.11,
-"line": 5
+"w": "real",
+"start": 20.0,
+"end": 20.3
 },
 {
-"word": "one",
-"start": 24.11,
-"end": 24.29,
-"line": 5
+"w": "good",
+"start": 20.3,
+"end": 20.48
 },
 {
-"word": "of",
-"start": 24.29,
-"end": 24.36,
-"line": 5
+"w": "-looking",
+"start": 20.48,
+"end": 20.64
 },
 {
-"word": "these",
-"start": 24.36,
-"end": 24.62,
-"line": 5
+"w": "design",
+"start": 20.64,
+"end": 20.88
 },
 {
-"word": "and",
-"start": 24.62,
-"end": 24.77,
-"line": 5
+"w": "you",
+"start": 20.88,
+"end": 21.0
 },
 {
-"word": "takes",
-"start": 24.77,
-"end": 25.03,
-"line": 5
+"w": "can",
+"start": 21.0,
+"end": 21.1
 },
 {
-"word": "a",
-"start": 25.03,
-"end": 25.08,
-"line": 5
+"w": "actually",
+"start": 21.1,
+"end": 21.3
 },
 {
-"word": "week.",
-"start": 25.08,
-"end": 25.51,
-"line": 5
+"w": "share.",
+"start": 21.3,
+"end": 21.48
 },
 {
-"word": "Claude",
-"start": 25.51,
-"end": 25.85,
-"line": 5
+"w": "Three",
+"start": 21.82,
+"end": 21.88
 },
 {
-"word": "can",
-"start": 25.85,
-"end": 26.0,
-"line": 5
+"w": "stars.",
+"start": 21.88,
+"end": 22.12
 },
 {
-"word": "do",
-"start": 26.0,
-"end": 26.11,
-"line": 5
+"w": "The",
+"start": 22.34,
+"end": 22.36
 },
 {
-"word": "the",
-"start": 26.11,
-"end": 26.27,
-"line": 5
+"w": "Golden",
+"start": 22.36,
+"end": 22.46
 },
 {
-"word": "whole",
-"start": 26.27,
-"end": 26.59,
-"line": 5
+"w": "Buzzer.",
+"start": 22.46,
+"end": 22.78
 },
 {
-"word": "set",
-"start": 26.59,
-"end": 26.7,
-"line": 5
+"w": "Comment",
+"start": 23.24,
+"end": 23.24
 },
 {
-"word": "in",
-"start": 26.7,
-"end": 26.81,
-"line": 5
+"w": "design",
+"start": 23.24,
+"end": 23.46
 },
 {
-"word": "one",
-"start": 26.81,
-"end": 26.97,
-"line": 5
+"w": "for",
+"start": 23.46,
+"end": 23.64
 },
 {
-"word": "chat.",
-"start": 26.97,
-"end": 27.39,
-"line": 5
+"w": "the",
+"start": 23.64,
+"end": 23.74
 },
 {
-"word": "Comment",
-"start": 27.56,
-"end": 27.9,
-"line": 6
+"w": "full",
+"start": 23.74,
+"end": 23.86
 },
 {
-"word": "design",
-"start": 27.9,
-"end": 28.13,
-"line": 6
-},
-{
-"word": "and",
-"start": 28.13,
-"end": 28.25,
-"line": 6
-},
-{
-"word": "I'll",
-"start": 28.25,
-"end": 28.43,
-"line": 6
-},
-{
-"word": "send",
-"start": 28.43,
-"end": 28.64,
-"line": 6
-},
-{
-"word": "you",
-"start": 28.64,
-"end": 28.74,
-"line": 6
-},
-{
-"word": "the",
-"start": 28.74,
-"end": 28.87,
-"line": 6
-},
-{
-"word": "exact",
-"start": 28.87,
-"end": 29.14,
-"line": 6
-},
-{
-"word": "setup.",
-"start": 29.14,
-"end": 29.4,
-"line": 6
+"w": "ranking.",
+"start": 23.86,
+"end": 24.02
 }
 ]

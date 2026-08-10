@@ -1,0 +1,42 @@
+TITLE   OPEN GENERATIVE AI
+SUB     The open source AI studio that replaces a monthly video subscription with your own API key
+
+H       What it actually is
+P       Open Generative AI is a free, MIT licensed app built by Anil Matcha. It puts image generation, video generation, lip sync and a cinema camera studio into one interface, and it points all of them at a very large catalogue of models.
+P       The repo is at github.com/Anil-matcha/Open-Generative-AI. It has passed 25,000 stars. The README describes 400 plus models across 14 studios, which is more than most people realise when they first open it.
+RULE
+
+H       Set it up in four steps
+NUM     Open the repo and grab the release for your machine, or clone it and run it locally. There is a prebuilt installer, so you do not need Node.
+NUM     Open settings and paste in your provider key. That key is what actually pays for generations, and it stays on your machine.
+NUM     Pick a studio from the sidebar. Image and Video are the obvious starting points, Lip Sync is the one people forget.
+NUM     Generate. You are billed by your provider for that generation and nothing else.
+RULE
+
+H       Cinema Studio, the part worth the install
+P       Cinema Studio is the closest thing here to the paid camera-control products. The README's own words are pro camera controls, and it exposes Lens, Focal Length and Aperture as real inputs rather than as prompt text you have to guess at.
+B       You set the shot the way you would set a shot, not by describing it.
+B       The same prompt at f/1.8 and at f/8 gives you two genuinely different images.
+B       It sits alongside the other studios, so you are not paying for a separate tool to do it.
+RULE
+
+H       Models you will recognise
+B       Seedance 2.0, Kling and Veo for video.
+B       Flux, Midjourney and Sora for image and video generation.
+B       Plus a long tail of open models most hosted products never expose to you.
+RULE
+
+H       What it costs, honestly
+P       The app is free and open source under MIT. There is no subscription to Open Generative AI, no monthly credit allowance and no recurring bill from it.
+P       The models are not free. You bring your own API key and you pay your provider for each generation. If you generate nothing this month, you pay nothing this month. That is the actual difference from a subscription, and it is a real one.
+P       One thing worth knowing before you judge the hype: this project has been in development since early 2026, not for a single week. The star count is real, the timeline in some posts about it is not.
+RULE
+
+H       Who it is for
+B       Anyone paying monthly for an AI video tool who does not use it every month.
+B       Anyone who wants camera controls instead of prompt guesswork.
+B       Anyone who wants image, video and lip sync in one place rather than three tabs.
+B       Anyone who would rather own their bill than rent their allowance.
+RULE
+
+KEY     Comment OPEN and I will send you the link.

@@ -1,0 +1,47 @@
+TITLE   Rowboat, End To End
+SUB     The open source agent tool two Y Combinator founders gave away, what it actually is today, and how to run it yourself
+
+H       What this is
+P       Rowboat is an open source project from Rowboat Labs, a Y Combinator S24 company founded by Arjun Maheswaran and Ramnique Singh. It is on GitHub under the Apache 2.0 licence, which is the permissive one: you can use it commercially, modify it, and ship it inside your own product, as long as you keep the licence and the notices.
+P       Every number and claim in this guide was read from the project's own GitHub repository and from ycombinator.com on 4 August 2026. Where something could not be confirmed from a primary source it is marked as such rather than repeated.
+
+H       The facts, and where each one comes from
+B       Repository: github.com/rowboatlabs/rowboat
+B       16,974 stars and 1,687 forks, read from the repository on 4 August 2026
+B       Licence: Apache 2.0, stated in the repository
+B       Backing: Y Combinator, S24 batch, per the badge in the README and the YC company page
+B       Founders: Arjun Maheswaran and Ramnique Singh, per ycombinator.com/companies/rowboat-labs
+B       Tooling: connects to external tools over MCP, the Model Context Protocol
+
+H       The part the video does not have room for
+P       Read this bit before you install anything, because it will save you an afternoon.
+P       Rowboat has changed. The version most articles and most YouTube videos describe is the one from around April 2025: you write what you want an agent to do in plain English, a copilot assembles a multi agent system for you, and you connect it to your tools. That is the version the internet remembers, and forks of it still carry that description.
+P       What the repository describes today is different. It calls itself an open source AI coworker with memory: a desktop application with a local knowledge graph, an email client, background agents, a browser and a meeting note taker. Same project, same founders, same licence, different product.
+P       Neither version is the wrong one to want. But if you install it expecting the copilot that writes a multi agent system for you and you get a desktop coworker, nothing has gone wrong, you have just read an old description. Check the README on the day you install it.
+
+H       What Coinbase actually bought
+P       This gets repeated wrongly a lot, so it is worth being exact. Coinbase did not buy Rowboat. Coinbase acquired Agara, an earlier company the founders were part of, in 2021. Rowboat is what they built afterwards and it is the thing they open sourced.
+P       Why that distinction matters to you: it means the people behind this have shipped AI that a public company thought was worth buying, and then gave the next one away. That is the actual signal. An acquisition of Rowboat itself would mean the opposite.
+
+H       Running it yourself
+NUM     Open github.com/rowboatlabs/rowboat and read the README first. It is the only description of the project that is current by definition.
+NUM     Follow the install steps in that README rather than any blog post, including this one. Setup steps for a fast moving project go stale in weeks.
+NUM     Check the LICENSE file if you plan to use it commercially. Apache 2.0 is permissive, but it has a notice requirement, and it has an express patent grant that some other licences do not.
+NUM     Look at the MCP configuration before you wire anything sensitive to it. MCP is how the project talks to outside tools, so that is where your credentials and your data boundaries live.
+
+H       How to judge any open source tool in about five minutes
+P       This applies well beyond this one project, and it is most of what separates a tool that will still be there next year from one that will not.
+NUM     Look at the commit history, not the star count. Stars measure attention on the day something trended. Recent commits measure whether anyone is still there.
+NUM     Check the date of the last release, and whether issues are being answered.
+NUM     Read the licence. MIT and Apache 2.0 let you build a business on top. AGPL has real obligations if you ship it as a service. This is a two minute check that occasionally saves a rewrite.
+NUM     Look for the gap between the README and the code. A README describing a product the repository does not contain is the single most common way people lose a weekend, and it is exactly what happened to the older descriptions of this project.
+NUM     Search the issues for the word migration or breaking. It tells you what upgrading actually costs.
+
+H       Honest limits of this guide
+P       Two things here are not verified and are flagged rather than smoothed over.
+B       Whether the copilot that builds a multi agent system from a plain English description still ships in the current desktop application. The current README does not describe it.
+B       Any performance number. There is no sourced figure for how long the tool takes to produce anything, so this guide does not give you one.
+
+RULE
+
+KEY     Comment ROWBOAT on the reel and I will send you this guide plus the direct repo link.

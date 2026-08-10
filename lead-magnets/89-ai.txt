@@ -1,0 +1,80 @@
+TITLE   The Wrap Up Skill
+SUB     Give Claude a memory that survives the chat window, using NotebookLM as the second brain
+
+H       What this is
+P       Claude starts every conversation from zero. That is not a bug, it is how the context window works, and it is why you keep re-pasting the same background before you can ask the real question. You pay for those tokens every single time.
+P       This guide sets up a wrap up skill. At the end of a working session Claude writes a structured summary of what happened, and that summary goes into a NotebookLM notebook you keep forever. Next session, instead of re-pasting your whole history, Claude reads back only the part it needs.
+P       One honest note before you start, because it changes how you set this up. NotebookLM has no public write API. Nothing can push a file into a notebook for you automatically. What the skill does is produce a clean, well shaped file in a folder you control. Getting that folder into NotebookLM is a one time setup, and after that it is either automatic through Google Drive or a five second upload. Anyone telling you otherwise has not tried it.
+
+H       What you need
+B       Claude Code, on any plan
+B       A Google account with NotebookLM enabled
+B       A folder on your machine for the wrap ups. This guide uses ~/claude-memory
+
+H       Step 1. Make the memory folder
+NUM     mkdir -p ~/claude-memory
+NUM     If you want the Google Drive route in Step 4, make this folder inside your Drive folder instead, for example ~/Google Drive/My Drive/claude-memory
+NUM     Add one file called INDEX.md with a single line in it: "Session wrap ups, newest last." Claude appends to this, and it becomes the table of contents NotebookLM reads first.
+
+H       Step 2. Create the skill
+P       In your project, make the file .claude/skills/wrap-up/SKILL.md. A skill is just a markdown file with front matter, and Claude loads it when the description matches what you are asking for.
+NUM     mkdir -p .claude/skills/wrap-up
+NUM     Create .claude/skills/wrap-up/SKILL.md
+NUM     Put the front matter block in first: three dashes, then name: wrap-up, then a description that says when to use it, then three dashes again.
+NUM     The description is the part that matters most. It is the only thing Claude sees before deciding whether to load the skill, so write it as a trigger, not as a title. Something like: use at the end of a working session, or when the user says wrap up, save this, or end of session.
+P       The body of the skill is the instruction set. The full file, with the exact wording of every section and the front matter, is in the copy paste block at the end of this guide.
+
+H       Step 3. What the wrap up should actually capture
+P       This is the part most people get wrong. They save a transcript. A transcript is the worst possible input for retrieval, because the useful facts are buried in the conversation around them and the file is mostly noise you already paid for once.
+P       Save decisions, not dialogue. The skill should write six things and nothing else.
+NUM     A one line summary of what the session was about
+NUM     Decisions made, and the reason for each. The reason is what stops you re-litigating it in three weeks.
+NUM     Files touched, with a sentence on what changed in each
+NUM     Anything that is still open, phrased as a question
+NUM     Facts discovered that were not obvious, for example a version number, an API quirk, a measured value
+NUM     Words someone would search for later to find this session
+P       That last one is doing more work than it looks. NotebookLM retrieval is semantic, but semantic search still needs something to be semantically close to. Writing the search terms down explicitly is the cheapest accuracy you will ever buy.
+
+H       Step 4. Get the folder into NotebookLM
+P       Two routes. Pick one.
+P       Route A, Google Drive, set up once and then hands off. Put the memory folder inside your Google Drive folder so it syncs. In NotebookLM, create a notebook, add a source, and pick the Google Drive files. New wrap ups land in Drive on their own. You still click to refresh a source in NotebookLM when you want it to see the newest version.
+P       Route B, upload, no sync, works everywhere. Keep the folder anywhere on disk. When you finish a session, upload the new wrap up file into the notebook as a source. It takes about five seconds and there is nothing to configure.
+P       Route A is less work per session. Route B has fewer moving parts and never silently stops working. If you are setting this up for the first time, start with B, and move to A once you know you will keep using it.
+
+H       Step 5. Reading it back
+P       The point of all this is the next session, so make the read side explicit or you will forget to use it. At the start of a session, ask NotebookLM the question you would otherwise have re-explained. For example: what did we decide about the auth flow, and why. Then paste the answer into Claude as your opening context.
+P       That paste is usually a paragraph. The thing it replaces is usually several pages. That difference is the whole point, and it is where the token saving actually comes from, not from anything clever.
+
+H       The part nobody mentions
+P       The skill will not fire if the description does not match how you actually talk. If you always say "ok we are done for today" and your description only lists "wrap up", it will never load, and you will conclude the whole idea does not work. Spend a minute writing the description in your own words, and add the two or three phrases you genuinely use.
+P       Also, wrap up at the end of a session, not at the end of a task. A session usually holds two or three related tasks, and the connections between them are the most valuable thing in the file. Wrap up after every task and you get a pile of fragments with the reasoning stripped out.
+P       And keep one file per session with the date in the name, rather than one growing file. NotebookLM handles many small sources better than one enormous one, and it lets you delete a bad session without unpicking it from everything else.
+
+H       The skill file, copy this
+P       Save as .claude/skills/wrap-up/SKILL.md
+P       ---
+P       name: wrap-up
+P       description: Use at the end of a working session, or when the user says wrap up, save this, end of session, or we are done for today. Writes a structured session summary into the memory folder so a later session can pick it up.
+P       ---
+P       # Wrap Up
+P       Write a session summary to ~/claude-memory/YYYY-MM-DD-<short-slug>.md using today's date and a three or four word slug describing the session.
+P       Use exactly these sections, in this order, and leave a section out entirely if it is empty rather than writing "none".
+P       ## Summary
+P       One sentence on what this session was about.
+P       ## Decisions
+P       Each decision on its own line, followed by the reason it was made. If a decision replaced an earlier one, say what it replaced.
+P       ## Files touched
+P       Each path, followed by one sentence on what changed in it.
+P       ## Open questions
+P       Anything unresolved, written as a question, not as a note.
+P       ## Facts worth keeping
+P       Non obvious things discovered this session. Version numbers, measured values, API behaviour that surprised us, a command that turned out to be wrong.
+P       ## Search terms
+P       Eight to twelve words or short phrases someone would type months from now to find this session.
+P       Then append one line to ~/claude-memory/INDEX.md: the date, the slug, and the one sentence summary.
+P       Do not include transcript text, code blocks, or anything already recorded in git history. Write what the code cannot tell you later.
+
+H       If you only do one thing
+P       Do Step 3. The folder, the skill file and the sync route are all replaceable. Writing decisions and reasons instead of transcripts is the part that makes the memory worth reading, and you can start doing it by hand today, before you automate any of it.
+
+KEY     Comment AI on the reel and I will send you this guide.

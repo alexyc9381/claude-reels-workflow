@@ -1,0 +1,1012 @@
+[
+{
+"word": " Most",
+"start": 0.0,
+"end": 0.125
+},
+{
+"word": " people",
+"start": 0.125,
+"end": 0.298
+},
+{
+"word": " don't",
+"start": 0.298,
+"end": 0.452
+},
+{
+"word": " know",
+"start": 0.452,
+"end": 0.587
+},
+{
+"word": " that",
+"start": 0.587,
+"end": 0.683
+},
+{
+"word": " you",
+"start": 0.683,
+"end": 0.76
+},
+{
+"word": " can",
+"start": 0.76,
+"end": 0.856
+},
+{
+"word": " stop",
+"start": 0.856,
+"end": 1.01
+},
+{
+"word": " burning",
+"start": 1.01,
+"end": 1.24
+},
+{
+"word": " through",
+"start": 1.24,
+"end": 1.394
+},
+{
+"word": " your",
+"start": 1.394,
+"end": 1.51
+},
+{
+"word": " Claude",
+"start": 1.51,
+"end": 1.644
+},
+{
+"word": " usage",
+"start": 1.644,
+"end": 1.875
+},
+{
+"word": " limits",
+"start": 1.875,
+"end": 2.125
+},
+{
+"word": " by",
+"start": 2.125,
+"end": 2.337
+},
+{
+"word": " running",
+"start": 2.337,
+"end": 2.567
+},
+{
+"word": " Google's",
+"start": 2.567,
+"end": 2.894
+},
+{
+"word": " brand",
+"start": 2.894,
+"end": 3.048
+},
+{
+"word": " new",
+"start": 3.048,
+"end": 3.26
+},
+{
+"word": " Gemini",
+"start": 3.26,
+"end": 3.413
+},
+{
+"word": " 3.6",
+"start": 3.413,
+"end": 4.125
+},
+{
+"word": " inside",
+"start": 4.125,
+"end": 4.317
+},
+{
+"word": " of",
+"start": 4.317,
+"end": 4.433
+},
+{
+"word": " Claude",
+"start": 4.433,
+"end": 4.587
+},
+{
+"word": " code.",
+"start": 4.587,
+"end": 4.798
+},
+{
+"word": " All",
+"start": 5.0,
+"end": 5.077
+},
+{
+"word": " of",
+"start": 5.077,
+"end": 5.173
+},
+{
+"word": " the",
+"start": 5.173,
+"end": 5.212
+},
+{
+"word": " smartest",
+"start": 5.212,
+"end": 5.481
+},
+{
+"word": " builders",
+"start": 5.481,
+"end": 5.923
+},
+{
+"word": " are",
+"start": 5.923,
+"end": 6.192
+},
+{
+"word": " already",
+"start": 6.192,
+"end": 6.327
+},
+{
+"word": " doing",
+"start": 6.327,
+"end": 6.577
+},
+{
+"word": " this",
+"start": 6.577,
+"end": 6.692
+},
+{
+"word": " by",
+"start": 6.692,
+"end": 6.827
+},
+{
+"word": " making",
+"start": 6.827,
+"end": 7.038
+},
+{
+"word": " Claude",
+"start": 7.038,
+"end": 7.231
+},
+{
+"word": " the",
+"start": 7.231,
+"end": 7.327
+},
+{
+"word": " boss",
+"start": 7.327,
+"end": 7.519
+},
+{
+"word": " and",
+"start": 7.519,
+"end": 7.692
+},
+{
+"word": " Gemini",
+"start": 7.692,
+"end": 7.827
+},
+{
+"word": " the",
+"start": 7.827,
+"end": 8.077
+},
+{
+"word": " worker.",
+"start": 8.077,
+"end": 8.25
+},
+{
+"word": " So",
+"start": 8.596,
+"end": 8.654
+},
+{
+"word": " stop",
+"start": 8.654,
+"end": 8.885
+},
+{
+"word": " arguing",
+"start": 8.885,
+"end": 9.212
+},
+{
+"word": " over",
+"start": 9.212,
+"end": 9.462
+},
+{
+"word": " which",
+"start": 9.462,
+"end": 9.692
+},
+{
+"word": " model",
+"start": 9.692,
+"end": 9.885
+},
+{
+"word": " is",
+"start": 9.885,
+"end": 10.077
+},
+{
+"word": " better",
+"start": 10.077,
+"end": 10.231
+},
+{
+"word": " and",
+"start": 10.231,
+"end": 10.423
+},
+{
+"word": " just",
+"start": 10.423,
+"end": 10.519
+},
+{
+"word": " use",
+"start": 10.519,
+"end": 10.673
+},
+{
+"word": " both",
+"start": 10.673,
+"end": 10.904
+},
+{
+"word": " of",
+"start": 10.904,
+"end": 11.038
+},
+{
+"word": " them",
+"start": 11.038,
+"end": 11.135
+},
+{
+"word": " on",
+"start": 11.135,
+"end": 11.231
+},
+{
+"word": " the",
+"start": 11.231,
+"end": 11.308
+},
+{
+"word": " same",
+"start": 11.308,
+"end": 11.5
+},
+{
+"word": " team.",
+"start": 11.5,
+"end": 11.75
+},
+{
+"word": " Let",
+"start": 12.029,
+"end": 12.077
+},
+{
+"word": " me",
+"start": 12.077,
+"end": 12.154
+},
+{
+"word": " show",
+"start": 12.154,
+"end": 12.327
+},
+{
+"word": " you.",
+"start": 12.327,
+"end": 12.442
+},
+{
+"word": " First,",
+"start": 12.692,
+"end": 12.692
+},
+{
+"word": " grab",
+"start": 12.808,
+"end": 12.923
+},
+{
+"word": " a",
+"start": 12.923,
+"end": 13.019
+},
+{
+"word": " Google",
+"start": 13.019,
+"end": 13.135
+},
+{
+"word": " AI",
+"start": 13.135,
+"end": 13.385
+},
+{
+"word": " key",
+"start": 13.385,
+"end": 13.577
+},
+{
+"word": " and",
+"start": 13.577,
+"end": 13.692
+},
+{
+"word": " install",
+"start": 13.692,
+"end": 13.846
+},
+{
+"word": " the",
+"start": 13.846,
+"end": 13.962
+},
+{
+"word": " Gemini",
+"start": 13.962,
+"end": 14.212
+},
+{
+"word": " CLI.",
+"start": 14.212,
+"end": 14.462
+},
+{
+"word": " Then",
+"start": 14.894,
+"end": 14.99
+},
+{
+"word": " go",
+"start": 14.99,
+"end": 15.24
+},
+{
+"word": " install",
+"start": 15.24,
+"end": 15.452
+},
+{
+"word": " the",
+"start": 15.452,
+"end": 15.587
+},
+{
+"word": " Gemini",
+"start": 15.587,
+"end": 15.798
+},
+{
+"word": " plugin",
+"start": 15.798,
+"end": 16.029
+},
+{
+"word": " for",
+"start": 16.029,
+"end": 16.298
+},
+{
+"word": " Claude",
+"start": 16.298,
+"end": 16.471
+},
+{
+"word": " code.",
+"start": 16.471,
+"end": 16.663
+},
+{
+"word": " Then",
+"start": 16.99,
+"end": 17.087
+},
+{
+"word": " use",
+"start": 17.087,
+"end": 17.183
+},
+{
+"word": " this",
+"start": 17.183,
+"end": 17.298
+},
+{
+"word": " prompt",
+"start": 17.298,
+"end": 17.49
+},
+{
+"word": " here",
+"start": 17.49,
+"end": 17.702
+},
+{
+"word": " so",
+"start": 17.702,
+"end": 17.856
+},
+{
+"word": " Claude",
+"start": 17.856,
+"end": 18.048
+},
+{
+"word": " can",
+"start": 18.048,
+"end": 18.202
+},
+{
+"word": " actually",
+"start": 18.202,
+"end": 18.49
+},
+{
+"word": " call",
+"start": 18.49,
+"end": 18.702
+},
+{
+"word": " Gemini",
+"start": 18.702,
+"end": 18.837
+},
+{
+"word": " 3.6",
+"start": 18.837,
+"end": 19.51
+},
+{
+"word": " and",
+"start": 19.51,
+"end": 19.663
+},
+{
+"word": " copy",
+"start": 19.663,
+"end": 19.875
+},
+{
+"word": " this",
+"start": 19.875,
+"end": 20.01
+},
+{
+"word": " exact",
+"start": 20.01,
+"end": 20.125
+},
+{
+"word": " prompt",
+"start": 20.125,
+"end": 20.75
+},
+{
+"word": " and",
+"start": 20.75,
+"end": 20.788
+},
+{
+"word": " copy",
+"start": 20.788,
+"end": 20.942
+},
+{
+"word": " this",
+"start": 20.942,
+"end": 21.135
+},
+{
+"word": " next",
+"start": 21.135,
+"end": 21.288
+},
+{
+"word": " prompt",
+"start": 21.288,
+"end": 21.596
+},
+{
+"word": " and",
+"start": 21.596,
+"end": 21.769
+},
+{
+"word": " give",
+"start": 21.769,
+"end": 21.923
+},
+{
+"word": " it",
+"start": 21.923,
+"end": 22.019
+},
+{
+"word": " to",
+"start": 22.019,
+"end": 22.096
+},
+{
+"word": " Claude",
+"start": 22.096,
+"end": 22.288
+},
+{
+"word": " so",
+"start": 22.288,
+"end": 22.481
+},
+{
+"word": " it",
+"start": 22.481,
+"end": 22.558
+},
+{
+"word": " builds",
+"start": 22.558,
+"end": 22.731
+},
+{
+"word": " the",
+"start": 22.731,
+"end": 22.865
+},
+{
+"word": " route",
+"start": 22.865,
+"end": 23.019
+},
+{
+"word": " skill",
+"start": 23.019,
+"end": 23.25
+},
+{
+"word": " that",
+"start": 23.25,
+"end": 23.577
+},
+{
+"word": " makes",
+"start": 23.577,
+"end": 23.75
+},
+{
+"word": " Claude",
+"start": 23.75,
+"end": 24.0
+},
+{
+"word": " the",
+"start": 24.0,
+"end": 24.173
+},
+{
+"word": " orchestrator",
+"start": 24.173,
+"end": 24.692
+},
+{
+"word": " and",
+"start": 24.692,
+"end": 24.808
+},
+{
+"word": " Gemini",
+"start": 24.808,
+"end": 24.962
+},
+{
+"word": " the",
+"start": 24.962,
+"end": 25.212
+},
+{
+"word": " executor.",
+"start": 25.212,
+"end": 25.731
+},
+{
+"word": " Don't",
+"start": 25.827,
+"end": 25.923
+},
+{
+"word": " worry,",
+"start": 25.923,
+"end": 26.058
+},
+{
+"word": " I'll",
+"start": 26.058,
+"end": 26.192
+},
+{
+"word": " give",
+"start": 26.192,
+"end": 26.308
+},
+{
+"word": " both",
+"start": 26.308,
+"end": 26.481
+},
+{
+"word": " of",
+"start": 26.481,
+"end": 26.615
+},
+{
+"word": " these",
+"start": 26.615,
+"end": 26.731
+},
+{
+"word": " to",
+"start": 26.731,
+"end": 26.865
+},
+{
+"word": " you",
+"start": 26.865,
+"end": 26.923
+},
+{
+"word": " at",
+"start": 26.923,
+"end": 27.019
+},
+{
+"word": " the",
+"start": 27.019,
+"end": 27.115
+},
+{
+"word": " end",
+"start": 27.115,
+"end": 27.269
+},
+{
+"word": " and",
+"start": 27.269,
+"end": 27.462
+},
+{
+"word": " now",
+"start": 27.462,
+"end": 27.635
+},
+{
+"word": " you're",
+"start": 27.635,
+"end": 27.712
+},
+{
+"word": " all",
+"start": 27.712,
+"end": 27.827
+},
+{
+"word": " set",
+"start": 27.827,
+"end": 27.962
+},
+{
+"word": " up.",
+"start": 27.962,
+"end": 28.135
+},
+{
+"word": " How",
+"start": 28.337,
+"end": 28.413
+},
+{
+"word": " it",
+"start": 28.413,
+"end": 28.51
+},
+{
+"word": " works",
+"start": 28.51,
+"end": 28.625
+},
+{
+"word": " is",
+"start": 28.625,
+"end": 28.779
+},
+{
+"word": " you",
+"start": 28.779,
+"end": 28.856
+},
+{
+"word": " just",
+"start": 28.856,
+"end": 29.029
+},
+{
+"word": " type",
+"start": 29.029,
+"end": 29.163
+},
+{
+"word": " slash",
+"start": 29.163,
+"end": 29.375
+},
+{
+"word": " route,",
+"start": 29.375,
+"end": 29.606
+},
+{
+"word": " then",
+"start": 29.76,
+"end": 29.798
+},
+{
+"word": " Claude",
+"start": 29.798,
+"end": 29.952
+},
+{
+"word": " takes",
+"start": 29.952,
+"end": 30.144
+},
+{
+"word": " over",
+"start": 30.144,
+"end": 30.317
+},
+{
+"word": " as",
+"start": 30.317,
+"end": 30.433
+},
+{
+"word": " boss,",
+"start": 30.433,
+"end": 30.606
+},
+{
+"word": " interviews",
+"start": 30.817,
+"end": 30.933
+},
+{
+"word": " you,",
+"start": 30.933,
+"end": 31.183
+},
+{
+"word": " builds",
+"start": 31.183,
+"end": 31.413
+},
+{
+"word": " the",
+"start": 31.413,
+"end": 31.548
+},
+{
+"word": " plan,",
+"start": 31.548,
+"end": 31.721
+},
+{
+"word": " hands",
+"start": 31.875,
+"end": 32.01
+},
+{
+"word": " each",
+"start": 32.01,
+"end": 32.163
+},
+{
+"word": " piece",
+"start": 32.163,
+"end": 32.375
+},
+{
+"word": " to",
+"start": 32.375,
+"end": 32.51
+},
+{
+"word": " Gemini",
+"start": 32.51,
+"end": 32.683
+},
+{
+"word": " 3.6",
+"start": 32.683,
+"end": 33.298
+},
+{
+"word": " and",
+"start": 33.298,
+"end": 33.529
+},
+{
+"word": " Gemini",
+"start": 33.529,
+"end": 33.702
+},
+{
+"word": " goes",
+"start": 33.702,
+"end": 34.01
+},
+{
+"word": " and",
+"start": 34.01,
+"end": 34.144
+},
+{
+"word": " builds",
+"start": 34.144,
+"end": 34.298
+},
+{
+"word": " everything.",
+"start": 34.298,
+"end": 34.625
+},
+{
+"word": " Claude",
+"start": 35.019,
+"end": 35.192
+},
+{
+"word": " reviews",
+"start": 35.192,
+"end": 35.404
+},
+{
+"word": " it",
+"start": 35.404,
+"end": 35.635
+},
+{
+"word": " and",
+"start": 35.635,
+"end": 35.712
+},
+{
+"word": " sends",
+"start": 35.712,
+"end": 35.827
+},
+{
+"word": " it",
+"start": 35.827,
+"end": 35.962
+},
+{
+"word": " back",
+"start": 35.962,
+"end": 36.077
+},
+{
+"word": " to",
+"start": 36.077,
+"end": 36.192
+},
+{
+"word": " Gemini",
+"start": 36.192,
+"end": 36.404
+},
+{
+"word": " until",
+"start": 36.404,
+"end": 36.635
+},
+{
+"word": " your",
+"start": 36.635,
+"end": 36.788
+},
+{
+"word": " whole",
+"start": 36.788,
+"end": 36.962
+},
+{
+"word": " project's",
+"start": 36.962,
+"end": 37.385
+},
+{
+"word": " done.",
+"start": 37.385,
+"end": 37.519
+},
+{
+"word": " And",
+"start": 37.76,
+"end": 37.827
+},
+{
+"word": " if",
+"start": 37.827,
+"end": 37.904
+},
+{
+"word": " you",
+"start": 37.904,
+"end": 37.981
+},
+{
+"word": " want",
+"start": 37.981,
+"end": 38.077
+},
+{
+"word": " my",
+"start": 38.077,
+"end": 38.173
+},
+{
+"word": " full",
+"start": 38.173,
+"end": 38.365
+},
+{
+"word": " build",
+"start": 38.365,
+"end": 38.558
+},
+{
+"word": " guide",
+"start": 38.558,
+"end": 38.75
+},
+{
+"word": " just",
+"start": 38.981,
+"end": 39.058
+},
+{
+"word": " comment",
+"start": 39.058,
+"end": 39.288
+},
+{
+"word": " route",
+"start": 39.288,
+"end": 39.5
+}
+]

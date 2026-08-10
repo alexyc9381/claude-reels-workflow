@@ -1,0 +1,497 @@
+[
+{
+"start": 0.0,
+"end": 0.22,
+"word": " This"
+},
+{
+"start": 0.22,
+"end": 0.46,
+"word": " AI"
+},
+{
+"start": 0.46,
+"end": 0.78,
+"word": " skill"
+},
+{
+"start": 0.64,
+"end": 0.82,
+"word": " lets"
+},
+{
+"start": 0.82,
+"end": 0.94,
+"word": " you"
+},
+{
+"start": 0.94,
+"end": 1.1,
+"word": " save"
+},
+{
+"start": 1.32,
+"end": 1.64,
+"word": " thousands"
+},
+{
+"start": 1.64,
+"end": 1.88,
+"word": " of"
+},
+{
+"start": 1.88,
+"end": 2.1,
+"word": " dollars"
+},
+{
+"start": 1.88,
+"end": 1.92,
+"word": " a"
+},
+{
+"start": 1.88,
+"end": 2.04,
+"word": " month"
+},
+{
+"start": 2.04,
+"end": 2.16,
+"word": " on"
+},
+{
+"start": 2.16,
+"end": 2.36,
+"word": " AI"
+},
+{
+"start": 2.38,
+"end": 2.6,
+"word": " tools"
+},
+{
+"start": 2.6,
+"end": 2.84,
+"word": " by"
+},
+{
+"start": 2.84,
+"end": 3.12,
+"word": " taking"
+},
+{
+"start": 3.08,
+"end": 3.2,
+"word": " the"
+},
+{
+"start": 3.2,
+"end": 3.4,
+"word": " system"
+},
+{
+"start": 3.4,
+"end": 3.66,
+"word": " prompts"
+},
+{
+"start": 3.81,
+"end": 4.01,
+"word": " of"
+},
+{
+"start": 4.01,
+"end": 4.13,
+"word": " the"
+},
+{
+"start": 4.13,
+"end": 4.29,
+"word": " top"
+},
+{
+"start": 4.13,
+"end": 4.37,
+"word": " models"
+},
+{
+"start": 4.37,
+"end": 4.61,
+"word": " like"
+},
+{
+"start": 4.61,
+"end": 4.95,
+"word": " Claude"
+},
+{
+"start": 4.97,
+"end": 5.09,
+"word": " Fable"
+},
+{
+"start": 5.09,
+"end": 5.27,
+"word": " 5"
+},
+{
+"start": 5.27,
+"end": 5.41,
+"word": " and"
+},
+{
+"start": 5.41,
+"end": 5.777,
+"word": " GPT"
+},
+{
+"start": 5.84,
+"end": 6.206,
+"word": " 5.6"
+},
+{
+"start": 6.206,
+"end": 6.573,
+"word": " Sol"
+},
+{
+"start": 6.853,
+"end": 7.053,
+"word": " and"
+},
+{
+"start": 7.053,
+"end": 7.233,
+"word": " putting"
+},
+{
+"start": 7.12,
+"end": 7.32,
+"word": " them"
+},
+{
+"start": 7.32,
+"end": 7.38,
+"word": " in"
+},
+{
+"start": 7.38,
+"end": 7.54,
+"word": " cheaper"
+},
+{
+"start": 7.69,
+"end": 8.01,
+"word": " models."
+},
+{
+"start": 8.64,
+"end": 8.68,
+"word": " And"
+},
+{
+"start": 8.68,
+"end": 8.76,
+"word": " it"
+},
+{
+"start": 8.76,
+"end": 8.9,
+"word": " has"
+},
+{
+"start": 8.76,
+"end": 8.9,
+"word": " over"
+},
+{
+"start": 8.9,
+"end": 9.78,
+"word": " 62,000"
+},
+{
+"start": 9.78,
+"end": 9.98,
+"word": " stars"
+},
+{
+"start": 9.99,
+"end": 10.11,
+"word": " on"
+},
+{
+"start": 10.11,
+"end": 10.27,
+"word": " GitHub."
+},
+{
+"start": 11.07,
+"end": 11.17,
+"word": " All"
+},
+{
+"start": 11.17,
+"end": 11.25,
+"word": " you"
+},
+{
+"start": 11.25,
+"end": 11.35,
+"word": " do"
+},
+{
+"start": 11.25,
+"end": 11.29,
+"word": " is"
+},
+{
+"start": 11.25,
+"end": 11.32,
+"word": " run"
+},
+{
+"start": 11.32,
+"end": 11.52,
+"word": " one"
+},
+{
+"start": 11.68,
+"end": 11.86,
+"word": " command"
+},
+{
+"start": 11.86,
+"end": 12.02,
+"word": " in"
+},
+{
+"start": 12.02,
+"end": 12.1,
+"word": " your"
+},
+{
+"start": 12.1,
+"end": 12.34,
+"word": " terminal"
+},
+{
+"start": 12.44,
+"end": 12.48,
+"word": " and"
+},
+{
+"start": 12.44,
+"end": 12.52,
+"word": " you'll"
+},
+{
+"start": 12.52,
+"end": 12.64,
+"word": " be"
+},
+{
+"start": 12.6,
+"end": 12.72,
+"word": " able"
+},
+{
+"start": 12.72,
+"end": 12.82,
+"word": " to"
+},
+{
+"start": 12.82,
+"end": 13.02,
+"word": " access"
+},
+{
+"start": 13.32,
+"end": 13.5,
+"word": " the"
+},
+{
+"start": 13.5,
+"end": 13.7,
+"word": " system"
+},
+{
+"start": 13.7,
+"end": 13.96,
+"word": " prompts"
+},
+{
+"start": 13.7,
+"end": 13.92,
+"word": " for"
+},
+{
+"start": 13.92,
+"end": 14.1,
+"word": " all"
+},
+{
+"start": 14.1,
+"end": 14.2,
+"word": " the"
+},
+{
+"start": 14.2,
+"end": 14.36,
+"word": " top"
+},
+{
+"start": 14.51,
+"end": 14.71,
+"word": " models"
+},
+{
+"start": 14.71,
+"end": 14.97,
+"word": " like"
+},
+{
+"start": 14.97,
+"end": 15.437,
+"word": " ChatGPT,"
+},
+{
+"start": 15.26,
+"end": 15.726,
+"word": " Claude,"
+},
+{
+"start": 15.726,
+"end": 16.193,
+"word": " Gemini,"
+},
+{
+"start": 16.193,
+"end": 16.433,
+"word": " Grok."
+},
+{
+"start": 17.09,
+"end": 17.37,
+"word": " Now,"
+},
+{
+"start": 17.47,
+"end": 17.65,
+"word": " the"
+},
+{
+"start": 17.65,
+"end": 17.87,
+"word": " dumbest"
+},
+{
+"start": 17.65,
+"end": 17.73,
+"word": " models"
+},
+{
+"start": 17.73,
+"end": 18.03,
+"word": " perform"
+},
+{
+"start": 18.03,
+"end": 18.37,
+"word": " just"
+},
+{
+"start": 18.45,
+"end": 18.63,
+"word": " as"
+},
+{
+"start": 18.63,
+"end": 18.77,
+"word": " well"
+},
+{
+"start": 18.63,
+"end": 18.73,
+"word": " as"
+},
+{
+"start": 18.73,
+"end": 18.81,
+"word": " the"
+},
+{
+"start": 18.81,
+"end": 18.95,
+"word": " best"
+},
+{
+"start": 18.95,
+"end": 19.21,
+"word": " models"
+},
+{
+"start": 19.23,
+"end": 19.45,
+"word": " at"
+},
+{
+"start": 19.45,
+"end": 19.51,
+"word": " a"
+},
+{
+"start": 19.51,
+"end": 19.75,
+"word": " fraction"
+},
+{
+"start": 19.87,
+"end": 20.09,
+"word": " of"
+},
+{
+"start": 20.09,
+"end": 20.17,
+"word": " the"
+},
+{
+"start": 20.17,
+"end": 20.33,
+"word": " price."
+},
+{
+"start": 20.71,
+"end": 20.75,
+"word": " Comment"
+},
+{
+"start": 20.71,
+"end": 21.01,
+"word": " TOOLS"
+},
+{
+"start": 21.01,
+"end": 21.25,
+"word": " and"
+},
+{
+"start": 21.25,
+"end": 21.33,
+"word": " I'll"
+},
+{
+"start": 21.36,
+"end": 21.5,
+"word": " send"
+},
+{
+"start": 21.5,
+"end": 21.62,
+"word": " it"
+},
+{
+"start": 21.62,
+"end": 21.82,
+"word": " immediately."
+}
+]

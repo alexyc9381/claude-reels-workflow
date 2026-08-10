@@ -133,13 +133,102 @@ export const Surface: React.FC<{ f: number; kind: WorldKind; pan?: number }> = (
     <div style={{ position: "absolute", left: 0, right: 0, top: H, bottom: 0, background: S.ground }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: H, height: 13, background: S.lip }} />
 
+    {/* --- DETAIL LAYER -------------------------------------------------
+        The hook shots measured 4 to 13 objects against 15-28 in the body, and
+        "needs to be way more detailed" is the same countable thing as before.
+        Everything below is shared, so enriching it lifts all nine worlds AND
+        every hook shot at once. Depth order: haze -> skyline -> boulders ->
+        grit -> foreground rocks, each on its own parallax rate. --------- */}
+
+    {/* haze sitting on the horizon, so the far ridge is not a hard cut */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: H - 46, height: 58,
+      background: S.lip, opacity: 0.34 }} />
+
+    {/* a far skyline: masts, dishes and dome silhouettes along the horizon */}
+    {Array.from({ length: 11 }, (_, i) => {
+      const x = ((i * 137 + rnd(i, 21) * 90) % (PW + 120)) - 60 - pan * 0.26;
+      const kind = i % 3, hh = 26 + rnd(i, 9) * 44;
+      return (
+        <div key={`sk${i}`} style={{ position: "absolute", left: x, top: H - hh, zIndex: 1 }}>
+          {kind === 0 && <div style={{ width: 7, height: hh, background: S.ridge[2] }} />}
+          {kind === 1 && (<>
+            <div style={{ position: "absolute", left: 3, top: hh * 0.36, width: 6, height: hh * 0.64, background: S.ridge[2] }} />
+            <div style={{ width: 34, height: hh * 0.4, borderRadius: "50% 50% 0 0", background: S.ridge[2] }} />
+          </>)}
+          {kind === 2 && <div style={{ width: 52, height: hh * 0.52, borderRadius: "50% 50% 0 0", background: S.ridge[2] }} />}
+        </div>
+      );
+    })}
+
+    {/* mid-ground boulders, each with its own cast shadow (one light direction) */}
+    {Array.from({ length: 7 }, (_, i) => {
+      const x = ((i * 191 + rnd(i, 5) * 120) % (PW + 160)) - 80 - pan * 0.62;
+      const y = H + 18 + rnd(i, 11) * 92, w = 46 + rnd(i, 13) * 74;
+      return (
+        <div key={`bo${i}`} style={{ position: "absolute", left: x, top: y, zIndex: 3 }}>
+          <div style={{ position: "absolute", left: w * 0.2, top: w * 0.42, width: w * 1.15, height: w * 0.2,
+            borderRadius: "50%", background: "rgba(26,30,40,0.20)" }} />
+          <div style={{ position: "relative", width: w, height: w * 0.62, background: S.rock,
+            clipPath: "polygon(14% 100%, 0 46%, 26% 8%, 62% 0, 92% 30%, 100% 100%)" }}>
+            <div style={{ position: "absolute", left: 0, top: 0, width: "52%", height: "100%",
+              background: "rgba(255,255,255,0.16)" }} />
+          </div>
+        </div>
+      );
+    })}
+
     {/* grit: flat stones scattered across the plane, bigger toward camera */}
-    {Array.from({ length: 22 }, (_, i) => {
+    {Array.from({ length: 26 }, (_, i) => {
       const t = rnd(i, 3), d = rnd(i, 7);
       const y = H + 26 + d * (PH - H - 60), w = 16 + d * 62;
       return <div key={i} style={{ position: "absolute", left: t * (PW + 80) - 40 - pan * 0.9, top: y,
-        width: w, height: w * 0.34, borderRadius: w * 0.2,
+        width: w, height: w * 0.34, borderRadius: w * 0.2, zIndex: 4,
         background: i % 3 === 0 ? S.rock : S.grit }} />;
+    })}
+
+    {/* per-world signature texture — the thing that says WHICH world this is */}
+    {kind === "ice" && Array.from({ length: 7 }, (_, i) => (
+      <div key={`cr${i}`} style={{ position: "absolute", left: -60 + i * 172 - pan * 0.9,
+        top: H + 40 + rnd(i, 17) * 260, width: 190 + rnd(i, 19) * 150, height: 5, zIndex: 5,
+        background: "#AFC9D6", transform: `rotate(${(rnd(i, 23) - 0.5) * 16}deg)` }} />
+    ))}
+    {kind === "dune" && Array.from({ length: 8 }, (_, i) => (
+      <div key={`rp${i}`} style={{ position: "absolute", left: -80 - pan * 0.9, top: H + 34 + i * 44,
+        width: PW + 160, height: 9, borderRadius: 5, zIndex: 5, opacity: 0.5,
+        background: i % 2 ? S.rock : S.lip }} />
+    ))}
+    {kind === "volcanic" && Array.from({ length: 6 }, (_, i) => (
+      <div key={`sm${i}`} style={{ position: "absolute", left: 40 + i * 176 - pan * 0.9,
+        top: H + 54 + rnd(i, 29) * 220, width: 120 + rnd(i, 31) * 130, height: 9, borderRadius: 5,
+        zIndex: 5, background: "#B84E2A", transform: `rotate(${(rnd(i, 33) - 0.5) * 14}deg)` }} />
+    ))}
+    {kind === "shatter" && Array.from({ length: 6 }, (_, i) => (
+      <div key={`sh${i}`} style={{ position: "absolute", left: 20 + i * 178 - pan * 0.8,
+        top: H - 40 - rnd(i, 37) * 44, width: 40 + rnd(i, 39) * 30, height: 60 + rnd(i, 41) * 70,
+        zIndex: 5, background: i % 2 ? S.rock : S.ridge[0],
+        clipPath: "polygon(46% 0, 100% 100%, 0 100%)",
+        transform: `rotate(${(rnd(i, 43) - 0.5) * 22}deg)` }} />
+    ))}
+    {kind === "moon" && Array.from({ length: 6 }, (_, i) => (
+      <div key={`cx${i}`} style={{ position: "absolute", left: 10 + i * 182 - pan * 0.9,
+        top: H + 44 + rnd(i, 45) * 210, width: 70 + rnd(i, 47) * 96, height: (70 + rnd(i, 47) * 96) * 0.34,
+        borderRadius: "50%", zIndex: 5, background: S.rock,
+        boxShadow: `inset 0 6px 0 ${S.grit}` }} />
+    ))}
+    {kind === "canyon" && Array.from({ length: 5 }, (_, i) => (
+      <div key={`st${i}`} style={{ position: "absolute", left: -60 - pan * 0.5, top: H - 176 + i * 34,
+        width: PW + 120, height: 22, zIndex: 2, opacity: 0.5,
+        background: i % 2 ? "#96693F" : "#C6A472" }} />
+    ))}
+
+    {/* rubble along the bottom edge. ⛔ z stays BELOW the cast (which sits at 13-18):
+        at z24 this became a beige band across the frame that cut the crew off at
+        the ankles in every scene. Foreground framing is not worth occluding the hero. */}
+    {Array.from({ length: 5 }, (_, i) => {
+      const w = 130 + rnd(i, 51) * 120;
+      return <div key={`fg${i}`} style={{ position: "absolute", left: -50 + i * 236 - pan * 1.25,
+        top: PH - 26 - rnd(i, 53) * 26, width: w, height: 92, zIndex: 6,
+        background: S.rock, clipPath: "polygon(10% 100%, 0 42%, 30% 12%, 58% 34%, 82% 6%, 100% 46%, 100% 100%)" }} />;
     })}
   </>);
 };
@@ -170,12 +259,12 @@ export const SkyWorld: React.FC<{ cx: number; cy: number; r: number; c: string; 
 /** an aurora: solid matte curtains, not a glow */
 export const Aurora: React.FC<{ f: number; z?: number }> = ({ f, z = 2 }) => (<>
   {[0, 1, 2, 3, 4].map((i) => {
-    const x = 40 + i * 196 + osc(f, 46 + i * 9, 18, i);
+    const x = 40 + i * 196 + osc(f, 70 + i * 11, 26, i);
     const h = 210 + (i % 2) * 74;
     return (
       <svg key={i} viewBox="0 0 160 300" width={160} height={h}
         style={{ position: "absolute", left: x, top: 30 + (i % 3) * 22, zIndex: z, overflow: "visible" }}>
-        <path d={`M78 0 Q ${40 + osc(f, 38, 12, i)} 150 ${96 + osc(f, 52, 16, i)} 300 L ${140 + osc(f, 52, 16, i)} 300 Q ${96 + osc(f, 38, 12, i)} 150 128 0 Z`}
+        <path d={`M78 0 Q ${40 + i * 6} 150 ${96 + i * 4} 300 L ${140 + i * 4} 300 Q ${96 + i * 6} 150 128 0 Z`}
           fill={i % 3 === 1 ? "#3E9C7A" : i % 3 === 0 ? "#2F7E68" : "#57B894"} opacity={0.8} />
       </svg>
     );
@@ -400,10 +489,10 @@ export const Hab: React.FC<{ f: number; x: number; y: number; s?: number; z?: nu
 
 /** tally marks cut into a rock — days, counted the way a person counts them */
 export const Tally: React.FC<{ f: number; x: number; y: number; n: number; at: number; c?: string;
-  z?: number }> = ({ f, x, y, n, at, c = "#F2E4C6", z = 18 }) => (
+  every?: number; z?: number }> = ({ f, x, y, n, at, c = "#F2E4C6", every = 2, z = 18 }) => (
   <div style={{ position: "absolute", left: x, top: y, width: Math.ceil(n / 5) * 78, height: 62, zIndex: z }}>
     {Array.from({ length: n }, (_, i) => {
-      const grp = Math.floor(i / 5), k = i % 5, on = f >= at + i * 2;
+      const grp = Math.floor(i / 5), k = i % 5, on = f >= at + i * every;
       if (!on) return null;
       return k === 4
         ? <div key={i} style={{ position: "absolute", left: grp * 78 - 4, top: 20, width: 58, height: 7,

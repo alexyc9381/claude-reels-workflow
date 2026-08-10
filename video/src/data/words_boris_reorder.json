@@ -1,0 +1,877 @@
+[
+{
+"start": 0.0,
+"end": 0.07,
+"word": " The"
+},
+{
+"start": 0.07,
+"end": 0.19,
+"word": " guy"
+},
+{
+"start": 0.19,
+"end": 0.31,
+"word": " who"
+},
+{
+"start": 0.19,
+"end": 0.23,
+"word": " built"
+},
+{
+"start": 0.19,
+"end": 0.38,
+"word": " Claude"
+},
+{
+"start": 0.38,
+"end": 0.58,
+"word": " Code"
+},
+{
+"start": 0.72,
+"end": 0.92,
+"word": " just"
+},
+{
+"start": 0.92,
+"end": 1.04,
+"word": " gave"
+},
+{
+"start": 1.04,
+"end": 1.14,
+"word": " a"
+},
+{
+"start": 1.14,
+"end": 1.32,
+"word": " talk"
+},
+{
+"start": 1.24,
+"end": 1.44,
+"word": " where"
+},
+{
+"start": 1.44,
+"end": 1.48,
+"word": " he"
+},
+{
+"start": 1.48,
+"end": 1.6,
+"word": " gave"
+},
+{
+"start": 1.5,
+"end": 1.62,
+"word": " away"
+},
+{
+"start": 1.62,
+"end": 1.88,
+"word": " three"
+},
+{
+"start": 1.88,
+"end": 2.16,
+"word": " things"
+},
+{
+"start": 2.26,
+"end": 2.52,
+"word": " 99%"
+},
+{
+"start": 2.92,
+"end": 3.02,
+"word": " of"
+},
+{
+"start": 3.02,
+"end": 3.2,
+"word": " users"
+},
+{
+"start": 3.2,
+"end": 3.34,
+"word": " are"
+},
+{
+"start": 3.44,
+"end": 3.58,
+"word": " getting"
+},
+{
+"start": 3.58,
+"end": 3.82,
+"word": " wrong"
+},
+{
+"start": 3.99,
+"end": 4.17,
+"word": " and"
+},
+{
+"start": 4.17,
+"end": 4.25,
+"word": " the"
+},
+{
+"start": 4.25,
+"end": 4.41,
+"word": " third"
+},
+{
+"start": 4.25,
+"end": 4.42,
+"word": " one"
+},
+{
+"start": 4.42,
+"end": 4.5,
+"word": " will"
+},
+{
+"start": 4.64,
+"end": 4.84,
+"word": " blow"
+},
+{
+"start": 4.84,
+"end": 5.0,
+"word": " your"
+},
+{
+"start": 5.0,
+"end": 5.22,
+"word": " mind."
+},
+{
+"start": 5.24,
+"end": 5.43,
+"word": " One."
+},
+{
+"start": 5.37,
+"end": 5.56,
+"word": " Stop"
+},
+{
+"start": 5.56,
+"end": 5.72,
+"word": " prompt"
+},
+{
+"start": 5.72,
+"end": 6.0,
+"word": " engineering."
+},
+{
+"start": 6.5,
+"end": 6.54,
+"word": " He"
+},
+{
+"start": 6.5,
+"end": 6.64,
+"word": " says"
+},
+{
+"start": 6.64,
+"end": 6.76,
+"word": " the"
+},
+{
+"start": 6.76,
+"end": 6.92,
+"word": " job"
+},
+{
+"start": 6.87,
+"end": 7.01,
+"word": " is"
+},
+{
+"start": 7.01,
+"end": 7.15,
+"word": " now"
+},
+{
+"start": 7.15,
+"end": 7.37,
+"word": " closer"
+},
+{
+"start": 7.51,
+"end": 7.71,
+"word": " to"
+},
+{
+"start": 7.71,
+"end": 7.85,
+"word": " being"
+},
+{
+"start": 7.85,
+"end": 7.95,
+"word": " a"
+},
+{
+"start": 7.95,
+"end": 8.19,
+"word": " scientist."
+},
+{
+"start": 8.71,
+"end": 8.75,
+"word": " Give"
+},
+{
+"start": 8.75,
+"end": 8.87,
+"word": " the"
+},
+{
+"start": 8.87,
+"end": 9.01,
+"word": " model"
+},
+{
+"start": 8.87,
+"end": 8.94,
+"word": " a"
+},
+{
+"start": 8.94,
+"end": 9.16,
+"word": " task"
+},
+{
+"start": 9.16,
+"end": 9.34,
+"word": " that"
+},
+{
+"start": 9.48,
+"end": 9.6,
+"word": " feels"
+},
+{
+"start": 9.6,
+"end": 9.88,
+"word": " slightly"
+},
+{
+"start": 9.88,
+"end": 10.18,
+"word": " too"
+},
+{
+"start": 10.13,
+"end": 10.39,
+"word": " hard"
+},
+{
+"start": 10.39,
+"end": 10.51,
+"word": " and"
+},
+{
+"start": 10.51,
+"end": 10.62,
+"word": " hand"
+},
+{
+"start": 10.6,
+"end": 10.71,
+"word": " it"
+},
+{
+"start": 10.71,
+"end": 10.82,
+"word": " a"
+},
+{
+"start": 10.82,
+"end": 10.93,
+"word": " way"
+},
+{
+"start": 11.02,
+"end": 11.16,
+"word": " to"
+},
+{
+"start": 11.16,
+"end": 11.32,
+"word": " check"
+},
+{
+"start": 11.32,
+"end": 11.46,
+"word": " its"
+},
+{
+"start": 11.46,
+"end": 11.58,
+"word": " own"
+},
+{
+"start": 11.46,
+"end": 11.62,
+"word": " work."
+},
+{
+"start": 12.19,
+"end": 12.23,
+"word": " Then"
+},
+{
+"start": 12.23,
+"end": 12.51,
+"word": " let"
+},
+{
+"start": 12.51,
+"end": 12.57,
+"word": " it"
+},
+{
+"start": 12.57,
+"end": 12.75,
+"word": " run"
+},
+{
+"start": 12.57,
+"end": 12.65,
+"word": " and"
+},
+{
+"start": 12.65,
+"end": 12.81,
+"word": " watch"
+},
+{
+"start": 12.81,
+"end": 13.01,
+"word": " where"
+},
+{
+"start": 13.19,
+"end": 13.25,
+"word": " it"
+},
+{
+"start": 13.25,
+"end": 13.51,
+"word": " actually"
+},
+{
+"start": 13.51,
+"end": 13.83,
+"word": " breaks."
+},
+{
+"start": 13.97,
+"end": 14.01,
+"word": " Once"
+},
+{
+"start": 13.99,
+"end": 14.15,
+"word": " it"
+},
+{
+"start": 14.15,
+"end": 14.31,
+"word": " breaks"
+},
+{
+"start": 14.47,
+"end": 14.69,
+"word": " you"
+},
+{
+"start": 14.69,
+"end": 14.83,
+"word": " fix"
+},
+{
+"start": 14.83,
+"end": 14.99,
+"word": " the"
+},
+{
+"start": 14.99,
+"end": 15.19,
+"word": " setup"
+},
+{
+"start": 15.04,
+"end": 15.32,
+"word": " around"
+},
+{
+"start": 15.32,
+"end": 15.5,
+"word": " it,"
+},
+{
+"start": 15.6,
+"end": 15.66,
+"word": " not"
+},
+{
+"start": 15.77,
+"end": 15.89,
+"word": " the"
+},
+{
+"start": 15.89,
+"end": 16.13,
+"word": " wording"
+},
+{
+"start": 16.13,
+"end": 16.33,
+"word": " of"
+},
+{
+"start": 16.33,
+"end": 16.41,
+"word": " the"
+},
+{
+"start": 16.41,
+"end": 16.61,
+"word": " prompt."
+},
+{
+"start": 17.06,
+"end": 17.1,
+"word": " Two."
+},
+{
+"start": 17.32,
+"end": 17.42,
+"word": " The"
+},
+{
+"start": 17.42,
+"end": 17.66,
+"word": " tasks"
+},
+{
+"start": 17.66,
+"end": 17.77,
+"word": " you"
+},
+{
+"start": 17.77,
+"end": 17.88,
+"word": " are"
+},
+{
+"start": 17.79,
+"end": 17.99,
+"word": " giving"
+},
+{
+"start": 17.99,
+"end": 18.03,
+"word": " it"
+},
+{
+"start": 17.99,
+"end": 18.15,
+"word": " are"
+},
+{
+"start": 18.15,
+"end": 18.47,
+"word": " far"
+},
+{
+"start": 18.47,
+"end": 18.69,
+"word": " too"
+},
+{
+"start": 18.69,
+"end": 18.93,
+"word": " small."
+},
+{
+"start": 19.21,
+"end": 19.25,
+"word": " He"
+},
+{
+"start": 19.23,
+"end": 19.37,
+"word": " handed"
+},
+{
+"start": 19.37,
+"end": 19.51,
+"word": " it"
+},
+{
+"start": 19.51,
+"end": 19.67,
+"word": " one"
+},
+{
+"start": 19.83,
+"end": 20.15,
+"word": " simple"
+},
+{
+"start": 20.15,
+"end": 20.51,
+"word": " instruction"
+},
+{
+"start": 20.51,
+"end": 20.77,
+"word": " to"
+},
+{
+"start": 20.77,
+"end": 20.91,
+"word": " rewrite"
+},
+{
+"start": 20.77,
+"end": 20.96,
+"word": " an"
+},
+{
+"start": 20.96,
+"end": 21.26,
+"word": " entire"
+},
+{
+"start": 21.26,
+"end": 21.5,
+"word": " app"
+},
+{
+"start": 21.76,
+"end": 21.88,
+"word": " in"
+},
+{
+"start": 21.88,
+"end": 21.94,
+"word": " a"
+},
+{
+"start": 21.94,
+"end": 22.14,
+"word": " different"
+},
+{
+"start": 21.98,
+"end": 22.34,
+"word": " language,"
+},
+{
+"start": 22.34,
+"end": 22.54,
+"word": " and"
+},
+{
+"start": 22.54,
+"end": 22.62,
+"word": " it's"
+},
+{
+"start": 22.62,
+"end": 22.76,
+"word": " been"
+},
+{
+"start": 22.75,
+"end": 22.97,
+"word": " running"
+},
+{
+"start": 22.97,
+"end": 23.13,
+"word": " on"
+},
+{
+"start": 23.13,
+"end": 23.25,
+"word": " its"
+},
+{
+"start": 23.25,
+"end": 23.37,
+"word": " own"
+},
+{
+"start": 23.36,
+"end": 23.52,
+"word": " for"
+},
+{
+"start": 23.52,
+"end": 23.68,
+"word": " two"
+},
+{
+"start": 23.68,
+"end": 23.84,
+"word": " weeks"
+},
+{
+"start": 23.73,
+"end": 23.95,
+"word": " straight."
+},
+{
+"start": 24.28,
+"end": 24.32,
+"word": " And"
+},
+{
+"start": 24.32,
+"end": 24.56,
+"word": " three."
+},
+{
+"start": 24.63,
+"end": 24.71,
+"word": " He"
+},
+{
+"start": 24.71,
+"end": 24.85,
+"word": " deleted"
+},
+{
+"start": 24.85,
+"end": 25.23,
+"word": " 80%"
+},
+{
+"start": 25.63,
+"end": 25.75,
+"word": " of"
+},
+{
+"start": 25.75,
+"end": 25.81,
+"word": " the"
+},
+{
+"start": 25.81,
+"end": 25.99,
+"word": " system"
+},
+{
+"start": 26.06,
+"end": 26.34,
+"word": " prompt,"
+},
+{
+"start": 26.82,
+"end": 26.86,
+"word": " not"
+},
+{
+"start": 26.84,
+"end": 27.0,
+"word": " trimmed"
+},
+{
+"start": 27.0,
+"end": 27.18,
+"word": " it,"
+},
+{
+"start": 27.28,
+"end": 27.44,
+"word": " deleted"
+},
+{
+"start": 27.32,
+"end": 27.6,
+"word": " it."
+},
+{
+"start": 27.72,
+"end": 28.08,
+"word": " Because"
+},
+{
+"start": 28.08,
+"end": 28.4,
+"word": " almost"
+},
+{
+"start": 28.4,
+"end": 28.78,
+"word": " every"
+},
+{
+"start": 28.66,
+"end": 28.94,
+"word": " rule"
+},
+{
+"start": 28.94,
+"end": 29.04,
+"word": " in"
+},
+{
+"start": 29.04,
+"end": 29.14,
+"word": " there"
+},
+{
+"start": 29.58,
+"end": 29.7,
+"word": " was"
+},
+{
+"start": 29.7,
+"end": 29.88,
+"word": " written"
+},
+{
+"start": 29.88,
+"end": 30.04,
+"word": " to"
+},
+{
+"start": 30.04,
+"end": 30.42,
+"word": " babysit"
+},
+{
+"start": 30.05,
+"end": 30.09,
+"word": " an"
+},
+{
+"start": 30.07,
+"end": 30.25,
+"word": " older"
+},
+{
+"start": 30.25,
+"end": 30.63,
+"word": " model,"
+},
+{
+"start": 30.97,
+"end": 31.03,
+"word": " and"
+},
+{
+"start": 31.03,
+"end": 31.27,
+"word": " Opus"
+},
+{
+"start": 31.27,
+"end": 31.53,
+"word": " 5"
+},
+{
+"start": 31.44,
+"end": 31.7,
+"word": " does"
+},
+{
+"start": 31.7,
+"end": 31.92,
+"word": " not"
+},
+{
+"start": 31.92,
+"end": 32.06,
+"word": " need"
+},
+{
+"start": 32.26,
+"end": 32.72,
+"word": " babysitting."
+},
+{
+"start": 33.08,
+"end": 33.12,
+"word": " Want"
+},
+{
+"start": 33.12,
+"end": 33.24,
+"word": " the"
+},
+{
+"start": 33.24,
+"end": 33.4,
+"word": " full"
+},
+{
+"start": 33.24,
+"end": 33.45,
+"word": " guide"
+},
+{
+"start": 33.45,
+"end": 33.55,
+"word": " to"
+},
+{
+"start": 33.55,
+"end": 33.69,
+"word": " getting"
+},
+{
+"start": 33.71,
+"end": 33.91,
+"word": " way"
+},
+{
+"start": 33.91,
+"end": 34.13,
+"word": " more"
+},
+{
+"start": 34.13,
+"end": 34.25,
+"word": " out"
+},
+{
+"start": 34.53,
+"end": 34.61,
+"word": " of"
+},
+{
+"start": 34.61,
+"end": 34.83,
+"word": " Opus"
+},
+{
+"start": 34.83,
+"end": 35.07,
+"word": " 5?"
+},
+{
+"start": 35.14,
+"end": 35.26,
+"word": " Comment"
+},
+{
+"start": 35.26,
+"end": 35.64,
+"word": " BORIS."
+}
+]

@@ -1,0 +1,42 @@
+TITLE   268 Experts, One Repo
+SUB     The free GitHub roster that gives your AI a job title before you type a word
+
+H       What this actually is
+P       Most people open a chat and spend the first five minutes describing who they wish they were talking to. "You are a senior product designer with ten years of experience." That brief is work, you rewrite it every time, and it is the reason two people get wildly different answers out of the same model.
+P       This repo replaces that. It is a folder of 268 pre written agent definitions, sorted into 20 divisions. Each one already knows its role, its scope, and what it is supposed to hand back. You name the job. The right specialists pick themselves up.
+
+H       The repo
+P       github.com/jnMetaCode/agency-agents-zh
+B       18,585 stars
+B       268 agents
+B       20 divisions
+B       Works across 18 tools
+P       One note on provenance, because it matters if you go looking. This project has an English language parent at github.com/msitarzewski/agency-agents with a much larger star count and a slightly smaller roster. The counts above belong to the fork listed here, which is the one those numbers come from. Its README is in Chinese and 52 of its agents are built for Chinese platforms. Both are free. Pick whichever suits the market you build for.
+
+H       The 20 divisions
+P       Engineering, Design, Marketing, Legal, Product, Growth, Finance, Support, Research, Security, Data, Ops, Sales, Content, QA, Brand, Partners, People, Strategy, Studio.
+P       Roughly 13 agents sit inside each one. That is the whole point: you are not picking a model, you are picking a role.
+
+H       Install it in under a minute
+NUM     Clone it: git clone https://github.com/jnMetaCode/agency-agents-zh
+NUM     Copy the agent files into your tool's agents or skills directory. In Claude Code that is .claude/agents/ in your project, or ~/.claude/agents/ to make them available everywhere.
+NUM     Restart your tool so it re indexes.
+NUM     Ask for the job, not the persona. "Build me a landing page for a dog walking service" instead of "act as a designer and also a copywriter and also."
+NUM     Watch which agents get pulled in. That tells you what the roster thinks the job actually is.
+
+H       Where it works
+B       Claude Code
+B       Cursor
+B       GitHub Copilot
+B       Plus 15 other tools that read the same agent format
+
+H       The three habits that make it pay off
+NUM     Stop writing personas. If you are still typing "you are a senior," you have an agent for that already and you are doing its job by hand.
+NUM     Ask for outcomes. The roster splits work between divisions on its own. A request phrased as a deliverable gets divided. A request phrased as an instruction gets followed literally by one agent.
+NUM     Read the agent file before you trust it. These are plain text. Two minutes reading design/ tells you exactly what that agent will and will not do, which is more than you know about any prompt you wrote at midnight.
+
+H       The honest limitation
+P       A roster is not magic. It removes the setup tax and it makes your results repeatable, which is most of the value. It does not make a weak request into a strong one. If you cannot describe the outcome you want, no agent can pick itself for the job.
+
+RULE
+KEY     ROLES

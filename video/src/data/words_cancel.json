@@ -1,0 +1,547 @@
+[
+{
+"start": 0.0,
+"end": 0.11,
+"word": " 5"
+},
+{
+"start": 0.11,
+"end": 0.25,
+"word": " apps"
+},
+{
+"start": 0.25,
+"end": 0.43,
+"word": " you"
+},
+{
+"start": 0.43,
+"end": 0.55,
+"word": " pay"
+},
+{
+"start": 0.43,
+"end": 0.47,
+"word": " for"
+},
+{
+"start": 0.44,
+"end": 0.58,
+"word": " every"
+},
+{
+"start": 0.58,
+"end": 0.8,
+"word": " month"
+},
+{
+"start": 0.84,
+"end": 1.02,
+"word": " have"
+},
+{
+"start": 1.02,
+"end": 1.22,
+"word": " free"
+},
+{
+"start": 1.22,
+"end": 1.52,
+"word": " versions,"
+},
+{
+"start": 1.73,
+"end": 1.77,
+"word": " and"
+},
+{
+"start": 1.75,
+"end": 1.95,
+"word": " together"
+},
+{
+"start": 1.95,
+"end": 2.21,
+"word": " they"
+},
+{
+"start": 2.23,
+"end": 2.33,
+"word": " have"
+},
+{
+"start": 2.33,
+"end": 2.53,
+"word": " over"
+},
+{
+"start": 2.53,
+"end": 3.87,
+"word": " 175,000"
+},
+{
+"start": 3.83,
+"end": 4.07,
+"word": " stars"
+},
+{
+"start": 4.07,
+"end": 4.23,
+"word": " on"
+},
+{
+"start": 4.23,
+"end": 4.39,
+"word": " GitHub."
+},
+{
+"start": 4.84,
+"end": 4.88,
+"word": " And"
+},
+{
+"start": 4.88,
+"end": 5.04,
+"word": " no,"
+},
+{
+"start": 5.1,
+"end": 5.18,
+"word": " these"
+},
+{
+"start": 5.22,
+"end": 5.32,
+"word": " are"
+},
+{
+"start": 5.32,
+"end": 5.46,
+"word": " not"
+},
+{
+"start": 5.46,
+"end": 5.74,
+"word": " stripped"
+},
+{
+"start": 5.7,
+"end": 5.98,
+"word": " down"
+},
+{
+"start": 5.98,
+"end": 6.2,
+"word": " free"
+},
+{
+"start": 6.2,
+"end": 6.46,
+"word": " trials,"
+},
+{
+"start": 6.93,
+"end": 6.97,
+"word": " they're"
+},
+{
+"start": 6.97,
+"end": 7.07,
+"word": " the"
+},
+{
+"start": 7.07,
+"end": 7.31,
+"word": " full"
+},
+{
+"start": 7.13,
+"end": 7.37,
+"word": " thing."
+},
+{
+"start": 7.93,
+"end": 8.35,
+"word": " OpenMontage"
+},
+{
+"start": 8.35,
+"end": 8.53,
+"word": " replaces"
+},
+{
+"start": 8.53,
+"end": 9.13,
+"word": " HiggsField."
+},
+{
+"start": 9.22,
+"end": 9.26,
+"word": " You"
+},
+{
+"start": 9.22,
+"end": 9.38,
+"word": " tell"
+},
+{
+"start": 9.38,
+"end": 9.46,
+"word": " it"
+},
+{
+"start": 9.46,
+"end": 9.6,
+"word": " what"
+},
+{
+"start": 9.58,
+"end": 9.78,
+"word": " video"
+},
+{
+"start": 9.78,
+"end": 9.96,
+"word": " you"
+},
+{
+"start": 9.96,
+"end": 10.12,
+"word": " want"
+},
+{
+"start": 10.44,
+"end": 10.48,
+"word": " and"
+},
+{
+"start": 10.46,
+"end": 10.52,
+"word": " it"
+},
+{
+"start": 10.52,
+"end": 10.6,
+"word": " makes"
+},
+{
+"start": 10.52,
+"end": 10.62,
+"word": " the"
+},
+{
+"start": 10.62,
+"end": 10.8,
+"word": " whole"
+},
+{
+"start": 10.8,
+"end": 11.04,
+"word": " thing"
+},
+{
+"start": 11.17,
+"end": 11.35,
+"word": " for"
+},
+{
+"start": 11.35,
+"end": 11.51,
+"word": " you."
+},
+{
+"start": 11.81,
+"end": 11.85,
+"word": " Jan"
+},
+{
+"start": 11.81,
+"end": 12.05,
+"word": " replaces"
+},
+{
+"start": 12.05,
+"end": 12.61,
+"word": " ChatGPT"
+},
+{
+"start": 12.56,
+"end": 12.8,
+"word": " Plus"
+},
+{
+"start": 12.8,
+"end": 12.98,
+"word": " and"
+},
+{
+"start": 12.98,
+"end": 13.1,
+"word": " works"
+},
+{
+"start": 13.4,
+"end": 13.58,
+"word": " with"
+},
+{
+"start": 13.58,
+"end": 13.78,
+"word": " no"
+},
+{
+"start": 13.78,
+"end": 14.04,
+"word": " internet."
+},
+{
+"start": 14.33,
+"end": 14.69,
+"word": " AppFlowy"
+},
+{
+"start": 14.69,
+"end": 15.01,
+"word": " replaces"
+},
+{
+"start": 15.01,
+"end": 15.47,
+"word": " Notion."
+},
+{
+"start": 15.64,
+"end": 16.1,
+"word": " Presenton"
+},
+{
+"start": 16.1,
+"end": 16.32,
+"word": " replaces"
+},
+{
+"start": 16.32,
+"end": 16.84,
+"word": " Canva."
+},
+{
+"start": 16.56,
+"end": 17.08,
+"word": " OpenPencil"
+},
+{
+"start": 17.08,
+"end": 17.58,
+"word": " replaces"
+},
+{
+"start": 17.58,
+"end": 17.94,
+"word": " Figma."
+},
+{
+"start": 18.47,
+"end": 18.57,
+"word": " The"
+},
+{
+"start": 18.57,
+"end": 18.73,
+"word": " best"
+},
+{
+"start": 18.73,
+"end": 18.89,
+"word": " thing"
+},
+{
+"start": 18.73,
+"end": 18.81,
+"word": " about"
+},
+{
+"start": 18.81,
+"end": 18.95,
+"word": " these"
+},
+{
+"start": 18.95,
+"end": 19.15,
+"word": " open"
+},
+{
+"start": 19.29,
+"end": 19.49,
+"word": " source"
+},
+{
+"start": 19.49,
+"end": 19.75,
+"word": " tools"
+},
+{
+"start": 19.75,
+"end": 19.89,
+"word": " is"
+},
+{
+"start": 19.89,
+"end": 19.99,
+"word": " that"
+},
+{
+"start": 19.94,
+"end": 20.02,
+"word": " your"
+},
+{
+"start": 20.02,
+"end": 20.26,
+"word": " files"
+},
+{
+"start": 20.26,
+"end": 20.56,
+"word": " stay"
+},
+{
+"start": 20.66,
+"end": 20.84,
+"word": " yours"
+},
+{
+"start": 20.84,
+"end": 21.12,
+"word": " too,"
+},
+{
+"start": 21.07,
+"end": 21.21,
+"word": " so"
+},
+{
+"start": 21.21,
+"end": 21.29,
+"word": " you"
+},
+{
+"start": 21.29,
+"end": 21.39,
+"word": " can"
+},
+{
+"start": 21.38,
+"end": 21.56,
+"word": " leave"
+},
+{
+"start": 21.56,
+"end": 21.72,
+"word": " whenever"
+},
+{
+"start": 21.92,
+"end": 22.24,
+"word": " you"
+},
+{
+"start": 22.24,
+"end": 22.44,
+"word": " want."
+},
+{
+"start": 22.79,
+"end": 22.99,
+"word": " Everyone"
+},
+{
+"start": 22.99,
+"end": 23.15,
+"word": " else"
+},
+{
+"start": 23.15,
+"end": 23.31,
+"word": " is"
+},
+{
+"start": 23.31,
+"end": 23.47,
+"word": " still"
+},
+{
+"start": 23.36,
+"end": 23.52,
+"word": " paying"
+},
+{
+"start": 23.52,
+"end": 23.66,
+"word": " for"
+},
+{
+"start": 23.66,
+"end": 23.74,
+"word": " the"
+},
+{
+"start": 23.74,
+"end": 23.94,
+"word": " same"
+},
+{
+"start": 23.82,
+"end": 24.04,
+"word": " thing"
+},
+{
+"start": 24.04,
+"end": 24.2,
+"word": " every"
+},
+{
+"start": 24.2,
+"end": 24.4,
+"word": " month."
+},
+{
+"start": 24.68,
+"end": 24.78,
+"word": " Comment"
+},
+{
+"start": 24.84,
+"end": 25.16,
+"word": " CANCEL"
+},
+{
+"start": 25.26,
+"end": 25.32,
+"word": " and"
+},
+{
+"start": 25.32,
+"end": 25.36,
+"word": " I'll"
+},
+{
+"start": 25.35,
+"end": 25.47,
+"word": " send"
+},
+{
+"start": 25.47,
+"end": 25.57,
+"word": " you"
+},
+{
+"start": 25.57,
+"end": 25.69,
+"word": " all"
+},
+{
+"start": 25.64,
+"end": 25.96,
+"word": " 5."
+}
+]

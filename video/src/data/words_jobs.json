@@ -1,0 +1,897 @@
+[
+{
+"start": 0.0,
+"end": 0.13,
+"word": " Stop"
+},
+{
+"start": 0.13,
+"end": 0.29,
+"word": " applying"
+},
+{
+"start": 0.29,
+"end": 0.47,
+"word": " to"
+},
+{
+"start": 0.47,
+"end": 0.65,
+"word": " jobs"
+},
+{
+"start": 0.53,
+"end": 0.69,
+"word": " until"
+},
+{
+"start": 0.69,
+"end": 0.87,
+"word": " you"
+},
+{
+"start": 0.87,
+"end": 1.01,
+"word": " see"
+},
+{
+"start": 0.89,
+"end": 1.09,
+"word": " this."
+},
+{
+"start": 1.43,
+"end": 1.47,
+"word": " And"
+},
+{
+"start": 1.45,
+"end": 1.63,
+"word": " stay"
+},
+{
+"start": 1.49,
+"end": 1.61,
+"word": " to"
+},
+{
+"start": 1.61,
+"end": 1.69,
+"word": " the"
+},
+{
+"start": 1.69,
+"end": 1.79,
+"word": " end"
+},
+{
+"start": 1.78,
+"end": 1.98,
+"word": " because"
+},
+{
+"start": 1.98,
+"end": 2.12,
+"word": " the"
+},
+{
+"start": 2.12,
+"end": 2.32,
+"word": " last"
+},
+{
+"start": 2.31,
+"end": 2.47,
+"word": " thing"
+},
+{
+"start": 2.47,
+"end": 2.55,
+"word": " it"
+},
+{
+"start": 2.55,
+"end": 2.69,
+"word": " does"
+},
+{
+"start": 2.85,
+"end": 3.01,
+"word": " is"
+},
+{
+"start": 3.01,
+"end": 3.05,
+"word": " the"
+},
+{
+"start": 3.05,
+"end": 3.21,
+"word": " part"
+},
+{
+"start": 3.1,
+"end": 3.26,
+"word": " that"
+},
+{
+"start": 3.26,
+"end": 3.42,
+"word": " gets"
+},
+{
+"start": 3.42,
+"end": 3.54,
+"word": " you"
+},
+{
+"start": 3.54,
+"end": 3.7,
+"word": " paid"
+},
+{
+"start": 3.8,
+"end": 4.02,
+"word": " more."
+},
+{
+"start": 4.51,
+"end": 4.57,
+"word": " A"
+},
+{
+"start": 4.57,
+"end": 4.71,
+"word": " guy"
+},
+{
+"start": 4.71,
+"end": 4.87,
+"word": " ran"
+},
+{
+"start": 4.71,
+"end": 5.31,
+"word": " 740"
+},
+{
+"start": 5.31,
+"end": 5.57,
+"word": " job"
+},
+{
+"start": 5.57,
+"end": 5.83,
+"word": " postings"
+},
+{
+"start": 5.92,
+"end": 6.22,
+"word": " through"
+},
+{
+"start": 6.22,
+"end": 6.42,
+"word": " this"
+},
+{
+"start": 6.42,
+"end": 6.7,
+"word": " system"
+},
+{
+"start": 6.84,
+"end": 6.98,
+"word": " he"
+},
+{
+"start": 6.98,
+"end": 7.2,
+"word": " built,"
+},
+{
+"start": 7.42,
+"end": 7.46,
+"word": " landed"
+},
+{
+"start": 7.42,
+"end": 7.56,
+"word": " a"
+},
+{
+"start": 7.56,
+"end": 7.75,
+"word": " Head"
+},
+{
+"start": 7.75,
+"end": 7.87,
+"word": " of"
+},
+{
+"start": 7.87,
+"end": 8.03,
+"word": " Applied"
+},
+{
+"start": 8.09,
+"end": 8.33,
+"word": " AI"
+},
+{
+"start": 8.33,
+"end": 8.57,
+"word": " role,"
+},
+{
+"start": 8.69,
+"end": 8.73,
+"word": " then"
+},
+{
+"start": 8.69,
+"end": 8.73,
+"word": " made"
+},
+{
+"start": 8.69,
+"end": 8.8,
+"word": " the"
+},
+{
+"start": 8.8,
+"end": 8.96,
+"word": " whole"
+},
+{
+"start": 8.93,
+"end": 9.15,
+"word": " thing"
+},
+{
+"start": 9.15,
+"end": 9.37,
+"word": " free."
+},
+{
+"start": 9.99,
+"end": 10.09,
+"word": " Now"
+},
+{
+"start": 10.09,
+"end": 10.17,
+"word": " it"
+},
+{
+"start": 10.17,
+"end": 10.27,
+"word": " has"
+},
+{
+"start": 10.17,
+"end": 10.86,
+"word": " 62,000"
+},
+{
+"start": 10.86,
+"end": 11.06,
+"word": " stars"
+},
+{
+"start": 11.06,
+"end": 11.18,
+"word": " on"
+},
+{
+"start": 11.18,
+"end": 11.32,
+"word": " GitHub."
+},
+{
+"start": 12.11,
+"end": 12.15,
+"word": " It"
+},
+{
+"start": 12.15,
+"end": 12.25,
+"word": " does"
+},
+{
+"start": 12.25,
+"end": 12.47,
+"word": " four"
+},
+{
+"start": 12.44,
+"end": 12.64,
+"word": " things"
+},
+{
+"start": 12.64,
+"end": 12.84,
+"word": " for"
+},
+{
+"start": 12.84,
+"end": 12.98,
+"word": " you."
+},
+{
+"start": 13.34,
+"end": 13.4,
+"word": " One."
+},
+{
+"start": 13.39,
+"end": 13.49,
+"word": " It"
+},
+{
+"start": 13.49,
+"end": 13.61,
+"word": " reads"
+},
+{
+"start": 13.61,
+"end": 13.89,
+"word": " every"
+},
+{
+"start": 13.99,
+"end": 14.29,
+"word": " posting"
+},
+{
+"start": 14.29,
+"end": 14.55,
+"word": " before"
+},
+{
+"start": 14.55,
+"end": 14.73,
+"word": " you"
+},
+{
+"start": 14.73,
+"end": 14.85,
+"word": " do"
+},
+{
+"start": 14.83,
+"end": 14.95,
+"word": " and"
+},
+{
+"start": 14.95,
+"end": 15.19,
+"word": " scores"
+},
+{
+"start": 15.18,
+"end": 15.42,
+"word": " it,"
+},
+{
+"start": 15.53,
+"end": 15.65,
+"word": " so"
+},
+{
+"start": 15.65,
+"end": 15.77,
+"word": " you"
+},
+{
+"start": 15.77,
+"end": 15.87,
+"word": " know"
+},
+{
+"start": 15.87,
+"end": 16.05,
+"word": " which"
+},
+{
+"start": 16.19,
+"end": 16.31,
+"word": " ones"
+},
+{
+"start": 16.31,
+"end": 16.47,
+"word": " are"
+},
+{
+"start": 16.47,
+"end": 16.65,
+"word": " actually"
+},
+{
+"start": 16.47,
+"end": 16.55,
+"word": " worth"
+},
+{
+"start": 16.55,
+"end": 16.69,
+"word": " your"
+},
+{
+"start": 16.69,
+"end": 16.89,
+"word": " time."
+},
+{
+"start": 17.58,
+"end": 17.62,
+"word": " Two."
+},
+{
+"start": 17.58,
+"end": 17.64,
+"word": " It"
+},
+{
+"start": 17.64,
+"end": 17.82,
+"word": " catches"
+},
+{
+"start": 17.82,
+"end": 18.02,
+"word": " the"
+},
+{
+"start": 18.02,
+"end": 18.16,
+"word": " fake"
+},
+{
+"start": 18.11,
+"end": 18.37,
+"word": " listings."
+},
+{
+"start": 18.89,
+"end": 18.93,
+"word": " Some"
+},
+{
+"start": 18.91,
+"end": 19.01,
+"word": " of"
+},
+{
+"start": 19.01,
+"end": 19.09,
+"word": " the"
+},
+{
+"start": 19.09,
+"end": 19.25,
+"word": " jobs"
+},
+{
+"start": 19.24,
+"end": 19.38,
+"word": " you"
+},
+{
+"start": 19.38,
+"end": 19.48,
+"word": " got"
+},
+{
+"start": 19.48,
+"end": 19.62,
+"word": " rejected"
+},
+{
+"start": 19.49,
+"end": 19.83,
+"word": " from"
+},
+{
+"start": 19.83,
+"end": 19.95,
+"word": " were"
+},
+{
+"start": 19.95,
+"end": 20.17,
+"word": " never"
+},
+{
+"start": 20.26,
+"end": 20.54,
+"word": " real."
+},
+{
+"start": 21.06,
+"end": 21.1,
+"word": " They"
+},
+{
+"start": 21.08,
+"end": 21.18,
+"word": " get"
+},
+{
+"start": 21.18,
+"end": 21.6,
+"word": " reposted"
+},
+{
+"start": 21.48,
+"end": 21.66,
+"word": " forever"
+},
+{
+"start": 21.66,
+"end": 21.94,
+"word": " and"
+},
+{
+"start": 21.94,
+"end": 22.17,
+"word": " nobody"
+},
+{
+"start": 22.26,
+"end": 22.49,
+"word": " is"
+},
+{
+"start": 22.49,
+"end": 22.67,
+"word": " hiring."
+},
+{
+"start": 23.31,
+"end": 23.41,
+"word": " Three."
+},
+{
+"start": 23.43,
+"end": 23.53,
+"word": " And"
+},
+{
+"start": 23.53,
+"end": 23.71,
+"word": " here's"
+},
+{
+"start": 23.71,
+"end": 23.77,
+"word": " the"
+},
+{
+"start": 23.77,
+"end": 23.91,
+"word": " part"
+},
+{
+"start": 24.05,
+"end": 24.31,
+"word": " nobody"
+},
+{
+"start": 24.31,
+"end": 24.69,
+"word": " expects."
+},
+{
+"start": 24.9,
+"end": 24.94,
+"word": " It"
+},
+{
+"start": 24.92,
+"end": 25.06,
+"word": " finds"
+},
+{
+"start": 25.06,
+"end": 25.2,
+"word": " the"
+},
+{
+"start": 25.2,
+"end": 25.38,
+"word": " real"
+},
+{
+"start": 25.37,
+"end": 25.69,
+"word": " person"
+},
+{
+"start": 25.69,
+"end": 25.79,
+"word": " to"
+},
+{
+"start": 25.79,
+"end": 26.05,
+"word": " contact"
+},
+{
+"start": 26.07,
+"end": 26.45,
+"word": " instead"
+},
+{
+"start": 26.45,
+"end": 26.59,
+"word": " of"
+},
+{
+"start": 26.59,
+"end": 26.69,
+"word": " the"
+},
+{
+"start": 26.69,
+"end": 27.07,
+"word": " application"
+},
+{
+"start": 27.14,
+"end": 27.46,
+"word": " portal,"
+},
+{
+"start": 27.46,
+"end": 27.82,
+"word": " and"
+},
+{
+"start": 27.82,
+"end": 27.96,
+"word": " writes"
+},
+{
+"start": 27.9,
+"end": 28.08,
+"word": " the"
+},
+{
+"start": 28.08,
+"end": 28.26,
+"word": " email"
+},
+{
+"start": 28.24,
+"end": 28.46,
+"word": " for"
+},
+{
+"start": 28.65,
+"end": 28.77,
+"word": " you"
+},
+{
+"start": 28.77,
+"end": 28.87,
+"word": " to"
+},
+{
+"start": 28.87,
+"end": 29.03,
+"word": " send"
+},
+{
+"start": 29.03,
+"end": 29.19,
+"word": " them."
+},
+{
+"start": 29.19,
+"end": 29.63,
+"word": " And"
+},
+{
+"start": 29.63,
+"end": 29.87,
+"word": " four."
+},
+{
+"start": 29.82,
+"end": 29.9,
+"word": " When"
+},
+{
+"start": 29.9,
+"end": 30.0,
+"word": " the"
+},
+{
+"start": 30.0,
+"end": 30.14,
+"word": " offer"
+},
+{
+"start": 30.18,
+"end": 30.54,
+"word": " actually"
+},
+{
+"start": 30.54,
+"end": 30.82,
+"word": " comes,"
+},
+{
+"start": 31.02,
+"end": 31.06,
+"word": " it"
+},
+{
+"start": 31.06,
+"end": 31.2,
+"word": " writes"
+},
+{
+"start": 31.14,
+"end": 31.28,
+"word": " your"
+},
+{
+"start": 31.28,
+"end": 31.92,
+"word": " negotiation,"
+},
+{
+"start": 32.51,
+"end": 32.75,
+"word": " including"
+},
+{
+"start": 32.75,
+"end": 33.03,
+"word": " what"
+},
+{
+"start": 33.03,
+"end": 33.15,
+"word": " to"
+},
+{
+"start": 33.15,
+"end": 33.31,
+"word": " say"
+},
+{
+"start": 33.15,
+"end": 33.21,
+"word": " when"
+},
+{
+"start": 33.21,
+"end": 33.31,
+"word": " they"
+},
+{
+"start": 33.31,
+"end": 33.43,
+"word": " lowball"
+},
+{
+"start": 33.58,
+"end": 33.76,
+"word": " you."
+},
+{
+"start": 34.35,
+"end": 34.39,
+"word": " Then"
+},
+{
+"start": 34.35,
+"end": 34.53,
+"word": " it"
+},
+{
+"start": 34.53,
+"end": 34.65,
+"word": " reads"
+},
+{
+"start": 34.94,
+"end": 35.04,
+"word": " your"
+},
+{
+"start": 35.04,
+"end": 35.32,
+"word": " contract"
+},
+{
+"start": 35.32,
+"end": 35.68,
+"word": " clause"
+},
+{
+"start": 35.39,
+"end": 35.63,
+"word": " by"
+},
+{
+"start": 35.63,
+"end": 35.81,
+"word": " clause"
+},
+{
+"start": 35.81,
+"end": 36.15,
+"word": " before"
+},
+{
+"start": 36.13,
+"end": 36.25,
+"word": " you"
+},
+{
+"start": 36.25,
+"end": 36.43,
+"word": " sign."
+},
+{
+"start": 36.7,
+"end": 36.86,
+"word": " Comment"
+},
+{
+"start": 36.86,
+"end": 37.08,
+"word": " JOBS"
+},
+{
+"start": 37.08,
+"end": 37.3,
+"word": " and"
+},
+{
+"start": 37.3,
+"end": 37.38,
+"word": " I'll"
+},
+{
+"start": 37.35,
+"end": 37.45,
+"word": " send"
+},
+{
+"start": 37.45,
+"end": 37.53,
+"word": " you"
+},
+{
+"start": 37.53,
+"end": 37.63,
+"word": " the"
+},
+{
+"start": 37.63,
+"end": 37.81,
+"word": " whole"
+},
+{
+"start": 37.91,
+"end": 38.17,
+"word": " system"
+},
+{
+"start": 38.17,
+"end": 38.39,
+"word": " for"
+},
+{
+"start": 38.39,
+"end": 38.53,
+"word": " free."
+}
+]

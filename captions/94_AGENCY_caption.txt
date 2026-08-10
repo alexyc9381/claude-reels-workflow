@@ -1,0 +1,29 @@
+Comment "AGENCY" and I'll send you the repo.
+
+👇 READ BELOW
+
+Someone built an entire creative agency out of AI agents and open sourced the whole thing. Not prompt templates. 270 named specialists across 17 divisions, each one with a written personality, a workflow and its own definition of done.
+
+msitarzewski/agency-agents. 139,604 stars, 22,798 forks, MIT licensed.
+
+★ Engineering 58 agents
+★ Specialized 56
+★ Marketing 36
+★ Game Development 21
+★ Plus GIS, Security, Design, Sales, Testing, Paid Media, Project Management, Support, Spatial Computing, Academic, Product, Finance and Healthcare
+
+The three from the video are all real files you can open right now. Frontend Developer sits in Engineering. Ad Creative Strategist sits in Paid Media next to a PPC Campaign Strategist and a Search Query Analyst. Reddit Community Builder sits in Marketing, and its own brief says you are not marketing on Reddit, you are becoming a valued community member who happens to represent a brand.
+
+There is a desktop app now, and it is a second free repo. Native for macOS, Windows and Linux. It browses the whole roster and installs into Claude Code, Cursor, Codex, Gemini CLI, OpenCode, Qwen and Osaurus for you, then keeps them updated. No clone, no scripts, no terminal. On a Mac it is one brew command.
+
+The part nobody mentions: do NOT install all 270. The installer takes a division filter and that is the difference between a roster you actually use and 270 files you never open. Start with two divisions, learn them, then add. Run the list command first and see the agent counts before you commit to anything.
+
+One more thing worth knowing. MIT does not just mean free. It means you can fork it, rewrite any agent in your own voice, ship it inside your own product and sell the work.
+
+Comment "AGENCY" and I'll send you the repo plus the setup guide.
+
+.
+.
+.
+
+#opensource #aiagents #github #claudecode #cursor #aitools #agenticai #buildinpublic #devtools #freetools #aiworkflow #aiautomation #promptengineering #softwaredevelopment #marketingagency #sideproject #codingtips #generativeai

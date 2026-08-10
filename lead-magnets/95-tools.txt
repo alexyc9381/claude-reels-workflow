@@ -1,0 +1,51 @@
+TITLE System Prompts Leaks
+SUB The hidden instructions behind ChatGPT, Claude, Gemini and Grok, 184 of them, captured verbatim and released into the public domain
+
+H What this actually is
+P asgeirtj/system_prompts_leaks is a GitHub repository of leaked and extracted system prompts: the instructions a model is given before your first message ever reaches it. Verified 2026-08-09: 62,597 stars, 10,288 forks, CC0-1.0.
+P CC0 is not MIT. It is a public domain dedication. There are no licence terms, no attribution requirement and nothing to comply with. You can paste any of it anywhere.
+P It is 184 linked prompt files across 18 company sections. That is the whole product. There is no app.
+
+H Read this before you get your hopes up
+B There is no installer, no CLI and no skill. Anyone telling you to run a magic command is describing something that does not exist. You clone a folder of markdown.
+B Nobody has published a benchmark showing a cheap model matching a frontier model once it has the frontier model's system prompt. It is a reasonable thing to try. It is not a measured result, and you should test it on your own task before you believe it.
+B A system prompt is written for a specific model with specific tools. Pasting Claude's into a small open model gives you Claude's instructions, not Claude's capabilities.
+
+H Getting it
+NUM Open github.com/asgeirtj/system_prompts_leaks
+NUM git clone https://github.com/asgeirtj/system_prompts_leaks
+NUM That is it. Open the folder. Every prompt is a plain .md file you can read in any editor.
+NUM If you only want one, click the file on GitHub and hit Raw.
+
+H What is actually in there
+P Anthropic: Claude Fable 5, Claude Opus 5, Claude Sonnet 5, Claude Code across several models, and Claude Design with its full prompt plus 53 tools, 22 skills and 10 starter components.
+P OpenAI: ChatGPT GPT-5.6 Sol including the extra-high variant, and Codex GPT-5.6 with its Sol variant.
+P Google: Gemini 3.5 Flash, Gemini 3.1 Pro, Antigravity and the Antigravity CLI, Gemini CLI.
+P xAI: Grok 4.5 and Grok Build.
+P And then Cursor, GitHub Copilot and Copilot CLI, VS Code, Perplexity and Perplexity Deep Research, Kimi K2.6, DeepSeek, Mistral, Meta AI, Notion AI, Qwen, Z.ai GLM, OpenCode, Pi and Devin.
+
+H How to actually use one
+NUM Pick the prompt for a model doing the job you want done, not the biggest model in the list.
+NUM Delete every line that references a tool your model does not have. This is the step people skip, and it is the step that decides whether it works.
+NUM Keep the structure: role, constraints, refusal rules, output format. That skeleton is the transferable part.
+NUM Paste it as your system message and test it against your own task, side by side with what you had before.
+NUM Measure it yourself. Same ten inputs, both prompts, and read the outputs.
+
+H The part worth stealing even if you never swap a model
+P Read three of these back to back and you will learn more about prompt structure than from any course. They are the most carefully edited prompts in the industry, written by teams with millions of users and real liability.
+B Watch how specific the refusal rules are, and how few of them there are.
+B Watch how output format is specified before behaviour.
+B Watch how much of each prompt is spent on what NOT to do.
+
+H Two things that make this repo credible
+B The Washington Post built an interactive story on prompts from this repo in May 2026.
+B CEPS' AI World built a live data dashboard from its files in July 2026.
+P Those are not endorsements of the practice. They are evidence the contents are real enough for newsrooms to publish against.
+
+H Honest notes
+B These are leaked and extracted, not officially published. They can be wrong, partial, or out of date the week a model updates. The repo is updated every few days, which tells you how fast they move.
+B Nothing here is a jailbreak and nothing here is private user data. It is the instruction layer, which the companies broadly acknowledge exists.
+B Check the file date against the model version you are actually using before you trust a line of it.
+
+RULE
+KEY Comment TOOLS on the reel and I will send you the repo plus this guide.

@@ -1,0 +1,23 @@
+Comment "AI" and I'll DM you The Wrap Up Skill, the full setup with the copy-paste skill file, free. (Follow so the DM lands 📩)
+
+👇 READ BELOW, this is everything that wouldn't fit in the video:
+
+Claude starts every conversation from zero. That's not a bug, it's how the context window works, and it's why you keep re-pasting the same background before you can ask the real question. You pay for those tokens every single time.
+
+The fix is a wrap up skill. At the end of a session Claude writes a structured summary of what happened, and that summary lives in a NotebookLM notebook you keep forever. Next session it reads back only the part it needs.
+
+1. Give Claude somewhere to write. One folder, one index file. That's the whole storage layer.
+
+2. Add the skill. A skill is just a markdown file with front matter, and the description is the only thing Claude sees before deciding to load it. Write it as a trigger, not a title.
+
+3. Save decisions, not dialogue. This is the part almost everyone gets wrong. A transcript is the worst possible thing to store, because the useful facts are buried in conversation you already paid for once.
+
+The part nobody mentions: NotebookLM has no public write API. Nothing pushes a file into a notebook for you automatically. The skill produces a clean file in a folder you control, and getting that folder in is a one time setup, either Google Drive sync or a five second upload. Anyone telling you it's fully automatic hasn't tried it.
+
+Two more things that didn't fit. Wrap up at the end of a SESSION, not the end of a task, because the connections between tasks are the most valuable thing in the file. And keep one file per session with the date in the name, not one growing file, so you can delete a bad session without unpicking it from everything else.
+
+Save this one, the setup takes about ten minutes and you only do it once.
+
+Comment "AI" and I'll send you The Wrap Up Skill.
+
+#claude #claudeai #notebooklm #aitools #aiworkflow #claudecode #aiagents #promptengineering #aiproductivity #buildwithai

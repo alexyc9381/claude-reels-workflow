@@ -1,0 +1,822 @@
+[
+{
+"word": "Most",
+"start": 0.0,
+"end": 0.173
+},
+{
+"word": "people",
+"start": 0.173,
+"end": 0.346
+},
+{
+"word": "don't",
+"start": 0.346,
+"end": 0.538
+},
+{
+"word": "realize",
+"start": 0.538,
+"end": 0.692
+},
+{
+"word": "they're",
+"start": 0.692,
+"end": 0.942
+},
+{
+"word": "only",
+"start": 0.942,
+"end": 1.058
+},
+{
+"word": "using",
+"start": 1.058,
+"end": 1.269
+},
+{
+"word": "about",
+"start": 1.269,
+"end": 1.442
+},
+{
+"word": "10%",
+"start": 1.442,
+"end": 1.942
+},
+{
+"word": "of",
+"start": 1.942,
+"end": 2.038
+},
+{
+"word": "Claude's",
+"start": 2.038,
+"end": 2.308
+},
+{
+"word": "brain.",
+"start": 2.308,
+"end": 2.423
+},
+{
+"word": "The",
+"start": 2.846,
+"end": 2.894
+},
+{
+"word": "other",
+"start": 2.865,
+"end": 2.942
+},
+{
+"word": "90%",
+"start": 2.942,
+"end": 3.442
+},
+{
+"word": "is",
+"start": 3.442,
+"end": 3.558
+},
+{
+"word": "a",
+"start": 3.558,
+"end": 3.615
+},
+{
+"word": "setup",
+"start": 3.615,
+"end": 3.846
+},
+{
+"word": "called",
+"start": 3.846,
+"end": 4.058
+},
+{
+"word": "an",
+"start": 4.058,
+"end": 4.173
+},
+{
+"word": "Agent",
+"start": 4.173,
+"end": 4.365
+},
+{
+"word": "Graph,",
+"start": 4.365,
+"end": 4.577
+},
+{
+"word": "and",
+"start": 4.788,
+"end": 4.837
+},
+{
+"word": "it's",
+"start": 4.808,
+"end": 4.923
+},
+{
+"word": "what",
+"start": 4.923,
+"end": 5.019
+},
+{
+"word": "everyone's",
+"start": 5.019,
+"end": 5.558
+},
+{
+"word": "talking",
+"start": 5.558,
+"end": 5.75
+},
+{
+"word": "about",
+"start": 5.75,
+"end": 6.019
+},
+{
+"word": "right",
+"start": 6.019,
+"end": 6.115
+},
+{
+"word": "now.",
+"start": 6.115,
+"end": 6.25
+},
+{
+"word": "Here's",
+"start": 6.404,
+"end": 6.615
+},
+{
+"word": "how",
+"start": 6.615,
+"end": 6.692
+},
+{
+"word": "to",
+"start": 6.692,
+"end": 6.75
+},
+{
+"word": "build",
+"start": 6.75,
+"end": 6.904
+},
+{
+"word": "one.",
+"start": 6.904,
+"end": 7.077
+},
+{
+"word": "You",
+"start": 7.404,
+"end": 7.462
+},
+{
+"word": "basically",
+"start": 7.462,
+"end": 7.577
+},
+{
+"word": "split",
+"start": 7.577,
+"end": 7.962
+},
+{
+"word": "Claude",
+"start": 7.962,
+"end": 8.154
+},
+{
+"word": "into",
+"start": 8.154,
+"end": 8.365
+},
+{
+"word": "a",
+"start": 8.365,
+"end": 8.481
+},
+{
+"word": "small",
+"start": 8.481,
+"end": 8.615
+},
+{
+"word": "team.",
+"start": 8.615,
+"end": 8.865
+},
+{
+"word": "But",
+"start": 9.0,
+"end": 9.096
+},
+{
+"word": "here's",
+"start": 9.096,
+"end": 9.269
+},
+{
+"word": "a",
+"start": 9.269,
+"end": 9.327
+},
+{
+"word": "twist",
+"start": 9.327,
+"end": 9.462
+},
+{
+"word": "most",
+"start": 9.462,
+"end": 9.75
+},
+{
+"word": "people",
+"start": 9.75,
+"end": 9.981
+},
+{
+"word": "miss.",
+"start": 9.981,
+"end": 10.212
+},
+{
+"word": "One",
+"start": 10.635,
+"end": 10.683
+},
+{
+"word": "of",
+"start": 10.654,
+"end": 10.75
+},
+{
+"word": "those",
+"start": 10.75,
+"end": 10.846
+},
+{
+"word": "agents",
+"start": 10.846,
+"end": 11.077
+},
+{
+"word": "isn't",
+"start": 11.077,
+"end": 11.462
+},
+{
+"word": "here",
+"start": 11.462,
+"end": 11.615
+},
+{
+"word": "to",
+"start": 11.615,
+"end": 11.692
+},
+{
+"word": "help.",
+"start": 11.692,
+"end": 11.865
+},
+{
+"word": "Its",
+"start": 11.981,
+"end": 12.038
+},
+{
+"word": "only",
+"start": 12.038,
+"end": 12.231
+},
+{
+"word": "job",
+"start": 12.231,
+"end": 12.404
+},
+{
+"word": "is",
+"start": 12.404,
+"end": 12.558
+},
+{
+"word": "to",
+"start": 12.558,
+"end": 12.615
+},
+{
+"word": "attack",
+"start": 12.615,
+"end": 12.904
+},
+{
+"word": "the",
+"start": 12.904,
+"end": 13.038
+},
+{
+"word": "others'",
+"start": 13.038,
+"end": 13.173
+},
+{
+"word": "work",
+"start": 13.269,
+"end": 13.404
+},
+{
+"word": "and",
+"start": 13.404,
+"end": 13.538
+},
+{
+"word": "try",
+"start": 13.538,
+"end": 13.712
+},
+{
+"word": "to",
+"start": 13.712,
+"end": 13.808
+},
+{
+"word": "break",
+"start": 13.808,
+"end": 13.962
+},
+{
+"word": "it.",
+"start": 13.962,
+"end": 14.154
+},
+{
+"word": "It",
+"start": 14.365,
+"end": 14.442
+},
+{
+"word": "hunts",
+"start": 14.442,
+"end": 14.558
+},
+{
+"word": "for",
+"start": 14.558,
+"end": 14.731
+},
+{
+"word": "every",
+"start": 14.731,
+"end": 14.885
+},
+{
+"word": "weak",
+"start": 14.885,
+"end": 15.115
+},
+{
+"word": "spot,",
+"start": 15.115,
+"end": 15.288
+},
+{
+"word": "every",
+"start": 15.462,
+"end": 15.558
+},
+{
+"word": "hole,",
+"start": 15.558,
+"end": 15.769
+},
+{
+"word": "every",
+"start": 15.904,
+"end": 16.038
+},
+{
+"word": "lazy",
+"start": 16.038,
+"end": 16.25
+},
+{
+"word": "shortcut.",
+"start": 16.25,
+"end": 16.481
+},
+{
+"word": "And",
+"start": 16.75,
+"end": 16.827
+},
+{
+"word": "when",
+"start": 16.827,
+"end": 16.904
+},
+{
+"word": "it",
+"start": 16.904,
+"end": 16.981
+},
+{
+"word": "finds",
+"start": 16.981,
+"end": 17.154
+},
+{
+"word": "one,",
+"start": 17.154,
+"end": 17.327
+},
+{
+"word": "the",
+"start": 17.442,
+"end": 17.49
+},
+{
+"word": "work",
+"start": 17.442,
+"end": 17.596
+},
+{
+"word": "gets",
+"start": 17.596,
+"end": 17.731
+},
+{
+"word": "thrown",
+"start": 17.731,
+"end": 17.923
+},
+{
+"word": "back",
+"start": 17.923,
+"end": 18.154
+},
+{
+"word": "down",
+"start": 18.154,
+"end": 18.346
+},
+{
+"word": "the",
+"start": 18.346,
+"end": 18.442
+},
+{
+"word": "graph",
+"start": 18.442,
+"end": 18.635
+},
+{
+"word": "and",
+"start": 18.635,
+"end": 18.788
+},
+{
+"word": "rebuilt,",
+"start": 18.788,
+"end": 18.923
+},
+{
+"word": "again",
+"start": 18.923,
+"end": 19.25
+},
+{
+"word": "and",
+"start": 19.25,
+"end": 19.346
+},
+{
+"word": "again,",
+"start": 19.346,
+"end": 19.577
+},
+{
+"word": "until",
+"start": 19.577,
+"end": 19.827
+},
+{
+"word": "it",
+"start": 19.827,
+"end": 19.923
+},
+{
+"word": "survives",
+"start": 19.923,
+"end": 20.135
+},
+{
+"word": "the",
+"start": 20.135,
+"end": 20.327
+},
+{
+"word": "attack.",
+"start": 20.327,
+"end": 20.481
+},
+{
+"word": "So",
+"start": 20.808,
+"end": 20.942
+},
+{
+"word": "what",
+"start": 20.942,
+"end": 21.058
+},
+{
+"word": "reaches",
+"start": 21.058,
+"end": 21.212
+},
+{
+"word": "you",
+"start": 21.212,
+"end": 21.442
+},
+{
+"word": "isn't",
+"start": 21.442,
+"end": 21.673
+},
+{
+"word": "Claude's",
+"start": 21.673,
+"end": 21.942
+},
+{
+"word": "first",
+"start": 21.942,
+"end": 22.096
+},
+{
+"word": "answer.",
+"start": 22.096,
+"end": 22.308
+},
+{
+"word": "It's",
+"start": 22.538,
+"end": 22.596
+},
+{
+"word": "the",
+"start": 22.596,
+"end": 22.731
+},
+{
+"word": "version",
+"start": 22.731,
+"end": 22.923
+},
+{
+"word": "that",
+"start": 22.923,
+"end": 23.058
+},
+{
+"word": "already",
+"start": 23.058,
+"end": 23.25
+},
+{
+"word": "got",
+"start": 23.25,
+"end": 23.423
+},
+{
+"word": "torn",
+"start": 23.423,
+"end": 23.558
+},
+{
+"word": "apart",
+"start": 23.558,
+"end": 23.712
+},
+{
+"word": "by",
+"start": 23.712,
+"end": 23.923
+},
+{
+"word": "Claude",
+"start": 23.923,
+"end": 24.115
+},
+{
+"word": "and",
+"start": 24.115,
+"end": 24.231
+},
+{
+"word": "lived.",
+"start": 24.231,
+"end": 24.365
+},
+{
+"word": "Bulletproof",
+"start": 24.731,
+"end": 24.942
+},
+{
+"word": "work",
+"start": 24.942,
+"end": 25.077
+},
+{
+"word": "you",
+"start": 25.077,
+"end": 25.231
+},
+{
+"word": "don't",
+"start": 25.231,
+"end": 25.423
+},
+{
+"word": "have",
+"start": 25.423,
+"end": 25.471
+},
+{
+"word": "to",
+"start": 25.462,
+"end": 25.577
+},
+{
+"word": "double",
+"start": 25.577,
+"end": 25.692
+},
+{
+"word": "check.",
+"start": 25.692,
+"end": 25.923
+},
+{
+"word": "You",
+"start": 25.923,
+"end": 26.212
+},
+{
+"word": "build",
+"start": 26.212,
+"end": 26.365
+},
+{
+"word": "the",
+"start": 26.365,
+"end": 26.462
+},
+{
+"word": "graph",
+"start": 26.462,
+"end": 26.596
+},
+{
+"word": "once,",
+"start": 26.596,
+"end": 26.788
+},
+{
+"word": "and",
+"start": 26.788,
+"end": 27.038
+},
+{
+"word": "it",
+"start": 27.038,
+"end": 27.096
+},
+{
+"word": "stress",
+"start": 27.096,
+"end": 27.269
+},
+{
+"word": "tests",
+"start": 27.269,
+"end": 27.538
+},
+{
+"word": "everything",
+"start": 27.538,
+"end": 27.923
+},
+{
+"word": "you",
+"start": 27.923,
+"end": 28.135
+},
+{
+"word": "throw",
+"start": 28.135,
+"end": 28.269
+},
+{
+"word": "at",
+"start": 28.269,
+"end": 28.385
+},
+{
+"word": "it",
+"start": 28.385,
+"end": 28.462
+},
+{
+"word": "after",
+"start": 28.462,
+"end": 28.654
+},
+{
+"word": "that.",
+"start": 28.654,
+"end": 28.904
+},
+{
+"word": "The",
+"start": 29.192,
+"end": 29.24
+},
+{
+"word": "full",
+"start": 29.231,
+"end": 29.365
+},
+{
+"word": "Agent",
+"start": 29.365,
+"end": 29.519
+},
+{
+"word": "Graph",
+"start": 29.519,
+"end": 29.75
+},
+{
+"word": "build",
+"start": 29.75,
+"end": 29.942
+},
+{
+"word": "is",
+"start": 29.942,
+"end": 30.077
+},
+{
+"word": "in",
+"start": 30.077,
+"end": 30.173
+},
+{
+"word": "a",
+"start": 30.173,
+"end": 30.221
+},
+{
+"word": "free",
+"start": 30.212,
+"end": 30.327
+},
+{
+"word": "guide.",
+"start": 30.327,
+"end": 30.538
+},
+{
+"word": "Follow",
+"start": 30.712,
+"end": 30.865
+},
+{
+"word": "and",
+"start": 30.865,
+"end": 30.942
+},
+{
+"word": "comment",
+"start": 30.942,
+"end": 31.192
+},
+{
+"word": "CHART.",
+"start": 31.192,
+"end": 31.346
+}
+]
