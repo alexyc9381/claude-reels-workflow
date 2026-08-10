@@ -3,7 +3,7 @@ import { AbsoluteFill, useCurrentFrame, Img, staticFile } from "remotion";
 import { inter, fraunces } from "./fonts";
 import { Panel, hexA, MONO } from "./SlopKit";
 import {
-  Stage, Room, Cone, Post, MarkTile, Stand, Drape, Rail, Chip, CARD_W, CARD_H,
+  Stage, Room, Cone, Post, MarkTile, Stand, Drape, Escape, Rail, Chip, CARD_W, CARD_H,
   useTheme, ThemeCtx, THEMES, Hoplite,
   PAIRS, ROOMS, REMAIN, TOTAL, useRoom, W, H, SH, SH_D, SAFE, RED, GO, AMB,
   Claudie, CLAY, E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark,
@@ -104,6 +104,17 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
      thing being shaken was the one thing in the room that was unlit. The head
      swings 85% of the way across during the build and completes on the pull. */
   const attention = ff < 0 ? Math.max(0, (ff + 20) / 20) * 0.85 : Math.max(0.85, pull);
+  /* ⭐ THE COLOUR COMING OUT. It grows on the same curve as the shake, so the
+     rumble and the light are one event, and it PEAKS at the pull rather than
+     after it. The hook starts leaking from frame 0 like its shake does. */
+  /* ⛔ AND IT DECAYS ONCE THE CLOTH IS OFF. Held at full it drew rays straight
+     across "Nano Banana" and the mark — the light was obscuring the reveal it
+     existed to build up to. There is nothing left to escape FROM once the
+     curtain is gone, so it falls back to a rim and fades. */
+  const escT = Math.min(1, ff < 0
+    ? Math.max(hook ? Math.min(0.86, 0.20 + f / 62) : 0, Math.max(0, (ff + 26) / 26))
+    : Math.max(0.24, 1 - ff / 26));
+  const burst = ff < 0 ? 0 : Math.max(0, 1 - ff / 14);
   const spot = LX + (RX - LX) * Math.max(pull, attention);
 
   return (
@@ -132,6 +143,12 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
         <Stand cx={RX} base={BASE} win={pull} logo={P.fLogo} name={P.free}
           price={0} free
           punch={ff < 0 ? 1 : 1 + Math.sin(Math.min(1, ff / 13) * Math.PI) * 0.24} z={61} />
+        {/* ⛔ z 58: BEHIND BOTH CARDS and behind the cloth, so the rays only ever
+            show where they clear a rim. In front of the card (z 74) they read as
+            a decal painted on the reveal instead of as light coming from behind
+            it, and after the pull they crossed the brand mark and the name. */}
+        <Escape cx={RX} base={BASE} w={CARD_W + 34} h={CARD_H + 34}
+          t={escT} c={T.cloth} burst={burst} f={f} z={58} />
         <Drape cx={RX} base={BASE} pull={pull} cloth={T.cloth} f={f} shake={shake} z={78} />
       </div>
 

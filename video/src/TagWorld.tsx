@@ -434,6 +434,67 @@ export const Stand: React.FC<{ cx: number; base: number; win: number; logo: stri
    still flips on the word: the drape goes up, the free tool is under it, and the
    paid price is struck in the same frame.
    ------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------
+   ⭐⭐ THE ESCAPE. Round 10: *"have colouring start coming out on the right side,
+   like glowing etc, building lots of anticipation."*
+
+   Something bright is behind the cloth and it is getting out — light in the
+   gaps at the edges, rays past the rim, and the floor taking the colour.
+
+   ⛔⛔ AND IT IS NOT A GLOW. The matte rule is a ship gate (`boxShadow: "0 0 Npx"`
+   greps to zero every render) and reel 86 already learned the softer version of
+   this mistake: its light pools were ALPHA WASHES at opacity 0.16, which is the
+   washed-out look the rule bans, just reached by compositing instead of by a
+   blur. So this is built the only way the house allows:
+
+     · HARD-EDGED SOLID SHAPES — clip-path wedges and rectangles, the same
+       family as the existing `Cone`, never a blur and never a shadow spread
+     · SOLID PAINTS via `mix()` for anything covering an area, so a lit wall is
+       a LIGHTER PAINT rather than white tissue laid over a darker one
+     · the only opacity used is the wedge falloff `Cone` already ships with
+
+   It reads as glowing because the shapes GROW and MULTIPLY, not because they
+   are soft.
+   ------------------------------------------------------------------------ */
+export const Escape: React.FC<{ cx: number; base: number; w: number; h: number;
+  t: number; c: string; burst?: number; f: number; z?: number }> =
+  ({ cx, base, w, h, t, c, burst = 0, f, z = 74 }) => {
+  if (t <= 0.02) return null;
+  const top = base - h;
+  const my = top + h * 0.46;                       // the rays come from the middle
+  const RAYS = 11;
+  const reach = (0.30 + t * 0.70) * (1 + burst * 0.55);
+  return (<>
+    {/* the rays, radiating past the rim of the cloth */}
+    {Array.from({ length: RAYS }, (_, i) => {
+      const a = (i / (RAYS - 1)) * 360;
+      const len = (240 + ((i * 37) % 130)) * reach;
+      const wide = 26 + ((i * 23) % 26);
+      return (
+        <div key={"ry" + i} style={{ position: "absolute", left: cx, top: my,
+          width: len, height: wide, marginTop: -wide / 2, background: c,
+          opacity: 0.10 + t * 0.26,
+          transform: `rotate(${a + Math.sin(f / 21 + i) * 2.2}deg)`,
+          transformOrigin: "0% 50%",
+          clipPath: "polygon(0 42%, 100% 0, 100% 100%, 0 58%)", zIndex: z }} />
+      );
+    })}
+    {/* the gaps at the edges: solid slivers, widening as the strain grows */}
+    {[[cx - w / 2 - 3, 5 + t * 13], [cx + w / 2 - 2, 5 + t * 13]].map(([x, ww], i) => (
+      <div key={"sv" + i} style={{ position: "absolute", left: x - (i ? 0 : ww - 5),
+        top: top + 8, width: ww, height: h - 16, borderRadius: 4,
+        background: mix(c, 0.55), zIndex: z + 3 }} />
+    ))}
+    <div style={{ position: "absolute", left: cx - w / 2 + 10, top: top - (4 + t * 9),
+      width: w - 20, height: 5 + t * 10, borderRadius: 4,
+      background: mix(c, 0.62), zIndex: z + 3 }} />
+    {/* the floor takes the colour — one solid paint, never a wash */}
+    <div style={{ position: "absolute", left: cx - w / 2 - 40 - t * 60, top: base + 14,
+      width: w + 80 + t * 120, height: 34 + t * 22, borderRadius: "50%",
+      background: mix(c, 0.30 + t * 0.26), opacity: 0.42 + t * 0.30, zIndex: z + 1 }} />
+  </>);
+};
+
 export const Drape: React.FC<{ cx: number; base: number; pull: number; cloth: string;
   f: number; shake?: number; z?: number }> = ({ cx, base, pull, cloth, f, shake = 0, z = 78 }) => {
   if (pull >= 1) return null;
