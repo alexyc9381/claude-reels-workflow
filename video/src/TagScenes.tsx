@@ -87,6 +87,13 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
   const spot = LX + (RX - LX) * pull;
   /* the puller dips into it, then the cloth goes */
   const dip = ff < 0 ? 0 : Math.max(0, Math.sin(Math.min(1, ff / 7) * Math.PI) * 7);
+  /* ⭐ THE RUMBLE. A small idle tremble all the way through (there is something
+     under there), ramping to full over the 20 frames BEFORE the pull and
+     decaying over the 6 after it. ⛔ The build has to finish ON the pull, not
+     start there — anticipation that arrives with the payoff is not
+     anticipation. */
+  const build = ff < 0 ? Math.max(0, 1 + ff / 20) : Math.max(0, 1 - ff / 6);
+  const shake = Math.min(1, 0.16 + build * 0.88);
 
   return (
     <Stage i={i} push={push ?? [0, 70, 1.135]} dust vig={T.vig}>
@@ -97,6 +104,11 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
       <Cone x={spot} y={44} top={70} bot={520} len={700} c={R.key} o={0.30} z={19} f={f} />
       <div style={{ position: "absolute", left: spot - 200, top: 630, width: 400, height: 54,
         borderRadius: "50%", background: R.key, opacity: 0.16, zIndex: 20 }} />
+      {/* the free side's own floor shadow jitters with the rumble, so the shake
+          reads as the ROOM reacting rather than as one prop wobbling */}
+      <div style={{ position: "absolute", left: RX - 190 + Math.sin(f * 2.1) * 2.4 * shake,
+        top: 668, width: 380, height: 26, borderRadius: "50%", background: "#05070B",
+        opacity: 0.30 + 0.10 * shake, zIndex: 21 }} />
 
       <div style={{ position: "absolute", inset: 0, zIndex: 60,
         transform: `translateY(${(1 - rise) * 70}px)`, opacity: rise }}>
@@ -109,7 +121,7 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
         <Stand cx={RX} base={BASE} win={pull} logo={P.fLogo} name={P.free}
           price={0} free
           punch={ff < 0 ? 1 : 1 + Math.sin(Math.min(1, ff / 13) * Math.PI) * 0.24} z={61} />
-        <Drape cx={RX} base={BASE} pull={pull} cloth={T.cloth} f={f} z={78} />
+        <Drape cx={RX} base={BASE} pull={pull} cloth={T.cloth} f={f} shake={shake} z={78} />
       </div>
 
       {/* ⭐ THE PULLER. Odyssey cut only: one hoplite in the near-right

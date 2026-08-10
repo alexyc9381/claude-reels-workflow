@@ -177,6 +177,18 @@ const SFX: Cue[] = [
     ];
   }),
 
+  /* ---- the ten RUMBLES: the anticipation layer under each reveal ----------
+     ⛔ ONE GESTURE, NOT A SECOND CUE. The rumble and the pull it resolves into
+     are the same gesture — the rumble is its attack. It is synthesized
+     (brown noise + a 38 Hz floor tone + an exponential swell), because the AM
+     pack has no rumble: ring-low is a bell and film-roll is a rattle.
+     ⛔ NOT A RISER. Risers are capped at 2 per reel and this is ten of them; it
+     stays a rumble by having no pitch sweep and by sitting at TEXTURE level. */
+  ...FREE.map((f, i): Cue => ({
+    at: (f - 19) / FPS, src: A_ + "rumble-build.wav", v: LEVELS.SFX_TEXTURE,
+    dur: 0.86, rate: 0.97 + i * 0.006, lead: 0,
+  })),
+
   /* ---- the ten FREE flips: the lock bursting + the money coming back ------- */
   ...FREE.flatMap((f, i): Cue[] => {
     const r = 0.95 + i * 0.017;

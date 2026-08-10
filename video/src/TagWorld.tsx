@@ -435,7 +435,7 @@ export const Stand: React.FC<{ cx: number; base: number; win: number; logo: stri
    paid price is struck in the same frame.
    ------------------------------------------------------------------------ */
 export const Drape: React.FC<{ cx: number; base: number; pull: number; cloth: string;
-  f: number; z?: number }> = ({ cx, base, pull, cloth, f, z = 78 }) => {
+  f: number; shake?: number; z?: number }> = ({ cx, base, pull, cloth, f, shake = 0, z = 78 }) => {
   if (pull >= 1) return null;
   const w = CARD_W + 34, h = CARD_H + 34;
   const top = base - CARD_H - 22;
@@ -444,10 +444,23 @@ export const Drape: React.FC<{ cx: number; base: number; pull: number; cloth: st
      unveiling drape does when one corner is pulled harder than the other. */
   const dy = pull * (h + top + 210);
   const rot = pull * -7;
+  /* ⭐ THE CLOTH TREMBLES, AND HARDER THE CLOSER THE PULL GETS. Round 8:
+     *"the right side FREE section should be shaking too a little and stuff,
+     shaking some and like rumbling."*  It is the anticipation beat the reveal
+     did not have — something is under there and it wants out, so the cut earns
+     the reveal instead of just arriving at it.
+     ⛔ TWO FREQUENCIES, NOT ONE. A single sine reads as a float; a fast jitter
+     over a slow sway reads as strain. And the cloth BULGES on the same curve,
+     because fabric with something behind it pushes out, it does not only slide. */
+  const jx = (Math.sin(f * 2.1) * 3.6 + Math.sin(f * 4.7 + 1.2) * 1.9) * shake;
+  const jy = (Math.sin(f * 2.9 + 0.7) * 2.7 + Math.sin(f * 6.1) * 1.1) * shake;
+  const jr = Math.sin(f * 2.4 + 0.3) * 0.9 * shake;
+  const bulge = 1 + Math.abs(Math.sin(f * 1.7)) * 0.022 * shake;
   return (
     <div style={{ position: "absolute", left: cx - w / 2, top,
       width: w, height: h, zIndex: z,
-      transform: `translateY(${-dy}px) rotate(${rot}deg)`, transformOrigin: "80% 100%" }}>
+      transform: `translate(${jx}px, ${-dy + jy}px) rotate(${rot + jr}deg) scale(${bulge}, 1)`,
+      transformOrigin: "80% 100%" }}>
       <div style={{ position: "absolute", inset: 0, borderRadius: "16px 16px 4px 4px",
         background: `linear-gradient(174deg, ${mix(cloth, 0.16)} 0%, ${cloth} 46%, ${dark(cloth, 0.72)} 100%)`,
         boxShadow: SH_D, overflow: "hidden" }}>
@@ -478,6 +491,15 @@ export const Drape: React.FC<{ cx: number; base: number; pull: number; cloth: st
           top: h - 12 + Math.sin(f / 17 + i * 0.9) * 3, width: w / 8, height: 30,
           borderRadius: "0 0 50% 50%", background: dark(cloth, 0.74) }} />
       ))}
+      {/* ⭐ grit shaken loose off the head of the cloth as the rumble peaks —
+          the cheapest possible proof that the shaking has FORCE behind it */}
+      {shake > 0.45 && Array.from({ length: 7 }, (_, i) => {
+        const r = (k: number) => { const v = Math.sin(i * 51.7 + k * 9.1) * 4371.7; return v - Math.floor(v); };
+        const t = ((f * (0.9 + r(2) * 0.8) + r(1) * 40) % 34) / 34;
+        return (<div key={"gr" + i} style={{ position: "absolute", left: 12 + r(1) * (w - 24),
+          top: -6 + t * 26, width: 3, height: 3, borderRadius: 3, background: "#E8DFC8",
+          opacity: (1 - t) * 0.55 * shake }} />);
+      })}
       {/* the pull ring on the near corner */}
       <div style={{ position: "absolute", left: w - 34, top: h - 4, width: 30, height: 30,
         borderRadius: 16, border: "7px solid #C9A45C" }} />
