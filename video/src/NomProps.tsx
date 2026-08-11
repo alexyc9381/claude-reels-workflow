@@ -1541,3 +1541,163 @@ export const Overhead: React.FC<{ x: number; y: number; s?: number; z?: number; 
       transform: "rotate(-19deg)" }} />
   </div>
 );
+
+/* =========================================================================
+   THE MOVING-PARTS KIT.
+
+   Alex, round 7: *"needs even more moving pieces at the beginning."*
+
+   ⚠️ A NOTE ON THE HIERARCHY RULE, because this is the fourth round of "more
+   motion" and it is worth writing down why it is not in conflict with
+   `reel-motion-hierarchy`. That rule forbids many SUBJECTS moving at once —
+   camera plus sprite plus background all sliding, which produces the smear
+   nobody can read. It does not forbid a world that is ALIVE. Everything below
+   is a FIXTURE or WEATHER: it is bolted down, it repeats, it has no arc, and
+   the eye never mistakes it for the thing the shot is about. One subject still
+   acts per shot. The frame around it is simply no longer a photograph.
+   ====================================================================== */
+
+/** a wind sock on a pole, whipping — reads instantly as "it is blowing here" */
+export const Windsock: React.FC<{ x: number; base: number; s?: number; z?: number; f?: number }> =
+  ({ x, base, s = 1, z = 60, f = 0 }) => {
+  const w = Math.sin(f / 7) * 7 + Math.sin(f / 3.3) * 3;
+  return (<>
+    <div style={{ position: "absolute", left: x, top: base - 210 * s, width: 10 * s,
+      height: 210 * s, background: "#6E6A62", zIndex: z }} />
+    <div style={{ position: "absolute", left: x - 4 * s, top: base - 218 * s, width: 26 * s,
+      height: 26 * s, borderRadius: "50%", border: `${4 * s}px solid #8A857B`,
+      boxSizing: "border-box", zIndex: z + 1 }} />
+    {[0, 1, 2, 3].map((i) => (
+      <div key={"ws" + i} style={{ position: "absolute", left: x + 18 * s + i * 26 * s,
+        top: base - 216 * s + i * 1.6 * s + w * (0.4 + i * 0.32),
+        width: 28 * s, height: (28 - i * 4) * s, background: i % 2 ? "#D9542F" : "#EFE7D6",
+        zIndex: z + 1, transform: `rotate(${w * (0.5 + i * 0.4)}deg)`,
+        transformOrigin: "0% 50%" }} />
+    ))}
+  </>);
+};
+
+/** a warning strobe on a post: hard on for two frames, off for eleven */
+export const Strobe: React.FC<{ x: number; base: number; s?: number; z?: number; f?: number;
+  c?: string; period?: number }> =
+  ({ x, base, s = 1, z = 62, f = 0, c = "#E8563C", period = 21 }) => {
+  const on = (f % period) < 3 ? 1 : 0;
+  return (<>
+    <div style={{ position: "absolute", left: x, top: base - 130 * s, width: 9 * s,
+      height: 130 * s, background: "#5F5B54", zIndex: z }} />
+    <div style={{ position: "absolute", left: x - 13 * s, top: base - 158 * s, width: 36 * s,
+      height: 34 * s, borderRadius: `${8 * s}px`, background: "#3E434A", zIndex: z + 1 }} />
+    <div style={{ position: "absolute", left: x - 8 * s, top: base - 152 * s, width: 26 * s,
+      height: 22 * s, borderRadius: 4 * s, background: on ? c : dark(c, 0.62), zIndex: z + 2 }} />
+    {on > 0 && (
+      <div style={{ position: "absolute", left: x - 80 * s, top: base - 220 * s, width: 176 * s,
+        height: 176 * s, borderRadius: "50%", zIndex: z - 1,
+        background: `radial-gradient(circle, ${hexa(c, 0.34)} 0%, ${hexa(c, 0)} 68%)` }} />
+    )}
+  </>);
+};
+
+/** loose sheeting and paper tumbling across the frame */
+export const Debris: React.FC<{ f: number; n?: number; z?: number; y0?: number; y1?: number;
+  speed?: number }> = ({ f, n = 7, z = 82, y0 = 380, y1 = 720, speed = 1 }) => (<>
+  {Array.from({ length: n }, (_, i) => {
+    const sp = (7 + rnd(i, 91) * 9) * speed;
+    const x = ((rnd(i, 92) * 1400 - f * sp) % 1400 + 1400) % 1400 - 180;
+    const bounce = Math.abs(Math.sin(f / (11 + i * 3) + i)) * 46;
+    const w = 26 + rnd(i, 93) * 44;
+    return <div key={"db" + i} style={{ position: "absolute", left: x,
+      top: y0 + rnd(i, 94) * (y1 - y0) - bounce, width: w, height: w * (0.5 + rnd(i, 95) * 0.4),
+      background: i % 3 === 0 ? "#D9D3C4" : (i % 3 === 1 ? "#8A857B" : "#B7A98C"),
+      opacity: 0.82, zIndex: z, borderRadius: 3,
+      transform: `rotate(${(f * (3 + i)) % 360}deg)` }} />;
+  })}
+</>);
+
+/** a dish that scans, on its own mount */
+export const ScanDish: React.FC<{ x: number; base: number; s?: number; z?: number; f?: number;
+  rate?: number }> = ({ x, base, s = 1, z = 40, f = 0, rate = 1 }) => {
+  const a = Math.sin(f / (46 / rate)) * 34;
+  return (<>
+    <div style={{ position: "absolute", left: x - 8 * s, top: base - 118 * s, width: 16 * s,
+      height: 118 * s, background: "#5A5F66", zIndex: z }} />
+    <div style={{ position: "absolute", left: x - 26 * s, top: base - 12 * s, width: 52 * s,
+      height: 14 * s, background: "#474C53", zIndex: z }} />
+    <div style={{ position: "absolute", left: x - 56 * s, top: base - 176 * s, width: 112 * s,
+      height: 88 * s, zIndex: z + 1, transform: `rotate(${a}deg)`, transformOrigin: "50% 90%" }}>
+      <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "#8A9099" }} />
+      <div style={{ position: "absolute", left: "13%", top: "13%", width: "74%", height: "74%",
+        borderRadius: "50%", background: "#B4BAC2" }} />
+      <div style={{ position: "absolute", left: "45%", top: "-16%", width: "10%", height: "42%",
+        background: "#5A5F66" }} />
+      <div style={{ position: "absolute", left: "40%", top: "-24%", width: "20%", height: "16%",
+        borderRadius: 4, background: "#474C53" }} />
+    </div>
+  </>);
+};
+
+/** a generator exhaust, puffing on a loop */
+export const Exhaust: React.FC<{ x: number; y: number; s?: number; z?: number; f?: number;
+  n?: number }> = ({ x, y, s = 1, z = 50, f = 0, n = 4 }) => (<>
+  {Array.from({ length: n }, (_, i) => {
+    const t = ((f * 1.5 + i * (100 / n)) % 100) / 100;
+    const sz = (10 + t * 52) * s;
+    return <div key={"ex" + i} style={{ position: "absolute", left: x - sz / 2 + t * 44 * s,
+      top: y - t * 104 * s, width: sz, height: sz * 0.8, borderRadius: "50%",
+      background: "#7E7A72", opacity: (1 - t) * 0.44, zIndex: z }} />;
+  })}
+</>);
+
+/** snow devils spinning over a flat plate — top-down weather */
+export const Vortex: React.FC<{ f: number; n?: number; z?: number; s?: number }> =
+  ({ f, n = 4, z = 76, s = 1 }) => (<>
+  {Array.from({ length: n }, (_, i) => {
+    const t = ((f * 0.6 + i * 40) % 160) / 160;
+    const cx = 120 + rnd(i, 96) * 820 + t * 180;
+    const cy = 120 + rnd(i, 97) * 560 - t * 90;
+    return (
+      <div key={"vx" + i} style={{ position: "absolute", left: cx, top: cy, zIndex: z,
+        opacity: Math.sin(Math.PI * t) * 0.72 }}>
+        {[0, 1, 2, 3, 4].map((k) => {
+          const a = (f * (7 + i * 2) + k * 72) * Math.PI / 180;
+          const r = (16 + k * 11) * s;
+          return <div key={k} style={{ position: "absolute",
+            left: Math.cos(a) * r, top: Math.sin(a) * r * 0.6 - k * 5 * s,
+            width: (9 - k) * s + 5, height: (6 - k * 0.6) * s + 4, borderRadius: 6,
+            background: "#FBFAF6", opacity: 0.9 - k * 0.13 }} />;
+        })}
+      </div>
+    );
+  })}
+</>);
+
+/** a rotating beacon seen FROM ABOVE: a wedge of light sweeping the ground */
+export const SweepLamp: React.FC<{ x: number; y: number; s?: number; z?: number; f?: number;
+  rate?: number; c?: string }> =
+  ({ x, y, s = 1, z = 24, f = 0, rate = 2.6, c = "#E0A542" }) => (<>
+    <div style={{ position: "absolute", left: x - 460 * s, top: y - 460 * s, width: 920 * s,
+      height: 920 * s, zIndex: z, transform: `rotate(${(f * rate) % 360}deg)`,
+      transformOrigin: "50% 50%",
+      background: `conic-gradient(from 0deg, ${hexa(c, 0.30)} 0deg, ${hexa(c, 0)} 34deg, ${hexa(c, 0)} 360deg)`,
+      borderRadius: "50%" }} />
+    <div style={{ position: "absolute", left: x - 26 * s, top: y - 26 * s, width: 52 * s,
+      height: 52 * s, borderRadius: "50%", background: "#3E434A", zIndex: z + 2 }} />
+    <div style={{ position: "absolute", left: x - 16 * s, top: y - 16 * s, width: 32 * s,
+      height: 32 * s, borderRadius: "50%", background: c, zIndex: z + 3,
+      opacity: 0.55 + 0.45 * Math.abs(Math.sin(f / 9)) }} />
+  </>);
+
+/** a loose tarp or fence panel, flapping at one corner */
+export const Flap: React.FC<{ x: number; y: number; w?: number; h?: number; s?: number;
+  z?: number; f?: number; c?: string }> =
+  ({ x, y, w: ww = 150, h: hh = 110, s = 1, z = 84, f = 0, c = "#8A857B" }) => {
+  const a = Math.sin(f / 6.5) * 13 + Math.sin(f / 2.7) * 5;
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: ww * s, height: hh * s, zIndex: z,
+      background: c, transformOrigin: "0% 0%",
+      transform: `rotate(${a}deg) skewY(${a * 0.4}deg)`,
+      clipPath: "polygon(0 0, 100% 8%, 92% 100%, 6% 88%)", boxShadow: SH }}>
+      <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 8 * s,
+        background: dark(c, 0.24) }} />
+    </div>
+  );
+};

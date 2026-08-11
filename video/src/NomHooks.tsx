@@ -8,6 +8,7 @@ import {
   Ridge, Snow, Ash, Beam, Strip, Motes, Edge, Keeper, Mitt, Scene, Cam, MarkPlate, MarkCast,
 } from "./NomWorld";
 import { Portal, Bunker, Fence, Wreck, Hatch, MastSite, Prints, Apron, Overhead,
+  Windsock, Strobe, Debris, ScanDish, Exhaust, Vortex, SweepLamp, Flap,
   BlastDoor, Wheel, Tunnel, Mast } from "./NomProps";
 
 /* ===========================================================================
@@ -91,6 +92,15 @@ export const S0HookMast: React.FC = () => {
           <Mast x={506} base={pm.horizon + 120} h={380} s={1} z={20} f={f} on={1} />
         </Cam>
         <MastSite x={506} base={pm.horizon + 214} s={0.94} z={44} f={f} on={1} />
+        {/* ⭐ ROUND 7 · the compound is RUNNING, not parked: the dish scans, the
+            generator smokes, a wind sock whips, a strobe blinks on the wire and
+            sheeting tumbles through. Fixtures and weather only. */}
+        <ScanDish x={856} base={pm.horizon + 214} s={0.80} z={52} f={f} rate={1.4} />
+        <Exhaust x={273} y={pm.horizon + 108} s={0.94} z={54} f={f} n={4} />
+        <Windsock x={92} base={pm.horizon + 178} s={0.80} z={60} f={f} />
+        <Strobe x={636} base={pm.horizon + 258} s={0.86} z={78} f={f} period={17} />
+        <Flap x={790} y={pm.horizon + 214} w={124} h={88} s={1} z={82} f={f} c="#6E6459" />
+        <Debris f={f} n={7} z={86} y0={pm.horizon + 110} y1={pm.horizon + 300} speed={1.4} />
         {/* the guy wire that lets go */}
         <div style={{ position: "absolute", left: 96, top: 40, width: 660, height: 7, zIndex: 56,
           background: "#4E4A45", transformOrigin: "0% 50%",
@@ -268,6 +278,12 @@ export const S0HookCase: React.FC = () => {
         <Bunker x={806} base={pr.horizon + 176} s={0.52} z={20} f={f} slot={0.9}
           floods={1} lamp={1} />
         <Wreck x={128} base={pr.horizon + 176} s={0.74} z={30} />
+        <ScanDish x={906} base={pr.horizon + 132} s={0.62} z={24} f={f} rate={1.3} />
+        <Exhaust x={862} y={pr.horizon + 40} s={0.72} z={25} f={f} n={3} />
+        <Windsock x={96} base={pr.horizon + 96} s={0.74} z={58} f={f} />
+        <Strobe x={196} base={pr.horizon + 172} s={0.80} z={60} f={f} period={19} />
+        <Flap x={704} y={pr.horizon + 120} w={104} h={76} s={1} z={62} f={f} c="#6E6459" />
+        <Debris f={f} n={8} z={86} y0={pr.horizon + 20} y1={pr.horizon + 300} speed={1.6} />
         <MarkPlate x={72} y={214} t="AN OFFLINE AI" s={0.92} z={70} />
         <Edge side="l" c={dark(pr.back, 0.66)} kind="rock" w={126} z={90} />
         <Ash f={f} n={30} z={68} speed={1 + gust * 2.4} />
@@ -288,6 +304,9 @@ export const S0HookCase: React.FC = () => {
           borderRadius: "50%", background: "#E4EAEF", zIndex: 52 }} />
         <Bunker x={806} base={pr.horizon + 176} s={0.52} z={20} f={f} slot={0.9}
           floods={1} lamp={1} />
+        <ScanDish x={906} base={pr.horizon + 132} s={0.62} z={24} f={f} rate={1.3} />
+        <Windsock x={96} base={pr.horizon + 96} s={0.74} z={58} f={f} />
+        <Debris f={f} n={8} z={86} y0={pr.horizon + 20} y1={pr.horizon + 300} speed={1.6} />
         <Edge side="l" c={dark(pr.back, 0.66)} kind="rock" w={126} z={90} />
         <Ash f={f} n={28} z={68} speed={1.3} />
         <Snow f={f} n={40} z={72} speed={1.3} c="#E6E3DB" />
@@ -383,7 +402,7 @@ export const S0HookCross: React.FC = () => {
   /* A · TOP-DOWN. A drift, and something under it. The wind takes the first
      third of the snow off it before the first cut. */
   if (shot === 0) {
-    const clear = E(lf, 3, 30, 0.26, 0.52, LIN);
+    const clear = E(lf, 3, 30, 0.36, 0.60, LIN);
     return (
       /* ⛔⛔ A PLATE IN A FIELD OF NOTHING IS STILL NOTHING. Round 6: the
          top-down camera was the right idea and the shot was still empty,
@@ -413,6 +432,14 @@ export const S0HookCross: React.FC = () => {
         <div style={{ position: "absolute", left: 848, top: 430, width: 76, height: 92,
           borderRadius: `${8}px ${8}px ${34}px ${34}px`, background: "#98A0A9", zIndex: 53,
           transform: "rotate(-19deg)" }} />
+        {/* ⭐ ROUND 7 · a rotating beacon on a post at the edge of the apron,
+            seen FROM ABOVE, sweeps a wedge of amber right across the plate once
+            a second. On a top-down shot that single fixture repaints half the
+            frame every cycle, which is the most motion available from something
+            that is bolted to the ground. Plus snow devils and tumbling sheeting. */}
+        <SweepLamp x={182} y={188} s={1.34} z={22} f={f} rate={2.8} />
+        <Vortex f={f} n={4} z={73} s={1.1} />
+        <Debris f={f} n={6} z={79} y0={80} y1={720} speed={1.5} />
         <Overhead x={496} y={-58} s={1.24} z={68} f={f} o={0.28} />
         <Drift n={22} z={74} sp={1.3} />
         <Ash f={f} n={30} z={76} speed={1.6} />
@@ -425,7 +452,7 @@ export const S0HookCross: React.FC = () => {
   /* B · a mitt sweeps the rest of it clear and the whole plate reads: steel,
      chevrons, NOMAD, and a wheel where a lock would be. */
   if (shot === 1) {
-    const clear = E(lf, 0, 22, 0.52, 1, OUT);
+    const clear = E(lf, 0, 22, 0.60, 1, OUT);
     return (
       <Scene p={pr} slug="NOMAD  ·  BAY 08" push={[30, 58, 1.06]} vig={0.42}>
         <Ground />
@@ -433,6 +460,9 @@ export const S0HookCross: React.FC = () => {
         <Prints x1={-50} y1={766} x2={300} y2={604} n={10} s={1.15} z={20} fade={1} />
         <Hatch x={520} y={452} s={0.94} z={30} f={f} clear={clear} open={0}
           spin={-18 - lf * 0.4} />
+        <SweepLamp x={182} y={188} s={1.34} z={22} f={f} rate={2.8} />
+        <Vortex f={f} n={3} z={73} s={1.1} />
+        <Debris f={f} n={5} z={79} y0={80} y1={720} speed={1.4} />
         <Overhead x={496} y={-58} s={1.24} z={68} f={f} o={0.24} />
         <Mitt x={112} y={300} s={1.5} z={70} rot={-18 + clear * 26} />
         <MarkPlate x={70} y={92} t="AN OFFLINE AI" s={0.92} z={72} />
@@ -452,6 +482,8 @@ export const S0HookCross: React.FC = () => {
       <Scene p={pr} slug="ONE HAND  ·  NO KEY" push={[58, 90, 1.06]} vig={0.46}>
         <Ground k={0.8} />
         <Apron x={520} y={452} r={356} z={14} s={1} />
+        <SweepLamp x={182} y={188} s={1.34} z={22} f={f} rate={2.8} />
+        <Vortex f={f} n={3} z={73} s={1.0} />
         <Hatch x={520} y={452} s={0.94} z={30} f={f} clear={1} open={crack}
           spin={-18 - turn * 210} />
         <Mitt x={128} y={356} s={1.6} z={70} rot={-14 + turn * 96} />

@@ -10,6 +10,7 @@ import {
 } from "./NomWorld";
 import {
   Portal, Bunker, Fence, Wreck, Pylon, BlastDoor, Wheel, Tunnel, Box, CmdScreen, Canister, Rack, Bars,
+  Windsock, Strobe, Debris, ScanDish, Exhaust, Flap,
   Pipes, GaugePanel, Stores, Notes, Fan,
   ChartTable, MapSheet, Compass, Shaft, Chute, Mast, CoinCage, Coin, SlitWindow,
   Cable, LightBank,
@@ -124,8 +125,17 @@ export const S0Hook: React.FC = () => {
         {/* MARK 2 · the Keeper walking the apron, badge above his hood */}
         <Keeper x={198 + walk * 116} y={pr.horizon + 344} s={1.30} z={90} f={f} face={1}
           hood={1} walk={walk > 0.01 && walk < 0.99 ? 1 : 0} badge={1} lit={0.98} />
+        {/* ⭐ ROUND 7 · MORE MOVING PIECES. All fixtures or weather, none of
+            them a subject: a scanning dish on the berm, a wind sock whipping,
+            a warning strobe on the fence line, a flapping tarp on the wreck,
+            and sheeting tumbling across the apron. */}
+        <ScanDish x={790} base={pr.horizon + 152} s={0.72} z={44} f={f} rate={1.2} />
+        <Windsock x={126} base={pr.horizon + 168} s={0.86} z={60} f={f} />
+        <Strobe x={874} base={pr.horizon + 268} s={0.92} z={81} f={f} />
         <Wreck x={838} base={pr.horizon + 350} s={1.15} z={84} face={-1} />
+        <Flap x={742} y={pr.horizon + 250} w={132} h={92} s={1} z={86} f={f} c="#7A6E5E" />
         <Fence y={pr.horizon + 236} z={82} s={1.10} torn={1} />
+        <Debris f={f} n={7} z={87} y0={pr.horizon + 120} y1={pr.horizon + 330} speed={1.3} />
         <Ash f={f} n={30} z={76} speed={1 + gust * 2.2} />
         <Snow f={f} n={34} z={78} speed={1.4 + gust * 3.2} c="#E6E3DB" />
         <Snow f={f} n={16} z={94} near speed={1.8 + gust * 4.2} c="#F2F0EA" />
