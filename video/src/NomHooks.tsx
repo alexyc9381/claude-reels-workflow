@@ -7,7 +7,8 @@ import {
   CLAY, GOLD, GREEN, RED, PAPER, INK, usePlace,
   Ridge, Snow, Ash, Beam, Strip, Motes, Edge, Keeper, Mitt, Scene, Cam, MarkPlate, MarkCast,
 } from "./NomWorld";
-import { Portal, Bunker, Fence, Wreck, Hatch, BlastDoor, Wheel, Tunnel, Mast } from "./NomProps";
+import { Portal, Bunker, Fence, Wreck, Hatch, MastSite, Prints, Apron, Overhead,
+  BlastDoor, Wheel, Tunnel, Mast } from "./NomProps";
 
 /* ===========================================================================
    REEL 98 "NOMAD" — THE ALTERNATE OPENS.
@@ -74,17 +75,31 @@ export const S0HookMast: React.FC = () => {
   if (shot === 0) {
     const jolt = E(lf, 14, 20, 0, 1, OUT) * (1 - E(lf, 20, 30, 0, 1, OUT));
     return (
-      <Scene p={pm} slug="THE UPLINK MAST" push={[0, 30, 1.06]} vig={0.46}>
+      /* ⛔⛔ IT IS A SITE, NOT A TOWER. Alex, round 6: cut B's first scene is
+         *"still too boring, and those are the most important scenes."* Shot A
+         was a lattice and a sky — almost no ink on the panel and no reason to
+         believe anyone ever worked there. It is now a working comms compound:
+         an equipment cabin with a live status lamp, a generator and its fuel
+         drums, a dish on its own mount, four guy wires anchored to concrete
+         blocks, a cable duct, an ice-furred climbing ladder with a safety cage,
+         a hazard sign on the fence line, and a wreck outside it. None of it
+         moves — SET-AND-LIGHT §6: the density lives in the STATIC set, and the
+         only thing that acts is the wire letting go. */
+      <Scene p={pm} slug="THE UPLINK COMPOUND" push={[0, 30, 1.06]} vig={0.46}>
         <Ridge p={pm} f={f} city={1} lit={1} sunX={168} storm={1} fires={1} />
-        <Cam z={40} s={1.72} y={132} rot={jolt * 1.6}>
-          <Mast x={506} base={pm.horizon + 120} h={360} s={1} z={20} f={f} on={1} />
+        <Cam z={40} s={1.34} y={96} rot={jolt * 1.6}>
+          <Mast x={506} base={pm.horizon + 120} h={380} s={1} z={20} f={f} on={1} />
         </Cam>
+        <MastSite x={506} base={pm.horizon + 214} s={0.94} z={44} f={f} on={1} />
         {/* the guy wire that lets go */}
-        <div style={{ position: "absolute", left: 120, top: 60, width: 620, height: 7, zIndex: 46,
+        <div style={{ position: "absolute", left: 96, top: 40, width: 660, height: 7, zIndex: 56,
           background: "#4E4A45", transformOrigin: "0% 50%",
           transform: `rotate(${26 + jolt * 22}deg)` }} />
-        <MarkPlate x={82} y={214} t="OFFLINE AI · NO CLOUD" s={0.92} z={70} />
-        <Fence y={pm.horizon + 252} z={84} s={1.06} torn={1} />
+        <Keeper x={206} y={pm.horizon + 268} s={0.90} z={72} f={f} face={1} hood={1}
+          badge={1} lit={0.94} />
+        <MarkPlate x={82} y={210} t="OFFLINE AI · NO CLOUD" s={0.92} z={76} />
+        <Wreck x={862} base={pm.horizon + 292} s={0.98} z={80} face={-1} />
+        <Fence y={pm.horizon + 236} z={84} s={1.08} torn={1} />
         <Edge side="r" c={dark(pm.back, 0.68)} kind="rock" w={130} z={90} />
         {weather(34)}
       </Scene>
@@ -370,11 +385,36 @@ export const S0HookCross: React.FC = () => {
   if (shot === 0) {
     const clear = E(lf, 3, 30, 0.26, 0.52, LIN);
     return (
+      /* ⛔⛔ A PLATE IN A FIELD OF NOTHING IS STILL NOTHING. Round 6: the
+         top-down camera was the right idea and the shot was still empty,
+         because a flat grey ground gives the eye one object and no context.
+         What it needed was EVIDENCE OF PEOPLE, which top-down does better than
+         any other angle: BOOT PRINTS walking in from the frame edge, the
+         painted concrete apron and its bay number showing through the drift, a
+         cable conduit running away off frame, a dropped crowbar and a shovel
+         stuck in the snow, scattered slabs — and the SHADOW of somebody
+         standing over the whole thing, cast in from the top of the frame. That
+         last one puts a person in a shot that contains no person. */
       <Scene p={pr} slug="SOMETHING UNDER THE SNOW" push={[0, 30, 1.06]} vig={0.40}>
         <Ground />
+        <Apron x={520} y={452} r={356} z={14} s={1} />
+        <Prints x1={-50} y1={766} x2={300} y2={604} n={10} s={1.15} z={20} fade={1} />
         <Hatch x={520} y={452} s={0.94} z={30} f={f} clear={clear} open={0}
           spin={-lf * 0.6} />
-        <Drift n={20} z={74} sp={1.3} />
+        {/* a crowbar dropped beside it and a shovel stood in the drift */}
+        <div style={{ position: "absolute", left: 168, top: 496, width: 224, height: 15,
+          borderRadius: 7, background: "#5A5148", zIndex: 52, transform: "rotate(15deg)",
+          boxShadow: SH }} />
+        <div style={{ position: "absolute", left: 154, top: 486, width: 52, height: 20,
+          borderRadius: 6, background: "#6E6459", zIndex: 53, transform: "rotate(46deg)" }} />
+        <div style={{ position: "absolute", left: 826, top: 240, width: 17, height: 216,
+          borderRadius: 6, background: "#8A6242", zIndex: 52, transform: "rotate(-19deg)",
+          boxShadow: SH }} />
+        <div style={{ position: "absolute", left: 848, top: 430, width: 76, height: 92,
+          borderRadius: `${8}px ${8}px ${34}px ${34}px`, background: "#98A0A9", zIndex: 53,
+          transform: "rotate(-19deg)" }} />
+        <Overhead x={496} y={-58} s={1.24} z={68} f={f} o={0.28} />
+        <Drift n={22} z={74} sp={1.3} />
         <Ash f={f} n={30} z={76} speed={1.6} />
         <Snow f={f} n={40} z={78} speed={2.0} c="#E6E3DB" />
         <Snow f={f} n={20} z={94} near speed={2.6} c="#F6F4EE" />
@@ -389,8 +429,11 @@ export const S0HookCross: React.FC = () => {
     return (
       <Scene p={pr} slug="NOMAD  ·  BAY 08" push={[30, 58, 1.06]} vig={0.42}>
         <Ground />
+        <Apron x={520} y={452} r={356} z={14} s={1} />
+        <Prints x1={-50} y1={766} x2={300} y2={604} n={10} s={1.15} z={20} fade={1} />
         <Hatch x={520} y={452} s={0.94} z={30} f={f} clear={clear} open={0}
           spin={-18 - lf * 0.4} />
+        <Overhead x={496} y={-58} s={1.24} z={68} f={f} o={0.24} />
         <Mitt x={112} y={300} s={1.5} z={70} rot={-18 + clear * 26} />
         <MarkPlate x={70} y={92} t="AN OFFLINE AI" s={0.92} z={72} />
         <Drift n={20} z={74} sp={1.3} />
@@ -408,6 +451,7 @@ export const S0HookCross: React.FC = () => {
     return (
       <Scene p={pr} slug="ONE HAND  ·  NO KEY" push={[58, 90, 1.06]} vig={0.46}>
         <Ground k={0.8} />
+        <Apron x={520} y={452} r={356} z={14} s={1} />
         <Hatch x={520} y={452} s={0.94} z={30} f={f} clear={1} open={crack}
           spin={-18 - turn * 210} />
         <Mitt x={128} y={356} s={1.6} z={70} rot={-14 + turn * 96} />

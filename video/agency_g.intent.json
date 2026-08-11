@@ -1,0 +1,77 @@
+{
+ "vo_onset_max_s": 0.15,
+ "audio_onset_max_s": 0.15,
+ "music_onset_max_s": 0.15,
+ "ends_tight_max_s": 0.5,
+ "max_short_word_s": 0.8,
+ "caption_drift_tol_s": 0.12,
+ "sfx_cues_s": [],
+ "scenes": [
+  {
+   "i": 0,
+   "job": "hook",
+   "t0": 0.0,
+   "t1": 2.77
+  },
+  {
+   "i": 1,
+   "job": "the front",
+   "t0": 2.77,
+   "t1": 5.97
+  },
+  {
+   "i": 2,
+   "job": "the roster",
+   "t0": 5.97,
+   "t1": 7.97
+  },
+  {
+   "i": 3,
+   "job": "the row",
+   "t0": 7.97,
+   "t1": 10.1
+  },
+  {
+   "i": 4,
+   "job": "the crew",
+   "t0": 10.1,
+   "t1": 12.4
+  },
+  {
+   "i": 5,
+   "job": "the plug",
+   "t0": 12.4,
+   "t1": 14.2
+  },
+  {
+   "i": 6,
+   "job": "the install",
+   "t0": 14.2,
+   "t1": 16.63
+  },
+  {
+   "i": 7,
+   "job": "the owner",
+   "t0": 16.63,
+   "t1": 18.5
+  },
+  {
+   "i": 8,
+   "job": "the CTA",
+   "t0": 18.5,
+   "t1": 20.5
+  }
+ ],
+ "voDuration": 20.5,
+ "L": [
+  0.0,
+  2.77,
+  5.97,
+  7.97,
+  10.1,
+  12.4,
+  14.2,
+  16.63,
+  18.5
+ ]
+}

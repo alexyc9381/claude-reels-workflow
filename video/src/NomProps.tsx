@@ -1321,17 +1321,223 @@ export const Hatch: React.FC<{ x: number; y: number; s?: number; z?: number; f?:
       </div>
     </div>
     {/* the drift still lying on it, swept off by `clear` */}
-    {clear < 0.995 && (
-      <div style={{ position: "absolute", left: x - R * 1.24, top: y - R * 1.24, width: R * 2.48,
-        height: R * 2.48, zIndex: z + 14, overflow: "hidden", borderRadius: "50%" }}>
-        <div style={{ position: "absolute", left: `${clear * 104}%`, top: 0, width: "100%",
-          height: "100%", background: "#E9E6DE", borderRadius: "50%" }} />
-        <div style={{ position: "absolute", left: `${-6 + clear * 108}%`, top: "8%", width: "96%",
-          height: "84%", background: "#F4F2EC", borderRadius: "50%" }} />
-        {/* the ridge of swept snow piling at the leading edge */}
-        <div style={{ position: "absolute", left: `${-14 + clear * 104}%`, top: "4%", width: "18%",
-          height: "92%", background: "#FBFAF6", borderRadius: "50%", opacity: 0.9 }} />
-      </div>
+    {/* ⛔ A SLIDING CIRCLE IS NOT SNOW. v1 masked the drift with one disc moving
+        sideways and it rendered as a hard-edged white lens flare over the plate.
+        A drift is a CLUSTER — overlapping lobes that shrink and blow off, each
+        at its own rate — and the lobes have to sit at different radii so the
+        steel comes out from under it unevenly, the way snow actually leaves. */}
+    {clear < 0.995 && Array.from({ length: 9 }, (_, i) => {
+      const a = (i / 9) * Math.PI * 2 + 0.6;
+      const rad = R * (0.30 + rnd(i, 81) * 0.62);
+      const lag = rnd(i, 82) * 0.42;                 // each lobe leaves at its own time
+      const k = Math.max(0, Math.min(1, (clear - lag) / (1 - lag)));
+      if (k > 0.985) return null;
+      const sz = R * (0.62 + rnd(i, 83) * 0.60) * (1 - k * 0.86);
+      const blow = k * (140 + rnd(i, 84) * 190) * s;
+      return (
+        <div key={"sd" + i} style={{ position: "absolute",
+          left: x + Math.cos(a) * rad - sz / 2 + blow,
+          top: y + Math.sin(a) * rad * 0.9 - sz / 2 - blow * 0.24,
+          width: sz, height: sz * (0.72 + rnd(i, 85) * 0.30), borderRadius: "50%",
+          background: i % 3 === 0 ? "#FBFAF6" : "#EFEDE6",
+          opacity: (1 - k) * 0.98, zIndex: z + 14 + (i % 3) }} />
+      );
+    })}
+    {/* the ridge of swept snow piling up ahead of the sweep */}
+    {clear > 0.06 && clear < 0.99 && (
+      <div style={{ position: "absolute", left: x - R * 0.30 + clear * R * 1.5,
+        top: y - R * 0.86, width: R * 0.52, height: R * 1.72, borderRadius: "50%",
+        background: "#FBFAF6", opacity: 0.86 * (1 - clear * 0.4), zIndex: z + 18 }} />
     )}
   </>);
 };
+
+/* =========================================================================
+   THE MAST SITE — everything that stands at the foot of a real comms tower.
+
+   Alex: cut B's first scene is *"still too boring, and those are the most
+   important scenes."* He is right. Shot A was a tower and a sky. A mast on its
+   own is a thin grey lattice: almost no ink, nothing to look at, and no reason
+   to believe anyone ever worked there.
+
+   ⭐ SET-AND-LIGHT §6: the density belongs in the STATIC set. None of this
+   moves. It is an equipment cabin, a generator, fuel drums, a dish on a mount,
+   guy wires anchored to concrete blocks, cable ducts, an ice-furred ladder and
+   signage — the stuff that makes a site read as a place somebody maintained
+   until they could not any more.
+   ====================================================================== */
+export const MastSite: React.FC<{ x: number; base: number; s?: number; z?: number; f?: number;
+  on?: number }> = ({ x, base, s = 1, z = 26, f = 0, on = 1 }) => (<>
+  {/* the guy wires, anchored to concrete blocks out either side */}
+  {[[-1, 0.86], [1, 0.86], [-1, 0.52], [1, 0.52]].map(([d, k], i) => (
+    <React.Fragment key={"gw" + i}>
+      <div style={{ position: "absolute", left: x, top: base - 470 * s * (k as number),
+        width: 420 * s * (k as number), height: 4, background: "#6E6A62", zIndex: z,
+        transformOrigin: "0% 50%",
+        transform: `rotate(${(d as number) > 0 ? 46 + i * 4 : 134 - i * 4}deg)` }} />
+      {/* ice furring the windward wire */}
+      {(d as number) < 0 && (
+        <div style={{ position: "absolute", left: x, top: base - 470 * s * (k as number),
+          width: 420 * s * (k as number), height: 9, background: "#DCE5EB", opacity: 0.5,
+          zIndex: z + 1, transformOrigin: "0% 50%", transform: `rotate(134deg)` }} />
+      )}
+    </React.Fragment>
+  ))}
+  {[-1, 1].map((d, i) => (
+    <div key={"an" + i} style={{ position: "absolute", left: x + d * 330 * s - 34 * s,
+      top: base - 34 * s, width: 68 * s, height: 38 * s, background: CONCD, zIndex: z + 2,
+      clipPath: "polygon(14% 0, 86% 0, 100% 100%, 0 100%)" }} />
+  ))}
+
+  {/* the equipment cabin: a door, a vent louvre, a meter box and a cable duct */}
+  <div style={{ position: "absolute", left: x + 96 * s, top: base - 152 * s, width: 224 * s,
+    height: 152 * s, background: "#7E7A72", zIndex: z + 6, boxShadow: SH_D }} />
+  <div style={{ position: "absolute", left: x + 96 * s, top: base - 152 * s, width: 224 * s,
+    height: 13 * s, background: "#959086", zIndex: z + 7 }} />
+  <div style={{ position: "absolute", left: x + 96 * s, top: base - 164 * s, width: 224 * s,
+    height: 16 * s, background: "#D9D6CE", zIndex: z + 8, borderRadius: `${5 * s}px ${5 * s}px 0 0` }} />
+  <div style={{ position: "absolute", left: x + 126 * s, top: base - 116 * s, width: 62 * s,
+    height: 116 * s, background: "#4A4E54", zIndex: z + 9 }} />
+  <div style={{ position: "absolute", left: x + 178 * s, top: base - 66 * s, width: 9 * s,
+    height: 9 * s, borderRadius: 5, background: "#C9BFA6", zIndex: z + 10 }} />
+  {Array.from({ length: 5 }, (_, i) => (
+    <div key={"lv" + i} style={{ position: "absolute", left: x + 214 * s, top: base - 122 * s + i * 13 * s,
+      width: 82 * s, height: 8 * s, background: "#5A5F66", zIndex: z + 9 }} />
+  ))}
+  <div style={{ position: "absolute", left: x + 232 * s, top: base - 56 * s, width: 46 * s,
+    height: 34 * s, background: "#3E434A", zIndex: z + 9, borderRadius: 3 }} />
+  <div style={{ position: "absolute", left: x + 238 * s, top: base - 48 * s, width: 34 * s,
+    height: 10 * s, background: on > 0.5 ? GREEN : "#5A5F66", zIndex: z + 10 }} />
+
+  {/* the generator and its fuel drums */}
+  <div style={{ position: "absolute", left: x - 320 * s, top: base - 76 * s, width: 168 * s,
+    height: 76 * s, background: "#4C5340", zIndex: z + 6, borderRadius: 4, boxShadow: SH }} />
+  <div style={{ position: "absolute", left: x - 320 * s, top: base - 76 * s, width: 168 * s,
+    height: 11 * s, background: "#666E55", zIndex: z + 7 }} />
+  {Array.from({ length: 6 }, (_, i) => (
+    <div key={"gv" + i} style={{ position: "absolute", left: x - 306 * s + i * 22 * s,
+      top: base - 58 * s, width: 12 * s, height: 34 * s, background: "#343A2B", zIndex: z + 8 }} />
+  ))}
+  <div style={{ position: "absolute", left: x - 250 * s, top: base - 108 * s, width: 15 * s,
+    height: 36 * s, background: "#3A3630", zIndex: z + 8 }} />
+  {[0, 1, 2].map((i) => (
+    <div key={"dr" + i} style={{ position: "absolute", left: x - 154 * s + i * 44 * s,
+      top: base - 64 * s, width: 40 * s, height: 64 * s, borderRadius: 4 * s,
+      background: i === 1 ? "#8A6C34" : "#7A4A3E", zIndex: z + 7 }}>
+      <div style={{ position: "absolute", left: 0, top: 16 * s, width: "100%", height: 7 * s,
+        background: "rgba(0,0,0,0.22)" }} />
+      <div style={{ position: "absolute", left: 0, top: 38 * s, width: "100%", height: 7 * s,
+        background: "rgba(0,0,0,0.22)" }} />
+      <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 8 * s,
+        background: "#D9D6CE" }} />
+    </div>
+  ))}
+
+  {/* a dish on its own mount, and a cable duct running to the cabin */}
+  <div style={{ position: "absolute", left: x + 372 * s, top: base - 96 * s, width: 15 * s,
+    height: 96 * s, background: "#5A5F66", zIndex: z + 6 }} />
+  <div style={{ position: "absolute", left: x + 340 * s, top: base - 152 * s, width: 92 * s,
+    height: 72 * s, borderRadius: "50%", background: "#8A9099", zIndex: z + 7,
+    transform: "rotate(-16deg)" }} />
+  <div style={{ position: "absolute", left: x + 356 * s, top: base - 140 * s, width: 62 * s,
+    height: 48 * s, borderRadius: "50%", background: "#B4BAC2", zIndex: z + 8,
+    transform: "rotate(-16deg)" }} />
+  <div style={{ position: "absolute", left: x - 40 * s, top: base - 20 * s, width: 300 * s,
+    height: 18 * s, background: "#6E6A62", zIndex: z + 5, borderRadius: 4 }} />
+  {Array.from({ length: 7 }, (_, i) => (
+    <div key={"dt" + i} style={{ position: "absolute", left: x - 30 * s + i * 42 * s,
+      top: base - 22 * s, width: 8 * s, height: 22 * s, background: "#565249", zIndex: z + 6 }} />
+  ))}
+
+  {/* the ladder with its safety cage, going up out of frame */}
+  <div style={{ position: "absolute", left: x - 34 * s, top: base - 520 * s, width: 44 * s,
+    height: 520 * s, zIndex: z + 4 }}>
+    {[0, 1].map((i) => (
+      <div key={"lr" + i} style={{ position: "absolute", left: i * 34 * s, top: 0, width: 7 * s,
+        height: "100%", background: "#5A5F66" }} />
+    ))}
+    {Array.from({ length: 16 }, (_, i) => (
+      <div key={"lg" + i} style={{ position: "absolute", left: 0, top: 14 * s + i * 32 * s,
+        width: 41 * s, height: 5 * s, background: "#6E747C" }} />
+    ))}
+    {Array.from({ length: 8 }, (_, i) => (
+      <div key={"cg" + i} style={{ position: "absolute", left: -13 * s, top: 20 * s + i * 64 * s,
+        width: 70 * s, height: 5 * s, borderRadius: 4, background: "#4A4E54", opacity: 0.85 }} />
+    ))}
+  </div>
+
+  {/* signage on the fence line */}
+  <div style={{ position: "absolute", left: x - 440 * s, top: base - 116 * s, width: 96 * s,
+    height: 72 * s, background: "#D9C86A", zIndex: z + 9, borderRadius: 4, boxShadow: SH,
+    transform: "rotate(-5deg)" }}>
+    <div style={{ position: "absolute", left: 8 * s, top: 8 * s, right: 8 * s, height: 26 * s,
+      background: "#3A3630" }} />
+    {[0, 1].map((i) => (
+      <div key={i} style={{ position: "absolute", left: 14 * s, top: 42 * s + i * 12 * s,
+        width: (64 - i * 20) * s, height: 5 * s, background: "#3A3630" }} />
+    ))}
+  </div>
+  <div style={{ position: "absolute", left: x - 440 * s + 44 * s, top: base - 48 * s, width: 9 * s,
+    height: 50 * s, background: "#6E6A62", zIndex: z + 8 }} />
+</>);
+
+/* --- TOP-DOWN DRESSING, for cut D's hatch plate ------------------------- */
+
+/** boot prints walking in from the frame edge — the single best top-down detail
+    there is, because it puts a person in a shot with no person in it */
+export const Prints: React.FC<{ x1: number; y1: number; x2: number; y2: number; n?: number;
+  s?: number; z?: number; fade?: number }> =
+  ({ x1, y1, x2, y2, n = 9, s = 1, z = 20, fade = 1 }) => (<>
+    {Array.from({ length: n }, (_, i) => {
+      const t = i / (n - 1);
+      const px = x1 + (x2 - x1) * t, py = y1 + (y2 - y1) * t;
+      const side = i % 2 ? 1 : -1;
+      const ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+      return (
+        <div key={"pr" + i} style={{ position: "absolute",
+          left: px + side * 15 * s - 13 * s, top: py - 19 * s, width: 26 * s, height: 38 * s,
+          borderRadius: `${12 * s}px ${12 * s}px ${7 * s}px ${7 * s}px`,
+          background: "#B7B2A8", opacity: (0.30 + t * 0.42) * fade, zIndex: z,
+          transform: `rotate(${ang + 90}deg)` }} />
+      );
+    })}
+  </>);
+
+/** the painted concrete apron the hatch is set into, showing through the drift */
+export const Apron: React.FC<{ x: number; y: number; r?: number; z?: number; s?: number }> =
+  ({ x, y, r = 340, z = 14, s = 1 }) => (<>
+    <div style={{ position: "absolute", left: x - r, top: y - r, width: r * 2, height: r * 2,
+      borderRadius: "50%", background: "#9C978D", opacity: 0.72, zIndex: z }} />
+    <div style={{ position: "absolute", left: x - r * 0.92, top: y - r * 0.92, width: r * 1.84,
+      height: r * 1.84, borderRadius: "50%", border: `${9 * s}px dashed #C9BF6A`, opacity: 0.5,
+      boxSizing: "border-box", zIndex: z + 1 }} />
+    <div style={{ position: "absolute", left: x - r * 1.28, top: y - r * 0.30, zIndex: z + 1,
+      fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 108 * s, lineHeight: 1,
+      color: "#8A857B", opacity: 0.62 }}>08</div>
+    {/* cable conduit running away to the frame edge */}
+    <div style={{ position: "absolute", left: x + r * 0.7, top: y - 13 * s, width: 640 * s,
+      height: 26 * s, background: "#7A756C", opacity: 0.8, zIndex: z + 1,
+      transform: "rotate(-9deg)", transformOrigin: "0% 50%" }} />
+    {Array.from({ length: 8 }, (_, i) => (
+      <div key={"cd" + i} style={{ position: "absolute", left: x + r * 0.78 + i * 74 * s,
+        top: y - 20 * s + i * 11 * s, width: 12 * s, height: 40 * s, background: "#5F5B54",
+        opacity: 0.8, zIndex: z + 2, transform: "rotate(-9deg)" }} />
+    ))}
+  </>);
+
+/** the shadow of somebody standing over it, cast in from the frame edge */
+export const Overhead: React.FC<{ x: number; y: number; s?: number; z?: number; f?: number;
+  o?: number }> = ({ x, y, s = 1, z = 70, f = 0, o = 0.30 }) => (
+  <div style={{ position: "absolute", left: x, top: y, zIndex: z, opacity: o,
+    transform: `rotate(${-14 + Math.sin(f / 26) * 1.6}deg)`, transformOrigin: "50% 0%" }}>
+    <div style={{ position: "absolute", left: -96 * s, top: 0, width: 192 * s, height: 210 * s,
+      borderRadius: `${96 * s}px ${96 * s}px ${34 * s}px ${34 * s}px`, background: "#3C3A36",
+      filter: "blur(7px)" }} />
+    <div style={{ position: "absolute", left: -150 * s, top: 62 * s, width: 84 * s, height: 156 * s,
+      borderRadius: 40 * s, background: "#3C3A36", filter: "blur(7px)",
+      transform: "rotate(19deg)" }} />
+    <div style={{ position: "absolute", left: 66 * s, top: 62 * s, width: 84 * s, height: 156 * s,
+      borderRadius: 40 * s, background: "#3C3A36", filter: "blur(7px)",
+      transform: "rotate(-19deg)" }} />
+  </div>
+);
