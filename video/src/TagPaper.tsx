@@ -486,6 +486,16 @@ const HEADS: Array<[string, string]> = [
   ["VIDEO EDITING", "9 OF 10"], ["VOICE GENERATION", "10 OF 10"],
   ["THAT IS $521 A MONTH", "COMMENT FREE FOR THE LIST"],
 ];
+/** ⭐⭐ EVERY SPOKEN "FREE", DERIVED FROM THE CAPTION DATA. Round 20: *"have some
+    sort of satisfying sound whenever 'free' is mentioned."*  Twelve of them —
+    the ten line-final ones plus both in the CTA ("comment FREE", "every free
+    tool") — and this list is COMPUTED from `words_free.json` rather than typed,
+    so it can never drift from what is actually said. Hardcoding it would be the
+    same mistake that put every hit 2-13 frames late in round 2. */
+const FREE_WORDS: number[] = (words as Array<{ start: number; word: string }>)
+  .filter((w) => w.word.trim().toLowerCase().replace(/[.,!?]/g, "") === "free")
+  .map((w) => Math.round(w.start * PFPS));
+
 const PPAID = [26, 98, 171, 242, 303, 370, 442, 513, 581, 661];
 const PFREE = [51, 120, 181, 260, 325, 393, 461, 525, 604, 682];
 const A_ = "am/";
@@ -500,17 +510,33 @@ const PSFX: Cue[] = [
               { src: A_ + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 1.1 }),
   ...SC.slice(1).map((at, i): Cue => ({ at: at / PFPS, src: A_ + "page-turn.wav",
     v: LEVELS.SFX_MID, dur: 0.8, rate: 0.94 + (i % 3) * 0.07, lead: 2 })),
-  ...PPAID.flatMap((fr, i): Cue[] => [
-    { at: fr / PFPS, src: A_ + "snap.wav", v: LEVELS.SFX_HERO, dur: 0.7, rate: 0.93 + i * 0.015, lead: 1 },
-    { at: fr / PFPS, src: A_ + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.0, rate: 0.9, lead: 2 },
-  ]),
+  /* ⛔ THE SLAM GETS OUT OF THE WAY WHEN THE NEXT BEAT IS CLOSE. Row 8's two
+     hits are 12 frames apart, and a 1.0s boom was still ringing when the reward
+     chime landed — measured a 0.0 dB rise on that row against 4-9 dB elsewhere.
+     The boom is shortened to fit the gap it actually has. */
+  ...PPAID.flatMap((fr, i): Cue[] => {
+    const gap = PFREE[i] - fr;
+    return [
+      { at: fr / PFPS, src: A_ + "snap.wav", v: LEVELS.SFX_HERO,
+        dur: gap < 20 ? 0.42 : 0.7, rate: 0.93 + i * 0.015, lead: 1 },
+      { at: fr / PFPS, src: A_ + "hit-boom.wav", v: LEVELS.SFX_MID,
+        dur: gap < 20 ? 0.44 : 1.0, rate: 0.9, lead: 2 },
+    ];
+  }),
   /* ⭐ THE STRAIN, AUDIBLE. The right square shakes for the 22 frames before the
      cut, so it has to be heard doing it: a synthesized low rumble under the
      build plus a paper rustle over it, and only then the sword. */
-  ...PFREE.map((fr, i): Cue => ({ at: (fr - 22) / PFPS, src: A_ + "rumble-build.wav",
-    v: LEVELS.SFX_TEXTURE, dur: 0.86, rate: 0.98 + i * 0.006, lead: 0 })),
-  ...PFREE.map((fr, i): Cue => ({ at: (fr - 18) / PFPS, src: A_ + "paper-rustle.wav",
-    v: LEVELS.SFX_BED, dur: 0.72, rate: 1.04 + i * 0.008, lead: 0 })),
+  /* ⛔ THE PRE-ROLL IS CLAMPED OFF THE PAID SLAM. Row 8's two hits are only 12
+     frames apart (513 -> 525), so a flat 22-frame wind-up started BEFORE the
+     slam and the reward chime had to fight it — measured a 0.1 dB rise on that
+     row against 4-9 dB everywhere else. Never let an anticipation layer start
+     before the beat it is anticipating from. */
+  ...PFREE.map((fr, i): Cue => ({ at: Math.max(fr - 22, PPAID[i] + 5) / PFPS,
+    src: A_ + "rumble-build.wav", v: LEVELS.SFX_TEXTURE, dur: 0.86,
+    rate: 0.98 + i * 0.006, lead: 0 })),
+  ...PFREE.map((fr, i): Cue => ({ at: Math.max(fr - 18, PPAID[i] + 7) / PFPS,
+    src: A_ + "paper-rustle.wav", v: LEVELS.SFX_BED, dur: 0.72,
+    rate: 1.04 + i * 0.008, lead: 0 })),
   ...PFREE.map((fr, i): Cue => ({ at: (fr - 14) / PFPS, src: A_ + "whoosh-fast.wav",
     v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.24 + i * 0.012, lead: 0 })),
   ...PFREE.flatMap((fr, i): Cue[] => [
@@ -519,9 +545,47 @@ const PSFX: Cue[] = [
     { at: (fr + 7) / PFPS, src: A_ + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 0.8, rate: 0.88, lead: 0 },
     { at: (fr + 11) / PFPS, src: A_ + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 0.94, lead: 0 },
   ]),
-  ...layer(713 / PFPS, { src: A_ + "hit-up.wav", v: LEVELS.SFX_HERO, dur: 1.3 },
-                        { src: A_ + "snap.wav", v: LEVELS.SFX_MID, dur: 0.7 }),
-  { at: 760 / PFPS, src: A_ + "success-jingle.wav", v: LEVELS.SFX_MID, dur: 1.6, lead: 0 },
+  /* ⛔⛔ THESE WERE HARDCODED AT 713 AND 760 AND THE WORDS ARE AT 709 AND 756.
+     Four frames of drift is enough for the stack to sit ON TOP of the reward
+     chime instead of under it — measured -4.2 dB on "comment FREE", the one
+     word in the reel the viewer is being asked to type. Derived now, like
+     everything else that has to match the voice. */
+  ...layer(FREE_WORDS[10] / PFPS, { src: A_ + "hit-up.wav", v: LEVELS.SFX_HERO, dur: 1.3 },
+                                   { src: A_ + "snap.wav", v: LEVELS.SFX_MID, dur: 0.7 }),
+  { at: FREE_WORDS[11] / PFPS, src: A_ + "success-jingle.wav", v: LEVELS.SFX_MID,
+    dur: 1.6, lead: 0 },
+
+  /* ⭐⭐ THE WORD ALWAYS RINGS. A bright chime plus a small pop on every single
+     "free", so the word itself becomes a motif rather than only the slice being
+     scored. ⛔ PITCHED UP THE RUN (0.94 -> 1.18 across the twelve) so they read
+     as ONE RISING GESTURE instead of twelve identical dings — twelve of the same
+     sample is a glitch, not a rhythm.
+     ⛔ It lands ON the word while the sword's snap leads it by a frame, so the
+     order a listener hears is: blade, then reward. Simultaneous would smear
+     both. */
+  /* ⛔⛔ THE CHIME RINGS FOUR FRAMES AFTER THE WORD, NOT ON IT. Landing it ON the
+     syllable put it underneath the sword, and the sword is BRIGHT — measured in
+     the 2-6 kHz band where the chime lives, the "before" window was up to 8 dB
+     HOTTER than the chime because the snap and the whoosh lead it by a frame.
+     Stacking two bright transients 30ms apart smears both. At +4 frames (133ms)
+     the ear gets a clean one-two: the crack, then the reward. */
+  ...FREE_WORDS.map((fr, i): Cue => ({
+    at: (fr + 4) / PFPS, src: A_ + "positive-chime.wav", v: LEVELS.SFX_HERO,
+    dur: 1.05, rate: 0.94 + i * 0.022, lead: 0,
+  })),
+  /* ⛔ THE TWO IN THE CTA SIT INSIDE UNBROKEN SPEECH ("comment FREE for", "every
+     free tool") rather than in the pause the other ten land in, so they get a
+     second, brighter layer to cut through the voice instead of sitting under it.
+     ⚠️ An energy-rise measurement cannot separate these two from the VO — the
+     window before them IS the voice. Same trap as the transient-density metric. */
+  ...FREE_WORDS.slice(10).map((fr, i): Cue => ({
+    at: (fr + 4) / PFPS, src: A_ + "ping.wav", v: LEVELS.SFX_HERO,
+    dur: 0.7, rate: 1.16 + i * 0.06, lead: 0,
+  })),
+  ...FREE_WORDS.map((fr, i): Cue => ({
+    at: (fr + 4) / PFPS, src: A_ + "check-pop.wav", v: LEVELS.SFX_MID,
+    dur: 0.38, rate: 1.00 + i * 0.018, lead: 0,
+  })),
 ];
 
 const PaperHead: React.FC<{ big: string; hot: string; settled?: boolean }> =
