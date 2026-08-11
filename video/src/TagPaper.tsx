@@ -294,6 +294,19 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
   const slice = ff < 3 ? 0 : E(ff, 3, 15, 0, 1, OUT);
   const flash = ff >= 2 && ff <= 4;
   const stamp = ff < 4 ? 1 : 1 + Math.sin(Math.min(1, (ff - 4) / 10) * Math.PI) * 0.22;
+  /* ⭐ THE FREE SQUARE STRAINS BEFORE THE BLADE LANDS. Round 19: *"the right side
+     needs to shake and stuff here and sound like that."*  Same job the curtain
+     does in the six house cuts — the beat has to be EARNED, not just arrived at.
+     A small idle tremble all the way through, ramping to full over the 22 frames
+     before the cut, released on the stamp.
+     ⛔ TWO FREQUENCIES, NOT ONE: a fast jitter over a slow sway reads as strain;
+     one sine reads as floating. And it BULGES on the same curve. */
+  const build = ff < 0 ? Math.max(0, 1 + ff / 22) : Math.max(0, 1 - ff / 5);
+  const shake = Math.min(1, 0.14 + build * 0.86);
+  const sx = (Math.sin(f * 2.2) * 4.2 + Math.sin(f * 4.9 + 1.1) * 2.2) * shake;
+  const sy = (Math.sin(f * 3.1 + 0.6) * 3.0 + Math.sin(f * 6.3) * 1.2) * shake;
+  const sr = Math.sin(f * 2.5 + 0.4) * 1.0 * shake;
+  const swell = 1 + Math.abs(Math.sin(f * 1.8)) * 0.024 * shake;
   const rise = hook ? 1 : E(f, 0, 8, 0, 1, OUT);
   /* ⛔ HE STARTS AT 890, NOT 950. The panel is 1012 wide with rounded corners and
      a push on top; at 950 his first pose was half off the screen. */
@@ -324,8 +337,22 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
               </div>
             </>)}
 
+            {/* ⭐ light building up BEHIND the free square as it strains. Hard
+                wedges and solid paints — the matte rule is a ship gate, and a
+                blur here would be the same mistake the drop-shadow was. */}
+            {shake > 0.2 && Array.from({ length: 9 }, (_, k) => {
+              const a = (k / 8) * 360;
+              const len = (120 + ((k * 31) % 70)) * (0.35 + shake * 0.75);
+              return (<div key={"ry" + k} style={{ position: "absolute",
+                left: RX, top: SQY + SQH * 0.46, width: len, height: 22 + (k % 3) * 8,
+                marginTop: -14, background: "#FFF4D2", opacity: 0.06 + shake * 0.20,
+                transform: `rotate(${a + Math.sin(f / 17 + k) * 2}deg)`,
+                transformOrigin: "0% 50%",
+                clipPath: "polygon(0 42%,100% 0,100% 100%,0 58%)", zIndex: 21 }} />);
+            })}
             <div style={{ position: "absolute", inset: 0, zIndex: 23,
-              transform: `scale(${stamp})`, transformOrigin: `${RX}px ${SQY + SQH / 2}px` }}>
+              transform: `translate(${sx}px, ${sy}px) rotate(${sr}deg) scale(${stamp * swell})`,
+              transformOrigin: `${RX}px ${SQY + SQH / 2}px` }}>
               <Square cx={RX} free P={P} punch={1} z={23} />
             </div>
 
@@ -477,6 +504,13 @@ const PSFX: Cue[] = [
     { at: fr / PFPS, src: A_ + "snap.wav", v: LEVELS.SFX_HERO, dur: 0.7, rate: 0.93 + i * 0.015, lead: 1 },
     { at: fr / PFPS, src: A_ + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.0, rate: 0.9, lead: 2 },
   ]),
+  /* ⭐ THE STRAIN, AUDIBLE. The right square shakes for the 22 frames before the
+     cut, so it has to be heard doing it: a synthesized low rumble under the
+     build plus a paper rustle over it, and only then the sword. */
+  ...PFREE.map((fr, i): Cue => ({ at: (fr - 22) / PFPS, src: A_ + "rumble-build.wav",
+    v: LEVELS.SFX_TEXTURE, dur: 0.86, rate: 0.98 + i * 0.006, lead: 0 })),
+  ...PFREE.map((fr, i): Cue => ({ at: (fr - 18) / PFPS, src: A_ + "paper-rustle.wav",
+    v: LEVELS.SFX_BED, dur: 0.72, rate: 1.04 + i * 0.008, lead: 0 })),
   ...PFREE.map((fr, i): Cue => ({ at: (fr - 14) / PFPS, src: A_ + "whoosh-fast.wav",
     v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.24 + i * 0.012, lead: 0 })),
   ...PFREE.flatMap((fr, i): Cue[] => [
