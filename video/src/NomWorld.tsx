@@ -63,14 +63,18 @@ export const PLACES: Record<string, Place> = {
         sky above it sat at ~110. Fixed by RAISING THE HORIZON (snow now 46% of
         the panel), lifting the plain a full stop, and warming the sky's lower
         third toward the sun rather than leaving it a flat cold blue. */
-  ridge:  { back: "#42618A", back2: "#9DB8CE", floor: "#E6ECF1", floor2: "#C2CFDA",
-            lip: "#A6B8C7", key: GOLD, horizon: 430, grit: "#A9B9C7" },
-  door:   { back: "#31445C", back2: "#55708C", floor: "#D2DCE4", floor2: "#A6B6C4",
-            lip: "#8A9DAE", key: GOLD, horizon: 640, grit: "#96A8B7" },
-  mast:   { back: "#33496A", back2: "#6C87A6", floor: "#CBD6E0", floor2: "#9EAFC0",
-            lip: "#889CB0", key: RED, horizon: 430, grit: "#93A5B6" },
-  kiosk:  { back: "#26313E", back2: "#3A4A5C", floor: "#B9C4CF", floor2: "#8E9DAC",
-            lip: "#75879A", key: "#9FB4C6", horizon: 560, grit: "#82939F" },
+  /* ⛔ THE SNOW IS ASH-STAINED AND THE SKY IS SMOKE. Clean white drifts under a
+     clear blue dusk is a ski holiday. Every exterior value is pulled toward
+     brown-grey, which keeps the frame BRIGHT (the plain is still the highest
+     value in the panel) while reading as fallout rather than fresh powder. */
+  ridge:  { back: "#8C818A", back2: "#E4CFB2", floor: "#EFECE4", floor2: "#D2CDC2",
+            lip: "#B8B1A6", key: GOLD, horizon: 430, grit: "#B3ACA0" },
+  door:   { back: "#655E6C", back2: "#B49C82", floor: "#D6D2CA", floor2: "#A8A49C",
+            lip: "#928D85", key: GOLD, horizon: 640, grit: "#9A948B" },
+  mast:   { back: "#7E7684", back2: "#D8C2A6", floor: "#E4E0D8", floor2: "#BAB5AB",
+            lip: "#A39D93", key: RED, horizon: 430, grit: "#A69F94" },
+  kiosk:  { back: "#514E5C", back2: "#94897C", floor: "#D4D0C8", floor2: "#A8A49C",
+            lip: "#8E8981", key: "#B0AEA6", horizon: 560, grit: "#948F86" },
 
   /* --- the throat: the transition, warm ahead and cold behind ----------- */
   throat: { back: "#2E2A26", back2: "#4A4039", floor: "#5A4E44", floor2: "#3A322C",
@@ -106,7 +110,16 @@ export const PLACES: Record<string, Place> = {
    ⭐ The fix is two rings. An exterior only ever borrows from another exterior
    (all four are cold, high-value snow), an interior only from another interior.
    The cuts still diverge — they just diverge without going dark. */
-const EXT = ["ridge", "door", "mast", "kiosk"];
+/* ⛔⛔ AND `kiosk` IS NOT A DONOR, AND EXTERIORS TAKE NO LEVEL SHIFT.
+   Round 2 measured cut B at 106 and cut C at 115 frame-0 panel luma against
+   cut A's 141. Two causes, both in here: the donor ring included `kiosk`, which
+   is deliberately the darkest exterior in the reel because it is the paid-gate
+   scene, and pal 3 applied a DARKENER on top. A variance lever must never cost
+   an open its brightness — divergence between these four cuts is already
+   carried by four completely different hook compositions, so the palette only
+   has to differ, not to dim. Exteriors now rotate among the three bright
+   places and take no level shift at all; the level shift is interiors only. */
+const EXT_DONORS = ["ridge", "door", "mast", "kiosk"];
 const INT = ["throat", "alcove", "stacks", "chart", "hall", "shaft", "dark"];
 const LEVEL: Record<number, (c: string) => string> = {
   1: (c) => mix(c, 0.10),
@@ -117,10 +130,12 @@ export const usePlace = (key: string): Place => {
   const p = React.useContext(PalCtx);
   const base = PLACES[key];
   if (!p) return base;
-  const ring = EXT.includes(key) ? EXT : INT;
+  const isExt = EXT_DONORS.includes(key);
+  const ring = isExt ? EXT_DONORS : INT;
+  const idx = Math.max(0, ring.indexOf(key));
   const OFFS: Record<number, number> = { 1: 1, 2: 2, 3: 3 };
-  const d = PLACES[ring[(ring.indexOf(key) + (OFFS[p] ?? p)) % ring.length]];
-  const L = LEVEL[p];
+  const d = PLACES[ring[(idx + (OFFS[p] ?? p)) % ring.length]];
+  const L = isExt ? undefined : LEVEL[p];
   const c = L ? { ...d, back: L(d.back), back2: L(d.back2), floor: L(d.floor),
     floor2: L(d.floor2), lip: L(d.lip), grit: L(d.grit) } : d;
   return { ...c, key: base.key, horizon: base.horizon };
@@ -146,69 +161,137 @@ export const Snow: React.FC<{ f: number; n?: number; z?: number; near?: boolean;
     })}
   </>);
 
-/** THE EXTERIOR. Sky, low sun, three ridge bands, the snow plain and its drift
-    ripples. `city` paints the far skyline — `lit` is how alive it still is,
-    which is the whole clock of this reel. */
+/** ⛔⛔ THE EXTERIOR IS A DOOMSDAY, NOT A SNOWY EVENING.
+    v1 painted an intact city with warm lit windows under a clear dusk and it
+    read as a pleasant winter scene with a bunker in it. The VO's first line is
+    "an AI for the apocalypse" and the frame has to agree with it.
+
+    What makes it read as the end of the world, in order of how much each pays:
+      1  a BROKEN SKYLINE. Sheared tops, leaning towers, whole floors missing,
+         a toppled crane, a collapsed span. An intact silhouette is a healthy
+         city however dark you paint it.
+      2  a STORM CEILING. Two drifting cloud bands crushing the sky down to a
+         letterbox. It also gives the frame continuous motion for free.
+      3  FIRES on the horizon, as a solid muted ember band under the ruins,
+         never as neon (REEL-BUILD-LEARNINGS §1).
+      4  ASHFALL mixed with the snow — dark flakes among light ones, which is
+         the single cheapest "something has burned" signal there is.
+      5  RUBBLE, not clean drifts. Slabs, rebar and debris breaking the plain.
+
+    ⭐ AND THE CLOCK STILL WORKS. `lit` is now "how much of the emergency power
+    is still hanging on" rather than "how alive the city is". The world is
+    already ruined at frame 0; what dies at the crest is the LAST of it. That is
+    a better turn than a healthy city dying, and it costs the arc nothing. */
 export const Ridge: React.FC<{ p: Place; f: number; city?: number; lit?: number;
-  sunX?: number; portal?: number; mastLit?: number }> =
-  ({ p, f, city = 1, lit = 1, sunX = 806, portal = 0 }) => {
+  sunX?: number; portal?: number; storm?: number; fires?: number }> =
+  ({ p, f, city = 1, lit = 1, sunX = 806, storm = 1, fires = 1 }) => {
   const hz = p.horizon;
   return (<>
     <div style={{ position: "absolute", inset: 0, zIndex: 1,
-      background: `linear-gradient(178deg, ${p.back} 0%, ${p.back2} 100%)` }} />
-    {/* the warm band the sun lays along the horizon — half the brightness win */}
-    <div style={{ position: "absolute", left: 0, right: 0, top: hz - 190, height: 200, zIndex: 2,
-      background: `linear-gradient(180deg, ${hexa("#F3D9AE", 0)} 0%, ${hexa("#F3D9AE", 0.34)} 100%)` }} />
-    {/* the low sun: one soft ring + one solid disc. Never an emissive blur. */}
-    <div style={{ position: "absolute", left: sunX - 280, top: hz - 330, width: 560, height: 560,
-      borderRadius: "50%", zIndex: 3,
-      background: `radial-gradient(circle, ${hexa("#F7E6C4", 0.44)} 0%, ${hexa("#F7E6C4", 0.14)} 42%, ${hexa("#F7E6C4", 0)} 70%)` }} />
-    <div style={{ position: "absolute", left: sunX - 46, top: hz - 92, width: 92, height: 92,
-      borderRadius: "50%", background: "#FBF0D8", zIndex: 4 }} />
+      background: `linear-gradient(178deg, ${dark(p.back, 0.24)} 0%, ${p.back2} 100%)` }} />
 
-    {/* the far city — three parallax bands of buildings with lit windows */}
-    {city > 0 && [0, 1, 2].map((b) => {
-      const bc = [dark(p.back, 0.34), dark(p.back, 0.46), dark(p.back, 0.58)][b];
-      const top = hz - 118 + b * 34;
-      const litB = lit * [0.55, 0.78, 1][b];
+    {/* 2 · THE STORM CEILING — two bands drifting at different rates. This is
+        the reel's largest continuous motion source and it costs no hierarchy,
+        because atmosphere is a PLANE, not a subject. */}
+    {storm > 0 && [0, 1].map((c) => {
+      const yy = -30 + c * 62, hh = 122 - c * 26;
+      const dx = -((f * (0.42 + c * 0.55)) % 1400);
       return (
-        <div key={"cb" + b} style={{ position: "absolute", left: 0, right: 0, top,
-          height: 150, zIndex: 5 + b }}>
-          {Array.from({ length: 13 - b * 2 }, (_, i) => {
-            const bw = 34 + rnd(b * 9 + i, 1) * 56;
-            const bh = 34 + rnd(b * 9 + i, 2) * (86 - b * 16);
-            const bx = 30 + i * (86 + b * 12) + rnd(b * 9 + i, 3) * 22;
-            return (
-              <div key={i} style={{ position: "absolute", left: bx, top: 118 - bh + b * 4,
-                width: bw, height: bh, background: bc }}>
-                {litB > 0.03 && Array.from({ length: 6 }, (_, k) => {
-                  const on = rnd(b * 40 + i * 7 + k, 6) < litB;
-                  if (!on) return null;
-                  return <div key={k} style={{ position: "absolute",
-                    left: 6 + (k % 2) * (bw * 0.46), top: 9 + Math.floor(k / 2) * 15,
-                    width: Math.max(5, bw * 0.26), height: 8,
-                    background: "#F0D49B", opacity: 0.55 + litB * 0.45 }} />;
-                })}
-              </div>
-            );
+        <div key={"cl" + c} style={{ position: "absolute", left: 0, right: 0, top: yy,
+          height: hh + 60, zIndex: 2 + c, overflow: "hidden" }}>
+          {Array.from({ length: 14 }, (_, i) => {
+            const bw = 240 + rnd(c * 11 + i, 1) * 300;
+            return <div key={i} style={{ position: "absolute",
+              left: dx + i * 200 + rnd(c * 11 + i, 2) * 90, top: rnd(c * 11 + i, 3) * 40,
+              width: bw, height: hh, borderRadius: hh / 2,
+              background: dark(p.back, 0.22 - c * 0.10), opacity: (0.40 - c * 0.12) * storm }} />;
           })}
         </div>
       );
     })}
 
+    {/* 3 · FIRES. A solid muted ember band low on the sky, plus two hot cores
+        sitting behind the ruins. Solid paints and one soft ring, never a glow. */}
+    {fires > 0 && (<>
+      <div style={{ position: "absolute", left: 0, right: 0, top: hz - 168, height: 176, zIndex: 3,
+        background: `linear-gradient(180deg, ${hexa("#C9743A", 0)} 0%, ${hexa("#C9743A", 0.34 * fires)} 72%, ${hexa("#E8AC68", 0.52 * fires)} 100%)` }} />
+      {[[268, 0.9], [742, 0.62]].map(([fx, k], i) => (
+        <div key={"fi" + i} style={{ position: "absolute", left: (fx as number) - 150,
+          top: hz - 150, width: 300, height: 190, zIndex: 4, borderRadius: "50%",
+          background: `radial-gradient(ellipse at 50% 100%, ${hexa("#E8A25C", (0.40 * (k as number) * fires) * (0.86 + Math.sin(f / 13 + i * 2) * 0.14))} 0%, ${hexa("#E8A25C", 0)} 70%)` }} />
+      ))}
+    </>)}
+    {/* the sun, sitting IN the smoke rather than in a clear sky */}
+    <div style={{ position: "absolute", left: sunX - 240, top: hz - 300, width: 480, height: 480,
+      borderRadius: "50%", zIndex: 4,
+      background: `radial-gradient(circle, ${hexa("#E9C899", 0.34)} 0%, ${hexa("#E9C899", 0.10)} 44%, ${hexa("#E9C899", 0)} 70%)` }} />
+    <div style={{ position: "absolute", left: sunX - 40, top: hz - 132, width: 80, height: 80,
+      borderRadius: "50%", background: "#EBD3AC", zIndex: 5 }} />
+
+    {/* 1 · THE BROKEN SKYLINE. Every block is sheared, leaning or gutted, and
+        only a handful of emergency lights are still on — those are `lit`. */}
+    {city > 0 && [0, 1, 2].map((b) => {
+      const bc = [dark(p.back, 0.62), dark(p.back, 0.74), dark(p.back, 0.84)][b];
+      const top = hz - 150 + b * 40;
+      const litB = lit * [0.16, 0.24, 0.32][b];
+      return (
+        <div key={"cb" + b} style={{ position: "absolute", left: 0, right: 0, top,
+          height: 190, zIndex: 6 + b }}>
+          {Array.from({ length: 13 - b * 2 }, (_, i) => {
+            const seed = b * 9 + i;
+            const bw = 34 + rnd(seed, 1) * 58;
+            const bh = 40 + rnd(seed, 2) * (104 - b * 18);
+            const bx = 20 + i * (86 + b * 12) + rnd(seed, 3) * 24;
+            const kind = rnd(seed, 9);
+            const lean = kind > 0.84 ? (rnd(seed, 10) - 0.5) * 13 : 0;
+            /* sheared / gutted / stub — never a clean rectangle */
+            const clip = kind > 0.62
+              ? `polygon(0 ${18 + rnd(seed, 11) * 22}%, ${34 + rnd(seed, 12) * 30}% 0, 100% ${8 + rnd(seed, 13) * 26}%, 100% 100%, 0 100%)`
+              : kind > 0.34
+                ? `polygon(0 0, 100% 0, 100% 100%, ${58 + rnd(seed, 14) * 22}% 100%, ${52 + rnd(seed, 15) * 16}% ${44 + rnd(seed, 16) * 22}%, ${22 + rnd(seed, 17) * 14}% ${40 + rnd(seed, 18) * 26}%, 0 100%)`
+                : undefined;
+            return (
+              <div key={i} style={{ position: "absolute", left: bx, top: 150 - bh + b * 6,
+                width: bw, height: bh, background: bc, clipPath: clip,
+                transform: lean ? `rotate(${lean}deg)` : undefined,
+                transformOrigin: "50% 100%" }}>
+                {Array.from({ length: 6 }, (_, k) => {
+                  if (rnd(b * 40 + i * 7 + k, 6) > litB) return null;
+                  /* emergency lights flicker; a steady grid is a working grid */
+                  const fl = 0.5 + 0.5 * Math.sin(f / (5 + (k % 4)) + i * 3 + b);
+                  return <div key={k} style={{ position: "absolute",
+                    left: 6 + (k % 2) * (bw * 0.46), top: 12 + Math.floor(k / 2) * 17,
+                    width: Math.max(5, bw * 0.24), height: 7,
+                    background: "#E9C07A", opacity: 0.34 + fl * 0.52 }} />;
+                })}
+              </div>
+            );
+          })}
+          {/* a toppled crane and a collapsed span, one per band on the near two */}
+          {b > 0 && (
+            <div style={{ position: "absolute", left: 300 + b * 330, top: 60,
+              width: 220, height: 12, background: bc,
+              transform: `rotate(${b === 1 ? -34 : 22}deg)`, transformOrigin: "0% 50%" }} />
+          )}
+        </div>
+      );
+    })}
+    {/* the mast that has already come down, lying across the skyline */}
+    <div style={{ position: "absolute", left: 78, top: hz - 46, width: 250, height: 9,
+      background: dark(p.back, 0.74), zIndex: 9, transform: "rotate(-11deg)",
+      transformOrigin: "0% 50%" }} />
+
     {/* the ridge itself — one black rock mass under the sky */}
     <div style={{ position: "absolute", left: -40, right: -40, top: hz - 62, height: 120,
-      zIndex: 11, background: dark(p.back, 0.66),
+      zIndex: 11, background: dark(p.back, 0.86),
       clipPath: "polygon(0 44%, 9% 30%, 19% 40%, 31% 22%, 44% 36%, 56% 20%, 68% 34%, 80% 25%, 91% 38%, 100% 30%, 100% 100%, 0 100%)" }} />
 
-    {/* the snow plain */}
+    {/* the ground */}
     <div style={{ position: "absolute", left: 0, right: 0, top: hz, bottom: 0, zIndex: 14,
       background: `linear-gradient(182deg, ${p.floor2} 0%, ${p.floor} 100%)` }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: hz - 5, height: 8,
       background: p.lip, zIndex: 15 }} />
-    {/* ⛔ DRIFT RIPPLES ARE SHORT STAGGERED ARCS, NOT FULL-WIDTH RULES. The first
-        cut drew each one edge to edge and the plain read as venetian blinds. Two
-        or three offset segments per row is what reads as wind-combed snow. */}
+    {/* wind-combed drift, in short staggered arcs (full-width rules read as blinds) */}
     {Array.from({ length: 10 }, (_, i) => {
       const y = hz + 20 + i * i * 3.0 + i * 13;
       if (y > H + 20) return null;
@@ -221,13 +304,44 @@ export const Ridge: React.FC<{ p: Place; f: number; city?: number; lit?: number;
           opacity: 0.26 + i * 0.026, zIndex: 16 }} />;
       });
     })}
-    {/* one bright crest catching the sun, so the plain has a highlight value.
-        Kept soft — a hard white rule across the whole width reads as a seam. */}
-    <div style={{ position: "absolute", left: 0, right: 0, top: hz + 2, height: 26, zIndex: 17,
-      background: `linear-gradient(180deg, ${hexa("#F6F9FB", 0.62)} 0%, ${hexa("#F6F9FB", 0)} 100%)` }} />
-    {portal > 0 && null}
+    {/* 5 · RUBBLE. Slabs and rebar breaking the plain, so the ground reads as a
+        place something fell on rather than a ski field. */}
+    {Array.from({ length: 13 }, (_, i) => {
+      const y = hz + 26 + rnd(i, 21) * (H - hz - 60);
+      const sc = 0.5 + (y - hz) / (H - hz);
+      const wd = (26 + rnd(i, 22) * 66) * sc, ht = (9 + rnd(i, 23) * 15) * sc;
+      return (
+        <div key={"rb" + i} style={{ position: "absolute", left: rnd(i, 24) * 1010 - 30, top: y,
+          width: wd, height: ht, zIndex: 17,
+          background: dark(p.grit, 0.32 + rnd(i, 25) * 0.22),
+          transform: `rotate(${(rnd(i, 26) - 0.5) * 26}deg)`,
+          borderTop: `${Math.max(2, ht * 0.22)}px solid ${p.grit}` }} />
+      );
+    })}
+    {/* one bright crest, kept soft — a hard white rule reads as a seam */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: hz + 2, height: 26, zIndex: 18,
+      background: `linear-gradient(180deg, ${hexa("#F6F9FB", 0.44)} 0%, ${hexa("#F6F9FB", 0)} 100%)` }} />
   </>);
 };
+
+/** 4 · ASHFALL. Dark flakes drifting UP as often as down, layered under the
+    snow. The mix of a light particle and a dark one is what stops the weather
+    reading as Christmas. */
+export const Ash: React.FC<{ f: number; n?: number; z?: number; speed?: number }> =
+  ({ f, n = 26, z = 62, speed = 1 }) => (<>
+    {Array.from({ length: n }, (_, i) => {
+      const sp = 2.2 * speed * (0.5 + rnd(i, 31) * 1.1);
+      const x = ((rnd(i, 32) * 1240 - f * sp) % 1240 + 1240) % 1240 - 110;
+      const rise = rnd(i, 33) > 0.62;
+      const y = ((rnd(i, 34) * H + (rise ? -f * 0.7 : f * 0.5)) % H + H) % H;
+      const s = 3 + rnd(i, 35) * 5;
+      return <div key={"as" + i} style={{ position: "absolute", left: x,
+        top: y + Math.sin(f / 18 + i) * 9, width: s, height: s * 0.7, borderRadius: 2,
+        background: rise ? "#C98A52" : "#4A443E",
+        opacity: rise ? 0.50 : 0.42, zIndex: z,
+        transform: `rotate(${(f * 2 + i * 40) % 360}deg)` }} />;
+    })}
+  </>);
 
 /** THE INTERIOR. A back wall with a skirting, a receding floor, and one
     committed light direction stated by the caller. */

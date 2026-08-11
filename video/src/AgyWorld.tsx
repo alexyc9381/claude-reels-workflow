@@ -93,13 +93,21 @@ const WORLD_KEYS_LEN = 14;   // 12 body places + lobby + corner
 const LEVEL: Record<number, (c: string) => string> = {
   4: (c) => dark(c, 0.28),
   5: (c) => mix(c, 0.24),
+  /* ⛔⛔ ROUND 8 · AT EIGHT CUTS THE ROTATION IS NOT ENOUGH ON ITS OWN, and it
+     is worse than it was at six: every new cut has to clear the bar against
+     SEVEN others rather than five, and the six delivered ones are frozen, so
+     all of the divergence has to come out of the two new palettes. Both carry a
+     LEVEL shift from the start, in OPPOSITE directions, so 6 and 7 can never
+     collapse toward each other however their donors land. */
+  6: (c) => mix(c, 0.34),
+  7: (c) => dark(c, 0.40),
 };
 export const useWorld = (key: string): World => {
   const p = React.useContext(PalCtx);
   const base = WORLDS[key];
   if (!p) return base;
   const keys = Object.keys(WORLDS);
-  const OFFS: Record<number, number> = { 1: 5, 2: 10, 3: 1, 4: 8, 5: 11 };
+  const OFFS: Record<number, number> = { 1: 5, 2: 10, 3: 1, 4: 8, 5: 11, 6: 3, 7: 6 };
   const d = WORLDS[keys[(keys.indexOf(key) + (OFFS[p] ?? p * 5)) % WORLD_KEYS_LEN]];
   const L = LEVEL[p];
   const donor = L ? { ...d, sky: L(d.sky), sky2: L(d.sky2), b1: L(d.b1), b2: L(d.b2),
@@ -212,6 +220,23 @@ export const WORLDS: Record<string, World> = {
   forecourt: { sky: "#8FA8C4", sky2: "#5A718F", glow: "#FFF4D8", glowX: 506, glowY: 178, glowR: 140,
     b1: "#5E7591", b2: "#4A5F79", b3: "#3A4C63", win: "#F0CE8A",
     ground: "#4E5A6B", ground2: "#36404E", lip: "#7B8A9C", grit: "#BCC7D4", horizon: 556, key: "#E7B24C" },
+
+  /* ---- ROUND 8 (2026-08-11) · two worlds for the two REPOST cuts, G and H.
+     ⛔ THESE ARE APPENDED, NEVER INSERTED. `WORLD_KEYS_LEN` stays 14 below, so
+        `useWorld`'s rotation still indexes only the first fourteen keys and the
+        six cuts already sitting on the Drive keep the exact donors they shipped
+        with. Adding a key in the MIDDLE would silently re-colour every delivered
+        variant's body. --------------------------------------------------- */
+  /* G · a jobbing print shop with its roller door up. Ink black on warm paper
+     white — the only place in the reel lit from INSIDE the building outward. */
+  press: { sky: "#2E2A34", sky2: "#1B1922", glow: "#F4E3BE", glowX: 470, glowY: 150, glowR: 128,
+    b1: "#332F3C", b2: "#292631", b3: "#1F1D26", win: "#F0D9A4",
+    ground: "#332F38", ground2: "#211E26", lip: "#5A5464", grit: "#A79FB0", horizon: 524, key: "#F4E3BE" },
+  /* H · the call board under a station awning. Cold slate green, so a cream
+     board is the only warm thing in the frame and cannot lose. */
+  board: { sky: "#1F3A38", sky2: "#122422", glow: "#CFE8DA", glowX: 780, glowY: 122, glowR: 88,
+    b1: "#264A46", b2: "#1D3B38", b3: "#152C2A", win: "#EBD79E",
+    ground: "#1D3634", ground2: "#122322", lip: "#356460", grit: "#7FB6A8", horizon: 540, key: "#CFE8DA" },
 };
 
 /* ---------------------------------------------------------------------------

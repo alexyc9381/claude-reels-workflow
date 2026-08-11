@@ -5,9 +5,9 @@ import { Img, staticFile } from "remotion";
 import {
   E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
   CLAY, GOLD, GREEN, RED, PAPER, INK, usePlace,
-  Ridge, Snow, Beam, Strip, Motes, Edge, Keeper, Mitt, Scene, Cam, MarkPlate, MarkCast,
+  Ridge, Snow, Ash, Beam, Strip, Motes, Edge, Keeper, Mitt, Scene, Cam, MarkPlate, MarkCast,
 } from "./NomWorld";
-import { Portal, BlastDoor, Wheel, Tunnel, Mast } from "./NomProps";
+import { Portal, Bunker, Fence, Wreck, BlastDoor, Wheel, Tunnel, Mast } from "./NomProps";
 
 /* ===========================================================================
    REEL 98 "NOMAD" — THE ALTERNATE OPENS.
@@ -22,8 +22,16 @@ import { Portal, BlastDoor, Wheel, Tunnel, Mast } from "./NomProps";
      C  THE CASE                     UNBOXING           — four latches pop and the lid lifts on light
      D  THE CROSSING                 SCALE OF EMPTINESS — one small figure, an enormous white nothing, one dark slot
 
-   All four run 117 frames, all four end at the same place (a door about to
-   open), and none of them spends the blackout — the grid is alive in every one.
+   All four run 117 frames and all four end at the same place (a door about to
+   open). All four are set in the SAME doomsday: a wildfire haze, a broken
+   skyline with a few emergency lights still flickering, ashfall, stripped
+   wrecks and a torn fence. What dies at the crest is the LAST of it, not a
+   healthy city.
+   ⛔ AND ALL FOUR CARRY REAL WEATHER. Alex: *"the variants need to be more
+      interesting with more motion and better worldbuilding."* Every shot below
+      runs four continuous atmosphere layers — storm ceiling, ashfall, driving
+      snow, near-plane spindrift — none of which is a SUBJECT, so the motion
+      hierarchy holds while the frame stops being still.
 
    ⛔⛔ AND ALL FOUR CARRY THE MARK. Reel 95's audience-filter rule applies to
       every open, not just the one that ships: a scroller either recognises the
@@ -49,10 +57,13 @@ export const S0HookMast: React.FC = () => {
       <Cam z={40} s={1.72} y={132}>
         <Mast x={506} base={pm.horizon + 120} h={360} s={1} z={20} f={f} on={1} />
       </Cam>
-      <MarkPlate x={92} y={556} t="OFFLINE AI · NO CLOUD" s={0.94} z={70} />
+      <Wreck x={168} base={pm.horizon + 232} s={0.94} z={78} />
+      <MarkPlate x={82} y={214} t="OFFLINE AI · NO CLOUD" s={0.92} z={70} />
+      <Fence y={pm.horizon + 252} z={84} s={1.06} torn={1} />
       <Edge side="r" c={dark(pm.back, 0.68)} kind="rock" w={130} z={90} />
-      <Snow f={f} n={26} z={70} />
-      <Snow f={f} n={12} z={93} near speed={1.5} />
+        <Ash f={f} n={26} z={68} speed={1.2} />
+        <Snow f={f} n={34} z={72} speed={1.4} c="#E6E3DB" />
+        <Snow f={f} n={15} z={93} near speed={1.9} c="#F2F0EA" />
     </Scene>
   );
 
@@ -78,8 +89,12 @@ export const S0HookMast: React.FC = () => {
           height: 60, zIndex: 33,
           background: `linear-gradient(180deg, ${hexa("#EED9AC", 0.44)} 0%, ${hexa("#EED9AC", 0)} 100%)`,
           clipPath: "polygon(38% 0, 62% 0, 100% 100%, 0 100%)" }} />
+        <Wreck x={862} base={pm.horizon + 250} s={0.98} z={78} face={-1} />
+        <Fence y={pm.horizon + 246} z={84} s={1.04} torn={1} />
         <Edge side="l" c={dark(pm.back, 0.68)} kind="rock" w={150} z={90} />
-        <Snow f={f} n={30} z={70} />
+        <Ash f={f} n={26} z={68} speed={1.2} />
+        <Snow f={f} n={34} z={72} speed={1.4} c="#E6E3DB" />
+        <Snow f={f} n={15} z={93} near speed={1.9} c="#F2F0EA" />
       </Scene>
     );
   }
@@ -94,8 +109,11 @@ export const S0HookMast: React.FC = () => {
           bleed={0.82} frost={1 - fall * 0.5} open={0} />
         <MarkCast x={506} y={pd.horizon - 408} s={100} z={46} o={0.86} />
         <MarkPlate x={216} y={pd.horizon - 92} t="LOCAL MODEL" s={0.9} z={48} />
+        <Wreck x={112} base={pd.horizon + 132} s={0.72} z={78} />
         <Edge side="r" c={dark(pd.back, 0.62)} kind="rock" w={104} z={90} />
-        <Snow f={f} n={20} z={70} />
+        <Ash f={f} n={26} z={68} speed={1.2} />
+        <Snow f={f} n={34} z={72} speed={1.4} c="#E6E3DB" />
+        <Snow f={f} n={15} z={93} near speed={1.9} c="#F2F0EA" />
       </Scene>
     );
   }
@@ -205,10 +223,14 @@ export const S0HookCase: React.FC = () => {
         <div style={{ position: "absolute", left: 150 + gust * 240, top: 300 - gust * 40,
           width: 520, height: 30, borderRadius: 30, background: "#EEF3F7",
           opacity: 0.62 * Math.sin(Math.PI * gust), zIndex: 62 }} />
-        <MarkPlate x={92} y={228} t="AN OFFLINE AI" s={0.94} z={70} />
+        <Bunker x={806} base={pr.horizon + 176} s={0.52} z={20} f={f} slot={0.9}
+          floods={1} lamp={1} />
+        <Wreck x={128} base={pr.horizon + 176} s={0.74} z={30} />
+        <MarkPlate x={72} y={214} t="AN OFFLINE AI" s={0.92} z={70} />
         <Edge side="l" c={dark(pr.back, 0.66)} kind="rock" w={126} z={90} />
-        <Snow f={f} n={40} z={70} speed={1 + gust * 3.2} />
-        <Snow f={f} n={20} z={93} near speed={1.4 + gust * 4} />
+        <Ash f={f} n={30} z={68} speed={1 + gust * 2.4} />
+        <Snow f={f} n={44} z={72} speed={1 + gust * 3.2} c="#E6E3DB" />
+        <Snow f={f} n={22} z={93} near speed={1.4 + gust * 4} c="#F2F0EA" />
       </Scene>
     );
   }
@@ -222,9 +244,12 @@ export const S0HookCase: React.FC = () => {
         <Case lid={0} glow={latch[3] * 0.4} latch={latch} base={640} s={1.06} />
         <div style={{ position: "absolute", left: 106, top: 610, width: 800, height: 76,
           borderRadius: "50%", background: "#E4EAEF", zIndex: 52 }} />
+        <Bunker x={806} base={pr.horizon + 176} s={0.52} z={20} f={f} slot={0.9}
+          floods={1} lamp={1} />
         <Edge side="l" c={dark(pr.back, 0.66)} kind="rock" w={126} z={90} />
-        <Snow f={f} n={34} z={70} speed={1.3} />
-        <Snow f={f} n={12} z={93} near speed={1.6} />
+        <Ash f={f} n={28} z={68} speed={1.3} />
+        <Snow f={f} n={40} z={72} speed={1.3} c="#E6E3DB" />
+        <Snow f={f} n={16} z={93} near speed={1.6} c="#F2F0EA" />
       </Scene>
     );
   }
@@ -238,8 +263,11 @@ export const S0HookCase: React.FC = () => {
         <Case lid={lid} glow={lid} latch={[1, 1, 1, 1]} base={640} s={1.06} />
         <div style={{ position: "absolute", left: 106, top: 610, width: 800, height: 76,
           borderRadius: "50%", background: "#E4EAEF", zIndex: 52 }} />
-        <Snow f={f} n={32} z={70} speed={1.2} />
-        <Snow f={f} n={11} z={93} near speed={1.5} />
+        <Bunker x={820} base={pr.horizon + 176} s={0.52} z={20} f={f} slot={0.9}
+          floods={1} lamp={1} />
+        <Ash f={f} n={26} z={68} speed={1.2} />
+        <Snow f={f} n={38} z={72} speed={1.2} c="#E6E3DB" />
+        <Snow f={f} n={15} z={93} near speed={1.5} c="#F2F0EA" />
         <Edge side="r" c={dark(pr.back, 0.62)} kind="rock" w={110} z={90} />
       </Scene>
     );
@@ -249,16 +277,19 @@ export const S0HookCase: React.FC = () => {
   return (
     <Scene p={pr} slug="AND WHERE IT LIVES" push={[94, 117, 1.055]} vig={0.52}>
       <Ridge p={pr} f={f} city={1} lit={1} sunX={868} />
-      <Portal x={640} base={pr.horizon + 122} s={0.92} z={30}
-        slot={0.9 + Math.sin(f / 16) * 0.06} f={f} />
+      <Bunker x={664} base={pr.horizon + 226} s={0.78} z={26} f={f}
+        slot={0.9 + Math.sin(f / 16) * 0.06} floods={1} lamp={1} />
+      <Wreck x={128} base={pr.horizon + 300} s={0.98} z={78} />
       <Cam z={50} s={0.44} x={-250} y={168}>
         <Case lid={1} glow={1} latch={[1, 1, 1, 1]} base={640} s={1.06} />
       </Cam>
       <MarkCast x={640} y={pr.horizon + 34} s={82} z={44} o={0.94} />
       <Keeper x={306} y={716} s={0.90} z={54} f={f} hood={1} badge={1} lit={0.88} />
+      <Fence y={pr.horizon + 248} z={84} s={1.06} torn={1} />
       <Edge side="l" c={dark(pr.back, 0.66)} kind="rock" w={126} z={90} />
-      <Snow f={f} n={24} z={70} />
-      <Snow f={f} n={10} z={93} near />
+        <Ash f={f} n={26} z={68} speed={1.2} />
+        <Snow f={f} n={34} z={72} speed={1.4} c="#E6E3DB" />
+        <Snow f={f} n={15} z={93} near speed={1.9} c="#F2F0EA" />
     </Scene>
   );
 };
@@ -288,16 +319,16 @@ export const S0HookCross: React.FC = () => {
           height: 4 + i * 1.5, borderRadius: 40, background: "#AFBECB",
           opacity: 0.34 + i * 0.03, zIndex: 18 }} />
       ))}
-      {/* the dark slot at the far end — the only non-white thing on the ridge */}
-      <div style={{ position: "absolute", left: 690, top: pr.horizon - 62, width: 62, height: 66,
-        background: "#23303D", zIndex: 19, borderRadius: "8px 8px 0 0" }} />
-      <div style={{ position: "absolute", left: 706, top: pr.horizon - 48, width: 28, height: 52,
-        background: "#F0D9A6", opacity: 0.9, zIndex: 20, borderRadius: "6px 6px 0 0" }} />
+      {/* the destination, small and far: the bunker he is walking to */}
+      <Bunker x={772} base={pr.horizon + 62} s={0.40} z={19} f={f} slot={0.92}
+        floods={1} lamp={1} />
+      <Wreck x={148} base={pr.horizon + 150} s={0.60} z={24} />
       <MarkPlate x={92} y={210} t="AN AI, OFFLINE" s={0.94} z={70} />
       <Keeper x={288 + f * 0.9} y={pr.horizon + 214} s={0.66} z={40} f={f} walk={1} hood={1}
         badge={1} lit={0.98} />
-      <Snow f={f} n={20} z={70} c="#F4F8FB" />
-      <Snow f={f} n={9} z={93} near c="#FFFFFF" />
+      <Ash f={f} n={24} z={68} speed={1.1} />
+      <Snow f={f} n={32} z={72} c="#E9E6DE" speed={1.3} />
+      <Snow f={f} n={14} z={93} near c="#F6F4EE" speed={1.7} />
     </Scene>
   );
 
@@ -318,9 +349,11 @@ export const S0HookCross: React.FC = () => {
           borderRadius: "12px 12px 0 0", border: "8px solid #343A2B", borderBottom: "none",
           boxSizing: "border-box" }} />
       </div>
+      <Wreck x={880} base={pr.horizon + 300} s={0.92} z={80} face={-1} />
       <Edge side="r" c={dark(pr.back, 0.60)} kind="rock" w={116} z={90} />
-      <Snow f={f} n={26} z={70} c="#F4F8FB" />
-      <Snow f={f} n={16} z={93} near speed={1.7} c="#FFFFFF" />
+      <Ash f={f} n={28} z={68} speed={1.4} />
+      <Snow f={f} n={38} z={72} c="#E9E6DE" speed={1.5} />
+      <Snow f={f} n={20} z={93} near speed={2.0} c="#F6F4EE" />
     </Scene>
   );
 
@@ -333,7 +366,9 @@ export const S0HookCross: React.FC = () => {
       <MarkCast x={556} y={pd.horizon - 392} s={96} z={46} o={0.86} />
       <MarkPlate x={94} y={pd.horizon - 300} t="LOCAL MODEL" s={0.88} z={48} />
       <Keeper x={186} y={pd.horizon + 132} s={1.16} z={60} f={f} hood={1} badge={1} lit={0.78} />
-      <Snow f={f} n={20} z={70} />
+      <Ash f={f} n={22} z={68} />
+      <Snow f={f} n={30} z={72} c="#E6E3DB" />
+      <Snow f={f} n={13} z={93} near c="#F2F0EA" />
       <Edge side="l" c={dark(pd.back, 0.62)} kind="rock" w={104} z={91} />
     </Scene>
   );

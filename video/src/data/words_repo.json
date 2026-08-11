@@ -1,0 +1,387 @@
+[
+{
+"start": 0.0,
+"end": 0.36,
+"word": " Someone"
+},
+{
+"start": 0.36,
+"end": 0.54,
+"word": " just"
+},
+{
+"start": 0.54,
+"end": 0.76,
+"word": " dropped"
+},
+{
+"start": 0.57,
+"end": 0.73,
+"word": " a"
+},
+{
+"start": 0.73,
+"end": 0.91,
+"word": " GitHub"
+},
+{
+"start": 0.91,
+"end": 1.05,
+"word": " repo"
+},
+{
+"start": 1.1,
+"end": 1.34,
+"word": " that"
+},
+{
+"start": 1.34,
+"end": 1.48,
+"word": " gives"
+},
+{
+"start": 1.48,
+"end": 1.62,
+"word": " you"
+},
+{
+"start": 1.62,
+"end": 1.98,
+"word": " 800"
+},
+{
+"start": 1.87,
+"end": 2.17,
+"word": " million"
+},
+{
+"start": 2.17,
+"end": 2.47,
+"word": " free"
+},
+{
+"start": 2.47,
+"end": 2.67,
+"word": " AI"
+},
+{
+"start": 2.61,
+"end": 2.87,
+"word": " tokens"
+},
+{
+"start": 2.87,
+"end": 3.21,
+"word": " every"
+},
+{
+"start": 3.21,
+"end": 3.47,
+"word": " month."
+},
+{
+"start": 3.8,
+"end": 3.9,
+"word": " Not"
+},
+{
+"start": 3.9,
+"end": 4.62,
+"word": " 800,000,"
+},
+{
+"start": 4.62,
+"end": 4.78,
+"word": " but"
+},
+{
+"start": 4.78,
+"end": 4.98,
+"word": " 800"
+},
+{
+"start": 4.95,
+"end": 5.49,
+"word": " million."
+},
+{
+"start": 6.06,
+"end": 6.44,
+"word": " GPT-5,"
+},
+{
+"start": 6.44,
+"end": 6.82,
+"word": " Claude,"
+},
+{
+"start": 6.82,
+"end": 7.1,
+"word": " Gemini,"
+},
+{
+"start": 7.07,
+"end": 7.45,
+"word": " Llama,"
+},
+{
+"start": 7.65,
+"end": 7.69,
+"word": " all"
+},
+{
+"start": 7.69,
+"end": 7.85,
+"word": " for"
+},
+{
+"start": 7.85,
+"end": 8.09,
+"word": " free."
+},
+{
+"start": 8.51,
+"end": 8.55,
+"word": " Most"
+},
+{
+"start": 8.51,
+"end": 8.75,
+"word": " developers"
+},
+{
+"start": 8.75,
+"end": 9.05,
+"word": " are"
+},
+{
+"start": 9.01,
+"end": 9.19,
+"word": " paying"
+},
+{
+"start": 9.19,
+"end": 9.53,
+"word": " hundreds"
+},
+{
+"start": 9.53,
+"end": 9.75,
+"word": " of"
+},
+{
+"start": 9.75,
+"end": 9.97,
+"word": " dollars"
+},
+{
+"start": 9.96,
+"end": 10.08,
+"word": " a"
+},
+{
+"start": 10.08,
+"end": 10.2,
+"word": " month"
+},
+{
+"start": 10.2,
+"end": 10.46,
+"word": " just"
+},
+{
+"start": 10.5,
+"end": 10.62,
+"word": " to"
+},
+{
+"start": 10.62,
+"end": 10.86,
+"word": " access"
+},
+{
+"start": 10.86,
+"end": 11.12,
+"word": " one"
+},
+{
+"start": 11.16,
+"end": 11.28,
+"word": " of"
+},
+{
+"start": 11.28,
+"end": 11.42,
+"word": " these"
+},
+{
+"start": 11.42,
+"end": 11.64,
+"word": " tools."
+},
+{
+"start": 12.17,
+"end": 12.21,
+"word": " This"
+},
+{
+"start": 12.19,
+"end": 12.45,
+"word": " repo"
+},
+{
+"start": 12.45,
+"end": 12.77,
+"word": " routes"
+},
+{
+"start": 12.66,
+"end": 12.76,
+"word": " your"
+},
+{
+"start": 12.76,
+"end": 13.0,
+"word": " requests"
+},
+{
+"start": 13.0,
+"end": 13.42,
+"word": " across"
+},
+{
+"start": 13.38,
+"end": 13.6,
+"word": " the"
+},
+{
+"start": 13.6,
+"end": 13.78,
+"word": " free"
+},
+{
+"start": 13.78,
+"end": 13.96,
+"word": " tiers"
+},
+{
+"start": 13.94,
+"end": 14.16,
+"word": " of"
+},
+{
+"start": 14.16,
+"end": 14.36,
+"word": " every"
+},
+{
+"start": 14.36,
+"end": 14.64,
+"word": " major"
+},
+{
+"start": 14.6,
+"end": 14.86,
+"word": " AI"
+},
+{
+"start": 14.86,
+"end": 15.18,
+"word": " company"
+},
+{
+"start": 15.18,
+"end": 15.84,
+"word": " simultaneously."
+},
+{
+"start": 16.65,
+"end": 16.69,
+"word": " Hit"
+},
+{
+"start": 16.65,
+"end": 16.79,
+"word": " one"
+},
+{
+"start": 16.79,
+"end": 17.13,
+"word": " model's"
+},
+{
+"start": 17.26,
+"end": 17.38,
+"word": " rate"
+},
+{
+"start": 17.38,
+"end": 17.54,
+"word": " limit,"
+},
+{
+"start": 17.7,
+"end": 17.74,
+"word": " it"
+},
+{
+"start": 17.74,
+"end": 18.06,
+"word": " automatically"
+},
+{
+"start": 17.77,
+"end": 18.11,
+"word": " jumps"
+},
+{
+"start": 18.11,
+"end": 18.31,
+"word": " to"
+},
+{
+"start": 18.31,
+"end": 18.35,
+"word": " the"
+},
+{
+"start": 18.35,
+"end": 18.51,
+"word": " next."
+},
+{
+"start": 19.12,
+"end": 19.16,
+"word": " Comment"
+},
+{
+"start": 19.12,
+"end": 19.34,
+"word": " REPO"
+},
+{
+"start": 19.34,
+"end": 19.6,
+"word": " and"
+},
+{
+"start": 19.6,
+"end": 19.64,
+"word": " I'll"
+},
+{
+"start": 19.6,
+"end": 19.73,
+"word": " send"
+},
+{
+"start": 19.73,
+"end": 19.83,
+"word": " it"
+},
+{
+"start": 19.83,
+"end": 20.07,
+"word": " immediately."
+}
+]

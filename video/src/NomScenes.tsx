@@ -5,11 +5,12 @@ import { MONO } from "./SlopKit";
 import {
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
   CLAY, GOLD, GREEN, RED, PAPER, INK, PLACES, usePlace,
-  Ridge, Room, Snow, Beam, Strip, Motes, Chip, Plate, BigNum, Contact, Edge,
+  Ridge, Room, Snow, Ash, Beam, Strip, Motes, Chip, Plate, BigNum, Contact, Edge,
   Keeper, Mitt, Scene, Cam, Mark, MarkPlate, MarkCast, AskBubble,
 } from "./NomWorld";
 import {
-  Portal, BlastDoor, Wheel, Tunnel, Box, CmdScreen, Canister, Rack, Bars,
+  Portal, Bunker, Fence, Wreck, Pylon, BlastDoor, Wheel, Tunnel, Box, CmdScreen, Canister, Rack, Bars,
+  Pipes, GaugePanel, Stores, Notes, Fan,
   ChartTable, MapSheet, Compass, Shaft, Chute, Mast, CoinCage, Coin, SlitWindow,
   Cable, LightBank,
 } from "./NomProps";
@@ -75,26 +76,48 @@ export const S0Hook: React.FC = () => {
   const lf = f - CUT[shot];
   const pr = usePlace("ridge"), pd = usePlace("door"), pt = usePlace("throat");
 
-  /* ---- A · 0.00-1.10s · WIDE · THE RIDGE ------------------------------- */
+  /* ---- A · 0.00-1.10s · WIDE · THE RIDGE -------------------------------
+     ⛔⛔ REBUILT AT SCALE. Alex: *"make the outside actually look more like a
+     doomsday apocalypse, and the beginning scene even bigger, more hierarchical
+     and like a bunker, with more interesting motion."* v1 was a 300px wedge
+     alone in a wide clean snow field under a clear dusk: no hierarchy, because
+     hierarchy needs things of different sizes in the same frame, and no
+     apocalypse, because an intact skyline is a healthy city however dark it is.
+
+     The frame is now five planes deep, biggest to smallest:
+       FG   a torn security fence and a stripped wreck, cropped by the panel
+       HERO the BUNKER — berm, mass, tier, vent stack, antenna, lit gantry
+       MID  a toppled pylon lying in the drift
+       BG   a broken skyline with a few emergency lights still flickering
+       SKY  two drifting storm bands and the fires behind the ruins
+     and FOUR continuous motion sources run under it: the storm ceiling, the
+     ashfall, the driving snow and the bunker's rotating hazard lamp. None of
+     them is a "subject", so the motion hierarchy still holds — the one thing
+     that ACTS in this shot is the gust. */
   if (shot === 0) {
-    const gust = E(lf, 12, 26, 0, 1, IO);
+    const gust = E(lf, 10, 26, 0, 1, IO);
     return (
-      <Scene p={pr} slug="NORTH RIDGE  ·  DUSK" push={[0, 33, 1.045]} vig={0.40}>
-        <Ridge p={pr} f={f} city={1} lit={1} sunX={846} />
-        {/* the one dominant object, drawn settled at f0, low and large */}
-        <Portal x={452} base={pr.horizon + 214} s={1.26} z={30}
-          slot={0.92 + Math.sin(f / 17) * 0.06 - gust * 0.26} f={f} />
-        {/* MARK 1 · cast into the wedge above the doorway, drawn at FRAME 0 */}
-        <MarkCast x={452} y={pr.horizon - 10} s={92} z={44} o={0.96} />
-        {/* MARK 2 · the Keeper at the door, badge above his hood, giving scale */}
-        <Keeper x={686} y={pr.horizon + 226} s={0.92} z={46} f={f} face={-1} hood={1}
-          badge={1} lit={0.96} />
-        {/* the far comms mast, alive — planted so S5 can kill it */}
-        <Mast x={862} base={pr.horizon + 10} h={158} s={0.62} z={22} f={f} on={1} />
-        {/* foreground rock, cropped by the panel: without it we are pointed at a backdrop */}
-        <Edge side="l" c="#455A6E" kind="rock" w={128} z={90} />
-        <Snow f={f} n={30} z={70} speed={1 + gust * 2.6} />
-        <Snow f={f} n={13} z={93} near speed={1.2 + gust * 3.4} />
+      <Scene p={pr} slug="NORTH RIDGE  ·  BAY 08" push={[0, 33, 1.05]} vig={0.44}>
+        <Ridge p={pr} f={f} city={1} lit={1} sunX={846} storm={1} fires={1} />
+        {/* MID · the grid that already fell over */}
+        <div style={{ position: "absolute", left: 24, top: pr.horizon + 74, zIndex: 22,
+          transform: "rotate(74deg)", transformOrigin: "50% 100%" }}>
+          <Mast x={150} base={230} h={300} s={0.86} z={0} f={0} on={0} />
+        </div>
+        {/* HERO · the bunker, filling the frame */}
+        <Bunker x={556} base={pr.horizon + 232} s={0.90} z={26} f={f}
+          slot={0.92 + Math.sin(f / 17) * 0.06 - gust * 0.22} floods={1} lamp={1} />
+        {/* MARK 1 · cast into the mass, above the gantry, drawn at FRAME 0 */}
+        <MarkCast x={556} y={pr.horizon - 122} s={96} z={70} o={0.92} />
+        {/* MARK 2 · the Keeper on the apron, badge above his hood, giving scale */}
+        <Keeper x={228} y={pr.horizon + 344} s={1.30} z={90} f={f} face={1} hood={1}
+          badge={1} lit={0.98} />
+        {/* FG · the wreck and the fence, both cropped by the panel */}
+        <Wreck x={838} base={pr.horizon + 350} s={1.15} z={84} face={-1} />
+        <Fence y={pr.horizon + 236} z={82} s={1.10} torn={1} />
+        <Ash f={f} n={30} z={76} speed={1 + gust * 2.2} />
+        <Snow f={f} n={34} z={78} speed={1.4 + gust * 3.2} c="#E6E3DB" />
+        <Snow f={f} n={16} z={94} near speed={1.8 + gust * 4.2} c="#F2F0EA" />
       </Scene>
     );
   }
@@ -118,9 +141,11 @@ export const S0Hook: React.FC = () => {
             width: 530, height: 44, background: "#DCE5EB", opacity: 0.72 * (1 - fall),
             borderRadius: 8, zIndex: 60 }} />
         )}
+        <Wreck x={106} base={pd.horizon + 128} s={0.72} z={78} />
         <Edge side="r" c={dark(pd.back, 0.62)} kind="rock" w={110} z={90} />
-        <Snow f={f} n={22} z={70} />
-        <Snow f={f} n={9} z={93} near />
+        <Ash f={f} n={22} z={68} />
+        <Snow f={f} n={30} z={72} c="#E6E3DB" />
+        <Snow f={f} n={13} z={93} near c="#F2F0EA" />
       </Scene>
     );
   }
@@ -158,6 +183,7 @@ export const S0Hook: React.FC = () => {
             height: 26 + seal * 70, zIndex: 80, background: "#F6E3BE", opacity: seal * 0.90,
             transform: `skewY(-4deg)` }} />
         )}
+        <Ash f={f} n={12} z={88} speed={1.4} />
         <Edge side="l" c="#3E434A" kind="wall" w={92} z={90} />
       </Scene>
     );
@@ -216,9 +242,17 @@ export const S1: React.FC = () => {
         <div style={{ position: "absolute", left: 96, top: 150, zIndex: 6,
           fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 132, lineHeight: 1,
           color: mix(p.back, 0.16), opacity: 0.42 }}>08</div>
-        {/* cable tray along the back wall */}
+        {/* ⛔ DENSITY LIVES IN THE STATIC SET. v1's alcove was a desk, a box, a
+            lamp and a coil in an empty room, and it read thin. Everything added
+            here is furniture that never moves — which is also what makes the
+            crest work, because the dark has more to take away. */}
         <div style={{ position: "absolute", left: 0, right: 0, top: 108, height: 16,
           background: dark(p.back, 0.30), zIndex: 6 }} />
+        <Pipes y={132} z={7} n={3} />
+        <GaugePanel x={706} y={236} s={0.92} z={20} f={f} on={1} />
+        <Fan x={92} y={244} s={0.94} z={20} f={f} on={0} />
+        <Stores x={620} y={392} w={286} s={0.92} z={22} />
+        <Notes x={188} y={210} s={0.86} z={8} />
         <Strip x={556} y={64} w={330} on={1} z={24} f={f} />
         <Motes x={556} y={110} w={300} h={300} n={13} f={f} z={26} />
         {/* the desk */}
@@ -546,6 +580,9 @@ export const S4: React.FC = () => {
     <Scene p={p} slug="ONE-TIME DOWNLOAD" push={[0, 54, 1.05]} vig={0.56}>
       <Room p={p} f={f} tiles={false} />
       <Shaft cx={462} z={14} f={f} day={1} />
+      <Pipes y={410} z={8} n={2} c="#54606B" />
+      <Stores x={64} y={624} w={230} s={0.86} z={22} />
+      <GaugePanel x={782} y={228} s={0.80} z={20} f={f} on={1} />
       {/* LEFT COLUMN — the uplink runs up the wall, and it is visibly working */}
       <Cable x1={168} y1={470} x2={196} y2={-20} z={30} live={1} f={f} w={14} />
       <Bars x={98} y={492} n={4} s={1.2} z={74} f={f} dead={0} />
@@ -611,9 +648,11 @@ export const S5: React.FC = () => {
         <Mast x={636} base={pm.horizon + 118} h={330} s={1} z={40} f={f} on={1} />
         <Cable x1={604} y1={pm.horizon + 108} x2={190} y2={730} z={38} live={1} f={f} w={11} />
         <Bars x={686} y={pm.horizon + 118} n={4} s={0.92} z={60} f={f} dead={0} />
+        <Wreck x={228} base={pm.horizon + 236} s={0.86} z={76} />
         <Edge side="l" c={dark(pm.back, 0.66)} kind="rock" w={140} z={90} />
-        <Snow f={f} n={26} z={70} />
-        <Snow f={f} n={10} z={93} near />
+        <Ash f={f} n={26} z={68} />
+        <Snow f={f} n={34} z={72} c="#E6E3DB" />
+        <Snow f={f} n={14} z={93} near c="#F2F0EA" />
       </Scene>
     );
   }
@@ -637,6 +676,16 @@ export const S5: React.FC = () => {
         color: mix(pa.back, 0.16), opacity: 0.42 * room }}>08</div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 108, height: 16,
         background: dark(pa.back, 0.30), zIndex: 6, opacity: room }} />
+      {/* ⭐ the same furniture as S1a, dimming with the room. The crest is a
+          SUBTRACTION, and a subtraction needs a full frame to subtract from. */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 8,
+        filter: `brightness(${0.16 + room * 0.84})` }}>
+        <Pipes y={132} z={7} n={3} />
+        <GaugePanel x={706} y={236} s={0.92} z={20} f={f} on={room} />
+        <Fan x={92} y={244} s={0.94} z={20} f={f} on={0} />
+        <Stores x={620} y={392} w={286} s={0.92} z={22} />
+        <Notes x={188} y={210} s={0.86} z={8} />
+      </div>
       {/* ⭐ the slit window: the city dying, without leaving the room */}
       <SlitWindow x={742} y={148} w={330} h={78} z={8} lit={city} f={f} />
       <Strip x={396} y={64} w={330} on={strip} z={24} f={f} />
@@ -739,8 +788,11 @@ export const S6: React.FC = () => {
         ) : null))}
         {/* he pays, and pays, and the grille moves two inches each time */}
         <Keeper x={866} y={742} s={1.02} z={78} f={f} face={-1} hood={1} badge={1} lit={0.86} />
+        <Wreck x={132} base={pk.horizon + 178} s={0.78} z={78} />
         <Edge side="l" c={dark(pk.back, 0.60)} kind="rail" z={90} />
-        <Snow f={f} n={16} z={70} />
+        <Ash f={f} n={20} z={68} />
+        <Snow f={f} n={26} z={72} c="#E6E3DB" />
+        <Snow f={f} n={11} z={93} near c="#F2F0EA" />
       </Scene>
     );
   }
@@ -845,20 +897,19 @@ export const S7Cta: React.FC = () => {
         <div style={{ position: "absolute", left: 110, top: 418, width: 138, height: 5,
           background: "#C6CBD1", opacity: 0.44 }} />
       </div>
-      {/* the snow outside, through the opening */}
+      {/* ⛔ THE VIEW OUT WAS A PALE GRADIENT. The CTA is the last frame anyone
+          sees and it was the only exterior in the reel that did not show the
+          world the whole video is about. It now carries the same doomsday as
+          the open — haze, ruins, fires, a stripped wreck and weather — seen
+          through the doorway the Keeper is standing in. */}
       <div style={{ position: "absolute", left: 260, top: 0, right: 0, bottom: 0, zIndex: 10,
         overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0,
-          background: `linear-gradient(178deg, #46628200 0%, #7E9AB4 100%)` }} />
-        <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 470,
-          background: `linear-gradient(178deg, #3C5878 0%, #7E9AB4 100%)` }} />
-        <div style={{ position: "absolute", left: -40, right: -40, top: 430, height: 120,
-          background: "#25313F",
-          clipPath: "polygon(0 46%, 14% 28%, 27% 42%, 41% 24%, 55% 38%, 70% 22%, 84% 36%, 100% 28%, 100% 100%, 0 100%)" }} />
-        <div style={{ position: "absolute", left: 0, right: 0, top: 500, bottom: 0,
-          background: "linear-gradient(182deg, #AEBECD 0%, #D8DFE6 100%)" }} />
-        <Snow f={f} n={38} z={30} speed={1.2} />
-        <Snow f={f} n={14} z={31} near speed={1.5} c="#FFFFFF" />
+        <div style={{ position: "absolute", left: -260, top: 0, width: 1012, height: 792 }}>
+          <Ridge p={PLACES.ridge} f={f} city={1} lit={0.9} sunX={720} storm={1} fires={1} />
+          <Wreck x={742} base={PLACES.ridge.horizon + 214} s={0.86} z={40} face={-1} />
+          <Ash f={f} n={22} z={44} speed={1.2} />
+          <Snow f={f} n={30} z={46} c="#E6E3DB" speed={1.3} />
+        </div>
       </div>
       {/* the threshold spill — warm from behind camera (the hall), cold ahead */}
       <div style={{ position: "absolute", left: 260, top: 548, right: 0, height: 150, zIndex: 24,
@@ -870,10 +921,10 @@ export const S7Cta: React.FC = () => {
         costume={{ cheer: nod * 0.42 }} lit={1} />
       {/* the comment chip */}
       {chip > 0.01 && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: 214, display: "flex",
+        <div style={{ position: "absolute", left: 0, right: 0, top: 190, display: "flex",
           justifyContent: "center", zIndex: 86, opacity: Math.min(1, chip * 1.6),
           transform: `translateY(${(1 - chip) * 26 + float2}px) scale(${0.86 + chip * 0.14})` }}>
-          <div style={{ position: "relative", padding: "16px 40px", borderRadius: 22,
+          <div style={{ position: "relative", padding: "15px 38px", borderRadius: 22,
             background: "#FFFFFF", border: "5px solid #EDE7DB", boxShadow: SH_D,
             fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 66, lineHeight: 1,
             color: INK }}>
@@ -883,16 +934,19 @@ export const S7Cta: React.FC = () => {
           </div>
         </div>
       )}
-      <div style={{ position: "absolute", left: 0, right: 0, top: 330, textAlign: "center",
-        zIndex: 86, opacity: line, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 32,
-        letterSpacing: "-0.01em", color: "#F3EEE3",
-        transform: `translateY(${(1 - line) * 12 + float2 * 0.4}px)`,
-        textShadow: "0 3px 12px rgba(0,0,0,0.6)" }}>the free offline setup</div>
+      <div style={{ position: "absolute", left: 262, right: 0, top: 668, display: "flex",
+        justifyContent: "center", zIndex: 86, opacity: line,
+        transform: `translateY(${(1 - line) * 12 + float2 * 0.4}px)` }}>
+        <div style={{ padding: "11px 26px", borderRadius: 13, background: "#241F17",
+          boxShadow: SH_D, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 31,
+          letterSpacing: "-0.01em", color: "#F6F2E8",
+          whiteSpace: "nowrap" }}>the free offline setup</div>
+      </div>
       {/* ⭐ the audience filter, kept OUT of the header's occlusion band (panel
           y < ~66) and out of the Keeper's column */}
       <div style={{ position: "absolute", inset: 0, zIndex: 88, opacity: Math.min(1, mark * 1.6),
-        transform: `scale(${0.7 + mark * 0.3})`, transformOrigin: "870px 620px" }}>
-        <Mark x={862} y={598} s={62} z={88} />
+        transform: `scale(${0.7 + mark * 0.3})`, transformOrigin: "342px 706px" }}>
+        <Mark x={310} y={676} s={58} z={88} />
       </div>
     </Scene>
   );

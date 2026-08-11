@@ -7,6 +7,7 @@ import {
 import { SfxTrack, LEVELS, layer, repeat, Cue } from "./SoundKit";
 import { HookQueue, HookCoach, HookShadow } from "./AgyHooks";
 import { HookLift, HookParade } from "./AgyHooks2";
+import { HookPress, HookBoard } from "./AgyHooks3";
 import { CamCtx, camFor, PalCtx } from "./AgyWorld";
 import words from "./data/words_agency.json";
 

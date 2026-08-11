@@ -91,6 +91,247 @@ export const Portal: React.FC<{ x: number; base: number; s?: number; z?: number;
 };
 
 /* =========================================================================
+   ⛔⛔ THE BUNKER — the hook's subject, rebuilt at SCALE and in TIERS.
+
+   v1 drew a 300px concrete wedge sitting alone in the middle of a wide snow
+   plain. Alex: *"the beginning scene even bigger, more hierarchical and like a
+   bunker."* He is right: one small mass in a large empty frame has no
+   hierarchy, because hierarchy is a RELATIONSHIP and there was nothing for it
+   to be in a relationship with.
+
+   This is built as a stack of tiers that read at a glance in descending size:
+     1  the BERM      a wide earth mound the whole thing is set into
+     2  the MASS      a battered concrete block, 520 wide and 400 tall
+     3  the TIER      a smaller upper block set back on top of it
+     4  the STACK     a vent tower and a lattice antenna above that
+     5  the GANTRY    a lit beam over the door, with working floodlights
+     6  the DOOR      the one warm thing, at the bottom of the pile
+   Plus the things that say "this is defended, not decorative": hazard chevrons,
+   a rotating amber lamp, buttresses, a bay stencil and a stair.
+   ====================================================================== */
+export const Bunker: React.FC<{ x: number; base: number; s?: number; z?: number; f?: number;
+  slot?: number; floods?: number; lamp?: number }> =
+  ({ x, base, s = 1, z = 30, f = 0, slot = 1, floods = 1, lamp = 1 }) => {
+  const W2 = 520 * s, Hm = 400 * s;            // the main mass
+  const top = base - Hm;
+  const tierW = 330 * s, tierH = 96 * s;
+  const rot = (f * 3.4) % 360;                  // the hazard lamp
+  const flick = floods * (0.80 + 0.20 * Math.sin(f / 3.1) * (rnd(Math.floor(f / 17), 2) > 0.12 ? 1 : -3));
+  return (<>
+    {/* 1 · THE BERM — the mound it is set into. Reads as dug in, not placed. */}
+    <div style={{ position: "absolute", left: x - W2 * 0.95, top: base - 66 * s,
+      width: W2 * 1.9, height: 120 * s, zIndex: z - 3, background: dark(CONC, 0.34),
+      clipPath: "polygon(9% 0, 91% 0, 100% 100%, 0 100%)" }} />
+    <div style={{ position: "absolute", left: x - W2 * 0.95, top: base - 66 * s,
+      width: W2 * 1.9, height: 20 * s, zIndex: z - 2, background: "#CFCCC4",
+      clipPath: "polygon(9% 0, 91% 0, 96% 100%, 4% 100%)" }} />
+
+    {/* 4 · THE STACK — a vent tower and a lattice mast, the top of the pile */}
+    <div style={{ position: "absolute", left: x + W2 * 0.20, top: top - tierH - 128 * s,
+      width: 74 * s, height: 132 * s, zIndex: z, background: CONCD }} />
+    <div style={{ position: "absolute", left: x + W2 * 0.20, top: top - tierH - 128 * s,
+      width: 74 * s, height: 14 * s, zIndex: z + 1, background: CONCL }} />
+    <div style={{ position: "absolute", left: x + W2 * 0.20 - 12 * s, top: top - tierH - 146 * s,
+      width: 98 * s, height: 22 * s, zIndex: z + 1, background: STEELD, borderRadius: 4 }} />
+    <svg width={90 * s} height={150 * s} viewBox="0 0 90 150"
+      style={{ position: "absolute", left: x - W2 * 0.34, top: top - tierH - 150 * s, zIndex: z }}>
+      <line x1={26} y1={150} x2={45} y2={6} stroke={dark(STEELD, 0.2)} strokeWidth={5} />
+      <line x1={64} y1={150} x2={45} y2={6} stroke={dark(STEELD, 0.2)} strokeWidth={5} />
+      {Array.from({ length: 6 }, (_, i) => (
+        <line key={i} x1={28 + i * 3} y1={140 - i * 22} x2={62 - i * 3} y2={140 - i * 22}
+          stroke={dark(STEELD, 0.1)} strokeWidth={4} />
+      ))}
+      <circle cx={45} cy={6} r={7}
+        fill={Math.floor(f / 14) % 2 ? "#C44A3A" : dark("#C44A3A", 0.5)} />
+    </svg>
+
+    {/* 3 · THE UPPER TIER, set back */}
+    <div style={{ position: "absolute", left: x - tierW / 2, top: top - tierH, width: tierW,
+      height: tierH, zIndex: z + 2, background: mix(CONC, 0.06), boxShadow: SH_D }} />
+    <div style={{ position: "absolute", left: x - tierW / 2, top: top - tierH, width: tierW,
+      height: 13 * s, zIndex: z + 3, background: "#D5D2CA" }} />
+    <div style={{ position: "absolute", left: x - tierW / 2, top: top - tierH * 0.52,
+      width: tierW * 0.30, height: tierH * 0.34, zIndex: z + 3, background: "#2A2E34",
+      marginLeft: tierW * 0.10 }} />
+    {/* the rotating amber hazard lamp on the tier's corner */}
+    {lamp > 0 && (<>
+      <div style={{ position: "absolute", left: x + tierW * 0.38, top: top - tierH - 30 * s,
+        width: 26 * s, height: 30 * s, zIndex: z + 6, background: STEELD, borderRadius: 4 }} />
+      <div style={{ position: "absolute", left: x + tierW * 0.38 + 3 * s, top: top - tierH - 26 * s,
+        width: 20 * s, height: 18 * s, zIndex: z + 7, background: "#E0A542", borderRadius: 3 }} />
+      <div style={{ position: "absolute", left: x + tierW * 0.38 - 92 * s, top: top - tierH - 74 * s,
+        width: 150 * s, height: 84 * s, zIndex: z + 5, transform: `rotate(${rot}deg)`,
+        transformOrigin: "50% 30%",
+        background: `linear-gradient(90deg, ${hexa("#E0A542", 0)} 0%, ${hexa("#E0A542", 0.28 * lamp)} 50%, ${hexa("#E0A542", 0)} 100%)`,
+        clipPath: "polygon(44% 0, 56% 0, 100% 100%, 0 100%)" }} />
+    </>)}
+
+    {/* 2 · THE MASS — battered face, buttresses, form ties, bay stencil */}
+    <div style={{ position: "absolute", left: x - W2 / 2, top, width: W2, height: Hm, zIndex: z + 4,
+      background: CONC, boxShadow: SH_D, clipPath: "polygon(6% 0, 94% 0, 100% 100%, 0 100%)" }} />
+    <div style={{ position: "absolute", left: x - W2 / 2, top, width: W2 * 0.30, height: Hm,
+      zIndex: z + 5, background: CONCD, clipPath: "polygon(20% 0, 100% 0, 100% 100%, 0 100%)" }} />
+    <div style={{ position: "absolute", left: x - W2 / 2, top, width: W2, height: Hm, zIndex: z + 5,
+      clipPath: "polygon(6% 0, 94% 0, 94.6% 4%, 5.4% 4%)", background: CONCL }} />
+    {[0, 1].map((i) => (
+      <div key={"bt" + i} style={{ position: "absolute",
+        left: x + (i ? W2 * 0.40 : -W2 * 0.52), top: top + Hm * 0.30, width: W2 * 0.12,
+        height: Hm * 0.70, zIndex: z + 6, background: i ? CONCD : mix(CONC, 0.04),
+        clipPath: i ? "polygon(0 0, 100% 26%, 100% 100%, 0 100%)"
+                    : "polygon(0 26%, 100% 0, 100% 100%, 0 100%)" }} />
+    ))}
+    {Array.from({ length: 15 }, (_, i) => (
+      <div key={"ft" + i} style={{ position: "absolute",
+        left: x - W2 * 0.36 + (i % 5) * W2 * 0.18,
+        top: top + 46 * s + Math.floor(i / 5) * 74 * s,
+        width: 8 * s, height: 8 * s, borderRadius: 5, background: CONCD, zIndex: z + 7 }} />
+    ))}
+    <div style={{ position: "absolute", left: x - W2 * 0.44, top: top + 40 * s, zIndex: z + 8,
+      fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 78 * s, lineHeight: 1,
+      color: CONCD, opacity: 0.44 }}>08</div>
+    {/* hazard chevrons across the base — the "this is defended" signal */}
+    <div style={{ position: "absolute", left: x - W2 * 0.52, top: base - 46 * s, width: W2 * 1.04,
+      height: 26 * s, zIndex: z + 9, overflow: "hidden", background: "#3A3630" }}>
+      {Array.from({ length: 18 }, (_, i) => (
+        <div key={"cv" + i} style={{ position: "absolute", left: i * 40 * s - 24 * s, top: -6 * s,
+          width: 20 * s, height: 40 * s, background: "#D0A64A",
+          transform: "skewX(-26deg)" }} />
+      ))}
+    </div>
+
+    {/* 5 · THE GANTRY — a beam over the door carrying three working floods */}
+    <div style={{ position: "absolute", left: x - W2 * 0.46, top: top + Hm * 0.36, width: W2 * 0.92,
+      height: 17 * s, zIndex: z + 12, background: STEELD, boxShadow: SH }} />
+    {[-1, 0, 1].map((k, i) => (
+      <React.Fragment key={"fl" + i}>
+        <div style={{ position: "absolute", left: x + k * W2 * 0.30 - 22 * s,
+          top: top + Hm * 0.36 + 15 * s, width: 44 * s, height: 26 * s, zIndex: z + 13,
+          background: "#33383F", borderRadius: `0 0 ${8 * s}px ${8 * s}px` }} />
+        <div style={{ position: "absolute", left: x + k * W2 * 0.30 - 15 * s,
+          top: top + Hm * 0.36 + 36 * s, width: 30 * s, height: 8 * s, zIndex: z + 14,
+          background: "#F2E3BC", opacity: 0.30 + flick * 0.70, borderRadius: 3 }} />
+        <div style={{ position: "absolute", left: x + k * W2 * 0.30 - 78 * s,
+          top: top + Hm * 0.36 + 42 * s, width: 156 * s, height: 200 * s, zIndex: z + 10,
+          background: `linear-gradient(180deg, ${hexa("#F2E3BC", 0.24 * flick)} 0%, ${hexa("#F2E3BC", 0)} 100%)`,
+          clipPath: "polygon(38% 0, 62% 0, 100% 100%, 0 100%)" }} />
+      </React.Fragment>
+    ))}
+
+    {/* 6 · THE DOOR — recessed, arched, and the only warm thing in the pile */}
+    <div style={{ position: "absolute", left: x - 108 * s, top: base - 268 * s, width: 216 * s,
+      height: 268 * s, zIndex: z + 15, background: CONCD,
+      borderRadius: `${108 * s}px ${108 * s}px 0 0` }} />
+    <div style={{ position: "absolute", left: x - 90 * s, top: base - 250 * s, width: 180 * s,
+      height: 250 * s, zIndex: z + 16, background: "#22262C",
+      borderRadius: `${90 * s}px ${90 * s}px 0 0` }} />
+    {slot > 0 && (<>
+      <div style={{ position: "absolute", left: x - 74 * s, top: base - 232 * s, width: 148 * s,
+        height: 232 * s, zIndex: z + 17, background: "#E8CE97", opacity: 0.42 + slot * 0.58,
+        borderRadius: `${74 * s}px ${74 * s}px 0 0` }} />
+      <div style={{ position: "absolute", left: x - 48 * s, top: base - 206 * s, width: 96 * s,
+        height: 206 * s, zIndex: z + 18, background: "#FBEFD2", opacity: slot,
+        borderRadius: `${48 * s}px ${48 * s}px 0 0` }} />
+      <div style={{ position: "absolute", left: x - 200 * s, top: base - 6 * s, width: 400 * s,
+        height: 138 * s, zIndex: z - 1,
+        background: `linear-gradient(180deg, ${hexa("#EED9AC", 0.50 * slot)} 0%, ${hexa("#EED9AC", 0)} 100%)`,
+        clipPath: "polygon(32% 0, 68% 0, 100% 100%, 0 100%)" }} />
+    </>)}
+    {/* the stair up to the threshold, so the door is reachable */}
+    {[0, 1, 2].map((i) => (
+      <div key={"st" + i} style={{ position: "absolute", left: x - (118 + i * 22) * s,
+        top: base - 4 * s + i * 15 * s, width: (236 + i * 44) * s, height: 16 * s,
+        zIndex: z + 14 - i, background: i % 2 ? CONCD : CONC }} />
+    ))}
+    {/* ash and snow caught on every horizontal — the world lands on it */}
+    {[[x - tierW / 2, top - tierH - 8 * s, tierW, 14 * s],
+      [x - W2 * 0.44, top - 9 * s, W2 * 0.88, 15 * s]].map((r, i) => (
+      <div key={"sn" + i} style={{ position: "absolute", left: r[0], top: r[1], width: r[2],
+        height: r[3], background: "#D9D6CE", zIndex: z + 20, borderRadius: `${6 * s}px ${6 * s}px 0 0` }} />
+    ))}
+  </>);
+};
+
+/* the things that say a place was defended and then abandoned ------------- */
+
+/** chain-link + hazard signage, cropped by the panel: the foreground plane */
+export const Fence: React.FC<{ y: number; z?: number; s?: number; torn?: number }> =
+  ({ y, z = 88, s = 1, torn = 1 }) => (<>
+    <div style={{ position: "absolute", left: -20, right: -20, top: y, height: 200 * s, zIndex: z,
+      overflow: "hidden" }}>
+      {Array.from({ length: 40 }, (_, i) => (
+        <div key={"fv" + i} style={{ position: "absolute", left: i * 27 * s, top: 0, width: 3,
+          height: "100%", background: "#8E9096", opacity: 0.55 }} />
+      ))}
+      {Array.from({ length: 8 }, (_, i) => (
+        <div key={"fh" + i} style={{ position: "absolute", left: 0, right: 0, top: i * 27 * s,
+          height: 3, background: "#8E9096", opacity: 0.55 }} />
+      ))}
+      {/* the tear — a whole panel ripped away and curled */}
+      {torn > 0 && (
+        <div style={{ position: "absolute", left: 300 * s, top: 20 * s, width: 250 * s,
+          height: 170 * s, background: "transparent",
+          boxShadow: `inset 0 0 0 3px #8E9096`,
+          clipPath: "polygon(0 0, 100% 12%, 76% 100%, 12% 88%)",
+          backdropFilter: "none" }} />
+      )}
+    </div>
+    {[0, 1].map((i) => (
+      <div key={"fp" + i} style={{ position: "absolute", left: 120 + i * 640, top: y - 26 * s,
+        width: 16 * s, height: 250 * s, background: "#6E7076", zIndex: z + 1 }} />
+    ))}
+  </>);
+
+/** a dead vehicle, half buried and stripped */
+export const Wreck: React.FC<{ x: number; base: number; s?: number; z?: number; face?: 1 | -1 }> =
+  ({ x, base, s = 1, z = 40, face = 1 }) => (
+  <div style={{ position: "absolute", left: x - 150 * s, top: base - 108 * s, zIndex: z,
+    transform: `scaleX(${face}) rotate(-4deg)` }}>
+    <Contact x={4 * s} y={96 * s} w={290 * s} z={-1} o={0.34} />
+    <div style={{ position: "absolute", left: 0, top: 46 * s, width: 300 * s, height: 58 * s,
+      background: "#5A5148", borderRadius: `${16 * s}px ${8 * s}px ${5 * s}px ${5 * s}px` }} />
+    <div style={{ position: "absolute", left: 46 * s, top: 6 * s, width: 150 * s, height: 48 * s,
+      background: "#4A423A", borderRadius: `${14 * s}px ${20 * s}px 0 0` }} />
+    <div style={{ position: "absolute", left: 62 * s, top: 16 * s, width: 54 * s, height: 26 * s,
+      background: "#2A2E34" }} />
+    <div style={{ position: "absolute", left: 130 * s, top: 16 * s, width: 46 * s, height: 26 * s,
+      background: "#2A2E34" }} />
+    <div style={{ position: "absolute", left: 0, top: 46 * s, width: 300 * s, height: 9 * s,
+      background: "#6E6459" }} />
+    {/* the wheels are gone; it sits on its rims in the drift */}
+    <div style={{ position: "absolute", left: 34 * s, top: 92 * s, width: 52 * s, height: 20 * s,
+      background: "#3A3630", borderRadius: 6 }} />
+    <div style={{ position: "absolute", left: 208 * s, top: 92 * s, width: 52 * s, height: 20 * s,
+      background: "#3A3630", borderRadius: 6 }} />
+    <div style={{ position: "absolute", left: -14 * s, top: 84 * s, width: 330 * s, height: 30 * s,
+      background: "#D9D6CE", borderRadius: `${18 * s}px` }} />
+    {/* snow on the roof */}
+    <div style={{ position: "absolute", left: 44 * s, top: 0, width: 156 * s, height: 13 * s,
+      background: "#DDDAD2", borderRadius: `${10 * s}px ${14 * s}px 0 0` }} />
+  </div>
+);
+
+/** a toppled pylon, its lattice folded into the ground */
+export const Pylon: React.FC<{ x: number; base: number; s?: number; z?: number; rot?: number }> =
+  ({ x, base, s = 1, z = 26, rot = -7 }) => (
+  <svg width={400 * s} height={200 * s} viewBox="0 0 400 200"
+    style={{ position: "absolute", left: x - 200 * s, top: base - 180 * s, zIndex: z,
+      transform: `rotate(${rot}deg)` }}>
+    <line x1={10} y1={150} x2={380} y2={96} stroke="#5E5A54" strokeWidth={9} />
+    <line x1={10} y1={196} x2={380} y2={130} stroke="#5E5A54" strokeWidth={9} />
+    {Array.from({ length: 9 }, (_, i) => (
+      <g key={i}>
+        <line x1={16 + i * 42} y1={150 - i * 6} x2={16 + i * 42} y2={196 - i * 7}
+          stroke="#4E4A45" strokeWidth={6} />
+        <line x1={16 + i * 42} y1={150 - i * 6} x2={58 + i * 42} y2={189 - i * 7}
+          stroke="#4E4A45" strokeWidth={5} />
+      </g>
+    ))}
+    <line x1={352} y1={64} x2={352} y2={132} stroke="#5E5A54" strokeWidth={8} />
+    <line x1={318} y1={72} x2={392} y2={64} stroke="#5E5A54" strokeWidth={7} />
+  </svg>
+);
+
+/* =========================================================================
    THE BLAST DOOR — steel, stencilled, frosted, and pointedly UNLOCKED.
    ====================================================================== */
 export const BlastDoor: React.FC<{ x: number; base: number; w?: number; h?: number; z?: number;
@@ -843,3 +1084,130 @@ export const LightBank: React.FC<{ x: number; y: number; w?: number; on?: number
     )}
   </>);
 };
+
+/* =========================================================================
+   INTERIOR DRESSING.
+   Alex: *"some of the scenes don't have enough stuff so it needs to be improved
+   to be more interesting in those scenes."* SET-AND-LIGHT §6 names the band we
+   want: the density lives in the STATIC, QUIET set — back-wall props, pipework,
+   stores — while only ONE thing moves. A richly built room where one thing
+   moves is the target; a bare room with one mover is what v1 shipped.
+   ⛔ None of these ever animates. They are there to be taken away by the dark.
+   ====================================================================== */
+
+/** conduit and pipework running the back wall — instant "this is a facility" */
+export const Pipes: React.FC<{ y: number; z?: number; c?: string; n?: number }> =
+  ({ y, z = 7, c = "#5A6169", n = 3 }) => (<>
+    {Array.from({ length: n }, (_, i) => (
+      <React.Fragment key={"pp" + i}>
+        <div style={{ position: "absolute", left: -20, right: -20, top: y + i * 26,
+          height: 13 - i * 2, borderRadius: 7, background: dark(c, i * 0.12), zIndex: z }} />
+        <div style={{ position: "absolute", left: -20, right: -20, top: y + i * 26,
+          height: 4, borderRadius: 4, background: mix(c, 0.24), zIndex: z + 1, opacity: 0.6 }} />
+      </React.Fragment>
+    ))}
+    {[150, 470, 790].map((x, i) => (
+      <div key={"br" + i} style={{ position: "absolute", left: x, top: y - 8,
+        width: 20, height: 26 + n * 26, background: dark(c, 0.28), zIndex: z + 2 }} />
+    ))}
+  </>);
+
+/** a wall gauge panel: three dials and a row of labelled toggles */
+export const GaugePanel: React.FC<{ x: number; y: number; s?: number; z?: number; f?: number;
+  on?: number }> = ({ x, y, s = 1, z = 20, f = 0, on = 1 }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: 210 * s, height: 128 * s, zIndex: z,
+    background: "#3A4148", borderRadius: 8 * s, border: `${4 * s}px solid #262B31`,
+    boxShadow: SH }}>
+    {[0, 1, 2].map((i) => (
+      <div key={"gg" + i} style={{ position: "absolute", left: (14 + i * 62) * s, top: 12 * s,
+        width: 50 * s, height: 50 * s, borderRadius: "50%", background: "#D9D3C4",
+        border: `${3 * s}px solid #262B31` }}>
+        <div style={{ position: "absolute", left: "48%", top: "16%", width: 3 * s, height: 20 * s,
+          background: "#8A3F32", transformOrigin: "50% 100%",
+          transform: `rotate(${(-52 + i * 34 + Math.sin(f / (21 + i * 7)) * 12) * on}deg)` }} />
+      </div>
+    ))}
+    {Array.from({ length: 6 }, (_, i) => (
+      <div key={"tg" + i} style={{ position: "absolute", left: (14 + i * 32) * s, top: 78 * s,
+        width: 22 * s, height: 34 * s, borderRadius: 4 * s, background: "#2E343A" }}>
+        <div style={{ position: "absolute", left: 4 * s, top: (i % 2 ? 4 : 16) * s,
+          width: 14 * s, height: 14 * s, borderRadius: 3 * s,
+          background: i % 3 === 0 && on > 0.4 ? GREEN : "#5A6169" }} />
+      </div>
+    ))}
+  </div>
+);
+
+/** a steel shelf of stores: cans, crates, a jerry can, a coil of rope */
+export const Stores: React.FC<{ x: number; y: number; w?: number; s?: number; z?: number }> =
+  ({ x, y, w: ww = 300, s = 1, z = 22 }) => (<>
+    <div style={{ position: "absolute", left: x, top: y, width: ww, height: 11 * s,
+      background: "#6E747C", zIndex: z, boxShadow: SH }} />
+    <div style={{ position: "absolute", left: x, top: y, width: ww, height: 4 * s,
+      background: "#98A0A9", zIndex: z + 1, opacity: 0.6 }} />
+    {[0, 1].map((i) => (
+      <div key={"sb" + i} style={{ position: "absolute", left: x + (i ? ww - 14 * s : 4 * s),
+        top: y, width: 11 * s, height: 54 * s, background: "#474C53", zIndex: z }} />
+    ))}
+    {/* cans */}
+    {Array.from({ length: 5 }, (_, i) => (
+      <div key={"cn" + i} style={{ position: "absolute", left: x + (18 + i * 30) * s,
+        top: y - 40 * s, width: 24 * s, height: 40 * s, borderRadius: 3 * s,
+        background: ["#8A6C34", "#7A4A3E", "#8A6C34", "#5E6161", "#7A4A3E"][i], zIndex: z + 2 }}>
+        <div style={{ position: "absolute", left: 0, top: 12 * s, width: "100%", height: 10 * s,
+          background: "#D9D3C4", opacity: 0.72 }} />
+      </div>
+    ))}
+    {/* a crate */}
+    <div style={{ position: "absolute", left: x + 178 * s, top: y - 52 * s, width: 74 * s,
+      height: 52 * s, background: "#8A6242", zIndex: z + 2, borderRadius: 3 }}>
+      <div style={{ position: "absolute", left: 0, top: 20 * s, width: "100%", height: 7 * s,
+        background: "#6E4A30" }} />
+    </div>
+    {/* a jerry can */}
+    <div style={{ position: "absolute", left: x + 262 * s, top: y - 58 * s, width: 40 * s,
+      height: 58 * s, background: "#4C5340", zIndex: z + 2, borderRadius: 4 * s }}>
+      <div style={{ position: "absolute", left: 8 * s, top: -8 * s, width: 24 * s, height: 12 * s,
+        borderRadius: 4 * s, background: "#343A2B" }} />
+      <div style={{ position: "absolute", left: 6 * s, top: 18 * s, width: 28 * s, height: 5 * s,
+        background: "#666E55" }} />
+    </div>
+  </>);
+
+/** pinned notes and a clipboard on the wall — the "someone works here" detail */
+export const Notes: React.FC<{ x: number; y: number; s?: number; z?: number }> =
+  ({ x, y, s = 1, z = 8 }) => (<>
+    {Array.from({ length: 5 }, (_, i) => (
+      <div key={"nt" + i} style={{ position: "absolute", left: x + (i % 3) * 62 * s,
+        top: y + Math.floor(i / 3) * 66 * s, width: 48 * s, height: 56 * s,
+        background: ["#EDE7DA", "#DED5C4", "#EDE7DA", "#D9CFB8", "#EDE7DA"][i], zIndex: z,
+        transform: `rotate(${(rnd(i, 41) - 0.5) * 12}deg)`, boxShadow: SH }}>
+        {[0, 1, 2].map((k) => (
+          <div key={k} style={{ position: "absolute", left: 7 * s, top: (12 + k * 11) * s,
+            width: (34 - k * 8) * s, height: 3 * s, background: "#A79A84" }} />
+        ))}
+        <div style={{ position: "absolute", left: "45%", top: 3 * s, width: 7 * s, height: 7 * s,
+          borderRadius: "50%", background: "#C44A3A" }} />
+      </div>
+    ))}
+  </>);
+
+/** a wall-mounted fan, still, because the power it needs is the point */
+export const Fan: React.FC<{ x: number; y: number; s?: number; z?: number; f?: number;
+  on?: number }> = ({ x, y, s = 1, z = 20, f = 0, on = 0 }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: 92 * s, height: 92 * s, zIndex: z }}>
+    <div style={{ position: "absolute", inset: 0, borderRadius: 8 * s, background: "#3A4148",
+      border: `${4 * s}px solid #262B31` }} />
+    <div style={{ position: "absolute", inset: 12 * s, borderRadius: "50%", background: "#22262C" }} />
+    <div style={{ position: "absolute", inset: 12 * s,
+      transform: `rotate(${on > 0.1 ? (f * 11) % 360 : 24}deg)` }}>
+      {[0, 120, 240].map((a) => (
+        <div key={a} style={{ position: "absolute", left: "46%", top: "8%", width: 10 * s,
+          height: 30 * s, borderRadius: 5 * s, background: "#6E747C",
+          transformOrigin: "50% 140%", transform: `rotate(${a}deg)` }} />
+      ))}
+    </div>
+    <div style={{ position: "absolute", left: "44%", top: "44%", width: 12 * s, height: 12 * s,
+      borderRadius: "50%", background: "#98A0A9" }} />
+  </div>
+);
