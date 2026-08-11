@@ -383,9 +383,12 @@ export const Belt: React.FC<{ y: number; f: number; z?: number; s?: number;
           transform: `translate(-50%,-50%) rotate(${f * speed * 3}deg)` }} />
       </div>
     ))}
-    {/* the goods */}
+    {/* the goods.
+        ⛔ MARKED PROVIDERS ONLY. A belt by definition runs off both edges of the
+        frame, so anything text-struck on it gets sliced mid-word every single
+        pass — "EREBRA", "OQ". Glyphs survive a crop; words do not. */}
     {Array.from({ length: n }, (_, i) => {
-      const pr = PROVIDERS[(from + i) % PROVIDERS.length];
+      const pr = PROVIDERS[(from + i) % 6];
       const x = ((i * SP + f * speed * on) % (W + 300)) - 150;
       return <Token key={"bt" + i} x={x} y={y - 4 * s} s={116 * s} z={z + 6 + i}
         markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={0} />;

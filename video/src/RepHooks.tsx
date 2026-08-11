@@ -56,12 +56,39 @@ const M = 800000000;
    lamp+beam, counter face, counter top, foreground edge.
    ====================================================================== */
 const Shop: React.FC<{ p: Place; f: number; shelf?: number; lamp?: number;
-  till?: boolean; edge?: boolean; from?: number }> =
-  ({ p, f, shelf = 4, lamp = 250, till = true, edge = true, from = 0 }) => {
+  till?: boolean; edge?: boolean; from?: number; jolt?: number; belt?: boolean }> =
+  ({ p, f, shelf = 4, lamp = 250, till = true, edge = true, from = 0, jolt = 0,
+     belt = false }) => {
   const hz = p.horizon;
+  /* ⛔⛔ *"a lot of the scenes dont have enough going on ... its too boring."*
+     Round 2 counted ~20 elements and still read empty, because most of them
+     were 3px rules and the two biggest planes — the mid wall and the counter
+     top — were blank. Density is not the element COUNT, it is whether the big
+     empty areas have anything in them. So: crates under the shelf, a jar and a
+     stack and a clipboard ON the counter, a second lamp, wall hooks, and an
+     optional belt running behind. Every one of them is a token, a logo or a
+     working object, and every one of them SWINGS or ROLLS when the hook hits. */
+  const sw = Math.sin(jolt * Math.PI * 3) * (1 - jolt) * 9;
   return (<>
     <Room p={p} f={f} />
-    {/* the back shelf, carrying stock — this is also where four more logos live */}
+    {belt && <Belt y={hz - 156} f={f} z={7} s={0.62} speed={2.6} n={5} from={from + 2} />}
+    {/* wall hooks and a hanging sign — the mid wall is not blank any more */}
+    {[124, 214].map((x, i) => (
+      <div key={"hk" + i} style={{ position: "absolute", left: x, top: hz - 150, width: 9,
+        height: 34, background: "#8A8074", zIndex: 6 }} />
+    ))}
+    <div style={{ position: "absolute", left: W - 300, top: hz - 168,
+      width: 210, height: 62, borderRadius: 8, background: "#EFE9DA",
+      border: "5px solid #A2957C", boxSizing: "border-box", zIndex: 7, boxShadow: SH,
+      transform: `rotate(${sw * 0.5}deg)`, transformOrigin: "50% 0%",
+      display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <span style={{ fontFamily: MONO, fontWeight: 900, fontSize: 26,
+        letterSpacing: "0.16em", color: "#4A4238" }}>FREE</span>
+    </div>
+    {/* the shelf. ⛔ it SKIPS THE CENTRE — anything standing there gets sliced in
+        half by whatever the hook does through the middle of frame — and it only
+        carries providers that HAVE a mark, because the other four are text in a
+        circle and a clipped word is the worst thing to put up there. */}
     <div style={{ position: "absolute", left: 46, top: hz - 214, width: W - 92, height: 15,
       background: WOODL, zIndex: 6, boxShadow: SH }} />
     <div style={{ position: "absolute", left: 46, top: hz - 200, width: W - 92, height: 8,
@@ -70,26 +97,57 @@ const Shop: React.FC<{ p: Place; f: number; shelf?: number; lamp?: number;
       <div key={"br" + i} style={{ position: "absolute", left: x, top: hz - 200, width: 24,
         height: 74, background: WOODD, zIndex: 5 }} />
     ))}
-    {/* ⛔ TWO FIXES HERE, BOTH FROM THE SAME NOTE. (1) The shelf skipped the
-        CENTRE, because anything standing there gets cropped in half by whatever
-        the hook does through the middle of frame — a logo sliced down the spine
-        reads as broken, not as depth. (2) Only MARK providers go on the shelf:
-        the four without one are name-struck tokens, i.e. TEXT in a circle, and
-        a clipped word ("EREBRA", "OQ") is the worst thing that can be up there. */}
     {[[128, 0], [306, 1], [706, 2], [884, 3]].slice(0, shelf).map(([x, i], k) => {
       const pr = P[(from + (i as number)) % 6];
-      return <Token key={"sh" + k} x={x as number} y={hz - 258} s={96} z={8}
-        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={(k % 2 ? 5 : -5)} />;
+      return <Token key={"sh" + k} x={x as number} y={hz - 258 + sw * 0.4} s={96} z={8}
+        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={(k % 2 ? 5 : -5) + sw * 0.6} />;
     })}
-    {/* the hung lamp and one solid beam */}
-    <div style={{ position: "absolute", left: lamp - 3, top: 0, width: 6, height: 78,
-      background: "#3E444A", zIndex: 20 }} />
-    <div style={{ position: "absolute", left: lamp - 52, top: 74, width: 104, height: 44,
-      borderRadius: "6px 6px 52px 52px", background: "#4E555C", zIndex: 21, boxShadow: SH_D }} />
-    <div style={{ position: "absolute", left: lamp - 44, top: 108, width: 88, height: 14,
-      borderRadius: "0 0 44px 44px", background: "#F2DFAE", zIndex: 22 }} />
+    {/* crates stacked under the shelf */}
+    {[[86, 96], [86, 62], [946, 82]].map(([x, wd], i) => (
+      <div key={"cr" + i} style={{ position: "absolute", left: x as number,
+        top: hz - 78 - (i === 1 ? 56 : 0), width: wd as number, height: 62,
+        borderRadius: 5, background: i === 2 ? "#9A7A52" : WOOD,
+        border: `4px solid ${WOODD}`, boxSizing: "border-box", zIndex: 9,
+        boxShadow: SH }}>
+        <div style={{ position: "absolute", left: 0, right: 0, top: "45%", height: 5,
+          background: WOODD, opacity: 0.7 }} />
+      </div>
+    ))}
+    {/* the hung lamps — they SWING when the room takes a hit */}
+    {[lamp, lamp + 430].map((lx, i) => (
+      <div key={"lm" + i} style={{ position: "absolute", left: lx, top: 0, zIndex: 20,
+        transform: `rotate(${sw * (i ? -0.8 : 1)}deg)`, transformOrigin: "50% 0%" }}>
+        <div style={{ position: "absolute", left: -3, top: 0, width: 6,
+          height: i ? 58 : 78, background: "#3E444A" }} />
+        <div style={{ position: "absolute", left: i ? -38 : -52, top: i ? 54 : 74,
+          width: i ? 76 : 104, height: i ? 34 : 44,
+          borderRadius: i ? "5px 5px 38px 38px" : "6px 6px 52px 52px",
+          background: "#4E555C", boxShadow: SH_D }} />
+        <div style={{ position: "absolute", left: i ? -32 : -44, top: i ? 80 : 108,
+          width: i ? 64 : 88, height: i ? 11 : 14,
+          borderRadius: i ? "0 0 32px 32px" : "0 0 44px 44px", background: "#F2DFAE" }} />
+      </div>
+    ))}
     <Beam x={lamp} y={120} top={90} bot={430} len={430} c="#F2E2BC" o={0.20} z={18} f={f} />
-    {/* the till on the counter */}
+    {/* ON THE COUNTER: a jar of tokens, a working stack, a clipboard, the till */}
+    <div style={{ position: "absolute", left: 108, top: hz - 96, width: 92, height: 104,
+      borderRadius: "10px 10px 16px 16px", background: "#DCE4E2", opacity: 0.92,
+      border: "4px solid #B4BEBC", boxSizing: "border-box", zIndex: 30, boxShadow: SH,
+      overflow: "hidden" }}>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <div key={"jt" + i} style={{ position: "absolute", left: 6 + (i % 3) * 26,
+          bottom: 4 + Math.floor(i / 3) * 24, width: 28, height: 28, borderRadius: "50%",
+          background: TOK, border: `3px solid ${TOKD}`, boxSizing: "border-box" }} />
+      ))}
+    </div>
+    <div style={{ position: "absolute", left: 232, top: hz - 40, width: 74, height: 46,
+      borderRadius: 4, background: "#EFE9DA", border: "4px solid #A2957C",
+      boxSizing: "border-box", zIndex: 30, transform: "rotate(-5deg)", boxShadow: SH }} />
+    {[0, 1, 2, 3].map((i) => (
+      <div key={"cs" + i} style={{ position: "absolute", left: 336, top: hz - 18 - i * 13,
+        width: 62, height: 62, borderRadius: "50%", background: TOK,
+        border: `4px solid ${TOKD}`, boxSizing: "border-box", zIndex: 30 + i }} />
+    ))}
     {till && (<>
       <div style={{ position: "absolute", left: W - 268, top: hz - 74, width: 196,
         height: 78, borderRadius: 8, background: "#6E6154", zIndex: 30, boxShadow: SH }} />
@@ -100,7 +158,6 @@ const Shop: React.FC<{ p: Place; f: number; shelf?: number; lamp?: number;
         color: "#E8DCBA" }}>FREE</div>
     </>)}
     <Motes x={lamp + 60} y={150} w={420} h={330} n={11} f={f} z={26} />
-    {/* the foreground counter edge — the frame is INSIDE the room, not aimed at it */}
     {edge && (
       <div style={{ position: "absolute", left: -40, top: H - 74, width: W + 80, height: 120,
         background: WOODD, zIndex: 118, boxShadow: "0 -14px 26px rgba(26,24,19,0.34)" }}>
@@ -108,6 +165,24 @@ const Shop: React.FC<{ p: Place; f: number; shelf?: number; lamp?: number;
           background: WOODL }} />
       </div>
     )}
+  </>);
+};
+
+/** tokens knocked loose and rolling across the counter — the SECONDARY motion
+    an impact should always have. A break that only moves the thing it broke
+    reads as one animation; a break that scatters the room reads as force. */
+const Rollers: React.FC<{ y: number; t: number; f: number; n?: number; z?: number;
+  from?: number }> = ({ y, t, f, n = 6, z = 110, from = 0 }) => {
+  if (t <= 0.01) return null;
+  return (<>
+    {Array.from({ length: n }, (_, i) => {
+      const dir = i % 2 ? 1 : -1;
+      const sp = 300 + rnd(i + from, 7) * 520;
+      const x = W / 2 + dir * t * sp + (rnd(i + from, 11) - 0.5) * 140;
+      const hop = Math.abs(Math.sin(t * 7 + i)) * (1 - t) * 34;
+      return <Token key={"ro" + i} x={x} y={y - hop} s={46 + rnd(i + from, 13) * 22}
+        z={z + i} rot={dir * t * 900} plain />;
+    })}
   </>);
 };
 
@@ -133,7 +208,7 @@ export const HookPaywall: React.FC = () => {
       <Scene p={p} slug="" push={[0, 42, 1.05]} vig={0.3}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px)` }}>
-          <Shop p={p} f={f} shelf={4} lamp={824} from={4} till={false} />
+          <Shop p={p} f={f} shelf={4} lamp={352} from={0} till belt jolt={smash} />
           {/* what is behind the gate, legible from frame 0 — that is the rank */}
           <div style={{ position: "absolute", left: 0, right: 0, top: 176, textAlign: "center",
             zIndex: 24, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 92,
@@ -176,6 +251,7 @@ export const HookPaywall: React.FC = () => {
             <RepoCard x={W / 2} y={318} s={0.74} z={100} />
           </div>
           <Burst x={W / 2} y={500} t={smash} n={18} s={1.05} z={112} spread={680} />
+          <Rollers y={676} t={smash} f={f} n={7} z={114} from={1} />
           <Claude x={126} base={706} s={0.8} z={84} f={f} gaze={0.85} shock={smash * 0.9} />
           <Flash lf={lf} at={11} n={4} o={0.48} />
         </div>
@@ -245,7 +321,7 @@ export const HookFuse: React.FC = () => {
       <Scene p={p} slug="" push={[0, 42, 1.05]} vig={0.32}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px)` }}>
-          <Shop p={p} f={f} shelf={4} lamp={806} from={4} till={false} />
+          <Shop p={p} f={f} shelf={4} lamp={352} from={0} till belt jolt={rise} />
           {/* EIGHT STUBS, each one provider's free tier, each useless */}
           {Array.from({ length: 8 }, (_, i) => {
             const x0 = 128 + i * 108;
@@ -263,18 +339,28 @@ export const HookFuse: React.FC = () => {
               </React.Fragment>
             );
           })}
-          {/* the tower, leaving the top of frame on the slam */}
-          {rise > 0.02 && (<>
-            <div style={{ position: "absolute", left: W / 2 - 92,
-              top: BASE - 40 - rise * 780, width: 184, height: 40 + rise * 780,
-              borderRadius: 10, background: TOK, border: `7px solid ${TOKD}`,
-              boxSizing: "border-box", zIndex: 88, boxShadow: SH_D }} />
-            <div style={{ position: "absolute", left: W / 2 - 92,
-              top: BASE - 40 - rise * 780, width: 46, height: 40 + rise * 780,
-              background: TOKL, opacity: 0.45, zIndex: 89 }} />
-          </>)}
+          {/* ⛔⛔ THE TOWER STAYS IN FRAME. It used to punch out through the top,
+              and a bar that leaves the frame cannot be COMPARED to anything —
+              which is the one job it has. It now tops out at y=196 with a small
+              overshoot and settle, so you can see both ends of it at once, and
+              it wears a marked token as a cap. */}
+          {rise > 0.02 && (() => {
+            const over = 1 + Math.sin(Math.min(1, rise) * Math.PI) * 0.06 * (1 - rise);
+            const hgt = (BASE - 196) * rise * over;
+            return (<>
+              <div style={{ position: "absolute", left: W / 2 - 92, top: BASE - hgt,
+                width: 184, height: hgt, borderRadius: 10, background: TOK,
+                border: `7px solid ${TOKD}`, boxSizing: "border-box", zIndex: 88,
+                boxShadow: SH_D }} />
+              <div style={{ position: "absolute", left: W / 2 - 92, top: BASE - hgt,
+                width: 46, height: hgt, background: TOKL, opacity: 0.45, zIndex: 89 }} />
+              <Token x={W / 2} y={BASE - hgt - 56} s={126} z={94} markKey={P[0].k}
+                name={P[0].n} hasMark />
+            </>);
+          })()}
           <Burst x={W / 2} y={BASE - 60} t={Math.min(1, rise * 1.6)} n={14} s={1.0}
             z={104} spread={560} />
+          <Rollers y={BASE + 34} t={Math.min(1, rise * 1.2)} f={f} n={7} z={106} from={3} />
           {/* ⛔⛔ NO HEADLINE IN THIS SHOT AT ALL. It was a big number plus a
               two-line caption that wrapped badly, and the tower printed straight
               through both. The SHOT IS THE SENTENCE: eight useless stubs become
@@ -299,11 +385,12 @@ export const HookFuse: React.FC = () => {
           boxSizing: "border-box", zIndex: 60, boxShadow: SH }} />
         <Token x={280} y={488} s={124} z={64} markKey={P[6].k} name={P[6].n}
           hasMark={P[6].mark} />
-        <div style={{ position: "absolute", left: 596, top: -40, width: 248, height: 700,
+        <div style={{ position: "absolute", left: 596, top: 172, width: 248, height: 484,
           borderRadius: 10, background: TOK, border: `7px solid ${TOKD}`,
           boxSizing: "border-box", zIndex: 60, boxShadow: SH_D }} />
-        <div style={{ position: "absolute", left: 596, top: -40, width: 62, height: 700,
+        <div style={{ position: "absolute", left: 596, top: 172, width: 62, height: 484,
           background: TOKL, opacity: 0.45, zIndex: 61 }} />
+        <Token x={720} y={142} s={128} z={64} markKey={P[1].k} name={P[1].n} hasMark />
         <Cam z={96} o={set} y={(1 - set) * 18}>
           <Plate x={196} y={664} t="800,000" sub="ONE FREE TIER" w={216} s={1.06} z={96} />
         </Cam>
@@ -315,10 +402,11 @@ export const HookFuse: React.FC = () => {
   const set = E(lf, 0, 12, 0, 1, OUT);
   return (
     <Scene p={p} slug="29 FREE TIERS  ·  ONE POOL" push={[78, 110, 1.05]} vig={0.34}>
-      <Shop p={p} f={f} shelf={4} lamp={210} from={0} />
-      <div style={{ position: "absolute", left: W / 2 - 92, top: -40, width: 184,
-        height: 620, borderRadius: 10, background: TOK, border: `6px solid ${TOKD}`,
+      <Shop p={p} f={f} shelf={4} lamp={352} from={0} till belt />
+      <div style={{ position: "absolute", left: W / 2 - 92, top: 196, width: 184,
+        height: 460, borderRadius: 10, background: TOK, border: `6px solid ${TOKD}`,
         boxSizing: "border-box", zIndex: 40, boxShadow: SH_D }} />
+      <Token x={W / 2} y={166} s={132} z={44} markKey={P[0].k} name={P[0].n} hasMark />
       <Token x={W / 2 - 208} y={266} s={180} z={92} markKey={P[0].k} name={P[0].n}
         hasMark rot={-8} />
       <Token x={W / 2 + 214} y={214} s={180} z={92} markKey={P[1].k} name={P[1].n}
@@ -355,7 +443,7 @@ export const HookJackpot: React.FC = () => {
       <Scene p={p} slug="" push={[0, 42, 1.05]} vig={0.3}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px)` }}>
-          <Shop p={p} f={f} shelf={4} lamp={140} from={4} till={false} />
+          <Shop p={p} f={f} shelf={4} lamp={140} from={0} till belt jolt={dump} />
           {/* the cabinet — pale enamel, not a grey slab */}
           <div style={{ position: "absolute", left: 178, top: 132, width: 690, height: 500,
             borderRadius: 18, background: "#E4DCC8", border: "8px solid #A2957C",
@@ -396,6 +484,7 @@ export const HookJackpot: React.FC = () => {
             spread={560} />
           <Pile x={W / 2} base={716} n={Math.round(dump * 130)} s={1.05} z={80} w={700}
             seed={4} />
+          <Rollers y={690} t={dump} f={f} n={8} z={112} from={5} />
           <Claude x={106} base={718} s={0.76} z={90} f={f} gaze={0.85} shock={dump * 0.9} />
           <Flash lf={lf} at={11} n={4} o={0.46} />
         </div>
@@ -461,7 +550,7 @@ export const HookFirehose: React.FC = () => {
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px) scale(${1 + blast * 0.09})`,
           transformOrigin: "34% 44%" }}>
-          <Shop p={p} f={f} shelf={4} lamp={846} from={4} till={false} />
+          <Shop p={p} f={f} shelf={4} lamp={620} from={0} till belt jolt={blast} />
           {/* the pipe, and the ONE provider it carries */}
           <div style={{ position: "absolute", left: 236, top: -40, width: 112, height: 340,
             background: BRASS, zIndex: 30, boxShadow: SH_D }} />
@@ -492,6 +581,7 @@ export const HookFirehose: React.FC = () => {
           </div>
           <Pile x={330} base={718} n={Math.round(blast * 100)} s={1.0} z={92} w={540}
             seed={9} />
+          <Rollers y={694} t={blast} f={f} n={8} z={114} from={7} />
           <Flash lf={lf} at={11} n={4} o={0.48} />
         </div>
       </Scene>
