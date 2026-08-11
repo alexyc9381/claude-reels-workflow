@@ -1,0 +1,32 @@
+Comment "AGENCY" and I'll send you the repo.
+
+👇 READ BELOW
+
+270 AI agents sounds like a flex until you try to use it. The number that actually matters is 17, because that is how many divisions they are sorted into, and picking two of them is the difference between a roster you use every day and 270 files you never open.
+
+msitarzewski/agency-agents. 139,604 stars, 22,798 forks, MIT licensed.
+
+★ Engineering 58 agents
+★ Specialized 56
+★ Marketing 36
+★ Game Development 21
+★ GIS 13, Security 12, Design 10, Sales 10, Testing 9
+★ Paid Media 7, Project Management 7, Support 6, Spatial Computing 6, Academic 6, Product 5, Finance 5, Healthcare 3
+
+Read those counts before you install anything. They tell you where the repo is deep and where it is thin. Engineering and Specialized are more than half the roster on their own. Healthcare is three files. If you are shipping software, two divisions cover you. If you are running marketing, Marketing plus Paid Media is 43 agents and you will not get through them in a month.
+
+Each one is a single file with a written personality, the tools it may use, a workflow, and its own definition of done. Frontend Developer sits in Engineering. Ad Creative Strategist sits in Paid Media. Reddit Community Builder sits in Marketing, and its brief tells it that it is not marketing on Reddit, it is becoming a valued community member who happens to represent a brand.
+
+The desktop app is a second free repo. Native for macOS, Windows and Linux, it browses the roster and installs into Claude Code, Cursor, Codex, Gemini CLI, OpenCode, Qwen and Osaurus, then keeps them updated. No clone, no terminal.
+
+The part nobody mentions: the installer takes a division filter, and almost nobody uses it. Run the list command first, look at the counts above, install two divisions, and give them a week before you add a third. An agent you have never read is not a team member, it is a file.
+
+MIT licensed, so you can fork it, rewrite any agent in your own voice, ship it in your own product and sell the work.
+
+Comment "AGENCY" and I'll send you the repo plus the setup guide.
+
+.
+.
+.
+
+#opensource #aiagents #github #claudecode #cursor #aitools #agenticai #devtools #freetools #aiautomation #aiworkflow #marketingagency #sideproject #generativeai #productivity #startuptools #nocode

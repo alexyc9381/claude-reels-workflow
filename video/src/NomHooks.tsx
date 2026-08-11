@@ -336,6 +336,18 @@ export const S0HookCross: React.FC = () => {
      the last dozen reels — is a side-on diorama. Looking straight down at a
      plate of steel coming out from under snow is the pattern interrupt: it is
      not a new subject, it is a camera nobody expects. */
+  const Drift: React.FC<{ n?: number; z?: number; sp?: number }> = ({ n = 18, z = 80, sp = 1 }) => (<>
+    {Array.from({ length: n }, (_, i) => {
+      const x = ((rnd(i, 71) * 1300 - f * (9 + rnd(i, 72) * 14) * sp) % 1300 + 1300) % 1300 - 150;
+      const y = rnd(i, 73) * 792 + Math.sin(f / 15 + i) * 16;
+      const w = 110 + rnd(i, 74) * 240;
+      return <div key={"df" + i} style={{ position: "absolute", left: x, top: y, width: w,
+        height: 6 + rnd(i, 75) * 9, borderRadius: 30, background: "#FAF8F3",
+        opacity: 0.34 + rnd(i, 76) * 0.36, zIndex: z,
+        transform: `rotate(${(rnd(i, 77) - 0.5) * 10}deg)` }} />;
+    })}
+  </>);
+
   const Ground: React.FC<{ k?: number }> = ({ k = 1 }) => (<>
     <div style={{ position: "absolute", inset: 0, zIndex: 1,
       background: "linear-gradient(168deg, #EFECE4 0%, #D2CDC2 62%, #BBB6AC 100%)" }} />
@@ -362,6 +374,7 @@ export const S0HookCross: React.FC = () => {
         <Ground />
         <Hatch x={520} y={452} s={0.94} z={30} f={f} clear={clear} open={0}
           spin={-lf * 0.6} />
+        <Drift n={20} z={74} sp={1.3} />
         <Ash f={f} n={30} z={76} speed={1.6} />
         <Snow f={f} n={40} z={78} speed={2.0} c="#E6E3DB" />
         <Snow f={f} n={20} z={94} near speed={2.6} c="#F6F4EE" />
@@ -380,6 +393,7 @@ export const S0HookCross: React.FC = () => {
           spin={-18 - lf * 0.4} />
         <Mitt x={112} y={300} s={1.5} z={70} rot={-18 + clear * 26} />
         <MarkPlate x={70} y={92} t="AN OFFLINE AI" s={0.92} z={72} />
+        <Drift n={20} z={74} sp={1.3} />
         <Ash f={f} n={26} z={76} speed={1.4} />
         <Snow f={f} n={34} z={78} speed={1.7} c="#E6E3DB" />
         <Snow f={f} n={16} z={94} near speed={2.2} c="#F6F4EE" />
@@ -397,6 +411,7 @@ export const S0HookCross: React.FC = () => {
         <Hatch x={520} y={452} s={0.94} z={30} f={f} clear={1} open={crack}
           spin={-18 - turn * 210} />
         <Mitt x={128} y={356} s={1.6} z={70} rot={-14 + turn * 96} />
+        <Drift n={20} z={74} sp={1.3} />
         <Ash f={f} n={22} z={76} speed={1.3} />
         <Snow f={f} n={30} z={78} speed={1.6} c="#E6E3DB" />
       </Scene>
@@ -413,7 +428,8 @@ export const S0HookCross: React.FC = () => {
         spin={-228} />
       <MarkCast x={520} y={452} s={126} z={64} o={0.42 + open * 0.44} spin={1.6} f={f}
         pulse={1} />
-      <Ash f={f} n={18} z={76} speed={1.2} />
+      <Drift n={20} z={74} sp={1.3} />
+        <Ash f={f} n={18} z={76} speed={1.2} />
       <Snow f={f} n={24} z={78} speed={1.4} c="#E6E3DB" />
     </Scene>
   );
