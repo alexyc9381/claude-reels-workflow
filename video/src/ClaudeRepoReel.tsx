@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
 import { S0Hook, S1, S2, S3, S4, S5, S6Cta } from "./RepScenes";
+import { HookPaywall, HookFuse } from "./RepHooks";
 import { CamCtx, PalCtx } from "./RepWorld";
 import { camFor } from "./AgyWorld";
 import { SfxTrack, LEVELS, layer, repeat, db, Cue } from "./SoundKit";
@@ -192,11 +193,16 @@ type Trans = "flash" | "bars" | "punch" | "slide";
 export type Variant = { hook: React.FC; hookHead: [string, string]; bed: string;
   seed: number; pal: number; trans: Trans; capTop: number; endHold: number };
 
+/* ⛔ THE TWO DELIVERY CUTS CARRY THE TWO PICKED HOOKS. `pal` stays 0 on both:
+   the palette rotation is a variance lever for the BODY, and running it under a
+   hook that was designed and measured at pal 0 would change the thing being
+   judged. The variance between these two cuts is the hook itself, the bed and
+   the transition — which is more divergence than a recolour ever bought. */
 export const VARIANTS: Variant[] = [
-  { hook: S0Hook, hookHead: ["800M FREE AI TOKENS", "ONE REPO, 18,265 STARS"],
+  { hook: HookPaywall, hookHead: ["800M FREE AI TOKENS", "ONE REPO, 18,265 STARS"],
     bed: "repo_bed.wav",   seed: 0,  pal: 0, trans: "flash", capTop: 1268, endHold: 12 },
-  { hook: S0Hook, hookHead: ["ONE REPO, 29 FREE TIERS", "18,265 STARS, MIT"],
-    bed: "repo_bed_b.wav", seed: 3,  pal: 1, trans: "bars",  capTop: 1214, endHold: 10 },
+  { hook: HookFuse, hookHead: ["29 FREE TIERS, POOLED", "18,265 STARS, MIT"],
+    bed: "repo_bed_b.wav", seed: 0,  pal: 0, trans: "bars",  capTop: 1214, endHold: 10 },
   { hook: S0Hook, hookHead: ["THE FREE TIER NOBODY STACKS", "800M TOKENS A MONTH"],
     bed: "repo_bed_c.wav", seed: 7,  pal: 2, trans: "punch", capTop: 1300, endHold: 8 },
   { hook: S0Hook, hookHead: ["STOP PAYING PER PROVIDER", "ONE ENDPOINT, 29 OF THEM"],

@@ -208,14 +208,36 @@ export const HookPaywall: React.FC = () => {
       <Scene p={p} slug="" push={[0, 42, 1.05]} vig={0.3}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px)` }}>
-          <Shop p={p} f={f} shelf={4} lamp={352} from={0} till belt jolt={smash} />
-          {/* what is behind the gate, legible from frame 0 — that is the rank */}
-          <div style={{ position: "absolute", left: 0, right: 0, top: 176, textAlign: "center",
-            zIndex: 24, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 92,
-            lineHeight: 1, letterSpacing: "-0.03em", color: "#B8541F" }}>800,000,000</div>
-          {/* ⛔ LESS TYPE, MORE SHOWING ([[feedback_graphical_over_textual]]).
-              The wrapped "FREE AI TOKENS / MONTH" is gone: the tokens bursting
-              through the gate say what they are, and one number is enough. */}
+          {/* ⛔⛔ NO SHELF IN THIS SHOT, AND THE NUMBER IS AN OBJECT. Floating
+              type at 92px landed straight on top of the shelf stock and the
+              belt behind it — three layers of unrelated things sharing one
+              band, which is what "the text is overlapping, it doesnt look good"
+              is. Two fixes, and the second is the real one:
+                1. the shelf comes out, so the upper band belongs to one thing;
+                2. the number is now a HANGING BOARD — an object with its own
+                   ground, hung on the wall behind the gate. Type that owns a
+                   surface can never collide with what is behind it, and a sign
+                   in a shop is something you can point at rather than a caption
+                   floated over the picture. */}
+          <Shop p={p} f={f} shelf={0} lamp={352} from={0} till belt jolt={smash} />
+          <div style={{ position: "absolute", left: W / 2 - 322, top: 150, width: 644,
+            zIndex: 24, transform: `rotate(${Math.sin(smash * Math.PI * 3) * (1 - smash) * 2.2}deg)`,
+            transformOrigin: "50% 0%" }}>
+            {[-238, 238].map((dx, i) => (
+              <div key={"sc" + i} style={{ position: "absolute", left: 322 + dx - 3, top: -44,
+                width: 6, height: 46, background: "#3E444A" }} />
+            ))}
+            <div style={{ width: 644, borderRadius: 14, background: "#F7F3E7",
+              border: "7px solid #A2957C", boxSizing: "border-box", boxShadow: SH_D,
+              padding: "14px 0 18px" }}>
+              <div style={{ textAlign: "center", fontFamily: fraunces.fontFamily,
+                fontWeight: 900, fontSize: 88, lineHeight: 1, letterSpacing: "-0.03em",
+                color: "#B8541F" }}>800,000,000</div>
+              <div style={{ textAlign: "center", fontFamily: inter.fontFamily,
+                fontWeight: 900, fontSize: 24, letterSpacing: "0.16em", color: "#6B6355",
+                marginTop: 4 }}>FREE AI TOKENS</div>
+            </div>
+          </div>
           {/* THE GATE — iron bars across the counter, price cards hung on them */}
           {smash < 0.02 && Array.from({ length: 9 }, (_, i) => (
             <div key={"bar" + i} style={{ position: "absolute", left: 76 + i * 108, top: 330,
