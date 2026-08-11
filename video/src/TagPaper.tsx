@@ -3,7 +3,7 @@ import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, Img } from 
 import { Bg, Panel, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
 import { inter, fraunces } from "./fonts";
 import { SfxTrack, LEVELS, layer, Cue } from "./SoundKit";
-import { PAIRS, CUM, TOTAL, MARK_CAP, E, OUT, IO, BACK, LIN, mix, dark, Claudie } from "./TagWorld";
+import { PAIRS, CUM, TOTAL, MARK_CAP, E, OUT, IO, BACK, IN_Q, LIN, mix, dark, Claudie } from "./TagWorld";
 import words from "./data/words_free.json";
 
 /* ============================================================================
@@ -281,10 +281,320 @@ const Square: React.FC<{ cx: number; free?: boolean; P: typeof PAIRS[0]; punch: 
   );
 };
 
-const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: boolean }> =
-  ({ i, paidAt, freeAt, hook }) => {
+/* ---- H · THE STAGE ------------------------------------------------------
+   A variety-show stage: swagged curtain, proscenium arch, footlights, boards.
+   Warm and bright, and the opposite temperature to the dojo on purpose.
+   ------------------------------------------------------------------------ */
+const STAGE_STOCK = [
+  { bg: "#B8452F", ink: "#2A1108", alt: "#8E2E1E" }, { bg: "#C97C1E", ink: "#2A1B08", alt: "#9C5C10" },
+  { bg: "#8E3350", ink: "#2A0E18", alt: "#6E2038" }, { bg: "#B85E22", ink: "#2A1508", alt: "#8E4212" },
+  { bg: "#A03A62", ink: "#2A0E1A", alt: "#7C2648" }, { bg: "#C06A28", ink: "#2A1808", alt: "#964C16" },
+  { bg: "#96305A", ink: "#2A0C18", alt: "#741E40" }, { bg: "#BE5230", ink: "#2A1208", alt: "#933A1E" },
+  { bg: "#AA4A28", ink: "#2A1208", alt: "#843418" }, { bg: "#8E3A66", ink: "#2A0E1C", alt: "#6E264A" },
+];
+const StageYard: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S, f, i }) => (<>
+  <div style={{ position: "absolute", inset: 0,
+    background: `linear-gradient(178deg, ${mix(S.bg, 0.24)} 0%, ${S.bg} 60%, ${dark(S.bg, 0.82)} 100%)` }} />
+  <Halftone c={S.alt} n={18} o={0.14} />
+  {/* the back curtain, swagged and gathered */}
+  {Array.from({ length: 14 }, (_, k) => (
+    <div key={"cu" + k} style={{ position: "absolute", left: k * (PW / 14) - 4, top: 0,
+      width: PW / 14 + 8, bottom: GROUND - 30,
+      background: `linear-gradient(90deg, ${dark(S.bg, 0.60)} 0%, ${mix(S.bg, 0.16)} 46%, ${dark(S.bg, 0.68)} 100%)` }} />
+  ))}
+  {Array.from({ length: 7 }, (_, k) => (
+    <div key={"sw" + k} style={{ position: "absolute", left: k * (PW / 7) - 20, top: -66,
+      width: PW / 7 + 40, height: 150, borderRadius: "0 0 50% 50%",
+      background: dark(S.bg, 0.52) }} />
+  ))}
+  {/* the proscenium arch and its bulbs */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 40,
+    background: "#7E5A28" }} />
+  {[0, 1].map((k) => (
+    <div key={"pl" + k} style={{ position: "absolute", left: k ? PW - 44 : 0, top: 0, width: 44,
+      bottom: 0, background: `linear-gradient(90deg,#7E5A28,#4E3714)` }} />
+  ))}
+  {Array.from({ length: 11 }, (_, k) => (
+    <div key={"bl" + k} style={{ position: "absolute", left: 30 + k * 96, top: 12, width: 20,
+      height: 20, borderRadius: 10, background: "#F4DC9A",
+      opacity: 0.55 + 0.45 * Math.abs(Math.sin(f / 9 + k * 0.7)) }} />
+  ))}
+  {/* the boards, and the footlights along the front */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: GROUND - 30, bottom: 0,
+    background: `linear-gradient(180deg, ${mix(S.bg, 0.34)} 0%, ${dark(S.bg, 0.74)} 100%)` }} />
+  {Array.from({ length: 13 }, (_, k) => (
+    <div key={"bd" + k} style={{ position: "absolute", left: k * 82, top: GROUND - 30, bottom: 0,
+      width: 3, background: dark(S.bg, 0.58), opacity: 0.6 }} />
+  ))}
+  {Array.from({ length: 9 }, (_, k) => (
+    <div key={"fl" + k} style={{ position: "absolute", left: 26 + k * 122, top: PH - 74,
+      width: 74, height: 34, borderRadius: "36px 36px 6px 6px", background: "#6E5A2E" }} />
+  ))}
+  {Array.from({ length: 9 }, (_, k) => (
+    <div key={"fg" + k} style={{ position: "absolute", left: 34 + k * 122, top: PH - 88,
+      width: 58, height: 18, borderRadius: 9, background: "#F4DC9A", opacity: 0.85 }} />
+  ))}
+</>);
+
+/* ---- I · THE PRESS FLOOR ------------------------------------------------
+   A factory: riveted plate, gantries, hazard stripes, pipework, a warning lamp.
+   Cool and hard, and the only world of the three with no soft edge in it.
+   ------------------------------------------------------------------------ */
+const PRESS_STOCK = [
+  { bg: "#41535E", ink: "#101A20", alt: "#2C3C46" }, { bg: "#4E5A50", ink: "#121A14", alt: "#36423A" },
+  { bg: "#3E4C64", ink: "#0E1420", alt: "#2A3648" }, { bg: "#56504A", ink: "#1A1612", alt: "#3C3833" },
+  { bg: "#3A5A5E", ink: "#0E1C1E", alt: "#284244" }, { bg: "#4A4E62", ink: "#121424", alt: "#343848" },
+  { bg: "#485A4E", ink: "#101A12", alt: "#324236" }, { bg: "#3E5068", ink: "#0E1622", alt: "#2A384C" },
+  { bg: "#525648", ink: "#181A12", alt: "#3A3E32" }, { bg: "#40525C", ink: "#101A1E", alt: "#2C3C44" },
+];
+const PressFloor: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S, f, i }) => (<>
+  <div style={{ position: "absolute", inset: 0,
+    background: `linear-gradient(178deg, ${dark(S.bg, 0.78)} 0%, ${S.bg} 66%, ${mix(S.bg, 0.10)} 100%)` }} />
+  <Halftone c={S.alt} n={16} o={0.14} />
+  {/* riveted wall plate */}
+  {Array.from({ length: 3 }, (_, r) => Array.from({ length: 4 }, (_, c) => (
+    <div key={"pl" + r + c} style={{ position: "absolute", left: c * 258 + 6, top: 40 + r * 168,
+      width: 246, height: 156, borderRadius: 4,
+      background: (r + c) % 2 ? mix(S.bg, 0.06) : dark(S.bg, 0.88),
+      border: `3px solid ${dark(S.bg, 0.70)}` }} />
+  )))}
+  {Array.from({ length: 20 }, (_, k) => (
+    <div key={"rv" + k} style={{ position: "absolute", left: 18 + (k % 5) * 258,
+      top: 50 + Math.floor(k / 5) * 168, width: 10, height: 10, borderRadius: 5,
+      background: mix(S.bg, 0.30), opacity: 0.8 }} />
+  ))}
+  {/* pipework across the top, and a warning lamp that pulses */}
+  {[70, 116].map((y, k) => (
+    <div key={"pi" + k} style={{ position: "absolute", left: -20, right: -20, top: y, height: 18,
+      background: `linear-gradient(180deg, ${mix(S.bg, 0.22)}, ${dark(S.bg, 0.68)})` }} />
+  ))}
+  {[180, 520, 860].map((x, k) => (
+    <div key={"fl" + k} style={{ position: "absolute", left: x - 12, top: 62, width: 24, height: 70,
+      background: dark(S.bg, 0.60) }} />
+  ))}
+  <div style={{ position: "absolute", left: PW - 116, top: 150, width: 52, height: 52,
+    borderRadius: 26, background: "#C0392B",
+    opacity: 0.45 + 0.55 * Math.abs(Math.sin(f / 7)) }} />
+  <div style={{ position: "absolute", left: PW - 124, top: 196, width: 68, height: 14,
+    borderRadius: 5, background: dark(S.bg, 0.62) }} />
+  {/* the press bed and the hazard kick rail */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: GROUND - 34, height: 22,
+    background: "repeating-linear-gradient(45deg,#C8A23A 0 22px,#2B2F34 22px 44px)", opacity: 0.9 }} />
+  <div style={{ position: "absolute", left: 0, right: 0, top: GROUND - 12, bottom: 0,
+    background: `linear-gradient(180deg, ${mix(S.bg, 0.18)} 0%, ${dark(S.bg, 0.72)} 100%)` }} />
+  {Array.from({ length: 8 }, (_, k) => (
+    <div key={"cq" + k} style={{ position: "absolute", left: -40 + k * 146, top: GROUND - 12,
+      bottom: 0, width: 72, background: mix(S.bg, 0.07), transform: "skewX(-15deg)" }} />
+  ))}
+</>);
+
+/* =========================================================================
+   ⭐⭐ A VARIANT IS A WORLD PLUS AN EVENT.
+
+   Round 21. The ninja cut is the shape that works, so the two new variants keep
+   everything that makes it work and change only the two things that make it
+   THAT cut: where it happens, and what happens.
+
+     shared, never varied   the house chassis · two 356x396 cards · the free one
+                            straining and rumbling before the beat · the reward
+                            chime on every spoken "free" · the running total
+     varied per cut         the WORLD (a layered background, its own palette)
+                            the EVENT (what destroys the paid card, and which
+                            Claude does it)
+
+   ⛔ The FREE card is never touched in any of them. That is the sentence.
+   ========================================================================= */
+type EventProps = { P: typeof PAIRS[0]; f: number; ff: number; pf: number; punchP: number };
+type PaperKit = {
+  id: string; label: string; bed: string;
+  stocks: typeof STOCK;
+  Dress: React.FC<{ S: typeof STOCK[0]; f: number; i: number }>;
+  Event: React.FC<EventProps>;
+};
+
+/* ---- G · THE DOJO — one stroke, the card falls in two ------------------- */
+const SliceEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
+  const crouch = pf < 0 ? 0 : Math.min(1, pf / 8);
+  const dash = ff < 0 ? 0 : E(ff, 0, 6, 0, 1, IO);
+  const slice = ff < 3 ? 0 : E(ff, 3, 15, 0, 1, OUT);
+  /* he starts at 902, not further right: the panel is 1012 wide with rounded
+     corners and a push on top, and at 950 his first pose was half off. */
+  const nx = 902 - dash * 806;
+  const idleBob = Math.sin(f / 6.5) * 5 + Math.sin(f / 3.1) * 2;
+  const drift = ff < 0 ? Math.min(48, Math.max(0, f - 4) * 1.1) : 0;
+  const landing = ff >= 6 ? Math.max(0, 1 - (ff - 6) / 10) : 0;
+  const x = nx - drift;
+  const y = FEET + crouch * 22 + idleBob * (dash > 0.02 ? 0 : 1)
+          - (dash > 0.02 && dash < 0.98 ? 26 : 0) + landing * 10;
+  const tilt = dash > 0.02 && dash < 0.98 ? -16 : ff >= 6 ? -6 + landing * 6 : -crouch * 7;
+  return (<>
+    {slice <= 0 && <Square cx={LX} P={P} punch={punchP} z={22} />}
+    {slice > 0 && (<>
+      <div style={{ position: "absolute", inset: 0, zIndex: 22,
+        transform: `translate(${-slice * 150}px, ${-slice * 28 + slice * slice * 210}px) rotate(${-slice * 26}deg)`,
+        transformOrigin: `${LX}px ${SQY + SQH / 2}px`, opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
+        <Square cx={LX} P={P} punch={1} clip="polygon(0 0,100% 0,100% 26%,0 74%)" z={22} />
+      </div>
+      <div style={{ position: "absolute", inset: 0, zIndex: 22,
+        transform: `translate(${slice * 130}px, ${slice * 42 + slice * slice * 250}px) rotate(${slice * 30}deg)`,
+        transformOrigin: `${LX}px ${SQY + SQH / 2}px`, opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
+        <Square cx={LX} P={P} punch={1} clip="polygon(0 74%,100% 26%,100% 100%,0 100%)" z={22} />
+      </div>
+    </>)}
+    {ff >= 1 && ff <= 6 && (
+      <div style={{ position: "absolute", left: -50, top: SQY + SQH * 0.46,
+        width: LX + SQ / 2 + 96, height: 7, background: "#FFFBF0", zIndex: 40,
+        transform: "rotate(-13deg)", transformOrigin: "0% 50%" }} />
+    )}
+    {dash > 0.02 && dash < 0.98 && [0, 1, 2, 3, 4].map((k) => (
+      <div key={"sl" + k} style={{ position: "absolute", left: nx + 30 + k * 70,
+        top: FEET - 150 + k * 32, width: 110 + k * 30, height: 5,
+        background: "#FFFBF0", opacity: 0.55, zIndex: 39 }} />
+    ))}
+    {ff >= 7 && ff <= 13 && [0, 1].map((k) => (
+      <div key={"fk" + k} style={{ position: "absolute", left: x + 26 + k * 20,
+        top: FEET - 96 - k * 16, width: 40 - k * 12, height: 5, background: "#FFFBF0",
+        opacity: 0.7 - k * 0.25, zIndex: 39, transform: `rotate(${-24 - k * 10}deg)` }} />
+    ))}
+    <div style={{ position: "absolute", left: x - 60, top: FEET - 12, width: 120, height: 18,
+      borderRadius: "50%", background: "rgba(14,12,10,0.32)", zIndex: 24,
+      opacity: dash > 0.02 && dash < 0.98 ? 0.2 : 1, transform: `scaleX(${1 - crouch * 0.12})` }} />
+    <div style={{ position: "absolute", inset: 0, zIndex: 27,
+      transform: `rotate(${tilt}deg)`, transformOrigin: `${x}px ${FEET}px` }}>
+      <Claudie x={x} y={y} s={0.92} f={f} z={27} face={-1}
+        costume={{ samurai: 1, stern: ff < 5 ? 1 : 0, cheer: ff >= 10 ? 1 : 0 }} />
+    </div>
+  </>);
+};
+
+/* ---- H · THE STAGE — the floor opens and it is simply gone -------------- */
+const TrapEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
+  const pull = ff < 0 ? 0 : E(ff, 0, 5, 0, 1, IO);        // the lever
+  const flap = ff < 1 ? 0 : E(ff, 1, 9, 0, 1, OUT);        // the doors swing down
+  const fall = ff < 3 ? 0 : E(ff, 3, 14, 0, 1, IN_Q);      // gravity, accelerating
+  const shut = ff < 15 ? 0 : E(ff, 15, 21, 0, 1, BACK);    // and they snap back
+  const open = Math.max(0, flap - shut);
+  const lx = 108, lever = -18 + pull * 46;
+  const brace = pf < 0 ? 0 : Math.min(1, pf / 9);
+  return (<>
+    {/* the trap doors, hinged at the outer edges of the card's footprint */}
+    {[-1, 1].map((sgn) => (
+      <div key={"tp" + sgn} style={{ position: "absolute",
+        left: sgn < 0 ? LX - SQ / 2 - 14 : LX + 4, top: GROUND - 12,
+        width: SQ / 2 + 10, height: 22, background: "#6E5A3E", zIndex: 26,
+        transformOrigin: sgn < 0 ? "0% 50%" : "100% 50%",
+        transform: `rotate(${sgn * open * 86}deg)`,
+        boxShadow: BOXSH }} />
+    ))}
+    {/* the hole under it, which only exists while the doors are open */}
+    {open > 0.05 && (
+      <div style={{ position: "absolute", left: LX - SQ / 2 - 4, top: GROUND - 6,
+        width: SQ + 8, height: 26, borderRadius: 6, background: "#17130E",
+        opacity: Math.min(1, open * 2), zIndex: 25 }} />
+    )}
+    {/* ⛔ THE CARD IS MASKED AT THE TRAPDOOR LINE, not just moved down. Without
+        the clip it slid over the floor and read as falling OVER rather than
+        THROUGH — the hole has to actually swallow it. The mask is a fixed band
+        from the top of the panel to the doors; the card animates inside it. */}
+    {fall < 1 && (
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: GROUND - 4,
+        overflow: "hidden", zIndex: 22 }}>
+        <div style={{ position: "absolute", inset: 0,
+          transform: `translateY(${fall * 470}px) rotate(${fall * 4}deg)`,
+          transformOrigin: `${LX}px ${SQY + SQH}px` }}>
+          <Square cx={LX} P={P} punch={punchP} z={22} />
+        </div>
+      </div>
+    )}
+    {/* the lever, and the Claude who yanks it */}
+    <div style={{ position: "absolute", left: lx - 12, top: FEET - 104, width: 24, height: 96,
+      borderRadius: 12, background: "#5E5348", zIndex: 26,
+      transform: `rotate(${lever}deg)`, transformOrigin: "50% 100%" }} />
+    <div style={{ position: "absolute", left: lx - 20, top: FEET - 118, width: 40, height: 30,
+      borderRadius: 14, background: "#C0392B", zIndex: 27,
+      transform: `rotate(${lever}deg)`, transformOrigin: "50% 320%" }} />
+    <div style={{ position: "absolute", left: lx - 34, top: FEET - 14, width: 68, height: 20,
+      borderRadius: 6, background: "#4A4038", zIndex: 26 }} />
+    <div style={{ position: "absolute", left: lx + 52, top: FEET - 12, width: 116, height: 18,
+      borderRadius: "50%", background: "rgba(14,12,10,0.30)", zIndex: 24 }} />
+    <Claudie x={lx + 110} y={FEET + brace * 10} s={0.92} f={f} z={27} face={-1}
+      costume={{ suit: 1, stern: ff < 3 ? 1 : 0, cheer: ff >= 8 ? 1 : 0 }} />
+  </>);
+};
+
+/* ---- I · THE PRESS — flattened where it stands -------------------------- */
+const PressEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
+  const arm = pf < 0 ? 0 : Math.min(1, pf / 10);           // he reaches for it
+  const hit = ff < 0 ? 0 : E(ff, 0, 4, 0, 1, IN_Q);        // the ram comes down FAST
+  const squash = ff < 3 ? 0 : E(ff, 3, 8, 0, 1, OUT);      // and it gives
+  const lift = ff < 14 ? 0 : E(ff, 14, 24, 0, 1, IO);      // then it withdraws
+  const ram = hit - lift * 0.8;
+  const flat = squash;
+  const bx = 118;
+  return (<>
+    {/* the card, flattening in place */}
+    <div style={{ position: "absolute", inset: 0, zIndex: 22,
+      transform: `scaleY(${1 - flat * 0.88}) scaleX(${1 + flat * 0.14})`,
+      transformOrigin: `${LX}px ${SQY + SQH}px` }}>
+      <Square cx={LX} P={P} punch={punchP} z={22} />
+    </div>
+    {/* the ram: a slab on two guide rails */}
+    {[-1, 1].map((sgn) => (
+      <div key={"gr" + sgn} style={{ position: "absolute", left: LX + sgn * (SQ / 2 + 26) - 9,
+        top: 40, width: 18, height: GROUND - 40, background: "#5A6169", zIndex: 20 }} />
+    ))}
+    {/* ⛔ THE RAM STOPS ON WHAT IT CRUSHED. It travelled to a fixed offset that
+        left it hovering mid-card; the card flattens to ~12% of its height with
+        its FOOT pinned, so the ram's resting face is (card foot - flat height -
+        ram height). Anything else and the press is pressing thin air. */}
+    <div style={{ position: "absolute", left: LX - SQ / 2 - 40,
+      top: -150 + ram * (SQY + SQH - SQH * 0.12 - 132 + 150),
+      width: SQ + 80, height: 132, zIndex: 30, boxShadow: BOXSH }}>
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,#8A939C,#4A5158)" }} />
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 26,
+        background: "repeating-linear-gradient(45deg,#C8A23A 0 20px,#2B2F34 20px 40px)" }} />
+      {[0, 1, 2, 3, 4].map((k) => (
+        <div key={k} style={{ position: "absolute", left: 26 + k * (SQ + 80 - 52) / 4 - 8, top: 20,
+          width: 16, height: 16, borderRadius: 9, background: "#39404A" }} />
+      ))}
+    </div>
+    {/* what squirts out sideways when it gives */}
+    {squash > 0.05 && squash < 0.98 && [0, 1, 2, 3, 4, 5].map((k) => (
+      <div key={"bo" + k} style={{ position: "absolute",
+        left: LX + (k % 2 ? 1 : -1) * (SQ / 2 + squash * (60 + k * 34)),
+        top: SQY + SQH - 30 - squash * (30 + k * 12), width: 16 - k, height: 16 - k,
+        borderRadius: 8, background: "#C8A23A", opacity: 1 - squash, zIndex: 31 }} />
+    ))}
+    {/* the button, and the Claude who hits it */}
+    <div style={{ position: "absolute", left: bx - 32, top: FEET - 92, width: 64, height: 58,
+      borderRadius: 8, background: "#3A4149", zIndex: 26, boxShadow: BOXSH }} />
+    <div style={{ position: "absolute", left: bx - 22, top: FEET - 100 + (ff >= 0 && ff < 8 ? 8 : 0),
+      width: 44, height: 30, borderRadius: 15, background: "#C0392B", zIndex: 27 }} />
+    <div style={{ position: "absolute", left: bx + 54, top: FEET - 12, width: 116, height: 18,
+      borderRadius: "50%", background: "rgba(14,12,10,0.30)", zIndex: 24 }} />
+    <div style={{ position: "absolute", inset: 0, zIndex: 27,
+      transform: `rotate(${arm * -8 + (ff >= 0 && ff < 8 ? -6 : 0)}deg)`,
+      transformOrigin: `${bx + 112}px ${FEET}px` }}>
+      <Claudie x={bx + 112} y={FEET} s={0.92} f={f} z={27} face={-1}
+        costume={{ constr: 1, stern: ff < 4 ? 1 : 0, cheer: ff >= 10 ? 1 : 0 }} />
+    </div>
+  </>);
+};
+
+export const PKITS: PaperKit[] = [
+  { id: "dojo",  label: "THE DOJO · one stroke, the card falls in two",
+    bed: "free_bed_g.wav", stocks: STOCK,       Dress: NightYard,  Event: SliceEvent },
+  { id: "stage", label: "THE STAGE · the floor opens and it is gone",
+    bed: "free_bed_h.wav", stocks: STAGE_STOCK, Dress: StageYard,  Event: TrapEvent },
+  { id: "press", label: "THE PRESS · flattened where it stands",
+    bed: "free_bed_i.wav", stocks: PRESS_STOCK, Dress: PressFloor, Event: PressEvent },
+];
+
+const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: boolean; k?: number }> =
+  ({ i, paidAt, freeAt, hook, k = 0 }) => {
   const f = useStep(2);
-  const P = PAIRS[i], S = STOCK[i];
+  const K = PKITS[k];
+  const P = PAIRS[i], S = K.stocks[i];
   const LEAD = 4;
   const pf = f - (paidAt - LEAD), ff = f - (freeAt - LEAD);
 
@@ -308,45 +618,35 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
   const sr = Math.sin(f * 2.5 + 0.4) * 1.0 * shake;
   const swell = 1 + Math.abs(Math.sin(f * 1.8)) * 0.024 * shake;
   const rise = hook ? 1 : E(f, 0, 8, 0, 1, OUT);
-  /* ⛔ HE STARTS AT 890, NOT 950. The panel is 1012 wide with rounded corners and
-     a push on top; at 950 his first pose was half off the screen. */
-  const nx = 902 - dash * 806;
+  /* ⛔ THE TOTAL NEEDS A KIT-AGNOSTIC "IT IS DONE". Each event destroys the paid
+     card its own way — sliced, dropped, flattened — so the rail cannot read any
+     one of their internals. It reads the BEAT: 7 frames past the word, whatever
+     just happened has happened. */
+  const gone = ff >= 7;
 
   return (
     <AbsoluteFill>
       <Panel>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden",
           transform: `scale(${1 + Math.min(1, f / 66) * 0.045})`, transformOrigin: "50% 58%" }}>
-          <NightYard S={S} f={f} i={i} />
+          <K.Dress S={S} f={f} i={i} />
 
           <div style={{ position: "absolute", inset: 0, zIndex: 20,
             transform: `translateY(${(1 - rise) * 46}px)` }}>
-            {slice <= 0 && <Square cx={LX} P={P} punch={punchP} z={22} />}
-            {slice > 0 && (<>
-              <div style={{ position: "absolute", inset: 0, zIndex: 22,
-                transform: `translate(${-slice * 150}px, ${-slice * 28 + slice * slice * 210}px) rotate(${-slice * 26}deg)`,
-                transformOrigin: `${LX}px ${SQY + SQH / 2}px`,
-                opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
-                <Square cx={LX} P={P} punch={1} clip="polygon(0 0,100% 0,100% 26%,0 74%)" z={22} />
-              </div>
-              <div style={{ position: "absolute", inset: 0, zIndex: 22,
-                transform: `translate(${slice * 130}px, ${slice * 42 + slice * slice * 250}px) rotate(${slice * 30}deg)`,
-                transformOrigin: `${LX}px ${SQY + SQH / 2}px`,
-                opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
-                <Square cx={LX} P={P} punch={1} clip="polygon(0 74%,100% 26%,100% 100%,0 100%)" z={22} />
-              </div>
-            </>)}
+            <K.Event P={P} f={f} ff={ff} pf={pf} punchP={punchP} />
 
             {/* ⭐ light building up BEHIND the free square as it strains. Hard
                 wedges and solid paints — the matte rule is a ship gate, and a
                 blur here would be the same mistake the drop-shadow was. */}
-            {shake > 0.2 && Array.from({ length: 9 }, (_, k) => {
-              const a = (k / 8) * 360;
-              const len = (120 + ((k * 31) % 70)) * (0.35 + shake * 0.75);
-              return (<div key={"ry" + k} style={{ position: "absolute",
-                left: RX, top: SQY + SQH * 0.46, width: len, height: 22 + (k % 3) * 8,
+            {/* ⛔ `ri`, not `k` — `k` is the KIT INDEX in this scope and shadowing
+                it here silently pointed the rays at the wrong variant's data. */}
+            {shake > 0.2 && Array.from({ length: 9 }, (_, ri) => {
+              const a = (ri / 8) * 360;
+              const len = (120 + ((ri * 31) % 70)) * (0.35 + shake * 0.75);
+              return (<div key={"ry" + ri} style={{ position: "absolute",
+                left: RX, top: SQY + SQH * 0.46, width: len, height: 22 + (ri % 3) * 8,
                 marginTop: -14, background: "#FFF4D2", opacity: 0.06 + shake * 0.20,
-                transform: `rotate(${a + Math.sin(f / 17 + k) * 2}deg)`,
+                transform: `rotate(${a + Math.sin(f / 17 + ri) * 2}deg)`,
                 transformOrigin: "0% 50%",
                 clipPath: "polygon(0 42%,100% 0,100% 100%,0 58%)", zIndex: 21 }} />);
             })}
@@ -355,55 +655,6 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
               transformOrigin: `${RX}px ${SQY + SQH / 2}px` }}>
               <Square cx={RX} free P={P} punch={1} z={23} />
             </div>
-
-            {ff >= 1 && ff <= 6 && (
-              <div style={{ position: "absolute", left: -50, top: SQY + SQH * 0.46,
-                width: LX + SQ / 2 + 96, height: 7, background: "#FFFBF0", zIndex: 40,
-                transform: "rotate(-13deg)", transformOrigin: "0% 50%" }} />
-            )}
-            {dash > 0.02 && dash < 0.98 && [0, 1, 2, 3, 4].map((k) => (
-              <div key={"sl" + k} style={{ position: "absolute", left: nx + 30 + k * 70,
-                top: FEET - 150 + k * 32, width: 110 + k * 30, height: 5,
-                background: "#FFFBF0", opacity: 0.55, zIndex: 39 }} />
-            ))}
-
-            {/* ⭐⭐ HE IS MOVING FOR THE WHOLE BEAT, NOT FOR SIX FRAMES OF IT.
-                Round 18: *"the ninja needs to be moving, more motion."*  He had
-                one action and stood still either side of it, which is the same
-                "arrives then HOLDS" failure the standing rule names — it just
-                happened to a character instead of a scene. Four states now:
-                  idle    a breathing bob and a slow drift toward the cards
-                  ready   he sinks into a crouch on the PAID hit and coils
-                  dash    six frames across, low and fast
-                  finish  a landing settle, a blade flick, then a cheer */}
-            {(() => {
-              const idleBob = Math.sin(f / 6.5) * 5 + Math.sin(f / 3.1) * 2;
-              const drift = ff < 0 ? Math.min(48, Math.max(0, f - 4) * 1.1) : 0;
-              const landing = ff >= 6 ? Math.max(0, 1 - (ff - 6) / 10) : 0;
-              const x = nx - drift;
-              const y = FEET + crouch * 22 + idleBob * (dash > 0.02 ? 0 : 1)
-                      - (dash > 0.02 && dash < 0.98 ? 26 : 0) + landing * 10;
-              const tilt = dash > 0.02 && dash < 0.98 ? -16
-                         : ff >= 6 ? -6 + landing * 6 : -crouch * 7;
-              return (<>
-                <div style={{ position: "absolute", left: x - 60, top: FEET - 12, width: 120,
-                  height: 18, borderRadius: "50%", background: "rgba(14,12,10,0.32)", zIndex: 24,
-                  opacity: dash > 0.02 && dash < 0.98 ? 0.2 : 1,
-                  transform: `scaleX(${1 - crouch * 0.12})` }} />
-                {/* the blade flick: two hard strokes off the sword after the cut */}
-                {ff >= 7 && ff <= 13 && [0, 1].map((k) => (
-                  <div key={"fk" + k} style={{ position: "absolute", left: x + 26 + k * 20,
-                    top: FEET - 96 - k * 16, width: 40 - k * 12, height: 5,
-                    background: "#FFFBF0", opacity: 0.7 - k * 0.25, zIndex: 39,
-                    transform: `rotate(${-24 - k * 10}deg)` }} />
-                ))}
-                <div style={{ position: "absolute", inset: 0, zIndex: 27,
-                  transform: `rotate(${tilt}deg)`, transformOrigin: `${x}px ${FEET}px` }}>
-                  <Claudie x={x} y={y} s={0.92} f={f} z={27} face={-1}
-                    costume={{ samurai: 1, stern: ff < 5 ? 1 : 0, cheer: ff >= 10 ? 1 : 0 }} />
-                </div>
-              </>);
-            })()}
           </div>
 
           {flash && (
@@ -419,8 +670,8 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
             <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 18,
               letterSpacing: "0.16em", color: "#8A8072" }}>YOU PAY</span>
             <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 42,
-              color: slice > 0.4 ? "#237A54" : "#B3372A" }}>
-              {"$" + (TOTAL - (slice > 0.4 ? CUM[i] : i > 0 ? CUM[i - 1] : 0))}
+              color: gone ? "#237A54" : "#B3372A" }}>
+              {"$" + (TOTAL - (gone ? CUM[i] : i > 0 ? CUM[i - 1] : 0))}
             </span>
           </div>
         </div>
@@ -430,14 +681,15 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
 };
 
 /* ---- the CTA, in the screen ------------------------------------------- */
-const PaperCta: React.FC = () => {
+const PaperCta: React.FC<{ k?: number }> = ({ k = 0 }) => {
   const f = useStep(2);
-  const S = STOCK[1];
+  const K = PKITS[k];
+  const S = K.stocks[1];
   return (
     <AbsoluteFill>
       <Panel>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
-          <NightYard S={S} f={f} i={4} />
+          <K.Dress S={S} f={f} i={4} />
           {/* the ten free marks, pegged up as paper chips */}
           {PAIRS.map((p, k) => {
             const col = k % 5, row = Math.floor(k / 5);
@@ -598,10 +850,10 @@ const PaperHead: React.FC<{ big: string; hot: string; settled?: boolean }> =
     house `KaraokeCaption` track — byte-identical to the six house cuts, because
     those are what a viewer recognises as this channel. Only what happens inside
     the screen is new. */
-export const FreeReelPaper: React.FC = () => (
+export const makePaperReel = (k: number): React.FC => () => (
   <AbsoluteFill>
     <Audio src={staticFile("free_vo.wav")} />
-    <Audio src={staticFile("free_bed_g.wav")} />
+    <Audio src={staticFile(PKITS[k].bed)} />
     <SfxTrack cues={PSFX} />
     <Bg />
     <AssemblyCtx.Provider value={true}>
@@ -610,8 +862,8 @@ export const FreeReelPaper: React.FC = () => (
         return (
           <Sequence key={at} from={at} durationInFrames={to - at} layout="none">
             {i < 10
-              ? <PaperBeat i={i} paidAt={PPAID[i] - at} freeAt={PFREE[i] - at} hook={i === 0} />
-              : <PaperCta />}
+              ? <PaperBeat i={i} paidAt={PPAID[i] - at} freeAt={PFREE[i] - at} hook={i === 0} k={k} />
+              : <PaperCta k={k} />}
           </Sequence>
         );
       })}
@@ -633,3 +885,7 @@ export const FreeReelPaper: React.FC = () => (
     <KaraokeCaption words={words as any} fps={PFPS} top={1268} />
   </AbsoluteFill>
 );
+
+export const FreeReelPaper = makePaperReel(0);   // G · THE DOJO
+export const FreeReelStage = makePaperReel(1);   // H · THE STAGE
+export const FreeReelPress = makePaperReel(2);   // I · THE PRESS

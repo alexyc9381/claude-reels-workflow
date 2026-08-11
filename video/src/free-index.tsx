@@ -1,6 +1,6 @@
 import React from "react";
 import { Composition, registerRoot } from "remotion";
-import { FreeReelPaper } from "./TagPaper";
+import { FreeReelPaper, FreeReelStage, FreeReelPress } from "./TagPaper";
 import { FreeReel, FreeReelB, FreeReelC, FreeReelD, FreeReelE, FreeReelF, FREE_TOTAL, VARIANTS } from "./ClaudeFreeReel";
 import { S1Hook, S2, S11Cta } from "./TagScenes";
 
@@ -29,6 +29,12 @@ const Root: React.FC = () => (<>
   {/* ⛔ CUT G IS NOT A `makeReel` VARIANT — it does not use the house chassis at
       all, so it cannot be one. Its own root, its own captions, its own SFX. */}
   <Composition id="FreeReelPaper" component={FreeReelPaper}
+    durationInFrames={767} {...V} />
+
+  <Composition id="FreeReelStage" component={FreeReelStage}
+    durationInFrames={767} {...V} />
+
+  <Composition id="FreeReelPress" component={FreeReelPress}
     durationInFrames={767} {...V} />
 
   <Composition id="freeHook" component={S1Hook} durationInFrames={65} {...V} />
