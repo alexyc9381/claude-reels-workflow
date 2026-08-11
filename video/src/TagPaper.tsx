@@ -1,5 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, Img } from "remotion";
+import { Bg, Panel, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
 import { inter, fraunces } from "./fonts";
 import { SfxTrack, LEVELS, layer, Cue } from "./SoundKit";
 import { PAIRS, CUM, TOTAL, MARK_CAP, E, OUT, IO, BACK, LIN, mix, dark, Claudie } from "./TagWorld";
@@ -112,52 +113,151 @@ const Card: React.FC<{ x: number; y: number; w: number; h: number; rot: number;
    so this is the channel's own cast, not a new character.
    ------------------------------------------------------------------------ */
 
-const GROUND = 1240;
-const FEET = 1372;
-const SQ = 430;                       // they are SQUARES, which is the note
-const LX = 288, RX = 792, SQY = 646;
+/* ---- panel-local geometry. ⛔ THE SCENE LIVES IN THE HOUSE SCREEN NOW ------
+   Round 17: *"the captions aren't the correct style as nocodealex, and the
+   screen part doesn't show properly."*  Both right, and they correct round 13.
+   I read "make the animation style a lot different" as licence to throw out the
+   chassis, and threw out BRAND with it: the karaoke captions and the framed
+   screen are what a viewer recognises as @nocodealex, not what makes ninety
+   reels look alike.
+
+   ⭐ THE SPLIT THAT ACTUALLY WORKS:
+       BRAND, keep   the cream ground, the framed screen, the house karaoke
+                     captions, the progress rail, the clay Claude
+       TEMPLATE, change   what happens INSIDE the screen — the world, the
+                     action, the cadence, the backgrounds
+   Everything below is authored in PANEL coordinates (1012 x 792), not frame. */
+const PW = 1012, PH = 792;
+/* ⛔ SQY 178, NOT 148. The HookHeader sits over the top of the panel and its
+   pill runs to about panel-local 150 — at 148 it clipped the PAID/FREE banners,
+   the same y=120-ish ceiling every other cut in this build has had to respect. */
+const SQ = 300, SQY = 178, LX = 250, RX = 762;
+const GROUND = 520;
+const FEET = 688;
+
+/** ⭐ A REAL BACKGROUND, NOT A FILL. Round 17: *"much more interesting
+    backgrounds, not just single colour."*  Seven layers before a square lands —
+    sky, moon, roofline, bamboo, mist, lanterns, ground — and every one of them
+    is on-theme with the ninja rather than generic texture. */
+const NightYard: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S, f, i }) => {
+  const r = (k: number) => { const v = Math.sin(i * 27.3 + k * 6.1) * 4371.7; return v - Math.floor(v); };
+  const moonX = 200 + r(1) * 640, moonR = 86 + r(2) * 46;
+  return (<>
+    {/* sky */}
+    {/* ⛔ A NIGHT YARD IS NOT A DARK RECTANGLE. Built off `dark(bg,0.62)` the
+        panel read as mud; the layers only separate if the sky is LIGHTER than
+        the silhouettes in front of it, which is what a moonlit sky actually is. */}
+    <div style={{ position: "absolute", inset: 0,
+      background: `linear-gradient(178deg, ${mix(S.bg, 0.30)} 0%, ${mix(S.bg, 0.10)} 54%, ${S.bg} 100%)` }} />
+    <Halftone c={S.alt} n={18} o={0.16} />
+    {/* the moon, flat and pale */}
+    <div style={{ position: "absolute", left: moonX - moonR, top: 40 + r(3) * 60,
+      width: moonR * 2, height: moonR * 2, borderRadius: "50%", background: "#F7F3E6",
+      opacity: 0.90 }} />
+    <div style={{ position: "absolute", left: moonX - moonR * 0.5, top: 40 + r(3) * 60 + moonR * 0.5,
+      width: moonR * 0.5, height: moonR * 0.4, borderRadius: "50%", background: mix(S.bg, 0.44),
+      opacity: 0.5 }} />
+    {/* the roofline: pagoda eaves in torn paper */}
+    {[0, 1, 2, 3].map((k) => {
+      const w = 200 + r(k + 4) * 190, x = -60 + k * 280 + r(k + 8) * 60;
+      const y = GROUND - 120 - r(k + 5) * 78;
+      return (<div key={"rf" + k} style={{ position: "absolute", left: x, top: y, width: w,
+        height: GROUND - y + 40, background: dark(S.bg, 0.62 - k * 0.05) }}>
+        <div style={{ position: "absolute", left: -22, top: -18, width: w + 44, height: 30,
+          background: dark(S.bg, 0.54),
+          clipPath: "polygon(0 100%,8% 22%,50% 0,92% 22%,100% 100%)" }} />
+        <div style={{ position: "absolute", left: w / 2 - 4, top: -40, width: 8, height: 26,
+          background: dark(S.bg, 0.40) }} />
+      </div>);
+    })}
+    {/* bamboo, at both edges, with nodes and leaves */}
+    {[36, 96, PW - 62, PW - 118].map((x, k) => (
+      <div key={"bb" + k} style={{ position: "absolute", left: x - 13, top: -20,
+        width: 26, height: GROUND + 120,
+        transform: `rotate(${(k % 2 ? 1 : -1) * (1.4 + r(k) * 1.6)}deg)`, transformOrigin: "50% 100%" }}>
+        <div style={{ position: "absolute", inset: 0, background: dark(S.bg, 0.56) }} />
+        {[0, 1, 2, 3, 4].map((n) => (
+          <div key={n} style={{ position: "absolute", left: -3, right: -3, top: 60 + n * 110,
+            height: 8, background: dark(S.bg, 0.34) }} />
+        ))}
+        {[0, 1, 2].map((n) => (
+          <div key={"lf" + n} style={{ position: "absolute",
+            left: k > 1 ? -66 : 22, top: 90 + n * 140,
+            width: 66, height: 17, borderRadius: "50%", background: dark(S.bg, 0.40),
+            transform: `rotate(${(k > 1 ? 1 : -1) * (16 + n * 9) + Math.sin(f / 21 + n) * 3}deg)` }} />
+        ))}
+      </div>
+    ))}
+    {/* mist: solid bands, drifting, never an alpha wash over the whole frame */}
+    {[0, 1, 2].map((k) => (
+      <div key={"ms" + k} style={{ position: "absolute",
+        left: -140 + ((f * (0.5 + k * 0.35) + k * 300) % (PW + 280)),
+        top: GROUND - 128 + k * 44, width: 420, height: 22, borderRadius: 12,
+        background: mix(S.bg, 0.30), opacity: 0.55 }} />
+    ))}
+    {/* two lanterns on a wire, swaying */}
+    {[176, PW - 196].map((x, k) => (
+      <div key={"ln" + k} style={{ position: "absolute", left: x, top: 4,
+        transform: `rotate(${Math.sin(f / 17 + k * 2) * 4}deg)`, transformOrigin: "50% 0%" }}>
+        <div style={{ position: "absolute", left: 15, top: 0, width: 4, height: 52,
+          background: dark(S.bg, 0.40) }} />
+        <div style={{ position: "absolute", left: 0, top: 50, width: 34, height: 46,
+          borderRadius: "16px 16px 14px 14px", background: "#D96A4A" }} />
+        <div style={{ position: "absolute", left: 0, top: 66, width: 34, height: 5,
+          background: "#A84A32" }} />
+      </div>
+    ))}
+    {/* the yard floor */}
+    <div style={{ position: "absolute", left: -20, right: -20, top: GROUND, height: PH,
+      background: mix(S.bg, 0.40), clipPath: TORN_TOP }} />
+    <div style={{ position: "absolute", left: -20, right: -20, top: GROUND + 96, height: PH,
+      background: mix(S.bg, 0.54), clipPath: TORN_TOP }} />
+    {[130, 380, 640, 890].map((x, k) => (
+      <div key={"st" + k} style={{ position: "absolute", left: x - 44, top: GROUND + 150 + (k % 2) * 46,
+        width: 88, height: 26, borderRadius: 13, background: mix(S.bg, 0.66), opacity: 0.8 }} />
+    ))}
+  </>);
+};
 
 /** one square, or one half of one: same content, a different clip. */
 const Square: React.FC<{ cx: number; free?: boolean; P: typeof PAIRS[0]; punch: number;
   clip?: string; z?: number }> = ({ cx, free, P, punch, clip, z = 22 }) => {
-  const cap = Math.min(132 * 0.62, (MARK_CAP[free ? P.fLogo : P.pLogo] ?? 999) * 1.4);
+  const cap = Math.min(92 * 0.62, (MARK_CAP[free ? P.fLogo : P.pLogo] ?? 999) * 1.4);
   return (
     <div style={{ position: "absolute", left: cx - SQ / 2, top: SQY, width: SQ, height: SQ,
       zIndex: z, clipPath: clip, filter: clip ? undefined : `drop-shadow(${SHADOW})` }}>
       <div style={{ position: "absolute", inset: 0, background: "#F7F3E6" }} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 66,
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 46,
         background: free ? "#237A54" : "#B3372A", display: "flex", alignItems: "center",
-        justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 38,
+        justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 26,
         letterSpacing: "0.22em", color: "#F7F3E6" }}>{free ? "FREE" : "PAID"}</div>
-      <div style={{ position: "absolute", left: SQ / 2 - 66, top: 96, width: 132, height: 132,
-        background: "#FFFFFF", border: "5px solid #E2DCC8", display: "flex",
+      <div style={{ position: "absolute", left: SQ / 2 - 46, top: 64, width: 92, height: 92,
+        background: "#FFFFFF", border: "4px solid #E2DCC8", display: "flex",
         alignItems: "center", justifyContent: "center" }}>
         <Img src={staticFile("logos/" + (free ? P.fLogo : P.pLogo))}
           style={{ width: cap, height: cap, objectFit: "contain" }} />
       </div>
-      <div style={{ position: "absolute", left: 8, right: 8, top: 244, textAlign: "center",
-        fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 38,
+      <div style={{ position: "absolute", left: 6, right: 6, top: 168, textAlign: "center",
+        fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 27,
         color: "#2A2114" }}>{free ? P.free : P.paid}</div>
+      {/* ⛔ MEASURED AGAINST THE BOX, NOT PLACED BY EYE. 300 tall: banner 46,
+          mark to 156, name to 196, tier to 226, number 232..288. */}
       {!free && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: 292, textAlign: "center" }}>
-          <span style={{ display: "inline-block", padding: "4px 12px", background: "#E2DCC8",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 20,
+        <div style={{ position: "absolute", left: 0, right: 0, top: 200, textAlign: "center" }}>
+          <span style={{ display: "inline-block", padding: "2px 9px", background: "#E2DCC8",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 14,
             letterSpacing: "0.16em", color: "#6B6252" }}>{P.tier}</span>
         </div>
       )}
-      {/* ⛔ THE SQUARE IS 430 TALL. At top 328 a 92px price plus its "PER MONTH"
-          ran to 444 and the label was cut off by the square's own edge — the
-          third time this exact overflow has bitten in this build. Measure the
-          block against the box. */}
-      <div style={{ position: "absolute", left: 0, right: 0, top: free ? 296 : 306,
+      <div style={{ position: "absolute", left: 0, right: 0, top: free ? 208 : 232,
         textAlign: "center", transform: `scale(${punch})` }}>
         <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
-          fontSize: free ? 100 : (String(P.price).length >= 3 ? 72 : 84), lineHeight: 1,
+          fontSize: free ? 72 : (String(P.price).length >= 3 ? 46 : 54), lineHeight: 1,
           color: free ? "#237A54" : "#B3372A" }}>
           {free ? "FREE" : "$" + P.price}
         </span>
         {!free && (
-          <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 20,
+          <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 13,
             letterSpacing: "0.14em", color: "#8A4A3C" }}>{P.note || "PER MONTH"}</div>
         )}
       </div>
@@ -174,193 +274,153 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
 
   const punchP = pf < 0 ? 1 : 1 + Math.sin(Math.min(1, pf / 9) * Math.PI) * 0.20;
   const crouch = pf < 0 ? 0 : Math.min(1, pf / 8);
-  /* ⛔ THE DASH IS SIX FRAMES. A ninja who takes half a second to cross is a
-     jogger; the whole read is that it already happened. */
   const dash = ff < 0 ? 0 : E(ff, 0, 6, 0, 1, IO);
   const slice = ff < 3 ? 0 : E(ff, 3, 15, 0, 1, OUT);
-  const flash = ff >= 2 && ff <= 4 ? 1 : 0;
+  const flash = ff >= 2 && ff <= 4;
   const stamp = ff < 4 ? 1 : 1 + Math.sin(Math.min(1, (ff - 4) / 10) * Math.PI) * 0.22;
   const rise = hook ? 1 : E(f, 0, 8, 0, 1, OUT);
-  const nx = 1010 - dash * 900;
+  /* ⛔ HE STARTS AT 890, NOT 950. The panel is 1012 wide with rounded corners and
+     a push on top; at 950 his first pose was half off the screen. */
+  const nx = 890 - dash * 800;
 
   return (
-    <AbsoluteFill style={{ background: S.bg, overflow: "hidden" }}>
-      <Halftone c={S.alt} o={0.20} />
-      <div style={{ position: "absolute", inset: 0,
-        transform: `scale(${1 + Math.min(1, f / 66) * 0.07})`, transformOrigin: "50% 58%" }}>
-        <div style={{ position: "absolute", left: -20, right: -20, top: GROUND, height: 900,
-          background: mix(S.bg, 0.30), clipPath: TORN_TOP, zIndex: 4 }} />
-        <div style={{ position: "absolute", left: -20, right: -20, top: GROUND + 170, height: 760,
-          background: mix(S.bg, 0.46), clipPath: TORN_TOP, zIndex: 4 }} />
+    <AbsoluteFill>
+      <Panel>
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden",
+          transform: `scale(${1 + Math.min(1, f / 66) * 0.07})`, transformOrigin: "50% 58%" }}>
+          <NightYard S={S} f={f} i={i} />
 
-        <div style={{ position: "absolute", inset: 0, zIndex: 20,
-          transform: `translateY(${(1 - rise) * 64}px)` }}>
+          <div style={{ position: "absolute", inset: 0, zIndex: 20,
+            transform: `translateY(${(1 - rise) * 46}px)` }}>
+            {slice <= 0 && <Square cx={LX} P={P} punch={punchP} z={22} />}
+            {slice > 0 && (<>
+              <div style={{ position: "absolute", inset: 0, zIndex: 22,
+                transform: `translate(${-slice * 150}px, ${-slice * 28 + slice * slice * 210}px) rotate(${-slice * 26}deg)`,
+                transformOrigin: `${LX}px ${SQY + SQ / 2}px`,
+                filter: `drop-shadow(${SHADOW})`, opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
+                <Square cx={LX} P={P} punch={1} clip="polygon(0 0,100% 0,100% 26%,0 74%)" z={22} />
+              </div>
+              <div style={{ position: "absolute", inset: 0, zIndex: 22,
+                transform: `translate(${slice * 130}px, ${slice * 42 + slice * slice * 250}px) rotate(${slice * 30}deg)`,
+                transformOrigin: `${LX}px ${SQY + SQ / 2}px`,
+                filter: `drop-shadow(${SHADOW})`, opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
+                <Square cx={LX} P={P} punch={1} clip="polygon(0 74%,100% 26%,100% 100%,0 100%)" z={22} />
+              </div>
+            </>)}
 
-          {/* ---- the PAID square, in one piece until the blade lands ------ */}
-          {slice <= 0 && <Square cx={LX} P={P} punch={punchP} z={22} />}
-          {/* ---- and in two after. One diagonal, two halves, gravity ------ */}
-          {slice > 0 && (<>
-            <div style={{ position: "absolute", inset: 0, zIndex: 22,
-              transform: `translate(${-slice * 210}px, ${-slice * 40 + slice * slice * 300}px) rotate(${-slice * 26}deg)`,
-              transformOrigin: `${LX}px ${SQY + SQ / 2}px`,
-              filter: `drop-shadow(${SHADOW})`, opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
-              <Square cx={LX} P={P} punch={1} clip="polygon(0 0,100% 0,100% 26%,0 74%)" z={22} />
+            <div style={{ position: "absolute", inset: 0, zIndex: 23,
+              transform: `scale(${stamp})`, transformOrigin: `${RX}px ${SQY + SQ / 2}px` }}>
+              <Square cx={RX} free P={P} punch={1} z={23} />
             </div>
-            <div style={{ position: "absolute", inset: 0, zIndex: 22,
-              transform: `translate(${slice * 180}px, ${slice * 60 + slice * slice * 360}px) rotate(${slice * 30}deg)`,
-              transformOrigin: `${LX}px ${SQY + SQ / 2}px`,
-              filter: `drop-shadow(${SHADOW})`, opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
-              <Square cx={LX} P={P} punch={1} clip="polygon(0 74%,100% 26%,100% 100%,0 100%)" z={22} />
-            </div>
-          </>)}
 
-          {/* ---- the FREE square. Untouched, and it stamps -------------- */}
-          <div style={{ position: "absolute", inset: 0, zIndex: 23,
-            transform: `scale(${stamp})`, transformOrigin: `${RX}px ${SQY + SQ / 2}px` }}>
-            <Square cx={RX} free P={P} punch={1} z={23} />
+            {ff >= 1 && ff <= 6 && (
+              <div style={{ position: "absolute", left: -50, top: SQY + SQ * 0.5,
+                width: LX + SQ / 2 + 96, height: 7, background: "#FFFBF0", zIndex: 40,
+                transform: "rotate(-13deg)", transformOrigin: "0% 50%" }} />
+            )}
+            {dash > 0.02 && dash < 0.98 && [0, 1, 2, 3, 4].map((k) => (
+              <div key={"sl" + k} style={{ position: "absolute", left: nx + 30 + k * 70,
+                top: FEET - 150 + k * 32, width: 110 + k * 30, height: 5,
+                background: "#FFFBF0", opacity: 0.55, zIndex: 39 }} />
+            ))}
+
+            <div style={{ position: "absolute", left: nx - 56, top: FEET - 12, width: 112,
+              height: 18, borderRadius: "50%", background: "rgba(14,12,10,0.32)", zIndex: 24,
+              opacity: dash > 0.02 && dash < 0.98 ? 0.2 : 1 }} />
+            <Claudie x={nx} y={FEET + crouch * 14 - (dash > 0.02 && dash < 0.98 ? 22 : 0)}
+              s={0.98} f={f} z={27} face={-1}
+              costume={{ samurai: 1, stern: ff < 4 ? 1 : 0, cheer: ff >= 8 ? 1 : 0 }} />
           </div>
 
-          {/* ---- the cut itself: one hard streak, three frames ---------- */}
-          {/* ⛔ THE STREAK STOPS AT THE PAID SQUARE. Run full width it crossed the
-              FREE one too, which contradicts the only thing the shot is saying:
-              the blade went over that one. */}
-          {ff >= 1 && ff <= 6 && (
-            <div style={{ position: "absolute", left: -70, top: SQY + SQ * 0.5,
-              width: LX + SQ / 2 + 130, height: 9, background: "#FFFBF0", zIndex: 40,
-              transform: "rotate(-13deg)", transformOrigin: "0% 50%" }} />
+          {flash && (
+            <div style={{ position: "absolute", inset: 0, background: "#FFFBF0", opacity: 0.66,
+              zIndex: 55 }} />
           )}
-          {/* speed lines, only while he is actually moving */}
-          {dash > 0.02 && dash < 0.98 && [0, 1, 2, 3, 4].map((k) => (
-            <div key={"sl" + k} style={{ position: "absolute", left: nx + 40 + k * 90,
-              top: FEET - 200 + k * 42, width: 150 + k * 40, height: 7,
-              background: "#FFFBF0", opacity: 0.55, zIndex: 39 }} />
-          ))}
 
-          {/* ---- the ninja ---------------------------------------------- */}
-          <div style={{ position: "absolute", left: nx - 78, top: FEET - 16, width: 156,
-            height: 24, borderRadius: "50%", background: "rgba(24,18,12,0.28)", zIndex: 24,
-            opacity: dash > 0.02 && dash < 0.98 ? 0.2 : 1 }} />
-          <Claudie x={nx} y={FEET + crouch * 20 - (dash > 0.02 && dash < 0.98 ? 30 : 0)}
-            s={1.34} f={f} z={27} face={-1}
-            costume={{ samurai: 1, stern: ff < 4 ? 1 : 0, cheer: ff >= 8 ? 1 : 0 }} />
+          {/* the running total, on a stuck-on paper sticker */}
+          <div style={{ position: "absolute", left: PW / 2 - 152, top: 700, width: 304, height: 62,
+            background: "#F7F3E6", transform: "rotate(-1.4deg)", zIndex: 42,
+            filter: `drop-shadow(${SHADOW})`, display: "flex", alignItems: "center",
+            justifyContent: "center", gap: 12 }}>
+            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 18,
+              letterSpacing: "0.16em", color: "#8A8072" }}>YOU PAY</span>
+            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 42,
+              color: slice > 0.4 ? "#237A54" : "#B3372A" }}>
+              {"$" + (TOTAL - (slice > 0.4 ? CUM[i] : i > 0 ? CUM[i - 1] : 0))}
+            </span>
+          </div>
         </div>
-      </div>
-
-      {/* ⛔ ONE FLASH FRAME, and it is a SOLID PAINT for two frames — a hard cut
-          flash, not a glow. The matte rule is a ship gate. */}
-      {flash > 0 && (
-        <div style={{ position: "absolute", inset: 0, background: "#FFFBF0", opacity: 0.72,
-          zIndex: 55 }} />
-      )}
-
-      <div style={{ position: "absolute", left: 56, top: 236, padding: "16px 30px",
-        background: S.ink, transform: "rotate(-2.2deg)", zIndex: 40,
-        filter: `drop-shadow(${SHADOW})`, fontFamily: inter.fontFamily, fontWeight: 900,
-        fontSize: 46, color: S.bg, textTransform: "uppercase" }}>{P.cat}</div>
-      <div style={{ position: "absolute", right: 56, top: 244, padding: "12px 22px",
-        background: "#F7F3E6", transform: "rotate(2.6deg)", zIndex: 40,
-        filter: `drop-shadow(${SHADOW})`, fontFamily: inter.fontFamily, fontWeight: 900,
-        fontSize: 34, color: "#2A2114" }}>{i + 1}/10</div>
-      <div style={{ position: "absolute", left: W / 2 - 190, top: 336, width: 380, height: 86,
-        background: "#F7F3E6", transform: "rotate(-1.4deg)", zIndex: 42,
-        filter: `drop-shadow(${SHADOW})`, display: "flex", alignItems: "center",
-        justifyContent: "center", gap: 14 }}>
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 24,
-          letterSpacing: "0.16em", color: "#8A8072" }}>YOU PAY</span>
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 58,
-          color: slice > 0.4 ? "#237A54" : "#B3372A" }}>
-          {"$" + (TOTAL - (slice > 0.4 ? CUM[i] : i > 0 ? CUM[i - 1] : 0))}
-        </span>
-      </div>
+      </Panel>
     </AbsoluteFill>
   );
 };
 
-/* ---- the CTA ------------------------------------------------------------ */
+/* ---- the CTA, in the screen ------------------------------------------- */
 const PaperCta: React.FC = () => {
   const f = useStep(2);
-  /* ⛔ THE CTA GROUND IS PAPER, NOT NEAR-BLACK. At #1E1A14 full bleed the whole
-     frame measured 55.7 against a 140 bar — the house cuts only clear it because
-     the cream chassis is 39% of every frame, and a full-bleed style has no such
-     safety net. Every ground in this cut has to carry its own luma. */
-  const S = { bg: "#EDE6D4", ink: "#2A2114" };
+  const S = STOCK[1];
   return (
-    <AbsoluteFill style={{ background: S.bg, overflow: "hidden" }}>
-      <Halftone c="#B9A97E" o={0.20} />
-      <div style={{ position: "absolute", left: 56, top: 250, padding: "16px 30px",
-        background: "#2A2114", transform: "rotate(-2deg)", zIndex: 40,
-        filter: `drop-shadow(${SHADOW})`, fontFamily: inter.fontFamily, fontWeight: 900,
-        fontSize: 46, color: "#EDE6D4" }}>THAT IS $521 A MONTH</div>
-      {/* the ten free marks, stuck down as paper chips */}
-      {PAIRS.map((p, k) => {
-        const col = k % 5, row = Math.floor(k / 5);
-        const t = E(f, 6 + k * 3, 6 + k * 3 + 8, 0, 1, BACK);
-        const r = (n: number) => { const v = Math.sin(k * 19.3 + n * 5.1) * 4371.7; return v - Math.floor(v); };
-        return (
-          <div key={p.free} style={{ position: "absolute", left: 66 + col * 194,
-            top: 560 + row * 250, width: 168, height: 218, zIndex: 30,
-            transform: `rotate(${(r(1) - 0.5) * 7}deg) scale(${t})`,
-            filter: `drop-shadow(${SHADOW})` }}>
-            <div style={{ position: "absolute", inset: 0, background: "#FBF8EE",
-              clipPath: TORN_ALL }} />
-            <div style={{ position: "absolute", left: 34, top: 26, width: 100, height: 100,
-              background: "#FFFFFF", border: "4px solid #E2DCCC", display: "flex",
-              alignItems: "center", justifyContent: "center" }}>
-              <Img src={staticFile("logos/" + p.fLogo)}
-                style={{ width: Math.min(62, (MARK_CAP[p.fLogo] ?? 999) * 1.3),
-                  height: Math.min(62, (MARK_CAP[p.fLogo] ?? 999) * 1.3), objectFit: "contain" }} />
-            </div>
-            <div style={{ position: "absolute", left: 6, right: 6, top: 140, textAlign: "center",
-              fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 22,
-              color: "#2A2114" }}>{p.free}</div>
-            <div style={{ position: "absolute", left: 0, right: 0, top: 172, textAlign: "center",
-              fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 30,
-              color: "#237A54" }}>FREE</div>
-          </div>
-        );
-      })}
-      {/* the keyword, stamped */}
-      <div style={{ position: "absolute", left: 66, right: 66, top: 1120, height: 132,
-        background: "#D8A62C", transform: `rotate(1.2deg) scale(${f < 4 ? 0 : E(f, 4, 12, 1.4, 1, BACK)})`,
-        zIndex: 44, filter: `drop-shadow(${SHADOW})`, display: "flex", alignItems: "center",
-        justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 62,
-        letterSpacing: "0.04em", color: "#2A2114" }}>COMMENT “FREE”</div>
+    <AbsoluteFill>
+      <Panel>
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+          <NightYard S={S} f={f} i={4} />
+          {/* the ten free marks, pegged up as paper chips */}
+          {PAIRS.map((p, k) => {
+            const col = k % 5, row = Math.floor(k / 5);
+            const t = E(f, 4 + k * 3, 4 + k * 3 + 8, 0, 1, BACK);
+            const r = (n: number) => { const v = Math.sin(k * 19.3 + n * 5.1) * 4371.7; return v - Math.floor(v); };
+            return (
+              <div key={p.free} style={{ position: "absolute", left: 52 + col * 186,
+                top: 150 + row * 208, width: 162, height: 190, zIndex: 30,
+                transform: `rotate(${(r(1) - 0.5) * 7}deg) scale(${t})`,
+                filter: `drop-shadow(${SHADOW})` }}>
+                <div style={{ position: "absolute", inset: 0, background: "#F7F3E6" }} />
+                <div style={{ position: "absolute", left: 35, top: 20, width: 92, height: 92,
+                  background: "#FFFFFF", border: "4px solid #E2DCC8", display: "flex",
+                  alignItems: "center", justifyContent: "center" }}>
+                  <Img src={staticFile("logos/" + p.fLogo)}
+                    style={{ width: Math.min(57, (MARK_CAP[p.fLogo] ?? 999) * 1.4),
+                      height: Math.min(57, (MARK_CAP[p.fLogo] ?? 999) * 1.4), objectFit: "contain" }} />
+                </div>
+                <div style={{ position: "absolute", left: 4, right: 4, top: 122, textAlign: "center",
+                  fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 19,
+                  color: "#2A2114" }}>{p.free}</div>
+                <div style={{ position: "absolute", left: 0, right: 0, top: 148, textAlign: "center",
+                  fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 26,
+                  color: "#237A54" }}>FREE</div>
+              </div>
+            );
+          })}
+          <div style={{ position: "absolute", left: 52, right: 52, top: 592, height: 96,
+            background: "#D8A62C", transform: `rotate(1.2deg) scale(${f < 4 ? 0 : E(f, 4, 12, 1.4, 1, BACK)})`,
+            zIndex: 44, filter: `drop-shadow(${SHADOW})`, display: "flex", alignItems: "center",
+            justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 50,
+            letterSpacing: "0.04em", color: "#2A2114" }}>COMMENT “FREE”</div>
+        </div>
+      </Panel>
     </AbsoluteFill>
-  );
-};
-
-/* ---- captions: a solid block, heavy uppercase, NOT the house karaoke ----- */
-const PaperCaption: React.FC = () => {
-  const f = useCurrentFrame();
-  const t = f / PFPS;
-  const W2 = words as Array<{ start: number; end: number; word: string }>;
-  const idx = W2.findIndex((w, k) => t >= w.start && (k === W2.length - 1 || t < W2[k + 1].start));
-  if (idx < 0) return null;
-  const lineStart = Math.max(0, idx - (idx % 4));
-  const line = W2.slice(lineStart, lineStart + 4);
-  return (
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1560, zIndex: 60,
-      display: "flex", justifyContent: "center" }}>
-      <div style={{ background: "#1E1A14", padding: "18px 34px", transform: "rotate(-0.8deg)",
-        filter: `drop-shadow(${SHADOW})`, display: "flex", gap: 16 }}>
-        {line.map((w, k) => (
-          <span key={k} style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 66,
-            letterSpacing: "-0.01em", textTransform: "uppercase",
-            color: lineStart + k === idx ? "#D8A62C" : "#F2EFE4" }}>{w.word.trim()}</span>
-        ))}
-      </div>
-    </div>
   );
 };
 
 /* ---- assembly ----------------------------------------------------------- */
 const SC = [0, 65, 135, 204, 274, 338, 407, 479, 549, 618, 699];
+const HEADS: Array<[string, string]> = [
+  ["FREE VS PAID AI", "IMAGE CREATION"], ["AI RESEARCH", "2 OF 10"],
+  ["AVATAR CREATION", "3 OF 10"], ["CODE GENERATION", "4 OF 10"],
+  ["VIDEO GENERATION", "5 OF 10"], ["IMAGE EDITING", "6 OF 10"],
+  ["SOCIAL SCHEDULING", "7 OF 10"], ["WEBSITE BUILDER", "8 OF 10"],
+  ["VIDEO EDITING", "9 OF 10"], ["VOICE GENERATION", "10 OF 10"],
+  ["THAT IS $521 A MONTH", "COMMENT FREE FOR THE LIST"],
+];
 const PPAID = [26, 98, 171, 242, 303, 370, 442, 513, 581, 661];
 const PFREE = [51, 120, 181, 260, 325, 393, 461, 525, 604, 682];
 const A_ = "am/";
 
-/** ⛔ THE SFX ARE REBUILT FOR PAPER, not reused. A cash register and a coin drop
-    belong to the coin-op cut; this world tears and stamps. */
+/** ⛔ THE SFX ARE REBUILT FOR A SWORD, not reused from the house cuts. A till
+    and a coin drop belong to the coin-op world; this one draws and cuts.
+    ⛔ THE SLICE IS THREE LAYERS AND THEY ARE NOT SIMULTANEOUS: the draw BEFORE
+    the word (the wind-up), the ring ON it, the thuds after as the halves land.
+    A single cue on the beat sounds like a click. */
 const PSFX: Cue[] = [
   ...layer(0, { src: A_ + "hit-boom.wav", v: LEVELS.SFX_HERO, dur: 1.8 },
               { src: A_ + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 1.1 }),
@@ -370,9 +430,6 @@ const PSFX: Cue[] = [
     { at: fr / PFPS, src: A_ + "snap.wav", v: LEVELS.SFX_HERO, dur: 0.7, rate: 0.93 + i * 0.015, lead: 1 },
     { at: fr / PFPS, src: A_ + "hit-boom.wav", v: LEVELS.SFX_MID, dur: 1.0, rate: 0.9, lead: 2 },
   ]),
-  /* ⛔ THE SLICE IS THREE LAYERS AND THEY ARE NOT SIMULTANEOUS: the draw comes
-     BEFORE the word (the wind-up), the ring lands ON it, the two thuds land
-     after as the halves hit. A single cue on the beat would sound like a click. */
   ...PFREE.map((fr, i): Cue => ({ at: (fr - 14) / PFPS, src: A_ + "whoosh-fast.wav",
     v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.24 + i * 0.012, lead: 0 })),
   ...PFREE.flatMap((fr, i): Cue[] => [
@@ -386,21 +443,48 @@ const PSFX: Cue[] = [
   { at: 760 / PFPS, src: A_ + "success-jingle.wav", v: LEVELS.SFX_MID, dur: 1.6, lead: 0 },
 ];
 
+const PaperHead: React.FC<{ big: string; hot: string; settled?: boolean }> =
+  ({ big, hot, settled }) => {
+  const f = useCurrentFrame();
+  return <HookHeader f={settled ? f + 12 : f} big={big} hot={hot} />;
+};
+
+/** ⛔⛔ THE ROOT OWNS THE BRAND. `Bg`, `HookHeader`, `ProgressBar` and the ONE
+    house `KaraokeCaption` track — byte-identical to the six house cuts, because
+    those are what a viewer recognises as this channel. Only what happens inside
+    the screen is new. */
 export const FreeReelPaper: React.FC = () => (
-  <AbsoluteFill style={{ background: "#1E1A14" }}>
+  <AbsoluteFill>
     <Audio src={staticFile("free_vo.wav")} />
     <Audio src={staticFile("free_bed_g.wav")} />
     <SfxTrack cues={PSFX} />
+    <Bg />
+    <AssemblyCtx.Provider value={true}>
+      {SC.map((at, i) => {
+        const to = i < SC.length - 1 ? SC[i + 1] : 767;
+        return (
+          <Sequence key={at} from={at} durationInFrames={to - at} layout="none">
+            {i < 10
+              ? <PaperBeat i={i} paidAt={PPAID[i] - at} freeAt={PFREE[i] - at} hook={i === 0} />
+              : <PaperCta />}
+          </Sequence>
+        );
+      })}
+    </AssemblyCtx.Provider>
+    {/* ⛔ HookHeader TAKES ITS OWN FRAME. Rendered without `f` it defaults to 0
+        and the entrance never plays, so the header simply never appears — which
+        is what "the screen part doesn't show properly" partly was. The house
+        cuts wrap it for exactly this reason, and the hook gets +12 so scene 0 is
+        SETTLED rather than animating in. */}
     {SC.map((at, i) => {
       const to = i < SC.length - 1 ? SC[i + 1] : 767;
       return (
-        <Sequence key={at} from={at} durationInFrames={to - at} layout="none">
-          {i < 10
-            ? <PaperBeat i={i} paidAt={PPAID[i] - at} freeAt={PFREE[i] - at} hook={i === 0} />
-            : <PaperCta />}
+        <Sequence key={"h" + at} from={at} durationInFrames={to - at} layout="none">
+          <PaperHead big={HEADS[i][0]} hot={HEADS[i][1]} settled={i === 0} />
         </Sequence>
       );
     })}
-    <PaperCaption />
+    <ProgressBar />
+    <KaraokeCaption words={words as any} fps={PFPS} top={1268} />
   </AbsoluteFill>
 );
