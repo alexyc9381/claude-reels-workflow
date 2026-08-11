@@ -176,7 +176,7 @@ export const HookPress: React.FC = () => {
     /* ⛔ SETTLED IS NOT INERT (round 3). The platen descends at CONSTANT velocity
        from frame 0 — the machine was already running when we cut in, which is
        both the motion and the reason the next shot happens. */
-    const drop = E(lf, 0, 26, 96, 152, LIN);
+    const drop = E(lf, 0, 26, 146, 196, LIN);
     return (
       <HookScene w={w} bare push={[0, 26, 1.07]}>
         {/* the bed of the press: iron rails and a dark deck */}
@@ -203,7 +203,7 @@ export const HookPress: React.FC = () => {
         {/* ⭐⭐ THE MASTER SHEET — the whole finding, as one object. 828 x 400 of
             cream in the middle third, the mark on white at its head, the number
             in 88px Fraunces. This is the frame a viewer decides on. */}
-        <div style={{ position: "absolute", left: 92, top: 150, width: 828, height: 400,
+        <div style={{ position: "absolute", left: 92, top: 216, width: 828, height: 400,
           zIndex: 40 }}>
           <div style={{ position: "absolute", inset: 0, borderRadius: 14, background: "#EFE9D9",
             border: "10px solid #CFC5A8", boxShadow: SH_D }} />
@@ -239,19 +239,35 @@ export const HookPress: React.FC = () => {
             background: "#B9AE90" }} />
         </div>
 
-        {/* THE PLATEN, coming down. Dark, heavy, and the only thing in the frame
-            that is going somewhere. */}
+        {/* THE PLATEN, coming down. ⛔⛔ V1 PAINTED IT #4A4356 ON A #231F2A BED AND
+            IT WAS INVISIBLE — [[reel-draw-dont-stack]]'s VALUE SEPARATION rule:
+            hero and ground must differ in LIGHTNESS, not just hue, and two dark
+            purples 25 points apart is not a difference at reel scale. It is now
+            lit from the lamp side, carries a bright leading edge, and casts onto
+            the sheet, so the one thing in the frame that is going somewhere
+            actually reads as going somewhere. */}
         <div style={{ position: "absolute", left: 62, top: drop - 232, width: 888, height: 232,
           zIndex: 52, borderRadius: "0 0 12px 12px",
-          background: "linear-gradient(178deg,#4A4356 0%,#2B2634 100%)",
+          background: "linear-gradient(178deg,#8A7F9E 0%,#4A4257 62%,#332C3E 100%)",
           boxShadow: "0 26px 44px rgba(8,6,12,0.52)" }}>
           {Array.from({ length: 7 }, (_, i) => (
-            <div key={"bolt" + i} style={{ position: "absolute", left: 54 + i * 128, top: 40,
-              width: 30, height: 30, borderRadius: 15, background: "#6A6178" }} />
+            <div key={"bolt" + i} style={{ position: "absolute", left: 54 + i * 128, top: 44,
+              width: 32, height: 32, borderRadius: 16, background: "#B4A9C6" }} />
           ))}
-          <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 16,
+          <div style={{ position: "absolute", left: 0, right: 0, top: 108, height: 7,
+            background: "#9E92B4" }} />
+          {/* the leading edge — the brightest line in the top half of the frame */}
+          <div style={{ position: "absolute", left: 0, right: 0, bottom: 14, height: 10,
+            background: "#C6BBD6" }} />
+          <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 14,
             background: "#151220" }} />
         </div>
+        {/* what it is about to land on gets darker as it closes — the shadow is
+            how a viewer reads the gap without being told there is one */}
+        <div style={{ position: "absolute", left: 92, top: 216, width: 828, height: 400,
+          zIndex: 53, borderRadius: 14, pointerEvents: "none",
+          background: "linear-gradient(178deg,#0A0810 0%,rgba(10,8,16,0) 62%)",
+          opacity: E(lf, 0, 26, 0.10, 0.62, LIN) }} />
         {/* the two screw columns it rides down */}
         {[150, 830].map((sx) => (
           <div key={"sc" + sx} style={{ position: "absolute", left: sx, top: 0,
@@ -265,8 +281,27 @@ export const HookPress: React.FC = () => {
         ))}
 
         <Flywheel x={-40} y={452} r={168} z={26} />
+        {/* ink cans and a lit deck lip, so the bed is a WORKING surface rather
+            than a flat field the plate happens to sit on */}
+        <div style={{ position: "absolute", left: 0, right: 0, top: 648, height: 9,
+          zIndex: 17, background: "#6A6178" }} />
+        {[[706, 674], [800, 690], [886, 670]].map(([cx, cy], i) => (
+          <div key={"ink" + i} style={{ position: "absolute", left: cx, top: cy, width: 62,
+            height: 76, borderRadius: 6, zIndex: 34, background: "#2C2636",
+            border: "5px solid #4A4356" }}>
+            <div style={{ position: "absolute", left: 10, top: -12, width: 42, height: 14,
+              borderRadius: 4, background: "#6A6178" }} />
+            <div style={{ position: "absolute", left: 12, top: 26, right: 12, height: 22,
+              background: i === 1 ? "#A6483A" : "#161220" }} />
+          </div>
+        ))}
         <Cone f={f} x={250} y={-52} top={130} bot={560} len={560} c="#F4E3BE" o={0.2} z={20} />
-        <Claudie x={214} y={946} s={1.86} z={62} f={f} hero costume={{ beard: 1 }} />
+        {/* ⛔ A COSTUME THAT SITS ON TOP OF THE HEAD IS THE ONLY ONE THAT SURVIVES
+            A BOTTOM CROP. V1 gave him `beard`, which renders below the chin and is
+            entirely off-frame here, so he read as a bare orange block. The hard
+            hat is above the eyes and reads at any crop — same trick variant A
+            uses with the same costume in the same corner of the frame. */}
+        <Claudie x={222} y={928} s={2.02} z={62} f={f} hero costume={{ constr: 1 }} />
         {/* paper dust off the stock, all through the shot */}
         {Array.from({ length: 15 }, (_, i) => {
           const r = (k: number) => { const v = Math.sin(i * 39.7 + k * 8.3) * 4371.7; return v - Math.floor(v); };
@@ -365,7 +400,7 @@ export const HookPress: React.FC = () => {
             16.3, i.e. 18px off the left edge of the panel. The safe band here is
             x >= 47.4 and x+w <= 964.6. This sits at 96 with 420 of width, which
             also gives the mono line room it did not have. */}
-        <div style={{ position: "absolute", left: 96, top: 566, width: 420, zIndex: 84,
+        <div style={{ position: "absolute", left: 96, top: 566, width: 420, zIndex: 96,
           borderRadius: 18, background: "#EDE7D6", border: "9px solid #B3A98F",
           boxShadow: SH_D, padding: "14px 0 18px", textAlign: "center" }}>
           <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 106,
@@ -373,8 +408,8 @@ export const HookPress: React.FC = () => {
           <div style={{ marginTop: 6, fontFamily: MONO, fontWeight: 900, fontSize: 22,
             letterSpacing: "0.16em", color: "#6E6450" }}>SPECIALISTS</div>
         </div>
-        <Claudie x={856} y={790} s={1.54} z={62} f={f} hero costume={{ beard: 1 }} face={-1} />
-        <Contact x={790} y={780} w={166} z={61} o={0.32} />
+        <Claudie x={856} y={790} s={1.54} z={88} f={f} hero costume={{ constr: 1 }} face={-1} />
+        <Contact x={790} y={780} w={166} z={87} o={0.32} />
         <Occluder side="l" c="#1E1A26" w={72} z={92} kind="pole" />
       </HookScene>
     );
@@ -414,17 +449,16 @@ export const HookPress: React.FC = () => {
           each with clear air around it.
           ⛔ And they GROW: a crew that arrives and holds is the note this reel
           has already been given twice. */}
-      {Array.from({ length: 6 }, (_, i) => {
-        const p = i / 5;
+      {Array.from({ length: 4 }, (_, i) => {
+        const p = i / 3;
         const g = E(lf, 0, 29, 1, 1.16, LIN);
-        const near = [0, 2, 4].includes(i) ? 1 : 0;
+        const near = i % 2;
         return (
-          <Claudie key={"c" + i} x={506 + (96 + p * 826 - 506) * g}
-            y={(660 + near * 96) * g} s={(0.88 + near * 0.34) * g}
-            z={40 + near * 8} f={f + i * 17} walk={1} tint={CLAY} face={i % 2 ? -1 : 1}
-            costume={[{ glasses: 1 }, { suit: 1 }, { wizard: 1 },
-                      { prof: 1 }, { beard: 1 }, { constr: 1 }][i]}
-            prop={(["board", "roll", "swatch", "case", "screen", "mega"] as const)[i]} />
+          <Claudie key={"c" + i} x={506 + (122 + p * 768 - 506) * g}
+            y={(628 + near * 122) * g} s={(0.76 + near * 0.3) * g}
+            z={86 + near * 3} f={f + i * 17} walk={1} tint={CLAY} face={i % 2 ? -1 : 1}
+            costume={[{ glasses: 1 }, { suit: 1 }, { wizard: 1 }, { prof: 1 }][i]}
+            prop={(["board", "roll", "swatch", "case"] as const)[i]} />
         );
       })}
       {/* the stack they came off, on the pavement */}
@@ -463,13 +497,27 @@ export const HookPress: React.FC = () => {
 /** one cream flap cell mid-roll. ⛔ The cell is never simply swapped — a swap has
     no frames in it, and both the audit and the eye can see that. */
 const GLY = "0123456789";
+const SETTLE = 12;                 // frames for one cell to land, see below
 const Cell: React.FC<{ ch: string; k: number; s?: number; delay?: number; lock: boolean }> =
   ({ ch, k, s = 1, delay = 0, lock }) => {
+  const kk = k - delay;
+  /* ⛔⛔ THE WAVE HAS TO FINISH INSIDE ITS OWN SHOT, AND V1's DID NOT. The settle
+     was 22 frames, rows started 5 apart and the last row began at lf=20 — so in a
+     28-frame shot the bottom row was still spinning when the cut came, and f30
+     and f40 rendered as the same picture. THE MECHANISM OF THIS OPEN IS THE LOCK;
+     if it does not land, the shot has no beat in it at all.
+     Budget: last row starts at 4*3=12, its second digit adds 2, plus SETTLE=12
+     -> lands at frame 26 of 28. ⭐ Always add the stagger, the intra-row delay
+     AND the settle before believing an animation fits.
+     ⚠️ When `lock` is false the cell FREE-RUNS instead of easing, because an
+     eased settle clamps and a clamped board is a dead board — shot A needs the
+     clatter to be the rest state, not a one-shot that ends. */
   const target = Math.max(0, GLY.indexOf(ch));
-  const spin = E(k - delay, 0, 22, 0, target + GLY.length * 4, IO);
-  const idx = Math.floor(spin) % GLY.length;
+  const spin = lock ? E(kk, 0, SETTLE, 0, target + GLY.length * 2, IO)
+                    : kk * 0.5 + delay * 1.7;
+  const idx = Math.floor(Math.max(0, spin)) % GLY.length;
   const frac = spin - Math.floor(spin);
-  const settled = lock && k - delay >= 22;
+  const settled = lock && kk >= SETTLE;
   const shown = settled ? ch : GLY[idx];
   const next = settled ? ch : GLY[(idx + 1) % GLY.length];
   const ww = 62 * s, hh = 84 * s;
@@ -518,7 +566,7 @@ const NameRow: React.FC<{ x: number; y: number; label: string; num: string; k: n
       paddingLeft: 22 * s, fontFamily: fraunces.fontFamily, fontWeight: 900,
       fontSize: 46 * s, color: "#241E12", letterSpacing: "0.01em" }}>{label}</div>
     {num.padStart(2, "0").split("").map((ch, i) => (
-      <Cell key={"n" + i} ch={ch} k={k} s={s} delay={i * 3} lock={lock} />
+      <Cell key={"n" + i} ch={ch} k={k} s={s} delay={i * 2} lock={lock} />
     ))}
   </div>
 );
@@ -607,25 +655,30 @@ export const HookBoard: React.FC = () => {
           zIndex: 20, borderRadius: 12, background: "#1C2C29", border: "12px solid #2E4A45",
           boxShadow: SH_D }} />
         <Head x={116} y={152} ww={780} hh={132} s={0.49} z={70} />
+        {/* the wave: row i starts its settle 3 frames after the row above it,
+            so the whole board locks front to back and is DONE by frame 26 of 28 */}
         {ROWS.map(([lb, nm], i) => (
-          <NameRow key={lb} x={132} y={300 + i * 62} label={lb} num={nm} k={lf} s={0.66}
-            z={40} lock={lf >= 4 + i * 5} />
+          <NameRow key={lb} x={132} y={300 + i * 62} label={lb} num={nm} k={lf - i * 3}
+            s={0.66} z={40} lock />
         ))}
         {/* the awning it hangs under, and the crowd that came to read it.
             ⛔ FIVE, NOT EIGHT, and none of them in the hero's lane — v1's eight
             merged into one orange band across the bottom edge. */}
         <div style={{ position: "absolute", left: 76, top: 66, width: 860, height: 30,
           zIndex: 26, borderRadius: 6, background: "#2E4A45" }} />
-        {Array.from({ length: 5 }, (_, i) => {
-          const p = i / 4;
+        {Array.from({ length: 4 }, (_, i) => {
+          const p = i / 3;
           return (
-            <Claudie key={"w" + i} x={104 + p * 560} y={760 + (i % 2) * 26}
-              s={0.8 + (i % 2) * 0.14} z={38 + (i % 2)} f={f + i * 19} tint={CLAY}
-              costume={[{ glasses: 1 }, { prof: 1 }, { wizard: 1 }, { girl: 1 },
-                        { beard: 1 }][i]} />
+            <Claudie key={"w" + i} x={96 + p * 546} y={756 + (i % 2) * 30}
+              s={0.72 + (i % 2) * 0.12} z={86 + (i % 2)} f={f + i * 21} tint={CLAY}
+              costume={[{ glasses: 1 }, { prof: 1 }, { wizard: 1 }, { girl: 1 }][i]} />
           );
         })}
-        <Claudie x={886} y={886} s={1.7} z={62} f={f} hero costume={{ suit: 1 }} face={-1} />
+        {/* ⛔ z 88, ABOVE the kerb furniture. `Surface` paints its pavement edge
+            at z 84 and its bins/crates/hydrants at z 85, and anything below that
+            gets a black lump across it — the exact note round 6 already fixed
+            once ("there shouldn't be the black objects at the bottom"). */}
+        <Claudie x={886} y={886} s={1.7} z={88} f={f} hero costume={{ suit: 1 }} face={-1} />
         <StreetLamp x={54} y={706} h={368} c="#CFE8DA" z={24} />
         <Occluder side="l" c="#0F1A18" w={70} z={92} />
       </HookScene>
@@ -641,22 +694,26 @@ export const HookBoard: React.FC = () => {
         boxShadow: SH_D }} />
       <Head x={216} y={158} ww={586} hh={122} s={0.46} z={70} />
       {ROWS.slice(0, 2).map(([lb, nm], i) => (
-        <NameRow key={lb} x={230} y={296 + i * 62} label={lb} num={nm} k={40} s={0.5} z={40}
+        <NameRow key={lb} x={230} y={296 + i * 62} label={lb} num={nm} k={99} s={0.5} z={40}
           lock />
       ))}
       {/* ⛔ THEY GROW, AND THERE ARE FIVE. A dark figure that arrives and holds is
           worth nothing to the eye or to the metric, and nine of them touching is
           a texture rather than a crew — the whole crew walks INTO the lens with
           air between them. */}
-      {Array.from({ length: 5 }, (_, i) => {
-        const p = i / 4;
+      {/* ⛔ FOUR, AND THEY MUST STILL HAVE AIR AT FULL GROWTH. The arithmetic that
+          v1 skipped: five sprites at a final scale of 1.52 are 289px wide each,
+          1445px of body across 937px of spread — they cannot not overlap. Four at
+          1.25 is 950px of body across the same spread, which reads as a crew. */}
+      {Array.from({ length: 4 }, (_, i) => {
+        const p = i / 3;
         const near = i % 2;
         return (
-          <Claudie key={"o" + i} x={506 + (110 + p * 800 - 506) * g}
-            y={(652 + near * 104) * g} s={(0.94 + near * 0.36) * g} z={40 + near * 7}
+          <Claudie key={"o" + i} x={506 + (118 + p * 776 - 506) * g}
+            y={(632 + near * 120) * g} s={(0.78 + near * 0.29) * g} z={86 + near * 3}
             f={f + i * 15} walk={1} tint={CLAY} face={i % 2 ? -1 : 1}
-            costume={[{ suit: 1 }, { glasses: 1 }, { wizard: 1 }, { prof: 1 }, { beard: 1 }][i]}
-            prop={(["case", "board", "mega", "swatch", "roll"] as const)[i]} />
+            costume={[{ suit: 1 }, { glasses: 1 }, { wizard: 1 }, { prof: 1 }][i]}
+            prop={(["case", "board", "mega", "swatch"] as const)[i]} />
         );
       })}
       {[176, 836].map((lx, i) => (

@@ -1,0 +1,104 @@
+{
+ "vo_onset_max_s": 0.15,
+ "audio_onset_max_s": 0.15,
+ "music_onset_max_s": 0.15,
+ "ends_tight_max_s": 0.5,
+ "max_short_word_s": 0.8,
+ "caption_drift_tol_s": 0.12,
+ "sfx_cues_s": [
+  0.0,
+  0.3,
+  0.4,
+  0.46,
+  0.73,
+  1.3,
+  1.87,
+  2.73,
+  2.9,
+  3.67,
+  3.86,
+  4.67,
+  5.37,
+  5.93,
+  6.0,
+  6.04,
+  6.166,
+  6.206,
+  6.332,
+  6.372,
+  6.498,
+  6.538,
+  7.2,
+  7.72,
+  8.37,
+  8.5,
+  9.23,
+  9.97,
+  10.97,
+  12.03,
+  12.44,
+  12.9,
+  12.92,
+  12.96,
+  13.03,
+  13.1,
+  13.17,
+  13.24,
+  13.6,
+  14.5,
+  15.5,
+  16.5,
+  17.03,
+  17.3,
+  17.32,
+  17.5,
+  18.57,
+  18.72,
+  19.0,
+  19.4,
+  19.95
+ ],
+ "music_bed": "video/public/repo_bed.wav",
+ "words_json": "video/src/data/words_repo.json",
+ "script": "Someone just dropped a GitHub repo that gives you 800 million free AI tokens every month. Not 800,000, but 800 million. GPT-5, Claude, Gemini, Llama, all for free. Most developers are paying hundreds of dollars a month just to access one of these tools. This repo routes your requests across the free tiers of every major AI company simultaneously. Hit one model's rate limit, it automatically jumps to the next. Comment REPO and I'll send it immediately.",
+ "L": [
+  0.0,
+  3.67,
+  5.93,
+  8.37,
+  12.03,
+  16.5,
+  19.0
+ ],
+ "voDuration": 21.33,
+ "scenes": [
+  {
+   "i": 0,
+   "job": "S0 HOOK pumphouse"
+  },
+  {
+   "i": 1,
+   "job": "S1 gauge yard"
+  },
+  {
+   "i": 2,
+   "job": "S2 feeder row"
+  },
+  {
+   "i": 3,
+   "job": "S3 coin pump"
+  },
+  {
+   "i": 4,
+   "job": "S4 manifold hall"
+  },
+  {
+   "i": 5,
+   "job": "S5 selector"
+  },
+  {
+   "i": 6,
+   "job": "S6 CTA tap"
+  }
+ ]
+}

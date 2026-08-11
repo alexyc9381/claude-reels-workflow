@@ -246,8 +246,8 @@ export const Feeders: React.FC<{ x: number; y: number; n?: number; s?: number; z
       appear, and the ones without a public mark get a cast stencil.
    ====================================================================== */
 export const Tap: React.FC<{ x: number; y: number; s?: number; z?: number; f?: number;
-  on?: number; label?: string; markKey?: string; hasMark?: boolean }> =
-  ({ x, y, s = 1, z = 60, f = 0, on = 0, label, markKey, hasMark }) => (<>
+  on?: number; label?: string; markKey?: string; hasMark?: boolean; drop?: number }> =
+  ({ x, y, s = 1, z = 60, f = 0, on = 0, label, markKey, hasMark, drop }) => (<>
     {/* the wall boss and the spout */}
     <div style={{ position: "absolute", left: x - 20 * s, top: y - 12 * s, width: 40 * s,
       height: 26 * s, borderRadius: 5, background: BRASSD, zIndex: z, boxShadow: SH }} />
@@ -261,7 +261,10 @@ export const Tap: React.FC<{ x: number; y: number; s?: number; z?: number; f?: n
     <div style={{ position: "absolute", left: x - 25 * s, top: y - 5 * s, width: 50 * s,
       height: 8 * s, borderRadius: 4, background: BRASSL, zIndex: z + 4,
       transform: `rotate(${on * 62}deg)`, transformOrigin: "50% 50%" }} />
-    {on > 0.04 && <Stream x={x} y={y + 62 * s} len={52 * s} w={11 * s} t={on} f={f} z={z + 5} />}
+    {/* the fall REACHES the launder — a stream that stops in mid-air is a
+        tap pouring onto nothing */}
+    {on > 0.04 && <Stream x={x} y={y + 62 * s} len={drop ?? 52 * s} w={11 * s} t={on}
+      f={f} z={z + 5} />}
     {hasMark && markKey
       ? <Disc k={markKey} x={x} y={y - 54 * s} s={46 * s} z={z + 9} />
       : label && <Stencil t={label} x={x - 48 * s} y={y - 70 * s} s={s * 0.92} z={z + 9} />}
@@ -335,6 +338,16 @@ export const Coin: React.FC<{ x: number; y: number; s?: number; z?: number; t: n
 export const Manifold: React.FC<{ x: number; y: number; n?: number; s?: number; z?: number;
   f?: number; charge?: number; w?: number }> =
   ({ x, y, n = 14, s = 1, z = 40, f = 0, charge = 0, w: hw = 720 }) => (<>
+    {/* ⛔ THE TOP RUN. Without it the drops are free-standing sticks with caps
+        on and the frame reads as a BAR CHART — the exact shape reel 86 rejected
+        for having no moment. A gallery pipe across the elbows makes them a
+        take-off from a main, which is what they are. */}
+    <div style={{ position: "absolute", left: x - hw / 2 - 60 * s,
+      top: y - 320 * s - 26 * s, width: hw + 120 * s, height: 34 * s, borderRadius: 6,
+      background: IROND, zIndex: z - 3, boxShadow: SH }} />
+    <div style={{ position: "absolute", left: x - hw / 2 - 60 * s,
+      top: y - 320 * s - 26 * s, width: hw + 120 * s, height: 9 * s, borderRadius: 6,
+      background: IRONL, opacity: 0.7, zIndex: z - 2 }} />
     {/* the arcs coming down into the header */}
     {Array.from({ length: n }, (_, i) => {
       const k = i / (n - 1);
@@ -445,10 +458,25 @@ export const Selector: React.FC<{ x: number; y: number; s?: number; z?: number; 
         )}
       </React.Fragment>);
     })}
-    {/* the arm — the thing that moves, and the only thing that moves */}
+    {/* the feed pipes entering each port, so this reads as PLUMBING and not as
+        a dial floating in a grey room */}
+    {PORTS.map((pt, i) => {
+      const rad = (pt.a * Math.PI) / 180;
+      const px = x + Math.cos(rad) * R * 1.34, py = y + Math.sin(rad) * R * 1.34;
+      return <div key={"fp" + i} style={{ position: "absolute", left: px - 26 * s,
+        top: py - 26 * s, width: 52 * s, height: 300 * s, borderRadius: 8,
+        background: i === dead ? "#5E4038" : i === live ? WATERD : IROND, zIndex: z - 4,
+        transformOrigin: "50% 0%", transform: `rotate(${pt.a + 90}deg)`, boxShadow: SH }} />;
+    })}
+    {/* the arm — the thing that moves, and the only thing that moves.
+        ⛔ THE BAR HANGS DOWNWARD FROM THE HUB, so at rotation 0 it points at
+        +90°. To aim at a port whose angle is A the rotation must be A - 90.
+        v1 used `arm + 90` and the arm pointed 180° AWAY from every port — at
+        f520 it sat between two dead ports while the flag said 07 had failed,
+        which is the one frame in the reel whose whole job is to be unambiguous. */}
     <div style={{ position: "absolute", left: x - 15 * s, top: y - 15 * s, width: 30 * s,
       height: R * 0.99, zIndex: z + 30, transformOrigin: `50% ${15 * s}px`,
-      transform: `rotate(${arm + 90}deg)` }}>
+      transform: `rotate(${arm - 90}deg)` }}>
       <div style={{ position: "absolute", inset: 0, borderRadius: 8, background: BRASSL,
         boxShadow: SH_D }} />
       <div style={{ position: "absolute", left: 0, top: 0, width: 10 * s, height: "100%",

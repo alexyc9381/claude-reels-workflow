@@ -1240,3 +1240,98 @@ export const Fan: React.FC<{ x: number; y: number; s?: number; z?: number; f?: n
       borderRadius: "50%", background: "#98A0A9" }} />
   </div>
 );
+
+/* =========================================================================
+   THE HATCH — a floor hatch seen from ABOVE, buried in drift.
+
+   Built for cut D's rebuilt open. Alex: cut D's hook *"isn't meeting the bar in
+   terms of interest and pattern interrupt."* He was right and the doc already
+   said why: its first shot was a single establishing wide of an empty plain
+   with a 40px figure in it, and `docs/THE-OPEN.md` calls an establishing wide a
+   POSTER — one beat, then the eye has nothing left to do.
+
+   ⭐ The replacement mechanism is EXCAVATION, and the thing that makes it work
+   is the CAMERA: this is the only shot in the whole reel that looks DOWN. A
+   viewer who has scrolled past forty side-on dioramas has not seen a top-down
+   plate of steel come out from under snow and open at them.
+   ====================================================================== */
+export const Hatch: React.FC<{ x: number; y: number; s?: number; z?: number; f?: number;
+  clear?: number; open?: number; spin?: number }> =
+  ({ x, y, s = 1, z = 30, f = 0, clear = 1, open = 0, spin = 0 }) => {
+  const R = 250 * s;
+  return (<>
+    {/* the rim set into the ground */}
+    <div style={{ position: "absolute", left: x - R * 1.16, top: y - R * 1.16, width: R * 2.32,
+      height: R * 2.32, borderRadius: "50%", background: CONCD, zIndex: z }} />
+    <div style={{ position: "absolute", left: x - R * 1.08, top: y - R * 1.08, width: R * 2.16,
+      height: R * 2.16, borderRadius: "50%", background: "#22262C", zIndex: z + 1 }} />
+    {/* the light that is already down there, revealed as the lid lifts */}
+    {open > 0.01 && (<>
+      <div style={{ position: "absolute", left: x - R * 1.02, top: y - R * 1.02, width: R * 2.04,
+        height: R * 2.04, borderRadius: "50%", background: "#E8CE97",
+        opacity: 0.45 + open * 0.55, zIndex: z + 2 }} />
+      <div style={{ position: "absolute", left: x - R * 0.74, top: y - R * 0.74, width: R * 1.48,
+        height: R * 1.48, borderRadius: "50%", background: "#FBEFD2", opacity: open, zIndex: z + 3 }} />
+      {/* the beam coming UP out of it, straight at the lens */}
+      <div style={{ position: "absolute", left: x - R * 2.0, top: y - R * 2.0, width: R * 4,
+        height: R * 4, borderRadius: "50%", zIndex: z + 4,
+        background: `radial-gradient(circle, ${hexa("#F5E2B4", 0.46 * open)} 0%, ${hexa("#F5E2B4", 0)} 62%)` }} />
+    </>)}
+    {/* the LID, hinged at the top edge, swinging up and toward camera */}
+    <div style={{ position: "absolute", left: x - R, top: y - R, width: R * 2, height: R * 2,
+      zIndex: z + 8, transformOrigin: "50% 0%",
+      transform: `perspective(1400px) rotateX(${-open * 96}deg)` }}>
+      <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: STEEL,
+        boxShadow: SH_D }} />
+      <div style={{ position: "absolute", inset: 0, borderRadius: "50%",
+        background: `linear-gradient(160deg, ${STEELL} 0%, ${STEEL} 34%, ${STEELD} 100%)`,
+        opacity: 0.55 }} />
+      {/* hazard chevrons round the rim */}
+      {Array.from({ length: 16 }, (_, i) => (
+        <div key={"hc" + i} style={{ position: "absolute", left: "50%", top: "50%", width: 20 * s,
+          height: R * 0.98, marginLeft: -10 * s, background: i % 2 ? "#D0A64A" : "#3A3630",
+          transformOrigin: "50% 0%", transform: `rotate(${i * 22.5}deg)`, opacity: 0.9 }} />
+      ))}
+      <div style={{ position: "absolute", left: R * 0.20, top: R * 0.20, width: R * 1.6,
+        height: R * 1.6, borderRadius: "50%", background: STEEL }} />
+      {Array.from({ length: 12 }, (_, i) => (
+        <div key={"rv" + i} style={{ position: "absolute", left: "50%", top: "50%",
+          width: 13 * s, height: 13 * s, marginLeft: -6.5 * s, borderRadius: 8,
+          background: STEELD,
+          transform: `rotate(${i * 30}deg) translateY(${-R * 0.70}px)` }} />
+      ))}
+      {/* the stencil, and the wheel at the centre */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: R * 0.42, textAlign: "center",
+        fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 44 * s, lineHeight: 1,
+        letterSpacing: "0.08em", color: "#C6CBD1", opacity: 0.66 }}>NOMAD</div>
+      <div style={{ position: "absolute", left: R - 90 * s, top: R - 20 * s, width: 180 * s,
+        height: 180 * s, transform: `rotate(${spin}deg)` }}>
+        <svg width={180 * s} height={180 * s} viewBox="0 0 180 180">
+          <circle cx={90} cy={90} r={78} fill={STEELD} />
+          <circle cx={90} cy={90} r={68} fill={STEEL} />
+          {[0, 72, 144, 216, 288].map((a) => (
+            <g key={a} transform={`rotate(${a} 90 90)`}>
+              <rect x={83} y={18} width={14} height={64} rx={6} fill={STEELL} opacity={0.7} />
+              <circle cx={90} cy={20} r={13} fill={STEELD} />
+            </g>
+          ))}
+          <circle cx={90} cy={90} r={26} fill={STEELD} />
+          <circle cx={90} cy={90} r={17} fill={STEELL} opacity={0.55} />
+        </svg>
+      </div>
+    </div>
+    {/* the drift still lying on it, swept off by `clear` */}
+    {clear < 0.995 && (
+      <div style={{ position: "absolute", left: x - R * 1.24, top: y - R * 1.24, width: R * 2.48,
+        height: R * 2.48, zIndex: z + 14, overflow: "hidden", borderRadius: "50%" }}>
+        <div style={{ position: "absolute", left: `${clear * 104}%`, top: 0, width: "100%",
+          height: "100%", background: "#E9E6DE", borderRadius: "50%" }} />
+        <div style={{ position: "absolute", left: `${-6 + clear * 108}%`, top: "8%", width: "96%",
+          height: "84%", background: "#F4F2EC", borderRadius: "50%" }} />
+        {/* the ridge of swept snow piling at the leading edge */}
+        <div style={{ position: "absolute", left: `${-14 + clear * 104}%`, top: "4%", width: "18%",
+          height: "92%", background: "#FBFAF6", borderRadius: "50%", opacity: 0.9 }} />
+      </div>
+    )}
+  </>);
+};

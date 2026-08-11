@@ -1,0 +1,77 @@
+TITLE   The Free Tier Stack
+SUB     How to pool the free tiers of 29 AI providers behind one endpoint, and never hit a rate limit again
+
+H       What this actually is
+P       Every serious AI lab now hands out a free tier. A few million tokens a month here, a few thousand requests a day there. On its own each one is a toy, which is why most developers sign up for one, hit a wall, and go pay for a plan.
+P       FreeLLMAPI is an MIT licensed proxy that stacks them. You add the free keys you already qualify for, and it serves all of them behind a single OpenAI compatible endpoint. Point any OpenAI client at your local server and it routes transparently across whichever providers you have added.
+B       Repo: github.com/tashfeenahmed/freellmapi
+B       18,265 stars, MIT licence, TypeScript
+B       29 free providers, 251 model families, 358 free model endpoints
+B       Roughly 4 billion tokens per month of listed free capacity
+B       Keys are AES-256-GCM encrypted at rest and decrypted in memory per request
+
+RULE
+
+H       Two things to be clear about before you start
+P       These are the two questions people ask within the first ten minutes, and getting them wrong wastes an evening.
+NUM     OpenAI is not one of the providers. GPT models are not part of the free pool. What you get is the free tiers of the labs and inference hosts that publish one.
+NUM     Claude appears here as a CLIENT, not as free inference. The router speaks Anthropic's wire format on /v1/messages, which means Claude Code and the official Anthropic SDKs can run against your free pool. It does not mean free Claude models.
+
+RULE
+
+H       The providers
+P       These are the ones the README names directly. There are 19 more behind them, and the always current list with per model rate limits and context windows lives at freellmapi.co/models.
+B       Google, for the Gemini models
+B       Groq
+B       Cerebras
+B       OpenCode Zen
+B       Mistral
+B       OpenRouter
+B       Cloudflare
+B       Cohere
+B       Z.ai, for GLM
+B       NVIDIA
+B       HuggingFace
+B       ModelScope, for Qwen3, DeepSeek V4 and GLM-5, which needs an Aliyun CN binding
+B       Plus a custom provider, so you can point chat, embedding, image or audio models at any OpenAI compatible endpoint you already run, including llama.cpp, LM Studio, vLLM or a local Ollama
+
+RULE
+
+H       Setting it up
+NUM     Clone the repo and start the server. It runs locally on port 3001 by default.
+NUM     Open the dashboard at localhost:3001 and go to the Keys page.
+NUM     Add the free tier keys you already have. Start with three or four rather than all 29. The router works the same and you will debug faster.
+NUM     Reorder the Fallback Chain to taste. The order is the priority order, so put your best model first and your most generous quota last.
+NUM     Copy the unified API key from the Keys page header. That single key is what every client uses from now on.
+NUM     Point a client at http://localhost:3001/v1 with that key and send one request. Check the X-Routed-Via response header to confirm which provider actually served it.
+
+H       Wiring up your agent
+P       Most clients configure themselves with one command. Each generator fetches your live catalog, makes a timestamped backup of any existing config, and merges rather than clobbering.
+B       Claude Code: npx freellmapi setup-claude --url http://localhost:3001 --api-key YOUR_KEY
+B       Codex CLI: npx freellmapi setup-codex
+B       Aider: npx freellmapi setup-aider
+B       Cline, Roo Code, Continue, opencode and Cursor each have a short recipe in docs/clients.md
+B       Every generator supports --dry-run. Use it the first time.
+P       If you would rather not have credentials sitting in a config file at all, use the zero persistence launchers. npx freellmapi launch starts Claude Code and npx freellmapi launch-codex starts Codex, both injecting the key into the child process only.
+
+RULE
+
+H       Why it does not fall over
+P       This is the part that makes it more than a list of free API keys, and it is worth understanding before you trust it with anything real.
+B       Per key rate tracking. The router keeps RPM, RPD, TPM and TPD counters for every platform, model and key combination, and learns the ceilings each provider reports. Routing stays under every cap rather than discovering them by failing.
+B       Automatic failover. On a 429 or a 5xx it cools that key down and retries the next model in your chain. You do not catch the error, and in practice you do not see it.
+B       Sticky sessions. A conversation stays on one model for 30 minutes, so a multi turn chat does not get scrambled by a mid conversation provider switch. There is an optional compact handoff note for when a switch does have to happen.
+B       A signed live catalog. The free tier landscape shifts weekly. Providers launch models, retire them and move quotas without notice. The router pulls an updated catalog on its own, so your install keeps up without a git pull.
+
+H       The failure mode to plan for
+P       The thing that actually breaks these setups is not the code, it is quota drift. A provider you rely on quietly halves its daily allowance and your chain silently leans harder on the next one down. Two habits fix it.
+NUM     Watch the X-Routed-Via header for a week. If everything is being served by your second or third choice, your first choice is not delivering what you think it is.
+NUM     Keep at least one high quota provider at the bottom of the chain doing nothing. It is the difference between a slow day and a dead one.
+
+RULE
+
+H       A fair summary
+P       This is a genuinely useful piece of infrastructure for experimentation, side projects and agent work where you control the workload. It is explicitly labelled for personal experimentation, each provider's own terms still apply to the key you added, and you should read them before you point anything commercial at it.
+P       What you are really buying is not free tokens. It is not having to think about rate limits while you build.
+
+KEY     Comment REPO for this guide

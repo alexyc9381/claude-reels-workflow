@@ -1,0 +1,31 @@
+Comment "AGENCY" and I'll send you the repo.
+
+👇 READ BELOW
+
+Every one of these 270 AI specialists is a plain text file. That is the part that changes how you use it. You can open one, read exactly what it was told to do, rewrite a line you disagree with, and save it. No black box, no platform, no subscription.
+
+msitarzewski/agency-agents. 139,604 stars, 22,798 forks, MIT licensed.
+
+★ Engineering 58 agents
+★ Specialized 56
+★ Marketing 36
+★ Game Development 21
+★ Plus GIS, Security, Design, Sales, Testing, Paid Media, Project Management, Support, Spatial Computing, Academic, Product, Finance and Healthcare
+
+Open any one of them and you get the same four things: who this agent is, the tools it is allowed to touch, the workflow it follows, and its own written definition of done. That last part is why the output is consistent. Most people write a prompt that says what to do and never says what finished looks like.
+
+Frontend Developer sits in Engineering. Ad Creative Strategist sits in Paid Media next to a PPC Campaign Strategist and a Search Query Analyst. Reddit Community Builder sits in Marketing, and its brief tells it that it is not marketing on Reddit, it is becoming a valued community member who happens to represent a brand.
+
+There is a desktop app too, and it is a second free repo. Native for macOS, Windows and Linux. It browses the roster and installs into Claude Code, Cursor, Codex, Gemini CLI, OpenCode, Qwen and Osaurus, then keeps them updated. No clone, no scripts, no terminal. On a Mac it is one brew command.
+
+The part nobody mentions: read the file before you run it. These are instructions you are handing to a model with tool access, and the whole reason plain text is better than a marketplace is that you can actually check. Open two, read them end to end, and you will understand the pattern well enough to write your own.
+
+One more thing worth knowing. MIT does not just mean free. It means you can fork it, rewrite any agent in your own voice, ship it inside your own product and sell the work.
+
+Comment "AGENCY" and I'll send you the repo plus the setup guide.
+
+.
+.
+.
+
+#opensource #aiagents #github #claudecode #cursor #aitools #agenticai #devtools #freetools #aiworkflow #promptengineering #softwaredevelopment #codingtips #generativeai #buildinpublic #techtips #automation

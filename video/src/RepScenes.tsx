@@ -170,7 +170,7 @@ export const S0Hook: React.FC = () => {
         </Cam>
         {/* the mark cast into the plaster behind — mark 4 of 5 */}
         <MarkCast x={190} y={300} s={168} z={12} o={0.30} />
-        <Edge side="r" c={dark(p.back, 0.44)} kind="wall" z={93} />
+        <Edge side="r" c={dkh(p.back, 0.44)} kind="wall" z={93} />
         <Flash lf={lf} at={0} n={2} o={0.2} />
       </Scene>
     );
@@ -196,7 +196,7 @@ export const S0Hook: React.FC = () => {
       <Stream x={W / 2} y={366} len={196} w={30} t={run} f={f} z={60} />
       <Pail x={W / 2} y={556} s={1.16} z={70} fill={run * 0.62} />
       <Splash x={W / 2} y={566} f={f} s={1.05} z={78} on={run} />
-      <Edge side="l" c={dark(p.back, 0.4)} kind="rail" z={93} />
+      <Edge side="l" c={dkh(p.back, 0.4)} kind="rail" z={93} />
       <Flash lf={lf} at={0} n={2} o={0.24} />
     </Scene>
   );
@@ -224,9 +224,9 @@ export const S1: React.FC = () => {
         <Outside p={p} f={f} water lamps={6} />
         {/* the kerb the cup sits on */}
         <div style={{ position: "absolute", left: 0, right: 0, top: 604, height: 34,
-          background: mix(p.floor2, 0.10), zIndex: 40 }} />
+          background: mxh(p.floor2, 0.10), zIndex: 40 }} />
         <div style={{ position: "absolute", left: 0, right: 0, top: 604, height: 8,
-          background: mix(p.floor, 0.22), zIndex: 41 }} />
+          background: mxh(p.floor, 0.22), zIndex: 41 }} />
         {/* the column base, mid-ground, cropped — the thing being compared to */}
         <div style={{ position: "absolute", left: 640, top: 96, width: 176, height: 520,
           background: IROND, zIndex: 30, boxShadow: SH_D }} />
@@ -237,7 +237,7 @@ export const S1: React.FC = () => {
         <Cam z={86} x={0} y={0}>
           <Plate x={168} y={630} t="800,000" sub="A DAY'S DRIBBLE" w={244} s={1.06} z={88} />
         </Cam>
-        <Edge side="r" c={dark(p.back, 0.36)} kind="post" z={93} />
+        <Edge side="r" c={dkh(p.back, 0.36)} kind="post" z={93} />
       </Scene>
     );
   }
@@ -264,7 +264,7 @@ export const S1: React.FC = () => {
         {/* the cup, still on the kerb, still a scratch */}
         <TinCup x={148} y={548} s={0.86} z={70} f={f} />
         <div style={{ position: "absolute", left: 0, right: 0, top: 640, height: 30,
-          background: mix(p.floor2, 0.10), zIndex: 60 }} />
+          background: mxh(p.floor2, 0.10), zIndex: 60 }} />
         {top > 0 && <Splash x={W / 2 - 4} y={150} f={lf} s={0.9} z={78} on={top} />}
         <Flash lf={lf} at={21} n={3} o={0.28} />
       </div>
@@ -303,10 +303,10 @@ export const S2: React.FC = () => {
         <Outside p={p} f={f} lamps={0} />
         {/* the wall the taps are set into, plus its brick courses */}
         <div style={{ position: "absolute", left: 0, right: 0, top: 118, height: 362,
-          background: mix(p.back2, 0.06), zIndex: 6 }} />
+          background: mxh(p.back2, 0.06), zIndex: 6 }} />
         {Array.from({ length: 7 }, (_, r) => (
           <div key={"bc" + r} style={{ position: "absolute", left: 0, right: 0, top: 126 + r * 50,
-            height: 3, background: dark(p.back2, 0.22), opacity: 0.6, zIndex: 7 }} />
+            height: 3, background: dkh(p.back2, 0.22), opacity: 0.6, zIndex: 7 }} />
         ))}
         {/* the run of main above the taps */}
         <div style={{ position: "absolute", left: -20, top: 168, width: W + 40, height: 30,
@@ -319,14 +319,38 @@ export const S2: React.FC = () => {
           return (
             <React.Fragment key={"tp" + i}>
               <Strip x={t.x} y={128} w={150} on={on} z={14} f={f} />
-              <Tap x={t.x} y={286} s={t.s} z={50 + i} f={f} on={on}
+              <Tap x={t.x} y={286} s={t.s} z={50 + i} f={f} on={on} drop={470 - (286 + 62 * t.s)}
                 label={pr.n} markKey={pr.k} hasMark={pr.mark} />
-              {on > 0.5 && <Splash x={t.x} y={286 + 116 * t.s} f={f} s={0.6 * t.s} z={66} on={on} />}
+              {on > 0.5 && <Splash x={t.x} y={470} f={f} s={0.7 * t.s} z={66} on={on} />}
             </React.Fragment>
           );
         })}
-        <Motes x={506} y={200} w={640} h={300} n={12} f={f} z={80} />
-        <Edge side="l" c={dark(p.back, 0.5)} kind="post" z={93} />
+        {/* ⛔ THE COLLECTION CHANNEL. v1 left the lower 40% of this frame an
+            empty brown sweep and the four streams fell into nothing — a tap
+            pouring onto a floor is not a pool. The launder catches all four and
+            runs them off frame-right toward the manifold, which is where the
+            next scene picks them up.
+            ⭐ The cast tags on its lip are the MODEL FAMILIES, and all three are
+            printed in the repo's own README. `LLAMA` is NOT among them: every
+            "llama" in that file is `llama.cpp`, a local runtime, not the model.
+            The VO says Llama; the picture does not claim it. */}
+        <div style={{ position: "absolute", left: -30, top: 470, width: W + 60, height: 34,
+          background: IRONL, zIndex: 60, boxShadow: SH }} />
+        <div style={{ position: "absolute", left: -30, top: 486, width: W + 60, height: 46,
+          background: WATERD, zIndex: 61 }} />
+        {Array.from({ length: 9 }, (_, i) => (
+          <div key={"fl" + i} style={{ position: "absolute",
+            left: ((f * 5 + i * 130) % (W + 160)) - 90, top: 494,
+            width: 74, height: 9, borderRadius: 5, background: WATERL,
+            opacity: 0.6, zIndex: 62 }} />
+        ))}
+        <div style={{ position: "absolute", left: -30, top: 528, width: W + 60, height: 22,
+          background: IROND, zIndex: 63 }} />
+        {[[128, "QWEN3"], [420, "DEEPSEEK V4"], [760, "GLM-5"]].map(([x, t], i) => (
+          <Stencil key={"mt" + i} t={t as string} x={x as number} y={556} s={1.06} z={70} />
+        ))}
+        <Motes x={506} y={190} w={640} h={260} n={12} f={f} z={80} />
+        <Edge side="l" c={dkh(p.back, 0.5)} kind="post" z={93} />
       </Scene>
     );
   }
@@ -337,7 +361,7 @@ export const S2: React.FC = () => {
     <Scene p={p} slug="29 PROVIDERS  ·  ONE POOL" push={[38, 73, 1.055]} vig={0.6}>
       <Outside p={p} f={f} lamps={0} />
       <div style={{ position: "absolute", left: 0, right: 0, top: 108, height: 380,
-        background: mix(p.back2, 0.05), zIndex: 6 }} />
+        background: mxh(p.back2, 0.05), zIndex: 6 }} />
       {/* five lamp pools receding — the DEPTH is the count */}
       {Array.from({ length: 5 }, (_, i) => {
         const k = i / 4;
@@ -352,13 +376,13 @@ export const S2: React.FC = () => {
       })}
       {/* the row keeps going into the dark, and says by how much */}
       <div style={{ position: "absolute", left: 862, top: 300, width: 150, height: 250,
-        background: dark(p.back2, 0.5), zIndex: 46 }} />
+        background: dkh(p.back2, 0.5), zIndex: 46 }} />
       <Cam z={88} o={E(lf, 8, 18, 0, 1, OUT)} y={(1 - E(lf, 8, 18, 0, 1, OUT)) * 16}>
         <Plate x={730} y={470} t="+19 MORE" sub="29 TOTAL" w={218} s={1.1} z={90} />
       </Cam>
       <MarkPlate x={92} y={606} t="CLAUDE CODE RUNS ON IT" s={0.86} z={90} />
       <Motes x={506} y={180} w={700} h={320} n={13} f={f} z={80} />
-      <Edge side="r" c={dark(p.back, 0.52)} kind="wall" z={93} />
+      <Edge side="r" c={dkh(p.back, 0.52)} kind="wall" z={93} />
     </Scene>
   );
 };
@@ -393,7 +417,7 @@ export const S3: React.FC = () => {
     return (
       <Scene p={p} slug="PAY SPIGOT  ·  PER REQUEST" push={[0, 40, 1.05]} vig={0.62}>
         <Outside p={p} f={f} lamps={3} />
-        <Puddle x={470} y={646} w={420} f={f} c={dark(p.floor2, 0.14)} z={18} />
+        <Puddle x={470} y={646} w={420} f={f} c={dkh(p.floor2, 0.14)} z={18} />
         <CoinPump x={470} base={666} s={1.24} z={40} f={f}
           price={PRICE[Math.min(3, nDrop)]} dial={nDrop * 118} flow={0.5} />
         {DROPS.map((d, i) => (
@@ -431,16 +455,32 @@ export const S3: React.FC = () => {
     );
   }
 
-  /* ---- C · WIDE · the queue continues into the rain -------------------- */
+  /* ---- C · WIDE · the queue continues into the rain --------------------
+     ⛔ THE DEAD RUN WAS HERE. v1 measured a 0.9s static stretch at 11.1-12.0s
+        — the last second before the reel's biggest turn — because the only
+        moving things in frame were 2px rain strokes and a constant dribble,
+        and at the audit's 240x188 downscale rain is invisible. Diagnosed at
+        its own cause rather than papered over with a camera move: a QUEUE that
+        never advances is the thing that was wrong, so it now SHUFFLES one place
+        forward on a stagger, which is also the beat the scene wanted anyway. */
+  const step = E(lf, 6, 20, 0, 1, IO);
   return (
     <Scene p={p} slug="AND THE QUEUE  ·  DOES NOT END" push={[78, 110, 1.05]} vig={0.66}>
       <Outside p={p} f={f} lamps={4} />
-      <Puddle x={300} y={690} w={520} f={f} c={dark(p.floor2, 0.14)} z={18} />
-      <CoinPump x={794} base={660} s={0.86} z={40} f={f} price="$300" dial={354} flow={0.42} />
-      {[604, 466, 348, 250, 176].map((x, i) => (
-        <Waiting key={"wt" + i} x={x} base={664 - i * 22} s={0.94 - i * 0.13} z={38 - i}
-          c={dark("#2E373E", i * 0.06)} />
-      ))}
+      <Puddle x={300} y={690} w={520} f={f} c={dkh(p.floor2, 0.14)} z={18} />
+      <CoinPump x={794} base={660} s={0.86} z={40} f={f} price="$300"
+        dial={300 + step * 96} flow={0.42} />
+      {[604, 466, 348, 250, 176].map((x, i) => {
+        /* each figure starts its step 3 frames after the one ahead — a queue
+           advances as a wave, never as a block */
+        const kk = E(lf, 6 + i * 3, 20 + i * 3, 0, 1, IO);
+        const bob = Math.abs(Math.sin(kk * Math.PI)) * 9 * (0.94 - i * 0.13);
+        return (
+          <Waiting key={"wt" + i} x={x + kk * (i === 0 ? 74 : 118)}
+            base={664 - i * 22 - bob} s={0.94 - i * 0.13} z={38 - i}
+            c={dkh("#2E373E", i * 0.06)} />
+        );
+      })}
       <Rain f={f} n={48} z={90} />
       <Edge side="l" c="#1C2226" kind="post" z={92} />
     </Scene>
@@ -507,7 +547,11 @@ export const S4: React.FC = () => {
             <div style={{ position: "absolute", left: W / 2 - 52, top: 546, width: 104, height: 280,
               background: WATERD, zIndex: 82, borderRadius: 4 }} />
           )}
-          <Chip t="ONE  /v1  ENDPOINT" y={620} z={96} c="#2E2415" />
+          {/* ⛔ THE CHIP MUST NOT ECHO THE HEADER. v1 said "ONE /v1 ENDPOINT"
+              under a header already reading ONE /v1 ENDPOINT, spending the
+              frame's one literal channel on a repeat. This is the fact the
+              audio and the header both leave out. */}
+          <Chip t="358 FREE MODEL ENDPOINTS" y={646} x={126} z={96} c="#2E2415" />
           <Flash lf={lf} at={2} n={3} o={0.3} />
         </div>
       </Scene>
@@ -632,6 +676,14 @@ export const S6Cta: React.FC = () => {
   const pop = E(f, 0, 9, 0, 1, BACK);
   const run = E(f, 2, 12, 0, 1, OUT);
   const sk = shake(f, 0, 12, 10);
+  /* ⛔ THE SECOND DEAD RUN WAS HERE, 19.4-20.4s — the last second of the reel.
+     Everything (the pop, the stream, the fill) finished by f12 and the frame
+     then held for a full second on the keyword, which is the worst possible
+     place to stall. The fix is the physical one the scene already implied: the
+     pail goes on FILLING for the whole shot and brims over at the end, so a
+     large area of the frame is still changing when the reel hands off. */
+  const brim = E(f, 6, 52, 0.22, 1.0, LIN);
+  const over = E(f, 44, 58, 0, 1, OUT);
   return (
     <Scene p={p} slug="COMMENT THE KEYWORD" push={[0, 58, 1.05]} vig={0.44}>
       <div style={{ position: "absolute", inset: 0, zIndex: 1,
@@ -650,8 +702,14 @@ export const S6Cta: React.FC = () => {
           background: BRASSL, opacity: 0.8, zIndex: 43 }} />
         <Handwheel x={W / 2 + 132} y={224} s={0.66} z={44} rot={128} />
         <Stream x={W / 2} y={344} len={190} w={34} t={run} f={f} z={60} />
-        <Pail x={W / 2} y={528} s={1.2} z={70} fill={0.30 + run * 0.44} />
+        <Pail x={W / 2} y={528} s={1.2} z={70} fill={brim} />
         <Splash x={W / 2} y={538} f={f} s={1.1} z={78} on={run} />
+        {/* it brims over — the last beat is still moving */}
+        {over > 0 && [-1, 1].map((sd) => (
+          <Stream key={"ov" + sd} x={W / 2 + sd * 72} y={620} len={54 * over} w={13}
+            t={over} f={f} z={76} />
+        ))}
+        {over > 0 && <Splash x={W / 2} y={686} f={f} s={1.3 * over} z={79} on={over} />}
         {/* THE KEYWORD, cast into a brass tag hanging off the tap chain */}
         <div style={{ position: "absolute", left: W / 2 - 316, top: 300, zIndex: 92,
           transform: `scale(${0.7 + pop * 0.3}) rotate(${-4 + (1 - pop) * 7}deg)`,

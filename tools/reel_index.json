@@ -1,10 +1,10 @@
 {
   "counts": {
-    "reels_with_code": 81,
-    "reels_total": 125,
+    "reels_with_code": 83,
+    "reels_total": 126,
     "factory_logs": 52,
-    "storyboards": 40,
-    "caption_jsons": 92,
+    "storyboards": 42,
+    "caption_jsons": 94,
     "memory_md": 191,
     "creators": 8,
     "packs": 3
@@ -562,6 +562,7 @@
         "video/src/data/words_mint.json",
         "video/src/data/words_night.json",
         "video/src/data/words_nightshift.json",
+        "video/src/data/words_nomad.json",
         "video/src/data/words_offer.json",
         "video/src/data/words_open.json",
         "video/src/data/words_open_103.json",
@@ -569,6 +570,7 @@
         "video/src/data/words_prompts.json",
         "video/src/data/words_promptsv2.json",
         "video/src/data/words_ramsay.json",
+        "video/src/data/words_repo.json",
         "video/src/data/words_retire.json",
         "video/src/data/words_roast.json",
         "video/src/data/words_roles.json",
@@ -901,15 +903,6 @@
       "number": null,
       "code": null,
       "log": "memory/reels/rent-factory-log.md",
-      "storyboard": null,
-      "captions": []
-    },
-    {
-      "key": "repo",
-      "name": "repo",
-      "number": null,
-      "code": null,
-      "log": "memory/reels/repo-factory-log.md",
       "storyboard": null,
       "captions": []
     },
@@ -1392,6 +1385,28 @@
       "storyboard": "storyboards/97-free.md",
       "captions": [
         "video/src/data/words_free.json"
+      ]
+    },
+    {
+      "key": "nomad",
+      "name": "nomad",
+      "number": 98,
+      "code": "video/src/ClaudeNomadReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/98-nomad.md",
+      "captions": [
+        "video/src/data/words_nomad.json"
+      ]
+    },
+    {
+      "key": "repo",
+      "name": "repo",
+      "number": 99,
+      "code": "video/src/ClaudeRepoReel.tsx",
+      "log": "memory/reels/repo-factory-log.md",
+      "storyboard": "storyboards/99-repo.md",
+      "captions": [
+        "video/src/data/words_repo.json"
       ]
     }
   ]

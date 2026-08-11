@@ -65,7 +65,11 @@ type Scene = { at: number; C: React.FC; head: [string, string] };
 export const SCENES: Scene[] = [
   { at: 0,   C: S0Hook, head: ["800M FREE AI TOKENS", "ONE REPO, 18,265 STARS"] },
   { at: 110, C: S1,     head: ["NOT 800 THOUSAND", "800 MILLION A MONTH"] },
-  { at: 178, C: S2,     head: ["29 FREE PROVIDERS", "GEMINI, LLAMA, MISTRAL"] },
+  /* ⛔ "LLAMA" CAME OFF THIS HEADER. The VO names it, but every "llama" in
+     the repo's README is `llama.cpp` — a local runtime you can point the proxy
+     AT, not a model it serves you. Qwen3 / DeepSeek V4 / GLM-5 are printed in
+     that README by name, so the header ships those instead. */
+  { at: 178, C: S2,     head: ["29 FREE PROVIDERS", "GEMINI, QWEN, DEEPSEEK"] },
   { at: 251, C: S3,     head: ["YOU PAY PER PROVIDER", "HUNDREDS A MONTH, EACH"] },
   { at: 361, C: S4,     head: ["IT POOLS EVERY FREE TIER", "ONE /v1 ENDPOINT"] },
   { at: 495, C: S5,     head: ["RATE LIMITED? IT SWITCHES", "AUTO FAILOVER ON 429"] },

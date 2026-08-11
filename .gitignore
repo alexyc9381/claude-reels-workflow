@@ -26,3 +26,4 @@ jr_frames/
 
 # winner-lab raw video corpus (247MB) — lives in Drive winner-lab.zip
 winner-lab/corpus/
+video/.claude/
