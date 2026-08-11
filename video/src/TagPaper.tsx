@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, Img } from "remotion";
 import { inter, fraunces } from "./fonts";
 import { SfxTrack, LEVELS, layer, Cue } from "./SoundKit";
-import { PAIRS, CUM, TOTAL, MARK_CAP, E, OUT, IO, BACK, LIN, mix, dark } from "./TagWorld";
+import { PAIRS, CUM, TOTAL, MARK_CAP, E, OUT, IO, BACK, LIN, mix, dark, Claudie } from "./TagWorld";
 import words from "./data/words_free.json";
 
 /* ============================================================================
@@ -93,6 +93,84 @@ const Card: React.FC<{ x: number; y: number; w: number; h: number; rot: number;
 );
 
 /* ---------------------------------------------------------------------------
+   ⭐⭐ THE SPRITES ARE THE CHANNEL, AND THE FIRST PAPER CUT LEFT THEM OUT.
+   Alex, round 14: *"still needs to be more interesting and on the theme of our
+   Claude sprites and their world."*  A new animation style that drops the one
+   thing every viewer recognises is not a new style for THIS channel, it is a
+   different channel. So the paper world is populated, and the two sprites do
+   not decorate the beat — they ARE it:
+
+     left   a Claude STRAINING to hold the paid tool up, buckling under it, who
+            sinks another notch every time the price lands
+     right  a Claude who RIPS the sheet off the free one and throws it away
+
+   That turns ten repetitions of a comparison into ten repetitions of a JOKE,
+   which is a different thing to sit through.
+   ------------------------------------------------------------------------ */
+
+/** arms drawn from a sprite's shoulders up to whatever he is holding. The same
+    trick the odyssey hoplite uses: the figure stays clear of the card and the
+    ARMS do the lifting, so nothing he does can cover the price. */
+const Arms: React.FC<{ x: number; y: number; s: number; reach: number; spread?: number;
+  z?: number }> = ({ x, y, s, reach, spread = 0.40, z = 26 }) => {
+  const H = 190 * s;
+  return (<>
+    {[-spread, spread].map((dx, i) => (
+      <div key={"a" + i} style={{ position: "absolute", left: x + dx * H - 11 * s,
+        top: y - H + H * 0.46 - reach, width: 22 * s, height: reach + H * 0.18,
+        borderRadius: 11 * s, background: "#D97757", zIndex: z }} />
+    ))}
+    {[-spread, spread].map((dx, i) => (
+      <div key={"h" + i} style={{ position: "absolute", left: x + dx * H - 18 * s,
+        top: y - H + H * 0.46 - reach - 16 * s, width: 36 * s, height: 26 * s,
+        borderRadius: 11 * s, background: "#EFA179", zIndex: z + 1 }} />
+    ))}
+  </>);
+};
+
+/** ⭐ THE STRAIN. He is holding a thing that costs $200 a month and it shows:
+    knees bent, a wobble, and a visible SINK on every price hit. */
+const Strainer: React.FC<{ x: number; y: number; f: number; load: number; reach: number }> =
+  ({ x, y, f, load, reach }) => {
+  const wob = Math.sin(f / 3.1) * 2.4 + Math.sin(f / 1.7) * 1.1;
+  const sink = load * 26;
+  /* ⛔ HIS HANDS STAY ON THE CARD WHILE HIS BODY SINKS, so the reach GROWS by
+     exactly the sink. Shrinking it (the obvious first write) drops his hands
+     away from the thing he is supposedly holding, which reads as shrugging. */
+  return (<>
+    <Arms x={x} y={y + sink} s={1.15} reach={reach + sink} z={26} />
+    <div style={{ position: "absolute", left: x - 66, top: y + sink - 12, width: 132, height: 20,
+      borderRadius: "50%", background: "rgba(24,18,12,0.30)", zIndex: 24 }} />
+    <Claudie x={x + wob * 0.5} y={y + sink} s={1.15} f={f} z={27} face={1}
+      costume={{ stern: 1, cheer: 0 }} />
+    {/* sweat: three paper flecks, because a paper world sweats in paper */}
+    {load > 0.4 && [0, 1, 2].map((k) => (
+      <div key={"sw" + k} style={{ position: "absolute",
+        left: x + 40 + k * 16, top: y - 190 + ((f * 3 + k * 11) % 40) - 20,
+        width: 9, height: 13, borderRadius: 5, background: "#F2EFE4",
+        opacity: 0.75, zIndex: 28 }} />
+    ))}
+  </>);
+};
+
+/** the one who tears it off: an arm out to the sheet, then a haul and a cheer */
+const Ripper: React.FC<{ x: number; y: number; f: number; rip: number; reach: number }> =
+  ({ x, y, f, rip, reach }) => {
+  const lean = rip > 0 ? Math.sin(Math.min(1, rip / 0.5) * Math.PI) * 9 : 0;
+  const hop = rip > 0.5 ? Math.abs(Math.sin(f / 2.6)) * 16 * Math.min(1, (rip - 0.5) * 3) : 0;
+  return (
+    <div style={{ position: "absolute", inset: 0,
+      transform: `rotate(${-lean}deg)`, transformOrigin: `${x}px ${y}px` }}>
+      <div style={{ position: "absolute", left: x - 66, top: y - hop - 12, width: 132, height: 20,
+        borderRadius: "50%", background: "rgba(24,18,12,0.30)", zIndex: 24 }} />
+      <Arms x={x} y={y - hop} s={1.15} reach={reach} spread={rip > 0.5 ? 0.44 : 0.30} z={26} />
+      <Claudie x={x} y={y - hop} s={1.15} f={f} z={27} face={-1}
+        costume={{ cheer: rip > 0.5 ? 1 : 0, stern: rip > 0.5 ? 0 : 1 }} />
+    </div>
+  );
+};
+
+/* ---------------------------------------------------------------------------
    ONE BEAT. Two paper cards; the free one is under a paper sheet reading FREE
    that RIPS DOWN THE MIDDLE and peels away in two halves.
    ⛔ The rip replaces the curtain because a curtain that lifts is what the other
@@ -113,8 +191,13 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
   const punch = pf < 0 ? 1 : 1 + Math.sin(Math.min(1, pf / 8) * Math.PI) * 0.16;
   const rise = hook ? 1 : E(f, 0, 8, 0, 1, BACK);
 
-  const CW = 452, CH = 620, CY = 560;
-  const cap = (lg: string) => Math.min(150 * 0.62, (MARK_CAP[lg] ?? 999) * 1.3);
+  /* ⛔ THE CARDS MOVED UP AND IN TO MAKE ROOM FOR THE PEOPLE. At 620 tall from
+     y560 they filled the frame down to 1180 and there was nowhere for anyone to
+     stand — which is how the first paper cut ended up with no sprites in it at
+     all. 560 from y430 leaves a floor from 990 to the price sticker. */
+  const CW = 430, CH = 560, CY = 430;
+  const FLOOR = 1196;
+  const cap = (lg: string) => Math.min(136 * 0.62, (MARK_CAP[lg] ?? 999) * 1.3);
 
   return (
     <AbsoluteFill style={{ background: S.bg, overflow: "hidden" }}>
@@ -122,6 +205,9 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
       {/* a torn band across the middle: the paper horizon */}
       <div style={{ position: "absolute", left: -20, right: -20, top: 430, height: 980,
         background: mix(S.bg, 0.13), clipPath: TORN_TOP, zIndex: 3 }} />
+      {/* the floor they stand on */}
+      <div style={{ position: "absolute", left: -20, right: -20, top: 1150, height: 300,
+        background: mix(S.bg, 0.26), clipPath: TORN_TOP, zIndex: 4 }} />
       {/* the category tab, hand-placed and rotated like a stuck label */}
       <div style={{ position: "absolute", left: 56, top: 250, padding: "16px 30px",
         background: S.ink, transform: "rotate(-2.2deg)", zIndex: 40,
@@ -137,57 +223,61 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
       <div style={{ position: "absolute", inset: 0, zIndex: 20,
         transform: `translateY(${(1 - rise) * 90}px)`, opacity: rise }}>
         {/* ---- the paid card ------------------------------------------- */}
-        <Card x={58} y={CY} w={CW} h={CH} rot={-1.8} bg="#F2EFE4" z={22}>
+        <Card x={62} y={CY} w={CW} h={CH} rot={-1.8} bg="#F2EFE4" z={22}>
           <div style={{ position: "absolute", left: 0, right: 0, top: 44, textAlign: "center",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40, letterSpacing: "0.22em",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 38, letterSpacing: "0.22em",
             color: "#B3372A" }}>PAID</div>
-          <div style={{ position: "absolute", left: CW / 2 - 75, top: 108, width: 150, height: 150,
+          <div style={{ position: "absolute", left: CW / 2 - 68, top: 92, width: 136, height: 136,
             background: "#FFFFFF", border: "5px solid #E2DCCC",
             display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Img src={staticFile("logos/" + P.pLogo)}
               style={{ width: cap(P.pLogo), height: cap(P.pLogo), objectFit: "contain" }} />
           </div>
-          <div style={{ position: "absolute", left: 10, right: 10, top: 282, textAlign: "center",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 44,
+          <div style={{ position: "absolute", left: 10, right: 10, top: 248, textAlign: "center",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40,
             color: "#2A2114" }}>{P.paid}</div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 340, textAlign: "center" }}>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 300, textAlign: "center" }}>
             <span style={{ display: "inline-block", padding: "5px 14px", background: "#E2DCCC",
               fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 22,
               letterSpacing: "0.16em", color: "#6B6252" }}>{P.tier}</span>
           </div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 402, textAlign: "center",
+          {/* ⛔ THE CARD IS 560 TALL AND THE CONTENTS RAN TO 580. "PER MONTH" was
+              sitting past the torn edge, where the clip-path ate it and the
+              sprite's arms appeared to be covering it. Nothing was covering
+              anything — the text was outside its own card. */}
+          <div style={{ position: "absolute", left: 0, right: 0, top: 352, textAlign: "center",
             transform: `scale(${punch})` }}>
             <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
-              fontSize: String(P.price).length >= 3 ? 118 : 140, lineHeight: 1,
+              fontSize: String(P.price).length >= 3 ? 104 : 124, lineHeight: 1,
               color: "#B3372A" }}>{"$" + P.price}</span>
-            <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 30,
+            <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 26,
               letterSpacing: "0.14em", color: "#8A4A3C" }}>
               {P.note ? P.note : "PER MONTH"}
             </div>
           </div>
           {rip > 0 && (
-            <div style={{ position: "absolute", left: 40, right: 40, top: 452, height: 14,
+            <div style={{ position: "absolute", left: 40, right: 40, top: 396, height: 13,
               background: "#B3372A", transform: `scaleX(${rip})`, transformOrigin: "0% 50%" }} />
           )}
         </Card>
 
         {/* ---- the free card ------------------------------------------- */}
-        <Card x={W - 58 - CW} y={CY + 16} w={CW} h={CH} rot={1.6} bg="#F2EFE4" z={22}>
+        <Card x={W - 62 - CW} y={CY + 16} w={CW} h={CH} rot={1.6} bg="#F2EFE4" z={22}>
           <div style={{ position: "absolute", left: 0, right: 0, top: 44, textAlign: "center",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40, letterSpacing: "0.22em",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 38, letterSpacing: "0.22em",
             color: "#237A54" }}>FREE</div>
-          <div style={{ position: "absolute", left: CW / 2 - 75, top: 108, width: 150, height: 150,
+          <div style={{ position: "absolute", left: CW / 2 - 68, top: 92, width: 136, height: 136,
             background: "#FFFFFF", border: "5px solid #E2DCCC",
             display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Img src={staticFile("logos/" + P.fLogo)}
               style={{ width: cap(P.fLogo), height: cap(P.fLogo), objectFit: "contain" }} />
           </div>
-          <div style={{ position: "absolute", left: 10, right: 10, top: 282, textAlign: "center",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 44,
+          <div style={{ position: "absolute", left: 10, right: 10, top: 248, textAlign: "center",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40,
             color: "#2A2114" }}>{P.free}</div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 396, textAlign: "center",
+          <div style={{ position: "absolute", left: 0, right: 0, top: 340, textAlign: "center",
             transform: `scale(${ff < 0 ? 1 : 1 + Math.sin(Math.min(1, ff / 12) * Math.PI) * 0.18})` }}>
-            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 150,
+            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 132,
               lineHeight: 1, color: "#237A54" }}>FREE</span>
           </div>
         </Card>
@@ -195,7 +285,7 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
         {/* ---- the sheet over it, and the RIP --------------------------- */}
         {rip < 1 && [0, 1].map((half) => (
           <div key={half} style={{ position: "absolute",
-            left: W - 58 - CW - 14 + half * (CW + 28) / 2, top: CY - 6,
+            left: W - 62 - CW - 14 + half * (CW + 28) / 2, top: CY + 10,
             width: (CW + 28) / 2, height: CH + 12, zIndex: 30, overflow: "hidden",
             /* ⛔ THE LEFT HALF FLIES TOWARD THE PAID CARD, so it has to CLEAR it.
                At 520px of travel it parked on top of "Midjourney / $30" for the
@@ -220,12 +310,26 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
               clipPath: "polygon(0 0,100% 4%,20% 11%,100% 19%,10% 27%,100% 35%,20% 43%,100% 51%,10% 59%,100% 67%,20% 75%,100% 83%,10% 91%,100% 97%,0 100%)" }} />
           </div>
         ))}
+        {/* ⭐ THE TWO WHO ARE ACTUALLY IN THIS SCENE. They stand on the floor in
+            front of their own card, so nothing they do covers a price. */}
+        <Strainer x={62 + CW / 2} y={FLOOR} f={f}
+          load={pf < 0 ? 0.25 : Math.min(1, 0.25 + pf / 14)}
+          reach={64} />
+        {/* ⛔ 64 AND 48 ARE COMPUTED, NOT CHOSEN. Shoulders sit at y=1078 for a
+            1.15 sprite standing on a 1196 floor; the paid card's foot is 990 and
+            the free card's is 1006, so those are the only reaches that put the
+            hands ON the cards instead of THROUGH them. The first pass used
+            220-230 and both pairs of hands covered the price. On the cheer he
+            raises them SHORT (30) for the same reason. */}
+        <Ripper x={W - 62 - CW / 2} y={FLOOR} f={f} rip={rip}
+          reach={rip > 0.5 ? 30 : 48} />
+
         {/* paper bits flying off the tear */}
         {rip > 0.05 && rip < 1 && Array.from({ length: 10 }, (_, k) => {
           const r = (n: number) => { const v = Math.sin(k * 31.4 + n * 7.7) * 4371.7; return v - Math.floor(v); };
           return (<div key={"bit" + k} style={{ position: "absolute",
-            left: W - 58 - CW / 2 + (r(1) - 0.5) * 260 * rip * 2,
-            top: CY + 200 + (r(2) - 0.5) * 320 * rip * 2 + rip * 180,
+            left: W - 62 - CW / 2 + (r(1) - 0.5) * 300 * rip * 2,
+            top: CY + 180 + (r(2) - 0.5) * 340 * rip * 2 - rip * 120,
             width: 14 + r(3) * 16, height: 10 + r(4) * 14, background: "#E8E2D2",
             transform: `rotate(${r(5) * 360 + rip * 300}deg)`, zIndex: 31,
             opacity: 1 - rip }} />);
@@ -233,7 +337,7 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
       </div>
 
       {/* the running total, as a stuck-on price sticker */}
-      <div style={{ position: "absolute", left: W / 2 - 190, top: 1252, width: 380, height: 92,
+      <div style={{ position: "absolute", left: W / 2 - 190, top: 1264, width: 380, height: 92,
         background: "#F2EFE4", transform: "rotate(-1.4deg)", zIndex: 42,
         filter: `drop-shadow(${SHADOW})`, display: "flex", alignItems: "center",
         justifyContent: "center", gap: 14 }}>
