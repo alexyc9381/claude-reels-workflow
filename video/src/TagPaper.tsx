@@ -236,12 +236,27 @@ const NightYard: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S, 
 
 /** one square, or one half of one: same content, a different clip. */
 const Square: React.FC<{ cx: number; free?: boolean; P: typeof PAIRS[0]; punch: number;
-  clip?: string; z?: number }> = ({ cx, free, P, punch, clip, z = 22 }) => {
+  clip?: string; shine?: number; z?: number }> =
+  ({ cx, free, P, punch, clip, shine = -1, z = 22 }) => {
   const cap = Math.min(116 * 0.62, (MARK_CAP[free ? P.fLogo : P.pLogo] ?? 999) * 1.4);
   return (
     <div style={{ position: "absolute", left: cx - SQ / 2, top: SQY, width: SQ, height: SQH,
-      zIndex: z, clipPath: clip, boxShadow: clip ? undefined : BOXSH }}>
+      zIndex: z, clipPath: clip, boxShadow: clip ? undefined : BOXSH,
+      overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "#F7F3E6" }} />
+      {/* ⭐ THE GLISTEN. Round 22: *"have a glisten at the beginning for each, on
+          the paid part, so it attracts more attention."*  A specular sweep is
+          the oldest trick there is for making the eye land somewhere, and the
+          paid card is what the beat opens on. Two bands, a wide one and a thin
+          trailing one, so it reads as a moving highlight and not a wipe.
+          ⛔ HARD-EDGED SOLID PAINT, clipped by the card. No blur, no glow — the
+          matte rule is a ship gate and the grep still reads 0. */}
+      {shine >= 0 && shine <= 1 && [0, 1].map((b) => (
+        <div key={"gl" + b} style={{ position: "absolute", top: -80, bottom: -80,
+          left: `${-30 + shine * 150 + b * 9}%`, width: b ? 22 : 76,
+          background: "#FFFFFF", opacity: (b ? 0.20 : 0.34) * Math.sin(shine * Math.PI),
+          transform: "rotate(-16deg)", zIndex: 9 }} />
+      ))}
       <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 56,
         background: free ? "#237A54" : "#B3372A", display: "flex", alignItems: "center",
         justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 32,
@@ -255,17 +270,20 @@ const Square: React.FC<{ cx: number; free?: boolean; P: typeof PAIRS[0]; punch: 
       <div style={{ position: "absolute", left: 6, right: 6, top: 206, textAlign: "center",
         fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 34,
         color: "#2A2114" }}>{free ? P.free : P.paid}</div>
-      {!free && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: 246, textAlign: "center" }}>
-          <span style={{ display: "inline-block", padding: "3px 11px", background: "#E2DCC8",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 17,
-            letterSpacing: "0.16em", color: "#6B6252" }}>{P.tier}</span>
-        </div>
-      )}
+      {/* ⛔ THE TIER BADGE IS GONE. Round 22: *"remove the words PRO from those
+          things on the left side."*  It read as part of the product name —
+          "GitHub Copilot PRO+" looks like what the thing is called — and on the
+          rows where it said PRO it said it three times across the reel.
+          ⚠️ IT WAS THERE FOR AN HONESTY REASON and that reason has not gone
+          away: the reel prices each tool on its SECOND paid tier, and a bare
+          number can read as "what the tool costs" rather than "what that plan
+          costs". The rule is still stated in the lead magnet and the caption,
+          and the number itself is unchanged. Flagged to Alex, not quietly
+          dropped. */}
       {/* ⛔ THE CONTENT STOPS AT 330 OF 396. The last 66px is deliberate empty
           card — it is the band the ninja is allowed to overlap as he crosses in
           front, and it is why nothing he does can ever cover a price. */}
-      <div style={{ position: "absolute", left: 0, right: 0, top: free ? 250 : 280,
+      <div style={{ position: "absolute", left: 0, right: 0, top: free ? 250 : 262,
         textAlign: "center", transform: `scale(${punch})` }}>
         <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
           fontSize: free ? 84 : (String(P.price).length >= 3 ? 56 : 66), lineHeight: 1,
@@ -404,7 +422,8 @@ const PressFloor: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S,
 
    ⛔ The FREE card is never touched in any of them. That is the sentence.
    ========================================================================= */
-type EventProps = { P: typeof PAIRS[0]; f: number; ff: number; pf: number; punchP: number };
+type EventProps = { P: typeof PAIRS[0]; f: number; ff: number; pf: number; punchP: number;
+  shine: number };
 type PaperKit = {
   id: string; label: string; bed: string;
   stocks: typeof STOCK;
@@ -413,7 +432,7 @@ type PaperKit = {
 };
 
 /* ---- G · THE DOJO — one stroke, the card falls in two ------------------- */
-const SliceEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
+const SliceEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP, shine }) => {
   const crouch = pf < 0 ? 0 : Math.min(1, pf / 8);
   const dash = ff < 0 ? 0 : E(ff, 0, 6, 0, 1, IO);
   const slice = ff < 3 ? 0 : E(ff, 3, 15, 0, 1, OUT);
@@ -428,7 +447,7 @@ const SliceEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
           - (dash > 0.02 && dash < 0.98 ? 26 : 0) + landing * 10;
   const tilt = dash > 0.02 && dash < 0.98 ? -16 : ff >= 6 ? -6 + landing * 6 : -crouch * 7;
   return (<>
-    {slice <= 0 && <Square cx={LX} P={P} punch={punchP} z={22} />}
+    {slice <= 0 && <Square cx={LX} P={P} punch={punchP} shine={shine} z={22} />}
     {slice > 0 && (<>
       <div style={{ position: "absolute", inset: 0, zIndex: 22,
         transform: `translate(${-slice * 150}px, ${-slice * 28 + slice * slice * 210}px) rotate(${-slice * 26}deg)`,
@@ -468,7 +487,7 @@ const SliceEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
 };
 
 /* ---- H · THE STAGE — the floor opens and it is simply gone -------------- */
-const TrapEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
+const TrapEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP, shine }) => {
   const pull = ff < 0 ? 0 : E(ff, 0, 5, 0, 1, IO);        // the lever
   const flap = ff < 1 ? 0 : E(ff, 1, 9, 0, 1, OUT);        // the doors swing down
   const fall = ff < 3 ? 0 : E(ff, 3, 14, 0, 1, IN_Q);      // gravity, accelerating
@@ -502,7 +521,7 @@ const TrapEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
         <div style={{ position: "absolute", inset: 0,
           transform: `translateY(${fall * 470}px) rotate(${fall * 4}deg)`,
           transformOrigin: `${LX}px ${SQY + SQH}px` }}>
-          <Square cx={LX} P={P} punch={punchP} z={22} />
+          <Square cx={LX} P={P} punch={punchP} shine={shine} z={22} />
         </div>
       </div>
     )}
@@ -523,7 +542,7 @@ const TrapEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
 };
 
 /* ---- I · THE PRESS — flattened where it stands -------------------------- */
-const PressEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
+const PressEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP, shine }) => {
   const arm = pf < 0 ? 0 : Math.min(1, pf / 10);           // he reaches for it
   const hit = ff < 0 ? 0 : E(ff, 0, 4, 0, 1, IN_Q);        // the ram comes down FAST
   const squash = ff < 3 ? 0 : E(ff, 3, 8, 0, 1, OUT);      // and it gives
@@ -536,7 +555,7 @@ const PressEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP }) => {
     <div style={{ position: "absolute", inset: 0, zIndex: 22,
       transform: `scaleY(${1 - flat * 0.88}) scaleX(${1 + flat * 0.14})`,
       transformOrigin: `${LX}px ${SQY + SQH}px` }}>
-      <Square cx={LX} P={P} punch={punchP} z={22} />
+      <Square cx={LX} P={P} punch={punchP} shine={shine} z={22} />
     </div>
     {/* the ram: a slab on two guide rails */}
     {[-1, 1].map((sgn) => (
@@ -623,6 +642,10 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
      one of their internals. It reads the BEAT: 7 frames past the word, whatever
      just happened has happened. */
   const gone = ff >= 7;
+  /* ⭐ the glisten runs early, while the beat is still introducing the card —
+     it is an attention cue, not a payoff, so it must be finished before the
+     price lands rather than competing with it. */
+  const shine = f >= 3 && f <= 22 ? (f - 3) / 19 : -1;
 
   return (
     <AbsoluteFill>
@@ -633,7 +656,7 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
 
           <div style={{ position: "absolute", inset: 0, zIndex: 20,
             transform: `translateY(${(1 - rise) * 46}px)` }}>
-            <K.Event P={P} f={f} ff={ff} pf={pf} punchP={punchP} />
+            <K.Event P={P} f={f} ff={ff} pf={pf} punchP={punchP} shine={shine} />
 
             {/* ⭐ light building up BEHIND the free square as it strains. Hard
                 wedges and solid paints — the matte rule is a ship gate, and a
