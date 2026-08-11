@@ -348,3 +348,148 @@ export const Cap: React.FC<{ x: number; y: number; w?: number; z?: number; t: nu
     </div>
   </div>
 );
+
+/* ===========================================================================
+   ⛔⛔ THREE NEW STRUCTURES, because *"too many scenes where its just coins
+      piling."* v4 leaned on a mound in five of its shots. The token language is
+      right; repeating one ARRANGEMENT of it is what made the middle flat.
+
+      A pile is a HEAP — good for scale, useless for anything else. These give
+      the reel three more shapes to think in: a LINE (things travelling), a
+      CONVERGENCE (many becoming one), and a LIST (an itemised total). Each is
+      still nothing but tokens, logos and numbers.
+   ========================================================================= */
+
+/** THE BELT — tokens travelling past camera, each struck with a provider mark.
+    Horizontal motion where a pile has none, and a belt that never stops is how
+    S5 shows "no pause" without a single word. */
+export const Belt: React.FC<{ y: number; f: number; z?: number; s?: number;
+  speed?: number; n?: number; from?: number; on?: number }> =
+  ({ y, f, z = 50, s = 1, speed = 3.4, n = 7, from = 0, on = 1 }) => {
+  const BH = 54 * s, SP = (W + 300) / n;
+  return (<>
+    {/* the bed */}
+    <div style={{ position: "absolute", left: -40, top: y, width: W + 80, height: BH,
+      background: "#4A4038", zIndex: z, boxShadow: SH_D }} />
+    <div style={{ position: "absolute", left: -40, top: y, width: W + 80, height: 9 * s,
+      background: "#6B5E50", zIndex: z + 1 }} />
+    {/* the rollers, turning — the belt is MOVING even between tokens */}
+    {Array.from({ length: 13 }, (_, i) => (
+      <div key={"rl" + i} style={{ position: "absolute", left: -30 + i * 86 * s,
+        top: y + BH - 16 * s, width: 34 * s, height: 34 * s, borderRadius: "50%",
+        background: "#2E2820", zIndex: z + 2 }}>
+        <div style={{ position: "absolute", left: "50%", top: "50%", width: 3 * s,
+          height: 15 * s, background: "#6B5E50", transformOrigin: "50% 0%",
+          transform: `translate(-50%,-50%) rotate(${f * speed * 3}deg)` }} />
+      </div>
+    ))}
+    {/* the goods */}
+    {Array.from({ length: n }, (_, i) => {
+      const pr = PROVIDERS[(from + i) % PROVIDERS.length];
+      const x = ((i * SP + f * speed * on) % (W + 300)) - 150;
+      return <Token key={"bt" + i} x={x} y={y - 4 * s} s={116 * s} z={z + 6 + i}
+        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={0} />;
+    })}
+  </>);
+};
+
+/** THE JUNCTION — many labelled inlets into ONE outlet. The convergence drawn
+    as plumbing you can trace with a finger, which a heap can never show. */
+export const Junction: React.FC<{ x: number; y: number; f: number; n?: number;
+  z?: number; s?: number; w?: number; on?: number }> =
+  ({ x, y, f, n = 5, z = 40, s = 1, w: ww = 800, on = 1 }) => (<>
+    {Array.from({ length: n }, (_, i) => {
+      const k = n === 1 ? 0.5 : i / (n - 1);
+      const px = x - ww / 2 + k * ww;
+      const pr = PROVIDERS[i % PROVIDERS.length];
+      const drop = 150 * s;
+      return (<React.Fragment key={"jn" + i}>
+        {/* the logo, at the head of its own line */}
+        <Token x={px} y={y - drop - 92 * s} s={150 * s} z={z + 20 + i}
+          markKey={pr.k} name={pr.n} hasMark={pr.mark} />
+        {/* the line down, and the elbow into the header */}
+        <div style={{ position: "absolute", left: px - 15 * s, top: y - drop,
+          width: 30 * s, height: drop, background: on > 0.5 ? "#C8963E" : "#8E8478",
+          zIndex: z + 2 + i, borderRadius: 5 }} />
+        <div style={{ position: "absolute", left: px - 15 * s, top: y - drop,
+          width: 10 * s, height: drop, background: BRASSL, opacity: 0.6,
+          zIndex: z + 3 + i }} />
+        {on > 0.5 && (
+          <div style={{ position: "absolute", left: px - 15 * s,
+            top: y - drop + ((f * 7 + i * 33) % drop), width: 30 * s, height: 26 * s,
+            borderRadius: 5, background: TOKL, opacity: 0.75, zIndex: z + 4 + i }} />
+        )}
+      </React.Fragment>);
+    })}
+    {/* the header they all land in, and the one pipe out */}
+    <div style={{ position: "absolute", left: x - ww / 2 - 40 * s, top: y,
+      width: ww + 80 * s, height: 46 * s, borderRadius: 9, background: "#5E5449",
+      zIndex: z + 40, boxShadow: SH_D }} />
+    <div style={{ position: "absolute", left: x - ww / 2 - 40 * s, top: y,
+      width: ww + 80 * s, height: 11 * s, borderRadius: "9px 9px 0 0",
+      background: "#7E7264", zIndex: z + 41 }} />
+    <div style={{ position: "absolute", left: x - 34 * s, top: y + 40 * s, width: 68 * s,
+      height: 96 * s, background: "#5E5449", zIndex: z + 40 }} />
+  </>);
+
+/** THE LEDGER — the itemised total, on a printed roll. A LIST is the one shape
+    that can carry twenty-nine of something plus its arithmetic, and it is the
+    most literal object in the reel: names, amounts, a rule, a total. */
+export const Ledger: React.FC<{ x: number; y: number; f: number; rows?: number;
+  s?: number; z?: number; reveal?: number; total?: string; sub?: string }> =
+  ({ x, y, f, rows = 5, s = 1, z = 60, reveal = 1, total = "4,000,000,000",
+     sub = "29 PROVIDERS · 358 ENDPOINTS" }) => {
+  const RW = 620 * s, RH = 74 * s;
+  const shown = Math.round(rows * Math.min(1, reveal));
+  /* ⛔⛔ NO PER-PROVIDER FIGURES. v1 of this prop printed 120,000,000 /
+     84,000,000 / 60,000,000 against Google / Mistral / Cloudflare and every one
+     of those was INVENTED — the README publishes a POOLED ~4B and nothing per
+     provider (the per-model limits live at freellmapi.co/models). A list is
+     exactly the shape that tempts you to fill a column, and a made-up number on
+     a receipt-looking object is the most believable kind of wrong.
+     The rows carry what is true — that each one HAS a free tier — and the only
+     figures on the roll are the two the repo actually states. */
+  return (<>
+    {/* the roll */}
+    <div style={{ position: "absolute", left: x - RW / 2, top: y - 26 * s, width: RW,
+      height: RH * shown + 216 * s, background: "#F9F5EA", zIndex: z,
+      boxShadow: SH_D, borderRadius: 4 }} />
+    <div style={{ position: "absolute", left: x - RW / 2, top: y - 26 * s, width: RW,
+      height: 9 * s, background: "#E2DAC6", zIndex: z + 1 }} />
+    {Array.from({ length: shown }, (_, i) => {
+      const pr = PROVIDERS[i % PROVIDERS.length];
+      return (
+        <React.Fragment key={"lr" + i}>
+          <Token x={x - RW / 2 + 62 * s} y={y + 22 * s + i * RH} s={72 * s}
+            z={z + 6} markKey={pr.k} name={pr.n} hasMark={pr.mark} />
+          <div style={{ position: "absolute", left: x - RW / 2 + 112 * s,
+            top: y + 4 * s + i * RH, width: RW * 0.42, zIndex: z + 5,
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 26 * s,
+            color: "#2E2820", lineHeight: `${36 * s}px` }}>{pr.n}</div>
+          <div style={{ position: "absolute", left: x - RW / 2, top: y + 4 * s + i * RH,
+            width: RW - 26 * s, textAlign: "right", zIndex: z + 5, fontFamily: MONO,
+            fontWeight: 800, fontSize: 24 * s, letterSpacing: "0.10em",
+            color: "#8A7C5C", lineHeight: `${36 * s}px` }}>FREE TIER</div>
+          <div style={{ position: "absolute", left: x - RW / 2 + 26 * s,
+            top: y + 46 * s + i * RH, width: RW - 52 * s, height: 2,
+            background: "#DED5BE", zIndex: z + 4 }} />
+        </React.Fragment>
+      );
+    })}
+    {/* the rule and the total */}
+    <div style={{ position: "absolute", left: x - RW / 2 + 20 * s,
+      top: y + 12 * s + shown * RH, width: RW - 40 * s, height: 5 * s,
+      background: "#2E2820", zIndex: z + 8 }} />
+    <div style={{ position: "absolute", left: x - RW / 2 + 24 * s,
+      top: y + 26 * s + shown * RH, zIndex: z + 8, fontFamily: MONO, fontWeight: 800,
+      fontSize: 21 * s, letterSpacing: "0.16em", color: "#8A7C5C" }}>TOTAL</div>
+    <div style={{ position: "absolute", left: x - RW / 2, top: y + 46 * s + shown * RH,
+      width: RW - 24 * s, textAlign: "right", zIndex: z + 8,
+      fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 56 * s,
+      lineHeight: 1, color: "#241F14" }}>{total}</div>
+    <div style={{ position: "absolute", left: x - RW / 2, top: y + 108 * s + shown * RH,
+      width: RW - 24 * s, textAlign: "right", zIndex: z + 8, fontFamily: inter.fontFamily,
+      fontWeight: 900, fontSize: 21 * s, letterSpacing: "0.05em",
+      color: "#6B5E44" }}>{sub}</div>
+  </>);
+};

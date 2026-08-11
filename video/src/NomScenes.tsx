@@ -6,7 +6,7 @@ import {
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
   CLAY, GOLD, GREEN, RED, PAPER, INK, PLACES, usePlace,
   Ridge, Room, Snow, Ash, Beam, Strip, Motes, Chip, Plate, BigNum, Contact, Edge,
-  Keeper, Mitt, Queue, Scene, Cam, Mark, MarkPlate, MarkCast, AskBubble,
+  Keeper, Mitt, Queue, Runners, Scene, Cam, Mark, MarkPlate, MarkCast, AskBubble,
 } from "./NomWorld";
 import {
   Portal, Bunker, Fence, Wreck, Pylon, BlastDoor, Wheel, Tunnel, Box, CmdScreen, Canister, Rack, Bars,
@@ -128,8 +128,15 @@ export const S0Hook: React.FC = () => {
             still the sprite nearest camera. It also says three things no prop
             can: the bunker is worth queueing for, other people exist out here,
             and every face in the line carries the audience's own mark. */}
-        <Queue x={486} y={pr.horizon + 244} n={8} s={0.60} f={f} z={62} gap={100} dir={-1}
-          depth={0.082} period={92} lit={0.90} rise={20} />
+        {/* ⭐ ROUND 9 · THEY ARE RUNNING. A queue says the bunker is worth
+            waiting for; a RUN says it is worth getting to before the thing
+            behind you does. Same worldbuilding, an order of magnitude more
+            urgency — and the line at the door now jostles continuously instead
+            of freezing between shuffles. */}
+        <Queue x={486} y={pr.horizon + 244} n={6} s={0.60} f={f} z={62} gap={100} dir={-1}
+          depth={0.082} period={62} lit={0.90} rise={20} />
+        <Runners y={pr.horizon + 262} toX={470} n={6} s={0.58} f={f} z={66} from={-200}
+          speed={5.2} lanes={3} lit={0.90} />
         {/* MARK 2 · the Keeper walking the apron, badge above his hood */}
         <Keeper x={856 - walk * 104} y={pr.horizon + 356} s={1.34} z={90} f={f} face={-1}
           hood={1} walk={walk > 0.01 && walk < 0.99 ? 1 : 0} badge={1} lit={0.98} />

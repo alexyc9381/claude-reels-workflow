@@ -833,12 +833,14 @@ export const Queue: React.FC<{ x: number; y: number; n?: number; s?: number; f?:
     const k = 1 - i * depth;                     // perspective down the line
     /* the shuffle wave: the one at the front moves first, each behind it later */
     const ph = ((f + i * 11) % period) / period;
-    const step = ph < 0.13 ? Math.sin((ph / 0.13) * Math.PI) : 0;
-    const px = x + dir * i * gap * k - dir * step * 26 * k;
+    const step = ph < 0.22 ? Math.sin((ph / 0.22) * Math.PI) : 0;
+    /* the constant jostle underneath the shuffle — nobody in a queue is still */
+    const jog = Math.sin(f / (7 + (i % 3) * 2) + i * 1.7) * 5 * k;
+    const px = x + dir * i * gap * k - dir * step * 30 * k + jog;
     const py = y - i * rise;                     // each place back is further UP the plane
     return (
-      <Keeper key={"qk" + i} x={px} y={py} s={s * k} z={z - i} f={f + i * 9}
-        face={dir < 0 ? 1 : -1} hood={1} walk={step > 0.05 ? 1 : 0}
+      <Keeper key={"qk" + i} x={px} y={py} s={s * k} z={z - i} f={f * 1.25 + i * 9}
+        face={dir < 0 ? 1 : -1} hood={1} walk={step > 0.05 ? 1 : 0.45}
         badge={i % 2 === 0 ? 1 : 0}
         lit={lit * (1 - i * 0.045)} />
     );
@@ -848,13 +850,19 @@ export const Queue: React.FC<{ x: number; y: number; n?: number; s?: number; f?:
 /** the same line seen FROM ABOVE, as shadows — for the top-down plate, where a
     side-on sprite cannot exist. A row of shadows reads as a row of people. */
 export const QueueShadows: React.FC<{ x: number; y: number; n?: number; s?: number; f?: number;
-  z?: number; gap?: number; o?: number }> =
-  ({ x, y, n = 5, s = 1, f = 0, z = 66, gap = 132, o = 0.24 }) => (<>
+  z?: number; gap?: number; o?: number; run?: number }> =
+  ({ x, y, n = 5, s = 1, f = 0, z = 66, gap = 132, o = 0.24, run = 0 }) => (<>
   {Array.from({ length: n }, (_, i) => {
-    const sway = Math.sin(f / (22 + i * 4) + i) * 5;
+    /* ⭐ they RUN across the plate: each shadow crosses and wraps, and the
+       stride is a fast lateral rock rather than a slow sway */
+    const drift = run ? ((f * run * (0.8 + rnd(i, 103) * 0.5) + i * 210) % 1500) - 250 : 0;
+    const sway = run
+      ? Math.sin(f / 3.4 + i * 2) * 13
+      : Math.sin(f / (22 + i * 4) + i) * 5;
     const k = 1 - i * 0.06;
     return (
-      <div key={"qs" + i} style={{ position: "absolute", left: x + i * gap, top: y + i * 26,
+      <div key={"qs" + i} style={{ position: "absolute", left: x + i * gap + drift,
+        top: y + i * 26 + (run ? Math.abs(Math.sin(f / 3.4 + i * 2)) * 16 : 0),
         zIndex: z, opacity: o * (1 - i * 0.10),
         transform: `rotate(${-16 + sway}deg)`, transformOrigin: "50% 0%" }}>
         <div style={{ position: "absolute", left: -74 * s * k, top: 0, width: 148 * s * k,
@@ -866,6 +874,44 @@ export const QueueShadows: React.FC<{ x: number; y: number; n?: number; s?: numb
         <div style={{ position: "absolute", left: 54 * s * k, top: 48 * s * k,
           width: 64 * s * k, height: 124 * s * k, borderRadius: 32 * s, background: "#3C3A36",
           filter: "blur(6px)", transform: "rotate(-18deg)" }} />
+      </div>
+    );
+  })}
+</>);
+
+/* =========================================================================
+   THE RUNNERS — a stream of Claudes RUNNING for the bunker.
+
+   Alex, round 9: *"the people have to be running and stuff, not just standing
+   still."* Right, and it is the better picture: a queue says the bunker is
+   worth waiting for, a RUN says it is worth getting to before the thing behind
+   you does. Same worldbuilding, an order of magnitude more urgency.
+
+   Each runner owns a LANE (its own y, scale and speed), crosses the frame, and
+   wraps off the far side, so the stream never runs out. The run itself is three
+   things the walk cycle does not do: a bigger bob, a forward LEAN, and arms
+   that swing — the house `Mascot` already alternates its legs off `lf`, so a
+   fast `nodSpeed` plus the lean reads as a sprint rather than a stroll.
+   ====================================================================== */
+export const Runners: React.FC<{ y: number; toX: number; n?: number; s?: number; f?: number;
+  z?: number; from?: number; speed?: number; lanes?: number; lit?: number; badge?: boolean }> =
+  ({ y, toX, n = 5, s = 0.62, f = 0, z = 64, from = -180, speed = 4.4, lanes = 3,
+     lit = 0.92, badge = true }) => (<>
+  {Array.from({ length: n }, (_, i) => {
+    const lane = i % lanes;
+    const k = s * (1 - lane * 0.10);                     // nearer lanes are bigger
+    const sp = speed * (0.78 + rnd(i, 101) * 0.5) * (1 - lane * 0.12);
+    const span = toX - from;
+    const t = (((f * sp) + rnd(i, 102) * span) % span) / span;
+    const px = from + t * span;
+    const py = y - lane * 34;                            // and lower on the plane
+    const lean = 9 + Math.sin(f / 5 + i) * 2.5;          // a runner leans into it
+    return (
+      <div key={"rn" + i} style={{ position: "absolute", inset: 0, zIndex: z - lane,
+        transform: `rotate(${lean * 0.16}deg)`, transformOrigin: `${px}px ${py}px` }}>
+        <Keeper x={px} y={py} s={k} z={0} f={f * 1.5 + i * 7} face={toX > from ? -1 : 1}
+          hood={1} walk={1} badge={badge && i % 2 === 0 ? 1 : 0}
+          lit={lit * (1 - lane * 0.06)} />
       </div>
     );
   })}

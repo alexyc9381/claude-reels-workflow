@@ -5,7 +5,7 @@ import { Img, staticFile } from "remotion";
 import {
   E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
   CLAY, GOLD, GREEN, RED, PAPER, INK, usePlace,
-  Ridge, Snow, Ash, Beam, Strip, Motes, Edge, Keeper, Mitt, Queue, QueueShadows,
+  Ridge, Snow, Ash, Beam, Strip, Motes, Edge, Keeper, Mitt, Queue, QueueShadows, Runners,
   Scene, Cam, MarkPlate, MarkCast,
 } from "./NomWorld";
 import { Portal, Bunker, Fence, Wreck, Hatch, MastSite, Prints, Apron, Overhead,
@@ -106,8 +106,10 @@ export const S0HookMast: React.FC = () => {
         <div style={{ position: "absolute", left: 96, top: 40, width: 660, height: 7, zIndex: 56,
           background: "#4E4A45", transformOrigin: "0% 50%",
           transform: `rotate(${26 + jolt * 22}deg)` }} />
-        <Queue x={442} y={pm.horizon + 226} n={8} s={0.58} f={f} z={58} gap={96} dir={-1}
-          depth={0.082} period={88} lit={0.88} rise={18} />
+        <Queue x={442} y={pm.horizon + 226} n={6} s={0.58} f={f} z={58} gap={96} dir={-1}
+          depth={0.082} period={60} lit={0.88} rise={18} />
+        <Runners y={pm.horizon + 250} toX={430} n={6} s={0.56} f={f} z={64} from={-200}
+          speed={5.0} lanes={3} lit={0.88} />
         <Keeper x={206} y={pm.horizon + 268} s={0.90} z={72} f={f} face={1} hood={1}
           badge={1} lit={0.94} />
         <MarkPlate x={82} y={210} t="OFFLINE AI · NO CLOUD" s={0.92} z={76} />
@@ -142,9 +144,13 @@ export const S0HookMast: React.FC = () => {
             borderRadius: "50%", background: "#E9E6DE", opacity: (1 - hit) * 0.86, zIndex: 60 }} />
         ))}
         {/* ⭐ and the line SCATTERS as it comes down — the queue breaks and runs */}
-        <Queue x={410 - fall * 180} y={pm.horizon + 232} n={8} s={0.58} f={f * (1 + fall * 3)}
+        {/* and when it comes down they BOLT — the stream doubles its speed and
+            the line breaks up behind it */}
+        <Queue x={410 - fall * 180} y={pm.horizon + 232} n={6} s={0.58} f={f * (1 + fall * 3)}
           z={58} gap={98 + fall * 60} dir={-1} depth={0.08}
-          period={Math.max(14, 88 - fall * 70)} lit={0.90} rope={false} rise={18} />
+          period={Math.max(12, 60 - fall * 46)} lit={0.90} rope={false} rise={18} />
+        <Runners y={pm.horizon + 254} toX={430} n={8} s={0.56} f={f} z={64} from={-220}
+          speed={5.0 + fall * 7} lanes={3} lit={0.90} />
         <Wreck x={196} base={pm.horizon + 250} s={0.94} z={78} />
         <Edge side="l" c={dark(pm.back, 0.68)} kind="rock" w={150} z={90} />
         {weather(40)}
@@ -168,8 +174,10 @@ export const S0HookMast: React.FC = () => {
           <Mast x={300} base={120} h={420} s={1.05} z={0} f={0} on={0} />
         </div>
         {/* and they re-form at the door, which is the point of the whole cut */}
-        <Queue x={448} y={pm.horizon + 228} n={8} s={0.58} f={f} z={58} gap={96} dir={-1}
-          depth={0.082} period={84} lit={0.90} rise={18} />
+        <Queue x={448} y={pm.horizon + 228} n={6} s={0.58} f={f} z={58} gap={96} dir={-1}
+          depth={0.082} period={58} lit={0.90} rise={18} />
+        <Runners y={pm.horizon + 252} toX={436} n={7} s={0.56} f={f} z={64} from={-210}
+          speed={5.4} lanes={3} lit={0.90} />
         <Keeper x={228} y={pm.horizon + 336} s={1.22} z={88} f={f} face={1} hood={1}
           badge={1} lit={0.96} />
         <Edge side="r" c={dark(pm.back, 0.66)} kind="rock" w={130} z={90} />
@@ -290,8 +298,10 @@ export const S0HookCase: React.FC = () => {
         <Wreck x={128} base={pr.horizon + 176} s={0.74} z={30} />
         <ScanDish x={906} base={pr.horizon + 132} s={0.62} z={24} f={f} rate={1.3} />
         <Exhaust x={862} y={pr.horizon + 40} s={0.72} z={25} f={f} n={3} />
-        <Queue x={752} y={pr.horizon + 178} n={7} s={0.40} f={f} z={26} gap={62} dir={-1}
-          depth={0.08} period={90} lit={0.82} rope={false} rise={12} />
+        <Queue x={752} y={pr.horizon + 178} n={5} s={0.40} f={f} z={26} gap={62} dir={-1}
+          depth={0.08} period={58} lit={0.82} rope={false} rise={12} />
+        <Runners y={pr.horizon + 194} toX={744} n={5} s={0.38} f={f} z={27} from={280}
+          speed={4.6} lanes={2} lit={0.80} badge={false} />
         <Windsock x={96} base={pr.horizon + 96} s={0.74} z={58} f={f} />
         <Strobe x={196} base={pr.horizon + 172} s={0.80} z={60} f={f} period={19} />
         <Flap x={704} y={pr.horizon + 120} w={104} h={76} s={1} z={62} f={f} c="#6E6459" />
@@ -317,8 +327,10 @@ export const S0HookCase: React.FC = () => {
         <Bunker x={806} base={pr.horizon + 176} s={0.52} z={20} f={f} slot={0.9}
           floods={1} lamp={1} />
         <ScanDish x={906} base={pr.horizon + 132} s={0.62} z={24} f={f} rate={1.3} />
-        <Queue x={752} y={pr.horizon + 178} n={7} s={0.40} f={f} z={26} gap={62} dir={-1}
-          depth={0.08} period={90} lit={0.82} rope={false} rise={12} />
+        <Queue x={752} y={pr.horizon + 178} n={5} s={0.40} f={f} z={26} gap={62} dir={-1}
+          depth={0.08} period={58} lit={0.82} rope={false} rise={12} />
+        <Runners y={pr.horizon + 194} toX={744} n={5} s={0.38} f={f} z={27} from={280}
+          speed={4.6} lanes={2} lit={0.80} badge={false} />
         <Windsock x={96} base={pr.horizon + 96} s={0.74} z={58} f={f} />
         <Debris f={f} n={8} z={86} y0={pr.horizon + 20} y1={pr.horizon + 300} speed={1.6} />
         <Edge side="l" c={dark(pr.back, 0.66)} kind="rock" w={126} z={90} />
@@ -354,8 +366,10 @@ export const S0HookCase: React.FC = () => {
       <Ridge p={pr} f={f} city={1} lit={1} sunX={868} />
       <Bunker x={664} base={pr.horizon + 226} s={0.78} z={26} f={f}
         slot={0.9 + Math.sin(f / 16) * 0.06} floods={1} lamp={1} />
-      <Queue x={534} y={pr.horizon + 224} n={8} s={0.54} f={f} z={58} gap={88} dir={-1}
-        depth={0.082} period={86} lit={0.88} rise={17} />
+      <Queue x={534} y={pr.horizon + 224} n={6} s={0.54} f={f} z={58} gap={88} dir={-1}
+        depth={0.082} period={58} lit={0.88} rise={17} />
+      <Runners y={pr.horizon + 248} toX={522} n={6} s={0.52} f={f} z={64} from={-190}
+        speed={5.0} lanes={3} lit={0.88} />
       <Wreck x={128} base={pr.horizon + 300} s={0.98} z={78} />
       <Cam z={50} s={0.44} x={-250} y={168}>
         <Case lid={1} glow={1} latch={[1, 1, 1, 1]} base={640} s={1.06} />
@@ -459,7 +473,7 @@ export const S0HookCross: React.FC = () => {
         {/* ⭐ ROUND 8 · the queue, from above. A side-on sprite cannot exist in
             a top-down shot, but a row of SHADOWS reads as a row of people just
             as well — and it keeps the camera that makes this cut worth having. */}
-        <QueueShadows x={640} y={-52} n={5} s={1.06} f={f} z={66} gap={126} o={0.24} />
+        <QueueShadows x={-120} y={-52} n={6} s={1.06} f={f} z={66} gap={126} o={0.26} run={5.2} />
         <Overhead x={496} y={-58} s={1.24} z={68} f={f} o={0.28} />
         <Drift n={22} z={74} sp={1.3} />
         <Ash f={f} n={30} z={76} speed={1.6} />
@@ -483,7 +497,7 @@ export const S0HookCross: React.FC = () => {
         <SweepLamp x={182} y={188} s={1.34} z={22} f={f} rate={2.8} />
         <Vortex f={f} n={3} z={73} s={1.1} />
         <Debris f={f} n={5} z={79} y0={80} y1={720} speed={1.4} />
-        <QueueShadows x={640} y={-52} n={5} s={1.06} f={f} z={66} gap={126} o={0.20} />
+        <QueueShadows x={-120} y={-52} n={6} s={1.06} f={f} z={66} gap={126} o={0.22} run={5.2} />
         <Overhead x={496} y={-58} s={1.24} z={68} f={f} o={0.24} />
         <Mitt x={112} y={300} s={1.5} z={70} rot={-18 + clear * 26} />
         <MarkPlate x={70} y={92} t="AN OFFLINE AI" s={0.92} z={72} />

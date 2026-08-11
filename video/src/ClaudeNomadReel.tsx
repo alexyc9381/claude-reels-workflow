@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
-import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
+import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader, hexA } from "./SlopKit";
 import { S0Hook, S1, S2, S3, S4, S5, S6, S7Cta } from "./NomScenes";
 import { S0HookMast, S0HookCase, S0HookCross } from "./NomHooks";
 import { CamCtx, PalCtx } from "./NomWorld";
@@ -108,6 +108,12 @@ const SFX: Cue[] = [
   { at: 0.80, src: "mech_clank.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.16 },
   /* his boots on the apron */
   ...repeat(4, 0.20, 0.21, { src: "sand-steps.mp3", v: LEVELS.SFX_TEXTURE, dur: 0.34 }, 0.07),
+  /* ⭐ ROUND 9 · THE CROWD. A running crowd under the whole open: a continuous
+     bed of feet, a low murmur beneath it, and six individual footfalls pitched
+     apart so the stream reads as separate people rather than one loop. */
+  { at: 0.00, src: "crowd_run.wav", v: db(-19), dur: 3.9 },
+  { at: 0.00, src: "crowd_ambience.wav", v: db(-27), dur: 3.9, rate: 0.9 },
+  ...repeat(6, 0.34, 0.29, { src: "sand-steps.mp3", v: db(-21), dur: 0.30 }, 0.13),
   ...layer(0.40, { src: "whoosh_heavy.wav", v: LEVELS.SFX_MID, dur: 0.9, rate: 0.86 },
                  { src: "am/cloth-shiver.wav", dur: 0.8 }),
   { at: 1.10, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 1.12 },
@@ -122,6 +128,8 @@ const SFX: Cue[] = [
 
   /* ---- S1 · THE MACHINE ------------------------------------------------- */
   { at: 3.90, src: "am/room-tone.wav", v: db(-26), dur: 2.1 },
+  /* the crowd carries a beat past the cut, then the door shuts it out */
+  { at: 3.90, src: "crowd_run.wav", v: db(-27), dur: 0.55, rate: 0.94 },
   { at: 3.90, src: "chair_knock.wav", v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 0.94 },
   ...layer(4.24, { src: "lib_mactype.wav", v: LEVELS.SFX_MID, dur: 0.5 },
                  { src: "c_power.wav", dur: 0.7, rate: 0.88 }),
@@ -219,37 +227,58 @@ export const VARIANTS: Variant[] = [
     bed: "nomad_bed_d.wav", seed: 11, pal: 3, trans: "slide", capTop: 1240, endHold: 12 },
 ];
 
-/** the cut punctuation. One per variant, so two cuts never edit the same way. */
+/* ⛔⛔ NO FLASHING, NO IRIS, NO HIGH-CONTRAST WIPES. STANDING RULE.
+   Alex: *"I hate the black circle transition thing, it is so flashy and hurts my
+   eyes, prevent stuff like this in the future too."*
+
+   The offenders were `punch` — a full-black circle closing over the whole frame —
+   and `flash`, a white plate at 0.42 opacity for six frames. Both are, in effect,
+   a strobe: a near-total luminance swing in under a fifth of a second, which is
+   physically uncomfortable on a phone held close and is the exact profile that
+   triggers photosensitivity.
+
+   ⛔ THE BAR FOR ANY TRANSITION IN THIS REPO FROM NOW ON:
+      1  peak overlay opacity <= 0.30, and NEVER pure white or pure black
+      2  no shape that closes over the FULL frame (no iris, no circle wipe)
+      3  ramp in AND out — never an instant on/off plate
+      4  at least 8 frames, so the eye reads it as a dissolve, not a hit
+   The cut itself is the punctuation. These exist to soften the seam, not to be
+   noticed. A hard cut with nothing over it is always an acceptable answer.        */
 const Trans: React.FC<{ at: number; kind: Trans }> = ({ at, kind }) => {
   const f = useCurrentFrame();
-  const n = kind === "flash" ? 6 : 9;
+  const n = 10;
   if (f < at || f >= at + n) return null;
   const p = (f - at) / n;
+  /* a symmetric ramp: 0 -> peak -> 0, so nothing ever snaps on */
+  const ramp = Math.sin(Math.PI * p);
+
   if (kind === "flash") return (
+    /* a WARM dip, not a white flash. #2A2620 at 0.22 is a shadow passing over
+       the frame; the old #F4EEE2 at 0.42 was a camera strobe. */
     <div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
-      background: "#F4EEE2", opacity: (1 - p) * 0.42 }} />
+      background: "#2A2620", opacity: ramp * 0.22 }} />
   );
   if (kind === "bars") return (
     <div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
       overflow: "hidden" }}>
       {[0, 1, 2, 3].map((i) => (
         <div key={i} style={{ position: "absolute", left: 0, right: 0, top: `${i * 25}%`,
-          height: "25%", background: "#14110E", opacity: 0.86,
-          transform: `translateX(${(i % 2 ? 1 : -1) * p * 130}%)` }} />
+          height: "25%", background: "#2A2620", opacity: ramp * 0.26,
+          transform: `translateX(${(i % 2 ? 1 : -1) * p * 110}%)` }} />
       ))}
     </div>
   );
   if (kind === "punch") return (
+    /* ⛔ THIS WAS THE IRIS. It is now a soft centre-weighted dip that never
+       closes and never reaches the frame edge at full strength. */
     <div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
-      background: "#14110E", opacity: 0.9,
-      clipPath: `circle(${16 + p * 116}% at 50% 46%)`,
-      WebkitClipPath: `circle(${16 + p * 116}% at 50% 46%)` }} />
+      background: `radial-gradient(circle at 50% 46%, ${hexA("#2A2620", ramp * 0.26)} 0%, ${hexA("#2A2620", ramp * 0.05)} 72%)` }} />
   );
   return (
     <div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
       overflow: "hidden" }}>
       <div style={{ position: "absolute", left: `${-100 + p * 100}%`, top: 0, width: "100%",
-        height: "100%", background: "#14110E", opacity: 0.88 }} />
+        height: "100%", background: "#2A2620", opacity: ramp * 0.24 }} />
     </div>
   );
 };

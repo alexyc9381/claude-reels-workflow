@@ -11,6 +11,7 @@ import {
 } from "./RepWorld";
 import {
   Counter, Pile, Fall, Chute, Flag429, Machine, Claude, Waiting, Stack, Cap,
+  Belt, Junction, Ledger,
 } from "./RepProps";
 
 /* ===========================================================================
@@ -141,8 +142,10 @@ export const S0Hook: React.FC = () => {
         <Counter x={W / 2} y={272} v={cnt} s={1.02} z={96} />
         <Fall x={W / 2} y={-30} len={280} f={f} n={7} s={0.8} z={40} spread={760} on={1} />
         {/* he is watching the number, which is what tells you to watch it too */}
-        <Claude x={188} base={792} s={1.0} z={80} f={f} gaze={0.9} cheer={0.25} />
-        <Pile x={690} base={790} n={40} s={1.0} z={70} w={520} seed={8} />
+        {/* a BELT, not another heap — the second pile in ninety frames was the
+            start of the "just coins piling" problem */}
+        <Belt y={604} f={f} z={50} s={1.0} speed={4.2} n={7} from={2} />
+        <Claude x={168} base={792} s={1.0} z={80} f={f} gaze={0.9} cheer={0.25} />
         <Flash lf={lf} at={0} n={2} o={0.22} />
       </Scene>
     );
@@ -171,16 +174,14 @@ export const S0Hook: React.FC = () => {
   return (
     <Scene p={p} slug="AND IT KEEPS COUNTING" push={[82, 110, 1.05]} vig={0.4}>
       <Room p={p} f={f} />
-      <Fall x={W / 2 + 90} y={-30} len={HZ + 190} f={f} n={11} s={1.1} z={40}
-        spread={420} on={1} />
-      <Pile x={W / 2 + 90} base={772} n={Math.round(grow * 120)} s={1.16} z={50}
-        w={660} seed={9} />
-      <Token x={512} y={606} s={186} z={92} markKey={P[4].k} name={P[4].n} hasMark
-        rot={-8} />
-      <Token x={800} y={560} s={186} z={93} markKey={P[5].k} name={P[5].n} hasMark
-        rot={7} />
-      <Claude x={150} base={768} s={0.94} z={80} f={f} gaze={0.8} cheer={0.7} />
-      <Counter x={W / 2} y={176} v={M} s={0.62} z={96} label="" />
+      {/* ⛔ NO PILE IN THIS SHOT. Two belts running opposite ways give the frame
+          a direction a heap cannot have, and every token on them carries a mark
+          — so the shot is busier AND says more. */}
+      <Belt y={318} f={f} z={40} s={1.05} speed={3.6} n={6} from={0} />
+      <Belt y={528} f={f} z={44} s={1.05} speed={-2.9} n={6} from={4} />
+      <Claude x={152} base={784} s={1.0} z={80} f={f} gaze={0.8} cheer={0.7}
+        hold={168} holdKey={P[2].k} holdName={P[2].n} holdMark />
+      <Counter x={W / 2 + 120} y={686} v={M} s={0.52} z={96} label="" />
       <Flash lf={lf} at={0} n={2} o={0.24} />
     </Scene>
   );
@@ -206,7 +207,7 @@ export const S1: React.FC = () => {
     return (
       <Scene p={p} slug="WHAT ONE FREE TIER GIVES" push={[0, 30, 1.05]} vig={0.44}>
         <Room p={p} f={f} />
-        <Stack x={W / 2 + 96} base={HZ + 168} n={4} s={1.5} z={60} label="800,000"
+        <Stack x={W / 2 + 150} base={HZ + 168} n={4} s={1.5} z={60} label="800,000"
           sub="ONE FREE TIER, ONE MONTH" seed={2} />
         {/* ⛔ THE SPRITE IS THE RULER. Two piles only rank against each other if
             something in frame has a known size, and he is it — the same sprite
@@ -438,18 +439,13 @@ export const S4: React.FC = () => {
     return (
       <Scene p={p} slug="ALL OF THEM  ·  AT ONCE" push={[0, 26, 1.05]} vig={0.4}>
         <Room p={p} f={f} />
-        {[[188, 0], [506, 1], [824, 3]].map(([x, i], k) => (
-          <React.Fragment key={"c4" + k}>
-            <Chute x={x as number} y={134} w={224} z={30 + k} f={f}
-              markKey={P[i as number].k} name={P[i as number].n}
-              hasMark={P[i as number].mark} open={on} />
-            <Fall x={x as number} y={330} len={HZ - 260} f={f + k * 11} n={6} s={0.9}
-              z={60 + k} spread={70} on={on} />
-          </React.Fragment>
-        ))}
-        <Pile x={560} base={HZ + 110} n={Math.round(on * 40)} s={1.0} z={50} w={600}
-          seed={6} />
-        <Claude x={112} base={HZ + 112} s={0.8} z={82} f={f} gaze={0.8} cheer={on * 0.8} />
+        {/* ⛔ A JUNCTION, NOT A HEAP. "routes your requests across every
+            provider" is a CONVERGENCE, and five labelled lines running into one
+            header is a shape you can trace with a finger. A pile can only ever
+            say "a lot". */}
+        <Junction x={W / 2} y={470} f={f} n={5} z={30} s={1.0} w={760} on={on} />
+        <Claude x={W / 2 - 30} base={784} s={0.94} z={82} f={f} gaze={0.4}
+          cheer={on * 0.8} hold={158} holdClaude />
         <Flash lf={lf} at={0} n={2} o={0.2} />
       </Scene>
     );
@@ -489,25 +485,13 @@ export const S4: React.FC = () => {
   return (
     <Scene p={p} slug="ONE  /v1  ENDPOINT" push={[70, 134, 1.05]} vig={0.38}>
       <Room p={p} f={f} />
-      {[0, 1, 2, 3, 4].map((k) => (
-        <Chute key={"c6" + k} x={150 + k * 202} y={126} w={130} z={30 + k} f={f}
-          markKey={P[k].k} name={P[k].n} hasMark={P[k].mark} open={1} />
-      ))}
-      {/* they converge: five falls angled toward one mouth */}
-      {[0, 1, 2, 3, 4].map((k) => (
-        <div key={"cv" + k} style={{ position: "absolute", inset: 0, zIndex: 60 + k,
-          transform: `rotate(${(k - 2) * 7}deg)`, transformOrigin: "50% 100%" }}>
-          <Fall x={W / 2} y={240} len={230} f={f + k * 13} n={4} s={0.78} z={60}
-            spread={40} on={on} />
-        </div>
-      ))}
-      <div style={{ position: "absolute", left: W / 2 - 178, top: 446, width: 356,
-        height: 46, borderRadius: 9, background: BRASS, zIndex: 78, boxShadow: SH_D }} />
-      <Claude x={W / 2 - 40} base={766} s={1.06} z={82} f={f} gaze={0.4} cheer={on * 0.9}
-        hold={206} holdClaude />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 700, textAlign: "center",
-        zIndex: 96, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 31,
-        letterSpacing: "0.04em", color: "#3A3226" }}>ONE KEY, ONE ENDPOINT</div>
+      {/* ⛔ A LIST, NOT A HEAP. This is the beat that has to carry 29 items AND
+          their arithmetic, and a printed roll is the only shape that does both:
+          names, amounts, a rule, a total. It is also the most literal object in
+          the reel — nothing on it needs translating. */}
+      <Ledger x={W / 2 + 34} y={140} f={f} rows={5} s={0.90} z={60}
+        reveal={E(lf, 2, 40, 0, 1, OUT)} />
+      <Claude x={116} base={776} s={0.82} z={82} f={f} gaze={0.7} cheer={on * 0.7} />
     </Scene>
   );
 };
@@ -547,11 +531,11 @@ export const S5: React.FC = () => {
         <Fall x={738} y={320} len={270} f={f} n={6} s={0.9} z={61} spread={70} on={next} />
         <Flag429 x={266} y={340} s={1.0} z={96} t={flag} />
         {/* the pile never stops growing, which is the actual claim */}
-        <Pile x={560} base={p.horizon + 176} n={30 + Math.round(f * 0.5)} s={0.92} z={50}
-          w={520} seed={7} />
-        {/* ⛔ HE NEVER TOUCHES IT. "you never see it" is the claim, so the sprite
-            just watches and the mechanism does the work by itself. */}
-        <Claude x={102} base={p.horizon + 178} s={0.76} z={82} f={f} gaze={0.9}
+        {/* ⛔ THE BELT NEVER STOPS, and that IS the claim. A growing pile only
+            says "more"; a belt that keeps running while the feed above it swaps
+            says "the switch cost you nothing", which is the actual sentence. */}
+        <Belt y={624} f={f} z={50} s={1.0} speed={3.8} n={7} from={1} />
+        <Claude x={116} base={792} s={0.80} z={82} f={f} gaze={0.9}
           shock={E(f, 24, 32, 0, 1, OUT) * 0.6} />
         <Flash lf={f} at={24} n={3} o={0.24} />
       </Scene>
@@ -602,11 +586,8 @@ export const S6Cta: React.FC = () => {
       <div style={{ position: "absolute", inset: 0, zIndex: 1,
         transform: `translate(${sk.x}px, ${sk.y}px)` }}>
         <Room p={p} f={f} />
-        <Fall x={W / 2 + 30} y={-30} len={HZ + 30} f={f} n={9} s={1.0} z={40}
-          spread={420} on={1} />
-        <Pile x={W / 2 + 120} base={HZ + 168} n={Math.round(grow * 96)} s={1.1} z={50}
-          w={600} seed={11} />
-        <Claude x={128} base={HZ + 170} s={0.86} z={82} f={f} gaze={0.4} cheer={0.85} />
+        <Belt y={556} f={f} z={40} s={1.0} speed={3.2} n={7} from={3} />
+        <Claude x={150} base={780} s={0.96} z={82} f={f} gaze={0.4} cheer={0.85} />
         {/* the keyword, struck on a token */}
         <div style={{ position: "absolute", inset: 0, zIndex: 92, opacity: pop,
           transform: `scale(${0.72 + pop * 0.28}) rotate(${-6 + (1 - pop) * 10}deg)`,
