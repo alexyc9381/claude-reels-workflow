@@ -13,7 +13,20 @@ import sys
 import numpy as np
 from PIL import Image
 
-FF = os.path.expanduser("~/Downloads/matchtern-longform/tools/node_modules/ffmpeg-static/ffmpeg")
+# ⛔ ffmpeg discovery, same chain as verify_reel.py. The hardcoded
+# ~/Downloads/matchtern-longform path this used to carry is from before the
+# project moved and no longer exists, so every run of these three audits died
+# with FileNotFoundError before reading a single frame.
+def _ffmpeg():
+    _here = os.path.dirname(os.path.abspath(__file__))
+    for c in (os.environ.get("FFMPEG", ""),
+              os.path.join(_here, "node_modules/ffmpeg-static/ffmpeg"),
+              os.path.expanduser("~/Downloads/matchtern-longform/tools/node_modules/ffmpeg-static/ffmpeg"),
+              "/opt/homebrew/bin/ffmpeg"):
+        if c and os.path.exists(c):
+            return c
+    return "ffmpeg"
+FF = _ffmpeg()
 FPS = 10.0
 # panel rect in the 1080x1920 frame
 CROP = "crop=1012:792:34:384"

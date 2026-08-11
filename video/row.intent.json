@@ -1,0 +1,169 @@
+{
+  "reel": 91,
+  "name": "ROWBOAT",
+  "keyword": "ROWBOAT",
+  "fps": 30,
+  "vo": "rowboat_vo_tight.wav",
+  "voDuration": 34.36,
+  "words": "src/data/words_rowboat_tight.json",
+  "note": "Every t is a MEASURED word onset out of words_rowboat_tight.json, re-derived after the silence trim rather than scaled. TWO cutting passes: pass 1 removed the three KitKat restarts (54.98 -> 38.70), pass 2 removed the dead air BETWEEN sentences (seven silences totalling 5.93s, trimmed to a 0.22s beat each, -4.35s -> 34.36). Fourteen scenes across thirteen places, alternating warm/cool so every cut is a colour change too - `lawn` is the one deliberate repeat, because the hook buries the agency and S5 comes back to the same grave.",
+  "hook": "D THE FUNERAL (rowWake) - picked by Alex. HOOK_LEN 138, cuts at f28/f60/f98, camera locked.",
+  "L": [
+    0.0,
+    4.59,
+    6.91,
+    9.49,
+    11.6,
+    13.57,
+    14.82,
+    16.0,
+    18.82,
+    21.31,
+    23.27,
+    25.1,
+    27.09,
+    28.8,
+    32.66
+  ],
+  "CUT": 33.84,
+  "scenes": [
+    {
+      "i": 0,
+      "t": 0.0,
+      "place": "lawn",
+      "vo": "Forget Claude Code or Cursor, forget paying developers to build AI agents, because this is gonna hurt.",
+      "job": "THE OPEN - the funeral. Four hard-cut shots, camera locked.",
+      "header": "SOLD THEIR LAST STARTUP / GAVE THIS ONE AWAY"
+    },
+    {
+      "i": 1,
+      "t": 4.59,
+      "place": "plaza",
+      "vo": "Two guys who already sold their startup to Coinbase",
+      "job": "the credential - the company walks off the plaza",
+      "header": "COINBASE BOUGHT / THEIR LAST COMPANY",
+      "warn": "\"Two guys\" is THREE - Arjun Maheswaran, Ramnique Singh, Akhilesh Sudhakar. Coinbase bought AGARA in 2021, NOT Rowboat. No count on screen."
+    },
+    {
+      "i": 2,
+      "t": 6.91,
+      "place": "yard",
+      "vo": "just quietly open sourced a tool that does it all in plain English.",
+      "job": "the next crate goes DOWN and gets a FREE sign",
+      "header": "THIS ONE THEY / OPEN SOURCED"
+    },
+    {
+      "i": 3,
+      "t": 9.49,
+      "place": "apron",
+      "vo": "Y Combinator backed it, and it's completely free.",
+      "job": "real YC mark + a price that is a zero",
+      "header": "Y COMBINATOR S24 / AND IT IS FREE"
+    },
+    {
+      "i": 4,
+      "t": 11.6,
+      "place": "street",
+      "vo": "And it's just made every AI agency in the world",
+      "job": "four shopfronts shutter in sequence",
+      "header": "EVERY AI AGENCY / JUST GOT REPLACED"
+    },
+    {
+      "i": 5,
+      "t": 13.57,
+      "place": "lawn",
+      "vo": "irrelevant overnight.",
+      "job": "back to the grave - the one deliberate repeat",
+      "header": "IRRELEVANT / OVERNIGHT"
+    },
+    {
+      "i": 6,
+      "t": 14.82,
+      "place": "cross",
+      "vo": "The tool is called Rowboat.",
+      "job": "the sheet comes off the signboard",
+      "header": "THE TOOL IS / CALLED ROWBOAT",
+      "warn": "MONOCHROME brand - a black sail on a white tile. Do not tint it."
+    },
+    {
+      "i": 7,
+      "t": 16.0,
+      "place": "dock",
+      "vo": "You just describe what you want your AI agent to do in normal words.",
+      "job": "one line, typed out",
+      "header": "DESCRIBE IT IN / PLAIN ENGLISH",
+      "warn": "PIVOT-DEPENDENT - see scene 8."
+    },
+    {
+      "i": 8,
+      "t": 18.82,
+      "place": "depot",
+      "vo": "The copilot builds the entire multi-agent system for you,",
+      "job": "a gantry lowers three agents onto a deck, then the links get drawn",
+      "header": "THE COPILOT BUILDS / THE WHOLE SYSTEM",
+      "warn": "PIVOT-DEPENDENT. Verified 2026-08-04: rowboatlabs/rowboat now ships an open-source AI COWORKER WITH MEMORY - desktop app, local knowledge graph, email client, background agents, browser, meeting notes, Code Mode. The copilot-builds-a-multi-agent-system product is ~Apr 2025. Scenes 7, 8 and 12 are ~10s of a 38.7s reel making a claim the shipping product no longer makes. Alex's call on 2026-08-04 was BUILD IT AS RECORDED. These are the shots to pull first if that is revisited."
+    },
+    {
+      "i": 9,
+      "t": 21.31,
+      "place": "build",
+      "vo": "multiple agents working together, connected to your tools,",
+      "job": "four agents land, each with a real MCP mark the README names",
+      "header": "AGENTS WIRED TO / SLACK, LINEAR, JIRA"
+    },
+    {
+      "i": 10,
+      "t": 23.27,
+      "place": "terrace",
+      "vo": "tested, and ready to deploy.",
+      "job": "TESTED lands, the gate opens",
+      "header": "TESTED AND / READY TO DEPLOY"
+    },
+    {
+      "i": 11,
+      "t": 25.1,
+      "place": "kerb",
+      "vo": "Think of it like having an entire AI development team",
+      "job": "the team, staged on depth not as bookends",
+      "header": "AN ENTIRE / AI DEV TEAM"
+    },
+    {
+      "i": 12,
+      "t": 27.09,
+      "place": "road",
+      "vo": "that takes orders in English and delivers in seconds.",
+      "job": "the order travels and becomes the thing; a rail fills end to end",
+      "header": "ORDERS IN ENGLISH / DELIVERED IN SECONDS",
+      "warn": "NO CLOCK ON SCREEN - \"in seconds\" has no sourceable duration behind it, so the travel carries the speed instead of a digit. PIVOT-DEPENDENT - see scene 8."
+    },
+    {
+      "i": 13,
+      "t": 28.8,
+      "place": "gate",
+      "vo": "It's open source, and the founders already proved they can build AI that works.",
+      "job": "the close - repo, licence, stars, all checkable",
+      "header": "APACHE-2.0 / 16,974 STARS"
+    },
+    {
+      "i": 14,
+      "t": 32.66,
+      "place": "gate",
+      "vo": "Comment ROWBOAT and I'll send you the direct link.",
+      "job": "CTA. HARD CUT on the keyword.",
+      "header": "COMMENT / ROWBOAT"
+    }
+  ],
+  "verified": {
+    "repo": "rowboatlabs/rowboat",
+    "stars": 16974,
+    "forks": 1687,
+    "license": "Apache-2.0",
+    "yc": "Y Combinator S24",
+    "asOf": "2026-08-04",
+    "notOnScreen": [
+      "any price",
+      "any founder count",
+      "Coinbase bought Rowboat"
+    ]
+  }
+}

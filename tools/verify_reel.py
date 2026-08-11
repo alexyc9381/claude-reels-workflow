@@ -44,7 +44,9 @@ import argparse, array, json, os, re, subprocess, sys, math
 
 # ---- ffmpeg discovery (no ffprobe on this machine — use ffmpeg for everything) ----------
 def _ffmpeg():
-    for c in (os.path.expanduser("~/Downloads/matchtern-longform/tools/node_modules/ffmpeg-static/ffmpeg"),
+    _here = os.path.dirname(os.path.abspath(__file__))
+    for c in (os.path.join(_here, "node_modules/ffmpeg-static/ffmpeg"),          # this repo's own toolchain
+              os.path.expanduser("~/Downloads/matchtern-longform/tools/node_modules/ffmpeg-static/ffmpeg"),
               "/opt/homebrew/bin/ffmpeg", "ffmpeg"):
         if c == "ffmpeg" or os.path.exists(c):
             return c

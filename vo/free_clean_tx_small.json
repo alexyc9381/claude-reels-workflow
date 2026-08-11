@@ -1,0 +1,509 @@
+{
+ "words": [
+  {
+   "start": 0.0,
+   "end": 0.14,
+   "word": " For"
+  },
+  {
+   "start": 0.14,
+   "end": 0.32,
+   "word": " image"
+  },
+  {
+   "start": 0.32,
+   "end": 0.78,
+   "word": " creation,"
+  },
+  {
+   "start": 0.98,
+   "end": 1.06,
+   "word": " this"
+  },
+  {
+   "start": 1.06,
+   "end": 1.22,
+   "word": " is"
+  },
+  {
+   "start": 1.22,
+   "end": 1.46,
+   "word": " paid,"
+  },
+  {
+   "start": 1.7,
+   "end": 1.78,
+   "word": " this"
+  },
+  {
+   "start": 1.78,
+   "end": 1.92,
+   "word": " is"
+  },
+  {
+   "start": 1.92,
+   "end": 2.18,
+   "word": " free."
+  },
+  {
+   "start": 2.5,
+   "end": 2.58,
+   "word": " For"
+  },
+  {
+   "start": 2.58,
+   "end": 2.74,
+   "word": " AI"
+  },
+  {
+   "start": 2.74,
+   "end": 3.08,
+   "word": " research,"
+  },
+  {
+   "start": 3.36,
+   "end": 3.42,
+   "word": " this"
+  },
+  {
+   "start": 3.42,
+   "end": 3.56,
+   "word": " is"
+  },
+  {
+   "start": 3.56,
+   "end": 3.82,
+   "word": " paid,"
+  },
+  {
+   "start": 4.04,
+   "end": 4.1,
+   "word": " this"
+  },
+  {
+   "start": 4.1,
+   "end": 4.24,
+   "word": " is"
+  },
+  {
+   "start": 4.24,
+   "end": 4.5,
+   "word": " free."
+  },
+  {
+   "start": 4.74,
+   "end": 4.9,
+   "word": " For"
+  },
+  {
+   "start": 4.9,
+   "end": 5.1,
+   "word": " avatar"
+  },
+  {
+   "start": 5.1,
+   "end": 5.54,
+   "word": " creation,"
+  },
+  {
+   "start": 5.78,
+   "end": 5.88,
+   "word": " this"
+  },
+  {
+   "start": 5.88,
+   "end": 6.02,
+   "word": " is"
+  },
+  {
+   "start": 6.02,
+   "end": 6.24,
+   "word": " paid,"
+  },
+  {
+   "start": 6.42,
+   "end": 6.46,
+   "word": " this"
+  },
+  {
+   "start": 6.46,
+   "end": 6.6,
+   "word": " is"
+  },
+  {
+   "start": 6.6,
+   "end": 6.82,
+   "word": " free."
+  },
+  {
+   "start": 6.98,
+   "end": 7.16,
+   "word": " For"
+  },
+  {
+   "start": 7.16,
+   "end": 7.34,
+   "word": " code"
+  },
+  {
+   "start": 7.34,
+   "end": 7.68,
+   "word": " generation,"
+  },
+  {
+   "start": 8.1,
+   "end": 8.18,
+   "word": " this"
+  },
+  {
+   "start": 8.18,
+   "end": 8.32,
+   "word": " is"
+  },
+  {
+   "start": 8.32,
+   "end": 8.56,
+   "word": " paid,"
+  },
+  {
+   "start": 8.76,
+   "end": 8.8,
+   "word": " this"
+  },
+  {
+   "start": 8.8,
+   "end": 8.96,
+   "word": " is"
+  },
+  {
+   "start": 8.96,
+   "end": 9.16,
+   "word": " free."
+  },
+  {
+   "start": 9.4,
+   "end": 9.54,
+   "word": " For"
+  },
+  {
+   "start": 9.54,
+   "end": 9.88,
+   "word": " videos,"
+  },
+  {
+   "start": 10.18,
+   "end": 10.26,
+   "word": " this"
+  },
+  {
+   "start": 10.26,
+   "end": 10.4,
+   "word": " is"
+  },
+  {
+   "start": 10.4,
+   "end": 10.64,
+   "word": " paid,"
+  },
+  {
+   "start": 10.82,
+   "end": 10.9,
+   "word": " this"
+  },
+  {
+   "start": 10.9,
+   "end": 11.06,
+   "word": " is"
+  },
+  {
+   "start": 11.06,
+   "end": 11.28,
+   "word": " free."
+  },
+  {
+   "start": 11.52,
+   "end": 11.68,
+   "word": " For"
+  },
+  {
+   "start": 11.68,
+   "end": 11.9,
+   "word": " image"
+  },
+  {
+   "start": 11.9,
+   "end": 12.22,
+   "word": " editing,"
+  },
+  {
+   "start": 12.42,
+   "end": 12.5,
+   "word": " this"
+  },
+  {
+   "start": 12.5,
+   "end": 12.64,
+   "word": " is"
+  },
+  {
+   "start": 12.64,
+   "end": 12.88,
+   "word": " paid,"
+  },
+  {
+   "start": 13.1,
+   "end": 13.16,
+   "word": " this"
+  },
+  {
+   "start": 13.16,
+   "end": 13.32,
+   "word": " is"
+  },
+  {
+   "start": 13.32,
+   "end": 13.54,
+   "word": " free."
+  },
+  {
+   "start": 13.78,
+   "end": 13.92,
+   "word": " For"
+  },
+  {
+   "start": 13.92,
+   "end": 14.16,
+   "word": " social"
+  },
+  {
+   "start": 14.16,
+   "end": 14.56,
+   "word": " scheduling,"
+  },
+  {
+   "start": 14.82,
+   "end": 14.9,
+   "word": " this"
+  },
+  {
+   "start": 14.9,
+   "end": 15.06,
+   "word": " is"
+  },
+  {
+   "start": 15.06,
+   "end": 15.3,
+   "word": " paid,"
+  },
+  {
+   "start": 15.42,
+   "end": 15.54,
+   "word": " this"
+  },
+  {
+   "start": 15.54,
+   "end": 15.74,
+   "word": " is"
+  },
+  {
+   "start": 15.74,
+   "end": 15.96,
+   "word": " free."
+  },
+  {
+   "start": 16.18,
+   "end": 16.34,
+   "word": " For"
+  },
+  {
+   "start": 16.34,
+   "end": 16.58,
+   "word": " website"
+  },
+  {
+   "start": 16.58,
+   "end": 16.92,
+   "word": " builder,"
+  },
+  {
+   "start": 17.12,
+   "end": 17.22,
+   "word": " this"
+  },
+  {
+   "start": 17.22,
+   "end": 17.38,
+   "word": " is"
+  },
+  {
+   "start": 17.38,
+   "end": 17.6,
+   "word": " paid,"
+  },
+  {
+   "start": 17.8,
+   "end": 17.88,
+   "word": " this"
+  },
+  {
+   "start": 17.88,
+   "end": 18.06,
+   "word": " is"
+  },
+  {
+   "start": 18.06,
+   "end": 18.3,
+   "word": " free."
+  },
+  {
+   "start": 18.56,
+   "end": 18.68,
+   "word": " For"
+  },
+  {
+   "start": 18.68,
+   "end": 18.88,
+   "word": " video"
+  },
+  {
+   "start": 18.88,
+   "end": 20.22,
+   "word": " editing,"
+  },
+  {
+   "start": 20.58,
+   "end": 20.68,
+   "word": " this"
+  },
+  {
+   "start": 20.68,
+   "end": 20.82,
+   "word": " is"
+  },
+  {
+   "start": 20.82,
+   "end": 21.06,
+   "word": " paid,"
+  },
+  {
+   "start": 21.3,
+   "end": 21.36,
+   "word": " this"
+  },
+  {
+   "start": 21.36,
+   "end": 21.5,
+   "word": " is"
+  },
+  {
+   "start": 21.5,
+   "end": 21.74,
+   "word": " free."
+  },
+  {
+   "start": 21.98,
+   "end": 22.12,
+   "word": " For"
+  },
+  {
+   "start": 22.12,
+   "end": 22.36,
+   "word": " voice"
+  },
+  {
+   "start": 22.36,
+   "end": 22.8,
+   "word": " generation,"
+  },
+  {
+   "start": 23.2,
+   "end": 23.3,
+   "word": " this"
+  },
+  {
+   "start": 23.3,
+   "end": 23.44,
+   "word": " is"
+  },
+  {
+   "start": 23.44,
+   "end": 23.7,
+   "word": " paid"
+  },
+  {
+   "start": 23.7,
+   "end": 23.9,
+   "word": " and"
+  },
+  {
+   "start": 23.9,
+   "end": 24.06,
+   "word": " this"
+  },
+  {
+   "start": 24.06,
+   "end": 24.2,
+   "word": " is"
+  },
+  {
+   "start": 24.2,
+   "end": 24.42,
+   "word": " free."
+  },
+  {
+   "start": 24.78,
+   "end": 24.82,
+   "word": " Follow"
+  },
+  {
+   "start": 24.82,
+   "end": 24.98,
+   "word": " and"
+  },
+  {
+   "start": 24.98,
+   "end": 25.2,
+   "word": " comment"
+  },
+  {
+   "start": 25.2,
+   "end": 25.52,
+   "word": " free"
+  },
+  {
+   "start": 25.52,
+   "end": 25.74,
+   "word": " for"
+  },
+  {
+   "start": 25.74,
+   "end": 25.82,
+   "word": " the"
+  },
+  {
+   "start": 25.82,
+   "end": 25.98,
+   "word": " list"
+  },
+  {
+   "start": 25.98,
+   "end": 26.14,
+   "word": " of"
+  },
+  {
+   "start": 26.14,
+   "end": 26.48,
+   "word": " every"
+  },
+  {
+   "start": 26.48,
+   "end": 26.78,
+   "word": " free"
+  },
+  {
+   "start": 26.78,
+   "end": 27.02,
+   "word": " tool."
+  }
+ ]
+}

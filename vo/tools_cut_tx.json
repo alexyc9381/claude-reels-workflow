@@ -1,0 +1,536 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 3.46,
+   "text": "This AI skill lets you save thousands of dollars a month on AI tools by taking the"
+  },
+  {
+   "start": 3.46,
+   "end": 7.92,
+   "text": "system prompts of the top models like CloudFable 5 and GPT 5.6 Sol and putting them in cheaper"
+  },
+  {
+   "start": 7.92,
+   "end": 12.54,
+   "text": "models. And it has over 62,000 stars on GitHub. All you do is run one command in your terminal"
+  },
+  {
+   "start": 12.54,
+   "end": 15.64,
+   "text": "and you'll be able to access the system prompts for all the top models like ChatGPT,"
+  },
+  {
+   "start": 15.74,
+   "end": 19.8,
+   "text": "Cloud, Gemini, Grok. Now, the dumbest models perform just as well as the best models at a"
+  },
+  {
+   "start": 19.8,
+   "end": 22.0,
+   "text": "fraction of the price. Comment tools and I'll send it immediately."
+  }
+ ],
+ "words": [
+  {
+   "w": "This",
+   "start": 0.0,
+   "end": 0.2
+  },
+  {
+   "w": "AI",
+   "start": 0.2,
+   "end": 0.46
+  },
+  {
+   "w": "skill",
+   "start": 0.46,
+   "end": 0.74
+  },
+  {
+   "w": "lets",
+   "start": 0.74,
+   "end": 0.98
+  },
+  {
+   "w": "you",
+   "start": 0.98,
+   "end": 1.04
+  },
+  {
+   "w": "save",
+   "start": 1.04,
+   "end": 1.26
+  },
+  {
+   "w": "thousands",
+   "start": 1.26,
+   "end": 1.56
+  },
+  {
+   "w": "of",
+   "start": 1.56,
+   "end": 1.76
+  },
+  {
+   "w": "dollars",
+   "start": 1.76,
+   "end": 1.94
+  },
+  {
+   "w": "a",
+   "start": 1.94,
+   "end": 2.1
+  },
+  {
+   "w": "month",
+   "start": 2.1,
+   "end": 2.28
+  },
+  {
+   "w": "on",
+   "start": 2.28,
+   "end": 2.4
+  },
+  {
+   "w": "AI",
+   "start": 2.4,
+   "end": 2.58
+  },
+  {
+   "w": "tools",
+   "start": 2.58,
+   "end": 2.82
+  },
+  {
+   "w": "by",
+   "start": 2.82,
+   "end": 3.04
+  },
+  {
+   "w": "taking",
+   "start": 3.04,
+   "end": 3.3
+  },
+  {
+   "w": "the",
+   "start": 3.3,
+   "end": 3.46
+  },
+  {
+   "w": "system",
+   "start": 3.46,
+   "end": 3.68
+  },
+  {
+   "w": "prompts",
+   "start": 3.68,
+   "end": 3.9
+  },
+  {
+   "w": "of",
+   "start": 3.9,
+   "end": 4.12
+  },
+  {
+   "w": "the",
+   "start": 4.12,
+   "end": 4.22
+  },
+  {
+   "w": "top",
+   "start": 4.22,
+   "end": 4.42
+  },
+  {
+   "w": "models",
+   "start": 4.42,
+   "end": 4.7
+  },
+  {
+   "w": "like",
+   "start": 4.7,
+   "end": 4.88
+  },
+  {
+   "w": "CloudFable",
+   "start": 4.88,
+   "end": 5.32
+  },
+  {
+   "w": "5",
+   "start": 5.32,
+   "end": 5.5
+  },
+  {
+   "w": "and",
+   "start": 5.5,
+   "end": 5.7
+  },
+  {
+   "w": "GPT",
+   "start": 5.7,
+   "end": 6.02
+  },
+  {
+   "w": "5",
+   "start": 6.02,
+   "end": 6.2
+  },
+  {
+   "w": ".6",
+   "start": 6.2,
+   "end": 6.56
+  },
+  {
+   "w": "Sol",
+   "start": 6.56,
+   "end": 6.8
+  },
+  {
+   "w": "and",
+   "start": 6.8,
+   "end": 7.06
+  },
+  {
+   "w": "putting",
+   "start": 7.06,
+   "end": 7.46
+  },
+  {
+   "w": "them",
+   "start": 7.46,
+   "end": 7.62
+  },
+  {
+   "w": "in",
+   "start": 7.62,
+   "end": 7.72
+  },
+  {
+   "w": "cheaper",
+   "start": 7.72,
+   "end": 7.92
+  },
+  {
+   "w": "models.",
+   "start": 7.92,
+   "end": 8.28
+  },
+  {
+   "w": "And",
+   "start": 8.46,
+   "end": 8.76
+  },
+  {
+   "w": "it",
+   "start": 8.76,
+   "end": 8.88
+  },
+  {
+   "w": "has",
+   "start": 8.88,
+   "end": 9.0
+  },
+  {
+   "w": "over",
+   "start": 9.0,
+   "end": 9.2
+  },
+  {
+   "w": "62",
+   "start": 9.2,
+   "end": 9.6
+  },
+  {
+   "w": ",000",
+   "start": 9.6,
+   "end": 10.08
+  },
+  {
+   "w": "stars",
+   "start": 10.08,
+   "end": 10.28
+  },
+  {
+   "w": "on",
+   "start": 10.28,
+   "end": 10.42
+  },
+  {
+   "w": "GitHub.",
+   "start": 10.42,
+   "end": 10.62
+  },
+  {
+   "w": "All",
+   "start": 10.88,
+   "end": 11.18
+  },
+  {
+   "w": "you",
+   "start": 11.18,
+   "end": 11.3
+  },
+  {
+   "w": "do",
+   "start": 11.3,
+   "end": 11.4
+  },
+  {
+   "w": "is",
+   "start": 11.4,
+   "end": 11.5
+  },
+  {
+   "w": "run",
+   "start": 11.5,
+   "end": 11.64
+  },
+  {
+   "w": "one",
+   "start": 11.64,
+   "end": 11.8
+  },
+  {
+   "w": "command",
+   "start": 11.8,
+   "end": 12.06
+  },
+  {
+   "w": "in",
+   "start": 12.06,
+   "end": 12.2
+  },
+  {
+   "w": "your",
+   "start": 12.2,
+   "end": 12.26
+  },
+  {
+   "w": "terminal",
+   "start": 12.26,
+   "end": 12.54
+  },
+  {
+   "w": "and",
+   "start": 12.54,
+   "end": 12.72
+  },
+  {
+   "w": "you'll",
+   "start": 12.72,
+   "end": 12.86
+  },
+  {
+   "w": "be",
+   "start": 12.86,
+   "end": 12.9
+  },
+  {
+   "w": "able",
+   "start": 12.9,
+   "end": 13.02
+  },
+  {
+   "w": "to",
+   "start": 13.02,
+   "end": 13.12
+  },
+  {
+   "w": "access",
+   "start": 13.12,
+   "end": 13.38
+  },
+  {
+   "w": "the",
+   "start": 13.38,
+   "end": 13.54
+  },
+  {
+   "w": "system",
+   "start": 13.54,
+   "end": 13.76
+  },
+  {
+   "w": "prompts",
+   "start": 13.76,
+   "end": 14.02
+  },
+  {
+   "w": "for",
+   "start": 14.02,
+   "end": 14.22
+  },
+  {
+   "w": "all",
+   "start": 14.22,
+   "end": 14.38
+  },
+  {
+   "w": "the",
+   "start": 14.38,
+   "end": 14.5
+  },
+  {
+   "w": "top",
+   "start": 14.5,
+   "end": 14.66
+  },
+  {
+   "w": "models",
+   "start": 14.66,
+   "end": 14.94
+  },
+  {
+   "w": "like",
+   "start": 14.94,
+   "end": 15.14
+  },
+  {
+   "w": "ChatGPT,",
+   "start": 15.14,
+   "end": 15.64
+  },
+  {
+   "w": "Cloud,",
+   "start": 15.74,
+   "end": 16.1
+  },
+  {
+   "w": "Gemini,",
+   "start": 16.2,
+   "end": 16.5
+  },
+  {
+   "w": "Grok.",
+   "start": 16.5,
+   "end": 16.78
+  },
+  {
+   "w": "Now,",
+   "start": 16.94,
+   "end": 17.34
+  },
+  {
+   "w": "the",
+   "start": 17.42,
+   "end": 17.54
+  },
+  {
+   "w": "dumbest",
+   "start": 17.54,
+   "end": 17.82
+  },
+  {
+   "w": "models",
+   "start": 17.82,
+   "end": 18.02
+  },
+  {
+   "w": "perform",
+   "start": 18.02,
+   "end": 18.24
+  },
+  {
+   "w": "just",
+   "start": 18.24,
+   "end": 18.62
+  },
+  {
+   "w": "as",
+   "start": 18.62,
+   "end": 18.76
+  },
+  {
+   "w": "well",
+   "start": 18.76,
+   "end": 18.96
+  },
+  {
+   "w": "as",
+   "start": 18.96,
+   "end": 19.06
+  },
+  {
+   "w": "the",
+   "start": 19.06,
+   "end": 19.1
+  },
+  {
+   "w": "best",
+   "start": 19.1,
+   "end": 19.28
+  },
+  {
+   "w": "models",
+   "start": 19.28,
+   "end": 19.6
+  },
+  {
+   "w": "at",
+   "start": 19.6,
+   "end": 19.76
+  },
+  {
+   "w": "a",
+   "start": 19.76,
+   "end": 19.8
+  },
+  {
+   "w": "fraction",
+   "start": 19.8,
+   "end": 20.06
+  },
+  {
+   "w": "of",
+   "start": 20.06,
+   "end": 20.26
+  },
+  {
+   "w": "the",
+   "start": 20.26,
+   "end": 20.32
+  },
+  {
+   "w": "price.",
+   "start": 20.32,
+   "end": 20.6
+  },
+  {
+   "w": "Comment",
+   "start": 20.7,
+   "end": 20.94
+  },
+  {
+   "w": "tools",
+   "start": 20.94,
+   "end": 21.24
+  },
+  {
+   "w": "and",
+   "start": 21.24,
+   "end": 21.5
+  },
+  {
+   "w": "I'll",
+   "start": 21.5,
+   "end": 21.6
+  },
+  {
+   "w": "send",
+   "start": 21.6,
+   "end": 21.72
+  },
+  {
+   "w": "it",
+   "start": 21.72,
+   "end": 21.78
+  },
+  {
+   "w": "immediately.",
+   "start": 21.78,
+   "end": 22.0
+  }
+ ]
+}

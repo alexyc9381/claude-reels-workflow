@@ -1,0 +1,27 @@
+{
+  "vo_onset_max_s": 0.15,
+  "audio_onset_max_s": 0.15,
+  "music_onset_max_s": 0.15,
+  "ends_tight_max_s": 0.6,
+  "max_short_word_s": 0.8,
+  "caption_drift_tol_s": 0.12,
+  "sfx_cues_s": [
+    0.0,
+    1.267,
+    2.505,
+    3.743,
+    4.371,
+    6.562,
+    8.752,
+    9.0,
+    10.105,
+    10.371,
+    12.648,
+    13.181,
+    15.476,
+    15.781
+  ],
+  "music_bed": null,
+  "words_json": "src/data/words_key_c.json",
+  "script": "Because of one GitHub repo almost nobody knows about, you might never have to pay for an API again. It lists 134 free APIs from over 40 providers, Gemini, Grok, and NVIDIA, all with a permanent free tier. One click setup, right inside Cursor, Claude Code or Codex. Everyone else hits their paid limits while you run the same models for free. Comment KEY and I'll send you the repo."
+}

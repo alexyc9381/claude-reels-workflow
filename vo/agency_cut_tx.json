@@ -1,0 +1,461 @@
+{
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 2.7,
+   "text": "So someone built an entire AI agency and open-sourced it."
+  },
+  {
+   "start": 2.76,
+   "end": 5.6,
+   "text": "It's called The Agency, with over 124,000 stars on GitHub."
+  },
+  {
+   "start": 5.82,
+   "end": 9.16,
+   "text": "So this has a full roster of specialist agents, front-end designers, ad writers,"
+  },
+  {
+   "start": 9.32,
+   "end": 11.92,
+   "text": "Reddit community wizards, each with its own personality and process."
+  },
+  {
+   "start": 12.2,
+   "end": 15.66,
+   "text": "It plugs straight into cloud code and there's even a desktop app that installs your dream team"
+  },
+  {
+   "start": 15.66,
+   "end": 18.34,
+   "text": "in one click. You just became an AI agency owner for free."
+  },
+  {
+   "start": 18.44,
+   "end": 19.92,
+   "text": "Call an agency and I'll send you the repo."
+  }
+ ],
+ "words": [
+  {
+   "w": "So",
+   "start": 0.0,
+   "end": 0.22
+  },
+  {
+   "w": "someone",
+   "start": 0.22,
+   "end": 0.46
+  },
+  {
+   "w": "built",
+   "start": 0.46,
+   "end": 0.66
+  },
+  {
+   "w": "an",
+   "start": 0.66,
+   "end": 0.78
+  },
+  {
+   "w": "entire",
+   "start": 0.78,
+   "end": 1.12
+  },
+  {
+   "w": "AI",
+   "start": 1.12,
+   "end": 1.44
+  },
+  {
+   "w": "agency",
+   "start": 1.44,
+   "end": 1.76
+  },
+  {
+   "w": "and",
+   "start": 1.76,
+   "end": 2.02
+  },
+  {
+   "w": "open",
+   "start": 2.02,
+   "end": 2.2
+  },
+  {
+   "w": "-sourced",
+   "start": 2.2,
+   "end": 2.58
+  },
+  {
+   "w": "it.",
+   "start": 2.58,
+   "end": 2.7
+  },
+  {
+   "w": "It's",
+   "start": 2.76,
+   "end": 2.92
+  },
+  {
+   "w": "called",
+   "start": 2.92,
+   "end": 3.08
+  },
+  {
+   "w": "The",
+   "start": 3.08,
+   "end": 3.2
+  },
+  {
+   "w": "Agency,",
+   "start": 3.2,
+   "end": 3.42
+  },
+  {
+   "w": "with",
+   "start": 3.62,
+   "end": 3.72
+  },
+  {
+   "w": "over",
+   "start": 3.72,
+   "end": 3.88
+  },
+  {
+   "w": "124",
+   "start": 3.88,
+   "end": 4.58
+  },
+  {
+   "w": ",000",
+   "start": 4.58,
+   "end": 5.02
+  },
+  {
+   "w": "stars",
+   "start": 5.02,
+   "end": 5.24
+  },
+  {
+   "w": "on",
+   "start": 5.24,
+   "end": 5.42
+  },
+  {
+   "w": "GitHub.",
+   "start": 5.42,
+   "end": 5.6
+  },
+  {
+   "w": "So",
+   "start": 5.82,
+   "end": 6.18
+  },
+  {
+   "w": "this",
+   "start": 6.18,
+   "end": 6.34
+  },
+  {
+   "w": "has",
+   "start": 6.34,
+   "end": 6.44
+  },
+  {
+   "w": "a",
+   "start": 6.44,
+   "end": 6.56
+  },
+  {
+   "w": "full",
+   "start": 6.56,
+   "end": 6.76
+  },
+  {
+   "w": "roster",
+   "start": 6.76,
+   "end": 7.14
+  },
+  {
+   "w": "of",
+   "start": 7.14,
+   "end": 7.28
+  },
+  {
+   "w": "specialist",
+   "start": 7.28,
+   "end": 7.54
+  },
+  {
+   "w": "agents,",
+   "start": 7.54,
+   "end": 7.92
+  },
+  {
+   "w": "front",
+   "start": 8.1,
+   "end": 8.24
+  },
+  {
+   "w": "-end",
+   "start": 8.24,
+   "end": 8.38
+  },
+  {
+   "w": "designers,",
+   "start": 8.38,
+   "end": 8.6
+  },
+  {
+   "w": "ad",
+   "start": 8.82,
+   "end": 8.92
+  },
+  {
+   "w": "writers,",
+   "start": 8.92,
+   "end": 9.16
+  },
+  {
+   "w": "Reddit",
+   "start": 9.32,
+   "end": 9.44
+  },
+  {
+   "w": "community",
+   "start": 9.44,
+   "end": 9.62
+  },
+  {
+   "w": "wizards,",
+   "start": 9.62,
+   "end": 10.14
+  },
+  {
+   "w": "each",
+   "start": 10.14,
+   "end": 10.28
+  },
+  {
+   "w": "with",
+   "start": 10.28,
+   "end": 10.46
+  },
+  {
+   "w": "its",
+   "start": 10.46,
+   "end": 10.58
+  },
+  {
+   "w": "own",
+   "start": 10.58,
+   "end": 10.68
+  },
+  {
+   "w": "personality",
+   "start": 10.68,
+   "end": 11.16
+  },
+  {
+   "w": "and",
+   "start": 11.16,
+   "end": 11.52
+  },
+  {
+   "w": "process.",
+   "start": 11.52,
+   "end": 11.92
+  },
+  {
+   "w": "It",
+   "start": 12.2,
+   "end": 12.54
+  },
+  {
+   "w": "plugs",
+   "start": 12.54,
+   "end": 12.74
+  },
+  {
+   "w": "straight",
+   "start": 12.74,
+   "end": 13.06
+  },
+  {
+   "w": "into",
+   "start": 13.06,
+   "end": 13.26
+  },
+  {
+   "w": "cloud",
+   "start": 13.26,
+   "end": 13.46
+  },
+  {
+   "w": "code",
+   "start": 13.46,
+   "end": 13.66
+  },
+  {
+   "w": "and",
+   "start": 13.66,
+   "end": 13.82
+  },
+  {
+   "w": "there's",
+   "start": 13.82,
+   "end": 13.94
+  },
+  {
+   "w": "even",
+   "start": 13.94,
+   "end": 14.08
+  },
+  {
+   "w": "a",
+   "start": 14.08,
+   "end": 14.2
+  },
+  {
+   "w": "desktop",
+   "start": 14.2,
+   "end": 14.48
+  },
+  {
+   "w": "app",
+   "start": 14.48,
+   "end": 14.68
+  },
+  {
+   "w": "that",
+   "start": 14.68,
+   "end": 14.8
+  },
+  {
+   "w": "installs",
+   "start": 14.8,
+   "end": 15.14
+  },
+  {
+   "w": "your",
+   "start": 15.14,
+   "end": 15.22
+  },
+  {
+   "w": "dream",
+   "start": 15.22,
+   "end": 15.46
+  },
+  {
+   "w": "team",
+   "start": 15.46,
+   "end": 15.66
+  },
+  {
+   "w": "in",
+   "start": 15.66,
+   "end": 15.78
+  },
+  {
+   "w": "one",
+   "start": 15.78,
+   "end": 15.96
+  },
+  {
+   "w": "click.",
+   "start": 15.96,
+   "end": 16.26
+  },
+  {
+   "w": "You",
+   "start": 16.44,
+   "end": 16.74
+  },
+  {
+   "w": "just",
+   "start": 16.74,
+   "end": 16.84
+  },
+  {
+   "w": "became",
+   "start": 16.84,
+   "end": 17.04
+  },
+  {
+   "w": "an",
+   "start": 17.04,
+   "end": 17.2
+  },
+  {
+   "w": "AI",
+   "start": 17.2,
+   "end": 17.34
+  },
+  {
+   "w": "agency",
+   "start": 17.34,
+   "end": 17.6
+  },
+  {
+   "w": "owner",
+   "start": 17.6,
+   "end": 17.86
+  },
+  {
+   "w": "for",
+   "start": 17.86,
+   "end": 18.1
+  },
+  {
+   "w": "free.",
+   "start": 18.1,
+   "end": 18.34
+  },
+  {
+   "w": "Call",
+   "start": 18.44,
+   "end": 18.62
+  },
+  {
+   "w": "an",
+   "start": 18.62,
+   "end": 18.74
+  },
+  {
+   "w": "agency",
+   "start": 18.74,
+   "end": 19.08
+  },
+  {
+   "w": "and",
+   "start": 19.08,
+   "end": 19.36
+  },
+  {
+   "w": "I'll",
+   "start": 19.36,
+   "end": 19.48
+  },
+  {
+   "w": "send",
+   "start": 19.48,
+   "end": 19.58
+  },
+  {
+   "w": "you",
+   "start": 19.58,
+   "end": 19.66
+  },
+  {
+   "w": "the",
+   "start": 19.66,
+   "end": 19.76
+  },
+  {
+   "w": "repo.",
+   "start": 19.76,
+   "end": 19.92
+  }
+ ]
+}

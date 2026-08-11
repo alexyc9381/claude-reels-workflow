@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 51,
-    "reels_total": 93,
-    "factory_logs": 51,
-    "storyboards": 18,
-    "caption_jsons": 56,
-    "memory_md": 190,
+    "reels_with_code": 81,
+    "reels_total": 125,
+    "factory_logs": 52,
+    "storyboards": 40,
+    "caption_jsons": 92,
+    "memory_md": 191,
     "creators": 8,
     "packs": 3
   },
@@ -111,6 +111,15 @@
       ]
     },
     {
+      "key": "cheats",
+      "name": "Cheats",
+      "number": null,
+      "code": "video/src/ClaudeCheatsReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": []
+    },
+    {
       "key": "clone",
       "name": "Clone",
       "number": null,
@@ -155,14 +164,14 @@
       ]
     },
     {
-      "key": "design",
-      "name": "Design",
+      "key": "designstack",
+      "name": "DesignStack",
       "number": null,
-      "code": "video/src/ClaudeDesignReel.tsx",
+      "code": "video/src/ClaudeDesignStackReel.tsx",
       "log": null,
       "storyboard": null,
       "captions": [
-        "video/src/data/words_design.json"
+        "video/src/data/words_designstack.json"
       ]
     },
     {
@@ -170,6 +179,15 @@
       "name": "Designer",
       "number": null,
       "code": "video/src/ClaudeDesignerReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "dev",
+      "name": "Dev",
+      "number": null,
+      "code": "video/src/ClaudeDevReel.tsx",
       "log": null,
       "storyboard": null,
       "captions": []
@@ -197,6 +215,17 @@
       ]
     },
     {
+      "key": "file",
+      "name": "File",
+      "number": null,
+      "code": "video/src/ClaudeFileReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_file.json"
+      ]
+    },
+    {
       "key": "glm",
       "name": "Glm",
       "number": null,
@@ -205,6 +234,17 @@
       "storyboard": null,
       "captions": [
         "video/src/data/words_glm.json"
+      ]
+    },
+    {
+      "key": "haaland",
+      "name": "Haaland",
+      "number": null,
+      "code": "video/src/ClaudeHaalandReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_haaland.json"
       ]
     },
     {
@@ -249,6 +289,17 @@
       "log": null,
       "storyboard": null,
       "captions": []
+    },
+    {
+      "key": "lot",
+      "name": "Lot",
+      "number": null,
+      "code": "video/src/ClaudeLotReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_autopilot.json"
+      ]
     },
     {
       "key": "md",
@@ -307,6 +358,15 @@
       ]
     },
     {
+      "key": "powers",
+      "name": "Powers",
+      "number": null,
+      "code": "video/src/ClaudePowersReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": []
+    },
+    {
       "key": "prompts",
       "name": "Prompts",
       "number": null,
@@ -330,14 +390,57 @@
       ]
     },
     {
-      "key": "seo",
-      "name": "Seo",
+      "key": "purge",
+      "name": "Purge",
       "number": null,
-      "code": "video/src/ClaudeSeoReel.tsx",
+      "code": "video/src/ClaudePurgeReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "ramsay",
+      "name": "Ramsay",
+      "number": null,
+      "code": "video/src/ClaudeRamsayReel.tsx",
       "log": null,
       "storyboard": null,
       "captions": [
-        "video/src/data/words_seo.json"
+        "video/src/data/words_ramsay.json"
+      ]
+    },
+    {
+      "key": "roast",
+      "name": "Roast",
+      "number": null,
+      "code": "video/src/ClaudeRoastReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_roast.json"
+      ]
+    },
+    {
+      "key": "route",
+      "name": "Route",
+      "number": null,
+      "code": "video/src/ClaudeRouteReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_route.json"
+      ]
+    },
+    {
+      "key": "rowboat",
+      "name": "Rowboat",
+      "number": null,
+      "code": "video/src/ClaudeRowboatReel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_rowboat.json",
+        "video/src/data/words_rowboat_tight.json"
       ]
     },
     {
@@ -370,6 +473,7 @@
       "log": null,
       "storyboard": null,
       "captions": [
+        "video/src/data/words_designstack.json",
         "video/src/data/words_stack.json"
       ]
     },
@@ -404,17 +508,28 @@
       "storyboard": null,
       "captions": [
         "video/src/data/words_ads.json",
+        "video/src/data/words_agency.json",
+        "video/src/data/words_ai.json",
         "video/src/data/words_arena.json",
         "video/src/data/words_ask.json",
         "video/src/data/words_attack.json",
+        "video/src/data/words_auto.json",
+        "video/src/data/words_auto_b.json",
+        "video/src/data/words_auto_c.json",
         "video/src/data/words_autopilot.json",
+        "video/src/data/words_awesome.json",
         "video/src/data/words_blueprint.json",
         "video/src/data/words_books.json",
         "video/src/data/words_boris.json",
+        "video/src/data/words_boris_reorder.json",
         "video/src/data/words_brain.json",
+        "video/src/data/words_brandkit.json",
+        "video/src/data/words_calls.json",
+        "video/src/data/words_cancel.json",
         "video/src/data/words_carousel.json",
         "video/src/data/words_carousel2.json",
         "video/src/data/words_channel.json",
+        "video/src/data/words_chart.json",
         "video/src/data/words_clone.json",
         "video/src/data/words_content.json",
         "video/src/data/words_control.json",
@@ -422,11 +537,22 @@
         "video/src/data/words_crew.json",
         "video/src/data/words_delete.json",
         "video/src/data/words_design.json",
+        "video/src/data/words_designstack.json",
         "video/src/data/words_erase.json",
         "video/src/data/words_fable.json",
         "video/src/data/words_factory.json",
+        "video/src/data/words_file.json",
+        "video/src/data/words_free.json",
         "video/src/data/words_glm.json",
+        "video/src/data/words_haaland.json",
+        "video/src/data/words_hermes.json",
+        "video/src/data/words_hermes_orig.json",
         "video/src/data/words_jarvis1.json",
+        "video/src/data/words_jobs.json",
+        "video/src/data/words_key.json",
+        "video/src/data/words_key_b.json",
+        "video/src/data/words_key_c.json",
+        "video/src/data/words_langfuse.json",
         "video/src/data/words_leads.json",
         "video/src/data/words_limits.json",
         "video/src/data/words_listicle.json",
@@ -439,21 +565,35 @@
         "video/src/data/words_offer.json",
         "video/src/data/words_open.json",
         "video/src/data/words_open_103.json",
+        "video/src/data/words_os.json",
         "video/src/data/words_prompts.json",
         "video/src/data/words_promptsv2.json",
+        "video/src/data/words_ramsay.json",
         "video/src/data/words_retire.json",
+        "video/src/data/words_roast.json",
+        "video/src/data/words_roles.json",
+        "video/src/data/words_roles_b.json",
+        "video/src/data/words_roles_c.json",
+        "video/src/data/words_route.json",
+        "video/src/data/words_rowboat.json",
+        "video/src/data/words_rowboat_tight.json",
         "video/src/data/words_seo.json",
         "video/src/data/words_serena.json",
         "video/src/data/words_sharp.json",
         "video/src/data/words_simulate.json",
         "video/src/data/words_site.json",
         "video/src/data/words_slash.json",
+        "video/src/data/words_slop.json",
+        "video/src/data/words_slop_hook.json",
         "video/src/data/words_sol.json",
         "video/src/data/words_stack.json",
         "video/src/data/words_swarm.json",
+        "video/src/data/words_takes.json",
         "video/src/data/words_tested.json",
+        "video/src/data/words_tools.json",
         "video/src/data/words_unlock.json",
         "video/src/data/words_vault.json",
+        "video/src/data/words_video.json",
         "video/src/data/words_words.json",
         "video/src/data/words_worthy.json"
       ]
@@ -504,17 +644,20 @@
       "log": "memory/reels/boris-factory-log.md",
       "storyboard": null,
       "captions": [
-        "video/src/data/words_boris.json"
+        "video/src/data/words_boris.json",
+        "video/src/data/words_boris_reorder.json"
       ]
     },
     {
       "key": "brand",
       "name": "brand",
       "number": null,
-      "code": null,
+      "code": "video/src/ClaudeBrandReel.tsx",
       "log": "memory/reels/brand-factory-log.md",
       "storyboard": null,
-      "captions": []
+      "captions": [
+        "video/src/data/words_brandkit.json"
+      ]
     },
     {
       "key": "channel",
@@ -782,6 +925,17 @@
       ]
     },
     {
+      "key": "seo",
+      "name": "seo",
+      "number": null,
+      "code": "video/src/ClaudeSeoReel.tsx",
+      "log": "memory/reels/seo-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_seo.json"
+      ]
+    },
+    {
       "key": "smart",
       "name": "smart",
       "number": null,
@@ -879,12 +1033,56 @@
       "captions": []
     },
     {
+      "key": "hermes",
+      "name": "hermes",
+      "number": 59,
+      "code": "video/src/ClaudeHermesReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/59-hermes.md",
+      "captions": [
+        "video/src/data/words_hermes.json",
+        "video/src/data/words_hermes_orig.json"
+      ]
+    },
+    {
       "key": "roots",
       "name": "roots",
       "number": 59,
       "code": null,
       "log": null,
       "storyboard": "storyboards/59-roots.md",
+      "captions": []
+    },
+    {
+      "key": "design",
+      "name": "design",
+      "number": 60,
+      "code": "video/src/ClaudeDesignReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/60-design.md",
+      "captions": [
+        "video/src/data/words_design.json",
+        "video/src/data/words_designstack.json"
+      ]
+    },
+    {
+      "key": "os",
+      "name": "os",
+      "number": 61,
+      "code": "video/src/ClaudeOsReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/61-os.md",
+      "captions": [
+        "video/src/data/words_os.json"
+      ]
+    },
+    {
+      "key": "osvillainbible",
+      "name": "os-VILLAIN-BIBLE",
+      "number": 61,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/61-os-VILLAIN-BIBLE.md",
       "captions": []
     },
     {
@@ -908,13 +1106,53 @@
       ]
     },
     {
+      "key": "takes",
+      "name": "takes",
+      "number": 62,
+      "code": "video/src/ClaudeTakesReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/62-takes.md",
+      "captions": [
+        "video/src/data/words_takes.json"
+      ]
+    },
+    {
+      "key": "takesvillainbible",
+      "name": "takes-VILLAIN-BIBLE",
+      "number": 62,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/62-takes-VILLAIN-BIBLE.md",
+      "captions": []
+    },
+    {
+      "key": "undo",
+      "name": "undo",
+      "number": 62,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/62-undo.md",
+      "captions": []
+    },
+    {
+      "key": "undovillainbible",
+      "name": "undo-VILLAIN-BIBLE",
+      "number": 62,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/62-undo-VILLAIN-BIBLE.md",
+      "captions": []
+    },
+    {
       "key": "tool",
       "name": "tool",
       "number": 65,
       "code": null,
       "log": "memory/reels/tool-factory-log.md",
       "storyboard": "storyboards/65-tool.md",
-      "captions": []
+      "captions": [
+        "video/src/data/words_tools.json"
+      ]
     },
     {
       "key": "posts",
@@ -926,13 +1164,15 @@
       "captions": []
     },
     {
-      "key": "chart",
-      "name": "chart",
+      "key": "calls",
+      "name": "calls",
       "number": 68,
-      "code": null,
+      "code": "video/src/ClaudeCallsReel.tsx",
       "log": null,
-      "storyboard": "storyboards/68-chart.md",
-      "captions": []
+      "storyboard": "storyboards/68-calls.md",
+      "captions": [
+        "video/src/data/words_calls.json"
+      ]
     },
     {
       "key": "arsenal",
@@ -953,6 +1193,17 @@
       "captions": []
     },
     {
+      "key": "chart",
+      "name": "chart",
+      "number": 69,
+      "code": "video/src/ClaudeChartReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/69-chart.md",
+      "captions": [
+        "video/src/data/words_chart.json"
+      ]
+    },
+    {
       "key": "serena",
       "name": "serena",
       "number": 69,
@@ -971,6 +1222,17 @@
       "log": "memory/reels/assembly-factory-log.md",
       "storyboard": "storyboards/70-assembly.md",
       "captions": []
+    },
+    {
+      "key": "langfuse",
+      "name": "langfuse",
+      "number": 70,
+      "code": "video/src/ClaudeLangfuseReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/70-langfuse.md",
+      "captions": [
+        "video/src/data/words_langfuse.json"
+      ]
     },
     {
       "key": "silos",
@@ -1001,6 +1263,135 @@
       "storyboard": "storyboards/78-limits.md",
       "captions": [
         "video/src/data/words_limits.json"
+      ]
+    },
+    {
+      "key": "key",
+      "name": "key",
+      "number": 83,
+      "code": "video/src/ClaudeKeyReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/83-key.md",
+      "captions": [
+        "video/src/data/words_key.json",
+        "video/src/data/words_key_b.json",
+        "video/src/data/words_key_c.json"
+      ]
+    },
+    {
+      "key": "roles",
+      "name": "roles",
+      "number": 84,
+      "code": "video/src/ClaudeRolesReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/84-roles.md",
+      "captions": [
+        "video/src/data/words_roles.json",
+        "video/src/data/words_roles_b.json",
+        "video/src/data/words_roles_c.json"
+      ]
+    },
+    {
+      "key": "auto",
+      "name": "auto",
+      "number": 85,
+      "code": "video/src/ClaudeAutoReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/85-auto.md",
+      "captions": [
+        "video/src/data/words_auto.json",
+        "video/src/data/words_auto_b.json",
+        "video/src/data/words_auto_c.json",
+        "video/src/data/words_autopilot.json"
+      ]
+    },
+    {
+      "key": "cancel",
+      "name": "cancel",
+      "number": 86,
+      "code": "video/src/ClaudeCancelReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/86-cancel.md",
+      "captions": [
+        "video/src/data/words_cancel.json"
+      ]
+    },
+    {
+      "key": "ai",
+      "name": "ai",
+      "number": 89,
+      "code": "video/src/ClaudeAiReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/89-ai.md",
+      "captions": [
+        "video/src/data/words_ai.json",
+        "video/src/data/words_brain.json"
+      ]
+    },
+    {
+      "key": "jobs",
+      "name": "jobs",
+      "number": 92,
+      "code": "video/src/ClaudeJobsReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/92-jobs.md",
+      "captions": [
+        "video/src/data/words_jobs.json"
+      ]
+    },
+    {
+      "key": "video",
+      "name": "video",
+      "number": 93,
+      "code": "video/src/ClaudeVideoReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/93-video.md",
+      "captions": [
+        "video/src/data/words_video.json"
+      ]
+    },
+    {
+      "key": "agency",
+      "name": "agency",
+      "number": 94,
+      "code": "video/src/ClaudeAgencyReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/94-agency.md",
+      "captions": [
+        "video/src/data/words_agency.json"
+      ]
+    },
+    {
+      "key": "tools",
+      "name": "tools",
+      "number": 95,
+      "code": "video/src/ClaudeToolsReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/95-tools.md",
+      "captions": [
+        "video/src/data/words_tools.json"
+      ]
+    },
+    {
+      "key": "awesome",
+      "name": "awesome",
+      "number": 96,
+      "code": "video/src/ClaudeAwesomeReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/96-awesome.md",
+      "captions": [
+        "video/src/data/words_awesome.json"
+      ]
+    },
+    {
+      "key": "free",
+      "name": "free",
+      "number": 97,
+      "code": "video/src/ClaudeFreeReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/97-free.md",
+      "captions": [
+        "video/src/data/words_free.json"
       ]
     }
   ]

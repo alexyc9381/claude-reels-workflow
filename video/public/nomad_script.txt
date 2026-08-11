@@ -1,0 +1,6 @@
+Someone actually created an AI for the apocalypse and it's completely free and open source.
+It has a completely offline AI chatbot that has access to Wikipedia, medical references, offline maps,
+so it has everything you might need in case of an apocalypse.
+To get started, you just download the content you want and it keeps working without internet forever.
+Similar products cost hundreds of dollars while this repo is completely free.
+Comment NOMAD and I'll send the free setup immediately.

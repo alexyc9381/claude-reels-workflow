@@ -95,6 +95,41 @@ unreadable. After any colour sweep, **render one still and actually read the tex
 tokens (`#CFE6DA`, `#F0B4AC`, `#CBD8EE`) must become dark inks (`#1F5140`, `#8E3125`, `#2B2620`) at the
 same time.
 
+### ⛔ Reel 86 · a CLONE inherits the last reel's accents, and they may not be house colours
+
+`CancelWorld.tsx` was cloned off reel 85 and carried its palette block with it: `RED #D63B27`,
+`GO #17A87C`, `GO_L #2FCB99`. That mint is in no house palette — it read as neon next to the clay and
+survived a full round because nothing checks it. **After cloning, diff the new file's accent block
+against SlopKit's line 18** and replace anything that is not a house constant or a lightness-only
+derivative of one:
+
+```
+CREAM #ECE9E2 · INK #1A1813 · CLAY #D2724E · CLAYD #B8501F · GOLD #E7B24C
+GREEN #3F9E74 · MUTE #9A968B · RED #C44A3A · AMBER #CF9544 · SKY #5AA0DE · PINK #E27BA0
+```
+
+Derive tints and shades by moving **lightness only** — never hue, never saturation.
+
+### ⛔ Reel 86 · "solid matte paints" also rules out the alpha wash you didn't think of
+
+The glow rule gets checked; stacked transparency does not. Reel 86's light pools and hall walls were
+`opacity: 0.16` / `opacity={0.55}` layers over the tier behind them, which is precisely the washed-out
+look this section keeps re-flagging — just arrived at through compositing rather than through a
+colour. Blend once into a **single solid paint** instead:
+
+```ts
+export const mix = (a: string, b: string, t: number) => { /* lerp two hexes -> one hex */ };
+<rect fill={mix(VOID, tint, 0.55)} />          // not  fill={tint} opacity={0.55}
+```
+
+Same pixel on screen, but it is a colour someone chose, it survives being layered on, and it greps.
+Both halves of the audit are mechanical, so run both — the second one is the one that gets missed:
+
+```bash
+grep -c "0 0 [0-9]*px" src/<Reel>*.tsx        # coloured glow
+grep -c "opacity={0\."  src/<Reel>*.tsx        # alpha washes
+```
+
 ### ⛔ Regex sweeps eat object keys
 Stripping glows with a broad regex removed the `boxShadow:` key and left a bare string in a style
 object. esbuild reports it as `Expected ":" but found "}"`, which does not obviously point at colour.
@@ -216,6 +251,110 @@ Rules that fall out of this:
 3. **Establish, then break.** Spend the first ~0.5s on a stable, legible state so the reversal lands.
 4. **A rigid box character cannot sell a deep lean.** Keep the body near-upright and let the props do
    it (taut chain + skid marks + dust). A 20° tilt on a box reads as *falling over*, not *straining*.
+
+### ⛔ Reel 86 · "more hierarchical" does NOT mean depth tiers. It means the frame must RANK.
+
+Reel 85 got this note about a flat black background and the fix was a third tier behind the subject,
+so reel 86's first hook set was built the same way: five genre worlds (a toll plaza, a supermarket, a
+subway, a night city, a billing factory), each with sky / structure / floor and a bright hero. Every
+gate passed — luma 141-170, five shots, five locations, motion 10.6-12.1 — and the whole set came
+back with the same three words:
+
+> "more hierarchical, related to the topic at hand and simpler to understand whats going on immediately"
+
+| the clause | what it actually meant |
+|---|---|
+| more hierarchical | not tiers. **A RANK.** You have to see which is bigger without reading anything. Depth behind a scene is not a ranking of anything. |
+| related to the topic | a metaphor for half the subject is not the subject. "Paying monthly" is a toll booth; "five products replaced by repos with 176,656 stars" is not, and that half was nowhere in frame 0. |
+| simpler | every world made the viewer decode *toll booth = subscription* before the subject arrived, and that decode costs the exact second the hook has to earn. |
+
+**The rule:** a hook is not a world with the subject placed in it. It is ONE OBJECT THAT IS THE
+CLAIM — a chart whose bar heights are the real numbers, a scale already tipped, a slab with the five
+competitors at its base. Then the literal layer (real marks, real counts) goes ON that object rather
+than beside it. Set 2 was five objects at five different ranking mechanisms — HEIGHT, WEIGHT, MASS,
+ORDER, QUANTITY — and dropped from five shots to four so nothing had to be re-read.
+
+Corollary, and it is the uncomfortable one: **a full gate sweep tells you nothing about whether the
+hook works.** Set 1 passed every measurable check in this file and was still the wrong idea.
+
+### ⛔ Reel 86 · the fix for "not hierarchical" is not a chart. It is a RITUAL.
+
+Three sets, and the middle one is the instructive failure:
+
+| set | what it was | the note it got |
+|---|---|---|
+| 1 | five GENRE WORLDS — toll plaza, supermarket, subway, night city, billing plant | "more hierarchical, related to the topic, simpler to understand immediately" |
+| 2 | five RANKING OBJECTS — bar chart, balance, monolith, flap board, star field | **"still the initial scene options arent interesting or creative enough concepts"** |
+| 3 | five RITUALS THAT RANK — high striker, title fight, auction, demolition, pawn shop | — |
+
+Set 2 was a correct reading of the note and still wrong, because ranking and interest are different
+axes and I traded one for the other. **A chart has no moment.** Nothing in a bar chart is about to
+happen, so there is nothing to stay for. Reel 84 had already written the answer down —
+
+> "Every rejected concept across reels 83 and 84 was a UI or a system (cards, walls, grids, toll
+>  booths, vaults, factories). What works is A GENRE WORLD WITH A MOMENT OF TENSION."
+
+— and a bar chart is a *system*, exactly like the walls and grids reel 84 rejected. Building one was
+re-committing that mistake in a form that happened to score well on the hierarchy metric.
+
+**The shape that satisfies both at once: a RITUAL whose entire cultural purpose is to rank
+something, frozen one beat before the result is known.** A high striker IS a calibrated scale with a
+bell on it. An auction IS a lot board. A title fight IS a belt changing hands. The ranking is
+intrinsic, so it needs no diagram; the ritual supplies the tension a diagram cannot have. Frame 0 is
+the held breath and the f12 slam is the release, which also turns the break into a story beat rather
+than a camera shake.
+
+**When you next pitch hook concepts, write three columns**: the RITUAL, its HIERARCHY MECHANISM, and
+the MOMENT frame 0 is frozen on. A concept that cannot fill the third column is a diagram.
+
+### ⛔ Reel 93 · the ban on systems includes ones you have DRESSED
+
+Reel 93's hook was a 4x3 grid of real product logos. It cleared frame-0 luma, cleared the
+first-5s motion bar, and came back as *"still boring, like it's just a big wall of stuff,
+it's not interesting, doesn't grab attention."*
+
+I had read the rule above and still built it, because the grid did not look like the
+things reel 84 listed — it had a saturated ground, a texture pass, a frame-edge occluder,
+a fissure and a brick blasted at the lens. **All of those are treatments of the frame.
+None of them changes what the frame IS.** A wall with an explosion in it is still a wall;
+the explosion is an effect happening *to* a layout, not a moment inside a situation.
+
+The tell, and it is available before rendering: **try to fill the third column.** RITUAL /
+HIERARCHY MECHANISM / THE MOMENT FRAME 0 IS FROZEN ON. For the wall, column three was "the
+wall is there", which is a state, not a moment. For the replacement — a block pull, hands
+on the load-bearing brick of a leaning tower — it is "one beat before it goes."
+
+Measured, same VO and same five-shot skeleton: first-5s motion 10.11 -> 12.19.
+
+### ⛔ Reel 86 · an honest scale will collide its own labels
+
+The high striker plots five real star counts on one axis. 44,388 and 43,792 are 596 apart out of
+74,690, so their rungs land ~3px apart and two of the five marks disappeared under each other.
+
+Do **not** rescale the data to fix it — the ratio is the whole point. Keep the RUNG at its true
+height and push only the LABEL to the next free slot:
+
+```ts
+let last = -999;
+const y = base - (stars / max) * H;              // true, untouched
+const ly = Math.max(y, last + 40); last = ly;    // legible, and clearly a legend
+```
+
+Same family as the layout rule above: the data element and the type element need separate columns,
+in both axes.
+
+### ⛔ Reel 86 · a frame-difference metric cannot see a small prop
+
+Set 2's frame 0 is a settled state by design, so nothing moved in shot 1 and per-second motion in
+bucket 1 measured **1.7-3.8** against 14-17 in the later buckets — the shot whose only job is to
+interrupt was the stillest in the hook. The obvious fix, landing five red `/mo` stamps on the paid
+marks at f12, moved bucket 1 from **1.7 to 1.8**: a 30px tag on a 1080x1920 frame is a rounding
+error to a pixel-difference measure, however much it reads to a human.
+
+What works is anything that moves EVERY pixel. A decaying camera shake (`sin/cos` on a squared decay
+over 12 frames) plus a 3-frame impact flash took the same five hooks to **8.7-15.3** with no new
+elements at all. If you need motion, move the camera or the whole frame; if you need meaning, move
+the prop. They are not the same lever, and only one of them shows up in the audit.
 
 ### Reel 82 · benchmark the cut times off the APPROVED reel, don't re-derive a feel
 
@@ -522,6 +661,306 @@ shadow covered its left edge. It is the single most important graphic in the ree
 prompt) and it shipped through 9/9 checks looking like a scrap of red behind someone's arm. Give the
 CTA asset a column no other element enters, then **render the still and look at it before delivering**.
 
+### ⛔ Reel 86 · measure the variant delta on the PANEL, and vary the biggest surface
+
+Three trial cuts that differ on hook / bed / transition kit / caption band, measured as mean
+per-pixel luma difference over the first 5s. Two things the numbers taught:
+
+**1. A whole-frame delta always looks like a failure.** The house chassis — cream background, the
+retention rail, the header pill, the caption band — is **61% of a 1080x1920 frame and is identical
+by design**. Measure the PANEL crop, which is where variance is possible at all:
+
+| | whole frame | panel only |
+|---|---|---|
+| A vs B | 4.16 | **7.47** |
+| A vs C | 5.46 | **9.35** |
+| B vs C | 6.54 | **11.31** |
+
+**2. Varying the accent buys nothing; vary the biggest surface.** The first cut of the variants
+table changed only the tag colour (red $/mo vs green FREE) and measured **2.70 / 3.22 / 3.17** on the
+panel — a near-duplicate set. What moved it was the STAGE, ~60% of the panel, once the three
+palettes were spread far enough apart in luma to matter:
+
+```
+warm  ~137   cool  ~168   amber ~108      # 30+ apart, not 6
+```
+
+Their first attempt sat at 137 / 121 / 143 — three "different" stages within 22 luma of each other,
+which is why "A vs C" was still 5.34 after the change. A variant axis you cannot see in a histogram
+is not an axis.
+
+⛔ And re-run the frame-0 luma gate after: the dark amber stage dropped C to 134.7 against the 140
+bar and had to come back up ~18 points. Variants each need the full gate sweep, not just the first.
+
+### ⛔ Reel 89 · "how is this obviously CLAUDE?" — a favicon is not identification
+
+A hook set built around a real Claude conversation window still came back with *"how do we make it
+clearer we are talking about Claude and not some random animation?"* The Claude signal was a **24px
+mark in a title bar** — about 5px once the reel is playing at feed width, i.e. not there at all.
+
+The repo already had the answer in `ClaudeEraseReel`'s chat window, and it is three things, not one:
+
+1. **The MARK at a real size** (40px+ in the panel), not a favicon.
+2. **The WORDMARK.** "Claude" spelled out, ~40px. A logotype is recognition, not reading, so it does
+   not count against a low-text budget — and it is the single strongest identifier available.
+3. **The product's OWN surface colours.** SlopKit already carries them: `APP_BG #FAF9F5`,
+   `APP_LINE #EAE6DC`, `APP_INK #2B2824`, `CO #C96442`. A generic grey window says nothing; that
+   cream-and-clay says claude.ai before a word is read.
+
+Two more that cost nothing: a **model pill** (`Sonnet 5`) is a detail only the target audience reads
+as familiar, and an empty thread should be drawn as the product's **actual new-chat state** — the
+big sunburst over a composer — rather than an empty rectangle.
+
+⛔ Check the model name against the current line-up before putting it on screen. It dates the reel
+instantly and it is trivially checkable.
+
+### ⛔ Reel 86 · CHECK A SCENE AT FEED SIZE, not at the size you authored it
+
+A nine-row feature table with 14px labels is perfectly legible in a 1012px still and completely
+unreadable in the feed: **a phone shows a reel at roughly 250px wide, so a 14px label in the panel
+lands at about 3.5px on screen.** The note was "too small stuff, hard to see, needs something
+simpler and bigger", and it was arithmetic, not taste.
+
+The rebuild dropped from nine rows to **two cards with one number each** — `1/9` against `9/9` at
+108px, which is ~27px on a phone. Everything else demoted to a banner, one icon and three chips.
+
+**Do the check, it costs one line.** Downscale the still to feed width and look at it there:
+
+```python
+Image.open("frame.png").resize((250, 444)).save("feedsize.png")
+```
+
+Rule of thumb that falls out: **the one string a scene exists to deliver wants ≥90px in the panel**
+(≈22px on a phone). Supporting labels can sit at 25-34px. Anything under ~20px is texture — it may
+be present for density, but nothing the viewer must READ can live there.
+
+Corollary, and it cuts against the density rule two entries up: *more detail* and *bigger* pull in
+opposite directions, and legibility wins. Get density from the number of OBJECTS, never from
+shrinking type to fit more rows in.
+
+### ⛔ Reel 86 · a product mock built out of HOUSE tokens reads as the house, not the product
+
+"The UI of those sites needs to look less like Claude." Two causes, both invisible from inside the
+file because every value was a legal house constant:
+
+1. **The light theme was the house CREAM.** AppFlowy's window sat on `#F4F1EA` chrome, `#F7F5EF`
+   sunken, `#E4DFD3` lines and a warm ink. Real productivity apps sit on cool white and grey
+   (`#FFFFFF` / `#F1F3F5` / `#E1E4E8` / `#1F2328`). Cream is the reel's chassis, not the product's.
+2. **House accents crossed the window frame — 28 times.** `GO`, `RED` and `AMB` were doing every
+   tick, every warning and every highlight inside all five apps, so a video editor's playhead was
+   clay-red and its keyframes were Claude gold.
+
+**The rule: nothing from the house palette crosses a product window's frame.** Give each Theme its
+own `ok / bad / warn` system colours the way a real product does, and keep `GO/RED/AMB` for the
+reel's own chrome — the chip, the scene glow, the swap strip. The audit is one grep over the scene
+block, with the chip and glow lines excluded:
+
+```bash
+# house tokens INSIDE the app scenes — should be zero
+awk '/export const S2/,/S7 · FILES/' src/<Scenes>.tsx \
+  | grep -v '<Chip ' | grep -v 'scene(ROOMS' | grep -oE '\b(GO|GO_L|RED|AMB|AMB_L|AMB_D)\b' | wc -l
+```
+
+### ⛔ Reel 86 · SAMPLE a product's brand colour off its own avatar, and say so when you cannot
+
+"Make the UI look like the actual apps, with those colour schemes" is answerable without guessing.
+Every project has an avatar; pixel-count its dominant non-white, non-black tones:
+
+```python
+from PIL import Image; from collections import Counter
+im = Image.open("avatar.png").convert("RGBA").resize((120,120)); px = im.load(); c = Counter()
+for y in range(120):
+    for x in range(120):
+        r,g,b,a = px[x,y]
+        if a < 200 or (min(r,g,b) > 236) or (max(r,g,b) < 26): continue
+        c[(r//18*18, g//18*18, b//18*18)] += 1
+print(c.most_common(4))
+```
+
+Reel 86 got AppFlowy's four-colour mark (#FCC600 / #00C6FC / #9024FC / #EA006C), Presenton's indigo
+(#4836D8, 12,352 px of it) and OpenPencil's blue (#0090EA) this way, and used them as the actual tag
+palette and chrome of each mock.
+
+⛔ **Two of the five had nothing to sample** — Jan's avatar is a generic waving-hand emoji and
+OpenMontage's is a photograph of the repo owner. Inventing a brand palette for those would put a
+fact on screen that is not one. They got their CATEGORY's real convention instead (a dark local-chat
+client, a dark professional NLE), which is honest and is what those categories actually look like.
+
+**What makes a mock read as software is the CHROME, not the props**: a title bar with window
+controls and view tabs, an icon rail, a sidebar with a tree, an inspector with X/Y/W/H fields, and a
+**status bar** carrying the details only real software bothers with — `1920x1080 · 30 fps · 4 TRACKS`,
+`llama-3.1-8b · Q4_K_M · 41 tok/s`, `workspace.db · ~/AppFlowy · SYNCED TO DISK`,
+`SELF HOSTED · localhost:5001`. One parameterised `AppWin` + `Rail` + `Pill` carried all five, so the
+scenes differ by content instead of by furniture.
+
+⛔ A `Pill` positioned `absolute` inside the title bar's FLEX row escapes it and stacks on the app
+name. Anything living in a flex row is inline, full stop.
+
+### ⛔ Reel 86 · "plain and basic" on a tool scene means you drew the SWAP, not the TOOL
+
+The five scenes that name a product each rendered a card, an arrow, a card and a price box. Counted:
+
+| | objects | |
+|---|---|---|
+| the three rapid-fire swaps | **8** | and all three were one template in three wall colours |
+| bar | 12-18 | under ~8 reads as a diagram |
+
+The fix is not decoration, and it is not a bigger logo. **Draw what the tool DOES.** A video tool gets
+an NLE — preview monitor, prompt, three tracks, clips, a waveform, a playhead, a render bar, an
+export chip. A local LLM gets the model actually loaded (`llama-3.1-8b · 4.7 GB · local`), a reply
+streaming, RAM and GPU meters, and the wifi cut. A Notion replacement gets a sidebar tree and three
+kanban columns with real cards. A vector tool gets a bezier **with its handles and nodes**, which is
+the single detail that separates "vector editor" from "a drawing".
+
+Two structural moves make that fit:
+
+1. **Compress the swap to a strip.** Paid mark struck, arrow, repo chip with stars and FREE, one
+   74px band across the top. It keeps the reel's grammar and hands the whole frame to the product.
+2. **Screens are LIGHT paper UI** (existing house rule) — so one `AppWin` component with a title bar
+   and traffic lights carries all five, and the scenes differ by CONTENT rather than by chrome.
+
+Result: 8 objects → 12-93 per scene, and the three swaps stopped being the same picture three times.
+The counting is mechanical, so do it before you ship rather than after the note:
+
+```bash
+python3 - <<'EOF'
+import re, pathlib
+b = pathlib.Path('src/<Scenes>.tsx').read_text()
+print(len(re.findall(r"<div style", b)) + len(re.findall(r"<Img ", b))
+      + sum(int(m) for m in re.findall(r"Array\.from\(\{ length: (\d+)", b)))
+EOF
+```
+
+### ⛔ Reel 86 · "cramped" is measurable — give the frame BANDS, not positions
+
+The note was "it feels so cramped", which sounds like taste. Measured, every part of it was a
+concrete collision or a missing gap:
+
+| symptom | the actual number |
+|---|---|
+| hero number over hero row | total plate ran 112..298, tallest tile started at 268 — **30px of overlap** |
+| the row read as one striped block | five 150px tiles on **10px** gaps |
+| nothing lined up | tile contents centred on each tile's own half-height, so five logos sat at five different heights |
+| the mascot was wedged in | 40px of clearance between tile 5 and the panel edge |
+| rank badges clipped the logos | badge inside the card at top+14, logo top at 430 on the short cards |
+
+The fix is not nudging. **Lay the frame out as bands with declared air between them**, then place
+inside a band:
+
+```
+122..268   THE TOTAL   one plate, its own row
+---- 28px ----
+296..636   THE ROW     five tiles, bottom-aligned, 26px apart
+636..659   the stage lip
+---- 13px ----
+672..731   THE CHIP    one line, nothing else in the band
+```
+
+Two rules that fall out and generalise:
+
+1. **Anchor a row's CONTENTS to a shared baseline, not to each item's own centre.** Tile heights
+   vary to show rank; the logos, names and tags all sit on the same lines. Varying two things at once
+   (card height *and* content position) is what reads as noise.
+2. **A badge that must not cover content goes ON the edge, half outside.** Inside a short card there
+   is no room; straddling the top edge it can never collide, at any card height.
+
+### ⛔ Reel 86 · the Panel's 1012x792 box is NOT the safe area when a shot is scaled
+
+Hook shots open scaled (reel 86 shot 1 is `scale(1.07)` about `transform-origin: 50% 54%`), so the
+panel box gets cropped on all four sides before anything reaches the screen. Chips authored at the
+usual y 700-726 came back **sliced through the middle** in every one of five variants at once.
+
+Solve it once, arithmetically, instead of nudging: a point maps to `(v - origin) * s + origin`, so at
+`s = 1.07` about `(506, 427.7)` the surviving box is
+
+| | keep inside |
+|---|---|
+| x | **40 … 972** (of 0…1012) |
+| y | **118 … 731** (of 0…792) — 118 also clears the hook header, which occupies 0…98 |
+
+Give the text chip its own band at the bottom of that (y=672) and let nothing else enter it.
+
+### ⛔ "The text is clipped" usually means something is PAINTED ON IT
+
+Reel 86's toll booth read `PAY TO / ONTINUE`, which looks exactly like a type-fitting failure — and
+the first fix was to drop the font from 46 to 38px and widen the box. It changed nothing, because the
+type was never too wide: the **barrier arm at z-index 30** was painted across the C of a sign at
+z-index 18. Zoom the actual still at full resolution and identify what is covering the glyph before
+resizing the thing underneath it. Same family of mistake as §12's "measure before you believe it".
+
+### A wall, a floor line and the one prop the beat needs is a DIAGRAM, not a place
+
+Reel 89's body was built that way and came back as "each of the scenes are way too
+little detail". What fixed it was a reusable deco kit applied to every room:
+**structure** (I-beams with flanges, pipes with couplings, wall plates), **texture**
+(bolts, grating, hazard stripes, floor scuffs and seams) and — the cheapest depth
+per line of code — a **frame-edge occluder**: a column or bench edge cropped by the
+panel border, in front of the action. That one element is the difference between a
+camera standing inside a room and a camera pointed at a backdrop.
+
+Budget roughly 6-10 deco elements per scene. Then re-measure panel luma: dark trim
+is what dressing adds, and reel 89 dropped four panels back under the 140 bar on the
+first detail pass.
+
+### Every feature the VO names needs a picture of its OUTPUT
+
+Reel 90's VO named four studios — Image, Video, Lip Sync, Cinema — and only Cinema
+got a scene. The other three were three doors rolling up, and Alex read that as
+*"isnt there other features beyond cinema studio in the VO? I feel like they got
+cutout"*. He was right: a door opening is a building, not a capability.
+
+Each stage now RUNS ITS OUTPUT on a screen beneath it. Image resolves an actual
+picture (sky, sun, hills) under a render cover that retreats down the frame with a
+scan line on its edge. Video runs film frames past sprocket holes. Lip Sync drives a
+mouth off a live waveform. All three are ~20 frames of screen time and all three
+read, because each one is a thing you have seen software do.
+
+Two layout rules came out of it, both learned by shipping the wrong version first:
+
+- **Three tiers, never two.** Stage in the top band, its output below, the claim chip
+  at the bottom. Parking the output over the doorway buries the costumed Claude
+  working inside it — the exact thing you were asked to add. The same fix rescued the
+  crowd scene, where the crowd stood *in* the doorways and got sliced in half by the
+  OChip: lift the buildings, drop the crowd, chip underneath.
+- **A second hero-coloured character behind the hero reads as a second head growing
+  out of his shoulder.** Background crew must be silhouettes —
+  `brightness(0.24) saturate(0.3) blur(4-9px)` — and anything the hero tracks past
+  (a camera rig, a stand) belongs BEHIND him in z, not in front.
+
+Dressing a tracking shot is the same recipe as dressing a room, just with each layer
+on its own parallax rate: flats slowest, lighting stands faster, cable drums and
+flight cases on the floor fastest, and a boom dipping in from the top of frame.
+
+### ⛔ "LOCKED CAMERA" DOES NOT MEAN "NO PUSH" — reel 96
+
+`storyboards/CAMERA-GRAMMAR.md` says still by default, at most one motivated move per
+scene, and only ~2-3 moving scenes across a reel. Reel 96's board took that literally and
+declared *"8 of 9 scenes locked, one motivated move."* Built exactly that way, it measured:
+
+    median motion 5.91   (bar 9.00)   7 of 9 scenes failing
+    dead runs 30f · 42f · 18f · 15f · 15f
+
+Reel 95 — the same chassis, the reel Alex called *"very elevated"* — carries **twelve**
+`push={[...]}` calls of 1.09 to 1.22 and measures median **9.92**. Both statements are in
+the repo and they look contradictory. They are not:
+
+| | what it is | how often |
+|---|---|---|
+| **RE-FRAMING move** | a whip, a dolly, a tilt: the shot becomes a shot of something else | rare — CAMERA-GRAMMAR's 2-3 per reel |
+| **the in-panel push** | a 1.09-1.13 scale drift over the scene; the framing never changes | **every scene** |
+
+CAMERA-GRAMMAR governs the first. `feedback_scene_needs_an_arc` ("every scene arrives then
+HOLDS") governs the second. Reading the discipline rule as a ban on the drift is what cost
+reel 96 a full render cycle.
+
+⛔ **And the push is not the fix for a dead run.** Adding pushes alone would have lifted the
+average while leaving all five holds in place, exactly the failure `scene_motion_audit`'s
+DEAD RUN column exists to catch. Each run had its own cause and each was fixed at it: the
+heap stopped shedding crates, the bench finished inking and waited, one scene had no
+content at all for its first second, a sprite stopped AT a gate instead of walking through
+it, and the CTA prop parked at local 26 of 65. Fix the cause; let the push do only its own
+job. (Reel 96 went to median **9.29, 0 of 9 failing, zero dead frames.**)
+
 ## 4. Real-world data (logos, repos, brands)
 
 **⛔ `<Img>` cannot play a video.** A clip slot wired with `Img src={staticFile("clip.mp4")}` renders
@@ -553,6 +992,69 @@ uninterrupted sentence, which is what reads as "speaking" when the clip is muted
   Trademark-removed brands (amazon, linkedin, adobe, banks) 404 — swap them.
 - **Download assets locally.** Remote URLs in `<Img>` are not reliable at render time.
 - Use a person's avatar **on their repo page** (normal attribution), not blown up as a scene badge.
+
+### ⛔⛔ Reel 86 · the house mark filter DESTROYS any logo that is not already black
+
+`grayscale(1) brightness(0.12)` is the house treatment for putting a mark on a light plate, and it
+is safe ONLY for simple-icons SVGs, which are black-on-transparent to begin with. Run it over a
+brand that owns a colour and you get a solid black square:
+
+| mark | what it actually is | after the filter |
+|---|---|---|
+| `logos_official/higgsfield.png` | a **LIME #D4F520 tile** with a black squiggle | a black block |
+| `logos/figma.svg` | Figma's multi-colour glyph | a black block |
+| notion / openai / canva SVGs | already black on transparent | unchanged |
+
+It shipped through THREE full hook sets — fifteen scenes — before the note came back as *"no logos
+etc and there's big black lines around."* Which is exactly right: one of the five "logos" had been a
+black rectangle the whole time, and I had been reading it as the brand's own dark mark.
+
+**The rule: do not filter brand marks at all.** Put them on a light plate and let them be themselves;
+a brand's colour is part of its recognisability, which is the entire reason for using a real mark.
+If a specific mark is illegible on its background, change the plate, not the mark.
+
+**The check, before you trust any mark:**
+
+```bash
+python3 -c "
+from PIL import Image; import statistics as s
+im=Image.open('X.png').convert('RGBA'); px=im.load(); w,h=im.size
+op=[px[x,y] for y in range(0,h,4) for x in range(0,w,4) if px[x,y][3]>200]
+print('mean lum', s.mean([0.299*c[0]+0.587*c[1]+0.114*c[2] for c in op]))"
+# > 120 means it owns a light colour and MUST NOT be darkened
+```
+
+### ⛔ Reel 86 · owner avatars are not a logo source
+
+Five open-source projects, none on simple-icons. The GitHub API gives every repo an
+`owner.avatar_url`, which looks like a clean fallback and is not: of the five, two were usable brand
+marks, one was a generic waving-hand emoji, and one was **a personal selfie of the repo owner**.
+Never put an individual's face on screen as a product logo. Where a project has no mark, give the
+free side a GitHub repo chip instead — the GitHub mark plus the star count is a real, verifiable
+identity and it reinforces the actual claim.
+
+### ⛔ Reel 86 · check a mark's ALPHA before you trust it, and check its BYTE COUNT
+
+Two of the six marks reel 86 needed were quietly broken, and neither failed loudly:
+
+| asset | what was wrong | how it showed up |
+|---|---|---|
+| `public/chatgpt_logo.png` | 600x600, **alpha 255 everywhere** — an opaque WHITE background | the house plate darkens marks with `grayscale(1) brightness(0.12)`, so that white field became a solid black square on every plate, in all five variants |
+| `public/logos/canva.svg` | **0 bytes** on disk | rendered as nothing at all; easy to read as "the logo just doesn't show at this size" |
+
+Both are one line to check and cost a render round each:
+
+```bash
+file public/logos/*.svg | grep empty          # 0-byte SVGs that still have the right name
+python3 -c "from PIL import Image; a=Image.open('X.png').convert('RGBA').getchannel('A').getextrema(); print(a)"
+# (255, 255) = opaque, there is a background in there. (0, 255) = a real cutout.
+```
+
+`logos_official/openai.svg` is the black-on-transparent ChatGPT mark and is the one to use on light
+plates. When re-sourcing from simple-icons, **`cdn.simpleicons.org/<slug>` and
+`raw.githubusercontent.com/simple-icons/...` both returned empty for canva** —
+`https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/<slug>.svg` was the route that worked. Always
+`wc -c` what you just downloaded before saving it over a real file.
 
 ---
 
@@ -652,6 +1154,36 @@ factor. Miss one and the whole back half desyncs.
 
 ---
 
+### NEVER call a take clean without re-transcribing the CUT file
+
+Reel 89 shipped a VO its own storyboard called "a clean single take — no `cut cut`
+flubs". It had **two**, and Alex found them in the delivered reel:
+
+```
+11.02-13.00  "...connect Claude to Notebo—  CUT CUT.  But when you connect..."
+26.90-29.30  "...it saves the entire—      CUT CUT.  After each session..."
+```
+
+The failure was procedural. Captions are built from a CANON script aligned to
+whisper — which is correct — but that means the caption JSON reads perfectly clean
+**whether or not the audio is**. Reading `words_*.json` proves nothing about flubs,
+and that is where the "no flubs" claim had come from.
+
+The check is one command on the FINAL wav, and it is not optional:
+
+```bash
+python3 -c "
+from faster_whisper import WhisperModel
+m=WhisperModel('base.en',device='cpu',compute_type='int8')
+s,_=m.transcribe('FINAL.wav', word_timestamps=True, vad_filter=False)
+w=[x.word.strip() for seg in s for x in seg.words]
+print([x for x in w if 'cut' in x.lower()])
+print([(i,w[i]) for i in range(len(w)-1) if w[i].lower().strip('.,')==w[i+1].lower().strip('.,')])"
+```
+
+Both lines must print empty. Run it again on the RENDERED mp4 before delivery —
+that is the only artefact the viewer actually hears.
+
 ## 6. Audio mix
 
 **The bed being "too quiet" is usually a measurement problem, not taste.** Measure both:
@@ -695,6 +1227,85 @@ and left a bare string in a style object — esbuild reports it as `Expected ":"
 After any bulk edit, grep for orphaned values and re-render one still before a full render.
 
 ---
+
+### A clean re-transcript is NOT proof the take is clean — check the RMS envelope
+
+Reel 89 again, one round later. After cutting two `cut cut` flubs the re-transcript
+came back with zero "cut" and zero adjacent repeats, and it was still wrong: a
+**145ms stub** of a false start survived because the cut boundary was ~180ms late.
+Whisper merged the stub into the following word, so every text-level check passed.
+Alex heard "after" twice.
+
+Word-level ASR cannot see a fragment shorter than a phoneme cluster. The envelope
+can. Around every join, at 20ms resolution:
+
+```python
+subprocess.run([FFMPEG,"-ss",str(t0),"-t","0.6","-i","FINAL.wav","-ac","1","-ar","16000","/tmp/z.wav"])
+a = np.frombuffer(wave.open("/tmp/z.wav").readframes(-1), dtype=np.int16).astype(float)
+for i in range(len(a)//320):
+    print(t0+i*0.02, "#"*int(np.sqrt((a[i*320:(i+1)*320]**2).mean())/70))
+```
+
+A clean join is one continuous quiet run. **Two quiet runs with a short burst
+between them is a stub**, and that burst is the thing the ear catches.
+
+### A fading Panel + back-to-back Sequences = one BLANK FRAME at every cut
+
+`Panel` with `pushIn` fades in from `opacity: 0` over 6 frames. The house assembly
+gives each scene `durationInFrames = IN[i+1] - IN[i]`, so the outgoing scene ends on
+exactly the frame the incoming one starts — and the incoming one is still
+transparent. Reel 89 flashed the empty background **twelve times**, once per cut, and
+it survived a full motion audit and an 8/8 verify, because neither looks at single
+frames.
+
+The outgoing scene must stay alive underneath until the incoming is opaque:
+
+```tsx
+durationInFrames={(i === last ? TOTAL : IN[i + 1] + 7) - IN[i]}
+```
+
+Check it directly — render the frame at each `IN[i]` and measure panel luma. A blank
+panel measures ~55 against a dressed one at 140+.
+
+### ⛔⛔ A `push` RANGE IS SCENE-LOCAL, NOT SHOT-LOCAL (reel 98)
+
+`useCurrentFrame()` restarts per **Sequence**, not per hard cut *inside* one. A scene
+that plays four shots off a `CUT = [0, 33, 62, 92]` table is ONE Sequence, so every
+shot sees the same scene-local `f`. A second shot that passes its push as
+`push={[0, 31, 1.05]}` — the obvious thing to write, since its own `lf` starts at 0 —
+has that push **already complete on its first frame** and sits on a frozen camera for
+its entire duration.
+
+Reel 98 shipped nine of fifteen shots that way. It typechecked, rendered, and looked
+fine in stills, because a still cannot show you a camera that is not moving.
+
+```tsx
+// ⛔ frozen: this range finished during the PREVIOUS shot
+if (shot === 1) return <Scene push={[0, 29, 1.045]}>…
+
+// ✅ starts on its own cut, and restarts at 1.0 because E() clamps left
+if (shot === 1) return <Scene push={[33, 62, 1.055]}>…
+```
+
+**What caught it:** `tools/scene_motion.py` reported one static stretch, `(1.2, 1.9)`.
+Nothing else did — not the typecheck, not the render, not four rounds of reading
+stills. **A 0.7s dead run is the symptom of a systemic camera bug; go looking for the
+cause rather than adding motion at 1.2s.** (`feedback_diagnose_before_fixing`.)
+
+### ⛔ `clip-path: polygon()` FILLS BY NONZERO WINDING — you cannot punch a hole with one (reel 98)
+
+The natural way to write a picture frame is one polygon that traces the outer rect and
+then the inner one, expecting an even-odd cutout. CSS fills by **nonzero** winding, so
+the "hole" fills solid and you get a flat rectangle over the whole scene. Reel 98's
+S3b rendered **completely black** and the render exited 0.
+
+```tsx
+// ⛔ fills solid — the entire panel goes to #1A1610
+clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 13% 0, 13% 12%, 87% 12%, …)"
+```
+
+Draw a frame as its **four sides** (top bar, left bar, right bar, and a curved header
+piece if it is an arch). Same for any mask with a hole in it.
 
 ## 8. Toolchain & environment
 
@@ -848,6 +1459,37 @@ default source. Alex rejected the Vox pack: "isn't really the sound design I wan
 
 ---
 
+### `LEVELS.*` are LINEAR GAINS, not dB — never do arithmetic on them additively
+
+`LEVELS.SFX_TEXTURE` is `db(-19)` = **0.112**, already converted. So a cue written as
+`v: LEVELS.SFX_TEXTURE - 3` is `0.112 - 3` = **-2.888**, and Remotion throws
+`You have passed a volume below 0 to your <Html5Audio /> component` — but only at the frame
+the cue starts, so `remotion still` passes and `remotion render` dies mid-way. Reel 89 lost a
+render cycle to this on an accelerating tick ramp.
+
+To offset a level, multiply by `db()`:
+
+```ts
+v: LEVELS.SFX_TEXTURE * db(-5 + i * 0.6)   // right — a ramp in dB
+v: LEVELS.SFX_TEXTURE - 5 + i * 0.6        // WRONG — negative volume, render dies
+```
+
+Grep before rendering: `grep -rn "LEVELS\.[A-Z_]* *[-+] *[0-9]" src/*.tsx` must return nothing.
+
+### Measure a hero impact by SCANNING, not by bucketing RMS
+
+`astats=reset=N` windows are audio frames, not seconds, so indexing them as 0.1s buckets reports
+the landing as *quieter* than the fall and sends you tuning a mix that was fine. Measure the beat
+directly instead, and scan finely enough to catch the attack:
+
+```bash
+ffmpeg -ss 3.77 -t 0.07 -i cut.mp4 -af volumedetect -f null - 2>&1 | grep max_volume
+```
+
+Remember `LEAD_FRAMES = 3`: the J-cut puts the attack **100ms before** the visual beat, so a window
+opened exactly on the cut frame measures the decay. A correct riser-into-impact reads as a dip then
+a jump — reel 89's token landing scans -16.1 dB at 3.60s (riser ended, pocket) to -3.8 dB at 3.77s.
+
 ## 11. Delivery
 
 **⛔ A trial-reel variant is not a re-render.** Instagram flags near-duplicates, so a second cut has to
@@ -894,6 +1536,11 @@ audio is intact; a truncated fragment means you cut too early.
 `ls -d` the Drive `Faceless/` folder and take the next FREE number. Other agents ship concurrently: on
 this build a parallel session created `79 - PLUGINS` 36 minutes before delivery, so what began as reel
 79 had to be renamed to 80 after the fact.
+
+Reels **24-89 now live in `Faceless/*REELS 24-89/`**, not at the top level (archived 2026-08-07 to cut
+the top-level folder count). `ls Faceless/` still gives the correct next free number because the live
+reels (90+) stay at the top level — but when looking for an *older* reel's deliverables, look inside
+`*REELS 24-89/`, and check both places before concluding a number is unclaimed.
 
 **A `.docx` copied into the Drive mount gets re-saved by Drive** and its byte size can jump many times
 over (14 KB to 659 KB). That is normal rehydration, not corruption and not another session overwriting
@@ -946,6 +1593,30 @@ was the surrounding world: the cabinet filled almost the whole panel, leaving a 
 small character. The fix was a **foreground plane** (`ArcadeCounter`) drawn after the cabinet, so each
 scene reads at three depths: prop behind / counter in front / character standing at it. **Density is a
 property of the composition, not of the busiest element in it.**
+
+### A scene needs an ARC, not an entrance — and per-scene averages hide the difference
+Reel 90 shipped a first pass where the audit's per-scene averages all looked survivable. The
+per-window numbers told the real story: every single scene spiked 7-11 on the cut and then sat at
+1-3 for its entire middle. Entrances complete; nothing then changes. **Read the windows, not the
+average**, and give each scene one thing that keeps transforming from its first frame to its last.
+
+Measured leverage on that reel, cheapest to dearest, so you stop guessing:
+
+| change | Δ motion |
+|---|---|
+| smooth parameter sweep inside a window (blur/scale demo) | **−0.40** |
+| a 30×38 cursor moving | ≈ 0 |
+| a progress bar filling | +0.11 |
+| doors opening | +0.15 |
+| **making the same subject full-panel instead of in a viewfinder** | **+1.07** |
+| 36 logo tiles scrolling | +1.90 |
+| 12 large cream cards blown apart | **+4.04** |
+| a continuous per-scene camera push (all scenes at once) | median 7.12 → 8.65 |
+
+The pattern is one thing: **CONTRAST × AREA × TRAVEL**. A smooth sweep over a uniform area is
+invisible no matter how large the parameter change; the Cinema scene went *down* 3.18 → 2.78 when
+its blur/scale demo was added, and only recovered (→ 13.55) when the lens output became the whole
+panel with a full-size subject tracking across it.
 
 ### Contrast survives a palette change only if you re-check the text
 The matte conversion lightened every panel but left the old light-on-dark type, so a whole diff panel

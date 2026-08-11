@@ -1,0 +1,52 @@
+TITLE   The Offline AI Setup
+SUB     Project NOMAD: a knowledge server that keeps answering after the internet stops. What it is, what goes in it, and how to stand one up.
+
+P       Everything below is checked against github.com/Crosstalk-Solutions/project-nomad as of 11 August 2026: Apache-2.0, 35,694 stars, 3,579 forks, TypeScript, last pushed 11 August 2026. Star counts move. The architecture and the component names do not.
+
+RULE
+
+H       What it actually is
+P       NOMAD is not a chatbot. It is a management application, which the project calls the Command Center, plus an API that installs and runs a set of containerised tools for you through Docker. You install one thing; it handles the rest.
+P       You reach all of it through a browser at localhost:8080. There is no desktop environment required, so a NOMAD box can sit headless in a cupboard and you use it from a laptop or a phone on the same network.
+P       The point of the design is that everything it knows is already on the disk. An internet connection is needed while you install and while you choose to download more content. After that it runs with nothing plugged in.
+
+H       What is inside it, and what actually powers each part
+B       AI Chat with Knowledge Base. Local chat via Ollama, or any OpenAI-compatible server such as LM Studio or llama.cpp. Document upload plus semantic search, with Qdrant doing the retrieval.
+B       Information Library. Offline Wikipedia, medical references, survival guides and ebooks, served by Kiwix from ZIM archive files.
+B       Education Platform. Khan Academy courses with progress tracking and multiple users, through Kolibri.
+B       Offline Maps. Downloadable regional maps you can view and search, via ProtoMaps.
+B       Data Tools. Encryption, encoding, hashing and analysis through CyberChef.
+B       Notes. Local markdown note-taking with FlatNotes.
+B       Supply Depot. A one-click catalogue of extra apps: PDF tools, a file browser, an ebook library, a password manager, plus the ability to run your own containers.
+B       System Benchmark. Scores your hardware and posts to a community leaderboard if you want it to.
+
+H       The install, start to finish
+NUM     Get a Debian-based machine. Ubuntu 26.04 LTS is the recommendation. Ubuntu 24.04 LTS and Debian 12 also work. Windows users go through WSL2, which is a community-supported path.
+NUM     Run the install script as root. It is one command from the repo README and it pulls everything it needs.
+NUM     Open a browser at localhost:8080, or DEVICE_IP:8080 from another machine on the network.
+NUM     Walk the setup wizard. It offers curated content collections so you are not picking ZIM files blind on your first run.
+NUM     Choose your content. This is the step that matters and the step people rush. Every archive you skip now is an archive you do not have later.
+NUM     Optionally turn on automatic updates, on a schedule you set. Minor and patch versions can install themselves inside a window you choose. Major versions always wait for you.
+
+H       Hardware, honestly
+P       Two different answers, and the project says so itself. The Command Center alone is light: a 2 GHz dual-core, 4 GB of RAM and 5 GB of disk will run it.
+P       Running local models is the opposite. The project recommends a Ryzen 7 or Core i7 class chip, 32 GB of RAM, an RTX 3060 or better, and at least 250 GB of SSD. More VRAM means larger models. If you want the AI half to be good rather than present, this is where the money goes.
+P       There is a hardware guide on the project site covering builds from about 150 dollars to over 1,000. NOMAD is not sponsored by any manufacturer, so those are reference builds rather than an upsell.
+
+H       Two things to know before you trust it
+P       There is no authentication. By design, NOMAD ships open and without hurdles. If you put it on a network for other devices, control access at the network level with ports and firewall rules. The project advises against exposing it to the internet, and it means it.
+P       There is zero built-in telemetry. It does make a connectivity check, by default against Cloudflare's 1.1.1.1 trace endpoint, falling back to the GitHub API and the project API. You can point that check somewhere else from Settings, Advanced, or with the INTERNET_STATUS_TEST_URL environment variable.
+
+H       The part nobody mentions
+P       The failure mode is not the software. It is an empty library. A NOMAD box with a model on it and no ZIM archives is a small language model with no reference material, which is the worst of both worlds: confident and unsourced.
+P       The value is in the pairing. The archives hold the facts, the retrieval layer finds them, and the model turns them into an answer you can act on. That only works if you did the downloading while you still had a connection.
+P       Which is the real instruction here. Set it up on a boring day. The day you need it is not the day you can download 90 gigabytes of Wikipedia.
+
+RULE
+
+H       Links
+B       Repo: github.com/Crosstalk-Solutions/project-nomad
+B       Site and install guide: projectnomad.us
+B       Hardware guide: projectnomad.us/hardware
+
+KEY     NOMAD

@@ -11,6 +11,18 @@ fundamentally different reframe that beats the reason it failed. Cross-reference
   accounts") — **did NOT work in the past (Alex, 2026-07-12).** The money-audit consumer angle is dead
   until a genuinely different mechanism/proof beats whatever made it fall flat. Don't pitch it again.
 
+## Flopped in the wild — cont.
+- **LEADS / "Claude builds a free lead list + cold-email machine, kills Clay + Apollo" (reel #71,
+  autopsy 2026-07-21).** Underperformed. Root cause = TAM: it is the STRUCTURAL TWIN of the resume
+  reel (Claude-builds-a-utility + comment-keyword CTA, both produce a concrete artifact) but aimed at
+  B2B-cold-outreach people instead of a universal audience. Natural experiment: resume broke out (7.9x
+  & 12.5x on two creators), LEADS flopped, and the only variable that changed was TAM (concreteness
+  held constant). The hook "Stop paying $2,000 for a lead list" is a command only existing lead-buyers
+  can obey (self-selects out ~90% in the first 1.5s), "lead list" is jargon in the top value-noun slot,
+  and the $2,000 loss is a stranger's, not the viewer's. Do NOT resurface any lead-gen / cold-outreach
+  / "get clients" / agency-tooling framing. SALVAGE = keep the free-scraper+Claude-enrichment mechanism,
+  re-aim it universal: "Claude finds anyone's email for free" (dream-job, admissions, pitching, investors).
+
 ## TAM kills (too small an audience)
 - Topics that require **running a business with clients / invoices / a team** (a "finance team," an
   agency, a CRM, a sales pipeline) — the TAM is business-owners only (Alex, 2026-07-12). Prefer topics

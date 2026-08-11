@@ -1,0 +1,31 @@
+{
+  "vo_onset_max_s": 0.15,
+  "audio_onset_max_s": 0.15,
+  "music_onset_max_s": 0.15,
+  "ends_tight_max_s": 0.8,
+  "max_short_word_s": 0.8,
+  "caption_drift_tol_s": 0.12,
+  "sfx_cues_s": [
+    0.0,
+    1.67,
+    3.2,
+    4.4,
+    5.46,
+    5.66,
+    6.62,
+    8.0,
+    10.36,
+    10.56,
+    12.76,
+    14.16,
+    16.9,
+    17.59,
+    18.1,
+    18.44,
+    20.4,
+    20.66
+  ],
+  "music_bed": "public/auto_bed.wav",
+  "words_json": "src/data/words_auto.json",
+  "script": "There's a GitHub repo with over 24,000 stars that gives you 280 pre-built automations so you never have to set one up yourself. Your inbox sorts itself, your leads get followed up on while you sleep, your content gets posted to every social media platform. Gmail, Slack, WhatsApp, Notion, Stripe, 18 categories of automations in total. You don't have to build any of them. You just have to grab one file, click import, and it starts running. Everyone else is still doing all of this by hand every morning. Comment AUTO and I'll send you the repo."
+}
