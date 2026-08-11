@@ -93,7 +93,10 @@ export const Pile: React.FC<{ x: number; base: number; n: number; s?: number;
   z?: number; w?: number; seed?: number; logos?: number[]; dim?: number }> =
   ({ x, base, n, s = 1, z = 60, w: ww = 520, seed = 3, logos = [], dim = 0 }) => {
   const TS = 54 * s;
-  const rows = Math.max(1, Math.ceil(Math.sqrt(n * 1.4)));
+  /* ⛔ A HEAP HAS TO GO UP. sqrt(n*1.4) spread 126 tokens over 13 shallow rows
+     and read as a carpet; sqrt(n*3.4) gives it height, which is what makes the
+     comparison in the frame a RANK rather than two widths. */
+  const rows = Math.max(1, Math.ceil(Math.sqrt(n * 3.4)));
   const out: React.ReactNode[] = [];
   let placed = 0;
   for (let r = 0; r < rows && placed < n; r++) {
@@ -254,17 +257,42 @@ export const Machine: React.FC<{ x: number; base: number; s?: number; z?: number
   </>);
 };
 
-/** the operator. ⛔ costume is unconditional — a bare box Mascot reads as
-    having two pairs of legs. */
-export const Clerk: React.FC<{ x: number; base: number; s?: number; z?: number; f: number;
-  cheer?: number; shock?: number; gaze?: number }> =
-  ({ x, base, s = 1, z = 70, f, cheer = 0, shock = 0, gaze = 0 }) => (
-  <div style={{ position: "absolute", left: x - (240 * s) / 2, top: base - 240 * s,
-    zIndex: z }}>
-    <Mascot lf={f} size={240 * s} glasses={1} gaze={gaze} cheer={cheer} shock={shock}
-      nodAmp={3.0} nodSpeed={11} />
-  </div>
-);
+/** THE CLAUDE SPRITE.
+    ⛔⛔ v3 SHIPPED WITH ZERO MASCOTS IN IT and Alex's note was *"there arent
+       claude sprites to make the scenes interesting"*. The house chassis is
+       built around the clay Claude Mascot; a reel of objects with nobody in it
+       has no scale reference, nobody to react, and nothing for the eye to
+       follow. He is now in EVERY scene.
+    ⛔ THE COSTUME IS UNCONDITIONAL — a bare box Mascot reads as having two
+       pairs of legs (reel 98). `glasses` is the counting-house clerk.
+    `hold` puts a token in his hands at arm height, which is how a logo gets to
+    be 190px AND belong to somebody. */
+export const Claude: React.FC<{ x: number; base: number; s?: number; z?: number; f: number;
+  cheer?: number; shock?: number; stern?: number; gaze?: number; hold?: number;
+  holdKey?: string; holdName?: string; holdMark?: boolean; holdClaude?: boolean }> =
+  ({ x, base, s = 1, z = 70, f, cheer = 0, shock = 0, stern = 0, gaze = 0,
+     hold = 0, holdKey, holdName, holdMark, holdClaude }) => {
+  const SZ = 240 * s;
+  return (<>
+    <Contact x={x - SZ * 0.32} y={base - 8 * s} w={SZ * 0.64} z={z - 2} o={0.38} />
+    <div style={{ position: "absolute", left: x - SZ / 2, top: base - SZ, zIndex: z }}>
+      <Mascot lf={f} size={SZ} glasses={1} gaze={gaze} cheer={cheer} shock={shock}
+        stern={stern} nodAmp={stern ? 1.6 : 3.0} nodSpeed={11} />
+    </div>
+    {/* the arm that reaches for what he is holding — proximity is not
+        connection, so the span gets drawn (reel 81's chain) */}
+    {hold > 0 && (
+      <div style={{ position: "absolute", left: x + SZ * 0.30, top: base - SZ * 0.62,
+        width: SZ * 0.34, height: SZ * 0.10, borderRadius: SZ * 0.05,
+        background: "#D97757", zIndex: z + 1, boxShadow: SH }} />
+    )}
+    {hold > 0 && (
+      <Token x={x + SZ * 0.74} y={base - SZ * 0.60} s={hold} z={z + 4}
+        markKey={holdKey} name={holdName} hasMark={holdMark} claude={holdClaude}
+        rot={-6} />
+    )}
+  </>);
+};
 
 /** a queueing silhouette, for the change-machine line. */
 export const Waiting: React.FC<{ x: number; base: number; s?: number; z?: number; c?: string }> =
@@ -289,8 +317,10 @@ export const Stack: React.FC<{ x: number; base: number; n: number; s?: number; z
       <Token key={"sk" + i} x={x + (rnd(seed + i, 3) - 0.5) * 7} y={base - TS / 2 - i * STEP}
         s={TS} z={z + i} plain rot={(rnd(seed + i, 4) - 0.5) * 8} />
     ))}
-    <div style={{ position: "absolute", left: x - 150 * s, top: base + 16 * s, width: 300 * s,
-      textAlign: "center", zIndex: z + n + 4 }}>
+    {/* ⛔ THE LABEL GOES ABOVE THE STACK. Below the base it fell off the bottom
+        of the panel on any stack standing on the floor line. */}
+    <div style={{ position: "absolute", left: x - 150 * s, top: base - TS - n * STEP - 92 * s,
+      width: 300 * s, textAlign: "center", zIndex: z + n + 4 }}>
       <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 46 * s,
         lineHeight: 1.04, color: "#F6EEDC",
         textShadow: "0 3px 10px rgba(0,0,0,0.5)" }}>{label}</div>

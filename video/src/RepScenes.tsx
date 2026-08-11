@@ -10,7 +10,7 @@ import {
   Mark, MarkPlate, MarkCast, Token, MakerPlate, PROVIDERS, usePlace,
 } from "./RepWorld";
 import {
-  Counter, Pile, Fall, Chute, Flag429, Machine, Clerk, Waiting, Stack, Cap,
+  Counter, Pile, Fall, Chute, Flag429, Machine, Claude, Waiting, Stack, Cap,
 } from "./RepProps";
 
 /* ===========================================================================
@@ -77,44 +77,51 @@ export const S0Hook: React.FC = () => {
   const lf = f - CUT[shot];
   const HZ = p.horizon;
 
-  /* ---- A · WIDE · the seal breaks and the count starts ----------------- */
+  /* ---- A · WIDE · THE RANK IS ALREADY IN FRAME 0 ----------------------- */
   if (shot === 0) {
-    const pop = E(lf, 12, 19, 0, 1, OUT);
-    const cnt = E(lf, 13, 22, 0, M, OUT);
-    const pour = E(lf, 13, 20, 0, 1, OUT);
-    const sk = shake(lf, 12, 15, 13);
+    /* ⛔⛔ v3's FRAME 0 WAS A SEALED CHUTE AND AN ODOMETER READING ZERO, and the
+       note was *"the beginning its not too clear what its about ... not really
+       hierarchical."* A counter at 000,000,000 states nothing, and there was no
+       rank in the frame because the only two things in it were both small.
+
+       Reel 86 already defined the word: hierarchical does NOT mean depth tiers,
+       it means A RANK — you have to see which is bigger without reading. So the
+       comparison is now the OPENING image, not the reveal: a Claude sprite for
+       scale, a 4-token stack at his feet, and a mountain of tokens filling the
+       right of frame with 200px provider logos on its face. Small / person /
+       enormous, readable in a glance, before a word is spoken. */
+    const surge = E(lf, 12, 24, 0, 1, OUT);
+    /* ⛔ FRAME 0 READS THE WHOLE CLAIM. v1 of this shot opened mid-count on
+       496,000,000, which is not a settled state and not a number anybody can
+       use. It reads 800,000,000 at f0 and keeps CLIMBING past it as the fresh
+       avalanche lands. */
+    const cnt = M + E(lf, 12, 26, 0, 14200000, OUT);
+    const sk = shake(lf, 12, 16, 14);
     return (
-      <Scene p={p} slug="FREE TOKENS  ·  PER MONTH" push={[0, 22, 1.045]} vig={0.34}>
+      <Scene p={p} slug="FREE AI TOKENS  ·  EVERY MONTH" push={[0, 22, 1.045]}
+        vig={0.32}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px)` }}>
           <Room p={p} f={f} />
-          {/* ⛔ THE HEADER PILL OCCLUDES PANEL y 0..100 ACROSS x 96..881. v1 of
-              this shot put the chute mouth at y=170 and the pill ate the top
-              two thirds of it, so the frame read as an empty cream room with a
-              small odometer in the corner. The chute now clears the pill and
-              the odometer sits on the counter-top at full size. */}
-          {/* two providers mounted on the wall — logos, in frame 0, at 120px */}
-          <Token x={162} y={252} s={132} z={26} markKey={P[0].k} name={P[0].n}
-            hasMark rot={-6} />
-          <Token x={856} y={252} s={132} z={26} markKey={P[1].k} name={P[1].n}
-            hasMark rot={7} />
-          {/* the main chute, Claude-marked, sealed at f0 */}
-          <div style={{ position: "absolute", left: W / 2 - 156, top: -40, width: 312,
-            height: 330, background: BRASS, zIndex: 30, boxShadow: SH_D,
-            clipPath: "polygon(0 0, 100% 0, 66% 100%, 34% 100%)" }} />
-          <div style={{ position: "absolute", left: W / 2 - 156, top: -40, width: 88,
-            height: 330, background: BRASSL, opacity: 0.5, zIndex: 31,
-            clipPath: "polygon(0 0, 100% 0, 66% 100%, 34% 100%)" }} />
-          <Cap x={W / 2} y={274} w={226} z={80} t={pop} />
-          <Fall x={W / 2} y={296} len={396} f={f} n={12} s={1.15} z={70}
-            spread={190} on={pour} />
-          {/* the odometer — the simple, straightforward version of the claim */}
-          <Counter x={W / 2} y={452} v={cnt} s={0.78} z={64} />
-          <Pile x={W / 2} base={748} n={Math.round(pour * 40)} s={1.0} z={76}
-            w={560} seed={5} logos={[2, 7, 13, 21]} />
-          {/* what one free tier gives, already on the counter at f0 — it fills
-              the empty lower-left AND sets up the comparison S1 makes */}
-          <Stack x={168} base={744} n={3} s={0.86} z={70} label="800,000"
+          <Counter x={606} y={150} v={cnt} s={0.76} z={96} />
+          {/* the mountain — settled and complete at f0, surging at f12 */}
+          <Fall x={690} y={-30} len={470} f={f} n={12} s={1.2} z={64} spread={360}
+            on={0.35 + surge * 0.65} />
+          <Pile x={690} base={762} n={Math.round(150 + surge * 70)} s={1.1} z={70}
+            w={540} seed={5} />
+          {/* ⛔ THE LOGOS ARE THE POINT AND THEY ARE 200px. They sit ON the face
+              of the mound, so they are big, they belong to the pile, and they
+              say "AI" in the first frame. */}
+          <Token x={548} y={588} s={198} z={92} markKey={P[0].k} name={P[0].n}
+            hasMark rot={-9} />
+          <Token x={742} y={452} s={210} z={93} markKey={P[1].k} name={P[1].n}
+            hasMark rot={6} />
+          <Token x={918} y={606} s={190} z={92} markKey={P[3].k} name={P[3].n}
+            hasMark rot={12} />
+          {/* the Claude sprite: the scale reference, and the one who reacts */}
+          <Claude x={132} base={756} s={0.92} z={80} f={f} gaze={0.75}
+            shock={surge * 0.7} />
+          <Stack x={392} base={756} n={4} s={0.78} z={74} label="800,000"
             sub="ONE FREE TIER" seed={2} />
           <Flash lf={lf} at={12} />
         </div>
@@ -131,8 +138,11 @@ export const S0Hook: React.FC = () => {
         <div style={{ position: "absolute", left: 0, right: 0, top: 470, bottom: 0,
           background: `linear-gradient(184deg, ${p.floor} 0%, ${p.floor2} 100%)`,
           zIndex: 12 }} />
-        <Counter x={W / 2} y={286} v={cnt} s={1.02} z={96} />
+        <Counter x={W / 2} y={272} v={cnt} s={1.02} z={96} />
         <Fall x={W / 2} y={-30} len={280} f={f} n={7} s={0.8} z={40} spread={760} on={1} />
+        {/* he is watching the number, which is what tells you to watch it too */}
+        <Claude x={188} base={792} s={1.0} z={80} f={f} gaze={0.9} cheer={0.25} />
+        <Pile x={690} base={790} n={40} s={1.0} z={70} w={520} seed={8} />
         <Flash lf={lf} at={0} n={2} o={0.22} />
       </Scene>
     );
@@ -144,12 +154,12 @@ export const S0Hook: React.FC = () => {
     return (
       <Scene p={pb} slug="ONE REPO  ·  MIT" push={[56, 82, 1.055]} vig={0.44}>
         <Room p={pb} f={f} />
-        <Token x={330} y={318} s={330} z={60} markKey={P[0].k} name={P[0].n} hasMark
-          rot={-7} />
-        <Token x={678} y={386} s={214} z={58} markKey={P[1].k} name={P[1].n} hasMark
+        <Token x={690} y={286} s={332} z={58} markKey={P[1].k} name={P[1].n} hasMark
           rot={9} />
+        <Claude x={278} base={720} s={1.24} z={80} f={f} gaze={0.5} cheer={0.4}
+          hold={276} holdKey={P[0].k} holdName={P[0].n} holdMark />
         <Cam z={88} y={(1 - set) * 24} o={set}>
-          <MakerPlate x={W / 2 - 176} y={556} s={1.3} z={90} />
+          <MakerPlate x={560} y={584} s={1.16} z={90} />
         </Cam>
         <Flash lf={lf} at={0} n={2} o={0.2} />
       </Scene>
@@ -161,10 +171,15 @@ export const S0Hook: React.FC = () => {
   return (
     <Scene p={p} slug="AND IT KEEPS COUNTING" push={[82, 110, 1.05]} vig={0.4}>
       <Room p={p} f={f} />
-      <Fall x={W / 2 - 40} y={-30} len={HZ + 40} f={f} n={10} s={1.1} z={40}
-        spread={330} on={1} />
-      <Pile x={W / 2 - 40} base={HZ + 150} n={Math.round(grow * 86)} s={1.16} z={50}
-        w={620} seed={9} logos={[3, 9, 17, 26, 38, 51]} />
+      <Fall x={W / 2 + 90} y={-30} len={HZ + 190} f={f} n={11} s={1.1} z={40}
+        spread={420} on={1} />
+      <Pile x={W / 2 + 90} base={772} n={Math.round(grow * 120)} s={1.16} z={50}
+        w={660} seed={9} />
+      <Token x={512} y={606} s={186} z={92} markKey={P[4].k} name={P[4].n} hasMark
+        rot={-8} />
+      <Token x={800} y={560} s={186} z={93} markKey={P[5].k} name={P[5].n} hasMark
+        rot={7} />
+      <Claude x={150} base={768} s={0.94} z={80} f={f} gaze={0.8} cheer={0.7} />
       <Counter x={W / 2} y={176} v={M} s={0.62} z={96} label="" />
       <Flash lf={lf} at={0} n={2} o={0.24} />
     </Scene>
@@ -191,9 +206,13 @@ export const S1: React.FC = () => {
     return (
       <Scene p={p} slug="WHAT ONE FREE TIER GIVES" push={[0, 30, 1.05]} vig={0.44}>
         <Room p={p} f={f} />
-        <Stack x={W / 2} base={HZ + 168} n={4} s={1.5} z={60} label="800,000"
+        <Stack x={W / 2 + 96} base={HZ + 168} n={4} s={1.5} z={60} label="800,000"
           sub="ONE FREE TIER, ONE MONTH" seed={2} />
-        <Counter x={W / 2} y={186} v={800000} s={0.62} z={96} label="" />
+        {/* ⛔ THE SPRITE IS THE RULER. Two piles only rank against each other if
+            something in frame has a known size, and he is it — the same sprite
+            at the same scale stands beside both. */}
+        <Claude x={272} base={HZ + 170} s={1.0} z={80} f={f} gaze={0.6} stern={1} />
+        <Counter x={W / 2} y={182} v={800000} s={0.62} z={96} label="" />
       </Scene>
     );
   }
@@ -207,9 +226,15 @@ export const S1: React.FC = () => {
         transform: `translate(${sk.x}px, ${sk.y}px) scale(${pull})`,
         transformOrigin: "16% 64%" }}>
         <Room p={p} f={f} />
-        <Stack x={122} base={HZ + 168} n={4} s={0.72} z={60} label="800,000" seed={2} />
-        <Pile x={636} base={HZ + 168} n={Math.round(grow * 150)} s={1.0} z={50}
-          w={700} seed={4} logos={[6, 14, 27, 41, 63, 88]} />
+        <Stack x={140} base={HZ + 168} n={4} s={0.72} z={60} label="800,000" seed={2} />
+        <Claude x={250} base={HZ + 170} s={0.48} z={80} f={f} gaze={0.9}
+          shock={E(lf, 20, 28, 0, 1, OUT) * 0.8} />
+        <Pile x={660} base={HZ + 168} n={Math.round(grow * 150)} s={1.0} z={50}
+          w={700} seed={4} />
+        <Token x={520} y={HZ + 66} s={172} z={92} markKey={P[0].k} name={P[0].n}
+          hasMark rot={-10} />
+        <Token x={772} y={HZ + 28} s={172} z={93} markKey={P[3].k} name={P[3].n}
+          hasMark rot={8} />
         <Counter x={636} y={186} v={grow * M} s={0.66} z={96} />
         <Flash lf={lf} at={22} n={3} o={0.26} />
       </div>
@@ -254,8 +279,8 @@ export const S2: React.FC = () => {
             <div key={"tk" + k} style={{ position: "absolute", inset: 0, zIndex: 50 + k,
               opacity: Math.min(1, on * 1.6),
               transform: `translateY(${(1 - on) * -230}px) scale(${(0.72 + on * 0.28) * (1 + land * 0.06)}, ${(0.72 + on * 0.28) * (1 - land * 0.10)})`,
-              transformOrigin: `${t.x}px 476px` }}>
-              <Token x={t.x} y={350} s={252} z={50 + k} markKey={P[t.i].k}
+              transformOrigin: `${t.x}px 500px` }}>
+              <Token x={t.x} y={330} s={306} z={50 + k} markKey={P[t.i].k}
                 name={P[t.i].n} hasMark={P[t.i].mark} rot={-8 + k * 8} />
             </div>
           );
@@ -265,12 +290,13 @@ export const S2: React.FC = () => {
           const land = (lf - (t.at + 8)) / 7;
           if (land < 0 || land > 1) return null;
           return <div key={"rg" + k} style={{ position: "absolute",
-            left: t.x - 150 * land - 60, top: 462 - 22 * land,
+            left: t.x - 150 * land - 60, top: 496 - 22 * land,
             width: 300 * land + 120, height: 44 * land + 18, borderRadius: "50%",
             border: `4px solid ${TOKL}`, opacity: (1 - land) * 0.6, zIndex: 48,
             boxSizing: "border-box" }} />;
         })}
-        <Chip t="EVERY ONE OF THESE HAS A FREE TIER" y={600} z={98} c="#241F19" />
+        <Claude x={128} base={772} s={0.78} z={82} f={f} gaze={0.8} cheer={0.5} />
+        <Chip t="EVERY ONE HAS A FREE TIER" y={634} x={276} z={98} c="#241F19" />
         <Motes x={506} y={200} w={700} h={280} n={11} f={f} z={80} />
       </Scene>
     );
@@ -285,27 +311,29 @@ export const S2: React.FC = () => {
       {[0, 1, 2, 3, 4].map((i, k) => {
         const on = E(lf, k * 2, k * 2 + 7, 0, 1, BACK);
         if (on <= 0.02) return null;
-        return <Token key={"r1" + k} x={122 + k * 192} y={228 - (1 - on) * 70}
-          s={152 * (0.78 + on * 0.22)} z={50 + k} markKey={P[i].k} name={P[i].n}
+        return <Token key={"r1" + k} x={152 + k * 186} y={218 - (1 - on) * 70}
+          s={184 * (0.78 + on * 0.22)} z={50 + k} markKey={P[i].k} name={P[i].n}
           hasMark={P[i].mark} rot={(k % 2 ? 6 : -6) + (1 - on) * 30} />;
       })}
       {[5, 6, 7, 8].map((i, k) => {
         const on = E(lf, 10 + k * 2, 17 + k * 2, 0, 1, BACK);
         if (on <= 0.02) return null;
-        return <Token key={"r2" + k} x={168 + k * 192} y={396 - (1 - on) * 70}
-          s={152 * (0.78 + on * 0.22)} z={56 + k} markKey={P[i].k} name={P[i].n}
+        return <Token key={"r2" + k} x={245 + k * 186} y={398 - (1 - on) * 70}
+          s={184 * (0.78 + on * 0.22)} z={56 + k} markKey={P[i].k} name={P[i].n}
           hasMark={P[i].mark} rot={(k % 2 ? -5 : 7) + (1 - on) * -30} />;
       })}
       <Cam z={90} o={rise} y={(1 - rise) * 18}>
-        <Plate x={830} y={356} t="+19 MORE" sub="29 TOTAL" w={176} s={1.1} z={92} />
+        <Plate x={806} y={512} t="+19 MORE" sub="29 TOTAL" w={186} s={1.12} z={92} />
       </Cam>
       {/* the Claude token: the CLIENT that spends them, which is what
           `/v1/messages` support actually means */}
-      <Token x={W / 2} y={572} s={150} z={70} claude />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 656, textAlign: "center",
-        zIndex: 96, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 30,
-        letterSpacing: "0.04em", color: "#3A3226" }}>CLAUDE CODE SPENDS THEM</div>
-      <Edge side="l" c={dkh(p.back2, 0.34)} kind="post" z={94} />
+      <Claude x={196} base={764} s={0.90} z={82} f={f} gaze={0.5} cheer={0.55}
+        hold={186} holdClaude />
+      {/* ⛔ NO EDGE OCCLUDER ON THIS SHOT — it was cropping the first logo, and a
+          scene whose whole job is "the logos are big" cannot afford to eat one. */}
+      <div style={{ position: "absolute", left: 384, right: 20, top: 690, textAlign: "left",
+        zIndex: 96, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 32,
+        letterSpacing: "0.03em", color: "#3A3226" }}>CLAUDE CODE SPENDS THEM</div>
     </Scene>
   );
 };
@@ -335,8 +363,9 @@ export const S3: React.FC = () => {
     return (
       <Scene p={p} slug="PAY PER PROVIDER" push={[0, 40, 1.05]} vig={0.58}>
         <Room p={p} f={f} panel={false} />
-        <Machine x={506} base={678} s={1.06} z={40} f={f} price={PRICE[Math.min(3, n)]}
+        <Machine x={638} base={678} s={1.06} z={40} f={f} price={PRICE[Math.min(3, n)]}
           markKey={P[0].k} name={P[0].n} hasMark out={n > 0 ? 1 : 0} />
+        <Claude x={214} base={676} s={0.98} z={80} f={f} gaze={0.8} stern={1} />
         <Rain f={f} n={40} z={90} />
         <Edge side="l" c="#232A30" kind="post" z={92} />
         <Flash lf={f} at={RAISE[0]} n={2} o={0.14} />
@@ -356,8 +385,9 @@ export const S3: React.FC = () => {
         </div>
         <Chip t="PER MONTH" y={406} z={98} c="#2A343B" />
         {/* one token, for all that money */}
-        <Token x={506} y={558} s={172} z={60} markKey={P[0].k} name={P[0].n} hasMark />
-        <div style={{ position: "absolute", left: 0, right: 0, top: 656, textAlign: "center",
+        <Token x={636} y={566} s={206} z={60} markKey={P[0].k} name={P[0].n} hasMark />
+        <Claude x={252} base={716} s={0.86} z={80} f={f} gaze={0.7} stern={1} />
+        <div style={{ position: "absolute", left: 420, right: 0, top: 690, textAlign: "left",
           zIndex: 96, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 29,
           letterSpacing: "0.06em", color: "#C3CBD1" }}>ONE PROVIDER</div>
         <Rain f={f} n={38} z={90} />
@@ -417,8 +447,9 @@ export const S4: React.FC = () => {
               z={60 + k} spread={70} on={on} />
           </React.Fragment>
         ))}
-        <Pile x={506} base={HZ + 110} n={Math.round(on * 40)} s={1.0} z={50} w={640}
-          seed={6} logos={[2, 11, 19, 30]} />
+        <Pile x={560} base={HZ + 110} n={Math.round(on * 40)} s={1.0} z={50} w={600}
+          seed={6} />
+        <Claude x={112} base={HZ + 112} s={0.8} z={82} f={f} gaze={0.8} cheer={on * 0.8} />
         <Flash lf={lf} at={0} n={2} o={0.2} />
       </Scene>
     );
@@ -472,8 +503,9 @@ export const S4: React.FC = () => {
       ))}
       <div style={{ position: "absolute", left: W / 2 - 178, top: 446, width: 356,
         height: 46, borderRadius: 9, background: BRASS, zIndex: 78, boxShadow: SH_D }} />
-      <Token x={W / 2} y={548} s={162} z={80} claude />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 640, textAlign: "center",
+      <Claude x={W / 2 - 40} base={766} s={1.06} z={82} f={f} gaze={0.4} cheer={on * 0.9}
+        hold={206} holdClaude />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 700, textAlign: "center",
         zIndex: 96, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 31,
         letterSpacing: "0.04em", color: "#3A3226" }}>ONE KEY, ONE ENDPOINT</div>
     </Scene>
@@ -515,8 +547,12 @@ export const S5: React.FC = () => {
         <Fall x={738} y={320} len={270} f={f} n={6} s={0.9} z={61} spread={70} on={next} />
         <Flag429 x={266} y={340} s={1.0} z={96} t={flag} />
         {/* the pile never stops growing, which is the actual claim */}
-        <Pile x={506} base={p.horizon + 176} n={30 + Math.round(f * 0.5)} s={0.92} z={50}
-          w={560} seed={7} logos={[4, 12, 22]} />
+        <Pile x={560} base={p.horizon + 176} n={30 + Math.round(f * 0.5)} s={0.92} z={50}
+          w={520} seed={7} />
+        {/* ⛔ HE NEVER TOUCHES IT. "you never see it" is the claim, so the sprite
+            just watches and the mechanism does the work by itself. */}
+        <Claude x={102} base={p.horizon + 178} s={0.76} z={82} f={f} gaze={0.9}
+          shock={E(f, 24, 32, 0, 1, OUT) * 0.6} />
         <Flash lf={f} at={24} n={3} o={0.24} />
       </Scene>
     );
@@ -568,8 +604,9 @@ export const S6Cta: React.FC = () => {
         <Room p={p} f={f} />
         <Fall x={W / 2 + 30} y={-30} len={HZ + 30} f={f} n={9} s={1.0} z={40}
           spread={420} on={1} />
-        <Pile x={W / 2 + 30} base={HZ + 168} n={Math.round(grow * 96)} s={1.1} z={50}
-          w={660} seed={11} logos={[2, 9, 18, 29, 44]} />
+        <Pile x={W / 2 + 120} base={HZ + 168} n={Math.round(grow * 96)} s={1.1} z={50}
+          w={600} seed={11} />
+        <Claude x={128} base={HZ + 170} s={0.86} z={82} f={f} gaze={0.4} cheer={0.85} />
         {/* the keyword, struck on a token */}
         <div style={{ position: "absolute", inset: 0, zIndex: 92, opacity: pop,
           transform: `scale(${0.72 + pop * 0.28}) rotate(${-6 + (1 - pop) * 10}deg)`,
