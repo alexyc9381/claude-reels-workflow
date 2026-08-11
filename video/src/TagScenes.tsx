@@ -79,7 +79,12 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
   const LEAD_V = 4;
   const pf = f - (paidAt - LEAD_V), ff = f - (freeAt - LEAD_V);
 
-  const BASE = 640, LX = 300, RX = 712;
+  /* ⛔⛔ THE FLOOR OF THE COMPOSITION IS SET BY THE STRONGEST PUSH, NOT BY THE
+     PANEL. Once each world got its own camera, the same rail at y706 landed
+     between 784 and 817 depending on the origin — clipped in all six, worst in
+     the coin-op (scale 1.17 about 50%). Everything moved UP so the deepest push
+     still clears 792: stands to 608, rail to 668, the figures to 718/726. */
+  const BASE = 608, LX = 300, RX = 712;
   const pull = ff < 0 ? 0 : E(ff, 0, 13, 0, 1, IO);
   const punch = pf < 0 ? 1 : 1 + Math.sin(Math.min(1, pf / 9) * Math.PI) * 0.22;
   const strike = ff < 0 ? 0 : E(ff, 2, 11, 0, 1, OUT);
@@ -118,7 +123,7 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
   const spot = LX + (RX - LX) * Math.max(pull, attention);
 
   return (
-    <Stage i={i} push={push ?? [0, 70, 1.135]} dust vig={T.vig}>
+    <Stage i={i} push={push ?? T.cam} origin={T.origin} dust vig={T.vig}>
       <T.Dress p={R} f={f} />
       <Post side="l" c={dark(R.wall, 0.42)} w={54} />
       <Post side="r" c={dark(R.wall, 0.48)} w={48} />
@@ -129,7 +134,7 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
       {/* the free side's own floor shadow jitters with the rumble, so the shake
           reads as the ROOM reacting rather than as one prop wobbling */}
       <div style={{ position: "absolute", left: RX - 190 + Math.sin(f * 2.1) * 2.4 * shake,
-        top: 668, width: 380, height: 26, borderRadius: "50%", background: "#05070B",
+        top: 636, width: 380, height: 26, borderRadius: "50%", background: "#05070B",
         opacity: 0.30 + 0.10 * shake, zIndex: 21 }} />
 
       <div style={{ position: "absolute", inset: 0, zIndex: 60,
@@ -149,7 +154,8 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
             it, and after the pull they crossed the brand mark and the name. */}
         <Escape cx={RX} base={BASE} w={CARD_W + 34} h={CARD_H + 34}
           t={escT} c={T.cloth} burst={burst} f={f} z={58} />
-        <Drape cx={RX} base={BASE} pull={pull} cloth={T.cloth} f={f} shake={shake} z={78} />
+        <Drape cx={RX} base={BASE} pull={pull} cloth={T.cloth} f={f} shake={shake}
+          fabric={T.fabric} reveal={T.reveal} z={78} />
       </div>
 
       {/* ⭐ THE PULLER. Odyssey cut only: one hoplite in the near-right
@@ -161,7 +167,7 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
           the card exists to show. */}
       {T.crew && (
         <div style={{ position: "absolute", inset: 0, zIndex: 84 }}>
-          <Hoplite x={845} y={786 + dip} s={0.78} f={f} z={84}
+          <Hoplite x={845} y={726 + dip} s={0.78} f={f} z={84}
             cheer={ff < 0 ? 0 : Math.min(1, Math.max(0, ff / 12))}
             reach={ff < 0 ? 42 : 42 - E(ff, 0, 14, 0, 32, OUT)}
             lean={ff < 0 ? 0 : E(ff, 0, 12, 0, 1, OUT)} />
@@ -172,11 +178,11 @@ export const Beat: React.FC<{ i: number; paidAt: number; freeAt: number;
           figure and a second Claude would just be crowding. */}
       <div style={{ position: "absolute", inset: 0, zIndex: 84,
         display: T.crew ? "none" : undefined }}>
-        <div style={{ position: "absolute", left: 82, top: 762, width: 104, height: 18,
+        <div style={{ position: "absolute", left: 82, top: 710, width: 104, height: 18,
           borderRadius: "50%", background: "#05070B", opacity: 0.44 }} />
-        <Claudie x={132} y={770 - (ff < 0 ? 0 : Math.max(0, Math.sin(Math.min(1, ff / 14) * Math.PI) * 22))}
+        <Claudie x={132} y={718 - (ff < 0 ? 0 : Math.max(0, Math.sin(Math.min(1, ff / 14) * Math.PI) * 22))}
           s={0.66} f={f} z={85} face={1}
-          costume={{ gaze: 1.4, cheer: pull > 0.55 ? 1 : 0, shock: 0 }} />
+          costume={{ ...T.who, cheer: pull > 0.55 ? 1 : 0 }} />
       </div>
 
       <Rail idx={i} pf={pf} ff={ff} />

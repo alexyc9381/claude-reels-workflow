@@ -495,78 +495,177 @@ export const Escape: React.FC<{ cx: number; base: number; w: number; h: number;
   </>);
 };
 
+export type Fabric = "velvet" | "sheet" | "tarp" | "sail" | "hessian" | "blanket";
+export type Reveal = "lift" | "sweep" | "snap" | "haul" | "dome" | "drop";
+
+/* ⛔⛔ SIX CUTS THAT DIFFER ONLY IN PALETTE ARE ONE CUT SHOT SIX TIMES. Round 12:
+   *"you might need to edit each reel theme to be more different and more
+   interestingly different from each other."*  Up to here every world shared the
+   same cloth, the same reveal and the same camera, and only the room and the
+   barrier changed — so the MOMENT the reel is built around was identical in all
+   six. What differs now:
+
+     the FABRIC    velvet · dust sheet · tarpaulin · sail · hessian · blanket
+     the REVEAL    lifted · swept aside · snapped up · hauled · domed · dropped
+     the CAMERA    a different push and a different origin per world
+     the FIGURE    a costume per world
+   plus the room, the barrier, the fixture, the palette and the bed, as before. */
 export const Drape: React.FC<{ cx: number; base: number; pull: number; cloth: string;
-  f: number; shake?: number; z?: number }> = ({ cx, base, pull, cloth, f, shake = 0, z = 78 }) => {
+  f: number; shake?: number; fabric?: Fabric; reveal?: Reveal; z?: number }> =
+  ({ cx, base, pull, cloth, f, shake = 0, fabric = "velvet", reveal = "lift", z = 78 }) => {
   if (pull >= 1) return null;
   const w = CARD_W + 34, h = CARD_H + 34;
   const top = base - CARD_H - 22;
-  /* the cloth flies UP and off, so the card is revealed from the BOTTOM — which
-     puts the word FREE on screen first. It leans as it goes, the way a real
-     unveiling drape does when one corner is pulled harder than the other. */
-  const dy = pull * (h + top + 210);
-  const rot = pull * -7;
-  /* ⭐ THE CLOTH TREMBLES, AND HARDER THE CLOSER THE PULL GETS. Round 8:
-     *"the right side FREE section should be shaking too a little and stuff,
-     shaking some and like rumbling."*  It is the anticipation beat the reveal
-     did not have — something is under there and it wants out, so the cut earns
-     the reveal instead of just arriving at it.
-     ⛔ TWO FREQUENCIES, NOT ONE. A single sine reads as a float; a fast jitter
-     over a slow sway reads as strain. And the cloth BULGES on the same curve,
-     because fabric with something behind it pushes out, it does not only slide. */
+
+  /* ⭐ THE REVEAL IS THE MOMENT THE WHOLE REEL IS BUILT AROUND, so it is the
+     first thing that should differ between cuts, not the last. */
+  const away = h + top + 210;
+  let tf = "";
+  let origin = "80% 100%";
+  if (reveal === "sweep") {                       // drawn aside, like a sheet off furniture
+    tf = `translate(${pull * (w + 300)}px, ${-pull * 40}px) rotate(${pull * 17}deg)`;
+    origin = "100% 0%";
+  } else if (reveal === "snap") {                 // a shutter: fast off the mark, slight squash
+    const p2 = Math.pow(pull, 0.58);
+    tf = `translateY(${-p2 * away}px) scaleY(${1 - p2 * 0.10})`;
+    origin = "50% 0%";
+  } else if (reveal === "haul") {                 // pulled by somebody, so it goes toward him
+    tf = `translate(${pull * 74}px, ${-pull * away}px) rotate(${pull * -13}deg)`;
+    origin = "88% 100%";
+  } else if (reveal === "dome") {                 // rises WITH the cloche, spreading as it goes
+    tf = `translateY(${-pull * away * 0.86}px) scale(${1 + pull * 0.13})`;
+    origin = "50% 100%";
+  } else if (reveal === "drop") {                 // gravity: it falls, revealing top-down
+    tf = `translate(${pull * -30}px, ${pull * (h + 240)}px) rotate(${pull * 11}deg)`;
+    origin = "20% 0%";
+  } else {                                        // lift: straight up and off
+    tf = `translateY(${-pull * away}px) rotate(${pull * -7}deg)`;
+  }
+
+  /* the tremble, on top of whichever exit this world uses */
   const jx = (Math.sin(f * 2.1) * 3.6 + Math.sin(f * 4.7 + 1.2) * 1.9) * shake;
   const jy = (Math.sin(f * 2.9 + 0.7) * 2.7 + Math.sin(f * 6.1) * 1.1) * shake;
   const jr = Math.sin(f * 2.4 + 0.3) * 0.9 * shake;
   const bulge = 1 + Math.abs(Math.sin(f * 1.7)) * 0.022 * shake;
+
+  const pale = fabric === "sheet";
+  const body = pale
+    ? `linear-gradient(174deg, ${mix(cloth, 0.62)} 0%, ${mix(cloth, 0.44)} 52%, ${mix(cloth, 0.20)} 100%)`
+    : `linear-gradient(174deg, ${mix(cloth, 0.16)} 0%, ${cloth} 46%, ${dark(cloth, 0.72)} 100%)`;
+  const ink = pale ? dark(cloth, 0.45) : "#FFFBF0";
+
   return (
-    <div style={{ position: "absolute", left: cx - w / 2, top,
-      width: w, height: h, zIndex: z,
-      transform: `translate(${jx}px, ${-dy + jy}px) rotate(${rot + jr}deg) scale(${bulge}, 1)`,
-      transformOrigin: "80% 100%" }}>
-      <div style={{ position: "absolute", inset: 0, borderRadius: "16px 16px 4px 4px",
-        background: `linear-gradient(174deg, ${mix(cloth, 0.16)} 0%, ${cloth} 46%, ${dark(cloth, 0.72)} 100%)`,
-        boxShadow: SH_D, overflow: "hidden" }}>
-        {/* ⛔ FOLDS ARE GRADIENTS, NOT STRIPES. Nine hard bars read as a roller
-            shutter; six soft ones read as hanging cloth. */}
-        {Array.from({ length: 6 }, (_, i) => (
-          <div key={"fd" + i} style={{ position: "absolute", left: i * w / 6, top: 0, bottom: 0,
-            width: w / 6,
-            background: `linear-gradient(90deg, ${dark(cloth, 0.78)} 0%, ${mix(cloth, 0.14)} 46%, ${dark(cloth, 0.86)} 100%)`,
-            opacity: 0.55 }} />
+    <div style={{ position: "absolute", left: cx - w / 2, top, width: w, height: h, zIndex: z,
+      transform: `translate(${jx}px, ${jy}px) rotate(${jr}deg) scale(${bulge}, 1) ${tf}`,
+      transformOrigin: origin }}>
+      <div style={{ position: "absolute", inset: 0,
+        borderRadius: fabric === "tarp" ? 6 : fabric === "blanket" ? 8 : "16px 16px 4px 4px",
+        background: body, boxShadow: SH_D, overflow: "hidden" }}>
+
+        {/* ---- what the cloth is MADE of ---------------------------------- */}
+        {(fabric === "velvet" || fabric === "sheet") &&
+          Array.from({ length: fabric === "velvet" ? 6 : 4 }, (_, i) => {
+            const N = fabric === "velvet" ? 6 : 4;
+            return (
+            <div key={"fd" + i} style={{ position: "absolute", left: i * w / N, top: 0,
+              bottom: 0, width: w / N,
+              background: `linear-gradient(90deg, ${dark(cloth, 0.78)} 0%, ${mix(cloth, pale ? 0.66 : 0.14)} 46%, ${dark(cloth, 0.86)} 100%)`,
+              opacity: pale ? 0.30 : 0.55 }} />);
+          })}
+        {fabric === "sail" && Array.from({ length: 4 }, (_, i) => (
+          <div key={"sm" + i} style={{ position: "absolute", left: -w, right: -w,
+            top: 40 + i * (h - 60) / 4, height: 7, background: dark(cloth, 0.66),
+            transform: "rotate(-7deg)", opacity: 0.85 }} />
         ))}
-        {/* the gathered head where the cloth hangs from its rod */}
-        <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 30,
-          background: dark(cloth, 0.58) }} />
-        {Array.from({ length: 12 }, (_, i) => (
-          <div key={"gt" + i} style={{ position: "absolute", left: 4 + i * (w - 8) / 12, top: 4,
-            width: (w - 8) / 20, height: 22, borderRadius: 6, background: dark(cloth, 0.44) }} />
+        {fabric === "hessian" && (<>
+          {Array.from({ length: 22 }, (_, i) => (
+            <div key={"wv" + i} style={{ position: "absolute", left: i * w / 22, top: 0, bottom: 0,
+              width: w / 44, background: dark(cloth, 0.80), opacity: 0.55 }} />
+          ))}
+          {Array.from({ length: 26 }, (_, i) => (
+            <div key={"wh" + i} style={{ position: "absolute", left: 0, right: 0, top: i * h / 26,
+              height: h / 52, background: mix(cloth, 0.20), opacity: 0.45 }} />
+          ))}
+        </>)}
+        {fabric === "blanket" && Array.from({ length: 7 }, (_, i) => (
+          <div key={"bd" + i} style={{ position: "absolute", left: 0, right: 0, top: i * h / 7,
+            height: h / 14, background: i % 2 ? mix(cloth, 0.24) : dark(cloth, 0.74),
+            opacity: 0.75 }} />
         ))}
-        {/* ⛔ THE WORD HAS TO SURVIVE THE FOLDS. Cream letters straight onto
-            gradient-folded cloth sat at the same value as the fold highlights
-            and read as texture. It is printed on a PANEL — which is also how a
-            real event drape carries a word — so the letters have one flat
-            ground instead of six alternating ones. */}
-        {/* ⛔ 132px OVERFLOWED BOTH THE PANEL AND THE CLOTH. "FREE" in Fraunces
-            900 runs about 2.5x its font size, so 132 is ~330px inside a 374px
-            drape whose printed panel is only 322 — the letters hung off the
-            right edge of the curtain. 106 measures ~265 and sits inside both. */}
+        {fabric === "tarp" && (<>
+          <div style={{ position: "absolute", left: 0, right: 0, top: h * 0.5 - 4, height: 8,
+            background: dark(cloth, 0.70), opacity: 0.8 }} />
+          <div style={{ position: "absolute", left: w * 0.5 - 4, top: 0, bottom: 0, width: 8,
+            background: dark(cloth, 0.70), opacity: 0.8 }} />
+        </>)}
+
+        {/* ---- how it is hung --------------------------------------------- */}
+        {fabric === "velvet" && (<>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 30,
+            background: dark(cloth, 0.58) }} />
+          {Array.from({ length: 12 }, (_, i) => (
+            <div key={"gt" + i} style={{ position: "absolute", left: 4 + i * (w - 8) / 12, top: 4,
+              width: (w - 8) / 20, height: 22, borderRadius: 6, background: dark(cloth, 0.44) }} />
+          ))}
+        </>)}
+        {(fabric === "tarp" || fabric === "sail") && [0.10, 0.34, 0.66, 0.90].map((t, i) => (
+          <div key={"ey" + i} style={{ position: "absolute", left: t * w - 11, top: 9, width: 22,
+            height: 22, borderRadius: 11, border: `5px solid ${mix(cloth, 0.42)}` }} />
+        ))}
+        {fabric === "hessian" && Array.from({ length: 16 }, (_, i) => (
+          <div key={"sx" + i} style={{ position: "absolute", left: 8 + i * (w - 16) / 16, top: 10,
+            width: (w - 16) / 32, height: 13, background: mix(cloth, 0.46),
+            transform: `rotate(${i % 2 ? 26 : -26}deg)` }} />
+        ))}
+        {fabric === "blanket" && (
+          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 20,
+            background: mix(cloth, 0.34) }} />
+        )}
+
+        {/* ---- the word, on a printed panel so the weave cannot eat it ----- */}
         <div style={{ position: "absolute", left: "5%", right: "5%", top: "27%", height: "34%",
-          borderRadius: 10, background: dark(cloth, 0.58) }} />
+          borderRadius: 10, background: pale ? mix(cloth, 0.16) : dark(cloth, 0.58) }} />
         <div style={{ position: "absolute", left: "5%", right: "5%", top: "27%", height: "34%",
-          borderRadius: 10, border: `4px solid ${mix(cloth, 0.36)}` }} />
+          borderRadius: 10, border: `4px solid ${mix(cloth, pale ? 0.06 : 0.36)}` }} />
         <div style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0,
           display: "flex", alignItems: "center", justifyContent: "center",
           fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 98,
-          letterSpacing: "0.01em", color: "#FFFBF0", whiteSpace: "nowrap",
-          textShadow: "0 6px 0 rgba(0,0,0,0.34)" }}>FREE</div>
+          letterSpacing: "0.01em", color: ink, whiteSpace: "nowrap",
+          textShadow: pale ? "none" : "0 6px 0 rgba(0,0,0,0.34)" }}>FREE</div>
       </div>
-      {/* the scalloped hem, waving a little while it hangs */}
-      {Array.from({ length: 8 }, (_, i) => (
+
+      {/* ---- the hem, different in every world --------------------------- */}
+      {fabric === "velvet" && Array.from({ length: 8 }, (_, i) => (
         <div key={"hm" + i} style={{ position: "absolute", left: i * w / 8,
           top: h - 12 + Math.sin(f / 17 + i * 0.9) * 3, width: w / 8, height: 30,
           borderRadius: "0 0 50% 50%", background: dark(cloth, 0.74) }} />
       ))}
-      {/* ⭐ grit shaken loose off the head of the cloth as the rumble peaks —
-          the cheapest possible proof that the shaking has FORCE behind it */}
+      {fabric === "sheet" && Array.from({ length: 5 }, (_, i) => (
+        <div key={"hs" + i} style={{ position: "absolute", left: i * w / 5 - 6,
+          top: h - 16 + Math.sin(f / 13 + i) * 5, width: w / 5 + 12, height: 40,
+          borderRadius: "0 0 40% 60%", background: mix(cloth, 0.30) }} />
+      ))}
+      {fabric === "sail" && (<>
+        <div style={{ position: "absolute", left: -6, top: h - 12, width: w + 12, height: 15,
+          borderRadius: 8,
+          background: "repeating-linear-gradient(74deg,#C8A465 0 9px,#9E7C3E 9px 18px)" }} />
+        <div style={{ position: "absolute", left: w - 44, top: h - 4, width: 34, height: 34,
+          borderRadius: 18, border: "8px solid #C9A45C" }} />
+      </>)}
+      {fabric === "hessian" && (
+        <div style={{ position: "absolute", left: 0, top: h - 10, width: w, height: 22,
+          background: dark(cloth, 0.72),
+          clipPath: "polygon(0 0,7% 62%,15% 8%,24% 70%,33% 12%,43% 66%,52% 6%,62% 72%,71% 14%,80% 64%,89% 8%,97% 68%,100% 10%,100% 0)" }} />
+      )}
+      {fabric === "blanket" && (
+        <div style={{ position: "absolute", left: 0, top: h - 8, width: w, height: 18,
+          background: mix(cloth, 0.34) }} />
+      )}
+      {fabric === "tarp" && [0.10, 0.34, 0.66, 0.90].map((t, i) => (
+        <div key={"be" + i} style={{ position: "absolute", left: t * w - 11, top: h - 30,
+          width: 22, height: 22, borderRadius: 11, border: `5px solid ${mix(cloth, 0.42)}` }} />
+      ))}
+
       {shake > 0.45 && Array.from({ length: 7 }, (_, i) => {
         const r = (k: number) => { const v = Math.sin(i * 51.7 + k * 9.1) * 4371.7; return v - Math.floor(v); };
         const t = ((f * (0.9 + r(2) * 0.8) + r(1) * 40) % 34) / 34;
@@ -574,9 +673,6 @@ export const Drape: React.FC<{ cx: number; base: number; pull: number; cloth: st
           top: -6 + t * 26, width: 3, height: 3, borderRadius: 3, background: "#E8DFC8",
           opacity: (1 - t) * 0.55 * shake }} />);
       })}
-      {/* the pull ring on the near corner */}
-      <div style={{ position: "absolute", left: w - 34, top: h - 4, width: 30, height: 30,
-        borderRadius: 16, border: "7px solid #C9A45C" }} />
     </div>
   );
 };
@@ -694,7 +790,7 @@ export const Rail: React.FC<{ idx: number; pf: number; ff: number; z?: number; d
      a pip strip beside two ranked stands was a third thing competing for rank.
      What survives is the one number the reel is actually about. */
   return (
-    <div style={{ position: "absolute", left: 0, right: 0, top: 706, height: 54, zIndex: z,
+    <div style={{ position: "absolute", left: 0, right: 0, top: 668, height: 54, zIndex: z,
       display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
       <span style={{ fontFamily: MONO, fontWeight: 800, fontSize: 20, letterSpacing: "0.20em",
         color: "#9AA29A" }}>{dead ? "YOU NOW PAY" : "YOU PAY"}</span>
@@ -718,7 +814,8 @@ export const Rail: React.FC<{ idx: number; pf: number; ff: number; z?: number; d
       stacking context and reel 93 lost a whole tower to it.
    ------------------------------------------------------------------------ */
 export const Stage: React.FC<{ i: number; children: React.ReactNode; push?: [number, number, number];
-  dust?: boolean; vig?: number }> = ({ i, children, push = [0, 999, 1.10], dust, vig }) => {
+  dust?: boolean; vig?: number; origin?: string }> =
+  ({ i, children, push = [0, 999, 1.10], dust, vig, origin = "50% 56%" }) => {
   const f = useCurrentFrame();
   const cam = React.useContext(CamCtx);
   const p = useRoom(i);
@@ -726,7 +823,10 @@ export const Stage: React.FC<{ i: number; children: React.ReactNode; push?: [num
   return (
     <AbsoluteFill>
       <Panel glow={hexA(p.key, 0.18)}>
-        <div style={{ position: "absolute", inset: 0, zIndex: 1, transformOrigin: "50% 56%",
+        {/* ⛔ THE ORIGIN IS PER WORLD. A push about the same point at the same
+            rate is the same camera, and six identical cameras is what made six
+            worlds read as one. */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 1, transformOrigin: origin,
           transform: `translate(${cam.dx}px, ${cam.dy}px) rotate(${cam.rot}deg) scale(${sc * cam.s})` }}>
           <Room i={i} f={f} dust={dust} vig={vig}>{children}</Room>
         </div>
@@ -803,6 +903,14 @@ export type Theme = {
   cloth: string;
   /** the drape is PULLED OFF by a figure rather than simply rising */
   crew?: boolean;
+  /** ⭐ what the cloth is made of, how it leaves, how the camera moves, and who
+      is standing in the room — the four things that were identical across all
+      six cuts until round 12 and made them one shot in six palettes. */
+  fabric: Fabric;
+  reveal: Reveal;
+  cam: [number, number, number];
+  origin: string;
+  who: Record<string, number>;
   Dress: React.FC<{ p: RoomP; f: number }>;
   Barrier: Barrier;
   Fixture: Fixture;
@@ -1476,20 +1584,32 @@ const MARBLE: RoomP[] = ROOMS.map((r, i) => {
 export const THEMES: Theme[] = [
   { id: "gallery", label: "THE GALLERY · behind glass, behind a rope",
     rooms: ROOMS, accent: "#C8A465", vig: 0.80, cloth: "#2E9C6E",
+    fabric: "velvet", reveal: "lift", cam: [0, 70, 1.135], origin: "50% 56%",
+    who: { suit: 1, gaze: 1.4 },
     Dress: Wing, Barrier: VitrineBarrier, Fixture: TrackFixture },
   { id: "reading", label: "THE READING ROOM · chained to the lectern",
     rooms: OAK, accent: "#C08A3E", vig: 0.84, cloth: "#AE3543",
+    fabric: "sheet", reveal: "sweep", cam: [0, 70, 1.10], origin: "42% 60%",
+    who: { glasses: 1, prof: 1, gaze: 1.2 },
     Dress: OakDress, Barrier: ChainBarrier, Fixture: ShadeFixture },
   { id: "coinop", label: "THE COIN-OP · feed the slot",
     rooms: STEEL, accent: "#A8B0B8", vig: 0.86, cloth: "#2A80AC",
+    fabric: "tarp", reveal: "snap", cam: [0, 70, 1.17], origin: "58% 50%",
+    who: { constr: 1, stern: 1 },
     Dress: SteelDress, Barrier: CoinBarrier, Fixture: BattenFixture },
   { id: "odyssey", label: "THE ODYSSEY · lashed to the column, the drape pulled off",
     rooms: MARBLE, accent: "#C8A465", vig: 0.82, cloth: "#8E44A0", crew: true,
+    fabric: "sail", reveal: "haul", cam: [0, 70, 1.12], origin: "50% 44%",
+    who: { beard: 1 },
     Dress: MarbleDress, Barrier: LashBarrier, Fixture: BrazierFixture },
   { id: "glasshouse", label: "THE GLASSHOUSE · under a locked cloche",
     rooms: FERN, accent: "#8E9E72", vig: 0.80, cloth: "#C4842E",
+    fabric: "hessian", reveal: "dome", cam: [0, 70, 1.15], origin: "62% 62%",
+    who: { beard: 1, gaze: 1.5 },
     Dress: GlassDress, Barrier: ClocheBarrier, Fixture: GrowFixture },
   { id: "cage", label: "THE CAGE · behind bars, padlocked",
     rooms: BRICK, accent: "#9A7A4E", vig: 0.84, cloth: "#1F7E86",
+    fabric: "blanket", reveal: "drop", cam: [0, 70, 1.09], origin: "38% 52%",
+    who: { fro: 1, shock: 0.6 },
     Dress: CageDress, Barrier: BarsBarrier, Fixture: CagedFixture },
 ];
