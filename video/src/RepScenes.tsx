@@ -102,7 +102,7 @@ export const S0Hook: React.FC = () => {
           <div style={{ position: "absolute", left: 0, right: 0, top: 596, bottom: 0,
             background: `linear-gradient(184deg, ${p.floor} 0%, ${p.floor2} 100%)`,
             zIndex: 12 }} />
-          <RepoCard x={W / 2} y={156} s={1.0} z={60} crack={burst} />
+          <RepoCard x={W / 2} y={156} s={1.0} z={60} crack={burst} f={f} />
           <Burst x={W / 2} y={330} t={burst} n={18} s={1.0} z={100} spread={620} />
           <Claude x={126} base={786} s={0.86} z={80} f={f} gaze={0.8}
             shock={burst * 0.9} />

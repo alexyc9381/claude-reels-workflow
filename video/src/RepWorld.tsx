@@ -279,10 +279,15 @@ export const ClientChip: React.FC<{ i: number; x: number; y: number; s?: number;
    truly still, which is the difference between a scene and a diagram.
    ⛔ SEED OFF POSITION, not off index — two props at the same index in
    different rows would otherwise wobble identically and read as a pattern. */
+/* ⛔ AND IT HAS TO BE VISIBLE. v1 of this ran at 1.15° / 1.7px, which is what
+   "subtle" gets you: technically never still, and indistinguishable from still
+   at feed size. *"every card even at 2 seconds ... needs to be moving and
+   animated and shifting around."* Tripled, and given a second slower harmonic
+   so the drift wanders instead of ticking metronomically. */
 export const idle = (f: number, seed: number, amp = 1) => ({
-  rot: Math.sin(f / 23 + seed * 1.7) * 1.15 * amp,
-  y: Math.sin(f / 17 + seed * 2.31) * 1.7 * amp,
-  x: Math.cos(f / 29 + seed * 1.13) * 1.1 * amp,
+  rot: (Math.sin(f / 23 + seed * 1.7) * 2.6 + Math.sin(f / 9.3 + seed * 3.1) * 0.9) * amp,
+  y: (Math.sin(f / 17 + seed * 2.31) * 4.6 + Math.sin(f / 7.7 + seed * 1.9) * 1.5) * amp,
+  x: (Math.cos(f / 29 + seed * 1.13) * 3.4 + Math.cos(f / 11.1 + seed * 2.7) * 1.2) * amp,
 });
 
 /** THE TOKEN. The whole reel is made of these.

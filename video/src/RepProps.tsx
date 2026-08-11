@@ -3,7 +3,7 @@ import { Img, staticFile } from "remotion";
 import { inter, fraunces } from "./fonts";
 import { MONO, Mascot } from "./SlopKit";
 import {
-  W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, mxh, dkh, SH, SH_D, rnd,
+  W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, mxh, dkh, SH, SH_D, rnd, idle,
   GOLD, RED, GREEN, PAPER, INK, CLAY, TOK, TOKD, TOKL, BRASS, BRASSD, BRASSL,
   WOOD, WOODD, WOODL, Contact, Token, PROVIDERS,
 } from "./RepWorld";
@@ -511,12 +511,14 @@ export const Ledger: React.FC<{ x: number; y: number; f: number; rows?: number;
        the claim printed under it on the same card. That single object is the
        whole sentence the VO is speaking, and it needs no decoding at all. */
 export const RepoCard: React.FC<{ x: number; y: number; s?: number; z?: number;
-  crack?: number; claim?: string; sub?: string }> =
-  ({ x, y, s = 1, z = 80, crack = 0, claim = "800,000,000", sub = "FREE AI TOKENS / MONTH" }) => {
+  crack?: number; claim?: string; sub?: string; f?: number; live?: number }> =
+  ({ x, y, s = 1, z = 80, crack = 0, claim = "800,000,000",
+     sub = "FREE AI TOKENS / MONTH", f = 0, live = 1 }) => {
   const CW = 720 * s, CH = 330 * s;
+  const w = idle(f, x * 0.021 + 5.3, live * 0.55);
   return (
-    <div style={{ position: "absolute", left: x - CW / 2, top: y, width: CW, zIndex: z,
-      transform: `scale(${1 + crack * 0.05}) rotate(${crack * -1.2}deg)`,
+    <div style={{ position: "absolute", left: x - CW / 2 + w.x, top: y + w.y, width: CW,
+      zIndex: z, transform: `scale(${1 + crack * 0.05}) rotate(${crack * -1.2 + w.rot}deg)`,
       transformOrigin: "50% 60%" }}>
       <div style={{ width: CW, minHeight: CH, borderRadius: 18 * s, background: "#FBF9F3",
         border: `${7 * s}px solid #2A2620`, boxSizing: "border-box", boxShadow: SH_D,

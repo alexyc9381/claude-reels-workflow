@@ -276,7 +276,7 @@ export const HookPaywall: React.FC = () => {
           <div style={{ position: "absolute", inset: 0, zIndex: 100,
             transform: `translateY(${-760 + drop * 760}px) rotate(${(1 - drop) * -14}deg)`,
             transformOrigin: "50% 50%" }}>
-            <RepoCard x={W / 2} y={318} s={0.74} z={100} />
+            <RepoCard x={W / 2} y={318} s={0.74} z={100} f={f} />
           </div>
           <Burst x={W / 2} y={500} t={smash} n={18} s={1.05} z={112} spread={680} />
           <Rollers y={676} t={smash} f={f} n={7} z={114} from={1} />
@@ -295,25 +295,59 @@ export const HookPaywall: React.FC = () => {
     );
   }
 
-  /* ---- B · CLOSE · a price card hits the counter and stops dead -------- */
+  /* ---- B · CLOSE · the card lands, and NOTHING in frame holds still ---- */
   if (shot === 1) {
+    /* ⛔⛔ v1 of this shot was one card that squashed on impact and then sat
+       there for a second — which is exactly *"even the card at 2 seconds needs
+       to be moving."* A landed card does not stop dead: it ROCKS, on a damped
+       oscillation that never quite settles. And it is not alone any more —
+       three more are still tumbling past it, the repo card drifts, and the
+       token spins down. Five moving things in a shot that used to have one. */
     const land = Math.max(0, 1 - Math.abs(lf - 5) / 5);
+    const rock = Math.sin(lf / 3.1) * Math.exp(-lf / 26) * 11 + Math.sin(lf / 13) * 1.9;
+    const settle = Math.sin(lf / 4.4) * Math.exp(-lf / 22) * 9;
     return (
       <Scene p={p} slug="NOTHING WAS BEHIND IT" push={[42, 78, 1.06]} vig={0.4}>
-        <Shop p={p} f={f} shelf={3} lamp={190} from={1} till={false} edge={false} />
+        <Shop p={p} f={f} shelf={3} lamp={190} from={1} till belt edge={false} />
+        {/* the three that are still falling */}
+        {[0, 1, 2].map((i) => {
+          const t = ((lf + i * 13) % 40) / 40;
+          const x = 172 + i * 318 + Math.sin(lf / 9 + i * 2) * 26;
+          return (
+            <div key={"fc" + i} style={{ position: "absolute", left: x - 74,
+              top: -220 + t * 1080, width: 148, height: 198, zIndex: 52 + i,
+              transform: `rotate(${t * (i % 2 ? 320 : -280) + i * 40}deg)`,
+              opacity: 0.9 }}>
+              <div style={{ width: "100%", height: "100%", borderRadius: 10,
+                background: "#EFE9DA", border: "5px solid #9A8F78", boxSizing: "border-box",
+                boxShadow: SH, display: "flex", alignItems: "center",
+                justifyContent: "center" }}>
+                <span style={{ fontFamily: MONO, fontWeight: 900, fontSize: 34,
+                  color: "#3A342A" }}>{["$20", "$60", "$140"][i]}</span>
+              </div>
+            </div>
+          );
+        })}
+        {/* the one that landed — still rocking */}
         <div style={{ position: "absolute", left: 268, top: 262, width: 300, height: 400,
           borderRadius: 16, background: "#EFE9DA", border: "8px solid #9A8F78",
           boxSizing: "border-box", boxShadow: SH_D, zIndex: 70,
-          transform: `rotate(-9deg) scale(${1 + land * 0.06}, ${1 - land * 0.09})`,
+          transform: `rotate(${-9 + rock}deg) scale(${1 + land * 0.06}, ${1 - land * 0.09})`,
           transformOrigin: "50% 100%" }} />
-        <Token x={418} y={392} s={186} z={74} markKey={P[3].k} name={P[3].n} hasMark
-          rot={-9} f={f} />
-        <div style={{ position: "absolute", left: 268, top: 520, width: 300, textAlign: "center",
-          zIndex: 76, fontFamily: MONO, fontWeight: 900, fontSize: 72, color: "#3A342A",
-          transform: "rotate(-9deg)" }}>$300</div>
-        <RepoCard x={760} y={236} s={0.62} z={90} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 74,
+          transform: `rotate(${rock * 0.9}deg)`, transformOrigin: "418px 662px" }}>
+          <Token x={418} y={392} s={186} z={74} markKey={P[3].k} name={P[3].n} hasMark
+            rot={-9 + settle} f={f} live={1.4} />
+        </div>
+        <div style={{ position: "absolute", left: 268, top: 520, width: 300,
+          textAlign: "center", zIndex: 76, fontFamily: MONO, fontWeight: 900,
+          fontSize: 72, color: "#3A342A",
+          transform: `rotate(${-9 + rock}deg)`, transformOrigin: "50% 220%" }}>$300</div>
+        <RepoCard x={772} y={222} s={0.6} z={90} f={f} live={2.2} />
         <Burst x={418} y={392} t={Math.min(1, E(lf, 2, 18, 0, 1, OUT))} n={9} s={0.8}
           z={104} spread={330} />
+        <Rollers y={700} t={Math.min(1, E(lf, 1, 22, 0, 1, OUT))} f={f} n={6} z={106}
+          from={9} />
         <Flash lf={lf} at={0} n={3} o={0.3} />
       </Scene>
     );
@@ -418,23 +452,44 @@ export const HookFuse: React.FC = () => {
     );
   }
 
-  /* ---- B · CLOSE · one stub, for comparison, against the column ------- */
+  /* ---- B · CLOSE · one stub against the column, and BOTH are alive ----- */
   if (shot === 1) {
+    /* ⛔⛔ MEASURED, NOT ASSUMED. Fixing hook A's 2-second shot and then
+       measuring the same window on this cut caught it doing 1.70 mean / 1.55
+       min — the stillest stretch in either reel, and the identical fault: two
+       fixed rectangles and a plate. The column now has tokens RISING inside it
+       on a loop, the stub rocks, tokens fall past, and the counter scatters. */
     const set = E(lf, 0, 10, 0, 1, OUT);
+    const rock = Math.sin(lf / 3.4) * Math.exp(-lf / 24) * 9 + Math.sin(lf / 12) * 1.6;
     return (
       <Scene p={p} slug="ONE FREE TIER  vs  ALL OF THEM" push={[42, 78, 1.06]} vig={0.4}>
-        <Shop p={p} f={f} shelf={3} lamp={200} from={2} till={false} edge={false} />
+        <Shop p={p} f={f} shelf={3} lamp={200} from={2} till belt edge={false} />
+        {/* the stub, still settling */}
         <div style={{ position: "absolute", left: 232, top: 560, width: 96, height: 96,
           borderRadius: 7, background: TOK, border: `5px solid ${TOKD}`,
-          boxSizing: "border-box", zIndex: 60, boxShadow: SH }} />
+          boxSizing: "border-box", zIndex: 60, boxShadow: SH,
+          transform: `rotate(${rock * 0.8}deg)`, transformOrigin: "50% 100%" }} />
         <Token x={280} y={488} s={124} z={64} markKey={P[6].k} name={P[6].n}
-          hasMark={P[6].mark} f={f} />
+          hasMark={P[6].mark} f={f} live={1.6} />
+        {/* the column, with tokens climbing inside it */}
         <div style={{ position: "absolute", left: 596, top: 172, width: 248, height: 484,
           borderRadius: 10, background: TOK, border: `7px solid ${TOKD}`,
-          boxSizing: "border-box", zIndex: 60, boxShadow: SH_D }} />
-        <div style={{ position: "absolute", left: 596, top: 172, width: 62, height: 484,
-          background: TOKL, opacity: 0.45, zIndex: 61 }} />
-        <Token x={720} y={142} s={128} z={64} markKey={P[1].k} name={P[1].n} hasMark f={f} />
+          boxSizing: "border-box", zIndex: 60, boxShadow: SH_D, overflow: "hidden" }}>
+          {Array.from({ length: 7 }, (_, i) => (
+            <div key={"cl" + i} style={{ position: "absolute", left: 18 + (i % 2) * 96,
+              top: 470 - (((lf * 6 + i * 74) % 540)), width: 92, height: 92,
+              borderRadius: "50%", background: TOKL, opacity: 0.5,
+              border: `4px solid ${mxh(TOKD, 0.2)}`, boxSizing: "border-box" }} />
+          ))}
+          <div style={{ position: "absolute", left: 0, top: 0, width: 62, height: "100%",
+            background: TOKL, opacity: 0.45 }} />
+        </div>
+        <Token x={720} y={142} s={128} z={64} markKey={P[1].k} name={P[1].n} hasMark
+          f={f} live={1.4} />
+        {/* and it is still being fed */}
+        <Fall x={720} y={-40} len={200} f={f} n={7} s={0.95} z={58} spread={210} on={1} />
+        <Rollers y={706} t={Math.min(1, E(lf, 1, 24, 0, 1, OUT))} f={f} n={6} z={104}
+          from={4} />
         <Cam z={96} o={set} y={(1 - set) * 18}>
           <Plate x={196} y={664} t="800,000" sub="ONE FREE TIER" w={216} s={1.06} z={96} />
         </Cam>
@@ -517,7 +572,7 @@ export const HookJackpot: React.FC = () => {
           <div style={{ position: "absolute", inset: 0, zIndex: 96,
             transform: `translate(${-46 + insert * 46}px, ${-176 + insert * 176}px) rotate(${(1 - insert) * -16}deg)`,
             opacity: 1 - flip * 0.85 }}>
-            <RepoCard x={W / 2} y={360} s={0.52} z={96} />
+            <RepoCard x={W / 2} y={360} s={0.52} z={96} f={f} />
           </div>
           {/* the tray, and what comes out of it */}
           <div style={{ position: "absolute", left: 306, top: 502, width: 434, height: 96,
@@ -614,7 +669,7 @@ export const HookFirehose: React.FC = () => {
           <div style={{ position: "absolute", inset: 0, zIndex: 100,
             transform: `translate(${430 - click * 128}px, -30px) rotate(${(1 - click) * 12}deg)`,
             opacity: 1 - blast * 0.8 }}>
-            <RepoCard x={330} y={452} s={0.48} z={100} />
+            <RepoCard x={330} y={452} s={0.48} z={100} f={f} />
           </div>
           {/* he is blown back, and the cup was never going to be enough */}
           <div style={{ position: "absolute", inset: 0, zIndex: 86,
