@@ -825,10 +825,12 @@ export const S6: React.FC = () => {
         {/* he pays, and pays, and the grille moves two inches each time */}
         <Keeper x={866} y={742} s={1.02} z={78} f={f} face={-1} hood={1} badge={1} lit={0.86} />
         <Wreck x={132} base={pk.horizon + 178} s={0.78} z={78} />
+        <Flap x={214} y={pk.horizon + 118} w={112} h={80} s={1} z={79} f={f} c="#6E6459" />
         <Edge side="l" c={dark(pk.back, 0.60)} kind="rail" z={90} />
-        <Ash f={f} n={20} z={68} />
-        <Snow f={f} n={26} z={72} c="#E6E3DB" />
-        <Snow f={f} n={11} z={93} near c="#F2F0EA" />
+        <Ash f={f} n={26} z={68} speed={1.3} />
+        <Snow f={f} n={36} z={72} c="#E6E3DB" speed={1.4} />
+        <Snow f={f} n={16} z={93} near c="#F2F0EA" speed={1.9} />
+        <Debris f={f} n={6} z={88} y0={pk.horizon + 40} y1={pk.horizon + 230} speed={1.5} />
       </Scene>
     );
   }
@@ -842,7 +844,13 @@ export const S6: React.FC = () => {
     <Scene p={ps} slug="OPEN SHELF  ·  TAKE ONE" push={[51, 103, 1.055]} vig={0.52}>
       <Room p={ps} f={f} />
       <Strip x={506} y={54} w={520} on={1} z={22} f={f} />
-      <Motes x={506} y={120} w={420} h={320} n={14} f={f} z={24} />
+      <Motes x={506} y={120} w={420} h={320} n={22} f={f} z={24} />
+      {/* a live status rail along the rack: eight lamps chasing left to right */}
+      {Array.from({ length: 8 }, (_, i) => (
+        <div key={"sl" + i} style={{ position: "absolute", left: 262 + i * 62, top: 300,
+          width: 26, height: 9, borderRadius: 4, zIndex: 70,
+          background: (Math.floor(f / 4) % 8) === i ? GREEN : "#3E4A44" }} />
+      ))}
       <MarkPlate x={112} y={196} t="NO ACCOUNT, NO KEY" s={0.76} z={44} c="#DCD4C4" />
       <Rack x={548} base={ps.horizon + 240} w={600} h={392} slots={3} shelves={2} z={26} />
       {/* ⛔ "TAKE ONE" IS A TRAVEL, NOT A LIFT. v1 raised the middle canister
