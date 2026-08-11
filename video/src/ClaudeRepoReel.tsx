@@ -78,116 +78,127 @@ export const SCENES: Scene[] = [
 ];
 
 /* ---- THE SFX BANK ---------------------------------------------------------
-   ⛔ COUNT GESTURES, NOT CUES. A `repeat()` run is ONE gesture. No scene runs
-      more than four.
-   ⛔ LAYER THE HERO HIT: attack + low-end body, or movement + texture. One thin
-      pop is the single thing that makes a reel feel cheap.
-   ⛔ RISERS CAPPED AT 2, spent on the reel's two real turns: the manifold
-      charging (12.90s) and the keyword (19.00s). NOT the open — a riser there
-      fights the four hard cuts, which are already the interrupt.
-   ⭐ THE TEXTURE LAYER IS WHERE THE MEANING LIVES. `water_fan` under the vault,
-      `am/coin-drop` + `ratchet` under the meter, `am/gear-mech` under the
-      selector: the sound says what the picture says, in a vocabulary nobody has
-      to learn.
+   ⛔⛔ THE OLD BANK WAS THE WATERWORKS BANK AND IT FUZZED. Alex: *"i hear like a
+      fuzzy sound effect ... i just hear fuzzy sounds right now."* Diagnosed
+      rather than guessed at — the sample census said `water_fan.wav` fired TEN
+      times, more than double anything else, across S0/S1/S2/S4/S5/S6, at rates
+      from 0.62 to 1.30. Measured, it is **0.477 spectral flatness** (1.0 is
+      white noise) with a 3.1 kHz centroid: a broadband hiss. Pitched down it is
+      a rumble, pitched up it is a hiss, and it was under most of the reel. It
+      made sense in a waterworks. In a counting house full of struck metal it is
+      just noise. It is gone, and so are the other two samples that measured
+      near it — `coin_slide` (0.521) and `chain_clank` (0.583).
+
+   ⭐ THE STANDING RULE THIS PRODUCES: measure a sample before you trust it.
+      Nothing above **0.45 flatness**, and nothing broadband pitched below
+      **0.85** — extreme downpitch is what turns a coin into a rumble. Every
+      sample below was measured: impact_deep 0.001, slate_whump 0.003,
+      pickup_chime 0.005, chimelo 0.007, sub 0.013, lamp_clunk 0.015,
+      bell_ring 0.022, temper_chime 0.028, lib_riser 0.034, metal_riser 0.034,
+      pneu_thunk 0.036, mech_clank 0.041, metal_ping 0.073. The coin sounds sit
+      higher (c_coin 0.307, gold_stamp 0.277) because a struck coin genuinely
+      has a broadband attack — those are short, and they run at TEXTURE/MID.
+
+   ⛔ THE BANK IS RE-TIMED TO THE NEW PICTURE. Both delivery hooks break at the
+      same frame (f11 = 0.37s) and cut at f42/f78, so one bank serves both cuts.
+   ⛔ COUNT GESTURES, NOT CUES — a `repeat()` run is ONE gesture, and no scene
+      runs more than four.
+   ⛔ LAYER THE HERO HIT: attack + low-end body. One thin pop is the single
+      thing that makes a reel sound cheap.
+   ⛔ RISERS CAPPED AT 2, spent on the reel's two real turns: the pool charging
+      (12.44s) and the keyword (18.72s).
    ------------------------------------------------------------------------ */
 const SFX: Cue[] = [
-  /* ---- S0 · THE OPEN. Four cuts, a transient on every one. -------------- */
-  { at: 0.00, src: "water_fan.wav", v: LEVELS.SFX_BED, dur: 3.9, rate: 0.62 },
-  { at: 0.00, src: "am/room-tone.wav", v: LEVELS.SFX_BED, dur: 3.6 },
-  /* the wheel breaking free — the reel's first physical event */
-  { at: 0.30, src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 0.88 },
-  ...layer(0.40, { src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 1.0 },
-                 { src: "sub.wav", dur: 1.2, rate: 0.74 }),
-  { at: 0.46, src: "wrench_clank.wav", v: LEVELS.SFX_TEXTURE, dur: 0.6, rate: 0.9 },
-  /* CUT 2 · the glass. The column climbing IS the sound. */
-  ...layer(0.73, { src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 1.14 },
-                 { src: "water_fan.wav", dur: 1.5, rate: 1.28 }),
-  { at: 1.30, src: "metal_ping.wav", v: LEVELS.SFX_MID, dur: 0.7, rate: 1.2 },
-  /* CUT 3 · the maker's plate */
-  ...layer(1.87, { src: "slate_whump.wav", v: LEVELS.SFX_HERO, dur: 0.8, rate: 0.98 },
-                 { src: "lamp_clunk.wav", dur: 0.5 }),
-  /* CUT 4 · the outlet, first water */
-  ...layer(2.73, { src: "lib_whoosh_fast.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 0.94 },
-                 { src: "water_fan.wav", dur: 1.4, rate: 1.05 }),
-  { at: 2.90, src: "graph_hum.wav", v: LEVELS.SFX_TEXTURE, dur: 0.8, rate: 1.1 },
+  /* ---- S0 · THE OPEN. The break at 0.37, then two hard cuts. ----------- */
+  { at: 0.00, src: "am/room-tone.wav", v: LEVELS.SFX_BED, dur: 3.4 },
+  /* THE BREAK — the repo hits the gate / the stubs slam together */
+  ...layer(0.37, { src: "impact_deep.wav", v: LEVELS.SFX_HERO, dur: 1.3, rate: 0.94 },
+                 { src: "sub.wav", dur: 1.1, rate: 0.88 }),
+  { at: 0.37, src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.5, rate: 0.96 },
+  /* the debris: tokens thrown across the counter */
+  ...repeat(5, 0.46, 0.085, { src: "c_coin.wav", v: LEVELS.SFX_MID, dur: 0.34 }, 0.07),
+  ...repeat(4, 0.78, 0.13, { src: "am/coin-drop.wav", v: LEVELS.SFX_TEXTURE, dur: 0.35 }, 0.06),
+  /* CUT 2 · the close */
+  ...layer(1.40, { src: "slate_whump.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.02 },
+                 { src: "metal_ping.wav", dur: 0.5, rate: 1.14 }),
+  /* CUT 3 · the wide, and what was behind it */
+  ...layer(2.60, { src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 1.1 },
+                 { src: "pickup_chime.wav", dur: 0.4 }),
+  ...repeat(4, 2.74, 0.10, { src: "c_coin.wav", v: LEVELS.SFX_TEXTURE, dur: 0.3 }, 0.08),
 
-  /* ---- S1 · THE SCALE. The cup is deliberately THIN and the column is not. */
-  { at: 3.67, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.06 },
-  { at: 3.86, src: "metal_ping.wav", v: LEVELS.SFX_TEXTURE, dur: 0.4, rate: 1.5 },
-  ...layer(4.67, { src: "lib_deep_whoosh.wav", v: LEVELS.SFX_MID, dur: 1.1, rate: 0.92 },
-                 { src: "water_fan.wav", dur: 1.4, rate: 1.18 }),
-  /* the top-out */
-  ...layer(5.37, { src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.8, rate: 1.06 },
-                 { src: "harden_chime.wav", dur: 0.9 }),
+  /* ---- S1 · THE SCALE. Thin for the stack, heavy for the mountain. ----- */
+  ...layer(3.67, { src: "lib_whoosh_fast.wav", v: LEVELS.SFX_MID, dur: 0.4, rate: 1.12 },
+                 { src: "c_coin.wav", dur: 0.3, rate: 1.3 }),
+  { at: 4.67, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 0.94 },
+  /* the mountain lands */
+  ...layer(5.40, { src: "impact_deep.wav", v: LEVELS.SFX_HERO, dur: 1.2, rate: 0.9 },
+                 { src: "sub.wav", dur: 1.0, rate: 0.86 }),
+  ...repeat(6, 5.46, 0.075, { src: "c_coin.wav", v: LEVELS.SFX_MID, dur: 0.3 }, 0.06),
 
-  /* ---- S2 · THE ROW. Four taps, PITCHED UP in sequence — the rising line
-     is what says "and there are more of these". --------------------------- */
-  { at: 5.93, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.1 },
-  ...repeat(4, 6.00, 0.166, { src: "pneu_thunk.wav", v: LEVELS.SFX_MID, dur: 0.4 }, 0.075),
-  /* the four spits, pitched UP across the run — `repeat` centres its drift on
-     1.0, so a one-directional climb has to be written out */
-  ...[0, 1, 2, 3].map((i) => ({ at: 6.04 + i * 0.166, src: "water_fan.wav",
-    v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.22 + i * 0.09 })),
-  ...layer(7.20, { src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 0.9 },
-                 { src: "am/lights-on.wav", dur: 0.7 }),
-  { at: 7.72, src: "c_collect.wav", v: LEVELS.SFX_MID, dur: 0.6 },
+  /* ---- S2 · THREE MARKS LAND, pitched UP so the run rises. ------------- */
+  { at: 5.93, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.06 },
+  ...layer(6.13, { src: "gold_stamp.wav", v: LEVELS.SFX_HERO, dur: 0.5, rate: 0.98 },
+                 { src: "metal_ping.wav", dur: 0.4, rate: 1.0 }),
+  ...layer(6.33, { src: "gold_stamp.wav", v: LEVELS.SFX_HERO, dur: 0.5, rate: 1.08 },
+                 { src: "metal_ping.wav", dur: 0.4, rate: 1.12 }),
+  ...layer(6.53, { src: "gold_stamp.wav", v: LEVELS.SFX_HERO, dur: 0.5, rate: 1.18 },
+                 { src: "metal_ping.wav", dur: 0.4, rate: 1.24 }),
+  /* the set assembling */
+  ...repeat(6, 7.20, 0.09, { src: "pneu_thunk.wav", v: LEVELS.SFX_MID, dur: 0.32 }, 0.06),
 
-  /* ---- S3 · THE VILLAIN. Three coins, the ratchet RISING while the dribble
-     stays identical. The pitch climb is the price climbing. ---------------- */
-  { at: 8.37, src: "am/room-tone.wav", v: LEVELS.SFX_BED, dur: 3.5 },
-  ...layer(8.50, { src: "am/coin-drop.wav", v: LEVELS.SFX_MID, dur: 0.6 },
-                 { src: "ratchet.wav", dur: 0.5, rate: 0.94 }),
-  ...layer(9.23, { src: "am/coin-drop.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 1.07 },
-                 { src: "ratchet.wav", dur: 0.5, rate: 1.03 }),
-  ...layer(9.97, { src: "am/coin-drop.wav", v: LEVELS.SFX_HERO, dur: 0.6, rate: 1.15 },
-                 { src: "ratchet.wav", dur: 0.5, rate: 1.12 }),
-  { at: 9.97, src: "am/cash-register.wav", v: LEVELS.SFX_TEXTURE, dur: 0.7 },
-  { at: 10.97, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 0.82 },
+  /* ---- S3 · THE VILLAIN. The price ratchets UP; the payout does not. --- */
+  { at: 8.37, src: "am/room-tone.wav", v: LEVELS.SFX_BED, dur: 3.4 },
+  ...layer(8.50, { src: "am/coin-drop.wav", v: LEVELS.SFX_MID, dur: 0.5 },
+                 { src: "ratchet.wav", dur: 0.4, rate: 0.96 }),
+  ...layer(9.23, { src: "am/coin-drop.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.08 },
+                 { src: "ratchet.wav", dur: 0.4, rate: 1.06 }),
+  ...layer(9.97, { src: "am/coin-drop.wav", v: LEVELS.SFX_HERO, dur: 0.5, rate: 1.17 },
+                 { src: "am/cash-register.wav", dur: 0.6 }),
+  { at: 10.97, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 0.86 },
 
-  /* ---- S4 · THE TURN. RISER 1 OF 2 lands on the all-29 impact. ---------- */
-  ...layer(12.03, { src: "lib_whoosh_fast.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.0 },
-                  { src: "water_fan.wav", dur: 1.2, rate: 1.1 }),
-  { at: 12.44, src: "lib_riser.wav", v: LEVELS.SFX_MID, dur: 0.62, rate: 1.1 },
-  /* the hero of the whole reel: twenty-nine feeds landing at once */
+  /* ---- S4 · THE TURN. RISER 1 OF 2 lands on the pool charging. -------- */
+  { at: 12.03, src: "lib_whoosh_fast.wav", v: LEVELS.SFX_MID, dur: 0.45, rate: 1.0 },
+  { at: 12.44, src: "lib_riser.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 1.1 },
   ...layer(12.90, { src: "impact_deep.wav", v: LEVELS.SFX_HERO, dur: 1.4, rate: 0.92 },
-                  { src: "sub.wav", dur: 1.3, rate: 0.7 }),
-  { at: 12.92, src: "water_fan.wav", v: LEVELS.SFX_MID, dur: 1.8, rate: 0.86 },
-  ...repeat(5, 12.96, 0.07, { src: "pneu_thunk.wav", v: LEVELS.SFX_TEXTURE, dur: 0.35 }, 0.05),
-  { at: 13.60, src: "deep_engine.wav", v: LEVELS.SFX_BED, dur: 2.6, rate: 0.9 },
-  /* the rating plate swinging into the light */
-  ...layer(14.50, { src: "gear_shift.wav", v: LEVELS.SFX_MID, dur: 0.6 },
-                  { src: "metal_ping.wav", dur: 0.7, rate: 0.86 }),
-  ...layer(15.50, { src: "water_fan.wav", v: LEVELS.SFX_MID, dur: 1.1, rate: 1.0 },
-                  { src: "am/positive-chime.wav", dur: 0.8 }),
+                  { src: "sub.wav", dur: 1.2, rate: 0.86 }),
+  ...repeat(6, 12.96, 0.07, { src: "pneu_thunk.wav", v: LEVELS.SFX_MID, dur: 0.32 }, 0.05),
+  /* the ledger: a swing, paper, and a row-by-row tick */
+  ...layer(14.37, { src: "gear_shift.wav", v: LEVELS.SFX_MID, dur: 0.4 },
+                  { src: "am/paper-slide.wav", dur: 0.6 }),
+  ...repeat(5, 14.55, 0.22, { src: "am/counter-tick.wav", v: LEVELS.SFX_TEXTURE, dur: 0.3 }, 0.05),
+  ...layer(15.72, { src: "stamp_press.wav", v: LEVELS.SFX_MID, dur: 0.5 },
+                  { src: "chimelo.wav", dur: 0.6 }),
 
-  /* ---- S5 · THE MECHANISM. The clack is the point, so it is the loudest
-     single transient in the back half and it is LAYERED. ------------------ */
-  { at: 16.50, src: "graph_hum.wav", v: LEVELS.SFX_BED, dur: 2.4, rate: 1.0 },
-  /* feed 07 dying: a dry rattle where water used to be */
-  ...layer(17.03, { src: "am/counter-tick.wav", v: LEVELS.SFX_MID, dur: 0.4, rate: 0.8 },
-                  { src: "am/digital-countdown.wav", dur: 0.45, rate: 1.25 }),
-  /* THE CLACK */
-  ...layer(17.30, { src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.7, rate: 1.14 },
-                  { src: "am/gear-mech.wav", dur: 0.6 }),
-  { at: 17.32, src: "metal_ping.wav", v: LEVELS.SFX_TEXTURE, dur: 0.6, rate: 1.28 },
-  ...layer(17.50, { src: "water_fan.wav", v: LEVELS.SFX_MID, dur: 1.0, rate: 1.06 },
-                  { src: "temper_chime.wav", dur: 0.7 }),
-  /* the second, unprompted clack — it is a loop, not a trick */
-  ...layer(18.57, { src: "mech_clank.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 1.2 },
-                  { src: "am/gear-mech.wav", dur: 0.5, rate: 1.1 }),
+  /* ---- S5 · THE MECHANISM. The clack is the loudest transient here. ---- */
+  { at: 16.50, src: "am/gear-mech.wav", v: LEVELS.SFX_BED, dur: 2.2, rate: 0.9 },
+  /* the chute dies: a dry rattle where tokens used to be */
+  ...layer(16.90, { src: "am/counter-tick.wav", v: LEVELS.SFX_MID, dur: 0.4, rate: 0.88 },
+                  { src: "ratchet.wav", dur: 0.4, rate: 0.86 }),
+  /* the 429 plate drops */
+  ...layer(17.00, { src: "slate_whump.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 0.94 },
+                  { src: "metal_ping.wav", dur: 0.45, rate: 0.9 }),
+  /* THE SWITCH */
+  ...layer(17.30, { src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.6, rate: 1.12 },
+                  { src: "am/gear-mech.wav", dur: 0.5 }),
+  { at: 17.32, src: "metal_ping.wav", v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.26 },
+  ...layer(17.60, { src: "temper_chime.wav", v: LEVELS.SFX_MID, dur: 0.6 },
+                  { src: "c_coin.wav", dur: 0.3, rate: 1.14 }),
+  /* and again, unprompted */
+  ...layer(18.43, { src: "mech_clank.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.2 },
+                  { src: "am/gear-mech.wav", dur: 0.45, rate: 1.1 }),
 
-  /* ---- S6 · THE KEYWORD. RISER 2 OF 2 lands on the hard cut. ------------ */
-  { at: 18.72, src: "lib_riser.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.32 },
-  ...layer(19.00, { src: "lib_cinematic_hit.wav", v: LEVELS.SFX_HERO, dur: 1.2, rate: 1.02 },
-                  { src: "water_fan.wav", dur: 1.6, rate: 1.0 }),
-  { at: 19.40, src: "gold_stamp.wav", v: LEVELS.SFX_MID, dur: 0.8 },
-  { at: 19.95, src: "arrive_chime.wav", v: LEVELS.SFX_MID, dur: 0.9 },
+  /* ---- S6 · THE KEYWORD. RISER 2 OF 2. -------------------------------- */
+  { at: 18.72, src: "metal_riser.wav", v: LEVELS.SFX_MID, dur: 0.55, rate: 1.24 },
+  ...layer(19.00, { src: "lib_cinematic_hit.wav", v: LEVELS.SFX_HERO, dur: 1.3, rate: 1.0 },
+                  { src: "sub.wav", dur: 1.0, rate: 0.9 }),
+  { at: 19.06, src: "gold_stamp.wav", v: LEVELS.SFX_HERO, dur: 0.6, rate: 0.96 },
+  { at: 19.44, src: "arrive_chime.wav", v: LEVELS.SFX_MID, dur: 0.9 },
+  { at: 19.98, src: "am/positive-chime.wav", v: LEVELS.SFX_MID, dur: 0.7 },
 ];
 
 /* ---- THE VARIANT CUTS -----------------------------------------------------
    [[feedback_trial_reel_variants]]: a variant must change hook, bed, camera,
-   palette AND transition — not one lever. The primary cut is A; B/C/D exist so
-   a trial round is a one-line change rather than a rebuild.
+   palette AND transition — not one lever.
    ------------------------------------------------------------------------ */
 type Trans = "flash" | "bars" | "punch" | "slide";
 export type Variant = { hook: React.FC; hookHead: [string, string]; bed: string;
