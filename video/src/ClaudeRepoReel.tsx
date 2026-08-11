@@ -43,10 +43,15 @@ import words from "./data/words_repo.json";
          5x. The gauge is graduated to the VO's number so audio and picture
          agree; the main's rating plate in S4 carries the real 4B, so the
          receipt over-delivers rather than contradicts.
-      2. "GPT-5 … all for free" — OPENAI IS NOT A PROVIDER. No GPT or OpenAI
-         mark appears anywhere in this reel. S2's taps carry only providers
-         really in the README; Claude appears as the CLIENT (Claude Code runs
-         against the pool via `/v1/messages`), which is what the repo documents.
+      2. "GPT-5 … all for free" — OPENAI IS NOT A PROVIDER, and no GPT mark ever
+         appears on a token, a chute or in a pile. It DOES appear, deliberately,
+         in the CLIENTS row: the README names "Claude Code, Codex CLI, Cline /
+         Roo Code, Continue, Aider, opencode, and Cursor" as compatible clients
+         and Codex is OpenAI's CLI. So the mark sits where it is true — on the
+         things that SPEND the tokens, never on the things that supply them.
+         ⛔ Never mix a client mark into a provider pile.
+      3. "Llama" — every `llama` in that README is `llama.cpp`, a local runtime
+         you can point the proxy AT, not a model it serves. Never drawn.
 
    ⛔ ROOT OWNS THE GLOBAL CHROME: Bg, the one continuous ProgressBar, the one
       KaraokeCaption track, the VO, the bed and every header. Scene bodies see
@@ -60,17 +65,19 @@ type Scene = { at: number; C: React.FC; head: [string, string] };
 
 /* ⛔ HEADERS STATE THE CLAIM IN PRODUCT NOUNS, THEY NEVER ECHO THE VO OR THE
    THEME ([[feedback_headers_state_the_claim]]). The picture is already carrying
-   the waterworks; the header is the reel's one LITERAL channel, so it spends
-   itself on the real nouns a Claude Code viewer recognises — freellmapi, the
-   star count, /v1, 429, MIT — none of which the audio carries. */
+   the world; the header is the reel's one LITERAL channel, so it spends itself
+   on real nouns a Claude Code viewer recognises — /v1, 429, MIT, the provider
+   names — none of which the audio carries. */
 export const SCENES: Scene[] = [
-  { at: 0,   C: S0Hook, head: ["800M FREE AI TOKENS", "ONE REPO, 18,265 STARS"] },
+  /* ⛔ NO STAR COUNT ON THE HOOK HEADER. It is a receipt, not a hook — it
+     answers "is this legit", which is a question nobody has yet at 0.0s, and it
+     spent the second line on something the maker's plate already carries later
+     in the reel. The line now says what you GET. */
+  { at: 0,   C: S0Hook, head: ["800M FREE AI TOKENS", "FROM ONE FREE REPO"] },
   { at: 110, C: S1,     head: ["NOT 800 THOUSAND", "800 MILLION A MONTH"] },
-  /* ⛔ "LLAMA" CAME OFF THIS HEADER. The VO names it, but every "llama" in
-     the repo's README is `llama.cpp` — a local runtime you can point the proxy
-     AT, not a model it serves you. Qwen3 / DeepSeek V4 / GLM-5 are printed in
-     that README by name, so the header ships those instead. */
-  { at: 178, C: S2,     head: ["29 FREE PROVIDERS", "GEMINI, MISTRAL, NVIDIA"] },
+  /* ⛔ "LLAMA" CAME OFF THIS HEADER — every "llama" in that README is
+     `llama.cpp`, a runtime you point the proxy AT, not a model it serves. */
+  { at: 178, C: S2,     head: ["29 FREE PROVIDERS", "GEMINI, NVIDIA, CLOUDFLARE"] },
   { at: 251, C: S3,     head: ["YOU PAY PER PROVIDER", "HUNDREDS A MONTH, EACH"] },
   { at: 361, C: S4,     head: ["IT POOLS EVERY FREE TIER", "ONE /v1 ENDPOINT"] },
   { at: 495, C: S5,     head: ["RATE LIMITED? IT SWITCHES", "AUTO FAILOVER ON 429"] },
@@ -210,9 +217,9 @@ export type Variant = { hook: React.FC; hookHead: [string, string]; bed: string;
    judged. The variance between these two cuts is the hook itself, the bed and
    the transition — which is more divergence than a recolour ever bought. */
 export const VARIANTS: Variant[] = [
-  { hook: HookPaywall, hookHead: ["800M FREE AI TOKENS", "ONE REPO, 18,265 STARS"],
+  { hook: HookPaywall, hookHead: ["800M FREE AI TOKENS", "FROM ONE FREE REPO"],
     bed: "repo_bed.wav",   seed: 0,  pal: 0, trans: "flash", capTop: 1268, endHold: 12 },
-  { hook: HookFuse, hookHead: ["29 FREE TIERS, POOLED", "18,265 STARS, MIT"],
+  { hook: HookFuse, hookHead: ["29 FREE TIERS, POOLED", "INTO ONE ENDPOINT"],
     bed: "repo_bed_b.wav", seed: 0,  pal: 0, trans: "bars",  capTop: 1214, endHold: 10 },
   { hook: S0Hook, hookHead: ["THE FREE TIER NOBODY STACKS", "800M TOKENS A MONTH"],
     bed: "repo_bed_c.wav", seed: 7,  pal: 2, trans: "punch", capTop: 1300, endHold: 8 },

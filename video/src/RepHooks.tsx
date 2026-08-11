@@ -6,7 +6,7 @@ import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, mxh, dkh, SH, SH_D, rnd,
   CLAY, GOLD, RED, TOK, TOKD, TOKL, BRASS, BRASSD, BRASSL, WOOD, WOODD, WOODL,
   Room, Scene, Cam, Beam, Motes, Chip, Plate, Edge, Token, MakerPlate, PROVIDERS,
-  usePlace,
+  ClientChip, idle, usePlace,
 } from "./RepWorld";
 import { Counter, Pile, Fall, Claude, Stack, RepoCard, Burst, Belt } from "./RepProps";
 import type { Place } from "./RepWorld";
@@ -100,7 +100,7 @@ const Shop: React.FC<{ p: Place; f: number; shelf?: number; lamp?: number;
     {[[128, 0], [306, 1], [706, 2], [884, 3]].slice(0, shelf).map(([x, i], k) => {
       const pr = P[(from + (i as number)) % 6];
       return <Token key={"sh" + k} x={x as number} y={hz - 258 + sw * 0.4} s={96} z={8}
-        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={(k % 2 ? 5 : -5) + sw * 0.6} />;
+        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={(k % 2 ? 5 : -5) + sw * 0.6} f={f} />;
     })}
     {/* crates stacked under the shelf */}
     {[[86, 96], [86, 62], [946, 82]].map(([x, wd], i) => (
@@ -181,7 +181,7 @@ const Rollers: React.FC<{ y: number; t: number; f: number; n?: number; z?: numbe
       const x = W / 2 + dir * t * sp + (rnd(i + from, 11) - 0.5) * 140;
       const hop = Math.abs(Math.sin(t * 7 + i)) * (1 - t) * 34;
       return <Token key={"ro" + i} x={x} y={y - hop} s={46 + rnd(i + from, 13) * 22}
-        z={z + i} rot={dir * t * 900} plain />;
+        z={z + i} rot={dir * t * 900} plain f={f} />;
     })}
   </>);
 };
@@ -247,18 +247,24 @@ export const HookPaywall: React.FC = () => {
             const x = 210 + i * 200;
             const gone = smash > 0.02;
             const a = (i - 1.5) * 0.55;
+            /* ⛔ EVEN THE CARDS MOVE. Hanging on a gate, they should never be
+               pinned — each gets its own small permanent swing on its own phase
+               so the wall is alive before anything hits it. */
+            const w = idle(f, i * 3.1 + 0.7, 1.4);
             return (
               <div key={"pw" + i} style={{ position: "absolute", left: x - 92, top: 372,
                 width: 184, height: 246, zIndex: 60 + i,
                 transform: gone
                   ? `translate(${Math.cos(a) * smash * 620}px, ${-smash * 210 + smash * smash * 760}px) rotate(${smash * (i % 2 ? 230 : -270)}deg)`
-                  : "none", opacity: gone ? 1 - smash * 0.35 : 1 }}>
+                  : `translate(${w.x}px, ${w.y}px) rotate(${w.rot}deg)`,
+                transformOrigin: "50% 0%",
+                opacity: gone ? 1 - smash * 0.35 : 1 }}>
                 <div style={{ width: "100%", height: "100%", borderRadius: 12,
                   background: "#EFE9DA", border: "6px solid #9A8F78", boxSizing: "border-box",
                   boxShadow: SH_D, display: "flex", flexDirection: "column",
                   alignItems: "center", justifyContent: "center" }}>
                   <Token x={92} y={78} s={118} z={2} markKey={P[i].k} name={P[i].n}
-                    hasMark={P[i].mark} />
+                    hasMark={P[i].mark} f={f} />
                   <span style={{ marginTop: 92, fontFamily: MONO, fontWeight: 900,
                     fontSize: 48, color: "#3A342A" }}>{pr}</span>
                   {i === 3 && <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
@@ -274,7 +280,15 @@ export const HookPaywall: React.FC = () => {
           </div>
           <Burst x={W / 2} y={500} t={smash} n={18} s={1.05} z={112} spread={680} />
           <Rollers y={676} t={smash} f={f} n={7} z={114} from={1} />
-          <Claude x={126} base={706} s={0.8} z={84} f={f} gaze={0.85} shock={smash * 0.9} />
+          {/* ⭐⭐ CLAUDE AND CODEX AT THE FRONT, and they are the two biggest
+              marks in the frame. They sit ON the near counter as the tools you
+              are holding — which is exactly what they are, the things you point
+              at the pool — so the two most recognisable names in the category
+              are the first thing the eye lands on, and neither is claiming to
+              be a provider. */}
+          <ClientChip i={0} x={252} y={690} s={156} z={124} f={f} label={false} />
+          <ClientChip i={1} x={432} y={700} s={152} z={124} f={f} label={false} />
+          <Claude x={82} base={706} s={0.70} z={84} f={f} gaze={0.85} shock={smash * 0.9} />
           <Flash lf={lf} at={11} n={4} o={0.48} />
         </div>
       </Scene>
@@ -293,7 +307,7 @@ export const HookPaywall: React.FC = () => {
           transform: `rotate(-9deg) scale(${1 + land * 0.06}, ${1 - land * 0.09})`,
           transformOrigin: "50% 100%" }} />
         <Token x={418} y={392} s={186} z={74} markKey={P[3].k} name={P[3].n} hasMark
-          rot={-9} />
+          rot={-9} f={f} />
         <div style={{ position: "absolute", left: 268, top: 520, width: 300, textAlign: "center",
           zIndex: 76, fontFamily: MONO, fontWeight: 900, fontSize: 72, color: "#3A342A",
           transform: "rotate(-9deg)" }}>$300</div>
@@ -311,9 +325,9 @@ export const HookPaywall: React.FC = () => {
     <Scene p={p} slug="800 MILLION  ·  FREE" push={[78, 110, 1.05]} vig={0.32}>
       <Shop p={p} f={f} shelf={4} lamp={230} from={0} />
       <Fall x={676} y={-30} len={640} f={f} n={13} s={1.15} z={64} spread={440} on={1} />
-      <Pile x={676} base={712} n={Math.round(pour * 175)} s={1.1} z={70} w={560} seed={5} />
-      <Token x={548} y={540} s={192} z={92} markKey={P[0].k} name={P[0].n} hasMark rot={-9} />
-      <Token x={766} y={408} s={204} z={93} markKey={P[1].k} name={P[1].n} hasMark rot={6} />
+      <Pile x={676} base={712} n={Math.round(pour * 175)} s={1.1} z={70} w={560} seed={5} f={f} />
+      <Token x={548} y={540} s={192} z={92} markKey={P[0].k} name={P[0].n} hasMark rot={-9} f={f} />
+      <Token x={766} y={408} s={204} z={93} markKey={P[1].k} name={P[1].n} hasMark rot={6} f={f} />
       <Counter x={330} y={172} v={M} s={0.58} z={96} />
       <Claude x={158} base={716} s={0.88} z={84} f={f} gaze={0.7} cheer={0.75} />
       <Flash lf={lf} at={0} n={2} o={0.22} />
@@ -357,7 +371,7 @@ export const HookFuse: React.FC = () => {
                   border: `4px solid ${TOKD}`, boxSizing: "border-box", zIndex: 40 + i,
                   boxShadow: SH }} />
                 <Token x={x} y={BASE - hgt - 52} s={104 - pull * 26} z={60 + i}
-                  markKey={P[i].k} name={P[i].n} hasMark={P[i].mark} />
+                  markKey={P[i].k} name={P[i].n} hasMark={P[i].mark} f={f} />
               </React.Fragment>
             );
           })}
@@ -377,7 +391,7 @@ export const HookFuse: React.FC = () => {
               <div style={{ position: "absolute", left: W / 2 - 92, top: BASE - hgt,
                 width: 46, height: hgt, background: TOKL, opacity: 0.45, zIndex: 89 }} />
               <Token x={W / 2} y={BASE - hgt - 56} s={126} z={94} markKey={P[0].k}
-                name={P[0].n} hasMark />
+                name={P[0].n} hasMark f={f} />
             </>);
           })()}
           <Burst x={W / 2} y={BASE - 60} t={Math.min(1, rise * 1.6)} n={14} s={1.0}
@@ -389,7 +403,15 @@ export const HookFuse: React.FC = () => {
               one column that leaves the top of frame. Nothing needs saying, so
               nothing is said — the number lands on the odometer two shots later,
               where it is an object rather than a paragraph. */}
-          <Claude x={110} base={712} s={0.76} z={84} f={f} gaze={0.9} shock={rise * 0.95} />
+          {/* ⭐⭐ CLAUDE AND CODEX AT THE FRONT, and they are the two biggest
+              marks in the frame. They sit ON the near counter as the tools you
+              are holding — which is exactly what they are, the things you point
+              at the pool — so the two most recognisable names in the category
+              are the first thing the eye lands on, and neither is claiming to
+              be a provider. */}
+          <ClientChip i={0} x={252} y={690} s={156} z={124} f={f} label={false} />
+          <ClientChip i={1} x={432} y={700} s={152} z={124} f={f} label={false} />
+          <Claude x={82} base={712} s={0.68} z={84} f={f} gaze={0.9} shock={rise * 0.95} />
           <Flash lf={lf} at={11} n={4} o={0.46} />
         </div>
       </Scene>
@@ -406,13 +428,13 @@ export const HookFuse: React.FC = () => {
           borderRadius: 7, background: TOK, border: `5px solid ${TOKD}`,
           boxSizing: "border-box", zIndex: 60, boxShadow: SH }} />
         <Token x={280} y={488} s={124} z={64} markKey={P[6].k} name={P[6].n}
-          hasMark={P[6].mark} />
+          hasMark={P[6].mark} f={f} />
         <div style={{ position: "absolute", left: 596, top: 172, width: 248, height: 484,
           borderRadius: 10, background: TOK, border: `7px solid ${TOKD}`,
           boxSizing: "border-box", zIndex: 60, boxShadow: SH_D }} />
         <div style={{ position: "absolute", left: 596, top: 172, width: 62, height: 484,
           background: TOKL, opacity: 0.45, zIndex: 61 }} />
-        <Token x={720} y={142} s={128} z={64} markKey={P[1].k} name={P[1].n} hasMark />
+        <Token x={720} y={142} s={128} z={64} markKey={P[1].k} name={P[1].n} hasMark f={f} />
         <Cam z={96} o={set} y={(1 - set) * 18}>
           <Plate x={196} y={664} t="800,000" sub="ONE FREE TIER" w={216} s={1.06} z={96} />
         </Cam>
@@ -428,11 +450,11 @@ export const HookFuse: React.FC = () => {
       <div style={{ position: "absolute", left: W / 2 - 92, top: 196, width: 184,
         height: 460, borderRadius: 10, background: TOK, border: `6px solid ${TOKD}`,
         boxSizing: "border-box", zIndex: 40, boxShadow: SH_D }} />
-      <Token x={W / 2} y={166} s={132} z={44} markKey={P[0].k} name={P[0].n} hasMark />
+      <Token x={W / 2} y={166} s={132} z={44} markKey={P[0].k} name={P[0].n} hasMark f={f} />
       <Token x={W / 2 - 208} y={266} s={180} z={92} markKey={P[0].k} name={P[0].n}
-        hasMark rot={-8} />
+        hasMark rot={-8} f={f} />
       <Token x={W / 2 + 214} y={214} s={180} z={92} markKey={P[1].k} name={P[1].n}
-        hasMark rot={7} />
+        hasMark rot={7} f={f} />
       {/* the number arrives HERE, and as an odometer — an object, one line */}
       <Cam z={96} o={set} y={(1 - set) * 20}>
         <Counter x={W / 2} y={556} v={M} s={0.56} z={96} />
@@ -482,7 +504,7 @@ export const HookJackpot: React.FC = () => {
                   border: `6px solid ${on ? "#3F9E74" : "#8A8074"}`, boxSizing: "border-box",
                   zIndex: 40, boxShadow: SH }} />
                 <Token x={x} y={262} s={126} z={44} markKey={P[i].k} name={P[i].n}
-                  hasMark={P[i].mark} />
+                  hasMark={P[i].mark} f={f} />
                 <div style={{ position: "absolute", left: x - 66, top: 336, width: 132,
                   textAlign: "center", zIndex: 46, fontFamily: MONO, fontWeight: 900,
                   fontSize: 36, color: on ? "#2E7D52" : "#3A342A" }}>
@@ -505,7 +527,7 @@ export const HookJackpot: React.FC = () => {
           <Burst x={W / 2} y={584} t={Math.min(1, dump * 1.5)} n={13} s={1.0} z={106}
             spread={560} />
           <Pile x={W / 2} base={716} n={Math.round(dump * 130)} s={1.05} z={80} w={700}
-            seed={4} />
+            seed={4} f={f} />
           <Rollers y={690} t={dump} f={f} n={8} z={112} from={5} />
           <Claude x={106} base={718} s={0.76} z={90} f={f} gaze={0.85} shock={dump * 0.9} />
           <Flash lf={lf} at={11} n={4} o={0.46} />
@@ -522,7 +544,7 @@ export const HookJackpot: React.FC = () => {
         <div style={{ position: "absolute", left: 210, top: 216, width: 592, height: 304,
           borderRadius: 16, background: "#FBF8F1", border: "8px solid #3F9E74",
           boxSizing: "border-box", zIndex: 60, boxShadow: SH_D }} />
-        <Token x={396} y={330} s={182} z={66} markKey={P[0].k} name={P[0].n} hasMark />
+        <Token x={396} y={330} s={182} z={66} markKey={P[0].k} name={P[0].n} hasMark f={f} />
         <div style={{ position: "absolute", left: 500, top: 286, width: 280, zIndex: 66,
           fontFamily: MONO, fontWeight: 900, fontSize: 52, color: "#9A9082",
           textDecoration: "line-through" }}>$300</div>
@@ -543,9 +565,9 @@ export const HookJackpot: React.FC = () => {
       <Shop p={p} f={f} shelf={4} lamp={200} from={0} />
       <Counter x={W / 2} y={166} v={M} s={0.62} z={96} />
       <Fall x={646} y={-30} len={620} f={f} n={12} s={1.15} z={64} spread={430} on={1} />
-      <Pile x={646} base={716} n={Math.round(grow * 175)} s={1.1} z={70} w={560} seed={7} />
-      <Token x={506} y={544} s={190} z={92} markKey={P[2].k} name={P[2].n} hasMark rot={-9} />
-      <Token x={730} y={412} s={202} z={93} markKey={P[3].k} name={P[3].n} hasMark rot={6} />
+      <Pile x={646} base={716} n={Math.round(grow * 175)} s={1.1} z={70} w={560} seed={7} f={f} />
+      <Token x={506} y={544} s={190} z={92} markKey={P[2].k} name={P[2].n} hasMark rot={-9} f={f} />
+      <Token x={730} y={412} s={202} z={93} markKey={P[3].k} name={P[3].n} hasMark rot={6} f={f} />
       <Claude x={144} base={716} s={0.86} z={84} f={f} gaze={0.75} cheer={0.8} />
       <Flash lf={lf} at={0} n={2} o={0.22} />
     </Scene>
@@ -581,8 +603,8 @@ export const HookFirehose: React.FC = () => {
           <div style={{ position: "absolute", left: 192, top: 286, width: 200, height: 58,
             borderRadius: 9, background: BRASSD, zIndex: 32, boxShadow: SH }} />
           <Token x={292} y={182} s={168} z={40} markKey={P[6].k} name={P[6].n}
-            hasMark={P[6].mark} />
-          {blast < 0.02 && <Token x={292} y={376 + Math.sin(f / 9) * 5} s={58} z={60} plain />}
+            hasMark={P[6].mark} f={f} />
+          {blast < 0.02 && <Token x={292} y={376 + Math.sin(f / 9) * 5} s={58} z={60} plain f={f} />}
           {blast > 0.02 && (<>
             <Fall x={292} y={344} len={400} f={f} n={17} s={1.45} z={70} spread={320}
               on={blast} />
@@ -602,7 +624,7 @@ export const HookFirehose: React.FC = () => {
               hold={blast < 0.3 ? 98 : 0} holdClaude />
           </div>
           <Pile x={330} base={718} n={Math.round(blast * 100)} s={1.0} z={92} w={540}
-            seed={9} />
+            seed={9} f={f} />
           <Rollers y={694} t={blast} f={f} n={8} z={114} from={7} />
           <Flash lf={lf} at={11} n={4} o={0.48} />
         </div>
@@ -620,7 +642,7 @@ export const HookFirehose: React.FC = () => {
             <div style={{ position: "absolute", left: 152 + i * 232, top: -40, width: 76,
               height: 260, background: BRASS, zIndex: 30, boxShadow: SH }} />
             <Token x={190 + i * 232} y={300} s={148} z={40} markKey={P[i].k}
-              name={P[i].n} hasMark={P[i].mark} />
+              name={P[i].n} hasMark={P[i].mark} f={f} />
             <Fall x={190 + i * 232} y={368} len={230} f={f + i * 9} n={5} s={0.9}
               z={60 + i} spread={60} on={E(lf, i * 3, i * 3 + 8, 0, 1, OUT)} />
           </React.Fragment>
@@ -639,9 +661,9 @@ export const HookFirehose: React.FC = () => {
       <Shop p={p} f={f} shelf={4} lamp={210} from={0} />
       <Counter x={W / 2} y={160} v={M} s={0.6} z={96} />
       <Fall x={664} y={-30} len={640} f={f} n={12} s={1.12} z={64} spread={420} on={1} />
-      <Pile x={664} base={716} n={Math.round(grow * 165)} s={1.08} z={70} w={560} seed={3} />
-      <Token x={534} y={548} s={188} z={92} markKey={P[1].k} name={P[1].n} hasMark rot={-8} />
-      <Token x={758} y={420} s={198} z={93} markKey={P[4].k} name={P[4].n} hasMark rot={7} />
+      <Pile x={664} base={716} n={Math.round(grow * 165)} s={1.08} z={70} w={560} seed={3} f={f} />
+      <Token x={534} y={548} s={188} z={92} markKey={P[1].k} name={P[1].n} hasMark rot={-8} f={f} />
+      <Token x={758} y={420} s={198} z={93} markKey={P[4].k} name={P[4].n} hasMark rot={7} f={f} />
       <Claude x={150} base={716} s={0.88} z={84} f={f} gaze={0.8} cheer={0.85} />
       <Flash lf={lf} at={0} n={2} o={0.22} />
     </Scene>

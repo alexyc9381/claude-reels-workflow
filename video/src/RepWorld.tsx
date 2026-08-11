@@ -248,11 +248,14 @@ export const CLIENTS = [
 
 /** a client mark on a light plate — the tools that spend the tokens. */
 export const ClientChip: React.FC<{ i: number; x: number; y: number; s?: number;
-  z?: number; label?: boolean }> = ({ i, x, y, s = 118, z = 80, label = true }) => {
+  z?: number; label?: boolean; f?: number; live?: number }> =
+  ({ i, x, y, s = 118, z = 80, label = true, f = 0, live = 1 }) => {
   const c = CLIENTS[i % CLIENTS.length];
   const src = (c as any).official ? `logos_official/${c.k}.svg` : `logos/${c.k}.svg`;
+  const w = idle(f, x * 0.027 + y * 0.019, live);
   return (
-    <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, zIndex: z,
+    <div style={{ position: "absolute", left: x - s / 2 + w.x, top: y - s / 2 + w.y,
+      width: s, zIndex: z, transform: `rotate(${w.rot * 0.7}deg)`,
       display: "flex", flexDirection: "column", alignItems: "center", gap: s * 0.07 }}>
       <div style={{ width: s, height: s, borderRadius: s * 0.26, background: "#FBF8F1",
         border: `${Math.max(3, s * 0.045)}px solid #D9CFB6`, boxSizing: "border-box",
@@ -267,17 +270,33 @@ export const ClientChip: React.FC<{ i: number; x: number; y: number; s?: number;
   );
 };
 
+/* ⛔⛔ *"even the cards around need to be shaking and moving around."* Every
+   prop in this reel was pinned to a fixed transform, so the only things moving
+   were the ones a scene explicitly animated. `idle` gives EVERY object its own
+   permanent, tiny wobble — a degree of rotation and a pixel or two of drift, on
+   its own phase from its own seed so nothing marches in step. It is small
+   enough never to compete with the hero and it means no object in frame is ever
+   truly still, which is the difference between a scene and a diagram.
+   ⛔ SEED OFF POSITION, not off index — two props at the same index in
+   different rows would otherwise wobble identically and read as a pattern. */
+export const idle = (f: number, seed: number, amp = 1) => ({
+  rot: Math.sin(f / 23 + seed * 1.7) * 1.15 * amp,
+  y: Math.sin(f / 17 + seed * 2.31) * 1.7 * amp,
+  x: Math.cos(f / 29 + seed * 1.13) * 1.1 * amp,
+});
+
 /** THE TOKEN. The whole reel is made of these.
     `plain` is an unstruck token — the ones that make up the bulk of a pile. */
 export const Token: React.FC<{ x: number; y: number; s?: number; z?: number;
   markKey?: string; name?: string; hasMark?: boolean; rot?: number; plain?: boolean;
-  claude?: boolean; dim?: number }> =
+  claude?: boolean; dim?: number; f?: number; live?: number }> =
   ({ x, y, s = 90, z = 60, markKey, name, hasMark, rot = 0, plain, claude,
-     dim = 0 }) => {
+     dim = 0, f = 0, live = 1 }) => {
   const D = (c: string) => (dim > 0 ? dkh(c, dim) : c);
+  const w = idle(f, x * 0.031 + y * 0.017, live);
   return (
-    <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, height: s,
-      zIndex: z, transform: `rotate(${rot}deg)` }}>
+    <div style={{ position: "absolute", left: x - s / 2 + w.x, top: y - s / 2 + w.y,
+      width: s, height: s, zIndex: z, transform: `rotate(${rot + w.rot}deg)` }}>
       {/* rim, face, highlight — three solid values, never a gradient */}
       <div style={{ position: "absolute", inset: 0, borderRadius: "50%",
         background: D(TOKD), boxShadow: SH }} />

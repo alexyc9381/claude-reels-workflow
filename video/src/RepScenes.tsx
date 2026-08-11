@@ -146,7 +146,7 @@ export const S0Hook: React.FC = () => {
               transform: `translateY(${(1 - on) * -300}px) scale(${1 + land * 0.09}, ${1 - land * 0.12})`,
               transformOrigin: `${t.x}px 470px` }}>
               <Token x={t.x} y={356} s={286} z={50 + k} markKey={P[t.i].k}
-                name={P[t.i].n} hasMark={P[t.i].mark} rot={-7 + k * 7} />
+                name={P[t.i].n} hasMark={P[t.i].mark} rot={-7 + k * 7} f={f} />
             </div>
           );
         })}
@@ -165,14 +165,14 @@ export const S0Hook: React.FC = () => {
         <Fall x={700} y={-30} len={470} f={f} n={11} s={1.15} z={64} spread={340}
           on={1} />
         <Pile x={700} base={762} n={Math.round(grow * 190)} s={1.1} z={70} w={520}
-          seed={5} />
+          seed={5} f={f} />
         <Token x={556} y={584} s={196} z={92} markKey={P[0].k} name={P[0].n} hasMark
-          rot={-9} />
+          rot={-9} f={f} />
         <Token x={752} y={448} s={210} z={93} markKey={P[1].k} name={P[1].n} hasMark
-          rot={6} />
+          rot={6} f={f} />
         <Claude x={132} base={756} s={0.92} z={80} f={f} gaze={0.75} cheer={0.6} />
         <Stack x={368} base={756} n={4} s={0.78} z={74} label="800,000"
-          sub="ONE FREE TIER" seed={2} />
+          sub="ONE FREE TIER" seed={2} f={f} />
       </Scene>
     );
   }
@@ -212,7 +212,7 @@ export const S1: React.FC = () => {
       <Scene p={p} slug="WHAT ONE FREE TIER GIVES" push={[0, 30, 1.05]} vig={0.44}>
         <Room p={p} f={f} />
         <Stack x={W / 2 + 150} base={HZ + 168} n={4} s={1.5} z={60} label="800,000"
-          sub="ONE FREE TIER, ONE MONTH" seed={2} />
+          sub="ONE FREE TIER, ONE MONTH" seed={2} f={f} />
         {/* ⛔ THE SPRITE IS THE RULER. Two piles only rank against each other if
             something in frame has a known size, and he is it — the same sprite
             at the same scale stands beside both. */}
@@ -231,15 +231,15 @@ export const S1: React.FC = () => {
         transform: `translate(${sk.x}px, ${sk.y}px) scale(${pull})`,
         transformOrigin: "16% 64%" }}>
         <Room p={p} f={f} />
-        <Stack x={140} base={HZ + 168} n={4} s={0.72} z={60} label="800,000" seed={2} />
+        <Stack x={140} base={HZ + 168} n={4} s={0.72} z={60} label="800,000" seed={2} f={f} />
         <Claude x={250} base={HZ + 170} s={0.48} z={80} f={f} gaze={0.9}
           shock={E(lf, 20, 28, 0, 1, OUT) * 0.8} />
         <Pile x={660} base={HZ + 168} n={Math.round(grow * 150)} s={1.0} z={50}
-          w={700} seed={4} />
+          w={700} seed={4} f={f} />
         <Token x={520} y={HZ + 66} s={172} z={92} markKey={P[0].k} name={P[0].n}
-          hasMark rot={-10} />
+          hasMark rot={-10} f={f} />
         <Token x={772} y={HZ + 28} s={172} z={93} markKey={P[3].k} name={P[3].n}
-          hasMark rot={8} />
+          hasMark rot={8} f={f} />
         <Counter x={636} y={186} v={grow * M} s={0.66} z={96} />
         <Flash lf={lf} at={22} n={3} o={0.26} />
       </div>
@@ -287,7 +287,7 @@ export const S2: React.FC = () => {
               transform: `translateY(${(1 - on) * -230}px) scale(${(0.72 + on * 0.28) * (1 + land * 0.06)}, ${(0.72 + on * 0.28) * (1 - land * 0.10)})`,
               transformOrigin: `${t.x}px 500px` }}>
               <Token x={t.x} y={330} s={306} z={50 + k} markKey={P[t.i].k}
-                name={P[t.i].n} hasMark={P[t.i].mark} rot={-8 + k * 8} />
+                name={P[t.i].n} hasMark={P[t.i].mark} rot={-8 + k * 8} f={f} />
             </div>
           );
         })}
@@ -319,14 +319,14 @@ export const S2: React.FC = () => {
         if (on <= 0.02) return null;
         return <Token key={"r1" + k} x={128 + k * 186} y={212 - (1 - on) * 70}
           s={176 * (0.78 + on * 0.22)} z={50 + k} markKey={P[i].k} name={P[i].n}
-          hasMark={P[i].mark} rot={(k % 2 ? 6 : -6) + (1 - on) * 30} />;
+          hasMark={P[i].mark} rot={(k % 2 ? 6 : -6) + (1 - on) * 30} f={f} />;
       })}
       {[5, 6, 7, 8].map((i, k) => {
         const on = E(lf, 10 + k * 2, 17 + k * 2, 0, 1, BACK);
         if (on <= 0.02) return null;
         return <Token key={"r2" + k} x={196 + k * 186} y={378 - (1 - on) * 70}
           s={176 * (0.78 + on * 0.22)} z={56 + k} markKey={P[i].k} name={P[i].n}
-          hasMark={P[i].mark} rot={(k % 2 ? -5 : 7) + (1 - on) * -30} />;
+          hasMark={P[i].mark} rot={(k % 2 ? -5 : 7) + (1 - on) * -30} f={f} />;
       })}
       <Cam z={90} o={rise} y={(1 - rise) * 18}>
         <Plate x={812} y={330} t="+19 MORE" sub="29 TOTAL" w={168} s={1.0} z={92} />
@@ -352,7 +352,7 @@ export const S2: React.FC = () => {
             opacity: Math.min(1, on * 1.5),
             transform: `translateY(${(1 - on) * 46}px) scale(${0.82 + on * 0.18})`,
             transformOrigin: `${126 + i * 192}px 600px` }}>
-            <ClientChip i={i} x={126 + i * 192} y={600} s={112} z={90 + i} />
+            <ClientChip i={i} x={126 + i * 192} y={600} s={112} z={90 + i} f={f} />
           </div>
         );
       })}
@@ -407,7 +407,7 @@ export const S3: React.FC = () => {
         </div>
         <Chip t="PER MONTH" y={406} z={98} c="#2A343B" />
         {/* one token, for all that money */}
-        <Token x={636} y={566} s={206} z={60} markKey={P[0].k} name={P[0].n} hasMark />
+        <Token x={636} y={566} s={206} z={60} markKey={P[0].k} name={P[0].n} hasMark f={f} />
         <Claude x={252} base={716} s={0.86} z={80} f={f} gaze={0.7} stern={1} />
         <div style={{ position: "absolute", left: 420, right: 0, top: 690, textAlign: "left",
           zIndex: 96, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 29,
@@ -518,7 +518,7 @@ export const S4: React.FC = () => {
         const on = E(lf, 18 + i * 4, 27 + i * 4, 0, 1, BACK);
         if (on <= 0.02) return null;
         return <ClientChip key={"c4" + i} i={i} x={110} y={210 + i * 172}
-          s={116 * (0.84 + on * 0.16)} z={92 + i} />;
+          s={116 * (0.84 + on * 0.16)} z={92 + i} f={f} />;
       })}
       <Claude x={116} base={776} s={0.82} z={82} f={f} gaze={0.7} cheer={on * 0.7} />
     </Scene>

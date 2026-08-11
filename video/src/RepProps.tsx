@@ -90,8 +90,10 @@ export const Counter: React.FC<{ x: number; y: number; v: number; s?: number;
    HEIGHT is the number, so the comparison in S1 needs no words.
    ====================================================================== */
 export const Pile: React.FC<{ x: number; base: number; n: number; s?: number;
-  z?: number; w?: number; seed?: number; logos?: number[]; dim?: number }> =
-  ({ x, base, n, s = 1, z = 60, w: ww = 520, seed = 3, logos = [], dim = 0 }) => {
+  z?: number; w?: number; seed?: number; logos?: number[]; dim?: number;
+  f?: number }> =
+  ({ x, base, n, s = 1, z = 60, w: ww = 520, seed = 3, logos = [], dim = 0,
+     f = 0 }) => {
   const TS = 54 * s;
   /* ⛔ A HEAP HAS TO GO UP. sqrt(n*1.4) spread 126 tokens over 13 shallow rows
      and read as a carpet; sqrt(n*3.4) gives it height, which is what makes the
@@ -116,7 +118,7 @@ export const Pile: React.FC<{ x: number; base: number; n: number; s?: number;
           markKey={li >= 0 ? PROVIDERS[li % PROVIDERS.length].k : undefined}
           name={li >= 0 ? PROVIDERS[li % PROVIDERS.length].n : undefined}
           hasMark={li >= 0 ? PROVIDERS[li % PROVIDERS.length].mark : undefined}
-          dim={dim} />
+          dim={dim} f={f} live={0.42} />
       );
     }
   }
@@ -137,7 +139,7 @@ export const Fall: React.FC<{ x: number; y: number; len: number; f: number; n?: 
       const ty = y + ph * ph * len;
       const tx = x + (rnd(i, 11) - 0.5) * spread * s;
       return <Token key={"fl" + i} x={tx} y={ty} s={40 * s} z={z + i}
-        rot={ph * 300 + i * 40} plain />;
+        rot={ph * 300 + i * 40} plain f={f} />;
     })}
   </>);
 };
@@ -252,7 +254,7 @@ export const Machine: React.FC<{ x: number; base: number; s?: number; z?: number
       zIndex: z + 4 }} />
     {out > 0.02 && [0, 1, 2].map((i) => (
       <Token key={"mt" + i} x={x - 52 * s + i * 52 * s} y={base - 74 * s}
-        s={46 * s} z={z + 8 + i} rot={i * 24 - 20} plain />
+        s={46 * s} z={z + 8 + i} rot={i * 24 - 20} plain f={f} />
     ))}
   </>);
 };
@@ -289,7 +291,7 @@ export const Claude: React.FC<{ x: number; base: number; s?: number; z?: number;
     {hold > 0 && (
       <Token x={x + SZ * 0.74} y={base - SZ * 0.60} s={hold} z={z + 4}
         markKey={holdKey} name={holdName} hasMark={holdMark} claude={holdClaude}
-        rot={-6} />
+        rot={-6} f={f} />
     )}
   </>);
 };
@@ -308,14 +310,14 @@ export const Waiting: React.FC<{ x: number; base: number; s?: number; z?: number
 
 /** a labelled stack of tokens — the S1 comparison, at TRUE relative scale. */
 export const Stack: React.FC<{ x: number; base: number; n: number; s?: number; z?: number;
-  label: string; sub?: string; seed?: number }> =
-  ({ x, base, n, s = 1, z = 60, label, sub, seed = 1 }) => {
+  label: string; sub?: string; seed?: number; f?: number }> =
+  ({ x, base, n, s = 1, z = 60, label, sub, seed = 1, f = 0 }) => {
   const TS = 62 * s, STEP = TS * 0.22;
   return (<>
     <Contact x={x - TS * 0.62} y={base - 8 * s} w={TS * 1.24} z={z - 1} o={0.38} />
     {Array.from({ length: n }, (_, i) => (
       <Token key={"sk" + i} x={x + (rnd(seed + i, 3) - 0.5) * 7} y={base - TS / 2 - i * STEP}
-        s={TS} z={z + i} plain rot={(rnd(seed + i, 4) - 0.5) * 8} />
+        s={TS} z={z + i} plain rot={(rnd(seed + i, 4) - 0.5) * 8} f={f} live={0.5} />
     ))}
     {/* ⛔ THE LABEL GOES ABOVE THE STACK. Below the base it fell off the bottom
         of the panel on any stack standing on the floor line. */}
@@ -391,7 +393,7 @@ export const Belt: React.FC<{ y: number; f: number; z?: number; s?: number;
       const pr = PROVIDERS[(from + i) % 6];
       const x = ((i * SP + f * speed * on) % (W + 300)) - 150;
       return <Token key={"bt" + i} x={x} y={y - 4 * s} s={116 * s} z={z + 6 + i}
-        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={0} />;
+        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={0} f={f} />;
     })}
   </>);
 };
@@ -409,7 +411,7 @@ export const Junction: React.FC<{ x: number; y: number; f: number; n?: number;
       return (<React.Fragment key={"jn" + i}>
         {/* the logo, at the head of its own line */}
         <Token x={px} y={y - drop - 92 * s} s={150 * s} z={z + 20 + i}
-          markKey={pr.k} name={pr.n} hasMark={pr.mark} />
+          markKey={pr.k} name={pr.n} hasMark={pr.mark} f={f} />
         {/* the line down, and the elbow into the header */}
         <div style={{ position: "absolute", left: px - 15 * s, top: y - drop,
           width: 30 * s, height: drop, background: on > 0.5 ? "#C8963E" : "#8E8478",
@@ -464,7 +466,7 @@ export const Ledger: React.FC<{ x: number; y: number; f: number; rows?: number;
       return (
         <React.Fragment key={"lr" + i}>
           <Token x={x - RW / 2 + 62 * s} y={y + 22 * s + i * RH} s={72 * s}
-            z={z + 6} markKey={pr.k} name={pr.n} hasMark={pr.mark} />
+            z={z + 6} markKey={pr.k} name={pr.n} hasMark={pr.mark} f={f} />
           <div style={{ position: "absolute", left: x - RW / 2 + 112 * s,
             top: y + 4 * s + i * RH, width: RW * 0.42, zIndex: z + 5,
             fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 26 * s,
@@ -561,6 +563,7 @@ export const RepoCard: React.FC<{ x: number; y: number; s?: number; z?: number;
 export const Burst: React.FC<{ x: number; y: number; t: number; n?: number; s?: number;
   z?: number; spread?: number }> =
   ({ x, y, t, n = 16, s = 1, z = 100, spread = 520 }) => {
+  /* a burst token is already spinning hard, so it needs no idle on top */
   if (t <= 0.01 || t >= 1) return null;
   return (<>
     {Array.from({ length: n }, (_, i) => {
@@ -568,7 +571,7 @@ export const Burst: React.FC<{ x: number; y: number; t: number; n?: number; s?: 
       const d = (0.35 + rnd(i, 19) * 0.65) * spread * s * t;
       return <Token key={"bu" + i} x={x + Math.cos(a) * d}
         y={y + Math.sin(a) * d * 0.72 + t * t * 190 * s} s={(52 + rnd(i, 23) * 34) * s}
-        z={z + i} rot={t * 420 + i * 37} plain />;
+        z={z + i} rot={t * 420 + i * 37} plain live={0} />;
     })}
   </>);
 };
