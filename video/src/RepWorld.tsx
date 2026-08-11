@@ -42,6 +42,26 @@ export type { Place };
 export const CLAY = "#D97757", GOLD = "#E7B24C", GREEN = "#3F9E74";
 export const RED = "#C44A3A", SKY = "#5AA0DE", PAPER = "#F7F5F0";
 export const INK = "#1A1813";
+/* ⛔⛔ `dark()` AND `mix()` TAKE HEX AND RETURN `rgb(...)`, SO THEY DO NOT NEST.
+   `dark(dark(c, .2), .1)` runs `parseInt("gb(186,179,164)", 16)` -> NaN, and
+   `NaN >> 16 & 255` is 0, so the result is a SILENT SOLID BLACK — not a crash,
+   not a dropped style, black. It shipped as heavy black arches across the vault
+   and one black band through the middle of the gauge shot, and it only happens
+   when a surface is DIMMED, which is why the undimmed frames looked fine.
+   These two are hex-in/hex-out and are what every derived colour below uses. */
+export const dkh = (hex: string, k: number) => {
+  const n = parseInt(hex.slice(1), 16);
+  const m = (v: number) => Math.round(v * (1 - k));
+  const h = (v: number) => m(v).toString(16).padStart(2, "0");
+  return `#${h((n >> 16) & 255)}${h((n >> 8) & 255)}${h(n & 255)}`;
+};
+export const mxh = (hex: string, k: number) => {
+  const n = parseInt(hex.slice(1), 16);
+  const m = (v: number) => Math.round(v + (247 - v) * k);
+  const h = (v: number) => m(v).toString(16).padStart(2, "0");
+  return `#${h((n >> 16) & 255)}${h((n >> 8) & 255)}${h(n & 255)}`;
+};
+
 /* the world's own materials */
 export const BRASS = "#C8963E", BRASSD = "#8E6626", BRASSL = "#E8C57A";
 export const IRON = "#4A5058", IROND = "#33383E", IRONL = "#6E757E";
@@ -59,8 +79,12 @@ export const PLASTER = "#E8E0CE", STONE = "#9E9A90";
    ------------------------------------------------------------------------ */
 export const PLACES: Record<string, Place> = {
   /* --- S0/S6 · the pumphouse. BRIGHT, warm, the reel's home value --------- */
-  pump:  { back: "#E8E0CE", back2: "#C6BCA4", floor: "#9E9A90", floor2: "#6B6860",
-           lip: "#B0AA9C", key: GOLD, horizon: 470, grit: "#8A867C" },
+  /* ⛔ THE FLOOR IS WHAT COSTS YOU THE LUMA GATE. v1 measured 145.3 against the
+     ≥150 bar with a plaster vault that was already at 232 — the lower 40% of
+     the frame was a #6B6860 sweep dragging the mean down. Lifting the flags a
+     stop (and only the flags) took frame 0 to 158 without touching the mood. */
+  pump:  { back: "#E8E0CE", back2: "#C6BCA4", floor: "#B2ADA1", floor2: "#88857D",
+           lip: "#C0BAAB", key: GOLD, horizon: 470, grit: "#98948A" },
   /* the CTA framing: same room, pushed a full stop brighter still */
   tap:   { back: "#F0E9D9", back2: "#D4CAB2", floor: "#ADA79A", floor2: "#7C776E",
            lip: "#BEB7A6", key: GOLD, horizon: 500, grit: "#98938A" },
@@ -92,10 +116,13 @@ export const PLACES: Record<string, Place> = {
    an interior's mud and goes dark (reel 98 lost two opens to exactly that). */
 const EXT = ["yard", "row", "kiosk"];
 const INT = ["pump", "tap", "hall", "gear"];
+/* ⛔ HEX IN, HEX OUT. A `Place` field is fed straight back into `dkh`/`mxh` by
+   the surfaces below, so a rotation that emitted `rgb(...)` would turn every
+   dimmed variant black — the same trap, one level further out. */
 const LEVEL: Record<number, (c: string) => string> = {
-  1: (c) => mix(c, 0.10),
-  2: (c) => mix(c, 0.17),
-  3: (c) => dark(c, 0.11),
+  1: (c) => mxh(c, 0.10),
+  2: (c) => mxh(c, 0.17),
+  3: (c) => dkh(c, 0.11),
 };
 export const usePlace = (key: string): Place => {
   const p = React.useContext(PalCtx);
@@ -119,14 +146,14 @@ export const usePlace = (key: string): Place => {
 export const Vault: React.FC<{ p: Place; f: number; ribs?: number; arch?: boolean;
   dim?: number }> = ({ p, f, ribs = 5, arch = true, dim = 0 }) => {
   const hz = p.horizon;
-  const D = (c: string) => (dim > 0 ? dark(c, dim) : c);
+  const D = (c: string) => (dim > 0 ? dkh(c, dim) : c);
   return (<>
     {/* the vault itself — a wide ellipse of plaster, the brightest plane */}
     <div style={{ position: "absolute", inset: 0, zIndex: 1,
-      background: `linear-gradient(176deg, ${D(p.back2)} 0%, ${D(p.back)} 34%, ${D(p.back)} 62%, ${D(dark(p.back, 0.14))} 100%)` }} />
+      background: `linear-gradient(176deg, ${D(p.back2)} 0%, ${D(p.back)} 34%, ${D(p.back)} 62%, ${D(dkh(p.back, 0.14))} 100%)` }} />
     <div style={{ position: "absolute", left: -180, top: -300, width: W + 360, height: 760,
       borderRadius: "50%", zIndex: 2,
-      background: `linear-gradient(180deg, ${D(mix(p.back, 0.30))} 0%, ${D(p.back)} 70%)` }} />
+      background: `linear-gradient(180deg, ${D(mxh(p.back, 0.30))} 0%, ${D(p.back)} 70%)` }} />
     {/* the ribs — plaster arches receding, each one darker and closer together */}
     {Array.from({ length: ribs }, (_, i) => {
       const k = i / (ribs - 1);
@@ -135,22 +162,22 @@ export const Vault: React.FC<{ p: Place; f: number; ribs?: number; arch?: boolea
         <div key={"rb" + i} style={{ position: "absolute", left: W / 2 - wRib / 2,
           top: 28 + k * 96, width: wRib, height: hRib, zIndex: 3 + i,
           borderRadius: `${wRib / 2}px ${wRib / 2}px 0 0`,
-          border: `${13 - i * 2}px solid ${D(dark(p.back, 0.09 + k * 0.16))}`,
+          border: `${13 - i * 2}px solid ${D(dkh(p.back, 0.09 + k * 0.16))}`,
           borderBottom: "none", boxSizing: "border-box" }} />
       );
     })}
     {/* the far arch: the dark hole the feeders come out of */}
     {arch && (<>
       <div style={{ position: "absolute", left: W / 2 - 172, top: hz - 292, width: 344, height: 330,
-        borderRadius: "172px 172px 0 0", background: D(dark(p.back2, 0.52)), zIndex: 9 }} />
+        borderRadius: "172px 172px 0 0", background: D(dkh(p.back2, 0.52)), zIndex: 9 }} />
       <div style={{ position: "absolute", left: W / 2 - 148, top: hz - 268, width: 296, height: 300,
-        borderRadius: "148px 148px 0 0", background: D(dark(p.back2, 0.72)), zIndex: 10 }} />
+        borderRadius: "148px 148px 0 0", background: D(dkh(p.back2, 0.72)), zIndex: 10 }} />
     </>)}
     {/* the dado band — a painted skirting, the line that makes the wall a wall */}
     <div style={{ position: "absolute", left: 0, right: 0, top: hz - 96, height: 96,
-      background: D(dark(p.back, 0.20)), zIndex: 11 }} />
+      background: D(dkh(p.back, 0.20)), zIndex: 11 }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: hz - 100, height: 7,
-      background: D(dark(p.back, 0.34)), zIndex: 12 }} />
+      background: D(dkh(p.back, 0.34)), zIndex: 12 }} />
     {/* the floor */}
     <div style={{ position: "absolute", left: 0, right: 0, top: hz, bottom: 0, zIndex: 13,
       background: `linear-gradient(184deg, ${D(p.floor)} 0%, ${D(p.floor2)} 100%)` }} />
@@ -160,18 +187,18 @@ export const Vault: React.FC<{ p: Place; f: number; ribs?: number; arch?: boolea
     {Array.from({ length: 5 }, (_, r) => (
       <div key={"fj" + r} style={{ position: "absolute", left: 0, right: 0,
         top: hz + 26 + r * r * 15 + r * 26, height: 3,
-        background: D(dark(p.floor2, 0.26)), opacity: 0.7, zIndex: 15 }} />
+        background: D(dkh(p.floor2, 0.26)), opacity: 0.7, zIndex: 15 }} />
     ))}
     {Array.from({ length: 16 }, (_, i) => {
       const r = Math.floor(i / 4), c = i % 4;
       const y = hz + 26 + r * r * 15 + r * 26;
       return <div key={"fv" + i} style={{ position: "absolute",
         left: 40 + c * 250 + (r % 2) * 125, top: y, width: 3,
-        height: 26 + r * 16, background: D(dark(p.floor2, 0.22)), opacity: 0.55, zIndex: 15 }} />;
+        height: 26 + r * 16, background: D(dkh(p.floor2, 0.22)), opacity: 0.55, zIndex: 15 }} />;
     })}
     {/* the WET SHEEN — a solid lighter band on the flags under the lamp */}
     <div style={{ position: "absolute", left: W / 2 - 250, top: hz + 30, width: 500, height: 116,
-      borderRadius: "50%", background: D(mix(p.floor, 0.26)), opacity: 0.55, zIndex: 16 }} />
+      borderRadius: "50%", background: D(mxh(p.floor, 0.26)), opacity: 0.55, zIndex: 16 }} />
     {Array.from({ length: 20 }, (_, i) => (
       <div key={"fg" + i} style={{ position: "absolute", left: rnd(i, 11) * W,
         top: hz + 20 + rnd(i, 12) * (H - hz - 36), width: 4 + rnd(i, 13) * 7, height: 3,
@@ -186,22 +213,22 @@ export const Vault: React.FC<{ p: Place; f: number; ribs?: number; arch?: boolea
 export const Outside: React.FC<{ p: Place; f: number; water?: boolean; lamps?: number;
   dim?: number }> = ({ p, f, water = false, lamps = 0, dim = 0 }) => {
   const hz = p.horizon;
-  const D = (c: string) => (dim > 0 ? dark(c, dim) : c);
+  const D = (c: string) => (dim > 0 ? dkh(c, dim) : c);
   return (<>
     <div style={{ position: "absolute", inset: 0, zIndex: 1,
       background: `linear-gradient(178deg, ${D(p.back)} 0%, ${D(p.back2)} 100%)` }} />
     {/* a far bank: the silhouette that gives the sky a bottom */}
     <div style={{ position: "absolute", left: -40, top: hz - 74, width: W + 80, height: 82,
-      zIndex: 4, background: D(dark(p.back2, 0.38)),
+      zIndex: 4, background: D(dkh(p.back2, 0.38)),
       clipPath: "polygon(0% 62%, 9% 44%, 17% 52%, 26% 30%, 34% 42%, 44% 26%, 53% 40%, 62% 22%, 71% 38%, 80% 30%, 89% 44%, 100% 34%, 100% 100%, 0% 100%)" }} />
     {/* the lamp row on the far bank */}
     {Array.from({ length: lamps }, (_, i) => {
       const x = 88 + i * ((W - 176) / Math.max(1, lamps - 1));
       return (<React.Fragment key={"lr" + i}>
         <div style={{ position: "absolute", left: x - 2, top: hz - 96, width: 4, height: 40,
-          background: D(dark(p.back2, 0.52)), zIndex: 5 }} />
+          background: D(dkh(p.back2, 0.52)), zIndex: 5 }} />
         <div style={{ position: "absolute", left: x - 8, top: hz - 104, width: 16, height: 13,
-          borderRadius: 4, background: D(mix(p.key, 0.20)), zIndex: 6 }} />
+          borderRadius: 4, background: D(mxh(p.key, 0.20)), zIndex: 6 }} />
       </React.Fragment>);
     })}
     <div style={{ position: "absolute", left: 0, right: 0, top: hz, bottom: 0, zIndex: 12,
@@ -216,14 +243,14 @@ export const Outside: React.FC<{ p: Place; f: number; water?: boolean; lamps?: n
         return <div key={"wv" + i} style={{ position: "absolute",
           left: -60 + Math.sin(f / 38 + i * 1.4) * 26, top: y,
           width: W + 120, height: 3 + i * 0.5, borderRadius: 3,
-          background: D(mix(p.floor, 0.20 + i * 0.026)), opacity: 0.68, zIndex: 14 }} />;
+          background: D(mxh(p.floor, 0.20 + i * 0.026)), opacity: 0.68, zIndex: 14 }} />;
       })}
       {/* the reflected lamp: a broken vertical column of solid dashes */}
       {Array.from({ length: 9 }, (_, i) => (
         <div key={"rf" + i} style={{ position: "absolute",
           left: W / 2 - 26 + Math.sin(f / 26 + i) * 13, top: hz + 18 + i * 30,
           width: 52 + i * 9, height: 7 + i, borderRadius: 5,
-          background: D(mix(p.key, 0.36)), opacity: 0.5 - i * 0.03, zIndex: 15 }} />
+          background: D(mxh(p.key, 0.36)), opacity: 0.5 - i * 0.03, zIndex: 15 }} />
       ))}
     </>) : (<>
       {Array.from({ length: 22 }, (_, i) => (
@@ -247,7 +274,6 @@ export const Rain: React.FC<{ f: number; n?: number; z?: number; c?: string }> =
         opacity: 0.34, zIndex: z, transform: "rotate(9deg)" }} />;
     })}
   </>);
-};
 
 /** the puddle a rain scene stands in — solid, with two ripple rings. */
 export const Puddle: React.FC<{ x: number; y: number; w?: number; f: number; c?: string;

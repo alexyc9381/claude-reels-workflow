@@ -96,23 +96,34 @@ export const S0Hook: React.FC = () => {
      that ACTS in this shot is the gust. */
   if (shot === 0) {
     const gust = E(lf, 10, 26, 0, 1, IO);
+    /* ⭐ ROUND 4 · THE HOOK NOW HAS EVENTS, NOT JUST WEATHER. Alex: *"more motion
+       components in the hook, spinning Claude logo, opening door."* Four things
+       happen inside this one locked second, staggered so they read as a sequence
+       rather than a pile:
+         f2-f8    the three gantry floods snap on, left to right
+         f6-f24   the outer roller shutter RISES and the doorway lights up
+         f0-      the mark on the mass turns, continuously
+         f4-      the Keeper walks the apron toward the door (the one SUBJECT)
+       Everything except the Keeper is a fixture or a light, so the motion
+       hierarchy holds: one thing moves, the rest of the frame changes state. */
+    const fl = [0, 1, 2].map((i) => E(lf, 2 + i * 3, 7 + i * 3, 0, 1, OUT)) as [number, number, number];
+    const shut = E(lf, 6, 24, 0, 1, OUT);
+    const walk = E(lf, 4, 33, 0, 1, LIN);
     return (
       <Scene p={pr} slug="NORTH RIDGE  ·  BAY 08" push={[0, 33, 1.05]} vig={0.44}>
         <Ridge p={pr} f={f} city={1} lit={1} sunX={846} storm={1} fires={1} />
-        {/* MID · the grid that already fell over */}
         <div style={{ position: "absolute", left: 24, top: pr.horizon + 74, zIndex: 22,
           transform: "rotate(74deg)", transformOrigin: "50% 100%" }}>
           <Mast x={150} base={230} h={300} s={0.86} z={0} f={0} on={0} />
         </div>
-        {/* HERO · the bunker, filling the frame */}
         <Bunker x={556} base={pr.horizon + 232} s={0.90} z={26} f={f}
-          slot={0.92 + Math.sin(f / 17) * 0.06 - gust * 0.22} floods={1} lamp={1} />
-        {/* MARK 1 · cast into the mass, above the gantry, drawn at FRAME 0 */}
-        <MarkCast x={556} y={pr.horizon - 122} s={96} z={70} o={0.92} />
-        {/* MARK 2 · the Keeper on the apron, badge above his hood, giving scale */}
-        <Keeper x={228} y={pr.horizon + 344} s={1.30} z={90} f={f} face={1} hood={1}
-          badge={1} lit={0.98} />
-        {/* FG · the wreck and the fence, both cropped by the panel */}
+          slot={(0.58 + shut * 0.42) * (0.94 + Math.sin(f / 17) * 0.06) - gust * 0.18}
+          floods={1} floodSeq={fl} lamp={1} shutter={0.55 * (1 - shut)} vent={1} />
+        {/* MARK 1 · cast into the mass, TURNING, drawn at FRAME 0 */}
+        <MarkCast x={556} y={pr.horizon - 122} s={96} z={70} o={0.92} spin={0.9} f={f} />
+        {/* MARK 2 · the Keeper walking the apron, badge above his hood */}
+        <Keeper x={198 + walk * 116} y={pr.horizon + 344} s={1.30} z={90} f={f} face={1}
+          hood={1} walk={walk > 0.01 && walk < 0.99 ? 1 : 0} badge={1} lit={0.98} />
         <Wreck x={838} base={pr.horizon + 350} s={1.15} z={84} face={-1} />
         <Fence y={pr.horizon + 236} z={82} s={1.10} torn={1} />
         <Ash f={f} n={30} z={76} speed={1 + gust * 2.2} />
@@ -132,7 +143,7 @@ export const S0Hook: React.FC = () => {
         <BlastDoor x={506} base={pd.horizon + 128} w={620} h={560} z={30} f={f}
           bleed={0.85 + Math.sin(f / 19) * 0.08} frost={1 - fall * 0.55} open={0} />
         {/* MARK 3 · stencilled on the door leaf, beside NOMAD */}
-        <MarkCast x={506} y={pd.horizon - 448} s={104} z={46} o={0.86} />
+        <MarkCast x={506} y={pd.horizon - 448} s={104} z={46} o={0.86} spin={-0.7} f={f} />
         {/* MARK 4 · and the product noun, bolted on where a sign would be */}
         <MarkPlate x={222} y={pd.horizon - 96} t="OFFLINE AI · NO CLOUD" s={0.92} z={48} />
         {/* the frost sheet that comes off on the sub-bass hit */}
@@ -175,7 +186,7 @@ export const S0Hook: React.FC = () => {
           color: "#C6CBD1", opacity: 0.30, lineHeight: 1 }}>N</div>
         <Wheel x={452} y={430} r={272} z={40} rot={-turn * 128} frost={1 - turn * 0.7} />
         {/* MARK 5 · the wheel's hub, so the macro shot carries one too */}
-        <MarkCast x={452} y={636} s={86} z={52} o={0.94} />
+        <MarkCast x={452} y={636} s={86} z={52} o={0.94} spin={1.4} f={f} />
         <Mitt x={604} y={352} s={1.45} z={60} rot={-16 + turn * 118} />
         {/* the seal parting: a blade of warm light across the frame */}
         {seal > 0 && (
@@ -212,7 +223,7 @@ export const S0Hook: React.FC = () => {
       {/* ⛔ HE STANDS ON THE FLOOR PLANE, not in mid-pipe. The Mascot has no back
           view in the house kit, so he is staged facing us at the mouth with the
           warm hall behind him as a rim, rather than walking away from camera. */}
-      <MarkCast x={534} y={168} s={92} z={70} o={0.72} />
+      <MarkCast x={534} y={168} s={92} z={70} o={0.72} spin={0.8} f={f} pulse={1} />
       <Keeper x={378} y={726} s={1.34} z={80} f={f} face={1} walk={step > 0.05 ? 1 : 0}
         hood={1} badge={1} lit={0.80} />
       <Snow f={f} n={12} z={82} near speed={1.6} c="#DCE7F0" />

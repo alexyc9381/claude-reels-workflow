@@ -2,11 +2,12 @@ import React from "react";
 import { Composition, registerRoot } from "remotion";
 import {
   AgencyReel, AgencyReelB, AgencyReelC, AgencyReelD, AgencyReelE, AgencyReelF,
-  AGY_TOTAL, VARIANTS,
+  AgencyReelG, AgencyReelH, AGY_TOTAL, VARIANTS,
 } from "./ClaudeAgencyReel";
 import { S0Hook } from "./AgyScenes";
 import { HookQueue, HookCoach, HookShadow } from "./AgyHooks";
 import { HookLift, HookParade } from "./AgyHooks2";
+import { HookPress, HookBoard } from "./AgyHooks3";
 
 /* Reel 94 "AGENCY". Board: storyboards/94-agency.md.
 
@@ -33,11 +34,20 @@ const Root: React.FC = () => (<>
   <Composition id="AgencyReelF" component={AgencyReelF}
     durationInFrames={AGY_TOTAL + VARIANTS[5].endHold} {...V} />
 
+  {/* ROUND 8 · the two REPOST cuts, built to the frame-0 DNA of the two that
+      performed. See the header of AgyHooks3.tsx for the measurement. */}
+  <Composition id="AgencyReelG" component={AgencyReelG}
+    durationInFrames={AGY_TOTAL + VARIANTS[6].endHold} {...V} />
+  <Composition id="AgencyReelH" component={AgencyReelH}
+    durationInFrames={AGY_TOTAL + VARIANTS[7].endHold} {...V} />
+
   <Composition id="agyHookA" component={S0Hook}     durationInFrames={83} {...V} />
   <Composition id="agyHookB" component={HookQueue}  durationInFrames={83} {...V} />
   <Composition id="agyHookC" component={HookCoach}  durationInFrames={83} {...V} />
   <Composition id="agyHookD" component={HookShadow} durationInFrames={83} {...V} />
   <Composition id="agyHookE" component={HookLift}   durationInFrames={83} {...V} />
   <Composition id="agyHookF" component={HookParade} durationInFrames={83} {...V} />
+  <Composition id="agyHookG" component={HookPress}  durationInFrames={83} {...V} />
+  <Composition id="agyHookH" component={HookBoard}  durationInFrames={83} {...V} />
 </>);
 registerRoot(Root);

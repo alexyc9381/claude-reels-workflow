@@ -135,9 +135,29 @@ export const Standpipe: React.FC<{ x: number; base: number; top?: number; s?: nu
     })}
     {gauge && <Gauge x={x} y={base - 44 * s - 430 * s} h={430 * s} t={fill} w={62 * s}
       z={z + 20} f={f} />}
-    {wheel > 0 && <Handwheel x={x} y={base - 44 * s - 470 * s} s={s * 1.05} z={z + 30} rot={wheel} />}
   </>);
 };
+
+/** the side-mounted handwheel and its spindle into the column.
+    ⛔⛔ FRAME 0 MUST BE COMPLETE CONTENT (docs/THE-OPEN.md law 1). v1 gated this
+       on `wheel > 0`, so at frame 0 — the one frame the whole hook is built on —
+       the wheel the valveman is supposedly gripping WAS NOT ON SCREEN, and the
+       reversal at f12 had nothing to break. It renders unconditionally; only
+       its ROTATION is animated. */
+export const SideWheel: React.FC<{ x: number; y: number; toX: number; s?: number;
+  z?: number; rot?: number }> = ({ x, y, toX, s = 1, z = 70, rot = 0 }) => (<>
+    {/* the spindle running from the wheel hub into the column */}
+    <div style={{ position: "absolute", left: Math.min(x, toX), top: y - 9 * s,
+      width: Math.abs(toX - x), height: 18 * s, borderRadius: 9 * s, background: BRASSD,
+      zIndex: z - 2, boxShadow: SH }} />
+    <div style={{ position: "absolute", left: Math.min(x, toX), top: y - 9 * s,
+      width: Math.abs(toX - x), height: 6 * s, borderRadius: 9 * s, background: BRASS,
+      zIndex: z - 1 }} />
+    {/* the gland where it enters the casting */}
+    <div style={{ position: "absolute", left: toX - 22 * s, top: y - 26 * s, width: 44 * s,
+      height: 52 * s, borderRadius: 6, background: IRONL, zIndex: z, boxShadow: SH }} />
+    <Handwheel x={x} y={y} s={s} z={z + 2} rot={rot} />
+  </>);
 
 /** the brass handwheel. `rot` is degrees — the hook's whole first beat. */
 export const Handwheel: React.FC<{ x: number; y: number; s?: number; z?: number; rot?: number }> =
@@ -167,36 +187,54 @@ export const Handwheel: React.FC<{ x: number; y: number; s?: number; z?: number;
   );
 };
 
-/** the feeder bundle: N thin pipes arcing in from the dark and entering the
-    column. `charge` 0..1 lights them from the outside in. */
+/** the feeder bundle: N thin pipes running in from the dark and CONVERGING on
+    the column. `charge` 0..1 lights them from the outside in.
+
+    ⛔ v1 drew them as parallel horizontals at one weight, spanning the whole
+       frame — it read as scaffolding, not as pipes arriving. They now FAN: each
+       pipe is rotated about its union so it points at the column, and the
+       nearer ones are thicker and darker. Convergence is what says "these all
+       go to the same place", which is the entire claim of the reel. */
 export const Feeders: React.FC<{ x: number; y: number; n?: number; s?: number; z?: number;
-  f?: number; charge?: number; span?: number }> =
-  ({ x, y, n = 12, s = 1, z = 30, f = 0, charge = 0, span = 470 }) => (<>
+  f?: number; charge?: number; span?: number; fan?: number; spread?: number }> =
+  ({ x, y, n = 12, s = 1, z = 30, f = 0, charge = 0, span = 150, fan = 5,
+     spread = 210 }) => (<>
     {Array.from({ length: n }, (_, i) => {
       const side = i % 2 === 0 ? -1 : 1;
-      const k = Math.floor(i / 2) / Math.max(1, n / 2 - 1);
-      const len = (140 + k * span) * s;
-      const yy = y + k * 96 * s;
+      const rows = Math.max(1, Math.ceil(n / 2));
+      const k = Math.floor(i / 2) / Math.max(1, rows - 1);
+      /* irregular lengths — an evenly-stepped fan reads as a FISHBONE */
+      const len = (168 + k * span + rnd(i, 61) * 96) * s;
+      /* ⛔ THEY ENTER THE COLUMN AT DIFFERENT HEIGHTS, NOT ALL AT ONE POINT.
+         v2 radiated every pipe from a single band at ±15° and the result was a
+         SUNBURST — a spider, not plumbing. A bundle reads as a bundle when the
+         unions are stacked up the casting and the pipes are near-horizontal. */
+      const yy = y + (k - 0.5) * spread * s;
+      const ang = side * (-fan + k * fan * 2) * 0.5;
       const lit = charge > 0 && charge * n > i ? 1 : 0;
-      const th = (13 - k * 4) * s;
+      const th = (17 - k * 6) * s;
+      const originX = x + side * 54 * s;
       return (<React.Fragment key={"fd" + i}>
-        <div style={{ position: "absolute", left: side < 0 ? x - len : x, top: yy,
+        <div style={{ position: "absolute",
+          left: side < 0 ? originX - len : originX, top: yy - th / 2,
           width: len, height: th, borderRadius: th / 2,
-          background: lit ? WATERD : IROND, zIndex: z + i, boxShadow: SH }} />
-        <div style={{ position: "absolute", left: side < 0 ? x - len : x, top: yy,
-          width: len, height: th * 0.34, borderRadius: th / 2,
-          background: lit ? WATERL : IRONL, opacity: 0.7, zIndex: z + i + 1 }} />
+          background: lit ? WATERD : IROND, zIndex: z + (rows - Math.floor(i / 2)),
+          boxShadow: SH, transformOrigin: side < 0 ? "100% 50%" : "0% 50%",
+          transform: `rotate(${ang}deg)` }}>
+          <div style={{ position: "absolute", inset: 0, height: th * 0.34,
+            borderRadius: th / 2, background: lit ? WATERL : IRONL, opacity: 0.7 }} />
+          {/* a travelling pulse, so a lit feeder FLOWS rather than just recolours */}
+          {lit > 0 && (
+            <div style={{ position: "absolute",
+              left: side < 0 ? len - ((f * 8 + i * 37) % len) : ((f * 8 + i * 37) % len),
+              top: 0, width: 40 * s, height: th, borderRadius: th / 2,
+              background: WATERL, opacity: 0.72 }} />
+          )}
+        </div>
         {/* the union collar where it meets the column */}
-        <div style={{ position: "absolute", left: x + side * (52 * s) - 11 * s, top: yy - 5 * s,
-          width: 22 * s, height: th + 10 * s, borderRadius: 4, background: BRASSD,
-          zIndex: z + i + 2 }} />
-        {/* a travelling pulse, so a lit feeder reads as FLOWING not just coloured */}
-        {lit > 0 && (
-          <div style={{ position: "absolute",
-            left: (side < 0 ? x - len : x) + ((f * 7 + i * 40) % len),
-            top: yy, width: 34 * s, height: th, borderRadius: th / 2,
-            background: WATERL, opacity: 0.7, zIndex: z + i + 3 }} />
-        )}
+        <div style={{ position: "absolute", left: originX - 13 * s, top: yy - th / 2 - 6 * s,
+          width: 26 * s, height: th + 12 * s, borderRadius: 4, background: BRASSD,
+          zIndex: z + rows + 4 }} />
       </React.Fragment>);
     })}
   </>);
@@ -476,12 +514,12 @@ export const Pail: React.FC<{ x: number; y: number; s?: number; z?: number; fill
     <div style={{ position: "absolute", left: x - bw / 2 - 5 * s, top: y - 7 * s,
       width: bw + 10 * s, height: 15 * s, borderRadius: 4, background: "#8E887A", zIndex: z + 4 }} />
     {mark && (
-      <div style={{ position: "absolute", left: x - 30 * s, top: y + bh * 0.22, width: 60 * s,
-        height: 60 * s, borderRadius: 14 * s, background: "#FFFFFF", zIndex: z + 6,
+      <div style={{ position: "absolute", left: x - 23 * s, top: y + bh * 0.30, width: 46 * s,
+        height: 46 * s, borderRadius: 11 * s, background: "#FFFFFF", zIndex: z + 6,
         border: `${3 * s}px solid #E8DCC0`, boxShadow: SH,
         display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Img src={staticFile("claude_logo.png")}
-          style={{ width: 44 * s, height: 44 * s, objectFit: "contain" }} />
+          style={{ width: 33 * s, height: 33 * s, objectFit: "contain" }} />
       </div>
     )}
   </>);

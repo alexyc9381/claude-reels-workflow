@@ -8,10 +8,10 @@ import {
   WATER, WATERD, WATERL,
   Vault, Outside, Rain, Puddle, Stream, Splash, Drip,
   Scene, Cam, Beam, Strip, Motes, Chip, Plate, BigNum, Contact, Edge,
-  Mark, MarkPlate, MarkCast, Disc, Stencil, MakerPlate, PROVIDERS, usePlace,
+  Mark, MarkPlate, MarkCast, Disc, Stencil, MakerPlate, PROVIDERS, usePlace, dkh, mxh,
 } from "./RepWorld";
 import {
-  Gauge, Standpipe, Handwheel, Feeders, Tap, CoinPump, Coin, Manifold, RatingPlate,
+  Gauge, Standpipe, Handwheel, SideWheel, Feeders, Tap, CoinPump, Coin, Manifold, RatingPlate,
   Selector, Lamp, Pail, TinCup, Valveman, Waiting, PipeMouth,
 } from "./RepProps";
 
@@ -81,30 +81,46 @@ export const S0Hook: React.FC = () => {
   const shot = CUT.filter((c) => f >= c).length - 1;
   const lf = f - CUT[shot];
 
+  /* the grip geometry, derived once so the wheel cannot drift off the hands.
+     The Mascot is a 200-unit viewBox drawn at `250 * s`; its arm blocks sit at
+     y 86..112, so the arm centre is `base - 250*s + 99*s`. */
+  const BASE = p.horizon + 176, VS = 0.80, VMX = W / 2 - 268;
+  const ARMY = BASE - 250 * VS + 99 * VS;
+  const WHX = VMX + 118;
+
   /* ---- A · WIDE · THE PUMPHOUSE. The wheel breaks free at f12. ---------- */
   if (shot === 0) {
     const brk = E(lf, 12, 22, 0, 1, OUT);              /* the wheel turning */
     const sk = shake(lf, 12, 15, 13);
     const surge = E(lf, 13, 21, 0, 1, OUT);            /* water hammer down the feeders */
     return (
-      <Scene p={p} slug="ENGINE HOUSE  ·  THE MAIN" push={[0, 22, 1.045]} vig={0.5}>
+      <Scene p={p} slug="ENGINE HOUSE  ·  THE MAIN" push={[0, 22, 1.045]} vig={0.40}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px)` }}>
           <Vault p={p} f={f} ribs={5} />
-          <Lamp x={214} y={104} s={1.05} z={26} f={f} on={1} />
-          <Beam x={214} y={150} top={100} bot={430} len={430} c="#F2E2BC" o={0.22} z={22} f={f} />
-          <PipeMouth x={W / 2} y={p.horizon - 138} s={0.9} z={18} />
+          <Lamp x={838} y={128} s={0.98} z={26} f={f} on={1} />
+          <Beam x={838} y={172} top={100} bot={430} len={430} c="#F2E2BC" o={0.22} z={22} f={f} />
+          <PipeMouth x={W / 2} y={p.horizon - 150} s={0.86} z={16} />
           {/* the twenty-nine feeders, dark and dead — the baseline to break */}
-          <Feeders x={W / 2} y={286} n={12} s={0.9} z={24} f={f} charge={surge * 12} span={420} />
-          {/* THE OBJECT. Gauge empty at f0; it is the wheel that moves first. */}
-          <Standpipe x={W / 2} base={p.horizon + 176} top={96} s={0.86} z={38} f={f}
-            fill={0} wheel={brk * 210} gauge />
-          <Valveman x={W / 2 - 214} base={p.horizon + 176} s={0.80} z={72} f={f}
-            gaze={0.5} shock={brk * 0.5} />
-          {/* the outlet and the pail — the Claude mark, in frame 0 */}
-          <Pail x={W / 2 + 236} y={p.horizon + 62} s={0.78} z={74} fill={0} />
-          <Drip x={W / 2 + 236} y={p.horizon + 6} f={f} period={54} fall={54} z={73} />
-          <Edge side="l" c={dark(p.back, 0.42)} kind="post" z={93} />
+          <Feeders x={W / 2} y={330} n={12} s={0.9} z={20} f={f} charge={surge * 12} />
+          {/* THE OBJECT. Gauge empty at f0; it is the WHEEL that moves first. */}
+          <Standpipe x={W / 2} base={BASE} top={92} s={0.86} z={38} f={f} fill={0} gauge />
+          {/* ⛔ THE HANDS HAVE TO BE ON IT. The Mascot is a rigid box, so "grip"
+              is staged, not posed: the wheel hub sits at the arm-block's exact
+              centre height (body top + 86 + 13 of a 200 viewBox) and the spindle
+              is drawn as a visible SPAN into the column — proximity alone never
+              reads as connection (reel 81's chain). */}
+          <SideWheel x={WHX} y={ARMY} toX={W / 2 - 56} s={0.74} z={66} rot={brk * 210} />
+          <Valveman x={VMX} base={BASE} s={0.80} z={70} f={f}
+            gaze={0.6} shock={brk * 0.45} />
+          {/* the outlet spout and the pail — the Claude mark, in frame 0 */}
+          <div style={{ position: "absolute", left: W / 2 + 236, top: p.horizon - 46,
+            width: 40, height: 96, borderRadius: 5, background: BRASSD, zIndex: 72 }} />
+          <div style={{ position: "absolute", left: W / 2 + 210, top: p.horizon - 60,
+            width: 92, height: 26, borderRadius: 5, background: IRONL, zIndex: 73 }} />
+          <Pail x={W / 2 + 256} y={p.horizon + 74} s={0.76} z={74} fill={0} />
+          <Drip x={W / 2 + 256} y={p.horizon + 54} f={f} period={54} fall={22} z={73} />
+          <Edge side="l" c={dkh(p.back, 0.42)} kind="post" z={93} />
           <Flash lf={lf} at={12} />
         </div>
       </Scene>

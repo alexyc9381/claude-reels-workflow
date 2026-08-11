@@ -110,8 +110,10 @@ export const Portal: React.FC<{ x: number; base: number; s?: number; z?: number;
    a rotating amber lamp, buttresses, a bay stencil and a stair.
    ====================================================================== */
 export const Bunker: React.FC<{ x: number; base: number; s?: number; z?: number; f?: number;
-  slot?: number; floods?: number; lamp?: number }> =
-  ({ x, base, s = 1, z = 30, f = 0, slot = 1, floods = 1, lamp = 1 }) => {
+  slot?: number; floods?: number; lamp?: number; shutter?: number; vent?: number;
+  floodSeq?: [number, number, number] }> =
+  ({ x, base, s = 1, z = 30, f = 0, slot = 1, floods = 1, lamp = 1, shutter = 0, vent = 0,
+     floodSeq }) => {
   const W2 = 520 * s, Hm = 400 * s;            // the main mass
   const top = base - Hm;
   const tierW = 330 * s, tierH = 96 * s;
@@ -209,10 +211,11 @@ export const Bunker: React.FC<{ x: number; base: number; s?: number; z?: number;
           background: "#33383F", borderRadius: `0 0 ${8 * s}px ${8 * s}px` }} />
         <div style={{ position: "absolute", left: x + k * W2 * 0.30 - 15 * s,
           top: top + Hm * 0.36 + 36 * s, width: 30 * s, height: 8 * s, zIndex: z + 14,
-          background: "#F2E3BC", opacity: 0.30 + flick * 0.70, borderRadius: 3 }} />
+          background: "#F2E3BC",
+          opacity: 0.30 + flick * 0.70 * (floodSeq ? floodSeq[i] : 1), borderRadius: 3 }} />
         <div style={{ position: "absolute", left: x + k * W2 * 0.30 - 78 * s,
           top: top + Hm * 0.36 + 42 * s, width: 156 * s, height: 200 * s, zIndex: z + 10,
-          background: `linear-gradient(180deg, ${hexa("#F2E3BC", 0.24 * flick)} 0%, ${hexa("#F2E3BC", 0)} 100%)`,
+          background: `linear-gradient(180deg, ${hexa("#F2E3BC", 0.24 * flick * (floodSeq ? floodSeq[i] : 1))} 0%, ${hexa("#F2E3BC", 0)} 100%)`,
           clipPath: "polygon(38% 0, 62% 0, 100% 100%, 0 100%)" }} />
       </React.Fragment>
     ))}
@@ -236,6 +239,32 @@ export const Bunker: React.FC<{ x: number; base: number; s?: number; z?: number;
         background: `linear-gradient(180deg, ${hexa("#EED9AC", 0.50 * slot)} 0%, ${hexa("#EED9AC", 0)} 100%)`,
         clipPath: "polygon(32% 0, 68% 0, 100% 100%, 0 100%)" }} />
     </>)}
+    {/* ⭐ THE OUTER SHUTTER. Alex asked for an opening door in the hook; the
+        BLAST door already opens in shot D, so repeating it there would spend the
+        same beat twice. This is the roller shutter in front of it, and it rises
+        during shot A — a genuine reveal, on a different object. */}
+    {shutter > 0.002 && (
+      <div style={{ position: "absolute", left: x - 92 * s, top: base - 252 * s, width: 184 * s,
+        height: 252 * s * shutter, zIndex: z + 19, overflow: "hidden",
+        background: "#5E646C", borderRadius: `${8 * s}px ${8 * s}px 0 0` }}>
+        {Array.from({ length: 12 }, (_, i) => (
+          <div key={"sl" + i} style={{ position: "absolute", left: 0, right: 0, top: i * 22 * s,
+            height: 18 * s, background: i % 2 ? "#525860" : "#6A7078" }} />
+        ))}
+        <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 12 * s,
+          background: "#3E434A" }} />
+      </div>
+    )}
+    {/* ⭐ THE STACK VENTS. Three puffs on a loop, drifting up and out. */}
+    {vent > 0 && Array.from({ length: 3 }, (_, i) => {
+      const t2 = ((f * 0.9 + i * 40) % 120) / 120;
+      const sz = (18 + t2 * 68) * s;
+      return <div key={"vp" + i} style={{ position: "absolute",
+        left: x + W2 * 0.20 + 22 * s - sz / 2 + t2 * 66 * s,
+        top: base - Hm - tierH - 146 * s - t2 * 130 * s,
+        width: sz, height: sz * 0.72, borderRadius: "50%", background: "#B9B3AA",
+        opacity: (1 - t2) * 0.42 * vent, zIndex: z + 1 }} />;
+    })}
     {/* the stair up to the threshold, so the door is reachable */}
     {[0, 1, 2].map((i) => (
       <div key={"st" + i} style={{ position: "absolute", left: x - (118 + i * 22) * s,

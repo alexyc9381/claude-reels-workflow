@@ -294,21 +294,45 @@ export const HookPress: React.FC = () => {
       <HookScene w={w} litFar={0.18} push={[0, 28, 1.06]}>
         {/* the shopfront, roller door up, the press lit from inside */}
         <div style={{ position: "absolute", left: 108, top: 116, width: 800, height: 470,
-          zIndex: 20, background: "#241F2C", border: "12px solid #3C3546", borderRadius: 8 }} />
+          zIndex: 20, background: "#1A1620", border: "12px solid #3C3546", borderRadius: 8 }} />
         <div style={{ position: "absolute", left: 132, top: 140, width: 752, height: 300,
-          zIndex: 21, background: "linear-gradient(178deg,#6E6248 0%,#4A4132 100%)" }} />
-        {/* the press body, squashing on the strike */}
-        <div style={{ position: "absolute", left: 268, top: 214, width: 470, height: 300,
-          zIndex: 30, transformOrigin: "50% 100%", transform: `scaleY(${1 - hit * 0.035})`,
-          background: "linear-gradient(178deg,#443D50 0%,#282332 100%)", borderRadius: 10,
-          boxShadow: SH_D }}>
-          <div style={{ position: "absolute", left: 40, top: 34, right: 40, height: 74,
-            background: "#1A1622", borderRadius: 6 }} />
-          <div style={{ position: "absolute", left: 62, top: 152, right: 62, height: 108,
-            background: "#EFE9D9", borderRadius: 4 }} />
-          <Mark x={196} y={54} d={78} f={f} z={34} />
+          zIndex: 21, background: "linear-gradient(178deg,#7C6E50 0%,#514736 100%)" }} />
+        {/* ⛔ V1's press was one dark slab inside a tan rectangle and read as "a
+            beige box with paper coming out". A machine needs a SILHOUETTE that
+            is nameable from the outline alone ([[reel-draw-dont-stack]]): two
+            cast-iron side pillars, a crown across the top, a delivery tray at
+            the bottom, and VALUE SEPARATION — the iron is the darkest thing in
+            the frame against the lit wall behind it. */}
+        <div style={{ position: "absolute", left: 254, top: 176, width: 500, height: 344,
+          zIndex: 30, transformOrigin: "50% 100%", transform: `scaleY(${1 - hit * 0.035})` }}>
+          {/* the crown */}
+          <div style={{ position: "absolute", left: 0, top: 0, width: 500, height: 74,
+            borderRadius: "12px 12px 0 0", background: "#3E3748", boxShadow: SH_D }} />
+          <Mark x={211} y={-6} d={86} f={f} z={38} />
+          {/* the two pillars */}
+          {[0, 1].map((i) => (
+            <div key={"pl" + i} style={{ position: "absolute", left: i ? 424 : 0, top: 62,
+              width: 76, height: 246, background: "#2A2434",
+              borderLeft: "7px solid #4A4356", borderRight: "7px solid #17131F" }}>
+              {Array.from({ length: 4 }, (_, k) => (
+                <div key={k} style={{ position: "absolute", left: 12, right: 12,
+                  top: 30 + k * 56, height: 12, borderRadius: 3, background: "#4A4356" }} />
+              ))}
+            </div>
+          ))}
+          {/* the platen, seated — this is what just came down */}
+          <div style={{ position: "absolute", left: 76, top: 62, width: 348, height: 96,
+            background: "linear-gradient(178deg,#544C62 0%,#332C40 100%)",
+            borderBottom: "10px solid #17131F" }} />
+          {/* the throat it fires out of, and the delivery tray under it */}
+          <div style={{ position: "absolute", left: 76, top: 158, width: 348, height: 92,
+            background: "#0F0C16" }} />
+          <div style={{ position: "absolute", left: 58, top: 250, width: 384, height: 58,
+            borderRadius: 6, background: "#EFE9D9", border: "5px solid #CFC5A8" }} />
+          <div style={{ position: "absolute", left: 0, top: 308, width: 500, height: 36,
+            borderRadius: "0 0 10px 10px", background: "#241E30" }} />
         </div>
-        <Flywheel x={228} y={430} r={92} z={31} />
+        <Flywheel x={214} y={430} r={96} z={31} />
         {/* ⭐ THE FAN. 30 sheets is the readable count; 270 drawn rects is mush
             and the number is carried by the tally instead. Each is a real arc
             with its own rotation, so no two travel the same line. */}
@@ -334,14 +358,20 @@ export const HookPress: React.FC = () => {
             </div>
           );
         })}
-        {/* the tally, on cream, so the claim plate never leaves the frame */}
-        <div style={{ position: "absolute", left: 44, top: 570, width: 336, zIndex: 84,
+        {/* the tally, on cream, so the claim plate never leaves the frame.
+            ⛔⛔ THE PUSH CROPS, AND THE ARITHMETIC IS DOABLE BEFORE RENDERING.
+            V1 put this at left 44 and the render came back reading "CIALIS" —
+            at scale 1.06 about origin 50%, x=44 lands at 506+(44-506)*1.06 =
+            16.3, i.e. 18px off the left edge of the panel. The safe band here is
+            x >= 47.4 and x+w <= 964.6. This sits at 96 with 420 of width, which
+            also gives the mono line room it did not have. */}
+        <div style={{ position: "absolute", left: 96, top: 566, width: 420, zIndex: 84,
           borderRadius: 18, background: "#EDE7D6", border: "9px solid #B3A98F",
           boxShadow: SH_D, padding: "14px 0 18px", textAlign: "center" }}>
           <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 106,
             lineHeight: 1, color: "#241E12" }}>{count}</div>
-          <div style={{ marginTop: 6, fontFamily: MONO, fontWeight: 900, fontSize: 23,
-            letterSpacing: "0.20em", color: "#6E6450" }}>SPECIALISTS</div>
+          <div style={{ marginTop: 6, fontFamily: MONO, fontWeight: 900, fontSize: 22,
+            letterSpacing: "0.16em", color: "#6E6450" }}>SPECIALISTS</div>
         </div>
         <Claudie x={856} y={790} s={1.54} z={62} f={f} hero costume={{ beard: 1 }} face={-1} />
         <Contact x={790} y={780} w={166} z={61} o={0.32} />
@@ -359,37 +389,48 @@ export const HookPress: React.FC = () => {
         zIndex: 20, background: "#241F2C", border: "10px solid #3C3546", borderRadius: 8 }} />
       <div style={{ position: "absolute", left: 316, top: 148, width: 380, height: 210,
         zIndex: 21, background: "linear-gradient(178deg,#6E6248 0%,#4A4132 100%)" }} />
-      {/* the fascia plate over the door — the claim survives into shot three */}
-      <div style={{ position: "absolute", left: 262, top: 42, width: 490, zIndex: 78,
+      {/* the fascia plate over the door — the claim survives into shot three.
+          ⛔ IT CANNOT LIVE ABOVE y=125. `HookHeader` owns panel-local 0..118 and
+          v1 put this at top 42, straight under the pill. Reel 94 has already
+          shipped the rule that you never run BOTH the root pill and an in-panel
+          title in the same band; this sits below it instead. */}
+      <div style={{ position: "absolute", left: 268, top: 150, width: 478, zIndex: 78,
         borderRadius: 16, background: "#EDE7D6", border: "9px solid #B3A98F", boxShadow: SH_D,
         padding: "16px 20px", display: "flex", alignItems: "center", gap: 18 }}>
         <div style={{ position: "relative", width: 92, height: 92, flex: "0 0 auto" }}>
           <Mark x={0} y={0} d={92} f={f} z={80} />
         </div>
         <div>
-          <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 56,
+          <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 54,
             lineHeight: 1, color: "#241E12" }}>270 AGENTS</div>
-          <div style={{ marginTop: 7, fontFamily: MONO, fontWeight: 900, fontSize: 22,
-            letterSpacing: "0.20em", color: "#6E6450" }}>17 DIVISIONS · MIT</div>
+          <div style={{ marginTop: 7, fontFamily: MONO, fontWeight: 900, fontSize: 21,
+            letterSpacing: "0.16em", color: "#6E6450" }}>17 DIVISIONS · MIT</div>
         </div>
       </div>
-      {/* ⛔ they GROW across the shot. A crew that arrives and holds is the note
-          this reel has already been given twice; the walk is the arc. */}
-      {Array.from({ length: 9 }, (_, i) => {
-        const p = i / 9;
-        const g = E(lf, 0, 29, 1, 1.15, LIN);
+      {/* ⛔ SIX, NOT NINE. V1 put nine across 900px at scale ~1.1 and they
+          overlapped into one continuous orange band — a crowd with no gaps is
+          not a crew, it is a texture, and the costume that is supposed to say
+          "specialist" disappears into it. Six, spread on a real depth ladder,
+          each with clear air around it.
+          ⛔ And they GROW: a crew that arrives and holds is the note this reel
+          has already been given twice. */}
+      {Array.from({ length: 6 }, (_, i) => {
+        const p = i / 5;
+        const g = E(lf, 0, 29, 1, 1.16, LIN);
+        const near = [0, 2, 4].includes(i) ? 1 : 0;
         return (
-          <Claudie key={"c" + i} x={62 + p * 900} y={(700 + (i % 3) * 44) * g}
-            s={(0.96 + (i % 3) * 0.2) * g} z={40 + (i % 3) * 6} f={f + i * 13} walk={1}
-            tint={CLAY} face={i % 2 ? -1 : 1}
-            costume={[{ glasses: 1 }, { suit: 1 }, { wizard: 1 }, { prof: 1 }, { beard: 1 }][i % 5]}
-            prop={(["board", "roll", "swatch", "case"] as const)[i % 4]} />
+          <Claudie key={"c" + i} x={506 + (96 + p * 826 - 506) * g}
+            y={(660 + near * 96) * g} s={(0.88 + near * 0.34) * g}
+            z={40 + near * 8} f={f + i * 17} walk={1} tint={CLAY} face={i % 2 ? -1 : 1}
+            costume={[{ glasses: 1 }, { suit: 1 }, { wizard: 1 },
+                      { prof: 1 }, { beard: 1 }, { constr: 1 }][i]}
+            prop={(["board", "roll", "swatch", "case", "screen", "mega"] as const)[i]} />
         );
       })}
       {/* the stack they came off, on the pavement */}
-      {Array.from({ length: 11 }, (_, i) => (
-        <div key={"st" + i} style={{ position: "absolute", left: 782 + (i % 3) * 4,
-          top: 640 - i * 9, width: 150, height: 14, borderRadius: 3, background: "#EFE9D9",
+      {Array.from({ length: 9 }, (_, i) => (
+        <div key={"st" + i} style={{ position: "absolute", left: 796 + (i % 3) * 4,
+          top: 596 - i * 9, width: 132, height: 13, borderRadius: 3, background: "#EFE9D9",
           border: "2px solid #CFC5A8", zIndex: 36 }} />
       ))}
       <StreetLamp x={128} y={666} h={392} c="#F4E3BE" z={24} />
@@ -421,33 +462,34 @@ export const HookPress: React.FC = () => {
 
 /** one cream flap cell mid-roll. ⛔ The cell is never simply swapped — a swap has
     no frames in it, and both the audit and the eye can see that. */
-const GLY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+const GLY = "0123456789";
 const Cell: React.FC<{ ch: string; k: number; s?: number; delay?: number; lock: boolean }> =
   ({ ch, k, s = 1, delay = 0, lock }) => {
   const target = Math.max(0, GLY.indexOf(ch));
-  const spin = E(k - delay, 0, 22, 0, target + GLY.length * 3, IO);
+  const spin = E(k - delay, 0, 22, 0, target + GLY.length * 4, IO);
   const idx = Math.floor(spin) % GLY.length;
   const frac = spin - Math.floor(spin);
   const settled = lock && k - delay >= 22;
   const shown = settled ? ch : GLY[idx];
   const next = settled ? ch : GLY[(idx + 1) % GLY.length];
-  const ww = 44 * s, hh = 62 * s;
+  const ww = 62 * s, hh = 84 * s;
   return (
-    <div style={{ position: "relative", width: ww, height: hh, borderRadius: 3 * s,
-      background: "#EFE9D9", overflow: "hidden", border: `${2 * s}px solid #CFC5A8`,
-      boxShadow: "0 3px 7px rgba(14,12,18,0.34)" }}>
+    <div style={{ position: "relative", width: ww, height: hh, borderRadius: 4 * s,
+      background: "#EFE9D9", overflow: "hidden", border: `${3 * s}px solid #CFC5A8`,
+      boxShadow: "0 4px 9px rgba(14,12,18,0.36)" }}>
       <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: hh / 2,
         overflow: "hidden", transform: `scaleY(${settled ? 1 : 1 - frac})`,
         transformOrigin: "50% 100%", background: "#F4EFE1" }}>
         <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: hh,
-          textAlign: "center", fontFamily: MONO, fontWeight: 900, fontSize: 40 * s,
-          lineHeight: `${hh}px`, color: "#241E12" }}>{shown}</div>
+          textAlign: "center", fontFamily: fraunces.fontFamily, fontWeight: 900,
+          fontSize: 62 * s, lineHeight: `${hh}px`, color: "#241E12" }}>{shown}</div>
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: hh / 2,
         overflow: "hidden", background: "#E8E1CE" }}>
         <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: hh,
-          textAlign: "center", fontFamily: MONO, fontWeight: 900, fontSize: 40 * s,
-          lineHeight: `${hh}px`, color: "#241E12" }}>{settled ? ch : next}</div>
+          textAlign: "center", fontFamily: fraunces.fontFamily, fontWeight: 900,
+          fontSize: 62 * s, lineHeight: `${hh}px`, color: "#241E12" }}>
+          {settled ? ch : next}</div>
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, top: hh / 2 - 1, height: 2,
         background: "#B9AE90" }} />
@@ -455,17 +497,28 @@ const Cell: React.FC<{ ch: string; k: number; s?: number; delay?: number; lock: 
   );
 };
 
-const Row: React.FC<{ x: number; y: number; label: string; num: string; k: number;
+/* ⛔⛔ V1 SPELLED THE DIVISION NAME OUT IN FLAPS — eleven 27px cells per row, five
+   rows, sixty-five tiles. The render came back as a KEYBOARD: no row was
+   readable at any point, the lock wave was invisible because you cannot see a
+   letter that small change, and shots B and C measured near-identical because
+   nothing legible was different between them.
+   ⭐ The fix is the house rule this reel already has written down: INFO IN THE
+   GRAPHIC, NOT IN TYPE. A number should MOVE to its value; a name should not
+   have to be spelled out one tile at a time. So the NAME is a single engraved
+   cream plate that reads instantly, and only the COUNT is on flaps — which is
+   the one thing on the row that is actually resolving. Two big digits per row
+   instead of thirteen small cells, and the plate keeps the row contiguous. */
+const NameRow: React.FC<{ x: number; y: number; label: string; num: string; k: number;
   s?: number; z?: number; lock: boolean }> =
   ({ x, y, label, num, k, s = 1, z = 40, lock }) => (
   <div style={{ position: "absolute", left: x, top: y, zIndex: z, display: "flex",
-    alignItems: "center", gap: 6 * s }}>
-    {label.padEnd(11, " ").split("").map((ch, i) => (
-      <Cell key={"l" + i} ch={ch} k={k} s={s} delay={i * 1.6} lock={lock} />
-    ))}
-    <div style={{ width: 14 * s }} />
-    {num.padStart(2, " ").split("").map((ch, i) => (
-      <Cell key={"n" + i} ch={ch} k={k} s={s} delay={(11 + i) * 1.6} lock={lock} />
+    alignItems: "center", gap: 10 * s }}>
+    <div style={{ width: 470 * s, height: 84 * s, borderRadius: 8 * s, background: "#EFE9D9",
+      border: `${4 * s}px solid #CFC5A8`, boxShadow: SH, display: "flex", alignItems: "center",
+      paddingLeft: 22 * s, fontFamily: fraunces.fontFamily, fontWeight: 900,
+      fontSize: 46 * s, color: "#241E12", letterSpacing: "0.01em" }}>{label}</div>
+    {num.padStart(2, "0").split("").map((ch, i) => (
+      <Cell key={"n" + i} ch={ch} k={k} s={s} delay={i * 3} lock={lock} />
     ))}
   </div>
 );
@@ -532,13 +585,13 @@ export const HookBoard: React.FC = () => {
 
         <Head x={74} y={138} ww={866} hh={268} s={1} z={70} />
 
-        {/* the roster, clattering. NOT locked in this shot. */}
+        {/* the roster, clattering. NOT locked in this shot — a board's rest
+            state IS motion, which is how frame 0 is settled without being inert. */}
         {ROWS.slice(0, 3).map(([lb, nm], i) => (
-          <Row key={lb} x={92} y={432 + i * 82} label={lb} num={nm} k={f + i * 7} s={1}
+          <NameRow key={lb} x={92} y={430 + i * 98} label={lb} num={nm} k={f + i * 7} s={1}
             z={40} lock={false} />
         ))}
-        <Claudie x={862} y={860} s={1.66} z={62} f={f} hero costume={{ suit: 1 }} face={-1}
-          prop="board" />
+        <Claudie x={886} y={868} s={1.62} z={62} f={f} hero costume={{ suit: 1 }} face={-1} />
       </HookScene>
     );
   }
@@ -550,27 +603,30 @@ export const HookBoard: React.FC = () => {
   if (shot === 1) {
     return (
       <HookScene w={w} litFar={0.20} push={[0, 28, 1.07]}>
-        <div style={{ position: "absolute", left: 148, top: 96, width: 736, height: 470,
+        <div style={{ position: "absolute", left: 92, top: 130, width: 828, height: 486,
           zIndex: 20, borderRadius: 12, background: "#1C2C29", border: "12px solid #2E4A45",
           boxShadow: SH_D }} />
-        <Head x={172} y={120} ww={688} hh={150} s={0.56} z={70} />
+        <Head x={116} y={152} ww={780} hh={132} s={0.49} z={70} />
         {ROWS.map(([lb, nm], i) => (
-          <Row key={lb} x={188} y={288 + i * 54} label={lb} num={nm} k={lf} s={0.62}
+          <NameRow key={lb} x={132} y={300 + i * 62} label={lb} num={nm} k={lf} s={0.66}
             z={40} lock={lf >= 4 + i * 5} />
         ))}
-        {/* the awning it hangs under, and the crowd that came to read it */}
-        <div style={{ position: "absolute", left: 96, top: 52, width: 840, height: 30,
+        {/* the awning it hangs under, and the crowd that came to read it.
+            ⛔ FIVE, NOT EIGHT, and none of them in the hero's lane — v1's eight
+            merged into one orange band across the bottom edge. */}
+        <div style={{ position: "absolute", left: 76, top: 66, width: 860, height: 30,
           zIndex: 26, borderRadius: 6, background: "#2E4A45" }} />
-        {Array.from({ length: 8 }, (_, i) => {
-          const p = i / 8;
+        {Array.from({ length: 5 }, (_, i) => {
+          const p = i / 4;
           return (
-            <Claudie key={"w" + i} x={78 + p * 880} y={742 + (i % 2) * 22}
-              s={0.78 + (i % 3) * 0.1} z={38 + (i % 3)} f={f + i * 15} tint={CLAY}
-              costume={[{ glasses: 1 }, { prof: 1 }, { wizard: 1 }, { girl: 1 }][i % 4]} />
+            <Claudie key={"w" + i} x={104 + p * 560} y={760 + (i % 2) * 26}
+              s={0.8 + (i % 2) * 0.14} z={38 + (i % 2)} f={f + i * 19} tint={CLAY}
+              costume={[{ glasses: 1 }, { prof: 1 }, { wizard: 1 }, { girl: 1 },
+                        { beard: 1 }][i]} />
           );
         })}
-        <Claudie x={880} y={880} s={1.74} z={62} f={f} hero costume={{ suit: 1 }} face={-1} />
-        <StreetLamp x={62} y={700} h={360} c="#CFE8DA" z={24} />
+        <Claudie x={886} y={886} s={1.7} z={62} f={f} hero costume={{ suit: 1 }} face={-1} />
+        <StreetLamp x={54} y={706} h={368} c="#CFE8DA" z={24} />
         <Occluder side="l" c="#0F1A18" w={70} z={92} />
       </HookScene>
     );
@@ -580,24 +636,27 @@ export const HookBoard: React.FC = () => {
   const g = E(lf, 0, 29, 1, 1.17, LIN);
   return (
     <HookScene w={w} litFar={0.28} push={[0, 29, 1.05]}>
-      <div style={{ position: "absolute", left: 210, top: 62, width: 600, height: 268,
+      <div style={{ position: "absolute", left: 196, top: 138, width: 626, height: 300,
         zIndex: 20, borderRadius: 12, background: "#1C2C29", border: "10px solid #2E4A45",
         boxShadow: SH_D }} />
-      <Head x={230} y={82} ww={560} hh={126} s={0.46} z={70} />
-      {ROWS.slice(0, 3).map(([lb, nm], i) => (
-        <Row key={lb} x={244} y={222 + i * 36} label={lb} num={nm} k={40} s={0.42} z={40}
+      <Head x={216} y={158} ww={586} hh={122} s={0.46} z={70} />
+      {ROWS.slice(0, 2).map(([lb, nm], i) => (
+        <NameRow key={lb} x={230} y={296 + i * 62} label={lb} num={nm} k={40} s={0.5} z={40}
           lock />
       ))}
-      {/* ⛔ THEY GROW. A dark figure that arrives and holds is worth nothing to
-          the eye or to the metric — the whole crew walks INTO the lens. */}
-      {Array.from({ length: 7 }, (_, i) => {
-        const p = i / 7;
+      {/* ⛔ THEY GROW, AND THERE ARE FIVE. A dark figure that arrives and holds is
+          worth nothing to the eye or to the metric, and nine of them touching is
+          a texture rather than a crew — the whole crew walks INTO the lens with
+          air between them. */}
+      {Array.from({ length: 5 }, (_, i) => {
+        const p = i / 4;
+        const near = i % 2;
         return (
-          <Claudie key={"o" + i} x={506 + (62 + p * 890 - 506) * g} y={(676 + (i % 3) * 52) * g}
-            s={(1.02 + (i % 3) * 0.22) * g} z={40 + (i % 3) * 5} f={f + i * 11} walk={1}
-            tint={CLAY} face={i % 2 ? -1 : 1}
-            costume={[{ suit: 1 }, { glasses: 1 }, { wizard: 1 }, { prof: 1 }][i % 4]}
-            prop={(["case", "board", "mega", "swatch"] as const)[i % 4]} />
+          <Claudie key={"o" + i} x={506 + (110 + p * 800 - 506) * g}
+            y={(652 + near * 104) * g} s={(0.94 + near * 0.36) * g} z={40 + near * 7}
+            f={f + i * 15} walk={1} tint={CLAY} face={i % 2 ? -1 : 1}
+            costume={[{ suit: 1 }, { glasses: 1 }, { wizard: 1 }, { prof: 1 }, { beard: 1 }][i]}
+            prop={(["case", "board", "mega", "swatch", "roll"] as const)[i]} />
         );
       })}
       {[176, 836].map((lx, i) => (

@@ -745,14 +745,25 @@ export const MarkPlate: React.FC<{ x: number; y: number; t: string; s?: number; 
 
 /** the mark as a big emblem cast into a wall or a door face — no plate, no
     chrome, just the logo at scale so it reads at a glance and at a thumbnail. */
-export const MarkCast: React.FC<{ x: number; y: number; s?: number; z?: number; o?: number }> =
-  ({ x, y, s = 150, z = 40, o = 1 }) => (
-  <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, height: s,
-    zIndex: z, opacity: o, display: "flex", alignItems: "center", justifyContent: "center" }}>
-    <Img src={staticFile("claude_logo.png")}
-      style={{ width: s, height: s, objectFit: "contain" }} />
-  </div>
-);
+export const MarkCast: React.FC<{ x: number; y: number; s?: number; z?: number; o?: number;
+  spin?: number; f?: number; pulse?: number }> =
+  ({ x, y, s = 150, z = 40, o = 1, spin = 0, f = 0, pulse = 0 }) => {
+  /* ⭐ THE MARK TURNS. Alex, round 4: *"more motion components in the hook,
+     spinning Claude logo."* A slow rotation on the emblem is the cheapest
+     legitimate motion in the frame — it is a fixture, not a subject, so it
+     costs the hierarchy nothing, and it makes the audience filter itself the
+     thing that catches the eye. */
+  const rot = spin ? (f * spin) % 360 : 0;
+  const k = pulse ? 1 + Math.sin(f / 14) * 0.06 * pulse : 1;
+  return (
+    <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, height: s,
+      zIndex: z, opacity: o, display: "flex", alignItems: "center", justifyContent: "center",
+      transform: `rotate(${rot}deg) scale(${k})` }}>
+      <Img src={staticFile("claude_logo.png")}
+        style={{ width: s, height: s, objectFit: "contain" }} />
+    </div>
+  );
+};
 
 /** a chat bubble carrying the mark — the recurring "this is an assistant" motif */
 export const AskBubble: React.FC<{ x: number; y: number; t: string; s?: number; z?: number }> =

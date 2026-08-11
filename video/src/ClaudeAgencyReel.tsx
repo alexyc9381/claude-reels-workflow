@@ -181,6 +181,74 @@ const SFX: Cue[] = [
   { at: 588 / FPS, src: A_ + "positive-chime.wav", v: LEVELS.SFX_MID, dur: 1.6, lead: 0 },
 ];
 
+/* ---- ROUND 8 · the two repost opens carry their OWN first 83 frames of sound.
+   Both cut at f26 and f54 (0.87 / 0.93 / 0.97s shots), so nothing above lines up
+   with them. ⛔ RISERS STAY CAPPED AT 2 FOR THE REEL: these banks replace the
+   hook's riser rather than adding one, so it is still one into the open and one
+   into the install press at 429. ------------------------------------------ */
+const G_SFX: Cue[] = [
+  { at: 0, src: A_ + "room-tone.wav", v: LEVELS.SFX_BED, dur: 3.0, lead: 0 },
+  /* the press is already turning when we cut in — the flywheel is the room tone */
+  { at: 0.1, src: A_ + "gear-mech.wav", v: LEVELS.SFX_TEXTURE, dur: 1.6, rate: 0.86, lead: 0 },
+  { at: 28 / FPS - 0.62, src: A_ + "riser-metal.wav", v: LEVELS.SFX_MID, dur: 1.0, lead: 0 },
+  ...cut(26 / FPS, "click-hard.wav", "whoosh-choppy.wav"),
+  /* ⛔ THE SLAM IS AT f28, TWO FRAMES INSIDE THE SHOT, NOT ON THE CUT. A cut that
+     lands exactly on its own payoff spends both events at once. */
+  ...layer(28 / FPS, { src: A_ + "hit-boom.wav", v: LEVELS.SFX_HERO, dur: 1.6 },
+                      { src: A_ + "snap.wav", v: LEVELS.SFX_MID, dur: 0.7 }),
+  ...repeat(4, 30 / FPS, 0.07, { src: A_ + "paper-slide.wav", v: LEVELS.SFX_MID, dur: 0.9 }, 0.08),
+  ...repeat(5, 33 / FPS, 4 / FPS, { src: A_ + "check-pop.wav", v: LEVELS.SFX_TEXTURE, dur: 0.7 }, 0.06),
+  ...layer(54 / FPS, { src: A_ + "whoosh-fast.wav", v: LEVELS.SFX_MID, dur: 0.8 },
+                      { src: A_ + "click-hard.wav", v: LEVELS.SFX_TEXTURE, dur: 0.5 }),
+  { at: 56 / FPS, src: A_ + "crowd-wow.wav", v: LEVELS.SFX_TEXTURE, dur: 2.0, lead: 3 },
+];
+
+const H_SFX: Cue[] = [
+  { at: 0, src: A_ + "room-tone.wav", v: LEVELS.SFX_BED, dur: 3.0, lead: 0 },
+  /* the clatter IS the rest state of a board — it runs from frame 0 */
+  ...repeat(9, 0.06, 0.085, { src: A_ + "click-light.wav", v: LEVELS.SFX_TEXTURE, dur: 0.4 }, 0.05),
+  ...cut(26 / FPS, "click-hard.wav", "whoosh-choppy.wav"),
+  /* five rows lock front to back — one clack each, pitch-drifting so a run of
+     the same action never sounds copy-pasted */
+  ...repeat(5, 30 / FPS, 5 / FPS, { src: A_ + "snap.wav", v: LEVELS.SFX_MID, dur: 0.8 }, 0.09),
+  { at: 50 / FPS - 0.55, src: A_ + "riser-sharp.wav", v: LEVELS.SFX_MID, dur: 0.9, lead: 0 },
+  { at: 50 / FPS, src: A_ + "hit-up.wav", v: LEVELS.SFX_HERO, dur: 1.2, lead: 0 },
+  ...layer(54 / FPS, { src: A_ + "whoosh-fast.wav", v: LEVELS.SFX_MID, dur: 0.8 },
+                      { src: A_ + "click-hard.wav", v: LEVELS.SFX_TEXTURE, dur: 0.5 }),
+  { at: 56 / FPS, src: A_ + "crowd-wow.wav", v: LEVELS.SFX_TEXTURE, dur: 2.0, lead: 3 },
+];
+
+/* ---- ROUND 8 · alternate BODY headers, one set per repost cut.
+   ✅ EVERY LINE IS STILL A FACT THE VOICEOVER NEVER STATES, read off the same
+      live README as the originals — the per-division counts, the fork count, the
+      Reddit origin, the install one-liner, the thirteen tools. Buying pixel
+      divergence is not a reason to relax the header rule.
+   ⛔ INDEX 0 IS IGNORED (the hook owns its own header) and INDEX 8 IS IDENTICAL
+      ON PURPOSE: the CTA carries the keyword, and the keyword is the funnel. */
+const HEADS_G: [string, string][] = [
+  ["", ""],
+  ["BORN FROM A REDDIT THREAD", "NOW 139,604 STARS"],
+  ["SPECIALIZED: 56 AGENTS", "ENGINEERING: 58"],
+  ["21 GAME DEV, 13 GIS", "12 SECURITY, 9 TESTING"],
+  ["ONE .md FILE PER AGENT", "TOOLS, WORKFLOW, METRICS"],
+  ["13 TOOLS SUPPORTED", "CURSOR, CODEX, QWEN"],
+  ["brew install --cask", "A NATIVE APP, NOT A CLONE"],
+  ["MIT: SELL WHAT IT MAKES", "22,798 FORKS ALREADY DID"],
+  ["COMMENT AGENCY", "I WILL SEND THE REPO"],
+];
+
+const HEADS_H: [string, string][] = [
+  ["", ""],
+  ["139,604 STARS, MIT", "22,798 FORKS"],
+  ["17 DIVISION TABLES", "PRODUCT 5, HEALTHCARE 3"],
+  ["10 SALES, 10 DESIGN", "7 PAID MEDIA, 6 SUPPORT"],
+  ["EVERY AGENT IS PLAIN TEXT", "READ IT BEFORE YOU RUN IT"],
+  ["~/.claude/agents", "OPENCODE, GEMINI CLI TOO"],
+  ["./scripts/install.sh", "OR THE DESKTOP APP"],
+  ["FORK IT, SHIP IT, SELL IT", "MIT SAYS YES"],
+  ["COMMENT AGENCY", "I WILL SEND THE REPO"],
+];
+
 /* ===========================================================================
    THE VARIANT FACTORY.
 
@@ -202,12 +270,25 @@ const SFX: Cue[] = [
         5  a different caption band Y.
         6  a slightly different end hold.
    ======================================================================== */
-export type TransKind = "flash" | "bars" | "punch" | "slide" | "wipeup" | "iris";
+export type TransKind = "flash" | "bars" | "punch" | "slide" | "wipeup" | "iris"
+  | "vsplit" | "diag";
 export type Variant = {
   id: string; label: string; hook: React.FC; bed: string; seed: number;
   trans: TransKind; capTop: number; endHold: number; hookHead: [string, string];
   /** palette rotation for the BODY scenes; 0 = the canonical cut */
   pal: number;
+  /** ⭐ ROUND 8 · the open's own sound. The bank below is cut to variant A's
+      events (a seal at f22, gear at f26, a punch at f52) and reading those under
+      a press or a call board is the "cut with no sound" failure in reverse — a
+      sound with no event. When present this REPLACES every cue before frame 83.
+      ⛔ Absent on a-f, so the six cuts already on the Drive are byte-identical. */
+  hookSfx?: Cue[];
+  /** ⭐ ROUND 8 · alternate BODY headers. The header pill is the brightest, most
+      salient region in nearly every body frame, so nine shared headers are nine
+      shared high-contrast rectangles for a near-duplicate check to latch onto.
+      ⛔ Every replacement is still a fact the VO never says, still read off the
+      live README — the header rule is not suspended to buy divergence. */
+  heads?: [string, string][];
 };
 
 export const VARIANTS: Variant[] = [
@@ -231,6 +312,28 @@ export const VARIANTS: Variant[] = [
   { id: "f", label: "CORNER · procession", hook: HookParade,
     bed: "agency_bed_f.wav", seed: 23, pal: 5, trans: "iris", capTop: 1226, endHold: 3,
     hookHead: ["A WHOLE AGENCY, FREE", "58 ENGINEERS, 36 MARKETERS"] },
+
+  /* ======================= ROUND 8 · THE TWO REPOST CUTS ====================
+     A and B performed and C-F did not, and the measured separator is not the
+     mechanism, the motion or the luma — it is whether frame 0 carries a CREAM
+     CLAIM PLATE in the middle third (A 32.66% of the panel, B 18.15%, and all
+     four losers 0%, whose biggest bright object at f0 is the shared header
+     pill). See the header of AgyHooks3.tsx for the table.
+
+     So G and H are built to the winners' frame-0 DNA and to nothing else about
+     them: different world, different prop, different action, different exit,
+     and — because the body is 528 of 611 frames and it is the body that a
+     near-duplicate check will match against the two cuts already up — a
+     palette, a header set, a camera seed, a bed, a transition and a caption
+     band that no delivered cut uses. ------------------------------------- */
+  { id: "g", label: "PRESS · multiplication", hook: HookPress,
+    bed: "agency_bed_g.wav", seed: 31, pal: 6, trans: "vsplit", capTop: 1256, endHold: 4,
+    hookHead: ["270 AGENTS, ONE FILE EACH", "FREE ON GITHUB"],
+    hookSfx: G_SFX, heads: HEADS_G },
+  { id: "h", label: "BOARD · resolution", hook: HookBoard,
+    bed: "agency_bed_h.wav", seed: 37, pal: 7, trans: "diag", capTop: 1290, endHold: 6,
+    hookHead: ["THE WHOLE ROSTER", "270 AGENTS, 17 DIVISIONS"],
+    hookSfx: H_SFX, heads: HEADS_H },
 ];
 
 /** ⛔ A DIFFERENT TRANSITION PER CUT, so the boundary frames — which is where a
@@ -268,6 +371,24 @@ const Trans: React.FC<{ at: number; kind: TransKind }> = ({ at, kind }) => {
     <div style={{ position: "absolute", left: 0, right: 0, top: `${p * 100}%`, bottom: `${-p * 100}%`,
       background: "#14110E", opacity: 0.86 }} />
   </div>);
+  /* vsplit: two halves part from the centre LINE — the only transition that
+     leaves the middle of the frame clear first, which is where G's plate lives */
+  if (kind === "vsplit") return (<div style={{ position: "absolute", inset: 0, zIndex: 140,
+    pointerEvents: "none", overflow: "hidden" }}>
+    {[0, 1].map((i) => (
+      <div key={i} style={{ position: "absolute", top: 0, bottom: 0, width: "50%",
+        [i ? "right" : "left"]: `${-p * 50}%`, background: "#14110E", opacity: 0.88 }} />
+    ))}
+  </div>);
+  /* diag: a corner-to-corner sweep. ⛔ Not a rotated `slide` — a skewed edge
+     changes a different set of boundary pixels than a vertical one, and the
+     boundary frames are exactly where a near-duplicate check looks hardest. */
+  if (kind === "diag") return (<div style={{ position: "absolute", inset: 0, zIndex: 140,
+    pointerEvents: "none", overflow: "hidden" }}>
+    <div style={{ position: "absolute", inset: -200, background: "#14110E", opacity: 0.88,
+      clipPath: `polygon(0% 0%, ${(1 - p) * 190}% 0%, 0% ${(1 - p) * 190}%)`,
+      WebkitClipPath: `polygon(0% 0%, ${(1 - p) * 190}% 0%, 0% ${(1 - p) * 190}%)` }} />
+  </div>);
   /* iris: a hard circular close-open, the only NON-linear transition in the set */
   return (<div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
     background: "#14110E", opacity: 0.9,
@@ -283,7 +404,14 @@ const HeadFor: React.FC<{ big: string; hot: string; settled?: boolean }> =
 };
 
 export const makeReel = (v: Variant): React.FC => () => {
-  const SC = SCENES.map((sc, i) => (i === 0 ? { ...sc, C: v.hook, head: v.hookHead } : sc));
+  const SC = SCENES.map((sc, i) => (i === 0
+    ? { ...sc, C: v.hook, head: v.hookHead }
+    : { ...sc, head: v.heads?.[i] ?? sc.head }));
+  /* the open's own cues REPLACE everything before the first body scene; the body
+     bank from frame 83 on is shared, because the body is shared. */
+  const CUES = v.hookSfx
+    ? [...v.hookSfx, ...SFX.filter((c) => c.at >= SCENES[1].at / FPS)]
+    : SFX;
   const TOTAL = AGY_TOTAL + v.endHold;
   return (
     <AbsoluteFill>
@@ -296,7 +424,7 @@ export const makeReel = (v: Variant): React.FC => () => {
           all four were checked for ONSET, not just mean, because a bed that
           opens quiet fails MUSIC_ONSET_0 at 480ms. */}
       <Audio src={staticFile(v.bed)} />
-      <SfxTrack cues={SFX} />
+      <SfxTrack cues={CUES} />
       <Bg />
 
       <AssemblyCtx.Provider value={true}>
@@ -338,3 +466,5 @@ export const AgencyReelC = makeReel(VARIANTS[2]);
 export const AgencyReelD = makeReel(VARIANTS[3]);
 export const AgencyReelE = makeReel(VARIANTS[4]);
 export const AgencyReelF = makeReel(VARIANTS[5]);
+export const AgencyReelG = makeReel(VARIANTS[6]);
+export const AgencyReelH = makeReel(VARIANTS[7]);

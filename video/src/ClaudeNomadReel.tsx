@@ -48,19 +48,30 @@ export const NOM_TOTAL = 604;      // 20.14s of VO
 
 type Scene = { at: number; C: React.FC; head: [string, string] };
 
-/* ⛔ HEADERS ADD A FACT, THEY NEVER ECHO THE VO ([[feedback_headers_state_the_claim]]).
-   The VO says "Wikipedia, medical references, offline maps"; the headers say
-   KIWIX, PROTOMAPS, OLLAMA, APACHE-2.0 — the actual named software doing it,
-   which is information the audio does not carry and which a Claude Code viewer
-   recognises. Every one of them is in the repo's own README table. */
+/* ⛔⛔ THE HEADER IS A HOOK, NOT A SPEC SHEET.
+   Alex, round 4: *"hook header should be 'AI FOR APOCALYPSE / OFFLINE AGENTS TO
+   SURVIVE', something like this, not that bs — the hook header needs to be
+   ENGAGING."* He is right and I had over-applied the add-a-fact rule: "AN
+   OFFLINE AI SERVER / 35,694 STARS, FREE" is accurate, informative, and reads
+   like a product page. Nobody stops scrolling for a spec.
+
+   The rule still holds where it earns its keep — APACHE-2.0 and the real
+   component names stay on the SCREEN, on plates and stencils, where a viewer
+   who is already interested can find them. The HEADER's job is the stop.
+
+   ⚠️ ONE WORD CHANGED FROM ALEX'S LINE. He wrote "OFFLINE AGENTS TO SURVIVE".
+   Project NOMAD ships a local CHAT with retrieval — Ollama plus Qdrant — and
+   nothing in the repo is an agent. "Agents" is the one word in that phrasing
+   the README does not back, so it reads "OFFLINE AI TO SURVIVE": same length,
+   same punch, and true. */
 export const SCENES: Scene[] = [
-  { at: 0,   C: S0Hook, head: ["AN OFFLINE AI SERVER", "35,694 STARS, FREE"] },
-  { at: 117, C: S1,     head: ["LOCAL AI CHAT", "OLLAMA, NO CLOUD"] },
-  { at: 179, C: S2,     head: ["OFFLINE LIBRARY", "KIWIX ZIM ARCHIVES"] },
-  { at: 226, C: S3,     head: ["OFFLINE MAPS", "PROTOMAPS REGIONS"] },
-  { at: 319, C: S4,     head: ["PICK YOUR CONTENT", "ONE-TIME DOWNLOAD"] },
-  { at: 373, C: S5,     head: ["ONLINE ONCE TO INSTALL", "NEVER AGAIN AFTER"] },
-  { at: 433, C: S6,     head: ["NO PAYWALL AT ALL", "APACHE-2.0, $0"] },
+  { at: 0,   C: S0Hook, head: ["AI FOR THE APOCALYPSE", "OFFLINE AI TO SURVIVE"] },
+  { at: 117, C: S1,     head: ["ASK IT ANYTHING", "NO WIFI, NO ACCOUNT"] },
+  { at: 179, C: S2,     head: ["WIKIPEDIA ON A SHELF", "AND EVERY MEDICAL BOOK"] },
+  { at: 226, C: S3,     head: ["MAPS THAT STILL WORK", "WHEN NOTHING ELSE DOES"] },
+  { at: 319, C: S4,     head: ["YOU CHOOSE WHAT GOES IN", "DOWNLOAD IT ONCE"] },
+  { at: 373, C: S5,     head: ["THE GRID DIES", "THIS DOES NOT"] },
+  { at: 433, C: S6,     head: ["NO PAYWALL, NO ACCOUNT", "APACHE-2.0, COSTS $0"] },
   { at: 536, C: S7Cta,  head: ["COMMENT NOMAD", "FOR THE FREE SETUP"] },
 ];
 
@@ -81,8 +92,22 @@ export const SCENES: Scene[] = [
       not, and that absence is the loudest thing in the reel.
    ------------------------------------------------------------------------ */
 const SFX: Cue[] = [
-  /* ---- S0 · THE OPEN. Four cuts, a transient on every one. -------------- */
+  /* ---- S0 · THE OPEN. Four cuts, a transient on every one, and now a sound
+     for every EVENT in the frame. Alex, round 4: *"more motion and sfx as well
+     throughout."* The three additions here are the three new events: the
+     floods snapping on, the roller shutter rising, and the Keeper walking. The
+     wind and the stack are BEDS, which cost no gesture budget. ---------- */
   { at: 0.00, src: "water_fan.wav", v: LEVELS.SFX_BED, dur: 4.1, rate: 0.68 },
+  { at: 0.00, src: "machine_bed.wav", v: db(-27), dur: 3.9, rate: 0.72 },
+  /* the three gantry floods, left to right, pitching UP so they read as one
+     rising gesture rather than three identical clunks */
+  ...repeat(3, 0.07, 0.10, { src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.45 }, 0.11),
+  /* the roller shutter: a motor that runs, then a clunk when it tops out */
+  ...layer(0.20, { src: "am/gear-mech.wav", v: LEVELS.SFX_MID, dur: 0.62 },
+                 { src: "ratchet.wav", dur: 0.60, rate: 0.86 }),
+  { at: 0.80, src: "mech_clank.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.16 },
+  /* his boots on the apron */
+  ...repeat(4, 0.20, 0.21, { src: "sand-steps.mp3", v: LEVELS.SFX_TEXTURE, dur: 0.34 }, 0.07),
   ...layer(0.40, { src: "whoosh_heavy.wav", v: LEVELS.SFX_MID, dur: 0.9, rate: 0.86 },
                  { src: "am/cloth-shiver.wav", dur: 0.8 }),
   { at: 1.10, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.6, rate: 1.12 },
@@ -96,6 +121,7 @@ const SFX: Cue[] = [
   ...repeat(4, 3.24, 0.11, { src: "lamp_clunk.wav", v: LEVELS.SFX_TEXTURE, dur: 0.4 }, 0.07),
 
   /* ---- S1 · THE MACHINE ------------------------------------------------- */
+  { at: 3.90, src: "am/room-tone.wav", v: db(-26), dur: 2.1 },
   { at: 3.90, src: "chair_knock.wav", v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 0.94 },
   ...layer(4.24, { src: "lib_mactype.wav", v: LEVELS.SFX_MID, dur: 0.5 },
                  { src: "c_power.wav", dur: 0.7, rate: 0.88 }),
@@ -105,12 +131,14 @@ const SFX: Cue[] = [
 
   /* ---- S2 · THE STACKS. Two slams, the second PITCHED UP so the pair reads
      as one rising gesture rather than two identical hits. ------------------ */
+  { at: 5.97, src: "am/room-tone.wav", v: db(-26), dur: 1.6, rate: 1.04 },
   ...layer(5.97, { src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.7 },
                  { src: "metal_ping.wav", dur: 0.8, rate: 1.0 }),
   ...layer(7.00, { src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.7, rate: 1.09 },
                  { src: "metal_ping.wav", dur: 0.8, rate: 1.14 }),
 
   /* ---- S3 · THE MAP AND THE HALL ---------------------------------------- */
+  { at: 7.53, src: "am/room-tone.wav", v: db(-26), dur: 3.1, rate: 0.96 },
   ...layer(7.53, { src: "slate_whump.wav", v: LEVELS.SFX_HERO, dur: 0.8, rate: 0.96 },
                  { src: "am/paper-rustle.wav", dur: 1.0 }),
   ...repeat(3, 8.23, 0.17, { src: "thock.wav", v: LEVELS.SFX_MID, dur: 0.4 }, 0.09),
@@ -120,6 +148,7 @@ const SFX: Cue[] = [
   ...repeat(5, 9.80, 0.13, { src: "am/lights-on.wav", v: LEVELS.SFX_MID, dur: 0.6 }, 0.08),
 
   /* ---- S4 · THE DOWNLOAD ------------------------------------------------ */
+  { at: 10.63, src: "am/loading-loop.wav", v: db(-25), dur: 1.8 },
   { at: 10.83, src: "slot_lever.wav", v: LEVELS.SFX_MID, dur: 0.6 },
   ...layer(11.26, { src: "wire_travel.wav", v: LEVELS.SFX_MID, dur: 0.7 },
                   { src: "pneu_thunk.wav", dur: 0.5 }),
@@ -144,6 +173,7 @@ const SFX: Cue[] = [
   /* ---- S6 · THE COIN CAGE AND THE OPEN SHELF ---------------------------- */
   { at: 14.43, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.05 },
   { at: 14.50, src: "am/room-tone.wav", v: LEVELS.SFX_BED, dur: 1.7 },
+  { at: 14.43, src: "water_fan.wav", v: db(-28), dur: 1.7, rate: 0.66 },
   /* three coins, PITCHED DOWN in sequence — the descending line is the point */
   ...layer(14.70, { src: "coin_slide.wav", v: LEVELS.SFX_MID, dur: 0.6 },
                   { src: "am/cash-register.wav", dur: 0.7 }),
@@ -155,6 +185,7 @@ const SFX: Cue[] = [
                   { src: "am/cash-register.wav", dur: 0.7, rate: 0.87 }),
   { at: 15.86, src: "ratchet.wav", v: LEVELS.SFX_TEXTURE, dur: 0.4, rate: 0.94 },
   { at: 16.13, src: "lib_whoosh.wav", v: LEVELS.SFX_MID, dur: 0.5, rate: 1.16 },
+  { at: 16.13, src: "am/room-tone.wav", v: db(-26), dur: 1.7, rate: 1.02 },
   { at: 16.33, src: "c_collect.wav", v: LEVELS.SFX_MID, dur: 0.6 },
   ...layer(17.13, { src: "gold_stamp.wav", v: LEVELS.SFX_HERO, dur: 0.8 },
                   { src: "harden_chime.wav", dur: 0.9 }),
@@ -163,6 +194,7 @@ const SFX: Cue[] = [
   /* ---- S7 · THE KEYWORD. RISER 2 OF 2 lands on the hard cut. ------------ */
   { at: 17.52, src: "lib_riser.wav", v: LEVELS.SFX_MID, dur: 0.55, rate: 1.3 },
   { at: 17.87, src: "lib_cinematic_hit.wav", v: LEVELS.SFX_HERO, dur: 1.2, rate: 1.02 },
+  { at: 17.87, src: "water_fan.wav", v: db(-28), dur: 2.6, rate: 0.64 },
   { at: 18.40, src: "lib_magic_reveal.wav", v: LEVELS.SFX_MID, dur: 1.0 },
   { at: 18.78, src: "arrive_chime.wav", v: LEVELS.SFX_MID, dur: 0.9 },
 ];
@@ -177,13 +209,13 @@ export type Variant = { hook: React.FC; hookHead: [string, string]; bed: string;
   seed: number; pal: number; trans: Trans; capTop: number; endHold: number };
 
 export const VARIANTS: Variant[] = [
-  { hook: S0Hook,      hookHead: ["AN OFFLINE AI SERVER", "35,694 STARS, FREE"],
+  { hook: S0Hook,      hookHead: ["AI FOR THE APOCALYPSE", "OFFLINE AI TO SURVIVE"],
     bed: "nomad_bed.wav",   seed: 0,  pal: 0, trans: "flash", capTop: 1268, endHold: 14 },
-  { hook: S0HookMast,  hookHead: ["THE AI IS NOT UP THERE", "IT IS IN THE BOX"],
+  { hook: S0HookMast,  hookHead: ["THE TOWER IS DEAD", "THE BOX STILL ANSWERS"],
     bed: "nomad_bed_b.wav", seed: 3,  pal: 1, trans: "bars",  capTop: 1214, endHold: 10 },
   { hook: S0HookCase,  hookHead: ["ONE CASE, ONE AI", "AND EVERY ANSWER IN IT"],
     bed: "nomad_bed_c.wav", seed: 7,  pal: 2, trans: "punch", capTop: 1300, endHold: 8 },
-  { hook: S0HookCross, hookHead: ["AN AI YOU CARRY IN", "NO SIGNAL, NO ACCOUNT"],
+  { hook: S0HookCross, hookHead: ["CARRY THE AI IN", "WALK OUT WITH ANSWERS"],
     bed: "nomad_bed_d.wav", seed: 11, pal: 3, trans: "slide", capTop: 1240, endHold: 12 },
 ];
 
