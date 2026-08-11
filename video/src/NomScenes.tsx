@@ -6,7 +6,7 @@ import {
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
   CLAY, GOLD, GREEN, RED, PAPER, INK, PLACES, usePlace,
   Ridge, Room, Snow, Ash, Beam, Strip, Motes, Chip, Plate, BigNum, Contact, Edge,
-  Keeper, Mitt, Scene, Cam, Mark, MarkPlate, MarkCast, AskBubble,
+  Keeper, Mitt, Queue, Scene, Cam, Mark, MarkPlate, MarkCast, AskBubble,
 } from "./NomWorld";
 import {
   Portal, Bunker, Fence, Wreck, Pylon, BlastDoor, Wheel, Tunnel, Box, CmdScreen, Canister, Rack, Bars,
@@ -122,18 +122,26 @@ export const S0Hook: React.FC = () => {
           floods={1} floodSeq={fl} lamp={1} shutter={0.55 * (1 - shut)} vent={1} />
         {/* MARK 1 · cast into the mass, TURNING, drawn at FRAME 0 */}
         <MarkCast x={556} y={pr.horizon - 122} s={96} z={70} o={0.92} spin={0.9} f={f} />
+        {/* ⭐ ROUND 8 · THE QUEUE. Seven Claudes lined up at the blast door
+            behind a rope, shuffling forward in a wave. It is not seven subjects,
+            it is ONE object with one shape and one behaviour, and the hero is
+            still the sprite nearest camera. It also says three things no prop
+            can: the bunker is worth queueing for, other people exist out here,
+            and every face in the line carries the audience's own mark. */}
+        <Queue x={486} y={pr.horizon + 244} n={8} s={0.60} f={f} z={62} gap={100} dir={-1}
+          depth={0.082} period={92} lit={0.90} rise={20} />
         {/* MARK 2 · the Keeper walking the apron, badge above his hood */}
-        <Keeper x={198 + walk * 116} y={pr.horizon + 344} s={1.30} z={90} f={f} face={1}
+        <Keeper x={856 - walk * 104} y={pr.horizon + 356} s={1.34} z={90} f={f} face={-1}
           hood={1} walk={walk > 0.01 && walk < 0.99 ? 1 : 0} badge={1} lit={0.98} />
         {/* ⭐ ROUND 7 · MORE MOVING PIECES. All fixtures or weather, none of
             them a subject: a scanning dish on the berm, a wind sock whipping,
             a warning strobe on the fence line, a flapping tarp on the wreck,
             and sheeting tumbling across the apron. */}
-        <ScanDish x={790} base={pr.horizon + 152} s={0.72} z={44} f={f} rate={1.2} />
-        <Windsock x={126} base={pr.horizon + 168} s={0.86} z={60} f={f} />
-        <Strobe x={874} base={pr.horizon + 268} s={0.92} z={81} f={f} />
-        <Wreck x={838} base={pr.horizon + 350} s={1.15} z={84} face={-1} />
-        <Flap x={742} y={pr.horizon + 250} w={132} h={92} s={1} z={86} f={f} c="#7A6E5E" />
+        <ScanDish x={806} base={pr.horizon + 130} s={0.66} z={44} f={f} rate={1.2} />
+        <Windsock x={94} base={pr.horizon + 150} s={0.80} z={60} f={f} />
+        <Strobe x={214} base={pr.horizon + 292} s={0.90} z={81} f={f} />
+        <Wreck x={132} base={pr.horizon + 356} s={1.10} z={84} />
+        <Flap x={318} y={pr.horizon + 268} w={124} h={88} s={1} z={86} f={f} c="#7A6E5E" />
         <Fence y={pr.horizon + 236} z={82} s={1.10} torn={1} />
         <Debris f={f} n={7} z={87} y0={pr.horizon + 120} y1={pr.horizon + 330} speed={1.3} />
         <Ash f={f} n={30} z={76} speed={1 + gust * 2.2} />

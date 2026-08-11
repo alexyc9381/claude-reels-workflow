@@ -80,7 +80,11 @@ export const CANVAS = "#EFE8D8", CANVAS2 = "#CFC5AE";
 export const ROPE = "#E4DACA", ROPED = "#B8AC96";
 export const POST_R = "#C25E42", POST_B = "#5E718C";
 export const BRASS = "#C8963E", BRASSD = "#8E6626", BRASSL = "#E8C57A";
-export const CROWD = "#2A303A", CROWD2 = "#1D222A";
+/* ⛔ THE CROWD IS WHAT COSTS THE LUMA GATE. At #2A303A/#1D222A the tiers ate
+   the upper half and frame 0 measured 141.8 against the >=150 bar. Lifted a
+   stop and warmed toward the hall light: still silhouette, still never competing
+   with a mark, and now the frame is legible at feed size. */
+export const CROWD = "#4C5666", CROWD2 = "#3E4756";
 
 /* ---------------------------------------------------------------------------
    THE SEVEN PLACES. Neighbours in the cut differ by both hue and lightness.
@@ -90,20 +94,20 @@ export const CROWD = "#2A303A", CROWD2 = "#1D222A";
    ------------------------------------------------------------------------ */
 export const PLACES: Record<string, Place> = {
   /* S0/S4 · the ring, from the apron. Warm hall, dark crowd, CREAM canvas. */
-  ring:   { back: "#46505F", back2: "#252B34", floor: CANVAS, floor2: CANVAS2,
+  ring:   { back: "#69748A", back2: "#454E5C", floor: CANVAS, floor2: CANVAS2,
             lip: POST_R, key: GOLD, horizon: 430, grit: "#B7AD98" },
   /* S0c/S6 · the corner, tighter and warmer */
   corner: { back: "#54443A", back2: "#2E2620", floor: "#EDE5D3", floor2: "#C6BCA4",
             lip: "#B8543A", key: "#EFD9A2", horizon: 470, grit: "#AFA48C" },
   /* S2 · the tunnel where the corner is introduced. AMBER, deepest frame. */
-  roster: { back: "#4A3D2E", back2: "#71603F", floor: "#8A7E6A", floor2: "#574E42",
+  roster: { back: "#5A4A38", back2: "#80704C", floor: "#9C8F78", floor2: "#6E624F",
             lip: "#8C7E66", key: GOLD, horizon: 480, grit: "#9E8E72" },
   /* S3 · the box office, outside in the rain. COLD SLATE + one sour lamp.
      The villain's palette, used NOWHERE else in the reel. */
   booth:  { back: "#3A4650", back2: "#28313A", floor: "#59636B", floor2: "#363F47",
             lip: "#4C575F", key: "#93A98C", horizon: 520, grit: "#6A737B" },
   /* S1 · the arena wide from high in the stand */
-  stand:  { back: "#3E4A5C", back2: "#20262F", floor: "#E6DECC", floor2: "#B8AE98",
+  stand:  { back: "#5F6C80", back2: "#3E4756", floor: "#E6DECC", floor2: "#B8AE98",
             lip: "#8E6C58", key: GOLD, horizon: 400, grit: "#A89E88" },
   /* S5 · macro on the tag, at the ropes */
   apron:  { back: "#57462F", back2: "#332A1E", floor: "#EDE5D3", floor2: "#C2B79E",
@@ -210,16 +214,22 @@ export const Ring: React.FC<{ p: Place; f: number; z?: number; mark?: number;
   ({ p, f, z = 30, mark = 260, ropes = 3, near = true, markX, markY }) => {
   const hz = p.horizon;
   const FAR_L = 150, FAR_R = W - 150, NEAR_L = -46, NEAR_R = W + 46;
-  const CT = hz + 4, CB = hz + 300;
+  /* the apron skirt has to stay ON PANEL — it is where the ring branding
+     lives, and at hz+342 it was pushed off the bottom edge entirely */
+  const CT = hz + 4, CB = hz + 296;
   return (<>
     {/* the canvas — a trapezoid, the brightest plane in the reel */}
     <div style={{ position: "absolute", left: 0, top: CT, width: W, height: CB - CT,
       zIndex: z, background: `linear-gradient(182deg, ${p.floor2} 0%, ${p.floor} 62%)`,
       clipPath: `polygon(${FAR_L}px 0, ${FAR_R}px 0, ${NEAR_R}px 100%, ${NEAR_L}px 100%)` }} />
-    {/* the painted mark, ON the canvas, in perspective */}
+    {/* the painted mark, ON the canvas, in perspective.
+        ⛔ 0.30 opacity on a cream mat is a smudge. At 0.46 against a canvas this
+        bright it still reads as PAINT rather than a decal, and it is the single
+        largest object in frame 0 — which is the whole point: the subject is
+        legible before anything has to be decoded. */}
     <div style={{ position: "absolute", left: (markX ?? W / 2) - mark / 2,
       top: (markY ?? CT + 96) - mark / 2, width: mark, height: mark, zIndex: z + 1,
-      opacity: 0.30, transform: "scaleY(0.52)", transformOrigin: "50% 50%" }}>
+      opacity: 0.36, transform: "scaleY(0.52)", transformOrigin: "50% 50%" }}>
       <Img src={staticFile("claude_logo.png")}
         style={{ width: "100%", height: "100%", objectFit: "contain" }} />
     </div>
@@ -263,6 +273,43 @@ export const Ring: React.FC<{ p: Place; f: number; z?: number; mark?: number;
     ))}
   </>);
 };
+
+/** THE RINGSIDE HOARDING — the lit advertising board that runs behind the
+    ropes in every real arena.
+
+    ⛔ IT IS DOING TWO JOBS AT ONCE, WHICH IS WHY IT EXISTS. Measured by band,
+       frame 0's problem was never the canvas (142-171) — it was the hall above
+       it, y 99-396, sitting at 110-118 and pulling the panel mean to 145
+       against a 150 bar. A cream board across the full width lands ~200 in the
+       exact band that was short. And because it is a hoarding, the thing it
+       carries is MARKS: five more at 66px, in the frame the brief said needed
+       more logos. Fixing the gate from inside the world, again. */
+export const Hoarding: React.FC<{ y: number; z?: number; n?: number; from?: number;
+  h?: number }> = ({ y, z = 16, n = 5, from = 0, h: hh = 86 }) => (<>
+  <div style={{ position: "absolute", left: -30, top: y, width: W + 60, height: hh,
+    background: "#EFE7D4", zIndex: z, boxShadow: SH }} />
+  <div style={{ position: "absolute", left: -30, top: y, width: W + 60, height: 9,
+    background: "#FBF6EA", zIndex: z + 1 }} />
+  <div style={{ position: "absolute", left: -30, top: y + hh - 11, width: W + 60, height: 11,
+    background: "#C3B9A2", zIndex: z + 1 }} />
+  {Array.from({ length: n }, (_, i) => {
+    const pr = PROVIDERS[(from + i) % PROVIDERS.length];
+    const x = 74 + i * ((W - 148) / Math.max(1, n - 1));
+    return (
+      <div key={"ho" + i} style={{ position: "absolute", left: x - 82, top: y + 12,
+        width: 164, height: hh - 26, zIndex: z + 2, display: "flex", alignItems: "center",
+        justifyContent: "center", gap: 9 }}>
+        {pr.mark
+          ? <Img src={staticFile(`logos/${pr.k}.svg`)}
+              style={{ width: 46, height: 46, objectFit: "contain" }} />
+          : null}
+        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
+          fontSize: pr.n.length > 8 ? 19 : 24, letterSpacing: "0.02em",
+          color: "#3A342A", whiteSpace: "nowrap" }}>{pr.n}</span>
+      </div>
+    );
+  })}
+</>);
 
 /** rain — solid slanted strokes, never a wash. The box office only. */
 export const Rain: React.FC<{ f: number; n?: number; z?: number; c?: string }> =

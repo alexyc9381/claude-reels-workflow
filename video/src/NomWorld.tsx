@@ -786,3 +786,87 @@ export const AskBubble: React.FC<{ x: number; y: number; t: string; s?: number; 
     </div>
   </div>
 );
+
+/* =========================================================================
+   THE QUEUE — a line of Claude sprites waiting to get into the bunker.
+
+   Alex, round 8: *"have like a whole line of Claude sprites moving around,
+   a whole line trying to get into the bunker."*
+
+   ⚠️ THIS DELIBERATELY OVERRIDES THE TWO-CHARACTER CAP. `reel-declutter-single-hero`
+   says max two sprites on screen and prefer one, and the reason is real: three
+   equal figures all acting at once is the clutter failure. What makes a QUEUE
+   different is that it is not three subjects, it is ONE OBJECT — a line has a
+   single shape, a single direction and a single behaviour, and the eye reads it
+   as one thing the way it reads a wall or a conveyor. The hero is still the one
+   sprite nearest camera; the rest are the line he is standing in.
+
+   ⭐ AND IT IS THE BEST WORLDBUILDING IN THE REEL. Reel 94's law is that every
+   person here is a Claude, so a queue of them at a blast door says three things
+   no prop can: that the bunker is worth queueing for, that other people exist in
+   this world, and that the audience's own mark is the one on every face in it.
+
+   The shuffle is a WAVE, not a march: sprite i steps when the sprite ahead has
+   already gone, so the line compresses and stretches the way a real queue does.
+   ====================================================================== */
+export const Queue: React.FC<{ x: number; y: number; n?: number; s?: number; f?: number;
+  z?: number; gap?: number; dir?: 1 | -1; depth?: number; period?: number; lit?: number;
+  rope?: boolean; rise?: number }> =
+  ({ x, y, n = 6, s = 1, f = 0, z = 60, gap = 92, dir = -1, depth = 0.055, period = 96,
+     lit = 1, rope = true, rise = 15 }) => (<>
+  {rope && Array.from({ length: n }, (_, i) => {
+    const k = 1 - i * depth;
+    const px = x + dir * i * gap * k, py = y - i * rise;
+    return (
+      <React.Fragment key={"qp" + i}>
+        <div style={{ position: "absolute", left: px + dir * gap * 0.5 * k, top: py - 104 * s * k,
+          width: 11 * s * k, height: 104 * s * k, background: "#4E4A45", zIndex: z + 2 }} />
+        <div style={{ position: "absolute", left: px + dir * gap * 0.5 * k,
+          top: py - 98 * s * k + Math.sin(f / 19 + i) * 3, width: gap * k, height: 9 * s * k,
+          background: "#C48A3C", zIndex: z + 2,
+          transform: `translateX(${dir < 0 ? -gap * k : 0}px) rotate(${dir * -rise * 0.22}deg)`,
+          transformOrigin: dir < 0 ? "100% 50%" : "0% 50%" }} />
+      </React.Fragment>
+    );
+  })}
+  {Array.from({ length: n }, (_, i) => {
+    const k = 1 - i * depth;                     // perspective down the line
+    /* the shuffle wave: the one at the front moves first, each behind it later */
+    const ph = ((f + i * 11) % period) / period;
+    const step = ph < 0.13 ? Math.sin((ph / 0.13) * Math.PI) : 0;
+    const px = x + dir * i * gap * k - dir * step * 26 * k;
+    const py = y - i * rise;                     // each place back is further UP the plane
+    return (
+      <Keeper key={"qk" + i} x={px} y={py} s={s * k} z={z - i} f={f + i * 9}
+        face={dir < 0 ? 1 : -1} hood={1} walk={step > 0.05 ? 1 : 0}
+        badge={i % 2 === 0 ? 1 : 0}
+        lit={lit * (1 - i * 0.045)} />
+    );
+  })}
+</>);
+
+/** the same line seen FROM ABOVE, as shadows — for the top-down plate, where a
+    side-on sprite cannot exist. A row of shadows reads as a row of people. */
+export const QueueShadows: React.FC<{ x: number; y: number; n?: number; s?: number; f?: number;
+  z?: number; gap?: number; o?: number }> =
+  ({ x, y, n = 5, s = 1, f = 0, z = 66, gap = 132, o = 0.24 }) => (<>
+  {Array.from({ length: n }, (_, i) => {
+    const sway = Math.sin(f / (22 + i * 4) + i) * 5;
+    const k = 1 - i * 0.06;
+    return (
+      <div key={"qs" + i} style={{ position: "absolute", left: x + i * gap, top: y + i * 26,
+        zIndex: z, opacity: o * (1 - i * 0.10),
+        transform: `rotate(${-16 + sway}deg)`, transformOrigin: "50% 0%" }}>
+        <div style={{ position: "absolute", left: -74 * s * k, top: 0, width: 148 * s * k,
+          height: 168 * s * k, borderRadius: `${74 * s}px ${74 * s}px ${26 * s}px ${26 * s}px`,
+          background: "#3C3A36", filter: "blur(6px)" }} />
+        <div style={{ position: "absolute", left: -118 * s * k, top: 48 * s * k,
+          width: 64 * s * k, height: 124 * s * k, borderRadius: 32 * s, background: "#3C3A36",
+          filter: "blur(6px)", transform: "rotate(18deg)" }} />
+        <div style={{ position: "absolute", left: 54 * s * k, top: 48 * s * k,
+          width: 64 * s * k, height: 124 * s * k, borderRadius: 32 * s, background: "#3C3A36",
+          filter: "blur(6px)", transform: "rotate(-18deg)" }} />
+      </div>
+    );
+  })}
+</>);

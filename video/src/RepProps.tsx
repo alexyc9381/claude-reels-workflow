@@ -47,10 +47,10 @@ export const NameBoard: React.FC<{ x: number; y: number; w?: number; z?: number;
 export const Fighter: React.FC<{ x: number; base: number; s?: number; z?: number; f: number;
   markKey?: string; name?: string; hasMark?: boolean; tint?: string; robe?: string;
   gassed?: number; cheer?: number; shock?: number; gaze?: number; board?: boolean;
-  armUp?: number }> =
+  armUp?: number; reach?: number; reachSide?: number }> =
   ({ x, base, s = 1, z = 60, f, markKey, name, hasMark, tint = "#7C8496",
      robe = "#5E6B80", gassed = 0, cheer = 0, shock = 0, gaze = 0, board = true,
-     armUp = 0 }) => {
+     armUp = 0, reach = 0, reachSide = 1 }) => {
   const SZ = 230 * s;
   const sag = gassed * 16 * s;
   return (<>
@@ -66,18 +66,36 @@ export const Fighter: React.FC<{ x: number; base: number; s?: number; z?: number
         stern={gassed > 0.4 ? 1 : 0} nodAmp={gassed > 0.4 ? 1.2 : 3.0} nodSpeed={11} />
     </div>
     {/* the gloves — the one thing a tag needs to be legible */}
-    {[-1, 1].map((sd) => (
-      <div key={"gl" + sd} style={{ position: "absolute",
-        left: x + sd * SZ * 0.40 - SZ * 0.085,
-        top: base - SZ * 0.50 + sag - (sd > 0 ? armUp * SZ * 0.30 : 0),
-        width: SZ * 0.17, height: SZ * 0.20, borderRadius: `${SZ * 0.085}px`,
-        background: CLAY === tint ? "#B8543A" : "#8E3F30", zIndex: z + 3, boxShadow: SH }}>
-        <div style={{ position: "absolute", left: "16%", top: "12%", width: "34%",
-          height: "30%", borderRadius: "50%", background: mxh("#B8543A", 0.30) }} />
-      </div>
-    ))}
+    {[-1, 1].map((sd) => {
+      /* ⛔ A REACHING ARM IS DRAWN, NOT IMPLIED. v1 floated a separate pair of
+         gloves in mid-canvas and they read as two blobs belonging to nobody —
+         the same failure as reel 81's hidden chain: PROXIMITY IS NOT CONNECTION,
+         you have to draw the span. When `reach` is set, this side gets a real
+         arm bar running from the body out to the glove. */
+      const out = sd === reachSide ? reach : 0;
+      const gx = x + sd * (SZ * 0.40 + out);
+      const gy = base - SZ * 0.50 + sag - (sd > 0 ? armUp * SZ * 0.30 : 0);
+      return (
+        <React.Fragment key={"gl" + sd}>
+          {out > 0 && (
+            <div style={{ position: "absolute",
+              left: sd < 0 ? gx : x + SZ * 0.30, top: gy + SZ * 0.055,
+              width: out + SZ * 0.12, height: SZ * 0.095, borderRadius: SZ * 0.05,
+              background: tint, zIndex: z + 2, boxShadow: SH }} />
+          )}
+          <div style={{ position: "absolute", left: gx - SZ * 0.085, top: gy,
+            width: SZ * 0.17, height: SZ * 0.20, borderRadius: `${SZ * 0.085}px`,
+            background: tint === CLAY ? "#B8543A" : "#44506A", zIndex: z + 3,
+            boxShadow: SH }}>
+            <div style={{ position: "absolute", left: "16%", top: "12%", width: "34%",
+              height: "30%", borderRadius: "50%",
+              background: mxh(tint === CLAY ? "#B8543A" : "#44506A", 0.30) }} />
+          </div>
+        </React.Fragment>
+      );
+    })}
     {board && name && (
-      <NameBoard x={x} y={base - SZ - 78 * s} w={150 * s} z={z + 8}
+      <NameBoard x={x} y={base - SZ - 44 * s} w={150 * s} z={z + 8}
         markKey={markKey} name={name} hasMark={hasMark} dim={gassed > 0.4 ? 1 : 0} />
     )}
   </>);

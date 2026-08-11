@@ -7,7 +7,7 @@ import {
   CLAY, GOLD, GREEN, RED, PAPER, INK, CANVAS, CANVAS2, ROPE, POST_R, POST_B,
   BRASS, BRASSD, BRASSL, CROWD,
   Arena, Ring, Rain, Scene, Cam, Beam, Strip, Motes, Chip, Plate, BigNum, Contact,
-  Edge, Mark, MarkPlate, MarkCast, Banner, MakerPlate, Stencil, PROVIDERS, usePlace,
+  Edge, Mark, MarkPlate, MarkCast, Banner, Hoarding, MakerPlate, Stencil, PROVIDERS, usePlace,
 } from "./RepWorld";
 import {
   NameBoard, Fighter, Tag, RoundBoard, Roster, Booth, Waiting, Towel429, Belt,
@@ -90,34 +90,64 @@ export const S0Hook: React.FC = () => {
     const t = E(lf, 12, 18, 0, 1, OUT);
     const sk = shake(lf, 12, 15, 13);
     const surge = E(lf, 13, 24, 0, 1, OUT);
+    /* ⛔ NO SLUG ON THIS SHOT. The slug prints centred at y=750 and the ring
+       skirt is the only place the CLAUDE CODE lockup can live, so the two were
+       overprinting. The lockup wins: it is this frame's answer to "make it
+       clearer we are talking about claude". */
     return (
-      <Scene p={p} slug="TITLE FIGHT  ·  THE CORNER" push={[0, 22, 1.045]} vig={0.42}>
+      <Scene p={p} slug="" push={[0, 22, 1.045]} vig={0.34}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px)` }}>
           <Arena p={p} f={f} rows={3} lights={4} />
-          {/* the corner's banners — three real marks at 150px, in frame 0 */}
-          {[[196, 0], [506, 1], [816, 2]].map(([x, i]) => (
-            <Banner key={"bn" + i} x={x as number} y={150} w={150} z={26}
-              markKey={P[i as number].k} name={P[i as number].n}
-              hasMark={P[i as number].mark} f={f} />
-          ))}
-          <Ring p={p} f={f} z={30} mark={260} markY={CANV + 118} />
+          {/* ⛔ ONE BIG BANNER, NOT TWO SMALL ONES. Two 186px banners plus the
+              hoarding stacked three rows of marks into the top third and each
+              one clipped the next. The hoarding already carries five; this
+              carries the SIXTH at 200px, which is the size the note asked for. */}
+          <Banner x={296} y={112} w={190} z={26} markKey={P[0].k} name={P[0].n}
+            hasMark f={f} />
+          <Hoarding y={CANV - 96} z={16} n={4} from={0} />
+          <Ring p={p} f={f} z={30} mark={330} markX={W / 2} markY={CANV + 236} />
           {/* the corner, behind the far ropes, surging on the tag */}
-          {[[236, 6], [352, 3], [672, 4], [790, 5]].map(([x, i], k) => (
-            <Fighter key={"cf" + k} x={x as number} base={CANV + 44 - surge * 8}
-              s={0.52} z={44 + k} f={f + k * 9}
-              markKey={P[i as number].k} name={P[i as number].n}
-              hasMark={P[i as number].mark} cheer={surge} board={false} />
+          {[[176, 6], [268, 3], [896, 4]].map(([x, i], k) => (
+            <Fighter key={"cf" + k} x={x as number} base={CANV + 52 - surge * 8}
+              s={0.46} z={40 + k} f={f + k * 9} cheer={surge} board={false} />
           ))}
-          {/* CLAUDE CODE, in the ring, clay against the corner's slate */}
-          <Fighter x={W / 2 - 132} base={CANV + 236} s={0.88} z={70} f={f}
-            tint={CLAY} robe="#B8543A" name="CLAUDE CODE" board={false}
-            armUp={t} gaze={0.6} />
-          <Mark x={W / 2 - 214} y={CANV - 44} s={92} z={88} />
-          {/* THE MOMENT: two gloves an inch apart at f0, meeting at f12 */}
-          <Tag x={W / 2 + 96} y={CANV + 92} s={0.86} z={92} t={t} f={lf} />
-          <RoundBoard x={628} y={214} v="800 MILLION" sub="FREE AI TOKENS / MONTH"
-            s={0.66} z={96} />
+          {/* ⛔ THE MOMENT IS TWO ARMS MEETING, AND BOTH ARMS ARE DRAWN. Claude
+              reaches right, the fresh man reaches left, and at f0 there is a
+              visible GAP between the gloves — the baseline the f12 slam breaks. */}
+          <Fighter x={286} base={CANV + 250} s={1.0} z={70} f={f}
+            tint={CLAY} robe="#B8543A" board={false} gaze={0.7}
+            reach={92 + t * 40} reachSide={1} />
+          <Fighter x={790} base={CANV + 250} s={1.0} z={68} f={f + 13}
+            markKey={P[1].k} name={P[1].n} hasMark board
+            reach={92 + t * 40} reachSide={-1} cheer={t * 0.7} />
+          {/* the contact burst, on the frame the gloves actually touch */}
+          {t > 0.9 && Array.from({ length: 9 }, (_, i) => (
+            <div key={"bz" + i} style={{ position: "absolute", left: 534, top: CANV + 122,
+              width: 11, height: 74, borderRadius: 6, background: "#F6EBD2", zIndex: 90,
+              transformOrigin: "50% 0%",
+              transform: `rotate(${i * 40}deg) translateY(40px)` }} />
+          ))}
+          {/* ⛔⛔ THE CLAUDE MARKS ARE PART OF THE WORLD, NOT PASTED ON IT. v1 put
+              a white badge plate in mid-canvas and it read as a sticker. A real
+              ring carries its sponsor PAINTED ON THE MAT and printed on the
+              apron skirt, so both go where they belong: 340px underfoot, and a
+              90px mark with the wordmark on the skirt, which is the brightest
+              band at the bottom of frame. */}
+          <div style={{ position: "absolute", left: 0, right: 0, top: CANV + 262,
+            zIndex: 88, display: "flex", alignItems: "center", justifyContent: "center",
+            gap: 13 }}>
+            <div style={{ width: 46, height: 46, borderRadius: 11, background: "#FFFFFF",
+              border: "3px solid #E8DCC0", display: "flex", alignItems: "center",
+              justifyContent: "center", boxShadow: SH }}>
+              <MarkCast x={23} y={23} s={34} z={89} />
+            </div>
+            <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 33,
+              letterSpacing: "-0.01em", color: "#F9F0DE",
+              textShadow: "0 3px 10px rgba(0,0,0,0.5)" }}>CLAUDE CODE</span>
+          </div>
+          <RoundBoard x={598} y={186} v="800 MILLION" sub="FREE AI TOKENS / MONTH"
+            s={0.68} z={96} />
           <Flash lf={lf} at={12} />
         </div>
       </Scene>
@@ -279,12 +309,18 @@ export const S2: React.FC = () => {
   const lf = f - CUT[shot];
 
   const Wall = () => (<>
-    <div style={{ position: "absolute", left: 0, right: 0, top: 110, height: 420,
+    <div style={{ position: "absolute", left: 0, right: 0, top: 104, height: 560,
       background: mxh(p.back2, 0.06), zIndex: 6 }} />
-    {Array.from({ length: 8 }, (_, r) => (
-      <div key={"bc" + r} style={{ position: "absolute", left: 0, right: 0, top: 118 + r * 52,
-        height: 3, background: dkh(p.back2, 0.22), opacity: 0.55, zIndex: 7 }} />
+    {Array.from({ length: 11 }, (_, r) => (
+      <div key={"bc" + r} style={{ position: "absolute", left: 0, right: 0, top: 112 + r * 52,
+        height: 3, background: dkh(p.back2, 0.20), opacity: 0.5, zIndex: 7 }} />
     ))}
+    {/* the skirting and the tunnel floor, so the lower half is a PLACE and not
+        an unlit band — v1 left it near-black under the posters */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 664, height: 16,
+      background: dkh(p.back2, 0.34), zIndex: 8 }} />
+    <div style={{ position: "absolute", left: 0, right: 0, top: 680, bottom: 0,
+      background: `linear-gradient(184deg, ${p.floor} 0%, ${p.floor2} 100%)`, zIndex: 8 }} />
   </>);
 
   /* ---- A · THREE POSTERS, 210px marks, pasted up in sequence ----------- */
@@ -600,16 +636,16 @@ export const S6Cta: React.FC = () => {
         <Arena p={p} f={f} rows={3} lights={5} />
         <Ring p={p} f={f} z={30} mark={250} markY={p.horizon + 122} />
         {/* the winner, arms up, holding it */}
-        <Fighter x={W / 2} base={p.horizon + 268} s={1.02} z={60} f={f} tint={CLAY}
-          robe="#B8543A" cheer={0.9} board={false} armUp={lift} />
-        <Mark x={148} y={228} s={108} z={88} />
+        <Fighter x={W / 2 - 24} base={p.horizon + 286} s={1.34} z={60} f={f} tint={CLAY}
+          robe="#B8543A" cheer={0.75} board={false} armUp={lift} />
+        <Mark x={64} y={556} s={104} z={88} />
         {/* THE BELT, raised across the whole shot */}
         <div style={{ position: "absolute", inset: 0, zIndex: 92,
           transform: `translateY(${(1 - lift) * 132}px) scale(${0.82 + pop * 0.18})`,
           transformOrigin: "50% 40%", opacity: pop }}>
-          <Belt x={W / 2} y={152} s={0.96} z={92} word="REPO" />
+          <Belt x={W / 2} y={126} s={0.92} z={92} word="REPO" />
         </div>
-        <MakerPlate x={628} y={598} s={1.02} z={94} />
+        <MakerPlate x={636} y={556} s={1.0} z={94} />
         <Flash lf={f} at={0} n={4} o={0.34} />
       </div>
     </Scene>
