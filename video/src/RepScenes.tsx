@@ -11,7 +11,7 @@ import {
 } from "./RepWorld";
 import {
   Counter, Pile, Fall, Chute, Flag429, Machine, Claude, Waiting, Stack, Cap,
-  Belt, Junction, Ledger,
+  Belt, Junction, Ledger, RepoCard, Burst,
 } from "./RepProps";
 
 /* ===========================================================================
@@ -73,116 +73,119 @@ export const S0Hook: React.FC = () => {
   const f = useCurrentFrame();
   const p = usePlace("count");
   const pb = usePlace("bench");
-  const CUT = [0, 22, 56, 82];
+  /* ⛔ DENSE AT THE FRONT, SETTLING AT THE BACK (reel 82). Five shots, four cuts
+     inside the first 2.2s: 0.67 / 0.73 / 0.73 / 0.80 / 0.73s. The old open was
+     four shots with its first cut at 0.73s and it read as slow. */
+  const CUT = [0, 20, 42, 64, 88];
   const shot = CUT.filter((c) => f >= c).length - 1;
   const lf = f - CUT[shot];
   const HZ = p.horizon;
 
-  /* ---- A · WIDE · THE RANK IS ALREADY IN FRAME 0 ----------------------- */
+  /* ---- A · THE REPO ITSELF, AND THEN IT COMES APART ------------------- */
   if (shot === 0) {
-    /* ⛔⛔ v3's FRAME 0 WAS A SEALED CHUTE AND AN ODOMETER READING ZERO, and the
-       note was *"the beginning its not too clear what its about ... not really
-       hierarchical."* A counter at 000,000,000 states nothing, and there was no
-       rank in the frame because the only two things in it were both small.
-
-       Reel 86 already defined the word: hierarchical does NOT mean depth tiers,
-       it means A RANK — you have to see which is bigger without reading. So the
-       comparison is now the OPENING image, not the reveal: a Claude sprite for
-       scale, a 4-token stack at his feet, and a mountain of tokens filling the
-       right of frame with 200px provider logos on its face. Small / person /
-       enormous, readable in a glance, before a word is spoken. */
-    const surge = E(lf, 12, 24, 0, 1, OUT);
-    /* ⛔ FRAME 0 READS THE WHOLE CLAIM. v1 of this shot opened mid-count on
-       496,000,000, which is not a settled state and not a number anybody can
-       use. It reads 800,000,000 at f0 and keeps CLIMBING past it as the fresh
-       avalanche lands. */
-    const cnt = M + E(lf, 12, 26, 0, 14200000, OUT);
-    const sk = shake(lf, 12, 16, 14);
+    /* ⛔⛔ THE FIRST OBJECT IN THE REEL IS THE SUBJECT. Not a metaphor for it,
+       not a consequence of it — the repo card: GitHub mark, the owner/name, the
+       star count, the licence, and the claim printed underneath. A viewer who
+       has not heard a word knows what this video is about.
+       ⛔ AND IT IS THE PATTERN INTERRUPT. It sits settled and complete, and at
+       f10 it BURSTS — sixteen tokens thrown out of it in every direction, a
+       three-frame flash and a hard shake. An object that was still coming apart
+       is the interrupt docs/THE-OPEN.md asks for; a fade never is. */
+    const burst = E(lf, 10, 20, 0, 1, OUT);
+    const sk = shake(lf, 10, 20, 12);
     return (
-      <Scene p={p} slug="FREE AI TOKENS  ·  EVERY MONTH" push={[0, 22, 1.045]}
-        vig={0.32}>
+      <Scene p={p} slug="" push={[0, 20, 1.05]} vig={0.3}>
         <div style={{ position: "absolute", inset: 0, zIndex: 1,
           transform: `translate(${sk.x}px, ${sk.y}px)` }}>
-          <Room p={p} f={f} />
-          <Counter x={606} y={150} v={cnt} s={0.76} z={96} />
-          {/* the mountain — settled and complete at f0, surging at f12 */}
-          <Fall x={690} y={-30} len={470} f={f} n={12} s={1.2} z={64} spread={360}
-            on={0.35 + surge * 0.65} />
-          <Pile x={690} base={762} n={Math.round(150 + surge * 70)} s={1.1} z={70}
-            w={540} seed={5} />
-          {/* ⛔ THE LOGOS ARE THE POINT AND THEY ARE 200px. They sit ON the face
-              of the mound, so they are big, they belong to the pile, and they
-              say "AI" in the first frame. */}
-          <Token x={548} y={588} s={198} z={92} markKey={P[0].k} name={P[0].n}
-            hasMark rot={-9} />
-          <Token x={742} y={452} s={210} z={93} markKey={P[1].k} name={P[1].n}
-            hasMark rot={6} />
-          <Token x={918} y={606} s={190} z={92} markKey={P[3].k} name={P[3].n}
-            hasMark rot={12} />
-          {/* the Claude sprite: the scale reference, and the one who reacts */}
-          <Claude x={132} base={756} s={0.92} z={80} f={f} gaze={0.75}
-            shock={surge * 0.7} />
-          <Stack x={392} base={756} n={4} s={0.78} z={74} label="800,000"
-            sub="ONE FREE TIER" seed={2} />
-          <Flash lf={lf} at={12} />
+          <Room p={p} f={f} counter={false} />
+          <div style={{ position: "absolute", left: 0, right: 0, top: 596, bottom: 0,
+            background: `linear-gradient(184deg, ${p.floor} 0%, ${p.floor2} 100%)`,
+            zIndex: 12 }} />
+          <RepoCard x={W / 2} y={156} s={1.0} z={60} crack={burst} />
+          <Burst x={W / 2} y={330} t={burst} n={18} s={1.0} z={100} spread={620} />
+          <Claude x={126} base={786} s={0.86} z={80} f={f} gaze={0.8}
+            shock={burst * 0.9} />
+          <Flash lf={lf} at={10} n={3} o={0.4} />
         </div>
       </Scene>
     );
   }
 
-  /* ---- B · EXTREME CLOSE · the digits, rolling ------------------------- */
+  /* ---- B · THE NUMBER, COUNTING ---------------------------------------- */
   if (shot === 1) {
-    const cnt = E(lf, 0, 26, M * 0.42, M, OUT);
+    const cnt = E(lf, 0, 20, M * 0.28, M, OUT);
     return (
-      <Scene p={p} slug="800,000,000  ·  A MONTH" push={[22, 56, 1.05]} vig={0.42}>
+      <Scene p={p} slug="FREE AI TOKENS  ·  EVERY MONTH" push={[20, 42, 1.06]}
+        vig={0.4}>
         <Room p={p} f={f} counter={false} />
-        <div style={{ position: "absolute", left: 0, right: 0, top: 470, bottom: 0,
+        <div style={{ position: "absolute", left: 0, right: 0, top: 520, bottom: 0,
           background: `linear-gradient(184deg, ${p.floor} 0%, ${p.floor2} 100%)`,
           zIndex: 12 }} />
-        <Counter x={W / 2} y={272} v={cnt} s={1.02} z={96} />
-        <Fall x={W / 2} y={-30} len={280} f={f} n={7} s={0.8} z={40} spread={760} on={1} />
-        {/* he is watching the number, which is what tells you to watch it too */}
-        {/* a BELT, not another heap — the second pile in ninety frames was the
-            start of the "just coins piling" problem */}
-        <Belt y={604} f={f} z={50} s={1.0} speed={4.2} n={7} from={2} />
-        <Claude x={168} base={792} s={1.0} z={80} f={f} gaze={0.9} cheer={0.25} />
+        <Counter x={W / 2} y={268} v={cnt} s={1.04} z={96} />
+        <Fall x={W / 2} y={-30} len={560} f={f} n={13} s={0.95} z={40} spread={860}
+          on={1} />
+        <Claude x={158} base={792} s={0.96} z={80} f={f} gaze={0.9} shock={0.35} />
+        <Flash lf={lf} at={0} n={2} o={0.24} />
+      </Scene>
+    );
+  }
+
+  /* ---- C · WHOSE TOKENS. Three marks SLAM in, one per 6 frames. -------- */
+  if (shot === 2) {
+    const T = [{ x: 236, i: 0, at: 0 }, { x: 536, i: 1, at: 6 }, { x: 836, i: 3, at: 12 }];
+    return (
+      <Scene p={pb} slug="EVERY MAJOR AI COMPANY" push={[42, 64, 1.05]} vig={0.4}>
+        <Room p={pb} f={f} />
+        {T.map((t, k) => {
+          const on = E(lf, t.at, t.at + 6, 0, 1, OUT);
+          if (on <= 0.02) return null;
+          const land = Math.max(0, 1 - Math.abs(lf - (t.at + 6)) / 4);
+          return (
+            <div key={"sl" + k} style={{ position: "absolute", inset: 0, zIndex: 50 + k,
+              transform: `translateY(${(1 - on) * -300}px) scale(${1 + land * 0.09}, ${1 - land * 0.12})`,
+              transformOrigin: `${t.x}px 470px` }}>
+              <Token x={t.x} y={356} s={286} z={50 + k} markKey={P[t.i].k}
+                name={P[t.i].n} hasMark={P[t.i].mark} rot={-7 + k * 7} />
+            </div>
+          );
+        })}
+        <Claude x={112} base={782} s={0.7} z={82} f={f} gaze={0.85} cheer={0.5} />
         <Flash lf={lf} at={0} n={2} o={0.22} />
       </Scene>
     );
   }
 
-  /* ---- C · WHOSE TOKENS, and the receipt ------------------------------- */
-  if (shot === 2) {
-    const set = E(lf, 0, 12, 0, 1, OUT);
+  /* ---- D · THE SCALE. The heap, and what one free tier gives beside it. */
+  if (shot === 3) {
+    const grow = E(lf, 0, 18, 0.55, 1, OUT);
     return (
-      <Scene p={pb} slug="ONE REPO  ·  MIT" push={[56, 82, 1.055]} vig={0.44}>
-        <Room p={pb} f={f} />
-        <Token x={690} y={286} s={332} z={58} markKey={P[1].k} name={P[1].n} hasMark
-          rot={9} />
-        <Claude x={278} base={720} s={1.24} z={80} f={f} gaze={0.5} cheer={0.4}
-          hold={276} holdKey={P[0].k} holdName={P[0].n} holdMark />
-        <Cam z={88} y={(1 - set) * 24} o={set}>
-          <MakerPlate x={560} y={584} s={1.16} z={90} />
-        </Cam>
-        <Flash lf={lf} at={0} n={2} o={0.2} />
+      <Scene p={p} slug="ALL OF THEM  ·  POOLED" push={[64, 88, 1.05]} vig={0.34}>
+        <Room p={p} f={f} />
+        <Fall x={700} y={-30} len={470} f={f} n={11} s={1.15} z={64} spread={340}
+          on={1} />
+        <Pile x={700} base={762} n={Math.round(grow * 190)} s={1.1} z={70} w={520}
+          seed={5} />
+        <Token x={556} y={584} s={196} z={92} markKey={P[0].k} name={P[0].n} hasMark
+          rot={-9} />
+        <Token x={752} y={448} s={210} z={93} markKey={P[1].k} name={P[1].n} hasMark
+          rot={6} />
+        <Claude x={132} base={756} s={0.92} z={80} f={f} gaze={0.75} cheer={0.6} />
+        <Stack x={368} base={756} n={4} s={0.78} z={74} label="800,000"
+          sub="ONE FREE TIER" seed={2} />
       </Scene>
     );
   }
 
-  /* ---- D · THE PILE, and it is still going ---------------------------- */
-  const grow = E(lf, 0, 24, 0.5, 1, OUT);
+  /* ---- E · THE LINE. Logo tokens travelling, and he takes one. --------- */
   return (
-    <Scene p={p} slug="AND IT KEEPS COUNTING" push={[82, 110, 1.05]} vig={0.4}>
+    <Scene p={p} slug="ONE REPO  ·  MIT" push={[88, 110, 1.05]} vig={0.36}>
       <Room p={p} f={f} />
-      {/* ⛔ NO PILE IN THIS SHOT. Two belts running opposite ways give the frame
-          a direction a heap cannot have, and every token on them carries a mark
-          — so the shot is busier AND says more. */}
       <Belt y={318} f={f} z={40} s={1.05} speed={3.6} n={6} from={0} />
       <Belt y={528} f={f} z={44} s={1.05} speed={-2.9} n={6} from={4} />
       <Claude x={152} base={784} s={1.0} z={80} f={f} gaze={0.8} cheer={0.7}
         hold={168} holdKey={P[2].k} holdName={P[2].n} holdMark />
-      <Counter x={W / 2 + 120} y={686} v={M} s={0.52} z={96} label="" />
-      <Flash lf={lf} at={0} n={2} o={0.24} />
+      <MakerPlate x={556} y={664} s={0.98} z={94} />
+      <Flash lf={lf} at={0} n={2} o={0.2} />
     </Scene>
   );
 };

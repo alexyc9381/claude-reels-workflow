@@ -238,15 +238,17 @@ export const VARIANTS: Variant[] = [
    triggers photosensitivity.
 
    ⛔ THE BAR FOR ANY TRANSITION IN THIS REPO FROM NOW ON:
-      1  peak overlay opacity <= 0.30, and NEVER pure white or pure black
+      1  peak overlay opacity <= 0.18, and NEVER pure white or pure black
       2  no shape that closes over the FULL frame (no iris, no circle wipe)
       3  ramp in AND out — never an instant on/off plate
-      4  at least 8 frames, so the eye reads it as a dissolve, not a hit
+      4  at least 12 frames, so the eye reads it as a dissolve, not a hit
+      5  and VERIFY it: a strobe is a >45 luma step that comes BACK within 8
+         frames. A plain cut steps once and stays. Measure, do not eyeball.
    The cut itself is the punctuation. These exist to soften the seam, not to be
    noticed. A hard cut with nothing over it is always an acceptable answer.        */
 const Trans: React.FC<{ at: number; kind: Trans }> = ({ at, kind }) => {
   const f = useCurrentFrame();
-  const n = 10;
+  const n = 13;
   if (f < at || f >= at + n) return null;
   const p = (f - at) / n;
   /* a symmetric ramp: 0 -> peak -> 0, so nothing ever snaps on */
@@ -256,14 +258,14 @@ const Trans: React.FC<{ at: number; kind: Trans }> = ({ at, kind }) => {
     /* a WARM dip, not a white flash. #2A2620 at 0.22 is a shadow passing over
        the frame; the old #F4EEE2 at 0.42 was a camera strobe. */
     <div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
-      background: "#2A2620", opacity: ramp * 0.22 }} />
+      background: "#2A2620", opacity: ramp * 0.15 }} />
   );
   if (kind === "bars") return (
     <div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
       overflow: "hidden" }}>
       {[0, 1, 2, 3].map((i) => (
         <div key={i} style={{ position: "absolute", left: 0, right: 0, top: `${i * 25}%`,
-          height: "25%", background: "#2A2620", opacity: ramp * 0.26,
+          height: "25%", background: "#2A2620", opacity: ramp * 0.16,
           transform: `translateX(${(i % 2 ? 1 : -1) * p * 110}%)` }} />
       ))}
     </div>
@@ -272,13 +274,13 @@ const Trans: React.FC<{ at: number; kind: Trans }> = ({ at, kind }) => {
     /* ⛔ THIS WAS THE IRIS. It is now a soft centre-weighted dip that never
        closes and never reaches the frame edge at full strength. */
     <div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
-      background: `radial-gradient(circle at 50% 46%, ${hexA("#2A2620", ramp * 0.26)} 0%, ${hexA("#2A2620", ramp * 0.05)} 72%)` }} />
+      background: `radial-gradient(circle at 50% 46%, ${hexA("#2A2620", ramp * 0.16)} 0%, ${hexA("#2A2620", ramp * 0.03)} 72%)` }} />
   );
   return (
     <div style={{ position: "absolute", inset: 0, zIndex: 140, pointerEvents: "none",
       overflow: "hidden" }}>
       <div style={{ position: "absolute", left: `${-100 + p * 100}%`, top: 0, width: "100%",
-        height: "100%", background: "#2A2620", opacity: ramp * 0.24 }} />
+        height: "100%", background: "#2A2620", opacity: ramp * 0.15 }} />
     </div>
   );
 };

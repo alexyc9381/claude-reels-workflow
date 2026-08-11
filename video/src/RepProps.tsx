@@ -493,3 +493,79 @@ export const Ledger: React.FC<{ x: number; y: number; f: number; rows?: number;
       color: "#6B5E44" }}>{sub}</div>
   </>);
 };
+
+/** THE REPO CARD — the actual thing the video is about, as one object.
+
+    ⛔⛔ *"the first few scenes needs to be way more obvious about the topic."*
+       v5 opened on a mountain of gold coins. A viewer who has not heard the VO
+       sees MONEY, or crypto — not a GitHub repo. Everything on screen was true
+       and none of it named the subject.
+
+       The fix is not subtler: the FIRST OBJECT IN THE REEL is now the repo
+       itself — the GitHub mark, `tashfeenahmed/freellmapi`, ★18,265, MIT — with
+       the claim printed under it on the same card. That single object is the
+       whole sentence the VO is speaking, and it needs no decoding at all. */
+export const RepoCard: React.FC<{ x: number; y: number; s?: number; z?: number;
+  crack?: number; claim?: string; sub?: string }> =
+  ({ x, y, s = 1, z = 80, crack = 0, claim = "800,000,000", sub = "FREE AI TOKENS / MONTH" }) => {
+  const CW = 720 * s, CH = 330 * s;
+  return (
+    <div style={{ position: "absolute", left: x - CW / 2, top: y, width: CW, zIndex: z,
+      transform: `scale(${1 + crack * 0.05}) rotate(${crack * -1.2}deg)`,
+      transformOrigin: "50% 60%" }}>
+      <div style={{ width: CW, minHeight: CH, borderRadius: 18 * s, background: "#FBF9F3",
+        border: `${7 * s}px solid #2A2620`, boxSizing: "border-box", boxShadow: SH_D,
+        padding: `${24 * s}px ${30 * s}px` }}>
+        {/* the repo line — mark, owner, name */}
+        <div style={{ display: "flex", alignItems: "center", gap: 16 * s }}>
+          <Img src={staticFile("logos/github.svg")}
+            style={{ width: 76 * s, height: 76 * s, objectFit: "contain" }} />
+          <div>
+            <div style={{ fontFamily: MONO, fontWeight: 800, fontSize: 24 * s,
+              letterSpacing: "0.10em", color: "#8A8074" }}>tashfeenahmed /</div>
+            <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 58 * s,
+              lineHeight: 1.02, letterSpacing: "-0.02em", color: "#1C1914" }}>freellmapi</div>
+          </div>
+        </div>
+        {/* the receipt row */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12 * s,
+          marginTop: 16 * s }}>
+          {["★ 18,265", "MIT", "TypeScript"].map((t, i) => (
+            <div key={"cf" + i} style={{ padding: `${7 * s}px ${16 * s}px`,
+              borderRadius: 8 * s, background: i === 0 ? "#F2D999" : "#EAE4D6",
+              border: `${3 * s}px solid ${i === 0 ? "#C9A455" : "#CFC7B4"}`,
+              fontFamily: MONO, fontWeight: 800, fontSize: 25 * s, letterSpacing: "0.06em",
+              color: "#3A342A" }}>{t}</div>
+          ))}
+        </div>
+        {/* the claim, on the same card as the repo that makes it */}
+        <div style={{ marginTop: 20 * s, paddingTop: 18 * s,
+          borderTop: `${4 * s}px solid #E2DAC6`, display: "flex", alignItems: "baseline",
+          gap: 14 * s }}>
+          <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 900,
+            fontSize: 74 * s, lineHeight: 1, letterSpacing: "-0.03em",
+            color: "#B8541F" }}>{claim}</span>
+        </div>
+        <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 28 * s,
+          letterSpacing: "0.10em", color: "#5C5346", marginTop: 6 * s }}>{sub}</div>
+      </div>
+    </div>
+  );
+};
+
+/** the burst — tokens thrown out of something, in every direction. The reel's
+    pattern interrupt: an object that was sitting still comes apart. */
+export const Burst: React.FC<{ x: number; y: number; t: number; n?: number; s?: number;
+  z?: number; spread?: number }> =
+  ({ x, y, t, n = 16, s = 1, z = 100, spread = 520 }) => {
+  if (t <= 0.01 || t >= 1) return null;
+  return (<>
+    {Array.from({ length: n }, (_, i) => {
+      const a = (i / n) * Math.PI * 2 + rnd(i, 17) * 0.5;
+      const d = (0.35 + rnd(i, 19) * 0.65) * spread * s * t;
+      return <Token key={"bu" + i} x={x + Math.cos(a) * d}
+        y={y + Math.sin(a) * d * 0.72 + t * t * 190 * s} s={(52 + rnd(i, 23) * 34) * s}
+        z={z + i} rot={t * 420 + i * 37} plain />;
+    })}
+  </>);
+};
