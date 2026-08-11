@@ -435,8 +435,9 @@ export const Edge: React.FC<{ side?: "l" | "r"; c: string; w?: number; z?: numbe
    ====================================================================== */
 export const Keeper: React.FC<{ x: number; y: number; s?: number; z?: number; f?: number;
   face?: 1 | -1; walk?: number; hood?: number; back?: boolean; costume?: Record<string, number>;
-  lit?: number }> =
-  ({ x, y, s = 1, z = 40, f = 0, face = 1, walk = 0, hood = 1, back = false, costume, lit = 1 }) => {
+  lit?: number; badge?: number }> =
+  ({ x, y, s = 1, z = 40, f = 0, face = 1, walk = 0, hood = 1, back = false, costume, lit = 1,
+     badge = 0 }) => {
   const size = 190 * s;
   const bob = walk ? Math.abs(Math.sin(f / 4.6 + x * 0.05)) * 5 * walk * s : 0;
   const P = "#3F5A44", PD = "#2C4030", FUR = "#D8CDB4";   // parka green, its shade, the ruff
@@ -499,6 +500,24 @@ export const Keeper: React.FC<{ x: number; y: number; s?: number; z?: number; f?
           </g>
         )}
       </svg>
+      {/* ⛔ THE BADGE HOVERS ABOVE THE HEAD, NEVER ON IT. Reel 94 put it at 47.5%
+          of `size`, calling that the chest — but on a box character the body rect
+          IS the face and the eyes sit at exactly that height. It landed on his
+          eyes. Above the ruff (y < 17 of 200) is the only safe place. */}
+      {badge > 0 && (
+        <div style={{ position: "absolute",
+          left: size * 0.5 - size * 0.17 * badge,
+          top: -size * 0.30 * badge + Math.sin(f / 17) * size * 0.014,
+          width: size * 0.34 * badge, height: size * 0.34 * badge,
+          borderRadius: size * 0.085 * badge, background: "#FFFFFF",
+          border: `${Math.max(2, size * 0.016 * badge)}px solid #E8DCC0`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          transform: `scaleX(${face})`, boxShadow: "0 6px 14px rgba(20,10,6,0.38)" }}>
+          <Img src={staticFile("claude_logo.png")}
+            style={{ width: size * 0.24 * badge, height: size * 0.24 * badge,
+              objectFit: "contain" }} />
+        </div>
+      )}
     </div>
   );
 };
@@ -560,6 +579,23 @@ export const Cam: React.FC<{ x?: number; y?: number; s?: number; z?: number; rot
     transformOrigin: "50% 62%" }}>{children}</div>
 );
 
+/* =========================================================================
+   ⛔⛔ THE MARK IS AN AUDIENCE FILTER, NOT BRANDING.
+   Reel 95, round 3: *"more Claude logo imagery especially in the first 3
+   seconds, more Claude logos throughout and BIGGER on the Claude sprites, so
+   our target Claude audience keeps watching but other randoms don't."* The
+   scroller who does not recognise the mark was never the audience, so the
+   objective is the RIGHT stop, not a broad one.
+
+   ⛔ v1 of this reel put ONE mark in the whole thing, in the CTA at 17.9s, and
+      the first four seconds said "bunker" and never said "AI". FIVE marks now
+      land inside the first three seconds, and every scene after carries one.
+   ⛔ THE MARK NEVER COVERS HIS FACE. The box Mascot has no separate head: the
+      body rect (y 44..146 of a 200 viewBox) IS the face and the eyes sit at
+      y 70..96. The only safe places for an emblem are ABOVE the body or behind
+      it (reel 94 learned this by landing a badge on the eyes).
+   ====================================================================== */
+
 /** the official Claude mark, for the frames that have to say who this is for */
 export const Mark: React.FC<{ x: number; y: number; s?: number; z?: number; plate?: boolean }> =
   ({ x, y, s = 84, z = 90, plate = true }) => (
@@ -570,5 +606,58 @@ export const Mark: React.FC<{ x: number; y: number; s?: number; z?: number; plat
     display: "flex", alignItems: "center", justifyContent: "center", boxShadow: plate ? SH : undefined }}>
     <Img src={staticFile("claude_logo.png")}
       style={{ width: s * 0.86, height: s * 0.86, objectFit: "contain" }} />
+  </div>
+);
+
+/** the mark CAST INTO the set: a concrete or steel plate with the logo and one
+    mono product line under it. This is how the world itself says what it runs. */
+export const MarkPlate: React.FC<{ x: number; y: number; t: string; s?: number; z?: number;
+  c?: string; fg?: string }> =
+  ({ x, y, t, s = 1, z = 70, c = "#EFE9DC", fg = "#241F17" }) => (
+  <div style={{ position: "absolute", left: x, top: y, zIndex: z,
+    display: "flex", alignItems: "center", gap: 12 * s,
+    padding: `${9 * s}px ${16 * s}px ${9 * s}px ${9 * s}px`, borderRadius: 14 * s,
+    background: c, border: `${3 * s}px solid ${dark(c, 0.16)}`, boxShadow: SH }}>
+    <div style={{ width: 52 * s, height: 52 * s, borderRadius: 12 * s, background: "#FFFFFF",
+      border: `${2 * s}px solid #E8DCC0`, display: "flex", alignItems: "center",
+      justifyContent: "center" }}>
+      <Img src={staticFile("claude_logo.png")}
+        style={{ width: 40 * s, height: 40 * s, objectFit: "contain" }} />
+    </div>
+    <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 26 * s,
+      letterSpacing: "0.02em", color: fg, whiteSpace: "nowrap" }}>{t}</span>
+  </div>
+);
+
+/** the mark as a big emblem cast into a wall or a door face — no plate, no
+    chrome, just the logo at scale so it reads at a glance and at a thumbnail. */
+export const MarkCast: React.FC<{ x: number; y: number; s?: number; z?: number; o?: number }> =
+  ({ x, y, s = 150, z = 40, o = 1 }) => (
+  <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, height: s,
+    zIndex: z, opacity: o, display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <Img src={staticFile("claude_logo.png")}
+      style={{ width: s, height: s, objectFit: "contain" }} />
+  </div>
+);
+
+/** a chat bubble carrying the mark — the recurring "this is an assistant" motif */
+export const AskBubble: React.FC<{ x: number; y: number; t: string; s?: number; z?: number }> =
+  ({ x, y, t, s = 1, z = 86 }) => (
+  <div style={{ position: "absolute", left: x, top: y, zIndex: z }}>
+    <div style={{ position: "relative", display: "inline-flex", alignItems: "center",
+      gap: 11 * s, padding: `${11 * s}px ${22 * s}px ${11 * s}px ${11 * s}px`,
+      borderRadius: 18 * s, background: "#FFFFFF", border: `${3 * s}px solid #EDE7DB`,
+      boxShadow: SH_D }}>
+      <div style={{ width: 44 * s, height: 44 * s, borderRadius: 11 * s, background: "#FFF3EC",
+        border: `${2 * s}px solid #F0D5C6`, display: "flex", alignItems: "center",
+        justifyContent: "center" }}>
+        <Img src={staticFile("claude_logo.png")}
+          style={{ width: 34 * s, height: 34 * s, objectFit: "contain" }} />
+      </div>
+      <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 27 * s,
+        color: INK, whiteSpace: "nowrap" }}>{t}</span>
+      <div style={{ position: "absolute", left: 34 * s, bottom: -16 * s, width: 24 * s,
+        height: 18 * s, background: "#FFFFFF", clipPath: "polygon(0 0, 100% 0, 18% 100%)" }} />
+    </div>
   </div>
 );

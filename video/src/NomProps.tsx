@@ -1,6 +1,7 @@
 import React from "react";
 import { inter, fraunces } from "./fonts";
 import { MONO } from "./SlopKit";
+import { Img, staticFile } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, LIN, hexa, mix, dark, SH, SH_D, rnd,
   CLAY, GOLD, GREEN, RED, PAPER, INK, Plate, Contact, Beam,
@@ -324,6 +325,16 @@ export const Box: React.FC<{ x: number; base: number; s?: number; z?: number; f?
         background: `linear-gradient(180deg, ${hexa("#FFF6E2", 0.30 * on)} 0%, ${hexa("#FFF6E2", 0)} 100%)`,
         clipPath: "polygon(22% 0, 78% 0, 100% 100%, 0 100%)" }} />
     )}
+    {/* ⭐ THE MARK ON THE HERO ARTIFACT. The box is the thing the whole reel
+        points at, so it is the thing that has to say what it runs. At the crest
+        this tile is one of only two lit objects left in the frame. */}
+    <div style={{ position: "absolute", left: x + w / 2 - 62 * s, top: base - 30 * s,
+      width: 42 * s, height: 22 * s, borderRadius: 5 * s, background: "#FFFFFF",
+      border: `${2 * s}px solid #E8DCC0`, zIndex: z + 5, display: "flex",
+      alignItems: "center", justifyContent: "center" }}>
+      <Img src={staticFile("claude_logo.png")}
+        style={{ width: 17 * s, height: 17 * s, objectFit: "contain" }} />
+    </div>
     {/* status LEDs */}
     {leds > 0 && [GREEN, GOLD].map((c, i) => (
       <div key={"ld" + i} style={{ position: "absolute", left: x - w / 2 + 20 * s,
@@ -359,10 +370,20 @@ export const CmdScreen: React.FC<{ f: number; ask?: number; answer?: number; s?:
       fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 15 * s, color: "#8C877D" }}>
       {Q.slice(0, typed)}<span style={{ opacity: Math.floor(f / 7) % 2 }}>|</span>
     </div>
-    {/* the answer, streaming */}
+    {/* the answer, streaming, from a MARKED assistant — the screen has to say
+        who is answering, not just that something is */}
+    {lines[0] > 0.02 && (
+      <div style={{ position: "absolute", left: 14 * s, top: 68 * s, width: 24 * s,
+        height: 24 * s, borderRadius: 7 * s, background: "#FFF3EC",
+        border: `${1.5 * s}px solid #F0D5C6`, display: "flex", alignItems: "center",
+        justifyContent: "center" }}>
+        <Img src={staticFile("claude_logo.png")}
+          style={{ width: 18 * s, height: 18 * s, objectFit: "contain" }} />
+      </div>
+    )}
     {lines.map((p, i) => (
-      <div key={"al" + i} style={{ position: "absolute", left: 14 * s, top: (72 + i * 16) * s,
-        width: `${(78 - i * 9) * p}%`, height: 9 * s, borderRadius: 4,
+      <div key={"al" + i} style={{ position: "absolute", left: 46 * s, top: (72 + i * 16) * s,
+        width: `${(66 - i * 8) * p}%`, height: 9 * s, borderRadius: 4,
         background: i === 0 ? "#2B2824" : "#B4AEA2" }} />
     ))}
     {/* the local badge — the fact that matters */}

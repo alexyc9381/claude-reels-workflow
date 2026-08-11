@@ -84,10 +84,34 @@ intensity  10 |                                        ██ S5
 
 ## SCENE 0 — 0.00 to 3.90s (117f) · HOOK · four hard cuts
 > VO: *"Someone actually created an AI for the apocalypse and it's completely free and open source."*
-> HEADER: **PROJECT NOMAD** / *35,694 STARS, FREE*
+> HEADER: **AN OFFLINE AI SERVER** / *35,694 STARS, FREE*
 > TAKEAWAY: a thing was built for the end of the world, and the door to it is not locked.
 
-Authored against `docs/THE-OPEN.md`: four hard-cut shots inside 3.9s, a bright and settled frame 0, a transient on every cut, and **no on-screen text inside the picture** — the header and the VO carry the claim, the frame carries the event.
+Authored against `docs/THE-OPEN.md`: four hard-cut shots inside 3.9s, a bright and settled frame 0, and a transient on every cut.
+
+### ⛔⛔ THE OPEN HAS TO SAY "AI" AND IT HAS TO SAY "CLAUDE" (round 2)
+
+Alex: *"the beginning scenes need to be more obvious that we are talking about Claude, more AI references throughout, the messaging needs to be more obvious about AI in the beginning first scenes."*
+
+He is right and the first cut was indefensible on this. Its opening four seconds read as: a bunker, a door, a wheel, a tunnel. **Nothing in any of them said what the video was about**, and the only Claude mark in the entire reel sat in the CTA at 17.9s. A viewer had to survive to 3.9s before the subject appeared.
+
+Reel 95 already settled the principle: **the mark is an AUDIENCE FILTER, not branding.** A scroller either recognises it and stops or does not, and the one who does not was never the audience, so the objective is the RIGHT stop rather than a broad one. Its number is five marks inside the first three seconds.
+
+**The five, and what each rides:**
+
+| # | at | where | why it is not clutter |
+|---|---|---|---|
+| 1 | 0.00s | cast into the portal wedge, above the doorway | it is ON the hook's one dominant object, not a new one |
+| 2 | 0.00s | the Keeper's badge, hovering above his hood | he was already needed for scale |
+| 3 | 1.10s | stencilled on the blast door, above NOMAD | the door already carries type |
+| 4 | 1.10s | the `OFFLINE AI · NO CLOUD` plate bolted beside the lock | this is the shot where signage belongs |
+| 5 | 2.07s | the wheel's lower ring | the macro shot had no mark at all |
+
+Every scene after carries one — a `LOCAL MODEL` plate in the alcove, `RUNS LOCALLY` in the stacks, a marked assistant avatar streaming the answer on the box screen, the mark on the box's own case, `NO ACCOUNT, NO KEY` on the open rack, and the Keeper badged in all eight scenes. **All four alternate opens carry at least four marks of their own** — the filter is not a property of one cut.
+
+⛔ **A mark must not sit on the thing it is marking.** Three of the five landed wrong on the first pass: the wedge mark fell inside the doorway surround and the arch cut it in half, the door mark sat dead centre on the word NOMAD and rendered it `NOM✳AD`, and the hub mark went under the mitten. All three moved.
+⛔ **The mark never covers the Mascot's face.** The box character has no separate head — the body rect *is* the face, eyes at y 70..96 of a 200 viewBox — so the badge hovers above the ruff and nowhere else.
+⛔ **Anything authored near the panel top RISES on render.** The scene push scales about 50%/56%, so the ask-bubble authored at y=92 landed at y=73, inside the header's occlusion band. It moved below the screen.
 
 ### 0a · 0.00–1.10s · WIDE · THE RIDGE
 - **SET:** *NORTH RIDGE, dusk.* Floor: a wind-combed snow plain with drift ripples running to camera. Back wall: a low black rock ridge. Far plane: a **living city** on the horizon — warm lit windows in three parallax bands, a comms mast with a red beacon. Foreground: a snow-crusted boulder cropped by the panel's left edge. Atmosphere: horizontal snow streaks + a cold haze layer.

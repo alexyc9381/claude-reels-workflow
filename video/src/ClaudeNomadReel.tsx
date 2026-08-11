@@ -54,7 +54,7 @@ type Scene = { at: number; C: React.FC; head: [string, string] };
    which is information the audio does not carry and which a Claude Code viewer
    recognises. Every one of them is in the repo's own README table. */
 export const SCENES: Scene[] = [
-  { at: 0,   C: S0Hook, head: ["PROJECT NOMAD", "35,694 STARS, FREE"] },
+  { at: 0,   C: S0Hook, head: ["AN OFFLINE AI SERVER", "35,694 STARS, FREE"] },
   { at: 117, C: S1,     head: ["LOCAL AI CHAT", "OLLAMA, NO CLOUD"] },
   { at: 179, C: S2,     head: ["OFFLINE LIBRARY", "KIWIX ZIM ARCHIVES"] },
   { at: 226, C: S3,     head: ["OFFLINE MAPS", "PROTOMAPS REGIONS"] },
@@ -177,13 +177,13 @@ export type Variant = { hook: React.FC; hookHead: [string, string]; bed: string;
   seed: number; pal: number; trans: Trans; capTop: number; endHold: number };
 
 export const VARIANTS: Variant[] = [
-  { hook: S0Hook,      hookHead: ["PROJECT NOMAD", "35,694 STARS, FREE"],
+  { hook: S0Hook,      hookHead: ["AN OFFLINE AI SERVER", "35,694 STARS, FREE"],
     bed: "nomad_bed.wav",   seed: 0,  pal: 0, trans: "flash", capTop: 1268, endHold: 14 },
-  { hook: S0HookMast,  hookHead: ["THE TOWER IS NOT IT", "THE BOX IS"],
+  { hook: S0HookMast,  hookHead: ["THE AI IS NOT UP THERE", "IT IS IN THE BOX"],
     bed: "nomad_bed_b.wav", seed: 3,  pal: 1, trans: "bars",  capTop: 1214, endHold: 10 },
-  { hook: S0HookCase,  hookHead: ["ONE CASE, ONE MACHINE", "AND EVERYTHING IN IT"],
+  { hook: S0HookCase,  hookHead: ["ONE CASE, ONE AI", "AND EVERY ANSWER IN IT"],
     bed: "nomad_bed_c.wav", seed: 7,  pal: 2, trans: "punch", capTop: 1300, endHold: 8 },
-  { hook: S0HookCross, hookHead: ["AN AI YOU CARRY IN", "NO SIGNAL REQUIRED"],
+  { hook: S0HookCross, hookHead: ["AN AI YOU CARRY IN", "NO SIGNAL, NO ACCOUNT"],
     bed: "nomad_bed_d.wav", seed: 11, pal: 3, trans: "slide", capTop: 1240, endHold: 12 },
 ];
 

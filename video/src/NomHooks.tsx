@@ -1,10 +1,11 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { fraunces } from "./fonts";
+import { Img, staticFile } from "remotion";
 import {
   E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
   CLAY, GOLD, GREEN, RED, PAPER, INK, usePlace,
-  Ridge, Snow, Beam, Strip, Motes, Edge, Keeper, Mitt, Scene, Cam,
+  Ridge, Snow, Beam, Strip, Motes, Edge, Keeper, Mitt, Scene, Cam, MarkPlate, MarkCast,
 } from "./NomWorld";
 import { Portal, BlastDoor, Wheel, Tunnel, Mast } from "./NomProps";
 
@@ -23,6 +24,12 @@ import { Portal, BlastDoor, Wheel, Tunnel, Mast } from "./NomProps";
 
    All four run 117 frames, all four end at the same place (a door about to
    open), and none of them spends the blackout — the grid is alive in every one.
+
+   ⛔⛔ AND ALL FOUR CARRY THE MARK. Reel 95's audience-filter rule applies to
+      every open, not just the one that ships: a scroller either recognises the
+      Claude mark in the first seconds or was never the audience. Each hook below
+      lands at least four marks plus the product noun (OFFLINE AI / LOCAL MODEL)
+      inside its own three seconds.
    ========================================================================= */
 
 /* ================================================================== B ====
@@ -42,6 +49,7 @@ export const S0HookMast: React.FC = () => {
       <Cam z={40} s={1.72} y={132}>
         <Mast x={506} base={pm.horizon + 120} h={360} s={1} z={20} f={f} on={1} />
       </Cam>
+      <MarkPlate x={92} y={556} t="OFFLINE AI · NO CLOUD" s={0.94} z={70} />
       <Edge side="r" c={dark(pm.back, 0.68)} kind="rock" w={130} z={90} />
       <Snow f={f} n={26} z={70} />
       <Snow f={f} n={12} z={93} near speed={1.5} />
@@ -63,6 +71,9 @@ export const S0HookMast: React.FC = () => {
           height: 8, background: "#A39D8E", zIndex: 35 }} />
         <div style={{ position: "absolute", left: 616, top: pm.horizon + 62, width: 26,
           height: 52, background: "#FBEFD2", opacity: pulse, zIndex: 36, borderRadius: "6px 6px 0 0" }} />
+        <MarkCast x={645} y={pm.horizon + 20} s={72} z={38} o={0.96} />
+        <Keeper x={368} y={pm.horizon + 214} s={0.86} z={40} f={f} face={1} hood={1}
+          badge={1} lit={0.94} />
         <div style={{ position: "absolute", left: 570, top: pm.horizon + 104, width: 120,
           height: 60, zIndex: 33,
           background: `linear-gradient(180deg, ${hexa("#EED9AC", 0.44)} 0%, ${hexa("#EED9AC", 0)} 100%)`,
@@ -81,6 +92,8 @@ export const S0HookMast: React.FC = () => {
         <Ridge p={pd} f={f} city={0.3} lit={0.8} sunX={80} />
         <BlastDoor x={506} base={pd.horizon + 120} w={560} h={510} z={30} f={f}
           bleed={0.82} frost={1 - fall * 0.5} open={0} />
+        <MarkCast x={506} y={pd.horizon - 408} s={100} z={46} o={0.86} />
+        <MarkPlate x={216} y={pd.horizon - 92} t="LOCAL MODEL" s={0.9} z={48} />
         <Edge side="r" c={dark(pd.back, 0.62)} kind="rock" w={104} z={90} />
         <Snow f={f} n={20} z={70} />
       </Scene>
@@ -94,6 +107,7 @@ export const S0HookMast: React.FC = () => {
     <Scene p={pd} slug="ONE HAND  ·  NO KEY" push={[94, 117, 1.055]} vig={0.62}>
       <div style={{ position: "absolute", inset: 0, background: dark("#6E747C", 0.50), zIndex: 1 }} />
       <Wheel x={470} y={420} r={258} z={40} rot={-turn * 118} frost={1 - turn * 0.7} />
+      <MarkCast x={470} y={616} s={84} z={52} o={0.94} />
       <Mitt x={618} y={344} s={1.4} z={60} rot={-14 + turn * 110} />
       {seal > 0 && (
         <div style={{ position: "absolute", left: 0, right: 0, top: 306 - seal * 26,
@@ -158,6 +172,14 @@ export const S0HookCase: React.FC = () => {
             height: 12 * s, borderRadius: 4, background: "#B4AEA0" }} />
         </div>
       ))}
+      {/* the mark cast into the lid, so the case says what is inside it */}
+      <div style={{ position: "absolute", left: x - w / 2 + 34 * s, top: base - h - 74 * s,
+        width: 62 * s, height: 62 * s, borderRadius: 14 * s, background: "#FFFFFF",
+        border: `${3 * s}px solid #E8DCC0`, zIndex: 51, display: "flex",
+        alignItems: "center", justifyContent: "center" }}>
+        <Img src={staticFile("claude_logo.png")}
+          style={{ width: 46 * s, height: 46 * s, objectFit: "contain" }} />
+      </div>
       {/* the stencil on the body */}
       <div style={{ position: "absolute", left: x - w / 2, top: base - h * 0.52, width: w,
         textAlign: "center", zIndex: 49, fontFamily: fraunces.fontFamily, fontWeight: 900,
@@ -183,6 +205,7 @@ export const S0HookCase: React.FC = () => {
         <div style={{ position: "absolute", left: 150 + gust * 240, top: 300 - gust * 40,
           width: 520, height: 30, borderRadius: 30, background: "#EEF3F7",
           opacity: 0.62 * Math.sin(Math.PI * gust), zIndex: 62 }} />
+        <MarkPlate x={92} y={228} t="AN OFFLINE AI" s={0.94} z={70} />
         <Edge side="l" c={dark(pr.back, 0.66)} kind="rock" w={126} z={90} />
         <Snow f={f} n={40} z={70} speed={1 + gust * 3.2} />
         <Snow f={f} n={20} z={93} near speed={1.4 + gust * 4} />
@@ -231,7 +254,8 @@ export const S0HookCase: React.FC = () => {
       <Cam z={50} s={0.44} x={-250} y={168}>
         <Case lid={1} glow={1} latch={[1, 1, 1, 1]} base={640} s={1.06} />
       </Cam>
-      <Keeper x={330} y={706} s={0.88} z={54} f={f} back hood={1} lit={0.8} />
+      <MarkCast x={640} y={pr.horizon + 34} s={82} z={44} o={0.94} />
+      <Keeper x={306} y={716} s={0.90} z={54} f={f} hood={1} badge={1} lit={0.88} />
       <Edge side="l" c={dark(pr.back, 0.66)} kind="rock" w={126} z={90} />
       <Snow f={f} n={24} z={70} />
       <Snow f={f} n={10} z={93} near />
@@ -269,8 +293,9 @@ export const S0HookCross: React.FC = () => {
         background: "#23303D", zIndex: 19, borderRadius: "8px 8px 0 0" }} />
       <div style={{ position: "absolute", left: 706, top: pr.horizon - 48, width: 28, height: 52,
         background: "#F0D9A6", opacity: 0.9, zIndex: 20, borderRadius: "6px 6px 0 0" }} />
-      <Keeper x={288 + f * 0.9} y={pr.horizon + 214} s={0.62} z={40} f={f} walk={1} hood={1}
-        lit={0.98} />
+      <MarkPlate x={92} y={210} t="AN AI, OFFLINE" s={0.94} z={70} />
+      <Keeper x={288 + f * 0.9} y={pr.horizon + 214} s={0.66} z={40} f={f} walk={1} hood={1}
+        badge={1} lit={0.98} />
       <Snow f={f} n={20} z={70} c="#F4F8FB" />
       <Snow f={f} n={9} z={93} near c="#FFFFFF" />
     </Scene>
@@ -282,7 +307,7 @@ export const S0HookCross: React.FC = () => {
       <Ridge p={pr} f={f} city={0.4} lit={1} sunX={920} />
       <div style={{ position: "absolute", left: 0, right: 0, top: pr.horizon + 60, bottom: 0,
         background: "linear-gradient(182deg, #C4D0DA 0%, #E6ECF1 100%)", zIndex: 17 }} />
-      <Keeper x={470} y={742} s={1.9} z={44} f={f} walk={1} hood={1} lit={1} />
+      <Keeper x={470} y={742} s={1.9} z={44} f={f} walk={1} hood={1} badge={1} lit={1} />
       {/* the hard case in his off hand */}
       <div style={{ position: "absolute", left: 646, top: 512, width: 196, height: 128,
         background: "#4C5340", zIndex: 46, borderRadius: 10, boxShadow: SH_D,
@@ -305,7 +330,9 @@ export const S0HookCross: React.FC = () => {
       <Ridge p={pd} f={f} city={0.25} lit={0.8} sunX={90} />
       <BlastDoor x={556} base={pd.horizon + 126} w={600} h={540} z={30} f={f}
         bleed={0.84} frost={1} open={0} />
-      <Keeper x={186} y={pd.horizon + 132} s={1.16} z={60} f={f} back hood={1} lit={0.72} />
+      <MarkCast x={556} y={pd.horizon - 392} s={96} z={46} o={0.86} />
+      <MarkPlate x={94} y={pd.horizon - 300} t="LOCAL MODEL" s={0.88} z={48} />
+      <Keeper x={186} y={pd.horizon + 132} s={1.16} z={60} f={f} hood={1} badge={1} lit={0.78} />
       <Snow f={f} n={20} z={70} />
       <Edge side="l" c={dark(pd.back, 0.62)} kind="rock" w={104} z={91} />
     </Scene>
@@ -321,6 +348,7 @@ export const S0HookCross: React.FC = () => {
         fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 400, lineHeight: 1,
         color: "#8C939C", opacity: 0.30 }}>D</div>
       <Wheel x={452} y={424} r={266} z={40} rot={-turn * 124} frost={1 - turn * 0.7} />
+      <MarkCast x={452} y={624} s={84} z={52} o={0.94} />
       <Mitt x={606} y={348} s={1.42} z={60} rot={-16 + turn * 114} />
       {seal > 0 && (
         <div style={{ position: "absolute", left: 0, right: 0, top: 300 - seal * 28,

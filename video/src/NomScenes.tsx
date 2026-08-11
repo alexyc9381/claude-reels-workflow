@@ -6,7 +6,7 @@ import {
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
   CLAY, GOLD, GREEN, RED, PAPER, INK, PLACES, usePlace,
   Ridge, Room, Snow, Beam, Strip, Motes, Chip, Plate, BigNum, Contact, Edge,
-  Keeper, Mitt, Scene, Cam, Mark,
+  Keeper, Mitt, Scene, Cam, Mark, MarkPlate, MarkCast, AskBubble,
 } from "./NomWorld";
 import {
   Portal, BlastDoor, Wheel, Tunnel, Box, CmdScreen, Canister, Rack, Bars,
@@ -51,8 +51,19 @@ import {
    ⛔ FRAME 0 IS SETTLED AND BRIGHT. The snow plain fills the lower half and the
       portal slot is drawn at full value at f0 — nothing that must read at frame
       0 has an entrance.
-   ⛔ NO TEXT INSIDE THE PICTURE IN THE OPEN. The header and the VO carry the
-      claim; the frame carries the event.
+   ⛔⛔ THE OPEN HAS TO SAY "AI" AND IT HAS TO SAY "CLAUDE", IN THE FIRST THREE
+      SECONDS. v1's first four seconds read: a bunker, a door, a wheel, a tunnel.
+      Nothing in any of them said what the video was about, and the only Claude
+      mark in the whole reel was in the CTA at 17.9s. Reel 95's rule (round 3):
+      the mark is an AUDIENCE FILTER, not branding, and FIVE separate marks must
+      land inside the first three seconds. They ride EXISTING props rather than
+      adding objects, so the hook keeps its one dominant subject:
+        1  f0    cast into the portal wedge above the doorway
+        2  f0    the Keeper's badge, hovering above his hood
+        3  1.10s stencilled on the blast door, beside NOMAD
+        4  1.10s the OFFLINE AI plate bolted to the door
+        5  2.07s the wheel's hub
+      And the product noun is on screen too: OFFLINE AI, LOCAL MODEL, no cloud.
    ⛔ AND THE PAYOFF IS NOT SPENT HERE. The city on the horizon is ALIVE. Draft 1
       opened on a dead world, which is S5's exact frame at 0.0s and left the
       crest with nothing to do.
@@ -73,8 +84,13 @@ export const S0Hook: React.FC = () => {
         {/* the one dominant object, drawn settled at f0, low and large */}
         <Portal x={452} base={pr.horizon + 214} s={1.26} z={30}
           slot={0.92 + Math.sin(f / 17) * 0.06 - gust * 0.26} f={f} />
+        {/* MARK 1 · cast into the wedge above the doorway, drawn at FRAME 0 */}
+        <MarkCast x={452} y={pr.horizon - 10} s={92} z={44} o={0.96} />
+        {/* MARK 2 · the Keeper at the door, badge above his hood, giving scale */}
+        <Keeper x={686} y={pr.horizon + 226} s={0.92} z={46} f={f} face={-1} hood={1}
+          badge={1} lit={0.96} />
         {/* the far comms mast, alive — planted so S5 can kill it */}
-        <Mast x={694} base={pr.horizon + 10} h={176} s={0.70} z={22} f={f} on={1} />
+        <Mast x={862} base={pr.horizon + 10} h={158} s={0.62} z={22} f={f} on={1} />
         {/* foreground rock, cropped by the panel: without it we are pointed at a backdrop */}
         <Edge side="l" c="#455A6E" kind="rock" w={128} z={90} />
         <Snow f={f} n={30} z={70} speed={1 + gust * 2.6} />
@@ -92,6 +108,10 @@ export const S0Hook: React.FC = () => {
         <Ridge p={pd} f={f} city={0.5} lit={0.9} sunX={930} />
         <BlastDoor x={506} base={pd.horizon + 128} w={620} h={560} z={30} f={f}
           bleed={0.85 + Math.sin(f / 19) * 0.08} frost={1 - fall * 0.55} open={0} />
+        {/* MARK 3 · stencilled on the door leaf, beside NOMAD */}
+        <MarkCast x={506} y={pd.horizon - 448} s={104} z={46} o={0.86} />
+        {/* MARK 4 · and the product noun, bolted on where a sign would be */}
+        <MarkPlate x={222} y={pd.horizon - 96} t="OFFLINE AI · NO CLOUD" s={0.92} z={48} />
         {/* the frost sheet that comes off on the sub-bass hit */}
         {fall > 0 && (
           <div style={{ position: "absolute", left: 240, top: pd.horizon - 30 + fall * 150,
@@ -129,6 +149,8 @@ export const S0Hook: React.FC = () => {
           fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 470,
           color: "#C6CBD1", opacity: 0.30, lineHeight: 1 }}>N</div>
         <Wheel x={452} y={430} r={272} z={40} rot={-turn * 128} frost={1 - turn * 0.7} />
+        {/* MARK 5 · the wheel's hub, so the macro shot carries one too */}
+        <MarkCast x={452} y={636} s={86} z={52} o={0.94} />
         <Mitt x={604} y={352} s={1.45} z={60} rot={-16 + turn * 118} />
         {/* the seal parting: a blade of warm light across the frame */}
         {seal > 0 && (
@@ -164,8 +186,9 @@ export const S0Hook: React.FC = () => {
       {/* ⛔ HE STANDS ON THE FLOOR PLANE, not in mid-pipe. The Mascot has no back
           view in the house kit, so he is staged facing us at the mouth with the
           warm hall behind him as a rim, rather than walking away from camera. */}
+      <MarkCast x={534} y={168} s={92} z={70} o={0.72} />
       <Keeper x={378} y={726} s={1.34} z={80} f={f} face={1} walk={step > 0.05 ? 1 : 0}
-        hood={1} lit={0.80} />
+        hood={1} badge={1} lit={0.80} />
       <Snow f={f} n={12} z={82} near speed={1.6} c="#DCE7F0" />
       <Edge side="r" c="#2A2520" kind="wall" w={104} z={90} />
     </Scene>
@@ -232,7 +255,8 @@ export const S1: React.FC = () => {
         <div style={{ position: "absolute", left: 358, top: 300, width: 12, height: 100,
           background: "#8A6C34", zIndex: 51 }} />
         <Beam x={365} y={444} top={100} bot={330} len={150} c="#EFD9A2" o={0.22} z={44} f={f} />
-        <Keeper x={378} y={712} s={1.10} z={54} f={f} face={1} hood={0}
+        <MarkPlate x={104} y={332} t="LOCAL MODEL" s={0.82} z={44} c="#DCD4C4" />
+        <Keeper x={378} y={712} s={1.10} z={54} f={f} face={1} hood={0} badge={1}
           costume={{ glasses: 1 }} lit={0.94} />
         <Edge side="r" c={dark(p.back, 0.44)} kind="wall" w={96} z={90} />
       </Scene>
@@ -260,10 +284,12 @@ export const S1: React.FC = () => {
           </div>
         </div>
       </Cam>
+      {/* the ask, as a MARKED bubble — the insert has to say who is answering */}
+      <AskBubble x={168} y={664} t="ask it anything, offline" s={1.0} z={86} />
       {/* the bezel LEDs, so it still reads as an object in a room */}
-      <div style={{ position: "absolute", left: 150, top: 646, width: 17, height: 17,
+      <div style={{ position: "absolute", left: 806, top: 660, width: 17, height: 17,
         borderRadius: 10, background: GREEN, zIndex: 60 }} />
-      <div style={{ position: "absolute", left: 182, top: 646, width: 17, height: 17,
+      <div style={{ position: "absolute", left: 838, top: 660, width: 17, height: 17,
         borderRadius: 10, background: Math.floor(f / 6) % 2 ? GOLD : dark(GOLD, 0.55), zIndex: 60 }} />
       <Edge side="l" c={dark(p.back, 0.56)} kind="wall" w={70} z={90} />
     </Scene>
@@ -316,6 +342,7 @@ export const S2: React.FC = () => {
         <Canister key={"dim" + i} x={340 + i * 112} base={p.horizon + 258} s={0.72} z={40}
           lit={0.42} c={["#7E8894", "#7E8894", "#8A8579", "#7E8894"][i]} f={f} />
       ))}
+      <MarkPlate x={124} y={202} t="RUNS LOCALLY" s={0.76} z={44} c="#DCD4C4" />
       <Canister x={378} base={p.horizon + 58} s={1.16} z={50} lit={litA}
         label="WIKIPEDIA" sub="ZIM · Kiwix" c={GOLD} f={f} />
       <Canister x={634} base={p.horizon + 58} s={1.16} z={50} lit={litB}
@@ -487,7 +514,7 @@ export const S3: React.FC = () => {
       {/* ⛔ CLEAR OF THE ZONES. v3 stood him dead centre, directly in front of
           the chart table, and his head covered the map he was meant to be
           showing. The human-scale reference belongs in the gap between zones. */}
-      <Keeper x={214} y={760} s={0.98} z={70} f={f} hood={0} costume={{ glasses: 1 }}
+      <Keeper x={214} y={760} s={0.98} z={70} f={f} hood={0} badge={1} costume={{ glasses: 1 }}
         lit={0.44 + amb * 0.44} />
     </Scene>
   );
@@ -553,7 +580,7 @@ export const S4: React.FC = () => {
         <div style={{ position: "absolute", left: -11, top: -22, width: 44, height: 36,
           borderRadius: 9, background: "#8A3F32" }} />
       </div>
-      <Keeper x={222} y={716} s={1.06} z={52} f={f} face={1} hood={0} lit={0.94}
+      <Keeper x={222} y={716} s={1.06} z={52} f={f} face={1} hood={0} badge={1} lit={0.94}
         costume={{ glasses: 1 }} />
       <Snow f={f} n={7} z={62} speed={0.5} c="#DCE7F0" />
       <Edge side="l" c={dark(p.back, 0.46)} kind="post" z={90} />
@@ -659,7 +686,7 @@ export const S5: React.FC = () => {
         borderRadius: 6, background: dark("#F3E3B4", (1 - room) * 0.9), zIndex: 53 }} />
       <div style={{ position: "absolute", left: 358, top: 300, width: 12, height: 100,
         background: dark("#8A6C34", (1 - room) * 0.8), zIndex: 51 }} />
-      <Keeper x={378} y={712} s={1.10} z={54} f={f} face={1} hood={0}
+      <Keeper x={378} y={712} s={1.10} z={54} f={f} face={1} hood={0} badge={1}
         costume={{ glasses: 1 }} lit={0.34 + room * 0.60} />
       <Edge side="r" c={dark(pa.back, 0.44 + (1 - room) * 0.4)} kind="wall" w={96} z={90} />
     </Scene>
@@ -711,7 +738,7 @@ export const S6: React.FC = () => {
           <Coin key={"co" + i} x={726} y={252 + v * 130} s={0.98} z={80} rot={v * 220} />
         ) : null))}
         {/* he pays, and pays, and the grille moves two inches each time */}
-        <Keeper x={866} y={742} s={1.02} z={78} f={f} face={-1} hood={1} lit={0.86} />
+        <Keeper x={866} y={742} s={1.02} z={78} f={f} face={-1} hood={1} badge={1} lit={0.86} />
         <Edge side="l" c={dark(pk.back, 0.60)} kind="rail" z={90} />
         <Snow f={f} n={16} z={70} />
       </Scene>
@@ -728,6 +755,7 @@ export const S6: React.FC = () => {
       <Room p={ps} f={f} />
       <Strip x={506} y={54} w={520} on={1} z={22} f={f} />
       <Motes x={506} y={120} w={420} h={320} n={14} f={f} z={24} />
+      <MarkPlate x={112} y={196} t="NO ACCOUNT, NO KEY" s={0.76} z={44} c="#DCD4C4" />
       <Rack x={548} base={ps.horizon + 240} w={600} h={392} slots={3} shelves={2} z={26} />
       {/* ⛔ "TAKE ONE" IS A TRAVEL, NOT A LIFT. v1 raised the middle canister
           128px straight up while the Keeper stood three feet away, so it read as
@@ -767,7 +795,7 @@ export const S6: React.FC = () => {
           </div>
         </div>
       )}
-      <Keeper x={206} y={716} s={1.06} z={54} f={f} face={1} hood={0}
+      <Keeper x={206} y={716} s={1.06} z={54} f={f} face={1} hood={0} badge={1}
         costume={{ glasses: 1, cheer: take * 0.4 }} lit={0.96} />
       <Edge side="l" c="#5A6068" kind="rail" z={90} />
     </Scene>
@@ -838,7 +866,7 @@ export const S7Cta: React.FC = () => {
       <div style={{ position: "absolute", left: 260, top: 0, width: 300, bottom: 0, zIndex: 23,
         background: `linear-gradient(92deg, ${hexa("#F0D9A6", 0.30)} 0%, ${hexa("#F0D9A6", 0)} 100%)` }} />
       <Strip x={664} y={36} w={420} on={1} z={22} f={f} />
-      <Keeper x={648} y={716} s={1.46} z={60} f={f} face={1} hood={1}
+      <Keeper x={648} y={716} s={1.46} z={60} f={f} face={1} hood={1} badge={1}
         costume={{ cheer: nod * 0.42 }} lit={1} />
       {/* the comment chip */}
       {chip > 0.01 && (
