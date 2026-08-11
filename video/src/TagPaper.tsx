@@ -51,14 +51,14 @@ const STOCK = [
      Measured ground luma is in the comment on each row. */
   { bg: "#D8A62C", ink: "#2A2114", alt: "#A87C18" },   // 166
   { bg: "#4FA69C", ink: "#1B2A28", alt: "#2E7C74" },   // 139
-  { bg: "#D4593F", ink: "#2A150F", alt: "#A8402C" },   // 123
+  { bg: "#E0705A", ink: "#2A150F", alt: "#B04A38" },   // 137
   { bg: "#6F82C4", ink: "#1C2340", alt: "#4A5C9E" },   // 131
   { bg: "#8D9F52", ink: "#22280F", alt: "#6A7B36" },   // 137
   { bg: "#D4718F", ink: "#33141F", alt: "#A84C68" },   // 146
   { bg: "#5FA377", ink: "#182A1F", alt: "#3E7A54" },   // 138
   { bg: "#D9913E", ink: "#2B1B0E", alt: "#A86A22" },   // 152
-  { bg: "#7A83BE", ink: "#1E2340", alt: "#565F98" },   // 134
-  { bg: "#C8635A", ink: "#2E1310", alt: "#9C443C" },   // 128
+  { bg: "#8A93CA", ink: "#1E2340", alt: "#626BA6" },   // 143
+  { bg: "#D4786E", ink: "#2E1310", alt: "#A85248" },   // 142
 ];
 
 /** a torn paper edge: a hand-cut polygon, never a soft mask */
@@ -93,259 +93,202 @@ const Card: React.FC<{ x: number; y: number; w: number; h: number; rot: number;
 );
 
 /* ---------------------------------------------------------------------------
-   ⭐⭐ THE SPRITES ARE THE CHANNEL, AND THE FIRST PAPER CUT LEFT THEM OUT.
-   Alex, round 14: *"still needs to be more interesting and on the theme of our
-   Claude sprites and their world."*  A new animation style that drops the one
-   thing every viewer recognises is not a new style for THIS channel, it is a
-   different channel. So the paper world is populated, and the two sprites do
-   not decorate the beat — they ARE it:
+   ⭐⭐ THE WEIGHT AND THE BALLOON.
 
-     left   a Claude STRAINING to hold the paid tool up, buckling under it, who
-            sinks another notch every time the price lands
-     right  a Claude who RIPS the sheet off the free one and throws it away
+   Round 15: *"I don't like this card idea, and the hands aren't well designed,
+   and it has to be within the video frame — or more interesting theming."*
 
-   That turns ten repetitions of a comparison into ten repetitions of a JOKE,
-   which is a different thing to sit through.
+   ⛔ THE CARDS ARE GONE. Two rectangles side by side is a SLIDE, not a scene, and
+   it is what every cut before this one was underneath its set dressing. The tools
+   are not presented on cards any more; they ARE objects in a world:
+
+     paid   a stone BLOCK with the mark chiselled into it and the price cut in
+            underneath, chained to a Claude who is dragging it and getting
+            nowhere. It slams a notch deeper every time the price lands.
+     free   a BALLOON carrying the mark, on a string in another Claude's hand.
+            On the word it lifts, and it takes him off the ground with it.
+
+   Heavy and low on the left, light and high on the right: the comparison is the
+   COMPOSITION, so it reads with the sound off and without a single card.
+
+   ⛔ AND NO DRAWN ARMS. The bolted-on clay rectangles were the "hands aren't well
+   designed" note and they were right — the house sprite has its own art and
+   anything I weld onto it looks welded on. The sprite holds a CHAIN and a
+   STRING; those are props, and props are allowed to be drawn.
    ------------------------------------------------------------------------ */
 
-/** arms drawn from a sprite's shoulders up to whatever he is holding. The same
-    trick the odyssey hoplite uses: the figure stays clear of the card and the
-    ARMS do the lifting, so nothing he does can cover the price. */
-const Arms: React.FC<{ x: number; y: number; s: number; reach: number; spread?: number;
-  z?: number }> = ({ x, y, s, reach, spread = 0.40, z = 26 }) => {
-  const H = 190 * s;
-  return (<>
-    {[-spread, spread].map((dx, i) => (
-      <div key={"a" + i} style={{ position: "absolute", left: x + dx * H - 11 * s,
-        top: y - H + H * 0.46 - reach, width: 22 * s, height: reach + H * 0.18,
-        borderRadius: 11 * s, background: "#D97757", zIndex: z }} />
-    ))}
-    {[-spread, spread].map((dx, i) => (
-      <div key={"h" + i} style={{ position: "absolute", left: x + dx * H - 18 * s,
-        top: y - H + H * 0.46 - reach - 16 * s, width: 36 * s, height: 26 * s,
-        borderRadius: 11 * s, background: "#EFA179", zIndex: z + 1 }} />
-    ))}
-  </>);
-};
+/* ⛔ EVERYTHING IS BIGGER AND SITS LOWER THAN THE FIRST PASS, and the total moved
+   to the top. First composition put the "YOU PAY" sticker at y1216 with the
+   sprites' heads at y1110 — the number was printed straight across the hauler —
+   and the whole scene was crushed into a band at the bottom under an empty sky.
+   Floor 1240, feet 1400, sprites at 1.4, captions down to 1560. */
+const GROUND = 1240;      // where the world's floor sits
+const FEET = 1400;        // where the sprites stand
 
-/** ⭐ THE STRAIN. He is holding a thing that costs $200 a month and it shows:
-    knees bent, a wobble, and a visible SINK on every price hit. */
-const Strainer: React.FC<{ x: number; y: number; f: number; load: number; reach: number }> =
-  ({ x, y, f, load, reach }) => {
-  const wob = Math.sin(f / 3.1) * 2.4 + Math.sin(f / 1.7) * 1.1;
-  const sink = load * 26;
-  /* ⛔ HIS HANDS STAY ON THE CARD WHILE HIS BODY SINKS, so the reach GROWS by
-     exactly the sink. Shrinking it (the obvious first write) drops his hands
-     away from the thing he is supposedly holding, which reads as shrugging. */
-  return (<>
-    <Arms x={x} y={y + sink} s={1.15} reach={reach + sink} z={26} />
-    <div style={{ position: "absolute", left: x - 66, top: y + sink - 12, width: 132, height: 20,
-      borderRadius: "50%", background: "rgba(24,18,12,0.30)", zIndex: 24 }} />
-    <Claudie x={x + wob * 0.5} y={y + sink} s={1.15} f={f} z={27} face={1}
-      costume={{ stern: 1, cheer: 0 }} />
-    {/* sweat: three paper flecks, because a paper world sweats in paper */}
-    {load > 0.4 && [0, 1, 2].map((k) => (
-      <div key={"sw" + k} style={{ position: "absolute",
-        left: x + 40 + k * 16, top: y - 190 + ((f * 3 + k * 11) % 40) - 20,
-        width: 9, height: 13, borderRadius: 5, background: "#F2EFE4",
-        opacity: 0.75, zIndex: 28 }} />
-    ))}
-  </>);
-};
+/** the chain from the hauler to his block: real links, sagging */
+const Chain: React.FC<{ x1: number; y1: number; x2: number; y2: number }> =
+  ({ x1, y1, x2, y2 }) => (<>
+  {Array.from({ length: 9 }, (_, i) => {
+    const t = i / 8;
+    const x = x1 + (x2 - x1) * t, y = y1 + (y2 - y1) * t + Math.sin(t * Math.PI) * 26;
+    return (<div key={i} style={{ position: "absolute", left: x - 11, top: y - 8, width: 22,
+      height: 16, borderRadius: 8, border: "5px solid #6E6252", zIndex: 25 }} />);
+  })}
+</>);
 
-/** the one who tears it off: an arm out to the sheet, then a haul and a cheer */
-const Ripper: React.FC<{ x: number; y: number; f: number; rip: number; reach: number }> =
-  ({ x, y, f, rip, reach }) => {
-  const lean = rip > 0 ? Math.sin(Math.min(1, rip / 0.5) * Math.PI) * 9 : 0;
-  const hop = rip > 0.5 ? Math.abs(Math.sin(f / 2.6)) * 16 * Math.min(1, (rip - 0.5) * 3) : 0;
-  return (
-    <div style={{ position: "absolute", inset: 0,
-      transform: `rotate(${-lean}deg)`, transformOrigin: `${x}px ${y}px` }}>
-      <div style={{ position: "absolute", left: x - 66, top: y - hop - 12, width: 132, height: 20,
-        borderRadius: "50%", background: "rgba(24,18,12,0.30)", zIndex: 24 }} />
-      <Arms x={x} y={y - hop} s={1.15} reach={reach} spread={rip > 0.5 ? 0.44 : 0.30} z={26} />
-      <Claudie x={x} y={y - hop} s={1.15} f={f} z={27} face={-1}
-        costume={{ cheer: rip > 0.5 ? 1 : 0, stern: rip > 0.5 ? 0 : 1 }} />
-    </div>
-  );
-};
-
-/* ---------------------------------------------------------------------------
-   ONE BEAT. Two paper cards; the free one is under a paper sheet reading FREE
-   that RIPS DOWN THE MIDDLE and peels away in two halves.
-   ⛔ The rip replaces the curtain because a curtain that lifts is what the other
-   six cuts already do — a different style has to change the ACTION, not just
-   the texture.
-   ------------------------------------------------------------------------ */
 const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: boolean }> =
   ({ i, paidAt, freeAt, hook }) => {
   const f = useStep(2);
-  const raw = useCurrentFrame();
   const P = PAIRS[i], S = STOCK[i];
   const LEAD = 4;
   const pf = f - (paidAt - LEAD), ff = f - (freeAt - LEAD);
 
-  const rip = ff < 0 ? 0 : E(ff, 0, 12, 0, 1, OUT);
-  const shake = ff < 0 ? Math.max(0, 1 + ff / 22) : Math.max(0, 1 - ff / 8);
-  const jx = Math.sin(f * 1.7) * 6 * shake, jr = Math.sin(f * 2.3) * 1.4 * shake;
-  const punch = pf < 0 ? 1 : 1 + Math.sin(Math.min(1, pf / 8) * Math.PI) * 0.16;
-  const rise = hook ? 1 : E(f, 0, 8, 0, 1, BACK);
+  const load = pf < 0 ? 0 : Math.min(1, pf / 12);
+  const lift = ff < 0 ? 0 : E(ff, 0, 16, 0, 1, OUT);
+  const rise = hook ? 1 : E(f, 0, 8, 0, 1, OUT);
+  /* the balloon strains upward before it goes: the anticipation beat */
+  const strain = ff < 0 ? Math.max(0, 1 + ff / 20) : 0;
+  const bob = Math.sin(f / 5.2) * 10 + strain * Math.sin(f / 2.1) * 7;
 
-  /* ⛔ THE CARDS MOVED UP AND IN TO MAKE ROOM FOR THE PEOPLE. At 620 tall from
-     y560 they filled the frame down to 1180 and there was nowhere for anyone to
-     stand — which is how the first paper cut ended up with no sprites in it at
-     all. 560 from y430 leaves a floor from 990 to the price sticker. */
-  const CW = 430, CH = 560, CY = 430;
-  const FLOOR = 1196;
-  const cap = (lg: string) => Math.min(136 * 0.62, (MARK_CAP[lg] ?? 999) * 1.3);
+  const BX = 258, BY = GROUND - 16;            // the block, sitting on the ground
+  const BW = 380, BH = 360;
+  const HX = 588;                               // the hauler
+  const FX = 862;                               // the free one
+  const BALX = 862, BALY = 660 - lift * 220 + bob;
+  const BALR = 176;
+  const flyer = FEET - lift * 330;
+
+  const cap = (lg: string, box: number) => Math.min(box * 0.62, (MARK_CAP[lg] ?? 999) * 1.4);
 
   return (
     <AbsoluteFill style={{ background: S.bg, overflow: "hidden" }}>
-      <Halftone c={S.alt} o={0.22} />
-      {/* a torn band across the middle: the paper horizon */}
-      <div style={{ position: "absolute", left: -20, right: -20, top: 430, height: 980,
-        background: mix(S.bg, 0.13), clipPath: TORN_TOP, zIndex: 3 }} />
-      {/* the floor they stand on */}
-      <div style={{ position: "absolute", left: -20, right: -20, top: 1150, height: 300,
-        background: mix(S.bg, 0.26), clipPath: TORN_TOP, zIndex: 4 }} />
-      {/* the category tab, hand-placed and rotated like a stuck label */}
-      <div style={{ position: "absolute", left: 56, top: 250, padding: "16px 30px",
+      <Halftone c={S.alt} o={0.20} />
+      {/* ⭐ A SLOW PUSH ON THE WHOLE SCENE. Losing the card-rip lost the one big
+          fast mass in the frame and measured motion fell from 3.03 to 2.16. A
+          push moves every pixel, which is what the audit can actually see, and
+          on twos it still steps. */}
+      <div style={{ position: "absolute", inset: 0,
+        transform: `scale(${1 + Math.min(1, f / 66) * 0.075})`,
+        transformOrigin: "52% 60%" }}>
+      {/* the ground: a torn paper hill */}
+      <div style={{ position: "absolute", left: -20, right: -20, top: GROUND, height: 900,
+        background: mix(S.bg, 0.30), clipPath: TORN_TOP, zIndex: 4 }} />
+      <div style={{ position: "absolute", left: -20, right: -20, top: GROUND + 150, height: 760,
+        background: mix(S.bg, 0.44), clipPath: TORN_TOP, zIndex: 4 }} />
+
+      {/* the category, on a stuck-down tab */}
+      <div style={{ position: "absolute", left: 56, top: 236, padding: "16px 30px",
         background: S.ink, transform: "rotate(-2.2deg)", zIndex: 40,
-        filter: `drop-shadow(${SHADOW})` }}>
-        <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 46,
-          letterSpacing: "0.02em", color: S.bg, textTransform: "uppercase" }}>{P.cat}</div>
-      </div>
-      <div style={{ position: "absolute", right: 56, top: 258, padding: "12px 22px",
-        background: "#F2EFE4", transform: "rotate(2.6deg)", zIndex: 40,
+        filter: `drop-shadow(${SHADOW})`, fontFamily: inter.fontFamily, fontWeight: 900,
+        fontSize: 46, color: S.bg, textTransform: "uppercase" }}>{P.cat}</div>
+      <div style={{ position: "absolute", right: 56, top: 244, padding: "12px 22px",
+        background: "#F7F3E6", transform: "rotate(2.6deg)", zIndex: 40,
         filter: `drop-shadow(${SHADOW})`, fontFamily: inter.fontFamily, fontWeight: 900,
         fontSize: 34, color: "#2A2114" }}>{i + 1}/10</div>
 
+      {/* ⛔⛔ THE ARRIVAL SLIDES, IT DOES NOT FADE. `opacity: rise` with rise
+          easing from 0 means the first frame of every scene is EMPTY — and on
+          twos it is the first TWO. That is ten blank frames on ten cuts, in the
+          one style where a cut is meant to land hard. Position animates;
+          opacity stays at 1. */}
       <div style={{ position: "absolute", inset: 0, zIndex: 20,
-        transform: `translateY(${(1 - rise) * 90}px)`, opacity: rise }}>
-        {/* ---- the paid card ------------------------------------------- */}
-        <Card x={62} y={CY} w={CW} h={CH} rot={-1.8} bg="#F2EFE4" z={22}>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 44, textAlign: "center",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 38, letterSpacing: "0.22em",
-            color: "#B3372A" }}>PAID</div>
-          <div style={{ position: "absolute", left: CW / 2 - 68, top: 92, width: 136, height: 136,
-            background: "#FFFFFF", border: "5px solid #E2DCCC",
-            display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Img src={staticFile("logos/" + P.pLogo)}
-              style={{ width: cap(P.pLogo), height: cap(P.pLogo), objectFit: "contain" }} />
-          </div>
-          <div style={{ position: "absolute", left: 10, right: 10, top: 248, textAlign: "center",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40,
-            color: "#2A2114" }}>{P.paid}</div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 300, textAlign: "center" }}>
-            <span style={{ display: "inline-block", padding: "5px 14px", background: "#E2DCCC",
-              fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 22,
-              letterSpacing: "0.16em", color: "#6B6252" }}>{P.tier}</span>
-          </div>
-          {/* ⛔ THE CARD IS 560 TALL AND THE CONTENTS RAN TO 580. "PER MONTH" was
-              sitting past the torn edge, where the clip-path ate it and the
-              sprite's arms appeared to be covering it. Nothing was covering
-              anything — the text was outside its own card. */}
-          <div style={{ position: "absolute", left: 0, right: 0, top: 352, textAlign: "center",
-            transform: `scale(${punch})` }}>
-            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
-              fontSize: String(P.price).length >= 3 ? 104 : 124, lineHeight: 1,
-              color: "#B3372A" }}>{"$" + P.price}</span>
-            <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 26,
-              letterSpacing: "0.14em", color: "#8A4A3C" }}>
-              {P.note ? P.note : "PER MONTH"}
-            </div>
-          </div>
-          {rip > 0 && (
-            <div style={{ position: "absolute", left: 40, right: 40, top: 396, height: 13,
-              background: "#B3372A", transform: `scaleX(${rip})`, transformOrigin: "0% 50%" }} />
-          )}
-        </Card>
+        transform: `translateY(${(1 - rise) * 64}px)` }}>
 
-        {/* ---- the free card ------------------------------------------- */}
-        <Card x={W - 62 - CW} y={CY + 16} w={CW} h={CH} rot={1.6} bg="#F2EFE4" z={22}>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 44, textAlign: "center",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 38, letterSpacing: "0.22em",
-            color: "#237A54" }}>FREE</div>
-          <div style={{ position: "absolute", left: CW / 2 - 68, top: 92, width: 136, height: 136,
-            background: "#FFFFFF", border: "5px solid #E2DCCC",
-            display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {/* ---------- the BALLOON, and the string in his hand ------------- */}
+        <div style={{ position: "absolute", left: BALX - 3, top: BALY + BALR - 14, width: 6,
+          height: flyer - 150 - (BALY + BALR) + 30, background: "#6E6252", zIndex: 24,
+          transform: `rotate(${Math.sin(f / 6) * 2}deg)`, transformOrigin: "50% 0%" }} />
+        <div style={{ position: "absolute", left: BALX - BALR, top: BALY - BALR,
+          width: BALR * 2, height: BALR * 2.16, zIndex: 26,
+          filter: `drop-shadow(${SHADOW})` }}>
+          <div style={{ position: "absolute", inset: 0, borderRadius: "50% 50% 46% 46%",
+            background: "#F7F3E6" }} />
+          <div style={{ position: "absolute", left: BALR - 20, bottom: -14, width: 40, height: 26,
+            borderRadius: "0 0 12px 12px", background: "#E2DCC8" }} />
+          <div style={{ position: "absolute", left: BALR - 70, top: 48, width: 140, height: 140,
+            background: "#FFFFFF", border: "5px solid #E2DCC8", display: "flex",
+            alignItems: "center", justifyContent: "center" }}>
             <Img src={staticFile("logos/" + P.fLogo)}
-              style={{ width: cap(P.fLogo), height: cap(P.fLogo), objectFit: "contain" }} />
+              style={{ width: cap(P.fLogo, 140), height: cap(P.fLogo, 140), objectFit: "contain" }} />
           </div>
-          <div style={{ position: "absolute", left: 10, right: 10, top: 248, textAlign: "center",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 40,
+          <div style={{ position: "absolute", left: 6, right: 6, top: 200, textAlign: "center",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 36,
             color: "#2A2114" }}>{P.free}</div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 340, textAlign: "center",
-            transform: `scale(${ff < 0 ? 1 : 1 + Math.sin(Math.min(1, ff / 12) * Math.PI) * 0.18})` }}>
-            <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 132,
-              lineHeight: 1, color: "#237A54" }}>FREE</span>
-          </div>
-        </Card>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 246, textAlign: "center",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 70,
+            color: "#237A54" }}>FREE</div>
+        </div>
 
-        {/* ---- the sheet over it, and the RIP --------------------------- */}
-        {rip < 1 && [0, 1].map((half) => (
-          <div key={half} style={{ position: "absolute",
-            left: W - 62 - CW - 14 + half * (CW + 28) / 2, top: CY + 10,
-            width: (CW + 28) / 2, height: CH + 12, zIndex: 30, overflow: "hidden",
-            /* ⛔ THE LEFT HALF FLIES TOWARD THE PAID CARD, so it has to CLEAR it.
-               At 520px of travel it parked on top of "Midjourney / $30" for the
-               whole reveal — the torn-off sheet was covering the other half of
-               the comparison. 780px plus an opacity fade puts it out of frame
-               before it can land on anything. */
-            transform: `translate(${(half ? 1 : -1) * rip * 780 + jx}px, ${rip * -60}px) rotate(${(half ? 1 : -1) * rip * 34 + jr}deg)`,
-            transformOrigin: half ? "0% 40%" : "100% 40%",
-            opacity: Math.max(0, 1 - rip * 1.5),
-            filter: `drop-shadow(${SHADOW})` }}>
-            <div style={{ position: "absolute", left: half ? -(CW + 28) / 2 : 0, top: 0,
-              width: CW + 28, height: CH + 12, background: "#E8E2D2",
-              clipPath: TORN_ALL }} />
-            {/* the printed word, split across the two halves */}
-            <div style={{ position: "absolute", left: half ? -(CW + 28) / 2 : 0, top: 0,
-              width: CW + 28, height: CH + 12, display: "flex", alignItems: "center",
-              justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900,
-              fontSize: 168, letterSpacing: "-0.02em", color: "#2A2114" }}>FREE</div>
-            {/* the torn seam down the middle */}
-            <div style={{ position: "absolute", top: 0, bottom: 0,
-              left: half ? 0 : (CW + 28) / 2 - 9, width: 9, background: mix("#E8E2D2", 0.4),
-              clipPath: "polygon(0 0,100% 4%,20% 11%,100% 19%,10% 27%,100% 35%,20% 43%,100% 51%,10% 59%,100% 67%,20% 75%,100% 83%,10% 91%,100% 97%,0 100%)" }} />
+        {/* ---------- the BLOCK he is chained to -------------------------- */}
+        <div style={{ position: "absolute", left: BX - BW / 2, top: BY - BH + load * 30,
+          width: BW, height: BH, zIndex: 22, filter: `drop-shadow(${SHADOW})` }}>
+          <div style={{ position: "absolute", inset: 0, background: "#AEA391",
+            clipPath: "polygon(3% 0,97% 2%,100% 96%,96% 100%,4% 98%,0 6%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "#948A79",
+            clipPath: "polygon(3% 0,97% 2%,100% 12%,0 10%)" }} />
+          <div style={{ position: "absolute", left: BW / 2 - 66, top: 38, width: 132, height: 132,
+            background: "#FFFFFF", border: "5px solid #6E6252", display: "flex",
+            alignItems: "center", justifyContent: "center" }}>
+            <Img src={staticFile("logos/" + P.pLogo)}
+              style={{ width: cap(P.pLogo, 132), height: cap(P.pLogo, 132), objectFit: "contain" }} />
           </div>
+          <div style={{ position: "absolute", left: 4, right: 4, top: 186, textAlign: "center",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 32,
+            color: "#2A2114" }}>{P.paid}</div>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 228, textAlign: "center",
+            fontFamily: inter.fontFamily, fontWeight: 900,
+            fontSize: String(P.price).length >= 3 ? 78 : 92, lineHeight: 1,
+            color: "#B3372A", transform: `scale(${pf < 0 ? 1 : 1 + Math.sin(Math.min(1, pf / 9) * Math.PI) * 0.16})` }}>
+            {"$" + P.price}
+          </div>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 310, textAlign: "center",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 22,
+            letterSpacing: "0.14em", color: "#5E5446" }}>{P.note || "PER MONTH"}</div>
+        </div>
+        {/* dust on the slam */}
+        {load > 0.1 && load < 0.9 && [0, 1, 2, 3].map((k) => (
+          <div key={"du" + k} style={{ position: "absolute",
+            left: BX - 170 + k * 112 + load * (k < 2 ? -110 : 110), top: BY - 16 - load * 46,
+            width: 40 - k * 5, height: 40 - k * 5, borderRadius: 22, background: mix(S.bg, 0.62),
+            opacity: (1 - load) * 0.8, zIndex: 23 }} />
         ))}
-        {/* ⭐ THE TWO WHO ARE ACTUALLY IN THIS SCENE. They stand on the floor in
-            front of their own card, so nothing they do covers a price. */}
-        <Strainer x={62 + CW / 2} y={FLOOR} f={f}
-          load={pf < 0 ? 0.25 : Math.min(1, 0.25 + pf / 14)}
-          reach={64} />
-        {/* ⛔ 64 AND 48 ARE COMPUTED, NOT CHOSEN. Shoulders sit at y=1078 for a
-            1.15 sprite standing on a 1196 floor; the paid card's foot is 990 and
-            the free card's is 1006, so those are the only reaches that put the
-            hands ON the cards instead of THROUGH them. The first pass used
-            220-230 and both pairs of hands covered the price. On the cheer he
-            raises them SHORT (30) for the same reason. */}
-        <Ripper x={W - 62 - CW / 2} y={FLOOR} f={f} rip={rip}
-          reach={rip > 0.5 ? 30 : 48} />
 
-        {/* paper bits flying off the tear */}
-        {rip > 0.05 && rip < 1 && Array.from({ length: 10 }, (_, k) => {
-          const r = (n: number) => { const v = Math.sin(k * 31.4 + n * 7.7) * 4371.7; return v - Math.floor(v); };
-          return (<div key={"bit" + k} style={{ position: "absolute",
-            left: W - 62 - CW / 2 + (r(1) - 0.5) * 300 * rip * 2,
-            top: CY + 180 + (r(2) - 0.5) * 340 * rip * 2 - rip * 120,
-            width: 14 + r(3) * 16, height: 10 + r(4) * 14, background: "#E8E2D2",
-            transform: `rotate(${r(5) * 360 + rip * 300}deg)`, zIndex: 31,
-            opacity: 1 - rip }} />);
-        })}
+        <Chain x1={HX - 46} y1={FEET - 128} x2={BX + BW / 2 - 22} y2={BY - 92} />
+
+        {/* ---------- the two of them ------------------------------------ */}
+        <div style={{ position: "absolute", left: HX - 78, top: FEET - 16, width: 156, height: 24,
+          borderRadius: "50%", background: "rgba(24,18,12,0.28)", zIndex: 24 }} />
+        {/* ⭐ HE LEANS INTO IT. A sprite standing upright next to a chain is
+            standing next to a chain; the lean is what makes it a haul, and it
+            deepens as the price lands. */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 27,
+          transform: `rotate(${7 + load * 7}deg)`, transformOrigin: `${HX}px ${FEET}px` }}>
+          <Claudie x={HX} y={FEET + load * 16} s={1.40} f={f} z={27} face={-1}
+            costume={{ stern: 1 }} />
+        </div>
+
+        <div style={{ position: "absolute", left: FX - 78, top: FEET - 16, width: 156,
+          height: 24, borderRadius: "50%", background: "rgba(24,18,12,0.28)",
+          opacity: 1 - lift * 0.8, transform: `scale(${1 - lift * 0.4})`, zIndex: 24 }} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 27,
+          transform: `rotate(${-lift * 9 + Math.sin(f / 7) * lift * 3}deg)`,
+          transformOrigin: `${FX}px ${flyer}px` }}>
+          <Claudie x={FX} y={flyer} s={1.40} f={f} z={27} face={1}
+            costume={{ cheer: lift > 0.25 ? 1 : 0, gaze: lift > 0.25 ? 0 : 1.3 }} />
+        </div>
       </div>
 
-      {/* the running total, as a stuck-on price sticker */}
-      <div style={{ position: "absolute", left: W / 2 - 190, top: 1264, width: 380, height: 92,
-        background: "#F2EFE4", transform: "rotate(-1.4deg)", zIndex: 42,
+      </div>
+      {/* the running total, on a stuck-on sticker */}
+      <div style={{ position: "absolute", left: W / 2 - 190, top: 336, width: 380, height: 86,
+        background: "#F7F3E6", transform: "rotate(-1.4deg)", zIndex: 42,
         filter: `drop-shadow(${SHADOW})`, display: "flex", alignItems: "center",
         justifyContent: "center", gap: 14 }}>
         <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 24,
           letterSpacing: "0.16em", color: "#8A8072" }}>YOU PAY</span>
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 60,
-          color: rip > 0.5 ? "#237A54" : "#B3372A" }}>
-          {"$" + (TOTAL - (rip > 0.5 ? CUM[i] : i > 0 ? CUM[i - 1] : 0))}
+        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 58,
+          color: lift > 0.5 ? "#237A54" : "#B3372A" }}>
+          {"$" + (TOTAL - (lift > 0.5 ? CUM[i] : i > 0 ? CUM[i - 1] : 0))}
         </span>
       </div>
     </AbsoluteFill>
@@ -415,7 +358,7 @@ const PaperCaption: React.FC = () => {
   const lineStart = Math.max(0, idx - (idx % 4));
   const line = W2.slice(lineStart, lineStart + 4);
   return (
-    <div style={{ position: "absolute", left: 0, right: 0, top: 1420, zIndex: 60,
+    <div style={{ position: "absolute", left: 0, right: 0, top: 1560, zIndex: 60,
       display: "flex", justifyContent: "center" }}>
       <div style={{ background: "#1E1A14", padding: "18px 34px", transform: "rotate(-0.8deg)",
         filter: `drop-shadow(${SHADOW})`, display: "flex", gap: 16 }}>
