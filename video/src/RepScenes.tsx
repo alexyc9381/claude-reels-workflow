@@ -7,7 +7,8 @@ import {
   CLAY, GOLD, GREEN, RED, PAPER, INK, TOK, TOKD, TOKL, BRASS, BRASSD, BRASSL,
   WOOD, WOODD, WOODL,
   Room, Rain, Scene, Cam, Beam, Strip, Motes, Chip, Plate, BigNum, Contact, Edge,
-  Mark, MarkPlate, MarkCast, Token, MakerPlate, PROVIDERS, usePlace,
+  Mark, MarkPlate, MarkCast, Token, MakerPlate, PROVIDERS, CLIENTS, ClientChip,
+  usePlace,
 } from "./RepWorld";
 import {
   Counter, Pile, Fall, Chute, Flag429, Machine, Claude, Waiting, Stack, Cap,
@@ -270,6 +271,7 @@ export const S2: React.FC = () => {
     return (
       <Scene p={p} slug="REAL PROVIDERS  ·  FREE TIERS" push={[0, 38, 1.05]} vig={0.42}>
         <Room p={p} f={f} />
+        <Belt y={148} f={f} z={8} s={0.54} speed={2.2} n={5} from={1} />
         {T.map((t, k) => {
           const on = E(lf, t.at, t.at + 8, 0, 1, BACK);
           if (on <= 0.02) return null;
@@ -315,29 +317,45 @@ export const S2: React.FC = () => {
       {[0, 1, 2, 3, 4].map((i, k) => {
         const on = E(lf, k * 2, k * 2 + 7, 0, 1, BACK);
         if (on <= 0.02) return null;
-        return <Token key={"r1" + k} x={152 + k * 186} y={218 - (1 - on) * 70}
-          s={184 * (0.78 + on * 0.22)} z={50 + k} markKey={P[i].k} name={P[i].n}
+        return <Token key={"r1" + k} x={128 + k * 186} y={212 - (1 - on) * 70}
+          s={176 * (0.78 + on * 0.22)} z={50 + k} markKey={P[i].k} name={P[i].n}
           hasMark={P[i].mark} rot={(k % 2 ? 6 : -6) + (1 - on) * 30} />;
       })}
       {[5, 6, 7, 8].map((i, k) => {
         const on = E(lf, 10 + k * 2, 17 + k * 2, 0, 1, BACK);
         if (on <= 0.02) return null;
-        return <Token key={"r2" + k} x={245 + k * 186} y={398 - (1 - on) * 70}
-          s={184 * (0.78 + on * 0.22)} z={56 + k} markKey={P[i].k} name={P[i].n}
+        return <Token key={"r2" + k} x={196 + k * 186} y={378 - (1 - on) * 70}
+          s={176 * (0.78 + on * 0.22)} z={56 + k} markKey={P[i].k} name={P[i].n}
           hasMark={P[i].mark} rot={(k % 2 ? -5 : 7) + (1 - on) * -30} />;
       })}
       <Cam z={90} o={rise} y={(1 - rise) * 18}>
-        <Plate x={806} y={512} t="+19 MORE" sub="29 TOTAL" w={186} s={1.12} z={92} />
+        <Plate x={812} y={330} t="+19 MORE" sub="29 TOTAL" w={168} s={1.0} z={92} />
       </Cam>
       {/* the Claude token: the CLIENT that spends them, which is what
           `/v1/messages` support actually means */}
-      <Claude x={196} base={764} s={0.90} z={82} f={f} gaze={0.5} cheer={0.55}
-        hold={186} holdClaude />
-      {/* ⛔ NO EDGE OCCLUDER ON THIS SHOT — it was cropping the first logo, and a
-          scene whose whole job is "the logos are big" cannot afford to eat one. */}
-      <div style={{ position: "absolute", left: 384, right: 20, top: 690, textAlign: "left",
-        zIndex: 96, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 32,
-        letterSpacing: "0.03em", color: "#3A3226" }}>CLAUDE CODE SPENDS THEM</div>
+      {/* ⛔⛔ THE CLIENTS ROW — and the one place OpenAI honestly appears.
+          Two rows, two different sentences: the tokens above are what you GET,
+          these are what you POINT at them. Claude Code, Codex, Cursor, Copilot
+          and Cline are all named in the repo's README as compatible clients, so
+          the biggest consumer names are on screen without a single false claim.
+          They arrive one at a time, left to right. */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 480, height: 3,
+        background: mxh(p.back2, 0.10), zIndex: 88 }} />
+      <div style={{ position: "absolute", left: 40, top: 496, zIndex: 96,
+        fontFamily: MONO, fontWeight: 800, fontSize: 21, letterSpacing: "0.20em",
+        color: "#F2E8D2", textShadow: "0 2px 8px rgba(0,0,0,0.55)" }}>YOU POINT THESE AT IT</div>
+      {[0, 1, 2, 3, 4].map((i) => {
+        const on = E(lf, 14 + i * 3, 22 + i * 3, 0, 1, BACK);
+        if (on <= 0.02) return null;
+        return (
+          <div key={"cl" + i} style={{ position: "absolute", inset: 0, zIndex: 90 + i,
+            opacity: Math.min(1, on * 1.5),
+            transform: `translateY(${(1 - on) * 46}px) scale(${0.82 + on * 0.18})`,
+            transformOrigin: `${126 + i * 192}px 600px` }}>
+            <ClientChip i={i} x={126 + i * 192} y={600} s={112} z={90 + i} />
+          </div>
+        );
+      })}
     </Scene>
   );
 };
@@ -488,12 +506,20 @@ export const S4: React.FC = () => {
   return (
     <Scene p={p} slug="ONE  /v1  ENDPOINT" push={[70, 134, 1.05]} vig={0.38}>
       <Room p={p} f={f} />
+      <Belt y={706} f={f} z={20} s={0.5} speed={-2.4} n={5} from={0} />
       {/* ⛔ A LIST, NOT A HEAP. This is the beat that has to carry 29 items AND
           their arithmetic, and a printed roll is the only shape that does both:
           names, amounts, a rule, a total. It is also the most literal object in
           the reel — nothing on it needs translating. */}
-      <Ledger x={W / 2 + 34} y={140} f={f} rows={5} s={0.90} z={60}
+      <Ledger x={W / 2 + 120} y={130} f={f} rows={5} s={0.86} z={60}
         reveal={E(lf, 2, 40, 0, 1, OUT)} />
+      {/* the clients, stacked down the left — one endpoint, all of these */}
+      {[0, 1, 2].map((i) => {
+        const on = E(lf, 18 + i * 4, 27 + i * 4, 0, 1, BACK);
+        if (on <= 0.02) return null;
+        return <ClientChip key={"c4" + i} i={i} x={110} y={210 + i * 172}
+          s={116 * (0.84 + on * 0.16)} z={92 + i} />;
+      })}
       <Claude x={116} base={776} s={0.82} z={82} f={f} gaze={0.7} cheer={on * 0.7} />
     </Scene>
   );
@@ -549,6 +575,8 @@ export const S5: React.FC = () => {
   return (
     <Scene p={p} slug="NO PAUSE  ·  NO DROP" push={[44, 75, 1.05]} vig={0.4}>
       <Room p={p} f={f} />
+      {/* the belt is the CLAIM here — it has not stopped once */}
+      <Belt y={624} f={f} z={20} s={0.78} speed={3.4} n={6} from={2} />
       <Chute x={210} y={126} w={170} z={30} f={f} markKey={P[1].k} name={P[1].n}
         hasMark open={1 - die2} />
       <Chute x={506} y={126} w={170} z={31} f={f} markKey={P[3].k} name={P[3].n}
@@ -589,6 +617,7 @@ export const S6Cta: React.FC = () => {
       <div style={{ position: "absolute", inset: 0, zIndex: 1,
         transform: `translate(${sk.x}px, ${sk.y}px)` }}>
         <Room p={p} f={f} />
+        <Belt y={190} f={f} z={8} s={0.52} speed={2.6} n={5} from={0} />
         <Belt y={556} f={f} z={40} s={1.0} speed={3.2} n={7} from={3} />
         <Claude x={150} base={780} s={0.96} z={82} f={f} gaze={0.4} cheer={0.85} />
         {/* the keyword, struck on a token */}

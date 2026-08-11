@@ -125,10 +125,19 @@ export const usePlace = (key: string): Place => {
    deliberately plain: the tokens are the subject and the set must not argue
    with them.
    ====================================================================== */
+/* ⛔⛔ *"so much more needs to be animated as well."* The body scenes had ONE
+   moving thing each — the hero — against a set that was completely frozen, so
+   however good the hero was the frame read as a still with an animation pasted
+   on it. `live` adds a permanent idle to the room itself: dust drifting through
+   the beam, a lamp on a slow swing, and the light on the counter breathing.
+   None of it competes with the hero (all of it is low-contrast and slow) and
+   all of it means the frame is never static. */
 export const Room: React.FC<{ p: Place; f: number; dim?: number; panel?: boolean;
-  counter?: boolean }> = ({ p, f, dim = 0, panel = true, counter = true }) => {
+  counter?: boolean; live?: boolean }> =
+  ({ p, f, dim = 0, panel = true, counter = true, live = true }) => {
   const hz = p.horizon;
   const D = (c: string) => (dim > 0 ? dkh(c, dim) : c);
+  const sway = Math.sin(f / 47) * 1.5 + Math.sin(f / 31) * 0.6;
   return (<>
     <div style={{ position: "absolute", inset: 0, zIndex: 1,
       background: `linear-gradient(176deg, ${D(mxh(p.back, 0.10))} 0%, ${D(p.back)} 46%, ${D(p.back2)} 100%)` }} />
@@ -151,6 +160,26 @@ export const Room: React.FC<{ p: Place; f: number; dim?: number; panel?: boolean
           top: hz + 40 + i * i * 12 + i * 30, height: 3,
           background: D(dkh(p.floor2, 0.24)), opacity: 0.6, zIndex: 15 }} />
       ))}
+      {/* the light on the counter, breathing */}
+      {live && (
+        <div style={{ position: "absolute", left: W / 2 - 300 + sway * 8, top: hz + 24,
+          width: 600, height: 128, borderRadius: "50%",
+          background: D(mxh(p.floor, 0.22)), opacity: 0.30 + Math.sin(f / 53) * 0.05,
+          zIndex: 16 }} />
+      )}
+    </>)}
+    {/* a hung lamp on a slow permanent swing, and the dust under it */}
+    {live && (<>
+      <div style={{ position: "absolute", left: 812, top: 0, zIndex: 19,
+        transform: `rotate(${sway * 0.7}deg)`, transformOrigin: "50% 0%" }}>
+        <div style={{ position: "absolute", left: -3, top: 0, width: 6, height: 62,
+          background: D("#3E444A") }} />
+        <div style={{ position: "absolute", left: -42, top: 58, width: 84, height: 36,
+          borderRadius: "5px 5px 42px 42px", background: D("#4E555C"), boxShadow: SH_D }} />
+        <div style={{ position: "absolute", left: -34, top: 86, width: 68, height: 12,
+          borderRadius: "0 0 34px 34px", background: D("#F2DFAE") }} />
+      </div>
+      <Motes x={812} y={120} w={330} h={hz - 60} n={12} f={f} z={17} />
     </>)}
   </>);
 };
@@ -177,18 +206,66 @@ export const Rain: React.FC<{ f: number; n?: number; z?: number; c?: string }> =
       mark into a black square). ⛔ NEVER INVENT ONE — the four providers with
       no public mark get their NAME struck into the token instead.
    ====================================================================== */
+/* ⛔ ORDERED BY RECOGNITION, NOT BY THE README'S ORDER. *"primarily show the
+   most popular ones first and then the less popular ones after."* Everything
+   here is still a real provider from that README — the ordering is the only
+   thing that changed, so the biggest names carry the frames that matter and
+   Mistral/OpenRouter fill in behind them. */
 export const PROVIDERS = [
   { k: "googlegemini", n: "GOOGLE",      mark: true },
-  { k: "mistralai",    n: "MISTRAL",     mark: true },
-  { k: "cloudflare",   n: "CLOUDFLARE",  mark: true },
   { k: "nvidia",       n: "NVIDIA",      mark: true },
+  { k: "cloudflare",   n: "CLOUDFLARE",  mark: true },
   { k: "huggingface",  n: "HUGGINGFACE", mark: true },
+  { k: "mistralai",    n: "MISTRAL",     mark: true },
   { k: "openrouter",   n: "OPENROUTER",  mark: true },
   { k: "groq",         n: "GROQ",        mark: false },
   { k: "cerebras",     n: "CEREBRAS",    mark: false },
   { k: "cohere",       n: "COHERE",      mark: false },
   { k: "zai",          n: "Z.AI",        mark: false },
 ] as const;
+
+/* ⛔⛔ THE CLIENTS — AND THIS IS HOW OPENAI HONESTLY GETS ON SCREEN.
+   Alex asked for the big consumer names, ChatGPT included. OpenAI is NOT a
+   provider in this repo: you cannot get GPT out of it, and a ChatGPT token in
+   a pile captioned "free AI tokens" would be a straight false claim.
+
+   But the README names, by name, the tools you POINT AT the pool: "Claude Code,
+   Codex CLI, Cline / Roo Code, Continue, Aider, opencode, and Cursor each have
+   a short recipe". Codex is OpenAI's CLI. So the OpenAI mark belongs on the
+   CLIENT side, where it is simply true — these are the things that SPEND the
+   tokens, not things that supply them. Same for Cursor and Copilot.
+
+   ⭐ The distinction is also the clearest thing the reel can teach: one row is
+   what you GET, the other row is what you USE. Keep them visually separate and
+   never mix a client mark into a provider pile. */
+export const CLIENTS = [
+  { k: "claude",         n: "CLAUDE CODE" },
+  { k: "openai",         n: "CODEX",   official: true },
+  { k: "cursor",         n: "CURSOR" },
+  { k: "githubcopilot",  n: "COPILOT" },
+  { k: "cline",          n: "CLINE" },
+] as const;
+
+/** a client mark on a light plate — the tools that spend the tokens. */
+export const ClientChip: React.FC<{ i: number; x: number; y: number; s?: number;
+  z?: number; label?: boolean }> = ({ i, x, y, s = 118, z = 80, label = true }) => {
+  const c = CLIENTS[i % CLIENTS.length];
+  const src = (c as any).official ? `logos_official/${c.k}.svg` : `logos/${c.k}.svg`;
+  return (
+    <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, zIndex: z,
+      display: "flex", flexDirection: "column", alignItems: "center", gap: s * 0.07 }}>
+      <div style={{ width: s, height: s, borderRadius: s * 0.26, background: "#FBF8F1",
+        border: `${Math.max(3, s * 0.045)}px solid #D9CFB6`, boxSizing: "border-box",
+        boxShadow: SH, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Img src={staticFile(src)}
+          style={{ width: s * 0.58, height: s * 0.58, objectFit: "contain" }} />
+      </div>
+      {label && <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
+        fontSize: s * 0.125, letterSpacing: "0.04em", color: "#4A4238",
+        whiteSpace: "nowrap" }}>{c.n}</span>}
+    </div>
+  );
+};
 
 /** THE TOKEN. The whole reel is made of these.
     `plain` is an unstruck token — the ones that make up the bulk of a pile. */
@@ -220,8 +297,14 @@ export const Token: React.FC<{ x: number; y: number; s?: number; z?: number;
             ? <Img src={staticFile(`logos/${markKey}.svg`)}
                 style={{ width: s * 0.46, height: s * 0.46, objectFit: "contain" }} />
             : <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 900,
-                fontSize: s * ((name?.length ?? 4) > 8 ? 0.115 : 0.16), lineHeight: 1,
-                color: "#241F17", textAlign: "center", padding: "0 4px" }}>{name}</span>}
+                /* ⛔ A NAME HAS TO FIT INSIDE A CIRCLE, and the inner plate is
+                   only 72% of the token. CEREBRAS at 0.16 overflowed and the
+                   round mask sliced it to "EREBRA". Scaled by length, allowed
+                   to wrap, and hyphenless. */
+                fontSize: s * ((name?.length ?? 4) > 7 ? 0.098 : 0.145),
+                lineHeight: 1.02, color: "#241F17", textAlign: "center",
+                padding: "0 6px", wordBreak: "keep-all",
+                letterSpacing: "-0.01em" }}>{name}</span>}
         </div>
       ) : (
         <div style={{ position: "absolute", inset: s * 0.20, borderRadius: "50%",
