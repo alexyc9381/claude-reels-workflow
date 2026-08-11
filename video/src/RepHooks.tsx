@@ -70,11 +70,16 @@ const Shop: React.FC<{ p: Place; f: number; shelf?: number; lamp?: number;
       <div key={"br" + i} style={{ position: "absolute", left: x, top: hz - 200, width: 24,
         height: 74, background: WOODD, zIndex: 5 }} />
     ))}
-    {Array.from({ length: shelf }, (_, i) => {
-      const pr = P[(from + i) % P.length];
-      const x = 150 + i * ((W - 300) / Math.max(1, shelf - 1));
-      return <Token key={"sh" + i} x={x} y={hz - 258} s={96} z={8}
-        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={(i % 2 ? 5 : -5)} />;
+    {/* ⛔ TWO FIXES HERE, BOTH FROM THE SAME NOTE. (1) The shelf skipped the
+        CENTRE, because anything standing there gets cropped in half by whatever
+        the hook does through the middle of frame — a logo sliced down the spine
+        reads as broken, not as depth. (2) Only MARK providers go on the shelf:
+        the four without one are name-struck tokens, i.e. TEXT in a circle, and
+        a clipped word ("EREBRA", "OQ") is the worst thing that can be up there. */}
+    {[[128, 0], [306, 1], [706, 2], [884, 3]].slice(0, shelf).map(([x, i], k) => {
+      const pr = P[(from + (i as number)) % 6];
+      return <Token key={"sh" + k} x={x as number} y={hz - 258} s={96} z={8}
+        markKey={pr.k} name={pr.n} hasMark={pr.mark} rot={(k % 2 ? 5 : -5)} />;
     })}
     {/* the hung lamp and one solid beam */}
     <div style={{ position: "absolute", left: lamp - 3, top: 0, width: 6, height: 78,
@@ -133,9 +138,9 @@ export const HookPaywall: React.FC = () => {
           <div style={{ position: "absolute", left: 0, right: 0, top: 176, textAlign: "center",
             zIndex: 24, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 92,
             lineHeight: 1, letterSpacing: "-0.03em", color: "#B8541F" }}>800,000,000</div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 272, textAlign: "center",
-            zIndex: 24, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 29,
-            letterSpacing: "0.14em", color: "#5C5346" }}>FREE AI TOKENS / MONTH</div>
+          {/* ⛔ LESS TYPE, MORE SHOWING ([[feedback_graphical_over_textual]]).
+              The wrapped "FREE AI TOKENS / MONTH" is gone: the tokens bursting
+              through the gate say what they are, and one number is enough. */}
           {/* THE GATE — iron bars across the counter, price cards hung on them */}
           {smash < 0.02 && Array.from({ length: 9 }, (_, i) => (
             <div key={"bar" + i} style={{ position: "absolute", left: 76 + i * 108, top: 330,
@@ -159,8 +164,8 @@ export const HookPaywall: React.FC = () => {
                     hasMark={P[i].mark} />
                   <span style={{ marginTop: 92, fontFamily: MONO, fontWeight: 900,
                     fontSize: 48, color: "#3A342A" }}>{pr}</span>
-                  <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 16,
-                    letterSpacing: "0.12em", color: "#8A8074" }}>PER MONTH</span>
+                  {i === 3 && <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
+                    fontSize: 16, letterSpacing: "0.12em", color: "#8A8074" }}>PER MONTH</span>}
                 </div>
               </div>
             );
@@ -260,27 +265,22 @@ export const HookFuse: React.FC = () => {
           })}
           {/* the tower, leaving the top of frame on the slam */}
           {rise > 0.02 && (<>
-            <div style={{ position: "absolute", left: W / 2 - 124,
-              top: BASE - 40 - rise * 780, width: 248, height: 40 + rise * 780,
+            <div style={{ position: "absolute", left: W / 2 - 92,
+              top: BASE - 40 - rise * 780, width: 184, height: 40 + rise * 780,
               borderRadius: 10, background: TOK, border: `7px solid ${TOKD}`,
               boxSizing: "border-box", zIndex: 88, boxShadow: SH_D }} />
-            <div style={{ position: "absolute", left: W / 2 - 124,
-              top: BASE - 40 - rise * 780, width: 62, height: 40 + rise * 780,
+            <div style={{ position: "absolute", left: W / 2 - 92,
+              top: BASE - 40 - rise * 780, width: 46, height: 40 + rise * 780,
               background: TOKL, opacity: 0.45, zIndex: 89 }} />
           </>)}
           <Burst x={W / 2} y={BASE - 60} t={Math.min(1, rise * 1.6)} n={14} s={1.0}
             z={104} spread={560} />
-          {/* ⛔ THE HEADLINE MOVES OFF THE TOWER'S PATH. Centred, it was printed
-              straight through by the column punching up, and the shelf tokens
-              sat behind it as well. It lives in the clear left band instead. */}
-          <div style={{ position: "absolute", left: 34, top: 286, width: 330,
-            zIndex: 100, fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 66,
-            lineHeight: 1.04, letterSpacing: "-0.02em", color: "#B8541F",
-            opacity: rise }}>800,000,000</div>
-          <div style={{ position: "absolute", left: 34, top: 358, width: 330,
-            zIndex: 100, fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 24,
-            letterSpacing: "0.10em", color: "#5C5346",
-            opacity: rise }}>FREE AI TOKENS / MONTH</div>
+          {/* ⛔⛔ NO HEADLINE IN THIS SHOT AT ALL. It was a big number plus a
+              two-line caption that wrapped badly, and the tower printed straight
+              through both. The SHOT IS THE SENTENCE: eight useless stubs become
+              one column that leaves the top of frame. Nothing needs saying, so
+              nothing is said — the number lands on the odometer two shots later,
+              where it is an object rather than a paragraph. */}
           <Claude x={110} base={712} s={0.76} z={84} f={f} gaze={0.9} shock={rise * 0.95} />
           <Flash lf={lf} at={11} n={4} o={0.46} />
         </div>
@@ -316,15 +316,16 @@ export const HookFuse: React.FC = () => {
   return (
     <Scene p={p} slug="29 FREE TIERS  ·  ONE POOL" push={[78, 110, 1.05]} vig={0.34}>
       <Shop p={p} f={f} shelf={4} lamp={210} from={0} />
-      <div style={{ position: "absolute", left: W / 2 - 118, top: -40, width: 236,
-        height: 660, borderRadius: 10, background: TOK, border: `6px solid ${TOKD}`,
+      <div style={{ position: "absolute", left: W / 2 - 92, top: -40, width: 184,
+        height: 620, borderRadius: 10, background: TOK, border: `6px solid ${TOKD}`,
         boxSizing: "border-box", zIndex: 40, boxShadow: SH_D }} />
-      <Token x={W / 2 - 186} y={288} s={180} z={92} markKey={P[0].k} name={P[0].n}
+      <Token x={W / 2 - 208} y={266} s={180} z={92} markKey={P[0].k} name={P[0].n}
         hasMark rot={-8} />
-      <Token x={W / 2 + 192} y={214} s={180} z={92} markKey={P[1].k} name={P[1].n}
+      <Token x={W / 2 + 214} y={214} s={180} z={92} markKey={P[1].k} name={P[1].n}
         hasMark rot={7} />
+      {/* the number arrives HERE, and as an odometer — an object, one line */}
       <Cam z={96} o={set} y={(1 - set) * 20}>
-        <MakerPlate x={W / 2 - 160} y={548} s={1.04} z={96} />
+        <Counter x={W / 2} y={556} v={M} s={0.56} z={96} />
       </Cam>
       <Claude x={126} base={716} s={0.82} z={84} f={f} gaze={0.8} cheer={0.75} />
       <Flash lf={lf} at={0} n={2} o={0.22} />
