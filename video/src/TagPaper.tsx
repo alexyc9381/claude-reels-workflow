@@ -38,8 +38,13 @@ import words from "./data/words_free.json";
 
 export const PFPS = 30;
 
-/** ⭐ ON TWOS. The single highest-leverage difference in this file. */
-const useStep = (n = 2) => Math.floor(useCurrentFrame() / n) * n;
+/** ⛔⛔ STEPPING ON TWOS IS GONE. It was the whole differentiation argument in
+    round 13 and round 18 killed it in three words: *"too laggy."*  On a phone,
+    at this size, a 15fps cadence does not read as hand-made — it reads as a
+    dropped-frame video, and no amount of intent survives that. The cut is
+    different because of the WORLD and the ACTION now, which is where the
+    difference should have been carried all along. Smooth 30. */
+const useStep = (_n = 2) => useCurrentFrame();
 
 /* ten paper grounds — matte stock colours, no glow, no gradient washes */
 const STOCK = [
@@ -66,7 +71,13 @@ const STOCK = [
 const TORN_TOP = "polygon(0 6%,4% 0,9% 7%,15% 1%,21% 8%,28% 2%,34% 9%,41% 2%,47% 8%,54% 1%,60% 8%,67% 2%,73% 9%,80% 2%,86% 8%,93% 1%,98% 7%,100% 2%,100% 100%,0 100%)";
 const TORN_ALL = "polygon(0 4%,5% 0,11% 6%,18% 1%,25% 7%,33% 1%,40% 6%,48% 0,56% 6%,64% 1%,72% 7%,80% 1%,88% 6%,95% 0,100% 5%,99% 12%,100% 22%,98% 33%,100% 44%,99% 56%,100% 67%,98% 78%,100% 89%,96% 96%,88% 100%,80% 95%,72% 100%,63% 95%,55% 100%,46% 95%,38% 100%,29% 95%,21% 100%,12% 95%,4% 99%,0 93%,1% 82%,0 71%,2% 60%,0 49%,1% 38%,0 27%,2% 16%)";
 
+/* ⛔⛔ `filter: drop-shadow()` WAS THE BLUR. It forces the element and its whole
+   subtree into a rasterised layer, and that raster then gets scaled twice — once
+   by the Panel's own push and once by the scene push — so every logo, price and
+   label resampled softly. `boxShadow` is composited, not rasterised, and stays
+   crisp under any transform. Same look, no cost. */
 const SHADOW = "10px 12px 0 rgba(24,18,12,0.34)";
+const BOXSH = "10px 12px 0 rgba(24,18,12,0.34)";
 const W = 1080, H = 1920;
 
 /** halftone: a dot field, drawn not filtered */
@@ -87,7 +98,7 @@ const Card: React.FC<{ x: number; y: number; w: number; h: number; rot: number;
   bg: string; children?: React.ReactNode; z?: number }> =
   ({ x, y, w, h, rot, bg, children, z = 20 }) => (
   <div style={{ position: "absolute", left: x, top: y, width: w, height: h, zIndex: z,
-    transform: `rotate(${rot}deg)`, filter: `drop-shadow(${SHADOW})` }}>
+    transform: `rotate(${rot}deg)`, }}>
     <div style={{ position: "absolute", inset: 0, background: bg, clipPath: TORN_ALL }} />
     {children}
   </div>
@@ -131,9 +142,13 @@ const PW = 1012, PH = 792;
 /* ⛔ SQY 178, NOT 148. The HookHeader sits over the top of the panel and its
    pill runs to about panel-local 150 — at 148 it clipped the PAID/FREE banners,
    the same y=120-ish ceiling every other cut in this build has had to respect. */
-const SQ = 300, SQY = 178, LX = 250, RX = 762;
-const GROUND = 520;
-const FEET = 688;
+/* ⭐ THE CARDS ARE THE MAIN FOCUS AND THEY ARE SIZED AS SUCH. Round 18: *"the
+   cards are too small when they should be the main focus."*  356 x 396 is the
+   largest a PAIR fits inside the push-safe box (x 90..922) with a 40px gap
+   between them: 2*356 + 3*40 = 832 = exactly the safe width. +41% area. */
+const SQ = 356, SQH = 396, SQY = 166, LX = 308, RX = 704;
+const GROUND = 574;
+const FEET = 700;
 
 /** ⭐ A REAL BACKGROUND, NOT A FILL. Round 17: *"much more interesting
     backgrounds, not just single colour."*  Seven layers before a square lands —
@@ -222,42 +237,43 @@ const NightYard: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S, 
 /** one square, or one half of one: same content, a different clip. */
 const Square: React.FC<{ cx: number; free?: boolean; P: typeof PAIRS[0]; punch: number;
   clip?: string; z?: number }> = ({ cx, free, P, punch, clip, z = 22 }) => {
-  const cap = Math.min(92 * 0.62, (MARK_CAP[free ? P.fLogo : P.pLogo] ?? 999) * 1.4);
+  const cap = Math.min(116 * 0.62, (MARK_CAP[free ? P.fLogo : P.pLogo] ?? 999) * 1.4);
   return (
-    <div style={{ position: "absolute", left: cx - SQ / 2, top: SQY, width: SQ, height: SQ,
-      zIndex: z, clipPath: clip, filter: clip ? undefined : `drop-shadow(${SHADOW})` }}>
+    <div style={{ position: "absolute", left: cx - SQ / 2, top: SQY, width: SQ, height: SQH,
+      zIndex: z, clipPath: clip, boxShadow: clip ? undefined : BOXSH }}>
       <div style={{ position: "absolute", inset: 0, background: "#F7F3E6" }} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 46,
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 56,
         background: free ? "#237A54" : "#B3372A", display: "flex", alignItems: "center",
-        justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 26,
+        justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 32,
         letterSpacing: "0.22em", color: "#F7F3E6" }}>{free ? "FREE" : "PAID"}</div>
-      <div style={{ position: "absolute", left: SQ / 2 - 46, top: 64, width: 92, height: 92,
-        background: "#FFFFFF", border: "4px solid #E2DCC8", display: "flex",
+      <div style={{ position: "absolute", left: SQ / 2 - 58, top: 78, width: 116, height: 116,
+        background: "#FFFFFF", border: "5px solid #E2DCC8", display: "flex",
         alignItems: "center", justifyContent: "center" }}>
         <Img src={staticFile("logos/" + (free ? P.fLogo : P.pLogo))}
           style={{ width: cap, height: cap, objectFit: "contain" }} />
       </div>
-      <div style={{ position: "absolute", left: 6, right: 6, top: 168, textAlign: "center",
-        fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 27,
+      <div style={{ position: "absolute", left: 6, right: 6, top: 206, textAlign: "center",
+        fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 34,
         color: "#2A2114" }}>{free ? P.free : P.paid}</div>
-      {/* ⛔ MEASURED AGAINST THE BOX, NOT PLACED BY EYE. 300 tall: banner 46,
-          mark to 156, name to 196, tier to 226, number 232..288. */}
       {!free && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: 200, textAlign: "center" }}>
-          <span style={{ display: "inline-block", padding: "2px 9px", background: "#E2DCC8",
-            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 14,
+        <div style={{ position: "absolute", left: 0, right: 0, top: 246, textAlign: "center" }}>
+          <span style={{ display: "inline-block", padding: "3px 11px", background: "#E2DCC8",
+            fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 17,
             letterSpacing: "0.16em", color: "#6B6252" }}>{P.tier}</span>
         </div>
       )}
-      <div style={{ position: "absolute", left: 0, right: 0, top: free ? 208 : 232,
+      {/* ⛔ THE CONTENT STOPS AT 330 OF 396. The last 66px is deliberate empty
+          card — it is the band the ninja is allowed to overlap as he crosses in
+          front, and it is why nothing he does can ever cover a price. */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: free ? 250 : 280,
         textAlign: "center", transform: `scale(${punch})` }}>
         <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
-          fontSize: free ? 72 : (String(P.price).length >= 3 ? 46 : 54), lineHeight: 1,
+          fontSize: free ? 84 : (String(P.price).length >= 3 ? 56 : 66), lineHeight: 1,
           color: free ? "#237A54" : "#B3372A" }}>
           {free ? "FREE" : "$" + P.price}
         </span>
         {!free && (
-          <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 13,
+          <div style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 15,
             letterSpacing: "0.14em", color: "#8A4A3C" }}>{P.note || "PER MONTH"}</div>
         )}
       </div>
@@ -281,13 +297,13 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
   const rise = hook ? 1 : E(f, 0, 8, 0, 1, OUT);
   /* ⛔ HE STARTS AT 890, NOT 950. The panel is 1012 wide with rounded corners and
      a push on top; at 950 his first pose was half off the screen. */
-  const nx = 890 - dash * 800;
+  const nx = 902 - dash * 806;
 
   return (
     <AbsoluteFill>
       <Panel>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden",
-          transform: `scale(${1 + Math.min(1, f / 66) * 0.07})`, transformOrigin: "50% 58%" }}>
+          transform: `scale(${1 + Math.min(1, f / 66) * 0.045})`, transformOrigin: "50% 58%" }}>
           <NightYard S={S} f={f} i={i} />
 
           <div style={{ position: "absolute", inset: 0, zIndex: 20,
@@ -296,25 +312,25 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
             {slice > 0 && (<>
               <div style={{ position: "absolute", inset: 0, zIndex: 22,
                 transform: `translate(${-slice * 150}px, ${-slice * 28 + slice * slice * 210}px) rotate(${-slice * 26}deg)`,
-                transformOrigin: `${LX}px ${SQY + SQ / 2}px`,
-                filter: `drop-shadow(${SHADOW})`, opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
+                transformOrigin: `${LX}px ${SQY + SQH / 2}px`,
+                opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
                 <Square cx={LX} P={P} punch={1} clip="polygon(0 0,100% 0,100% 26%,0 74%)" z={22} />
               </div>
               <div style={{ position: "absolute", inset: 0, zIndex: 22,
                 transform: `translate(${slice * 130}px, ${slice * 42 + slice * slice * 250}px) rotate(${slice * 30}deg)`,
-                transformOrigin: `${LX}px ${SQY + SQ / 2}px`,
-                filter: `drop-shadow(${SHADOW})`, opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
+                transformOrigin: `${LX}px ${SQY + SQH / 2}px`,
+                opacity: 1 - Math.max(0, slice - 0.7) * 3 }}>
                 <Square cx={LX} P={P} punch={1} clip="polygon(0 74%,100% 26%,100% 100%,0 100%)" z={22} />
               </div>
             </>)}
 
             <div style={{ position: "absolute", inset: 0, zIndex: 23,
-              transform: `scale(${stamp})`, transformOrigin: `${RX}px ${SQY + SQ / 2}px` }}>
+              transform: `scale(${stamp})`, transformOrigin: `${RX}px ${SQY + SQH / 2}px` }}>
               <Square cx={RX} free P={P} punch={1} z={23} />
             </div>
 
             {ff >= 1 && ff <= 6 && (
-              <div style={{ position: "absolute", left: -50, top: SQY + SQ * 0.5,
+              <div style={{ position: "absolute", left: -50, top: SQY + SQH * 0.46,
                 width: LX + SQ / 2 + 96, height: 7, background: "#FFFBF0", zIndex: 40,
                 transform: "rotate(-13deg)", transformOrigin: "0% 50%" }} />
             )}
@@ -324,12 +340,43 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
                 background: "#FFFBF0", opacity: 0.55, zIndex: 39 }} />
             ))}
 
-            <div style={{ position: "absolute", left: nx - 56, top: FEET - 12, width: 112,
-              height: 18, borderRadius: "50%", background: "rgba(14,12,10,0.32)", zIndex: 24,
-              opacity: dash > 0.02 && dash < 0.98 ? 0.2 : 1 }} />
-            <Claudie x={nx} y={FEET + crouch * 14 - (dash > 0.02 && dash < 0.98 ? 22 : 0)}
-              s={0.98} f={f} z={27} face={-1}
-              costume={{ samurai: 1, stern: ff < 4 ? 1 : 0, cheer: ff >= 8 ? 1 : 0 }} />
+            {/* ⭐⭐ HE IS MOVING FOR THE WHOLE BEAT, NOT FOR SIX FRAMES OF IT.
+                Round 18: *"the ninja needs to be moving, more motion."*  He had
+                one action and stood still either side of it, which is the same
+                "arrives then HOLDS" failure the standing rule names — it just
+                happened to a character instead of a scene. Four states now:
+                  idle    a breathing bob and a slow drift toward the cards
+                  ready   he sinks into a crouch on the PAID hit and coils
+                  dash    six frames across, low and fast
+                  finish  a landing settle, a blade flick, then a cheer */}
+            {(() => {
+              const idleBob = Math.sin(f / 6.5) * 5 + Math.sin(f / 3.1) * 2;
+              const drift = ff < 0 ? Math.min(48, Math.max(0, f - 4) * 1.1) : 0;
+              const landing = ff >= 6 ? Math.max(0, 1 - (ff - 6) / 10) : 0;
+              const x = nx - drift;
+              const y = FEET + crouch * 22 + idleBob * (dash > 0.02 ? 0 : 1)
+                      - (dash > 0.02 && dash < 0.98 ? 26 : 0) + landing * 10;
+              const tilt = dash > 0.02 && dash < 0.98 ? -16
+                         : ff >= 6 ? -6 + landing * 6 : -crouch * 7;
+              return (<>
+                <div style={{ position: "absolute", left: x - 60, top: FEET - 12, width: 120,
+                  height: 18, borderRadius: "50%", background: "rgba(14,12,10,0.32)", zIndex: 24,
+                  opacity: dash > 0.02 && dash < 0.98 ? 0.2 : 1,
+                  transform: `scaleX(${1 - crouch * 0.12})` }} />
+                {/* the blade flick: two hard strokes off the sword after the cut */}
+                {ff >= 7 && ff <= 13 && [0, 1].map((k) => (
+                  <div key={"fk" + k} style={{ position: "absolute", left: x + 26 + k * 20,
+                    top: FEET - 96 - k * 16, width: 40 - k * 12, height: 5,
+                    background: "#FFFBF0", opacity: 0.7 - k * 0.25, zIndex: 39,
+                    transform: `rotate(${-24 - k * 10}deg)` }} />
+                ))}
+                <div style={{ position: "absolute", inset: 0, zIndex: 27,
+                  transform: `rotate(${tilt}deg)`, transformOrigin: `${x}px ${FEET}px` }}>
+                  <Claudie x={x} y={y} s={0.92} f={f} z={27} face={-1}
+                    costume={{ samurai: 1, stern: ff < 5 ? 1 : 0, cheer: ff >= 10 ? 1 : 0 }} />
+                </div>
+              </>);
+            })()}
           </div>
 
           {flash && (
@@ -340,7 +387,7 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
           {/* the running total, on a stuck-on paper sticker */}
           <div style={{ position: "absolute", left: PW / 2 - 152, top: 700, width: 304, height: 62,
             background: "#F7F3E6", transform: "rotate(-1.4deg)", zIndex: 42,
-            filter: `drop-shadow(${SHADOW})`, display: "flex", alignItems: "center",
+            boxShadow: BOXSH, display: "flex", alignItems: "center",
             justifyContent: "center", gap: 12 }}>
             <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 18,
               letterSpacing: "0.16em", color: "#8A8072" }}>YOU PAY</span>
@@ -373,7 +420,7 @@ const PaperCta: React.FC = () => {
               <div key={p.free} style={{ position: "absolute", left: 52 + col * 186,
                 top: 150 + row * 208, width: 162, height: 190, zIndex: 30,
                 transform: `rotate(${(r(1) - 0.5) * 7}deg) scale(${t})`,
-                filter: `drop-shadow(${SHADOW})` }}>
+                boxShadow: BOXSH }}>
                 <div style={{ position: "absolute", inset: 0, background: "#F7F3E6" }} />
                 <div style={{ position: "absolute", left: 35, top: 20, width: 92, height: 92,
                   background: "#FFFFFF", border: "4px solid #E2DCC8", display: "flex",
@@ -393,7 +440,7 @@ const PaperCta: React.FC = () => {
           })}
           <div style={{ position: "absolute", left: 52, right: 52, top: 592, height: 96,
             background: "#D8A62C", transform: `rotate(1.2deg) scale(${f < 4 ? 0 : E(f, 4, 12, 1.4, 1, BACK)})`,
-            zIndex: 44, filter: `drop-shadow(${SHADOW})`, display: "flex", alignItems: "center",
+            zIndex: 44, boxShadow: BOXSH, display: "flex", alignItems: "center",
             justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 50,
             letterSpacing: "0.04em", color: "#2A2114" }}>COMMENT “FREE”</div>
         </div>
