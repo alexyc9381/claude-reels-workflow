@@ -72,7 +72,7 @@ export const SCENES: Scene[] = [
   { at: 178, C: S2,     head: ["29 FREE PROVIDERS", "GEMINI, MISTRAL, NVIDIA"] },
   { at: 251, C: S3,     head: ["YOU PAY PER PROVIDER", "HUNDREDS A MONTH, EACH"] },
   { at: 361, C: S4,     head: ["IT POOLS EVERY FREE TIER", "ONE /v1 ENDPOINT"] },
-  { at: 495, C: S5,     head: ["RATE LIMITED? IT TAGS OUT", "AUTO FAILOVER ON 429"] },
+  { at: 495, C: S5,     head: ["RATE LIMITED? IT SWITCHES", "AUTO FAILOVER ON 429"] },
   { at: 570, C: S6Cta,  head: ["COMMENT REPO", "FOR THE FREE SETUP"] },
 ];
 

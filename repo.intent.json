@@ -74,31 +74,31 @@
  "scenes": [
   {
    "i": 0,
-   "job": "S0 HOOK the ring"
+   "job": "S0 HOOK counter+pile"
   },
   {
    "i": 1,
-   "job": "S1 corner scale"
+   "job": "S1 800K vs 800M"
   },
   {
    "i": 2,
-   "job": "S2 the fight bill"
+   "job": "S2 the tokens"
   },
   {
    "i": 3,
-   "job": "S3 box office"
+   "job": "S3 change machine"
   },
   {
    "i": 4,
-   "job": "S4 corner fills"
+   "job": "S4 all chutes pour"
   },
   {
    "i": 5,
-   "job": "S5 the tag / 429"
+   "job": "S5 429 + switch"
   },
   {
    "i": 6,
-   "job": "S6 CTA the belt"
+   "job": "S6 CTA keyword token"
   }
  ]
 }

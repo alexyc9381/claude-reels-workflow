@@ -1,57 +1,50 @@
-# STORYBOARD — REEL 99 REPO (Stage 6)
+# STORYBOARD — REEL 99 REPO (Stage 6) — BUILD 3
 
-> ⛔⛔ **v1 WAS A NIGHT WATERWORKS AND IT WAS REJECTED.** The board below is v2.
-> The note, verbatim: *"each of the scenes dont really make sense in relation back
-> to the main topic like its just water animations not really about claude or ai
-> and stuff ppl will just get bored and scroll away"* and *"logos need to be
-> bigger and especially hook scene needs to be clearer we are talking about
-> claude and stuff."*
+> ⛔⛔ **TWO WORLDS WERE REJECTED BEFORE THIS ONE, AND BOTH HAD CORRECT MAPPINGS.**
+> v1 a night waterworks: *"its just water animations not really about claude or ai
+> ... ppl will just get bored and scroll away"*.
+> v2 a tag-team title fight: *"some of the components i wouldnt think its about the
+> content discussed in the video unless otherwise, like the animations isnt really
+> related"* + *"try to represent 800 million free tokens in a much simpler and
+> straightforward way"*.
 >
-> The v1 mechanism was RIGHT — pipes pool, a gauge ranks, a selector switches —
-> and it did not matter. **A metaphor for the mechanism is not the subject.**
-> Nothing in frame said AI, so the viewer had to decode plumbing before the topic
-> arrived, and that decode costs the exact second the reel has to earn. Reel 86
-> already wrote this rule down; v1 built past it.
->
-> **The fix is not a better metaphor. It is that the real marks ARE the props.**
+> A gauge glass stands for capacity. A championship belt stands for winning. Each
+> one has to be TRANSLATED before it means anything, and the viewer does not do
+> that work. **The mapping was never the problem.**
 
-> **Logline:** every AI lab hands out a free tier that is useless on its own; one
-> repo puts all twenty-nine of them in your corner, and tags the next one in the
-> moment one gasses out.
+> **BUILD 3 USES THE SUBJECT'S OWN OBJECTS.** A "token" is already a physical coin
+> and a number is already a number, so there is nothing left to decode. The rule,
+> and it is checkable per scene: **every object on screen is a TOKEN, a LOGO, a
+> COUNTER or a REAL NUMBER.** A prop that would need a sentence of explanation is
+> not in the reel.
+>
+> The test to apply before building: **point at each prop and say what it is.** If
+> the answer is "a gauge glass, which stands for capacity" — cut it. If it is "a
+> token, and there are 800 million of them" — ship it.
+
+> **Logline:** every AI lab gives away a few free tokens; one repo stacks 29 of
+> those allowances into one pile and one endpoint, and swaps feeds the moment one
+> runs out.
 > Format:   single dark panel · reel-98 NOMAD chassis (`Rep*` kit)
-> Arc:      DISCOVERY -> the scarcity is a lie, the corner was always that deep
-> Villain:  THE BOX OFFICE — sells ONE fighter a month. Rule: never beaten by
->           argument, only made irrelevant when the corner fills at S4.
-> Hero cast: the clay Claude Mascot as CLAUDE CODE, the one in the ring. The
->           corner are slate-tinted Mascots, so the hero ranks by COLOUR.
-> ⛔ NUMBER SPINE: 800 MILLION (totaliser, S0/S1) · 800,000 (one fighter, S1) ·
->                  29 PROVIDERS (S2/S4) · ★18,265 · MIT (fight bill, S0c + S6) ·
->                  4 BILLION (rated capacity, S4b) · 358 ENDPOINTS (S4c) · 429 (S5)
-> ⛔ HERO ARTIFACT: **THE TAG** — two gloves an inch apart. It is the hook's frozen
->                  moment, the mechanism in S5, and the reason the fight never stops.
+> Arc:      DISCOVERY -> the scarcity is a lie, the tokens were always there
+> Villain:  THE CHANGE MACHINE — $300 a month buys ONE provider. Never argued
+>           with, only abandoned at S4.
+> ⛔ NUMBER SPINE: 800,000 (the small stack) · 800,000,000 (the odometer) ·
+>                  29 PROVIDERS · 358 ENDPOINTS · 4 BILLION (real rated figure) ·
+>                  ★18,265 · MIT · 429
+> ⛔ HERO ARTIFACT: **THE ODOMETER**, and the mound of tokens under it.
 
 ---
 
-## THE RITUAL, ITS HIERARCHY, AND THE MOMENT
+## HOW 800 MILLION IS SHOWN
 
-| RITUAL | HIERARCHY MECHANISM | THE MOMENT FRAME 0 IS FROZEN ON |
-|---|---|---|
-| a tag-team title fight | the corner's roster board: how many ROUNDS each is good for, and the pooled rail under them | two gloves an inch apart, mid-tag, with a visible GAP |
+An odometer rolls **0 → 800,000,000** while gold tokens pour out of a
+Claude-marked chute and mound up beneath it. That is the entire device.
 
-A tag team's entire cultural purpose is **relief by substitution**, which IS
-failover. So the mechanism needs no diagram and no decode — the viewer already
-knows what a tag means before the VO says "it automatically jumps to the next".
-
-## THE CONTRACT EVERY SCENE IS HELD TO (this is what v1 failed)
-
-Checkable, per scene:
-1. a REAL provider mark at **>= 96px**, or the Claude mark, is on screen;
-2. a REAL product noun or number is on screen (429, /v1, MIT, 18,265★, 29 PROVIDERS, 358 ENDPOINTS);
-3. every ring scene carries the **Claude mark painted on the canvas at 230-330px**.
-
-Frame 0 alone carries **seven marks**: a 190px Google banner, four on the ringside
-hoarding, a Mistral name board over the fresh fighter, the Claude mark painted on
-the mat at 330px, and the CLAUDE CODE lockup on the ring skirt.
+⭐ And the pile does the arithmetic for free: in S1 a stack of **4** tokens sits
+beside a mound of **150**, same token size, both labelled. The 800K-vs-800M
+comparison is PROVED on screen rather than asserted — no diagram, no rescaling,
+no caption doing the work.
 
 ---
 
@@ -82,38 +75,35 @@ the mat at 330px, and the CLAUDE CODE lockup on the ring skirt.
 
 ---
 
-## THE WORLD — A TAG-TEAM TITLE FIGHT IN A WARM BOXING HALL
+## THE PLACE — A COUNTING ROOM
 
-| the subject | the ring |
+Cream plaster, a wood counter, brass chutes, gold tokens. Deliberately almost no
+world at all: staging for the tokens, and nothing that competes with them.
+
+| the subject | the object |
 |---|---|
-| free tiers, each good for a round | twenty-nine fighters in ONE corner |
-| pooled behind one endpoint | one ring, one fight, one belt |
-| capacity | ROUNDS on the corner's roster board |
-| a rate limit | a fighter gasses out, the 429 towel comes in |
-| automatic failover | THE TAG, and the fight never stops |
-| paying per provider | a box office that sells ONE ticket |
-
-⛔ Matte, never neon. An arena pulls hard toward spotlights on black; the
-brightest thing here is the **canvas**, cream, and a lit **ringside hoarding**.
-That hoarding exists because measuring frame 0 by band showed the problem was
-never the canvas (142-171) but the hall above it (110-118) — a cream board across
-the full width lands ~200 in exactly the short band, AND carries four more marks.
-Fixing the gate from inside the world, and serving the brief in the same move.
+| 800 million free tokens | an ODOMETER, and a mound of tokens |
+| 29 providers | 29 chutes, each with its LOGO on the front |
+| one endpoint | they all pour into one place |
+| a rate limit | a chute jams and a red **429** plate drops on it |
+| failover | the next chute opens; the counter never pauses |
+| paying per provider | a change machine: $300 in, three tokens out |
 
 ## SCENES
 
-| # | t | place | what carries the topic |
-|---|---|---|---|
-| S0 | 0.00-3.67 | THE RING (4 hard cuts) | Google banner 190px · hoarding x4 · Claude mat mark 330px · CLAUDE CODE skirt lockup · 800 MILLION totaliser · the fight bill `freellmapi ★18,265 MIT` |
-| S1 | 3.67-5.93 | THE STAND | one fighter alone under 800,000, then the corner full under 800 MILLION · four banners at 132px |
-| S2 | 5.93-8.37 | THE TUNNEL | three fight posters at 252px (marks ~155px) · five banners · four cast stencils for the marks that do not exist · `+19 MORE` · CLAUDE CODE IS THE CLIENT |
-| S3 | 8.37-12.03 | THE BOX OFFICE | the only cold scene, the only rain · price ratchets $20 -> $300 · ONE FIGHTER / MONTH · the queue shuffles |
-| S4 | 12.03-16.50 | THE RING | the corner fills · RATED CAPACITY **4 BILLION** · 29 PROVIDERS · 358 ENDPOINTS · the roster's pooled rail · **the reel's one camera move** |
-| S5 | 16.50-19.00 | AT THE ROPES | a fighter gasses, the **429 towel** drops, the tag fires in 8 frames · ROUND 12, NO DROP, NO RESET · it fires again unprompted |
-| S6 | 19.00-20.93 | THE BELT | COMMENT **REPO** cast into the centre plate · `freellmapi ★18,265 MIT` · Claude mark |
+| # | t | what is on screen |
+|---|---|---|
+| S0 | 0.00-3.67 | sealed Claude-marked chute + odometer at 000,000,000 + an 800,000 stack (settled f0); at f12 the cap blows, tokens pour, the counter spins to 800,000,000. Then: the digits close, one 330px Google token + the `freellmapi ★18,265 MIT` receipt, the mound |
+| S1 | 3.67-5.93 | 4 tokens labelled 800,000, then the pull-back to a mound of 150 at true scale |
+| S2 | 5.93-8.37 | three 252px logo tokens DROPPING in with impact rings, then nine assembling one at a time + `+19 MORE` + the Claude token, "CLAUDE CODE SPENDS THEM" |
+| S3 | 8.37-12.03 | the change machine. $20 → $300, three tokens out, ONE PROVIDER. Only cold scene, only rain |
+| S4 | 12.03-16.50 | three chutes, then six, all pouring; the odometer rolls to **4,000,000,000**; 29 PROVIDERS · 358 ENDPOINTS; five feeds converge on one Claude token |
+| S5 | 16.50-19.00 | GROQ jams, the red **429 RATE LIMIT** plate drops, MISTRAL opens 8 frames later, the pile never stops. It happens twice |
+| S6 | 19.00-20.93 | COMMENT **REPO** struck on a 356px token, the mound still growing, the receipt |
 
-## MEASURED (v2)
+## MEASURED (build 3)
 
-frame-0 panel luma **151.3** (bar 150) · per-scene motion 7.46-13.04, overall
-**9.37**, 0 under bar · **0 static stretches** · `verify_reel.py` **9/9, 0 skipped**
-· 4 shots in the first 3.67s, transient on every cut.
+frame-0 panel luma **157.1** (bar 150) · per-scene motion 5.58-11.03, overall
+**7.11**, 0 under bar · **0 static stretches** · `verify_reel.py` **9/9, 0
+skipped** · 4 shots in the first 3.67s, a transient on every cut · marks run
+132-330px throughout.

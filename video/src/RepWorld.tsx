@@ -12,39 +12,40 @@ import type { Place } from "./NomWorld";
 /* ===========================================================================
    REEL 99 "REPO" — THE WORLD KIT.  Board: storyboards/99-repo.md.
 
-   ⛔⛔ v1 OF THIS REEL WAS A NIGHT WATERWORKS AND IT WAS REJECTED, for the
-      reason reel 86 already wrote down and I built past anyway:
+   ⛔⛔ THIS IS BUILD 3. TWO WORLDS WERE REJECTED, FOR THE SAME REASON, AND THE
+      REASON IS WORTH KEEPING IN FRONT OF YOU:
 
-        "each of the scenes dont really make sense in relation back to the main
-         topic like its just water animations not really about claude or ai and
-         stuff ppl will just get bored and scroll away"
+      v1, a night waterworks:
+        *"its just water animations not really about claude or ai and stuff ppl
+          will just get bored and scroll away"*
+      v2, a tag-team title fight:
+        *"some of the components i wouldnt think its about the content discussed
+          in the video unless otherwise, like the animations isnt really
+          related"* + *"represent 800 million free tokens in a much simpler and
+          straightforward way"*
 
-      The mechanism was right — pipes pool, a gauge ranks, a selector switches —
-      and it did not matter, because A METAPHOR FOR THE MECHANISM IS NOT THE
-      SUBJECT. Nothing in frame said AI. The viewer had to decode plumbing
-      before the topic arrived, and that decode costs the exact second the reel
-      has to earn.
+      v1's mechanism mapped perfectly. v2's ritual mapped perfectly. Both still
+      failed, because A BORROWED PROP HAS TO BE TRANSLATED BEFORE IT MEANS
+      ANYTHING. A gauge glass, a championship belt, a corner man — the viewer
+      has to be told what each one stands for, and you do not get to tell them.
 
-   THE FIX IS NOT A BETTER METAPHOR. It is that the REAL MARKS ARE THE PROPS.
-   Every scene below carries a provider mark at 110-260px, or the Claude mark,
-   or a real product noun (429, /v1, MIT, 18,265★) — usually all three. The
-   world is staging for those objects, never a substitute for them.
+   ⛔ THE RULE THIS BUILD IS HELD TO: **every object on screen is a TOKEN, a
+      LOGO, a COUNTER or a REAL NUMBER.** If a prop needs a sentence of
+      explanation, it is cut. There is no metaphor left to decode, because a
+      "token" is already a physical object and the number is just the number.
 
-   THE WORLD: A TAG-TEAM TITLE FIGHT, in a warm old boxing hall.
-     free tiers, each good for a round   -> twenty-nine fighters in ONE corner
-     pooled behind one endpoint          -> one ring, one fight, one belt
-     capacity                            -> ROUNDS on the corner's roster board
-     a rate limit                        -> a fighter gasses out, 429 towel in
-     automatic failover                  -> THE TAG, and the fight never stops
-     paying per provider                 -> a box office that sells ONE ticket
-   The ritual's entire cultural purpose is relief by substitution, which IS
-   failover — so the mechanism needs no diagram and no decode.
+   THE PLACE: a warm counting house. Cream plaster, a wood counter, brass
+   chutes, gold tokens. It is deliberately almost no world at all — staging for
+   the tokens, and nothing that competes with them.
+     800 million free tokens   -> an ODOMETER, and a token pile past the frame
+     29 providers              -> 29 chutes, each with its LOGO on the front
+     one endpoint              -> they all pour into ONE hopper
+     a rate limit              -> a chute jams and a red 429 flag drops on it
+     failover                  -> the next chute opens; the counter never pauses
+     paying per provider       -> a change machine: $300 in, one small cup out
 
-   ⛔ MATTE PALETTE, NOT NEON. An arena pulls hard toward spotlights on black.
-      The brightest thing here is the CANVAS — cream, and it fills the lower
-      half of frame 0, which is what wins the luma gate from inside the world.
-      No `0 0 Npx <colour>` anywhere; ring lights are solid discs and one
-      low-alpha cone.
+   ⛔ MATTE PALETTE. Gold tokens and cream plaster carry the brightness; there
+      is not one `0 0 Npx <colour>` glow in the reel.
    ========================================================================= */
 
 export { W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
@@ -58,10 +59,8 @@ export const RED = "#C44A3A", SKY = "#5AA0DE", PAPER = "#F7F5F0";
 export const INK = "#1A1813";
 
 /* ⛔⛔ `dark()` AND `mix()` TAKE HEX AND RETURN `rgb(...)`, SO THEY DO NOT NEST.
-   `dark(dark(c, .2), .1)` runs `parseInt("gb(186,179,164)", 16)` -> NaN, and
-   `NaN >> 16 & 255` is 0, so the result is a SILENT SOLID BLACK — not a crash,
-   not a dropped style, black. It only bites when a surface is DIMMED, which is
-   why the undimmed frames looked perfect for a whole pass. Hex in, hex out. */
+   `dark(dark(c,.2),.1)` parses to NaN and `NaN >> 16 & 255` is 0 — a SILENT
+   SOLID BLACK, and only in dimmed shots. Hex in, hex out. */
 export const dkh = (hex: string, k: number) => {
   const n = parseInt(hex.slice(1), 16);
   const m = (v: number) => Math.round(v * (1 - k));
@@ -76,62 +75,44 @@ export const mxh = (hex: string, k: number) => {
 };
 
 /* the world's own materials */
-export const CANVAS = "#EFE8D8", CANVAS2 = "#CFC5AE";
-export const ROPE = "#E4DACA", ROPED = "#B8AC96";
-export const POST_R = "#C25E42", POST_B = "#5E718C";
+export const TOK = "#E4A93F", TOKD = "#A9721F", TOKL = "#F5D68A";
 export const BRASS = "#C8963E", BRASSD = "#8E6626", BRASSL = "#E8C57A";
-/* ⛔ THE CROWD IS WHAT COSTS THE LUMA GATE. At #2A303A/#1D222A the tiers ate
-   the upper half and frame 0 measured 141.8 against the >=150 bar. Lifted a
-   stop and warmed toward the hall light: still silhouette, still never competing
-   with a mark, and now the frame is legible at feed size. */
-export const CROWD = "#4C5666", CROWD2 = "#3E4756";
+/* ⛔ THE COUNTER-TOP IS 47% OF THE PANEL. At #8A6242/#5C412C (luma ~104/68)
+   it dragged frame 0 to 145.7 against the >=150 bar while the plaster above was
+   already at 230. Lifted a stop; still clearly wood, now the frame clears. */
+export const WOOD = "#A67F58", WOODD = "#77593C", WOODL = "#C0996E";
+export const PLAST = "#EDE5D2", PLASTD = "#CDC3AC";
 
-/* ---------------------------------------------------------------------------
-   THE SEVEN PLACES. Neighbours in the cut differ by both hue and lightness.
-   ⛔ FRAME 0 IS A BRIGHTNESS COMPETITION (docs/THE-OPEN.md law 1, ≥150/255) and
-      `ring` wins it from INSIDE the world: a lit canvas is the brightest thing
-      a boxing hall actually contains, so no neutral card is imported.
-   ------------------------------------------------------------------------ */
 export const PLACES: Record<string, Place> = {
-  /* S0/S4 · the ring, from the apron. Warm hall, dark crowd, CREAM canvas. */
-  ring:   { back: "#69748A", back2: "#454E5C", floor: CANVAS, floor2: CANVAS2,
-            lip: POST_R, key: GOLD, horizon: 430, grit: "#B7AD98" },
-  /* S0c/S6 · the corner, tighter and warmer */
-  corner: { back: "#54443A", back2: "#2E2620", floor: "#EDE5D3", floor2: "#C6BCA4",
-            lip: "#B8543A", key: "#EFD9A2", horizon: 470, grit: "#AFA48C" },
-  /* S2 · the tunnel where the corner is introduced. AMBER, deepest frame. */
-  roster: { back: "#5A4A38", back2: "#80704C", floor: "#9C8F78", floor2: "#6E624F",
-            lip: "#8C7E66", key: GOLD, horizon: 480, grit: "#9E8E72" },
-  /* S3 · the box office, outside in the rain. COLD SLATE + one sour lamp.
-     The villain's palette, used NOWHERE else in the reel. */
-  booth:  { back: "#3A4650", back2: "#28313A", floor: "#59636B", floor2: "#363F47",
-            lip: "#4C575F", key: "#93A98C", horizon: 520, grit: "#6A737B" },
-  /* S1 · the arena wide from high in the stand */
-  stand:  { back: "#5F6C80", back2: "#3E4756", floor: "#E6DECC", floor2: "#B8AE98",
-            lip: "#8E6C58", key: GOLD, horizon: 400, grit: "#A89E88" },
-  /* S5 · macro on the tag, at the ropes */
-  apron:  { back: "#57462F", back2: "#332A1E", floor: "#EDE5D3", floor2: "#C2B79E",
-            lip: "#B8543A", key: "#F0DDB0", horizon: 500, grit: "#AA9F86" },
-  /* S6 · the belt. Brightest frame in the reel. */
-  belt:   { back: "#65523E", back2: "#3A2F24", floor: "#F4EEE0", floor2: "#D6CCB6",
-            lip: "#C25E42", key: GOLD, horizon: 500, grit: "#BDB39C" },
+  /* S0/S4/S6 · the counting room. BRIGHT cream plaster, wood counter. */
+  count: { back: PLAST, back2: "#D2C8B0", floor: WOOD, floor2: WOODD,
+           lip: "#B9AD93", key: GOLD, horizon: 420, grit: "#A08B6E" },
+  /* S1 · the same room, wider and cooler, for the scale comparison */
+  hall:  { back: "#DED8C6", back2: "#B6AE99", floor: "#9C8E76", floor2: "#6B6050",
+           lip: "#AA9E86", key: GOLD, horizon: 430, grit: "#8E8069" },
+  /* S2 · close on the tokens, warm and shallow */
+  bench: { back: "#E6DCC4", back2: "#C0B49A", floor: "#A88354", floor2: "#71583A",
+           lip: "#BE9464", key: GOLD, horizon: 500, grit: "#B08E62" },
+  /* S3 · the change machine. COLD SLATE, the villain's palette, used nowhere
+     else in the reel. */
+  cash:  { back: "#4A555F", back2: "#333C45", floor: "#5E6870", floor2: "#3A424A",
+           lip: "#525C64", key: "#93A98C", horizon: 520, grit: "#6E777F" },
+  /* S5 · macro on the chutes */
+  chute: { back: "#E2D9C4", back2: "#B4A98E", floor: "#8E7048", floor2: "#5E4A30",
+           lip: "#A8845A", key: GOLD, horizon: 520, grit: "#9A7C54" },
 };
 
-const BRIGHT = ["ring", "corner", "stand", "apron", "belt"];
-const DIMMER = ["roster", "booth"];
-/* ⛔ HEX IN, HEX OUT. A `Place` field is fed straight back into `dkh`/`mxh` by
-   the surfaces below, so a rotation emitting `rgb(...)` blacks out every dimmed
-   variant — the same trap, one level further out. */
+const WARM = ["count", "hall", "bench", "chute"];
+const COLD = ["cash"];
+/* ⛔ HEX IN, HEX OUT — a Place field is fed straight back into dkh/mxh. */
 const LEVEL: Record<number, (c: string) => string> = {
-  1: (c) => mxh(c, 0.10),
-  2: (c) => mxh(c, 0.17),
-  3: (c) => dkh(c, 0.11),
+  1: (c) => mxh(c, 0.09), 2: (c) => mxh(c, 0.16), 3: (c) => dkh(c, 0.10),
 };
 export const usePlace = (key: string): Place => {
   const p = React.useContext(PalCtx);
   const base = PLACES[key];
   if (!p) return base;
-  const ring = BRIGHT.includes(key) ? BRIGHT : DIMMER;
+  const ring = COLD.includes(key) ? COLD : WARM;
   const d = PLACES[ring[(ring.indexOf(key) + p) % ring.length]];
   const L = LEVEL[p];
   const c = L ? { ...d, back: L(d.back), back2: L(d.back2), floor: L(d.floor),
@@ -140,178 +121,41 @@ export const usePlace = (key: string): Place => {
 };
 
 /* =========================================================================
-   SURFACES
+   THE ROOM — plaster wall, a wood counter, and almost nothing else. It is
+   deliberately plain: the tokens are the subject and the set must not argue
+   with them.
    ====================================================================== */
-
-/** the hall: crowd tiers, a back wall, and the lighting truss. Six depth
-    planes before a prop lands — wall, upper tier, lower tier, rail, floor,
-    truss. The crowd is SILHOUETTE ONLY; it must never compete with the marks. */
-export const Arena: React.FC<{ p: Place; f: number; rows?: number; truss?: boolean;
-  dim?: number; lights?: number }> =
-  ({ p, f, rows = 3, truss = true, dim = 0, lights = 4 }) => {
+export const Room: React.FC<{ p: Place; f: number; dim?: number; panel?: boolean;
+  counter?: boolean }> = ({ p, f, dim = 0, panel = true, counter = true }) => {
   const hz = p.horizon;
   const D = (c: string) => (dim > 0 ? dkh(c, dim) : c);
   return (<>
     <div style={{ position: "absolute", inset: 0, zIndex: 1,
-      background: `linear-gradient(176deg, ${D(p.back2)} 0%, ${D(p.back)} 58%, ${D(dkh(p.back, 0.16))} 100%)` }} />
-    {/* the far wall's steel bays — structure, so the dark has something in it */}
-    {Array.from({ length: 7 }, (_, i) => (
-      <div key={"bay" + i} style={{ position: "absolute", left: 26 + i * 148, top: 40,
-        width: 9, height: hz - 90, background: D(dkh(p.back, 0.26)), zIndex: 2 }} />
-    ))}
-    {/* crowd tiers, receding and darkening */}
-    {Array.from({ length: rows }, (_, r) => {
-      const ty = hz - 210 + r * 62;
-      const c = D(r === 0 ? dkh(CROWD2, 0.15) : r === 1 ? CROWD2 : CROWD);
-      return (<React.Fragment key={"tier" + r}>
-        <div style={{ position: "absolute", left: -20, top: ty, width: W + 40, height: 64,
-          background: c, zIndex: 4 + r }} />
-        {Array.from({ length: 26 }, (_, i) => (
-          <div key={"hd" + r + i} style={{ position: "absolute",
-            left: -10 + i * 40 + (r % 2) * 20 + rnd(r * 30 + i, 7) * 12,
-            top: ty - 16 - rnd(r * 30 + i, 8) * 7, width: 24, height: 26,
-            borderRadius: "12px 12px 3px 3px", background: c, zIndex: 4 + r }} />
-        ))}
-        {/* the tier's front rail catches the light */}
-        <div style={{ position: "absolute", left: -20, top: ty + 58, width: W + 40, height: 7,
-          background: D(mxh(p.back, 0.14)), opacity: 0.8, zIndex: 4 + r }} />
-      </React.Fragment>);
-    })}
-    {/* the floor the ring stands on */}
-    <div style={{ position: "absolute", left: 0, right: 0, top: hz - 22, bottom: 0, zIndex: 11,
-      background: `linear-gradient(184deg, ${D(dkh(p.back, 0.34))} 0%, ${D(dkh(p.back, 0.5))} 100%)` }} />
-    {/* the truss and its lamps — solid discs, never an emissive blur */}
-    {truss && (<>
-      <div style={{ position: "absolute", left: -20, top: 44, width: W + 40, height: 15,
-        background: D("#2B3038"), zIndex: 20 }} />
-      <div style={{ position: "absolute", left: -20, top: 56, width: W + 40, height: 6,
-        background: D("#454C56"), zIndex: 21 }} />
-      {Array.from({ length: lights }, (_, i) => {
-        const x = 108 + i * ((W - 216) / Math.max(1, lights - 1));
-        return (<React.Fragment key={"lt" + i}>
-          <div style={{ position: "absolute", left: x - 27, top: 58, width: 54, height: 32,
-            borderRadius: "5px 5px 26px 26px", background: D("#3C434D"), zIndex: 22 }} />
-          <div style={{ position: "absolute", left: x - 20, top: 82, width: 40, height: 15,
-            borderRadius: "0 0 20px 20px", background: D("#F4E4B8"), zIndex: 23 }} />
-          <Beam x={x} y={92} top={40} bot={330} len={430} c="#F4E4B8" o={0.13} z={19} f={f} />
-        </React.Fragment>);
-      })}
+      background: `linear-gradient(176deg, ${D(mxh(p.back, 0.10))} 0%, ${D(p.back)} 46%, ${D(p.back2)} 100%)` }} />
+    {/* wall panelling — two rails, the only wall detail there is */}
+    {panel && (<>
+      <div style={{ position: "absolute", left: 0, right: 0, top: hz - 190, height: 7,
+        background: D(dkh(p.back2, 0.16)), zIndex: 2 }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: hz - 176, height: 3,
+        background: D(mxh(p.back, 0.20)), zIndex: 2 }} />
+    </>)}
+    {counter && (<>
+      <div style={{ position: "absolute", left: 0, right: 0, top: hz, bottom: 0, zIndex: 12,
+        background: `linear-gradient(184deg, ${D(p.floor)} 0%, ${D(p.floor2)} 100%)` }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: hz - 16, height: 20,
+        background: D(mxh(p.floor, 0.22)), zIndex: 13, boxShadow: SH }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: hz + 4, height: 6,
+        background: D(dkh(p.floor2, 0.22)), zIndex: 14 }} />
+      {Array.from({ length: 5 }, (_, i) => (
+        <div key={"pj" + i} style={{ position: "absolute", left: 0, right: 0,
+          top: hz + 40 + i * i * 12 + i * 30, height: 3,
+          background: D(dkh(p.floor2, 0.24)), opacity: 0.6, zIndex: 15 }} />
+      ))}
     </>)}
   </>);
 };
 
-/** THE RING. Canvas, apron, three ropes, four posts — and the Claude mark
-    painted on the mat at sponsor scale.
-
-    ⛔⛔ THIS IS THE ANSWER TO "the hook needs to be clearer we are talking about
-       claude". A real ring has a huge mark painted on the canvas, so the single
-       most legible object in frame 0 can be the Claude logo without a badge
-       being pasted anywhere — the world itself carries it, at 260px, under
-       everything else. It is also the brightest plane, so it wins the luma gate
-       and says the subject in the same move. */
-export const Ring: React.FC<{ p: Place; f: number; z?: number; mark?: number;
-  ropes?: number; near?: boolean; markX?: number; markY?: number }> =
-  ({ p, f, z = 30, mark = 260, ropes = 3, near = true, markX, markY }) => {
-  const hz = p.horizon;
-  const FAR_L = 150, FAR_R = W - 150, NEAR_L = -46, NEAR_R = W + 46;
-  /* the apron skirt has to stay ON PANEL — it is where the ring branding
-     lives, and at hz+342 it was pushed off the bottom edge entirely */
-  const CT = hz + 4, CB = hz + 296;
-  return (<>
-    {/* the canvas — a trapezoid, the brightest plane in the reel */}
-    <div style={{ position: "absolute", left: 0, top: CT, width: W, height: CB - CT,
-      zIndex: z, background: `linear-gradient(182deg, ${p.floor2} 0%, ${p.floor} 62%)`,
-      clipPath: `polygon(${FAR_L}px 0, ${FAR_R}px 0, ${NEAR_R}px 100%, ${NEAR_L}px 100%)` }} />
-    {/* the painted mark, ON the canvas, in perspective.
-        ⛔ 0.30 opacity on a cream mat is a smudge. At 0.46 against a canvas this
-        bright it still reads as PAINT rather than a decal, and it is the single
-        largest object in frame 0 — which is the whole point: the subject is
-        legible before anything has to be decoded. */}
-    <div style={{ position: "absolute", left: (markX ?? W / 2) - mark / 2,
-      top: (markY ?? CT + 96) - mark / 2, width: mark, height: mark, zIndex: z + 1,
-      opacity: 0.36, transform: "scaleY(0.52)", transformOrigin: "50% 50%" }}>
-      <Img src={staticFile("claude_logo.png")}
-        style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-    </div>
-    {/* the canvas seams */}
-    {[0.3, 0.62].map((k, i) => (
-      <div key={"sm" + i} style={{ position: "absolute", left: 0, top: CT + (CB - CT) * k,
-        width: W, height: 3, background: dkh(CANVAS2, 0.12), opacity: 0.6, zIndex: z + 2 }} />
-    ))}
-    {/* the apron skirt below the near edge */}
-    <div style={{ position: "absolute", left: NEAR_L, top: CB - 4, width: NEAR_R - NEAR_L,
-      height: 130, background: p.lip, zIndex: z + 3, boxShadow: SH_D }} />
-    <div style={{ position: "absolute", left: NEAR_L, top: CB - 4, width: NEAR_R - NEAR_L,
-      height: 13, background: mxh(p.lip, 0.26), zIndex: z + 4 }} />
-    {/* the ropes, far side, behind everything that stands on the canvas */}
-    {Array.from({ length: ropes }, (_, i) => (
-      <React.Fragment key={"rf" + i}>
-        <div style={{ position: "absolute", left: FAR_L - 8, top: CT - 128 + i * 42,
-          width: FAR_R - FAR_L + 16, height: 11, borderRadius: 6, background: ROPE,
-          zIndex: z + 5, boxShadow: SH }} />
-        <div style={{ position: "absolute", left: FAR_L - 8, top: CT - 122 + i * 42,
-          width: FAR_R - FAR_L + 16, height: 4, borderRadius: 6, background: ROPED,
-          zIndex: z + 6 }} />
-      </React.Fragment>
-    ))}
-    {/* the two far posts */}
-    {[FAR_L - 22, FAR_R - 8].map((x, i) => (
-      <React.Fragment key={"pf" + i}>
-        <div style={{ position: "absolute", left: x, top: CT - 168, width: 30, height: 176,
-          borderRadius: 7, background: i === 0 ? POST_R : POST_B, zIndex: z + 8, boxShadow: SH }} />
-        <div style={{ position: "absolute", left: x, top: CT - 168, width: 9, height: 176,
-          background: mxh(i === 0 ? POST_R : POST_B, 0.28), zIndex: z + 9 }} />
-        <div style={{ position: "absolute", left: x - 6, top: CT - 180, width: 42, height: 18,
-          borderRadius: 5, background: BRASS, zIndex: z + 10 }} />
-      </React.Fragment>
-    ))}
-    {/* the near ropes, IN FRONT — the frame-edge occluder this world owns */}
-    {near && Array.from({ length: ropes }, (_, i) => (
-      <div key={"rn" + i} style={{ position: "absolute", left: -60, top: CB - 34 + i * 54,
-        width: W + 120, height: 15, borderRadius: 8,
-        background: i === 0 ? ROPE : mxh(ROPE, 0.06), zIndex: z + 60, boxShadow: SH }} />
-    ))}
-  </>);
-};
-
-/** THE RINGSIDE HOARDING — the lit advertising board that runs behind the
-    ropes in every real arena.
-
-    ⛔ IT IS DOING TWO JOBS AT ONCE, WHICH IS WHY IT EXISTS. Measured by band,
-       frame 0's problem was never the canvas (142-171) — it was the hall above
-       it, y 99-396, sitting at 110-118 and pulling the panel mean to 145
-       against a 150 bar. A cream board across the full width lands ~200 in the
-       exact band that was short. And because it is a hoarding, the thing it
-       carries is MARKS: five more at 66px, in the frame the brief said needed
-       more logos. Fixing the gate from inside the world, again. */
-export const Hoarding: React.FC<{ y: number; z?: number; n?: number; from?: number;
-  h?: number }> = ({ y, z = 16, n = 5, from = 0, h: hh = 86 }) => (<>
-  <div style={{ position: "absolute", left: -30, top: y, width: W + 60, height: hh,
-    background: "#EFE7D4", zIndex: z, boxShadow: SH }} />
-  <div style={{ position: "absolute", left: -30, top: y, width: W + 60, height: 9,
-    background: "#FBF6EA", zIndex: z + 1 }} />
-  <div style={{ position: "absolute", left: -30, top: y + hh - 11, width: W + 60, height: 11,
-    background: "#C3B9A2", zIndex: z + 1 }} />
-  {Array.from({ length: n }, (_, i) => {
-    const pr = PROVIDERS[(from + i) % PROVIDERS.length];
-    const x = 74 + i * ((W - 148) / Math.max(1, n - 1));
-    return (
-      <div key={"ho" + i} style={{ position: "absolute", left: x - 82, top: y + 12,
-        width: 164, height: hh - 26, zIndex: z + 2, display: "flex", alignItems: "center",
-        justifyContent: "center", gap: 9 }}>
-        {pr.mark
-          ? <Img src={staticFile(`logos/${pr.k}.svg`)}
-              style={{ width: 46, height: 46, objectFit: "contain" }} />
-          : null}
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
-          fontSize: pr.n.length > 8 ? 19 : 24, letterSpacing: "0.02em",
-          color: "#3A342A", whiteSpace: "nowrap" }}>{pr.n}</span>
-      </div>
-    );
-  })}
-</>);
-
-/** rain — solid slanted strokes, never a wash. The box office only. */
+/** rain — the change-machine scene only. Solid strokes, never a wash. */
 export const Rain: React.FC<{ f: number; n?: number; z?: number; c?: string }> =
   ({ f, n = 40, z = 88, c = "#B6C6CE" }) => (<>
     {Array.from({ length: n }, (_, i) => {
@@ -325,19 +169,13 @@ export const Rain: React.FC<{ f: number; n?: number; z?: number; c?: string }> =
   </>);
 
 /* =========================================================================
-   ⛔⛔ THE MARKS ARE THE PROPS, AND THEY ARE BIG.
-
-   Alex, on v1: *"logos need to be bigger and especially hook scene needs to be
-   clearer we are talking about claude and stuff."* v1's provider marks were
-   46px enamel discs on a tap. Here the smallest a mark is ever drawn is 96px,
-   the corner banners run 150-190px, the roster cards 210px, and the Claude mark
-   is painted on the canvas at 260.
-
-   ⛔ NEVER FILTER A BRAND MARK (reel 86). `grayscale(1) brightness(0.12)` turns
-      any mark that owns a colour into a black square. They go on light plates
-      and are left alone.
-   ⛔ NEVER INVENT ONE. Groq, Cerebras, Cohere and Z.ai are not on simple-icons,
-      so they get a cast stencil nameplate instead of a guessed glyph.
+   ⛔⛔ THE MARKS ARE THE PROPS, AND ON A TOKEN THEY GET TO BE HUGE.
+   A token is a disc with a light plate in it, so a brand mark sits on the one
+   surface it is guaranteed to read on — and at 200px+ in the close shots,
+   which is the size the note asked for.
+   ⛔ NEVER FILTER A BRAND MARK (reel 86: the darken filter turns any coloured
+      mark into a black square). ⛔ NEVER INVENT ONE — the four providers with
+      no public mark get their NAME struck into the token instead.
    ====================================================================== */
 export const PROVIDERS = [
   { k: "googlegemini", n: "GOOGLE",      mark: true },
@@ -352,54 +190,54 @@ export const PROVIDERS = [
   { k: "zai",          n: "Z.AI",        mark: false },
 ] as const;
 
-/** a hanging corner banner carrying ONE provider at scale. This is the reel's
-    workhorse: it is how a mark gets to be 150-190px without covering a face. */
-export const Banner: React.FC<{ x: number; y: number; w?: number; z?: number;
-  markKey?: string; name: string; hasMark?: boolean; f?: number; sway?: number;
-  sub?: string }> =
-  ({ x, y, w: ww = 190, z = 40, markKey, name, hasMark, f = 0, sway = 1, sub }) => {
-  const a = Math.sin(f / 52 + x / 180) * 0.9 * sway;
-  const hh = ww * 1.20;
+/** THE TOKEN. The whole reel is made of these.
+    `plain` is an unstruck token — the ones that make up the bulk of a pile. */
+export const Token: React.FC<{ x: number; y: number; s?: number; z?: number;
+  markKey?: string; name?: string; hasMark?: boolean; rot?: number; plain?: boolean;
+  claude?: boolean; dim?: number }> =
+  ({ x, y, s = 90, z = 60, markKey, name, hasMark, rot = 0, plain, claude,
+     dim = 0 }) => {
+  const D = (c: string) => (dim > 0 ? dkh(c, dim) : c);
   return (
-    <div style={{ position: "absolute", left: x - ww / 2, top: y, width: ww, zIndex: z,
-      transform: `rotate(${a}deg)`, transformOrigin: "50% 0%" }}>
-      {/* the hanger */}
-      <div style={{ position: "absolute", left: ww / 2 - 4, top: -34, width: 8, height: 36,
-        background: BRASSD }} />
-      <div style={{ position: "absolute", left: ww / 2 - 26, top: -40, width: 52, height: 12,
-        borderRadius: 4, background: BRASS }} />
-      <div style={{ width: ww, height: hh, borderRadius: 10, background: "#F7F3E8",
-        border: `6px solid ${BRASSD}`, boxShadow: SH_D, boxSizing: "border-box",
-        display: "flex", flexDirection: "column", alignItems: "center",
-        justifyContent: "center", gap: ww * 0.05, overflow: "hidden" }}>
-        {hasMark && markKey
-          ? <Img src={staticFile(`logos/${markKey}.svg`)}
-              style={{ width: ww * 0.56, height: ww * 0.56, objectFit: "contain" }} />
-          : <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 900,
-              fontSize: ww * (name.length > 8 ? 0.16 : 0.22), lineHeight: 1,
-              color: "#241F17", textAlign: "center", padding: "0 6px" }}>{name}</span>}
-        <span style={{ fontFamily: inter.fontFamily, fontWeight: 900,
-          fontSize: ww * 0.088, letterSpacing: "0.06em", color: "#6B6355",
-          textAlign: "center", padding: "0 6px" }}>{hasMark ? name : ""}</span>
-        {sub && <span style={{ fontFamily: MONO, fontWeight: 800, fontSize: ww * 0.082,
-          letterSpacing: "0.08em", color: "#8C8474" }}>{sub}</span>}
-      </div>
-      {/* the tail */}
-      <div style={{ position: "absolute", left: 0, top: hh - 2, width: ww, height: ww * 0.16,
-        background: "#F7F3E8", borderLeft: `6px solid ${BRASSD}`,
-        borderRight: `6px solid ${BRASSD}`, boxSizing: "border-box",
-        clipPath: "polygon(0 0, 100% 0, 50% 100%)" }} />
+    <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, height: s,
+      zIndex: z, transform: `rotate(${rot}deg)` }}>
+      {/* rim, face, highlight — three solid values, never a gradient */}
+      <div style={{ position: "absolute", inset: 0, borderRadius: "50%",
+        background: D(TOKD), boxShadow: SH }} />
+      <div style={{ position: "absolute", inset: s * 0.045, borderRadius: "50%",
+        background: D(TOK) }} />
+      <div style={{ position: "absolute", left: s * 0.09, top: s * 0.07,
+        width: s * 0.38, height: s * 0.30, borderRadius: "50%", background: D(TOKL),
+        opacity: 0.7 }} />
+      {!plain ? (
+        <div style={{ position: "absolute", inset: s * 0.14, borderRadius: "50%",
+          background: D("#FBF8F1"), display: "flex", alignItems: "center",
+          justifyContent: "center", overflow: "hidden" }}>
+          {claude
+            ? <Img src={staticFile("claude_logo.png")}
+                style={{ width: s * 0.46, height: s * 0.46, objectFit: "contain" }} />
+            : hasMark && markKey
+            ? <Img src={staticFile(`logos/${markKey}.svg`)}
+                style={{ width: s * 0.46, height: s * 0.46, objectFit: "contain" }} />
+            : <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 900,
+                fontSize: s * ((name?.length ?? 4) > 8 ? 0.115 : 0.16), lineHeight: 1,
+                color: "#241F17", textAlign: "center", padding: "0 4px" }}>{name}</span>}
+        </div>
+      ) : (
+        <div style={{ position: "absolute", inset: s * 0.20, borderRadius: "50%",
+          border: `${Math.max(2, s * 0.035)}px solid ${D(TOKD)}`, boxSizing: "border-box",
+          opacity: 0.7 }} />
+      )}
     </div>
   );
 };
 
-/** the repo's own receipt, on a fight-bill card. Every value is real, pulled
-    from the GitHub API on 2026-08-11. */
+/** the repo's receipt, struck on a plate. Every value real, GitHub API 2026-08-11. */
 export const MakerPlate: React.FC<{ x: number; y: number; s?: number; z?: number;
   stars?: string }> = ({ x, y, s = 1, z = 84, stars = "18,265" }) => (
   <div style={{ position: "absolute", left: x, top: y, zIndex: z,
     padding: `${13 * s}px ${20 * s}px`, borderRadius: 8 * s,
-    background: "#F4EFE2", border: `${5 * s}px solid ${BRASSD}`, boxShadow: SH_D }}>
+    background: "#F7F3E7", border: `${5 * s}px solid ${BRASSD}`, boxShadow: SH_D }}>
     <div style={{ display: "flex", alignItems: "center", gap: 11 * s }}>
       <Img src={staticFile("logos/github.svg")}
         style={{ width: 38 * s, height: 38 * s, objectFit: "contain" }} />
@@ -409,15 +247,4 @@ export const MakerPlate: React.FC<{ x: number; y: number; s?: number; z?: number
     <div style={{ marginTop: 5 * s, fontFamily: MONO, fontWeight: 800, fontSize: 21 * s,
       letterSpacing: "0.10em", color: "#7A6A44" }}>★ {stars}  ·  MIT</div>
   </div>
-);
-
-/** a cast stencil nameplate — what a provider with no public mark gets. */
-export const Stencil: React.FC<{ t: string; x: number; y: number; s?: number; z?: number;
-  c?: string; fg?: string }> =
-  ({ t, x, y, s = 1, z = 80, c = "#E4DAC4", fg = "#2A2418" }) => (
-  <div style={{ position: "absolute", left: x, top: y, zIndex: z,
-    padding: `${6 * s}px ${13 * s}px`, borderRadius: 4 * s, background: c,
-    border: `${3 * s}px solid ${dkh(c, 0.26)}`, boxShadow: SH,
-    fontFamily: MONO, fontWeight: 800, fontSize: 20 * s, letterSpacing: "0.13em",
-    color: fg, whiteSpace: "nowrap" }}>{t}</div>
 );
