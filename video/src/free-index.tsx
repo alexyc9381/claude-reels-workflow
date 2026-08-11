@@ -1,6 +1,6 @@
 import React from "react";
 import { Composition, registerRoot } from "remotion";
-import { FreeReelPaper, FreeReelStage, FreeReelPress } from "./TagPaper";
+import { FreeReelPaper, FreeReelStage, FreeReelPress, FreeReelYard, FreeReelAlley, FreeReelShore } from "./TagPaper";
 import { FreeReel, FreeReelB, FreeReelC, FreeReelD, FreeReelE, FreeReelF, FREE_TOTAL, VARIANTS } from "./ClaudeFreeReel";
 import { S1Hook, S2, S11Cta } from "./TagScenes";
 
@@ -35,6 +35,15 @@ const Root: React.FC = () => (<>
     durationInFrames={767} {...V} />
 
   <Composition id="FreeReelPress" component={FreeReelPress}
+    durationInFrames={767} {...V} />
+
+  <Composition id="FreeReelYard" component={FreeReelYard}
+    durationInFrames={767} {...V} />
+
+  <Composition id="FreeReelAlley" component={FreeReelAlley}
+    durationInFrames={767} {...V} />
+
+  <Composition id="FreeReelShore" component={FreeReelShore}
     durationInFrames={767} {...V} />
 
   <Composition id="freeHook" component={S1Hook} durationInFrames={65} {...V} />

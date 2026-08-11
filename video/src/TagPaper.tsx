@@ -251,12 +251,33 @@ const Square: React.FC<{ cx: number; free?: boolean; P: typeof PAIRS[0]; punch: 
           trailing one, so it reads as a moving highlight and not a wipe.
           ⛔ HARD-EDGED SOLID PAINT, clipped by the card. No blur, no glow — the
           matte rule is a ship gate and the grep still reads 0. */}
-      {shine >= 0 && shine <= 1 && [0, 1].map((b) => (
-        <div key={"gl" + b} style={{ position: "absolute", top: -80, bottom: -80,
-          left: `${-30 + shine * 150 + b * 9}%`, width: b ? 22 : 76,
-          background: "#FFFFFF", opacity: (b ? 0.20 : 0.34) * Math.sin(shine * Math.PI),
-          transform: "rotate(-16deg)", zIndex: 9 }} />
-      ))}
+      {/* ⭐⭐ THE GLISTEN, MADE OBVIOUS. Round 23: *"even more obvious."*  The
+          first pass was two thin bands at 0.34 — technically a sweep, and on a
+          phone you would never notice it. Now: a wide bright body, a hard
+          leading EDGE (a highlight is only a highlight if it has a boundary),
+          a thin trailing band, and three hard sparkle crosses that pop as it
+          passes. ⛔ All solid paint, all hard-edged, clipped by the card. */}
+      {shine >= 0 && shine <= 1 && (<>
+        {[[0, 132, 0.62], [1, 46, 0.40], [2, 8, 0.92]].map(([bi, w, o]) => (
+          <div key={"gl" + bi} style={{ position: "absolute", top: -90, bottom: -90,
+            left: `${-34 + shine * 162 + (bi as number) * 7}%`, width: w as number,
+            background: "#FFFFFF",
+            opacity: (o as number) * Math.sin(shine * Math.PI), transform: "rotate(-16deg)",
+            zIndex: 9 }} />
+        ))}
+        {[[0.30, 0.26], [0.58, 0.62], [0.44, 0.84]].map(([px, py], k) => {
+          const near = 1 - Math.min(1, Math.abs(shine - (0.25 + k * 0.22)) * 6);
+          if (near <= 0) return null;
+          const r = 26 * near;
+          return (<div key={"sp" + k} style={{ position: "absolute",
+            left: `${(px as number) * 100}%`, top: `${(py as number) * 100}%`, zIndex: 10 }}>
+            <div style={{ position: "absolute", left: -r, top: -2.5, width: r * 2, height: 5,
+              background: "#FFFFFF", opacity: 0.95 * near }} />
+            <div style={{ position: "absolute", left: -2.5, top: -r, width: 5, height: r * 2,
+              background: "#FFFFFF", opacity: 0.95 * near }} />
+          </div>);
+        })}
+      </>)}
       <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 56,
         background: free ? "#237A54" : "#B3372A", display: "flex", alignItems: "center",
         justifyContent: "center", fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 32,
@@ -600,6 +621,335 @@ const PressEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP, shine }) => {
   </>);
 };
 
+/* ---- J · THE SCRAPYARD — an electromagnet takes it away ------------------
+   The verb is REMOVAL BY MACHINE: nothing hits the card, nothing breaks it, it
+   is simply picked up and gone. Dusk, rust, a crane jib, stacks of crushed car
+   cubes, a chain-link line, tyre piles.
+   ------------------------------------------------------------------------ */
+const YARD_STOCK = [
+  { bg: "#7A4A32", ink: "#241209", alt: "#5A3220" }, { bg: "#6E4038", ink: "#200E0B", alt: "#502A24" },
+  { bg: "#805238", ink: "#261408", alt: "#5E3A24" }, { bg: "#6A4642", ink: "#1E100E", alt: "#4C302C" },
+  { bg: "#7E4E2E", ink: "#24130A", alt: "#5C361C" }, { bg: "#74423C", ink: "#220F0C", alt: "#542C28" },
+  { bg: "#82543A", ink: "#261508", alt: "#603C26" }, { bg: "#6C4440", ink: "#1E100F", alt: "#4E2E2A" },
+  { bg: "#7C4C34", ink: "#241309", alt: "#5A3422" }, { bg: "#70443A", ink: "#200F0C", alt: "#502E26" },
+];
+const ScrapYard: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S, f, i }) => (<>
+  <div style={{ position: "absolute", inset: 0,
+    background: `linear-gradient(178deg, ${mix(S.bg, 0.40)} 0%, ${mix(S.bg, 0.14)} 46%, ${dark(S.bg, 0.80)} 100%)` }} />
+  <Halftone c={S.alt} n={16} o={0.14} />
+  {/* the low sun, flat */}
+  <div style={{ position: "absolute", left: 690, top: 150, width: 190, height: 190,
+    borderRadius: "50%", background: mix(S.bg, 0.62), opacity: 0.9 }} />
+  {/* the crane jib across the top, on a lattice */}
+  <div style={{ position: "absolute", left: -20, right: -20, top: 44, height: 26,
+    background: dark(S.bg, 0.44) }} />
+  {Array.from({ length: 16 }, (_, k) => (
+    <div key={"lt" + k} style={{ position: "absolute", left: -10 + k * 70, top: 44, width: 6,
+      height: 46, background: dark(S.bg, 0.40), transform: `skewX(${k % 2 ? 22 : -22}deg)` }} />
+  ))}
+  <div style={{ position: "absolute", left: -20, right: -20, top: 86, height: 12,
+    background: dark(S.bg, 0.36) }} />
+  {/* stacks of crushed cubes along the back */}
+  {[60, 210, 830, 950].map((x, k) => (
+    <div key={"cb" + k} style={{ position: "absolute", left: x - 62, top: GROUND - 180 - (k % 2) * 46,
+      width: 124, height: 180 + (k % 2) * 46, zIndex: 5 }}>
+      {[0, 1, 2, 3].map((r) => (
+        <div key={r} style={{ position: "absolute", left: (r % 2) * 6, top: r * 46, width: 118,
+          height: 42, borderRadius: 3, background: r % 2 ? dark(S.bg, 0.58) : dark(S.bg, 0.66),
+          border: `2px solid ${dark(S.bg, 0.44)}` }} />
+      ))}
+    </div>
+  ))}
+  {/* a chain-link fence line and the dirt */}
+  {Array.from({ length: 26 }, (_, k) => (
+    <div key={"fn" + k} style={{ position: "absolute", left: k * 40, top: GROUND - 88, width: 3,
+      height: 88, background: dark(S.bg, 0.50), opacity: 0.6 }} />
+  ))}
+  <div style={{ position: "absolute", left: 0, right: 0, top: GROUND - 92, height: 8,
+    background: dark(S.bg, 0.44) }} />
+  <div style={{ position: "absolute", left: 0, right: 0, top: GROUND, bottom: 0,
+    background: `linear-gradient(180deg, ${mix(S.bg, 0.16)} 0%, ${dark(S.bg, 0.72)} 100%)` }} />
+  {[120, 340, 700, 900].map((x, k) => (
+    <div key={"ty" + k} style={{ position: "absolute", left: x - 34, top: GROUND + 40 + (k % 2) * 40,
+      width: 68, height: 26, borderRadius: 13, border: `9px solid ${dark(S.bg, 0.64)}` }} />
+  ))}
+</>);
+
+const MagnetEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP, shine }) => {
+  const drop = ff < -6 ? 0 : E(ff, -6, 2, 0, 1, IO);       // the magnet comes down
+  const grab = ff < 1 ? 0 : Math.min(1, (ff - 1) / 3);      // it clamps
+  const haul = ff < 4 ? 0 : E(ff, 4, 20, 0, 1, IN_Q);       // and takes it up
+  const magY = -140 + drop * (SQY - 40) - haul * 300;
+  const cardY = -haul * (SQY + SQH + 120);
+  const lever = pf < 0 ? 0 : Math.min(1, pf / 9);
+  return (<>
+    {/* the chain, always paying out to wherever the magnet is */}
+    <div style={{ position: "absolute", left: LX - 6, top: -20, width: 12,
+      height: Math.max(0, magY + 150), background: "#4A403A", zIndex: 28 }} />
+    {haul < 1 && (
+      <div style={{ position: "absolute", inset: 0, zIndex: 22,
+        transform: `translateY(${cardY}px)` }}>
+        <Square cx={LX} P={P} punch={punchP} shine={shine} z={22} />
+      </div>
+    )}
+    {/* the electromagnet: a heavy disc with a coil band */}
+    <div style={{ position: "absolute", left: LX - 128, top: magY, width: 256, height: 96,
+      zIndex: 30, boxShadow: BOXSH }}>
+      <div style={{ position: "absolute", inset: 0, borderRadius: 10,
+        background: "linear-gradient(180deg,#6E747C,#33383E)" }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 44, height: 20,
+        background: "#C0392B", opacity: 0.85 + 0.15 * Math.abs(Math.sin(f / 4)) }} />
+      <div style={{ position: "absolute", left: 18, right: 18, bottom: -14, height: 20,
+        borderRadius: 6, background: "#2A2E33" }} />
+    </div>
+    {/* grit shaken off the card as the magnet takes hold */}
+    {grab > 0.1 && haul < 0.9 && [0, 1, 2, 3, 4].map((k) => (
+      <div key={"gt" + k} style={{ position: "absolute", left: LX - 90 + k * 45,
+        top: SQY + 40 + ((f * 5 + k * 17) % 60), width: 7, height: 7, borderRadius: 4,
+        background: mix("#8A7A66", 0.3), opacity: 0.7 * (1 - haul), zIndex: 31 }} />
+    ))}
+    {/* the control box and the operator */}
+    <div style={{ position: "absolute", left: 86, top: FEET - 96, width: 72, height: 62,
+      borderRadius: 8, background: "#4A4E52", zIndex: 26, boxShadow: BOXSH }} />
+    <div style={{ position: "absolute", left: 114, top: FEET - 122 - lever * 6, width: 12,
+      height: 34, borderRadius: 6, background: "#C0392B", zIndex: 27,
+      transform: `rotate(${-14 + lever * 26}deg)`, transformOrigin: "50% 100%" }} />
+    <div style={{ position: "absolute", left: 176, top: FEET - 12, width: 116, height: 18,
+      borderRadius: "50%", background: "rgba(14,12,10,0.30)", zIndex: 24 }} />
+    <Claudie x={234} y={FEET} s={0.92} f={f} z={27} face={-1}
+      costume={{ constr: 1, stern: ff < 4 ? 1 : 0, cheer: ff >= 12 ? 1 : 0 }} />
+  </>);
+};
+
+/* ---- K · THE ALLEY — knocked flat by a strike ---------------------------
+   The verb is IMPACT FROM OFF-FRAME. Nothing about the card changes until
+   something arrives at speed and takes it out.
+   ------------------------------------------------------------------------ */
+const ALLEY_STOCK = [
+  { bg: "#2E4E52", ink: "#0C1A1C", alt: "#1E3639" }, { bg: "#38424E", ink: "#0E1218", alt: "#262E38" },
+  { bg: "#2C5048", ink: "#0C1C18", alt: "#1C3830" }, { bg: "#3A4452", ink: "#0E1218", alt: "#28303C" },
+  { bg: "#305054", ink: "#0C1C1E", alt: "#203A3C" }, { bg: "#364656", ink: "#0E1218", alt: "#243040" },
+  { bg: "#2E5250", ink: "#0C1C1C", alt: "#1E3A38" }, { bg: "#3C4450", ink: "#0E1218", alt: "#2A303A" },
+  { bg: "#324E56", ink: "#0C1A1E", alt: "#22383E" }, { bg: "#38465A", ink: "#0E1220", alt: "#263244" },
+];
+const Alley: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S, f, i }) => (<>
+  <div style={{ position: "absolute", inset: 0,
+    background: `linear-gradient(178deg, ${dark(S.bg, 0.70)} 0%, ${S.bg} 62%, ${mix(S.bg, 0.10)} 100%)` }} />
+  <Halftone c={S.alt} n={18} o={0.12} />
+  {/* the overhead monitors */}
+  {[220, 520, 820].map((x, k) => (
+    <div key={"mo" + k} style={{ position: "absolute", left: x - 92, top: 44, width: 184, height: 96,
+      borderRadius: 8, background: dark(S.bg, 0.66), border: `5px solid ${dark(S.bg, 0.48)}`,
+      zIndex: 6 }}>
+      {[0, 1, 2].map((r) => (
+        <div key={r} style={{ position: "absolute", left: 14, right: 14, top: 16 + r * 24,
+          height: 10, borderRadius: 3, background: mix(S.bg, 0.30), opacity: 0.7 - r * 0.16 }} />
+      ))}
+    </div>
+  ))}
+  {/* the maple lane, in boards */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: GROUND - 60, bottom: 0,
+    background: "linear-gradient(180deg,#C08A48 0%,#8A5C28 100%)" }} />
+  {Array.from({ length: 22 }, (_, k) => (
+    <div key={"bo" + k} style={{ position: "absolute", left: 0, right: 0, top: GROUND - 60 + k * 14,
+      height: 2, background: "#6E4418", opacity: 0.45 }} />
+  ))}
+  {/* the gutters */}
+  {[GROUND - 74, PH - 40].map((y, k) => (
+    <div key={"gu" + k} style={{ position: "absolute", left: 0, right: 0, top: y, height: 22,
+      borderRadius: 11, background: dark(S.bg, 0.62) }} />
+  ))}
+  {/* the arrows on the lane */}
+  {[300, 420, 540, 660, 780].map((x, k) => (
+    <div key={"ar" + k} style={{ position: "absolute", left: x - 12, top: GROUND + 24 + (k % 3) * 16,
+      width: 24, height: 30, background: "#6E4418", opacity: 0.5,
+      clipPath: "polygon(50% 0,100% 100%,0 100%)" }} />
+  ))}
+  {/* pins standing at the back of the deck */}
+  {[[86, 0], [126, 1], [166, 0], [206, 1]].map(([x, r], k) => (
+    <div key={"pn" + k} style={{ position: "absolute", left: (x as number) + 700,
+      top: GROUND - 118 + (r as number) * 10, width: 26, height: 62,
+      borderRadius: "13px 13px 6px 6px", background: "#F2EFE4", zIndex: 5 }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 18, height: 7,
+        background: "#C0392B" }} />
+    </div>
+  ))}
+</>);
+
+const StrikeEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP, shine }) => {
+  const roll = ff < -10 ? 0 : E(ff, -10, 1, 0, 1, LIN);     // the ball comes in
+  const hit = ff < 1 ? 0 : E(ff, 1, 16, 0, 1, OUT);          // and it goes over
+  const wind = pf < 0 ? 0 : Math.min(1, pf / 10);
+  const ballX = -160 + roll * (LX - SQ / 2 + 60 + 160);
+  const ballY = SQY + SQH - 46;
+  return (<>
+    <div style={{ position: "absolute", inset: 0, zIndex: 22,
+      transform: `translate(${hit * 210}px, ${hit * hit * 260}px) rotate(${hit * 84}deg)`,
+      transformOrigin: `${LX + SQ / 2}px ${SQY + SQH}px`,
+      opacity: 1 - Math.max(0, hit - 0.72) * 3.4 }}>
+      <Square cx={LX} P={P} punch={punchP} shine={shine} z={22} />
+    </div>
+    {/* the ball, and the shine on it */}
+    {roll > 0 && hit < 0.6 && (
+      <div style={{ position: "absolute", left: ballX - 44, top: ballY - 44, width: 88, height: 88,
+        borderRadius: 44, background: "radial-gradient(circle at 36% 32%, #5A6470 0%, #262C34 66%)",
+        zIndex: 29, boxShadow: BOXSH }}>
+        {[[26, 24], [44, 30], [34, 44]].map(([hx, hy], k) => (
+          <div key={k} style={{ position: "absolute", left: hx, top: hy, width: 12, height: 12,
+            borderRadius: 6, background: "#141920" }} />
+        ))}
+      </div>
+    )}
+    {/* the trail it leaves down the boards */}
+    {roll > 0.05 && hit < 0.4 && [0, 1, 2].map((k) => (
+      <div key={"tr" + k} style={{ position: "absolute", left: ballX - 90 - k * 74, top: ballY - 5,
+        width: 66, height: 10, borderRadius: 5, background: "#F2EFE4",
+        opacity: 0.34 - k * 0.10, zIndex: 28 }} />
+    ))}
+    {/* the bowler, following through */}
+    <div style={{ position: "absolute", left: 108, top: FEET - 12, width: 116, height: 18,
+      borderRadius: "50%", background: "rgba(6,10,12,0.34)", zIndex: 24 }} />
+    <div style={{ position: "absolute", inset: 0, zIndex: 27,
+      transform: `rotate(${-wind * 12 + (ff >= -10 && ff < 2 ? 16 : 0)}deg)`,
+      transformOrigin: `${166}px ${FEET}px` }}>
+      <Claudie x={166} y={FEET} s={0.92} f={f} z={27} face={1}
+        costume={{ suit: 1, stern: ff < 2 ? 1 : 0, cheer: ff >= 6 ? 1 : 0 }} />
+    </div>
+  </>);
+};
+
+/* ---- L · THE SHORE — the sea takes it -----------------------------------
+   The verb is EROSION. Nothing strikes it and nothing lifts it; the water comes
+   in, and when it goes out the card is not there any more. The quietest of the
+   six and the only one where the paid card is not destroyed but simply taken.
+   ------------------------------------------------------------------------ */
+/* ⛔⛔ THE SHORE IS THE BRIGHT ONE, AND I GOT THIS BACKWARDS FIRST. It failed
+   against the stage (17.2) and the scrapyard (18.9), so I DARKENED it — and
+   J/L got worse, 18.9 -> 15.8, because darkening moved it TOWARD the scrapyard.
+   Guessing a direction on a crowded axis is a coin flip. Measured properly, the
+   six sit at I 132 · K 138 · L 141 · J 142 · H 146 · G 174: five bunched at the
+   bottom and one empty band from 146 to 174. **Plot the axis, find the gap, move
+   into the gap.** A bright hazy shore is also a real thing. */
+const SHORE_STOCK = [
+  { bg: "#828F9B", ink: "#0A121B", alt: "#616D78" }, { bg: "#868F9B", ink: "#0B121B", alt: "#656D79" },
+  { bg: "#81909B", ink: "#0A141B", alt: "#606F7A" }, { bg: "#888D99", ink: "#0B111C", alt: "#676C76" },
+  { bg: "#81919D", ink: "#0A151C", alt: "#61717C" }, { bg: "#868F9B", ink: "#0B121B", alt: "#656E78" },
+  { bg: "#82919C", ink: "#0A141C", alt: "#62707B" }, { bg: "#888D9A", ink: "#0B111B", alt: "#666D77" },
+  { bg: "#818F9E", ink: "#0A121C", alt: "#606E7D" }, { bg: "#858F9C", ink: "#0B121C", alt: "#646D7A" },
+];
+const Shore: React.FC<{ S: typeof STOCK[0]; f: number; i: number }> = ({ S, f, i }) => (<>
+  <div style={{ position: "absolute", inset: 0,
+    background: `linear-gradient(178deg, ${mix(S.bg, 0.52)} 0%, ${mix(S.bg, 0.26)} 40%, ${mix(S.bg, 0.04)} 100%)` }} />
+  <Halftone c={S.alt} n={16} o={0.10} />
+  {/* the sun sitting on the water */}
+  <div style={{ position: "absolute", left: 420, top: 176, width: 164, height: 164,
+    borderRadius: "50%", background: "#F2C48A", opacity: 0.92 }} />
+  {/* the sea, in flat bands, the nearer ones lighter */}
+  {[0, 1, 2, 3, 4].map((k) => (
+    <div key={"se" + k} style={{ position: "absolute", left: -20, right: -20,
+      top: 336 + k * 30, height: 32, background: mix(S.bg, 0.16 + k * 0.07) }} />
+  ))}
+  {Array.from({ length: 16 }, (_, k) => (
+    <div key={"gl" + k} style={{ position: "absolute",
+      left: 430 + Math.sin(k * 1.7 + f / 22) * 60 + (k % 3) * 20,
+      top: 344 + k * 9, width: 90 - k * 3, height: 5, borderRadius: 3,
+      background: "#F2C48A", opacity: 0.55 - k * 0.025 }} />
+  ))}
+  {/* three gulls, drifting */}
+  {[[180, 150], [260, 120], [820, 168]].map(([gx, gy], k) => (
+    <div key={"gu" + k} style={{ position: "absolute",
+      left: (gx as number) + Math.sin(f / 40 + k) * 16, top: (gy as number), zIndex: 6 }}>
+      <div style={{ position: "absolute", left: 0, top: 0, width: 22, height: 4, borderRadius: 3,
+        background: dark(S.bg, 0.40), transform: `rotate(${-18 + Math.sin(f / 9 + k) * 8}deg)` }} />
+      <div style={{ position: "absolute", left: 20, top: 0, width: 22, height: 4, borderRadius: 3,
+        background: dark(S.bg, 0.40), transform: `rotate(${18 - Math.sin(f / 9 + k) * 8}deg)` }} />
+    </div>
+  ))}
+  {/* wet sand, with a reflected band */}
+  <div style={{ position: "absolute", left: 0, right: 0, top: 494, bottom: 0,
+    background: `linear-gradient(180deg, ${mix(S.bg, 0.62)} 0%, ${mix(S.bg, 0.44)} 40%, ${mix(S.bg, 0.16)} 100%)` }} />
+  <div style={{ position: "absolute", left: 0, right: 0, top: 494, height: 10,
+    background: "#F2E0C0", opacity: 0.5 }} />
+  {Array.from({ length: 7 }, (_, k) => (
+    <div key={"rf" + k} style={{ position: "absolute", left: 380 + Math.sin(k * 2.1 + f / 18) * 40,
+      top: 520 + k * 26, width: 220 - k * 20, height: 6, borderRadius: 3,
+      background: "#F2C48A", opacity: 0.26 - k * 0.03 }} />
+  ))}
+  {/* dune grass at the near edges */}
+  {[24, 62, 960, 998].map((x, k) => (
+    <div key={"dg" + k} style={{ position: "absolute", left: x, top: PH - 150, zIndex: 8 }}>
+      {[0, 1, 2].map((b) => (
+        <div key={b} style={{ position: "absolute", left: b * 9, top: 0, width: 5, height: 100 - b * 14,
+          borderRadius: 3, background: dark(S.bg, 0.46),
+          transform: `rotate(${(b - 1) * 13 + Math.sin(f / 26 + k + b) * 4}deg)`,
+          transformOrigin: "50% 100%" }} />
+      ))}
+    </div>
+  ))}
+</>);
+
+const WaveEvent: React.FC<EventProps> = ({ P, f, ff, pf, punchP, shine }) => {
+  const inn = ff < -8 ? 0 : E(ff, -8, 4, 0, 1, IO);          // the water comes up
+  const out = ff < 6 ? 0 : E(ff, 6, 22, 0, 1, IO);           // and it goes back
+  const cover = Math.max(0, inn - out);
+  /* ⛔⛔ THE WATER STOPS BEFORE THE FREE CARD. Swept full width it washed over
+     BOTH, which breaks the only rule every one of these cuts shares. The sheet's
+     right edge runs to 510 at full cover; the free card starts at 526. */
+  const waveR = -60 + cover * 570;
+  /* the card dissolves under the water rather than being knocked or cut */
+  const eaten = ff < 2 ? 0 : E(ff, 2, 14, 0, 1, IO);
+  const watch = pf < 0 ? 0 : Math.min(1, pf / 10);
+  return (<>
+    {eaten < 1 && (
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: SQY + SQH,
+        overflow: "hidden", zIndex: 22 }}>
+        <div style={{ position: "absolute", inset: 0,
+          clipPath: `inset(0 0 ${eaten * 100}% 0)` }}>
+          <Square cx={LX} P={P} punch={punchP} shine={shine} z={22} />
+        </div>
+      </div>
+    )}
+    {/* foam bits carried off as it goes */}
+    {eaten > 0.05 && eaten < 0.98 && Array.from({ length: 9 }, (_, k) => {
+      const r = (n: number) => { const v = Math.sin(k * 23.7 + n * 5.3) * 4371.7; return v - Math.floor(v); };
+      return (<div key={"fm" + k} style={{ position: "absolute",
+        left: LX - SQ / 2 + r(1) * SQ - eaten * (60 + r(2) * 120),
+        top: SQY + SQH - eaten * SQH * 0.9 + r(3) * 40,
+        width: 12 + r(4) * 14, height: 8 + r(5) * 8, borderRadius: 8,
+        background: "#F2EFE4", opacity: (1 - eaten) * 0.8, zIndex: 31 }} />);
+    })}
+    {/* the wave itself: three solid sheets with a foam lip */}
+    {cover > 0.02 && [0, 1, 2].map((k) => (
+      <div key={"wv" + k} style={{ position: "absolute", left: waveR - (PW + 320) - k * 70,
+        top: SQY + SQH - 130 + k * 52, width: PW + 320, height: 150 - k * 22,
+        borderRadius: "0 90px 0 0", background: `rgba(214,232,240,${0.5 - k * 0.12})`,
+        zIndex: 30 - k }} />
+    ))}
+    {cover > 0.02 && (
+      <div style={{ position: "absolute", left: waveR - 118, top: SQY + SQH - 142,
+        width: 130, height: 164, borderRadius: "0 90px 0 0", background: "#F2EFE4",
+        opacity: 0.9, zIndex: 32 }} />
+    )}
+    {/* ⭐ THE WASH ACROSS THE SAND. The capped wave only crosses half the frame,
+        and the cut measured 8.76 against a 9.00 bar — the event was real but it
+        moved too few pixels. The sheet of water running up the beach and back is
+        the biggest mass in the scene and it costs nothing to add, because the
+        sand is BELOW both cards and can never touch the free one. */}
+    {[0, 1, 2].map((k) => {
+      const ph = Math.max(0, Math.min(1, inn * 1.15 - k * 0.12)) - Math.max(0, out * 1.1 - k * 0.1);
+      if (ph <= 0.01) return null;
+      return (<div key={"wash" + k} style={{ position: "absolute",
+        left: -60, top: 560 + k * 62, width: 60 + ph * (PW + 140), height: 46 - k * 8,
+        borderRadius: "0 40px 40px 0", background: "#F2EFE4",
+        opacity: (0.34 - k * 0.08) * Math.min(1, ph * 2.4), zIndex: 12 }} />);
+    })}
+    <div style={{ position: "absolute", left: 150, top: FEET - 12, width: 116, height: 18,
+      borderRadius: "50%", background: "rgba(6,12,20,0.28)", zIndex: 24 }} />
+    <Claudie x={208} y={FEET - watch * 4} s={0.92} f={f} z={27} face={-1}
+      costume={{ gaze: 1.4, cheer: ff >= 10 ? 1 : 0 }} />
+  </>);
+};
+
 export const PKITS: PaperKit[] = [
   { id: "dojo",  label: "THE DOJO · one stroke, the card falls in two",
     bed: "free_bed_g.wav", stocks: STOCK,       Dress: NightYard,  Event: SliceEvent },
@@ -607,6 +957,12 @@ export const PKITS: PaperKit[] = [
     bed: "free_bed_h.wav", stocks: STAGE_STOCK, Dress: StageYard,  Event: TrapEvent },
   { id: "press", label: "THE PRESS · flattened where it stands",
     bed: "free_bed_i.wav", stocks: PRESS_STOCK, Dress: PressFloor, Event: PressEvent },
+  { id: "yard",  label: "THE SCRAPYARD · an electromagnet takes it away",
+    bed: "free_bed_j.wav", stocks: YARD_STOCK,  Dress: ScrapYard,  Event: MagnetEvent },
+  { id: "alley", label: "THE ALLEY · knocked flat by a strike",
+    bed: "free_bed_k.wav", stocks: ALLEY_STOCK, Dress: Alley,      Event: StrikeEvent },
+  { id: "shore", label: "THE SHORE · the sea takes it",
+    bed: "free_bed_l.wav", stocks: SHORE_STOCK, Dress: Shore,      Event: WaveEvent },
 ];
 
 const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: boolean; k?: number }> =
@@ -645,7 +1001,7 @@ const PaperBeat: React.FC<{ i: number; paidAt: number; freeAt: number; hook?: bo
   /* ⭐ the glisten runs early, while the beat is still introducing the card —
      it is an attention cue, not a payoff, so it must be finished before the
      price lands rather than competing with it. */
-  const shine = f >= 3 && f <= 22 ? (f - 3) / 19 : -1;
+  const shine = f >= 3 && f <= 27 ? (f - 3) / 24 : -1;
 
   return (
     <AbsoluteFill>
@@ -711,18 +1067,34 @@ const PaperCta: React.FC<{ k?: number }> = ({ k = 0 }) => {
   return (
     <AbsoluteFill>
       <Panel>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        {/* ⛔⛔ THE CTA WAS THE ONLY FAILING SCENE, IN EVERY CUT. The ten marks
+            stagger in over ~30 frames and then NOTHING moves for the remaining
+            27 — measured 4.26 motion with a 27-frame dead run, while the body
+            scenes sit at 7.5-10.8. It read as "1/11 failing" on all six and I
+            had been treating it as a per-cut problem. It is one shared scene.
+            Three fixes, all continuous: a push like the beats have, a highlight
+            that sweeps the wall once the marks have landed, and a per-mark bob
+            so the wall is never a still photograph. */}
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden",
+          transform: `scale(${1 + Math.min(1, f / 62) * 0.055})`, transformOrigin: "50% 46%" }}>
           <K.Dress S={S} f={f} i={4} />
           {/* the ten free marks, pegged up as paper chips */}
           {PAIRS.map((p, k) => {
             const col = k % 5, row = Math.floor(k / 5);
             const t = E(f, 4 + k * 3, 4 + k * 3 + 8, 0, 1, BACK);
             const r = (n: number) => { const v = Math.sin(k * 19.3 + n * 5.1) * 4371.7; return v - Math.floor(v); };
+            const bob = Math.sin(f / (7 + (k % 4)) + k) * 4;
+            const sweep = f >= 40 && f <= 62 ? 1 - Math.min(1, Math.abs((f - 40) / 22 - (col + row * 0.4) / 6) * 5) : 0;
             return (
               <div key={p.free} style={{ position: "absolute", left: 52 + col * 186,
-                top: 150 + row * 208, width: 162, height: 190, zIndex: 30,
-                transform: `rotate(${(r(1) - 0.5) * 7}deg) scale(${t})`,
-                boxShadow: BOXSH }}>
+                top: 150 + row * 208 + bob, width: 162, height: 190, zIndex: 30,
+                transform: `rotate(${(r(1) - 0.5) * 7 + bob * 0.14}deg) scale(${t * (1 + sweep * 0.05)})`,
+                boxShadow: BOXSH, overflow: "hidden" }}>
+                {sweep > 0 && (
+                  <div style={{ position: "absolute", top: -40, bottom: -40, left: "-20%",
+                    width: 90, background: "#FFFFFF", opacity: 0.55 * sweep,
+                    transform: `translateX(${sweep * 180}%) rotate(-16deg)`, zIndex: 9 }} />
+                )}
                 <div style={{ position: "absolute", inset: 0, background: "#F7F3E6" }} />
                 <div style={{ position: "absolute", left: 35, top: 20, width: 92, height: 92,
                   background: "#FFFFFF", border: "4px solid #E2DCC8", display: "flex",
@@ -912,3 +1284,6 @@ export const makePaperReel = (k: number): React.FC => () => (
 export const FreeReelPaper = makePaperReel(0);   // G · THE DOJO
 export const FreeReelStage = makePaperReel(1);   // H · THE STAGE
 export const FreeReelPress = makePaperReel(2);   // I · THE PRESS
+export const FreeReelYard  = makePaperReel(3);   // J · THE SCRAPYARD
+export const FreeReelAlley = makePaperReel(4);   // K · THE ALLEY
+export const FreeReelShore = makePaperReel(5);   // L · THE SHORE
