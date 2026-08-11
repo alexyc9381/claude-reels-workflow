@@ -2,6 +2,7 @@ import React from "react";
 import { Composition, registerRoot } from "remotion";
 import { RepoReel, RepoReelB, RepoReelC, RepoReelD, REP_TOTAL, VARIANTS } from "./ClaudeRepoReel";
 import { S0Hook, S1, S2, S3, S4, S5, S6Cta } from "./RepScenes";
+import { HookPaywall, HookFuse, HookJackpot, HookFirehose } from "./RepHooks";
 
 /* Reel 99 "REPO". Board: storyboards/99-repo.md.
    FOUR delivery cuts, all from `makeReel(variant)` so a fix lands in every one.
@@ -28,6 +29,14 @@ const Root: React.FC = () => (<>
   <Composition id="repS4" component={S4}     durationInFrames={134} {...V} />
   <Composition id="repS5" component={S5}     durationInFrames={75}  {...V} />
   <Composition id="repS6" component={S6Cta}  durationInFrames={58}  {...V} />
+
+  {/* ⛔ HOOK DESIGN PREVIEWS — 110f each, and by construction they have NO VO,
+      NO music, NO SFX and NO real captions ([[feedback_label_preview_artifacts]]).
+      Judge the picture and the timing of the break only. */}
+  <Composition id="hookA-paywall"  component={HookPaywall}  durationInFrames={110} {...V} />
+  <Composition id="hookB-fuse"     component={HookFuse}     durationInFrames={110} {...V} />
+  <Composition id="hookC-jackpot"  component={HookJackpot}  durationInFrames={110} {...V} />
+  <Composition id="hookD-firehose" component={HookFirehose} durationInFrames={110} {...V} />
 </>);
 
 registerRoot(Root);
