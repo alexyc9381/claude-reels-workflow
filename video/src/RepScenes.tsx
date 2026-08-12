@@ -8,11 +8,11 @@ import {
   WOOD, WOODD, WOODL,
   Room, Rain, Scene, Cam, Beam, Strip, Motes, Chip, Plate, BigNum, Contact, Edge,
   Mark, MarkPlate, MarkCast, Token, MakerPlate, PROVIDERS, CLIENTS, ClientChip,
-  usePlace,
+  NAMED, NamedMark, usePlace,
 } from "./RepWorld";
 import {
   Counter, Pile, Fall, Chute, Flag429, Machine, Claude, Waiting, Stack, Cap,
-  Belt, Junction, Ledger, RepoCard, Burst,
+  Belt, Junction, Ledger, RepoCard, Burst, Rollers,
 } from "./RepProps";
 
 /* ===========================================================================
@@ -262,67 +262,66 @@ export const S1: React.FC = () => {
 export const S2: React.FC = () => {
   const f = useCurrentFrame();
   const p = usePlace("bench");
-  const CUT = [0, 38];
+  /* ⛔ THE CUT WAS LANDING MID-WORD. At local f38 (7.20s) it killed the LLAMA
+     card 0.13s after the word started, so the fourth name never had a frame to
+     itself. "all for free" starts at 7.65s = local f52, so the cut moves to f48
+     (the same 4-frame picture lead) and all four names now live in shot A. */
+  const CUT = [0, 48];
   const shot = CUT.filter((c) => f >= c).length - 1;
   const lf = f - CUT[shot];
 
   if (shot === 0) {
-    const T = [{ x: 212, i: 0, at: 1 }, { x: 508, i: 1, at: 7 }, { x: 806, i: 3, at: 13 }];
+    /* ⛔⛔ THE MARK MATCHES THE WORD. This shot shipped for several rounds with
+       the VO saying "GPT-5, Claude, Gemini, Llama" while the picture landed
+       Google, NVIDIA and HuggingFace — every mark on screen belonging to a
+       different company from the word in the viewer's ear.
+       Every `at` below is the measured onset of the word being spoken, minus
+       the house 4-frame picture lead:
+         GPT-5 6.06s -> f0 · CLAUDE 6.44 -> f11 · GEMINI 6.82 -> f23 · LLAMA 7.07 -> f30
+       They land on NEUTRAL cards, not gold tokens: a gold token in this reel
+       means "free tokens you get", and two of these four supply none. */
     return (
-      <Scene p={p} slug="REAL PROVIDERS  ·  FREE TIERS" push={[0, 38, 1.05]} vig={0.42}>
+      <Scene p={p} slug="THE MODELS EVERYONE NAMES" push={[0, 48, 1.05]} vig={0.42}>
         <Room p={p} f={f} />
-        <Belt y={148} f={f} z={8} s={0.54} speed={2.2} n={5} from={1} />
-        {T.map((t, k) => {
-          const on = E(lf, t.at, t.at + 8, 0, 1, BACK);
+        <Belt y={140} f={f} z={8} s={0.52} speed={2.2} n={5} from={1} />
+        {NAMED.map((c, k) => {
+          const on = E(lf, c.at, c.at + 7, 0, 1, OUT);
           if (on <= 0.02) return null;
-          /* ⛔ A FADE IS NOT AN EVENT. v1 cross-faded three tokens in and the
-             scene measured 4.98 against a 4.0 bar — technically passing, and
-             the flattest thing in the reel. Each one now DROPS in, squashes on
-             contact and kicks a two-frame ring, so three arrivals read as three
-             events and the scene has a rhythm. */
-          const land = Math.max(0, 1 - Math.abs(lf - (t.at + 8)) / 5);
+          const land = Math.max(0, 1 - Math.abs(lf - (c.at + 7)) / 4);
           return (
-            <div key={"tk" + k} style={{ position: "absolute", inset: 0, zIndex: 50 + k,
+            <div key={"nm" + k} style={{ position: "absolute", inset: 0, zIndex: 50 + k,
               opacity: Math.min(1, on * 1.6),
-              transform: `translateY(${(1 - on) * -230}px) scale(${(0.72 + on * 0.28) * (1 + land * 0.06)}, ${(0.72 + on * 0.28) * (1 - land * 0.10)})`,
-              transformOrigin: `${t.x}px 500px` }}>
-              <Token x={t.x} y={330} s={306} z={50 + k} markKey={P[t.i].k}
-                name={P[t.i].n} hasMark={P[t.i].mark} rot={-8 + k * 8} f={f} />
+              transform: `translateY(${(1 - on) * -260}px) scale(${1 + land * 0.08}, ${1 - land * 0.10})`,
+              transformOrigin: `${132 + k * 250}px 560px` }}>
+              <NamedMark i={k} x={132 + k * 250} y={392} s={218} z={50 + k} f={f} />
             </div>
           );
         })}
-        {/* the impact rings, on the frame each one actually lands */}
-        {T.map((t, k) => {
-          const land = (lf - (t.at + 8)) / 7;
-          if (land < 0 || land > 1) return null;
-          return <div key={"rg" + k} style={{ position: "absolute",
-            left: t.x - 150 * land - 60, top: 496 - 22 * land,
-            width: 300 * land + 120, height: 44 * land + 18, borderRadius: "50%",
-            border: `4px solid ${TOKL}`, opacity: (1 - land) * 0.6, zIndex: 48,
-            boxSizing: "border-box" }} />;
-        })}
-        <Claude x={128} base={772} s={0.78} z={82} f={f} gaze={0.8} cheer={0.5} />
-        <Chip t="EVERY ONE HAS A FREE TIER" y={634} x={276} z={98} c="#241F19" />
-        <Motes x={506} y={200} w={700} h={280} n={11} f={f} z={80} />
+        {NAMED.map((c, k) => (
+          <Rollers key={"nr" + k} y={702}
+            t={Math.min(1, E(lf, c.at + 6, c.at + 24, 0, 1, OUT))} f={f} n={3}
+            z={104 + k} from={k * 3} />
+        ))}
+        <Claude x={88} base={782} s={0.60} z={110} f={f} gaze={0.85} cheer={0.4} />
       </Scene>
     );
   }
 
-  const rise = E(lf, 4, 16, 0, 1, OUT);
+  const rise = E(lf, 2, 10, 0, 1, OUT);
   return (
-    <Scene p={p} slug="29 PROVIDERS  ·  ONE CLIENT" push={[38, 73, 1.05]} vig={0.46}>
+    <Scene p={p} slug="29 PROVIDERS  ·  ONE CLIENT" push={[48, 73, 1.05]} vig={0.46}>
       <Room p={p} f={f} />
       {/* they assemble one at a time, back row first — nine arrivals across the
           shot instead of one block appearing */}
       {[0, 1, 2, 3, 4].map((i, k) => {
-        const on = E(lf, k * 2, k * 2 + 7, 0, 1, BACK);
+        const on = E(lf, k, k + 5, 0, 1, BACK);
         if (on <= 0.02) return null;
         return <Token key={"r1" + k} x={128 + k * 186} y={212 - (1 - on) * 70}
           s={176 * (0.78 + on * 0.22)} z={50 + k} markKey={P[i].k} name={P[i].n}
           hasMark={P[i].mark} rot={(k % 2 ? 6 : -6) + (1 - on) * 30} f={f} />;
       })}
       {[5, 6, 7, 8].map((i, k) => {
-        const on = E(lf, 10 + k * 2, 17 + k * 2, 0, 1, BACK);
+        const on = E(lf, 5 + k, 10 + k, 0, 1, BACK);
         if (on <= 0.02) return null;
         return <Token key={"r2" + k} x={196 + k * 186} y={378 - (1 - on) * 70}
           s={176 * (0.78 + on * 0.22)} z={56 + k} markKey={P[i].k} name={P[i].n}
@@ -345,7 +344,7 @@ export const S2: React.FC = () => {
         fontFamily: MONO, fontWeight: 800, fontSize: 21, letterSpacing: "0.20em",
         color: "#F2E8D2", textShadow: "0 2px 8px rgba(0,0,0,0.55)" }}>YOU POINT THESE AT IT</div>
       {[0, 1, 2, 3, 4].map((i) => {
-        const on = E(lf, 14 + i * 3, 22 + i * 3, 0, 1, BACK);
+        const on = E(lf, 9 + i * 2, 15 + i * 2, 0, 1, BACK);
         if (on <= 0.02) return null;
         return (
           <div key={"cl" + i} style={{ position: "absolute", inset: 0, zIndex: 90 + i,

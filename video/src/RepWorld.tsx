@@ -246,6 +246,51 @@ export const CLIENTS = [
   { k: "cline",          n: "CLINE" },
 ] as const;
 
+/* ⛔⛔ THE NAMED MODELS — one card per word the VO actually says, and each one
+   lands ON its own measured onset. This is a sync bug I shipped for several
+   rounds: the VO said "GPT-5, Claude, Gemini, Llama" while the picture landed
+   Google, NVIDIA and HuggingFace, so every mark on screen belonged to a
+   different company from the word in the viewer's ear. The onsets come from
+   words_repo.json (GPT-5 6.06s, Claude 6.44, Gemini 6.82, Llama 7.07) and the
+   picture leads each by 4 frames, so the card is settled as the word lands.
+
+   ⚠️ THE STANDING CAVEAT, unchanged and stated in the delivery note every time:
+   of these four only GEMINI is a model you actually get free out of this repo.
+   CLAUDE is true as the CLIENT you point at the pool. GPT is not obtainable
+   through it, and every "llama" in the README is `llama.cpp`, the runtime.
+   They are drawn here because the reel has to show the word being spoken; they
+   are on NEUTRAL cards, never on a gold token, so nothing stamps "free tokens
+   of this model" on a mark that does not supply any. */
+export const NAMED = [
+  { k: "openai",       n: "GPT-5",  official: true, at: 0 },
+  { k: "claude",       n: "CLAUDE", at: 11 },
+  { k: "googlegemini", n: "GEMINI", at: 23 },
+  { k: "meta",         n: "LLAMA",  at: 30 },
+] as const;
+
+/** a named model on a neutral card — big mark, name under it. */
+export const NamedMark: React.FC<{ i: number; x: number; y: number; s?: number;
+  z?: number; f?: number; live?: number }> =
+  ({ i, x, y, s = 216, z = 60, f = 0, live = 1 }) => {
+  const c = NAMED[i % NAMED.length];
+  const src = (c as any).official ? `logos_official/${c.k}.svg` : `logos/${c.k}.svg`;
+  const w = idle(f, x * 0.023 + 2.9, live);
+  return (
+    <div style={{ position: "absolute", left: x - s / 2 + w.x, top: y - s / 2 + w.y,
+      width: s, zIndex: z, transform: `rotate(${w.rot * 0.8}deg)` }}>
+      <div style={{ width: s, height: s, borderRadius: s * 0.16, background: "#FBF8F1",
+        border: `${Math.max(4, s * 0.035)}px solid #C9BFA6`, boxSizing: "border-box",
+        boxShadow: SH_D, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Img src={staticFile(src)}
+          style={{ width: s * 0.60, height: s * 0.60, objectFit: "contain" }} />
+      </div>
+      <div style={{ width: s, textAlign: "center", marginTop: s * 0.05,
+        fontFamily: inter.fontFamily, fontWeight: 900, fontSize: s * 0.115,
+        letterSpacing: "0.04em", color: "#3A342A" }}>{c.n}</div>
+    </div>
+  );
+};
+
 /** a client mark on a light plate — the tools that spend the tokens. */
 export const ClientChip: React.FC<{ i: number; x: number; y: number; s?: number;
   z?: number; label?: boolean; f?: number; live?: number }> =

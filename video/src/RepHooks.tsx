@@ -8,7 +8,7 @@ import {
   Room, Scene, Cam, Beam, Motes, Chip, Plate, Edge, Token, MakerPlate, PROVIDERS,
   ClientChip, idle, usePlace,
 } from "./RepWorld";
-import { Counter, Pile, Fall, Claude, Stack, RepoCard, Burst, Belt } from "./RepProps";
+import { Counter, Pile, Fall, Claude, Stack, RepoCard, Burst, Belt, Rollers } from "./RepProps";
 import type { Place } from "./RepWorld";
 
 /* ===========================================================================
@@ -165,24 +165,6 @@ const Shop: React.FC<{ p: Place; f: number; shelf?: number; lamp?: number;
           background: WOODL }} />
       </div>
     )}
-  </>);
-};
-
-/** tokens knocked loose and rolling across the counter — the SECONDARY motion
-    an impact should always have. A break that only moves the thing it broke
-    reads as one animation; a break that scatters the room reads as force. */
-const Rollers: React.FC<{ y: number; t: number; f: number; n?: number; z?: number;
-  from?: number }> = ({ y, t, f, n = 6, z = 110, from = 0 }) => {
-  if (t <= 0.01) return null;
-  return (<>
-    {Array.from({ length: n }, (_, i) => {
-      const dir = i % 2 ? 1 : -1;
-      const sp = 300 + rnd(i + from, 7) * 520;
-      const x = W / 2 + dir * t * sp + (rnd(i + from, 11) - 0.5) * 140;
-      const hop = Math.abs(Math.sin(t * 7 + i)) * (1 - t) * 34;
-      return <Token key={"ro" + i} x={x} y={y - hop} s={46 + rnd(i + from, 13) * 22}
-        z={z + i} rot={dir * t * 900} plain f={f} />;
-    })}
   </>);
 };
 

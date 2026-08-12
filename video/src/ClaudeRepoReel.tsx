@@ -77,7 +77,7 @@ export const SCENES: Scene[] = [
   { at: 110, C: S1,     head: ["NOT 800 THOUSAND", "800 MILLION A MONTH"] },
   /* ⛔ "LLAMA" CAME OFF THIS HEADER — every "llama" in that README is
      `llama.cpp`, a runtime you point the proxy AT, not a model it serves. */
-  { at: 178, C: S2,     head: ["29 FREE PROVIDERS", "GEMINI, NVIDIA, CLOUDFLARE"] },
+  { at: 178, C: S2,     head: ["EVERY MODEL YOU NAMED", "29 FREE PROVIDERS, ONE KEY"] },
   { at: 251, C: S3,     head: ["YOU PAY PER PROVIDER", "HUNDREDS A MONTH, EACH"] },
   { at: 361, C: S4,     head: ["IT POOLS EVERY FREE TIER", "ONE /v1 ENDPOINT"] },
   { at: 495, C: S5,     head: ["RATE LIMITED? IT SWITCHES", "AUTO FAILOVER ON 429"] },
