@@ -1,0 +1,28 @@
+Comment "PLUGIN" and I'll send you all three links.
+
+👇 READ BELOW
+
+Claude Code ships with three empty plugin bays. These are the three modules that fill them, and all three are free and open source.
+
+121,174 combined GitHub stars. Nothing to pay, nothing to sign up for. Every number below was pulled from the GitHub API the day this was made, not from a blog post.
+
+★ 90,651 · claude-mem → memory that survives the session
+★ 28,826 · vercel-labs/skills → finds and ranks skills for your repo
+★ 1,697 · awesome-freellm-apis → 134+ free AI API keys, 40+ providers
+
+Awesome APIs is an index of free LLM keys with their real rate limits, plus ready to copy config for Claude Code, Cursor and Codex. Gemini, Groq, NVIDIA and OpenRouter are all in there on a permanently free tier, most with no card. Find Skills searches the open skills ecosystem, scores every candidate by install count and source reputation, and hands you the winner. Claude Mem captures what your session did, compresses it, and injects the relevant part back into the next one, so your project, your preferences and your decisions stop dying at the end of a chat.
+
+The part nobody mentions: Find Skills does not install anything for you. It searches and it recommends. The install is a separate command you run yourself, npx skills add, and its own docs say it identifies skills rather than deploying them. That is the better version. You get to see what it picked and why before it touches your project, which is exactly what you want from a tool reading an ecosystem you have not audited.
+
+One more honest note. The awesome-freellm-apis repo says 134+ APIs from 40+ providers in its description and 431+ from 30 providers on its front page. Those two disagree inside the repo itself, so check the provider table for the one you actually want.
+
+Full written breakdown, free to read:
+chenmedialabs.com/guides/the-three-claude-code-plugins-worth-installing
+
+Comment "PLUGIN" and I'll send you the full breakdown: all three repos, what each one really does, the setup order that works, and the claim to ignore.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #aitools #devtools #opensource #github #buildinpublic #aiagents #coding #softwaredevelopment #programming #developertools #freetools #aiworkflow #vibecoding #cursor #llm #machinelearning #techtips

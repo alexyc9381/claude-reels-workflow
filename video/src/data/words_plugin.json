@@ -1,0 +1,692 @@
+[
+{
+"start": 0.0,
+"end": 0.11,
+"word": " Stop"
+},
+{
+"start": 0.11,
+"end": 0.27,
+"word": " using"
+},
+{
+"start": 0.27,
+"end": 0.53,
+"word": " Claude"
+},
+{
+"start": 0.43,
+"end": 0.63,
+"word": " Code"
+},
+{
+"start": 0.63,
+"end": 0.79,
+"word": " until"
+},
+{
+"start": 0.79,
+"end": 1.01,
+"word": " you've"
+},
+{
+"start": 0.9,
+"end": 1.1,
+"word": " installed"
+},
+{
+"start": 1.1,
+"end": 1.32,
+"word": " these"
+},
+{
+"start": 1.32,
+"end": 1.6,
+"word": " three"
+},
+{
+"start": 1.72,
+"end": 1.98,
+"word": " plugins."
+},
+{
+"start": 2.58,
+"end": 2.66,
+"word": " If"
+},
+{
+"start": 2.66,
+"end": 2.74,
+"word": " you"
+},
+{
+"start": 2.74,
+"end": 2.94,
+"word": " don't"
+},
+{
+"start": 2.74,
+"end": 2.84,
+"word": " have"
+},
+{
+"start": 2.84,
+"end": 2.94,
+"word": " these"
+},
+{
+"start": 2.94,
+"end": 3.24,
+"word": " installed,"
+},
+{
+"start": 3.44,
+"end": 3.58,
+"word": " you're"
+},
+{
+"start": 3.58,
+"end": 3.72,
+"word": " only"
+},
+{
+"start": 3.72,
+"end": 3.9,
+"word": " using"
+},
+{
+"start": 3.85,
+"end": 4.03,
+"word": " about"
+},
+{
+"start": 4.03,
+"end": 4.37,
+"word": " 40%"
+},
+{
+"start": 4.69,
+"end": 4.81,
+"word": " of"
+},
+{
+"start": 4.81,
+"end": 4.91,
+"word": " what"
+},
+{
+"start": 5.04,
+"end": 5.16,
+"word": " Claude"
+},
+{
+"start": 5.16,
+"end": 5.34,
+"word": " is"
+},
+{
+"start": 5.34,
+"end": 5.56,
+"word": " actually"
+},
+{
+"start": 5.52,
+"end": 6.0,
+"word": " capable"
+},
+{
+"start": 6.0,
+"end": 6.34,
+"word": " of."
+},
+{
+"start": 6.71,
+"end": 6.87,
+"word": " First"
+},
+{
+"start": 6.87,
+"end": 7.05,
+"word": " is"
+},
+{
+"start": 7.05,
+"end": 7.29,
+"word": " Awesome"
+},
+{
+"start": 7.25,
+"end": 7.49,
+"word": " APIs,"
+},
+{
+"start": 7.73,
+"end": 7.79,
+"word": " which"
+},
+{
+"start": 7.79,
+"end": 7.93,
+"word": " lists"
+},
+{
+"start": 7.79,
+"end": 8.09,
+"word": " over"
+},
+{
+"start": 8.09,
+"end": 8.37,
+"word": " 134"
+},
+{
+"start": 8.37,
+"end": 8.95,
+"word": " plus"
+},
+{
+"start": 8.9,
+"end": 9.16,
+"word": " free"
+},
+{
+"start": 9.16,
+"end": 9.38,
+"word": " AI"
+},
+{
+"start": 9.38,
+"end": 9.78,
+"word": " APIs"
+},
+{
+"start": 9.89,
+"end": 10.05,
+"word": " from"
+},
+{
+"start": 10.05,
+"end": 10.09,
+"word": " over"
+},
+{
+"start": 10.09,
+"end": 10.43,
+"word": " 40"
+},
+{
+"start": 10.48,
+"end": 10.86,
+"word": " providers,"
+},
+{
+"start": 11.18,
+"end": 11.22,
+"word": " Gemini,"
+},
+{
+"start": 11.22,
+"end": 11.44,
+"word": " Groq,"
+},
+{
+"start": 11.29,
+"end": 11.51,
+"word": " and"
+},
+{
+"start": 11.51,
+"end": 11.67,
+"word": " NVIDIA,"
+},
+{
+"start": 12.07,
+"end": 12.15,
+"word": " all"
+},
+{
+"start": 12.15,
+"end": 12.27,
+"word": " with"
+},
+{
+"start": 12.27,
+"end": 12.35,
+"word": " a"
+},
+{
+"start": 12.35,
+"end": 12.67,
+"word": " permanent"
+},
+{
+"start": 12.66,
+"end": 12.9,
+"word": " free"
+},
+{
+"start": 12.9,
+"end": 13.06,
+"word": " tier."
+},
+{
+"start": 13.6,
+"end": 13.66,
+"word": " One"
+},
+{
+"start": 13.66,
+"end": 13.84,
+"word": " click"
+},
+{
+"start": 13.84,
+"end": 14.16,
+"word": " setup"
+},
+{
+"start": 14.2,
+"end": 14.26,
+"word": " in"
+},
+{
+"start": 14.26,
+"end": 14.38,
+"word": " your"
+},
+{
+"start": 14.38,
+"end": 14.6,
+"word": " Cursor,"
+},
+{
+"start": 14.52,
+"end": 14.72,
+"word": " Claude"
+},
+{
+"start": 14.72,
+"end": 14.9,
+"word": " Code,"
+},
+{
+"start": 14.92,
+"end": 15.0,
+"word": " or"
+},
+{
+"start": 15.0,
+"end": 15.38,
+"word": " Codex,"
+},
+{
+"start": 15.58,
+"end": 15.62,
+"word": " and"
+},
+{
+"start": 15.62,
+"end": 15.7,
+"word": " you"
+},
+{
+"start": 15.7,
+"end": 15.86,
+"word": " never"
+},
+{
+"start": 16.06,
+"end": 16.32,
+"word": " hit"
+},
+{
+"start": 16.32,
+"end": 16.42,
+"word": " your"
+},
+{
+"start": 16.42,
+"end": 16.58,
+"word": " paid"
+},
+{
+"start": 16.44,
+"end": 16.68,
+"word": " limits"
+},
+{
+"start": 16.68,
+"end": 16.94,
+"word": " ever"
+},
+{
+"start": 16.94,
+"end": 17.2,
+"word": " again."
+},
+{
+"start": 17.68,
+"end": 17.88,
+"word": " Second"
+},
+{
+"start": 17.88,
+"end": 18.08,
+"word": " is"
+},
+{
+"start": 18.08,
+"end": 18.22,
+"word": " Find"
+},
+{
+"start": 18.18,
+"end": 18.46,
+"word": " Skills."
+},
+{
+"start": 18.74,
+"end": 18.78,
+"word": " Just"
+},
+{
+"start": 18.76,
+"end": 18.92,
+"word": " tell"
+},
+{
+"start": 18.92,
+"end": 19.1,
+"word": " Claude"
+},
+{
+"start": 18.99,
+"end": 19.11,
+"word": " what"
+},
+{
+"start": 19.11,
+"end": 19.21,
+"word": " you're"
+},
+{
+"start": 19.21,
+"end": 19.45,
+"word": " building"
+},
+{
+"start": 19.53,
+"end": 19.63,
+"word": " and"
+},
+{
+"start": 19.63,
+"end": 19.69,
+"word": " it"
+},
+{
+"start": 19.69,
+"end": 19.89,
+"word": " finds"
+},
+{
+"start": 20.04,
+"end": 20.2,
+"word": " and"
+},
+{
+"start": 20.2,
+"end": 20.42,
+"word": " installs"
+},
+{
+"start": 20.42,
+"end": 20.6,
+"word": " the"
+},
+{
+"start": 20.6,
+"end": 20.74,
+"word": " right"
+},
+{
+"start": 20.63,
+"end": 20.85,
+"word": " skills"
+},
+{
+"start": 20.85,
+"end": 21.05,
+"word": " for"
+},
+{
+"start": 21.05,
+"end": 21.15,
+"word": " you"
+},
+{
+"start": 21.15,
+"end": 21.39,
+"word": " automatically."
+},
+{
+"start": 22.19,
+"end": 22.27,
+"word": " And"
+},
+{
+"start": 22.27,
+"end": 22.33,
+"word": " the"
+},
+{
+"start": 22.33,
+"end": 22.47,
+"word": " third"
+},
+{
+"start": 22.44,
+"end": 22.56,
+"word": " is"
+},
+{
+"start": 22.56,
+"end": 22.74,
+"word": " Claude"
+},
+{
+"start": 22.74,
+"end": 22.9,
+"word": " Mem,"
+},
+{
+"start": 22.9,
+"end": 23.0,
+"word": " which"
+},
+{
+"start": 23.0,
+"end": 23.08,
+"word": " gives"
+},
+{
+"start": 23.08,
+"end": 23.36,
+"word": " Claude"
+},
+{
+"start": 23.32,
+"end": 23.56,
+"word": " actual"
+},
+{
+"start": 23.56,
+"end": 23.8,
+"word": " memory,"
+},
+{
+"start": 23.83,
+"end": 24.07,
+"word": " so"
+},
+{
+"start": 24.07,
+"end": 24.15,
+"word": " it"
+},
+{
+"start": 24.15,
+"end": 24.31,
+"word": " stops"
+},
+{
+"start": 24.43,
+"end": 24.73,
+"word": " forgetting"
+},
+{
+"start": 24.73,
+"end": 24.91,
+"word": " your"
+},
+{
+"start": 24.91,
+"end": 25.11,
+"word": " project,"
+},
+{
+"start": 25.04,
+"end": 25.3,
+"word": " your"
+},
+{
+"start": 25.3,
+"end": 25.54,
+"word": " preferences,"
+},
+{
+"start": 25.74,
+"end": 25.78,
+"word": " and"
+},
+{
+"start": 25.76,
+"end": 25.86,
+"word": " the"
+},
+{
+"start": 25.86,
+"end": 26.04,
+"word": " decisions"
+},
+{
+"start": 26.1,
+"end": 26.32,
+"word": " you"
+},
+{
+"start": 26.32,
+"end": 26.42,
+"word": " make"
+},
+{
+"start": 26.44,
+"end": 26.68,
+"word": " across"
+},
+{
+"start": 26.68,
+"end": 26.88,
+"word": " your"
+},
+{
+"start": 26.88,
+"end": 27.1,
+"word": " different"
+},
+{
+"start": 26.98,
+"end": 27.14,
+"word": " chats."
+},
+{
+"start": 27.54,
+"end": 28.02,
+"word": " To"
+},
+{
+"start": 28.02,
+"end": 28.18,
+"word": " try"
+},
+{
+"start": 28.18,
+"end": 28.3,
+"word": " these"
+},
+{
+"start": 28.18,
+"end": 28.22,
+"word": " for"
+},
+{
+"start": 28.18,
+"end": 28.38,
+"word": " yourself,"
+},
+{
+"start": 28.42,
+"end": 28.68,
+"word": " comment"
+},
+{
+"start": 28.98,
+"end": 29.24,
+"word": " PLUGIN"
+},
+{
+"start": 29.24,
+"end": 29.36,
+"word": " down"
+},
+{
+"start": 29.36,
+"end": 29.5,
+"word": " below"
+},
+{
+"start": 29.36,
+"end": 29.47,
+"word": " and"
+},
+{
+"start": 29.47,
+"end": 29.51,
+"word": " I'll"
+},
+{
+"start": 29.51,
+"end": 29.65,
+"word": " send"
+},
+{
+"start": 29.66,
+"end": 29.74,
+"word": " you"
+},
+{
+"start": 29.74,
+"end": 29.82,
+"word": " the"
+},
+{
+"start": 29.82,
+"end": 29.94,
+"word": " link"
+},
+{
+"start": 30.22,
+"end": 30.6,
+"word": " immediately."
+}
+]

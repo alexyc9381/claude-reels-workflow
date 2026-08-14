@@ -429,6 +429,30 @@ a stage line, and it is another way to look like nothing is happening. Put one l
 foreground (feet low in frame, often cropped) and one small back near the horizon. Same two
 characters, and suddenly the frame has space in it.
 
+### ⭐⭐ A CUT IS NOT AN EVENT (reel 104 — a correction to `docs/THE-OPEN.md`)
+
+That doc says **"three to four shots, never one"**, and its reasoning is right as far as it goes:
+a single establishing wide is a poster with one beat. But it does not cover the failure it
+directly caused on reel 104. A five-shot open built to satisfy it scored **better on every number
+the doc gives** — 5 shots, open motion 9.97, no dead per-second bucket — and was rejected anyway:
+
+> *"the first few scenes are way too boring, it's just cuts and then nothing happens. It should
+> just be ONE scene but then something actually interesting HAPPENS."*
+
+**Four framings in which nothing happens is four posters in a row.** The doc optimises the thing
+that is easy to count (shot count) and misses the thing that decides whether an open works.
+
+**The rule: an open needs ONE THING TO HAPPEN, with a beginning, a middle and an end. Reach for
+shot count only if you cannot find an event.** Reel 104 shipped one locked 2.57s framing in which
+three plugins eject off a wall and slam onto a counter one-two-three; open motion went 9.97 → 12.10
+with FEWER cuts.
+
+⛔ And when you rewrite a shared open, **re-measure every variant** — that rewrite silently dropped
+the frame-0 cream plate on two of three cuts (14.4% against an 18% bar) because only one cut's hero
+object happened to be cream.
+
+---
+
 ## 3. Scene & screen layout
 
 **⛔ Enlarging a container does NOT re-lay-out its contents.** Reel 79's cabinets were scaled up and
@@ -961,6 +985,46 @@ content at all for its first second, a sprite stopped AT a gate instead of walki
 it, and the CTA prop parked at local 26 of 65. Fix the cause; let the push do only its own
 job. (Reel 96 went to median **9.29, 0 of 9 failing, zero dead frames.**)
 
+### ⭐⭐⭐ CONTAINERS vs DEPICTIONS vs TEXT — the two failures either side of the target (reel 104)
+
+Reel 104 was rejected twice in a row for opposite reasons, and the pair is the most useful thing
+in this file.
+
+**Failure 1 — the CONTAINER.** *"Each scene doesn't actually represent what's being spoken… it's
+just three little cards… I'm watching the video but I'm not really getting anything from seeing the
+animations."* A box with a logo on it is a container for the idea "a plugin"; it is not a picture of
+what that plugin DOES. Three identical boxes carry **one bit of information** (there are three) for
+two and a half seconds.
+
+⭐ **The tell is in the script.** The VO said the repo *"**lists** over 134 APIs"* and the shot drew
+keys on hooks. It said memory works *"across your different **chats**"* and the shot drew labelled
+trays. **Draw the noun and the verb the sentence actually uses.**
+
+**Failure 2 — the TEXT.** Fixing failure 1 by adding lists and tables produced *"a lot of the ways
+here is just too much text. I don't want to see text in animation. Animation should not be text.
+Animation should be magical, interesting, stimulating."* Counted on that build: ~30 text elements in
+one shot, 12 in another, 5 per card. The density was right and the MEDIUM was wrong — see §"a number
+MOVES to its value" below.
+
+**The target is between them: information, carried graphically.**
+
+| the information | container (nothing) | text (unwatchable) | depiction (right) |
+|---|---|---|---|
+| "40% of what it can do" | a lamp grid | a 6-row checklist | **ten segments, four lit**, no numeral |
+| "over 40 providers" | keys on hooks | a 10-row table | **forty real logo tiles landing**, countable |
+| a per-item count | — | a numeral column | **the bar length under each tile** |
+| "across your different chats" | labelled trays | key/value rows | **coloured bars crossing a session boundary** |
+
+**The test, and it is cheap:** write the VO line next to the shot and ask what the picture ADDS. If
+the answer is "it shows there are three of them", it is a container. If the answer requires reading,
+it is text. **Both are catchable on the storyboard, before a frame is rendered.**
+
+⭐ And this is not only a craft win: on reel 104 the depiction pass fixed a motion bucket that three
+separate rounds of scan-bars, travel-bands and mid-scene events could not (6.3-6.9 → 8.0-8.5).
+**Real content beats motion tricks.**
+
+---
+
 ## 4. Real-world data (logos, repos, brands)
 
 **⛔ `<Img>` cannot play a video.** A clip slot wired with `Img src={staticFile("clip.mp4")}` renders
@@ -1195,6 +1259,26 @@ On reel 79 the bed and the VO both sat at ≈ -20 dB mean, and the bed gain was 
 sources that is a gain around **0.28–0.32**, not 0.10. Fade the bed up from ~0.22 at frame 0 so the
 hook is not silent.
 
+### ⛔⛔⛔ CHECK THE BED ACTUALLY HAS A `volume` PROP (reel 104 — house-wide)
+
+`LEVELS.MUSIC` existing in `SoundKit.tsx` does **not** mean it is applied. Reel 104 and reel 103
+both play the bed as a bare `<Audio src={staticFile(v.bed)} />` — **no volume prop at all** — so the
+bed runs at full file level and the house constant is decorative. Grep every reel for it.
+
+Measured consequence on reel 104 before the fix:
+
+    bed  -29.3 dB at the top, rising to -26.2 dB by the CTA   (the PASSAGE builds)
+    VO   peaks -17.5 dB
+    => 6.4 dB of separation. A dialogue bed wants 10-15.
+
+⭐ **The fix is a real sidechain, not a flat trim.** Generate a per-frame duck from the VO's OWN
+envelope (fast attack ~3f, slow release ~14f) into a JSON the reel imports, de-trend the passage's
+own rise, and ramp off over the last 0.6s. Reel 104's mix went from climbing to **flat at ~-21 dB**
+across the whole runtime. *"The music gets loud at the end"* is usually the passage building, not
+the mix.
+⛔ Do NOT multiply the duck by `LEVELS.MUSIC` as well — that double-attenuates. On reel 104 it put
+the bed at -45 dB, inaudible, and would have failed `MUSIC_ONSET_0`.
+
 - SFX one-shots ride 0.26–0.45; impacts on the hook slam can go 0.5–0.65.
 - Put a whoosh on every panel push and a distinct one-shot on every state change (selector snap,
   cabinet boot, prize pop, CTA fanfare).
@@ -1306,6 +1390,25 @@ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 13% 0, 13% 12%, 87% 12%,
 
 Draw a frame as its **four sides** (top bar, left bar, right bar, and a curved header
 piece if it is an arch). Same for any mask with a hole in it.
+
+### ⛔⛔ `Scene` PUTS EVERY CHILD UNDER THE VIGNETTE (reel 104 — three bugs from one cause)
+
+`Scene` renders `<Panel>` → one `zIndex:1` wrapper holding **all children** → the vignette at
+`z97` as a **sibling** of that wrapper → the slug. So **nothing a scene renders can ever paint
+above the vignette, whatever its own z**. A full-frame alarm authored at `z=120` came out as a
+faint tint and read as "the effect is too subtle".
+
+Reel 104 hit the same class of bug three times:
+- `HookHeader` rendered as a child of `Scene` resolved its FRAME-coord `top` against the 1012x792
+  PANEL, landing across the middle of every hero.
+- A claim plate authored in panel coords but rendered as a Panel sibling landed at the panel top.
+- The alarm above.
+
+`Scene` now takes an `overlay` slot that paints after the vignette. **The habit: when an element
+looks dim, misplaced or too subtle, check the stacking context and the coordinate space BEFORE you
+touch its values.** All three of these looked like styling problems and none of them were.
+
+---
 
 ## 8. Toolchain & environment
 
@@ -1566,6 +1669,34 @@ came from fixing the wrong thing confidently.
 both at ~-20 dB mean while the bed gain was `0.10`, putting music 20 dB under the voice. Inaudible by
 construction. **Whenever a complaint has a number behind it, go get the number** before touching a
 creative decision.
+
+### ⭐⭐ A feature that exists in the CODE is not a feature that exists in the VIDEO
+
+Reel 104 shipped a red alarm, said it was done, and it **could not fire**. One trace found it:
+
+    the fill ran to at+34, and the alarm needed t > 26 AFTER that
+    shot D: at=8 -> arms at local frame 68 ... OF A 61-FRAME SHOT.  NEVER FIRES.
+    => at the 4.0s the reviewer was watching, there was nothing on screen at all.
+
+**Convert every timed effect to ROOT SECONDS and check it against its own scene's length before
+calling it done.** A five-line `local frame → root second → value` trace catches this instantly, and
+the same trace immediately found a second fault: 0-1s, the most-watched second of the reel, held one
+moving object because the first landing was at 0.87s.
+
+### ⛔ A green gate is not evidence the reel is RIGHT
+
+Every rejection on reel 104's eleven rounds came from a build that passed every gate it had — the
+first one passed ship 8/8, open gate PASS and 0/10 scenes failing, and was rejected outright on
+theme. **The gates measure whether a reel is BUILT correctly. They cannot see whether it is the
+RIGHT reel.** Treating a green run as permission to stop is what turned a theme problem into two
+wasted builds.
+
+### ⛔ A rebuild is not automatically an improvement — re-audit the window you changed
+
+Twice on reel 104 a component swap that was better in every other way dropped a single second while
+the reel median barely moved: a list whose rows arrive is continuously changing, a bar that fills
+once and stops is a STATE. **Run the per-scene audit on the thing you changed, every time**, and
+measure the WINDOW, not the whole reel.
 
 ### When a gate fails, verify the gate against the source of truth before "fixing" the work
 `verify_reel.py` ship-blocked on `VO_ONSET_0`. The tempting move is to go re-cut the VO. Instead:

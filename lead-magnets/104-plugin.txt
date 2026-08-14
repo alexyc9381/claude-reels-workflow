@@ -1,0 +1,55 @@
+TITLE   The 3 Claude Code Plugins
+SUB     What each one actually does, the numbers behind them, and the one claim from the video that the tools themselves do not support
+
+H       The three, with their real repos
+P       All three are free and open source, and all three were checked against the GitHub API on the day this was written rather than taken from a blog. That matters more than it sounds: a widely syndicated article this month lists claude-mem at 46.1K stars and the API returns 90,651.
+B       Awesome APIs: github.com/open-free-llm-api/awesome-freellm-apis, 1,697 stars, MIT
+B       Find Skills: github.com/vercel-labs/skills, 28,826 stars, MIT
+B       Claude Mem: github.com/thedotmack/claude-mem, 90,651 stars, Apache 2.0
+B       121,174 combined stars, nothing to pay, nothing to sign up for
+
+RULE
+
+H       Read this before you install the second one
+P       This is the part the sixty second version cannot fit, and it is the part that decides whether you set your expectations correctly.
+NUM     Find Skills does not install skills for you automatically. It searches the open agent skills ecosystem, checks skills.sh, runs keyword searches, and scores what it finds by install count and source reputation. Then it recommends. Its own documentation is explicit that it identifies skills rather than automatically deploying them.
+NUM     The install is a separate command that you run: npx skills add. That is a feature rather than a limitation, because you get to see what it picked and why before anything lands in your project.
+NUM     So the honest framing is not "it installs the right skills for you". It is "it reads the whole ecosystem so you do not have to, ranks it, and hands you the one to run". That is a smaller claim and a considerably more useful one.
+
+RULE
+
+H       1. Awesome APIs, and what the free tier really is
+P       This one is a curated index rather than a proxy. It lists free LLM API keys by provider with their rate limits, and it publishes ready to copy configuration snippets for the tools you already use.
+B       134 plus free LLM APIs across 40 plus providers, by the repo's own description
+B       Google Gemini, NVIDIA NIM, Groq and OpenRouter are among the named providers
+B       Setup snippets for Claude Code, Cursor and Codex, plus ten or more other tools
+B       The permanent free tier section is the one to read first: no credit card required for most of the listed providers
+B       Worth knowing: the repo's front page heading says 431 plus APIs from 30 providers while its description says 134 plus from 40 plus. The two figures disagree inside the repo itself, so treat both as approximate and check the provider table for the one you actually want.
+
+RULE
+
+H       2. Find Skills, used properly
+P       The value here is triage. There are now far more published skills than anyone can evaluate, and the quality range is wide.
+NUM     Install the finder itself: npx skills add vercel-labs/skills, and point it at the agent you use.
+NUM     Describe what you are building in a sentence. Do not ask it for a skill by name, because the whole point is that you do not know what exists.
+NUM     Read the ranking, not just the top result. Install count tells you what other people kept, and source reputation tells you who wrote it.
+NUM     Run the add command yourself for the one you want. Check what landed in your skills directory before you rely on it.
+
+RULE
+
+H       3. Claude Mem, and the thing it fixes
+P       Every session normally starts from nothing. This one captures what the agent did, compresses those observations, and injects the relevant parts back into future sessions, so the project context, your preferences and the decisions you already made survive the end of a chat.
+B       It hooks into session lifecycle events rather than wrapping API calls, so the context arrives natively rather than being pasted in
+B       It works across Claude Code, Codex, Gemini CLI, OpenCode and others, so your context is not locked to one tool
+B       Apache 2.0, which is the most permissive licence of the three
+B       The thing to watch: it stores what your sessions contained. Check what is being captured before you point it at anything sensitive.
+
+RULE
+
+H       A sensible first week
+NUM     Start with Claude Mem on one project only. It is the one whose benefit compounds, and one project is enough to tell whether the injected context is helping or just filling your window.
+NUM     Add Awesome APIs when you next hit a limit, not before. Pick one provider from the permanent free tier list, wire it into the tool you actually use, and confirm the rate limit is what the table claims.
+NUM     Add Find Skills last, once you have a real project with real gaps. It is a triage tool, and triage needs something to triage.
+NUM     Re-check the star counts and the rate limits yourself before you depend on any of it. All three of these repos move quickly, and the numbers in this document are a snapshot rather than a guarantee.
+
+KEY     Comment PLUGIN for the full breakdown.
