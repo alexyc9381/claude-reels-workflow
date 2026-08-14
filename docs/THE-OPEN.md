@@ -147,6 +147,22 @@ thumb distance, in the terminal face if it is a command, in the display face if 
 
 ## The structure: three to four shots, never one
 
+> ### ⛔⛔ CORRECTED BY REEL 104 — READ THIS BEFORE APPLYING THE RULE BELOW
+> A **five-shot** open built to this section scored better on every number this doc gives —
+> 5 shots, open motion 9.97, no dead per-second bucket — and was rejected anyway:
+> *"it's just cuts and then nothing happens. It should just be ONE scene but then something
+> actually interesting HAPPENS."*
+>
+> **A CUT IS NOT AN EVENT.** Four framings in which nothing happens is four posters in a row.
+> This section optimises the thing that is easy to count and misses the thing that decides it.
+>
+> **The corrected rule: an open needs ONE THING TO HAPPEN — a before state, a trigger, travel,
+> and an arrival that costs something. Reach for shot count only when you cannot find an event.**
+> Reel 104 shipped ONE locked 2.57s framing (three plugins ejecting off a wall and slamming onto
+> a counter) and open motion went **9.97 → 12.10 with FEWER cuts.**
+> Full reasoning: [`ANIMATION-QUALITY.md`](ANIMATION-QUALITY.md) §2.
+
+
 Cut the open like a cold open. **The camera still never moves** — every change is a hard cut to
 a different *framing* of the same world, and each shot advances the problem rather than
 re-stating it.

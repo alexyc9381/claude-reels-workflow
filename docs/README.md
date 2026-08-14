@@ -13,6 +13,11 @@ Then [`MEASURING.md`](MEASURING.md) if you are about to write a gate, an audit, 
 | `CONVENTIONS.md` | the repo's legibility rules — nav contract, README skeleton, reel/pack naming, generated files |
 | `AUDIT-FIRST.md` | the 5 whole-reel audits to run before the first review, the six times the symptom was in a different place from the cause, and the ceiling/measurement traps that cost reel 86 nine rounds |
 | `MEASURING.md` | the 7 laws of measurement — compare like with like, match the window, solo the bus; plus the reel-86 catalogue of wrong-signal answers |
+| `KICKOFF-PROMPT.md` | the canonical opening message for a new reel, clause by clause: what each part triggers, the three transcription errors it always has, and what it does NOT say |
+| `THE-OPEN.md` | the first five seconds — the 4 laws of frame 0, the multi-shot structure, scoring the cuts, and the gate. ⛔ its "three to four shots, never one" is corrected by `ANIMATION-QUALITY.md` §2 |
+| **`ANIMATION-QUALITY.md`** | ⭐ **the craft doc.** Why a first pass is never good enough: the six different defects that all sound like "boring", the MEASURED table of what creates motion and what does nothing, containers vs depictions vs text, and the four ways an effect exists in the code but never reaches the screen |
+| `SOUND-DESIGN.md` | placing a single cue — layer / pitch-vary / J-cut / hierarchy / dB levels + the sidechain frequency pocket |
+| `93-video-hooks.md` | the reel-93 hook study |
 | `specs/` | dated design docs for cross-cutting changes, one per decision |
 | `specs/2026-07-16-reel-consistency-defaults-design.md` | the "defaults fix" — make the correct visual choice the *ergonomic* one (eased `over()`, `costume` type, `lift()` matte, `reel-floors.js`, a delivery gate) |
 
