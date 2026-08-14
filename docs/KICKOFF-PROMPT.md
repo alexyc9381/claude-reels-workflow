@@ -55,7 +55,7 @@ need, and knowing that saves the next person a confused search.
 | "start building out the reel" | The full reel, not a hook round. Board, world kit, props, scenes, assembly, SFX, bed, gates, delivery. |
 | "edit the video based on the GitHub repo" | ⛔ Use the house chassis. Clone the newest shipped reel: cream `Bg`, dark `Panel`, karaoke captions, the progress rail, the `HookHeader`, and the clay `Mascot` from `SlopKit` verbatim. Do not invent a new art style, a new caption system or a new mascot. `REEL-BUILD-LEARNINGS.md` is the index of what has already gone wrong. |
 | "the storyboard needs to be very, very good" | ⭐ **This is the clause that changes the output most.** It makes the board a real Stage 6 deliverable to `storyboards/STORYBOARD-SPEC.md`: a named world, an arc, a hierarchy MECHANISM per beat, a number spine, a hero artifact, and per scene cards with set, camera, blocking and takeaway. **No approved board, no visual build.** Boards written this way are also where the honest-fact problems surface early, before anything is drawn. |
-| "the animations need to be very, very interesting" and "elevated" | ⭐ **This is the clause that makes the motion audit a gate instead of a formality.** It means: no scene may arrive and then hold, every scene earns motion from the ACTION, and the result is MEASURED with `tools/scene_motion_audit.py`, per frame, not asserted. |
+| "the animations need to be very, very interesting" and "elevated" | ⭐⭐ **READ [`ANIMATION-QUALITY.md`](ANIMATION-QUALITY.md) BEFORE AUTHORING A SINGLE SCENE.** This clause used to map only to the motion audit — i.e. to a MEASUREMENT, with nothing telling you what to build. Reel 104 passed that audit on its first pass and was still rejected as boring six separate times. The craft doc carries the measured table of what actually creates motion (**the SET is worth more than the effects**), **a cut is not an event**, **containers vs depictions vs text**, and the four ways an effect never reaches the screen. THEN measure with `tools/scene_motion_audit.py`, per frame, per scene, never asserted. |
 
 ---
 
@@ -76,6 +76,14 @@ optional even though nobody asks for them:
    than no mark.
 5. **The Claude mark is the audience filter**, not decoration. Big and early, repeated through the
    reel, and never on the sprite's face.
+
+## ⛔ Before the first scene is authored
+
+Read [`ANIMATION-QUALITY.md`](ANIMATION-QUALITY.md). Its §3 test (write the VO line beside each
+shot and ask what the picture ADDS) and §2 (name the EVENT in each scene: before state, trigger,
+travel, arrival) are storyboard-time checks. Both defects they catch — containers, and text
+standing in for graphics — cost reel 104 two full rebuild rounds each, and both were free to
+catch on the board.
 
 ## The gates a build is finished against
 
