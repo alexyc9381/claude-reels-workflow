@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 83,
-    "reels_total": 126,
-    "factory_logs": 52,
-    "storyboards": 42,
-    "caption_jsons": 94,
-    "memory_md": 191,
+    "reels_with_code": 87,
+    "reels_total": 130,
+    "factory_logs": 53,
+    "storyboards": 47,
+    "caption_jsons": 97,
+    "memory_md": 193,
     "creators": 8,
     "packs": 3
   },
@@ -510,6 +510,7 @@
         "video/src/data/words_ads.json",
         "video/src/data/words_agency.json",
         "video/src/data/words_ai.json",
+        "video/src/data/words_apple.json",
         "video/src/data/words_arena.json",
         "video/src/data/words_ask.json",
         "video/src/data/words_attack.json",
@@ -531,6 +532,7 @@
         "video/src/data/words_channel.json",
         "video/src/data/words_chart.json",
         "video/src/data/words_clone.json",
+        "video/src/data/words_compress.json",
         "video/src/data/words_content.json",
         "video/src/data/words_control.json",
         "video/src/data/words_council.json",
@@ -567,6 +569,7 @@
         "video/src/data/words_open.json",
         "video/src/data/words_open_103.json",
         "video/src/data/words_os.json",
+        "video/src/data/words_plugin.json",
         "video/src/data/words_prompts.json",
         "video/src/data/words_promptsv2.json",
         "video/src/data/words_ramsay.json",
@@ -915,17 +918,6 @@
       "storyboard": null,
       "captions": [
         "video/src/data/words_retire.json"
-      ]
-    },
-    {
-      "key": "seo",
-      "name": "seo",
-      "number": null,
-      "code": "video/src/ClaudeSeoReel.tsx",
-      "log": "memory/reels/seo-factory-log.md",
-      "storyboard": null,
-      "captions": [
-        "video/src/data/words_seo.json"
       ]
     },
     {
@@ -1407,6 +1399,59 @@
       "storyboard": "storyboards/99-repo.md",
       "captions": [
         "video/src/data/words_repo.json"
+      ]
+    },
+    {
+      "key": "apple",
+      "name": "apple",
+      "number": 100,
+      "code": "video/src/ClaudeAppleReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/100-apple.md",
+      "captions": [
+        "video/src/data/words_apple.json"
+      ]
+    },
+    {
+      "key": "compress",
+      "name": "compress",
+      "number": 101,
+      "code": "video/src/ClaudeCompressReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/101-compress.md",
+      "captions": [
+        "video/src/data/words_compress.json"
+      ]
+    },
+    {
+      "key": "seo",
+      "name": "seo",
+      "number": 102,
+      "code": "video/src/ClaudeSeoReel.tsx",
+      "log": "memory/reels/seo-factory-log.md",
+      "storyboard": "storyboards/102-seo.md",
+      "captions": [
+        "video/src/data/words_seo.json"
+      ]
+    },
+    {
+      "key": "trade",
+      "name": "trade",
+      "number": 103,
+      "code": "video/src/ClaudeTradeReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/103-trade.md",
+      "captions": []
+    },
+    {
+      "key": "plugin",
+      "name": "plugin",
+      "number": 104,
+      "code": "video/src/ClaudePluginReel.tsx",
+      "log": "memory/reels/plugin-factory-log.md",
+      "storyboard": "storyboards/104-plugin.md",
+      "captions": [
+        "video/src/data/words_plugin.json"
       ]
     }
   ]
