@@ -1,0 +1,37 @@
+Comment "APPLE" and I will send you the skill.
+
+👇 READ BELOW
+
+Apple's website does not look expensive because of taste. It looks that way because it obeys a small set of numbers, and it obeys them on every single page.
+
+Someone wrote those numbers down and turned them into a Claude skill. A skill is just a markdown file of rules that Claude loads once and then follows without being reminded.
+
+These are the actual values:
+
+→ Section gap between page blocks: 100px, never outside 80 to 120
+→ Content column max width: 980px, and almost every site runs wider
+→ Body text: #1D1D1F, not the mid grey most people reach for
+→ Secondary text: #6E6E73, tertiary: #86868B
+→ Card padding: 32px, valid range 24 to 40
+→ Heading weight: 600 semibold, 700 for a hero line
+→ Alternating backgrounds: #FFFFFF then #F5F5F7, then #1D1D1F for a dark block
+→ Link blue: #0066CC, links only, used sparingly
+→ Type: SF Pro Display for headings, SF Pro Text for body
+
+Most people install this and use it to build a new site. That is the obvious move and it is the weaker one.
+
+The better use is pointing it at a site you already have and asking for an audit instead of a redesign. A site that has been live for a while has months of small drift in it that you genuinely cannot see any more, because you were there for every decision that caused it.
+
+The part nobody mentions: what comes back is not a new look, it is a list of subtractions. Widen a gap. Narrow a column. Darken the text. Delete a shadow. Nothing in that list is impressive on its own, and that is exactly why the difference is so hard to reverse engineer by eye, and why copying Apple manually in DevTools takes hours and still lands slightly off. You are not missing a trick. You are missing a spec.
+
+Two more things worth knowing. This is not published by Apple and none of it is official, it is a documented reading of a public design language. And it suits content led marketing pages far better than it suits dashboards or dense product interfaces, so take the spacing and type tokens everywhere and be more careful with the layout rules inside an app.
+
+If you only change two things: body text to #1D1D1F, section gaps to 100px. One line each, and they account for most of it.
+
+Comment APPLE and I will send you the doc with the full token block, the exact folder and front matter to make it a skill, and the audit prompt that gets you a list instead of a redesign.
+
+.
+.
+.
+
+#claudeai #claudecode #anthropic #aitools #webdesign #uidesign #uiux #designsystem #frontend #css #applestyle #designtokens #buildinpublic #vibecoding #aiforcreators #webdev #landingpage #designtips #producthunt #techtips

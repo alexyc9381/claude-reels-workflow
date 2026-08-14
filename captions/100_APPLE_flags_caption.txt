@@ -1,0 +1,34 @@
+Comment "APPLE" and I will send you the skill.
+
+👇 READ BELOW
+
+Your website has flaws you genuinely cannot see any more. Not because you are bad at this, but because you were there for every single decision that caused them.
+
+A gap that ended up 64px instead of 100. A content column that quietly runs full bleed. Body text sitting at #4A4A4A instead of #1D1D1F. One card with tighter padding than the two beside it. Every one of those is invisible on its own. Together they are the whole difference between your site and the one you were trying to match.
+
+Someone wrote Apple's design language down as a set of numbers and turned it into a Claude skill. These are the real values:
+
+→ Section gap between page blocks: 100px, never outside 80 to 120
+→ Content column max width: 980px
+→ Card padding: 32px, valid range 24 to 40
+→ Body text: #1D1D1F, secondary #6E6E73, tertiary #86868B
+→ Heading weight: 600 semibold, 700 for a hero line
+→ Backgrounds: #FFFFFF, #F5F5F7 alternating, #1D1D1F for a dark block
+→ Link blue: #0066CC, links only
+→ Type: SF Pro Display for headings, SF Pro Text for body
+
+Drop the skill in, then ask for an audit rather than a redesign. You get a list of specific, boring, one line fixes ordered by how much each one will actually show.
+
+The part nobody mentions: this is a spec, not a style. What comes back is subtraction. Widen a gap, narrow a column, darken the text, delete a shadow. Nothing on that list is impressive by itself, which is precisely why you cannot reverse engineer it by staring at Apple's site in DevTools for three hours. You are not missing a trick, you are missing the numbers.
+
+Worth being straight about two things. None of this is published by Apple, it is a documented reading of a public design language. And it fits content led marketing pages much better than dashboards or dense product UI, so take the spacing and type tokens everywhere and go carefully with the layout rules inside an app.
+
+If you change two things and nothing else: body text to #1D1D1F, section gaps to 100px.
+
+Comment APPLE and I will send you the doc with the full token block, the folder and front matter that make it a real skill, and the audit prompt that returns a list instead of a redesign.
+
+.
+.
+.
+
+#claudeai #claudecode #anthropic #aitools #webdesign #uidesign #uiux #designsystem #frontend #css #applestyle #designtokens #buildinpublic #vibecoding #aiforcreators #webdev #landingpage #designtips #producthunt #techtips

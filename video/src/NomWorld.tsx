@@ -663,8 +663,11 @@ export const Mitt: React.FC<{ x: number; y: number; s?: number; z?: number; rot?
       re-framing move (S5b) is a separate, larger push passed in explicitly.
    ====================================================================== */
 export const Scene: React.FC<{ p: Place; slug: string; children: React.ReactNode;
-  glow?: string; slugC?: string; push?: [number, number, number]; vig?: number }> =
-  ({ p, slug, children, glow, slugC, push, vig = 0.58 }) => {
+  glow?: string; slugC?: string; push?: [number, number, number]; vig?: number;
+  /** painted ABOVE the vignette — for frame-wide effects that must not be
+      dimmed by it. ⛔ Anything passed as `children` sits UNDER the vignette. */
+  overlay?: React.ReactNode }> =
+  ({ p, slug, children, glow, slugC, push, vig = 0.58, overlay }) => {
   const f = useCurrentFrame();
   const [a, b, to] = push ?? [0, 150, 1.05];
   const sc = E(f, a, b, 1, to, LIN);
@@ -678,6 +681,7 @@ export const Scene: React.FC<{ p: Place; slug: string; children: React.ReactNode
       {/* the vignette, last, over everything — it is what makes one thing rank */}
       <div style={{ position: "absolute", inset: 0, zIndex: 97, pointerEvents: "none",
         background: `radial-gradient(122% 92% at 50% 46%, transparent 38%, ${hexa("#05060B", vig)} 100%)` }} />
+      {overlay}
       <Slug t={slug} c={slugC} />
     </Panel>
   );

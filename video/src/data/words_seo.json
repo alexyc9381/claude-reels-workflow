@@ -1,752 +1,462 @@
 [
 {
-"word": "Did",
-"start": 0,
-"end": 0.15,
-"line": 0
+"start": 0.0,
+"end": 0.05,
+"word": " I"
 },
 {
-"word": "you",
-"start": 0.15,
-"end": 0.33,
-"line": 0
+"start": 0.05,
+"end": 0.27,
+"word": " shouldn't"
 },
 {
-"word": "know",
-"start": 0.33,
-"end": 0.57,
-"line": 0
+"start": 0.27,
+"end": 0.37,
+"word": " be"
 },
 {
-"word": "Claude",
-"start": 0.57,
-"end": 1.01,
-"line": 0
+"start": 0.27,
+"end": 0.31,
+"word": " saying"
 },
 {
-"word": "can",
-"start": 1.01,
-"end": 1.11,
-"line": 0
+"start": 0.3,
+"end": 0.5,
+"word": " this,"
 },
 {
-"word": "now",
-"start": 1.11,
-"end": 1.29,
-"line": 0
+"start": 0.82,
+"end": 0.9,
+"word": " but"
 },
 {
-"word": "steal",
-"start": 1.29,
-"end": 1.59,
-"line": 0
+"start": 0.82,
+"end": 0.92,
+"word": " if"
 },
 {
-"word": "your",
-"start": 1.59,
+"start": 0.92,
+"end": 0.98,
+"word": " you"
+},
+{
+"start": 0.98,
+"end": 1.18,
+"word": " installed"
+},
+{
+"start": 1.18,
+"end": 1.44,
+"word": " this"
+},
+{
+"start": 1.38,
+"end": 1.48,
+"word": " in"
+},
+{
+"start": 1.48,
+"end": 1.58,
+"word": " your"
+},
+{
+"start": 1.58,
+"end": 1.76,
+"word": " Claude,"
+},
+{
+"start": 1.81,
 "end": 1.85,
-"line": 0
+"word": " it"
 },
 {
-"word": "competitor's",
-"start": 1.85,
-"end": 2.55,
-"line": 0
+"start": 1.83,
+"end": 1.93,
+"word": " will"
 },
 {
-"word": "Google",
-"start": 2.55,
-"end": 2.91,
-"line": 0
+"start": 1.93,
+"end": 2.13,
+"word": " optimize"
 },
 {
-"word": "traffic?",
-"start": 2.91,
-"end": 3.57,
-"line": 0
+"start": 2.39,
+"end": 2.65,
+"word": " your"
 },
 {
-"word": "It",
-"start": 3.48,
-"end": 3.58,
-"line": 1
+"start": 2.65,
+"end": 2.93,
+"word": " website"
 },
 {
-"word": "finds",
-"start": 3.58,
-"end": 3.84,
-"line": 1
+"start": 2.93,
+"end": 3.09,
+"word": " for"
 },
 {
-"word": "the",
-"start": 3.84,
-"end": 4.08,
-"line": 1
+"start": 3.09,
+"end": 3.23,
+"word": " SEO."
 },
 {
-"word": "exact",
-"start": 4.08,
-"end": 4.26,
-"line": 1
+"start": 3.82,
+"end": 3.86,
+"word": " It"
 },
 {
-"word": "keywords",
-"start": 4.26,
-"end": 4.68,
-"line": 1
+"start": 3.82,
+"end": 3.96,
+"word": " will"
 },
 {
-"word": "they're",
-"start": 4.68,
-"end": 5.04,
-"line": 1
+"start": 3.96,
+"end": 4.14,
+"word": " audit"
 },
 {
-"word": "ranking",
-"start": 5.04,
-"end": 5.41,
-"line": 1
+"start": 4.14,
+"end": 4.3,
+"word": " your"
 },
 {
-"word": "for",
-"start": 5.41,
-"end": 5.57,
-"line": 1
+"start": 4.3,
+"end": 4.62,
+"word": " technical"
 },
 {
-"word": "and",
-"start": 5.57,
-"end": 5.73,
-"line": 1
+"start": 4.62,
+"end": 4.94,
+"word": " SEO,"
 },
 {
-"word": "writes",
-"start": 5.73,
-"end": 6.05,
-"line": 1
+"start": 5.26,
+"end": 5.38,
+"word": " content"
 },
 {
-"word": "the",
-"start": 6.05,
-"end": 6.2,
-"line": 1
+"start": 5.38,
+"end": 5.66,
+"word": " schema,"
 },
 {
-"word": "content",
-"start": 6.2,
-"end": 6.59,
-"line": 1
+"start": 5.98,
+"end": 6.06,
+"word": " even"
 },
 {
-"word": "to",
-"start": 6.59,
-"end": 6.66,
-"line": 1
+"start": 6.01,
+"end": 6.25,
+"word": " geo"
 },
 {
-"word": "outrank",
-"start": 6.66,
-"end": 7.06,
-"line": 1
+"start": 6.25,
+"end": 6.61,
+"word": " and"
 },
 {
-"word": "them.",
-"start": 7.06,
-"end": 7.96,
-"line": 1
+"start": 6.61,
+"end": 6.75,
+"word": " local"
 },
 {
-"word": "What",
-"start": 7.96,
-"end": 8.24,
-"line": 1
+"start": 7.0,
+"end": 7.38,
+"word": " SEO."
 },
 {
-"word": "SEO",
-"start": 8.24,
-"end": 8.45,
-"line": 1
+"start": 7.81,
+"end": 7.85,
+"word": " Then"
 },
 {
-"word": "agencies",
-"start": 8.45,
-"end": 9.01,
-"line": 1
+"start": 7.83,
+"end": 7.89,
+"word": " it"
 },
 {
-"word": "charge",
-"start": 9.01,
+"start": 7.89,
+"end": 8.05,
+"word": " tells"
+},
+{
+"start": 8.04,
+"end": 8.18,
+"word": " you"
+},
+{
+"start": 8.18,
+"end": 8.38,
+"word": " exactly"
+},
+{
+"start": 8.38,
+"end": 8.76,
+"word": " what"
+},
+{
+"start": 8.62,
+"end": 8.74,
+"word": " to"
+},
+{
+"start": 8.74,
+"end": 9.0,
+"word": " improve"
+},
+{
+"start": 9.0,
+"end": 9.14,
+"word": " and"
+},
+{
+"start": 9.14,
+"end": 9.32,
+"word": " what"
+},
+{
+"start": 9.28,
 "end": 9.5,
-"line": 1
+"word": " order"
 },
 {
-"word": "three",
 "start": 9.5,
-"end": 9.79,
-"line": 1
+"end": 9.62,
+"word": " and"
 },
 {
-"word": "grand",
-"start": 9.79,
-"end": 10.14,
-"line": 1
+"start": 9.62,
+"end": 9.8,
+"word": " even"
 },
 {
-"word": "a",
-"start": 10.14,
-"end": 10.2,
-"line": 1
+"start": 9.9,
+"end": 10.18,
+"word": " fixes"
 },
 {
-"word": "month",
-"start": 10.2,
-"end": 10.55,
-"line": 1
+"start": 10.18,
+"end": 10.44,
+"word": " your"
 },
 {
-"word": "for.",
-"start": 10.55,
-"end": 11.0,
-"line": 1
+"start": 10.44,
+"end": 10.58,
+"word": " own"
 },
 {
-"word": "So",
-"start": 10.94,
-"end": 11.03,
-"line": 2
+"start": 10.81,
+"end": 11.05,
+"word": " website"
 },
 {
-"word": "all",
-"start": 11.03,
-"end": 11.17,
-"line": 2
+"start": 11.05,
+"end": 11.33,
+"word": " for"
 },
 {
-"word": "you",
-"start": 11.17,
-"end": 11.31,
-"line": 2
+"start": 11.33,
+"end": 11.49,
+"word": " you."
 },
 {
-"word": "do",
-"start": 11.31,
-"end": 11.4,
-"line": 2
-},
-{
-"word": "is",
-"start": 11.4,
-"end": 11.54,
-"line": 2
-},
-{
-"word": "drop",
-"start": 11.54,
-"end": 11.68,
-"line": 2
-},
-{
-"word": "in",
-"start": 11.68,
-"end": 11.77,
-"line": 2
-},
-{
-"word": "your",
 "start": 11.77,
-"end": 11.98,
-"line": 2
+"end": 11.81,
+"word": " And"
 },
 {
-"word": "website",
-"start": 11.98,
-"end": 12.3,
-"line": 2
+"start": 11.81,
+"end": 11.87,
+"word": " it"
 },
 {
-"word": "and",
-"start": 12.3,
-"end": 12.48,
-"line": 2
+"start": 11.87,
+"end": 12.03,
+"word": " comes"
 },
 {
-"word": "add",
-"start": 12.48,
-"end": 12.58,
-"line": 2
+"start": 11.95,
+"end": 12.15,
+"word": " with"
 },
 {
-"word": "competitors",
-"start": 12.58,
-"end": 13.12,
-"line": 2
+"start": 12.15,
+"end": 12.39,
+"word": " 18"
 },
 {
-"word": "and",
-"start": 13.12,
-"end": 13.25,
-"line": 2
+"start": 12.39,
+"end": 12.83,
+"word": " SEO"
 },
 {
-"word": "tell",
-"start": 13.25,
-"end": 13.49,
-"line": 2
+"start": 12.74,
+"end": 13.04,
+"word": " agents"
 },
 {
-"word": "it",
-"start": 13.49,
-"end": 13.53,
-"line": 2
+"start": 13.04,
+"end": 13.24,
+"word": " and"
 },
 {
-"word": "to",
-"start": 13.53,
-"end": 13.62,
-"line": 2
+"start": 13.24,
+"end": 13.5,
+"word": " 25"
 },
 {
-"word": "find",
-"start": 13.62,
-"end": 13.81,
-"line": 2
+"start": 13.48,
+"end": 13.92,
+"word": " specialized"
 },
 {
-"word": "the",
-"start": 13.81,
-"end": 13.95,
-"line": 2
+"start": 13.92,
+"end": 14.34,
+"word": " skills"
 },
 {
-"word": "gap.",
-"start": 13.95,
-"end": 14.38,
-"line": 2
+"start": 14.34,
+"end": 14.6,
+"word": " all"
 },
 {
-"word": "In",
-"start": 14.08,
-"end": 14.17,
-"line": 3
+"start": 14.68,
+"end": 14.86,
+"word": " trained"
 },
 {
-"word": "about",
-"start": 14.17,
-"end": 14.4,
-"line": 3
+"start": 14.86,
+"end": 15.06,
+"word": " around"
 },
 {
-"word": "two",
-"start": 14.4,
-"end": 14.54,
-"line": 3
+"start": 15.06,
+"end": 15.36,
+"word": " Google's"
 },
 {
-"word": "minutes,",
-"start": 14.54,
-"end": 14.96,
-"line": 3
+"start": 15.29,
+"end": 15.41,
+"word": " own"
 },
 {
-"word": "it",
-"start": 14.96,
-"end": 15.12,
-"line": 3
+"start": 15.41,
+"end": 15.85,
+"word": " optimization"
 },
 {
-"word": "pulls",
-"start": 15.12,
-"end": 15.28,
-"line": 3
+"start": 15.85,
+"end": 16.27,
+"word": " guidelines."
 },
 {
-"word": "every",
-"start": 15.28,
-"end": 15.51,
-"line": 3
+"start": 16.97,
+"end": 17.01,
+"word": " So"
 },
 {
-"word": "keyword",
-"start": 15.51,
-"end": 15.84,
-"line": 3
+"start": 16.99,
+"end": 17.13,
+"word": " rather"
 },
 {
-"word": "they're",
-"start": 15.84,
-"end": 16.17,
-"line": 3
+"start": 17.13,
+"end": 17.29,
+"word": " than"
 },
 {
-"word": "getting",
-"start": 16.17,
-"end": 16.5,
-"line": 3
+"start": 17.51,
+"end": 17.73,
+"word": " spending"
 },
 {
-"word": "free",
-"start": 16.5,
-"end": 16.69,
-"line": 3
+"start": 17.73,
+"end": 17.97,
+"word": " hours"
 },
 {
-"word": "traffic",
-"start": 16.69,
-"end": 17.02,
-"line": 3
+"start": 17.97,
+"end": 18.17,
+"word": " trying"
 },
 {
-"word": "from",
-"start": 17.02,
-"end": 17.21,
-"line": 3
+"start": 18.01,
+"end": 18.13,
+"word": " to"
 },
 {
-"word": "that",
-"start": 17.21,
-"end": 17.6,
-"line": 3
+"start": 18.13,
+"end": 18.25,
+"word": " audit"
 },
 {
-"word": "you're",
-"start": 17.6,
-"end": 17.72,
-"line": 3
+"start": 18.25,
+"end": 18.41,
+"word": " your"
 },
 {
-"word": "missing,",
-"start": 17.72,
-"end": 18.32,
-"line": 3
+"start": 18.41,
+"end": 18.67,
+"word": " SEO"
 },
 {
-"word": "ranked",
-"start": 18.32,
-"end": 18.76,
-"line": 3
+"start": 18.67,
+"end": 18.89,
+"word": " manually,"
 },
 {
-"word": "by",
-"start": 18.76,
-"end": 18.85,
-"line": 3
+"start": 19.19,
+"end": 19.29,
+"word": " try"
 },
 {
-"word": "how",
-"start": 18.85,
-"end": 19.05,
-"line": 3
+"start": 19.29,
+"end": 19.51,
+"word": " this."
 },
 {
-"word": "easy",
-"start": 19.05,
-"end": 19.32,
-"line": 3
+"start": 19.84,
+"end": 19.9,
+"word": " Comment"
 },
 {
-"word": "each",
-"start": 19.32,
-"end": 19.59,
-"line": 3
+"start": 19.9,
+"end": 20.14,
+"word": " SEO"
 },
 {
-"word": "one",
-"start": 19.59,
-"end": 19.79,
-"line": 3
+"start": 20.14,
+"end": 20.36,
+"word": " below"
 },
 {
-"word": "is",
-"start": 19.79,
-"end": 19.92,
-"line": 3
+"start": 20.22,
+"end": 20.4,
+"word": " and"
 },
 {
-"word": "to",
-"start": 19.92,
-"end": 20.05,
-"line": 3
+"start": 20.4,
+"end": 20.48,
+"word": " I'll"
 },
 {
-"word": "actually",
-"start": 20.05,
-"end": 20.59,
-"line": 3
+"start": 20.48,
+"end": 20.6,
+"word": " send"
 },
 {
-"word": "win.",
-"start": 20.59,
-"end": 21.04,
-"line": 3
+"start": 20.75,
+"end": 20.83,
+"word": " a"
 },
 {
-"word": "Then",
-"start": 21.25,
-"end": 21.45,
-"line": 4
+"start": 20.83,
+"end": 20.99,
+"word": " guide"
 },
 {
-"word": "it",
-"start": 21.45,
-"end": 21.55,
-"line": 4
-},
-{
-"word": "writes",
-"start": 21.55,
-"end": 21.85,
-"line": 4
-},
-{
-"word": "the",
-"start": 21.85,
-"end": 22.0,
-"line": 4
-},
-{
-"word": "articles",
-"start": 22.0,
-"end": 22.4,
-"line": 4
-},
-{
-"word": "to",
-"start": 22.4,
-"end": 22.5,
-"line": 4
-},
-{
-"word": "go",
-"start": 22.5,
-"end": 22.6,
-"line": 4
-},
-{
-"word": "take",
-"start": 22.6,
-"end": 22.8,
-"line": 4
-},
-{
-"word": "them,",
-"start": 22.8,
-"end": 23.1,
-"line": 4
-},
-{
-"word": "the",
-"start": 23.1,
-"end": 23.3,
-"line": 4
-},
-{
-"word": "title,",
-"start": 23.3,
-"end": 23.6,
-"line": 4
-},
-{
-"word": "the",
-"start": 23.6,
-"end": 23.8,
-"line": 4
-},
-{
-"word": "headings,",
-"start": 23.8,
-"end": 24.25,
-"line": 4
-},
-{
-"word": "the",
-"start": 24.25,
-"end": 24.4,
-"line": 4
-},
-{
-"word": "meta",
-"start": 24.4,
-"end": 24.83,
-"line": 4
-},
-{
-"word": "description,",
-"start": 24.83,
-"end": 25.25,
-"line": 4
-},
-{
-"word": "even",
-"start": 25.25,
-"end": 25.51,
-"line": 4
-},
-{
-"word": "the",
-"start": 25.51,
-"end": 25.7,
-"line": 4
-},
-{
-"word": "schema",
-"start": 25.7,
-"end": 26.09,
-"line": 4
-},
-{
-"word": "Google",
-"start": 26.09,
-"end": 26.48,
-"line": 4
-},
-{
-"word": "looks",
-"start": 26.48,
-"end": 26.8,
-"line": 4
-},
-{
-"word": "for,",
-"start": 26.8,
-"end": 27.13,
-"line": 4
-},
-{
-"word": "built",
-"start": 27.13,
-"end": 27.44,
-"line": 4
-},
-{
-"word": "to",
-"start": 27.44,
-"end": 27.57,
-"line": 4
-},
-{
-"word": "rank,",
-"start": 27.57,
-"end": 27.96,
-"line": 4
-},
-{
-"word": "not",
-"start": 27.96,
-"end": 28.15,
-"line": 4
-},
-{
-"word": "just",
-"start": 28.15,
-"end": 28.41,
-"line": 4
-},
-{
-"word": "to",
-"start": 28.41,
-"end": 28.54,
-"line": 4
-},
-{
-"word": "read.",
-"start": 28.54,
-"end": 29.05,
-"line": 4
-},
-{
-"word": "No",
-"start": 29.15,
-"end": 29.26,
-"line": 5
-},
-{
-"word": "agency,",
-"start": 29.26,
-"end": 29.83,
-"line": 5
-},
-{
-"word": "no",
-"start": 29.83,
-"end": 29.92,
-"line": 5
-},
-{
-"word": "SEO",
-"start": 29.92,
-"end": 30.16,
-"line": 5
-},
-{
-"word": "degree,",
-"start": 30.16,
-"end": 30.66,
-"line": 5
-},
-{
-"word": "one",
-"start": 30.66,
-"end": 30.86,
-"line": 5
-},
-{
-"word": "chat,",
-"start": 30.86,
-"end": 31.26,
-"line": 5
-},
-{
-"word": "Comment",
-"start": 30.98,
-"end": 31.46,
-"line": 6
-},
-{
-"word": "SEO",
-"start": 31.46,
-"end": 31.74,
-"line": 6
-},
-{
-"word": "and",
-"start": 31.74,
-"end": 31.86,
-"line": 6
-},
-{
-"word": "I'll",
-"start": 31.86,
-"end": 32.13,
-"line": 6
-},
-{
-"word": "send",
-"start": 32.13,
-"end": 32.42,
-"line": 6
-},
-{
-"word": "you",
-"start": 32.42,
-"end": 32.6,
-"line": 6
-},
-{
-"word": "the",
-"start": 32.6,
-"end": 32.8,
-"line": 6
-},
-{
-"word": "exact",
-"start": 32.8,
-"end": 33.14,
-"line": 6
-},
-{
-"word": "setup.",
-"start": 33.14,
-"end": 33.64,
-"line": 6
+"start": 20.99,
+"end": 21.25,
+"word": " immediately."
 }
 ]

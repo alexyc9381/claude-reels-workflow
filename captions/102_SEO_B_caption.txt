@@ -1,0 +1,27 @@
+Comment "SEO" and I'll send you the setup guide.
+
+👇 READ BELOW
+
+This is a free SEO agency that lives inside Claude Code. A whole team of specialists, none of whom invoice you.
+
+Every site has SEO faults you cannot see. Not because they are hidden, because nothing you own is measuring for them.
+
+Claude SEO is an open source plugin for Claude Code. 14,028 stars, MIT licence. Point it at a URL and 18 specialist agents go over every page at once, then hand back the faults in the order they have to be fixed.
+
+★ 14,028 stars · AgriciDaniel/claude-seo · MIT
+→ 25 sub skills, 18 named agents, 32 commands
+→ technical SEO, E-E-A-T content, Schema.org, GEO for AI answers, local and map pack
+→ a full audit spawns up to 15 agents at once, so a site level run finishes in minutes
+→ 410 tests passing, and a Codex port if you are not on Claude Code
+
+The mechanism is the interesting part. Most SEO tools hand you a list of 40 problems, which is the same as handing you nothing, because you do not know which one is upstream of the others. This one sequences them into a dependency graph and emits a prioritised plan. Fix number one, and several of the others resolve on their own.
+
+The part nobody mentions: it is an analysis plugin, not an autopilot. It GENERATES your fixes, the JSON-LD, the sitemaps, the hreflang blocks, the content briefs, and Claude Code can apply them to your source. It does not log into your CMS and rewrite your live site, and anyone telling you otherwise has not run it. Same for "trained on Google's guidelines". Nothing is trained. The recommendations are grounded in Google's own published docs, including the AI Optimization Guide, and every single one ships with an explicit check for how you would know it failed. That is a much better property than being trained on anything.
+
+Comment "SEO" and I'll send the full setup guide: both install paths, the 10 commands worth knowing on day one, all 18 agent names, and the first run sequence that tells you whether it actually works for your site.
+
+.
+.
+.
+
+#seo #technicalseo #aiseo #claudecode #claudeai #anthropic #seotools #searchengineoptimization #generativeengineoptimization #geo #schemamarkup #localseo #contentstrategy #opensource #github #devtools #aiagents #marketingtools #seoaudit #buildinpublic

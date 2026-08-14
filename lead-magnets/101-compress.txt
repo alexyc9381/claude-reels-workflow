@@ -1,0 +1,55 @@
+TITLE   The Context Compression Playbook
+SUB     How to cut what your coding agent sends to the model, without changing a line of your code
+
+H       Why your token bill is mostly repetition
+P       A coding agent does not send your question. It sends your question plus every tool schema it exposes, plus the whole conversation so far, plus every file it has read this session. That prefix is rebuilt and re-sent on every single turn, so a twenty turn session pays for the same file read twenty times.
+P       This is why the bill grows faster than the work does. The fix is not a smaller model or a shorter prompt. It is compressing the material before it leaves your machine.
+
+H       The tool this is built on
+P       headroom, from headroomlabs-ai, is an open source compression layer for AI agents. Apache 2.0, 66,006 stars, and it runs locally so your code never leaves your machine. Its own published measurements on real agent workloads:
+NUM     Code search over 100 results: 17,765 tokens becomes 1,408. A 92 percent cut.
+NUM     SRE incident debugging: 65,694 becomes 5,118. Also 92 percent.
+NUM     GitHub issue triage: 54,174 becomes 14,761. A 73 percent cut.
+NUM     Codebase exploration: 78,502 becomes 41,254. A 47 percent cut.
+P       Read those numbers carefully, because the spread is the whole lesson. Structured, repetitive material compresses enormously. Dense original prose does not. Where your own savings land depends entirely on what your agent spends its context on.
+
+H       The number the videos get wrong
+P       You will see 60 to 95 percent quoted everywhere. That figure is real, and it is measured on JSON data. For general coding agent traffic the same project publishes 15 to 20 percent. Both numbers are true and they measure different things.
+QUOTE   If a claim does not name the workload it was measured on, it is not a number you can plan with.
+P       So the honest expectation is this: enormous savings on tool output, logs, search results and JSON. Modest savings on a session that is mostly you and the model writing new prose. Most real sessions are a mix, which is why the measured end to end figures land between the two.
+
+H       Does compressing the context make the answers worse
+P       This is the question that actually matters, and it is testable rather than arguable. The published benchmark deltas:
+B       GSM8K, 100 items: 0.870 baseline against 0.870 compressed. A delta of exactly zero.
+B       TruthfulQA, 100 items: 0.530 baseline against 0.560 compressed. Slightly better, which is noise at that sample size, not an improvement to believe in.
+B       SQuAD v2 question answering: 97 percent retained at 19 percent compression.
+B       BFCL tool calling: 97 percent retained at 32 percent compression.
+P       The reason accuracy holds is worth understanding, because it tells you when it will not. Compression removes redundancy the model was never using: repeated schemas, log preamble, whitespace, boilerplate that appears in every tool result. It is not summarising your reasoning. Push the ratio far enough and you will eventually cut something load bearing, which is why the aggressive numbers appear on JSON and never on prose.
+
+H       The four ways to run it
+NUM     As a proxy. Start it, point your agent at it with a base URL, change nothing else. This is the zero risk way to try it and the way to start.
+NUM     As a library. Call compress on your messages inline in Python or TypeScript when you want control over exactly what gets touched.
+NUM     As an agent wrap. One command wraps a specific tool, and one command undoes it. Documented targets include Claude Code, Codex, Copilot, Cursor, Cline, Aider, Continue, Goose and OpenHands.
+NUM     As an MCP server. Exposes compress, retrieve and stats to any MCP client, so an agent can compress on demand rather than always.
+
+H       The part nobody mentions
+P       Reversibility is the feature that makes this safe to run in production, and it is the one nobody talks about. Compressed segments are tagged with a reference id and the exact original bytes are cached locally. When the model needs the real thing it calls retrieve and gets it back byte for byte.
+P       That inverts the risk. Without it you are making a permanent bet that the compressor did not throw away something important. With it, the worst case is one extra round trip. Any compression layer you evaluate should be judged on this first: if it cannot hand back the original on demand, it is not compression, it is deletion.
+
+H       How to evaluate it on your own work in one afternoon
+NUM     Get a baseline before you change anything. Run a task you do often and record the total input tokens. Without this number you cannot tell whether anything improved.
+NUM     Run the same task through the proxy. Same prompts, same order, same files. Compare totals.
+NUM     Read the outputs side by side, not just the token counts. You are checking whether the answer changed, which no metric will tell you.
+NUM     Repeat on a long session, not a short one. Savings compound with session length because every file you read stays in history and is re-sent. A single turn benchmark systematically understates it.
+NUM     Then check the split. Look at where your context actually goes. If it is dominated by tool output and file reads you are in the high savings case. If it is mostly conversation, expect the modest end.
+
+H       When not to bother
+B       Short sessions. If you rarely pass a handful of turns, the prefix never grows enough to matter.
+B       Work that is mostly new prose rather than tool output. The compressible surface is small.
+B       Anything where an extra retrieval round trip is unacceptable for latency reasons.
+P       Being able to say when a tool will not help you is how you know the recommendation is real.
+
+RULE
+P       Everything in this guide is taken from headroom's published documentation and benchmark tables, current as of August 2026. Numbers move. Re-check them against the repository before you rely on them, and measure on your own workload rather than trusting anyone else's, including this one.
+
+KEY     COMPRESS

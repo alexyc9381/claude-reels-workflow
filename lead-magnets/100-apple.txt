@@ -1,0 +1,61 @@
+TITLE   The Apple Design Skill
+SUB     The real design tokens behind Apple's website, packaged as a Claude skill, plus the audit prompt that points it at a site you already have
+
+H       What this actually is
+P       Apple's website does not look expensive because of taste. It looks that way because it obeys a small set of numbers, and it obeys them everywhere. Section gaps are always in the same range. The content column never gets wider than a fixed value. Body text is one specific near black, not a soft grey. Headings sit at one weight.
+P       Once those numbers are written down, they stop being taste and start being a spec. A spec is something you can hand to Claude. That is all a skill is: a markdown file of rules that Claude loads and then follows without being reminded.
+B       The tokens below are quoted from an open source Apple style skill, MIT licensed, at github.com/chaos-xxl/apple-design-skill
+B       There are several of these. That one is the closest to a web design system rather than an iOS one, which is what you want if you are working on a website
+B       Nothing here is published by Apple, and none of it is official. It is a documented reading of a public design language
+
+RULE
+
+H       The numbers
+P       Copy this block into your skill file. Everything downstream references these instead of hard coded values.
+B       Section gap between major page blocks: 100px, valid range 80 to 120
+B       Content column max width: 980px, or 1200px for wide layouts
+B       Card and container internal padding: 32px, valid range 24 to 40
+B       Component level gaps inside a section: 16px small, 32px medium, 48px large
+B       Text primary: #1D1D1F, which is the one most sites get wrong by using a mid grey
+B       Text secondary: #6E6E73, tertiary: #86868B
+B       Backgrounds: #FFFFFF, #F5F5F7 for alternating sections, #FBFBFD elevated, #1D1D1F for dark blocks
+B       Link and call to action blue: #0066CC, hover #0077ED, used sparingly and for links only
+B       Heading weight: 600 semibold as the default, 700 for hero headlines
+B       Type stack: SF Pro Display for headings, SF Pro Text for body, falling back to Helvetica Neue, then Inter from Google Fonts
+
+RULE
+
+H       Making it a skill
+NUM     Create the folder. In your project, make .claude/skills/apple-design/ and inside it a file called SKILL.md.
+NUM     Give it a front matter block with a name and a description. The description is what Claude reads to decide whether the skill is relevant, so write it as a trigger, not as a summary. Something like: use when designing, building or reviewing any web page, landing page or marketing site.
+NUM     Paste the numbers above under a heading called Design tokens. Add one line at the top saying that every value in the generated CSS must reference a token and that raw values are not allowed.
+NUM     Add a short Layout section. Alternate white and #F5F5F7 sections down the page, centre content in the max width column, and keep hero sections either pure white or #1D1D1F.
+NUM     Save and restart Claude. Ask it what skills it can see. If yours is not listed, the description is too vague, not the file.
+
+RULE
+
+H       The audit prompt, which is the part most people miss
+P       The obvious use is building something new. The better one is pointing it at a site that already exists, because a site that already exists has months of small drift in it that you can no longer see.
+P       Open the project and run this. Do not paste your CSS into a chat window, let it read the files.
+B       Audit this site against the apple-design skill. Do not change any code yet.
+B       For every section, report the actual computed section gap and the token it should be.
+B       Report the content column width on desktop and whether it exceeds the max width token.
+B       List every text colour in use and flag any that is not text primary, secondary or tertiary.
+B       List every heading and its font weight, and flag any below the title weight token.
+B       Report card padding per component and flag anything outside the valid range.
+B       Give me the list ordered by how visible the fix will be, then wait.
+P       You will get a list rather than a redesign. That is the point. Fix them in batches of three or four and look at the page between batches, because the whole value of this is that the changes are small and you can still tell what changed.
+
+RULE
+
+H       What to expect, honestly
+P       Two things are worth knowing before you run it.
+NUM     The result is restraint, not decoration. Most of what comes back is removing a shadow, widening a gap, darkening text and narrowing a column. If you were hoping for a new look, this is not that. It is the pass that makes an existing look hold together.
+NUM     Apple's design language suits content led marketing pages. It suits dense product interfaces, dashboards and data tables much less well. Use the spacing and type tokens everywhere, and be more careful about applying the layout rules to an app.
+
+RULE
+
+H       If you only do one thing
+P       Set your body text to #1D1D1F and your section gaps to 100px and look at the page again. Those two account for most of the difference, and both are one line each.
+
+KEY     Comment APPLE for this guide

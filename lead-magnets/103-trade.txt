@@ -1,0 +1,65 @@
+TITLE   The 10 Finance Agents
+SUB     Anthropic's own agent templates for equity research, modelling and the back office, what each one does, and the line they do not cross
+
+H       What this actually is
+P       On 5 May 2026 Anthropic released ten ready to run agent templates for financial services. They are not a product you buy. They are reference architectures published in a public repo, and each one packages three things: skills (the instructions and domain knowledge for the task), connectors (governed access to the data the task runs on), and subagents (extra Claude models the main agent calls for sub tasks like comparables selection or a methodology check).
+B       Repo: github.com/anthropics/financial-services
+B       34,211 stars, Apache 2.0 licence, Python
+B       Ten named agents, nine vertical plugin bundles, eleven data connectors
+B       Announcement: anthropic.com/news/finance-agents
+B       Pairs with Claude Opus 4.7, which leads Vals AI's Finance Agent benchmark at 64.37%
+
+RULE
+
+H       Read this before you install anything
+P       This is the part the short version cannot fit, and it is the part that decides whether the rest is useful to you.
+NUM     These agents do not make investment recommendations and do not execute transactions. The repo says so in its own README. They draft analyst work product, models, memos, research notes, reconciliations, and every output is staged for a human to review and approve.
+NUM     Nothing in the repo constitutes investment, legal, tax or accounting advice, and you are responsible for verifying every output and for whatever rules apply to you.
+NUM     So the honest framing is not "an AI that trades for you". It is "the reading, the gathering and the model building get done, and the decision is still yours". That is a smaller claim and a much more useful one.
+
+RULE
+
+H       The three from the video
+P       These are the three worth setting up first if you follow individual companies.
+NUM     Earnings reviewer. Reads transcripts and filings, updates your model, and flags changes that matter to your thesis. You give it the call, it gives you back what was actually said, organised by guidance, margin, capital spending and capital returns, with the model updated underneath.
+NUM     Market researcher. Tracks sector and issuer developments and synthesises news, filings and broker research across your names. You hand it the list you follow, it hands back the announcements, the stories and the analyst ratings, sourced.
+NUM     Model builder. Creates and maintains financial models from filings, data feeds and analyst inputs, live in Excel. DCF, comparables, leveraged buyout and three statement, with the sensitivity table that shows you the risk alongside the value.
+
+RULE
+
+H       The other seven
+P       Five of the ten are coverage and research. The other five are the back office, and if you work at a firm rather than for yourself these are the ones that will save you the most hours.
+B       Pitch builder. Target lists, comparables and a drafted pitchbook, end to end.
+B       Meeting preparer. A client and counterparty brief before every call.
+B       Valuation reviewer. Checks valuations against comparables, methodology and your firm's review standards.
+B       General ledger reconciler. Reconciles accounts and runs net asset value against the books of record.
+B       Month end closer. Runs the close checklist, prepares journal entries, produces the close reports.
+B       Statement auditor. Reviews financial statements for consistency, completeness and audit readiness.
+B       KYC screener. Assembles entity files, reviews source documents, packages escalations for compliance.
+
+RULE
+
+H       How to install them
+P       There are two ways to run any of these, and they are the same template underneath. Pick by whether you want it working next to you or working on a schedule.
+NUM     As a plugin, in Claude Cowork or Claude Code. It runs alongside you, using the software already on your desktop. In Claude Code, add the marketplace with "claude plugin marketplace add anthropics/financial-services", then install the core skills bundle first and the named agents you want after it.
+NUM     As a Claude Managed Agent, on Anthropic's platform. Same system prompt, same skills, but running autonomously across a whole book of work or a nightly schedule, with per tool permissions, managed credential vaults and a full audit log of every tool call.
+P       Start with the financial analysis bundle. It carries the shared modelling skills and all eleven data connectors, and the named agents assume it is there.
+
+RULE
+
+H       Where the data comes from
+P       An agent is only as good as what it can see. These are the connectors Anthropic names, and they are why the research agents can cite rather than guess.
+B       FactSet, S&P Capital IQ, MSCI, PitchBook, Morningstar, LSEG, Daloopa
+B       Plus your firm's own data warehouses, research repositories and CRMs, under governed access
+B       Claude also runs inside Excel, PowerPoint, Word and Outlook through the Microsoft 365 add ins, and carries context between them
+
+RULE
+
+H       A sensible first week
+NUM     Install the financial analysis bundle and connect one data source you already pay for.
+NUM     Add the earnings reviewer. Run it on a call you have already read, and compare. That is how you calibrate how much to trust it.
+NUM     Add the model builder. Have it rebuild a model you already own, then check the formulas rather than the outputs.
+NUM     Only then add the market researcher across your whole list, because that is the one that produces the most volume and needs the most tuning.
+NUM     Keep the review step. Every one of these is designed to stop at your signature, and the value is in the reading and the building, not in skipping the judgement.
+
+KEY     Comment TRADE for the full breakdown.

@@ -1,0 +1,75 @@
+TITLE   The SEO Agent Stack
+SUB     How to install 25 SEO skills and 18 specialist agents into Claude Code, and get a prioritised action plan for any site in about fifteen minutes
+
+H       What this actually is
+P       Claude SEO is an open source SEO analysis plugin for Claude Code. You point it at a URL and it fans out across the site, running sub skills in parallel for technical SEO, content quality, Schema.org markup, AI search visibility, local search and more. What comes back is not a list of complaints. It is a prioritised action plan, sequenced so that the thing you fix first is the thing everything else depends on.
+B       Repo: github.com/AgriciDaniel/claude-seo
+B       14,028 stars, MIT licence, Python
+B       25 sub skills, 18 specialist agents, 32 user facing commands
+B       410 tests passing, and a Codex port at github.com/AgriciDaniel/codex-seo
+B       A full site audit can spawn up to 15 specialist agents at once, which is why a site level audit finishes in minutes instead of hours
+
+RULE
+
+H       Three things to be clear about before you start
+P       These are the questions that decide whether this is the right tool for you, and the answers are all in the project's own docs.
+NUM     It is an ANALYSIS plugin, not an autopilot. It audits, scores and GENERATES artifacts for you: Schema.org JSON-LD, XML sitemaps, hreflang blocks, content briefs, competitor pages. It does not log into your CMS and rewrite your live site. You or Claude Code still apply the output.
+NUM     The free tier makes no third party API calls by default. It fetches the URLs you point it at and nothing else. That means Core Web Vitals are lab estimates and indexation is inferred from page level signals. Adding Google API credentials unlocks real field data and live indexation status.
+NUM     Recommendations are grounded in primary source guidance from Google, in particular the AI Optimization Guide at developers.google.com. Nothing here is a trained model with an opinion. Every recommendation carries the observation it rests on and an explicit check for how you would know it failed.
+
+RULE
+
+H       Installing it
+P       There are two supported paths. The plugin install is the fastest and is the one to use if you are on Claude Code 1.0.33 or later.
+NUM     Plugin install. Run /plugin marketplace add AgriciDaniel/claude-seo, then /plugin install claude-seo@agricidaniel-claude-seo, then /seo setup. The setup step builds an isolated Python environment inside Claude's plugin data and installs Playwright Chromium. It does not touch your global Python or your PATH.
+NUM     Manual install. git clone --depth 1 https://github.com/AgriciDaniel/claude-seo.git and then bash claude-seo/install.sh. On Windows use install.ps1 from PowerShell.
+P       Check the runtime any time with /seo doctor. It reports readiness without changing anything.
+
+RULE
+
+H       The commands worth knowing on day one
+P       There are 32 in total. These are the ones that carry most of the value, and the order below is roughly the order you will want them.
+B       /seo audit URL, the full site audit with parallel sub agent delegation. Start here.
+B       /seo page URL, a deep single page analysis covering on page elements, content quality and schema.
+B       /seo technical URL, a technical audit across nine categories.
+B       /seo content URL, E-E-A-T and content quality analysis.
+B       /seo schema URL, detect, validate and generate Schema.org markup.
+B       /seo geo URL, generative engine optimisation: how citable your passages are for AI Overviews and AI answers.
+B       /seo local URL, local SEO covering Google Business Profile, citations, reviews and the map pack.
+B       /seo sitemap generate, build an XML sitemap from industry templates.
+B       /seo cluster KEYWORD, SERP based semantic clustering.
+B       /seo drift baseline URL, then /seo drift compare URL later, to track what moved between audits using SQLite snapshots.
+
+RULE
+
+H       The eighteen agents, by name
+P       These are the actual files in the repo's agents directory. Knowing the names is useful because you can invoke one directly when you already know what you are looking for, instead of running a whole audit.
+B       seo-technical, seo-content, seo-schema, seo-geo, seo-local
+B       seo-maps, seo-backlinks, seo-cluster, seo-drift, seo-ecommerce
+B       seo-flow, seo-google, seo-image-gen, seo-performance
+B       seo-sitemap, seo-sxo, seo-visual, seo-dataforseo
+
+RULE
+
+H       A first run that gives you something useful
+P       Do not start with your biggest site. Start with one you can verify by hand, so you learn to trust or distrust the output before it matters.
+NUM     Run /seo audit on a small site you know well. Read the prioritised plan top to bottom before you fix anything.
+NUM     Fix only item one. Resist the urge to do all of them. The plan is dependency ordered, so item one is upstream of the rest and several later items often resolve themselves.
+NUM     Run /seo drift baseline on that URL so you have a snapshot to compare against.
+NUM     Wait for a crawl cycle, then run /seo drift compare. This is the step almost everyone skips, and it is the one that tells you whether the tool is working for your site specifically.
+NUM     Only then scale up to client work or a large property.
+
+RULE
+
+H       Where it struggles
+P       The project is unusually direct about its own limits, which is worth repeating because it saves you a wasted evening.
+B       Pages with heavy client side hydration can produce noisy findings, in particular anything that loads content after a user interaction such as opening a modal or clicking a tab. For those, run the seo-visual subagent and compare its Playwright snapshot against the raw HTML findings.
+B       Without Google API credentials, Core Web Vitals numbers are lab estimates rather than real field data.
+B       Competitive and AI citation data needs MCP extensions such as Ahrefs, DataForSEO, SE Ranking or Profound, and each of those needs its own account.
+
+RULE
+
+H       The honest summary
+P       If you already run SEO for several sites, the value here is cadence. A deep audit that used to be quarterly because it cost a day can be weekly because it costs fifteen minutes, and every recommendation arrives with a falsifiability check your client can verify independently. If you have one site and no SEO background, the value is different: it is the prioritised order. Knowing which single thing to fix first is worth more than knowing all twenty things that are wrong.
+
+KEY     SEO

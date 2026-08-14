@@ -203,7 +203,13 @@ def check_captions(words, script, drift_tol):
                         blocking=False))
     if script:
         got = " ".join(str(x.get("word", "")).strip() for x in w)
-        norm = lambda s: re.sub(r"[^a-z0-9 ]", "", s.lower()).split()
+        # ⛔ A NEWLINE IS A WORD BOUNDARY. This stripped `[^a-z0-9 ]` first, which
+        # DELETES "\n" rather than collapsing it, so a script file written one
+        # sentence per line welded the last word of each line to the first of the
+        # next ("...you need to know.\nThe first..." -> "knowthe"). Reel 103 was
+        # ship-blocked by a 1-diff CAPTION_TEXT whose caption and script were
+        # word-for-word identical. Collapse whitespace BEFORE stripping.
+        norm = lambda s: re.sub(r"[^a-z0-9 ]", "", re.sub(r"\s+", " ", s.lower())).split()
         a, b = norm(got), norm(script)
         same = a == b
         checks.append(Check("CAPTION_TEXT", same, "match" if same else f"{sum(1 for x,y in zip(a,b) if x!=y)} diff",

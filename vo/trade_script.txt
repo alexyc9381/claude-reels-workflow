@@ -1,0 +1,6 @@
+So, Anthropic just updated their most advanced trading model this year, the update includes ten new agents that everyone's using incorrectly. But let me break down the only ones you need to know.
+The first is the earnings reviewer. Paste in any earnings call and we'll break down exactly what executives said so you can decide whether to hold the stock or not.
+The second is a market researcher. Give it your stock portfolio and it will give you every announcement, news story, and analyst rating on those stocks.
+The third is a model builder. Give it any stock and it will build you a full model based on what it's worth plus any risk it may have.
+People are already building trading bots with these tools and making massive profits.
+If you want a full breakdown, just comment trade and I'll send it over.
