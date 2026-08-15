@@ -241,6 +241,104 @@ frame edge disappears **only at the end of the shot**, which is why it survives 
 6. **Never treat a green gate as evidence the reel is right.** Every rejection on reel 104 came
    from a build that passed everything it had.
 
+## 8. THE TEN-REEL LOOK REGRESSION — and the gate that now catches it
+
+Everything above is about one reel at a time. This section is about the drift you only see by
+lining thirteen of them up. Measured on every delivered main cut, 93 to 105, panel rect only:
+
+| | 93-95 avg | 96-105 avg | change |
+|---|---|---|---|
+| saturated pixels (>0.35 sat) | 51.7% | 27.3% | **-47%** |
+| black point (luma p10) | 28.7 | 55.9 | **+95%** |
+| **motion** | 10.0 | 10.3 | **+2.6%** |
+| edge density · colour count · luma range | — | — | flat |
+
+**The animations never got less animated. They got paler, and the shadows filled in.** Every one
+of those reels passed its motion audit, because motion is the thing that is gated and the two
+things that moved are not.
+
+Ranked, so the gap is visible: **94 AGENCY 57.9 · 95 TOOLS 56.3 · 103 TRADE 55.5 · 104 PLUGIN
+42.5** then **102 SEO 15.0 · 100 APPLE 14.7 · 101 COMPRESS 12.7 · 98 NOMAD 10.3**.
+
+### ⛔⛔ How it happened: a frame-0 law became a whole-reel minimum
+
+[`THE-OPEN.md`](THE-OPEN.md) law 1 sets panel luma >= 140. It is about **frame 0** — the one frame
+guaranteed to be seen. AGENCY obeys it exactly: hook 154, body 64-103. Then it leaked. Reel 96's
+log records the trade being made out loud:
+
+> "**Saturated costs luma.** Every category paint is darker than bone, so frame 0 fell 140.2 ->
+> 132.8 against the 140 bar. Fixed by lifting the SHADING (shallower dark stop, lighter top stop)."
+
+Reel 97 applied it as a **whole-reel minimum** ("full-frame luma min 176.9"), and reel 99 raised
+the bar to **150**. Once every frame must clear a brightness floor, the sanctioned fix for every
+failure is lifting the shadows — which is precisely what destroys the black point and washes out
+saturated paint. Meanwhile the matte-palette rule caps saturation from *above*. Squeezed from both
+ends, what survives is pale.
+
+Reel 84 had already proved the opposite and it is still true: **hierarchy needs DARKNESS.** A cream
+room ranks nothing at 1.24; a dark room with one lit thing ranks at 2.92.
+
+⭐ **The rule, restored:** the >=140 luma bar applies to **frame 0 and nowhere else**. Body scenes
+target luma 70-105, saturated pixels 34-45%, black point p10 <= 35. When a set is too dim, add a
+**practical light** (`WorldKit.Cone` / `StreetLamp`) or brighten the **subject**. Never lift the
+palette's dark stop.
+
+### The gate: `tools/look_audit.py`
+
+```bash
+python3 tools/look_audit.py out/myreel.mp4 --scenes video/myreel.intent.json
+```
+
+Blocks on `HOOK_LUMA` (frame 0 only), `BODY_SAT` (>=34%) and `BODY_BLACK` (p10 <=35). Warns on
+`HOOK_PLATE`. Run it beside `scene_motion.py` — motion says things move, this says the picture is
+still worth looking at. Of the thirteen delivered reels, **only 94 AGENCY passes**; 95 and 96 fail
+on black point, and everything from 97 on fails on both axes.
+
+⚠️ `HOOK_PLATE` **warns and never blocks**, deliberately. It has the best evidence in the repo —
+across reel 94's six trial cuts (same subject, same VO, same body, only the hook varied) the two
+that performed opened with a cream claim plate of 32.7% and 18.2% of the panel, and the four that
+did not had no plate of their own at all; their largest bright object at frame 0 was the shared
+`HookHeader` pill. But that is a **hook-selection rule proven within one reel**, and it does *not*
+predict performance across reels — 100 APPLE (23.0%), 102 SEO (21.7%) and 103 TRADE (22.9%) all
+have a plate and all underperformed. Gating on a rule whose own evidence says it does not
+generalise is how the luma bar became a ratchet in the first place.
+
+### ⛔ What is NOT gated, and why that is the honest answer
+
+The clearest difference between the reels that look good and the ones that do not is that AGENCY is
+a **place** and APPLE/SEO are **an object on a flat wall**. Two automatic proxies for depth were
+built and both failed: row-luma spread separates weakly and is confounded by the header pill, and a
+"bottom band darker" test scored 102 SEO *highest of all* because it was measuring the vignette.
+So depth is reported, never failed, and checked with one question by eye:
+
+> **Is there a mass cropped by the panel edge, in front of the action?** If not, the camera is
+> pointed at a backdrop.
+
+### The cause underneath: the set engine was never promoted
+
+Counted across every reel's own source files:
+
+| reel | worlds | occluders | parallax |
+|---|---|---|---|
+| **94 AGENCY** | **16** | **16** | **12** |
+| 95 · 96 · 97 · 98 · 99 · 100 · 102 · 103 · 104 | 0 | 0 | 0-2 |
+
+`SlopKit.tsx` exports Panel, Bg, Mascot, headers, captions, the rail — chrome and characters, and
+**not one set primitive**. Reel 94 built its own depth engine in `AgyWorld.tsx` and it stayed
+there, so every reel since hand-built flat sets from gradients.
+
+⭐ It is now promoted to [`video/src/WorldKit.tsx`](../video/src/WorldKit.tsx): `Surface` (sky,
+haze, three parallax bands, ground, kerb, grit, overhead), `Occluder`, `Cone`, `StreetLamp`,
+`Contact`, and ten `PALETTES` that keep their shadows. `AgyWorld.tsx` is untouched — 94 is frozen.
+Smoke-test it after any change, because a set engine is exactly the kind of thing that typechecks,
+renders and paints nothing:
+
+```bash
+npx remotion still src/worldkit-index.tsx WorldKitDemo out/wk.png --frame=40
+```
+
+---
+
 ## Related
 [`THE-OPEN.md`](THE-OPEN.md) (the first five seconds, and the correction in §2 above) ·
 [`MEASURING.md`](MEASURING.md) (making a number mean something) ·
