@@ -27,3 +27,10 @@ jr_frames/
 # winner-lab raw video corpus (247MB) — lives in Drive winner-lab.zip
 winner-lab/corpus/
 video/.claude/
+
+# real-UI proof captures (34MB of PNG) — heavy media lives in Drive, per CLAUDE.md
+video/public/shots/
+__pycache__/
+*.pyc
+out/
+*.npy

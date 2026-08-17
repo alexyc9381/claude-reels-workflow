@@ -1,0 +1,27 @@
+Comment "CLAUDE" and I'll send you all three links.
+
+👇 READ BELOW
+
+Anthropic gives away the training for their own AI and almost nobody opens it.
+
+Three things, all free, all live right now. One is Anthropic's own course platform, one is Anthropic's own repo, and one is what the community built on top.
+
+★ 22 courses → Anthropic Academy, anthropic.skilljar.com, free, certificates included
+★ 169,585 stars → anthropics/skills, the official Agent Skills repo, installs into Claude Code as a plugin marketplace
+★ 24,350 stars → VoltAgent/awesome-claude-code-subagents, 100+ specialised subagents built by the community
+
+The order matters more than the list does. The Academy teaches you what the tool actually does, which is the part most people skip because it feels like homework. The skills repo is Anthropic's own implementation of Agent Skills, so it is the reference version rather than someone's interpretation of it. The subagents are the last step, because a hundred specialists are only useful once you know what you are delegating.
+
+The part nobody mentions: none of this is hidden. It is not a beta, there is no waitlist, and there is no paid tier gating the good version. Anthropic Academy launched publicly in March 2026 and the two repos are ordinary public GitHub. The reason people are behind is not access, it is that free things with no urgency attached never make it onto a calendar. The gap the video is about is a gap in what people have opened, not in what they were allowed to open.
+
+Two honest notes, because the video moves fast. Dario Amodei really did warn about this, in an essay called "The Adolescence of Technology" published in January 2026, where he writes about wealth concentration potentially exceeding the Gilded Age and personal fortunes reaching into the trillions. The video's phrasing is my paraphrase of that argument, not a direct quote from him. And "over 100 subagents" is the repo's own description of itself rather than a number I counted, so treat it as the maintainers' claim.
+
+Star counts were read from the GitHub API on the day this was made, and the course count came from the live catalogue. All three move.
+
+Comment "CLAUDE" and I'll DM you the three links, the specific courses worth starting with, and the install command for the skills marketplace.
+
+.
+.
+.
+
+#ai #claude #claudeai #anthropic #aitools #claudecode #aiagents #subagents #agentskills #freecourses #learnai #promptengineering #aiworkflow #developertools #github #opensource #productivity #techtips #artificialintelligence #aiforbeginners

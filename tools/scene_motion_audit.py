@@ -25,6 +25,11 @@ motion is low, so the distribution is always near-uniform. Top share is reported
 below as information; do not gate on it, and do not "fix" a scene because of it.
 
   MOTION    >= 6.0 per scene, median >= 9.0   (from the approved reel above)
+  HOLD      share of a scene's frames at its OWN floor. REPORTED, NOT GATED.
+            It caught a real defect once (v10, arrivals bunched + a band holding
+            the baseline up) but it measures BURSTINESS: rebuilding ROOF into a
+            roadmap that draws itself smoothly — the correct fix — took it from
+            59% to 95%. Diagnostic hint only. Never optimise against it.
   DEAD RUN  <= 12 frames of near-zero change  (0.4s; this is what "too static"
             actually is — reel 82 M4 had FORTY consecutive dead frames while
             still scoring a passable average, because the average was made
@@ -83,8 +88,8 @@ def main():
     t = np.arange(1, len(F)) / FPS
 
     bounds = starts + [t[-1] + 1]
-    print(f"\n  {'scene':<22}{'MOTION':>8}{'top share':>11}{'DEADRUN':>8}   verdict")
-    print("  " + "-" * 68)
+    print(f"\n  {'scene':<22}{'MOTION':>8}{'top share':>11}{'DEADRUN':>8}{'HOLD':>8}  verdict")
+    print("  " + "-" * 76)
     rows = []
     for i, nm in enumerate(names):
         m = (t >= bounds[i]) & (t < bounds[i + 1])
@@ -104,15 +109,45 @@ def main():
             best = max(best, run)
         dead = int(best * (30 / FPS))          # report in 30fps frames
 
+        # ⛔⛔ HOLD — the share of the scene sitting at its OWN floor.
+        # Added 2026-08-15 after reel 106 v10 passed 0/11 STATIC with DEADRUN 0
+        # everywhere while Alex reported *"a lot of pausing"* — and was right:
+        # 49% of all sampled frames sat at the scene floor. Both existing guards
+        # were blind to it. DEADRUN's threshold is absolute (0.6) and a
+        # full-panel travelling band holds the floor at 5-9, so it can never
+        # fire once one is running. And `mot` is a MEAN, which on a scene whose
+        # only real motion is the cut transient at either end reports the
+        # transients, not the body — reel 82 M4 exactly.
+        # This metric is RELATIVE to the scene's own floor, so a band cannot
+        # hide behind it: a scene that arrives and then holds scores high here
+        # no matter how much furniture is running.
+        vals = np.array([tot[j] for j in range(len(tot)) if m[j]])
+        flr = float(np.percentile(vals, 10))
+        hold = float((vals <= flr * 1.25).mean() * 100)
         bad = []
         if mot < 6.0:
             bad.append("STATIC")
         if dead > 12:
             bad.append(f"DEAD {dead}f")
+        # ⛔⛔ HOLD IS REPORTED, NEVER GATED — DO NOT TURN THIS BACK ON.
+        # I added it 2026-08-15 to catch Alex's *"a lot of pausing"* note, and
+        # it did diagnose the real defect once: reel 106 v10 had 49% of all
+        # frames sitting at the scene floor because the arrivals bunched early
+        # and a travelling band held the baseline up.
+        # ⛔ But it measures BURSTINESS, not whether anything is happening, and
+        # steering by it made the reel worse three times running. The proof:
+        # rebuilding ROOF's seven labelled blocks into a real roadmap that DRAWS
+        # ITSELF across the panel — unambiguously the better scene, and the
+        # thing Alex actually asked for — took it from HOLD 59% to **95%**,
+        # the worst in the reel, because smooth continuous motion sits at a
+        # steady level by definition. Every intervention that improved the
+        # picture made this number worse.
+        # Read it as a HINT when a scene is suspected of arriving-then-holding.
+        # Never optimise against it, and never block a ship on it.
         rows.append((nm, mot, top, active, bad))
-        print(f"  {nm:<22}{mot:>8.2f}{top:>11.3f}{dead:>8}   {'· '.join(bad) if bad else 'ok'}")
+        print(f"  {nm:<22}{mot:>8.2f}{top:>11.3f}{dead:>8}{hold:>7.0f}%  {'· '.join(bad) if bad else 'ok'}")
 
-    print("  " + "-" * 68)
+    print("  " + "-" * 76)
     mots = sorted(r[1] for r in rows)
     print(f"  median motion {mots[len(mots) // 2]:.2f}  (bar 9.00, approved reel 81 = 9.82)")
     print(f"  scenes failing: {sum(1 for r in rows if r[4])}/{len(rows)}")

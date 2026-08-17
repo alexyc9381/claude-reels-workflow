@@ -1,7 +1,8 @@
 # ANIMATION QUALITY — why the first pass is never good enough, and what actually fixes it
 
 **Status:** the craft doc. Read before authoring scenes, and again when a reel comes back as
-*"boring"*, *"not interesting enough"* or *"I'm not getting anything from the animations"*.
+*"boring"*, *"not interesting enough"*, *"they don't actually do movements"* or *"I'm not getting
+anything from the animations"*.
 
 **Why this exists.** Reel 104 took **eleven review rounds**, and the animation was called not
 good enough in six of them, in six different ways. Every one of those notes had a cause that was
@@ -14,9 +15,9 @@ answers *"what makes an animation actually good"*, with the numbers that proved 
 
 ---
 
-## 0. The six ways an animation is "not good enough"
+## 0. The eight ways an animation is "not good enough"
 
-They look like one complaint and they are six different defects with six different fixes. Getting
+They look like one complaint and they are eight different defects with eight different fixes. Getting
 the diagnosis right is most of the work — see [`MEASURING.md`](MEASURING.md) and
 [`AUDIT-FIRST.md`](AUDIT-FIRST.md).
 
@@ -28,6 +29,12 @@ the diagnosis right is most of the work — see [`MEASURING.md`](MEASURING.md) a
 | *"too much text, not magical"* | information delivered as type | §4 |
 | *"where is the [effect]?"* | it is authored but never reachable in time | §6 |
 | *"not enough to make me scroll"* | no characters, no stakes, no scale | §5 |
+| *"they just stand there, they dont do movements"* | sprites are running an IDLE, not an ACTION | §5 |
+| *"too many / too annoying"* or *"only 20% as good"* | density is flat instead of PEAKED | §9 |
+
+⛔ **The complaint that sounds like the first row but is not:** *"only 20% as good, needs more stuff
+going on"* and *"there's too much"* are the SAME defect seen from two sides — flat density. Adding
+uniformly fixes neither. See §9.
 
 ---
 
@@ -40,6 +47,12 @@ project, not imported from anywhere.
 |---|---|
 | **a dense, correct SET** (a wall of ~70 real objects instead of an empty room) | **7.68 → 9.65** |
 | **real content arriving** (a list whose rows land one by one) | a stuck second: **6.3-6.9 → 8.0-8.5** |
+| **⭐ real UI / real b-roll** (a scrolling screen capture, a live page) | median **6.36 → 8.00**; one scene **6.30 → 10.25**, another **7.99 → 13.24** |
+| **⭐ giving landed sprites an ACTION LOOP instead of a bob** | failures **3/11 → 1/11**, every scene rose (see §5) |
+| **N discrete pops instead of one long tween** (same 82 frames) | **4.27 → 5.63** |
+| **scaling sprites up + shortening the arrival to 8 frames** | CTA **5.14 → 7.55**, DOCK → **10.17** |
+| a real interview b-roll HELD for a whole sentence | **3.23, with a 60-frame dead run** |
+| one smooth 82-frame scale ramp | **4.27 (WORSE than what it replaced)** |
 | **a continuous in-panel camera push** on every scene | median **7.12 → 8.65** |
 | **a full-width high-contrast travelling band** (a conveyor, a chain, a cable run) | one scene **10.44** vs its neighbour **2.83** at identical push |
 | **many large bright objects travelling** (36 tiles crossing frame) | 3.77 → **5.67** |
@@ -51,6 +64,41 @@ project, not imported from anywhere.
 | a 30x38 cursor travelling | **~0** |
 | cream tiles on a white window (no contrast) | **~0** |
 | a smooth blur/scale sweep inside a 632px window | 3.18 → **2.78 (WORSE)** |
+
+### ⭐⭐⭐ THE FORMULA UNDER THE WHOLE TABLE (derived on reel 106)
+
+Every row above follows from one line. `tools/scene_motion_audit.py` crops the panel, scales it
+**1012→240** (a 0.237 factor), converts to **greyscale**, and means the **absolute difference**
+between samples taken at **10fps**. So:
+
+> **motion ≈ (fraction of the panel repainted per 0.1s) × (luma delta)**
+
+Knowing this turns "add more motion" into a calculation you can do *before* rendering, and it
+predicts the table's zeroes exactly:
+
+| the trap | why it scores ~0 |
+|---|---|
+| **only the SWEPT EDGE repaints, not the object's area** | seven 88×214 blocks are 16% of the panel, but bobbing them a few px repaints only their edges. A big object moving slightly is worth LESS than a small object crossing the frame. |
+| **under ~8px wide does not survive the downsample** | 3px rain streaks become 0.7px before differencing. Reel 106's YARD ran 46 of them every frame and still scored 4.96 — it HAD a background process and the process was invisible. |
+| **greyscale** | a colour change at equal luma scores zero. Contrast must be in VALUE. |
+| **smooth smears, stepped lands** | an ease spreads its delta across three samples; a hard edge lands inside one. Hence the blur/scale sweep measuring *worse*. |
+
+⛔⛔ **THE ONE THAT WILL COST YOU A ROUND: a travelling band must alternate LIGHT AND SHADOW.**
+Reel 106's first attempt was light bands only. It scored 7.79 **and lifted the black point 47.4 →
+56.1** — which is precisely the "fix it by lifting the shading" move §8 exists to ban, reached for
+without noticing. Interleaving a dark band between the light ones fixed both at once: **9.92**
+(every boundary becomes light-against-shadow, so more luma delta per swept pixel) with the black
+point back **down**, and the reel's p10 ended identical to the version before. You cannot have
+shafts without the dark between them, so it is also just what raking light looks like.
+
+⛔ **`DEADRUN` goes uninformative the moment anything runs continuously** — its threshold is 0.6, so
+a travelling band guarantees 0 dead frames everywhere. Once you add one, read the per-sample TRACE
+to check the scene body still has an arc; the summary number can no longer tell you.
+
+⭐ **Probe one scene, don't re-render the reel.** `remotion render --frames=A-B` is ~16s against ~65s
+for a 1172-frame reel, and the audit runs on the clip with `--scenes "0"`. A probe reads ~0.04 LOW
+(it misses the cut transient the full timeline puts in the scene's first sample) — verify that
+offset against one full render before trusting the loop.
 
 ### What this table is really saying
 
@@ -169,6 +217,64 @@ rocket and a substation, none of which were about the subject. That is
 One hero doing one gesture is a dead shot. Something else must be running: a belt, cards tumbling,
 a beam sweeping, spools turning, a gantry crossing. It costs the hierarchy nothing because it is
 furniture, and it is the difference between a shot and a still.
+
+### ⭐⭐⭐ SPRITES NEED AN ACTION LOOP, NOT AN IDLE
+
+**The single biggest lift of reel 107, and it beat every "add more objects" pass in that build.**
+
+Alex: *"we see the claude sprites come in but then nothing else, they just stand there and move
+slightly up and down but they dont actually do movements"*. Every sprite arrived with a squash and
+then ran a sine bob forever. **A bob is an IDLE. An idle is not an action.**
+
+The fix: after it lands, each sprite runs **one of four action loops, chosen by index**, each on its
+own phase and rate — so a crowd is doing four different things at once instead of one animation
+played N times.
+
+| loop | what it does |
+|---|---|
+| `0 PACE` | walks side to side with a stride lift |
+| `1 WORK` | leans in with a real swinging arm |
+| `2 HOP` | jumps on a beat and cheers at the apex |
+| `3 LOOK` | turns its head and double-takes |
+
+MEASURED, one change, whole reel: **failures 3/11 → 1/11, zero dead runs anywhere**, and *every*
+scene rose —
+
+```
+HOOK 4.40→5.10 · SLOT 5.43→6.70 · TOP 5.53→7.26
+BENCH 6.66→8.02 · DOCK 10.17→12.57 · CTA 7.55→8.99
+```
+
+> ⛔ **ANIMATE WHAT IS ALREADY ON SCREEN BEFORE ADDING ANYTHING ELSE.** This outperformed every pass
+> that added props, and it is `reel-motion-hierarchy`'s "an inert hero is boring however big it is"
+> applied to a crowd.
+
+### ⛔⛔ …AND SPRITES MUST BE BIG AND FAST, or they measure WORSE than what they replaced
+
+Replacing abstract slabs with sprites is the right call for meaning (§3) and **dropped the score**:
+CTA **8.54 → 5.14**, BENCH 6.34 → 4.84, failures 3 → 5. The slabs were large, bright and fast; the
+crowds replacing them were half the size easing in over 13 frames.
+
+Fixed by **scaling the crowds (s 72-92 → 118-148), shortening the arrival to 8 frames**, lengthening
+the travel and adding a squash: CTA back to **7.55**, BENCH **6.66**, DOCK **10.17**.
+
+> **A gentle arrival is not an event.** Same lesson as the slow tween and the b-roll hold, three
+> times over in one build.
+
+### ⛔ Sprites merge into a blob — the spacing law is arithmetic, not taste
+
+18 sprites at s=148 across 600px in 6 columns is **120px of pitch for ~126px bodies** — under
+`reel-sprite-grounding-law`'s `spacing >= 0.85 × (rA + rB)`. It rendered as one unreadable orange
+mass. **Ten sprites, 5 columns, 190px pitch reads as a cast.**
+
+> **Compute the pitch before adding count.** More sprites past that threshold subtracts legibility.
+
+### ⛔ Check the costume roster before building a crowd
+
+`SlopKit.Mascot` ships **twelve** costume levers (glasses / suit / constr / prof / chef / wizard /
+samurai / cop / beard / fro / girl / xeyes) plus `capeC` and `tint`. Reel 107 was using **four**, and
+got *"there arent enough outfits either"*. Cycle them **deterministically** (`costumeFor(i)`, never
+random — re-renders must be identical).
 
 ### Idles must be big enough to see
 Measured: **1.15° / 1.7px registers as "never static" on a metric and READS as static to a human.**
@@ -339,10 +445,97 @@ npx remotion still src/worldkit-index.tsx WorldKitDemo out/wk.png --frame=40
 
 ---
 
+## 9. HOW MUCH — the density budgets
+
+*"Each scene is only 20% as good in the animations, needs to be elevated to 100% with more stuff
+going on"* and, four rounds later on the same reel, *"theres too many sfx and some of them are too
+annoying"*. Both notes are about density. Neither is answered by taste — every line below is a
+number measured off a reel that shipped.
+
+### Per REEL
+
+| budget | house figure | how it was set |
+|---|---|---|
+| **motion median** | **≥ 9.00**, and **report the WEAKEST scene by name** | reel 106: the median hid a floor failure |
+| **scenes under bar** | ideally **0**; 1-2/11 is shippable | reel 107 delivered at 1/11 |
+| **SFX cue rate** | **1.0-1.5 / sec** (ceiling, not target) | 95 = 0.98 · 105 = 1.13 · 106 = 1.48 · a rejected 107 = **3.82** |
+| **distinct locations** | a new light + colour every **2-4s**; interiors all count as ONE place | `feedback_reel_vary_the_locations` |
+| **neighbouring scenes** | differ by **both hue AND lightness** | AGENCY's own source, the stated bar |
+| **costume levers used** | all **12**, cycled deterministically | reel 107 shipped 4 and was told so |
+| **shot length floor** | no shot under **0.7s**; never two consecutive zoom-only shots | `feedback_shot_count_is_a_floor` |
+
+### Per SCENE
+
+| budget | house figure |
+|---|---|
+| **movers that actually register** | the only shape that measures above bar is **MANY LARGE OBJECTS ARRIVING CONTINUOUSLY** — 3-5 movers sits at 2-4 |
+| **arrival spread** | across the **FULL** duration. An arrival inside the first third leaves the rest dead |
+| **object size floor** | **≥ ~40px** on the short side, or it vanishes in the audit's 1012→240 downsample |
+| **sprite pitch** | `spacing ≥ 0.85 × (rA + rB)` — compute it *before* adding count |
+| **background process** | exactly one, always running |
+| **text chips** | **ONE** per shot, in a band nothing else enters |
+| **SFX** | one transient on the cut *(only if it earns one)* + **one hero** + ≤2 accents; no sample repeated >3× |
+
+### ⭐ Density is a SHAPE, not a level
+
+The mistake both notes describe is the same one: **flat coverage**. A reel where every scene has the
+same amount going on reads as busy *and* unranked — which is what "not hierarchical" means when you
+hear it about motion rather than about light.
+
+> **Density should PEAK on the one or two scenes that carry the story and thin out elsewhere.**
+
+Reel 107's shipped SFX bank runs 2-4 cues in most scenes and **7** in the two that matter (the brain
+charging, the level-ups). That contour is the point. The same applies to props, arrivals and camera.
+
+### ⛔⛔⛔ AND THE WARNING THAT COST THE MOST: a metric satisfiable the wrong way WILL be satisfied the wrong way
+
+The motion audit rewards **large bright objects arriving**. So every time a scene measured low on
+reel 107, it was answered with more cream rectangles. Median went **3.21 → 7.91** and the reel turned
+into flying stationery: *"way too many paper animations… this is like paper boxes and stuff. You
+need animations where it's actual Claude SPRITES."*
+
+⭐ **The fix was also the better mapping.** The VO says "over 100 Claude Code **helpers**" — a helper
+is not a tile, it is a **Claude**. Crowds of the house mascot are the literal noun, on brand,
+saturated clay (worth more to the audit than cream), *and* a body doing something.
+
+> **Prefer sprites over abstract slabs every time. Reach for a rectangle only when the thing
+> genuinely is a rectangle.** If a metric is going up while the reel is getting worse, the metric is
+> being gamed — go back to what the line actually says.
+
+### ⭐⭐ Real UI and real footage are the biggest single motion lever — and they still need an edit
+
+Adding a real scrolling screen capture and real b-roll took reel 107's median **6.36 → 8.00**, with
+BOARD **6.30 → 10.25** and LIFT **7.99 → 13.24**. Dense high-detail content changing every frame
+satisfies the playbook's PROOF requirement and the motion audit at once. **Reach for it before
+inventing more drawn movers.**
+
+⛔ But **real footage is not automatically motion**: a seated interview held for a full sentence
+scored **3.23 with a 60-frame dead run**. Cutting *inside* the clip on the beat — wide, then a hard
+punch to a tight framing — took it to **4.40**, dead run **60f → 3f**. Treat b-roll like any other
+shot: it still needs an edit, it does not get to hold.
+
+### ⛔ Prefer N discrete events over one long tween, always
+
+An 82-frame smooth growth measured **4.27 — worse than the scene it replaced.** Duration is not
+motion; a continuous tween repaints almost nothing per 0.1s. Rebuilt as **four discrete level-up
+pops** (fast `BACK` steps + squash + a ring each): **4.27 → 5.63**, and it reads better too — he
+levels up rather than inflating.
+
+### ⛔ When a sprite kit hides its own padding, READ THE PIXELS
+
+Placing a crown on a mascot's head from the container maths left it **floating 38px above the head**
+— `Actor` puts the mascot div at `y - s*0.62`, but the drawn head inside `Mascot` starts lower than
+its own div's top edge. Traced on a still by reading a pixel column (crown base y=716, head top
+y=754), the real head top is `y - s*0.451`. **Measure the render, don't trust the algebra.**
+
+---
+
 ## Related
 [`THE-OPEN.md`](THE-OPEN.md) (the first five seconds, and the correction in §2 above) ·
 [`MEASURING.md`](MEASURING.md) (making a number mean something) ·
 [`AUDIT-FIRST.md`](AUDIT-FIRST.md) (run these before the first review) ·
 [`../storyboards/STORYBOARD-SPEC.md`](../storyboards/STORYBOARD-SPEC.md) (the board contract) ·
 [`../REEL-BUILD-LEARNINGS.md`](../REEL-BUILD-LEARNINGS.md) §2 §3 §7 §12 ·
-`memory/reels/plugin-factory-log.md` (the eleven rounds that produced this file)
+`memory/reels/plugin-factory-log.md` (the eleven rounds that produced this file) ·
+[`SOUND-DESIGN.md`](SOUND-DESIGN.md) §2b (the audio half of §9's density budget) ·
+`memory/claude107-reel.md` (reel 107 — the source of §5's action loops and all of §9)

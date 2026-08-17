@@ -16,7 +16,7 @@ Run them **before the first review**, not in response to a note.
 
 ---
 
-## 1 · The five audits
+## 1 · The seven audits
 
 ### A. Every silent run in the VO
 ```bash
@@ -84,6 +84,34 @@ for a,b in e['spans']:
 Any shot boundary or held frame near a seam is suspect. ARMY's EDL kept a
 **0.17s span — five frames** — between two long ones, and the picture was
 conformed to the same cut list, so the video jump-cut to an unrelated moment.
+
+### F. The SFX bank's SIZE and RATE
+```bash
+python3 tools/sfx_audit.py video/src/MyReel.tsx            # the five gates
+python3 tools/sfx_audit.py video/src/MyReel.tsx --levels   # perceived level per cue
+```
+⛔ Reel 107 shipped **134 cues = 3.82/sec** against a house rate of **1.0-1.5**
+and got *"theres too many sfx and some of them are too annoying"*. Nobody had
+ever summed the bank — each ladder and layer partner was defensible alone.
+
+Two things to read off it before any review:
+- **the rate** — cues ÷ duration. Over ~1.5/sec, cut before you render.
+- **any sample used 5+ times** — a repeated identical transient is a metronome,
+  and if it is also bright (>35% above 2kHz) it is a *slap*. The SLAP gate
+  catches it; `clap_slam` was on all 13 scene cuts.
+
+### G. SOLO EVERY STEM before diagnosing any audio note
+```bash
+# mute VO + bed, render 60 frames; then empty the cue array, render again
+npx remotion render src/index.tsx comp out/solo.wav --frames=0-60
+```
+⛔⛔ **This is the cheapest audit in the file and it settles arguments that
+otherwise run for rounds.** Reel 107 spent **four rounds** rebuilding the SFX
+bank for a note that was a riser in the **music bed** and then an aspirated
+consonant in the **VO**. Three 2-second renders proved the effects track was at
+**-180 dB — digital silence** — in the window being complained about.
+
+Do this **first**, on the very first audio note, not on the fourth.
 
 ---
 
@@ -237,10 +265,13 @@ day.
 
 ---
 
-## The five rules, short
+## The eight rules, short
 
 1. Run the audits in §1 **before** the first review.
 2. When one instance is reported, **fix the class**.
 3. Never write a computed constraint into a comment **without rendering the check**.
 4. When a note reads as "remove X", ask whether it means **"X is illegible"**.
 5. **Grep the cue table whenever a visual is replaced.**
+6. **Solo every stem before diagnosing any audio note** — it is one cheap render each.
+7. **A note that returns with the same timestamps means the wrong LAYER**, not a worse fix.
+8. **Count the bank and its rate** before shipping it; density is a budget, not a feeling.

@@ -367,7 +367,7 @@ const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: numb
       let changed = false;
       for (let i = 0; i < out.length - 1; i++) {
         const ln = out[i];
-        if (ln.words.length < 2) continue;
+        if (ln.words.length < 3) continue; // <3, not <2 — see STRAND note
         const last = ln.words[ln.words.length - 1].w.trim();
         if (/[.!?]$/.test(last) || !DANGLE.test(last.replace(/[.,!?]+$/, ""))) continue;
         const moved = ln.words.pop()!;
@@ -392,7 +392,7 @@ const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: numb
       }
       for (let i = 0; i < out.length - 1; i++) {
         const ln = out[i];
-        if (ln.words.length < 2) continue;
+        if (ln.words.length < 3) continue; // <3, not <2 — see STRAND note
         const last = ln.words[ln.words.length - 1].w.trim();
         if (/[.!?]$/.test(last) || !DANGLE.test(last.replace(/[.,!?]+$/, ""))) continue;
         const moved = ln.words.pop()!;

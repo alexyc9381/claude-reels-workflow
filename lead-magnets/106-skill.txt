@@ -1,0 +1,73 @@
+TITLE The 4 Prompts That Turn a Claude Project Into a Tutor
+SUB Copy them in order. The first one goes in the project instructions, the other three go in the chat.
+
+H Set it up first, it takes about a minute
+NUM Open Claude and create a new Project. A Project is a real Claude feature: a self contained workspace with its own instructions and its own memory of your files. Free accounts get five of them.
+NUM Name it after the skill you are learning, not after Claude. "Spanish B1" or "Blender" or "Options trading".
+NUM Open the project instructions field. This is the field that shapes every reply inside that project, and it is where Prompt 1 lives.
+NUM Paste Prompt 1 there, with your skill written into it. Save.
+NUM Then work inside that project only. Prompts 2, 3 and 4 get pasted into the chat, in that order, whenever you reach that stage.
+P One thing to get right before you start: replace every bracket. The prompts are built to be filled in, and a tutor that does not know your starting level will teach you the wrong things politely for a week.
+
+RULE
+
+H Prompt 1: the setup. This one goes in the project instructions.
+P You are my personal tutor for [SKILL]. I am starting at [complete beginner / can do the basics / intermediate and stuck]. What I want to be able to do at the end is [SPECIFIC OUTCOME].
+P How you teach me:
+B Before you teach anything, ask me up to five questions to find out what I already know, what I have already tried, and what I actually want to be able to do. Wait for my answers.
+B Teach in the order that makes me useful fastest, not the order a textbook would use. Start from the thing I will do most often.
+B Never explain for more than 150 words before you make me do something.
+B Assume I will forget. Bring back anything I got wrong two sessions later without announcing it.
+B When I get something right, make the next thing harder. When I get it wrong, do not give me the answer. Give me the smallest hint that lets me find it myself, then let me try again.
+B Use my world for every example. Once I tell you my job and my projects, every exercise comes from there.
+B Keep two lists: what we have covered, and what is still weak. Open every session by giving me both in one line each.
+P Never do for me what I should be doing myself. If I ask you to just give me the answer, work through a different example instead and hand mine back to me.
+
+RULE
+
+H Prompt 2: stop the lecture, start the drills
+P Stop explaining and start drilling me. From here, teach [SKILL] only through real situations.
+P Each round:
+NUM Drop me into one specific, realistic scenario where this skill is needed. Give me the context, the constraint and the stakes. Do not tell me which concept it is testing.
+NUM Make me respond before you say anything else. Wait for me.
+NUM Score what I did against what an experienced person would have done. Name the exact gap, not a grade.
+NUM Run the same situation again with one variable changed, so I cannot pattern match my way through it.
+P Rules: no multiple choice, ever. Realistic mess is required, so include incomplete information, time pressure, or someone who disagrees with me. Escalate the difficulty every time I pass, and drop back one level the moment I fail twice in a row. If I make the same class of mistake twice, stop the drill and build me three short reps that target only that mistake.
+P Start with round one now. One scenario, nothing else.
+
+RULE
+
+H Prompt 3: the deadline and the 7 day plan
+P Now give me a deadline. Build me a precise 7 day plan to reach [SPECIFIC OUTCOME] on 45 minutes of focused work per day.
+P For each of the seven days, give me exactly four things:
+NUM The one thing I will be able to do at the end of that day that I could not do at the start.
+NUM The 45 minutes split into blocks with a time on each, with at least 30 of the 45 spent doing rather than reading or watching.
+NUM The single exercise that proves the day worked, and the standard I have to hit to pass it.
+NUM What to do instead on a day I only get 15 minutes.
+P Constraints: no day depends on something I have to buy, install or sign up for on that same day. Put the hardest concept on day 2 or day 3, never at the end. Day 7 is one end to end attempt at the real thing, not revision.
+P Give me the plan as a table, then stop. Do not start teaching day 1 until I say go.
+
+RULE
+
+H Prompt 4: the test at the end
+P Test whether I actually learned this. Do not be kind.
+P Assess me on [SKILL] against the outcome we set at the start. Rules:
+NUM Test me by making me perform, never by asking me what a term means. Every question is a task.
+NUM Include at least one problem slightly outside anything we practised, so we find out whether I understood it or memorised it.
+NUM Ask one at a time and wait for my answer. No hints while the assessment is running.
+P When it is over, tell me:
+B What I can now do unsupervised, what I can do with a reference open, and what I still cannot do
+B The single weakest link, and why that is the one that matters most
+B Whether I would survive doing this for real, answered plainly, yes or no, with the reason
+B A three exercise repair plan for the weak link
+P If I am not there yet, say so directly. I would rather hear it from you than find out in the real thing.
+
+RULE
+
+H The part nobody mentions
+P There is no hidden toggle. Nothing in Claude is called "Personal Tutor" and there is no menu to go looking for, so do not waste an evening hunting for it. What is real is the Project and the project instructions field, and what makes it a tutor is what you pasted in there. That is genuinely the whole trick, and it is also why it works in any tool with a persistent instructions field.
+P Worth knowing, because it is a real feature and a different one: Claude does ship a Learning style in the style dropdown, which makes it Socratic and gets it asking you questions instead of answering yours. That is a global toggle. These four prompts are a specific curriculum that lives in one project. You can run both.
+P On the numbers: "4 hours instead of 6 months" comes from the post this idea spread through, not from a study, so treat it as the shape of the claim and not a promise. What the four prompts actually remove is the two things that really do burn the months. You stop rereading material you already understand, because Prompt 2 will not let you sit still, and you stop finding out too late that it did not stick, because Prompt 4 makes you fail in front of a tutor instead of in front of a client.
+P The reason the order matters more than the wording: most people paste something like Prompt 1 and stop. Instructions alone give you a friendlier explainer, not a tutor. The drilling is what changes what you can do, the deadline is what makes it finish, and the test is the only part that tells you the truth. Any one of the four on its own gets you a nicer chatbot.
+
+KEY SKILL

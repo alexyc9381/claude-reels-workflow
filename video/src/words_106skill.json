@@ -1,0 +1,957 @@
+[
+{
+"start": 0.0,
+"end": 0.13,
+"word": " Claude"
+},
+{
+"start": 0.13,
+"end": 0.23,
+"word": " has"
+},
+{
+"start": 0.23,
+"end": 0.33,
+"word": " a"
+},
+{
+"start": 0.33,
+"end": 0.47,
+"word": " hidden"
+},
+{
+"start": 0.405,
+"end": 0.445,
+"word": " feature"
+},
+{
+"start": 0.48,
+"end": 0.54,
+"word": " that"
+},
+{
+"start": 0.555,
+"end": 0.66,
+"word": " might"
+},
+{
+"start": 1.02,
+"end": 1.26,
+"word": " replace"
+},
+{
+"start": 1.26,
+"end": 1.6,
+"word": " every"
+},
+{
+"start": 1.6,
+"end": 1.78,
+"word": " tech"
+},
+{
+"start": 1.675,
+"end": 1.88,
+"word": " platform"
+},
+{
+"start": 1.94,
+"end": 2.16,
+"word": " because"
+},
+{
+"start": 2.16,
+"end": 2.28,
+"word": " it"
+},
+{
+"start": 2.28,
+"end": 2.38,
+"word": " can"
+},
+{
+"start": 2.38,
+"end": 2.52,
+"word": " help"
+},
+{
+"start": 2.52,
+"end": 2.64,
+"word": " you"
+},
+{
+"start": 2.64,
+"end": 2.86,
+"word": " master"
+},
+{
+"start": 2.92,
+"end": 3.14,
+"word": " any"
+},
+{
+"start": 3.14,
+"end": 3.34,
+"word": " skill"
+},
+{
+"start": 3.34,
+"end": 3.48,
+"word": " in"
+},
+{
+"start": 3.48,
+"end": 3.62,
+"word": " 4"
+},
+{
+"start": 3.64,
+"end": 3.88,
+"word": " hours"
+},
+{
+"start": 3.96,
+"end": 4.06,
+"word": " which"
+},
+{
+"start": 4.06,
+"end": 4.18,
+"word": " would"
+},
+{
+"start": 4.135,
+"end": 4.27,
+"word": " usually"
+},
+{
+"start": 4.27,
+"end": 4.49,
+"word": " take"
+},
+{
+"start": 4.49,
+"end": 4.69,
+"word": " 6"
+},
+{
+"start": 4.7,
+"end": 4.96,
+"word": " months."
+},
+{
+"start": 5.4,
+"end": 5.54,
+"word": " Most"
+},
+{
+"start": 5.54,
+"end": 5.66,
+"word": " people"
+},
+{
+"start": 5.66,
+"end": 5.82,
+"word": " spend"
+},
+{
+"start": 5.81,
+"end": 6.01,
+"word": " months"
+},
+{
+"start": 6.01,
+"end": 6.25,
+"word": " learning"
+},
+{
+"start": 6.25,
+"end": 6.39,
+"word": " a"
+},
+{
+"start": 6.39,
+"end": 6.53,
+"word": " skill"
+},
+{
+"start": 6.48,
+"end": 6.62,
+"word": " and"
+},
+{
+"start": 6.62,
+"end": 6.76,
+"word": " still"
+},
+{
+"start": 6.76,
+"end": 6.94,
+"word": " feel"
+},
+{
+"start": 6.95,
+"end": 7.21,
+"word": " stuck,"
+},
+{
+"start": 7.27,
+"end": 7.39,
+"word": " not"
+},
+{
+"start": 7.39,
+"end": 7.63,
+"word": " because"
+},
+{
+"start": 7.57,
+"end": 7.73,
+"word": " they're"
+},
+{
+"start": 7.73,
+"end": 7.93,
+"word": " slow,"
+},
+{
+"start": 7.97,
+"end": 8.05,
+"word": " but"
+},
+{
+"start": 8.05,
+"end": 8.25,
+"word": " because"
+},
+{
+"start": 8.2,
+"end": 8.64,
+"word": " nobody's"
+},
+{
+"start": 8.64,
+"end": 8.82,
+"word": " teaching"
+},
+{
+"start": 8.82,
+"end": 9.0,
+"word": " them"
+},
+{
+"start": 9.19,
+"end": 9.55,
+"word": " correctly."
+},
+{
+"start": 9.71,
+"end": 9.77,
+"word": " But"
+},
+{
+"start": 9.785,
+"end": 9.91,
+"word": " this"
+},
+{
+"start": 9.91,
+"end": 10.09,
+"word": " one"
+},
+{
+"start": 9.985,
+"end": 10.24,
+"word": " hidden"
+},
+{
+"start": 10.24,
+"end": 10.42,
+"word": " mode"
+},
+{
+"start": 10.42,
+"end": 10.56,
+"word": " in"
+},
+{
+"start": 10.56,
+"end": 10.74,
+"word": " Claude"
+},
+{
+"start": 10.75,
+"end": 10.97,
+"word": " called"
+},
+{
+"start": 10.97,
+"end": 11.17,
+"word": " a"
+},
+{
+"start": 11.17,
+"end": 11.43,
+"word": " personal"
+},
+{
+"start": 11.47,
+"end": 11.77,
+"word": " tutor"
+},
+{
+"start": 11.77,
+"end": 12.05,
+"word": " changes"
+},
+{
+"start": 12.05,
+"end": 12.53,
+"word": " everything."
+},
+{
+"start": 12.8,
+"end": 12.9,
+"word": " To"
+},
+{
+"start": 12.9,
+"end": 13.12,
+"word": " activate"
+},
+{
+"start": 13.12,
+"end": 13.3,
+"word": " it,"
+},
+{
+"start": 13.34,
+"end": 13.48,
+"word": " first"
+},
+{
+"start": 13.42,
+"end": 13.54,
+"word": " go"
+},
+{
+"start": 13.54,
+"end": 13.66,
+"word": " to"
+},
+{
+"start": 13.66,
+"end": 13.84,
+"word": " Claude,"
+},
+{
+"start": 13.84,
+"end": 13.98,
+"word": " open"
+},
+{
+"start": 13.98,
+"end": 14.08,
+"word": " a"
+},
+{
+"start": 14.08,
+"end": 14.24,
+"word": " new"
+},
+{
+"start": 14.48,
+"end": 14.74,
+"word": " project"
+},
+{
+"start": 14.82,
+"end": 14.96,
+"word": " and"
+},
+{
+"start": 14.96,
+"end": 15.08,
+"word": " paste"
+},
+{
+"start": 15.035,
+"end": 15.08,
+"word": " this"
+},
+{
+"start": 15.11,
+"end": 15.26,
+"word": " prompt"
+},
+{
+"start": 15.26,
+"end": 15.48,
+"word": " along"
+},
+{
+"start": 15.45,
+"end": 15.57,
+"word": " with"
+},
+{
+"start": 15.57,
+"end": 15.71,
+"word": " the"
+},
+{
+"start": 15.71,
+"end": 15.83,
+"word": " skill"
+},
+{
+"start": 15.97,
+"end": 16.09,
+"word": " you"
+},
+{
+"start": 16.09,
+"end": 16.23,
+"word": " want"
+},
+{
+"start": 16.23,
+"end": 16.29,
+"word": " to"
+},
+{
+"start": 16.305,
+"end": 16.39,
+"word": " learn"
+},
+{
+"start": 16.38,
+"end": 16.46,
+"word": " in"
+},
+{
+"start": 16.46,
+"end": 16.56,
+"word": " the"
+},
+{
+"start": 16.56,
+"end": 16.94,
+"word": " instructions."
+},
+{
+"start": 17.4,
+"end": 17.72,
+"word": " Instantly"
+},
+{
+"start": 17.82,
+"end": 17.92,
+"word": " your"
+},
+{
+"start": 17.92,
+"end": 18.2,
+"word": " personal"
+},
+{
+"start": 18.02,
+"end": 18.28,
+"word": " tutor"
+},
+{
+"start": 18.28,
+"end": 18.4,
+"word": " mode"
+},
+{
+"start": 18.4,
+"end": 18.52,
+"word": " will"
+},
+{
+"start": 18.73,
+"end": 18.87,
+"word": " get"
+},
+{
+"start": 18.87,
+"end": 19.33,
+"word": " activated."
+},
+{
+"start": 19.39,
+"end": 19.57,
+"word": " Second,"
+},
+{
+"start": 19.65,
+"end": 19.79,
+"word": " paste"
+},
+{
+"start": 19.79,
+"end": 19.97,
+"word": " this"
+},
+{
+"start": 20.05,
+"end": 20.29,
+"word": " prompt"
+},
+{
+"start": 20.35,
+"end": 20.41,
+"word": " and"
+},
+{
+"start": 20.425,
+"end": 20.59,
+"word": " instead"
+},
+{
+"start": 20.67,
+"end": 20.77,
+"word": " of"
+},
+{
+"start": 20.77,
+"end": 21.07,
+"word": " explaining"
+},
+{
+"start": 21.07,
+"end": 21.41,
+"word": " concepts"
+},
+{
+"start": 21.22,
+"end": 21.38,
+"word": " like"
+},
+{
+"start": 21.38,
+"end": 21.52,
+"word": " a"
+},
+{
+"start": 21.52,
+"end": 21.68,
+"word": " boring"
+},
+{
+"start": 21.75,
+"end": 22.11,
+"word": " textbook,"
+},
+{
+"start": 22.43,
+"end": 22.55,
+"word": " Claude"
+},
+{
+"start": 22.55,
+"end": 22.71,
+"word": " will"
+},
+{
+"start": 22.64,
+"end": 22.72,
+"word": " throw"
+},
+{
+"start": 22.72,
+"end": 22.8,
+"word": " you"
+},
+{
+"start": 22.8,
+"end": 22.98,
+"word": " into"
+},
+{
+"start": 23.15,
+"end": 23.41,
+"word": " real"
+},
+{
+"start": 23.41,
+"end": 23.87,
+"word": " situations"
+},
+{
+"start": 23.87,
+"end": 24.09,
+"word": " until"
+},
+{
+"start": 23.945,
+"end": 24.17,
+"word": " making"
+},
+{
+"start": 24.17,
+"end": 24.55,
+"word": " mistakes"
+},
+{
+"start": 24.55,
+"end": 24.93,
+"word": " becomes"
+},
+{
+"start": 24.92,
+"end": 25.46,
+"word": " impossible."
+},
+{
+"start": 25.85,
+"end": 26.01,
+"word": " Third,"
+},
+{
+"start": 26.09,
+"end": 26.19,
+"word": " to"
+},
+{
+"start": 26.19,
+"end": 26.31,
+"word": " finish"
+},
+{
+"start": 26.265,
+"end": 26.305,
+"word": " any"
+},
+{
+"start": 26.34,
+"end": 26.44,
+"word": " goal,"
+},
+{
+"start": 26.48,
+"end": 26.54,
+"word": " you"
+},
+{
+"start": 26.555,
+"end": 26.66,
+"word": " must"
+},
+{
+"start": 26.93,
+"end": 27.07,
+"word": " have"
+},
+{
+"start": 27.07,
+"end": 27.21,
+"word": " a"
+},
+{
+"start": 27.21,
+"end": 27.47,
+"word": " deadline."
+},
+{
+"start": 27.62,
+"end": 27.96,
+"word": " Paste"
+},
+{
+"start": 27.96,
+"end": 28.22,
+"word": " this"
+},
+{
+"start": 28.28,
+"end": 28.34,
+"word": " and"
+},
+{
+"start": 28.355,
+"end": 28.48,
+"word": " Claude"
+},
+{
+"start": 28.43,
+"end": 28.47,
+"word": " will"
+},
+{
+"start": 28.505,
+"end": 28.545,
+"word": " build"
+},
+{
+"start": 28.58,
+"end": 28.62,
+"word": " a"
+},
+{
+"start": 28.655,
+"end": 28.75,
+"word": " precise"
+},
+{
+"start": 28.73,
+"end": 28.93,
+"word": " 7"
+},
+{
+"start": 28.93,
+"end": 29.05,
+"word": " day"
+},
+{
+"start": 29.05,
+"end": 29.27,
+"word": " roadmap"
+},
+{
+"start": 29.3,
+"end": 29.5,
+"word": " with"
+},
+{
+"start": 29.5,
+"end": 29.62,
+"word": " just"
+},
+{
+"start": 29.62,
+"end": 30.0,
+"word": " 45"
+},
+{
+"start": 30.11,
+"end": 30.35,
+"word": " minutes"
+},
+{
+"start": 30.35,
+"end": 30.55,
+"word": " of"
+},
+{
+"start": 30.55,
+"end": 30.79,
+"word": " focused"
+},
+{
+"start": 30.67,
+"end": 30.89,
+"word": " work"
+},
+{
+"start": 30.89,
+"end": 31.07,
+"word": " per"
+},
+{
+"start": 31.07,
+"end": 31.35,
+"word": " day."
+},
+{
+"start": 31.58,
+"end": 31.7,
+"word": " Fourth,"
+},
+{
+"start": 31.86,
+"end": 31.9,
+"word": " now"
+},
+{
+"start": 31.935,
+"end": 32.0,
+"word": " to"
+},
+{
+"start": 32.01,
+"end": 32.16,
+"word": " test"
+},
+{
+"start": 32.19,
+"end": 32.31,
+"word": " if"
+},
+{
+"start": 32.31,
+"end": 32.41,
+"word": " you"
+},
+{
+"start": 32.41,
+"end": 32.63,
+"word": " actually"
+},
+{
+"start": 32.76,
+"end": 33.0,
+"word": " learned"
+},
+{
+"start": 33.0,
+"end": 33.14,
+"word": " the"
+},
+{
+"start": 33.14,
+"end": 33.3,
+"word": " new"
+},
+{
+"start": 33.4,
+"end": 33.6,
+"word": " skills"
+},
+{
+"start": 33.6,
+"end": 33.96,
+"word": " correctly,"
+},
+{
+"start": 34.1,
+"end": 34.3,
+"word": " paste"
+},
+{
+"start": 34.175,
+"end": 34.23,
+"word": " this"
+},
+{
+"start": 34.25,
+"end": 34.49,
+"word": " prompt"
+},
+{
+"start": 34.61,
+"end": 34.65,
+"word": " and"
+},
+{
+"start": 34.685,
+"end": 34.83,
+"word": " Claude"
+},
+{
+"start": 34.84,
+"end": 34.98,
+"word": " will"
+},
+{
+"start": 34.98,
+"end": 35.3,
+"word": " evaluate"
+},
+{
+"start": 35.3,
+"end": 35.46,
+"word": " your"
+},
+{
+"start": 35.46,
+"end": 35.8,
+"word": " learnings."
+},
+{
+"start": 36.12,
+"end": 36.18,
+"word": " If"
+},
+{
+"start": 36.195,
+"end": 36.28,
+"word": " you"
+},
+{
+"start": 36.28,
+"end": 36.36,
+"word": " want"
+},
+{
+"start": 36.355,
+"end": 36.395,
+"word": " to"
+},
+{
+"start": 36.43,
+"end": 36.47,
+"word": " get"
+},
+{
+"start": 36.505,
+"end": 36.545,
+"word": " all"
+},
+{
+"start": 36.58,
+"end": 36.62,
+"word": " of"
+},
+{
+"start": 36.655,
+"end": 36.695,
+"word": " these"
+},
+{
+"start": 36.73,
+"end": 36.92,
+"word": " prompts,"
+},
+{
+"start": 37.26,
+"end": 37.42,
+"word": " comment"
+},
+{
+"start": 37.42,
+"end": 37.76,
+"word": " SKILL"
+},
+{
+"start": 37.86,
+"end": 37.9,
+"word": " and"
+},
+{
+"start": 37.935,
+"end": 38.02,
+"word": " I'll"
+},
+{
+"start": 38.01,
+"end": 38.11,
+"word": " share"
+},
+{
+"start": 38.11,
+"end": 38.21,
+"word": " it"
+},
+{
+"start": 38.185,
+"end": 38.225,
+"word": " to"
+},
+{
+"start": 38.26,
+"end": 38.3,
+"word": " you"
+},
+{
+"start": 38.335,
+"end": 38.39,
+"word": " via"
+},
+{
+"start": 38.41,
+"end": 38.63,
+"word": " DM."
+}
+]

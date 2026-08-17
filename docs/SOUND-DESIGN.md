@@ -34,9 +34,14 @@ Copy only what a reel uses — do not vendor whole packs into the repo.
 ## 2. The five rules
 
 ### Layer — movement + texture
-One sound is almost never enough. Pair a **movement** sound (whoosh, boom, riser) with a **texture**
-(paper, tick, marker, gear, keyboard). The texture sits ~6 dB under and one frame later, so the pair
-reads as a single event with grit.
+One sound is almost never enough. Pair a **movement** sound (a low impact, a thud, a mechanical
+ratchet) with a **texture** (tick, marker, gear, keyboard). The texture sits ~6 dB under and one
+frame later, so the pair reads as a single event with grit.
+
+> ⛔⛔ **THIS RULE USED TO SAY "whoosh, boom, riser". IT DOES NOT ANY MORE.** Air-movement sounds
+> are banned house-wide — see §6. Reel 107 spent **five review rounds** on "a puff of air" and the
+> word "whoosh" sitting in this very sentence is part of why it kept getting reached for. The
+> movement half of a layer is a THUD, not a gust.
 
 ```ts
 ...layer(18.76,
@@ -74,6 +79,81 @@ animation makes the mix cluttered and reads as amateur. There is no API for this
 | Ambient bed / room tone | -24 dB | `SFX_BED` |
 
 `db(-14)` converts dB to Remotion's linear volume. **Never type a bare float.**
+
+### ⛔⛔⛔ …AND THE TABLE ABOVE IS NOT WHAT THE EAR HEARS
+
+**Nominal dB tells you nothing about perceived loudness.** Reel 107's game chimes were SET at
+-17..-19 against percussion at -12..-14 — five dB *down* — and came back as *"those ding game sfx
+are wayy too loud"*. They were, by 13-18 dB. Two reasons the number lied:
+
+- the ear peaks in sensitivity around **2-5 kHz**, and chime/UI packs are normalised right into it
+- a short **tone** integrates over its length where a **transient** does not
+
+Measured A-weighted offset per file (how much hotter than its nominal dB it actually lands):
+
+| file | offset | |
+|---|---|---|
+| `c_collect` `c_grow` `c_powerbig` `c_1up` `c_power` | **-10 to -12** | the game bank |
+| `clap_slam` `punch_thud` `slate_whump` | -23 to -25 | percussion |
+| `temper_chime` `impact` `thock` | -30 / -36 / -42 | |
+
+A chime and a clap set to the same number land **~13 dB apart**.
+
+> ⭐ **SET ACCENT CUES FROM A PERCEPTUAL TARGET, NOT A NUMBER:**
+> `cue_dB = target_A_weighted - offset(file)`.
+> Targets: **hero -32 · support -37 · texture -43 · bed -50** (A-weighted).
+> `python3 tools/sfx_audit.py <reel>.tsx --levels` prints every cue by perceived level and its tier.
+
+---
+
+## 2b. HOW MANY CUES — density is a budget, and it is small
+
+⛔ Reel 107 shipped a bank of **134 cues = 3.82/sec** and got *"theres too many sfx and some of them
+are too annoying"*. Counted against reels that shipped:
+
+| reel | cues | per second |
+|---|---|---|
+| 95 TOOLS | 22 / 22.5s | **0.98** |
+| 105 FREE | 25 / 22.1s | **1.13** |
+| 106 SKILL | 58 / 39.1s | **1.48** |
+| 107 v34 (rejected) | 134 / 35.1s | **3.82** |
+
+> **House rate: ~1.0-1.5 cues per second. Treat 1.5 as a ceiling, not a target.**
+
+**"Annoying" has a specific signature: bursts of the SAME sample.** That bank had 10× `key` inside
+0.75s, 8× `ui_tap`, 8× `c_power`, 6× `ticket_click`, 6× `stamp_press`. A repeated identical
+transient is a machine gun, and pitch-varying does **not** rescue it at that count.
+
+⭐ **The per-scene budget that worked:** one transient on the cut *(if the cut earns one — see below)*
++ **one hero** for the thing the scene is about + at most a couple of accents. **No sample repeated
+more than 3×.** Density should PEAK on the one or two scenes that carry the story and thin out
+elsewhere; flat coverage is what makes a mix feel busy and unranked.
+
+⛔ HOW IT HAPPENS: you score every **beat** instead of every **event**. Each ladder, layer partner
+and weight cue is defensible alone and nobody ever sums them. **Count the bank and its rate before
+shipping it.**
+
+### ⛔⛔ DO NOT SOUND EVERY CUT
+
+Reel 107 carried a rule — *"every scene cut gets a transient, a silent cut reads as a glitch"* — and
+it was wrong at scale. Thirteen identical marks is a **metronome, not an edit**, and it produced
+*"i hate that there is keep a hitting sound … that sounds like shit, never do that sound again"*.
+
+> **A rule that is right for one cut is not right for thirteen.** Mark ~5 structural beats and let
+> the picture cut carry itself the rest of the time.
+
+### ⛔⛔ PERCUSSION MUST BE LOW, NEVER BRIGHT
+
+The offender above was `clap_slam`: **62.0% of its energy above 2 kHz, 9.6% below 250 Hz.** A
+transient with its energy up top is a **slap**; the same event carried under 250 Hz is a **thud you
+feel**.
+
+| ✅ use | | ⛔ banned |
+|---|---|---|
+| `thock` 88.6% low · `impact_deep` 93.1% · `sub` 96.6% · `impact` 42.1% | | `clap_slam` 62% bright · `punch_thud` 93.7% bright |
+
+One bright sample as a **one-off** accent is fine (a keystroke, a stamp). It is the **repetition**
+that turns brightness into a slap, which is why the SLAP gate keys on both.
 
 ---
 
@@ -155,6 +235,102 @@ find public/sfx -size 0 -name '*.wav'
 ```
 
 A missing `staticFile()` path fails silently at render — the cue just never plays.
+
+---
+
+## 6. THE GATES — `tools/sfx_audit.py`
+
+Five automatic gates plus two report modes. Run it on the reel's `.tsx` before every render, and
+with `--mix` on the finished mp4 before shipping.
+
+```bash
+python3 tools/sfx_audit.py video/src/MyReel.tsx                      # the five gates
+python3 tools/sfx_audit.py video/src/MyReel.tsx --levels             # perceived level per cue
+python3 tools/sfx_audit.py video/src/MyReel.tsx --mix out/reel.mp4   # + the balance band
+```
+
+| gate | rule | the round that produced it |
+|---|---|---|
+| **HISS BED** | `dur > 0.8s` **and** >85% of energy above 2 kHz | `cloth-shiver` 2.30s/98.3%, `paper-rustle` 2.25s/91.6%, `check-pop` 0.95s/91.5% — three of them overlapped into a **continuous 4.5-second hiss** |
+| **AIR SWELL** | `attack > 40ms` **and** <250 Hz energy < 15% | a swoosh IS a puff of air: `swooshup` 73ms/0% low, `blip_up` 167ms — *which I had introduced myself as the fix for check-pop* |
+| **NAMED AIR** | filename contains whoosh/swoosh/puff/poof/breath/wind — **banned regardless of measurements** | `am/whoosh-fast` and `lib_whoosh` both PASSED the two measured gates on technicalities and were still, by ear, exactly the reported defect |
+| **MISSING** | a cue pointing at no file | a cue that silently never plays |
+| **SLAP** | a sample used **5+ times** must be **<35%** above 2 kHz | `clap_slam` at 13 uses / 62% bright |
+| `--mix` **BALANCE** | the rendered mix vs the approved-reel band | see below |
+| `--levels` | every cue by A-weighted level and tier | the "dings too loud" round |
+
+### ⛔ A measurement gate cannot out-argue the label on the tin
+
+Two files literally named "whoosh" passed two numeric gates — one attacked too fast to be an "air
+swell", the other carried just enough low end. **If a file is called a whoosh, it is one.** Gates
+are a floor, never a substitute for the obvious.
+
+### ⛔ Write the gate, then RUN it on everything
+
+`blip_up` was added as the fix for a hiss cue and was itself the next round's complaint. The AIR
+gate that would have caught it had been written the round before — and only ever run against the
+one cue being replaced. **A gate applied to your diff is not a gate.**
+
+### The BALANCE band — set from ACCEPTED work
+
+Rolling 0.4s windows over the four reels that were approved (94 AGENCY — the stated animation bar —
+95, 97, 105), median per reel:
+
+```
+>2kHz   mean 36.9  sd 6.4   ->  band 24.1 - 49.7 %
+<250Hz  mean 12.0  sd 1.3   ->  band  9.5 - 14.5 %
+```
+
+⛔⛔ **THE BAND IS mean ± 2sd, NOT min-max.** It was min-max of those four (31.0-46.0) and that form
+is indefensible: with n=4 it fails any fifth sample landing outside four observations, and it duly
+failed a good mix at 30.3% — which is only **-1.03 sd** from the approved mean. See
+`docs/MEASURING.md`.
+
+⭐ **And set thresholds from work that was ACCEPTED, not from the thing you are trying to quieten.**
+Reel 107's *rejected* cut measured **27.6% >2kHz — duller than every approved reel.** So "too airy"
+was the wrong axis entirely, and a bank tuned darker to chase it would have moved AWAY from the
+house sound. A whoosh is identified by its **envelope**, never its spectrum.
+
+---
+
+## 7. ⛔⛔⛔ WHEN A NOTE SURVIVES A FIX, THE FIX IS IN THE WRONG LAYER
+
+The single most expensive lesson in this repo's audio history. Reel 107 was told *"a puff of air"*
+**five times across four rounds**. Each time the **SFX bank** was audited and rebuilt. The SFX were
+never making the sound.
+
+- **Rounds 1-3** — real SFX defects, all fixed, note unchanged.
+- **Round 4** — scanning the **music beds** for the air-swell envelope found reverse-cymbal risers
+  at **0.00 / 0.75 / 1.00 / 8.25s** — i.e. exactly the "0.5s", "0.8s" and "9s" that had been
+  reported. A riser into a downbeat is a standard intro element and is, acoustically, a puff of air.
+- **Round 5** — the layers were **soloed and re-rendered** (61 frames each, one per stem). Across
+  **0.60-1.23s the SFX track measures -180 dB, digital silence**, with the bed at -61 dB. The only
+  audible thing there was the **VO**: an aspirated consonant carrying 45-52% of its energy in
+  2-8 kHz. **A hard consonant IS a puff of air.**
+
+> ⭐⭐⭐ **SOLO THE LAYERS. It is one cheap render per stem and it ENDS the argument.**
+> Four rounds of spectral inference were less decisive than three 61-frame renders.
+
+**How to solo:** mute the VO and bed `<Audio>` volumes and render 60 frames; then empty the cue
+array and render again; measure each. `MEASURING.md` Law 6 already said this — it was applied
+*within* the SFX bank and never *across* the stems.
+
+### The tell, so you can catch it early
+
+A correct fix makes a note go away. **A note that comes back unchanged — same words, same
+timestamps — is telling you the thing you changed was not the cause.** Stop fixing and re-diagnose:
+enumerate every layer that could produce the symptom (VO · bed · SFX) and measure each **in
+isolation**, starting with the ones you did not write and did not change.
+
+### And scale the fix to the complaint
+
+The de-esser that fixed round 5 was first applied across the whole 35s (active on 12.6% of hops).
+It fixed the burst and pushed the reel **outside the balance band**, because one moment had been
+named and every consonant in the reel had been processed. Retuned to **6.6%** of hops: burst down
+**-6.5 dB**, voiced speech **-0.00 dB**, overall level **-0.03 dB**, mix back in band.
+
+> **A global process to fix a local defect is the same error as the 13-cut clap and the 134-cue
+> bank.** Match the width of the fix to the width of the complaint.
 
 ---
 

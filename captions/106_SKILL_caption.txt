@@ -1,0 +1,26 @@
+Comment "SKILL" and I'll send you all four prompts.
+
+👇 READ BELOW
+
+You have been "learning" something for months. The problem is not you, it is that nothing is teaching you, it is only explaining to you.
+
+Four prompts fix that, and they run inside a real Claude feature: a Project, which is a workspace with its own instructions field. Free accounts get five of them.
+
+★ 1 → goes in the project instructions, and sets the rules before Claude teaches you anything
+★ 2 → kills the lecture and drops you into real situations you have to handle
+★ 3 → turns it into a 7 day plan at 45 minutes a day
+★ 4 → tests you properly and tells you what you still cannot do
+
+The order is doing more work than the wording. Almost everyone pastes something like the first prompt and stops there, which gets you a friendlier explainer and nothing else. The drilling is what changes what you can actually do. The deadline is what makes it finish, because an open ended plan is the thing you quietly abandon in week three. The test is the only part that tells you the truth, and it has to come last, when it can still hurt.
+
+The part nobody mentions: there is no hidden toggle. Nothing in Claude is called "Personal Tutor", so do not go hunting through the menus for it. What is real is the Project and the instructions field, and what makes it a tutor is what you paste in there. That is genuinely the whole mechanism, which is also why it works in any tool that has a persistent instructions field.
+
+Two more honest notes. Claude does ship a real Learning style in the style dropdown, which makes it Socratic and gets it asking you questions instead of answering yours. That is a different thing from these four prompts, it is a global toggle rather than one project, and you can run both. And "4 hours instead of 6 months" comes from the post this idea spread through, not from a study, so take it as the shape of the claim rather than a promise. What the prompts really remove is the two things that burn the months: rereading material you already understand, and finding out far too late that none of it stuck.
+
+Comment "SKILL" and I'll DM you all four prompts in full, in order, with the brackets to fill in and where each one gets pasted.
+
+.
+.
+.
+
+#ai #claude #claudeai #anthropic #aitools #learning #learnfast #studytips #skills #upskilling #promptengineering #prompts #aiprompts #productivity #selftaught #onlinelearning #careergrowth #techtips #artificialintelligence #aiworkflow

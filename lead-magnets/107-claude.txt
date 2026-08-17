@@ -1,0 +1,54 @@
+TITLE  The 3 Free Claude Resources Most People Never Open
+SUB    Anthropic's own course platform, Anthropic's own skills repo, and the 100+ subagents the community built on top. All free, all live, nothing gated.
+
+H      Start here
+P      Everything in this guide is free and public right now. There is no waitlist, no beta, and no paid tier holding the better version. That is the whole point: the reason most people are behind on this is not access, it is that free things with no deadline attached never make it onto a calendar.
+P      Work through them in the order below. It is deliberate. The courses teach you what the tool actually does, the official repo shows you Anthropic's own implementation of it, and the subagents are only useful once you know what you would delegate.
+
+RULE
+
+H      1. Anthropic Academy
+P      Anthropic's own training platform, at anthropic.skilljar.com. It launched publicly in March 2026 and the catalogue read 22 courses on the day this guide was written. Enrolment is free, there is no premium tier, and the completion certificates are free and shareable on LinkedIn.
+P      You do not need an Anthropic account to start. An email address is enough.
+NUM    Claude 101, if you have only ever used the chat window
+NUM    Claude Code 101, then Claude Code in Action, if you write software
+NUM    Introduction to Model Context Protocol, once the first two feel obvious
+NUM    Introduction to agent skills and Introduction to subagents, which set up the other two resources in this guide
+NUM    The AI Fluency track, if you are teaching or rolling this out to a team
+P      The tracks worth knowing about: AI Fluency, Product Training, Developer Deep Dives, Cloud and Enterprise, and Foundational Knowledge.
+
+RULE
+
+H      2. anthropics/skills
+P      The official public repository for Agent Skills, published by Anthropic themselves. It stood at 169,585 stars and 20,190 forks when this was written, which makes it one of the most starred repositories on GitHub in any category.
+P      What matters is that this is the reference implementation rather than somebody's interpretation of the idea. The document skills in it are the same ones that ship to paid plans in Claude.ai.
+P      It also registers as a Claude Code plugin marketplace, so you can install from it directly rather than copying files around.
+QUOTE  /plugin install document-skills@anthropic-agent-skills
+P      Anthropic also maintains a separate curated directory of high quality Claude Code plugins at anthropics/claude-plugins-official, which is worth a look once the first one makes sense.
+
+RULE
+
+H      3. VoltAgent/awesome-claude-code-subagents
+P      A community collection describing itself as 100+ specialised Claude Code subagents, at 24,350 stars and 2,833 forks. This is the one people find last and should probably find third.
+P      A subagent is a Claude with a narrowed job and its own context. The value is not that there are a hundred of them, it is that each one arrives already scoped, so you are choosing a specialist instead of writing a brief.
+B      code-reviewer, security-auditor and test-automator, for work you want checked rather than produced
+B      backend-architect, cloud-architect and api-designer, for decisions you want argued before they are built
+B      sql-pro, python-pro, react-specialist and frontend-dev, for the narrow deep tasks
+B      debugger, refactorer and perf-engineer, for work on code that already exists
+P      Start with two or three that match what you actually do this week. A hundred installed subagents you never call is the same problem as a course library you never open.
+
+RULE
+
+H      What the video moves too fast to say properly
+P      Dario Amodei, Anthropic's CEO, really did make the warning the video opens with. It is in an essay called The Adolescence of Technology, published in January 2026, in which he argues that AI could drive wealth concentration past that of the Gilded Age, with personal fortunes reaching into the trillions. For scale, the richest Gilded Age industrialist, John D. Rockefeller, controlled roughly 2 percent of US GDP. The phrasing in the video is a paraphrase of that argument, not a direct quotation.
+P      "Over 100 subagents" is the repository's own description of itself. It is the maintainers' claim rather than a count anyone verified, so treat it as such.
+P      The star counts came from the GitHub API and the course count from the live catalogue, both on the day this was made. All three numbers move, and the two repositories are growing quickly.
+P      Anthropic Academy is genuinely free with no upsell attached. If you ever hit a paywall on any of these three, you are on the wrong site.
+
+RULE
+
+H      The honest version of the argument
+P      The gap this video is about is not a gap in access. Every resource here is public and free. It is a gap in what people have actually opened, which is a much less dramatic problem and a much easier one to fix.
+P      Pick one course, finish it this week, then install one skill and two subagents that match your real work. That is roughly four hours of effort and it puts you ahead of almost everyone who has bookmarked the same three links.
+
+KEY    Comment CLAUDE for all three links

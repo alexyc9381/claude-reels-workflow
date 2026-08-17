@@ -1,0 +1,796 @@
+{
+ "lines": [
+  {
+   "start": 1.9,
+   "end": 4.34,
+   "text": "3 AI platforms that replace paid tools."
+  },
+  {
+   "start": 4.98,
+   "end": 5.38,
+   "text": "Number 1."
+  },
+  {
+   "start": 5.82,
+   "end": 6.02,
+   "text": "Cut, cut."
+  },
+  {
+   "start": 7.04,
+   "end": 7.34,
+   "text": "Number 1."
+  },
+  {
+   "start": 7.5,
+   "end": 10.6,
+   "text": "This website lets you run ChatTributee, Cloud, Gemini, Grok, and DeepSeek all in one place"
+  },
+  {
+   "start": 10.6,
+   "end": 11.04,
+   "text": "for free."
+  },
+  {
+   "start": 11.56,
+   "end": 14.38,
+   "text": "So stop paying hundreds in monthly subscription costs, but then cut, cut."
+  },
+  {
+   "start": 15.44,
+   "end": 18.82,
+   "text": "So stop paying hundreds in monthly subscription costs, but the next one is even better."
+  },
+  {
+   "start": 19.4,
+   "end": 19.72,
+   "text": "Number 2."
+  },
+  {
+   "start": 19.88,
+   "end": 20.92,
+   "text": "A free AI video generator."
+  },
+  {
+   "start": 21.2,
+   "end": 23.04,
+   "text": "It has tools like Cling, Sore, cut, cut."
+  },
+  {
+   "start": 25.36,
+   "end": 27.94,
+   "text": "It has tools like Cling, Sore, and Cdance fully built in."
+  },
+  {
+   "start": 28.08,
+   "end": 29.3,
+   "text": "Just drop down a prompt, cut, cut."
+  },
+  {
+   "start": 29.3,
+   "end": 31.56,
+   "text": "Just drop in a prompt and get a video on the spot."
+  },
+  {
+   "start": 31.96,
+   "end": 32.28,
+   "text": "Number 3."
+  },
+  {
+   "start": 32.46,
+   "end": 33.16,
+   "text": "A free cut, cut."
+  },
+  {
+   "start": 33.62,
+   "end": 33.92,
+   "text": "Number 3."
+  },
+  {
+   "start": 34.14,
+   "end": 40.64,
+   "text": "Free AI image generation with insane quality and realism that goes toe to toe with paid"
+  },
+  {
+   "start": 40.64,
+   "end": 40.96,
+   "text": "tools."
+  },
+  {
+   "start": 41.24,
+   "end": 43.08,
+   "text": "Follow and comment free and I'll send you all the links."
+  }
+ ],
+ "words": [
+  {
+   "w": "3",
+   "start": 1.9,
+   "end": 2.3
+  },
+  {
+   "w": "AI",
+   "start": 2.3,
+   "end": 2.48
+  },
+  {
+   "w": "platforms",
+   "start": 2.48,
+   "end": 2.84
+  },
+  {
+   "w": "that",
+   "start": 2.84,
+   "end": 3.04
+  },
+  {
+   "w": "replace",
+   "start": 3.04,
+   "end": 3.28
+  },
+  {
+   "w": "paid",
+   "start": 3.28,
+   "end": 3.52
+  },
+  {
+   "w": "tools.",
+   "start": 3.52,
+   "end": 4.34
+  },
+  {
+   "w": "Number",
+   "start": 4.98,
+   "end": 5.06
+  },
+  {
+   "w": "1.",
+   "start": 5.06,
+   "end": 5.38
+  },
+  {
+   "w": "Cut,",
+   "start": 5.82,
+   "end": 5.86
+  },
+  {
+   "w": "cut.",
+   "start": 5.92,
+   "end": 6.02
+  },
+  {
+   "w": "Number",
+   "start": 7.04,
+   "end": 7.08
+  },
+  {
+   "w": "1.",
+   "start": 7.08,
+   "end": 7.34
+  },
+  {
+   "w": "This",
+   "start": 7.5,
+   "end": 7.5
+  },
+  {
+   "w": "website",
+   "start": 7.5,
+   "end": 7.68
+  },
+  {
+   "w": "lets",
+   "start": 7.68,
+   "end": 7.86
+  },
+  {
+   "w": "you",
+   "start": 7.86,
+   "end": 8.0
+  },
+  {
+   "w": "run",
+   "start": 8.0,
+   "end": 8.12
+  },
+  {
+   "w": "ChatTributee,",
+   "start": 8.12,
+   "end": 8.74
+  },
+  {
+   "w": "Cloud,",
+   "start": 8.74,
+   "end": 8.9
+  },
+  {
+   "w": "Gemini,",
+   "start": 9.0,
+   "end": 9.18
+  },
+  {
+   "w": "Grok,",
+   "start": 9.28,
+   "end": 9.46
+  },
+  {
+   "w": "and",
+   "start": 9.5,
+   "end": 9.62
+  },
+  {
+   "w": "DeepSeek",
+   "start": 9.62,
+   "end": 9.86
+  },
+  {
+   "w": "all",
+   "start": 9.86,
+   "end": 10.06
+  },
+  {
+   "w": "in",
+   "start": 10.06,
+   "end": 10.14
+  },
+  {
+   "w": "one",
+   "start": 10.14,
+   "end": 10.34
+  },
+  {
+   "w": "place",
+   "start": 10.34,
+   "end": 10.6
+  },
+  {
+   "w": "for",
+   "start": 10.6,
+   "end": 10.8
+  },
+  {
+   "w": "free.",
+   "start": 10.8,
+   "end": 11.04
+  },
+  {
+   "w": "So",
+   "start": 11.56,
+   "end": 11.64
+  },
+  {
+   "w": "stop",
+   "start": 11.64,
+   "end": 11.88
+  },
+  {
+   "w": "paying",
+   "start": 11.88,
+   "end": 12.02
+  },
+  {
+   "w": "hundreds",
+   "start": 12.02,
+   "end": 12.34
+  },
+  {
+   "w": "in",
+   "start": 12.34,
+   "end": 12.5
+  },
+  {
+   "w": "monthly",
+   "start": 12.5,
+   "end": 12.74
+  },
+  {
+   "w": "subscription",
+   "start": 12.74,
+   "end": 13.12
+  },
+  {
+   "w": "costs,",
+   "start": 13.12,
+   "end": 13.46
+  },
+  {
+   "w": "but",
+   "start": 13.62,
+   "end": 13.62
+  },
+  {
+   "w": "then",
+   "start": 13.62,
+   "end": 13.84
+  },
+  {
+   "w": "cut,",
+   "start": 13.84,
+   "end": 14.22
+  },
+  {
+   "w": "cut.",
+   "start": 14.24,
+   "end": 14.38
+  },
+  {
+   "w": "So",
+   "start": 15.44,
+   "end": 15.74
+  },
+  {
+   "w": "stop",
+   "start": 15.74,
+   "end": 15.98
+  },
+  {
+   "w": "paying",
+   "start": 15.98,
+   "end": 16.14
+  },
+  {
+   "w": "hundreds",
+   "start": 16.14,
+   "end": 16.48
+  },
+  {
+   "w": "in",
+   "start": 16.48,
+   "end": 16.66
+  },
+  {
+   "w": "monthly",
+   "start": 16.66,
+   "end": 16.94
+  },
+  {
+   "w": "subscription",
+   "start": 16.94,
+   "end": 17.34
+  },
+  {
+   "w": "costs,",
+   "start": 17.34,
+   "end": 17.72
+  },
+  {
+   "w": "but",
+   "start": 17.82,
+   "end": 17.94
+  },
+  {
+   "w": "the",
+   "start": 17.94,
+   "end": 18.06
+  },
+  {
+   "w": "next",
+   "start": 18.06,
+   "end": 18.2
+  },
+  {
+   "w": "one",
+   "start": 18.2,
+   "end": 18.32
+  },
+  {
+   "w": "is",
+   "start": 18.32,
+   "end": 18.42
+  },
+  {
+   "w": "even",
+   "start": 18.42,
+   "end": 18.6
+  },
+  {
+   "w": "better.",
+   "start": 18.6,
+   "end": 18.82
+  },
+  {
+   "w": "Number",
+   "start": 19.4,
+   "end": 19.46
+  },
+  {
+   "w": "2.",
+   "start": 19.46,
+   "end": 19.72
+  },
+  {
+   "w": "A",
+   "start": 19.88,
+   "end": 19.88
+  },
+  {
+   "w": "free",
+   "start": 19.88,
+   "end": 20.1
+  },
+  {
+   "w": "AI",
+   "start": 20.1,
+   "end": 20.34
+  },
+  {
+   "w": "video",
+   "start": 20.34,
+   "end": 20.5
+  },
+  {
+   "w": "generator.",
+   "start": 20.5,
+   "end": 20.92
+  },
+  {
+   "w": "It",
+   "start": 21.2,
+   "end": 21.22
+  },
+  {
+   "w": "has",
+   "start": 21.22,
+   "end": 21.36
+  },
+  {
+   "w": "tools",
+   "start": 21.36,
+   "end": 21.56
+  },
+  {
+   "w": "like",
+   "start": 21.56,
+   "end": 21.86
+  },
+  {
+   "w": "Cling,",
+   "start": 21.86,
+   "end": 22.1
+  },
+  {
+   "w": "Sore,",
+   "start": 22.22,
+   "end": 22.46
+  },
+  {
+   "w": "cut,",
+   "start": 22.46,
+   "end": 22.86
+  },
+  {
+   "w": "cut.",
+   "start": 22.92,
+   "end": 23.04
+  },
+  {
+   "w": "It",
+   "start": 25.36,
+   "end": 25.76
+  },
+  {
+   "w": "has",
+   "start": 25.76,
+   "end": 25.92
+  },
+  {
+   "w": "tools",
+   "start": 25.92,
+   "end": 26.08
+  },
+  {
+   "w": "like",
+   "start": 26.08,
+   "end": 26.3
+  },
+  {
+   "w": "Cling,",
+   "start": 26.3,
+   "end": 26.5
+  },
+  {
+   "w": "Sore,",
+   "start": 26.7,
+   "end": 26.76
+  },
+  {
+   "w": "and",
+   "start": 26.88,
+   "end": 26.98
+  },
+  {
+   "w": "Cdance",
+   "start": 26.98,
+   "end": 27.28
+  },
+  {
+   "w": "fully",
+   "start": 27.28,
+   "end": 27.5
+  },
+  {
+   "w": "built",
+   "start": 27.5,
+   "end": 27.74
+  },
+  {
+   "w": "in.",
+   "start": 27.74,
+   "end": 27.94
+  },
+  {
+   "w": "Just",
+   "start": 28.08,
+   "end": 28.14
+  },
+  {
+   "w": "drop",
+   "start": 28.14,
+   "end": 28.32
+  },
+  {
+   "w": "down",
+   "start": 28.32,
+   "end": 28.42
+  },
+  {
+   "w": "a",
+   "start": 28.42,
+   "end": 28.52
+  },
+  {
+   "w": "prompt,",
+   "start": 28.52,
+   "end": 28.74
+  },
+  {
+   "w": "cut,",
+   "start": 29.08,
+   "end": 29.16
+  },
+  {
+   "w": "cut.",
+   "start": 29.18,
+   "end": 29.3
+  },
+  {
+   "w": "Just",
+   "start": 29.3,
+   "end": 29.96
+  },
+  {
+   "w": "drop",
+   "start": 29.96,
+   "end": 30.2
+  },
+  {
+   "w": "in",
+   "start": 30.2,
+   "end": 30.3
+  },
+  {
+   "w": "a",
+   "start": 30.3,
+   "end": 30.38
+  },
+  {
+   "w": "prompt",
+   "start": 30.38,
+   "end": 30.56
+  },
+  {
+   "w": "and",
+   "start": 30.56,
+   "end": 30.72
+  },
+  {
+   "w": "get",
+   "start": 30.72,
+   "end": 30.8
+  },
+  {
+   "w": "a",
+   "start": 30.8,
+   "end": 30.94
+  },
+  {
+   "w": "video",
+   "start": 30.94,
+   "end": 31.04
+  },
+  {
+   "w": "on",
+   "start": 31.04,
+   "end": 31.22
+  },
+  {
+   "w": "the",
+   "start": 31.22,
+   "end": 31.28
+  },
+  {
+   "w": "spot.",
+   "start": 31.28,
+   "end": 31.56
+  },
+  {
+   "w": "Number",
+   "start": 31.96,
+   "end": 31.98
+  },
+  {
+   "w": "3.",
+   "start": 31.98,
+   "end": 32.28
+  },
+  {
+   "w": "A",
+   "start": 32.46,
+   "end": 32.46
+  },
+  {
+   "w": "free",
+   "start": 32.46,
+   "end": 32.68
+  },
+  {
+   "w": "cut,",
+   "start": 32.68,
+   "end": 33.0
+  },
+  {
+   "w": "cut.",
+   "start": 33.16,
+   "end": 33.16
+  },
+  {
+   "w": "Number",
+   "start": 33.62,
+   "end": 33.66
+  },
+  {
+   "w": "3.",
+   "start": 33.66,
+   "end": 33.92
+  },
+  {
+   "w": "Free",
+   "start": 34.14,
+   "end": 34.2
+  },
+  {
+   "w": "AI",
+   "start": 34.2,
+   "end": 34.46
+  },
+  {
+   "w": "image",
+   "start": 34.46,
+   "end": 34.6
+  },
+  {
+   "w": "generation",
+   "start": 34.6,
+   "end": 34.94
+  },
+  {
+   "w": "with",
+   "start": 34.94,
+   "end": 35.18
+  },
+  {
+   "w": "insane",
+   "start": 35.18,
+   "end": 35.6
+  },
+  {
+   "w": "quality",
+   "start": 35.6,
+   "end": 39.12
+  },
+  {
+   "w": "and",
+   "start": 39.12,
+   "end": 39.26
+  },
+  {
+   "w": "realism",
+   "start": 39.26,
+   "end": 39.52
+  },
+  {
+   "w": "that",
+   "start": 39.52,
+   "end": 39.74
+  },
+  {
+   "w": "goes",
+   "start": 39.74,
+   "end": 39.92
+  },
+  {
+   "w": "toe",
+   "start": 39.92,
+   "end": 40.08
+  },
+  {
+   "w": "to",
+   "start": 40.08,
+   "end": 40.2
+  },
+  {
+   "w": "toe",
+   "start": 40.2,
+   "end": 40.36
+  },
+  {
+   "w": "with",
+   "start": 40.36,
+   "end": 40.48
+  },
+  {
+   "w": "paid",
+   "start": 40.48,
+   "end": 40.64
+  },
+  {
+   "w": "tools.",
+   "start": 40.64,
+   "end": 40.96
+  },
+  {
+   "w": "Follow",
+   "start": 41.24,
+   "end": 41.48
+  },
+  {
+   "w": "and",
+   "start": 41.48,
+   "end": 41.64
+  },
+  {
+   "w": "comment",
+   "start": 41.64,
+   "end": 41.82
+  },
+  {
+   "w": "free",
+   "start": 41.82,
+   "end": 42.16
+  },
+  {
+   "w": "and",
+   "start": 42.16,
+   "end": 42.28
+  },
+  {
+   "w": "I'll",
+   "start": 42.28,
+   "end": 42.4
+  },
+  {
+   "w": "send",
+   "start": 42.4,
+   "end": 42.52
+  },
+  {
+   "w": "you",
+   "start": 42.52,
+   "end": 42.64
+  },
+  {
+   "w": "all",
+   "start": 42.64,
+   "end": 42.8
+  },
+  {
+   "w": "the",
+   "start": 42.8,
+   "end": 42.9
+  },
+  {
+   "w": "links.",
+   "start": 42.9,
+   "end": 43.08
+  }
+ ]
+}

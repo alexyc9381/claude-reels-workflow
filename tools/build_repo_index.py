@@ -85,12 +85,28 @@ def scan_reels():
     # storyboard: storyboards/<number>-<name>.md   (number is the reel's canonical id)
     d = rp("storyboards")
     if os.path.isdir(d):
+        # ⛔ SORT BY NUMBER, NOT FILENAME. Two reels can legitimately share a name
+        # (97 FREE and 105 FREE both exist), and filename order puts "105-" before
+        # "97-", so the newer reel would claim the plain key and the older one —
+        # the one that already owns the matching Claude<Name>Reel.tsx — would be
+        # displaced. Ascending number keeps existing rows stable.
+        boards = []
         for f in sorted(os.listdir(d)):
             m = re.fullmatch(r"(\d+)-(.+?)\.md", f)
             if not m or not keep(f"storyboards/{f}"):
                 continue
-            num, name = int(m.group(1)), m.group(2)
-            r = touch(norm(name), storyboard=f"storyboards/{f}", name=name)
+            boards.append((int(m.group(1)), m.group(2), f))
+        for num, name, f in sorted(boards):
+            key = norm(name)
+            # ⛔ A SECOND REEL WITH THE SAME NAME IS A DIFFERENT REEL, NOT AN UPDATE.
+            # Without this, 105-free.md merged into 97 FREE's row: one row, the wrong
+            # number, and 105 absent from the registry entirely. If the plain key is
+            # already held by a storyboard with a different number, this reel gets
+            # its own row keyed name+number.
+            held = reels.get(key)
+            if held and held.get("storyboard") and held.get("number") not in (None, num):
+                key = f"{key}{num}"
+            r = touch(key, storyboard=f"storyboards/{f}", name=name)
             # a storyboard's number is the best id we have; keep the highest (part2 > part1 etc.)
             if r["number"] is None or num >= r["number"]:
                 r["number"] = num

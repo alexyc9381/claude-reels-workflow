@@ -1,0 +1,39 @@
+TITLE   3 Free AI Sites That Replace What You Pay For
+SUB     The exact links, what each one actually gives you, and where the free tier stops
+
+H       The three
+NUM     Arena (arena.ai): every frontier model, one chat box, free
+NUM     Magnific, formerly Freepik (magnific.com): Kling, Sora and Seedance in one generator
+NUM     Google AI Studio (aistudio.google.com): Nano Banana image generation
+
+RULE
+
+H       1. Arena, at arena.ai
+P       This is the one that replaces a stack of chat subscriptions. It used to live at lmarena.ai and now redirects to arena.ai. You pick a model and talk to it, or put two side by side and compare the same prompt.
+P       Read off the live leaderboard on 12 August 2026: 391 models ranked by 7,779,985 human votes.
+B       Every model the video names is on it: Claude, ChatGPT, Gemini, Grok and DeepSeek, plus Qwen, Llama, Kimi and Mistral
+B       Four modes: Battle (two anonymous models fight), Side by Side (two you choose), Direct (one at a time), Agent
+B       No card, no trial. You can browse and use it without signing up
+QUOTE   Why it is actually free: you are the judge. Your votes are what produce the leaderboard, so the free usage is the product, not a loss leader.
+
+H       2. Magnific, at magnific.com
+P       Freepik's AI product is now called Magnific. Their own banner says so, and freepik.com redirects there. One prompt box, and you choose which video model renders it.
+B       Models on the page: Google Veo, Kling AI, MiniMax Hailuo, PixVerse, Runway, ByteDance Seed
+B       Sora 2 has its own page there too, up to 12 second clips with synced audio
+B       Text to video, image to video, consistent characters, and a sound effects generator
+P       Be honest about the free tier here. Video generation is credit metered, not unlimited. You can start free and the cheap models go a long way, but Sora 2 Pro is quoted at 450 credits per second of footage. Plan around the credits, not around the word free.
+
+H       3. Google AI Studio, at aistudio.google.com
+P       Nano Banana is Google's image model and AI Studio is where you use it without paying. Their own description is "high quality image generation".
+B       Photoreal output that holds up next to paid image tools
+B       Edit an existing photo: change the light, the camera angle, the focus, the style
+B       Veo for video and Gemini for text sit in the same place
+P       "Toe to toe with paid tools" is the fair claim. Level, not better. For most real work you will not be able to tell which one made the image.
+
+RULE
+
+H       The part nobody mentions
+P       These three do not overlap. That is the whole reason the stack works. Arena is where you think, Magnific is where you move, AI Studio is where you make. People try to replace a paid subscription with one free tool, it falls short at something, and they go back to paying. Split the job across the three and there is nothing left that the paid tier was doing for you.
+P       The other thing: check what a site is called before you trust it. Freepik is Magnific now, lmarena is arena.ai, and there is a lookalike on a freepik.app domain that is a completely different company. The names move faster than the tutorials do.
+
+KEY     FREE

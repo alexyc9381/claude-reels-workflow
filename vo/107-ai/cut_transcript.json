@@ -1,0 +1,1011 @@
+{
+ "lines": [
+  {
+   "start": 0.0,
+   "end": 2.26,
+   "text": "If you're not using cloud right now, you're probably falling behind."
+  },
+  {
+   "start": 2.52,
+   "end": 4.88,
+   "text": "The creator of cloud even said that AI is about to create a wealth cap bigger"
+  },
+  {
+   "start": 4.88,
+   "end": 6.28,
+   "text": "than anything we've ever seen before."
+  },
+  {
+   "start": 6.76,
+   "end": 7.18,
+   "text": "And don't worry."
+  },
+  {
+   "start": 7.34,
+   "end": 8.94,
+   "text": "It's not too late to catch up because here are the exact"
+  },
+  {
+   "start": 8.94,
+   "end": 10.36,
+   "text": "resources to not get left behind."
+  },
+  {
+   "start": 10.74,
+   "end": 12.12,
+   "text": "First is Anthopics free course library."
+  },
+  {
+   "start": 12.44,
+   "end": 14.8,
+   "text": "They basically made free classes to teach you how to use their own AI."
+  },
+  {
+   "start": 14.9,
+   "end": 16.14,
+   "text": "So there's no reason not to learn."
+  },
+  {
+   "start": 16.48,
+   "end": 17.92,
+   "text": "Next is Anthopics official skills plugins."
+  },
+  {
+   "start": 18.26,
+   "end": 19.06,
+   "text": "These are basically cheat codes."
+  },
+  {
+   "start": 19.18,
+   "end": 21.58,
+   "text": "You can plug into cloud code to make it instantly better at specific tasks."
+  },
+  {
+   "start": 21.86,
+   "end": 23.7,
+   "text": "Finally, there's this repo called awesome cloud code sub-agents."
+  },
+  {
+   "start": 24.08,
+   "end": 25.78,
+   "text": "This is a free collection of over a hundred cloud code"
+  },
+  {
+   "start": 25.78,
+   "end": 26.7,
+   "text": "helpers built by the community."
+  },
+  {
+   "start": 27.16,
+   "end": 27.74,
+   "text": "Think of them like apps."
+  },
+  {
+   "start": 27.84,
+   "end": 29.22,
+   "text": "You can add to cloud to make it do more things."
+  },
+  {
+   "start": 29.22,
+   "end": 31.56,
+   "text": "And you do not want to be left behind when it comes to AI and cloud"
+  },
+  {
+   "start": 31.56,
+   "end": 33.02,
+   "text": "is arguably the best AI right now."
+  },
+  {
+   "start": 33.38,
+   "end": 34.9,
+   "text": "Follow and comment cloud for all the links I mentioned."
+  }
+ ],
+ "words": [
+  {
+   "w": "If",
+   "start": 0.0,
+   "end": 0.16
+  },
+  {
+   "w": "you're",
+   "start": 0.16,
+   "end": 0.3
+  },
+  {
+   "w": "not",
+   "start": 0.3,
+   "end": 0.5
+  },
+  {
+   "w": "using",
+   "start": 0.5,
+   "end": 0.72
+  },
+  {
+   "w": "cloud",
+   "start": 0.72,
+   "end": 0.88
+  },
+  {
+   "w": "right",
+   "start": 0.88,
+   "end": 1.0
+  },
+  {
+   "w": "now,",
+   "start": 1.0,
+   "end": 1.12
+  },
+  {
+   "w": "you're",
+   "start": 1.22,
+   "end": 1.32
+  },
+  {
+   "w": "probably",
+   "start": 1.32,
+   "end": 1.6
+  },
+  {
+   "w": "falling",
+   "start": 1.6,
+   "end": 1.94
+  },
+  {
+   "w": "behind.",
+   "start": 1.94,
+   "end": 2.26
+  },
+  {
+   "w": "The",
+   "start": 2.52,
+   "end": 2.56
+  },
+  {
+   "w": "creator",
+   "start": 2.56,
+   "end": 2.78
+  },
+  {
+   "w": "of",
+   "start": 2.78,
+   "end": 2.9
+  },
+  {
+   "w": "cloud",
+   "start": 2.9,
+   "end": 3.08
+  },
+  {
+   "w": "even",
+   "start": 3.08,
+   "end": 3.3
+  },
+  {
+   "w": "said",
+   "start": 3.3,
+   "end": 3.48
+  },
+  {
+   "w": "that",
+   "start": 3.48,
+   "end": 3.6
+  },
+  {
+   "w": "AI",
+   "start": 3.6,
+   "end": 3.78
+  },
+  {
+   "w": "is",
+   "start": 3.78,
+   "end": 3.88
+  },
+  {
+   "w": "about",
+   "start": 3.88,
+   "end": 4.02
+  },
+  {
+   "w": "to",
+   "start": 4.02,
+   "end": 4.16
+  },
+  {
+   "w": "create",
+   "start": 4.16,
+   "end": 4.32
+  },
+  {
+   "w": "a",
+   "start": 4.32,
+   "end": 4.4
+  },
+  {
+   "w": "wealth",
+   "start": 4.4,
+   "end": 4.56
+  },
+  {
+   "w": "cap",
+   "start": 4.56,
+   "end": 4.7
+  },
+  {
+   "w": "bigger",
+   "start": 4.7,
+   "end": 4.88
+  },
+  {
+   "w": "than",
+   "start": 4.88,
+   "end": 5.04
+  },
+  {
+   "w": "anything",
+   "start": 5.04,
+   "end": 5.36
+  },
+  {
+   "w": "we've",
+   "start": 5.36,
+   "end": 5.58
+  },
+  {
+   "w": "ever",
+   "start": 5.58,
+   "end": 5.78
+  },
+  {
+   "w": "seen",
+   "start": 5.78,
+   "end": 5.98
+  },
+  {
+   "w": "before.",
+   "start": 5.98,
+   "end": 6.28
+  },
+  {
+   "w": "And",
+   "start": 6.76,
+   "end": 6.86
+  },
+  {
+   "w": "don't",
+   "start": 6.86,
+   "end": 7.02
+  },
+  {
+   "w": "worry.",
+   "start": 7.02,
+   "end": 7.18
+  },
+  {
+   "w": "It's",
+   "start": 7.34,
+   "end": 7.36
+  },
+  {
+   "w": "not",
+   "start": 7.36,
+   "end": 7.48
+  },
+  {
+   "w": "too",
+   "start": 7.48,
+   "end": 7.58
+  },
+  {
+   "w": "late",
+   "start": 7.58,
+   "end": 7.68
+  },
+  {
+   "w": "to",
+   "start": 7.68,
+   "end": 7.78
+  },
+  {
+   "w": "catch",
+   "start": 7.78,
+   "end": 7.92
+  },
+  {
+   "w": "up",
+   "start": 7.92,
+   "end": 8.1
+  },
+  {
+   "w": "because",
+   "start": 8.1,
+   "end": 8.28
+  },
+  {
+   "w": "here",
+   "start": 8.28,
+   "end": 8.46
+  },
+  {
+   "w": "are",
+   "start": 8.46,
+   "end": 8.54
+  },
+  {
+   "w": "the",
+   "start": 8.54,
+   "end": 8.62
+  },
+  {
+   "w": "exact",
+   "start": 8.62,
+   "end": 8.94
+  },
+  {
+   "w": "resources",
+   "start": 8.94,
+   "end": 9.32
+  },
+  {
+   "w": "to",
+   "start": 9.32,
+   "end": 9.56
+  },
+  {
+   "w": "not",
+   "start": 9.56,
+   "end": 9.7
+  },
+  {
+   "w": "get",
+   "start": 9.7,
+   "end": 9.84
+  },
+  {
+   "w": "left",
+   "start": 9.84,
+   "end": 10.0
+  },
+  {
+   "w": "behind.",
+   "start": 10.0,
+   "end": 10.36
+  },
+  {
+   "w": "First",
+   "start": 10.74,
+   "end": 10.86
+  },
+  {
+   "w": "is",
+   "start": 10.86,
+   "end": 11.0
+  },
+  {
+   "w": "Anthopics",
+   "start": 11.0,
+   "end": 11.32
+  },
+  {
+   "w": "free",
+   "start": 11.32,
+   "end": 11.54
+  },
+  {
+   "w": "course",
+   "start": 11.54,
+   "end": 11.78
+  },
+  {
+   "w": "library.",
+   "start": 11.78,
+   "end": 12.12
+  },
+  {
+   "w": "They",
+   "start": 12.44,
+   "end": 12.6
+  },
+  {
+   "w": "basically",
+   "start": 12.6,
+   "end": 12.86
+  },
+  {
+   "w": "made",
+   "start": 12.86,
+   "end": 13.04
+  },
+  {
+   "w": "free",
+   "start": 13.04,
+   "end": 13.26
+  },
+  {
+   "w": "classes",
+   "start": 13.26,
+   "end": 13.6
+  },
+  {
+   "w": "to",
+   "start": 13.6,
+   "end": 13.76
+  },
+  {
+   "w": "teach",
+   "start": 13.76,
+   "end": 13.88
+  },
+  {
+   "w": "you",
+   "start": 13.88,
+   "end": 14.0
+  },
+  {
+   "w": "how",
+   "start": 14.0,
+   "end": 14.1
+  },
+  {
+   "w": "to",
+   "start": 14.1,
+   "end": 14.18
+  },
+  {
+   "w": "use",
+   "start": 14.18,
+   "end": 14.32
+  },
+  {
+   "w": "their",
+   "start": 14.32,
+   "end": 14.44
+  },
+  {
+   "w": "own",
+   "start": 14.44,
+   "end": 14.6
+  },
+  {
+   "w": "AI.",
+   "start": 14.6,
+   "end": 14.8
+  },
+  {
+   "w": "So",
+   "start": 14.9,
+   "end": 14.94
+  },
+  {
+   "w": "there's",
+   "start": 14.94,
+   "end": 15.12
+  },
+  {
+   "w": "no",
+   "start": 15.12,
+   "end": 15.28
+  },
+  {
+   "w": "reason",
+   "start": 15.28,
+   "end": 15.48
+  },
+  {
+   "w": "not",
+   "start": 15.48,
+   "end": 15.74
+  },
+  {
+   "w": "to",
+   "start": 15.74,
+   "end": 15.9
+  },
+  {
+   "w": "learn.",
+   "start": 15.9,
+   "end": 16.14
+  },
+  {
+   "w": "Next",
+   "start": 16.48,
+   "end": 16.58
+  },
+  {
+   "w": "is",
+   "start": 16.58,
+   "end": 16.7
+  },
+  {
+   "w": "Anthopics",
+   "start": 16.7,
+   "end": 17.02
+  },
+  {
+   "w": "official",
+   "start": 17.02,
+   "end": 17.36
+  },
+  {
+   "w": "skills",
+   "start": 17.36,
+   "end": 17.7
+  },
+  {
+   "w": "plugins.",
+   "start": 17.7,
+   "end": 17.92
+  },
+  {
+   "w": "These",
+   "start": 18.26,
+   "end": 18.34
+  },
+  {
+   "w": "are",
+   "start": 18.34,
+   "end": 18.44
+  },
+  {
+   "w": "basically",
+   "start": 18.44,
+   "end": 18.72
+  },
+  {
+   "w": "cheat",
+   "start": 18.72,
+   "end": 18.94
+  },
+  {
+   "w": "codes.",
+   "start": 18.94,
+   "end": 19.06
+  },
+  {
+   "w": "You",
+   "start": 19.18,
+   "end": 19.2
+  },
+  {
+   "w": "can",
+   "start": 19.2,
+   "end": 19.3
+  },
+  {
+   "w": "plug",
+   "start": 19.3,
+   "end": 19.44
+  },
+  {
+   "w": "into",
+   "start": 19.44,
+   "end": 19.58
+  },
+  {
+   "w": "cloud",
+   "start": 19.58,
+   "end": 19.76
+  },
+  {
+   "w": "code",
+   "start": 19.76,
+   "end": 19.94
+  },
+  {
+   "w": "to",
+   "start": 19.94,
+   "end": 20.04
+  },
+  {
+   "w": "make",
+   "start": 20.04,
+   "end": 20.14
+  },
+  {
+   "w": "it",
+   "start": 20.14,
+   "end": 20.26
+  },
+  {
+   "w": "instantly",
+   "start": 20.26,
+   "end": 20.56
+  },
+  {
+   "w": "better",
+   "start": 20.56,
+   "end": 20.82
+  },
+  {
+   "w": "at",
+   "start": 20.82,
+   "end": 20.94
+  },
+  {
+   "w": "specific",
+   "start": 20.94,
+   "end": 21.2
+  },
+  {
+   "w": "tasks.",
+   "start": 21.2,
+   "end": 21.58
+  },
+  {
+   "w": "Finally,",
+   "start": 21.86,
+   "end": 22.04
+  },
+  {
+   "w": "there's",
+   "start": 22.14,
+   "end": 22.28
+  },
+  {
+   "w": "this",
+   "start": 22.28,
+   "end": 22.34
+  },
+  {
+   "w": "repo",
+   "start": 22.34,
+   "end": 22.56
+  },
+  {
+   "w": "called",
+   "start": 22.56,
+   "end": 22.76
+  },
+  {
+   "w": "awesome",
+   "start": 22.76,
+   "end": 23.06
+  },
+  {
+   "w": "cloud",
+   "start": 23.06,
+   "end": 23.24
+  },
+  {
+   "w": "code",
+   "start": 23.24,
+   "end": 23.38
+  },
+  {
+   "w": "sub",
+   "start": 23.38,
+   "end": 23.58
+  },
+  {
+   "w": "-agents.",
+   "start": 23.58,
+   "end": 23.7
+  },
+  {
+   "w": "This",
+   "start": 24.08,
+   "end": 24.16
+  },
+  {
+   "w": "is",
+   "start": 24.16,
+   "end": 24.26
+  },
+  {
+   "w": "a",
+   "start": 24.26,
+   "end": 24.34
+  },
+  {
+   "w": "free",
+   "start": 24.34,
+   "end": 24.54
+  },
+  {
+   "w": "collection",
+   "start": 24.54,
+   "end": 24.78
+  },
+  {
+   "w": "of",
+   "start": 24.78,
+   "end": 24.9
+  },
+  {
+   "w": "over",
+   "start": 24.9,
+   "end": 25.04
+  },
+  {
+   "w": "a",
+   "start": 25.04,
+   "end": 25.14
+  },
+  {
+   "w": "hundred",
+   "start": 25.14,
+   "end": 25.4
+  },
+  {
+   "w": "cloud",
+   "start": 25.4,
+   "end": 25.64
+  },
+  {
+   "w": "code",
+   "start": 25.64,
+   "end": 25.78
+  },
+  {
+   "w": "helpers",
+   "start": 25.78,
+   "end": 26.02
+  },
+  {
+   "w": "built",
+   "start": 26.02,
+   "end": 26.22
+  },
+  {
+   "w": "by",
+   "start": 26.22,
+   "end": 26.34
+  },
+  {
+   "w": "the",
+   "start": 26.34,
+   "end": 26.44
+  },
+  {
+   "w": "community.",
+   "start": 26.44,
+   "end": 26.7
+  },
+  {
+   "w": "Think",
+   "start": 27.16,
+   "end": 27.26
+  },
+  {
+   "w": "of",
+   "start": 27.26,
+   "end": 27.34
+  },
+  {
+   "w": "them",
+   "start": 27.34,
+   "end": 27.44
+  },
+  {
+   "w": "like",
+   "start": 27.44,
+   "end": 27.56
+  },
+  {
+   "w": "apps.",
+   "start": 27.56,
+   "end": 27.74
+  },
+  {
+   "w": "You",
+   "start": 27.84,
+   "end": 27.84
+  },
+  {
+   "w": "can",
+   "start": 27.84,
+   "end": 27.94
+  },
+  {
+   "w": "add",
+   "start": 27.94,
+   "end": 28.06
+  },
+  {
+   "w": "to",
+   "start": 28.06,
+   "end": 28.16
+  },
+  {
+   "w": "cloud",
+   "start": 28.16,
+   "end": 28.32
+  },
+  {
+   "w": "to",
+   "start": 28.32,
+   "end": 28.44
+  },
+  {
+   "w": "make",
+   "start": 28.44,
+   "end": 28.52
+  },
+  {
+   "w": "it",
+   "start": 28.52,
+   "end": 28.6
+  },
+  {
+   "w": "do",
+   "start": 28.6,
+   "end": 28.7
+  },
+  {
+   "w": "more",
+   "start": 28.7,
+   "end": 28.9
+  },
+  {
+   "w": "things.",
+   "start": 28.9,
+   "end": 29.22
+  },
+  {
+   "w": "And",
+   "start": 29.22,
+   "end": 29.58
+  },
+  {
+   "w": "you",
+   "start": 29.58,
+   "end": 29.7
+  },
+  {
+   "w": "do",
+   "start": 29.7,
+   "end": 29.78
+  },
+  {
+   "w": "not",
+   "start": 29.78,
+   "end": 29.92
+  },
+  {
+   "w": "want",
+   "start": 29.92,
+   "end": 30.04
+  },
+  {
+   "w": "to",
+   "start": 30.04,
+   "end": 30.08
+  },
+  {
+   "w": "be",
+   "start": 30.08,
+   "end": 30.16
+  },
+  {
+   "w": "left",
+   "start": 30.16,
+   "end": 30.28
+  },
+  {
+   "w": "behind",
+   "start": 30.28,
+   "end": 30.5
+  },
+  {
+   "w": "when",
+   "start": 30.5,
+   "end": 30.64
+  },
+  {
+   "w": "it",
+   "start": 30.64,
+   "end": 30.7
+  },
+  {
+   "w": "comes",
+   "start": 30.7,
+   "end": 30.82
+  },
+  {
+   "w": "to",
+   "start": 30.82,
+   "end": 30.98
+  },
+  {
+   "w": "AI",
+   "start": 30.98,
+   "end": 31.12
+  },
+  {
+   "w": "and",
+   "start": 31.12,
+   "end": 31.48
+  },
+  {
+   "w": "cloud",
+   "start": 31.48,
+   "end": 31.56
+  },
+  {
+   "w": "is",
+   "start": 31.56,
+   "end": 31.68
+  },
+  {
+   "w": "arguably",
+   "start": 31.68,
+   "end": 31.96
+  },
+  {
+   "w": "the",
+   "start": 31.96,
+   "end": 32.18
+  },
+  {
+   "w": "best",
+   "start": 32.18,
+   "end": 32.38
+  },
+  {
+   "w": "AI",
+   "start": 32.38,
+   "end": 32.64
+  },
+  {
+   "w": "right",
+   "start": 32.64,
+   "end": 32.78
+  },
+  {
+   "w": "now.",
+   "start": 32.78,
+   "end": 33.02
+  },
+  {
+   "w": "Follow",
+   "start": 33.38,
+   "end": 33.44
+  },
+  {
+   "w": "and",
+   "start": 33.44,
+   "end": 33.56
+  },
+  {
+   "w": "comment",
+   "start": 33.56,
+   "end": 33.74
+  },
+  {
+   "w": "cloud",
+   "start": 33.74,
+   "end": 33.96
+  },
+  {
+   "w": "for",
+   "start": 33.96,
+   "end": 34.14
+  },
+  {
+   "w": "all",
+   "start": 34.14,
+   "end": 34.32
+  },
+  {
+   "w": "the",
+   "start": 34.32,
+   "end": 34.4
+  },
+  {
+   "w": "links",
+   "start": 34.4,
+   "end": 34.52
+  },
+  {
+   "w": "I",
+   "start": 34.52,
+   "end": 34.68
+  },
+  {
+   "w": "mentioned.",
+   "start": 34.68,
+   "end": 34.9
+  }
+ ]
+}

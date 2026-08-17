@@ -70,6 +70,18 @@ file. No downstream treatment could ever have recovered it.
 **Rule:** on the **third** report of the same defect, stop iterating and re-derive from the raw
 asset. Iteration count is a signal about your model, not about the fix.
 
+**⛔⛔ Second worked example, because this law was already written and got violated anyway.** Reel
+107 was told *"a puff of air"* **five times across four rounds**. Each round audited and rebuilt the
+**SFX bank**; three rounds found and fixed genuine SFX defects and the note came back unchanged,
+with the **same timestamps**. It was a riser in the **music bed** (rounds 1-4) and then an aspirated
+consonant in the **VO** (round 5). The effects track measured **-180 dB — digital silence** in the
+window being complained about.
+
+> **The tell is free and I ignored it four times: a correct fix makes a note go away. A note that
+> returns UNCHANGED — same words, same timestamps — is telling you the thing you changed was not the
+> cause.** Enumerate every layer that could produce the symptom and measure each in isolation,
+> starting with the ones you did not write and did not change.
+
 ## Law 4 — Never hardcode an expected value as a pass condition
 
 A gate that asserts a specific number will call an improvement a failure.
@@ -108,6 +120,16 @@ measurement. Rendering a soloed SFX bus (VO and bed muted) answered it in one pa
 **Rule:** if a change to X does not move a metric that should depend on X, suspect the metric
 before the change. Mute everything that is not X and re-measure.
 
+**⛔⛔ And apply it ACROSS the stems, not just within one.** On reel 107 this law was obeyed *inside*
+the SFX bank — cues were soloed against each other for four rounds — and never applied to the
+question "is it even the SFX?". Round 5 rendered **61 frames per stem** with the others muted and
+settled a four-round argument in three cheap renders: SFX **-180 dB**, bed **-61 dB**, VO carrying
+the whole complaint.
+
+> ⭐⭐ **SOLOING IS CHEAPER THAN INFERENCE.** Four rounds of spectral reasoning over a mix were less
+> decisive than three 2-second renders. When you catch yourself building a cleverer detector, render
+> the stems instead.
+
 ## Law 7 — A silent no-op reads exactly like a failed hypothesis
 
 **Worked example.** A batch of `str.replace` calls silently matched nothing. The script printed
@@ -116,6 +138,52 @@ fix had not worked. It had never been applied.
 
 **Rule:** `assert` on every string replacement, every file edit, every "I changed N things"
 claim. Print the count and fail loudly on zero. This is two lines and it saves a round.
+
+## Law 8 — A threshold is a DISTRIBUTION, not the range you happened to observe
+
+**Worked example.** A mix-balance gate was built from four approved reels by taking the **min-max**
+of their measurements: `>2kHz 31.0-46.0%`. It then failed a good reel at **30.3%** — 0.7pp under the
+floor, but only **-1.03 sd** from the approved mean (36.9, sd 6.4). With n=4, min-max fails any
+fifth sample landing outside four observations, which is most of them.
+
+**Rule:** state a band as **mean ± 2sd** over the reference set, and say n. If n is small, say that
+too. **Min-max is not a threshold; it is the smallest interval guaranteed to reject new data.**
+
+⛔ **AND THE SECOND-ORDER TRAP:** obeying that bad gate would have meant re-adding the sound effects
+the user had *just* asked to have removed. **"The gate says no" is not "the work is wrong"** — a gate
+you wrote yourself will happily fail good work. Re-derive the threshold before obeying it, and be
+honest when you widen one: say whether you fixed the gate or excused the output.
+
+## Law 9 — Calibrate on ACCEPTED work, and only apply a detector to the signal it was calibrated on
+
+Two failures from one reel, both of which produced confident wrong answers:
+
+**a) Calibrate on what was accepted, not on what you are trying to fix.** A rejected cut was assumed
+"too bright/airy" and the bank was tuned darker. Measured against four *approved* reels, the rejected
+cut was at **27.6% >2kHz — DULLER than every one of them**. Brightness was never the defect, and
+chasing it moved away from the house sound. The real defect (a whoosh) is an **envelope**, not a
+spectrum.
+
+> **Before treating a complaint as a direction, measure the accepted work on that axis.** If the
+> rejected version already sits on the "good" side, the axis is wrong.
+
+**b) A detector calibrated on isolated stems is invalid on a mix.** An air-swell test (peak arriving
+>45% in, >55% above 2kHz, <15% below 250Hz) was correct on bed stems and, run on the finished mix,
+reported the **rejected** version as clean and the **fixed** one as broken — because the rejected
+mix was darker overall and never crossed the test's own high-frequency precondition.
+
+> **A test with a precondition inherits that precondition as a bias.** Re-validate on the signal you
+> intend to run it on, or run it only where it was calibrated.
+
+## Law 10 — Match the width of the fix to the width of the complaint
+
+**Worked example.** One moment (0.8-1.0s) was reported. The de-esser built to fix it was applied
+across all 35 seconds, active on **12.6%** of the file — it fixed the burst and pushed the whole reel
+outside the balance band. Retuned to **6.6%**: burst down **-6.5 dB**, voiced speech **-0.00 dB**,
+overall level **-0.03 dB**, mix back in band.
+
+**Rule:** a global process to fix a local defect is a defect of its own. It is the same error as
+scoring all 13 cuts with one clap, or answering "this scene is low" with a bank of 134 cues.
 
 ---
 
@@ -221,3 +289,10 @@ Before printing a number, or writing a gate:
 - [ ] If the metric didn't move, have I ruled out the metric before the change?
 - [ ] Does the complaint name a variable I am not measuring?
 - [ ] Is this the third time I've been told about this defect?
+- [ ] Has this note come back with the SAME timestamps? (→ wrong layer, not a worse fix)
+- [ ] Have I soloed each STEM, or only compared things within one of them?
+- [ ] Is my band mean±2sd over a stated n, or the min-max I happened to observe?
+- [ ] Did I calibrate on work that was ACCEPTED, or on the thing I'm trying to change?
+- [ ] Is this detector being run on the same kind of signal it was calibrated on?
+- [ ] Is my fix as narrow as the complaint, or global?
+- [ ] If a gate I wrote is failing good work, is the GATE wrong?

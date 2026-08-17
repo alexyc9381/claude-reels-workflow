@@ -1,0 +1,512 @@
+[
+ {
+  "w": "It's",
+  "start": 0.0,
+  "end": 0.0
+ },
+ {
+  "w": "three",
+  "start": 0.0,
+  "end": 0.22
+ },
+ {
+  "w": "AI",
+  "start": 0.22,
+  "end": 0.42
+ },
+ {
+  "w": "platforms",
+  "start": 0.42,
+  "end": 0.76
+ },
+ {
+  "w": "that",
+  "start": 0.76,
+  "end": 0.96
+ },
+ {
+  "w": "replace",
+  "start": 0.96,
+  "end": 1.2
+ },
+ {
+  "w": "paid",
+  "start": 1.2,
+  "end": 1.44
+ },
+ {
+  "w": "tools.",
+  "start": 1.44,
+  "end": 1.8
+ },
+ {
+  "w": "Number",
+  "start": 2.12,
+  "end": 2.18
+ },
+ {
+  "w": "one,",
+  "start": 2.18,
+  "end": 2.42
+ },
+ {
+  "w": "this",
+  "start": 2.58,
+  "end": 2.58
+ },
+ {
+  "w": "website",
+  "start": 2.58,
+  "end": 2.8
+ },
+ {
+  "w": "lets",
+  "start": 2.8,
+  "end": 2.96
+ },
+ {
+  "w": "you",
+  "start": 2.96,
+  "end": 3.08
+ },
+ {
+  "w": "run",
+  "start": 3.08,
+  "end": 3.2
+ },
+ {
+  "w": "chatgbt,",
+  "start": 3.2,
+  "end": 3.64
+ },
+ {
+  "w": "cloud,",
+  "start": 3.92,
+  "end": 3.98
+ },
+ {
+  "w": "Gemini,",
+  "start": 4.08,
+  "end": 4.24
+ },
+ {
+  "w": "Grok,",
+  "start": 4.46,
+  "end": 4.54
+ },
+ {
+  "w": "and",
+  "start": 4.58,
+  "end": 4.7
+ },
+ {
+  "w": "Deepsea",
+  "start": 4.7,
+  "end": 4.92
+ },
+ {
+  "w": "all",
+  "start": 4.92,
+  "end": 5.12
+ },
+ {
+  "w": "in",
+  "start": 5.12,
+  "end": 5.24
+ },
+ {
+  "w": "one",
+  "start": 5.24,
+  "end": 5.42
+ },
+ {
+  "w": "place",
+  "start": 5.42,
+  "end": 5.68
+ },
+ {
+  "w": "for",
+  "start": 5.68,
+  "end": 5.88
+ },
+ {
+  "w": "free.",
+  "start": 5.88,
+  "end": 6.1
+ },
+ {
+  "w": "So",
+  "start": 6.28,
+  "end": 6.36
+ },
+ {
+  "w": "stop",
+  "start": 6.36,
+  "end": 6.58
+ },
+ {
+  "w": "paying",
+  "start": 6.58,
+  "end": 6.76
+ },
+ {
+  "w": "hundreds",
+  "start": 6.76,
+  "end": 7.1
+ },
+ {
+  "w": "in",
+  "start": 7.1,
+  "end": 7.28
+ },
+ {
+  "w": "monthly",
+  "start": 7.28,
+  "end": 7.54
+ },
+ {
+  "w": "subscription",
+  "start": 7.54,
+  "end": 7.94
+ },
+ {
+  "w": "costs,",
+  "start": 7.94,
+  "end": 8.32
+ },
+ {
+  "w": "but",
+  "start": 8.48,
+  "end": 8.56
+ },
+ {
+  "w": "the",
+  "start": 8.56,
+  "end": 8.68
+ },
+ {
+  "w": "next",
+  "start": 8.68,
+  "end": 8.82
+ },
+ {
+  "w": "one",
+  "start": 8.82,
+  "end": 8.94
+ },
+ {
+  "w": "is",
+  "start": 8.94,
+  "end": 9.04
+ },
+ {
+  "w": "even",
+  "start": 9.04,
+  "end": 9.22
+ },
+ {
+  "w": "better.",
+  "start": 9.22,
+  "end": 9.4
+ },
+ {
+  "w": "Number",
+  "start": 9.8,
+  "end": 9.86
+ },
+ {
+  "w": "two,",
+  "start": 9.86,
+  "end": 10.12
+ },
+ {
+  "w": "a",
+  "start": 10.24,
+  "end": 10.28
+ },
+ {
+  "w": "free",
+  "start": 10.28,
+  "end": 10.5
+ },
+ {
+  "w": "AI",
+  "start": 10.5,
+  "end": 10.72
+ },
+ {
+  "w": "video",
+  "start": 10.72,
+  "end": 10.9
+ },
+ {
+  "w": "generator.",
+  "start": 10.9,
+  "end": 11.34
+ },
+ {
+  "w": "It",
+  "start": 11.56,
+  "end": 11.64
+ },
+ {
+  "w": "has",
+  "start": 11.64,
+  "end": 11.76
+ },
+ {
+  "w": "tools",
+  "start": 11.76,
+  "end": 11.96
+ },
+ {
+  "w": "like",
+  "start": 11.96,
+  "end": 12.18
+ },
+ {
+  "w": "Cling,",
+  "start": 12.18,
+  "end": 12.36
+ },
+ {
+  "w": "Soar,",
+  "start": 12.5,
+  "end": 12.68
+ },
+ {
+  "w": "and",
+  "start": 12.72,
+  "end": 12.88
+ },
+ {
+  "w": "CDance",
+  "start": 12.88,
+  "end": 13.12
+ },
+ {
+  "w": "fully",
+  "start": 13.12,
+  "end": 13.36
+ },
+ {
+  "w": "built",
+  "start": 13.36,
+  "end": 13.6
+ },
+ {
+  "w": "in.",
+  "start": 13.6,
+  "end": 13.78
+ },
+ {
+  "w": "Just",
+  "start": 13.94,
+  "end": 14.06
+ },
+ {
+  "w": "drop",
+  "start": 14.06,
+  "end": 14.26
+ },
+ {
+  "w": "it",
+  "start": 14.26,
+  "end": 14.34
+ },
+ {
+  "w": "a",
+  "start": 14.34,
+  "end": 14.44
+ },
+ {
+  "w": "prompt",
+  "start": 14.44,
+  "end": 14.62
+ },
+ {
+  "w": "and",
+  "start": 14.62,
+  "end": 14.76
+ },
+ {
+  "w": "get",
+  "start": 14.76,
+  "end": 14.86
+ },
+ {
+  "w": "a",
+  "start": 14.86,
+  "end": 14.98
+ },
+ {
+  "w": "video",
+  "start": 14.98,
+  "end": 15.12
+ },
+ {
+  "w": "on",
+  "start": 15.12,
+  "end": 15.28
+ },
+ {
+  "w": "the",
+  "start": 15.28,
+  "end": 15.36
+ },
+ {
+  "w": "spot.",
+  "start": 15.36,
+  "end": 15.58
+ },
+ {
+  "w": "Number",
+  "start": 15.96,
+  "end": 16.0
+ },
+ {
+  "w": "three,",
+  "start": 16.0,
+  "end": 16.26
+ },
+ {
+  "w": "free",
+  "start": 16.42,
+  "end": 16.54
+ },
+ {
+  "w": "AI",
+  "start": 16.54,
+  "end": 16.76
+ },
+ {
+  "w": "image",
+  "start": 16.76,
+  "end": 16.94
+ },
+ {
+  "w": "generation",
+  "start": 16.94,
+  "end": 17.34
+ },
+ {
+  "w": "with",
+  "start": 17.34,
+  "end": 17.56
+ },
+ {
+  "w": "insane",
+  "start": 17.56,
+  "end": 17.88
+ },
+ {
+  "w": "quality",
+  "start": 17.88,
+  "end": 18.2
+ },
+ {
+  "w": "and",
+  "start": 18.2,
+  "end": 18.32
+ },
+ {
+  "w": "realism",
+  "start": 18.32,
+  "end": 18.56
+ },
+ {
+  "w": "that",
+  "start": 18.56,
+  "end": 18.82
+ },
+ {
+  "w": "goes",
+  "start": 18.82,
+  "end": 19.0
+ },
+ {
+  "w": "toe",
+  "start": 19.0,
+  "end": 19.16
+ },
+ {
+  "w": "to",
+  "start": 19.16,
+  "end": 19.26
+ },
+ {
+  "w": "toe",
+  "start": 19.26,
+  "end": 19.4
+ },
+ {
+  "w": "with",
+  "start": 19.4,
+  "end": 19.54
+ },
+ {
+  "w": "paid",
+  "start": 19.54,
+  "end": 19.7
+ },
+ {
+  "w": "tools.",
+  "start": 19.7,
+  "end": 20.02
+ },
+ {
+  "w": "Follow",
+  "start": 20.52,
+  "end": 20.56
+ },
+ {
+  "w": "and",
+  "start": 20.56,
+  "end": 20.7
+ },
+ {
+  "w": "comment",
+  "start": 20.7,
+  "end": 20.9
+ },
+ {
+  "w": "free",
+  "start": 20.9,
+  "end": 21.22
+ },
+ {
+  "w": "and",
+  "start": 21.22,
+  "end": 21.34
+ },
+ {
+  "w": "I'll",
+  "start": 21.34,
+  "end": 21.44
+ },
+ {
+  "w": "send",
+  "start": 21.44,
+  "end": 21.58
+ },
+ {
+  "w": "you",
+  "start": 21.58,
+  "end": 21.7
+ },
+ {
+  "w": "all",
+  "start": 21.7,
+  "end": 21.86
+ },
+ {
+  "w": "the",
+  "start": 21.86,
+  "end": 21.96
+ },
+ {
+  "w": "links.",
+  "start": 21.96,
+  "end": 22.12
+ }
+]

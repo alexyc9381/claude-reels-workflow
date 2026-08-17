@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 87,
-    "reels_total": 130,
-    "factory_logs": 53,
-    "storyboards": 47,
-    "caption_jsons": 97,
-    "memory_md": 193,
+    "reels_with_code": 89,
+    "reels_total": 134,
+    "factory_logs": 54,
+    "storyboards": 50,
+    "caption_jsons": 98,
+    "memory_md": 194,
     "creators": 8,
     "packs": 3
   },
@@ -531,6 +531,7 @@
         "video/src/data/words_carousel2.json",
         "video/src/data/words_channel.json",
         "video/src/data/words_chart.json",
+        "video/src/data/words_claude.json",
         "video/src/data/words_clone.json",
         "video/src/data/words_compress.json",
         "video/src/data/words_content.json",
@@ -1160,6 +1161,17 @@
       ]
     },
     {
+      "key": "chart",
+      "name": "chart",
+      "number": 68,
+      "code": "video/src/ClaudeChartReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/68-chart.md",
+      "captions": [
+        "video/src/data/words_chart.json"
+      ]
+    },
+    {
       "key": "arsenal",
       "name": "arsenal",
       "number": 69,
@@ -1178,15 +1190,13 @@
       "captions": []
     },
     {
-      "key": "chart",
+      "key": "chart69",
       "name": "chart",
       "number": 69,
-      "code": "video/src/ClaudeChartReel.tsx",
+      "code": null,
       "log": null,
       "storyboard": "storyboards/69-chart.md",
-      "captions": [
-        "video/src/data/words_chart.json"
-      ]
+      "captions": []
     },
     {
       "key": "serena",
@@ -1452,6 +1462,35 @@
       "storyboard": "storyboards/104-plugin.md",
       "captions": [
         "video/src/data/words_plugin.json"
+      ]
+    },
+    {
+      "key": "free105",
+      "name": "free",
+      "number": 105,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/105-free.md",
+      "captions": []
+    },
+    {
+      "key": "skill",
+      "name": "skill",
+      "number": 106,
+      "code": "video/src/ClaudeSkillReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/106-skill.md",
+      "captions": []
+    },
+    {
+      "key": "claude",
+      "name": "claude",
+      "number": 107,
+      "code": "video/src/ClaudeClaudeReel.tsx",
+      "log": "memory/reels/claude-factory-log.md",
+      "storyboard": "storyboards/107-claude.md",
+      "captions": [
+        "video/src/data/words_claude.json"
       ]
     }
   ]

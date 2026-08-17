@@ -6,7 +6,14 @@ Implements CLAUDE-REELS-PLAYBOOK C4 + memory/caption-sync-gate.md so the method
 stops being re-improvised per reel (reel 81 hand-patched whisper mishears three
 separate times, which that memory explicitly forbids).
 
-    python3 tools/build_captions.py FINAL.wav SCRIPT.txt OUT.json
+    python3 tools/build_captions.py FINAL.wav SCRIPT.txt OUT.json [MODEL]
+
+  MODEL defaults to base.en. Step 4 anchors each LINE's start but PRESERVES
+  whisper's within-line spacing, so a model that compresses a region poisons
+  every word inside it — base.en crushed reel 106's last 8 words into 0.57s of
+  a 1.16s tail, emitting two sub-0.1s single-word caption flashes on the CTA.
+  Pass `medium.en` when a tail or a fast passage comes out compressed; compare
+  the emitted span against the wav's own last speech offset before shipping.
 
   1  CANON = the exact VO script, from a file. This is the source of truth for
      the WORDS. Never patch whisper's mishears word by word — whisper mangles
@@ -31,6 +38,7 @@ from difflib import SequenceMatcher
 
 LEAD = 0.10           # captions land slightly BEFORE the word, never after
 MAX_DELTA = 0.25      # a bigger measured shift than this is suspect
+MIN_STEP = 0.075      # minimum gap between consecutive word STARTS (see step 5b)
 DANGLE = re.compile(r"^(i|a|an|the|to|of|and|or|you|your|for|is|it|in|on|so|my|as|at|but|if|their|its|our|his|her|with|from)$", re.I)
 norm = lambda w: re.sub(r"[^a-z0-9.]", "", w.lower())
 
@@ -77,10 +85,17 @@ def lines_of(words):
     if cur: out.append(cur)
     # mirror SlopKit exactly: hand a trailing connector to the next line, and
     # repeat to a fixed point (popping "the" can expose "on" underneath it)
+    # ⛔ STRAND: the guard is <3, not <2. With <2 the cascade can eat a line down
+    # to ONE word and stop there ("share it to you" -> "share" | "it" | "to you
+    # via DM."), and a 1-word line's gate lands inside a single frame, so
+    # KaraokeCaption never selects it — on reel 106 two CTA lines rendered for
+    # ZERO frames. At <3 a 2-word line keeps its connector, which the playbook
+    # dislikes but the viewer can actually read. Verified no-op on the grouping
+    # of reels 105/plugin/trade; SlopKit.tsx carries the identical guard.
     for _ in range(4):
         changed = False
         for i in range(len(out) - 1):
-            if len(out[i]) < 2: continue
+            if len(out[i]) < 3: continue      # <3, not <2: see STRAND note
             last = words[out[i][-1]]["word"].strip()
             if re.search(r"[.!?]$", last) or not DANGLE.match(norm(last).rstrip(".")): continue
             out[i + 1].insert(0, out[i].pop()); changed = True
@@ -96,7 +111,7 @@ def lines_of(words):
                 out.insert(i + 1, tail); touched = True
             i += 1
         for i in range(len(out) - 1):
-            if len(out[i]) < 2: continue
+            if len(out[i]) < 3: continue      # <3, not <2: see STRAND note
             last = words[out[i][-1]]["word"].strip()
             if re.search(r"[.!?]$", last) or not DANGLE.match(norm(last).rstrip(".")): continue
             out[i + 1].insert(0, out[i].pop()); touched = True
@@ -104,10 +119,10 @@ def lines_of(words):
     return out
 
 
-def main(wav, script_path, out_path):
+def main(wav, script_path, out_path, model="base.en"):
     canon = open(script_path).read().split()
     from faster_whisper import WhisperModel
-    segs, _ = WhisperModel("base.en", device="cpu", compute_type="int8").transcribe(
+    segs, _ = WhisperModel(model, device="cpu", compute_type="int8").transcribe(
         wav, word_timestamps=True, beam_size=5)
     hyp = [{"w": x.word.strip(), "s": x.start, "e": x.end} for s in segs for x in s.words]
     print(f"  script {len(canon)} words · whisper {len(hyp)} tokens")
@@ -160,6 +175,22 @@ def main(wav, script_path, out_path):
         if b["start"] < a["start"]: b["start"] = a["start"]
         if b["end"] < b["start"] + 0.04: b["end"] = round(b["start"] + 0.04, 3)
 
+    # ---- 5b · DE-CLUMP ------------------------------------------------------
+    # Monotonic is not enough: whisper emits several words on ONE timestamp in a
+    # fast passage (and an uneven 'replace' span spreads evenly, which can round
+    # to the same value). Equal starts invert the renderer's line gate
+    #     gate_i = max(start_i, min(end_{i-1} + 0.05, start_i + 0.5))
+    # so a LATER line can gate BEFORE an earlier one. KaraokeCaption keeps the
+    # last line whose gate passed, so the earlier line is then never selected:
+    # on reel 106 two CTA lines rendered for ZERO frames ("to get all", "it") and
+    # "share" flashed for 3. Push each start to at least MIN_STEP after the
+    # previous one. In real speech (~6.5 words/sec at its fastest here) gaps run
+    # ~0.15s, so this only ever fires on already-degenerate input.
+    for a, b in zip(words, words[1:]):
+        if b["start"] < a["start"] + MIN_STEP:
+            b["start"] = round(a["start"] + MIN_STEP, 3)
+        if b["end"] < b["start"] + 0.04: b["end"] = round(b["start"] + 0.04, 3)
+
     # ---- 6 · gates ---------------------------------------------------------
     assert [w["word"].strip() for w in words] == canon, "emitted words != script"
     assert all(b["start"] >= a["start"] - 1e-6 for a, b in zip(words, words[1:])), "not monotonic"
@@ -173,6 +204,6 @@ def main(wav, script_path, out_path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
+    if len(sys.argv) not in (4, 5):
         print(__doc__); sys.exit(2)
     main(*sys.argv[1:])
