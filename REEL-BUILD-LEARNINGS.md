@@ -1779,3 +1779,23 @@ a fresh process fixes it. **Read cloud folders with absolute paths; never `cd` i
 ---
 
 *Maintained alongside `CLAUDE-REELS-PLAYBOOK.md`. Add an entry whenever a mistake costs a cycle.*
+
+---
+
+## 13. REEL 109 — the six that each cost a round
+
+1. **A green gate sheet is not an approved reel.** 109 passed motion, look, ship and SFX and came
+   back on five notes. Those five were **two** defects once measured: 33 `<span>`s in the animation
+   layer and props at 46-96px. **Count the text and the prop sizes before rebuilding anything.**
+   → `docs/ANIMATION-QUALITY.md` §4, §1
+2. **"Too plain" is usually half a mechanism** — a beam with no finding, an arrival with no output,
+   a hand-off with no source. → §10
+3. **A travelling band trades the LOOK (hard edge) against the NUMBER (swept area × speed), and
+   they are separable.** Feather the edge, take the motion back through speed. → §11
+4. **Brightness is the mean, hierarchy is the spread.** Lift the hero's own value, never the
+   palette. → §11, `docs/THE-OPEN.md`
+5. **Run `sfx_audit.py` BEFORE authoring the bank** — 14 of 44 cues failed on measurement while
+   sounding right by name. → `docs/SOUND-DESIGN.md`
+6. **A transformed wrapper with no `zIndex` still vanishes.** It is written at the top of the
+   world file and I wrote a bare `<div>` anyway; the hook rendered completely empty and only a
+   still caught it. **Render a still of every new scene before trusting it.**

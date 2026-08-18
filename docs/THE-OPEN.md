@@ -105,6 +105,17 @@ ffmpeg -y -v error -i REEL.mp4 -vframes 1 -vf "crop=1012:792:34:384" /tmp/f0.png
 python3 -c "from PIL import Image;import statistics as s;p=Image.open('/tmp/f0.png').convert('L').load();print(s.mean([p[x,y] for y in range(0,792,8) for x in range(0,1012,8)]))"
 ```
 
+> ⭐⭐ **AND THIS LAW DOES NOT FIGHT "HIERARCHY NEEDS DARKNESS" (reel 109).** Brightness is the
+> **MEAN**; hierarchy is the **SPREAD**. A bright hall containing three near-black masses has a
+> high mean luma AND the biggest value gap in the reel. They only collide when the fix reached for
+> is the palette's dark stop. If a dark hero drags frame 0 under the bar, lift **the hero's own
+> value** (0.19 → 0.36 was enough) and add ONE bright settled subject — never the shading.
+
+> ⭐ **The claim plate should BE the receipts.** Reel 109's hook warned `HOOK_PLATE 8.4% = HEADER
+> PILL` with three separate repo cards at ~6% each: three small bright objects are never the
+> largest one. One object carrying the marks and the star count fixed the plate warning AND the
+> luma bar at once. One object, two gate results.
+
 ### 2. THE SUBJECT IS IN IT
 
 If the reel is about Claude, a Claude is on screen at frame 0. Reel 78 held its mascot back

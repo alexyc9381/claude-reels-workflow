@@ -1,0 +1,40 @@
+TITLE   The Three-Plugin Claude Code Setup
+SUB     One scans your repo and tells you what to install, one keeps you coding past the usage limit, one stops you re-explaining your project every session
+
+H       Why these three and not thirty
+P       There are hundreds of Claude Code plugins now and almost all of them make Claude better at a task you already knew you wanted done. These three are different: each one removes a wall you hit whether you asked for it or not. You do not know what to configure. You run out of usage. You lose everything between sessions. That is the whole list, and it is why the order below is also the order you should install them in.
+P       Every figure on this page was read from the GitHub API and from each repo's own README on 18 August 2026. Star counts move. The token figure moves fortnightly, on purpose, and I have said so where it matters.
+
+RULE
+
+H       One: Claude Code Setup, the official Anthropic one
+NUM     Lives in anthropics/claude-plugins-official (33,639 stars, Apache-2.0), Anthropic's own managed directory of Claude Code plugins. The plugin you want inside it is claude-code-setup.
+NUM     It reads your actual repo, not a template. It looks at package.json, your language files and your directory structure, works out what kind of project this is, and then recommends the top one or two options in each of five categories: MCP servers, skills, hooks, subagents and slash commands.
+NUM     Because it knows the stack, the suggestions are specific. A React project gets Playwright MCP. A repo with auth code in it gets a security-reviewer subagent. Docs-heavy work gets context7.
+NUM     The one thing to be clear about: it is READ-ONLY. Its own documentation says it analyses but does not modify files, and it identifies options rather than deploying them. Installing is still your call and still a separate command. That is a feature, not a shortfall. You get the shortlist without anything being changed underneath you.
+
+H       Two: OmniRoute, the reason you stop hitting the wall
+NUM     diegosouzapw/OmniRoute (50,060 stars, MIT). A local gateway you point Claude Code at with one base URL. Everything else stays the same.
+NUM     Its README headline is 290 providers, 90 or more of them with a free tier and 40 or more free forever, across 516 models behind a single /v1 endpoint.
+NUM     What it actually does when you run out is the part worth understanding, because it is not magic. It runs a four-tier cascade: your subscription first, then any API keys you have, then the cheap models, then the free ones. The moment a tier is exhausted it drops to the next and keeps going. Your limit is not raised. It is routed around.
+NUM     On free capacity the README publishes about 1.53 billion free tokens a month steady, and up to about 2.15 billion in your first month once signup credits are counted. It also says, in its own words, that the figure is re-audited every two weeks and moves both ways as providers add and end free tiers. Treat it as a live number, not a promise.
+
+H       Three: Claude Mem, so you stop starting from zero
+NUM     thedotmack/claude-mem (91,045 stars, Apache-2.0). Persistent context across sessions.
+NUM     It captures what happens during a session, compresses it, and injects the relevant parts back into future ones. The practical effect is that the second conversation about a project already knows the project.
+NUM     It is the least glamorous of the three and the one you notice most, because the cost it removes is one you had stopped noticing you were paying.
+
+RULE
+
+H       The honest notes
+B       The video says Claude Setup gives you "10x your productivity". Nothing anywhere backs a multiplier, mine included, so there is no number on that claim in the video or on this page. What it does is verifiable: it scans and it ranks.
+B       The video says OmniRoute gives Claude Code "unlimited usage". The README never claims unlimited. Its own words are "never stop coding" and "never hit limits", delivered by the four-tier fallback described above. The distinction matters the first time a free tier goes down.
+B       The video says 1.6 billion tokens. The README says about 1.53 billion a month steady. I have used the repo's own audited figure throughout.
+B       OmniRoute's GitHub description says 340 providers and 1,200 models while its README headline says 290 and 516. It contradicts itself. I have used the README's more conservative pair.
+B       33,639 stars belongs to the whole official plugins directory, not to claude-code-setup on its own. There is no separate count for a single plugin inside a marketplace repo.
+B       15 of OmniRoute's providers are flagged in its own docs as having terms worth reading before you route production work through them. It flags them so you can decide. Decide.
+
+H       If you install only one
+P       Install OmniRoute. Claude Setup is a one-afternoon win you can get by reading a good blog post, and Claude Mem pays off over weeks. OmniRoute pays off the first evening you would otherwise have stopped.
+
+KEY     CLAUDE

@@ -1,0 +1,31 @@
+Comment "CLAUDE" and I'll send you all three.
+
+👇 READ BELOW
+
+Claude Code out of the box is one layer. These three stack on top of it, and the order matters more than the list.
+
+★ claude-code-setup → anthropics/claude-plugins-official, 33,639 stars, Apache-2.0. Anthropic's own plugin. It reads your actual repo, not a template: package.json, your language files, your directory structure, then recommends the best one or two options across MCP servers, skills, hooks, subagents and slash commands.
+★ OmniRoute → diegosouzapw/OmniRoute, 50,060 stars, MIT. One local gateway, one base URL, 290 providers behind it, 90+ with a free tier. Hit your limit and it drops down a four-tier cascade: subscription, then your API keys, then cheap models, then free ones. You keep coding.
+★ claude-mem → thedotmack/claude-mem, 91,045 stars, Apache-2.0. Captures the session, compresses it, injects the relevant part into the next one. The second conversation about your project already knows the project.
+
+174,744 stars between them and every one is free and open source.
+
+Install them in that order and each one holds up the next. Setup tells you what your repo is missing. OmniRoute makes sure you can afford to act on it. claude-mem means you only ever explain it once. Do it backwards and you get a beautifully configured project you have to re-describe from scratch every morning.
+
+The part nobody mentions: OmniRoute does not raise your limit. It routes around it. That sounds like a technicality until the first evening it happens to you, and then it is the difference between stopping at 11pm and not stopping. The reason it spread is not that it is free. It is that it turns a hard stop into a shrug.
+
+Three honest notes, because the video moves fast.
+
+I say these "10x your productivity". Nothing backs a multiplier, mine included. What Claude Setup verifiably does is scan and rank, and it is READ-ONLY by its own docs: it recommends, it does not install for you.
+
+I say OmniRoute gives "unlimited usage". Its README never claims unlimited. Its own words are "never stop coding" and "never hit limits", delivered by the four-tier fallback above.
+
+I say 1.6 billion free tokens a month. The README publishes about 1.53 billion steady, up to about 2.15 billion in month one with signup credits, and says the figure is re-audited every two weeks and moves both ways. Star counts came from the GitHub API on the day this was made and they move too.
+
+Comment "CLAUDE" and I'll DM you all three repos, the install commands, and the order I'd actually set them up in.
+
+.
+.
+.
+
+#ai #claude #claudeai #anthropic #claudecode #aitools #aiagents #aicoding #vibecoding #opensource #github #devtools #softwareengineering #programming #coding #developer #productivity #automation #mcp #llm #freetools #buildinpublic

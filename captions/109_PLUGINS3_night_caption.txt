@@ -1,0 +1,31 @@
+Comment "CLAUDE" and I'll send you all three.
+
+👇 READ BELOW
+
+There are hundreds of Claude Code plugins now. These three are the only ones that remove a wall you hit whether you asked for it or not.
+
+★ claude-code-setup → anthropics/claude-plugins-official, 33,639 stars, Apache-2.0. Anthropic's own plugin. It reads your actual repo, works out what kind of project it is from package.json and your directory structure, and recommends the best one or two options in five categories: MCP servers, skills, hooks, subagents and slash commands. React project gets Playwright MCP. Auth code in the repo gets a security-reviewer subagent.
+★ OmniRoute → diegosouzapw/OmniRoute, 50,060 stars, MIT. One local gateway, one base URL, and Claude Code is suddenly sitting in front of 290 providers, 90+ of them with a free tier. When you run out it drops down a four-tier cascade: subscription, then your API keys, then cheap models, then free ones. You keep coding.
+★ claude-mem → thedotmack/claude-mem, 91,045 stars, Apache-2.0. Captures what happens in a session, compresses it, and injects the relevant part back into the next one. The second conversation about your project already knows the project.
+
+174,744 stars between them and every one is free and open source.
+
+The order in the video is the order I'd install them. Setup tells you what your repo is missing, OmniRoute makes sure you can afford to act on it, and claude-mem means you only ever explain it once. Doing it backwards is how people end up with a beautifully configured project they have to re-describe from scratch every morning.
+
+The part nobody mentions: OmniRoute does not raise your limit. It routes around it. That sounds like a technicality until the first evening it happens to you, and then it is the difference between stopping at 11pm and not stopping. The reason it spread is not that it is free. It is that it turns a hard stop into a shrug.
+
+Three honest notes, because the video moves fast.
+
+I say Claude Setup gives you "10x your productivity". Nothing backs a multiplier, so there is no number on that claim anywhere in the video. What it verifiably does is scan and rank. It is also READ-ONLY by its own docs: it recommends, it does not install for you.
+
+I say OmniRoute gives you "unlimited usage". Its README never claims unlimited. Its own words are "never stop coding" and "never hit limits", delivered by the four-tier fallback above.
+
+I say 1.6 billion free tokens a month. The README publishes about 1.53 billion steady, up to about 2.15 billion in month one with signup credits, and it says the figure is re-audited every two weeks and moves both ways. The video prints the repo's number, not mine. Star counts came from the GitHub API on the day this was made and they move too.
+
+Comment "CLAUDE" and I'll DM you all three repos, the install commands, and the honest notes on what each one does and does not do.
+
+.
+.
+.
+
+#ai #claude #claudeai #anthropic #claudecode #aitools #aiagents #aicoding #vibecoding #opensource #github #devtools #softwareengineering #programming #coding #developer #productivity #automation #mcp #llm #freetools #buildinpublic

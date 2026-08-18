@@ -99,8 +99,19 @@ one house clay, and the delivered mp4 re-transcribed to prove no flub survived t
 ## Where the deliverables go
 
 ⛔ Every reel deliverable goes in **its own numbered subfolder**, `Faceless/<n> - NAME/`: the main
-mp4, the lead magnet docx, the caption, and every trial cut with its own caption. Not the shared
-`Trial Reels/` folder.
+mp4, the caption, and every trial cut with its own caption. Not the shared `Trial Reels/` folder.
+
+⛔⛔ **NO `.docx` IN THAT FOLDER (Alex, 2026-08-18: *"from now on i dont want the docx files
+anymore just the articles on the site"*).** The lead magnet is the **live article on
+chenmedialabs.com**, because that is what the CTA actually promises — a URL that loads, not a
+file. The `.docx` is still generated, but only as the site's build input and its gated download;
+it is never delivered and never listed as a deliverable.
+
+⛔ **A REEL IS NOT FINISHED UNTIL THE ARTICLE IS LIVE.** Not written, not converted — live at
+its URL and verified with a cache-buster against the domain a visitor would type. The publish
+step is: docx → `chenmedialabs/source-docs/` → add to `tools/manifest.json` → `npm run content`
+→ `vercel --prod` → **re-alias apex AND www** (the pin has been found stale three times) →
+curl the real URL. See memory `feedback_reel_deliverable_is_the_article`.
 
 ## Related
 

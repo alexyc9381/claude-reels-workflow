@@ -31,6 +31,8 @@ the diagnosis right is most of the work — see [`MEASURING.md`](MEASURING.md) a
 | *"not enough to make me scroll"* | no characters, no stakes, no scale | §5 |
 | *"they just stand there, they dont do movements"* | sprites are running an IDLE, not an ACTION | §5 |
 | *"too many / too annoying"* or *"only 20% as good"* | density is flat instead of PEAKED | §9 |
+| *"I can't really tell what that is"* | the scene MEASURES fine and DEPICTS nothing | §10 |
+| *"it's still not clear it's a \<thing\>"* | the prop's PROPORTIONS are wrong, usually because a gate is riding on it | §10 |
 
 ⛔ **The complaint that sounds like the first row but is not:** *"only 20% as good, needs more stuff
 going on"* and *"there's too much"* are the SAME defect seen from two sides — flat density. Adding
@@ -539,3 +541,175 @@ y=754), the real head top is `y - s*0.451`. **Measure the render, don't trust th
 `memory/reels/plugin-factory-log.md` (the eleven rounds that produced this file) ·
 [`SOUND-DESIGN.md`](SOUND-DESIGN.md) §2b (the audio half of §9's density budget) ·
 `memory/claude107-reel.md` (reel 107 — the source of §5's action loops and all of §9)
+
+---
+
+## 10. "TOO PLAIN" IS USUALLY HALF A MECHANISM (reel 109)
+
+Reel 109 was called plain three separate times, on three different scenes, after it had already
+passed every gate it has. None of the three was answered by adding decoration. **Every one was a
+scene that had drawn the FIRST half of a mechanism and stopped before the half that makes it
+mean something.**
+
+| the note | what was on screen | the missing half | measured |
+|---|---|---|---|
+| *"too plain with the scanning aspect"* | a beam sweeping a wall and changing its colour | **the FINDINGS.** A scan that surfaces nothing is a progress bar. The plugin can only recommend because it found something first | flags stabbed into the code + a red burning read-line |
+| *"just a plain screen"* | six sprites landing in a dark room, then 20 frames of nothing | **the OUTPUT.** The beat is "and then work starts happening" and nothing was produced | the bench throws finished work: **12.12 → 14.80** |
+| *"there needs to be something above the train"* | an empty upper half | **the SOURCE.** The rig gives capacity and where it came from was off-screen | an overhead catenary feeding the deck: **10.42 → 11.80** |
+
+> **The check, before reaching for more props:** name the mechanism the scene is drawing, then ask
+> which half is missing — its INPUT, its OUTPUT, or its SOURCE. A beam needs a finding. An arrival
+> needs an output. A hand-off needs somewhere it came from.
+
+### ⭐⭐ …and run the §3 test PER SCENE, on the VERB
+
+The scene that failed hardest was the one where the verb *was* the sentence. At 12s the VO says
+**"gives Claude Code unlimited usage"** — measured word onsets 11.83 / 12.01 / 12.27 / 12.49 /
+13.23 — and the picture was a rig driving past with three boxes on its deck. Write the line beside
+the shot: it depicted **no giving, no Claude Code, and no usage.**
+
+Rebuilt as the transaction itself, cut to those onsets: a tank with a gauge at 2 of 12, a coupler
+arm that extends **on "gives"**, locks **on "Code"**, and supply that pumps down the line while
+the gauge climbs **on "usage"**. ⭐ **Pull the word onsets out of the caption JSON and put the
+scene's beats on them.** A scene can be "about" the right subject and still depict none of the
+words actually being said.
+
+⛔ **And the thing doing the verb has to be IN FRAME.** The first rebuild parked the rig at
+x=-178, ~90% off-panel, so the subject of "gives" was invisible. Check the SETTLED x against the
+panel, not just the travel.
+
+---
+
+## 11. FOUR MEASUREMENT TRAPS THAT EACH COST A ROUND (reel 109)
+
+### ⭐⭐⭐ A travelling band trades TWO things and only ONE of them is the look
+The `Rake` bands read as **wallpaper** on a contact sheet — diagonal stripes were the first thing
+you saw in every scene. Narrowing them (0.58 → 0.34 of the pitch) at 0.52 opacity fixed the look
+and took the reel's median **10.81 → 9.18, with EVERY scene dropping.**
+
+> **They are separable.** What makes a band look like wallpaper is the **HARD EDGE** — a
+> hard-edged bar reads as a graphic laid over the room, a **feathered** one reads as light falling
+> through it. What makes it MEASURE is **swept area × speed**, neither of which a viewer reads as
+> "stripiness" in a still frame. Keep the feathering, restore the width, and take the rest back
+> through **SPEED** at the call sites: a faster sweep repaints more per sample and looks no
+> heavier at any instant. **9.18 → 11.30**, better-looking AND higher than the striped version.
+
+### ⭐⭐ Brightness is the MEAN. Hierarchy is the SPREAD.
+"Hierarchy needs DARKNESS" (§8) and THE-OPEN law 1's ">=140 at frame 0" look like opposites. They
+are not, and they only fight when you reach for the palette. Three colossal near-black sprites
+took HOOK_LUMA 150.4 → 130.0; the fix was lifting **the silhouette's own value** 0.19 → 0.36 (a
+~55-luma figure against a ~200-luma lit board is still a 145-point gap, the biggest spread in the
+reel) plus one bright subject settled at f0. **144.9, and no dark stop was touched.**
+
+### ⛔ The 40px floor applies to MOVING objects too
+Five 34×14 supply pulses travelling a full span left their scene at 10.17 with **75% HOLD**, the
+highest in the reel. 34×14 is under the short-side floor twice over, so it vanished in the audit's
+1012→240 downsample and read as nothing to a human either. Four 66×46 **canisters** plus a
+two-frame flash across the whole 250×128 tank on each gauge segment: **HOLD 75% → 59%.**
+
+### ⛔⛔ `SlopKit.Mascot` draws its body at ~100% of `size`, NOT ~70%
+Three "giants" at s=352 on a 320px pitch overlapped and rendered as **one continuous black band**
+across the lower half of the frame. Sprite pitch is arithmetic, and the arithmetic needs the real
+number. **Read the pixels, don't trust the algebra** — the same lesson as the crown that floated
+38px above the head.
+
+---
+
+## 10. WHEN THE NUMBER IS GREEN AND THE SCENE IS WRONG
+
+Harvested from reel 110 **FLOW** (Aug 2026), five review rounds. Every note had a
+measurable cause, and in four of them **a gate was green while the defect was
+plainly visible.** That is the class this section is about, and it is different
+from §7's "never treat a green gate as evidence the reel is right" — that warns
+you not to *trust* a gate; this explains the three specific ways a gate is
+actively *pointing the wrong way*.
+
+### ⭐⭐⭐ A high motion score is not legibility
+
+> *"The animation at 12 seconds isn't good enough, I can't really tell what that
+> is, it needs to be completely redone to a better concept."*
+
+That scene **measured 13.93** — third highest in the reel. It was a hexagonal
+core with twelve cable runs and beads flying both ways: large, bright, travelling
+continuously, which is exactly the shape §1's table rewards. It also depicted
+**nothing a viewer can name.**
+
+> **`scene_motion_audit.py` cannot tell a mechanism from a light show.** It means
+> the absolute difference between greyscale samples. Abstract lights on wires
+> satisfy it perfectly.
+
+The §3 test is the one that catches this and it has to be run on the BOARD, not
+on the render: write the VO line beside the shot and ask what the picture ADDS.
+The replacement was one sentence you can read without narration — *one agent
+finishes a job and puts what it learned INTO a bank; the same thing immediately
+comes back OUT to the other three; all three visibly get better* — and it scored
+LOWER (9.72) while being the fix.
+
+### ⭐⭐ An ACTION LOOP is not a SCENE
+
+> *"The animation at 24 seconds needs an actual animation concept, not just a
+> bunch of sprites standing around bouncing, it actually has to have something
+> going on."*
+
+§5 says sprites need an action loop rather than an idle, and that reel had eight
+sprites each running one of the four loops. Everybody was busy and **nothing was
+happening.**
+
+> **An action loop is what a sprite does WHILE the scene happens around it. It is
+> not the scene.** §2's four-part event test still has to pass: a before state, a
+> trigger, travel, and an arrival that costs something.
+
+Replaced with a bucket brigade — work pours from a chute at an accelerating rate,
+five Claudes pass every ticket hand to hand across the full panel, a crate at the
+foot of the now-empty spike fills and overflows. **12.83 → 23.13**, the highest
+scene in the reel, and the first version was *already* obeying §5.
+
+### ⭐⭐⭐ A GATE CARRIED BY THE WRONG OBJECT DEFORMS THAT OBJECT
+
+The most reusable finding in the build.
+
+> *"It's still not that clear that it's lifting weights."*
+
+Measured, rather than argued about:
+
+```
+plate 372px      = 47% of the panel HEIGHT and 113% of the lifter's whole body
+a real 45cm plate against a 175cm lifter is 26% of his height  ->  4.3x too big
+barbell overall  = 982px = 97% of the panel WIDTH  ->  no air on either side
+```
+
+A barbell is recognised by its **silhouette** — a long shaft, a weight at each
+end, a person under it, and space around the whole thing. At 97% of panel width
+that silhouette cannot form. The VALUE was backwards too: a cream bar on a lit
+hall has no silhouette at all, where every readable reference image is a DARK
+object against something brighter.
+
+⭐ **And the reason it was huge and pale was that it was carrying BOTH frame-0
+gates** — `HOOK_LUMA >= 140` and `HOOK_PLATE >= 18%`. Moving them onto a lit
+board on the wall behind freed the weights to be 152px of cast iron on a 560px
+shaft: 70% of panel width with air on both sides, dark against a light field.
+
+> **When a prop looks wrong and you cannot say why, ask what GATE it is being
+> asked to satisfy.** Then give that job to a different object.
+
+**The two checks that would have caught it on the board, both free:**
+1. **Proportion.** Measure the prop against the BODY beside it and against the
+   PANEL. If a hand prop is more than ~40% of the body's height, or an object is
+   over ~85% of the panel width, it has stopped reading as itself.
+2. **Silhouette value.** Name which side of the contrast the subject is on. A
+   light subject needs a darker field and vice versa. "Light on light" is the
+   answer to *"I can't tell what it is"* more often than shape ever is.
+
+### ⛔ And the arithmetic ones, restated because they keep recurring
+
+- **A crowd is `pitch = usableWidth / (n + 1)` per rank against
+  `spacing >= 0.85 x size`, PLUS a value ramp.** Sixty sprites at one size is a
+  texture whatever the pitch is; painting back ranks in progressively darker clay
+  is what makes depth readable — and it is the axis the greyscale audit can see.
+- **When a change measures far below what the arithmetic predicts, check the
+  STACKING CONTEXT before you touch its values.** A full-width conveyor — the
+  highest-value shape in §1's table — bought **+0.17**, because it sat at
+  `zIndex 26` under panes at `zIndex 40`. Above them it was worth **+1.33**.
+- **Cheap motion is worth trading away.** Removing an unmotivated explosion cost
+  the hook 17.12 → 14.35 and was correct: the shatter was motion for a beat that
+  did not mean anything. A number going down is not automatically a regression.

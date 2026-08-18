@@ -1,7 +1,13 @@
 # lead-magnets/
 
 ## Purpose
-The **source specs** for each reel's giveaway `.docx` — the thing the CTA promises ("comment BORIS and
+⛔⛔ **AS OF 2026-08-18 THE `.docx` IS NOT A DELIVERABLE.** Alex: *"from now on i dont want
+the docx files anymore just the articles on the site"*. What the CTA promises is a **live
+article on chenmedialabs.com**; the `.docx` built here is now only the site's build input
+and its gated download. Never ship one to Drive. See memory
+`feedback_reel_deliverable_is_the_article`.
+
+The **source specs** for each reel's guide — the thing the CTA promises ("comment BORIS and
 I'll send you the guide"). One plain-text spec per reel, so a magnet can be rebuilt or edited without
 reverse-engineering a Word file.
 

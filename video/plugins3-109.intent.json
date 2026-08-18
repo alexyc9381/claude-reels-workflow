@@ -1,0 +1,10 @@
+{
+  "reel": "109-plugins3",
+  "fps": 30,
+  "total": 950,
+  "L": { "S0": 0, "S1": 52, "S2": 160, "S3": 267, "S4": 311, "S5": 406,
+         "S6": 492, "S7": 570, "S8": 670, "S9": 751, "S10": 845 },
+  "names": { "S0": "HOOK", "S1": "SCAN", "S2": "SORT", "S3": "HANDOFF",
+             "S4": "ROAD", "S5": "GRID", "S6": "SHUTTER", "S7": "MINT",
+             "S8": "WIPE", "S9": "RECALL", "S10": "CTA" }
+}

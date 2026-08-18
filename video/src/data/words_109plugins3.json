@@ -1,0 +1,627 @@
+[
+{
+"start": 0.0,
+"end": 0.23,
+"word": " Don't"
+},
+{
+"start": 0.23,
+"end": 0.39,
+"word": " use"
+},
+{
+"start": 0.39,
+"end": 0.59,
+"word": " Claude"
+},
+{
+"start": 0.465,
+"end": 0.505,
+"word": " Code"
+},
+{
+"start": 0.54,
+"end": 0.7,
+"word": " without"
+},
+{
+"start": 0.7,
+"end": 0.88,
+"word": " these"
+},
+{
+"start": 1.13,
+"end": 1.45,
+"word": " 3"
+},
+{
+"start": 1.45,
+"end": 1.83,
+"word": " plugins."
+},
+{
+"start": 1.86,
+"end": 2.06,
+"word": " First"
+},
+{
+"start": 2.06,
+"end": 2.24,
+"word": " is"
+},
+{
+"start": 2.24,
+"end": 2.4,
+"word": " Claude"
+},
+{
+"start": 2.51,
+"end": 2.77,
+"word": " Setup,"
+},
+{
+"start": 2.87,
+"end": 2.97,
+"word": " an"
+},
+{
+"start": 2.97,
+"end": 3.23,
+"word": " official"
+},
+{
+"start": 3.16,
+"end": 3.58,
+"word": " Anthropic"
+},
+{
+"start": 3.58,
+"end": 3.8,
+"word": " plugin"
+},
+{
+"start": 3.8,
+"end": 3.96,
+"word": " that"
+},
+{
+"start": 4.11,
+"end": 4.29,
+"word": " scans"
+},
+{
+"start": 4.29,
+"end": 4.43,
+"word": " your"
+},
+{
+"start": 4.43,
+"end": 4.91,
+"word": " entire"
+},
+{
+"start": 5.03,
+"end": 5.47,
+"word": " codebase"
+},
+{
+"start": 5.47,
+"end": 5.67,
+"word": " and"
+},
+{
+"start": 5.67,
+"end": 5.93,
+"word": " recommends"
+},
+{
+"start": 5.745,
+"end": 5.93,
+"word": " the"
+},
+{
+"start": 5.93,
+"end": 6.19,
+"word": " best"
+},
+{
+"start": 6.19,
+"end": 6.59,
+"word": " skills,"
+},
+{
+"start": 6.72,
+"end": 7.0,
+"word": " subagents,"
+},
+{
+"start": 7.08,
+"end": 7.18,
+"word": " and"
+},
+{
+"start": 7.18,
+"end": 7.3,
+"word": " even"
+},
+{
+"start": 7.26,
+"end": 7.76,
+"word": " MCP"
+},
+{
+"start": 7.76,
+"end": 8.06,
+"word": " servers"
+},
+{
+"start": 8.02,
+"end": 8.22,
+"word": " for"
+},
+{
+"start": 8.22,
+"end": 8.36,
+"word": " your"
+},
+{
+"start": 8.36,
+"end": 8.56,
+"word": " project"
+},
+{
+"start": 9.03,
+"end": 9.29,
+"word": " to"
+},
+{
+"start": 9.29,
+"end": 9.57,
+"word": " 10x"
+},
+{
+"start": 9.365,
+"end": 9.405,
+"word": " your"
+},
+{
+"start": 9.44,
+"end": 9.81,
+"word": " productivity."
+},
+{
+"start": 10.51,
+"end": 10.65,
+"word": " The"
+},
+{
+"start": 10.65,
+"end": 10.87,
+"word": " second"
+},
+{
+"start": 10.87,
+"end": 11.03,
+"word": " is"
+},
+{
+"start": 11.03,
+"end": 11.33,
+"word": " OmniRoute,"
+},
+{
+"start": 11.39,
+"end": 11.53,
+"word": " which"
+},
+{
+"start": 11.53,
+"end": 11.83,
+"word": " literally"
+},
+{
+"start": 11.83,
+"end": 12.09,
+"word": " gives"
+},
+{
+"start": 12.01,
+"end": 12.27,
+"word": " Claude"
+},
+{
+"start": 12.27,
+"end": 12.49,
+"word": " Code"
+},
+{
+"start": 12.49,
+"end": 13.09,
+"word": " unlimited"
+},
+{
+"start": 13.23,
+"end": 13.65,
+"word": " usage"
+},
+{
+"start": 13.65,
+"end": 13.85,
+"word": " by"
+},
+{
+"start": 13.85,
+"end": 14.15,
+"word": " connecting"
+},
+{
+"start": 13.98,
+"end": 14.14,
+"word": " to"
+},
+{
+"start": 14.14,
+"end": 14.3,
+"word": " over"
+},
+{
+"start": 14.3,
+"end": 14.76,
+"word": " 200"
+},
+{
+"start": 14.86,
+"end": 15.16,
+"word": " AI"
+},
+{
+"start": 15.16,
+"end": 15.5,
+"word": " providers"
+},
+{
+"start": 15.5,
+"end": 15.72,
+"word": " to"
+},
+{
+"start": 15.72,
+"end": 15.88,
+"word": " use"
+},
+{
+"start": 15.795,
+"end": 15.835,
+"word": " for"
+},
+{
+"start": 15.87,
+"end": 16.07,
+"word": " free."
+},
+{
+"start": 16.54,
+"end": 16.72,
+"word": " Then"
+},
+{
+"start": 16.72,
+"end": 16.84,
+"word": " the"
+},
+{
+"start": 16.84,
+"end": 17.0,
+"word": " moment"
+},
+{
+"start": 17.14,
+"end": 17.26,
+"word": " you"
+},
+{
+"start": 17.26,
+"end": 17.36,
+"word": " hit"
+},
+{
+"start": 17.36,
+"end": 17.52,
+"word": " your"
+},
+{
+"start": 17.52,
+"end": 17.68,
+"word": " limit,"
+},
+{
+"start": 17.75,
+"end": 17.87,
+"word": " it"
+},
+{
+"start": 17.87,
+"end": 18.03,
+"word": " swaps"
+},
+{
+"start": 17.945,
+"end": 17.985,
+"word": " to"
+},
+{
+"start": 18.02,
+"end": 18.07,
+"word": " the"
+},
+{
+"start": 18.095,
+"end": 18.23,
+"word": " next"
+},
+{
+"start": 18.28,
+"end": 18.46,
+"word": " best"
+},
+{
+"start": 18.46,
+"end": 18.76,
+"word": " model."
+},
+{
+"start": 19.13,
+"end": 19.29,
+"word": " You"
+},
+{
+"start": 19.29,
+"end": 19.63,
+"word": " literally"
+},
+{
+"start": 19.63,
+"end": 19.85,
+"word": " get"
+},
+{
+"start": 19.705,
+"end": 20.31,
+"word": " 1.6"
+},
+{
+"start": 20.31,
+"end": 20.67,
+"word": " billion"
+},
+{
+"start": 20.67,
+"end": 21.05,
+"word": " tokens"
+},
+{
+"start": 20.96,
+"end": 21.12,
+"word": " for"
+},
+{
+"start": 21.12,
+"end": 21.36,
+"word": " free"
+},
+{
+"start": 21.36,
+"end": 21.62,
+"word": " every"
+},
+{
+"start": 21.65,
+"end": 21.95,
+"word": " month."
+},
+{
+"start": 22.46,
+"end": 22.6,
+"word": " The"
+},
+{
+"start": 22.6,
+"end": 22.74,
+"word": " third"
+},
+{
+"start": 22.74,
+"end": 22.88,
+"word": " is"
+},
+{
+"start": 22.88,
+"end": 23.08,
+"word": " Claude"
+},
+{
+"start": 22.98,
+"end": 23.12,
+"word": " Mem."
+},
+{
+"start": 23.2,
+"end": 23.3,
+"word": " It"
+},
+{
+"start": 23.3,
+"end": 23.48,
+"word": " gives"
+},
+{
+"start": 23.48,
+"end": 23.74,
+"word": " Claude"
+},
+{
+"start": 23.78,
+"end": 24.0,
+"word": " memory"
+},
+{
+"start": 24.0,
+"end": 24.3,
+"word": " across"
+},
+{
+"start": 24.3,
+"end": 24.56,
+"word": " all"
+},
+{
+"start": 24.56,
+"end": 24.76,
+"word": " your"
+},
+{
+"start": 24.76,
+"end": 25.04,
+"word": " sessions,"
+},
+{
+"start": 25.16,
+"end": 25.26,
+"word": " so"
+},
+{
+"start": 25.26,
+"end": 25.36,
+"word": " it"
+},
+{
+"start": 25.36,
+"end": 25.5,
+"word": " remembers"
+},
+{
+"start": 25.75,
+"end": 26.01,
+"word": " your"
+},
+{
+"start": 26.01,
+"end": 26.27,
+"word": " projects"
+},
+{
+"start": 26.085,
+"end": 26.18,
+"word": " and"
+},
+{
+"start": 26.18,
+"end": 26.38,
+"word": " your"
+},
+{
+"start": 26.38,
+"end": 26.56,
+"word": " files"
+},
+{
+"start": 26.82,
+"end": 26.92,
+"word": " so"
+},
+{
+"start": 26.92,
+"end": 27.02,
+"word": " you"
+},
+{
+"start": 27.02,
+"end": 27.2,
+"word": " never"
+},
+{
+"start": 27.095,
+"end": 27.53,
+"word": " re-explain"
+},
+{
+"start": 27.53,
+"end": 27.93,
+"word": " anything"
+},
+{
+"start": 27.93,
+"end": 28.29,
+"word": " again."
+},
+{
+"start": 28.29,
+"end": 28.83,
+"word": " If"
+},
+{
+"start": 28.83,
+"end": 28.93,
+"word": " you"
+},
+{
+"start": 28.93,
+"end": 29.03,
+"word": " want"
+},
+{
+"start": 29.005,
+"end": 29.045,
+"word": " to"
+},
+{
+"start": 29.08,
+"end": 29.12,
+"word": " try"
+},
+{
+"start": 29.155,
+"end": 29.24,
+"word": " these"
+},
+{
+"start": 29.23,
+"end": 29.32,
+"word": " for"
+},
+{
+"start": 29.32,
+"end": 29.54,
+"word": " free,"
+},
+{
+"start": 29.7,
+"end": 29.9,
+"word": " comment"
+},
+{
+"start": 30.23,
+"end": 30.59,
+"word": " CLAUDE"
+},
+{
+"start": 30.59,
+"end": 30.81,
+"word": " for"
+},
+{
+"start": 30.81,
+"end": 30.95,
+"word": " the"
+},
+{
+"start": 30.95,
+"end": 31.11,
+"word": " full"
+},
+{
+"start": 31.025,
+"end": 31.14,
+"word": " setup."
+}
+]

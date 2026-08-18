@@ -42,7 +42,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 | **build a reel's whole SFX bank** (or you got "too many sfx" / "that sound is annoying" back) | [`docs/SOUND-DESIGN.md`](docs/SOUND-DESIGN.md) §2b §6 §7 — ⭐ the house cue RATE (1.0-1.5/sec; a rejected reel ran 3.82), why nominal dB lies about loudness, the five gates in [`tools/sfx_audit.py`](tools/sfx_audit.py), and the five-round "puff of air" that was in the MUSIC BED and then in the VOICE, never in the effects |
 | **decide HOW MUCH should be happening** (or you got "only 20% as good" / "too many" back) | [`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) §9 — the per-reel and per-scene density budgets, why density is a SHAPE not a level, and the warning that a metric satisfiable the wrong way WILL be satisfied the wrong way |
 | **make sprites feel alive** | [`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) §5 — ⭐ sprites need an ACTION LOOP, not an idle (the single biggest measured lift in reel 107: failures 3/11 → 1/11), the four loop types, the spacing law, and why swapping slabs for sprites measures WORSE until they are big and fast |
-| **build a reel's lead-magnet .docx** | [`lead-magnets/`](lead-magnets/) + [`tools/make_lead_magnet.py`](tools/make_lead_magnet.py) — zero-dependency OOXML; hard-fails on em-dashes, a Matchtern footer, or a missing keyword line |
+| **publish a reel's guide** (⛔ the ARTICLE is the deliverable, not the docx) | [`lead-magnets/`](lead-magnets/) + [`tools/make_lead_magnet.py`](tools/make_lead_magnet.py) — zero-dependency OOXML; hard-fails on em-dashes, a Matchtern footer, or a missing keyword line |
 | **pick the next topic / write a script** | [`script-factory/`](script-factory/) + memory `script-factory-pipeline` |
 | **replicate a creator's *script* voice** | [`script-style-replicator/`](script-style-replicator/) — start at its `SKILL.md` |
 | **replicate a creator's *edit* style** | [`packs/`](packs/) — measured, verified edit packs |
@@ -72,7 +72,7 @@ Each has its own `README.md` (same skeleton — Purpose / Start here / Layout / 
 | [`outlier-engine/`](outlier-engine/) | comp discovery — weekly scans for candidate reels |
 | [`cover-system/`](cover-system/) | the post-cover design system + its generated index |
 | [`storyboards/`](storyboards/) | per-reel storyboards (`<number>-<name>.md`) |
-| [`lead-magnets/`](lead-magnets/) | the source specs for each reel's giveaway `.docx` |
+| [`lead-magnets/`](lead-magnets/) | the source specs for each reel's guide. ⛔ Since 2026-08-18 the `.docx` is NOT a deliverable — the lead magnet is the **live article on chenmedialabs.com**; the docx is only the site's build input + gated download |
 | [`editing-styles/`](editing-styles/) | editing-style reference notes + the production loop |
 | [`style-cloning-kit/`](style-cloning-kit/) | one example video → a reusable static-look style pack |
 | [`analytics/`](analytics/) | performance pull + template (IG insights) |

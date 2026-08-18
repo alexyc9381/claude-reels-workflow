@@ -415,7 +415,11 @@ cp ~/Downloads/Claude-Reels-Final/NN_*.mp4 \
 ```
 
 - **E3 caption** (`memory/caption-structure.md`) — ⛔ opens with `Comment "<KEYWORD>"`, then `👇 READ BELOW`, then the value. CTA first, never buried.
-- **E4 lead magnet** (`memory/lead-magnet-docs.md`) — the gated `.docx`. ⛔ It must **over-deliver vs the video** (video shows N → guide holds >N) and contain the genuinely non-obvious how, not the thing the VO already said.
+- **E4 lead magnet** (`memory/lead-magnet-docs.md`) — ⛔⛔ **the LIVE ARTICLE on
+  chenmedialabs.com**, not a file (Alex, 2026-08-18). The `.docx` is still built, but only as
+  the site's build input and its gated download; it is never delivered. **The reel is not
+  finished until the article URL loads**, verified with a cache-buster against the real
+  domain. The gated `.docx` ⛔ It must **over-deliver vs the video** (video shows N → guide holds >N) and contain the genuinely non-obvious how, not the thing the VO already said.
 - **E5 log it** — append to `memory/reel-lever-ledger.md` (reel #, keyword, opening lever, hook family, structure, date) and finish the factory log.
 - **E6 POST-PUBLISH AUTOPSY (48-72h)** — append the real 3-second hold, avg watch time, comment count next to the predicted scorecard. **This is what makes the rubric learn.** A bad miss triggers a postmortem + new kill-rules.
 

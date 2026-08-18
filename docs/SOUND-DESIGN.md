@@ -339,3 +339,94 @@ named and every consonant in the reel had been processed. Retuned to **6.6%** of
 - [`video/src/SoundKit.tsx`](../video/src/SoundKit.tsx) — the implementation
 - [`REEL-BUILD-LEARNINGS.md`](../REEL-BUILD-LEARNINGS.md) §6 — the audio-mix gotchas
 - [`CLAUDE-REELS-PLAYBOOK.md`](../CLAUDE-REELS-PLAYBOOK.md) — the full pipeline
+
+---
+
+## ⛔⛔ RUN `sfx_audit.py` BEFORE BUILDING THE BANK, NOT AFTER (reel 109)
+
+Reel 109 authored 44 cues by ear and by name, then ran the audit: **14 of them failed on
+measurement** — `am/unlock` `am/gear-mech` `am/lights-on` `am/coin-drop` `am/counter-tick`
+`am/positive-chime` `am/film-roll` `lib_pop` `lib_pop2` `sorter_tick` `harden_chime` `coin_slide`
+`chain_clank` `crowd_cheer`. Nine HISS, eleven AIR, six both. Every one of them sounded right from
+its filename.
+
+⭐ **Scan the WHOLE library first and pick from what passes.** 116 files clear all four gates, so
+there is never a reason to author a cue that does not. Sort the survivors by `<250Hz` and pick by
+measurement:
+
+```bash
+python3 tools/sfx_audit.py video/src/<Reel>.tsx      # after, as a check
+# before: measure every file once and choose from the clean list
+```
+
+⭐ **The replacement is often the more literal object too.** `lamp_clunk` (20.3% above 2kHz) is
+the bench light because it IS a lamp; `gong` (2.8%) beat `crowd_cheer` (50.4%, AIR) for the peak
+landing, and a low bell under a landing figure is better sound design than a cheer anyway.
+
+---
+
+## 12. ⛔⛔ A CLEAN `sfx_audit` IS NOT A GOOD SOUND BANK
+
+Reel 110 **FLOW**, round 2: *"a lot of the sfx are not good enough throughout the
+entire video, it just sounds like video game upgrade sounds or something like
+that, it's not good at all."*
+
+That is a countable defect, not a vibe. **24 of the bank's 41 cues came from ONE
+chiptune pack** — every file in this library prefixed `c_`:
+
+```
+c_1up · c_coin · c_collect · c_grow · c_fanfare · c_powerbig · c_bump
+c_clear · c_stomp · c_stomp2 · c_hit · c_break · c_warp · c_boss · c_unlock
+```
+
+Every one of them **passed** `tools/sfx_audit.py`, and the audit was right to
+pass them: it gates HISS, AIR, OVER-RING and SLAP, and it has **no gate for
+"this is a Mario sound."** Four level-ups scored with `c_1up` and five lane
+arrivals with `c_coin` is an arcade, however clean each file measures.
+
+> ⭐ **THE RULE: the bank has to belong to the WORLD, not just pass the gates.**
+> Before you place a single cue, name the room out loud — a machine shop, a
+> newsroom, a lifting hall — and pick the palette from that. Then run the audit.
+
+### The check that takes ten seconds
+
+```bash
+# no single FAMILY may carry the bank. >40% from one prefix is the defect.
+grep -oE 'src: "[a-z0-9_/-]+' src/Claude<Name>Reel.tsx | sed 's/.*"//' \
+  | sed 's#/.*##; s/_.*//' | sort | uniq -c | sort -rn | head
+```
+
+### The measured machine-room palette (taken on this repo, build day)
+
+Everything below passes all four gates. The percentages are energy above 2 kHz
+and below 250 Hz — **a repeated cue must be under 35% bright**, so the low ones
+carry the repetition and the bright ones are capped at four uses.
+
+| cue | >2kHz | <250Hz | what it is for |
+|---|---|---|---|
+| `thock` | 1.3% | 88.6% | anything landing; the workhorse |
+| `impact` | 6.2% | 42.1% | a strike, a stamp, a keyword hit |
+| `impact_deep` | 0.4% | 93.1% | a heavy arrival |
+| `sub` | 0.8% | 96.6% | weight under any of the above |
+| `adv_strike` | 0.4% | 88.9% | metal under strain |
+| `chair_knock` | 10.8% | 70.1% | a dull knock — reads as a REJECT |
+| `slate_whump` | 2.2% | 44.7% | a parcel into a crate |
+| `can_bong` | 17.4% | 46.0% | a block into a metal drawer |
+| `spotlight_snap` | 5.2% | 16.0% | a lamp switching on |
+| `gear_shift` | 43.3% | 35.5% | a machine changing gear |
+| `knife_switch` | 51.5% | 19.7% | a breaker being thrown |
+| `crusher` | 33.3% | 39.5% | something breaking |
+| `data` · `scan_beep` | 14.6% · 7.4% | — | a machine reading |
+| `temper_chime` · `bell_ring` | 4.9% · 16.1% | — | a settle, a service bell |
+| `stage_hum` | 0.3% | 70.3% | a room that is running |
+
+⛔ **The `am/` folder is almost entirely HISS/AIR by measurement** — long recorded
+foley, typically >88% above 2 kHz with attacks over 100 ms. `am/keys-macbook`,
+`am/counter-tick`, `am/lights-on`, `am/gear-mech` and `am/paper-slide` all fail.
+The usable mechanical sounds are in the main `sfx/` folder.
+
+⭐ **Match the SOUND to the OBJECT, not to the beat.** The four fixes that made
+the difference were all of this shape: a lamp is `spotlight_snap`, a breaker is
+`knife_switch`, a swarm getting faster is a machine changing gear, and a failing
+test is a dull knock rather than a bright tick — because a bright tick reads as a
+pass.
