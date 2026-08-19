@@ -33,12 +33,46 @@ import { chromium } from 'playwright';
 
 const OUT = new URL('../video/public/shots/', import.meta.url).pathname;
 
-/** [id, url, how many CSS px of the page are worth keeping] */
-const SITES = [
+/** ⭐⭐ TWO KINDS OF CAPTURE, AND THEY DO DIFFERENT JOBS.
+ *
+ *  SUBJECT sites are the products the VO names. They go where the product is
+ *  named, and they are the receipt.
+ *
+ *  REFERENCE sites are what the viewer actually WANTS — award-winning animated
+ *  work. Alex, after seeing a cut built only from subject sites: *"we need to
+ *  see example sites of really good animated scroll sites that we can pull from
+ *  even if its not designed from them"*, and *"the hook site isnt good enough"*.
+ *  A product's own docs page is correct, on-topic, and not what anybody is
+ *  aspiring to. The reference layer is the aspiration.
+ *
+ *  ⛔⛔ REFERENCE SITES GO IN THE HOOK AND ON INSPIRATION BOARDS, NEVER AT THE
+ *  PAYOFF. Showing a named company's homepage under "this is what you built"
+ *  implies it was built with the thing you are selling; stamping a price across
+ *  it implies what that company charges. Reel 111 solved both by using a WALL of
+ *  many (awwwards' winners grid) for the hook, so no single site is implicated,
+ *  and by keeping the payoff on a subject site that genuinely is built from its
+ *  own components.
+ *
+ *  ⛔ WEBGL AND LOADER-HEAVY SITES OFTEN CAPTURE BLANK. Of ten reference sites
+ *  tried, lusion.co, obys.agency and igloo.inc all came back empty or mid-loader
+ *  (measured edge-detail 434 / 516 / 0 against awwwards' 8,871). Measure every
+ *  capture before using it; do not eyeball the filenames.
+ *
+ *  [id, url, how many CSS px of the page are worth keeping] */
+const SUBJECT = [
   ['skiper', 'https://skiper-ui.com/',      2700],
   ['veng',   'https://www.vengenceui.com/', 3500],
   ['anim',   'https://animmasterlib.dev/',  4400],
 ];
+const REFERENCE = [
+  ['ex_awwwards', 'https://www.awwwards.com/websites/', 4200],  // the winners wall
+  ['ex_godly',    'https://godly.website/',             3600],
+  ['ex_basement', 'https://basement.studio/',           3600],
+  ['ex_stripe',   'https://stripe.com/',                4200],
+  ['ex_cuberto',  'https://cuberto.com/',               3600],
+  ['ex_apple',    'https://www.apple.com/airpods-pro/', 3600],
+];
+const SITES = [...SUBJECT, ...REFERENCE];
 
 const VP_W = 900;   // the reel's browser viewport width
 

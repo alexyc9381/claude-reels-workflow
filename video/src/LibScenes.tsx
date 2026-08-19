@@ -123,20 +123,35 @@ const seatsFor = (nav: number, card: number, price: number): Seat[] => [
       OBJECT and a staged scene, which the press is. The real capture is the
       thing being priced, not the interface being explained.
    ====================================================================== */
-/* ⛔⛔ THE CAPTURE'S TOP IS A BLACK NAV BAR, and frame 0 is a brightness
-   competition. Measured across the strip in 420px windows, skiper-ui.com's
-   brightest stretch is its COMPONENT GRID at strip y=720 (mean 149) — real
-   white component cards — where the page top reads near zero. So the hook opens
-   part-scrolled into the grid rather than at the top of the page, which is both
-   brighter AND more interesting: you see the actual components, not a logo.
-   `scroll` is in RENDERED pixels: the strip is 900 wide and draws at 772, so a
-   strip offset of 720 is 720 * (772/900) = 618. */
+/* ⭐⭐⭐ THE HOOK SHOWS A WALL OF AWARD-WINNING ANIMATED SITES, NOT A DOCS PAGE.
+   Alex, on the previous version: *"the hook site isnt good enough either"* and
+   *"we need to see example sites of really good animated scroll sites that we
+   can pull from even if its not designed from them."* Both notes are the same
+   note. skiper-ui.com's own homepage is a PRODUCT page — correct, on-topic, and
+   not what anybody is aspiring to. What the viewer wants is the LOOK.
+
+   So frame 0 is awwwards.com's winners grid, captured live: a dense, colourful
+   wall of real Site-of-the-Day pages with their studio names and award badges
+   on them. Measured brightest 420px window of the strip is its top at mean 184,
+   and it is also the highest-detail capture in the set (8,871 edge crossings vs
+   skiper's page).
+
+   ⛔⛔ AND IT IS A WALL ON PURPOSE, NOT ONE SITE. Stamping `$10,000` across a
+   named company's homepage would be an implied claim about what that company
+   charges, which is not ours to make. A wall of many says "this LOOK costs
+   money" and implicates nobody. Same reason no real third-party site appears at
+   the payoff: showing one there would imply it was built with these libraries.
+   The payoff uses vengenceui.com, which really is built from its own components.
+
+   `scroll` is in RENDERED pixels: the strip is 900 wide and draws at 832 here,
+   so a strip offset of 170 (below the promo bar, into the first thumbnail rows,
+   and above the cookie banner at ~980) is 170 * (832/900) = 157. */
 const SCR = { x: 76, y: 306, w: 860, h: 420 } as const;
 /* ⛔ AND THE ADDRESS BAR MUST STAY VISIBLE — it is the receipt that this is the
    real skiper-ui.com and not a drawing of one, so the press head parks ABOVE the
    screen rather than over its chrome. 420 puts the page's own headline and its
    real install command in the viewport with the hero behind them. */
-const SCR_START = 640;
+const SCR_START = 120;
 
 export const S0: React.FC<{ v: Variant }> = ({ v }) => {
   const f = useCurrentFrame();
@@ -144,7 +159,7 @@ export const S0: React.FC<{ v: Variant }> = ({ v }) => {
   const p = placeFor("quote");
   const HIT = HV.slam;
   /* the page is alive until the press lands, then it is frozen */
-  const scroll = SCR_START + Math.min(f, HIT) * 2.4;
+  const scroll = SCR_START + Math.min(f, HIT) * 2.2;
   const grey = E(f, HIT, HIT + 8, 0, 1, OUT);
   /* down fast, then back up — and it never leaves the frame */
   const headY = 46 + E(f, HIT - 8, HIT, 0, 236, OUT) - E(f, HIT + 8, HIT + 24, 0, 268, IO);
@@ -157,14 +172,14 @@ export const S0: React.FC<{ v: Variant }> = ({ v }) => {
         <SetFor k="quote" f={f} />
 
         {/* the shopfront the screen is set into */}
-        <Front x={44} y={262} w={924} h={532} f={f} lit={0.86 - grey * 0.52} z={22}
+        <Front x={44} y={262} w={924} h={532} f={f} lit={0.98 - grey * 0.56} z={22}
           scaffold={false} />
 
         {/* ⭐ THE REAL SITE, LIVE. skiper-ui.com, captured on build day, scrolling
             through a clipping viewport. It is the brightest, most saturated and
             most detailed object in the frame, which is what frame 0 needs. */}
-        <SiteScreen x={SCR.x} y={SCR.y} w={SCR.w} h={SCR.h} src="skiper_strip.png"
-          scroll={scroll} grey={grey} z={40} url="skiper-ui.com" />
+        <SiteScreen x={SCR.x} y={SCR.y} w={SCR.w} h={SCR.h} src="ex_awwwards_strip.png"
+          scroll={scroll} grey={grey} z={40} url="awwwards.com/websites" />
 
         {/* the price the press leaves on the glass */}
         <InkPrice x={SCR.x + 90} y={SCR.y + SCR.h * 0.34} w={SCR.w - 180} f={f} at={HIT + 1} z={52} />
@@ -242,6 +257,14 @@ export const S1: React.FC<{ v: Variant }> = ({ v }) => {
 
         {/* our dead front, small in the wide */}
         <Front x={96} y={214} w={392} h={454} f={f} lit={0} z={26} scaffold />
+        {/* ⭐ CONTINUITY: the same wall of award-winning sites the press killed in
+            S0 is still on the shopfront screen, still grey — and the COLOUR
+            COMES BACK as the three crates hit the pavement. The VO's "these three
+            libraries do it for free" gets its payoff in the picture rather than
+            in a badge, which is the whole reason no library carries a FREE stamp. */}
+        <SiteScreen x={122} y={258} w={344} h={244} src="ex_awwwards_strip.png"
+          scroll={260 + f * 1.6} z={34}
+          grey={1 - E(f, 18, 40, 0, 1, OUT)} url="awwwards.com" />
         {/* the quote board still hanging, still legible, still winning */}
         <QuoteBoard x={122} y={186} w={330} h={206} f={f} lands={[-99]} rockAt={-99} z={44} />
 
