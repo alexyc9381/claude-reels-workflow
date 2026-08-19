@@ -16,6 +16,15 @@
 > ⛔ **NUMBER SPINE:** `$10,000` (agency invoice, S0 · re-lit S6 · beaten S9) → `3` (crates, S1) →
 >               `106` (Skiper components, S4) → `46` (Vengeance components, S6) → `250`
 >               (Animmaster, S8) → the keyword (S10). **No other numeral is typeset anywhere.**
+> ⛔⛔ **EXAMPLE SITES, NOT DOCS PAGES (rev 4):** Alex: *"the vengeance UI and each of the sites
+>               mentioned should just be primarily like example sites that have super good scroll
+>               animations"*, and *"the site at 31 seconds it needs to be a reference example actual
+>               site with hella good scroll animations."* A product's own homepage is the RECEIPT and
+>               nobody aspires to it. Every screen in the reel now carries a real award-winning page:
+>               **awwwards' winners wall** (hook + S1) · **superlist** (the S2 wipe) ·
+>               **spline.design** (S3/S4, the component grid) · **basement.studio** (S5/S6, dark and
+>               cinematic, because a bright page under a flood rig blows out) · **rive.app** (S7/S8) ·
+>               **locomotive.ca** (S9, the ~31s payoff) · **stripe.com** (S10). Seven distinct sites.
 > ⛔ **REAL CAPTURES (rev 2):** every library is shown as its OWN LIVE PAGE, captured with
 >               Playwright on build day into `video/public/shots/` and scrolled through a clipping
 >               viewport (`LibWorld.SiteScreen`) with its real address bar on it. Alex: *"use real
@@ -130,7 +139,20 @@ every 1.1–5.9s; the three long scenes (S4, S6, S8) each carry an internal hard
 - **TAKEAWAY:** *the site you want, priced out of reach* — recognised in under a second, no
   narration, and the dreaded thing is a staged OBJECT, not a UI explainer (Alex, 2026-08-03).
 
-## SCENE 1 — 2.45 to 5.18s (2.70s) · HARD CUT TO WIDE · HOOK
+## SCENE 1 — 2.45 to 5.18s (2.70s) · HARD CUT TO WIDE · HOOK  ⭐ REBUILT (rev 4)
+- **⛔ WHY.** Alex: *"each of the libraries at 4 seconds needs to be better designed, right now it
+  just looks like a colored block, its kind of boring and no intrigue, and there should also be a
+  big claude sprite at the top right area part so its more hierarchical."* Two defects:
+  1. **The crates were primitives.** Nine divs each — a box, a band and a stencil. Rebuilt at ~30:
+     an aluminium extrusion frame on all four edges, eight ball corners, two dished butterfly
+     latches, spring handles, a louvred vent, a cable port with the lead in it, a livery band and a
+     real spec plate. `feedback_props_need_real_drawing` says count the divs before adding objects.
+  2. **No hierarchy.** Three same-size sprites jogging in is a row, not a composition. ONE COLOSSAL
+     Claude (352px) now owns the top right and does the work; the two small ones became scale
+     reference. It is also the reel's best callback: the agency's press stamped a PRICE across the
+     wall in the hook, and this is the same gesture with the opposite meaning — each case gets
+     stamped **IN**.
+
 - **VO:** *"These three libraries do it for free, so this is how it works."*
 - **SET:** Same street, `row`, pulled WIDE. Now the whole block reads: the dark shopfront centre,
   the quote board still hanging and still lit at frame-left, and — new information — the
@@ -150,7 +172,18 @@ every 1.1–5.9s; the three long scenes (S4, S6, S8) each carry an internal hard
   footsteps.
 - **TAKEAWAY:** three things just arrived, free of the board that is still hanging there.
 
-## SCENE 2 — 5.18 to 9.02s (3.87s) · HARD CUT · SETUP
+## SCENE 2 — 5.18 to 9.02s (3.87s) · LOCKED · SETUP  ⭐ REBUILT (rev 4)
+- **⛔ WHY.** Alex: *"at 6 seconds the animation looks horrible and boring here."* Correct, and the
+  diagnosis is §3: the old version drew a grey concrete shell, three placeholder blocks falling off
+  it and a cable being plugged in — a CONTAINER for the idea "a plain site", carrying one bit of
+  information for nearly four seconds.
+- **⭐ THE REBUILD.** The line is *"you can plug instantly into ANY AI generated site"*, so the scene
+  is the TRANSFORMATION itself: one browser at `your-site.com`, a hard lit edge dragged across the
+  glass by a big Claude, a dead AI-built layout behind the edge (`PlainPage` — a competent, utterly
+  still nav/hero/three-card page) and **superlist.com** live in front of it. A full-width travelling
+  boundary is the highest-scoring shape in the measured motion table, and here it means something.
+  Measured **12.68 → 14.04**, HOLD 62% → 38%.
+
 - **VO:** *"These three UI libraries you can plug instantly into any AI generated site."*
 - **SET:** `depot` (steel-blue, the coldest and deadest frame in the reel, deliberately). The
   **bare shell**: raw grey concrete frontage, scaffold, no signage, a sagging placeholder banner,

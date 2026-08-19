@@ -554,6 +554,47 @@ export const SiteScreen: React.FC<{ x: number; y: number; w: number; h: number;
   </div>
 );
 
+/** ⭐ THE "AI GENERATED SITE" — what the VO means by the thing you paste INTO.
+    Deliberately competent and completely dead: a nav of grey pills, a hero with
+    two rules and a button, a row of empty cards. It is the BEFORE, and it has to
+    look plausible rather than broken, because the point is not that AI builds
+    bad layouts — it is that it builds STILL ones. */
+export const PlainPage: React.FC<{ w: number; h: number; z?: number }> =
+  ({ w, h, z = 4 }) => {
+  const g1 = "#8E9299", g2 = "#6E737B", bg = "#E6E7EA";
+  return (
+    <div style={{ position: "absolute", inset: 0, background: bg, zIndex: z }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: h * 0.09,
+        background: "#D6D8DD" }}>
+        <div style={{ position: "absolute", left: w * 0.03, top: h * 0.028, width: w * 0.09,
+          height: h * 0.034, background: g2, borderRadius: 3 }} />
+        {[0, 1, 2, 3].map(i => (
+          <div key={i} style={{ position: "absolute", left: w * (0.42 + i * 0.09), top: h * 0.034,
+            width: w * 0.055, height: h * 0.022, background: g1, borderRadius: 3 }} />
+        ))}
+      </div>
+      {[0.62, 0.44].map((k, i) => (
+        <div key={"hb" + i} style={{ position: "absolute", left: w * 0.08, top: h * (0.20 + i * 0.10),
+          width: w * k, height: h * (i ? 0.045 : 0.075), background: i ? g1 : g2, borderRadius: 3 }} />
+      ))}
+      <div style={{ position: "absolute", left: w * 0.08, top: h * 0.40, width: w * 0.15,
+        height: h * 0.07, background: g2, borderRadius: 5 }} />
+      {[0, 1, 2].map(i => (
+        <div key={"cd" + i} style={{ position: "absolute", left: w * (0.08 + i * 0.29),
+          top: h * 0.56, width: w * 0.26, height: h * 0.34, background: "#D6D8DD",
+          border: `2px solid #C2C5CB` }}>
+          <div style={{ position: "absolute", left: "8%", top: "8%", right: "8%", height: "44%",
+            background: "#C2C5CB" }} />
+          {[0, 1].map(j => (
+            <div key={j} style={{ position: "absolute", left: "8%", top: `${60 + j * 14}%`,
+              width: `${70 - j * 22}%`, height: "7%", background: g1 }} />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 /* =========================================================================
    THE VILLAIN. ⛔ Its RULE: its marquee stays lit and its invoice stays
    legible through every scene. It is never torn and never stamped — at S9 it
@@ -746,40 +787,119 @@ export const InkPrice: React.FC<{ x: number; y: number; w: number; f: number; at
    killed three identical lid shots. Blocks / light / volume.
    ====================================================================== */
 export const Crate: React.FC<{ x: number; y: number; w: number; h: number; f: number;
-  i: number; open?: number; z?: number; stencil?: string }> =
-  ({ x, y, w, h, f, i, open = 0, z = 40, stencil }) => {
+  i: number; open?: number; z?: number; stencil?: string; stamped?: number }> =
+  ({ x, y, w, h, f, i, open = 0, z = 40, stencil, stamped = 0 }) => {
   const lib = R.libs[i];
   const body = dkh(lib.c, 0.52);
+  const R2 = Math.max(3, w * 0.014);           // trim thickness
   return (
     <div style={{ position: "absolute", left: x, top: y, width: w, height: h, zIndex: z }}>
+      {/* --- the case body: a ply panel inside an aluminium extrusion frame --- */}
       <div style={{ position: "absolute", inset: 0,
-        background: `linear-gradient(164deg, ${mxh(body, 0.16)} 0%, ${dkh(body, 0.30)} 100%)`,
-        boxShadow: SH_D, border: `5px solid ${dkh(lib.c, 0.66)}` }} />
-      {/* case corners + latches — flight-case furniture */}
+        background: `linear-gradient(164deg, ${mxh(body, 0.20)} 0%, ${dkh(body, 0.34)} 100%)`,
+        boxShadow: SH_D }} />
+      {/* the extrusion, all four edges — this is what makes it read as a road case */}
+      {[["top", 0], ["bottom", 0]].map(([side], j) => (
+        <div key={"ex" + j} style={{ position: "absolute", left: 0, right: 0, height: R2 * 2.6,
+          [side as string]: 0, background: `linear-gradient(180deg, #B9BEC6 0%, #6E747E 100%)` }} />
+      ))}
+      {["left", "right"].map((side, j) => (
+        <div key={"ey" + j} style={{ position: "absolute", top: 0, bottom: 0, width: R2 * 2.6,
+          [side]: 0, background: `linear-gradient(90deg, #B9BEC6 0%, #6E747E 100%)` }} />
+      ))}
+      {/* --- eight ball corners --- */}
       {[[0, 0], [1, 0], [0, 1], [1, 1]].map(([cx, cy], j) => (
-        <div key={"cn" + j} style={{ position: "absolute", left: cx ? w - 30 : 0, top: cy ? h - 30 : 0,
-          width: 30, height: 30, background: "#4A4E56" }} />
+        <div key={"cn" + j} style={{ position: "absolute",
+          left: cx ? w - w * 0.13 : 0, top: cy ? h - w * 0.13 : 0,
+          width: w * 0.13, height: w * 0.13,
+          background: `radial-gradient(circle at 34% 30%, #C6CAD2 0%, #5E646E 70%, #3A3E48 100%)`,
+          borderRadius: cx ? (cy ? "0 0 8px 0" : "0 8px 0 0") : (cy ? "0 0 0 8px" : "8px 0 0 0") }} />
       ))}
-      {[0.28, 0.72].map((k, j) => (
-        <div key={"lt" + j} style={{ position: "absolute", left: w * k - 13, top: h * 0.30,
-          width: 26, height: 20, background: "#8A9099" }} />
+      {/* --- two butterfly latches, dished --- */}
+      {[0.24, 0.76].map((k, j) => (
+        <div key={"lt" + j} style={{ position: "absolute", left: w * k - w * 0.075, top: h * 0.30,
+          width: w * 0.15, height: h * 0.17, background: "#3E434C", borderRadius: 4 }}>
+          <div style={{ position: "absolute", inset: "18%",
+            background: `linear-gradient(160deg, #D2D6DE 0%, #8A9099 100%)`, borderRadius: 3 }} />
+          <div style={{ position: "absolute", left: "40%", top: "26%", width: "20%", height: "48%",
+            background: "#4A4F58" }} />
+        </div>
       ))}
-      {/* the livery band + stencil */}
-      <div style={{ position: "absolute", left: 0, right: 0, top: h * 0.46, height: h * 0.10,
-        background: hexa(lib.c, 0.85) }} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: h * 0.62, textAlign: "center",
-        ...ui(Math.max(13, h * 0.095), 900), color: hexa(lib.accent, 0.95), letterSpacing: 1.5 }}>
+      {/* --- a spring handle on each flank --- */}
+      {[0.03, 0.97].map((k, j) => (
+        <div key={"hd" + j} style={{ position: "absolute", left: w * k - w * 0.02, top: h * 0.52,
+          width: w * 0.04, height: h * 0.22, background: "#4A4F58", borderRadius: 4 }} />
+      ))}
+      {/* --- a vent grille: real louvres, not a texture --- */}
+      <div style={{ position: "absolute", left: w * 0.06, top: h * 0.60, width: w * 0.20,
+        height: h * 0.26, background: dkh(body, 0.60), borderRadius: 3, overflow: "hidden" }}>
+        {Array.from({ length: 5 }, (_, j) => (
+          <div key={j} style={{ position: "absolute", left: "8%", right: "8%",
+            top: `${10 + j * 18}%`, height: "8%", background: hexa("#000", 0.55) }} />
+        ))}
+      </div>
+      {/* --- a cable port with the lead still in it --- */}
+      <div style={{ position: "absolute", right: w * 0.07, top: h * 0.63, width: w * 0.11,
+        height: w * 0.11, borderRadius: "50%", background: "#2A2E36",
+        border: `${R2}px solid #7C828C` }}>
+        <div style={{ position: "absolute", inset: "26%", borderRadius: "50%", background: "#14171C" }} />
+      </div>
+      {/* --- the livery band + a real spec plate --- */}
+      <div style={{ position: "absolute", left: R2 * 2.6, right: R2 * 2.6, top: h * 0.40,
+        height: h * 0.17, background: hexa(lib.c, 0.95) }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: h * 0.575, textAlign: "center",
+        ...ui(Math.max(12, h * 0.10), 900), color: hexa(lib.accent, 0.97), letterSpacing: 1.6 }}>
         {stencil ?? lib.stencil}
       </div>
+      <div style={{ position: "absolute", left: w * 0.30, top: h * 0.74, width: w * 0.40,
+        height: h * 0.14, background: hexa("#E8E4D8", 0.90), borderRadius: 2 }}>
+        {[0, 1, 2].map(j => (
+          <div key={j} style={{ position: "absolute", left: "10%", top: `${18 + j * 26}%`,
+            width: `${70 - j * 16}%`, height: "13%", background: hexa("#3A342A", 0.42) }} />
+        ))}
+      </div>
+      {/* --- the QC stamp our own crew puts on it (S1) --- */}
+      {stamped > 0 && (
+        <div style={{ position: "absolute", left: w * 0.16, top: h * 0.16, width: w * 0.68,
+          height: h * 0.26, zIndex: 6,
+          border: `${Math.max(4, w * 0.022)}px solid ${hexa("#D8443A", 0.92 * stamped)}`,
+          borderRadius: 6, transform: `rotate(-7deg) scale(${1 + (1 - stamped) * 0.5})`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          ...ui(h * 0.13, 900), color: hexa("#D8443A", 0.94 * stamped), letterSpacing: 2 }}>
+          IN
+        </div>
+      )}
       {open > 0 && (
         <div style={{ position: "absolute", left: -6, right: -6, top: -10, height: h * 0.26,
           background: dkh(lib.c, 0.44), border: `5px solid ${dkh(lib.c, 0.66)}`, zIndex: 4,
-          /* ⛔ THE LID FLEW STRAIGHT UP AND LANDED ACROSS THE SCREEN BEHIND IT,
-             covering the real page the whole scene exists to show. It now throws
-             sideways and out of frame, which is also what a blown lid does. */
           transformOrigin: "50% 100%",
           transform: `translate(${-open * 300}px, ${-open * 96}px) rotate(${-open * 62}deg)` }} />
       )}
+    </div>
+  );
+};
+
+/** ⭐ THE CREW'S OWN PRESS — the deliberate counterpart to the agency's. The
+    agency stamped a PRICE on the wall in the hook; our Claude stamps the three
+    cases IN. Same gesture, opposite meaning, and it gives S1 the one big
+    dominant figure it was missing.
+    ⛔ NEVER HAND-DRAW A LIMB ON THE MASCOT — the stamp is a SEPARATE object that
+    travels with the sprite, not an arm bolted onto it. */
+export const HandStamp: React.FC<{ x: number; y: number; w: number; f: number;
+  at: number; z?: number; c?: string }> =
+  ({ x, y, w, f, at, z = 62, c = "#D8443A" }) => {
+  const drop = E(f, at - 5, at, 0, 1, IN_Q) - E(f, at + 3, at + 12, 0, 1, OUT);
+  const h = w * 0.52;
+  return (
+    <div style={{ position: "absolute", left: x, top: y + drop * 150, width: w, height: h,
+      zIndex: z }}>
+      <div style={{ position: "absolute", left: w * 0.34, top: -h * 0.72, width: w * 0.32,
+        height: h * 0.76, background: `linear-gradient(90deg, #8A6A44 0%, #5A432A 100%)`,
+        borderRadius: w * 0.06 }} />
+      <div style={{ position: "absolute", inset: 0, borderRadius: w * 0.05,
+        background: `linear-gradient(170deg, #6E747E 0%, #3A3E48 100%)`, boxShadow: SH_D }} />
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: -h * 0.16, height: h * 0.22,
+        background: c, borderRadius: w * 0.03 }} />
     </div>
   );
 };

@@ -1,12 +1,12 @@
 import React from "react";
-import { useCurrentFrame } from "remotion";
+import { Img, staticFile, useCurrentFrame } from "remotion";
 import {
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
   Scene, Cam, Mark, MarkCast, dkh, mxh, idle, rock, shake, drift, squash,
   R, CLAY, GOLD, GREEN, RED, TEAL, PAPER, CREAMB, CONCRETE, ui, mono,
   Rake, Ring, Puff, Pool, Clad, Slot, Front, Tower, QuoteBoard, Crate,
   FloodHead, ConeLight, PartsRack, BigCursor, Marquee, Crew, RACK_RANKS, RANK_TINT,
-  SiteScreen, PressStamp, InkPrice,
+  SiteScreen, PressStamp, InkPrice, HandStamp, PlainPage,
 } from "./LibWorld";
 import type { Seat, PanelKind } from "./LibWorld";
 import { SetFor, placeFor, Pole } from "./LibSets";
@@ -57,9 +57,14 @@ export const CAM: Record<Variant, { dx: number; dy: number; s: number; rot: numb
     GAMMA that flip gradient signs near flat areas. It is a CSS filter, so nothing
     moves and the motion audit is unaffected. */
 export const GRADE: Record<Variant, string> = {
-  night: "contrast(0.985) saturate(1.08) brightness(1.005) hue-rotate(-2deg)",
-  amber: "contrast(1.205) saturate(1.22) brightness(0.930) hue-rotate(-17deg)",
-  steel: "contrast(0.862) saturate(0.90) brightness(1.068) hue-rotate(14deg)",
+  /* ⛔ THE REAL CAPTURES ARE MOSTLY NEUTRAL and they now occupy a large share of
+     every body scene, which dragged BODY_SAT to 34.2% against a 34% bar — 0.2 of
+     margin is a failure waiting for a re-encode. The fix is the GRADE, not the
+     palette: a saturate() lift on the panel contents costs no luma, touches no
+     dark stop, and is a CSS filter so the motion audit is unaffected. */
+  night: "contrast(0.985) saturate(1.20) brightness(1.005) hue-rotate(-2deg)",
+  amber: "contrast(1.205) saturate(1.34) brightness(0.930) hue-rotate(-17deg)",
+  steel: "contrast(0.862) saturate(1.02) brightness(1.068) hue-rotate(14deg)",
 };
 
 /** ⭐ a genuinely different HOOK ACTION per cut — the memory's #1 variant lever.
@@ -281,7 +286,8 @@ export const S1: React.FC<{ v: Variant }> = ({ v }) => {
                   <div style={{ position: "absolute", left: 0, top: 0,
                     transform: `scale(${2 - sq}, ${sq})`, transformOrigin: `${x + s / 2}px ${yy + s * 0.78}px` }}>
                     <div style={{ transform: `rotate(${rk}deg)`, transformOrigin: `${x + s / 2}px ${yy + s * 0.78}px` }}>
-                      <Crate x={x} y={yy} w={s} h={s * 0.78} f={f} i={i} z={42} />
+                      <Crate x={x} y={yy} w={s} h={s * 0.78} f={f} i={i} z={42}
+                        stamped={E(f, at + 6, at + 12, 0, 1, OUT)} />
                     </div>
                   </div>
                 </div>
@@ -323,15 +329,35 @@ export const S1: React.FC<{ v: Variant }> = ({ v }) => {
         <Rake f={f} y={0} h={792} x0={-300} span={1500} n={3} c="#F4E2C4" dc="#07060C"
           speed={9.6} z={70} o={0.24} skew={-13} />
 
-        {/* the crew arriving on the third hit — they run IN, they do not fade in */}
-        {[0, 1, 2].map(i => {
-          const at = 40 + i * 5;
+        {/* ⭐⭐ THE SCENE HAD NO HIERARCHY. Alex: *"there should also be a big
+            claude sprite at the top right area part so its more hierarchical
+            scene stamping the thing."* Three same-size sprites jogging in is a
+            row, not a composition — nothing out-ranks anything. ONE COLOSSAL
+            Claude in the top right now owns the frame and does the work, and the
+            two small ones become scale reference rather than co-leads.
+            ⭐ It is also the reel's best callback: the agency's press stamped a
+            PRICE across the wall in the hook, and this is the same gesture with
+            the opposite meaning — each case gets stamped **IN**. */}
+        {(() => {
+          const inK = E(f, 6, 18, 0, 1, OUT);
+          return (<>
+            <Pool x={846} y={430} w={330} o={0.34} z={44} />
+            <Crew f={f} x={846 + (1 - inK) * 300} y={438} i={2} size={352} z={46} act={1} />
+            {CRATES.map(([, at], j) => (
+              <HandStamp key={"hs" + j} x={700} y={286} w={188} f={f} at={at + 6} z={45} />
+            ))}
+          </>);
+        })()}
+
+        {/* two smaller hands on the pavement — scale reference, not co-leads */}
+        {[0, 1].map(i => {
+          const at = 42 + i * 7;
           const k = E(f, at, at + 12, 0, 1, OUT);
           if (k <= 0) return null;
           return (
             <React.Fragment key={"cw" + i}>
-              <Pool x={1090 - k * (330 + i * 132)} y={738} w={112} z={38} />
-              <Crew f={f} x={1090 - k * (330 + i * 132)} y={742} i={i} size={112} z={40} act={0} />
+              <Pool x={132 + i * 150} y={742} w={104} z={38} />
+              <Crew f={f} x={132 + i * 150} y={746} i={i} size={112 * k} z={40} act={i} />
             </React.Fragment>
           );
         })}
@@ -364,92 +390,75 @@ const JUNK: Array<[number, number, number, number]> = [
 export const S2: React.FC<{ v: Variant }> = ({ v }) => {
   const f = useCurrentFrame();
   const p = placeFor("shell");
-  const slotOn = E(f, 78, 100, 0, 1, OUT);
-  /* ⭐ THE SHELL BRIGHTENS AS THE SOCKETS COME ALIVE — the value arc IS the
-     story of this scene, and a rising luma is motion the audit can see. */
-  const lit = E(f, 76, 112, 0.10, 0.62, LIN);
+  /* the wipe: a hard edge dragged across the glass, f26 -> f100 */
+  const wipe = E(f, 14, 88, 0, 1, IO);
+  const SC = { x: 74, y: 178, w: 864, h: 470 };
+  const inner = { w: SC.w - 28, h: SC.h - 68 };
   return (
-    <Scene p={p} slug="" push={push(v, 116, 1.09)} vig={0.50}>
+    <Scene p={p} slug="" push={push(v, 116, 1.07)} vig={0.46}>
       <div style={{ position: "absolute", inset: 0, zIndex: 2 }}>
         <SetFor k="shell" f={f} />
 
-        {/* ⭐ THE BACKGROUND PROCESS: a scaffold hoist running the whole scene.
-            One hero doing one gesture is a dead shot. */}
-        <div style={{ position: "absolute", left: 92, top: -40, width: 10, height: 860,
-          background: "#3A4652", zIndex: 24 }} />
-        <div style={{ position: "absolute", left: 46, top: ((f * 4.6) % 780) - 90,
-          width: 104, height: 78, background: "#54606E", zIndex: 25, boxShadow: SH_D }}>
-          <div style={{ position: "absolute", left: 10, top: 12, width: 84, height: 10,
-            background: "#2A343E" }} />
+        {/* ⛔⛔ REBUILT. Alex: *"at 6 seconds the animation looks horrible and
+            boring here."* He was right and the diagnosis is §3: the old version
+            drew a grey concrete shell, three placeholder blocks falling off it
+            and a cable being plugged in — a CONTAINER for the idea "a plain
+            site", carrying one bit of information for nearly four seconds.
+            ⭐ The line is *"you can plug instantly into ANY AI generated site"*,
+            so the scene is now the TRANSFORMATION itself: one screen, a hard
+            edge dragged across it, a dead AI-built layout behind the edge and a
+            real award-winning animated page in front of it. A full-width
+            travelling boundary is also the single highest-scoring shape in the
+            measured motion table, and here it means something. */}
+        <div style={{ position: "absolute", left: SC.x, top: SC.y, width: SC.w, height: SC.h,
+          zIndex: 34, background: "#0A0B0F", border: "14px solid #24262E", boxShadow: SH_D }}>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 40,
+            background: "#16181F", display: "flex", alignItems: "center", paddingLeft: 14, gap: 9,
+            borderBottom: "2px solid #2A2D36", zIndex: 8 }}>
+            {["#E0655B", "#E3B341", "#5BB98C"].map(c => (
+              <span key={c} style={{ width: 12, height: 12, borderRadius: "50%", background: c }} />
+            ))}
+            <div style={{ marginLeft: 10, height: 24, flex: 1, marginRight: 14, borderRadius: 12,
+              background: "#0C0E13", display: "flex", alignItems: "center", paddingLeft: 12,
+              ...mono(15, 700), color: "#B9BCC6" }}>your-site.com</div>
+          </div>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 40, bottom: 0,
+            overflow: "hidden" }}>
+            {/* BEHIND the edge — the dead AI layout */}
+            <PlainPage w={inner.w} h={inner.h} z={4} />
+            {/* IN FRONT of it — a real page with real scroll work on it, revealed */}
+            <div style={{ position: "absolute", inset: 0, zIndex: 6,
+              clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)` }}>
+              <Img src={staticFile("shots/ex_superlist_strip.png")}
+                style={{ position: "absolute", left: 0, top: -(624 + f * 1.5), width: inner.w,
+                  display: "block" }} />
+            </div>
+            {/* the edge itself: a lit seam with its own shadow behind it */}
+            <div style={{ position: "absolute", top: 0, bottom: 0, left: `${wipe * 100}%`,
+              width: 20, marginLeft: -10, zIndex: 9,
+              background: `linear-gradient(90deg, ${hexa("#050810", 0.5)} 0%, ${hexa("#DCEEFF", 0.95)} 55%, ${hexa("#DCEEFF", 0)} 100%)` }} />
+          </div>
         </div>
 
-        <Front x={FB.x} y={FB.y} w={FB.w} h={FB.h} f={f} lit={lit} z={26}
-          slots={SLOT_BOXES} slotOn={slotOn} scaffold />
+        {/* ⭐ ONE BIG FIGURE DRAGGING IT. The hand that pulls the edge across is
+            the scene's hierarchy — everything else is the room. */}
+        <Pool x={SC.x + wipe * SC.w} y={706} w={250} o={0.34} z={44} />
+        <Crew f={f} x={SC.x + wipe * SC.w} y={712} i={4} size={268} z={48} act={1} />
 
-        {/* ⛔ THE PLACEHOLDER FURNITURE GIVES UP, ONE PIECE AT A TIME. The site
-            is not merely plain, it is FAILING — which is what earns this scene
-            the right to be the dimmest in the reel. */}
-        {JUNK.map(([jx, jw, jh, at], i) => {
-          const k = E(f, at, at + 26, 0, 1, IN_Q);
-          if (k <= 0 || f > at + 44) return null;
-          const jy = 70 + i * 60 + k * (700 - i * 60);
-          return (
-            <React.Fragment key={"jk" + i}>
-              <div style={{ position: "absolute", left: jx, top: jy, zIndex: 48,
-                transform: `rotate(${k * (i % 2 ? -104 : 128)}deg)`, transformOrigin: "50% 50%" }}>
-                <Clad x={0} y={0} w={jw} h={jh} kind="block" c="#6A7482" lit={0.30} z={48} />
-              </div>
-              <Ring x={jx + jw / 2} y={738} f={f} at={at + 26} c="#9FB6CC" r1={230} life={14} z={50} />
-              <Puff x={jx + jw / 2} y={738} f={f} at={at + 26} c="#8FA6BC" n={10} s={1.2} z={49} />
-            </React.Fragment>
-          );
-        })}
+        {/* the three cases waiting on the kerb, in their livery */}
+        {[0, 1, 2].map(i => (
+          <Crate key={"kc" + i} x={54 + i * 128} y={674} w={112} h={88} f={f} i={i} z={40}
+            stamped={1} />
+        ))}
 
-        {/* the umbilical — dragged in, rammed home, and then it CHARGES */}
-        {(() => {
-          const dk = E(f, 50, 70, 0, 1, OUT);
-          const cx = 1010 - dk * 600;
-          return (<>
-            <div style={{ position: "absolute", left: cx, top: 720, right: 0, height: 17,
-              background: "#2E3A46", zIndex: 44, borderRadius: 8 }} />
-            {/* four DISCRETE charge pops running up the cable — never one tween */}
-            {[0, 1, 2, 3].map(i => {
-              const at = 72 + i * 4;
-              const k = E(f, at, at + 6, 0, 1, OUT);
-              if (k <= 0) return null;
-              return (
-                <div key={"ch" + i} style={{ position: "absolute", left: cx + 30 + i * 132,
-                  top: 700, width: 84, height: 58, zIndex: 47,
-                  background: hexa("#BFE4FF", 0.78 * (1 - E(f, at + 6, at + 16, 0, 1, LIN))) }} />
-              );
-            })}
-            <Pool x={cx + 50} y={772} w={168} z={38} />
-            <Crew f={f} x={cx + 50} y={776} i={2} size={176} z={46} act={1} />
-          </>);
-        })()}
+        <Ring x={SC.x + wipe * SC.w} y={SC.y + SC.h / 2} f={f} at={14} c="#DCEEFF"
+          r1={300} life={16} z={52} />
 
-        {/* ⭐ THE SLOTS COME ALIVE AS THREE BIG DISCRETE POPS — a full-width
-            flash filling each socket, never a fade. N discrete events beat one
-            long tween (4.27 -> 5.63, measured on exactly this choice). */}
-        {SLOT_BOXES.map(([sx, sy, sw, sh_], i) => {
-          const at = 80 + i * 9;
-          const k = E(f, at, at + 5, 0, 1, OUT);
-          if (k <= 0) return null;
-          const fade = 1 - E(f, at + 5, at + 20, 0, 1, LIN);
-          return (
-            <div key={"sp" + i} style={{ position: "absolute", left: FB.x + sx, top: FB.y + sy,
-              width: sw, height: sh_, zIndex: 52,
-              background: hexa("#DCEEFF", 0.80 * fade), transform: `scaleY(${k})` }} />
-          );
-        })}
-
-        {/* ⭐ A WORK LIGHT CROSSING THE SHELL for the whole scene — feathered,
-            wide and FAST, alternating light AND shadow so every boundary carries
-            luma delta instead of lifting the black point. */}
-        <Rake f={f} y={22} h={740} x0={-300} span={1520} n={3} c="#E4F2FF" dc="#050810"
-          speed={9.9} z={60} o={0.30} skew={-12} />
-
-        <MarkCast x={880} y={168} s={150} z={21} o={0.12} spin={0.4} f={f} />
+        {/* ⭐ THE WORK LIGHT — feathered, wide and fast, alternating light and
+            shadow so every boundary carries luma delta. */}
+        <Rake f={f} y={0} h={792} x0={-300} span={1520} n={3} c="#E4F2FF" dc="#050810"
+          speed={9.9} z={62} o={0.26} skew={-12} />
+        <MarkCast x={886} y={140} s={140} z={21} o={0.12} spin={0.4} f={f} />
       </div>
     </Scene>
   );
@@ -481,8 +490,8 @@ export const S3: React.FC<{ v: Variant }> = ({ v }) => {
         {/* ⭐ THE CRATE OPENS ONTO THE REAL SITE. "First, Skiper UI" is a name,
             and a name with no product behind it is a container (§3) — so what
             comes up out of the case is skiper-ui.com itself, captured live. */}
-        <SiteScreen x={196} y={196 + (1 - open) * 300} w={620} h={330} src="skiper_top.png"
-          scroll={0} z={44} on={open} url="skiper-ui.com" />
+        <SiteScreen x={196} y={196 + (1 - open) * 300} w={620} h={330} src="ex_spline_strip.png"
+          scroll={1284 + f * 1.4} z={44} on={open} url="spline.design" />
         <Crate x={276} y={442} w={460} h={280} f={f} i={0} open={open} z={46} />
         <Ring x={506} y={340} f={f} at={4} c={R.libs[0].accent} r1={330} life={16} z={52} />
         <Puff x={506} y={352} f={f} at={4} c="#E4C79A" n={12} s={1.4} z={51} />
@@ -568,8 +577,8 @@ export const S4: React.FC<{ v: Variant }> = ({ v }) => {
               white cards — instead of the dark band above it. Same measurement
               as the hook: the strip renders at 552 here, so strip y 720 is
               720 * (552/900) = 441. */}
-          <SiteScreen x={FB.x + 30} y={FB.y + 72} w={580} h={430} src="skiper_strip.png"
-            scroll={470 + f * 3.0} z={33} url="skiper-ui.com" />
+          <SiteScreen x={FB.x + 30} y={FB.y + 72} w={580} h={430} src="ex_spline_strip.png"
+            scroll={1150 + f * 1.2} z={33} url="spline.design" />
 
           {/* the three named panels FLYING IN on the crane, before they seat */}
           {([
@@ -689,8 +698,8 @@ export const S5: React.FC<{ v: Variant }> = ({ v }) => {
             width: 3, height: 26, zIndex: 41,
             background: hexa(R.libs[1].accent, 0.34 * iris), transform: "rotate(7deg)" }} />
         ))}
-        <SiteScreen x={214} y={210 + (1 - iris) * 240} w={584} h={300} src="veng_top.png"
-          scroll={0} z={43} on={iris} url="vengenceui.com" />
+        <SiteScreen x={214} y={210 + (1 - iris) * 240} w={584} h={300} src="ex_basement_strip.png"
+          scroll={124 + f * 1.2} z={43} on={iris} url="basement.studio" />
         <Crate x={306} y={470} w={400} h={244} f={f} i={1} open={0} z={46} />
         {/* the iris itself, opening on the lid */}
         <div style={{ position: "absolute", left: 506 - 96 * iris, top: 392 - 10,
@@ -757,8 +766,8 @@ export const S6: React.FC<{ v: Variant }> = ({ v }) => {
           <Front x={38} y={172} w={560} h={560} f={f} lit={E(f, 10, 60, 0.34, 1, LIN)} z={28}
             seats={seatsFor(-99, -99, -99)} scaffold={false} />
           {/* the real vengenceui.com, scrolling through its own cinematic blocks */}
-          <SiteScreen x={72} y={214} w={492} h={392} src="veng_strip.png"
-            scroll={120 + f * 4.2} z={33} url="vengenceui.com" />
+          <SiteScreen x={72} y={214} w={492} h={392} src="ex_basement_strip.png"
+            scroll={103 + f * 1.1} z={33} url="basement.studio" />
         </Cam>
 
         {/* ⭐⭐ §10 — A BEAM WITH NO FINDINGS IS A PROGRESS BAR. v5 switched eight
@@ -870,8 +879,8 @@ export const S7: React.FC<{ v: Variant }> = ({ v }) => {
             </div>
           );
         })}
-        <SiteScreen x={214} y={186 + (1 - hinge) * 250} w={584} h={296} src="anim_top.png"
-          scroll={0} z={43} on={hinge} url="animmasterlib.dev" />
+        <SiteScreen x={214} y={186 + (1 - hinge) * 250} w={584} h={296} src="ex_rive_strip.png"
+          scroll={237 + f * 1.5} z={43} on={hinge} url="rive.app" />
         <Crate x={306} y={452} w={400} h={258} f={f} i={2} open={hinge * 0.6} z={46} />
         <Ring x={506} y={424} f={f} at={3} c={R.libs[2].accent} r1={320} life={16} z={52} />
         <Pool x={180} y={742} w={116} z={48} />
@@ -935,8 +944,8 @@ export const S8: React.FC<{ v: Variant }> = ({ v }) => {
             ⛔ The site's hero says 300 and the VO says over 250: the VO
             UNDERSTATES it, which is the safe direction, so the capture and the
             drawn chip do not contradict each other. */}
-        <SiteScreen x={556} y={64} w={444} h={628} src="anim_strip.png"
-          scroll={seg === 0 ? 500 + f * 4.4 : 760 + f * 7.0} z={35} url="animmasterlib.dev" />
+        <SiteScreen x={556} y={64} w={444} h={628} src="ex_rive_strip.png"
+          scroll={seg === 0 ? 177 + f * 1.8 : 460 + f * 2.6} z={35} url="rive.app" />
 
         {/* ⛔ THE DRAWN FRONT USED TO CARRY THIS BEAT AND IT NOW DOUBLE-DRAWS.
             The real page scrolling past a locked camera IS "scroll effects", so
@@ -1063,6 +1072,15 @@ export const S9: React.FC<{ v: Variant }> = ({ v }) => {
             { x: 46, y: 370, w: 484, h: 122, kind: "card", c: R.libs[0].c, at: -99 },
             { x: 46, y: 512, w: 484, h: 116, kind: "price", c: R.libs[2].c, at: -99 },
           ]} />
+        {/* ⭐⭐ THE ~31s BEAT. Alex: *"the site at 31 seconds it needs to be a
+            reference example actual site with hella good scroll animations."*
+            The payoff line is *"a website that looks like it costs thousands"*,
+            so the finished frontage shows one — locomotive.ca, an agency
+            portfolio, still scrolling in colour while the tower beside it dies.
+            A drawn facade can only ASSERT the claim; a real page IS it. */}
+        <SiteScreen x={140} y={158} w={504} h={438} src="ex_locomotive_strip.png"
+          scroll={790 + f * 1.4} z={38} url="locomotive.ca" />
+
         {/* ⭐ THE LIGHT WAVE CLIMBING OUR FRONT — a 190px band with its own
             SHADOW behind it, so the boundary is light-against-dark rather than a
             wash that would only lift the black point. */}
@@ -1150,6 +1168,9 @@ export const S10: React.FC<{ v: Variant }> = ({ v }) => {
             { x: 60, y: 400, w: 592, h: 120, kind: "card", c: R.libs[0].c, at: -99 },
             { x: 60, y: 540, w: 592, h: 104, kind: "price", c: R.libs[2].c, at: -99 },
           ]} />
+        {/* ⭐ the finished shopfront is showing real work, not drawn panels */}
+        <SiteScreen x={196} y={352} w={620} h={330} src="ex_stripe_strip.png"
+          scroll={487 + f * 1.5} z={38} url="stripe.com" />
         <Marquee x={196} y={168} w={620} h={150} f={f} text={R.keyword} at={6} z={64} c={GOLD} />
 
         {/* ⛔ ARRIVALS ACROSS THE FULL DURATION. v3 put all three of these
