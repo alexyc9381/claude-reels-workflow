@@ -38,6 +38,24 @@ WHAT IT CHECKS
     HOOK (frame 0 only — this is where the >=140 law belongs and where it STOPS)
       HOOK_LUMA       panel luma >= 140
       HOOK_PLATE      a claim plate >= 18% of the panel with its top edge BELOW y120
+
+⛔⛔ HOOK_PLATE MEASURES **CONTIGUITY**, NOT AREA. This cost reel 110 four separate
+    rounds in four different disguises, so it is written here rather than in a log:
+      1 a repo card 18% of the panel by area scored 10.6% — a black GitHub header
+        strip across its top third SPLIT the bright region in two;
+      2 a barbell 22% of the panel by area scored 8.4% — the shaft was painted
+        BEFORE the plates, so each plate's dark rim cut across it and the gate saw
+        one ring. Painting the shaft LAST bridged them: 8.4% -> 18.7%, no resize;
+      3 marks placed at a plate's centre carved its middle out — they moved to the
+        upper face on their own white tiles;
+      4 a lit board whose top edge sat 32px under the shared HookHeader pill MERGED
+        with it into one region touching y0, and the whole thing was discounted as
+        chassis: 26.3% reported, none of it usable. A dark rail between them gave
+        19.0% at y141.
+    ⭐ So before RESIZING anything to satisfy this gate, find what is BREAKING the
+    region: a dark border, a dark header, a mark in the middle, another fix, or the
+    shared chrome. And a bright element sitting near the header pill stops being
+    its own object.
     BODY (every sampled frame after the hook)
       BODY_SAT        saturated-pixel share >= 34%
       BODY_BLACK      black point (luma p10) <= 35

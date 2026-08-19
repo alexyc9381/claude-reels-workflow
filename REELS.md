@@ -3,10 +3,11 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 90 reels with code · 54 factory logs · 51 storyboards · 99 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 91 reels with code · 54 factory logs · 52 storyboards · 100 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
+| 111 | **LIBRARIES** | [✓](video/src/ClaudeLibrariesReel.tsx) | [1](video/src/data/words_libraries.json) | · | [✓](storyboards/111-libraries.md) | code, no log |
 | 109 | **PLUGINS3** | [✓](video/src/ClaudePlugins3Reel.tsx) | [1](video/src/data/words_109plugins3.json) | · | [✓](storyboards/109-plugins3.md) | code, no log |
 | 107 | **CLAUDE** | [✓](video/src/ClaudeClaudeReel.tsx) | [1](video/src/data/words_claude.json) | [✓](memory/reels/claude-factory-log.md) | [✓](storyboards/107-claude.md) | built |
 | 106 | **SKILL** | [✓](video/src/ClaudeSkillReel.tsx) | · | · | [✓](storyboards/106-skill.md) | code, no log |
@@ -139,7 +140,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **SWIPE** | · | · | [✓](memory/reels/swipe-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **UNLOCK** | [✓](video/src/ClaudeUnlockReel.tsx) | [1](video/src/data/words_unlock.json) | · | · | code, no log |
 | · | **VAULT** | [✓](video/src/ClaudeVaultReel.tsx) | [1](video/src/data/words_vault.json) | · | · | code, no log |
-| · | **WORDS** | [✓](video/src/ClaudeWordsReel.tsx) | [96](video/src/data/words_109plugins3.json) | · | · | code, no log |
+| · | **WORDS** | [✓](video/src/ClaudeWordsReel.tsx) | [97](video/src/data/words_109plugins3.json) | · | · | code, no log |
 | · | **WORTHY** | [✓](video/src/ClaudeWorthyReel.tsx) | [1](video/src/data/words_worthy.json) | · | · | code, no log |
 | · | **XRAY** | · | · | [✓](memory/reels/xray-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 

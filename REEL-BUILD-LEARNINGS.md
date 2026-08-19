@@ -1799,3 +1799,83 @@ a fresh process fixes it. **Read cloud folders with absolute paths; never `cd` i
 6. **A transformed wrapper with no `zIndex` still vanishes.** It is written at the top of the
    world file and I wrote a bare `<div>` anyway; the hook rendered completely empty and only a
    still caught it. **Render a still of every new scene before trusting it.**
+
+---
+
+## 14. REEL 110 FLOW — five rounds, and four of them had a GREEN GATE on top
+
+The full write-up is in [`docs/AUDIT-FIRST.md`](docs/AUDIT-FIRST.md) §4 and
+[`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) §10. Index entries:
+
+**14.1 ⛔⛔⛔ `silencedetect` finds a THRESHOLD CROSSING, not a word.** A −48 dB
+mouth click at raw 1.847s made `-40dB` report speech there; the real word starts
+0.65s later, so 0.53s of dead room tone shipped with `VO_ONSET_0` reading 0.000s.
+Confirm every LEAD and TAIL trim with a 10 ms RMS scan and cut where the level
+goes AND STAYS above about −30 dB. Mid-VO pauses are fine — a breath is content.
+→ `CLAUDE-REELS-PLAYBOOK.md` C2.
+
+**14.2 ⭐⭐⭐ A high motion score is not legibility.** The scene that came back as
+*"I can't really tell what that is"* measured **13.93**, third highest in the
+reel. `scene_motion_audit.py` means greyscale frame deltas, so abstract lights on
+wires satisfy it perfectly. The §3 "what does the picture ADD" test is the only
+thing that catches it, and it belongs on the BOARD.
+
+**14.3 ⭐⭐ An ACTION LOOP is not a SCENE.** Eight sprites all correctly running
+reel 107's four action loops still came back as *"standing around bouncing"*. A
+loop is what a sprite does WHILE the scene happens; §2's four-part event still has
+to exist. Rebuilt as a bucket brigade: **12.83 → 23.13.**
+
+**14.4 ⭐⭐⭐ A gate carried by the wrong object DEFORMS that object.** The hook's
+barbell was 4.3× too big and painted pale *because* it was carrying both frame-0
+gates. Moving them to a lit board behind freed it to be the right size and the
+right colour. **When a prop looks wrong and you cannot say why, ask what gate it
+is being asked to satisfy.**
+
+**14.5 ⛔⛔ `HOOK_PLATE` measures CONTIGUITY, not area** — and it did it in four
+different disguises in one reel (a dark header strip splitting a card, a shaft
+painted under two dark rims, a mark carving a plate's middle, and a board merging
+with the shared header pill and being discounted as chassis). Written into
+`tools/look_audit.py` itself.
+
+**14.6 ⛔⛔ A clean `sfx_audit` is not a good sound bank.** 24 of 41 cues came
+from one chiptune pack and every one passed, because the tool gates hiss, air,
+over-ring and slap and has no gate for *"this is a Mario sound"*. The bank has to
+belong to the WORLD. Family check + the measured machine-room palette are in
+`docs/SOUND-DESIGN.md` §12.
+
+**14.7 ⛔ When a change measures far below what the arithmetic predicts, check the
+STACKING CONTEXT first.** A full-width conveyor — the highest-value shape there
+is — bought **+0.17** because it sat at `zIndex 26` under panes at `zIndex 40`.
+
+**14.8 ⭐ Cheap motion is worth trading away.** Removing an unmotivated explosion
+took the hook 17.12 → 14.35 and was right: it was motion for a beat that meant
+nothing. **A number going down is not automatically a regression.**
+
+**14.9 ⛔ Never hand-draw a limb on the house mascot — and read the rig first.**
+An arm bar hung off the body edge read as a TAIL on every sprite. `SlopKit.Mascot`
+already draws arms, and `cheer` both raises and rotates them.
+
+**14.10 ⛔ An UNDERSTATED number is safe to draw; a DIFFERENT one is not.** The VO
+says 60 agents and the README says 98, so the reel drew sixty. Compare reel 108,
+where the spoken count was too SMALL to be true and the frame typeset neither.
+
+**14.11 ⛔⛔ A GAIN THAT FIXED ONE REEL IS NOT A CONSTANT.** Reel 108 fixed an
+INAUDIBLE bed with a `+8 dB` reel-local trim; carrying that `db(8)` onto a
+different bed source made reel 110's bed **7 dB hot** (5.2 dB under the VO against
+a ~12 dB house figure). Measure the two stems against each other every reel.
+→ `docs/SOUND-DESIGN.md` §13.
+
+**14.12 ⛔⛔⛔ Never `atempo` a music bed by more than ~6%.** A 39.2s source
+stretched to 31.4s (`atempo 1.2464`) was heard in one pass. `atempo` preserves
+PITCH, which is why it looks safe — it is the TEMPO that breaks, and transient
+smearing shows past ~1.1. A voice takes it; music does not.
+
+**14.13 ⛔⛔⛔ Trial cuts that look varied can measure IDENTICAL.** The full house
+variant system scored **3.4-7.0 bits of 64** on a dHash — every pair a duplicate
+risk. The measured lever ranking, the targets (mean ≥14, **min ≥10**) and the four
+traps are in `docs/TRIAL-CUTS.md`.
+
+**14.14 ⛔ Prove an audio change by SUBTRACTING the two renders.** An A/B window
+that happened to sit inside the bed's own fade-out showed 0.6 dB of a real 6.0 dB
+move. And exclude your own fades and loudnorm before correlating two beds — the
+envelope check returned +0.84 for two genuinely different tracks.

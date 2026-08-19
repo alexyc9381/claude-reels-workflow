@@ -284,6 +284,41 @@ highpass=f=75,alimiter=level_in=1:level_out=1:limit=0.93,loudnorm=I=-16:TP=-1.5:
 > Whisper times drift around flubs. On reel 52, cutting in detected silence instead of on word times moved the
 > hook from **4.6 → 4.2 wps — an R1 fail into a pass.** This step is not cosmetic.
 
+### ⛔⛔⛔ `silencedetect` FINDS A THRESHOLD CROSSING, NOT A WORD (reel 110, Aug 2026)
+**The lead trim is the one place this tool will lie to you, and every downstream gate
+will agree with it.** Reel 110 shipped a first cut with **0.53s of dead room tone** at
+the head — and `verify_reel.VO_NO_FLUB`, `VO_ONSET_0` and `AUDIO_AT_0` all passed,
+because `silencedetect=-40dB` hit a **−48 dB mouth click** at raw 1.847s and reported
+speech from there. The real onset of the first word is 0.65s later, and only a 10 ms
+RMS scan shows it:
+
+```
+1.84s  -48.5   <- the blip silencedetect called speech
+1.86s  -60.8       ... 0.6s of room tone at -55 to -70 ...
+2.48s  -69.7
+2.50s  -26.4   <- the actual word
+```
+
+⭐ **So confirm every LEAD and TAIL trim with a 10 ms RMS scan, and cut to where the
+level goes AND STAYS above about −30 dB:**
+
+```bash
+python3 - <<'PY2'
+import subprocess, array, math
+FF='tools/node_modules/ffmpeg-static/ffmpeg'
+d=subprocess.run([FF,'-v','error','-nostdin','-i','vo48.wav','-ac','1','-ar','48000',
+                  '-f','s16le','-'],capture_output=True).stdout
+a=array.array('h'); a.frombytes(d[:len(d)//2*2])
+for i in range(0, 400):                      # first 4s in 10ms windows
+    s=a[i*480:(i+1)*480]
+    db=20*math.log10(math.sqrt(sum(x*x for x in s)/len(s)+1e-9)/32768)
+    print(f'{i/100:.2f}s {db:7.1f} ' + '#'*max(0,int((db+70)/2)))
+PY2
+```
+
+`silencedetect` is still correct for MID-VO pauses — a breath between words is content.
+It is at the head and the tail that a single click hides two thirds of a second of nothing.
+
 ### ⛔ TIGHTEN THE VO. ALWAYS. (Alex, standing)
 The VO must be **tight** — no lead-in, no dead air, no drifting pauses. Non-negotiable:
 - **Leading silence → 0.00s.** `L[0] = 0.0`; his first word is frame 1. (Reel 52 arrived with 1.06s of lead.)

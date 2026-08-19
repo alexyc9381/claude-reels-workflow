@@ -1,10 +1,10 @@
 {
   "counts": {
-    "reels_with_code": 90,
-    "reels_total": 135,
+    "reels_with_code": 91,
+    "reels_total": 136,
     "factory_logs": 54,
-    "storyboards": 51,
-    "caption_jsons": 99,
+    "storyboards": 52,
+    "caption_jsons": 100,
     "memory_md": 194,
     "creators": 8,
     "packs": 3
@@ -558,6 +558,7 @@
         "video/src/data/words_key_c.json",
         "video/src/data/words_langfuse.json",
         "video/src/data/words_leads.json",
+        "video/src/data/words_libraries.json",
         "video/src/data/words_limits.json",
         "video/src/data/words_listicle.json",
         "video/src/data/words_loops.json",
@@ -1504,6 +1505,17 @@
       "storyboard": "storyboards/109-plugins3.md",
       "captions": [
         "video/src/data/words_109plugins3.json"
+      ]
+    },
+    {
+      "key": "libraries",
+      "name": "libraries",
+      "number": 111,
+      "code": "video/src/ClaudeLibrariesReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/111-libraries.md",
+      "captions": [
+        "video/src/data/words_libraries.json"
       ]
     }
   ]

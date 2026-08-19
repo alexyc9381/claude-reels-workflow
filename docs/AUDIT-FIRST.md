@@ -275,3 +275,101 @@ day.
 6. **Solo every stem before diagnosing any audio note** — it is one cheap render each.
 7. **A note that returns with the same timestamps means the wrong LAYER**, not a worse fix.
 8. **Count the bank and its rate** before shipping it; density is a budget, not a feeling.
+
+---
+
+## 4 · THE OTHER SHAPE: a gate that is GREEN and POINTING THE WRONG WAY
+
+Reel 86 gave this doc its first thesis — *a class of defect where one instance
+got fixed*. Reel 110 (Aug 2026, five rounds) gave it a second one, and the audits
+above cannot catch it because **the audit is the thing that is wrong**.
+
+> **In four of five rounds a gate was green while the defect was plainly visible,
+> and in three of them the gate had actively CAUSED the defect.**
+
+| the note | what every gate said | what it actually was |
+|---|---|---|
+| *"cut out the blank space at the start"* | `VO_ONSET_0` **0.000s**, `AUDIO_AT_0` **40ms**, both pass | `silencedetect -40dB` called a **−48 dB mouth click** speech, so 0.53s of room tone shipped. Only a 10ms RMS scan sees it |
+| *"I can't tell what that is"* | scene motion **13.93**, third highest in the reel | the audit means greyscale frame deltas — abstract lights on wires satisfy it perfectly. It cannot tell a mechanism from a light show |
+| *"sprites standing around bouncing"* | motion 12.83, 0 dead runs, every sprite on a house ACTION LOOP | an action loop is what a sprite does **while** the scene happens. It is not the scene |
+| *"sfx sound like video game upgrade sounds"* | `sfx_audit` **clean** | 24 of 41 cues from one chiptune pack. The tool gates hiss/air/ring/slap and has **no gate for "this is a Mario sound"** |
+| *"still not clear it's lifting weights"* | `HOOK_LUMA` and `HOOK_PLATE` both green | **the prop was carrying both gates**, which is why it was 4.3x too big and painted pale |
+
+### The three audits this reel would have wanted, all under a minute
+
+**A · The proportion pass.** For every hero prop, print its size against the body
+beside it and against the panel.
+```bash
+python3 -c "P_W,P_H=1012,792; prop=372; body=330
+print(f'{100*prop/body:.0f}% of the body · {100*prop/P_W:.0f}% of panel width')"
+```
+Over ~40% of the body for a hand prop, or over ~85% of panel width for anything,
+and it has stopped reading as itself. **A prop that is misshapen is usually
+carrying a gate — ask which one, and give that job to another object.**
+
+**B · The family pass on the SFX bank.** No single sample family may carry it.
+```bash
+grep -oE 'src: "[a-z0-9_/-]+' src/Claude<Name>Reel.tsx | sed 's/.*"//' \
+  | sed 's#/.*##; s/_.*//' | sort | uniq -c | sort -rn | head -3
+```
+Over ~40% from one prefix is the defect, whatever each file measures.
+
+**C · The "say what it is" pass on the board.** Point at every prop and finish the
+sentence *"this is a ___"* with a noun from the subject. Anything that needs a
+clause — *"it's a core, which stands for the shared memory"* — is the scene that
+will come back as **"I can't tell what that is"**, and it will come back with a
+green motion score attached.
+
+⭐ **The generalisation worth carrying past this repo:** a gate tells you a
+property held. It never tells you the property was the right one to hold, and a
+metric that something is optimised against will eventually shape that thing.
+When a note contradicts a green gate, the note is the measurement and the gate is
+the hypothesis.
+
+---
+
+## 5 · THE ROUTINE FOR §4: LOOK AT THE PICTURE, EVERY ROUND
+
+§4 says a gate can be green and pointing the wrong way. This is the method that
+actually catches it, and it costs thirty seconds.
+
+> **Render a CONTACT SHEET of the whole reel and look at it before believing any
+> gate.**
+
+```bash
+mkdir -p /tmp/q && i=0
+for t in <one timestamp per scene>; do
+  i=$((i+1)); printf -v n "%02d" $i
+  ffmpeg -y -v error -ss $t -i REEL.mp4 -vframes 1 \
+    -vf "crop=1012:792:34:384,scale=506:396" /tmp/q/$n.png
+done
+ffmpeg -y -v error -i /tmp/q/%02d.png -vf "tile=4x5:margin=6:padding=4" sheet.png
+```
+
+Reel 112 SQUAD is the case that proved it. Its motion median was 5.05 against a
+9.00 bar; multiplying **every set's `Rake` opacity by 2.6** took it to **10.72
+with 0/20 failing**, every gate green — and turned the reel into **venetian
+blinds**: hard diagonal stripes across all twenty scenes, sets flattened, props
+unreadable. One contact sheet found that, plus a split-flap board churned into
+unreadable letters, workbenches hidden behind their own workers, and a **press ram
+hovering in the sky for four beats** because its `topY` could never reach the
+block. **The audits found none of them** — that scene simply measured "low", which
+sent two rounds chasing travel distance.
+
+⭐ **And the corollary for the FIX: when a metric is low, do the ARITHMETIC rather
+than turning up whatever knob moves it.**
+`motion ≈ (fraction of the panel repainted per 0.1s) × (luma delta)` explained
+every stubborn scene on that reel: 58px cells that become 14px after the
+1012→240 downsample, a block sweeping only 24px per sample, and the right lever
+applied at 6.5% of the panel where the scene that worked had 31%.
+
+> **The knob that moves the number fastest is usually the one that wrecks the
+> picture.**
+
+### The three cheap passes, together
+
+| pass | catches |
+|---|---|
+| **contact sheet** | anything a gate cannot see: stripes, occlusion, a prop stuck off-screen, illegible type |
+| **proportion + silhouette** (§4) | *"I can't tell what that is"* — a prop deformed by the gate riding on it |
+| **dHash across cuts** ([`TRIAL-CUTS.md`](TRIAL-CUTS.md)) | trial cuts that look varied and measure identical |

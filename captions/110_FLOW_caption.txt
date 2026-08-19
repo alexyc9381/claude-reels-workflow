@@ -1,0 +1,33 @@
+Comment "FLOW" and I'll send you the full setup.
+
+👇 READ BELOW
+
+One Claude session is one worker. This turns it into a swarm.
+
+It's called Ruflo (ruvnet/ruflo on GitHub, and yes, it's the repo that used to be called claude-flow). 68,132 stars, MIT licensed, and it was pushed the same morning I made this.
+
+★ 68,132 · 8,173 forks · MIT
+→ 98 specialist agents on the full install
+→ plan · code · test · security, running at the same time
+→ one shared vector memory, so they stop re-explaining your project to each other
+→ a learning loop that feeds what worked back to the front of the line
+→ a router that sends easy work to a local model and saves the frontier model for the hard stuff
+
+npx ruflo init
+
+That's it. After that you use Claude Code exactly the way you already do. The hooks route the tasks, the swarm coordinates itself, and the memory persists across sessions without you managing any of it.
+
+The part nobody mentions: the memory benchmark in that README publishes its own losses. It says the vector index is 1.9x to 4.7x faster than brute force above a crossover point, and then says outright that it ties or loses below it. Almost nobody ships a number that argues against their own feature. That is the tell that the rest of the repo is worth your time.
+
+Two honest corrections to my own video, because you'll go and check:
+→ I say it cuts API costs by 75%. That figure is not in the repo. The mechanism is real (multi-provider routing, local models, a cost tracker) but the number is not published, so measure your own.
+→ I say 60 agents. The README says 100+ and the CLI install ships 98. I undersold it.
+→ I say ranked number one in agentic frameworks. The old claude-flow description claimed that; the current one doesn't. The stars and the topics are what's verifiable.
+
+Comment "FLOW" and I'll send you the setup doc: which of the two install paths to pick, what each plugin is actually for, and the order to add them in.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #aiagents #agenticai #multiagent #opensource #github #devtools #aitools #vibecoding #softwareengineering #buildinpublic #ollama #localllm #promptengineering #aiworkflow #codingtools

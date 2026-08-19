@@ -430,3 +430,73 @@ the difference were all of this shape: a lamp is `spotlight_snap`, a breaker is
 `knife_switch`, a swarm getting faster is a machine changing gear, and a failing
 test is a dull knock rather than a bright tick — because a bright tick reads as a
 pass.
+
+---
+
+## 13. THE MUSIC BED — two rules that were both learned the hard way
+
+### ⛔⛔ A GAIN THAT FIXED ONE REEL IS NOT A CONSTANT
+
+Reel 110 shipped with the bed **7 dB over spec**, and Alex heard it before any
+tool did: *"the bg music is pretty damn loud right now."* Measured:
+
+```
+VO  file -17.7 LUFS  x LEVELS.DIALOGUE (-6)   ->  -23.7 in the mix
+bed file -16.9 LUFS  x LEVELS.MUSIC * db(8)   ->  -28.9 in the mix
+gap 5.2 dB                        the house figure is ~12 dB under the VO
+```
+
+⭐ **The cause is the interesting part.** Reel 108 hit the OPPOSITE bug — a bed
+26 dB under the voice, completely inaudible — and its fix was a `+8 dB`
+reel-local trim. That `db(8)` was carried forward onto a **different bed source**
+without re-measuring, so the correction for one problem became the cause of its
+mirror image.
+
+> **Measure the two stems against each other every reel. Never inherit a trim.**
+> Target: the bed lands **~12 dB under the VO** — present, not competing.
+
+```bash
+# per reel, before rendering: what gap do these two actually produce?
+for f in public/vo_<k>.wav public/<k>_bed.wav; do
+  ffmpeg -nostdin -i $f -af loudnorm=print_format=json -f null - 2>&1 \
+    | grep -m1 input_i
+done
+# then add LEVELS.DIALOGUE (-6) and LEVELS.MUSIC*trim to each and subtract
+```
+
+⛔ And **prove an audio change by SUBTRACTING the two renders**, not by eyeballing
+a window. My first A/B window happened to sit inside the bed's own fade-out and
+showed **0.6 dB** of a real **6.0 dB** move:
+
+```bash
+ffmpeg -i A.mp4 -i B.mp4 -filter_complex \
+  "[1:a]volume=-1[b];[0:a][b]amix=inputs=2:weights=1 1:normalize=0,volume=2,volumedetect" \
+  -f null -
+# the residual mean = the level of whatever actually changed
+```
+
+### ⛔⛔⛔ NEVER `atempo` A MUSIC BED BY MORE THAN ABOUT 6%
+
+Building a different bed per trial cut, I took a 39.2s source and stretched it to
+31.4s — **`atempo 1.2464`, a 25% speed-up.** Alex: *"the second one, the
+background music doesn't sound right."*
+
+⭐ `atempo` **preserves pitch**, which is exactly why it is easy to abuse: nothing
+goes out of tune, so the code looks safe. What goes wrong is the TEMPO, and the
+transient smearing becomes audible past roughly 1.1. A **voice** takes it fine —
+the VO itself runs at ×1.15. **Music does not.**
+
+> **Pick a source that is ALREADY within ~6% of the reel length, or trim/loop it.
+> Never stretch it into place.** Assert the limit in the builder.
+
+Beds that need under 2% for a ~31.4s reel: `104_plugin_bed` / `_b` / `_c`
+(31.50s) · `103_trade_bed` a-d (32.00s) · `video_bed` (31.30s) ·
+`109_plugins3_bed` a-c (31.65s).
+
+⛔ **And when you check that two beds are different PIECES, exclude your own
+processing.** Correlating their amplitude envelopes returned **+0.84** for two
+genuinely different tracks, because both had been given the same 1.2s fade-in,
+0.8s tail and loudness target — I was measuring my own chain. A coarse SPECTRAL
+profile over the MIDDLE of the file (fades excluded) gave the truth: **+0.39 to
++0.51**. Same family as the "check every stem" rule: **a detector calibrated at
+one stage of a chain is invalid at another.**

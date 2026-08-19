@@ -12,9 +12,9 @@ repo.
 >    in-repo is normal — the code is in Drive or the sibling `matchtern-longform` project.
 
 <!-- INDEX:AUTO -->
-| reels (code in-repo) | **89** | factory logs | **54** |
+| reels (code in-repo) | **91** | factory logs | **54** |
 |---|---|---|---|
-| storyboards | 50 | caption files | 98 |
+| storyboards | 52 | caption files | 100 |
 | memory `.md` | 194 | creator packs | 3 |
 | script-DNA creators | 8 | | |
 <!-- /INDEX:AUTO -->
@@ -49,6 +49,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 | **decompose a viral winner into numbers** | [`winner-lab/`](winner-lab/) |
 | **build a post cover** | [`cover-system/`](cover-system/) |
 | **make the animation actually good** (or you got "boring" / "not interesting" back) | [`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) — ⭐ the craft doc: the six different defects that all sound like "boring", the MEASURED table of what creates motion and what does nothing, containers vs depictions vs text, and the four ways an effect exists in the code but not in the video |
+| **deliver more than one cut of a reel** (IG duplicate flagging) | [`docs/TRIAL-CUTS.md`](docs/TRIAL-CUTS.md) — ⭐ the dHash measurement and the discovery that the house variant system scored **3.4-7.0 bits of 64, every pair a duplicate risk**. The measured lever ranking (rake > grade > camera > bed > per-cut layout), the targets (mean ≥14, **min ≥10**), and why an audio-only variant is a pixel duplicate |
 | **build the opening 5 seconds (pattern interrupt)** | [`docs/THE-OPEN.md`](docs/THE-OPEN.md) — the 4 laws of frame 0, the multi-shot structure, scoring the cuts, and the gate |
 | **storyboard a reel before building** | [`storyboards/STORYBOARD-SPEC.md`](storyboards/STORYBOARD-SPEC.md) — the mandatory contract + camera/arc/set libraries |
 | **write a gate / audit, or trust a number** | [`docs/MEASURING.md`](docs/MEASURING.md) — the 7 laws of making a measurement mean something, and the 8 times on one reel a correct calculation over the wrong signal produced a confident false answer |

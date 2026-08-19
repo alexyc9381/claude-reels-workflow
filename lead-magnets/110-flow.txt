@@ -1,0 +1,50 @@
+TITLE   Sixty Agents, One Command
+SUB     The setup for Ruflo, the agent harness that runs Claude Code as a swarm instead of a single session
+
+H       What this actually is
+P       Ruflo is the repo you may know as claude-flow. It renamed itself, and the README says so in its own words, so if you go looking for "claude flow" on GitHub you now land on ruvnet/ruflo. Same project, same maintainer, 68,132 stars, MIT licensed, and it was pushed the morning this was written.
+P       The one-line version: a model writes, a harness gives it tools, memory, loops and controls so it can actually work. Ruflo is the harness. It sits around Claude Code and adds specialist agents, coordinated swarms, memory that survives your session, and a router that decides which model each piece of work is worth.
+P       The video shows the shape. This is the part the video does not have room for: which install path to pick, in what order, and what each piece is genuinely for.
+
+RULE
+
+H       Pick your install path first, because they are not the same product
+P       The README is unusually honest about this and it is the single decision that trips people up. There are two tracks and they give you different amounts of the thing.
+NUM     Path A, the plugin track. You run /plugin marketplace add ruvnet/ruflo and then /plugin install ruflo-core@ruflo. This puts ZERO files in your workspace. You get slash commands and agent definitions. It is the right choice if you want to try one plugin without committing.
+NUM     Path B, the CLI track. You run npx ruflo init. This is the full loop: 98 agents, 60 or so commands, 30 skills, an MCP server, hooks and a daemon. It writes .claude/, .claude-flow/, a CLAUDE.md and settings into your workspace. This is what the README calls production use, and it is what "everything works as documented" means.
+P       If you are following along with the video, you want Path B. Everything below assumes it.
+QUOTE   npx ruflo@latest init wizard
+
+RULE
+
+H       What each part is for
+B       The router. Every task gets read before it gets run. This is the piece the video's cost beat is about: local models via Ollama can take work that does not need a frontier model, and the frontier model gets called when the job actually warrants it. The relevant plugin is ruflo-ruvllm, which runs local LLMs with smart routing. The multi-provider layer covers Claude, GPT, Gemini, Cohere and Ollama.
+B       The swarm. ruflo-swarm coordinates multiple agents as a team rather than as a queue. One model response can fire four to six tools at once, which is where the parallelism you see in the video comes from.
+B       The agents. The specialist roles the video names are real: coding, testing, security, docs and architecture. Planning is its own thing, hosted at goal.ruv.io, and it is a Goal-Oriented Action Planning front end: you describe an outcome in plain English and it decomposes it into preconditions, actions and an A-star path through state space, then dispatches the work.
+B       The memory. AgentDB with HNSW vector search. The repo publishes its own benchmark rather than a marketing number: roughly 1.9 times faster than brute force at 20,000 records, 3.2 to 4.7 times at 5,000, with recall at ten around 0.99, and it says outright that the approximate index ties or loses at small N. That is the level of honesty worth rewarding.
+B       The learning loop. SONA neural patterns, a ReasoningBank and trajectory learning. Plans, outcomes and failures all flow back into the same store, so the planner retrieves past solutions rather than rediscovering them. This is what "gets smarter every run" means concretely, and ruflo-intelligence is the plugin that carries it.
+B       The cost tracker. ruflo-cost-tracker gives you token usage, budgets and alerts. Install this early. It is the only way you will know whether the routing is doing anything for you.
+B       Federation, if you get that far. Agents on separate machines discover each other, prove identity over mTLS and ed25519 challenge-response, and exchange work with personal data stripped before anything leaves your node. Untrusted agents participate at lower privilege and get upgraded as they prove reliable.
+
+RULE
+
+H       The order I would install them in
+NUM     npx ruflo init. Then just use Claude Code normally. The hooks route tasks and coordinate agents in the background, and you do not need to learn the MCP tool surface to get value on day one.
+NUM     ruflo-cost-tracker. Before you tune anything, measure what you are spending.
+NUM     ruflo-rag-memory or ruflo-agentdb. Memory is the piece that changes how the whole thing feels, because it stops you re-explaining your project.
+NUM     ruflo-swarm. Only once single agents are behaving. A swarm multiplies whatever your setup already does, including the mistakes.
+NUM     ruflo-ruvllm, if you run local models. This is the routing half of the cost story and it needs Ollama or an equivalent already working on your machine.
+
+RULE
+
+H       The honest notes
+B       The video says the tool slashes API costs by 75 percent. That number is not in the repo. What IS in the repo is the mechanism: multi-provider smart routing, local model support and a cost tracker. Your actual saving depends on your workload, your model mix and whether you have a local model worth routing to. Treat 75 percent as a claim from a video, not a benchmark.
+B       The video says 60 agents. The README says 100 plus, and the CLI track ships 98. So the video understates it, which is the safe direction, but the number you will see after install is 98.
+B       The video says ranked number one in agentic frameworks. The old claude-flow repo description did say that. The current ruflo description does not. What is verifiable is the star count, the fork count and the topics the repo tags itself with: agentic-framework, swarm-intelligence, multi-agent.
+B       68,132 stars and 8,173 forks were read from the GitHub API on 18 August 2026 and they move fast.
+B       Free means the harness is free and MIT licensed. The frontier models it routes to are not. Local models are free to run and cost you hardware instead.
+
+H       If you try only one thing
+P       Run npx ruflo init on a project you already know well, then work normally for a day without touching any of the commands. The hooks are doing the routing, the memory and the coordination in the background, and the honest test of a harness is whether the day felt different, not whether you enjoyed the setup.
+
+KEY     FLOW
