@@ -366,6 +366,128 @@ export const BraceStencil: React.FC<{ b: BraceDef; size: number; state?: string 
   );
 };
 
+
+/* =========================================================================
+   THE WINCH — the thing that lowers the rig, and the reason it is lowered.
+
+   ⛔⛔ ALEX, ON THE REVISED HOOK: *"need more interesting motion, another Claude
+   sprite somehow in this equation lowering it and stuff, just more not just like
+   standard linear motion."* The note is doing two jobs at once and both are in
+   the craft doc:
+     1 §10 — a hand-off needs a SOURCE. A cage that descends by itself has no
+       agent, so nothing on screen explains WHY it is coming down.
+     2 §1 — "N discrete pops instead of one long tween" measured 4.27 -> 5.63 at
+       identical duration. A winch pays out in NOTCHES; a tween does not.
+
+   ⭐ And it is the best beat in the hook thematically: the rig does not fall on
+   him out of nowhere. **Other Claudes bolt it on.** That is literally what
+   writing a CLAUDE.md is, and it is why the crew are the ones who look pleased
+   with themselves right up until it bites.
+   ====================================================================== */
+export const Winch: React.FC<{ x: number; y: number; f: number; turn: number; z?: number;
+  s?: number; released?: boolean; c?: string }> =
+  ({ x, y, f, turn, z = 56, s = 1, released = false, c = IRON }) => {
+  const R = 66 * s;
+  return (<>
+    {/* the platform the crew stand on */}
+    <div style={{ position: "absolute", left: x - 190 * s, top: y, width: 400 * s, height: 22 * s,
+      zIndex: z - 2, borderRadius: 3,
+      background: `linear-gradient(180deg, ${mxh(c, 0.26)}, ${dkh(c, 0.44)})`, boxShadow: SH_D }} />
+    {Array.from({ length: 9 }, (_, i) => (
+      <div key={"pk" + i} style={{ position: "absolute", left: x - 182 * s + i * 46 * s,
+        top: y - 30 * s, width: 7 * s, height: 30 * s, zIndex: z - 3,
+        background: hexa(dkh(c, 0.34), 0.85) }} />
+    ))}
+    {/* the drum, and the CAPSTAN WHEEL that turns with the payout */}
+    <div style={{ position: "absolute", left: x - 52 * s, top: y - 92 * s, width: 104 * s,
+      height: 70 * s, zIndex: z, borderRadius: 6,
+      background: `linear-gradient(180deg, ${mxh(c, 0.20)}, ${dkh(c, 0.46)})`, boxShadow: SH }} />
+    <div style={{ position: "absolute", left: x - R, top: y - 92 * s + 35 * s - R, width: R * 2,
+      height: R * 2, borderRadius: "50%", zIndex: z + 1,
+      border: `${11 * s}px solid ${dkh(c, 0.26)}`,
+      background: hexa(dkh(c, 0.52), 0.7),
+      transform: `rotate(${turn}deg)` }}>
+      {Array.from({ length: 6 }, (_, i) => (
+        <div key={"sp" + i} style={{ position: "absolute", left: R - 6 * s - 11 * s, top: 0,
+          width: 12 * s, height: R * 2 - 22 * s, background: dkh(c, 0.34),
+          transform: `rotate(${i * 30}deg)`, transformOrigin: "50% 50%" }} />
+      ))}
+      <div style={{ position: "absolute", left: R - 20 * s - 11 * s, top: R - 20 * s - 11 * s,
+        width: 40 * s, height: 40 * s, borderRadius: "50%", background: mxh(c, 0.16) }} />
+    </div>
+    {/* the brake lever — upright while it holds, thrown flat on the release */}
+    <div style={{ position: "absolute", left: x + 96 * s, top: y - 108 * s, width: 13 * s,
+      height: 96 * s, zIndex: z + 2, borderRadius: 4,
+      transformOrigin: "50% 100%",
+      transform: `rotate(${released ? 74 : 4 + Math.sin(f / 17) * 2}deg)`,
+      background: `linear-gradient(90deg, ${dkh(RED, 0.34)}, ${mxh(RED, 0.12)})`, boxShadow: SH }} />
+    <div style={{ position: "absolute", left: x + 88 * s, top: y - 18 * s, width: 30 * s,
+      height: 20 * s, zIndex: z + 1, borderRadius: 3, background: dkh(c, 0.44) }} />
+  </>);
+};
+
+
+/* =========================================================================
+   THE BEACON — a rotating hazard light, for the one bay rule this world had not
+   yet drawn: when a load is moving overhead, the light is on.
+
+   ⛔⛔ IT IS A SWEEPING CONE, NOT A FULL-FRAME TINT. THE-OPEN's third rejected
+   draft was "a full-panel red tint pulse for the klaxon", killed twice over --
+   it flattened the grade AND flooded the frame uniformly, "making the motion
+   metric look good for the wrong reason". The rule it produced is absolute:
+   light is always a SHAPED CONE, never a full-frame fill.
+
+   A rotating beacon is also the cheapest legitimate motion in the frame. Two
+   opposed cones sweeping 360 degrees is a large swept area at a high luma delta,
+   which is what the motion formula rewards -- and unlike a rake it is a real
+   object doing a real job, so it cannot read as wallpaper.
+
+   `level` escalates rather than switching: 0 = dark, 1 = slow amber-red sweep
+   while the load is under control, 2 = fast hard-red strobe once it is not.
+   ====================================================================== */
+export const Beacon: React.FC<{ x: number; y: number; f: number; level?: number;
+  z?: number; s?: number; len?: number; rate?: number;
+  /** ⛔ ON A RED SET, A RED CONE IS A COLOUR CHANGE AT EQUAL LUMA — the audit is
+      GREYSCALE and scores it at zero, and the eye reads it as haze rather than
+      as a light. Pass a near-white here for the oxblood room. */
+  hot?: string }> =
+  ({ x, y, f, level = 1, z = 64, s = 1, len = 300, rate = 1, hot: hotC }) => {
+  if (level <= 0) return null;
+  const hot = level >= 2;
+  const c = hotC ?? (hot ? "#FF5A44" : "#E8734A");
+  const spin = f * (hot ? 11.5 : 5.2) * rate;
+  const face = 0.5 + 0.5 * Math.cos((spin * Math.PI) / 180);
+  return (<>
+    {[0, 180].map((off, i) => {
+      const a = (spin + off) % 360;
+      const lit = Math.max(0, Math.cos(((a - 90) * Math.PI) / 180));
+      if (lit <= 0.02) return null;
+      return (
+        <div key={"bc" + i} style={{ position: "absolute", left: x - 46 * s, top: y + 12 * s,
+          width: 92 * s, height: len * s, zIndex: z - 2, opacity: lit * (hot ? 0.62 : 0.44),
+          transform: `rotate(${a - 90}deg)`, transformOrigin: `50% ${-12 * s}px`,
+          clipPath: "polygon(38% 0, 62% 0, 100% 100%, 0 100%)",
+          background: `linear-gradient(180deg, ${hexa(c, 0.85)} 0%, ${hexa(c, 0)} 100%)` }} />
+      );
+    })}
+    <div style={{ position: "absolute", left: x - 26 * s, top: y - 30 * s, width: 52 * s,
+      height: 34 * s, zIndex: z, borderRadius: `${26 * s}px ${26 * s}px 4px 4px`,
+      background: `linear-gradient(180deg, ${mxh(c, 0.30 + face * 0.45)}, ${dkh(c, 0.30)})`,
+      boxShadow: SH }} />
+    {Array.from({ length: 3 }, (_, i) => (
+      <div key={"bg" + i} style={{ position: "absolute", left: x - 26 * s + i * 18 * s,
+        top: y - 30 * s, width: 5 * s, height: 34 * s, zIndex: z + 1,
+        background: hexa(dkh(IRON, 0.30), 0.75) }} />
+    ))}
+    <div style={{ position: "absolute", left: x - 32 * s, top: y + 2 * s, width: 64 * s,
+      height: 13 * s, zIndex: z + 1, borderRadius: 3,
+      background: `linear-gradient(180deg, ${mxh(IRON, 0.14)}, ${dkh(IRON, 0.46)})` }} />
+    <div style={{ position: "absolute", left: x - 13 * s, top: y - 22 * s, width: 26 * s,
+      height: 18 * s, borderRadius: "50%", zIndex: z + 2,
+      background: hexa(mxh(c, 0.55), 0.30 + face * 0.65) }} />
+  </>);
+};
+
 /** the gantry cable that hangs each brace from the ceiling — the rig's SOURCE
     (§10: a hand-off needs somewhere it came from). */
 export const RigCables: React.FC<{ size: number; f: number; z?: number; tension?: number;
@@ -401,6 +523,8 @@ export const Rig: React.FC<{
   /** 0..1 general clamp tension -> visible bend */
   tight?: number;
   cables?: boolean;
+  /** degrees of pendulum swing about the cable anchor */
+  sway?: number;
   /** ⛔⛔ THE RIG STRADDLES THE HERO, IT DOES NOT SIT IN FRONT OF HIM. v0 wrapped
       the whole rig in one z=46 div, so its own internal z ordering was
       irrelevant and the spine bars painted OVER a mascot at z=40 — the hero
@@ -410,7 +534,7 @@ export const Rig: React.FC<{
       check the STACKING CONTEXT before you touch its values. */
   zBack?: number; zFront?: number;
 }> = ({ f, x, y, size, z = 46, zBack, zFront, drop = 1, gone = [], state = {}, lit, tags = [],
-        fight = 0, tight = 0, cables = true }) => {
+        fight = 0, tight = 0, cables = true, sway = 0 }) => {
   const zB = zBack ?? z - 12, zF = zFront ?? z + 6;
   /* ⭐ THE LIFT IS 1.40 x size, AND IT WAS TUNED TWICE.
      At 1.55 the hanging rig sat entirely above the panel, so frame 0 promised
@@ -434,9 +558,16 @@ export const Rig: React.FC<{
     );
   };
   const live = BRACES.filter((b) => !gone.includes(b.id));
+  /* ⭐ A HANGING LOAD SWINGS. A rig on cables that travels in a perfectly
+     straight line reads as a div animating, which is exactly the "just standard
+     linear motion" note. `sway` is a slow pendulum about the CABLE ANCHOR that
+     decays as the load seats, so the descent has a second axis the eye can read
+     without any extra objects. */
   const Half: React.FC<{ zi: number; children: React.ReactNode }> = ({ zi, children }) => (
     <div style={{ position: "absolute", left: x, top: y - size, width: 0, height: 0, zIndex: zi }}>
-      <div style={{ position: "absolute", transform: `translateY(${dy}px)` }}>{children}</div>
+      <div style={{ position: "absolute",
+        transform: `translateY(${dy}px) rotate(${sway}deg)`,
+        transformOrigin: `50% ${-dy - size * 0.9}px` }}>{children}</div>
     </div>
   );
   return (<>
@@ -497,24 +628,24 @@ export const SpecBoard: React.FC<{ x: number; y: number; w?: number; h?: number;
     {/* the ruled grid — a spec board is ruled, and it survives the downsample */}
     {Array.from({ length: 7 }, (_, i) => (
       <div key={"gl" + i} style={{ position: "absolute", left: 0, right: 0, top: 26 + i * (hh / 7.6),
-        height: 2, background: hexa("#8C7A50", 0.16) }} />
+        height: 2, background: hexa("#8C7A50", 0.055) }} />
     ))}
     {Array.from({ length: 4 }, (_, i) => (
       <div key={"gv" + i} style={{ position: "absolute", top: 0, bottom: 0, left: 34 + i * (ww / 4.4),
-        width: 2, background: hexa("#8C7A50", 0.10) }} />
+        width: 2, background: hexa("#8C7A50", 0.04) }} />
     ))}
     {num && (
       <div style={{ position: "absolute", right: 20, bottom: 8,
         fontFamily: MONO, fontWeight: 900, fontSize: hh * 0.46, lineHeight: 1,
-        color: hexa("#3A3018", 0.20) }}>{num}</div>
+        color: hexa("#3A3018", 0.11) }}>{num}</div>
     )}
     {head && (
-      <div style={{ position: "absolute", left: 22, right: 22, top: hh * 0.20,
+      <div style={{ position: "absolute", left: 44, right: 30, top: hh * 0.20,
         fontFamily: inter.fontFamily, fontWeight: 900, fontSize: Math.round(hh * 0.17),
         letterSpacing: "-0.02em", lineHeight: 1.02, color: "#2A2416" }}>{head}</div>
     )}
     {sub && (
-      <div style={{ position: "absolute", left: 24, right: 22, top: hh * 0.20 + hh * 0.21,
+      <div style={{ position: "absolute", left: 46, right: 30, top: hh * 0.20 + hh * 0.21,
         fontFamily: MONO, fontWeight: 800, fontSize: Math.round(hh * 0.078),
         letterSpacing: "0.13em", color: hexa("#5A4A28", 0.85) }}>{sub}</div>
     )}

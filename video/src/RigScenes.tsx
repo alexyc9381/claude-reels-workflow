@@ -10,7 +10,7 @@ import {
   Ring, Puff, Rake, Pool, Tag, costumeFor,
   CLAY, GOLD, GREEN, RED, SKY, PAPER, INK, MUTE, TEAL, STEEL, STEELD, IRON, RUST, CREAM,
   R, BRACES, byRank, KEPT, PLACES, asPlace, KEYWORD,
-  Rig, RigBrace, SpecBoard, Belt, Part, RejectBin, TokenGauge, Furnace, TokenCoin,
+  Rig, RigBrace, SpecBoard, Belt, Part, RejectBin, TokenGauge, Furnace, TokenCoin, Winch, Beacon,
   SlotRank, Press, Cartridge, Sledge, Cutter, SwingLamp, ScanLine, Verdict,
   judder, whip,
 } from "./RigWorld";
@@ -103,12 +103,66 @@ export const S0: React.FC<SP> = ({ v }) => {
   const f = useCurrentFrame(); const V = VD(v);
   const p = asPlace("fitbay"); const gy = p.horizon + 140;
 
-  const TRIG = 66, FALL = 92, BITE = 114;
-  const drop = E(f, TRIG, TRIG + 10, 0, 0.12, OUT) + E(f, FALL, BITE, 0, 0.88, IN_Q);
+  const NOTICE = 22, TRIG = 66, BITE = 114;
+
+  /* the hero object is MOVING FROM FRAME 0.
+     Alex, on the delivered cut: "at the very beginning there still needs to be
+     motion, right now the brace bay thing only drops on him near the end of that
+     hook animation." He is right, and the per-second buckets said so too --
+     6.5 / 6.3 / 7.2 / 11.2 / 16.3, i.e. the reel's biggest event lived entirely
+     in the last third and the first two seconds were carried by thrown parts.
+
+     v1 held the rig still for 92 of 136 frames and then dropped it 462px in 22.
+     It now descends for the WHOLE shot, in three gears. The total travel is
+     unchanged -- the same distance, spread across the whole hook instead of
+     hidden at the end:
+
+        f0-62    CLOSING   0    -> 0.34   ~2.5 px/frame, slow and continuous
+        f62-92   RELEASE   0.34 -> 0.66   ~4.9 px/frame, the gantry pays out
+        f92-114  FALL      0.66 -> 1.00   ~7.1 px/frame into the bite
+
+     Each gear is FASTER than the one before it, which is both what a thing being
+     lowered and then released actually does and what the per-second buckets
+     need. v2 got this backwards: its middle gear ran 2.1 px/frame against a
+     3.2 px/frame opening, so the rig visibly SLOWED between 2s and 3s and that
+     bucket dipped to 6.4 while its neighbours sat at 7.7 and 11.0.
+
+     It also reads better. A threat already descending on frame 0 is a promise
+     the viewer can watch being kept; a threat that hangs still for two seconds
+     is a prop. The acceleration still lands the clamp exactly on the word
+     "dumber" (f118, drawn at 114), so the word mapping is untouched. */
+  /* ⭐⭐⭐ THE DESCENT IS NOTCHED, NOT TWEENED, AND A CREW IS PAYING IT OUT.
+     Alex: *"more interesting motion, another Claude sprite somehow in this
+     equation lowering it, not just standard linear motion."*
+
+     §1 measured "N discrete pops instead of one long tween" at 4.27 -> 5.63 for
+     the SAME duration, and a winch is the mechanism that makes notches honest:
+     the drum lets out one turn, the load drops and BOUNCES on the cable, the
+     crew haul the next turn. Seven notches across the closing phase, each
+     landing with a `BACK` overshoot, then the brake is kicked and the last
+     third is a clean accelerating plunge with no notches at all. */
+  const smooth = E(f, 0, 62, 0, 0.34, LIN) + E(f, 62, 92, 0, 0.32, LIN);
+  const NOTCHES = 7;
+  const raw = smooth / 0.66 * NOTCHES;
+  const ni = Math.floor(raw), nf = raw - ni;
+  /* each notch holds, then moves in the last 45% of its window and overshoots */
+  const notched = Math.min(0.66, (ni + E(nf, 0.55, 1.0, 0, 1, BACK)) / NOTCHES * 0.66);
+  const drop = notched + E(f, 92, BITE, 0, 0.34, IN_Q);
+
+  /* the load swings on its cables, and the swing dies as it seats */
+  const sway = Math.sin(f / 11.5) * 4.6 * (1 - drop) + rock(f, BITE, 2.2, 16);
+  /* the drum turns in proportion to what it has paid out, and spins free after */
+  const turn = drop * 760 + (f > TRIG ? E(f, TRIG, BITE, 0, 340, IN_Q) : 0);
   const bit = f >= BITE;
   const sq = bit ? squash(f, BITE, 0.16, 3, 14) : 1;
   const sh = shake(f, BITE, 13, 12);
   const tight = E(f, BITE, BITE + 12, 0, 1, OUT);
+
+  /* THE REACTION ARC. A hook whose hero never reacts to the thing coming down on
+     him is a hero who has not noticed it. Working -> NOTICES (f22: he looks up
+     and stops throwing) -> braced -> crushed. */
+  const noticed = f >= NOTICE;
+  const look = E(f, NOTICE, NOTICE + 8, 0, 1, OUT);
 
   /* the parts he throws BEFORE the rig lands — the "winning" state has to be an
      ACTION, not a pose, or frame 0 is a poster (§2).
@@ -116,7 +170,8 @@ export const S0: React.FC<SP> = ({ v }) => {
      SETTLED, which means nothing may be fading IN — it does not mean nothing may
      be MOVING. A frame with one object in flight reads as work in progress; the
      same frame with everything at rest reads as a poster. */
-  const THROWS = [-14, 6, 24, 42, 58, 72];
+  /* he stops working the moment he looks up */
+  const THROWS = [-14, 6, 20];
 
   return (
     <Scene p={p} slug="THE FIT BAY" push={push(V, 136, 1.070)} vig={0.12}>
@@ -125,7 +180,7 @@ export const S0: React.FC<SP> = ({ v }) => {
       {/* ⭐ the board that carries frame 0. Behind everything, never dimmed.
           660x270 = 22.2% of the panel, ONE contiguous cream mass — reel 109's
           lesson that three small bright objects are never the largest one. */}
-      <SpecBoard x={104} y={224} w={806} h={310} f={f} z={12} lit={1 - tight * 0.42}
+      <SpecBoard x={72} y={224} w={652} h={312} f={f} z={12} lit={1 - tight * 0.42}
         head="FIT: SUPPORT RIG" sub={`MODEL · CLAUDE ${R.model}`} num={R.modelNum} />
 
       {/* the FITTING BAY marked out on the floor — hazard chevrons around the
@@ -142,22 +197,10 @@ export const S0: React.FC<SP> = ({ v }) => {
         ))}
       </div>
 
-      {/* the CHUTE the finished work goes down: rails, a mouth and a lip, so it
-          reads as a thing rather than a dark slab (feedback_props_need_real_drawing
-          — count the divs per object before adding objects). */}
-      <div style={{ position: "absolute", left: 800, top: gy - 176, width: 232, height: 20,
-        zIndex: 35, borderRadius: 4, transform: "rotate(15deg)",
-        background: `linear-gradient(180deg, ${mxh(IRON, 0.24)}, ${dkh(IRON, 0.36)})`, boxShadow: SH }} />
-      <div style={{ position: "absolute", left: 806, top: gy - 96, width: 232, height: 20,
-        zIndex: 35, borderRadius: 4, transform: "rotate(15deg)",
-        background: `linear-gradient(180deg, ${mxh(IRON, 0.18)}, ${dkh(IRON, 0.42)})` }} />
-      {Array.from({ length: 5 }, (_, i) => (
-        <div key={"cr" + i} style={{ position: "absolute", left: 816 + i * 48,
-          top: gy - 170 + i * 13, width: 12, height: 84, zIndex: 34,
-          background: hexa(dkh(IRON, 0.30), 0.8), transform: "rotate(15deg)" }} />
-      ))}
-      <div style={{ position: "absolute", left: 786, top: gy - 196, width: 40, height: 116,
-        zIndex: 36, borderRadius: 4, background: dkh(IRON, 0.44), boxShadow: SH }} />
+      {/* ⛔ THE CHUTE IS GONE. It read as a ladder lying on its side, it was the
+          weakest object in the frame, and its slot is where the winch belongs —
+          so the object count is unchanged and the right third now carries a
+          machine with characters on it instead of a prop nobody could name. */}
 
       {/* ⛔ THE MARK IS THE AUDIENCE FILTER, BIG AND EARLY (THE-OPEN law 2 +
           reel 95 round 3). It is a fixture on the bay wall, never on a face. */}
@@ -175,17 +218,21 @@ export const S0: React.FC<SP> = ({ v }) => {
       {/* ⭐ THE HERO. Free until f114, then pinned. */}
       <div style={{ position: "absolute", left: 506 - HERO / 2 + sh.x, top: gy - HERO + sh.y,
         zIndex: 40, transform: `scaleY(${sq}) scaleX(${2 - sq})`, transformOrigin: "50% 100%" }}>
-        <Mascot lf={f * (bit ? 0.5 : 1.25)} size={HERO}
-          cheer={bit ? 0 : Math.max(0, Math.sin(f / 6)) * 0.55}
-          nodAmp={bit ? 1.4 : 8.4} nodSpeed={bit ? 6 : 8}
-          gaze={bit ? 0 : Math.sin(f / 9) * 0.8}
-          stern={tight} shock={E(f, BITE, BITE + 6, 0, 0.8, OUT) * (1 - E(f, BITE + 20, BITE + 40, 0, 1, LIN))} />
+        <Mascot lf={f * (bit ? 0.5 : noticed ? 0.7 : 1.25)} size={HERO}
+          cheer={noticed ? 0 : Math.max(0, Math.sin(f / 6)) * 0.55}
+          nodAmp={bit ? 1.4 : noticed ? 2.2 : 8.4}
+          nodSpeed={bit ? 6 : noticed ? 5 : 8}
+          gaze={bit ? 0 : noticed ? 0 : Math.sin(f / 9) * 0.8}
+          stern={Math.max(tight, look * 0.55)}
+          shock={Math.max(
+            E(f, NOTICE, NOTICE + 6, 0, 0.75, OUT) * (1 - E(f, NOTICE + 16, NOTICE + 30, 0, 1, LIN)),
+            E(f, BITE, BITE + 6, 0, 0.9, OUT) * (1 - E(f, BITE + 20, BITE + 40, 0, 1, LIN)))} />
       </div>
       <Contact x={506 - HERO * 0.44} y={gy - 6} w={HERO * 0.88} o={0.40} z={38} />
 
       {/* ⭐⭐ THE RIG. Hanging in frame from f0 — the threat is visible before it
           moves, which is what makes the first 2s a promise rather than a wait. */}
-      <Rig f={f} x={506} y={gy} size={HERO} z={46} drop={drop} tight={tight} cables />
+      <Rig f={f} x={506} y={gy} size={HERO} z={46} drop={drop} tight={tight} sway={sway} cables />
 
       {/* ⭐ THE HOIST CHAIN. Before the drop, the rig is being HELD — so the chain
           that holds it is running, link by link, across the top of the frame.
@@ -193,7 +240,10 @@ export const S0: React.FC<SP> = ({ v }) => {
           band of light against shadow, and it stops dead on the release, which
           is the trigger the eye actually reads. */}
       {Array.from({ length: 26 }, (_, i) => {
-        const t = Math.min(f, TRIG);
+        /* the chain PAYS OUT for the whole shot and whips on the release --
+           v1 froze it at TRIG, which was consistent with a rig that hung still
+           and is wrong for one that has been descending since frame 0. */
+        const t = f + E(f, TRIG, BITE, 0, 90, IN_Q);
         const x = ((i * 42 + t * 5.2) % 1120) - 60;
         return (
           <div key={"ch" + i} style={{ position: "absolute", left: x, top: 104,
@@ -203,12 +253,75 @@ export const S0: React.FC<SP> = ({ v }) => {
         );
       })}
 
+      {/* ⭐⭐ THE CREW WHO LOWER IT. Two Claudes on the winch platform, hauling the
+          drum round notch by notch — they are the SOURCE the descent was missing
+          (§10), and they are the reel's argument in one image: the rig does not
+          fall on him, other Claudes bolt it on. Which is what writing a
+          CLAUDE.md is. */}
+      {/* ⛔ THE CREW WERE CLIPPED BY THE HEADER BAND. `HookHeader` owns panel-local
+          y 0..118, and v1 put the platform at y=214 with 116px bodies on it, so
+          both crew had their heads under the chassis. The deck is at y=286 and
+          the tallest head now sits at 162 — the same check as
+          "check the settled x against the panel", on the other axis and against
+          the CHROME rather than the frame edge. */}
+      <Winch x={906} y={286} f={f} turn={turn} z={56} s={1.0} released={f >= TRIG} />
+      {[0, 1].map((i) => {
+        const cs = 124 + i * 8;
+        const cx = 838 + i * 132;
+        /* they HAUL on the notch: a hard lean timed to the drum, not a free bob */
+        const haul = f < TRIG ? Math.max(0, Math.sin((raw - i * 0.18) * Math.PI * 2)) : 0;
+        const recoil = E(f, BITE, BITE + 5, 0, 1, OUT) * (1 - E(f, BITE + 14, BITE + 34, 0, 1, LIN));
+        return (
+          <React.Fragment key={"cw" + i}>
+            <div style={{ position: "absolute", left: cx - cs / 2,
+              top: 286 - cs + haul * 9 - recoil * 16, zIndex: 58,
+              transform: `rotate(${(i ? 1 : -1) * (6 + haul * 13 - recoil * 22)}deg)`,
+              transformOrigin: "50% 96%" }}>
+              <Mascot lf={f * 1.3 + i * 9} size={cs} constr={1}
+                nodAmp={6.2 + haul * 5.5} nodSpeed={7}
+                gaze={f >= TRIG ? (i ? -1.2 : 1.2) : 0}
+                shock={Math.max(recoil * 0.9, E(f, TRIG, TRIG + 5, 0, 0.5, OUT) * (1 - E(f, TRIG + 12, TRIG + 26, 0, 1, LIN)))} />
+            </div>
+            <Contact x={cx - cs * 0.44} y={292} w={cs * 0.86} o={0.30} z={57} />
+          </React.Fragment>
+        );
+      })}
+      {/* the cable run from the drum, over the head sheave, down to the yoke */}
+      <div style={{ position: "absolute", left: 560, top: 176, width: 356, height: 5, zIndex: 55,
+        background: hexa("#20242B", 0.9), transform: "rotate(-4deg)" }} />
+      <div style={{ position: "absolute", left: 506, top: 156, width: 46, height: 46,
+        borderRadius: "50%", zIndex: 57, border: `10px solid ${dkh(IRON, 0.30)}`,
+        transform: `rotate(${turn * 1.6}deg)` }} />
+
+      {/* ⭐ THE HAZARD BEACONS. A bay lowering a load overhead runs its warning
+          light the whole time, so these are on from frame 0 and they ESCALATE
+          rather than switch on: a slow amber-red sweep while the crew have it,
+          a fast hard-red strobe from the moment the brake is kicked.
+          ⛔ Cones, never a full-frame tint (THE-OPEN killed that twice). */}
+      <Beacon x={286} y={126} f={f} level={f >= TRIG ? 2 : 1} z={64} s={1.15} len={330} />
+      <Beacon x={906} y={188} f={f} level={f >= TRIG ? 2 : 1} z={64} s={0.85} len={230} rate={1.3} />
+
+      {/* the floor strobes at the corners of the fitting box — the bay marking
+          the spot, and the only red down at ground level */}
+      {[292, 720].map((bx, i) => {
+        const ph = (f * (f >= TRIG ? 0.34 : 0.15) + i * 0.5) % 1;
+        const on = ph < (f >= TRIG ? 0.5 : 0.34) ? 1 : 0.12;
+        return (
+          <div key={"fs" + i} style={{ position: "absolute", left: bx, top: gy - 52,
+            width: 34, height: 20, zIndex: 36, borderRadius: 4,
+            background: hexa(f >= TRIG ? "#FF5A44" : "#E8734A", 0.25 + on * 0.62) }} />
+        );
+      })}
+
       {/* the trigger: the gantry lamp trips red and the release chain snaps */}
+      {/* the gantry lamp: AMBER while it closes, hard RED on the release. A lamp
+          that only changes at the trigger leaves the first two seconds with
+          nothing to read; this one is already warning you. */}
       <div style={{ position: "absolute", left: 486, top: 62, width: 40, height: 40,
         borderRadius: "50%", zIndex: 60,
         background: f >= TRIG
           ? hexa(mxh(RED, 0.16), 0.55 + Math.sin(f / 3) * 0.35)
-          : hexa(dkh(GREEN, 0.30), 0.7) }} />
+          : hexa(mxh(GOLD, 0.10), 0.40 + Math.sin(f / 9) * 0.28) }} />
 
       {/* the arrival COSTS something: dust, two rings, and a floor recoil */}
       <Ring x={506} y={gy} f={f} at={BITE} c="#FFE2A8" max={520} dur={20} />
@@ -228,6 +341,26 @@ export const S0: React.FC<SP> = ({ v }) => {
             top: gy - HERO + b.by * HERO, width: b.bw * HERO, height: b.bh * HERO,
             zIndex: 58, borderRadius: 4, opacity: kk,
             background: `linear-gradient(180deg, ${mxh(STEEL, 0.20)}, ${dkh(IRON, 0.30)})` }} />
+        );
+      })}
+
+      {/* ⛔ THE BITE ALARM IS A RIM, NOT A FLOOD. Four edge bands rather than a
+          full-panel tint — the frame reddens at its borders where the beacons
+          are, the middle of the picture keeps its grade, and the hero stays
+          readable. This is the shaped-light rule applied to a whole-frame
+          moment. */}
+      {bit && [0, 1, 2, 3].map((i) => {
+        const k = (0.30 + Math.abs(Math.sin((f - BITE) / 3.4)) * 0.70)
+                * (1 - E(f, BITE + 26, BITE + 46, 0, 0.55, LIN));
+        const vert = i > 1;
+        return (
+          <div key={"al" + i} style={{ position: "absolute", zIndex: 88,
+            left: vert ? (i === 2 ? 0 : undefined) : 0,
+            right: vert ? (i === 3 ? 0 : undefined) : 0,
+            top: !vert ? (i === 0 ? 0 : undefined) : 0,
+            bottom: !vert ? (i === 1 ? 0 : undefined) : 0,
+            width: vert ? 132 : undefined, height: vert ? undefined : 116,
+            background: `linear-gradient(${i === 0 ? 180 : i === 1 ? 0 : i === 2 ? 90 : 270}deg, ${hexa("#FF4A34", 0.46 * k)}, transparent)` } as any} />
         );
       })}
 
@@ -425,7 +558,7 @@ export const S1: React.FC<SP> = ({ v }) => {
 export const S2: React.FC<SP> = ({ v }) => {
   const f = useCurrentFrame(); const V = VD(v);
   const p = asPlace("inspect"); const gy = 880;          /* feet BELOW the panel */
-  const CLEAN = 43, FLAG = 92;
+  const CLEAN = 34, FLAG = 74;
   const S = 470;
 
   return (
@@ -467,7 +600,7 @@ export const S2: React.FC<SP> = ({ v }) => {
 
       <Rig f={f} x={506} y={gy} size={S} zBack={30} zFront={52} drop={1} tight={0.6}
         state={Object.fromEntries(
-          BRACES.filter((_, i) => i < 7).map((b, i) => [b.id, f >= FLAG + i * 4 ? "red" : "idle"])
+          BRACES.filter((_, i) => i < 7).map((b, i) => [b.id, f >= FLAG + i * 5 ? "red" : "idle"])
         ) as any} cables />
 
       <div style={{ position: "absolute", left: 506 - S / 2, top: gy - S, zIndex: 40 }}>
@@ -497,7 +630,7 @@ export const S2: React.FC<SP> = ({ v }) => {
       {/* ⭐ FINDING 2 — SEVEN red flags stabbed into the rig, one per 3 frames */}
       {BRACES.slice(0, 7).map((b, i) => (
         <Verdict key={"vf" + b.id} x={506 + b.bx * S + b.bw * S * 0.5} y={gy - S + b.by * S - 72}
-          f={f} at={FLAG + i * 4} kind="cut" z={84} s={1.4} />
+          f={f} at={FLAG + i * 5} kind="cut" z={84} s={1.5} />
       ))}
     </Scene>
   );
@@ -584,6 +717,13 @@ export const S3: React.FC<SP> = ({ v }) => {
       })}
 
       {/* the ARCHIVE's background process: a rack shuttle running the aisle */}
+      {/* a beacon on the aisle: the rig is being moved, which is exactly when a
+          bay runs its warning light. Weakest scene in the reel at 6.16, and a
+          sweeping cone is a large swept area at a high luma delta on a set whose
+          own paint is dark. */}
+      <Beacon x={506} y={128} f={f} level={f >= LIFT - 8 && f < SEAT + 10 ? 1 : 0}
+        z={64} s={1.0} len={360} />
+
       {/* the aisle shuttle, running the WHOLE scene with its own lamp — one
           large bright object crossing continuously, which is the shape §1's
           table actually rewards */}
@@ -948,7 +1088,28 @@ export const S7: React.FC<SP> = ({ v }) => {
   const S = 420;
 
   const fight = E(f, PULL, PULL + 10, 0, 1, OUT) * (1 - E(f, SEIZE, SEIZE + 4, 0, 0.86, OUT));
-  const jd = judder(f, PULL, 15, 60) * (1 - E(f, SEIZE, SEIZE + 3, 0, 1, OUT));
+
+  /* THE TUG OF WAR IS A DISTANCE, NOT A WOBBLE.
+     This scene measured 7.95 -- 8th of 15, BELOW the median -- while being the
+     peak the whole world was built for, and two rounds of adding LIGHT to it
+     moved the probe 6.23 -> 6.44. The light was never the problem.
+
+     §11: an ACTION is a DISTANCE, and under about a third of the object's own
+     size is a state change. "Two braces yanking his arm" was a few degrees of
+     rotation on a 126px bar: nothing crossed any real distance, so there was
+     nothing for a viewer OR the audit to read.
+
+     Now the two rules drag his WHOLE BODY between them -- 132px each way at full
+     swing on a 420px body, accelerating as neither side gives -- and it SNAPS
+     DEAD on the seize. That is the sentence: they are not tugging at a limb,
+     they are fighting over him. */
+  const TUG = 132;
+  const tugPh = (f - PULL) / 7.4;
+  const tug = f < PULL ? 0
+    : f >= SEIZE ? rock(f, SEIZE, 9, 11)
+    : Math.sin(tugPh) * TUG * E(f, PULL, SEIZE - 6, 0.22, 1, OUT);
+  const jd = (judder(f, PULL, 15, 60) + Math.sin(f / 3.4) * 3.2 * E(f, 0, PULL, 0.3, 1, LIN))
+            * (1 - E(f, SEIZE, SEIZE + 3, 0, 1, OUT));
   const sh = shake(f, SEIZE, 15, 14);
   const seized = f >= SEIZE;
 
@@ -957,20 +1118,50 @@ export const S7: React.FC<SP> = ({ v }) => {
       <SetFor k="clash" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       <div style={{ position: "absolute", left: sh.x, top: sh.y, right: -sh.x, bottom: -sh.y }}>
-        <Rig f={f} x={506} y={gy} size={S} z={46} drop={1} tight={0.7 + fight * 0.3}
+        <Rig f={f} x={506 + tug * 0.30} y={gy} size={S} z={46} drop={1} tight={0.7 + fight * 0.3}
           fight={fight}
           lit={f >= LIGHT ? ["r1", "r2", "m1"] : undefined}
           tags={f >= LIGHT ? ["r1", "r2"] : []}
           state={seized ? { r1: "red", r2: "red" } : {}} cables />
 
-        <div style={{ position: "absolute", left: 506 - S / 2, top: gy - S, zIndex: 40,
-          transform: `rotate(${jd * 0.10}deg)`, transformOrigin: "50% 90%" }}>
+        <div style={{ position: "absolute", left: 506 - S / 2 + tug, top: gy - S, zIndex: 40,
+          transform: `rotate(${jd * 0.10 + tug * 0.045}deg)`, transformOrigin: "50% 96%" }}>
           <Mascot lf={f * 0.4} size={S} nodAmp={1.2} nodSpeed={4}
             gaze={Math.sin(f / 4) * 1.3} stern={1} xeyes={seized ? 1 : 0}
             shock={E(f, SEIZE, SEIZE + 5, 0, 0.9, OUT)} />
         </div>
-        <Contact x={506 - S * 0.44} y={gy - 6} w={S * 0.88} o={0.42} z={38} />
+        <Contact x={506 - S * 0.44 + tug * 0.8} y={gy - 6} w={S * 0.88} o={0.42} z={38} />
       </div>
+
+      {/* ⭐⭐⭐ THE ALARM BELONGS HERE MOST OF ALL. This is a machine seizing under
+          two loads pulling against each other, and it measured **7.95** — 8th of
+          15 and BELOW the reel median — while being the scene the whole world
+          was built for. A peak that measures under the median is a defect, not
+          a nitpick.
+          Two beacons flanking the clash, dark until the pull starts and hard red
+          from the seize, plus the edge alarm. Same shaped-cone rule as the hook:
+          no full-frame tint. */}
+      <Beacon x={124} y={150} f={f} level={f >= SEIZE ? 2 : 1} z={64} s={1.2} len={420} hot="#FFF0E4" />
+      <Beacon x={888} y={150} f={f} level={f >= SEIZE ? 2 : 1} z={64} s={1.2} len={420} rate={-1.15} hot="#FFF0E4" />
+      {seized && [0, 1, 2, 3].map((i) => {
+        const k = (0.34 + Math.abs(Math.sin((f - SEIZE) / 3.0)) * 0.66)
+                * (1 - E(f, SEIZE + 20, 95, 0, 0.45, LIN));
+        const vert = i > 1;
+        return (
+          <div key={"cal" + i} style={{ position: "absolute", zIndex: 88,
+            left: vert ? (i === 2 ? 0 : undefined) : 0,
+            right: vert ? (i === 3 ? 0 : undefined) : 0,
+            top: !vert ? (i === 0 ? 0 : undefined) : 0,
+            bottom: !vert ? (i === 1 ? 0 : undefined) : 0,
+            width: vert ? 140 : undefined, height: vert ? undefined : 124,
+            background: `linear-gradient(${i === 0 ? 180 : i === 1 ? 0 : i === 2 ? 90 : 270}deg, ${hexa("#FF4A34", 0.50 * k)}, transparent)` } as any} />
+        );
+      })}
+
+      {/* ⭐ THE OVERLOAD GAUGE. The two rules are pulling against each other, so
+          the thing that reads the load pegs and stays pegged — a mechanism, and
+          a 10-segment bank changing every frame through the whole fight. */}
+      <TokenGauge x={296} y={132} lvl={E(f, 0, SEIZE, 0.10, 1.0, LIN)} f={f} z={62} s={1.2} w={420} />
 
       {/* ⭐⭐ THE STEAM. On the head, because the head is the part not acting. */}
       {f >= PULL && Array.from({ length: 10 }, (_, i) => {
@@ -992,7 +1183,7 @@ export const S7: React.FC<SP> = ({ v }) => {
           left: 506 + side * S * 0.62 - 3, top: 0, width: 6,
           height: gy - S + S * 0.16, zIndex: 44,
           background: `linear-gradient(180deg, ${hexa("#3A2018", 0.4)}, ${hexa(seized ? RED : "#7A4A38", 0.9)})`,
-          transform: `rotate(${fight * side * 3.4}deg)`, transformOrigin: "50% 0%" }} />
+          transform: `rotate(${fight * side * 3.4 + tug * side * -0.055}deg)`, transformOrigin: "50% 0%" }} />
       ))}
 
       {/* the arrival COSTS: sparks off both cables, both lamps trip red */}
@@ -1059,13 +1250,27 @@ export const S8: React.FC<SP> = ({ v }) => {
       <Sledge x={252 - carry * 560} y={gy - 396 + carry * 120} rot={swing + carry * 46}
         z={74} s={1.85} bright />
 
-      {/* the crew Claude who catches the haft */}
-      {f >= CATCH - 8 && (
-        <div style={{ position: "absolute", left: 214 - 82, top: gy - 164, zIndex: 76 }}>
-          <Mascot lf={f * 1.5} size={164} nodAmp={6.5} nodSpeed={12} constr={1}
-            shock={E(f, CATCH, CATCH + 6, 0, 0.7, OUT)} />
-        </div>
-      )}
+      {/* ⭐ TWO crew, and they ARRIVE — v1 had one appearing 8 frames before the
+          catch, which is a state change rather than an action. They now run in
+          from the left edge across 26 frames, which is a 300px travel by two
+          150px+ bodies on the reel's second-weakest scene (6.25). */}
+      {[0, 1].map((i) => {
+        const run = E(f, CATCH - 22 + i * 5, CATCH + 2, 0, 1, OUT);
+        if (run <= 0) return null;
+        const cs = 172 - i * 18;
+        const cx = -110 + run * (330 - i * 74);
+        const bob = Math.abs(Math.sin((f + i * 7) / 5)) * (1 - run) * 22;
+        return (
+          <React.Fragment key={"cc" + i}>
+            <div style={{ position: "absolute", left: cx - cs / 2, top: gy - cs - bob,
+              zIndex: 76 - i }}>
+              <Mascot lf={f * 1.7 + i * 11} size={cs} nodAmp={7.4} nodSpeed={12} constr={1}
+                shock={E(f, CATCH, CATCH + 6, 0, 0.75, OUT)} />
+            </div>
+            <Contact x={cx - cs * 0.44} y={gy - 6} w={cs * 0.86} o={0.32} z={74 - i} />
+          </React.Fragment>
+        );
+      })}
       {held && (<>
         <Ring x={300} y={gy - 300} f={f} at={CATCH} c="#FFE0A0" max={230} dur={14} />
         <Puff x={300} y={gy - 280} f={f} at={CATCH} c="#8FA0BE" n={6} />
@@ -1348,6 +1553,10 @@ export const S12: React.FC<SP> = ({ v }) => {
             boxShadow: SH }} />
         );
       })}
+
+      {/* the cut deck's beacon: the rig is coming apart overhead, which is the
+          third and last place in the reel a warning light is motivated */}
+      <Beacon x={148} y={140} f={f} level={f < FALL + 20 ? 1 : 0} z={64} s={0.95} len={330} />
 
       {/* the torch flash at each cut — a hard edge lands inside ONE audit sample */}
       {BRACES.filter((b) => !b.keep).map((b) => {

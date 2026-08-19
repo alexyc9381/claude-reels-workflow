@@ -1,0 +1,28 @@
+Comment "GO" and I'll send you the free setup.
+
+👇 READ BELOW
+
+The people who never run out of Claude usage are not better at prompting than you. They are not writing the prompt at all.
+
+Prompt Master is a free Claude skill that takes the messy paragraph you were going to send and turns it into an actual work order before it ever reaches the model. 11,415 stars on GitHub, MIT licensed, and it installs in about a minute with no terminal.
+
+★ 11,415 · nidhinjs/prompt-master → writes the prompt for you, for any AI tool
+→ what the output should look like, so there is nothing left to guess
+→ which files it is allowed to touch, and which it must not
+→ when to stop, as an explicit stop condition instead of a hope
+→ 35 credit killing patterns it checks every prompt against
+→ a Memory Block that carries yesterday's decisions into today's chat
+
+The mechanism is not that it makes the prompt longer. It makes every word load bearing. Most wasted messages are not caused by the model being wrong, they are caused by the model being right about a request that was underspecified: no success criteria, no scope boundary, no stack, no stop condition. So it does exactly what it was told, you look at it, and you spend three more messages explaining what you actually meant. Four attempts for one result, every time.
+
+The part nobody mentions: the expensive failure is not the bad answer, it is the re-prompt. You already paid for attempt one. Then you paid again to describe attempt one. Then again. Nobody counts those, because each one feels like a small correction rather than a bill, and that is exactly why the total is invisible.
+
+Two honest notes. It works on ChatGPT, Gemini, Cursor and about thirty other tools, not just Claude, because a prompt spec is not Claude shaped. And the fastest way to install it is the browser, not the CLI: download the repo as a ZIP, then claude.ai, Customize, Skills, Upload a Skill.
+
+Comment "GO" and I'll send you the free setup with the install steps and the patterns it checks for.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #aitools #promptengineering #prompts #aiagents #devtools #coding #programming #opensource #github #chatgpt #cursor #aiworkflow #codingtips #developertools #aiassistant #vibecoding #buildinpublic

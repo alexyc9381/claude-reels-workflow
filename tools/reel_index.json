@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 93,
-    "reels_total": 138,
-    "factory_logs": 55,
-    "storyboards": 54,
-    "caption_jsons": 102,
-    "memory_md": 195,
+    "reels_with_code": 96,
+    "reels_total": 141,
+    "factory_logs": 56,
+    "storyboards": 57,
+    "caption_jsons": 105,
+    "memory_md": 196,
     "creators": 8,
     "packs": 3
   },
@@ -507,8 +507,10 @@
       "log": null,
       "storyboard": null,
       "captions": [
+        "video/src/data/words_108marketing.json",
         "video/src/data/words_109plugins3.json",
         "video/src/data/words_110flow.json",
+        "video/src/data/words_113go.json",
         "video/src/data/words_ads.json",
         "video/src/data/words_agency.json",
         "video/src/data/words_ai.json",
@@ -594,6 +596,7 @@
         "video/src/data/words_slash.json",
         "video/src/data/words_slop.json",
         "video/src/data/words_slop_hook.json",
+        "video/src/data/words_smart.json",
         "video/src/data/words_sol.json",
         "video/src/data/words_squad.json",
         "video/src/data/words_stack.json",
@@ -926,11 +929,11 @@
       ]
     },
     {
-      "key": "smart",
-      "name": "smart",
+      "key": "smart114",
+      "name": "smart114",
       "number": null,
       "code": null,
-      "log": "memory/reels/smart-factory-log.md",
+      "log": "memory/reels/smart114-factory-log.md",
       "storyboard": null,
       "captions": []
     },
@@ -1499,6 +1502,17 @@
       ]
     },
     {
+      "key": "marketing",
+      "name": "marketing",
+      "number": 108,
+      "code": "video/src/ClaudeMarketingReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/108-marketing.md",
+      "captions": [
+        "video/src/data/words_108marketing.json"
+      ]
+    },
+    {
       "key": "plugins3",
       "name": "plugins3",
       "number": 109,
@@ -1540,6 +1554,28 @@
       "storyboard": "storyboards/112-squad.md",
       "captions": [
         "video/src/data/words_squad.json"
+      ]
+    },
+    {
+      "key": "go",
+      "name": "go",
+      "number": 113,
+      "code": "video/src/ClaudeGoReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/113-go.md",
+      "captions": [
+        "video/src/data/words_113go.json"
+      ]
+    },
+    {
+      "key": "smart",
+      "name": "smart",
+      "number": 114,
+      "code": "video/src/ClaudeSmartReel.tsx",
+      "log": "memory/reels/smart-factory-log.md",
+      "storyboard": "storyboards/114-smart.md",
+      "captions": [
+        "video/src/data/words_smart.json"
       ]
     }
   ]

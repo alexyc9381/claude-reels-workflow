@@ -1,0 +1,76 @@
+TITLE   Stop Re-Prompting
+SUB     A free MIT licensed Claude skill that turns your messy paragraph into a prompt with an output spec, a file scope and a stop condition, so you get it right on attempt one
+
+H       What this actually is
+P       Prompt Master is a Claude skill. You describe what you want in whatever shape it comes out of your head, and it hands back a single clean prompt you can paste into any AI tool. It is free, MIT licensed, and it installs from a browser in about a minute with no terminal.
+P       The thing worth understanding before you install it is what it is optimising for. Most prompt tools make prompts longer. This one makes every word load bearing, which is the repo's own phrase, and then strips the rest. The output is usually shorter than what you would have written by hand and far more specific.
+B       Repo: github.com/nidhinjs/prompt-master
+B       11,415 stars, MIT licensed, verified 19 August 2026
+B       Works with Claude, Claude Code, ChatGPT, Gemini, Cursor, Windsurf, Copilot, Midjourney and about thirty more
+
+RULE
+
+H       The cost you are not counting
+P       Almost nobody wastes credits on the answer. They waste them on the conversation that follows it.
+NUM     You write a rough prompt, because writing a precise one takes longer than you want to spend.
+NUM     The model does exactly what you asked, correctly, and it is not what you meant.
+NUM     You spend three more messages explaining what you actually meant.
+NUM     Attempt four is the one you keep.
+P       That is four passes for one result. You paid for the first attempt, then you paid again to describe the first attempt, then again. Each of those feels like a small correction rather than a bill, which is exactly why the total is invisible. Multiply by however many prompts a day you send.
+P       The failure is almost never the model being wrong. It is the model being right about a request that was underspecified: no definition of done, no scope boundary, no stack, no stop condition. It cannot ask you for those, so it guesses, and a guess is what you end up correcting.
+
+RULE
+
+H       The four things it adds that you were never going to write
+P       This is the part that matters and it is easy to skim past. For agentic tools the skill emits four things by default, and those four are the ones people leave out by hand every single time.
+NUM     What the output should look like. Not "make it good" but the actual shape of done: the format, the length, the sections, the acceptance criteria. The repo calls the missing version of this "no success criteria" and it is the single most common pattern it catches.
+NUM     Which files it is allowed to touch. And, more usefully, which it is not. Scope is a fence, and a fence only works if it has an outside.
+NUM     When to stop. An explicit stop condition, plus checkpoints, so an agent reports progress instead of running until it decides it is finished.
+NUM     What was already decided. A Memory Block of prior choices carried forward, so the model does not contradict architecture you settled two days ago.
+P       If you write those four yourself, every time, you do not need this skill. Almost nobody does, which is the whole point.
+
+RULE
+
+H       Install it in about a minute
+P       The browser route is the one to use. The repo also documents cloning into a skills directory and marks it as not suggested.
+NUM     Download the repo as a ZIP from github.com/nidhinjs/prompt-master.
+NUM     Go to claude.ai, open the sidebar, then Customize, then Skills.
+NUM     Choose Upload a Skill and give it the ZIP.
+NUM     That is it. Invoke it by asking naturally, for example "write me a prompt for Cursor to refactor my auth module", or explicitly with /prompt-master.
+P       There is no API key, no config file and nothing to maintain. If you use Claude Code, the same skill works there.
+
+RULE
+
+H       The 35 patterns it checks every prompt against
+P       The repo publishes the full list with a before and after for each one. They are grouped, and the grouping is the useful part because it tells you where your own prompts leak.
+B       Task patterns, 7 of them. Vague verbs, two tasks in one prompt, no success criteria, over-permissive agents, emotional descriptions, build-the-whole-thing, and referring to "the other thing we discussed".
+B       Context patterns, 6. Assumed prior knowledge, no project context, forgotten stack, hallucination invites, undefined audience, and never mentioning what you already tried and why it failed.
+B       Format patterns, 6. Missing output format, implicit length, no role, vague aesthetic adjectives, missing negative prompts on image tools, and prose sent to a tool that wants comma separated descriptors.
+B       Scope patterns, 6. No scope boundary, no stack constraints, no stop condition, no file path, the wrong template for the tool, and pasting an entire codebase every turn.
+B       Reasoning patterns, 5. Including the one most people get backwards: adding "think step by step" to a reasoning model degrades its output, because it already thinks internally.
+B       Agentic patterns, 5. No starting state, no target state, a silent agent, an unlocked filesystem, and no trigger for human review before something irreversible.
+P       You do not have to learn these. The skill applies them. Reading the list once is still worth it, because you will recognise three or four of your own habits in it and stop doing them by hand.
+
+RULE
+
+H       The Memory Block, which is the fix for long sessions
+P       When a conversation already has history, the skill pulls out the decisions you have made and prepends them as a short block: the stack, the auth approach, the naming convention, the architecture calls, the things you ruled out.
+P       This is the single biggest fix for long sessions, and it is aimed at a specific failure. Two of the 35 patterns are about it directly: forgetting the stack, and contradicting a decision you already made. Both feel like the model getting worse over a long conversation. Neither is. They are the model not being told what was already settled.
+
+RULE
+
+H       It is not a Claude only tool
+P       The skill detects which system the prompt is for and routes to a different approach for each. Claude gets XML structure and padding removed. ChatGPT gets an output contract and completion criteria. Reasoning models get short clean instructions with chain of thought stripped out. Cursor and Windsurf get a file path, a function name and a do-not-touch list. Midjourney gets comma separated descriptors, parameters and a negative prompt. For anything it has never seen, it asks four questions and writes for that instead.
+P       Practically, that means the sentence you type once produces a Claude Code prompt, a Cursor prompt or a Midjourney prompt depending on where you said it was going. The spec is not Claude shaped, it is prompt shaped.
+
+RULE
+
+H       What to know before you install it
+P       Three honest notes, because a guide that only lists upsides is an advert.
+NUM     It is a prompt writer, not a model upgrade. It will not make Claude smarter. It removes the class of failure where a capable model does the wrong correct thing, which is most of them, and none of the ones where the task is genuinely hard.
+NUM     It asks questions. Up to three, when something critical is missing. That is the mechanism working, but if you were expecting instant output the first run will feel slower. It is still faster than four attempts.
+NUM     The video says it checks against thirty plus ways prompts waste credits. The real number published in the repo is 35. The video understates it, which is the safe direction, and the full list is in the section above.
+
+RULE
+
+KEY     GO

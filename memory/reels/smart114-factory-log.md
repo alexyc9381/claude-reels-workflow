@@ -179,3 +179,56 @@ each got its own, solved from its own A-weighted measurement. All three now sit 
    wallpaper threshold) says no scene is carried by a repeat, but that is a fallback,
    not a substitute for looking. **The sheets are at `out/sheet_v*.png` and should be
    eyeballed before this ships.**
+
+---
+
+## ROUND 2 — the hook rebuild, and the peak that measured below the median
+
+### ⛔⛔⛔ THE HERO OBJECT WAS STATIC FOR TWO THIRDS OF THE HOOK
+Alex: *"at the very beginning there still needs to be motion, right now the brace bay thing only
+drops on him near the end of that hook animation."* The buckets agreed — **6.5 / 6.3 / 7.2 / 11.2 /
+16.3**, every bit of the event in the last third. The rig hung still for 92 of 136 frames and then
+fell 462px in 22.
+
+Rebuilt to descend across the WHOLE shot over the same total distance, in three gears that each go
+faster than the last. ⛔ The first attempt got the gearing BACKWARDS — its middle gear ran 2.1
+px/frame against a 3.2 px/frame opening, so the rig visibly decelerated between 2s and 3s and that
+bucket dipped to 6.4 while its neighbours sat at 7.7 and 11.0. **A descent has to accelerate.**
+
+### ⭐⭐⭐ AND THEN IT NEEDED AN OPERATOR
+Alex: *"more interesting motion, another Claude sprite somehow in this equation lowering it, not
+just standard linear motion."* Two things at once, both in the craft doc: §10 (a hand-off needs a
+SOURCE) and §1 (N discrete pops beat one long tween, 4.27 → 5.63 at identical duration).
+
+Two hard-hat Claudes on a winch now pay it out in **seven notches**, each landing with a `BACK`
+overshoot; the capstan turns in proportion to what it has paid out; one of them kicks the brake and
+the last third is a clean plunge. The rig also **swings** on its cables — a load that travels in a
+perfectly straight line reads as a div animating.
+⭐ It is also the reel's argument in one image: the cage does not fall on him, **other Claudes bolt
+it on**, which is what writing a CLAUDE.md is.
+
+### ⛔⛔ THE HAZARD BEACONS, AND THE ONE THAT DID NOTHING
+Alex asked for red alarms. They went into the three places a warning light is motivated — the hook
+(a load moving overhead), S7 (the rig seizing) and S12 (the rig being cut) — as **sweeping cones**,
+never a full-frame tint, because THE-OPEN killed exactly that twice.
+
+⛔ **The S7 pair measured NOTHING until their colour changed.** A red cone on an oxblood set is a
+colour change at equal luma, and the audit is GREYSCALE — it scores that at zero, and the eye reads
+it as haze rather than as a light. A white-hot core fixed it. Same family as the archive `Pool`s.
+
+### ⭐⭐⭐ THE PEAK MEASURED BELOW THE MEDIAN, AND LIGHT WAS NEVER THE FIX
+S7 CLASH — the rules-fighting beat the entire world was built for — sat at **7.95, 8th of 15**.
+Two rounds of adding light to it moved the probe **6.23 → 6.44**.
+
+The defect was §11, exactly as written: *an ACTION is a DISTANCE, and under about a third of the
+object's own size is a state change.* "Two braces yanking his arm" was a few degrees of rotation on
+a 126px bar. Nothing crossed any distance, so there was nothing for a viewer OR the audit to read.
+
+Rebuilt as a real tug of war: the two rules drag his **whole body** 132px each way on a 420px frame,
+accelerating as neither side gives, snapping dead on the seize. Probe **6.44 → 8.90**, HOLD 45% →
+26%. And it is the sentence — they are not tugging at a limb, they are fighting over him.
+
+> **The pattern across all three of this round's failures:** when a scene measured low I reached for
+> LIGHT, and light only helps when it creates a luma delta over TIME. Twice it was a static
+> practical, once a red cone on a red wall. What moved every number was making something travel
+> further.

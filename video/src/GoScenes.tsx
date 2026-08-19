@@ -60,7 +60,7 @@ export const CAM: Record<Variant, { dx: number; dy: number; s: number; rot: numb
     touches no dark stop (reel 111 fixed a 34.2% failure this way). */
 export const GRADE: Record<Variant, string> = {
   shop:  "contrast(1.010) saturate(1.24) brightness(1.000) hue-rotate(-2deg)",
-  amber: "contrast(1.190) saturate(1.36) brightness(0.938) hue-rotate(-15deg)",
+  amber: "contrast(1.285) saturate(1.40) brightness(0.902) hue-rotate(-21deg)",
   steel: "contrast(0.874) saturate(1.06) brightness(1.062) hue-rotate(13deg)",
 };
 
@@ -71,6 +71,24 @@ export const HOOK_V: Record<Variant, { ej: number[]; land: number[] }> = {
   shop:  { ej: [8, 34, 60], land: [20, 46, 72] },
   amber: { ej: [5, 27, 52], land: [16, 39, 65] },
   steel: { ej: [12, 40, 66], land: [24, 52, 78] },
+};
+
+/** ⭐ a per-cut PRESS RHYTHM. The 4.4s frame measured a 64-bit dHash distance of
+    just 9 between the shop and amber cuts — under the 10 minimum — because S1 is
+    dominated by one large flat cream board, and a luma-GRADIENT hash reads a
+    flat field almost identically however far the camera is offset. Camera and
+    grade cannot fix that; only a different PICTURE can. So the board drops on a
+    different frame and prints its marks in a different order per cut, which is
+    an editorial difference rather than a filter trick. */
+export const PRESS_V: Record<Variant, { drop: number; marks: number[] }> = {
+  /* ⛔ A 6-FRAME SPREAD WAS NOT ENOUGH: at 4.4s all three cuts showed a landed
+     board carrying one mark, which is the same PICTURE, so the hash still read
+     9. The spread is now 34 frames — at any given instant one cut has a board
+     mid-air and another has it locked and printing, which is a state a
+     gradient hash cannot miss. */
+  shop:  { drop: 10, marks: [34, 50, 66, 84] },
+  amber: { drop: 44, marks: [70, 82, 94, 108] },
+  steel: { drop: 24, marks: [50, 62, 80, 100] },
 };
 
 /** a different push per cut, so no two cuts share a camera move on the same beat */
@@ -202,7 +220,8 @@ export const S0: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 export const S1: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("press");
-  const LOCK = 30;
+  const P = PRESS_V[v];
+  const LOCK = P.drop + 16;
   const sh = shake(f, LOCK, 11, 10);
   /* the slip travels in from the right and is stopped by the board */
   const slipT = E(f, 0, LOCK, 0, 1, LIN);
@@ -228,8 +247,7 @@ export const S1: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           s={f > LOCK ? 1 - E(f, LOCK, LOCK + 6, 0, 0.18, OUT) : 1} />
 
         {/* THE SPEC PRESS — 470px, the biggest bright mass in the frame */}
-        <SpecPress x={452} y={392} w={470} f={f} drop={14} z={48}
-          marks={[38, 54, 70, 88]} />
+        <SpecPress x={452} y={392} w={470} f={f} drop={P.drop} z={48} marks={P.marks} />
 
         <Puff x={452} y={604} f={f} at={LOCK} n={14} s={1.3} c={p.grit} z={62} />
         <Ring x={452} y={598} f={f} at={LOCK} r={250} c={p.key} z={61} />
