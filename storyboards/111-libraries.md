@@ -16,6 +16,13 @@
 > ⛔ **NUMBER SPINE:** `$10,000` (agency invoice, S0 · re-lit S6 · beaten S9) → `3` (crates, S1) →
 >               `106` (Skiper components, S4) → `46` (Vengeance components, S6) → `250`
 >               (Animmaster, S8) → the keyword (S10). **No other numeral is typeset anywhere.**
+> ⛔ **REAL CAPTURES (rev 2):** every library is shown as its OWN LIVE PAGE, captured with
+>               Playwright on build day into `video/public/shots/` and scrolled through a clipping
+>               viewport (`LibWorld.SiteScreen`) with its real address bar on it. Alex: *"use real
+>               screen recordings of the sites for each of these… when websites are mentioned show
+>               actual examples."* This is also the biggest motion lever in the repo — it took the
+>               median **10.90 → 12.51** in one pass, with DECK 10.90 → 15.08 and the hook
+>               10.51 → 14.19.
 > ⛔ **HERO ARTIFACT:** **THE FRONT** — one building frontage, on screen in all 11 scenes, bare grey
 >               concrete at S2 and blazing at S9. Everything else is decoration.
 
@@ -93,28 +100,35 @@ every 1.1–5.9s; the three long scenes (S4, S6, S8) each carry an internal hard
 
 # THE CARDS
 
-## SCENE 0 — 0.00 to 2.45s (2.47s) · LOCKED CLOSE · HOOK
+## SCENE 0 — 0.00 to 2.45s (2.47s) · LOCKED · HOOK  ⭐ REBUILT (rev 2)
 - **VO:** *"Web developers charge thousands for animated sites."*
-- **SET:** A night high street, `row` (plum). Camera close on a dark shopfront. Depth planes: wet
-  road grit (near), kerb lip, the shopfront's own dead window, a scaffold leg, the far band of
-  lit windows, sky. `Occluder` side="l" as a scaffold pole cropped by the panel edge, in front of
-  the action — the mass that makes it a place and not a backdrop.
-- **CAMERA:** LOCKED. No push. One framing, one event.
-- **BLOCKING:** *Before state:* one small Claude (`constr`) stands at the bottom of frame looking
-  up at a dead grey window. *Trigger (f8):* a cable snaps taut overhead. *Travel (f10–f26):* a
-  colossal agency **QUOTE BOARD** drops on two chains from the top of frame, filling ~40% of the
-  panel — cream board, `MERIDIAN & CO.` in the display face, one line item, and `$10,000` set
-  huge and mute-readable. *Arrival (f26):* it slams to a stop, both chains recoil, the board
-  rocks on a damped oscillation, grit jumps off the kerb, an expanding dust ring, and the Claude
-  is knocked back one step and does a `shock` double-take. The board keeps rocking to f74.
-- **LIGHT:** one sodium source top-left, raking. The board is the brightest object in frame (it is
-  the claim plate — one contiguous cream mass, ~40% of the panel, so `HOOK_PLATE` reads it as one
-  object, not three small ones). The Claude reads dark against it.
-- **BACKGROUND PROCESS:** rain grit drifting across the kerb, continuous, whole scene.
-- **SFX:** chain-rattle riser pre-rolled from f0 · `slate_whump` + `sub` + `impact_deep` ON f26 ·
-  grit patter under. Heaviest cue stack of the reel sits on the arrival.
-- **TAKEAWAY:** *this is what an animated site costs you* — recognised in under a second, no
-  narration, no UI screenshot (Alex's 2026-08-03 ruling: the dreaded thing is a drawn OBJECT).
+- **⛔ WHY IT WAS REBUILT.** Rev 1 was a quote board on chains whose price flipped up on
+  split-flaps. It passed **every** gate — frame-0 luma 151, HOOK_PLATE 21.8%, open motion 10.43,
+  no dead bucket — and Alex still rejected the concept. That is §0 exactly: *a scene that passes
+  every gate can still be dead.* The gates check that an open is BUILT correctly; nothing in them
+  can see whether the IDEA is any good.
+- **The diagnosis:** the object on screen was a **piece of paper about a website**, when the thing
+  the viewer actually wants is the **website**.
+- **SET:** the night street, `quote`. The biggest shopfront on the road is a screen.
+- **CAMERA:** LOCKED. One framing, one event.
+- **BLOCKING:**
+  - *Before (f0):* **skiper-ui.com, live**, captured on build day, scrolling in colour behind its
+    own address bar, with its real install command and Quick Start button on screen. A colossal
+    cream **PRESS HEAD** already hangs in the top of frame. A Claude on the pavement, face clear.
+  - *Trigger (f36):* the press drops.
+  - *Travel (f36-44):* 236px, fast, the biggest bright mass in the frame moving.
+  - *Arrival (f44):* **SLAM.** Frame shake, expanding ring, two dust puffs, the rubber face
+    compresses, `$10,000` inks across the glass — and the page **drains to greyscale and stops
+    scrolling.** You were looking at the thing you want; now it has a price on it and it is dead.
+  - *Tail (f48-70):* two more presses hit the shopfronts down the street. The first version held
+    here; this says the quiet part instead — it happens to every site on the road.
+- **⛔ THE VILLAIN STILL DOES NOT LOSE.** It stamps, it lifts, and it is still hanging in frame at
+  the cut. Nothing touches it until S9.
+- **LIGHT:** the screen is the source. Frame 0 measured **141.4** against the ≥140 bar with the
+  capture opened onto the page's brightest stretch (its component grid, strip y=720, mean 149).
+- **SFX:** press whine pre-rolled · `slate_whump` + `sub` ON the slam · two smaller hits in the tail.
+- **TAKEAWAY:** *the site you want, priced out of reach* — recognised in under a second, no
+  narration, and the dreaded thing is a staged OBJECT, not a UI explainer (Alex, 2026-08-03).
 
 ## SCENE 1 — 2.45 to 5.18s (2.70s) · HARD CUT TO WIDE · HOOK
 - **VO:** *"These three libraries do it for free, so this is how it works."*
@@ -164,7 +178,9 @@ every 1.1–5.9s; the three long scenes (S4, S6, S8) each carry an internal hard
   stencilled mark `SKIPER UI` reads for the first time; two fitters vault in over the lip.
 - **LIGHT:** the crate interior is the source — light spills UP onto the fitters' faces.
 - **SFX:** `spotlight_snap` + latch clack + a low `can_bong` on the lid.
-- **TAKEAWAY:** name 1, stated once, big.
+- **⭐ REAL CAPTURE:** the crate blows its lid **sideways out of frame** and skiper-ui.com's own
+  page rises out of the case. A name with no product behind it is a container (§3).
+- **TAKEAWAY:** name 1, stated once, big, with the real page under it.
 
 ## SCENE 4 — 10.12 to 14.80s (4.67s) · TWO FRAMINGS · ESCALATE
 - **VO:** *"Cards, pricing, layouts, and ready to use blocks you can drop into any project with
@@ -191,6 +207,10 @@ every 1.1–5.9s; the three long scenes (S4, S6, S8) each carry an internal hard
 - **TEXT CHIP:** ONE — `106 COMPONENTS` on the deck rail, in the band nothing else enters.
 - **SFX:** crane whine bed · `thock` on each of the three named seats (pitched down the ranks) ·
   five detent clicks on the nav strip · `chair_knock` accents on the block fill. ≤4 uses each.
+- **⭐ REAL CAPTURE:** the frontage carries a live scroll through **skiper-ui.com's own component
+  grid** — the real cards, hover members, drag-and-scroll and cursor-trail components — so the
+  receipt and the depiction are the same object. Offset 470 lands the viewport on the white cards
+  rather than the dark band above them.
 - **TAKEAWAY:** the front now has real sections, and nobody designed one of them.
 
 ## SCENE 5 — 14.80 to 15.87s (1.07s) · HARD PUNCH IN · TURN
@@ -226,6 +246,8 @@ every 1.1–5.9s; the three long scenes (S4, S6, S8) each carry an internal hard
 - **TEXT CHIP:** ONE — `46 COMPONENTS` on the gantry rail.
 - **SFX:** `knife_switch` on the throw · eight `spotlight_snap` pops down the rank · a low
   `stage_hum` bed rising under the sweep.
+- **⭐ REAL CAPTURE:** vengenceui.com scrolling through its own cinematic blocks under the rig.
+  ⛔ The flood bands were washing it out at 0.72 alpha and came down to 0.46.
 - **TAKEAWAY:** ours now throws the same light the expensive one does.
 
 ## SCENE 7 — 20.81 to 21.88s (1.07s) · HARD PUNCH IN · TURN
@@ -268,6 +290,12 @@ every 1.1–5.9s; the three long scenes (S4, S6, S8) each carry an internal hard
 - **SFX:** rolling rack rumble bed · drawer bangs in a travelling wave (pitched by rank,
   `pitch = k/(n+1)`) · a `gear_shift` on each of the two internal cuts · a wet `stamp_press` on
   the paste. Peak cue count of the reel sits here (7), matching the density contour.
+- **⭐⭐ REAL CAPTURE — THIS IS THE SCENE IT MATTERS MOST IN.** animmasterlib.dev's own page is a
+  grid of exactly the components the VO lists, each labelled with its category (Scroll Animation ·
+  Hero Animation · WebGL Animation · 3D Animation · Text Animation). Scrolling the real page IS the
+  line, so the hand-drawn panel stack that used to carry it was removed as a double-draw and only
+  the HERO BLOCK slam stayed. ⛔ The site's hero says **300** and the VO says **over 250**: the VO
+  understates it, which is the safe direction, so capture and chip do not contradict.
 - **TAKEAWAY:** there is a part for everything, and fitting one is one gesture.
 
 ## SCENE 9 — 27.75 to 31.31s (3.57s) · HARD CUT TO WIDEST · PAYOFF
@@ -288,6 +316,9 @@ every 1.1–5.9s; the three long scenes (S4, S6, S8) each carry an internal hard
 - **TEXT CHIP:** ONE — the agency's `$10,000`, now the dimmest thing in frame.
 - **SFX:** a rising rank of `temper_chime` under the light wave · the agency's hum dying away ·
   one distant door close on the last exit.
+- **⭐ REAL CAPTURE:** the finished frontage shows **vengenceui.com in full colour, still
+  scrolling**, while the agency tower beside it goes dark. A drawn facade can only assert *"looks
+  like it costs thousands"*; the real page is the receipt for it.
 - **TAKEAWAY:** the expensive-looking result, with nobody left on the street who could have made it.
 
 ## SCENE 10 — 31.31 to 33.49s (2.20s) · HARD CUT · CTA

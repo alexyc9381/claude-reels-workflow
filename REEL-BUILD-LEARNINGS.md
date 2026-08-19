@@ -1879,3 +1879,18 @@ traps are in `docs/TRIAL-CUTS.md`.
 that happened to sit inside the bed's own fade-out showed 0.6 dB of a real 6.0 dB
 move. And exclude your own fades and loudnorm before correlating two beds — the
 envelope check returned +0.84 for two genuinely different tracks.
+
+**14.15 ⭐⭐⭐ MAKING AN ACTION READ** — the cluster the hook rebuild paid for, all
+in `docs/ANIMATION-QUALITY.md` §11 and `docs/THE-OPEN.md`: an ACTION is a
+DISTANCE (a lift travelling 14% of its range read as "standing under"); WEIGHT is
+DEFORMATION (bar whip, plate wobble, tremble) not size or colour; EFFORT wants an
+EMITTER on the STILLEST part of the hero; CATEGORY is STRUCTURE not hue (rim,
+grip holes, hub, stamp — not a repaint); READ THE RIG before drawing geometry;
+and an EMPTY container must still read and must differ from its room in hue AND
+value.
+
+**14.16 ⭐⭐⭐ THE HOOK IS AN IMAGE, NOT A ROOM.** v1 obeyed every law in
+`THE-OPEN.md`, measured 17.68, and was rejected for having five objects competing
+across the frame. Hierarchy is what a viewer sees in the first 200ms; motion is
+what keeps them past 2s. Then two more rounds on PROPORTION and SILHOUETTE VALUE,
+both of which are free board-time checks.

@@ -288,3 +288,99 @@ impact` on the third.
 - [ ] A transient lands on every cut frame; frame 0 is the loudest
 - [ ] Every SFX `dur` ≥ the file's measured true length
 - [ ] First-5s motion mean ≥ 4.0, measured on the delivered mp4
+
+---
+
+## THE HOOK IS AN IMAGE, NOT A ROOM
+
+Reel 110 FLOW built its hook **three times**. The first two passed everything in
+this document and were rejected anyway, and the reasons are measurable, so they
+belong here rather than in a log.
+
+### v1 — a ROOM. It obeyed every law above and was still wrong.
+
+A 3am desk: a repo card, a terminal, a queue of tickets, a cost meter and a hero,
+across the whole frame. Frame 0 was bright (145), the subject was in it, it was
+mute-readable, it had a real event, and it measured **17.68 motion** — one of the
+strongest opens this repo has produced. Alex:
+
+> *"The beginning hook scene needs to be completely reworked to be a lot more
+> interesting. Like, maybe just have one Claude sprite in the middle lifting
+> weights, super hierarchical, just one Claude sprite in the middle."*
+
+> **Five objects competing across a frame is a ROOM. A hook is an IMAGE.**
+> `memory/reel-hook-simplicity.md` already says it — ONE dominant object, empty
+> stage — and a high open score does not exempt you from it. **Hierarchy is
+> what a viewer sees in the first 200ms; motion is what keeps them past 2s.**
+
+The composition that replaced it is the oldest one there is: **one figure, dead
+centre, doing one thing, with nothing else standing on the floor.**
+
+### v2 — the right idea at the wrong PROPORTIONS
+
+The lift went in and came back twice more as *"still not that clear that it's
+lifting weights."* Measured rather than argued about:
+
+```
+plate 372px      = 47% of the panel HEIGHT and 113% of the lifter's whole body
+a real 45cm plate against a 175cm lifter is 26% of his height  ->  4.3x too big
+barbell overall  = 982px = 97% of the panel WIDTH  ->  no air on either side
+```
+
+> **An object is recognised by its SILHOUETTE, and a silhouette needs ROOM.**
+> Past roughly 85% of the panel width there is no air for one to form, and the
+> thing stops reading as itself however big and bright it is.
+
+⛔ **And the VALUE was backwards.** A cream barbell on a lit hall has no
+silhouette at all. Every readable reference image of anything is a DARK subject
+against a lighter field or the reverse.
+
+> **Name which side of the contrast your subject is on. "Light on light" answers
+> *"I can't tell what that is"* more often than shape ever does.**
+
+### ⭐⭐⭐ And the cause of BOTH: the prop was carrying the frame-0 gates
+
+The barbell was huge and pale **because it was the only object holding up
+`HOOK_LUMA >= 140` and `HOOK_PLATE >= 18%`.** Moving both jobs onto a lit meet
+board on the wall behind freed it to be 152px of cast iron on a 560px shaft — 70%
+of panel width, air on both sides, dark against a light field — and it read
+immediately.
+
+> **A GATE CARRIED BY THE WRONG OBJECT DEFORMS THAT OBJECT.** When a hook prop
+> looks wrong and you cannot say why, ask what gate it is being asked to satisfy,
+> then give that job to a different object. A lit board, a hoarding, a plinth and
+> a window wall all carry luma and a claim plate without touching the subject.
+
+### Two free checks, at board time
+
+1. **Proportion.** Print the prop against the BODY beside it and against the
+   PANEL. Over ~40% of the body for a hand prop, or over ~85% of panel width for
+   anything, and it has stopped reading as itself.
+2. **Silhouette value.** Say out loud which is darker, the subject or the field
+   behind it. If the answer is "about the same", there is no silhouette.
+
+### ⛔ The hand-off out of the hook is a SENTENCE, not an effect
+
+v2 ended with the weight plates EXPLODING into the swarm. Alex:
+
+> *"I don't really like that it explodes, it doesn't really make sense for this
+> hook scene either."*
+
+He is right, and the tell was there in the script: nothing about lifting a weight
+makes it detonate. It was a link forced because the next scene needed one.
+
+⭐ **The next VO line already tells you what the last beat of the hook should
+be.** Here it was *"60 agents working together simultaneously"*, so the hook now
+ends with **four more Claudes running in to take the bar**, and the shaft grows
+as each joins. Five under one bar cuts to sixty on the floor.
+
+⛔ That cost the scene **17.12 → 14.35** and was correct. The shatter was cheap
+motion for a beat that meant nothing. **A number going down is not automatically
+a regression.**
+
+---
+
+## Related
+[`ANIMATION-QUALITY.md`](ANIMATION-QUALITY.md) §10 (green gates) and §11 (making
+an action read) · `memory/reel-hook-simplicity.md` ·
+`memory/reel-real-marks-are-the-props.md`

@@ -12,9 +12,9 @@ repo.
 >    in-repo is normal — the code is in Drive or the sibling `matchtern-longform` project.
 
 <!-- INDEX:AUTO -->
-| reels (code in-repo) | **91** | factory logs | **54** |
+| reels (code in-repo) | **92** | factory logs | **54** |
 |---|---|---|---|
-| storyboards | 52 | caption files | 100 |
+| storyboards | 53 | caption files | 101 |
 | memory `.md` | 194 | creator packs | 3 |
 | script-DNA creators | 8 | | |
 <!-- /INDEX:AUTO -->
@@ -41,6 +41,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 | **place a single sound effect** | [`docs/SOUND-DESIGN.md`](docs/SOUND-DESIGN.md) — layer / pitch-vary / J-cut / hierarchy / dB levels + the sidechain frequency pocket. Code: [`video/src/SoundKit.tsx`](video/src/SoundKit.tsx) |
 | **build a reel's whole SFX bank** (or you got "too many sfx" / "that sound is annoying" back) | [`docs/SOUND-DESIGN.md`](docs/SOUND-DESIGN.md) §2b §6 §7 — ⭐ the house cue RATE (1.0-1.5/sec; a rejected reel ran 3.82), why nominal dB lies about loudness, the five gates in [`tools/sfx_audit.py`](tools/sfx_audit.py), and the five-round "puff of air" that was in the MUSIC BED and then in the VOICE, never in the effects |
 | **decide HOW MUCH should be happening** (or you got "only 20% as good" / "too many" back) | [`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) §9 — the per-reel and per-scene density budgets, why density is a SHAPE not a level, and the warning that a metric satisfiable the wrong way WILL be satisfied the wrong way |
+| **make an authored action actually READ** (or you got "I can't tell what it's doing" / "it doesn't feel heavy") | [`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) §11 — ⭐ an ACTION is a DISTANCE not a state change · WEIGHT is DEFORMATION · EFFORT wants an emitter on the STILLEST part of the hero · CATEGORY is STRUCTURE not hue · read the rig before drawing geometry |
 | **make sprites feel alive** | [`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) §5 — ⭐ sprites need an ACTION LOOP, not an idle (the single biggest measured lift in reel 107: failures 3/11 → 1/11), the four loop types, the spacing law, and why swapping slabs for sprites measures WORSE until they are big and fast |
 | **publish a reel's guide** (⛔ the ARTICLE is the deliverable, not the docx) | [`lead-magnets/`](lead-magnets/) + [`tools/make_lead_magnet.py`](tools/make_lead_magnet.py) — zero-dependency OOXML; hard-fails on em-dashes, a Matchtern footer, or a missing keyword line |
 | **pick the next topic / write a script** | [`script-factory/`](script-factory/) + memory `script-factory-pipeline` |

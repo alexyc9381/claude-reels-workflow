@@ -1,4 +1,5 @@
 import React from "react";
+import { Img, staticFile } from "remotion";
 import { MONO, Mascot } from "./SlopKit";
 import { inter } from "./fonts";
 import {
@@ -506,6 +507,54 @@ export const Front: React.FC<{ x: number; y: number; w: number; h: number; f: nu
 };
 
 /* =========================================================================
+   ⭐⭐⭐ THE REAL SITE, SCROLLING. `src` is a tall PNG pulled LIVE from the
+   library's own site on build day (`public/shots/`), rendered through a
+   CLIPPING viewport with a moving offset — which is what turns a still capture
+   into a genuine scroll-through rather than a crossfade between two frames.
+
+   This is the biggest single motion lever in the repo and it is not close:
+   real UI took reel 107's median 6.36 -> 8.00, with one scene 6.30 -> 10.25 and
+   another 7.99 -> 13.24. It also satisfies the playbook's PROOF requirement at
+   the same time, because the receipt for "this library exists and looks like
+   this" is the library's own page.
+
+   ⛔ REAL FOOTAGE IS NOT AUTOMATICALLY MOTION. A capture HELD for a whole
+   sentence measured 3.23 with a 60-frame dead run; cutting inside it on the
+   beat took it to 4.40. So every call site here either scrolls continuously or
+   gets cut, and none of them just sits.
+   ====================================================================== */
+export const SiteScreen: React.FC<{ x: number; y: number; w: number; h: number;
+  src: string; scroll?: number; z?: number; grey?: number; on?: number;
+  url?: string; bezel?: number; capW?: number }> =
+  ({ x, y, w, h, src, scroll = 0, z = 40, grey = 0, on = 1, url, bezel = 14, capW = 900 }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: w, height: h, zIndex: z,
+    background: "#0A0B0F", boxShadow: SH_D, border: `${bezel}px solid #24262E` }}>
+    {/* the address bar — the real URL, because a claim about a site is cheap
+        and the site's own domain on screen is a receipt */}
+    {url && (
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 40,
+        background: "#16181F", display: "flex", alignItems: "center", paddingLeft: 14, gap: 9,
+        borderBottom: "2px solid #2A2D36", zIndex: 4 }}>
+        {["#E0655B", "#E3B341", "#5BB98C"].map(c => (
+          <span key={c} style={{ width: 12, height: 12, borderRadius: "50%", background: c }} />
+        ))}
+        <div style={{ marginLeft: 10, height: 24, flex: 1, marginRight: 14, borderRadius: 12,
+          background: "#0C0E13", display: "flex", alignItems: "center", paddingLeft: 12,
+          ...mono(15, 700), color: "#B9BCC6" }}>{url}</div>
+      </div>
+    )}
+    {/* the clipping viewport */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: url ? 40 : 0, bottom: 0,
+      overflow: "hidden", filter: grey > 0 ? `grayscale(${grey}) brightness(${1 - grey * 0.34})` : undefined,
+      opacity: on }}>
+      <Img src={staticFile("shots/" + src)}
+        style={{ position: "absolute", left: 0, top: -scroll, width: w - bezel * 2,
+          display: "block" }} />
+    </div>
+  </div>
+);
+
+/* =========================================================================
    THE VILLAIN. ⛔ Its RULE: its marquee stays lit and its invoice stays
    legible through every scene. It is never torn and never stamped — at S9 it
    is OUT-SHONE, which is the only way it is allowed to lose.
@@ -630,6 +679,69 @@ export const QuoteBoard: React.FC<{ x: number; y: number; w: number; h: number; 
 };
 
 /* =========================================================================
+   THE AGENCY'S PRESS. A colossal rubber stamp on a piston that comes down out
+   of the top of frame and prices whatever is under it.
+   ⛔ It is the VILLAIN'S instrument, so it never breaks and never gets taken
+   away — it stamps, it lifts, and it is still hanging there at the end of the
+   scene. The agency does not lose until S9, and then only by being out-shone.
+   ====================================================================== */
+export const PressStamp: React.FC<{ x: number; y: number; w: number; h: number;
+  z?: number; press?: number; label?: string }> =
+  ({ x, y, w, h, z = 66, press = 0, label }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: w, height: h, zIndex: z }}>
+    {/* the piston, drawn up out of frame */}
+    <div style={{ position: "absolute", left: w / 2 - 46, top: -900, width: 92, height: 920,
+      background: `linear-gradient(90deg, #6E7280 0%, #3A3E48 100%)` }}>
+      {Array.from({ length: 9 }, (_, i) => (
+        <div key={i} style={{ position: "absolute", left: -12, top: 40 + i * 96, width: 116,
+          height: 16, background: "#2A2D36" }} />
+      ))}
+    </div>
+    {/* the head — ONE contiguous cream mass, which is what HOOK_PLATE measures */}
+    {/* ⛔ A DARKER RIM AND A STEEL COLLAR. Painted in flat house cream the head
+        merged with the `HookHeader` pill sitting directly above it and the two
+        read as one object — which is fine for HOOK_PLATE and wrong for a viewer,
+        who then cannot tell the chrome from the scene. */}
+    <div style={{ position: "absolute", left: -10, right: -10, top: -14, height: 26,
+      background: "#3A3E48", zIndex: 2 }} />
+    <div style={{ position: "absolute", inset: 0, background: CREAMB, boxShadow: SH_D,
+      border: "9px solid #9A8F76" }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: h * 0.30,
+        background: hexa("#B8AC8C", 0.62) }} />
+      {/* ⛔ the label sits BELOW the header pill's footprint (~106px of panel),
+          or the agency's name is clipped in the one frame guaranteed to be seen */}
+      <div style={{ position: "absolute", left: w * 0.05, top: h * 0.40, ...ui(h * 0.17, 900),
+        color: "#3A342A", letterSpacing: 1.5 }}>{label ?? R.agency.name}</div>
+      {/* the embossed rule and the ribs of a real press head */}
+      {[0, 1].map(i => (
+        <div key={i} style={{ position: "absolute", left: w * 0.05, right: w * 0.05,
+          top: h * (0.68 + i * 0.13), height: h * 0.05, background: hexa("#3A342A", 0.16) }} />
+      ))}
+    </div>
+    {/* the rubber face, compressed on the press */}
+    <div style={{ position: "absolute", left: w * 0.03, right: w * 0.03, top: h,
+      height: 34 * (1 - press * 0.55), background: "#A8302A", boxShadow: SH }} />
+  </div>
+);
+
+/** the wet ink a press leaves behind. ⛔ The price is the VO's own word and it
+    belongs to the AGENCY, which is the only thing in this reel allowed to
+    carry money. */
+export const InkPrice: React.FC<{ x: number; y: number; w: number; f: number; at: number;
+  z?: number; text?: string }> = ({ x, y, w, f, at, z = 70, text }) => {
+  const k = E(f, at, at + 5, 0, 1, OUT);
+  if (k <= 0) return null;
+  const sq = 1 + (1 - k) * 0.26;
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: w, zIndex: z, textAlign: "center",
+      ...ui(w * 0.20, 900), color: hexa("#D8443A", 0.94), letterSpacing: -2,
+      transform: `scale(${sq}) rotate(-2.4deg)`, transformOrigin: "50% 50%", opacity: k }}>
+      {text ?? R.agency.price}
+    </div>
+  );
+};
+
+/* =========================================================================
    THE THREE CRATES. Each opens by a DIFFERENT mechanism — the critic pass
    killed three identical lid shots. Blocks / light / volume.
    ====================================================================== */
@@ -662,7 +774,11 @@ export const Crate: React.FC<{ x: number; y: number; w: number; h: number; f: nu
       {open > 0 && (
         <div style={{ position: "absolute", left: -6, right: -6, top: -10, height: h * 0.26,
           background: dkh(lib.c, 0.44), border: `5px solid ${dkh(lib.c, 0.66)}`, zIndex: 4,
-          transformOrigin: "50% 100%", transform: `translateY(${-open * 120}px) rotate(${-open * 26}deg)` }} />
+          /* ⛔ THE LID FLEW STRAIGHT UP AND LANDED ACROSS THE SCREEN BEHIND IT,
+             covering the real page the whole scene exists to show. It now throws
+             sideways and out of frame, which is also what a blown lid does. */
+          transformOrigin: "50% 100%",
+          transform: `translate(${-open * 300}px, ${-open * 96}px) rotate(${-open * 62}deg)` }} />
       )}
     </div>
   );

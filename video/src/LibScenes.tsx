@@ -6,6 +6,7 @@ import {
   R, CLAY, GOLD, GREEN, RED, TEAL, PAPER, CREAMB, CONCRETE, ui, mono,
   Rake, Ring, Puff, Pool, Clad, Slot, Front, Tower, QuoteBoard, Crate,
   FloodHead, ConeLight, PartsRack, BigCursor, Marquee, Crew, RACK_RANKS, RANK_TINT,
+  SiteScreen, PressStamp, InkPrice,
 } from "./LibWorld";
 import type { Seat, PanelKind } from "./LibWorld";
 import { SetFor, placeFor, Pole } from "./LibSets";
@@ -88,94 +89,119 @@ const seatsFor = (nav: number, card: number, price: number): Seat[] => [
 ];
 
 /* =========================================================================
-   S0 — THE QUOTE.  f0-74 (2.47s).  BEAT: HOOK.  Intensity 6.
+   S0 — THE PRESS.  f0-74 (2.47s).  BEAT: HOOK.  Intensity 7.
    VO: "Web developers charge thousands for animated sites."
 
-   ⛔⛔ FRAME 0 IS THE ONLY FRAME GUARANTEED TO BE SEEN, and it does four jobs at
-   once here: it is BRIGHT (the cream board is ~36% of the panel and the street
-   is genuinely lit rather than washed out — `back2` untouched), the SUBJECT is
-   in it (a Claude, bottom-left, on frame 1), it shows something the target
-   viewer DREADS with no setup (an agency quote board), and the one string that
-   matters is mute-readable at thumb distance.
+   ⭐⭐⭐ REBUILT. The first hook was a quote board on chains with a price that
+   flipped up on split-flaps. It passed every gate — frame 0 luma 151, plate
+   21.8%, open motion 10.43 — and Alex still called the concept not interesting
+   enough, which is exactly the §0 warning that a scene passing every gate can
+   still be dead. The gates check that an open is BUILT correctly; nothing in
+   them can see whether the IDEA is any good.
 
-   ⭐⭐ AND THE BOARD IS ONE CONTIGUOUS CREAM MASS ON FRAME 0. Reel 110 lost an
-   18%-by-area card down to 10.6% because a dark header strip SPLIT it, and
-   reel 109 warned `HOOK_PLATE 8.4% = HEADER PILL` because it had three separate
-   6% repo cards instead of one object. The price flaps are CREAM WHEN BLANK for
-   exactly this reason — and that is also how the number gets to MOVE TO ITS
-   VALUE (§4) instead of being typeset at it.
+   ⭐ What was actually wrong: the object on screen was a piece of PAPER about a
+   website, when the thing the viewer wants is the WEBSITE. So the hook now opens
+   on the real thing — Skiper UI's own live page, captured on build day, playing
+   full-width on a shopfront screen — and the agency arrives as a colossal rubber
+   PRESS that comes down out of the sky and stamps a price straight across the
+   glass. On the hit the page DRAINS TO GREY and stops scrolling: you were
+   looking at the thing you want, and now it has a price on it and it is dead.
 
-     before  f0      the board hangs, priced blank, the Claude looking up at it
-     trigger f8      the first flap turns
-     travel  f8-44   seven flaps land one at a time — N DISCRETE POPS, never one
-                     tween (4.27 -> 5.63 measured on exactly this choice)
-     arrival f44-50  the board DROPS on its chains and slams, grit jumps, a ring
-                     and a puff, and the Claude is knocked back a step
+     before  f0      a real animated site scrolling, in colour, and a press head
+                     already hanging in the top of frame
+     trigger f10     the press drops
+     travel  f10-18  240px of travel, fast, the biggest bright mass in the frame
+     arrival f18     SLAM. Frame shake, ring, dust, the rubber face compresses,
+                     the ink lands, the page desaturates and freezes.
+     tail    f44-70  two more presses hit the shopfronts down the street, so the
+                     last third is not the dead hold the first version had
+
+   ⛔ THE VILLAIN STILL DOES NOT LOSE. It stamps, it lifts, and it is still
+      hanging in frame at the cut. Nothing tears it down until S9.
+   ⛔ RECOGNITION, NOT MOTION (THE-OPEN law 3): the dreaded thing is a price on
+      the site you wanted, and Alex's 2026-08-03 ruling says build it as a drawn
+      OBJECT and a staged scene, which the press is. The real capture is the
+      thing being priced, not the interface being explained.
    ====================================================================== */
+/* ⛔⛔ THE CAPTURE'S TOP IS A BLACK NAV BAR, and frame 0 is a brightness
+   competition. Measured across the strip in 420px windows, skiper-ui.com's
+   brightest stretch is its COMPONENT GRID at strip y=720 (mean 149) — real
+   white component cards — where the page top reads near zero. So the hook opens
+   part-scrolled into the grid rather than at the top of the page, which is both
+   brighter AND more interesting: you see the actual components, not a logo.
+   `scroll` is in RENDERED pixels: the strip is 900 wide and draws at 772, so a
+   strip offset of 720 is 720 * (772/900) = 618. */
+const SCR = { x: 76, y: 306, w: 860, h: 420 } as const;
+/* ⛔ AND THE ADDRESS BAR MUST STAY VISIBLE — it is the receipt that this is the
+   real skiper-ui.com and not a drawing of one, so the press head parks ABOVE the
+   screen rather than over its chrome. 420 puts the page's own headline and its
+   real install command in the viewport with the hero behind them. */
+const SCR_START = 640;
+
 export const S0: React.FC<{ v: Variant }> = ({ v }) => {
   const f = useCurrentFrame();
   const HV = HOOK_V[v];
   const p = placeFor("quote");
-  const drop = E(f, HV.slam, HV.slam + 6, 0, HV.drop, OUT);
-  const sh = shake(f, HV.slam, 11, 12);
+  const HIT = HV.slam;
+  /* the page is alive until the press lands, then it is frozen */
+  const scroll = SCR_START + Math.min(f, HIT) * 2.4;
+  const grey = E(f, HIT, HIT + 8, 0, 1, OUT);
+  /* down fast, then back up — and it never leaves the frame */
+  const headY = 46 + E(f, HIT - 8, HIT, 0, 236, OUT) - E(f, HIT + 8, HIT + 24, 0, 268, IO);
+  const press = E(f, HIT, HIT + 3, 0, 1, OUT) * (1 - E(f, HIT + 8, HIT + 16, 0, 1, IO));
+  const sh = shake(f, HIT, 13, 13);
   return (
     <Scene p={p} slug="" push={push(v, 74, 1.035)} vig={0.44}>
       <div style={{ position: "absolute", inset: 0, zIndex: 2,
         transform: `translate(${sh.x}px, ${sh.y}px)` }}>
         <SetFor k="quote" f={f} />
 
-        {/* the dead shopfront this quote is FOR — bare, unlit, no signage */}
-        <Front x={92} y={150} w={560} h={640} f={f} lit={0} z={22} scaffold />
+        {/* the shopfront the screen is set into */}
+        <Front x={44} y={262} w={924} h={532} f={f} lit={0.86 - grey * 0.52} z={22}
+          scaffold={false} />
 
-        {/* ⛔ THE MARK IS AN AUDIENCE FILTER, not branding — cast into the wall
-            so the first second says "this is for you" without costing hierarchy */}
-        <MarkCast x={742} y={210} s={168} z={21} o={0.13} spin={0.4} f={f} />
+        {/* ⭐ THE REAL SITE, LIVE. skiper-ui.com, captured on build day, scrolling
+            through a clipping viewport. It is the brightest, most saturated and
+            most detailed object in the frame, which is what frame 0 needs. */}
+        <SiteScreen x={SCR.x} y={SCR.y} w={SCR.w} h={SCR.h} src="skiper_strip.png"
+          scroll={scroll} grey={grey} z={40} url="skiper-ui.com" />
 
-        {/* the villain's receipt. ⛔ It is NEVER torn and NEVER stamped.
-            ⭐ 700x468 = 41% of the panel, ONE contiguous cream mass. Reel 109
-            warned `HOOK_PLATE 8.4% = HEADER PILL` because it had three separate
-            ~6% cards; one big object carries the plate AND the luma bar at once. */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 60,
-          transform: `translateY(${drop}px)` }}>
-          <QuoteBoard x={252} y={150} w={690} h={462} f={f} lands={HV.lands} rockAt={HV.slam} />
-        </div>
+        {/* the price the press leaves on the glass */}
+        <InkPrice x={SCR.x + 90} y={SCR.y + SCR.h * 0.34} w={SCR.w - 180} f={f} at={HIT + 1} z={52} />
 
-        {/* ⛔ THE SUBJECT IS IN FRAME 0 AND ITS FACE IS NOT COVERED. The board
-            sat over this sprite's head in the first pass, which fails
-            THE-OPEN law 2 in the one frame guaranteed to be seen — the board is
-            now inset to x=252 so the sprite's 30..230 column is clear of it. */}
-        <Pool x={130} y={766} w={210} z={38} />
-        <Crew f={f} x={130} y={770} i={0} size={200} z={40} act={3}
-          shock={E(f, HV.slam, HV.slam + 5, 0, 1, OUT) * (1 - E(f, HV.slam + 26, HV.slam + 44, 0, 0.7, IO))} />
+        {/* THE AGENCY'S PRESS — one contiguous cream mass, in frame from f0 */}
+        <PressStamp x={68} y={headY} w={876} h={250} press={press} z={66} />
 
-        {/* ⭐ THE STREET LAMP'S LIGHT CROSSING THE FRAME — a full-width
-            feathered band, wide and FAST. The measured table's biggest single
-            entry: one scene 10.44 vs its neighbour 2.83 at identical push. */}
-        <Rake f={f} y={0} h={792} x0={-300} span={1500} n={3} c="#FFE9C0" dc="#07060C"
-          speed={9.0} z={70} o={0.26} skew={-13} />
-        <Ring x={506} y={620} f={f} at={HV.slam + 4} c="#FFE9C0" r1={330} life={18} z={64} />
-        <Puff x={330} y={708} f={f} at={HV.slam + 4} c="#C9BFA4" n={11} s={1.3} z={63} />
-        <Puff x={700} y={708} f={f} at={HV.slam + 5} c="#C9BFA4" n={9} s={1.15} z={63} />
+        <Ring x={506} y={SCR.y + SCR.h * 0.46} f={f} at={HIT} c="#FFD9C0" r1={430} life={18} z={62} />
+        <Puff x={220} y={SCR.y + SCR.h * 0.60} f={f} at={HIT} c="#C9BFA4" n={11} s={1.3} z={61} />
+        <Puff x={800} y={SCR.y + SCR.h * 0.60} f={f} at={HIT + 1} c="#C9BFA4" n={10} s={1.2} z={61} />
 
-        {/* ⛔ THE TAIL WAS DEAD. After the slam this scene held for 24 frames on
-            a rocking board (HOLD 62%). The slam now shakes render off the shell:
-            three chunks, spread across the rest of the scene, each landing with
-            its own puff. An arrival inside the first third leaves the rest of a
-            scene dead — and so does an arrival that is the LAST thing to happen. */}
-        {[[128, 54, 62], [372, 60, 78], [232, 66, 54]].map(([cx, at, sz], i) => {
-          const k = E(f, HV.slam + (at - 44), HV.slam + (at - 44) + 18, 0, 1, IN_Q);
+        {/* the one who has to pay it. ⛔ Its face is clear of every overlay —
+            THE-OPEN law 2 in the one frame guaranteed to be seen. */}
+        <Pool x={128} y={768} w={196} z={38} />
+        <Crew f={f} x={128} y={772} i={0} size={188} z={44} act={3}
+          shock={E(f, HIT, HIT + 5, 0, 1, OUT) * (1 - E(f, HIT + 26, HIT + 44, 0, 0.7, IO))} />
+
+        {/* ⛔ THE TAIL WAS THE FIRST VERSION'S WEAKEST STRETCH. Two more presses
+            hit the shopfronts down the street, f48 and f62, so the last third
+            carries arrivals instead of holding on a settled frame — and it says
+            the quiet part: this happens to every site on the road. */}
+        {[[706, 48, 250], [372, 62, 210]].map(([px, at, pw], i) => {
+          const k = E(f, at - 7, at, 0, 1, IN_Q);
           if (k <= 0) return null;
-          const cy = 300 + k * 470;
+          const py = -240 + k * 320;
           return (
-            <React.Fragment key={"rb" + i}>
-              <div style={{ position: "absolute", left: cx, top: cy, width: sz, height: sz * 0.72,
-                zIndex: 55, background: "#6E6A62", transform: `rotate(${k * 190}deg)`,
-                boxShadow: SH_D }} />
-              <Puff x={cx + sz / 2} y={782} f={f} at={HV.slam + (at - 44) + 18} c="#B0A896"
-                n={8} s={0.9} z={56} />
+            <React.Fragment key={"ps" + i}>
+              <PressStamp x={px} y={py} w={pw} h={78} press={E(f, at, at + 3, 0, 1, OUT)}
+                z={58} label="" />
+              <Ring x={px + pw / 2} y={py + 92} f={f} at={at} c="#FFD9C0" r1={180} life={12} z={59} />
+              <Puff x={px + pw / 2} y={py + 92} f={f} at={at} c="#C9BFA4" n={7} s={0.85} z={59} />
             </React.Fragment>
           );
         })}
+
+        <Rake f={f} y={0} h={792} x0={-300} span={1500} n={3} c="#FFE9C0" dc="#07060C"
+          speed={9.0} z={72} o={0.22} skew={-13} />
       </div>
     </Scene>
   );
@@ -429,7 +455,12 @@ export const S3: React.FC<{ v: Variant }> = ({ v }) => {
         {/* the crate interior is the SOURCE — light spills UP onto the fitters */}
         <ConeLight x={506} y={352} len={-340} spread={520} c={R.libs[0].accent}
           o={0.30 * open} z={44} ang={180} />
-        <Crate x={276} y={330} w={460} h={352} f={f} i={0} open={open} z={46} />
+        {/* ⭐ THE CRATE OPENS ONTO THE REAL SITE. "First, Skiper UI" is a name,
+            and a name with no product behind it is a container (§3) — so what
+            comes up out of the case is skiper-ui.com itself, captured live. */}
+        <SiteScreen x={196} y={196 + (1 - open) * 300} w={620} h={330} src="skiper_top.png"
+          scroll={0} z={44} on={open} url="skiper-ui.com" />
+        <Crate x={276} y={442} w={460} h={280} f={f} i={0} open={open} z={46} />
         <Ring x={506} y={340} f={f} at={4} c={R.libs[0].accent} r1={330} life={16} z={52} />
         <Puff x={506} y={352} f={f} at={4} c="#E4C79A" n={12} s={1.4} z={51} />
 
@@ -505,6 +536,17 @@ export const S4: React.FC<{ v: Variant }> = ({ v }) => {
         <Cam x={cam.x} y={cam.y} s={cam.s} z={26}>
           <Front x={FB.x} y={FB.y} w={FB.w} h={FB.h} f={f} lit={lit} z={26}
             slots={SLOT_BOXES} slotOn={1} seats={seatsFor(78, 26, 52)} scaffold />
+          {/* ⭐⭐ THE REAL COMPONENT GRID, SCROLLING, set into the frontage. The VO
+              names cards, pricing, layouts and blocks; skiper-ui.com's own page
+              shows those exact components, so the receipt and the depiction are
+              the same object. Real UI is the biggest motion lever in the repo
+              (median 6.36 -> 8.00 on reel 107) and it is also the PROOF. */}
+          {/* ⛔ 430 lands the viewport on the page's real COMPONENT GRID — the
+              white cards — instead of the dark band above it. Same measurement
+              as the hook: the strip renders at 552 here, so strip y 720 is
+              720 * (552/900) = 441. */}
+          <SiteScreen x={FB.x + 30} y={FB.y + 72} w={580} h={430} src="skiper_strip.png"
+            scroll={470 + f * 3.0} z={33} url="skiper-ui.com" />
 
           {/* the three named panels FLYING IN on the crane, before they seat */}
           {([
@@ -624,7 +666,9 @@ export const S5: React.FC<{ v: Variant }> = ({ v }) => {
             width: 3, height: 26, zIndex: 41,
             background: hexa(R.libs[1].accent, 0.34 * iris), transform: "rotate(7deg)" }} />
         ))}
-        <Crate x={306} y={392} w={400} h={306} f={f} i={1} open={0} z={46} />
+        <SiteScreen x={214} y={210 + (1 - iris) * 240} w={584} h={300} src="veng_top.png"
+          scroll={0} z={43} on={iris} url="vengenceui.com" />
+        <Crate x={306} y={470} w={400} h={244} f={f} i={1} open={0} z={46} />
         {/* the iris itself, opening on the lid */}
         <div style={{ position: "absolute", left: 506 - 96 * iris, top: 392 - 10,
           width: 192 * iris, height: 40 * iris, borderRadius: "50%", zIndex: 47,
@@ -689,6 +733,9 @@ export const S6: React.FC<{ v: Variant }> = ({ v }) => {
               combination that registers, so it is now 560x560. */}
           <Front x={38} y={172} w={560} h={560} f={f} lit={E(f, 10, 60, 0.34, 1, LIN)} z={28}
             seats={seatsFor(-99, -99, -99)} scaffold={false} />
+          {/* the real vengenceui.com, scrolling through its own cinematic blocks */}
+          <SiteScreen x={72} y={214} w={492} h={392} src="veng_strip.png"
+            scroll={120 + f * 4.2} z={33} url="vengenceui.com" />
         </Cam>
 
         {/* ⭐⭐ §10 — A BEAM WITH NO FINDINGS IS A PROGRESS BAR. v5 switched eight
@@ -712,7 +759,7 @@ export const S6: React.FC<{ v: Variant }> = ({ v }) => {
                also what gives the boundary its luma delta. */
             <div key={"lb" + i} style={{ position: "absolute", left: 38, top: by, width: 560,
               height: 70, zIndex: 46, transform: `scaleX(${k})`, transformOrigin: "0% 50%",
-              background: `linear-gradient(180deg, ${hexa(R.libs[1].accent, 0.72 * k * settle)} 0%, ${hexa(R.libs[1].accent, 0.16 * k * settle)} 46%, ${hexa("#060A12", 0.34 * k * settle)} 100%)` }} />
+              background: `linear-gradient(180deg, ${hexa(R.libs[1].accent, 0.46 * k * settle)} 0%, ${hexa(R.libs[1].accent, 0.10 * k * settle)} 46%, ${hexa("#060A12", 0.30 * k * settle)} 100%)` }} />
           );
         })}
 
@@ -800,7 +847,9 @@ export const S7: React.FC<{ v: Variant }> = ({ v }) => {
             </div>
           );
         })}
-        <Crate x={306} y={410} w={400} h={300} f={f} i={2} open={hinge * 0.6} z={46} />
+        <SiteScreen x={214} y={186 + (1 - hinge) * 250} w={584} h={296} src="anim_top.png"
+          scroll={0} z={43} on={hinge} url="animmasterlib.dev" />
+        <Crate x={306} y={452} w={400} h={258} f={f} i={2} open={hinge * 0.6} z={46} />
         <Ring x={506} y={424} f={f} at={3} c={R.libs[2].accent} r1={320} life={16} z={52} />
         <Pool x={180} y={742} w={116} z={48} />
         <Crew f={f} x={180} y={746} i={4} size={126} z={50} act={3} />
@@ -856,20 +905,33 @@ export const S8: React.FC<{ v: Variant }> = ({ v }) => {
 
         {/* ---- clause 2 · "scroll effects, hero blocks" ----
             the front SCROLLS: a full-panel travelling move, and the literal noun */}
-        <Cam x={cam.x} y={cam.y} s={cam.s} z={36}>
-          <Front x={636} y={-150} w={392} h={1120} f={f} lit={0.92} z={36} scroll={scroll}
-            scaffold={false}
-            seats={[
-              { x: 34, y: 250, w: 320, h: 74,  kind: "nav",   c: R.libs[2].c, at: -99 },
-              { x: 34, y: 344, w: 320, h: 150, kind: "card",  c: R.libs[2].c, at: -99 },
-              { x: 34, y: 514, w: 320, h: 140, kind: "price", c: R.libs[2].c, at: -99 },
-              { x: 34, y: 674, w: 320, h: 120, kind: "block", c: R.libs[2].c, at: -99 },
-              { x: 34, y: 814, w: 320, h: 118, kind: "media", c: R.libs[2].c, at: -99 },
-              /* THE HERO BLOCK — twice the size of anything else, and it SLAMS
-                 into the top as the slide stops */
-              { x: 34, y: 40, w: 320, h: 190, kind: "hero", c: R.libs[2].c, at: C1 + 40 },
-            ]} />
-        </Cam>
+        {/* ⭐⭐⭐ THE REAL GALLERY. The VO says "over 250 pre built components
+            covering scroll effects, hero blocks and mouse driven interactions",
+            and animmasterlib.dev's own page is a grid of exactly those, each
+            labelled with its category. Scrolling the real page IS the line.
+            ⛔ The site's hero says 300 and the VO says over 250: the VO
+            UNDERSTATES it, which is the safe direction, so the capture and the
+            drawn chip do not contradict each other. */}
+        <SiteScreen x={556} y={64} w={444} h={628} src="anim_strip.png"
+          scroll={seg === 0 ? 500 + f * 4.4 : 760 + f * 7.0} z={35} url="animmasterlib.dev" />
+
+        {/* ⛔ THE DRAWN FRONT USED TO CARRY THIS BEAT AND IT NOW DOUBLE-DRAWS.
+            The real page scrolling past a locked camera IS "scroll effects", so
+            the hand-drawn stack came out and only the HERO BLOCK stayed — one
+            panel twice the size of anything else, slamming into the top of the
+            page as the slide stops, which is the noun the VO actually says. */}
+        {seg >= 1 && (() => {
+          const k = E(f, C1 + 34, C1 + 42, 0, 1, BACK);
+          if (k <= 0) return null;
+          const sq = squash(f, C1 + 42, 0.22, 3, 12);
+          return (
+            <div style={{ position: "absolute", left: 0, top: 0, zIndex: 46,
+              transform: `scale(${2 - sq}, ${sq})`, transformOrigin: "804px 250px" }}>
+              <Clad x={628} y={104 + (1 - k) * -300} w={352} h={190} kind="hero"
+                c={R.libs[2].c} lit={1} z={46} fill={E(f, C1 + 44, C1 + 70, 0, 1, LIN)} />
+            </div>
+          );
+        })()}
 
         {/* ---- clause 3 · "mouse driven interactions to copy and paste" ----
             ⭐ THE POINT IS NOT THE POINTER. Every panel the cursor passes

@@ -32,7 +32,9 @@ the diagnosis right is most of the work — see [`MEASURING.md`](MEASURING.md) a
 | *"they just stand there, they dont do movements"* | sprites are running an IDLE, not an ACTION | §5 |
 | *"too many / too annoying"* or *"only 20% as good"* | density is flat instead of PEAKED | §9 |
 | *"I can't really tell what that is"* | the scene MEASURES fine and DEPICTS nothing | §10 |
-| *"it's still not clear it's a \<thing\>"* | the prop's PROPORTIONS are wrong, usually because a gate is riding on it | §10 |
+| *"it's still not clear it's a \<thing\>"* | the prop's PROPORTIONS are wrong, usually because a gate is riding on it | §10 · §11 |
+| *"I can't tell it's \<doing the action\>"* | the movement is a STATE CHANGE, not a distance | §11 |
+| *"it doesn't feel heavy / doesn't feel like effort"* | nothing DEFORMS under the load, and the still part of the hero has no emitter | §11 |
 
 ⛔ **The complaint that sounds like the first row but is not:** *"only 20% as good, needs more stuff
 going on"* and *"there's too much"* are the SAME defect seen from two sides — flat density. Adding
@@ -713,3 +715,114 @@ shaft: 70% of panel width with air on both sides, dark against a light field.
 - **Cheap motion is worth trading away.** Removing an unmotivated explosion cost
   the hook 17.12 → 14.35 and was correct: the shatter was motion for a beat that
   did not mean anything. A number going down is not automatically a regression.
+
+---
+
+## 11. MAKING AN ACTION READ — weight, effort, travel, category
+
+§2 says a scene needs an EVENT and gives its four parts. This section is the next
+question down: **the event is authored and the viewer still cannot tell what is
+happening.** Every rule below is from reel 110's hook, which was rebuilt three
+times before a Claude lifting a barbell read as a Claude lifting a barbell.
+
+### ⭐⭐⭐ An ACTION is a DISTANCE. A state change is not an action.
+
+The first lift started at **0.86 of lockout** and drove the last **0.14**. Every
+part of §2's event was present — a before state, a trigger, travel, an arrival —
+and it read as a man *standing under* a barbell, because 14% of a press is not a
+distance the eye can resolve at 30fps on a phone.
+
+Restarting at **0.55** and covering the remaining 45% in six frames made the same
+event legible with no other change.
+
+> **Ask of every action: how far does the thing actually MOVE, as a fraction of
+> its own size?** Under about a third and you have a state change, not an action.
+> The fix is almost never more frames — it is a bigger start-to-end gap.
+
+### ⭐⭐ WEIGHT is communicated by DEFORMATION, not by size or colour
+
+A big dark object is not a heavy one. What says *heavy* is the thing carrying it
+being visibly stressed:
+
+| the cue | what it does |
+|---|---|
+| **bar whip** | a loaded bar never sits straight. It bends, and it oscillates on its own slow clock |
+| **plates wobbling** on their sleeves | loose iron under load |
+| a **tremble** on the body, amplitude scaled by strain | effort, before the movement starts |
+| the platform **dust** on the drive | the floor takes the load too |
+
+v1's shaft was a rigid stick and the lift read as someone holding a prop. Nothing
+about the plates changed; the bar bending did the work.
+
+### ⭐⭐ EFFORT wants a secondary emitter, on the STILLEST part
+
+Alex asked for **steam out of the ears**, and it is a better note than it sounds:
+
+- it says EFFORT with **no narration**, which is the only kind of information a
+  muted feed can carry;
+- it reads at **thumbnail size**, where a facial expression does not;
+- and it gives the **head** — the stillest part of a pressing sprite, because the
+  arms and torso are doing the acting — something continuously moving.
+
+> **Generalise it: find the part of your hero that is NOT moving during its own
+> action, and give that part a continuous emitter.** Steam, sweat, sparks, smoke,
+> paper, dust. It costs the hierarchy nothing and it is the difference between a
+> pose and an exertion.
+
+### ⭐⭐ CATEGORY is communicated by STRUCTURE, not hue
+
+*"Make it more weight coloured"* sounded like a palette note and was not. A cream
+circle reads as a **disc**. What makes something read as a **weight plate** is
+four structural features, and adding them fixed it while the face stayed bone:
+
+**a thick dark cast rim · six grip holes · a machined hub · a stamped face**
+
+> **Before repainting an object to make it read, list the four or five features a
+> viewer actually uses to identify that category, and check you have drawn them.**
+> Hue is usually the least of them, and it is often the one you cannot change
+> because a gate is riding on it.
+
+⭐ The stamp is also where reel 110 put its receipts — `★68,132` on one plate and
+`MIT` on the other, in the place a weight number goes. **A structural feature you
+have to draw anyway is free real estate for a real number.**
+
+### ⛔ READ THE RIG BEFORE YOU DRAW GEOMETRY
+
+Two rounds were spent making a sprite hold something overhead, and
+`SlopKit.Mascot` **already draws its own arms** — two 26x26 clay rects whose
+`cheer` prop both raises and rotates them (`armY = 86 - cheer*26`). The first
+attempt hung a hand-drawn arm off the body edge and it read as a **TAIL** on
+every sprite in the reel.
+
+> **Open the component before adding geometry to it.** The only geometry that
+> survived is two forearms that START on the mascot's own arm rects and END on
+> the bar — they connect two things that are both on screen, which is why they
+> cannot be misread. A limb that terminates in mid-air is the banned shape.
+
+### ⛔ An EMPTY container must still read, and a SET element must differ from its room
+
+Two instances of the same defect in one reel:
+
+1. The DONE crate at the end of the brigade was painted warm oak and dropped into
+   an amber room — **a patch of wall.** It only became a container once it was
+   slate-green: different from its room in **hue AND value**, with bright contents
+   inside it.
+2. The router's two lane beds were painted `dark(colour, 0.58)` on a dark floor,
+   and the sort the whole scene existed to show was invisible.
+
+> **Every object that holds, carries or receives something must differ from its
+> background in BOTH hue and value — and it must read while it is still EMPTY,**
+> because empty is the promise. (Reel 108 learned this as "an empty bay is a
+> bright cream plate, not a black hole"; it recurs in every room.)
+
+### The arithmetic ones, together
+
+- **Crowds:** `pitch = usableWidth / (n + 1)` per rank against
+  `spacing >= 0.85 x size`, **plus a VALUE ramp** — back ranks in progressively
+  darker paint. Size alone is a texture; value is what makes depth readable, and
+  it is the axis the greyscale audit can see.
+- **Arrivals span the FULL duration.** Reel 110's hook puts its four joiners at
+  f16/26/36/46 of 55. Bunched arrivals leave the tail dead.
+- **Growth has a frame budget.** The bar lengthened 58px per joiner because at 90
+  it outgrew the panel by the fourth and the plates left frame — **a bar with no
+  ends is a pole.**
