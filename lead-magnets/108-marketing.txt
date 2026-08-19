@@ -1,0 +1,36 @@
+TITLE   The Seven-Skill Marketing Stack
+SUB     Every job a retainer covers, mapped to a free Claude skill, in the order you should install them
+
+H       Why the order matters more than the list
+P       All seven of these are free and public right now. That is not the interesting part. The interesting part is that they do not compose in an arbitrary order: three of them change what you produce, two change how you decide, and two go out and act. Install the acting ones first and you get an agent running outbound against a brand system that does not exist yet.
+P       So this is the list in dependency order, which is also the order they appear in the video.
+
+RULE
+
+H       Stage one: what you produce
+NUM     head-of-content, by Brad Bonanno (bradautomates/head-of-content). Scrapes and scores high-performing content across X, Instagram, YouTube and TikTok, identifies statistical outliers, extracts the replicable hooks and patterns, and generates a content plan with cross-platform opportunity scoring. Wires up Apify for scraping, TubeLab for YouTube outlier detection and Gemini for video analysis.
+NUM     ai-seo, in coreyhaines31/marketingskills (44,618 stars, 48 skills). Rewrites pages so AI answer engines will surface them. Worth separating in your head from classic search SEO. The retrieval behaviour is different and so is the fix.
+NUM     brand-guidelines. Applies a full brand system (colour, typography, tone of voice) to whatever you generate. The version worth forking encodes ROLES ("accent", "background") rather than raw hex values, which is what lets it apply to artifact types you did not anticipate.
+
+H       Stage two: how you decide
+NUM     The Anthropic marketing plugin (anthropics/knowledge-work-plugins, 23,537 stars). Install with: claude plugins add knowledge-work-plugins/marketing
+NUM     It ships SEVEN slash commands: draft-content, campaign-plan, brand-review, competitive-brief, performance-report, seo-audit and email-sequence. It also carries five skills and connects to ten tools over MCP, including HubSpot, Slack, Canva, Figma, Klaviyo, Ahrefs, Amplitude, Notion, Similarweb and Supermetrics.
+NUM     marketing-council, in the same repo as ai-seo. A simulated board of legendary marketers: Godin, Ogilvy, Schwartz, Dunford, Sutherland, Hormozi, Sharp and others. Each gives their take through their own documented framework, the skill surfaces where they disagree, then synthesises. It is persona simulation grounded in what those people actually published, not an oracle.
+
+H       Stage three: what goes out the door
+NUM     Lessie (lessie.ai). Finds creators and B2B leads across 100+ live sources, audits follower authenticity, and enriches contacts with verified emails before you reach out. Ask it in plain language (a niche, a follower band, an audience geography) and it returns a scored list.
+NUM     campaign-launcher-oss, by Improvado, in tekliner/improvado-agentic-frameworks-and-skills. Orchestrates full marketing experiments across Google Ads, Meta and Lemlist from a single ICP prompt. The OSS build is bring-your-own-API-keys and runs standalone.
+
+RULE
+
+H       The honest notes
+B       The video says the plugin gives you "six commands". It gives you seven. The README's own table lists all seven and they are named above.
+B       "10 out of 10" in the hook is a rating, not a count. There are seven skills.
+B       Star counts were read from the GitHub API on 17 August 2026 and they move.
+B       "Free" means the skill is free. Lessie's data, the Ahrefs and Klaviyo connections and the ad platforms all need their own accounts or API keys to do the useful half.
+B       The council simulates personas. It is not the real marketers and it should not be quoted as them.
+
+H       If you install only two
+P       Take brand-guidelines and marketing-council. The first makes everything else you generate consistent, and the second is the only one on the list that argues back ,  which turns out to be the thing most solo marketing stacks are missing, not more output.
+
+KEY     MARKETING

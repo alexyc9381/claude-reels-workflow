@@ -1,0 +1,67 @@
+TITLE   Rightsize Your Claude Setup
+SUB     Why the CLAUDE.md and skills you wrote last year are now slowing Claude down, and the one prompt that audits them for you
+
+H       What this actually is
+P       Anthropic removed over 80 percent of Claude Code's system prompt for the Claude 5 generation and measured no loss on their coding evaluations. Their explanation was blunt: they had been over-constraining Claude Code, through the system prompt and through their own CLAUDE.md files and skills. When they read back real transcripts they found single requests carrying instructions that contradicted each other, one telling Claude to leave documentation as appropriate and another telling it not to add comments.
+P       Your setup has the same problem for the same reason. Every rule you wrote was written for a model that needed it. Most of them were written for models that are two generations old. On Opus 5 they are not guardrails any more, they are noise the model has to read, weigh and resolve before it does anything.
+P       This guide is what actually changed, how to tell which of your rules still earn their place, and a prompt you can paste into Claude that does the audit for you.
+B       Verified: Anthropic cut over 80 percent of Claude Code's system prompt, announced 24 July 2026
+B       Their word for the old approach: over-constraining
+B       The fix is not deleting everything. It is keeping the small number of rules that still bind.
+
+RULE
+
+H       The three symptoms, and why they all come from the same place
+P       People describe this differently but it is one failure with three faces. Every one of them is the model spending its attention on your instructions instead of your problem.
+NUM     Answers take longer. Before Claude writes anything it has to read your CLAUDE.md, load the skills that matched, and work out which instruction wins where two of them overlap. That resolution is real work and you pay for it on every single turn.
+NUM     Simple rules get ignored. This one feels like the model getting worse and it is the opposite. When twenty instructions are in context and three of them conflict, following any one of them means breaking another. A rule that is always in tension with a neighbour is a rule the model learns to discount.
+NUM     Hallucinations you were not seeing before. Long, prescriptive instruction blocks push the model toward satisfying the instructions rather than checking the world. Anthropic's own framing is that newer models have better judgment and can handle these decisions without explicit guardrails, and that older models needed the constraints to avoid producing the wrong thing.
+
+RULE
+
+H       What Anthropic actually changed
+P       Six shifts, published by Thariq Shihipar on the Claude blog. They are useful to you because they are a description of what a Claude 5 generation model no longer needs to be told.
+NUM     Rules become judgment. Explicit constraints like "default to writing no comments" were replaced by higher-level guidance and the model was left to decide.
+NUM     Examples become interface design. Instead of showing the model how to use a tool, make the tool's interface obvious.
+NUM     Everything upfront becomes progressive disclosure. Verification and review instructions load when they are needed, as skills, rather than sitting in context on every turn.
+NUM     Repetition becomes tool descriptions. Guidance that was repeated in three places moved into the description of the tool it was about, once.
+NUM     Manual memory becomes auto-memory. Saving context by hand with the hash key was replaced by memory the model maintains itself.
+NUM     Simple specs become rich references. Plain markdown descriptions were replaced by things with more signal in them: real code, test suites, rubrics, working artifacts.
+P       The pattern under all six is the same. Stop describing what you want in prose and start curating what the model sees.
+
+RULE
+
+H       The prompt
+P       Open Claude in the project whose setup you want audited and paste the block below. It reads what you actually have, judges each item against how you actually work, and proposes a plan before it changes anything. It is deliberately conservative: it keeps anything it cannot justify cutting.
+P       Paste this:
+QUOTE   Audit my Claude setup and tell me what to cut. Read my CLAUDE.md files (project and user level), every skill I have installed, and my memory files. For each individual rule, skill and memory entry, tell me which of these four it is: STILL BINDING, meaning a current model would get this wrong without it, and you can point to what would go wrong. REDUNDANT, meaning it repeats something in another file, a tool description, or the model's default behaviour. CONFLICTING, meaning it contradicts another instruction I have, and name the other one. STALE, meaning it describes a tool, path, workflow or model that no longer exists. Then show me a table of everything you would cut and everything you would keep, with a one-line reason each, and the total lines removed. Do not change any files until I say go. When I do, keep anything you marked STILL BINDING verbatim, delete the rest, and show me the diff.
+P       The reason this works is the same reason Anthropic's own cleanup worked. You are not asking the model to write better rules. You are asking it to find the rules that are no longer doing anything, which is a reading task, and models are good at reading tasks.
+
+RULE
+
+H       How to judge a rule yourself
+P       If you would rather do it by hand, this is the test that separates the two piles, and it is the one the prompt above encodes.
+QUOTE   A rule earns its place only if you can name the specific wrong thing a current model would do without it. If the honest answer is "it probably would not do that anyway", the rule is decoration and it is costing you tokens and attention on every turn.
+P       Two more that catch most of the rest. If a rule is already true of the tool's own description, it belongs in the tool, not your file. If two rules have ever both applied to the same request and pulled in different directions, one of them has to go, and it does not matter which as long as you pick.
+
+RULE
+
+H       Where people get this wrong
+NUM     Deleting the whole file. This is the mistake the fix is most often confused with. Some of your rules are load-bearing, usually the ones about your own repository's conventions that no model could infer. Cutting those makes things worse, and then people conclude the whole idea was wrong.
+NUM     Rewriting instead of removing. Making a bad rule shorter does not help. The cost is that it is in context at all, being weighed against its neighbours.
+NUM     Auditing once. Setups grow. Every time you catch yourself adding a rule because the model did something you did not like once, that is a rule that will still be there in six months and probably should not be.
+NUM     Assuming skills are free. A skill that never fires costs nothing, but a skill whose description is broad enough to fire on the wrong turns costs you the same as a bad rule, and it is harder to notice.
+
+RULE
+
+H       There is also an official version of this
+P       Anthropic shipped their own conclusions as a command. Running the doctor command in Claude Code rightsizes skills and CLAUDE.md files against the same principles. It is worth running alongside the prompt above, because it knows things about the current model that a guide written today will not know in three months.
+P       Use both. The command applies the vendor's defaults; the prompt above judges your rules against your project, which is the half the vendor cannot see.
+
+RULE
+
+H       What to do this week
+P       Run the audit prompt on your largest CLAUDE.md, the one you have been adding to for months. Read the CONFLICTING pile first, because those are the ones actively making the model worse rather than merely costing you tokens. Cut those today. Leave the rest for a week and see whether you miss anything.
+P       Then set a reminder for six months. Whatever you write between now and then will have been written for the model you are using today, and the next one will not need most of it either.
+
+KEY     Comment SMART on the reel and I will send you this guide.

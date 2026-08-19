@@ -1,0 +1,11 @@
+The new Claude models are the smartest models ever, but there's one setting that's making them dumber.
+And you've definitely noticed it. Answers taking longer, simple rules getting ignored, and the hallucinations you weren't seeing before.
+But here's what surprised me, it's not an issue with the model, you actually just need to fix your setup.
+Every line in your CLAUDE.md file and every skill you built were for models that needed the extra support.
+Now with Claude Opus 5, it's just extra clutter and burns more tokens for it to decide what to do.
+That's why Anthropic's team deleted over 80% of their system prompts, calling them over-constraining because they realized that their own rules were fighting against each other.
+Now don't just go deleting everything, let me show you how I did it.
+You just need to open Claude and paste in this one prompt.
+Now Claude will run an audit and clean up any rules, skills, and memory that doesn't make sense to keep.
+I actually ran this on my setup and Claude is running so much faster with no hallucinations.
+Comment SMART for the free guide.

@@ -1,0 +1,13 @@
+{
+  "reel": "108-marketing",
+  "fps": 30,
+  "total": 1434,
+  "L": {
+    "S0": 0, "S1": 169, "S2": 322, "S3": 541, "S4": 669,
+    "S5": 830, "S6": 994, "S7": 1191, "S8": 1338
+  },
+  "names": {
+    "S0": "HOOK", "S1": "CONTENT", "S2": "SEO", "S3": "BRAND", "S4": "PLUGIN",
+    "S5": "COUNCIL", "S6": "LESSIE", "S7": "LAUNCH", "S8": "CTA"
+  }
+}

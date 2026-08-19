@@ -1,0 +1,33 @@
+Comment "MARKETING" and I'll send you all seven.
+
+👇 READ BELOW
+
+A marketing retainer buys you a team. Seven Claude skills do the same seven jobs, and every one of them is free.
+
+★ head-of-content → bradautomates/head-of-content. Scrapes and scores high-performing content across X, Instagram, YouTube and TikTok, finds the statistical outliers, and turns the patterns it extracts into your next content plan.
+★ ai-seo → coreyhaines31/marketingskills, 44,580 stars. Rewrites your pages so AI engines like ChatGPT and Claude can actually surface them, which is a different job from ranking on Google.
+★ brand-guidelines → applies a whole brand system to your output: colour, typography and tone of voice. Fork it, swap the palette and the fonts, done.
+★ the Anthropic marketing plugin → anthropics/knowledge-work-plugins, 23,529 stars. One install, and it is wired into HubSpot, Slack, Canva and Klaviyo through MCP.
+★ marketing-council → same repo as ai-seo. Simulates a board of legendary marketers arguing your strategy out, surfaces where they disagree, then synthesises a recommendation.
+★ Lessie → lessie.ai. Finds creators and B2B leads across 100+ live sources, audits follower authenticity, and verifies each email before you send anything.
+★ campaign-launcher-oss → Improvado, in tekliner/improvado-agentic-frameworks-and-skills. Plans and launches a multi-channel campaign across Google Ads, Meta and Lemlist from a single ICP prompt.
+
+The order in the video is the order they get more powerful, and that ordering is the actual advice. The first three change what you produce. The middle two change how you decide. The last two go and do the outbound. Installing the seventh first is how people end up with an agent launching campaigns against a brand system that does not exist yet.
+
+The one that surprises people is the council. It is persona simulation, not the real marketers, and it works because it makes you argue with your own plan before you spend money on it, not because it summons Ogilvy.
+
+Three honest notes, because the video moves fast.
+
+The plugin gives you SEVEN slash commands, not six. I say six in the voiceover and the README's own table lists seven: draft-content, campaign-plan, brand-review, competitive-brief, performance-report, seo-audit and email-sequence. Miscount is mine. It also connects to ten tools, not the four I name, and the four I name are the four I actually use.
+
+"10 out of 10" in the hook is a rating, not a count. There are seven skills in the video.
+
+Star counts came from the GitHub API on the day this was made, and they move. Everything here is free and public right now, but Lessie and the plugin integrations need their own API keys or accounts to do the useful half, so "free" means the skill is free, not that every service behind it is.
+
+Comment "MARKETING" and I'll DM you all seven links, the install commands, and the order I'd actually set them up in.
+
+.
+.
+.
+
+#ai #claude #claudeai #anthropic #aitools #claudecode #aiagents #marketing #marketingstrategy #digitalmarketing #contentmarketing #seo #aiseo #b2bmarketing #leadgeneration #brandstrategy #marketingtips #opensource #github #productivity #automation #growthmarketing

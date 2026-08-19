@@ -1,0 +1,662 @@
+[
+ {
+  "word": " Meet",
+  "start": 2.14,
+  "end": 2.58
+ },
+ {
+  "word": " the",
+  "start": 2.58,
+  "end": 2.7
+ },
+ {
+  "word": " most",
+  "start": 2.7,
+  "end": 2.8
+ },
+ {
+  "word": " powerful",
+  "start": 2.8,
+  "end": 3.34
+ },
+ {
+  "word": " claw",
+  "start": 3.34,
+  "end": 3.74
+ },
+ {
+  "word": " tool",
+  "start": 3.74,
+  "end": 3.96
+ },
+ {
+  "word": " on",
+  "start": 3.96,
+  "end": 4.14
+ },
+ {
+  "word": " the",
+  "start": 4.14,
+  "end": 4.22
+ },
+ {
+  "word": " planet,",
+  "start": 4.22,
+  "end": 4.5
+ },
+ {
+  "word": " 60",
+  "start": 4.84,
+  "end": 4.98
+ },
+ {
+  "word": " agents",
+  "start": 4.98,
+  "end": 5.32
+ },
+ {
+  "word": " working",
+  "start": 5.32,
+  "end": 5.58
+ },
+ {
+  "word": " together",
+  "start": 5.58,
+  "end": 5.88
+ },
+ {
+  "word": " simultaneously",
+  "start": 5.88,
+  "end": 6.32
+ },
+ {
+  "word": " with",
+  "start": 6.32,
+  "end": 6.86
+ },
+ {
+  "word": " each",
+  "start": 6.86,
+  "end": 7.1
+ },
+ {
+  "word": " one",
+  "start": 7.1,
+  "end": 7.22
+ },
+ {
+  "word": " getting",
+  "start": 7.22,
+  "end": 7.36
+ },
+ {
+  "word": " smarter",
+  "start": 7.36,
+  "end": 7.7
+ },
+ {
+  "word": " every",
+  "start": 7.7,
+  "end": 8.08
+ },
+ {
+  "word": " single",
+  "start": 8.08,
+  "end": 8.44
+ },
+ {
+  "word": " run.",
+  "start": 8.44,
+  "end": 8.66
+ },
+ {
+  "word": " It's",
+  "start": 9.02,
+  "end": 9.04
+ },
+ {
+  "word": " called",
+  "start": 9.04,
+  "end": 9.2
+ },
+ {
+  "word": " Ruflow,",
+  "start": 9.2,
+  "end": 9.62
+ },
+ {
+  "word": " and",
+  "start": 9.76,
+  "end": 9.78
+ },
+ {
+  "word": " this",
+  "start": 9.78,
+  "end": 9.88
+ },
+ {
+  "word": " thing",
+  "start": 9.88,
+  "end": 10.08
+ },
+ {
+  "word": " is",
+  "start": 10.08,
+  "end": 10.18
+ },
+ {
+  "word": " crazy.",
+  "start": 10.18,
+  "end": 10.5
+ },
+ {
+  "word": " One",
+  "start": 11.6,
+  "end": 11.62
+ },
+ {
+  "word": " agent",
+  "start": 11.62,
+  "end": 11.82
+ },
+ {
+  "word": " handles",
+  "start": 11.82,
+  "end": 12.16
+ },
+ {
+  "word": " planning",
+  "start": 12.16,
+  "end": 12.42
+ },
+ {
+  "word": " while",
+  "start": 12.42,
+  "end": 12.68
+ },
+ {
+  "word": " another",
+  "start": 12.68,
+  "end": 12.9
+ },
+ {
+  "word": " writes",
+  "start": 12.9,
+  "end": 13.1
+ },
+ {
+  "word": " the",
+  "start": 13.1,
+  "end": 13.26
+ },
+ {
+  "word": " code,",
+  "start": 13.26,
+  "end": 13.46
+ },
+ {
+  "word": " another",
+  "start": 13.62,
+  "end": 13.7
+ },
+ {
+  "word": " writes...",
+  "start": 13.7,
+  "end": 14.64
+ },
+ {
+  "word": " cut",
+  "start": 14.64,
+  "end": 14.66
+ },
+ {
+  "word": " cut.",
+  "start": 14.66,
+  "end": 14.8
+ },
+ {
+  "word": " One",
+  "start": 15.44,
+  "end": 15.58
+ },
+ {
+  "word": " agent",
+  "start": 15.58,
+  "end": 15.76
+ },
+ {
+  "word": " handles",
+  "start": 15.76,
+  "end": 16.2
+ },
+ {
+  "word": " planning,",
+  "start": 16.2,
+  "end": 16.46
+ },
+ {
+  "word": " another",
+  "start": 16.68,
+  "end": 16.76
+ },
+ {
+  "word": " writes",
+  "start": 16.76,
+  "end": 17.02
+ },
+ {
+  "word": " the",
+  "start": 17.02,
+  "end": 17.18
+ },
+ {
+  "word": " code,",
+  "start": 17.18,
+  "end": 17.4
+ },
+ {
+  "word": " another",
+  "start": 17.54,
+  "end": 17.6
+ },
+ {
+  "word": " runs",
+  "start": 17.6,
+  "end": 17.9
+ },
+ {
+  "word": " tests,",
+  "start": 17.9,
+  "end": 18.2
+ },
+ {
+  "word": " then",
+  "start": 18.62,
+  "end": 18.62
+ },
+ {
+  "word": " another",
+  "start": 18.62,
+  "end": 18.82
+ },
+ {
+  "word": " checks",
+  "start": 18.82,
+  "end": 19.02
+ },
+ {
+  "word": " security.",
+  "start": 19.02,
+  "end": 19.44
+ },
+ {
+  "word": " They",
+  "start": 19.94,
+  "end": 19.96
+ },
+ {
+  "word": " all",
+  "start": 19.96,
+  "end": 20.16
+ },
+ {
+  "word": " run",
+  "start": 20.16,
+  "end": 20.32
+ },
+ {
+  "word": " in",
+  "start": 20.32,
+  "end": 20.42
+ },
+ {
+  "word": " parallel,",
+  "start": 20.42,
+  "end": 20.68
+ },
+ {
+  "word": " sharing",
+  "start": 20.86,
+  "end": 21.06
+ },
+ {
+  "word": " memory,",
+  "start": 21.06,
+  "end": 21.32
+ },
+ {
+  "word": " and",
+  "start": 21.32,
+  "end": 21.52
+ },
+ {
+  "word": " even",
+  "start": 21.52,
+  "end": 21.7
+ },
+ {
+  "word": " improving",
+  "start": 21.7,
+  "end": 22.06
+ },
+ {
+  "word": " each",
+  "start": 22.06,
+  "end": 22.32
+ },
+ {
+  "word": " other",
+  "start": 22.32,
+  "end": 22.44
+ },
+ {
+  "word": " after",
+  "start": 22.44,
+  "end": 22.74
+ },
+ {
+  "word": " every",
+  "start": 22.74,
+  "end": 23.26
+ },
+ {
+  "word": " single",
+  "start": 23.26,
+  "end": 23.6
+ },
+ {
+  "word": " run.",
+  "start": 23.6,
+  "end": 23.9
+ },
+ {
+  "word": " But",
+  "start": 24.84,
+  "end": 24.96
+ },
+ {
+  "word": " here's",
+  "start": 24.96,
+  "end": 25.18
+ },
+ {
+  "word": " the",
+  "start": 25.18,
+  "end": 25.24
+ },
+ {
+  "word": " part",
+  "start": 25.24,
+  "end": 25.38
+ },
+ {
+  "word": " that's",
+  "start": 25.38,
+  "end": 25.62
+ },
+ {
+  "word": " even",
+  "start": 25.62,
+  "end": 25.92
+ },
+ {
+  "word": " crazier.",
+  "start": 25.92,
+  "end": 26.46
+ },
+ {
+  "word": " It",
+  "start": 26.46,
+  "end": 26.7
+ },
+ {
+  "word": " slashes",
+  "start": 26.7,
+  "end": 27.02
+ },
+ {
+  "word": " your",
+  "start": 27.02,
+  "end": 27.2
+ },
+ {
+  "word": " API",
+  "start": 27.2,
+  "end": 27.42
+ },
+ {
+  "word": " costs",
+  "start": 27.42,
+  "end": 27.64
+ },
+ {
+  "word": " by",
+  "start": 27.64,
+  "end": 28.02
+ },
+ {
+  "word": " 75%.",
+  "start": 28.02,
+  "end": 29.26
+ },
+ {
+  "word": " Basic",
+  "start": 29.26,
+  "end": 30.02
+ },
+ {
+  "word": " tasks",
+  "start": 30.02,
+  "end": 30.32
+ },
+ {
+  "word": " brought",
+  "start": 30.32,
+  "end": 30.72
+ },
+ {
+  "word": " to",
+  "start": 30.72,
+  "end": 30.9
+ },
+ {
+  "word": " a",
+  "start": 30.9,
+  "end": 31.0
+ },
+ {
+  "word": " future",
+  "start": 31.0,
+  "end": 31.14
+ },
+ {
+  "word": " automatically",
+  "start": 31.14,
+  "end": 31.68
+ },
+ {
+  "word": " while",
+  "start": 31.68,
+  "end": 32.04
+ },
+ {
+  "word": " advanced",
+  "start": 32.04,
+  "end": 32.32
+ },
+ {
+  "word": " tasks",
+  "start": 32.32,
+  "end": 32.82
+ },
+ {
+  "word": " only",
+  "start": 32.82,
+  "end": 33.08
+ },
+ {
+  "word": " use",
+  "start": 33.08,
+  "end": 33.38
+ },
+ {
+  "word": " the",
+  "start": 33.38,
+  "end": 33.56
+ },
+ {
+  "word": " expensive",
+  "start": 33.56,
+  "end": 33.74
+ },
+ {
+  "word": " model",
+  "start": 33.74,
+  "end": 34.24
+ },
+ {
+  "word": " when",
+  "start": 34.24,
+  "end": 34.5
+ },
+ {
+  "word": " necessary.",
+  "start": 34.5,
+  "end": 34.94
+ },
+ {
+  "word": " Your",
+  "start": 35.98,
+  "end": 36.06
+ },
+ {
+  "word": " claw",
+  "start": 36.06,
+  "end": 36.26
+ },
+ {
+  "word": " subscription",
+  "start": 36.26,
+  "end": 36.48
+ },
+ {
+  "word": " just",
+  "start": 36.48,
+  "end": 36.86
+ },
+ {
+  "word": " became",
+  "start": 36.86,
+  "end": 37.12
+ },
+ {
+  "word": " three",
+  "start": 37.12,
+  "end": 37.46
+ },
+ {
+  "word": " times",
+  "start": 37.46,
+  "end": 37.76
+ },
+ {
+  "word": " more",
+  "start": 37.76,
+  "end": 38.04
+ },
+ {
+  "word": " powerful.",
+  "start": 38.04,
+  "end": 38.42
+ },
+ {
+  "word": " It's",
+  "start": 39.8,
+  "end": 40.36
+ },
+ {
+  "word": " even",
+  "start": 40.36,
+  "end": 40.48
+ },
+ {
+  "word": " ranked",
+  "start": 40.48,
+  "end": 40.68
+ },
+ {
+  "word": " number",
+  "start": 40.68,
+  "end": 40.94
+ },
+ {
+  "word": " one",
+  "start": 40.94,
+  "end": 41.2
+ },
+ {
+  "word": " in",
+  "start": 41.2,
+  "end": 41.32
+ },
+ {
+  "word": " Agentic",
+  "start": 41.32,
+  "end": 41.7
+ },
+ {
+  "word": " Framers",
+  "start": 41.7,
+  "end": 41.86
+ },
+ {
+  "word": " with",
+  "start": 41.86,
+  "end": 42.18
+ },
+ {
+  "word": " over",
+  "start": 42.18,
+  "end": 42.32
+ },
+ {
+  "word": " 20",
+  "start": 42.32,
+  "end": 42.66
+ },
+ {
+  "word": ",000",
+  "start": 42.66,
+  "end": 43.22
+ },
+ {
+  "word": " stars.",
+  "start": 43.22,
+  "end": 43.5
+ },
+ {
+  "word": " Comment",
+  "start": 45.8,
+  "end": 46.36
+ },
+ {
+  "word": " Flow",
+  "start": 46.36,
+  "end": 46.72
+ },
+ {
+  "word": " for",
+  "start": 46.72,
+  "end": 46.96
+ },
+ {
+  "word": " the",
+  "start": 46.96,
+  "end": 47.04
+ },
+ {
+  "word": " link.",
+  "start": 47.04,
+  "end": 47.2
+ }
+]

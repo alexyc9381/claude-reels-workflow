@@ -1,0 +1,3 @@
+seg03: Number three is the brand guidelines.
+seg07: And number six is the let's see skill.
+seg05: Just one install gives you six commands and it's wired straight into HubSpot, Slack, Canva and Clavio.

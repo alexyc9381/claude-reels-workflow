@@ -1,0 +1,602 @@
+[
+ {
+  "word": " Meet",
+  "start": 0.0,
+  "end": 0.68
+ },
+ {
+  "word": " the",
+  "start": 0.68,
+  "end": 0.78
+ },
+ {
+  "word": " most",
+  "start": 0.78,
+  "end": 0.94
+ },
+ {
+  "word": " powerful",
+  "start": 0.94,
+  "end": 1.48
+ },
+ {
+  "word": " cloud",
+  "start": 1.48,
+  "end": 1.72
+ },
+ {
+  "word": " tool",
+  "start": 1.72,
+  "end": 1.92
+ },
+ {
+  "word": " on",
+  "start": 1.92,
+  "end": 2.06
+ },
+ {
+  "word": " the",
+  "start": 2.06,
+  "end": 2.14
+ },
+ {
+  "word": " planet,",
+  "start": 2.14,
+  "end": 2.36
+ },
+ {
+  "word": " 60",
+  "start": 2.66,
+  "end": 2.86
+ },
+ {
+  "word": " agents",
+  "start": 2.86,
+  "end": 3.12
+ },
+ {
+  "word": " working",
+  "start": 3.12,
+  "end": 3.32
+ },
+ {
+  "word": " together",
+  "start": 3.32,
+  "end": 3.64
+ },
+ {
+  "word": " simultaneously",
+  "start": 3.64,
+  "end": 4.1
+ },
+ {
+  "word": " with",
+  "start": 4.1,
+  "end": 4.4
+ },
+ {
+  "word": " each",
+  "start": 4.4,
+  "end": 4.58
+ },
+ {
+  "word": " one",
+  "start": 4.58,
+  "end": 4.76
+ },
+ {
+  "word": " getting",
+  "start": 4.76,
+  "end": 4.86
+ },
+ {
+  "word": " smarter",
+  "start": 4.86,
+  "end": 5.18
+ },
+ {
+  "word": " every",
+  "start": 5.18,
+  "end": 5.56
+ },
+ {
+  "word": " single",
+  "start": 5.56,
+  "end": 5.8
+ },
+ {
+  "word": " run.",
+  "start": 5.8,
+  "end": 6.0
+ },
+ {
+  "word": " It's",
+  "start": 6.22,
+  "end": 6.34
+ },
+ {
+  "word": " called",
+  "start": 6.34,
+  "end": 6.48
+ },
+ {
+  "word": " Brewflow,",
+  "start": 6.48,
+  "end": 6.8
+ },
+ {
+  "word": " and",
+  "start": 6.94,
+  "end": 6.96
+ },
+ {
+  "word": " this",
+  "start": 6.96,
+  "end": 7.08
+ },
+ {
+  "word": " thing",
+  "start": 7.08,
+  "end": 7.2
+ },
+ {
+  "word": " is",
+  "start": 7.2,
+  "end": 7.38
+ },
+ {
+  "word": " crazy.",
+  "start": 7.38,
+  "end": 7.64
+ },
+ {
+  "word": " One",
+  "start": 8.2,
+  "end": 8.32
+ },
+ {
+  "word": " agent",
+  "start": 8.32,
+  "end": 8.52
+ },
+ {
+  "word": " handles",
+  "start": 8.52,
+  "end": 8.82
+ },
+ {
+  "word": " planning,",
+  "start": 8.82,
+  "end": 9.12
+ },
+ {
+  "word": " another",
+  "start": 9.18,
+  "end": 9.34
+ },
+ {
+  "word": " writes",
+  "start": 9.34,
+  "end": 9.58
+ },
+ {
+  "word": " the",
+  "start": 9.58,
+  "end": 9.7
+ },
+ {
+  "word": " code,",
+  "start": 9.7,
+  "end": 9.88
+ },
+ {
+  "word": " another",
+  "start": 9.94,
+  "end": 10.08
+ },
+ {
+  "word": " runs",
+  "start": 10.08,
+  "end": 10.36
+ },
+ {
+  "word": " tests,",
+  "start": 10.36,
+  "end": 10.64
+ },
+ {
+  "word": " then",
+  "start": 10.8,
+  "end": 10.92
+ },
+ {
+  "word": " another",
+  "start": 10.92,
+  "end": 11.16
+ },
+ {
+  "word": " checks",
+  "start": 11.16,
+  "end": 11.34
+ },
+ {
+  "word": " security.",
+  "start": 11.34,
+  "end": 11.7
+ },
+ {
+  "word": " They",
+  "start": 12.0,
+  "end": 12.08
+ },
+ {
+  "word": " all",
+  "start": 12.08,
+  "end": 12.26
+ },
+ {
+  "word": " run",
+  "start": 12.26,
+  "end": 12.4
+ },
+ {
+  "word": " in",
+  "start": 12.4,
+  "end": 12.52
+ },
+ {
+  "word": " parallel,",
+  "start": 12.52,
+  "end": 12.74
+ },
+ {
+  "word": " sharing",
+  "start": 12.86,
+  "end": 13.06
+ },
+ {
+  "word": " memory,",
+  "start": 13.06,
+  "end": 13.3
+ },
+ {
+  "word": " and",
+  "start": 13.42,
+  "end": 13.46
+ },
+ {
+  "word": " even",
+  "start": 13.46,
+  "end": 13.6
+ },
+ {
+  "word": " improving",
+  "start": 13.6,
+  "end": 13.94
+ },
+ {
+  "word": " each",
+  "start": 13.94,
+  "end": 14.16
+ },
+ {
+  "word": " other",
+  "start": 14.16,
+  "end": 14.28
+ },
+ {
+  "word": " after",
+  "start": 14.28,
+  "end": 14.52
+ },
+ {
+  "word": " every",
+  "start": 14.52,
+  "end": 14.98
+ },
+ {
+  "word": " single",
+  "start": 14.98,
+  "end": 15.28
+ },
+ {
+  "word": " run.",
+  "start": 15.28,
+  "end": 15.58
+ },
+ {
+  "word": " But",
+  "start": 15.92,
+  "end": 15.98
+ },
+ {
+  "word": " here's",
+  "start": 15.98,
+  "end": 16.18
+ },
+ {
+  "word": " the",
+  "start": 16.18,
+  "end": 16.26
+ },
+ {
+  "word": " part",
+  "start": 16.26,
+  "end": 16.38
+ },
+ {
+  "word": " that's",
+  "start": 16.38,
+  "end": 16.54
+ },
+ {
+  "word": " even",
+  "start": 16.54,
+  "end": 16.84
+ },
+ {
+  "word": " crazier.",
+  "start": 16.84,
+  "end": 17.34
+ },
+ {
+  "word": " It",
+  "start": 17.46,
+  "end": 17.54
+ },
+ {
+  "word": " slashes",
+  "start": 17.54,
+  "end": 17.76
+ },
+ {
+  "word": " your",
+  "start": 17.76,
+  "end": 17.94
+ },
+ {
+  "word": " API",
+  "start": 17.94,
+  "end": 18.14
+ },
+ {
+  "word": " costs",
+  "start": 18.14,
+  "end": 18.4
+ },
+ {
+  "word": " by",
+  "start": 18.4,
+  "end": 18.64
+ },
+ {
+  "word": " 75%.",
+  "start": 18.64,
+  "end": 19.64
+ },
+ {
+  "word": " Basic",
+  "start": 19.64,
+  "end": 20.1
+ },
+ {
+  "word": " tasks",
+  "start": 20.1,
+  "end": 20.46
+ },
+ {
+  "word": " route",
+  "start": 20.46,
+  "end": 20.7
+ },
+ {
+  "word": " to",
+  "start": 20.7,
+  "end": 20.84
+ },
+ {
+  "word": " a",
+  "start": 20.84,
+  "end": 20.9
+ },
+ {
+  "word": " free",
+  "start": 20.9,
+  "end": 21.06
+ },
+ {
+  "word": " tier",
+  "start": 21.06,
+  "end": 21.2
+ },
+ {
+  "word": " automatically,",
+  "start": 21.2,
+  "end": 21.52
+ },
+ {
+  "word": " while",
+  "start": 21.52,
+  "end": 21.84
+ },
+ {
+  "word": " advanced",
+  "start": 21.84,
+  "end": 22.16
+ },
+ {
+  "word": " tasks",
+  "start": 22.16,
+  "end": 22.52
+ },
+ {
+  "word": " only",
+  "start": 22.52,
+  "end": 22.76
+ },
+ {
+  "word": " use",
+  "start": 22.76,
+  "end": 23.0
+ },
+ {
+  "word": " the",
+  "start": 23.0,
+  "end": 23.12
+ },
+ {
+  "word": " expensive",
+  "start": 23.12,
+  "end": 23.46
+ },
+ {
+  "word": " model",
+  "start": 23.46,
+  "end": 23.76
+ },
+ {
+  "word": " when",
+  "start": 23.76,
+  "end": 24.0
+ },
+ {
+  "word": " necessary.",
+  "start": 24.0,
+  "end": 24.44
+ },
+ {
+  "word": " Your",
+  "start": 24.86,
+  "end": 25.0
+ },
+ {
+  "word": " cloud",
+  "start": 25.0,
+  "end": 25.18
+ },
+ {
+  "word": " subscription",
+  "start": 25.18,
+  "end": 25.46
+ },
+ {
+  "word": " just",
+  "start": 25.46,
+  "end": 25.68
+ },
+ {
+  "word": " became",
+  "start": 25.68,
+  "end": 25.92
+ },
+ {
+  "word": " three",
+  "start": 25.92,
+  "end": 26.24
+ },
+ {
+  "word": " times",
+  "start": 26.24,
+  "end": 26.46
+ },
+ {
+  "word": " more",
+  "start": 26.46,
+  "end": 26.72
+ },
+ {
+  "word": " powerful.",
+  "start": 26.72,
+  "end": 27.08
+ },
+ {
+  "word": " It's",
+  "start": 27.08,
+  "end": 27.56
+ },
+ {
+  "word": " even",
+  "start": 27.56,
+  "end": 27.7
+ },
+ {
+  "word": " ranked",
+  "start": 27.7,
+  "end": 27.9
+ },
+ {
+  "word": " number",
+  "start": 27.9,
+  "end": 28.08
+ },
+ {
+  "word": " one",
+  "start": 28.08,
+  "end": 28.3
+ },
+ {
+  "word": " in",
+  "start": 28.3,
+  "end": 28.4
+ },
+ {
+  "word": " Adjunctic",
+  "start": 28.4,
+  "end": 28.76
+ },
+ {
+  "word": " Framers",
+  "start": 28.76,
+  "end": 29.0
+ },
+ {
+  "word": " with",
+  "start": 29.0,
+  "end": 29.14
+ },
+ {
+  "word": " over",
+  "start": 29.14,
+  "end": 29.32
+ },
+ {
+  "word": " 20",
+  "start": 29.32,
+  "end": 29.6
+ },
+ {
+  "word": ",000",
+  "start": 29.6,
+  "end": 30.04
+ },
+ {
+  "word": " stars.",
+  "start": 30.04,
+  "end": 30.36
+ },
+ {
+  "word": " Comment",
+  "start": 30.76,
+  "end": 31.02
+ },
+ {
+  "word": " flow",
+  "start": 31.02,
+  "end": 31.3
+ },
+ {
+  "word": " for",
+  "start": 31.3,
+  "end": 31.48
+ },
+ {
+  "word": " the",
+  "start": 31.48,
+  "end": 31.56
+ },
+ {
+  "word": " link.",
+  "start": 31.56,
+  "end": 31.7
+ }
+]
