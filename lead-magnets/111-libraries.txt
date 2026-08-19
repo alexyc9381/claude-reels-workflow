@@ -1,0 +1,60 @@
+TITLE   Three Libraries, One Animated Site
+SUB     The install order for Skiper UI, Vengeance UI and Animmaster Lib, and the honest note on which of the three actually costs money
+
+H       What this actually is
+P       An AI can already give you a layout. What it gives you badly is motion, and motion is the entire reason a site reads as expensive. That gap is what an agency bills you for, and it is the gap these three libraries close with copy and paste code.
+P       None of them is a template or a site builder. They are component libraries: you keep the project you already have, including one Claude or v0 generated for you, and you paste in the pieces that move.
+P       The video shows the shape. This is the part it does not have room for: which one to reach for first, how each installs, and what each is genuinely good at.
+
+RULE
+
+H       Skiper UI, for the blocks you always need anyway
+P       106 plus components in the shadcn style, built on Next.js, React, Tailwind and Framer Motion, with a Vercel and Apple flavoured look. Cards, pricing tables, carousels, marquees, preloaders, theme toggles and the micro-interactions that make a page feel finished.
+P       It installs through the shadcn CLI, so each component is copied into your project as source you own rather than a package you depend on. There is nothing to keep updated and nothing to fight when you want to change a colour.
+QUOTE   npx shadcn add @skiper-ui/skiper40
+P       Reach for this first. It is the one that covers the sections every landing page has, so it is the fastest way to make an AI generated page stop looking like an AI generated page.
+P       Pricing, plainly: there is a real free set. Premium is a 129 dollar one time payment and Exclusive is 549, which adds Figma files and full templates. Neither is a subscription and you do not need either to start.
+
+RULE
+
+H       Vengeance UI, for the cinematic half
+P       46 components across 9 families plus more than 100 blocks, built on Radix primitives and Tailwind. This is the one that does reveals, staggered text, shutter preloaders, perspective grids and the scroll driven set pieces that agencies charge for.
+P       It is fully open source and part of the Vercel OSS program, and it installs the same way Skiper does.
+QUOTE   npx shadcn@latest add @vengeanceui/reveal-loader
+P       The reveal loader is the single component with the highest ratio of impression to effort in any of these three libraries. It is a GSAP preloader with staggered text and a gradient shutter, it takes about four minutes to wire in, and it changes the first two seconds of your site, which are the two seconds that decide whether the rest gets looked at.
+B       Source: github.com/Ashutoshx7/VengeanceUI
+B       Docs: vengenceui.com. Note the spelling of the domain, it drops the first a.
+
+RULE
+
+H       Animmaster Lib, for volume
+P       300 components, and unlike the other two it is not limited to React. The same effects ship as plain HTML, CSS and JavaScript as well as React and Next, so it works on a site that was never a framework project.
+P       The catalogue is the reason to have it, and it is worth seeing the shape of it before you decide:
+B       66 scroll animations and 26 hero animations
+B       23 sliders, 21 navigation menus, 20 hover effects
+B       20 mouse effects and 18 WebGL shaders
+B       14 page transitions, 14 text animations, 11 SVG animations
+B       10 background animations, 10 grid animations, 10 physics effects
+P       Reach for this when you know the effect you want and you do not want to build it. It is a parts bin, not a design system, and that is the right way to use it.
+
+RULE
+
+H       The order I would install them in
+NUM     Skiper UI. Get the sections in place first. A page with good structure and no motion still reads as competent; a page with motion and no structure reads as broken.
+NUM     Vengeance UI, and specifically one entrance effect. Do not add five. The reveal is the beat that sells the whole page and a second one competing with it makes both feel cheap.
+NUM     Animmaster Lib, last and only if you have a specific gap. Buying a 300 piece parts bin before you know which part you need is how you end up with a page that does eleven things and says nothing.
+P       If you install all three on day one you will paste in too much. The failure mode of these libraries is not that they are hard, it is that they are easy.
+
+RULE
+
+H       The honest notes
+B       The video says all three are free. Two of them are. Skiper UI has a genuinely free component set, and Vengeance UI is fully open source under the Vercel OSS program. Animmaster Lib is a paid pack: 3 dollars for Junior, 4.99 for PRO and 8 dollars for Premium, one time, lifetime access, no subscription. That is small, but small is not free and you should hear it from me rather than from the pricing page.
+B       The video says over 250 components for Animmaster. The site says 300. The video understates it, which is the safe direction.
+B       Skiper UI and Vengeance UI both install through the shadcn CLI, which means they want a React or Next project with Tailwind already set up. If your site is plain HTML, Animmaster is the only one of the three that will drop straight in.
+B       Every figure here was read from each library's own site on 18 August 2026. Component counts on projects like these move, so treat them as a floor.
+B       Free means the components are free. Hosting, a domain and your own time are not, and the time is the one that actually costs you something.
+
+H       If you try only one thing
+P       Take a page you have already built, add the Vengeance reveal loader, and change nothing else. Then look at it on a phone. That single component is the cheapest test of the whole idea, because if the entrance does not change how the page feels to you, no amount of scroll effects further down will change how it feels to anyone else.
+
+KEY     LIBRARIES

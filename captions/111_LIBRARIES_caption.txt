@@ -1,0 +1,23 @@
+Comment "LIBRARIES" and I'll send you all three links.
+
+👇 READ BELOW
+
+Web developers charge thousands for an animated site. Three component libraries do the same job, and you paste them in.
+
+These are not templates. They are real React and Tailwind components you drop into a project you already have, including one an AI generated for you.
+
+→ Skiper UI, 106+ components. Cards, pricing, layouts and ready to use blocks, installed straight through the shadcn CLI.
+→ Vengeance UI, 46 components across 9 families plus 100+ blocks. Cinematic reveals, preloaders and scroll animations. Fully open source, backed by the Vercel OSS program.
+→ Animmaster Lib, 300 components. Scroll animations, hero sections, WebGL shaders, mouse effects, page transitions and physics.
+
+Why it works: a site looks expensive because of motion, not because of layout. Layout is the part AI already does well. Motion is the part it does badly, and it is the part an agency bills you for. These libraries hand you the motion as copy and paste code, so the expensive looking half stops being the hard half.
+
+The part nobody mentions: Skiper UI and Vengeance UI have genuinely free component sets, but Animmaster Lib is a paid pack. It is a one time purchase starting at $3, not a subscription, and I would rather tell you that than have you find out on the pricing page. Two free and one that costs less than a coffee is still not a $10,000 invoice.
+
+Comment "LIBRARIES" and I'll send you the three links plus the full setup guide.
+
+.
+.
+.
+
+#webdesign #uidesign #frontend #reactjs #nextjs #tailwindcss #webdeveloper #uiux #webdev #framermotion #shadcn #componentlibrary #codingtips #buildinpublic #aitools #vibecoding #webdesigner #uicomponents #javascript #designsystem
