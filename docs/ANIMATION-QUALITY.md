@@ -534,18 +534,6 @@ y=754), the real head top is `y - s*0.451`. **Measure the render, don't trust th
 
 ---
 
-## Related
-[`THE-OPEN.md`](THE-OPEN.md) (the first five seconds, and the correction in §2 above) ·
-[`MEASURING.md`](MEASURING.md) (making a number mean something) ·
-[`AUDIT-FIRST.md`](AUDIT-FIRST.md) (run these before the first review) ·
-[`../storyboards/STORYBOARD-SPEC.md`](../storyboards/STORYBOARD-SPEC.md) (the board contract) ·
-[`../REEL-BUILD-LEARNINGS.md`](../REEL-BUILD-LEARNINGS.md) §2 §3 §7 §12 ·
-`memory/reels/plugin-factory-log.md` (the eleven rounds that produced this file) ·
-[`SOUND-DESIGN.md`](SOUND-DESIGN.md) §2b (the audio half of §9's density budget) ·
-`memory/claude107-reel.md` (reel 107 — the source of §5's action loops and all of §9)
-
----
-
 ## 10. "TOO PLAIN" IS USUALLY HALF A MECHANISM (reel 109)
 
 Reel 109 was called plain three separate times, on three different scenes, after it had already
@@ -826,3 +814,100 @@ Two instances of the same defect in one reel:
 - **Growth has a frame budget.** The bar lengthened 58px per joiner because at 90
   it outgrew the panel by the fourth and the plates left frame — **a bar with no
   ends is a pole.**
+
+## 12. ⭐⭐⭐ "MOTION" MEANS THE **SUBJECT**, NOT THE FRAME (reel 112)
+
+Everything above measures the FRAME. A viewer watches the SUBJECT, and the audit cannot
+tell the difference. Reel 112, after a scene came back as *"nothing going on"*:
+
+> **Alex: *"when I mean motion I primarily mean motion for the MAIN animations, not like
+> the backgrounds — I mean for the main concepts here."***
+
+The answer that failed was an overhead rail, two pouring chutes, growing piles and shuttle
+workers. It measured **8.94** and read as dead, because the hero was standing in the middle
+of a busy room running an idle. Same set, same background, only the hero's action changed:
+
+| the hero's action | motion |
+|---|---|
+| standing, idle bob, busy background | 8.94 |
+| **loaded and crushed under a growing pile** (his body changes shape) | **14.09** |
+| **volumes fired at him — twelve discrete impacts, each with its own recoil** | 13.63 |
+| the same, with the props redrawn as real objects | **17.85** |
+
+> **The check, before adding anything: name what the CLAUDE DOES in this scene. If the
+> answer is "stands there while things happen around him", the scene is dead however the
+> number reads.** Background process is furniture — §5 still wants one, but it can never be
+> the answer to "not enough motion".
+
+### ⭐⭐ A SWAY IS AN IDLE. A LIFT IS AN ARC.
+*"It's just repetitive back and forth motion of him swaying back and forth."* A sway is a
+bob with a bigger amplitude — no beginning, middle or end. What makes a lift read is that
+**the body CHANGES SHAPE through it**: each impact drives him down (sink 0→104px),
+compresses him (scaleY 1→0.83) and spreads him (scaleX 1→1.13); past halfway a **fast small
+tremble** (the opposite of a slow sway); then the release **overshoots past his standing
+height**. The overshoot is the whole reason it reads.
+
+⛔ **`Agent`/`Spec`'s WORK loop (`act=1`) rotates the BODY ±15°.** On a 400px hero that is
+toppling over, not straining. Heroes run `act=3`; put the stagger on a wrapper that carries
+the hero and anything riding on him.
+
+### ⭐⭐⭐ AND THE ROUTINE THAT CATCHES ALL OF THIS: RENDER A CONTACT SHEET AND LOOK
+Reel 112's median was 5.05. Multiplying **every set's `Rake` opacity by 2.6** took it to
+**10.72 with 0/20 failing** in one pass, every gate green — and turned the reel into
+**venetian blinds**: hard diagonal stripes over 20 scenes, sets flattened, props unreadable.
+
+```bash
+for t in <one timestamp per scene>; do
+  ffmpeg -ss $t -i REEL.mp4 -vframes 1 -vf "crop=1012:792:34:384,scale=440:344" q/NN.png
+done
+ffmpeg -i q/%02d.png -vf "tile=4x5:margin=5:padding=4" sheet.png
+```
+
+Thirty seconds. It found the stripes, an unreadable split-flap board, workbenches invisible
+behind their own workers, **a press ram hovering in the sky for four beats**, the emptiest
+frame in the reel, and a bottom-heavy composition across six scenes. **The audits found none
+of them.** Do it every round, before believing any green gate.
+
+### ⭐⭐ USE THE FORMULA AS A CALCULATOR — the first guess is usually wrong
+`motion ≈ (fraction of panel repainted per 0.1s) × (luma delta)`
+
+| symptom | the wrong fix | what it actually was |
+|---|---|---|
+| the scene with the MOST movers scored lowest (2.90) | more churn (→5.27) | **58px cells become 14px** after the 1012→240 downsample, and dark-flipping-to-dark has ~0 delta. Bigger cells + **a bright card face on the flip** → 8.02 |
+| the longest scene, 5.74 | make the object travel further (→5.72, no change) | **24px of sweep per sample.** A big object moving SLOWLY repaints only its edge. It needs a big FAST AREA change — and PAPER against a night set, not grey on grey |
+| 7.56 after applying the known-good lever | scroll the content (→7.24) | the right lever **at 6.5% of the panel**; the identical change took another scene 7.16 → 12.50 because its content is **31%** |
+
+⛔ **A prop that measures small IS small.** The floor is not 40px, it is *survives
+1012→240*: a 52px object is 12px when differenced.
+
+### ⭐⭐ A CONTAINER IS STILL A CONTAINER WHEN IT IS A NICE BOX
+*"I don't like how each of the repos are represented as brown boxes."* A crate carries ONE
+bit — "there is a thing in it". Draw the thing the world would actually contain: in a
+library, a repo is a **bound volume** (boards, banded spine, page block with leaves, tooled
+border, label, embossed mark, ribbon) — **fourteen drawn parts against four**.
+⛔ And fixing the foreground leaves the background as the same note: swapping the falling
+props still left the SHELVES as brown blocks.
+
+### ⛔ PLATES BELONG IN A RESERVED BAND
+*"The claude sprites are covered by the text boxes."* Every `RepoPlate`/`SquadCard` sat at
+y 600-640 — the ground line the sprites stand on — so it recurs in every new scene.
+**Convention: a plate band at panel y 112-210**, receipt left, roster right. `HookHeader`
+owns y 0..96, the cast owns the ground line, nothing else enters the band.
+
+### ⛔ BOTTOM-HEAVY IS A COMPOSITION DEFECT, NOT A PROP SHORTAGE
+Six scenes had the characters in the lowest third and two thirds of dead wall above. The
+fix is the HORIZON and what hangs overhead (a loaded rack, chains, a gantry), not more props
+on the floor.
+
+
+## Related
+[`THE-OPEN.md`](THE-OPEN.md) (the first five seconds, and the correction in §2 above) ·
+[`MEASURING.md`](MEASURING.md) (making a number mean something) ·
+[`AUDIT-FIRST.md`](AUDIT-FIRST.md) (run these before the first review) ·
+[`../storyboards/STORYBOARD-SPEC.md`](../storyboards/STORYBOARD-SPEC.md) (the board contract) ·
+[`../REEL-BUILD-LEARNINGS.md`](../REEL-BUILD-LEARNINGS.md) §2 §3 §7 §12 ·
+`memory/reels/plugin-factory-log.md` (the eleven rounds that produced this file) ·
+[`SOUND-DESIGN.md`](SOUND-DESIGN.md) §2b (the audio half of §9's density budget) ·
+`memory/claude107-reel.md` (reel 107 — the source of §5's action loops and all of §9)
+
+---

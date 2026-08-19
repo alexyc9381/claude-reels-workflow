@@ -1,0 +1,27 @@
+Comment "SQUAD" and I'll send you the free setup guide.
+
+👇 READ BELOW
+
+There are thousands of Claude Code repos on GitHub. Seven of them are worth installing.
+
+Not seven "cool finds". Seven that each take over a job you are currently doing by hand, and all seven are free and open source. 579,600 stars between them.
+
+★ 273,648 · obra/superpowers → gives Claude a full workflow: brainstorm, spec, plan, test, review
+★ 203,624 · multica-ai/andrej-karpathy-skills → one CLAUDE.md, four principles, stops it overbuilding
+★ 52,567 · hesreallyhim/awesome-claude-code → the master index of skills, hooks, commands, orchestrators
+★ 36,250 · microsoft/playwright-mcp → lets Claude drive a browser: click, fill, scrape
+★ 8,336 · smtg-ai/claude-squad → run multiple Claude agents in parallel
+★ 2,871 · letta-ai/claude-subconscious → a background subagent that watches your sessions and builds memory
+★ 2,304 · nizos/tdd-guard → blocks the commit if the tests did not run
+
+The mechanism is the same in all seven: they do not make Claude smarter, they give it a PROCESS it cannot skip. Superpowers stops it jumping straight to code. TDD Guard stops it claiming done. Karpathy's file stops it writing 1,000 lines where 100 would do. Subconscious stops it forgetting what you told it yesterday. Every one of them is a constraint, and the constraint is the feature.
+
+The part nobody mentions: the reason people bounce off setups like this is not that the repos are hard, it is that finding them is seven separate searches, seven READMEs and seven install steps on seven different days. Nobody does all seven. That is the whole problem, and it is why the guide exists as one paste instead of a reading list.
+
+Comment "SQUAD" and I'll send the setup guide with all seven, ready to paste into Claude.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #aitools #aiagents #devtools #softwareengineering #coding #programming #opensource #github #buildinpublic #aiworkflow #tdd #mcp #codingtips #developertools #aiassistant #vibecoding #shipfast

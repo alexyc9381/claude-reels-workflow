@@ -1,0 +1,53 @@
+TITLE   The Claude Code Squad
+SUB     Seven free repos that each take over a job you are currently doing by hand, and the one paste that installs all of them
+
+H       What this actually is
+P       There are thousands of Claude Code repos on GitHub and almost all of them are wrappers, demos or abandoned experiments. Seven are worth the disk space. Each one takes a specific job away from you and gives it to a process that cannot skip a step.
+P       This guide is the seven, what each one actually does, and a single block you can paste into Claude Code that sets all of them up in one go. Every figure below was checked live against the GitHub API on 18 August 2026.
+B       Combined: 579,600 stars across the seven
+B       Every one is free and open source
+B       Nothing here needs an API key beyond the Claude subscription you already have
+
+RULE
+
+H       The seven, in the order they are worth installing
+P       Install them in this order. The first three change how Claude works on every task, and the last four are specialists you will reach for on particular days.
+
+NUM     obra/superpowers, 273,648 stars. Gives Claude a full development workflow instead of a single prompt: brainstorm, spec, plan, test, review. This is the one that turns it from a coding assistant into something that runs the whole build.
+NUM     multica-ai/andrej-karpathy-skills, 203,624 stars. One CLAUDE.md file with four principles, derived from Andrej Karpathy's public notes on where LLMs go wrong when they write code. Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven Execution.
+NUM     hesreallyhim/awesome-claude-code, 52,567 stars. The master index of the ecosystem: skills, hooks, slash commands, orchestrators and the plugins worth installing. When you want to know whether a thing exists already, this is where you look before building it.
+NUM     microsoft/playwright-mcp, 36,250 stars. An MCP server that lets Claude drive a real browser: navigate pages, fill forms, click buttons and scrape content that only exists after JavaScript runs.
+NUM     smtg-ai/claude-squad, 8,336 stars. Runs multiple Claude agents in parallel in separate workspaces, so one can build a feature while another writes tests and a third refactors, instead of you waiting for each in turn.
+NUM     letta-ai/claude-subconscious, 2,871 stars. A background subagent that watches your sessions, reads your files and builds memory over time, so Claude stops starting from zero every morning.
+NUM     nizos/tdd-guard, 2,304 stars. Blocks the commit when the tests did not run. If Claude tries to declare something done without running them first, this stops it.
+
+RULE
+
+H       The thing they have in common
+P       None of these make the model smarter. Every single one gives it a constraint it cannot talk its way out of.
+QUOTE   Superpowers stops it jumping straight to code. TDD Guard stops it claiming done. Karpathy's file stops it writing a thousand lines where a hundred would do. Subconscious stops it forgetting what you told it yesterday.
+P       That is the whole pattern, and it is why the effect compounds when you run several of them rather than picking one. The constraint is the feature.
+
+RULE
+
+H       The one paste
+P       Open Claude Code in the project you want set up and paste the block below. It reads the list, checks what you already have, and installs the rest in order. Nothing is destructive: it will show you the plan before it touches anything.
+P       Paste this:
+QUOTE   Set up my Claude Code environment from this list, in this order, and show me the plan before you install anything. 1. obra/superpowers 2. multica-ai/andrej-karpathy-skills, install the CLAUDE.md into this project 3. hesreallyhim/awesome-claude-code, just clone it somewhere I can search 4. microsoft/playwright-mcp as an MCP server 5. smtg-ai/claude-squad 6. letta-ai/claude-subconscious 7. nizos/tdd-guard. For each one, read its README first, use its own documented install method rather than guessing, and tell me if anything conflicts with what I already have.
+P       The reason this works better than seven separate installs is that Claude reads each README before acting, so it uses the project's own current instructions rather than whatever a guide like this one froze in time.
+
+RULE
+
+H       Where people get stuck
+NUM     Installing all seven on day one and changing nothing about how you work. Start with Superpowers and the Karpathy file. Give it a week. The other five make more sense once you have felt the first two.
+NUM     Expecting TDD Guard to be pleasant. It is supposed to be annoying. That is the job. If it never blocks you, it is not configured.
+NUM     Treating awesome-claude-code as reading material. It is a lookup, not a syllabus. Search it when you are about to build something, not on a Sunday.
+NUM     Running claude-squad on a repo with uncommitted work. Give each agent a clean workspace, which is what the tool is designed around.
+
+RULE
+
+H       What to do this week
+P       Install the first two. Add the paste block above to a note somewhere. The next time you catch yourself telling Claude the same thing you told it last week, install Subconscious. The next time you catch it saying a feature is done without a test run, install TDD Guard.
+P       Every repo named here is linked from awesome-claude-code, which is the one to check first when you want to know whether a problem already has a tool.
+
+KEY     SQUAD

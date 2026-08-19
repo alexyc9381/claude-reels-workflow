@@ -500,3 +500,88 @@ genuinely different tracks, because both had been given the same 1.2s fade-in,
 profile over the MIDDLE of the file (fades excluded) gave the truth: **+0.39 to
 +0.51**. Same family as the "check every stem" rule: **a detector calibrated at
 one stage of a chain is invalid at another.**
+
+---
+
+## ⭐⭐ "CHOPPY" AND "NOT DOPAMINE ENOUGH" — the glue problem (reel 112)
+
+> *"The sfx design is not good, it sounds choppy, it should be more interesting and
+> dopamine inducing."*
+
+**Choppy is a diagnosis, not a vibe: transients with nothing sustaining under them.** Reel
+112's open was eleven short cues in three seconds with no glue, so each read as a separate
+click. The cue RATE was already legal — the defect was shape.
+
+### ⛔⛔ AND THE AIR GATE CANNOT BE ARGUED WITH. I TRIED AND MEASURED MYSELF WRONG.
+The obvious fix is pads, chords and risers. `sfx_audit` flags all of them as AIR. I
+hypothesised the gate was over-broad — a chime is TONAL where a swoosh is NOISE — and tested
+it with spectral flatness:
+
+```
+whoosh        0.122      <- a known swoosh
+lib_whoosh    0.081      <- another known swoosh
+riser_cine    0.169      <- MORE noise-like than both
+```
+
+**The known swooshes measured more tonal than the risers. The distinction does not hold.**
+Do not re-open this; the gate stands.
+
+### ⭐ THE GLUE COMES FROM THE LOW END
+A sustained cue passes the AIR gate if it carries real weight under 250Hz — which is exactly
+where glue should live anyway:
+
+| cue | dur | <250Hz | use |
+|---|---|---|---|
+| `cello_note` | 6.00s | 82.6% | the bed under a whole section |
+| `lib_cinematic_hit` | 5.63s | 87.2% | the big beats |
+| `gong` | 2.20s | 67.2% | a sustained reward that rings on |
+| `boom` | 0.55s | 98.3% | the floor under every impact |
+
+Then **layer every impact** (body + low + top) instead of a lone tick, and spend ONE reward
+stack in the reel, on the single frame that earns it.
+
+### ⭐⭐ COUNT EVENTS, NOT CUES, ONCE THE BANK IS LAYERED
+Layers on the same instant are one sound. 126 cues = 1.61/sec reads as over the ceiling;
+**93 distinct events = 1.19/sec** is the honest figure. Cluster `at` values within 60ms and
+count the clusters.
+
+### ⛔ A BRITTLE CUE IS MEASURABLE
+*"Those sounds are horrible and boring"* — seven arrivals on `bamboo_crack` (75.8% above
+2kHz) and `ceramic_crack` (88.0%): top-heavy snaps with no body, seven identical in a row.
+Match the cue to the OBJECT'S WEIGHT (books → `rebuild_thud`, 89% low) and make a run of
+seven **climb in pitch** so the beat goes somewhere.
+
+---
+
+## ⛔⛔⛔ THE PUFF OF AIR, THIRD REEL RUNNING — and the routine that ends it
+
+Reels 107, 110 and 112 all had it. The standing rule is [[feedback_check_every_stem]]: a
+note that survives a fix means the fix was in the wrong layer. Reel 112 adds two things:
+
+**1 · Decompose BEFORE touching anything.** Measure the VO, the bed and the mix in isolation
+over the reported window. On reel 112 the VO stem was **88.1% above 4kHz at 16.07s** and the
+bed was 25.8% — a mic BREATH, not an effect. There was a conveniently-timed `stamp_press`
+0.1s earlier that would have taken the blame, and rebuilding the bank would have changed
+nothing.
+
+**2 · When it survives a SECOND time and no layer is provably guilty, remove every candidate
+at once** rather than taking a fourth guess — VO ducked harder, the brightest cue in the
+window retired from the reel, and the bed high-shelved. ⛔ A **CUT** above 5.2kHz; boosting
+treble is what put static into ARENA.
+
+### ⭐ Detecting a breath (and not a sibilant)
+A breath is **a sustained rush of pure top with nothing under it, ≥50ms**. An /s/ is short
+and sits against a voiced neighbour. Duck with ~12ms shoulders so nothing clicks.
+
+⛔ **My first pass required ≥80ms, "fixed" 22 breaths and MISSED the one that was reported**
+(it runs 60ms). *A fix that reports success while the complaint survives is the same trap
+wearing a different coat.*
+
+⛔ **Verify by LEVEL, not by spectral share.** Share is level-independent, so a flat duck
+cannot move it — the breath measured 88.1% before and after, while its level went
+-26.6 dB → -41.5 dB. Check the words either side are untouched and that whole-VO loudness
+has not shifted.
+
+### ⛔ The library has no laugh in it
+Asked for a chuckle, the closest human sound is `huh.mp3` (0.30s). Two, pitched apart and
+0.16s apart, approximate one. Say that it is an approximation.

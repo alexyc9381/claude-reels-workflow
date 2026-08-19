@@ -1,0 +1,10 @@
+Most people don't realize that there are thousands of Claude repos on GitHub. I tested all of them and these are the seven that you actually need. And the last one is crazy good.
+One, Claude Subconscious. This is a background subagent that watches your sessions, reads your files and builds memory over time. So Claude stops forgetting everything between sessions.
+Two, Superpowers. This gives Claude a full development workflow, brainstorm, spec, plan, test, review. So it turns Claude from a coding assistant into a project manager that runs your entire build process.
+Three, Awesome Claude Code. It has a master index of the entire Claude Code ecosystem, skills, hooks, commands, orchestrators, and even the best plugins to automatically install.
+Four, Claude Squad. This lets you run multiple Claude agents in parallel. One agent builds a feature, another one writes tests, and then the third one refactors your code. So this is how you get an entire dev team in Claude for free.
+Five, Karpathy's CLAUDE.md file. One CLAUDE.md file with four principles that stop Claude from overcomplicating your code. It turns Claude into a senior software engineer instantly.
+Six, Playwright MCP. It allows Claude to navigate content pages, fill out forms, click buttons, and scrape dynamic content.
+Seven, TDD Guard. This blocks Claude from skipping tests. If Claude tries to commit without running tests first, TDD Guard stops it and acts like a quality enforcement so you ship without bugs.
+And the best part is that I made a free setup guide with all of these plugins. You can just paste into Claude to get all of them instantly rather than spending hours manually searching for each of these.
+For the free setup to make you 11 times more productive, comment squad and I'll send it over immediately.

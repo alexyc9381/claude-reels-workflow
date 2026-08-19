@@ -428,10 +428,28 @@ const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: numb
      to a measured onset, and changing it here would desync the anchors. */
   const measure = (ws: CapWord[]) =>
     ws.reduce((a, w) => a + w.w.trim().length, 0) * 45 + (ws.length - 1) * 16;
-  const shrink = React.useMemo(() => {
-    const widest = clines.reduce((m, l) => Math.max(m, measure(l.words)), 0);
-    return widest > SAFE ? SAFE / widest : 1;
+  /* ⛔⛔ ...BUT MEASURING AGAINST THE ABSOLUTE WIDEST LINE LETS ONE OUTLIER SHRINK
+     THE WHOLE REEL. Reel 112: a single line, "from overcomplicating your code."
+     (three long words the dangle rule refuses to split), measured 1353px and pulled
+     every caption in the reel from 74px down to 49px — Alex: *"the captions are
+     also too small for some reason now"*, and it appeared only because a VO speed
+     change regrouped the lines.
+     ⭐ The base size is now set by the 95th-percentile line, so it is ONE constant
+     size for 95 of 100 lines; only a genuinely pathological line scales further,
+     and only that line. Measured on this reel: 49px -> 63px, with 5 lines of 100
+     varying instead of the whole reel being dragged down by one.
+     ⛔ Grouping is still untouched — build_captions.py reproduces it to anchor each
+     line to a measured onset, and changing it here would desync every reel. */
+  const shrinkFor = React.useMemo(() => {
+    const widths = clines.map((l) => measure(l.words)).sort((a, b) => a - b);
+    const p95 = widths.length ? widths[Math.floor((widths.length - 1) * 0.95)] : 0;
+    const base = p95 > SAFE ? SAFE / p95 : 1;
+    return (l: typeof clines[number]) => {
+      const w = measure(l.words);
+      return Math.min(base, w > SAFE ? SAFE / w : 1);
+    };
   }, [clines]);
+  const shrink = shrinkFor(cur);
   return (
     <div style={{ position: "absolute", left: 88, right: 88, top, textAlign: "center", zIndex: 90 }}>
       <div style={{ display: "flex", width: "100%", flexWrap: "nowrap", whiteSpace: "nowrap", justifyContent: "center", alignItems: "baseline", gap: "0 16px", transform: `scale(${shrink})`, transformOrigin: "50% 50%" }}>
