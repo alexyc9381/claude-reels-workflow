@@ -53,6 +53,23 @@ const OUT = new URL('../video/public/shots/', import.meta.url).pathname;
  *  and by keeping the payoff on a subject site that genuinely is built from its
  *  own components.
  *
+ *  ⛔⛔ START EVERY SINGLE-SITE SCROLL AT 0 — AT THE VERY TOP OF THE PAGE.
+ *  Alex: *"when you show a single site scroll down, start at the very top
+ *  because those usually have the best scroll animations."* This is the exact
+ *  OPPOSITE of what a brightest-window measurement tells you: the brightest band
+ *  on most pages is a mid-page marketing section, and the HERO is where the
+ *  scroll work actually lives. Measure the TOP window, not the best window, and
+ *  reject a site whose top is weak rather than scrolling past it. (The
+ *  brightest-window rule still holds for the HOOK, where frame-0 luma is gated,
+ *  and there it should be a GALLERY rather than a single site anyway.)
+ *
+ *  ⛔⛔ CONSENT BANNERS GET BAKED INTO THE CAPTURE AND WILL SHIP. Porsche's
+ *  landed mid-strip and reached a rendered cut. It then survived all three
+ *  dismissal passes below — click-by-deny-text, click-by-accept-text, and
+ *  remove-everything-still-fixed — because the dialog was out of reach of the
+ *  DOM query. **Some sites cannot be captured cleanly headless. Drop them
+ *  rather than fight them**, and eyeball every strip before wiring it in.
+ *
  *  ⛔ WEBGL AND LOADER-HEAVY SITES OFTEN CAPTURE BLANK. Of ten reference sites
  *  tried, lusion.co, obys.agency and igloo.inc all came back empty or mid-loader
  *  (measured edge-detail 434 / 516 / 0 against awwwards' 8,871). Measure every
@@ -64,14 +81,22 @@ const SUBJECT = [
   ['veng',   'https://www.vengenceui.com/', 3500],
   ['anim',   'https://animmasterlib.dev/',  4400],
 ];
+/** The set that survived. Pulled from awwwards' own "best scrolling websites"
+ *  gallery plus the scroll libraries' own pages, then measured at the TOP window
+ *  and eyeballed. These are the ones with a hero worth opening on. */
 const REFERENCE = [
-  ['ex_awwwards', 'https://www.awwwards.com/websites/', 4200],  // the winners wall
-  ['ex_godly',    'https://godly.website/',             3600],
-  ['ex_basement', 'https://basement.studio/',           3600],
-  ['ex_stripe',   'https://stripe.com/',                4200],
-  ['ex_cuberto',  'https://cuberto.com/',               3600],
-  ['ex_apple',    'https://www.apple.com/airpods-pro/', 3600],
+  ['ex_awwwards',  'https://www.awwwards.com/websites/',      4200], // the winners wall — HOOK
+  ['ex_lenis',     'https://lenis.darkroom.engineering/',     4200], // "SMOOTH SCROLL", blackletter
+  ['ex_gsap',      'https://gsap.com/',                       4200], // "Animate anyth!ng"
+  ['ex_basement',  'https://basement.studio/',                3600], // 3D arcade, dark + cinematic
+  ['ex_haoqi',     'https://haoqi.design/',                   4200], // blue + colourful 3D
+  ['ex_superlist', 'https://www.superlist.com/',              4200], // purple gradient hero
+  ['ex_darkroom',  'https://darkroom.engineering/',           4200], // red on black
+  ['ex_stripe',    'https://stripe.com/',                     4200],
 ];
+/* tried and rejected: lusion.co · obys.agency · igloo.inc · exoape.com ·
+   austinwerner.io (blank or mid-loader) · racing.porsche.com (unbeatable consent
+   dialog) · linearity.io · drinkstill.nz · faers.tech · noth.in (empty tops) */
 const SITES = [...SUBJECT, ...REFERENCE];
 
 const VP_W = 900;   // the reel's browser viewport width

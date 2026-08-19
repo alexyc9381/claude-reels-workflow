@@ -430,7 +430,7 @@ export const S2: React.FC<{ v: Variant }> = ({ v }) => {
             <div style={{ position: "absolute", inset: 0, zIndex: 6,
               clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)` }}>
               <Img src={staticFile("shots/ex_superlist_strip.png")}
-                style={{ position: "absolute", left: 0, top: -(624 + f * 1.5), width: inner.w,
+                style={{ position: "absolute", left: 0, top: -(f * 1.6), width: inner.w,
                   display: "block" }} />
             </div>
             {/* the edge itself: a lit seam with its own shadow behind it */}
@@ -490,8 +490,8 @@ export const S3: React.FC<{ v: Variant }> = ({ v }) => {
         {/* ⭐ THE CRATE OPENS ONTO THE REAL SITE. "First, Skiper UI" is a name,
             and a name with no product behind it is a container (§3) — so what
             comes up out of the case is skiper-ui.com itself, captured live. */}
-        <SiteScreen x={196} y={196 + (1 - open) * 300} w={620} h={330} src="ex_spline_strip.png"
-          scroll={1284 + f * 1.4} z={44} on={open} url="spline.design" />
+        <SiteScreen x={196} y={196 + (1 - open) * 300} w={620} h={330} src="ex_haoqi_strip.png"
+          scroll={f * 1.6} z={44} on={open} url="haoqi.design" />
         <Crate x={276} y={442} w={460} h={280} f={f} i={0} open={open} z={46} />
         <Ring x={506} y={340} f={f} at={4} c={R.libs[0].accent} r1={330} life={16} z={52} />
         <Puff x={506} y={352} f={f} at={4} c="#E4C79A" n={12} s={1.4} z={51} />
@@ -577,8 +577,8 @@ export const S4: React.FC<{ v: Variant }> = ({ v }) => {
               white cards — instead of the dark band above it. Same measurement
               as the hook: the strip renders at 552 here, so strip y 720 is
               720 * (552/900) = 441. */}
-          <SiteScreen x={FB.x + 30} y={FB.y + 72} w={580} h={430} src="ex_spline_strip.png"
-            scroll={1150 + f * 1.2} z={33} url="spline.design" />
+          <SiteScreen x={FB.x + 30} y={FB.y + 72} w={580} h={430} src="ex_haoqi_strip.png"
+            scroll={f * 1.5} z={33} url="haoqi.design" />
 
           {/* the three named panels FLYING IN on the crane, before they seat */}
           {([
@@ -699,7 +699,7 @@ export const S5: React.FC<{ v: Variant }> = ({ v }) => {
             background: hexa(R.libs[1].accent, 0.34 * iris), transform: "rotate(7deg)" }} />
         ))}
         <SiteScreen x={214} y={210 + (1 - iris) * 240} w={584} h={300} src="ex_basement_strip.png"
-          scroll={124 + f * 1.2} z={43} on={iris} url="basement.studio" />
+          scroll={f * 1.5} z={43} on={iris} url="basement.studio" />
         <Crate x={306} y={470} w={400} h={244} f={f} i={1} open={0} z={46} />
         {/* the iris itself, opening on the lid */}
         <div style={{ position: "absolute", left: 506 - 96 * iris, top: 392 - 10,
@@ -767,7 +767,7 @@ export const S6: React.FC<{ v: Variant }> = ({ v }) => {
             seats={seatsFor(-99, -99, -99)} scaffold={false} />
           {/* the real vengenceui.com, scrolling through its own cinematic blocks */}
           <SiteScreen x={72} y={214} w={492} h={392} src="ex_basement_strip.png"
-            scroll={103 + f * 1.1} z={33} url="basement.studio" />
+            scroll={f * 1.3} z={33} url="basement.studio" />
         </Cam>
 
         {/* ⭐⭐ §10 — A BEAM WITH NO FINDINGS IS A PROGRESS BAR. v5 switched eight
@@ -879,8 +879,8 @@ export const S7: React.FC<{ v: Variant }> = ({ v }) => {
             </div>
           );
         })}
-        <SiteScreen x={214} y={186 + (1 - hinge) * 250} w={584} h={296} src="ex_rive_strip.png"
-          scroll={237 + f * 1.5} z={43} on={hinge} url="rive.app" />
+        <SiteScreen x={214} y={186 + (1 - hinge) * 250} w={584} h={296} src="ex_lenis_strip.png"
+          scroll={f * 1.6} z={43} on={hinge} url="lenis.darkroom.engineering" />
         <Crate x={306} y={452} w={400} h={258} f={f} i={2} open={hinge * 0.6} z={46} />
         <Ring x={506} y={424} f={f} at={3} c={R.libs[2].accent} r1={320} life={16} z={52} />
         <Pool x={180} y={742} w={116} z={48} />
@@ -944,8 +944,8 @@ export const S8: React.FC<{ v: Variant }> = ({ v }) => {
             ⛔ The site's hero says 300 and the VO says over 250: the VO
             UNDERSTATES it, which is the safe direction, so the capture and the
             drawn chip do not contradict each other. */}
-        <SiteScreen x={556} y={64} w={444} h={628} src="ex_rive_strip.png"
-          scroll={seg === 0 ? 177 + f * 1.8 : 460 + f * 2.6} z={35} url="rive.app" />
+        <SiteScreen x={556} y={64} w={444} h={628} src="ex_lenis_strip.png"
+          scroll={seg === 0 ? f * 1.9 : 340 + f * 2.4} z={35} url="lenis.darkroom.engineering" />
 
         {/* ⛔ THE DRAWN FRONT USED TO CARRY THIS BEAT AND IT NOW DOUBLE-DRAWS.
             The real page scrolling past a locked camera IS "scroll effects", so
@@ -1078,8 +1078,8 @@ export const S9: React.FC<{ v: Variant }> = ({ v }) => {
             so the finished frontage shows one — locomotive.ca, an agency
             portfolio, still scrolling in colour while the tower beside it dies.
             A drawn facade can only ASSERT the claim; a real page IS it. */}
-        <SiteScreen x={140} y={158} w={504} h={438} src="ex_locomotive_strip.png"
-          scroll={790 + f * 1.4} z={38} url="locomotive.ca" />
+        <SiteScreen x={140} y={158} w={504} h={438} src="ex_gsap_strip.png"
+          scroll={f * 1.5} z={38} url="gsap.com" />
 
         {/* ⭐ THE LIGHT WAVE CLIMBING OUR FRONT — a 190px band with its own
             SHADOW behind it, so the boundary is light-against-dark rather than a
@@ -1170,7 +1170,7 @@ export const S10: React.FC<{ v: Variant }> = ({ v }) => {
           ]} />
         {/* ⭐ the finished shopfront is showing real work, not drawn panels */}
         <SiteScreen x={196} y={352} w={620} h={330} src="ex_stripe_strip.png"
-          scroll={487 + f * 1.5} z={38} url="stripe.com" />
+          scroll={f * 1.6} z={38} url="stripe.com" />
         <Marquee x={196} y={168} w={620} h={150} f={f} text={R.keyword} at={6} z={64} c={GOLD} />
 
         {/* ⛔ ARRIVALS ACROSS THE FULL DURATION. v3 put all three of these

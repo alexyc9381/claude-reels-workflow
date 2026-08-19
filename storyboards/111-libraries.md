@@ -16,6 +16,15 @@
 > ⛔ **NUMBER SPINE:** `$10,000` (agency invoice, S0 · re-lit S6 · beaten S9) → `3` (crates, S1) →
 >               `106` (Skiper components, S4) → `46` (Vengeance components, S6) → `250`
 >               (Animmaster, S8) → the keyword (S10). **No other numeral is typeset anywhere.**
+> ⛔⛔ **EVERY SITE SCROLL STARTS AT THE TOP (rev 5):** Alex: *"when you show a single site scroll
+>               down, start at the very top because those usually have the best scroll animations"*,
+>               and *"the site at 30 seconds sucks, it doesnt have scroll effects."* The hero is
+>               where the scroll work lives, so a brightest-window offset is the wrong instinct for
+>               a single site. Final roster, all opening at scroll 0: **awwwards' winners wall**
+>               (hook + S1) · **superlist** (S2 wipe) · **haoqi.design** (S3/S4) ·
+>               **basement.studio** (S5/S6 — dark, so the flood rig has something to land on) ·
+>               **lenis.darkroom.engineering** (S7/S8 — literally "SMOOTH SCROLL" in blackletter) ·
+>               **gsap.com** (S9, the 30s payoff — "Animate anyth!ng") · **stripe.com** (S10).
 > ⛔⛔ **EXAMPLE SITES, NOT DOCS PAGES (rev 4):** Alex: *"the vengeance UI and each of the sites
 >               mentioned should just be primarily like example sites that have super good scroll
 >               animations"*, and *"the site at 31 seconds it needs to be a reference example actual
