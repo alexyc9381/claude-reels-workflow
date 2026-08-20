@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 96,
-    "reels_total": 141,
-    "factory_logs": 56,
-    "storyboards": 57,
-    "caption_jsons": 105,
-    "memory_md": 196,
+    "reels_with_code": 97,
+    "reels_total": 143,
+    "factory_logs": 57,
+    "storyboards": 58,
+    "caption_jsons": 106,
+    "memory_md": 197,
     "creators": 8,
     "packs": 3
   },
@@ -511,6 +511,7 @@
         "video/src/data/words_109plugins3.json",
         "video/src/data/words_110flow.json",
         "video/src/data/words_113go.json",
+        "video/src/data/words_116bill.json",
         "video/src/data/words_ads.json",
         "video/src/data/words_agency.json",
         "video/src/data/words_ai.json",
@@ -646,6 +647,15 @@
       "number": null,
       "code": null,
       "log": "memory/reels/army-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "bill116",
+      "name": "bill116",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/bill116-factory-log.md",
       "storyboard": null,
       "captions": []
     },
@@ -1576,6 +1586,17 @@
       "storyboard": "storyboards/114-smart.md",
       "captions": [
         "video/src/data/words_smart.json"
+      ]
+    },
+    {
+      "key": "bill",
+      "name": "bill",
+      "number": 116,
+      "code": "video/src/ClaudeBillReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/116-bill.md",
+      "captions": [
+        "video/src/data/words_116bill.json"
       ]
     }
   ]

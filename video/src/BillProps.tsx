@@ -1,5 +1,5 @@
 import React from "react";
-import { Img, staticFile } from "remotion";
+import { Img, OffthreadVideo, staticFile } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
   squash, rock, shake, R, ui, mono, vivid,
@@ -20,6 +20,117 @@ import {
    short side vanishes in the audit's 1012->240 downsample and reads as nothing
    to a human either.
    ========================================================================= */
+
+/* =========================================================================
+   ⭐⭐⭐ THE B-ROLL SCREEN — REAL GOOGLE LAUNCH FOOTAGE, IN A REAL DEVICE.
+
+   Alex: *"try to find the google launch videos for these tools you can
+   partially use as broll for some of these scenes."* This is also the single
+   biggest motion lever this repo has measured: real UI took reel 107's median
+   6.36 -> 8.00 (one scene 6.30 -> 10.25) and reel 111's 10.90 -> 12.51.
+
+   SOURCES, all Google's own published assets:
+     · Flow      four clips from `gstatic.com/aitestkitchen/website/flow/
+                 landing_page/*.mp4` — the product's own landing-page videos
+     · NotebookLM the official "Introducing NotebookLM Video Overviews" launch
+                 video from the Google channel
+   Each is cut to 3.0-3.4s and sits INSIDE a device frame, which is what makes
+   it read as "here is the product" rather than as a pasted rectangle.
+
+   ⛔ REAL FOOTAGE IS NOT AUTOMATICALLY MOTION (§1). A clip HELD for a whole
+   sentence measured 3.23 with a 60-frame dead run. Every call site here either
+   sits under a scene that is already cutting, or gets a `punch` — a hard scale
+   step partway through, which is the "cut inside the clip on the beat" that
+   took that scene 3.23 -> 4.40.
+   ====================================================================== */
+export const Broll: React.FC<{ x: number; y: number; w: number; f: number; at: number;
+  src: string; z?: number; label?: string; punch?: number; chrome?: "browser" | "app" | "bare";
+  ratio?: number; startFrom?: number }> =
+  ({ x, y, w, f, at, src, z = 50, label, punch, chrome = "browser", ratio = 0.562, startFrom = 0 }) => {
+  const lf = f - at;
+  if (lf < 0) return null;
+  const h = w * ratio;
+  const inS = E(lf, 0, 9, 0, 1, BACK);
+  /* the punch: a hard step, never a tween — a smooth zoom measures WORSE */
+  const pk = punch !== undefined && f >= punch ? 1.09 : 1;
+  const head = chrome === "bare" ? 0 : chrome === "browser" ? h * 0.11 : h * 0.09;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - (h + head) / 2, width: w,
+      height: h + head, zIndex: z, transform: `scale(${inS * pk})`, borderRadius: 14,
+      overflow: "hidden", background: "#0E1218",
+      border: `5px solid ${dkh("#2A3038", 0.20)}`, boxShadow: SH_D }}>
+      {/* the chrome, so it reads as a product and not as a pasted rectangle */}
+      {chrome !== "bare" && (
+        <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: head,
+          background: "#1A2029", borderBottom: `2px solid #2A3038` }}>
+          {chrome === "browser" && ["#E0685C", "#E7B24C", "#3F9E74"].map((c, i) => (
+            <div key={"bl" + i} style={{ position: "absolute", left: 12 + i * 20, top: "34%",
+              width: 11, height: 11, borderRadius: "50%", background: c }} />
+          ))}
+          {chrome === "browser" && (
+            <div style={{ position: "absolute", left: 82, right: 60, top: "24%", height: "52%",
+              borderRadius: 8, background: "#0E1218" }} />
+          )}
+          {label && (
+            <span style={{ position: "absolute", right: 12, top: "26%", ...mono(Math.max(10, head * 0.40), 700),
+              color: hexa("#9FB4C8", 0.9), letterSpacing: "0.06em" }}>{label}</span>
+          )}
+        </div>
+      )}
+      {/* the footage */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: head, bottom: 0, overflow: "hidden" }}>
+        <OffthreadVideo src={staticFile(src)} startFrom={startFrom} muted
+          style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      </div>
+      {/* a live REC pip, so the frame says THIS IS THE REAL THING */}
+      <div style={{ position: "absolute", left: 14, bottom: 12, display: "flex", alignItems: "center",
+        gap: 7, padding: "5px 11px", borderRadius: 12, background: hexa("#0A0E14", 0.62) }}>
+        <div style={{ width: 9, height: 9, borderRadius: "50%",
+          background: Math.floor(f / 14) % 2 ? "#E0443E" : hexa("#E0443E", 0.35) }} />
+        <span style={{ ...mono(11, 800), color: hexa("#DCE6F0", 0.86), letterSpacing: "0.10em" }}>LIVE</span>
+      </div>
+    </div>
+  );
+};
+
+/** the same frame for a STILL capture — the three products with no launch video */
+export const Shot: React.FC<{ x: number; y: number; w: number; f: number; at: number;
+  src: string; z?: number; label?: string; ratio?: number; pan?: number; chrome?: "browser" | "bare" }> =
+  ({ x, y, w, f, at, src, z = 50, label, ratio = 0.562, pan = 0, chrome = "browser" }) => {
+  const lf = f - at;
+  if (lf < 0) return null;
+  const h = w * ratio;
+  const inS = E(lf, 0, 9, 0, 1, BACK);
+  const head = chrome === "bare" ? 0 : h * 0.11;
+  /* ⭐ a still has to MOVE or it is a poster: a slow vertical pan across the
+     capture is the cheapest legitimate motion a screenshot can carry. */
+  const dy = pan ? -E(lf, 0, 120, 0, pan, LIN) : 0;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - (h + head) / 2, width: w,
+      height: h + head, zIndex: z, transform: `scale(${inS})`, borderRadius: 14,
+      overflow: "hidden", background: "#0E1218",
+      border: `5px solid ${dkh("#2A3038", 0.20)}`, boxShadow: SH_D }}>
+      {chrome !== "bare" && (
+        <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: head,
+          background: "#1A2029", borderBottom: `2px solid #2A3038` }}>
+          {["#E0685C", "#E7B24C", "#3F9E74"].map((c, i) => (
+            <div key={"sl" + i} style={{ position: "absolute", left: 12 + i * 20, top: "34%",
+              width: 11, height: 11, borderRadius: "50%", background: c }} />
+          ))}
+          <div style={{ position: "absolute", left: 82, right: 60, top: "24%", height: "52%",
+            borderRadius: 8, background: "#0E1218" }} />
+          {label && (
+            <span style={{ position: "absolute", right: 12, top: "26%", ...mono(Math.max(10, head * 0.40), 700),
+              color: hexa("#9FB4C8", 0.9), letterSpacing: "0.06em" }}>{label}</span>
+          )}
+        </div>
+      )}
+      <div style={{ position: "absolute", left: 0, right: 0, top: head, bottom: 0, overflow: "hidden" }}>
+        <Img src={staticFile(src)} style={{ position: "absolute", left: 0, top: dy, width: "100%" }} />
+      </div>
+    </div>
+  );
+};
 
 /* =========================================================================
    S4 — THE TOLL BOOTH. Eleven parts: the plinth, two posts, the drum, three
@@ -187,6 +298,217 @@ export const CodeCrate: React.FC<{ x: number; y: number; s: number; f: number; r
     ))}
   </div>
 );
+
+/* =========================================================================
+   S7 — ⭐⭐⭐ THE SECOND BRAIN, DRAWN AS A BRAIN.
+   Alex: *"second brain part animation should be represented as like a big
+   brain something like that."* He is right and the first version was the
+   defect ANIMATION-QUALITY §3 is about: shelves of files are a CONTAINER for
+   "a place your files go". The VO's noun is **a second brain**, so the picture
+   is a brain, and the mechanism is that HIS OWN FILES are what fill it.
+
+   ⛔ AND IT IS DRAWN, NOT A BLOB. `feedback_props_need_real_drawing`: two
+   hemispheres, a dividing fissure, the cerebellum, the stem, eight gyri folds
+   per side as real curved bands, a temporal lobe, and eight LOBE CELLS that
+   light one at a time as files land. Twenty-two parts.
+   ====================================================================== */
+export const Brain: React.FC<{ x: number; y: number; s: number; f: number;
+  lit: number[]; z?: number; c?: string; hot?: string }> =
+  /* ⛔ c WAS "#E08A6E" — within a few degrees of the Mascot's own clay #D97757,
+     so the brain and the Claudes standing in front of it were the same hue and
+     the hero stopped separating from its cast. A dusty rose reads as tissue,
+     stays saturated (BODY_SAT is gated) and is clearly NOT the mascot. */
+  ({ x, y, s, f, lit, z = 40, c = "#D2757F", hot = "#FFDFA8" }) => {
+  const n = lit.filter(k => f >= k).length;
+  const last = lit.filter(k => f >= k).slice(-1)[0];
+  const pulse = last !== undefined && f - last < 14 ? 1 - (f - last) / 14 : 0;
+  const W_ = 560 * s, H_ = 440 * s;
+  /* it BREATHES — a brain that is perfectly still is an anatomical diagram */
+  const br = 1 + Math.sin(f / 21) * 0.014 + pulse * 0.03;
+  const LOBES: Array<[number, number, number, number]> = [
+    [0.16, 0.30, 0.26, 0.24], [0.40, 0.20, 0.26, 0.22], [0.64, 0.26, 0.24, 0.24],
+    [0.14, 0.56, 0.24, 0.22], [0.40, 0.46, 0.26, 0.24], [0.66, 0.52, 0.24, 0.22],
+    [0.28, 0.72, 0.24, 0.20], [0.56, 0.72, 0.24, 0.20],
+  ];
+  return (
+    <div style={{ position: "absolute", left: x - W_ / 2, top: y - H_ / 2, width: W_, height: H_,
+      zIndex: z, transform: `scale(${br})` }}>
+      {/* 1 · the cerebrum mass — two lobes meeting at a fissure */}
+      {[0, 1].map(i => (
+        <div key={"hm" + i} style={{ position: "absolute",
+          left: i ? W_ * 0.48 : 0, top: 0, width: W_ * 0.52, height: H_ * 0.82,
+          borderRadius: i ? `${W_ * 0.30}px ${W_ * 0.46}px ${W_ * 0.34}px ${W_ * 0.12}px`
+                          : `${W_ * 0.46}px ${W_ * 0.30}px ${W_ * 0.12}px ${W_ * 0.34}px`,
+          background: `linear-gradient(${i ? 200 : 160}deg, ${mxh(c, 0.22)} 0%, ${c} 46%, ${dkh(c, 0.26)} 100%)`,
+          border: `${5 * s}px solid ${dkh(c, 0.34)}` }} />
+      ))}
+      {/* 2 · the longitudinal fissure between them */}
+      <div style={{ position: "absolute", left: W_ * 0.49, top: H_ * 0.03, width: 7 * s,
+        height: H_ * 0.74, borderRadius: 4 * s, background: dkh(c, 0.42) }} />
+      {/* 3 · the GYRI — real curved folds, eight a side, which is what makes a
+             brain-shaped blob read as a brain */}
+      {Array.from({ length: 16 }, (_, i) => {
+        const side = i % 2, k = Math.floor(i / 2);
+        const rot = -34 + k * 13 + side * 6;
+        return (
+          <div key={"gy" + i} style={{ position: "absolute",
+            left: side ? W_ * (0.52 + (k % 4) * 0.10) : W_ * (0.06 + (k % 4) * 0.10),
+            top: H_ * (0.10 + Math.floor(k / 4) * 0.30) + (k % 3) * 12 * s,
+            width: W_ * 0.30, height: H_ * 0.17,
+            borderRadius: "50%", border: `${7 * s}px solid ${dkh(c, 0.22)}`,
+            borderBottomColor: "transparent", borderRightColor: "transparent",
+            transform: `rotate(${rot}deg)`, opacity: 0.7 }} />
+        );
+      })}
+      {/* 4 · the temporal lobe, tucked under the front */}
+      <div style={{ position: "absolute", left: W_ * 0.10, top: H_ * 0.58, width: W_ * 0.34,
+        height: H_ * 0.26, borderRadius: `${W_ * 0.22}px ${W_ * 0.10}px ${W_ * 0.20}px ${W_ * 0.22}px`,
+        background: `linear-gradient(170deg, ${c} 0%, ${dkh(c, 0.30)} 100%)`,
+        border: `${5 * s}px solid ${dkh(c, 0.34)}` }} />
+      {/* 5 · the cerebellum */}
+      <div style={{ position: "absolute", left: W_ * 0.60, top: H_ * 0.66, width: W_ * 0.30,
+        height: H_ * 0.24, borderRadius: "50%",
+        background: `linear-gradient(180deg, ${dkh(c, 0.14)} 0%, ${dkh(c, 0.38)} 100%)`,
+        border: `${5 * s}px solid ${dkh(c, 0.40)}`, overflow: "hidden" }}>
+        {Array.from({ length: 6 }, (_, i) => (
+          <div key={"cb" + i} style={{ position: "absolute", left: 0, right: 0, top: `${10 + i * 15}%`,
+            height: 4 * s, background: hexa(dkh(c, 0.50), 0.7) }} />
+        ))}
+      </div>
+      {/* 6 · the stem */}
+      <div style={{ position: "absolute", left: W_ * 0.46, top: H_ * 0.76, width: W_ * 0.13,
+        height: H_ * 0.24, borderRadius: `0 0 ${W_ * 0.07}px ${W_ * 0.07}px`,
+        background: `linear-gradient(180deg, ${dkh(c, 0.20)} 0%, ${dkh(c, 0.44)} 100%)` }} />
+      {/* 7 · ⭐ THE LOBE CELLS — one lights per file that lands, so the brain
+             FILLS rather than simply existing. This is the mechanism. */}
+      {LOBES.map(([lx, ly, lw, lh], i) => {
+        const on = i < n;
+        const at = lit[i];
+        const pop = on ? squash(f - at, 6, 0.22, 3, 10) : 1;
+        return (
+          <div key={"lb" + i} style={{ position: "absolute",
+            left: W_ * lx, top: H_ * ly, width: W_ * lw, height: H_ * lh,
+            borderRadius: "50%", transform: `scale(${pop})`,
+            background: on ? hexa(hot, 0.52) : hexa(dkh(c, 0.40), 0.30),
+            border: `${4 * s}px solid ${on ? hexa(hot, 0.86) : hexa(dkh(c, 0.48), 0.5)}` }}>
+            {/* each lit lobe carries the FILE that lit it, as a small page */}
+            {on && (
+              <div style={{ position: "absolute", left: "32%", top: "26%", width: "36%", height: "48%",
+                borderRadius: 3, background: hexa("#FFF6E4", 0.9) }}>
+                {[0.24, 0.50, 0.74].map((q, j) => (
+                  <div key={"lf" + j} style={{ position: "absolute", left: "16%", top: `${q * 100}%`,
+                    width: `${64 - j * 16}%`, height: 3 * s, background: hexa(INK, 0.34) }} />
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+      {/* 8 · the synapse arcs that fire between lit lobes — a brain WORKS */}
+      {n > 1 && Array.from({ length: Math.min(n - 1, 7) }, (_, i) => {
+        const a = LOBES[i], b = LOBES[i + 1];
+        const ax = W_ * (a[0] + a[2] / 2), ay = H_ * (a[1] + a[3] / 2);
+        const bx = W_ * (b[0] + b[2] / 2), by = H_ * (b[1] + b[3] / 2);
+        const t = (f / 15 + i * 0.4) % 1;
+        return (
+          <div key={"sy" + i} style={{ position: "absolute",
+            left: ax + (bx - ax) * t - 7 * s, top: ay + (by - ay) * t - 7 * s,
+            width: 14 * s, height: 14 * s, borderRadius: "50%",
+            background: hexa(hot, 0.9 * (1 - Math.abs(t - 0.5) * 1.2)) }} />
+        );
+      })}
+    </div>
+  );
+};
+
+/* =========================================================================
+   S6 — ⭐⭐⭐ A CODEBASE, DRAWN AS CODE.
+   Alex: *"codebase, that should be seen as actual kind of codebase graphics."*
+   The first version dropped wooden CRATES with a file-tree stencil on the side,
+   which is a container for "a lot of files" and not a picture of a codebase.
+   This is a real editor slab: a title bar with a filename tab, a line-number
+   gutter, indented syntax-coloured lines with keyword / string / comment
+   colouring, a fold marker, a minimap strip and a status bar. Fourteen parts,
+   and the LINES are what makes it read as code at thumbnail size.
+   ====================================================================== */
+export const CodeSlab: React.FC<{ x: number; y: number; w: number; f: number; seed: number;
+  rot?: number; z?: number; s?: number; name?: string }> =
+  ({ x, y, w, f, seed, rot = 0, z = 62, s = 1, name = "src" }) => {
+  const h = w * 0.72;
+  const ROWS = 13;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h,
+      zIndex: z, transform: `rotate(${rot}deg)`, borderRadius: 10 * s, overflow: "hidden",
+      background: "#141A22", border: `${4 * s}px solid #2C3644`, boxShadow: SH_D }}>
+      {/* the title bar with a real filename tab */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: h * 0.12,
+        background: "#1B2430", borderBottom: `2px solid #2C3644` }}>
+        <div style={{ position: "absolute", left: w * 0.03, top: "16%", width: w * 0.36, height: "70%",
+          borderRadius: `${5 * s}px ${5 * s}px 0 0`, background: "#141A22",
+          display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span style={{ ...mono(Math.max(9, h * 0.055), 700), color: hexa("#9FB4C8", 0.9) }}>
+            {name}.ts
+          </span>
+        </div>
+        <div style={{ position: "absolute", right: w * 0.04, top: "34%", width: w * 0.05,
+          height: w * 0.05, borderRadius: "50%", background: hexa(G_YEL, 0.7) }} />
+      </div>
+      {/* the line-number gutter */}
+      <div style={{ position: "absolute", left: 0, top: h * 0.12, bottom: h * 0.09, width: w * 0.10,
+        background: "#111720", borderRight: `2px solid #232C38` }}>
+        {Array.from({ length: ROWS }, (_, i) => (
+          <div key={"ln" + i} style={{ position: "absolute", right: w * 0.018,
+            top: h * (0.02 + i * 0.062), width: w * 0.035, height: Math.max(3, h * 0.016),
+            borderRadius: 2, background: hexa("#4A5A6E", 0.8) }} />
+        ))}
+      </div>
+      {/* ⭐ THE CODE — indented, syntax-coloured, with a blank line and a fold */}
+      {Array.from({ length: ROWS }, (_, i) => {
+        const indent = [0, 0, 1, 2, 2, 1, 0, 0, 1, 2, 2, 1, 0][i] ?? 0;
+        const kind = [0, 1, 2, 3, 2, 3, 0, 1, 2, 3, 2, 0, 1][i] ?? 0;
+        const col = kind === 0 ? "#C792EA" : kind === 1 ? "#82AAFF" : kind === 2 ? "#C3E88D" : "#7E8CA0";
+        const wid = 0.20 + rnd(seed, i) * 0.52;
+        if (i === 6) return null;                       /* a blank line — code breathes */
+        return (
+          <React.Fragment key={"cl" + i}>
+            <div style={{ position: "absolute", left: w * (0.13 + indent * 0.05),
+              top: h * (0.155 + i * 0.062), width: w * wid, height: Math.max(4, h * 0.026),
+              borderRadius: 2, background: hexa(col, 0.88) }} />
+            {/* a second token on some lines, so it is not one bar per row */}
+            {i % 3 === 1 && (
+              <div style={{ position: "absolute", left: w * (0.13 + indent * 0.05 + wid + 0.03),
+                top: h * (0.155 + i * 0.062), width: w * (0.08 + rnd(seed + 3, i) * 0.14),
+                height: Math.max(4, h * 0.026), borderRadius: 2, background: hexa("#FFCB6B", 0.8) }} />
+            )}
+          </React.Fragment>
+        );
+      })}
+      {/* the fold marker */}
+      <div style={{ position: "absolute", left: w * 0.105, top: h * 0.28, width: w * 0.02,
+        height: h * 0.19, background: hexa("#3E4C5E", 0.9) }} />
+      {/* the minimap strip down the right edge */}
+      <div style={{ position: "absolute", right: 0, top: h * 0.12, bottom: h * 0.09, width: w * 0.09,
+        background: "#111720", borderLeft: `2px solid #232C38` }}>
+        {Array.from({ length: 22 }, (_, i) => (
+          <div key={"mm" + i} style={{ position: "absolute", left: w * 0.012,
+            top: h * (0.015 + i * 0.036), width: w * (0.02 + rnd(seed + 7, i) * 0.05),
+            height: Math.max(2, h * 0.011), background: hexa("#3E5064", 0.9) }} />
+        ))}
+      </div>
+      {/* the caret, blinking — the file is OPEN */}
+      <div style={{ position: "absolute", left: w * 0.24, top: h * 0.40, width: Math.max(2, w * 0.008),
+        height: h * 0.032, background: Math.floor(f / 8) % 2 ? "#FFFFFF" : "transparent" }} />
+      {/* the status bar */}
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: h * 0.09,
+        background: "#1B2430", borderTop: `2px solid #2C3644` }}>
+        <div style={{ position: "absolute", left: w * 0.03, top: "30%", width: w * 0.18,
+          height: "40%", borderRadius: 2, background: hexa(G_BLUE, 0.55) }} />
+        <div style={{ position: "absolute", right: w * 0.03, top: "30%", width: w * 0.10,
+          height: "40%", borderRadius: 2, background: hexa("#4A5A6E", 0.8) }} />
+      </div>
+    </div>
+  );
+};
 
 /** the shaft mouth: a lit hatch with a gauge that barely moves. ⛔ the gauge
     reads `1M` — the REAL Gemini 3 context figure, and the only one legal here. */

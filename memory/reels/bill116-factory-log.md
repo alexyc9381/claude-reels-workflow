@@ -240,3 +240,126 @@ VO, the three beds, the caption JSON and the composition index.
 > immediately before creating the delivery folder, not only at kickoff** — reel 86's log
 > already recorded this exact hazard (*"85 = AUTO was in flight in a parallel session"*)
 > and it cost nothing there because it was noticed in time.
+
+---
+
+# ROUND 2 — six notes, and the one that had been wrong since reel 107
+
+Alex, on the delivered cut: *"the BG music is completely wrong… it's not using
+the right bg music we typically use"* · *"try to find the google launch videos
+for these tools you can partially use as broll"* · *"second brain part animation
+should be represented as like a big brain"* · *"codebase, that should be seen as
+actual kind of codebase graphics"* · *"the beginning needs to have bigger claude
+sprite"* · *"the diff tools need the correct logos as well"*.
+
+| | round 1 | round 2 |
+|---|---|---|
+| motion median | 9.70 | **9.94** (0/20 failing, above reel 81's approved 9.82) |
+| STAGE / LINK / CONTEXT | 7.72 · 7.84 · 15.15 | **9.94 · 9.92 · 16.73** |
+| look | all green | all green (HOOK_LUMA 144.0 · SAT 48.7% · p10 26.7) |
+| dHash | mean 25.8 min 14 | mean 25.0 **min 12** |
+
+## ⛔⛔⛔ THE MUSIC HAD BEEN WRONG SINCE REEL 107 AND NO GATE COULD SEE IT
+
+The bed was a synthesised pad from `gen_bill_bed.py`, cloned from reel 114's
+`gen_bay_bed.py`. It passed everything: onset at zero, no air swell, continuous,
+correctly gapped, 12 dB under the VO. It was still not the show's music.
+
+⭐ **The evidence was already in the repo and I never counted it.** One grep over
+every reel's source:
+
+```
+ados_bed_loud.wav / ados_bed.wav   13 uses    "Another Day Of Sun"      (Drive *Soundtracks/)
+ebm_bed.wav / ebm_bed_hot.wav       8 uses    "Every Living Breathing Moment"
+```
+
+Those two real tracks ARE the house bed. Reels 107-114 drifted onto generated
+pads one clone at a time, and this reel inherited the drift as a fact.
+
+> **When a subsystem has a house default, count its USES across shipped work
+> before writing a new one.** `grep -ohE '"[a-z_]*bed[a-z_]*\.wav"' src/*.tsx |
+> sort | uniq -c` is the whole check and it takes five seconds.
+
+⛔ **AND THE SWAP IMMEDIATELY BLOCKED THE SHIP GATE.** `ebm_bed.wav` carries a
+**280 ms lead-in** against `MUSIC_ONSET_0`'s 150 ms bar — a bed that sounds
+perfect and fails `soundtrack-onset-at-zero`. Measured with a 5 ms RMS scan
+rather than by ear (`ebm 280ms ⛔ · ebm_hot 15ms ✓ · ados 10ms ✓`), trimmed to
+`116_ebm_bed.wav`. ⭐ **And the trim moved its loudness -11.0 → -16.0 LUFS**,
+because it removed a loud intro — so the gain had to be re-derived, which is
+exactly the carried-over-constant trap SOUND-DESIGN §13 exists for, one step
+further along than usual.
+
+## ⭐⭐ REAL GOOGLE LAUNCH FOOTAGE, AND HOW TO GET IT WHEN YOUTUBE SAYS NO
+
+yt_dlp returned **403 on four of five** official videos here. What worked:
+
+1. **Google's own CDN.** `labs.google/flow` serves 21 landing-page mp4s straight
+   from `gstatic.com/aitestkitchen/website/flow/landing_page/*.mp4` — the actual
+   product videos, no extractor involved. Four became b-roll.
+2. **yt_dlp with the default web client and a PROGRESSIVE format** got the
+   NotebookLM launch video through when every alternate `player_client` failed.
+3. **Headless Chrome from the puppeteer cache** (`~/.cache/puppeteer/chrome/…`)
+   for live site captures, because Playwright was not installed. Five products
+   captured at 1280×820.
+
+Measured effect, unchanged animation elsewhere: **STAGE 7.72 → 9.94 · LINK 7.84
+→ 9.92 · TETHER 8.01 → 8.99 · SENTENCE 8.74 → 10.12.** This is §1's "real UI is
+the biggest single motion lever" holding for the fourth reel running.
+
+⛔ NotebookLM's app URL is a **sign-in wall** — capture the marketing page
+(`notebooklm.google`), never the app.
+
+## ⛔⛔ AND ONE B-ROLL INSERTION SILENTLY DID NOTHING
+
+Five of six `Broll` insertions landed. The sixth was written as a plain
+`str.replace()` against a `<Crew>` line that an earlier pass in the same session
+had already rewritten, so it matched nothing, changed nothing, and **said
+nothing**. The scene rendered fine and looked wrong for no visible reason.
+
+> ⭐ **Every scripted edit asserts its anchor.** `assert old in s` before
+> `s.replace(old, new)`, every time. A `grep -c` over the file afterwards is the
+> second check, and it is what actually caught this one.
+
+## ⛔ THE LOGOS: FOUR OF FIVE HAD A REAL MARK AND I STOPPED LOOKING TOO EARLY
+
+Round 1 used the Google `G` for Flow, Opal and Antigravity because none is on
+the usual `gstatic.com/images/branding/productlogos/…` path. Three of them were
+findable elsewhere:
+
+| mark | where it actually was |
+|---|---|
+| **Flow** | `labs.google/fx/icons/favicon/flow_favicon_{b,w}.png` — 653×524, and it is a **projector light-cone** |
+| **Antigravity** | the `@googleantigravity` channel avatar at `=s900` — 900×900 of the real gradient arch |
+| **NotebookLM** | the official mark **is** monochrome arcs; the `_color_` path returns the same glyph, so the repo SVG was right all along |
+| **Opal** | genuinely has no icon — `opal.google` renders a **wordmark** plus a Labs chip, read live. The wordmark IS the mark, not a fallback |
+
+⛔⛔ **AND THE FLOW MARK ONLY READS ON A DARK TILE.** The dark-ink version on a
+white card was a solid black rectangle at card size: the mark is a cone that
+FADES to transparent, so its silhouette IS the fade, and a fade against white
+has no edge. The white-on-dark version is the same asset read the right way
+round — reel 110's silhouette test applied to a logo.
+
+## ⭐ THE TWO CONCEPT REBUILDS WERE BOTH §3 FAILURES
+
+- **"a free second brain"** was drawn as SHELVES OF FILES — a container for "a
+  place your files go". The VO's noun is a BRAIN, so it is now one: 22 drawn
+  parts (two hemispheres, a fissure, 16 gyri, a temporal lobe, a cerebellum, a
+  stem) with eight lobe cells that light one per file and synapses firing
+  between the lit ones. ⛔ Its first colour `#E08A6E` was within a few degrees
+  of the Mascot's own clay and the hero stopped separating from its cast; a
+  dusty rose fixed it without touching saturation.
+- **"drop a whole codebase into"** was drawn as WOODEN CRATES with a file-tree
+  stencil. It is now `CodeSlab`: a real editor pane with a filename tab, a
+  line-number gutter, indented syntax-coloured tokens, a fold marker, a minimap
+  and a status bar — plus a stream of nine smaller slabs, because a codebase is
+  a VOLUME and not three objects. **CONTEXT 15.15 → 16.73.**
+
+## ⛔ AND `z` BURIED SOMETHING FOR THE THIRD TIME IN ONE BUILD
+
+S14's Antigravity capture was drawn at `z=30` under `DarkOverhead` (`z=82`) and
+could not be seen. That is ANIMATION-QUALITY §6 fault 2 — *"it is behind
+something"* — for the third time here (the stamp head behind `HookHeader`, the
+bench belt behind the pegboard, and now this).
+
+> **When a new element does not appear, read the z of every full-width furniture
+> layer in its set BEFORE touching its position or its values.**

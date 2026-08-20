@@ -12,7 +12,8 @@ import {
 import type { BillRow } from "./BillWorld";
 import {
   Turnstile, Coin, BrowserWin, CodeCrate, ContextShaft, ShelfUnit, FileProp,
-  AnswerCard, Tether, Crane, StageFlat, AppTile, LinkChain, Bay, Ticket,
+  AnswerCard, Tether, Crane, StageFlat, AppTile, LinkChain, Bay, Ticket, Brain, CodeSlab,
+  Broll, Shot,
   OutputRack, CommentField,
 } from "./BillProps";
 import { SetFor, placeFor } from "./BillSets";
@@ -246,7 +247,12 @@ export const S0: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         {/* ⛔ z=90, NOT 70. `NearStack` paints the near plane at z=87, so at 70
             his legs were behind a pallet and he rendered as a floating orange
             bar. The near mass belongs BEHIND the cast, not over it. */}
-        <Crew f={f} x={806} y={762} i={2} size={214} z={90} at={-14} loop={3}
+        {/* ⭐ BIGGER. Alex: *"the beginning needs to have bigger claude sprite."*
+            214 -> 286px is 36% of the panel height against a 620px bill, which
+            keeps the bill the hero while making the character the second thing
+            you see rather than the fifth. THE-OPEN law 2: characters stop
+            scrolls, and a small one does not. */}
+        <Crew f={f} x={834} y={784} i={2} size={286} z={90} at={-14} loop={3}
           shock={lastHit !== undefined && f - lastHit < 12 ? 1 : 0} />
 
         {/* the mark, big and early — the audience filter, never on a face.
@@ -671,8 +677,17 @@ export const S5: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             <div style={{ width: 44, height: 44, borderRadius: 12, background: G_BLUE }} />
             <span style={{ ...ui(34, 900), color: INK }}>GEMINI 3 PRO</span>
           </div>
+          {/* ⭐ THE REAL PAGE, captured live from aistudio.google.com, panning
+              slowly behind the chrome. A drawn approximation of a product is a
+              container; the product's own page is the receipt. */}
+          <div style={{ position: "absolute", left: 336, top: 168, right: 44, bottom: 118,
+            borderRadius: 12, overflow: "hidden", border: `4px solid ${dkh("#E6E1D4", 0.14)}` }}>
+            <Img src={staticFile("shots/bill_aistudio.png")}
+              style={{ position: "absolute", left: 0, top: -E(f, OPEN + 18, OPEN + 96, 0, 130, LIN),
+                width: "100%" }} />
+          </div>
           {/* the prompt area filling with real content */}
-          {Array.from({ length: Math.min(5, Math.max(0, Math.floor((f - OPEN - 22) / 6))) }, (_, i) => (
+          {Array.from({ length: 0 }, (_, i) => (
             <div key={"pr" + i} style={{ position: "absolute", left: 300, top: 176 + i * 44,
               width: `${44 + rnd(4, i) * 34}%`, height: 30, borderRadius: 8,
               background: hexa(i % 2 ? G_GRN : INK, 0.13),
@@ -734,17 +749,40 @@ export const S6: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 
         <ContextShaft x={476} y={p.horizon - 40} w={430} f={f} fills={LAND} z={30} c={p.key} />
 
-        {/* the three crates, each falling the FULL panel height */}
+        {/* ⭐⭐⭐ REBUILT AS ACTUAL CODE. Alex: *"codebase, that should be seen as
+            actual kind of codebase graphics."* The first version dropped wooden
+            CRATES with a file-tree stencil painted on the side — a container for
+            "a lot of files", which is exactly the §3 defect: the VO's noun is a
+            CODEBASE, so the thing falling has to look like one. `CodeSlab` is a
+            real editor pane: filename tab, line-number gutter, indented
+            syntax-coloured tokens, a fold marker, a minimap and a status bar. */}
         {D.map((k, i) => {
+          const NAMES = ["index", "server", "router"];
           if (f < k - 6) {
             /* they hang on the gantry before they drop — a legible before-state */
-            return <CodeCrate key={"cq" + i} x={300 + i * 190} y={214} s={0.62} f={f} rot={-2 + i * 2} z={58} />;
+            return <CodeSlab key={"cq" + i} x={276 + i * 224} y={228} w={214} f={f}
+              seed={i * 11 + 3} rot={-3 + i * 3} z={58} s={0.62} name={NAMES[i]} />;
           }
           if (f > LAND[i] + 3) return null;
           const t = E(f, k, LAND[i], 0, 1, IN_Q);
           return (
-            <CodeCrate key={"cd" + i} x={300 + i * 190 + (476 - (300 + i * 190)) * t}
-              y={214 + t * 330} s={0.62 + t * 0.30} f={f} rot={-2 + i * 2 + t * 16} z={58} />
+            <CodeSlab key={"cd" + i} x={276 + i * 224 + (476 - (276 + i * 224)) * t}
+              y={228 + t * 316} w={214 + t * 96} f={f} seed={i * 11 + 3}
+              rot={-3 + i * 3 + t * 22} z={58} s={0.62 + t * 0.28} name={NAMES[i]} />
+          );
+        })}
+        {/* ⭐ and the code KEEPS COMING — a stream of smaller slabs feeding the
+            shaft behind the three heroes, so "a whole codebase" is a VOLUME and
+            not three objects. Each is 96px, clear of the 40px floor. */}
+        {Array.from({ length: 9 }, (_, i) => {
+          const born = 6 + i * 8;
+          if (f < born || f > born + 30) return null;
+          const t = E(f, born, born + 30, 0, 1, IN_Q);
+          const x0 = 150 + (i % 5) * 190;
+          return (
+            <CodeSlab key={"cs" + i} x={x0 + (476 - x0) * t} y={150 + t * 380} w={96} f={f}
+              seed={i * 5 + 21} rot={(i % 2 ? -14 : 12) + t * 40} z={52} s={0.42}
+              name={["api", "db", "auth", "ui", "lib"][i % 5]} />
           );
         })}
         {LAND.map((k, i) => (<React.Fragment key={"la" + i}>
@@ -784,21 +822,29 @@ export const S7: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const off = v === "amber" ? 5 : v === "steel" ? -3 : 0;
   /* NINE files, arriving across the FULL 96 frames — never front-loaded */
   const FLY = Array.from({ length: 9 }, (_, i) => 6 + off + i * 9);
-  const LIT = [FLY[1], FLY[3], FLY[5], FLY[7], FLY[8]].map(k => k + 12);
+  /* one lobe lights per file that lands — eight lobes, nine files */
+  const LIT = FLY.map(k => k + 14);
   return (
     <Scene p={p} slug="YOUR OWN FILES" push={push(v, dur, 1.082)} vig={0.42}>
       <div style={{ position: "absolute", inset: 0 }}>
         <SetFor k="stacks" f={f} lit={1} t={f * 0.6} rakeRate={5.0} />
 
-        <ShelfUnit x={560} y={p.horizon + 26} w={470} h={410} f={f} lit={LIT} z={34} />
+        {/* ⭐⭐⭐ A SECOND BRAIN, DRAWN AS A BRAIN. Alex: *"second brain part
+            animation should be represented as like a big brain something like
+            that."* The shelf unit was a CONTAINER for "a place your files go";
+            the VO's noun is a second BRAIN, so the picture is one, and the
+            mechanism is that HIS OWN FILES are what light it up — one lobe per
+            file, with synapses firing between the lit ones. 560px wide = 55% of
+            the panel, so it is the hero with air around it. */}
+        <Brain x={506} y={350} s={0.94} f={f} lit={LIT} z={40} />
 
-        {/* the real NotebookLM mark, 200px, on the unit's face */}
-        <div style={{ position: "absolute", left: 690, top: 178, width: 216, height: 216, zIndex: 52,
-          borderRadius: 44, background: "#FFFFFF", border: "6px solid #ECE7DC",
+        {/* the real NotebookLM mark on a plate beside it, 200px */}
+        <div style={{ position: "absolute", left: 806, top: 138, width: 200, height: 200, zIndex: 52,
+          borderRadius: 42, background: "#FFFFFF", border: "6px solid #ECE7DC",
           display: "flex", alignItems: "center", justifyContent: "center",
           transform: `scale(${E(f, 10, 20, 0, 1, BACK)})` }}>
-          <Img src={staticFile("logos/notebooklm.svg")}
-            style={{ width: 150, height: 150, objectFit: "contain" }} />
+          <Img src={staticFile("logos/notebooklm_mark.png")}
+            style={{ width: 142, height: 142, objectFit: "contain" }} />
         </div>
 
         {/* HIS PILE, on the floor beside him — "your own files" is possessive */}
@@ -816,7 +862,15 @@ export const S7: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           /* ⛔ s WAS 0.86 = a 76x96 file. Under the audit's 1012->240 downsample
              that is 18x23 and it read as a white speck; at 1.22 it is 107x137,
              clear of the 40px short-side floor with room to spare. */
-          const tx = 400 + (i % 3) * 128, ty = 200 + Math.floor(i / 3) * 104;
+          /* ⭐ the flight targets are the BRAIN'S LOBE CENTRES, so a file visibly
+             goes INTO the thing it is filling. Derived from `Brain`'s own LOBES
+             table at x=520 y=356 s=1.06: half-width 297, half-height 233. */
+          const LOBES: Array<[number, number]> = [
+            [0.29, 0.42], [0.53, 0.31], [0.76, 0.38],
+            [0.26, 0.67], [0.53, 0.58], [0.78, 0.63], [0.40, 0.82],
+          ];
+          const [lu, lv] = LOBES[i % 7];
+          const tx = 506 - 263 + lu * 526, ty = 350 - 207 + lv * 414;
           return (
             <FileProp key={"ff" + i} x={186 + (tx - 186) * t}
               y={p.horizon + 110 + (ty - (p.horizon + 110)) * t - Math.sin(t * Math.PI) * 130}
@@ -824,16 +878,20 @@ export const S7: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           );
         })}
         {/* the ones that have landed, staying on their shelf */}
-        {FLY.map((k, i) => (
-          f > k + 14
-            ? <FileProp key={"fs" + i} x={400 + (i % 3) * 128} y={200 + Math.floor(i / 3) * 104}
-                s={1.22} rot={(i % 3) * 3 - 3} z={44} />
-            : null
-        ))}
-        {FLY.map((k, i) => (
-          <Ring key={"fr" + i} x={400 + (i % 3) * 128} y={200 + Math.floor(i / 3) * 104}
-            f={f} at={k + 14} r={110} c={p.key} z={64} w={5} dur={12} />
-        ))}
+        {/* ⛔ no landed copies: the file is now absorbed INTO the lobe it lit
+            (the lobe draws its own page), so a second copy sitting on top would
+            be the same object twice. Only the arrival ring remains. */}
+        {FLY.map((k, i) => {
+          const LOBES: Array<[number, number]> = [
+            [0.29, 0.42], [0.53, 0.31], [0.76, 0.38],
+            [0.26, 0.67], [0.53, 0.58], [0.78, 0.63], [0.40, 0.82],
+          ];
+          const [lu, lv] = LOBES[i % 7];
+          return (
+            <Ring key={"fr" + i} x={506 - 263 + lu * 526} y={350 - 207 + lv * 414}
+              f={f} at={k + 14} r={130} c="#FFD9A0" z={64} w={6} dur={13} />
+          );
+        })}
 
         {/* two Claudes: one loading, one shelving. Jobs, not idles. */}
         <Crew f={f} x={198} y={p.horizon + 226} i={4} size={172} z={70} at={0} loop={4} />
@@ -872,6 +930,11 @@ export const S8: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
     <Scene p={p} slug="TIED TO THE SOURCE" push={push(v, dur, 1.072)} vig={0.48}>
       <div style={{ position: "absolute", inset: 0 }}>
         <SetFor k="desk" f={f} lit={1} t={f * 0.5} rakeRate={4.4} />
+
+        {/* ⭐ THE REAL NOTEBOOKLM UI, from Google's own launch video, sitting where
+            the sources live. The tether runs back to the actual product. */}
+        <Broll x={806} y={214} w={330} f={f} at={2} src="broll/broll_notebook.mp4"
+          z={44} label="NOTEBOOKLM" chrome="app" punch={BOUND} />
 
         {/* the three SOURCES the tether goes back to — real files on a shelf */}
         <div style={{ position: "absolute", left: 90, top: 152, width: 350, height: 156, zIndex: 30,
@@ -967,16 +1030,25 @@ export const S9: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         {/* ⛔ s WAS 1.06 AND THE RIG WAS A TWIG ON A BLACK STAGE. At 1.5 the boom
             spans ~450px against a 1012 panel — 44%, which is a crane, and still
             leaves air for a silhouette to form. */}
-        <Crane x={648} y={p.horizon + 152} s={1.50} f={f} unfold={UNFOLD} z={56} />
+        <Crane x={344} y={p.horizon + 152} s={1.42} f={f} unfold={UNFOLD} z={56} />
 
         {/* the FLOW card, 200px, on the stage's name board */}
-        <NameBoard x={300} y={196} w={352} t="FLOW" f={f} at={UNFOLD + 14} z={68} s={1.16}
+        <NameBoard x={216} y={132} w={332} t="FLOW" f={f} at={UNFOLD + 14} z={68} s={1.06}
           sub="GOOGLE · AI FILM" />
-        <div style={{ position: "absolute", left: 214, top: 288, width: 172, height: 172, zIndex: 69,
-          borderRadius: 36, background: "#FFFFFF", border: "6px solid #ECE7DC",
-          display: "flex", alignItems: "center", justifyContent: "center",
+        {/* ⭐ THE REAL FLOW MARK — a projector light-cone, from Google's own
+            favicon asset. It goes on a DARK tile because the mark is dark ink. */}
+        {/* ⭐ THE REAL FLOW MARK — a projector light-cone, from Google's own
+            favicon asset. ⛔ At 168px inside a 168px tile it filled the tile
+            edge to edge and read as a BLACK SMEAR: the mark fades to
+            transparent, so it has no silhouette without air around it. At 0.60
+            of the tile the cone shape is legible, which is the whole point of
+            using the real mark instead of a `G`. */}
+        <div style={{ position: "absolute", left: 132, top: 218, width: 168, height: 168, zIndex: 69,
+          borderRadius: 36, background: "#141518", border: "6px solid #2A2C32",
+          display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
           transform: `scale(${E(f, UNFOLD + 18, UNFOLD + 28, 0, 1, BACK)})` }}>
-          <Img src={staticFile("logos/google.svg")} style={{ width: 118, height: 118, objectFit: "contain" }} />
+          <Img src={staticFile("logos/googleflow_light.png")}
+            style={{ width: 150, height: 150, objectFit: "contain" }} />
         </div>
 
         {/* the operator, walking the crane round — a job with an object */}
@@ -1027,8 +1099,21 @@ export const S9: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             background: hexa("#241E2E", 0.5) }} />
         ))}
 
+        {/* ⭐ REAL FLOW OUTPUT ON THE STAGE SCREEN — Google's own landing-page
+            video of a wall of Veo results, playing on the cyclorama. This is
+            the receipt for "Google's AI film tool" and the largest changing
+            area in the shot.
+            ⛔ THIS EDIT SILENTLY NO-OP'D ONCE. It was written as a plain
+            `str.replace()` against a Crew line that an earlier pass had already
+            rewritten, so it matched nothing and failed without a word — five
+            other b-roll insertions landed and this one did not, and only a
+            `grep -c` over the file found it. Every scripted edit in this build
+            now asserts its anchor before replacing. */}
+        <Broll x={596} y={286} w={470} f={f} at={UNFOLD + 6} src="broll/broll_flow_grid.mp4"
+          z={52} label="FLOW" chrome="app" punch={UNFOLD + 34} />
+
         <Crew f={f} x={140} y={p.horizon + 220} i={10} size={168} z={70} at={2} loop={0} />
-        <Crew f={f} x={880} y={p.horizon + 244} i={7} size={142} z={70} at={10} loop={1} flip />
+        <Crew f={f} x={906} y={p.horizon + 244} i={7} size={142} z={70} at={10} loop={1} flip />
 
         <MarkCast x={906} y={620} s={88} z={74} f={f} spin={-0.5} o={0.62} />
       </div>
@@ -1073,7 +1158,7 @@ export const S10: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           z={26} kind={0} c="#2C2440" />
 
         {/* the slate he types on, then slams */}
-        {f < SLAM + 22 && (
+        {false && (
           <div style={{ position: "absolute", left: 344, top: 250, width: 330, height: 208, zIndex: 64,
             borderRadius: 8, background: "#14121A", border: "7px solid #3A3448",
             transform: `rotate(${f >= SLAM ? -8 + rock(f - SLAM, 0, 1, 20) * 12   /* ⛔ was 20x12 = 240deg */ : -3}deg) scale(${E(f, TYPE - 8, TYPE, 0, 1, BACK)})` }}>
@@ -1143,6 +1228,20 @@ export const S10: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           <div style={{ position: "absolute", inset: 0, zIndex: 18,
             background: `linear-gradient(96deg, ${hexa(SKY, 0.10)} 0%, ${hexa(GOLD, 0.12)} 100%)` }} />
         </>)}
+
+        {/* ⭐⭐ CUT TO THE WORDS, WITH THE REAL PRODUCT. Flow's own launch clip of
+            the GENERATION PANEL runs while he types (that panel is literally
+            where you type the shot), and on "Veo" it hard-cuts to Flow's clip of
+            the built result. The §3 test passes on the footage itself: the
+            picture shows a shot being specified and then existing. */}
+        {f < VEO && (
+          <Broll x={512} y={252} w={356} f={f} at={TYPE - 4} src="broll/broll_flow_type.mp4"
+            z={66} label="FLOW" chrome="app" punch={SLAM} />
+        )}
+        {f >= VEO && (
+          <Broll x={512} y={268} w={556} f={f} at={VEO} src="broll/broll_flow_scene.mp4"
+            z={66} label="VEO" chrome="app" punch={MOVE} />
+        )}
 
         <Crew f={f} x={132} y={p.horizon + 226} i={10} size={150} z={72} at={0} loop={1} />
       </div>
@@ -1357,6 +1456,11 @@ export const S13: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           at={RISE} z={64} live />
         <Ring x={236} y={430} f={f} at={RISE} r={200} c={p.key} z={62} w={6} />
 
+        {/* ⭐ THE REAL OPAL PAGE, captured live from opal.google — the prompt box
+            and "Build, edit, and share AI mini-apps using natural language". */}
+        <Shot x={790} y={214} w={380} f={f} at={OPEN} src="shots/bill_opal.png"
+          z={44} label="opal.google" pan={90} />
+
         {/* ⭐⭐ THE LINK — real chain links snapping out the full panel width */}
         <LinkChain x0={596} y0={356} x1={912} y1={352} f={f} at={CHAIN} z={70} c={SKY} n={11} />
         {/* the far end lights up: a second, running copy */}
@@ -1446,14 +1550,26 @@ export const S14: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             r={200} c={p.key} z={72} w={6} dur={14} />
         ))}
 
+        {/* ⭐ THE REAL ANTIGRAVITY PRODUCT PAGE behind the bays, so the room is
+            the actual IDE rather than a drawing of one. */}
+        {/* ⛔ z=30 PUT THIS UNDER `DarkOverhead` (z82), which paints the room's
+            dark tenth from -10 to ~170 — the capture rendered and could not be
+            seen, §6 fault 2 for the third time in this build. It is the
+            product's own page and has to be legible, so it sits above the
+            gantry rather than behind it. */}
+        <Shot x={506} y={96} w={408} f={f} at={OPEN + 10} src="shots/bill_antigravity_ide.png"
+          z={84} label="antigravity.google" pan={60} ratio={0.34} />
+
         {/* the ANTIGRAVITY card, 200px, on the room's name board */}
         <NameBoard x={506} y={78} w={430} t="ANTIGRAVITY" f={f} at={OPEN + 20} z={76} s={1.06}
           sub="GOOGLE · FREE IDE" />
-        <div style={{ position: "absolute", left: 116, top: 62, width: 132, height: 132, zIndex: 77,
-          borderRadius: 28, background: "#FFFFFF", border: "5px solid #ECE7DC",
-          display: "flex", alignItems: "center", justifyContent: "center",
+        {/* ⭐ THE REAL ANTIGRAVITY MARK, from the official channel avatar. It
+            ships on a dark ground, so its tile is dark — as Google presents it. */}
+        <div style={{ position: "absolute", left: 92, top: 54, width: 140, height: 140, zIndex: 77,
+          borderRadius: 30, background: "#141518", border: "5px solid #2A2C32",
+          display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
           transform: `scale(${E(f, OPEN + 24, OPEN + 34, 0, 1, BACK)})` }}>
-          <Img src={staticFile("logos/google.svg")} style={{ width: 92, height: 92, objectFit: "contain" }} />
+          <Img src={staticFile("logos/antigravity.png")} style={{ width: 140, height: 140, objectFit: "contain" }} />
         </div>
 
         {/* ⛔ 6.91 — the three shutters roll in 16 frames and then the shot

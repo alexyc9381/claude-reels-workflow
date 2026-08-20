@@ -79,13 +79,35 @@ export const G_BLUE = "#4285F4", G_RED = "#EA4335", G_YEL = "#FBBC05", G_GRN = "
    page. NOTHING in the picture may state a figure that is not in here.
    ====================================================================== */
 export const R = {
-  /* the five, in VO order */
+  /* ⭐⭐ THE FIVE, IN VO ORDER, AND FOUR NOW CARRY THEIR REAL MARK.
+     The first build used the Google `G` for Flow / Opal / Antigravity because
+     none of them publishes an icon on the usual gstatic product-logo path. That
+     was the wrong place to stop looking:
+       · FLOW         labs.google/fx/icons/favicon/flow_favicon_b.png — 653x524,
+                      and the mark is a PROJECTOR LIGHT-CONE, which is exactly
+                      right for a film tool
+       · ANTIGRAVITY  the @googleantigravity channel avatar at s900 — 900x900 of
+                      the real gradient arch, on Google's own dark tile
+       · NOTEBOOKLM   the official product mark is MONOCHROME arcs; the
+                      "..._color_..." gstatic path returns the same mono glyph,
+                      so the repo SVG was already correct
+       · AI STUDIO    gstatic web-512dp, real colour
+     ⛔ OPAL is the one that genuinely has no icon: opal.google renders its
+     identity as a WORDMARK plus a Google Labs chip, read live. So Opal keeps
+     the wordmark treatment — that is not a fallback, it IS the mark. */
   tools: [
-    { key: "aistudio", name: "AI STUDIO",   mark: "logos/aistudio.png",   real: true },
-    { key: "notebook", name: "NOTEBOOKLM",  mark: "logos/notebooklm.svg", real: true },
-    { key: "flow",     name: "FLOW",        mark: "logos/google.svg",     real: false },
-    { key: "opal",     name: "OPAL",        mark: "logos/google.svg",     real: false },
-    { key: "antigrav", name: "ANTIGRAVITY", mark: "logos/google.svg",     real: false },
+    { key: "aistudio", name: "AI STUDIO",   mark: "logos/aistudio.png",       real: true,  dark: false },
+    { key: "notebook", name: "NOTEBOOKLM",  mark: "logos/notebooklm_mark.png", real: true,  dark: false },
+    /* ⛔⛔ THE FLOW CONE ONLY READS ON A DARK TILE. Google ships it in two
+       versions and the DARK-INK one on a white tile is a solid black rectangle
+       at card size — the mark is a light-cone that fades to transparent, so its
+       silhouette is the FADE, and a fade against white has no edge at all. The
+       white-on-dark version is the same asset read the right way round: a
+       projector beam, which is what a film tool's mark should look like. Reel
+       110's silhouette test, applied to a logo. */
+    { key: "flow",     name: "FLOW",        mark: "logos/googleflow_light.png", real: true, dark: true },
+    { key: "opal",     name: "OPAL",        mark: "logos/google.svg",         real: false, dark: false },
+    { key: "antigrav", name: "ANTIGRAVITY", mark: "logos/antigravity.png",    real: true,  dark: true  },
   ] as const,
 
   /* ⭐ the ONLY two figures the picture may draw, and why each is safe:
@@ -753,12 +775,21 @@ export const ToolCard: React.FC<{ x: number; y: number; s: number; i: number; f:
       transform: `scale(${inS * sq}) rotate(${rot}deg)`, transformOrigin: "50% 100%",
       borderRadius: 20 * s, background: `linear-gradient(172deg, #FFFFFF 0%, ${dkh("#F4F1EA", 0.08)} 100%)`,
       border: `${5 * s}px solid ${dkh("#F4F1EA", 0.22)}`, boxShadow: SH_D, opacity: 0.30 + lit * 0.70 }}>
-      {/* the mark, on its own tile */}
+      {/* the mark, on its own tile. ⛔ Antigravity's real mark ships on a dark
+          ground and is a gradient — dropping it on a white tile puts a black
+          square inside a cream card. Its tile goes dark instead, which is how
+          Google itself presents it. */}
       <div style={{ position: "absolute", left: w * 0.5 - 62 * s, top: 24 * s, width: 124 * s,
-        height: 124 * s, borderRadius: 26 * s, background: "#FFFFFF",
-        border: `${3 * s}px solid #ECE7DC`, display: "flex", alignItems: "center",
-        justifyContent: "center" }}>
-        <Img src={staticFile(t.mark)} style={{ width: 92 * s, height: 92 * s, objectFit: "contain" }} />
+        height: 124 * s, borderRadius: 26 * s, background: t.dark ? "#141518" : "#FFFFFF",
+        border: `${3 * s}px solid ${t.dark ? "#2A2C32" : "#ECE7DC"}`, display: "flex",
+        alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+        {/* ⛔ THE FLOW CONE FADES TO TRANSPARENT and has no silhouette unless it
+            has air around it — at tile size it read as a black smear. It gets
+            0.60 of the tile; Antigravity's mark is a full-bleed dark tile by
+            design; the other two are the usual 0.74. */}
+        <Img src={staticFile(t.mark)}
+          style={{ width: (t.key === "flow" ? 104 : t.dark ? 124 : 92) * s,
+                   height: (t.key === "flow" ? 104 : t.dark ? 124 : 92) * s, objectFit: "contain" }} />
       </div>
       {/* the wordmark */}
       <div style={{ position: "absolute", left: 0, right: 0, top: 166 * s, textAlign: "center",
