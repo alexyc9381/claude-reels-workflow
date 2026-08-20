@@ -314,109 +314,120 @@ export const CodeCrate: React.FC<{ x: number; y: number; s: number; f: number; r
    ====================================================================== */
 export const Brain: React.FC<{ x: number; y: number; s: number; f: number;
   lit: number[]; z?: number; c?: string; hot?: string }> =
-  /* ⛔ c WAS "#E08A6E" — within a few degrees of the Mascot's own clay #D97757,
-     so the brain and the Claudes standing in front of it were the same hue and
-     the hero stopped separating from its cast. A dusty rose reads as tissue,
-     stays saturated (BODY_SAT is gated) and is clearly NOT the mascot. */
+  /* ⛔⛔ DRAWN IN SVG, AFTER TWO DIV VERSIONS FAILED IN OPPOSITE DIRECTIONS.
+     v1 built the folds from `border-radius` ARCS with two transparent sides, so
+     their ends stuck out past the outline in every direction — Alex: *"why is
+     it hairy too."* v2 clipped every fold inside an `overflow:hidden`
+     hemisphere, which killed the hair and left two pink rounded RECTANGLES: no
+     silhouette, no organic edge, and folds too low-contrast to count.
+
+     ⭐ The real problem is that a brain is a CURVE, and stacked divs can only
+     make rounded boxes. One SVG path gives the bumpy frontal rise, the
+     occipital swell, the temporal notch and the cerebellum in a single
+     silhouette, and the folds become stroked paths with round caps that are
+     clipped to that silhouette by construction. Everything below is one
+     560x440 viewBox, so it scales with `s` and nothing can drift out of
+     register. */
   ({ x, y, s, f, lit, z = 40, c = "#D2757F", hot = "#FFDFA8" }) => {
   const n = lit.filter(k => f >= k).length;
   const last = lit.filter(k => f >= k).slice(-1)[0];
   const pulse = last !== undefined && f - last < 14 ? 1 - (f - last) / 14 : 0;
   const W_ = 560 * s, H_ = 440 * s;
-  /* it BREATHES — a brain that is perfectly still is an anatomical diagram */
-  const br = 1 + Math.sin(f / 21) * 0.014 + pulse * 0.03;
-  const LOBES: Array<[number, number, number, number]> = [
-    [0.16, 0.30, 0.26, 0.24], [0.40, 0.20, 0.26, 0.22], [0.64, 0.26, 0.24, 0.24],
-    [0.14, 0.56, 0.24, 0.22], [0.40, 0.46, 0.26, 0.24], [0.66, 0.52, 0.24, 0.22],
-    [0.28, 0.72, 0.24, 0.20], [0.56, 0.72, 0.24, 0.20],
+  const br = 1 + Math.sin(f / 21) * 0.013 + pulse * 0.028;
+
+  /* the cerebrum silhouette — four bumps across the top, a frontal bulge at the
+     left, the occipital swell at the right and the temporal notch beneath */
+  const CEREBRUM = "M 92 262 C 62 206 84 138 146 112 C 158 66 218 44 262 72 "
+    + "C 296 40 358 46 382 88 C 442 84 486 130 482 186 C 512 214 508 268 476 292 "
+    + "C 470 330 430 350 392 338 C 372 372 316 380 288 352 C 250 372 198 360 178 324 "
+    + "C 122 322 92 300 92 262 Z";
+  /* six folds, as strokes. Each is a real channel across the mass, not a ring. */
+  const FOLDS = [
+    "M 118 150 C 176 128 214 168 268 142 C 318 118 362 150 418 128",
+    "M 104 200 C 168 182 200 224 258 200 C 312 178 358 214 452 190",
+    "M 108 250 C 170 236 206 272 262 250 C 316 230 372 262 468 244",
+    "M 128 298 C 186 288 214 318 268 300 C 320 284 368 306 430 296",
+    "M 150 106 C 190 90 214 118 250 104",
+    "M 300 96 C 340 82 372 106 402 102",
+  ];
+  const LOBES: Array<[number, number, number]> = [
+    [168, 176, 44], [268, 128, 46], [372, 156, 44],
+    [150, 268, 42], [268, 236, 48], [392, 244, 44], [258, 320, 42],
   ];
   return (
     <div style={{ position: "absolute", left: x - W_ / 2, top: y - H_ / 2, width: W_, height: H_,
       zIndex: z, transform: `scale(${br})` }}>
-      {/* 1 · the cerebrum mass — two lobes meeting at a fissure */}
-      {[0, 1].map(i => (
-        <div key={"hm" + i} style={{ position: "absolute",
-          left: i ? W_ * 0.48 : 0, top: 0, width: W_ * 0.52, height: H_ * 0.82,
-          borderRadius: i ? `${W_ * 0.30}px ${W_ * 0.46}px ${W_ * 0.34}px ${W_ * 0.12}px`
-                          : `${W_ * 0.46}px ${W_ * 0.30}px ${W_ * 0.12}px ${W_ * 0.34}px`,
-          background: `linear-gradient(${i ? 200 : 160}deg, ${mxh(c, 0.22)} 0%, ${c} 46%, ${dkh(c, 0.26)} 100%)`,
-          border: `${5 * s}px solid ${dkh(c, 0.34)}` }} />
-      ))}
-      {/* 2 · the longitudinal fissure between them */}
-      <div style={{ position: "absolute", left: W_ * 0.49, top: H_ * 0.03, width: 7 * s,
-        height: H_ * 0.74, borderRadius: 4 * s, background: dkh(c, 0.42) }} />
-      {/* 3 · the GYRI — real curved folds, eight a side, which is what makes a
-             brain-shaped blob read as a brain */}
-      {Array.from({ length: 16 }, (_, i) => {
-        const side = i % 2, k = Math.floor(i / 2);
-        const rot = -34 + k * 13 + side * 6;
-        return (
-          <div key={"gy" + i} style={{ position: "absolute",
-            left: side ? W_ * (0.52 + (k % 4) * 0.10) : W_ * (0.06 + (k % 4) * 0.10),
-            top: H_ * (0.10 + Math.floor(k / 4) * 0.30) + (k % 3) * 12 * s,
-            width: W_ * 0.30, height: H_ * 0.17,
-            borderRadius: "50%", border: `${7 * s}px solid ${dkh(c, 0.22)}`,
-            borderBottomColor: "transparent", borderRightColor: "transparent",
-            transform: `rotate(${rot}deg)`, opacity: 0.7 }} />
-        );
-      })}
-      {/* 4 · the temporal lobe, tucked under the front */}
-      <div style={{ position: "absolute", left: W_ * 0.10, top: H_ * 0.58, width: W_ * 0.34,
-        height: H_ * 0.26, borderRadius: `${W_ * 0.22}px ${W_ * 0.10}px ${W_ * 0.20}px ${W_ * 0.22}px`,
-        background: `linear-gradient(170deg, ${c} 0%, ${dkh(c, 0.30)} 100%)`,
-        border: `${5 * s}px solid ${dkh(c, 0.34)}` }} />
-      {/* 5 · the cerebellum */}
-      <div style={{ position: "absolute", left: W_ * 0.60, top: H_ * 0.66, width: W_ * 0.30,
-        height: H_ * 0.24, borderRadius: "50%",
-        background: `linear-gradient(180deg, ${dkh(c, 0.14)} 0%, ${dkh(c, 0.38)} 100%)`,
-        border: `${5 * s}px solid ${dkh(c, 0.40)}`, overflow: "hidden" }}>
-        {Array.from({ length: 6 }, (_, i) => (
-          <div key={"cb" + i} style={{ position: "absolute", left: 0, right: 0, top: `${10 + i * 15}%`,
-            height: 4 * s, background: hexa(dkh(c, 0.50), 0.7) }} />
-        ))}
-      </div>
-      {/* 6 · the stem */}
-      <div style={{ position: "absolute", left: W_ * 0.46, top: H_ * 0.76, width: W_ * 0.13,
-        height: H_ * 0.24, borderRadius: `0 0 ${W_ * 0.07}px ${W_ * 0.07}px`,
-        background: `linear-gradient(180deg, ${dkh(c, 0.20)} 0%, ${dkh(c, 0.44)} 100%)` }} />
-      {/* 7 · ⭐ THE LOBE CELLS — one lights per file that lands, so the brain
-             FILLS rather than simply existing. This is the mechanism. */}
-      {LOBES.map(([lx, ly, lw, lh], i) => {
-        const on = i < n;
-        const at = lit[i];
-        const pop = on ? squash(f - at, 6, 0.22, 3, 10) : 1;
-        return (
-          <div key={"lb" + i} style={{ position: "absolute",
-            left: W_ * lx, top: H_ * ly, width: W_ * lw, height: H_ * lh,
-            borderRadius: "50%", transform: `scale(${pop})`,
-            background: on ? hexa(hot, 0.52) : hexa(dkh(c, 0.40), 0.30),
-            border: `${4 * s}px solid ${on ? hexa(hot, 0.86) : hexa(dkh(c, 0.48), 0.5)}` }}>
-            {/* each lit lobe carries the FILE that lit it, as a small page */}
-            {on && (
-              <div style={{ position: "absolute", left: "32%", top: "26%", width: "36%", height: "48%",
-                borderRadius: 3, background: hexa("#FFF6E4", 0.9) }}>
-                {[0.24, 0.50, 0.74].map((q, j) => (
-                  <div key={"lf" + j} style={{ position: "absolute", left: "16%", top: `${q * 100}%`,
-                    width: `${64 - j * 16}%`, height: 3 * s, background: hexa(INK, 0.34) }} />
-                ))}
-              </div>
-            )}
-          </div>
-        );
-      })}
-      {/* 8 · the synapse arcs that fire between lit lobes — a brain WORKS */}
-      {n > 1 && Array.from({ length: Math.min(n - 1, 7) }, (_, i) => {
-        const a = LOBES[i], b = LOBES[i + 1];
-        const ax = W_ * (a[0] + a[2] / 2), ay = H_ * (a[1] + a[3] / 2);
-        const bx = W_ * (b[0] + b[2] / 2), by = H_ * (b[1] + b[3] / 2);
-        const t = (f / 15 + i * 0.4) % 1;
-        return (
-          <div key={"sy" + i} style={{ position: "absolute",
-            left: ax + (bx - ax) * t - 7 * s, top: ay + (by - ay) * t - 7 * s,
-            width: 14 * s, height: 14 * s, borderRadius: "50%",
-            background: hexa(hot, 0.9 * (1 - Math.abs(t - 0.5) * 1.2)) }} />
-        );
-      })}
+      <svg viewBox="0 0 560 440" width={W_} height={H_} style={{ display: "block", overflow: "visible" }}>
+        <defs>
+          <clipPath id="brainClip"><path d={CEREBRUM} /></clipPath>
+          <linearGradient id="brainFill" x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0%" stopColor={mxh(c, 0.26)} />
+            <stop offset="46%" stopColor={c} />
+            <stop offset="100%" stopColor={dkh(c, 0.24)} />
+          </linearGradient>
+        </defs>
+
+        {/* the stem, behind everything */}
+        <path d="M 300 330 C 296 372 302 404 316 424 L 372 424 C 356 396 350 360 352 330 Z"
+          fill={dkh(c, 0.40)} stroke={dkh(c, 0.52)} strokeWidth={7} strokeLinejoin="round" />
+        {/* the cerebellum, tucked under the occipital */}
+        <g>
+          <ellipse cx={412} cy={340} rx={82} ry={56} fill={dkh(c, 0.28)}
+            stroke={dkh(c, 0.46)} strokeWidth={7} />
+          {[-30, -12, 6, 24].map((dy, i) => (
+            <path key={"cb" + i} d={`M 342 ${340 + dy} C 380 ${332 + dy} 442 ${348 + dy} 486 ${338 + dy}`}
+              fill="none" stroke={hexa(dkh(c, 0.52), 0.8)} strokeWidth={5} strokeLinecap="round" />
+          ))}
+        </g>
+
+        {/* the cerebrum */}
+        <path d={CEREBRUM} fill="url(#brainFill)" stroke={dkh(c, 0.36)} strokeWidth={9}
+          strokeLinejoin="round" />
+        {/* the folds — clipped to the silhouette, so nothing can protrude */}
+        <g clipPath="url(#brainClip)">
+          {FOLDS.map((d, i) => (
+            <React.Fragment key={"fd" + i}>
+              {/* the lit ridge, then the channel under it: a fold has two sides */}
+              <path d={d} fill="none" stroke={hexa(mxh(c, 0.30), 0.5)} strokeWidth={20}
+                strokeLinecap="round" transform="translate(0,-11)" />
+              <path d={d} fill="none" stroke={hexa(dkh(c, 0.34), 0.85)} strokeWidth={15}
+                strokeLinecap="round" />
+            </React.Fragment>
+          ))}
+          {/* the central fissure */}
+          <path d="M 268 60 C 258 140 276 224 262 356" fill="none"
+            stroke={hexa(dkh(c, 0.48), 0.9)} strokeWidth={13} strokeLinecap="round" />
+        </g>
+
+        {/* ⭐ THE LOBE CELLS — one lights per file, and an UNLIT one is not drawn
+            at all: a grey disc on a brain reads as damage, not as capacity. */}
+        {LOBES.map(([cx, cy, r], i) => {
+          if (i >= n) return null;
+          const pop = squash(f - lit[i], 6, 0.22, 3, 10);
+          return (
+            <g key={"lb" + i} transform={`translate(${cx} ${cy}) scale(${pop}) translate(${-cx} ${-cy})`}>
+              <circle cx={cx} cy={cy} r={r} fill={hexa(hot, 0.52)}
+                stroke={hexa(hot, 0.92)} strokeWidth={6} />
+              {/* the FILE that lit it */}
+              <rect x={cx - r * 0.32} y={cy - r * 0.40} width={r * 0.64} height={r * 0.80}
+                rx={4} fill={hexa("#FFF8EA", 0.95)} />
+              {[0.26, 0.50, 0.74].map((q, j) => (
+                <rect key={"lf" + j} x={cx - r * 0.22} y={cy - r * 0.40 + r * 0.80 * q}
+                  width={r * (0.44 - j * 0.10)} height={3} rx={1.5} fill={hexa(INK, 0.36)} />
+              ))}
+            </g>
+          );
+        })}
+        {/* the synapses firing between lit lobes — a brain WORKS */}
+        {n > 1 && Array.from({ length: Math.min(n - 1, 6) }, (_, i) => {
+          const [ax, ay] = LOBES[i], [bx, by] = LOBES[i + 1];
+          const t = (f / 15 + i * 0.4) % 1;
+          return (
+            <circle key={"sy" + i} cx={ax + (bx - ax) * t} cy={ay + (by - ay) * t} r={9}
+              fill={hexa(hot, 0.95 * (1 - Math.abs(t - 0.5) * 1.2))} />
+          );
+        })}
+      </svg>
     </div>
   );
 };

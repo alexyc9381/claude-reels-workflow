@@ -810,10 +810,21 @@ export const ToolCard: React.FC<{ x: number; y: number; s: number; i: number; f:
   );
 };
 
-/** an unnamed Labs tile for the wall of 24 — ⛔ NO product identity is asserted */
+/** ⭐⭐ THE TILE WALL, WITH REAL GOOGLE TOOL MARKS.
+    Alex: *"the google logos should be the google tools logos at 6 seconds in
+    that animation here."* The first version put the plain Google `G` on all 24
+    tiles, which says "Google" and does not say "TOOLS" — and the five that
+    survive the sift are the five the reel is about, so they have to be
+    recognisable here or the payoff in S3 lands on strangers.
+
+    ⛔ AND THE ROSTER IS HONEST. The VO says Google shipped "over 20 of THESE
+    tools", meaning AI tools. So the wall carries the real marks this repo has
+    for Google AI products — AI Studio, NotebookLM, Flow, Antigravity, Gemini,
+    Colab — and everything else stays an UNNAMED Labs tile. Docs, Sheets, Drive
+    and Calendar are not "quietly shipped AI tools" and are not on this wall. */
 export const LabTile: React.FC<{ x: number; y: number; s: number; f: number; at: number;
-  struck?: number; z?: number; seed: number }> =
-  ({ x, y, s, f, at, struck, z = 40, seed }) => {
+  struck?: number; z?: number; seed: number; mark?: string; dark?: boolean }> =
+  ({ x, y, s, f, at, struck, z = 40, seed, mark, dark }) => {
   const lf = f - at;
   if (lf < 0) return null;
   const inS = E(lf, 0, 7, 0, 1, BACK);
@@ -824,14 +835,16 @@ export const LabTile: React.FC<{ x: number; y: number; s: number; f: number; at:
   return (
     <div style={{ position: "absolute", left: x - w / 2, top: y - w / 2, width: w, height: w, zIndex: z,
       transform: `scale(${inS * sq})`, borderRadius: 16 * s,
-      background: isX ? dkh("#8A8578", 0.34) : "#FFFFFF",
-      border: `${4 * s}px solid ${isX ? dkh("#8A8578", 0.46) : "#E6E1D4"}`,
+      background: isX ? dkh("#8A8578", 0.34) : dark ? "#141518" : "#FFFFFF",
+      border: `${4 * s}px solid ${isX ? dkh("#8A8578", 0.46) : dark ? "#2A2C32" : "#E6E1D4"}`,
       display: "flex", alignItems: "center", justifyContent: "center",
       overflow: "hidden" }}>
-      <Img src={staticFile("logos/google.svg")}
-        style={{ width: w * 0.46, height: w * 0.46, objectFit: "contain", opacity: isX ? 0.16 : 0.92 }} />
-      {/* three anonymous UI bars so the tile is a TOOL, not a blank square */}
-      {[0.70, 0.80].map((k, i) => (
+      <Img src={staticFile(mark ?? "logos/google.svg")}
+        style={{ width: w * (dark ? 1 : 0.50), height: w * (dark ? 1 : 0.50),
+          objectFit: "contain", opacity: isX ? 0.16 : 0.94 }} />
+      {/* two UI bars so an UNNAMED tile still reads as a TOOL and not a blank
+          square. A tile carrying a real mark does not need them. */}
+      {!mark && [0.70, 0.80].map((k, i) => (
         <div key={"lt" + i} style={{ position: "absolute", left: "18%", top: `${k * 100}%`,
           width: `${(46 + rnd(seed, i) * 26)}%`, height: 6 * s, borderRadius: 3,
           background: hexa(INK, isX ? 0.10 : 0.20) }} />

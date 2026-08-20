@@ -9,7 +9,7 @@ metadata:
 # REEL 115 · "STAR" — THE FREE MARKET
 
 **Subject:** five free GitHub repos that replace software you pay for.
-**VO:** `STAR.m4a`, 99.57s raw → **53.46s** cut. **Board:** `storyboards/115-star.md`.
+**VO:** `STAR.m4a`, 99.57s raw → cut → **x1.04** → **51.41s**. **Board:** `storyboards/115-star.md`.
 **Code:** `video/src/StarWorld.tsx` · `StarSets.tsx` · `StarScenes.tsx` · `ClaudeStarReel.tsx` · `star-115-index.tsx`.
 
 ## The ledger, verified live 2026-08-20
@@ -35,15 +35,46 @@ hangs over the market, not on the repos. The framing stays in the VO and the cap
 
 | gate | result |
 |---|---|
-| scene motion | **median 9.56 · 0/14 failing** (bar 9.00). Weakest: METERS 7.10, BAYS 7.80 |
-| look_audit | HOOK_LUMA **144.9** · BODY_SAT **63.6%** · BODY_BLACK p10 **29.2** · ✅ the look holds. HOOK_PLATE 8.6% WARNS and is accepted — see §3 below |
+| scene motion | **median 10.83 · 0/14 failing** (bar 9.00). Weakest scene is WALL at **9.03**, i.e. every scene clears the bar |
+| look_audit | HOOK_LUMA **144.9** · BODY_SAT **64.5%** · BODY_BLACK p10 **29.1** · ✅ the look holds. HOOK_PLATE 8.6% WARNS and is accepted — see §3 below |
 | verify_reel | **8/8** on all three cuts |
 | flub scan | **0 hits** across 22 overlapping windows, on the raw cut AND the delivered mp4 |
-| sfx_audit | clean · **74 cues / 1.38 per sec** (ceiling 1.5) · zero chiptune |
-| dHash (3 cuts) | **mean 26.1 · MIN 16** (targets 14 / 10) — the best this repo has measured |
+| sfx_audit | clean · **76 cues / 1.48 per sec** (ceiling 1.5) · zero chiptune · BALANCE >2kHz 30.5% and <250Hz 11.7%, both inside band |
+| dHash (3 cuts) | **mean 25.4 · MIN 16** (targets 14 / 10) — the best this repo has measured |
 | glow gate | 0 |
 
-## ⛔⛔⛔ THE FIVE THINGS THIS BUILD LEARNED
+## ROUND 2 — Alex's ten notes, and what each one actually was
+
+| the note | what it was | the fix |
+|---|---|---|
+| *"the BG music is completely wrong, not the one we use, another day another sun"* | I generated a **synth bed**. The house track is named in `claude-ai-reel-workflow` and sitting in `Drive/*Soundtracks/`. **I never looked.** | "Another Day Of Sun", windows chosen by measurement. `tools/gen_star_bed.py` deleted so nobody regenerates one |
+| *"the 5 plugins as those brown boxes is too plain and dull"* | **§12 verbatim: a container is still a container when it is a nice box.** Five identical crates carry ONE bit for the whole payoff | five different drawn objects — pass book, cord coil, grabber claw, generator can, socket block — each the thing its own stall runs on, so the hook plants what the body pays off |
+| *"those plain papers need logos, and not good sfx there"* | the passes were 56x42 (**13x10 after the downsample**) with nothing on them, and 84 of them ejected on ONE `slate_whump` | 78x62 passes carrying 14 real service marks on a category stripe; the cascade rescored to three pitched `sign_clack` textures |
+| *"those logos need to be bigger within those containers"* | 87px tiles in a 272px bay = 20px after the downsample | bays widened to 306, tiles to 150 |
+| *"there should be icons above those gears, coloured, when each category is mentioned"* | the categories were LABELS. A category you can name beats one you can only read | four coloured plates (github / youtube / coinbase / postgres) dropping on each category's **measured** word onset |
+| *"at 32s barely any motion, boring, needs reworking"* | **§10 — which half is missing.** The scan and the denials were drawn; the OUTPUT was not, so half the shot was a man walking across an empty room | he now hauls a loaded cart through and it fills with 12 pages as he crosses |
+| *"at 38s needs reworking, more interesting"* | same defect: the generator RAN and made nothing | the three model drums feed a belt, the belt feeds a tray, and the tray fills for the rest of the shot |
+| *"at 40s those need big logos of AI softwares"* | the marks were 79px hanging off the BOTTOM edge of the case, reading as stickers fallen off | the meter is rebuilt around the mark: a big white panel on top, dial underneath |
+| *"speed up VO by 1.04x"* | — | re-cut, re-transcribed, and **every value in `L` plus every word-cut beat re-measured from the new caption JSON** |
+
+⛔⛔ **AND THE ONE I DID TO MYSELF TWICE.** The five new objects each wore a white
+GitHub tile "so the object also says which repo it is". Five identical bright
+squares are the loudest thing in the frame, so they were what the eye landed on —
+which is the container defect again, one layer up. Removed: the objects carry
+identity by SHAPE and COLOUR, and the marks live on S1's rack where there is
+time to read one.
+
+⛔ **A RE-CUT IS NOT A DIVISION.** The SFX bank could be scaled by 1/1.04 because
+every cue is scene-local. The picture beats could NOT: a beat at 40s moves more
+than a second and a half, so every one that lands on a word was re-measured from
+the new JSON. Scaling those would have been a mis-cut dressed as a retime.
+
+⛔ **AND RE-CUTTING ONTO A WORD CAN EMPTY A SCENE.** Moving S11's plate landing
+from f62 to f49 (where "92,000" is actually spoken) was right and left a 52-frame
+tail: **8.56 → 6.45**. Fixed by giving the wall an answer — twelve server cards
+ejecting across every remaining frame — **6.45 → 9.03**.
+
+## ⛔⛔⛔ THE FIVE THINGS ROUND 1 LEARNED
 
 ### 1. A NO-OP `.replace()` IS SILENT, AND THE TELL IS A NUMBER THAT DOES NOT MOVE AT ALL
 `CatBay` lives in `StarWorld.tsx`; the fix was applied to `StarScenes.tsx` and did nothing.

@@ -363,3 +363,105 @@ bench belt behind the pegboard, and now this).
 
 > **When a new element does not appear, read the z of every full-width furniture
 > layer in its set BEFORE touching its position or its values.**
+
+---
+
+# ROUND 3 — ten notes, and the sound that no gate could hear
+
+| | round 2 | round 3 |
+|---|---|---|
+| motion median | 9.94 | **10.42** (0/20 failing) |
+| TOLL · SENTENCE · IDE · LAST | 7.36 · 8.84 · 7.96 · 12.69 | **10.42 · 10.85 · 11.08 · 13.86** |
+| look | all green | all green (144.0 · 45.3% · p10 25.1) |
+| dHash | mean 25.0 min 12 | mean 24.8 min 12 |
+| SFX | 77 cues, clean | 79 cues 1.40/sec, clean |
+
+## ⛔⛔⛔ "PUFF OF AIR" WAS THE SFX THIS TIME, AND IT PASSED EVERY GATE
+
+Alex: *"those puff of air sounds at 4 seconds and stuff do not use those sound
+effects again forever, like those do not sound good and dont sound like stamping
+or whatever."*
+
+The 4-second hit was **`pneu_thunk.wav`** — a PNEUMATIC, i.e. compressed air —
+used as the STAMP sound four times in S1. `sfx_audit` passes it: 4.6% above
+2kHz, 17ms attack, not named "whoosh". Nothing in the tool can hear that a
+fast-attack low-frequency sample is *air escaping*.
+
+⭐ **THE CHECK THAT FINDS THIS CLASS, AND IT IS NEW:** an ATTACK SCAN over every
+non-BED cue.
+
+```
+for every cue not at SFX_BED:  attack > 150ms  ->  it is a SWELL, not a hit
+```
+
+Measured on this bank: `crusher` 289ms · `deep_engine` 346ms · `projector`
+776ms · `shop_bed` 296ms · `machine_bed` 422ms · `road_bed` 2681ms. The four
+beds are supposed to swell and sit at `SFX_BED`; **`crusher` was at TEXTURE and
+MID**, i.e. a whoosh at impact volume. Both are now banned permanently.
+
+⭐ **The replacement is the OBJECT, not a near-miss.** A stamp is `stamp_press`
+(0.9ms attack, literally a stamp press) layered with `thock` for the low body,
+and the heaviest of the four adds `rebuild_thud`. ⛔ That immediately tripped the
+SLAP GATE at 7 uses of a 50%-bright sample, so the four HERO stamps keep
+`stamp_press` and the MID ones took `slate_whump` (2.2% bright, 2.4ms) — the
+same gesture one stop darker.
+
+## ⛔ THE HEADER BAND BURIED SOMETHING FOUR TIMES IN ONE BUILD
+
+`HookHeader` renders at ROOT, above every scene, and owns roughly the first
+**95px** of the 792px panel. Four separate objects were placed above that line
+and rendered perfectly while being invisible: the hook's stamp head, S14's
+product capture, S18's stamp head, and S14's tool card.
+
+> ⭐ It is a NUMBER now, not something to remember: `HEADER_SAFE = 118` in
+> BillScenes.tsx, and anything placed near the top of a scene starts below it.
+> ⛔ And note `ToolCard`'s `y` is the card's FOOT — its top is `y - 262*s`.
+
+## ⭐ MEASURE THE FOOTAGE BEFORE YOU PLACE IT
+
+S9 was rebuilt so real Flow footage fills the frame, and the scene **fell 9.94 →
+7.58 with 50% HOLD**. The clip was chosen by what it SHOWED. Measured with the
+audit's own method (10fps, greyscale, 240px, mean |delta|):
+
+```
+broll_flow_edit  8.43    broll_flow_type   8.09
+broll_flow_grid  4.75    broll_notebook    3.77    broll_flow_scene  3.19
+```
+
+A wall of small thumbnails is mostly static. Swapping in the EDITOR clip (a
+timeline being cut — also the truer depiction of "Google's AI film tool") and
+keeping the crane booming through the shot: **9.18, HOLD 29%.** S10's "Veo
+builds it" had the same problem and took the grid instead of the scene.
+
+> **A clip is a mover, and movers have numbers.** Measure b-roll like any other
+> element before you commit a scene to it.
+
+## The other seven notes
+
+- **6s tile wall** — the 24 `G` tiles now carry the REAL tool marks. The five
+  survivors are the five subject tools in VO order, so the wall's payoff and
+  S3's card rail are the same five objects; Gemini and Colab sit among the
+  struck tiles so the wall reads as Google's AI tools. ⛔ Docs/Sheets/Drive are
+  NOT on it — they are not "quietly shipped AI tools".
+- **11s toll** — *"too complicated, not immediately easy to understand"*, and
+  the count says why: nine ideas (turnstile, coin, caged window, meter, two
+  booth walls, a three-Claude queue, two rails, the bill) in a 2.57s shot whose
+  sentence is "you pay $20 a month for a chat window". Now ONE object and ONE
+  action: a chat window with a coin slot in its face. **7.36 → 10.42.**
+- **20s brain** — *"why is it hairy"*: the folds were open ARCS whose ends stuck
+  out past the outline. Clipping them inside the hemispheres killed the hair and
+  produced two pink RECTANGLES. ⭐ Third version is one **SVG path** — a brain is
+  a curve and stacked divs can only make rounded boxes.
+- **34s / 41s** — both were "arrive then hold". S12 now starts the BUILD inside
+  the scene; S14 is a power-up that runs all 80 frames, with a surge crossing
+  the room and each bay igniting as it arrives. **8.84 → 10.85 · 7.96 → 11.08.**
+- **51s** — *"way too boring and bad"*: a 600px cream sheet filling the panel.
+  Rebuilt around the VILLAIN instead of the paper — the stamp head huge and
+  still hammering, the cursor mark at 150px, the row TORN into six flying
+  pieces, and the machine dragged out with the roll. **12.69 → 13.86.**
+- **logos on every mention** — each tool's card now lands on its own measured
+  name onset and holds through its beats.
+- **the CTA** — the comment field sat at `p.horizon + 130` = 658 of 792, under
+  the vignette's darkest band and right above the caption track. The one object
+  the reel is asking for was the least visible thing in its own shot. Moved to
+  dead centre and 40% wider.

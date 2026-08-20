@@ -156,6 +156,34 @@ const DUR = {
    projector, stage lamps and machine hum. **ZERO chiptune cues.** The greppable
    gate is a grep for `c_` over this file, which must return 0.
 
+
+   ⛔⛔⛔ TWO CUES ARE BANNED FROM THIS REEL AND FROM EVERY FUTURE ONE.
+   Alex, on the delivered cut: *"those puff of air sounds at 4 seconds and stuff
+   do not use those sound effects again forever, like those do not sound good
+   and dont sound like stamping or whatever."*
+
+     the pneumatic cue   PNEUMATIC — literally compressed air escaping. It was
+                         the STAMP sound in S1, four times, and the 4-second hit
+                         he named is the one at 3.97s.
+     the crusher cue     289ms attack used as an IMPACT. Anything over ~150ms is
+                         a SWELL, and a swell at impact volume reads as a whoosh.
+
+   ⭐ AND NEITHER WAS CATCHABLE BY THE EXISTING GATES. `sfx_audit` measures
+   spectrum and names; the pneumatic is 4.6% >2kHz with a 17ms attack and passes
+   every check in the tool. The ATTACK SCAN is what finds this class, and it is
+   now part of building a bank:
+
+       for every non-BED cue:  attack > 150ms  ->  it is a SWELL, not a hit
+
+   Measured on this bank: crusher 289ms · deep_engine 346ms · projector 776ms ·
+   shop_bed 296ms · machine_bed 422ms · road_bed 2681ms. The four beds are
+   SUPPOSED to swell and sit at SFX_BED; the crusher sat at TEXTURE and MID.
+
+   ⭐ THE REPLACEMENTS ARE THE OBJECT, not a near-miss. A stamp is
+   `stamp_press` (0.9ms attack, literally a stamp press) layered with `thock`
+   for the low body, and the heaviest of the four adds `rebuild_thud`. That is
+   what a die striking paper sounds like.
+
    ⛔ SLAP GATE: a cue used 5+ times must be <=35% above 2kHz. Every bright one
    (`stamp_press` 50.4%, `slash` 81.1%, `ratchet` 67.3%, `ui_tap` 65.7%,
    `snap` 92.7%, `key` 97.0%, `wrench_clank` 93.3%, `camera_shutter` 80.1%,
@@ -196,16 +224,19 @@ const SFX: Cue[] = [
      the repetition IS the argument, so it must sound like the same charge, not
      four different events. */
   { at: S(L.S1 + 0),   src: "machine_bed.wav",   v: LEVELS.SFX_BED,     dur: 3.9 },
-  { at: S(L.S1 + 11),  src: "pneu_thunk.wav",    v: LEVELS.SFX_HERO,    dur: 0.44, rate: 1.00 },
-  { at: S(L.S1 + 32),  src: "pneu_thunk.wav",    v: LEVELS.SFX_MID,     dur: 0.44, rate: 0.96 },
-  { at: S(L.S1 + 53),  src: "pneu_thunk.wav",    v: LEVELS.SFX_MID,     dur: 0.44, rate: 0.92 },
-  { at: S(L.S1 + 71),  src: "pneu_thunk.wav",    v: LEVELS.SFX_HERO,    dur: 0.44, rate: 0.86 },
+  { at: S(L.S1 + 11),  src: "stamp_press.wav",   v: LEVELS.SFX_HERO,    dur: 0.32, rate: 1.00 },
+  { at: S(L.S1 + 11),  src: "thock.wav",         v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.92 },
+  { at: S(L.S1 + 32),  src: "slate_whump.wav",   v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.96 },
+  { at: S(L.S1 + 53),  src: "slate_whump.wav",   v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.90 },
+  { at: S(L.S1 + 71),  src: "stamp_press.wav",   v: LEVELS.SFX_HERO,    dur: 0.32, rate: 0.88 },
+  { at: S(L.S1 + 71),  src: "rebuild_thud.wav",  v: LEVELS.SFX_MID,     dur: 0.78, rate: 0.90 },
 
   /* ---- S2 · TWENTY SHIPPED (4). 24 tiles are NOT 24 cues — two textured
      passes plus the shutter, or it becomes a metronome of slaps. */
   { at: S(L.S2 + 0),   src: "stage_hum.wav",     v: LEVELS.SFX_BED,     dur: 1.9 },
   { at: S(L.S2 + 2),   src: "ratchet.wav",       v: LEVELS.SFX_MID,     dur: 0.46 },
-  { at: S(L.S2 + 20),  src: "crusher.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.86, rate: 1.16 },
+  { at: S(L.S2 + 20),  src: "mech_clank.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.11, rate: 1.10 },
+  { at: S(L.S2 + 32),  src: "mech_clank.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.11, rate: 0.96 },
 
   /* ---- S3 · THESE FIVE (5). Five landings are TWO impacts and a chime, not
      five slaps — and the chime is what says "these are the good ones". */
@@ -280,7 +311,7 @@ const SFX: Cue[] = [
   /* ---- S14 · THE FREE IDE (4). One switch, three shutters — the shutters are
      ONE rising trio, not three identical hits. */
   { at: S(L.S14 + 8),  src: "knife_switch.wav",  v: LEVELS.SFX_MID,     dur: 0.11 },
-  { at: S(L.S14 + 22), src: "crusher.wav",       v: LEVELS.SFX_MID,     dur: 0.86, rate: 0.92 },
+  { at: S(L.S14 + 22), src: "ratchet.wav",       v: LEVELS.SFX_MID,     dur: 0.46, rate: 0.82 },
   { at: S(L.S14 + 30), src: "impact_deep.wav",   v: LEVELS.SFX_HERO,    dur: 0.76 },
 
   /* ---- S15 · THE TEAM (7) — the second density peak. ⭐ The three bays come
@@ -302,14 +333,14 @@ const SFX: Cue[] = [
   /* ---- S17 · MUCH MORE FINISHED (5). Thirty units are TWO textures plus the
      overflow — never thirty cues. */
   { at: S(L.S17 + 0),  src: "shop_bed.wav",      v: LEVELS.SFX_BED,     dur: 2.7, rate: 1.08 },
-  { at: S(L.S17 + 28), src: "crusher.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.86, rate: 1.22 },
+  { at: S(L.S17 + 28), src: "chair_knock.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.28, rate: 1.14 },
   { at: S(L.S17 + 70), src: "can_bong.wav",      v: LEVELS.SFX_MID,     dur: 0.32, rate: 1.18 },
 
   /* ---- S18 · THE LAST CHARGE (7) — the third density peak, and the only place
      in the reel the GONG appears. The villain stamps twice more, is cut, and
      the gong is the beat that says it is over. */
   { at: S(L.S18 + 0),  src: "machine_bed.wav",   v: LEVELS.SFX_BED,     dur: 3.9, rate: 0.94 },
-  { at: S(L.S18 + 8),  src: "stamp_press.wav",   v: LEVELS.SFX_MID,     dur: 0.32, rate: 0.94 },
+  { at: S(L.S18 + 8),  src: "slate_whump.wav",   v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.94 },
   { at: S(L.S18 + 24), src: "stamp_press.wav",   v: LEVELS.SFX_MID,     dur: 0.32, rate: 0.88 },
   { at: S(L.S18 + 46), src: "slash.wav",         v: LEVELS.SFX_HERO,    dur: 0.44, rate: 0.84 },
   { at: S(L.S18 + 55), src: "impact_deep.wav",   v: LEVELS.SFX_HERO,    dur: 0.76, rate: 0.92 },

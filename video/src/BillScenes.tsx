@@ -128,6 +128,17 @@ const rowsFor = (killed: number, cutLocal?: number): BillRow[] =>
   ROW_DEFS.slice(killed).map((r, i) =>
     i === 0 && cutLocal !== undefined ? { ...r, cut: cutLocal } : { ...r });
 
+/** ⛔⛔⛔ THE HEADER BAND OWNS THE TOP OF THE PANEL, AND IT HAS BURIED SOMETHING
+    FOUR TIMES IN THIS BUILD: the hook's stamp head, S14's product capture,
+    S18's stamp head, and S14's tool card. `HookHeader` is rendered at ROOT,
+    above every scene, and it occupies roughly the first 95px of the 792px
+    panel. Nothing whose top edge lands above this line will be seen, however
+    correct its own z is — ANIMATION-QUALITY §6 fault 2, four times.
+
+    ⭐ So it is a NUMBER now, not a thing to remember. Any card, board or plate
+    placed near the top of a scene starts below `HEADER_SAFE`. */
+const HEADER_SAFE = 118;
+
 /** ⛔⛔ THE CUT HAS TO HAPPEN ON SCREEN, AND THAT IS ARITHMETIC.
     A horizontal roll drifts left at `creep` px/frame, so the cell being cut is
     somewhere else by the time the blade arrives. The contact sheet caught it
@@ -386,13 +397,26 @@ export const S2: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           ))}
         </div>
 
+        {/* ⭐ THE SURVIVORS CARRY THE FIVE SUBJECT MARKS, in VO order, so the
+            wall's payoff and S3's card rail are the same five objects. Two more
+            real Google AI marks (Gemini, Colab) sit among the struck tiles so
+            the wall reads as GOOGLE'S AI TOOLS rather than as anonymous
+            squares; everything else stays unnamed, because no roster of twenty
+            named Labs products is sourceable. */}
         {Array.from({ length: COLS * ROWS }, (_, i) => {
           const c = i % COLS, r = Math.floor(i / COLS);
           const x = 148 + c * 144, y = 196 + r * 96;
-          const struck = KEEP.includes(i) ? undefined : 34 + off + (c * 8 + r * 3);
+          const survivor = KEEP.indexOf(i);
+          const struck = survivor >= 0 ? undefined : 34 + off + (c * 8 + r * 3);
+          const MARK = survivor >= 0
+            ? R.tools[survivor].mark
+            : i === 1 ? "logos/googlegemini.svg"
+            : i === 14 ? "logos/googlecolab.svg"
+            : undefined;
           return (
             <LabTile key={"lt" + i} x={x} y={y} s={0.86} f={f} at={at(i)} struck={struck}
-              z={40 + r} seed={i * 7 + 3} />
+              z={40 + r} seed={i * 7 + 3} mark={MARK}
+              dark={survivor >= 0 ? !!R.tools[survivor].dark : false} />
           );
         })}
 
@@ -490,131 +514,123 @@ export const S3: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
    S4 — AI STUDIO · THE $20 WINDOW.  f312-389 (2.57s).  Intensity 6.
    VO: "1. AI Studio. Instead of $20 a month for a chat window,"
 
-   ⭐ THE NOUNS ARE **$20 A MONTH** and **A CHAT WINDOW**, and the shape of the
-   sentence is a TOLL. So: a small caged chat window behind a turnstile, and a
-   coin that has to be fed before it lights — then it dies again.
+   ⛔⛔ REBUILT. Alex: *"the animation at 11 seconds needs to be redone because
+   it doesnt make sense its too complicated its not immediately easy to
+   understand."* He is right, and the count says why: the first version had a
+   turnstile (11 drawn parts), a coin, a caged chat window, a running meter,
+   two booth walls, a queue of three Claudes, two queue rails and the bill
+   crossing the floor — NINE ideas in a 2.57-second shot whose sentence is
+   "you pay $20 a month for a chat window".
 
-   ⛔ THE $20 IS LEGAL because the VO says it and it is a real price. ⛔ NO
-   VENDOR MARK ANYWHERE IN THIS SCENE — the VO names none, so the toll is
-   unbranded (the ledger's edge 3).
+   ⭐ It is now ONE OBJECT AND ONE ACTION: a chat window with a COIN SLOT in its
+   face. A $20 coin goes in, the window lights, a month meter runs down, the
+   window dies, and the counter says this is the second time. The turnstile,
+   the queue, the rails and the booth walls are gone — they were staging for a
+   metaphor the line does not need. [[feedback_hook_simplicity]]'s rule
+   generalised: **the thing to reduce is IDEAS, not layers.**
+
+   ⭐ AND THE TOOL IS NAMED WHERE THE VO NAMES IT. Alex: *"have the logos of the
+   apps whenever you mention them between things."* Measured onsets: "AI"
+   10.93s / "Studio." 11.05s / "Instead" 11.52s, i.e. local f16 / f20 / f34. So
+   the AI STUDIO card lands on its own name and holds through the beat, and the
+   toll starts on "Instead".
+
+   ⛔ NO VENDOR MARK ON THE PAID WINDOW ITSELF. The VO names no vendor for the
+   "$20 a month for a chat window" line, so the thing being paid for is
+   unbranded — the AI Studio card is the FREE alternative being introduced, and
+   it sits apart from the machine.
    ====================================================================== */
 export const S4: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("booth");
-  const FEED = v === "amber" ? 26 : v === "steel" ? 16 : 21;
-  const CLACK = FEED + 13;
-  /* the coin drops the FULL height of the machine — a real distance */
-  const ct = E(f, FEED, FEED + 13, 0, 1, IN_Q);
+  /* the measured onsets, minus the scene start (f312 = 10.40s) */
+  const NAME = 16, PAY = v === "amber" ? 40 : v === "steel" ? 32 : 36;
+  const IN = PAY + 12, DIE = IN + 22;
+  const ct = E(f, PAY, IN, 0, 1, IN_Q);
+  const sh = shake(f, IN, 8, 7);
+  const lit = f >= IN && f < DIE;
   return (
-    <Scene p={p} slug="THE TOLL" push={push(v, dur, 1.094)} vig={0.50}>
-      <div style={{ position: "absolute", inset: 0 }}>
+    <Scene p={p} slug="$20 A MONTH" push={push(v, dur, 1.088)} vig={0.46}>
+      <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
         <SetFor k="booth" f={f} lit={1} t={f * 0.4} rakeRate={3.8} />
 
-        {/* ⛔⛔ REBUILT. The contact sheet showed a grey stick on a dark green
-            field with a pale rectangle behind a chain-link mesh — three separate
-            legibility failures in the one shot whose job is "you are paying a
-            toll for a chat window". Fixed by MEASUREMENT, not taste:
-              · the mesh no longer crosses the window (it was the only object
-                the line is about, and it was behind a fence)
-              · the turnstile went 1.05 -> 1.48 and steel #B4BDB8, so the
-                barrier is the brightest thing in the room — which is what a
-                barrier should be
-              · the window is LIT the whole shot and goes DARK when the month
-                runs out, instead of being dark and flashing on
-              · the Claude went 182 -> 206 and moved fully inside the frame */}
-        <div style={{ position: "absolute", left: 300, top: 150, width: 412, height: 274, zIndex: 42,
-          borderRadius: 14, background: f < CLACK + 18 ? "#F6F3EC" : dkh("#1A2620", 0.10),
-          border: `7px solid ${dkh("#243830", 0.40)}`, overflow: "hidden" }}>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 44,
-            background: hexa(p.key, f < CLACK + 18 ? 0.26 : 0.06) }}>
+        {/* ⭐ ONE OBJECT: a chat window with a coin slot in it. 470x330 = 46% of
+            the panel, dead centre, nothing competing. */}
+        <div style={{ position: "absolute", left: 270, top: 158, width: 470, height: 330, zIndex: 46,
+          borderRadius: 18, overflow: "hidden",
+          background: lit ? "#F7F4EC" : dkh("#1A2620", 0.10),
+          border: `8px solid ${dkh("#243830", 0.44)}` }}>
+          {/* its title bar */}
+          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 52,
+            background: hexa(p.key, lit ? 0.26 : 0.06) }}>
             {[0, 1, 2].map(i => (
-              <div key={"cd" + i} style={{ position: "absolute", left: 16 + i * 26, top: 15,
-                width: 15, height: 15, borderRadius: "50%",
-                background: f < CLACK + 18 ? hexa(INK, 0.22) : hexa(p.key, 0.10) }} />
+              <div key={"cd" + i} style={{ position: "absolute", left: 18 + i * 28, top: 18,
+                width: 16, height: 16, borderRadius: "50%",
+                background: lit ? hexa(INK, 0.22) : hexa(p.key, 0.10) }} />
             ))}
           </div>
+          {/* the conversation — it only exists while the coin is good */}
           {[0, 1, 2, 3].map(i => (
-            <div key={"cw" + i} style={{ position: "absolute", left: i % 2 ? 176 : 22, top: 68 + i * 48,
-              width: i % 2 ? 208 : 244, height: 32, borderRadius: 16,
-              background: f < CLACK + 18
-                ? hexa(i % 2 ? CLAY : INK, 0.24) : hexa(p.key, 0.07) }} />
+            <div key={"cw" + i} style={{ position: "absolute", left: i % 2 ? 196 : 26,
+              top: 82 + i * 56, width: i % 2 ? 246 : 288, height: 38, borderRadius: 19,
+              background: lit ? hexa(i % 2 ? CLAY : INK, 0.24) : hexa(p.key, 0.06) }} />
           ))}
-          {/* the cursor blinking in the composer — it IS a chat window */}
-          <div style={{ position: "absolute", left: 22, bottom: 16, right: 22, height: 40,
-            borderRadius: 20, background: hexa(INK, f < CLACK + 18 ? 0.07 : 0.03),
-            border: `3px solid ${hexa(INK, f < CLACK + 18 ? 0.12 : 0.05)}` }}>
-            <div style={{ position: "absolute", left: 18, top: 10, width: 5, height: 20,
-              background: f < CLACK + 18 && Math.floor(f / 7) % 2 ? CLAY : "transparent" }} />
+          <div style={{ position: "absolute", left: 26, bottom: 20, right: 26, height: 46,
+            borderRadius: 23, background: hexa(INK, lit ? 0.07 : 0.03),
+            border: `3px solid ${hexa(INK, lit ? 0.12 : 0.05)}` }}>
+            <div style={{ position: "absolute", left: 20, top: 12, width: 6, height: 22,
+              background: lit && Math.floor(f / 7) % 2 ? CLAY : "transparent" }} />
           </div>
         </div>
-        {/* the meter above it — the month running out is what forces the coin */}
-        <div style={{ position: "absolute", left: 430, top: 82, width: 152, height: 56, zIndex: 44,
-          borderRadius: 8, background: "#0E1815", border: `5px solid ${dkh("#243830", 0.44)}`,
-          display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span style={{ ...mono(32, 800), color: f >= CLACK ? GREEN : RED }}>
-            {f >= CLACK ? "30d" : "00d"}
-          </span>
+
+        {/* ⭐ THE COIN SLOT, cut into the machine's own face — this is the whole
+            idea, so it is on the object and not beside it */}
+        <div style={{ position: "absolute", left: 300, top: 500, width: 410, height: 76, zIndex: 48,
+          borderRadius: 10, background: `linear-gradient(178deg, ${mxh("#8E9A94", 0.18)} 0%, ${dkh("#8E9A94", 0.36)} 100%)`,
+          border: `6px solid ${dkh("#8E9A94", 0.46)}` }}>
+          <div style={{ position: "absolute", left: 92, top: 20, width: 108, height: 20,
+            borderRadius: 5, background: "#0C100E",
+            boxShadow: "inset 0 3px 0 rgba(0,0,0,0.6)" }} />
+          {/* the month meter, ON the machine */}
+          <div style={{ position: "absolute", right: 18, top: 14, width: 120, height: 46,
+            borderRadius: 7, background: "#0E1815", border: `4px solid ${dkh("#8E9A94", 0.44)}`,
+            display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ ...mono(28, 800), color: lit ? GREEN : RED }}>
+              {lit ? `${Math.max(0, 30 - Math.floor((f - IN) * 1.4))}d` : "00d"}
+            </span>
+          </div>
+          {/* the count of how many times this has happened */}
+          <div style={{ position: "absolute", left: 18, top: 20, ...mono(30, 800),
+            color: hexa(GOLD, 0.9) }}>{f >= IN ? "02" : "01"}</div>
         </div>
 
-        {/* ⛔ mesh OFF: it painted across the chat window, which is the one
-            object this line is about. The booth walls already say "caged". */}
-        <Turnstile x={506} y={p.horizon + 186} s={1.48} f={f} clack={CLACK} z={60} mesh={false} />
-
-        {/* the coin travels the machine's full height, and stays visible long
-            enough to be seen doing it */}
-        {f < FEED + 20 && (
-          <Coin x={372 + ct * 128} y={196 + ct * 214} s={1.34} f={f} rot={ct * 420} z={68} />
+        {/* the coin travels the full height of the machine and goes IN */}
+        {f >= PAY && f < IN + 4 && (
+          <Coin x={196 + ct * 260} y={330 + ct * 190} s={1.5} f={f} rot={ct * 420} z={62} />
         )}
-        <Puff x={506} y={330} f={f} at={CLACK} n={12} s={1.1} z={70} c="#7EA894" />
-        <Ring x={506} y={334} f={f} at={CLACK} r={190} c={p.key} z={69} w={6} />
+        <Puff x={506} y={520} f={f} at={IN} n={14} s={1.2} z={64} c="#7EA894" />
+        <Ring x={506} y={524} f={f} at={IN} r={230} c={p.key} z={63} w={7} />
 
-        {/* ⛔ 7.36 — ONE CLACK IN A 2.57s SHOT. The line is "$20 a MONTH", and
-            the thing a toll actually has is a QUEUE: he is not the only one
-            paying and he will be back next month. Three more behind him,
-            arriving across the full duration, each shuffling forward. */}
-        {[0, 1, 2].map(i => (
-          /* ⛔ y WAS `p.horizon + 268` = 816 ON A 792px PANEL — the whole queue
-             rendered BELOW the frame and bought exactly nothing. The panel is
-             792 tall and `booth`'s horizon is 548, so anything on that floor
-             has ~244px of room; check the arithmetic against H, not against a
-             number that looked right in another set. */
-          <Crew key={"q" + i} f={f} x={62 - i * 6} y={p.horizon + 208 + i * 14} i={i + 6}
-            size={132 - i * 14} z={68 - i} at={8 + i * 12} loop={0}
-            tint={i ? (i === 1 ? "#B8613F" : "#8E4A30") : undefined} />
-        ))}
-        {/* the queue rail they stand behind — a toll has one */}
-        {[0, 1].map(i => (
-          <div key={"qr" + i} style={{ position: "absolute", left: -40, top: p.horizon + 74 + i * 54,
-            width: 300, height: 13, zIndex: 66, borderRadius: 6, background: dkh("#243830", 0.16) }} />
-        ))}
+        {/* ⭐ THE TOOL, NAMED WHERE THE VO NAMES IT — and it is the FREE
+            alternative, so it stands apart from the machine, not on it. */}
+        <ToolCard x={158} y={430} s={0.68} i={0} f={f} at={NAME} z={72} rot={-3} />
+        <Ring x={158} y={422} f={f} at={NAME} r={180} c={p.key} z={71} w={6} dur={14} />
 
-        {/* he pays. The loop is HAUL — he is carrying the coin, not bobbing. */}
-        <Crew f={f} x={192} y={p.horizon + 250} i={3} size={206} z={72} at={0} loop={4} />
-        {/* the bill runs past and takes the charge */}
-        <BillRoll x={rollX(220, CLACK + 4, 1.05)} y={p.horizon + 182} w={150} f={f} rows={rowsFor(0)} rowH={220} z={54}
-          dir="h" creep={1.05} head={false}
-          stampsFor={i => (i === 0 ? [CLACK + 4] : [])} />
+        {/* he pays, and he is the only character in the shot.
+            ⛔ y = p.horizon + 246 was 794 ON A 792px PANEL — his feet were off
+            the bottom. Check the arithmetic against H, not against a number
+            that looked right in another set. */}
+        <Crew f={f} x={166} y={p.horizon + 208} i={3} size={186} z={70} at={0} loop={4} />
 
-        <MarkCast x={900} y={168} s={92} z={74} f={f} spin={0.4} o={0.7} />
+        {/* the bill takes the charge, along the very bottom edge */}
+        <BillRoll x={rollX(220, IN + 4, 1.05)} y={p.horizon + 214} w={124} f={f}
+          rows={rowsFor(0)} rowH={220} z={54} dir="h" creep={1.05} head={false}
+          stampsFor={i => (i === 0 ? [IN + 4] : [])} />
       </div>
     </Scene>
   );
 };
 
-/* =========================================================================
-   S5 — GEMINI 3 PRO, FREE.  f389-489 (3.33s).  Intensity 9.
-   VO: "you get Gemini 3 Pro in your browser for free on the Google account you
-        already have,"
-
-   ⭐ THE NOUNS ARE **BROWSER** and **THE ACCOUNT YOU ALREADY HAVE**. So the cage
-   is physically SWEPT OFF and a real browser expands to fill the panel, and his
-   OWN account chip slots into it.
-   ⭐⭐ AND THE FIRST CUT LANDS HERE — the blade runs the full panel width and
-   row 1 falls out of the bill. Counter 5 -> 4. The spine's first payoff.
-
-   ⛔ occluders OFF: the stanchion brace paints at z86, in front of everything,
-   and would sit across the middle of a full-panel screen.
-   ====================================================================== */
 export const S5: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("wide");
@@ -800,7 +816,12 @@ export const S6: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           shock={LAND.some(k => f >= k && f - k < 10) ? 1 : 0} />
         <Crew f={f} x={148} y={p.horizon + 240} i={1} size={140} z={71} at={4} loop={1} flip />
 
-        <MarkCast x={906} y={158} s={94} z={74} f={f} spin={0.5} o={0.76} />
+        {/* ⭐ Alex: *"have the logos of the apps whenever you mention them
+            between things."* The tool that owns this beat carries its mark, so
+            a viewer joining mid-scene still knows which product they are
+            looking at. */}
+        <ToolCard x={834} y={262} s={0.56} i={0} f={f} at={4} z={76} rot={3} />
+        <MarkCast x={128} y={148} s={86} z={74} f={f} spin={0.5} o={0.70} />
       </div>
     </Scene>
   );
@@ -992,152 +1013,116 @@ export const S8: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 };
 
 /* =========================================================================
-   S9 — FLOW · THE FILM TOOL.  f769-843 (2.47s).  Intensity 7.
+   S9 — FLOW · THE FILM TOOL.  f769-843 (2.47s).  Intensity 8.
    VO: "3. Google Flow. This is Google's AI film tool."
 
-   ⭐ THE NOUN IS **FILM TOOL**, so the frame has to say STAGE before a word of
-   the next line lands: black wings, a lighting grid, a floor mark, and a real
-   crane that UNFOLDS the full panel height.
+   ⛔⛔ ELEVATED. Alex: *"at 25 seconds that animation needs to be elevated to
+   be a lot more interesting."* The first version was a crane unfolding on a
+   dark stage with a small monitor beside it — one prop doing one gesture, which
+   §5 calls a dead shot however well it moves.
 
-   ⛔⛔ NO `FREE` PLATE AND NO `$0` IN THIS SCENE OR THE NEXT. Flow's free tier
-   is 50 DAILY CREDITS — metered, not open. "Free" stays in the audio where
-   Alex said it (the ledger's edge 1, and reel 105's Magnific edge verbatim).
+   ⭐⭐ THE MOVE: THE REAL VEO FOOTAGE BECOMES THE STAGE ITSELF. Google's own
+   landing-page video of a wall of Veo output plays FULL WIDTH as the projection
+   the stage is pointed at, and the rig — crane, lamp bar, dolly track, flight
+   case — sits in SILHOUETTE in front of it. That is the largest changing area
+   available in the reel, it is high-contrast by construction (bright screen,
+   black rig), and it is the product doing its actual job rather than a drawing
+   of a place where the job happens.
+   ⭐ Reel 110's silhouette test, used the other way round: the rig has no
+   silhouette on a dark stage, and a perfect one against a lit screen.
+
+   ⛔ NO `FREE` PLATE AND NO `$0` HERE OR IN S10 — Flow's free tier is 50 daily
+   credits, metered, so the word stays in the audio.
+   ⭐ The FLOW card lands on its own measured name onset (26.16s -> local f11).
    ====================================================================== */
 export const S9: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("stage");
-  const off = v === "amber" ? 5 : v === "steel" ? -3 : 0;
-  const BANKS = [4 + off, 12 + off, 20 + off];
-  const UNFOLD = 22 + off;
+  const off = v === "amber" ? 4 : v === "steel" ? -3 : 0;
+  const PROJ = 2 + off;                 /* the projection strikes */
+  const BANKS = [10 + off, 17 + off, 24 + off];
+  const NAME = 11;                      /* "Google Flow." at 26.16s */
+  const UNFOLD = 20 + off;
+  const sh = shake(f, PROJ, 9, 8);
   return (
-    <Scene p={p} slug="THE STAGE" push={push(v, dur, 1.090)} vig={0.52}>
-      <div style={{ position: "absolute", inset: 0 }}>
-        <SetFor k="stage" f={f} lit={E(f, BANKS[0], BANKS[2] + 10, 0.24, 1, OUT)} t={f * 0.4}
-          rakeRate={5.8} />
+    <Scene p={p} slug="THE STAGE" push={push(v, dur, 1.078)} vig={0.40}>
+      <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
+        <SetFor k="stage" f={f} lit={E(f, PROJ, BANKS[2] + 8, 0.20, 1, OUT)} t={f * 0.4}
+          rakeRate={5.8} occluders={false} />
 
-        {/* the banks striking on, one at a time — the trigger is visible */}
+        {/* ⭐ THE PROJECTION — real Veo output, full width, and it is what lights
+            the room. `chrome="bare"` because a stage screen has no browser. */}
+        {/* ⛔⛔ THE CLIP WAS CHOSEN BY WHAT IT SHOWED AND NOT BY WHAT IT DOES.
+            The first pass put the video-GRID clip here and the scene fell
+            9.94 -> 7.58 with 50% HOLD: a wall of small thumbnails is mostly
+            static, and it was filling 87% of the panel. Measured on the clips
+            themselves with the audit's own method (10fps, greyscale, 240px,
+            mean |delta|):
+                broll_flow_edit   8.43     broll_flow_type   8.09
+                broll_flow_grid   4.75     broll_notebook    3.77
+                broll_flow_scene  3.19
+            The EDITOR clip is nearly twice the grid and it is also the better
+            depiction — "Google's AI film tool" is a timeline being cut, not a
+            gallery of finished files. ⭐ Measure the footage before you place
+            it; a clip is a mover and movers have numbers. */}
+        <Broll x={506} y={286} w={880} f={f} at={PROJ} src="broll/broll_flow_edit.mp4"
+          z={30} chrome="bare" ratio={0.50} punch={UNFOLD + 14} />
+        {/* the projector beam reaching it, so the light has a source */}
+        <div style={{ position: "absolute", left: 300, top: 0, width: 412, height: 180, zIndex: 31,
+          opacity: E(f, PROJ, PROJ + 10, 0, 0.30, OUT), pointerEvents: "none",
+          clipPath: "polygon(44% 0, 56% 0, 100% 100%, 0 100%)",
+          background: `linear-gradient(180deg, ${hexa(p.key, 0.7)} 0%, ${hexa(p.key, 0)} 100%)` }} />
+        <Ring x={506} y={286} f={f} at={PROJ} r={420} c={p.key} z={33} w={10} dur={18} />
+
+        {/* the stage banks striking in, one at a time, ACROSS the screen */}
         {BANKS.map((k, i) => (
           <React.Fragment key={"bk" + i}>
             {f >= k && (
-              <div style={{ position: "absolute", left: 120 + i * 300, top: 96, width: 320, height: 460,
-                zIndex: 24, opacity: 0.30, clipPath: "polygon(38% 0, 62% 0, 100% 100%, 0 100%)",
-                background: `linear-gradient(180deg, ${hexa(p.key, 0.62)} 0%, ${hexa(p.key, 0)} 100%)` }} />
+              <div style={{ position: "absolute", left: 60 + i * 300, top: 60, width: 320, height: 520,
+                zIndex: 34, opacity: 0.26, clipPath: "polygon(40% 0, 60% 0, 100% 100%, 0 100%)",
+                background: `linear-gradient(180deg, ${hexa("#FFE9C4", 0.66)} 0%, ${hexa("#FFE9C4", 0)} 100%)` }} />
             )}
-            <Ring x={280 + i * 300} y={130} f={f} at={k} r={150} c={p.key} z={72} w={5} dur={12} />
+            <Ring x={220 + i * 300} y={96} f={f} at={k} r={170} c="#FFE9C4" z={72} w={5} dur={12} />
           </React.Fragment>
         ))}
 
-        {/* ⛔ s WAS 1.06 AND THE RIG WAS A TWIG ON A BLACK STAGE. At 1.5 the boom
-            spans ~450px against a 1012 panel — 44%, which is a crane, and still
-            leaves air for a silhouette to form. */}
-        <Crane x={344} y={p.horizon + 152} s={1.42} f={f} unfold={UNFOLD} z={56} />
-
-        {/* the FLOW card, 200px, on the stage's name board */}
-        <NameBoard x={216} y={132} w={332} t="FLOW" f={f} at={UNFOLD + 14} z={68} s={1.06}
-          sub="GOOGLE · AI FILM" />
-        {/* ⭐ THE REAL FLOW MARK — a projector light-cone, from Google's own
-            favicon asset. It goes on a DARK tile because the mark is dark ink. */}
-        {/* ⭐ THE REAL FLOW MARK — a projector light-cone, from Google's own
-            favicon asset. ⛔ At 168px inside a 168px tile it filled the tile
-            edge to edge and read as a BLACK SMEAR: the mark fades to
-            transparent, so it has no silhouette without air around it. At 0.60
-            of the tile the cone shape is legible, which is the whole point of
-            using the real mark instead of a `G`. */}
-        <div style={{ position: "absolute", left: 132, top: 218, width: 168, height: 168, zIndex: 69,
-          borderRadius: 36, background: "#141518", border: "6px solid #2A2C32",
-          display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
-          transform: `scale(${E(f, UNFOLD + 18, UNFOLD + 28, 0, 1, BACK)})` }}>
-          <Img src={staticFile("logos/googleflow_light.png")}
-            style={{ width: 150, height: 150, objectFit: "contain" }} />
+        {/* ⭐ THE RIG, IN SILHOUETTE AGAINST THE SCREEN. Near-black on a lit
+            projection is the strongest value spread in the reel. */}
+        {/* ⛔ the rig UNFOLDED and then stood there — half the scene's HOLD. It
+            now keeps working: it booms through the whole shot, which is what a
+            crane on a live stage actually does. */}
+        <Crane x={786} y={p.horizon + 156} s={1.46} f={f} unfold={UNFOLD} z={56} c="#1A1622"
+          travel={[UNFOLD + 16, dur, -300]} boom={[UNFOLD + 14, dur, 22]} />
+        {/* the dolly track running the full width, in front of everything */}
+        <div style={{ position: "absolute", left: -60, right: -60, top: p.horizon + 118, height: 26,
+          zIndex: 60, background: `repeating-linear-gradient(90deg, ${dkh("#14111C", 0.02)} 0px, ${dkh("#14111C", 0.02)} 54px, ${mxh("#14111C", 0.14)} 54px, ${mxh("#14111C", 0.14)} 78px)` }} />
+        <div style={{ position: "absolute", left: -60, right: -60, top: p.horizon + 146, height: 12,
+          zIndex: 60, background: dkh("#14111C", 0.04) }} />
+        {/* a flight case cropped by the left edge — the near plane */}
+        <div style={{ position: "absolute", left: -70, top: p.horizon + 40, width: 250, height: 300,
+          zIndex: 78, borderRadius: 8, background: `linear-gradient(94deg, ${mxh("#141020", 0.12)} 0%, ${dkh("#141020", 0.02)} 100%)` }}>
+          {[0, 1].map(i => (
+            <div key={"fc" + i} style={{ position: "absolute", left: 22, right: 22, top: 40 + i * 130,
+              height: 16, background: mxh("#141020", 0.20) }} />
+          ))}
+          {[[24, 26], [200, 26], [24, 250], [200, 250]].map(([lx, ly], i) => (
+            <div key={"fl" + i} style={{ position: "absolute", left: lx, top: ly, width: 30, height: 30,
+              background: mxh("#141020", 0.26) }} />
+          ))}
         </div>
 
-        {/* the operator, walking the crane round — a job with an object */}
-        {/* ⛔ 6.48 — THE LOWEST BODY SCENE. One crane unfolding over 22 frames
-            repaints almost nothing per 0.1s. §1: LARGE x BRIGHT x FAST is the
-            only combination that registers, and the largest thing a stage has
-            is its DROP. A backdrop falls the full panel height on the third
-            bank, and the fly bars come in behind it — motivated, on-topic, and
-            the biggest swept area available in the room. */}
-        {f >= BANKS[2] && (() => {
-          const t = E(f, BANKS[2], BANKS[2] + 16, 0, 1, OUT);
-          return (<>
-            {/* ⛔⛔ THE FIRST BACKDROP MADE THE SCENE WORSE: 6.48 -> 6.07.
-                It was a DARK drop falling onto a DARK stage, and motion is
-                (fraction repainted per 0.1s) x (LUMA DELTA) — a near-black mass
-                travelling over a near-black field has an enormous swept area
-                and almost no delta, so it bought nothing and cost the black
-                point. ⭐ A film backdrop is a LIT cyclorama; painting it bright
-                is both what one actually looks like and the only version of
-                this shape the audit can see. `a rebuild is not automatically an
-                improvement` (§5) — measure it. */}
-            <div style={{ position: "absolute", left: 96, top: -560 + t * 620, width: 820, height: 560,
-              zIndex: 22, borderRadius: 4,
-              background: `linear-gradient(184deg, #FFE9C0 0%, #F2C48E 46%, ${mxh("#C98F62", 0.10)} 100%)` }}>
-              {/* a painted backdrop: a horizon and three receding masses, DARK
-                  against the lit cyc so the drop lands as a value CONTRAST */}
-              <div style={{ position: "absolute", left: 0, right: 0, top: "62%", height: 10,
-                background: hexa("#6E4A2E", 0.55) }} />
-              {[[70, 210, 240], [360, 260, 300], [640, 190, 220]].map(([bx, bw, bh], i) => (
-                <div key={"bd" + i} style={{ position: "absolute", left: bx, top: `calc(62% - ${bh}px)`,
-                  width: bw, height: bh, background: hexa("#5A3E2C", 0.42 + i * 0.10) }} />
-              ))}
-              {/* the batten it hangs from */}
-              <div style={{ position: "absolute", left: -20, right: -20, top: -18, height: 22,
-                background: dkh("#241E2E", 0.20) }} />
-              {/* the drop's own ripple as it lands — cloth does not stop dead */}
-              <div style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0,
-                background: `repeating-linear-gradient(90deg, transparent 0px, transparent 54px, ${hexa("#8A6642", 0.10 + 0.10 * Math.sin(f / 5))} 54px, ${hexa("#8A6642", 0.10)} 96px)` }} />
-            </div>
-            <Ring x={506} y={230} f={f} at={BANKS[2] + 16} r={340} c={p.key} z={73} w={8} />
-            <Puff x={506} y={300} f={f} at={BANKS[2] + 16} n={18} s={1.6} z={72} c="#9A88B4" up={0.4} />
-          </>);
-        })()}
-        {/* two fly bars travelling in behind it, on their own clock */}
-        {[0, 1].map(i => (
-          <div key={"fb" + i} style={{ position: "absolute", left: -180 + ((f * (5.4 + i * 2.2)) % 1400),
-            top: 92 + i * 54, width: 300, height: 20, zIndex: 24, borderRadius: 4,
-            background: hexa("#241E2E", 0.5) }} />
-        ))}
+        {/* ⭐ THE TOOL, NAMED WHERE THE VO NAMES IT */}
+        <ToolCard x={172} y={330} s={0.72} i={2} f={f} at={NAME} z={76} rot={-3} />
+        <Ring x={172} y={322} f={f} at={NAME} r={190} c={p.key} z={75} w={6} dur={14} />
 
-        {/* ⭐ REAL FLOW OUTPUT ON THE STAGE SCREEN — Google's own landing-page
-            video of a wall of Veo results, playing on the cyclorama. This is
-            the receipt for "Google's AI film tool" and the largest changing
-            area in the shot.
-            ⛔ THIS EDIT SILENTLY NO-OP'D ONCE. It was written as a plain
-            `str.replace()` against a Crew line that an earlier pass had already
-            rewritten, so it matched nothing and failed without a word — five
-            other b-roll insertions landed and this one did not, and only a
-            `grep -c` over the file found it. Every scripted edit in this build
-            now asserts its anchor before replacing. */}
-        <Broll x={596} y={286} w={470} f={f} at={UNFOLD + 6} src="broll/broll_flow_grid.mp4"
-          z={52} label="FLOW" chrome="app" punch={UNFOLD + 34} />
-
-        <Crew f={f} x={140} y={p.horizon + 220} i={10} size={168} z={70} at={2} loop={0} />
-        <Crew f={f} x={906} y={p.horizon + 244} i={7} size={142} z={70} at={10} loop={1} flip />
-
-        <MarkCast x={906} y={620} s={88} z={74} f={f} spin={-0.5} o={0.62} />
+        {/* the operator, working the crane, in silhouette too */}
+        <Crew f={f} x={604} y={p.horizon + 214} i={10} size={172} z={70} at={2} loop={0}
+          tint="#3A2E44" />
       </div>
     </Scene>
   );
 };
 
-/* =========================================================================
-   S10 — THE SHOT + THE CAMERA MOVE.  f843-948 (3.50s).  Intensity 9.
-   VO: "You type any animated or film shot you want and Veo builds it with a
-        camera move and everything,"
-
-   ⭐⭐ THE SCENE'S BEATS ARE CUT TO THE MEASURED WORD ONSETS (§10 — a scene can
-   be "about" the right subject and depict none of the words being said). Root
-   onsets from src/data/words_116bill.json, minus this scene's start (843):
-
-       "type"          28.54s -> f856 -> local 13
-       "shot you want" 29.43s -> f883 -> local 40
-       "Veo"           30.15s -> f905 -> local 62
-       "camera move"   30.76s -> f923 -> local 80
-       "and everything"31.15s -> f935 -> local 92
-
-   ⛔⛔ NO `FREE` PLATE, NO `$0` (see S9).
-   ====================================================================== */
 export const S10: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("stage");
@@ -1238,8 +1223,17 @@ export const S10: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           <Broll x={512} y={252} w={356} f={f} at={TYPE - 4} src="broll/broll_flow_type.mp4"
             z={66} label="FLOW" chrome="app" punch={SLAM} />
         )}
+        {/* ⛔ was broll_flow_scene, the least active clip of the five at 3.19.
+            The GRID is 4.75 and it is also the truer depiction of "Veo builds
+            it": results appearing, not one held shot.
+            ⛔ AND THE COMMENT GOES HERE, NOT INSIDE THE `&&`. A JSX comment is
+            an expression, so putting one inside `cond && ( ... )` alongside the
+            element gives two children where one is allowed. The fix for that
+            then broke the build a SECOND time, because the explanatory comment
+            quoted a JSX comment literally and its closing star-slash ended this
+            comment early. Do not quote comment syntax inside a comment. */}
         {f >= VEO && (
-          <Broll x={512} y={268} w={556} f={f} at={VEO} src="broll/broll_flow_scene.mp4"
+          <Broll x={512} y={268} w={556} f={f} at={VEO} src="broll/broll_flow_grid.mp4"
             z={66} label="VEO" chrome="app" punch={MOVE} />
         )}
 
@@ -1295,142 +1289,109 @@ export const S11: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 };
 
 /* =========================================================================
-   S12 — OPAL · ONE SENTENCE.  f1033-1093 (2.00s).  Intensity 6.
+   S12 — OPAL · ONE SENTENCE.  f1033-1093 (2.00s).  Intensity 7.
    VO: "4. Opal. You describe an app in one sentence"
 
-   ⭐ THE MEASURE IS **ONE SENTENCE**, so the input is ONE object — a single
-   long bar, not a paragraph of type (`feedback_graphical_over_textual`: budget
-   ONE text chip per shot, and a number moves to its value rather than being
-   typeset at it). It slides into a press and the press SLAMS.
+   ⛔⛔ REBUILT. Alex: *"at 34 seconds the animation needs to be so much better
+   here."* The first version was a press standing on a bench with a white pill
+   sliding into it — a machine with no output, in a room the contact sheet read
+   as empty. §10: name the mechanism and ask which half is missing. The INPUT
+   was drawn; the RESULT of the input was not, and neither was the tool.
+
+   ⭐ Now: he SPEAKS, the sentence leaves his mouth as one lit strip, it flies
+   into the machine, and the machine immediately starts ASSEMBLING — app parts
+   snapping together on the bed, one after another, while the strip is still
+   being read. The build is the interesting part and it starts inside this
+   scene rather than waiting for S13.
+   ⭐ And the OPAL card lands on its measured name onset (34.98s -> local f13).
    ====================================================================== */
 export const S12: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("bench");
-  const SAY = v === "amber" ? 10 : v === "steel" ? 4 : 7;
-  const SLIDE = SAY + 8, SLAM = SLIDE + 20;
-  const sh = shake(f, SLAM, 10, 8);
-  const st = E(f, SLIDE, SLAM, 0, 1, IO);
+  const NAME = 13;                       /* "Opal." at 34.98s */
+  const SAY = v === "amber" ? 18 : v === "steel" ? 12 : 15;
+  const IN = SAY + 12, BUILD = IN + 4;
+  const st = E(f, SAY, IN, 0, 1, IO);
+  const sh = shake(f, IN, 9, 7);
+  /* the parts that snap together once the sentence is in */
+  const PARTS: Array<[number, number, number, number]> = [
+    [560, 300, 150, 44], [560, 352, 96, 44], [664, 352, 46, 44],
+    [560, 404, 150, 34], [560, 446, 72, 34], [638, 446, 72, 34],
+  ];
   return (
-    <Scene p={p} slug="ONE SENTENCE" push={push(v, dur, 1.104)} vig={0.46}>
+    <Scene p={p} slug="ONE SENTENCE" push={push(v, dur, 1.098)} vig={0.42}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
         <SetFor k="bench" f={f} lit={1} t={f * 0.5} rakeRate={4.8} />
 
-        {/* ⛔ THE PRESS READ AS A TABLE. Wide thin legs, a thin crown and a
-            shallow ram is the silhouette of furniture; a press is a HEAVY CROWN
-            on THICK COLUMNS over a MASSIVE BED, with the ram filling the gap.
-            Rebuilt to those proportions and moved to frame centre, and it is
-            now 14 drawn parts rather than 6. */}
-        <div style={{ position: "absolute", left: 440, top: 132, width: 360, height: 404, zIndex: 44 }}>
-          {/* two THICK columns with tie rods */}
-          {[0, 306].map((k, i) => (
-            <div key={"pc" + i} style={{ position: "absolute", left: k, top: 0, width: 54, height: 404,
-              borderRadius: 5,
-              background: `linear-gradient(90deg, ${mxh("#9A8468", 0.26)} 0%, ${dkh("#9A8468", 0.34)} 100%)` }}>
-              {[0.14, 0.44, 0.74].map((j, q) => (
-                <div key={"tr" + q} style={{ position: "absolute", left: 8, right: 8, top: `${j * 100}%`,
-                  height: 14, borderRadius: 3, background: dkh("#9A8468", 0.46) }} />
-              ))}
-            </div>
+        {/* THE MACHINE — a builder, not a press: an open frame with a bed the
+            parts land on and a read head that runs across the sentence */}
+        <div style={{ position: "absolute", left: 512, top: 226, width: 300, height: 340, zIndex: 42 }}>
+          {[0, 268].map((k, i) => (
+            <div key={"mc" + i} style={{ position: "absolute", left: k, top: 0, width: 32, height: 340,
+              borderRadius: 5, background: `linear-gradient(90deg, ${mxh("#9A8468", 0.26)} 0%, ${dkh("#9A8468", 0.32)} 100%)` }} />
           ))}
-          {/* the CROWN — deep, and it carries the flywheel */}
-          <div style={{ position: "absolute", left: -26, top: -14, width: 412, height: 96, borderRadius: 8,
-            background: `linear-gradient(178deg, ${mxh("#9A8468", 0.30)} 0%, ${dkh("#9A8468", 0.36)} 100%)`,
-            border: `6px solid ${dkh("#9A8468", 0.46)}` }}>
-            {[0.10, 0.30, 0.50, 0.70, 0.90].map((k, i) => (
-              <div key={"cb" + i} style={{ position: "absolute", left: `${k * 100}%`, top: 22,
-                width: 20, height: 20, borderRadius: "50%", background: dkh("#9A8468", 0.52) }} />
+          <div style={{ position: "absolute", left: -20, top: -12, width: 340, height: 58, borderRadius: 8,
+            background: `linear-gradient(178deg, ${mxh("#9A8468", 0.30)} 0%, ${dkh("#9A8468", 0.34)} 100%)`,
+            border: `5px solid ${dkh("#9A8468", 0.46)}` }}>
+            {[0.12, 0.34, 0.56, 0.78].map((q, i) => (
+              <div key={"mb" + i} style={{ position: "absolute", left: `${q * 100}%`, top: 18,
+                width: 18, height: 18, borderRadius: "50%", background: dkh("#9A8468", 0.52) }} />
             ))}
           </div>
-          {/* the flywheel on the side, turning — the background process */}
-          <div style={{ position: "absolute", left: -96, top: 4, width: 108, height: 108,
-            borderRadius: "50%", background: dkh("#9A8468", 0.30),
-            border: `10px solid ${mxh("#9A8468", 0.16)}`, transform: `rotate(${f * 4.2}deg)` }}>
-            {[0, 60, 120].map(a => (
-              <div key={"fw" + a} style={{ position: "absolute", left: 44, top: 6, width: 8, height: 76,
-                background: dkh("#9A8468", 0.44), transform: `rotate(${a}deg)`, transformOrigin: "50% 50%" }} />
-            ))}
-          </div>
-          {/* the BED — massive, and the thing the sentence slides onto */}
-          <div style={{ position: "absolute", left: -34, top: 326, width: 428, height: 92, borderRadius: 6,
+          <div style={{ position: "absolute", left: -26, top: 304, width: 352, height: 60, borderRadius: 8,
             background: `linear-gradient(178deg, ${mxh("#9A8468", 0.20)} 0%, ${dkh("#9A8468", 0.44)} 100%)`,
-            border: `6px solid ${dkh("#9A8468", 0.50)}` }} />
-          {/* the RAM — it fills the gap, so the drop is a real distance */}
-          <div style={{ position: "absolute", left: 44,
-            top: 92 + (f >= SLAM ? Math.min(196, (f - SLAM) * 34) : 0),
-            width: 272, height: 168, borderRadius: 5,
-            background: `linear-gradient(178deg, ${mxh("#7E6A50", 0.26)} 0%, ${dkh("#7E6A50", 0.44)} 100%)`,
-            border: `6px solid ${dkh("#7E6A50", 0.54)}` }}>
-            {/* ⛔ THREE BOLTS IN A ROW OVER A COLOURED BAR IS A FACE — the same
-                defect the stamp head had, on a second prop, caught the same way
-                (look at the still, not at the code). Five bolts plus a lower
-                rail reads as a machined ram. */}
-            {[0.10, 0.30, 0.50, 0.70, 0.90].map((k, i) => (
-              <div key={"rb" + i} style={{ position: "absolute", left: `${k * 100}%`, top: 26,
-                width: 19, height: 19, borderRadius: "50%", background: dkh("#7E6A50", 0.58) }} />
-            ))}
-            <div style={{ position: "absolute", left: 18, right: 18, top: 78, height: 13,
-              borderRadius: 3, background: dkh("#7E6A50", 0.50) }} />
-            <div style={{ position: "absolute", left: 34, right: 34, top: 104, height: 9,
-              borderRadius: 3, background: mxh("#7E6A50", 0.10) }} />
-            {/* the die face */}
-            <div style={{ position: "absolute", left: 26, bottom: -20, right: 26, height: 32,
-              borderRadius: 4, background: dkh(CLAY, 0.22) }} />
-          </div>
+            border: `5px solid ${dkh("#9A8468", 0.50)}` }} />
+          {/* the read head, running across the sentence once it is in */}
+          {f >= IN && (
+            <div style={{ position: "absolute", left: 26 + ((f - IN) * 9) % 216, top: 52, width: 18,
+              height: 250, borderRadius: 6, background: hexa(G_BLUE, 0.72) }} />
+          )}
         </div>
 
-        {/* ⭐ THE ONE SENTENCE — a SINGLE long bar, sliding into the press */}
-        {f >= SAY && f < SLAM + 6 && (
-          <div style={{ position: "absolute", left: 116 + st * 468, top: 452, width: 380, height: 54,
-            zIndex: 60, borderRadius: 27,
-            background: `linear-gradient(94deg, #FFFFFF 0%, ${dkh(CREAMB, 0.06)} 100%)`,
-            border: `5px solid ${dkh(CREAMB, 0.24)}`,
-            transform: `scale(${E(f, SAY, SAY + 7, 0, 1, BACK)})` }}>
-            {/* it is a sentence, so it has words — as ink bars, never as type */}
-            {[14, 108, 176, 262].map((k, i) => (
-              <div key={"sw" + i} style={{ position: "absolute", left: k, top: 20, width: 78 - i * 12,
-                height: 13, borderRadius: 4, background: hexa(INK, 0.28) }} />
+        {/* ⭐ THE ONE SENTENCE — a single lit strip, spoken, flying in */}
+        {f >= SAY && f < IN + 6 && (
+          <div style={{ position: "absolute", left: 214 + st * 348, top: 452 - st * 130,
+            width: 340, height: 52, zIndex: 60, borderRadius: 26,
+            background: `linear-gradient(94deg, #FFFFFF 0%, ${dkh(CREAMB, 0.05)} 100%)`,
+            border: `5px solid ${hexa(G_BLUE, 0.42)}`,
+            transform: `scale(${E(f, SAY, SAY + 7, 0, 1, BACK)}) rotate(${-6 + st * 6}deg)` }}>
+            {[16, 104, 168, 248].map((k, i) => (
+              <div key={"sw" + i} style={{ position: "absolute", left: k, top: 19, width: 74 - i * 12,
+                height: 13, borderRadius: 4, background: hexa(INK, 0.30) }} />
             ))}
           </div>
         )}
-        <Puff x={620} y={470} f={f} at={SLAM} n={18} s={1.4} z={70} c="#C09660" />
-        <Ring x={620} y={474} f={f} at={SLAM} r={280} c={p.key} z={69} w={7} />
 
-        {/* ⭐ §10 — WHICH HALF IS MISSING? The press and the sentence were both
-            drawn and the SOURCE was not: a sentence that simply appears on a
-            bench came from nowhere. It now leaves HIS MOUTH — a speech plume
-            that opens on the same frame the bar arrives, which is also the only
-            thing in the shot moving before the slide starts. */}
-        {f >= SAY - 6 && f < SLIDE + 6 && [0, 1, 2].map(i => {
-          const t = E(f, SAY - 6 + i * 3, SAY + 6 + i * 3, 0, 1, OUT);
-          if (t <= 0) return null;
+        {/* ⭐ THE BUILD STARTS HERE — parts snapping onto the bed one after
+            another, which is the half the first version was missing */}
+        {PARTS.map(([px, py, pw, ph], i) => {
+          const at = BUILD + i * 5;
+          if (f < at) return null;
           return (
-            <div key={"sp" + i} style={{ position: "absolute", left: 296 + t * (60 + i * 26),
-              top: 344 - i * 26 - t * 22, width: 26 + i * 16, height: 26 + i * 16,
-              borderRadius: "50%", zIndex: 66, background: hexa(PAPER, 0.30 * (1 - t * 0.5)) }} />
+            <div key={"pt" + i} style={{ position: "absolute", left: px, top: py, width: pw, height: ph,
+              zIndex: 58, borderRadius: 8, background: hexa(i % 3 === 0 ? G_BLUE : i % 3 === 1 ? G_GRN : G_YEL, 0.30),
+              border: `3px solid ${hexa(i % 3 === 0 ? G_BLUE : i % 3 === 1 ? G_GRN : G_YEL, 0.70)}`,
+              transform: `scale(${squash(f - at, 5, 0.28, 3, 9)})` }} />
           );
         })}
-        {/* he speaks it — one gesture, and the bench jumps under him */}
-        <Crew f={f} x={186} y={p.horizon + 44} i={4} size={196} z={80} at={0} loop={1} />
-        <MarkCast x={912} y={140} s={90} z={74} f={f} spin={-0.4} o={0.7} />
+        {PARTS.map((_, i) => (
+          <Ring key={"pr" + i} x={620} y={340 + i * 34} f={f} at={BUILD + i * 5} r={120}
+            c={p.key} z={59} w={4} dur={10} />
+        ))}
+        <Puff x={664} y={400} f={f} at={IN} n={16} s={1.3} z={62} c="#C09660" />
+        <Ring x={664} y={404} f={f} at={IN} r={270} c={p.key} z={61} w={7} />
+
+        {/* ⭐ THE TOOL, NAMED WHERE THE VO NAMES IT */}
+        <ToolCard x={186} y={330} s={0.66} i={3} f={f} at={NAME} z={74} rot={-4} />
+        <Ring x={186} y={322} f={f} at={NAME} r={170} c={p.key} z={73} w={5} dur={13} />
+
+        {/* he speaks it — one gesture, at the bench line */}
+        <Crew f={f} x={266} y={p.horizon + 44} i={4} size={196} z={80} at={0} loop={1} />
       </div>
     </Scene>
   );
 };
 
-/* =========================================================================
-   S13 — THE APP, AS A LINK.  f1093-1195 (3.40s).  Intensity 9.
-   VO: "and it builds a working AI tool you can send to someone as a link
-        immediately."
-
-   ⭐⭐ §10 — BOTH MISSING HALVES ARE DRAWN:
-     · the OUTPUT — the tile that rises carries LIVE MOVING UI on its face
-       (rows arriving, a bar filling). Reel 107 measured real changing content
-       as the biggest single motion lever there is; a logo on a box is a
-       container, a running app is a depiction.
-     · the HANDOFF — a LINK CHAIN snaps out across the FULL panel width to a
-       third Claude, who lights up. It now runs on BOTH ends.
-   ⭐ cut 4 of 5. Counter 2 -> 1.
-   ====================================================================== */
 export const S13: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("bench");
@@ -1455,6 +1416,9 @@ export const S13: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         <AppTile x={236 + ct * 300} y={470 - Math.sin(ct * Math.PI) * 120} s={0.94} f={f}
           at={RISE} z={64} live />
         <Ring x={236} y={430} f={f} at={RISE} r={200} c={p.key} z={62} w={6} />
+
+        {/* ⭐ the tool that owns this beat, named */}
+        <ToolCard x={136} y={276} s={0.56} i={3} f={f} at={4} z={76} rot={-3} />
 
         {/* ⭐ THE REAL OPAL PAGE, captured live from opal.google — the prompt box
             and "Build, edit, and share AI mini-apps using natural language". */}
@@ -1511,113 +1475,109 @@ export const S13: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 };
 
 /* =========================================================================
-   S14 — ANTIGRAVITY · THE FREE IDE.  f1195-1275 (2.67s).  Intensity 7.
+   S14 — ANTIGRAVITY · THE FREE IDE.  f1195-1275 (2.67s).  Intensity 8.
    VO: "5. Antigravity. It's a free coding IDE from Google"
 
-   ⭐ THE NOUN IS AN **IDE**, and Antigravity's own docs name exactly three
-   surfaces — editor, terminal, browser. So the room IS those three surfaces,
-   and they come up TOGETHER on one switch, which is what makes them one thing.
+   ⛔⛔ REDONE. Alex: *"at 41 seconds that animation needs to be made
+   significantly better redone its not that good right now."* The first version
+   threw a switch, rolled three shutters up over 16 frames, and then HELD for
+   sixty — §5's "arrivals spread across the FULL duration", failed. It also had
+   the room's own capture buried under the dark overhead, and no tool card on
+   the beat where the VO names the tool.
+
+   ⭐ THE POWER-UP IS NOW THE WHOLE SCENE, and it runs the entire 80 frames:
+     · the room is DEAD at f0 — three dark bays, no light anywhere
+     · the ANTIGRAVITY card lands on its measured name onset (40.58s -> f18)
+     · a POWER SURGE crosses the room left to right, and each bay ignites as the
+       surge reaches it — three staggered ignitions, not one simultaneous reveal
+     · each bay floods with content the instant it lights, and the content CYCLES
+     · the crew streams in behind the surge, arriving across the back half
+     · a status rail along the bottom fills bay by bay
+   ⭐ Three large bright rectangles igniting in sequence across 2.67s is the
+   shape §1's table actually rewards, and it is what "it boots up" looks like.
    ====================================================================== */
 export const S14: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("bays");
-  const THROW = v === "amber" ? 12 : v === "steel" ? 5 : 8;
-  const OPEN = THROW + 4;
-  const sh = shake(f, THROW, 7, 6);
+  const off = v === "amber" ? 4 : v === "steel" ? -3 : 0;
+  const THROW = 6 + off, NAME = 18;
+  /* the surge crosses the room; each bay ignites as it arrives */
+  const IGN = [THROW + 8, THROW + 18, THROW + 28];
+  const surgeX = E(f, THROW, THROW + 34, -120, 1140, LIN);
+  const sh = shake(f, THROW, 8, 7);
   return (
-    <Scene p={p} slug="THE BAYS" push={push(v, dur, 1.084)} vig={0.46}>
+    <Scene p={p} slug="THE BAYS" push={push(v, dur, 1.080)} vig={0.44}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="bays" f={f} lit={1} t={f * 0.5} rakeRate={5.2} />
+        <SetFor k="bays" f={f} lit={E(f, IGN[0], IGN[2] + 10, 0.10, 1, OUT)} t={f * 0.5}
+          rakeRate={5.2} />
 
-        {/* the master switch — the trigger is a real object, thrown */}
-        <div style={{ position: "absolute", left: 62, top: 296, width: 92, height: 150, zIndex: 60,
+        {/* the master switch — the trigger, and a real object */}
+        <div style={{ position: "absolute", left: 46, top: 306, width: 88, height: 146, zIndex: 60,
           borderRadius: 8, background: `linear-gradient(178deg, ${mxh("#243440", 0.20)} 0%, ${dkh("#243440", 0.38)} 100%)`,
           border: `5px solid ${dkh("#243440", 0.50)}` }}>
-          <div style={{ position: "absolute", left: 34, top: 18, width: 20, height: 74, borderRadius: 10,
+          <div style={{ position: "absolute", left: 32, top: 18, width: 20, height: 72, borderRadius: 10,
             background: f >= THROW ? GREEN : RED,
             transformOrigin: "50% 100%", transform: `rotate(${f >= THROW ? 26 : -26}deg)` }} />
-          <div style={{ position: "absolute", left: 26, top: 108, width: 36, height: 22, borderRadius: 5,
-            background: f >= THROW ? hexa(GREEN, 0.5) : dkh("#243440", 0.30) }} />
+          <div style={{ position: "absolute", left: 24, top: 106, width: 36, height: 22, borderRadius: 5,
+            background: f >= THROW ? hexa(GREEN, 0.55) : dkh("#243440", 0.30) }} />
         </div>
 
-        {/* the three bays, rolling up TOGETHER */}
+        {/* ⭐ THE SURGE — a bright front crossing the room, and it is what makes
+            the three ignitions read as ONE event rather than three cuts */}
+        {f >= THROW && f <= THROW + 36 && (<>
+          <div style={{ position: "absolute", left: surgeX - 26, top: 90, width: 52, bottom: 120,
+            zIndex: 66, background: `linear-gradient(90deg, ${hexa(p.key, 0)} 0%, ${hexa(p.key, 0.85)} 50%, ${hexa(p.key, 0)} 100%)` }} />
+          <div style={{ position: "absolute", left: surgeX - 140, top: 90, width: 140, bottom: 120,
+            zIndex: 65, background: `linear-gradient(90deg, ${hexa(p.key, 0)} 0%, ${hexa(p.key, 0.22)} 100%)` }} />
+        </>)}
+
+        {/* the three bays, each igniting as the surge reaches it */}
         {[0, 1, 2].map(i => (
           <Bay key={"by" + i} x={244 + i * 262} y={p.horizon - 24} w={228} h={264} f={f}
-            open={OPEN + i * 2} kind={i as 0 | 1 | 2} z={34 + i} live={OPEN + 16} />
+            open={IGN[i] - 12} kind={i as 0 | 1 | 2} z={34 + i} live={IGN[i]} />
         ))}
+        {[0, 1, 2].map(i => (<React.Fragment key={"bi" + i}>
+          <Ring x={244 + i * 262} y={p.horizon - 150} f={f} at={IGN[i]} r={250} c={p.key}
+            z={72} w={8} dur={16} />
+          <Puff x={244 + i * 262} y={p.horizon - 40} f={f} at={IGN[i]} n={12} s={1.2}
+            z={71} c="#527084" />
+          {/* the bay's own flood, on ignition */}
+          {f >= IGN[i] && f < IGN[i] + 12 && (
+            <div style={{ position: "absolute", left: 244 + i * 262 - 132, top: p.horizon - 306,
+              width: 264, height: 300, zIndex: 40, borderRadius: 8,
+              background: hexa(p.key, 0.55 * (1 - (f - IGN[i]) / 12)) }} />
+          )}
+        </React.Fragment>))}
+
+        {/* ⭐ a STATUS RAIL that fills bay by bay — the room reporting itself up */}
+        <div style={{ position: "absolute", left: -40, right: -40, top: p.horizon + 176, height: 44,
+          zIndex: 68, borderRadius: 6,
+          background: `linear-gradient(178deg, ${mxh("#243440", 0.14)} 0%, ${dkh("#243440", 0.40)} 100%)` }} />
         {[0, 1, 2].map(i => (
-          <Ring key={"br" + i} x={244 + i * 262} y={p.horizon - 150} f={f} at={OPEN + i * 2 + 16}
-            r={200} c={p.key} z={72} w={6} dur={14} />
+          <div key={"sr" + i} style={{ position: "absolute", left: 120 + i * 300, top: p.horizon + 186,
+            width: 260, height: 24, zIndex: 69, borderRadius: 5,
+            background: f >= IGN[i] ? hexa(GREEN, 0.62) : hexa("#243440", 0.5),
+            transform: `scaleX(${f >= IGN[i] ? E(f, IGN[i], IGN[i] + 9, 0, 1, OUT) : 0.06})`,
+            transformOrigin: "0% 50%" }} />
         ))}
 
-        {/* ⭐ THE REAL ANTIGRAVITY PRODUCT PAGE behind the bays, so the room is
-            the actual IDE rather than a drawing of one. */}
-        {/* ⛔ z=30 PUT THIS UNDER `DarkOverhead` (z82), which paints the room's
-            dark tenth from -10 to ~170 — the capture rendered and could not be
-            seen, §6 fault 2 for the third time in this build. It is the
-            product's own page and has to be legible, so it sits above the
-            gantry rather than behind it. */}
-        <Shot x={506} y={96} w={408} f={f} at={OPEN + 10} src="shots/bill_antigravity_ide.png"
-          z={84} label="antigravity.google" pan={60} ratio={0.34} />
+        {/* ⭐ THE TOOL, NAMED WHERE THE VO NAMES IT */}
+        {/* ⛔ y=224 put the card TOP at 41 — behind the header band. `y` is the
+            card FOOT, so the top is `y - 262*s`; at s=0.70 that is y-183. */}
+        <ToolCard x={186} y={HEADER_SAFE + 190} s={0.70} i={4} f={f} at={NAME} z={80} rot={-4} />
+        <Ring x={186} y={HEADER_SAFE + 182} f={f} at={NAME} r={190} c={p.key} z={79} w={6} dur={14} />
 
-        {/* the ANTIGRAVITY card, 200px, on the room's name board */}
-        <NameBoard x={506} y={78} w={430} t="ANTIGRAVITY" f={f} at={OPEN + 20} z={76} s={1.06}
-          sub="GOOGLE · FREE IDE" />
-        {/* ⭐ THE REAL ANTIGRAVITY MARK, from the official channel avatar. It
-            ships on a dark ground, so its tile is dark — as Google presents it. */}
-        <div style={{ position: "absolute", left: 92, top: 54, width: 140, height: 140, zIndex: 77,
-          borderRadius: 30, background: "#141518", border: "5px solid #2A2C32",
-          display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
-          transform: `scale(${E(f, OPEN + 24, OPEN + 34, 0, 1, BACK)})` }}>
-          <Img src={staticFile("logos/antigravity.png")} style={{ width: 140, height: 140, objectFit: "contain" }} />
-        </div>
-
-        {/* ⛔ 6.91 — the three shutters roll in 16 frames and then the shot
-            HOLDS for 60. §5: spread arrivals across the FULL duration. The crew
-            arrives to man the bays across the back half, which is also the
-            before-state S15 needs. */}
+        {/* the crew streams in behind the surge, across the back half */}
         {[0, 1, 2, 3, 4].map(i => (
-          <Crew key={"ia" + i} f={f} x={196 + i * 168} y={p.horizon + 200 + (i % 2) * 34}
-            i={i + 2} size={150 - (i % 2) * 18} z={70 - (i % 2)} at={OPEN + 22 + i * 8}
-            loop={i % 3 === 0 ? 1 : i % 3 === 1 ? 4 : 0}
-            tint={i % 2 ? "#B8613F" : undefined} />
+          <Crew key={"ia" + i} f={f} x={206 + i * 160} y={p.horizon + 152 + (i % 2) * 30}
+            i={i + 2} size={148 - (i % 2) * 18} z={70 - (i % 2)} at={IGN[Math.min(2, i % 3)] + 6 + i * 4}
+            loop={i % 3 === 0 ? 1 : i % 3 === 1 ? 4 : 0} tint={i % 2 ? "#B8613F" : undefined} />
         ))}
-        {[0, 1, 2, 3, 4].map(i => (
-          <Puff key={"ip" + i} x={196 + i * 168} y={p.horizon + 200 + (i % 2) * 34} f={f}
-            at={OPEN + 22 + i * 8} n={9} s={1.0} z={73} c="#527084" up={0.3} />
-        ))}
-
-        <Crew f={f} x={112} y={p.horizon + 220} i={8} size={158} z={72} at={0} loop={1} />
       </div>
     </Scene>
   );
 };
 
-/* =========================================================================
-   S15 — THE TEAM, THREE SURFACES.  f1275-1395 (4.00s).  ⭐ THE PEAK. Intensity 10.
-   VO: "that runs a team of agents at once across your editor, terminal, and
-        your browser"
-
-   ⭐⭐⭐ DENSITY PEAKS HERE (§9 — density is a SHAPE, not a level: it should
-   peak on the one or two scenes that carry the story and thin out elsewhere).
-
-   ⛔⛔ AN ACTION LOOP IS NOT A SCENE (reel 110). Eight sprites each correctly
-   running a loop still read as *"standing around bouncing"*. So each bay's crew
-   has a DIFFERENT JOB WITH A DIFFERENT OBJECT, and ⭐⭐ ONE TICKET TRAVELS
-   BETWEEN THE BAYS — editor -> terminal -> browser, across the full panel —
-   which is what makes three bays one SYSTEM rather than three loops.
-
-   ⭐ Word-onset cuts, root minus 1275:
-       "your editor,"  44.68s -> f1340 -> local 65
-       "terminal,"     45.44s -> f1363 -> local 88
-       "your browser"  46.08s -> f1382 -> local 107
-   Each bay's sign lights and its work bursts on its OWN word.
-
-   ⛔ CROWD ARITHMETIC: 9 sprites, 3 per bay, size 118. `pitch >= 0.85 * size`
-   = 100px; the bays are 262px apart and each rank is 3 across ~228px, so the
-   in-bay pitch is 76px — UNDER the law. Fixed by staggering the ranks in Y and
-   painting back ranks darker, which is also the axis a greyscale audit reads.
-   ====================================================================== */
 export const S15: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("bays");
@@ -1729,7 +1689,8 @@ export const S15: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           );
         })}
 
-        <MarkCast x={912} y={126} s={92} z={78} f={f} spin={0.55} o={0.72} />
+        <ToolCard x={884} y={228} s={0.52} i={4} f={f} at={4} z={80} rot={3} />
+        <MarkCast x={118} y={126} s={84} z={78} f={f} spin={0.55} o={0.68} />
       </div>
     </Scene>
   );
@@ -1876,68 +1837,138 @@ export const S17: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 };
 
 /* =========================================================================
-   S18 — THE LAST CHARGE.  f1517-1636 (3.97s).  Intensity 9.
+   S18 — THE LAST CHARGE.  f1517-1636 (3.97s).  Intensity 10. ⭐ THE PAYOFF.
    VO: "and that's what people are also paying Cursor and other coding IDEs $20
         a month for."
 
-   ⭐ THE VILLAIN IS BEATEN EXACTLY ONCE, HERE. The stamp head has been fed in
-   S0, S1, S4 and S11 and is STILL GOING at this scene's before-state — which is
-   what makes the last cut land.
-   ⭐ cut 5 of 5. Counter 1 -> 0. Then the whole remaining roll is pulled up and
-   out of frame, and the five cards are standing lit behind it.
-   ⛔ `$20` on the Cursor row is legal: the VO says it and Cursor Pro is $20/mo.
+   ⛔⛔ REBUILT. Alex: *"at 51 seconds needs to be significantly better right now
+   its way too boring and bad here."* He is right and the diagnosis is the same
+   one §8 keeps writing: the frame was a 600px CREAM SHEET filling the panel
+   with a small counter beside it. One big pale rectangle is not a payoff, it is
+   a wall — and this is the scene the whole reel has been counting down to.
+
+   ⭐ WHAT THE PAYOFF ACTUALLY IS: the villain is beaten. So the shot is built
+   around the villain, not around the paper:
+     · the STAMP HEAD is huge and centre, still hammering the last row — it has
+       won every scene it appeared in and it is winning at f0
+     · the CURSOR mark is 150px on that row, because the VO names it and this is
+       the only scene it appears in
+     · the blade runs the full panel width and the row is TORN OUT — the strip
+       flies apart in six pieces rather than sliding away
+     · the roll is YANKED up and out, and the stamp head is dragged up with it:
+       the machine leaves with the paper
+     · the counter slams 1 -> 0 and the five cards land in the space it left
+   ⭐ The bill is angled and narrower so the hall reads behind it, which is what
+   stops the frame being a white wall.
    ====================================================================== */
 export const S18: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("hall3");
-  const off = v === "amber" ? 6 : v === "steel" ? -4 : 0;
-  const CUT = 46 + off, PULL = CUT + 26;
-  const sh = shake(f, CUT + 12, 10, 9);
-  const CARDS = [PULL + 8, PULL + 13, PULL + 18, PULL + 23, PULL + 28];
+  const off = v === "amber" ? 5 : v === "steel" ? -4 : 0;
+  const HITS = [6 + off, 22 + off];
+  const CUT = 44 + off, TEAR = CUT + 9, PULL = CUT + 24;
+  const sh = HITS.concat([TEAR]).reduce((a, k) => {
+    const q = shake(f, k, k === TEAR ? 13 : 8, 9); return { x: a.x + q.x, y: a.y + q.y };
+  }, { x: 0, y: 0 });
+  /* ⛔ was PULL+10..+30, which left ten frames of EMPTY ROOM between the roll
+     leaving and the first card landing — the payoff beat played on nothing.
+     They now start as the roll clears and overlap it. */
+  const CARDS = [PULL + 2, PULL + 6, PULL + 10, PULL + 14, PULL + 18];
+  const yank = f >= PULL ? E(f, PULL, PULL + 20, 0, 1, IN_Q) : 0;
   return (
-    <Scene p={p} slug="THE LAST CHARGE" push={push(v, dur, 1.062)} vig={0.32}>
+    <Scene p={p} slug="THE LAST CHARGE" push={push(v, dur, 1.058)} vig={0.34}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
         <SetFor k="hall3" f={f} lit={1} t={f * 0.5} rakeRate={6.0} />
 
-        {/* the last row, still stamping right up to the cut */}
-        <BillRoll x={210} y={-88} w={600} f={f} rows={rowsFor(4, CUT)} rowH={300} z={46}
-          dir="v" creep={0.34} head pull={PULL}
-          stampsFor={i => (i === 0 ? [8, 24] : [])} />
-        <StampHead x={506} y={-160} w={500} f={f} hits={[8, 24]} z={62} drop={104} />
+        {/* ⭐ THE LAST ROW — angled and narrower, so the hall reads behind it and
+            the frame is not a cream wall. It carries the CURSOR mark at 150px
+            and the $20 the VO says, and it is still being stamped at f0. */}
+        {f < TEAR + 26 && (
+          <div style={{ position: "absolute", left: 176, top: 300 - yank * 900, width: 660, height: 236,
+            zIndex: 48, transform: `rotate(-3.5deg)` }}>
+            {[0, 1, 2, 3, 4, 5].map(i => {
+              const torn = f >= TEAR;
+              const tt = torn ? Math.min(1, (f - TEAR) / 24) : 0;
+              const dir = i % 2 ? 1 : -1;
+              return (
+                <div key={"pc" + i} style={{ position: "absolute", left: i * 110, top: 0,
+                  width: 112, height: 236, overflow: "hidden",
+                  transform: torn
+                    ? `translate(${dir * tt * (70 + i * 26)}px, ${tt * tt * 700}px) rotate(${dir * tt * 46}deg)`
+                    : undefined,
+                  opacity: 1 - tt * 0.5 }}>
+                  <div style={{ position: "absolute", left: -i * 110, top: 0, width: 660, height: 236,
+                    background: `linear-gradient(178deg, ${dkh(PAPER, 0.04)} 0%, ${PAPER} 22%, ${dkh(PAPER, 0.14)} 100%)`,
+                    border: `5px solid ${dkh(PAPER, 0.22)}` }}>
+                    {/* the cursor mark, 150px, because the VO names it */}
+                    <div style={{ position: "absolute", left: 42, top: 42, width: 150, height: 150,
+                      borderRadius: 30, background: "#FFFFFF", border: `5px solid ${dkh(PAPER, 0.20)}`,
+                      display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <Img src={staticFile("logos/cursor.svg")}
+                        style={{ width: 104, height: 104, objectFit: "contain" }} />
+                    </div>
+                    {[0.30, 0.50, 0.68].map((k, j) => (
+                      <div key={"db" + j} style={{ position: "absolute", left: 224, top: 236 * k,
+                        width: 190 - j * 44, height: 15, borderRadius: 4, background: hexa(INK, 0.28 - j * 0.06) }} />
+                    ))}
+                    <div style={{ position: "absolute", right: 34, top: 74, ...mono(86, 800),
+                      color: hexa(INK, 0.86), letterSpacing: "-0.03em" }}>{R.price}</div>
+                    {/* the recurring stamp, landing twice more before the cut */}
+                    {HITS.filter(k => f >= k).map((k, j) => (
+                      <div key={"st" + j} style={{ position: "absolute", right: 236 + j * 18, top: 44,
+                        width: 128, height: 128, borderRadius: "50%",
+                        border: `10px solid ${hexa(RED, 0.5)}`, transform: `rotate(-13deg) scale(${squash(f - k, 5, 0.12, 3, 9)})`,
+                        display: "flex", alignItems: "center", justifyContent: "center" }}>
+                        <span style={{ ...mono(30, 800), color: hexa(RED, 0.62) }}>PAID</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
 
-        {/* ⭐ CUT 5 OF 5 */}
-        <Cutter y={442} f={f} at={CUT} z={78} h={64} dur={15} />
-        <Puff x={506} y={442} f={f} at={CUT + 9} n={24} s={1.7} z={80} c="#D8B98E" up={0.7} />
-        <Ring x={506} y={442} f={f} at={CUT + 9} r={380} c={p.key} z={79} w={10} />
+        {/* ⭐ THE VILLAIN, HUGE AND CENTRE, and it is DRAGGED OUT with the paper */}
+        {f < PULL + 22 && (
+          <div style={{ position: "absolute", inset: 0, transform: `translateY(${-yank * 700}px)` }}>
+            {/* ⛔ y=44 PUT THE VILLAIN BEHIND `HookHeader` AGAIN (it owns the
+                top ~95px). Third time in this build — check the header band
+                before placing anything above y=110. */}
+            <StampHead x={506} y={112} w={560} f={f} hits={HITS} z={62} drop={92} />
+          </div>
+        )}
+        {HITS.map((k, i) => (<React.Fragment key={"hp" + i}>
+          <Puff x={506} y={320} f={f} at={k} n={16} s={1.4} z={66} c="#D8B98E" up={0.4} />
+          <Ring x={506} y={324} f={f} at={k} r={280} c={p.key} z={65} w={8} />
+        </React.Fragment>))}
 
-        <ChargeCounter x={742} y={122} f={f} s={0.92} z={84}
-          steps={[[-1, 1], [CUT + 14, 0]]} label="CHARGES" />
+        {/* ⭐ CUT 5 OF 5 — and the row is TORN, not slid away */}
+        <Cutter y={416} f={f} at={CUT} z={78} h={70} dur={13} />
+        <Puff x={506} y={416} f={f} at={TEAR} n={30} s={2.0} z={80} c="#E8D2AA" up={0.9} />
+        <Ring x={506} y={416} f={f} at={TEAR} r={460} c={p.key} z={79} w={12} dur={22} />
 
-        {/* ⭐ behind the roll, once it is pulled: the five cards, lit and standing */}
+        <ChargeCounter x={742} y={112} f={f} s={0.96} z={84}
+          steps={[[-1, 1], [TEAR, 0]]} label="CHARGES" />
+
+        {/* ⭐ the five cards land in the space the bill left */}
         {CARDS.map((k, i) => (
-          <ToolCard key={"fc" + i} x={124 + i * 190} y={p.horizon + 40} s={0.72} i={i} f={f}
+          <ToolCard key={"fc" + i} x={124 + i * 190} y={p.horizon + 46} s={0.74} i={i} f={f}
             at={k} z={64 + i} rot={(i - 2) * 1.3} />
         ))}
         {CARDS.map((k, i) => (
-          <Ring key={"cr" + i} x={124 + i * 190} y={p.horizon + 32} f={f} at={k} r={160}
+          <Ring key={"cr" + i} x={124 + i * 190} y={p.horizon + 38} f={f} at={k} r={170}
             c={p.key} z={74} w={5} dur={13} />
         ))}
 
-        <Crew f={f} x={912} y={p.horizon + 250} i={11} size={172} z={72} at={0} loop={4}
-          cheer={f > CUT + 16 ? 1 : 0} />
-        <MarkCast x={92} y={148} s={98} z={76} f={f} spin={-0.5} o={0.8} />
+        <Crew f={f} x={916} y={p.horizon + 236} i={11} size={168} z={72} at={0} loop={4}
+          cheer={f > TEAR + 6 ? 1 : 0} />
+        <MarkCast x={88} y={140} s={92} z={76} f={f} spin={-0.5} o={0.72} />
       </div>
     </Scene>
   );
 };
 
-/* =========================================================================
-   S19 — CTA · THE STUB.  f1636-1696 (2.00s).  Intensity 7.
-   VO: "For the full free list, comment BILL."
-
-   ⛔ HARD CUT ON THE KEYWORD. `BILL` lands at 55.98s = f1679 = local 43, and
-   the reel ends at f1696 — 17 frames later, which carries the word and stops.
-   ====================================================================== */
 export const S19: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("hall3");
@@ -1948,8 +1979,9 @@ export const S19: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         <SetFor k="hall3" f={f} lit={1.1} t={f * 0.6} rakeRate={5.4} />
 
         {/* the five cards, standing, pulsing left to right */}
+        {/* the cards move DOWN to make room for the comment field */}
         {[0, 1, 2, 3, 4].map(i => (
-          <ToolCard key={"cc" + i} x={124 + i * 190} y={p.horizon + 26} s={0.74} i={i} f={f}
+          <ToolCard key={"cc" + i} x={124 + i * 190} y={p.horizon + 196} s={0.66} i={i} f={f}
             at={-30} z={62 + i} rot={(i - 2) * 1.2}
             lit={0.62 + 0.38 * Math.max(0, Math.sin((f - i * 5) / 7))} />
         ))}
@@ -1968,11 +2000,18 @@ export const S19: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             color: hexa(INK, 0.48), letterSpacing: "0.06em" }}>CHARGES</div>
         </div>
 
-        <CommentField x={506} y={p.horizon + 130} w={620} f={f} at={FIELD} word="BILL" z={86} />
-        <Ring x={506} y={p.horizon + 178} f={f} at={KEY + 16} r={340} c={GOLD} z={85} w={8} />
+        {/* ⛔ Alex: *"the 'bill' thing to comment at the bottom here is too low
+            needs to be moved up and stuff here its not really visible."* It sat
+            at `p.horizon + 130` = 658 on a 792 panel, i.e. the last eighth of
+            the frame, under the vignette's darkest band and directly above the
+            caption track — the one object the whole reel is asking for was the
+            least visible thing in its own shot. It is now at 470, dead centre,
+            and 40% wider. */}
+        <CommentField x={506} y={470} w={720} f={f} at={FIELD} word="BILL" z={86} />
+        <Ring x={506} y={518} f={f} at={KEY + 16} r={380} c={GOLD} z={85} w={9} />
 
-        <Crew f={f} x={122} y={p.horizon + 268} i={6} size={150} z={72} at={2} loop={2} />
-        <Crew f={f} x={906} y={p.horizon + 268} i={9} size={150} z={72} at={6} loop={2} flip />
+        <Crew f={f} x={92} y={p.horizon + 250} i={6} size={132} z={72} at={2} loop={2} />
+        <Crew f={f} x={930} y={p.horizon + 250} i={9} size={132} z={72} at={6} loop={2} flip />
         <MarkCast x={506} y={64} s={104} z={80} f={f} spin={0.6} o={0.9} />
       </div>
     </Scene>
