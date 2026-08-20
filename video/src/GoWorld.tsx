@@ -994,12 +994,21 @@ export const SpecPlate: React.FC<{ x: number; y: number; w: number; f: number;
       <div style={{ position: "absolute", left: w * 0.09, top: h * 0.32 }}>
         <Roll x={0} y={0} f={f} steps={count} size={h * 0.21} z={4} c={INK} />
       </div>
-      {/* THE MIT STAMP, struck by a descending die */}
-      <div style={{ position: "absolute", left: w * 0.10, top: h * 0.62, width: w * 0.36,
-        height: h * 0.26, borderRadius: 6, opacity: stamped,
-        background: hexa(CLAYD, 0.13), border: `${w * 0.011}px solid ${CLAYD}`,
-        display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ ...ui(h * 0.16, 900), color: CLAYD, letterSpacing: "0.06em" }}>{R.license}</span>
+      {/* ⭐ THE MIT MARK, struck into the plate by the descending die.
+          ⚠️ MY NOTE, AND ALEX'S CALL. I first built this as the Open Source
+          Initiative's approved-license mark, because the MIT LICENSE has no
+          logo of its own — "MIT" there is the licence's name, and the wordmark
+          below belongs to the Massachusetts Institute of Technology. I raised
+          that; Alex's ruling, twice: *"just have the official MIT logo there
+          thats it"*. Recorded here so it is not silently re-litigated.
+          The file is the official 2023 wordmark in MIT's own red #750014,
+          used at its real proportions and never redrawn or recoloured. */}
+      <div style={{ position: "absolute", left: w * 0.09, top: h * 0.635, width: w * 0.36,
+        height: w * 0.36 * (829 / 1473), opacity: stamped,
+        transform: `rotate(-2.5deg) scale(${stamped ? squash(f, dieAt, 0.16, 3, 12) : 1})`,
+        transformOrigin: "0% 50%" }}>
+        <Img src={staticFile("logos/mit.svg")}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }} />
       </div>
       {/* the kind of thing this is: SKILL. Not a plugin, not an app. */}
       <div style={{ position: "absolute", left: w * 0.54, top: h * 0.62, width: w * 0.36,
@@ -1484,19 +1493,19 @@ export const Cursor: React.FC<{ x: number; y: number; f: number; clicks?: number
 export const Browser: React.FC<{ x: number; y: number; w: number; h: number; url: string;
   children?: React.ReactNode; z?: number }> = ({ x, y, w, h, url, children, z = 40 }) => (
   <div style={{ position: "absolute", left: x, top: y, width: w, height: h, zIndex: z,
-    borderRadius: 16, overflow: "hidden", background: "#FFFFFF",
+    borderRadius: 16, overflow: "hidden", background: "#0D1117",
     boxShadow: "0 26px 54px rgba(14,10,6,0.42)", border: "5px solid #23201B" }}>
-    <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 62, background: "#E8E4DC",
-      borderBottom: "3px solid #CFC9BE" }}>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 62, background: "#22262C",
+      borderBottom: "3px solid #12161B" }}>
       {["#E0554C", "#E3B341", "#4FA85F"].map((c, i) => (
         <div key={"tl" + i} style={{ position: "absolute", left: 20 + i * 26, top: 22, width: 16,
           height: 16, borderRadius: "50%", background: c }} />
       ))}
       <div style={{ position: "absolute", left: 118, top: 12, right: 20, height: 38, borderRadius: 10,
-        background: "#FBF9F5", border: "2px solid #D6D0C4", display: "flex", alignItems: "center",
+        background: "#161A20", border: "2px solid #2C323A", display: "flex", alignItems: "center",
         paddingLeft: 16, gap: 10 }}>
         <div style={{ width: 14, height: 14, borderRadius: 3, background: "#9A968B" }} />
-        <span style={{ ...mono(21, 600), color: "#3A342C" }}>{url}</span>
+        <span style={{ ...mono(21, 600), color: "#B6BEC8" }}>{url}</span>
       </div>
     </div>
     <div style={{ position: "absolute", left: 0, right: 0, top: 62, bottom: 0, overflow: "hidden" }}>
@@ -1508,22 +1517,22 @@ export const Browser: React.FC<{ x: number; y: number; w: number; h: number; url
 /** STEP 1 — the repo page, and the Download ZIP the README asks for */
 export const RepoPage: React.FC<{ f: number; open: number; w: number; h: number;
   scroll?: number }> = ({ f, open, w, h, scroll = 0 }) => (
-  <div style={{ position: "absolute", inset: 0, background: "#FFFFFF" }}>
+  <div style={{ position: "absolute", inset: 0, background: "#0D1117" }}>
    <div style={{ position: "absolute", inset: 0, transform: `translateY(${-scroll}px)` }}>
     <div style={{ position: "absolute", left: 30, top: 26, display: "flex", alignItems: "center", gap: 12 }}>
-      <div style={{ width: 34, height: 34, borderRadius: "50%", background: "#24292F" }} />
-      <span style={{ ...ui(27, 800), color: "#0969DA" }}>nidhinjs</span>
-      <span style={{ ...ui(27, 500), color: "#57606A" }}>/</span>
-      <span style={{ ...ui(27, 900), color: "#0969DA" }}>prompt-master</span>
+      <div style={{ width: 34, height: 34, borderRadius: "50%", background: "#C9D1D9" }} />
+      <span style={{ ...ui(27, 800), color: "#58A6FF" }}>nidhinjs</span>
+      <span style={{ ...ui(27, 500), color: "#8B949E" }}>/</span>
+      <span style={{ ...ui(27, 900), color: "#58A6FF" }}>prompt-master</span>
     </div>
     <div style={{ position: "absolute", left: 30, top: 78, display: "flex", gap: 22 }}>
       {[["★", R.starsText], ["⑂", "1,350"], ["", R.license]].map(([g, t], i) => (
-        <span key={"st" + i} style={{ ...ui(21, 700), color: "#57606A" }}>{g} {t}</span>
+        <span key={"st" + i} style={{ ...ui(21, 700), color: "#8B949E" }}>{g} {t}</span>
       ))}
     </div>
     {/* the green Code button */}
     <div style={{ position: "absolute", right: 30, top: 118, width: 168, height: 52,
-      borderRadius: 9, background: "#1F883D", display: "flex", alignItems: "center",
+      borderRadius: 9, background: "#238636", display: "flex", alignItems: "center",
       justifyContent: "center", gap: 10 }}>
       <span style={{ ...ui(24, 800), color: "#FFFFFF" }}>Code</span>
       <span style={{ ...ui(18, 800), color: "#FFFFFF" }}>▾</span>
@@ -1531,13 +1540,13 @@ export const RepoPage: React.FC<{ f: number; open: number; w: number; h: number;
     {/* its dropdown, with Download ZIP */}
     {f >= open && (
       <div style={{ position: "absolute", right: 30, top: 178, width: 300,
-        height: E(f, open, open + 7, 0, 148, OUT), borderRadius: 10, background: "#FFFFFF",
-        border: "2px solid #D0D7DE", boxShadow: "0 12px 26px rgba(20,18,14,0.2)", overflow: "hidden" }}>
+        height: E(f, open, open + 7, 0, 148, OUT), borderRadius: 10, background: "#161B22",
+        border: "2px solid #30363D", boxShadow: "0 12px 26px rgba(20,18,14,0.2)", overflow: "hidden" }}>
         {["Clone with HTTPS", "Open with GitHub Desktop", "Download ZIP"].map((t, i) => (
           <div key={"dd" + i} style={{ position: "absolute", left: 0, right: 0, top: i * 48, height: 48,
             display: "flex", alignItems: "center", paddingLeft: 18,
-            background: i === 2 && f >= open + 12 ? "#DDF4E4" : "transparent" }}>
-            <span style={{ ...ui(21, i === 2 ? 800 : 600), color: i === 2 ? "#1A7F37" : "#57606A" }}>{t}</span>
+            background: i === 2 && f >= open + 12 ? "#1B3A26" : "transparent" }}>
+            <span style={{ ...ui(21, i === 2 ? 800 : 600), color: i === 2 ? "#3FB950" : "#8B949E" }}>{t}</span>
           </div>
         ))}
       </div>
@@ -1545,17 +1554,17 @@ export const RepoPage: React.FC<{ f: number; open: number; w: number; h: number;
     {/* the file rows */}
     {["SKILL.md", "README.md", "references/", "LICENSE"].map((t, i) => (
       <div key={"fr" + i} style={{ position: "absolute", left: 30, right: 230, top: 200 + i * 46,
-        height: 40, borderBottom: "2px solid #EAEEF2", display: "flex", alignItems: "center", gap: 12,
+        height: 40, borderBottom: "2px solid #21262D", display: "flex", alignItems: "center", gap: 12,
         opacity: E(f, 4 + i * 5, 12 + i * 5, 0, 1, OUT),
         transform: `translateX(${E(f, 4 + i * 5, 12 + i * 5, -40, 0, OUT)}px)` }}>
-        <div style={{ width: 18, height: 22, borderRadius: 3, background: "#8C959F" }} />
-        <span style={{ ...ui(21, 600), color: "#0969DA" }}>{t}</span>
+        <div style={{ width: 18, height: 22, borderRadius: 3, background: "#6E7681" }} />
+        <span style={{ ...ui(21, 600), color: "#58A6FF" }}>{t}</span>
       </div>
     ))}
     {/* more of the README below, so the page has somewhere to scroll TO */}
     {[0.82, 0.64, 0.90, 0.52, 0.74].map((k, i) => (
       <div key={"rd" + i} style={{ position: "absolute", left: 30, top: 400 + i * 34,
-        width: `${k * 74}%`, height: 16, borderRadius: 5, background: "#EAEEF2" }} />
+        width: `${k * 74}%`, height: 16, borderRadius: 5, background: "#21262D" }} />
     ))}
    </div>
   </div>
@@ -1567,18 +1576,18 @@ export const ClaudePage: React.FC<{ f: number; at: number; openCustomize: number
   ({ f, at, openCustomize, openSkills, upload, done }) => {
   const lf = f - at;
   return (
-    <div style={{ position: "absolute", inset: 0, background: APP_BG }}>
+    <div style={{ position: "absolute", inset: 0, background: "#1A1815" }}>
       {/* the sidebar */}
       <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 244,
-        background: "#F0EDE6", borderRight: "3px solid #E2DDD2" }}>
+        background: "#221F1B", borderRight: "3px solid #14120F" }}>
         <div style={{ position: "absolute", left: 20, top: 22, display: "flex", alignItems: "center", gap: 10 }}>
           <Img src={staticFile("claude_logo.png")} style={{ width: 30, height: 30, objectFit: "contain" }} />
-          <span style={{ ...ui(24, 800), color: APP_INK }}>Claude</span>
+          <span style={{ ...ui(24, 800), color: "#EDE7DC" }}>Claude</span>
         </div>
         {["New chat", "Chats", "Projects"].map((t, i) => (
           <div key={"sb" + i} style={{ position: "absolute", left: 14, right: 14, top: 84 + i * 46,
             height: 38, borderRadius: 9, display: "flex", alignItems: "center", paddingLeft: 14 }}>
-            <span style={{ ...ui(20, 600), color: APP_DIM }}>{t}</span>
+            <span style={{ ...ui(20, 600), color: "#8C857A" }}>{t}</span>
           </div>
         ))}
         {/* ⭐ the Customize entry the README names */}
@@ -1586,44 +1595,80 @@ export const ClaudePage: React.FC<{ f: number; at: number; openCustomize: number
           display: "flex", alignItems: "center", paddingLeft: 14,
           background: lf >= openCustomize ? hexA(CO, 0.16) : "transparent",
           border: lf >= openCustomize ? `2px solid ${hexA(CO, 0.5)}` : "2px solid transparent" }}>
-          <span style={{ ...ui(21, 800), color: lf >= openCustomize ? CO : APP_INK }}>Customize</span>
+          <span style={{ ...ui(21, 800), color: lf >= openCustomize ? CO : "#EDE7DC" }}>Customize</span>
         </div>
       </div>
 
       {/* the panel that opens on Customize */}
       {lf >= openSkills ? (
-        <div style={{ position: "absolute", left: 244, top: 0, right: 0, bottom: 0, padding: 26 }}>
-          <span style={{ ...ui(30, 900), color: APP_INK }}>Skills</span>
-          <p style={{ ...ui(19, 500), color: APP_DIM, margin: "10px 0 0" }}>
+        <div style={{ position: "absolute", left: 244, top: 0, right: 0, bottom: 0, padding: 26,
+          overflow: "hidden" }}>
+          {/* a slow sheen crossing the panel — a live screen is never a still */}
+          <div style={{ position: "absolute", left: `${((lf * 3.4) % 200) - 50}%`, top: -40,
+            width: "50%", bottom: -40, zIndex: 0, pointerEvents: "none",
+            background: `linear-gradient(100deg, ${hexA("#FFFFFF", 0)} 0%, ${hexA(CLAY, 0.26)} 44%, ${hexA("#FFFFFF", 0.16)} 56%, ${hexA("#FFFFFF", 0)} 100%)` }} />
+          <span style={{ ...ui(30, 900), color: "#EDE7DC",
+            opacity: E(lf, openSkills, openSkills + 6, 0, 1, OUT) }}>Skills</span>
+          <p style={{ ...ui(19, 500), color: "#8C857A", margin: "10px 0 0",
+            opacity: E(lf, openSkills + 5, openSkills + 12, 0, 1, OUT) }}>
             Skills give Claude instructions for specific tasks.
           </p>
+          {/* a load scan crossing the list — bright on dark is where the delta
+              lives, and it is what a panel actually does while it works */}
+          {Array.from({ length: 3 }, (_, i) => {
+            const yy = 106 + i * 74;
+            const tt = ((lf * 4.2 + i * 26) % 150) / 150;
+            return (<div key={"scn" + i} style={{ position: "absolute", left: `${tt * 108 - 14}%`,
+              top: yy, width: "22%", height: 66, zIndex: 0, borderRadius: 12,
+              background: `linear-gradient(90deg, ${hexA(CO, 0)} 0%, ${hexA(CO, 0.34)} 50%, ${hexA(CO, 0)} 100%)` }} />);
+          })}
           {/* the upload control */}
-          <div style={{ position: "absolute", left: 26, right: 26, top: 106, height: 66,
-            borderRadius: 12, border: `3px dashed ${lf >= upload ? CO : APP_LINE}`,
-            background: lf >= upload ? hexA(CO, 0.10) : "#FFFFFF",
+          <div style={{ position: "absolute", left: 26, right: 26,
+            top: 106 + E(lf, openSkills + 10, openSkills + 20, 26, 0, OUT), height: 66,
+            opacity: E(lf, openSkills + 10, openSkills + 20, 0, 1, OUT),
+            borderRadius: 12, border: `3px dashed ${lf >= upload ? CO : "#3A352E"}`,
+            background: lf >= upload ? hexA(CO, 0.16) : "#232019",
             display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
-            <span style={{ ...ui(23, 800), color: lf >= upload ? CO : APP_DIM }}>+ Upload a skill</span>
+            <span style={{ ...ui(23, 800), color: lf >= upload ? CO : "#8C857A" }}>+ Upload a skill</span>
+            {lf >= upload && lf < done + 6 && (
+              <div style={{ position: "absolute", left: 16, right: 16, bottom: 10, height: 8,
+                borderRadius: 4, background: hexA(CO, 0.16), overflow: "hidden" }}>
+                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0,
+                  width: `${E(lf, upload, done + 4, 0, 100, IO)}%`, borderRadius: 4, background: CO }} />
+              </div>
+            )}
           </div>
           {/* the installed list — prompt-master lands in it */}
           {[0, 1].map(i => {
-            const shown = i === 0 ? lf >= done : lf >= openSkills + 6;
+            const shown = i === 0 ? lf >= done : lf >= openSkills + 22;
             if (!shown) return null;
             const nm = i === 0 ? "prompt-master" : "web-search";
             return (
               <div key={"sk" + i} style={{ position: "absolute", left: 26, right: 26, top: 196 + i * 74,
-                height: 62, borderRadius: 12, background: "#FFFFFF",
-                border: `2px solid ${i === 0 ? hexA(CO, 0.55) : APP_LINE}`,
+                height: 62, borderRadius: 12, background: "#232019",
+                border: `2px solid ${i === 0 ? hexA(CO, 0.70) : "#3A352E"}`,
                 display: "flex", alignItems: "center", paddingLeft: 18, gap: 14,
-                transform: i === 0 ? `scale(${squash(lf, done, 0.10, 3, 12)})` : undefined }}>
-                <div style={{ width: 36, height: 36, borderRadius: 9, background: i === 0 ? CO : "#DED8CC" }} />
-                <span style={{ ...ui(22, 800), color: APP_INK }}>{nm}</span>
-                {i === 0 && (
+                opacity: i === 1 ? E(lf, openSkills + 22, openSkills + 30, 0, 1, OUT) : 1,
+                transform: i === 0 ? `scale(${squash(lf, done, 0.10, 3, 12)})`
+                  : `translateX(${E(lf, openSkills + 22, openSkills + 30, -30, 0, OUT)}px)` }}>
+                <div style={{ width: 36, height: 36, borderRadius: 9, background: i === 0 ? CO : "#4A443A" }} />
+                <span style={{ ...ui(22, 800), color: "#EDE7DC" }}>{nm}</span>
+                {i === 0 && (<>
+                  {/* the enable toggle sliding across after it installs */}
+                  <div style={{ position: "absolute", right: 76, top: 17, width: 64, height: 30,
+                    borderRadius: 15, background: mxh(GREEN, 1 - E(lf, done + 8, done + 18, 1, 0, OUT)),
+                    border: `2px solid ${dkh(GREEN, 0.24)}` }}>
+                    <div style={{ position: "absolute", top: 3, left: 3 + E(lf, done + 8, done + 18, 0, 32, OUT),
+                      width: 22, height: 22, borderRadius: "50%", background: "#FFFFFF" }} />
+                  </div>
                   <div style={{ position: "absolute", right: 20, width: 32, height: 32,
                     borderRadius: "50%", background: GREEN, display: "flex", alignItems: "center",
-                    justifyContent: "center" }}>
+                    justifyContent: "center",
+                    transform: `scale(${squash(lf, done + 16, 0.26, 3, 12)})`,
+                    opacity: E(lf, done + 14, done + 20, 0, 1, OUT) }}>
                     <span style={{ ...ui(19, 900), color: "#FFFFFF" }}>✓</span>
                   </div>
-                )}
+                </>)}
               </div>
             );
           })}
@@ -1632,13 +1677,13 @@ export const ClaudePage: React.FC<{ f: number; at: number; openCustomize: number
         /* the chat view it starts on */
         <div style={{ position: "absolute", left: 244, top: 0, right: 0, bottom: 0, padding: 30 }}>
           <div style={{ position: "absolute", left: 30, right: 30, top: 40, height: 44, borderRadius: 10,
-            background: "#FFFFFF", border: `2px solid ${APP_LINE}` }} />
+            background: "#232019", border: `2px solid #3A352E` }} />
           {[0.62, 0.46].map((k, i) => (
             <div key={"cb" + i} style={{ position: "absolute", left: 30, top: 116 + i * 40,
-              width: `${k * 100}%`, height: 20, borderRadius: 6, background: "#E6E1D6" }} />
+              width: `${k * 100}%`, height: 20, borderRadius: 6, background: "#332E27" }} />
           ))}
           <div style={{ position: "absolute", left: 30, right: 30, bottom: 34, height: 62,
-            borderRadius: 14, background: "#FFFFFF", border: `2px solid ${APP_LINE}` }} />
+            borderRadius: 14, background: "#232019", border: `2px solid #3A352E` }} />
         </div>
       )}
     </div>

@@ -204,7 +204,7 @@ const HOOK_SFX: Record<HookKind, Cue[]> = {
     { at: S(76), src: "slate_whump.wav",  v: LEVELS.SFX_HERO, dur: 0.20, rate: 0.88 },
   ],
   /* THE SHUTTER: four segments dying, the trip, the slam, then the shop stops */
-  /* THE SHUTTER: the meter dying, the trip, the slam, then the shop stops.
+  /* THE SHUTTER: the meter dying, the trip, the RUN, the slam, then the shop stops.
      ⛔ Trimmed to EIGHT: at thirteen the reel's cue rate went to 1.58/sec
      against a 1.0-1.5 ceiling, and a rejected reel once ran 3.82. The three
      segment clicks became one representative tick — the picture already counts
@@ -215,6 +215,11 @@ const HOOK_SFX: Record<HookKind, Cue[]> = {
     { at: S(0),  src: "machine_bed.wav",  v: LEVELS.SFX_BED,  dur: 1.3 },
     { at: S(14), src: "ticket_click.wav", v: LEVELS.SFX_TEXTURE, dur: 0.16 },
     { at: S(24), src: "scan_beep.wav",    v: LEVELS.SFX_MID,  dur: 0.42 },
+    /* ⭐ THE RUN. `ratchet` pitched down to 0.68 is metal running in guides, and
+       `crusher` under it gives the mass. Both are cut at the slam frame so the
+       rattle stops dead on impact rather than ringing through it. */
+    { at: S(28), src: "ratchet.wav",      v: LEVELS.SFX_MID,  dur: 0.34, rate: 0.68 },
+    { at: S(30), src: "crusher.wav",      v: LEVELS.SFX_MID,  dur: 0.28, rate: 1.30 },
     { at: S(37), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.74 },
     { at: S(37), src: "sub.wav",          v: LEVELS.SFX_HERO, dur: 0.45, rate: 0.80 },
     { at: S(50), src: "mech_clank.wav",   v: LEVELS.SFX_MID,  dur: 0.15 },
@@ -295,8 +300,8 @@ const SFX: Cue[] = [
   { at: S(L.S8 + 58),  src: "crack_hunt.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.54, rate: 1.18 },
   { at: S(L.S8 + 88),  src: "adv_strike.wav",   v: LEVELS.SFX_HERO,    dur: 0.64, rate: 0.94 },
 
-  /* ---- S9 · THE CARD RAIL (4) */
-  { at: S(L.S9 + 8),   src: "gear_shift.wav",   v: LEVELS.SFX_MID,     dur: 0.12, rate: 0.92 },
+  /* ---- S9 · THE CARD RAIL (3). ⛔ Trimmed twice: the reel carries a 10-cue
+     hook on the shutter cut, so the body had to give two back. */
   { at: S(L.S9 + 8),   src: "deep_engine.wav",  v: LEVELS.SFX_BED,     dur: 3.6 },
   { at: S(L.S9 + 54),  src: "slot_stop.wav",    v: LEVELS.SFX_MID,     dur: 0.26, rate: 0.9 },
   { at: S(L.S9 + 62),  src: "thock.wav",        v: LEVELS.SFX_HERO,    dur: 0.20, rate: 0.86 },
@@ -316,12 +321,11 @@ const SFX: Cue[] = [
   { at: S(L.S11 + 14), src: "rev_up.wav",       v: LEVELS.SFX_MID,     dur: 1.05, rate: 1.22 },
   { at: S(L.S11 + 40), src: "impact.wav",       v: LEVELS.SFX_MID,     dur: 0.66, rate: 1.12 },
 
-  /* ---- S12 · DOUBLE THE WORK (4). The left lane's four passes reuse ONE
+  /* ---- S12 · DOUBLE THE WORK (3). The left lane's four passes reuse ONE
      sample at ONE pitch, deliberately: the repetition IS the argument. */
   { at: S(L.S12 + 20), src: "mech_clank.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.15, rate: 0.9 },
   { at: S(L.S12 + 40), src: "mech_clank.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.15, rate: 0.9 },
   { at: S(L.S12 + 60), src: "mech_clank.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.15, rate: 0.9 },
-  { at: S(L.S12 + 80), src: "mech_clank.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.15, rate: 0.9 },
   { at: S(L.S12 + 92), src: "rebuild_thud.wav", v: LEVELS.SFX_MID,     dur: 0.85, rate: 1.04 },
 
   /* ---- S13 · THE HAND-OFF (3). ⛔ No confetti and no fanfare: the arrival IS
@@ -410,7 +414,16 @@ export const makeReel = (v: Variant, bed: keyof typeof BED_TRIM = "loud",
    publishes none (MONEY_BANNED / RATE_BANNED).
    ====================================================================== */
 const BANDS: Array<{ from: number; big: string; hot: string }> = [
-  { from: L.S0,  big: "YOU ARE NOT WORSE AT CLAUDE",  hot: "YOU ARE FEEDING IT A SCRIBBLE" },
+  /* ⛔ THE OLD HOOK BAND WAS "YOU ARE NOT WORSE AT CLAUDE / YOU ARE FEEDING IT A
+     SCRIBBLE", and Alex called it: *"it doesnt really convey the value"*. He is
+     right, and it broke the premise gate's own wording rule twice — A2 rule 6 is
+     **"NO NEGATION in the first breath; value noun by ~word 12"** and that band
+     opened on a negation and never reached a value noun at all. It was a
+     DIAGNOSIS (what is wrong with you) where a hook band has to be an OFFER.
+     ⭐ It also now says what the picture says: the open depicts a meter draining
+     and a shutter coming down, i.e. hitting a limit. Words and image agreeing is
+     what makes a reel legible with the sound off. */
+  { from: L.S0,  big: "STOP HITTING YOUR LIMIT",      hot: "ONE FREE CLAUDE SKILL" },
   { from: L.S1,  big: "ONE FREE CLAUDE SKILL",        hot: "IT STOPS THE WRONG BUILD FIRST" },
   { from: L.S2,  big: "PROMPT MASTER",                hot: "★ 11,415 · MIT · OPEN SOURCE" },
   { from: L.S3,  big: "IT BUILDS WHAT YOU TYPED",     hot: "NOT WHAT YOU MEANT" },
@@ -422,7 +435,11 @@ const BANDS: Array<{ from: number; big: string; hot: string }> = [
   { from: L.S9,  big: "IT CARRIES YOUR DECISIONS",    hot: "AND REFUSES TO CONTRADICT THEM" },
   { from: L.S10, big: "SAME WORK · FEWER RETRIES",    hot: "FOUR PASSES BECOMES ONE" },
   { from: L.S11, big: "WORKS ON ANY AI TOOL",         hot: "CHATGPT · GEMINI · CURSOR" },
-  { from: L.S12, big: "RE-PROMPTING IS THE BILL",     hot: "YOU ARE ALREADY PAYING IT" },
+  /* ⛔ was "RE-PROMPTING IS THE BILL / YOU ARE ALREADY PAYING IT", which
+     restated the new hook band. A section header advances the claim, it never
+     repeats one — and S10 already owns the retry COUNT, so this owns the fact
+     that nobody adds them up. */
+  { from: L.S12, big: "YOU PAY FOR EVERY RETRY",      hot: "NOBODY COUNTS THOSE" },
   { from: L.S13, big: "COMMENT GO",                   hot: "AND I'LL SEND THE FREE SETUP" },
 ];
 
@@ -436,9 +453,20 @@ const SectionBand: React.FC<{ f: number }> = ({ f }) => {
 };
 
 export const ReelShop = makeReel("shop");
-/** the two limit-shaped opens, for the pick */
-export const ReelLine = makeReel("shop", "loud", "line");
+/** ⛔⛔ A DIFFERENT OPEN IS NOT A VARIANT ON ITS OWN. Delivered as
+    line/shop against shutter/shop, the two cuts measured a 64-bit dHash of
+    **mean 3.3, min 0** — because only S0 differs and the other 47 seconds are
+    literally the same frames. That is the same trap docs/TRIAL-CUTS.md records
+    for audio-only variants, one layer up: a hook-only variant is a pixel
+    duplicate of the body. So the LINE cut carries the STEEL camera and grade
+    too, and the three delivered cuts differ on open AND camera AND grade AND
+    bed. */
+export const ReelLine = makeReel("steel", "loud", "line");
 export const ReelShutter = makeReel("shop", "loud", "shutter");
+/** trial cut B — the same SHUTTER open under the amber camera + grade, so the
+    three delivered cuts are: shutter/shop, line/shop (a different OPEN, the
+    strongest variant lever there is) and shutter/amber. */
+export const ReelShutterAmber = makeReel("amber", "loud", "shutter");
 export const ReelAmber = makeReel("amber");
 export const ReelSteel = makeReel("steel");
 /** the same picture with the music bed 6 dB down — for an A/B on the bed only */

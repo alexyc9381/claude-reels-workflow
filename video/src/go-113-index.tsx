@@ -1,6 +1,6 @@
 import React from "react";
 import { Composition, registerRoot } from "remotion";
-import { ReelShop, ReelAmber, ReelSteel, ReelQuiet, ReelLine, ReelShutter, GO_TOTAL } from "./ClaudeGoReel";
+import { ReelShop, ReelAmber, ReelSteel, ReelQuiet, ReelLine, ReelShutter, ReelShutterAmber, GO_TOTAL } from "./ClaudeGoReel";
 
 /* Reel 113 "GO". Board: storyboards/113-go.md.
 
@@ -35,6 +35,7 @@ const Root: React.FC = () => (<>
   {/* the two limit-shaped opens cut into the full reel, for the pick */}
   <Composition id="go-line" component={ReelLine} durationInFrames={GO_TOTAL} {...V} />
   <Composition id="go-shutter" component={ReelShutter} durationInFrames={GO_TOTAL} {...V} />
+  <Composition id="go-shutter-amber" component={ReelShutterAmber} durationInFrames={GO_TOTAL} {...V} />
   <Composition id="go-amber" component={ReelAmber} durationInFrames={GO_TOTAL} {...V} />
   <Composition id="go-steel" component={ReelSteel} durationInFrames={GO_TOTAL} {...V} />
   {/* identical picture to go-shop, music bed 6 dB down — an A/B on the bed only */}
