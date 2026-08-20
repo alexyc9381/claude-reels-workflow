@@ -1,6 +1,6 @@
 import React from "react";
 import { Img, staticFile } from "remotion";
-import { MONO, Mascot } from "./SlopKit";
+import { MONO, Mascot, APP_BG, APP_INK, APP_DIM, APP_LINE, CO, hexA } from "./SlopKit";
 import { inter } from "./fonts";
 import {
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, mix, dark, SH, SH_D, rnd,
@@ -1439,3 +1439,208 @@ export const ShopCounter: React.FC<{ y: number; f: number; z?: number; c?: strin
     )}
   </div>
 );
+
+/* =========================================================================
+   THE SCREEN RECORDING — Alex, on the setup beat: *"have a realistic screen
+   recording of the claude platform showing how it works, showing the cursor and
+   stuff going through add skills"*.
+
+   ⛔ claude.ai is behind a login, so a headless capture (the `capture_sites.mjs`
+   route reel 111 used) cannot reach the Skills panel. This is a faithful
+   RECREATION of the flow the repo's own README documents, verbatim:
+   *"Download this repo as a ZIP → claude.ai → Sidebar → Customize → Skills →
+   Upload a Skill"*. Nothing here invents a capability: every control drawn is
+   one of those four steps, and the cursor performs them in order.
+
+   ⚠️ This is the one scene in the reel that is allowed to be TEXT-heavy. The
+   standing rule is that animation should not be text — but a how-to beat whose
+   whole job is "here is where to click" is the exception Alex asked for by
+   name, so the labels are real, minimal, and legible at thumb distance.
+   ====================================================================== */
+
+/** the mac cursor, with a click ripple */
+export const Cursor: React.FC<{ x: number; y: number; f: number; clicks?: number[];
+  z?: number; s?: number }> = ({ x, y, f, clicks = [], z = 96, s = 1 }) => {
+  const hit = clicks.find(k => f >= k && f < k + 14);
+  const press = clicks.some(k => f >= k && f < k + 4) ? 0.86 : 1;
+  return (<>
+    {hit !== undefined && (() => {
+      const t = E(f, hit, hit + 14, 0, 1, OUT);
+      return (<div style={{ position: "absolute", left: x - 44 * t * s, top: y - 44 * t * s,
+        width: 88 * t * s, height: 88 * t * s, borderRadius: "50%", zIndex: z - 1,
+        border: `${4 * s}px solid ${hexa(CLAY, (1 - t) * 0.9)}` }} />);
+    })()}
+    <div style={{ position: "absolute", left: x, top: y, width: 30 * s, height: 44 * s, zIndex: z,
+      transform: `scale(${press})`, transformOrigin: "0% 0%",
+      filter: "drop-shadow(0 3px 5px rgba(10,8,6,0.44))" }}>
+      <svg viewBox="0 0 30 44" width={30 * s} height={44 * s}>
+        <path d="M2 2 L2 34 L10 27 L15 40 L20 38 L15 25 L25 25 Z" fill="#FFFFFF" stroke="#1A1813" strokeWidth={3} strokeLinejoin="round" />
+      </svg>
+    </div>
+  </>);
+};
+
+/** a mac browser chrome with a live URL */
+export const Browser: React.FC<{ x: number; y: number; w: number; h: number; url: string;
+  children?: React.ReactNode; z?: number }> = ({ x, y, w, h, url, children, z = 40 }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: w, height: h, zIndex: z,
+    borderRadius: 16, overflow: "hidden", background: "#FFFFFF",
+    boxShadow: "0 26px 54px rgba(14,10,6,0.42)", border: "5px solid #23201B" }}>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 62, background: "#E8E4DC",
+      borderBottom: "3px solid #CFC9BE" }}>
+      {["#E0554C", "#E3B341", "#4FA85F"].map((c, i) => (
+        <div key={"tl" + i} style={{ position: "absolute", left: 20 + i * 26, top: 22, width: 16,
+          height: 16, borderRadius: "50%", background: c }} />
+      ))}
+      <div style={{ position: "absolute", left: 118, top: 12, right: 20, height: 38, borderRadius: 10,
+        background: "#FBF9F5", border: "2px solid #D6D0C4", display: "flex", alignItems: "center",
+        paddingLeft: 16, gap: 10 }}>
+        <div style={{ width: 14, height: 14, borderRadius: 3, background: "#9A968B" }} />
+        <span style={{ ...mono(21, 600), color: "#3A342C" }}>{url}</span>
+      </div>
+    </div>
+    <div style={{ position: "absolute", left: 0, right: 0, top: 62, bottom: 0, overflow: "hidden" }}>
+      {children}
+    </div>
+  </div>
+);
+
+/** STEP 1 — the repo page, and the Download ZIP the README asks for */
+export const RepoPage: React.FC<{ f: number; open: number; w: number; h: number;
+  scroll?: number }> = ({ f, open, w, h, scroll = 0 }) => (
+  <div style={{ position: "absolute", inset: 0, background: "#FFFFFF" }}>
+   <div style={{ position: "absolute", inset: 0, transform: `translateY(${-scroll}px)` }}>
+    <div style={{ position: "absolute", left: 30, top: 26, display: "flex", alignItems: "center", gap: 12 }}>
+      <div style={{ width: 34, height: 34, borderRadius: "50%", background: "#24292F" }} />
+      <span style={{ ...ui(27, 800), color: "#0969DA" }}>nidhinjs</span>
+      <span style={{ ...ui(27, 500), color: "#57606A" }}>/</span>
+      <span style={{ ...ui(27, 900), color: "#0969DA" }}>prompt-master</span>
+    </div>
+    <div style={{ position: "absolute", left: 30, top: 78, display: "flex", gap: 22 }}>
+      {[["★", R.starsText], ["⑂", "1,350"], ["", R.license]].map(([g, t], i) => (
+        <span key={"st" + i} style={{ ...ui(21, 700), color: "#57606A" }}>{g} {t}</span>
+      ))}
+    </div>
+    {/* the green Code button */}
+    <div style={{ position: "absolute", right: 30, top: 118, width: 168, height: 52,
+      borderRadius: 9, background: "#1F883D", display: "flex", alignItems: "center",
+      justifyContent: "center", gap: 10 }}>
+      <span style={{ ...ui(24, 800), color: "#FFFFFF" }}>Code</span>
+      <span style={{ ...ui(18, 800), color: "#FFFFFF" }}>▾</span>
+    </div>
+    {/* its dropdown, with Download ZIP */}
+    {f >= open && (
+      <div style={{ position: "absolute", right: 30, top: 178, width: 300,
+        height: E(f, open, open + 7, 0, 148, OUT), borderRadius: 10, background: "#FFFFFF",
+        border: "2px solid #D0D7DE", boxShadow: "0 12px 26px rgba(20,18,14,0.2)", overflow: "hidden" }}>
+        {["Clone with HTTPS", "Open with GitHub Desktop", "Download ZIP"].map((t, i) => (
+          <div key={"dd" + i} style={{ position: "absolute", left: 0, right: 0, top: i * 48, height: 48,
+            display: "flex", alignItems: "center", paddingLeft: 18,
+            background: i === 2 && f >= open + 12 ? "#DDF4E4" : "transparent" }}>
+            <span style={{ ...ui(21, i === 2 ? 800 : 600), color: i === 2 ? "#1A7F37" : "#57606A" }}>{t}</span>
+          </div>
+        ))}
+      </div>
+    )}
+    {/* the file rows */}
+    {["SKILL.md", "README.md", "references/", "LICENSE"].map((t, i) => (
+      <div key={"fr" + i} style={{ position: "absolute", left: 30, right: 230, top: 200 + i * 46,
+        height: 40, borderBottom: "2px solid #EAEEF2", display: "flex", alignItems: "center", gap: 12,
+        opacity: E(f, 4 + i * 5, 12 + i * 5, 0, 1, OUT),
+        transform: `translateX(${E(f, 4 + i * 5, 12 + i * 5, -40, 0, OUT)}px)` }}>
+        <div style={{ width: 18, height: 22, borderRadius: 3, background: "#8C959F" }} />
+        <span style={{ ...ui(21, 600), color: "#0969DA" }}>{t}</span>
+      </div>
+    ))}
+    {/* more of the README below, so the page has somewhere to scroll TO */}
+    {[0.82, 0.64, 0.90, 0.52, 0.74].map((k, i) => (
+      <div key={"rd" + i} style={{ position: "absolute", left: 30, top: 400 + i * 34,
+        width: `${k * 74}%`, height: 16, borderRadius: 5, background: "#EAEEF2" }} />
+    ))}
+   </div>
+  </div>
+);
+
+/** STEPS 2-4 — claude.ai: the sidebar, Customize, Skills, Upload a Skill */
+export const ClaudePage: React.FC<{ f: number; at: number; openCustomize: number;
+  openSkills: number; upload: number; done: number }> =
+  ({ f, at, openCustomize, openSkills, upload, done }) => {
+  const lf = f - at;
+  return (
+    <div style={{ position: "absolute", inset: 0, background: APP_BG }}>
+      {/* the sidebar */}
+      <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 244,
+        background: "#F0EDE6", borderRight: "3px solid #E2DDD2" }}>
+        <div style={{ position: "absolute", left: 20, top: 22, display: "flex", alignItems: "center", gap: 10 }}>
+          <Img src={staticFile("claude_logo.png")} style={{ width: 30, height: 30, objectFit: "contain" }} />
+          <span style={{ ...ui(24, 800), color: APP_INK }}>Claude</span>
+        </div>
+        {["New chat", "Chats", "Projects"].map((t, i) => (
+          <div key={"sb" + i} style={{ position: "absolute", left: 14, right: 14, top: 84 + i * 46,
+            height: 38, borderRadius: 9, display: "flex", alignItems: "center", paddingLeft: 14 }}>
+            <span style={{ ...ui(20, 600), color: APP_DIM }}>{t}</span>
+          </div>
+        ))}
+        {/* ⭐ the Customize entry the README names */}
+        <div style={{ position: "absolute", left: 14, right: 14, top: 234, height: 42, borderRadius: 9,
+          display: "flex", alignItems: "center", paddingLeft: 14,
+          background: lf >= openCustomize ? hexA(CO, 0.16) : "transparent",
+          border: lf >= openCustomize ? `2px solid ${hexA(CO, 0.5)}` : "2px solid transparent" }}>
+          <span style={{ ...ui(21, 800), color: lf >= openCustomize ? CO : APP_INK }}>Customize</span>
+        </div>
+      </div>
+
+      {/* the panel that opens on Customize */}
+      {lf >= openSkills ? (
+        <div style={{ position: "absolute", left: 244, top: 0, right: 0, bottom: 0, padding: 26 }}>
+          <span style={{ ...ui(30, 900), color: APP_INK }}>Skills</span>
+          <p style={{ ...ui(19, 500), color: APP_DIM, margin: "10px 0 0" }}>
+            Skills give Claude instructions for specific tasks.
+          </p>
+          {/* the upload control */}
+          <div style={{ position: "absolute", left: 26, right: 26, top: 106, height: 66,
+            borderRadius: 12, border: `3px dashed ${lf >= upload ? CO : APP_LINE}`,
+            background: lf >= upload ? hexA(CO, 0.10) : "#FFFFFF",
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 12 }}>
+            <span style={{ ...ui(23, 800), color: lf >= upload ? CO : APP_DIM }}>+ Upload a skill</span>
+          </div>
+          {/* the installed list — prompt-master lands in it */}
+          {[0, 1].map(i => {
+            const shown = i === 0 ? lf >= done : lf >= openSkills + 6;
+            if (!shown) return null;
+            const nm = i === 0 ? "prompt-master" : "web-search";
+            return (
+              <div key={"sk" + i} style={{ position: "absolute", left: 26, right: 26, top: 196 + i * 74,
+                height: 62, borderRadius: 12, background: "#FFFFFF",
+                border: `2px solid ${i === 0 ? hexA(CO, 0.55) : APP_LINE}`,
+                display: "flex", alignItems: "center", paddingLeft: 18, gap: 14,
+                transform: i === 0 ? `scale(${squash(lf, done, 0.10, 3, 12)})` : undefined }}>
+                <div style={{ width: 36, height: 36, borderRadius: 9, background: i === 0 ? CO : "#DED8CC" }} />
+                <span style={{ ...ui(22, 800), color: APP_INK }}>{nm}</span>
+                {i === 0 && (
+                  <div style={{ position: "absolute", right: 20, width: 32, height: 32,
+                    borderRadius: "50%", background: GREEN, display: "flex", alignItems: "center",
+                    justifyContent: "center" }}>
+                    <span style={{ ...ui(19, 900), color: "#FFFFFF" }}>✓</span>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        /* the chat view it starts on */
+        <div style={{ position: "absolute", left: 244, top: 0, right: 0, bottom: 0, padding: 30 }}>
+          <div style={{ position: "absolute", left: 30, right: 30, top: 40, height: 44, borderRadius: 10,
+            background: "#FFFFFF", border: `2px solid ${APP_LINE}` }} />
+          {[0.62, 0.46].map((k, i) => (
+            <div key={"cb" + i} style={{ position: "absolute", left: 30, top: 116 + i * 40,
+              width: `${k * 100}%`, height: 20, borderRadius: 6, background: "#E6E1D6" }} />
+          ))}
+          <div style={{ position: "absolute", left: 30, right: 30, bottom: 34, height: 62,
+            borderRadius: 14, background: "#FFFFFF", border: `2px solid ${APP_LINE}` }} />
+        </div>
+      )}
+    </div>
+  );
+};

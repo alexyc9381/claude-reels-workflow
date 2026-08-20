@@ -15,10 +15,26 @@ import words from "./data/words_113go.json";
    brain dump into a precise work order carrying an output spec, a file scope
    and a stop condition. 11,415 stars, verified live 2026-08-19.
 
-   VO: public/vo_113go.wav — 51.93s, 211 words, cut from a 65.43s raw take.
-   NO `cut cut` flubs (a clean single take). Head trimmed 3.10s, tail 2.87s,
-   seven mid-gaps capped to 0.22s, two-pass polish to -18.0 LUFS integrated.
-   The cut file was re-transcribed and starts at 0.00s.
+   VO: public/vo_113go.wav — 50.13s, 211 words, cut from a 65.43s raw take.
+   Head trimmed 3.10s, tail 2.87s, six mid-gaps capped to 0.22s, two-pass
+   polish. The cut file was re-transcribed and starts at 0.00s.
+
+   ⛔⛔⛔ THE FLUB I SHIPPED, AND THE REASON I MISSED IT. Alex, on the delivered
+      cut: *"at 7 seconds you left in the wrong take where i say 'it even has 11
+      cut cut'"*. He was right. The raw take contains ONE flub at 10.0-12.5s:
+        10.38-11.35  "It even has over a h-"      <- the flubbed take
+        11.68-11.98  "cut cut"                    <- the kill marker
+        12.71-       "It even has over 11,000..." <- the clean retry
+      I KEPT THE FLUBBED TAKE, because a whole-file faster-whisper pass over the
+      raw m4a transcribed the region as one clean sentence and reported zero
+      `cut` tokens. ⭐ THE TELL, AND THE ROUTINE THAT FINDS IT: transcribing the
+      SAME AUDIO in 4s windows at a 2.5s hop returns
+      *"It even has over a h- cut cut. It even has over 11,000-"* at t=10.0.
+      The model smooths a stutter-plus-retry into the sentence it expects when
+      it can see the whole file; it cannot when the window is short.
+      ⛔ A WHOLE-FILE PASS IS NOT A FLUB CHECK. Scan in overlapping windows,
+      every reel, and scan the CUT file the same way to prove it is clean —
+      this one now returns 0 hits across all 20 windows.
 
    ⛔⛔ WHISPER LIED ABOUT THE HEAD BY 0.35s AND EVERY DOWNSTREAM GATE WOULD
       HAVE AGREED. It put the first word at 2.76s; the 10 ms RMS scan shows
@@ -77,29 +93,31 @@ import words from "./data/words_113go.json";
 
 export const FPS = 30;
 
-/** 1558 frames = 51.93s, exactly the VO file's length. Its last word ends at
-    51.64s, so the reel carries the tail and hard-cuts after it. */
-export const GO_TOTAL = 1558;
+/** 1504 frames = 50.13s, exactly the VO file's length. Its last word ends at
+    49.90s, so the reel carries the tail and hard-cuts after it.
+    ⛔⛔ THIS WAS 1558 UNTIL A FLUB WAS FOUND AT 10.0-12.5s OF THE RAW TAKE —
+    see the VO note below. Every value in `L` moved. */
+export const GO_TOTAL = 1504;
 
 /* ⛔ MEASURED WORD ONSETS from src/data/words_113go.json, converted to frames.
    Nothing here is estimated — every value is `round(onset * 30)` of the VO's
    own sentence starts, read by pattern-matching the beat opener (never a
    hardcoded index — those drift the moment the VO changes). */
 export const L = {
-  S0: 0,      /* MOUND      0.00s  "The people who never hit their Claude..." */
-  S1: 93,     /* PRESS      3.09s  "They just installed this one free skill"  */
-  S2: 210,    /* PLATE      7.00s  "It even has over 11,000 stars on GitHub"  */
-  S3: 396,    /* TURN      13.19s  "Here's the problem. You type a rough..."  */
-  S4: 580,    /* DUMP      19.32s  "Now you just brain dump what you want"    */
-  S5: 714,    /* CALLOUTS  23.79s  "What the output should look like..."      */
-  S6: 813,    /* MINUTE    27.11s  "And now the setup takes just one minute"  */
-  S7: 863,    /* MOVES     28.78s  "All you have to do is just download..."   */
-  S8: 1029,   /* INSPECT   34.30s  "It checks against 30 plus unknown ways"   */
-  S9: 1132,   /* RAIL      37.74s  "and it remembers your old thought..."     */
-  S10: 1249,  /* PAYOFF    41.64s  "So now you get the same work for way..."  */
-  S11: 1326,  /* FOREIGN   44.21s  "and this even works on your ChatGPT..."   */
-  S12: 1387,  /* STAKES    46.22s  "If you're paying for Claude and still..." */
-  S13: 1492,  /* CTA       49.74s  "Just comment GO and I'll send you..."     */
+  S0: 0,      /* HOOK       0.00s  "The people who never hit their Claude..." */
+  S1: 93,     /* INSTALL    3.09s  "They just installed this one free skill"  */
+  S2: 211,    /* PLATE      7.02s  "It even has over 11,000 stars on GitHub"  */
+  S3: 342,    /* TURN      11.40s  "Here's the problem. You type a rough..."  */
+  S4: 526,    /* DUMP      17.55s  "Now you just brain dump what you want"    */
+  S5: 670,    /* CALLOUTS  22.35s  "What the output should look like..."      */
+  S6: 759,    /* MINUTE    25.31s  "And now the setup takes just one minute"  */
+  S7: 813,    /* MOVES     27.10s  "All you have to do is just download..."   */
+  S8: 975,    /* INSPECT   32.51s  "It checks against 30 plus unknown ways"   */
+  S9: 1078,   /* RAIL      35.95s  "and it remembers your old thought..."     */
+  S10: 1193,  /* PAYOFF    39.78s  "So now you get the same work for way..."  */
+  S11: 1272,  /* FOREIGN   42.39s  "and this even works on your ChatGPT..."   */
+  S12: 1333,  /* STAKES    44.42s  "If you're paying for Claude and still..." */
+  S13: 1438,  /* CTA       47.94s  "Just comment GO and I'll send you..."     */
   END: GO_TOTAL,
 } as const;
 
@@ -204,21 +222,23 @@ const HOOK_SFX: Record<HookKind, Cue[]> = {
 };
 
 const SFX: Cue[] = [
-  /* ---- S1 · THE PRESS LANDS (4) */
-  { at: S(L.S1 + 0),   src: "slate_whump.wav",  v: LEVELS.SFX_MID,     dur: 0.20 },
-  { at: S(L.S1 + 14),  src: "gear_shift.wav",   v: LEVELS.SFX_MID,     dur: 0.12 },
-  { at: S(L.S1 + 30),  src: "pneu_thunk.wav",   v: LEVELS.SFX_HERO,    dur: 0.50 },
-  { at: S(L.S1 + 30),  src: "boom.wav",         v: LEVELS.SFX_MID,     dur: 0.58, rate: 0.92 },
+  /* ---- S1 · THE INSTALL (4). ⛔ Rescored: the scene was rebuilt from a board
+     swinging down to a cartridge being SLAMMED into a slot and a gate dropping
+     in front of the throat, so the old gantry cues fired on nothing. */
+  { at: S(L.S1 + 0),  src: "slate_whump.wav",  v: LEVELS.SFX_MID,  dur: 0.20 },
+  { at: S(L.S1 + 7),  src: "pneu_thunk.wav",   v: LEVELS.SFX_HERO, dur: 0.50 },
+  { at: S(L.S1 + 7),  src: "boom.wav",         v: LEVELS.SFX_MID,  dur: 0.58, rate: 0.92 },
+  { at: S(L.S1 + 45), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.88 },
 
   /* ---- S2 · THE SPEC PLATE (5). Eleven stars are NOT eleven cues — they are
      two pitched impacts on the counter's pops, so the run reads as a texture
      rather than a metronome of slaps. */
   { at: S(L.S2 + 0),   src: "stage_hum.wav",    v: LEVELS.SFX_BED,     dur: 6.2 },
   { at: S(L.S2 + 10),  src: "knife_switch.wav", v: LEVELS.SFX_MID,     dur: 0.14 },
-  { at: S(L.S2 + 34),  src: "metal_ping.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.34, rate: 1.04 },
-  { at: S(L.S2 + 74),  src: "temper_chime.wav", v: LEVELS.SFX_MID,     dur: 0.74 },
-  { at: S(L.S2 + 104), src: "stamp_press.wav",  v: LEVELS.SFX_HERO,    dur: 0.38 },
-  { at: S(L.S2 + 104), src: "impact.wav",       v: LEVELS.SFX_MID,     dur: 0.66, rate: 0.88 },
+  { at: S(L.S2 + 28),  src: "metal_ping.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.34, rate: 1.04 },
+  { at: S(L.S2 + 62),  src: "temper_chime.wav", v: LEVELS.SFX_MID,     dur: 0.74 },
+  { at: S(L.S2 + 92),  src: "stamp_press.wav",  v: LEVELS.SFX_HERO,    dur: 0.38 },
+  { at: S(L.S2 + 92),  src: "impact.wav",       v: LEVELS.SFX_MID,     dur: 0.66, rate: 0.88 },
 
   /* ---- S3 · THE TURN (8). The three bells are the villain's theme and they
      RISE in pitch, because it is getting worse. */
@@ -257,14 +277,15 @@ const SFX: Cue[] = [
   { at: S(L.S6 + 22),  src: "impact.wav",       v: LEVELS.SFX_HERO,    dur: 0.66 },
   { at: S(L.S6 + 24),  src: "tick.wav",         v: LEVELS.SFX_TEXTURE, dur: 0.10 },
 
-  /* ---- S7 · THE THREE MOVES (7) */
-  { at: S(L.S7 + 10),  src: "projector.wav",    v: LEVELS.SFX_BED,     dur: 1.6 },
-  { at: S(L.S7 + 50),  src: "impact.wav",       v: LEVELS.SFX_HERO,    dur: 0.66, rate: 0.92 },
-  { at: S(L.S7 + 58),  src: "wrench_clank.wav", v: LEVELS.SFX_MID,     dur: 0.10 },
-  { at: S(L.S7 + 106), src: "snap.wav",         v: LEVELS.SFX_MID,     dur: 0.10 },
-  { at: S(L.S7 + 120), src: "snap.wav",         v: LEVELS.SFX_MID,     dur: 0.10, rate: 1.1 },
-  { at: S(L.S7 + 134), src: "snap.wav",         v: LEVELS.SFX_MID,     dur: 0.10, rate: 1.2 },
-  { at: S(L.S7 + 138), src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.38 },
+  /* ---- S7 · THE SCREEN (5). ⛔ Rescored: the scene is now a real cursor
+     driving claude.ai, so it wants UI clicks and a download, not crate slams.
+     ⛔ `ui_tap` and `ticket_click` are both bright (65.7% and 92.1% >2kHz) so
+     each stays at four uses or under across the reel — the SLAP GATE. */
+  { at: S(L.S7 + 40),  src: "mallet_tap.wav",  v: LEVELS.SFX_MID,     dur: 0.22 },
+  { at: S(L.S7 + 55),  src: "pickup_chime.wav", v: LEVELS.SFX_MID,    dur: 0.38 },
+  { at: S(L.S7 + 74),  src: "mallet_tap.wav",  v: LEVELS.SFX_MID,     dur: 0.22, rate: 1.08 },
+  { at: S(L.S7 + 96),  src: "mallet_tap.wav",  v: LEVELS.SFX_MID,     dur: 0.22, rate: 1.16 },
+  { at: S(L.S7 + 140), src: "temper_chime.wav", v: LEVELS.SFX_MID,    dur: 0.74, rate: 1.06 },
 
   /* ---- S8 · THE INSPECTION (5). 35 flags are TWO volley textures, never 35
      cues — a repeated bright transient is a metronome of slaps. */

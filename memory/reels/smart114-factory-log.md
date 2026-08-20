@@ -469,3 +469,58 @@ not a pass, it is proof the artefact did not change. On the real render they wer
 ⛔ THE FIX IS MECHANICAL: `cd` to an ABSOLUTE path in every chained render command, never a relative
 one, because the session cwd carries between calls and a failed `cd` silently skips the work behind
 `&&`. And when a gate is unchanged after a rebuild, check the file timestamp before believing it.
+
+---
+
+## ROUND 6 — the house track, an icon for a state, and accumulation
+
+### ⛔⛔⛔ "THE BG MUSIC NEEDS TO BE THE SAME BG MUSIC WE TYPICALLY USE"
+I had synthesized a bed from scratch for five rounds and never asked what the house already uses. It
+is **`ados_bed`** — "Another Day of Sun" — and it is named in `claude-ai-reel-workflow` and
+`reel-vo-pacing` with its own level rule.
+
+⭐ The three cuts take three SEPARATED 48s windows (119.0s / 63.5s / 28.5s) rather than one window at
+three volumes, so the trial cuts differ musically. Each window was chosen by MEASUREMENT:
+  · it opens ON A DOWNBEAT — loud in the first 60ms AND a rise from what precedes it
+  · its quietest 1.5s stays within ~9 dB of its own mean, so it never drops out mid-reel
+  · ⛔ NO `afade in` — a 0.9s fade kills the first downbeat (the night reel's "the soundtrack is too
+    low at the beginning")
+  · `loudnorm I=-24`, not -27; -27 is a quiet bed and reads as absent
+
+### ⭐⭐ AND A STANDING INSTRUCTION OUTRANKS A TARGET I DERIVED
+Solving for "12 dB under the VO, A-weighted" gave 0.336 / 0.385 / 0.287. The house rule from Alex is
+**≤ 0.25 for a normal-mastered bed** (`reel-vo-pacing`: *"the background music is too loud compared
+to the voiceover"*). The three gains are the equalised set scaled so the loudest sits exactly at
+0.25 — all perceptually level, ~15.7 dB under. When my own measurement disagrees with a note Alex
+has already given, the note wins.
+
+⚠️ FLAGGED TO ALEX: a recognisable commercial track baked into the mp4 can be Content-ID'd by IG.
+His own workflow memory carries the same caveat and the mitigation (add audio from the app's library
+at upload). Offered a clean no-music export.
+
+### ⭐⭐ AN INTERNAL STATE IS THE ONE THING THAT EARNS AN ICON
+*"at 7 seconds there should be like a hallucinations icon graphic above his head, spinning around,
+purple, same with his eyes."* Everything else in this world is a physical object doing a physical
+job — correct for a machine bay — but "it is hallucinating" is not something a bay can show
+happening TO a body. It is internal, and internal is exactly what a floating glyph is for.
+⭐ PURPLE BECAUSE NOTHING ELSE IN THE REEL IS. The palette runs tungsten / teal / sodium / oxblood /
+navy / green, so violet reads as "wrong" on sight without a label. Spiral above the head with three
+motes orbiting the other way, matching swirls on both eyes, up 10 frames BEFORE the warped parts so
+the cause precedes the effect.
+⛔ Two dazed-eye treatments fought each other: `xeyes` plus the purple swirls. Alex asked for purple,
+so the purple stayed and `xeyes` went.
+⛔ And the warped parts were flying straight over his face — the hallucination was hiding the thing
+that was hallucinating. Their trajectories now clear him.
+
+### ⭐⭐⭐ "THE ANIMATION AT 15 SECONDS NEEDS TO BE BETTER" — THIRD ATTEMPT, AND THE FIRST RIGHT ONE
+Twice this scene opened with braces LIGHTING UP in sequence. That is a state change dressed as an
+event, and it is why the note came back both times.
+
+The line is *"**EVERY LINE** in your CLAUDE.md file and **EVERY SKILL** you built"*. The sentence is
+about **sheer accumulation** and nothing was accumulating. Eighteen stamped plates now rain down and
+bolt onto him two frames apart until he is encased, and only then does the rig crane across.
+Probe **5.8 -> 7.20**, HOLD 43% -> 30%.
+
+> **The rule this produces: read the sentence for its QUANTIFIER.** "Every line", "over 100",
+> "thousands of" are instructions to show a PILE arriving, not one example lighting up. Twice I drew
+> the noun and skipped the quantifier.

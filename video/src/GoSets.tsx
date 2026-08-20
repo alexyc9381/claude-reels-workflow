@@ -264,7 +264,12 @@ export const Shop: React.FC<{ p: Place; f: number; t?: number; lit?: number; z0?
    neighbours differ by BOTH hue and lightness.
    ====================================================================== */
 export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
-  rakeRate?: number }> = ({ k, f, lit = 1, t = 0, rakeRate }) => {
+  rakeRate?: number;
+  /** ⛔ set false when a scene puts a large flat SUBJECT in the middle of the
+      frame (S7's browser). The stanchion's diagonal brace and the dark overhead
+      are painted at z 82-87, i.e. IN FRONT of everything, which is exactly what
+      makes them a depth cue — and exactly what ruins a screen. */
+  occluders?: boolean }> = ({ k, f, lit = 1, t = 0, rakeRate, occluders = true }) => {
   const p = placeFor(k);
   switch (k) {
     /* S0 — THE SCRAP FLOOR. One hard overhead flood, camera-left, throwing the
@@ -304,8 +309,8 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         <Pool x={400} y={p.horizon + 150} w={1180} c={p.key} o={0.62 * lit} z={19} h={470} />
         <Belt x={-60} y={p.horizon - 44} w={430} f={f} rate={5.5} z={23}
           carry={[{ o: 0.1, wrong: true }, { o: 0.55, wrong: true }, { o: 0.85, wrong: true, s: 0.6 }]} />
-        <Stanchion side="l" w={126} z={86} />
-        <NearStack side="r" c="#241A12" h={196} trolley={false} />
+        {occluders && <Stanchion side="l" w={126} z={86} />}
+        {occluders && <NearStack side="r" c="#241A12" h={196} trolley={false} />}
       </>);
 
     /* S3 — the same floor RELIT FROM THE OTHER SIDE, a stop down and colder, so
@@ -315,7 +320,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         <Shop p={p} f={f} t={t} lit={0.28} glowX={720} glowR={300} rakeRate={rakeRate ?? 6.9} />
         <Flood x={742} y={20} s={1.35} on={lit * 0.92} len={720} spread={266} c={p.key} />
         <Pool x={726} y={p.horizon + 118} w={720} c={p.key} o={0.28 * lit} z={19} />
-        <Stanchion side="r" w={132} z={86} lean={0.6} />
+        {occluders && <Stanchion side="r" w={132} z={86} lean={0.6} />}
       </>);
 
     /* S1/S4 — THE PRESS BAY. Warm gold from the gantry above, cream bounce. */
@@ -331,8 +336,8 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
           <div key={"gc" + i} style={{ position: "absolute", left: ((i * 74 + f * 2.6) % 1200) - 60,
             top: 130, width: 30, height: 16, borderRadius: 4, background: dkh(BRASS, 0.30), zIndex: 26 }} />
         ))}
-        <Stanchion side="l" w={110} z={86} brace={false} />
-        <NearStack side="r" h={330} />
+        {occluders && <Stanchion side="l" w={110} z={86} brace={false} />}
+        {occluders && <NearStack side="r" h={330} />}
       </>);
 
     /* S5 — the same bay one stop DOWN and tighter: the cream sheet is what
@@ -342,7 +347,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         <Shop p={p} f={f} t={t} lit={0.26} glowX={506} glowR={280} racks={false} truss={false}
           rakeRate={rakeRate ?? 5.2} />
         <Flood x={506} y={-30} s={1.3} on={lit * 0.86} len={700} spread={280} c={p.key} />
-        <Stanchion side="r" w={104} z={86} brace={false} />
+        {occluders && <Stanchion side="r" w={104} z={86} brace={false} />}
       </>);
 
     /* S2 — THE YARD, night. The reel's only COLD set: steel-blue, one warm
@@ -360,7 +365,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         ))}
         <Flood x={766} y={70} s={1.15} on={lit} len={560} spread={210} c={p.key} />
         <Pool x={752} y={p.horizon + 96} w={600} c={p.key} o={0.24 * lit} z={19} />
-        <Stanchion side="l" w={122} z={86} />
+        {occluders && <Stanchion side="l" w={122} z={86} />}
       </>);
 
     /* S6/S7 — THE INTAKE DOCK. Flat bright daylight through an open roller
@@ -380,9 +385,9 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
           <div key={"jm" + i} style={{ position: "absolute", left: x, top: 44, width: 30,
             height: p.horizon - 10, zIndex: 14, background: dkh(STEEL, 0.40) }} />
         ))}
-        <Stanchion side="r" w={116} z={86} c="#1A2C37" />
-        <NearStack side="l" c="#16232C" h={320} />
-        <DarkOverhead c="#101A21" />
+        {occluders && <Stanchion side="r" w={116} z={86} c="#1A2C37" />}
+        {occluders && <NearStack side="l" c="#16232C" h={320} />}
+        {occluders && <DarkOverhead c="#101A21" />}
       </>);
 
     /* S8 — THE INSPECTION BAY. The most saturated frame in the reel: this is
@@ -391,8 +396,8 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
       return (<>
         <Shop p={p} f={f} t={t} lit={0.34} glowX={506} glowR={290} racks={false} rakeRate={rakeRate ?? 7.5} />
         <Flood x={506} y={-16} s={1.2} on={lit} len={620} spread={250} c={p.key} />
-        <Stanchion side="l" w={120} z={86} c="#3A1C18" />
-        <Stanchion side="r" w={92} z={85} c="#3A1C18" brace={false} />
+        {occluders && <Stanchion side="l" w={120} z={86} c="#3A1C18" />}
+        {occluders && <Stanchion side="r" w={92} z={85} c="#3A1C18" brace={false} />}
       </>);
 
     /* S9 — THE CARD RAIL. The rail IS the light source. */
@@ -400,7 +405,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
       return (<>
         <Shop p={p} f={f} t={t} lit={0.30} glowX={506} glowR={300} racks rakeRate={rakeRate ?? 5.5} />
         <Pool x={506} y={p.horizon + 90} w={820} c={p.key} o={0.22 * lit} z={19} />
-        <Stanchion side="l" w={108} z={86} c="#17342C" />
+        {occluders && <Stanchion side="l" w={108} z={86} c="#17342C" />}
       </>);
 
     /* S10/S11 — THE OUTPUT FLOOR. Bright, even, near shadowless: relief. */
@@ -410,9 +415,9 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         <Flood x={280} y={-20} s={1.25} on={lit * 0.9} len={700} spread={250} c={p.key} />
         <Flood x={760} y={-20} s={1.25} on={lit * 0.9} len={700} spread={250} c={p.key} />
         <Pool x={506} y={p.horizon + 120} w={980} c={p.key} o={0.28 * lit} z={19} />
-        <Stanchion side="r" w={112} z={86} c="#3A2214" />
-        <NearStack side="l" c="#2A1810" h={340} />
-        <DarkOverhead c="#1E120A" />
+        {occluders && <Stanchion side="r" w={112} z={86} c="#3A2214" />}
+        {occluders && <NearStack side="l" c="#2A1810" h={340} />}
+        {occluders && <DarkOverhead c="#1E120A" />}
       </>);
 
     /* S12/S13 — THE COUNTER. Warm practical in, cool street spill behind:
@@ -431,7 +436,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         ))}
         <Flood x={506} y={40} s={1.4} on={lit} len={640} spread={290} c={p.key} />
         <Pool x={506} y={p.horizon + 104} w={800} c={p.key} o={0.30 * lit} z={19} />
-        <Stanchion side="l" w={104} z={86} brace={false} />
+        {occluders && <Stanchion side="l" w={104} z={86} brace={false} />}
       </>);
   }
   return null;

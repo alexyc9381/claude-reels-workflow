@@ -322,10 +322,34 @@ const CAP_Y: Record<Variant, number> = { bay: 1258, amber: 1330, steel: 1190 };
     keys and timbres carry different energy), so ONE shared trim cannot land all
     three. Each gets its own, solved from its own measurement to hit 12 dB. */
 export const BED_GAIN: Record<Variant, number> = {
-  bay:   db(2.8),
-  amber: db(0.7),
-  steel: db(2.5),
+  bay:   db(6.8),    /* -> volume 0.218 */
+  amber: db(8.0),    /* -> volume 0.250, the loudest of the three */
+  steel: db(5.4),    /* -> volume 0.186 */
 };
+
+/* ⛔⛔⛔ THE BED IS THE HOUSE TRACK NOW, NOT A SYNTH. Alex: *"the BG music needs
+   to be the same bg music we typically use for videos here."* That is
+   `ados_bed` — "Another Day of Sun" — and the three cuts take three SEPARATED
+   48s windows of it (119.0s / 63.5s / 28.5s) so each trial cut is genuinely
+   different music rather than one track at three volumes.
+
+   Each window was chosen by measurement, not by ear-scrubbing:
+     · it must open ON A DOWNBEAT — loud in the first 60ms AND a RISE from what
+       precedes it, because `soundtrack-onset-at-zero` and the night reel's
+       *"the soundtrack is too low at the beginning"* both land on frame 0
+     · its QUIETEST 1.5s must stay within ~9 dB of its own mean, so the bed never
+       drops out mid-reel (a previous reel shipped a full-length bed that went
+       silent after 38s and the duration check passed it)
+     · ⛔ NO `afade in`. A 0.9s fade-in kills the first downbeat outright.
+   loudnorm I=-24, not -27: -27 is a quiet bed and reads as absent.
+
+   ⛔⛔ AND THE LEVEL OBEYS THE STANDING RULE OVER MY OWN TARGET. Solving for
+   "12 dB under the VO, A-weighted" gave 0.336 / 0.385 / 0.287 — all above the
+   house ceiling of **0.25 for a normal-mastered bed** (`reel-vo-pacing`, from
+   Alex: *"the background music is too loud compared to the voiceover"*). The
+   three gains above are the equalised set scaled so the loudest sits exactly at
+   0.25; all three are perceptually level with each other at ~15.7 dB under the
+   VO. A standing instruction from Alex outranks a target I derived. */
 
 /* ⛔⛔⛔ AND THE SECOND TIME THESE WERE RE-SOLVED, IT WAS BECAUSE THE BED WAS
    EATING A DIFFERENT GATE ENTIRELY. `sfx_audit --mix` reported <250Hz at 19.8%

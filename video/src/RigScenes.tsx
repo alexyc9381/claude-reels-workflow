@@ -11,7 +11,7 @@ import {
   CLAY, GOLD, GREEN, RED, SKY, PAPER, INK, MUTE, TEAL, STEEL, STEELD, IRON, RUST, CREAM,
   R, BRACES, byRank, KEPT, PLACES, asPlace, KEYWORD,
   Rig, RigBrace, SpecBoard, Belt, Part, RejectBin, TokenGauge, Furnace, TokenCoin, Winch, Beacon,
-  PromptCard,
+  PromptCard, HallucGlyph, HallucEyes, VIOLET,
   SlotRank, Press, Cartridge, Sledge, Cutter, SwingLamp, ScanLine, Verdict,
   judder, whip,
 } from "./RigWorld";
@@ -532,13 +532,20 @@ export const S1: React.FC<SP> = ({ v }) => {
       {f >= HALL && [0, 1, 2].map((i) => {
         const k = E(f, HALL + i * 4, HALL + 26 + i * 4, 0, 1, OUT);
         if (k <= 0) return null;
-        const dir = (i - 1);
+        const dir = [-1.9, 1.5, 2.4][i];
         return (
-          <Part key={"hz" + i} x={470 + dir * 250 * k} y={gy - 190 - Math.sin(k * Math.PI) * 120 + k * 130}
+          <Part key={"hz" + i} x={470 + dir * 210 * k} y={gy - 150 - Math.sin(k * Math.PI) * 150 + k * 150}
             s={1.9 + i * 0.25} bad={1} f={f + i * 9} z={62} />
         );
       })}
       <Puff x={520} y={gy - 150} f={f} at={HALL} c="#C9B486" n={8} s={1.5} />
+
+      {/* ⭐ THE HALLUCINATION READS AS A STATE, NOT AN EVENT. It comes up 10
+          frames BEFORE the warped parts so the cause is on screen before the
+          effect, and it stays up for the rest of the shot — he does not stop
+          hallucinating when the parts land. */}
+      <HallucGlyph x={470 + reach * 58} y={gy - S - 26} f={f} at={HALL - 10} s={1.25} z={86} />
+      <HallucEyes x={470 + reach * 58} y={gy - S * 0.74} f={f} at={HALL - 6} s={1.7} gap={62} z={88} />
 
       {/* THE HERO, big and centre — the subject of his own scene */}
       <Rig f={f} x={470} y={gy} size={S} zBack={30} zFront={52} drop={1}
@@ -716,9 +723,20 @@ export const S3: React.FC<SP> = ({ v }) => {
   const BIGX = 730, SMALLX = 292;
 
   const lit: string[] = [];
-  byRank("rule").forEach((b, i) => { if (f >= RULES + i * 4) lit.push(b.id); });
-  byRank("mem").forEach((b, i) => { if (f >= RULES + i * 4) lit.push(b.id); });
-  byRank("skill").forEach((b, i) => { if (f >= SKILLS + i * 4) lit.push(b.id); });
+  byRank("rule").forEach((b, i) => { if (f >= RULES + i * 3) lit.push(b.id); });
+  byRank("mem").forEach((b, i) => { if (f >= RULES + i * 3) lit.push(b.id); });
+  byRank("skill").forEach((b, i) => { if (f >= SKILLS + i * 3) lit.push(b.id); });
+
+  /* ⭐⭐⭐ THE FIRST TWO SECONDS ARE THE ACCUMULATION. Alex, on 15s: *"the
+     animation needs to be better."* Twice now this scene has opened with braces
+     merely LIGHTING UP in sequence, which is a state change dressed as an event.
+
+     The line is *"EVERY LINE in your CLAUDE.md file and EVERY SKILL you built"* —
+     the sentence is about SHEER ACCUMULATION, and nothing accumulated. Eighteen
+     stamped plates now rain down and bolt onto him one after another, fast, two
+     frames apart, until he is encased. That is the feeling the line is after
+     (you wrote all of this, a line at a time, and never counted) and it is also
+     the one shape §1 says measures: many large objects arriving continuously. */
 
   /* ⭐ ONE LARGE OBJECT TRAVELS 438px ACROSS THE FRAME. That is the scene's
      motion AND its meaning: the same rig, moved from one model to the other.
@@ -806,6 +824,36 @@ export const S3: React.FC<SP> = ({ v }) => {
           that keep moving, so the practicals below are on the SHUTTLE, and the
           shuttle runs for the whole scene. */}
       <Pool x={SMALLX} y={gy - 14} w={430} c="#D8CCF4" o={0.30} />
+
+      {/* ⭐⭐⭐ EIGHTEEN PLATES RAIN DOWN AND BOLT ON — one every 2 frames. Each is
+          stamped, each lands with a tick, and he is visibly encased by the time
+          the sentence reaches "the extra support". This is the accumulation the
+          line is actually about. */}
+      {Array.from({ length: 18 }, (_, i) => {
+        const at = RULES + i * 2;
+        const kk = E(f, at, at + 7, 0, 1, IN_Q);
+        if (kk <= 0) return null;
+        /* they stack in two columns down his body, alternating sides */
+        const side = i % 2 ? 1 : -1;
+        const row = Math.floor(i / 2);
+        const tx = BIGX + side * (S * 0.30 + (row % 3) * 16);
+        const ty = gy - S * 0.94 + row * (S * 0.084);
+        const gone = k > 0.06;                     /* they leave with the rig */
+        return (
+          <div key={"pl" + i} style={{ position: "absolute",
+            left: tx - 52, top: ty - (1 - kk) * 420,
+            width: 104, height: 26, zIndex: 50, borderRadius: 3,
+            opacity: (0.35 + kk * 0.65) * (gone ? Math.max(0, 1 - k * 3) : 1),
+            transform: `rotate(${(1 - kk) * side * 40 + side * 2}deg)`,
+            background: `linear-gradient(180deg, ${mxh(CREAM, 0.30)}, ${dkh(CREAM, 0.22)})`,
+            border: `2px solid ${dkh(CREAM, 0.40)}`, boxShadow: SH,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: MONO, fontWeight: 900, fontSize: 12, letterSpacing: "0.06em",
+            color: "#3A3018" }}>
+            {i % 3 === 0 ? "RULE" : i % 3 === 1 ? "SKILL" : "MEMORY"}
+          </div>
+        );
+      })}
 
       {/* ⭐ THE OLD MODEL, on his plinth from frame 0 — the comparison only works
           if BOTH are in frame the whole time. Pale clay = an older, dimmer build

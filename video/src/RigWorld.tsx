@@ -72,6 +72,8 @@ export const RED = "#C44A3A", SKY = "#5AA0DE", PAPER = "#F7F5F0";
 export const INK = "#1A1813", MUTE = "#9A968B", TEAL = "#7FC0C9";
 export const STEEL = "#8A8F98", STEELD = "#3E434C", IRON = "#5A6069";
 export const RUST = "#9E5A38", CREAM = "#EFE7D4";
+/** ⭐ the ONE hue nothing else in this reel uses — see `HallucGlyph` */
+export const VIOLET = "#9A7FD0";
 
 export const KEYWORD = "SMART";
 
@@ -563,6 +565,79 @@ export const PromptCard: React.FC<{ x: number; y: number; f: number; z?: number;
       )}
     </div>
   );
+};
+
+
+/* =========================================================================
+   THE HALLUCINATION GLYPH — the one place in this reel a state gets an ICON.
+
+   ⭐ Alex: *"at 7 seconds there should be like a hallucinations icon graphic
+   above his head, spinning around, purple, same with his eyes."*
+
+   Everything else in this world is a physical object doing a physical job, and
+   that is right for a machine bay — but "it is hallucinating" is not a thing a
+   machine bay can show you happening TO a body. It is an internal state, and an
+   internal state is exactly what a floating glyph is for. Purple because nothing
+   else in the reel is: the palette runs tungsten / teal / sodium / oxblood /
+   navy / green, so VIOLET reads as "wrong" on sight without a label.
+   ====================================================================== */
+export const HallucGlyph: React.FC<{ x: number; y: number; f: number; at: number;
+  s?: number; z?: number }> = ({ x, y, f, at, s = 1, z = 86 }) => {
+  const k = E(f, at, at + 9, 0, 1, BACK);
+  if (k <= 0) return null;
+  const spin = (f - at) * 5.6;
+  const R = 66 * s;
+  return (<>
+    {/* the spiral: four tapering arms, so it reads as a swirl and not a fan */}
+    <div style={{ position: "absolute", left: x - R, top: y - R, width: R * 2, height: R * 2,
+      zIndex: z, transform: `rotate(${spin}deg) scale(${k})` }}>
+      {Array.from({ length: 4 }, (_, i) => (
+        <div key={"ar" + i} style={{ position: "absolute", left: R - 5 * s, top: 0,
+          width: 10 * s, height: R, borderRadius: 6,
+          transformOrigin: `50% ${R}px`, transform: `rotate(${i * 90}deg)`,
+          background: `linear-gradient(180deg, ${hexa(VIOLET, 0.95)}, ${hexa(VIOLET, 0.10)})` }} />
+      ))}
+      <div style={{ position: "absolute", left: R - 17 * s, top: R - 17 * s,
+        width: 34 * s, height: 34 * s, borderRadius: "50%",
+        background: hexa(mxh(VIOLET, 0.36), 0.95) }} />
+    </div>
+    {/* three motes orbiting the other way — the second axis that says "spinning" */}
+    {Array.from({ length: 3 }, (_, i) => {
+      const a = ((-spin * 1.7) + i * 120) * Math.PI / 180;
+      return (
+        <div key={"mo" + i} style={{ position: "absolute",
+          left: x + Math.cos(a) * R * 1.35 - 11 * s, top: y + Math.sin(a) * R * 0.62 - 11 * s,
+          width: 22 * s, height: 22 * s, borderRadius: "50%", zIndex: z + 1, opacity: k,
+          background: hexa(mxh(VIOLET, 0.20), 0.9) }} />
+      );
+    })}
+  </>);
+};
+
+/** the same swirl, small, sat over each eye — Alex asked for the eyes too, and
+    a dazed sprite whose EYES are still calm reads as a sprite with a hat on. */
+export const HallucEyes: React.FC<{ x: number; y: number; f: number; at: number;
+  s?: number; z?: number; gap?: number }> = ({ x, y, f, at, s = 1, z = 88, gap = 62 }) => {
+  const k = E(f, at, at + 7, 0, 1, OUT);
+  if (k <= 0) return null;
+  return (<>
+    {[-1, 1].map((side, i) => {
+      const spin = (f - at) * (side > 0 ? 9.5 : -9.5);
+      const R = 24 * s;
+      return (
+        <div key={"ey" + i} style={{ position: "absolute", left: x + side * gap - R, top: y - R,
+          width: R * 2, height: R * 2, zIndex: z, opacity: k,
+          transform: `rotate(${spin}deg)` }}>
+          {Array.from({ length: 3 }, (_, j) => (
+            <div key={j} style={{ position: "absolute", left: R - 4 * s, top: 2,
+              width: 8 * s, height: R - 2, borderRadius: 4,
+              transformOrigin: `50% ${R - 2}px`, transform: `rotate(${j * 120}deg)`,
+              background: `linear-gradient(180deg, ${hexa(mxh(VIOLET, 0.44), 0.98)}, ${hexa(VIOLET, 0.12)})` }} />
+          ))}
+        </div>
+      );
+    })}
+  </>);
 };
 
 /** the gantry cable that hangs each brace from the ceiling — the rig's SOURCE

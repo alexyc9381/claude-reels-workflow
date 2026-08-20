@@ -1,5 +1,5 @@
 import React from "react";
-import { useCurrentFrame } from "remotion";
+import { Img, staticFile, useCurrentFrame } from "remotion";
 import {
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
   Scene, Cam, Mark, MarkCast, MarkPlate, idle, rock, shake, drift, squash,
@@ -7,6 +7,7 @@ import {
   ui, mono, vivid, Rake, Ring, Puff, Pool, Belt, Part, ScrapMound, Chute, Mill,
   SpecSheet, OrderSlip, SpecPress, Roll, TallyBoard, SpecPlate, Crew, costumeFor,
   Dial, Crate, SkillRack, FlagWall, CardRail, DoneRack, ShopCounter,
+  Cursor, Browser, RepoPage, ClaudePage,
 } from "./GoWorld";
 import { SetFor, Stanchion, Flood, placeFor } from "./GoSets";
 
@@ -220,43 +221,120 @@ export const S0: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 export const S1: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("press");
-  const P = PRESS_V[v];
-  const LOCK = P.drop + 16;
-  const sh = shake(f, LOCK, 11, 10);
-  /* the slip travels in from the right and is stopped by the board */
-  const slipT = E(f, 0, LOCK, 0, 1, LIN);
-  const slipX = 1010 - slipT * 372;
+  /* ⛔⛔ COMPLETELY REBUILT. The first version was a colossal cream drawing
+     board swinging down in front of the mill, and it read as a WHITEBOARD three
+     rounds running — a big pale rectangle with a small sprite beside it, which
+     is a container with no hierarchy and no relation to the words.
+
+     ⭐ The line is "they just INSTALLED this one free SKILL that STOPS Claude
+     from doing the wrong thing IN THE FIRST PLACE", and it has three verbs.
+     Every beat below lands on its own measured onset:
+        installed=7   one=18  free=25  skill=33
+        stops=45      Claude=50        wrong=70  thing=74   first/place=92/96
+     INSTALL is a cartridge slammed into a slot. STOPS is a gate dropping in
+     front of the throat and physically halting the order that was travelling
+     toward it. IN THE FIRST PLACE is WHERE the gate sits: before the cutter,
+     not after, so the wrong part is never made rather than made and binned. */
+  const SLAM = 7, SEAT = 18, GATE = 45, BOUNCE = 52, LIFT = 70;
+  const sh = [SLAM, GATE, BOUNCE].reduce((a, k) => {
+    const s = shake(f, k, k === SLAM ? 14 : 9, 10); return { x: a.x + s.x, y: a.y + s.y };
+  }, { x: 0, y: 0 });
+  const seated = f >= SLAM;
+  /* the order slip travels toward the mill's throat and is STOPPED by the gate */
+  const slipT = E(f, 0, BOUNCE, 0, 1, LIN);
+  const slipX = 1000 - slipT * 306 + (f >= BOUNCE ? E(f, BOUNCE, BOUNCE + 14, 0, 92, OUT) : 0);
   return (
-    <Scene p={p} slug="THE PRESS BAY" push={push(v, dur, 1.075)} vig={0.56}>
+    <Scene p={p} slug="ONE SKILL" push={push(v, dur, 1.06)} vig={0.30}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="press" f={f} lit={1} t={f * 0.42} rakeRate={5.8} />
+        <SetFor k="press" f={f} lit={seated ? 2.0 : 1.4} t={f * 0.42} rakeRate={5.8} />
+        <Pool x={760} y={p.horizon + 140} w={900} c={p.key} o={0.72} z={19} h={320} />
 
-        {/* the scrap floor still visible through the bay opening — the villain
-            does not leave the world just because we changed rooms */}
-        <div style={{ position: "absolute", left: -10, top: 214, width: 210, height: 372, zIndex: 15,
-          borderRadius: 6, background: `linear-gradient(96deg, ${dkh(OXIDE, 0.44)} 0%, ${dkh(OXIDE, 0.72)} 100%)` }} />
-        <ScrapMound x={92} y={572} w={330} f={f} z={16} lit={0.55} />
+        {/* the shop's own traffic, so the bay is a working place */}
+        <Belt x={-70} y={252} w={1160} f={f} rate={8.0} z={20}
+          carry={[{ o: 0.2, s: 0.6 }, { o: 0.72, s: 0.6 }]} />
 
-        {/* the mill's intake throat, facing camera */}
-        <Mill x={738} y={p.horizon + 58} s={0.88} f={f} z={30} spin={0.6} mark={false}
-          head={Math.sin(f / 13) * 20} />
+        {/* THE MILL — the thing being fitted. Its throat faces camera. */}
+        <Mill x={352} y={p.horizon + 66} s={1.02} f={f} z={30} mark={false}
+          head={f >= LIFT ? E(f, LIFT, LIFT + 12, 0, -120, OUT) : Math.sin(f / 11) * 18} />
 
-        {/* THE SLIP, travelling — and stopped */}
-        <OrderSlip x={slipX} y={332} w={168} f={f} rot={-9 + slipT * 20} crumple={0.7}
-          strokes={[-99, -99, -99]} z={54}
-          s={f > LOCK ? 1 - E(f, LOCK, LOCK + 6, 0, 0.18, OUT) : 1} />
+        {/* ⭐ THE SLOT the cartridge goes into, and the state lamp beside it */}
+        <div style={{ position: "absolute", left: 268, top: 306, width: 176, height: 58, zIndex: 40,
+          borderRadius: 8, background: seated ? dkh(CLAY, 0.30) : "#141109",
+          border: `6px solid ${dkh("#7C818C", 0.50)}` }} />
+        <div style={{ position: "absolute", left: 470, top: 310, width: 48, height: 48, zIndex: 40,
+          borderRadius: "50%", border: `6px solid ${dkh("#7C818C", 0.48)}`,
+          background: seated ? mxh(GREEN, 0.22 + Math.sin(f / 5) * 0.14) : mxh(RED, 0.18) }} />
 
-        {/* THE SPEC PRESS — 470px, the biggest bright mass in the frame */}
-        <SpecPress x={452} y={392} w={470} f={f} drop={P.drop} z={48} marks={P.marks} />
+        {/* ⭐⭐ THE SKILL CARTRIDGE — carried, then SLAMMED home. An action is a
+            DISTANCE: it travels 300px in seven frames and lands with a squash,
+            a ring and dust, rather than easing into place. */}
+        {(() => {
+          const t = E(f, 0, SLAM, 0, 1, IN_Q);
+          const x = 660 - t * 306, y = 232 + t * 78;
+          return (<div style={{ position: "absolute", left: x - 96, top: y - 40, width: 192,
+            height: 80, zIndex: 52, borderRadius: 8,
+            transform: `scaleX(${seated ? squash(f, SLAM, 0.20, 3, 12) : 1}) rotate(${(1 - t) * -12}deg)`,
+            background: `linear-gradient(166deg, ${mxh(CLAY, 0.22)} 0%, ${dkh(CLAY, 0.30)} 100%)`,
+            border: `6px solid ${dkh(CLAY, 0.44)}` }}>
+            <div style={{ position: "absolute", left: 14, top: 12, width: 56, height: 56,
+              borderRadius: 10, background: "#FFFFFF", border: "3px solid #E8DCC0",
+              display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Img src={staticFile("claude_logo.png")}
+                style={{ width: 42, height: 42, objectFit: "contain" }} />
+            </div>
+            {[0.30, 0.54].map((k, i) => (
+              <div key={"cl" + i} style={{ position: "absolute", left: 88, top: `${k * 100}%`,
+                width: `${44 - i * 12}%`, height: 9, borderRadius: 4, background: hexa("#2A1B10", 0.44) }} />
+            ))}
+            {/* the contact fingers on its edge */}
+            {[0, 1, 2, 3].map(i => (
+              <div key={"cf" + i} style={{ position: "absolute", left: 8 + i * 16, bottom: -12,
+                width: 10, height: 14, background: BRASS }} />
+            ))}
+          </div>);
+        })()}
+        <Puff x={356} y={336} f={f} at={SLAM} n={14} s={1.3} c={p.grit} z={60} />
+        <Ring x={356} y={334} f={f} at={SLAM} r={250} c={CLAY} z={58} />
 
-        <Puff x={452} y={604} f={f} at={LOCK} n={14} s={1.3} c={p.grit} z={62} />
-        <Ring x={452} y={598} f={f} at={LOCK} r={250} c={p.key} z={61} />
+        {/* ⭐ the SEAT wave — the machine accepting it, running down its body */}
+        {seated && Array.from({ length: 5 }, (_, i) => {
+          const t = E(f, SEAT + i * 3, SEAT + i * 3 + 12, 0, 1, OUT);
+          if (t <= 0 || t >= 1) return null;
+          return (<div key={"wv" + i} style={{ position: "absolute", left: 176, top: 366 + t * 250,
+            width: 344, height: 10, zIndex: 42, borderRadius: 5, background: GREEN,
+            opacity: (1 - t) * 0.7 }} />);
+        })}
 
-        {/* the crew that installed it, working the bay */}
-        <Crew f={f} x={218} y={p.horizon + 128} i={1} size={150} z={52} at={44} />
-        <Crew f={f} x={882} y={p.horizon + 136} i={3} size={144} z={52} at={62} flip />
+        {/* ⭐⭐ THE GATE — it drops IN FRONT of the throat on "stops", which is
+            what "in the first place" means: the order never reaches the cutter. */}
+        {f >= GATE - 8 && (
+          <div style={{ position: "absolute", left: 560, top: 150 + E(f, GATE - 8, GATE, -300, 0, IN_Q)
+            + (f >= GATE ? rock(f, GATE, 7, 20) : 0), width: 118, height: 420, zIndex: 62,
+            borderRadius: 6,
+            background: `repeating-linear-gradient(180deg, ${mxh("#6E6A63", 0.30)} 0px, ${mxh("#6E6A63", 0.30)} 22px, ${dkh("#6E6A63", 0.18)} 22px, ${dkh("#6E6A63", 0.18)} 44px)`,
+            border: `6px solid ${dkh("#6E6A63", 0.52)}` }}>
+            <div style={{ position: "absolute", left: 14, top: 168, width: 84, height: 84,
+              borderRadius: 12, background: "#FFFFFF", border: "3px solid #E8DCC0",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              opacity: E(f, 50, 58, 0, 1, OUT) }}>
+              <Img src={staticFile("claude_logo.png")}
+                style={{ width: 62, height: 62, objectFit: "contain" }} />
+            </div>
+          </div>
+        )}
+        <Puff x={618} y={566} f={f} at={GATE} n={12} s={1.2} c={p.grit} z={64} />
+        <Ring x={618} y={560} f={f} at={GATE} r={230} c={p.key} z={63} />
 
-        <MarkCast x={452} y={230} s={104} z={70} f={f} spin={0.45} o={0.55} />
+        {/* THE ORDER, travelling in and STOPPED DEAD by the gate */}
+        <OrderSlip x={slipX} y={362} w={158} f={f} rot={-8 + slipT * 14 + (f >= BOUNCE ? 26 : 0)}
+          crumple={0.7} strokes={[-99, -99, -99]} z={56} />
+        <Ring x={694} y={362} f={f} at={BOUNCE} r={180} c={RED} z={66} />
+
+        {/* ⭐ THE FOCAL POINT — it fits the cartridge, then watches it work */}
+        <Crew f={f} x={868} y={p.horizon + 158} i={0} size={324} z={68} at={-14}
+          loop={f >= GATE ? 3 : 1} flip />
+
+        <MarkCast x={906} y={186} s={110} z={70} f={f} spin={0.5} o={0.66} />
       </div>
     </Scene>
   );
@@ -278,9 +356,9 @@ export const S1: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 export const S2: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("yard");
-  const CUT = 90;
+  const CUT = 78;
   const A = f < CUT;
-  const STARS = Array.from({ length: 11 }, (_, i) => 12 + i * 6);
+  const STARS = Array.from({ length: 11 }, (_, i) => 8 + i * 5);
   const DIE = CUT + 14;
   return (
     <Scene p={p} slug="★ 11,415 · MIT" push={push(v, dur, A ? 1.09 : 1.06)} vig={0.60}
@@ -312,10 +390,10 @@ export const S2: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 
           <SpecPlate x={506} y={318} w={520} f={f} z={58}
             starsAt={STARS}
-            count={[[18, "2,400"], [34, "5,800"], [52, "9,100"], [74, R.starsText]]}
+            count={[[14, "2,400"], [28, "5,800"], [44, "9,100"], [62, R.starsText]]}
             dieAt={DIE} />
 
-          <Ring x={520} y={352} f={f} at={74} r={300} c={GOLD} z={60} />
+          <Ring x={520} y={352} f={f} at={62} r={300} c={GOLD} z={60} />
           <Puff x={430} y={430} f={f} at={DIE} n={12} s={1.1} c={p.grit} z={62} />
         </Cam>
 
@@ -715,7 +793,7 @@ export const S6: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="ONE MINUTE" push={push(v, dur, 1.05)} vig={0.44} slugC={CLAYD}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="dock" f={f} lit={1} t={f * 0.3} rakeRate={3.6} />
+        <SetFor k="dock" f={f} lit={1} t={f * 0.3} rakeRate={3.6} occluders={false} />
         <Belt x={-60} y={p.horizon + 44} w={1140} f={f} rate={5.2} z={24} />
         <Dial x={506} y={392} s={360} f={f} drop={DROP} sweep={LAND + 2} z={54} />
         <Puff x={506} y={556} f={f} at={LAND} n={16} s={1.5} c={p.grit} z={62} />
@@ -748,112 +826,77 @@ export const S6: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 export const S7: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("dock");
-  const CUT1 = 44, CUT2 = 100;
-  const A = f < CUT1, B = f >= CUT1 && f < CUT2, C = f >= CUT2;
-  const LAND = 50, LID = 58, CROSS = 69;
-  const SEATS = [106, 120, 134];
-  const sh = shake(f, LAND, 12, 10);
-  /* the floor cast: which step number is lit */
-  const step = C ? "3" : B ? "2" : "1";
+  /* ⭐⭐ ALEX ASKED FOR THIS ONE BY NAME: *"have a realistic screen recording of
+     the claude platform showing how it works, showing the cursor and stuff
+     going through add skills"*. So the setup beat is no longer three crates on
+     a dock — it is the actual flow, on screen, driven by a cursor, cut to the
+     measured word onsets:
+
+        download=40   repo=55   go=57   Claude=64
+        customize=74  add=94    skills=102   absolutely=130   it=142
+
+     The steps are the README's own, verbatim: download the repo as a ZIP, go to
+     claude.ai, Customize, Skills, Upload a skill. Nothing is invented.
+     ⛔ claude.ai is behind a login so this cannot be a headless capture; it is
+     a faithful recreation, which is the honest way to show a gated flow. */
+  const NAV = 58;                         /* the browser navigates to claude.ai */
+  const onRepo = f < NAV;
+  const W_ = 952, H_ = 636, X_ = 30, Y_ = 132;
+  /* the cursor's waypoints, in panel coords, each arriving on its own onset */
+  const path: Array<[number, number, number]> = onRepo
+    ? [[700, 560, 0], [886, 258, 30], [886, 258, 38], [846, 330, 48], [846, 330, 57]]
+    : [[520, 560, NAV], [186, 400, 70], [186, 400, 86], [520, 292, 96], [520, 292, 112],
+       [520, 372, 124], [520, 372, 162]];
+  let cx = path[0][0], cy = path[0][1];
+  for (let i = 1; i < path.length; i++) {
+    const [px, py, pt] = path[i - 1], [nx, ny, nt] = path[i];
+    if (f >= nt) { cx = nx; cy = ny; }
+    else if (f >= pt) { const t = E(f, pt, nt, 0, 1, IO); cx = px + (nx - px) * t; cy = py + (ny - py) * t; }
+  }
   return (
-    <Scene p={p} slug="THE INTAKE DOCK" push={push(v, dur, A ? 1.05 : B ? 1.08 : 1.06)} vig={0.58}>
-      <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="dock" f={f} lit={B ? 1.1 : 1} t={f * 0.34} rakeRate={3.9} />
+    <Scene p={p} slug="claude.ai" push={push(v, dur, 1.045)} vig={0.34} slugC={CLAY}>
+      <div style={{ position: "absolute", inset: 0 }}>
+        <SetFor k="dock" f={f} lit={1} t={f * 0.3} rakeRate={3.6} occluders={false} />
 
-        {/* THE STEP NUMBER, cast into the dock floor — not typeset over a card */}
-        <div style={{ position: "absolute", left: 62, top: p.horizon + 96, zIndex: 22,
-          transform: "rotate(-4deg) skewX(-19deg)" }}>
-          <span style={{ ...ui(150, 900), color: hexa(INK, 0.20), letterSpacing: "-0.03em" }}>{step}</span>
-        </div>
+        {/* the desk the screen sits on, so it is a PLACE and not a floating UI */}
+        <div style={{ position: "absolute", left: -60, right: -60, top: 776, height: 200, zIndex: 30,
+          background: `linear-gradient(180deg, ${mxh("#6E5A46", 0.42)} 0%, ${dkh("#6E5A46", 0.30)} 100%)` }} />
+        <div style={{ position: "absolute", left: -60, right: -60, top: 770, height: 12, zIndex: 31,
+          borderRadius: 4, background: mxh("#6E5A46", 0.60) }} />
 
-        {/* ---- SHOT A — the chute, and something is coming --------------- */}
-        {A && (<Cam x={0} y={0} s={1.0} z={32}>
-          <div style={{ position: "absolute", left: 590, top: -40, width: 300, height: 330, zIndex: 40,
-            borderRadius: 8, transform: "rotate(15deg)",
-            background: `linear-gradient(178deg, ${dkh(STEEL, 0.20)} 0%, ${dkh(STEEL, 0.48)} 100%)`,
-            border: `6px solid ${dkh(STEEL, 0.56)}` }}>
-            {Array.from({ length: 6 }, (_, i) => (
-              <div key={"cr" + i} style={{ position: "absolute", left: 14, right: 14, top: 24 + i * 48,
-                height: 10, borderRadius: 4, background: mxh(STEEL, 0.14) }} />
-            ))}
+        {/* ⭐ THE PUNCH-IN. At the "add skills" onset the framing cuts tighter
+            onto the Skills panel — a discontinuous jump, never a tween. */}
+        <Cam x={f >= NAV + 38 ? -96 : 0} y={f >= NAV + 38 ? -66 : 0}
+          s={f >= NAV + 38 ? 1.30 : 1} z={38}>
+        <Browser x={X_} y={Y_} w={W_} h={H_} z={40}
+          url={onRepo ? "github.com/nidhinjs/prompt-master" : "claude.ai/settings/capabilities"}>
+          {onRepo
+            ? <RepoPage f={f} open={40} w={W_} h={H_} scroll={E(f, 6, 40, 0, 44, IO)} />
+            : <ClaudePage f={f} at={NAV} openCustomize={16} openSkills={38} upload={64} done={82} />}
+        </Browser>
+        </Cam>
+
+        {/* the ZIP that lands when Download is clicked */}
+        {f >= 50 && f < NAV + 10 && (
+          <div style={{ position: "absolute", left: X_ + 30, top: Y_ + H_ - 78,
+            width: 300, height: 58, zIndex: 52, borderRadius: 10, background: "#FFFFFF",
+            border: "3px solid #D0D7DE", display: "flex", alignItems: "center", gap: 12,
+            paddingLeft: 14, transform: `translateY(${E(f, 50, 56, 60, 0, OUT)}px)`,
+            boxShadow: "0 10px 22px rgba(20,18,14,0.24)" }}>
+            <div style={{ width: 34, height: 40, borderRadius: 4, background: CLAY }} />
+            <span style={{ ...ui(20, 800), color: "#24292F" }}>prompt-master.zip</span>
           </div>
-          <Belt x={-60} y={p.horizon + 40} w={1140} f={f} rate={7.4} z={24}
-            carry={[{ o: 0.08, s: 0.82 }, { o: 0.34, s: 0.82 }, { o: 0.62, s: 0.82 },
-                    { o: 0.88, s: 0.82 }]} />
-          {/* the dock's waiting stock, so the opening shot is a working dock
-              and not an empty room with one chute in it */}
-          {[[96, 0], [268, 1], [438, 2]].map(([sx, k], i) => (
-            <div key={"ws" + i} style={{ position: "absolute", left: sx, top: p.horizon - 44 - i * 8,
-              width: 104, height: 128, zIndex: 30, borderRadius: 6,
-              background: `linear-gradient(166deg, ${mxh("#9A7A4E", 0.14)} 0%, ${dkh("#9A7A4E", 0.36)} 100%)`,
-              border: `5px solid ${dkh("#9A7A4E", 0.48)}`,
-              transform: `rotate(${-2 + i * 2}deg)` }}>
-              {[0.24, 0.52, 0.78].map((ky, j) => (
-                <div key={"wl" + j} style={{ position: "absolute", left: 8, right: 8,
-                  top: `${ky * 100}%`, height: 7, background: dkh("#9A7A4E", 0.24) }} />
-              ))}
-            </div>
-          ))}
-          <Crew f={f} x={620} y={p.horizon + 160} i={0} size={196} z={52} at={0} loop={1} />
-          <Crew f={f} x={862} y={p.horizon + 148} i={6} size={140} z={52} at={10} loop={3} flip />
-        </Cam>)}
+        )}
 
-        {/* ---- SHOT B — the crate lands, and is walked in to Claude ------ */}
-        {B && (<Cam x={0} y={-16} s={1.10} z={32}>
-          <Crate x={276} y={p.horizon + 96} w={300} f={f} drop={LAND - 15} lid={LID} z={50} />
-          <Puff x={276} y={p.horizon + 100} f={f} at={LAND} n={16} s={1.5} c={p.grit} z={62} />
-          <Ring x={276} y={p.horizon + 96} f={f} at={LAND} r={280} c="#FFFFFF" z={61} />
-          {/* THE DOORWAY, with a 350px turning mark on its header — this is
-              where the thing arrives AT CLAUDE, and the light changes on him
-              as he crosses. That light change is the whole beat. */}
-          {/* the doorway: a dark OPENING inside a clay frame, with a header
-              beam and two jambs — a flat slab reads as nothing */}
-          <div style={{ position: "absolute", left: 560, top: 120, width: 340, height: 476, zIndex: 32,
-            borderRadius: 6, background: `linear-gradient(180deg, ${dkh("#3A1F12", 0.02)} 0%, ${dkh("#3A1F12", 0.42)} 100%)` }} />
-          <div style={{ position: "absolute", left: 540, top: 104, width: 382, height: 54, zIndex: 34,
-            borderRadius: 5, background: `linear-gradient(180deg, ${mxh(CLAY, 0.20)} 0%, ${dkh(CLAY, 0.28)} 100%)` }} />
-          {[540, 866].map((jx, i) => (
-            <div key={"jb" + i} style={{ position: "absolute", left: jx, top: 104, width: 44,
-              height: 500, zIndex: 34, borderRadius: 4,
-              background: `linear-gradient(90deg, ${mxh(CLAY, 0.14)} 0%, ${dkh(CLAY, 0.34)} 100%)` }} />
-          ))}
-          {/* the shop visible THROUGH it, so the opening has depth */}
-          {[0, 1, 2].map(i => (
-            <div key={"tg" + i} style={{ position: "absolute", left: 592 + i * 88, top: 300 + (i % 2) * 44,
-              width: 74, height: 190, zIndex: 33, borderRadius: 4,
-              background: hexa(mxh(CLAY, 0.26), 0.34 + i * 0.08) }} />
-          ))}
-          <MarkCast x={730} y={210} s={196} z={38} f={f} spin={0.9} o={0.95} />
-          {/* the foreman crossing the threshold with the crate */}
-          <Crew f={f} x={366 + E(f, CROSS, CROSS + 24, 0, 292, IO)} y={p.horizon + 168} i={0}
-            size={190} z={52} at={CUT1} loop={0}
-            tint={f >= CROSS + 12 ? mxh(CLAY, 0.14) : undefined} />
-          {/* the light spilling out of the doorway onto the floor */}
-          <Pool x={730} y={p.horizon + 108} w={520} c={CLAY} o={0.34} z={20} />
-        </Cam>)}
+        {/* ⭐ THE CURSOR, clicking on the beats */}
+        <Cursor x={cx} y={cy} f={f} z={96}
+          clicks={onRepo ? [40, 50] : [NAV + 16, NAV + 38, NAV + 66]} s={1.5} />
 
-        {/* ---- SHOT C — three skill blanks dealt and seated -------------- */}
-        {C && (<Cam x={0} y={10} s={1.04} z={32}>
-          {/* the bench */}
-          <div style={{ position: "absolute", left: 96, top: p.horizon + 12, width: 820, height: 82,
-            zIndex: 40, borderRadius: 6,
-            background: `linear-gradient(180deg, ${mxh("#6A6259", 0.22)} 0%, ${dkh("#6A6259", 0.44)} 100%)`,
-            border: `5px solid ${dkh("#6A6259", 0.54)}` }} />
-          {/* the feed of blanks coming to the bench, running all shot */}
-          {Array.from({ length: 4 }, (_, i) => (
-            <div key={"fb" + i} style={{ position: "absolute", left: ((f * 8.8 + i * 296) % 1380) - 180,
-              top: 206, width: 150, height: 92, zIndex: 24, borderRadius: 6,
-              background: `linear-gradient(166deg, ${mxh(CLAY, 0.10)} 0%, ${dkh(CLAY, 0.34)} 100%)`,
-              border: `4px solid ${dkh(CLAY, 0.46)}`,
-              transform: `rotate(${Math.sin(f / 14 + i) * 3}deg)` }} />
-          ))}
-          <SkillRack x={470} y={392} w={620} f={f} seats={SEATS} z={46} />
-          {SEATS.map((k, i) => <Ring key={"sr" + i} x={296 + i * 196} y={392} f={f} at={k + 8}
-            r={160} c={CLAY} z={62} />)}
-          {/* "and that's absolutely it" — palms up */}
-          <Crew f={f} x={856} y={p.horizon + 170} i={0} size={192} z={52} at={CUT2}
-            loop={f >= 134 ? 2 : 1} flip />
-        </Cam>)}
+        {/* the Claude watching its own setup happen — the reel's cast is never
+            absent from a scene, even one that is a screen */}
+        <Crew f={f} x={936} y={p.horizon + 300} i={0} size={186} z={60} at={-12} loop={3} flip />
+
+        <MarkCast x={92} y={832} s={92} z={62} f={f} spin={0.5} o={0.62} />
       </div>
     </Scene>
   );
@@ -1074,6 +1117,37 @@ export const S11: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 
         <Belt x={-60} y={p.horizon - 70} w={1180} f={f} rate={6.2} z={24}
           carry={[{ o: 0.25, s: 0.78 }, { o: 0.72, s: 0.78 }]} />
+
+        {/* ⭐ THE CHATGPT MARK, on the left, growing on the word.
+            Alex: *"use the chatgpt logo at 44 seconds on the leftside there as
+            well and like enlargen it"*. Onsets: works=11, ChatGPT=33,
+            prompts=44, too=52 — it lands small on "works" and jumps to full on
+            "ChatGPT".
+            ⚠️ I had deliberately kept competitor marks OUT of this scene, on
+            the grounds that another company's logo under "this works on your X"
+            can read as a claim about their product. Alex has called it, so it
+            is in — and it is scoped to what the repo actually documents: a
+            TOOL THIS SKILL WRITES FOR, listed in its own README's tool table
+            alongside Gemini and Cursor. No performance claim is attached to it. */}
+        {(() => {
+          const IN_ = 11, BIG = 33;
+          if (f < IN_) return null;
+          const s0 = E(f, IN_, IN_ + 7, 0, 1, BACK);
+          const grow = f >= BIG ? E(f, BIG, BIG + 9, 1, 1.62, BACK) : 1;
+          const tile = 158 * grow;
+          return (<>
+            <div style={{ position: "absolute", left: 150 - tile / 2, top: 336 - tile / 2,
+              width: tile, height: tile, zIndex: 64, borderRadius: tile * 0.24,
+              background: "#FFFFFF", border: `${Math.max(3, tile * 0.026)}px solid #E4DED0`,
+              transform: `scale(${s0}) rotate(${(1 - s0) * -14}deg)`,
+              boxShadow: "0 16px 30px rgba(20,14,8,0.30)",
+              display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Img src={staticFile("logos/openai.png")}
+                style={{ width: tile * 0.66, height: tile * 0.66, objectFit: "contain" }} />
+            </div>
+            <Ring x={150} y={336} f={f} at={BIG} r={230} c={p.key} z={63} />
+          </>);
+        })()}
 
         {/* the first machine's part, already on the rack from S10 */}
         <DoneRack x={286} y={p.horizon + 30} w={330} f={f} lands={[-1, LAND]} z={46} c={CLAYD} />
