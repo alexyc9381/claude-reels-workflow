@@ -932,27 +932,27 @@ export const S4: React.FC<SP> = ({ v }) => {
         const on = E(f, BURN, BURN + 8, 0, 1, OUT);
         return (<>
           {/* the box */}
-          <div style={{ position: "absolute", left: 300, top: gy - 26, width: 420, height: 190,
+          <div style={{ position: "absolute", left: 168, top: gy - 84, width: 676, height: 250,
             zIndex: 62, borderRadius: 6,
             background: `linear-gradient(180deg, ${dkh(STEELD, 0.20)}, ${dkh(STEELD, 0.56)})`,
             border: `9px solid ${dkh(STEELD, 0.62)}`, boxShadow: SH_D }} />
           {/* the open door, and the fire inside it */}
-          <div style={{ position: "absolute", left: 340, top: gy + 6, width: 340, height: 128,
+          <div style={{ position: "absolute", left: 206, top: gy - 44, width: 600, height: 186,
             zIndex: 63, borderRadius: 4, overflow: "hidden",
             background: `linear-gradient(0deg, ${hexa("#FFD08A", 0.92 * on)}, ${hexa("#B8320E", 0.55 * on)})` }}>
-            {Array.from({ length: 9 }, (_, i) => {
-              const ph = f * (0.34 + (i % 4) * 0.09) + i * 2.1;
-              const h = (44 + Math.abs(Math.sin(ph)) * 96) * on;
+            {Array.from({ length: 12 }, (_, i) => {
+              const ph = f * (0.42 + (i % 5) * 0.11) + i * 2.1;
+              const h = (66 + Math.abs(Math.sin(ph)) * 172) * on;
               return (
-                <div key={"fi" + i} style={{ position: "absolute", left: 6 + i * 37, bottom: 0,
-                  width: 34, height: h,
+                <div key={"fi" + i} style={{ position: "absolute", left: 4 + i * 50, bottom: 0,
+                  width: 46, height: h,
                   clipPath: "polygon(16% 100%, 0 46%, 36% 62%, 50% 0, 66% 60%, 100% 42%, 84% 100%)",
                   background: `linear-gradient(0deg, ${hexa("#FFF0C0", 0.95)}, ${hexa("#F0782A", 0.30)})` }} />
               );
             })}
           </div>
           {/* the swung-open door leaf */}
-          <div style={{ position: "absolute", left: 258, top: gy - 2, width: 96, height: 140,
+          <div style={{ position: "absolute", left: 84, top: gy - 60, width: 110, height: 200,
             zIndex: 64, borderRadius: 4, transform: "rotate(-19deg)", transformOrigin: "100% 20%",
             background: `linear-gradient(90deg, ${dkh(STEELD, 0.50)}, ${dkh(STEELD, 0.22)})`,
             boxShadow: SH }} />
@@ -962,6 +962,18 @@ export const S4: React.FC<SP> = ({ v }) => {
               overlapping cones on their own clocks, each breathing in width and
               opacity, is what firelight on a deck actually looks like — and it
               repaints most of the upper frame every sample. */}
+          {Array.from({ length: 12 }, (_, i) => {
+            const at = (i * 7) % 46;
+            const kk = ((f - BURN - at) % 46) / 46;
+            if (f < BURN + at || kk < 0) return null;
+            const sx = 230 + i * 46 + Math.sin(kk * 6 + i) * 40;
+            return (
+              <div key={"em" + i} style={{ position: "absolute", left: sx,
+                top: gy - 40 - kk * 300, width: 48 - kk * 18, height: 48 - kk * 18,
+                borderRadius: "50%", zIndex: 66, opacity: on * (1 - kk) * 0.95,
+                background: hexa(kk < 0.4 ? "#FFF0C0" : "#F08A38", 0.92) }} />
+            );
+          })}
           {[0, 1, 2].map((i) => {
             const fl = 0.62 + Math.abs(Math.sin(f / (5.5 + i * 2.3) + i * 1.7)) * 0.38;
             const w = 470 + i * 90 + fl * 130;

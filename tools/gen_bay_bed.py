@@ -67,10 +67,21 @@ def build(root, chords, bpm, timbre, noise_cut, seed, bright):
     bar = beat * 4
     mix = np.zeros_like(t)
 
-    # the drone: root + fifth, always on, so there is no onset anywhere
-    mix += 0.30 * voice(t, root, 0.0, "sine")
-    mix += 0.16 * voice(t, root * 1.5, 0.4, "sine")
-    mix += 0.10 * voice(t, root * 0.5, 0.0, "sine")
+    # ⛔⛔⛔ THE BED IS WHERE THE LOW END WAS, NOT THE EFFECTS.
+    # `sfx_audit --mix` reported <250Hz at 19.8% against a 9.5-14.5 band. I
+    # trimmed the gong/sub/boom/impact stack by 3-5 dB each and the number did
+    # not move by 0.1 -- which is reel 107's rule stated as a measurement:
+    # A FIX THAT CHANGES NOTHING MEANS THE FIX IS IN THE WRONG LAYER.
+    # Measured per stem: VO 10.4% low, BED **70.5% low**. The bed was three sine
+    # drones at 37 / 73 / 110 Hz plus a sub pulse on every beat -- almost all of
+    # its energy below 250 Hz, most of it under a phone speaker's floor, and all
+    # of it landing on the one gate that reads the whole mix.
+    # The drone now sits an octave up with the bottom thinned, so the bed still
+    # has body and stops owning the low band.
+    mix += 0.14 * voice(t, root, 0.0, "sine")
+    mix += 0.12 * voice(t, root * 1.5, 0.4, "sine")
+    mix += 0.13 * voice(t, root * 2.0, 0.2, "sine")
+    mix += 0.07 * voice(t, root * 3.0, 0.6, "sine")
 
     # the pad: one chord per two bars, crossfaded, never re-struck
     seg = bar * 2
@@ -78,18 +89,19 @@ def build(root, chords, bpm, timbre, noise_cut, seed, bright):
         ch = chords[i % len(chords)]
         w = np.clip(1 - np.abs(t - (i + 0.5) * seg) / seg, 0, 1)
         for k, semi in enumerate(ch):
-            f = root * (2 ** (semi / 12.0)) * (2 if k > 1 else 1)
+            f = root * (2 ** (semi / 12.0)) * (4 if k > 1 else 2)
             mix += (0.115 - 0.02 * k) * w * voice(t, f, 0.3 * k, timbre)
 
     # the machine hum: filtered noise, swelling on the bar
-    mix += (0.085 if bright else 0.11) * air(t, noise_cut, seed) * \
+    mix += (0.115 if bright else 0.14) * air(t, noise_cut, seed) * \
         (0.55 + 0.45 * adsr_pulse(t, bar, 0.30, 1.1))
 
-    # the pulse: a SUB swell on every beat. Amplitude only, no attack.
-    mix += 0.20 * voice(t, root * 0.5, 0, "sine") * adsr_pulse(t, beat, 0.26, 0.55)
+    # the pulse: a swell on every beat, at the ROOT rather than an octave below.
+    # Amplitude only, no attack -- the transient-free rule is unchanged.
+    mix += 0.13 * voice(t, root, 0, "sine") * adsr_pulse(t, beat, 0.26, 0.55)
 
     # a slow high shimmer so the bed is not all bottom
-    mix += 0.035 * voice(t, root * 6, 0.7, "sine") * (0.5 + 0.5 * np.sin(2 * np.pi * t / 11.0))
+    mix += 0.070 * voice(t, root * 6, 0.7, "sine") * (0.5 + 0.5 * np.sin(2 * np.pi * t / 11.0))
 
     fade = int(SR * 1.6)
     mix[-fade:] *= np.linspace(1, 0, fade)      # the ONLY fade, and it is the tail
@@ -113,18 +125,18 @@ def main():
     out = sys.argv[1] if len(sys.argv) > 1 else "video/public"
     os.makedirs(out, exist_ok=True)
     print("gen_bay_bed · three beds, three keys, three tempos")
-    # BAY   — D minor, 84 bpm, warm saw pad over a deep drone
+    # BAY   — D minor (an octave up from v1), 84 bpm, warm saw pad
     write(os.path.join(out, "114_smart_bed.wav"),
-          build(73.42, [[0, 7, 15], [-2, 5, 12], [3, 10, 15], [-4, 3, 12]],
-                84, "saw", 900, 11, False))
-    # AMBER — F minor, 92 bpm, brighter triangle pad, more air
+          build(146.83, [[0, 7, 15], [-2, 5, 12], [3, 10, 15], [-4, 3, 12]],
+                84, "saw", 2600, 11, False))
+    # AMBER — F minor (octave up), 92 bpm, brighter triangle pad, more air
     write(os.path.join(out, "114_smart_bed_amber.wav"),
-          build(87.31, [[0, 7, 12], [5, 12, 17], [-3, 4, 12], [2, 9, 14]],
-                92, "tri", 1500, 23, True))
-    # STEEL — A minor, 76 bpm, colder and slower, sine pad, low hum
+          build(174.61, [[0, 7, 12], [5, 12, 17], [-3, 4, 12], [2, 9, 14]],
+                92, "tri", 3400, 23, True))
+    # STEEL — C minor (was A at 55 Hz, the worst offender), 76 bpm, sine pad
     write(os.path.join(out, "114_smart_bed_steel.wav"),
-          build(55.00, [[0, 7, 14], [-5, 2, 9], [3, 10, 17], [-2, 5, 12]],
-                76, "sine", 520, 37, False))
+          build(130.81, [[0, 7, 14], [-5, 2, 9], [3, 10, 17], [-2, 5, 12]],
+                76, "sine", 2100, 37, False))
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ import { AbsoluteFill, Audio, Composition, registerRoot, staticFile, useCurrentF
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
 import { CamCtx } from "./GoWorld";
 import { CAM, GRADE } from "./GoScenes";
-import { HookCounter, HookBurial, HookCrank, HOOK_LEN } from "./GoHooks";
+import { HookGauge, HookShutter, HookLine, HOOK_LEN } from "./GoHooks";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
 import words from "./data/words_113go.json";
 
@@ -23,78 +23,38 @@ const S = (fr: number) => fr / 30;
     (THE-OPEN: frame 0 is the interrupt). Every cue is from the measured-clean
     16-bit house set — no chiptune, no named air. */
 const BANKS: Record<string, Cue[]> = {
-  counter: [
-    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
+  gauge: [
+    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 2.7 },
     { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
-    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
-    { at: S(10), src: "chair_knock.wav", v: LEVELS.SFX_TEXTURE, dur: 0.32 },
-    { at: S(22), src: "impact.wav", v: LEVELS.SFX_HERO, dur: 0.66, rate: 1.02 },
-    { at: S(48), src: "impact.wav", v: LEVELS.SFX_HERO, dur: 0.66, rate: 0.94 },
-    { at: S(74), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.86 },
-    { at: S(82), src: "thock.wav", v: LEVELS.SFX_MID, dur: 0.20 },
+    { at: S(0), src: "machine_bed.wav", v: LEVELS.SFX_BED, dur: 2.7 },
+    { at: S(14), src: "impact.wav", v: LEVELS.SFX_MID, dur: 0.66, rate: 1.04 },
+    { at: S(38), src: "impact.wav", v: LEVELS.SFX_MID, dur: 0.66, rate: 0.96 },
+    { at: S(60), src: "impact.wav", v: LEVELS.SFX_MID, dur: 0.66, rate: 0.88 },
+    { at: S(78), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.78 },
+    { at: S(78), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45, rate: 0.84 },
+    { at: S(82), src: "line_dead.wav", v: LEVELS.SFX_MID, dur: 0.74 },
   ],
-  burial: [
-    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
+  shutter: [
+    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 2.7 },
     { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
-    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
-    { at: S(6), src: "gear_shift.wav", v: LEVELS.SFX_MID, dur: 0.12 },
-    { at: S(12), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94, rate: 1.1 },
-    { at: S(30), src: "rebuild_thud.wav", v: LEVELS.SFX_MID, dur: 0.85, rate: 1.00 },
-    { at: S(40), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94, rate: 0.98 },
-    { at: S(56), src: "rebuild_thud.wav", v: LEVELS.SFX_MID, dur: 0.85, rate: 0.90 },
-    { at: S(70), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94, rate: 0.88 },
-    { at: S(86), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.80 },
+    { at: S(0), src: "machine_bed.wav", v: LEVELS.SFX_BED, dur: 2.7 },
+    { at: S(14), src: "scan_beep.wav", v: LEVELS.SFX_MID, dur: 0.42 },
+    { at: S(18), src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.54, rate: 1.2 },
+    { at: S(27), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.74 },
+    { at: S(27), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45, rate: 0.80 },
+    { at: S(33), src: "key.wav", v: LEVELS.SFX_MID, dur: 0.06 },
+    { at: S(40), src: "mech_clank.wav", v: LEVELS.SFX_MID, dur: 0.15 },
+    { at: S(62), src: "mech_clank.wav", v: LEVELS.SFX_MID, dur: 0.15, rate: 0.9 },
   ],
-  crank: [
-    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
+  line: [
+    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 2.7 },
     { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
-    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
-    { at: S(8), src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.54 },
-    { at: S(22), src: "impact.wav", v: LEVELS.SFX_HERO, dur: 0.66, rate: 1.04 },
-    { at: S(34), src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.54, rate: 1.1 },
-    { at: S(46), src: "impact.wav", v: LEVELS.SFX_HERO, dur: 0.66, rate: 0.96 },
-    { at: S(58), src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.54, rate: 1.2 },
-    { at: S(70), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.86 },
-  ],
-  tower: [
-    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
-    { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
-    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
-    { at: S(6), src: "mech_clank.wav", v: LEVELS.SFX_MID, dur: 0.15 },
-    { at: S(18), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.96 },
-    { at: S(44), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.88 },
-    { at: S(70), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.80 },
-    { at: S(72), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94 },
-  ],
-  throat: [
-    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
-    { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
-    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
-    { at: S(18), src: "slate_whump.wav", v: LEVELS.SFX_MID, dur: 0.20 },
-    { at: S(18), src: "bell_ring.wav", v: LEVELS.SFX_MID, dur: 1.20, rate: 0.94 },
-    { at: S(42), src: "bell_ring.wav", v: LEVELS.SFX_MID, dur: 1.20, rate: 1.02 },
-    { at: S(66), src: "bell_ring.wav", v: LEVELS.SFX_MID, dur: 1.20, rate: 1.10 },
-    { at: S(88), src: "bell_ring.wav", v: LEVELS.SFX_HERO, dur: 1.65, rate: 1.18 },
-  ],
-  weigh: [
-    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
-    { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
-    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
-    { at: S(16), src: "impact.wav", v: LEVELS.SFX_MID, dur: 0.66, rate: 1.06 },
-    { at: S(36), src: "impact.wav", v: LEVELS.SFX_MID, dur: 0.66, rate: 0.98 },
-    { at: S(56), src: "impact.wav", v: LEVELS.SFX_MID, dur: 0.66, rate: 0.90 },
-    { at: S(76), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.80 },
-    { at: S(76), src: "boom.wav", v: LEVELS.SFX_HERO, dur: 0.58, rate: 0.84 },
-  ],
-  giant: [
-    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
-    { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
-    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
-    { at: S(10), src: "gear_shift.wav", v: LEVELS.SFX_MID, dur: 0.12 },
-    { at: S(22), src: "rebuild_thud.wav", v: LEVELS.SFX_MID, dur: 0.85, rate: 1.00 },
-    { at: S(48), src: "rebuild_thud.wav", v: LEVELS.SFX_MID, dur: 0.85, rate: 0.92 },
-    { at: S(74), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.84 },
-    { at: S(76), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94 },
+    { at: S(0), src: "deep_engine.wav", v: LEVELS.SFX_BED, dur: 2.4 },
+    { at: S(30), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.80 },
+    { at: S(30), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94 },
+    { at: S(38), src: "chair_knock.wav", v: LEVELS.SFX_MID, dur: 0.32 },
+    { at: S(58), src: "chair_knock.wav", v: LEVELS.SFX_MID, dur: 0.32, rate: 0.92 },
+    { at: S(76), src: "slate_whump.wav", v: LEVELS.SFX_HERO, dur: 0.20, rate: 0.88 },
   ],
 };
 
@@ -122,9 +82,9 @@ const wrap = (Body: React.FC, key: string): React.FC => () => {
 };
 
 const Root: React.FC = () => (<>
-  <Composition id="hook-1-counter" component={wrap(HookCounter, "counter")} durationInFrames={HOOK_LEN} {...V} />
-  <Composition id="hook-2-burial"  component={wrap(HookBurial, "burial")}   durationInFrames={HOOK_LEN} {...V} />
-  <Composition id="hook-3-crank"   component={wrap(HookCrank, "crank")}     durationInFrames={HOOK_LEN} {...V} />
+  <Composition id="hook-1-gauge"   component={wrap(HookGauge, "gauge")}     durationInFrames={HOOK_LEN} {...V} />
+  <Composition id="hook-2-shutter" component={wrap(HookShutter, "shutter")} durationInFrames={HOOK_LEN} {...V} />
+  <Composition id="hook-3-line"    component={wrap(HookLine, "line")}       durationInFrames={HOOK_LEN} {...V} />
 </>);
 
 registerRoot(Root);

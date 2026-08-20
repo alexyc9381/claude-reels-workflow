@@ -23,7 +23,20 @@ import { SetFor, Stanchion, Flood, placeFor } from "./GoSets";
        maybe doesn't have to be the whole screen, but it should also be
        interesting components"*
 
-   THE FOUR RULES THAT FOLLOW, AND EVERY CONCEPT BELOW IS BUILT TO ALL FOUR:
+   ⛔⛔ AND ROUND 2's MISS, WHICH IS THE ONE THAT MATTERS MOST:
+     *"these dont represent hitting a Claude limit"*
+   Round 2 drew the WASTE — scrap, retries, a Claude buried in its own rejects —
+   and the VO's line is *"the people who never hit their Claude limit"*. The
+   dread is not "I made a mess", it is **I RAN OUT, MID-TASK**. THE-OPEN law 3:
+   the strongest interrupt is the viewer seeing a thing they personally DREAD,
+   recognised in under a second with no narration. So every concept below is
+   built around a LIMIT as a physical mechanism — a supply that empties, a
+   shutter that comes down, a line that will not move — with the waste kept on
+   screen as the CAUSE, because that is what the rest of the reel then fixes.
+   ⛔ And not as a UI screenshot: Alex has killed a text/UI open three times
+   (reels 68, 85, 86 — *"object scenes not UI"*). It is drawn as objects.
+
+   THE FOUR RULES FROM ROUND 2, STILL BINDING ON ALL THREE:
    1. ⭐ THE CLAUDE IS THE FOCAL POINT. Not a bystander at the edge (round 1's
       A/B/C) and not a wall filling the frame (round 1's D at 620px). ~300-340px
       on a 1012 panel: it owns the shot and still has a world around it.
@@ -112,320 +125,109 @@ const Bay: React.FC<{ p: any; top?: number; h?: number; l?: number; r?: number }
   ))}
 </>);
 
-/* =========================================================================
-   1 · THE COUNTER — the EXCHANGE.
-   A Claude behind a service counter, dead centre, owning the shot. You slide a
-   scribbled note across. It reads it, turns, and puts a BENT part down in front
-   of you. Then again. Then again. Three wrong parts end up in a row on the
-   counter where you can count them, and the Claude shrugs at the third.
-
-   Why this answers the note: the input, the worker and the output are all in
-   one frame at all times, so there is nothing to work out. Nothing leaves the
-   screen. The Claude is the focal point and it is SERVING, not standing.
-   ====================================================================== */
-export const HookCounter: React.FC = () => {
-  const f = useCurrentFrame();
-  const p = placeFor("counter");
-  const SLIDE = [0, 26, 52], TAKE = SLIDE.map(k => k + 10);
-  const PUT = [22, 48, 74];
-  const n = PUT.filter(k => f >= k).length;
-  const last = PUT.filter(k => f >= k).slice(-1)[0];
-  const sh = PUT.reduce((a, k) => { const s = shake(f, k, 7, 8); return { x: a.x + s.x, y: a.y + s.y }; }, { x: 0, y: 0 });
-  /* it ducks under the counter to fetch, and comes back up with the part */
-  /* ⭐ AN ACTION IS A DISTANCE (§11): a 54px dip read as a nod. It now drops
-     186px — most of its own height — so it clearly goes UNDER the counter to
-     fetch and comes back up with the part. */
-  const duck = PUT.reduce((a, k) => a + (f >= k - 14 && f < k + 2
-    ? E(f, k - 14, k - 7, 0, 186, IO) - E(f, k - 7, k + 2, 0, 186, IO) : 0), 0);
-  const CY = 618;
-  return (
-    <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.05]} vig={0.30}>
-      <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="counter" f={f} lit={1.9} t={f * 0.3} rakeRate={3.4} />
-        <Bay p={p} top={96} h={470} l={46} r={46} />
-        <Pool x={506} y={CY - 110} w={1300} c={p.key} o={1.0} z={19} h={480} />
-
-        {/* the shop working behind it — the background process every shot needs */}
-        <Belt x={-70} y={392} w={1160} f={f} rate={7.6} z={24}
-          carry={[{ o: 0.12, s: 0.72, wrong: true }, { o: 0.48, s: 0.72, wrong: true },
-                  { o: 0.82, s: 0.72, wrong: true }]} />
-
-        {/* the racks behind it, so the Claude is standing in a WORKPLACE */}
-        {[168, 848].map((rx, i) => (
-          <div key={"rk" + i} style={{ position: "absolute", left: rx - 96, top: 190, width: 192,
-            height: 330, zIndex: 22, borderRadius: 6,
-            background: `linear-gradient(168deg, ${mxh("#6E5A44", 0.34)} 0%, ${dkh("#6E5A44", 0.14)} 100%)`,
-            border: `5px solid ${dkh("#6E5A44", 0.40)}` }}>
-            {[0.16, 0.42, 0.68].map((k, j) => (
-              <div key={"sh" + j} style={{ position: "absolute", left: 12, right: 12,
-                top: `${k * 100}%`, height: 10, background: mxh("#6E5A44", 0.44) }} />
-            ))}
-            {[0, 1, 2].map(j => (
-              <Part key={"rp" + j} x={96} y={72 + j * 88} s={0.62} z={4} kind={(i + j) % 4}
-                c={STEEL} rot={-6 + j * 5} />
-            ))}
-          </div>
-        ))}
-
-        {/* ⭐ THE FOCAL POINT — 330px, dead centre, behind the counter */}
-        <Hero f={f} x={506} y={CY + 14} size={330} z={50} bob={duck}
-          gaze={f >= 16 && f < 22 ? 0.9 : 0}
-          shock={last !== undefined && f >= last && f < last + 10 ? 0.5 : 0}
-          stern={n >= 2 ? 0.7 : 0} xeyes={n >= 3 ? 0.6 : 0}
-          cheer={n >= 3 && f >= 82 ? 1 : 0} />
-
-        {/* the counter itself, cropped by the panel's bottom edge */}
-        <div style={{ position: "absolute", left: -60, right: -60, top: CY, height: 320, zIndex: 62,
-          background: `linear-gradient(180deg, ${mxh("#6E5A46", 0.54)} 0%, ${dkh("#6E5A46", 0.18)} 100%)` }} />
-        <div style={{ position: "absolute", left: -60, right: -60, top: CY - 16, height: 22, zIndex: 63,
-          borderRadius: 5, background: mxh("#6E5A46", 0.68) }} />
-        {Array.from({ length: 5 }, (_, i) => (
-          <div key={"cp" + i} style={{ position: "absolute", left: 30 + i * 210, top: CY + 46,
-            width: 176, height: 120, zIndex: 64, borderRadius: 5,
-            border: `4px solid ${dkh("#6E5A46", 0.10)}`, background: mxh("#6E5A46", 0.30) }} />
-        ))}
-
-        {/* THE INPUT — a note slides in from the viewer's side, three times */}
-        {SLIDE.map((k, i) => {
-          const t = E(f, k, TAKE[i], 0, 1, OUT);
-          if (f < k || f > TAKE[i] + 2) return null;
-          return <Slip key={"in" + i} x={506} y={790 - t * 218} w={138} rot={-8 + t * 6} z={70} />;
-        })}
-
-        {/* THE OUTPUT — a BENT part put down on the counter, and it STAYS there */}
-        {PUT.map((k, i) => {
-          if (f < k) return null;
-          const drop = E(f, k, k + 8, -300, 0, IN_Q);
-          return (<React.Fragment key={"out" + i}>
-            <Part x={252 + i * 254} y={CY - 54 + drop} s={1.28} wrong kind={i} c={OXIDE}
-              z={68} rot={-10 + i * 7} />
-            <Ring x={252 + i * 254} y={CY - 26} f={f} at={k + 7} r={190} c={p.key} z={69} />
-            <Puff x={252 + i * 254} y={CY - 22} f={f} at={k + 7} n={9} s={0.9} z={69} />
-          </React.Fragment>);
-        })}
-
-        <MarkCast x={880} y={188} s={120} z={72} f={f} spin={0.55} o={0.90} />
-      </div>
-    </Scene>
-  );
-};
 
 /* =========================================================================
-   2 · THE BURIAL — the OVERWHELM.
-   A Claude dead centre, holding one small scribbled note up over its head. A
-   chute tips above it and the wrong parts rain down and PILE UP around it,
-   burying it to the chest, then the shoulders, then the eyes — and it is still
-   holding the note up.
+   1 · THE GAUGE — the SUPPLY RUNS OUT, AND THE SCRAP IS WHAT DRAINED IT.
+   A Claude working its machine, and beside it a colossal gauge. Every wrong
+   part that clatters out knocks the needle down a step: full, half, into the
+   red, EMPTY. On empty the machine's lamp dies, the hum stops and the Claude
+   slumps with its eyes crossed, still holding the note it was given.
 
-   Why this answers the note: the whole story is one sentence you can read in
-   half a second, the Claude is the subject the entire time, and every part that
-   falls STAYS in frame and stacks where you can see the cost growing.
+   ⭐ This is the only one of the three that shows the limit AND its cause in
+   one frame: the tray fills with retries on the left while the needle falls on
+   the right, so the sentence the picture makes is *the retries did this*, which
+   is exactly what the rest of the reel goes on to fix.
    ====================================================================== */
-export const HookBurial: React.FC = () => {
-  const f = useCurrentFrame();
-  const p = placeFor("scrap");
-  const TIP = 6;
-  /* the pile height is the whole story, so it is one legible ramp with three
-     stepped surges rather than a smooth fill */
-  const fill = E(f, 12, 30, 0, 0.34, OUT) + E(f, 34, 56, 0, 0.33, OUT) + E(f, 60, 86, 0, 0.33, OUT);
-  /* ⛔ the pile top, in PANEL PIXELS, clamped at the hero's eye line so the
-     subject is buried TO the eyes and never past them */
-  const TOP = 690 - fill * 220;   /* 690 (feet) -> 470 (eyes) */
-  const CX = 506, GY = 640;
-  const sh = [30, 56, 86].reduce((a, k) => { const s = shake(f, k, 6, 8); return { x: a.x + s.x, y: a.y + s.y }; }, { x: 0, y: 0 });
-  return (
-    <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.05]} vig={0.30}>
-      <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="scrap" f={f} lit={1.05} t={f * 0.4} rakeRate={4.0} />
-        <Bay p={p} top={130} h={400} l={92} r={92} />
-        <Pool x={CX} y={GY + 60} w={1160} c={p.key} o={0.86} z={19} h={320} />
-
-        {/* THE CHUTE above, tipping — the source, so the rain has somewhere to
-            come FROM (ANIMATION-QUALITY §10: a hand-off needs a source) */}
-        <div style={{ position: "absolute", left: 316, top: -30, width: 380, height: 150, zIndex: 30,
-          borderRadius: "0 0 26px 26px", transformOrigin: "50% 0%",
-          transform: `rotate(${E(f, TIP, TIP + 10, 0, 7, OUT)}deg)`,
-          background: `linear-gradient(180deg, ${mxh("#5E5A52", 0.24)} 0%, ${dkh("#5E5A52", 0.40)} 100%)`,
-          border: `7px solid ${dkh("#5E5A52", 0.54)}` }}>
-          {[0.22, 0.5, 0.78].map((k, i) => (
-            <div key={"cr" + i} style={{ position: "absolute", left: `${k * 100}%`, top: 10,
-              width: 12, bottom: 16, background: dkh("#5E5A52", 0.22) }} />
-          ))}
-        </div>
-
-        {/* ⭐ THE FOCAL POINT — 336px, centre, holding the note UP the whole time */}
-        <Hero f={f} x={CX} y={GY} size={336} z={53}
-          cheer={1}
-          shock={f >= 26 && f < 40 ? 0.55 : 0}
-          stern={fill > 0.34 && fill <= 0.66 ? 0.8 : 0}
-          xeyes={fill > 0.66 ? 0.9 : 0} />
-        {/* the note it is still holding up, above the head, above the pile */}
-        <Slip x={CX + 4} y={GY - 356} w={132} rot={-7 + Math.sin(f / 13) * 3} z={88} />
-
-        {/* THE RAIN — parts falling continuously from the chute onto the pile */}
-        {Array.from({ length: 22 }, (_, i) => {
-          const at = TIP + 4 + i * 3.4;
-          const t = E(f, at, at + 15, 0, 1, IN_Q);
-          if (f < at || t >= 1) return null;
-          const tx = CX + (rnd(i, 3) - 0.5) * 420;
-          return <Part key={"rn" + i} x={316 + (tx - 316) * t} y={110 + t * (GY - 190)}
-            s={0.98 + rnd(i, 7) * 0.4} wrong kind={i % 4} c={i % 3 ? OXIDE : STEEL}
-            z={70} rot={t * 340} />;
-        })}
-
-        {/* THE PILE — it rises AROUND the hero and is drawn in FRONT of it, so
-            the Claude is progressively buried rather than standing behind junk */}
-        {/* the mass of the pile, whose top edge IS the story */}
-        <div style={{ position: "absolute", left: -80, right: -80, top: TOP + 40, bottom: -40,
-          zIndex: 52, borderRadius: "42% 42% 0 0",
-          background: `linear-gradient(180deg, ${mxh(OXIDE, 0.16)} 0%, ${dkh(OXIDE, 0.44)} 100%)` }} />
-        {/* the parts lying ON its surface, following the top edge so the pile
-            reads as made OF them rather than as a shape with junk in front */}
-        {Array.from({ length: 26 }, (_, i) => {
-          const u = (i % 13) / 12;                        /* across the pile */
-          const band = Math.floor(i / 13);                /* two rows deep    */
-          const px = 40 + u * 932;
-          /* the surface is an arc: highest at the middle, falling to the sides */
-          const surf = TOP + 74 + Math.pow(Math.abs(u - 0.5) * 2, 1.7) * 150 + band * 62;
-          if (surf > 800) return null;
-          return <Part key={"pl" + i} x={px} y={surf} s={1.05 + rnd(i, 5) * 0.32}
-            wrong={i % 4 !== 0} kind={i % 4} c={i % 3 === 0 ? STEEL : OXIDE}
-            z={54 + band * 2 + (i % 3)} rot={-34 + rnd(i, 9) * 68} lit={0.9 + band * 0.2} />;
-        })}
-        {/* the pile's near rim, cropped by the bottom of the panel */}
-        <div style={{ position: "absolute", left: -80, right: -80, top: 706, height: 200,
-          zIndex: 76, borderRadius: "38% 38% 0 0",
-          background: `linear-gradient(180deg, ${dkh(OXIDE, 0.30)} 0%, ${dkh(OXIDE, 0.60)} 100%)` }} />
-
-        {[30, 56, 86].map((k, i) => (<React.Fragment key={"br" + i}>
-          <Puff x={CX} y={TOP + 60} f={f} at={k} n={13} s={1.3} z={80} />
-          <Ring x={CX} y={TOP + 56} f={f} at={k} r={230} c={p.key} z={79} />
-        </React.Fragment>))}
-
-        <MarkCast x={874} y={196} s={118} z={88} f={f} spin={0.55} o={0.88} />
-      </div>
-    </Scene>
-  );
-};
-
-/* =========================================================================
-   3 · THE CRANK — the LOOP.
-   A Claude working a hand press, centre-left, at readable size. It feeds the
-   scribbled note in, throws its weight onto the wheel, and a BENT part clatters
-   out into the tray beside it. It does it again, faster. And again, faster
-   still, steam coming off its head. Three bent parts in the tray by the end.
-
-   Why this answers the note: it is the clearest input -> operation -> output
-   loop of the three, the machine gives the Claude something to physically DO,
-   and the tray is the counter — the cost is a thing you can see mounting.
-   ⭐ ANIMATION-QUALITY §11: EFFORT wants an EMITTER on the STILLEST part of the
-   hero, so the steam comes off its head while its arms do the work.
-   ====================================================================== */
-export const HookCrank: React.FC = () => {
+export const HookGauge: React.FC = () => {
   const f = useCurrentFrame();
   const p = placeFor("press");
-  const FEED = [2, 30, 56], PULL = [8, 34, 58], OUT_ = [22, 46, 70];
+  const OUT_ = [14, 38, 60], DEAD = 78;
   const n = OUT_.filter(k => f >= k).length;
-  const sh = OUT_.reduce((a, k) => { const s = shake(f, k, 13, 11); return { x: a.x + s.x, y: a.y + s.y }; }, { x: 0, y: 0 });
-  /* the wheel spins while it cranks, and each round is FASTER than the last */
-  const speed = [0, 13, 19, 27][n] || 27;
-  const spin = PULL.reduce((a, k, i) => a + (f >= k ? Math.min(f - k, 20) * (13 + i * 7) : 0), 0);
-  /* it throws its weight onto the wheel: a real lean, not a wobble */
-  const lean = PULL.reduce((a, k) => a + (f >= k && f < k + 16
-    ? E(f, k, k + 5, 0, 13, OUT) - E(f, k + 5, k + 16, 0, 13, IO) : 0), 0);
-  const GY = 636, WX = 636;
+  const dead = f >= DEAD;
+  /* the needle falls in STEPS, one per wrong part, then slams to empty */
+  const steps = [0, 0.30, 0.58, 0.82, 1];
+  const idx = dead ? 4 : n;
+  const at = dead ? DEAD : (OUT_[n - 1] ?? -99);
+  const swing = idx === 0 ? 0 : E(f, at, at + 7, steps[idx - 1] * 150, steps[idx] * 150, OUT)
+    + (idx > 0 ? rock(f, at + 7, 5.5, 15) : 0);
+  const sh = [...OUT_, DEAD].reduce((a, k) => {
+    const s = shake(f, k, k === DEAD ? 15 : 8, k === DEAD ? 12 : 8); return { x: a.x + s.x, y: a.y + s.y };
+  }, { x: 0, y: 0 });
+  const GY = 640, GX = 700;
   return (
-    <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.06]} vig={0.16}>
+    <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.05]} vig={0.18}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="press" f={f} lit={2.0} t={f * 0.42} rakeRate={4.2} />
-        <Bay p={p} top={88} h={500} l={40} r={40} />
-        {/* the lit working apron in front of the press — the floor is the last
-            dark band in this frame and it is also where the light would land */}
-        <div style={{ position: "absolute", left: -60, right: -60, top: 560, height: 260, zIndex: 18,
-          background: `linear-gradient(180deg, ${mxh(p.floor, 0.76)} 0%, ${mxh(p.floor, 0.46)} 100%)` }} />
-        <div style={{ position: "absolute", left: -60, right: -60, top: 554, height: 12, zIndex: 19,
+        <SetFor k="press" f={f} lit={dead ? 1.5 : 2.0} t={f * 0.42} rakeRate={4.2} />
+        <Bay p={p} top={88} h={470} l={40} r={40} />
+        {/* the lit working apron — the floor is otherwise the darkest band */}
+        <div style={{ position: "absolute", left: -60, right: -60, top: 552, height: 270, zIndex: 18,
+          background: `linear-gradient(180deg, ${mxh(p.floor, 0.74)} 0%, ${mxh(p.floor, 0.42)} 100%)` }} />
+        <div style={{ position: "absolute", left: -60, right: -60, top: 546, height: 12, zIndex: 19,
           background: mxh(p.lip, 0.44) }} />
-        <Pool x={506} y={GY - 50} w={1340} c={p.key} o={1.0} z={19} h={580} />
+        <Belt x={-70} y={312} w={1160} f={f} rate={dead ? 0 : 8.0} z={22}
+          carry={[{ o: 0.22, s: 0.64 }, { o: 0.7, s: 0.64 }]} />
 
-        {/* THE PRESS — the interesting component. A body, a slot the note goes
-            into, a spoked wheel the Claude turns, and a spout the part falls out of. */}
-        <div style={{ position: "absolute", left: 300, top: 268, width: 286, height: 382, zIndex: 34,
+        {/* the machine the Claude is working */}
+        <div style={{ position: "absolute", left: 128, top: 300, width: 250, height: 330, zIndex: 34,
           borderRadius: 10,
           background: `linear-gradient(166deg, ${mxh("#7C818C", 0.30)} 0%, ${dkh("#7C818C", 0.34)} 100%)`,
-          border: `8px solid ${dkh("#7C818C", 0.52)}` }}>
-          {/* the feed slot */}
-          <div style={{ position: "absolute", left: 44, top: 40, width: 200, height: 34,
+          border: `8px solid ${dkh("#7C818C", 0.50)}` }}>
+          <div style={{ position: "absolute", left: 34, top: 34, width: 174, height: 30,
             borderRadius: 5, background: "#17140F" }} />
-          {/* a louvred vent and a gauge, so it is a MACHINE and not a box */}
-          <div style={{ position: "absolute", left: 40, top: 110, width: 116, height: 92,
-            borderRadius: 5, overflow: "hidden", background: dkh("#7C818C", 0.46) }}>
-            {[0, 1, 2, 3].map(i => (
-              <div key={"lv" + i} style={{ position: "absolute", left: 0, right: 0, top: 8 + i * 22,
-                height: 10, background: mxh("#7C818C", 0.30) }} />
-            ))}
-          </div>
-          <div style={{ position: "absolute", left: 178, top: 120, width: 72, height: 72,
-            borderRadius: "50%", background: CREAMB, border: `6px solid ${dkh("#7C818C", 0.44)}` }}>
-            <div style={{ position: "absolute", left: "46%", top: "12%", width: 5, height: "42%",
-              background: RED, transformOrigin: "50% 100%",
-              transform: `rotate(${40 + n * 42 + Math.sin(f / 4) * 9}deg)` }} />
-          </div>
-          {/* ⭐ THE RAM — the press has to visibly DO something, or the Claude is
-              turning a wheel attached to a cupboard. It slams on every cycle. */}
-          <div style={{ position: "absolute", left: 40, top: 96 + OUT_.reduce((a, k) => a +
-            (f >= k - 12 && f < k + 10 ? E(f, k - 12, k - 2, 0, 150, IN_Q) - E(f, k - 2, k + 10, 0, 150, OUT) : 0), 0),
-            width: 206, height: 92, borderRadius: 6, zIndex: 8,
-            background: `linear-gradient(180deg, ${dkh("#7C818C", 0.10)} 0%, ${dkh("#7C818C", 0.44)} 100%)`,
-            border: `6px solid ${dkh("#7C818C", 0.52)}` }} />
-
-          {/* the spout the wrong part comes out of */}
-          <div style={{ position: "absolute", left: 196, top: 300, width: 150, height: 74,
-            borderRadius: "0 0 18px 0", background: dkh("#7C818C", 0.28),
-            border: `6px solid ${dkh("#7C818C", 0.50)}` }} />
-        </div>
-
-        {/* THE WHEEL it turns */}
-        <div style={{ position: "absolute", left: WX - 130, top: 340, width: 260, height: 260,
-          zIndex: 40, borderRadius: "50%", transform: `rotate(${spin}deg)`,
-          background: `radial-gradient(circle, ${mxh(BRASS, 0.20)} 34%, ${dkh(BRASS, 0.30)} 36%, ${dkh(BRASS, 0.30)} 100%)`,
-          border: `10px solid ${dkh(BRASS, 0.44)}` }}>
-          {[0, 60, 120].map((a, i) => (
-            <div key={"sp" + i} style={{ position: "absolute", left: "50%", top: 12, width: 18,
-              height: 232, marginLeft: -9, background: mxh(BRASS, 0.10),
-              transformOrigin: "50% 50%", transform: `rotate(${a}deg)` }} />
+          {[0, 1, 2, 3].map(i => (
+            <div key={"lv" + i} style={{ position: "absolute", left: 32, right: 32, top: 96 + i * 26,
+              height: 11, borderRadius: 3, background: mxh("#7C818C", 0.20) }} />
           ))}
-          <div style={{ position: "absolute", left: "50%", top: "50%", width: 40, height: 40,
-            marginLeft: -20, marginTop: -20, borderRadius: "50%", background: dkh(BRASS, 0.42) }} />
+          {/* ⭐ THE RUNNING LAMP — green while it has supply, dead red after */}
+          <div style={{ position: "absolute", left: 92, top: 232, width: 62, height: 62,
+            borderRadius: "50%", border: `7px solid ${dkh("#7C818C", 0.48)}`,
+            background: dead ? dkh(RED, 0.34) : mxh("#3F9E74", 0.30 + Math.sin(f / 5) * 0.14) }} />
         </div>
 
-        {/* ⭐ THE FOCAL POINT — 316px, and it is WORKING the wheel */}
-        <Hero f={f} x={790} y={GY} size={330} z={50} flip lean={-lean}
-          shock={OUT_.some(k => f >= k && f < k + 9) ? 0.5 : 0}
-          stern={n >= 1 && n < 3 ? 0.7 : 0} xeyes={n >= 3 ? 0.85 : 0} />
+        {/* ⭐⭐ THE LIMIT, AS AN OBJECT — a colossal gauge on a stand. Red zone
+            on the left, graduations, and a needle that falls a step per retry.
+            No words: a dial is read by where the needle IS. */}
+        <div style={{ position: "absolute", left: GX - 32, top: 400, width: 64, height: 300,
+          zIndex: 36, background: `linear-gradient(94deg, ${mxh("#4A423A", 0.20)} 0%, ${dkh("#4A423A", 0.42)} 100%)` }} />
+        <div style={{ position: "absolute", left: GX - 208, top: 122, width: 416, height: 416,
+          zIndex: 40, borderRadius: "50%",
+          background: `linear-gradient(160deg, ${mxh(BRASS, 0.28)} 0%, ${dkh(BRASS, 0.40)} 100%)`,
+          border: `16px solid ${dkh(BRASS, 0.46)}` }}>
+          <div style={{ position: "absolute", inset: 26, borderRadius: "50%", background: CREAMB,
+            border: `6px solid ${dkh(CREAMB, 0.26)}` }} />
+          {/* the RED ZONE, drawn as a swept sector at the empty end */}
+          <div style={{ position: "absolute", inset: 34, borderRadius: "50%", overflow: "hidden" }}>
+            <div style={{ position: "absolute", left: 0, top: "50%", width: "50%", height: "50%",
+              transformOrigin: "100% 0%", transform: "rotate(-38deg)",
+              background: hexa(RED, dead ? 0.62 + Math.sin(f / 3) * 0.24 : 0.30) }} />
+          </div>
+          {/* graduations */}
+          {Array.from({ length: 11 }, (_, i) => (
+            <div key={"gd" + i} style={{ position: "absolute", left: "50%", top: 44,
+              width: i % 5 === 0 ? 12 : 6, marginLeft: i % 5 === 0 ? -6 : -3,
+              height: i % 5 === 0 ? 40 : 24, background: hexa(INK, i % 5 === 0 ? 0.74 : 0.42),
+              transformOrigin: `50% ${166}px`, transform: `rotate(${-75 + i * 15}deg)` }} />
+          ))}
+          {/* the needle, and it falls in STEPS */}
+          <div style={{ position: "absolute", left: "50%", top: "50%", width: 16, height: 152,
+            marginLeft: -8, borderRadius: 8, background: dead ? RED : CLAYD,
+            transformOrigin: "50% 100%", transform: `translateY(-100%) rotate(${75 - swing}deg)` }} />
+          <div style={{ position: "absolute", left: "50%", top: "50%", width: 52, height: 52,
+            marginLeft: -26, marginTop: -26, borderRadius: "50%", background: dkh(BRASS, 0.30),
+            border: `6px solid ${dkh(BRASS, 0.48)}` }} />
+        </div>
 
-        {/* ⭐ EFFORT IS AN EMITTER ON THE STILLEST PART — steam off its head
-            while the arms do the work. It gets heavier every round. */}
-        {n >= 1 && Array.from({ length: 7 }, (_, i) => {
-          const t = ((f * 2.4 + i * 17) % 60) / 60;
-          return (<div key={"st" + i} style={{ position: "absolute",
-            left: 766 + Math.sin(f / 7 + i) * 26 + i * 5, top: GY - 344 - t * 150,
-            width: 20 + t * 30, height: 20 + t * 30, borderRadius: "50%", zIndex: 54,
-            background: "#F4EDE0", opacity: Math.max(0, (0.20 + n * 0.10) * (1 - t)) }} />);
-        })}
+        {/* ⭐ THE FOCAL POINT — 330px, working, and it POWERS DOWN on empty */}
+        <Hero f={f} x={432} y={GY} size={330} z={50}
+          lean={dead ? E(f, DEAD, DEAD + 10, 0, 15, OUT) : 0}
+          bob={dead ? E(f, DEAD, DEAD + 10, 0, 30, OUT) : 0}
+          shock={OUT_.some(k => f >= k && f < k + 8) ? 0.5 : 0}
+          stern={n >= 2 && !dead ? 0.8 : 0} xeyes={dead ? 1 : 0} />
+        {/* the note it was given, still in its hand */}
+        <Slip x={330} y={GY - 214} w={104} rot={-9 + Math.sin(f / 13) * 3} z={58} />
 
-        <Belt x={-70} y={318} w={1160} f={f} rate={8.2} z={22}
-          carry={[{ o: 0.2, s: 0.66 }, { o: 0.68, s: 0.66 }]} />
-
-        {/* THE INPUT — the note fed into the slot */}
-        {FEED.map((k, i) => {
-          const t = E(f, k, k + 8, 0, 1, IN_Q);
-          if (f < k || t >= 1) return null;
-          return <Slip key={"fd" + i} x={690 - t * 250} y={312 + t * 8} w={124}
-            rot={-10 + t * 10} z={60} o={1 - Math.max(0, (t - 0.8) * 5)} />;
-        })}
-
-        {/* THE OUTPUT — bent parts clattering into the tray, and STAYING there */}
-        <div style={{ position: "absolute", left: 108, top: GY - 46, width: 330, height: 96,
+        {/* THE CAUSE, kept on screen — the retries stacking in the tray */}
+        <div style={{ position: "absolute", left: 60, top: GY - 42, width: 300, height: 92,
           zIndex: 66, borderRadius: 8,
           background: `linear-gradient(180deg, ${mxh("#8A8074", 0.34)} 0%, ${dkh("#8A8074", 0.22)} 100%)`,
           border: `6px solid ${dkh("#8A8074", 0.44)}` }} />
@@ -433,14 +235,213 @@ export const HookCrank: React.FC = () => {
           if (f < k) return null;
           const t = E(f, k, k + 9, 0, 1, IN_Q);
           return (<React.Fragment key={"op" + i}>
-            <Part x={410 - t * 158 - i * 6} y={520 + t * (GY - 566) + i * 4} s={1.20}
-              wrong kind={i} c={OXIDE} z={68} rot={-t * 200 - i * 8} />
-            <Ring x={262} y={GY - 40} f={f} at={k + 9} r={170} c={p.key} z={70} />
-            <Puff x={262} y={GY - 34} f={f} at={k + 9} n={10} s={1.0} z={70} />
+            <Part x={256 - t * 96 - i * 66} y={470 + t * (GY - 512) + i * 3} s={1.14}
+              wrong kind={i} c={OXIDE} z={68} rot={-t * 190 - i * 8} />
+            <Ring x={160 - i * 66} y={GY - 36} f={f} at={k + 9} r={160} c={p.key} z={70} />
+            <Puff x={160 - i * 66} y={GY - 30} f={f} at={k + 9} n={9} s={0.9} z={70} />
           </React.Fragment>);
         })}
 
-        <MarkCast x={170} y={192} s={116} z={72} f={f} spin={0.55} o={0.88} />
+        {/* the whole shop dims the instant the supply is gone */}
+        {dead && (
+          <div style={{ position: "absolute", inset: 0, zIndex: 92, pointerEvents: "none",
+            background: hexa("#1A0E08", E(f, DEAD, DEAD + 8, 0, 0.20, OUT)) }} />
+        )}
+        <MarkCast x={906} y={664} s={110} z={72} f={f} spin={0.55} o={0.86} />
+      </div>
+    </Scene>
+  );
+};
+
+/* =========================================================================
+   2 · THE SHUTTER — CUT OFF, MID-TASK.
+   The purest form of the thing: a Claude at its bench, half way through a part,
+   and a heavy steel shutter comes down out of nowhere and stops in front of it.
+   It gets its hands on it, heaves, and it does not move. The unfinished part is
+   still on the bench on the wrong side of it.
+
+   ⭐ THE-OPEN's pattern-interrupt test wants something physically surprising by
+   frame 15-30. The shutter lands on frame 26 and takes two thirds of the panel
+   in nine frames, which is the biggest single event in anything built for this
+   hook.
+   ====================================================================== */
+export const HookShutter: React.FC = () => {
+  const f = useCurrentFrame();
+  const p = placeFor("press");
+  const GY = 648, SH_Y = 300;
+  const WARN = 14, DROP = 18, LAND = 27;
+  const down = E(f, DROP, LAND, -(SH_Y + 660), 0, IN_Q);
+  const landed = f >= LAND;
+  const bounce = landed ? rock(f, LAND, 11, 22) : 0;
+  const sh = shake(f, LAND, 20, 14);
+  /* it heaves at the shutter twice and it does not give */
+  const heave = [40, 62].reduce((a, k) => a + (f >= k && f < k + 16
+    ? E(f, k, k + 6, 0, 16, OUT) - E(f, k + 6, k + 16, 0, 16, IO) : 0), 0);
+
+  return (
+    <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.05]} vig={0.18}>
+      <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
+        <SetFor k="press" f={f} lit={2.0} t={f * 0.42} rakeRate={4.2} />
+        <Bay p={p} top={88} h={430} l={40} r={40} />
+        <div style={{ position: "absolute", left: -60, right: -60, top: 556, height: 270, zIndex: 18,
+          background: `linear-gradient(180deg, ${mxh(p.floor, 0.74)} 0%, ${mxh(p.floor, 0.42)} 100%)` }} />
+        <div style={{ position: "absolute", left: -60, right: -60, top: 550, height: 12, zIndex: 19,
+          background: mxh(p.lip, 0.44) }} />
+
+        {/* ⭐ THE FOCAL POINT — 336px, working, then hauling on the shutter */}
+        <Hero f={f} x={506} y={GY} size={336} z={76}
+          lean={-heave} bob={landed ? -heave * 0.8 : 0}
+          cheer={landed ? 1 : 0}
+          shock={f >= LAND && f < LAND + 14 ? 0.9 : 0}
+          stern={f >= LAND + 14 && f < 76 ? 0.9 : 0}
+          xeyes={f >= 76 ? 1 : 0} />
+
+        {/* the bench and the half-finished part it was working on */}
+        <div style={{ position: "absolute", left: 236, top: GY - 46, width: 540, height: 94,
+          zIndex: 60, borderRadius: 8,
+          background: `linear-gradient(180deg, ${mxh("#8A8074", 0.34)} 0%, ${dkh("#8A8074", 0.22)} 100%)`,
+          border: `6px solid ${dkh("#8A8074", 0.44)}` }} />
+        <Part x={300} y={GY - 74} s={1.16} kind={1} c={STEEL} z={62} rot={-6} />
+        <Slip x={742} y={GY - 82} w={112} rot={7} z={62} />
+
+        {/* the warning lamp, flashing just before it comes down */}
+        <div style={{ position: "absolute", left: 470, top: 172, width: 72, height: 72,
+          borderRadius: "50%", zIndex: 34,
+          border: `8px solid ${dkh("#4A423A", 0.44)}`,
+          background: f >= WARN && !landed ? mxh(RED, 0.20 + Math.abs(Math.sin(f / 2.2)) * 0.5) : dkh(RED, 0.44) }} />
+
+        {/* ⭐⭐ THE LIMIT — a heavy steel shutter, two thirds of the panel, that
+            comes down in nine frames and stops. It is drawn IN FRONT of the
+            hero, so the Claude is genuinely shut behind it. */}
+        <div style={{ position: "absolute", left: -40, right: -40, top: SH_Y + down + bounce,
+          height: 560, zIndex: 70,
+          background: `repeating-linear-gradient(180deg, ${mxh("#6E6A63", 0.34)} 0px, ${mxh("#6E6A63", 0.34)} 26px, ${dkh("#6E6A63", 0.16)} 26px, ${dkh("#6E6A63", 0.16)} 52px)`,
+          borderBottom: `18px solid ${dkh("#6E6A63", 0.52)}` }}>
+          {/* the bottom rail and its two lugs, so it reads as a SHUTTER */}
+          <div style={{ position: "absolute", left: 0, right: 0, bottom: -14, height: 32,
+            background: dkh("#6E6A63", 0.44) }} />
+          {[300, 720].map((x, i) => (
+            <div key={"lg" + i} style={{ position: "absolute", left: x, bottom: -6, width: 96,
+              height: 40, borderRadius: 6, background: dkh("#6E6A63", 0.56) }} />
+          ))}
+        </div>
+        {/* the two guide rails it runs in, in front of everything */}
+        {[-40, 972].map((x, i) => (
+          <div key={"gr" + i} style={{ position: "absolute", left: x, top: -40, width: 80,
+            height: 1000, zIndex: 74,
+            background: `linear-gradient(90deg, ${mxh("#4A443C", 0.20)} 0%, ${dkh("#4A443C", 0.40)} 100%)` }} />
+        ))}
+        {/* the padlock hasp clacking shut on it */}
+        {f >= LAND + 6 && (
+          <div style={{ position: "absolute", left: 452, top: SH_Y + 516 + bounce, width: 108,
+            height: 76, zIndex: 78, borderRadius: 8,
+            transform: `scale(${squash(f, LAND + 6, 0.24, 3, 12)})`,
+            background: `linear-gradient(180deg, ${mxh(BRASS, 0.24)} 0%, ${dkh(BRASS, 0.34)} 100%)`,
+            border: `6px solid ${dkh(BRASS, 0.46)}` }}>
+            <div style={{ position: "absolute", left: 30, top: -30, width: 48, height: 44,
+              borderRadius: "24px 24px 0 0", border: `10px solid ${dkh(BRASS, 0.40)}`,
+              borderBottom: "none" }} />
+          </div>
+        )}
+
+        <Puff x={506} y={SH_Y + 560} f={f} at={LAND} n={20} s={1.8} z={82} spread={1.5} />
+        <Ring x={506} y={SH_Y + 554} f={f} at={LAND} r={380} c={p.key} z={81} />
+        <MarkCast x={880} y={196} s={112} z={30} f={f} spin={0.55} o={0.88} />
+      </div>
+    </Scene>
+  );
+};
+
+/* =========================================================================
+   3 · THE LINE — YOU CANNOT GO FURTHER.
+   A Claude pushing a barrow piled with the day's retries toward a hard red
+   limit line across the shop floor. The barrow hits the barrier, the load
+   pitches forward, and it heaves against it with steam coming off its head.
+   The barrier does not move.
+
+   ⭐ The waste is IN the barrow, so the cause is being pushed by the character
+   into the thing that stops it: one object carrying both halves of the idea.
+   ====================================================================== */
+export const HookLine: React.FC = () => {
+  const f = useCurrentFrame();
+  const p = placeFor("press");
+  const HIT = 30;
+  const push0 = E(f, 0, HIT, 0, 250, IO);
+  const hit = f >= HIT;
+  /* it strains against the barrier in three surges and gets nowhere */
+  const strain = [38, 58, 76].reduce((a, k) => a + (f >= k && f < k + 18
+    ? E(f, k, k + 7, 0, 20, OUT) - E(f, k + 7, k + 18, 0, 20, IO) : 0), 0);
+  const x0 = 250 + push0 + strain;
+  const sh = shake(f, HIT, 16, 12);
+  const GY = 648, BAR = 742;
+  return (
+    <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.05]} vig={0.18}>
+      <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
+        <SetFor k="press" f={f} lit={2.0} t={f * 0.42} rakeRate={4.2} />
+        <Bay p={p} top={88} h={430} l={40} r={40} />
+        <div style={{ position: "absolute", left: -60, right: -60, top: 556, height: 270, zIndex: 18,
+          background: `linear-gradient(180deg, ${mxh(p.floor, 0.74)} 0%, ${mxh(p.floor, 0.42)} 100%)` }} />
+        <div style={{ position: "absolute", left: -60, right: -60, top: 550, height: 12, zIndex: 19,
+          background: mxh(p.lip, 0.44) }} />
+
+        {/* ⭐⭐ THE LIMIT — a hard barrier across the floor, hazard striped, with
+            two posts bolted down. It never moves a pixel, which is the point. */}
+        {[BAR - 40, BAR + 150].map((x, i) => (
+          <div key={"po" + i} style={{ position: "absolute", left: x, top: 300, width: 46,
+            height: 380, zIndex: 62, borderRadius: 5,
+            background: `linear-gradient(90deg, ${mxh("#4A443C", 0.22)} 0%, ${dkh("#4A443C", 0.40)} 100%)` }} />
+        ))}
+        <div style={{ position: "absolute", left: BAR - 60, top: 372, width: 300, height: 68,
+          zIndex: 64, borderRadius: 6,
+          background: `repeating-linear-gradient(56deg, ${RED} 0px, ${RED} 30px, ${CREAMB} 30px, ${CREAMB} 60px)`,
+          border: `6px solid ${dkh(RED, 0.34)}` }} />
+        <div style={{ position: "absolute", left: BAR - 60, top: 500, width: 300, height: 52,
+          zIndex: 64, borderRadius: 6,
+          background: `repeating-linear-gradient(56deg, ${RED} 0px, ${RED} 30px, ${CREAMB} 30px, ${CREAMB} 60px)`,
+          border: `6px solid ${dkh(RED, 0.34)}`, opacity: 0.92 }} />
+        {/* the stop line painted on the floor it cannot cross */}
+        <div style={{ position: "absolute", left: BAR - 74, top: 640, width: 40, height: 180,
+          zIndex: 20, background: hexa(RED, 0.52), transform: "skewX(-16deg)" }} />
+
+        {/* the barrow, loaded with the day's retries */}
+        <div style={{ position: "absolute", left: x0 + 130, top: GY - 132, width: 280, height: 120,
+          zIndex: 56, borderRadius: "8px 26px 8px 8px",
+          transform: `rotate(${hit ? E(f, HIT, HIT + 6, 0, -7, OUT) + rock(f, HIT + 6, 4, 18) : 0}deg)`,
+          transformOrigin: "84% 100%",
+          background: `linear-gradient(170deg, ${mxh("#8A8074", 0.30)} 0%, ${dkh("#8A8074", 0.28)} 100%)`,
+          border: `7px solid ${dkh("#8A8074", 0.46)}` }} />
+        <div style={{ position: "absolute", left: x0 + 236, top: GY - 24, width: 78, height: 78,
+          zIndex: 58, borderRadius: "50%", background: dkh("#4A443C", 0.20),
+          border: `10px solid ${mxh("#4A443C", 0.24)}`,
+          transform: `rotate(${push0 * 2.2}deg)` }} />
+        {/* the load: retries, spilling forward on the hit */}
+        {[0, 1, 2, 3, 4].map(i => (
+          <Part key={"ld" + i} x={x0 + 186 + (i % 3) * 78} y={GY - 168 - Math.floor(i / 3) * 54
+            + (hit ? E(f, HIT, HIT + 10, 0, -34 + i * 5, OUT) : 0)}
+            s={1.04} wrong kind={i % 4} c={OXIDE} z={60 + i}
+            rot={-16 + i * 11 + (hit ? E(f, HIT, HIT + 10, 0, -24, OUT) : 0)} />
+        ))}
+
+        {/* ⭐ THE FOCAL POINT — 330px, pushing, then straining and getting nowhere */}
+        <Hero f={f} x={x0} y={GY} size={330} z={54}
+          lean={hit ? 16 + strain * 0.5 : 11}
+          shock={f >= HIT && f < HIT + 12 ? 0.8 : 0}
+          stern={f >= HIT + 12 && f < 78 ? 0.9 : 0}
+          xeyes={f >= 78 ? 1 : 0} />
+
+        {/* ⭐ EFFORT IS AN EMITTER ON THE STILLEST PART — steam off its head
+            while its whole body is braced against the barrier */}
+        {hit && Array.from({ length: 8 }, (_, i) => {
+          const t = ((f * 2.6 + i * 15) % 56) / 56;
+          return (<div key={"st" + i} style={{ position: "absolute",
+            left: x0 - 30 + Math.sin(f / 7 + i) * 28 + i * 6, top: GY - 348 - t * 160,
+            width: 22 + t * 32, height: 22 + t * 32, borderRadius: "50%", zIndex: 56,
+            background: "#F4EDE0", opacity: Math.max(0, 0.34 * (1 - t)) }} />);
+        })}
+
+        <Puff x={BAR - 70} y={GY - 40} f={f} at={HIT} n={16} s={1.5} z={66} />
+        <Ring x={BAR - 70} y={GY - 46} f={f} at={HIT} r={280} c={RED} z={65} />
+        <MarkCast x={150} y={200} s={112} z={30} f={f} spin={0.55} o={0.86} />
       </div>
     </Scene>
   );

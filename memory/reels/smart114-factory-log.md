@@ -301,3 +301,45 @@ re-auditing a 65-file pool rather than the 60 I first tried:
 at 3.82 for exactly this. Trimmed to **1.46/sec by cutting RUNS and minor singles and keeping every
 layered hero stack**, because the layering is what makes a bank interesting and the density is what
 makes it annoying. Those are separate dials and I had turned the wrong one.
+
+### ⛔⛔⛔ AND THE FIREBOX COST WHAT THE TONGUES WERE EARNING
+Rebuilding S4 as one contained firebox fixed the LOOK Alex asked about and dropped the scene
+**9.33 -> 5.70**. The fourteen full-width flame tongues had been doing real measurable work.
+
+⛔ The first repair was a flickering light cone over the deck: **5.70 -> 5.96**. That is the THIRD
+time this reel I answered a low-measuring scene with light, and the third time it failed for the
+same reason — an orange gradient over a sodium-orange set is a small luma delta, exactly like the
+red cone on the oxblood wall in round 2.
+
+⭐ What worked was giving the fire AREA and hard edges inside the box Alex asked for: the firebox
+grew 420x190 -> 676x250, its flames 9 x 34px -> 12 x 46px and half again as tall, plus twelve
+rising EMBERS (48px, bright, on a dark ground). Probe **5.96 -> 6.61**, HOLD 58% -> 29%.
+
+> **Three rounds, one habit:** when a scene measures low my first instinct is to light it. Light
+> only helps when it creates a luma delta OVER TIME, and on a set whose own paint is the same hue
+> it creates none. The lever is always area x contrast x speed.
+
+
+### ⛔⛔⛔ THE MIX GATE WAS READING THE BED, AND I SPENT AN EDIT ON THE EFFECTS
+`sfx_audit --mix` reported **<250Hz at 19.8%** against a 9.5-14.5 band. I trimmed the gong / sub /
+boom / impact_deep stack by 3-5 dB each, re-rendered, and the figure came back **19.8%** — identical
+to one decimal place.
+
+⭐ That is reel 107's five-round "puff of air" restated as a measurement: **a fix that changes
+nothing means the fix is in the WRONG LAYER.** Measured per stem instead of arguing about it:
+
+```
+VO    10.4% below 250Hz     <- fine
+BED   70.5% below 250Hz     <- the entire problem
+```
+
+The synthesized bed was three sine drones at 37 / 73 / 110 Hz plus a sub swell on every beat: nearly
+all its energy under 250 Hz, most of it below a phone speaker's floor, and all of it landing on the
+one gate that reads the whole mix.
+
+⛔ And the FIRST repair was also wrong: thinning the voices took bay 70.5% -> 63.7% and made STEEL
+**worse** (78.6%), because steel's root is 55 Hz and at that fundamental the problem is not the
+voicing above it. Every root went up an octave (bay 73->147, amber 87->175, steel 55->131) and the
+hum's lowpass opened 520-1500 -> 2100-3400 Hz: **70.5% -> 26.7%**, mix **19.8% -> 14.3%, IN BAND.**
+The three BED_GAINs were then re-solved from the new files rather than carried over — the second
+time on this reel that an inherited gain was wrong for the material it was applied to.

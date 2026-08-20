@@ -304,10 +304,29 @@ const CAP_Y: Record<Variant, number> = { bay: 1258, amber: 1330, steel: 1190 };
     keys and timbres carry different energy), so ONE shared trim cannot land all
     three. Each gets its own, solved from its own measurement to hit 12 dB. */
 export const BED_GAIN: Record<Variant, number> = {
-  bay:   db(-0.1),   /*  5.9 under -> 12.0 */
-  amber: db(-1.1),   /*  4.9 under -> 12.0 */
-  steel: db(1.0),    /*  7.0 under -> 12.0 */
+  bay:   db(-4.0),
+  amber: db(-4.7),
+  steel: db(-3.6),
 };
+
+/* ⛔⛔⛔ AND THE SECOND TIME THESE WERE RE-SOLVED, IT WAS BECAUSE THE BED WAS
+   EATING A DIFFERENT GATE ENTIRELY. `sfx_audit --mix` reported <250Hz at 19.8%
+   against a 9.5-14.5 band. I trimmed the gong / sub / boom / impact_deep stack
+   by 3-5 dB each and the figure did not move by 0.1 — which is reel 107's rule
+   restated as a measurement: **a fix that changes nothing means the fix is in
+   the wrong layer.** Measured per stem:
+
+       VO   10.4% below 250Hz          <- fine
+       BED  70.5% below 250Hz          <- the whole problem
+
+   The synthesized bed was three sine drones at 37 / 73 / 110 Hz plus a sub swell
+   on every beat: almost all of its energy under 250 Hz, most of it under a phone
+   speaker's floor, and all of it landing on the one gate that reads the mix.
+   Thinning the voices took it to 63.7% and made STEEL worse (78.6%), because at
+   a 55 Hz root the FUNDAMENTAL is the problem, not the voicing above it. Every
+   root went up an octave and the hum's lowpass opened from 520-1500 Hz to
+   2100-3400: **70.5% -> 26.7%**, and the gains above were re-solved from the new
+   files rather than carried over. */
 /** the A/B lever only — `quiet` is a further 4 dB down for a bed-level check */
 export const BED_TRIM = { loud: db(0), quiet: db(-4) } as const;
 
