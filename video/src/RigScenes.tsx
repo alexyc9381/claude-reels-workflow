@@ -687,7 +687,12 @@ export const S3: React.FC<SP> = ({ v }) => {
           + E(f, LIFT + 20, LIFT + 26, 0, 0.18, IN_Q);
   const rigX = BIGX + (SMALLX - BIGX) * k;
   const rigS = S + (SMALL - S) * k;
-  const hop = Math.sin(k * Math.PI) * 150;                 /* it arcs, not slides */
+  /* ⭐ THE ARC IS A CRANE MOVE, NOT A SLIDE. 150px of lift over a 438px span is
+     barely an arc; at 330 the rig climbs clear of both heads and comes down on
+     the small one, which is a far larger swept area for the same two endpoints
+     — and it reads as a crane doing a crane's job. Same lever that took CLASH
+     6.44 -> 8.90: distance, not light. */
+  const hop = Math.sin(k * Math.PI) * 330;                 /* it arcs, not slides */
 
   return (
     <Scene p={p} slug="THE ARCHIVE" push={push(V, 136, 1.080)} vig={0.48}>
@@ -699,10 +704,10 @@ export const S3: React.FC<SP> = ({ v }) => {
           the one shape §1 says measures above bar, and it is also what an archive
           full of rules written for older models would literally look like. */}
       {[0, 1, 2, 3, 4].map((i) => {
-        const at = 2 + i * 11;
+        const at = 2 + i * 9;
         const kk = E(f, at, at + 20, 0, 1, OUT);
         if (kk <= 0) return null;
-        const x = -250 + kk * (240 + i * 210);
+        const x = -250 + kk * (560 + i * 190);
         return (
           <div key={"rr" + i} style={{ position: "absolute", left: x, top: 172 + i * 96,
             width: 240, height: 96, zIndex: 22 + i, borderRadius: 4, opacity: 0.60 + kk * 0.35,
@@ -791,8 +796,8 @@ export const S3: React.FC<SP> = ({ v }) => {
           standing. It is the largest object in the scene travelling the widest
           distance, and it is the sentence's actual argument. */}
       {f >= TRY && (() => {
-        const tk = E(f, TRY, TRY + 22, 0, 1, OUT);
-        const tx = BIGX + (SMALLX + 250 - BIGX) * tk;
+        const tk = E(f, TRY - 6, TRY + 24, 0, 1, OUT);
+        const tx = BIGX + 120 + (SMALLX + 232 - BIGX - 120) * tk;
         return (<>
           <div style={{ position: "absolute", left: tx - S / 2, top: gy - S, zIndex: 46 }}>
             <Mascot lf={f * 1.15} size={S} nodAmp={5.0} nodSpeed={9}

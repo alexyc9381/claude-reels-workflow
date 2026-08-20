@@ -67,19 +67,19 @@ export const HookTower: React.FC = () => {
   /* the whole tower recoils DOWN on each landing and rocks back */
   const rk = last === undefined ? 0 : rock(f, last, 9, 24);
   const sink = last === undefined ? 0 : E(f, last, last + 5, 0, 14, OUT) - E(f, last + 5, last + 26, 0, 14, IO);
-  const SEG = 16 + n;                          /* the stack grows a segment per hit */
+  const SEG = 12 + n;                          /* the stack grows a segment per hit */
   return (
     <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.05]} vig={0.30}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
         {/* the world, held DOWN — rich background, nothing competing */}
-        <SetFor k="scrap" f={f} lit={0.72} t={f * 0.4} rakeRate={4.0} />
+        <SetFor k="scrap" f={f} lit={1.0} t={f * 0.4} rakeRate={4.0} />
 
         {/* THE ONE DOMINANT OBJECT — a stack 520 wide running off the top, so
             it reads as ENDLESS rather than as an object with a top on it */}
-        <div style={{ position: "absolute", left: 246, top: -300 + sink, width: 520, height: 1080,
+        <div style={{ position: "absolute", left: 246, top: -76 + sink, width: 520, height: 1080,
           zIndex: 40, transform: `rotate(${rk * 0.10}deg)`, transformOrigin: "50% 100%" }}>
           {Array.from({ length: SEG }, (_, i) => {
-            const y = 1000 - i * 62;
+            const y = 1000 - i * 66;
             const wob = Math.sin(f / 21 + i * 0.7) * (1.0 + i * 0.20);
             /* ⛔ a TOWER is recognised by its vertical edge. Random 19deg
                rotations made this a wobbling pile; alternating ~5deg keeps the
@@ -97,7 +97,7 @@ export const HookTower: React.FC = () => {
           borderRadius: "50%", zIndex: 20, background: hexa("#140E08", 0.42) }} />
 
         {/* THE ONE SUPPORTING ELEMENT — the input, lit, tiny, at its foot */}
-        <Pool x={764} y={p.horizon + 150} w={520} c={p.key} o={0.62} z={21} h={210} />
+        <Pool x={620} y={p.horizon + 140} w={1240} c={p.key} o={0.98} z={21} h={360} />
         <div style={{ position: "absolute", left: 690, top: p.horizon + 74, width: 150, height: 112,
           zIndex: 60, borderRadius: 5, background: CREAMB, transform: "rotate(-7deg)",
           border: `4px solid ${dkh(CREAMB, 0.28)}` }}>
@@ -113,13 +113,15 @@ export const HookTower: React.FC = () => {
         {THROW.map((t0, i) => {
           const t = E(f, t0, LAND[i], 0, 1, LIN);
           if (f < t0 || f > LAND[i]) return null;
-          const x = 1080 - t * 560, arc = -Math.sin(t * Math.PI) * 210;
-          return <Part key={"in" + i} x={x} y={120 + arc + t * t * 90} s={1.7} wrong
+          /* land ON the current top of the stack, which moves up as it grows */
+          const topY = 1000 - (12 + i) * 66 - 76;
+          const x = 1080 - t * 560, arc = -Math.sin(t * Math.PI) * 230;
+          return <Part key={"in" + i} x={x} y={topY - 320 + t * 320 + arc} s={1.7} wrong
             rot={t * 430} z={80} c={OXIDE} kind={i} />;
         })}
         {LAND.map((k, i) => (<React.Fragment key={"ar" + i}>
-          <Puff x={508} y={62 + sink} f={f} at={k} n={16} s={1.6} z={82} />
-          <Ring x={508} y={56 + sink} f={f} at={k} r={250} c={p.key} z={81} />
+          <Puff x={508} y={1000 - (12 + n) * 66 - 76 + sink} f={f} at={k} n={16} s={1.6} z={82} />
+          <Ring x={508} y={994 - (12 + n) * 66 - 76 + sink} f={f} at={k} r={250} c={p.key} z={81} />
         </React.Fragment>))}
 
         <MarkCast x={168} y={210} s={128} z={70} f={f} spin={0.55} o={0.92} />
@@ -137,25 +139,58 @@ export const HookTower: React.FC = () => {
 export const HookThroat: React.FC = () => {
   const f = useCurrentFrame();
   const p = placeFor("scrap");
-  const FEED = [4, 28, 52, 74], GONE = FEED.map(k => k + 14);
+  const FEED = [2, 24, 46, 68], GONE = FEED.map(k => k + 19);
   const sh = GONE.reduce((a, k) => { const s = shake(f, k, 8, 8); return { x: a.x + s.x, y: a.y + s.y }; }, { x: 0, y: 0 });
   return (
     <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.07]} vig={0.30}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="scrap" f={f} lit={1.0} t={f * 0.4} rakeRate={4.2} />
-        <Pool x={506} y={p.horizon + 150} w={1140} c={p.key} o={0.78} z={19} h={300} />
+        <SetFor k="scrap" f={f} lit={1.15} t={f * 0.4} rakeRate={4.2} />
+        <Pool x={506} y={p.horizon + 156} w={1240} c={p.key} o={1.0} z={19} h={380} />
 
         {/* THE ONE DOMINANT OBJECT — the chute at 2.6x, cropped by the bottom
             of the panel, its mouth the only true black in a lit room. That
             single dark hole against a bright shop IS the hierarchy. */}
-        <Chute x={506} y={438} s={1.9} f={f} z={46} rings={GONE} />
+        {/* ⭐ reel 109's rule applied: when a DARK hero drags frame 0 under the
+            bar, lift THE HERO'S OWN VALUE and add one bright settled thing —
+            never the shading. The chute body goes to galvanised steel and the
+            throat is lit from inside, which also reads better: a mouth with a
+            fire down it is where things GO, where a flat black rectangle is
+            just a hole. The mouth is still the darkest region in frame, so the
+            spread that makes this concept work is untouched. */}
+        {/* ⭐ THE CHOICE THIS CONCEPT FORCED, MADE DELIBERATELY. A black mouth
+            gave the best hierarchy in the set (spread 232) and could not clear
+            THE-OPEN law 1 at any size: 76 -> 104 -> 118 -> 124 -> 135 against a
+            140 bar, and every point cost the concept. So the mouth becomes a
+            FURNACE. Hierarchy does not have to be dark-on-light: one saturated
+            hot mass among cool neutral steel ranks just as hard, it clears the
+            brightness bar instead of fighting it, and it is on-topic in the
+            VO's own word — this is where messages get BURNED. */}
+        <div style={{ position: "absolute", left: 372, top: 372, width: 268, height: 232, zIndex: 47,
+          borderRadius: 10,
+          /* the furnace FLARES as each part goes in: the arrival costs something */
+          transform: `scaleY(${1 + GONE.reduce((a, k) => a + (f >= k && f < k + 12 ? E(f, k, k + 3, 0, 0.16, OUT) - E(f, k + 3, k + 12, 0, 0.16, IO) : 0), 0)})`,
+          transformOrigin: "50% 100%",
+          background: `linear-gradient(180deg, ${dkh(CLAYD, 0.30)} 0%, ${CLAYD} 34%, ${CLAY} 66%, ${GOLD} 100%)` }} />
+        {/* the heat haze coming off it */}
+        <div style={{ position: "absolute", left: 300, top: 250, width: 412, height: 300, zIndex: 48,
+          background: `radial-gradient(ellipse at 50% 88%, ${hexa(GOLD, 0.44)} 0%, ${hexa(CLAY, 0.16)} 44%, ${hexa(CLAY, 0)} 76%)` }} />
+        {/* embers rising out of the throat, the background process */}
+        {Array.from({ length: 14 }, (_, i) => {
+          const t = ((f * 2.2 + i * 19) % 120) / 120;
+          return (<div key={"em" + i} style={{ position: "absolute",
+            left: 396 + ((i * 37) % 220) + Math.sin(f / 9 + i) * 14,
+            top: 560 - t * 340, width: 9 + (i % 3) * 4, height: 9 + (i % 3) * 4,
+            borderRadius: 6, zIndex: 49, background: i % 3 ? GOLD : CLAY,
+            opacity: Math.max(0, 0.85 - t * 1.1) }} />);
+        })}
+        <Chute x={506} y={452} s={1.65} f={f} z={46} rings={GONE} c="#C6C1B6" />
 
         {/* the four wrong parts going in, each bigger and faster than the last */}
         {FEED.map((t0, i) => {
           const t = E(f, t0, GONE[i], 0, 1, IN_Q);
           if (f < t0 || f > GONE[i]) return null;
-          return <Part key={"fd" + i} x={1040 - t * 480} y={150 + t * 200} s={1.5 + i * 0.22}
-            wrong rot={-t * 260} z={44} c={OXIDE} kind={i} o={1 - Math.max(0, (t - 0.82) * 5.5)} />;
+          return <Part key={"fd" + i} x={1060 - t * 500} y={110 + t * 300} s={2.0 + i * 0.24}
+            wrong rot={-t * 330} z={44} c={OXIDE} kind={i} o={1 - Math.max(0, (t - 0.80) * 5.0)} />;
         })}
         {GONE.map((k, i) => <Ring key={"gr" + i} x={506} y={410} f={f} at={k} r={230 + i * 40}
           c={RED} z={70} />)}
@@ -186,7 +221,7 @@ export const HookWeigh: React.FC = () => {
   /* the beam tips one step per part and springs on each hit */
   const tilt = E(f, 0, 1, 0, 0, LIN) + [0, 6, 12, 18, 25][n] + (last === undefined ? 0 : rock(f, last, 3.4, 16));
   const sh = HIT.reduce((a, k) => { const s = shake(f, k, 9, 9); return { x: a.x + s.x, y: a.y + s.y }; }, { x: 0, y: 0 });
-  const BX = 506, BY = 268, ARM = 396;
+  const BX = 506, BY = 288, ARM = 352;
   const lx = BX - ARM * Math.cos(tilt * Math.PI / 180), ly = BY - ARM * Math.sin(tilt * Math.PI / 180);
   const rx = BX + ARM * Math.cos(tilt * Math.PI / 180), ry = BY + ARM * Math.sin(tilt * Math.PI / 180);
   return (
@@ -288,12 +323,23 @@ export const HookGiant: React.FC = () => {
         </div>
 
         {/* the ONE supporting element — the scribble it is handed, tiny */}
-        <div style={{ position: "absolute", left: 330, top: 372, width: 104, height: 78, zIndex: 70,
-          borderRadius: 4, background: CREAMB, transform: `rotate(${-8 + Math.sin(f / 14) * 3}deg)`,
-          border: `3px solid ${dkh(CREAMB, 0.30)}` }}>
-          {[0.26, 0.50, 0.74].map((k, i) => (
-            <div key={"gs" + i} style={{ position: "absolute", left: 8, top: `${k * 100}%`,
-              width: `${50 + ((i * 27) % 32)}%`, height: 6, borderRadius: 3, background: INK, opacity: 0.82 }} />
+        {/* the outstretched hand, and the scribble ON it — the claim, literal */}
+        <div style={{ position: "absolute", left: 214, top: 470, width: 190, height: 62, zIndex: 68,
+          borderRadius: 12, background: CLAY, border: `5px solid ${dkh(CLAY, 0.26)}`,
+          transform: `rotate(${-3 + Math.sin(f / 15) * 2}deg)` }} />
+        <div style={{ position: "absolute", left: 176, top: 356, width: 210, height: 158, zIndex: 70,
+          borderRadius: 6, background: CREAMB,
+          transform: `rotate(${-9 + Math.sin(f / 14) * 3}deg)`,
+          border: `5px solid ${dkh(CREAMB, 0.30)}`, boxShadow: "0 14px 26px rgba(20,14,8,0.34)" }}>
+          {[0.16, 0.32, 0.48, 0.64, 0.80].map((k, i) => (
+            <div key={"gs" + i} style={{ position: "absolute", left: 16, top: `${k * 100}%`,
+              width: `${44 + ((i * 27) % 40)}%`, height: 10, borderRadius: 5, background: INK,
+              opacity: 0.84, transform: `rotate(${-3 + (i % 3) * 2.5}deg)` }} />
+          ))}
+          {[0, 1].map(i => (
+            <div key={"gt" + i} style={{ position: "absolute", left: 132 + i * 26, top: 36 + i * 62,
+              width: 40, height: 9, borderRadius: 5, background: INK, opacity: 0.7,
+              transform: `rotate(${i ? 52 : -44}deg)` }} />
           ))}
         </div>
 
