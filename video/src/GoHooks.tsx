@@ -314,14 +314,15 @@ export const HookGauge: React.FC = () => {
 export const HookShutter: React.FC<{ headBar?: boolean }> = ({ headBar = false }) => {
   const f = useCurrentFrame();
   const p = placeFor("press");
-  const GY = 648, SH_Y = 300;
+  const GY = 648, SH_TOP = -84, SH_H = 680, SH_BOT = SH_TOP + SH_H;
   /* ⭐ THE MISSING SOURCE (§10): a shutter that just falls is an act of god.
      A METER above the bench drains a segment at a time while it works, and the
      LAST segment is what trips it — so the drop has a cause you watched happen. */
   const BARS = [8, 14, 20, 24];
   const lit = 5 - BARS.filter(k => f >= k).length;
   const WARN = 24, DROP = 28, LAND = 37;
-  const down = E(f, DROP, LAND, -(SH_Y + 660), 0, IN_Q);
+  /* it starts entirely above the panel: top + height <= 0 */
+  const down = E(f, DROP, LAND, -(SH_BOT + 80), 0, IN_Q);
   const landed = f >= LAND;
   const bounce = landed ? rock(f, LAND, 13, 24) : 0;
   const sh = shake(f, LAND, 26, 16);
@@ -414,8 +415,8 @@ export const HookShutter: React.FC<{ headBar?: boolean }> = ({ headBar = false }
         })}
 
         {/* ⭐⭐ THE LIMIT — the shutter. Two thirds of the panel in nine frames. */}
-        <div style={{ position: "absolute", left: -40, right: -40, top: SH_Y + down + bounce,
-          height: 560, zIndex: 70,
+        <div style={{ position: "absolute", left: -40, right: -40, top: SH_TOP + down + bounce,
+          height: SH_H, zIndex: 70,
           background: `repeating-linear-gradient(180deg, ${mxh("#6E6A63", 0.34)} 0px, ${mxh("#6E6A63", 0.34)} 26px, ${dkh("#6E6A63", 0.16)} 26px, ${dkh("#6E6A63", 0.16)} 52px)`,
           borderBottom: `18px solid ${dkh("#6E6A63", 0.52)}` }}>
           <div style={{ position: "absolute", left: 0, right: 0, bottom: -14, height: 32,
@@ -431,7 +432,7 @@ export const HookShutter: React.FC<{ headBar?: boolean }> = ({ headBar = false }
             background: `linear-gradient(90deg, ${mxh("#4A443C", 0.20)} 0%, ${dkh("#4A443C", 0.40)} 100%)` }} />
         ))}
         {f >= LAND + 6 && (
-          <div style={{ position: "absolute", left: 452, top: SH_Y + 516 + bounce, width: 108,
+          <div style={{ position: "absolute", left: 452, top: SH_BOT - 46 + bounce, width: 108,
             height: 76, zIndex: 78, borderRadius: 8,
             transform: `scale(${squash(f, LAND + 6, 0.24, 3, 12)})`,
             background: `linear-gradient(180deg, ${mxh(BRASS, 0.24)} 0%, ${dkh(BRASS, 0.34)} 100%)`,
@@ -451,8 +452,8 @@ export const HookShutter: React.FC<{ headBar?: boolean }> = ({ headBar = false }
             background: "#F4EDE0", opacity: Math.max(0, 0.32 * (1 - t)) }} />);
         })}
 
-        <Puff x={506} y={SH_Y + 560} f={f} at={LAND} n={24} s={2.1} z={82} spread={1.7} />
-        <Ring x={506} y={SH_Y + 554} f={f} at={LAND} r={430} c={p.key} z={81} />
+        <Puff x={506} y={SH_BOT} f={f} at={LAND} n={24} s={2.1} z={82} spread={1.7} />
+        <Ring x={506} y={SH_BOT - 6} f={f} at={LAND} r={430} c={p.key} z={81} />
         <MarkCast x={880} y={196} s={112} z={30} f={f} spin={landed ? 0 : 0.55} o={0.88} />
       </div>
     </Scene>
