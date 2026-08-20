@@ -524,3 +524,89 @@ Probe **5.8 -> 7.20**, HOLD 43% -> 30%.
 > **The rule this produces: read the sentence for its QUANTIFIER.** "Every line", "over 100",
 > "thousands of" are instructions to show a PILE arriving, not one example lighting up. Twice I drew
 > the noun and skipped the quantifier.
+
+---
+
+## ROUND 7 — the song's start, and the smoothness I traded away for a number
+
+Two notes. Both were things I had done *deliberately*, for defensible reasons, and both were wrong.
+
+### ⛔⛔⛔ "THE SONG DOESN'T START AT THE RIGHT PLACE LIKE THE OTHER VIDEOS"
+
+Round 6 replaced my synthesised ambience with the house track, and I thought that closed the note. It
+did not, because I picked *where in the track to start* by running my own loudness scan and taking the
+three loudest windows — **119.0s / 63.50s / 28.50s**. Those are real peaks. They are also three
+musically anonymous stretches of the middle of the song. The thing that makes a bed feel like "the
+music we always use" is not its level, it is the **recognisable opening**.
+
+One measurement settled it — cross-correlate the shipped house beds against the source:
+
+```
+ados_bed.wav        corr 1.000  at source   0.00s
+105_free_bed.wav    corr 1.000  at source   1.50s
+107 / 108 / 109 / 110 / 112   corr < 0.10   (a different track entirely)
+```
+
+The house starts the song at its **beginning**. Not literally 0.00s though, and this is the part worth
+keeping: the source is **digital silence until 0.76s**, and `ados_bed.wav` bakes that lead-in in — its
+first half second measures **-240 dB**, which would fail `verify_reel`'s "soundtrack audible @ 0"
+outright. **1.50s** is the first downbeat clear of the lead-in, and it is exactly what the one shipped
+reel cut from this track used. All three cuts take it now.
+
+> **The rule: when a note says "like the other videos", the answer is a MEASUREMENT OF THE OTHER
+> VIDEOS, not an analysis of the asset.** I had the source file and derived a defensible answer from
+> it. The correct answer was sitting in `video/public/` the whole time and took one cross-correlation
+> to read out. Ask what the precedent *is* before deciding what it *should* be.
+
+Two follow-ons from the same pass:
+
+⭐ **The three cuts no longer differ, and that is correct.** I had been spending an axis of variation
+on the bed. `docs/TRIAL-CUTS.md` says plainly that dHash is a pixel measure and an audio-only variant
+is a pixel duplicate — so bed variation bought exactly zero separation, while costing two of the three
+cuts the right opening. Separation stays on rake / grade / camera, where it is actually measured.
+
+⛔ **The fade-out was landing 0.57s after the reel ended.** Every cut had `afade=t=out:st=47.0` on a
+**46.433s** reel, so the music never faded at all — it just stopped dead on the last frame. Nothing
+gates this. Fade now starts at 44.95s and is silent by 46.43s.
+
+⭐ **The gain was re-solved as a DELTA, not from a formula.** The old mix passed BALANCE and the
+audible-at-0 check; the only thing that changed was which 46.6s of the song was in the file. So rather
+than recompute an absolute target I measured both cuts A-weighted, found the new one 0.9 dB quieter,
+and moved the gain by 0.9 dB. `db(6.8) -> db(7.7)`, and all three share it now.
+
+### ⛔⛔ "THE CRATE MOVING FROM THE BIGGER SPRITE TO THE SMALLER SPRITE IS WAY TOO CHOPPY"
+
+I quantised that traverse on purpose. §1 says "an ease spreads its delta across three samples; a hard
+edge lands inside one", and one long `IO` tween across this move had measured **2.93** — the weakest
+scene in the reel. So I cut it into three discrete moves with dead pauses between them. It scored.
+It also looked broken, which is what Alex saw.
+
+**The fix was not "put the ease back".** One long ease is the thing that measured 2.93. It was
+**overlapping action**, which is smooth *and* keeps the swept area up:
+
+- the **hoist leads** — its own curve now, up before the traverse begins and down after it ends
+- the **trolley follows** — a single C1 ease, no pauses
+- the **load swings** — trailing the trolley in proportion to the trolley's own velocity, then ringing
+  out as a damped pendulum after it stops
+
+The pendulum is what pays for the smoothing: it keeps the rig moving through exactly the frames where
+the stepped version sat still, so the delta lost to easing comes back as sub-motion rather than as a
+jump cut. Measured on the curve before rendering anything:
+
+```
+                     STEPPED      SMOOTH
+  total path          816px       1066px     (+31%)
+  peak px/frame       139.1        61.7      (-56%)
+  max jerk            139.1        61.7      <- this is the choppiness
+```
+
+And on the full render, **ARCHIVE 7.47 -> 7.95**, HOLD 27% -> 24%. The smooth version is not a
+compromise against the metric; it beats the stepped one on the metric.
+
+> **The rule: "smooth" and "high motion" are only opposed if the object moves in a straight line at a
+> constant scale.** Give the move sub-parts that lead and lag each other and you get both. When §1
+> pushes you toward a hard edge, check first whether the shot has a *second thing* that could be
+> moving — overlap is cheaper than a jump cut and it does not read as a defect.
+
+⭐ This is the same shape as [[feedback_green_gate_wrong_way]] again: a green gate, satisfied the wrong
+way, deforming the object that was carrying it. Fifth time on this reel's family of notes.

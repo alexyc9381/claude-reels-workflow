@@ -321,10 +321,27 @@ const CAP_Y: Record<Variant, number> = { bay: 1258, amber: 1330, steel: 1190 };
     The three synthesized beds also differ from each other by ~2 dB (different
     keys and timbres carry different energy), so ONE shared trim cannot land all
     three. Each gets its own, solved from its own measurement to hit 12 dB. */
+/* ⛔⛔ THE SONG HAS TO START WHERE THE HOUSE STARTS IT. Alex: *"the song doesnt
+   start at the right place here like the other videos."* I had picked the three
+   windows (119.0 / 63.5 / 28.5s) off my OWN loudness scan of the track, which
+   found three loud sections and three musically anonymous ones. Cross-correlating
+   the shipped house beds against the source settled it in one pass:
+       ados_bed.wav        corr 1.00 at source  0.00s
+       105_free_bed.wav    corr 1.00 at source  1.50s
+   The house uses the song's OPENING. It is not 0.00 though — the source is
+   digital silence until 0.76s, and `ados_bed.wav` bakes that in (-240 dB over its
+   first half second), which would fail verify_reel's "soundtrack audible @ 0".
+   1.50s is the first downbeat clear of the lead-in, and it is what the one
+   shipped reel cut from this track actually used. All three cuts take it:
+   dHash is a PIXEL measure, so an audio-only variant buys zero separation
+   (TRIAL-CUTS.md), and there is only one right place for the song to start.
+   Gain re-solved as a DELTA against the mix that already passed BALANCE rather
+   than from a fresh absolute formula: new cut is 0.9 dB quieter A-weighted than
+   the old `bay` window, so 6.8 + 0.9 = 7.7, and the three now share it. */
 export const BED_GAIN: Record<Variant, number> = {
-  bay:   db(6.8),    /* -> volume 0.218 */
-  amber: db(8.0),    /* -> volume 0.250, the loudest of the three */
-  steel: db(5.4),    /* -> volume 0.186 */
+  bay:   db(7.7),    /* -> volume 0.243 */
+  amber: db(7.7),
+  steel: db(7.7),
 };
 
 /* ⛔⛔⛔ THE BED IS THE HOUSE TRACK NOW, NOT A SYNTH. Alex: *"the BG music needs

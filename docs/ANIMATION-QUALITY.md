@@ -69,6 +69,11 @@ project, not imported from anywhere.
 | cream tiles on a white window (no contrast) | **~0** |
 | a smooth blur/scale sweep inside a 632px window | 3.18 → **2.78 (WORSE)** |
 
+> ⛔⛔ **READ §13 BEFORE ACTING ON THE "N DISCRETE POPS" ROW.** It is the row most likely to make you
+> ship a visible defect: reel 114 quantised a crane traverse to satisfy it, passed the gate, and got
+> *"way too choppy"* back. **Overlapping action** beats both the long tween and the stepped move — on
+> the metric as well as by eye. This table describes what the AUDIT rewards, not what looks good.
+
 ### ⭐⭐⭐ THE FORMULA UNDER THE WHOLE TABLE (derived on reel 106)
 
 Every row above follows from one line. `tools/scene_motion_audit.py` crops the panel, scales it
@@ -898,6 +903,60 @@ owns y 0..96, the cast owns the ground line, nothing else enters the band.
 Six scenes had the characters in the lowest third and two thirds of dead wall above. The
 fix is the HORIZON and what hangs overhead (a loaded rack, chains, a gantry), not more props
 on the floor.
+
+
+## 13. ⭐⭐⭐ "N DISCRETE POPS" HAS A LIMIT, AND IT IS CALLED CHOPPY (reel 114)
+
+§1's table rewards **N discrete pops instead of one long tween** (4.27 → 5.63) and warns that "an
+ease spreads its delta across three samples; a hard edge lands inside one". That is true, and taken
+literally it will make you ship a defect.
+
+Reel 114's crane traverse — one large rig carried from a big sprite to a small one — measured **2.93**
+as a single 34-frame `IO` tween, the weakest scene in the reel. Quantising it into three discrete
+moves with dead pauses between them fixed the number. Alex's note: *"the crate moving from the bigger
+sprite to the smaller sprite is way too choppy."* The gate was green and the shot was broken.
+
+**The fix is not putting the ease back** — one long ease is what measured 2.93. It is **OVERLAPPING
+ACTION**: give the move sub-parts that lead and lag each other, so the object is smooth while the
+*composite* keeps repainting.
+
+| | STEPPED | OVERLAPPING |
+|---|---|---|
+| total path travelled | 816px | **1066px** (+31%) |
+| peak px per frame | 139.1 | **61.7** (−56%) |
+| **max jerk** (this is the choppiness) | 139.1 | **61.7** |
+| measured scene motion | 7.47 | **7.95** |
+
+The three sub-parts, for a carried load:
+- the **hoist leads** — its own curve, up before the traverse begins and down after it ends
+- the **trolley follows** — a single C1 ease, no pauses
+- the **load swings** — trailing the trolley in proportion to the trolley's own *velocity*, then
+  ringing out as a damped pendulum after the trolley stops
+
+```js
+const trolley = (g) => E(g, A, B, 0, 1, IO);
+const k    = trolley(f);
+const vel  = (trolley(f + 1) - trolley(f - 1)) * 0.5;      // central difference
+const ring = f > B ? Math.sin((f - B) * 0.62) * Math.exp(-(f - B) / 6.5) * 34 : 0;
+const x    = X0 + (X1 - X0) * k + (-vel * (X1 - X0) * 2.2 + ring);   // lag, then settle
+const hop  = (E(f, A - 3, A + 12, 0, 1, OUT) - E(f, B - 15, B + 3, 0, 1, IO)) * 330;
+```
+
+The pendulum is what pays for the smoothing: it keeps the object moving through exactly the frames
+the stepped version sat still in, so the delta lost to easing comes back as **sub-motion** instead of
+as a jump cut.
+
+> **The rule: "smooth" and "high motion" are only opposed for a RIGID object travelling in a STRAIGHT
+> LINE at a CONSTANT SCALE.** Before you quantise a move to satisfy §1, ask whether the shot has a
+> *second thing* that could be moving — a hoist, a hanging load, a lid, a shadow, a cable. Overlap is
+> cheaper than a jump cut and it does not read as a defect.
+
+⭐ **Measure the curve before you render it.** Total path, peak px/frame and **max jerk** are three
+lines of arithmetic on the easing functions and they predicted this outcome exactly — no render
+needed to know the smooth version had more swept area and half the jerk.
+
+⛔ This is [[feedback_green_gate_wrong_way]] again: a gate satisfied the wrong way deforms the object
+carrying it. §1 is a description of what the audit rewards, **not** a description of what looks good.
 
 
 ## Related

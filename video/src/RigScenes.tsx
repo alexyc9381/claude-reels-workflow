@@ -740,23 +740,47 @@ export const S3: React.FC<SP> = ({ v }) => {
 
   /* ⭐ ONE LARGE OBJECT TRAVELS 438px ACROSS THE FRAME. That is the scene's
      motion AND its meaning: the same rig, moved from one model to the other.
-     ⛔⛔ AND IT IS STEPPED, NOT EASED. v2 ran this as one `IO` tween over 34
-     frames and the scene measured **2.93** — the weakest in the reel — because
-     §1's formula punishes exactly that: "an ease spreads its delta across three
-     samples; a hard edge lands inside one", which is why an 82-frame smooth
-     growth once measured WORSE than the shot it replaced. Same distance, three
-     discrete moves: unclamp, swing, drop. */
-  const k = E(f, LIFT, LIFT + 6, 0, 0.30, OUT)
-          + E(f, LIFT + 9, LIFT + 17, 0, 0.52, OUT)
-          + E(f, LIFT + 20, LIFT + 26, 0, 0.18, IN_Q);
-  const rigX = BIGX + (SMALLX - BIGX) * k;
+
+     ⛔⛔ IT USED TO BE STEPPED AND THAT SHIPPED AS A DEFECT. Alex: *"the crate
+     moving from the bigger sprite to the smaller sprite is way too choppy at
+     fifteen seconds."* The three discrete moves (unclamp / swing / drop, with a
+     dead pause between each) were pure motion-farming: §1 rewards "a hard edge
+     landing inside one sample", so quantising the traverse scored well and read
+     as broken. That trade bought nothing any more — the 18 accumulation plates
+     added later now carry this scene.
+
+     ⭐⭐ THE FIX IS NOT "one long ease". One long ease is exactly what measured
+     **2.93** here in v2. It is OVERLAPPING ACTION, which is smooth AND keeps the
+     swept area up:
+       • the HOIST leads   — up before the traverse starts, down after it ends
+       • the TROLLEY follows — a single C1 ease, no pauses
+       • the LOAD SWINGS   — trailing the trolley by its own velocity, then
+                              ringing out as a damped pendulum after it stops
+     The pendulum is what pays for the smoothing: it keeps the rig moving through
+     the frames where the stepped version simply sat still, so the delta lost to
+     easing comes back as sub-motion instead of as a jump cut. */
+  const trolley = (g: number) => E(g, LIFT + 3, SEAT - 2, 0, 1, IO);
+  const k = trolley(f);
+  /* velocity of the trolley, in units of k per frame (central difference) */
+  const vel = (trolley(f + 1) - trolley(f - 1)) * 0.5;
+  /* the load trails the trolley while it accelerates, then rings out on landing.
+     (SMALLX - BIGX) is negative, so -vel * that is a positive (rightward) lag. */
+  const ring = f > SEAT - 2
+    ? Math.sin((f - (SEAT - 2)) * 0.62) * Math.exp(-(f - (SEAT - 2)) / 6.5) * 34
+    : 0;
+  const swing = -vel * (SMALLX - BIGX) * 2.2 + ring;
+  const rigX = BIGX + (SMALLX - BIGX) * k + swing;
   const rigS = S + (SMALL - S) * k;
   /* ⭐ THE ARC IS A CRANE MOVE, NOT A SLIDE. 150px of lift over a 438px span is
      barely an arc; at 330 the rig climbs clear of both heads and comes down on
      the small one, which is a far larger swept area for the same two endpoints
      — and it reads as a crane doing a crane's job. Same lever that took CLASH
-     6.44 -> 8.90: distance, not light. */
-  const hop = Math.sin(k * Math.PI) * 330;                 /* it arcs, not slides */
+     6.44 -> 8.90: distance, not light.
+     It is now its OWN curve rather than sin(k*PI), so the hoist can lead the
+     traverse and lag it on the way down — that overlap is most of what makes the
+     move read as a crane instead of a tween. */
+  const hop = (E(f, LIFT, LIFT + 15, 0, 1, OUT)
+             - E(f, SEAT - 15, SEAT + 3, 0, 1, IO)) * 330;
 
   return (
     <Scene p={p} slug="" push={push(V, 136, 1.080)} vig={0.48}>
