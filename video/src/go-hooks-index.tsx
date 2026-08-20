@@ -3,7 +3,7 @@ import { AbsoluteFill, Audio, Composition, registerRoot, staticFile, useCurrentF
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
 import { CamCtx } from "./GoWorld";
 import { CAM, GRADE } from "./GoScenes";
-import { HookTower, HookThroat, HookWeigh, HookGiant, HOOK_LEN } from "./GoHooks";
+import { HookCounter, HookBurial, HookCrank, HOOK_LEN } from "./GoHooks";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
 import words from "./data/words_113go.json";
 
@@ -23,6 +23,39 @@ const S = (fr: number) => fr / 30;
     (THE-OPEN: frame 0 is the interrupt). Every cue is from the measured-clean
     16-bit house set — no chiptune, no named air. */
 const BANKS: Record<string, Cue[]> = {
+  counter: [
+    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
+    { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
+    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
+    { at: S(10), src: "chair_knock.wav", v: LEVELS.SFX_TEXTURE, dur: 0.32 },
+    { at: S(22), src: "impact.wav", v: LEVELS.SFX_HERO, dur: 0.66, rate: 1.02 },
+    { at: S(48), src: "impact.wav", v: LEVELS.SFX_HERO, dur: 0.66, rate: 0.94 },
+    { at: S(74), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.86 },
+    { at: S(82), src: "thock.wav", v: LEVELS.SFX_MID, dur: 0.20 },
+  ],
+  burial: [
+    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
+    { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
+    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
+    { at: S(6), src: "gear_shift.wav", v: LEVELS.SFX_MID, dur: 0.12 },
+    { at: S(12), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94, rate: 1.1 },
+    { at: S(30), src: "rebuild_thud.wav", v: LEVELS.SFX_MID, dur: 0.85, rate: 1.00 },
+    { at: S(40), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94, rate: 0.98 },
+    { at: S(56), src: "rebuild_thud.wav", v: LEVELS.SFX_MID, dur: 0.85, rate: 0.90 },
+    { at: S(70), src: "crusher.wav", v: LEVELS.SFX_TEXTURE, dur: 0.94, rate: 0.88 },
+    { at: S(86), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.80 },
+  ],
+  crank: [
+    { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
+    { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
+    { at: S(0), src: "sub.wav", v: LEVELS.SFX_HERO, dur: 0.45 },
+    { at: S(8), src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.54 },
+    { at: S(22), src: "impact.wav", v: LEVELS.SFX_HERO, dur: 0.66, rate: 1.04 },
+    { at: S(34), src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.54, rate: 1.1 },
+    { at: S(46), src: "impact.wav", v: LEVELS.SFX_HERO, dur: 0.66, rate: 0.96 },
+    { at: S(58), src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.54, rate: 1.2 },
+    { at: S(70), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.86 },
+  ],
   tower: [
     { at: S(0), src: "shop_bed.wav", v: LEVELS.SFX_BED, dur: 3.3 },
     { at: S(0), src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.30 },
@@ -89,10 +122,9 @@ const wrap = (Body: React.FC, key: string): React.FC => () => {
 };
 
 const Root: React.FC = () => (<>
-  <Composition id="hook-a-tower"  component={wrap(HookTower, "tower")}   durationInFrames={HOOK_LEN} {...V} />
-  <Composition id="hook-b-throat" component={wrap(HookThroat, "throat")} durationInFrames={HOOK_LEN} {...V} />
-  <Composition id="hook-c-weigh"  component={wrap(HookWeigh, "weigh")}   durationInFrames={HOOK_LEN} {...V} />
-  <Composition id="hook-d-giant"  component={wrap(HookGiant, "giant")}   durationInFrames={HOOK_LEN} {...V} />
+  <Composition id="hook-1-counter" component={wrap(HookCounter, "counter")} durationInFrames={HOOK_LEN} {...V} />
+  <Composition id="hook-2-burial"  component={wrap(HookBurial, "burial")}   durationInFrames={HOOK_LEN} {...V} />
+  <Composition id="hook-3-crank"   component={wrap(HookCrank, "crank")}     durationInFrames={HOOK_LEN} {...V} />
 </>);
 
 registerRoot(Root);

@@ -232,3 +232,72 @@ accelerating as neither side gives, snapping dead on the seize. Probe **6.44 →
 > LIGHT, and light only helps when it creates a luma delta over TIME. Twice it was a static
 > practical, once a red cone on a red wall. What moved every number was making something travel
 > further.
+
+
+---
+
+## ROUND 3 — the slugs, two pivot bugs, the prompt, and a sound rebuild
+
+### ⛔⛔⛔ A PERCENTAGE `transformOrigin` ON A ZERO-SIZE BOX IS A SILENT NO-OP
+Alex: *"the hammer at thirty two seconds, it's not swinging properly like a hammer, it swings the
+opposite way the way that it's hinged. And same with the screwdriver thing."* Both props are a
+wrapper with `position:absolute` + left/top and NO width or height, with every child absolutely
+positioned — so the border box is **0x0** and `transformOrigin: "12% 84%"` resolved to **`0px 0px`**,
+the top-left corner. For `Sledge` that corner is where the HEAD is drawn, so the hammer was pivoting
+around its own head. `Cutter` had the same bug at "20% 70%" and rotated about its tail.
+
+⭐ **THE RULE: on a wrapper whose children are all absolutely positioned, give `transformOrigin` in
+PIXELS.** A percentage there does nothing and looks like it worked. This is the same family as the
+brace stencils trapped inside a transformed parent — CSS geometry on these wrappers has to be
+checked against what the box actually IS, not what it looks like it contains.
+
+⛔ And fixing the pivot moved the prop: `Sledge` hinges at (12*s, 230*s) inside its own box, so its
+placement had to be re-derived from the HANDS. v1's hands were 29px below the floor.
+
+### ⛔ THE SCENE SLUGS ARE GONE
+*"we have kind of like little subheader text that says like THE INSPECTION or THE LINE at the bottom
+of the screen instead of these animations. Remove those."* `Slug` now renders null on an empty
+string and all 15 scenes pass `slug=""`. Other reels pass a real string and are untouched.
+
+### ⭐⭐⭐ A PROMPT HAS TO LOOK LIKE WRITING
+*"at 35 seconds ... it has to be more obvious that it's a prompt."* The CARTRIDGE was a good object
+and a bad sign — nothing about a game cartridge says "a block of text you paste". Replaced with a
+**punched PROGRAM CARD**: feed holes down the edge, a `PROMPT` header band, and three short
+imperative lines (`AUDIT MY SETUP` / `KEEP WHAT BINDS` / `CUT THE REST`) that a reader head lights
+one at a time as it runs down the card.
+⭐ It satisfies both rules that were pulling against each other: Alex's standing "creative objects,
+not UI" AND §4's "one text chip per shot" — because the chip IS the subject, and it tells the viewer
+what the prompt does, which no cartridge could.
+⛔ First attempt put the card centre-frame at 430px and it covered the hero completely; the shot lost
+its subject to its own prop. The reader is now its own machine on the left, cabled to the rig, hero
+clear on the right.
+
+### ⭐⭐ "IT'S LITERALLY JUST THEM STATIC STILL" — S3
+The reveal had two sprites standing while a cage moved between them. The line is *"models that
+needed the extra support"* and v1 never drew the SUPPORT. Now: before the rig arrives the old model
+SAGS and cannot hold himself up; once it seats, the braces **pump his arms for him** and a head-prop
+lifts his chin. He is not wearing a cage, he is being carried by one.
+
+### ⭐ THE FIREBOX, NOT A ROW OF FLAME-SHAPED DIVS — S4
+*"at twenty two seconds the animation is kind of odd when it starts talking about the tokens getting
+burned."* v1 ran fourteen clipPath tongues the full width of frame with coins falling past them.
+Rebuilt as ONE contained firebox with an open door, the fire INSIDE it, its light spilling out as a
+cone, and the tokens arriving down a chute from a hopper. Same beat, but you can point at where the
+burning happens.
+
+### ⛔⛔ THE SOUND WAS DULL BECAUSE IT HAD NO PITCH AND NO LAYERS
+*"all the sound effects right now are horrible, doesn't sound interesting at all."* Diagnosis, from
+re-auditing a 65-file pool rather than the 60 I first tried:
+  1 **nothing moved in pitch anywhere.** Every event was one flat sample. The winch now pays out on
+    a `repeat()` whose rate CLIMBS across the run, so the descent has an audible direction.
+  2 **no tonal body on the impacts.** The bite and the seize were percussive thuds with no pitch, so
+    they landed without weight. Both now carry a `gong` under the transient.
+  3 **no room.** There was no ambience at all between cues, which is most of why 62 clanks read as
+    "a series of clanks" rather than as a place. An `engine_idle` bed now runs under the bay.
+  4 **no alarm** — the reel grew red beacons in round 2 and they made no sound. `alarm.wav`
+    (2.40s, 26% >2kHz, 1ms attack) passes every gate and was sitting unused in the library.
+  5 the reader now reads the prompt card on three DIFFERENT blips, one per line.
+⛔ The first rebuild came in at **2.20 cues/sec** against a 1.0-1.5 ceiling — reel 107 was rejected
+at 3.82 for exactly this. Trimmed to **1.46/sec by cutting RUNS and minor singles and keeping every
+layered hero stack**, because the layering is what makes a bank interesting and the density is what
+makes it annoying. Those are separate dials and I had turned the wrong one.

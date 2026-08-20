@@ -488,6 +488,83 @@ export const Beacon: React.FC<{ x: number; y: number; f: number; level?: number;
   </>);
 };
 
+
+/* =========================================================================
+   THE PROMPT CARD — the deliverable, and it has to LOOK like a prompt.
+
+   ⛔⛔ Alex: *"at 35 seconds when it's represented by the prompt that gets
+   plugged in, you should have a more interesting representation ... it has to be
+   more obvious that it's a prompt."* The v1 CARTRIDGE was a good object and a
+   bad sign: nothing about a game cartridge says "a block of text you paste".
+
+   The fix has to satisfy two rules that pull against each other:
+     · Alex's standing ruling — CREATIVE OBJECTS, NOT UI. No fake terminal, no
+       product screenshot (reels 86, 85, 68).
+     · §4 — information delivered as type is unwatchable, ONE text chip per shot.
+
+   A PUNCHED PROGRAM CARD does both. It is a physical object with a feed edge and
+   registration holes, so it belongs in a machine bay; and the thing written on it
+   is three short imperative lines, which is what a prompt IS. The lines are the
+   shot's one text element, they are mute-readable at thumb distance, and they
+   tell the viewer what the prompt actually does — which no cartridge could.
+   ====================================================================== */
+export const PromptCard: React.FC<{ x: number; y: number; f: number; z?: number; s?: number;
+  /** 0..1 how far a reader head has travelled down the card */
+  read?: number; lit?: boolean }> =
+  ({ x, y, f, z = 70, s = 1, read = 0, lit = false }) => {
+  const W = 430 * s, H = 296 * s;
+  const LINES = ["AUDIT MY SETUP", "KEEP WHAT BINDS", "CUT THE REST"];
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: W, height: H, zIndex: z }}>
+      {/* the card stock, with a clipped corner so it only loads one way round */}
+      <div style={{ position: "absolute", inset: 0, borderRadius: 6,
+        background: `linear-gradient(168deg, ${mxh(CREAM, 0.52)} 0%, ${mxh(CREAM, 0.12)} 52%, ${dkh(CREAM, 0.10)} 100%)`,
+        border: `${5 * s}px solid ${dkh(CREAM, 0.30)}`, boxShadow: SH_D,
+        clipPath: `polygon(0 0, ${W - 40 * s}px 0, 100% ${40 * s}px, 100% 100%, 0 100%)` }} />
+      {/* the feed edge: registration holes down the left, like a real punch card */}
+      {Array.from({ length: 9 }, (_, i) => (
+        <div key={"fh" + i} style={{ position: "absolute", left: 13 * s, top: 22 * s + i * 30 * s,
+          width: 13 * s, height: 13 * s, borderRadius: "50%",
+          background: dkh(CREAM, 0.44) }} />
+      ))}
+      {/* the header band — what this card IS */}
+      <div style={{ position: "absolute", left: 40 * s, right: 16 * s, top: 16 * s,
+        height: 42 * s, borderRadius: 3, background: dkh(CLAY, 0.10),
+        display: "flex", alignItems: "center", paddingLeft: 14 * s,
+        fontFamily: MONO, fontWeight: 900, fontSize: 22 * s, letterSpacing: "0.16em",
+        color: "#FDF6E8" }}>PROMPT</div>
+      {/* the three instruction lines, each lighting as the reader passes it */}
+      {LINES.map((t, i) => {
+        const at = (i + 0.6) / LINES.length;
+        const on = read >= at;
+        return (
+          <React.Fragment key={"pl" + i}>
+            <div style={{ position: "absolute", left: 40 * s, right: 16 * s,
+              top: 82 * s + i * 62 * s, height: 48 * s, borderRadius: 3,
+              background: on ? hexa(GOLD, 0.30) : hexa("#8C7A50", 0.10) }} />
+            <div style={{ position: "absolute", left: 54 * s, top: 94 * s + i * 62 * s,
+              fontFamily: MONO, fontWeight: 900, fontSize: 24 * s, letterSpacing: "0.03em",
+              color: on ? "#241F17" : hexa("#241F17", 0.62), whiteSpace: "nowrap" }}>{t}</div>
+          </React.Fragment>
+        );
+      })}
+      {/* the READER HEAD travelling down the card — the mechanism that makes this
+          a machine reading an instruction rather than a card sitting in a slot */}
+      {read > 0 && read < 1 && (<>
+        <div style={{ position: "absolute", left: -8 * s, right: -8 * s,
+          top: 70 * s + read * (H - 96 * s), height: 7 * s,
+          background: hexa("#FFF0C8", 0.95) }} />
+        <div style={{ position: "absolute", left: -20 * s, top: 62 * s + read * (H - 96 * s),
+          width: 26 * s, height: 24 * s, borderRadius: 3, background: dkh(IRON, 0.24) }} />
+      </>)}
+      {lit && (
+        <div style={{ position: "absolute", inset: -6 * s, borderRadius: 8,
+          border: `${4 * s}px solid ${hexa(GOLD, 0.34 + Math.sin(f / 6) * 0.24)}` }} />
+      )}
+    </div>
+  );
+};
+
 /** the gantry cable that hangs each brace from the ceiling — the rig's SOURCE
     (§10: a hand-off needs somewhere it came from). */
 export const RigCables: React.FC<{ size: number; f: number; z?: number; tension?: number;
@@ -919,8 +996,18 @@ export const Cartridge: React.FC<{ x: number; y: number; f: number; z?: number; 
    ====================================================================== */
 export const Sledge: React.FC<{ x: number; y: number; rot?: number; z?: number; s?: number;
   bright?: boolean }> = ({ x, y, rot = 0, z = 74, s = 1, bright = false }) => (
+  /* ⛔⛔⛔ A PERCENTAGE transformOrigin ON A ZERO-SIZE BOX RESOLVES TO (0,0).
+     This wrapper has `position:absolute` with a left/top and NO width or height,
+     and every child is absolutely positioned — so its border box is 0x0 and
+     `transformOrigin: "12% 84%"` was silently "0px 0px", i.e. the TOP-LEFT
+     corner, which is exactly where the HEAD is drawn. The sledge was pivoting
+     around its own head. Alex: *"it's not swinging properly like a hammer, it
+     swings the opposite way the way that it's hinged."*
+     ⭐ THE RULE: on a wrapper whose children are all absolute, give the
+     transformOrigin in PIXELS. A percentage there is a silent no-op. The hands
+     are 12*s across and 230*s down the haft; that is the hinge. */
   <div style={{ position: "absolute", left: x, top: y, zIndex: z,
-    transform: `rotate(${rot}deg)`, transformOrigin: "12% 84%" }}>
+    transform: `rotate(${rot}deg)`, transformOrigin: `${12 * s}px ${230 * s}px` }}>
     {/* the shaft, with a bound grip at the bottom */}
     <div style={{ position: "absolute", left: 0, top: 0, width: 24 * s, height: 250 * s,
       borderRadius: 6, background: `linear-gradient(90deg, ${dkh(RUST, 0.34)}, ${mxh(RUST, 0.18)} 46%, ${dkh(RUST, 0.28)})`,
@@ -955,8 +1042,11 @@ export const Cutter: React.FC<{ x: number; y: number; f: number; rot?: number; z
      as a floating green slab rather than a grip. What makes a hand tool read is
      the FEATURES: a barrel, a machined collar, a shaped pistol grip with finger
      swells, a trigger, a hose gland and a nozzle. */
+  /* ⛔ SAME ZERO-SIZE ORIGIN BUG AS `Sledge` — "20% 70%" resolved to the back of
+     the barrel, so the tool rotated about its own tail instead of the hand that
+     is holding it. A hand tool hinges at the GRIP. */
   <div style={{ position: "absolute", left: x, top: y, zIndex: z,
-    transform: `rotate(${rot}deg)`, transformOrigin: "20% 70%" }}>
+    transform: `rotate(${rot}deg)`, transformOrigin: `${43 * s}px ${70 * s}px` }}>
     {/* the barrel */}
     <div style={{ position: "absolute", left: 0, top: 0, width: 152 * s, height: 36 * s,
       borderRadius: 7 * s, background: `linear-gradient(180deg, ${mxh(IRON, 0.30)}, ${IRON} 46%, ${dkh(IRON, 0.44)})`,

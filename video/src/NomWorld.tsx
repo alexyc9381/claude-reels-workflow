@@ -434,8 +434,13 @@ export const Chip: React.FC<{ t: string; y: number; x?: number; c?: string; fg?:
   </div>
 );
 
+/** ⛔ AN EMPTY LABEL RENDERS NOTHING. Alex, 2026-08-19: *"we have kind of like
+    little subheader text that says like THE INSPECTION or THE LINE at the bottom
+    of the screen instead of these animations. Remove those."* Passing `slug=""`
+    now removes it cleanly rather than laying an empty styled band over the
+    picture. Existing reels pass a real string and are untouched. */
 export const Slug: React.FC<{ t: string; c?: string; z?: number; y?: number }> =
-  ({ t, c = "#CFC8BC", z = 95, y = H - 42 }) => (
+  ({ t, c = "#CFC8BC", z = 95, y = H - 42 }) => !t ? null : (
   <div style={{ position: "absolute", left: 0, right: 0, top: y, textAlign: "center", zIndex: z,
     fontFamily: MONO, fontWeight: 800, fontSize: 20, letterSpacing: "0.30em", color: c,
     textShadow: "0 2px 6px rgba(0,0,0,0.55)" }}>{t}</div>

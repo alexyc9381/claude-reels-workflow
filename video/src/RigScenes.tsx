@@ -11,6 +11,7 @@ import {
   CLAY, GOLD, GREEN, RED, SKY, PAPER, INK, MUTE, TEAL, STEEL, STEELD, IRON, RUST, CREAM,
   R, BRACES, byRank, KEPT, PLACES, asPlace, KEYWORD,
   Rig, RigBrace, SpecBoard, Belt, Part, RejectBin, TokenGauge, Furnace, TokenCoin, Winch, Beacon,
+  PromptCard,
   SlotRank, Press, Cartridge, Sledge, Cutter, SwingLamp, ScanLine, Verdict,
   judder, whip,
 } from "./RigWorld";
@@ -174,7 +175,7 @@ export const S0: React.FC<SP> = ({ v }) => {
   const THROWS = [-14, 6, 20];
 
   return (
-    <Scene p={p} slug="THE FIT BAY" push={push(V, 136, 1.070)} vig={0.12}>
+    <Scene p={p} slug="" push={push(V, 136, 1.070)} vig={0.12}>
       <SetFor k="fitbay" f={f} lightK={1 - tight * 0.30} rake={1} rk={RAKE[V]} />
 
       {/* ⭐ the board that carries frame 0. Behind everything, never dimmed.
@@ -432,7 +433,7 @@ export const S1: React.FC<SP> = ({ v }) => {
   const beltSpeed = 9.0 - E(f, SLOW, SLOW + 14, 0, 7.6, OUT);
 
   return (
-    <Scene p={p} slug="THE LINE" push={push(V, 169, 1.085)} vig={0.46}>
+    <Scene p={p} slug="" push={push(V, 169, 1.085)} vig={0.46}>
       <SetFor k="linebay" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       {/* ⭐ THE OVERHEAD RETURN — a second full-width band running the OTHER way,
@@ -562,7 +563,7 @@ export const S2: React.FC<SP> = ({ v }) => {
   const S = 470;
 
   return (
-    <Scene p={p} slug="THE INSPECTION" push={push(V, 129, 1.088)} vig={0.50}>
+    <Scene p={p} slug="" push={push(V, 129, 1.088)} vig={0.50}>
       <SetFor k="inspect" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       {/* the swinging lamp: the ONLY moving light in the reel, and it is a LIGHT,
@@ -695,7 +696,7 @@ export const S3: React.FC<SP> = ({ v }) => {
   const hop = Math.sin(k * Math.PI) * 330;                 /* it arcs, not slides */
 
   return (
-    <Scene p={p} slug="THE ARCHIVE" push={push(V, 136, 1.080)} vig={0.48}>
+    <Scene p={p} slug="" push={push(V, 136, 1.080)} vig={0.48}>
       <SetFor k="archive" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       {/* ⭐ THE FIRST 66 FRAMES WERE TWO SPRITES STANDING (60% HOLD, motion 3.64).
@@ -764,9 +765,12 @@ export const S3: React.FC<SP> = ({ v }) => {
       {/* ⭐ THE OLD MODEL, on his plinth from frame 0 — the comparison only works
           if BOTH are in frame the whole time. Pale clay = an older, dimmer build
           of the same thing, and value is the axis the greyscale audit can see. */}
-      <div style={{ position: "absolute", left: SMALLX - SMALL / 2, top: gy - SMALL, zIndex: 42 }}>
-        <Mascot lf={f * 1.35} size={SMALL} nodAmp={5.4} nodSpeed={11}
-          tint="#B79A86" cheer={k > 0.92 ? 0.55 : 0} />
+      <div style={{ position: "absolute", left: SMALLX - SMALL / 2,
+        top: gy - SMALL + (k > 0.94 ? 0 : 16 + Math.sin(f / 17) * 5), zIndex: 42 }}>
+        <Mascot lf={f * (k > 0.94 ? 1.9 : 0.55)} size={SMALL}
+          nodAmp={k > 0.94 ? 8.2 : 1.6} nodSpeed={k > 0.94 ? 13 : 4}
+          tint="#B79A86" cheer={k > 0.94 ? 0.62 : 0}
+          stern={k > 0.94 ? 0 : 0.7} gaze={k > 0.94 ? 0 : Math.sin(f / 23) * 0.5} />
       </div>
       <Contact x={SMALLX - SMALL * 0.44} y={gy - 6} w={SMALL * 0.88} o={0.34} z={40} />
 
@@ -774,18 +778,22 @@ export const S3: React.FC<SP> = ({ v }) => {
           He walks out of this slot at TRY and into the one above. */}
       <div style={{ position: "absolute", left: BIGX - S / 2, top: gy - S, zIndex: 38,
         opacity: f >= TRY ? 0 : 1 }}>
-        <Mascot lf={f * 0.7} size={S} nodAmp={3.2} nodSpeed={7}
-          gaze={k > 0.3 ? -1.2 : 0} stern={0.5} />
+        <Mascot lf={f * 1.45} size={S} nodAmp={7.6} nodSpeed={8}
+          gaze={k > 0.3 ? -1.2 : Math.sin(f / 13) * 0.8} stern={0.35} />
       </div>
       <Contact x={BIGX - S * 0.44} y={gy - 6} w={S * 0.88} o={0.36} z={36} />
 
-      {/* THE RIG, travelling from one to the other and shrinking to fit */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 1,
-        transform: `translateY(${-hop}px)` }}>
-        <Rig f={f} x={rigX} y={gy} size={rigS} zBack={44} zFront={56} drop={1}
-          tight={k < 0.1 ? 0.7 : 0} lit={lit.length ? lit : undefined}
-          tags={f >= SKILLS ? ["r1"] : ["m1"]} cables={k < 0.06 || k > 0.94} />
-      </div>
+      {/* THE RIG, travelling from one to the other and shrinking to fit.
+          ⛔⛔⛔ THE ARC IS APPLIED TO ITS `y`, NOT VIA A WRAPPER. v1 put it inside
+          a `zIndex: 1` transformed div to carry the crane hop — and that div is
+          a stacking context, so the rig's own zBack/zFront of 44/56 were
+          resolved INSIDE it and the whole cage painted underneath two Mascots at
+          z 38/42. It was invisible for the entire scene. Third time this reel
+          has been bitten by a transformed wrapper: check the STACKING CONTEXT
+          before believing an element is drawn. */}
+      <Rig f={f} x={rigX} y={gy - hop} size={rigS} zBack={44} zFront={56} drop={1}
+        tight={k < 0.1 ? 0.7 : 0} lit={lit.length ? lit : undefined}
+        tags={f >= SKILLS ? ["r1"] : ["m1"]} cables={k < 0.06 || k > 0.94} />
 
       {/* ⭐⭐ THE PUNCHLINE, AND IT IS ALSO THE FIX FOR A 62% HOLD. Once the rig
           has seated on the old model, the current one walks 400px across and
@@ -812,6 +820,31 @@ export const S3: React.FC<SP> = ({ v }) => {
           )}
         </>);
       })()}
+
+      {/* ⭐⭐⭐ THE RIG DOES THE WORK FOR HIM — which is what "the extra support"
+          MEANS, and v1 never drew it. Alex: *"at fifteen seconds the animation
+          isn't good enough, it's literally just them static still."* He was
+          right: two sprites stood still while a cage moved between them.
+          Before it arrives the old model SAGS and cannot hold himself up; once
+          it seats, the braces PUMP HIS ARMS FOR HIM and a head-prop lifts his
+          chin. He is not wearing a cage, he is being carried by one. */}
+      {k > 0.94 && [0, 1].map((side) => {
+        const w = Math.sin((f - SEAT) / 5.5 + side * Math.PI);
+        return (
+          <div key={"sup" + side} style={{ position: "absolute",
+            left: SMALLX + (side ? 1 : -1) * SMALL * 0.40 - 14,
+            top: gy - SMALL * 0.62 + w * 16, width: 28, height: SMALL * 0.30,
+            zIndex: 58, borderRadius: 4,
+            transform: `rotate(${w * (side ? 26 : -26)}deg)`, transformOrigin: "50% 0%",
+            background: `linear-gradient(180deg, ${mxh(STEEL, 0.24)}, ${dkh(IRON, 0.34)})`,
+            boxShadow: SH }} />
+        );
+      })}
+      {k > 0.94 && (
+        <div style={{ position: "absolute", left: SMALLX - 30, top: gy - SMALL * 1.02,
+          width: 60, height: 16, zIndex: 58, borderRadius: 4,
+          background: `linear-gradient(180deg, ${mxh(STEEL, 0.30)}, ${dkh(IRON, 0.30)})` }} />
+      )}
 
       {/* it FITS: a seat ring and four clean clamp ticks when it settles */}
       {k > 0.94 && (<>
@@ -861,7 +894,7 @@ export const S4: React.FC<SP> = ({ v }) => {
   const stalled = f >= STALL;
 
   return (
-    <Scene p={p} slug="THE FURNACE" push={push(V, 128, 1.086)} vig={0.46}>
+    <Scene p={p} slug="" push={push(V, 128, 1.086)} vig={0.46}>
       <SetFor k="furnace" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       {/* ⭐ THE GAUGE IS THE TOP OF THE FRAME — a 700px bank of ten segments
@@ -887,20 +920,73 @@ export const S4: React.FC<SP> = ({ v }) => {
           cue the look gate cannot automate: a mass cropped by the frame edge,
           in front of the action. */}
       <Furnace x={-60} y={gy + 62} f={f} on={E(f, BURN, BURN + 8, 0, 1, OUT)} z={64} w={1140} />
-      {/* ⭐ FLAME TONGUES. The grate glow alone is a gradient and gradients do not
-          repaint — §1: "only the SWEPT EDGE repaints". Fourteen hard-edged tongues
-          on their own clocks, 76px wide and up to 210px tall, is a band of light
-          against shadow that changes shape every single frame. */}
-      {f >= BURN && Array.from({ length: 14 }, (_, i) => {
-        const ph = f * (0.30 + (i % 4) * 0.07) + i * 1.9;
-        const h = (110 + Math.abs(Math.sin(ph)) * 210) * E(f, BURN, BURN + 8, 0, 1, OUT);
-        return (
-          <div key={"fl" + i} style={{ position: "absolute", left: -50 + i * 78,
-            top: gy + 62 - h, width: 76, height: h, zIndex: 63,
-            clipPath: "polygon(14% 100%, 0 44%, 34% 60%, 50% 0, 68% 58%, 100% 40%, 86% 100%)",
-            background: `linear-gradient(0deg, ${hexa("#FFD08A", 0.86)}, ${hexa("#E8622A", 0.30)})` }} />
-        );
-      })}
+      {/* ⭐⭐ THE FIREBOX, NOT A ROW OF TONGUES. Alex: *"at twenty two seconds the
+          animation is kind of odd when it starts talking about the tokens getting
+          burned, it doesn't look that good."* v1 ran fourteen clipPath flames the
+          full width of the frame with coins dropping past them — a wall of
+          flame-shaped divs, not a place where something burns.
+          It is now ONE contained firebox with an open door: the fire lives INSIDE
+          it, the light spills OUT of it, and the tokens arrive down a chute from
+          a hopper. Same beat, but you can point at where the burning happens. */}
+      {f >= BURN && (() => {
+        const on = E(f, BURN, BURN + 8, 0, 1, OUT);
+        return (<>
+          {/* the box */}
+          <div style={{ position: "absolute", left: 300, top: gy - 26, width: 420, height: 190,
+            zIndex: 62, borderRadius: 6,
+            background: `linear-gradient(180deg, ${dkh(STEELD, 0.20)}, ${dkh(STEELD, 0.56)})`,
+            border: `9px solid ${dkh(STEELD, 0.62)}`, boxShadow: SH_D }} />
+          {/* the open door, and the fire inside it */}
+          <div style={{ position: "absolute", left: 340, top: gy + 6, width: 340, height: 128,
+            zIndex: 63, borderRadius: 4, overflow: "hidden",
+            background: `linear-gradient(0deg, ${hexa("#FFD08A", 0.92 * on)}, ${hexa("#B8320E", 0.55 * on)})` }}>
+            {Array.from({ length: 9 }, (_, i) => {
+              const ph = f * (0.34 + (i % 4) * 0.09) + i * 2.1;
+              const h = (44 + Math.abs(Math.sin(ph)) * 96) * on;
+              return (
+                <div key={"fi" + i} style={{ position: "absolute", left: 6 + i * 37, bottom: 0,
+                  width: 34, height: h,
+                  clipPath: "polygon(16% 100%, 0 46%, 36% 62%, 50% 0, 66% 60%, 100% 42%, 84% 100%)",
+                  background: `linear-gradient(0deg, ${hexa("#FFF0C0", 0.95)}, ${hexa("#F0782A", 0.30)})` }} />
+              );
+            })}
+          </div>
+          {/* the swung-open door leaf */}
+          <div style={{ position: "absolute", left: 258, top: gy - 2, width: 96, height: 140,
+            zIndex: 64, borderRadius: 4, transform: "rotate(-19deg)", transformOrigin: "100% 20%",
+            background: `linear-gradient(90deg, ${dkh(STEELD, 0.50)}, ${dkh(STEELD, 0.22)})`,
+            boxShadow: SH }} />
+          {/* ⭐ THE LIGHT THE BOX THROWS UP, AND IT FLICKERS HARD. A fire's cone
+              is the largest swept area in this frame; holding it at a constant
+              opacity threw away the motion the tongues used to carry. Three
+              overlapping cones on their own clocks, each breathing in width and
+              opacity, is what firelight on a deck actually looks like — and it
+              repaints most of the upper frame every sample. */}
+          {[0, 1, 2].map((i) => {
+            const fl = 0.62 + Math.abs(Math.sin(f / (5.5 + i * 2.3) + i * 1.7)) * 0.38;
+            const w = 470 + i * 90 + fl * 130;
+            return (
+              <div key={"fc" + i} style={{ position: "absolute", left: 506 - w / 2,
+                top: gy - 300 - i * 26, width: w, height: 310 + i * 30,
+                zIndex: 24 - i, opacity: on * (0.42 - i * 0.10) * fl,
+                clipPath: "polygon(34% 100%, 66% 100%, 100% 0, 0 0)",
+                background: `linear-gradient(0deg, ${hexa("#FFB268", 0.62)}, ${hexa("#F09048", 0)})` }} />
+            );
+          })}
+        </>);
+      })()}
+
+      {/* the HOPPER and its chute: where the tokens come from. §10 — a hand-off
+          needs a source, and "burns more tokens" needs somewhere they arrive from. */}
+      {f >= BURN - 6 && (<>
+        <div style={{ position: "absolute", left: 690, top: gy - 300, width: 190, height: 104,
+          zIndex: 60, clipPath: "polygon(0 0, 100% 0, 74% 100%, 26% 100%)",
+          background: `linear-gradient(180deg, ${mxh(IRON, 0.18)}, ${dkh(IRON, 0.44)})`,
+          boxShadow: SH }} />
+        <div style={{ position: "absolute", left: 660, top: gy - 200, width: 150, height: 22,
+          zIndex: 60, borderRadius: 3, transform: "rotate(24deg)",
+          background: `linear-gradient(180deg, ${mxh(IRON, 0.10)}, ${dkh(IRON, 0.48)})` }} />
+      </>)}
 
       <Rig f={f} x={506} y={gy} size={S} zBack={30} zFront={52} drop={1}
         tight={0.55 + E(f, CLUTTER, CLUTTER + 12, 0, 0.4, OUT)} cables />
@@ -933,10 +1019,20 @@ export const S4: React.FC<SP> = ({ v }) => {
 
       {/* the tokens going into the fire — 66px+ objects, so they survive the
           1012->240 downsample (§11's third trap) */}
-      {Array.from({ length: 12 }, (_, i) => (
-        <TokenCoin key={"tc" + i} x={370 + (i % 4) * 78} y={gy - 240} f={f}
-          at={BURN + 2 + i * 4} dist={330} z={60} s={2.4} />
-      ))}
+      {Array.from({ length: 18 }, (_, i) => {
+        const at = BURN + 1 + i * 2.6;
+        const kk = E(f, at, at + 15, 0, 1, IN_Q);
+        if (kk <= 0 || kk >= 1) return null;
+        /* down the chute, then a short drop through the open door */
+        const x = 742 - kk * 210, y = gy - 214 + kk * 226;
+        return (
+          <div key={"tk" + i} style={{ position: "absolute", left: x, top: y,
+            width: 68, height: 68, borderRadius: "50%", zIndex: 65,
+            transform: `scaleX(${Math.abs(Math.cos(kk * 8))}) rotate(${kk * 190}deg)`,
+            background: `linear-gradient(160deg, ${mxh(GOLD, 0.38)}, ${dkh(GOLD, 0.24)})`,
+            boxShadow: SH }} />
+        );
+      })}
     </Scene>
   );
 };
@@ -965,7 +1061,7 @@ export const S5: React.FC<SP> = ({ v }) => {
   const cut = Math.max(0, Math.min(R.slotsCut, Math.floor((f - CUT0) / 3) + 1));
 
   return (
-    <Scene p={p} slug="THEIR OWN SHOP" push={push(V, 92, 1.068)} vig={0.48}>
+    <Scene p={p} slug="" push={push(V, 92, 1.068)} vig={0.48}>
       <SetFor k="theirbay" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       <SlotRank x={146} y={236} f={f} cut={f >= CUT0 ? cut : 0} z={58} w={720} h={104} />
@@ -1041,7 +1137,7 @@ export const S6: React.FC<SP> = ({ v }) => {
   const p = asPlace("theirbay"); const gy = p.horizon + 150;
 
   return (
-    <Scene p={p} slug="THEIR OWN WORD" push={push(V, 44, 1.058)} vig={0.56}>
+    <Scene p={p} slug="" push={push(V, 44, 1.058)} vig={0.56}>
       <SetFor k="theirbay" f={f} lightK={0.7} rake={0.6} rk={RAKE[V]} />
 
       {/* the cut rig lying on the deck, most of it gone */}
@@ -1119,7 +1215,7 @@ export const S7: React.FC<SP> = ({ v }) => {
   const seized = f >= SEIZE;
 
   return (
-    <Scene p={p} slug="RULE vs RULE" push={push(V, 95, 1.096)} vig={0.44}>
+    <Scene p={p} slug="" push={push(V, 95, 1.096)} vig={0.44}>
       <SetFor k="clash" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       <div style={{ position: "absolute", left: sh.x, top: sh.y, right: -sh.x, bottom: -sh.y }}>
@@ -1228,7 +1324,12 @@ export const S8: React.FC<SP> = ({ v }) => {
   /* ⭐ §11: AN ACTION IS A DISTANCE. The head swings through 128 degrees of
      arc across 19 frames, so the catch reads as an interruption rather than a
      state change. v1 used 96 degrees at s=1.15 and measured 4.57. */
-  const swing = f < CATCH ? E(f, 0, CATCH, -104, 24, IN_Q) : 24 + rock(f, CATCH, 7, 22);
+  /* ⛔ THE ARC RUNS THE WAY A SLEDGE ACTUALLY GOES. With the pivot finally at the
+     HANDS (see `Sledge` — the old percentage origin resolved to the head), the
+     head starts drawn BACK over his shoulder and comes forward and down. Angles
+     are measured from "haft vertical, head up": -118 is cocked back to the left,
+     +30 is past vertical on the follow-through. */
+  const swing = f < CATCH ? E(f, 0, CATCH, -118, 30, IN_Q) : 30 + rock(f, CATCH, 8, 20);
   /* ⭐ AND THEN IT IS TAKEN AWAY. v2 caught the haft at local 19 and held for the
      remaining 38 frames (53% HOLD). The sledge now travels 520px out of frame
      between local 26 and 52, which is the same object doing the SECOND half of
@@ -1237,7 +1338,7 @@ export const S8: React.FC<SP> = ({ v }) => {
   const held = f >= CATCH;
 
   return (
-    <Scene p={p} slug="NOT ALL OF IT" push={push(V, 57, 1.062)} vig={0.58}>
+    <Scene p={p} slug="" push={push(V, 57, 1.062)} vig={0.58}>
       <SetFor k="crib" f={f} lightK={0.34} rake={0.7} rk={RAKE[V]} />
 
       <Rig f={f} x={506} y={gy} size={S} z={46} drop={1} tight={0.8} cables={false} />
@@ -1252,8 +1353,12 @@ export const S8: React.FC<SP> = ({ v }) => {
           motion was there and the CONTRAST was not. The head is now bright steel
           against the dark wall, which is the same swept area at three times the
           luma delta. */}
-      <Sledge x={252 - carry * 560} y={gy - 396 + carry * 120} rot={swing + carry * 46}
-        z={74} s={1.85} bright />
+      {/* ⛔ AND IT IS POSITIONED FROM THE PIVOT. `Sledge` hinges at
+          (12*s, 230*s) inside its own box, so to put the hands at (392, 540) —
+          roughly where a 300px Claude's grip is — the box origin has to sit that
+          much up and to the left. v1 had the hands 29px BELOW the floor. */}
+      <Sledge x={392 - 12 * 1.85 - carry * 560} y={540 - 230 * 1.85 + carry * 120}
+        rot={swing + carry * 46} z={74} s={1.85} bright />
 
       {/* ⭐ TWO crew, and they ARRIVE — v1 had one appearing 8 frames before the
           catch, which is a state change rather than an action. They now run in
@@ -1263,7 +1368,7 @@ export const S8: React.FC<SP> = ({ v }) => {
         const run = E(f, CATCH - 22 + i * 5, CATCH + 2, 0, 1, OUT);
         if (run <= 0) return null;
         const cs = 172 - i * 18;
-        const cx = -110 + run * (330 - i * 74);
+        const cx = -110 + run * (452 - i * 96);   /* ends AT the haft, not near it */
         const bob = Math.abs(Math.sin((f + i * 7) / 5)) * (1 - run) * 22;
         return (
           <React.Fragment key={"cc" + i}>
@@ -1312,7 +1417,7 @@ export const S9: React.FC<SP> = ({ v }) => {
   const k = E(f, LIFT, LIFT + 14, 0, 1, BACK);
 
   return (
-    <Scene p={p} slug="THE RIGHT TOOL" push={push(V, 41, 1.070)} vig={0.46}>
+    <Scene p={p} slug="" push={push(V, 41, 1.070)} vig={0.46}>
       <SetFor k="crib" f={f} lightK={E(f, 0, 8, 0.34, 1.15, OUT)} rake={1} rk={RAKE[V]} />
 
       {/* the cutter comes OFF the wall and travels — 420px, 2.8x its own length */}
@@ -1320,13 +1425,13 @@ export const S9: React.FC<SP> = ({ v }) => {
           frame, which is §1's "many large bright objects travelling" with one
           object instead of many. v1's 1.25-scale tool crossed 420px and the
           scene measured 8.91 mostly on the lights coming up. */}
-      <Cutter x={92 + k * 520} y={252 + k * 150} f={f} rot={-18 + k * 26} z={74} s={2.1}
+      <Cutter x={92 + k * 470} y={252 + k * 246} f={f} rot={-18 + k * 30} z={74} s={2.1}
         on={E(f, LIFT + 10, LIFT + 18, 0, 1, OUT)} />
 
       {/* the two hands it passes between */}
       {[0, 1].map((i) => {
         const s = i ? 214 : 178;
-        const x = i ? 742 : 214;
+        const x = i ? 690 : 214;
         return (
           <React.Fragment key={"hd" + i}>
             <div style={{ position: "absolute", left: x - s / 2, top: gy - s, zIndex: 44 }}>
@@ -1361,94 +1466,98 @@ export const S10: React.FC<SP> = ({ v }) => {
   const S = 300;
   const k = E(f, 2, SEAT, 0, 1, IN_Q);
   const seated = f >= SEAT ? 1 : 0;
+  const read = seated ? E(f, SEAT + 2, SEAT + 26, 0, 1, LIN) : 0;
 
   return (
-    <Scene p={p} slug="ONE PROMPT" push={push(V, 61, 1.086)} vig={0.50}>
+    <Scene p={p} slug="" push={push(V, 61, 1.086)} vig={0.50}>
       <SetFor k="crib" f={f} lightK={1.25} rake={1} rk={RAKE[V]} />
-      {/* the console's own key light, so the shot is not a dark rig on a dark
-          wall — the same value-contrast failure as the sledge in S8 */}
-      <Pool x={506} y={gy - 12} w={520} c="#FFD98C" o={0.32} />
-      <Beam x={506} y={100} top={120} bot={560} len={p.horizon + 70} c="#FFE6B0" o={0.22} z={20} f={f} />
+      <Pool x={640} y={gy - 12} w={660} c="#FFD98C" o={0.32} />
+      <Beam x={640} y={100} top={120} bot={560} len={p.horizon + 70} c="#FFE6B0" o={0.22} z={20} f={f} />
 
-      <Rig f={f} x={506} y={gy} size={S} z={46} drop={1} tight={0.75} cables />
-      <div style={{ position: "absolute", left: 506 - S / 2, top: gy - S, zIndex: 40 }}>
-        <Mascot lf={f * 0.9} size={S} nodAmp={4.2} nodSpeed={8}
-          cheer={seated ? E(f, SEAT, SEAT + 10, 0, 0.6, OUT) : 0} />
-      </div>
-      <Contact x={506 - S * 0.44} y={gy - 6} w={S * 0.88} o={0.38} z={38} />
-
-      {/* the two shutter halves SLIDE APART to open the console — two 210px
-          panels travelling in opposite directions is a real event where v8 had a
-          panel that simply existed */}
-      {[-1, 1].map((sd, i) => {
-        const op = E(f, 0, 12, 0, 1, OUT);
+      {/* the crib trolley, running the whole shot */}
+      {[0, 1].map((i) => {
+        const x = ((f * 10.5 + i * 560) % 1420) - 210;
         return (
-          <div key={"sd" + i} style={{ position: "absolute",
-            left: 506 - 210 + (sd < 0 ? 0 : 210) + sd * op * 214,
-            top: gy - S * 1.02 - 40, width: 210, height: 250, zIndex: 58, borderRadius: 6,
-            background: `linear-gradient(${sd < 0 ? 90 : 270}deg, ${mxh(IRON, 0.14)}, ${dkh(IRON, 0.46)})`,
-            boxShadow: SH }} />
+          <React.Fragment key={"tr" + i}>
+            <div style={{ position: "absolute", left: x, top: 150 + i * 90, width: 208, height: 74,
+              zIndex: 25 + i, borderRadius: 5,
+              background: `linear-gradient(180deg, ${mxh(GOLD, 0.30)}, ${dkh(GOLD, 0.34)})`,
+              boxShadow: SH }} />
+            <div style={{ position: "absolute", left: x + 22, top: 164 + i * 90, width: 54, height: 30,
+              zIndex: 26 + i, borderRadius: 3, background: hexa("#FFF4D8", 0.66) }} />
+          </React.Fragment>
         );
       })}
 
-      {/* the console plate opens on the rig's spine, and once the cartridge is in
-          its ten channels light one at a time — a 420px bank of large segments
-          changing every three frames, where v2 had a flat grey panel. */}
-      <div style={{ position: "absolute", left: 506 - 210, top: gy - S * 1.02 - 40, width: 420,
-        height: 250, zIndex: 56, borderRadius: 8,
-        background: `linear-gradient(178deg, ${dkh(STEELD, 0.16)}, ${dkh(STEELD, 0.52)})`,
-        border: `5px solid ${dkh(STEELD, 0.60)}`, boxShadow: SH }}>
+      {/* ⛔⛔ THE READER IS ITS OWN MACHINE, BESIDE HIM — NOT A PLATE OVER HIM.
+          v1 hung a 420x250 console off the rig's spine at z56 with the Mascot at
+          z40, so the shot's biggest dark object painted straight over its own
+          subject and the Claude disappeared. A card reader is a machine in the
+          crib; it stands on the floor, it is cabled to the rig, and the hero
+          stays clear on the right. */}
+      <div style={{ position: "absolute", left: 62, top: gy - 296, width: 372, height: 296,
+        zIndex: 30, borderRadius: 8,
+        background: `linear-gradient(172deg, ${mxh(IRON, 0.14)}, ${dkh(IRON, 0.46)})`,
+        border: `7px solid ${dkh(IRON, 0.54)}`, boxShadow: SH_D }}>
+        {/* the intake slot the card drops into */}
+        <div style={{ position: "absolute", left: 26, right: 26, top: 22, height: 26,
+          borderRadius: 3, background: dkh(IRON, 0.66) }} />
+        {/* the reader's own ten status channels, lighting as it reads */}
         {Array.from({ length: 10 }, (_, i) => {
-          const on = seated ? E(f, SEAT + 3 + i * 3, SEAT + 7 + i * 3, 0, 1, OUT) : 0;
+          const on = read >= (i + 0.5) / 10;
           return (
-            <div key={"ch" + i} style={{ position: "absolute", left: 16 + (i % 5) * 78,
-              top: 20 + Math.floor(i / 5) * 108, width: 66, height: 92, borderRadius: 4,
-              background: on > 0.04 ? mxh(GOLD, 0.06 + Math.sin(f / 5 + i) * 0.10)
-                                    : dkh(STEELD, 0.28),
-              opacity: on > 0.04 ? 0.6 + on * 0.4 : 1 }} />
+            <div key={"rc" + i} style={{ position: "absolute", left: 26 + (i % 5) * 66,
+              top: 178 + Math.floor(i / 5) * 56, width: 54, height: 44, borderRadius: 4,
+              background: on ? mxh(GOLD, 0.10 + Math.sin(f / 5 + i) * 0.10) : dkh(IRON, 0.30),
+              opacity: on ? 1 : 0.85 }} />
           );
         })}
+        {Array.from({ length: 4 }, (_, i) => (
+          <div key={"rv" + i} style={{ position: "absolute", left: 24, right: 24, top: 62 + i * 24,
+            height: 8, borderRadius: 2, background: hexa("#0E1420", 0.40) }} />
+        ))}
       </div>
+      <Contact x={70} y={gy - 8} w={356} o={0.34} z={28} />
 
-      {/* THE CARTRIDGE travels 480px and SEATS with a ring */}
-      {/* ⭐ 1.7 SCALE AND A 620px TRAVEL. The cartridge IS the deliverable, so
-          it is the largest moving object in the shot, not a 214px chip. */}
-      {/* ⛔⛔ CHECK THE SETTLED **AND THE STARTING** x AGAINST THE PANEL (§10's
-          last line, which cost reel 109 a round when a rig sat 90% off-frame).
-          v6 started this at x=944 on a 1012px panel with a 364px cartridge, so
-          the first 60% of a 620px travel happened entirely off-screen and the
-          scene measured 5.84 for an animation that is mostly invisible. It now
-          arcs in from the TOP, where there is room for the whole path. */}
-      <Cartridge x={506 - 230 - (1 - k) * 330} y={gy - S * 1.02 - 30 - (1 - k) * 300}
-        f={f} z={70} s={2.15} seated={seated} label={KEYWORD} />
-      <Ring x={506} y={gy - S * 1.02 + 80} f={f} at={SEAT} c="#FFD9A8" max={330} dur={18} />
-      <Puff x={506} y={gy - S * 1.02 + 150} f={f} at={SEAT} c="#8FA0BE" n={6} />
+      {/* the umbilical from the reader to the rig — the hand-off, drawn */}
+      <div style={{ position: "absolute", left: 428, top: gy - 128, width: 210, height: 8,
+        zIndex: 29, borderRadius: 4, transform: "rotate(-5deg)",
+        background: `linear-gradient(90deg, ${dkh(IRON, 0.40)}, ${dkh(CLAY, 0.20)})` }} />
 
-      {/* ⭐ THE RIG WAKES. v2 seated the cartridge at local 22 and then held for
-          39 frames — 60% HOLD, the second worst in the reel. The prompt landing
-          has to DO something, so power runs out through every brace in turn and
-          each one lights as the pulse reaches it. That is the scene's arrival
-          "costing something", and it sets up the audit in the next shot. */}
+      {/* ⭐ THE CARD ARCS IN AND THE MACHINE READS IT. 250px of travel, then a
+          reader head runs the full height of the card, line by line. */}
+      <PromptCard x={78 - (1 - k) * 220} y={150 - (1 - k) * 240}
+        f={f} z={70} s={0.82} read={read} lit={!!seated} />
+      <Ring x={248} y={gy - 286} f={f} at={SEAT} c="#FFD9A8" max={300} dur={18} />
+      <Puff x={248} y={gy - 274} f={f} at={SEAT} c="#8FA0BE" n={6} />
+
+      {/* the hero, clear on the right, waking as the reader gets through it */}
+      <Rig f={f} x={742} y={gy} size={S} zBack={30} zFront={52} drop={1} tight={0.75} cables />
+      <div style={{ position: "absolute", left: 742 - S / 2, top: gy - S, zIndex: 40 }}>
+        <Mascot lf={f * (seated ? 1.5 : 0.9)} size={S}
+          nodAmp={seated ? 6.8 : 4.2} nodSpeed={seated ? 11 : 8}
+          cheer={seated ? E(f, SEAT + 8, SEAT + 22, 0, 0.7, OUT) : 0} />
+      </div>
+      <Contact x={742 - S * 0.44} y={gy - 6} w={S * 0.88} o={0.38} z={38} />
+
+      {/* power runs out through every brace as the reader reaches its line */}
       {seated > 0 && BRACES.map((b, i) => {
-        const at = SEAT + 4 + i * 2;
-        const kk = E(f, at, at + 5, 0, 1, OUT);
+        const kk = E(f, SEAT + 4 + i * 2, SEAT + 9 + i * 2, 0, 1, OUT);
         if (kk <= 0) return null;
         return (
           <div key={"wk" + b.id} style={{ position: "absolute",
-            left: 506 + b.bx * S - 5, top: gy - S + b.by * S - 5,
+            left: 742 + b.bx * S - 5, top: gy - S + b.by * S - 5,
             width: b.bw * S + 10, height: b.bh * S + 10, zIndex: 60, borderRadius: 5,
-            border: `4px solid ${hexa(GOLD, 0.34 + Math.sin(f / 6 + i) * 0.22)}`,
-            opacity: kk }} />
+            border: `4px solid ${hexa(GOLD, 0.34 + Math.sin(f / 6 + i) * 0.22)}`, opacity: kk }} />
         );
       })}
       {Array.from({ length: 7 }, (_, i) => {
-        const at = SEAT + 5 + i * 5;
-        const kk = E(f, at, at + 12, 0, 1, LIN);
+        const kk = E(f, SEAT + 5 + i * 5, SEAT + 17 + i * 5, 0, 1, LIN);
         if (kk <= 0 || kk >= 1) return null;
         return (
-          <div key={"pl" + i} style={{ position: "absolute", left: 506 - 48,
-            top: gy - S * 0.98 + kk * S * 1.0, width: 96, height: 74, zIndex: 62,
-            borderRadius: 5, background: hexa(mxh(GOLD, 0.34), 0.88 * (1 - kk * 0.35)) }} />
+          <div key={"pl" + i} style={{ position: "absolute", left: 448 + kk * 260,
+            top: gy - 132 - kk * 40, width: 90, height: 66, zIndex: 62, borderRadius: 5,
+            background: hexa(mxh(GOLD, 0.34), 0.88 * (1 - kk * 0.3)) }} />
         );
       })}
     </Scene>
@@ -1471,7 +1580,7 @@ export const S11: React.FC<SP> = ({ v }) => {
   const top = gy - S - 60, bot = gy + 30;
 
   return (
-    <Scene p={p} slug="THE AUDIT" push={push(V, 47, 1.074)} vig={0.48}>
+    <Scene p={p} slug="" push={push(V, 47, 1.074)} vig={0.48}>
       <SetFor k="cutdeck" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       <Rig f={f} x={506} y={gy} size={S} z={46} drop={1} tight={0.7} cables />
@@ -1527,7 +1636,7 @@ export const S12: React.FC<SP> = ({ v }) => {
   const gone = Object.keys(cutAt).filter((id) => f >= cutAt[id] + 4);
 
   return (
-    <Scene p={p} slug="KEEP / CUT" push={push(V, 81, 1.090)} vig={0.46}>
+    <Scene p={p} slug="" push={push(V, 81, 1.090)} vig={0.46}>
       <SetFor k="cutdeck" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       <Rig f={f} x={506} y={gy} size={S} z={46} drop={1}
@@ -1618,7 +1727,7 @@ export const S13: React.FC<SP> = ({ v }) => {
   const lvl = E(f, FREE, FAST, 0.92, 0.16, OUT);
 
   return (
-    <Scene p={p} slug="THE OPEN FLOOR" push={push(V, 124, 1.080)} vig={0.42}>
+    <Scene p={p} slug="" push={push(V, 124, 1.080)} vig={0.42}>
       <SetFor k="openfloor" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       <Belt x={40} y={gy - 46} w={800} f={f} speed={rate} z={44} />
@@ -1702,7 +1811,7 @@ export const S14: React.FC<SP> = ({ v }) => {
   const S = 300;
 
   return (
-    <Scene p={p} slug={`COMMENT ${KEYWORD}`} push={push(V, 53, 1.066)} vig={0.44}>
+    <Scene p={p} slug="" push={push(V, 53, 1.066)} vig={0.44}>
       <SetFor k="openfloor" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
       <Press x={186} y={244} f={f} at={STAMP} t={KEYWORD} z={66} s={1.0} w={640}

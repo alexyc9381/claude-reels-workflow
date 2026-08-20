@@ -158,96 +158,115 @@ export const DUR = {
     which is why the eight slot cuts and the brace cuts are carried by
     `lamp_clunk` (20%) and `mech_clank` (30%) instead. */
 const SFX_RAW: Cue[] = [
-  /* ---- S0 · THE HOOK.  ⭐ THE HEAVIEST STACK IN THE REEL IS THE BITE (3.80s),
-       which is THE-OPEN's "frame 0 gets the heaviest cue stack" applied to the
-       corrected rule: the interrupt here is the EVENT, not frame 0. ---------- */
-  { at: 0.47, src: "thock.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.16 },
-  { at: 2.20, src: "metal_ping.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.31 },
-  ...layer(2.20, { src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.50 },
-                  { src: "mech_clank.wav", dur: 0.12 }),
-  { at: 3.07, src: "am/rumble-build.wav", v: LEVELS.SFX_MID, dur: 0.86, lead: 0 },
-  { at: 3.80, src: "impact_deep.wav", v: LEVELS.SFX_HERO, dur: 0.80 },
-  { at: 3.80, src: "sub.wav",         v: LEVELS.SFX_HERO * db(-3), dur: 0.42 },
-  { at: 3.80, src: "pneu_thunk.wav",  v: LEVELS.SFX_MID,  dur: 0.45, lead: 1 },
-  { at: 3.86, src: "crusher.wav",     v: LEVELS.SFX_TEXTURE, dur: 0.90, lead: 0 },
-  { at: 3.93, src: "neon_off.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.40, lead: 0 },
+  /* ═══ THE BAY'S OWN VOICE — a continuous machine bed, so the room is never
+     silent between cues. v1 had no ambience at all, which is a large part of why
+     the bank read as "a series of clanks" rather than as a place. ═══ */
+  { at: 0.00,  src: "engine_idle.wav", v: LEVELS.SFX_BED * db(-5), dur: 2.00, lead: 0, rate: 1.05 },
+  { at: 19.10, src: "machine_bed.wav", v: LEVELS.SFX_BED, dur: 4.00, lead: 0 },
+  { at: 41.80, src: "machine_bed.wav", v: LEVELS.SFX_BED * db(2), dur: 4.00, lead: 0, rate: 1.12 },
 
-  /* ---- S1 · THE LINE. Three symptoms, three different sounds. ------------- */
-  { at: 4.53, src: "mech_clank.wav",  v: LEVELS.SFX_MID, dur: 0.12 },
-  { at: 5.80, src: "crusher.wav",     v: LEVELS.SFX_MID, dur: 0.90, rate: 0.82 },
-  { at: 6.80, src: "pneu_thunk.wav",  v: LEVELS.SFX_MID, dur: 0.45 },
-  ...layer(7.47, { src: "ceramic_crack.wav", v: LEVELS.SFX_MID, dur: 0.70 },
-                  { src: "bamboo_crack.wav", dur: 0.40 }),
-  ...repeat(3, 8.07, 0.27, { src: "ceramic_crack.wav", v: LEVELS.SFX_TEXTURE, dur: 0.70 }, 0.09),
+  /* ═══ S0 · THE HOOK ═══════════════════════════════════════════════════════
+     ⭐ THE WINCH NOTCHES RISE IN PITCH. `repeat()` walks the rate across the run,
+     so five pay-outs of the same ratchet climb instead of repeating — the sound
+     of a drum letting a load down, and the reason the descent has a direction
+     you can hear. This is the single biggest change from v1, which fired one
+     flat `mech_clank` per event and had nothing moving in pitch anywhere. */
+  ...repeat(3, 0.66, 0.86, { src: "ratchet.wav", v: LEVELS.SFX_TEXTURE, dur: 0.50 }, 0.075),
+  ...layer(2.20, { src: "knife_switch.wav", v: LEVELS.SFX_MID, dur: 0.12 },
+                  { src: "slot_stop.wav", dur: 0.22 }),
+  /* the beacons come on WITH a sound — v1 lit them silently */
+  { at: 2.20,  src: "spotlight_snap.wav", v: LEVELS.SFX_MID, dur: 0.40, lead: 1 },
+  { at: 2.24,  src: "alarm.wav",       v: LEVELS.SFX_TEXTURE * db(-2), dur: 2.40, lead: 0 },
+  { at: 3.07,  src: "rev_up.wav",      v: LEVELS.SFX_MID, dur: 1.00, lead: 0 },
+  /* ⭐ THE BITE IS A FOUR-LAYER STACK WITH A TONAL BODY. `gong` is what gives it
+     WEIGHT — v1's bite was three percussive thuds and no pitch, which is why it
+     landed without feeling like anything. */
+  { at: 3.80,  src: "impact_deep.wav", v: LEVELS.SFX_HERO * db(-3), dur: 0.80 },
+  { at: 3.80,  src: "gong.wav",        v: LEVELS.SFX_HERO * db(-9), dur: 2.20, lead: 1 },
+  { at: 3.80,  src: "sub.wav",         v: LEVELS.SFX_HERO * db(-8), dur: 0.42, lead: 1 },
+  { at: 3.84,  src: "crusher.wav",     v: LEVELS.SFX_TEXTURE, dur: 0.90, lead: 0, rate: 0.86 },
 
-  /* ---- S2 · THE INSPECTION. The findings are what get scored. ------------- */
+  /* ═══ S1 · THE LINE — three symptoms, three DIFFERENT sounds ═══════════════ */
+  { at: 4.53,  src: "mech_clank.wav",  v: LEVELS.SFX_MID, dur: 0.12 },
+  { at: 6.80,  src: "pneu_thunk.wav",  v: LEVELS.SFX_MID, dur: 0.45 },
+  { at: 7.47,  src: "ceramic_crack.wav", v: LEVELS.SFX_MID, dur: 0.70 },
+  { at: 8.07,  src: "bamboo_crack.wav", v: LEVELS.SFX_TEXTURE, dur: 0.40 },
+
+  /* ═══ S2 · THE INSPECTION ═════════════════════════════════════════════════ */
   ...layer(11.60, { src: "green_tone.wav", v: LEVELS.SFX_MID, dur: 0.70 },
-                   { src: "temper_chime.wav", dur: 0.70 }),
-  ...repeat(3, 13.60, 0.10, { src: "mech_clank.wav", v: LEVELS.SFX_TEXTURE, dur: 0.12 }, 0.08),
+                   { src: "bell_ring.wav", dur: 1.60, rate: 1.18 }),
+  { at: 13.55, src: "sign_clack.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.22 },
 
-  /* ---- S3 · THE ARCHIVE. The rig travels, then it FITS. ------------------- */
-  { at: 14.47, src: "gear_shift.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.09 },
-  { at: 16.67, src: "ratchet.wav",     v: LEVELS.SFX_MID, dur: 0.50, rate: 0.92 },
+  /* ═══ S3 · THE ARCHIVE ════════════════════════════════════════════════════ */
+  { at: 16.60, src: "deep_engine.wav", v: LEVELS.SFX_MID * db(-4), dur: 1.10, rate: 1.00 },
   ...layer(17.80, { src: "pneu_thunk.wav", v: LEVELS.SFX_MID, dur: 0.45 },
                    { src: "temper_chime.wav", dur: 0.70 }),
 
-  /* ---- S4 · THE FURNACE. The clutter lands, the fire takes over. ---------- */
+  /* ═══ S4 · THE FURNACE ════════════════════════════════════════════════════ */
   ...layer(19.27, { src: "stamp_press.wav", v: LEVELS.SFX_MID, dur: 0.34 },
                    { src: "impact.wav", dur: 0.62 }),
-  ...repeat(3, 20.00, 0.18, { src: "mech_clank.wav", v: LEVELS.SFX_MID, dur: 0.12 }, 0.07),
-  { at: 20.93, src: "machine_bed.wav", v: LEVELS.SFX_BED, dur: 4.00, lead: 0 },
+  { at: 20.00, src: "mech_clank.wav",  v: LEVELS.SFX_MID, dur: 0.12 },
+  ...layer(20.93, { src: "deep_engine.wav", v: LEVELS.SFX_MID * db(-4), dur: 1.10, rate: 0.92 },
+                   { src: "crusher.wav", dur: 0.90, rate: 0.92 }),
+  /* the tokens going down the chute — a stream, pitched down as they fall in */
+  ...repeat(2, 21.30, 0.26, { src: "ticket_click.wav", v: LEVELS.SFX_TEXTURE, dur: 0.14 }, -0.09),
   { at: 22.10, src: "thock.wav",       v: LEVELS.SFX_MID, dur: 0.16 },
 
-  /* ---- S5 · THEIR OWN SHOP. Eight of ten, four of them scored. ------------ */
-  { at: 23.27, src: "mech_clank.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.12 },
-  ...repeat(4, 24.70, 0.20, { src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.27 }, 0.06),
+  /* ═══ S5 · THEIR OWN SHOP ═════════════════════════════════════════════════ */
+  ...repeat(2, 24.70, 0.32, { src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.27 }, 0.07),
 
-  /* ---- S6 · THE STAMP. One object, one blow. ----------------------------- */
+  /* ═══ S6 · THE STAMP ══════════════════════════════════════════════════════ */
   { at: 26.87, src: "stamp_press.wav", v: LEVELS.SFX_HERO * db(-2), dur: 0.34 },
   { at: 26.87, src: "impact_deep.wav", v: LEVELS.SFX_MID, dur: 0.80, lead: 1 },
   { at: 26.90, src: "slate_whump.wav", v: LEVELS.SFX_TEXTURE, dur: 0.16, lead: 0 },
 
-  /* ---- S7 · THE CLASH. ⭐ THE SECOND PEAK — §9's density CONTOUR is the point,
-       so this scene and the hook carry the two heavy stacks and everything
-       between them thins out. --------------------------------------------- */
-  { at: 28.43, src: "scan_beep.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.40 },
-  ...layer(29.20, { src: "twang.wav", v: LEVELS.SFX_MID, dur: 0.50 },
-                   { src: "crusher.wav", dur: 0.90, rate: 0.90 }),
-  { at: 29.97, src: "impact_deep.wav", v: LEVELS.SFX_HERO, dur: 0.80 },
-  { at: 29.97, src: "boom.wav",        v: LEVELS.SFX_HERO * db(-4), dur: 0.55, lead: 1 },
+  /* ═══ S7 · THE CLASH — ⭐ THE SECOND PEAK ═════════════════════════════════
+     The strain has to be AUDIBLE before the seize or the seize is just a bang:
+     an engine under load, a cable creaking, then everything stops at once. */
+  { at: 28.43, src: "blip3.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.22 },
+  ...layer(29.10, { src: "engine_rev.wav", v: LEVELS.SFX_MID, dur: 1.40, rate: 0.84 },
+                   { src: "twang.wav", dur: 0.50, rate: 0.88 }),
+  { at: 29.97, src: "impact_deep.wav", v: LEVELS.SFX_HERO * db(-3), dur: 0.80 },
+  { at: 29.97, src: "gong.wav",        v: LEVELS.SFX_HERO * db(-8), dur: 2.20, lead: 1 },
+  { at: 29.97, src: "boom.wav",        v: LEVELS.SFX_HERO * db(-11), dur: 0.55, lead: 1 },
   { at: 30.00, src: "adv_strike.wav",  v: LEVELS.SFX_MID, dur: 0.60, lead: 0 },
   { at: 30.03, src: "can_bong.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.34, lead: 0 },
 
-  /* ---- S8/S9 · THE CRIB. Two beats, two cues. ---------------------------- */
+  /* ═══ S8 / S9 · THE CRIB ══════════════════════════════════════════════════ */
   ...layer(31.60, { src: "thock.wav", v: LEVELS.SFX_MID, dur: 0.16 },
                    { src: "wrench_clank.wav", dur: 0.06 }),
-  { at: 33.53, src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE, dur: 0.50 },
+  { at: 33.50, src: "chrome_shine.wav", v: LEVELS.SFX_MID, dur: 0.50 },
 
-  /* ---- S10 · THE PASTE. It seats. --------------------------------------- */
+  /* ═══ S10 · THE PASTE — ⭐ THE READER READS IT, LINE BY LINE ═══════════════
+     Three DIFFERENT blips for the three instruction lines, rising. The card is
+     the deliverable; it should sound like a machine taking an instruction in,
+     not like one more clunk. */
   ...layer(34.97, { src: "pneu_thunk.wav", v: LEVELS.SFX_MID, dur: 0.45 },
                    { src: "gold_stamp.wav", dur: 0.50 }),
+  { at: 35.30, src: "blip1.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.22 },
+  { at: 35.58, src: "blip2.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.22 },
 
-  /* ---- S11 · THE AUDIT. The sweep, then three findings. ------------------ */
-  { at: 36.40, src: "scan_beep.wav",   v: LEVELS.SFX_MID, dur: 0.40, rate: 0.86 },
-  ...repeat(3, 36.80, 0.36, { src: "scan_beep.wav", v: LEVELS.SFX_TEXTURE, dur: 0.40 }, 0.10),
+  /* ═══ S11 · THE AUDIT ═════════════════════════════════════════════════════ */
+  { at: 36.40, src: "scan_beep.wav",   v: LEVELS.SFX_MID, dur: 0.40, rate: 0.84 },
+  { at: 36.90, src: "scan_beep.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.40, rate: 1.10 },
 
-  /* ---- S12 · THE VERDICT. The villain comes off, four cuts scored. ------- */
+  /* ═══ S12 · THE VERDICT ═══════════════════════════════════════════════════ */
   { at: 37.83, src: "lamp_clunk.wav",  v: LEVELS.SFX_MID, dur: 0.27 },
   { at: 38.33, src: "mech_clank.wav",  v: LEVELS.SFX_MID, dur: 0.12 },
-  ...repeat(4, 38.90, 0.22, { src: "lamp_clunk.wav", v: LEVELS.SFX_MID, dur: 0.27 }, 0.07),
-  { at: 39.57, src: "crusher.wav",     v: LEVELS.SFX_MID, dur: 0.90, rate: 0.94 },
+  ...repeat(2, 38.90, 0.34, { src: "knife_switch.wav", v: LEVELS.SFX_MID, dur: 0.12 }, 0.09),
+  { at: 39.57, src: "rebuild_thud.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.80 },
 
-  /* ---- S13 · THE OPEN FLOOR. The line runs, and the bin stays empty. ----- */
-  { at: 41.03, src: "temper_chime.wav", v: LEVELS.SFX_MID, dur: 0.70 },
-  { at: 41.83, src: "machine_bed.wav",  v: LEVELS.SFX_BED, dur: 4.00, lead: 0 },
-  ...layer(42.50, { src: "gear_shift.wav", v: LEVELS.SFX_MID, dur: 0.09 },
-                   { src: "crusher.wav", dur: 0.90, rate: 1.10 }),
-  { at: 43.67, src: "green_tone.wav",   v: LEVELS.SFX_MID, dur: 0.70 },
+  /* ═══ S13 · THE OPEN FLOOR ════════════════════════════════════════════════ */
+  ...layer(41.03, { src: "temper_chime.wav", v: LEVELS.SFX_MID, dur: 0.70 },
+                   { src: "bell_ring.wav", dur: 1.60 }),
+  { at: 42.50, src: "rev_up.wav",      v: LEVELS.SFX_MID, dur: 1.00, rate: 1.16 },
+  ...layer(43.67, { src: "green_tone.wav", v: LEVELS.SFX_MID, dur: 0.70 },
+                   { src: "blip2.wav", dur: 0.22, rate: 1.14 }),
 
-  /* ---- S14 · THE CTA. The same press that named the problem. ------------- */
-  { at: 45.00, src: "stamp_press.wav",  v: LEVELS.SFX_HERO * db(-2), dur: 0.34 },
-  { at: 45.00, src: "gold_stamp.wav",   v: LEVELS.SFX_MID, dur: 0.50, lead: 1 },
-  { at: 45.03, src: "impact.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.62, lead: 0 },
+  /* ═══ S14 · THE CTA ═══════════════════════════════════════════════════════ */
+  { at: 45.00, src: "stamp_press.wav", v: LEVELS.SFX_HERO * db(-2), dur: 0.34 },
+  { at: 45.00, src: "bell_ring.wav",   v: LEVELS.SFX_MID, dur: 1.60, lead: 1 },
+  { at: 45.02, src: "gold_stamp.wav",  v: LEVELS.SFX_MID, dur: 0.50, lead: 0 },
 ];
 
 /** ⭐ THE GAIN IS RE-MEASURED PER REEL. Reel 108's `+8 dB` fixed an INAUDIBLE
