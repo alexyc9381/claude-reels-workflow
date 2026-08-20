@@ -1,0 +1,1232 @@
+[
+{
+"start": 0.0,
+"end": 0.16,
+"word": " If"
+},
+{
+"start": 0.16,
+"end": 0.26,
+"word": " you're"
+},
+{
+"start": 0.26,
+"end": 0.34,
+"word": " not"
+},
+{
+"start": 0.335,
+"end": 0.375,
+"word": " using"
+},
+{
+"start": 0.41,
+"end": 0.52,
+"word": " these"
+},
+{
+"start": 0.52,
+"end": 0.92,
+"word": " 5"
+},
+{
+"start": 0.85,
+"end": 1.15,
+"word": " Google"
+},
+{
+"start": 1.15,
+"end": 1.35,
+"word": " AI"
+},
+{
+"start": 1.35,
+"end": 1.59,
+"word": " tools,"
+},
+{
+"start": 1.72,
+"end": 1.82,
+"word": " you're"
+},
+{
+"start": 1.82,
+"end": 2.06,
+"word": " wasting"
+},
+{
+"start": 2.06,
+"end": 2.56,
+"word": " thousands"
+},
+{
+"start": 3.01,
+"end": 3.23,
+"word": " of"
+},
+{
+"start": 3.23,
+"end": 3.43,
+"word": " dollars"
+},
+{
+"start": 3.43,
+"end": 3.59,
+"word": " a"
+},
+{
+"start": 3.59,
+"end": 3.75,
+"word": " month"
+},
+{
+"start": 3.665,
+"end": 3.71,
+"word": " on"
+},
+{
+"start": 3.74,
+"end": 3.95,
+"word": " AI"
+},
+{
+"start": 3.95,
+"end": 4.43,
+"word": " subscriptions."
+},
+{
+"start": 4.7,
+"end": 4.74,
+"word": " So"
+},
+{
+"start": 4.775,
+"end": 4.94,
+"word": " Google"
+},
+{
+"start": 4.94,
+"end": 5.26,
+"word": " quietly"
+},
+{
+"start": 5.22,
+"end": 5.4,
+"word": " shipped"
+},
+{
+"start": 5.4,
+"end": 5.64,
+"word": " over"
+},
+{
+"start": 5.64,
+"end": 5.92,
+"word": " 20"
+},
+{
+"start": 5.93,
+"end": 6.09,
+"word": " of"
+},
+{
+"start": 6.09,
+"end": 6.15,
+"word": " these"
+},
+{
+"start": 6.165,
+"end": 6.41,
+"word": " tools"
+},
+{
+"start": 6.39,
+"end": 6.51,
+"word": " and"
+},
+{
+"start": 6.51,
+"end": 6.65,
+"word": " I"
+},
+{
+"start": 6.65,
+"end": 6.85,
+"word": " tested"
+},
+{
+"start": 6.91,
+"end": 7.19,
+"word": " all"
+},
+{
+"start": 7.19,
+"end": 7.33,
+"word": " of"
+},
+{
+"start": 7.33,
+"end": 7.47,
+"word": " them,"
+},
+{
+"start": 7.48,
+"end": 7.62,
+"word": " but"
+},
+{
+"start": 7.62,
+"end": 7.88,
+"word": " these"
+},
+{
+"start": 7.88,
+"end": 8.16,
+"word": " 5"
+},
+{
+"start": 8.21,
+"end": 8.35,
+"word": " are"
+},
+{
+"start": 8.35,
+"end": 8.45,
+"word": " the"
+},
+{
+"start": 8.45,
+"end": 8.61,
+"word": " ones"
+},
+{
+"start": 8.61,
+"end": 8.87,
+"word": " that"
+},
+{
+"start": 8.87,
+"end": 9.25,
+"word": " actually"
+},
+{
+"start": 9.25,
+"end": 9.61,
+"word": " replace"
+},
+{
+"start": 9.61,
+"end": 9.79,
+"word": " your"
+},
+{
+"start": 9.79,
+"end": 9.93,
+"word": " paid"
+},
+{
+"start": 9.93,
+"end": 10.23,
+"word": " tools."
+},
+{
+"start": 10.52,
+"end": 10.6,
+"word": " 1."
+},
+{
+"start": 10.93,
+"end": 11.05,
+"word": " AI"
+},
+{
+"start": 11.05,
+"end": 11.37,
+"word": " Studio."
+},
+{
+"start": 11.52,
+"end": 11.64,
+"word": " Instead"
+},
+{
+"start": 11.64,
+"end": 11.78,
+"word": " of"
+},
+{
+"start": 11.78,
+"end": 12.1,
+"word": " $20"
+},
+{
+"start": 11.98,
+"end": 12.24,
+"word": " a"
+},
+{
+"start": 12.24,
+"end": 12.38,
+"word": " month"
+},
+{
+"start": 12.37,
+"end": 12.51,
+"word": " for"
+},
+{
+"start": 12.51,
+"end": 12.67,
+"word": " a"
+},
+{
+"start": 12.67,
+"end": 12.79,
+"word": " chat"
+},
+{
+"start": 12.82,
+"end": 13.0,
+"word": " window,"
+},
+{
+"start": 13.1,
+"end": 13.14,
+"word": " you"
+},
+{
+"start": 13.175,
+"end": 13.28,
+"word": " get"
+},
+{
+"start": 13.35,
+"end": 13.65,
+"word": " Gemini"
+},
+{
+"start": 13.65,
+"end": 13.93,
+"word": " 3"
+},
+{
+"start": 13.93,
+"end": 14.09,
+"word": " Pro"
+},
+{
+"start": 14.1,
+"end": 14.24,
+"word": " in"
+},
+{
+"start": 14.24,
+"end": 14.34,
+"word": " your"
+},
+{
+"start": 14.34,
+"end": 14.54,
+"word": " browser"
+},
+{
+"start": 14.42,
+"end": 14.64,
+"word": " for"
+},
+{
+"start": 14.64,
+"end": 14.82,
+"word": " free"
+},
+{
+"start": 14.93,
+"end": 15.07,
+"word": " on"
+},
+{
+"start": 15.07,
+"end": 15.21,
+"word": " the"
+},
+{
+"start": 15.21,
+"end": 15.37,
+"word": " Google"
+},
+{
+"start": 15.31,
+"end": 15.59,
+"word": " account"
+},
+{
+"start": 15.59,
+"end": 15.77,
+"word": " you"
+},
+{
+"start": 15.77,
+"end": 15.99,
+"word": " already"
+},
+{
+"start": 16.12,
+"end": 16.42,
+"word": " have,"
+},
+{
+"start": 16.42,
+"end": 16.64,
+"word": " with"
+},
+{
+"start": 16.64,
+"end": 16.84,
+"word": " a"
+},
+{
+"start": 16.84,
+"end": 17.08,
+"word": " context"
+},
+{
+"start": 16.915,
+"end": 17.09,
+"word": " window"
+},
+{
+"start": 17.09,
+"end": 17.31,
+"word": " big"
+},
+{
+"start": 17.31,
+"end": 17.49,
+"word": " enough"
+},
+{
+"start": 17.81,
+"end": 17.95,
+"word": " to"
+},
+{
+"start": 17.95,
+"end": 18.13,
+"word": " drop"
+},
+{
+"start": 18.13,
+"end": 18.37,
+"word": " a"
+},
+{
+"start": 18.37,
+"end": 18.55,
+"word": " whole"
+},
+{
+"start": 18.445,
+"end": 18.68,
+"word": " codebase"
+},
+{
+"start": 18.68,
+"end": 19.02,
+"word": " into."
+},
+{
+"start": 19.36,
+"end": 19.44,
+"word": " 2."
+},
+{
+"start": 19.83,
+"end": 20.19,
+"word": " NotebookLM."
+},
+{
+"start": 20.24,
+"end": 20.3,
+"word": " You"
+},
+{
+"start": 20.315,
+"end": 20.46,
+"word": " can"
+},
+{
+"start": 20.46,
+"end": 20.62,
+"word": " build"
+},
+{
+"start": 20.83,
+"end": 21.05,
+"word": " a"
+},
+{
+"start": 21.05,
+"end": 21.23,
+"word": " free"
+},
+{
+"start": 21.23,
+"end": 21.61,
+"word": " second"
+},
+{
+"start": 21.305,
+"end": 21.47,
+"word": " brain"
+},
+{
+"start": 21.47,
+"end": 21.61,
+"word": " by"
+},
+{
+"start": 21.61,
+"end": 21.91,
+"word": " uploading"
+},
+{
+"start": 21.95,
+"end": 22.13,
+"word": " your"
+},
+{
+"start": 22.13,
+"end": 22.33,
+"word": " own"
+},
+{
+"start": 22.33,
+"end": 22.63,
+"word": " files"
+},
+{
+"start": 22.55,
+"end": 22.71,
+"word": " so"
+},
+{
+"start": 22.71,
+"end": 22.83,
+"word": " it"
+},
+{
+"start": 22.83,
+"end": 23.03,
+"word": " stops"
+},
+{
+"start": 23.12,
+"end": 23.44,
+"word": " making"
+},
+{
+"start": 23.44,
+"end": 23.68,
+"word": " things"
+},
+{
+"start": 23.68,
+"end": 23.82,
+"word": " up"
+},
+{
+"start": 23.79,
+"end": 23.87,
+"word": " and"
+},
+{
+"start": 23.87,
+"end": 24.03,
+"word": " has"
+},
+{
+"start": 24.03,
+"end": 24.41,
+"word": " context"
+},
+{
+"start": 24.43,
+"end": 24.67,
+"word": " between"
+},
+{
+"start": 24.67,
+"end": 24.95,
+"word": " all"
+},
+{
+"start": 24.93,
+"end": 25.01,
+"word": " of"
+},
+{
+"start": 25.01,
+"end": 25.15,
+"word": " your"
+},
+{
+"start": 25.15,
+"end": 25.39,
+"word": " sessions."
+},
+{
+"start": 25.75,
+"end": 25.89,
+"word": " 3."
+},
+{
+"start": 26.16,
+"end": 26.28,
+"word": " Google"
+},
+{
+"start": 26.28,
+"end": 26.56,
+"word": " Flow."
+},
+{
+"start": 26.72,
+"end": 26.84,
+"word": " This"
+},
+{
+"start": 26.84,
+"end": 26.98,
+"word": " is"
+},
+{
+"start": 26.98,
+"end": 27.4,
+"word": " Google's"
+},
+{
+"start": 27.39,
+"end": 27.61,
+"word": " AI"
+},
+{
+"start": 27.61,
+"end": 27.81,
+"word": " film"
+},
+{
+"start": 27.81,
+"end": 28.09,
+"word": " tool."
+},
+{
+"start": 28.24,
+"end": 28.54,
+"word": " You"
+},
+{
+"start": 28.54,
+"end": 28.7,
+"word": " type"
+},
+{
+"start": 28.7,
+"end": 28.98,
+"word": " any"
+},
+{
+"start": 28.775,
+"end": 29.0,
+"word": " animated"
+},
+{
+"start": 29.0,
+"end": 29.16,
+"word": " or"
+},
+{
+"start": 29.16,
+"end": 29.32,
+"word": " film"
+},
+{
+"start": 29.43,
+"end": 29.57,
+"word": " shot"
+},
+{
+"start": 29.57,
+"end": 29.69,
+"word": " you"
+},
+{
+"start": 29.69,
+"end": 29.85,
+"word": " want"
+},
+{
+"start": 29.97,
+"end": 30.15,
+"word": " and"
+},
+{
+"start": 30.15,
+"end": 30.29,
+"word": " Veo"
+},
+{
+"start": 30.29,
+"end": 30.55,
+"word": " builds"
+},
+{
+"start": 30.365,
+"end": 30.46,
+"word": " it"
+},
+{
+"start": 30.46,
+"end": 30.56,
+"word": " with"
+},
+{
+"start": 30.56,
+"end": 30.76,
+"word": " a"
+},
+{
+"start": 30.76,
+"end": 30.94,
+"word": " camera"
+},
+{
+"start": 30.95,
+"end": 31.15,
+"word": " move"
+},
+{
+"start": 31.15,
+"end": 31.29,
+"word": " and"
+},
+{
+"start": 31.29,
+"end": 31.65,
+"word": " everything,"
+},
+{
+"start": 31.74,
+"end": 31.84,
+"word": " so"
+},
+{
+"start": 31.84,
+"end": 31.96,
+"word": " you're"
+},
+{
+"start": 31.96,
+"end": 32.1,
+"word": " not"
+},
+{
+"start": 32.33,
+"end": 32.51,
+"word": " paying"
+},
+{
+"start": 32.51,
+"end": 32.87,
+"word": " Higgsfield"
+},
+{
+"start": 32.87,
+"end": 33.03,
+"word": " or"
+},
+{
+"start": 33.03,
+"end": 33.31,
+"word": " Seedance"
+},
+{
+"start": 33.42,
+"end": 33.8,
+"word": " hundreds"
+},
+{
+"start": 33.8,
+"end": 34.0,
+"word": " of"
+},
+{
+"start": 34.0,
+"end": 34.2,
+"word": " dollars"
+},
+{
+"start": 34.075,
+"end": 34.115,
+"word": " per"
+},
+{
+"start": 34.15,
+"end": 34.21,
+"word": " month."
+},
+{
+"start": 34.57,
+"end": 34.67,
+"word": " 4."
+},
+{
+"start": 34.98,
+"end": 35.16,
+"word": " Opal."
+},
+{
+"start": 35.17,
+"end": 35.25,
+"word": " You"
+},
+{
+"start": 35.25,
+"end": 35.49,
+"word": " describe"
+},
+{
+"start": 35.49,
+"end": 35.63,
+"word": " an"
+},
+{
+"start": 35.63,
+"end": 35.73,
+"word": " app"
+},
+{
+"start": 35.96,
+"end": 36.14,
+"word": " in"
+},
+{
+"start": 36.14,
+"end": 36.32,
+"word": " one"
+},
+{
+"start": 36.32,
+"end": 36.68,
+"word": " sentence"
+},
+{
+"start": 36.56,
+"end": 36.66,
+"word": " and"
+},
+{
+"start": 36.66,
+"end": 36.78,
+"word": " it"
+},
+{
+"start": 36.78,
+"end": 36.92,
+"word": " builds"
+},
+{
+"start": 36.9,
+"end": 37.08,
+"word": " a"
+},
+{
+"start": 37.08,
+"end": 37.32,
+"word": " working"
+},
+{
+"start": 37.32,
+"end": 37.58,
+"word": " AI"
+},
+{
+"start": 37.48,
+"end": 37.7,
+"word": " tool"
+},
+{
+"start": 37.7,
+"end": 37.82,
+"word": " you"
+},
+{
+"start": 37.82,
+"end": 38.0,
+"word": " can"
+},
+{
+"start": 38.08,
+"end": 38.2,
+"word": " send"
+},
+{
+"start": 38.2,
+"end": 38.3,
+"word": " to"
+},
+{
+"start": 38.3,
+"end": 38.5,
+"word": " someone"
+},
+{
+"start": 38.48,
+"end": 38.64,
+"word": " as"
+},
+{
+"start": 38.64,
+"end": 38.8,
+"word": " a"
+},
+{
+"start": 38.8,
+"end": 38.94,
+"word": " link"
+},
+{
+"start": 39.17,
+"end": 39.75,
+"word": " immediately."
+},
+{
+"start": 39.96,
+"end": 40.32,
+"word": " 5."
+},
+{
+"start": 40.58,
+"end": 41.06,
+"word": " Antigravity."
+},
+{
+"start": 41.19,
+"end": 41.25,
+"word": " It's"
+},
+{
+"start": 41.265,
+"end": 41.45,
+"word": " a"
+},
+{
+"start": 41.45,
+"end": 41.63,
+"word": " free"
+},
+{
+"start": 41.59,
+"end": 41.89,
+"word": " coding"
+},
+{
+"start": 41.89,
+"end": 42.19,
+"word": " IDE"
+},
+{
+"start": 42.19,
+"end": 42.43,
+"word": " from"
+},
+{
+"start": 42.43,
+"end": 42.63,
+"word": " Google"
+},
+{
+"start": 42.62,
+"end": 42.78,
+"word": " that"
+},
+{
+"start": 42.78,
+"end": 42.92,
+"word": " runs"
+},
+{
+"start": 43.04,
+"end": 43.18,
+"word": " a"
+},
+{
+"start": 43.18,
+"end": 43.34,
+"word": " team"
+},
+{
+"start": 43.26,
+"end": 43.44,
+"word": " of"
+},
+{
+"start": 43.44,
+"end": 43.74,
+"word": " agents"
+},
+{
+"start": 43.74,
+"end": 44.08,
+"word": " at"
+},
+{
+"start": 44.08,
+"end": 44.34,
+"word": " once"
+},
+{
+"start": 44.38,
+"end": 44.68,
+"word": " across"
+},
+{
+"start": 44.68,
+"end": 44.88,
+"word": " your"
+},
+{
+"start": 44.88,
+"end": 45.12,
+"word": " editor,"
+},
+{
+"start": 45.44,
+"end": 45.6,
+"word": " terminal,"
+},
+{
+"start": 45.78,
+"end": 45.92,
+"word": " and"
+},
+{
+"start": 45.92,
+"end": 46.08,
+"word": " your"
+},
+{
+"start": 46.08,
+"end": 46.38,
+"word": " browser"
+},
+{
+"start": 46.63,
+"end": 46.97,
+"word": " while"
+},
+{
+"start": 46.97,
+"end": 47.13,
+"word": " you"
+},
+{
+"start": 47.13,
+"end": 47.27,
+"word": " just"
+},
+{
+"start": 47.205,
+"end": 47.38,
+"word": " watch"
+},
+{
+"start": 47.38,
+"end": 47.52,
+"word": " them"
+},
+{
+"start": 47.52,
+"end": 47.78,
+"word": " work."
+},
+{
+"start": 47.94,
+"end": 48.06,
+"word": " This"
+},
+{
+"start": 48.06,
+"end": 48.18,
+"word": " is"
+},
+{
+"start": 48.18,
+"end": 48.28,
+"word": " how"
+},
+{
+"start": 48.255,
+"end": 48.38,
+"word": " people"
+},
+{
+"start": 48.38,
+"end": 48.72,
+"word": " become"
+},
+{
+"start": 48.72,
+"end": 49.02,
+"word": " 20"
+},
+{
+"start": 49.0,
+"end": 49.22,
+"word": " times"
+},
+{
+"start": 49.22,
+"end": 49.46,
+"word": " more"
+},
+{
+"start": 49.46,
+"end": 49.8,
+"word": " productive"
+},
+{
+"start": 49.89,
+"end": 50.07,
+"word": " with"
+},
+{
+"start": 50.07,
+"end": 50.23,
+"word": " their"
+},
+{
+"start": 50.23,
+"end": 50.47,
+"word": " coding"
+},
+{
+"start": 50.35,
+"end": 50.59,
+"word": " agents,"
+},
+{
+"start": 50.71,
+"end": 50.81,
+"word": " and"
+},
+{
+"start": 50.81,
+"end": 50.99,
+"word": " that's"
+},
+{
+"start": 50.98,
+"end": 51.08,
+"word": " what"
+},
+{
+"start": 51.08,
+"end": 51.26,
+"word": " people"
+},
+{
+"start": 51.26,
+"end": 51.42,
+"word": " are"
+},
+{
+"start": 51.42,
+"end": 51.68,
+"word": " also"
+},
+{
+"start": 51.68,
+"end": 51.92,
+"word": " paying"
+},
+{
+"start": 51.92,
+"end": 52.28,
+"word": " Cursor"
+},
+{
+"start": 52.24,
+"end": 52.4,
+"word": " and"
+},
+{
+"start": 52.4,
+"end": 52.56,
+"word": " other"
+},
+{
+"start": 52.56,
+"end": 52.86,
+"word": " coding"
+},
+{
+"start": 52.9,
+"end": 53.34,
+"word": " IDEs"
+},
+{
+"start": 53.34,
+"end": 53.72,
+"word": " $20"
+},
+{
+"start": 53.72,
+"end": 53.96,
+"word": " a"
+},
+{
+"start": 53.96,
+"end": 54.1,
+"word": " month"
+},
+{
+"start": 54.1,
+"end": 54.32,
+"word": " for."
+},
+{
+"start": 54.66,
+"end": 54.74,
+"word": " For"
+},
+{
+"start": 54.74,
+"end": 54.92,
+"word": " the"
+},
+{
+"start": 54.92,
+"end": 55.1,
+"word": " full"
+},
+{
+"start": 55.22,
+"end": 55.48,
+"word": " free"
+},
+{
+"start": 55.48,
+"end": 55.74,
+"word": " list,"
+},
+{
+"start": 55.9,
+"end": 56.14,
+"word": " comment"
+},
+{
+"start": 55.975,
+"end": 56.18,
+"word": " BILL."
+}
+]
