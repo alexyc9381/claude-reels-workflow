@@ -147,11 +147,18 @@ export const DUR = {
       LOW MOVEMENT  impact_deep 93% low · boom 95% · sub 97% · rebuild_thud 90%
                     thock 89% · adv_strike 89% · chair_knock 70% · lamp_clunk 56%
                     can_bong 46% · slate_whump 45% · impact 42% · mech_clank 42%
-                    pneu_thunk 40% · crusher 40% (33% hi — a real machine)
+                    pneu_thunk 40% · chair_knock 70%
       TEXTURE       ratchet · metal_ping · wrench_clank · ceramic_crack
                     bamboo_crack · chrome_shine · gold_stamp · gear_shift
                     stamp_press · scan_beep · green_tone · temper_chime · twang
-      BED           machine_bed (4.0s)
+      TONAL         gong · bell_ring · cello_note · temper_chime · green_tone
+    ⛔⛔ AND NOTHING WITH A SLOW NOISY ATTACK. Alex: *"why are the sfx just like
+    motorcycle revs"* — six engine-family cues (rev_up, engine_rev, engine_idle,
+    deep_engine) all added in the round before, plus `crusher` and `machine_bed`,
+    which pass the AIR gate on a technicality and are the same thing by ear: a
+    noise source with a long attack. Every one is gone. A machine bay is made of
+    IMPACTS and TONES; the engine is what the bay's own bed is for, and the bed
+    is music.
 
     ⛔ THE SLAP GATE: a cue used 5+ times must be under 35% above 2kHz. That rules
     out `metal_ping` (89%) and `knife_switch` (52%) for the repeated cut runs,
@@ -161,9 +168,6 @@ const SFX_RAW: Cue[] = [
   /* ═══ THE BAY'S OWN VOICE — a continuous machine bed, so the room is never
      silent between cues. v1 had no ambience at all, which is a large part of why
      the bank read as "a series of clanks" rather than as a place. ═══ */
-  { at: 0.00,  src: "engine_idle.wav", v: LEVELS.SFX_BED * db(-5), dur: 2.00, lead: 0, rate: 1.05 },
-  { at: 19.10, src: "machine_bed.wav", v: LEVELS.SFX_BED, dur: 4.00, lead: 0 },
-  { at: 41.80, src: "machine_bed.wav", v: LEVELS.SFX_BED * db(2), dur: 4.00, lead: 0, rate: 1.12 },
 
   /* ═══ S0 · THE HOOK ═══════════════════════════════════════════════════════
      ⭐ THE WINCH NOTCHES RISE IN PITCH. `repeat()` walks the rate across the run,
@@ -177,14 +181,14 @@ const SFX_RAW: Cue[] = [
   /* the beacons come on WITH a sound — v1 lit them silently */
   { at: 2.20,  src: "spotlight_snap.wav", v: LEVELS.SFX_MID, dur: 0.40, lead: 1 },
   { at: 2.24,  src: "alarm.wav",       v: LEVELS.SFX_TEXTURE * db(-2), dur: 2.40, lead: 0 },
-  { at: 3.07,  src: "rev_up.wav",      v: LEVELS.SFX_MID, dur: 1.00, lead: 0 },
+  { at: 3.07,  src: "ratchet.wav",     v: LEVELS.SFX_MID, dur: 0.50, rate: 1.22 },
   /* ⭐ THE BITE IS A FOUR-LAYER STACK WITH A TONAL BODY. `gong` is what gives it
      WEIGHT — v1's bite was three percussive thuds and no pitch, which is why it
      landed without feeling like anything. */
   { at: 3.80,  src: "impact_deep.wav", v: LEVELS.SFX_HERO * db(-3), dur: 0.80 },
   { at: 3.80,  src: "gong.wav",        v: LEVELS.SFX_HERO * db(-9), dur: 2.20, lead: 1 },
   { at: 3.80,  src: "sub.wav",         v: LEVELS.SFX_HERO * db(-8), dur: 0.42, lead: 1 },
-  { at: 3.84,  src: "crusher.wav",     v: LEVELS.SFX_TEXTURE, dur: 0.90, lead: 0, rate: 0.86 },
+  { at: 3.84,  src: "chair_knock.wav", v: LEVELS.SFX_TEXTURE, dur: 0.30, lead: 0 },
 
   /* ═══ S1 · THE LINE — three symptoms, three DIFFERENT sounds ═══════════════ */
   { at: 4.53,  src: "mech_clank.wav",  v: LEVELS.SFX_MID, dur: 0.12 },
@@ -198,7 +202,7 @@ const SFX_RAW: Cue[] = [
   { at: 13.55, src: "sign_clack.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.22 },
 
   /* ═══ S3 · THE ARCHIVE ════════════════════════════════════════════════════ */
-  { at: 16.60, src: "deep_engine.wav", v: LEVELS.SFX_MID * db(-4), dur: 1.10, rate: 1.00 },
+  { at: 16.60, src: "ratchet.wav",     v: LEVELS.SFX_MID, dur: 0.50, rate: 0.82 },
   ...layer(17.80, { src: "pneu_thunk.wav", v: LEVELS.SFX_MID, dur: 0.45 },
                    { src: "temper_chime.wav", dur: 0.70 }),
 
@@ -206,8 +210,8 @@ const SFX_RAW: Cue[] = [
   ...layer(19.27, { src: "stamp_press.wav", v: LEVELS.SFX_MID, dur: 0.34 },
                    { src: "impact.wav", dur: 0.62 }),
   { at: 20.00, src: "mech_clank.wav",  v: LEVELS.SFX_MID, dur: 0.12 },
-  ...layer(20.93, { src: "deep_engine.wav", v: LEVELS.SFX_MID * db(-4), dur: 1.10, rate: 0.92 },
-                   { src: "crusher.wav", dur: 0.90, rate: 0.92 }),
+  ...layer(20.93, { src: "can_bong.wav", v: LEVELS.SFX_MID, dur: 0.34, rate: 0.86 },
+                   { src: "mech_clank.wav", dur: 0.12, rate: 0.74 }),
   /* the tokens going down the chute — a stream, pitched down as they fall in */
   ...repeat(2, 21.30, 0.26, { src: "ticket_click.wav", v: LEVELS.SFX_TEXTURE, dur: 0.14 }, -0.09),
   { at: 22.10, src: "thock.wav",       v: LEVELS.SFX_MID, dur: 0.16 },
@@ -224,7 +228,10 @@ const SFX_RAW: Cue[] = [
      The strain has to be AUDIBLE before the seize or the seize is just a bang:
      an engine under load, a cable creaking, then everything stops at once. */
   { at: 28.43, src: "blip3.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.22 },
-  ...layer(29.10, { src: "engine_rev.wav", v: LEVELS.SFX_MID, dur: 1.40, rate: 0.84 },
+  /* ⭐ THE STRAIN IS A BOWED TONE, NOT AN ENGINE. `cello_note` swells under the
+     tug of war the way a loaded cable actually sings — TONAL, so it carries
+     tension without being a noise swell. */
+  ...layer(29.10, { src: "cello_note.wav", v: LEVELS.SFX_MID * db(-2), dur: 1.90, rate: 0.92 },
                    { src: "twang.wav", dur: 0.50, rate: 0.88 }),
   { at: 29.97, src: "impact_deep.wav", v: LEVELS.SFX_HERO * db(-3), dur: 0.80 },
   { at: 29.97, src: "gong.wav",        v: LEVELS.SFX_HERO * db(-8), dur: 2.20, lead: 1 },
@@ -259,7 +266,8 @@ const SFX_RAW: Cue[] = [
   /* ═══ S13 · THE OPEN FLOOR ════════════════════════════════════════════════ */
   ...layer(41.03, { src: "temper_chime.wav", v: LEVELS.SFX_MID, dur: 0.70 },
                    { src: "bell_ring.wav", dur: 1.60 }),
-  { at: 42.50, src: "rev_up.wav",      v: LEVELS.SFX_MID, dur: 1.00, rate: 1.16 },
+  ...layer(42.50, { src: "gear_shift.wav", v: LEVELS.SFX_MID, dur: 0.09 },
+                   { src: "temper_chime.wav", dur: 0.70, rate: 1.20 }),
   ...layer(43.67, { src: "green_tone.wav", v: LEVELS.SFX_MID, dur: 0.70 },
                    { src: "blip2.wav", dur: 0.22, rate: 1.14 }),
 
@@ -304,9 +312,9 @@ const CAP_Y: Record<Variant, number> = { bay: 1258, amber: 1330, steel: 1190 };
     keys and timbres carry different energy), so ONE shared trim cannot land all
     three. Each gets its own, solved from its own measurement to hit 12 dB. */
 export const BED_GAIN: Record<Variant, number> = {
-  bay:   db(-4.0),
+  bay:   db(-3.9),
   amber: db(-4.7),
-  steel: db(-3.6),
+  steel: db(-3.7),
 };
 
 /* ⛔⛔⛔ AND THE SECOND TIME THESE WERE RE-SOLVED, IT WAS BECAUSE THE BED WAS

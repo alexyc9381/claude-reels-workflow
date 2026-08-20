@@ -343,3 +343,53 @@ voicing above it. Every root went up an octave (bay 73->147, amber 87->175, stee
 hum's lowpass opened 520-1500 -> 2100-3400 Hz: **70.5% -> 26.7%**, mix **19.8% -> 14.3%, IN BAND.**
 The three BED_GAINs were then re-solved from the new files rather than carried over — the second
 time on this reel that an inherited gain was wrong for the material it was applied to.
+
+---
+
+## ROUND 4 — the boring scenes were the ones where the hero was a bystander
+
+### ⭐⭐⭐ THE SAME DIAGNOSIS TWICE, AND IT IS A GENERAL ONE
+Alex: *"between 4-9 seconds that animation needs to be redone, way too boring and not good enough
+whatsoever"* and *"the animation at 10 seconds, these are too static and boring."*
+
+Both scenes had the SAME defect and it is not "not enough movement" — both passed the motion gate.
+**The hero was a bystander in his own scene.**
+
+- **S1** put a conveyor across the frame and stood a 250px Claude off to one side watching it. But
+  the VO's three symptoms are things HE does — HE takes longer, HE ignores the rule, HE hallucinates.
+  The belt depicted the sentence's OBJECT and left out its SUBJECT. (A generic factory conveyor was
+  also the most anonymous image in the reel.)
+  Rebuilt as THE WORK ORDER: jobs drop down a chute to his bench and the RIG causes each failure in
+  front of you — the braces lock while a 232px dwell dial sweeps into the red, the rig drags his arm
+  straight past a rule plate and flattens it, and the part he finally makes SPLITS into three
+  mismatched copies.
+- **S2** had him STAND while things happened around him: a lamp swung, a hatch opened, flags
+  appeared. Nothing large ever moved.
+  ⭐ The line is a COMPARISON, so the picture is a SEPARATION: the crane lifts the rig bodily off him
+  and hangs it beside him, then both are inspected side by side — the model comes up ALL GREEN, the
+  rig ALL RED. "It's not an issue with the model, you just need to fix your setup" is that image and
+  nothing else. HOLD 49% -> 19%.
+
+> **The rule: when a scene is called boring, check whether the SUBJECT of the spoken sentence is the
+> subject of the shot.** Twice here the answer was no, and in both cases the fix was to give the
+> hero the failure rather than stage it next to him.
+
+### ⛔⛔⛔ "WHY ARE THE SFX JUST LIKE MOTORCYCLE REVS"
+Because I put six engine-family cues in the bank the round before — `rev_up` x2, `engine_rev`,
+`engine_idle`, `deep_engine` x2 — reaching for "machine bay" and landing on "motorbike". Gone, along
+with `crusher` and `machine_bed`, which pass the AIR gate on a technicality and are the same thing by
+ear: a noise source with a long attack.
+⭐ The replacement principle, now written into the bank's header: **a machine bay is made of IMPACTS
+and TONES.** The engine is what the BED is for, and the bed is music. Verified with a new check —
+every cue in the bank has an attack under 120ms unless it is tonal. 37 cues, 0 offenders.
+
+### ⛔⛔⛔ "REMOVE ALL PUFF OF AIR SFX" — AND IT WAS IN THE BED AGAIN
+`sfx_audit` clears the whole bank on NAMED-AIR and AIR-SWELL. The air was in `gen_bay_bed.py`:
+filtered noise multiplied by a swell envelope, **once per bar, under all 46 seconds**. And in the
+round before I had made it worse on both axes at once while chasing the low-end gate — louder
+(0.085/0.11 -> 0.115/0.14) and brighter (lowpass 520-1500 -> 2100-3400 Hz).
+
+⭐ **THIS IS REEL 107'S FIVE-ROUND NOTE FOR THE SECOND TIME IN THIS REPO.** A "puff of air" reported
+against a clean SFX bank is in the MUSIC BED. Do not rebuild the bank looking for it. The layer is
+deleted; the room's texture now comes from the pad's own detuning and the beat swell, which are
+TONES, not noise.

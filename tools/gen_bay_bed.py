@@ -49,7 +49,7 @@ def voice(t, f, detune=0.0, kind="saw"):
             + 0.19 * np.sin(3 * ph + detune * 2)) / 1.61
 
 
-def air(t, cut, seed):
+def air(t, cut, seed):          # ⛔ BANNED — see the note in build()
     """filtered noise — the bay's extraction hum. Three cascaded moving averages
     approximate a smooth lowpass without a per-sample Python loop."""
     rng = np.random.default_rng(seed)
@@ -92,9 +92,17 @@ def build(root, chords, bpm, timbre, noise_cut, seed, bright):
             f = root * (2 ** (semi / 12.0)) * (4 if k > 1 else 2)
             mix += (0.115 - 0.02 * k) * w * voice(t, f, 0.3 * k, timbre)
 
-    # the machine hum: filtered noise, swelling on the bar
-    mix += (0.115 if bright else 0.14) * air(t, noise_cut, seed) * \
-        (0.55 + 0.45 * adsr_pulse(t, bar, 0.30, 1.1))
+    # ⛔⛔⛔ THE NOISE LAYER IS GONE. Alex: *"remove all puff of air sfx."*
+    # It was never in the effects — `sfx_audit` clears the whole bank on the
+    # NAMED-AIR and AIR-SWELL gates. It was HERE: filtered noise multiplied by a
+    # swell envelope, once per bar, under all 46 seconds. That is the definition
+    # of a puff of air, and last round I made it worse on both axes at once —
+    # louder (0.085/0.11 -> 0.115/0.14) and brighter (lowpass 520-1500 ->
+    # 2100-3400 Hz) — while chasing the low-end gate.
+    # ⭐ THIS IS REEL 107'S NOTE FOR THE SECOND TIME IN THIS REPO: a "puff of air"
+    # reported against a clean SFX bank is in the MUSIC BED. Do not rebuild the
+    # bank looking for it. The room's texture now comes from the pad's own
+    # detuning and the beat swell, both of which are TONES, not noise.
 
     # the pulse: a swell on every beat, at the ROOT rather than an octave below.
     # Amplitude only, no attack -- the transient-free rule is unchanged.

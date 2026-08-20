@@ -423,116 +423,149 @@ export const S0: React.FC<SP> = ({ v }) => {
    ====================================================================== */
 export const S1: React.FC<SP> = ({ v }) => {
   const f = useCurrentFrame(); const V = VD(v);
-  const p = asPlace("linebay"); const gy = p.horizon + 96;
+  const p = asPlace("linebay"); const gy = p.horizon + 128;
   const SLOW = 38, IGN = 68, HALL = 106;
-  const S = 250;
-  const BELT_Y = 606;
+  const S = 330;
 
-  /* the belt slows to a crawl on SLOW and never recovers — the background
-     process IS the symptom, so it cannot be decorative here */
-  const beltSpeed = 9.0 - E(f, SLOW, SLOW + 14, 0, 7.6, OUT);
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ⛔⛔⛔ REBUILT. Alex: *"between 4-9 seconds that animation needs to be redone
+     to be a lot more interesting, that one is way too boring and not good enough
+     whatsoever."*
+
+     The diagnosis, and it is the same one as S3's: **THE HERO WAS A BYSTANDER IN
+     HIS OWN SCENE.** v1 put a conveyor across the frame and stood a 250px Claude
+     off to one side watching it. But the VO's three symptoms are things HE does
+     — HE takes longer, HE ignores the rule, HE hallucinates — so the belt was
+     depicting the sentence's object and leaving out its subject. A generic
+     factory conveyor is also the most anonymous image in the whole reel.
+
+     Now it is THE WORK ORDER: jobs drop down a chute to his bench, and the RIG
+     causes each failure in front of you.
+       f178 "answers taking longer"  -> he reaches, the braces LOCK, and a dwell
+             dial beside him spins up while the job just sits there
+       f208 "simple rules getting ignored" -> a rule plate drops into his reach
+             and the rig drags his arm straight PAST it, flattening it
+       f246 "hallucinations" -> the part he finally makes SPLITS into three
+             mismatched wrong copies that clatter off the bench
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  /* the arm the rig drags around — one value, three different failures */
+  const reach = f < SLOW ? 0
+    : f < IGN ? E(f, SLOW, SLOW + 10, 0, 1, OUT) * 0.34
+    : f < HALL ? 0.34 + E(f, IGN, IGN + 8, 0, 1, IN_Q) * 0.66
+    : 1;
+  const strain = E(f, SLOW, SLOW + 8, 0, 1, OUT) * (1 - E(f, HALL, HALL + 10, 0, 1, OUT));
+  const dwell = E(f, SLOW, IGN + 10, 0, 1, LIN);
 
   return (
     <Scene p={p} slug="" push={push(V, 169, 1.085)} vig={0.46}>
       <SetFor k="linebay" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
-      {/* ⭐ THE OVERHEAD RETURN — a second full-width band running the OTHER way,
-          so the frame has a process at both edges. It is furniture: it costs the
-          hierarchy nothing and it is the difference between a shot and a still. */}
-      <Belt x={-40} y={228} w={1100} f={-f * 0.7} speed={5.4} z={26} c="#2E2A1C" />
-      {Array.from({ length: 9 }, (_, i) => {
-        const x = ((-f * 6.2 + i * 138) % 1260) - 130;
-        return <Part key={"oh" + i} x={x} y={168} s={1.85} f={f} z={27}
-          c={i % 3 === 0 ? GOLD : i % 3 === 1 ? RUST : "#6E5A34"} />;
-      })}
-
-      {/* ⭐⭐ THE BELT IS THE SUBJECT. Full panel width, foreground, 84px tall. */}
-      <Belt x={-40} y={BELT_Y} w={1100} f={f} speed={beltSpeed} z={44} />
-      <div style={{ position: "absolute", left: -40, top: BELT_Y + 84, width: 1100, height: 26,
-        zIndex: 43, background: `linear-gradient(180deg, ${dkh(STEELD, 0.44)}, ${dkh(STEELD, 0.66)})` }} />
-
-      {/* SYMPTOM 1 — the part that stalls, and the dwell wheel that says so.
-          ⛔ 150px on the short side, against §11's 40px floor: v1's 62px parts
-          were 15px after the 1012->240 downsample and read as nothing. */}
-      {(() => {
-        const k1 = E(f, 2, SLOW, 0, 1, LIN);
-        const k2 = E(f, SLOW, 169, 0, 0.09, LIN);
-        const x = -60 + (k1 + k2) * 700;
-        return (<>
-          <Part x={x} y={BELT_Y - 108} s={2.4} f={f} z={54} c={GOLD} />
-          {f >= SLOW && (
-            <div style={{ position: "absolute", left: x + 30, top: BELT_Y - 268, width: 132,
-              height: 132, borderRadius: "50%", zIndex: 62,
-              border: `15px solid ${hexa(RED, 0.62)}`,
-              transform: `rotate(${(f - SLOW) * 4.6}deg)` }}>
-              <div style={{ position: "absolute", left: 52, top: 6, width: 14, height: 56,
-                background: hexa(mxh(RED, 0.24), 0.95) }} />
-            </div>
-          )}
-        </>);
-      })()}
-
-      {/* SYMPTOM 2 — a RULE GATE drops across the belt and the part goes STRAIGHT
-          THROUGH it. §11: an action is a DISTANCE — the gate falls 300px and the
-          break throws four large shards, so "ignored" is an event, not a state. */}
-      {(() => {
-        const fall = E(f, IGN, IGN + 8, 0, 1, IN_Q);
-        if (fall <= 0) return null;
-        const broken = f >= IGN + 20;
-        return (<>
-          {!broken && (
-            <div style={{ position: "absolute", left: 560, top: BELT_Y - 316 + fall * 190,
-              width: 210, height: 130, zIndex: 58, borderRadius: 5,
-              background: `linear-gradient(180deg, ${mxh(CREAM, 0.22)}, ${dkh(CREAM, 0.22)})`,
-              border: `6px solid ${dkh(CREAM, 0.38)}`, boxShadow: SH_D,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontFamily: MONO, fontWeight: 900, fontSize: 32, letterSpacing: "0.10em",
-              color: "#2E2718" }}>RULE</div>
-          )}
-          {broken && Array.from({ length: 5 }, (_, i) => {
-            const k = E(f, IGN + 20, IGN + 42, 0, 1, OUT);
-            const dir = (i / 4 - 0.5) * 2;
-            return (
-              <div key={"sh" + i} style={{ position: "absolute",
-                left: 640 + dir * 260 * k, top: BELT_Y - 130 - k * 150 + k * k * 260,
-                width: 84, height: 56, zIndex: 60, borderRadius: 3, opacity: 1 - k * 0.3,
-                transform: `rotate(${k * dir * 190}deg)`,
-                background: `linear-gradient(180deg, ${mxh(CREAM, 0.16)}, ${dkh(CREAM, 0.30)})`,
-                boxShadow: SH }} />
-            );
-          })}
-          <Puff x={660} y={BELT_Y - 96} f={f} at={IGN + 20} c="#CDBE9A" n={8} s={1.6} />
-        </>);
-      })()}
-
-      {/* SYMPTOM 3 — four WARPED parts fly off the end into the bin, large and fast */}
-      {[0, 1, 2, 3].map((i) => {
-        const at = HALL + i * 8;
-        const k = E(f, at, at + 20, 0, 1, OUT);
-        if (k <= 0) return null;
-        const x = 470 + k * 210, y = BELT_Y - 120 - Math.sin(k * Math.PI) * 190 + k * 150;
-        return <Part key={"bd" + i} x={x} y={y} s={2.1} bad={1} f={f + i * 7} z={60} />;
-      })}
-      {/* ⛔ THE BIN IS FULLY IN FRAME. v1 put it at x=846 with w=186 on a 1012px
-          panel, so a third of the reel's callback object was off the edge. */}
-      <RejectBin x={684} y={BELT_Y - 66} fill={E(f, HALL + 12, HALL + 40, 0, 1, OUT)}
-        f={f} z={56} s={1.35} />
-
-      {/* the hero, pushed LEFT and small: this is a different camera, not the
-          hook redressed. He is straining against the rig behind the line. */}
-      <Rig f={f} x={176} y={gy} size={S} zBack={30} zFront={50} drop={1} tight={0.85} cables={false} />
-      <div style={{ position: "absolute", left: 176 - S / 2, top: gy - S, zIndex: 40 }}>
-        <Mascot lf={f * 0.55} size={S} nodAmp={2.0} nodSpeed={5} stern={0.8}
-          gaze={Math.sin(f / 17) * 0.7} />
-      </div>
-      <Contact x={176 - S * 0.44} y={gy - 6} w={S * 0.88} o={0.38} z={38} />
-
-      {/* the rig's pistons — the scene's third process, on its own clock */}
-      {[0, 1].map((i) => (
-        <div key={"pi" + i} style={{ position: "absolute", left: 96 + i * 132,
-          top: gy - S - 132 + Math.sin(f / 8 + i * 2.1) * 34, width: 38, height: 116, zIndex: 44,
-          borderRadius: 4, background: `linear-gradient(180deg, ${STEEL}, ${dkh(IRON, 0.44)})` }} />
+      {/* THE CHUTE the jobs come down — the SOURCE, in frame (§10) */}
+      <div style={{ position: "absolute", left: 640, top: 96, width: 300, height: 30, zIndex: 30,
+        borderRadius: 5, transform: "rotate(17deg)",
+        background: `linear-gradient(180deg, ${mxh(IRON, 0.24)}, ${dkh(IRON, 0.44)})`, boxShadow: SH }} />
+      <div style={{ position: "absolute", left: 660, top: 176, width: 300, height: 26, zIndex: 30,
+        borderRadius: 5, transform: "rotate(17deg)",
+        background: `linear-gradient(180deg, ${mxh(IRON, 0.14)}, ${dkh(IRON, 0.50)})` }} />
+      {Array.from({ length: 6 }, (_, i) => (
+        <div key={"cr" + i} style={{ position: "absolute", left: 664 + i * 52, top: 108 + i * 16,
+          width: 13, height: 84, zIndex: 29, background: hexa(dkh(IRON, 0.34), 0.8),
+          transform: "rotate(17deg)" }} />
       ))}
+
+      {/* THE BENCH — waist-high and IN FRONT of him (reel 112's note) */}
+      <div style={{ position: "absolute", left: 214, top: gy - 96, width: 620, height: 30, zIndex: 56,
+        borderRadius: 4,
+        background: `linear-gradient(180deg, ${mxh(RUST, 0.20)}, ${dkh(RUST, 0.30)})`, boxShadow: SH_D }} />
+      <div style={{ position: "absolute", left: 214, top: gy - 66, width: 620, height: 70, zIndex: 55,
+        background: `linear-gradient(180deg, ${dkh(RUST, 0.36)}, ${dkh(RUST, 0.58)})` }} />
+
+      {/* ⭐ THE DWELL DIAL — "answers taking longer" as a NUMBER MOVING TO ITS
+          VALUE: a 220px face with a needle sweeping most of the way round while
+          nothing else happens. It is the biggest single mover in the shot. */}
+      <div style={{ position: "absolute", left: 62, top: gy - 366, width: 232, height: 232,
+        zIndex: 58, borderRadius: "50%",
+        background: `linear-gradient(168deg, ${mxh(CREAM, 0.30)}, ${dkh(CREAM, 0.18)})`,
+        border: `11px solid ${dkh(IRON, 0.30)}`, boxShadow: SH_D }}>
+        {Array.from({ length: 12 }, (_, i) => (
+          <div key={"tk" + i} style={{ position: "absolute", left: 105, top: 8, width: 8,
+            height: i % 3 === 0 ? 28 : 17, background: i > 8 ? hexa(RED, 0.75) : hexa("#3A3018", 0.55),
+            transformOrigin: "50% 100px", transform: `rotate(${i * 30}deg)` }} />
+        ))}
+        <div style={{ position: "absolute", left: 102, top: 26, width: 14, height: 90,
+          borderRadius: 4, background: dwell > 0.72 ? RED : "#2E2718",
+          transformOrigin: "50% 100%",
+          transform: `rotate(${-140 + dwell * 280}deg)` }} />
+        <div style={{ position: "absolute", left: 94, top: 94, width: 32, height: 32,
+          borderRadius: "50%", background: dkh(IRON, 0.34) }} />
+      </div>
+
+      {/* the three jobs arriving down the chute */}
+      {[0, 1, 2].map((i) => {
+        const at = [SLOW - 26, IGN - 24, HALL - 22][i];
+        const k = E(f, at, at + 16, 0, 1, IN_Q);
+        if (k <= 0) return null;
+        const x = 900 - k * 300, y = 130 + k * (gy - 244);
+        return <Part key={"jb" + i} x={x} y={y} s={2.0} f={f} z={54} c={GOLD} />;
+      })}
+
+      {/* ⭐ SYMPTOM 2 — THE RULE PLATE, and the arm dragged straight past it */}
+      {f >= IGN - 12 && (() => {
+        const fall = E(f, IGN - 12, IGN - 2, 0, 1, IN_Q);
+        const hit = E(f, IGN + 6, IGN + 16, 0, 1, OUT);
+        return (
+          <div style={{ position: "absolute", left: 560, top: gy - 300 + fall * 168 + hit * 60,
+            width: 230, height: 96, zIndex: 60, borderRadius: 5,
+            transform: `rotate(${hit * 88}deg)`, transformOrigin: "0% 100%",
+            background: `linear-gradient(180deg, ${mxh(CREAM, 0.24)}, ${dkh(CREAM, 0.20)})`,
+            border: `6px solid ${dkh(CREAM, 0.38)}`, boxShadow: SH,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontFamily: MONO, fontWeight: 900, fontSize: 30, letterSpacing: "0.10em",
+            color: "#2E2718" }}>RULE</div>
+        );
+      })()}
+
+      {/* ⭐ SYMPTOM 3 — THE OUTPUT SPLITS. One part becomes three mismatched
+          copies that do not agree with each other, which is what a hallucination
+          looks like when the thing hallucinating is a machine making parts. */}
+      {f >= HALL && [0, 1, 2].map((i) => {
+        const k = E(f, HALL + i * 4, HALL + 26 + i * 4, 0, 1, OUT);
+        if (k <= 0) return null;
+        const dir = (i - 1);
+        return (
+          <Part key={"hz" + i} x={470 + dir * 250 * k} y={gy - 190 - Math.sin(k * Math.PI) * 120 + k * 130}
+            s={1.9 + i * 0.25} bad={1} f={f + i * 9} z={62} />
+        );
+      })}
+      <Puff x={520} y={gy - 150} f={f} at={HALL} c="#C9B486" n={8} s={1.5} />
+
+      {/* THE HERO, big and centre — the subject of his own scene */}
+      <Rig f={f} x={470} y={gy} size={S} zBack={30} zFront={52} drop={1}
+        tight={0.6 + strain * 0.4} cables />
+      <div style={{ position: "absolute", left: 470 - S / 2 + reach * 58, top: gy - S,
+        zIndex: 40, transform: `rotate(${reach * 5 - strain * 2}deg)`, transformOrigin: "50% 96%" }}>
+        <Mascot lf={f * (0.5 + strain * 0.3)} size={S}
+          nodAmp={1.8 + strain * 2.4} nodSpeed={5} stern={0.85}
+          gaze={f >= HALL ? Math.sin(f / 4) * 1.4 : Math.sin(f / 15) * 0.6}
+          shock={E(f, HALL, HALL + 6, 0, 0.8, OUT) * (1 - E(f, HALL + 22, HALL + 40, 0, 1, LIN))} />
+      </div>
+      <Contact x={470 - S * 0.44} y={gy - 6} w={S * 0.88} o={0.38} z={38} />
+
+      {/* ⭐ EFFORT WANTS AN EMITTER ON THE STILLEST PART (§11) — he is pinned, so
+          the steam comes off his head while the braces hold him */}
+      {strain > 0.2 && Array.from({ length: 6 }, (_, i) => {
+        const at = SLOW + i * 7;
+        const k = E(f, at, at + 24, 0, 1, OUT);
+        if (k <= 0 || k >= 1) return null;
+        const side = i % 2 ? 1 : -1;
+        return (
+          <div key={"st" + i} style={{ position: "absolute",
+            left: 470 + side * (S * 0.30 + k * 62) - 20, top: gy - S * 0.96 - k * 106,
+            width: 34 + k * 34, height: 34 + k * 34, borderRadius: "50%", zIndex: 66,
+            background: hexa("#F4EDE2", 0.30 * (1 - k)) }} />
+        );
+      })}
     </Scene>
   );
 };
@@ -558,81 +591,93 @@ export const S1: React.FC<SP> = ({ v }) => {
    ====================================================================== */
 export const S2: React.FC<SP> = ({ v }) => {
   const f = useCurrentFrame(); const V = VD(v);
-  const p = asPlace("inspect"); const gy = 880;          /* feet BELOW the panel */
-  const CLEAN = 34, FLAG = 74;
-  const S = 470;
+  const p = asPlace("inspect"); const gy = p.horizon + 128;
+  const OFF = 30, CLEAN = 52, FLAG = 96;
+  const S = 340;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ⛔⛔ REBUILT. Alex: *"the animation at 10 seconds, these are too static and
+     boring throughout here still."* He is right and the fix is the same shape as
+     S1's: v1 had him STAND while things happened around him — a lamp swung, a
+     hatch opened, flags appeared. Nothing large ever moved.
+
+     ⭐ THE LINE IS A COMPARISON, SO THE PICTURE IS A SEPARATION. The crane LIFTS
+     THE RIG BODILY OFF HIM and hangs it beside him, and then both get inspected
+     side by side: the model comes up ALL GREEN, the rig comes up ALL RED.
+     "It's not an issue with the model, you just need to fix your setup" is that
+     image and nothing else — and it is carried by a 300px lift of the largest
+     object in the frame rather than by a hatch.
+       f352 "not an issue with the model" -> green ticks cascade down HIM
+       f412 "fix your setup"              -> red flags stab all over IT
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  const lift = E(f, OFF, OFF + 22, 0, 1, OUT);      /* the rig comes off */
+  const rigX = 506 + lift * 268;
+  const rigY = gy - lift * 210;
 
   return (
-    <Scene p={p} slug="" push={push(V, 129, 1.088)} vig={0.50}>
+    <Scene p={p} slug="" push={push(V, 129, 1.080)} vig={0.48}>
       <SetFor k="inspect" f={f} lightK={1} rake={1} rk={RAKE[V]} />
 
-      {/* the swinging lamp: the ONLY moving light in the reel, and it is a LIGHT,
-          not a camera move (STORYBOARD-SPEC floor 2). Bigger swing at this
-          framing so the shadow direction sweeps the whole frame. */}
-      <SwingLamp x={506} y={-40} f={f} len={230} z={34} c="#DCEFF2" on={1} amp={19} />
-
-      {/* ⭐ THE TURNTABLE. An inspection bay turns the subject, and that makes the
-          largest object in frame move CONTINUOUSLY instead of holding for 56% of
-          the scene. The deck is 620px wide with eight radial ribs, so every
-          rotation sweeps hard light/dark boundaries across the lower third. */}
-      <div style={{ position: "absolute", left: 506 - 330, top: gy - 372, width: 660, height: 160,
-        zIndex: 30, borderRadius: "50%", overflow: "hidden",
-        background: `linear-gradient(180deg, ${mxh(STEELD, 0.22)}, ${dkh(STEELD, 0.44)})`,
-        boxShadow: SH_D }}>
-        {Array.from({ length: 10 }, (_, i) => {
-          const a = (f * 2.1 + i * 36) % 360;
-          const rad = (a * Math.PI) / 180;
-          return (
-            <div key={"rb" + i} style={{ position: "absolute", left: 330 + Math.cos(rad) * 318 - 21,
-              top: 80 + Math.sin(rad) * 70 - 21, width: 42, height: 42, borderRadius: 5,
-              background: hexa(mxh(TEAL, 0.40), 0.34 + 0.5 * (0.5 + Math.cos(rad) / 2)) }} />
-          );
-        })}
-        <div style={{ position: "absolute", left: 40, right: 40, top: 60, height: 40,
-          borderRadius: "50%", border: `6px solid ${hexa(TEAL, 0.30)}` }} />
-      </div>
-
-      {/* a full-width inspection gantry crossing behind him — the background
-          process, and a large bright travelling object (§1's table) */}
-      <div style={{ position: "absolute", left: ((f * 9.5) % 1500) - 300, top: 250,
-        width: 260, height: 60, zIndex: 26, borderRadius: 6,
-        background: `linear-gradient(180deg, ${mxh(TEAL, 0.10)}, ${dkh(TEAL, 0.52)})`,
+      {/* the inspection gantry that does the lifting — the SOURCE of the move */}
+      <div style={{ position: "absolute", left: -40, right: -40, top: 126, height: 30, zIndex: 26,
+        background: `linear-gradient(180deg, ${mxh(STEELD, 0.20)}, ${dkh(STEELD, 0.44)})`,
+        boxShadow: SH }} />
+      {[0, 1, 2].map((i) => (
+        <div key={"hk" + i} style={{ position: "absolute", left: rigX - 120 + i * 120, top: 152,
+          width: 4, height: rigY - S - 152 + 40, zIndex: 25,
+          background: hexa("#20242B", 0.85) }} />
+      ))}
+      {/* the trolley that carried it across, still running */}
+      <div style={{ position: "absolute", left: rigX - 96, top: 108, width: 192, height: 44,
+        zIndex: 28, borderRadius: 5,
+        background: `linear-gradient(180deg, ${mxh(STEELD, 0.28)}, ${dkh(STEELD, 0.36)})`,
         boxShadow: SH }} />
 
-      <Rig f={f} x={506} y={gy} size={S} zBack={30} zFront={52} drop={1} tight={0.6}
-        state={Object.fromEntries(
-          BRACES.filter((_, i) => i < 7).map((b, i) => [b.id, f >= FLAG + i * 5 ? "red" : "idle"])
-        ) as any} cables />
-
-      <div style={{ position: "absolute", left: 506 - S / 2, top: gy - S, zIndex: 40 }}>
-        <Mascot lf={f * 0.6} size={S} nodAmp={2.4} nodSpeed={6} gaze={Math.sin(f / 19) * 0.9} />
+      {/* ⭐ THE MODEL, now standing free and being read clean */}
+      <div style={{ position: "absolute", left: 340 - S / 2, top: gy - S, zIndex: 42 }}>
+        <Mascot lf={f * (lift > 0.9 ? 1.5 : 0.7)} size={S}
+          nodAmp={lift > 0.9 ? 6.4 : 2.4} nodSpeed={lift > 0.9 ? 10 : 6}
+          cheer={f >= CLEAN + 14 ? E(f, CLEAN + 14, CLEAN + 30, 0, 0.55, OUT) : 0}
+          gaze={Math.sin(f / 17) * 0.8} />
       </div>
+      <Contact x={340 - S * 0.44} y={gy - 6} w={S * 0.88} o={0.38} z={40} />
 
-      {/* ⭐ FINDING 1 — the model itself is FINE. A hatch, a clean core, one ring.
-          At this framing it is a 280px reveal instead of a 124px one. */}
-      {f >= CLEAN && (() => {
-        const k = E(f, CLEAN, CLEAN + 9, 0, 1, OUT);
-        return (<>
-          <div style={{ position: "absolute", left: 506 - 140, top: gy - S * 0.60, width: 280,
-            height: 210 * k, zIndex: 54, borderRadius: 10, overflow: "hidden",
-            background: `linear-gradient(180deg, ${dkh("#0E2A34", 0.06)}, ${dkh("#0E2A34", 0.44)})`,
-            border: `6px solid ${dkh(TEAL, 0.40)}` }}>
-            <div style={{ position: "absolute", left: 66, top: 34, width: 142, height: 142,
-              borderRadius: "50%", border: `18px solid ${hexa(GREEN, 0.9)}`,
-              transform: `rotate(${f * 4}deg)` }} />
-            <div style={{ position: "absolute", left: 116, top: 84, width: 42, height: 42,
-              borderRadius: "50%", background: mxh(GREEN, 0.34) }} />
-          </div>
-          <Ring x={506} y={gy - S * 0.46} f={f} at={CLEAN} c="#8FE0B4" max={430} dur={20} />
-          <Ring x={506} y={gy - S * 0.46} f={f} at={CLEAN + 6} c="#B4F0D0" max={300} dur={16} />
-        </>);
-      })()}
-
-      {/* ⭐ FINDING 2 — SEVEN red flags stabbed into the rig, one per 3 frames */}
-      {BRACES.slice(0, 7).map((b, i) => (
-        <Verdict key={"vf" + b.id} x={506 + b.bx * S + b.bw * S * 0.5} y={gy - S + b.by * S - 72}
-          f={f} at={FLAG + i * 5} kind="cut" z={84} s={1.5} />
+      {/* the scan bar that reads HIM, top to bottom */}
+      <ScanLine x={170} w={340} y0={gy - S - 40} y1={gy + 20} f={f} at={CLEAN - 16} dur={26}
+        z={78} c="#7DE0A8" />
+      {/* ⭐ GREEN TICKS CASCADE DOWN THE MODEL — the finding, not just the beam */}
+      {[0, 1, 2, 3, 4].map((i) => (
+        <Verdict key={"ok" + i} x={252 + (i % 2) * 176} y={gy - S + 46 + i * 62}
+          f={f} at={CLEAN + i * 5} kind="keep" z={84} s={1.15} />
       ))}
+
+      {/* ⭐ THE RIG, LIFTED OFF AND HANGING — the whole point of the shot */}
+      <Rig f={f} x={rigX} y={rigY} size={S} zBack={30} zFront={52} drop={1}
+        tight={0.2} sway={lift * Math.sin(f / 13) * 5.5}
+        state={Object.fromEntries(
+          BRACES.map((b, i) => [b.id, f >= FLAG + i * 3 ? "red" : "idle"])
+        ) as any} cables={false} />
+
+      {/* the scan bar that reads IT, and the flags that come back */}
+      <ScanLine x={rigX - 260} w={520} y0={rigY - S - 40} y1={rigY + 40} f={f} at={FLAG - 14} dur={24}
+        z={78} c="#FF7A5E" />
+      {BRACES.filter((b) => b.front).slice(0, 7).map((b, i) => (
+        <Verdict key={"vf" + b.id} x={rigX + b.bx * S + b.bw * S * 0.5} y={rigY - S + b.by * S - 58}
+          f={f} at={FLAG + i * 4} kind="cut" z={84} s={1.2} />
+      ))}
+
+      {/* the two verdict lamps, one over each — green over him, red over it */}
+      {f >= CLEAN + 8 && (
+        <div style={{ position: "absolute", left: 296, top: gy - S - 96, width: 88, height: 30,
+          zIndex: 86, borderRadius: 5,
+          background: hexa(mxh(GREEN, 0.16), 0.55 + Math.sin(f / 7) * 0.30) }} />
+      )}
+      {f >= FLAG + 6 && (
+        <div style={{ position: "absolute", left: rigX - 44, top: rigY - S - 86, width: 88, height: 30,
+          zIndex: 86, borderRadius: 5,
+          background: hexa(mxh(RED, 0.14), 0.55 + Math.sin(f / 5) * 0.32) }} />
+      )}
     </Scene>
   );
 };

@@ -58,7 +58,7 @@ const BANKS: Record<string, Cue[]> = {
   ],
 };
 
-const wrap = (Body: React.FC, key: string): React.FC => () => {
+const wrap = (Body: React.FC<any>, key: string, props: any = {}): React.FC => () => {
   const f = useCurrentFrame();
   return (
     <AbsoluteFill>
@@ -69,7 +69,7 @@ const wrap = (Body: React.FC, key: string): React.FC => () => {
       <CamCtx.Provider value={{ ...CAM.shop }}>
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE.shop }}>
-            <Body />
+            <Body {...props} />
           </div>
         </AssemblyCtx.Provider>
       </CamCtx.Provider>
@@ -85,6 +85,8 @@ const Root: React.FC = () => (<>
   <Composition id="hook-1-gauge"   component={wrap(HookGauge, "gauge")}     durationInFrames={HOOK_LEN} {...V} />
   <Composition id="hook-2-shutter" component={wrap(HookShutter, "shutter")} durationInFrames={HOOK_LEN} {...V} />
   <Composition id="hook-3-line"    component={wrap(HookLine, "line")}       durationInFrames={HOOK_LEN} {...V} />
+  {/* the same shutter with its meter moved above the head */}
+  <Composition id="hook-2b-shutter-head" component={wrap(HookShutter, "shutter", { headBar: true })} durationInFrames={HOOK_LEN} {...V} />
 </>);
 
 registerRoot(Root);

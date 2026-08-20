@@ -126,6 +126,52 @@ const Bay: React.FC<{ p: any; top?: number; h?: number; l?: number; r?: number }
 </>);
 
 
+
+/** ⭐ THE LIMIT BAR — a status bar riding above the hero's head. It FILLS as it
+    pushes (green to amber to red), runs into a hard CAP MARK at the right end,
+    and locks there flashing on the frame it hits the barrier. A bar filling
+    into a cap is the most recognisable "you have run out" object there is, and
+    it says it with no words at all: the cap is a LINE the fill cannot pass,
+    which is the same sentence the barrier makes, stated on the character.
+    ⛔ Wordless on purpose — the reel's text budget is one chip per shot and the
+    header band is already spending it. */
+const LimitBar: React.FC<{ x: number; y: number; f: number; full: number; at: number;
+  w?: number; z?: number; /** true = it EMPTIES to nothing instead of filling to a cap */
+  drain?: boolean }> = ({ x, y, f, full, at, w = 268, z = 70, drain = false }) => {
+  const h = 54;
+  const maxed = f >= at;
+  /* it pops on the frame it maxes, then pulses while it stays pinned */
+  const pop = maxed ? squash(f, at, 0.22, 3, 12) : 1;
+  const flash = maxed ? 0.5 + Math.abs(Math.sin((f - at) / 3.4)) * 0.5 : 0;
+  const fillC = drain ? (full < 0.16 ? RED : full < 0.45 ? GOLD : "#3F9E74")
+    : (full > 0.86 ? RED : full > 0.6 ? GOLD : "#3F9E74");
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h,
+      zIndex: z, transform: `scale(${pop})` }}>
+      {/* the little stem tying it to the head, so it reads as HIS bar */}
+      <div style={{ position: "absolute", left: w / 2 - 5, top: h - 6, width: 10, height: 22,
+        background: dkh("#2A241E", 0.10), borderRadius: 3 }} />
+      {/* the trough */}
+      <div style={{ position: "absolute", inset: 0, borderRadius: 12,
+        background: dkh("#2A241E", 0.06), border: `6px solid ${dkh("#2A241E", 0.34)}` }} />
+      {/* the fill */}
+      <div style={{ position: "absolute", left: 8, top: 8, width: (w - 16) * full, height: h - 16,
+        borderRadius: 7,
+        background: maxed ? mxh(RED, flash * 0.34) : `linear-gradient(90deg, ${mxh(fillC, 0.20)} 0%, ${fillC} 100%)` }} />
+      {/* graduations across the trough */}
+      {[0.2, 0.4, 0.6, 0.8].map((k, i) => (
+        <div key={"gg" + i} style={{ position: "absolute", left: 8 + (w - 16) * k, top: 8,
+          width: 3, height: h - 16, background: hexa("#2A241E", 0.34) }} />
+      ))}
+      {/* ⭐ THE CAP MARK — the line the fill runs into and cannot pass */}
+      <div style={{ position: "absolute", left: drain ? 8 : w - 20, top: -12, width: 12,
+        height: h + 24, borderRadius: 4, background: maxed ? RED : dkh("#2A241E", 0.40) }} />
+      {/* and it throws a ring the moment it reaches the end */}
+      <Ring x={drain ? 14 : w - 14} y={h / 2} f={f} at={at} r={110} c={RED} z={4} w={5} />
+    </div>
+  );
+};
+
 /* =========================================================================
    1 · THE GAUGE — the SUPPLY RUNS OUT, AND THE SCRAP IS WHAT DRAINED IT.
    A Claude working its machine, and beside it a colossal gauge. Every wrong
@@ -265,59 +311,113 @@ export const HookGauge: React.FC = () => {
    in nine frames, which is the biggest single event in anything built for this
    hook.
    ====================================================================== */
-export const HookShutter: React.FC = () => {
+export const HookShutter: React.FC<{ headBar?: boolean }> = ({ headBar = false }) => {
   const f = useCurrentFrame();
   const p = placeFor("press");
   const GY = 648, SH_Y = 300;
-  const WARN = 14, DROP = 18, LAND = 27;
+  /* ⭐ THE MISSING SOURCE (§10): a shutter that just falls is an act of god.
+     A METER above the bench drains a segment at a time while it works, and the
+     LAST segment is what trips it — so the drop has a cause you watched happen. */
+  const BARS = [8, 14, 20, 24];
+  const lit = 5 - BARS.filter(k => f >= k).length;
+  const WARN = 24, DROP = 28, LAND = 37;
   const down = E(f, DROP, LAND, -(SH_Y + 660), 0, IN_Q);
   const landed = f >= LAND;
-  const bounce = landed ? rock(f, LAND, 11, 22) : 0;
-  const sh = shake(f, LAND, 20, 14);
-  /* it heaves at the shutter twice and it does not give */
-  const heave = [40, 62].reduce((a, k) => a + (f >= k && f < k + 16
-    ? E(f, k, k + 6, 0, 16, OUT) - E(f, k + 6, k + 16, 0, 16, IO) : 0), 0);
-
+  const bounce = landed ? rock(f, LAND, 13, 24) : 0;
+  const sh = shake(f, LAND, 26, 16);
+  const heave = [50, 72].reduce((a, k) => a + (f >= k && f < k + 16
+    ? E(f, k, k + 6, 0, 18, OUT) - E(f, k + 6, k + 16, 0, 18, IO) : 0), 0);
   return (
     <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.05]} vig={0.18}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
-        <SetFor k="press" f={f} lit={2.0} t={f * 0.42} rakeRate={4.2} />
+        {/* ⭐ THE MISSING CONSEQUENCE (§10): when the shutter lands, the WHOLE
+            WORLD stops at once — the belt halts, the sparks die, the machine
+            lamp goes out and the warm key snaps cold. One frame, everything.
+            That simultaneous death is the elevation; the slam on its own was
+            just a big object arriving. */}
+        <SetFor k="press" f={f} lit={landed ? 1.05 : 2.0} t={landed ? LAND * 0.42 : f * 0.42}
+          rakeRate={landed ? 0.2 : 4.2} />
         <Bay p={p} top={88} h={430} l={40} r={40} />
         <div style={{ position: "absolute", left: -60, right: -60, top: 556, height: 270, zIndex: 18,
-          background: `linear-gradient(180deg, ${mxh(p.floor, 0.74)} 0%, ${mxh(p.floor, 0.42)} 100%)` }} />
+          background: `linear-gradient(180deg, ${mxh(p.floor, landed ? 0.40 : 0.74)} 0%, ${mxh(p.floor, landed ? 0.14 : 0.42)} 100%)` }} />
         <div style={{ position: "absolute", left: -60, right: -60, top: 550, height: 12, zIndex: 19,
-          background: mxh(p.lip, 0.44) }} />
+          background: mxh(p.lip, landed ? 0.18 : 0.44) }} />
+        {/* the shop's belt, running — and DEAD the instant the shutter lands */}
+        <Belt x={-70} y={470} w={1160} f={landed ? LAND : f} rate={landed ? 0 : 8.4} z={22}
+          carry={[{ o: 0.16, s: 0.62 }, { o: 0.6, s: 0.62 }]} />
 
-        {/* ⭐ THE FOCAL POINT — 336px, working, then hauling on the shutter */}
+        {/* ⭐⭐ THE METER — five segments, draining as it works. The number
+            spine of the whole idea, drawn as lamps rather than a readout.
+            `headBar` moves it off the wall and onto the character, so the limit
+            reads as HIS allowance rather than the building's. */}
+        {headBar && <LimitBar x={506} y={GY - 356} f={f} at={WARN}
+          full={1 - E(f, 0, WARN, 0, 0.98, LIN)} drain z={80} />}
+        {!headBar && <div style={{ position: "absolute", left: 336, top: 158, width: 340, height: 78, zIndex: 34,
+          borderRadius: 10, background: dkh("#4A423A", 0.28),
+          border: `7px solid ${dkh("#4A423A", 0.50)}` }}>
+          {[0, 1, 2, 3, 4].map(i => {
+            const on = i < lit;
+            const died = BARS[4 - 1 - i];
+            return (<div key={"bar" + i} style={{ position: "absolute", left: 14 + i * 63, top: 13,
+              width: 52, height: 46, borderRadius: 5,
+              background: on ? mxh("#3F9E74", 0.24) : dkh("#4A423A", 0.44),
+              transform: `scale(${!on && died !== undefined && f >= died && f < died + 7
+                ? 1 + E(f, died, died + 3, 0, 0.24, OUT) - E(f, died + 3, died + 7, 0, 0.24, IO) : 1})` }} />);
+          })}
+        </div>}
+        {/* the warning lamp on the meter's end, hammering before the drop */}
+        <div style={{ position: "absolute", left: 700, top: 166, width: 62, height: 62,
+          borderRadius: "50%", zIndex: 34, border: `8px solid ${dkh("#4A423A", 0.44)}`,
+          background: f >= WARN && !landed ? mxh(RED, 0.16 + Math.abs(Math.sin(f / 1.7)) * 0.56)
+            : landed ? mxh(RED, 0.30) : dkh(RED, 0.46) }} />
+
+        {/* ⭐ THE FOCAL POINT — working, then shut out in FRONT of the shutter */}
         <Hero f={f} x={506} y={GY} size={336} z={76}
-          lean={-heave} bob={landed ? -heave * 0.8 : 0}
+          lean={landed ? -heave : Math.sin(f / 5) * 5}
+          bob={landed ? -heave * 0.8 : 0}
           cheer={landed ? 1 : 0}
           shock={f >= LAND && f < LAND + 14 ? 0.9 : 0}
-          stern={f >= LAND + 14 && f < 76 ? 0.9 : 0}
-          xeyes={f >= 76 ? 1 : 0} />
+          stern={f >= LAND + 14 && f < 82 ? 0.9 : 0}
+          xeyes={f >= 82 ? 1 : 0} />
 
-        {/* the bench and the half-finished part it was working on */}
+        {/* the bench, the part it was cutting, and the SPARKS — which die too */}
         <div style={{ position: "absolute", left: 236, top: GY - 46, width: 540, height: 94,
           zIndex: 60, borderRadius: 8,
-          background: `linear-gradient(180deg, ${mxh("#8A8074", 0.34)} 0%, ${dkh("#8A8074", 0.22)} 100%)`,
+          background: `linear-gradient(180deg, ${mxh("#8A8074", landed ? 0.14 : 0.34)} 0%, ${dkh("#8A8074", 0.22)} 100%)`,
           border: `6px solid ${dkh("#8A8074", 0.44)}` }} />
         <Part x={300} y={GY - 74} s={1.16} kind={1} c={STEEL} z={62} rot={-6} />
-        <Slip x={742} y={GY - 82} w={112} rot={7} z={62} />
+        {!landed && Array.from({ length: 9 }, (_, i) => {
+          const a = rnd(i, 3) * Math.PI - Math.PI / 2;
+          const d = ((f * 8 + i * 11) % 44);
+          return (<div key={"sp" + i} style={{ position: "absolute",
+            left: 300 + Math.cos(a) * d * 1.8, top: GY - 96 + Math.sin(a) * d * 0.9 + d * 0.6,
+            width: 10, height: 10, borderRadius: 5, background: GOLD, zIndex: 63,
+            opacity: Math.max(0, 0.9 - d / 44) }} />);
+        })}
 
-        {/* the warning lamp, flashing just before it comes down */}
-        <div style={{ position: "absolute", left: 470, top: 172, width: 72, height: 72,
-          borderRadius: "50%", zIndex: 34,
-          border: `8px solid ${dkh("#4A423A", 0.44)}`,
-          background: f >= WARN && !landed ? mxh(RED, 0.20 + Math.abs(Math.sin(f / 2.2)) * 0.5) : dkh(RED, 0.44) }} />
+        {/* ⭐ the note it was holding is KNOCKED OUT of its hands on the slam and
+            flutters down — the small secondary motion that sells a big impact */}
+        {!landed
+          ? <Slip x={742} y={GY - 82} w={112} rot={7} z={62} />
+          : <Slip x={742 + E(f, LAND, LAND + 30, 0, 60, OUT)}
+              y={GY - 82 - Math.sin(Math.min(1, (f - LAND) / 30) * Math.PI) * 210}
+              w={112} rot={7 + (f - LAND) * 7} z={62} />}
 
-        {/* ⭐⭐ THE LIMIT — a heavy steel shutter, two thirds of the panel, that
-            comes down in nine frames and stops. It is drawn IN FRONT of the
-            hero, so the Claude is genuinely shut behind it. */}
+        {/* ⭐ DEBRIS — bolts jumping off the bench on the hit. WEIGHT IS
+            DEFORMATION (§11): the frame shakes, the world jumps, things fall. */}
+        {landed && [0, 1, 2, 3, 4].map(i => {
+          const t = Math.min(1, (f - LAND) / 22);
+          return (<div key={"db" + i} style={{ position: "absolute",
+            left: 280 + i * 118 + Math.sin(i) * 20, top: GY - 60 - Math.sin(t * Math.PI) * (60 + i * 14) + t * t * 90,
+            width: 18, height: 18, borderRadius: 4, background: dkh(STEEL, 0.20), zIndex: 64,
+            transform: `rotate(${t * 300}deg)`, opacity: 1 - Math.max(0, (t - 0.85) * 6) }} />);
+        })}
+
+        {/* ⭐⭐ THE LIMIT — the shutter. Two thirds of the panel in nine frames. */}
         <div style={{ position: "absolute", left: -40, right: -40, top: SH_Y + down + bounce,
           height: 560, zIndex: 70,
           background: `repeating-linear-gradient(180deg, ${mxh("#6E6A63", 0.34)} 0px, ${mxh("#6E6A63", 0.34)} 26px, ${dkh("#6E6A63", 0.16)} 26px, ${dkh("#6E6A63", 0.16)} 52px)`,
           borderBottom: `18px solid ${dkh("#6E6A63", 0.52)}` }}>
-          {/* the bottom rail and its two lugs, so it reads as a SHUTTER */}
           <div style={{ position: "absolute", left: 0, right: 0, bottom: -14, height: 32,
             background: dkh("#6E6A63", 0.44) }} />
           {[300, 720].map((x, i) => (
@@ -325,13 +425,11 @@ export const HookShutter: React.FC = () => {
               height: 40, borderRadius: 6, background: dkh("#6E6A63", 0.56) }} />
           ))}
         </div>
-        {/* the two guide rails it runs in, in front of everything */}
         {[-40, 972].map((x, i) => (
           <div key={"gr" + i} style={{ position: "absolute", left: x, top: -40, width: 80,
             height: 1000, zIndex: 74,
             background: `linear-gradient(90deg, ${mxh("#4A443C", 0.20)} 0%, ${dkh("#4A443C", 0.40)} 100%)` }} />
         ))}
-        {/* the padlock hasp clacking shut on it */}
         {f >= LAND + 6 && (
           <div style={{ position: "absolute", left: 452, top: SH_Y + 516 + bounce, width: 108,
             height: 76, zIndex: 78, borderRadius: 8,
@@ -344,9 +442,18 @@ export const HookShutter: React.FC = () => {
           </div>
         )}
 
-        <Puff x={506} y={SH_Y + 560} f={f} at={LAND} n={20} s={1.8} z={82} spread={1.5} />
-        <Ring x={506} y={SH_Y + 554} f={f} at={LAND} r={380} c={p.key} z={81} />
-        <MarkCast x={880} y={196} s={112} z={30} f={f} spin={0.55} o={0.88} />
+        {/* ⭐ EFFORT WANTS AN EMITTER ON THE STILLEST PART (§11) */}
+        {landed && f >= 50 && Array.from({ length: 7 }, (_, i) => {
+          const t = ((f * 2.6 + i * 16) % 54) / 54;
+          return (<div key={"stm" + i} style={{ position: "absolute",
+            left: 470 + Math.sin(f / 7 + i) * 30 + i * 6, top: GY - 356 - t * 150,
+            width: 22 + t * 30, height: 22 + t * 30, borderRadius: "50%", zIndex: 79,
+            background: "#F4EDE0", opacity: Math.max(0, 0.32 * (1 - t)) }} />);
+        })}
+
+        <Puff x={506} y={SH_Y + 560} f={f} at={LAND} n={24} s={2.1} z={82} spread={1.7} />
+        <Ring x={506} y={SH_Y + 554} f={f} at={LAND} r={430} c={p.key} z={81} />
+        <MarkCast x={880} y={196} s={112} z={30} f={f} spin={landed ? 0 : 0.55} o={0.88} />
       </div>
     </Scene>
   );
@@ -365,15 +472,14 @@ export const HookShutter: React.FC = () => {
 export const HookLine: React.FC = () => {
   const f = useCurrentFrame();
   const p = placeFor("press");
-  const HIT = 30;
+  const HIT = 26;
   const push0 = E(f, 0, HIT, 0, 250, IO);
   const hit = f >= HIT;
-  /* it strains against the barrier in three surges and gets nowhere */
   const strain = [38, 58, 76].reduce((a, k) => a + (f >= k && f < k + 18
-    ? E(f, k, k + 7, 0, 20, OUT) - E(f, k + 7, k + 18, 0, 20, IO) : 0), 0);
+    ? E(f, k, k + 7, 0, 22, OUT) - E(f, k + 7, k + 18, 0, 22, IO) : 0), 0);
   const x0 = 250 + push0 + strain;
-  const sh = shake(f, HIT, 16, 12);
-  const GY = 648, BAR = 742;
+  const sh = shake(f, HIT, 20, 13);
+  const GY = 648, BAR = 700;
   return (
     <Scene p={p} slug="THE JOB SHOP" push={[0, HOOK_LEN, 1.05]} vig={0.18}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
@@ -384,63 +490,122 @@ export const HookLine: React.FC = () => {
         <div style={{ position: "absolute", left: -60, right: -60, top: 550, height: 12, zIndex: 19,
           background: mxh(p.lip, 0.44) }} />
 
-        {/* ⭐⭐ THE LIMIT — a hard barrier across the floor, hazard striped, with
-            two posts bolted down. It never moves a pixel, which is the point. */}
-        {[BAR - 40, BAR + 150].map((x, i) => (
-          <div key={"po" + i} style={{ position: "absolute", left: x, top: 300, width: 46,
-            height: 380, zIndex: 62, borderRadius: 5,
-            background: `linear-gradient(90deg, ${mxh("#4A443C", 0.22)} 0%, ${dkh("#4A443C", 0.40)} 100%)` }} />
-        ))}
-        <div style={{ position: "absolute", left: BAR - 60, top: 372, width: 300, height: 68,
-          zIndex: 64, borderRadius: 6,
-          background: `repeating-linear-gradient(56deg, ${RED} 0px, ${RED} 30px, ${CREAMB} 30px, ${CREAMB} 60px)`,
-          border: `6px solid ${dkh(RED, 0.34)}` }} />
-        <div style={{ position: "absolute", left: BAR - 60, top: 500, width: 300, height: 52,
-          zIndex: 64, borderRadius: 6,
-          background: `repeating-linear-gradient(56deg, ${RED} 0px, ${RED} 30px, ${CREAMB} 30px, ${CREAMB} 60px)`,
-          border: `6px solid ${dkh(RED, 0.34)}`, opacity: 0.92 }} />
-        {/* the stop line painted on the floor it cannot cross */}
+        <Belt x={-70} y={318} w={1160} f={f} rate={8.6} z={21}
+          carry={[{ o: 0.2, s: 0.6, wrong: true }, { o: 0.7, s: 0.6, wrong: true }]} />
+
+        {/* ⭐⭐⭐ THE OTHER HALF OF THE VO'S OWN SENTENCE. The line is *"the
+            people who NEVER hit their Claude limit"*, and until now the picture
+            only had the person who does. Past the barrier, in the light, a
+            second Claude walks away with a finished part, entirely untroubled.
+            That is the comparison the hook is actually making, and it costs one
+            small sprite to say it. */}
+        {/* the lit bay beyond the line, and the walkway it is walking away on */}
+        <div style={{ position: "absolute", left: 748, top: 110, width: 300, height: 320, zIndex: 24,
+          borderRadius: 8, background: `linear-gradient(180deg, #FFF8EA 0%, ${mxh(p.key, 0.52)} 100%)` }} />
+        <div style={{ position: "absolute", left: 716, top: 366, width: 340, height: 28, zIndex: 27,
+          borderRadius: 4, background: `linear-gradient(180deg, ${mxh("#4A443C", 0.34)} 0%, ${dkh("#4A443C", 0.30)} 100%)` }} />
+        {/* ⭐ it walks AWAY, right to left out of the lit bay, unbothered, with a
+            finished part under its arm. Small and far, so the hierarchy holds. */}
+        <Hero f={f} x={800 + E(f, 4, 92, 0, 170, LIN)} y={362} size={196} z={28}
+          costume={{ glasses: 1 }} bob={Math.abs(Math.sin(f / 8)) * -12} lean={Math.sin(f / 8) * 5} />
+        {/* the finished part under its arm — the thing our hero never gets to */}
+        <Part x={742 + E(f, 4, 92, 0, 170, LIN)} y={296} s={0.86} z={29}
+          rot={Math.sin(f / 11) * 6} />
+
+        {/* ⭐⭐ THE LIMIT — hazard-striped, bolted down, and it FLEXES on the hit
+            without moving. WEIGHT IS DEFORMATION (§11): a barrier that is
+            perfectly rigid reads as scenery; one that shudders reads as solid. */}
+        {(() => {
+          const flex = hit ? rock(f, HIT, 3.0, 20) + strain * 0.10 : 0;
+          return (<>
+            {[BAR - 40, BAR + 210].map((x, i) => (
+              <div key={"po" + i} style={{ position: "absolute", left: x, top: 372, width: 46,
+                height: 300, zIndex: 62, borderRadius: 5,
+                background: `linear-gradient(90deg, ${mxh("#4A443C", 0.22)} 0%, ${dkh("#4A443C", 0.40)} 100%)` }} />
+            ))}
+            {[430, 546].map((ty, i) => (
+              <div key={"br" + i} style={{ position: "absolute", left: BAR - 60, top: ty,
+                width: 340, height: i ? 50 : 64, zIndex: 64, borderRadius: 6,
+                transform: `translateX(${flex}px) rotate(${flex * 0.10}deg)`,
+                background: `repeating-linear-gradient(56deg, ${RED} 0px, ${RED} 30px, ${CREAMB} 30px, ${CREAMB} 60px)`,
+                border: `6px solid ${dkh(RED, 0.34)}`, opacity: i ? 0.92 : 1 }} />
+            ))}
+          </>);
+        })()}
         <div style={{ position: "absolute", left: BAR - 74, top: 640, width: 40, height: 180,
           zIndex: 20, background: hexa(RED, 0.52), transform: "skewX(-16deg)" }} />
 
-        {/* the barrow, loaded with the day's retries */}
+        {/* the barrow of the day's retries */}
         <div style={{ position: "absolute", left: x0 + 130, top: GY - 132, width: 280, height: 120,
           zIndex: 56, borderRadius: "8px 26px 8px 8px",
-          transform: `rotate(${hit ? E(f, HIT, HIT + 6, 0, -7, OUT) + rock(f, HIT + 6, 4, 18) : 0}deg)`,
+          transform: `rotate(${hit ? E(f, HIT, HIT + 6, 0, -9, OUT) + rock(f, HIT + 6, 5, 18) : 0}deg)`,
           transformOrigin: "84% 100%",
           background: `linear-gradient(170deg, ${mxh("#8A8074", 0.30)} 0%, ${dkh("#8A8074", 0.28)} 100%)`,
           border: `7px solid ${dkh("#8A8074", 0.46)}` }} />
         <div style={{ position: "absolute", left: x0 + 236, top: GY - 24, width: 78, height: 78,
           zIndex: 58, borderRadius: "50%", background: dkh("#4A443C", 0.20),
-          border: `10px solid ${mxh("#4A443C", 0.24)}`,
-          transform: `rotate(${push0 * 2.2}deg)` }} />
-        {/* the load: retries, spilling forward on the hit */}
+          border: `10px solid ${mxh("#4A443C", 0.24)}`, transform: `rotate(${push0 * 2.2}deg)` }} />
+
+        {/* ⭐ THE MISSING OUTPUT (§10): hitting it produced nothing before. Now
+            the load PITCHES OVER THE FRONT and three parts spill onto the floor
+            and stay there, so the impact leaves evidence. */}
         {[0, 1, 2, 3, 4].map(i => (
           <Part key={"ld" + i} x={x0 + 186 + (i % 3) * 78} y={GY - 168 - Math.floor(i / 3) * 54
-            + (hit ? E(f, HIT, HIT + 10, 0, -34 + i * 5, OUT) : 0)}
+            + (hit ? E(f, HIT, HIT + 10, 0, -30 + i * 4, OUT) : 0)}
             s={1.04} wrong kind={i % 4} c={OXIDE} z={60 + i}
-            rot={-16 + i * 11 + (hit ? E(f, HIT, HIT + 10, 0, -24, OUT) : 0)} />
+            rot={-16 + i * 11 + (hit ? E(f, HIT, HIT + 10, 0, -22, OUT) : 0)} />
         ))}
-
-        {/* ⭐ THE FOCAL POINT — 330px, pushing, then straining and getting nowhere */}
-        <Hero f={f} x={x0} y={GY} size={330} z={54}
-          lean={hit ? 16 + strain * 0.5 : 11}
-          shock={f >= HIT && f < HIT + 12 ? 0.8 : 0}
-          stern={f >= HIT + 12 && f < 78 ? 0.9 : 0}
-          xeyes={f >= 78 ? 1 : 0} />
-
-        {/* ⭐ EFFORT IS AN EMITTER ON THE STILLEST PART — steam off its head
-            while its whole body is braced against the barrier */}
-        {hit && Array.from({ length: 8 }, (_, i) => {
-          const t = ((f * 2.6 + i * 15) % 56) / 56;
-          return (<div key={"st" + i} style={{ position: "absolute",
-            left: x0 - 30 + Math.sin(f / 7 + i) * 28 + i * 6, top: GY - 348 - t * 160,
-            width: 22 + t * 32, height: 22 + t * 32, borderRadius: "50%", zIndex: 56,
-            background: "#F4EDE0", opacity: Math.max(0, 0.34 * (1 - t)) }} />);
+        {hit && [0, 1, 2].map(i => {
+          const t = E(f, HIT + i * 3, HIT + i * 3 + 16, 0, 1, IN_Q);
+          return <Part key={"sp" + i} x={x0 + 300 + t * (120 + i * 60)}
+            y={GY - 160 - Math.sin(t * Math.PI) * 130 + t * t * 190} s={1.0}
+            wrong kind={i} c={OXIDE} z={66} rot={t * 320} />;
         })}
 
-        <Puff x={BAR - 70} y={GY - 40} f={f} at={HIT} n={16} s={1.5} z={66} />
-        <Ring x={BAR - 70} y={GY - 46} f={f} at={HIT} r={280} c={RED} z={65} />
+        {/* ⭐⭐ AND THE QUEUE BEHIND. You are not just stopped, the work keeps
+            arriving — two more barrows roll up and pile in behind you. This is
+            the beat that makes the shot escalate instead of hold. */}
+        {[40, 60].map((k, i) => {
+          const t = E(f, k, k + 20, 0, 1, OUT);
+          if (f < k) return null;
+          return (<React.Fragment key={"q" + i}>
+            <div style={{ position: "absolute", left: -330 + t * (400 - i * 170), top: GY - 118,
+              width: 250, height: 106, zIndex: 40 - i * 2, borderRadius: "8px 24px 8px 8px",
+              background: `linear-gradient(170deg, ${mxh("#8A8074", 0.20)} 0%, ${dkh("#8A8074", 0.34)} 100%)`,
+              border: `6px solid ${dkh("#8A8074", 0.50)}` }} />
+            {[0, 1, 2].map(j => (
+              <Part key={"qp" + j} x={-260 + t * (400 - i * 170) + j * 70} y={GY - 150}
+                s={0.9} wrong kind={j} c={OXIDE} z={41 - i * 2} rot={-14 + j * 12} />
+            ))}
+          </React.Fragment>);
+        })}
+
+        {/* ⭐⭐ THE LIMIT, ON THE CHARACTER. The barrier says it about the shop;
+            this says it about HIM, and it says it before the impact rather than
+            after — the bar is already deep in the red as he pushes, so the hit
+            is the thing you were waiting for instead of a surprise. */}
+        <LimitBar x={x0} y={GY - 342} f={f} at={HIT}
+          full={E(f, 0, HIT, 0.34, 1, IO)} z={70} />
+
+        {/* ⭐ THE FOCAL POINT — braced against it, and it looks PAST the barrier
+            at the one who got through */}
+        <Hero f={f} x={x0} y={GY} size={330} z={54}
+          lean={hit ? 17 + strain * 0.5 : 11}
+          gaze={f >= 70 ? 1 : 0}
+          shock={f >= HIT && f < HIT + 12 ? 0.8 : 0}
+          stern={f >= HIT + 12 && f < 80 ? 0.9 : 0}
+          xeyes={f >= 80 ? 1 : 0} />
+
+        {hit && Array.from({ length: 9 }, (_, i) => {
+          const t = ((f * 2.6 + i * 14) % 54) / 54;
+          return (<div key={"st" + i} style={{ position: "absolute",
+            left: x0 - 34 + Math.sin(f / 7 + i) * 30 + i * 6, top: GY - 350 - t * 165,
+            width: 24 + t * 34, height: 24 + t * 34, borderRadius: "50%", zIndex: 56,
+            background: "#F4EDE0", opacity: Math.max(0, 0.36 * (1 - t)) }} />);
+        })}
+
+        <Puff x={BAR - 70} y={GY - 40} f={f} at={HIT} n={20} s={1.8} z={66} spread={1.4} />
+        <Ring x={BAR - 70} y={GY - 46} f={f} at={HIT} r={330} c={RED} z={65} />
         <MarkCast x={150} y={200} s={112} z={30} f={f} spin={0.55} o={0.86} />
       </div>
     </Scene>
