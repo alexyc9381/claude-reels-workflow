@@ -1287,6 +1287,22 @@ the bed at -45 dB, inaudible, and would have failed `MUSIC_ONSET_0`.
 
 ## 7. Remotion gotchas
 
+- **⛔⛔ A PERCENTAGE `transformOrigin` RESOLVES TO (0,0) WHEN EVERY CHILD IS ABSOLUTE** (reel 114).
+  Alex on a sledgehammer: *"it's not swinging properly like a hammer, it swings the opposite way the
+  way that it's hinged."* The sledge pivoted around its own head and the cutter about its tail. A
+  wrapper whose children are all `position: absolute` has **zero intrinsic size**, so
+  `transformOrigin: "50% 90%"` computes against a 0x0 box and lands on the top-left corner. It looks
+  authored, it renders, and it rotates about the wrong point. Use PIXEL origins, scaled by the
+  sprite's own scale:
+  ```tsx
+  // ⛔ silently pivots at (0,0) — the wrapper has no intrinsic size
+  <div style={{ position: "absolute", transformOrigin: "50% 90%", transform: `rotate(${a}deg)` }}>
+  // ✅ the hinge is where the drawing's hinge actually is
+  <div style={{ position: "absolute", transformOrigin: `${12 * s}px ${230 * s}px`, transform: `rotate(${a}deg)` }}>
+  ```
+  Any hinged prop — hammer, lever, door, needle, gauge — needs this. The tell is a rotation that
+  looks like it swings from the wrong end.
+
 - **`interpolate` throws on a collapsed input range** — "inputRange must be strictly monotonically
   increasing". Easy to hit when a lead-in is computed off a scene's own flip frame and they coincide.
   Guard the helper:
