@@ -334,6 +334,63 @@ named and every consonant in the reel had been processed. Retuned to **6.6%** of
 
 ---
 
+## ⭐⭐⭐ "STATIC" MEANT TWO THINGS — MEASURE THE LITERAL ONE FIRST (reel 114)
+
+*"i dont like the static sounds at 7 seconds here."*
+
+**Static** has two readings: broadband noise, or *not moving*. Reel 114 had a five-round history of
+"puff of air", so noise was the obvious suspect — and the obvious suspect was wrong. Two cheap
+measurements ruled it out before a single cue was touched:
+
+```
+spectral flatness of the cues there   ceramic_crack 0.118 · bamboo_crack 0.060 · the other two 0.000
+whole-reel scan, 92 half-second       the flagged region ranks 30th-38th for (>5kHz share x flatness
+windows                               of that band) — not an outlier anywhere in the reel
+```
+
+No hiss. The note meant **nothing there moved**: four dry unpitched knocks in 1.3 seconds.
+
+> **The rule: when a note uses a word with two readings, measure the literal one FIRST.** It is
+> cheap, and ruling it out is what points at the real reading. Trusting the obvious reading here
+> would have produced a round of swapping cues for quieter cues — and a note that comes back, which
+> is §7's "a note that survives a fix means the fix is in the wrong layer" arriving one round later
+> than it needed to.
+
+### ⛔ `rate` CANNOT SWEEP — if the beat needs movement, bake it into the FILE
+
+`SoundKit`'s `rate` is a constant `playbackRate`. It transposes a cue; it cannot bend one. So a beat
+that needs a sound to *move* — a motor bogging down, a bell going seasick, anything spinning or
+warping on screen — **cannot be built by setting a prop**, no matter which file you pick.
+
+`tools/build_sag_warp.py` is the pattern: variable-rate resample **the room's own tonal stock** so
+the timbre still belongs to the set, with the movement baked in.
+
+```python
+def vrate(a, rate):
+    # rate[i] is the READ SPEED at output sample i - a falling rate is a falling pitch
+    pos = np.cumsum(rate); pos = pos[pos < len(a) - 2]
+    i = pos.astype(int); fr = pos - i
+    return a[i] * (1 - fr) + a[i + 1] * fr
+
+wow = 1 + 0.105*np.sin(2*np.pi*4.6*t) + 0.035*np.sin(2*np.pi*7.9*t + 1.1)   # seasick
+out = vrate(gong, wow * (1 - 0.16*t))                                       # ...and sinking
+```
+
+⭐ **Pick LOW-heavy source material for this, deliberately.** The AIR gate fires on
+`attack > 40ms AND <250Hz < 15%`, and a pitch-ramped hum has no transient — reel 114's two builds
+measured 57ms and 73ms attacks. At **86.6%** and **79.3%** below 250Hz they cleared AIR with huge
+margin. Building the same effect out of bright stock would have tripped the gate *and* re-created
+the quality being complained about.
+
+### ⛔ A SECTION COMMENT IS A CLAIM, NOT A DESCRIPTION
+
+The block header in the source read *"S1 · THE LINE — three symptoms, three DIFFERENT sounds."* The
+scene's beats are SLOW · IGN · HALL. **SLOW was silent** and the other two were the same dry knock
+twice. The comment recorded an intention that the cue list never delivered — and it had survived
+several review rounds because it *read* like a description of what was there.
+
+
+
 ## Related
 
 - [`video/src/SoundKit.tsx`](../video/src/SoundKit.tsx) — the implementation

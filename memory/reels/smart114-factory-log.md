@@ -610,3 +610,73 @@ compromise against the metric; it beats the stepped one on the metric.
 
 ⭐ This is the same shape as [[feedback_green_gate_wrong_way]] again: a green gate, satisfied the wrong
 way, deforming the object that was carrying it. Fifth time on this reel's family of notes.
+
+---
+
+## ROUND 8 — "the static sounds at 7 seconds", and the word that meant two things
+
+### ⭐⭐⭐ I ALMOST WENT HUNTING FOR HISS THAT WAS NOT THERE
+*"i dont like the static sounds at 7 seconds here."* The obvious reading is literal static —
+broadband noise — and this reel has a history that makes it the obvious suspect (three rounds of
+"puff of air", twice hiding in a bed layer). So the first move was to check whether the note was
+even about noise, before touching a cue.
+
+Two measurements said no:
+
+```
+spectral flatness of the four cues at 7s   ceramic_crack 0.118 · bamboo_crack 0.060
+                                           slate_whump / chair_knock  0.000
+whole-reel scan, 92 half-second windows    the 7s region ranks 30th-38th for
+(>5kHz share x flatness of that band)      broadband noise — not an outlier
+```
+
+There is no hiss at 7 seconds. **"Static" was the other meaning: nothing there MOVED.**
+
+> **The rule: when a note uses a word with two readings, measure the literal one FIRST — it is
+> cheap, and ruling it out is what points at the real one.** Had I trusted the obvious reading I
+> would have spent a round swapping cues for quieter cues and the note would have come back, which
+> is this reel's five-round "puff of air" pattern exactly.
+
+### ⛔⛔ FOUR DRY KNOCKS IN 1.3 SECONDS, AND THE STORY BEAT GOT THE QUIETEST ONE
+What is actually at 6.8-8.1s: `slate_whump` · `chair_knock` · `ceramic_crack` · `bamboo_crack`.
+Four unpitched percussive hits in a row, and **`rate` is a constant `playbackRate`** — it transposes
+a cue but cannot sweep one, so not one of them could bend even in principle.
+
+Worse, the beat underneath is the **HALLUCINATION** — a violet glyph spinning up over his head and
+his eyes swirling, the most distinctive image in the scene — and it was scored with a **bamboo twig
+snap at `SFX_TEXTURE`**, the quietest tier in the bank, firing *after* both had already arrived.
+
+⛔ The section header in my own source read *"S1 · THE LINE — three symptoms, three DIFFERENT
+sounds."* The scene's beats are `SLOW`(5.80) · `IGN`(6.80) · `HALL`(8.07). **SLOW was silent** and
+the other two were the same dry knock twice. The comment described an intention, not the code.
+
+### ⭐⭐ WHEN A PROP CANNOT SWEEP, BAKE THE MOVEMENT INTO THE FILE
+`tools/build_sag_warp.py` variable-rate resamples the room's **own tonal stock** (not a synth — the
+timbre has to stay in the machine bay):
+
+| beat | cue | built from | pitch travel |
+|---|---|---|---|
+| SLOW 5.80 | `motor_sag` | `stage_hum` ramped down + a labouring grind | **1.50 oct** |
+| IGN 6.80 | `slate_whump` + `twang` @0.78 | the plate lets go — sprung metal, not a wooden knock | — |
+| HALL 7.70 | `gong_warp` | the room's own `gong` at ±10% wow, sinking | **3.03 oct** |
+
+The gong is the argument in one sound: the bay's own bell going seasick **is** the hallucination.
+And it now spans the glyph *and* the eyes instead of snapping once after both.
+
+⭐ **Low-heavy stock was the deliberate choice, not an accident.** `sfx_audit`'s AIR gate fires on
+`attack > 40ms AND <250Hz < 15%`. Both new files measure a slow attack (57ms / 73ms) because a
+pitch-ramped hum has no transient — but at **86.6%** and **79.3%** below 250Hz they clear AIR with
+enormous margin. Building this out of bright material would have tripped the gate *and* re-created
+the very quality being complained about.
+
+Measured on the delivered mix, 5.5-9.5s:
+
+```
+                <250Hz     >2kHz     centroid travel
+  before         10.9%      53.7%       3.00 oct
+  after          24.8%      34.9%       3.97 oct
+```
+
+The change is confined to 5.75-8.00s (largest mix delta -18.5 dB at 5.75s, nothing outside the
+beat), whole-reel BALANCE stayed in band and moved warmer (>2kHz **37.5% -> 35.0%**, <250Hz
+11.6% -> 12.3%), and the bank still audits clean.

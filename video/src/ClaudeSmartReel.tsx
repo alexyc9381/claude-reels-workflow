@@ -199,12 +199,36 @@ const SFX_RAW: Cue[] = [
   { at: 3.80,  src: "sub.wav",         v: LEVELS.SFX_HERO * db(-8), dur: 0.42, lead: 1 },
   { at: 3.84,  src: "chair_knock.wav", v: LEVELS.SFX_TEXTURE, dur: 0.30, lead: 0 },
 
-  /* ═══ S1 · THE LINE — three symptoms, three DIFFERENT sounds ═══════════════ */
+  /* ═══ S1 · THE LINE — three symptoms, three DIFFERENT sounds ═══════════════
+     ⛔⛔ ALEX: *"i dont like the static sounds at 7 seconds."* It is NOT hiss —
+     measured on the delivered mix, this window ranks 30th-38th of 92 half-second
+     windows for broadband noise, so there is no literal static to remove. It is
+     static in the OTHER sense: nothing in the stretch MOVED. `slate_whump` /
+     `chair_knock` / `ceramic_crack` / `bamboo_crack` are four dry unpitched
+     knocks in 1.3s, and `rate` is a constant playbackRate so no cue here could
+     bend even in principle.
+     ⛔ And the beat they sat on is the HALLUCINATION — a violet glyph spinning
+     up and his eyes swirling, the most distinctive image in the scene — scored
+     with a bamboo twig snap at SFX_TEXTURE, the quietest tier in the bank.
+     ⭐ The scene's beats are SLOW(5.80) · IGN(6.80) · HALL(8.07) and the header
+     above already promised "three DIFFERENT sounds". It was not delivering them:
+     SLOW was SILENT, and the other two were the same dry knock twice. Each
+     symptom now has its own voice and two of the three MOVE in pitch. Since
+     `rate` cannot sweep, the movement is baked in by variable-rate resampling
+     the room's OWN tonal stock (`tools/build_sag_warp.py`):
+       SLOW  motor_sag  — `stage_hum` ramped down **1.50 oct**: the bogging motor
+       IGN   slate+twang — the plate lets go: sprung metal, not a wooden knock
+       HALL  gong_warp  — the room's own `gong` at ±10% wow, sinking **3.03 oct**.
+                          The machine's bell going seasick IS the hallucination,
+                          and it spans the glyph AND the eyes instead of snapping
+                          once after both have already arrived.
+     Both new files are 80-87% BELOW 250Hz — the far end of the spectrum from the
+     thing being complained about — and both clear HISS and AIR. */
   { at: 4.53,  src: "mech_clank.wav",  v: LEVELS.SFX_MID, dur: 0.12 },
+  { at: 5.80,  src: "motor_sag.wav",   v: LEVELS.SFX_MID * db(-1), dur: 0.85 },
   { at: 6.80,  src: "slate_whump.wav", v: LEVELS.SFX_MID, dur: 0.16 },
-  { at: 6.82,  src: "chair_knock.wav", v: LEVELS.SFX_TEXTURE, dur: 0.30, lead: 0 },
-  { at: 7.47,  src: "ceramic_crack.wav", v: LEVELS.SFX_MID, dur: 0.70 },
-  { at: 8.07,  src: "bamboo_crack.wav", v: LEVELS.SFX_TEXTURE, dur: 0.40 },
+  { at: 6.82,  src: "twang.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.50, lead: 0, rate: 0.78 },
+  { at: 7.70,  src: "gong_warp.wav",   v: LEVELS.SFX_MID * db(-2), dur: 1.35 },
 
   /* ═══ S2 · THE INSPECTION ═════════════════════════════════════════════════ */
   ...layer(11.60, { src: "green_tone.wav", v: LEVELS.SFX_MID, dur: 0.70 },
