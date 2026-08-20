@@ -4,6 +4,7 @@ import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./Slop
 import { S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, CAM, GRADE } from "./GoScenes";
 import type { Variant } from "./GoScenes";
 import { CamCtx, R } from "./GoWorld";
+import { HookLine, HookShutter } from "./GoHooks";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
 import words from "./data/words_113go.json";
 
@@ -154,19 +155,55 @@ const DUR = {
    ------------------------------------------------------------------------ */
 const S = (fr: number) => fr / FPS;
 
-const SFX: Cue[] = [
-  /* ---- S0 · THE MOUND (8) — frame 0 carries the heaviest stack in the reel,
-     because frame 0 IS the interrupt (THE-OPEN: "frame 0 gets the heaviest cue
-     stack of the open"). Three simultaneous cues there, one to two elsewhere. */
-  { at: S(L.S0 + 0),   src: "shop_bed.wav",     v: LEVELS.SFX_BED,     dur: 5.0 },
-  { at: S(L.S0 + 0),   src: "lamp_clunk.wav",   v: LEVELS.SFX_MID,     dur: 0.30 },
-  { at: S(L.S0 + 0),   src: "sub.wav",          v: LEVELS.SFX_HERO,    dur: 0.45 },
-  { at: S(L.S0 + 8),   src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.15 },
-  { at: S(L.S0 + 20),  src: "rebuild_thud.wav", v: LEVELS.SFX_HERO,    dur: 0.85, rate: 0.96 },
-  { at: S(L.S0 + 46),  src: "rebuild_thud.wav", v: LEVELS.SFX_HERO,    dur: 0.85, rate: 0.90 },
-  { at: S(L.S0 + 72),  src: "rebuild_thud.wav", v: LEVELS.SFX_HERO,    dur: 0.85, rate: 0.84 },
-  { at: S(L.S0 + 74),  src: "bell_ring.wav",    v: LEVELS.SFX_MID,     dur: 1.65 },
+/** which open the cut uses. `mound` is the original; `line` and `shutter` are
+    the two limit-shaped opens — a bar filling into a cap, and a meter draining
+    until it trips a shutter — both with the limit read on the Claude itself. */
+export type HookKind = "mound" | "line" | "shutter";
 
+/* ⛔ THE OPEN'S CUE STACK IS PART OF THE OPEN. Swapping the picture without
+   swapping the sound leaves a bank scored to events that no longer happen —
+   the mound's three slams land on nothing in either new hook. */
+const HOOK_SFX: Record<HookKind, Cue[]> = {
+  mound: [
+    { at: S(0),  src: "shop_bed.wav",     v: LEVELS.SFX_BED,  dur: 5.0 },
+    { at: S(0),  src: "lamp_clunk.wav",   v: LEVELS.SFX_MID,  dur: 0.30 },
+    { at: S(0),  src: "sub.wav",          v: LEVELS.SFX_HERO, dur: 0.45 },
+    { at: S(8),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,  dur: 0.15 },
+    { at: S(20), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.96 },
+    { at: S(46), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.90 },
+    { at: S(72), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.84 },
+    { at: S(74), src: "bell_ring.wav",    v: LEVELS.SFX_MID,  dur: 1.65 },
+  ],
+  /* THE LINE: push, hit the barrier, the load spills, two more barrows queue up */
+  line: [
+    { at: S(0),  src: "shop_bed.wav",     v: LEVELS.SFX_BED,  dur: 3.3 },
+    { at: S(0),  src: "lamp_clunk.wav",   v: LEVELS.SFX_MID,  dur: 0.30 },
+    { at: S(0),  src: "deep_engine.wav",  v: LEVELS.SFX_BED,  dur: 2.4 },
+    { at: S(26), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.80 },
+    { at: S(26), src: "crusher.wav",      v: LEVELS.SFX_TEXTURE, dur: 0.94 },
+    { at: S(40), src: "chair_knock.wav",  v: LEVELS.SFX_MID,  dur: 0.32 },
+    { at: S(60), src: "chair_knock.wav",  v: LEVELS.SFX_MID,  dur: 0.32, rate: 0.92 },
+    { at: S(76), src: "slate_whump.wav",  v: LEVELS.SFX_HERO, dur: 0.20, rate: 0.88 },
+  ],
+  /* THE SHUTTER: four segments dying, the trip, the slam, then the shop stops */
+  /* THE SHUTTER: the meter dying, the trip, the slam, then the shop stops.
+     ⛔ Trimmed to EIGHT: at thirteen the reel's cue rate went to 1.58/sec
+     against a 1.0-1.5 ceiling, and a rejected reel once ran 3.82. The three
+     segment clicks became one representative tick — the picture already counts
+     them, so the sound does not have to. */
+  shutter: [
+    { at: S(0),  src: "shop_bed.wav",     v: LEVELS.SFX_BED,  dur: 1.3 },
+    { at: S(0),  src: "lamp_clunk.wav",   v: LEVELS.SFX_MID,  dur: 0.30 },
+    { at: S(0),  src: "machine_bed.wav",  v: LEVELS.SFX_BED,  dur: 1.3 },
+    { at: S(14), src: "ticket_click.wav", v: LEVELS.SFX_TEXTURE, dur: 0.16 },
+    { at: S(24), src: "scan_beep.wav",    v: LEVELS.SFX_MID,  dur: 0.42 },
+    { at: S(37), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO, dur: 0.85, rate: 0.74 },
+    { at: S(37), src: "sub.wav",          v: LEVELS.SFX_HERO, dur: 0.45, rate: 0.80 },
+    { at: S(50), src: "mech_clank.wav",   v: LEVELS.SFX_MID,  dur: 0.15 },
+  ],
+};
+
+const SFX: Cue[] = [
   /* ---- S1 · THE PRESS LANDS (4) */
   { at: S(L.S1 + 0),   src: "slate_whump.wav",  v: LEVELS.SFX_MID,     dur: 0.20 },
   { at: S(L.S1 + 14),  src: "gear_shift.wav",   v: LEVELS.SFX_MID,     dur: 0.12 },
@@ -296,19 +333,24 @@ const CAP_Y: Record<Variant, number> = { shop: 1254, amber: 1326, steel: 1188 };
    +1.5 dB lands the gap at 12.2 dB. Nothing was inherited. */
 export const BED_TRIM = { loud: db(1.5), quiet: db(-4.5) } as const;
 
-export const makeReel = (v: Variant, bed: keyof typeof BED_TRIM = "loud"): React.FC => () => {
+export const makeReel = (v: Variant, bed: keyof typeof BED_TRIM = "loud",
+  hook: HookKind = "mound"): React.FC => () => {
   const f = useCurrentFrame();
   return (
     <AbsoluteFill>
       <Bg />
       <Audio src={staticFile("vo_113go.wav")} volume={LEVELS.DIALOGUE} />
       <Audio src={staticFile(BED[v])} volume={LEVELS.MUSIC * BED_TRIM[bed]} />
-      <SfxTrack cues={SFX} />
+      <SfxTrack cues={[...HOOK_SFX[hook], ...SFX]} />
 
       <CamCtx.Provider value={{ ...CAM[v] }}>
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE[v] }}>
-            <Sequence from={L.S0} durationInFrames={DUR.S0}><S0 v={v} dur={DUR.S0} /></Sequence>
+            <Sequence from={L.S0} durationInFrames={DUR.S0}>
+              {hook === "line" ? <HookLine />
+                : hook === "shutter" ? <HookShutter headBar />
+                : <S0 v={v} dur={DUR.S0} />}
+            </Sequence>
             <Sequence from={L.S1} durationInFrames={DUR.S1}><S1 v={v} dur={DUR.S1} /></Sequence>
             <Sequence from={L.S2} durationInFrames={DUR.S2}><S2 v={v} dur={DUR.S2} /></Sequence>
             <Sequence from={L.S3} durationInFrames={DUR.S3}><S3 v={v} dur={DUR.S3} /></Sequence>
@@ -373,6 +415,9 @@ const SectionBand: React.FC<{ f: number }> = ({ f }) => {
 };
 
 export const ReelShop = makeReel("shop");
+/** the two limit-shaped opens, for the pick */
+export const ReelLine = makeReel("shop", "loud", "line");
+export const ReelShutter = makeReel("shop", "loud", "shutter");
 export const ReelAmber = makeReel("amber");
 export const ReelSteel = makeReel("steel");
 /** the same picture with the music bed 6 dB down — for an A/B on the bed only */

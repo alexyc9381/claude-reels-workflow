@@ -1376,75 +1376,110 @@ export const S7: React.FC<SP> = ({ v }) => {
 export const S8: React.FC<SP> = ({ v }) => {
   const f = useCurrentFrame(); const V = VD(v);
   const p = asPlace("crib"); const gy = p.horizon + 148;
-  const CATCH = 19;
+  const HIT = 19;
   const S = 300;
-  /* ⭐ §11: AN ACTION IS A DISTANCE. The head swings through 128 degrees of
-     arc across 19 frames, so the catch reads as an interruption rather than a
-     state change. v1 used 96 degrees at s=1.15 and measured 4.57. */
-  /* ⛔ THE ARC RUNS THE WAY A SLEDGE ACTUALLY GOES. With the pivot finally at the
-     HANDS (see `Sledge` — the old percentage origin resolved to the head), the
-     head starts drawn BACK over his shoulder and comes forward and down. Angles
-     are measured from "haft vertical, head up": -118 is cocked back to the left,
-     +30 is past vertical on the follow-through. */
-  const swing = f < CATCH ? E(f, 0, CATCH, -118, 30, IN_Q) : 30 + rock(f, CATCH, 8, 20);
-  /* ⭐ AND THEN IT IS TAKEN AWAY. v2 caught the haft at local 19 and held for the
-     remaining 38 frames (53% HOLD). The sledge now travels 520px out of frame
-     between local 26 and 52, which is the same object doing the SECOND half of
-     the beat: not just "stopped", but "removed". */
-  const carry = E(f, CATCH + 7, CATCH + 33, 0, 1, IN_Q);
-  const held = f >= CATCH;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ⭐ THE HAMMER LANDS. Alex: *"when it says don't just go around deleting
+     everything and the hammer strikes down, make it break those metal chains
+     things."*
+
+     v1 caught the haft mid-swing, which made the point but gave the swing no
+     payoff — a wind-up with nothing at the end of it. Now it completes: the head
+     comes through the arc and SHATTERS the chain run holding the rig, links
+     bursting out in both directions. THEN the crew reach him and take the hammer
+     off him before he starts on the braces.
+
+     ⭐ That is actually the better reading of the line. "Don't just go deleting
+     everything" is not "don't touch it" — it is "you'll take the whole thing
+     down if nobody stops you". You have to see it work once to believe that.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  /* the arc runs THROUGH the chain and follows through past vertical */
+  const swing = f < HIT ? E(f, 0, HIT, -118, 58, IN_Q) : 58 + rock(f, HIT, 11, 16);
+  const broke = f >= HIT;
+  const sh = shake(f, HIT, 14, 12);
+  /* they take it off him once it has landed */
+  const carry = E(f, HIT + 14, HIT + 38, 0, 1, IN_Q);
+
+  const CHX = 556;                       /* where the chain hangs */
 
   return (
     <Scene p={p} slug="" push={push(V, 57, 1.062)} vig={0.58}>
-      <SetFor k="crib" f={f} lightK={0.34} rake={0.7} rk={RAKE[V]} />
+      <SetFor k="crib" f={f} lightK={0.42} rake={0.7} rk={RAKE[V]} />
 
-      <Rig f={f} x={506} y={gy} size={S} z={46} drop={1} tight={0.8} cables={false} />
-      <div style={{ position: "absolute", left: 506 - S / 2, top: gy - S, zIndex: 40 }}>
-        <Mascot lf={f * 1.1} size={S} nodAmp={5.0} nodSpeed={9} stern={0.7} />
+      <div style={{ position: "absolute", left: sh.x, top: sh.y, right: -sh.x, bottom: -sh.y }}>
+        {/* ⭐ THE CHAIN — the thing the hammer is FOR. Twelve real links hanging
+            from the gantry to the rig's yoke; the lower run shatters on impact. */}
+        {Array.from({ length: 12 }, (_, i) => {
+          const y = 150 + i * 34;
+          const low = y > 330;
+          if (broke && low) return null;
+          return (
+            <div key={"ch" + i} style={{ position: "absolute", left: CHX - 17, top: y,
+              width: 34, height: 46, zIndex: 62, borderRadius: 12,
+              border: `9px solid ${i % 2 ? "#9AA0A8" : "#5A6069"}`,
+              transform: `rotate(${i % 2 ? 0 : 90}deg)` }} />
+          );
+        })}
+
+        {/* the links blowing apart */}
+        {broke && Array.from({ length: 11 }, (_, i) => {
+          const k = E(f, HIT + (i % 3), HIT + 26 + (i % 3) * 4, 0, 1, OUT);
+          if (k <= 0 || k >= 1) return null;
+          const dir = i % 2 ? 1 : -1;
+          const spd = 1 + (i % 4) * 0.32;
+          return (
+            <div key={"br" + i} style={{ position: "absolute",
+              left: CHX - 17 + dir * k * 300 * spd,
+              top: 330 + i * 12 - k * 150 + k * k * 420,
+              width: 34, height: 46, zIndex: 70, borderRadius: 12, opacity: 1 - k * 0.25,
+              border: `9px solid ${i % 2 ? "#B4BAC2" : "#6E747C"}`,
+              transform: `rotate(${k * dir * 320}deg)` }} />
+          );
+        })}
+        {broke && (<>
+          <Ring x={CHX} y={352} f={f} at={HIT} c="#FFF0D0" max={340} dur={16} />
+          <Ring x={CHX} y={352} f={f} at={HIT + 3} c="#FFE0A8" max={240} dur={14} />
+          <Puff x={CHX} y={366} f={f} at={HIT} c="#9AA0A8" n={9} s={1.5} />
+        </>)}
+        {/* the white flash of the strike, two frames, hard-edged */}
+        {f >= HIT && f <= HIT + 1 && (
+          <div style={{ position: "absolute", left: CHX - 150, top: 250, width: 300, height: 210,
+            zIndex: 82, borderRadius: 10, background: hexa("#FFF6E0", 0.80) }} />
+        )}
+
+        <Rig f={f} x={506} y={gy} size={S} zBack={30} zFront={52} drop={1}
+          tight={broke ? 0.45 : 0.8} sway={broke ? rock(f, HIT, 4.5, 20) : 0} cables={false} />
+        <div style={{ position: "absolute", left: 506 - S / 2, top: gy - S, zIndex: 40 }}>
+          <Mascot lf={f * 1.1} size={S} nodAmp={5.0} nodSpeed={9} stern={0.7}
+            shock={E(f, HIT, HIT + 5, 0, 0.8, OUT) * (1 - E(f, HIT + 18, HIT + 34, 0, 1, LIN))} />
+        </div>
+        <Contact x={506 - S * 0.44} y={gy - 6} w={S * 0.88} o={0.38} z={38} />
+
+        <Sledge x={392 - 12 * 1.85 - carry * 560} y={540 - 230 * 1.85 + carry * 120}
+          rot={swing + carry * 46} z={74} s={1.85} bright />
       </div>
-      <Contact x={506 - S * 0.44} y={gy - 6} w={S * 0.88} o={0.38} z={38} />
 
-      {/* ⛔ SILHOUETTE VALUE (reel 110's second free board check): name which side
-          of the contrast the subject is on. A rust-and-iron sledge against a navy
-          crib is dark-on-dark and it measured 5.59 with only a 26% hold — the
-          motion was there and the CONTRAST was not. The head is now bright steel
-          against the dark wall, which is the same swept area at three times the
-          luma delta. */}
-      {/* ⛔ AND IT IS POSITIONED FROM THE PIVOT. `Sledge` hinges at
-          (12*s, 230*s) inside its own box, so to put the hands at (392, 540) —
-          roughly where a 300px Claude's grip is — the box origin has to sit that
-          much up and to the left. v1 had the hands 29px BELOW the floor. */}
-      <Sledge x={392 - 12 * 1.85 - carry * 560} y={540 - 230 * 1.85 + carry * 120}
-        rot={swing + carry * 46} z={74} s={1.85} bright />
-
-      {/* ⭐ TWO crew, and they ARRIVE — v1 had one appearing 8 frames before the
-          catch, which is a state change rather than an action. They now run in
-          from the left edge across 26 frames, which is a 300px travel by two
-          150px+ bodies on the reel's second-weakest scene (6.25). */}
+      {/* the crew arrive AFTER it lands and take it off him */}
       {[0, 1].map((i) => {
-        const run = E(f, CATCH - 22 + i * 5, CATCH + 2, 0, 1, OUT);
+        const run = E(f, HIT + 2 + i * 5, HIT + 22, 0, 1, OUT);
         if (run <= 0) return null;
         const cs = 172 - i * 18;
-        const cx = -110 + run * (452 - i * 96);   /* ends AT the haft, not near it */
+        const cx = -110 + run * (452 - i * 96);
         const bob = Math.abs(Math.sin((f + i * 7) / 5)) * (1 - run) * 22;
         return (
           <React.Fragment key={"cc" + i}>
-            <div style={{ position: "absolute", left: cx - cs / 2, top: gy - cs - bob,
-              zIndex: 76 - i }}>
+            <div style={{ position: "absolute", left: cx - cs / 2, top: gy - cs - bob, zIndex: 76 - i }}>
               <Mascot lf={f * 1.7 + i * 11} size={cs} nodAmp={7.4} nodSpeed={12} constr={1}
-                shock={E(f, CATCH, CATCH + 6, 0, 0.75, OUT)} />
+                shock={E(f, HIT + 2 + i * 5, HIT + 10 + i * 5, 0, 0.75, OUT)} />
             </div>
             <Contact x={cx - cs * 0.44} y={gy - 6} w={cs * 0.86} o={0.32} z={74 - i} />
           </React.Fragment>
         );
       })}
-      {held && (<>
-        <Ring x={300} y={gy - 300} f={f} at={CATCH} c="#FFE0A0" max={230} dur={14} />
-        <Puff x={300} y={gy - 280} f={f} at={CATCH} c="#8FA0BE" n={6} />
-      </>)}
 
-      {/* the two braces that WILL be kept stay lit through the swing — the
-          scene's argument in one detail */}
+      {/* the two braces that WILL be kept stay lit through all of it */}
       {["r4", "r6"].map((id) => {
         const b = BRACES.find((x) => x.id === id)!;
         return (
@@ -1470,37 +1505,113 @@ export const S8: React.FC<SP> = ({ v }) => {
 export const S9: React.FC<SP> = ({ v }) => {
   const f = useCurrentFrame(); const V = VD(v);
   const p = asPlace("crib"); const gy = p.horizon + 148;
-  const LIFT = 6;
-  const k = E(f, LIFT, LIFT + 14, 0, 1, BACK);
+  const AIM = 8, CUT = 20;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ⛔⛔ REBUILT. Alex: *"the drill animation at 33 seconds is very unclear what
+     that is even for."*
+
+     He is describing a tool that was HELD and never USED. v1 handed a cutter
+     across the frame and stopped — so the shot showed an object with no verb,
+     and an object with no verb is unreadable however well it is drawn. It also
+     looked like a drill because a barrel with a grip IS a drill until it does
+     something only a cutter does.
+
+     ⭐ THE FIX IS THE DEMONSTRATION, NOT THE DRAWING. It now CUTS, on camera,
+     and the point of the shot is what it cuts and what it leaves: a fine beam
+     parts ONE brace, that brace drops away, and the brace 40px beside it is
+     untouched and stays lit green. That is the whole difference from the
+     sledgehammer in the shot before — same job, one brace at a time.
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  const aim = E(f, 0, AIM, 0, 1, OUT);
+  const beam = E(f, AIM, AIM + 5, 0, 1, OUT);
+  const cut = f >= CUT;
+  const fall = E(f, CUT, CUT + 22, 0, 1, IN_Q);
+
+  /* the three braces on the stand: the middle one goes, its neighbours stay */
+  const BX = [400, 590, 780], BY = 286;
 
   return (
     <Scene p={p} slug="" push={push(V, 41, 1.070)} vig={0.46}>
-      <SetFor k="crib" f={f} lightK={E(f, 0, 8, 0.34, 1.15, OUT)} rake={1} rk={RAKE[V]} />
+      <SetFor k="crib" f={f} lightK={E(f, 0, 8, 0.42, 1.15, OUT)} rake={1} rk={RAKE[V]} />
 
-      {/* the cutter comes OFF the wall and travels — 420px, 2.8x its own length */}
-      {/* ⭐ THE CUTTER TRAVELS 520px AT s=2.1 — a 430px object crossing the
-          frame, which is §1's "many large bright objects travelling" with one
-          object instead of many. v1's 1.25-scale tool crossed 420px and the
-          scene measured 8.91 mostly on the lights coming up. */}
-      <Cutter x={92 + k * 470} y={252 + k * 246} f={f} rot={-18 + k * 30} z={74} s={2.1}
-        on={E(f, LIFT + 10, LIFT + 18, 0, 1, OUT)} />
+      {/* the stand the three braces are clamped to — a jig, so the cut has a
+          reason to be precise */}
+      <div style={{ position: "absolute", left: 322, top: BY + 120, width: 540, height: 26,
+        zIndex: 40, borderRadius: 4,
+        background: `linear-gradient(180deg, ${mxh(IRON, 0.20)}, ${dkh(IRON, 0.46)})`, boxShadow: SH }} />
+      {[0, 2].map((i) => (
+        <div key={"lg" + i} style={{ position: "absolute", left: BX[i] - 8, top: BY + 146,
+          width: 18, height: gy - BY - 146, zIndex: 39,
+          background: `linear-gradient(90deg, ${dkh(IRON, 0.36)}, ${IRON})` }} />
+      ))}
 
-      {/* the two hands it passes between */}
-      {[0, 1].map((i) => {
-        const s = i ? 214 : 178;
-        const x = i ? 690 : 214;
+      {/* the three braces. ⭐ THE NEIGHBOURS ARE THE POINT — they stay lit. */}
+      {[0, 1, 2].map((i) => {
+        const gone = i === 1 && cut;
         return (
-          <React.Fragment key={"hd" + i}>
-            <div style={{ position: "absolute", left: x - s / 2, top: gy - s, zIndex: 44 }}>
-              <Mascot lf={f * (1.2 + i * 0.3)} size={s} nodAmp={6.0} nodSpeed={10}
-                constr={i ? 0 : 1} cheer={i && k > 0.8 ? 0.4 : 0} />
+          <React.Fragment key={"bb" + i}>
+            <div style={{ position: "absolute", left: BX[i] - 59,
+              top: BY + (gone ? fall * 420 : 0),
+              width: 118, height: 124, zIndex: 46, borderRadius: 5,
+              opacity: gone ? 1 - fall * 0.2 : 1,
+              transform: gone ? `rotate(${fall * 96}deg) translateX(${fall * 90}px)` : "none",
+              background: `linear-gradient(180deg, ${mxh(IRON, 0.22)} 0%, ${IRON} 46%, ${dkh(IRON, 0.40)} 100%)`,
+              boxShadow: SH }}>
+              {Array.from({ length: 3 }, (_, j) => (
+                <div key={"bo" + j} style={{ position: "absolute", left: 22 + j * 34, top: 52,
+                  width: 20, height: 20, borderRadius: "50%", background: dkh(IRON, 0.46) }} />
+              ))}
             </div>
-            <Contact x={x - s * 0.44} y={gy - 6} w={s * 0.88} o={0.34} z={42} />
+            {/* the two survivors get a green ring the moment the middle one goes */}
+            {i !== 1 && cut && (
+              <div style={{ position: "absolute", left: BX[i] - 67, top: BY - 8,
+                width: 134, height: 140, zIndex: 48, borderRadius: 7,
+                border: `5px solid ${hexa(GREEN, 0.50 + Math.sin(f / 7) * 0.28)}` }} />
+            )}
           </React.Fragment>
         );
       })}
 
-      <Ring x={742} y={gy - 200} f={f} at={LIFT + 14} c="#FFE0A0" max={260} dur={16} />
+      {/* ⭐ THE BEAM — thin, aimed, and it stops exactly at the one brace.
+          A wide beam would be the sledgehammer again. */}
+      {beam > 0 && (<>
+        <div style={{ position: "absolute", left: 300, top: BY + 46 - 4, width: 206 * beam,
+          height: 8, zIndex: 60,
+          background: `linear-gradient(90deg, ${hexa(mxh(GREEN, 0.55), 0.95)}, ${hexa(mxh(GREEN, 0.30), 0.55)})` }} />
+        <div style={{ position: "absolute", left: 512, top: BY + 24, width: 46, height: 46,
+          borderRadius: "50%", zIndex: 62,
+          background: hexa(mxh(GREEN, 0.60), 0.40 + Math.sin(f / 3) * 0.28) }} />
+        {/* the sparks where it bites */}
+        {Array.from({ length: 8 }, (_, i) => {
+          const k = E(f, AIM + 2 + (i % 4) * 3, AIM + 16 + (i % 4) * 3, 0, 1, OUT);
+          if (k <= 0 || k >= 1) return null;
+          const a = (i / 8) * Math.PI * 2;
+          return (
+            <div key={"sp" + i} style={{ position: "absolute",
+              left: 552 + Math.cos(a) * k * 130, top: BY + 46 + Math.sin(a) * k * 96 + k * k * 60,
+              width: 15, height: 15, borderRadius: 3, zIndex: 64,
+              background: hexa("#EAFFF2", 1 - k) }} />
+          );
+        })}
+      </>)}
+
+      {/* the tool, aimed from the left and held by a crew Claude */}
+      {/* ⛔ THE TOOL IS ANGLED UP AT THE WORK, NOT LYING FLAT. A barrel drawn
+          horizontal reads as a pipe; the same barrel raised into a firing line,
+          with the grip under it and the nozzle pointing at the thing that is
+          about to fall off, reads as a tool being used. It is also clear of the
+          braces now, so the two silhouettes cannot be confused. */}
+      <Cutter x={96 + aim * 62} y={BY + 138 - aim * 44} f={f} rot={-26 + aim * 8}
+        z={74} s={2.0} on={beam} />
+      <div style={{ position: "absolute", left: 176 - 130, top: gy - 260, zIndex: 44 }}>
+        <Mascot lf={f * 1.25} size={260} nodAmp={6.2} nodSpeed={10} constr={1}
+          cheer={cut ? E(f, CUT, CUT + 14, 0, 0.5, OUT) : 0} />
+      </div>
+      <Contact x={176 - 114} y={gy - 6} w={228} o={0.34} z={42} />
+
+      <Ring x={552} y={BY + 46} f={f} at={CUT} c="#8FE0B4" max={300} dur={16} />
     </Scene>
   );
 };

@@ -147,7 +147,16 @@ export const DUR = {
       LOW MOVEMENT  impact_deep 93% low · boom 95% · sub 97% · rebuild_thud 90%
                     thock 89% · adv_strike 89% · chair_knock 70% · lamp_clunk 56%
                     can_bong 46% · slate_whump 45% · impact 42% · mech_clank 42%
-                    pneu_thunk 40% · chair_knock 70%
+                    chair_knock 70% · slate_whump 45% · thock 89%
+    ⛔⛔ AND NOTHING PNEUMATIC. Alex: *"at around 6.8 seconds there's a puff of
+    air sound effect."* That was `pneu_thunk` — it clears every gate in
+    `sfx_audit` (17ms attack, 40% under 250Hz) and a PNEUMATIC cylinder is
+    literally a burst of compressed air, so by ear it is exactly the thing that
+    has now been reported three times. All four uses are gone.
+    ⭐ THE LESSON, GENERALISED: the NAMED-AIR gate bans whoosh/swoosh/puff by
+    filename. It cannot ban a sound whose name describes the MACHINE rather than
+    the noise — pneumatic, air-ram, blowoff, vent. Read what the object actually
+    does, not just what the file is called.
       TEXTURE       ratchet · metal_ping · wrench_clank · ceramic_crack
                     bamboo_crack · chrome_shine · gold_stamp · gear_shift
                     stamp_press · scan_beep · green_tone · temper_chime · twang
@@ -192,7 +201,8 @@ const SFX_RAW: Cue[] = [
 
   /* ═══ S1 · THE LINE — three symptoms, three DIFFERENT sounds ═══════════════ */
   { at: 4.53,  src: "mech_clank.wav",  v: LEVELS.SFX_MID, dur: 0.12 },
-  { at: 6.80,  src: "pneu_thunk.wav",  v: LEVELS.SFX_MID, dur: 0.45 },
+  { at: 6.80,  src: "slate_whump.wav", v: LEVELS.SFX_MID, dur: 0.16 },
+  { at: 6.82,  src: "chair_knock.wav", v: LEVELS.SFX_TEXTURE, dur: 0.30, lead: 0 },
   { at: 7.47,  src: "ceramic_crack.wav", v: LEVELS.SFX_MID, dur: 0.70 },
   { at: 8.07,  src: "bamboo_crack.wav", v: LEVELS.SFX_TEXTURE, dur: 0.40 },
 
@@ -203,7 +213,7 @@ const SFX_RAW: Cue[] = [
 
   /* ═══ S3 · THE ARCHIVE ════════════════════════════════════════════════════ */
   { at: 16.60, src: "ratchet.wav",     v: LEVELS.SFX_MID, dur: 0.50, rate: 0.82 },
-  ...layer(17.80, { src: "pneu_thunk.wav", v: LEVELS.SFX_MID, dur: 0.45 },
+  ...layer(17.80, { src: "thock.wav", v: LEVELS.SFX_MID, dur: 0.16 },
                    { src: "temper_chime.wav", dur: 0.70 }),
 
   /* ═══ S4 · THE FURNACE ════════════════════════════════════════════════════ */
@@ -248,7 +258,7 @@ const SFX_RAW: Cue[] = [
      Three DIFFERENT blips for the three instruction lines, rising. The card is
      the deliverable; it should sound like a machine taking an instruction in,
      not like one more clunk. */
-  ...layer(34.97, { src: "pneu_thunk.wav", v: LEVELS.SFX_MID, dur: 0.45 },
+  ...layer(34.97, { src: "slot_stop.wav", v: LEVELS.SFX_MID, dur: 0.22 },
                    { src: "gold_stamp.wav", dur: 0.50 }),
   { at: 35.30, src: "blip1.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.22 },
   { at: 35.58, src: "blip2.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.22 },
@@ -312,9 +322,9 @@ const CAP_Y: Record<Variant, number> = { bay: 1258, amber: 1330, steel: 1190 };
     keys and timbres carry different energy), so ONE shared trim cannot land all
     three. Each gets its own, solved from its own measurement to hit 12 dB. */
 export const BED_GAIN: Record<Variant, number> = {
-  bay:   db(-3.9),
-  amber: db(-4.7),
-  steel: db(-3.7),
+  bay:   db(2.8),
+  amber: db(0.7),
+  steel: db(2.5),
 };
 
 /* ⛔⛔⛔ AND THE SECOND TIME THESE WERE RE-SOLVED, IT WAS BECAUSE THE BED WAS
@@ -397,7 +407,7 @@ const BANDS: Array<{ from: number; big: string; hot: string }> = [
   { from: L.S6,  big: "THEIR WORD FOR IT:",       hot: R.verdict },
   { from: L.S7,  big: "THE RULES WERE",           hot: "FIGHTING EACH OTHER" },
   { from: L.S8,  big: "DON'T DELETE IT ALL",      hot: "SOME OF IT EARNS ITS PLACE" },
-  { from: L.S9,  big: "USE THE RIGHT TOOL",       hot: "NOT A SLEDGEHAMMER" },
+  { from: L.S9,  big: "AUDIT IT",                 hot: "DON'T JUST DELETE IT" },
   { from: L.S10, big: "OPEN CLAUDE",              hot: "PASTE ONE PROMPT" },
   { from: L.S11, big: "IT AUDITS THE LOT",        hot: "RULE BY RULE" },
   { from: L.S12, big: "RULES · SKILLS · MEMORY",  hot: "KEEP WHAT EARNS IT" },

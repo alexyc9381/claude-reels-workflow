@@ -393,3 +393,79 @@ round before I had made it worse on both axes at once while chasing the low-end 
 against a clean SFX bank is in the MUSIC BED. Do not rebuild the bank looking for it. The layer is
 deleted; the room's texture now comes from the pad's own detuning and the beat swell, which are
 TONES, not noise.
+
+---
+
+## ROUND 5 — the pneumatic, the missing music, and two shots with no verb
+
+### ⛔⛔⛔ "PUFF OF AIR" #3 — AND THE GATE CANNOT CATCH THIS CLASS
+Alex: *"at around 6.8 seconds there's a puff of air sound effect."* It was **`pneu_thunk`**, and it
+passes every gate in `sfx_audit`: 17ms attack, 40% under 250Hz, and a filename with no banned word
+in it. But a PNEUMATIC cylinder is literally a burst of compressed air, so by ear it is exactly the
+thing that has now been reported three times on this reel.
+
+⭐ **THE NAMED-AIR GATE BANS THE NOISE, NOT THE MACHINE.** It catches
+whoosh/swoosh/puff/breath/wind. It cannot catch `pneu_`, `air_ram`, `blowoff`, `vent`, `hiss_valve`
+— names that describe the mechanism that MAKES the air. Read what the object does, not what the file
+is called. All four uses replaced with struck metal (`slate_whump`, `thock`, `slot_stop`).
+
+### ⛔⛔⛔ "WHERE IS THE GOOD BACKGROUND MUSIC" — I HAD SHIPPED AMBIENCE, NOT A TRACK
+The bed was a root drone + a fifth + a slow pad. It has harmony and **no tune**, so under a voice at
+12 dB down it reads as room noise and the reel sounds like it has no music at all.
+
+⛔ The trap that produced it is real and is in `retire-factory-log`: a bed with 73 percussive onsets
+was rejected as *"a bare metronome"*, and the fix that time was a transient-free pad. Correct for the
+metronome — and it threw the tune out with it, and I inherited that shape without questioning it.
+
+⭐ **A BED CAN HAVE A BASSLINE, AN ARPEGGIO AND A MELODY WITH NO PERCUSSIVE TRANSIENT.** Rebuilt as
+an actual piece: a bass walking the chord roots, running eighths through the chord for RHYTHM MADE OF
+TONES, a crossfaded pad, and a four-bar motif that restates an octave up. Every voice has a 55-75ms
+raised-cosine attack, so the notes swell instead of striking.
+
+⭐⭐ **AND THE TRANSIENT THRESHOLD HAD TO BE CALIBRATED ON SHIPPED WORK BEFORE IT MEANT ANYTHING.**
+My first pass measured 55-105 hard transients per track and I nearly softened the music into a drone
+again to "fix" it. Then I ran the identical detector over fourteen beds that actually shipped:
+
+```
+100 apple 11.9/10s · 105 free 21.5 · 103 trade 27.5 · 102 seo 50.4
+101 compress 62.5 · 104 plugin 80.3 · 104 plugin_b 94.0     per 10 seconds
+```
+
+Shipped work runs **11.9 to 94.0**. My beds run **7.5 to 26.7** — at or below the quietest reel in
+the house. The number was frightening only because it had no reference. `docs/MEASURING`: a correct
+calculation over the wrong baseline produces a confident false answer.
+
+### ⭐⭐ TWO SHOTS THAT HAD AN OBJECT AND NO VERB
+- *"when it says don't just go around deleting everything and the hammer strikes down, make it break
+  those metal chains."* v1 caught the haft MID-SWING: a wind-up with nothing at the end of it. The
+  head now comes through and shatters a twelve-link chain run, and the crew reach him afterwards.
+  ⭐ It is also the better reading of the line — "don't just go deleting everything" is not "don't
+  touch it", it is "you will take the whole thing down if nobody stops you", and you have to see it
+  work once to believe that.
+- *"the drill animation at 33 seconds is very unclear what that is even for."* The tool was HELD and
+  never USED — an object with no verb is unreadable however well it is drawn, and a barrel with a
+  grip IS a drill until it does something only a cutter does. It now cuts on camera, and the shot is
+  about what it LEAVES: one brace parts and falls, the two beside it stay and light green. That is
+  the whole difference from the sledgehammer in the previous shot.
+  ⛔ Drawing it better was not the fix. Angling it into a firing line was half of it; the other half
+  was giving it something to do.
+
+### ⛔ HEADERS NAME THE SUBJECT, NEVER THE SET
+*"for the headers don't say anything about hammers or anything not related to AI stuff."*
+`USE THE RIGHT TOOL / NOT A SLEDGEHAMMER` -> `AUDIT IT / DON'T JUST DELETE IT`. The header band is
+the reel's one guaranteed-legible surface; spending it on a prop is spending it on the metaphor
+instead of the subject. Swept all fifteen bands: that was the only one.
+
+### ⛔⛔ AND I REPORTED A STALE GATE SET AS FINAL
+The round-5 gate run was chained behind `cd video && for c in ...` — but the shell was ALREADY in
+`video/`, so the `cd` failed, the `&&` short-circuited, **no render ran**, and every number I read
+came off the previous round's mp4s. I published them as the final gates.
+
+⭐ The tell was in the data and I nearly missed it: **NOTALL and TOOL came back identical to two
+decimal places on two scenes I had just rebuilt from scratch.** Identical numbers after a rewrite is
+not a pass, it is proof the artefact did not change. On the real render they were 7.99 -> 11.08 and
+9.34 -> 9.16.
+
+⛔ THE FIX IS MECHANICAL: `cd` to an ABSOLUTE path in every chained render command, never a relative
+one, because the session cwd carries between calls and a failed `cd` silently skips the work behind
+`&&`. And when a gate is unchanged after a rebuild, check the file timestamp before believing it.
