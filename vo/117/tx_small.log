@@ -1,0 +1,27 @@
+[   0.58 ->    3.72]  There's a new prompting technique that's been blowing people's minds over the past
+[   3.72 ->    4.12]  week.
+[   4.66 ->    8.10]  Because in a single prompt, you can build fully functional apps and websites even the
+[   8.10 ->   10.80]  creator of Cloud Code said might be the future of prompting LLMs.
+[  12.54 ->   13.72]  It's called the gauntlet loop.
+[  14.72 ->   18.08]  Instead of going back and forth with the AI manually, you set the task until Cloud d…
+[  18.66 ->   18.88]  cut cut.
+[  20.02 ->   23.48]  Instead of going back and forth with the AI manually, you set the task until Cloud
+[  23.48 ->   26.00]  deploy a massive team of sub-agents to do the work.
+[  27.12 ->   31.00]  But the secret sauce is in the third line of the prompt where you assign an AI critic.
+[  31.88 ->   33.04]  The AI agents, cut cut.
+[  33.70 ->   35.54]  The agents loop and refine, cut cut.
+[  36.12 ->   40.62]  The agents loop and refine the code automatically until the critic is utterly wowed by the result.
+[  44.10 ->   44.80]  Cut cut.
+[  45.46 ->   49.74]  The agents loop and refine the code automatically until the critic is amazed by the result.
+[  50.64 ->   54.16]  This eats up tokens fast, so you should build your minimum viable product, cut cut.
+[  55.30 ->   56.84]  This eats up, cut cut.
+[  58.52 ->   61.94]  Now know that this eats up tokens fast, so you should build your minimum viable product,
+[  61.94 ->   62.32]  cut cut.
+[  63.02 ->   64.22]  Now know that you…
+[  64.22 ->   64.38]  cut cut.
+[  65.02 ->   68.78]  Now this eats up tokens fast, so you should build your minimum viable product, cut cut.
+[  69.60 ->   73.34]  Now this eats up tokens fast, so you should build your minimum viable product, cut cut.
+[  73.96 ->   77.88]  Now this eats up tokens fast, so you should build your minimum viable product first and
+[  77.88 ->   80.30]  then unleash the gauntlet loop to polish the final build.
+[  81.02 ->   83.80]  I put this all in a free setup guide, just comment the word loop.
+WROTE LOOP_raw_tx.json

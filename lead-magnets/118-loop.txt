@@ -1,0 +1,82 @@
+TITLE   The Gauntlet Loop
+SUB     The three line prompt that makes Claude build, judge and rebuild its own work until a separate critic agent runs out of complaints
+
+H       What this actually is
+P       The Gauntlet Loop is a way of writing one prompt so that you stop being the person who checks the output. Instead of you reading a result and asking for another pass, the prompt sets up two kinds of agent and lets them argue until the work clears a bar you defined at the start.
+P       It was named and popularised by Matt Shumer, and it spread on the back of one demo he called Claude of Duty: a playable browser shooter, roughly 55,000 lines of Three.js, produced from a single prompt by Claude Opus 5. The demo is the reason people are copying it. The mechanism is the reason it works.
+P       Boris Cherny, who built Claude Code, describes his own day the same way. His words: "My job is to write loops."
+
+RULE
+
+H       Why checking your own work is the part that fails
+P       Every agent workflow that disappoints has the same shape. One model does the job, then the same model is asked whether the job is good, and it says yes. This is not laziness in the model and it is not a prompt you can nag your way out of.
+NUM     An agent that just produced something has the whole production in its context. It knows why every decision was made, so every decision looks justified. That is the definition of a bad reviewer.
+NUM     Without a reference, "is this good" has no answer. The model will produce a plausible score because you asked for one, and the score will move around between runs because there is nothing anchoring it.
+NUM     A single agent optimises for finishing. It has a task list and it wants the list done, so "good enough" arrives exactly when the steps run out rather than when the quality arrives.
+P       The fix is structural, not verbal. You need a second agent that has never seen the attempt, holding the output against something concrete, and you need the loop to end on the critic's verdict rather than on the builder's step count.
+
+RULE
+
+H       The three lines
+P       The prompt is short. Only the third line is unusual, and it is the one people leave out.
+NUM     Line one: the task, plus a concrete example of what great looks like. Not an adjective. A real reference the model can open, read and measure itself against.
+NUM     Line two: split the job into the smallest pieces that can be judged on their own, and give each piece its own builder agent with its own context.
+NUM     Line three: give each piece a separate critic agent, with fresh context, whose job is to inspect the real output, compare it directly against the bar, name the single biggest remaining gap, and send it back.
+P       The loop is then implicit: builder produces, critic rejects with one named gap, builder rebuilds against that gap, critic looks again. It ends when the critic has nothing left to raise.
+
+RULE
+
+H       The prompt, written out
+P       Adapt the nouns, keep the structure. The three numbered clauses are doing all the work.
+B       Build me [the thing]. Here is what great looks like: [link, file, screenshot, or a named product to match]. Treat that as the bar.
+B       Break this into the smallest pieces that can be judged independently. For each piece, spawn a builder subagent with its own context and give it that piece only.
+B       For each piece, also spawn a separate critic subagent with fresh context. The critic must open the actual output, compare it against the bar, name the single largest remaining gap, and send it back to the builder. The builder never grades its own work. Repeat until the critic has no further gap to raise, or until [N] rounds, whichever comes first.
+P       The bracketed round cap in the last clause is not optional. See the section on cost below.
+
+RULE
+
+H       Why the separate critic is the whole trick
+P       Three properties, and the technique loses its power if you drop any of them.
+NUM     Fresh context. The critic must not have seen the build happen. If it inherits the builder's reasoning it inherits the builder's confidence, and you are back to one agent grading itself.
+NUM     A real artifact. The critic opens the output rather than reading a description of it. Judging a summary of the work is judging the builder's own account of the work.
+NUM     One gap at a time. A critic that returns twelve notes produces a builder that half fixes twelve things. A critic that returns the single biggest gap produces a builder that fixes it properly, and the next round surfaces the next one.
+P       Where you can, have the critic do a blind A and B against the reference rather than score out of ten. A comparison is anchored to something real. A number is invented.
+
+RULE
+
+H       Running it without burning your month
+P       This eats tokens fast, and that is not a footnote. Public reports of single projects run into four figures each, and the reason is structural: every piece has at least two agents on it and every round runs both again.
+NUM     Build the minimum viable version by hand, or in a normal single pass, first. Get something that runs.
+NUM     Then unleash the loop on the polish pass only, pointed at the specific parts that are not good enough yet.
+NUM     Always give the loop a stop condition with two halves: the quality bar, and a hard round cap. A loop with a vague bar does not converge, it wanders.
+NUM     Scope the pieces small. The cost multiplies with the number of pieces and the number of rounds, so ten small pieces at two rounds is cheaper and better than three large ones at six.
+P       Run it overnight on a bounded job rather than interactively on an open ended one. The technique rewards patience and punishes supervision.
+
+RULE
+
+H       When it does not work
+P       The honest limit, and it is a real one. The loop depends on the critic having something concrete to compare against.
+P       On a job with a clear reference, a competitor to match, a spec, a design file, an existing product, the critic has an anchor and the loop converges. On a genuinely novel idea with no reference, the critic invents its own standard, and because that standard drifts between rounds the loop can run a long time producing changes rather than improvements. You pay for the argument.
+P       So the rule is: if you cannot name what great looks like in line one, the technique is not ready for that job yet. Go and find or make the reference first, even a rough one, then run the loop against it.
+
+RULE
+
+H       A checklist before you press go
+NUM     Have I put a real, openable example of great in line one, rather than an adjective?
+NUM     Are the pieces small enough that a critic can judge one without reading the others?
+NUM     Does every piece have a critic that is a different agent from its builder, with fresh context?
+NUM     Does the critic return one gap, against the bar, rather than a score?
+NUM     Is there a hard round cap as well as a quality bar?
+NUM     Have I already built the cheap version by hand, so the loop is polishing rather than starting?
+
+RULE
+
+H       What to know before you start
+P       Three honest notes, because a guide that only lists upsides is an advert.
+NUM     The 55,000 line figure is the Claude of Duty demo's reported size, not a promise about your project. It is evidence that the technique scales to something real, not a benchmark.
+NUM     The cost figures circulating are from separate projects, not from that demo, and they vary enormously with how you scope the pieces. Treat them as a warning about the shape of the cost rather than a price list.
+NUM     No published benchmark compares this against a normal single pass prompt. What is verifiable is the mechanism and the demos. Take the mechanism seriously and any multiplier you hear loosely.
+
+RULE
+
+KEY     LOOP

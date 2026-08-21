@@ -1,0 +1,742 @@
+[
+{
+"start": 0.0,
+"end": 0.04,
+"word": " There's"
+},
+{
+"start": 0.075,
+"end": 0.115,
+"word": " a"
+},
+{
+"start": 0.15,
+"end": 0.35,
+"word": " new"
+},
+{
+"start": 0.35,
+"end": 0.63,
+"word": " prompting"
+},
+{
+"start": 0.63,
+"end": 0.95,
+"word": " technique"
+},
+{
+"start": 0.95,
+"end": 1.13,
+"word": " that's"
+},
+{
+"start": 1.025,
+"end": 1.09,
+"word": " been"
+},
+{
+"start": 1.1,
+"end": 1.43,
+"word": " blowing"
+},
+{
+"start": 1.43,
+"end": 1.83,
+"word": " people's"
+},
+{
+"start": 1.78,
+"end": 1.92,
+"word": " minds"
+},
+{
+"start": 1.92,
+"end": 2.18,
+"word": " over"
+},
+{
+"start": 2.18,
+"end": 2.32,
+"word": " the"
+},
+{
+"start": 2.32,
+"end": 2.6,
+"word": " past"
+},
+{
+"start": 2.72,
+"end": 3.06,
+"word": " week."
+},
+{
+"start": 3.34,
+"end": 3.6,
+"word": " Because"
+},
+{
+"start": 3.6,
+"end": 3.72,
+"word": " in"
+},
+{
+"start": 3.72,
+"end": 3.9,
+"word": " a"
+},
+{
+"start": 3.9,
+"end": 4.12,
+"word": " single"
+},
+{
+"start": 3.975,
+"end": 4.14,
+"word": " prompt,"
+},
+{
+"start": 4.2,
+"end": 4.26,
+"word": " you"
+},
+{
+"start": 4.275,
+"end": 4.38,
+"word": " can"
+},
+{
+"start": 4.38,
+"end": 4.58,
+"word": " build"
+},
+{
+"start": 4.58,
+"end": 5.0,
+"word": " fully"
+},
+{
+"start": 5.0,
+"end": 5.36,
+"word": " functional"
+},
+{
+"start": 5.44,
+"end": 5.74,
+"word": " apps"
+},
+{
+"start": 5.74,
+"end": 5.9,
+"word": " and"
+},
+{
+"start": 5.9,
+"end": 6.18,
+"word": " websites,"
+},
+{
+"start": 6.21,
+"end": 6.37,
+"word": " even"
+},
+{
+"start": 6.37,
+"end": 6.57,
+"word": " the"
+},
+{
+"start": 6.57,
+"end": 6.79,
+"word": " creator"
+},
+{
+"start": 6.85,
+"end": 7.05,
+"word": " of"
+},
+{
+"start": 7.05,
+"end": 7.17,
+"word": " Claude"
+},
+{
+"start": 7.17,
+"end": 7.41,
+"word": " Code"
+},
+{
+"start": 7.43,
+"end": 7.59,
+"word": " said"
+},
+{
+"start": 7.59,
+"end": 7.75,
+"word": " might"
+},
+{
+"start": 7.75,
+"end": 7.87,
+"word": " be"
+},
+{
+"start": 7.93,
+"end": 8.07,
+"word": " the"
+},
+{
+"start": 8.07,
+"end": 8.39,
+"word": " future"
+},
+{
+"start": 8.39,
+"end": 8.57,
+"word": " of"
+},
+{
+"start": 8.57,
+"end": 8.89,
+"word": " prompting"
+},
+{
+"start": 8.88,
+"end": 9.38,
+"word": " LLMs."
+},
+{
+"start": 9.45,
+"end": 9.61,
+"word": " It's"
+},
+{
+"start": 9.61,
+"end": 9.79,
+"word": " called"
+},
+{
+"start": 9.79,
+"end": 9.97,
+"word": " the"
+},
+{
+"start": 9.97,
+"end": 10.23,
+"word": " Gauntlet"
+},
+{
+"start": 10.34,
+"end": 10.62,
+"word": " Loop."
+},
+{
+"start": 10.73,
+"end": 10.91,
+"word": " Instead"
+},
+{
+"start": 10.91,
+"end": 11.05,
+"word": " of"
+},
+{
+"start": 11.05,
+"end": 11.21,
+"word": " going"
+},
+{
+"start": 11.28,
+"end": 11.5,
+"word": " back"
+},
+{
+"start": 11.5,
+"end": 11.68,
+"word": " and"
+},
+{
+"start": 11.68,
+"end": 11.88,
+"word": " forth"
+},
+{
+"start": 11.87,
+"end": 12.09,
+"word": " with"
+},
+{
+"start": 12.09,
+"end": 12.21,
+"word": " the"
+},
+{
+"start": 12.21,
+"end": 12.39,
+"word": " AI"
+},
+{
+"start": 12.32,
+"end": 12.68,
+"word": " manually,"
+},
+{
+"start": 12.78,
+"end": 12.88,
+"word": " you"
+},
+{
+"start": 12.88,
+"end": 13.04,
+"word": " set"
+},
+{
+"start": 13.06,
+"end": 13.24,
+"word": " the"
+},
+{
+"start": 13.24,
+"end": 13.46,
+"word": " task"
+},
+{
+"start": 13.46,
+"end": 13.68,
+"word": " and"
+},
+{
+"start": 13.68,
+"end": 13.78,
+"word": " tell"
+},
+{
+"start": 13.83,
+"end": 14.03,
+"word": " Claude"
+},
+{
+"start": 14.03,
+"end": 14.17,
+"word": " to"
+},
+{
+"start": 14.17,
+"end": 14.45,
+"word": " deploy"
+},
+{
+"start": 14.42,
+"end": 14.7,
+"word": " a"
+},
+{
+"start": 14.7,
+"end": 14.98,
+"word": " massive"
+},
+{
+"start": 14.98,
+"end": 15.3,
+"word": " team"
+},
+{
+"start": 15.29,
+"end": 15.51,
+"word": " of"
+},
+{
+"start": 15.51,
+"end": 15.81,
+"word": " subagents"
+},
+{
+"start": 15.81,
+"end": 16.05,
+"word": " to"
+},
+{
+"start": 16.05,
+"end": 16.17,
+"word": " do"
+},
+{
+"start": 16.14,
+"end": 16.3,
+"word": " the"
+},
+{
+"start": 16.3,
+"end": 16.5,
+"word": " work."
+},
+{
+"start": 16.69,
+"end": 16.79,
+"word": " But"
+},
+{
+"start": 16.79,
+"end": 17.01,
+"word": " the"
+},
+{
+"start": 17.01,
+"end": 17.21,
+"word": " secret"
+},
+{
+"start": 17.16,
+"end": 17.48,
+"word": " sauce"
+},
+{
+"start": 17.48,
+"end": 17.62,
+"word": " is"
+},
+{
+"start": 17.7,
+"end": 17.82,
+"word": " in"
+},
+{
+"start": 17.82,
+"end": 17.98,
+"word": " the"
+},
+{
+"start": 17.98,
+"end": 18.26,
+"word": " third"
+},
+{
+"start": 18.26,
+"end": 18.44,
+"word": " line"
+},
+{
+"start": 18.65,
+"end": 18.77,
+"word": " of"
+},
+{
+"start": 18.77,
+"end": 18.91,
+"word": " the"
+},
+{
+"start": 18.91,
+"end": 19.15,
+"word": " prompt,"
+},
+{
+"start": 18.985,
+"end": 19.04,
+"word": " where"
+},
+{
+"start": 19.06,
+"end": 19.1,
+"word": " you"
+},
+{
+"start": 19.135,
+"end": 19.38,
+"word": " assign"
+},
+{
+"start": 19.44,
+"end": 19.68,
+"word": " an"
+},
+{
+"start": 19.68,
+"end": 19.88,
+"word": " AI"
+},
+{
+"start": 19.88,
+"end": 20.14,
+"word": " critic."
+},
+{
+"start": 20.38,
+"end": 20.5,
+"word": " The"
+},
+{
+"start": 20.5,
+"end": 20.74,
+"word": " agents"
+},
+{
+"start": 20.74,
+"end": 21.04,
+"word": " loop"
+},
+{
+"start": 21.11,
+"end": 21.25,
+"word": " and"
+},
+{
+"start": 21.25,
+"end": 21.53,
+"word": " refine"
+},
+{
+"start": 21.53,
+"end": 21.69,
+"word": " the"
+},
+{
+"start": 21.69,
+"end": 21.89,
+"word": " code"
+},
+{
+"start": 21.84,
+"end": 22.52,
+"word": " automatically"
+},
+{
+"start": 22.52,
+"end": 22.8,
+"word": " until"
+},
+{
+"start": 22.8,
+"end": 23.02,
+"word": " the"
+},
+{
+"start": 23.02,
+"end": 23.2,
+"word": " critic"
+},
+{
+"start": 23.27,
+"end": 23.49,
+"word": " is"
+},
+{
+"start": 23.49,
+"end": 24.01,
+"word": " amazed"
+},
+{
+"start": 24.01,
+"end": 24.25,
+"word": " by"
+},
+{
+"start": 24.29,
+"end": 24.43,
+"word": " the"
+},
+{
+"start": 24.43,
+"end": 24.77,
+"word": " result."
+},
+{
+"start": 25.12,
+"end": 25.22,
+"word": " Now"
+},
+{
+"start": 25.22,
+"end": 25.38,
+"word": " this"
+},
+{
+"start": 25.38,
+"end": 25.58,
+"word": " eats"
+},
+{
+"start": 25.46,
+"end": 25.64,
+"word": " up"
+},
+{
+"start": 25.64,
+"end": 25.9,
+"word": " tokens"
+},
+{
+"start": 25.9,
+"end": 26.24,
+"word": " fast,"
+},
+{
+"start": 26.3,
+"end": 26.44,
+"word": " so"
+},
+{
+"start": 26.44,
+"end": 26.5,
+"word": " you"
+},
+{
+"start": 26.515,
+"end": 26.68,
+"word": " should"
+},
+{
+"start": 26.84,
+"end": 27.02,
+"word": " build"
+},
+{
+"start": 27.02,
+"end": 27.2,
+"word": " your"
+},
+{
+"start": 27.2,
+"end": 27.58,
+"word": " minimum"
+},
+{
+"start": 27.66,
+"end": 28.0,
+"word": " viable"
+},
+{
+"start": 28.0,
+"end": 28.4,
+"word": " product"
+},
+{
+"start": 28.4,
+"end": 28.74,
+"word": " first"
+},
+{
+"start": 28.67,
+"end": 28.71,
+"word": " and"
+},
+{
+"start": 28.745,
+"end": 28.79,
+"word": " then"
+},
+{
+"start": 28.82,
+"end": 29.25,
+"word": " unleash"
+},
+{
+"start": 29.43,
+"end": 29.67,
+"word": " the"
+},
+{
+"start": 29.67,
+"end": 29.93,
+"word": " Gauntlet"
+},
+{
+"start": 29.93,
+"end": 30.07,
+"word": " Loop"
+},
+{
+"start": 30.005,
+"end": 30.17,
+"word": " to"
+},
+{
+"start": 30.17,
+"end": 30.55,
+"word": " polish"
+},
+{
+"start": 30.55,
+"end": 30.77,
+"word": " the"
+},
+{
+"start": 30.77,
+"end": 30.97,
+"word": " final"
+},
+{
+"start": 30.845,
+"end": 31.07,
+"word": " build."
+},
+{
+"start": 31.24,
+"end": 31.3,
+"word": " I"
+},
+{
+"start": 31.315,
+"end": 31.46,
+"word": " put"
+},
+{
+"start": 31.46,
+"end": 31.64,
+"word": " this"
+},
+{
+"start": 31.7,
+"end": 31.82,
+"word": " all"
+},
+{
+"start": 31.82,
+"end": 31.9,
+"word": " in"
+},
+{
+"start": 31.9,
+"end": 32.04,
+"word": " a"
+},
+{
+"start": 32.04,
+"end": 32.26,
+"word": " free"
+},
+{
+"start": 32.3,
+"end": 32.54,
+"word": " setup"
+},
+{
+"start": 32.54,
+"end": 32.76,
+"word": " guide,"
+},
+{
+"start": 32.86,
+"end": 32.92,
+"word": " just"
+},
+{
+"start": 32.935,
+"end": 33.2,
+"word": " comment"
+},
+{
+"start": 33.2,
+"end": 33.36,
+"word": " the"
+},
+{
+"start": 33.36,
+"end": 33.5,
+"word": " word"
+},
+{
+"start": 33.435,
+"end": 33.68,
+"word": " LOOP."
+}
+]

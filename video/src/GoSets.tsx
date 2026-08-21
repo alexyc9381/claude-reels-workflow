@@ -214,9 +214,13 @@ export const DarkOverhead: React.FC<{ c?: string; y?: number; z?: number; deep?:
    ====================================================================== */
 export const Shop: React.FC<{ p: Place; f: number; t?: number; lit?: number; z0?: number;
   truss?: boolean; racks?: boolean; band?: React.ReactNode; glowX?: number; glowR?: number;
-  rake?: boolean; rakeRate?: number }> =
+  /* ⭐ the rake is a per-cut lever now — angle and stripe count, not just rate.
+     A dHash reads adjacent-pixel luma, so moving where the light EDGES fall is
+     worth far more than changing how fast they travel. */
+  rake?: boolean; rakeRate?: number; rakeAng?: number; rakeN?: number; rakeO?: number }> =
   ({ p, f, t = 0, lit = 0.34, z0 = 0, truss = true, racks = true, band,
-     glowX = 500, glowR = 300, rake = true, rakeRate = 3.4 }) => (<>
+     glowX = 500, glowR = 300, rake = true, rakeRate = 3.4,
+     rakeAng = -17, rakeN = 6, rakeO = 0.26 }) => (<>
   {/* 1 · the far wall */}
   <div style={{ position: "absolute", inset: 0, zIndex: z0 + 1,
     background: `linear-gradient(174deg, ${p.back} 0%, ${p.back2} 100%)` }} />
@@ -255,7 +259,7 @@ export const Shop: React.FC<{ p: Place; f: number; t?: number; lit?: number; z0?
       opacity: 0.32, zIndex: z0 + 17 }} />
   ))}
   {/* ⭐ the travelling rake — feathered, light AND shadow, speed at the call site */}
-  {rake && <Rake f={f} y={p.horizon - 300} h={480} c={p.key} o={0.26} rate={rakeRate} z={z0 + 20} n={6} />}
+  {rake && <Rake f={f} y={p.horizon - 300} h={480} c={p.key} o={rakeO} rate={rakeRate} z={z0 + 20} n={rakeN} ang={rakeAng} />}
   {truss && <Truss z={z0 + 84} />}
 </>);
 

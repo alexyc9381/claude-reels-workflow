@@ -1,0 +1,8 @@
+There's a new prompting technique that's been blowing people's minds over the past week.
+Because in a single prompt, you can build fully functional apps and websites, even the creator of Claude Code said might be the future of prompting LLMs.
+It's called the Gauntlet Loop.
+Instead of going back and forth with the AI manually, you set the task and tell Claude to deploy a massive team of subagents to do the work.
+But the secret sauce is in the third line of the prompt, where you assign an AI critic.
+The agents loop and refine the code automatically until the critic is amazed by the result.
+Now this eats up tokens fast, so you should build your minimum viable product first and then unleash the Gauntlet Loop to polish the final build.
+I put this all in a free setup guide, just comment the word LOOP.

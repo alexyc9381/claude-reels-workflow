@@ -95,7 +95,11 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
       frame. The stanchion's brace and the dark overhead paint at z 82-87, i.e.
       IN FRONT of everything — which is what makes them a depth cue and exactly
       what ruins a screen. */
-  occluders?: boolean }> = ({ k, f, lit = 1, t = 0, rakeRate, occluders = true }) => {
+  /** ⭐ the per-cut rake profile — angle, count and opacity, not just rate.
+      Threaded from the scene so every set in every cut lights differently. */
+  rk?: { mul: number; ang: number; n: number; o: number };
+  occluders?: boolean }> = ({ k, f, lit = 1, t = 0, rakeRate, rk, occluders = true }) => {
+  const RK = rk ?? { mul: 1, ang: -17, n: 6, o: 0.24 };
   const p = placeFor(k);
   switch (k) {
 
@@ -106,7 +110,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "hall":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.30} glowX={506} glowR={340} racks={false}
-          rakeRate={rakeRate ?? 5.4} truss={false} />
+          rakeRate={(rakeRate ?? 5.4) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} truss={false} />
         <DrawerWall y={p.horizon - 6} n={9} rows={3} c="#3A322C" z={9} dx={t * 0.14} on={0.16} />
         <Flood x={506} y={-10} s={1.7} on={lit} len={860} spread={330} c={p.key} />
         <Flood x={128} y={26} s={1.1} on={lit * 0.62} len={640} spread={210} c={p.key} />
@@ -150,7 +154,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "hall2":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.22} glowX={186} glowR={300} racks={false}
-          rakeRate={rakeRate ?? 7.2} truss={false} />
+          rakeRate={(rakeRate ?? 7.2) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} truss={false} />
         <DrawerWall y={p.horizon - 6} n={7} rows={3} c="#28303A" z={9} dx={t * 0.24}
           lit="#CFE4F4" on={0.12} />
         <Flood x={176} y={-14} s={1.5} on={lit * 0.96} len={800} spread={264} c={p.key} />
@@ -164,7 +168,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "hall3":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.44} glowX={506} glowR={400} racks={false}
-          rakeRate={rakeRate ?? 6.0} truss={false} />
+          rakeRate={(rakeRate ?? 6.0) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} truss={false} />
         <DrawerWall y={p.horizon - 6} n={8} rows={3} c="#4A3A2C" z={9} dx={t * 0.10} on={0.30} />
         <Flood x={400} y={-14} s={1.8} on={lit} len={880} spread={352} c={p.key} />
         <Flood x={790} y={4} s={1.3} on={lit * 0.82} len={760} spread={250} c={p.key} />
@@ -187,7 +191,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        brightest set in the reel and the biggest hue+lightness jump anywhere. */
     case "lab":
       return (<>
-        <Shop p={p} f={f} t={t} lit={0.78} glowX={506} glowR={430} rakeRate={rakeRate ?? 4.2} />
+        <Shop p={p} f={f} t={t} lit={0.78} glowX={506} glowR={430} rakeRate={(rakeRate ?? 4.2) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} />
         {/* the roof light itself — the light source is in frame */}
         <div style={{ position: "absolute", left: 40, right: 40, top: 24, height: 96, zIndex: 15,
           borderRadius: 8, background: `linear-gradient(180deg, #FFFFFF 0%, ${mxh(p.key, 0.6)} 100%)` }} />
@@ -207,7 +211,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        SPREAD, not the mean. */
     case "rail":
       return (<>
-        <Shop p={p} f={f} t={t} lit={0.20} glowX={506} glowR={320} rakeRate={rakeRate ?? 5.6} />
+        <Shop p={p} f={f} t={t} lit={0.20} glowX={506} glowR={320} rakeRate={(rakeRate ?? 5.6) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} />
         <Flood x={506} y={-8} s={1.5} on={lit} len={740} spread={330} c={p.key} />
         {/* the bench rail the cards land on — a real rail with legs and a lip */}
         <div style={{ position: "absolute", left: -40, right: -40, top: p.horizon - 24, height: 40,
@@ -228,7 +232,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "booth":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.16} glowX={330} glowR={230} racks={false}
-          rakeRate={rakeRate ?? 3.8} />
+          rakeRate={(rakeRate ?? 3.8) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} />
         {/* the booth walls closing in from both sides — cramped is BUILT */}
         {[-30, 720].map((x, i) => (
           <div key={"bw" + i} style={{ position: "absolute", left: x, top: 40, width: 390,
@@ -252,7 +256,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "wide":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.72} glowX={506} glowR={460} racks={false}
-          rakeRate={rakeRate ?? 4.6} truss={false} />
+          rakeRate={(rakeRate ?? 4.6) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} truss={false} />
         <Flood x={506} y={-16} s={1.9} on={lit} len={900} spread={380} c={p.key} />
         <Pool x={506} y={p.horizon + 120} w={1200} c={p.key} o={0.40 * lit} z={19} h={380} />
         <DarkOverhead c="#25344A" deep={0.8} z={82} />
@@ -264,7 +268,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "shaft":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.18} glowX={506} glowR={300} racks={false}
-          rakeRate={rakeRate ?? 6.4} truss={false} />
+          rakeRate={(rakeRate ?? 6.4) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} truss={false} />
         {/* the gantry the crate hangs from, running the full width */}
         <div style={{ position: "absolute", left: -60, right: -60, top: 86, height: 46, zIndex: 28,
           background: `linear-gradient(180deg, ${mxh("#4A3A22", 0.20)} 0%, ${dkh("#4A3A22", 0.36)} 100%)` }} />
@@ -285,7 +289,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     /* S7 — THE STACKS. One green reading lamp, shelves receding hard. */
     case "stacks":
       return (<>
-        <Shop p={p} f={f} t={t} lit={0.26} glowX={720} glowR={280} rakeRate={rakeRate ?? 5.0} />
+        <Shop p={p} f={f} t={t} lit={0.26} glowX={720} glowR={280} rakeRate={(rakeRate ?? 5.0) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} />
         {/* the receding stack aisle — four ranks of shelving, parallaxed */}
         {[0, 1, 2, 3].map(i => (
           <div key={"sa" + i} style={{ position: "absolute",
@@ -315,7 +319,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "desk":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.20} glowX={506} glowR={280} racks={false}
-          rakeRate={rakeRate ?? 4.4} />
+          rakeRate={(rakeRate ?? 4.4) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} />
         {/* the desk itself, cropped by the bottom edge — the near plane */}
         <div style={{ position: "absolute", left: -60, right: -60, top: p.horizon + 90, height: 300,
           zIndex: 84, background: `linear-gradient(178deg, ${mxh("#2A3040", 0.16)} 0%, ${dkh("#2A3040", 0.42)} 100%)` }}>
@@ -344,7 +348,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "stage":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.12} glowX={560} glowR={330} racks={false}
-          rakeRate={rakeRate ?? 5.8} truss={false} />
+          rakeRate={(rakeRate ?? 5.8) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} truss={false} />
         {/* the lighting grid overhead — a stage is defined by what hangs above */}
         <div style={{ position: "absolute", left: -60, right: -60, top: -8, height: 150, zIndex: 80 }}>
           {[0, 1].map(i => (
@@ -390,7 +394,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     /* S12/S13 — THE BENCH. A small warm workshop; one lamp, clean, low. */
     case "bench":
       return (<>
-        <Shop p={p} f={f} t={t} lit={0.24} glowX={430} glowR={290} rakeRate={rakeRate ?? 4.8} />
+        <Shop p={p} f={f} t={t} lit={0.24} glowX={430} glowR={290} rakeRate={(rakeRate ?? 4.8) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} />
         {/* the pegboard behind, with real tools hung on it */}
         <div style={{ position: "absolute", left: 120, top: 120, width: 780, height: 300, zIndex: 18,
           borderRadius: 5, background: dkh("#2E3440", 0.10),
@@ -433,7 +437,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
     case "bays":
       return (<>
         <Shop p={p} f={f} t={t} lit={0.12} glowX={506} glowR={420} racks={false}
-          rakeRate={rakeRate ?? 5.2} truss={false} />
+          rakeRate={(rakeRate ?? 5.2) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} truss={false} />
         {/* the gantry walkway across the back, with its handrail and mesh */}
         <div style={{ position: "absolute", left: -60, right: -60, top: 176, height: 26, zIndex: 16,
           background: dkh("#1E2A34", 0.16) }} />
@@ -452,7 +456,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        control room, and the reel's second brightest set. */
     case "out":
       return (<>
-        <Shop p={p} f={f} t={t} lit={0.66} glowX={506} glowR={400} rakeRate={rakeRate ?? 4.4} />
+        <Shop p={p} f={f} t={t} lit={0.66} glowX={506} glowR={400} rakeRate={(rakeRate ?? 4.4) * RK.mul} rakeAng={RK.ang} rakeN={RK.n} rakeO={RK.o} />
         <Flood x={330} y={-12} s={1.6} on={lit} len={820} spread={310} c={p.key} />
         <Flood x={760} y={-4} s={1.4} on={lit * 0.86} len={780} spread={270} c={p.key} />
         <Pool x={506} y={p.horizon + 140} w={1180} c={p.key} o={0.50 * lit} z={19} h={420} />

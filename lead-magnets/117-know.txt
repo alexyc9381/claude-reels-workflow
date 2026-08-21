@@ -1,0 +1,106 @@
+TITLE   10,000 Hours of Claude
+SUB     Fifteen things that change how Claude works for you, beginner to expert, every one of them checked against Anthropic's own documentation on 21 August 2026
+
+H       What this actually is
+P       Most people are using Claude at a fraction of what it does. Not because they are prompting badly. Because the things that matter most are configuration decisions, and nobody walks you through configuration.
+P       There are no clever prompts in this guide. Every item below is a setting, a surface or a habit, and each one is either something Anthropic documents or something clearly labelled as a judgement call. Where the video says something the documentation does not back, this guide says so in plain words rather than repeating it.
+P       Six of the fifteen are in the video. The other nine are here.
+
+RULE
+
+H       Part one, beginner
+P       These five are about not making Claude's job harder than it needs to be.
+
+H       1. Stop sending simple work to the biggest model
+P       The current line-up is Sonnet 5, Haiku 4.5, Opus 5 and Fable 5. They are not a quality ladder where the last one is always right. They are sized for different jobs.
+B       Sonnet 5 is the daily driver. Most of what you do belongs here.
+B       Haiku 4.5 is the fast one. Reach for it on high volume, low ambiguity work where speed is what you are actually buying.
+B       Opus 5 and Fable 5 are for the tasks with many moving parts, where the model has to hold a lot at once and reason across it.
+P       The honest version of the video's joke: Haiku is not a worse model, it is a faster one, and speed is a real trade you make on purpose. Anthropic publishes no benchmark that says "use this one for wrong answers" and this guide is not going to invent one. What is true is that running everything on the largest model spends your limits on work that did not need them.
+P       The practical habit: pick the model when you start the conversation, not after it disappoints you.
+
+H       2. Do not work inside Projects by default
+P       This is the one that surprises people, and it comes straight from Anthropic's help centre. On memory and Projects, the wording is exact:
+P       "Each project has its own separate memory space and dedicated project summary, so the context within each of your projects is focused, relevant, and separate from other projects or non-project chats."
+P       Read that twice. A Project is not a folder that adds context. It is a boundary that removes it. Inside a Project, Claude is working from that Project's memory, not the general memory it has built up with you everywhere else.
+P       That isolation is the feature. It is exactly what you want when a client's work should not leak into another client's, or when confidential planning should stay separate from general operations. It is exactly what you do not want when you open a Project out of tidiness and then wonder why Claude has forgotten how you like things done.
+B       Use a Project when separation is the point: a client, a confidential workstream, a body of work with its own reference files.
+B       Stay in ordinary chats when continuity is the point, which is most day to day work.
+
+H       3. Turn memory on deliberately, then leave it alone
+P       Memory is optional and it is off until you switch it on. It lives in Settings, under Capabilities, and it comes with granular controls over what is kept.
+P       The reason to do this on purpose rather than by accident is that memory only pays off once it has something in it. Turning it on today and forgetting about it is the entire strategy. In a month, the difference between a Claude that knows how you work and one that does not is a single toggle you flipped and never thought about again.
+
+H       4. Search your own history instead of pasting it back in
+P       Chat search lets Claude find and build on previous conversations rather than making you re-explain. If you find yourself pasting the same background into a new chat for the third time, that is the signal.
+
+H       5. Give it the file, not a description of the file
+P       People summarise a document into a prompt and then ask about the summary. Upload the actual source. Everything downstream, including how much Claude can check itself against, depends on whether the real thing is in the conversation or a paraphrase of it is.
+
+RULE
+
+H       Part two, intermediate
+P       These five are about the browser, which is where most people's work already lives.
+
+H       6. Treat the Chrome extension like a junior hire
+P       Claude in Chrome sees the page you are on and takes action in it. Anthropic's description of what that means is specific: clicking links, typing text, navigating between pages, and filling out forms, using your existing logins.
+P       That last clause is the part that matters. It is not calling an API on your behalf. It is working the same pages, signed in as you, the way a new hire on their first week would.
+P       So brief it like one. Tell it the outcome, tell it where to start, and check the first few runs before you trust it with anything that submits.
+
+H       7. Put the tabs it needs into its tab group
+P       Claude can work across multiple tabs at once. Drag the tabs you want it to see into Claude's designated tab group and it can view and interact with all of them together, instead of you switching back and forth and pasting between them.
+P       This is the difference between "read this page" and "compare these four things", and almost nobody who has the extension installed is using it.
+
+H       8. Use short commands on the platforms it already knows
+P       It ships with built-in knowledge of how to navigate Slack, Google Calendar, Gmail, Google Docs and GitHub. On those, plain instructions like "schedule a meeting" or "update the doc" work without step by step directions.
+P       Save the detailed instructions for the tools it has never seen.
+
+H       9. Let the safety check do its job
+P       Before it acts on a page, a separate safety check reviews the action for risk and for instructions hidden in the site itself, and surfaces anything that looks wrong.
+P       That second half is worth understanding. A page can contain text written to be read by an AI agent rather than by you. The check exists because that is a real category of attack, and the correct response when it flags something is to look, not to click through.
+
+H       10. Know where it runs
+P       The extension is generally available on all paid plans, and it works alongside Claude Code, Cowork and the desktop app rather than instead of them. The browser is one surface of the same assistant, not a separate product.
+
+RULE
+
+H       Part three, expert
+P       These five are where the ceiling actually moves.
+
+H       11. Build working software from the Code tab, in plain English
+P       The Code tab in the desktop app is an interactive coding surface with access to your local files. It reads the codebase, modifies files, runs tests, makes commits and works across multiple files at once.
+P       The part that changes who this is for: people who have never written a line of code build working tools with it by describing what they want in plain language. It shows you the changes and asks for approval before applying them.
+P       It requires a Pro, Max, Team or Enterprise subscription.
+
+H       12. Let it run the thing it is building
+P       The Code tab can run your dev server and render a live preview in the app. Claude sees the running application, tests endpoints, reads logs and iterates on what it observes.
+P       This is the difference between an assistant that writes code and one that checks its own work. Give it the ability to run what it built and the number of round trips through you drops sharply.
+
+H       13. Automate the job you keep redoing
+P       The work worth automating is not the interesting work. It is the identical thing you do every week: the same report, the same triage pass, the same reformat.
+P       The video says this makes people ten times more productive. That figure has no published benchmark behind it and this guide is not going to pretend otherwise. What is defensible is the mechanism: a job you set up once and then do not perform again produces output whether or not you are at the keyboard, and the compounding comes from the number of those you accumulate.
+
+H       14. Install plugins from the Customize menu
+P       On claude.ai, the Customize menu in the left sidebar brings plugins, skills and connectors together in one place. Open the Plugins tab, click Browse plugins, and install the ones you want.
+P       A plugin is a bundle. It can package slash commands, subagents, MCP servers and hooks together, which is why installing one can change what Claude can do rather than just how it talks.
+
+H       15. Connect MCP servers, which is what actually gives it hands
+P       MCP is the layer that connects Claude to things outside the chat. There are three routes in depending on where you work:
+B       Desktop, the easy way: Settings, then Extensions, then Browse extensions, and install any Anthropic-reviewed tool with one click.
+B       Desktop, manually: the plus button by the chat box, then Connectors, which shows the connected servers and the tools each one exposes.
+B       Claude Code: /plugin marketplace add followed by a GitHub owner and repo, then browse and install from the /plugin menu. The official Anthropic marketplace is added automatically the first time you run it interactively.
+P       This is the item with the highest ceiling on the list and the one fewest people ever reach. Everything above changes how well Claude does what it already does. This changes what it is able to touch.
+
+RULE
+
+H       The part nobody mentions
+P       Look back at the fifteen. Almost none of them are about how you write a prompt.
+P       They are decisions about which model, where the memory lives, which surface you are on, and what has permission to act. You make each one once. Then every request you already know how to make gets better, for free, for as long as you keep the setting.
+P       That is the actual gap between someone who has used Claude for a week and someone who has used it for a year. Not vocabulary. Configuration.
+
+RULE
+
+H       Sources
+P       Every product claim above was read on 21 August 2026 from Anthropic's own documentation: the help centre articles on memory and chat search, on Claude in Chrome, and on using plugins in Claude; the Claude Code documentation on the desktop app and on discovering plugins through marketplaces; and the Anthropic engineering post on desktop extensions. Where the video makes a claim the documentation does not support, it is flagged as such in the text rather than repeated.
+
+KEY     KNOW

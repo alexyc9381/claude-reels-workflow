@@ -1,0 +1,13 @@
+[   0.00 ->    2.84]  There's a new prompting technique that's been blowing people's minds over the past
+[   2.84 ->    3.18]  week.
+[   3.44 ->    6.82]  Because in a single prompt, you can build fully functional apps and websites even the
+[   6.82 ->    9.52]  creator of Cloud Code said might be the future of prompting LLMs.
+[   9.74 ->   10.72]  It's called the Gauntlet Loop.
+[  11.00 ->   14.26]  Instead of going back and forth with the AI manually, you set the task and tell Cloud
+[  14.26 ->   16.76]  to deploy a massive team of sub-agents to do the work.
+[  16.90 ->   20.36]  But the secret sauce is in the third line of the prompt, reassign an AI critic.
+[  20.66 ->   24.90]  The agents loop and refine the code automatically until the critic is amazed by the result.
+[  25.24 ->   28.66]  Now this eats up tokens fast, so you should build your minimum viable product first
+[  28.66 ->   31.28]  and then unleash the Gauntlet Loop to polish the final build.
+[  31.54 ->   34.02]  I put this all in a free setup guide, just comment the word LOOP.
+WROTE LOOP_final_tx.json

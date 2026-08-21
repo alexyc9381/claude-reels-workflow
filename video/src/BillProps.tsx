@@ -45,8 +45,13 @@ import {
    ====================================================================== */
 export const Broll: React.FC<{ x: number; y: number; w: number; f: number; at: number;
   src: string; z?: number; label?: string; punch?: number; chrome?: "browser" | "app" | "bare";
-  ratio?: number; startFrom?: number }> =
-  ({ x, y, w, f, at, src, z = 50, label, punch, chrome = "browser", ratio = 0.562, startFrom = 0 }) => {
+  ratio?: number; startFrom?: number;
+  /** ⭐ the per-cut framing: a different start frame AND a different zoom/pan on
+      the same footage, so the trial cuts do not share pixels. */
+  bv?: { t: number; k: number; dx: number; dy: number } }> =
+  ({ x, y, w, f, at, src, z = 50, label, punch, chrome = "browser", ratio = 0.562,
+     startFrom = 0, bv }) => {
+  const BV = bv ?? { t: startFrom, k: 1, dx: 0, dy: 0 };
   const lf = f - at;
   if (lf < 0) return null;
   const h = w * ratio;
@@ -79,8 +84,9 @@ export const Broll: React.FC<{ x: number; y: number; w: number; f: number; at: n
       )}
       {/* the footage */}
       <div style={{ position: "absolute", left: 0, right: 0, top: head, bottom: 0, overflow: "hidden" }}>
-        <OffthreadVideo src={staticFile(src)} startFrom={startFrom} muted
-          style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <OffthreadVideo src={staticFile(src)} startFrom={BV.t} muted
+          style={{ width: "100%", height: "100%", objectFit: "cover",
+            transform: `scale(${BV.k}) translate(${BV.dx}%, ${BV.dy}%)` }} />
       </div>
       {/* a live REC pip, so the frame says THIS IS THE REAL THING */}
       <div style={{ position: "absolute", left: 14, bottom: 12, display: "flex", alignItems: "center",
@@ -943,55 +949,146 @@ export const Bay: React.FC<{ x: number; y: number; w: number; h: number; f: numb
       {/* the screen and its bezel */}
       <div style={{ position: "absolute", inset: 0, borderRadius: 6, background: face,
         border: `5px solid ${dkh(c, 0.50)}`, overflow: "hidden" }}>
-        {/* ---- EDITOR: code blocks being laid into a growing file ----
-             ⛔ THIS USED TO FILL ONCE AND STOP. `Math.min(9, lf/5)` reaches 9 at
-             lf=45 and then repaints NOTHING, so the reel's peak scene went
-             static two thirds of the way through it. A file gets written,
-             saved and written again — so the run CYCLES, and the cycle is what
-             the audit actually sees (motion is fraction-repainted per 0.1s). */}
-        {kind === 0 && on && Array.from({ length: 1 + Math.floor((lf % 58) / 5.6) }, (_, i) => (
-          <div key={"eb" + i} style={{ position: "absolute", left: 16 + (i % 3) * 18,
-            top: 18 + i * 26, width: (w * 0.30 + rnd(5, i) * w * 0.42), height: 17,
-            borderRadius: 3, background: hexa(i % 3 === 0 ? SKY : i % 3 === 1 ? GOLD : GREEN, 0.62),
-            transform: `scale(${squash((lf % 58) - i * 5.6, 4, 0.18, 2, 7)})`, transformOrigin: "0% 50%" }} />
-        ))}
-        {kind === 0 && (
-          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 34,
-            background: hexa("#FFFFFF", 0.04), borderRight: `2px solid ${hexa("#FFFFFF", 0.08)}` }} />
-        )}
-        {/* ---- TERMINAL: output lines scrolling out and PILING UP ---- */}
-        {kind === 1 && on && Array.from({ length: 14 }, (_, i) => {
-          const k = (i * 30 - lf * 3.4) % (h + 60);
-          return (
-            <div key={"tl" + i} style={{ position: "absolute", left: 18, top: h - k,
-              width: w * (0.24 + rnd(9, i) * 0.58), height: 14, borderRadius: 2,
-              background: hexa(GREEN, 0.24 + rnd(2, i) * 0.44) }} />
-          );
-        })}
-        {kind === 1 && on && (
+        {/* ⛔⛔ ALL THREE SCREENS WERE COLOURED BARS. Alex: *"the animations
+             behind the little cloth sprites need to be more interesting and more
+             detailed... they just look very surface level and generic, just too
+             generic."* He is right: an editor, a terminal and a browser were the
+             same primitive — a rounded rect of a different hue — so the three
+             surfaces the VO NAMES were indistinguishable from each other.
+             [[feedback_props_need_real_drawing]]: count the parts per object
+             before adding objects.
+             ⭐ Each screen is now drawn as the tool it actually is. */}
+
+        {/* ---- EDITOR: a tab bar, a numbered gutter, and INDENTED lines made of
+             several syntax-coloured tokens each, not one bar per line.
+             ⛔ THE RUN STILL CYCLES — `Math.min(9, lf/5)` filled once and then
+             repainted nothing, which left the reel's peak scene static two
+             thirds of the way through. A file gets written, saved, written
+             again. */}
+        {kind === 0 && on && (<>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 22,
+            background: hexa("#FFFFFF", 0.07), borderBottom: `2px solid ${hexa("#FFFFFF", 0.10)}` }}>
+            <div style={{ position: "absolute", left: 8, top: 5, width: 54, height: 12,
+              borderRadius: 3, background: hexa(SKY, 0.5) }} />
+            <div style={{ position: "absolute", left: 68, top: 5, width: 38, height: 12,
+              borderRadius: 3, background: hexa("#FFFFFF", 0.10) }} />
+          </div>
+          <div style={{ position: "absolute", left: 0, top: 22, bottom: 0, width: 26,
+            background: hexa("#FFFFFF", 0.05), borderRight: `2px solid ${hexa("#FFFFFF", 0.09)}` }} />
+          {Array.from({ length: 1 + Math.floor((lf % 58) / 4.2) }, (_, i) => {
+            const ind = [0, 0, 1, 2, 2, 1, 0, 1, 2, 2, 1, 0, 1, 2][i % 14];
+            const toks = [[26, SKY], [40, GOLD], [30, "#FFFFFF"], [22, GREEN]] as const;
+            let cx = 32 + ind * 14;
+            return (
+              <React.Fragment key={"eb" + i}>
+                <div style={{ position: "absolute", left: 7, top: 30 + i * 15, width: 12, height: 8,
+                  borderRadius: 2, background: hexa("#FFFFFF", 0.16) }} />
+                {toks.map(([tw, tc], j) => {
+                  if (rnd(7, i * 4 + j) < 0.22) return null;
+                  const wpx = tw * (0.6 + rnd(3, i + j) * 0.8);
+                  const el = (
+                    <div key={"tk" + j} style={{ position: "absolute", left: cx, top: 30 + i * 15,
+                      width: wpx, height: 9, borderRadius: 2,
+                      background: hexa(tc as string, 0.30 + rnd(5, i + j) * 0.45),
+                      transform: `scaleX(${squash((lf % 58) - i * 4.2, 4, 0.5, 2, 6)})`,
+                      transformOrigin: "0% 50%" }} />
+                  );
+                  cx += wpx + 6;
+                  return el;
+                })}
+              </React.Fragment>
+            );
+          })}
+        </>)}
+
+        {/* ---- TERMINAL: a prompt, a command, output PILING UP, and a run bar */}
+        {kind === 1 && on && (<>
+          {Array.from({ length: 14 }, (_, i) => {
+            const k = (i * 30 - lf * 3.4) % (h + 60);
+            const isCmd = i % 4 === 0;
+            return (
+              <React.Fragment key={"tl" + i}>
+                {/* the $ prompt, so a line reads as a SHELL line */}
+                <div style={{ position: "absolute", left: 14, top: h - k + 2,
+                  width: 9, height: 9, borderRadius: 2,
+                  background: hexa(isCmd ? GOLD : GREEN, 0.8) }} />
+                <div style={{ position: "absolute", left: 28, top: h - k,
+                  width: w * (0.20 + rnd(9, i) * 0.52), height: 12, borderRadius: 2,
+                  background: hexa(isCmd ? "#FFFFFF" : GREEN, 0.22 + rnd(2, i) * 0.44) }} />
+                {!isCmd && rnd(4, i) > 0.6 && (
+                  <div style={{ position: "absolute", right: 16, top: h - k + 1, width: 14, height: 10,
+                    borderRadius: 2, background: hexa(GREEN, 0.7) }} />
+                )}
+              </React.Fragment>
+            );
+          })}
+          {/* the run bar at the foot — a job in progress */}
+          <div style={{ position: "absolute", left: 14, right: 14, bottom: 34, height: 10,
+            borderRadius: 5, background: hexa("#FFFFFF", 0.10) }}>
+            <div style={{ position: "absolute", inset: 0, borderRadius: 5, background: hexa(GREEN, 0.62),
+              clipPath: `inset(0 ${100 - ((lf * 2.2) % 100)}% 0 0)` }} />
+          </div>
           <div style={{ position: "absolute", left: 18, bottom: 14, width: 16, height: 20,
             background: Math.floor(f / 8) % 2 ? GREEN : "transparent" }} />
-        )}
-        {/* ---- BROWSER: a page being pushed through checks ---- */}
+        </>)}
+
+        {/* ---- BROWSER: a real page — chrome with tabs and a URL pill, a nav
+             bar, a hero with an image placeholder, a two-column text block, and
+             a check column running down the side as it passes. */}
         {kind === 2 && (<>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 30,
-            background: hexa("#FFFFFF", 0.07) }} />
-          <div style={{ position: "absolute", left: 14, right: 14, top: 44, height: h * 0.34,
-            borderRadius: 5, background: hexa("#FFFFFF", on ? 0.10 + 0.10 * ((lf % 52) / 52) : 0.10) }} />
-          {on && Array.from({ length: 4 }, (_, i) => (
-            <div key={"bp" + i} style={{ position: "absolute", left: 24, top: 58 + i * 22,
-              width: `${(30 + rnd(11, i + Math.floor(lf / 52)) * 52)}%`, height: 11, borderRadius: 3,
-              background: hexa("#FFFFFF", 0.24) }} />
+          {/* the chrome: two tabs and a URL pill */}
+          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 34,
+            background: hexa("#FFFFFF", 0.07), borderBottom: `2px solid ${hexa("#FFFFFF", 0.10)}` }}>
+            <div style={{ position: "absolute", left: 8, top: 5, width: 46, height: 13,
+              borderRadius: "4px 4px 0 0", background: hexa("#FFFFFF", 0.16) }} />
+            <div style={{ position: "absolute", left: 58, top: 5, width: 34, height: 13,
+              borderRadius: "4px 4px 0 0", background: hexa("#FFFFFF", 0.07) }} />
+            <div style={{ position: "absolute", left: 8, right: 8, top: 21, height: 10,
+              borderRadius: 5, background: hexa("#0A0F16", 0.6) }}>
+              <div style={{ position: "absolute", left: 5, top: 3, width: 4, height: 4,
+                borderRadius: "50%", background: hexa(GREEN, 0.8) }} />
+              <div style={{ position: "absolute", left: 14, top: 3, width: `${34 + (on ? (lf % 52) / 52 * 22 : 0)}%`,
+                height: 4, borderRadius: 2, background: hexa("#FFFFFF", 0.26) }} />
+            </div>
+          </div>
+          {/* the page's own nav */}
+          <div style={{ position: "absolute", left: 0, right: 0, top: 34, height: 20,
+            background: hexa(SKY, 0.16), display: "flex", alignItems: "center", gap: 9,
+            paddingLeft: 10 }}>
+            <div style={{ width: 13, height: 9, borderRadius: 2, background: hexa(SKY, 0.7) }} />
+            {[16, 22, 18].map((q, i) => (
+              <div key={"nv" + i} style={{ width: q, height: 5, borderRadius: 2,
+                background: hexa("#FFFFFF", 0.22) }} />
+            ))}
+          </div>
+          {/* the hero, with an image placeholder that CYCLES */}
+          <div style={{ position: "absolute", left: 12, right: 12, top: 62, height: h * 0.26,
+            borderRadius: 5, overflow: "hidden",
+            background: `linear-gradient(148deg, ${hexa(SKY, 0.30)} 0%, ${hexa(GREEN, 0.22)} 100%)` }}>
+            <div style={{ position: "absolute", left: "50%", top: "50%", width: 26, height: 20,
+              marginLeft: -13, marginTop: -10, borderRadius: 3,
+              border: `3px solid ${hexa("#FFFFFF", 0.34)}`,
+              transform: `scale(${on ? 1 + 0.14 * Math.sin(lf / 7) : 1})` }} />
+            <div style={{ position: "absolute", left: 10, bottom: 8, width: 54, height: 7,
+              borderRadius: 3, background: hexa("#FFFFFF", 0.5) }} />
+          </div>
+          {/* two columns of copy, refilling on the cycle */}
+          {on && [0, 1].map(col => (
+            Array.from({ length: 5 }, (_, i) => (
+              <div key={"bp" + col + "_" + i} style={{ position: "absolute",
+                left: 14 + col * (w * 0.46), top: 62 + h * 0.30 + i * 15,
+                width: (w * 0.42) * (0.44 + rnd(11, i + col * 5 + Math.floor(lf / 52)) * 0.56),
+                height: 8, borderRadius: 2, background: hexa("#FFFFFF", 0.22) }} />
+            ))
           ))}
-          {/* ⛔ same fix: the check column filled once and froze. A page gets
-              pushed through checks, passes, and the next page arrives. */}
+          {/* the checks running down the edge as the page passes */}
           {on && Array.from({ length: 1 + Math.floor((lf % 52) / 8.2) }, (_, i) => (
-            <div key={"bc" + i} style={{ position: "absolute", left: 18, top: h * 0.46 + i * 26,
-              width: 22, height: 22, borderRadius: 5, background: hexa(GREEN, 0.72),
+            <div key={"bc" + i} style={{ position: "absolute", right: 12, top: h * 0.44 + i * 24,
+              width: 20, height: 20, borderRadius: 5, background: hexa(GREEN, 0.78),
               transform: `scale(${squash((lf % 52) - i * 8.2, 5, 0.24, 2, 8)})` }}>
-              <div style={{ position: "absolute", left: 5, top: 10, width: 11, height: 4,
+              <div style={{ position: "absolute", left: 4, top: 9, width: 10, height: 4,
                 background: "#0A140E", transform: "rotate(42deg)" }} />
-              <div style={{ position: "absolute", left: 9, top: 6, width: 4, height: 12,
+              <div style={{ position: "absolute", left: 8, top: 5, width: 4, height: 11,
                 background: "#0A140E", transform: "rotate(42deg)" }} />
             </div>
           ))}
@@ -1148,6 +1245,64 @@ export const CommentField: React.FC<{ x: number; y: number; w: number; f: number
         <div style={{ position: "absolute", inset: -10, borderRadius: 54,
           border: `${8 * flash}px solid ${hexa(GOLD, flash)}` }} />
       )}
+    </div>
+  );
+};
+
+/* =========================================================================
+   ⭐⭐ THE MONEY. Alex: *"those paper things should be green, there should be
+   like dollar bills or hundred dollar bills, not... like if it's money it
+   might [be] green. Like actually look like money paper."*
+
+   ⛔ THEY WERE CREAM. The reel drew its money as a pale tan rectangle with a
+   circle and a figure on it — the same paper stock as the BILL, the villain,
+   which is exactly backwards: the money you get back should not be made of the
+   thing that was taking it. Cream also gave it no identity at 104px; it read as
+   a receipt.
+
+   ⭐ It is a BANKNOTE now, drawn with the four things that make paper money
+   recognisable at a glance and at small size:
+     · a desaturated green field (⛔ matte palette — money green, not neon)
+     · fine engraving hatch across the whole face
+     · an oval portrait frame, off centre
+     · a numeral in two opposite corners and a seal disc
+   One component, used by all four scenes that move money, so the reel's cash is
+   a single object wherever it appears. [[feedback_props_need_real_drawing]]
+   ====================================================================== */
+export const MoneyNote: React.FC<{ x: number; y: number; s?: number; rot?: number;
+  z?: number; o?: number; fig?: string }> =
+  ({ x, y, s = 1, rot = 0, z = 74, o = 1, fig = R.price }) => {
+  const W = 112 * s, H = 62 * s;
+  return (
+    <div style={{ position: "absolute", left: x - W / 2, top: y - H / 2, width: W, height: H,
+      zIndex: z, opacity: o, borderRadius: 4 * s, overflow: "hidden",
+      transform: `rotate(${rot}deg)`,
+      background: `linear-gradient(166deg, #CBDCC0 0%, #A6BF9C 58%, #8FAA86 100%)`,
+      border: `${3.5 * s}px solid #5E7A58` }}>
+      {/* the engraving — what makes a rectangle read as CURRENCY */}
+      <div style={{ position: "absolute", inset: 0,
+        background: `repeating-linear-gradient(90deg, transparent 0 ${2.6 * s}px, ${hexa("#415C3C", 0.20)} ${2.6 * s}px ${3.6 * s}px)` }} />
+      <div style={{ position: "absolute", inset: 0,
+        background: `repeating-linear-gradient(0deg, transparent 0 ${4 * s}px, ${hexa("#415C3C", 0.11)} ${4 * s}px ${5 * s}px)` }} />
+      {/* the inner rule */}
+      <div style={{ position: "absolute", inset: 4 * s, borderRadius: 2 * s,
+        border: `${2 * s}px solid ${hexa("#415C3C", 0.40)}` }} />
+      {/* the portrait oval */}
+      <div style={{ position: "absolute", left: 14 * s, top: 12 * s, width: 30 * s, height: 38 * s,
+        borderRadius: "50%", background: "#E3EEDC", border: `${2.5 * s}px solid #415C3C` }}>
+        <div style={{ position: "absolute", left: 7 * s, top: 8 * s, width: 14 * s, height: 14 * s,
+          borderRadius: "50%", background: hexa("#415C3C", 0.42) }} />
+        <div style={{ position: "absolute", left: 3 * s, top: 22 * s, width: 22 * s, height: 13 * s,
+          borderRadius: `${11 * s}px ${11 * s}px 0 0`, background: hexa("#415C3C", 0.42) }} />
+      </div>
+      {/* the seal */}
+      <div style={{ position: "absolute", right: 12 * s, bottom: 9 * s, width: 17 * s, height: 17 * s,
+        borderRadius: "50%", border: `${2.5 * s}px solid ${hexa("#7A3B36", 0.62)}` }} />
+      {/* the numerals, opposite corners */}
+      <div style={{ position: "absolute", right: 9 * s, top: 8 * s, ...mono(20 * s, 800),
+        color: "#2E4529" }}>{fig}</div>
+      <div style={{ position: "absolute", left: 50 * s, bottom: 7 * s, ...mono(11 * s, 800),
+        color: hexa("#2E4529", 0.72), letterSpacing: "0.08em" }}>{fig}</div>
     </div>
   );
 };

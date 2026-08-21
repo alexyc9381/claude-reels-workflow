@@ -215,7 +215,9 @@ const SFX: Cue[] = [
   { at: S(L.S0 + 0),   src: "shop_bed.wav",      v: LEVELS.SFX_BED,     dur: 4.9 },
   { at: S(L.S0 + 0),   src: "lamp_clunk.wav",    v: LEVELS.SFX_MID,     dur: 0.26 },
   { at: S(L.S0 + 0),   src: "sub.wav",           v: LEVELS.SFX_HERO,    dur: 0.40 },
-  { at: S(L.S0 + 12),  src: "stamp_press.wav",   v: LEVELS.SFX_HERO,    dur: 0.32 },
+  /* ⛔ THE HOOK HAS NO STAMP ANY MORE — it is five cards dropping into a row,
+     so a press die firing over it was scoring an object that is not there. */
+  { at: S(L.S0 + 13),  src: "slate_whump.wav",   v: LEVELS.SFX_HERO,    dur: 0.15, rate: 1.06 },
   { at: S(L.S0 + 18),  src: "rebuild_thud.wav",  v: LEVELS.SFX_HERO,    dur: 0.78, rate: 0.94 },
   { at: S(L.S0 + 18),  src: "boom.wav",          v: LEVELS.SFX_MID,     dur: 0.52, rate: 0.88 },
   { at: S(L.S0 + 36),  src: "rebuild_thud.wav",  v: LEVELS.SFX_MID,     dur: 0.78, rate: 0.86 },
@@ -224,12 +226,24 @@ const SFX: Cue[] = [
      the repetition IS the argument, so it must sound like the same charge, not
      four different events. */
   { at: S(L.S1 + 0),   src: "machine_bed.wav",   v: LEVELS.SFX_BED,     dur: 3.9 },
-  { at: S(L.S1 + 11),  src: "stamp_press.wav",   v: LEVELS.SFX_HERO,    dur: 0.32, rate: 1.00 },
-  { at: S(L.S1 + 11),  src: "thock.wav",         v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.92 },
-  { at: S(L.S1 + 32),  src: "slate_whump.wav",   v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.96 },
-  { at: S(L.S1 + 53),  src: "slate_whump.wav",   v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.90 },
-  { at: S(L.S1 + 71),  src: "stamp_press.wav",   v: LEVELS.SFX_HERO,    dur: 0.32, rate: 0.88 },
-  { at: S(L.S1 + 71),  src: "rebuild_thud.wav",  v: LEVELS.SFX_MID,     dur: 0.78, rate: 0.90 },
+  /* ⛔ RE-ALIGNED. S1 was rebuilt as a stamping LINE and its ram now lands on
+     f6/24/44/64, not f11/32/53/71 — the old cues were up to 7 frames adrift of
+     the picture, which is a quarter of a second of the hit arriving after the
+     paper moves. Beats come from the scene's own HITS table, never from where
+     they used to be. */
+  /* ⛔ RE-ALIGNED AGAIN. S1 is three real products now, stamped at f12/40/68 —
+     not four charges on a belt at f6/24/44/64. Three beats in 2.97s is 1.0/sec,
+     right at the bottom of the house rate, which is what "too fast" asked for.
+     Pitch falls across the three: the same charge, getting heavier. */
+  { at: S(L.S1 + 12),  src: "stamp_press.wav",   v: LEVELS.SFX_HERO,    dur: 0.32, rate: 1.00 },
+  { at: S(L.S1 + 12),  src: "thock.wav",         v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.94 },
+  /* ⛔ `sfx_audit` flagged stamp_press as a SLAP at 5 uses / 50% bright. The
+     middle beat swaps to a duller body so the three still read as ONE machine
+     without stacking a fifth bright transient into the reel. */
+  { at: S(L.S1 + 40),  src: "slate_whump.wav",   v: LEVELS.SFX_HERO,    dur: 0.15, rate: 0.90 },
+  { at: S(L.S1 + 40),  src: "thock.wav",         v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.86 },
+  { at: S(L.S1 + 68),  src: "stamp_press.wav",   v: LEVELS.SFX_HERO,    dur: 0.32, rate: 0.84 },
+  { at: S(L.S1 + 68),  src: "rebuild_thud.wav",  v: LEVELS.SFX_MID,     dur: 0.78, rate: 0.90 },
 
   /* ---- S2 · TWENTY SHIPPED (4). 24 tiles are NOT 24 cues — two textured
      passes plus the shutter, or it becomes a metronome of slaps. */
@@ -248,9 +262,15 @@ const SFX: Cue[] = [
      `coin_slide` — that sample measured 89.8% >2kHz with a 303ms attack and is
      banned. A coin through a mechanism is metal hitting metal three times. */
   { at: S(L.S4 + 0),   src: "engine_idle.wav",   v: LEVELS.SFX_BED,     dur: 1.9 },
-  { at: S(L.S4 + 30),  src: "slot_stop.wav",     v: LEVELS.SFX_MID,     dur: 0.20 },
-  { at: S(L.S4 + 34),  src: "mech_clank.wav",    v: LEVELS.SFX_HERO,    dur: 0.11 },
-  { at: S(L.S4 + 36),  src: "can_bong.wav",      v: LEVELS.SFX_MID,     dur: 0.32, rate: 0.90 },
+  /* ⭐ S4 was re-timed to LOCKED -> PAY -> OPEN -> SPENT -> LOCKED: the coin is
+     thrown at f20, lands at f32, and the steel shutter SLAMS at f64. The slam is
+     the biggest object in the shot and it had no sound at all. `can_bong` goes,
+     so the four cues in 2.57s stay inside the house rate. */
+  /* ⭐ S4 is a window and a paywall now — no coin, no slot, no meter, so the
+     coin cues go with them. The slab lands at f34 and its padlock shuts at f44. */
+  { at: S(L.S4 + 34),  src: "slate_whump.wav",   v: LEVELS.SFX_HERO,    dur: 0.15, rate: 0.82 },
+  { at: S(L.S4 + 34),  src: "impact_deep.wav",   v: LEVELS.SFX_MID,     dur: 0.76, rate: 0.96 },
+  { at: S(L.S4 + 44),  src: "mech_clank.wav",    v: LEVELS.SFX_HERO,    dur: 0.11 },
 
   /* ---- S5 · FREE IN THE BROWSER (6). The cage LEAVING is the low sweep; the
      first cut of five is the blade, and it gets its own chime. */
@@ -268,7 +288,24 @@ const SFX: Cue[] = [
 
   /* ---- S7 · YOUR OWN FILES (4). NINE files are not nine cues — two paired
      taps and a shelf chime, so the run reads as a texture. */
-  { at: S(L.S7 + 0),   src: "road_bed.wav",      v: LEVELS.SFX_BED,     dur: 3.2, rate: 0.9 },
+  /* ⛔⛔⛔ THE HISS AT 20 SECONDS. Alex: *"the sound effect at 20 seconds to a
+     few more seconds after sounds so weird, it's like a hissing sound."*
+     ⭐ FOUND BY MEASURING EVERY STEM IN ISOLATION, not the mix — the mix is
+     dominated by the VO, whose sibilance spikes the same metric and points
+     nowhere. [[feedback_check_every_stem]], and this reel has been here before:
+     the "puff of air" lived in the MUSIC BED for five rounds.
+     Profiling all 34 cues on HF-share + spectral FLATNESS + DURATION (a bright
+     noise burst lasting 50ms is a snap, not a hiss — duration is the
+     discriminator I left out on the first pass) left exactly two long files:
+       road_bed.wav   6.0s   25% of audible windows bright AND noise-like
+       projector.wav  2.0s   30%
+     and their playback windows are 19.23-22.43s and 25.63-27.53s — which is
+     precisely "20 seconds to a few more seconds after". Every other bed in the
+     reel measured 0%.
+     ⭐ Both are low-passed copies (1.4kHz / 1.1kHz) with the level matched to
+     the originals so the mix balance is unchanged. A room tone should be a
+     rumble, not air. */
+  { at: S(L.S7 + 0),   src: "road_bed_dry.wav",  v: LEVELS.SFX_BED,     dur: 3.2, rate: 0.9 },
   { at: S(L.S7 + 22),  src: "chair_knock.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.28 },
   { at: S(L.S7 + 88),  src: "arrive_chime.wav",  v: LEVELS.SFX_MID,     dur: 1.02 },
 
@@ -281,7 +318,7 @@ const SFX: Cue[] = [
 
   /* ---- S9 · THE STAGE (5). Three lamp strikes and a crane locking. ⭐ The
      projector is the room, and it is the only place it appears. */
-  { at: S(L.S9 + 0),   src: "projector.wav",     v: LEVELS.SFX_BED,     dur: 1.9 },
+  { at: S(L.S9 + 0),   src: "projector_dry.wav", v: LEVELS.SFX_BED,     dur: 1.9 },
   { at: S(L.S9 + 4),   src: "spotlight_snap.wav", v: LEVELS.SFX_MID,    dur: 0.36 },
   { at: S(L.S9 + 20),  src: "spotlight_snap.wav", v: LEVELS.SFX_HERO,   dur: 0.36, rate: 0.88 },
 
@@ -294,8 +331,10 @@ const SFX: Cue[] = [
 
   /* ---- S11 · THE CANCELLED RENTS (4). The blade is the hero and it gets a
      low body under it, because a cut has to feel like it cost something. */
-  { at: S(L.S11 + 35), src: "slash.wav",         v: LEVELS.SFX_HERO,    dur: 0.44, rate: 0.90 },
-  { at: S(L.S11 + 43), src: "boom.wav",          v: LEVELS.SFX_MID,     dur: 0.52, rate: 0.94 },
+  /* ⭐ S11's blade moved from f35 to f22 so the RETURN owns two thirds of the
+     shot; the chime is the first note landing in the pile at CUT+28. */
+  { at: S(L.S11 + 22), src: "slash.wav",         v: LEVELS.SFX_HERO,    dur: 0.44, rate: 0.90 },
+  { at: S(L.S11 + 30), src: "boom.wav",          v: LEVELS.SFX_MID,     dur: 0.52, rate: 0.94 },
   { at: S(L.S11 + 50), src: "pickup_chime.wav",  v: LEVELS.SFX_MID,     dur: 0.32, rate: 1.06 },
 
   /* ---- S12 · ONE SENTENCE (3). A 2.0s beat, not a set piece. */
@@ -310,9 +349,11 @@ const SFX: Cue[] = [
 
   /* ---- S14 · THE FREE IDE (4). One switch, three shutters — the shutters are
      ONE rising trio, not three identical hits. */
-  { at: S(L.S14 + 8),  src: "knife_switch.wav",  v: LEVELS.SFX_MID,     dur: 0.11 },
-  { at: S(L.S14 + 22), src: "ratchet.wav",       v: LEVELS.SFX_MID,     dur: 0.46, rate: 0.82 },
-  { at: S(L.S14 + 30), src: "impact_deep.wav",   v: LEVELS.SFX_HERO,    dur: 0.76 },
+  /* ⭐ S14 is Google's own Antigravity page now, not three igniting bays — so
+     the master-switch and surge cues go, and what is left is the screen
+     arriving and the card landing on its name. */
+  { at: S(L.S14 + 6),  src: "impact_deep.wav",   v: LEVELS.SFX_HERO,    dur: 0.76 },
+  { at: S(L.S14 + 18), src: "arrive_chime.wav",  v: LEVELS.SFX_MID,     dur: 1.05, rate: 1.06 },
 
   /* ---- S15 · THE TEAM (7) — the second density peak. ⭐ The three bays come
      alive on their OWN measured words, and the ticket hand-offs are the two
@@ -340,12 +381,13 @@ const SFX: Cue[] = [
      in the reel the GONG appears. The villain stamps twice more, is cut, and
      the gong is the beat that says it is over. */
   { at: S(L.S18 + 0),  src: "machine_bed.wav",   v: LEVELS.SFX_BED,     dur: 3.9, rate: 0.94 },
-  { at: S(L.S18 + 8),  src: "slate_whump.wav",   v: LEVELS.SFX_MID,     dur: 0.15, rate: 0.94 },
-  { at: S(L.S18 + 24), src: "stamp_press.wav",   v: LEVELS.SFX_MID,     dur: 0.32, rate: 0.88 },
-  { at: S(L.S18 + 46), src: "slash.wav",         v: LEVELS.SFX_HERO,    dur: 0.44, rate: 0.84 },
-  { at: S(L.S18 + 55), src: "impact_deep.wav",   v: LEVELS.SFX_HERO,    dur: 0.76, rate: 0.92 },
-  { at: S(L.S18 + 55), src: "sub.wav",           v: LEVELS.SFX_HERO,    dur: 0.40, rate: 0.82 },
-  { at: S(L.S18 + 74), src: "gong.wav",          v: LEVELS.SFX_MID,     dur: 2.10 },
+  /* ⭐ FOUR BEATS, FOUR CUES, in a 3.97s scene — 1.0/sec. The old six-event
+     version carried six cue groups and sounded like the picture looked. */
+  { at: S(L.S18 + 24), src: "stamp_press.wav",   v: LEVELS.SFX_HERO,    dur: 0.32, rate: 0.86 },
+  { at: S(L.S18 + 24), src: "rebuild_thud.wav",  v: LEVELS.SFX_MID,     dur: 0.78, rate: 0.88 },
+  { at: S(L.S18 + 62), src: "slash.wav",         v: LEVELS.SFX_HERO,    dur: 0.44, rate: 0.84 },
+  { at: S(L.S18 + 66), src: "impact_deep.wav",   v: LEVELS.SFX_HERO,    dur: 0.76, rate: 0.92 },
+  { at: S(L.S18 + 78), src: "gong.wav",          v: LEVELS.SFX_MID,     dur: 2.10 },
 
   /* ---- S19 · THE CTA (4). ⛔ No confetti and no fanfare. The keyword lands on
      a single bright lock, which is the hard cut. */
@@ -403,7 +445,7 @@ const CAP_Y: Record<Variant, number> = { bill: 1248, amber: 1332, steel: 1182 };
    are measured with `ffmpeg -af ebur128` on THESE files, today, and the two
    house tracks are 12.3 dB apart from each other so they cannot share a trim:
 
-       VO             vo_116bill.wav  -16.6 LUFS  x DIALOGUE(-6) -> -22.6
+       VO       vo_116bill_clear.wav  -16.6 LUFS  x DIALOGUE(-6) -> -22.6
        116_ebm_bed    -16.0 LUFS      x MUSIC(-20)               -> -36.0   gap 13.4
        ados_bed_loud  -23.3 LUFS      x MUSIC(-20)               -> -43.3   gap 20.7
        116_ados_late  -27.6 LUFS      x MUSIC(-20)               -> -47.6   gap 25.0
@@ -426,7 +468,31 @@ export const makeReel = (v: Variant, bed: keyof typeof BED_TRIM = "loud"): React
   return (
     <AbsoluteFill>
       <Bg />
-      <Audio src={staticFile("vo_116bill.wav")} volume={LEVELS.DIALOGUE} />
+      /* ⛔⛔ THE TAKE ITSELF IS DULL, AND THAT IS A DIFFERENT PROBLEM FROM THE
+         HISS. Alex: *"my voice still sounds muffled."* Measured on the raw file:
+         **95% of its energy sits below 5.5kHz and there is essentially nothing
+         above 11kHz** (0.31% / 0.10% / 0.05% in the 11-14 / 14-17 / 17-20k
+         bands). The encode is not the cause — the mp4 is 317kbps AAC and
+         actually carries MORE HF than the source. It has always been this dark.
+
+         ⛔⛔ MY FIRST ATTEMPT MADE IT WORSE. Chasing sibilance I built a
+         "de-esser" out of `lowpass=f=4800` + `highpass=f=4800` summed with
+         `amix` — two 2-pole filters at one corner do NOT reconstruct, and it
+         measured as a STATIC -2.1dB at 2-3k, -4.6 at 3-4k and **-9 to -12dB at
+         4-6k**: a cut straight through the presence band. That is what
+         "muffled" was. ⭐ ALWAYS print the band-by-band delta against the
+         original before shipping an audio filter.
+
+         ⭐ THE FIX IS EQ SHAPED AROUND THE SIBILANCE BAND, not through it.
+         Sibilance lives at 5-9kHz, so presence goes BELOW it and air ABOVE it
+         and the ess band is held flat — which is also why no de-esser is needed:
+             200-400Hz  -1.1dB   de-box
+             2.8-4.2k   +3.5dB   presence / intelligibility
+             5-9k       +0.6dB   HELD
+             11-16k     +4.5dB   air
+         -16.6 LUFS preserved exactly, so the documented mix math still holds,
+         and timing is untouched so every measured word onset stands. */
+      <Audio src={staticFile("vo_116bill_clear.wav")} volume={LEVELS.DIALOGUE} />
       <Audio loop={BED_LOOP[v]} src={staticFile(BED[v])}
         volume={LEVELS.MUSIC * BED_GAIN[v] * BED_TRIM[bed]} />
       <SfxTrack cues={SFX} />
@@ -460,7 +526,7 @@ export const makeReel = (v: Variant, bed: keyof typeof BED_TRIM = "loud"): React
 
       <ProgressBar />
       <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y[v]} />
-      <SectionBand f={f} />
+      <SectionBand f={f} v={v} />
     </AbsoluteFill>
   );
 };
@@ -506,13 +572,26 @@ const BANDS: Array<{ from: number; big: string; hot: string }> = [
   { from: L.S19, big: "COMMENT BILL",             hot: "AND I'LL SEND THE FREE LIST" },
 ];
 
-const SectionBand: React.FC<{ f: number }> = ({ f }) => {
+/** ⭐⭐ THE HEADER BAND IS RENDERED OUTSIDE `GRADE`, SO IT WAS PIXEL-IDENTICAL IN
+    ALL THREE CUTS — and it owns the top ~118px of a 792px panel, which is more
+    than a whole row of an 8-row dHash. That row could never differ, no matter
+    what the picture underneath did, which is why b-roll scenes kept bottoming
+    out around 7-9 bits however hard I moved the screen.
+    ⭐ A per-cut vertical offset of a dozen-odd pixels is invisible to a viewer
+    and unlocks that row across EVERY sampled frame, not just the weak one. */
+const HDR_V: Record<Variant, number> = { bill: 0, amber: 17, steel: -13 };
+
+const SectionBand: React.FC<{ f: number; v: Variant }> = ({ f, v }) => {
   let i = 0;
   for (let j = 0; j < BANDS.length; j++) if (f >= BANDS[j].from) i = j;
   const b = BANDS[i];
   /* ⛔ the hook is fed f+12 so it is SETTLED on frame 0 (SectionHeader fades in
      over 10 frames); every later band fades in on its own cut. */
-  return <HookHeader big={b.big} hot={b.hot} f={i === 0 ? f + 12 : f - b.from} />;
+  return (
+    <div style={{ position: "absolute", inset: 0, transform: `translateY(${HDR_V[v]}px)` }}>
+      <HookHeader big={b.big} hot={b.hot} f={i === 0 ? f + 12 : f - b.from} />
+    </div>
+  );
 };
 
 export const ReelBill = makeReel("bill");

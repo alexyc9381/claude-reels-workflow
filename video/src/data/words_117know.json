@@ -1,0 +1,837 @@
+[
+{
+"start": 0.0,
+"end": 0.1,
+"word": " Give"
+},
+{
+"start": 0.1,
+"end": 0.24,
+"word": " me"
+},
+{
+"start": 0.24,
+"end": 0.6,
+"word": " 30"
+},
+{
+"start": 0.33,
+"end": 0.65,
+"word": " seconds"
+},
+{
+"start": 0.65,
+"end": 0.79,
+"word": " and"
+},
+{
+"start": 0.79,
+"end": 0.91,
+"word": " I'll"
+},
+{
+"start": 0.93,
+"end": 1.01,
+"word": " give"
+},
+{
+"start": 1.01,
+"end": 1.17,
+"word": " you"
+},
+{
+"start": 1.17,
+"end": 1.73,
+"word": " 10,000"
+},
+{
+"start": 1.83,
+"end": 2.01,
+"word": " hours"
+},
+{
+"start": 2.01,
+"end": 2.29,
+"word": " of"
+},
+{
+"start": 2.29,
+"end": 2.37,
+"word": " Claude"
+},
+{
+"start": 2.365,
+"end": 2.76,
+"word": " knowledge."
+},
+{
+"start": 3.23,
+"end": 3.49,
+"word": " First,"
+},
+{
+"start": 3.65,
+"end": 3.81,
+"word": " beginner"
+},
+{
+"start": 3.81,
+"end": 4.13,
+"word": " tips."
+},
+{
+"start": 4.4,
+"end": 4.52,
+"word": " Don't"
+},
+{
+"start": 4.52,
+"end": 4.68,
+"word": " waste"
+},
+{
+"start": 4.68,
+"end": 4.92,
+"word": " money"
+},
+{
+"start": 4.8,
+"end": 4.94,
+"word": " and"
+},
+{
+"start": 4.94,
+"end": 5.16,
+"word": " usage"
+},
+{
+"start": 5.16,
+"end": 5.4,
+"word": " limits"
+},
+{
+"start": 5.37,
+"end": 5.53,
+"word": " on"
+},
+{
+"start": 5.53,
+"end": 5.73,
+"word": " high"
+},
+{
+"start": 5.73,
+"end": 5.89,
+"word": " tier"
+},
+{
+"start": 6.01,
+"end": 6.29,
+"word": " models"
+},
+{
+"start": 6.29,
+"end": 6.45,
+"word": " for"
+},
+{
+"start": 6.45,
+"end": 6.73,
+"word": " simple"
+},
+{
+"start": 6.75,
+"end": 7.21,
+"word": " tasks."
+},
+{
+"start": 7.51,
+"end": 7.65,
+"word": " Use"
+},
+{
+"start": 7.65,
+"end": 7.89,
+"word": " Sonnet"
+},
+{
+"start": 7.89,
+"end": 8.03,
+"word": " for"
+},
+{
+"start": 8.03,
+"end": 8.27,
+"word": " daily"
+},
+{
+"start": 8.21,
+"end": 8.45,
+"word": " use,"
+},
+{
+"start": 8.61,
+"end": 8.77,
+"word": " Haiku"
+},
+{
+"start": 8.76,
+"end": 8.92,
+"word": " if"
+},
+{
+"start": 8.92,
+"end": 8.98,
+"word": " you"
+},
+{
+"start": 8.995,
+"end": 9.1,
+"word": " like"
+},
+{
+"start": 9.11,
+"end": 9.33,
+"word": " wrong"
+},
+{
+"start": 9.33,
+"end": 9.69,
+"word": " answers,"
+},
+{
+"start": 9.74,
+"end": 9.9,
+"word": " and"
+},
+{
+"start": 9.9,
+"end": 10.1,
+"word": " Opus"
+},
+{
+"start": 10.1,
+"end": 10.28,
+"word": " slash"
+},
+{
+"start": 10.38,
+"end": 10.6,
+"word": " Fable"
+},
+{
+"start": 10.6,
+"end": 10.78,
+"word": " for"
+},
+{
+"start": 10.78,
+"end": 10.98,
+"word": " more"
+},
+{
+"start": 10.89,
+"end": 11.29,
+"word": " complex"
+},
+{
+"start": 11.29,
+"end": 11.75,
+"word": " tasks."
+},
+{
+"start": 12.33,
+"end": 12.53,
+"word": " Also,"
+},
+{
+"start": 12.69,
+"end": 12.77,
+"word": " don't"
+},
+{
+"start": 12.77,
+"end": 12.93,
+"word": " use"
+},
+{
+"start": 13.07,
+"end": 13.35,
+"word": " Projects"
+},
+{
+"start": 13.35,
+"end": 13.49,
+"word": " for"
+},
+{
+"start": 13.49,
+"end": 13.73,
+"word": " most"
+},
+{
+"start": 13.7,
+"end": 13.88,
+"word": " work"
+},
+{
+"start": 13.88,
+"end": 14.1,
+"word": " because"
+},
+{
+"start": 14.1,
+"end": 14.26,
+"word": " the"
+},
+{
+"start": 14.26,
+"end": 14.4,
+"word": " AI"
+},
+{
+"start": 14.335,
+"end": 14.42,
+"word": " loses"
+},
+{
+"start": 14.42,
+"end": 14.78,
+"word": " access"
+},
+{
+"start": 14.92,
+"end": 15.08,
+"word": " to"
+},
+{
+"start": 15.08,
+"end": 15.22,
+"word": " your"
+},
+{
+"start": 15.22,
+"end": 15.38,
+"word": " main"
+},
+{
+"start": 15.33,
+"end": 15.59,
+"word": " memory"
+},
+{
+"start": 15.59,
+"end": 15.71,
+"word": " when"
+},
+{
+"start": 16.03,
+"end": 16.17,
+"word": " in"
+},
+{
+"start": 16.17,
+"end": 16.31,
+"word": " the"
+},
+{
+"start": 16.31,
+"end": 16.69,
+"word": " Projects."
+},
+{
+"start": 16.99,
+"end": 17.11,
+"word": " For"
+},
+{
+"start": 17.11,
+"end": 17.45,
+"word": " intermediate"
+},
+{
+"start": 17.45,
+"end": 17.73,
+"word": " tips,"
+},
+{
+"start": 17.68,
+"end": 17.78,
+"word": " use"
+},
+{
+"start": 17.78,
+"end": 17.96,
+"word": " the"
+},
+{
+"start": 17.96,
+"end": 18.12,
+"word": " Claude"
+},
+{
+"start": 18.12,
+"end": 18.34,
+"word": " Chrome"
+},
+{
+"start": 18.34,
+"end": 18.62,
+"word": " extension"
+},
+{
+"start": 18.62,
+"end": 18.9,
+"word": " and"
+},
+{
+"start": 18.9,
+"end": 19.0,
+"word": " treat"
+},
+{
+"start": 19.05,
+"end": 19.15,
+"word": " it"
+},
+{
+"start": 19.15,
+"end": 19.25,
+"word": " like"
+},
+{
+"start": 19.25,
+"end": 19.39,
+"word": " a"
+},
+{
+"start": 19.39,
+"end": 19.55,
+"word": " junior"
+},
+{
+"start": 19.55,
+"end": 19.83,
+"word": " hire."
+},
+{
+"start": 20.08,
+"end": 20.16,
+"word": " It"
+},
+{
+"start": 20.16,
+"end": 20.28,
+"word": " can"
+},
+{
+"start": 20.28,
+"end": 20.62,
+"word": " navigate"
+},
+{
+"start": 20.56,
+"end": 20.94,
+"word": " pages,"
+},
+{
+"start": 21.12,
+"end": 21.18,
+"word": " read"
+},
+{
+"start": 21.195,
+"end": 21.56,
+"word": " content,"
+},
+{
+"start": 21.73,
+"end": 21.83,
+"word": " click"
+},
+{
+"start": 21.83,
+"end": 22.17,
+"word": " elements,"
+},
+{
+"start": 22.17,
+"end": 22.35,
+"word": " and"
+},
+{
+"start": 22.35,
+"end": 22.47,
+"word": " even"
+},
+{
+"start": 22.425,
+"end": 22.59,
+"word": " fill"
+},
+{
+"start": 22.59,
+"end": 22.73,
+"word": " out"
+},
+{
+"start": 22.73,
+"end": 22.95,
+"word": " forms"
+},
+{
+"start": 23.01,
+"end": 23.19,
+"word": " on"
+},
+{
+"start": 23.19,
+"end": 23.27,
+"word": " its"
+},
+{
+"start": 23.27,
+"end": 23.55,
+"word": " own."
+},
+{
+"start": 24.15,
+"end": 24.27,
+"word": " For"
+},
+{
+"start": 24.27,
+"end": 24.53,
+"word": " expert"
+},
+{
+"start": 24.53,
+"end": 24.75,
+"word": " tips,"
+},
+{
+"start": 24.66,
+"end": 24.76,
+"word": " use"
+},
+{
+"start": 24.76,
+"end": 24.92,
+"word": " the"
+},
+{
+"start": 24.92,
+"end": 25.12,
+"word": " desktop"
+},
+{
+"start": 25.1,
+"end": 25.32,
+"word": " app's"
+},
+{
+"start": 25.32,
+"end": 25.58,
+"word": " Code"
+},
+{
+"start": 25.58,
+"end": 25.78,
+"word": " tab"
+},
+{
+"start": 25.87,
+"end": 26.03,
+"word": " to"
+},
+{
+"start": 26.03,
+"end": 26.17,
+"word": " build"
+},
+{
+"start": 26.17,
+"end": 26.61,
+"word": " functional"
+},
+{
+"start": 26.69,
+"end": 27.07,
+"word": " software"
+},
+{
+"start": 27.07,
+"end": 27.31,
+"word": " using"
+},
+{
+"start": 27.31,
+"end": 27.57,
+"word": " plain"
+},
+{
+"start": 27.53,
+"end": 27.79,
+"word": " English"
+},
+{
+"start": 27.79,
+"end": 28.11,
+"word": " prompts"
+},
+{
+"start": 28.11,
+"end": 28.33,
+"word": " and"
+},
+{
+"start": 28.33,
+"end": 28.51,
+"word": " build"
+},
+{
+"start": 28.49,
+"end": 29.01,
+"word": " automations"
+},
+{
+"start": 29.01,
+"end": 29.19,
+"word": " to"
+},
+{
+"start": 29.19,
+"end": 29.59,
+"word": " 10x"
+},
+{
+"start": 29.67,
+"end": 29.83,
+"word": " your"
+},
+{
+"start": 29.83,
+"end": 29.97,
+"word": " Claude"
+},
+{
+"start": 29.97,
+"end": 30.41,
+"word": " usage."
+},
+{
+"start": 30.71,
+"end": 30.79,
+"word": " And"
+},
+{
+"start": 30.79,
+"end": 30.87,
+"word": " you"
+},
+{
+"start": 30.87,
+"end": 31.01,
+"word": " can"
+},
+{
+"start": 31.04,
+"end": 31.3,
+"word": " install"
+},
+{
+"start": 31.3,
+"end": 31.62,
+"word": " plugins"
+},
+{
+"start": 31.62,
+"end": 31.78,
+"word": " and"
+},
+{
+"start": 31.78,
+"end": 32.24,
+"word": " MCPs"
+},
+{
+"start": 32.1,
+"end": 32.2,
+"word": " for"
+},
+{
+"start": 32.2,
+"end": 32.42,
+"word": " Claude"
+},
+{
+"start": 32.42,
+"end": 32.54,
+"word": " to"
+},
+{
+"start": 32.54,
+"end": 32.66,
+"word": " make"
+},
+{
+"start": 32.67,
+"end": 32.77,
+"word": " it"
+},
+{
+"start": 32.77,
+"end": 32.91,
+"word": " an"
+},
+{
+"start": 32.91,
+"end": 33.23,
+"word": " expert"
+},
+{
+"start": 33.27,
+"end": 33.45,
+"word": " in"
+},
+{
+"start": 33.45,
+"end": 33.67,
+"word": " UI"
+},
+{
+"start": 33.67,
+"end": 33.97,
+"word": " design,"
+},
+{
+"start": 34.18,
+"end": 34.42,
+"word": " scraping,"
+},
+{
+"start": 34.56,
+"end": 34.8,
+"word": " marketing,"
+},
+{
+"start": 34.84,
+"end": 34.94,
+"word": " and"
+},
+{
+"start": 34.94,
+"end": 35.08,
+"word": " so"
+},
+{
+"start": 35.08,
+"end": 35.24,
+"word": " much"
+},
+{
+"start": 35.24,
+"end": 35.56,
+"word": " more."
+},
+{
+"start": 36.13,
+"end": 36.17,
+"word": " I"
+},
+{
+"start": 36.205,
+"end": 36.27,
+"word": " made"
+},
+{
+"start": 36.28,
+"end": 36.41,
+"word": " a"
+},
+{
+"start": 36.41,
+"end": 36.59,
+"word": " full"
+},
+{
+"start": 36.58,
+"end": 36.74,
+"word": " list"
+},
+{
+"start": 36.74,
+"end": 36.94,
+"word": " of"
+},
+{
+"start": 36.94,
+"end": 37.18,
+"word": " 15"
+},
+{
+"start": 37.07,
+"end": 37.37,
+"word": " tips"
+},
+{
+"start": 37.37,
+"end": 37.55,
+"word": " from"
+},
+{
+"start": 37.55,
+"end": 37.81,
+"word": " beginner"
+},
+{
+"start": 37.93,
+"end": 38.09,
+"word": " to"
+},
+{
+"start": 38.09,
+"end": 38.39,
+"word": " expert"
+},
+{
+"start": 38.34,
+"end": 38.44,
+"word": " in"
+},
+{
+"start": 38.44,
+"end": 38.56,
+"word": " a"
+},
+{
+"start": 38.56,
+"end": 38.72,
+"word": " free"
+},
+{
+"start": 38.72,
+"end": 38.98,
+"word": " guide."
+},
+{
+"start": 39.27,
+"end": 39.31,
+"word": " Comment"
+},
+{
+"start": 39.345,
+"end": 39.57,
+"word": " KNOW"
+},
+{
+"start": 39.57,
+"end": 39.77,
+"word": " for"
+},
+{
+"start": 39.77,
+"end": 40.05,
+"word": " access."
+}
+]

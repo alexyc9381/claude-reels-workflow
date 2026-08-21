@@ -1,0 +1,8 @@
+Give me 30 seconds and I'll give you 10,000 hours of Claude knowledge.
+First, beginner tips. Don't waste money and usage limits on high tier models for simple tasks.
+Use Sonnet for daily use, Haiku if you like wrong answers, and Opus slash Fable for more complex tasks.
+Also, don't use Projects for most work because the AI loses access to your main memory when in the Projects.
+For intermediate tips, use the Claude Chrome extension and treat it like a junior hire. It can navigate pages, read content, click elements, and even fill out forms on its own.
+For expert tips, use the desktop app's Code tab to build functional software using plain English prompts and build automations to 10x your Claude usage.
+And you can install plugins and MCPs for Claude to make it an expert in UI design, scraping, marketing, and so much more.
+I made a full list of 15 tips from beginner to expert in a free guide. Comment KNOW for access.

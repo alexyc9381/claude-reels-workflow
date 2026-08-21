@@ -1,0 +1,26 @@
+Comment "KNOW" and I'll send you all 15 tips.
+
+👇 READ BELOW
+
+Most people use Claude at about 20% of what it can do. Not because they are doing it wrong. Because nobody told them the other 80% exists.
+
+Here are 6 of the 15, beginner to expert.
+
+→ Stop burning Opus on simple tasks. Sonnet 5 is the daily driver, Haiku 4.5 is the fast one, Opus 5 and Fable 5 are for the jobs with nine moving parts.
+→ Don't work inside Projects by default. Anthropic's own help centre: "Each project has its own separate memory space… separate from other projects or non-project chats." Step into a Project and your main memory stops following you in.
+→ The Chrome extension is a junior hire. It navigates pages, reads content, clicks elements and fills out forms, using the logins you already have.
+→ The desktop app's Code tab builds working software from plain English. People who have never written a line of code ship real tools with it.
+→ Automations run the same job over and over while you do something else.
+→ Plugins and MCP servers re-skill it on demand: UI design, scraping, marketing, and a lot more.
+
+The mechanism is the same every time. Claude is not one tool, it is a set of them, and almost everyone is using the first one they were shown.
+
+The part nobody mentions: the tips that move the needle are not the clever prompts. They are the boring configuration decisions you make once and never think about again. Which model. Where the memory lives. What has permission to act. Get those four right and everything you already know how to ask for gets better.
+
+Comment "KNOW" and I'll send you the full list, all 15, beginner to expert, free.
+
+.
+.
+.
+
+#claude #claudeai #anthropic #aitools #aitips #artificialintelligence #ainews #claudecode #mcp #promptengineering #aiautomation #techtips #aiworkflow #buildwithai #aiforbeginners #futureofwork #productivity #aiagents

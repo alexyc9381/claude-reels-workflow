@@ -26,23 +26,80 @@ type CProps = { f: number; x: number; y: number; size: number; i?: number; z?: n
 
 /** the shared idle/action rig, so a design is judged on its DRAWING and not on
     whether it happens to have better motion than its neighbour */
+/* ⛔⛔⛔ THESE WERE IDLES, NOT ACTION LOOPS. Alex: *"the gemini mascot thing
+   doesn't really move or have any interesting motion in the first scenes and
+   throughout."* Measured on the old rig at a 280px sprite:
+
+       loop 0  dy 11px   rot  3.6 deg
+       loop 1  dy 11px   rot  5 +/- 8 deg
+       loop 2  dy 56px   rot  2.6 deg   (one hop every 26 frames)
+       loop 3  dy  6px   rot  4.4 deg
+
+   `docs/ANIMATION-QUALITY.md` §11: **an ACTION is a DISTANCE**, and anything
+   under about a third of the object's own size is a state change, not an
+   action. 6-11px on a 280px body is a twitch. Three of the four loops were
+   below the 40px floor entirely, which is why the cast reads as standing still
+   however many of them are on screen. [[feedback_make_an_action_read]]
+
+   ⭐ REBUILT ON THREE THINGS THE OLD RIG HAD NONE OF:
+     1. DISTANCE — vertical travel is now 0.10-0.34 x size (28-95px at 280).
+     2. DEFORMATION — `WEIGHT is DEFORMATION`, so every loop squashes and
+        stretches on its own beat instead of translating rigidly.
+     3. OVERLAPPING ACTION — the lean leads the bounce and the rotation trails
+        it, so the body arrives in parts rather than as one block.
+   ⛔ LATERAL travel is deliberately capped at 0.12 x size. The cast sits inside
+   a measured x band (see `feedback_the_crop_bound_includes_cam`) with only
+   ~10px of margin, and a big dx would walk it straight back off the frame. */
 const useRig = (f: number, size: number, i: number, loop?: number, at = 0) => {
   const lf = f - at;
   const inS = E(lf, 0, 8, 0, 1, BACK);
   const sq = squash(lf, 6, 0.16, 3, 11);
   const L = loop ?? i % 4;
   const ph = i * 1.7;
-  let dx = 0, dy = 0, rot = 0, ch = 0;
-  if (L === 0) { dx = Math.sin(f / 17 + ph) * size * 0.22;
-                 dy = -Math.abs(Math.sin(f / 8.5 + ph)) * size * 0.04;
-                 rot = Math.cos(f / 17 + ph) * 3.6; }
-  else if (L === 1) { rot = 5 + Math.sin(f / 6.2 + ph) * 8;
-                      dy = Math.abs(Math.sin(f / 6.2 + ph)) * size * 0.04; }
-  else if (L === 2) { const t = (f / 26 + ph) % 1; const j = Math.max(0, Math.sin(t * Math.PI));
-                      dy = -j * size * 0.20; ch = j > 0.55 ? 1 : 0; rot = Math.sin(f / 26 + ph) * 2.6; }
-  else { rot = Math.sin(f / 21 + ph) * 4.4; dy = Math.sin(f / 15 + ph) * size * 0.022; }
-  return { lf, inS, sq, dx, dy, rot, ch, ph, L };
+  let dx = 0, dy = 0, rot = 0, ch = 0, sx = 1, sy = 1, arm = 1;
+
+  if (L === 0) {
+    /* PACE — a step in place, with the weight dropping onto each foot */
+    const step = Math.sin(f / 7.5 + ph);
+    dx = Math.sin(f / 15 + ph) * size * 0.12;
+    dy = -Math.abs(step) * size * 0.13;
+    rot = Math.cos(f / 15 + ph) * 7 + step * 3;
+    sy = 1 + Math.abs(step) * 0.07;            /* stretch at the top of a step */
+    sx = 1 - Math.abs(step) * 0.05;
+    arm = 1.5;
+  } else if (L === 1) {
+    /* WORK — a two-handed haul: dip, pull, recover */
+    const t = ((f / 17 + ph) % 1 + 1) % 1;
+    const pull = Math.sin(t * Math.PI * 2);
+    dy = size * 0.11 * pull;
+    rot = 6 + pull * 13;
+    sy = 1 - Math.max(0, pull) * 0.12;          /* compress into the pull */
+    sx = 1 + Math.max(0, pull) * 0.08;
+    arm = 2.4;
+  } else if (L === 2) {
+    /* HOP — anticipation, launch, land. The only loop that leaves the ground,
+       and it now clears 0.34 x size instead of 0.20. */
+    const t = ((f / 22 + ph) % 1 + 1) % 1;
+    const air = Math.max(0, Math.sin(t * Math.PI * 1.35 - 0.35));
+    dy = -air * size * 0.34;
+    ch = air > 0.5 ? 1 : 0;
+    rot = Math.sin(f / 22 + ph) * 6;
+    if (t < 0.12) { sy = 0.86; sx = 1.12; }     /* crouch */
+    else if (air > 0.05) { sy = 1 + air * 0.13; sx = 1 - air * 0.09; }
+    else { sy = 0.90; sx = 1.08; }              /* land */
+    arm = 1.8;
+  } else {
+    /* LOOK — a lean and a turn, the quiet loop, but still a real move */
+    const b = Math.sin(f / 12 + ph);
+    dx = Math.sin(f / 21 + ph) * size * 0.10;
+    dy = -Math.abs(b) * size * 0.10;
+    rot = Math.sin(f / 10.5 + ph) * 9;
+    sy = 1 + Math.abs(b) * 0.05;
+    arm = 1.2;
+  }
+  return { lf, inS, sq, dx, dy, rot, ch, ph, L, sx, sy, arm };
 };
+
 
 /** ⛔ `useRig` is called inside a component and cannot be sampled at f-1 to get
     velocity. This is the same maths as a plain function, so the Beaker can ask
@@ -68,7 +125,10 @@ const Shell: React.FC<{ p: CProps; r: ReturnType<typeof useRig>; children: React
   return (
     <div style={{ position: "absolute", left: p.x - p.size / 2 + r.dx, top: p.y - p.size + r.dy,
       width: p.size, height: p.size, zIndex: p.z ?? 60,
-      transform: `scale(${r.inS * r.sq}) rotate(${r.rot}deg) ${p.flip ? "scaleX(-1)" : ""}`,
+      /* ⭐ the deformation is applied HERE — a rig that returns sx/sy and a
+          Shell that ignores them is the classic "the effect exists in the code
+          but not in the video" fault. */
+      transform: `scale(${r.inS * r.sq}) scale(${r.sx}, ${r.sy}) rotate(${r.rot}deg) ${p.flip ? "scaleX(-1)" : ""}`,
       transformOrigin: "50% 100%" }}>
       <svg viewBox="0 0 100 100" width={p.size} height={p.size} style={{ overflow: "visible" }}>
         {children}
@@ -100,11 +160,11 @@ export const Sparky: React.FC<CProps> = (p) => {
         <stop offset="0%" stopColor={A} /><stop offset="100%" stopColor={B} /></linearGradient></defs>
       {[38, 55].map((lx, j) => (
         <rect key={j} x={lx} y={80} width={8} height={19} rx={3.6} fill={dkh(B, 0.18)}
-          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (r.L === 0 ? 10 : 3)} ${lx + 4} 82)`} />
+          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (7 + r.arm * 8)   /* ⛔ was 3 deg on every loop but PACE */} ${lx + 4} 82)`} />
       ))}
       {[[26, -1], [74, 1]].map(([ax, dir], j) => (
         <rect key={"a" + j} x={(ax as number) - 6} y={62} width={12} height={8} rx={4} fill={dkh(B, 0.10)}
-          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18)} ${ax} 66)`} />
+          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18 * r.arm)} ${ax} 66)`} />
       ))}
       {/* body — a small rounded torso, clearly separate from the head */}
       <rect x={33} y={56} width={34} height={28} rx={11} fill={dkh(A, 0.10)} />
@@ -131,11 +191,11 @@ export const GemBot: React.FC<CProps> = (p) => {
         <stop offset="0%" stopColor="#7DA8FF" /><stop offset="100%" stopColor="#5C6BE8" /></linearGradient></defs>
       {[38, 55].map((lx, j) => (
         <rect key={j} x={lx} y={82} width={8} height={17} rx={3.6} fill="#4A56C4"
-          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (r.L === 0 ? 10 : 3)} ${lx + 4} 84)`} />
+          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (7 + r.arm * 8)   /* ⛔ was 3 deg on every loop but PACE */} ${lx + 4} 84)`} />
       ))}
       {[[24, -1], [76, 1]].map(([ax, dir], j) => (
         <rect key={"a" + j} x={(ax as number) - 6} y={64} width={12} height={8} rx={4} fill="#4A56C4"
-          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18)} ${ax} 68)`} />
+          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18 * r.arm)} ${ax} 68)`} />
       ))}
       <rect x={31} y={58} width={38} height={28} rx={9} fill="#5C6BE8" />
       <rect x={31} y={74} width={38} height={12} rx={6} fill="#000" opacity={0.13} />
@@ -234,11 +294,11 @@ export const Beaker: React.FC<CProps & { fill?: number; liquid?: string }> = (p)
       </defs>
       {[38, 55].map((lx, j) => (
         <rect key={j} x={lx} y={82} width={8} height={17} rx={3.6} fill="#3E6BD9"
-          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (r.L === 0 ? 10 : 3)} ${lx + 4} 84)`} />
+          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (7 + r.arm * 8)   /* ⛔ was 3 deg on every loop but PACE */} ${lx + 4} 84)`} />
       ))}
       {[[25, -1], [75, 1]].map(([ax, dir], j) => (
         <rect key={"a" + j} x={(ax as number) - 6} y={64} width={12} height={8} rx={4} fill="#3E6BD9"
-          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18)} ${ax} 68)`} />
+          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18 * r.arm)} ${ax} 68)`} />
       ))}
       <rect x={32} y={58} width={36} height={28} rx={10} fill="#4C7BEA" />
       <rect x={32} y={74} width={36} height={12} rx={6} fill="#000" opacity={0.13} />
@@ -285,11 +345,11 @@ export const DotHead: React.FC<CProps> = (p) => {
     <Shell p={p} r={r}>
       {[38, 55].map((lx, j) => (
         <rect key={j} x={lx} y={82} width={8} height={17} rx={3.6} fill="#C9CEDA"
-          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (r.L === 0 ? 10 : 3)} ${lx + 4} 84)`} />
+          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (7 + r.arm * 8)   /* ⛔ was 3 deg on every loop but PACE */} ${lx + 4} 84)`} />
       ))}
       {[[24, -1], [76, 1]].map(([ax, dir], j) => (
         <rect key={"a" + j} x={(ax as number) - 6} y={64} width={12} height={8} rx={4} fill="#C9CEDA"
-          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18)} ${ax} 68)`} />
+          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18 * r.arm)} ${ax} 68)`} />
       ))}
       <rect x={31} y={58} width={38} height={28} rx={10} fill="#EDF0F6" />
       <rect x={31} y={74} width={38} height={12} rx={6} fill="#000" opacity={0.10} />
@@ -349,11 +409,11 @@ export const Chippy: React.FC<CProps> = (p) => {
     <Shell p={p} r={r}>
       {[38, 55].map((lx, j) => (
         <rect key={j} x={lx} y={82} width={8} height={17} rx={2.5} fill="#3F8F6A"
-          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (r.L === 0 ? 10 : 3)} ${lx + 4} 84)`} />
+          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (7 + r.arm * 8)   /* ⛔ was 3 deg on every loop but PACE */} ${lx + 4} 84)`} />
       ))}
       {[[24, -1], [76, 1]].map(([ax, dir], j) => (
         <rect key={"a" + j} x={(ax as number) - 6} y={64} width={12} height={8} rx={3} fill="#3F8F6A"
-          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18)} ${ax} 68)`} />
+          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18 * r.arm)} ${ax} 68)`} />
       ))}
       <rect x={31} y={58} width={38} height={28} rx={7} fill="#4FB183" />
       <rect x={31} y={74} width={38} height={12} rx={6} fill="#000" opacity={0.14} />
@@ -412,15 +472,41 @@ export const GCrew: React.FC<CProps & { kind?: CastKind; fill?: number; liquid?:
   tint?: string }> = ({ kind = "gem", ...p }) =>
   kind === "beaker" ? <Beaker {...p} /> : <GemBot {...p} />;
 
-/** ⛔⛔⛔ THE FOOT LINE, AND WHY IT IS A FUNCTION.
-    A sprite's `y` is its FEET, and scenes write it as `p.horizon + n`. That is
-    fine until the set's horizon is low — `shaft` sits at 588, so a habitual
-    `+240` puts the feet at 828 on a 792px panel and the character is drawn with
-    its legs off the bottom. This build shipped that bug FOUR times (the toll
-    queue, the hook's Claude, the S4 payer, and S1/S3/S5/S6's cast) before it was
-    caught by measuring every call site against `H` rather than by eye.
+/* ⛔⛔⛔ THE FLOOR LINE IS NOT `792 - something`, AND MY FIRST TWO ANSWERS WERE
+   BOTH WRONG BECAUSE I DERIVED THEM FROM AN INCOMPLETE RIG.
 
-    ⭐ `foot()` clamps it. 782 leaves ten pixels of margin under the deepest
-    sprite, which survives the per-scene push crop. */
-export const foot = (horizon: number, off: number, max = 782) =>
+   Alex: *"for a lot of the scenes, the gemini sprites are like mostly cut off
+   they dont really show."* I solved it once at 742 and again at 716, both times
+   from this formula:
+
+       max visible y = 443.5 + (792 - 443.5) / push          ← WRONG
+
+   `Scene` does not apply `push` alone. It renders
+       translate(cam.dx, cam.dy) rotate(cam.rot) scale(push * cam.s)
+   about `50% 56%`, and `CamCtx` supplies a PER-CUT scale AND a per-cut
+   translate that my formula ignored completely:
+       bill  s 1.058  dy +34      amber s 1.204  dy -66      steel s 1.122  dy +14
+   The bill cut therefore runs at push x 1.058 and is then pushed a further 34px
+   DOWN, so the real bound is
+
+       max visible y = 443.5 + (792 - 443.5 - cam.dy) / (push * cam.s)
+
+   Measured across all 20 scenes x all 3 cuts, the tightest is **708** (S16, bill
+   cut, effective scale 1.189) — so a clamp of 716 put the feet EIGHT PIXELS
+   BELOW THE CROP, and in the ten scenes nearest the bound they sat exactly on
+   it. That is the note. Both my earlier fixes were arithmetic over a rig I had
+   not read; `docs/MEASURING.md` is about precisely this failure — a correct
+   calculation over the wrong signal produces a confident wrong answer.
+
+   ⭐ 672 gives at least 36px of floor under the feet in the WORST scene and
+   more everywhere else. Clearing the crop is not the same as reading: a sprite
+   needs ground beneath it to be standing on something.
+
+   ⭐ THE SAME BOUND APPLIES SIDEWAYS, and it is much tighter than the note that
+   used to sit in `BillScenes` (`left >= 506 - 486/push`). The real band, over
+   every scene and cut, is **x 208..879** — 671px of a 1012px panel. That is why
+   S17 could not hold four 192px sprites in a row, and why its output stack and
+   S11's charge counter were both invisible until they were moved inside it. */
+export const foot = (horizon: number, off: number, max = 672) =>
+
   Math.min(horizon + off, max);

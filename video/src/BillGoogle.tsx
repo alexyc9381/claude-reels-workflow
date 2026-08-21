@@ -425,3 +425,68 @@ export const MARK_POOL: GTool[] = [
      that they are the five left standing. A duplicate of a survivor is the one
      repeat the wall cannot afford. */
 ];
+
+/* =========================================================================
+   ⭐⭐ THE LANDING EFFECT — how a logo "glows" without a glow.
+
+   Alex: *"after the logos show up at 9 seconds, they need to have some special
+   effect like glowing or something like that."*
+
+   ⛔ IT CANNOT BE A GLOW. `feedback_reel_matte_palette` bans soft light —
+   "solid animation paints and dark shadows, no neon" — and the build's own gate
+   is `grep 'boxShadow: 0 0 Npx'` returning 0. A blurred halo would fail both.
+
+   ⭐ SO IT IS FOUR HARD-EDGED THINGS THAT READ AS RADIANCE:
+     1. RAYS — eight solid wedges behind the card, sweeping out and fading. A
+        starburst is what "glowing" looks like when it is drawn rather than lit.
+     2. A SPECULAR SWEEP — one solid angled band travelling across the card
+        face, which is how a physical card catches light.
+     3. A RING that expands and thins, already the house arrival cue.
+     4. THE FOUR-COLOUR BAR CHARGING — it wipes on left to right, so the Google
+        signature is what finishes the beat.
+   Every one is a solid paint, so the matte rule holds and the audit still sees
+   large bright shapes moving, which is what it rewards. */
+export const CardLand: React.FC<{ x: number; y: number; s: number; f: number; at: number;
+  z?: number; c?: string }> = ({ x, y, s, f, at, z = 90, c = "#FFE9C4" }) => {
+  const lf = f - at;
+  if (lf < 0 || lf > 30) return null;
+  const t = lf / 30;
+  const w = 210 * s, h = 262 * s;
+  return (
+    <div style={{ position: "absolute", left: x, top: y - h * 0.5, width: 0, height: 0, zIndex: z }}>
+      {/* ⛔ THE EIGHT RAYS ARE GONE. They were my first answer to "make the
+          logos glow" and the frame strip showed what they actually are: pale
+          straw-coloured spokes scribbled across the card and its neighbours.
+          The aura border in `ToolCard` is the effect Alex was describing — a
+          light that WRAPS the outline — so this is now only the three things
+          that support it: a specular sweep on the face, one ring, and the
+          Google bar charging. */}
+      {/* 2 · the specular sweep across the card face */}
+      {lf >= 4 && lf < 22 && (
+        <div style={{ position: "absolute", left: -w / 2, top: -h / 2, width: w, height: h,
+          borderRadius: 20 * s, overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: -h * 0.3, bottom: -h * 0.3,
+            left: -w * 0.5 + ((lf - 4) / 18) * w * 1.6, width: w * 0.34,
+            background: hexa("#FFFFFF", 0.55), transform: "rotate(18deg)" }} />
+        </div>
+      )}
+      {/* 3 · the ring */}
+      {lf < 22 && (() => {
+        const rt = lf / 22, rr = w * (0.36 + rt * 0.95);
+        return (
+          <div style={{ position: "absolute", left: -rr, top: -rr * 0.5, width: rr * 2,
+            height: rr, borderRadius: "50%", opacity: (1 - rt) * 0.85,
+            border: `${Math.max(3, 9 * (1 - rt))}px solid ${c}` }} />
+        );
+      })()}
+      {/* 4 · the four-colour bar wiping on, so GOOGLE finishes the beat */}
+      <div style={{ position: "absolute", left: -w * 0.28, top: h * 0.30, width: w * 0.56,
+        height: 12 * s, borderRadius: 6 * s, overflow: "hidden", display: "flex",
+        clipPath: `inset(0 ${Math.max(0, 100 - t * 260)}% 0 0)` }}>
+        {[G_BLUE, G_RED, G_YEL, G_GRN].map((q, j) => (
+          <div key={"gb" + j} style={{ flex: 1, background: q }} />
+        ))}
+      </div>
+    </div>
+  );
+};

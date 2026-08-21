@@ -762,15 +762,41 @@ export const ChargeCounter: React.FC<{ x: number; y: number; f: number;
    their REAL marks.
    ====================================================================== */
 export const ToolCard: React.FC<{ x: number; y: number; s: number; i: number; f: number;
-  at?: number; z?: number; lit?: number; rot?: number }> =
-  ({ x, y, s, i, f, at = -999, z = 70, lit = 1, rot = 0 }) => {
+  at?: number; z?: number; lit?: number; rot?: number;
+  /** ⭐⭐ THE AURA. Alex: *"after each of the logos come in there should be like
+      an aura border around them, like it goes around the whole thing... a
+      glowing kind of thing that wraps around, right after it appears, and it
+      goes around for each."*
+
+      ⛔ IT STILL CANNOT BE A GLOW — the matte palette bans emissive light and
+      the build greps for `boxShadow: 0 0 Npx`, which must stay at 0. But what he
+      is describing is not a halo, it is a light TRAVELLING THE PERIMETER, and
+      that is a hard-edged shape: a `conic-gradient` with one bright arc,
+      rotated. Drawn one layer BEHIND the card and inset by a few px, the card's
+      own opaque body masks the middle, so all that shows is a bright segment
+      running around the outline. Two laps, then it fades.
+      ⭐ Pass the frame the card LANDS on — not the frame it starts moving. */
+  auraAt?: number; auraC?: string }> =
+  ({ x, y, s, i, f, at = -999, z = 70, lit = 1, rot = 0, auraAt, auraC = GOLD }) => {
   const t = R.tools[i];
   const lf = f - at;
   if (lf < -2) return null;
   const inS = E(lf, 0, 8, 0, 1, BACK);
   const sq = squash(lf, 6, 0.18, 3, 12);
   const w = 210 * s, h = 262 * s;
+  const al = auraAt === undefined ? -1 : f - auraAt;
   return (
+    <>
+    {al >= 0 && al <= 32 && (() => {
+      const P = 26 * s, ang = (al / 32) * 720, fade = al > 24 ? 1 - (al - 24) / 8 : 1;
+      return (
+        <div style={{ position: "absolute", left: x - w / 2 - P, top: y - h - P,
+          width: w + 2 * P, height: h + 2 * P, zIndex: z - 1, borderRadius: 20 * s + P,
+          opacity: fade, transform: `rotate(${rot}deg)`, transformOrigin: "50% 100%",
+          background: `conic-gradient(from ${ang}deg, ${hexa(auraC, 0)} 0deg, ${hexa(auraC, 0)} 188deg, ${hexa(auraC, 0.42)} 250deg, ${auraC} 312deg, #FFFFFF 344deg, ${auraC} 352deg, ${hexa(auraC, 0)} 360deg)`,
+          border: `${3 * s}px solid ${hexa(auraC, 0.30)}` }} />
+      );
+    })()}
     <div style={{ position: "absolute", left: x - w / 2, top: y - h, width: w, height: h, zIndex: z,
       transform: `scale(${inS * sq}) rotate(${rot}deg)`, transformOrigin: "50% 100%",
       borderRadius: 20 * s, background: `linear-gradient(172deg, #FFFFFF 0%, ${dkh("#F4F1EA", 0.08)} 100%)`,
@@ -807,6 +833,7 @@ export const ToolCard: React.FC<{ x: number; y: number; s: number; i: number; f:
       <div style={{ position: "absolute", left: 14 * s, top: 210 * s, ...mono(20 * s, 800),
         color: hexa(INK, 0.34) }}>{i + 1}</div>
     </div>
+    </>
   );
 };
 
