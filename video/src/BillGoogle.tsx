@@ -386,3 +386,42 @@ export const SparkGuy: React.FC<{ f: number; x: number; y: number; size: number;
     </div>
   );
 };
+
+/* =========================================================================
+   ⭐ THE WALL'S MARK POOL.
+
+   Alex, on the tiles still showing text: *"for the ones here without a logo,
+   just repeat some logos throughout here if that makes sense."*
+
+   ⛔ IT MAKES SENSE WITH ONE CHANGE, AND THE CHANGE MATTERS: the repeated mark
+   goes on a tile with NO NAME on it. Putting Gemini's logo on a tile labelled
+   "VEO" would be a wrong mark — it states that this specific product looks like
+   that, which is false. Dropping the name makes the tile an unnamed GOOGLE AI
+   PRODUCT, which every one of them is, and repetition across 24 cells then
+   reads as texture rather than as a claim. The VO's claim is the COUNT ("over
+   20 of these tools"), never the identities.
+
+   ⭐ So: the five survivors keep their own correct marks and are unique. Every
+   other cell draws from this pool, offset so no two neighbours match. The
+   GEMINI SPARK leads it, because it is Google's universal AI symbol and is the
+   most honest thing an unnamed Google-AI tile can wear.
+   ====================================================================== */
+export const MARK_POOL: GTool[] = [
+  { name: "", mark: "logos/gemini.png" },
+  { name: "", mark: "logos/jules.png" },
+  { name: "", mark: "logos/stitch.png", dark: true },
+  { name: "", mark: "logos/googlecolab.svg" },
+  { name: "", mark: "logos/stax.png" },
+  { name: "", mark: "logos/flowmusic.png", dark: true },
+  { name: "", mark: "logos/learnyourway.png" },
+  { name: "", mark: "logos/litinsights.png" },
+  { name: "", mark: "logos/hypothesis.png" },
+  { name: "", mark: "logos/compdisc.png" },
+  { name: "", mark: "logos/labsbeaker.png" },
+  { name: "", mark: "logos/dreambeans.png", wide: true },
+  /* ⛔ THE FIVE SURVIVORS' MARKS ARE NOT IN THIS POOL. The first pass included
+     AI Studio, NotebookLM and Antigravity, so a pooled cell could wear the same
+     mark as a survivor two rows away — and the whole point of the survivors is
+     that they are the five left standing. A duplicate of a survivor is the one
+     repeat the wall cannot afford. */
+];

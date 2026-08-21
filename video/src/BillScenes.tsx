@@ -17,7 +17,7 @@ import {
   OutputRack, CommentField,
 } from "./BillProps";
 import { SetFor, placeFor } from "./BillSets";
-import { G_TOOLS, ToolTile, Spark } from "./BillGoogle";
+import { G_TOOLS, MARK_POOL, ToolTile, Spark } from "./BillGoogle";
 import { GCrew, foot } from "./BillChars";
 
 /* ===========================================================================
@@ -427,14 +427,23 @@ export const S2: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           ))}
         </div>
 
+        {/* ⭐ EVERY CELL CARRIES A MARK, NEVER TEXT. The five survivors are the
+            five subject tools with their own correct marks; every other cell
+            draws from `MARK_POOL` with a stride that keeps neighbours different.
+            ⛔ The pooled cells carry NO NAME — a repeated logo under a specific
+            product's name would be a wrong mark, and an unnamed Google-AI tile
+            is simply true of all of them. */}
         {Array.from({ length: COLS * ROWS }, (_, i) => {
           const c = i % COLS, r = Math.floor(i / COLS);
           const x = 130 + c * 152, y = 192 + r * 98;
-          const survivor = KEEP.includes(i);
-          const struck = survivor ? undefined : 32 + off + (c * 7 + r * 3);
+          const k = KEEP.indexOf(i);
+          const struck = k >= 0 ? undefined : 32 + off + (c * 7 + r * 3);
+          /* stride 5 over a 14-mark pool: adjacent cells and vertical
+             neighbours never land on the same mark */
+          const t = k >= 0 ? G_TOOLS[k] : MARK_POOL[(i * 5 + r) % MARK_POOL.length];
           return (
             <ToolTile key={"tt" + i} x={x} y={y} s={0.80} f={f} at={at(i)}
-              struck={struck} z={40 + r} seed={i} t={G_TOOLS[order(i)]} />
+              struck={struck} z={40 + r} seed={i} t={t} />
           );
         })}
 
