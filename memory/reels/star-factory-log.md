@@ -625,3 +625,80 @@ Final: market 6.86 -> **7.30**, amber 8.42 -> **8.94**, steel 5.95 -> **6.46**.
 The uncut VO, beds, words and script are preserved as `*_UNCUT.*` in
 `video/public/` and `video/src/data/` (gitignored), and `S1` + `RunTotal` are
 still in `StarScenes.tsx`, unused — the cut is reversible.
+
+---
+
+## Round 13 — "software" was cut off. TWICE. (2026-08-21)
+
+**Alex:** *"the word 'software' is cut off at 3 seconds here"*
+
+### The mistake
+
+The RMS envelope showed a clean-looking 50ms dip at **3.430-3.480, -44 to -52
+dB**, with speech either side. I read it as the gap between "software," and
+"and" and cut at 3.4667.
+
+It is the **T STOP CLOSURE inside "sof-t-ware"**. A plosive closure is silence
+that belongs to the word. I cut **118ms inside it.**
+
+The true structure, 100ms later than assumed:
+
+```
+  3.240 - 3.625   "software"  (unbroken speech)
+  3.630 - 3.690   the comma pause          <- the real boundary
+  3.695           "and" begins
+```
+
+And a second, compounding error: cut B landed **inside 108ms of true digital
+silence** (-240 dB) before "Number". A VO has continuous room tone — dropping to
+absolute zero right after a word is *itself* heard as the word being chopped.
+
+### What proved it
+
+⭐⭐⭐ **The same transcriber run on the UNCUT original as a control.** Uncut,
+"software" spans 3.240-3.580. The cut file transcribed the same moment as
+**"soft."** One transcription proves nothing; the *pair* proves everything.
+(`base.en` was useless here — it heard "Claude" as "-club". `small.en` for
+boundary work.)
+
+### The fix
+
+```
+  A = 3.680   inside the REAL comma pause
+  + 53 ms     real room tone donated from 45.145s (-52 dB), so the pause reads ~150ms
+  B = 7.900   in the room tone AFTER the dead stretch, never inside it
+  net = 125 frames  (was 130) -> STAR_TOTAL 1417, 47.23s
+```
+
+Re-verified on the audio pulled back **out of the finished MP4**, not just the
+wav: `software.` 3.280-3.600, then `Number` at 3.900.
+
+⛔ And the comment documenting all this **broke the build**: it contained
+`**/t/ STOP CLOSURE`, and the `*/` closed the block comment. Never write `*/`
+inside a block comment, phonetics included.
+
+### ⛔⛔ AND THE ROUND-12 S10 REWORK WAS PROBABLY CHASING AN ARTIFACT
+
+Round 12 reported S10 failing at **5.95** against the 6.00 floor and I reworked
+the scene for it. Every one of those numbers — 5.95, 6.13, 6.46, 7.30, 8.94 —
+was measured while **three audits ran concurrently**, in the same chain where
+`look_audit` was silently dying of contention.
+
+Re-measured **serially on a quiet machine, the same scene reads 9.72-11.62.**
+
+The scene was very likely never failing. The changes it prompted (stagger 8->5,
+the tail sweep, steel `RAKE_K` 0.58 -> 0.85) are all defensible on craft grounds
+and are kept — but the *diagnosis* was wrong, and a render cycle was spent on it.
+New standing rule: [[feedback_audits_lie_under_load]].
+
+### Gates — all measured SERIALLY
+
+```
+              verify   HOOK_LUMA   BODY_SAT   BODY_BLACK   weakest   motion   failing
+  market       8/8       148.1      66.7%       29.2        8.78     11.40     0/13
+  amber        8/8       179.6      72.6%       16.5        9.72     13.40     0/13
+  steel        8/8       167.5      66.3%       29.1        9.72     11.41     0/13
+
+  dHash   mean 22.6   MIN 12   PASS
+  length  1417 frames · 47.23s   (from 51.41s)
+```

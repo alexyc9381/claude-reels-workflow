@@ -85,9 +85,20 @@ export const FPS = 30;
    frame 234 (7.8000s) sits inside 108ms of TRUE digital silence before
    "Number". `silencedetect` found NOTHING at -40dB/60ms across that whole
    region — an earlier pass had already removed every pause — so the cut points
-   came from a 5ms RMS envelope instead. Removing exactly 130 frames keeps
-   every later onset frame-aligned, so the whole spine just shifts. */
-export const STAR_TOTAL = 1412;
+   came from a 5ms RMS envelope instead.
+
+   ⛔⛔⛔ AND THE FIRST TWO ATTEMPTS CUT INSIDE THE WORD. Alex: *"the word
+   'software' is cut off at 3 seconds."* The envelope shows a quiet run at
+   3.430-3.480 (-44 to -52 dB) that looks exactly like an inter-word gap. It is
+   the T STOP CLOSURE inside "sof-t-ware". A plosive closure is silence
+   that belongs to the word. The real boundary is 100ms later: speech runs
+   unbroken to 3.625, the comma pause is 3.630-3.690, and "and" starts at 3.695.
+   Cut at **3.680**, and land at **7.900** — in the room tone AFTER the 108ms of
+   digital silence, never inside it, because dropping to true zero right after a
+   word is itself heard as the word being chopped. 53ms of real room tone
+   (donated from 45.145s, -52 dB) restores the pause to ~150ms.
+   Net 125 frames. */
+export const STAR_TOTAL = 1417;
 
 /* ⛔ MEASURED WORD ONSETS from src/data/words_115star.json, converted to
    frames. Nothing here is estimated — every value is `round(onset * 30)` of
@@ -98,18 +109,18 @@ export const L = {
   /* ⛔ S1 (ARCH, "and they all have over 500,000 combined stars on GitHub with
      the simple one-click install") IS CUT — measured drop-off. The scene
      component still exists in StarScenes.tsx, unused, so this is reversible. */
-  S2: 104,    /* HOLES      3.46s  "Number one, Free for Dev. You get..."     */
-  S3: 211,    /* BAYS       7.03s  "to all the paid softwares across design"  */
-  S4: 316,    /* TILL      10.55s  "No trials or credit cards required."      */
-  S5: 392,    /* PATCH     13.08s  "Two, Public APIs. It has over 1,400..."   */
-  S6: 538,    /* DRUMS     17.94s  "like programming, video, finance, data"   */
-  S7: 663,    /* METER     22.10s  "Three, Scrapling. Cancel your $300 a..."  */
-  S8: 753,    /* CHECK     25.10s  "because this plugin has undetectable..."  */
-  S9: 889,    /* SHED      29.63s  "Four, Ollama. You can run Llama..."       */
-  S10: 1012,  /* METERS    33.74s  "so you can stop paying for expensive..."  */
-  S11: 1100,  /* WALL      36.67s  "Five, Awesome MCPs. It has over 92,000"   */
-  S12: 1201,  /* CROSS     40.03s  "and it has thousands of MCP servers..."   */
-  S13: 1366,  /* CTA       45.54s  "For the free setup, comment STAR."        */
+  S2: 109,    /* HOLES      3.62s  "Number one, Free for Dev. You get..."     */
+  S3: 216,    /* BAYS       7.20s  "to all the paid softwares across design"  */
+  S4: 321,    /* TILL      10.71s  "No trials or credit cards required."      */
+  S5: 397,    /* PATCH     13.24s  "Two, Public APIs. It has over 1,400..."   */
+  S6: 543,    /* DRUMS     18.10s  "like programming, video, finance, data"   */
+  S7: 668,    /* METER     22.27s  "Three, Scrapling. Cancel your $300 a..."  */
+  S8: 758,    /* CHECK     25.27s  "because this plugin has undetectable..."  */
+  S9: 894,    /* SHED      29.80s  "Four, Ollama. You can run Llama..."       */
+  S10: 1017,  /* METERS    33.90s  "so you can stop paying for expensive..."  */
+  S11: 1105,  /* WALL      36.83s  "Five, Awesome MCPs. It has over 92,000"   */
+  S12: 1206,  /* CROSS     40.20s  "and it has thousands of MCP servers..."   */
+  S13: 1371,  /* CTA       45.70s  "For the free setup, comment STAR."        */
   END: STAR_TOTAL,
 } as const;
 
