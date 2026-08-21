@@ -936,9 +936,9 @@ export const CatBay: React.FC<{ x: number; y: number; w: number; h: number; f: n
           WHOLE face from near-black to bone in three frames is LARGE x BRIGHT x
           FAST, which is the only combination §1's table says registers. Changing
           a gradient stop by 0.30 is a state change and measured as one. */}
-      {swapped && lf < 4 && (
-        <div style={{ position: "absolute", inset: 4, borderRadius: 5, background: "#FFF8E8",
-          opacity: 1 - lf / 4, zIndex: 30 }} />
+      {swapped && lf < 5 && (
+        <div style={{ position: "absolute", inset: 4, borderRadius: 5,
+          background: mxh(c, 0.62), opacity: (1 - lf / 5) * 0.55, zIndex: 30 }} />
       )}
       {/* the marks — and once the bay is lit they CYCLE through the rest of the
           category on a hard 13-frame flip, two big tiles repainting at once */}

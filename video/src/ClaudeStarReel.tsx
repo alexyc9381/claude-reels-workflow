@@ -334,8 +334,22 @@ const SFX: Cue[] = [
        bar as last week's reel is the same upload to an ear
    144 windows passed. After the overlap and the 114 rule, only TWO survived:
 
-       market  ADOS @ 107.00s   onset 0.345  rise x3.43  -13.8 dB  worst-1.5s 3.7 dB
-       amber   ADOS @  45.50s   onset 0.288  rise x2.27  -16.2 dB  worst-1.5s 7.1 dB
+       market  ADOS @  13.95s   onset 0.973  rise x17.05  OPENING 3s -12.4 dB
+       amber   ADOS @ 165.50s   onset 0.755  rise  x3.55  OPENING 3s -10.3 dB
+
+   ⛔⛔⛔ AND THE FIRST VERSION OF THIS PICKER OPTIMISED THE WRONG QUANTITY.
+   It scored window MEAN and drop-out and chose ADOS @ 107.0s, which is 3.7 dB
+   louder on average — and **4.4 dB QUIETER across the opening three seconds**
+   than the house start. Alex: *"the bg music isn't the right spot compared to
+   previous bg musics where we had it from before."* He is right, and the house
+   start is written down: `claude-ai-reel-workflow` records that for this track
+   the loud section is **8-16s** and it drops to -18/-19 dB after 18s, so the
+   house has shipped `-ss 13.95` repeatedly. At 13.95 the onset is 0.973 against
+   0.345 and the rise is x17.05 against x3.43 — it lands ON the downbeat.
+   ⭐ THE TEST IS THE OPENING THREE SECONDS, NOT THE WINDOW MEAN. A bed is
+   judged where a viewer meets it. My worst-1.5s <= 9 dB bar also rejected
+   13.95 (it measures 11.2) — the bar is too strict for this track and the
+   house's shipped choice outranks it.
 
    ⚠️ AND THE THIRD IS A DISCLOSED DEVIATION, NOT A PASS. The whole tail of
    ADOS past ~155s runs into the outro, so every window there fails the
@@ -366,8 +380,8 @@ const SFX: Cue[] = [
    takes the window to **9.3%**, below the VO's own, and leaves the tune
    untouched. ⛔ DO NOT REMOVE THESE TWO FILTERS.  */
 const BED: Record<Variant, string> = {
-  market: "115_star_bed.wav",        /* Another Day Of Sun @ 107.00s */
-  amber:  "115_star_bed_amber.wav",  /* Another Day Of Sun @  45.50s */
+  market: "115_star_bed.wav",        /* Another Day Of Sun @  13.95s — THE HOUSE SPOT */
+  amber:  "115_star_bed_amber.wav",  /* Another Day Of Sun @ 165.50s */
   steel:  "115_star_bed_steel.wav",  /* Every Living Breathing Moment @ 46.00s */
 };
 
@@ -380,7 +394,7 @@ const CAP_Y: Record<Variant, number> = { market: 1262, amber: 1330, steel: 1194 
        market -23.8 LUFS x LEVELS.MUSIC (-20)   ->  -43.8   gap 19.3 dB
        amber  -24.9 LUFS                        ->  -44.9   gap 20.4 dB
        steel  -23.7 LUFS                        ->  -43.7   gap 19.2 dB
-   The house figure is ~12 dB under the VO, which asks for +7.3 / +8.4 / +7.2.
+   The house figure is ~12 dB under the VO, which asks for +7.1 / +7.8 / +7.2.
    ⛔ RE-SOLVED AFTER THE HIGH SHELF, NOT INHERITED THROUGH IT: taking 11 dB off
    everything above 4.8k moved all three files by 0.3-0.5 LUFS, and carrying the
    old numbers across a filter change is exactly how reel 110 shipped 7 dB hot.
@@ -392,8 +406,8 @@ const CAP_Y: Record<Variant, number> = { market: 1262, amber: 1330, steel: 1194 
    under the VO rather than 12. A standing instruction from Alex outranks a
    target I derived. All three land within 0.8 dB of each other. */
 export const BED_GAIN: Record<Variant, number> = {
-  market: db(7.30),   /* -> volume 0.2317 */
-  amber:  db(7.96),   /* -> volume 0.2500, the ceiling (12 dB would ask 0.272) */
+  market: db(7.10),   /* -> volume 0.2265 */
+  amber:  db(7.80),   /* -> volume 0.2455 */
   steel:  db(7.20),   /* -> volume 0.2291 */
 };
 /** the bed-only A/B: identical picture, bed 6 dB down */

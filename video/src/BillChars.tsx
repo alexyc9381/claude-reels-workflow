@@ -44,6 +44,24 @@ const useRig = (f: number, size: number, i: number, loop?: number, at = 0) => {
   return { lf, inS, sq, dx, dy, rot, ch, ph, L };
 };
 
+/** ⛔ `useRig` is called inside a component and cannot be sampled at f-1 to get
+    velocity. This is the same maths as a plain function, so the Beaker can ask
+    "where was I three frames ago" without breaking the rules of hooks. */
+export const useRigPure = (f: number, size: number, i: number, loop?: number, at = 0) => {
+  const L = loop ?? i % 4;
+  const ph = i * 1.7;
+  let dx = 0, dy = 0, rot = 0;
+  if (L === 0) { dx = Math.sin(f / 17 + ph) * size * 0.22;
+                 dy = -Math.abs(Math.sin(f / 8.5 + ph)) * size * 0.04;
+                 rot = Math.cos(f / 17 + ph) * 3.6; }
+  else if (L === 1) { rot = 5 + Math.sin(f / 6.2 + ph) * 8;
+                      dy = Math.abs(Math.sin(f / 6.2 + ph)) * size * 0.04; }
+  else if (L === 2) { const t = (f / 26 + ph) % 1; const j = Math.max(0, Math.sin(t * Math.PI));
+                      dy = -j * size * 0.20; rot = Math.sin(f / 26 + ph) * 2.6; }
+  else { rot = Math.sin(f / 21 + ph) * 4.4; dy = Math.sin(f / 15 + ph) * size * 0.022; }
+  return { dx, dy, rot };
+};
+
 const Shell: React.FC<{ p: CProps; r: ReturnType<typeof useRig>; children: React.ReactNode }> =
   ({ p, r, children }) => {
   if (r.lf < -2) return null;
@@ -159,14 +177,61 @@ export const Beaker: React.FC<CProps & { fill?: number; liquid?: string }> = (p)
   /* ⛔ tinted, not white: the bill is the brightest thing in this reel */
   const glass = "#DCE6F5", rim = "#C3D2E8";
   const liq = p.liquid ?? "#4C7BEA";
-  const lvl = p.fill ?? 0.62;                       /* 0..1, and it is a STATE */
-  /* ⛔ THE LIQUID MAY NOT REACH THE FACE. At `52 - lvl*22` a 0.62 fill put the
-     surface at y=38 and the eyes sit at y=34 — the character drowned in its own
-     head. The face is the one thing a level can never cover, so the surface is
-     clamped to the flask's lower body: full is 42, empty is 57. */
-  const top = 57 - lvl * 15;
+  const lvl = Math.max(0, Math.min(1, p.fill ?? 0.62));
+  /* ⛔ THE LIQUID MAY NOT REACH THE FACE. The eyes sit at y=34, so the surface
+     is clamped to the flask's lower body: full is 42, empty is 57. */
+  const surf = 57 - lvl * 15;
+
+  /* ⭐⭐⭐ WATER PHYSICS, AND THE WHOLE THING IS ONE IDEA: THE SURFACE BELONGS TO
+     THE WORLD, NOT TO THE FLASK. Everything a viewer reads as "that is liquid"
+     follows from that:
+
+       1. IT STAYS LEVEL. The body rotates; the surface counter-rotates by the
+          same angle, so it holds horizontal while the glass tilts around it.
+          This is the single tell — a surface that rotates WITH its container is
+          drawn liquid, not observed liquid.
+       2. IT LAGS. The counter-rotation is damped, so on a fast turn the surface
+          arrives a few frames late and overshoots before settling.
+       3. IT PILES UP. Horizontal acceleration tilts it the OTHER way — move
+          left and it heaps on the right — which is what sells weight.
+       4. IT TRAVELS. Two sine waves at different wavelengths and speeds, so the
+          surface is a moving wave rather than one bobbing line. A single sine
+          reads as a metronome, the same trap the reel's SFX bank has.
+
+     ⛔ AND IT IS CLIPPED TO THE GLASS. The liquid is a big rect that extends
+     well past the flask on every side; the flask path is the clip. That is what
+     lets the surface rotate freely without ever leaking out of the vessel — the
+     alternative, redrawing the liquid's outline to match the flask each frame,
+     is where hand-built versions of this go wrong. */
+  const V = (fr: number) => {
+    /* the rig, sampled — velocity has to be measured, not guessed */
+    const g = useRigPure(fr, p.size, p.i ?? 0, p.loop, p.at ?? 0);
+    return g;
+  };
+  const now = V(p.f), was = V(p.f - 1), wasWas = V(p.f - 3);
+  const vx = (now.dx - was.dx) / Math.max(1, p.size) * 100;     /* per-100 units */
+  const dRot = now.rot - wasWas.rot;
+  /* level in world space, minus a lag term, plus the pile-up from acceleration.
+     ⛔ CLAMPED. Unbounded, a fast lateral move drove the tilt past 40 degrees and
+     the surface swung far enough that the liquid slid out of the visible flask —
+     the character looked empty for a few frames. Real liquid in a narrow vessel
+     cannot tilt much before it hits the wall, so +-20 degrees is both the fix
+     and the truth. */
+  const tilt = Math.max(-20, Math.min(20, -now.rot * 0.92 - dRot * 0.55 - vx * 3.4));
+  const cid = `bk${p.i}_${Math.round(p.size)}`;
+  const FLASK = "M 42 8 h 16 v 14 l 13 26 a 8 8 0 0 1 -7 12 h -28 a 8 8 0 0 1 -7 -12 l 13 -26 z";
+  /* the travelling surface: two waves, different wavelength and speed */
+  const wave = (x: number) =>
+    Math.sin((x + p.f * 1.9) / 9) * 1.5 + Math.sin((x - p.f * 1.1) / 5.5) * 0.8;
+  const pts = Array.from({ length: 13 }, (_, i) => {
+    const x = 14 + i * 6;
+    return `${x} ${surf + wave(x)}`;
+  }).join(" L ");
   return (
     <Shell p={p} r={r}>
+      <defs>
+        <clipPath id={cid}><path d={FLASK} /></clipPath>
+      </defs>
       {[38, 55].map((lx, j) => (
         <rect key={j} x={lx} y={82} width={8} height={17} rx={3.6} fill="#3E6BD9"
           transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (r.L === 0 ? 10 : 3)} ${lx + 4} 84)`} />
@@ -177,20 +242,37 @@ export const Beaker: React.FC<CProps & { fill?: number; liquid?: string }> = (p)
       ))}
       <rect x={32} y={58} width={36} height={28} rx={10} fill="#4C7BEA" />
       <rect x={32} y={74} width={36} height={12} rx={6} fill="#000" opacity={0.13} />
-      {/* ⭐ the four-colour chest bar, borrowed from GEMBOT — it is the one thing
-          that says GOOGLE outright, and it costs nothing to carry */}
+      {/* the four-colour chest bar — the one thing that says GOOGLE outright */}
       {[G_BLUE, G_RED, G_YEL, G_GRN].map((c, j) => (
         <rect key={"cb" + j} x={38 + j * 6} y={64} width={5} height={5} rx={1.4} fill={c} />
       ))}
-      {/* the flask head */}
-      <path d="M 42 8 h 16 v 14 l 13 26 a 8 8 0 0 1 -7 12 h -28 a 8 8 0 0 1 -7 -12 l 13 -26 z" fill={glass} />
-      {/* the liquid — a LEVEL, with a surface that sloshes */}
-      <path d={`M ${33 - (top - 44) * 0.5} ${top} q 17 ${4 + Math.sin(p.f / 9) * 3} ${34 + (top - 44)} 0
-                l 4 ${56 - top} a 8 8 0 0 1 -7 8 h -28 a 8 8 0 0 1 -7 -8 z`}
-        fill={liq} opacity={0.9} />
+      {/* the flask */}
+      <path d={FLASK} fill={glass} />
+      {/* ⭐ THE LIQUID — a wide body with a wave for a top edge, rotated about
+          its own surface, clipped to the glass */}
+      <g clipPath={`url(#${cid})`}>
+        <g transform={`rotate(${tilt} 50 ${surf})`}>
+          <path d={`M -60 ${surf + 6} L ${pts} L 160 ${surf + 6} L 160 190 L -60 190 Z`}
+            fill={liq} opacity={0.92} />
+          {/* the surface highlight, so the top edge reads as a meniscus */}
+          <path d={`M -60 ${surf + 6} L ${pts}`} fill="none"
+            stroke="#FFFFFF" strokeWidth={1.6} opacity={0.34} />
+        </g>
+        {/* bubbles rising through it, faster when it is being shaken */}
+        {[0, 1, 2].map(j => {
+          const life = (p.f * (1.1 + j * 0.35) + j * 17) % 26;
+          const by = 62 - life;
+          if (by < surf + 2) return null;
+          return (
+            <circle key={"bb" + j} cx={40 + j * 8 + Math.sin(p.f / 7 + j) * 2.4} cy={by}
+              r={1.5 + j * 0.5} fill="#FFFFFF" opacity={0.42} />
+          );
+        })}
+      </g>
       <rect x={40} y={5} width={20} height={6} rx={3} fill={rim} />
-      <circle cx={46 + Math.sin(p.f / 11) * 3} cy={top + 4 - ((p.f * 1.4) % 14)} r={2.4}
-        fill="#FFFFFF" opacity={0.5} />
+      {/* the glass reads as glass: one specular streak down the left shoulder */}
+      <path d="M 44 12 l -6 22 a 3 3 0 0 0 4 1 l 6 -22 a 3 3 0 0 0 -4 -1 z"
+        fill="#FFFFFF" opacity={0.42} />
       <Face cx={50} cy={34} gap={8} shock={p.shock} cheer={p.cheer ?? r.ch} />
     </Shell>
   );

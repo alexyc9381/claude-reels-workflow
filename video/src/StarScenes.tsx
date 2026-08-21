@@ -435,15 +435,11 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
           );
         })}
 
-        {/* ⭐ THE RACK FLASHES ON EVERY SLAM. A 800x210 face going bone for three
-            frames is 21% of the panel repainted in ONE sample — the shape §1's
-            table rewards, and five of them spread across the full 138 frames. */}
-        {SLAM.map((at, i) => f >= at && f < at + 4 && (
-          <div key={"fl" + i} style={{ position: "absolute", left: 106, top: gy - 310,
-            width: 800, height: 226, borderRadius: 12, background: "#FFF8E8",
-            opacity: (1 - (f - at) / 4) * 0.86, zIndex: 66 }} />
-        ))}
-
+        {/* ⛔ NO FLASH HERE. A rack flash used to fire on every slam and it
+            broke `feedback_no_flashing_transitions` outright. The slam now
+            reads through the PLATE ITSELF — a hard drop, a squash, a ring and
+            a dust puff — which is §2's "an arrival that costs something" and
+            costs the viewer's eyes nothing. */}
         {/* the INSTALL plunger the hero drives on the fifth */}
         <div style={{ position: "absolute", left: 856, top: gy - 244, width: 130, height: 132,
           zIndex: 52 }}>
@@ -1284,9 +1280,9 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
         {/* ⭐ THE CATCH FLOODS THE SET. A generator firing is the one beat in
             this scene, and changing only the 100x75 firebox is a state change,
             not an event: the whole cold room goes warm in four frames. */}
-        {f >= FIRE && f < FIRE + 8 && (
+        {f >= FIRE && f < FIRE + 14 && (
           <div style={{ position: "absolute", inset: 0, zIndex: 68, pointerEvents: "none",
-            background: `radial-gradient(120% 92% at 30% 72%, ${hexa("#FFD9A8", 0.92 * (1 - (f - FIRE) / 8))} 0%, ${hexa("#FFC98A", 0.42 * (1 - (f - FIRE) / 8))} 46%, ${hexa("#FFC98A", 0)} 82%)` }} />
+            background: `radial-gradient(120% 92% at 30% 72%, ${hexa("#FFD9A8", 0.30 * (1 - (f - FIRE) / 14))} 0%, ${hexa("#FFC98A", 0.16 * (1 - (f - FIRE) / 14))} 46%, ${hexa("#FFC98A", 0)} 82%)` }} />
         )}
 
         {/* the three model drums on the shed wall, on their spoken onsets */}
@@ -1527,35 +1523,80 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
         </div>
         {f >= LAND && <><Ring x={506} y={py} f={f} at={LAND} r={330} z={62} c="#9CF0C4" w={10} />
           <Puff x={506} y={py + 70} f={f} at={LAND} n={12} s={1.1} z={61} c="#6AC69C" /></>}
-        {/* ⭐ THE WALL ANSWERS. Twelve server cards eject from the sockets in a
-            ring around the plate, one every four frames from the landing to the
-            end of the shot — large, bright, arriving continuously, and it is
-            what "thousands of servers" looks like a beat before it is said. */}
+        {/* ⭐ THE WALL ANSWERS with the two things it actually holds. */}
         {Array.from({ length: 12 }, (_, i) => {
           const at = LAND + 3 + i * 4;
           if (f < at) return null;
           const lf = f - at;
-          const a = (i / 12) * Math.PI * 2 + 0.4;
+          const ang = (i / 12) * Math.PI * 2 + 0.4;
           const t = E(lf, 0, 13, 0, 1, OUT);
-          const cx = 506 + Math.cos(a) * (150 + t * 300);
-          const cy = 330 + Math.sin(a) * (90 + t * 190);
+          const cx = 506 + Math.cos(ang) * (170 + t * 340);
+          const cy = 296 + Math.sin(ang) * (78 + t * 148);
+          const o = Math.min(1, 1 - (lf - 30) / 14);
+          const sq = squash(lf, 0, 0.3, 3, 12);
+          const spin = -14 + i * 9 + t * 40;
+          if (i % 2 === 0) {
+            /* ⭐ A STRUCK STAR MEDALLION — this is what "92,592 stars" IS */
+            const D = 92;
+            return (
+              <div key={"st" + i} style={{ position: "absolute", left: cx - D / 2, top: cy - D / 2,
+                width: D, height: D, zIndex: 58, opacity: o,
+                transform: `rotate(${spin}deg) scale(${sq})` }}>
+                <div style={{ position: "absolute", inset: 0, borderRadius: "50%",
+                  background: "radial-gradient(circle at 34% 30%, #F6DFA4 0%, #D9A22E 54%, #8E6A18 100%)",
+                  border: "5px solid #6E5212" }} />
+                {/* the milled rim */}
+                {Array.from({ length: 16 }, (_, k) => (
+                  <div key={"ml" + k} style={{ position: "absolute", left: "50%", top: "50%",
+                    width: 5, height: D * 0.5, marginLeft: -2.5, marginTop: -D * 0.5,
+                    transformOrigin: "50% 100%", transform: `rotate(${k * 22.5}deg)`,
+                    background: hexa("#6E5212", 0.30) }} />
+                ))}
+                {/* the five points, drawn */}
+                {Array.from({ length: 5 }, (_, k) => (
+                  <div key={"pt" + k} style={{ position: "absolute", left: "50%", top: "50%",
+                    width: 17, height: D * 0.34, marginLeft: -8.5, marginTop: -D * 0.34,
+                    transformOrigin: "50% 100%", transform: `rotate(${k * 72}deg)`,
+                    background: "#F7EFD8", clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }} />
+                ))}
+                <div style={{ position: "absolute", left: "50%", top: "50%", width: 22, height: 22,
+                  marginLeft: -11, marginTop: -11, borderRadius: "50%", background: "#B98A20",
+                  border: "3px solid #6E5212" }} />
+              </div>
+            );
+          }
+          /* ⭐ A 1U RACK SERVER — front panel, ear brackets, vents, bays, LEDs */
+          const W2 = 132, H2 = 56;
           return (
-            <div key={"sv" + i} style={{ position: "absolute", left: cx - 46, top: cy - 34,
-              width: 92, height: 68, zIndex: 58, borderRadius: 6, background: "#F2EDE0",
-              border: "4px solid #1E4A3C", opacity: Math.min(1, 1 - (lf - 30) / 14),
-              transform: `rotate(${-10 + i * 6}deg) scale(${squash(lf, 0, 0.3, 3, 12)})` }}>
-              <div style={{ position: "absolute", left: 8, top: 10, width: 46, height: 8,
-                background: "#2F8A63" }} />
-              <div style={{ position: "absolute", left: 8, top: 26, width: 62, height: 6,
-                background: "#B4C6BC" }} />
-              <div style={{ position: "absolute", left: 8, top: 40, width: 34, height: 6,
-                background: "#B4C6BC" }} />
-              <div style={{ position: "absolute", right: 8, top: 10, width: 14, height: 14,
-                borderRadius: "50%", background: "#9CF0C4" }} />
+            <div key={"sv" + i} style={{ position: "absolute", left: cx - W2 / 2, top: cy - H2 / 2,
+              width: W2, height: H2, zIndex: 58, opacity: o,
+              transform: `rotate(${spin * 0.4}deg) scale(${sq})` }}>
+              <div style={{ position: "absolute", inset: 0, borderRadius: 5,
+                background: "linear-gradient(178deg, #46566E 0%, #1A2330 100%)",
+                border: "4px solid #0E1620" }} />
+              {[0, W2 - 18].map((ex, k) => (
+                <div key={"ea" + k} style={{ position: "absolute", left: ex, top: -4, width: 18,
+                  height: H2 + 8, borderRadius: 3, background: "#5E7290",
+                  border: "3px solid #0E1620" }} />
+              ))}
+              {/* the vent block */}
+              <div style={{ position: "absolute", left: 26, top: 9, width: 40, height: H2 - 18,
+                borderRadius: 2, background: `repeating-linear-gradient(90deg, #0E1620 0px, #0E1620 3px, #3A4A60 3px, #3A4A60 7px)` }} />
+              {/* two drive bays */}
+              {[0, 1].map(k => (
+                <div key={"bay" + k} style={{ position: "absolute", left: 74, top: 10 + k * 19,
+                  width: 34, height: 15, borderRadius: 2, background: "#2A3547",
+                  border: "2px solid #101A26" }} />
+              ))}
+              {/* status LEDs */}
+              {[0, 1, 2].map(k => (
+                <div key={"led" + k} style={{ position: "absolute", left: 114, top: 12 + k * 12,
+                  width: 8, height: 8, borderRadius: "50%",
+                  background: k === 0 ? "#9CF0C4" : k === 1 ? "#E7B24C" : "#5FC79A" }} />
+              ))}
             </div>
           );
         })}
-
         {/* the two hauling. Their forearms end ON the rope. */}
         <Hero f={f} x={330} y={gy} size={222} z={56} drive={t * 0.5}
           strain={f < LAND ? 0.4 + t * 0.5 : 0.1} reach={54} costume={{ wizard: 1 }} act={1} ph={2.1} />
@@ -1619,12 +1660,17 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
           <MarkCast x={92} y={92} s={112} z={4} f={f} spin={0.6} />
         </div>
         {/* the trunk plug the hero drives home */}
-        <div style={{ position: "absolute", left: 506 - 54, top: 470 - dr * 46, width: 108,
-          height: 96, zIndex: 58, borderRadius: 12,
+        {/* ⛔ THE PLUG SEATS BELOW THE MARK, NOT ACROSS IT. Alex: *"there
+            shouldn't be a green thing covering the claude logo in the middle."*
+            The socket face runs y 348..532 and the plug was landing at 424 with
+            its pins reaching 398 — straight over the emblem. The Claude mark is
+            the audience filter; nothing gets to sit on it. */}
+        <div style={{ position: "absolute", left: 506 - 54, top: 556 - dr * 30, width: 108,
+          height: 84, zIndex: 52, borderRadius: 12,
           background: "linear-gradient(178deg, #3E8C70 0%, #113026 100%)", border: "6px solid #0A1F18" }}>
           {[0, 1].map(i => (
-            <div key={"pp" + i} style={{ position: "absolute", left: 22 + i * 44, top: -26,
-              width: 20, height: 30, borderRadius: 3, background: "#D8DDE4" }} />
+            <div key={"pp" + i} style={{ position: "absolute", left: 22 + i * 44, top: -22,
+              width: 20, height: 26, borderRadius: 3, background: "#D8DDE4" }} />
           ))}
         </div>
 
@@ -1715,19 +1761,23 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
           c="#FFD8A0" w={9} /></>}
 
         {/* the STAR stamp, driven down */}
-        <div style={{ position: "absolute", left: 664, top: 120 + st * 150, width: 190,
-          height: 156, zIndex: 84 }}>
-          <div style={{ position: "absolute", left: 62, top: 0, width: 66, height: 74,
-            borderRadius: 10, background: "linear-gradient(178deg, #55606A 0%, #262C33 100%)",
-            border: "5px solid #171C22" }} />
-          <div style={{ position: "absolute", left: 0, top: 70, width: 190, height: 84,
-            borderRadius: 10, background: "linear-gradient(178deg, #C44A3A 0%, #6E2018 100%)",
-            border: "6px solid #3E100C", display: "flex", alignItems: "center",
-            justifyContent: "center" }}>
-            <span style={{ ...mono(42, 900), color: "#F7EFE0", letterSpacing: "0.16em" }}>STAR</span>
+        {/* ⭐ THE KEYWORD IS THE WHOLE POINT OF THE LAST SHOT, so it is centred
+            and 1.7x the size it was. Alex: *"the STAR thing at the end should be
+            bigger, more near the center."* A CTA that is smaller than the props
+            around it is a CTA nobody acts on. */}
+        <div style={{ position: "absolute", left: 506 - 166, top: 176 + st * 150, width: 332,
+          height: 250, zIndex: 90 }}>
+          <div style={{ position: "absolute", left: 116, top: 0, width: 100, height: 112,
+            borderRadius: 14, background: "linear-gradient(178deg, #55606A 0%, #262C33 100%)",
+            border: "7px solid #171C22" }} />
+          <div style={{ position: "absolute", left: 0, top: 104, width: 332, height: 132,
+            borderRadius: 14, background: "linear-gradient(178deg, #C44A3A 0%, #6E2018 100%)",
+            border: "8px solid #3E100C", display: "flex", alignItems: "center",
+            justifyContent: "center", boxShadow: SH_D }}>
+            <span style={{ ...mono(74, 900), color: "#F7EFE0", letterSpacing: "0.18em" }}>STAR</span>
           </div>
         </div>
-        <Hero f={f} x={848} y={gy + 30} size={244} z={82} drive={st} strain={st * 0.7}
+        <Hero f={f} x={866} y={gy + 30} size={244} z={82} drive={st} strain={st * 0.7}
           reach={30} costume={{ suit: 1 }} act={2} ph={1.8} flip />
         <Crew f={f} x={168} y={gy + 34} i={6} size={206} z={82} at={0} loop={2} />
         <MarkPlate x={44} y={140} t="FOR CLAUDE" s={1.0} z={84} />
