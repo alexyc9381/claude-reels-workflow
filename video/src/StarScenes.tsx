@@ -9,7 +9,7 @@ import {
   PigeonWall, Ticket, CatBay, CardReader, JackWall, Cord, Counter, Drum,
   Meter, Checkpoint, Generator, PlugWall, Dest, Crew, Hero, Forearm, costumeFor,
   CLAY, CLAYD, GOLD, GREEN, RED, SKY, PAPER, CREAMB, INK, MUTE, TEAL, STEEL,
-  BRASS, ENAM, SODIUM, VIOLET, OXIDE, rock, shake, drift, squash, idle,
+  BRASS, ENAM, SODIUM, VIOLET, OXIDE, rock, shake, drift, squash, idle, lerpHex,
 } from "./StarWorld";
 import { SetFor } from "./StarSets";
 
@@ -140,61 +140,97 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
   const p = asPlace("street");
   const CUT = 54;
   const B = f >= CUT;
-  /* the three shoves, and the recoil after each */
-  const SH1 = 7, SH2 = 24, SH3 = 42;
-  const shoveAt = (a: number) => E(f, a, a + 6, 0, 1, OUT) - E(f, a + 6, a + 15, 0, 1, IO);
-  const drive = Math.max(shoveAt(SH1) * 0.72, shoveAt(SH2) * 0.86, shoveAt(SH3));
-  const strain = B ? 0 : E(f, 0, 8, 0.35, 0.72, OUT) + drive * 0.28;
-  /* the arm gives 46px then CLACKS back — the villain wins all three times */
-  const give = drive * 0.42;
-  /* shot B: five crates fall from the gantry and shear the arm */
-  const CR = [56, 62, 68, 74, 80];
+
+  /* ⛔⛔⛔ REBUILT. Alex: *"the immediate hook between 0-2 seconds isn't good
+     enough, it's just him moving back and forth, it's not interesting nor does
+     it really incorporate those logos."* Two separate defects, and the second
+     one causes the first.
+
+     1. **A SWAY IS AN IDLE** (§12). v1 was three shoves that each RETURNED TO
+        WHERE THEY STARTED — net travel zero, three times. That is the exact
+        shape of *"it's just repetitive back and forth motion"*, which this repo
+        has been told before and written down.
+     2. **THE LOGOS ARRIVED AT 1.87s**, i.e. after the first two seconds were
+        already spent. The five recognisable marks were the fix for the LAST
+        round's hook note and they were not on screen for the part of the hook
+        that decides whether anyone stays.
+
+     ⭐ THE REBUILD MAKES THE LOGOS THE MOVERS INSTEAD OF THE HERO. All five
+     branded plates are mounted on the gate at FRAME 0, in colour. Then a heavy
+     price tag DROPS onto each one in turn — five discrete arrivals across
+     f10-f42 — and each plate goes grey as its tag lands. That is five large
+     objects arriving AND five large areas flipping value, which is the top of
+     §1's measured table, and it is the literal sentence: this is what you are
+     paying, one thing at a time, and the board totals it.
+     The hero's action is a RECOIL from each slam — his body compresses and he
+     gives ground — so the movement has direction instead of oscillating. */
+  const SLAM = [10, 18, 26, 34, 42];
+  const pulse = (a2: number) => E(f, a2, a2 + 3, 0, 1, OUT) - E(f, a2 + 3, a2 + 13, 0, 1, IO);
+  const hit = Math.max(...SLAM.map(pulse));
+  /* he gives ground on every slam and never fully recovers — a hook that ends
+     where it started has not moved */
+  const lost = SLAM.filter(a2 => f >= a2 + 3).length * 0.13;
+
+  /* shot B: the tags TEAR OFF, each plate flashes back to colour and takes a
+     FREE stamp, then the gate goes */
+  const TEAR = [58, 64, 70, 76, 82];
   const SHEAR = 86;
   const surge = E(f, 88, 101, 0, 1, OUT);
+  const drop = (i: number) => E(f, 88 + i * 3, 100 + i * 3, 0, 1, BACK);
+  /* ⛔ the freed plates SETTLE on the rail; they do not fall onto the hero, who
+     is the one thing in the frame that must stay readable */
+
+  const drive = B ? E(f, 56, 70, 0, 1, OUT) : -(hit * 0.42 + lost);
+  const strain = B ? E(f, 56, 64, 0.8, 0.2, OUT) : 0.32 + hit * 0.5;
+  const give = B ? 0 : lost * 0.5 + hit * 0.2;
   const gy = p.horizon + 192;
-    /* ⛔ THE VIGNETTE IS A LUMA LEVER AND IT IS THE RIGHT ONE TO PULL. THE-OPEN
-     law 1 wants frame 0 over 140 and §8 forbids buying it by lifting the
-     palette's dark stop. The vignette is neither: it is the panel's own edge
-     falloff, so easing it on the HOOK ONLY (0.50 -> 0.38) brightens the corners
-     without touching a single paint. Every body scene keeps its 0.52-0.60. */
+
+  /* ⭐⭐⭐ THE CHARACTER ARC, IN COLOUR. Alex: *"near the end he starts glowing or
+     something, or he starts red then turns orange, something interesting with
+     this character."*
+
+     ⛔ A GLOW IS BANNED HOUSE-WIDE — the matte rule, and the greppable gate on
+     `boxShadow: 0 0 Npx` has to return 0. So the energy is built out of things
+     that are matte by construction: a colour arc on the sprite itself, a drawn
+     light POOL (a practical, never an emissive blur), an expanding RING, drawn
+     embers, and a two-frame scale pop.
+
+     ⛔⛔ AND THE HOUSE-CLAY RULE STILL HOLDS, WHICH IS WHAT DECIDES THE
+     DIRECTION OF THE ARC. *"Every Claude the one house clay"* is a delivery
+     gate, so the reel cannot simply end on a different colour. The honest
+     reading — and the better story — is that the RED IS WHAT THE PAYWALL DOES
+     TO HIM and being free RESTORES him: he starts on house clay, is driven to
+     a deep red one step per price tag, flashes hot when the gate goes, and
+     settles back to exactly #D97757. Identity is the payoff, not the cost. */
+  const press = SLAM.filter(a2 => f >= a2 + 2).length / SLAM.length;
+  const TURN = SHEAR;
+  const flash = E(f, TURN, TURN + 2, 0, 1, LIN) - E(f, TURN + 2, TURN + 9, 0, 1, OUT);
+  const cool = E(f, TURN + 2, TURN + 16, 1, 0, OUT);   /* red -> house clay */
+  const heroTint = flash > 0.02
+    ? lerpHex("#D97757", "#FFE7BE", flash)
+    : lerpHex("#D97757", "#A8331F", B ? press * cool : press);
+  /* his face carries it too: a scowl that deepens with every tag, a flinch on
+     each impact, and both gone the moment he is free */
+  const scowl = B ? 0.9 * cool : press * 0.9;
+  const flinch = Math.max(...SLAM.map(a2 => E(f, a2 + 1, a2 + 3, 0, 1, OUT) - E(f, a2 + 3, a2 + 12, 0, 1, IO)));
+  const pop = 1 + flash * 0.16;
+
+  /* the five plates live on the gate, inside the shot-B punch crop (206..806) */
+  const PX = (i: number) => 206 + i * 150;
+  const PY = 372;
+  const TAG = ["$49", "$99", "$300", "$59", "$79"];
+
   return (
     <Scene p={p} slug="THE METERED STREET" push={[0, dur, 1.055]} vig={0.32}>
       <Cam z={5} s={B ? 1.26 : 1.0} y={B ? -46 : 0} x={B ? 18 : 0}>
         <SetFor k="street" f={f} t={f * 1.5} rakeRate={6.1} />
 
-        {/* ⛔ ONE readable stack behind the bars, not a scatter. v1 put four
-            price-tagged crates across the frame and the hook had five things
-            competing to be looked at — [[feedback_hook_simplicity]]: the hook
-            is an IMAGE, not a room. The market itself is what he cannot reach;
-            the crates only have to say that it costs money. */}
-        {[[262, 0.86, "$49"], [756, 0.78, "$99"]].map(([bx, bs, pr], i) => (
-          <React.Fragment key={"pc" + i}>
-            <Box x={bx as number} y={p.horizon + 122} w={150} s={bs as number} z={16}
-              c={i ? "#8A6A44" : "#7A5A38"} rot={i ? 2 : -2} />
-            <PriceTag x={(bx as number) - 40} y={p.horizon + 44} t={pr as string}
-              s={0.76} z={17} rot={i ? -8 : 7} />
-          </React.Fragment>
-        ))}
-
-        {/* ⭐⭐ THE PRICE GANTRY — the hook's claim plate and the number spine's
-            first figure. The figure is the VO's own spoken words and nothing
-            else; the sourced receipt (945,792 stars) lands in S1.
-            ⛔ IT IS SETTLED ON FRAME 0. The board is fed `at = -14` for its
-            first state, so frame 0 shows a resolved `01,200` rather than the
-            flip's placeholder. Frame 0 is the only frame guaranteed to be
-            seen and it may not contain an animation mid-flight. */}
+        {/* ⭐⭐ THE PRICE GANTRY — the claim plate, and the running total of the
+            five tags below it. The figure is the VO's own spoken words.
+            ⛔ IT IS SETTLED ON FRAME 0: the board is fed a negative `at` for
+            its first state so frame 0 shows a resolved number, never a flip
+            caught mid-roll. Frame 0 is the only frame guaranteed to be seen. */}
         <Gantry y={112} f={f} z={70}>
-          {/* ⛔⛔ THIS BOARD WAS 844px WIDE FOR ONE ROUND, TO CHASE `HOOK_PLATE`.
-              It cleared the warn and it DESTROYED THE HOOK: a cream slab across
-              the whole arch, hiding the free market that is the entire reason
-              the shot means anything, with the digits jammed left and a lone
-              `$` adrift in the empty half.
-              ⭐ [[feedback_green_gate_wrong_way]] — HOOK_PLATE **warns and never
-              blocks**, and `look_audit.py`'s own header says its evidence does
-              not generalise across reels. Deforming the one image the reel is
-              sold on to satisfy it is the exact failure the rule describes. The
-              board is now sized to its CONTENT, the market reads either side of
-              it, and the warn is accepted and logged. */}
           <div style={{ position: "absolute", left: 246, top: 158, zIndex: 74,
             borderRadius: 16, background: "linear-gradient(178deg, #FBF6E8 0%, #E6DCC4 100%)",
             border: "7px solid #241F17", padding: "10px 18px 14px", boxShadow: SH_D }}>
@@ -207,54 +243,102 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <span style={{ ...mono(54, 900), color: "#8E2F22" }}>$</span>
-              <SplitFlap inline x={0} y={0} text={f < 7 ? "01,200" : f < 24 ? "04,800" : "10,000"}
-                f={f} at={f < 7 ? -26 : f < 24 ? 7 : 24} s={1} z={75} cell={48} />
+              <SplitFlap inline x={0} y={0} text={f < 10 ? "01,200" : f < 26 ? "04,800" : "10,000"}
+                f={f} at={f < 10 ? -26 : f < 26 ? 10 : 26} s={1} z={75} cell={48} />
             </div>
           </div>
         </Gantry>
 
-        {/* ⭐⭐ THE PAY GATE, spanning the arch. The lit market behind it is
-            cut into bright stripes by dark bars — the biggest value spread in
-            the reel, and the reason frame 0 clears the luma bar without the
-            palette's dark stop being touched. */}
+        {/* ⭐⭐ THE PAY GATE. The lit market behind it is cut into bright stripes
+            by dark bars — the biggest value spread in the reel, and the reason
+            frame 0 clears the luma bar without the dark stop being touched. */}
         <PayGate x0={182} x1={830} yTop={318} yBot={p.horizon + 190} f={f} z={46}
           push={give} burst={B ? SHEAR : -1} />
 
-        {/* ⭐ THE HERO. He is a dark mass against the lit arch: reel 110's
-            "name which side of the contrast the subject is on". */}
-        <Hero f={f} x={318 + surge * 320} y={gy} size={356} z={56}
-          drive={drive} strain={strain} reach={104} costume={{ constr: 1 }}
-          gaze={B ? 0.4 : 0} cheer={surge > 0.5 ? 1 : 0} />
-        {/* ⛔ READ THE RIG BEFORE YOU DRAW GEOMETRY. `Mascot` draws its own
-            arms; the only limb geometry that survives is a forearm whose far
-            end is ON something visible. Both of these end on the gate's own
-            KICK PLATE — the part of a gate a shove actually lands on — so they
-            connect two things that are both on screen and cannot read as the
-            TAIL that reel 110 shipped. */}
-        {!B && <>
-          <Forearm x0={318 + drive * 104 + 112} y0={gy - 226} x1={506 + give * 16}
-            y1={gy - 196} w={19} c="#C4674A" z={58} />
-          <Forearm x0={318 + drive * 104 + 104} y0={gy - 172} x1={500 + give * 16}
-            y1={gy - 158} w={17} c="#B85C40" z={57} />
-        </>}
-        {/* ⭐ the emitter on the stillest part */}
-        {!B && f >= SH2 && <Steam x={318} y={gy - 334} f={f} at={SH2} n={6} s={1.05} z={66} />}
-
-        {/* shot B: the five crates fall and smash the turnstile */}
-        {B && CR.map((at, i) => {
-          const lf = f - at;
-          if (lf < 0) return null;
-          const t = E(lf, 0, 9, 0, 1, IN_Q);
-          const land = lf >= 9;
+        {/* ⭐⭐⭐ THE FIVE BRANDS, ON THE GATE FROM FRAME 0. In colour, priced one
+            at a time, freed one at a time. They are the subject of the shot —
+            not decoration that arrives once the hook is over. */}
+        {[0, 1, 2, 3, 4].map(i => {
+          const at = SLAM[i];
+          const priced = f >= at + 2;
+          const freed = B && f >= TEAR[i];
+          const shock = squash(f, at + 2, 0.13, 2, 12);
+          const dy = B ? drop(i) * 44 : 0;
           return (
-            <React.Fragment key={"dc" + i}>
-              <RepoIcon x={206 + i * 150} y={-120 + t * (gy - 60)} i={i} s={0.82} z={64}
-                f={f} rot={-14 + i * 7 + (land ? 0 : (1 - t) * 26)} />
-              {land && <Puff x={206 + i * 150} y={gy - 40} f={f} at={at + 9} n={9} s={0.9} z={65} c="#C0A882" />}
-              {land && <Ring x={206 + i * 150} y={gy - 30} f={f} at={at + 9} r={150} z={63} c="#FFE7BE" />}
+            <React.Fragment key={"bp" + i}>
+              <div style={{ position: "absolute", inset: 0, zIndex: 60,
+                transform: `translateY(${dy}px) scale(${shock})`,
+                transformOrigin: `${(PX(i) / 1012) * 100}% ${(PY / 792) * 100}%` }}>
+                <RepoIcon x={PX(i)} y={PY} i={i} s={0.68} z={60} f={f}
+                  rot={-3 + i * 1.5 + (B ? drop(i) * (i % 2 ? 5 : -5) : 0)}
+                  dim={priced && !freed ? 1 : 0} free={freed ? TEAR[i] : -1} />
+              </div>
+
+              {/* the tag DROPS onto the plate and hangs there; on the tear it is
+                  thrown clear, spinning, and the plate comes back to life */}
+              {(() => {
+                const lf = f - at;
+                if (lf < -9) return null;
+                const fall = E(lf, -9, 0, -430, 0, IN_Q);
+                const tl = f - TEAR[i];
+                const off = freed ? E(tl, 0, 20, 0, 1, OUT) : 0;
+                return (
+                  <div style={{ position: "absolute",
+                    left: PX(i) - 46 + off * (i % 2 ? 330 : -330),
+                    top: PY - 84 + fall - off * 190 + (freed ? tl * tl * 0.34 : 0),
+                    zIndex: 68, opacity: freed ? Math.max(0, 1 - tl / 22) : 1,
+                    transform: `rotate(${(freed ? off * 260 : 0) + (lf < 0 ? -14 : -6)}deg)` }}>
+                    <PriceTag x={0} y={0} t={TAG[i]} s={0.92} z={68} rot={0} />
+                  </div>
+                );
+              })()}
+              {f >= at + 2 && !freed && (
+                <Puff x={PX(i)} y={PY - 34} f={f} at={at + 2} n={7} s={0.7} z={64} c="#C0A882" />
+              )}
+              {freed && <Ring x={PX(i)} y={PY} f={f} at={TEAR[i]} r={170} z={66} c="#9CF0C4" w={8} />}
             </React.Fragment>
           );
         })}
+
+        {/* ⭐ THE HERO. He gives ground on every slam and never recovers it, then
+            drives forward once through the broken gate — one direction each way,
+            which is what a sway is not. */}
+        {/* ⭐ THE POOL BLOOMS BEHIND HIM ON THE TURN — a drawn practical, matte
+            by construction, so the frame reads as energy without a banned glow */}
+        {B && f >= TURN && (
+          <Pool x={506 - lost * 78 + surge * 96} y={gy - 40}
+            w={E(f, TURN, TURN + 14, 120, 760, OUT)} c="#FFD9A8"
+            o={0.30 * E(f, TURN, TURN + 6, 0, 1, OUT)} z={54} />
+        )}
+        <Hero f={f} x={506 - lost * 78 + surge * 96} y={gy} size={338} z={82}
+          drive={drive} strain={strain} reach={104} costume={{ constr: 1 }}
+          gaze={B ? 0.4 : 0} cheer={surge > 0.5 ? 1 : 0}
+          tint={heroTint} shock={flinch} stern={scowl} pop={pop} />
+        {/* the ring and the embers coming off him — every one drawn, none of it
+            an emissive blur. The embers rise on their own clocks so the tail of
+            the hook keeps moving after the plates have settled. */}
+        {B && f >= TURN && <Ring x={506 - lost * 78 + surge * 96} y={gy - 150} f={f}
+          at={TURN} r={340} z={84} w={11} c="#FFD9A8" />}
+        {B && f >= TURN && Array.from({ length: 14 }, (_, i) => {
+          const lf = f - TURN - (i % 5) * 2;
+          if (lf < 0) return null;
+          const t = lf / 26;
+          if (t > 1) return null;
+          const hx = 506 - lost * 78 + surge * 96;
+          const sz = 26 - (i % 3) * 6;
+          return (
+            <div key={"em" + i} style={{ position: "absolute",
+              left: hx + Math.cos(i * 1.31) * (60 + t * 190) - sz / 2,
+              top: gy - 120 - t * 260 + Math.sin(i * 2.2) * 40 - sz / 2,
+              width: sz, height: sz, borderRadius: 6, zIndex: 85,
+              background: i % 2 ? "#FFD9A8" : "#F2854F", opacity: (1 - t) * 0.9,
+              transform: `rotate(${i * 37 + t * 180}deg)` }} />
+          );
+        })}
+        {/* ⭐ the emitter on the stillest part of a bracing sprite: his head */}
+        {!B && f >= SLAM[2] && <Steam x={506 - lost * 78} y={gy - 318} f={f} at={SLAM[2]}
+          n={6} s={1.05} z={66} />}
+
         {B && f >= SHEAR && <>
           <Puff x={506} y={gy - 150} f={f} at={SHEAR} n={16} s={1.3} z={68} c="#C0A882" />
           <Ring x={506} y={gy - 150} f={f} at={SHEAR} r={280} z={67} w={10} />

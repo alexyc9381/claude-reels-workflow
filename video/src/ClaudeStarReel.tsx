@@ -168,15 +168,20 @@ const S = (fr: number) => fr / FPS;
 
 const SFX: Cue[] = [
   /* ---- S0 · THE METERED STREET (10) — the reel's first density peak.
-     ⛔ RE-CUT AT x1.04, NOT DIVIDED BY 1.04. Every cue below sits on a beat that
-     was re-measured from the new caption JSON. */
+     ⛔ RESCORED FOR THE REBUILT HOOK. The shot is now five price tags LANDING
+     and then five TEARING OFF, so the old shove/clack cues fired on events that
+     no longer happen. Five slams are not five copies of one sample — that is a
+     metronome — so it is two pitched `mech_clank` bookends plus a `crusher`
+     texture under the run, and the tears are one rising `sign_clack` pair. */
   { at: S(L.S0 + 0),  src: "shop_bed.wav",     v: LEVELS.SFX_BED,     dur: 3.6 },
-  { at: S(L.S0 + 2),  src: "slot_stop.wav",    v: LEVELS.SFX_MID,     dur: 0.24 },
-  { at: S(L.S0 + 7),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14, rate: 0.94 },
-  { at: S(L.S0 + 24), src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14, rate: 0.86 },
-  { at: S(L.S0 + 42), src: "sign_clack.wav",   v: LEVELS.SFX_MID,     dur: 0.24 },
-  { at: S(L.S0 + 56), src: "crusher.wav",      v: LEVELS.SFX_TEXTURE, dur: 0.92, rate: 1.10 },
-  { at: S(L.S0 + 80), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO,    dur: 0.82, rate: 0.78 },
+  { at: S(L.S0 + 10), src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14, rate: 1.02 },
+  { at: S(L.S0 + 18), src: "slot_stop.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.24, rate: 0.96 },
+  { at: S(L.S0 + 26), src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14, rate: 0.92 },
+  { at: S(L.S0 + 34), src: "slot_stop.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.24, rate: 0.88 },
+  { at: S(L.S0 + 42), src: "mech_clank.wav",   v: LEVELS.SFX_HERO,    dur: 0.14, rate: 0.82 },
+  { at: S(L.S0 + 58), src: "sign_clack.wav",   v: LEVELS.SFX_MID,     dur: 0.24, rate: 1.10 },
+  { at: S(L.S0 + 76), src: "crusher.wav",      v: LEVELS.SFX_TEXTURE, dur: 0.92, rate: 1.10 },
+  /* the gate going: the heaviest low pair in the reel, on the cut */
   { at: S(L.S0 + 86), src: "sub.wav",          v: LEVELS.SFX_HERO,    dur: 0.44 },
   { at: S(L.S0 + 86), src: "boom.wav",         v: LEVELS.SFX_HERO,    dur: 0.56, rate: 0.85 },
   { at: S(L.S0 + 92), src: "neon_on.wav",      v: LEVELS.SFX_MID,     dur: 0.56 },

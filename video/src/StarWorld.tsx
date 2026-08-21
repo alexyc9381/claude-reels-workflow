@@ -184,6 +184,18 @@ export const vivid = (hex: string, k: number) => {
   });
   return `#${out.map(v => v.toString(16).padStart(2, "0")).join("")}`;
 };
+/** ⭐ a straight hex→hex lerp. `mxh`/`dkh` only move toward white or black, so
+    neither can take a sprite from clay to red and back. */
+export const lerpHex = (a: string, b: string, t: number) => {
+  const k = Math.max(0, Math.min(1, t));
+  const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+  const ch = (sh: number) => {
+    const va = (pa >> sh) & 255, vb = (pb >> sh) & 255;
+    return Math.round(va + (vb - va) * k).toString(16).padStart(2, "0");
+  };
+  return `#${ch(16)}${ch(8)}${ch(0)}`;
+};
+
 export const mono = (px: number, w = 700) => ({ fontFamily: MONO, fontSize: px, fontWeight: w as 700 });
 export const ui = (px: number, w = 800) => ({ fontFamily: inter.fontFamily, fontSize: px, fontWeight: w });
 
@@ -475,13 +487,21 @@ export const SplitFlap: React.FC<{ x: number; y: number; text: string; f: number
            guaranteed to be seen — the whole board read `888888`. THE-OPEN law 4:
            frame 0 must be SETTLED and readable. Pass a negative `at` to have a
            board already resolved when the scene opens. */
-        const flip = lf < 0 ? 0 : lf < 3 ? 1 : lf < 5 ? 2 : lf < 7 ? 1 : 0;
-        const shown = lf < 0 ? ct : lf < 2 ? "8" : lf < 4 ? "0" : lf < 6 ? "5" : ct;
+        /* ⛔⛔ A HALF-FLIPPED PRICE IS A WRONG PRICE. v1 substituted "8"/"0"/"5"
+           through the roll to fake intermediate characters, so a frame strip of
+           the hook reads `08,800`, `04,-08`, `10,-08` — nonsense numbers on the
+           one board the whole claim rests on, held for seven frames each. A
+           real split-flap shows a flap EDGE-ON between characters, which is
+           unreadable rather than wrong. The cell now squashes to nothing and
+           carries no glyph until it lands. */
+        const roll = lf < 0 || lf >= 7 ? 0 : 1 - Math.abs(lf - 3.2) / 3.4;
+        const flip = roll;
+        const shown = lf < 0 || lf >= 6 ? ct : "";
         return (
           <div key={"sf" + i} style={{ position: "relative", width: cw, height: ch,
             borderRadius: 4 * s, background: c, border: `${2 * s}px solid ${dkh(c, 0.5)}`,
             display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden",
-            transform: `scaleY(${1 - flip * 0.34})` }}>
+            transform: `scaleY(${1 - flip * 0.94})` }}>
             <span style={{ ...mono(cell * 0.86 * s, 900), color: fg, lineHeight: 1 }}>{shown}</span>
             {/* the hinge line every split-flap cell has */}
             <div style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 2 * s,
@@ -650,11 +670,18 @@ export const BRAND_DROPS: Array<{ src: string; name: string; c: string }> = [
 ];
 
 export const RepoIcon: React.FC<{ x: number; y: number; i: number; s?: number; z?: number;
-  rot?: number; f?: number }> =
-  ({ x, y, i, s = 1, z = 60, rot = 0, f = 0 }) => {
+  rot?: number; f?: number;
+  /** 0 = full colour, 1 = priced and greyed out. The flip between them is a
+      LARGE AREA changing VALUE in one sample, which is the shape §1's table
+      rewards — and it is also the whole idea of the hook. */
+  dim?: number;
+  /** frame the FREE stamp hits, -1 = never */ free?: number }> =
+  ({ x, y, i, s = 1, z = 60, rot = 0, f = 0, dim = 0, free = -1 }) => {
   const D = 186 * s;
   const b = BRAND_DROPS[i];
   const edge = dkh(b.c, 0.52);
+  const gone = dim > 0.02;
+  const stamped = free >= 0 && f >= free;
   return (
     <div style={{ position: "absolute", left: x - D / 2, top: y - D / 2, width: D, height: D * 1.24,
       zIndex: z, transform: `rotate(${rot}deg)` }}>
@@ -663,16 +690,36 @@ export const RepoIcon: React.FC<{ x: number; y: number; i: number; s?: number; z
       {/* the coloured carrier — five different colours, so five tiles are never
           five identical white squares (the round-2 defect, restated) */}
       <div style={{ position: "absolute", inset: 0, borderRadius: 20 * s,
-        background: `linear-gradient(168deg, ${mxh(b.c, 0.26)} 0%, ${b.c} 48%, ${dkh(b.c, 0.34)} 100%)`,
-        border: `${6 * s}px solid ${edge}`, boxShadow: SH_D }} />
+        background: gone
+          ? `linear-gradient(168deg, #7E8288 0%, #55595F 48%, #33363B 100%)`
+          : `linear-gradient(168deg, ${mxh(b.c, 0.26)} 0%, ${b.c} 48%, ${dkh(b.c, 0.34)} 100%)`,
+        border: `${6 * s}px solid ${gone ? "#26292D" : edge}`, boxShadow: SH_D }} />
       {/* the mark, on white, filling most of the face — this is the whole point */}
       <div style={{ position: "absolute", left: D * 0.12, top: D * 0.10, width: D * 0.76,
-        height: D * 0.76, borderRadius: 14 * s, background: "#FFFFFF",
-        border: `${4 * s}px solid #E8E2D2`, display: "flex", alignItems: "center",
-        justifyContent: "center" }}>
+        height: D * 0.76, borderRadius: 14 * s, background: gone ? "#9A9DA2" : "#FFFFFF",
+        border: `${4 * s}px solid ${gone ? "#7E8288" : "#E8E2D2"}`, display: "flex",
+        alignItems: "center", justifyContent: "center" }}>
         <Img src={staticFile("logos/" + b.src)}
-          style={{ width: D * 0.52, height: D * 0.52, objectFit: "contain" }} />
+          style={{ width: D * 0.52, height: D * 0.52, objectFit: "contain",
+            filter: gone ? "grayscale(1) opacity(0.42)" : undefined }} />
       </div>
+      {/* ⭐ THE FREE STAMP. It does not fade on — it lands, oversized and
+          rotated, and settles. An arrival that appears is a state change. */}
+      {stamped && (() => {
+        const lf = f - free;
+        const k = E(lf, 0, 6, 1.55, 1, OUT);
+        return (
+          <div style={{ position: "absolute", left: D * 0.06, top: D * 0.30, width: D * 0.88,
+            height: D * 0.34, borderRadius: 8 * s, zIndex: 6,
+            transform: `rotate(-13deg) scale(${k})`, transformOrigin: "50% 50%",
+            opacity: E(lf, 0, 4, 0, 1, LIN),
+            border: `${6 * s}px solid #1E5C42`, background: hexa("#F7F2E4", 0.94),
+            display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ ...mono(D * 0.20, 900), color: "#1E5C42", letterSpacing: "0.14em" }}>
+              FREE</span>
+          </div>
+        );
+      })()}
       {/* the name strip: the mark says what it is ABOUT, this says what it IS */}
       <div style={{ position: "absolute", left: D * 0.06, top: D * 0.92, right: D * 0.06,
         height: D * 0.24, borderRadius: 8 * s, background: "#14171C",
@@ -1525,9 +1572,11 @@ export const Crew: React.FC<{ f: number; x: number; y: number; i: number; size: 
 export const Hero: React.FC<{ f: number; x: number; y: number; size: number; z?: number;
   /** 0..1 of the drive */ drive?: number; /** 0..1 of the load */ strain?: number;
   flip?: boolean; costume?: Record<string, number>; gaze?: number; cheer?: number;
-  /** how far the drive travels, px */ reach?: number; tint?: string }> =
+  /** how far the drive travels, px */ reach?: number; tint?: string;
+  /** 0..1 — `Mascot`'s own flinch lever, for a per-impact expression beat */
+  shock?: number; /** 0..1 — the scowl */ stern?: number; /** a scale pop */ pop?: number }> =
   ({ f, x, y, size, z = 56, drive = 0, strain = 0, flip = false, costume = { constr: 1 },
-     gaze = 0, cheer = 0, reach = 96, tint }) => {
+     gaze = 0, cheer = 0, reach = 96, tint, shock = 0, stern = 0, pop = 1 }) => {
   const tremble = strain > 0.5 ? Math.sin(f * 1.9) * 3.4 * (strain - 0.5) * 2 : 0;
   const sy = 1 - strain * 0.16;
   const sx = 1 + strain * 0.12;
@@ -1537,10 +1586,10 @@ export const Hero: React.FC<{ f: number; x: number; y: number; size: number; z?:
   return (
     <div style={{ position: "absolute", left: x - size / 2 + dx, top: y - size + dy,
       width: size, height: size, zIndex: z,
-      transform: `scale(${sx * (flip ? -1 : 1)}, ${sy}) rotate(${rot}deg)`,
+      transform: `scale(${sx * pop * (flip ? -1 : 1)}, ${sy * pop}) rotate(${rot}deg)`,
       transformOrigin: "50% 100%" }}>
       <Mascot lf={f} size={size} gaze={gaze} nodAmp={2.6 + strain * 2} nodSpeed={10}
-        cheer={cheer} tint={tint} {...costume} />
+        cheer={cheer} tint={tint} shock={shock} stern={stern} {...costume} />
     </div>
   );
 };

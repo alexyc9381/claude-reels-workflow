@@ -17,7 +17,7 @@ import {
   OutputRack, CommentField,
 } from "./BillProps";
 import { SetFor, placeFor } from "./BillSets";
-import { G_TOOLS, ToolTile, GoogleSprite, Spark } from "./BillGoogle";
+import { G_TOOLS, ToolTile, GoogleSprite, SparkGuy, Spark } from "./BillGoogle";
 
 /* ===========================================================================
    REEL 116 · "BILL" — THE SCENES.  Board: storyboards/116-bill.md.
@@ -269,8 +269,12 @@ export const S0: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 
         {/* ⭐ THE GOOGLE SPRITE at the foot — the cast is Google's now, not
             Claude's. He flinches on every card that lands. */}
-        <GoogleSprite f={f} x={846} y={772} size={260} i={0} kind="spark" z={90} at={-14}
-          loop={3} shock={lastHit !== undefined && f - lastHit < 12 ? 1 : 0} />
+        {/* ⭐ THE SPARK CHARACTER. Alex: *"i do like the gemini style character
+            here but maybe not so claude sprite shaped."* Tinting the house box
+            blue still read as Claude-in-blue, because the SILHOUETTE is the
+            identity. This one's outline IS the Gemini mark. */}
+        <SparkGuy f={f} x={846} y={784} size={278} i={0} z={90} at={-14} loop={3}
+          shock={lastHit !== undefined && f - lastHit < 12 ? 1 : 0} />
       </div>
     </Scene>
   );
@@ -439,8 +443,7 @@ export const S2: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
               in a cop hat, standing in front of a wall of Google tools — the
               same mismatch Alex named on the hook. `GoogleSprite` is the house
               body with a Google tint and the Gemini spark. */}
-          <GoogleSprite f={f} x={walk} y={p.horizon + 150} size={190} i={0} kind="spark"
-            z={64} at={2} loop={1} />
+          <SparkGuy f={f} x={walk} y={p.horizon + 150} size={196} i={0} z={64} at={2} loop={1} />
           <div style={{ position: "absolute", left: walk + 60, top: p.horizon - 74,
             width: 60, height: 72, zIndex: 66, borderRadius: 7,
             background: `linear-gradient(176deg, ${mxh("#5A4A3A", 0.20)} 0%, ${dkh("#5A4A3A", 0.34)} 100%)`,

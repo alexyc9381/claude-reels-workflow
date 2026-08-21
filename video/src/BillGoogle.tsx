@@ -176,28 +176,49 @@ export const G_TOOLS: GTool[] = [
   { name: "AI STUDIO",    mark: "logos/aistudio.png" },
   { name: "NOTEBOOKLM",   mark: "logos/notebooklm_mark.png" },
   { name: "FLOW",         mark: "logos/googleflow_light.png", dark: true },
-  { name: "OPAL" },
+  { name: "OPAL",         mark: "logos/opal.png" },
   { name: "ANTIGRAVITY",  mark: "logos/antigravity.png", dark: true },
-  /* the rest of Google's AI roster, all read live from labs.google */
+  /* ⭐ THE REST OF THE ROSTER, AND TWELVE OF THE TWENTY-FOUR NOW CARRY A REAL
+     ICON. Alex: *"you need the official logos for those tools, why are they just
+     text."* Fair — the first pass gave up after the four on gstatic. A second
+     hunt through each tool's OWN page found seven more:
+        opal.google/images/favicon.png            a purple pentagon
+        gstatic.com/labs-code/stitch/...192       a pill with two dots
+        flowmusic.app/icon-512.png                a gradient play mark
+        stax.withgoogle.com/favicon.svg           vector
+        learnyourway.withgoogle.com/static/...svg vector
+        gstatic.com/canvas/mixboard_favicon...    the Google Labs beaker
+        gstatic.com/_/bettany/...favicon-48       the beaker, tinted (Pomelli)
+     The SVGs were rasterised with headless Chrome (cairosvg has no libcairo
+     here) and the small favicons upscaled — they are flat vector-style marks,
+     so an upscale holds where a photographic one would not.
+
+     ⛔ AND FIVE GENUINELY HAVE NO PRODUCT ICON. Veo, Imagen and Genie are
+     MODELS: every DeepMind model page serves the shared Google DeepMind lockup,
+     not a per-model mark. Whisk sits on labs.google/fx and serves Flow's
+     favicon. Dreambeans and the three Science tools publish none at all. Those
+     keep their real NAME, which is how Google itself presents them — the same
+     call Opal forced before its pentagon turned up. */
   { name: "GEMINI",       mark: "logos/gemini.png" },
   { name: "JULES",        mark: "logos/jules.png" },
   { name: "COLAB",        mark: "logos/googlecolab.svg" },
+  { name: "STITCH",       mark: "logos/stitch.png", dark: true },
+  { name: "FLOW MUSIC",   mark: "logos/flowmusic.png", dark: true },
+  { name: "STAX",         mark: "logos/stax.png" },
+  { name: "LEARN YOUR WAY", mark: "logos/learnyourway.png" },
+  { name: "MIXBOARD",     mark: "logos/labsbeaker.png" },
+  { name: "POMELLI",      mark: "logos/pomelli.png" },
+  /* no published product mark — the real name is the mark */
   { name: "VEO" },
   { name: "IMAGEN" },
   { name: "WHISK" },
-  { name: "STITCH" },
-  { name: "POMELLI" },
-  { name: "MIXBOARD" },
-  { name: "STAX" },
-  { name: "VANTAGE" },
   { name: "GENIE" },
-  { name: "FLOW MUSIC" },
-  { name: "LEARN YOUR WAY" },
+  { name: "VANTAGE" },
+  { name: "DREAMBEANS" },
   { name: "LIT. INSIGHTS" },
   { name: "HYPOTHESIS GEN" },
   { name: "COMP. DISCOVERY" },
   { name: "AI EDGE" },
-  { name: "DREAMBEANS" },
 ];
 
 /** one tool tile: a real icon where Google publishes one, the real NAME where
@@ -252,6 +273,96 @@ export const ToolTile: React.FC<{ x: number; y: number; s: number; f: number; at
           width: w * 0.92 * xt, height: 11 * s, borderRadius: 3, background: hexa("#C44A3A", 0.82),
           transform: `translate(-50%,-50%) rotate(${a}deg)` }} />
       ))}
+    </div>
+  );
+};
+
+/* =========================================================================
+   ⭐⭐⭐ THE SPARK CHARACTER — a Google-SHAPED body, not a recoloured Claude.
+
+   Alex: *"i do like the gemini style character here but maybe not so claude
+   sprite shaped? idk what do you think"* — and he is right. Tinting the house
+   box blue and hanging a spark over it still reads as "Claude, in blue": the
+   SILHOUETTE is the identity, and the silhouette had not changed.
+
+   ⛔ This does NOT restyle the Mascot. The clay Claude is untouched and stays
+   exactly as it is in every Claude reel — this is a SECOND, separate character
+   that exists alongside it, which is the only reading of reel 46's rejection
+   that survives contact with a reel about someone else's product.
+
+   ⭐ THE BODY IS THE GEMINI SPARK. Four concave-sided points, eyes in the
+   middle of the mass, stub arms off the side points and stub legs under the
+   bottom one. It is unmistakably Google at thumbnail size, it shares the house
+   language (flat fill, hard shapes, black slit eyes, visible limbs), and its
+   outline cannot be confused with a box.
+   ====================================================================== */
+export const SparkGuy: React.FC<{ f: number; x: number; y: number; size: number;
+  i?: number; z?: number; at?: number; loop?: number; flip?: boolean;
+  cheer?: number; shock?: number; a?: string; b?: string }> =
+  ({ f, x, y, size, i = 0, z = 60, at = 0, loop, flip = false, cheer = 0, shock = 0,
+     a = "#4C8DFF", b = "#A48BFF" }) => {
+  const lf = f - at;
+  if (lf < -2) return null;
+  const inS = E(lf, 0, 8, 0, 1, BACK);
+  const sq = squash(lf, 6, 0.16, 3, 11);
+  const L = loop ?? i % 4;
+  const ph = i * 1.7;
+  let dx = 0, dy = 0, rot = 0, ch = cheer;
+  if (L === 0) { dx = Math.sin(f / 17 + ph) * size * 0.26;
+                 dy = -Math.abs(Math.sin(f / 8.5 + ph)) * size * 0.05;
+                 rot = Math.cos(f / 17 + ph) * 4; }
+  else if (L === 1) { rot = 6 + Math.sin(f / 6.2 + ph) * 9;
+                      dy = Math.abs(Math.sin(f / 6.2 + ph)) * size * 0.05; }
+  else if (L === 2) { const t = (f / 26 + ph) % 1; const j = Math.max(0, Math.sin(t * Math.PI));
+                      dy = -j * size * 0.22; ch = j > 0.55 ? 1 : ch; rot = Math.sin(f / 26 + ph) * 3; }
+  else { rot = Math.sin(f / 21 + ph) * 5; dy = Math.sin(f / 15 + ph) * size * 0.025; }
+  /* the four-point spark spins slowly on its own clock — the body IS the mark */
+  const spin = Math.sin(f / 34 + ph) * 5;
+  const id = `sg${i}_${Math.round(size)}`;
+  const eyeY = 52 + (shock ? -3 : 0);
+  const eyeH = shock ? 20 : ch ? 7 : 15;
+  return (
+    <div style={{ position: "absolute", left: x - size / 2 + dx, top: y - size + dy,
+      width: size, height: size, zIndex: z,
+      transform: `scale(${inS * sq}) rotate(${rot}deg) ${flip ? "scaleX(-1)" : ""}`,
+      transformOrigin: "50% 100%" }}>
+      <svg viewBox="0 0 100 100" width={size} height={size} style={{ overflow: "visible" }}>
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="0.8" y2="1">
+            <stop offset="0%" stopColor={a} /><stop offset="100%" stopColor={b} />
+          </linearGradient>
+        </defs>
+        {/* ⛔ THE LIMBS HAD TO GROW TO EXIST. At 5.5 units on a 100 viewBox they
+            were ~10px on a 190px sprite — under the 40px floor twice over, so
+            the character read as a floating star. Legs 9 wide, arms 15 long and
+            pushed clear of the body's side points. */}
+        {[38, 55].map((lx, j) => (
+          <rect key={"lg" + j} x={lx} y={76} width={9} height={26} rx={4}
+            fill={b} transform={`rotate(${Math.sin(f / 8 + j * 2 + ph) * (L === 0 ? 11 : 4)} ${lx + 4.5} 78)`} />
+        ))}
+        {[[12, -1], [88, 1]].map(([ax, dir], j) => (
+          <rect key={"ar" + j} x={(ax as number) - 7} y={45} width={15} height={9} rx={4.5}
+            fill={b} transform={`rotate(${(dir as number) * (16 + Math.sin(f / 7 + j * 3 + ph) * 20)} ${ax} 49)`} />
+        ))}
+        {/* ⭐ THE BODY: the Gemini spark itself */}
+        <g transform={`rotate(${spin} 50 50)`}>
+          <path d="M 50 2 C 54 30 70 46 98 50 C 70 54 54 70 50 98 C 46 70 30 54 2 50 C 30 46 46 30 50 2 Z"
+            fill={`url(#${id})`} />
+        </g>
+        {/* the underside, so the body has FORM — the house clay sprites all have
+            a shaded lower half and a flat star would sit apart from them */}
+        <g transform={`rotate(${spin} 50 50)`} clipPath="none">
+          <path d="M 50 98 C 46 70 30 54 2 50 C 30 52 62 56 98 50 C 70 54 54 70 50 98 Z"
+            fill="#000000" opacity={0.13} />
+        </g>
+        {/* the face — house language: two black slit eyes, no mouth */}
+        <rect x={40} y={eyeY - eyeH / 2} width={6} height={eyeH} rx={2.4} fill="#14121A" />
+        <rect x={54} y={eyeY - eyeH / 2} width={6} height={eyeH} rx={2.4} fill="#14121A" />
+        {/* a cheek lift when it cheers, so the emotion reads without a mouth */}
+        {ch > 0 && [37, 57].map((cx, j) => (
+          <circle key={"ck" + j} cx={cx} cy={62} r={3.4} fill="#FFFFFF" opacity={0.34} />
+        ))}
+      </svg>
     </div>
   );
 };

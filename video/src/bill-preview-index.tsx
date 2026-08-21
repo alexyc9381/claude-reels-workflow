@@ -3,7 +3,7 @@ import { AbsoluteFill, Composition, registerRoot, useCurrentFrame } from "remoti
 import { Bg, AssemblyCtx, HookHeader } from "./SlopKit";
 import { CamCtx } from "./BillWorld";
 import { CAM, GRADE, S0, S2 } from "./BillScenes";
-import { GoogleSprite, Spark, G_TOOLS, ToolTile, G_TINTS } from "./BillGoogle";
+import { GoogleSprite, SparkGuy, Spark, G_TOOLS, ToolTile, G_TINTS } from "./BillGoogle";
 import { SetFor } from "./BillSets";
 
 /* Reel 116 · PREVIEW ONLY. Alex: *"for now dont need to render full video just
@@ -54,6 +54,16 @@ const SpriteBoard: React.FC = () => {
         letterSpacing: "0.06em" }}>
         SAME HOUSE CLAY BODY · GOOGLE TINTS · A DIFFERENT IDENTITY LAYER ABOVE THE HEAD
       </div>
+      {/* ⭐ THE SPARK-BODIED CHARACTER, for the "not so Claude sprite shaped"
+          note — its silhouette is the Gemini mark, not a box. */}
+      {[0, 1, 2].map(j => (
+        <SparkGuy key={"sg" + j} f={f} x={330 + j * 190} y={1770}
+          size={j === 1 ? 230 : 186} i={j} z={60} at={j * 4} loop={j}
+          a={["#4C8DFF", "#7C6CFF", "#3FA9F5"][j]} b={["#A48BFF", "#C08BFF", "#8ED6FF"][j]} />
+      ))}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 1800, textAlign: "center",
+        fontFamily: "ui-monospace, Menlo", fontWeight: 800, fontSize: 26, color: "#1A1813",
+        letterSpacing: "0.04em" }}>E · SPARK BODY — the mark IS the character</div>
       {KINDS.map((k, i) => {
         const cx = 270 + (i % 2) * 540, cy = 700 + Math.floor(i / 2) * 620;
         return (
@@ -73,11 +83,7 @@ const SpriteBoard: React.FC = () => {
         );
       })}
       {/* the real Gemini spark, for reference against option A */}
-      <Spark x={540} y={1810} s={92} f={f} spin={0.4} pulse={1} z={90} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 1866, textAlign: "center",
-        fontFamily: "ui-monospace, Menlo", fontWeight: 700, fontSize: 20, color: "#8C877D" }}>
-        the real Gemini spark — Google's own AI symbol
-      </div>
+
     </AbsoluteFill>
   );
 };
