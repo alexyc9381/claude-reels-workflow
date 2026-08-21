@@ -17,6 +17,7 @@ import {
   OutputRack, CommentField,
 } from "./BillProps";
 import { SetFor, placeFor } from "./BillSets";
+import { G_TOOLS, ToolTile, GoogleSprite, Spark } from "./BillGoogle";
 
 /* ===========================================================================
    REEL 116 · "BILL" — THE SCENES.  Board: storyboards/116-bill.md.
@@ -152,124 +153,124 @@ const HEADER_SAFE = 118;
 const rollX = (rowH: number, cut: number, creep: number) => 506 - rowH / 2 + cut * creep;
 
 /* =========================================================================
-   S0 — THE BILL.  f0-48 (1.60s).  BEAT: HOOK.  Intensity 9.
+   S0 — HOOK · THE BILL vs THE TOOLS.  f0-48 (1.60s).  Intensity 10.
    VO: "If you're not using these 5 Google AI tools"
 
-   ⭐⭐⭐ ONE LOCKED FRAMING IN WHICH SOMETHING HAPPENS, not four posters
-   (ANIMATION-QUALITY §2 — reel 104's open went 9.97 -> 12.10 with FEWER cuts).
-   ⭐ ONE DOMINANT OBJECT ([[feedback_hook_simplicity]]): the bill. One
-   supporting element: the Claude at its foot. The world is behind it, held DOWN.
+   ⛔⛔⛔ REDONE COMPLETELY. Alex: *"the animation at 0 seconds hook needs to be
+   redone completely its not interesting enough nor hierarchical and not really
+   showing Google."* Three separate failures and the third is the root of the
+   other two:
 
-     before  f0   the bill is ALREADY colossal, already printed, already lit;
-                  five charge rows on it; the Claude tilted up at its foot.
-                  Settled, bright, no fade-in.
-     trigger f8   the stamp head SLAMS
-     travel  f8-20  a new charge prints and the WHOLE ROLL lurches 96px down —
-                  a real distance, not a state change (§11: under a third of the
-                  object's own size is not an action)
-     arrival f20  the roll's tail whips on a damped wave, dust, a ring at the
-                  head, the Claude ducks. Repeats at f26.
+     · NOT SHOWING GOOGLE — the old hook was a bill, a press and a clay Claude.
+       Nothing in it was Google. The reel is about GOOGLE'S tools and the open
+       never said so, which is `feedback_real_marks_are_the_props` exactly: the
+       real marks ARE the props.
+     · NOT HIERARCHICAL — one cream mass filling the frame with a small sprite
+       beside it. A big pale rectangle ranks nothing.
+     · NOT INTERESTING — one stamp coming down twice. §2: a scene needs ONE
+       THING TO HAPPEN with a beginning, a middle and an end.
 
-   ⛔ THE FRAME-0 GATE. Panel luma >= 140 is carried by the CREAM BILL — which
-   is the subject — plus the floor pool. The palette's dark stop is NOT touched
-   (§8's restored rule). The bill's head block is one CONTIGUOUS cream mass of
-   ~24% of the panel, not three cards (reel 109 warned at 8.4% doing exactly
-   the wrong thing).
-   ⛔ PROPORTION (§11): the roll is 640px = 63% of panel width, so a silhouette
-   can still form. Past ~85% it stops reading as itself.
+   ⭐ THE NEW IMAGE IS THE WHOLE CLAIM IN ONE PICTURE: the bill hangs, and
+   GOOGLE'S OWN TOOL CARDS FLY IN AND KNOCK THE CHARGES OFF IT. Every element
+   is the subject's own object — five real Google marks, the four-colour bar,
+   the Gemini spark, and the bill.
+
+     before  f0   the bill is already there, five charges printed, and the FIRST
+                  card is already in flight and large. Settled and legible on
+                  the one frame guaranteed to be seen.
+     trigger f5   card 1 hits
+     travel  each card crosses ~640px of frame — a real distance, not a state
+                  change (§11)
+     arrival f5 / f16 / f27 / f37  the struck row BURSTS: it tears off the bill,
+                  the strip tumbles away, dust, a ring, and the bill's remaining
+                  length snaps upward
+
+   ⛔ HIERARCHY IS THE SPREAD, NOT THE MEAN (§11). The bill is the biggest thing
+   and near-white; the cards are the most SATURATED things and they are the ones
+   moving. Frame 0's cream plate is the bill's head block, and the >=140 luma
+   comes from it — no palette value is touched.
    ====================================================================== */
 export const S0: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const HV = HOOK_V[v];
   const p = placeFor("hall");
-  /* the frame shakes on each slam — a big mass landing costs the camera */
-  const sh = HV.hits.reduce((a, k) => {
-    const s = shake(f, k + 10, 10, 8); return { x: a.x + s.x, y: a.y + s.y };
+  /* four cards, four impacts, spread across the full 48 frames */
+  const HIT = v === "amber" ? [7, 18, 29, 39] : v === "steel" ? [4, 15, 26, 36] : [5, 16, 27, 37];
+  const sh = HIT.reduce((a, k) => {
+    const q = shake(f, k, 11, 8); return { x: a.x + q.x, y: a.y + q.y };
   }, { x: 0, y: 0 });
-  const lastHit = HV.hits.filter(k => f >= k + 10).slice(-1)[0];
+  const lastHit = HIT.filter(k => f >= k).slice(-1)[0];
   return (
-    <Scene p={p} slug="THE LONG BILL" push={push(v, dur, 1.052)} vig={0.30}>
+    <Scene p={p} slug="THE LONG BILL" push={push(v, dur, 1.048)} vig={0.28}>
       <div style={{ position: "absolute", inset: 0, transform: `translate(${sh.x}px, ${sh.y}px)` }}>
         <SetFor k="hall" f={f} lit={1} t={f * 0.5} rakeRate={5.4} />
 
-        {/* ⛔⛔ THE LAYOUT IS ARITHMETIC, NOT TASTE — the first pass got all
-            three of these wrong and the contact sheet showed it instantly.
-            · the HEAD BLOCK is the frame-0 claim plate and `BillRoll` draws it
-              at top:-272, so the roll's y must be `wantedHeadTop + 272` or the
-              plate renders ABOVE the panel and frame 0 states nothing.
-            · at rowH 150 the mark tile is 150*0.68 = 102px, over the 96px mark
-              floor. At 132 it was 90px, under it.
-            · the roll is 560px = 55% of panel width at x 118..678, which leaves
-              334px of clear air for the Claude. Past ~85% there is no room for
-              a silhouette to form (§11, reel 110's barbell). */}
-        {/* ⛔⛔ THE VERTICAL STACK IS A BUDGET, AND `HookHeader` SPENDS THE
-            FIRST ~95px OF IT. The first pass parked the stamp head at y=-14 and
-            it rendered ENTIRELY BEHIND THE HEADER PILL — ANIMATION-QUALITY §6's
-            second failure mode (*"it is behind something"*), which survives a
-            frame-0 check because the object is drawn, just not seen.
-              header pill   0..95
-              stamp head   98..226   (128 tall)
-              bill head   238..388   (headH 150, short so rows fit)
-              rows        388..792   (rowH 145 -> mark 98px, over the 96 floor)
-            2.8 rows visible and the roll runs off the bottom edge, which is what
-            says LONG. */}
-        {/* ⭐ THE EVENT IS THE STAMP LANDING. A `steps` paper-advance was built
-            and measured and then REMOVED: cascading the rows opened a gap
-            between the header and the first charge, and advancing the whole
-            roll fed the document out of the bottom of the panel by the second
-            strike. What actually reads is a ~110px PAID ring appearing at full
-            size on cream paper — a large, high-contrast, discrete change, which
-            is the shape §1's table rewards — plus a 30px recoil. `a rebuild is
-            not automatically an improvement` (§5), and this one was measured
-            both ways before it was thrown away. */}
-        {/* ⛔ MOVING THE ROLL DOWN 60px TO CLEAR THE PRESS COST 3 LUMA AND FRAME 0
-            FELL TO 137.2 AGAINST THE 140 BAR. ⛔ The banned fix is lifting the
-            shading — that is precisely the move that produced the ten-reel pale
-            run (§8). The subject gets BIGGER instead: 560 -> 620 puts another
-            ~31,000px of cream paper in frame, which is 3.9% of the panel at
-            ~245 luma against a ~60 room. Still 61% of panel width, so the
-            silhouette still has air on both sides. */}
-        <BillRoll x={104} y={470} w={620} f={f} rows={rowsFor(0)} rowH={145} z={44}
-          dir="v" creep={0.30} jolt={HV.hits[0] + 10} head headH={150}
-          stampsFor={i => (i === 0 ? [HV.hits[0] + 10] : i === 2 ? [HV.hits[1] + 10] : [])} />
+        {/* ⭐ THE BILL — the biggest, palest mass, and it gets SHORTER as the
+            cards land. Its head block is the frame-0 claim plate. */}
+        {/* ⛔ THE ROWS HAVE TO ACTUALLY LEAVE. The first pass drew loose grey
+            rectangles tumbling NEXT to the bill while the bill itself stayed the
+            same length — so nothing was being taken away, which is the entire
+            claim. `BillRoll` already cuts rows and closes the paper up; the
+            strike frames are passed straight into it. */}
+        {/* ⛔ frame-0 luma 135.6 against the 140 bar after the narrowing. §8's
+            other remedy is to brighten the SUBJECT, so the bill's head block —
+            which is the claim plate and the brightest contiguous cream in the
+            frame — grows 148 -> 196 and the roll widens 462 -> 508. The hall
+            keeps its dark corners: p90-p10 spread stays above 200. */}
+        <BillRoll x={96} y={452} w={508} f={f} rowH={128} z={44}
+          rows={ROW_DEFS.map((r, i) => ({ ...r, cut: i < HIT.length ? HIT[i] : undefined }))}
+          dir="v" creep={0.24} jolt={HIT[0]} head headH={196}
+          stampsFor={i => (i === 0 ? [-1] : [])} />
 
-        {/* ⛔⛔ THE DIE USED TO LAND ON TOP OF "SUBSCRIPTIONS". At y=98 with a
-            96px drop the head block reached 322 and the bill's head block starts
-            at 300 — so the reel's frame-0 claim plate was covered by the villain
-            every time it struck, which is the one thing that must stay readable.
-            ⭐ And the fix is also the correct mechanism: a press strikes where
-            the paper ENTERS and the sheet feeds out from under it. Head at rest
-            64..192, at full drop 120..248 with the die face reaching 278; the
-            bill's head block starts at 298 and "SUBSCRIPTIONS" at 313. Twenty
-            pixels of clearance, checked by arithmetic rather than by eye —
-            the first two attempts both LOOKED clear at rest and struck through
-            the word. */}
-        <StampHead x={398} y={64} w={470} f={f} hits={HV.hits.map(k => k + 10)} z={62} drop={56} />
+        {/* ⭐⭐ THE FOUR GOOGLE CARDS, flying in from the right and STRIKING the
+            bill. This is the Google that the old hook did not have: four real
+            marks, each on its own four-colour card, crossing 640px of frame. */}
+        {HIT.map((k, i) => {
+          const t = E(f, k - 13, k, 0, 1, IN_Q);
+          const done = f > k + 5;
+          if (f < k - 13) return null;
+          /* ⛔ THE FOUR CARDS LANDED IN A VERTICAL COLUMN and read as a pile.
+             They now settle in a ROW along the top — a shelf of Google tools
+             above the bill they just shortened, which states "these five" AND
+             leaves the bill unobstructed. */
+          /* ⛔ y1 = 262 at s=0.60 puts the card TOP at 262 - 262*0.60 = 105,
+             inside the header band. HEADER_SAFE plus a card height clears it. */
+          const x0 = 1150 + i * 60, x1 = 292 + i * 172;
+          const y0 = 268 + i * 40, y1 = HEADER_SAFE + 186;
+          const x = done ? x1 : x0 + (x1 - x0) * t;
+          const y = done ? y1 : y0 + (y1 - y0) * t;
+          const settle = done ? squash(f - k, 7, 0.20, 3, 12) : 1;
+          return (
+            <div key={"gc" + i} style={{ position: "absolute", left: 0, top: 0, zIndex: 68 + i,
+              transform: `rotate(${done ? (i - 1.5) * 3 : -26 + t * 26}deg)`,
+              transformOrigin: `${x}px ${y}px` }}>
+              <ToolCard x={x} y={y} s={0.60} i={i} f={f} at={k - 13} z={68 + i} />
+              {!done && (
+                /* the trail, so a fast object reads as fast */
+                <div style={{ position: "absolute", left: x + 60, top: y - 80, width: 260 * (1 - t),
+                  height: 10, borderRadius: 5, background: hexa(p.key, 0.42 * (1 - t)) }} />
+              )}
+            </div>
+          );
+        })}
 
-        {/* the arrivals cost something */}
-        {HV.hits.map((k, i) => (<React.Fragment key={"hk" + i}>
-          <Puff x={398} y={272} f={f} at={k + 10} n={16} s={1.5} z={66} up={0.4} c="#E8D8BC" />
-          <Ring x={398} y={276} f={f} at={k + 10} r={260} c={p.key} z={65} />
+        {/* the strike costs something: the row tears off and tumbles away */}
+        {HIT.map((k, i) => (<React.Fragment key={"hx" + i}>
+          <Puff x={336} y={452 + i * 116} f={f} at={k} n={22} s={1.7} z={78} c="#E8D8BC" up={0.5} />
+          <Ring x={336} y={456 + i * 116} f={f} at={k} r={330} c={p.key} z={77} w={10} />
+          {/* ⛔ the hand-drawn debris is gone: `BillRoll` tumbles the REAL row,
+              with its real mark and figure on it, which is the object that was
+              actually taken away. Loose grey rectangles were a container. */}
         </React.Fragment>))}
 
-        {/* THE SUBJECT IS IN FRAME 0 (THE-OPEN law 2: characters stop scrolls),
-            and ONE supporting element only ([[feedback_hook_simplicity]] — the
-            thing to reduce is IDEAS, not layers). He ducks on each slam. */}
-        {/* ⛔ z=90, NOT 70. `NearStack` paints the near plane at z=87, so at 70
-            his legs were behind a pallet and he rendered as a floating orange
-            bar. The near mass belongs BEHIND the cast, not over it. */}
-        {/* ⭐ BIGGER. Alex: *"the beginning needs to have bigger claude sprite."*
-            214 -> 286px is 36% of the panel height against a 620px bill, which
-            keeps the bill the hero while making the character the second thing
-            you see rather than the fifth. THE-OPEN law 2: characters stop
-            scrolls, and a small one does not. */}
-        <Crew f={f} x={834} y={784} i={2} size={286} z={90} at={-14} loop={3}
-          shock={lastHit !== undefined && f - lastHit < 12 ? 1 : 0} />
+        {/* ⭐ THE GEMINI SPARK — Google's own AI symbol, big, and it is the
+            brightest single object in the frame. It pulses on every strike. */}
+        <Spark x={886} y={186} s={188} f={f} z={80} spin={0.5} pulse={1} />
 
-        {/* the mark, big and early — the audience filter, never on a face.
-            ⛔ x=890 not 906: at the scene's end push (1.064) the visible band is
-            30..982, and a 122px emblem at 906 would clip. */}
-        <MarkCast x={882} y={186} s={122} z={74} f={f} spin={0.5} o={0.92} />
+        {/* ⭐ THE GOOGLE SPRITE at the foot — the cast is Google's now, not
+            Claude's. He flinches on every card that lands. */}
+        <GoogleSprite f={f} x={846} y={772} size={260} i={0} kind="spark" z={90} at={-14}
+          loop={3} shock={lastHit !== undefined && f - lastHit < 12 ? 1 : 0} />
       </div>
     </Scene>
   );
@@ -359,77 +360,92 @@ export const S1: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 };
 
 /* =========================================================================
-   S2 — TWENTY SHIPPED.  f137-220 (2.77s).  BEAT: SETUP.  Intensity 7.
+   S2 — TWENTY-FOUR SHIPPED.  f137-220 (2.77s).  BEAT: SETUP.  Intensity 8.
    VO: "So Google quietly shipped over 20 of these tools and I tested all of
         them,"
 
-   ⭐ THE VERBS ARE **SHIPPED** and **TESTED**. So: things ARRIVE (24 tiles
-   sliding onto a wall) and then something SIFTS them (a Claude walking the
-   wall X-stamping as he passes — a job with an object, not a bob).
+   ⛔⛔ THE WALL IS REAL NOW. Alex, twice: *"the google logo is still at 6
+   seconds, use the other logos as replacement, there should be like 20 other
+   google ai tool logos you can use."* There are — and the first two versions
+   put a generic Google `G` on every tile, which says GOOGLE and never says
+   TOOLS.
 
-   ⛔ THE TILES ARE UNNAMED, carrying only the real Google mark. There is no
-   sourceable roster of 20 named Labs products, so the COUNT is the claim and
-   no identity is asserted. `feedback_real_marks_are_the_props` cuts the other
-   way here: a mark you cannot source is worse than no mark.
+   ⭐ THE ROSTER IS READ LIVE FROM `labs.google` (see `G_TOOLS` in
+   BillGoogle.tsx): AI Studio · Gemini Notebook · Flow · Opal · Antigravity ·
+   Gemini · Jules · Colab · Veo · Imagen · Whisk · Stitch · Pomelli · Mixboard ·
+   Stax · Vantage · Genie · Flow Music · Learn Your Way · Literature Insights ·
+   Hypothesis Generation · Computational Discovery · AI Edge · Dreambeans.
+   **Twenty-four**, which is what "over 20" actually looks like.
+
+   ⛔ EIGHT OF THEM HAVE AN ICON AND SIXTEEN DO NOT. Google publishes marks for
+   AI Studio, NotebookLM, Gemini and Jules on `gstatic.com/images/branding/
+   productlogos/`, Flow's is in `labs.google/fx/icons/`, Antigravity's is its
+   channel avatar, and Colab's is in the repo. The rest ship as a WORDMARK, so
+   the tile carries the tool's real NAME — inventing an icon for Stitch or
+   Pomelli would be worse than either. Every tile also carries the four-colour
+   bar, so the wall says GOOGLE without a word on it.
+
+   ⭐ AND THE FIVE SURVIVORS ARE THE FIVE THE REEL IS ABOUT, in VO order, so
+   the sift's payoff and S3's card rail are the same five objects.
    ====================================================================== */
 export const S2: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("lab");
   const off = v === "amber" ? 6 : v === "steel" ? -4 : 0;
-  /* 24 tiles, 4 ranks of 6, arriving across the FULL duration */
   const COLS = 6, ROWS = 4;
-  const at = (i: number) => 4 + off + i * 1.9;
-  /* the sift: 19 struck, 5 left — he walks left to right */
-  const KEEP = [3, 8, 12, 17, 21];
-  const walk = E(f, 30, 78, 96, 900, LIN);
+  const at = (i: number) => 3 + off + i * 1.5;
+  /* the five that survive are G_TOOLS[0..4] — the subject tools, in VO order */
+  /* ⛔ the survivors were scattered into two clusters and stopped reading as a
+     SET. Spread across the middle two ranks, one per column pair, so the five
+     that live are legible as five before S3 collects them onto the rail. */
+  const KEEP = [7, 9, 11, 14, 16];
+  const order = (i: number) => {
+    const k = KEEP.indexOf(i);
+    if (k >= 0) return k;                       /* a survivor -> its subject tool */
+    const rest = i - KEEP.filter(q => q < i).length;
+    return 5 + (rest % (G_TOOLS.length - 5));   /* everything else -> the roster */
+  };
+  const walk = E(f, 26, 74, 118, 862, LIN);
   return (
     <Scene p={p} slug="GOOGLE LABS" push={push(v, dur, 1.070)} vig={0.34}>
       <div style={{ position: "absolute", inset: 0 }}>
         <SetFor k="lab" f={f} lit={1} t={f * 0.7} rakeRate={4.2} />
 
-        {/* the wall the tiles seat into — a real board with a frame and rails */}
-        <div style={{ position: "absolute", left: 66, top: 132, width: 880, height: 400, zIndex: 28,
+        {/* the board the tiles seat into — a real rack with rails */}
+        <div style={{ position: "absolute", left: 52, top: 128, width: 908, height: 410, zIndex: 28,
           borderRadius: 8, background: `linear-gradient(176deg, ${dkh("#2A3E4C", 0.06)} 0%, ${dkh("#2A3E4C", 0.26)} 100%)`,
           border: `7px solid ${dkh("#2A3E4C", 0.34)}` }}>
           {[0, 1, 2, 3].map(i => (
-            <div key={"wr" + i} style={{ position: "absolute", left: 10, right: 10, top: 22 + i * 96,
+            <div key={"wr" + i} style={{ position: "absolute", left: 10, right: 10, top: 24 + i * 98,
               height: 6, background: hexa("#9AC4D8", 0.20) }} />
           ))}
         </div>
 
-        {/* ⭐ THE SURVIVORS CARRY THE FIVE SUBJECT MARKS, in VO order, so the
-            wall's payoff and S3's card rail are the same five objects. Two more
-            real Google AI marks (Gemini, Colab) sit among the struck tiles so
-            the wall reads as GOOGLE'S AI TOOLS rather than as anonymous
-            squares; everything else stays unnamed, because no roster of twenty
-            named Labs products is sourceable. */}
         {Array.from({ length: COLS * ROWS }, (_, i) => {
           const c = i % COLS, r = Math.floor(i / COLS);
-          const x = 148 + c * 144, y = 196 + r * 96;
-          const survivor = KEEP.indexOf(i);
-          const struck = survivor >= 0 ? undefined : 34 + off + (c * 8 + r * 3);
-          const MARK = survivor >= 0
-            ? R.tools[survivor].mark
-            : i === 1 ? "logos/googlegemini.svg"
-            : i === 14 ? "logos/googlecolab.svg"
-            : undefined;
+          const x = 130 + c * 152, y = 192 + r * 98;
+          const survivor = KEEP.includes(i);
+          const struck = survivor ? undefined : 32 + off + (c * 7 + r * 3);
           return (
-            <LabTile key={"lt" + i} x={x} y={y} s={0.86} f={f} at={at(i)} struck={struck}
-              z={40 + r} seed={i * 7 + 3} mark={MARK}
-              dark={survivor >= 0 ? !!R.tools[survivor].dark : false} />
+            <ToolTile key={"tt" + i} x={x} y={y} s={0.80} f={f} at={at(i)}
+              struck={struck} z={40 + r} seed={i} t={G_TOOLS[order(i)]} />
           );
         })}
 
         {/* ⭐ THE SIFTER — he WALKS the wall carrying a stamp, and the X-marks
             land where he has been. A job with an object beats any idle. */}
         <Cam x={0} y={0} z={64}>
-          <Crew f={f} x={walk} y={p.horizon + 150} i={8} size={196} z={64} at={2} loop={1} />
-          {/* the stamp in his hand — 46px+, so it survives the downsample */}
-          <div style={{ position: "absolute", left: walk + 62, top: p.horizon - 76,
-            width: 62, height: 74, zIndex: 66, borderRadius: 7,
+          {/* ⛔ THE CAST IN A GOOGLE SCENE IS GOOGLE'S. This was the clay Claude
+              in a cop hat, standing in front of a wall of Google tools — the
+              same mismatch Alex named on the hook. `GoogleSprite` is the house
+              body with a Google tint and the Gemini spark. */}
+          <GoogleSprite f={f} x={walk} y={p.horizon + 150} size={190} i={0} kind="spark"
+            z={64} at={2} loop={1} />
+          <div style={{ position: "absolute", left: walk + 60, top: p.horizon - 74,
+            width: 60, height: 72, zIndex: 66, borderRadius: 7,
             background: `linear-gradient(176deg, ${mxh("#5A4A3A", 0.20)} 0%, ${dkh("#5A4A3A", 0.34)} 100%)`,
             transform: `rotate(${-16 + Math.sin(f / 6.2) * 22}deg)` }}>
-            <div style={{ position: "absolute", left: 8, bottom: -12, width: 46, height: 20,
+            <div style={{ position: "absolute", left: 8, bottom: -12, width: 44, height: 20,
               borderRadius: 3, background: dkh(RED, 0.16) }} />
           </div>
         </Cam>
@@ -439,30 +455,15 @@ export const S2: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           width: 220, height: 128, zIndex: 46, borderRadius: 6,
           background: `linear-gradient(178deg, ${mxh("#3A4650", 0.18)} 0%, ${dkh("#3A4650", 0.34)} 100%)` }}>
           {[0, 1, 2].map(i => (
-            <div key={"tt" + i} style={{ position: "absolute", left: 14 + i * 66, top: 16, width: 54,
+            <div key={"tr" + i} style={{ position: "absolute", left: 14 + i * 66, top: 16, width: 54,
               height: 54, borderRadius: 9, background: "#FFFFFF", opacity: 0.86 }} />
           ))}
         </div>
-
-        <MarkCast x={906} y={146} s={104} z={74} f={f} spin={0.45} o={0.86} />
       </div>
     </Scene>
   );
 };
 
-/* =========================================================================
-   S3 — THESE FIVE.  f220-312 (3.07s).  BEAT: SETUP-2.  Intensity 8.
-   VO: "but these 5 are the ones that actually replace your paid tools."
-
-   ⭐ THE VERB IS **REPLACE**, and the noun is **THESE FIVE**. So the five clean
-   tiles physically LEAVE the wall and land as five named cards on a lit rail,
-   growing as they come — and the bill's counter is SET to 5 at the same moment,
-   which is the reel's number spine starting.
-
-   ⛔ SPRITE/CARD PITCH IS ARITHMETIC. Five cards at s=0.86 are 181px wide on a
-   ~168px pitch would merge; the rail is 880px wide, so pitch = 880/6 = 147 —
-   too tight. Cards sit at s=0.78 (164px) on a 176px pitch across 1012.
-   ====================================================================== */
 export const S3: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("rail");

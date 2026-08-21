@@ -112,7 +112,17 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         <Flood x={128} y={26} s={1.1} on={lit * 0.62} len={640} spread={210} c={p.key} />
         {/* ⭐ a PRACTICAL, not a lifted dark stop — §8's stated remedy when a
             set is too dim: add a light or brighten the subject. */}
-        <Pool x={506} y={p.horizon + 156} w={1150} c={p.key} o={0.54 * lit} z={19} h={460} />
+        {/* ⛔ THE HOOK WAS "NOT HIERARCHICAL" AND THIS POOL WAS PART OF WHY: a
+            1150px wash under a cream bill lit the whole floor, so nothing
+            ranked. Hierarchy is the SPREAD (§11) — the pool is now tight under
+            the bill and the rest of the hall keeps its dark. */}
+        {/* ⛔ AND THEN IT WENT TOO FAR THE OTHER WAY: at 780px the hook's frame-0
+            luma fell to 132.4 against the 140 bar. §8's remedy is a PRACTICAL or
+            a brighter SUBJECT, never a lifted dark stop — so the pool widens
+            back toward the cast and a second flood picks up the tool shelf.
+            The hall's own dark corners are untouched, so the spread survives. */}
+        <Pool x={392} y={p.horizon + 150} w={980} c={p.key} o={0.56 * lit} z={19} h={440} />
+        <Flood x={560} y={-16} s={1.5} on={lit * 0.86} len={760} spread={290} c={p.key} />
         {/* ⛔ NO SPOOL RIG HERE. Three dark-centred discs across the top of the
             hook read as GOOGLY EYES on the contact sheet — the exact class of
             defect `feedback_green_gate_wrong_way` exists for: every gate was
