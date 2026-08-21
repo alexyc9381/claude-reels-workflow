@@ -43,18 +43,47 @@ export type Variant = "market" | "amber" | "steel";
     Targets: mean Hamming >= 14 of 64, min >= 10. */
 export const CAM: Record<Variant, { dx: number; dy: number; s: number; rot: number }> = {
   market: { dx: -18, dy: 26, s: 1.054, rot: -0.7 },
-  amber:  { dx: -92, dy: -68, s: 1.204, rot: 1.7 },
-  steel:  { dx: 52, dy: 16, s: 1.126, rot: 1.3 },
+  amber:  { dx: -66, dy: -44, s: 1.148, rot: 1.6 },
+  steel:  { dx: 46, dy: 20, s: 1.108, rot: -1.4 },
 };
 
-/** a global grade per cut, on the PANEL CONTENTS only. A dHash compares
-    ADJACENT-PIXEL LUMA, so a brightness shift moves nothing — it is CONTRAST
-    and GAMMA that flip gradient signs near flat areas. */
+/** ⛔⛔⛔ A TRIAL CUT MAY NEVER RECOLOUR THE CLAUDE. Alex, on reel 115's amber
+    cut: *"don't have the amber version of the Claude sprites — it shouldn't
+    change the colour of the sprites."* He is right, and it collides with a
+    delivery gate that was already standing: **"every Claude the one house
+    clay."** The grade is a CSS filter on the whole panel, so a `hue-rotate` on
+    the SET drags the cast with it — amber ran -21deg and shipped an off-brand
+    mascot in a third of the deliverables.
+
+    ⭐ THE RULE: **HUE IS NOT A VARIANT LEVER. `hue-rotate` and `saturate` are
+    banned from GRADE** — both move the clay. Only CONTRAST and BRIGHTNESS vary,
+    which change punch without moving a single hue, and `saturate` is held at
+    the house 1.26 for all three cuts.
+
+    ⛔ That costs pixel separation, so it has to be bought back somewhere the
+    mascot does not live — see CAM above (bigger offsets) and the per-cut RAKE
+    speed, which is the highest-ranked lever in TRIAL-CUTS.md anyway. */
 export const GRADE: Record<Variant, string> = {
-  market: "contrast(1.015) saturate(1.26) brightness(1.000) hue-rotate(-2deg)",
-  amber:  "contrast(1.205) saturate(1.44) brightness(0.968) hue-rotate(-21deg)",
-  steel:  "contrast(1.050) saturate(1.34) brightness(0.990) hue-rotate(17deg)",
+  market: "contrast(1.015) saturate(1.26) brightness(1.000)",
+  amber:  "contrast(1.150) saturate(1.26) brightness(0.965)",
+  /* ⛔ 0.945/1.045 lifted the black point to p10 36.0 and FAILED look_audit's
+     BODY_BLACK (bar 35) — dropping contrast and raising brightness BOTH lift
+     blacks. Now that grade is known to buy ~1 bit of dHash (docs/TRIAL-CUTS §6)
+     it is set for the LOOK alone: steel is the BRIGHT, CRISP cut. p10 -> 28.1. */
+  steel:  "contrast(1.030) saturate(1.26) brightness(1.075)",
 };
+
+/** ⭐ THE RAKE SPEED IS THE HIGHEST-RANKED VARIANT LEVER (TRIAL-CUTS.md) and it
+    never touches the cast — a travelling band sweeps different pixels per cut
+    while every sprite stays house clay. This multiplies each scene's own rate. */
+export const RAKE_K: Record<Variant, number> = { market: 1.0, amber: 1.66, steel: 0.58 };
+/** ⭐ A PHASE OFFSET ON THE RAKE AND ON THE PARALLAX. Speed alone still lets two
+    cuts coincide on any given frame; an offset guarantees every band sits
+    somewhere different in EVERY frame, which is what a dHash actually samples.
+    Neither touches a sprite. Added after banning hue left market/amber at a
+    dHash of 9 against a bar of 10, on a frame at 44s no HOOK can reach. */
+export const RAKE_X0: Record<Variant, number> = { market: -260, amber: 260, steel: 780 };
+export const PAR_X: Record<Variant, number> = { market: 0, amber: 940, steel: -620 };
 
 type SP = { v: Variant; dur: number };
 
@@ -223,7 +252,7 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="THE METERED STREET" push={[0, dur, 1.055]} vig={0.32}>
       <Cam z={5} s={B ? 1.26 : 1.0} y={B ? -46 : 0} x={B ? 18 : 0}>
-        <SetFor k="street" f={f} t={f * 1.5} rakeRate={6.1} />
+        <SetFor k="street" f={f} t={f * 1.5} rakeRate={6.1 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
 
         {/* ⭐⭐ THE PRICE GANTRY — the claim plate, and the running total of the
             five tags below it. The figure is the VO's own spoken words.
@@ -380,7 +409,7 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="THE FREE MARKET · THE GATE" push={[0, dur, 1.052]} vig={0.54}>
       <Cam z={5}>
-        <SetFor k="arch" f={f} t={f * 1.1} rakeRate={4.4} />
+        <SetFor k="arch" f={f} t={f * 1.1} rakeRate={4.4 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
 
         {/* ⛔ BOTTOM-HEAVY IS A COMPOSITION DEFECT, NOT A PROP SHORTAGE (reel
             112). The contact sheet showed the cast in the lowest third with
@@ -604,7 +633,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 1 · FREE FOR DEV" push={[0, dur, 1.068]} vig={0.56}>
       <Cam z={5}>
-        <SetFor k="holes" f={f} t={f * 0.9} rakeRate={5.0} />
+        <SetFor k="holes" f={f} t={f * 0.9} rakeRate={5.0 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
 
         <PigeonWall x={132} y={158} w={760} h={332} f={f} z={30} eject={EJECT} c="#2A5548" />
 
@@ -679,7 +708,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 1 · THE BAYS" push={[0, dur, 1.058]} vig={0.56}>
       <Cam z={5}>
-        <SetFor k="holes" f={f} t={f * 0.9 + 400} rakeRate={8.0} />
+        <SetFor k="holes" f={f} t={f * 0.9 + 400} rakeRate={8.0 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* ⛔ THE OPENING 40 FRAMES WERE DEAD. Alex: *"at 11 seconds the
             animation is static and does nothing."* He is right and the cause is
             structural: re-cutting the three swaps onto their spoken words
@@ -744,7 +773,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 1 · THE TILL" push={[0, dur, 1.082]} vig={0.46}>
       <Cam z={5}>
-        <SetFor k="till" f={f} t={f * 0.8} rakeRate={3.4} />
+        <SetFor k="till" f={f} t={f * 0.8} rakeRate={3.4 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* ⭐ THE IMPULSE RACK. A till has product ON it, and this reel's palest
             scene (sat 18.3% against a 34% bar) needed COLOUR IN THE SUBJECT —
             not a lifted palette, which is the one move §8 exists to ban. Twelve
@@ -900,7 +929,7 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 2 · PUBLIC APIS" push={[0, dur, 1.056]} vig={0.56}>
       <Cam z={5}>
-        <SetFor k="patch" f={f} t={f * 1.0} rakeRate={8.4} />
+        <SetFor k="patch" f={f} t={f * 1.0} rakeRate={8.4 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <JackWall x={70} y={196} w={872} h={352} f={f} z={28} c="#604724" live={LIVE} rows={7} spread={19} />
         {CORDS.map((c, i) => (
           <Cord key={"cd" + i} f={f} at={c.at} x0={c.x0} y0={c.y0} x1={c.x1} y1={c.y1}
@@ -964,7 +993,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 2 · THE CATEGORIES" push={[0, dur, 1.070]} vig={0.56}>
       <Cam z={5}>
-        <SetFor k="patch" f={f} t={f * 1.0 + 260} rakeRate={6.0} />
+        <SetFor k="patch" f={f} t={f * 1.0 + 260} rakeRate={6.0 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* the hopper the drums pour into — the OUTPUT half of the mechanism */}
         <div style={{ position: "absolute", left: 96, right: 96, top: p.horizon + 26, height: 132,
           zIndex: 34, borderRadius: "0 0 22px 22px",
@@ -1063,7 +1092,7 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 3 · SCRAPLING" push={[0, dur, 1.092]} vig={0.60}>
       <Cam z={5}>
-        <SetFor k="check" f={f} t={f * 1.2} rakeRate={6.6} />
+        <SetFor k="check" f={f} t={f * 1.2} rakeRate={6.6 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* the supply conduit run the meter hangs off — the SOURCE */}
         <div style={{ position: "absolute", left: 96, right: 96, top: 150, height: 24, zIndex: 30,
           borderRadius: 5, background: "linear-gradient(180deg, #6E4038 0%, #2E120E 100%)" }} />
@@ -1191,7 +1220,7 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 3 · THE CHECK" push={[0, dur, 1.058]} vig={0.58}>
       <Cam z={5}>
-        <SetFor k="check" f={f} t={f * 1.2 + 300} rakeRate={7.2} />
+        <SetFor k="check" f={f} t={f * 1.2 + 300} rakeRate={7.2 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <Checkpoint x={392} y={p.horizon + 44} w={330} f={f} z={44} lift={LIFT} />
 
         {/* the checkpoint plate — the sourced mark */}
@@ -1386,7 +1415,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 4 · OLLAMA" push={[0, dur, 1.070]} vig={0.60}>
       <Cam z={5}>
-        <SetFor k="shed" f={f} t={f * 0.8} rakeRate={4.2} />
+        <SetFor k="shed" f={f} t={f * 0.8} rakeRate={4.2 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* the warm floor pool the firebox throws, only after it catches */}
         {f >= FIRE && <Pool x={362} y={p.horizon + 150} w={800 * lit} c="#FFC98A" o={0.34} z={19} />}
 
@@ -1513,7 +1542,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 4 · THE METER ROW" push={[0, dur, 1.082]} vig={0.60}>
       <Cam z={5}>
-        <SetFor k="shed" f={f} t={f * 0.8 + 260} rakeRate={4.8} />
+        <SetFor k="shed" f={f} t={f * 0.8 + 260} rakeRate={4.8 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <Pool x={780} y={p.horizon + 140} w={620} c="#FFC98A" o={0.30} z={19} />
 
         {/* the trunk cable that feeds them, going slack and falling */}
@@ -1601,7 +1630,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 5 · AWESOME MCP" push={[0, dur, 1.056]} vig={0.54}>
       <Cam z={5}>
-        <SetFor k="plugs" f={f} t={f * 1.0} rakeRate={5.2} />
+        <SetFor k="plugs" f={f} t={f * 1.0} rakeRate={5.2 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <PlugWall x={70} y={172} w={872} h={330} f={f} z={26} c="#1F4C3E"
           wave={LAND + 4} from={[0.5, 0.32]} />
 
@@ -1763,7 +1792,7 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="STALL 5 · THE INTERCHANGE" push={[0, dur, 1.050]} vig={0.52}>
       <Cam z={5}>
-        <SetFor k="plugs" f={f} t={f * 1.1 + 300} rakeRate={5.8} occluders={false} />
+        <SetFor k="plugs" f={f} t={f * 1.1 + 300} rakeRate={5.8 * RAKE_K[v]} occluders={false}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <PlugWall x={70} y={150} w={872} h={366} f={f} z={22} c="#1B4437" wave={20}
           from={[0.5, 0.5]} />
 
@@ -1858,7 +1887,7 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="COMMENT · STAR" push={[0, dur, 1.058]} vig={0.54}>
       <Cam z={5}>
-        <SetFor k="gate" f={f} t={f * 0.9} rakeRate={4.0} />
+        <SetFor k="gate" f={f} t={f * 0.9} rakeRate={4.0 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* the counter, cropped by the bottom edge */}
         <div style={{ position: "absolute", left: -30, right: -30, top: p.horizon + 96, height: 240,
           zIndex: 70, background: "linear-gradient(180deg, #8A6A44 0%, #2E2018 100%)",

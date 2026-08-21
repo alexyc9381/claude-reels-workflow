@@ -3,7 +3,7 @@
     "reels_with_code": 98,
     "reels_total": 144,
     "factory_logs": 58,
-    "storyboards": 58,
+    "storyboards": 59,
     "caption_jsons": 107,
     "memory_md": 198,
     "creators": 8,
@@ -958,17 +958,6 @@
       "captions": []
     },
     {
-      "key": "star",
-      "name": "star",
-      "number": null,
-      "code": "video/src/ClaudeStarReel.tsx",
-      "log": "memory/reels/star-factory-log.md",
-      "storyboard": null,
-      "captions": [
-        "video/src/data/words_115star.json"
-      ]
-    },
-    {
       "key": "swarm",
       "name": "swarm",
       "number": null,
@@ -1598,6 +1587,17 @@
       "storyboard": "storyboards/114-smart.md",
       "captions": [
         "video/src/data/words_smart.json"
+      ]
+    },
+    {
+      "key": "star",
+      "name": "star",
+      "number": 115,
+      "code": "video/src/ClaudeStarReel.tsx",
+      "log": "memory/reels/star-factory-log.md",
+      "storyboard": "storyboards/115-star.md",
+      "captions": [
+        "video/src/data/words_115star.json"
       ]
     },
     {

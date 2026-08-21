@@ -3,11 +3,12 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 98 reels with code · 58 factory logs · 58 storyboards · 107 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 98 reels with code · 58 factory logs · 59 storyboards · 107 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
 | 116 | **BILL** | [✓](video/src/ClaudeBillReel.tsx) | [1](video/src/data/words_116bill.json) | · | [✓](storyboards/116-bill.md) | code, no log |
+| 115 | **STAR** | [✓](video/src/ClaudeStarReel.tsx) | [1](video/src/data/words_115star.json) | [✓](memory/reels/star-factory-log.md) | [✓](storyboards/115-star.md) | built |
 | 114 | **SMART** | [✓](video/src/ClaudeSmartReel.tsx) | [1](video/src/data/words_smart.json) | [✓](memory/reels/smart-factory-log.md) | [✓](storyboards/114-smart.md) | built |
 | 113 | **GO** | [✓](video/src/ClaudeGoReel.tsx) | [1](video/src/data/words_113go.json) | · | [✓](storyboards/113-go.md) | code, no log |
 | 112 | **SQUAD** | [✓](video/src/ClaudeSquadReel.tsx) | [1](video/src/data/words_squad.json) | [✓](memory/reels/squad-factory-log.md) | [✓](storyboards/112-squad.md) | built |
@@ -143,7 +144,6 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **SMART114** | · | · | [✓](memory/reels/smart114-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **SPEND** | · | · | [✓](memory/reels/spend-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **STACK** | [✓](video/src/ClaudeStackReel.tsx) | [2](video/src/data/words_designstack.json) | · | · | code, no log |
-| · | **STAR** | [✓](video/src/ClaudeStarReel.tsx) | [1](video/src/data/words_115star.json) | [✓](memory/reels/star-factory-log.md) | · | built |
 | · | **SWARM** | [✓](video/src/ClaudeSwarmReel.tsx) | [1](video/src/data/words_swarm.json) | [✓](memory/reels/swarm-factory-log.md) | · | built |
 | · | **SWIPE** | · | · | [✓](memory/reels/swipe-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **UNLOCK** | [✓](video/src/ClaudeUnlockReel.tsx) | [1](video/src/data/words_unlock.json) | · | · | code, no log |

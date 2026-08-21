@@ -22,6 +22,22 @@ def ff():
     return c if os.path.exists(c) else "ffmpeg"
 
 
+def nframes(m, FF):
+    """⛔ NEVER GUESS THE REEL LENGTH. A hardcoded default silently skipped the
+    last 149 frames of a 1542-frame reel and put a sample 4 frames after a cut,
+    where two cuts have not yet diverged. Ask the file."""
+    pr = FF.replace("ffmpeg-static/ffmpeg", "ffprobe-static/bin/darwin/arm64/ffprobe")
+    if not os.path.exists(pr):
+        pr = "ffprobe"
+    try:
+        out = subprocess.run([pr, "-v", "error", "-select_streams", "v:0", "-count_frames",
+                              "-show_entries", "stream=nb_read_frames", "-of", "csv=p=0", m],
+                             capture_output=True, text=True, timeout=300).stdout.strip()
+        return int(out.split(",")[0])
+    except Exception:
+        return 0
+
+
 def dhash(im, s=8):
     px = list(im.convert("L").resize((s + 1, s), Image.LANCZOS).getdata())
     return [1 if px[r * (s + 1) + c] > px[r * (s + 1) + c + 1] else 0
@@ -37,7 +53,7 @@ def main():
     ap.add_argument("--names", default="")
     a = ap.parse_args()
     FF = ff()
-    total = a.total or 1393
+    total = a.total or nframes(a.mp4s[0], FF) or 1393
     names = a.names.split(",") if a.names else [os.path.basename(m).replace(".mp4", "") for m in a.mp4s]
     ts = [round(total * (i + 0.5) / a.n) for i in range(a.n)]
 

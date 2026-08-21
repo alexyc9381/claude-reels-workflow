@@ -101,3 +101,223 @@ end up measuring your own chain.
 ## Related
 `memory/reel-trial-variants.md` · [`SOUND-DESIGN.md`](SOUND-DESIGN.md) §13 ·
 [`AUDIT-FIRST.md`](AUDIT-FIRST.md) §4 · [`MEASURING.md`](MEASURING.md)
+
+
+---
+
+## ⛔⛔⛔ HUE IS NOT A VARIANT LEVER — A TRIAL CUT MAY NEVER RECOLOUR THE CLAUDE
+
+Alex, on reel 115's amber cut: *"don't have the amber version of the Claude
+sprites — it shouldn't change the colour of the sprites."*
+
+The grade is a CSS filter over the whole panel, so **a `hue-rotate` meant for the
+SET drags the CAST with it.** Amber ran `hue-rotate(-21deg)` and shipped an
+off-brand mascot in a third of the deliverables — which also breaks a delivery
+gate that was already standing: **"every Claude the one house clay."** Two rules
+were in conflict and the pixel-separation one quietly won for several reels.
+
+### The corrected lever set
+
+| lever | varies? | why |
+|---|---|---|
+| **RAKE speed** | ⭐ **yes, first** | a travelling band sweeps different pixels every frame and never touches a sprite. Highest-ranked lever already; now carries more. |
+| **CAMERA** offset/scale/rot | ⭐ yes | re-frames the panel contents; the mascot moves but keeps its paint |
+| **HOOK** | ⭐⭐ **yes — see below** | a genuinely different open is the biggest separation available AND it is an experiment |
+| GRADE — contrast, brightness | yes, but it buys ~**1 bit** | changes punch without moving a hue — and see §6: a **swept** contrast/brightness range moved one frame 11 -> 10-12 while the camera moved it 11 -> 32. Vary it for the LOOK, never to pass the gate |
+| GRADE — **`hue-rotate`** | ⛔ **BANNED** | recolours the mascot |
+| GRADE — **`saturate`** | ⛔ **BANNED as a variant** | moves the clay's vividness. Hold it at the house value (1.26) for every cut. |
+| BED | yes | audio only, so it buys zero dHash — but it stops three cuts sounding like one upload |
+
+⛔ Removing hue costs pixel separation. **Buy it back from RAKE and CAMERA**, not
+from the palette, and re-measure `dhash_cuts.py` — the targets are unchanged
+(mean >= 14, **min >= 10**).
+
+---
+
+## ⭐⭐⭐ AND MAKE THE VARIANTS A HOOK EXPERIMENT
+
+Alex: *"you can make the hooks more interesting — run hook experiments to see if
+different hook ideas would be better."*
+
+`THE-OPEN.md` already says to generate 3-5 hook concepts and get ONE picked
+before building. That is a BUILD-time filter and it throws away four ideas on a
+guess. **Trial cuts are the place to actually test them.**
+
+> ### The new default: three cuts = ONE body, THREE hooks.
+> Same scenes, same VO, same everything after the first ~3.5s. The cuts differ
+> where a viewer decides whether to stay.
+
+Why this is strictly better than grading three copies:
+1. **It answers a question.** Reel 94 is the only evidence in this repo about
+   what makes an open work, and it came from six cuts of one reel where only the
+   hook varied. Every grade-only variant set since has produced no information.
+2. **It is the biggest pixel separation available** — a different open is
+   different content, not a filter over the same content.
+3. **It cannot break the house clay**, because it changes what HAPPENS, not what
+   colour things are.
+
+⛔ **Every hook must still pass `THE-OPEN.md`'s four frame-0 laws on its own** —
+bright and saturated, the subject in it, recognition over motion, and a settled
+readable frame 0 — and each one is measured separately (`hook_open_gate.py`,
+frame-0 luma, `HOOK_PLATE`). A weak second hook is not a valid experiment; it is
+a wasted upload.
+
+⭐ **Log which cut went out when, so the IG numbers are attributable.** A hook
+experiment nobody records the result of is just three uploads.
+
+## 6 · ⛔⛔⛔ A dHASH IS ALMOST BLIND TO GRADE — IT IS A **GEOMETRY** METRIC
+
+Reel 115, market/steel stuck at **10** against a bar of 10. The obvious move was
+to push the two grades apart. It was measured instead of assumed, on one frame,
+against the gate's own crop:
+
+| steel grade | dHash vs market @f1335 |
+|---|---|
+| `contrast(0.945) brightness(1.045)` *(base)* | 11 |
+| `contrast(1.060) brightness(1.090)` | 12 |
+| `contrast(0.900) brightness(1.085)` | 10 |
+| `contrast(1.100) brightness(1.110)` | 10 |
+| `contrast(0.870) brightness(1.110)` | 11 |
+
+**A quarter of the whole contrast range is worth one bit.** The reason is in the
+definition: a dHash compares each pixel with *its right-hand neighbour* and keeps
+only the sign. Contrast and brightness are **monotonic** tone curves, and a
+monotonic curve preserves the ordering of any two values — so almost every
+comparison comes out the same way it did before. Grade changes what the frame
+*looks* like and leaves what the frame *hashes* to almost untouched.
+
+The same frame, moving the **camera** instead:
+
+| steel camera | dHash |
+|---|---|
+| `dx 46 dy 20 s1.108 rot -1.4` *(base)* | 11 |
+| `dx 46 dy 74` | 13 |
+| `dx 46 s1.152` | 11 |
+| `dx 86 dy 58 s1.120 rot -2.2` | 27 |
+| `dx 110` | **32** |
+
+⭐ **Rank the levers by whether they MOVE CONTENT ACROSS THE 8x8 GRID.** rake and
+camera do. Hue did (it changed which neighbour was brighter). Contrast, gamma and
+brightness essentially do not. This corrects the §2 ranking, which put grade
+second on the strength of a look-difference, not a measured one.
+
+### And a big dHash jump is a SYMPTOM, not a win
+
+`dx 110` scored 32 — and the contact sheet showed why: `1,346 FREE TIERS` had
+become `1,346 FREE TIER` and `awesome-mcp-servers` had become `awesome-mcp-ser`.
+**The gain was content falling off the frame.** A camera lever is bounded by the
+crop long before it is bounded by the metric.
+
+> ⛔ Any lever that improves a gate by >2x in one step is suspect. **Contact-sheet
+> it before you keep it.** (Same law as the reel-112 blinds and the reel-115 white
+> plate: a metric satisfiable the wrong way WILL be satisfied the wrong way.)
+
+---
+
+## 7 · ⛔⛔ NEVER LET THE GATE GUESS THE REEL'S LENGTH
+
+`dhash_cuts.py --total` defaulted to a hardcoded **1393**. STAR is **1542**.
+
+Two silent failures at once:
+1. The last **149 frames — the entire STAR payoff — were never compared.**
+2. `ts = round(total*(i+0.5)/n)` put a sample at **f1335, four frames after the
+   S12 cut**, where two cuts have not yet diverged: the set levers had had 4
+   frames to act and the scene's own animation had not started. That frame, and
+   only that frame, read 10.
+
+With the true length the same three files score **mean 23.3, MIN 12** — and the
+ending is actually checked. Nothing about the reel changed.
+
+The tool now calls `ffprobe -count_frames` and only falls back to a constant.
+
+> ⭐ **A number that depends on a default you did not set is not a measurement.**
+> The wrong total did not error, did not warn, and produced a confidently
+> formatted table with a FAIL in it. See `docs/MEASURING.md`.
+
+### The probe must reproduce the gate before it can replace it
+
+The single-frame probe first read **7** where the gate read **10** — it was
+hashing the full 1080x1920 frame, and the gate crops to the panel
+(`crop=1012:792:34:384`) and seeks by timestamp. After matching both it returned
+**10 and 27** against the gate's 10 and 27, exactly. Only then was it worth
+trusting for a sweep.
+
+> ⛔ Reel 108's rule again, from the other direction: a probe that DISAGREES with
+> the gate is not "reading low", it is **measuring something else**.
+
+---
+
+## 8 · HOW COARSE 8x8 REALLY IS — 409,612 PIXELS CHANGED, **ZERO BITS MOVED**
+
+The two weakest frames of reel 115 (`f321`, `f1349`) are both **grid-wall**
+scenes: `PigeonWall` in S2 and `PlugWall` in S12 each fill the panel with a
+repeating grid, which buries the rake and the parallax behind it. §2 lists the
+remedy — *"per-cut LAYOUT on the flattest scenes"* — so the walls were given a
+real per-cut position and size (`dx +-30, dy +-22, dw +-34`).
+
+Measured result on the weak frame: **10 -> 10.** Not one bit.
+
+That was checked before it was believed, against the render rather than the
+source (`ImageChops.difference`):
+
+```
+changed bbox: (0, 0, 1012, 792)      <- the WHOLE panel
+mean abs diff: 8.725   max: 164
+pixels differing: 409,612            <- 40% of the panel
+```
+
+**40% of the panel changed and the hash did not move.** At 8x8 each cell averages
+roughly 126x99 px, so a 30px shift redistributes luma *inside* a cell without
+flipping the sign of any neighbour comparison. A dHash sees **large-scale luma
+layout** and nothing else.
+
+> ⭐⭐⭐ **Only a WHOLE-FRAME transform moves a dHash.** Camera offset/scale, and a
+> wholly different hook. Grade (§6), object position, object size and local
+> detail are all invisible to it. That is the complete lever list — the rest of
+> §2's table is ranked by how different things LOOK.
+
+### Which means the weak frames are structural, and that is the right answer
+
+`f321` sits at **10** and is not cheaply improvable: the frame-wide camera is
+already at its crop bound (§6), and the only remaining whole-frame lever is the
+per-scene `push` — which on a grid-wall scene means **a visibly wider shot with a
+smaller subject.** That trades the picture for the proxy.
+
+**It was left at 10.** mean 23.1, min 10, bar min >= 10 — a pass, with 35 of 36
+pair-measurements between 15 and 36.
+
+> ⛔ Do not spend picture quality on a gate that already passes. Record the weak
+> frame and design the NEXT reel so its flattest scenes are not identical across
+> cuts — that is a storyboard decision, not a post-hoc lever.
+
+---
+
+## 9 · ⛔⛔ A REGEX EDIT CAN HIT THE WRONG CONSTANT, AND THE MEASUREMENT IS SILENT
+
+Two edits during this round did something other than what they said:
+
+```python
+re.sub(r'/\*\* ⭐ PUSH_K.*?\n\};\n', '', s, flags=re.S)
+```
+`PUSH_K`'s object **ends inline** (`... steel: -0.048 };`), so `\n};\n` did not
+match it and the removal ran on to the next line-starting `};` — **deleting
+`RAKE_X0` and `PAR_X`.**
+
+```python
+re.sub(r'steel: -?[0-9.]+ \};', 'steel: %s };' % val, s, count=1)
+```
+intended for `PUSH_K`, matched **`RAKE_K`** — the first inline `steel: <num> };`
+in the file. So two "push delta" readings (`-0.15 -> 12`, `+0.16 -> 11`) were in
+fact measuring a mangled rake speed. Both numbers were discarded.
+
+> ⭐ The companion to *"a no-op `.replace()` is silent"* (reel 115, round 3): **a
+> replace that hits the WRONG target is silent too**, and unlike a no-op it gives
+> you a number that MOVES — which is far more convincing and completely wrong.
+>
+> **After any regex edit to a config block, `grep` every constant it could have
+> touched and assert the count.** And prove the source still reproduces the
+> shipped render by diffing a still against the mp4 frame, using an
+> *unchanged* cut as the compression baseline (market 3.553 vs steel 3.587 = same
+> file, different codec noise).
+
+---

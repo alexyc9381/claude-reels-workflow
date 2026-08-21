@@ -415,3 +415,79 @@ also 200. Spec: `lead-magnets/115-star.txt`.
 46.1s of flubs and dead air from a 99.57s take, and no edit reaches 30s without dropping one of
 the five repos. Recent ships: 107 = 35.06 · 109 = 31.65 · 110 = 31.36 · 111 = 33.49 ·
 112 = 81.63 · 113 = 51.93. Scaling the reel down is Alex's call.
+
+---
+
+## Round 10 — the trial-cut hook experiment (2026-08-21)
+
+**Alex:** *"for the future like other trial test varitans here, dont have hte
+amber version of hte claude sprite slike it shoudnt change the color of the
+sprites but oyu can make the hooks more interesting idk like run hook
+experiemnts to see if diff hook ideas woul dbe better etc"*
+
+### What the variants are now
+
+| cut | hook | idea | the image on frame 0 |
+|---|---|---|---|
+| **market** | `S0` THE PRICE WALL | a **BARRIER** you pay to pass | a turnstile, a running meter, five paid brand tiles on the bar |
+| **amber** | `HookReceipt` THE RECEIPT | a **BILL** that will not stop unspooling | an itemised MONTHLY receipt, free-for-dev $49 / public-apis $99 already printed |
+| **steel** | `HookLoad` THE LOAD | a **BURDEN** carried on his back | two crates already stacked on him, `ON YOUR BACK $04,800` settled overhead |
+
+Sprite paint is **identical in all three**. `hue-rotate` and `saturate` are banned
+as variant levers (`docs/TRIAL-CUTS.md`).
+
+### Measured
+
+```
+dHash (length now derived from the file: 1542)   mean 23.2   MIN 12   PASS
+verify_reel      market 8/8 · amber 8/8 · steel 8/8
+motion median    12.04   0/14 scenes failing
+hook motion      market 11.91 · amber 13.96 · steel 11.50
+frame-0 luma     market 148.0 · amber 179.5 · steel 162.6   (bar 140)
+```
+
+### The four things this round taught
+
+1. **A dHash is a GEOMETRY metric.** Sweeping steel's grade across a quarter of
+   the contrast range moved the weak frame 11 -> 10-12. The camera moved it
+   11 -> 32. A monotonic tone curve preserves neighbour ordering, which is all a
+   dHash looks at. `docs/TRIAL-CUTS.md` §6 — this **corrects** the §2 ranking
+   that had grade second.
+2. **A big jump is a symptom.** `dx 110` scored 32 because `1,346 FREE TIERS` had
+   become `1,346 FREE TIER`. The contact sheet caught it; the metric applauded it.
+3. **The gate was guessing the reel length.** `--total` defaulted to 1393 on a
+   1542-frame reel: the STAR payoff was never compared, and a sample landed 4
+   frames after the S12 cut where two cuts have not diverged. That single frame
+   was the entire FAIL. Fixed with `ffprobe -count_frames`.
+4. **Pre-seeding is TIME; z is SIGHT.** `HookLoad` pre-seeded two crates so frame
+   0 would contain the load — and drew them at `z60` behind a `z82`, 296px-wide
+   hero on the same x. Frame 0 had no visible load at all. `z90 + i` and a
+   `headTop - 96` offset (the old -62 sat inside the hard hat) fixed it, plus the
+   `SplitFlap` seed moved to `at = -40` so frame 0 is **settled, not mid-roll**.
+
+### And one defect that had been shipping
+
+`look_audit` on **steel** had never been run until this round: `BODY_BLACK p10
+36.0` against a bar of 35 — a **fail**, present before any of this round's work.
+Cause: a grade that both dropped contrast and raised brightness, each of which
+lifts the black point. Reset to `contrast(1.030) brightness(1.075)` (steel = the
+bright, crisp cut) once §6 established that grade was not buying separation
+anyway.
+
+> ⛔ **Run every gate on every cut.** `verify_reel` passing on all three said
+> nothing about `look_audit`, and the variant cuts had only ever been checked on
+> the one gate.
+
+### Two things tried and REJECTED (both documented, neither shipped)
+
+- **`WALL_L`, per-cut layout on the grid walls.** Repainted 40% of the panel and
+  moved the weak frame **10 -> 10**. Proof that an 8x8 dHash only responds to
+  whole-frame transforms. Reverted.
+- **`PUSH_K`, a per-scene push delta.** Its two readings turned out to be
+  measuring a **regex-corrupted `RAKE_K`** (a `steel: <num> };` substitution hit
+  `RAKE_K`, and the block removal deleted `RAKE_X0` and `PAR_X`). Discarded, file
+  rebuilt from backup, and the source re-proved against the shipped mp4 using
+  the unchanged market cut as the compression baseline (3.553 vs 3.587).
+
+The weak frame **stays at 10**. Both weak frames are grid-wall scenes; the only
+lever left was a wider shot, which trades the picture for the proxy. `docs/TRIAL-CUTS.md` §8.

@@ -4,6 +4,7 @@ import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./Slop
 import { S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, CAM, GRADE } from "./StarScenes";
 import type { Variant } from "./StarScenes";
 import { CamCtx, R } from "./StarWorld";
+import { HookReceipt, HookLoad } from "./StarHooks";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
 import words from "./data/words_115star.json";
 
@@ -456,7 +457,18 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
       <CamCtx.Provider value={{ ...CAM[v] }}>
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE[v] }}>
-            <Sequence from={L.S0} durationInFrames={DUR.S0}><S0 v={v} dur={DUR.S0} /></Sequence>
+            {/* ⭐⭐⭐ ONE BODY, THREE HOOKS — the trial cuts are a HOOK EXPERIMENT
+                rather than three graded copies of one film. Everything from S1
+                on is identical; the cuts differ exactly where a viewer decides
+                whether to stay. See docs/TRIAL-CUTS.md and StarHooks.tsx.
+                  market  THE PRICE WALL — a BARRIER
+                  amber   THE RECEIPT    — a BILL that will not stop
+                  steel   THE LOAD       — a BURDEN on his back */}
+            <Sequence from={L.S0} durationInFrames={DUR.S0}>
+              {v === "amber" ? <HookReceipt dur={DUR.S0} />
+                : v === "steel" ? <HookLoad dur={DUR.S0} />
+                : <S0 v={v} dur={DUR.S0} />}
+            </Sequence>
             <Sequence from={L.S1} durationInFrames={DUR.S1}><S1 v={v} dur={DUR.S1} /></Sequence>
             <Sequence from={L.S2} durationInFrames={DUR.S2}><S2 v={v} dur={DUR.S2} /></Sequence>
             <Sequence from={L.S3} durationInFrames={DUR.S3}><S3 v={v} dur={DUR.S3} /></Sequence>

@@ -171,12 +171,14 @@ export const Lamp: React.FC<{ x: number; y?: number; s?: number; z?: number; on?
 /** the market's base plate: seven planes, one committed light direction. */
 export const Market: React.FC<{ p: Place; f: number; t?: number; lit?: number; z0?: number;
   bulbs?: boolean; band?: React.ReactNode; glowX?: number; glowR?: number;
-  rake?: boolean; rakeRate?: number; kind?: "stall" | "shutter" | "crate";
+  rake?: boolean; rakeRate?: number; rakeX0?: number; parX?: number;
+  kind?: "stall" | "shutter" | "crate";
   /** how far the parallax bands fall away in VALUE. 0 = a lit block (the hook,
       where THE-OPEN law 1 wants a bright mean); 1 = the house depth ramp. */
   deep?: number }> =
   ({ p, f, t = 0, lit = 0.34, z0 = 0, bulbs = true, band, glowX = 500, glowR = 300,
-     rake = true, rakeRate = 3.4, kind = "stall", deep = 1 }) => (<>
+     rake = true, rakeRate = 3.4, rakeX0 = -260, parX = 0,
+     kind = "stall", deep = 1 }) => (<>
   {/* 1 · the far wall / the night beyond */}
   <div style={{ position: "absolute", inset: 0, zIndex: z0 + 1,
     background: `linear-gradient(174deg, ${p.back} 0%, ${p.back2} 100%)` }} />
@@ -215,7 +217,8 @@ export const Market: React.FC<{ p: Place; f: number; t?: number; lit?: number; z
       opacity: 0.32, zIndex: z0 + 17 }} />
   ))}
   {/* ⭐ the travelling rake — feathered, light AND shadow, speed at the call site */}
-  {rake && <Rake f={f} y={p.horizon - 300} h={480} c={p.key} o={0.26} rate={rakeRate} z={z0 + 20} n={6} />}
+  {rake && <Rake f={f} y={p.horizon - 300} h={480} c={p.key} o={0.26} rate={rakeRate}
+    x0={rakeX0} z={z0 + 20} n={6} />}
   {bulbs && <BulbString f={f} c={p.key} z={z0 + 88} />}
 </>);
 
@@ -224,8 +227,8 @@ export const Market: React.FC<{ p: Place; f: number; t?: number; lit?: number; z
    neighbours differ by BOTH hue and lightness.
    ====================================================================== */
 export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
-  rakeRate?: number; occluders?: boolean }> =
-  ({ k, f, lit = 1, t = 0, rakeRate, occluders = true }) => {
+  rakeRate?: number; rakeX0?: number; parX?: number; occluders?: boolean }> =
+  ({ k, f, lit = 1, t = 0, rakeRate, rakeX0, parX = 0, occluders = true }) => {
   const p = placeFor(k);
   switch (k) {
 
@@ -236,7 +239,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        is bought by touching the palette's dark stop. */
     case "street":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.70} bulbs={false} glowX={506} glowR={430}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.70} bulbs={false} glowX={506} glowR={430}
           rakeRate={rakeRate ?? 6.1} kind="shutter" deep={0.15} />
         {/* ⛔⛔ THE ARCH IS THE SET'S BRIGHT PLANE AND IT MUST NOT BE AN EMPTY
             WHITE VOID. v1 painted one pale gradient inside the opening and the
@@ -407,7 +410,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        the brightest object and the arch feet are the deepest shadow. */
     case "arch":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.46} glowX={506} glowR={330}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.46} glowX={506} glowR={330}
           rakeRate={rakeRate ?? 4.4} kind="crate" />
         <Lamp x={506} y={44} s={1.25} z={17} c={p.key} drop={104} />
         {/* the arch's brick soffit, cropped by the top edge */}
@@ -427,7 +430,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        wall fills the back plane, so the set IS the mechanism. */
     case "holes":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.40} glowX={430} glowR={310}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.40} glowX={430} glowR={310}
           rakeRate={rakeRate ?? 5.0} kind="stall" />
         <Lamp x={286} y={40} s={0.92} z={17} c={p.key} drop={92} />
         <Lamp x={742} y={40} s={0.92} z={17} c={p.key} drop={118} />
@@ -447,7 +450,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        reel, landing on the beat that should feel like relief. */
     case "till":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.86} bulbs={false} glowX={506} glowR={400}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.86} bulbs={false} glowX={506} glowR={400}
           rakeRate={rakeRate ?? 3.4} kind="shutter" />
         {/* the fluorescent tube itself, drawn */}
         <div style={{ position: "absolute", left: 150, top: 78, width: 712, height: 30,
@@ -494,7 +497,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        a top highlight and the floor is nearly black under the bay. */
     case "patch":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.44} glowX={506} glowR={350}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.44} glowX={506} glowR={350}
           rakeRate={rakeRate ?? 5.6} kind="stall" />
         {/* the cable loom overhead — the SOURCE half of the mechanism */}
         <div style={{ position: "absolute", left: -40, right: -40, top: -10, height: 118,
@@ -515,7 +518,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        frame in the reel, and where BODY_SAT is bought back. */
     case "check":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.34} bulbs={false} glowX={218} glowR={370}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.34} bulbs={false} glowX={218} glowR={370}
           rakeRate={rakeRate ?? 6.6} kind="shutter" />
         {/* the red raking lamp on its bracket */}
         <div style={{ position: "absolute", left: 96, top: 96, width: 106, height: 70,
@@ -542,7 +545,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        carries the contrast rather than a grade. */
     case "shed":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.30} bulbs={false} glowX={330} glowR={300}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.30} bulbs={false} glowX={330} glowR={300}
           rakeRate={rakeRate ?? 4.2} kind="crate" />
         {/* moonlight from a high window, the cold key */}
         <div style={{ position: "absolute", left: 620, top: 62, width: 268, height: 176,
@@ -571,7 +574,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        the mechanism and the practical are the same object. */
     case "plugs":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.52} glowX={506} glowR={420}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.52} glowX={506} glowR={420}
           rakeRate={rakeRate ?? 5.2} kind="stall" />
         {/* the trunking run that feeds the wall — the SOURCE half */}
         <div style={{ position: "absolute", left: -30, right: -30, top: 84, height: 46,
@@ -590,7 +593,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
        spill behind it: the strongest depth in the reel, on the last frame. */
     case "gate":
       return (<>
-        <Market p={p} f={f} t={t} lit={0.42} glowX={506} glowR={340}
+        <Market p={p} f={f} t={t + parX} rakeX0={rakeX0} lit={0.42} glowX={506} glowR={340}
           rakeRate={rakeRate ?? 4.0} kind="stall" />
         <Lamp x={506} y={40} s={1.2} z={17} c={p.key} drop={96} />
         {/* the cool street spill through the gate behind */}

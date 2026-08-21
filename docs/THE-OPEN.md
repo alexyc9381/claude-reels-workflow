@@ -384,3 +384,38 @@ a regression.**
 [`ANIMATION-QUALITY.md`](ANIMATION-QUALITY.md) §10 (green gates) and §11 (making
 an action read) · `memory/reel-hook-simplicity.md` ·
 `memory/reel-real-marks-are-the-props.md`
+
+## ⛔⛔⛔ PRE-SEEDING PUTS AN OBJECT IN **TIME**. z PUTS IT IN **SIGHT**.
+
+Reel 115's `HookLoad` opens on a Claude being crushed by a stack of paid-software
+crates. Two crates were pre-seeded with negative start frames (`DROP = [-40, -20,
+15, 28, 41]`) precisely so that **frame 0 already contains the subject** — the
+law at the top of this doc.
+
+Frame 0 shipped with **no visible load at all.**
+
+The crates were rendered at `zIndex: 60 + i`. The hero is `z={82}`, `size={296}`,
+and both are centred on `x=380` — so the entire pre-seeded stack was drawn behind
+a 296px-wide sprite sitting on the same spot. The object existed, on the right
+frame, at the right coordinates, and could not be seen.
+
+Two edits fixed it:
+- `zIndex: 90 + i` — **a load is carried in FRONT of the carrier.** The bottom
+  crate now rests on the hard hat instead of hiding behind it.
+- `headTop - 96` instead of `headTop - 62` — the old offset put crate 0's bottom
+  **12px below the head top**, i.e. inside the costume hat.
+
+> ⭐ **Check frame 0 as an IMAGE, not as a list of what is mounted.** "Two crates
+> exist at f0" was true the whole time. Render the still and look at it.
+
+### And frame 0 may not be MID-ROLL
+
+The same hook's `SplitFlap` counter ran `at={... DROP[1] + 7 ...}` = **-13**, so
+frame 0 caught it 13 frames into a flip, showing blank half-rolled cells where
+the price should be. A pre-seeded counter has to be seeded far enough back to
+have **settled**: `at = -40` renders a clean `$04,800` on frame 0.
+
+> ⛔ Every animated element that exists at frame 0 needs its start pushed back
+> far enough to be **finished**, not merely started.
+
+---
