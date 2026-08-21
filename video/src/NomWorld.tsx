@@ -434,13 +434,23 @@ export const Chip: React.FC<{ t: string; y: number; x?: number; c?: string; fg?:
   </div>
 );
 
+/** ⛔⛔⛔ THE FLOOR SLUG IS OFF, HOUSE-WIDE. Making `slug=""` render nothing was
+    not enough: reel 115 simply passed real strings again and shipped
+    "THE METERED STREET" / "STALL 1 - FREE FOR DEV" across all 14 scenes, and
+    Alex asked a SECOND time (2026-08-21): *"remove the text at hte bottom of the
+    screen that says like 'the metered gate' etc throughout the video."*
+    A preference stated twice is a house rule, so it is enforced here rather than
+    left to each reel's call sites to remember. Call sites keep their `slug` prop
+    (it still documents which set a scene is on) and nothing is drawn. */
+export const SLUGS_OFF = true;
+
 /** ⛔ AN EMPTY LABEL RENDERS NOTHING. Alex, 2026-08-19: *"we have kind of like
     little subheader text that says like THE INSPECTION or THE LINE at the bottom
     of the screen instead of these animations. Remove those."* Passing `slug=""`
     now removes it cleanly rather than laying an empty styled band over the
     picture. Existing reels pass a real string and are untouched. */
 export const Slug: React.FC<{ t: string; c?: string; z?: number; y?: number }> =
-  ({ t, c = "#CFC8BC", z = 95, y = H - 42 }) => !t ? null : (
+  ({ t, c = "#CFC8BC", z = 95, y = H - 42 }) => (SLUGS_OFF || !t) ? null : (
   <div style={{ position: "absolute", left: 0, right: 0, top: y, textAlign: "center", zIndex: z,
     fontFamily: MONO, fontWeight: 800, fontSize: 20, letterSpacing: "0.30em", color: c,
     textShadow: "0 2px 6px rgba(0,0,0,0.55)" }}>{t}</div>

@@ -491,3 +491,48 @@ anyway.
 
 The weak frame **stays at 10**. Both weak frames are grid-wall scenes; the only
 lever left was a wider shot, which trades the picture for the proxy. `docs/TRIAL-CUTS.md` §8.
+
+---
+
+## Round 11 — no floor slug (2026-08-21)
+
+**Alex:** *"remove the text at hte bottom of the screen that says like 'the
+metered gate' etc throughout the video here etc here"*
+
+The spaced caps at the panel floor naming each set — `THE METERED STREET`,
+`STALL 1 · FREE FOR DEV`, `THE FREE MARKET · THE GATE` and 13 more.
+
+⛔ **This is the SECOND time it was asked.** On 2026-08-19 the fix was to make
+`slug=""` render nothing — and reel 115 simply passed real strings anyway. There
+are **223 non-empty `slug=` call sites across 20+ reel files**, so a rule that
+each future call site has to remember is not a rule.
+
+Fixed at the component: `NomWorld.tsx` now exports **`SLUGS_OFF = true`** and
+`Slug` returns `null` regardless of what is passed. Call sites keep the prop as
+documentation of which set a scene is on. Four other reels (Agy, Dep, Jobs, Play)
+render `<Slug>` through their own Scene wrappers and are covered by the same flag.
+
+Verified by sweeping the bottom 200px of the panel at 8 points across the reel —
+the floor is clean, and the text still visible is real in-world signage (counter
+labels, the carried `ON GITHUB` sign, the star plates).
+
+### Gates, all three cuts, slug-free renders
+
+```
+                verify   HOOK_LUMA   BODY_SAT   BODY_BLACK   motion   failing
+  market        8/8        148.1      68.3%       28.6       12.06     0/14
+  amber         8/8        179.6      73.3%       16.1       13.70     0/14
+  steel         8/8        167.5      68.3%       28.1       12.23     0/14
+
+  dHash   mean 23.1   MIN 11   PASS     (11, up from 10 — the slug was identical
+                                         in all three cuts, so removing it could
+                                         only help)
+```
+
+> ⛔⛔ **`look_audit` failed SILENTLY on the market cut, twice.** It printed
+> `ERROR: ffmpeg read no video` to stderr and exited 2 — and the suite's
+> `grep -E "HOOK_LUMA|BODY_SAT|..."` filtered that line away, so the run just
+> showed *nothing* between verify and motion. It was transient contention
+> (renders + stills + three audits at once); the same file audits fine on a quiet
+> machine. **A gate that prints nothing is not a gate that passed** — grep for
+> the PASS line, or check the exit code, never assume silence means clean.

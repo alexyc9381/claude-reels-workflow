@@ -250,7 +250,7 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
   const TAG = ["$49", "$99", "$300", "$59", "$79"];
 
   return (
-    <Scene p={p} slug="THE METERED STREET" push={[0, dur, 1.055]} vig={0.32}>
+    <Scene p={p} slug="" push={[0, dur, 1.055]} vig={0.32}>
       <Cam z={5} s={B ? 1.26 : 1.0} y={B ? -46 : 0} x={B ? 18 : 0}>
         <SetFor k="street" f={f} t={f * 1.5} rakeRate={6.1 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
 
@@ -407,7 +407,7 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
   const gy = p.horizon + 176;
   const plunge = E(f, PLUNGE, PLUNGE + 7, 0, 1, OUT) - E(f, PLUNGE + 7, PLUNGE + 18, 0, 1, IO);
   return (
-    <Scene p={p} slug="THE FREE MARKET · THE GATE" push={[0, dur, 1.052]} vig={0.54}>
+    <Scene p={p} slug="" push={[0, dur, 1.052]} vig={0.54}>
       <Cam z={5}>
         <SetFor k="arch" f={f} t={f * 1.1} rakeRate={4.4 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
 
@@ -631,7 +631,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
   const pull = E(f, PULL, PULL + 7, 0, 1, OUT);
   const gy = p.horizon + 170;
   return (
-    <Scene p={p} slug="STALL 1 · FREE FOR DEV" push={[0, dur, 1.068]} vig={0.56}>
+    <Scene p={p} slug="" push={[0, dur, 1.068]} vig={0.56}>
       <Cam z={5}>
         <SetFor k="holes" f={f} t={f * 0.9} rakeRate={5.0 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
 
@@ -706,7 +706,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
   const swing = (a: number) => E(f, a - 7, a, 0, 1, IN_Q) - E(f, a, a + 12, 0, 1, OUT);
   const dr = Math.max(swing(A[0]), swing(A[1]), swing(A[2]));
   return (
-    <Scene p={p} slug="STALL 1 · THE BAYS" push={[0, dur, 1.058]} vig={0.56}>
+    <Scene p={p} slug="" push={[0, dur, 1.058]} vig={0.56}>
       <Cam z={5}>
         <SetFor k="holes" f={f} t={f * 0.9 + 400} rakeRate={8.0 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* ⛔ THE OPENING 40 FRAMES WERE DEAD. Alex: *"at 11 seconds the
@@ -771,7 +771,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
   const draw = E(f, DRAWER, DRAWER + 9, 0, 1, BACK);
   const gy = p.horizon + 168;
   return (
-    <Scene p={p} slug="STALL 1 · THE TILL" push={[0, dur, 1.082]} vig={0.46}>
+    <Scene p={p} slug="" push={[0, dur, 1.082]} vig={0.46}>
       <Cam z={5}>
         <SetFor k="till" f={f} t={f * 0.8} rakeRate={3.4 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* ⭐ THE IMPULSE RACK. A till has product ON it, and this reel's palest
@@ -927,7 +927,7 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
     c: i % 3 === 0 ? "#E7B24C" : i % 3 === 1 ? "#F0C46E" : "#D97757",
   }));
   return (
-    <Scene p={p} slug="STALL 2 · PUBLIC APIS" push={[0, dur, 1.056]} vig={0.56}>
+    <Scene p={p} slug="" push={[0, dur, 1.056]} vig={0.56}>
       <Cam z={5}>
         <SetFor k="patch" f={f} t={f * 1.0} rakeRate={8.4 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <JackWall x={70} y={196} w={872} h={352} f={f} z={28} c="#604724" live={LIVE} rows={7} spread={19} />
@@ -991,7 +991,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
   for (let i = 0; i < 4; i++) if (f >= K[i] - 14) hx = 76 + i * 176;
   const hxs = E(f, 0, 1, hx, hx, LIN);
   return (
-    <Scene p={p} slug="STALL 2 · THE CATEGORIES" push={[0, dur, 1.070]} vig={0.56}>
+    <Scene p={p} slug="" push={[0, dur, 1.070]} vig={0.56}>
       <Cam z={5}>
         <SetFor k="patch" f={f} t={f * 1.0 + 260} rakeRate={6.0 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* the hopper the drums pour into — the OUTPUT half of the mechanism */}
@@ -1090,7 +1090,7 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
   const wind = E(f, 38, CUT, 0, 1, IN_Q) - E(f, CUT, CUT + 14, 0, 1, OUT);
   const gy = p.horizon + 170;
   return (
-    <Scene p={p} slug="STALL 3 · SCRAPLING" push={[0, dur, 1.092]} vig={0.60}>
+    <Scene p={p} slug="" push={[0, dur, 1.092]} vig={0.60}>
       <Cam z={5}>
         <SetFor k="check" f={f} t={f * 1.2} rakeRate={6.6 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* the supply conduit run the meter hangs off — the SOURCE */}
@@ -1218,7 +1218,7 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
   /* the sweep: a full-width travelling band, feathered, light AND shadow */
   const sweepX = ((f * 26) % 1180) - 120;
   return (
-    <Scene p={p} slug="STALL 3 · THE CHECK" push={[0, dur, 1.058]} vig={0.58}>
+    <Scene p={p} slug="" push={[0, dur, 1.058]} vig={0.58}>
       <Cam z={5}>
         <SetFor k="check" f={f} t={f * 1.2 + 300} rakeRate={7.2 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <Checkpoint x={392} y={p.horizon + 44} w={330} f={f} z={44} lift={LIFT} />
@@ -1413,7 +1413,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
   const gy = p.horizon + 168;
   const lit = E(f, FIRE, FIRE + 12, 0, 1, OUT);
   return (
-    <Scene p={p} slug="STALL 4 · OLLAMA" push={[0, dur, 1.070]} vig={0.60}>
+    <Scene p={p} slug="" push={[0, dur, 1.070]} vig={0.60}>
       <Cam z={5}>
         <SetFor k="shed" f={f} t={f * 0.8} rakeRate={4.2 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* the warm floor pool the firebox throws, only after it catches */}
@@ -1540,7 +1540,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
   const slack = E(f, BREAK + 4, BREAK + 26, 0, 1, BACK);
   const gy = p.horizon + 166;
   return (
-    <Scene p={p} slug="STALL 4 · THE METER ROW" push={[0, dur, 1.082]} vig={0.60}>
+    <Scene p={p} slug="" push={[0, dur, 1.082]} vig={0.60}>
       <Cam z={5}>
         <SetFor k="shed" f={f} t={f * 0.8 + 260} rakeRate={4.8 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <Pool x={780} y={p.horizon + 140} w={620} c="#FFC98A" o={0.30} z={19} />
@@ -1628,7 +1628,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
   const px = 506 + (-vel * 300 * 1.8 + ring);
   const gy = p.horizon + 178;
   return (
-    <Scene p={p} slug="STALL 5 · AWESOME MCP" push={[0, dur, 1.056]} vig={0.54}>
+    <Scene p={p} slug="" push={[0, dur, 1.056]} vig={0.54}>
       <Cam z={5}>
         <SetFor k="plugs" f={f} t={f * 1.0} rakeRate={5.2 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <PlugWall x={70} y={172} w={872} h={330} f={f} z={26} c="#1F4C3E"
@@ -1790,7 +1790,7 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
     { x: 506, y: 640, at: 149, src: "huggingface.svg", lab: "ANYTHING", flip: true },
   ];
   return (
-    <Scene p={p} slug="STALL 5 · THE INTERCHANGE" push={[0, dur, 1.050]} vig={0.52}>
+    <Scene p={p} slug="" push={[0, dur, 1.050]} vig={0.52}>
       <Cam z={5}>
         <SetFor k="plugs" f={f} t={f * 1.1 + 300} rakeRate={5.8 * RAKE_K[v]} occluders={false}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         <PlugWall x={70} y={150} w={872} h={366} f={f} z={22} c="#1B4437" wave={20}
@@ -1885,7 +1885,7 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
   const st = E(f, STAMP, STAMP + 5, 0, 1, IN_Q) - E(f, STAMP + 5, STAMP + 14, 0, 1, OUT);
   const gy = p.horizon + 174;
   return (
-    <Scene p={p} slug="COMMENT · STAR" push={[0, dur, 1.058]} vig={0.54}>
+    <Scene p={p} slug="" push={[0, dur, 1.058]} vig={0.54}>
       <Cam z={5}>
         <SetFor k="gate" f={f} t={f * 0.9} rakeRate={4.0 * RAKE_K[v]}  rakeX0={RAKE_X0[v]} parX={PAR_X[v]} />
         {/* the counter, cropped by the bottom edge */}

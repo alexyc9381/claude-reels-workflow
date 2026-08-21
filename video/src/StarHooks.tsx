@@ -73,7 +73,7 @@ export const HookReceipt: React.FC<{ dur: number }> = ({ dur }) => {
   const load = Math.min(1, fed / 5);
 
   return (
-    <Scene p={p} slug="THE METERED STREET" push={[0, dur, 1.055]} vig={0.34}>
+    <Scene p={p} slug="" push={[0, dur, 1.055]} vig={0.34}>
       <Cam z={5} s={B ? 1.24 : 1.0} y={B ? -38 : 0} x={B ? 10 : 0}>
         <SetFor k="street" f={f} t={f * 1.5} rakeRate={6.6} />
 
@@ -220,7 +220,7 @@ export const HookLoad: React.FC<{ dur: number }> = ({ dur }) => {
   const lifted = B ? E(f, LIFT, LIFT + 14, 0, 1, OUT) : 0;
 
   return (
-    <Scene p={p} slug="THE METERED STREET" push={[0, dur, 1.058]} vig={0.34}>
+    <Scene p={p} slug="" push={[0, dur, 1.058]} vig={0.34}>
       <Cam z={5} s={B ? 1.22 : 1.0} y={B ? -30 : 0} x={B ? -12 : 0}>
         <SetFor k="street" f={f} t={f * 1.5} rakeRate={5.4} />
 
