@@ -1490,20 +1490,19 @@ export const Dest: React.FC<{ x: number; y: number; f: number; at: number; src: 
   const sq = on ? squash(lf, 0, 0.34, 3, 13) : 1;
   const rk = on ? rock(lf, 2, 6.5, 16) : 0;
   const d = 132 * s;
+  /* ⛔ NOTHING IS DRAWN UNTIL IT LANDS. The wall has its own socket here. */
+  if (!on) return null;
   return (
     <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
       zIndex: z, transform: `scale(${sq}) rotate(${rk * 0.35}deg)` }}>
-      <div style={{ position: "absolute", inset: on ? 0 : d * 0.20, borderRadius: 14 * s,
-        background: on ? "#F4EFE1" : hexa("#0E1F19", 0.34),
-        border: `${on ? 5 * s : 3 * s}px solid ${on ? "#241F17" : hexa("#0A1A14", 0.42)}` }} />
-      {on && (flip ? lf > 6 : true) && (
+      <div style={{ position: "absolute", inset: 0, borderRadius: 14 * s, background: "#F4EFE1",
+        border: `${5 * s}px solid #241F17` }} />
+      {(flip ? lf > 6 : true) && (
         <Img src={staticFile("logos/" + src)}
           style={{ position: "absolute", left: d * 0.18, top: d * 0.18, width: d * 0.64,
             height: d * 0.64, objectFit: "contain" }} />
       )}
-      {!on && <div style={{ position: "absolute", left: d * 0.38, top: d * 0.46, width: d * 0.24,
-        height: d * 0.08, borderRadius: 3 * s, background: hexa("#08150F", 0.5) }} />}
-      {label && on && <div style={{ position: "absolute", left: -d * 0.3, top: d * 1.02,
+      {label && <div style={{ position: "absolute", left: -d * 0.3, top: d * 1.02,
         width: d * 1.6, textAlign: "center" }}>
         <span style={{ ...mono(15 * s, 900), color: "#C8EFD8" }}>{label}</span>
       </div>}

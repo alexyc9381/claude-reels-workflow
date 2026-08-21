@@ -1,0 +1,27 @@
+Comment "STAR" and I'll send you the free setup for all five.
+
+👇 READ BELOW
+
+Five free GitHub repos that do the job of software you are currently paying a monthly fee for. 945,792 stars between them, all public, all free, checked live today.
+
+★ 132,255 · ripienaar/free-for-dev → 1,346 free tiers across 56 sections
+★ 466,531 · public-apis/public-apis → 1,706 free APIs across 51 categories, MIT
+★ 75,397 · D4Vinci/Scrapling → scraping that walks past Cloudflare Turnstile, BSD-3
+★ 179,017 · ollama/ollama → Llama, Mistral and DeepSeek running on your own machine, one command, MIT
+★ 92,592 · punkpeye/awesome-mcp-servers → the connectors that plug your agent into everything else, MIT
+
+What these five actually have in common is not that they are free. It is that each one removes a meter. free-for-dev and public-apis remove the "you need an account and a card to try this" meter. Scrapling removes the per request scraping bill. Ollama removes the per token bill entirely, because the model is running on hardware you already own. awesome-mcp-servers removes the "there is no integration for that" wall, which is the meter you pay in hours rather than dollars.
+
+The part nobody mentions: the expensive line item is almost never the tool you chose on purpose. It is the four trials you started, forgot, and are still being billed for, plus the one API you added for a single feature in March. Nobody audits those, because each one is small enough to feel like a rounding error and there is no single screen that adds them up.
+
+Two honest notes. free-for-dev and public-apis are lists, not products, so the quality varies entry by entry and you still have to read the free tier limits before you build on one. And Ollama trades a monthly bill for your own RAM: a 7B model is comfortable on 16GB, a 70B is not, so check the model size against your machine before you assume it is free.
+
+Save this one. The star counts are live as of today and every repo above is public.
+
+Comment "STAR" and I'll send you the free setup, with the install order and what each one replaces.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #aitools #opensource #github #devtools #freetools #ollama #localllm #mcp #apis #webscraping #coding #programming #developertools #aiagents #buildinpublic #vibecoding #softwaredevelopment

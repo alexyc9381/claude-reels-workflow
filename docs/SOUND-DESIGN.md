@@ -642,3 +642,121 @@ has not shifted.
 ### ⛔ The library has no laugh in it
 Asked for a chuckle, the closest human sound is `huh.mp3` (0.30s). Two, pitched apart and
 0.16s apart, approximate one. Say that it is an approximation.
+
+---
+
+## 14. ⛔⛔⛔ REEL 115 — FIVE ROUNDS ON ONE NOTE, AND THE ANSWER WAS A BANNED CUE
+
+The single most expensive failure this project has recorded on the audio side.
+Alex reported *"a puff of air"* **five times** across five review rounds. Every
+round I measured, every round the measurement found something real, and four
+times in a row it was not the cause.
+
+### The answer
+`pneu_thunk.wav` at **7.00s, 32.80s and 44.77s**, plus `crusher.wav` at 2.53s.
+Both are on the **standing forever-ban** in `feedback_banned_sfx_air`, from reel
+116: *"those puff of air sounds, do not use those sound effects again forever."*
+A pneumatic thunk is compressed air escaping. **Two of those timestamps are the
+ones he named.** The ban is in `memory/MEMORY.md`'s index, which is read at the
+start of every session.
+
+### Why five rounds of measuring never found it
+`pneu_thunk` is **4.6% above 2kHz with a 17ms attack.** It passes every spectral
+gate in `sfx_audit`. The memory file says this in as many words — *"sfx_audit
+CANNOT hear this class"* — and prescribes a BAN LIST and an ATTACK SCAN instead.
+
+> ### ⭐⭐⭐ A MEASUREMENT CANNOT OUT-ARGUE A BAN. CHECK THE BAN LIST FIRST, BEFORE THE SPECTRUM.
+> And when a note RECURS, re-read the memory for that note before building any
+> new instrument to hunt it.
+
+### The four wrong diagnoses, kept as a record of the failure mode
+| round | what the measurement "found" | real? | the cause? |
+|---|---|---|---|
+| 3 | the music bed at 23.9% above 4kHz in the reported window | yes | no |
+| 5 | a plosive — worst low/mid ratio in the file, at 32.23s | yes | no |
+| 7 | three of five room-tone beds are broadband noise | yes | no |
+| 8 | 22 inhales, 3.7s of the read | **no** | **no — and it damaged the read** |
+
+Round 8 shipped a de-breather and Alex came back with *"now there's randomly
+cuts in the audio."* The detector's four tests — quiet, broadband, non-tonal,
+sustained — also describe unvoiced fricatives, sentence tails and low-energy
+function words, so it ducked real speech. **Reverted and deleted. Do not build a
+de-breather for these VOs.**
+
+> ### ⛔⛔ THE FALSE-POSITIVE CASCADE
+> Given any signal and a search, the search returns a maximum. Four rounds of
+> "I measured X and found an anomaly" produced four anomalies and zero fixes.
+> **When you cannot find a cause, say so and re-read the rules — do not build
+> another instrument.**
+
+### ⭐ The one method that did work, when it was finally used
+**Measure each STEM SEPARATELY at the exact timestamp reported, scaled by its
+real mix gain.** Measuring the mixed total says nothing, because in a VO gap the
+total is whatever is loudest. Separating VO / bed / SFX named a culprit in one
+pass, twice.
+
+---
+
+## 15. THE GATES THAT NOW CLOSE THOSE HOLES (all in `tools/sfx_audit.py`)
+
+| gate | why it exists |
+|---|---|
+| **BANNED** | hard-fails on `pneu_thunk` / `crusher` **before any measurement**. Verified: feeding them back in fails the audit. |
+| **NOISE-BED** | ⛔ the other air gates deliberately EXEMPT bed cues (*"any NON-BED cue with attack >150ms…"*), and that carve-out is exactly where a continuous puff hides. Flags a bed-level cue with >4kHz over 8% AND **peakiness** under 14 — peakiness = top-1% bin / median bin over 1-8kHz, and it separates a hum from hiss cleanly: `stage_hum` 337.7 and `deep_engine` 28.1 are TONE; `shop_bed` 9.3, `machine_bed` 10.8, `engine_loop` 11.8 are NOISE. |
+| **SWELL-Nms** | the ATTACK SCAN, promoted from a prescribed manual step to a gate — a rule you have to remember is a rule that gets skipped. It caught `engine_rev` at 361ms on SFX_HERO, invisible to every other check. ⛔ It respects `from:`, because a gate that re-flags an already-fixed cue is a gate people learn to ignore. |
+
+> **Every carve-out in a gate is a place a defect can live undetected. When a
+> note survives a fix, suspect the layer your own gate EXEMPTS.**
+
+---
+
+## 16. THE MUSIC BED — two more, both measured on reel 115
+
+### ⛔⛔⛔ CHOOSE THE WINDOW BY ITS OPENING THREE SECONDS, NOT ITS MEAN
+A picker that scored window MEAN and drop-out chose ADOS @ 107.0s: **3.7 dB
+louder on average and 4.4 dB QUIETER across the opening three seconds** than the
+house start. Alex: *"the bg music isn't the right spot compared to previous."*
+
+```
+                 onset   rise     OPENING 3s
+house  13.95s    0.973  x17.05      -12.4 dB
+picked 107.0s    0.345   x3.43      -16.8 dB
+```
+
+⭐ **A bed is judged where a viewer meets it.** And the house spot was written
+down the whole time — `claude-ai-reel-workflow` records that for "Another Day Of
+Sun" the loud section is **8-16s**, dropping after 18s, and that the house ships
+**`-ss 13.95`**. ⛔ My own `worst-1.5s <= 9 dB` bar actively REJECTED it (13.95
+measures 11.2). **Look up the house spot before deriving one.**
+
+### ⛔⛔ COMPRESS THE BED BEFORE YOU LEVEL IT
+`loudnorm` sets an **integrated** level, so a track with wide internal dynamics
+puts its brass hits far above target. Measured: peaks sat **11.2 dB above the
+bed's own median** and landed **3.6 dB under the voice inside a VO gap**, where a
+swell in a silence reads as air. `acompressor` 4:1 (threshold 0.045, attack 25,
+release 260) before `loudnorm=I=-24:LRA=7`:
+
+```
+peak over median   11.2 dB -> 3.7 dB
+worst VO gap       -3.6 dB -> -8.5 dB      (others -11.5 to -12.6)
+```
+
+The house figure of "12 dB under the VO" was always an AVERAGE. Without
+compression a wide-range track never actually sits there.
+
+---
+
+## 17. ⭐⭐ WHEN ALEX ASKS FOR MORE CUES, THE CEILING BENDS — BUT THE SLAP GATE DOES NOT
+
+Reel 115 ships **80 cues over 51.41s = 1.56/sec**, over the 1.0-1.5 ceiling, and
+deliberately: he asked twice for a sound on every discrete event — a seat on all
+thirteen sockets, and a small sound on every slot fill. Two of five slot fills
+had made **no sound at all**, which is why that beat read as inert regardless of
+the picture.
+
+⭐ **The ceiling is a proxy; the SLAP GATE is the mechanism.** *"Too many sfx and
+some of them are annoying"* is caused by a repeated BRIGHT transient. Every
+repeated cue in this reel is one of the two lowest-HF samples in the bank
+(`thock` 1.3%, `pickup_chime` 1.2%) and each run is **pitched ascending** rather
+than copy-pasted — which also makes a repeated reward read as PROGRESS. Buy the
+budget back from beats the picture already counts, then state the overage.

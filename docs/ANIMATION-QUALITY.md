@@ -959,6 +959,116 @@ needed to know the smooth version had more swept area and half the jerk.
 carrying it. §1 is a description of what the audit rewards, **not** a description of what looks good.
 
 
+## 14. ⛔⛔⛔ `Hero` HAD NO ACTION LOOP — ONLY `Crew` DID (reel 115)
+
+§5 is the biggest measured lift in this repo and it was only ever wired into the
+CROWD. `Hero` — **the one sprite a viewer is actually watching** — stood
+perfectly still whenever its authored beat was not firing. Counted on a reel that
+had already passed every gate:
+
+```
+S1   100 dead frames of 132     <- "why is that claude sprite in the suit not moving"
+S12  140 of 165
+S5   116 of 146
+S8   100 of 136
+```
+
+⭐ **THE FIX, AND THE SHAPE THAT MAKES IT SAFE:** the hero runs the same four
+loops, with **the amplitude scaled to zero as drive/strain rise**, so an authored
+action always wins outright and the loop only ever fills the gaps. A breathing
+idle sits under all four at **4.6px / 2.6°** — the measured floor at which an
+idle READS, against the 1.7px that registers on a metric and looks static to a
+person. One loop per scene, matched to what that hero should be doing, phases
+offset so no two run in lockstep. Median motion **11.91 → 12.32**, nine scenes up.
+
+> **Check every kit component for the levers it does NOT pass through.** `Hero`
+> also never forwarded `Mascot`'s own `stern` and `shock` — so no hero in any
+> reel had ever scowled or flinched.
+
+---
+
+## 15. ⛔⛔⛔ A DRAWN OBJECT IS NOT A RECOGNISABLE ONE (reel 115)
+
+The same shot was wrong in opposite directions two rounds running, and that is
+the useful part:
+
+| version | note it got |
+|---|---|
+| five brown crates | *"too plain and dull"* |
+| five hand-drawn objects — a pass book, a cord coil, a grabber claw | *"they need to be BRANDS people recognize, like claude, chatgpt, gemini"* |
+
+⭐ **At half a second on a phone, a viewer RECOGNISES A MARK; they do not decode
+a silhouette.** Craft on the object was the wrong axis entirely — recognition is
+the axis. Five branded plates (figma / youtube / scrapling / ollama / claude),
+each verified against that repo's own README, each on its own colour with a name
+strip: the mark says what it is ABOUT, the strip says what it IS.
+
+⛔ **AND THE ROUND-2 LESSON STILL APPLIES ON TOP:** the first version of those
+plates wore the SAME white GitHub tile on all five, and five identical bright
+squares became the loudest thing in frame. Identity comes from **shape AND
+colour**; a shared mark is the container defect one layer up.
+
+---
+
+## 16. ⛔⛔⛔ I ADDED A BANNED THING TO PASS A GATE (reel 115)
+
+`feedback_no_flashing_transitions` is standing and unambiguous — *"no white
+flashes, they read as a strobe and physically hurt to watch"* — and to lift one
+scene's motion score I put an **800x226 bone plate at 0.86 opacity, three frames,
+five times.** Alex: *"I don't like how the screen flashes every time the github
+repo goes into the slot."*
+
+This is §9's warning in its purest form: **a metric satisfiable the wrong way
+WILL be satisfied the wrong way** — and here the wrong way was one the house had
+already banned in writing.
+
+⭐ **The check, and it costs nothing:** before shipping, grep the reel for
+full-frame overlays painted near-white. A flash is the one motion lever that is
+cheap, effective and forbidden.
+
+⭐ **And the honest replacement measured BETTER than the flash it removed.**
+Removing it cost ARCH 5.4 points; making the overhead goods rail RUN — §1's
+biggest per-scene lever, a full-width high-contrast travelling band — took it
+from 7.86 back to **11.72** with no flash in it at all.
+
+---
+
+## 17. THREE CROP AND ORDER TRAPS, ALL FOUND BY EYE (reel 115)
+
+- ⛔ **A PUNCH-IN CROPS HARDER THAN THE PUSH, AND ONLY AFTER THE CUT.** Shot B at
+  1.26 on top of the scene's own 1.055 leaves **761px of 1012 visible — 125px
+  gone each side.** Content laid out against the panel passes a frame-0 check and
+  loses its edge at the cut. Compute safe centres against the PUNCH.
+- ⛔ **THE SUBJECT MUST NOT BE BEHIND THE PROPS.** A plate row at z60 over a hero
+  at z56, at chest height, made the subject of the hook the one thing hidden. And
+  an UNLANDED container drawn at z66 put a dark plate across the hero at 47s —
+  **a socket waiting to be filled should draw NOTHING when the set already paints
+  one.** The arrival is the reveal.
+- ⛔ **RE-CUTTING A BEAT ONTO ITS SPOKEN WORD CAN EMPTY THE SCENE AROUND IT.**
+  Moving S11's landing 13 frames earlier (onto the figure being said) left a
+  52-frame tail: **8.56 → 6.45**. Moving S3's swaps onto their words left 40 dead
+  frames in FRONT. Both correct cuts; both need the rest of the scene rebuilt
+  around them.
+
+---
+
+## 18. ⭐⭐ A REWARD BEAT HAS TO RESOLVE SOMEWHERE (reel 115)
+
+*"Each time the github icon clicks into the slot it should have some sort of
+interesting dopamine inducing effect and small sfx."*
+
+**A burst that goes nowhere is a firework; a burst that DELIVERS is a reward.**
+Four things fire together on each seat: the slot's own bed pulses (contained to
+the slot at 2.7% of the panel — **never** a screen flash, see §16), ten stars
+burst out, a `+★132,255` chip **arcs into the running total** which then ticks up
+by exactly that amount, and the rack recoils.
+
+⛔ **And the real defect was audio: three of the five fills made NO SOUND AT
+ALL.** That is why the beat read as inert whatever the picture did. Each seat now
+carries a chime pitched one step up the run — **an ascending run is what makes a
+repeated reward read as PROGRESS rather than repetition.**
+
+
 ## Related
 [`THE-OPEN.md`](THE-OPEN.md) (the first five seconds, and the correction in §2 above) ·
 [`MEASURING.md`](MEASURING.md) (making a number mean something) ·

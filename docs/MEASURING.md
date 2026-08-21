@@ -275,6 +275,33 @@ Every measurement mistake from one reel, for pattern recognition:
 
 ---
 
+## Reel 115 — three ways a correct calculation lied
+
+⛔ **A SCALE-INVARIANT RATIO IS HIGH BY DEFINITION DURING THE THING IT MEASURES.**
+Hunting "air", I measured the >4kHz share in the gaps between words and found
+spikes of 75-84%. They were sibilants: **a 75% high-frequency ratio during an /s/
+is what an /s/ IS.** I built a de-esser for it, which moved the figure 16.2% ->
+16.5% — nothing. *(Law 9: apply a detector only to the signal it was calibrated
+on.)*
+
+⛔ **AN ABSOLUTE-dB THRESHOLD ON A PRE-NORMALISED FILE SELECTS THE WRONG
+WINDOWS.** A breath detector keyed to a fixed -52..-28 dB band, run BEFORE
+`loudnorm`, picked completely different material from what is audible in the
+finished file — 2 dB of improvement where 17 was expected. **Key every audio
+threshold to the file's OWN speech reference, and run the detector on the file
+that will actually be heard.**
+
+⛔ **A GATE THAT CRIES WOLF GETS IGNORED.** The new attack-scan gate measured the
+raw sample and so kept re-flagging a cue that had already been fixed with a
+`from:` offset. A gate must understand every parameter that legitimately changes
+the thing it measures, or the team learns to skip it.
+
+⭐ **AND THE POSITIVE ONE: SEPARATE THE STEMS.** For any "I hear X in the mix"
+note, measure **each stem alone at the exact reported timestamp, scaled by its
+real mix gain.** The mixed total is uninformative — in a VO gap it is simply
+whatever is loudest. This named a culprit in one pass, twice, after four rounds
+of measuring the total had named none.
+
 ## Checklist
 
 Before printing a number, or writing a gate:

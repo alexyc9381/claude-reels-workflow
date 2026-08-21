@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 97,
-    "reels_total": 143,
-    "factory_logs": 57,
+    "reels_with_code": 98,
+    "reels_total": 144,
+    "factory_logs": 58,
     "storyboards": 58,
-    "caption_jsons": 106,
-    "memory_md": 197,
+    "caption_jsons": 107,
+    "memory_md": 198,
     "creators": 8,
     "packs": 3
   },
@@ -511,6 +511,7 @@
         "video/src/data/words_109plugins3.json",
         "video/src/data/words_110flow.json",
         "video/src/data/words_113go.json",
+        "video/src/data/words_115star.json",
         "video/src/data/words_116bill.json",
         "video/src/data/words_ads.json",
         "video/src/data/words_agency.json",
@@ -955,6 +956,17 @@
       "log": "memory/reels/spend-factory-log.md",
       "storyboard": null,
       "captions": []
+    },
+    {
+      "key": "star",
+      "name": "star",
+      "number": null,
+      "code": "video/src/ClaudeStarReel.tsx",
+      "log": "memory/reels/star-factory-log.md",
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_115star.json"
+      ]
     },
     {
       "key": "swarm",

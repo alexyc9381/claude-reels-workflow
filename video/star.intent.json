@@ -1,0 +1,93 @@
+{
+  "reel": "115-star",
+  "fps": 30,
+  "voDuration": 51.41,
+  "L": [
+    0.0,
+    3.41,
+    7.79,
+    11.37,
+    14.88,
+    17.41,
+    22.27,
+    26.43,
+    29.43,
+    33.96,
+    38.07,
+    41.01,
+    44.37,
+    49.88
+  ],
+  "scenes": [
+    {
+      "i": 0,
+      "job": "STREET hook",
+      "set": "street"
+    },
+    {
+      "i": 1,
+      "job": "ARCH rack",
+      "set": "arch"
+    },
+    {
+      "i": 2,
+      "job": "HOLES eject",
+      "set": "holes"
+    },
+    {
+      "i": 3,
+      "job": "BAYS swap",
+      "set": "holes"
+    },
+    {
+      "i": 4,
+      "job": "TILL rip",
+      "set": "till"
+    },
+    {
+      "i": 5,
+      "job": "PATCH cords",
+      "set": "patch"
+    },
+    {
+      "i": 6,
+      "job": "DRUMS kick",
+      "set": "patch"
+    },
+    {
+      "i": 7,
+      "job": "METER cut",
+      "set": "check"
+    },
+    {
+      "i": 8,
+      "job": "CHECK pass",
+      "set": "check"
+    },
+    {
+      "i": 9,
+      "job": "SHED fire",
+      "set": "shed"
+    },
+    {
+      "i": 10,
+      "job": "METERS dark",
+      "set": "shed"
+    },
+    {
+      "i": 11,
+      "job": "WALL hoist",
+      "set": "plugs"
+    },
+    {
+      "i": 12,
+      "job": "CROSS cables",
+      "set": "plugs"
+    },
+    {
+      "i": 13,
+      "job": "CTA handoff",
+      "set": "gate"
+    }
+  ]
+}

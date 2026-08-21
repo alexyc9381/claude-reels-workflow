@@ -6,10 +6,22 @@
 Four gates, each written after a real rejection on reel 107:
   HISS BED   dur > 0.8s and >85% of energy above 2kHz  (a noise bed, not an fx)
   AIR SWELL  attack > 40ms and <250Hz energy < 15%     (a swoosh IS a puff of air)
+  BANNED     ⛔⛔⛔ pneu_thunk / crusher — a STANDING forever-ban. Checked before
+             any measurement, because reel 115 shipped pneu_thunk three times
+             through four rounds of "there is a puff of air" while every
+             spectral gate here reported clean.
   NAMED AIR  the filename says whoosh/swoosh/puff — banned no matter what it measures
   MISSING    a cue pointing at no file is a cue that silently never plays
   SLAP       a cue used 5+ times must be LOW — a repeated bright transient is a
              metronome of slaps (reel 107: clap_slam on all 13 scene cuts)
+  NOISE BED  ⛔⛔ a BED-level cue that is broadband NOISE rather than tone. This
+             gate exists because the other air gates deliberately EXEMPT beds —
+             "any NON-BED cue with attack >150ms is a swell" — and reel 115 spent
+             four review rounds on a "puff of air throughout the video" that was
+             hiding in exactly that carve-out. Measured: >4kHz share and
+             PEAKINESS (top-1% bin / median bin over 1-8kHz). A hum has tall bins
+             (stage_hum 337.7), hiss is flat (shop_bed 9.3, machine_bed 10.8,
+             engine_loop 11.8). Flagged when >4kHz > 8% AND peakiness < 14.
   BALANCE    --mix <reel.mp4>: the rendered mix vs the approved-reel band
   LEVELS     --levels: perceived (A-weighted) level of every cue, loudest first
 Exit 1 if anything is flagged.
@@ -27,11 +39,34 @@ import numpy as np
 src = open(sys.argv[1]).read()
 root = os.path.join(os.path.dirname(sys.argv[1]), "..", "public", "sfx")
 cues = sorted(set(re.findall(r'src:\s*"([^"]+)"', src)))
+# which cues are ONLY ever used at bed level — those are allowed to swell
+_lv = {}
+for _m in re.finditer(r'src:\s*"([^"]+)",\s*v:\s*LEVELS\.(\w+)', src):
+    _lv.setdefault(_m.group(1), set()).add(_m.group(2))
+_bed_only = {k: (v == {"SFX_BED"}) for k, v in _lv.items()}
+# ⛔ THE GATE MUST RESPECT `from:` — that parameter exists precisely to skip a
+# slow attack, so measuring the raw file re-flags a cue already fixed, and a
+# gate that cries wolf is a gate people learn to ignore.
+_from = {}
+for _m in re.finditer(r'src:\s*"([^"]+)"[^}]*?from:\s*([\d.]+)', src):
+    _from[_m.group(1)] = max(_from.get(_m.group(1), 0.0), float(_m.group(2)))
 bad = []
 print(f"sfx_audit · {len(cues)} distinct cues\n")
+# ⛔⛔⛔ THE STANDING BAN LIST — checked BEFORE any measurement, because that is
+# the whole point. `feedback_banned_sfx_air` banned these on reel 116 (*"those
+# puff of air sounds, do not use those sound effects again forever"*) and reel
+# 115 shipped `pneu_thunk` THREE times anyway, through four review rounds of
+# "there is a puff of air", because it passes every spectral gate in this tool:
+# 4.6% above 2kHz, 17ms attack. A MEASUREMENT CANNOT OUT-ARGUE A BAN.
+BANNED = ("pneu_thunk", "crusher")
+
 for c in cues:
     NAMED_AIR = ("whoosh", "swoosh", "swish", "woosh", "puff", "poof", "breath", "airy", "wind")
     base = c.rsplit("/", 1)[-1].lower()
+    if any(b in base for b in BANNED):
+        bad.append((c, ["BANNED"]))
+        print(f"  \u26d4 {c:22s} BANNED FOREVER (feedback_banned_sfx_air) — remove it")
+        continue
     if any(w in base for w in NAMED_AIR):
         bad.append((c, ["NAMED-AIR"]))
         print(f"  \u26d4 {c:22s} NAMED AIR — banned by name, regardless of measurements")
@@ -48,6 +83,24 @@ for c in cues:
     hi = sp[fr > 2000].sum() / max(sp.sum(), 1e-9)
     lo = sp[fr < 250].sum() / max(sp.sum(), 1e-9)
     flags = []
+    # ---- NOISE BED: broadband hiss used as room tone (reel 115, four rounds)
+    nfft = 1 << 14
+    _seg = a[:nfft] if len(a) >= nfft else np.pad(a, (0, nfft - len(a)))
+    _sp = np.abs(np.fft.rfft(_seg * np.hanning(nfft)))
+    _fr = np.fft.rfftfreq(nfft, 1 / sr)
+    hi4 = _sp[_fr > 4000].sum() / max(_sp.sum(), 1e-9)
+    _band = _sp[(_fr > 1000) & (_fr < 8000)]
+    peaky = float(np.mean(np.sort(_band)[-max(1, len(_band) // 100):]) / (np.median(_band) + 1e-12))
+    if dur > 1.5 and hi4 > 0.08 and peaky < 14:
+        flags.append("NOISE-BED")
+    # ---- ATTACK SCAN: any NON-BED cue peaking later than 150ms is a SWELL, not
+    # a hit (feedback_banned_sfx_air). `from:` skips into the file to fix it.
+    _skip = int(_from.get(c, 0.0) * sr)
+    _env2 = env[_skip:] if _skip < len(env) - 1 else env
+    _pk = _env2.max()
+    _atk = int(np.argmax(_env2 >= 0.9 * _pk)) / sr * 1000
+    if _atk > 150 and not _bed_only.get(c, False):
+        flags.append(f"SWELL-{int(_atk)}ms")
     if dur > 0.8 and hi > 0.85: flags.append("HISS")
     if atk > 40 and lo < 0.15:  flags.append("AIR")
     if flags: bad.append((c, flags))

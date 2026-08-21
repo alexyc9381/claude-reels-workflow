@@ -373,6 +373,8 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
   const p = asPlace("arch");
   const SLAM = [8, 31, 54, 77, 100];
   const PLUNGE = 108;
+  /* the cursor travels in, lands on the button, and CLICKS on "one-click" */
+  const CUR_IN = 74, CLICK = 100;
   const gy = p.horizon + 176;
   const plunge = E(f, PLUNGE, PLUNGE + 7, 0, 1, OUT) - E(f, PLUNGE + 7, PLUNGE + 18, 0, 1, IO);
   return (
@@ -385,7 +387,7 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
             two thirds of dead brick above, so the answer is what HANGS — a
             loaded goods rack on chains over the gate, swinging on its own
             clock, with the market's stock on it. */}
-        <div style={{ position: "absolute", left: 96, top: 196, width: 820, height: 150,
+        <div style={{ position: "absolute", left: 96, top: 146, width: 820, height: 130,
           zIndex: 30, transform: `rotate(${Math.sin(f / 51) * 0.5}deg)`, transformOrigin: "50% -70px" }}>
           {[0, 1].map(i => (
             <div key={"ch" + i} style={{ position: "absolute", left: 60 + i * 700, top: -104,
@@ -393,20 +395,41 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
           ))}
           <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 26, borderRadius: 5,
             background: "linear-gradient(180deg, #A88866 0%, #5A4432 100%)" }} />
-          {Array.from({ length: 9 }, (_, i) => (
-            <div key={"hg" + i} style={{ position: "absolute", left: 26 + i * 90, top: 24,
-              width: 72, height: 74 + ((i * 5) % 3) * 24, borderRadius: 4,
-              background: i % 3 === 0 ? "#D97757" : i % 3 === 1 ? "#E7B24C" : "#8A6A44",
-              border: "3px solid #3A2A1C" }}>
-              <div style={{ position: "absolute", left: 10, right: 10, top: 12, height: 10,
-                background: hexa("#2A1B10", 0.32) }} />
-            </div>
-          ))}
+          {/* ⛔ THE RAIL RUNS. A static row of goods is furniture; a row that
+              TRAVELS is the highest-value shape §1 measured on this project, and
+              it is what buys back the motion the banned flash was faking. */}
+          {Array.from({ length: 13 }, (_, i) => {
+            const x = ((i * 90 + f * 3.4) % 1060) - 120;
+            return (
+              <div key={"hg" + i} style={{ position: "absolute", left: x, top: 24,
+                width: 76, height: 74 + ((i * 5) % 3) * 26, borderRadius: 4,
+                background: i % 3 === 0 ? "#D97757" : i % 3 === 1 ? "#E7B24C" : "#8A6A44",
+                border: "3px solid #3A2A1C" }}>
+                <div style={{ position: "absolute", left: 10, right: 10, top: 12, height: 12,
+                  background: hexa("#2A1B10", 0.32) }} />
+                <div style={{ position: "absolute", left: 22, top: -18, width: 8, height: 20,
+                  background: "#4A3A2A" }} />
+                <div style={{ position: "absolute", left: 46, top: -18, width: 8, height: 20,
+                  background: "#4A3A2A" }} />
+              </div>
+            );
+          })}
         </div>
 
-        {/* ⭐ THE HERO ARTIFACT — empty and legible before anything lands */}
-        <SlotRack x={506} y={gy - 84} w={800} f={f} z={54} fill={SLAM} s={1.08} />
-        <RunTotal f={f} steps={SLAM} x={286} y={378} />
+        {/* ⭐ THE HERO ARTIFACT — empty and legible before anything lands.
+            It RECOILS on every slam: a damped rock, so a plate landing has a
+            consequence the whole 800px object carries. */}
+        {(() => {
+          const rk = Math.max(...SLAM.map(a2 => rock(f, a2, 5.5, 17)));
+          return (
+            <div style={{ position: "absolute", inset: 0, zIndex: 54,
+              transform: `translateY(${rk * 1.6}px) rotate(${rk * 0.16}deg)`,
+              transformOrigin: "50% 100%" }}>
+              <SlotRack x={506} y={gy - 84} w={800} f={f} z={54} fill={SLAM} s={1.08} />
+            </div>
+          );
+        })()}
+        <RunTotal f={f} steps={SLAM} x={54} y={214} />
 
         {/* the five crew hauling their plates up the ramp */}
         {SLAM.map((at, i) => {
@@ -429,8 +452,62 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
                     style={{ width: 84, height: 84, objectFit: "contain" }} />
                 </div>
               )}
-              {f >= at && <Ring x={182 + i * 156} y={gy - 150} f={f} at={at} r={130} z={60} c="#FFD9A0" />}
-              {f >= at && <Puff x={182 + i * 156} y={gy - 122} f={f} at={at} n={7} s={0.7} z={59} c="#DCB88A" />}
+              {/* ⭐⭐⭐ THE REWARD BEAT. Alex: *"each time the github icon clicks
+                  into the slot it should have some sort of interesting dopamine
+                  inducing effect and small sfx."* Four things fire together on
+                  every seat, and the point of the shape is that it RESOLVES
+                  somewhere — a burst that goes nowhere is a firework, a burst
+                  that DELIVERS is a reward:
+                    1 the slot's own bed pulses gold (contained to the slot —
+                      2.7% of the panel, never a screen flash)
+                    2 ten small stars burst out of it
+                    3 a "+★132,255" chip pops off and ARCS INTO the running
+                      total, which then ticks up by exactly that amount
+                    4 an ascending pickup chime, one step per slot (see the bank)
+                  ⛔ NOT a white plate. `feedback_no_flashing_transitions` is
+                  standing and it applies here too. */}
+              {f >= at && f < at + 6 && (
+                <div style={{ position: "absolute", left: 92 + i * 167, top: 464,
+                  width: 150, height: 146, borderRadius: 8, zIndex: 62,
+                  background: "#F4E3B0", opacity: (1 - (f - at) / 6) * 0.5 }} />
+              )}
+              {f >= at && Array.from({ length: 10 }, (_, k) => {
+                const lf2 = f - at;
+                if (lf2 > 20) return null;
+                const a2 = (k / 10) * Math.PI * 2 + i;
+                const t2 = E(lf2, 0, 20, 0, 1, OUT);
+                const sz = 22 - (k % 3) * 5;
+                return (
+                  <div key={"sp" + k} style={{ position: "absolute",
+                    left: 166 + i * 167 + Math.cos(a2) * t2 * 190 - sz / 2,
+                    top: 534 + Math.sin(a2) * t2 * 120 - sz / 2 + t2 * t2 * 40,
+                    width: sz, height: sz, zIndex: 64, opacity: 1 - t2,
+                    background: k % 2 ? "#F4E3B0" : "#D9A22E",
+                    clipPath: "polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)",
+                    transform: `rotate(${k * 36 + t2 * 200}deg)` }} />
+                );
+              })}
+              {/* the chip that carries the count into the total */}
+              {(() => {
+                const lf2 = f - at;
+                if (lf2 < 0 || lf2 > 16) return null;
+                const t2 = E(lf2, 0, 16, 0, 1, IO);
+                const sx = 166 + i * 167, sy = 534;
+                const cxp = sx + (224 - sx) * t2;
+                const cyp = sy + (250 - sy) * t2 - Math.sin(t2 * Math.PI) * 130;
+                return (
+                  <div style={{ position: "absolute", left: cxp - 74, top: cyp - 22,
+                    zIndex: 86, opacity: lf2 > 12 ? 1 - (lf2 - 12) / 4 : 1,
+                    transform: `scale(${1.25 - t2 * 0.5})`,
+                    padding: "5px 12px", borderRadius: 9, background: "#241F17",
+                    border: "3px solid #D9A22E", display: "flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ ...mono(19, 900), color: "#F4E3B0" }}>+★</span>
+                    <span style={{ ...mono(19, 900), color: "#FFFFFF", whiteSpace: "nowrap" }}>
+                      {R.repos[i].starsText}</span>
+                  </div>
+                );
+              })()}
+              {f >= at && <Ring x={166 + i * 167} y={534} f={f} at={at} r={150} z={60} c="#F4E3B0" w={7} />}
             </React.Fragment>
           );
         })}
@@ -440,6 +517,43 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
             reads through the PLATE ITSELF — a hard drop, a squash, a ring and
             a dust puff — which is §2's "an arrival that costs something" and
             costs the viewer's eyes nothing. */}
+        {/* ⭐⭐ THE ONE-CLICK INSTALL, IN THE MIDDLE OF THE FRAME. A big pointer
+            travels in and CLICKS a big button — the literal thing the line
+            names, drawn where the eye already is rather than as a lever off to
+            one side. The button depresses, rings, and every slot latches. */}
+        {(() => {
+          const press = E(f, CLICK, CLICK + 4, 0, 1, OUT) - E(f, CLICK + 4, CLICK + 14, 0, 1, IO);
+          const t = E(f, CUR_IN, CLICK, 0, 1, IO);
+          const cx = 940 - t * 380, cy = 690 - t * 300;
+          const down = press * 12;
+          return (<>
+            <div style={{ position: "absolute", left: 346, top: 284 + down, width: 320, height: 92,
+              zIndex: 76, borderRadius: 16,
+              background: press > 0.1
+                ? "linear-gradient(178deg, #2E7A57 0%, #12402C 100%)"
+                : "linear-gradient(178deg, #4FBF8B 0%, #1E6B4A 100%)",
+              border: "7px solid #12402E", boxShadow: SH_D,
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 14 }}>
+              <span style={{ ...mono(38, 900), color: "#F2FBF5", letterSpacing: "0.10em" }}>
+                INSTALL</span>
+            </div>
+            {/* the button's own shadow plinth, so it reads as a THING to press */}
+            <div style={{ position: "absolute", left: 346, top: 366, width: 320, height: 20,
+              zIndex: 75, borderRadius: 10, background: "#0C3020" }} />
+            {f >= CLICK && <Ring x={506} y={330} f={f} at={CLICK} r={280} z={78} c="#9CF0C4" w={9} />}
+            {/* the pointer: a real arrow — outlined, with a tail, not a triangle */}
+            {f >= CUR_IN - 2 && (
+              <div style={{ position: "absolute", left: cx, top: cy, width: 96, height: 132,
+                zIndex: 92, transform: `scale(${1 - press * 0.14})`, transformOrigin: "18% 12%" }}>
+                <svg viewBox="0 0 96 132" width="96" height="132">
+                  <path d="M10 6 L10 104 L34 82 L50 120 L72 110 L56 74 L86 70 Z"
+                    fill="#FFFFFF" stroke="#1A1813" strokeWidth="9" strokeLinejoin="round" />
+                </svg>
+              </div>
+            )}
+          </>);
+        })()}
+
         {/* the INSTALL plunger the hero drives on the fifth */}
         <div style={{ position: "absolute", left: 856, top: gy - 244, width: 130, height: 132,
           zIndex: 52 }}>
@@ -460,7 +574,7 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
           <Crew key={"bg" + i} f={f} x={92 + i * 116} y={gy + 46} i={i + 6} size={132} z={30}
             at={0} tint="#8E7A62" />
         ))}
-        <Mark x={44} y={228} s={70} z={80} />
+        <Mark x={858} y={214} s={66} z={80} />
         <Band f={f} at={PLUNGE} t="ONE-CLICK INSTALL" sub="5 REPOS · MIT & OPEN" x={340} />
       </Cam>
     </Scene>
@@ -1524,20 +1638,20 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
         {f >= LAND && <><Ring x={506} y={py} f={f} at={LAND} r={330} z={62} c="#9CF0C4" w={10} />
           <Puff x={506} y={py + 70} f={f} at={LAND} n={12} s={1.1} z={61} c="#6AC69C" /></>}
         {/* ⭐ THE WALL ANSWERS with the two things it actually holds. */}
-        {Array.from({ length: 12 }, (_, i) => {
-          const at = LAND + 3 + i * 4;
+        {Array.from({ length: 18 }, (_, i) => {
+          const at = LAND + 2 + i * 3;
           if (f < at) return null;
           const lf = f - at;
-          const ang = (i / 12) * Math.PI * 2 + 0.4;
-          const t = E(lf, 0, 13, 0, 1, OUT);
-          const cx = 506 + Math.cos(ang) * (170 + t * 340);
+          const ang = (i / 18) * Math.PI * 2 + 0.4 + (i % 2) * 0.17;
+          const t = E(lf, 0, 16, 0, 1, OUT);
+          const cx = 506 + Math.cos(ang) * (170 + t * 400);
           const cy = 296 + Math.sin(ang) * (78 + t * 148);
-          const o = Math.min(1, 1 - (lf - 30) / 14);
+          const o = Math.min(1, 1 - (lf - 40) / 16);
           const sq = squash(lf, 0, 0.3, 3, 12);
           const spin = -14 + i * 9 + t * 40;
           if (i % 2 === 0) {
             /* ⭐ A STRUCK STAR MEDALLION — this is what "92,592 stars" IS */
-            const D = 92;
+            const D = 112;
             return (
               <div key={"st" + i} style={{ position: "absolute", left: cx - D / 2, top: cy - D / 2,
                 width: D, height: D, zIndex: 58, opacity: o,
@@ -1566,7 +1680,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
             );
           }
           /* ⭐ A 1U RACK SERVER — front panel, ear brackets, vents, bays, LEDs */
-          const W2 = 132, H2 = 56;
+          const W2 = 156, H2 = 66;
           return (
             <div key={"sv" + i} style={{ position: "absolute", left: cx - W2 / 2, top: cy - H2 / 2,
               width: W2, height: H2, zIndex: 58, opacity: o,
@@ -1580,18 +1694,18 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
                   border: "3px solid #0E1620" }} />
               ))}
               {/* the vent block */}
-              <div style={{ position: "absolute", left: 26, top: 9, width: 40, height: H2 - 18,
+              <div style={{ position: "absolute", left: 30, top: 11, width: 48, height: H2 - 22,
                 borderRadius: 2, background: `repeating-linear-gradient(90deg, #0E1620 0px, #0E1620 3px, #3A4A60 3px, #3A4A60 7px)` }} />
               {/* two drive bays */}
               {[0, 1].map(k => (
-                <div key={"bay" + k} style={{ position: "absolute", left: 74, top: 10 + k * 19,
-                  width: 34, height: 15, borderRadius: 2, background: "#2A3547",
+                <div key={"bay" + k} style={{ position: "absolute", left: 88, top: 12 + k * 23,
+                  width: 40, height: 18, borderRadius: 2, background: "#2A3547",
                   border: "2px solid #101A26" }} />
               ))}
               {/* status LEDs */}
               {[0, 1, 2].map(k => (
-                <div key={"led" + k} style={{ position: "absolute", left: 114, top: 12 + k * 12,
-                  width: 8, height: 8, borderRadius: "50%",
+                <div key={"led" + k} style={{ position: "absolute", left: 134, top: 14 + k * 14,
+                  width: 10, height: 10, borderRadius: "50%",
                   background: k === 0 ? "#9CF0C4" : k === 1 ? "#E7B24C" : "#5FC79A" }} />
               ))}
             </div>

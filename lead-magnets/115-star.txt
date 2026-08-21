@@ -1,0 +1,95 @@
+TITLE   The Free Five
+SUB     Five public GitHub repositories, 945,792 stars between them, that replace software most people are paying a monthly fee for right now
+
+H       What this actually is
+P       This is not a list of cheap alternatives. Every one of the five below is free, public and open, and each one removes a specific meter rather than lowering a price. That distinction matters, because a cheaper subscription is still a subscription and a removed meter is a line item that never comes back.
+P       All five star counts below were read from the GitHub API on 20 August 2026 and are written here exactly as returned. The video says over 500,000 combined. The real figure is 945,792.
+B       ripienaar/free-for-dev, 132,255 stars
+B       public-apis/public-apis, 466,531 stars, MIT
+B       D4Vinci/Scrapling, 75,397 stars, BSD-3-Clause
+B       ollama/ollama, 179,017 stars, MIT
+B       punkpeye/awesome-mcp-servers, 92,592 stars, MIT
+
+RULE
+
+H       The cost nobody is actually counting
+P       Ask most people what their tooling costs and they will name the two things they chose on purpose. Those are almost never the problem.
+NUM     The trials. You started four to evaluate something in one afternoon, kept one, and are still being billed for the other three because cancelling was a Tuesday job you never did.
+NUM     The single feature APIs. You added one in March for one endpoint on one screen. It has a minimum monthly charge. The screen still works, so nobody has ever looked at it again.
+NUM     The seat you do not use. Somebody left, the seat stayed, and the invoice total did not change enough for anyone to notice.
+NUM     The per token bill. This one is different from the others because it scales with how much you actually work, which makes it feel earned rather than wasted right up until you read the month.
+P       Each of these is small enough to feel like a rounding error, and there is no single screen anywhere that adds them together. That is the whole reason the total is invisible, and it is why an audit beats a negotiation.
+
+RULE
+
+H       1. free-for-dev, the directory of free tiers
+P       A single maintained README listing services that have a genuinely usable free tier, aimed at developers and infrastructure people. It is not a coupon list and there is no signup.
+B       1,346 entries across 56 sections, counted from the README on 20 August 2026
+B       Sections include Design and UI, Generative AI, CI and CD, Monitoring, Email, Forms, Analytics, Storage, DNS, Web Hosting and about forty more
+B       Repo: github.com/ripienaar/free-for-dev
+P       Use it as a lookup rather than a read. Before you sign up for anything, search this file for the category first. Most of the time somebody has already found a tier that covers what you are about to pay for, and the entry tells you what the limit is before you build on it.
+P       The honest caveat: it is a list, not a product. Quality varies entry by entry, some limits have changed since they were written, and you still have to read the free tier terms yourself before you depend on one.
+
+RULE
+
+H       2. public-apis, the switchboard
+P       A categorised index of free public APIs, which is one of the most starred repositories on GitHub for a reason: it is the fastest way to find data you were about to pay a vendor for.
+B       1,706 API entries across 51 categories, counted from the README on 20 August 2026
+B       Categories include Programming, Video, Finance, Data Validation, Weather, Geocoding, Machine Learning, Government, Health and Books
+B       Every entry carries whether it needs auth, whether it supports HTTPS and its CORS status, which is the information that decides whether it is usable from a browser
+B       Repo: github.com/public-apis/public-apis, MIT
+P       The auth and CORS columns are the part people skip and then regret. An API with no auth and CORS enabled can be called straight from your front end with no proxy, no key management and no server. That is often the difference between an afternoon and a sprint.
+
+RULE
+
+H       3. Scrapling, the one that gets the page
+P       A Python scraping framework whose distinguishing feature is that it fetches pages other libraries get blocked on. Its own README describes its fetchers as bypassing anti bot systems like Cloudflare Turnstile out of the box.
+B       75,397 stars, BSD-3-Clause licensed
+B       StealthyFetcher for pages behind bot checks, Fetcher for fast plain HTTP with browser TLS fingerprint impersonation, DynamicFetcher for pages that need a real browser
+B       An adaptive parser that relocates your selectors when a site changes its markup, which is the maintenance cost that usually kills a scraper
+B       Session management, proxy rotation and pause and resume crawls
+B       Repo: github.com/D4Vinci/Scrapling
+P       The practical read: the recurring bill you are replacing here is a per request scraping API, which is priced per page precisely because handling bot checks is the hard part. If your volume is small this is a library import instead of a vendor. If your volume is large, read the terms of the sites you are hitting first, because a tool that can fetch a page is not the same as a right to.
+
+RULE
+
+H       4. Ollama, the model on your own machine
+P       A runtime that downloads and runs open weight models locally with one command. No API key, no per token cost, and the text never leaves your machine, which is the part that matters if you have ever hesitated to paste something into a hosted chat.
+B       179,017 stars, MIT licensed
+B       Runs Llama, Mistral, DeepSeek, Qwen, Gemma, gpt-oss and most other open weight families
+B       One line to start: ollama run llama3
+B       Exposes an OpenAI compatible local endpoint, so most existing code points at it by changing a base URL
+B       Repo: github.com/ollama/ollama
+P       The honest constraint, and it is the one that decides whether this works for you: local models trade a monthly bill for your own RAM. A 7B model is comfortable on 16GB. A 13B wants more. A 70B needs hardware most laptops do not have. Check the model size against your machine before assuming free means free, and expect a smaller model to be worse than a frontier hosted one at hard reasoning while being entirely adequate at summarising, extracting, classifying and rewriting.
+
+RULE
+
+H       5. awesome-mcp-servers, the connectors
+P       Model Context Protocol is the standard that lets an assistant call your actual tools rather than describe them. This repository is the largest curated index of MCP servers that exist, which means it is the list you check before writing an integration yourself.
+B       92,592 stars, MIT licensed. This is the figure the video quotes and it is accurate
+B       Servers covering browsers, databases, file systems, cloud providers, version control, issue trackers, note apps, communication tools and a long tail of everything else
+B       Repo: github.com/punkpeye/awesome-mcp-servers
+P       The meter this removes is not a dollar figure, it is hours. The usual reason an assistant cannot do something useful is not capability, it is that it has no hands on the system that holds the data. Nine times out of ten somebody has already written the server, and finding it takes two minutes against the day it takes to write one.
+
+RULE
+
+H       The order to install them in
+P       Do not install five things at once. Each one below is useful on its own and the order is chosen so that each step tells you whether the next is worth taking.
+NUM     Start with the audit, not the install. List every subscription and every API with a minimum charge, including the ones you forgot. This takes twenty minutes and it is the only step that guarantees a result.
+NUM     Open free-for-dev and search it for every category on that list. Anything with a free tier that covers your usage is a cancellation you can make today.
+NUM     Open public-apis and do the same for every data vendor. Check the auth and CORS columns before you get attached to an entry.
+NUM     If a scraping bill appeared on the audit, install Scrapling and try StealthyFetcher on the exact page that was failing. This is a single afternoon and it either works on the first page or it does not.
+NUM     Install Ollama last, because it is the one with a hardware constraint. Run one small model, point one existing script at the local endpoint, and see whether the quality is adequate for that specific job before you cancel anything.
+NUM     Add MCP servers as you hit walls, not in advance. Search awesome-mcp-servers the moment you catch yourself about to copy data between two tools by hand.
+
+RULE
+
+H       What to know before you start
+P       Three honest notes, because a guide that only lists upsides is an advert.
+NUM     Two of these five are lists, not products. free-for-dev and public-apis are maintained READMEs. They are extremely valuable as lookups and they carry no guarantee about any individual entry, so read the limits yourself before you build on one.
+NUM     Free is not the same as no cost. Ollama costs RAM and electricity. Scrapling costs the time you spend maintaining a scraper that a vendor was maintaining for you. Both are usually the better trade, and both are a trade.
+NUM     The video calls these five Claude plugins. Four of the five are repositories and tools rather than Claude plugins specifically. They are all things you would plug into an assistant based workflow, awesome-mcp-servers most directly of all, and none of them requires Claude to be useful.
+
+RULE
+
+KEY     STAR

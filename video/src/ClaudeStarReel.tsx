@@ -135,12 +135,23 @@ const DUR = {
    greppable gate is a grep for the chiptune pack's filename prefix over the
    cue list below, which must return zero hits.
 
+   ⛔⛔⛔ BAN LIST FIRST, BEFORE ANY OTHER CHECK. `feedback_banned_sfx_air` puts
+   **`pneu_thunk.wav` and `crusher.wav` on a standing forever-ban** from reel 116
+   (*"those puff of air sounds do not use those sound effects again forever"*),
+   and this reel shipped `pneu_thunk` THREE times — 7.00s, 32.80s, 44.77s — plus
+   `crusher` once. `pneu_thunk` is PNEUMATIC: compressed air escaping. Two of
+   those timestamps are the ones Alex named across four review rounds, and every
+   round of measuring said "clean" because the cue is 4.6% above 2kHz with a
+   17ms attack and passes every spectral gate in the tool.
+   ⭐ `tools/sfx_audit.py` now hard-fails on the ban list, so a name can never
+   again get past a measurement.
+
    ⛔ SLAP GATE: a cue used 5+ times must be <=35% above 2kHz, so every bright
    one (`sign_clack` 49.9%, `ratchet` 67.3%, `neon_on` 69.1%, `gold_stamp`
    68.8%, `knife_switch` 51.5%, `slot_stop` 47.4%, `stamp_press` 50.4%,
    `gear_shift` 43.3%, `wrench_clank` 93.3%, `crack_hunt` 86.3%) is capped at
    THREE uses or fewer, and the low ones (`mech_clank` 30.4%, `thock` 1.3%,
-   `rebuild_thud` 2.7%, `sub` 0.8%, `slate_whump` 2.2%, `pneu_thunk` 4.6%)
+   `rebuild_thud` 2.7%, `sub` 0.8%, `slate_whump` 2.2%, `chair_knock` 10.8%)
    carry the repetition.
    ⛔ Every `dur` is >= the file's measured true length so no tail is chopped
    mid-decay, EXCEPT where a long one-shot is deliberately truncated — a slam
@@ -151,7 +162,13 @@ const DUR = {
    information scenes.
 
    ⚠️⚠️ AND THE RATE IS DELIBERATELY OVER THE HOUSE CEILING, WHICH IS A CALL,
-   NOT AN OVERSIGHT. 80 cues over 51.41s = **1.56/sec** against a 1.0-1.5
+   NOT AN OVERSIGHT. Alex has now twice asked explicitly for MORE cues — a seat
+   on all thirteen sockets at 48s, and a small sound on every slot fill at 4s —
+   and both are events the viewer watches happen. The ceiling exists because of
+   *"too many sfx and some of them are annoying"*, and the MECHANISM behind that
+   note is a repeated BRIGHT transient. Every repeated cue here is one of the two
+   lowest-HF transients in the bank (`thock` 1.3%, `pickup_chime` 1.2%), pitched
+   in ascending runs rather than copy-pasted, so the SLAP GATE passes with room. 80 cues over 51.41s = **1.56/sec** against a 1.0-1.5
    ceiling. Alex asked directly for the thing that costs it: *"whenever the
    animation connects to one of the logos, it needs to make some satisfying
    sound as well"* — thirteen sockets, thirteen seats, +9 cues on their own.
@@ -171,16 +188,15 @@ const SFX: Cue[] = [
      ⛔ RESCORED FOR THE REBUILT HOOK. The shot is now five price tags LANDING
      and then five TEARING OFF, so the old shove/clack cues fired on events that
      no longer happen. Five slams are not five copies of one sample — that is a
-     metronome — so it is two pitched `mech_clank` bookends plus a `crusher`
+     metronome — so it is two pitched `mech_clank` bookends plus a knock
      texture under the run, and the tears are one rising `sign_clack` pair. */
-  { at: S(L.S0 + 0),  src: "shop_bed.wav",     v: LEVELS.SFX_BED,     dur: 3.6 },
+  { at: S(L.S0 + 0),  src: "stage_hum.wav",    v: LEVELS.SFX_BED,     dur: 3.6, rate: 0.90 },
   { at: S(L.S0 + 10), src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14, rate: 1.02 },
   { at: S(L.S0 + 18), src: "slot_stop.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.24, rate: 0.96 },
   { at: S(L.S0 + 26), src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14, rate: 0.92 },
   { at: S(L.S0 + 34), src: "slot_stop.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.24, rate: 0.88 },
   { at: S(L.S0 + 42), src: "mech_clank.wav",   v: LEVELS.SFX_HERO,    dur: 0.14, rate: 0.82 },
   { at: S(L.S0 + 58), src: "sign_clack.wav",   v: LEVELS.SFX_MID,     dur: 0.24, rate: 1.10 },
-  { at: S(L.S0 + 76), src: "crusher.wav",      v: LEVELS.SFX_TEXTURE, dur: 0.92, rate: 1.10 },
   /* the gate going: the heaviest low pair in the reel, on the cut */
   { at: S(L.S0 + 86), src: "sub.wav",          v: LEVELS.SFX_HERO,    dur: 0.44 },
   { at: S(L.S0 + 86), src: "boom.wav",         v: LEVELS.SFX_HERO,    dur: 0.56, rate: 0.85 },
@@ -189,10 +205,23 @@ const SFX: Cue[] = [
   /* ---- S1 · UNDER THE ARCH (7). Five plates seating is NOT five copies of one
      sample — that is a metronome of slaps. */
   { at: S(L.S1 + 0),   src: "stage_hum.wav",    v: LEVELS.SFX_BED,     dur: 4.5 },
+  /* ⭐⭐ FIVE SEATS, FIVE SOUNDS — AND THEY CLIMB. Alex: *"each time the github
+     icon clicks into the slot it should have... a small sfx."* Slots 2, 3 and 4
+     previously made NO SOUND AT ALL, which is the whole reason the beat felt
+     inert. Each seat is now a mechanical clank plus a `pickup_chime` pitched one
+     step up the run (0.88 -> 1.28). An ASCENDING run is what makes a repeated
+     reward read as PROGRESS rather than repetition — the same reason S12's
+     socket run climbs — and `pickup_chime` is 1.2% above 2kHz, the second-lowest
+     transient in the bank, so seven uses never slap. */
   { at: S(L.S1 + 8),   src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14 },
+  { at: S(L.S1 + 8),   src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 0.88 },
+  { at: S(L.S1 + 31),  src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 0.98 },
+  { at: S(L.S1 + 54),  src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 1.08 },
+  { at: S(L.S1 + 77),  src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 1.18 },
+  { at: S(L.S1 + 100), src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 1.28 },
   { at: S(L.S1 + 100), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO,    dur: 0.82, rate: 0.90 },
   { at: S(L.S1 + 104), src: "gold_stamp.wav",   v: LEVELS.SFX_MID,     dur: 0.52 },
-  { at: S(L.S1 + 108), src: "pneu_thunk.wav",   v: LEVELS.SFX_HERO,    dur: 0.48 },
+  { at: S(L.S1 + 108), src: "slate_whump.wav",  v: LEVELS.SFX_HERO,    dur: 0.18, rate: 0.90 },
 
   /* ---- S2 · THE PIGEONHOLE WALL (6). ⛔⛔ RESCORED. Alex: *"not good sfx
      there."* v1 gave a wall of 84 passes ejecting ONE `slate_whump` and then a
@@ -206,7 +235,6 @@ const SFX: Cue[] = [
   { at: S(L.S2 + 24),  src: "ratchet.wav",      v: LEVELS.SFX_MID,     dur: 0.52 },
   { at: S(L.S2 + 33),  src: "slate_whump.wav",  v: LEVELS.SFX_HERO,    dur: 0.18 },
   { at: S(L.S2 + 38),  src: "sign_clack.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.24, rate: 1.14 },
-  { at: S(L.S2 + 54),  src: "sign_clack.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.24, rate: 1.02 },
   { at: S(L.S2 + 70),  src: "sign_clack.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.24, rate: 0.90 },
   { at: S(L.S2 + 86),  src: "arrive_chime.wav", v: LEVELS.SFX_MID,     dur: 1.12 },
 
@@ -234,11 +262,10 @@ const SFX: Cue[] = [
   /* ---- S6 · THE DRUMS (5). Four kicks, TWO sounded, plus a chime on each
      category plate landing so the icon has a sound of its own arriving. */
   { at: S(L.S6 + 9),   src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14, rate: 1.04 },
-  { at: S(L.S6 + 50),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14, rate: 1.12 },
   { at: S(L.S6 + 100), src: "temper_chime.wav", v: LEVELS.SFX_MID,     dur: 0.72, rate: 1.08 },
 
   /* ---- S7 · THE METER (5). The cut lands on "a month". */
-  { at: S(L.S7 + 0),   src: "machine_bed.wav",  v: LEVELS.SFX_BED,     dur: 3.1, rate: 0.92 },
+  { at: S(L.S7 + 0),   src: "deep_engine.wav",  v: LEVELS.SFX_BED,     dur: 3.1, rate: 0.86 },
   { at: S(L.S7 + 38),  src: "ratchet.wav",      v: LEVELS.SFX_MID,     dur: 0.52, rate: 0.88 },
   { at: S(L.S7 + 57),  src: "adv_strike.wav",   v: LEVELS.SFX_HERO,    dur: 0.62 },
   { at: S(L.S7 + 57),  src: "sub.wav",          v: LEVELS.SFX_HERO,    dur: 0.44, rate: 0.85 },
@@ -253,7 +280,7 @@ const SFX: Cue[] = [
   { at: S(L.S8 + 32),  src: "scan_beep.wav",    v: LEVELS.SFX_MID,     dur: 0.42, rate: 0.94 },
   { at: S(L.S8 + 50),  src: "scan_beep.wav",    v: LEVELS.SFX_MID,     dur: 0.42, rate: 0.88 },
   { at: S(L.S8 + 86),  src: "data.wav",         v: LEVELS.SFX_TEXTURE, dur: 0.22 },
-  { at: S(L.S8 + 101), src: "pneu_thunk.wav",   v: LEVELS.SFX_HERO,    dur: 0.48, rate: 1.06 },
+  { at: S(L.S8 + 101), src: "mech_clank.wav",   v: LEVELS.SFX_HERO,    dur: 0.14, rate: 0.84 },
   { at: S(L.S8 + 106), src: "chair_knock.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.28, rate: 1.10 },
   { at: S(L.S8 + 118), src: "chair_knock.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.28, rate: 0.94 },
   { at: S(L.S8 + 128), src: "slate_whump.wav",  v: LEVELS.SFX_HERO,    dur: 0.18, rate: 0.84 },
@@ -263,8 +290,8 @@ const SFX: Cue[] = [
      sound after it starts, and that was the note. */
   { at: S(L.S9 + 4),   src: "motor_sag.wav",    v: LEVELS.SFX_MID,     dur: 0.86, rate: 1.10 },
   { at: S(L.S9 + 17),  src: "motor_sag.wav",    v: LEVELS.SFX_MID,     dur: 0.86, rate: 0.94 },
-  { at: S(L.S9 + 24),  src: "engine_rev.wav",   v: LEVELS.SFX_HERO,    dur: 1.42 },
-  { at: S(L.S9 + 36),  src: "engine_loop.wav",  v: LEVELS.SFX_BED,     dur: 2.6 },
+  { at: S(L.S9 + 24),  src: "engine_rev.wav",   v: LEVELS.SFX_HERO,    dur: 1.12, from: 0.30 },
+  { at: S(L.S9 + 36),  src: "deep_engine.wav",  v: LEVELS.SFX_BED,     dur: 2.6, rate: 1.14 },
   { at: S(L.S9 + 100), src: "can_bong.wav",     v: LEVELS.SFX_MID,     dur: 0.36, rate: 1.14 },
 
   /* ---- S10 · THE METER ROW (5). The villain dies once, here. Six meters are
@@ -280,8 +307,8 @@ const SFX: Cue[] = [
 
   /* ---- S12 · THE INTERCHANGE (8) — the reel's second density peak. Thirteen
      cables are FOUR pitched `thock` seats plus a chime, never thirteen cues. */
-  { at: S(L.S12 + 0),   src: "machine_bed.wav",  v: LEVELS.SFX_BED,     dur: 5.5, rate: 1.05 },
-  { at: S(L.S12 + 12),  src: "pneu_thunk.wav",   v: LEVELS.SFX_HERO,    dur: 0.48 },
+  { at: S(L.S12 + 0),   src: "stage_hum.wav",    v: LEVELS.SFX_BED,     dur: 5.5, rate: 1.06 },
+  { at: S(L.S12 + 12),  src: "impact.wav",       v: LEVELS.SFX_HERO,    dur: 0.64, rate: 1.04 },
   /* ⭐⭐ EVERY SINGLE CONNECTION SEATS. Alex: *"whenever the animation connects
      to one of the logos, it needs to make some satisfying sound as well."* v1
      gave thirteen arrivals four cues, so nine marks lit in silence.
@@ -295,9 +322,7 @@ const SFX: Cue[] = [
   { at: S(L.S12 + 26),  src: "thock.wav",        v: LEVELS.SFX_MID,     dur: 0.18, rate: 0.84 },
   { at: S(L.S12 + 38),  src: "thock.wav",        v: LEVELS.SFX_MID,     dur: 0.18, rate: 0.88 },
   { at: S(L.S12 + 52),  src: "thock.wav",        v: LEVELS.SFX_MID,     dur: 0.18, rate: 0.92 },
-  { at: S(L.S12 + 64),  src: "thock.wav",        v: LEVELS.SFX_MID,     dur: 0.18, rate: 0.96 },
   { at: S(L.S12 + 86),  src: "thock.wav",        v: LEVELS.SFX_MID,     dur: 0.18, rate: 1.00 },
-  { at: S(L.S12 + 104), src: "thock.wav",        v: LEVELS.SFX_MID,     dur: 0.18, rate: 1.10 },
   { at: S(L.S12 + 106), src: "thock.wav",        v: LEVELS.SFX_MID,     dur: 0.18, rate: 1.14 },
   { at: S(L.S12 + 116), src: "thock.wav",        v: LEVELS.SFX_MID,     dur: 0.18, rate: 1.18 },
   { at: S(L.S12 + 124), src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36 },
@@ -310,7 +335,6 @@ const SFX: Cue[] = [
      the rack crossing the counter, and the stamp is what it costs. */
   { at: S(L.S13 + 20), src: "slate_whump.wav",  v: LEVELS.SFX_HERO,    dur: 0.18, rate: 0.88 },
   { at: S(L.S13 + 25), src: "stamp_press.wav",  v: LEVELS.SFX_HERO,    dur: 0.36 },
-  { at: S(L.S13 + 30), src: "bell_ring.wav",    v: LEVELS.SFX_MID,     dur: 1.62, rate: 1.06 },
 ];
 
 /* ⛔⛔⛔ THE BED IS THE HOUSE TRACK, NOT A SYNTH. Alex, on v1: *"the BG music is
@@ -360,6 +384,13 @@ const SFX: Cue[] = [
        steel   ELBM @  46.00s   onset 0.880  rise x6.64  -12.7 dB  worst-1.5s 11.8 dB
                                                           ^ over the 9 dB bar
 
+   ⛔⛔ AND THE BED IS COMPRESSED BEFORE IT IS LEVELLED. `loudnorm` sets an
+   INTEGRATED level, so a track with 11 dB of internal range puts its brass hits
+   far above the target: measured, this bed's peaks sat **11.2 dB over its own
+   median** and landed **3.6 dB under the voice** inside a VO gap, where they
+   read as a swell. `acompressor` at 4:1 before the level stage takes
+   peak-over-median to **3.7 dB**, and the gaps from -3.6 to -8.5/-12.6 dB —
+   the 12 dB target the house figure always meant.
    ⛔ NO `afade in` on any of them: a 0.9s fade kills the first downbeat.
    loudnorm I=-24, not -27; -27 is a quiet bed and reads as absent.
 
@@ -406,9 +437,9 @@ const CAP_Y: Record<Variant, number> = { market: 1262, amber: 1330, steel: 1194 
    under the VO rather than 12. A standing instruction from Alex outranks a
    target I derived. All three land within 0.8 dB of each other. */
 export const BED_GAIN: Record<Variant, number> = {
-  market: db(7.10),   /* -> volume 0.2265 */
-  amber:  db(7.80),   /* -> volume 0.2455 */
-  steel:  db(7.20),   /* -> volume 0.2291 */
+  market: db(6.90),   /* -> volume 0.2213 */
+  amber:  db(7.30),   /* -> volume 0.2317 */
+  steel:  db(7.30),   /* -> volume 0.2317 */
 };
 /** the bed-only A/B: identical picture, bed 6 dB down */
 export const BED_QUIET = db(-6);
