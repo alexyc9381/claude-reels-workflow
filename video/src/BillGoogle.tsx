@@ -169,7 +169,7 @@ export const GoogleSprite: React.FC<{ f: number; x: number; y: number; size: num
    Inventing an icon for Stitch or Pomelli would be worse than either.
    ⛔ AND NOTHING HERE IS INVENTED: every name below is on labs.google today.
    ====================================================================== */
-export type GTool = { name: string; mark?: string; dark?: boolean };
+export type GTool = { name: string; mark?: string; dark?: boolean; wide?: boolean };
 
 export const G_TOOLS: GTool[] = [
   /* the five the reel is about, first — these are the survivors of the sift */
@@ -208,16 +208,31 @@ export const G_TOOLS: GTool[] = [
   { name: "LEARN YOUR WAY", mark: "logos/learnyourway.png" },
   { name: "MIXBOARD",     mark: "logos/labsbeaker.png" },
   { name: "POMELLI",      mark: "logos/pomelli.png" },
-  /* no published product mark — the real name is the mark */
+  /* ⭐ the three Google SCIENCE tools publish real icons on the DeepMind CDN —
+     `science__<tool>__icon.svg`. They declare `fill="none"` and inherit their
+     colour, so a plain <img> rasterises to nothing; they are inlined with an
+     explicit fill instead. */
+  { name: "LIT. INSIGHTS",   mark: "logos/litinsights.png" },
+  { name: "HYPOTHESIS GEN",  mark: "logos/hypothesis.png" },
+  { name: "COMP. DISCOVERY", mark: "logos/compdisc.png" },
+  /* ⭐ these two ship a WORDMARK LOCKUP rather than a square icon, which is a
+     real logo — it just needs the tile's full width instead of a centre square */
+  { name: "DREAMBEANS",   mark: "logos/dreambeans.png", wide: true },
+  /* ⛔⛔ WHISK'S "MARK" WAS FLOW'S WORDMARK. `labs.google/fx/pinhole/hero/
+     wordmark.svg` looked like a Whisk asset because Whisk's page serves it —
+     but /fx is one section with ONE wordmark, and the rasterised file plainly
+     reads "Flow". A WRONG mark is worse than no mark, so Whisk keeps its name.
+     ⭐ The tell was free: rasterise the asset and LOOK at it before wiring it. */
+  { name: "WHISK" },
+  /* ⛔ FOUR GENUINELY HAVE NO PRODUCT MARK, and the name is the honest answer:
+     VEO, IMAGEN and GENIE are MODELS — every DeepMind model page serves the
+     shared Google DeepMind lockup, and Genie's own Labs page serves only the
+     generic Labs favicon. VANTAGE serves the plain Google logo. Drawing an icon
+     for any of them would be inventing a mark. */
   { name: "VEO" },
   { name: "IMAGEN" },
-  { name: "WHISK" },
   { name: "GENIE" },
   { name: "VANTAGE" },
-  { name: "DREAMBEANS" },
-  { name: "LIT. INSIGHTS" },
-  { name: "HYPOTHESIS GEN" },
-  { name: "COMP. DISCOVERY" },
   { name: "AI EDGE" },
 ];
 
@@ -245,8 +260,9 @@ export const ToolTile: React.FC<{ x: number; y: number; s: number; f: number; at
       border: `${4 * s}px solid ${isX ? dkh("#8A8578", 0.46) : t.dark ? "#2A2C32" : "#E6E1D4"}` }}>
       {t.mark ? (
         <Img src={staticFile(t.mark)}
-          style={{ position: "absolute", left: "50%", top: "42%",
-            width: w * (t.dark ? 0.92 : 0.50), height: w * (t.dark ? 0.92 : 0.50),
+          style={{ position: "absolute", left: "50%", top: t.wide ? "40%" : "42%",
+            width: w * (t.wide ? 0.86 : t.dark ? 0.92 : 0.50),
+            height: t.wide ? w * 0.30 : w * (t.dark ? 0.92 : 0.50),
             transform: "translate(-50%,-50%)", objectFit: "contain",
             opacity: isX ? 0.16 : 0.95 }} />
       ) : (

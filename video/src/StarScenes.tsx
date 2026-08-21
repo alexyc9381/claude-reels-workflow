@@ -204,7 +204,7 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
      settles back to exactly #D97757. Identity is the payoff, not the cost. */
   const press = SLAM.filter(a2 => f >= a2 + 2).length / SLAM.length;
   const TURN = SHEAR;
-  const flash = E(f, TURN, TURN + 2, 0, 1, LIN) - E(f, TURN + 2, TURN + 9, 0, 1, OUT);
+  const flash = (E(f, TURN, TURN + 2, 0, 1, LIN) - E(f, TURN + 2, TURN + 9, 0, 1, OUT)) * 0.62;
   const cool = E(f, TURN + 2, TURN + 16, 1, 0, OUT);   /* red -> house clay */
   const heroTint = flash > 0.02
     ? lerpHex("#D97757", "#FFE7BE", flash)
@@ -213,7 +213,7 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
      each impact, and both gone the moment he is free */
   const scowl = B ? 0.9 * cool : press * 0.9;
   const flinch = Math.max(...SLAM.map(a2 => E(f, a2 + 1, a2 + 3, 0, 1, OUT) - E(f, a2 + 3, a2 + 12, 0, 1, IO)));
-  const pop = 1 + flash * 0.16;
+  const pop = 1 + flash * 0.26;
 
   /* the five plates live on the gate, inside the shot-B punch crop (206..806) */
   const PX = (i: number) => 206 + i * 150;

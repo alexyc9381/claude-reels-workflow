@@ -5,6 +5,7 @@ import { CamCtx } from "./BillWorld";
 import { CAM, GRADE, S0, S2 } from "./BillScenes";
 import { GoogleSprite, SparkGuy, Spark, G_TOOLS, ToolTile, G_TINTS } from "./BillGoogle";
 import { SetFor } from "./BillSets";
+import { CHARACTERS } from "./BillChars";
 
 /* Reel 116 · PREVIEW ONLY. Alex: *"for now dont need to render full video just
    hook scene and that 6 seconds scene."* These comps render one scene each so a
@@ -88,6 +89,47 @@ const SpriteBoard: React.FC = () => {
   );
 };
 
+
+/* ⭐ THE CHARACTER SHEET. Alex: *"just show me the different character design
+   options by themselves as images here let me see."* One per card, big, on a
+   neutral ground, with the same idle rig on every one so a design is judged on
+   its DRAWING and not on whether it happens to move better than its neighbour. */
+const CharBoard: React.FC = () => {
+  const f = useCurrentFrame();
+  return (
+    <AbsoluteFill style={{ background: "#ECE9E2" }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 62, textAlign: "center",
+        fontFamily: "Inter, system-ui", fontWeight: 900, fontSize: 52, color: "#1A1813" }}>
+        GOOGLE AI CHARACTER — SIX DESIGNS
+      </div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 126, textAlign: "center",
+        fontFamily: "ui-monospace, Menlo", fontWeight: 700, fontSize: 21, color: "#8C877D",
+        letterSpacing: "0.05em" }}>
+        head and body are different shapes · face on the head · house flat fill and slit eyes
+      </div>
+      {CHARACTERS.map((c, i) => {
+        const cx = 270 + (i % 2) * 540;
+        const cy = 480 + Math.floor(i / 2) * 470;
+        const C = c.C;
+        return (
+          <React.Fragment key={c.key}>
+            <div style={{ position: "absolute", left: cx - 246, top: cy - 330, width: 492,
+              height: 400, borderRadius: 26, background: "#FFFFFF",
+              border: "3px solid #DED9CE" }} />
+            <C f={f} x={cx} y={cy + 20} size={300} i={i} z={40} at={2} loop={i % 4} />
+            <div style={{ position: "absolute", left: cx - 246, top: cy + 82, width: 492,
+              textAlign: "center", fontFamily: "Inter, system-ui", fontWeight: 900,
+              fontSize: 27, color: "#1A1813" }}>{c.name}</div>
+            <div style={{ position: "absolute", left: cx - 246, top: cy + 116, width: 492,
+              textAlign: "center", fontFamily: "ui-monospace, Menlo", fontWeight: 700,
+              fontSize: 18, color: "#8C877D" }}>{c.note}</div>
+          </React.Fragment>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
 /* the 24-tool wall on its own, so the roster can be read */
 const ToolBoard: React.FC = () => {
   const f = useCurrentFrame();
@@ -115,6 +157,7 @@ const Root: React.FC = () => (<>
   <Composition id="p-wall"    component={WallOnly}   durationInFrames={83}  {...V} />
   <Composition id="p-sprites" component={SpriteBoard} durationInFrames={90} {...V} />
   <Composition id="p-tools"   component={ToolBoard}  durationInFrames={90}  {...V} />
+  <Composition id="p-chars"   component={CharBoard}  durationInFrames={90}  {...V} />
 </>);
 
 registerRoot(Root);
