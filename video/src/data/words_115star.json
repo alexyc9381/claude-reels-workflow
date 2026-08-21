@@ -56,21 +56,21 @@
 },
 {
 "start": 1.75,
-"end": 1.79,
+"end": 1.83,
 "word": " on"
 },
 {
-"start": 1.825,
+"start": 1.83,
 "end": 1.97,
 "word": " over"
 },
 {
 "start": 2.17,
-"end": 2.95,
+"end": 2.93,
 "word": " $10,000"
 },
 {
-"start": 2.95,
+"start": 2.93,
 "end": 3.13,
 "word": " worth"
 },
@@ -86,56 +86,56 @@
 },
 {
 "start": 3.41,
-"end": 3.59,
+"end": 3.57,
 "word": " and"
 },
 {
-"start": 3.59,
-"end": 3.71,
+"start": 3.57,
+"end": 3.67,
 "word": " they"
 },
 {
-"start": 3.71,
-"end": 3.83,
+"start": 3.67,
+"end": 3.79,
 "word": " all"
 },
 {
-"start": 4.01,
-"end": 4.15,
+"start": 4.02,
+"end": 4.16,
 "word": " have"
 },
 {
-"start": 4.15,
-"end": 4.31,
+"start": 4.16,
+"end": 4.32,
 "word": " over"
 },
 {
-"start": 4.31,
-"end": 5.43,
+"start": 4.32,
+"end": 5.42,
 "word": " 500,000"
 },
 {
 "start": 5.34,
-"end": 5.6,
+"end": 5.62,
 "word": " combined"
 },
 {
-"start": 5.6,
+"start": 5.62,
 "end": 5.88,
 "word": " stars"
 },
 {
 "start": 5.88,
-"end": 6.04,
+"end": 6.06,
 "word": " on"
 },
 {
-"start": 6.04,
-"end": 6.18,
+"start": 6.06,
+"end": 6.2,
 "word": " GitHub"
 },
 {
-"start": 6.115,
+"start": 6.135,
 "end": 6.25,
 "word": " with"
 },
@@ -156,7 +156,7 @@
 },
 {
 "start": 7.0,
-"end": 7.46,
+"end": 7.44,
 "word": " install."
 },
 {
@@ -246,37 +246,37 @@
 },
 {
 "start": 12.05,
-"end": 12.29,
+"end": 12.31,
 "word": " paid"
 },
 {
 "start": 12.125,
-"end": 12.5,
+"end": 12.48,
 "word": " softwares"
 },
 {
-"start": 12.5,
-"end": 12.82,
+"start": 12.48,
+"end": 12.8,
 "word": " across"
 },
 {
-"start": 12.82,
-"end": 13.18,
+"start": 12.8,
+"end": 13.16,
 "word": " design,"
 },
 {
 "start": 13.49,
-"end": 13.73,
+"end": 13.75,
 "word": " generative"
 },
 {
-"start": 13.73,
-"end": 13.95,
+"start": 13.75,
+"end": 13.97,
 "word": " AI,"
 },
 {
-"start": 14.07,
-"end": 14.29,
+"start": 14.09,
+"end": 14.31,
 "word": " marketing,"
 },
 {
@@ -326,11 +326,11 @@
 },
 {
 "start": 17.65,
-"end": 17.85,
+"end": 17.87,
 "word": " Public"
 },
 {
-"start": 17.85,
+"start": 17.87,
 "end": 18.19,
 "word": " APIs."
 },
@@ -361,37 +361,37 @@
 },
 {
 "start": 20.35,
-"end": 20.71,
+"end": 20.69,
 "word": " free"
 },
 {
 "start": 20.79,
-"end": 21.13,
+"end": 21.17,
 "word": " APIs"
 },
 {
-"start": 21.13,
-"end": 21.47,
+"start": 21.17,
+"end": 21.49,
 "word": " across"
 },
 {
-"start": 21.47,
-"end": 21.85,
+"start": 21.49,
+"end": 21.87,
 "word": " 50"
 },
 {
 "start": 21.77,
-"end": 22.27,
+"end": 22.25,
 "word": " categories,"
 },
 {
-"start": 22.27,
-"end": 22.71,
+"start": 22.59,
+"end": 22.73,
 "word": " like"
 },
 {
-"start": 22.71,
-"end": 23.15,
+"start": 22.73,
+"end": 23.13,
 "word": " programming,"
 },
 {
@@ -401,7 +401,7 @@
 },
 {
 "start": 24.05,
-"end": 24.25,
+"end": 24.23,
 "word": " finance,"
 },
 {
@@ -435,13 +435,13 @@
 "word": " more."
 },
 {
-"start": 26.43,
-"end": 26.53,
+"start": 26.27,
+"end": 26.39,
 "word": " Three,"
 },
 {
-"start": 26.71,
-"end": 27.13,
+"start": 26.57,
+"end": 26.99,
 "word": " Scrapling."
 },
 {
@@ -456,22 +456,22 @@
 },
 {
 "start": 27.79,
-"end": 28.33,
+"end": 28.31,
 "word": " $300"
 },
 {
 "start": 28.25,
-"end": 28.45,
+"end": 28.47,
 "word": " a"
 },
 {
-"start": 28.45,
-"end": 28.63,
+"start": 28.47,
+"end": 28.67,
 "word": " month"
 },
 {
-"start": 28.63,
-"end": 29.05,
+"start": 28.67,
+"end": 29.07,
 "word": " scraping"
 },
 {
@@ -545,7 +545,7 @@
 "word": " Four,"
 },
 {
-"start": 34.14,
+"start": 34.12,
 "end": 34.44,
 "word": " Ollama."
 },
@@ -565,18 +565,18 @@
 "word": " run"
 },
 {
-"start": 35.02,
-"end": 35.38,
+"start": 35.03,
+"end": 35.37,
 "word": " Llama,"
 },
 {
-"start": 35.54,
-"end": 35.84,
+"start": 35.55,
+"end": 35.85,
 "word": " Mistral,"
 },
 {
-"start": 36.04,
-"end": 36.4,
+"start": 36.05,
+"end": 36.41,
 "word": " DeepSeek"
 },
 {
@@ -676,12 +676,12 @@
 },
 {
 "start": 42.355,
-"end": 42.46,
+"end": 42.48,
 "word": " has"
 },
 {
-"start": 42.46,
-"end": 42.7,
+"start": 42.48,
+"end": 42.72,
 "word": " over"
 },
 {
@@ -705,18 +705,18 @@
 "word": " GitHub,"
 },
 {
-"start": 44.37,
-"end": 44.57,
+"start": 44.45,
+"end": 44.49,
 "word": " and"
 },
 {
-"start": 44.57,
-"end": 44.69,
+"start": 44.525,
+"end": 44.61,
 "word": " it"
 },
 {
-"start": 44.69,
-"end": 44.85,
+"start": 44.61,
+"end": 44.77,
 "word": " has"
 },
 {
@@ -755,13 +755,13 @@
 "word": " agent"
 },
 {
-"start": 47.16,
-"end": 47.36,
+"start": 46.88,
+"end": 47.08,
 "word": " to"
 },
 {
-"start": 47.36,
-"end": 47.76,
+"start": 47.08,
+"end": 47.46,
 "word": " browsers,"
 },
 {
@@ -770,7 +770,7 @@
 "word": " databases,"
 },
 {
-"start": 48.5,
+"start": 48.48,
 "end": 48.62,
 "word": " and"
 },
@@ -801,17 +801,17 @@
 },
 {
 "start": 49.88,
-"end": 49.98,
+"end": 50.0,
 "word": " For"
 },
 {
-"start": 49.98,
-"end": 50.08,
+"start": 50.0,
+"end": 50.12,
 "word": " the"
 },
 {
-"start": 50.08,
-"end": 50.28,
+"start": 50.12,
+"end": 50.3,
 "word": " free"
 },
 {

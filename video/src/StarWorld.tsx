@@ -1574,22 +1574,69 @@ export const Hero: React.FC<{ f: number; x: number; y: number; size: number; z?:
   flip?: boolean; costume?: Record<string, number>; gaze?: number; cheer?: number;
   /** how far the drive travels, px */ reach?: number; tint?: string;
   /** 0..1 — `Mascot`'s own flinch lever, for a per-impact expression beat */
-  shock?: number; /** 0..1 — the scowl */ stern?: number; /** a scale pop */ pop?: number }> =
+  shock?: number; /** 0..1 — the scowl */ stern?: number; /** a scale pop */ pop?: number;
+  /** which of the four action loops he runs BETWEEN his authored beats:
+      0 PACE · 1 WORK · 2 HOP · 3 LOOK */ act?: number;
+  /** phase offset, so two heroes in a reel never run in lockstep */ ph?: number }> =
   ({ f, x, y, size, z = 56, drive = 0, strain = 0, flip = false, costume = { constr: 1 },
-     gaze = 0, cheer = 0, reach = 96, tint, shock = 0, stern = 0, pop = 1 }) => {
+     gaze = 0, cheer = 0, reach = 96, tint, shock = 0, stern = 0, pop = 1,
+     act = 1, ph = 0 }) => {
+  /* ⭐⭐⭐ THE HERO HAS AN ACTION LOOP TOO, AND NOT HAVING ONE WAS THE DEFECT.
+     Alex: *"why is that claude sprite guy in the suit on the right not moving,
+     same with the other scenes as well."*
+
+     `Crew` has run the four action loops since reel 107 — it is §5's single
+     biggest measured lift in this repo — and `Hero` never did. So every scene's
+     HERO, the one sprite a viewer is actually watching, stood perfectly still
+     whenever its authored beat was not firing. Counted across this reel that is
+     **100 of 132 frames in S1** (the suited Claude at 5s, exactly the one he
+     saw), 116 of 146 in S5, 140 of 165 in S12 and 100 of 136 in S8.
+
+     ⛔ THE LOOP YIELDS TO THE BEAT. Its amplitude scales to zero as drive or
+     strain rise, so an authored action always wins outright and the loop only
+     ever fills the gaps — it can never fight the thing the scene is about.
+     ⛔ AND THE AMPLITUDE HAS TO BE BIG ENOUGH TO SEE: measured, 1.15deg / 1.7px
+     registers as "never static" on a metric and READS as static to a human.
+     2.6deg / 4.6px with a second slower harmonic is the floor that shows. */
+  const beat = Math.min(1, Math.max(Math.abs(drive), strain) * 1.7);
+  const k = 1 - beat;
+  let ax = 0, ay = 0, ar = 0, aGaze = 0, aCheer = 0;
+  if (act === 0) {                                   /* PACE — walks, with a stride lift */
+    ax = Math.sin(f / 17 + ph) * size * 0.20 * k;
+    ay = -Math.abs(Math.sin(f / 8.5 + ph)) * size * 0.042 * k;
+    ar = Math.cos(f / 17 + ph) * 3.2 * k;
+  } else if (act === 1) {                            /* WORK — leans in on a beat */
+    ar = (4.5 + Math.sin(f / 6.2 + ph) * 6.5) * k;
+    ay = Math.abs(Math.sin(f / 6.2 + ph)) * size * 0.038 * k;
+    ax = Math.sin(f / 6.2 + ph) * size * 0.048 * k;
+  } else if (act === 2) {                            /* HOP — jumps, cheers at the apex */
+    const t = (f / 26 + ph) % 1;
+    const j = Math.max(0, Math.sin(t * Math.PI));
+    ay = -j * size * 0.19 * k;
+    aCheer = j > 0.55 ? k : 0;
+    ar = Math.sin(f / 26 + ph) * 2.6 * k;
+  } else {                                           /* LOOK — turns its head, double-takes */
+    aGaze = Math.sin(f / 21 + ph) * 1.0 * k;
+    ar = Math.sin(f / 21 + ph) * 4.0 * k;
+  }
+  /* and a breathing idle UNDER all four, so nothing is ever perfectly still */
+  ay += Math.sin(f / 23 + ph) * 4.6 * k;
+  ar += Math.sin(f / 31 + ph * 1.7) * 1.3 * k;
+
   const tremble = strain > 0.5 ? Math.sin(f * 1.9) * 3.4 * (strain - 0.5) * 2 : 0;
   const sy = 1 - strain * 0.16;
   const sx = 1 + strain * 0.12;
-  const dx = (flip ? -1 : 1) * drive * reach + tremble;
-  const dy = strain * size * 0.05;
-  const rot = (flip ? -1 : 1) * (drive * 7 - strain * 2);
+  const dx = (flip ? -1 : 1) * (drive * reach + ax) + tremble;
+  const dy = strain * size * 0.05 + ay;
+  const rot = (flip ? -1 : 1) * (drive * 7 - strain * 2 + ar);
   return (
     <div style={{ position: "absolute", left: x - size / 2 + dx, top: y - size + dy,
       width: size, height: size, zIndex: z,
       transform: `scale(${sx * pop * (flip ? -1 : 1)}, ${sy * pop}) rotate(${rot}deg)`,
       transformOrigin: "50% 100%" }}>
-      <Mascot lf={f} size={size} gaze={gaze} nodAmp={2.6 + strain * 2} nodSpeed={10}
-        cheer={cheer} tint={tint} shock={shock} stern={stern} {...costume} />
+      <Mascot lf={f} size={size} gaze={gaze + aGaze} nodAmp={2.6 + strain * 2 + k * 1.4}
+        nodSpeed={10} cheer={Math.max(cheer, aCheer)} tint={tint} shock={shock}
+        stern={stern} {...costume} />
     </div>
   );
 };

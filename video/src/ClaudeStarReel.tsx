@@ -376,11 +376,11 @@ const CAP_Y: Record<Variant, number> = { market: 1262, amber: 1330, steel: 1194 
 
 /* ⛔⛔ A GAIN THAT FIXED ONE REEL IS NOT A CONSTANT (SOUND-DESIGN §13), so this
    is solved on THESE files, today, per cut:
-       VO   -18.2 LUFS  x LEVELS.DIALOGUE (-6)  ->  -24.2 in the mix
-       market -23.8 LUFS x LEVELS.MUSIC (-20)   ->  -43.8   gap 19.6 dB
-       amber  -24.9 LUFS                        ->  -44.9   gap 20.7 dB
-       steel  -23.7 LUFS                        ->  -43.7   gap 19.5 dB
-   The house figure is ~12 dB under the VO, which asks for +7.6 / +8.7 / +7.5.
+       VO   -18.5 LUFS  x LEVELS.DIALOGUE (-6)  ->  -24.5 in the mix  (post de-plosive)
+       market -23.8 LUFS x LEVELS.MUSIC (-20)   ->  -43.8   gap 19.3 dB
+       amber  -24.9 LUFS                        ->  -44.9   gap 20.4 dB
+       steel  -23.7 LUFS                        ->  -43.7   gap 19.2 dB
+   The house figure is ~12 dB under the VO, which asks for +7.3 / +8.4 / +7.2.
    ⛔ RE-SOLVED AFTER THE HIGH SHELF, NOT INHERITED THROUGH IT: taking 11 dB off
    everything above 4.8k moved all three files by 0.3-0.5 LUFS, and carrying the
    old numbers across a filter change is exactly how reel 110 shipped 7 dB hot.
@@ -392,9 +392,9 @@ const CAP_Y: Record<Variant, number> = { market: 1262, amber: 1330, steel: 1194 
    under the VO rather than 12. A standing instruction from Alex outranks a
    target I derived. All three land within 0.8 dB of each other. */
 export const BED_GAIN: Record<Variant, number> = {
-  market: db(7.60),   /* -> volume 0.2399 */
+  market: db(7.30),   /* -> volume 0.2317 */
   amber:  db(7.96),   /* -> volume 0.2500, the ceiling (12 dB would ask 0.272) */
-  steel:  db(7.50),   /* -> volume 0.2371 */
+  steel:  db(7.20),   /* -> volume 0.2291 */
 };
 /** the bed-only A/B: identical picture, bed 6 dB down */
 export const BED_QUIET = db(-6);

@@ -17,7 +17,8 @@ import {
   OutputRack, CommentField,
 } from "./BillProps";
 import { SetFor, placeFor } from "./BillSets";
-import { G_TOOLS, ToolTile, GoogleSprite, SparkGuy, Spark } from "./BillGoogle";
+import { G_TOOLS, ToolTile, Spark } from "./BillGoogle";
+import { GCrew, foot } from "./BillChars";
 
 /* ===========================================================================
    REEL 116 · "BILL" — THE SCENES.  Board: storyboards/116-bill.md.
@@ -273,7 +274,8 @@ export const S0: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             here but maybe not so claude sprite shaped."* Tinting the house box
             blue still read as Claude-in-blue, because the SILHOUETTE is the
             identity. This one's outline IS the Gemini mark. */}
-        <SparkGuy f={f} x={846} y={784} size={278} i={0} z={90} at={-14} loop={3}
+        {/* ⭐ GEMBOT is the default cast — the hook's one supporting element */}
+        <GCrew f={f} x={846} y={784} size={278} i={0} z={90} at={-14} loop={3}
           shock={lastHit !== undefined && f - lastHit < 12 ? 1 : 0} />
       </div>
     </Scene>
@@ -354,7 +356,7 @@ export const S1: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         ))}
 
         {/* he is being buried by it — the loop is a REACTION, not a bob */}
-        <Crew f={f} x={880} y={p.horizon + 258} i={11} size={186} z={70} at={0} loop={3}
+        <GCrew f={f} x={880} y={foot(p.horizon, 258)} i={11} size={186} z={70} at={0} loop={3}
           shock={hits.some(k => f >= k && f - k < 11) ? 1 : 0} />
 
         <MarkCast x={906} y={636} s={96} z={74} f={f} spin={-0.4} o={0.8} />
@@ -443,7 +445,10 @@ export const S2: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
               in a cop hat, standing in front of a wall of Google tools — the
               same mismatch Alex named on the hook. `GoogleSprite` is the house
               body with a Google tint and the Gemini spark. */}
-          <SparkGuy f={f} x={walk} y={p.horizon + 150} size={196} i={0} z={64} at={2} loop={1} />
+          {/* ⭐ BEAKER here: this scene IS the wall of Labs experiments, and the
+              flask is Labs' own mark. The sifter testing experiments is the one
+              place the character and the subject are the same object. */}
+          <GCrew kind="beaker" f={f} x={walk} y={foot(p.horizon, 150)} size={196} i={0} z={64} at={2} loop={1} />
           <div style={{ position: "absolute", left: walk + 60, top: p.horizon - 74,
             width: 60, height: 72, zIndex: 66, borderRadius: 7,
             background: `linear-gradient(176deg, ${mxh("#5A4A3A", 0.20)} 0%, ${dkh("#5A4A3A", 0.34)} 100%)`,
@@ -507,7 +512,7 @@ export const S3: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         <ChargeCounter x={758} y={132} f={f} s={0.86} z={82}
           steps={[[-1, 5], [CV[4], 5]]} />
 
-        <Crew f={f} x={62} y={p.horizon + 268} i={6} size={158} z={72} at={CV[0]} loop={2} />
+        <GCrew f={f} x={62} y={foot(p.horizon, 268)} i={6} size={158} z={72} at={CV[0]} loop={2} />
         <MarkCast x={912} y={608} s={92} z={74} f={f} spin={-0.4} o={0.78} />
       </div>
     </Scene>
@@ -624,7 +629,7 @@ export const S4: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             ⛔ y = p.horizon + 246 was 794 ON A 792px PANEL — his feet were off
             the bottom. Check the arithmetic against H, not against a number
             that looked right in another set. */}
-        <Crew f={f} x={166} y={p.horizon + 208} i={3} size={186} z={70} at={0} loop={4} />
+        <GCrew f={f} x={166} y={foot(p.horizon, 208)} i={3} size={186} z={70} at={0} loop={4} />
 
         {/* the bill takes the charge, along the very bottom edge */}
         <BillRoll x={rollX(220, IN + 4, 1.05)} y={p.horizon + 214} w={124} f={f}
@@ -736,7 +741,7 @@ export const S5: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         <Cutter y={686} f={f} at={CUT} z={76} h={48} dur={13} />
         <ChargeCounter x={40} y={112} f={f} s={0.74} z={84} steps={[[-1, 5], [CUT + 14, 4]]} />
 
-        <Crew f={f} x={906} y={p.horizon + 232} i={0} size={162} z={72} at={OPEN + 6} loop={2} />
+        <GCrew f={f} x={906} y={foot(p.horizon, 232)} i={0} size={162} z={72} at={OPEN + 6} loop={2} />
       </div>
     </Scene>
   );
@@ -816,9 +821,12 @@ export const S6: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           height: 76, zIndex: 50, background: dkh("#4A3A22", 0.22), borderRadius: 5 }} />
 
         {/* he watches it go in and reacts on each land */}
-        <Crew f={f} x={868} y={p.horizon + 214} i={9} size={166} z={72} at={0} loop={3}
+        {/* ⭐ BEAKER: this is the one beat with a LEVEL in it — the flask fills as
+            each codebase goes into the shaft, which no other character can do. */}
+        <GCrew kind="beaker" fill={0.15 + LAND.filter(k => f >= k).length * 0.24}
+          f={f} x={868} y={foot(p.horizon, 214)} i={9} size={166} z={72} at={0} loop={3}
           shock={LAND.some(k => f >= k && f - k < 10) ? 1 : 0} />
-        <Crew f={f} x={148} y={p.horizon + 240} i={1} size={140} z={71} at={4} loop={1} flip />
+        <GCrew f={f} x={148} y={foot(p.horizon, 240)} i={1} size={140} z={71} at={4} loop={1} flip />
 
         {/* ⭐ Alex: *"have the logos of the apps whenever you mention them
             between things."* The tool that owns this beat carries its mark, so
@@ -919,8 +927,8 @@ export const S7: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         })}
 
         {/* two Claudes: one loading, one shelving. Jobs, not idles. */}
-        <Crew f={f} x={198} y={p.horizon + 226} i={4} size={172} z={70} at={0} loop={4} />
-        <Crew f={f} x={874} y={p.horizon + 202} i={7} size={150} z={70} at={8} loop={1} flip />
+        <GCrew f={f} x={198} y={foot(p.horizon, 226)} i={4} size={172} z={70} at={0} loop={4} />
+        <GCrew f={f} x={874} y={foot(p.horizon, 202)} i={7} size={150} z={70} at={8} loop={1} flip />
 
         <MarkCast x={104} y={162} s={92} z={74} f={f} spin={-0.45} o={0.74} />
       </div>
@@ -1009,7 +1017,7 @@ export const S8: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             a body in front of a table it is standing behind); it is to stand
             them at the bench line so their whole torso is above it, which is
             where a person working at a bench actually is. */}
-        <Crew f={f} x={560} y={p.horizon + 86} i={2} size={166} z={80} at={2} loop={3} />
+        <GCrew f={f} x={560} y={foot(p.horizon, 86)} i={2} size={166} z={80} at={2} loop={3} />
         <MarkCast x={906} y={148} s={88} z={74} f={f} spin={0.4} o={0.7} />
       </div>
     </Scene>
@@ -1120,7 +1128,7 @@ export const S9: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         <Ring x={172} y={322} f={f} at={NAME} r={190} c={p.key} z={75} w={6} dur={14} />
 
         {/* the operator, working the crane, in silhouette too */}
-        <Crew f={f} x={604} y={p.horizon + 214} i={10} size={172} z={70} at={2} loop={0}
+        <GCrew f={f} x={604} y={foot(p.horizon, 214)} i={10} size={172} z={70} at={2} loop={0}
           tint="#3A2E44" />
       </div>
     </Scene>
@@ -1241,7 +1249,7 @@ export const S10: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             z={66} label="VEO" chrome="app" punch={MOVE} />
         )}
 
-        <Crew f={f} x={132} y={p.horizon + 226} i={10} size={150} z={72} at={0} loop={1} />
+        <GCrew f={f} x={132} y={foot(p.horizon, 226)} i={10} size={150} z={72} at={0} loop={1} />
       </div>
     </Scene>
   );
@@ -1283,7 +1291,7 @@ export const S11: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         <ChargeCounter x={716} y={520} f={f} s={0.82} z={84} steps={[[-1, 3], [CUT + 14, 2]]} />
 
         {/* he cuts it. HAUL loop — he is working the cutter, not standing. */}
-        <Crew f={f} x={186} y={p.horizon + 242} i={5} size={176} z={72} at={0} loop={4}
+        <GCrew f={f} x={186} y={foot(p.horizon, 242)} i={5} size={176} z={72} at={0} loop={4}
           cheer={f > CUT + 14 ? 1 : 0} />
 
         <MarkCast x={906} y={150} s={92} z={74} f={f} spin={0.42} o={0.72} />
@@ -1390,7 +1398,7 @@ export const S12: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         <Ring x={186} y={322} f={f} at={NAME} r={170} c={p.key} z={73} w={5} dur={13} />
 
         {/* he speaks it — one gesture, at the bench line */}
-        <Crew f={f} x={266} y={p.horizon + 44} i={4} size={196} z={80} at={0} loop={1} />
+        <GCrew f={f} x={266} y={foot(p.horizon, 44)} i={4} size={196} z={80} at={0} loop={1} />
       </div>
     </Scene>
   );
@@ -1463,9 +1471,9 @@ export const S13: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         })}
 
         {/* three Claudes: builds it, hands it over, receives it and cheers */}
-        <Crew f={f} x={150} y={p.horizon + 44} i={4} size={172} z={80} at={0} loop={1} />
-        <Crew f={f} x={584} y={p.horizon + 48} i={0} size={156} z={81} at={RISE} loop={4} />
-        <Crew f={f} x={912} y={p.horizon + 44} i={6} size={150} z={81} at={CHAIN}
+        <GCrew f={f} x={150} y={foot(p.horizon, 44)} i={4} size={172} z={80} at={0} loop={1} />
+        <GCrew f={f} x={584} y={foot(p.horizon, 48)} i={0} size={156} z={81} at={RISE} loop={4} />
+        <GCrew f={f} x={912} y={foot(p.horizon, 44)} i={6} size={150} z={81} at={CHAIN}
           loop={2} flip cheer={f > CHAIN + 16 ? 1 : 0} />
 
         {/* ⭐ cut 4 of 5 */}
@@ -1573,9 +1581,9 @@ export const S14: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 
         {/* the crew streams in behind the surge, across the back half */}
         {[0, 1, 2, 3, 4].map(i => (
-          <Crew key={"ia" + i} f={f} x={206 + i * 160} y={p.horizon + 152 + (i % 2) * 30}
+          <GCrew key={"ia" + i} f={f} x={206 + i * 160} y={p.horizon + 152 + (i % 2) * 30}
             i={i + 2} size={148 - (i % 2) * 18} z={70 - (i % 2)} at={IGN[Math.min(2, i % 3)] + 6 + i * 4}
-            loop={i % 3 === 0 ? 1 : i % 3 === 1 ? 4 : 0} tint={i % 2 ? "#B8613F" : undefined} />
+            loop={i % 3 === 0 ? 1 : i % 3 === 1 ? 4 : 0} />
         ))}
       </div>
     </Scene>
@@ -1643,9 +1651,11 @@ export const S15: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
           const y = p.horizon + 172 + rank * 62;
           const size = 156 - rank * 22;
           return (
-            <Crew key={"cw" + i} f={f} x={x} y={y} i={i} size={size} z={62 - rank * 3} at={k}
-              loop={bay === 0 ? 1 : bay === 1 ? 4 : 2}
-              tint={rank === 0 ? undefined : rank === 1 ? "#B8613F" : "#8E4A30"} />
+            /* ⭐ two of the nine are BEAKERS, so a crew of agents reads as a team
+               rather than one character cloned nine times */
+            <GCrew key={"cw" + i} kind={i === 2 || i === 6 ? "beaker" : "gem"}
+              f={f} x={x} y={y} i={i} size={size} z={62 - rank * 3} at={k}
+              loop={bay === 0 ? 1 : bay === 1 ? 4 : 2} />
           );
         })}
 
@@ -1725,10 +1735,9 @@ export const S16: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         ))}
         {/* and the crew keeps working */}
         {Array.from({ length: 6 }, (_, i) => (
-          <Crew key={"cw" + i} f={f} x={150 + (i % 3) * 296 + Math.floor(i / 3) * 76}
+          <GCrew key={"cw" + i} f={f} x={150 + (i % 3) * 296 + Math.floor(i / 3) * 76}
             y={p.horizon + 96 + Math.floor(i / 3) * 40} i={i + 3} size={104 - Math.floor(i / 3) * 12}
-            z={48 - Math.floor(i / 3) * 3} at={-20} loop={i % 3 === 0 ? 1 : i % 3 === 1 ? 4 : 2}
-            tint={Math.floor(i / 3) ? "#A85838" : undefined} />
+            z={48 - Math.floor(i / 3) * 3} at={-20} loop={i % 3 === 0 ? 1 : i % 3 === 1 ? 4 : 2} />
         ))}
 
         {/* THE CHAIR — a real one: a base, a gas strut, five castors, a seat,
@@ -1827,11 +1836,11 @@ export const S17: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         ))}
 
         {/* one Claude at the bench, and the crew that arrived with the wall */}
-        <Crew f={f} x={120} y={p.horizon + 244} i={1} size={168} z={72} at={0} loop={1} />
+        <GCrew f={f} x={120} y={foot(p.horizon, 244)} i={1} size={168} z={72} at={0} loop={1} />
         {[0, 1, 2, 3].map(i => (
-          <Crew key={"oc" + i} f={f} x={716 + (i % 2) * 118} y={p.horizon + 236 + Math.floor(i / 2) * 44}
+          <GCrew key={"oc" + i} f={f} x={716 + (i % 2) * 118} y={p.horizon + 236 + Math.floor(i / 2) * 44}
             i={i + 6} size={124 - Math.floor(i / 2) * 14} z={70 - Math.floor(i / 2)}
-            at={OPENW + 6 + i * 5} loop={i % 2 ? 4 : 1} tint={Math.floor(i / 2) ? "#B0603C" : undefined} />
+            at={OPENW + 6 + i * 5} loop={i % 2 ? 4 : 1} />
         ))}
 
         <MarkCast x={906} y={140} s={94} z={76} f={f} spin={0.5} o={0.78} />
@@ -1965,7 +1974,7 @@ export const S18: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
             c={p.key} z={74} w={5} dur={13} />
         ))}
 
-        <Crew f={f} x={916} y={p.horizon + 236} i={11} size={168} z={72} at={0} loop={4}
+        <GCrew f={f} x={916} y={foot(p.horizon, 236)} i={11} size={168} z={72} at={0} loop={4}
           cheer={f > TEAR + 6 ? 1 : 0} />
         <MarkCast x={88} y={140} s={92} z={76} f={f} spin={-0.5} o={0.72} />
       </div>
@@ -2014,8 +2023,8 @@ export const S19: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
         <CommentField x={506} y={470} w={720} f={f} at={FIELD} word="BILL" z={86} />
         <Ring x={506} y={518} f={f} at={KEY + 16} r={380} c={GOLD} z={85} w={9} />
 
-        <Crew f={f} x={92} y={p.horizon + 250} i={6} size={132} z={72} at={2} loop={2} />
-        <Crew f={f} x={930} y={p.horizon + 250} i={9} size={132} z={72} at={6} loop={2} flip />
+        <GCrew f={f} x={92} y={foot(p.horizon, 250)} i={6} size={132} z={72} at={2} loop={2} />
+        <GCrew f={f} x={930} y={foot(p.horizon, 250)} i={9} size={132} z={72} at={6} loop={2} flip />
         <MarkCast x={506} y={64} s={104} z={80} f={f} spin={0.6} o={0.9} />
       </div>
     </Scene>

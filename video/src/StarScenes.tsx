@@ -313,7 +313,7 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
         <Hero f={f} x={506 - lost * 78 + surge * 96} y={gy} size={338} z={82}
           drive={drive} strain={strain} reach={104} costume={{ constr: 1 }}
           gaze={B ? 0.4 : 0} cheer={surge > 0.5 ? 1 : 0}
-          tint={heroTint} shock={flinch} stern={scowl} pop={pop} />
+          tint={heroTint} shock={flinch} stern={scowl} pop={pop} act={1} ph={0.0} />
         {/* the ring and the embers coming off him — every one drawn, none of it
             an emissive blur. The embers rise on their own clocks so the tail of
             the hook keeps moving after the plates have settled. */}
@@ -456,7 +456,7 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
             height: 28, background: "#1E6B4A" }} />
         </div>
         <Hero f={f} x={806} y={gy + 40} size={236} z={62} drive={plunge} reach={26}
-          strain={plunge * 0.6} costume={{ suit: 1 }} flip />
+          strain={plunge * 0.6} costume={{ suit: 1 }} act={1} ph={1.1} flip />
         {f >= PLUNGE + 7 && <Ring x={901} y={gy - 182} f={f} at={PLUNGE + 7} r={200} z={68} c="#9CF0C4" />}
 
         {/* the market's own background process: crowd on the four action loops */}
@@ -521,7 +521,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
         </div>
         <Hero f={f} x={820} y={gy + 24} size={268} z={62} drive={pull * 0.7}
           strain={E(f, PULL - 6, PULL + 7, 0.2, 0.8, OUT) * (f > PULL + 20 ? 0.3 : 1)}
-          reach={40} costume={{ chef: 1 }} flip />
+          reach={40} costume={{ chef: 1 }} act={3} ph={2.2} flip />
         <Forearm x0={820 + 74} y0={gy - 190} x1={936} y1={266 + pull * 176} w={24} z={63} />
 
         {/* two crew catching them in a basket — the market's background process */}
@@ -601,7 +601,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
 
         {/* the hero, swinging. His arm ends on the tag, never in mid-air. */}
         <Hero f={f} x={506} y={gy + 30} size={252} z={84} drive={dr} strain={dr * 0.5}
-          reach={86} costume={{ girl: 1 }} />
+          reach={86} costume={{ girl: 1 }} act={0} ph={0.7} />
         <Crew f={f} x={150} y={gy + 40} i={9} size={148} z={82} at={0} loop={3} />
         <Crew f={f} x={874} y={gy + 46} i={11} size={142} z={82} at={0} loop={0} />
         {A.map((a, i) => f >= a && (
@@ -740,7 +740,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
           );
         })}
         <Hero f={f} x={470} y={gy + 26} size={286} z={62} drive={rip} strain={rip * 0.85}
-          reach={104} costume={{ cop: 1 }} />
+          reach={104} costume={{ cop: 1 }} act={1} ph={3.1} />
         <Forearm x0={470 + 92 + rip * 104} y0={gy - 208} x1={716 + rip * 40} y1={p.horizon + 46}
           w={26} z={63} />
         {f >= RIP && <Puff x={742} y={p.horizon + 40} f={f} at={RIP} n={11} s={1} z={60} c="#C9CFD6" />}
@@ -813,7 +813,7 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
         </div>
         <Pool x={724} y={gy + 40} w={520} c="#FFCE7A" o={0.34} z={19} />
         <Hero f={f} x={724} y={gy + 26} size={286} z={62} drive={th} strain={th * 0.7} reach={44}
-          costume={{ glasses: 1 }} flip />
+          costume={{ glasses: 1 }} act={3} ph={1.6} flip />
         <Forearm x0={724 + 84} y0={gy - 210} x1={886} y1={292 - th * 24} w={25} z={63} />
 
         {/* the market's background process behind the bay */}
@@ -925,7 +925,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
           </div>
         )}
         <Hero f={f} x={hxs + 40} y={gy + 84} size={244} z={62} drive={dr} strain={dr * 0.6}
-          reach={92} costume={{ samurai: 1 }} />
+          reach={92} costume={{ samurai: 1 }} act={0} ph={2.6} />
       </Cam>
     </Scene>
   );
@@ -1033,7 +1033,7 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
 
         <Pool x={300} y={gy + 22} w={540} c="#FF8E62" o={0.30} z={19} />
         <Hero f={f} x={300} y={gy + 12} size={292} z={62} drive={wind} strain={wind * 0.9}
-          reach={124} costume={{ stern: 1 }} />
+          reach={124} costume={{ stern: 1 }} act={1} ph={0.4} />
         {/* sparks off the severed conduit — the wall is the still thing here */}
         {f >= CUT && Array.from({ length: 22 }, (_, i) => {
           const lf = (f - CUT + i * 4) % 26;
@@ -1240,7 +1240,7 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
             })}
             <Hero f={f} x={hx} y={gy + 18} size={272} z={62}
               drive={walk > 0 ? 0.34 : 0} strain={0.30 + walk * 0.18} reach={20}
-              costume={{ prof: 1 }} />
+              costume={{ prof: 1 }} act={1} ph={2.9} />
             <Pool x={hx} y={gy + 30} w={430} c="#FF8E62" o={0.26} z={19} />
             <Forearm x0={hx + 74} y0={gy - 176} x1={hx + 96} y1={gy - 120} w={24} z={63} />
           </>);
@@ -1361,7 +1361,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
 
         {/* ⭐ the hero: the release OVERSHOOTS past his standing height */}
         <Hero f={f} x={148} y={gy + 38 - Math.max(0, -pull) * 86} size={278} z={56}
-          drive={-pull} strain={Math.abs(pull) * 1.0} reach={186} costume={{ beard: 1 }} />
+          drive={-pull} strain={Math.abs(pull) * 1.0} reach={186} costume={{ beard: 1 }} act={1} ph={1.3} />
         {f >= FIRE && <Steam x={148} y={gy - 250} f={f} at={FIRE} n={4} s={0.8} z={66} c="#FFD9A8" />}
 
         {/* the command, stamped on the shed door — the only text in the shot */}
@@ -1455,7 +1455,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
             background: hexa("#000000", 0.34) }} />
         </div>
         <Hero f={f} x={838} y={gy + 62} size={216} z={56} drive={br} strain={br * 0.95}
-          reach={44} costume={{ fro: 1 }} flip />
+          reach={44} costume={{ fro: 1 }} act={3} ph={0.9} flip />
         <Forearm x0={838 - 62} y0={gy - 120} x1={898} y1={p.horizon - 6 + br * 92} w={26} z={58} />
         {f >= BREAK && <Puff x={890} y={p.horizon + 40} f={f} at={BREAK} n={9} s={0.9} z={60}
           c="#7E95B6" />}
@@ -1558,7 +1558,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
 
         {/* the two hauling. Their forearms end ON the rope. */}
         <Hero f={f} x={330} y={gy} size={222} z={56} drive={t * 0.5}
-          strain={f < LAND ? 0.4 + t * 0.5 : 0.1} reach={54} costume={{ wizard: 1 }} />
+          strain={f < LAND ? 0.4 + t * 0.5 : 0.1} reach={54} costume={{ wizard: 1 }} act={1} ph={2.1} />
         <Crew f={f} x={694} y={gy} i={1} size={200} z={55} at={0} loop={1} flip />
         <Forearm x0={330 + 62} y0={gy - 168} x1={498} y1={Math.max(120, py - 40)} w={24} z={58} />
         <Forearm x0={694 - 66} y0={gy - 154} x1={516} y1={Math.max(140, py - 20)} w={22} z={57} />
@@ -1666,7 +1666,7 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
         ))}
 
         <Hero f={f} x={506} y={gy + 30} size={224} z={57} drive={dr} strain={dr * 0.8}
-          reach={0} costume={{ constr: 1 }} />
+          reach={0} costume={{ constr: 1 }} act={1} ph={3.4} />
         {/* the crew working the wall behind, on the four action loops */}
         {[0, 1, 2].map(i => (
           <Crew key={"iw" + i} f={f} x={214 + i * 292} y={gy + 66} i={i + 3} size={118} z={34}
@@ -1728,7 +1728,7 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
           </div>
         </div>
         <Hero f={f} x={848} y={gy + 30} size={244} z={82} drive={st} strain={st * 0.7}
-          reach={30} costume={{ suit: 1 }} flip />
+          reach={30} costume={{ suit: 1 }} act={2} ph={1.8} flip />
         <Crew f={f} x={168} y={gy + 34} i={6} size={206} z={82} at={0} loop={2} />
         <MarkPlate x={44} y={140} t="FOR CLAUDE" s={1.0} z={84} />
       </Cam>

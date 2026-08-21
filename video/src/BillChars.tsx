@@ -300,3 +300,45 @@ export const CHARACTERS = [
   { key: "pebble",  name: "5 · PEBBLE",  C: Pebble,  note: "one soft mass, spark badge" },
   { key: "chippy",  name: "6 · CHIPPY",  C: Chippy,  note: "chip head, spark on the brow" },
 ] as const;
+
+/* =========================================================================
+   ⭐⭐ THE CAST, AND WHICH CHARACTER GOES WHERE.
+
+   Alex: *"lets go with the gembot primarily and go with the beaker only
+   sometimes here i think it could be good in some scenes as well."*
+
+   ⛔ NOT AT RANDOM. Each has a job it is better at, so the rule is legible:
+
+     GEMBOT — the DEFAULT cast. A Gemini gem is "Google AI" in general, so it
+              carries every scene whose subject is a product, a result or a
+              person doing work.
+     BEAKER — used where the LABS / EXPERIMENT idea is the actual point, because
+              the flask is Google Labs' OWN published mark:
+                · S2  the wall of 24 experiments being sifted
+                · S6  the context window filling — the liquid is a LEVEL, and
+                      this is the one beat that has a level in it
+                · S15 a few in the crew, so the team reads as mixed rather than
+                      cloned
+   ⭐ The liquid also gives S6 something no other character has: as each codebase
+   goes in, the flask fills.
+   ====================================================================== */
+export type CastKind = "gem" | "beaker";
+
+/** the same call signature the scenes already use for `Crew`, so swapping the
+    cast is mechanical and no scene has to be rewritten to change character. */
+export const GCrew: React.FC<CProps & { kind?: CastKind; fill?: number; liquid?: string;
+  tint?: string }> = ({ kind = "gem", ...p }) =>
+  kind === "beaker" ? <Beaker {...p} /> : <GemBot {...p} />;
+
+/** ⛔⛔⛔ THE FOOT LINE, AND WHY IT IS A FUNCTION.
+    A sprite's `y` is its FEET, and scenes write it as `p.horizon + n`. That is
+    fine until the set's horizon is low — `shaft` sits at 588, so a habitual
+    `+240` puts the feet at 828 on a 792px panel and the character is drawn with
+    its legs off the bottom. This build shipped that bug FOUR times (the toll
+    queue, the hook's Claude, the S4 payer, and S1/S3/S5/S6's cast) before it was
+    caught by measuring every call site against `H` rather than by eye.
+
+    ⭐ `foot()` clamps it. 782 leaves ten pixels of margin under the deepest
+    sprite, which survives the per-scene push crop. */
+export const foot = (horizon: number, off: number, max = 782) =>
+  Math.min(horizon + off, max);

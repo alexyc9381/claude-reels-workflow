@@ -206,8 +206,12 @@ export const G_TOOLS: GTool[] = [
   { name: "FLOW MUSIC",   mark: "logos/flowmusic.png", dark: true },
   { name: "STAX",         mark: "logos/stax.png" },
   { name: "LEARN YOUR WAY", mark: "logos/learnyourway.png" },
-  { name: "MIXBOARD",     mark: "logos/labsbeaker.png" },
-  { name: "POMELLI",      mark: "logos/pomelli.png" },
+  /* ⛔ MIXBOARD AND POMELLI GO BACK TO NAME TILES. Both ship the GENERIC Google
+     Labs beaker rather than a distinct product mark, and the beaker is now the
+     CAST — two tiles wearing the character's shape reads as a mistake. Nothing
+     real is lost: neither has a logo of its own to show. */
+  { name: "MIXBOARD" },
+  { name: "POMELLI" },
   /* ⭐ the three Google SCIENCE tools publish real icons on the DeepMind CDN —
      `science__<tool>__icon.svg`. They declare `fill="none"` and inherit their
      colour, so a plain <img> rasterises to nothing; they are inlined with an
