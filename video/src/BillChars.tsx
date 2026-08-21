@@ -134,10 +134,37 @@ export const GemBot: React.FC<CProps> = (p) => {
   );
 };
 
-/* ── 3 · BEAKER — the Google Labs beaker as a head. It is Labs' own icon. */
-export const Beaker: React.FC<CProps> = (p) => {
+/* ── 3 · BEAKER — the Google Labs flask as a head.
+   ⭐ THE RECOMMENDATION, and the reason is not the drawing: this is GOOGLE'S OWN
+   OBJECT. The flask is the icon Google Labs actually ships — it is on Mixboard's
+   and Pomelli's real product tiles, pulled from gstatic in this same build. The
+   repo has burned three reels on `feedback_real_marks_are_the_props`: use the
+   subject's own objects, because a shape you invented has to be TRANSLATED
+   before it means anything. A gem is a nice shape I drew. The flask is Google's.
+
+   ⭐⭐ AND THE LIQUID IS A STATE. It can fill as tools are found, drain when a
+   charge lands, and take each tool's colour. This reel's whole spine is a
+   counter going 5 -> 0, so a character that can SHOW a level is a storytelling
+   lever the gem does not have.
+
+   ⛔ THE ONE COST, AND IT IS FIXED HERE: a near-white glass head was the
+   brightest object in the frame and competed with the cream BILL in the hook —
+   the bill has to stay top of the value ladder. The glass is tinted to a cool
+   blue-grey, which still reads as glass and sits a stop under the paper.
+   ⛔ AND THE TILE CLASH: Mixboard and Pomelli currently show the same beaker.
+   They are the GENERIC Labs mark, not distinct product marks, so those two go
+   back to name tiles and the flask belongs to the cast alone. */
+export const Beaker: React.FC<CProps & { fill?: number; liquid?: string }> = (p) => {
   const r = useRig(p.f, p.size, p.i ?? 0, p.loop, p.at ?? 0);
-  const fill = "#E8F0FF";
+  /* ⛔ tinted, not white: the bill is the brightest thing in this reel */
+  const glass = "#DCE6F5", rim = "#C3D2E8";
+  const liq = p.liquid ?? "#4C7BEA";
+  const lvl = p.fill ?? 0.62;                       /* 0..1, and it is a STATE */
+  /* ⛔ THE LIQUID MAY NOT REACH THE FACE. At `52 - lvl*22` a 0.62 fill put the
+     surface at y=38 and the eyes sit at y=34 — the character drowned in its own
+     head. The face is the one thing a level can never cover, so the surface is
+     clamped to the flask's lower body: full is 42, empty is 57. */
+  const top = 57 - lvl * 15;
   return (
     <Shell p={p} r={r}>
       {[38, 55].map((lx, j) => (
@@ -150,14 +177,21 @@ export const Beaker: React.FC<CProps> = (p) => {
       ))}
       <rect x={32} y={58} width={36} height={28} rx={10} fill="#4C7BEA" />
       <rect x={32} y={74} width={36} height={12} rx={6} fill="#000" opacity={0.13} />
-      {/* the flask head, with liquid that sloshes */}
-      <path d="M 42 8 h 16 v 14 l 13 26 a 8 8 0 0 1 -7 12 h -28 a 8 8 0 0 1 -7 -12 l 13 -26 z" fill={fill} />
-      <path d={`M 33 44 q 17 ${5 + Math.sin(p.f / 9) * 3} 34 0 l 4 8 a 8 8 0 0 1 -7 8 h -28 a 8 8 0 0 1 -7 -8 z`}
-        fill="#4C7BEA" opacity={0.85} />
-      <rect x={40} y={5} width={20} height={6} rx={3} fill="#D8E4FA" />
-      {/* a bubble rising */}
-      <circle cx={46 + Math.sin(p.f / 11) * 3} cy={50 - ((p.f * 1.4) % 18)} r={2.4} fill="#FFFFFF" opacity={0.6} />
-      <Face cx={50} cy={36} gap={8} shock={p.shock} cheer={p.cheer ?? r.ch} />
+      {/* ⭐ the four-colour chest bar, borrowed from GEMBOT — it is the one thing
+          that says GOOGLE outright, and it costs nothing to carry */}
+      {[G_BLUE, G_RED, G_YEL, G_GRN].map((c, j) => (
+        <rect key={"cb" + j} x={38 + j * 6} y={64} width={5} height={5} rx={1.4} fill={c} />
+      ))}
+      {/* the flask head */}
+      <path d="M 42 8 h 16 v 14 l 13 26 a 8 8 0 0 1 -7 12 h -28 a 8 8 0 0 1 -7 -12 l 13 -26 z" fill={glass} />
+      {/* the liquid — a LEVEL, with a surface that sloshes */}
+      <path d={`M ${33 - (top - 44) * 0.5} ${top} q 17 ${4 + Math.sin(p.f / 9) * 3} ${34 + (top - 44)} 0
+                l 4 ${56 - top} a 8 8 0 0 1 -7 8 h -28 a 8 8 0 0 1 -7 -8 z`}
+        fill={liq} opacity={0.9} />
+      <rect x={40} y={5} width={20} height={6} rx={3} fill={rim} />
+      <circle cx={46 + Math.sin(p.f / 11) * 3} cy={top + 4 - ((p.f * 1.4) % 14)} r={2.4}
+        fill="#FFFFFF" opacity={0.5} />
+      <Face cx={50} cy={34} gap={8} shock={p.shock} cheer={p.cheer ?? r.ch} />
     </Shell>
   );
 };

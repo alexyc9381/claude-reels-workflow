@@ -5,7 +5,7 @@ import { CamCtx } from "./BillWorld";
 import { CAM, GRADE, S0, S2 } from "./BillScenes";
 import { GoogleSprite, SparkGuy, Spark, G_TOOLS, ToolTile, G_TINTS } from "./BillGoogle";
 import { SetFor } from "./BillSets";
-import { CHARACTERS } from "./BillChars";
+import { CHARACTERS, GemBot, Beaker } from "./BillChars";
 
 /* Reel 116 · PREVIEW ONLY. Alex: *"for now dont need to render full video just
    hook scene and that 6 seconds scene."* These comps render one scene each so a
@@ -130,6 +130,93 @@ const CharBoard: React.FC = () => {
   );
 };
 
+
+/* ⭐ THE SIZE TEST. A character sheet is a lie about scale: these appear at
+   90-280px on a 1012px panel, not at 300px on a white card. Alex likes Gembot
+   and Beaker, so both are rendered at every size the reel actually uses, on the
+   reel's own dark ground, plus a crowd — because the hook has one and S15 has
+   nine. A design that only works big is not a design. */
+const SizeTest: React.FC = () => {
+  const f = useCurrentFrame();
+  const SIZES = [280, 190, 130, 90];
+  const ROWS = [
+    { name: "GEMBOT", C: GemBot },
+    { name: "BEAKER", C: Beaker },
+  ];
+  return (
+    <AbsoluteFill style={{ background: "#ECE9E2" }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 54, textAlign: "center",
+        fontFamily: "Inter, system-ui", fontWeight: 900, fontSize: 48, color: "#1A1813" }}>
+        AT THE SIZES THE REEL ACTUALLY USES
+      </div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 112, textAlign: "center",
+        fontFamily: "ui-monospace, Menlo", fontWeight: 700, fontSize: 20, color: "#8C877D" }}>
+        280px hook · 190px scene · 130px crowd · 90px back rank — on the reel's own dark panel
+      </div>
+      {ROWS.map((r, ri) => {
+        const top = 200 + ri * 520;
+        const C = r.C;
+        return (
+          <React.Fragment key={r.name}>
+            <div style={{ position: "absolute", left: 40, top, width: 1000, height: 440,
+              borderRadius: 22, background: "#26313C" }} />
+            <div style={{ position: "absolute", left: 56, top: top + 12,
+              fontFamily: "Inter, system-ui", fontWeight: 900, fontSize: 30, color: "#F2EDE0" }}>
+              {r.name}
+            </div>
+            {SIZES.map((sz, j) => (
+              <C key={j} f={f} x={220 + j * 230} y={top + 400} size={sz} i={j} z={40} at={2} loop={j} />
+            ))}
+            {SIZES.map((sz, j) => (
+              <div key={"l" + j} style={{ position: "absolute", left: 220 + j * 230 - 60, top: top + 406,
+                width: 120, textAlign: "center", fontFamily: "ui-monospace, Menlo",
+                fontWeight: 700, fontSize: 17, color: "#8FA0B0" }}>{sz}px</div>
+            ))}
+          </React.Fragment>
+        );
+      })}
+      {/* the crowd test — S15 puts nine of them in one frame */}
+      <div style={{ position: "absolute", left: 40, top: 1246, width: 1000, height: 380,
+        borderRadius: 22, background: "#1E2A34" }} />
+      <div style={{ position: "absolute", left: 56, top: 1258, fontFamily: "Inter, system-ui",
+        fontWeight: 900, fontSize: 26, color: "#F2EDE0" }}>A CROWD OF NINE — the S15 test</div>
+      {Array.from({ length: 9 }, (_, i) => {
+        const rank = Math.floor(i / 3);
+        const C = i % 2 ? Beaker : GemBot;
+        return (
+          <C key={"c" + i} f={f} x={200 + (i % 3) * 260 + rank * 70} y={1470 + rank * 62}
+            size={150 - rank * 24} i={i} z={40 - rank} at={2 + i * 3} loop={i % 4} />
+        );
+      })}
+      <div style={{ position: "absolute", left: 56, top: 1580, fontFamily: "ui-monospace, Menlo",
+        fontWeight: 700, fontSize: 17, color: "#8FA0B0" }}>alternating, so the two read against each other in a mass</div>
+      {/* ⭐ THE LIQUID IS A STATE — the reason this one wins. Four levels, which
+          is the reel's own 5 -> 0 spine, drawn on the character. */}
+      <div style={{ position: "absolute", left: 40, top: 1660, width: 1000, height: 210,
+        borderRadius: 22, background: "#26313C" }} />
+      <div style={{ position: "absolute", left: 56, top: 1672, fontFamily: "Inter, system-ui",
+        fontWeight: 900, fontSize: 24, color: "#F2EDE0" }}>THE LIQUID IS A STATE — 5 charges down to 0</div>
+      {[0.95, 0.62, 0.32, 0.08].map((lv, j) => (
+        <Beaker key={"lv" + j} f={f} x={190 + j * 148} y={1856} size={128} i={j} z={50} at={2}
+          loop={3} fill={lv} liquid={["#4C7BEA", "#34A853", "#FBBC05", "#EA4335"][j]} />
+      ))}
+      {/* the thumbnail test — how it survives a feed */}
+      {/* the thumbnail test rides along the level row — 56px, silhouette only */}
+      {[0, 1, 2, 3].map(i => (
+        <React.Fragment key={"t" + i}>
+          {i % 2 === 0
+            ? <GemBot f={f} x={704 + i * 62} y={1712} size={52} i={i} z={52} at={2} loop={0} />
+            : <Beaker f={f} x={704 + i * 62} y={1712} size={52} i={i} z={52} at={2} loop={0} />}
+        </React.Fragment>
+      ))}
+      <div style={{ position: "absolute", left: 640, top: 1720, width: 340, textAlign: "center",
+        fontFamily: "ui-monospace, Menlo", fontWeight: 700, fontSize: 14, color: "#8FA0B0" }}>
+        52px silhouette test
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 /* the 24-tool wall on its own, so the roster can be read */
 const ToolBoard: React.FC = () => {
   const f = useCurrentFrame();
@@ -158,6 +245,7 @@ const Root: React.FC = () => (<>
   <Composition id="p-sprites" component={SpriteBoard} durationInFrames={90} {...V} />
   <Composition id="p-tools"   component={ToolBoard}  durationInFrames={90}  {...V} />
   <Composition id="p-chars"   component={CharBoard}  durationInFrames={90}  {...V} />
+  <Composition id="p-size"    component={SizeTest}   durationInFrames={90}  {...V} />
 </>);
 
 registerRoot(Root);
