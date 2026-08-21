@@ -76,7 +76,14 @@ export const GRADE: Record<Variant, string> = {
 /** ⭐ THE RAKE SPEED IS THE HIGHEST-RANKED VARIANT LEVER (TRIAL-CUTS.md) and it
     never touches the cast — a travelling band sweeps different pixels per cut
     while every sprite stays house clay. This multiplies each scene's own rate. */
-export const RAKE_K: Record<Variant, number> = { market: 1.0, amber: 1.66, steel: 0.58 };
+/* ⛔ steel was 0.58 — nearly HALF market's rake speed — and the rake is the only
+   element that repaints a large share of a quiet scene. That is precisely why
+   S10 (METERS) was the reel's weakest scene in the STEEL cut specifically
+   (5.95 vs a 6.00 floor, against market 6.86 / amber 8.42). §8 of
+   docs/TRIAL-CUTS.md measured that rake speed buys ~no dHash separation
+   (40% of the panel repainted moved ZERO bits), so this costs nothing that
+   matters and buys back the motion. Still the slowest of the three. */
+export const RAKE_K: Record<Variant, number> = { market: 1.0, amber: 1.66, steel: 0.85 };
 /** ⭐ A PHASE OFFSET ON THE RAKE AND ON THE PARALLAX. Speed alone still lets two
     cuts coincide on any given frame; an offset guarantees every band sits
     somewhere different in EVERY frame, which is what a dHash actually samples.
@@ -1534,7 +1541,15 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("shed");
   const BREAK = 8;
-  const DEAD = [11, 19, 27, 35, 43, 51];
+  /* ⭐ STAGGER 8 -> 5. This scene was the reel's WEAKEST in every cut (steel
+     5.95 against a 6.00 floor, market 6.86, amber 8.42) with 24% HOLD, and the
+     median was hiding it. Motion is ARITHMETIC: six meters each sweep
+     144x470px, but on an 8-frame stagger against a 20-frame fall only ~2.5 are
+     ever moving at once. At 5 that becomes ~4 — 60% more swept area per frame
+     with NO new object, no new part to decode, and more overlapping action
+     rather than a metronome of pops. */
+  const DEAD = [11, 16, 21, 26, 31, 36];
+  const SWEEP = 54;
   const FALL = DEAD.map(d => d + 10);
   const br = E(f, BREAK - 8, BREAK, 0, 1, IN_Q);
   const slack = E(f, BREAK + 4, BREAK + 26, 0, 1, BACK);
@@ -1598,6 +1613,22 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
         <Forearm x0={838 - 62} y0={gy - 120} x1={898} y1={p.horizon - 6 + br * 92} w={26} z={58} />
         {f >= BREAK && <Puff x={890} y={p.horizon + 40} f={f} at={BREAK} n={9} s={0.9} z={60}
           c="#7E95B6" />}
+        {/* ⭐ THE TAIL HAD NOTHING IN IT. Once the last meter is down the wall of
+            empty brackets is the payoff ("empty is the promise"), so a bar
+            travels it left to right and wakes each bracket as it passes. A
+            ~200px edge crossing 1100px is the largest swept area in the scene,
+            and it carries a DARK leading edge so it cannot lift the black
+            point the way a light-only wash does. */}
+        {f >= SWEEP && (() => {
+          const t = E(f, SWEEP, SWEEP + 30, -240, 1120, OUT);
+          return (
+            <div style={{ position: "absolute", left: t, top: p.horizon - 196, width: 208,
+              height: 214, zIndex: 46, transform: "skewX(-9deg)",
+              background: `linear-gradient(90deg, ${hexa("#0E1622", 0.34)} 0%, ` +
+                `${hexa("#C6DCF4", 0.52)} 46%, ${hexa("#C6DCF4", 0.18)} 78%, ` +
+                `${hexa("#0E1622", 0.00)} 100%)` }} />
+          );
+        })()}
         <Band f={f} at={FALL[5] + 8} t="NOTHING LEFT TO CANCEL" sub="RUNS ON YOUR MACHINE"
           x={140} />
       </Cam>

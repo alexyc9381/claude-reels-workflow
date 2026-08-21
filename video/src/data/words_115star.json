@@ -1,832 +1,757 @@
 [
-{
-"start": 0.0,
-"end": 0.08,
-"word": " If"
-},
-{
-"start": 0.08,
-"end": 0.16,
-"word": " you're"
-},
-{
-"start": 0.16,
-"end": 0.26,
-"word": " not"
-},
-{
-"start": 0.235,
-"end": 0.275,
-"word": " using"
-},
-{
-"start": 0.31,
-"end": 0.4,
-"word": " these"
-},
-{
-"start": 0.4,
-"end": 0.7,
-"word": " five"
-},
-{
-"start": 0.65,
-"end": 0.85,
-"word": " Claude"
-},
-{
-"start": 0.85,
-"end": 1.17,
-"word": " plugins,"
-},
-{
-"start": 1.27,
-"end": 1.35,
-"word": " you're"
-},
-{
-"start": 1.46,
-"end": 1.58,
-"word": " missing"
-},
-{
-"start": 1.58,
-"end": 1.74,
-"word": " out"
-},
-{
-"start": 1.74,
-"end": 1.84,
-"word": " on"
-},
-{
-"start": 1.84,
-"end": 1.98,
-"word": " over"
-},
-{
-"start": 2.17,
-"end": 2.93,
-"word": " $10,000"
-},
-{
-"start": 2.93,
-"end": 3.13,
-"word": " worth"
-},
-{
-"start": 3.13,
-"end": 3.27,
-"word": " of"
-},
-{
-"start": 3.27,
-"end": 3.57,
-"word": " software,"
-},
-{
-"start": 3.41,
-"end": 3.51,
-"word": " and"
-},
-{
-"start": 3.51,
-"end": 3.61,
-"word": " they"
-},
-{
-"start": 3.61,
-"end": 3.73,
-"word": " all"
-},
-{
-"start": 4.02,
-"end": 4.16,
-"word": " have"
-},
-{
-"start": 4.16,
-"end": 4.32,
-"word": " over"
-},
-{
-"start": 4.32,
-"end": 5.42,
-"word": " 500,000"
-},
-{
-"start": 5.35,
-"end": 5.63,
-"word": " combined"
-},
-{
-"start": 5.63,
-"end": 5.91,
-"word": " stars"
-},
-{
-"start": 5.91,
-"end": 6.07,
-"word": " on"
-},
-{
-"start": 6.07,
-"end": 6.21,
-"word": " GitHub"
-},
-{
-"start": 6.145,
-"end": 6.25,
-"word": " with"
-},
-{
-"start": 6.25,
-"end": 6.37,
-"word": " the"
-},
-{
-"start": 6.37,
-"end": 6.65,
-"word": " simple"
-},
-{
-"start": 6.56,
-"end": 7.0,
-"word": " one-click"
-},
-{
-"start": 7.0,
-"end": 7.44,
-"word": " install."
-},
-{
-"start": 7.79,
-"end": 7.83,
-"word": " Number"
-},
-{
-"start": 7.865,
-"end": 8.05,
-"word": " one,"
-},
-{
-"start": 8.19,
-"end": 8.29,
-"word": " Free"
-},
-{
-"start": 8.37,
-"end": 8.49,
-"word": " for"
-},
-{
-"start": 8.49,
-"end": 8.67,
-"word": " Dev."
-},
-{
-"start": 8.83,
-"end": 8.87,
-"word": " You"
-},
-{
-"start": 8.905,
-"end": 9.03,
-"word": " get"
-},
-{
-"start": 9.03,
-"end": 9.43,
-"word": " instant"
-},
-{
-"start": 9.41,
-"end": 9.77,
-"word": " access"
-},
-{
-"start": 9.77,
-"end": 10.03,
-"word": " to"
-},
-{
-"start": 10.03,
-"end": 10.31,
-"word": " hundreds"
-},
-{
-"start": 10.19,
-"end": 10.43,
-"word": " of"
-},
-{
-"start": 10.43,
-"end": 10.67,
-"word": " free"
-},
-{
-"start": 10.67,
-"end": 11.13,
-"word": " alternatives"
-},
-{
-"start": 11.37,
-"end": 11.61,
-"word": " to"
-},
-{
-"start": 11.61,
-"end": 11.85,
-"word": " all"
-},
-{
-"start": 11.85,
-"end": 12.05,
-"word": " the"
-},
-{
-"start": 12.05,
-"end": 12.29,
-"word": " paid"
-},
-{
-"start": 12.125,
-"end": 12.5,
-"word": " softwares"
-},
-{
-"start": 12.5,
-"end": 12.82,
-"word": " across"
-},
-{
-"start": 12.82,
-"end": 13.18,
-"word": " design,"
-},
-{
-"start": 13.34,
-"end": 13.62,
-"word": " generative"
-},
-{
-"start": 13.62,
-"end": 13.82,
-"word": " AI,"
-},
-{
-"start": 13.98,
-"end": 14.18,
-"word": " marketing,"
-},
-{
-"start": 14.3,
-"end": 14.42,
-"word": " and"
-},
-{
-"start": 14.42,
-"end": 14.62,
-"word": " more."
-},
-{
-"start": 14.88,
-"end": 15.0,
-"word": " No"
-},
-{
-"start": 15.0,
-"end": 15.54,
-"word": " trials"
-},
-{
-"start": 15.54,
-"end": 15.88,
-"word": " or"
-},
-{
-"start": 15.88,
-"end": 16.18,
-"word": " credit"
-},
-{
-"start": 16.21,
-"end": 16.47,
-"word": " cards"
-},
-{
-"start": 16.47,
-"end": 17.03,
-"word": " required."
-},
-{
-"start": 17.41,
-"end": 17.51,
-"word": " Two,"
-},
-{
-"start": 17.69,
-"end": 17.87,
-"word": " Public"
-},
-{
-"start": 17.87,
-"end": 18.21,
-"word": " APIs."
-},
-{
-"start": 18.56,
-"end": 18.6,
-"word": " It"
-},
-{
-"start": 18.635,
-"end": 18.74,
-"word": " has"
-},
-{
-"start": 18.74,
-"end": 18.98,
-"word": " over"
-},
-{
-"start": 18.815,
-"end": 19.85,
-"word": " 1,400"
-},
-{
-"start": 19.85,
-"end": 20.35,
-"word": " plus"
-},
-{
-"start": 20.35,
-"end": 20.67,
-"word": " free"
-},
-{
-"start": 20.8,
-"end": 21.16,
-"word": " APIs"
-},
-{
-"start": 21.16,
-"end": 21.5,
-"word": " across"
-},
-{
-"start": 21.5,
-"end": 21.88,
-"word": " 50"
-},
-{
-"start": 21.77,
-"end": 22.25,
-"word": " categories,"
-},
-{
-"start": 22.49,
-"end": 22.71,
-"word": " like"
-},
-{
-"start": 22.71,
-"end": 23.13,
-"word": " programming,"
-},
-{
-"start": 23.55,
-"end": 23.81,
-"word": " video,"
-},
-{
-"start": 24.05,
-"end": 24.23,
-"word": " finance,"
-},
-{
-"start": 24.43,
-"end": 24.59,
-"word": " data"
-},
-{
-"start": 24.505,
-"end": 24.86,
-"word": " validation,"
-},
-{
-"start": 24.86,
-"end": 25.08,
-"word": " and"
-},
-{
-"start": 25.08,
-"end": 25.38,
-"word": " so"
-},
-{
-"start": 25.38,
-"end": 25.6,
-"word": " much"
-},
-{
-"start": 25.73,
-"end": 26.05,
-"word": " more."
-},
-{
-"start": 26.27,
-"end": 26.39,
-"word": " Three,"
-},
-{
-"start": 26.59,
-"end": 26.97,
-"word": " Scrapling."
-},
-{
-"start": 27.37,
-"end": 27.55,
-"word": " Cancel"
-},
-{
-"start": 27.55,
-"end": 27.79,
-"word": " your"
-},
-{
-"start": 27.79,
-"end": 28.31,
-"word": " $300"
-},
-{
-"start": 28.26,
-"end": 28.5,
-"word": " a"
-},
-{
-"start": 28.5,
-"end": 28.66,
-"word": " month"
-},
-{
-"start": 28.66,
-"end": 29.08,
-"word": " scraping"
-},
-{
-"start": 29.05,
-"end": 29.43,
-"word": " API,"
-},
-{
-"start": 29.43,
-"end": 29.71,
-"word": " because"
-},
-{
-"start": 29.71,
-"end": 29.95,
-"word": " this"
-},
-{
-"start": 30.0,
-"end": 30.28,
-"word": " plugin"
-},
-{
-"start": 30.28,
-"end": 30.5,
-"word": " has"
-},
-{
-"start": 30.5,
-"end": 31.3,
-"word": " undetectable"
-},
-{
-"start": 31.33,
-"end": 31.49,
-"word": " web"
-},
-{
-"start": 31.49,
-"end": 31.79,
-"word": " scraping"
-},
-{
-"start": 31.74,
-"end": 31.92,
-"word": " with"
-},
-{
-"start": 31.92,
-"end": 32.12,
-"word": " a"
-},
-{
-"start": 32.12,
-"end": 32.48,
-"word": " built-in"
-},
-{
-"start": 32.44,
-"end": 32.94,
-"word": " Cloudflare"
-},
-{
-"start": 32.94,
-"end": 33.42,
-"word": " bypass."
-},
-{
-"start": 33.96,
-"end": 34.0,
-"word": " Four,"
-},
-{
-"start": 34.14,
-"end": 34.44,
-"word": " Ollama."
-},
-{
-"start": 34.59,
-"end": 34.63,
-"word": " You"
-},
-{
-"start": 34.665,
-"end": 34.77,
-"word": " can"
-},
-{
-"start": 34.77,
-"end": 34.95,
-"word": " run"
-},
-{
-"start": 34.94,
-"end": 35.3,
-"word": " Llama,"
-},
-{
-"start": 35.44,
-"end": 35.76,
-"word": " Mistral,"
-},
-{
-"start": 35.96,
-"end": 36.34,
-"word": " DeepSeek"
-},
-{
-"start": 36.41,
-"end": 36.75,
-"word": " locally"
-},
-{
-"start": 36.75,
-"end": 36.95,
-"word": " for"
-},
-{
-"start": 36.95,
-"end": 37.19,
-"word": " free"
-},
-{
-"start": 37.24,
-"end": 37.42,
-"word": " with"
-},
-{
-"start": 37.42,
-"end": 37.66,
-"word": " one"
-},
-{
-"start": 37.66,
-"end": 37.98,
-"word": " command,"
-},
-{
-"start": 38.18,
-"end": 38.26,
-"word": " so"
-},
-{
-"start": 38.26,
-"end": 38.32,
-"word": " you"
-},
-{
-"start": 38.335,
-"end": 38.52,
-"word": " can"
-},
-{
-"start": 38.42,
-"end": 38.62,
-"word": " stop"
-},
-{
-"start": 38.62,
-"end": 38.86,
-"word": " paying"
-},
-{
-"start": 38.86,
-"end": 39.06,
-"word": " for"
-},
-{
-"start": 39.06,
-"end": 39.64,
-"word": " expensive"
-},
-{
-"start": 39.67,
-"end": 40.03,
-"word": " AI"
-},
-{
-"start": 40.03,
-"end": 40.55,
-"word": " subscriptions."
-},
-{
-"start": 41.01,
-"end": 41.19,
-"word": " Five,"
-},
-{
-"start": 41.41,
-"end": 41.61,
-"word": " Awesome"
-},
-{
-"start": 41.61,
-"end": 42.19,
-"word": " MCPs."
-},
-{
-"start": 42.28,
-"end": 42.32,
-"word": " It"
-},
-{
-"start": 42.355,
-"end": 42.48,
-"word": " has"
-},
-{
-"start": 42.48,
-"end": 42.72,
-"word": " over"
-},
-{
-"start": 42.77,
-"end": 43.83,
-"word": " 92,000"
-},
-{
-"start": 43.83,
-"end": 44.01,
-"word": " stars"
-},
-{
-"start": 44.01,
-"end": 44.19,
-"word": " on"
-},
-{
-"start": 44.19,
-"end": 44.35,
-"word": " GitHub,"
-},
-{
-"start": 44.45,
-"end": 44.49,
-"word": " and"
-},
-{
-"start": 44.525,
-"end": 44.61,
-"word": " it"
-},
-{
-"start": 44.61,
-"end": 44.77,
-"word": " has"
-},
-{
-"start": 45.2,
-"end": 45.7,
-"word": " thousands"
-},
-{
-"start": 45.7,
-"end": 45.9,
-"word": " of"
-},
-{
-"start": 45.9,
-"end": 46.26,
-"word": " MCP"
-},
-{
-"start": 45.975,
-"end": 46.17,
-"word": " servers"
-},
-{
-"start": 46.17,
-"end": 46.51,
-"word": " connecting"
-},
-{
-"start": 46.51,
-"end": 46.69,
-"word": " your"
-},
-{
-"start": 46.69,
-"end": 46.87,
-"word": " agent"
-},
-{
-"start": 47.16,
-"end": 47.36,
-"word": " to"
-},
-{
-"start": 47.36,
-"end": 47.74,
-"word": " browsers,"
-},
-{
-"start": 48.02,
-"end": 48.28,
-"word": " databases,"
-},
-{
-"start": 48.48,
-"end": 48.6,
-"word": " and"
-},
-{
-"start": 48.6,
-"end": 48.98,
-"word": " anything"
-},
-{
-"start": 49.01,
-"end": 49.15,
-"word": " you"
-},
-{
-"start": 49.15,
-"end": 49.27,
-"word": " can"
-},
-{
-"start": 49.27,
-"end": 49.45,
-"word": " think"
-},
-{
-"start": 49.45,
-"end": 49.67,
-"word": " of."
-},
-{
-"start": 49.88,
-"end": 50.0,
-"word": " For"
-},
-{
-"start": 50.0,
-"end": 50.1,
-"word": " the"
-},
-{
-"start": 50.1,
-"end": 50.3,
-"word": " free"
-},
-{
-"start": 50.24,
-"end": 50.52,
-"word": " setup,"
-},
-{
-"start": 50.72,
-"end": 50.82,
-"word": " comment"
-},
-{
-"start": 50.82,
-"end": 51.1,
-"word": " STAR."
-}
+ {
+  "start": 0.0,
+  "end": 0.08,
+  "word": " If"
+ },
+ {
+  "start": 0.08,
+  "end": 0.16,
+  "word": " you're"
+ },
+ {
+  "start": 0.16,
+  "end": 0.26,
+  "word": " not"
+ },
+ {
+  "start": 0.235,
+  "end": 0.275,
+  "word": " using"
+ },
+ {
+  "start": 0.31,
+  "end": 0.4,
+  "word": " these"
+ },
+ {
+  "start": 0.4,
+  "end": 0.7,
+  "word": " five"
+ },
+ {
+  "start": 0.65,
+  "end": 0.85,
+  "word": " Claude"
+ },
+ {
+  "start": 0.85,
+  "end": 1.17,
+  "word": " plugins,"
+ },
+ {
+  "start": 1.27,
+  "end": 1.35,
+  "word": " you're"
+ },
+ {
+  "start": 1.46,
+  "end": 1.58,
+  "word": " missing"
+ },
+ {
+  "start": 1.58,
+  "end": 1.74,
+  "word": " out"
+ },
+ {
+  "start": 1.74,
+  "end": 1.84,
+  "word": " on"
+ },
+ {
+  "start": 1.84,
+  "end": 1.98,
+  "word": " over"
+ },
+ {
+  "start": 2.17,
+  "end": 2.93,
+  "word": " $10,000"
+ },
+ {
+  "start": 2.93,
+  "end": 3.13,
+  "word": " worth"
+ },
+ {
+  "start": 3.13,
+  "end": 3.27,
+  "word": " of"
+ },
+ {
+  "start": 3.27,
+  "end": 3.466667,
+  "word": " software,"
+ },
+ {
+  "start": 3.457,
+  "end": 3.497,
+  "word": " Number"
+ },
+ {
+  "start": 3.532,
+  "end": 3.717,
+  "word": " one,"
+ },
+ {
+  "start": 3.857,
+  "end": 3.957,
+  "word": " Free"
+ },
+ {
+  "start": 4.037,
+  "end": 4.157,
+  "word": " for"
+ },
+ {
+  "start": 4.157,
+  "end": 4.337,
+  "word": " Dev."
+ },
+ {
+  "start": 4.497,
+  "end": 4.537,
+  "word": " You"
+ },
+ {
+  "start": 4.572,
+  "end": 4.697,
+  "word": " get"
+ },
+ {
+  "start": 4.697,
+  "end": 5.097,
+  "word": " instant"
+ },
+ {
+  "start": 5.077,
+  "end": 5.437,
+  "word": " access"
+ },
+ {
+  "start": 5.437,
+  "end": 5.697,
+  "word": " to"
+ },
+ {
+  "start": 5.697,
+  "end": 5.977,
+  "word": " hundreds"
+ },
+ {
+  "start": 5.857,
+  "end": 6.097,
+  "word": " of"
+ },
+ {
+  "start": 6.097,
+  "end": 6.337,
+  "word": " free"
+ },
+ {
+  "start": 6.337,
+  "end": 6.797,
+  "word": " alternatives"
+ },
+ {
+  "start": 7.037,
+  "end": 7.277,
+  "word": " to"
+ },
+ {
+  "start": 7.277,
+  "end": 7.517,
+  "word": " all"
+ },
+ {
+  "start": 7.517,
+  "end": 7.717,
+  "word": " the"
+ },
+ {
+  "start": 7.717,
+  "end": 7.957,
+  "word": " paid"
+ },
+ {
+  "start": 7.792,
+  "end": 8.167,
+  "word": " softwares"
+ },
+ {
+  "start": 8.167,
+  "end": 8.487,
+  "word": " across"
+ },
+ {
+  "start": 8.487,
+  "end": 8.847,
+  "word": " design,"
+ },
+ {
+  "start": 9.007,
+  "end": 9.287,
+  "word": " generative"
+ },
+ {
+  "start": 9.287,
+  "end": 9.487,
+  "word": " AI,"
+ },
+ {
+  "start": 9.647,
+  "end": 9.847,
+  "word": " marketing,"
+ },
+ {
+  "start": 9.967,
+  "end": 10.087,
+  "word": " and"
+ },
+ {
+  "start": 10.087,
+  "end": 10.287,
+  "word": " more."
+ },
+ {
+  "start": 10.547,
+  "end": 10.667,
+  "word": " No"
+ },
+ {
+  "start": 10.667,
+  "end": 11.207,
+  "word": " trials"
+ },
+ {
+  "start": 11.207,
+  "end": 11.547,
+  "word": " or"
+ },
+ {
+  "start": 11.547,
+  "end": 11.847,
+  "word": " credit"
+ },
+ {
+  "start": 11.877,
+  "end": 12.137,
+  "word": " cards"
+ },
+ {
+  "start": 12.137,
+  "end": 12.697,
+  "word": " required."
+ },
+ {
+  "start": 13.077,
+  "end": 13.177,
+  "word": " Two,"
+ },
+ {
+  "start": 13.357,
+  "end": 13.537,
+  "word": " Public"
+ },
+ {
+  "start": 13.537,
+  "end": 13.877,
+  "word": " APIs."
+ },
+ {
+  "start": 14.227,
+  "end": 14.267,
+  "word": " It"
+ },
+ {
+  "start": 14.302,
+  "end": 14.407,
+  "word": " has"
+ },
+ {
+  "start": 14.407,
+  "end": 14.647,
+  "word": " over"
+ },
+ {
+  "start": 14.482,
+  "end": 15.517,
+  "word": " 1,400"
+ },
+ {
+  "start": 15.517,
+  "end": 16.017,
+  "word": " plus"
+ },
+ {
+  "start": 16.017,
+  "end": 16.337,
+  "word": " free"
+ },
+ {
+  "start": 16.467,
+  "end": 16.827,
+  "word": " APIs"
+ },
+ {
+  "start": 16.827,
+  "end": 17.167,
+  "word": " across"
+ },
+ {
+  "start": 17.167,
+  "end": 17.547,
+  "word": " 50"
+ },
+ {
+  "start": 17.437,
+  "end": 17.917,
+  "word": " categories,"
+ },
+ {
+  "start": 18.157,
+  "end": 18.377,
+  "word": " like"
+ },
+ {
+  "start": 18.377,
+  "end": 18.797,
+  "word": " programming,"
+ },
+ {
+  "start": 19.217,
+  "end": 19.477,
+  "word": " video,"
+ },
+ {
+  "start": 19.717,
+  "end": 19.897,
+  "word": " finance,"
+ },
+ {
+  "start": 20.097,
+  "end": 20.257,
+  "word": " data"
+ },
+ {
+  "start": 20.172,
+  "end": 20.527,
+  "word": " validation,"
+ },
+ {
+  "start": 20.527,
+  "end": 20.747,
+  "word": " and"
+ },
+ {
+  "start": 20.747,
+  "end": 21.047,
+  "word": " so"
+ },
+ {
+  "start": 21.047,
+  "end": 21.267,
+  "word": " much"
+ },
+ {
+  "start": 21.397,
+  "end": 21.717,
+  "word": " more."
+ },
+ {
+  "start": 21.937,
+  "end": 22.057,
+  "word": " Three,"
+ },
+ {
+  "start": 22.257,
+  "end": 22.637,
+  "word": " Scrapling."
+ },
+ {
+  "start": 23.037,
+  "end": 23.217,
+  "word": " Cancel"
+ },
+ {
+  "start": 23.217,
+  "end": 23.457,
+  "word": " your"
+ },
+ {
+  "start": 23.457,
+  "end": 23.977,
+  "word": " $300"
+ },
+ {
+  "start": 23.927,
+  "end": 24.167,
+  "word": " a"
+ },
+ {
+  "start": 24.167,
+  "end": 24.327,
+  "word": " month"
+ },
+ {
+  "start": 24.327,
+  "end": 24.747,
+  "word": " scraping"
+ },
+ {
+  "start": 24.717,
+  "end": 25.097,
+  "word": " API,"
+ },
+ {
+  "start": 25.097,
+  "end": 25.377,
+  "word": " because"
+ },
+ {
+  "start": 25.377,
+  "end": 25.617,
+  "word": " this"
+ },
+ {
+  "start": 25.667,
+  "end": 25.947,
+  "word": " plugin"
+ },
+ {
+  "start": 25.947,
+  "end": 26.167,
+  "word": " has"
+ },
+ {
+  "start": 26.167,
+  "end": 26.967,
+  "word": " undetectable"
+ },
+ {
+  "start": 26.997,
+  "end": 27.157,
+  "word": " web"
+ },
+ {
+  "start": 27.157,
+  "end": 27.457,
+  "word": " scraping"
+ },
+ {
+  "start": 27.407,
+  "end": 27.587,
+  "word": " with"
+ },
+ {
+  "start": 27.587,
+  "end": 27.787,
+  "word": " a"
+ },
+ {
+  "start": 27.787,
+  "end": 28.147,
+  "word": " built-in"
+ },
+ {
+  "start": 28.107,
+  "end": 28.607,
+  "word": " Cloudflare"
+ },
+ {
+  "start": 28.607,
+  "end": 29.087,
+  "word": " bypass."
+ },
+ {
+  "start": 29.627,
+  "end": 29.667,
+  "word": " Four,"
+ },
+ {
+  "start": 29.807,
+  "end": 30.107,
+  "word": " Ollama."
+ },
+ {
+  "start": 30.257,
+  "end": 30.297,
+  "word": " You"
+ },
+ {
+  "start": 30.332,
+  "end": 30.437,
+  "word": " can"
+ },
+ {
+  "start": 30.437,
+  "end": 30.617,
+  "word": " run"
+ },
+ {
+  "start": 30.607,
+  "end": 30.967,
+  "word": " Llama,"
+ },
+ {
+  "start": 31.107,
+  "end": 31.427,
+  "word": " Mistral,"
+ },
+ {
+  "start": 31.627,
+  "end": 32.007,
+  "word": " DeepSeek"
+ },
+ {
+  "start": 32.077,
+  "end": 32.417,
+  "word": " locally"
+ },
+ {
+  "start": 32.417,
+  "end": 32.617,
+  "word": " for"
+ },
+ {
+  "start": 32.617,
+  "end": 32.857,
+  "word": " free"
+ },
+ {
+  "start": 32.907,
+  "end": 33.087,
+  "word": " with"
+ },
+ {
+  "start": 33.087,
+  "end": 33.327,
+  "word": " one"
+ },
+ {
+  "start": 33.327,
+  "end": 33.647,
+  "word": " command,"
+ },
+ {
+  "start": 33.847,
+  "end": 33.927,
+  "word": " so"
+ },
+ {
+  "start": 33.927,
+  "end": 33.987,
+  "word": " you"
+ },
+ {
+  "start": 34.002,
+  "end": 34.187,
+  "word": " can"
+ },
+ {
+  "start": 34.087,
+  "end": 34.287,
+  "word": " stop"
+ },
+ {
+  "start": 34.287,
+  "end": 34.527,
+  "word": " paying"
+ },
+ {
+  "start": 34.527,
+  "end": 34.727,
+  "word": " for"
+ },
+ {
+  "start": 34.727,
+  "end": 35.307,
+  "word": " expensive"
+ },
+ {
+  "start": 35.337,
+  "end": 35.697,
+  "word": " AI"
+ },
+ {
+  "start": 35.697,
+  "end": 36.217,
+  "word": " subscriptions."
+ },
+ {
+  "start": 36.677,
+  "end": 36.857,
+  "word": " Five,"
+ },
+ {
+  "start": 37.077,
+  "end": 37.277,
+  "word": " Awesome"
+ },
+ {
+  "start": 37.277,
+  "end": 37.857,
+  "word": " MCPs."
+ },
+ {
+  "start": 37.947,
+  "end": 37.987,
+  "word": " It"
+ },
+ {
+  "start": 38.022,
+  "end": 38.147,
+  "word": " has"
+ },
+ {
+  "start": 38.147,
+  "end": 38.387,
+  "word": " over"
+ },
+ {
+  "start": 38.437,
+  "end": 39.497,
+  "word": " 92,000"
+ },
+ {
+  "start": 39.497,
+  "end": 39.677,
+  "word": " stars"
+ },
+ {
+  "start": 39.677,
+  "end": 39.857,
+  "word": " on"
+ },
+ {
+  "start": 39.857,
+  "end": 40.017,
+  "word": " GitHub,"
+ },
+ {
+  "start": 40.117,
+  "end": 40.157,
+  "word": " and"
+ },
+ {
+  "start": 40.192,
+  "end": 40.277,
+  "word": " it"
+ },
+ {
+  "start": 40.277,
+  "end": 40.437,
+  "word": " has"
+ },
+ {
+  "start": 40.867,
+  "end": 41.367,
+  "word": " thousands"
+ },
+ {
+  "start": 41.367,
+  "end": 41.567,
+  "word": " of"
+ },
+ {
+  "start": 41.567,
+  "end": 41.927,
+  "word": " MCP"
+ },
+ {
+  "start": 41.642,
+  "end": 41.837,
+  "word": " servers"
+ },
+ {
+  "start": 41.837,
+  "end": 42.177,
+  "word": " connecting"
+ },
+ {
+  "start": 42.177,
+  "end": 42.357,
+  "word": " your"
+ },
+ {
+  "start": 42.357,
+  "end": 42.537,
+  "word": " agent"
+ },
+ {
+  "start": 42.827,
+  "end": 43.027,
+  "word": " to"
+ },
+ {
+  "start": 43.027,
+  "end": 43.407,
+  "word": " browsers,"
+ },
+ {
+  "start": 43.687,
+  "end": 43.947,
+  "word": " databases,"
+ },
+ {
+  "start": 44.147,
+  "end": 44.267,
+  "word": " and"
+ },
+ {
+  "start": 44.267,
+  "end": 44.647,
+  "word": " anything"
+ },
+ {
+  "start": 44.677,
+  "end": 44.817,
+  "word": " you"
+ },
+ {
+  "start": 44.817,
+  "end": 44.937,
+  "word": " can"
+ },
+ {
+  "start": 44.937,
+  "end": 45.117,
+  "word": " think"
+ },
+ {
+  "start": 45.117,
+  "end": 45.337,
+  "word": " of."
+ },
+ {
+  "start": 45.547,
+  "end": 45.667,
+  "word": " For"
+ },
+ {
+  "start": 45.667,
+  "end": 45.767,
+  "word": " the"
+ },
+ {
+  "start": 45.767,
+  "end": 45.967,
+  "word": " free"
+ },
+ {
+  "start": 45.907,
+  "end": 46.187,
+  "word": " setup,"
+ },
+ {
+  "start": 46.387,
+  "end": 46.487,
+  "word": " comment"
+ },
+ {
+  "start": 46.487,
+  "end": 46.767,
+  "word": " STAR."
+ }
 ]

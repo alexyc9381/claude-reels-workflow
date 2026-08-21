@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
-import { S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, CAM, GRADE } from "./StarScenes";
+import { S0, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, CAM, GRADE } from "./StarScenes";
 import type { Variant } from "./StarScenes";
 import { CamCtx, R } from "./StarWorld";
 import { HookReceipt, HookLoad } from "./StarHooks";
@@ -76,7 +76,18 @@ export const FPS = 30;
     divided by 1.04. Every in-scene beat that lands on a word was re-cut the
     same way; a 4% tempo change moves a beat at 40s by more than a second and a
     half, which is a mis-cut, not a drift. */
-export const STAR_TOTAL = 1542;
+/* ⛔ 1542 -> 1412. Alex, 2026-08-21: *"cut out the part that says they have
+   over 500000 stars on github with one click install since i saw that many ppl
+   dropped off during that."* That line was S1 (the ARCH), 130 frames.
+
+   The VO was spliced on MEASURED points, never whisper word times: frame 104
+   (3.4667s) sits in a 50ms dip at ~-50dB between "software," and "and", and
+   frame 234 (7.8000s) sits inside 108ms of TRUE digital silence before
+   "Number". `silencedetect` found NOTHING at -40dB/60ms across that whole
+   region — an earlier pass had already removed every pause — so the cut points
+   came from a 5ms RMS envelope instead. Removing exactly 130 frames keeps
+   every later onset frame-aligned, so the whole spine just shifts. */
+export const STAR_TOTAL = 1412;
 
 /* ⛔ MEASURED WORD ONSETS from src/data/words_115star.json, converted to
    frames. Nothing here is estimated — every value is `round(onset * 30)` of
@@ -84,24 +95,26 @@ export const STAR_TOTAL = 1542;
    (never a hardcoded index — those drift the moment the VO changes). */
 export const L = {
   S0: 0,      /* STREET     0.00s  "If you're not using these five Claude..." */
-  S1: 102,    /* ARCH       3.41s  "and they all have over 500,000 combined"  */
-  S2: 234,    /* HOLES      7.79s  "Number one, Free for Dev. You get..."     */
-  S3: 341,    /* BAYS      11.37s  "to all the paid softwares across design"  */
-  S4: 446,    /* TILL      14.88s  "No trials or credit cards required."      */
-  S5: 522,    /* PATCH     17.41s  "Two, Public APIs. It has over 1,400..."   */
-  S6: 668,    /* DRUMS     22.27s  "like programming, video, finance, data"   */
-  S7: 793,    /* METER     26.43s  "Three, Scrapling. Cancel your $300 a..."  */
-  S8: 883,    /* CHECK     29.43s  "because this plugin has undetectable..."  */
-  S9: 1019,   /* SHED      33.96s  "Four, Ollama. You can run Llama..."       */
-  S10: 1142,  /* METERS    38.07s  "so you can stop paying for expensive..."  */
-  S11: 1230,  /* WALL      41.01s  "Five, Awesome MCPs. It has over 92,000"   */
-  S12: 1331,  /* CROSS     44.37s  "and it has thousands of MCP servers..."   */
-  S13: 1496,  /* CTA       49.88s  "For the free setup, comment STAR."        */
+  /* ⛔ S1 (ARCH, "and they all have over 500,000 combined stars on GitHub with
+     the simple one-click install") IS CUT — measured drop-off. The scene
+     component still exists in StarScenes.tsx, unused, so this is reversible. */
+  S2: 104,    /* HOLES      3.46s  "Number one, Free for Dev. You get..."     */
+  S3: 211,    /* BAYS       7.03s  "to all the paid softwares across design"  */
+  S4: 316,    /* TILL      10.55s  "No trials or credit cards required."      */
+  S5: 392,    /* PATCH     13.08s  "Two, Public APIs. It has over 1,400..."   */
+  S6: 538,    /* DRUMS     17.94s  "like programming, video, finance, data"   */
+  S7: 663,    /* METER     22.10s  "Three, Scrapling. Cancel your $300 a..."  */
+  S8: 753,    /* CHECK     25.10s  "because this plugin has undetectable..."  */
+  S9: 889,    /* SHED      29.63s  "Four, Ollama. You can run Llama..."       */
+  S10: 1012,  /* METERS    33.74s  "so you can stop paying for expensive..."  */
+  S11: 1100,  /* WALL      36.67s  "Five, Awesome MCPs. It has over 92,000"   */
+  S12: 1201,  /* CROSS     40.03s  "and it has thousands of MCP servers..."   */
+  S13: 1366,  /* CTA       45.54s  "For the free setup, comment STAR."        */
   END: STAR_TOTAL,
 } as const;
 
 const DUR = {
-  S0: L.S1 - L.S0, S1: L.S2 - L.S1, S2: L.S3 - L.S2, S3: L.S4 - L.S3,
+  S0: L.S2 - L.S0, S2: L.S3 - L.S2, S3: L.S4 - L.S3,
   S4: L.S5 - L.S4, S5: L.S6 - L.S5, S6: L.S7 - L.S6, S7: L.S8 - L.S7,
   S8: L.S9 - L.S8, S9: L.S10 - L.S9, S10: L.S11 - L.S10, S11: L.S12 - L.S11,
   S12: L.S13 - L.S12, S13: L.END - L.S13,
@@ -202,27 +215,6 @@ const SFX: Cue[] = [
   { at: S(L.S0 + 86), src: "sub.wav",          v: LEVELS.SFX_HERO,    dur: 0.44 },
   { at: S(L.S0 + 86), src: "boom.wav",         v: LEVELS.SFX_HERO,    dur: 0.56, rate: 0.85 },
   { at: S(L.S0 + 92), src: "neon_on.wav",      v: LEVELS.SFX_MID,     dur: 0.56 },
-
-  /* ---- S1 · UNDER THE ARCH (7). Five plates seating is NOT five copies of one
-     sample — that is a metronome of slaps. */
-  { at: S(L.S1 + 0),   src: "stage_hum.wav",    v: LEVELS.SFX_BED,     dur: 4.5 },
-  /* ⭐⭐ FIVE SEATS, FIVE SOUNDS — AND THEY CLIMB. Alex: *"each time the github
-     icon clicks into the slot it should have... a small sfx."* Slots 2, 3 and 4
-     previously made NO SOUND AT ALL, which is the whole reason the beat felt
-     inert. Each seat is now a mechanical clank plus a `pickup_chime` pitched one
-     step up the run (0.88 -> 1.28). An ASCENDING run is what makes a repeated
-     reward read as PROGRESS rather than repetition — the same reason S12's
-     socket run climbs — and `pickup_chime` is 1.2% above 2kHz, the second-lowest
-     transient in the bank, so seven uses never slap. */
-  { at: S(L.S1 + 8),   src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.14 },
-  { at: S(L.S1 + 8),   src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 0.88 },
-  { at: S(L.S1 + 31),  src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 0.98 },
-  { at: S(L.S1 + 54),  src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 1.08 },
-  { at: S(L.S1 + 77),  src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 1.18 },
-  { at: S(L.S1 + 100), src: "pickup_chime.wav", v: LEVELS.SFX_MID,     dur: 0.36, rate: 1.28 },
-  { at: S(L.S1 + 100), src: "rebuild_thud.wav", v: LEVELS.SFX_HERO,    dur: 0.82, rate: 0.90 },
-  { at: S(L.S1 + 104), src: "gold_stamp.wav",   v: LEVELS.SFX_MID,     dur: 0.52 },
-  { at: S(L.S1 + 108), src: "slate_whump.wav",  v: LEVELS.SFX_HERO,    dur: 0.18, rate: 0.90 },
 
   /* ---- S2 · THE PIGEONHOLE WALL (6). ⛔⛔ RESCORED. Alex: *"not good sfx
      there."* v1 gave a wall of 84 passes ejecting ONE `slate_whump` and then a
@@ -469,7 +461,6 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
                 : v === "steel" ? <HookLoad dur={DUR.S0} />
                 : <S0 v={v} dur={DUR.S0} />}
             </Sequence>
-            <Sequence from={L.S1} durationInFrames={DUR.S1}><S1 v={v} dur={DUR.S1} /></Sequence>
             <Sequence from={L.S2} durationInFrames={DUR.S2}><S2 v={v} dur={DUR.S2} /></Sequence>
             <Sequence from={L.S3} durationInFrames={DUR.S3}><S3 v={v} dur={DUR.S3} /></Sequence>
             <Sequence from={L.S4} durationInFrames={DUR.S4}><S4 v={v} dur={DUR.S4} /></Sequence>
@@ -508,7 +499,6 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
    ====================================================================== */
 const BANDS: Array<{ from: number; big: string; hot: string }> = [
   { from: L.S0,  big: "5 FREE REPOS REPLACE",   hot: "$10,000 OF PAID SOFTWARE" },
-  { from: L.S1,  big: "ALL FIVE ARE FREE",      hot: "★945,792 ON GITHUB" },
   { from: L.S2,  big: "#1 · FREE-FOR-DEV",      hot: "1,346 FREE TIERS" },
   { from: L.S4,  big: "#1 · FREE-FOR-DEV",      hot: "NO CARD REQUIRED" },
   { from: L.S5,  big: "#2 · PUBLIC-APIS",       hot: "1,706 FREE APIS" },

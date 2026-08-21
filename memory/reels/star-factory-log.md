@@ -536,3 +536,92 @@ labels, the carried `ON GITHUB` sign, the star plates).
 > (renders + stills + three audits at once); the same file audits fine on a quiet
 > machine. **A gate that prints nothing is not a gate that passed** — grep for
 > the PASS line, or check the exit code, never assume silence means clean.
+
+---
+
+## Round 12 — cut the "500,000 stars / one-click install" beat (2026-08-21)
+
+**Alex:** *"cut out the part that says they have over 500000 stars on github with
+one click install since i saw that many ppl dropped off during that"*
+
+Measured drop-off, so S1 (THE ARCH, 130 frames) is gone. **51.4s -> 47.1s,
+1542 -> 1412 frames.**
+
+### The splice: silencedetect found NOTHING, so the envelope did the work
+
+`silencedetect` returned **no gaps at all** between 2.0s and 9.5s — not at
+-40dB/90ms, not at -30dB/60ms. An earlier pass in this reel's own pipeline had
+already removed every pause, so there was no silence left to cut on. A 5ms RMS
+envelope found the real structure:
+
+```
+  BOUNDARY A   3.430-3.480   -44 to -52 dB   a 50ms dip, too SHORT for
+                                             silencedetect's 60ms minimum
+  BOUNDARY B   7.780-7.888   -240 dB         108ms of TRUE digital silence
+```
+
+Cut at **f104 (3.4667s)** and **f234 (7.8000s)** — both on frame boundaries, so
+exactly 130 frames leave and every later onset stays frame-aligned. The spine
+just shifts; all 107 SFX cues anchor to `L.Sn` so they moved themselves. Only
+S1's own 10 cues, its `<Sequence>`, and its header band were deleted.
+
+⛔ The band's hot line was **"★945,792 ON GITHUB"** — the exact claim the VO no
+longer makes. **A band dies with the line that earned it.** (`RunTotal` was used
+only in S1, so the combined total now appears nowhere.)
+
+Verified by transcribing the join: *"...worth of software. Number one, free for
+dev."* No fragment, no click (peak -27.4 dB across the join window).
+
+> ⭐ **TWO ASSERTIONS CAUGHT ERRORS BEFORE THEY WERE WRITTEN.** A time-window
+> word filter swallowed **"Number"** (whisper puts it at 7.790; its true onset is
+> 7.888 — the same ~100ms lead that is the whole reason for the never-use-whisper
+> -times rule), and the cue-block count was asserted at 11 when it was 10.
+> Neither wrote a file. **Assert what you believe about a range BEFORE you
+> delete by it.**
+
+### And the cut surfaced a scene the median had been hiding
+
+With 13 scenes instead of 14, **steel failed 1/13**: S10 (METERS) at **5.95**
+against the **6.00 per-scene floor**. It was not caused by the cut — the same
+scene is the reel's weakest in every cut (market 6.86, amber 8.42) and its
+content and duration never changed.
+
+Two fixes, and the FIRST one barely worked:
+
+| change | steel S10 |
+|---|---|
+| baseline | 5.95 FAIL |
+| meter stagger 8 -> 5 (~2.5 -> ~4 falling at once) + a tail light sweep | 6.13 |
+| **steel `RAKE_K` 0.58 -> 0.85** | **6.46** |
+
+⛔ **The sweep was INVISIBLE in the render** at 0.30 alpha over a dark wall — an
+effect that existed in the code and not in the video, found by rendering the
+frames rather than re-reading the diff. Raised to 0.52.
+
+⭐ **The real cause was a variant lever.** steel's rake ran at **0.58x**, nearly
+half market's, and the rake is the only element that repaints a large share of a
+quiet scene — which is exactly why this scene was worst in steel *specifically*.
+§8 had already measured that rake speed buys ~no dHash separation, so raising it
+cost nothing that matters. **When one CUT fails a scene the others pass, suspect
+that cut's own levers before rewriting the scene.**
+
+Final: market 6.86 -> **7.30**, amber 8.42 -> **8.94**, steel 5.95 -> **6.46**.
+
+> ⚠️ Still the reel's weakest scene, and HOLD went **24% -> 38%** — a tighter
+> cascade empties the tail. The number was lifted over the floor; the scene was
+> not reworked. Flagged to Alex as a separate pass.
+
+### Gates, all three cuts
+
+```
+              verify   HOOK_LUMA   BODY_SAT   BODY_BLACK   S10    motion   failing
+  market       8/8       148.1      67.8%       29.2       7.30   11.34     0/13
+  amber        8/8       179.6      73.1%       16.5       8.94   13.06     0/13
+  steel        8/8       167.5      67.8%       29.0       6.46   11.89     0/13
+
+  dHash   mean 22.8   MIN 12   PASS
+```
+
+The uncut VO, beds, words and script are preserved as `*_UNCUT.*` in
+`video/public/` and `video/src/data/` (gitignored), and `S1` + `RunTotal` are
+still in `StarScenes.tsx`, unused — the cut is reversible.
