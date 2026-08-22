@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 98,
-    "reels_total": 144,
-    "factory_logs": 58,
-    "storyboards": 59,
-    "caption_jsons": 107,
-    "memory_md": 198,
+    "reels_with_code": 100,
+    "reels_total": 147,
+    "factory_logs": 59,
+    "storyboards": 61,
+    "caption_jsons": 110,
+    "memory_md": 199,
     "creators": 8,
     "packs": 3
   },
@@ -512,7 +512,10 @@
         "video/src/data/words_110flow.json",
         "video/src/data/words_113go.json",
         "video/src/data/words_115star.json",
+        "video/src/data/words_115star_UNCUT.json",
         "video/src/data/words_116bill.json",
+        "video/src/data/words_117know.json",
+        "video/src/data/words_118loop.json",
         "video/src/data/words_ads.json",
         "video/src/data/words_agency.json",
         "video/src/data/words_ai.json",
@@ -880,6 +883,15 @@
       "number": null,
       "code": null,
       "log": "memory/reels/lean-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "loop118",
+      "name": "loop118",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/loop118-factory-log.md",
       "storyboard": null,
       "captions": []
     },
@@ -1597,7 +1609,8 @@
       "log": "memory/reels/star-factory-log.md",
       "storyboard": "storyboards/115-star.md",
       "captions": [
-        "video/src/data/words_115star.json"
+        "video/src/data/words_115star.json",
+        "video/src/data/words_115star_UNCUT.json"
       ]
     },
     {
@@ -1609,6 +1622,30 @@
       "storyboard": "storyboards/116-bill.md",
       "captions": [
         "video/src/data/words_116bill.json"
+      ]
+    },
+    {
+      "key": "know",
+      "name": "know",
+      "number": 117,
+      "code": "video/src/ClaudeKnowReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/117-know.md",
+      "captions": [
+        "video/src/data/words_117know.json"
+      ]
+    },
+    {
+      "key": "loop",
+      "name": "loop",
+      "number": 118,
+      "code": "video/src/ClaudeLoopReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/118-loop.md",
+      "captions": [
+        "video/src/data/words_118loop.json",
+        "video/src/data/words_loops.json",
+        "video/src/data/words_loops_alex.json"
       ]
     }
   ]

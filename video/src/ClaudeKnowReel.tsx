@@ -6,7 +6,7 @@ import {
   CAM, GRADE,
 } from "./KnowScenes";
 import type { Variant } from "./KnowScenes";
-import { CamCtx, R } from "./KnowWorld";
+import { CamCtx, R, SectionCard, SODIUM, TEAL, VIOLET } from "./KnowWorld";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
 import words from "./data/words_117know.json";
 
@@ -92,10 +92,19 @@ import words from "./data/words_117know.json";
 
 export const FPS = 30;
 
-/** 1212 frames = 40.40s, the VO file's own length to within a frame. Its last
-    word `access` starts at 39.77s (f1193), so the reel carries 19 frames of
-    tail and hard-cuts after the CTA lands. */
-export const KNOW_TOTAL = 1212;
+/** 1171 frames = 39.02s. ⛔ RE-CUT: Alex, on the first delivery — *"there is a
+    bit too long of a pause in between scenes here."* Measured on the shipped
+    VO, the four gaps before a new beat ran **0.45 / 0.55 / 0.49 / 0.51s**, and
+    half a second of nothing in a forty-second reel is a hole rather than a
+    breath. Re-spliced from the raw take with the inter-island silences cut to
+    0.05-0.15s and the safety pads tightened 0.10/0.12 -> 0.07/0.09: longest gap
+    now **0.30s**, total silence 3.31 -> 2.03s, runtime 40.39 -> 39.02s.
+    ⛔⛔ AND A RE-CUT IS NOT A DIVISION (reel 115). Every onset below was
+    RE-DERIVED from the rebuilt caption JSON, not scaled — at 35s a 1.04x factor
+    is over a second out. Captions were rebuilt first, then these read off them.
+    Its last word `access` starts at 38.55s (f1157), so the reel carries 14
+    frames of tail and hard-cuts after the CTA lands. */
+export const KNOW_TOTAL = 1171;
 
 /* ⛔ MEASURED WORD ONSETS from src/data/words_117know.json, converted to frames
    and pulled back by the house 4-frame picture lead. Nothing here is estimated
@@ -105,20 +114,20 @@ export const KNOW_TOTAL = 1212;
 export const L = {
   S0: 0,      /* POUR      0.00s  "Give me 30 seconds and I'll give you…"     */
   S1: 31,     /* INGOT     1.17s  "…10,000 hours of Claude knowledge."        */
-  S2: 93,     /* GRIND     3.23s  "First, beginner tips."                     */
-  S3: 128,    /* BURN      4.40s  "Don't waste money and usage limits on…"    */
-  S4: 221,    /* LINE      7.51s  "Use Sonnet for daily use,"                 */
-  S5: 254,    /* FAST      8.61s  "Haiku if you like wrong answers,"          */
-  S6: 288,    /* DEEP      9.74s  "and Opus slash Fable for more complex…"    */
-  S7: 366,    /* VAULT    12.33s  "Also, don't use Projects for most work"    */
-  S8: 412,    /* SHUTTER  13.88s  "because the AI loses access to your main…" */
-  S9: 506,    /* STREET   16.99s  "For intermediate tips, use the Claude…"    */
-  S10: 598,   /* VERBS    20.08s  "It can navigate pages, read content,…"     */
-  S11: 720,   /* LOFT     24.15s  "For expert tips, use the desktop app's…"   */
-  S12: 839,   /* LOOMS    28.11s  "and build automations to 10x your Claude…" */
-  S13: 917,   /* SOCKETS  30.71s  "And you can install plugins and MCPs…"     */
-  S14: 969,   /* RESKILL  32.42s  "to make it an expert in UI design,…"       */
-  S15: 1080,  /* CTA      36.13s  "I made a full list of 15 tips from…"       */
+  S2: 90,     /* GRIND     3.12s  "First, beginner tips."          BEGINNER   */
+  S3: 124,    /* BURN      4.26s  "Don't waste money and usage limits on…"    */
+  S4: 215,    /* LINE      7.29s  "Use Sonnet for daily use,"                 */
+  S5: 247,    /* FAST      8.38s  "Haiku if you like wrong answers,"          */
+  S6: 281,    /* DEEP      9.50s  "and Opus slash Fable for more complex…"    */
+  S7: 353,    /* VAULT    11.90s  "Also, don't use Projects for most work"    */
+  S8: 399,    /* SHUTTER  13.42s  "because the AI loses access to your main…" */
+  S9: 485,    /* STREET   16.31s  "For intermediate tips, use the Claude…" INT*/
+  S10: 570,   /* VERBS    19.12s  "It can navigate pages, read content,…"     */
+  S11: 693,   /* LOFT     23.22s  "For expert tips, use the desktop app's…" EXP*/
+  S12: 810,   /* LOOMS    27.13s  "and build automations to 10x your Claude…" */
+  S13: 885,   /* SOCKETS  29.63s  "And you can install plugins and MCPs…"     */
+  S14: 935,   /* RESKILL  31.29s  "to make it an expert in UI design,…"       */
+  S15: 1041,  /* CTA      34.82s  "I made a full list of 15 tips from…"       */
   END: KNOW_TOTAL,
 } as const;
 
@@ -351,6 +360,8 @@ export const BED_GAIN: Record<Variant, number> = {
 };
 /** a different caption band Y per cut — another axis a perceptual hash reads */
 const CAP_Y: Record<Variant, number> = { works: 1252, forge: 1332, night: 1186 };
+/** and a per-cut section-card Y, for the same reason */
+const CARD_Y: Record<Variant, number> = { works: 664, forge: 590, night: 726 };
 
 /** the header changes per SECTION. ⛔ It never disappears (reel 107) and it
     never says one thing for the whole reel (reel 108). */
@@ -400,7 +411,21 @@ export const makeReel = (v: Variant): React.FC => () => {
         </AssemblyCtx.Provider>
       </CamCtx.Provider>
 
-      {/* ⛔ THE GLOBAL CHROME — one of each, at root, for all 1212 frames. */}
+      {/* ⭐⭐ THE THREE SECTION CARDS. Alex: *"when I say beginner, intermediate,
+          expert it should be clear separations… very clear and structured."*
+          Each drives in ON the spoken word, holds ~0.7s and leaves. They are at
+          ROOT so a card can ride over the cut that follows it, and their tick
+          rules split the fifteen 5/5/5 — which is exactly how the guide is
+          divided, so the card is also telling you where you are in the number
+          spine rather than just naming a tier. */}
+      <SectionCard t="BEGINNER" n={1} f={f} at={L.S2} from={0} to={5} c={SODIUM} bc="#F0C078"
+        top={CARD_Y[v]} grade={GRADE[v]} />
+      <SectionCard t="INTERMEDIATE" n={2} f={f} at={L.S9} from={5} to={10} c={TEAL} bc="#A6D8DE"
+        top={CARD_Y[v]} grade={GRADE[v]} />
+      <SectionCard t="EXPERT" n={3} f={f} at={L.S11} from={10} to={15} c={VIOLET} bc="#BCA8DA"
+        top={CARD_Y[v]} grade={GRADE[v]} />
+
+      {/* ⛔ THE GLOBAL CHROME — one of each, at root, for all 1171 frames. */}
       <HookHeader big={hd.big} hot={hd.hot} f={f < L.S2 ? f + 12 : f - L.S2} />
       <ProgressBar />
       <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y[v]} />

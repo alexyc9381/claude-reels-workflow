@@ -1,6 +1,7 @@
 import React from "react";
 import { Composition, registerRoot } from "remotion";
-import { ReelGauntlet, ReelAmber, ReelSteel, ReelQuiet, LOOP_TOTAL } from "./ClaudeLoopReel";
+import { ReelGauntlet, ReelAmber, ReelSteel, ReelQuiet, LOOP_TOTAL,
+  HookShipped, HookVolleyCut, HookPressCut } from "./ClaudeLoopReel";
 
 /* Reel 118 "LOOP". Board: storyboards/118-loop.md.
 
@@ -38,6 +39,10 @@ const Root: React.FC = () => (<>
   <Composition id="loop-amber" component={ReelAmber} durationInFrames={LOOP_TOTAL} {...V} />
   <Composition id="loop-steel" component={ReelSteel} durationInFrames={LOOP_TOTAL} {...V} />
   <Composition id="loop-quiet" component={ReelQuiet} durationInFrames={LOOP_TOTAL} {...V} />
+  {/* the hook experiment — 96 frames each, same VO/bed/plate, different IDEA */}
+  <Composition id="hook-a-tower" component={HookShipped} durationInFrames={96} {...V} />
+  <Composition id="hook-b-volley" component={HookVolleyCut} durationInFrames={96} {...V} />
+  <Composition id="hook-c-press" component={HookPressCut} durationInFrames={96} {...V} />
 </>);
 
 registerRoot(Root);

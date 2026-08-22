@@ -6,6 +6,7 @@ import {
 } from "./LoopScenes";
 import type { Variant } from "./LoopScenes";
 import { CamCtx, R } from "./LoopWorld";
+import { HookVolley, HookPress } from "./LoopHooks";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
 import words from "./data/words_118loop.json";
 
@@ -323,7 +324,21 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
       <CamCtx.Provider value={{ ...CAM[v] }}>
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE[v] }}>
-            <Sequence from={L.S0} durationInFrames={DUR.S0}><S0 v={v} dur={DUR.S0} /></Sequence>
+            {/* ⭐⭐ S0 IS THE VOLLEY, NOT THE TOWER. Alex, on the shipped open:
+                *"the hook scene is way too boring, it needs to be revised into
+                more interesting concepts"* — then, of the two candidates, *"the
+                first hook is good here."*
+                The tower's mechanism was GROWTH: a thing gets bigger while a
+                number goes up, which is a progress bar standing up and which
+                you can predict from frame 8. The volley's mechanism is a
+                RETURN: he hands work in and it comes straight back stamped,
+                faster every time, and the pile of refusals grows past his own
+                head. It opens on the counterintuitive half of the subject —
+                the AI refusing its own work on purpose — and leaves the "why"
+                for the next line to answer.
+                ⛔ `S0` is kept in LoopScenes.tsx and still renders as the
+                `hook-a-tower` composition, so the experiment stays reproducible. */}
+            <Sequence from={L.S0} durationInFrames={DUR.S0}><HookVolley v={v} dur={DUR.S0} /></Sequence>
             <Sequence from={L.S1} durationInFrames={DUR.S1}><S1 v={v} dur={DUR.S1} /></Sequence>
             <Sequence from={L.S2} durationInFrames={DUR.S2}><S2 v={v} dur={DUR.S2} /></Sequence>
             <Sequence from={L.S3} durationInFrames={DUR.S3}><S3 v={v} dur={DUR.S3} /></Sequence>
@@ -387,6 +402,65 @@ const SectionBand: React.FC<{ f: number }> = ({ f }) => {
      only frame guaranteed to be seen and it may not contain an animation. */
   return <HookHeader big={b.big} hot={b.hot} f={f < 20 ? f + 12 : f - b.from + 12} />;
 };
+
+
+/* =========================================================================
+   ⭐ THE HOOK EXPERIMENT — each candidate as a standalone 96-frame cut.
+
+   Alex: *"just take the hook scene and play it out for me, make me 2 good
+   variants."* THE-OPEN's step 1 says the first build step of a reel is N
+   concepts for scene 0, rendered at full quality and picked before anything
+   else is written. This is that, run late: same VO, same bed, same chassis,
+   same claim plate, differing only in the IDEA.
+
+   ⛔ EACH ONE IS A DIFFERENT MECHANISM, not a restyle. See LoopHooks.tsx.
+   ⛔ The label in the corner is for review only and never ships.
+   ====================================================================== */
+const HookLabel: React.FC<{ t: string; sub: string }> = ({ t, sub }) => (
+  <div style={{ position: "absolute", left: 40, top: 1720, zIndex: 200,
+    padding: "14px 26px", borderRadius: 14, background: "#1A1813",
+    border: "4px solid #3A342A" }}>
+    <div style={{ fontFamily: "ui-monospace,'SF Mono',Menlo,monospace", fontWeight: 900,
+      fontSize: 40, color: "#F2E0B4", letterSpacing: "0.04em" }}>{t}</div>
+    <div style={{ fontFamily: "ui-monospace,'SF Mono',Menlo,monospace", fontWeight: 700,
+      fontSize: 22, color: "#9A968B", letterSpacing: "0.10em", marginTop: 4 }}>{sub}</div>
+  </div>
+);
+
+export const makeHookCut = (
+  which: "shipped" | "volley" | "press",
+  label: string, sub: string,
+): React.FC => () => {
+  const f = useCurrentFrame();
+  const DURH = DUR.S0;
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("118loop_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.gauntlet)} volume={LEVELS.MUSIC * BED_GAIN.gauntlet} />
+      <SfxTrack cues={SFX.filter(c => c.at < DURH / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.gauntlet }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.gauntlet }}>
+            <Sequence from={0} durationInFrames={DURH}>
+              {which === "volley" ? <HookVolley dur={DURH} />
+                : which === "press" ? <HookPress dur={DURH} />
+                : <S0 v="gauntlet" dur={DURH} />}
+            </Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.gauntlet} />
+      <HookHeader big={BANDS[0].big} hot={BANDS[0].hot} f={f < 20 ? f + 12 : f + 12} />
+      <HookLabel t={label} sub={sub} />
+    </AbsoluteFill>
+  );
+};
+
+export const HookShipped = makeHookCut("shipped", "A · THE TOWER", "SHIPPED — mechanism: GROWTH");
+export const HookVolleyCut = makeHookCut("volley", "B · THE VOLLEY", "mechanism: A RETURN");
+export const HookPressCut = makeHookCut("press", "C · THE PRESS", "mechanism: A VERDICT");
 
 /* the three trial cuts, from ONE factory — never three copied files. IG flags
    near-duplicates, so the axes that vary are the ones a perceptual hash samples

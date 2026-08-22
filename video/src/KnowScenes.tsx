@@ -49,6 +49,18 @@ export const RAKE_K: Record<Variant, number> = { works: 1, forge: 1.66, night: 0
     frame — which is a large, cheap, sprite-free change of exactly the thing the
     hash samples. Speed and phase were already at their useful limits. */
 export const RAKE_ANG: Record<Variant, number> = { works: 0, forge: 9, night: -9 };
+/** per-cut x offset for the big uniform bright props (the page windows). Small
+    enough to stay inside every cut's crop bound, large enough to move a bit. */
+export const LAY_X: Record<Variant, number> = { works: 0, forge: 38, night: -34 };
+/** ⭐ the browser scenes' own shift, sized against the HASH not against taste:
+    ~one full 8x8 cell (126px on a 1012px panel), checked against every cut's
+    crop bound. 34px moved gradients inside a cell and bought nothing. */
+export const LAY_X2: Record<Variant, number> = { works: 0, forge: 114, night: -106 };
+/** ⭐ per-cut multiplier on every scene's push DELTA. `pk(1.09)` gives works
+    1.090, forge 1.108, night 1.072 — a framing that diverges continuously
+    rather than a fixed offset a gradient hash can cancel. */
+export const PUSH_K: Record<Variant, number> = { works: 1, forge: 1.20, night: 0.80 };
+export const pk = (v: Variant, to: number) => 1 + (to - 1) * PUSH_K[v];
 /** ⭐ A PHASE OFFSET ON THE RAKE AND ON THE PARALLAX, and the offsets have to be
     LARGE. v1 used 260 / -190 and the body frames measured 5-12 bits against a
     min bar of 10, because speed alone still lets two cuts coincide on any given
@@ -64,14 +76,14 @@ export const CAM: Record<Variant, { s: number; dx: number; dy: number; rot: numb
      to the left at nearly the same scale. They now occupy three quadrants:
      works neutral, forge down-left, night up-right. */
   works: { s: 1.000, dx: 0, dy: 0, rot: 0 },
-  forge: { s: 1.058, dx: -44, dy: 26, rot: 1.6 },
+  forge: { s: 1.058, dx: -56, dy: 24, rot: 2.9 },
   /* ⛔ NIGHT WAS THE WEAK PAIR. At s1.030/dx20/rot-1.1 with a near-neutral
      grade it measured 5-8 bits against works on five body frames — a mild
      camera plus a mild grade is not a variant, it is the same picture nudged.
      Pushed to the crop bound and no further: at push 1.096 x s 1.078 the
      visible half-width is 429px, so `dx` goes NEGATIVE (content left, window
      right) to keep the brass spine at x880-927 inside it. */
-  night: { s: 1.062, dx: 36, dy: -30, rot: -2.2 },
+  night: { s: 1.062, dx: 36, dy: -30, rot: -3.6 },
 };
 /** ⛔⛔⛔ A TRIAL CUT MAY NEVER RECOLOUR THE CLAUDE. The grade is a CSS filter
     over the whole panel, so a `hue-rotate` on the SET drags the cast with it —
@@ -87,8 +99,8 @@ export const CAM: Record<Variant, { s: number; dx: number; dy: number; rot: numb
     blacks DOWN. */
 export const GRADE: Record<Variant, string> = {
   works: "contrast(1.020) saturate(1.16) brightness(1.000)",
-  forge: "contrast(1.155) saturate(1.16) brightness(0.958)",
-  night: "contrast(1.210) saturate(1.16) brightness(0.952)",
+  forge: "contrast(1.100) saturate(1.16) brightness(1.000)",
+  night: "contrast(1.255) saturate(1.16) brightness(0.986)",
 };
 
 /** the rail's fill at each scene — the number spine, six of fifteen */
@@ -159,7 +171,7 @@ const S0Pour: React.FC<SP> = ({ v, dur }) => {
      which is half of the metaphor, while the brick pier at z93 painted over the
      plate's own left edge and clipped the first glyph of the headline. */
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.30}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.062)]} vig={0.30}>
       <Cam z={5}>
         <SetFor k="pour" f={f} t={f * 0.8} rakeRate={6.4 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -213,9 +225,9 @@ const S0Pour: React.FC<SP> = ({ v, dur }) => {
           alignItems: "center", gap: 24 }}>
           <div style={{ flex: 1 }}>
             <div style={{ ...ui(76, 900), color: INK, lineHeight: 0.92,
-              letterSpacing: "-0.025em" }}>10,000 HOURS</div>
+              letterSpacing: "-0.025em", whiteSpace: "nowrap" }}>10,000 HOURS</div>
             <div style={{ ...ui(76, 900), color: CLAYD, lineHeight: 0.92,
-              letterSpacing: "-0.025em" }}>OF CLAUDE</div>
+              letterSpacing: "-0.025em", whiteSpace: "nowrap" }}>OF CLAUDE</div>
           </div>
           <div style={{ padding: "12px 16px", textAlign: "center", whiteSpace: "nowrap" }}>
             <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>IN 30</div>
@@ -224,7 +236,7 @@ const S0Pour: React.FC<SP> = ({ v, dur }) => {
         </div>
         {/* the mark, big and early — the audience filter, never on a face, and
             ⛔ never in the middle of the plate (it would carve the region out) */}
-        <MarkCast x={936} y={412} s={96} z={94} f={f} spin={0.5} />
+        <MarkCast x={54} y={206} s={92} z={94} f={f} spin={0.5} />
 
         <Contact x={446} y={736} w={222} z={64} o={0.30} />
       </Cam>
@@ -255,7 +267,7 @@ const S1Pour: React.FC<SP> = ({ v, dur }) => {
   const kick = f >= SLAM ? Math.sin((f - SLAM) / 3.1) * 6 * Math.exp(-(f - SLAM) / 14) : 0;
   const gy = p.horizon + 150;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.098]} vig={0.36}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.098)]} vig={0.36}>
       <Cam z={5} y={kick}>
         <SetFor k="pour" f={f + 40} t={f * 0.8 + 300} rakeRate={7.2 * RAKE_K[v]}
           rakeX0={RAKE_X0[v]} parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -308,36 +320,76 @@ const S0Forge: React.FC<SP> = ({ v, dur }) => {
   const p = placeFor("grind");
   const gy = p.horizon + 120;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.058]} vig={0.34}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.058)]} vig={0.34}>
       <Cam z={5}>
         <SetFor k="grind" f={f} t={f * 0.5} rakeRate={4.6 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} lit={1.35} />
+        {/* ⭐ THE OPEN HATCH — the bright plane, and the thing S1Forge lowers
+            the ingot through. A lit loading bay at the back of a sub-floor is
+            what makes the room read as UNDER something. */}
+        <div style={{ position: "absolute", left: 26, top: 130, width: 960, height: 470,
+          zIndex: 8, borderRadius: "12px 12px 4px 4px", overflow: "hidden",
+          background: `linear-gradient(178deg, #FFF6E4 0%, #F4DCAE 42%, #D8B072 100%)` }}>
+          {/* the works above, seen through it, dark against the light */}
+          {Array.from({ length: 7 }, (_, i) => (
+            <div key={"up" + i} style={{ position: "absolute", left: 12 + i * 132, bottom: 0,
+              width: 104, height: 120 + rnd(i, 3) * 120,
+              background: hexa("#3E362E", 0.9), borderRadius: 3 }}>
+              <div style={{ position: "absolute", left: 22, top: 24, width: 58, height: 40,
+                borderRadius: 3, background: hexa(SODIUM, 0.5) }} />
+            </div>
+          ))}
+          {/* the hoist beam and its chain, waiting */}
+          <div style={{ position: "absolute", left: 0, right: 0, top: 22, height: 30,
+            background: dkh(IRON, 0.56) }} />
+          <div style={{ position: "absolute", left: 596, top: 52, width: 18, height: 96,
+            background: `repeating-linear-gradient(180deg, ${dkh(IRON, 0.30)} 0px, ${dkh(IRON, 0.30)} 10px, ${dkh(IRON, 0.62)} 10px, ${dkh(IRON, 0.62)} 20px)` }} />
+        </div>
+        {/* ⭐ THE APRON — the hatch's light landing on the floor. It is the
+            bottom 45% of the frame, which measured 66/53/61/55 without it. */}
+        <div style={{ position: "absolute", left: 26, right: 26, top: 512, height: 260,
+          zIndex: 14, borderRadius: "40% 40% 12px 12px",
+          background: `linear-gradient(180deg, ${hexa("#F2DFB4", 0.86)} 0%, ${hexa("#D6BC8E", 0.60)} 46%, ${hexa("#8E7C5E", 0.20)} 100%)` }} />
+        {/* the wet floor picking it up, and the grit that stops it being a wash */}
+        {Array.from({ length: 16 }, (_, i) => (
+          <div key={"wg" + i} style={{ position: "absolute",
+            left: ((i * 71 + 30 - f * 0.5) % 1000) - 20, top: 596 + ((i * 37) % 7) * 26,
+            width: 8 + (i % 3) * 7, height: 5, borderRadius: 3, zIndex: 15,
+            background: "#6E6250", opacity: 0.5 }} />
+        ))}
         {/* the villain, full panel, turning — the PRICE of ten thousand hours */}
-        <Grind x={430} y={gy + 92} f={f} s={1.06} z={36} rate={2.1} n={5} lit={1} />
+        <Grind x={192} y={860} f={f} s={0.68} z={36} rate={2.1} n={4} lit={1} />
         {/* the tally board: what one lap on that wheel is worth */}
-        <Counter x={706} y={352} f={f} at={-40} to="1" s={1.5} z={80} label="HOURS BANKED"
+        <Counter x={676} y={430} f={f} at={-40} to="1" s={1.5} z={80} label="HOURS BANKED"
           c="#2A3038" dur={4} />
-        <Hero f={f} x={244} y={gy + 96} size={228} z={70} costume={{ beard: 1 }} act={0} ph={1.4}
+        <Hero f={f} x={352} y={700} size={190} z={70} costume={{ beard: 1 }} act={0} ph={1.4}
           drive={Math.abs(Math.sin(f / 12)) * 0.5} reach={44} stern={0.6} />
-        <Crew f={f} x={880} y={gy + 100} i={3} size={168} z={62} at={-10} loop={0} />
+        <Crew f={f} x={806} y={708} i={3} size={158} z={62} at={-10} loop={0} />
         {/* one contiguous cream region, top edge clear of the header pill */}
-        <div style={{ position: "absolute", left: 124, top: 126, width: 830, zIndex: 96,
+        {/* ⭐ THE PLATE GOES WHERE THE FRAME IS DARK. Measured on this hook:
+            the top half sat at 149-180 (the lit hatch) and the bottom four
+            row-bands at 66/53/61/55. Putting an 830x232 cream sign on the
+            BRIGHT half was spending the one lever that lifts frame-0 luma on
+            the pixels that did not need it. Over the floor it converts ~191,000
+            of the darkest pixels in the frame and leaves the hatch, the wheel
+            and the cast all visible. */}
+        <div style={{ position: "absolute", left: 124, top: 540, width: 830, zIndex: 96,
           borderRadius: 18, padding: "24px 30px", background: CREAMB,
           border: `8px solid ${INK}`, boxShadow: SH_D, display: "flex",
           alignItems: "center", gap: 24 }}>
           <div style={{ flex: 1 }}>
-            <div style={{ ...ui(76, 900), color: INK, lineHeight: 0.92,
-              letterSpacing: "-0.025em" }}>10,000 HOURS</div>
-            <div style={{ ...ui(76, 900), color: CLAYD, lineHeight: 0.92,
-              letterSpacing: "-0.025em" }}>THE SLOW WAY</div>
+            <div style={{ ...ui(70, 900), color: INK, lineHeight: 0.94,
+              letterSpacing: "-0.03em", whiteSpace: "nowrap" }}>10,000 HOURS</div>
+            <div style={{ ...ui(70, 900), color: CLAYD, lineHeight: 0.94,
+              letterSpacing: "-0.03em", whiteSpace: "nowrap" }}>THE SLOW WAY</div>
           </div>
           <div style={{ padding: "12px 16px", textAlign: "center", whiteSpace: "nowrap" }}>
             <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>OR 30</div>
             <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>SECONDS</div>
           </div>
         </div>
-        <MarkCast x={928} y={402} s={100} z={94} f={f} spin={0.5} />
-        <Contact x={144} y={gy + 100} w={206} z={30} o={0.30} />
+        <MarkCast x={928} y={224} s={100} z={94} f={f} spin={0.5} />
+        <Contact x={272} y={704} w={170} z={30} o={0.30} />
       </Cam>
     </Scene>
   );
@@ -354,7 +406,7 @@ const S1Forge: React.FC<SP> = ({ v, dur }) => {
   const kick = f >= LAND ? Math.sin((f - LAND) / 3.0) * 8 * Math.exp(-(f - LAND) / 15) : 0;
   const gy = p.horizon + 120;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.092]} vig={0.40}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.092)]} vig={0.40}>
       <Cam z={5} y={kick}>
         <SetFor k="grind" f={f + 30} t={f * 0.5 + 200} rakeRate={5.2 * RAKE_K[v]}
           rakeX0={RAKE_X0[v]} parX={PAR_X[v]} lit={1.2 + E(f, LAND, LAND + 12, 0, 0.9, OUT)} />
@@ -394,24 +446,28 @@ const S0Night: React.FC<SP> = ({ v, dur }) => {
   const gy = p.horizon + 130;
   const DECKS: Array<[string, string]> = [["EXPERT", VIOLET], ["INTERMEDIATE", TEAL], ["BEGINNER", SODIUM]];
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.056]} vig={0.32}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.056)]} vig={0.32}>
       <Cam z={5}>
         <SetFor k="street" f={f} t={f * 1.1} rakeRate={7.0 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
-          parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} lit={1.25} />
+          parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} lit={1.85} />
         {/* THE WORKS — one tall building, three lit floors, each its own colour */}
-        <div style={{ position: "absolute", left: 232, top: 118, width: 548, height: gy - 92,
+        <div style={{ position: "absolute", left: 118, top: 100, width: 800, height: gy - 60,
           zIndex: 30, borderRadius: "10px 10px 4px 4px",
           background: `linear-gradient(178deg, ${hexa("#2A3742", 0.96)} 0%, ${hexa("#16202A", 0.98)} 100%)`,
           border: `9px solid ${hexa("#101A22", 0.9)}` }}>
           {DECKS.map(([lab, c], i) => (
             <div key={"dk" + i} style={{ position: "absolute", left: 22, right: 22,
-              top: 26 + i * 148, height: 122, borderRadius: 6, overflow: "hidden",
-              background: `linear-gradient(178deg, ${hexa(c, 0.86)} 0%, ${hexa(dkh(c, 0.34), 0.94)} 100%)` }}>
-              {/* silhouettes at work behind each lit floor's glazing */}
-              {Array.from({ length: 4 }, (_, k) => (
+              top: 18 + i * 182, height: 172, borderRadius: 6, overflow: "hidden",
+              background: `linear-gradient(178deg, #FFFFFF 0%, ${hexa(mxh(c, 0.62), 0.98)} 46%, ${hexa(c, 0.94)} 100%)` }}>
+              {/* silhouettes at work behind each lit floor's glazing — DARK
+                  against a near-white field, which is both what a lit floor
+                  looks like from the street and the biggest value spread the
+                  frame has (reel 109: brightness is the MEAN, hierarchy is the
+                  SPREAD, and neither is bought from the palette). */}
+              {Array.from({ length: 5 }, (_, k) => (
                 <div key={"sil" + k} style={{ position: "absolute",
-                  left: 22 + k * 118 + Math.sin(f / 14 + k * 2 + i) * 12, bottom: 8,
-                  width: 62, height: 66, borderRadius: 8, background: hexa("#141A22", 0.72) }} />
+                  left: 26 + k * 138 + Math.sin(f / 14 + k * 2 + i) * 14, bottom: 8,
+                  width: 74, height: 78, borderRadius: 9, background: hexa("#141A22", 0.80) }} />
               ))}
               {/* the floor's own mullions */}
               {[0.33, 0.66].map((q, k) => (
@@ -425,6 +481,17 @@ const S0Night: React.FC<SP> = ({ v, dur }) => {
             </div>
           ))}
         </div>
+        {/* ⭐ THE WET ROAD — the building's own light, on the ground under it.
+            Measured: the bottom two row-bands read 58/62 without this. */}
+        <div style={{ position: "absolute", left: 28, right: 28, top: gy - 58, height: 292,
+          zIndex: 16, borderRadius: "44% 44% 16px 16px",
+          background: `linear-gradient(180deg, #F4EFE0 0%, ${hexa("#D4D6CC", 0.86)} 40%, ${hexa("#8A9098", 0.34)} 100%)` }} />
+        {/* the three decks' colours running down it, so it reads as REFLECTION */}
+        {[SODIUM, TEAL, VIOLET].map((c, i) => (
+          <div key={"rf" + i} style={{ position: "absolute", left: 166 + i * 236, top: gy - 34,
+            width: 232, height: 232, zIndex: 17, borderRadius: "50%",
+            background: `radial-gradient(circle, ${hexa(c, 0.40)} 0%, ${hexa(c, 0)} 70%)` }} />
+        ))}
         {/* ⭐ THE RAIL CLIMBING PAST ALL THREE — the reel's spine, introduced as
             the hook's own subject rather than as furniture at the frame edge. */}
         <HourRail x={806} y={140} f={f} lit={0} at={0} s={1.15} z={72} label="15 TIPS" />
@@ -436,18 +503,18 @@ const S0Night: React.FC<SP> = ({ v, dur }) => {
         })}
         <div style={{ position: "absolute", left: 178, top: 108, width: 16, height: gy - 90,
           zIndex: 40, background: `repeating-linear-gradient(180deg, ${dkh(IRON, 0.30)} 0px, ${dkh(IRON, 0.30)} 10px, ${dkh(IRON, 0.60)} 10px, ${dkh(IRON, 0.60)} 20px)` }} />
-        <Hero f={f} x={906} y={gy + 60} size={228} z={70} costume={{ prof: 1 }} act={3} ph={0.6} />
-        <Crew f={f} x={92} y={gy + 62} i={6} size={162} z={62} at={-10} loop={1} />
+        <Hero f={f} x={932} y={gy + 118} size={196} z={70} costume={{ prof: 1 }} act={3} ph={0.6} />
+        <Crew f={f} x={70} y={gy + 120} i={6} size={158} z={62} at={-10} loop={1} />
         {/* one contiguous cream region, top edge clear of the header pill */}
-        <div style={{ position: "absolute", left: 124, top: 126, width: 830, zIndex: 96,
-          borderRadius: 18, padding: "24px 30px", background: CREAMB,
+        <div style={{ position: "absolute", left: 76, top: 524, width: 900, zIndex: 96,
+          borderRadius: 18, padding: "34px 30px", background: CREAMB,
           border: `8px solid ${INK}`, boxShadow: SH_D, display: "flex",
           alignItems: "center", gap: 24 }}>
           <div style={{ flex: 1 }}>
             <div style={{ ...ui(76, 900), color: INK, lineHeight: 0.92,
-              letterSpacing: "-0.025em" }}>10,000 HOURS</div>
+              letterSpacing: "-0.025em", whiteSpace: "nowrap" }}>10,000 HOURS</div>
             <div style={{ ...ui(76, 900), color: CLAYD, lineHeight: 0.92,
-              letterSpacing: "-0.025em" }}>IN 3 FLOORS</div>
+              letterSpacing: "-0.025em", whiteSpace: "nowrap" }}>IN 3 FLOORS</div>
           </div>
           <div style={{ padding: "12px 16px", textAlign: "center", whiteSpace: "nowrap" }}>
             <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>IN 30</div>
@@ -470,7 +537,7 @@ const S1Night: React.FC<SP> = ({ v, dur }) => {
   const gy = p.horizon + 130;
   const DECKS: Array<[string, string]> = [["EXPERT", VIOLET], ["INTERMEDIATE", TEAL], ["BEGINNER", SODIUM]];
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.100]} vig={0.38}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.100)]} vig={0.38}>
       <Cam z={5} y={kick}>
         <SetFor k="street" f={f + 40} t={f * 1.1 + 260} rakeRate={7.8 * RAKE_K[v]}
           rakeX0={RAKE_X0[v]} parX={PAR_X[v]} lit={1.3} />
@@ -483,7 +550,7 @@ const S1Night: React.FC<SP> = ({ v, dur }) => {
             const at = TIP + (2 - i) * 7;
             const on = E(f, at, at + 6, 0.24, 1, OUT);
             return (
-              <div key={"dk" + i} style={{ position: "absolute", left: 26, right: 26,
+              <div key={"dk" + i} style={{ position: "absolute", left: 16, right: 16,
                 top: 30 + i * 178, height: 150, borderRadius: 7, overflow: "hidden",
                 background: `linear-gradient(178deg, ${hexa(c, 0.88 * on)} 0%, ${hexa(dkh(c, 0.34), 0.94)} 100%)`,
                 transform: `scaleY(${0.96 + on * 0.04})` }}>
@@ -504,6 +571,17 @@ const S1Night: React.FC<SP> = ({ v, dur }) => {
           <Ring key={"dr" + i} x={500} y={190 + i * 178} f={f} at={TIP + (2 - i) * 7} r={330}
             z={64} c={INGH} w={8} />
         ))}
+        {/* ⭐ THE CASCADE — twelve ingots running the full height of the frame
+            for the whole shot, bottom to top, so the building lighting has
+            something continuously travelling beside it rather than three pops
+            and a hold. */}
+        {Array.from({ length: 12 }, (_, i) => {
+          const t = (((f * 1.5 + i * 11) % 132) / 132);
+          return <Ingot key={"cs" + i} x={886 + Math.sin(t * 4 + i) * 22}
+            y={gy + 40 - t * 640} s={1.35} z={56} stamp="1 HR" hot={0.5} rot={-6 + t * 12} />;
+        })}
+        <div style={{ position: "absolute", left: 876, top: 96, width: 20, height: gy - 60,
+          zIndex: 40, background: `repeating-linear-gradient(180deg, ${dkh(IRON, 0.30)} 0px, ${dkh(IRON, 0.30)} 11px, ${dkh(IRON, 0.60)} 11px, ${dkh(IRON, 0.60)} 22px)` }} />
         <Ingot x={500} y={168} s={3.0} z={74} stamp={R.hours}
           hot={E(f, TIP, TIP + 30, 1, 0.3, OUT)} rot={-3 + E(f, TIP, TIP + 8, 0, 6, OUT)} />
         <Steam x={500} y={104} f={f} at={TIP + 4} n={7} s={1.5} z={72} c="#DCEAF4" />
@@ -536,7 +614,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
   const reach = E(f, MISS - 8, MISS, 0, 1, OUT) - E(f, MISS, MISS + 10, 0, 1, IN_Q);
   const gy = p.horizon + 120;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.070]} vig={0.60}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.60}>
       <Cam z={5}>
         <SetFor k="grind" f={f} t={f * 0.5} rakeRate={4.2 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -591,7 +669,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
   const spit = E(f, SPIT, SPIT + 8, 0, 1, BACK);
   const gy = p.horizon + 156;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.082]} vig={0.66}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.082)]} vig={0.66}>
       <Cam z={5}>
         <SetFor k="burn" f={f} t={f * 0.7} rakeRate={6.8 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -676,7 +754,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
   const gy = p.horizon + 150;
   const X = [106, 292, 546, 812];
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.070]} vig={0.62}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.62}>
       <Cam z={5}>
         <SetFor k="line" f={f} t={f * 0.8} rakeRate={6.0 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -729,7 +807,7 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
   const top = E(f, TOPPLE, TOPPLE + 12, 0, 1, IN_Q);
   const gy = p.horizon + 150;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.118]} vig={0.62}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.118)]} vig={0.62}>
       <Cam z={5}>
         <SetFor k="fast" f={f} t={f * 1.4} rakeRate={11.5 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -793,7 +871,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
   const open = E(f, OUT_, dur - 4, 0, 1, OUT);
   const gy = p.horizon + 150;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.064]} vig={0.66}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.064)]} vig={0.66}>
       <Cam z={5}>
         <SetFor k="deep" f={f} t={f * 0.8} rakeRate={6.6 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -807,19 +885,42 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
         <Furnace x={800} y={gy} f={f + 30} w={292} h={326} c={VIOLET} name="FABLE 5" z={40}
           open={0.5 + Math.sin(f / 11 + 2.1) * 0.5} roar={0.7} />
 
-        {/* the crane hook that carries it in — a hand-off with a SOURCE */}
-        <div style={{ position: "absolute", left: 494, top: 118, width: 14,
-          height: 130 + carry * 96, zIndex: 44, background: dkh(IRON, 0.54) }} />
-        <div style={{ position: "absolute", left: 476, top: 244 + carry * 96, width: 50, height: 34,
-          zIndex: 45, borderRadius: 6, background: dkh(IRON, 0.44) }} />
+        {/* the crane hook that carries the crate to the OPUS mouth */}
+        <div style={{ position: "absolute", left: 312, top: 118, width: 14,
+          height: 120 + carry * 150, zIndex: 44, background: dkh(IRON, 0.54) }} />
+        <div style={{ position: "absolute", left: 294, top: 234 + carry * 150, width: 50,
+          height: 34, zIndex: 45, borderRadius: 6, background: dkh(IRON, 0.44) }} />
 
-        {/* the nine-piece assembly: carried in, through, and OUT unfolded */}
-        <Assembly x={506} y={286 + carry * 108 + thru * 108} f={f} at={OUT_} s={1.86}
+        {/* ⭐ THE CRATE GOES IN. Nine parts, banded, unmistakably ONE job with
+            many pieces — and it is swallowed by the furnace the VO just named. */}
+        {f < THRU + 10 && (
+          <div style={{ position: "absolute", left: 216 - 108 + (1 - carry) * 0,
+            top: 300 + carry * 150 + thru * 110, width: 216, height: 168, zIndex: 54,
+            borderRadius: 8, opacity: 1 - thru,
+            transform: `scale(${1 - thru * 0.35})`,
+            background: `linear-gradient(172deg, ${mxh("#7A5C3A", 0.18)} 0%, ${dkh("#7A5C3A", 0.34)} 100%)`,
+            border: `5px solid ${dkh("#7A5C3A", 0.54)}` }}>
+            {[0, 1].map((k) => (
+              <div key={"bd" + k} style={{ position: "absolute", left: 0, right: 0,
+                top: 34 + k * 74, height: 16, background: dkh(IRON, 0.44) }} />
+            ))}
+            {Array.from({ length: 9 }, (_, k) => (
+              <div key={"pk" + k} style={{ position: "absolute", left: 18 + (k % 3) * 62,
+                top: 14 + Math.floor(k / 3) * 50, width: 44, height: 34, borderRadius: 4,
+                background: hexa([GOLD, TEAL, VIOLET][k % 3], 0.86) }} />
+            ))}
+          </div>
+        )}
+        {/* ⭐ AND IT COMES OUT OF THE OTHER ONE, UNFOLDED. Same nine parts, now
+            a working mechanism, emerging from FABLE's mouth. */}
+        <Assembly x={800} y={396} f={f} at={OUT_} s={1.72 * E(f, OUT_, OUT_ + 10, 0.3, 1, BACK)}
           z={54} open={open} />
+        {/* the transfer flash at each mouth, so the hand-off has a moment */}
+        <Ring x={216} y={396} f={f} at={THRU} r={230} z={52} c="#FFD0BC" w={8} />
 
         {/* the four unfold rings, so each pop lands rather than smears */}
         {[0, 1, 2, 3].map((i) => (
-          <Ring key={"ur" + i} x={506} y={410} f={f} at={OUT_ + i * 8} r={230 + i * 44} z={52}
+          <Ring key={"ur" + i} x={800} y={396} f={f} at={OUT_ + i * 8} r={200 + i * 40} z={52}
             c={i % 2 ? "#E8CCFF" : "#FFD0BC"} w={8} />
         ))}
         {/* ⭐ THE BACKGROUND PROCESS THIS SCENE DID NOT HAVE. Nine raw parts ride
@@ -850,7 +951,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
           );
         })}
 
-        <Hero f={f} x={506} y={gy + 50} size={238} z={70} costume={{ prof: 1 }} act={1} ph={0.5}
+        <Hero f={f} x={492} y={gy + 50} size={238} z={70} costume={{ prof: 1 }} act={1} ph={0.5}
           cheer={E(f, dur - 20, dur - 10, 0, 1, OUT)} />
         <Crew f={f} x={150} y={gy + 56} i={9} size={168} z={62} at={0} loop={0} />
         <Crew f={f} x={880} y={gy + 56} i={11} size={164} z={62} at={0} loop={2} />
@@ -876,7 +977,7 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
   const p = placeFor("vault");
   const gy = p.horizon + 140;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.070]} vig={0.52}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.52}>
       <Cam z={5}>
         <SetFor k="vault" f={f} t={f * 0.6} rakeRate={5.4 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -947,8 +1048,8 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
      to be arguing for sat hidden behind it. Reel 107 fixed a dead b-roll hold
      the same way: cut INSIDE the clip on the beat (3.23 -> 4.40, dead run 60f
      -> 3f). Shot A is the vault and the fall; shot B is where he ends up.
-     Both are over the 0.7s floor: 56f (1.87s) and 38f (1.27s). */
-  const CUT = 56;
+     Both are over the 0.7s floor: 50f (1.67s) and 36f (1.20s). */
+  const CUT = 50;
   return f < CUT ? <S8a v={v} dur={dur} /> : <S8b v={v} dur={dur} cut={CUT} />;
 };
 
@@ -970,7 +1071,7 @@ const S8a: React.FC<SP> = ({ v, dur }) => {
   const kick = f >= SHUT + 6 ? Math.sin((f - SHUT - 6) / 2.8) * 9 * Math.exp(-(f - SHUT - 6) / 13) : 0;
   const gy = p.horizon + 140;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.070]} vig={0.58}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.58}>
       <Cam z={5} y={kick}>
         <SetFor k="vault" f={f} t={f * 0.6} rakeRate={5.0 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} lit={0.34 + vlit * 0.66} />
@@ -1094,11 +1195,11 @@ const S8a: React.FC<SP> = ({ v, dur }) => {
 const S8b: React.FC<SP & { cut: number }> = ({ v, dur, cut }) => {
   const f = useCurrentFrame() - cut;
   const p = placeFor("booth");
-  const BANG = [6, 20, 32];
+  const BANG = [5, 16, 27];
   const gy = p.horizon + 140;
   const hit = BANG.some((a) => f >= a && f < a + 4);
   return (
-    <Scene p={p} slug="" push={[0, dur - cut, 1.104]} vig={0.66}>
+    <Scene p={p} slug="" push={[0, dur - cut, pk(v, 1.104)]} vig={0.66}>
       <Cam z={5} y={hit ? Math.sin(f * 2.2) * 7 : 0}>
         <SetFor k="booth" f={f} t={f * 0.6} rakeRate={4.0 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} lit={0.9} />
@@ -1184,7 +1285,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
   const ride = E(f, RIDE, dur, 0, 1, LIN);
   const gy = p.horizon + 130;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.080]} vig={0.64}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.080)]} vig={0.64}>
       <Cam z={5}>
         <SetFor k="street" f={f} t={f * 1.1} rakeRate={7.2 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1192,7 +1293,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
             frames. This is the change that took VERBS 5.31 -> 8.16 and it is
             the same street, so it is the same furniture. */}
         {Array.from({ length: 9 }, (_, i) => {
-          const x = ((i * 138 + f * 5.8) % 1240) - 150;
+          const x = ((i * 138 + f * 5.8 + LAY_X[v] * 3) % 1240) - 150;
           return (
             <div key={"tb" + i} style={{ position: "absolute", left: x, top: 148, width: 110,
               height: 140, zIndex: 20, borderRadius: 5,
@@ -1210,7 +1311,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
         })}
         {/* three PAGE windows as lit shopfronts, receding */}
         {[0, 1, 2].map((i) => (
-          <PageWindow key={"pw" + i} x={40 + i * 322} y={gy - 40} w={286} h={300} f={f + i * 20}
+          <PageWindow key={"pw" + i} x={40 + i * 322 + LAY_X2[v]} y={gy - 40} w={286} h={300} f={f + i * 20}
             z={32 + i} lit={1} rows={9} i={i} />
         ))}
         {/* the tab rail, full width — the travelling band of this scene */}
@@ -1228,7 +1329,27 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
           background: dkh(IRON, 0.52) }} />
         <div style={{ position: "absolute", left: 336, top: 100, width: 10,
           height: 60 + drop * 232, zIndex: 51, background: dkh(IRON, 0.44) }} />
-        <Tile x={412} y={128} s={72} src="googlechrome.svg" z={86} />
+        {/* ⭐ the real Chrome mark on a white tile, beside the Claude mark —
+            this is Claude IN Chrome, so both marks belong, and neither is ever
+            on a sprite's face. */}
+        <div style={{ position: "absolute", left: 300, top: 178, zIndex: 92,
+          display: "flex", alignItems: "center", gap: 12, padding: "10px 20px 10px 10px",
+          borderRadius: 16, background: CREAMB, border: `5px solid ${INK}`, boxShadow: SH_D }}>
+          <div style={{ width: 62, height: 62, borderRadius: 14, background: "#FFFFFF",
+            border: "3px solid #E8DCC0", display: "flex", alignItems: "center",
+            justifyContent: "center" }}>
+            <Img src={staticFile("logos/googlechrome.svg")}
+              style={{ width: 44, height: 44, objectFit: "contain" }} />
+          </div>
+          <div style={{ width: 62, height: 62, borderRadius: 14, background: "#FFFFFF",
+            border: "3px solid #E8DCC0", display: "flex", alignItems: "center",
+            justifyContent: "center" }}>
+            <Img src={staticFile("logos/claude.svg")}
+              style={{ width: 44, height: 44, objectFit: "contain" }} />
+          </div>
+          <span style={{ ...ui(30, 900), color: INK, letterSpacing: "0.01em",
+            whiteSpace: "nowrap" }}>CLAUDE IN CHROME</span>
+        </div>
 
         {/* THE JUNIOR — lowered, then riding, window to window, immediately */}
         <Hero f={f} x={341 + ride * 470} y={gy - 34 + (1 - drop) * -300} size={206} z={70}
@@ -1237,7 +1358,6 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
         {/* NIB hands him the clipboard — the Claude mark, on the JOB not the face */}
         <Hero f={f} x={150} y={gy + 46} size={244} z={68} costume={{ prof: 1 }} act={3} ph={0.4}
           drive={E(f, DROP + 12, DROP + 22, 0, 1, OUT) * 0.6} reach={60} />
-        <MarkPlate x={72} y={176} t="CLAUDE IN CHROME" s={0.86} z={88} />
 
         <Spine f={f} lit={RAIL.S9} at={RIDE} />
         <Contact x={96} y={gy + 42} w={158} z={30} o={0.32} />
@@ -1261,7 +1381,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
 export const S10: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("hall");
-  const NAV = 6, READ = 32, CLICK = 50, FILL = 71;
+  const NAV = 6, READ = 37, CLICK = 57, FILL = 77;
   const nav = E(f, NAV, READ - 4, 0, 1, IO);
   const read = E(f, READ, CLICK - 4, 0, 1, LIN);
   const click = E(f, CLICK, CLICK + 6, 0, 1, OUT) - E(f, CLICK + 10, CLICK + 26, 0, 1, OUT);
@@ -1270,7 +1390,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
   const sub = E(f, dur - 12, dur - 4, 0, 1, OUT);
   const gy = p.horizon + 132;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.090]} vig={0.66}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.090)]} vig={0.66}>
       <Cam z={5}>
         <SetFor k="hall" f={f} t={f * 1.5} rakeRate={7.6 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1283,7 +1403,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
         {Array.from({ length: 9 }, (_, i) => {
           const x = ((i * 132 + f * 6.2) % 1220) - 150;
           return (
-            <div key={"tb" + i} style={{ position: "absolute", left: x, top: 128, width: 116,
+            <div key={"tb" + i} style={{ position: "absolute", left: x + LAY_X[v], top: 128, width: 116,
               height: 148, zIndex: 20, borderRadius: 5,
               background: i % 2 ? hexa(PAPER, 0.82) : hexa("#3A4250", 0.86),
               border: `3px solid ${hexa("#2A3040", 0.7)}` }}>
@@ -1297,10 +1417,29 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
             </div>
           );
         })}
-        <PageWindow x={20} y={gy - 26} w={252} h={290} f={f} z={30} lit={0.9} rows={9} i={0} />
-        <PageWindow x={296} y={gy - 26} w={272} h={300} f={f} z={32} lit={1} rows={10} i={1}
+        {/* ⭐ THE MARK STAYS UP FOR THE WHOLE BROWSER SECTION — 22s lands here */}
+        <div style={{ position: "absolute", left: 286, top: 176, zIndex: 92,
+          display: "flex", alignItems: "center", gap: 12, padding: "10px 20px 10px 10px",
+          borderRadius: 16, background: CREAMB, border: `5px solid ${INK}`, boxShadow: SH_D }}>
+          <div style={{ width: 62, height: 62, borderRadius: 14, background: "#FFFFFF",
+            border: "3px solid #E8DCC0", display: "flex", alignItems: "center",
+            justifyContent: "center" }}>
+            <Img src={staticFile("logos/googlechrome.svg")}
+              style={{ width: 44, height: 44, objectFit: "contain" }} />
+          </div>
+          <div style={{ width: 62, height: 62, borderRadius: 14, background: "#FFFFFF",
+            border: "3px solid #E8DCC0", display: "flex", alignItems: "center",
+            justifyContent: "center" }}>
+            <Img src={staticFile("logos/claude.svg")}
+              style={{ width: 44, height: 44, objectFit: "contain" }} />
+          </div>
+          <span style={{ ...ui(30, 900), color: INK, letterSpacing: "0.01em",
+            whiteSpace: "nowrap" }}>CLAUDE IN CHROME</span>
+        </div>
+        <PageWindow x={20 + LAY_X2[v]} y={gy - 26} w={252} h={290} f={f} z={30} lit={0.9} rows={9} i={0} />
+        <PageWindow x={296 + LAY_X2[v]} y={gy - 26} w={272} h={300} f={f} z={32} lit={1} rows={10} i={1}
           read={read} click={click} />
-        <PageWindow x={592} y={gy - 26} w={252} h={290} f={f} z={30} lit={0.9} rows={9} i={2} />
+        <PageWindow x={592 + LAY_X2[v]} y={gy - 26} w={252} h={290} f={f} z={30} lit={0.9} rows={9} i={2} />
 
         {/* NAVIGATE — he rides the rail hard across the three, and the street
             behind SCROLLS, which is the full-width band this scene lives on */}
@@ -1316,7 +1455,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
 
         {/* READ — the lamp he carries is the only MOVING light in the hall */}
         {f >= READ && f < CLICK + 6 && (<>
-          <div style={{ position: "absolute", left: 306, top: gy - 320 + read * 274, width: 252,
+          <div style={{ position: "absolute", left: 306 + LAY_X2[v], top: gy - 320 + read * 274, width: 252,
             height: 34, zIndex: 60, borderRadius: 17, background: hexa(INGH, 0.94) }} />
           <div style={{ position: "absolute", left: 296, top: gy - 316, width: 272,
             height: read * 268, zIndex: 44,
@@ -1324,7 +1463,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
         </>)}
         {/* ⭐ THE FINDINGS — the half of the mechanism that makes a scan mean
             something. Five facts lift off the page he has read. */}
-        <Facts x={432} y={gy - 300} f={f} at={READ + 10} n={6} z={68} s={1.6} />
+        <Facts x={432 + LAY_X2[v]} y={gy - 300} f={f} at={READ + 10} n={6} z={68} s={1.6} />
 
         {/* CLICK — the page RESPONDS: a drawer opens and a result drops out */}
         {drawer > 0 && (
@@ -1342,11 +1481,11 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
 
         {/* FILL — seven fields, each landing a real value, and then SUBMITTED */}
         {f >= FILL - 10 && (
-          <FormBoard x={790} y={gy - 6 + (1 - E(f, FILL - 10, FILL, 0, 1, BACK)) * 420}
+          <FormBoard x={790 + LAY_X2[v]} y={gy - 6 + (1 - E(f, FILL - 10, FILL, 0, 1, BACK)) * 420}
             w={330} h={392} f={f} at={dur - 12} z={56} n={7} done={fill} submitted={sub} />
         )}
         {Array.from({ length: 7 }, (_, i) => (
-          <Ring key={"st" + i} x={790} y={gy - 300 + i * 48} f={f} at={FILL + i * 5} r={70}
+          <Ring key={"st" + i} x={790 + LAY_X2[v]} y={gy - 300 + i * 48} f={f} at={FILL + i * 5} r={70}
             z={62} c={CLAY} w={4} />
         ))}
 
@@ -1382,7 +1521,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
   const drop = E(f, DROP, DROP + 12, 0, 1, IN_Q);
   const gy = p.horizon + 132;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.078]} vig={0.64}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.078)]} vig={0.64}>
       <Cam z={5}>
         <SetFor k="loft" f={f} t={f * 0.7} rakeRate={6.4 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1467,7 +1606,7 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
   const stop = E(f, SEIZE, SEIZE + 18, 0, 1, OUT);
   const gy = p.horizon + 128;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.100]} vig={0.6}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.100)]} vig={0.6}>
       <Cam z={5}>
         <SetFor k="looms" f={f} t={f * 1.0} rakeRate={8.2 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1518,8 +1657,17 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
           <div style={{ position: "absolute", left: -8, top: -13, width: 34, height: 26,
             borderRadius: 7, background: CLAYD }} />
         </div>
-        <Hero f={f} x={876} y={gy + 46} size={236} z={68} costume={{ constr: 1 }} act={2} ph={0.8}
-          drive={lever * 0.8} reach={56} cheer={E(f, SEIZE + 12, SEIZE + 22, 0, 1, OUT)} />
+        {/* ⭐ HE LEAVES. An automation is a job that keeps running when the
+            person who started it has gone, so the scene's last beat is an EMPTY
+            control position with six lines still producing behind it. */}
+        <Hero f={f} x={876 + E(f, LEVER + 14, LEVER + 40, 0, 300, IO)} y={gy + 46} size={236}
+          z={68} costume={{ constr: 1 }} act={0} ph={0.8}
+          drive={lever * 0.8 + E(f, LEVER + 14, LEVER + 40, 0, 0.5, IO)} reach={56} />
+        {/* the lever stays thrown, and the position stays empty */}
+        {f > LEVER + 40 && (
+          <div style={{ position: "absolute", left: 828, top: gy - 30, width: 156, height: 22,
+            borderRadius: 6, zIndex: 40, background: hexa("#0A0C12", 0.34) }} />
+        )}
         <Crew f={f} x={106} y={gy + 50} i={10} size={170} z={62} at={0} loop={1} />
 
         <Spine f={f} lit={RAIL.S12} at={0} />
@@ -1546,7 +1694,7 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
   const filled = A.filter((a) => f >= a + 7).length;
   const gy = p.horizon + 130;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.072]} vig={0.62}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.072)]} vig={0.62}>
       <Cam z={5}>
         <SetFor k="socket" f={f} t={f * 1.2} rakeRate={7.8 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1614,13 +1762,13 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
 export const S14: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("socket");
-  const UI = 31, SCR = 52, MKT = 64, MORE = 78;
+  const UI = 31, SCR = 53, MKT = 65, MORE = 80;
   const ui_ = E(f, UI, UI + 26, 0, 1, OUT);
   const scr = E(f, SCR, dur - 8, 0, 1, LIN);
   const mkt = E(f, MKT, dur - 8, 0, 1, LIN);
   const gy = p.horizon + 130;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.088]} vig={0.62}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.088)]} vig={0.62}>
       <Cam z={5}>
         <SetFor k="socket" f={f + 60} t={f * 1.2 + 300} rakeRate={7.4 * RAKE_K[v]}
           rakeX0={RAKE_X0[v]} parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1758,13 +1906,13 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
 export const S15: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("dawn");
-  const EXT = 20, PRESS = 58, TYPE = 94, BACK_ = 112;
+  const EXT = 20, PRESS = 58, TYPE = 93, BACK_ = 111;
   const press = E(f, PRESS, PRESS + 10, 0, 1, IN_Q);
   const push = E(f, TYPE, TYPE + 14, 0, 1, IO);
   const ret = E(f, BACK_, BACK_ + 10, 0, 1, BACK);
   const gy = p.horizon + 150;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.46}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.062)]} vig={0.46}>
       <Cam z={5}>
         <SetFor k="dawn" f={f} t={f * 0.5} rakeRate={5.6 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1814,7 +1962,7 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
           const t = E(f, at, at + 11, 0, 1, BACK);
           const lf = f - at;
           return (
-            <Guide key={"gd" + i} x={760 + i * 34}
+            <Guide key={"gd" + i} x={760 + i * 34 + LAY_X[v]}
               y={gy - 84 - t * (150 + i * 30)} f={f} s={1.02 - i * 0.06} z={68 - i}
               rot={t * (10 + i * 5) + Math.sin(lf / 3.4) * 8 * Math.exp(-lf / 22)} />
           );
@@ -1871,7 +2019,7 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
         <Crew f={f} x={922} y={gy + 52} i={5} size={172} z={62} at={0} loop={2} />
 
         {/* the CTA plate — the only place the keyword is typeset large */}
-        <div style={{ position: "absolute", left: 40, top: 268, width: 440, zIndex: 92,
+        <div style={{ position: "absolute", left: 40 + LAY_X[v], top: 268, width: 440, zIndex: 92,
           borderRadius: 15, padding: "18px 22px", background: CREAMB,
           border: `6px solid ${INK}`, boxShadow: SH_D,
           opacity: E(f, 6, 16, 0, 1, OUT), transform: `scale(${E(f, 6, 16, 0.9, 1, BACK)})`,

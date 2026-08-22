@@ -58,6 +58,60 @@ verify_reel 8/8 · sfx clean · dHash mean 25.4 / min 14.
    motion pushed p10 to 35.3 and failed the look gate. Weighting the DARK band above the light
    one raised motion further *and* put the black point back — the two are not a trade.
 
+## ⛔⛔⛔ THE HOOK WAS REJECTED AFTER DELIVERY, AND THE GATES COULD NOT SEE IT
+
+The shipped open passed everything: HOOK_LUMA 144.6, HOOK_PLATE 18.1%, motion
+7.88 with no dead run, 0/15 scenes under bar. Alex: *"the hook scene is way too
+boring here, it needs to be revised into more interesting concepts."*
+
+⭐ **THE DIAGNOSIS HAS TO BE ONE SENTENCE ABOUT WHAT THE VIEWER WANTS TO LOOK AT**
+(feedback_hook_simplicity's own test). Here it was: *a building getting taller is
+a progress bar standing up.* You know the ending at frame 8, the tower and the
+counter both say the single word "big", and nothing happens to anybody. No gate
+in this repo can see that, and none should be expected to.
+
+⭐⭐ **THE FIX IS A DIFFERENT MECHANISM, NOT A RESTYLED PROP.** The tower's
+mechanism was GROWTH. Two candidates were built as full 96-frame cuts, each a
+different mechanism from the tower AND from each other:
+
+| | mechanism | image |
+|---|---|---|
+| A shipped | GROWTH | a tower rises, a counter rolls |
+| **B chosen** | **a RETURN** | he hands work in and it comes back stamped, faster each time |
+| C | a VERDICT | a press the size of the room refuses work that keeps getting better |
+
+⭐ **AND THE SUBJECT WAS WRONG, NOT JUST THE STAGING.** The interesting thing
+about the Gauntlet Loop is not that it builds something big, it is that **the AI
+refuses its own work on purpose.** Both replacements open on the refusal and
+leave "why is it doing that to itself" for the next line. Neither resolves to
+PASS — a hook that resolves has spent the payoff at three seconds.
+MEASURED: hook motion **7.88 → 12.14**, reel median **9.02 → 9.59**, and the
+scene went from the weakest in the reel to the third strongest.
+
+## ⛔ THREE THINGS THE HOOK REBUILD COST, ALL WORTH WRITING DOWN
+
+1. **THE STAMP LANDED 82px BELOW THE PAPER.** *"the stamp doesnt land on the
+   papers."* The paper sat at y386-574 and the stamp was authored independently
+   at `top: 560 + slamK*96`. Two objects positioned from separate numbers and
+   never checked against each other. ⭐ **The fix is an ANCHOR:** every
+   coordinate in that scene now derives from `PX/PY`, the seated paper, so the
+   tool cannot drift off the thing it strikes.
+2. **A GATE CARRIED BY THE WRONG OBJECT, FOR THE THIRD TIME IN ONE REEL.** A
+   claim plate was built into both hooks purely to hold up HOOK_LUMA, and it
+   restated the header band directly above it. Alex: *"avoid having other text
+   in the animation besides the header."* Removed; the brightness now comes from
+   the ROOM and the bone-white work.
+3. **THEN I WASHED IT OUT.** Replacing the plate's luma with a brighter room
+   took the black point to p10 55 against a bar of 35 — §11 exactly: brightness
+   is the MEAN, hierarchy is the SPREAD. ⭐ And the p10 panic was itself a
+   misread: `BODY_BLACK` is a BODY gate. On the full reel the fourteen dark body
+   scenes carry it and the delivered cuts measure **32.1 / 18.3 / 26.1**.
+   ⛔ **Do not tune a body gate on a hook-only clip.**
+
+⭐ **MEASURE ON THE ENCODED FILE.** The hook read 140.5 raw and 137.0 after the
+E1 delivery encode — full-to-limited range costs 2-4 luma points, which is the
+difference between passing and failing at the bar.
+
 ## Related
 `storyboards/118-loop.md` · `docs/ANIMATION-QUALITY.md` §1 §5 §9 §11 §12 §13 ·
 `docs/TRIAL-CUTS.md` · `memory/reels/star-factory-log.md` (the chassis this clones)

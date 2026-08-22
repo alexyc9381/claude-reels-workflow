@@ -5,7 +5,8 @@
 > Arc:      UNDERDOG / QUEST — a stub build has to clear a bar it cannot reach
 > Villain:  **THE HEAD CRITIC** (stern Claude on the pulpit, oversized REJECT paddle).
 >           RULE: he rejects EVERY pass. He is beaten exactly once, at S10, the peak.
-> Hero cast: BUILDER (constr) is the hero · CRITIC (prof/stern) is the villain ·
+> Hero cast: BUILDER (constr) is the hero — 334px in the hook, the largest
+>            sprite in the reel · CRITIC (prof/stern) is the villain ·
 >            a 10-strong bench CREW cycling all 12 costume levers deterministically
 > ⛔ NUMBER SPINE: `1 PROMPT / 3 LINES` → `55,000 LINES` → `MY JOB IS TO WRITE LOOPS`
 >    (BORIS CHERNY · CLAUDE CODE) → `THE GAUNTLET LOOP` → `LINE 3` → `REJECT ×1,2,3` →
@@ -84,23 +85,48 @@ work must physically run a line of judges, and what it does when it fails is go 
 *(every onset is `round(word_onset × 30) − 4` from `src/data/words_118loop.json`; nothing estimated)*
 
 ```
-SCENE S0 — 0.00→3.34s (96f) · TWO SHOTS, ONE EVENT · HOOK                      intensity 9
+SCENE S0 — 0.00→3.34s (96f) · LOCKED MED · HOOK                                intensity 9
+  ⛔ REBUILT. The first cut of this scene was THE TOWER: one prompt, a building
+  erupting out of the floor, a counter rolling to 55,000. It passed every gate
+  and Alex rejected it — *"the hook scene is way too boring, it needs to be
+  revised into more interesting concepts."* The defect in one sentence:
+  **a building getting taller is a progress bar standing up.** You know the
+  ending at frame 8, the tower and the counter both say the single word "big",
+  and nothing happens to anybody. Its mechanism was GROWTH.
+  Two replacements were built as full 96-frame cuts and this one was chosen.
+  Its mechanism is a RETURN, and it opens on the counterintuitive half of the
+  subject — the AI refusing its own work on purpose.
+
   VO:       "There's a new prompting technique that's been blowing people's minds
              over the past week."
-  SET:      THE INTAKE. 6 planes: back wall + the dark BAR beam / the far run rail /
-            the build plot and its floor slot / the lectern and console / the hero /
-            a foreground bracket cropped by the panel edge (the occluder).
-  CAMERA:   LOCKED. One hard PUNCH-IN at f62 (a cut, not a drift).
-  BLOCKING: before — an empty plot, a small stub, a lit 3-line slab (the claim plate,
-            ~21% of panel, settled on frame 0).
-            trigger — the hero DRIVES the lever from 0.48 to 1.0 of its throw in 6f.
-            travel  — a TOWER erupts out of the plot in 4 overlapping stage-pops,
-                      each stage leading the next, cropped by the panel top.
-            arrival — floor shock, dust ring, the hero flinches (shock) and cranes up;
-                      steam from the ears (emitter on the stillest part).
-  LIGHT:    high cream key from the left; the plot lit from BELOW as the tower rises.
-  SFX:      lever throw · 4 pitched stage thuds climbing · sub on the top-out · counter data
-  TAKEAWAY: three lines in, something enormous out.
+  SET:      THE INTAKE, bright. 6 planes: back wall + racking / the loaded return
+            rail overhead / the lamp bank and its cones / the counter and the
+            work on it / the builder and the reject pile / a stanchion cropped by
+            the panel edge.
+  CAMERA:   LOCKED. No punch — the earlier cut's 1.26 punch cropped the claim off
+            the frame and turned the hero object into an abstract.
+  BLOCKING: before — he holds finished work, an in-tray of three more beside him,
+            the counter empty, the pile empty.
+            trigger — he pushes a sheet onto the counter, centre frame.
+            travel  — a HAND comes down out of frame with a rubber stamp. Never a
+                      face, never a second body: an arm, a fist, a grip, a stamp.
+            arrival — it strikes the paper, holds two frames, and LIFTS to reveal
+                      REJECT underneath it. The sheet then arcs off left onto the
+                      pile. Four volleys, each 4 frames faster than the last, the
+                      pile growing past his own head and his face going from
+                      neutral to sweating to furious.
+  LIGHT:    high cream key; the counter is the brightest thing on the floor.
+  SFX:      the shove · four strikes pitched DOWN the run · the sheet landing
+  TAKEAWAY: it refuses its own work, and it does it faster every time.
+
+  ⛔ THE STAMP MUST LAND ON THE PAPER. The first build of this scene had the two
+  objects positioned from independent numbers and the stamp landed 82px BELOW
+  the sheet. Every coordinate now derives from one anchor, `PX/PY`, the seated
+  paper; the stamp face is `PY + PH*0.30` by construction.
+  ⛔ NO TEXT IN THIS SCENE BUT THE HEADER. A claim plate carrying 1 PROMPT /
+  3 LINES / 55,000 was built here to hold up HOOK_LUMA and removed on Alex's
+  note: it restated the header band directly above it. The only words in frame
+  are the ones printed on a rubber stamp.
 
 SCENE S1 — 3.34→6.21s (86f) · WIDE · SETUP                                     intensity 7
   VO:       "Because in a single prompt, you can build fully functional apps and websites,"

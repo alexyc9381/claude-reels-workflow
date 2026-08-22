@@ -437,6 +437,101 @@ export const Band: React.FC<{ t: string; f: number; at?: number; y?: number; c?:
 };
 
 /* =========================================================================
+   ⭐⭐⭐ THE SECTION CARD — the three tiers, made unmissable.
+
+   Alex, on the delivered cut: *"when I say beginner, intermediate, expert it
+   should be clear separations and showing the headers, showing the separations,
+   very clear and structured."*
+
+   ⛔ AND I HAD REMOVED THE THING THAT DID THIS. Round 1 deleted the per-scene
+   `Band` chip on the grounds that `HookHeader` already carried the tier and
+   `feedback_graphical_over_textual` says ONE text chip per shot. Both of those
+   are true and the conclusion was still wrong: a pill that quietly swaps a word
+   at the top of the frame is not a SEPARATION, it is a label. A structure the
+   viewer can feel needs a beat where one section ENDS and the next BEGINS.
+
+   ⭐ So this is a real title card, and it is the only place in the reel where
+   type is allowed to be the subject: a full-width band that drives in on the
+   spoken word, holds ~1.1s, and leaves. It carries
+     · the tier number as a fraction (1/3, 2/3, 3/3) — the structure, countable
+     · the tier name, huge
+     · a rule of 15 ticks with THIS tier's slice lit — so the card also says
+       where you are in the fifteen, which is the reel's number spine
+   ⛔ It sits ABOVE the panel content but BELOW nothing: `Scene`'s vignette is a
+   sibling at z97, so a card inside `children` can never beat it. It is passed
+   to `Scene` as `overlay` instead.
+   ====================================================================== */
+export const SectionCard: React.FC<{
+  t: string; n: number; f: number; at: number; hold?: number; c?: string;
+  /** which rail slots this tier owns, for the tick rule */ from: number; to: number;
+  /** per-cut vertical position and grade — a card that is byte-identical in all
+      three cuts makes every frame it appears on a duplicate risk */
+  top?: number; grade?: string;
+  /** ⛔ THE BADGE FILL. See the block below — this is NOT the same value as `c`. */
+  bc?: string;
+}> = ({ t, n, f, at, hold = 34, c = GOLD, from, to, top = 664, grade, bc }) => {
+  const lf = f - at;
+  const OUT_AT = 12 + hold;
+  if (lf < -2 || lf > OUT_AT + 14) return null;
+  /* drive in hard, hold, then leave the way it came — a wipe, never a fade,
+     because a fade at this size reads as a mistake rather than as a cut */
+  const inX = E(lf, 0, 11, -1180, 0, BACK);
+  const outX = E(lf, OUT_AT, OUT_AT + 12, 0, 1180, IN_Q);
+  const x = inX + outX;
+  const shake = lf >= 11 && lf < 17 ? Math.sin((lf - 11) * 2.2) * 5 * (1 - (lf - 11) / 6) : 0;
+  return (
+    <div style={{ position: "absolute", left: 0, right: 0, top, zIndex: 99, filter: grade,
+      transform: `translateX(${x}px) translateY(${shake}px)`, pointerEvents: "none" }}>
+      {/* the dark shadow bar behind it, so the card has a thickness */}
+      <div style={{ position: "absolute", left: 30, right: 30, top: 14, height: 214,
+        borderRadius: 20, background: hexa("#0A0C12", 0.55) }} />
+      <div style={{ position: "absolute", left: 22, right: 22, top: 0, height: 214,
+        borderRadius: 20, background: CREAMB, border: `9px solid ${INK}`,
+        display: "flex", alignItems: "center", gap: 26, padding: "0 30px", overflow: "hidden" }}>
+        {/* ⛔⛔ THE TIER NUMBER, AND IT IS INVERTED FOR A MEASURED REASON.
+            Alex, on the delivered cut: *"these icons here for 1, 2, 3 are too
+            dark, can't really see."* v1 set the numeral in the TIER colour on
+            an INK badge, and measured as WCAG contrast that is:
+              BEGINNER  #E7A94C on ink   8.60:1   ok
+              INTERMED  #7FC0C9 on ink   8.69:1   ok
+              EXPERT    #7A6494 on ink   3.44:1   ⛔ under the 4.5 floor
+            The violet is a MID-TONE, so it was never going to survive being put
+            on near-black — and a badge that is only legible for two of three
+            tiers is broken for all three, because the set has to read as one
+            system. Inverted: a FILLED badge in a lifted tier colour with the
+            numeral in INK gives 10.57 / 11.40 / 8.24, and it also makes the
+            tier COLOUR the thing you see first rather than a dark chip.
+            ⛔ `bc` is deliberately a separate value from `c`: the badge needs a
+            LIGHT fill to carry dark type, while the tick rule below sits on a
+            CREAM plate and needs the SATURATED colour to read against it. One
+            value cannot do both jobs. */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center",
+          padding: "12px 24px", borderRadius: 14, whiteSpace: "nowrap",
+          background: bc ?? c, border: `4px solid ${dkh(bc ?? c, 0.34)}` }}>
+          <span style={{ ...ui(76, 900), color: INK, lineHeight: 0.88 }}>{n}</span>
+          <span style={{ ...mono(24, 900), color: hexa("#1A1813", 0.66), lineHeight: 1.1 }}>/3</span>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ ...ui(t.length > 10 ? 68 : 82, 900), color: INK, lineHeight: 0.94,
+            letterSpacing: "-0.03em", whiteSpace: "nowrap" }}>{t}</div>
+          {/* the rule of fifteen, with THIS tier's slice lit */}
+          <div style={{ display: "flex", gap: 5, marginTop: 14 }}>
+            {Array.from({ length: R.railSlots }, (_, i) => {
+              const on = i >= from && i < to;
+              return (
+                <div key={"tk" + i} style={{ width: 34, height: 14, borderRadius: 3,
+                  background: on ? c : hexa("#241F17", 0.16),
+                  border: on ? `2px solid ${dkh(c, 0.34)}` : "2px solid transparent" }} />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* =========================================================================
    A BELT — the background process. Every shot needs one running, and it costs
    the hierarchy nothing because it is furniture.
 
