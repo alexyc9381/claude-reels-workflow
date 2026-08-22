@@ -535,74 +535,90 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
 export const S3: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("hall");
-  const on = (i: number) => E(f, 2 + i * 7, 10 + i * 7, 0, 1, OUT);
-  const railOn = E(f, 24, 32, 0, 1, OUT);
+  /* ⛔⛔ THE PICTURE HAS TO BE THE WORD. Alex: *"when it says gauntlet loop at
+     like 10 seconds, i should see like a gauntlet thing animation there."* He is
+     right and it is ANIMATION-QUALITY §3 on the noun rather than the verb: the
+     VO names the thing, so the shot must BE the thing. v1 was a light sweep
+     revealing benches and two pulpits — that is A HALL. Nobody looks at a hall
+     and thinks "gauntlet".
+
+     ⭐ A GAUNTLET HAS ONE INSTANTLY READABLE IMAGE: a LANE you must run between
+     TWO FACING RANKS who strike at you as you pass. So the shot is now a
+     one-point corridor receding to the BAR, eight critics in two ranks down its
+     sides at falling scale, and their paddles snapping up in a wave from the far
+     end toward camera. The work enters at the near end and starts the run.
+     ⛔ The ranks carry a VALUE RAMP as well as a size ramp — back ranks in
+     darker clay — because that is the axis the greyscale audit can see and the
+     one that makes depth read. */
+  const RANKS = [
+    { x: 92, mx: 920, y: 754, s: 202, tint: undefined as string | undefined },
+    { x: 212, mx: 800, y: 690, s: 168, tint: "#C2603C" },
+    { x: 298, mx: 714, y: 640, s: 138, tint: "#A85434" },
+    { x: 360, mx: 652, y: 602, s: 112, tint: "#8E4529" },
+  ];
+  /* the wave runs FAR to NEAR, so it arrives at the viewer */
+  const up = (i: number) => E(f, 2 + (3 - i) * 4, 10 + (3 - i) * 4, 0, 1, BACK);
+  const lane = E(f, 0, 14, 0, 1, OUT);
+  const runK = E(f, 20, 38, 0, 1, IO);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.104]} vig={0.52} glow={hexa(p.key, 0.24)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="truss" bands={4} kind="bay"
-        rake={0.10 + railOn * 0.22} rakeX={RAKE_X0[v]} rakeRate={6.45 * RAKE_K[v]}
+        rake={0.239} rakeX={RAKE_X0[v]} rakeRate={6.44 * RAKE_K[v]}
         lamp={{ x: 506, y: 300, r: 380 }} grit={1.4} />
+      <ReturnRail y={120} f={f} rate={7.9 * RAKE_K[v]} z={26} c={STEEL} hangers={false} />
 
-      {/* ⭐ THE REVEAL IS A SWEEP, NOT FOUR POPS. v1 struck four banks at f2/8/
-          14/20 of 38 and then held for 28 frames — HOLD 75%, the worst in the
-          reel. A single bright bar travelling the full width for the whole shot
-          reveals the hall section by section AND is the one shape §1's table
-          ranks highest. The banks still fire; they now fire as the sweep
-          reaches them, which is also a better reveal. */}
-      <div style={{ position: "absolute", left: -220 + E(f, 0, 24, 0, 1, LIN) * (W + 300),
-        top: 150, width: 240, height: 620, zIndex: 27,
-        background: `linear-gradient(90deg, ${hexa(SODIUM, 0)} 0%, ${hexa(SODIUM, 0.34)} 46%, ${hexa(SODIUM, 0)} 100%)` }} />
-      <div style={{ position: "absolute", left: -220 + E(f, 0, 24, 0, 1, LIN) * (W + 300) + 122,
-        top: 150, width: 96, height: 620, zIndex: 27,
-        background: `linear-gradient(90deg, ${hexa("#05070C", 0)} 0%, ${hexa("#05070C", 0.30)} 50%, ${hexa("#05070C", 0)} 100%)` }} />
-      {/* the four lamp banks and the cone each one drops */}
-      {[150, 372, 620, 866].map((x, i) => (
-        <React.Fragment key={"lb" + i}>
-          <div style={{ position: "absolute", left: x - 62, top: 148, width: 124, height: 22,
-            zIndex: 32, borderRadius: 4, background: dkh(SLATE, 0.44) }} />
-          <div style={{ position: "absolute", left: x - 54, top: 168, width: 108, height: 11,
-            zIndex: 33, borderRadius: 3, background: lerpHex("#2A3038", "#F2E0B4", on(i)) }} />
-          {on(i) > 0.02 && (
-            <div style={{ position: "absolute", left: x - 190, top: 180, width: 380, height: 430,
-              zIndex: 26,
-              background: `linear-gradient(180deg, ${hexa(SODIUM, 0.30 * on(i))} 0%, ${hexa(SODIUM, 0)} 100%)`,
-              clipPath: "polygon(37% 0, 63% 0, 100% 100%, 0 100%)" }} />
+      {/* ⭐ THE LANE — a bright floor running away from camera and converging.
+          It is the single strongest cue that this is a corridor to be RUN. */}
+      <div style={{ position: "absolute", left: 0, top: 520, width: W, height: 272, zIndex: 24,
+        opacity: lane,
+        background: `linear-gradient(180deg, ${hexa(SODIUM, 0.10)} 0%, ${hexa(SODIUM, 0.34)} 100%)`,
+        clipPath: "polygon(43.5% 0, 56.5% 0, 90% 100%, 10% 100%)" }} />
+      {/* the lane's edge kerbs, converging with it */}
+      {[-1, 1].map(sgn => (
+        <div key={"kb" + sgn} style={{ position: "absolute", left: 506 + sgn * 66 - 8, top: 520,
+          width: 16, height: 272, zIndex: 25, opacity: lane, transformOrigin: "50% 0%",
+          transform: `rotate(${sgn * 13.5}deg)`, background: mxh(SLATE, 0.20) }} />
+      ))}
+      {/* ⭐ THE BAR AT THE END OF IT — what running the gauntlet is FOR */}
+      <div style={{ opacity: lane }}>
+        <QualityBar y={398} f={f} on={0.30 + lane * 0.34} z={30} x0={404} x1={608} />
+      </div>
+
+      {/* ⭐⭐ THE TWO RANKS. Facing inward, paddles up, at falling scale AND
+          falling value into depth. This is the gauntlet. */}
+      {RANKS.map((r, i) => (
+        <React.Fragment key={"rk" + i}>
+          {/* left rank, facing right */}
+          <Crew f={f} x={r.x} y={r.y} i={i * 2 + 9} size={r.s} z={52 - i * 3} at={i * 2}
+            loop={3} tint={r.tint} />
+          {f >= i * 2 && (
+            <div style={{ position: "absolute", left: r.x + r.s * 0.30, top: r.y - r.s * 1.22,
+              zIndex: 54 - i * 3, transformOrigin: "50% 100%",
+              transform: `rotate(${-88 + up(i) * 62}deg) scale(${r.s / 202})` }}>
+              <Paddle x={0} y={0} rot={0} face="bad" s={0.58} z={54 - i * 3} f={f} />
+            </div>
           )}
-          <Pool x={x} y={560} w={560} c={SODIUM} o={0.30 * on(i)} z={19} hh={230} />
-          {/* the wall behind each bank lifts with it — a 250x330 field changing
-              value is worth far more per 0.1s than the lamp that caused it */}
-          <div style={{ position: "absolute", left: x - 126, top: 214, width: 252, height: 336,
-            zIndex: 25, background: `linear-gradient(180deg, ${hexa(SODIUM, 0.26 * on(i))} 0%, ${hexa(SODIUM, 0)} 100%)` }} />
+          {/* right rank, facing left */}
+          <Crew f={f} x={r.mx} y={r.y} i={i * 2 + 10} size={r.s} z={52 - i * 3} at={i * 2 + 1}
+            loop={3} tint={r.tint} flip />
+          {f >= i * 2 + 1 && (
+            <div style={{ position: "absolute", left: r.mx - r.s * 0.30, top: r.y - r.s * 1.22,
+              zIndex: 54 - i * 3, transformOrigin: "50% 100%",
+              transform: `rotate(${88 - up(i) * 62}deg) scale(${r.s / 202})` }}>
+              <Paddle x={0} y={0} rot={0} face="bad" s={0.58} z={54 - i * 3} f={f} />
+            </div>
+          )}
         </React.Fragment>
       ))}
 
-      {/* the gauntlet's own furniture, revealed bank by bank */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 30, opacity: on(0),
-        transform: `translateY(${(1 - on(0)) * 210}px)` }}>
-        <Bench x={150} y={640} w={168} s={1.2} z={40} />
+      {/* the work entering the lane at the near end — the run begins */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 58 }}>
+        <BuildRig x={506} y={792 - runK * 96} lvl={2} f={f} s={0.86 - runK * 0.16} z={58}
+          shake={runK > 0.1 ? 2.6 : 0} />
       </div>
-      <div style={{ position: "absolute", inset: 0, zIndex: 31, opacity: on(1),
-        transform: `translateY(${(1 - on(1)) * 300}px)` }}>
-        <Pulpit x={392} y={540} h={214} s={0.98} z={44} c="#3A3448" lit={on(1)} f={f} />
-      </div>
-      <div style={{ position: "absolute", inset: 0, zIndex: 32, opacity: on(2),
-        transform: `translateY(${(1 - on(2)) * 300}px)` }}>
-        <Pulpit x={648} y={540} h={214} s={0.98} z={44} c="#3A3448" lit={on(2)} f={f} />
-      </div>
-      {/* the run itself */}
-      <div style={{ position: "absolute", left: -20, top: 596, width: W + 40, height: 26,
-        zIndex: 28, background: `linear-gradient(180deg, ${mxh(SLATE, 0.10)} 0%, ${dkh(SLATE, 0.56)} 100%)`,
-        opacity: on(1) }} />
-      {/* THE BAR — the hero artifact, on its pilot light only */}
-      <div style={{ opacity: on(3) }}>
-        <QualityBar y={244} f={f} on={0.34} z={38} x0={620} x1={916} label="THE BAR" />
-      </div>
-      <ReturnRail y={132} f={f} rate={5.2 * RAKE_K[v] * railOn} z={34} c={STEEL} o={railOn} />
+      <Puff x={506} y={780} f={f} at={20} c="#C6A882" n={9} s={1.0} z={56} up={30} />
 
-      {[262, 520, 782].map((x, i) => (
-        <Crew key={"hc" + i} f={f} x={x} y={706} i={i + 9} size={116} z={48} at={4 + i * 5} loop={i} />
-      ))}
-      <Stanchion side="r" c="#1E262C" w={66} z={90} />
+      <Stanchion side="r" c="#1E262C" w={112} z={90} braceY={470} braceW={118} />
     </Scene>
   );
 };

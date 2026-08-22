@@ -230,8 +230,8 @@ const S0Pour: React.FC<SP> = ({ v, dur }) => {
               letterSpacing: "-0.025em", whiteSpace: "nowrap" }}>OF CLAUDE</div>
           </div>
           <div style={{ padding: "12px 16px", textAlign: "center", whiteSpace: "nowrap" }}>
-            <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>IN 30</div>
-            <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>SECONDS</div>
+            <div style={{ ...ui(52, 900), color: INK, lineHeight: 0.92 }}>15</div>
+            <div style={{ ...mono(26, 900), color: CLAYD, letterSpacing: "0.10em" }}>TIPS</div>
           </div>
         </div>
         {/* the mark, big and early — the audience filter, never on a face, and
@@ -384,8 +384,8 @@ const S0Forge: React.FC<SP> = ({ v, dur }) => {
               letterSpacing: "-0.03em", whiteSpace: "nowrap" }}>THE SLOW WAY</div>
           </div>
           <div style={{ padding: "12px 16px", textAlign: "center", whiteSpace: "nowrap" }}>
-            <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>OR 30</div>
-            <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>SECONDS</div>
+            <div style={{ ...ui(52, 900), color: INK, lineHeight: 0.92 }}>15</div>
+            <div style={{ ...mono(26, 900), color: CLAYD, letterSpacing: "0.10em" }}>TIPS</div>
           </div>
         </div>
         <MarkCast x={928} y={224} s={100} z={94} f={f} spin={0.5} />
@@ -517,8 +517,8 @@ const S0Night: React.FC<SP> = ({ v, dur }) => {
               letterSpacing: "-0.025em", whiteSpace: "nowrap" }}>IN 3 FLOORS</div>
           </div>
           <div style={{ padding: "12px 16px", textAlign: "center", whiteSpace: "nowrap" }}>
-            <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>IN 30</div>
-            <div style={{ ...mono(30, 900), color: INK, letterSpacing: "0.06em" }}>SECONDS</div>
+            <div style={{ ...ui(52, 900), color: INK, lineHeight: 0.92 }}>15</div>
+            <div style={{ ...mono(26, 900), color: CLAYD, letterSpacing: "0.10em" }}>TIPS</div>
           </div>
         </div>
         <MarkCast x={936} y={412} s={96} z={94} f={f} spin={0.5} />

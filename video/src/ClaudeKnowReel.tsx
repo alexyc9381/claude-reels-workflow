@@ -363,20 +363,24 @@ const CAP_Y: Record<Variant, number> = { works: 1252, forge: 1332, night: 1186 }
 /** and a per-cut section-card Y, for the same reason */
 const CARD_Y: Record<Variant, number> = { works: 664, forge: 590, night: 726 };
 
-/** the header changes per SECTION. ⛔ It never disappears (reel 107) and it
-    never says one thing for the whole reel (reel 108). */
-const headerFor = (f: number): { big: string; hot: string } => {
-  /* ⛔ THE HOOK HEADER MUST NOT REPEAT THE CLAIM PLATE. v1 said "10,000 HOURS /
-     IN 30 SECONDS" twelve pixels above a plate saying the same six words, so the
-     two largest bright objects in the reel's most important frame carried one
-     piece of information between them. The plate is the PROMISE; the header is
-     the AUDIENCE FILTER, which is the job THE-OPEN law 2 actually gives it. */
-  if (f < L.S2) return { big: "CLAUDE", hot: "BEGINNER → EXPERT" };
-  if (f < L.S9) return { big: "CLAUDE TIPS", hot: "BEGINNER" };
-  if (f < L.S11) return { big: "CLAUDE TIPS", hot: "INTERMEDIATE" };
-  if (f < L.S15) return { big: "CLAUDE TIPS", hot: "EXPERT" };
-  return { big: "15 TIPS", hot: "COMMENT KNOW" };
-};
+/** ⭐ THE HEADER IS CONSTANT, AND THAT IS A DELIBERATE REVERSAL. Alex, on the
+    delivered cut: *"Claude Beginner -> Expert / 30 Seconds — that should be the
+    header here."*
+
+    ⛔ It contradicts a standing house rule, so the reasoning is written down
+    rather than left to look like a slip. Reel 107 taught that the header must
+    never DISAPPEAR, and reel 108 taught that that is not the same instruction
+    as saying one thing for the whole reel — so 116 and this reel's first cut
+    both swapped the header per section. That rule existed because the header
+    was the ONLY thing marking structure.
+    ⭐ It no longer is. This reel now carries three full SECTION CARDS
+    (1/3 · 2/3 · 3/3, numbered, with the fifteen ticks split 5/5/5), which mark
+    the tiers far harder than a pill ever did. With the structure carried
+    properly, the header is free to go back to its real job: stating the promise
+    for all 1171 frames, so a viewer arriving at any second knows what they are
+    watching and how long it takes. The tier label was duplicating the card. */
+const headerFor = (_f: number): { big: string; hot: string } =>
+  ({ big: "CLAUDE BEGINNER → EXPERT", hot: "30 SECONDS" });
 
 export const makeReel = (v: Variant): React.FC => () => {
   const f = useCurrentFrame();

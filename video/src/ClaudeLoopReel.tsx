@@ -378,22 +378,34 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
    ⛔ NO MONEY IN ANY BAND — the VO names no figure (honesty ledger 1).
    ====================================================================== */
 const BANDS: Array<{ from: number; big: string; hot: string }> = [
-  { from: L.S0,  big: "ONE PROMPT. THREE LINES.", hot: "55,000 LINES OF CODE" },
-  { from: L.S1,  big: "IT BUILDS THE WHOLE THING", hot: "APPS · SITES · A PLAYABLE GAME" },
-  { from: L.S2,  big: "CLAUDE CODE'S CREATOR",     hot: "“MY JOB IS TO WRITE LOOPS”" },
-  { from: L.S3,  big: "THE GAUNTLET LOOP",         hot: "BUILDERS VS CRITICS" },
-  { from: L.S4,  big: "STOP PROMPTING BY HAND",    hot: "NO MORE BACK AND FORTH" },
-  { from: L.S5,  big: "LINE 1 · SET THE TASK",     hot: "AND WHAT GREAT LOOKS LIKE" },
-  { from: L.S6,  big: "LINE 2 · FAN IT OUT",       hot: "A TEAM OF SUBAGENTS" },
-  { from: L.S7,  big: "LINE 3 · THE SECRET",       hot: "THE PART EVERYONE MISSES" },
-  { from: L.S8,  big: "LINE 3 · ADD A CRITIC",     hot: "THE BUILDER NEVER GRADES ITSELF" },
-  { from: L.S9,  big: "THEN IT LOOPS ITSELF",      hot: "BUILD · JUDGE · REJECT · REPEAT" },
-  { from: L.S10, big: "IT STOPS WHEN IT'S GREAT",  hot: "NOT WHEN IT'S FINISHED" },
-  { from: L.S11, big: "IT BURNS TOKENS FAST",      hot: "SO RUN IT LAST, NOT FIRST" },
-  { from: L.S12, big: "BUILD YOUR MVP FIRST",      hot: "THE CHEAP VERSION, BY HAND" },
-  { from: L.S13, big: "THEN UNLEASH THE LOOP",     hot: "IT POLISHES THE FINAL BUILD" },
-  { from: L.S14, big: "COMMENT “LOOP”",            hot: "AND I'LL SEND THE SETUP" },
+  /* ⛔ A HEADER STATES THE VALUE, AND IT STATES IT SHORT. Two notes, in order:
+     *"it doesnt really convey the value, it just says what it does"*, then
+     *"the header of the hook scene is way too long."* The value rewrite ran to
+     27 and 34 characters, which is a paragraph at this type size.
+     ⭐ THE HOUSE LENGTH, measured off what has shipped: reel 115's hook band is
+     `5 FREE REPOS REPLACE` / `$10,000 OF PAID SOFTWARE` — **20 and 24**. That is
+     the budget: `big` <= 22, `hot` <= 24, every band, no exceptions. A band that
+     needs more words is a band that has not found its claim yet.
+     ⭐ The hook's is the one that matters, and it is the whole value of the
+     technique in eight words: it checks its own work, so you don't have to. */
+  { from: L.S0,  big: "IT CHECKS ITS OWN WORK", hot: "SO YOU DON'T HAVE TO" },
+  { from: L.S1,  big: "ONE PROMPT, ONE BUILD",  hot: "APPS, SITES, A GAME" },
+  { from: L.S2,  big: "CLAUDE CODE'S CREATOR",  hot: "“I JUST WRITE LOOPS”" },
+  { from: L.S3,  big: "THE GAUNTLET LOOP",      hot: "IT RUNS TILL IT'S GOOD" },
+  { from: L.S4,  big: "STOP BABYSITTING IT",    hot: "NO MORE BACK AND FORTH" },
+  { from: L.S5,  big: "LINE 1 · THE TARGET",    hot: "SHOW IT WHAT GREAT IS" },
+  { from: L.S6,  big: "LINE 2 · SPLIT IT UP",   hot: "ONE AGENT PER PIECE" },
+  { from: L.S7,  big: "LINE 3 IS THE TRICK",    hot: "NOBODY COPIES THIS ONE" },
+  { from: L.S8,  big: "LINE 3 · THE CRITIC",    hot: "IT NEVER GRADES ITSELF" },
+  { from: L.S9,  big: "NOW YOU WALK AWAY",      hot: "BUILD · JUDGE · REPEAT" },
+  { from: L.S10, big: "IT STOPS WHEN IT'S GOOD", hot: "NOT WHEN IT'S DONE" },
+  { from: L.S11, big: "IT BURNS TOKENS FAST",   hot: "RUN IT LAST, NOT FIRST" },
+  { from: L.S12, big: "BUILD THE CHEAP ONE",    hot: "THEN HAND IT OVER" },
+  { from: L.S13, big: "THEN UNLEASH THE LOOP",  hot: "IT POLISHES THE BUILD" },
+  { from: L.S14, big: "COMMENT “LOOP”",         hot: "AND I'LL SEND IT OVER" },
 ];
+
+
 
 const SectionBand: React.FC<{ f: number }> = ({ f }) => {
   let b = BANDS[0];
