@@ -1069,6 +1069,80 @@ carries a chime pitched one step up the run — **an ascending run is what makes
 repeated reward read as PROGRESS rather than repetition.**
 
 
+---
+
+## 12. A FLOAT IS NOT A LIFT, AND AN ACCENT SET IS ONLY AS GOOD AS ITS WORST MEMBER (reel 117)
+
+Two notes from reel 117 that generalise past that build.
+
+### ⭐⭐⭐ When the note is "make it more interesting", the defect is usually a MISSING MECHANISM
+
+*"At 2 seconds when that 10,000 hours thing is lifted up, have more interesting animations to it
+so it retains."*
+
+The beat had everything §2 asks for on paper — a before state, a trigger, travel, an arrival — and
+it was still dead, because the travel was **one 9-frame tween on a `y` value with nothing lifting
+it and nothing resisting it**, followed by 37 frames of hold. That is a FLOAT. It is what you get
+whenever an object's movement is authored directly rather than authored as the *output* of
+something.
+
+⛔ **The wrong fix is more frames, a bigger distance, or another effect.** All three were already
+inside spec: the rise was 4.8x the object's own height, well past §11's one-third floor.
+
+⭐ **The right fix is to draw the MECHANISM and let it fail first.** The rebuilt beat is:
+
+| frame | what |
+|---|---|
+| tongs descend | something is coming to do the lifting |
+| tongs CLOSE | it has hold of it |
+| chains go taut, **the gantry beam BOWS, and the ingot does not move** | six frames of the thing visibly REFUSING to come. This is the whole weight beat |
+| it TEARS OUT | a crack, a shower of scale, a light sweep — the mould does not simply release it |
+| it rises **while rotating** −24° → 0 | the stamp SWINGS INTO VIEW |
+| damped swing on the chains | nothing lands and stops |
+
+**10.41 → 13.02**, and the scene went from the middle of the reel to near the top.
+
+> ⭐⭐ **THE REVEAL IS THE ROTATION, NOT THE TRAVEL.** Carrying a hero artifact up already legible
+> spends the one moment it gets. Turning it INTO readability is what makes the beat land — the
+> viewer decodes it at the same instant it arrives.
+
+⛔ **And the phases OVERLAP, they are not queued.** §13's warning about "N discrete pops" applies
+directly: stepping this six-part sequence would have read as choppy. Each phase starts before the
+one before it finishes.
+
+⛔ **Two geometry bugs here were invisible to the algebra and obvious in a still**: `(1 - drop) *
+300` ADDS at `drop = 0`, so the tongs descended from *below*; and a 300px lift put the object's top
+13px under its own beam, so the chain length went to zero and the entire mechanism vanished at
+exactly the moment it was meant to be holding the thing up. [[feedback_render_a_frame_strip]].
+
+### ⭐⭐ Check the WORST member of an accent set, not the average
+
+*"These icons for 1, 2, 3 are too dark, can't really see."*
+
+A three-tier badge set put the tier numeral in the tier colour on a near-black chip. Measured as
+WCAG contrast:
+
+```
+BEGINNER      #E7A94C on ink    8.60:1   ok
+INTERMEDIATE  #7FC0C9 on ink    8.69:1   ok
+EXPERT        #7A6494 on ink    3.44:1   ⛔ under the 4.5 floor
+```
+
+Two of three were fine. The violet is a **mid-tone** and was never going to survive being placed on
+near-black — and a badge that is legible for two tiers out of three is broken for **all three**,
+because the set has to read as one system.
+
+> **A palette is only as legible as its darkest member. "Most of them read fine" is a broken
+> system, not a passing one — and the average will never tell you, because the average is carried
+> by the ones that work.**
+
+⭐ The fix inverts it: a **FILLED badge in a lifted tier colour with the numeral in INK** — 10.57 /
+11.40 / 8.24 — which also makes the tier COLOUR the first thing read rather than a dark chip.
+⛔ And the badge fill has to be a **separate value from the same tier's use elsewhere**: a badge
+needs a LIGHT fill to carry dark type, while the same tier's tick marks sit on a CREAM plate and
+need the SATURATED colour to read against it. One value cannot do both jobs.
+
+
 ## Related
 [`THE-OPEN.md`](THE-OPEN.md) (the first five seconds, and the correction in §2 above) ·
 [`MEASURING.md`](MEASURING.md) (making a number mean something) ·
