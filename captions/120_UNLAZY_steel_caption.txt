@@ -1,0 +1,31 @@
+Comment "UNLAZY" and I'll send you the free setup guide.
+
+👇 READ BELOW
+
+Your AI is not misunderstanding you. It is deciding, quietly, that what it already did is enough.
+
+This is not a vibe. Anthropic runs a whole evaluation category on it called reward-hack-prone coding tasks, which is their own name for a model gaming the job by hard coding values and special casing tests instead of solving the thing. On SlopCodeBench, a benchmark of long horizon iterative coding, the best agent finishes 14.8 percent of the work. So if you have noticed it skipping the hard part and then telling you it is done, you are reading it correctly.
+
+Leon Lin just shipped a free fix for it. The repo is called unlazy, MIT licensed, 973 stars in under two weeks. Same author as taste-skill, which is sitting at 79,304.
+
+The one line the whole thing is built on: you do not promise you are done, you prove it against a ledger.
+
+→ It writes a GATES.md file. Every claim you care about becomes a box.
+→ Every box carries a CHECK command and an EXPECT string.
+→ A script called gate-check.mjs runs the command for real and only flips the box when the output matches.
+→ It saves the deciding output lines next to the box as evidence.
+→ A Stop hook blocks the agent from declaring victory while any box is unmet.
+
+That is the difference between a status update and a receipt. The old failure mode was the model writing "all tests passing" in a summary. Now the box does not tick unless something actually ran and the output actually matched, and a checked box whose evidence still says pending counts as unmet. Done means the ledger is full, N of N, with every number re-measured at report time.
+
+The part nobody mentions: the expensive half is not writing the gates, it is that proving things is strictly slower than claiming them. Out of the box it works one unit at a time, which is correct and which is also why people try it once and quietly go back. The fix is in your instructions, not in the repo. Tell it to fan the leaves out and run them as parallel sub-agents with fresh context each, and you get the same ledger without the queue. I run about ten. The repo does not publish a number for this, it just says leaves parallelise where your harness allows, so treat ten as my setting rather than a spec.
+
+Two honest notes. This costs more tokens than not doing it, deliberately, and the author says so plainly: below roughly half an hour of real work, stay solo. And the hard enforcement, the Stop hook, is Claude Code only. Everything else reads from SKILL.md, so Codex and Cursor get the gates and the ledger but not the block.
+
+Comment "UNLAZY" and I'll send you the setup guide with the gates file, the parallel tweak, and the stop condition.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #promptengineering #aiagents #subagents #aicoding #vibecoding #buildwithai #aiworkflow #devtools #coding #programming #cursor #githubprojects #opensource #aidevelopment #buildinpublic #aitools #softwareengineering

@@ -388,7 +388,7 @@ const BANDS: Array<{ from: number; big: string; hot: string }> = [
      needs more words is a band that has not found its claim yet.
      ⭐ The hook's is the one that matters, and it is the whole value of the
      technique in eight words: it checks its own work, so you don't have to. */
-  { from: L.S0,  big: "IT CHECKS ITS OWN WORK", hot: "SO YOU DON'T HAVE TO" },
+  { from: L.S0,  big: "IT FIXES ITS OWN WORK",  hot: "BEFORE YOU EVER SEE IT" },
   { from: L.S1,  big: "ONE PROMPT, ONE BUILD",  hot: "APPS, SITES, A GAME" },
   { from: L.S2,  big: "CLAUDE CODE'S CREATOR",  hot: "“I JUST WRITE LOOPS”" },
   { from: L.S3,  big: "THE GAUNTLET LOOP",      hot: "IT RUNS TILL IT'S GOOD" },

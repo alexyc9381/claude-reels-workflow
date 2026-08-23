@@ -12,7 +12,7 @@ import {
 import {
   PromptSlab, Lever, ReturnRail, Carriage, BuildRig, BrowserWin, AppWin, GameView,
   Paddle, Pulpit, RejectCounter, QualityBar, Hatch, Bench, Belt, Splitter, Plunger,
-  TokenDrum, KnifeSwitch,
+  TokenDrum, KnifeSwitch, ScreenAura,
 } from "./LoopProps";
 import { Hall, KeyPool, Stanchion, SparePile, Truss, DuctRun } from "./LoopSets";
 
@@ -360,9 +360,18 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
       ))}
 
       {/* ⭐ REAL ARTIFACTS, DRAWN — each winched up out of its own slot */}
+      {/* ⭐ EACH SCREEN SITS IN ITS OWN LIGHT. The aura is keyed to the artifact's
+          own colour and fades up as it arrives, so the three of them read as
+          three LIT things rather than three pictures hung on a wall. */}
       <div style={{ position: "absolute", inset: 0, zIndex: 52 }}>
+        <ScreenAura x={112} y={302 + rise(8)} w={258} h={184} c={CLAY} f={f}
+          k={E(f, 8, 24, 0, 1, OUT)} z={51} />
         <BrowserWin x={112} y={302 + rise(8)} s={0.86} z={52} f={f - 8} />
+        <ScreenAura x={392} y={318 + rise(35)} w={230} h={170} c={TEAL} f={f + 40}
+          k={E(f, 35, 51, 0, 1, OUT)} z={51} />
         <AppWin x={392} y={318 + rise(35)} s={0.86} z={53} f={f - 35} />
+        <ScreenAura x={648} y={296 + rise(62)} w={288} h={182} c={GOLD} f={f + 80}
+          k={E(f, 62, 78, 0, 1, OUT)} z={51} />
         <GameView x={648} y={296 + rise(62)} s={0.90} z={54} f={f - 62} />
       </div>
       {[8, 35, 62].map((at, i) => (
@@ -551,10 +560,10 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
      darker clay — because that is the axis the greyscale audit can see and the
      one that makes depth read. */
   const RANKS = [
-    { x: 92, mx: 920, y: 754, s: 202, tint: undefined as string | undefined },
-    { x: 212, mx: 800, y: 690, s: 168, tint: "#C2603C" },
-    { x: 298, mx: 714, y: 640, s: 138, tint: "#A85434" },
-    { x: 360, mx: 652, y: 602, s: 112, tint: "#8E4529" },
+    { x: 118, mx: 894, y: 776, s: 272, tint: undefined as string | undefined },
+    { x: 250, mx: 762, y: 692, s: 212, tint: "#C2603C" },
+    { x: 336, mx: 676, y: 630, s: 164, tint: "#A85434" },
+    { x: 396, mx: 616, y: 586, s: 126, tint: "#8E4529" },
   ];
   /* the wave runs FAR to NEAR, so it arrives at the viewer */
   const up = (i: number) => E(f, 2 + (3 - i) * 4, 10 + (3 - i) * 4, 0, 1, BACK);
@@ -569,19 +578,19 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
 
       {/* ⭐ THE LANE — a bright floor running away from camera and converging.
           It is the single strongest cue that this is a corridor to be RUN. */}
-      <div style={{ position: "absolute", left: 0, top: 520, width: W, height: 272, zIndex: 24,
+      <div style={{ position: "absolute", left: 0, top: 470, width: W, height: 322, zIndex: 24,
         opacity: lane,
         background: `linear-gradient(180deg, ${hexa(SODIUM, 0.10)} 0%, ${hexa(SODIUM, 0.34)} 100%)`,
-        clipPath: "polygon(43.5% 0, 56.5% 0, 90% 100%, 10% 100%)" }} />
+        clipPath: "polygon(45.5% 0, 54.5% 0, 82% 100%, 18% 100%)" }} />
       {/* the lane's edge kerbs, converging with it */}
       {[-1, 1].map(sgn => (
-        <div key={"kb" + sgn} style={{ position: "absolute", left: 506 + sgn * 66 - 8, top: 520,
-          width: 16, height: 272, zIndex: 25, opacity: lane, transformOrigin: "50% 0%",
-          transform: `rotate(${sgn * 13.5}deg)`, background: mxh(SLATE, 0.20) }} />
+        <div key={"kb" + sgn} style={{ position: "absolute", left: 506 + sgn * 46 - 9, top: 470,
+          width: 18, height: 322, zIndex: 25, opacity: lane, transformOrigin: "50% 0%",
+          transform: `rotate(${sgn * 15.5}deg)`, background: mxh(SLATE, 0.20) }} />
       ))}
       {/* ⭐ THE BAR AT THE END OF IT — what running the gauntlet is FOR */}
       <div style={{ opacity: lane }}>
-        <QualityBar y={398} f={f} on={0.30 + lane * 0.34} z={30} x0={404} x1={608} />
+        <QualityBar y={368} f={f} on={0.30 + lane * 0.34} z={30} x0={418} x1={594} />
       </div>
 
       {/* ⭐⭐ THE TWO RANKS. Facing inward, paddles up, at falling scale AND
@@ -594,8 +603,8 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
           {f >= i * 2 && (
             <div style={{ position: "absolute", left: r.x + r.s * 0.30, top: r.y - r.s * 1.22,
               zIndex: 54 - i * 3, transformOrigin: "50% 100%",
-              transform: `rotate(${-88 + up(i) * 62}deg) scale(${r.s / 202})` }}>
-              <Paddle x={0} y={0} rot={0} face="bad" s={0.58} z={54 - i * 3} f={f} />
+              transform: `rotate(${-88 + up(i) * 62}deg) scale(${r.s / 272})` }}>
+              <Paddle x={0} y={0} rot={0} face="bad" s={0.72} z={54 - i * 3} f={f} />
             </div>
           )}
           {/* right rank, facing left */}
@@ -604,8 +613,8 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
           {f >= i * 2 + 1 && (
             <div style={{ position: "absolute", left: r.mx - r.s * 0.30, top: r.y - r.s * 1.22,
               zIndex: 54 - i * 3, transformOrigin: "50% 100%",
-              transform: `rotate(${88 - up(i) * 62}deg) scale(${r.s / 202})` }}>
-              <Paddle x={0} y={0} rot={0} face="bad" s={0.58} z={54 - i * 3} f={f} />
+              transform: `rotate(${88 - up(i) * 62}deg) scale(${r.s / 272})` }}>
+              <Paddle x={0} y={0} rot={0} face="bad" s={0.72} z={54 - i * 3} f={f} />
             </div>
           )}
         </React.Fragment>
@@ -613,7 +622,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
 
       {/* the work entering the lane at the near end — the run begins */}
       <div style={{ position: "absolute", inset: 0, zIndex: 58 }}>
-        <BuildRig x={506} y={792 - runK * 96} lvl={2} f={f} s={0.86 - runK * 0.16} z={58}
+        <BuildRig x={506} y={806 - runK * 110} lvl={2} f={f} s={1.02 - runK * 0.24} z={58}
           shake={runK > 0.1 ? 2.6 : 0} />
       </div>
       <Puff x={506} y={780} f={f} at={20} c="#C6A882" n={9} s={1.0} z={56} up={30} />
@@ -811,6 +820,27 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
      - so ten sprites doing action loops had nothing to do them TO. Arrivals now
      finish by f54 of 80 (still spread, but leaving 26 frames of full floor),
      the ranks move up, and every column gets a bench. */
+  /* ⭐⭐ THIRTY-FOUR AGENTS, AND THE COUNT IS ARITHMETIC. Ten sprites at s=156
+     was what the spacing law allows on ONE rank; more ranks is how you buy
+     count without breaking `spacing >= 0.85 * size`. Each rank gets its own
+     pitch from `usable/(n+1)`, its own smaller size, and its own darker clay —
+     the value ramp is what makes four ranks read as depth instead of as a
+     crowd, and it is the axis the greyscale audit can actually see. */
+  /* ⭐⭐ THIRTY-EIGHT AGENTS, AND THE SPACING LAW DECIDES THE SIZE — not the
+     other way round. The first attempt at "more agents" put 10 sprites at
+     s=132 on a 916px rank: pitch 916/11 = 83px against a law of
+     `spacing >= 0.85 * size` = 112px, so they overlapped into one orange mass.
+     That is `reel-sprite-grounding-law` exactly, and it is arithmetic, not
+     taste: **size <= pitch / 0.85**, computed per rank BEFORE the count is
+     chosen. Deeper ranks carry MORE agents at SMALLER size, which is also what
+     perspective does, and each rank is offset half a pitch so no two ranks
+     stack into columns. */
+  const RANKS = [
+    { n: 8,  y: 706, s: 116, at: 8,  tint: undefined as string | undefined, z: 52, off: 0.0 },
+    { n: 9,  y: 640, s: 100, at: 15, tint: "#C2603C", z: 46, off: 0.5 },
+    { n: 10, y: 590, s: 86,  at: 22, tint: "#A85434", z: 40, off: 0.0 },
+    { n: 11, y: 550, s: 74,  at: 29, tint: "#8E4529", z: 34, off: 0.5 },
+  ];
   const cols = [128, 296, 464, 632, 800];
   const beltLoad = [0, 0.18, 0.36, 0.54, 0.72, 0.9].map((k, i) => ({
     k, c: [CREAMB, TEAL, GOLD, CLAY, GREEN, CREAMB][i],
@@ -839,17 +869,15 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
         </React.Fragment>
       ))}
 
-      {/* the back rank first — a VALUE RAMP is what makes depth readable, and it
-          is the axis the greyscale audit can actually see */}
-      {cols.map((x, i) => (
-        <Crew key={"bk" + i} f={f} x={x + 46} y={590} i={i + 5} size={116} z={38}
-          at={34 + i * 5} loop={(i + 2) % 4} tint="#A85434" />
-      ))}
-      {/* the front rank */}
-      {cols.map((x, i) => (
-        <Crew key={"fr" + i} f={f} x={x} y={672} i={i} size={156} z={50} at={10 + i * 5}
-          loop={i % 4} />
-      ))}
+      {/* ⭐ FOUR RANKS, BACK TO FRONT, EACH ON ITS OWN PITCH AND VALUE */}
+      {RANKS.slice().reverse().map((r, ri) => {
+        const pitch = 916 / (r.n + 1);
+        return Array.from({ length: r.n }, (_, i) => (
+          <Crew key={`rk${ri}-${i}`} f={f} x={48 + pitch * (i + 1 + r.off)} y={r.y}
+            i={i + ri * 3} size={r.s} z={r.z} at={r.at + i * 2} loop={(i + ri) % 4}
+            tint={r.tint} />
+        ));
+      })}
       {cols.map((x, i) => (
         <React.Fragment key={"cr" + i}>
           <Ring x={x} y={662} f={f} at={10 + i * 5} c={SODIUM} s={0.66} z={44} />
@@ -1566,16 +1594,20 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
       ))}
 
       {/* the keyword plate — flips ON the spoken word */}
-      <div style={{ position: "absolute", left: 806, top: 424, width: 176, height: 118, zIndex: 70,
+      {/* ⛔ THE KEYWORD GOES IN THE MIDDLE. It was parked at x=806 against the
+          right edge, which is the one place a viewer is not looking when the
+          word is spoken. Centred and larger: this is the last thing on screen
+          and the only thing the CTA is asking for. */}
+      <div style={{ position: "absolute", left: 356, top: 396, width: 300, height: 156, zIndex: 70,
         borderRadius: 12, boxShadow: SH_D, overflow: "hidden",
         background: flipped ? GOLD : "#20242C",
         border: `6px solid ${flipped ? dkh(GOLD, 0.44) : "#12151A"}`,
         transform: `perspective(500px) rotateX(${flipped ? 0 : 62}deg) scale(${squash(f, KEY, 0.24, 3, 11)})`,
         display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ ...mono(46, 900), letterSpacing: "0.06em",
+        <span style={{ ...mono(78, 900), letterSpacing: "0.06em",
           color: flipped ? "#241F17" : "#3A404C" }}>LOOP</span>
       </div>
-      <Ring x={894} y={484} f={f} at={KEY} c={GOLD} s={1.2} z={72} />
+      <Ring x={506} y={476} f={f} at={KEY} c={GOLD} s={1.7} z={72} />
       {flipped && Array.from({ length: 10 }, (_, i) => {
         const k = E(f, KEY, KEY + 20, 0, 1, OUT);
         const a = (i / 10) * Math.PI * 2;

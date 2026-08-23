@@ -1,0 +1,722 @@
+[
+{
+"start": 0.0,
+"end": 0.1,
+"word": " The"
+},
+{
+"start": 0.1,
+"end": 0.26,
+"word": " rumors"
+},
+{
+"start": 0.26,
+"end": 0.46,
+"word": " are"
+},
+{
+"start": 0.54,
+"end": 0.82,
+"word": " true."
+},
+{
+"start": 0.79,
+"end": 0.83,
+"word": " Claude"
+},
+{
+"start": 0.865,
+"end": 1.07,
+"word": " is"
+},
+{
+"start": 1.07,
+"end": 1.39,
+"word": " secretly"
+},
+{
+"start": 1.36,
+"end": 1.66,
+"word": " skipping"
+},
+{
+"start": 1.66,
+"end": 1.84,
+"word": " your"
+},
+{
+"start": 1.84,
+"end": 2.14,
+"word": " tasks"
+},
+{
+"start": 2.28,
+"end": 2.52,
+"word": " and"
+},
+{
+"start": 2.52,
+"end": 2.72,
+"word": " lying"
+},
+{
+"start": 2.84,
+"end": 3.02,
+"word": " to"
+},
+{
+"start": 3.02,
+"end": 3.1,
+"word": " you"
+},
+{
+"start": 3.1,
+"end": 3.28,
+"word": " about"
+},
+{
+"start": 3.28,
+"end": 3.5,
+"word": " it."
+},
+{
+"start": 3.53,
+"end": 3.59,
+"word": " And"
+},
+{
+"start": 3.605,
+"end": 4.03,
+"word": " Anthropic,"
+},
+{
+"start": 4.03,
+"end": 4.17,
+"word": " the"
+},
+{
+"start": 4.17,
+"end": 4.41,
+"word": " creators"
+},
+{
+"start": 4.245,
+"end": 4.42,
+"word": " of"
+},
+{
+"start": 4.42,
+"end": 4.62,
+"word": " Claude,"
+},
+{
+"start": 4.62,
+"end": 4.92,
+"word": " even"
+},
+{
+"start": 4.98,
+"end": 5.28,
+"word": " admitted"
+},
+{
+"start": 5.28,
+"end": 5.54,
+"word": " it."
+},
+{
+"start": 5.83,
+"end": 5.91,
+"word": " So"
+},
+{
+"start": 5.91,
+"end": 6.01,
+"word": " if"
+},
+{
+"start": 6.01,
+"end": 6.25,
+"word": " you've"
+},
+{
+"start": 6.16,
+"end": 6.32,
+"word": " noticed"
+},
+{
+"start": 6.32,
+"end": 6.52,
+"word": " that"
+},
+{
+"start": 6.52,
+"end": 6.7,
+"word": " Claude"
+},
+{
+"start": 6.7,
+"end": 6.98,
+"word": " keeps"
+},
+{
+"start": 6.98,
+"end": 7.3,
+"word": " skipping"
+},
+{
+"start": 7.3,
+"end": 7.48,
+"word": " the"
+},
+{
+"start": 7.48,
+"end": 7.68,
+"word": " hard"
+},
+{
+"start": 7.68,
+"end": 7.94,
+"word": " parts"
+},
+{
+"start": 7.94,
+"end": 8.06,
+"word": " of"
+},
+{
+"start": 8.06,
+"end": 8.16,
+"word": " your"
+},
+{
+"start": 8.16,
+"end": 8.4,
+"word": " prompts,"
+},
+{
+"start": 8.6,
+"end": 8.74,
+"word": " you're"
+},
+{
+"start": 8.74,
+"end": 8.9,
+"word": " not"
+},
+{
+"start": 8.9,
+"end": 9.3,
+"word": " crazy."
+},
+{
+"start": 9.63,
+"end": 9.75,
+"word": " But"
+},
+{
+"start": 9.75,
+"end": 10.27,
+"word": " GitHub's"
+},
+{
+"start": 10.27,
+"end": 10.47,
+"word": " top"
+},
+{
+"start": 10.345,
+"end": 10.5,
+"word": " trending"
+},
+{
+"start": 10.5,
+"end": 10.82,
+"word": " author"
+},
+{
+"start": 10.82,
+"end": 11.02,
+"word": " just"
+},
+{
+"start": 11.02,
+"end": 11.18,
+"word": " dropped"
+},
+{
+"start": 11.18,
+"end": 11.34,
+"word": " a"
+},
+{
+"start": 11.34,
+"end": 11.54,
+"word": " fix"
+},
+{
+"start": 11.61,
+"end": 11.83,
+"word": " called"
+},
+{
+"start": 11.83,
+"end": 11.97,
+"word": " the"
+},
+{
+"start": 11.97,
+"end": 12.33,
+"word": " Unlazy"
+},
+{
+"start": 12.67,
+"end": 12.97,
+"word": " Skill."
+},
+{
+"start": 13.07,
+"end": 13.11,
+"word": " It"
+},
+{
+"start": 13.145,
+"end": 13.41,
+"word": " stops"
+},
+{
+"start": 13.41,
+"end": 13.63,
+"word": " AI"
+},
+{
+"start": 13.5,
+"end": 13.7,
+"word": " from"
+},
+{
+"start": 13.7,
+"end": 13.94,
+"word": " taking"
+},
+{
+"start": 13.94,
+"end": 14.34,
+"word": " shortcuts"
+},
+{
+"start": 14.44,
+"end": 14.62,
+"word": " by"
+},
+{
+"start": 14.62,
+"end": 15.08,
+"word": " forcing"
+},
+{
+"start": 15.17,
+"end": 15.33,
+"word": " it"
+},
+{
+"start": 15.33,
+"end": 15.49,
+"word": " to"
+},
+{
+"start": 15.49,
+"end": 15.65,
+"word": " prove"
+},
+{
+"start": 15.565,
+"end": 15.69,
+"word": " its"
+},
+{
+"start": 15.69,
+"end": 15.97,
+"word": " work."
+},
+{
+"start": 16.31,
+"end": 16.35,
+"word": " So"
+},
+{
+"start": 16.385,
+"end": 16.61,
+"word": " instead"
+},
+{
+"start": 16.61,
+"end": 16.75,
+"word": " of"
+},
+{
+"start": 16.75,
+"end": 16.89,
+"word": " just"
+},
+{
+"start": 16.85,
+"end": 17.19,
+"word": " saying"
+},
+{
+"start": 17.19,
+"end": 17.35,
+"word": " that"
+},
+{
+"start": 17.35,
+"end": 17.49,
+"word": " a"
+},
+{
+"start": 17.49,
+"end": 17.71,
+"word": " task"
+},
+{
+"start": 17.6,
+"end": 17.78,
+"word": " is"
+},
+{
+"start": 17.78,
+"end": 17.98,
+"word": " done,"
+},
+{
+"start": 18.18,
+"end": 18.46,
+"word": " Unlazy"
+},
+{
+"start": 18.86,
+"end": 19.18,
+"word": " builds"
+},
+{
+"start": 19.18,
+"end": 19.42,
+"word": " a"
+},
+{
+"start": 19.42,
+"end": 19.62,
+"word": " ledger."
+},
+{
+"start": 19.73,
+"end": 20.09,
+"word": " Basically,"
+},
+{
+"start": 20.09,
+"end": 20.25,
+"word": " the"
+},
+{
+"start": 20.25,
+"end": 20.41,
+"word": " AI"
+},
+{
+"start": 20.47,
+"end": 20.65,
+"word": " has"
+},
+{
+"start": 20.65,
+"end": 20.79,
+"word": " to"
+},
+{
+"start": 20.79,
+"end": 20.91,
+"word": " run"
+},
+{
+"start": 20.865,
+"end": 20.98,
+"word": " commands"
+},
+{
+"start": 20.98,
+"end": 21.16,
+"word": " and"
+},
+{
+"start": 21.16,
+"end": 21.46,
+"word": " verify"
+},
+{
+"start": 21.61,
+"end": 21.79,
+"word": " the"
+},
+{
+"start": 21.79,
+"end": 22.05,
+"word": " output"
+},
+{
+"start": 22.05,
+"end": 22.47,
+"word": " before"
+},
+{
+"start": 22.45,
+"end": 22.77,
+"word": " giving"
+},
+{
+"start": 22.77,
+"end": 22.89,
+"word": " you"
+},
+{
+"start": 22.89,
+"end": 23.03,
+"word": " the"
+},
+{
+"start": 23.03,
+"end": 23.33,
+"word": " answer."
+},
+{
+"start": 23.71,
+"end": 23.83,
+"word": " But"
+},
+{
+"start": 23.83,
+"end": 24.09,
+"word": " here's"
+},
+{
+"start": 24.09,
+"end": 24.21,
+"word": " the"
+},
+{
+"start": 24.21,
+"end": 24.55,
+"word": " catch."
+},
+{
+"start": 24.77,
+"end": 24.89,
+"word": " Out"
+},
+{
+"start": 24.89,
+"end": 24.99,
+"word": " of"
+},
+{
+"start": 24.99,
+"end": 25.11,
+"word": " the"
+},
+{
+"start": 25.11,
+"end": 25.33,
+"word": " box,"
+},
+{
+"start": 25.185,
+"end": 25.28,
+"word": " it"
+},
+{
+"start": 25.28,
+"end": 25.5,
+"word": " takes"
+},
+{
+"start": 25.5,
+"end": 25.98,
+"word": " hours"
+},
+{
+"start": 26.36,
+"end": 26.68,
+"word": " because"
+},
+{
+"start": 26.68,
+"end": 26.82,
+"word": " it"
+},
+{
+"start": 26.82,
+"end": 26.98,
+"word": " runs"
+},
+{
+"start": 26.895,
+"end": 26.97,
+"word": " one"
+},
+{
+"start": 26.97,
+"end": 27.27,
+"word": " task"
+},
+{
+"start": 27.47,
+"end": 27.61,
+"word": " at"
+},
+{
+"start": 27.61,
+"end": 27.75,
+"word": " a"
+},
+{
+"start": 27.75,
+"end": 27.95,
+"word": " time."
+},
+{
+"start": 28.09,
+"end": 28.19,
+"word": " The"
+},
+{
+"start": 28.19,
+"end": 28.47,
+"word": " trick"
+},
+{
+"start": 28.55,
+"end": 28.81,
+"word": " is"
+},
+{
+"start": 28.81,
+"end": 28.97,
+"word": " to"
+},
+{
+"start": 28.97,
+"end": 29.17,
+"word": " tweak"
+},
+{
+"start": 29.045,
+"end": 29.085,
+"word": " the"
+},
+{
+"start": 29.12,
+"end": 29.55,
+"word": " instructions"
+},
+{
+"start": 29.71,
+"end": 29.93,
+"word": " so"
+},
+{
+"start": 29.93,
+"end": 30.03,
+"word": " it"
+},
+{
+"start": 30.03,
+"end": 30.23,
+"word": " runs"
+},
+{
+"start": 30.105,
+"end": 30.24,
+"word": " up"
+},
+{
+"start": 30.24,
+"end": 30.4,
+"word": " to"
+},
+{
+"start": 30.4,
+"end": 30.62,
+"word": " 10"
+},
+{
+"start": 30.6,
+"end": 31.08,
+"word": " sub-agents"
+},
+{
+"start": 31.08,
+"end": 31.3,
+"word": " in"
+},
+{
+"start": 31.3,
+"end": 31.64,
+"word": " parallel"
+},
+{
+"start": 32.07,
+"end": 32.51,
+"word": " without"
+},
+{
+"start": 32.51,
+"end": 32.99,
+"word": " affecting"
+},
+{
+"start": 32.99,
+"end": 33.15,
+"word": " each"
+},
+{
+"start": 33.065,
+"end": 33.105,
+"word": " other."
+},
+{
+"start": 33.4,
+"end": 33.44,
+"word": " So"
+},
+{
+"start": 33.475,
+"end": 33.78,
+"word": " comment"
+},
+{
+"start": 33.78,
+"end": 34.32,
+"word": " Unlazy"
+},
+{
+"start": 34.38,
+"end": 34.58,
+"word": " for"
+},
+{
+"start": 34.58,
+"end": 34.68,
+"word": " the"
+},
+{
+"start": 34.68,
+"end": 34.96,
+"word": " free"
+},
+{
+"start": 34.88,
+"end": 35.14,
+"word": " setup."
+}
+]

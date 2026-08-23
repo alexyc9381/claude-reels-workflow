@@ -65,24 +65,56 @@ export const OXIDE = "#8C4A2E", SLATE = "#4E5A62";
    Every number and word the picture is allowed to assert, and where it came
    from. Checked live 2026-08-21. If it is not in here it does not go on screen. */
 export const R = {
-  /** the demo that made the technique spread — Claude Opus 5, a browser FPS */
-  demo:      { name: "CLAUDE OF DUTY", lines: "55,000", stack: "THREE.JS" },
-  /** the creator of Claude Code, on how he works now. Six words, quoted. */
-  cherny:    { quote: "MY JOB IS TO WRITE LOOPS", who: "BORIS CHERNY", what: "CLAUDE CODE" },
-  /** who named and popularised it */
-  author:    "MATT SHUMER",
-  /** the three lines, in order — this is the mechanism the reel draws */
-  lines:     ["THE TASK", "FAN OUT", "THE CRITIC"] as const,
-  /** the loop's own counter. These are EVENTS ON SCREEN, not a benchmark. */
-  rejects:   3,
-  verdicts:  { bad: "REJECT", good: "PASS" },
-  stamps:    { mvp: "MVP", done: "POLISHED" },
+  /** the model itself. Appeared on OpenRouter 2026-08-20. Verified 2026-08-22. */
+  model:     { name: "ox-alpha", provider: "REDACTED", born: "AUG 20" },
+  /** ⛔ THE EXACT context figure, not "1M". OpenRouter publishes 1,048,576. */
+  context:   { tokens: "1,048,576", label: "CONTEXT", outMax: "131,072" },
+  /** ⛔ THIS IS A CLAIM, NOT A MEASUREMENT. The operator states 100T tokens/day
+      of serving capacity; nobody has audited it. It is drawn ON a plate that
+      says PROVIDER CLAIM, and it is never presented as a measured fact. */
+  capacity:  { n: "100,000,000,000,000", unit: "/ DAY", qualifier: "PROVIDER CLAIM" },
+  /** ⛔⛔ THE ONE REAL BENCHMARK RESULT, AND ITS PROVENANCE.
+      The VO says it "beats them on ALL the coding benchmarks". What exists is
+      ONE test — DeepSWE Pass@1 — from a 10-TASK COMMUNITY RUN, not an audited
+      leaderboard. So the reel draws ONE named lane test with these three
+      numbers and a provenance strip, and NEVER a wall of benchmarks.
+      (`docs/ANIMATION-QUALITY` has no rule for this; the kickoff doc does:
+      when a VO asserts a RESULT you cannot source, dramatise the MECHANISM and
+      stop at the edge of the claim.) */
+  bench:     { name: "DeepSWE Pass@1", note: "COMMUNITY RUN · 10 TASKS",
+               rows: [{ who: "ox-alpha", n: 80 }, { who: "Claude Fable 5", n: 65 },
+                      { who: "GPT-5.6", n: 52 }] as const },
+  /** the deadline — the villain. Free preview ends Aug 27 2026. */
+  clock:     { days: "7 DAYS", ends: "AUG 27" },
+  /** ⭐ WHERE IT RUNS. Two different lists, and the reel uses the second one.
+      The SERVING surfaces are OpenRouter, OpenCode Zen and Mercury Cloud — that
+      is the sourced fact. But Alex: *"animation at 23 seconds should just be
+      clear what those softwares are with the big logos for each"*, and a viewer
+      recognises the EDITOR they use, not the gateway behind it. S8 therefore
+      shows Claude Code / Cursor / Windsurf, all three of which take an
+      OpenAI-compatible endpoint, so the claim "run it in any coding software"
+      is drawn with the marks people actually know. */
+  serving:   ["OPENROUTER", "OPENCODE ZEN", "MERCURY CLOUD"] as const,
+  bays:      ["CLAUDE CODE", "CURSOR", "WINDSURF"] as const,
+  /** what you make with it — the four nouns the VO actually says */
+  outputs:   ["APPS", "WEBSITES", "GAMES", "VIDEOS"] as const,
+  keyword:   "OX",
 } as const;
 
 /** ⛔ GUARDS. A grep for any of these over Loop*.tsx must return zero hits in a
     rendered string. Both exist because the VO makes neither claim. */
-export const MONEY_BANNED = ["$", "USD", "COST", "PER RUN", "SPEND", "SAVED"] as const;
-export const RATE_BANNED = ["%", "FASTER", "BETTER", "X MORE", "SCORE", "/10"] as const;
+/** ⛔ GUARDS. A grep for any of these over Ox*.tsx must return zero hits in a
+    rendered string.
+    · MONEY: the model is free and the VO names no price but "$0" — a monthly
+      figure or a "you save" number would be invented.
+    · UNSOURCED: the VO's "all the coding benchmarks" is ONE community run.
+      These strings would each assert something no source backs. */
+export const MONEY_BANNED = ["USD", "/MO", "PER MONTH", "SAVED", "WORTH"] as const;
+export const RATE_BANNED = ["ALL BENCHMARKS", "SOTA", "#1", "BEST MODEL", "X FASTER"] as const;
+/** ⛔ AND THE ATTRIBUTION GUARD. Community fingerprinting points at a Zhipu/GLM
+    variant. It is SPECULATION and a guess printed on a maker's plate is the most
+    believable kind of wrong. The plate stays redacted. */
+export const ATTRIB_BANNED = ["GLM", "ZHIPU", "Z.AI", "GEMINI", "GOOGLE"] as const;
 
 /* ---- THE NINE PLACES -----------------------------------------------------
    ⛔ NEIGHBOURING SCENES DIFFER BY BOTH HUE **AND** LIGHTNESS. The order the
@@ -92,42 +124,41 @@ export const RATE_BANNED = ["%", "FASTER", "BETTER", "X MORE", "SCORE", "/10"] a
    ⛔ BODY SCENES TARGET LUMA 70-105 AND BLACK POINT p10 <= 35 (ANIM-QUALITY §8).
    The >=140 bar is FRAME 0 ONLY, and `intake` is the only place built for it. */
 export const PLACES: Record<string, Place> = {
-  /* 1 · THE INTAKE — the brightest room in the reel, and the hook's. High cream
-     key from the left, bone walls, a warm floor. Frame 0 lives here. */
-  /* ⛔ FRAME 0 MEASURED 133.3 AGAINST THE >=140 BAR, and the fix is NOT the
-     shading (§8: lifting the dark stop is exactly what washed out ten reels).
-     Only the two LARGE, ALREADY-LIT areas move — the back wall's lower stop and
-     the floor — while `lip` and `grit` are untouched, so the black point holds
-     at p10 34. Re-measured after: 141.6, p10 33. */
-  intake:  { back: "#8A7B66", back2: "#E6D6B8", floor: "#A6906B", floor2: "#6E5E46",
-             lip: "#3E362B", key: "#F2E0B4", horizon: 452, grit: "#2C2620" },
-  /* 2 · THE BENCH FLOOR — forge amber up through ten open hatches. */
-  bench:   { back: "#3A2A1E", back2: "#8A4E28", floor: "#71472A", floor2: "#3E2718",
-             lip: "#2A1C12", key: "#F2A24A", horizon: 498, grit: "#241811" },
-  /* 3 · THE GALLERY — a dark hall whose ONLY light is the split-flap board. */
-  gallery: { back: "#141A26", back2: "#2E3A50", floor: "#202836", floor2: "#12161E",
-             lip: "#080A10", key: "#CFE0F2", horizon: 556, grit: "#080A10" },
-  /* 4 · THE HALL — the whole gauntlet, cold steel with sodium pools. */
-  hall:    { back: "#1C242A", back2: "#3E5058", floor: "#2E3C42", floor2: "#19232A",
-             lip: "#0C1216", key: "#E7A94C", horizon: 512, grit: "#0B1013" },
-  /* 5 · THE SIDE OFFICE — the smallest, sickliest room. Deliberately ugly. */
-  office:  { back: "#2E3630", back2: "#525E4C", floor: "#3C443A", floor2: "#242A24",
-             lip: "#141814", key: "#C2CE9E", horizon: 540, grit: "#101410" },
-  /* 6 · THE LECTERN — near black, one hard cone on the slab. */
-  lectern: { back: "#12141A", back2: "#242A36", floor: "#1E2028", floor2: "#101218",
-             lip: "#07080C", key: "#F2E0B4", horizon: 566, grit: "#07080C" },
-  /* 7 · THE PULPITS — cold violet from above, the critic's room. */
-  pulpit:  { back: "#1E1A2A", back2: "#463A5E", floor: "#2C2440", floor2: "#171224",
-             lip: "#0C0816", key: "#A48CC8", horizon: 560, grit: "#120E1A" },
-  /* 8 · THE RUN — hard teal side rake through the rail's gaps. */
-  run:     { back: "#16242A", back2: "#33565E", floor: "#284046", floor2: "#16262A",
-             lip: "#0A1416", key: "#7FC0C9", horizon: 520, grit: "#0A1215" },
-  /* 9 · THE DRUM ROOM — ember from a furnace mouth and nothing else. */
-  drum:    { back: "#2A150E", back2: "#7A3212", floor: "#552A14", floor2: "#2A1408",
-             lip: "#140803", key: "#E06A2C", horizon: 544, grit: "#150803" },
-  /* 10 · THE BAR WALL — the payoff, gold flood from screen right. */
-  bar:     { back: "#2A2416", back2: "#7A6428", floor: "#54441F", floor2: "#2E2410",
-             lip: "#141005", key: "#F2C25E", horizon: 500, grit: "#171205" },
+  /* 1 · THE BAY — the brightest room in the reel, and the hook's. Frame 0 lives
+     here, so it is built for the >=140 bar: bone-steel walls, a lit bench floor
+     and a warm practical. The HERO CORE is near-black on top of it, which is
+     where the reel's biggest value SPREAD comes from (§8: brightness is the
+     mean, hierarchy is the spread — they only fight if you touch the dark stop). */
+  bay:     { back: "#B4BCC8", back2: "#F6F7F9", floor: "#CACFD4", floor2: "#A6ADB6",
+             lip: "#33383E", key: "#F2E6C6", horizon: 460, grit: "#262A2E" },
+  /* 2 · THE SPEC WALL — warm amber board room, front-right key. */
+  spec:    { back: "#3A2C1C", back2: "#8E6230", floor: "#75552F", floor2: "#3E2C18",
+             lip: "#291C0F", key: "#F2B45C", horizon: 500, grit: "#241A10" },
+  /* 3 · THE PULL FLOOR — green-cyan floods, three lanes in perspective. */
+  pull:    { back: "#13251F", back2: "#2E5A4A", floor: "#24463A", floor2: "#13261F",
+             lip: "#081410", key: "#6FD0A4", horizon: 508, grit: "#08120E" },
+  /* 4 · THE BAY, RE-LIT — same room, warm at the edges, a floor hatch about to
+     open. ⛔ A returning set is a callback only if the LIGHT changed. */
+  bayhot:  { back: "#2E2A22", back2: "#6E5A38", floor: "#5E4E32", floor2: "#2E2618",
+             lip: "#181208", key: "#F2C25E", horizon: 470, grit: "#191308" },
+  /* 5 · THE HOPPER — the room under the hatch. Gold from BELOW, black ceiling. */
+  hopper:  { back: "#241A0C", back2: "#6E4E14", floor: "#8A6420", floor2: "#3E2C0C",
+             lip: "#140E04", key: "#F2C45A", horizon: 430, grit: "#161004" },
+  /* 6 · THE DECK — a long measuring bed, violet rake from the left. */
+  deck:    { back: "#1C1628", back2: "#463A5E", floor: "#2E2440", floor2: "#181224",
+             lip: "#0C0816", key: "#B08CD8", horizon: 524, grit: "#120C1A" },
+  /* 7 · THE YARD — the payoff. Doors open onto warm daylight; brightest body set. */
+  yard:    { back: "#8A6A44", back2: "#F0DCB4", floor: "#A88A5E", floor2: "#6E5636",
+             lip: "#3A2C1C", key: "#FFE6B0", horizon: 448, grit: "#2A2014" },
+  /* 8 · THE ROW — three software bays, cold teal, screen light. */
+  row:     { back: "#132228", back2: "#2E5660", floor: "#244048", floor2: "#132428",
+             lip: "#081216", key: "#7FC0C9", horizon: 516, grit: "#091214" },
+  /* 9 · THE CLOCK — the villain's room. The only red in the reel, hard top-down. */
+  clockp:  { back: "#2A1210", back2: "#7A2418", floor: "#54201A", floor2: "#2A1008",
+             lip: "#140604", key: "#E8563C", horizon: 480, grit: "#150604" },
+  /* 10 · THE FRONT — the CTA bench, warm and bright, the core seated and running. */
+  front:   { back: "#3A3020", back2: "#A8894E", floor: "#8A7040", floor2: "#463820",
+             lip: "#221A0E", key: "#F2D07A", horizon: 486, grit: "#1E1608" },
 };
 export const asPlace = (k: keyof typeof PLACES): Place => PLACES[k];
 
@@ -310,17 +341,10 @@ export const Crew: React.FC<{ f: number; x: number; y: number; i: number; size: 
 export const Hero: React.FC<{ f: number; x: number; y: number; size: number; z?: number;
   drive?: number; strain?: number; flip?: boolean; costume?: Record<string, number>;
   gaze?: number; cheer?: number; reach?: number; tint?: string; shock?: number;
-  stern?: number; pop?: number; act?: number; ph?: number; lift?: number;
-  /** ⭐ drawn INSIDE the hero's own transform, in mascot-local coords (0..size).
-      Anything stuck to the character — a nose, a hat brim, a held prop — has to
-      live here, or it stays put while the sprite bobs, rocks and squashes.
-      Reel 120 shipped a Pinocchio nose as a SIBLING of this div and Alex caught
-      it immediately: *"the nose stays in place while the claude guy rocks back
-      and forth."* Every transform on the line below applies to the body only. */
-  face?: React.ReactNode }> =
+  stern?: number; pop?: number; act?: number; ph?: number; lift?: number }> =
   ({ f, x, y, size, z = 56, drive = 0, strain = 0, flip = false, costume = { constr: 1 },
      gaze = 0, cheer = 0, reach = 96, tint, shock = 0, stern = 0, pop = 1,
-     act = 1, ph = 0, lift = 0, face }) => {
+     act = 1, ph = 0, lift = 0 }) => {
   const beat = Math.min(1, Math.max(Math.abs(drive), strain) * 1.7);
   const k = 1 - beat;
   let ax = 0, ay = 0, ar = 0, aGaze = 0, aCheer = 0;
@@ -358,7 +382,6 @@ export const Hero: React.FC<{ f: number; x: number; y: number; size: number; z?:
       <Mascot lf={f} size={size} gaze={gaze + aGaze} nodAmp={2.6 + strain * 2 + k * 1.4}
         nodSpeed={10} cheer={Math.max(cheer, aCheer)} tint={tint} shock={shock}
         stern={stern} {...costume} />
-      {face}
     </div>
   );
 };

@@ -352,6 +352,28 @@ export const BuildRig: React.FC<{ x: number; y: number; lvl: number; f: number; 
    4 · THE THREE ARTIFACTS — "apps and websites". Drawn, not contained.
    ====================================================================== */
 
+
+/** ⭐ THE AURA — light coming OFF a lit screen, built the matte way. Three
+    layers: a wide soft field, a tighter warm core, and a thin bright rim that
+    hugs the bezel. ⛔ No `boxShadow: 0 0` anywhere; the ship gate greps for it
+    and this house paints light as gradients, never as a glow property. */
+export const ScreenAura: React.FC<{ x: number; y: number; w: number; h: number;
+  c?: string; k?: number; z?: number; f?: number }> =
+  ({ x, y, w: ww, h: hh, c = TEAL, k = 1, z = 44, f = 0 }) => {
+  const pulse = 0.92 + Math.sin(f / 17) * 0.08;
+  const o = k * pulse;
+  return (<>
+    <div style={{ position: "absolute", left: x - ww * 0.44, top: y - hh * 0.44,
+      width: ww * 1.88, height: hh * 1.88, zIndex: z - 2, borderRadius: "50%",
+      background: `radial-gradient(50% 50% at 50% 50%, ${hexa(c, 0.46 * o)} 0%, ${hexa(c, 0.17 * o)} 44%, ${hexa(c, 0)} 100%)` }} />
+    <div style={{ position: "absolute", left: x - ww * 0.16, top: y - hh * 0.16,
+      width: ww * 1.32, height: hh * 1.32, zIndex: z - 1, borderRadius: 26,
+      background: `radial-gradient(50% 50% at 50% 50%, ${hexa(c, 0.52 * o)} 0%, ${hexa(c, 0)} 72%)` }} />
+    <div style={{ position: "absolute", left: x - 7, top: y - 7, width: ww + 14, height: hh + 14,
+      zIndex: z, borderRadius: 15, border: `4px solid ${hexa(c, 0.78 * o)}` }} />
+  </>);
+};
+
 export const BrowserWin: React.FC<{ x: number; y: number; s?: number; z?: number; f: number }> =
   ({ x, y, s = 1, z = 54, f }) => (
   <div style={{ position: "absolute", left: x, top: y, width: 300 * s, height: 214 * s, zIndex: z,

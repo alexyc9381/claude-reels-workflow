@@ -1,0 +1,607 @@
+[
+{
+"start": 0.0,
+"end": 0.14,
+"word": " So"
+},
+{
+"start": 0.14,
+"end": 0.24,
+"word": " you"
+},
+{
+"start": 0.24,
+"end": 0.36,
+"word": " can"
+},
+{
+"start": 0.315,
+"end": 0.355,
+"word": " now"
+},
+{
+"start": 0.39,
+"end": 0.58,
+"word": " use"
+},
+{
+"start": 0.58,
+"end": 0.68,
+"word": " Claude"
+},
+{
+"start": 0.655,
+"end": 0.86,
+"word": " Code"
+},
+{
+"start": 0.86,
+"end": 1.32,
+"word": " completely"
+},
+{
+"start": 1.32,
+"end": 1.64,
+"word": " free"
+},
+{
+"start": 1.69,
+"end": 1.87,
+"word": " for"
+},
+{
+"start": 1.87,
+"end": 1.99,
+"word": " the"
+},
+{
+"start": 1.99,
+"end": 2.13,
+"word": " next"
+},
+{
+"start": 2.19,
+"end": 2.47,
+"word": " week."
+},
+{
+"start": 2.51,
+"end": 2.59,
+"word": " Now"
+},
+{
+"start": 2.59,
+"end": 2.69,
+"word": " let"
+},
+{
+"start": 2.69,
+"end": 2.77,
+"word": " me"
+},
+{
+"start": 3.02,
+"end": 3.42,
+"word": " explain."
+},
+{
+"start": 3.48,
+"end": 3.58,
+"word": " So"
+},
+{
+"start": 3.58,
+"end": 3.72,
+"word": " there's"
+},
+{
+"start": 3.72,
+"end": 3.84,
+"word": " this"
+},
+{
+"start": 3.93,
+"end": 4.15,
+"word": " brand"
+},
+{
+"start": 4.15,
+"end": 4.27,
+"word": " new"
+},
+{
+"start": 4.27,
+"end": 4.49,
+"word": " model"
+},
+{
+"start": 4.35,
+"end": 4.59,
+"word": " called"
+},
+{
+"start": 4.59,
+"end": 4.81,
+"word": " Ox"
+},
+{
+"start": 4.81,
+"end": 5.01,
+"word": " Alpha"
+},
+{
+"start": 4.885,
+"end": 5.06,
+"word": " that"
+},
+{
+"start": 5.06,
+"end": 5.34,
+"word": " beats"
+},
+{
+"start": 5.34,
+"end": 5.6,
+"word": " Claude"
+},
+{
+"start": 5.63,
+"end": 5.79,
+"word": " Fable"
+},
+{
+"start": 5.79,
+"end": 6.07,
+"word": " 5"
+},
+{
+"start": 6.07,
+"end": 6.35,
+"word": " and"
+},
+{
+"start": 6.35,
+"end": 7.23,
+"word": " GPT-5.6"
+},
+{
+"start": 7.26,
+"end": 7.38,
+"word": " on"
+},
+{
+"start": 7.38,
+"end": 7.6,
+"word": " all"
+},
+{
+"start": 7.6,
+"end": 7.76,
+"word": " the"
+},
+{
+"start": 7.76,
+"end": 7.92,
+"word": " coding"
+},
+{
+"start": 7.91,
+"end": 8.39,
+"word": " benchmarks."
+},
+{
+"start": 8.58,
+"end": 8.84,
+"word": " But"
+},
+{
+"start": 8.84,
+"end": 9.04,
+"word": " here's"
+},
+{
+"start": 9.04,
+"end": 9.16,
+"word": " the"
+},
+{
+"start": 9.16,
+"end": 9.32,
+"word": " part"
+},
+{
+"start": 9.235,
+"end": 9.48,
+"word": " that's"
+},
+{
+"start": 9.48,
+"end": 9.68,
+"word": " even"
+},
+{
+"start": 9.68,
+"end": 10.22,
+"word": " crazier."
+},
+{
+"start": 10.73,
+"end": 10.85,
+"word": " It"
+},
+{
+"start": 10.85,
+"end": 10.97,
+"word": " has"
+},
+{
+"start": 10.97,
+"end": 11.13,
+"word": " a"
+},
+{
+"start": 11.13,
+"end": 11.33,
+"word": " free"
+},
+{
+"start": 11.205,
+"end": 11.4,
+"word": " daily"
+},
+{
+"start": 11.4,
+"end": 11.9,
+"word": " capacity"
+},
+{
+"start": 11.98,
+"end": 12.12,
+"word": " of"
+},
+{
+"start": 12.12,
+"end": 12.26,
+"word": " a"
+},
+{
+"start": 12.26,
+"end": 12.48,
+"word": " hundred"
+},
+{
+"start": 12.335,
+"end": 12.71,
+"word": " trillion"
+},
+{
+"start": 12.71,
+"end": 13.07,
+"word": " tokens"
+},
+{
+"start": 13.08,
+"end": 13.24,
+"word": " and"
+},
+{
+"start": 13.24,
+"end": 13.4,
+"word": " even"
+},
+{
+"start": 13.4,
+"end": 13.72,
+"word": " offers"
+},
+{
+"start": 13.84,
+"end": 14.0,
+"word": " a"
+},
+{
+"start": 14.0,
+"end": 14.2,
+"word": " one"
+},
+{
+"start": 14.2,
+"end": 14.52,
+"word": " million"
+},
+{
+"start": 14.7,
+"end": 15.04,
+"word": " token"
+},
+{
+"start": 15.04,
+"end": 15.46,
+"word": " context"
+},
+{
+"start": 15.46,
+"end": 15.8,
+"word": " window,"
+},
+{
+"start": 15.87,
+"end": 16.09,
+"word": " meaning"
+},
+{
+"start": 16.09,
+"end": 16.25,
+"word": " you"
+},
+{
+"start": 16.25,
+"end": 16.37,
+"word": " can"
+},
+{
+"start": 16.325,
+"end": 16.365,
+"word": " use"
+},
+{
+"start": 16.4,
+"end": 16.44,
+"word": " it"
+},
+{
+"start": 16.475,
+"end": 16.56,
+"word": " to"
+},
+{
+"start": 16.56,
+"end": 16.72,
+"word": " build"
+},
+{
+"start": 16.66,
+"end": 17.04,
+"word": " anything"
+},
+{
+"start": 17.04,
+"end": 17.2,
+"word": " you"
+},
+{
+"start": 17.2,
+"end": 17.4,
+"word": " want"
+},
+{
+"start": 17.6,
+"end": 18.1,
+"word": " completely"
+},
+{
+"start": 18.1,
+"end": 18.5,
+"word": " free."
+},
+{
+"start": 18.59,
+"end": 18.87,
+"word": " Imagine"
+},
+{
+"start": 18.87,
+"end": 19.27,
+"word": " apps,"
+},
+{
+"start": 19.47,
+"end": 19.67,
+"word": " websites,"
+},
+{
+"start": 19.74,
+"end": 19.88,
+"word": " games,"
+},
+{
+"start": 20.06,
+"end": 20.28,
+"word": " videos,"
+},
+{
+"start": 20.44,
+"end": 20.52,
+"word": " the"
+},
+{
+"start": 20.52,
+"end": 20.76,
+"word": " options"
+},
+{
+"start": 20.9,
+"end": 21.12,
+"word": " are"
+},
+{
+"start": 21.12,
+"end": 21.58,
+"word": " unlimited."
+},
+{
+"start": 21.88,
+"end": 22.18,
+"word": " And"
+},
+{
+"start": 22.18,
+"end": 22.28,
+"word": " you"
+},
+{
+"start": 22.28,
+"end": 22.4,
+"word": " can"
+},
+{
+"start": 22.355,
+"end": 22.395,
+"word": " run"
+},
+{
+"start": 22.43,
+"end": 22.47,
+"word": " it"
+},
+{
+"start": 22.505,
+"end": 22.56,
+"word": " in"
+},
+{
+"start": 22.58,
+"end": 22.78,
+"word": " any"
+},
+{
+"start": 22.655,
+"end": 22.97,
+"word": " coding"
+},
+{
+"start": 22.97,
+"end": 23.37,
+"word": " software."
+},
+{
+"start": 23.76,
+"end": 23.86,
+"word": " But"
+},
+{
+"start": 23.86,
+"end": 24.06,
+"word": " here's"
+},
+{
+"start": 24.06,
+"end": 24.16,
+"word": " the"
+},
+{
+"start": 24.16,
+"end": 24.4,
+"word": " twist."
+},
+{
+"start": 24.235,
+"end": 24.43,
+"word": " It's"
+},
+{
+"start": 24.43,
+"end": 24.57,
+"word": " only"
+},
+{
+"start": 24.57,
+"end": 24.81,
+"word": " free"
+},
+{
+"start": 24.94,
+"end": 25.1,
+"word": " during"
+},
+{
+"start": 25.1,
+"end": 25.24,
+"word": " this"
+},
+{
+"start": 25.24,
+"end": 25.48,
+"word": " one"
+},
+{
+"start": 25.78,
+"end": 25.94,
+"word": " week"
+},
+{
+"start": 25.94,
+"end": 26.2,
+"word": " preview"
+},
+{
+"start": 26.2,
+"end": 26.48,
+"word": " period"
+},
+{
+"start": 26.275,
+"end": 26.315,
+"word": " so"
+},
+{
+"start": 26.35,
+"end": 26.41,
+"word": " you"
+},
+{
+"start": 26.425,
+"end": 26.53,
+"word": " don't"
+},
+{
+"start": 26.55,
+"end": 26.67,
+"word": " have"
+},
+{
+"start": 26.67,
+"end": 26.85,
+"word": " much"
+},
+{
+"start": 26.85,
+"end": 27.05,
+"word": " time"
+},
+{
+"start": 26.97,
+"end": 27.19,
+"word": " left."
+},
+{
+"start": 27.51,
+"end": 27.71,
+"word": " Comment"
+},
+{
+"start": 27.71,
+"end": 28.01,
+"word": " OX"
+},
+{
+"start": 27.86,
+"end": 28.04,
+"word": " for"
+},
+{
+"start": 28.04,
+"end": 28.14,
+"word": " the"
+},
+{
+"start": 28.14,
+"end": 28.3,
+"word": " free"
+},
+{
+"start": 28.3,
+"end": 28.56,
+"word": " setup."
+}
+]

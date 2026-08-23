@@ -1,0 +1,68 @@
+TITLE   Ox Alpha
+SUB     The anonymous coding model that is free until August 27, how to point Claude Code at it in two lines, and the honest version of the benchmark everybody is quoting
+
+H       What this actually is
+P       On August 20, 2026 a model called ox-alpha appeared on OpenRouter with no announcement, no company attached to it, and a price of zero. Its listing says the provider is a third party who has chosen to remain anonymous for the length of the preview. There is no lab name, no launch post, and no pricing page.
+P       What it does have is a specification that reads like a frontier release: a 1,048,576 token context window, up to 131,072 tokens of output in a single response, text, image and video accepted as input, and tool calling and structured outputs supported. It is aimed squarely at coding and long agent runs.
+P       The free preview ends on August 27, 2026. After that it either gets a price or it disappears, and nobody outside the lab knows which.
+
+RULE
+
+H       The honest version of the benchmark
+P       You have probably seen a number. Here is where it comes from, because the gap between the number and its provenance is the whole story.
+NUM     The figure in circulation is DeepSWE Pass@1: ox-alpha 80 percent, Claude Fable 5 at 65, GPT-5.6 at 52. That is a real result and the ordering has held up across several independent write-ups.
+NUM     It came from a ten task run by one developer, not from an audited leaderboard. Ten tasks is a small sample. A single task swinging either way moves the headline by ten points.
+NUM     OpenRouter itself publishes no scores for this model at all. No intelligence index, no coding leaderboard number, no agentic score. Every figure you have read is community reported.
+NUM     Other numbers are circulating too, including an 88 percent SWE-bench claim, and they do not reconcile with each other. Treat any single figure as one person's run until somebody audits it.
+P       So: promising, and worth an evening. Not something to move a production stack onto this week.
+P       The same caution applies to the capacity claim. The operator states 100 trillion tokens per day of serving capacity and near unlimited rate limits. That is the operator's own claim, not a measurement, and 100 trillion a day is in the range only the largest providers claim across every model and customer combined.
+
+RULE
+
+H       The setup, in two lines
+P       This is the part the video promised. OpenRouter exposes an endpoint that speaks the Anthropic Messages format natively, which they call the Anthropic Skin. That means Claude Code can talk to it directly, in its own protocol, without a proxy or a router in the middle.
+NUM     Sign up at openrouter.ai, open your account settings, go to API keys, and create one. It will start with sk-or-.
+NUM     Set two environment variables in your shell, then restart your terminal so Claude Code picks them up.
+B       export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
+B       export ANTHROPIC_AUTH_TOKEN="sk-or-your-key-here"
+NUM     Open Claude Code and run /status. It should report the auth token as ANTHROPIC_AUTH_TOKEN and the base URL as https://openrouter.ai/api. If it still shows your normal Anthropic account, the variables are not in the shell Claude Code launched from.
+NUM     The model slug on OpenRouter is stealth/ox-alpha. Its price is listed as zero, so no prompt or completion tokens are billed during the preview.
+P       To go back to your normal setup, unset both variables and restart the terminal. Nothing about your Claude Code install is modified by this, so there is no uninstall step.
+
+RULE
+
+H       One warning worth reading before you commit an afternoon
+P       OpenRouter's own integration documentation says it plainly: Claude Code is optimised for Anthropic models and may not work correctly with other providers. That is not a disclaimer about ox-alpha specifically, it is about every non-Anthropic model behind that endpoint.
+P       In practice the things most likely to behave differently are the ones that depend on the model following Claude's tool-use conventions closely: long multi-step agent runs, sub-agents, and anything that leans on a tool being called in a particular shape. Short and medium coding tasks tend to be fine.
+P       Which is the practical reason to treat this as a second machine rather than a replacement. Run it on a scratch branch or a side project first and see how it behaves on your actual code before you point it at anything that matters.
+
+RULE
+
+H       Where else it runs
+P       If you would rather not touch Claude Code's configuration, the same key works in the editors most people already have open.
+NUM     Cursor. Settings, then Models, then add a custom OpenAI compatible provider pointing at https://openrouter.ai/api/v1 with the same sk-or- key, and select stealth/ox-alpha.
+NUM     Windsurf. Same pattern under its provider settings: a custom OpenAI compatible base URL and the same key.
+NUM     Anything else that accepts an OpenAI compatible base URL. That is most of the field now, including Cline, Roo and the various VS Code extensions.
+P       It is also served through OpenCode Zen and Mercury Cloud if you would rather go direct than through OpenRouter.
+
+RULE
+
+H       What to actually build with a million token window
+P       A context that size changes which jobs are worth attempting, not just how fast the old ones go. Three that are genuinely different at this size.
+NUM     Read a whole repository at once and ask for a map. Not a file, not a directory, the entire thing. Ask where the state lives, what the real entry points are, and which three files you would have to understand before changing anything. That answer is much better when nothing has been chunked away.
+NUM     Hand it an entire log dump alongside the code that produced it and ask what happened. Most debugging sessions with a model are spent feeding it the context it needed in the first place.
+NUM     Migrate one pattern across a codebase in a single pass. Give it every call site at once rather than file by file, and the consistency problem mostly disappears.
+P       And do it this week. The one thing about this model that is not ambiguous is the date it stops being free.
+
+RULE
+
+H       The short version
+NUM     ox-alpha is real, it is on OpenRouter, and it is free until August 27, 2026.
+NUM     Two environment variables point Claude Code at it. No proxy, no router, no install.
+NUM     The benchmark everybody is quoting is one ten task community run, and OpenRouter publishes no official scores. Believe the ordering, not the decimal.
+NUM     The 100 trillion tokens per day figure is the operator's claim, not a measured number.
+NUM     Nobody knows who made it. That is genuinely unusual, and it is the part worth watching.
+
+RULE
+
+KEY     OX

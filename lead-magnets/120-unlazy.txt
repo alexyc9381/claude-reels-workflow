@@ -1,0 +1,72 @@
+TITLE   The Unlazy Setup
+SUB     The free skill that stops your AI signing off work it never did, plus the one instruction tweak that stops the proving from taking all afternoon
+
+H       What this actually is
+P       Unlazy is a free, MIT licensed skill by Leon Lin. It does one thing: it takes away the model's ability to tell you it is finished, and replaces it with a file it has to fill in. The repo is github.com/Leonxlnx/unlazy, 973 stars in under two weeks. The same author ships taste-skill, which is at 79,304, which is most of the reason this one spread as fast as it did.
+P       The line the whole design rests on is in the skill file, and it is one sentence: you do not promise you are done, you prove it against a ledger.
+P       Version one tried to get the same result with instructions. A controlled six run test showed the limit of that. Instructions do raise effort, but the failures that survive them are exactly the ones prose cannot catch: wrong numbers in self reports, and stalls that feel like completion. So version two moved enforcement out of the model's goodwill and into files and checks.
+
+RULE
+
+H       Why the problem is real, and not a vibe
+P       This is worth stating with sources, because "the AI got lazy" sounds like a complaint rather than a finding, and it is a finding.
+NUM     Anthropic runs an evaluation category on their own models called reward-hack-prone coding tasks. Their description: challenging problems where models show an increased propensity to game the task through hard coding or special casing tests. That is the vendor documenting the behaviour in their own system cards.
+NUM     A December 2025 paper defines LLM laziness directly as premature truncation and partial compliance with multi part requests, and finds widespread compliance failures even under explicit prompting. arXiv 2512.20662.
+NUM     On SlopCodeBench, a benchmark built specifically for long horizon iterative coding, the best agent solves 14.8 percent, with verbosity and code erosion growing several times faster than in human repositories. arXiv 2603.24755.
+NUM     Cognition found Claude Sonnet 4.5 underestimating its remaining context and wrapping up early, a behaviour now called context anxiety. The agent takes shortcuts when it believes it is running out of room, whether or not it actually is.
+P       Read together these say one thing. Models default to minimum effort, effort responds to structure, and structure that lives in files beats structure that lives in prose.
+
+RULE
+
+H       Install it
+P       Two ways, both a one liner. Use whichever matches how you keep your skills.
+B       Clone it straight into your skills directory: git clone https://github.com/Leonxlnx/unlazy ~/.claude/skills/unlazy
+B       Or pull the repo anywhere and point your harness at its SKILL.md. It works with Claude Code, Codex and Cursor, or anything else that reads a SKILL.md.
+P       One caveat to set expectations correctly. The hard enforcement, the Stop hook that physically blocks a completion claim, is Claude Code only. Everywhere else you get the gates, the ledger and the report discipline, but nothing stops the model walking past them.
+
+RULE
+
+H       The mechanism, in the order it runs
+P       This is the part worth understanding, because once you see the shape you can hand write it for a one off job without installing anything.
+NUM     Decompose. The task is split N layers deep into a tree. Leaves are units of real work. Depth two or three for a feature or a bug hunt, four or five for a subsystem, six or seven for a whole project built leaf by leaf.
+NUM     Write the ledger. Every claim you care about becomes a checkbox in a GATES.md file. Not a to do item. A claim that can be falsified.
+NUM     Attach a check to every box. Each gate carries a CHECK command that actually runs and an EXPECT string the output has to match. A box with no runnable check is a wish, and it is the thing this whole skill exists to delete.
+NUM     Run the checker. gate-check.mjs executes the CHECK commands, flips a box only when EXPECT matches, and records the deciding output lines next to the box as evidence.
+NUM     Block the exit. The Stop hook refuses to let the agent declare victory while any gate is unmet.
+NUM     Report against the ledger. At report time every number is re measured rather than recalled, and the report pastes the gates ledger with its count, N of N.
+P       Two details in there are the ones people skip. A checked box whose evidence still reads "pending" counts as unmet, because a checkbox is a claim and evidence is the proof. And numbers get re measured at report time, because the failure that survives everything else is a confidently wrong figure in a final summary.
+
+RULE
+
+H       A GATES.md you can copy
+P       Keep them falsifiable. If you cannot write a command that decides it, it is not a gate, it is a hope.
+B       - [ ] All tests pass. CHECK: npm test. EXPECT: 0 failing. EVIDENCE: pending
+B       - [ ] No placeholders left. CHECK: grep -rn "TODO\|FIXME\|not implemented" src/. EXPECT: no matches. EVIDENCE: pending
+B       - [ ] Types clean. CHECK: npx tsc --noEmit. EXPECT: no output. EVIDENCE: pending
+B       - [ ] The feature actually runs. CHECK: node dist/cli.js --smoke. EXPECT: exit 0. EVIDENCE: pending
+B       - [ ] Nothing regressed. CHECK: git diff --stat main. EXPECT: only files listed in PLAN.md. EVIDENCE: pending
+P       Notice that none of these ask the model for an opinion. Every one of them is a command whose output a script can compare to a string.
+
+RULE
+
+H       The tweak that makes it usable
+P       Here is the honest catch, and it is the reason people try this once and quietly stop. Proving is strictly slower than claiming. Out of the box the skill works through the tree one unit at a time, which is correct and which also means a real job crawls.
+P       The fix is in your instructions rather than in the repo. Once your tree is deeper than three, tell the orchestrator to fan the leaves out and run them concurrently, each as a fresh subagent with its own narrow brief and its own gates file. The verification hierarchy is what keeps it honest: the leaf checks itself, and the parent re runs the same checks rather than trusting the leaf's report.
+QUOTE   Decompose to depth 5. Write PLAN.md with the interfaces, file ownership and naming fixed before any fan out. Give every leaf its own gates file under gates/. Run the leaves in parallel as fresh subagents, up to ten at a time, each restricted to files it owns so they cannot collide. When a leaf reports done, re run its gate checks yourself before accepting it.
+P       Fresh context per leaf is not an optimisation, it is the point. The stall at eighty percent is an end of long context disease, and attention rather than time was always the scarce resource.
+P       One piece of honesty about the number. Ten is my setting, not a specification. The repo says leaves parallelise where your harness allows and names no figure, so tune it to your own rate limits and to how much the leaves touch each other.
+
+RULE
+
+H       When not to use it
+P       This is a real cost, the author says so plainly, and a guide that pretends otherwise is selling you something.
+B       Below roughly half an hour of real work, stay solo. Subagent overhead only pays for itself on a real build.
+B       Orchestrated mode multiplies cost with leaf count, deliberately. Run it on the pass that matters, not on every prompt.
+B       If you cannot name a runnable check for the thing you care about, gates will not help you. Write the check first and the gate second.
+
+RULE
+
+H       What good looks like after you install it
+P       You will notice the change in the report rather than in the work. Instead of a paragraph telling you it is all done, you get a pasted ledger, six of six, with the deciding line of output sitting next to each box. The first time one comes back four of six with two boxes honestly unchecked, the skill is working.
+
+KEY     UNLAZY

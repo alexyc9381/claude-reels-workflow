@@ -1,0 +1,92 @@
+TITLE   The Free Google Five
+SUB     Five Google AI tools that replace paid subscriptions most people are still buying, what each one actually does, and the exact point where each one stops being free
+
+H       What this actually is
+P       Google shipped a large number of AI products in a short window and told almost nobody. Most of them are interesting and will not change how you work. Five of them replace something you are probably paying for right now, which is a different claim and a much smaller list.
+P       Everything below was checked against each product's own page on 20 August 2026. Where a tool has a meter or a limit, the limit is written next to it rather than at the bottom, because the limit is usually the thing that decides whether it can actually replace what you pay for.
+B       AI Studio, at aistudio.google.com
+B       NotebookLM, at notebooklm.google.com
+B       Flow, at labs.google/fx/tools/flow
+B       Opal, at opal.google
+B       Antigravity, at antigravity.google
+
+RULE
+
+H       Why the subscriptions pile up in the first place
+P       Ask anyone what their AI tooling costs and they will name the one or two they chose deliberately. Those are rarely the problem. The problem is the tools that arrived one at a time, each solving a real annoyance on the day it was bought, none of them ever reviewed again.
+NUM     A chat subscription, bought because the free tier ran out mid task.
+NUM     A video or image generator, bought for one project and never cancelled.
+NUM     A coding IDE seat, bought because the agent features were behind it.
+P       None of those is an unreasonable purchase on its own. The reason they add up is that nothing ever prompts you to look at them together, and every one of them renews silently.
+
+RULE
+
+H       1. AI Studio, instead of paying for a chat window
+P       AI Studio is Gemini in a browser tab, on the Google account you already have. No new subscription and no separate signup. The reason it matters is not that it is another chat box, it is what you get inside the box.
+NUM     Gemini 3 Pro, the current top model, rather than a cut down free tier version of it.
+NUM     An input context window of 1,000,000 tokens. That is large enough to paste an entire codebase, a full book, or a year of meeting notes and then ask questions across all of it at once.
+NUM     Model settings that consumer chat apps hide: temperature, system instructions, structured output, and the ability to compare models side by side.
+P       What it replaces: the roughly $20 a month people pay for a consumer chat subscription, when the reason they pay is model access rather than the app around it.
+P       Where it stops being free: AI Studio is free to use but rate limited. Heavy sustained use will hit those limits, and the paid API is the path beyond them. For normal daily work the limits are generous enough that most people never see them.
+
+RULE
+
+H       2. NotebookLM, instead of trusting a general model with your own material
+P       NotebookLM is the one on this list that solves a different problem from the others. You upload your own sources, documents, slides, PDFs, links, and it answers only from those. Every answer carries citations back to the passage it came from.
+P       Two consequences follow, and the second is the one people underrate.
+NUM     Answers are grounded. When a model is restricted to sources you provided, the failure mode changes from inventing a plausible answer to telling you the sources do not cover it. That is a far more useful failure.
+NUM     The notebook persists. A general chat starts from nothing every session, so you re-explain your context constantly. A notebook holds the material once and every future question starts from it.
+P       What it replaces: the habit of pasting the same background into a chat window over and over, and any paid research assistant whose value is really just document recall.
+P       Where it stops being free: notebooks and sources are capped per account on the free tier, and the higher caps sit inside a paid Google AI plan. For a single working project the free caps are rarely the binding constraint.
+P       An honest note: grounding reduces invention, it does not eliminate it. The citations are the feature. Click them.
+
+RULE
+
+H       3. Flow, instead of a monthly video generation subscription
+P       Flow is Google's filmmaking tool, built on Veo. You describe a shot in plain language, including the camera move, and it generates it. You can extend a shot, keep a character consistent across shots, and assemble scenes rather than producing single disconnected clips.
+P       That last part is the actual difference. Most video generators produce a clip. Flow is built around producing a sequence, which is what anyone making something rather than testing something needs.
+P       What it replaces: the paid video generation tools people subscribe to for exactly this, which typically run from tens to a few hundred dollars a month depending on tier.
+P       Where it stops being free, and this one matters: the free tier is 50 credits per day. It is metered, not open. A single generation consumes credits, so 50 per day is enough to learn the tool and produce occasional work, and it is not enough to run a production schedule. Anyone who needs volume is buying a Google AI plan, which is a smaller bill than the tools it displaces but is not zero.
+
+RULE
+
+H       4. Opal, instead of building a small internal tool from scratch
+P       Opal takes a description of an app in ordinary language and produces a working AI tool with a shareable link. Not a code sample you then have to host, an actual running thing you can send to somebody.
+P       It is worth being precise about what this is good for, because the demos oversell it and the real use case is narrower and genuinely useful.
+NUM     Good for: small single purpose tools. A form that summarises what gets submitted. An internal helper that follows a fixed set of steps. A prototype you want to put in front of somebody today rather than describe to them.
+NUM     Not good for: anything with real users, real data, or requirements that will change every week. You will outgrow it, and that is fine, because the point is to find out whether the thing is worth building properly.
+P       What it replaces: the two week gap between having an idea for an internal tool and having something a colleague can click. For most small tools that gap is the entire reason they never get built.
+P       Where it stops being free: Opal is a Google Labs product, which means it is free while it is experimental and the terms can change. Build accordingly.
+
+RULE
+
+H       5. Antigravity, instead of a paid agentic IDE seat
+P       Antigravity is Google's agent first code editor. The distinction from a normal editor with an assistant bolted on is that agents operate across three surfaces at once, and you supervise rather than drive.
+NUM     The editor, where code is written and changed.
+NUM     The terminal, where things are actually run and the output is read back.
+NUM     The browser, where the result is opened and checked.
+P       That third surface is the one that changes the experience. An agent that can only write code hands you something and asks you to verify it. An agent that can run it and then look at the result in a browser can catch its own mistake before you ever see it.
+P       What it replaces: the roughly $20 a month for a paid coding IDE tier, where the thing behind the paywall is the agent features rather than the editor.
+P       Where it stops being free: it is in preview, free during preview, with the usual caveat that preview products change. Model usage inside it is subject to rate limits.
+P       An honest note: you will hear large productivity multipliers attached to this category of tool. There is no published benchmark behind those numbers. What is verifiable is the mechanism, an agent that can run and inspect its own work catches a class of error that one which only writes code cannot. Judge it on that, and treat any specific multiple as marketing.
+
+RULE
+
+H       The order to try them in
+P       Trying five new tools at once is how people end up using none of them. Pick by which subscription is bothering you most.
+NUM     Paying for a chat subscription: open AI Studio first. It is the smallest change, takes two minutes, and it either replaces your subscription or it does not, which you will know the same day.
+NUM     Constantly re-explaining the same context: NotebookLM. Load one real project, not a test file. The value only shows up when the material is something you actually need answers about.
+NUM     Paying for video generation: Flow, with the 50 daily credits in mind. Spend the first day finding out whether the output clears your bar before you think about volume.
+NUM     An idea for a small internal tool that has been sitting untouched: Opal. One sentence, one link, one afternoon.
+NUM     Paying for an agentic IDE: Antigravity. Give it a real task with a visible result, so the browser surface has something to check.
+
+RULE
+
+H       Three honest notes, because a list of only upsides is an advert
+NUM     Free here means no subscription, not no limits. Four of the five are metered in some way and the meters are written next to each one above. Flow's is the one most likely to bite.
+NUM     Two of these are Google Labs and preview products. Labs products get changed and occasionally retired. That is an acceptable risk for a prototyping tool and a poor one for something load bearing.
+NUM     Replacing a subscription only saves money if you actually cancel it. Running a free tool alongside a paid one you have stopped using is the most common outcome and it saves nothing. Check the renewal date before you do anything else.
+
+RULE
+
+KEY     BILL

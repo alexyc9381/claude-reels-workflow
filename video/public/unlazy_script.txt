@@ -1,0 +1,11 @@
+The rumors are true. Claude is secretly skipping your tasks and lying to you about it.
+And Anthropic, the creators of Claude, even admitted it.
+So if you've noticed that Claude keeps skipping the hard parts of your prompts, you're not crazy.
+But GitHub's top trending author just dropped a fix called the Unlazy Skill.
+It stops AI from taking shortcuts by forcing it to prove its work.
+So instead of just saying that a task is done, Unlazy builds a ledger.
+Basically, the AI has to run commands and verify the output before giving you the answer.
+But here's the catch.
+Out of the box, it takes hours because it runs one task at a time.
+The trick is to tweak the instructions so it runs up to 10 sub-agents in parallel without affecting each other.
+So comment Unlazy for the free setup.
