@@ -1,10 +1,10 @@
 {
   "counts": {
-    "reels_with_code": 100,
-    "reels_total": 144,
+    "reels_with_code": 102,
+    "reels_total": 146,
     "factory_logs": 59,
-    "storyboards": 61,
-    "caption_jsons": 110,
+    "storyboards": 63,
+    "caption_jsons": 112,
     "memory_md": 200,
     "creators": 8,
     "packs": 3
@@ -516,6 +516,8 @@
         "video/src/data/words_116bill.json",
         "video/src/data/words_117know.json",
         "video/src/data/words_118loop.json",
+        "video/src/data/words_119ox.json",
+        "video/src/data/words_120unlazy.json",
         "video/src/data/words_ads.json",
         "video/src/data/words_agency.json",
         "video/src/data/words_ai.json",
@@ -1619,6 +1621,28 @@
         "video/src/data/words_118loop.json",
         "video/src/data/words_loops.json",
         "video/src/data/words_loops_alex.json"
+      ]
+    },
+    {
+      "key": "ox",
+      "name": "ox",
+      "number": 119,
+      "code": "video/src/ClaudeOxReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/119-ox.md",
+      "captions": [
+        "video/src/data/words_119ox.json"
+      ]
+    },
+    {
+      "key": "unlazy",
+      "name": "unlazy",
+      "number": 120,
+      "code": "video/src/ClaudeUnlazyReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/120-unlazy.md",
+      "captions": [
+        "video/src/data/words_120unlazy.json"
       ]
     }
   ]

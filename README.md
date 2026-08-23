@@ -13,9 +13,9 @@ measured **creator style packs**. Clone it, `npm install`, and you're developing
 > Drive.
 
 <!-- INDEX:AUTO -->
-| reels (code in-repo) | **100** | factory logs | **59** |
+| reels (code in-repo) | **102** | factory logs | **59** |
 |---|---|---|---|
-| storyboards | 61 | caption files | 110 |
+| storyboards | 63 | caption files | 112 |
 | memory `.md` | 200 | creator packs | 3 |
 | script-DNA creators | 8 | | |
 <!-- /INDEX:AUTO -->

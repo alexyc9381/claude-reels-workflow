@@ -390,7 +390,7 @@ const BANDS: Array<{ from: number; big: string; hot: string }> = [
      technique in eight words: it checks its own work, so you don't have to. */
   /* ⚠️⚠️ THE HOOK BAND IS A DELIBERATE OVERRIDE, NOT AN OVERSIGHT — do not
      "correct" it. Alex specified this copy directly: `10X CLAUDE POWER /
-     1 PROMPT`.
+     FROM 1 PROMPT`.
      ⛔ It collides with this reel's own honesty ledger (`RATE_BANNED` in
      LoopWorld.tsx, rule 4: no speed, quality or "N× better" claim, because no
      benchmark for the Gauntlet Loop is published) and with reel 116's ledger,
@@ -401,7 +401,7 @@ const BANDS: Array<{ from: number; big: string; hot: string }> = [
      rate, the caption still says in full that no published benchmark exists and
      to take any multiplier loosely, and the article says the same. The picture
      and the receipts are unchanged. */
-  { from: L.S0,  big: "10X CLAUDE POWER",       hot: "1 PROMPT" },
+  { from: L.S0,  big: "10X CLAUDE POWER",       hot: "FROM 1 PROMPT" },
   { from: L.S1,  big: "ONE PROMPT, ONE BUILD",  hot: "APPS, SITES, A GAME" },
   { from: L.S2,  big: "CLAUDE CODE'S CREATOR",  hot: "“I JUST WRITE LOOPS”" },
   { from: L.S3,  big: "THE GAUNTLET LOOP",      hot: "IT RUNS TILL IT'S GOOD" },

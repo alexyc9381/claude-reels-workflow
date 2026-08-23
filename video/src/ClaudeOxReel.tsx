@@ -165,15 +165,12 @@ const SFX: Cue[] = [
      a DEAD thud on the blank provider row — the one that refuses to print. */
   { at: S(L.S1 + 6),  src: "deep_engine.wav",  v: LEVELS.SFX_BED,     dur: 1.4, rate: 0.72 },
   { at: S(L.S1 + 30), src: "impact_deep.wav",  v: LEVELS.SFX_MID,     dur: 0.80, rate: 0.82 },
-  /* ⭐ THE BELLOW, on the frame the ox lands. Alex: *"I need to hear an ox sound
-     effect right now or like bull or whatever."* ⛔ The 183-file house bank has
-     no animal in it at all, so rather than pull a foreign pack in (reel 110
-     shipped 24 chiptune cues that way) this one is SYNTHESISED for this reel by
-     `tools/gen_ox_bellow.py` — a gliding 84-134Hz fundamental, sixteen
-     harmonics, a half-frequency growl and a breath bed. Measured on the file it
-     writes: attack 37.7ms (bar <150ms) and 7.0% above 2kHz, so it is neither a
-     SWELL nor an "air" cue. */
-  { at: S(L.S1 + 31), src: "ox_bellow.wav",    v: LEVELS.SFX_HERO,    dur: 1.55 },
+  /* ⛔ THE THIRD BELLOW IS OUT (Alex: *"remove the ox sound at 3 seconds"*).
+     `ox_bellow` is synthesised for this reel by `tools/gen_ox_bellow.py` — the
+     183-file house bank has no animal in it at all — and it now fires TWICE, in
+     the hook, both times answering something: the herd coming through the gate
+     at 0.90s and the branding iron at 2.03s. A third at 3.53s was tied to no
+     action; it just made the animal noisy. One at 27.9s closes the reel. */
   { at: S(L.S1 + 40), src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.18, rate: 0.86 },
 
   /* ---- S2 · THE PULL FLOOR (5). One start, one drag texture under all three
