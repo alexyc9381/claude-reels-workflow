@@ -2,7 +2,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
-  Scene, Cam, Mark, MarkPlate, Chip, Motes, Edge,
+  Scene, Cam, Mark, MarkPlate, MarkCast, Chip, Motes, Edge,
   R, PLACES, asPlace, vivid, mono, ui, Rake, Ring, Puff, Pool, Steam,
   Crew, Hero, Forearm, costumeFor, squash, lerpHex,
   CLAY, CLAYD, GOLD, GREEN, RED, PAPER, CREAMB, INK, MUTE, TEAL, STEEL,
@@ -78,7 +78,13 @@ export const GRADE: Record<Variant, string> = {
   /* ⛔ brightness(0.968) took amber's frame 0 to 136.9 against the >=140 bar.
      The standing rule already said it: take the separation from CONTRAST, never
      from brightness, in EITHER direction. */
-  amber: "contrast(1.042) saturate(1.46) brightness(1.082)",
+    /* ⛔ amber's p10 crept 29.8 -> 35.5 across this round as glow was added, and
+     brightness(1.082) — put there to pass HOOK_LUMA — is what was holding the
+     shadows up. CONTRAST pivots at mid-grey, so it drops the darks without
+     costing the frame-0 mean. This is the standing rule, applied the other way
+     round from usual: take it from contrast, never brightness, in EITHER
+     direction ([[unlazy120-reel]]). */
+  amber: "contrast(1.115) saturate(1.46) brightness(1.080)",
   steel: "contrast(1.205) saturate(1.22) brightness(1.006)",
 };
 
@@ -137,7 +143,14 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
      ⛔ The receipt is still on screen and still first-party — it just is not the
      thing you are looking at any more. */
   const DROPHEAD = 6, SCAN = 14, VERDICT = 34, ALARM = 38;
-  const head = E(f, DROPHEAD, SCAN, 0, 1, IO);
+  /* ⛔ v1 OF THIS RAN THE HEAD DOWN IN 8 FRAMES AND PARKED IT — 74% hold on a
+     69-frame scene, the same plateau trap as the press ram and the pop debris
+     ([[feedback_authored_motion_needs_its_own_driver]]). A scan is a SWEEP: the
+     head runs the length of him one and a half times before the verdict, which
+     is 670px of a 300x62 bar travelling instead of 224px once. */
+  const head = f < DROPHEAD ? 0
+    : f < VERDICT ? 0.5 - 0.5 * Math.cos((f - DROPHEAD) / 9.4 * Math.PI)
+    : 1;
   const needle = E(f, VERDICT, VERDICT + 8, 0, 1, BACK);
   const alarm = f >= ALARM ? 1 : 0;
   const jolt = f >= VERDICT ? Math.sin((f - VERDICT) / 2.1) * Math.exp(-(f - VERDICT) / 7) * 11 : 0;
@@ -147,6 +160,13 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
         rake={0.26} rakeX={RAKE_X0[v] + 90} rakeRate={3.4 * RAKE_K[v]}
         lamp={{ x: 520, y: 190, r: 330 }} grit={0.9} />
       <ToolWall p={p} f={f} x={-24} y={158} cols={10} rows={3} z={16} seed={WALL_SEED[v]} live={6} />
+      {/* ⭐ THE MARK, CAST INTO THE BACK WALL AND TURNING. Alex: *"have a big
+          claude logo at 3 seconds in the middle area too."* It earns its place
+          here rather than being a sticker: this is Claude's own bench, the thing
+          strapped into it is a Claude, and when the verdict lands the alarm wash
+          turns the emblem red along with the room. A slow rotation is also the
+          cheapest legitimate motion in a frame ([[MarkCast]]). */}
+      <MarkCast x={506} y={362} s={560} z={20} o={0.58} f={f} spin={0.28} pulse={0.6} />
       <PartsLine y={700} f={f} rate={7.2 * RAKE_K[v]} z={30} c={p.key} s={1.14} n={6} o={0.40} />
       <Pool x={506} y={706} w={800} c={p.key} o={0.24} hh={140} z={18} />
 
@@ -163,7 +183,9 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
 
       {/* ⭐ THE SUBJECT UNDER TEST — a body, in the cradle, reacting */}
       <Hero f={f + 40} x={392} y={648 + jolt} size={214} z={50} costume={{ constr: 1 }}
-        strain={0.30 + head * 0.34} act={3} ph={0.6} gaze={0.5}
+        strain={f < VERDICT ? 0.28 + head * 0.30
+          : 0.5 + Math.sin((f - VERDICT) / 3.6) * 0.42}
+        act={3} ph={0.6} gaze={0.5}
         shock={f >= VERDICT && f < VERDICT + 24 ? 1 : 0}
         stern={f >= VERDICT + 24 ? 1 : 0} />
       {/* the clamp holding him in it, so he reads as UNDER test, not beside it */}
@@ -186,6 +208,13 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
       <Ring x={470} y={470} f={f} at={SCAN} c="#8FE6FF" s={1.25} z={76} dur={20} />
       <Ring x={648} y={492} f={f} at={VERDICT} c={RED} s={1.5} z={80} dur={22} />
       <Puff x={470} y={640} f={f} at={VERDICT} c="#9FB4C6" n={10} s={0.95} z={72} />
+      {/* the rig vents once the verdict is in, and he fights the clamp */}
+      {f >= VERDICT + 2 && (
+        <Steam x={252} y={606} f={f} at={VERDICT + 2} n={9} s={1.05} z={54} c="#DCE6EE" rate={1.4} />
+      )}
+      {[VERDICT + 6, VERDICT + 16, VERDICT + 26].map((at, i) => (
+        <Puff key={"tk" + i} x={392} y={556} f={f} at={at} c="#9FB4C6" n={5} s={0.6} z={70} />
+      ))}
       <Edge side="r" c={dkh(p.lip, 0.10)} kind="post" z={93} top={120} />
       <Chip t="THEIR OWN TEST" y={152} x={358} c={hexa("#2B4A66", 0.9)} fg={PAPER} />
     </Scene>
@@ -214,11 +243,26 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
      DONE, bright green. The six readouts do not move. Then it happens again, and
      again. The CONTRADICTION between the green board and the dark rack is the
      whole scene, and it is the "you're not crazy" beat. */
+  /* ⭐⭐ Alex: *"at 8 seconds, those screens should show a big RED X on them
+     stamped on consecutively then like flashing alarm red."* Exactly the beat
+     this scene was missing — the board lying green was stated, but the six gates
+     only sat there NOT RUN, which is a passive fact. Now each one takes a hard
+     red X in sequence, two per bell, and once the last one lands the whole rack
+     goes into an alarm flash. The contradiction stops being implied. */
   const RING = [10, 46, 82];
+  const XAT = [18, 27, 54, 63, 90, 97];
+  const xDone = XAT.filter(t => f >= t).length;
+  /* ⛔ v1 lit the alarm only after the sixth stamp, which left 14 frames of it
+     in a 114-frame scene. It now BUILDS: a low pulse from the fourth X, full
+     from the sixth, so the back half of the scene is escalating red. */
+  const alarm = Math.min(1, E(f, XAT[3] + 2, XAT[3] + 10, 0, 0.44, OUT)
+    + E(f, XAT[5] + 2, XAT[5] + 7, 0, 0.62, OUT));
+  const flash = alarm * (0.36 + 0.64 * Math.abs(Math.sin(f / 3.1)));
   const rung = RING.filter(r => f >= r).length;
   const lastRing = RING.filter(r => f >= r).pop() ?? -99;
   const hit = f >= lastRing ? Math.min(1, (f - lastRing) / 20) : 0;
-  const doneOn = f >= lastRing && f < lastRing + 26 ? 1 : 0;
+  const doneOn = rung > 0 ? 1 : 0;
+  const donePop = f >= lastRing && f < lastRing + 12 ? 1 : 0;
   return (
     <Scene p={p} slug="" push={[0, dur, 1.166]} vig={0.62} glow={hexa(p.key, 0.22)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="truss" bands={3} kind="plant"
@@ -230,7 +274,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
 
       {/* ⭐ THE BIG BOARD THAT LIES. It goes green every time the bell rings. */}
       <div style={{ position: "absolute", left: 268, top: 322, width: 476, height: 92, zIndex: 56,
-        borderRadius: 6, transform: `scale(${1 + doneOn * 0.03})`, transformOrigin: "50% 50%",
+        borderRadius: 6, transform: `scale(${1 + donePop * 0.045})`, transformOrigin: "50% 50%",
         background: doneOn ? mxh(GREEN, 0.06) : dkh(SLATE, 0.60),
         border: `7px solid ${doneOn ? dkh(GREEN, 0.30) : dkh(SLATE, 0.76)}` }}>
         <div style={{ position: "absolute", inset: 9, borderRadius: 3,
@@ -249,12 +293,57 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
         ))}
       </div>
 
-      {/* ⛔ AND THE SIX GATES BEHIND IT NEVER MOVE. Every one still NOT RUN. */}
+      {/* ⛔ AND THE SIX GATES BEHIND IT NEVER RUN — each one gets STAMPED. */}
       {Array.from({ length: 6 }, (_, i) => (
         <GatePane key={"g2" + i} x={228 + (i % 3) * 278} y={588 + Math.floor(i / 3) * 172}
           f={f + i * 6} w={252} s={0.84} z={44} run={0} pass={0} n={i + 1}
           cmd={["npm test", "tsc --noEmit", "grep -r TODO", "node smoke.js", "eslint .", "git diff"][i]} />
       ))}
+      {/* the alarm wash over the rack once every gate has been marked */}
+      {alarm > 0 && (
+        <div style={{ position: "absolute", left: 78, top: 396, width: 856, height: 388, zIndex: 52,
+          borderRadius: 8, opacity: flash * 0.60, pointerEvents: "none",
+          background: `radial-gradient(66% 66% at 50% 50%, ${hexa(RED, 0.96)} 0%, ${hexa(RED, 0.34)} 100%)`,
+          boxShadow: `0 0 ${110 * flash}px ${hexa(RED, 0.8 * flash)}` }} />
+      )}
+      {/* a red rim round every stamped gate, so the rack itself is alarmed */}
+      {alarm > 0 && Array.from({ length: 6 }, (_, i) => (
+        <div key={"rim" + i} style={{ position: "absolute",
+          left: 228 + (i % 3) * 278 - 112, top: 588 + Math.floor(i / 3) * 172 - 148,
+          width: 224, height: 152, zIndex: 51, borderRadius: 6, pointerEvents: "none",
+          border: `${3 + flash * 5}px solid ${hexa(RED, 0.55 + flash * 0.45)}`,
+          boxShadow: `0 0 ${34 * flash}px ${hexa(RED, 0.85 * flash)}` }} />
+      ))}
+      {/* and the whole room takes it, over the vignette */}
+      {alarm > 0 && (
+        <div style={{ position: "absolute", inset: 0, zIndex: 89, pointerEvents: "none",
+          opacity: 0.30 + flash * 0.42,
+          background: `radial-gradient(70% 52% at 50% 62%, ${hexa(RED, 0.74 * flash)} 0%, ${hexa(RED, 0.10 * flash)} 44%, ${hexa("#05060B", 0.62 + flash * 0.16)} 100%)` }} />
+      )}
+      {/* ⭐ THE STAMPS. A hard slam from 2.4x, a shock ring and grit each time. */}
+      {XAT.map((at, i) => {
+        if (f < at - 6) return null;
+        const cx = 228 + (i % 3) * 278, cy = 588 + Math.floor(i / 3) * 172 - 84;
+        const k = E(f, at - 6, at, 2.4, 1, IN_Q);
+        const rock = f >= at ? Math.sin((f - at) / 1.9) * Math.exp(-(f - at) / 6) * 5 : 0;
+        const lit = 0.86 + flash * 0.14;
+        return (
+          <React.Fragment key={"xs" + i}>
+            <svg width={150} height={150} viewBox="0 0 100 100" style={{ position: "absolute",
+              left: cx - 75, top: cy - 75, zIndex: 58, overflow: "visible",
+              transform: `scale(${k}) rotate(${-7 + rock}deg)`,
+              opacity: Math.min(1, (f - at + 6) / 4) }}>
+              <path d="M17 14 L50 43 L83 14 L96 27 L64 56 L96 85 L83 98 L50 69 L17 98 L4 85 L36 56 L4 27 Z"
+                fill={hexa(RED, lit)} stroke={dkh(RED, 0.46)} strokeWidth="3"
+                strokeLinejoin="round" />
+              <path d="M22 20 L50 45 L78 20" fill="none" stroke={hexa("#FFFFFF", 0.24)}
+                strokeWidth="5" strokeLinecap="round" />
+            </svg>
+            <Ring x={cx} y={cy} f={f} at={at} c={RED} s={1.15} z={60} dur={15} />
+            <Puff x={cx} y={cy + 14} f={f} at={at} c="#C4A79A" n={7} s={0.72} z={57} />
+          </React.Fragment>
+        );
+      })}
       <Pool x={506} y={678} w={940} c={p.key} o={0.18} hh={150} z={19} />
 
       {/* the bell, and the Claudes that keep ringing it */}
@@ -271,7 +360,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
       ))}
       <Edge side="l" c={dkh(p.lip, 0.14)} kind="post" z={93} top={150} />
       <Mark x={62} y={168} s={98} z={90} />
-      <Chip t={`RUNG ${rung}x · RAN 0x`} y={152} x={366} c={hexa(RED, 0.90)} fg={PAPER} />
+      <Chip t={`RUNG ${rung}x · FAILED ${xDone}`} y={152} x={352} c={hexa(RED, 0.90)} fg={PAPER} />
     </Scene>
   );
 };

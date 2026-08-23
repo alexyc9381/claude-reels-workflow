@@ -25,25 +25,26 @@ const HOOK_SFX = [
      the gate carries a 3-frame J-cut lead, so they smeared into one mush and
      BOTH measured flat against the bed. 6-frame hauls move the last click to
      f16 and give the gate clean air. */
-  { at: 4 / 30, src: "ratchet.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.32, rate: 0.94 },
-  { at: 10 / 30, src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.32, rate: 1.03 },
-  { at: 16 / 30, src: "ratchet.wav", v: LEVELS.SFX_MID * db(2), dur: 0.34, rate: 1.13 },
-  /* shot B · ⛔ v1 gave the biggest visual event in the hook a WHOOSH and
+  { at: 3 / 30, src: "ratchet.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.32, rate: 0.94 },
+  { at: 8 / 30, src: "ratchet.wav", v: LEVELS.SFX_MID, dur: 0.32, rate: 1.03 },
+  { at: 13 / 30, src: "ratchet.wav", v: LEVELS.SFX_MID * db(2), dur: 0.34, rate: 1.13 },
+  /* the second and last cut · ⛔ v1 gave the biggest visual event in the hook a WHOOSH and
      nothing else, and it read as nothing. 700px of steel breaking free is an
      IMPACT first; the whoosh is only the travel after it. */
-  ...layer(20 / 30,
+  ...layer(16 / 30,
     { src: "impact_deep.wav", v: LEVELS.SFX_HERO, dur: 0.62 },
     { src: "chain_clank.wav", v: LEVELS.SFX_TEXTURE * db(2), dur: 0.50, rate: 0.88 }),
-  { at: 21 / 30, src: "whoosh_heavy.wav", v: LEVELS.SFX_MID * db(1), dur: 0.66 },
+  { at: 17 / 30, src: "whoosh_heavy.wav", v: LEVELS.SFX_MID * db(1), dur: 0.66 },
   /* ⭐ THE ANIMAL, twice, and both times it is answering something.
      `ox_bellow` is synthesised for this reel — the bank has no animal at all,
      and a borrowed pack is not this world ([[feedback_sfx_bank_belongs_to_the_world]]). */
-  { at: 23 / 30, src: "ox_bellow.wav", v: LEVELS.SFX_HERO * db(-1), dur: 0.95 },
-  /* shot C · the iron, then the animal again — deeper, and it is a REACTION */
-  ...layer(61 / 30,
-    { src: "stamp_press.wav", v: LEVELS.SFX_HERO, dur: 0.34 },
-    { src: "paper_burn.wav", v: LEVELS.SFX_TEXTURE * db(3), dur: 0.86 }),
-  { at: 65 / 30, src: "ox_bellow.wav", v: LEVELS.SFX_HERO * db(-2), dur: 0.62, rate: 0.74 },
+  { at: 20 / 30, src: "crowd_run.wav", v: LEVELS.SFX_TEXTURE * db(2), dur: 0.62, rate: 0.78 },
+  { at: 27 / 30, src: "ox_bellow.wav", v: LEVELS.SFX_HERO * db(4), dur: 0.95 },
+  /* still the same take · the iron, then the animal again — deeper, a REACTION */
+  ...layer(57 / 30,
+    { src: "stamp_press.wav", v: LEVELS.SFX_HERO * db(3), dur: 0.34 },
+    { src: "paper_burn.wav", v: LEVELS.SFX_TEXTURE * db(3), dur: 0.90 }),
+  { at: 61 / 30, src: "ox_bellow.wav", v: LEVELS.SFX_HERO * db(1), dur: 0.80, rate: 0.74 },
 ];;
 
 const HookCut = (Inner: React.FC<{ dur: number }>): React.FC => () => (

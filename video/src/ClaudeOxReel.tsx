@@ -1,7 +1,8 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
-import { S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, CAM, GRADE } from "./OxScenes";
+import { S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, CAM, GRADE } from "./OxScenes";
+import { HookGate } from "./OxHooks";
 import type { Variant } from "./OxScenes";
 import { CamCtx, R } from "./OxWorld";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
@@ -147,13 +148,18 @@ const SFX: Cue[] = [
   /* ---- S0 · THE BAY (7) — ⭐ the heaviest cue stack in the reel. Frame 0 is
      the interrupt, so the bed, the plant hum and the first movement all land
      on it, and the SEAT at f26 is the hero. */
-  { at: S(L.S0 + 0),  src: "machine_bed.wav",  v: LEVELS.SFX_BED,     dur: 3.2, rate: 0.94 },
-  { at: S(L.S0 + 6),  src: "gear_shift.wav",   v: LEVELS.SFX_MID,     dur: 0.30, rate: 0.92 },
-  { at: S(L.S0 + 16), src: "ox_bellow.wav",    v: LEVELS.SFX_MID,     dur: 1.30, rate: 0.88 },
-  { at: S(L.S0 + 28), src: "slate_whump.wav",  v: LEVELS.SFX_HERO,    dur: 0.22, rate: 0.84 },
-  { at: S(L.S0 + 28), src: "impact_deep.wav",  v: LEVELS.SFX_MID,     dur: 0.70, rate: 0.88 },
-  { at: S(L.S0 + 32), src: "neon_on.wav",      v: LEVELS.SFX_MID,     dur: 0.58 },
-  { at: S(L.S0 + 44), src: "stamp_press.wav",  v: LEVELS.SFX_HERO,    dur: 0.44, rate: 0.96 },
+  { at: S(L.S0 + 0),  src: "machine_bed.wav",  v: LEVELS.SFX_BED,     dur: 2.6, rate: 0.94 },
+  { at: S(L.S0 + 3),  src: "ratchet.wav",      v: LEVELS.SFX_MID * db(-1), dur: 0.32, rate: 0.94 },
+  { at: S(L.S0 + 8),  src: "ratchet.wav",      v: LEVELS.SFX_MID,     dur: 0.32, rate: 1.03 },
+  { at: S(L.S0 + 13), src: "ratchet.wav",      v: LEVELS.SFX_MID * db(2), dur: 0.34, rate: 1.13 },
+  { at: S(L.S0 + 16), src: "impact_deep.wav",  v: LEVELS.SFX_HERO,    dur: 0.62 },
+  { at: S(L.S0 + 16), src: "chain_clank.wav",  v: LEVELS.SFX_TEXTURE * db(2), dur: 0.50, rate: 0.88, lead: 2 },
+  { at: S(L.S0 + 17), src: "whoosh_heavy.wav", v: LEVELS.SFX_MID * db(1), dur: 0.66 },
+  { at: S(L.S0 + 20), src: "crowd_run.wav",    v: LEVELS.SFX_TEXTURE * db(2), dur: 0.62, rate: 0.78 },
+  { at: S(L.S0 + 27), src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(4), dur: 0.95 },
+  { at: S(L.S0 + 57), src: "stamp_press.wav",  v: LEVELS.SFX_HERO * db(3), dur: 0.34 },
+  { at: S(L.S0 + 57), src: "paper_burn.wav",   v: LEVELS.SFX_TEXTURE * db(3), dur: 0.90, lead: 2 },
+  { at: S(L.S0 + 61), src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(1), dur: 0.80, rate: 0.74 },
 
   /* ---- S1 · THE SPEC WALL (4). Three placard rows pitched UP a step each, and
      a DEAD thud on the blank provider row — the one that refuses to print. */
@@ -304,7 +310,7 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
       <CamCtx.Provider value={{ ...CAM[v] }}>
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE[v] }}>
-            <Sequence from={L.S0} durationInFrames={DUR.S0}><S0 v={v} dur={DUR.S0} /></Sequence>
+            <Sequence from={L.S0} durationInFrames={DUR.S0}><HookGate dur={DUR.S0} /></Sequence>
             <Sequence from={L.S1} durationInFrames={DUR.S1}><S1 v={v} dur={DUR.S1} /></Sequence>
             <Sequence from={L.S2} durationInFrames={DUR.S2}><S2 v={v} dur={DUR.S2} /></Sequence>
             <Sequence from={L.S3} durationInFrames={DUR.S3}><S3 v={v} dur={DUR.S3} /></Sequence>

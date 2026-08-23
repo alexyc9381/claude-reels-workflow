@@ -559,11 +559,16 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
      ⛔ The ranks carry a VALUE RAMP as well as a size ramp — back ranks in
      darker clay — because that is the axis the greyscale audit can see and the
      one that makes depth read. */
+  /* ⭐⭐ MUCH BIGGER, AND THE MAIN FOCUS. The near rank is now 400px and stands
+     BELOW the panel floor so it is cropped by the frame edge — a foreground mass
+     the camera is standing behind, which is the depth cue this repo has failed
+     to ship ten times. Each rank halves toward the vanishing point, so the
+     corridor is a real perspective run rather than four evenly-spaced pairs. */
   const RANKS = [
-    { x: 118, mx: 894, y: 776, s: 272, tint: undefined as string | undefined },
-    { x: 250, mx: 762, y: 692, s: 212, tint: "#C2603C" },
-    { x: 336, mx: 676, y: 630, s: 164, tint: "#A85434" },
-    { x: 396, mx: 616, y: 586, s: 126, tint: "#8E4529" },
+    { x: 92, mx: 920, y: 858, s: 400, tint: undefined as string | undefined },
+    { x: 196, mx: 816, y: 752, s: 296, tint: "#C2603C" },
+    { x: 312, mx: 700, y: 664, s: 214, tint: "#A85434" },
+    { x: 382, mx: 630, y: 602, s: 152, tint: "#8E4529" },
   ];
   /* the wave runs FAR to NEAR, so it arrives at the viewer */
   const up = (i: number) => E(f, 2 + (3 - i) * 4, 10 + (3 - i) * 4, 0, 1, BACK);
@@ -578,19 +583,19 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
 
       {/* ⭐ THE LANE — a bright floor running away from camera and converging.
           It is the single strongest cue that this is a corridor to be RUN. */}
-      <div style={{ position: "absolute", left: 0, top: 470, width: W, height: 322, zIndex: 24,
+      <div style={{ position: "absolute", left: 0, top: 452, width: W, height: 340, zIndex: 24,
         opacity: lane,
         background: `linear-gradient(180deg, ${hexa(SODIUM, 0.10)} 0%, ${hexa(SODIUM, 0.34)} 100%)`,
-        clipPath: "polygon(45.5% 0, 54.5% 0, 82% 100%, 18% 100%)" }} />
+        clipPath: "polygon(46.5% 0, 53.5% 0, 92% 100%, 8% 100%)" }} />
       {/* the lane's edge kerbs, converging with it */}
       {[-1, 1].map(sgn => (
-        <div key={"kb" + sgn} style={{ position: "absolute", left: 506 + sgn * 46 - 9, top: 470,
-          width: 18, height: 322, zIndex: 25, opacity: lane, transformOrigin: "50% 0%",
-          transform: `rotate(${sgn * 15.5}deg)`, background: mxh(SLATE, 0.20) }} />
+        <div key={"kb" + sgn} style={{ position: "absolute", left: 506 + sgn * 36 - 10, top: 452,
+          width: 20, height: 340, zIndex: 25, opacity: lane, transformOrigin: "50% 0%",
+          transform: `rotate(${sgn * 22}deg)`, background: mxh(SLATE, 0.20) }} />
       ))}
       {/* ⭐ THE BAR AT THE END OF IT — what running the gauntlet is FOR */}
       <div style={{ opacity: lane }}>
-        <QualityBar y={368} f={f} on={0.30 + lane * 0.34} z={30} x0={418} x1={594} />
+        <QualityBar y={340} f={f} on={0.30 + lane * 0.34} z={30} x0={430} x1={582} />
       </div>
 
       {/* ⭐⭐ THE TWO RANKS. Facing inward, paddles up, at falling scale AND
@@ -603,8 +608,8 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
           {f >= i * 2 && (
             <div style={{ position: "absolute", left: r.x + r.s * 0.30, top: r.y - r.s * 1.22,
               zIndex: 54 - i * 3, transformOrigin: "50% 100%",
-              transform: `rotate(${-88 + up(i) * 62}deg) scale(${r.s / 272})` }}>
-              <Paddle x={0} y={0} rot={0} face="bad" s={0.72} z={54 - i * 3} f={f} />
+              transform: `rotate(${-88 + up(i) * 62}deg) scale(${r.s / 400})` }}>
+              <Paddle x={0} y={0} rot={0} face="bad" s={1.05} z={54 - i * 3} f={f} />
             </div>
           )}
           {/* right rank, facing left */}
@@ -613,8 +618,8 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
           {f >= i * 2 + 1 && (
             <div style={{ position: "absolute", left: r.mx - r.s * 0.30, top: r.y - r.s * 1.22,
               zIndex: 54 - i * 3, transformOrigin: "50% 100%",
-              transform: `rotate(${88 - up(i) * 62}deg) scale(${r.s / 272})` }}>
-              <Paddle x={0} y={0} rot={0} face="bad" s={0.72} z={54 - i * 3} f={f} />
+              transform: `rotate(${88 - up(i) * 62}deg) scale(${r.s / 400})` }}>
+              <Paddle x={0} y={0} rot={0} face="bad" s={1.05} z={54 - i * 3} f={f} />
             </div>
           )}
         </React.Fragment>
@@ -622,7 +627,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
 
       {/* the work entering the lane at the near end — the run begins */}
       <div style={{ position: "absolute", inset: 0, zIndex: 58 }}>
-        <BuildRig x={506} y={806 - runK * 110} lvl={2} f={f} s={1.02 - runK * 0.24} z={58}
+        <BuildRig x={506} y={824 - runK * 132} lvl={2} f={f} s={1.24 - runK * 0.34} z={58}
           shake={runK > 0.1 ? 2.6 : 0} />
       </div>
       <Puff x={506} y={780} f={f} at={20} c="#C6A882" n={9} s={1.0} z={56} up={30} />
@@ -653,70 +658,70 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
   const c0 = cyc(0), c1 = cyc(1), c2 = cyc(2);
   const push = Math.max(c0.out - c0.back, c1.out - c1.back, c2.out - c2.back);
   const tired = E(f, 4, 58, 0.18, 0.72, LIN);
-  const tx = c0.k * 300 + c1.k * 252 + c2.k * 192;
+  const tx = c0.k * 356 + c1.k * 300 + c2.k * 228;
   const stamped = [c0, c1, c2].filter(c => f > c.a + 9).length;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.66} glow={hexa(p.key, 0.12)}>
+    <Scene p={p} slug="" push={[0, dur, 1.052]} vig={0.62} glow={hexa(p.key, 0.12)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="duct" bands={2} kind="shutter"
         rake={0.164} rakeX={RAKE_X0[v]} rakeRate={2.24 * RAKE_K[v]}
         lamp={{ x: 470, y: 220, r: 220 }} grit={0.4} />
       {/* one sickly overhead, hard shadow, no fill */}
-      <div style={{ position: "absolute", left: 402, top: 106, width: 136, height: 18, zIndex: 32,
-        borderRadius: 4, background: "#2E3630" }} />
-      <div style={{ position: "absolute", left: 414, top: 122, width: 112, height: 9, zIndex: 33,
+      <div style={{ position: "absolute", left: 372, top: 88, width: 196, height: 24, zIndex: 32,
+        borderRadius: 5, background: "#2E3630" }} />
+      <div style={{ position: "absolute", left: 388, top: 112, width: 164, height: 13, zIndex: 33,
         borderRadius: 3, background: "#C2CE9E", opacity: 0.72 + Math.sin(f / 3.1) * 0.10 }} />
 
       {/* the desk, the hatch in the wall, and the clock */}
-      <div style={{ position: "absolute", left: 236, top: 560, width: 380, height: 22, zIndex: 40,
+      <div style={{ position: "absolute", left: 168, top: 578, width: 512, height: 30, zIndex: 40,
         borderRadius: 3, background: `linear-gradient(180deg, ${mxh("#4E4234", 0.20)} 0%, ${dkh("#4E4234", 0.30)} 100%)` }} />
-      <div style={{ position: "absolute", left: 252, top: 582, width: 20, height: 118, zIndex: 39,
+      <div style={{ position: "absolute", left: 190, top: 606, width: 28, height: 158, zIndex: 39,
         background: dkh("#4E4234", 0.44) }} />
-      <div style={{ position: "absolute", left: 578, top: 582, width: 20, height: 118, zIndex: 39,
+      <div style={{ position: "absolute", left: 630, top: 606, width: 28, height: 158, zIndex: 39,
         background: dkh("#4E4234", 0.44) }} />
       {/* the hatch: a lintel, a roller and a dark mouth */}
-      <div style={{ position: "absolute", left: 664, top: 404, width: 214, height: 168, zIndex: 42,
-        borderRadius: 6, background: "#0C0F0C", border: "6px solid #232A22" }}>
-        <div style={{ position: "absolute", left: 8, top: 8, right: 8, height: 22,
+      <div style={{ position: "absolute", left: 700, top: 384, width: 288, height: 226, zIndex: 42,
+        borderRadius: 8, background: "#0C0F0C", border: "8px solid #232A22" }}>
+        <div style={{ position: "absolute", left: 10, top: 10, right: 10, height: 30,
           background: "#2E3630" }} />
-        <div style={{ position: "absolute", left: 8, bottom: 8, right: 8, height: 12,
+        <div style={{ position: "absolute", left: 10, bottom: 10, right: 10, height: 16,
           background: "#1A1F19" }} />
       </div>
       {/* the wall clock, hand spinning — the background process */}
-      <div style={{ position: "absolute", left: 300, top: 226, width: 96, height: 96, zIndex: 41,
-        borderRadius: "50%", background: "#D8DCC6", border: "6px solid #2E3630" }}>
-        <div style={{ position: "absolute", left: 42, top: 12, width: 4, height: 36,
+      <div style={{ position: "absolute", left: 232, top: 194, width: 134, height: 134, zIndex: 41,
+        borderRadius: "50%", background: "#D8DCC6", border: "8px solid #2E3630" }}>
+        <div style={{ position: "absolute", left: 59, top: 16, width: 6, height: 50,
           background: "#2E3630", transformOrigin: "50% 100%", transform: `rotate(${f * 15}deg)` }} />
-        <div style={{ position: "absolute", left: 40, top: 40, width: 10, height: 10,
-          borderRadius: 10, background: "#2E3630" }} />
+        <div style={{ position: "absolute", left: 55, top: 56, width: 14, height: 14,
+          borderRadius: 14, background: "#2E3630" }} />
       </div>
 
       {/* THE TICKET going back and forth */}
-      <div style={{ position: "absolute", left: 486 + tx, top: 452, width: 152, height: 106,
-        zIndex: 58, borderRadius: 5, background: CREAMB, border: "5px solid #8E8672",
+      <div style={{ position: "absolute", left: 498 + tx, top: 420, width: 206, height: 144,
+        zIndex: 58, borderRadius: 7, background: CREAMB, border: "6px solid #8E8672",
         transform: `rotate(${tx * 0.04}deg)` }}>
         {[0, 1, 2].map(i => (
-          <div key={"tk" + i} style={{ position: "absolute", left: 14, top: 19 + i * 22,
-            width: 96 - i * 22, height: 10, borderRadius: 5, background: "#A8A08C" }} />
+          <div key={"tk" + i} style={{ position: "absolute", left: 19, top: 26 + i * 30,
+            width: 130 - i * 30, height: 13, borderRadius: 7, background: "#A8A08C" }} />
         ))}
-        {stamped > 0 && <div style={{ position: "absolute", left: 22, top: 26, width: 106, height: 48,
+        {stamped > 0 && <div style={{ position: "absolute", left: 30, top: 36, width: 144, height: 66,
           borderRadius: 4, background: hexa(RED, 0.86), transform: "rotate(-12deg)",
           display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span style={{ ...mono(24, 900), color: "#2A0E08" }}>{R.verdicts.bad}</span></div>}
+          <span style={{ ...mono(32, 900), color: "#2A0E08" }}>{R.verdicts.bad}</span></div>}
       </div>
 
       {/* the reject pile growing beside him */}
       {Array.from({ length: stamped * 3 }, (_, i) => (
-        <div key={"rp" + i} style={{ position: "absolute", left: 268 + (i % 3) * 9,
-          top: 528 - Math.floor(i / 3) * 11, width: 84, height: 20, zIndex: 44 + i,
-          borderRadius: 3, background: i % 2 ? "#C6BEA6" : CREAMB, border: "3px solid #8E8672",
+        <div key={"rp" + i} style={{ position: "absolute", left: 208 + (i % 3) * 12,
+          top: 542 - Math.floor(i / 3) * 15, width: 114, height: 27, zIndex: 44 + i,
+          borderRadius: 4, background: i % 2 ? "#C6BEA6" : CREAMB, border: "4px solid #8E8672",
           transform: `rotate(${(i % 2 ? 1 : -1) * 2.4}deg)` }} />
       ))}
 
-      <Hero f={f} x={452} y={704} size={228} z={56} act={1} ph={0.9}
+      <Hero f={f} x={412} y={760} size={318} z={56} act={1} ph={0.9}
         drive={push * 0.55} reach={104} strain={tired}
         stern={tired * 0.8} costume={{ suit: 1 }} />
-      <Contact x={376} y={700} w={156} z={19} o={0.46} />
-      <Steam x={452} y={496} f={f} at={30} n={5} s={0.8} z={62} rate={0.7} c="#B8C4A0" />
+      <Contact x={320} y={756} w={200} z={19} o={0.46} />
+      <Steam x={412} y={498} f={f} at={30} n={6} s={1.1} z={62} rate={0.7} c="#B8C4A0" />
       <Stanchion side="l" c="#1E241D" w={78} z={90} />
     </Scene>
   );
@@ -835,11 +840,17 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
      chosen. Deeper ranks carry MORE agents at SMALLER size, which is also what
      perspective does, and each rank is offset half a pitch so no two ranks
      stack into columns. */
+  /* ⭐ BIGGER *AND* MORE, WHICH IS NOT A CONTRADICTION — it is a fifth rank.
+     Within one rank, size is capped by `pitch/0.85`, so making sprites bigger
+     means fewer PER RANK. Adding a rank buys the count back in DEPTH, where
+     there is no horizontal spacing constraint at all. Front rank 116 -> 150,
+     total 38 -> 40. */
   const RANKS = [
-    { n: 8,  y: 706, s: 116, at: 8,  tint: undefined as string | undefined, z: 52, off: 0.0 },
-    { n: 9,  y: 640, s: 100, at: 15, tint: "#C2603C", z: 46, off: 0.5 },
-    { n: 10, y: 590, s: 86,  at: 22, tint: "#A85434", z: 40, off: 0.0 },
-    { n: 11, y: 550, s: 74,  at: 29, tint: "#8E4529", z: 34, off: 0.5 },
+    { n: 6,  y: 722, s: 150, at: 6,  tint: undefined as string | undefined, z: 54, off: 0.0 },
+    { n: 7,  y: 656, s: 130, at: 12, tint: "#CC6A44", z: 48, off: 0.5 },
+    { n: 8,  y: 602, s: 112, at: 18, tint: "#C2603C", z: 42, off: 0.0 },
+    { n: 9,  y: 560, s: 96,  at: 24, tint: "#A85434", z: 36, off: 0.5 },
+    { n: 10, y: 526, s: 82,  at: 30, tint: "#8E4529", z: 30, off: 0.0 },
   ];
   const cols = [128, 296, 464, 632, 800];
   const beltLoad = [0, 0.18, 0.36, 0.54, 0.72, 0.9].map((k, i) => ({

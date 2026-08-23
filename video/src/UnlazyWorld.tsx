@@ -844,81 +844,139 @@ export const TestRig: React.FC<{ x: number; y: number; f: number; s?: number; z?
   );
 };
 
-/** ⭐⭐ THE GATE RIG — what actually comes out of the crate. Alex: *"the thing
-    that comes out of the boxes needs to be more interesting and spark more
-    curiosity and like that thing is just way too gray and boring."* It was the
-    reel's shared grey slab, again. This is brass and chrome with a DOMED
-    silhouette, six numbered valve wheels, live gauges and a pipe run — a
-    machine you want to look at, and one the rest of the reel can keep using. */
+/** ⭐⭐ THE GATE RIG — what comes out of the crate. Rejected once as *"way too
+    gray and boring"*, and again after the brass pass: *"on the device it should
+    have a big UNLAZY word on it and be a lot cooler and have like glowing etc...
+    that device needs to be also way cooler shape."*
+
+    ⭐ So: a HEXAGONAL crown instead of a plain dome, swept shoulder fins, a
+    chrome spine, a pulsing power core behind a grille — and across the front, a
+    **backlit UNLAZY nameplate** that breathes. The six valve wheels stay, because
+    six turning brass wheels are the six gates as hardware. Everything that can
+    glow does, on its own clock, so the machine looks POWERED rather than
+    painted. */
 export const GateRig: React.FC<{ x: number; y: number; f: number; s?: number; z?: number;
-  n?: number; glow?: number }> = ({ x, y, f, s = 1, z = 44, n = 6, glow = 1 }) => {
-  const W = 470 * s, H2 = 330 * s;
+  n?: number; glow?: number; name?: string }> =
+  ({ x, y, f, s = 1, z = 44, n = 6, glow = 1, name = "UNLAZY" }) => {
+  const W = 500 * s, H2 = 360 * s;
+  const pulse = 0.62 + 0.38 * (0.5 + 0.5 * Math.sin(f / 7.5));
+  const NEON = "#63E6A8";
   return (
     <div style={{ position: "absolute", left: x - W / 2, top: y - H2, width: W, height: H2,
       zIndex: z }}>
-      {/* the warm bloom it throws — this is what stops it reading as a slab */}
-      <div style={{ position: "absolute", left: -90 * s, top: -90 * s, right: -90 * s,
-        bottom: -60 * s, zIndex: 0, opacity: glow,
-        background: `radial-gradient(50% 50% at 50% 44%, ${hexa("#FFD9A0", 0.42)} 0%, ${hexa("#FFD9A0", 0)} 70%)` }} />
-      {/* the domed housing */}
-      <div style={{ position: "absolute", left: 62 * s, top: 0, width: W - 124 * s, height: 118 * s,
-        zIndex: 3, borderRadius: `${(W - 124 * s) / 2}px ${(W - 124 * s) / 2}px 0 0`,
-        background: `linear-gradient(160deg, ${mxh(BRASS, 0.56)} 0%, ${mxh(BRASS, 0.14)} 34%, ${BRASS} 58%, ${dkh(BRASS, 0.46)} 100%)`,
-        border: `${5 * s}px solid ${dkh(BRASS, 0.56)}`, boxShadow: SH_D }}>
-        <div style={{ position: "absolute", left: "22%", top: "18%", width: "22%", height: "42%",
-          borderRadius: "50%", background: hexa("#FFFFFF", 0.34) }} />
+      {/* the bloom it throws — this is what stops it reading as a slab */}
+      <div style={{ position: "absolute", left: -120 * s, top: -110 * s, right: -120 * s,
+        bottom: -70 * s, zIndex: 0, opacity: glow,
+        background: `radial-gradient(50% 50% at 50% 46%, ${hexa("#FFD9A0", 0.40)} 0%, ${hexa("#FFD9A0", 0)} 70%)` }} />
+      <div style={{ position: "absolute", left: -70 * s, top: 80 * s, right: -70 * s,
+        bottom: 10 * s, zIndex: 0, opacity: glow * pulse * 0.8,
+        background: `radial-gradient(50% 50% at 50% 50%, ${hexa(NEON, 0.30)} 0%, ${hexa(NEON, 0)} 72%)` }} />
+
+      {/* ⭐ THE HEX CROWN — a cut silhouette, not a half circle */}
+      <div style={{ position: "absolute", left: 84 * s, top: 0, width: W - 168 * s, height: 126 * s,
+        zIndex: 3, clipPath: "polygon(26% 0, 74% 0, 100% 46%, 100% 100%, 0 100%, 0 46%)",
+        background: `linear-gradient(158deg, ${mxh(BRASS, 0.60)} 0%, ${mxh(BRASS, 0.14)} 30%, ${BRASS} 56%, ${dkh(BRASS, 0.48)} 100%)`,
+        boxShadow: SH_D }}>
+        <div style={{ position: "absolute", left: "20%", top: "16%", width: "20%", height: "38%",
+          borderRadius: "50%", background: hexa("#FFFFFF", 0.36) }} />
         {Array.from({ length: 7 }, (_, i) => (
-          <div key={"rv" + i} style={{ position: "absolute", left: `${9 + i * 13}%`, top: "72%",
-            width: 13 * s, height: 13 * s, borderRadius: "50%", background: dkh(BRASS, 0.52) }} />
+          <div key={"rv" + i} style={{ position: "absolute", left: `${8 + i * 13.5}%`, top: "74%",
+            width: 12 * s, height: 12 * s, borderRadius: "50%", background: dkh(BRASS, 0.54) }} />
         ))}
       </div>
-      {/* the chimney and its cap */}
-      <div style={{ position: "absolute", left: W / 2 - 20 * s, top: -54 * s, width: 40 * s,
-        height: 62 * s, zIndex: 2, background: dkh(BRASS, 0.34), borderRadius: 4 * s }} />
-      <div style={{ position: "absolute", left: W / 2 - 34 * s, top: -68 * s, width: 68 * s,
-        height: 20 * s, zIndex: 2, background: mxh(BRASS, 0.18), borderRadius: 5 * s }} />
+      {/* the lit ring around the crown's neck */}
+      <div style={{ position: "absolute", left: 74 * s, top: 118 * s, width: W - 148 * s,
+        height: 15 * s, zIndex: 5, borderRadius: 8 * s,
+        background: `linear-gradient(90deg, ${hexa(NEON, 0.20)} 0%, ${mxh(NEON, 0.30)} 50%, ${hexa(NEON, 0.20)} 100%)`,
+        opacity: 0.55 + pulse * 0.45,
+        boxShadow: `0 0 ${26 * pulse * s}px ${hexa(NEON, 0.75 * pulse)}` }} />
+      {/* the chrome spine and its cap */}
+      <div style={{ position: "absolute", left: W / 2 - 19 * s, top: -66 * s, width: 38 * s,
+        height: 76 * s, zIndex: 2, borderRadius: 5 * s,
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.44)} 0%, #EAF0F4 46%, ${dkh(STEEL, 0.50)} 100%)` }} />
+      <div style={{ position: "absolute", left: W / 2 - 26 * s, top: -84 * s, width: 52 * s,
+        height: 26 * s, zIndex: 2, borderRadius: "50%",
+        background: `radial-gradient(50% 50% at 40% 30%, ${mxh(NEON, 0.5)} 0%, ${NEON} 60%, ${dkh(NEON, 0.40)} 100%)`,
+        opacity: 0.5 + pulse * 0.5,
+        boxShadow: `0 0 ${34 * pulse * s}px ${hexa(NEON, 0.8 * pulse)}` }} />
+
+      {/* ⭐ SWEPT SHOULDER FINS — the "cooler shape" note, answered in silhouette */}
+      {[-1, 1].map(sg => (
+        <div key={"fn" + sg} style={{ position: "absolute", top: 108 * s, width: 96 * s,
+          height: 108 * s, zIndex: 2,
+          [sg < 0 ? "left" : "right"]: -34 * s,
+          clipPath: sg < 0 ? "polygon(0 40%, 100% 0, 100% 100%, 22% 100%)"
+                           : "polygon(0 0, 100% 40%, 78% 100%, 0 100%)",
+          background: `linear-gradient(${sg < 0 ? 120 : 240}deg, ${dkh(BRASS, 0.52)} 0%, ${mxh(BRASS, 0.10)} 60%, ${dkh(BRASS, 0.44)} 100%)`,
+          boxShadow: SH }} />
+      ))}
+
       {/* the body */}
-      <div style={{ position: "absolute", left: 22 * s, top: 108 * s, right: 22 * s, bottom: 26 * s,
-        zIndex: 4, borderRadius: 8 * s, boxShadow: SH_D,
-        background: `linear-gradient(172deg, ${mxh(STEEL, 0.30)} 0%, ${mxh(STEEL, 0.04)} 40%, ${dkh(STEEL, 0.34)} 100%)`,
-        border: `${5 * s}px solid ${dkh(STEEL, 0.52)}` }}>
+      <div style={{ position: "absolute", left: 30 * s, top: 132 * s, right: 30 * s, bottom: 28 * s,
+        zIndex: 4, borderRadius: 10 * s, boxShadow: SH_D,
+        background: `linear-gradient(172deg, ${mxh(STEEL, 0.34)} 0%, ${mxh(STEEL, 0.06)} 36%, ${dkh(STEEL, 0.40)} 100%)`,
+        border: `${5 * s}px solid ${dkh(STEEL, 0.56)}` }}>
+        {/* ⭐⭐ THE BACKLIT NAMEPLATE */}
+        <div style={{ position: "absolute", left: 14 * s, right: 14 * s, top: 12 * s,
+          height: 62 * s, borderRadius: 7 * s, overflow: "hidden",
+          background: `linear-gradient(178deg, ${dkh(INK, 0.03)} 0%, ${dkh(INK, 0.10)} 100%)`,
+          border: `${4 * s}px solid ${dkh(BRASS, 0.50)}`,
+          boxShadow: `inset 0 0 ${30 * pulse * s}px ${hexa(NEON, 0.55 * pulse)}` }}>
+          <div style={{ position: "absolute", inset: 0, opacity: 0.30 + pulse * 0.34,
+            background: `radial-gradient(70% 150% at 50% 120%, ${hexa(NEON, 0.90)} 0%, ${hexa(NEON, 0)} 100%)` }} />
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center",
+            justifyContent: "center", ...ui(Math.round(42 * s), 900), letterSpacing: 9 * s,
+            color: "#EAFFF3",
+            textShadow: `0 0 ${16 * pulse * s}px ${hexa(NEON, 0.95)}, 0 0 ${40 * pulse * s}px ${hexa(NEON, 0.65)}` }}>
+            {name}
+          </div>
+        </div>
         {/* SIX NUMBERED VALVE WHEELS — the six gates, as hardware */}
         {Array.from({ length: n }, (_, i) => (
-          <div key={"vw" + i} style={{ position: "absolute", left: `${5 + i * 15.6}%`, top: 20 * s,
-            width: 58 * s, height: 58 * s, borderRadius: "50%",
-            background: `radial-gradient(50% 50% at 38% 32%, ${mxh(BRASS, 0.46)} 0%, ${BRASS} 52%, ${dkh(BRASS, 0.44)} 100%)`,
+          <div key={"vw" + i} style={{ position: "absolute", left: `${4.5 + i * 15.6}%`, top: 88 * s,
+            width: 54 * s, height: 54 * s, borderRadius: "50%",
+            background: `radial-gradient(50% 50% at 38% 32%, ${mxh(BRASS, 0.48)} 0%, ${BRASS} 52%, ${dkh(BRASS, 0.44)} 100%)`,
             border: `${5 * s}px solid ${dkh(BRASS, 0.58)}`,
-            transform: `rotate(${(f * 1.4 + i * 37) % 360}deg)` }}>
+            boxShadow: `0 0 ${9 * pulse * s}px ${hexa(NEON, 0.4 * pulse)}`,
+            transform: `rotate(${(f * 1.6 + i * 37) % 360}deg)` }}>
             {[0, 60, 120].map(a => (
-              <div key={a} style={{ position: "absolute", left: "50%", top: "50%", width: 44 * s,
-                height: 6 * s, marginLeft: -22 * s, marginTop: -3 * s,
+              <div key={a} style={{ position: "absolute", left: "50%", top: "50%", width: 40 * s,
+                height: 6 * s, marginLeft: -20 * s, marginTop: -3 * s,
                 transform: `rotate(${a}deg)`, background: dkh(BRASS, 0.50), borderRadius: 3 * s }} />
             ))}
           </div>
         ))}
+        {/* the power core behind a grille */}
+        <div style={{ position: "absolute", left: 18 * s, bottom: 10 * s, width: 116 * s,
+          height: 44 * s, borderRadius: 5 * s, overflow: "hidden",
+          background: dkh(INK, 0.06), border: `${4 * s}px solid ${dkh(STEEL, 0.54)}` }}>
+          <div style={{ position: "absolute", inset: -10 * s, opacity: 0.4 + pulse * 0.6,
+            background: `radial-gradient(50% 60% at 50% 50%, ${hexa(NEON, 0.95)} 0%, ${hexa(NEON, 0)} 100%)` }} />
+          {Array.from({ length: 6 }, (_, i) => (
+            <div key={"gl" + i} style={{ position: "absolute", left: 0, right: 0, top: i * 8 * s,
+              height: 4 * s, background: dkh(STEEL, 0.60), opacity: 0.85 }} />
+          ))}
+        </div>
         {/* two live gauges */}
         {[0, 1].map(i => (
-          <div key={"gg" + i} style={{ position: "absolute", left: `${16 + i * 46}%`, bottom: 14 * s,
-            width: 52 * s, height: 52 * s, borderRadius: "50%", background: CREAMB,
+          <div key={"gg" + i} style={{ position: "absolute", left: `${34 + i * 22}%`, bottom: 10 * s,
+            width: 48 * s, height: 48 * s, borderRadius: "50%", background: CREAMB,
             border: `${5 * s}px solid ${dkh(BRASS, 0.50)}` }}>
             <div style={{ position: "absolute", left: "50%", bottom: "50%", width: 4 * s,
-              height: 19 * s, marginLeft: -2 * s, transformOrigin: "50% 100%", borderRadius: 2,
+              height: 17 * s, marginLeft: -2 * s, transformOrigin: "50% 100%", borderRadius: 2,
               transform: `rotate(${-46 + Math.sin(f / 9 + i * 2) * 34}deg)`, background: dkh(RED, 0.20) }} />
           </div>
         ))}
         {/* the chrome lever */}
-        <div style={{ position: "absolute", right: 26 * s, bottom: 18 * s, width: 15 * s,
-          height: 86 * s, transformOrigin: "50% 100%", borderRadius: 4 * s,
+        <div style={{ position: "absolute", right: 24 * s, bottom: 16 * s, width: 15 * s,
+          height: 80 * s, transformOrigin: "50% 100%", borderRadius: 4 * s,
           transform: `rotate(${-16 + Math.sin(f / 21) * 7}deg)`,
           background: `linear-gradient(90deg, ${dkh(STEEL, 0.40)} 0%, #E9EEF2 44%, ${dkh(STEEL, 0.46)} 100%)` }} />
-        <div style={{ position: "absolute", right: 18 * s, bottom: 92 * s, width: 32 * s,
-          height: 32 * s, borderRadius: "50%", background: dkh(RED, 0.14),
-          border: `${4 * s}px solid ${dkh(RED, 0.38)}` }} />
       </div>
       {/* pipework out of the base */}
-      {[0.16, 0.84].map((k, i) => (
-        <div key={"pp" + i} style={{ position: "absolute", left: W * k - 13 * s, bottom: -18 * s,
-          width: 26 * s, height: 62 * s, zIndex: 2, borderRadius: 5 * s,
+      {[0.14, 0.86].map((k, i) => (
+        <div key={"pp" + i} style={{ position: "absolute", left: W * k - 13 * s, bottom: -20 * s,
+          width: 26 * s, height: 64 * s, zIndex: 2, borderRadius: 5 * s,
           background: `linear-gradient(90deg, ${dkh(BRASS, 0.50)} 0%, ${mxh(BRASS, 0.20)} 44%, ${dkh(BRASS, 0.56)} 100%)` }} />
       ))}
     </div>

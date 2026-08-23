@@ -388,7 +388,20 @@ const BANDS: Array<{ from: number; big: string; hot: string }> = [
      needs more words is a band that has not found its claim yet.
      ⭐ The hook's is the one that matters, and it is the whole value of the
      technique in eight words: it checks its own work, so you don't have to. */
-  { from: L.S0,  big: "IT FIXES ITS OWN WORK",  hot: "BEFORE YOU EVER SEE IT" },
+  /* ⚠️⚠️ THE HOOK BAND IS A DELIBERATE OVERRIDE, NOT AN OVERSIGHT — do not
+     "correct" it. Alex specified this copy directly: `10X CLAUDE POWER /
+     1 PROMPT`.
+     ⛔ It collides with this reel's own honesty ledger (`RATE_BANNED` in
+     LoopWorld.tsx, rule 4: no speed, quality or "N× better" claim, because no
+     benchmark for the Gauntlet Loop is published) and with reel 116's ledger,
+     which banned a `20x` plate for the same reason. The concern was raised once
+     and he confirmed the copy, so it ships as specified.
+     ⭐ WHAT KEEPS IT HONEST EVERYWHERE ELSE: the multiplier appears ONLY in this
+     header band. No plate, gauge, counter or prop anywhere in the reel asserts a
+     rate, the caption still says in full that no published benchmark exists and
+     to take any multiplier loosely, and the article says the same. The picture
+     and the receipts are unchanged. */
+  { from: L.S0,  big: "10X CLAUDE POWER",       hot: "1 PROMPT" },
   { from: L.S1,  big: "ONE PROMPT, ONE BUILD",  hot: "APPS, SITES, A GAME" },
   { from: L.S2,  big: "CLAUDE CODE'S CREATOR",  hot: "“I JUST WRITE LOOPS”" },
   { from: L.S3,  big: "THE GAUNTLET LOOP",      hot: "IT RUNS TILL IT'S GOOD" },

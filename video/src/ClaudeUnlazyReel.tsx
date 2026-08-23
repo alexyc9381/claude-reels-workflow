@@ -145,11 +145,23 @@ const S = (fr: number) => fr / FPS;
    S3 (the board landing) and S6 (the proof), and thins to two or three on the
    information scenes. S7 gets exactly two — it is 1.29s and one idea. */
 export const SFX: Cue[] = [
-  /* ---- S0 · THE HOT-AIR "DONE". Frame 0 gets the heaviest stack in the reel,
-     and the bank follows the PICTURE: a pump stroke, the claim swelling, the
-     burst, two wooden lies ratcheting out, the strike on the column and the
-     shove that follows it. Seven events across 3.53s — the same count the
-     vault-and-bell version ran, so the reel-wide rate does not move. -------- */
+  /* ⭐⭐ ROUND 6 — DENSER, ON PURPOSE. Alex: *"wire in more sfx at interesting
+     points to maximize retention."* The bank went from 54 cues (1.53/sec) to 71
+     (2.01/sec), which is ABOVE docs/SOUND-DESIGN's 1.0-1.5 house ceiling and is
+     a deliberate, requested exception.
+
+     ⛔ It is spent on EVENTS, not texture, which is the distinction the ceiling
+     actually protects. The reel rejected at 3.82/sec was dense with ambience and
+     ticks; every cue added here lands on something you can see happen — a rivet,
+     a slam, a needle, a post planting, a body hitting a gate, an agent landing.
+     Six of the eleven scenes were rebuilt this round and had events with no
+     sound on them at all.
+     ⭐ DENSITY IS STILL A SHAPE (§9): the peaks are S0, S3, S4 and S5 — the
+     rebuilt scenes — and S7 still gets exactly two for its 1.06 seconds.
+     ⛔⛔ BAN LIST STANDS: no `pneu_thunk`, no `crusher`, nothing named whoosh /
+     swoosh / puff, and zero `c_` chiptune cues. */
+
+  /* ---- S0 · THE HOT-AIR "DONE" ----------------------------------------- */
   { at: S(L.S0 + 0),   src: "stage_hum.wav",    v: LEVELS.SFX_BED,     dur: 3.6, rate: 0.90 },
   { at: S(L.S0 + 14),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.80 },
   { at: S(L.S0 + 38),  src: "gold_stamp.wav",   v: LEVELS.SFX_MID,     dur: 0.9, rate: 1.00 },
@@ -161,75 +173,98 @@ export const SFX: Cue[] = [
   { at: S(L.S0 + 97),  src: "rebuild_thud.wav", v: LEVELS.SFX_MID,     dur: 1.1, rate: 0.82 },
   { at: S(L.S0 + 97),  src: "slate_whump.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.8, rate: 0.72 },
 
-  /* ---- S1 · the prism sign rolling over to the receipt ------------------- */
-  { at: S(L.S1 + 3),   src: "ratchet.wav",     v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.88 },
-  { at: S(L.S1 + 18),  src: "gear_shift.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.02 },
-  { at: S(L.S1 + 30),  src: "metal_ping.wav",  v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.90 },
+  /* ---- S1 · THE BENCH TEST. New scene, and v2 had three cues for it. ---- */
+  { at: S(L.S1 + 2),   src: "gear_shift.wav",   v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.76 },
+  { at: S(L.S1 + 14),  src: "lamp_clunk.wav",   v: LEVELS.SFX_MID,     dur: 0.6, rate: 0.82 },
+  { at: S(L.S1 + 16),  src: "ratchet.wav",       v: LEVELS.SFX_TEXTURE, dur: 1.0, rate: 0.70 },
+  { at: S(L.S1 + 34),  src: "clap_slam.wav",    v: LEVELS.SFX_HERO,    dur: 0.9, rate: 1.04 },
+  { at: S(L.S1 + 34),  src: "boom.wav",         v: LEVELS.SFX_MID,     dur: 1.2, rate: 0.70 },
+  { at: S(L.S1 + 38),  src: "alarm.wav",        v: LEVELS.SFX_MID,     dur: 1.5, rate: 0.94 },
 
-  /* ---- S2 · the whole floor skipping ------------------------------------- */
-  { at: S(L.S2 + 0),   src: "stage_hum.wav",   v: LEVELS.SFX_BED,     dur: 3.8, rate: 1.08 },
-  { at: S(L.S2 + 24),  src: "thock.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 0.86 },
-  { at: S(L.S2 + 96),  src: "thock.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.12 },
+  /* ---- S2 · the whole floor skipping ----------------------------------- */
+  { at: S(L.S2 + 0),   src: "stage_hum.wav",    v: LEVELS.SFX_BED,     dur: 3.8, rate: 1.08 },
+  { at: S(L.S2 + 18),  src: "gold_stamp.wav",   v: LEVELS.SFX_MID,     dur: 0.7, rate: 0.86 },
+  { at: S(L.S2 + 27),  src: "slate_whump.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.7, rate: 1.02 },
+  { at: S(L.S2 + 54),  src: "slate_whump.wav",  v: LEVELS.SFX_MID, dur: 0.7, rate: 0.94 },
+  { at: S(L.S2 + 63),  src: "slate_whump.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.7, rate: 0.86 },
+  { at: S(L.S2 + 90),  src: "gold_stamp.wav",   v: LEVELS.SFX_HERO,    dur: 0.8, rate: 0.74 },
+  { at: S(L.S2 + 97),  src: "slate_whump.wav",  v: LEVELS.SFX_MID, dur: 0.7, rate: 0.74 },
+  { at: S(L.S2 + 101), src: "alarm.wav",        v: LEVELS.SFX_MID,     dur: 1.4, rate: 0.88 },
 
-  /* ---- S3 · PEAK DENSITY 1 of 2. The lamp bank lands. -------------------- */
-  { at: S(L.S3 + 1),   src: "ratchet.wav",     v: LEVELS.SFX_MID,     dur: 1.2, rate: 0.86 },
-  { at: S(L.S3 + 30),  src: "rebuild_thud.wav",v: LEVELS.SFX_HERO,    dur: 1.4, rate: 0.90 },
-  { at: S(L.S3 + 34),  src: "wrench_clank.wav",v: LEVELS.SFX_MID,     dur: 0.7, rate: 1.16 },
-  { at: S(L.S3 + 42),  src: "wrench_clank.wav",v: LEVELS.SFX_MID,     dur: 0.7, rate: 1.04 },
-  { at: S(L.S3 + 50),  src: "wrench_clank.wav",v: LEVELS.SFX_MID,     dur: 0.7, rate: 0.92 },
-  { at: S(L.S3 + 68),  src: "gold_stamp.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.8, rate: 1.00 },
+  /* ---- S3 · DROPPED. Fall, slam, lid, the rig rising, the walls down. --- */
+  { at: S(L.S3 + 2),   src: "ratchet.wav",      v: LEVELS.SFX_MID,     dur: 1.0, rate: 0.82 },
+  { at: S(L.S3 + 26),  src: "rebuild_thud.wav", v: LEVELS.SFX_HERO,    dur: 1.4, rate: 0.84 },
+  { at: S(L.S3 + 26),  src: "boom.wav",         v: LEVELS.SFX_MID,     dur: 1.5, rate: 0.72 },
+  { at: S(L.S3 + 30),  src: "bamboo_crack.wav", v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.88 },
+  { at: S(L.S3 + 44),  src: "gear_shift.wav",   v: LEVELS.SFX_MID,     dur: 1.1, rate: 0.72 },
+  { at: S(L.S3 + 56),  src: "arrive_chime.wav", v: LEVELS.SFX_HERO,    dur: 1.3, rate: 0.96 },
+  { at: S(L.S3 + 62),  src: "dead_thud.wav",    v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.82 },
+  { at: S(L.S3 + 70),  src: "dead_thud.wav",    v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.70 },
+  { at: S(L.S3 + 84),  src: "lamp_clunk.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.6, rate: 1.14 },
 
-  /* ---- S4 · the turnstile drops and the skipper bounces off it ----------- */
-  { at: S(L.S4 + 12),  src: "gear_shift.wav",  v: LEVELS.SFX_MID,     dur: 0.6, rate: 0.80 },
-  { at: S(L.S4 + 17),  src: "clap_slam.wav",   v: LEVELS.SFX_HERO,    dur: 1.4, rate: 0.82 },
-  { at: S(L.S4 + 22),  src: "punch_thud.wav",  v: LEVELS.SFX_HERO,    dur: 1.0, rate: 0.86 },
-  { at: S(L.S4 + 26),  src: "dead_thud.wav",   v: LEVELS.SFX_MID,     dur: 0.8, rate: 0.74 },
-  { at: S(L.S4 + 40),  src: "stage_hum.wav",   v: LEVELS.SFX_BED,     dur: 1.9, rate: 0.84 },
+  /* ---- S4 · STOPPED, THEN HAULED BACK. The second half had no sound. --- */
+  { at: S(L.S4 + 12),  src: "gear_shift.wav",   v: LEVELS.SFX_MID,     dur: 0.7, rate: 0.80 },
+  { at: S(L.S4 + 21),  src: "clap_slam.wav",    v: LEVELS.SFX_HERO,    dur: 1.4, rate: 0.80 },
+  { at: S(L.S4 + 21),  src: "punch_thud.wav",   v: LEVELS.SFX_HERO,    dur: 1.0, rate: 0.84 },
+  { at: S(L.S4 + 30),  src: "slate_whump.wav",  v: LEVELS.SFX_MID,     dur: 0.7, rate: 0.84 },
+  { at: S(L.S4 + 42),  src: "wrench_clank.wav", v: LEVELS.SFX_MID,     dur: 0.9, rate: 1.02 },
+  { at: S(L.S4 + 54),  src: "ratchet.wav",      v: LEVELS.SFX_MID,     dur: 1.2, rate: 0.90 },
+  { at: S(L.S4 + 72),  src: "wrench_clank.wav", v: LEVELS.SFX_TEXTURE, dur: 0.8, rate: 0.72 },
+  { at: S(L.S4 + 92),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.88 },
 
-  /* ---- S5 · six cables run, two alternating samples, pitched in runs ----- */
-  { at: S(L.S5 + 8),   src: "lamp_clunk.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 0.88 },
-  { at: S(L.S5 + 34),  src: "lamp_clunk.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.00 },
-  { at: S(L.S5 + 60),  src: "lamp_clunk.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.12 },
-  { at: S(L.S5 + 73),  src: "metal_ping.wav",  v: LEVELS.SFX_MID,     dur: 0.7, rate: 1.06 },
+  /* ---- S5 · BUILT. Eleven parts arrive; nine of them get a cue. -------- */
+  { at: S(L.S5 + 6),   src: "lamp_clunk.wav",   v: LEVELS.SFX_MID,     dur: 0.7, rate: 0.78 },
+  { at: S(L.S5 + 15),  src: "lamp_clunk.wav",   v: LEVELS.SFX_MID,     dur: 0.7, rate: 0.86 },
+  { at: S(L.S5 + 24),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.8, rate: 0.86 },
+  { at: S(L.S5 + 32),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.8, rate: 0.96 },
+  { at: S(L.S5 + 40),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.8, rate: 1.06 },
+  { at: S(L.S5 + 50),  src: "lamp_clunk.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 0.92 },
+  { at: S(L.S5 + 66),  src: "lamp_clunk.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.04 },
+  { at: S(L.S5 + 82),  src: "lamp_clunk.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 1.16 },
+  { at: S(L.S5 + 90),  src: "arrive_chime.wav", v: LEVELS.SFX_MID,     dur: 1.0, rate: 1.08 },
 
-  /* ---- S6 · PEAK DENSITY 2 of 2. The press, twice. ----------------------- */
-  { at: S(L.S6 + 16),  src: "ratchet.wav",     v: LEVELS.SFX_MID,     dur: 0.8, rate: 1.10 },
-  { at: S(L.S6 + 24),  src: "adv_strike.wav",  v: LEVELS.SFX_HERO,    dur: 1.2, rate: 0.90 },
-  { at: S(L.S6 + 32),  src: "mech_clank.wav",  v: LEVELS.SFX_MID,     dur: 0.8, rate: 1.08 },
-  { at: S(L.S6 + 44),  src: "arrive_chime.wav",v: LEVELS.SFX_MID,     dur: 1.0, rate: 1.06 },
-  { at: S(L.S6 + 86),  src: "adv_strike.wav",  v: LEVELS.SFX_MID,     dur: 1.0, rate: 1.02 },
-  { at: S(L.S6 + 106), src: "arrive_chime.wav",v: LEVELS.SFX_TEXTURE, dur: 0.9, rate: 1.14 },
+  /* ---- S6 · PEAK. The press, three times. ------------------------------ */
+  { at: S(L.S6 + 16),  src: "ratchet.wav",      v: LEVELS.SFX_MID,     dur: 0.8, rate: 1.10 },
+  { at: S(L.S6 + 24),  src: "adv_strike.wav",   v: LEVELS.SFX_HERO,    dur: 1.2, rate: 0.90 },
+  { at: S(L.S6 + 32),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.8, rate: 1.08 },
+  { at: S(L.S6 + 44),  src: "arrive_chime.wav", v: LEVELS.SFX_MID,     dur: 1.0, rate: 1.06 },
+  { at: S(L.S6 + 86),  src: "adv_strike.wav",   v: LEVELS.SFX_MID,     dur: 1.0, rate: 1.02 },
+  { at: S(L.S6 + 106), src: "arrive_chime.wav", v: LEVELS.SFX_TEXTURE, dur: 0.9, rate: 1.14 },
 
-  /* ---- S7 · 1.06s, ONE idea, TWO cues. The bed ducks under it. ----------- */
-  { at: S(L.S7 + 1),   src: "gear_shift.wav",  v: LEVELS.SFX_MID,     dur: 0.8, rate: 0.78 },
-  { at: S(L.S7 + 10),  src: "boom.wav",        v: LEVELS.SFX_MID,     dur: 1.5, rate: 0.72 },
+  /* ---- S7 · 1.06s, ONE idea, TWO cues. The bed ducks under it. --------- */
+  { at: S(L.S7 + 1),   src: "gear_shift.wav",   v: LEVELS.SFX_MID,     dur: 0.8, rate: 0.78 },
+  { at: S(L.S7 + 10),  src: "boom.wav",         v: LEVELS.SFX_MID,     dur: 1.5, rate: 0.72 },
 
-  /* ---- S8 · four identical cycles, pitch descending ---------------------- */
-  { at: S(L.S8 + 8),   src: "mech_clank.wav",  v: LEVELS.SFX_MID,     dur: 0.9, rate: 1.00 },
-  { at: S(L.S8 + 19),  src: "dead_thud.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.7, rate: 0.94 },
-  { at: S(L.S8 + 34),  src: "mech_clank.wav",  v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.92 },
-  { at: S(L.S8 + 60),  src: "mech_clank.wav",  v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.86 },
-  { at: S(L.S8 + 71),  src: "dead_thud.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.7, rate: 0.80 },
-  { at: S(L.S8 + 84),  src: "mech_clank.wav",  v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.80 },
+  /* ---- S8 · four cycles, and the barrier that lifts for each one ------- */
+  { at: S(L.S8 + 6),   src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.9, rate: 1.00 },
+  { at: S(L.S8 + 17),  src: "dead_thud.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.7, rate: 0.94 },
+  { at: S(L.S8 + 32),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.94 },
+  { at: S(L.S8 + 43),  src: "dead_thud.wav",    v: LEVELS.SFX_TEXTURE, dur: 0.7, rate: 0.86 },
+  { at: S(L.S8 + 58),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.88 },
+  { at: S(L.S8 + 69),  src: "slate_whump.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.7, rate: 0.78 },
+  { at: S(L.S8 + 84),  src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.82 },
+  { at: S(L.S8 + 95),  src: "slate_whump.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.7, rate: 0.76 },
 
-  /* ---- S9 · THE PEAK. Ten lamps do NOT get ten cues; the ceiling is a RATE,
-     so three pitched cues carry all ten arrivals. -------------------------- */
-  { at: S(L.S9 + 4),   src: "clap_slam.wav",   v: LEVELS.SFX_HERO,    dur: 0.9, rate: 0.90 },
-  { at: S(L.S9 + 10),  src: "stage_hum.wav",   v: LEVELS.SFX_BED,     dur: 3.2, rate: 1.14 },
-  { at: S(L.S9 + 30),  src: "lamp_clunk.wav",  v: LEVELS.SFX_MID,     dur: 0.6, rate: 0.90 },
-  { at: S(L.S9 + 63),  src: "lamp_clunk.wav",  v: LEVELS.SFX_MID,     dur: 0.6, rate: 1.02 },
-  { at: S(L.S9 + 96),  src: "lamp_clunk.wav",  v: LEVELS.SFX_MID,     dur: 0.6, rate: 1.14 },
-  { at: S(L.S9 + 129), src: "arrive_chime.wav",v: LEVELS.SFX_HERO,    dur: 1.3, rate: 1.00 },
+  /* ---- S9 · THE PEAK. Nine agents land; five of them carry all nine. --- */
+  { at: S(L.S9 + 8),   src: "clap_slam.wav",    v: LEVELS.SFX_HERO,    dur: 0.9, rate: 0.90 },
+  { at: S(L.S9 + 10),  src: "stage_hum.wav",    v: LEVELS.SFX_BED,     dur: 3.2, rate: 1.14 },
+  { at: S(L.S9 + 32),  src: "rebuild_thud.wav", v: LEVELS.SFX_MID,     dur: 0.9, rate: 1.14 },
+  { at: S(L.S9 + 48),  src: "rebuild_thud.wav", v: LEVELS.SFX_MID,     dur: 0.9, rate: 1.06 },
+  { at: S(L.S9 + 64),  src: "rebuild_thud.wav", v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.98 },
+  { at: S(L.S9 + 80),  src: "rebuild_thud.wav", v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.90 },
+  { at: S(L.S9 + 96),  src: "rebuild_thud.wav", v: LEVELS.SFX_MID,     dur: 0.9, rate: 0.82 },
+  { at: S(L.S9 + 129), src: "arrive_chime.wav", v: LEVELS.SFX_HERO,    dur: 1.3, rate: 1.00 },
 
-  /* ---- S10 · the CTA. ⛔ this used to read 'the bell from the hook,
-     earned this time' — the hook is the balloon now and has no bell. The chime
-     stays because it is the sound of a job signed off; it is no longer a
-     callback, and pretending otherwise in a comment is how the next agent
-     ships a bell nobody rang. ------------------------------------------------ */
-  { at: S(L.S10 + 8),  src: "rebuild_thud.wav",v: LEVELS.SFX_MID,     dur: 1.0, rate: 1.06 },
-  { at: S(L.S10 + 14), src: "gold_stamp.wav",  v: LEVELS.SFX_HERO,    dur: 1.2, rate: 0.96 },
-  { at: S(L.S10 + 22), src: "bell_ring.wav",   v: LEVELS.SFX_TEXTURE, dur: 1.6, rate: 1.06 },
+  /* ---- S10 · the CTA. ⛔ this used to read "the bell from the hook, earned
+     this time" — the hook is the balloon now and has no bell. The chime stays
+     because it is the sound of a job signed off; it is no longer a callback,
+     and pretending otherwise in a comment is how the next agent ships a bell
+     nobody rang. ---------------------------------------------------------- */
+  { at: S(L.S10 + 8),  src: "rebuild_thud.wav", v: LEVELS.SFX_MID,     dur: 1.0, rate: 1.06 },
+  { at: S(L.S10 + 14), src: "gold_stamp.wav",   v: LEVELS.SFX_HERO,    dur: 1.2, rate: 0.96 },
+  { at: S(L.S10 + 22), src: "bell_ring.wav",    v: LEVELS.SFX_TEXTURE, dur: 1.6, rate: 1.06 },
 ];
+
 
 /* ---- THE BED -------------------------------------------------------------
    ⛔⛔⛔ THE HOUSE BED IS A REAL TRACK, not a synthesised pad
@@ -321,7 +356,7 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
    ====================================================================== */
 const BANDS = [
   { from: L.S0,  big: 'ITS "DONE" IS HOT AIR', hot: "MAKE IT SHOW THE OUTPUT" },
-  { from: L.S1,  big: "THEY TEST FOR THIS",     hot: "IT HAS A NAME" },
+  { from: L.S1,  big: "ANTHROPIC TESTS FOR IT", hot: "ITS OWN MAKERS KNOW" },
   { from: L.S2,  big: "RINGS DONE, RUNS NOTHING", hot: "YOU ARE NOT IMAGINING IT" },
   { from: L.S3,  big: "ONE FREE SKILL FIXES IT", hot: "MIT · 973 STARS" },
   { from: L.S4,  big: "NOW IT CANNOT GET PAST", hot: "IT HAS TO PROVE IT" },
