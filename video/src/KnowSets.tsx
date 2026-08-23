@@ -178,8 +178,13 @@ export const Works: React.FC<{ p: Place; f: number; t?: number; lit?: number;
    THE PER-PLACE STRUCTURE. What makes each room THAT room.
    ====================================================================== */
 export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
-  rakeRate?: number; rakeX0?: number; parX?: number; occ?: boolean; rakeAng?: number }> =
-  ({ k, f, lit = 1, t = 0, rakeRate, rakeX0 = -260, parX = 0, occ = true, rakeAng = 0 }) => {
+  rakeRate?: number; rakeX0?: number; parX?: number; occ?: boolean; rakeAng?: number;
+  /** ⭐ how DARK the frame-edge occluder is: 1 = silhouette, 0.30 = a lit face.
+      The hook needs a lit pier for HOOK_LUMA; every body scene wants the dark
+      one, because hierarchy needs DARKNESS and p10 is measured on the body. */
+  pierLit?: number }> =
+  ({ k, f, lit = 1, t = 0, rakeRate, rakeX0 = -260, parX = 0, occ = true, rakeAng = 0,
+     pierLit }) => {
   const p = placeFor(k);
   const tt = t + parX;
 
@@ -261,7 +266,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         </div>
         <Rake f={f} y={110} h={430} n={6} c="#FFD9A0" o={0.24} rate={rakeRate ?? 6.4} z={19}
           x0={rakeX0} ang={-16 + rakeAng} />
-        {occ && <Pier side="l" c="#C4753F" w={128} kind="brick" lit={0.30} />}
+        {occ && <Pier side="l" c="#C4753F" w={128} kind="brick" lit={pierLit ?? 0.30} />}
       </>);
 
     /* ---- S2 · THE GRIND ----------------------------------------------------
@@ -562,7 +567,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         ))}
         <Rake f={f} y={130} h={450} n={7} c="#DCCCF6" o={0.18} rate={rakeRate ?? 7.6} z={19}
           x0={rakeX0} ang={-14 + rakeAng} />
-        {occ && <Pier side="l" c="#333A48" w={124} kind="steel" />}
+        {occ && <Pier side="l" c="#232838" w={148} kind="steel" lit={pierLit ?? 1.2} />}
       </>);
 
     /* ---- S11 · THE CODE LOFT ---------------------------------------------- */
@@ -706,7 +711,7 @@ export const SetFor: React.FC<{ k: SetKey; f: number; lit?: number; t?: number;
         ))}
         <Rake f={f} y={150} h={400} n={6} c="#FFE6BC" o={0.16} rate={rakeRate ?? 5.6} z={19}
           x0={rakeX0} ang={-10 + rakeAng} />
-        {occ && <Pier side="l" c="#6A5A46" kind="rail" />}
+        {occ && <Pier side="l" c="#4A3E30" kind="rail" lit={pierLit ?? 1.2} />}
       </>);
 
     default:

@@ -7,11 +7,11 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
-| 118 | **LOOP** | [✓](video/src/ClaudeLoopReel.tsx) | [3](video/src/data/words_118loop.json) | · | [✓](storyboards/118-loop.md) | code, no log |
-| 117 | **KNOW** | [✓](video/src/ClaudeKnowReel.tsx) | [1](video/src/data/words_117know.json) | · | [✓](storyboards/117-know.md) | code, no log |
-| 116 | **BILL** | [✓](video/src/ClaudeBillReel.tsx) | [1](video/src/data/words_116bill.json) | · | [✓](storyboards/116-bill.md) | code, no log |
+| 118 | **LOOP** | [✓](video/src/ClaudeLoopReel.tsx) | [3](video/src/data/words_118loop.json) | [✓](memory/reels/loop118-factory-log.md) | [✓](storyboards/118-loop.md) | built |
+| 117 | **KNOW** | [✓](video/src/ClaudeKnowReel.tsx) | [1](video/src/data/words_117know.json) | [✓](memory/reels/know117-factory-log.md) | [✓](storyboards/117-know.md) | built |
+| 116 | **BILL** | [✓](video/src/ClaudeBillReel.tsx) | [1](video/src/data/words_116bill.json) | [✓](memory/reels/bill116-factory-log.md) | [✓](storyboards/116-bill.md) | built |
 | 115 | **STAR** | [✓](video/src/ClaudeStarReel.tsx) | [2](video/src/data/words_115star.json) | [✓](memory/reels/star-factory-log.md) | [✓](storyboards/115-star.md) | built |
-| 114 | **SMART** | [✓](video/src/ClaudeSmartReel.tsx) | [1](video/src/data/words_smart.json) | [✓](memory/reels/smart-factory-log.md) | [✓](storyboards/114-smart.md) | built |
+| 114 | **SMART** | [✓](video/src/ClaudeSmartReel.tsx) | [1](video/src/data/words_smart.json) | [✓](memory/reels/smart114-factory-log.md) | [✓](storyboards/114-smart.md) | built |
 | 113 | **GO** | [✓](video/src/ClaudeGoReel.tsx) | [1](video/src/data/words_113go.json) | · | [✓](storyboards/113-go.md) | code, no log |
 | 112 | **SQUAD** | [✓](video/src/ClaudeSquadReel.tsx) | [1](video/src/data/words_squad.json) | [✓](memory/reels/squad-factory-log.md) | [✓](storyboards/112-squad.md) | built |
 | 111 | **LIBRARIES** | [✓](video/src/ClaudeLibrariesReel.tsx) | [1](video/src/data/words_libraries.json) | · | [✓](storyboards/111-libraries.md) | code, no log |
@@ -76,7 +76,6 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **ASK** | [✓](video/src/ClaudeAskReel.tsx) | [1](video/src/data/words_ask.json) | · | · | code, no log |
 | · | **ATTACK** | [✓](video/src/ClaudeAttackReel.tsx) | [1](video/src/data/words_attack.json) | · | · | code, no log |
 | · | **AUTOPILOT** | [✓](video/src/ClaudeAutopilotReel.tsx) | [1](video/src/data/words_autopilot.json) | · | · | code, no log |
-| · | **BILL116** | · | · | [✓](memory/reels/bill116-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **BLUEPRINT** | [✓](video/src/ClaudeBlueprintReel.tsx) | [1](video/src/data/words_blueprint.json) | · | · | code, no log |
 | · | **BOOKS** | [✓](video/src/ClaudeBooksReel.tsx) | [1](video/src/data/words_books.json) | · | · | code, no log |
 | · | **BORIS** | [✓](video/src/ClaudeBorisReel.tsx) | [2](video/src/data/words_boris.json) | [✓](memory/reels/boris-factory-log.md) | · | built |
@@ -119,7 +118,6 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **LEADS** | [✓](video/src/ClaudeLeadsReel.tsx) | [1](video/src/data/words_leads.json) | · | · | code, no log |
 | · | **LEAN** | · | · | [✓](memory/reels/lean-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **LISTICLE** | [✓](video/src/ClaudeListicleReel.tsx) | [1](video/src/data/words_listicle.json) | · | · | code, no log |
-| · | **LOOP118** | · | · | [✓](memory/reels/loop118-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **LOOPS** | [✓](video/src/ClaudeLoopsReel.tsx) | [2](video/src/data/words_loops.json) | · | · | code, no log |
 | · | **LOOPSREAL** | [✓](video/src/ClaudeLoopsRealReel.tsx) | · | · | · | code, no log |
 | · | **LOT** | [✓](video/src/ClaudeLotReel.tsx) | [1](video/src/data/words_autopilot.json) | · | · | code, no log |
@@ -144,7 +142,6 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **ROWBOAT** | [✓](video/src/ClaudeRowboatReel.tsx) | [2](video/src/data/words_rowboat.json) | · | · | code, no log |
 | · | **SHARP** | [✓](video/src/ClaudeSharpReel.tsx) | [1](video/src/data/words_sharp.json) | · | · | code, no log |
 | · | **SITE** | [✓](video/src/ClaudeSiteReel.tsx) | [1](video/src/data/words_site.json) | · | · | code, no log |
-| · | **SMART114** | · | · | [✓](memory/reels/smart114-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **SPEND** | · | · | [✓](memory/reels/spend-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **STACK** | [✓](video/src/ClaudeStackReel.tsx) | [2](video/src/data/words_designstack.json) | · | · | code, no log |
 | · | **SWARM** | [✓](video/src/ClaudeSwarmReel.tsx) | [1](video/src/data/words_swarm.json) | [✓](memory/reels/swarm-factory-log.md) | · | built |

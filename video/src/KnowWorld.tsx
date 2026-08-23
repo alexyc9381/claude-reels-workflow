@@ -437,6 +437,66 @@ export const Band: React.FC<{ t: string; f: number; at?: number; y?: number; c?:
 };
 
 /* =========================================================================
+   ⭐⭐ THE WALL MARK — the Claude emblem CAST INTO A SET, for the empty half
+   of a frame.
+
+   Alex, on the delivered cut: *"for certain scenes where there are blank parts,
+   try to incorporate the Claude logo more throughout."* This is the standing
+   note from reel 95 round 3 arriving again — *"more Claude logos throughout…
+   so our target Claude audience keeps watching but other randoms don't."*
+   ⛔ THE MARK IS AN AUDIENCE FILTER, NOT BRANDING, and a floating sticker is
+   the wrong answer to both halves of that. What belongs in a works is an
+   emblem CAST INTO the wall it hangs on: a recessed plate, a bevel that catches
+   the room's own key light, four fixing bolts, and the mark proud on it.
+
+   ⭐ It also does three jobs at once, which is why it is worth building rather
+   than pasting a logo:
+     1 it FILLS the blank upper third that most of these sets have
+     2 it TURNS, and a slow rotation on a fixture is the cheapest legitimate
+       motion in the frame — it costs the hierarchy nothing because it is
+       furniture, not a subject
+     3 the mark is saturated house clay, which feeds BODY_SAT rather than
+       fighting it
+
+   ⛔ NEVER on a sprite (the mascot's body IS its face) and never in the middle
+   of a claim plate — a mark placed at a plate's centre carves its bright region
+   in two and the frame-0 plate gate sizes the largest remaining piece.
+   ====================================================================== */
+export const WallMark: React.FC<{ x: number; y: number; f: number; s?: number; z?: number;
+  /** the room's own key colour, so the bevel belongs to THIS set */ c?: string;
+  o?: number; spin?: number; plate?: boolean }> =
+  ({ x, y, f, s = 168, z = 16, c = GOLD, o = 1, spin = 0.22, plate = true }) => {
+  const d = s * 1.42;
+  return (
+    <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+      zIndex: z, opacity: o }}>
+      {plate && <>
+        {/* the recess it is set into */}
+        <div style={{ position: "absolute", inset: 0, borderRadius: d * 0.20,
+          background: hexa("#0A0C12", 0.42) }} />
+        {/* the plate, lit from the room's own key */}
+        <div style={{ position: "absolute", inset: d * 0.05, borderRadius: d * 0.17,
+          background: `linear-gradient(158deg, ${hexa(mxh(c, 0.30), 0.30)} 0%, ${hexa(dkh(c, 0.44), 0.26)} 100%)`,
+          border: `${Math.max(3, d * 0.022)}px solid ${hexa(dkh(c, 0.50), 0.44)}` }} />
+        {/* four fixing bolts — what makes it CAST IN rather than stuck on */}
+        {[[0.13, 0.13], [0.87, 0.13], [0.13, 0.87], [0.87, 0.87]].map((q, i) => (
+          <div key={"bx" + i} style={{ position: "absolute", left: `${q[0] * 100}%`,
+            top: `${q[1] * 100}%`, width: d * 0.055, height: d * 0.055,
+            marginLeft: -d * 0.0275, marginTop: -d * 0.0275, borderRadius: "50%",
+            background: hexa(mxh(c, 0.24), 0.34) }} />
+        ))}
+      </>}
+      <div style={{ position: "absolute", left: d / 2 - s * 0.34, top: d / 2 - s * 0.34,
+        width: s * 0.68, height: s * 0.68,
+        transform: `rotate(${(f * spin) % 360}deg)` }}>
+        <Img src={staticFile("logos/claude.svg")}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+      </div>
+    </div>
+  );
+};
+
+/* =========================================================================
    ⭐⭐⭐ THE SECTION CARD — the three tiers, made unmissable.
 
    Alex, on the delivered cut: *"when I say beginner, intermediate, expert it
@@ -483,8 +543,11 @@ export const SectionCard: React.FC<{
     <div style={{ position: "absolute", left: 0, right: 0, top, zIndex: 99, filter: grade,
       transform: `translateX(${x}px) translateY(${shake}px)`, pointerEvents: "none" }}>
       {/* the dark shadow bar behind it, so the card has a thickness */}
-      <div style={{ position: "absolute", left: 30, right: 30, top: 14, height: 214,
-        borderRadius: 20, background: hexa("#0A0C12", 0.55) }} />
+      <div style={{ position: "absolute", left: 14, right: 14, top: 18, height: 226,
+        borderRadius: 22, background: hexa("#06070C", 0.86) }} />
+      {/* and a hard dark rule under it, so the card sits ON something */}
+      <div style={{ position: "absolute", left: 22, right: 22, top: 236, height: 14,
+        borderRadius: 7, background: hexa("#06070C", 0.62) }} />
       <div style={{ position: "absolute", left: 22, right: 22, top: 0, height: 214,
         borderRadius: 20, background: CREAMB, border: `9px solid ${INK}`,
         display: "flex", alignItems: "center", gap: 26, padding: "0 30px", overflow: "hidden" }}>

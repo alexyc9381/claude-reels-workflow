@@ -1,11 +1,11 @@
 {
   "counts": {
     "reels_with_code": 100,
-    "reels_total": 147,
+    "reels_total": 144,
     "factory_logs": 59,
     "storyboards": 61,
     "caption_jsons": 110,
-    "memory_md": 199,
+    "memory_md": 200,
     "creators": 8,
     "packs": 3
   },
@@ -655,15 +655,6 @@
       "captions": []
     },
     {
-      "key": "bill116",
-      "name": "bill116",
-      "number": null,
-      "code": null,
-      "log": "memory/reels/bill116-factory-log.md",
-      "storyboard": null,
-      "captions": []
-    },
-    {
       "key": "boris",
       "name": "boris",
       "number": null,
@@ -887,15 +878,6 @@
       "captions": []
     },
     {
-      "key": "loop118",
-      "name": "loop118",
-      "number": null,
-      "code": null,
-      "log": "memory/reels/loop118-factory-log.md",
-      "storyboard": null,
-      "captions": []
-    },
-    {
       "key": "opps",
       "name": "opps",
       "number": null,
@@ -950,15 +932,6 @@
       "captions": [
         "video/src/data/words_retire.json"
       ]
-    },
-    {
-      "key": "smart114",
-      "name": "smart114",
-      "number": null,
-      "code": null,
-      "log": "memory/reels/smart114-factory-log.md",
-      "storyboard": null,
-      "captions": []
     },
     {
       "key": "spend",
@@ -1595,7 +1568,7 @@
       "name": "smart",
       "number": 114,
       "code": "video/src/ClaudeSmartReel.tsx",
-      "log": "memory/reels/smart-factory-log.md",
+      "log": "memory/reels/smart114-factory-log.md",
       "storyboard": "storyboards/114-smart.md",
       "captions": [
         "video/src/data/words_smart.json"
@@ -1618,7 +1591,7 @@
       "name": "bill",
       "number": 116,
       "code": "video/src/ClaudeBillReel.tsx",
-      "log": null,
+      "log": "memory/reels/bill116-factory-log.md",
       "storyboard": "storyboards/116-bill.md",
       "captions": [
         "video/src/data/words_116bill.json"
@@ -1629,7 +1602,7 @@
       "name": "know",
       "number": 117,
       "code": "video/src/ClaudeKnowReel.tsx",
-      "log": null,
+      "log": "memory/reels/know117-factory-log.md",
       "storyboard": "storyboards/117-know.md",
       "captions": [
         "video/src/data/words_117know.json"
@@ -1640,7 +1613,7 @@
       "name": "loop",
       "number": 118,
       "code": "video/src/ClaudeLoopReel.tsx",
-      "log": null,
+      "log": "memory/reels/loop118-factory-log.md",
       "storyboard": "storyboards/118-loop.md",
       "captions": [
         "video/src/data/words_118loop.json",

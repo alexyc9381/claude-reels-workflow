@@ -80,7 +80,20 @@ def scan_reels():
             m = re.fullmatch(r"(.+?)-factory-log\.md", f)
             if not m or not keep(f"memory/reels/{f}"):
                 continue
-            touch(norm(m.group(1)), log=f"memory/reels/{f}", name=m.group(1))
+            # ⛔ THE DOCUMENTED CONVENTION IS `<name>-factory-log.md`, AND HALF THE
+            # RECENT LOGS ARE WRITTEN `<name><number>-factory-log.md` INSTEAD —
+            # `bill116`, `know117`. `norm` keeps digits, so those keys never
+            # matched their own `Claude<Name>Reel.tsx` and the reels rendered as
+            # "code, no log" while the log sat right there. Silent, and wrong for
+            # every reel that used the numbered form.
+            # ⭐ Fall back to the digit-stripped key ONLY when it already names a
+            # reel that has code — so a genuinely separate log keeps its own row.
+            key = norm(m.group(1))
+            if key not in reels:
+                bare = re.sub(r"\d+$", "", key)
+                if bare and bare in reels and reels[bare].get("code"):
+                    key = bare
+            touch(key, log=f"memory/reels/{f}", name=m.group(1))
 
     # storyboard: storyboards/<number>-<name>.md   (number is the reel's canonical id)
     d = rp("storyboards")

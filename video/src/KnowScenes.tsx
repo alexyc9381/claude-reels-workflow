@@ -4,7 +4,7 @@ import {
   E, OUT, IO, BACK, IN_Q, LIN, hexa, SH, SH_D, rnd, dkh, mxh, squash, rock, shake, idle,
   Scene, Cam, Mark, MarkPlate, MarkCast, Plate, BigNum, Contact, Chip,
   Crew, Hero, Forearm, costumeFor, Ring, Puff, Pool, Steam, Tile, Counter,
-  mono, ui, R, HourRail, Belt, Cable, Ingot, Furnace,
+  mono, ui, R, HourRail, Belt, Cable, Ingot, Furnace, WallMark,
   CLAY, CLAYD, GOLD, GREEN, RED, SKY, PAPER, CREAMB, INK, MUTE, TEAL, STEEL,
   BRASS, ENAM, SODIUM, VIOLET, OXIDE, CYAN, IRON, EMBER, ING, INGH, INGD,
 } from "./KnowWorld";
@@ -260,49 +260,150 @@ export const S1: React.FC<SP> = (pr) =>
 const S1Pour: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = placeFor("pour");
-  const SLAM = 10, RISE = 22, COUNT = 24;
+  /* ⛔⛔ THE PAYOFF BEAT WAS A FLOAT. Alex: *"at 2 seconds when that 10,000
+     hours thing is lifted up, have more interesting animations to it so it
+     retains."* He is right and the cause is nameable: the ingot ROSE — one
+     9-frame tween on a `y` value, with nothing lifting it, nothing resisting
+     it, and 37 frames of hold after. §11: WEIGHT IS DEFORMATION, and there was
+     nothing in the shot to deform.
+
+     ⭐ Rebuilt as a real lift, with the phases OVERLAPPING rather than queued
+     (§13 — N discrete pops has a limit and it is called CHOPPY; overlapping
+     action beats both the stepped move and the long ease):
+
+       f10 SLAM    the pour lands, the deck recoils
+       f13 HOOK    a chain and tongs come down off the gantry
+       f19 GRAB    the tongs close, and NOTHING MOVES YET
+       f21 TAUT    the chains go tight and THE GANTRY BEAM BOWS — this is the
+                   whole weight beat, and it is 6 frames of the thing visibly
+                   refusing to come
+       f27 BREAK   it tears out of the mould: a crack, a shower of scale, the
+                   mould rocks back, a light sweep crosses the hall
+       f27-45      it RISES 210px (1.4x its own height) WHILE ROTATING -24 -> 0,
+                   so the stamp SWINGS INTO VIEW rather than being carried up
+                   already legible. The reveal is the rotation, not the travel.
+       f45+        a damped swing on the chains that never quite settles
+     ⛔ Nothing here lands and stops. */
+  const SLAM = 10, HOOK = 13, GRAB = 19, TAUT = 21, BREAK = 27, TOP = 45;
   const fill = E(f, 0, SLAM + 6, 0.1, 1, OUT);
-  const rise = E(f, RISE, RISE + 9, 0, 1, BACK);
-  /* the whole deck recoils on the slam — the impact costs the SET something */
+  const drop = E(f, HOOK, GRAB, 0, 1, OUT);                 /* tongs coming down */
+  const close = E(f, GRAB, GRAB + 4, 0, 1, OUT);            /* tongs closing */
+  const strain = E(f, TAUT, BREAK, 0, 1, IO) - E(f, BREAK, BREAK + 8, 0, 1, OUT);
+  const lift = E(f, BREAK, TOP, 0, 1, OUT);                 /* the travel */
+  const LIFT_PX = 210;
+  /* the swing never fully settles — a damped oscillation on the chains */
+  const swing = f > BREAK ? Math.sin((f - BREAK) / 4.6) * 7 * Math.exp(-(f - BREAK) / 22) : 0;
   const kick = f >= SLAM ? Math.sin((f - SLAM) / 3.1) * 6 * Math.exp(-(f - SLAM) / 14) : 0;
+  const jolt = f >= BREAK ? Math.sin((f - BREAK) / 2.4) * 9 * Math.exp(-(f - BREAK) / 9) : 0;
   const gy = p.horizon + 150;
+  const iy = gy - 74 - lift * LIFT_PX;
+  const bx = 506 + swing * 2.2;
   return (
     <Scene p={p} slug="" push={[0, dur, pk(v, 1.098)]} vig={0.36}>
-      <Cam z={5} y={kick}>
+      <Cam z={5} y={kick + jolt}>
         <SetFor k="pour" f={f + 40} t={f * 0.8 + 300} rakeRate={7.2 * RAKE_K[v]}
-          rakeX0={RAKE_X0[v]} parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
-        {/* the drum is now a dark mass at the frame edge — same world, new shot */}
+          rakeX0={RAKE_X0[v]} parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} pierLit={1.15} />
         <HourDrum x={-40} y={440} f={f + 40} s={0.74} z={20} crack={1} />
         <Chute x0={-40} y0={452} x1={452} y1={566} w={196} z={26} f={f + 40} />
-
-        {/* the pour, still running, until the slam */}
         {f < SLAM + 14 && <Pour f={f} at={0} x0={-30} y0={446} x1={480} y1={558} n={22} z={40}
           rate={0.085} s={1.1} spread={108} />}
 
-        <Mould x={506} y={gy + 40} f={f} s={1.28} z={34} fill={fill} hot={E(f, SLAM, SLAM + 20, 1, 0.3, OUT)} />
+        {/* ⭐ THE GANTRY BEAM, AND IT BOWS. A loaded beam never sits straight —
+            this is the only thing in the shot that says the ingot is heavy, and
+            it says it BEFORE the ingot moves. */}
+        <div style={{ position: "absolute", left: -60, right: -60, top: 150, height: 34,
+          zIndex: 22, borderRadius: 6,
+          transform: `translateY(${strain * 13}px)`,
+          background: `linear-gradient(180deg, ${mxh(IRON, 0.26)} 0%, ${dkh(IRON, 0.56)} 100%)` }} />
+        <div style={{ position: "absolute", left: 330, width: 360, top: 176,
+          height: 16 + strain * 12, zIndex: 21, borderRadius: "0 0 200px 200px",
+          background: dkh(IRON, 0.60) }} />
+        {/* the two chains, lengthening as the tongs go down and shortening on
+            the lift, and they lean with the swing */}
+        {[-52, 52].map((ox, i) => {
+          const top = 176 + strain * 12;
+          const bot = iy - 84 - (1 - drop) * 260;
+          return (
+            <div key={"ch" + i} style={{ position: "absolute", left: 506 + ox - 9, top,
+              width: 18, height: Math.max(0, bot - top), zIndex: 60,
+              transformOrigin: "50% 0%", transform: `rotate(${swing * 0.9}deg)`,
+              background: `repeating-linear-gradient(180deg, ${dkh(IRON, 0.26)} 0px, ${dkh(IRON, 0.26)} 11px, ${dkh(IRON, 0.62)} 11px, ${dkh(IRON, 0.62)} 22px)` }} />
+          );
+        })}
+        {/* the tongs — two arms that CLOSE on it, so something is doing the lifting */}
+        {[-1, 1].map((sgn) => (
+          <div key={"tg" + sgn} style={{ position: "absolute",
+            left: bx + sgn * (84 - close * 26) - 13, top: iy - 84 - (1 - drop) * 260,
+            width: 26, height: 84, zIndex: 66, borderRadius: 8,
+            transformOrigin: "50% 0%",
+            transform: `rotate(${sgn * (18 - close * 15) + swing * 0.9}deg)`,
+            background: `linear-gradient(180deg, ${mxh(IRON, 0.20)} 0%, ${dkh(IRON, 0.52)} 100%)` }}>
+            <div style={{ position: "absolute", bottom: -6, left: sgn > 0 ? -14 : 0, width: 40,
+              height: 22, borderRadius: 6, background: dkh(IRON, 0.58) }} />
+          </div>
+        ))}
 
-        {/* the overflow — an arrival that costs something, thrown wide */}
+        <Mould x={506} y={gy + 40} f={f} s={1.28} z={34} fill={fill}
+          hot={E(f, SLAM, SLAM + 20, 1, 0.3, OUT)} />
+        {/* the mould ROCKS when the ingot tears out of it */}
+        <div style={{ position: "absolute", left: 0, right: 0, top: 0, bottom: 0, zIndex: 35,
+          pointerEvents: "none",
+          transform: `rotate(${f > BREAK ? Math.sin((f - BREAK) / 3.4) * 2.4 * Math.exp(-(f - BREAK) / 13) : 0}deg)`,
+          transformOrigin: `506px ${gy + 40}px` }} />
+
         <Puff x={506} y={gy - 40} f={f} at={SLAM} c="#FFE0A4" n={16} s={1.5} z={62} spread={1.5} />
         <Ring x={506} y={gy - 30} f={f} at={SLAM} r={300} z={60} c={INGH} w={11} />
-        <Ring x={506} y={gy - 30} f={f} at={SLAM + 5} r={220} z={60} c={EMBER} w={7} />
 
-        {/* ⭐ THE HERO ARTIFACT, BORN. 40% of panel height, and it rises 4.8x
-            its own height so the movement is a DISTANCE, not a state change. */}
-        <Ingot x={506} y={gy - 74 - rise * 262} s={3.3} z={72} stamp={R.hours}
-          hot={E(f, RISE, RISE + 34, 1, 0.25, OUT)} rot={-4 + rise * 4} />
-        <Steam x={506} y={gy - 350} f={f} at={RISE + 6} n={8} s={1.7} z={70} c="#FFE9C8" />
+        {/* ⭐ THE BREAK — it does not simply leave the mould, it TEARS OUT.
+            A crack ring, a wide shower of scale, and a light sweep across the
+            whole hall, all inside four frames. */}
+        <Ring x={506} y={gy - 56} f={f} at={BREAK} r={420} z={64} c={INGH} w={13} />
+        <Ring x={506} y={gy - 56} f={f} at={BREAK + 4} r={300} z={64} c={EMBER} w={8} />
+        <Puff x={506} y={gy - 52} f={f} at={BREAK} c="#FFD79A" n={20} s={1.8} z={63} spread={1.9} />
+        {f >= BREAK && f < BREAK + 16 && (
+          <div style={{ position: "absolute", left: -200 + E(f, BREAK, BREAK + 14, 0, 1600, OUT),
+            top: 0, bottom: 0, width: 240, zIndex: 58, pointerEvents: "none",
+            transform: "skewX(-14deg)",
+            background: `linear-gradient(90deg, ${hexa(INGH, 0)} 0%, ${hexa(INGH, 0.34)} 50%, ${hexa(INGH, 0)} 100%)` }} />
+        )}
 
-        {/* the crew flinch on the slam — the impact reaches the CAST */}
+        {/* ⭐ THE SCALE. Hot metal sheds it, and it is the emitter §11 asks for
+            on the part that is NOT doing the acting — 18 flakes at 14-30px, over
+            the downsample floor, falling for the whole lift. */}
+        {f >= BREAK && Array.from({ length: 18 }, (_, i) => {
+          const at = BREAK + (i % 6) * 3;
+          const lf = f - at;
+          if (lf < 0 || lf > 34) return null;
+          const sz = 14 + rnd(i, 5) * 16;
+          const dx = (rnd(i, 3) - 0.5) * 210;
+          return (
+            <div key={"sc" + i} style={{ position: "absolute",
+              left: bx + dx - sz / 2, top: iy + 40 + lf * lf * 0.42, width: sz, height: sz * 0.62,
+              zIndex: 68, borderRadius: 3, opacity: Math.max(0, 1 - lf / 32),
+              transform: `rotate(${lf * (8 + i % 5)}deg)`,
+              background: lf < 10 ? INGH : dkh("#6A4A28", 0.2 + lf * 0.012) }} />
+          );
+        })}
+
+        {/* ⭐⭐ THE ARTIFACT. It rises 210px — 1.4x its own height — WHILE rotating
+            -24 -> 0, so the stamp swings into view instead of arriving already
+            readable. The reveal is the ROTATION; the travel is just how it gets
+            here. And it never stops: the swing damps but does not settle. */}
+        <Ingot x={bx} y={iy} s={3.3} z={72} stamp={R.hours}
+          hot={E(f, BREAK, BREAK + 40, 1, 0.25, OUT)}
+          rot={-24 + lift * 24 + swing * 0.5 - strain * 3} />
+        <Steam x={bx} y={iy - 70} f={f} at={BREAK + 6} n={8} s={1.7} z={70} c="#FFE9C8" />
+
         <Crew f={f} x={150} y={gy + 46} i={2} size={186} z={66} at={0} loop={3} />
         <Crew f={f} x={886} y={gy + 52} i={7} size={182} z={66} at={0} loop={2} />
         <Hero f={f} x={712} y={gy + 40} size={244} z={68} costume={{ constr: 1 }} act={2}
-          ph={1.2} shock={E(f, SLAM, SLAM + 4, 0, 1, OUT) - E(f, SLAM + 6, SLAM + 22, 0, 1, OUT)}
-          cheer={E(f, RISE + 4, RISE + 12, 0, 1, OUT)} />
+          ph={1.2}
+          shock={E(f, SLAM, SLAM + 4, 0, 1, OUT) - E(f, SLAM + 6, SLAM + 22, 0, 1, OUT)}
+          strain={strain * 0.5}
+          cheer={E(f, BREAK + 6, BREAK + 14, 0, 1, OUT)} />
 
-        {/* ⛔ FOUR DISCRETE STEPS, NEVER A TWEEN. §1: N pops beat a long ramp. */}
-        <Counter x={92} y={150} f={f} at={COUNT} to="10,000" s={1.15} z={86} label="HOURS BANKED"
-          c="#2A2118" dur={22} />
-
+        <Counter x={92} y={150} f={f} at={BREAK} to="10,000" s={1.15} z={86} label="HOURS BANKED"
+          c="#2A2118" dur={20} />
         <MarkCast x={862} y={128} s={92} z={90} f={f} spin={0.5} />
         <Contact x={430} y={gy + 44} w={168} z={30} o={0.34} />
       </Cam>
@@ -614,11 +715,12 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
   const reach = E(f, MISS - 8, MISS, 0, 1, OUT) - E(f, MISS, MISS + 10, 0, 1, IN_Q);
   const gy = p.horizon + 120;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.60}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.64}>
       <Cam z={5}>
         <SetFor k="grind" f={f} t={f * 0.5} rakeRate={4.2 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
         {/* THE VILLAIN, full panel and turning */}
+        <WallMark x={862} y={214} f={f} s={132} c="#9DB4C4" z={17} o={0.92} />
         <Grind x={470} y={gy + 60} f={f} s={0.94} z={36} rate={2.1} n={5} lit={0.7} />
 
         {/* the chain and the hatch it comes through — the ingot has a SOURCE
@@ -638,7 +740,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
           stern={E(f, MISS + 2, MISS + 10, 0, 1, OUT)} />
 
         <Spine f={f} lit={RAIL.S2} at={MISS + 4} />
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -675,6 +777,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
 
         {/* THE HIGH-TIER MODEL: the largest furnace in the reel, badged. */}
+        <WallMark x={716} y={236} f={f} s={140} c={SODIUM} z={17} o={0.90} />
         <Furnace x={250} y={gy + 20} f={f} w={352} h={412} c="#C0563E" name="OPUS 5"
           z={42} open={E(f, FEED - 6, FEED + 2, 0, 1, OUT)} roar={1.6} job="HIGH TIER" />
 
@@ -729,7 +832,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
 
         <Belt y={gy + 84} f={f} rate={3.4} z={24} h={24} />
         <Spine f={f} lit={RAIL.S3} at={0} />
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -754,7 +857,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
   const gy = p.horizon + 150;
   const X = [106, 292, 546, 812];
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.62}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.66}>
       <Cam z={5}>
         <SetFor k="line" f={f} t={f * 0.8} rakeRate={6.0 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -764,6 +867,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
             open={m.key === "sonnet" ? open : 0} />
         ))}
         {/* the belt in front — the background process for the whole section */}
+        <WallMark x={506} y={196} f={f} s={128} c={SODIUM} z={17} o={0.88} />
         <Belt y={gy + 26} f={f} rate={5.0} z={52} h={30} />
         {/* finished parts arriving on it, one every 6 frames, and NOT stopping */}
         {Array.from({ length: 8 }, (_, i) => {
@@ -807,10 +911,11 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
   const top = E(f, TOPPLE, TOPPLE + 12, 0, 1, IN_Q);
   const gy = p.horizon + 150;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.118)]} vig={0.62}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.118)]} vig={0.66}>
       <Cam z={5}>
         <SetFor k="fast" f={f} t={f * 1.4} rakeRate={11.5 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
+        <WallMark x={790} y={214} f={f} s={132} c="#8FD6EE" z={17} o={0.88} />
         <Furnace x={300} y={gy} f={f} w={228} h={286} c="#5FB6D6" name="HAIKU 4.5" z={42}
           open={1} roar={3} job="FASTEST" />
         {/* the ejects — 14 of them in 34 frames, which IS the depiction of fast */}
@@ -880,6 +985,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
             clocks, out of phase: 2 x (225 x 156) of large travelling contrast,
             for free, from geometry that was already on screen. §5's rule —
             ANIMATE WHAT IS ALREADY THERE BEFORE ADDING ANYTHING ELSE. */}
+        <WallMark x={506} y={190} f={f} s={126} c={VIOLET} z={17} o={0.88} />
         <Furnace x={216} y={gy} f={f} w={296} h={340} c="#C0563E" name="OPUS 5" z={40}
           open={0.5 + Math.sin(f / 11) * 0.5} roar={0.7} />
         <Furnace x={800} y={gy} f={f + 30} w={292} h={326} c={VIOLET} name="FABLE 5" z={40}
@@ -957,7 +1063,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
         <Crew f={f} x={880} y={gy + 56} i={11} size={164} z={62} at={0} loop={2} />
         <Belt y={gy + 40} f={f} rate={3.0} z={30} h={26} c="#4A3A46" />
         <Spine f={f} lit={RAIL.S6} at={OUT_ + 6} />
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -977,11 +1083,15 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
   const p = placeFor("vault");
   const gy = p.horizon + 140;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.52}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.56}>
       <Cam z={5}>
         <SetFor k="vault" f={f} t={f * 0.6} rakeRate={5.4 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
         {/* ⭐ THE BIGGEST BRIGHT MASS SINCE THE HOOK — 45 turning spools */}
+        {/* ⭐ the vault's wall IS the memory, so the emblem goes ON it rather than
+            in a gap — no plate, just the mark proud on the spools, which is what
+            an emblem cast into a working wall actually looks like */}
+        <WallMark x={506} y={318} f={f} s={186} z={30} o={0.80} plate={false} />
         <SpoolWall x={56} y={172} w={900} h={318} f={f} z={26} cols={9} rows={5} lit={1} />
         {/* the three feed rails, and the spools running BOTH ways on them */}
         {[0, 1, 2].map((i) => (
@@ -1071,7 +1181,7 @@ const S8a: React.FC<SP> = ({ v, dur }) => {
   const kick = f >= SHUT + 6 ? Math.sin((f - SHUT - 6) / 2.8) * 9 * Math.exp(-(f - SHUT - 6) / 13) : 0;
   const gy = p.horizon + 140;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.58}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.070)]} vig={0.62}>
       <Cam z={5} y={kick}>
         <SetFor k="vault" f={f} t={f * 0.6} rakeRate={5.0 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} lit={0.34 + vlit * 0.66} />
@@ -1185,7 +1295,7 @@ const S8a: React.FC<SP> = ({ v, dur }) => {
         ))}
         <Puff x={506} y={740} f={f} at={SHUT + 6} c="#7E8E92" n={22} s={2.0} z={82} spread={2.0} />
         <Ring x={506} y={734} f={f} at={SHUT + 6} r={520} z={81} c="#B8C6CA" w={12} />
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -1259,7 +1369,7 @@ const S8b: React.FC<SP & { cut: number }> = ({ v, dur, cut }) => {
             <Puff x={506} y={400} f={f} at={at} c="#8A9A9E" n={13} s={1.4} z={84} />
           </React.Fragment>
         ))}
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -1285,7 +1395,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
   const ride = E(f, RIDE, dur, 0, 1, LIN);
   const gy = p.horizon + 130;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.080)]} vig={0.64}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.080)]} vig={0.68}>
       <Cam z={5}>
         <SetFor k="street" f={f} t={f * 1.1} rakeRate={7.2 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1497,7 +1607,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
         <Crew f={f} x={946} y={gy + 46} i={4} size={158} z={60} at={0} loop={3} />
 
         <Spine f={f} lit={RAIL.S10} at={0} />
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -1521,7 +1631,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
   const drop = E(f, DROP, DROP + 12, 0, 1, IN_Q);
   const gy = p.horizon + 132;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.078)]} vig={0.64}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.078)]} vig={0.68}>
       <Cam z={5}>
         <SetFor k="loft" f={f} t={f * 0.7} rakeRate={6.4 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1544,6 +1654,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
             </div>
           );
         })}
+        <WallMark x={402} y={214} f={f} s={138} c="#FFE0B0" z={19} o={0.92} />
         <CodeRig x={246} y={gy - 18} w={432} h={318} f={f} z={34} hot={drop} />
         {/* the bench lamp over the rig — the practical that lights this loft */}
         <div style={{ position: "absolute", left: 196, top: 118, width: 108, height: 26,
@@ -1606,11 +1717,12 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
   const stop = E(f, SEIZE, SEIZE + 18, 0, 1, OUT);
   const gy = p.horizon + 128;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.100)]} vig={0.6}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.100)]} vig={0.64}>
       <Cam z={5}>
         <SetFor k="looms" f={f} t={f * 1.0} rakeRate={8.2 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
 
+        <WallMark x={506} y={186} f={f} s={128} c={GOLD} z={17} o={0.88} />
         {/* SIX LINES, STARTING TOGETHER on a 3-frame stagger */}
         {Array.from({ length: 6 }, (_, i) => (
           <Loom key={"lm" + i} x={70 + i * 152} y={gy - 26} f={f} at={LEVER + i * 3} s={0.86}
@@ -1671,7 +1783,7 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
         <Crew f={f} x={106} y={gy + 50} i={10} size={170} z={62} at={0} loop={1} />
 
         <Spine f={f} lit={RAIL.S12} at={0} />
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -1694,7 +1806,7 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
   const filled = A.filter((a) => f >= a + 7).length;
   const gy = p.horizon + 130;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.072)]} vig={0.62}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.072)]} vig={0.66}>
       <Cam z={5}>
         <SetFor k="socket" f={f} t={f * 1.2} rakeRate={7.8 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1720,6 +1832,7 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
             </div>
           );
         })}
+        <WallMark x={506} y={196} f={f} s={124} c={CYAN} z={17} o={0.86} />
         <SocketWall x={40} y={gy - 60} w={932} h={286} f={f} z={28} n={8} filled={filled} />
 
         {["UI", "SCRAPE", "MKT", "MCP"].map((lb, i) => (
@@ -1743,7 +1856,7 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
         <Crew f={f} x={626} y={gy + 70} i={9} size={176} z={66} at={0} loop={3} />
         <Crew f={f} x={864} y={gy + 70} i={11} size={172} z={66} at={0} loop={0} />
         <Spine f={f} lit={RAIL.S13} at={0} />
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -1768,7 +1881,7 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
   const mkt = E(f, MKT, dur - 8, 0, 1, LIN);
   const gy = p.horizon + 130;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.088)]} vig={0.62}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.088)]} vig={0.66}>
       <Cam z={5}>
         <SetFor k="socket" f={f + 60} t={f * 1.2 + 300} rakeRate={7.4 * RAKE_K[v]}
           rakeX0={RAKE_X0[v]} parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
@@ -1794,6 +1907,7 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
             </div>
           );
         })}
+        <WallMark x={506} y={186} f={f} s={124} c={CYAN} z={17} o={0.86} />
         <SocketWall x={20} y={gy - 88} w={972} h={230} f={f} z={28} n={8}
           filled={3 + (f >= MORE ? Math.min(4, Math.floor((f - MORE) / 5) + 1) : 0)} />
         {[0, 1, 2].map((i) => (
@@ -1885,7 +1999,7 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
         })}
 
         <Spine f={f} lit={RAIL.S14} at={0} />
-        <Mark x={62} y={112} s={62} z={90} />
+        <Mark x={54} y={104} s={84} z={90} />
       </Cam>
     </Scene>
   );
@@ -1912,7 +2026,7 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
   const ret = E(f, BACK_, BACK_ + 10, 0, 1, BACK);
   const gy = p.horizon + 150;
   return (
-    <Scene p={p} slug="" push={[0, dur, pk(v, 1.062)]} vig={0.46}>
+    <Scene p={p} slug="" push={[0, dur, pk(v, 1.062)]} vig={0.5}>
       <Cam z={5}>
         <SetFor k="dawn" f={f} t={f * 0.5} rakeRate={5.6 * RAKE_K[v]} rakeX0={RAKE_X0[v]}
           parX={PAR_X[v]} rakeAng={RAKE_ANG[v]} />
