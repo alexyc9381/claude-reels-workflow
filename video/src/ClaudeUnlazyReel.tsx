@@ -355,18 +355,28 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
    ([[feedback_headers_state_the_claim]]) — nothing below says "sign-off line".
    ====================================================================== */
 const BANDS = [
-  { from: L.S0,  big: 'ITS "DONE" IS HOT AIR', hot: "MAKE IT SHOW THE OUTPUT" },
-  { from: L.S1,  big: "ANTHROPIC TESTS FOR IT", hot: "ITS OWN MAKERS KNOW" },
-  { from: L.S2,  big: "RINGS DONE, RUNS NOTHING", hot: "YOU ARE NOT IMAGINING IT" },
-  { from: L.S3,  big: "ONE FREE SKILL FIXES IT", hot: "MIT · 973 STARS" },
-  { from: L.S4,  big: "NOW IT CANNOT GET PAST", hot: "IT HAS TO PROVE IT" },
-  { from: L.S5,  big: "EVERY CLAIM GETS A CHECK", hot: "AND IT HAS NOT RUN YET" },
-  { from: L.S6,  big: "IT HAS TO RUN THE CHECK", hot: "AND SHOW YOU THE OUTPUT" },
-  { from: L.S7,  big: "THERE IS A CATCH",       hot: "AND IT'S THE SPEED" },
-  { from: L.S8,  big: "IT PROVES ONE AT A TIME", hot: "SO THE QUEUE BACKS UP" },
-  { from: L.S9,  big: "TWEAK IT TO FAN OUT",    hot: "TEN LANES, SAME PROOF" },
-  { from: L.S10, big: "COMMENT “UNLAZY”",       hot: "AND I'LL SEND IT OVER" },
+  /* ⭐ ONE STANDING HEADER, on Alex's call: *"the header is not good.... like the
+     header should be 'MAKE CLAUDE 10X BETTER WITH ONE PROMPT' for these revised
+     videos here."* This replaces the eleven per-scene claim bands that were here
+     before — kept in the block below in case the per-scene version is wanted
+     back, because reel 108's note was the opposite instruction (*"the headers
+     don't change"*) and both have been asked for on different reels. */
+  { from: L.S0, big: "MAKE CLAUDE 10X BETTER", hot: "WITH ONE PROMPT" },
 ];
+
+/* the per-scene bands this replaced, verbatim, so restoring them is one edit:
+     S0  ITS "DONE" IS HOT AIR    / MAKE IT SHOW THE OUTPUT
+     S1  ANTHROPIC TESTS FOR IT   / ITS OWN MAKERS KNOW
+     S2  RINGS DONE, RUNS NOTHING / YOU ARE NOT IMAGINING IT
+     S3  ONE FREE SKILL FIXES IT  / MIT · 973 STARS
+     S4  NOW IT CANNOT GET PAST   / IT HAS TO PROVE IT
+     S5  EVERY CLAIM GETS A CHECK / AND IT HAS NOT RUN YET
+     S6  IT HAS TO RUN THE CHECK  / AND SHOW YOU THE OUTPUT
+     S7  THERE IS A CATCH         / AND IT'S THE SPEED
+     S8  IT PROVES ONE AT A TIME  / SO THE QUEUE BACKS UP
+     S9  TWEAK IT TO FAN OUT      / TEN LANES, SAME PROOF
+     S10 COMMENT "UNLAZY"         / AND I'LL SEND IT OVER                     */
+
 
 const SectionBand: React.FC<{ f: number }> = ({ f }) => {
   let b = BANDS[0];

@@ -172,6 +172,12 @@ const SFX: Cue[] = [
      at 0.90s and the branding iron at 2.03s. A third at 3.53s was tied to no
      action; it just made the animal noisy. One at 27.9s closes the reel. */
   { at: S(L.S1 + 40), src: "mech_clank.wav",   v: LEVELS.SFX_MID,     dur: 0.18, rate: 0.86 },
+  /* ⭐ the NAME branded onto the wall. ⛔ NO SIZZLE LAYER (Alex: *"i dont like
+     the sizzle sound at 4 seconds ish"*). Pairing `paper_burn` under the stamp
+     matched the hook's iron, but the hook's version is under a HOT PRESS you
+     watch make contact; here the burn is already on the wall by the time the
+     hiss arrives, so it read as noise rather than as the event. The hit alone. */
+  { at: S(L.S1 + 44), src: "stamp_press.wav",  v: LEVELS.SFX_HERO * db(2), dur: 0.34, rate: 0.92 },
 
   /* ---- S2 · THE PULL FLOOR (5). One start, one drag texture under all three
      lanes (⛔ NOT one cue per lane — three identical drags is a metronome),

@@ -59,22 +59,27 @@ export const PAR_X: Record<Variant, number> = { hall: 0, amber: -48, steel: 44 }
 export const WALL_SEED: Record<Variant, number> = { hall: 71, amber: 137, steel: 211 };
 
 export const CAM: Record<Variant, { dx: number; dy: number; s: number; rot: number }> = {
-  hall:  { dx: 0, dy: 14, s: 1.036, rot: -0.5 },
-    /* ⛔ dy:-52 shifted the WORLD up, so amber's frame 0 revealed a strip of the
-     hook's dark foreground drums that hall never shows, and HOOK_LUMA came in
-     at 134.9 against the 140 law — the third time this cut has failed that gate
-     ([[unlazy120-reel]]). The spread is paid back on dx and rot, which cost the
-     luma nothing. */
-  amber: { dx: -112, dy: -6, s: 1.162, rot: 2.6 },
-  steel: { dx: 72, dy: 34, s: 1.118, rot: -2.2 },
+  /* ⛔⛔ THE THREE CUTS WERE A GRADE AND A ZOOM. `dhash_cuts` passed at mean
+     26.2 / MIN 16 and Alex still asked whether they were actually different —
+     correctly. hall 1.036 / amber 1.162 / steel 1.118 is a 12% spread, which is
+     three copies of one shot, not three edits. dHash reads CROP GEOMETRY, so a
+     small camera nudge satisfies it without a viewer seeing anything: exactly
+     [[feedback_green_gate_wrong_way]].
+
+     ⭐ THEY NOW HAVE THREE SHOT SIZES AND THREE FRAMINGS:
+        hall   1.04  level, centred      — the wide
+        steel  1.14  tilted left-down    — the medium, favouring the set
+        amber  1.25  tilted right-up     — the tight, favouring the workers
+     ⛔ The window is `506 ± 486/(push·s)` SHIFTED BY dx, so the tight cut is now
+     the binding constraint: the intersection across all three is scene x
+     229-833. Every hero placement was re-checked against it. */
+  hall:  { dx: 0,   dy: 14,  s: 1.036, rot: -0.5 },
+  steel: { dx: 96,  dy: 36,  s: 1.140, rot: -3.0 },
+  amber: { dx: -96, dy: -10, s: 1.250, rot: 2.8 },
 };
 
-/** ⛔⛔⛔ HUE IS NOT A VARIANT LEVER (reel 115): `hue-rotate`/`saturate` swings
-    ship an off-brand mascot. These move CONTRAST only, and steel takes its
-    separation from CONTRAST rather than brightness, because raising brightness
-    lifts the black point (ANIMATION-QUALITY §8). */
 export const GRADE: Record<Variant, string> = {
-  hall:  "contrast(1.025) saturate(1.24) brightness(1.000)",
+  hall:  "contrast(1.075) saturate(1.26) brightness(1.014)",
   /* ⛔ brightness(0.968) took amber's frame 0 to 136.9 against the >=140 bar.
      The standing rule already said it: take the separation from CONTRAST, never
      from brightness, in EITHER direction. */
@@ -84,8 +89,11 @@ export const GRADE: Record<Variant, string> = {
      costing the frame-0 mean. This is the standing rule, applied the other way
      round from usual: take it from contrast, never brightness, in EITHER
      direction ([[unlazy120-reel]]). */
-  amber: "contrast(1.115) saturate(1.46) brightness(1.080)",
-  steel: "contrast(1.205) saturate(1.22) brightness(1.006)",
+  /* ⛔ saturate(1.46) was pushing the mascot off-brand, which is the standing
+     ban ([[feedback_trial_cut_variants]]) — every Claude is the one house clay.
+     Pulled back to 1.30 and the separation taken from contrast instead. */
+  amber: "contrast(1.150) saturate(1.30) brightness(1.086)",
+  steel: "contrast(1.245) saturate(1.18) brightness(1.014)",
 };
 
 const ROW_Y = (i: number) => (i % 2 ? 566 : 716);
@@ -1128,12 +1136,12 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
       <Counter x={742} y={168} v={ledger * R.gates} of={R.gates} s={0.94} z={90} c={GOLD} />
 
       {/* the hero throws the lever that releases the other nine */}
-      <Hero f={f} x={930} y={748} size={196} z={58} costume={{ suit: 1 }}
+      <Hero f={f} x={886} y={748} size={196} z={58} costume={{ suit: 1 }}
         drive={Math.max(0, lever) * 0.30} act={2} ph={0.3} cheer={f > 120 ? 1 : 0} />
-      <div style={{ position: "absolute", left: 966, top: 514, width: 24, height: 118, zIndex: 54,
+      <div style={{ position: "absolute", left: 922, top: 514, width: 24, height: 118, zIndex: 54,
         transformOrigin: "50% 100%", transform: `rotate(${-30 + Math.max(0, lever) * 60}deg)`,
         background: `linear-gradient(90deg, ${dkh(BRASS, 0.50)} 0%, ${mxh(BRASS, 0.14)} 44%, ${dkh(BRASS, 0.56)} 100%)` }} />
-      <Ring x={976} y={510} f={f} at={LEV + 8} c={SODIUM} s={1.0} z={76} dur={16} />
+      <Ring x={932} y={510} f={f} at={LEV + 8} c={SODIUM} s={1.0} z={76} dur={16} />
       <Mark x={62} y={168} s={104} z={90} />
       <Chip t="TEN LANES" y={152} x={400} c={hexa(VERD, 0.94)} fg={PAPER} />
     </Scene>

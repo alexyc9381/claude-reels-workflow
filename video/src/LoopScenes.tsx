@@ -1,5 +1,5 @@
 import React from "react";
-import { Img, staticFile, useCurrentFrame } from "remotion";
+import { Img, staticFile, useCurrentFrame, Sequence, OffthreadVideo } from "remotion";
 import { MONO } from "./SlopKit";
 import {
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
@@ -7,7 +7,7 @@ import {
   R, PLACES, asPlace, vivid, mono, ui, Rake, Ring, Puff, Pool, Steam,
   Crew, Hero, Forearm, costumeFor, squash, lerpHex,
   CLAY, CLAYD, GOLD, GREEN, RED, PAPER, CREAMB, INK, MUTE, TEAL, STEEL,
-  BRASS, SODIUM, VIOLET, EMBER, OXIDE, SLATE,
+  BRASS, SODIUM, VIOLET, EMBER, OXIDE, SLATE, SKY,
 } from "./LoopWorld";
 import {
   PromptSlab, Lever, ReturnRail, Carriage, BuildRig, BrowserWin, AppWin, GameView,
@@ -449,86 +449,97 @@ const FlapCell: React.FC<{ ch: string; f: number; at: number; s?: number }> =
 export const S2: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("gallery");
-  const pull = E(f, 6, 12, 0, 1, IN_Q) - E(f, 14, 26, 0, 1, OUT);
+  /* ⭐⭐ REAL FOOTAGE OF THE PERSON BEING QUOTED. Alex: *"for 'even the creator
+     of claude code' show a video of the creator of claude code like speaking on
+     stage."* Source: Y Combinator, "Boris Cherny: We Cut 80% of Claude Code's
+     Prompt", the fireside chat at ~1:47. Two beats cut from it, both MUTED:
+     `boris_wide.mp4` (the stage two-shot, so you read that it IS a stage) and
+     `boris_tight.mp4` (him talking).
+
+     ⛔ REAL FOOTAGE IS NOT AUTOMATICALLY MOTION — a clip HELD for a sentence
+     measured 3.23 with a 60-frame dead run. So it gets an EDIT: a hard cut from
+     wide to tight on the measured onset of "creator" (6.57s = local f15), and a
+     second scale STEP at f56 as "the future" lands. Never a tween.
+     ⛔ AND IT IS MUTED. The clips carry their own audio and the VO owns this
+     track; `-an` at extract time, `muted` here, belt and braces.
+
+     ⭐ THE QUOTE SURVIVES AS A LOWER THIRD. The split-flap board that used to
+     carry it was the better-reading half of the old scene, but it cannot share
+     the frame with footage. A broadcast lower third does the same job in a
+     quarter of the space and is a shape every viewer already knows. */
+  const CUT = 15;
+  const punch = f >= 56 ? 1.07 : 1;
+  const SX = 148, SY = 214, SW = 716, SH = 403;
+  const lower = E(f, 41, 52, 0, 1, OUT);
   const words = R.cherny.quote.split(" ");
-  let idx = 0;
-  const lamp = E(f, 56, 68, 0, 1, OUT);            /* the board's lamp bar, on the lock */
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.058]} vig={0.60} glow={hexa(p.key, 0.20)}>
+    <Scene p={p} slug="" push={[0, dur, 1.058]} vig={0.62} glow={hexa(p.key, 0.22)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="duct" bands={3} kind="shutter"
-        rake={0.328} rakeX={RAKE_X0[v]} rakeRate={3.73 * RAKE_K[v]}
-        lamp={{ x: 540, y: 300, r: 400 }} />
+        rake={0.162} rakeX={RAKE_X0[v]} rakeRate={3.71 * RAKE_K[v]}
+        lamp={{ x: 506, y: 300, r: 400 }} />
       <ReturnRail y={120} f={f} rate={6.07 * RAKE_K[v]} z={26} c={STEEL} hangers={false} />
 
-      {/* ⭐ THE BOARD IS THE ONLY LIGHT IN THE ROOM, and it fills it on the lock */}
-      <div style={{ position: "absolute", left: 92, top: 168, width: 836, height: 312,
-        zIndex: 44, borderRadius: 12, boxShadow: SH_D, overflow: "hidden",
-        background: `linear-gradient(176deg, #232A34 0%, #131820 100%)`,
-        border: `8px solid ${dkh(SLATE, 0.58)}` }}>
-        {/* the lamp bar across the top of the housing */}
-        <div style={{ position: "absolute", left: 12, top: 10, right: 12, height: 12,
-          borderRadius: 6, background: lerpHex("#2A3038", "#F2E0B4", lamp) }} />
-        {/* the flap rows */}
-        <div style={{ position: "absolute", left: 26, top: 44, right: 26,
-          display: "flex", flexWrap: "wrap", gap: 6, rowGap: 12 }}>
-          {/* EACH WORD IS ITS OWN NOWRAP GROUP. Flattening the letters into one
-              wrapping row split the quote as "MY JOB IS TO WRIT / E LOOPS",
-              which is a legibility defect on the one scene whose entire job is
-              to be read. */}
-          {words.map((wd, wi) => (
-            <div key={"wd" + wi} style={{ display: "flex", gap: 6, marginRight: 20,
-              flexWrap: "nowrap" }}>
-              {wd.split("").map((ch, ci) => {
-                const at = 14 + idx * 1.5; idx++;
-                return <FlapCell key={"fc" + wi + ci} ch={ch} f={f} at={at} s={1.50} />;
-              })}
-            </div>
-          ))}
+      {/* the wall-mounted display: a real bezel, a mount arm and a status lamp */}
+      <div style={{ position: "absolute", left: SX - 18, top: SY - 18, width: SW + 36,
+        height: SH + 36, zIndex: 42, borderRadius: 16, boxShadow: SH_D,
+        background: `linear-gradient(172deg, #3A414C 0%, #1C2027 62%, #12151A 100%)`,
+        border: `6px solid #0C0E12` }} />
+      <div style={{ position: "absolute", left: SX + SW / 2 - 34, top: SY + SH + 18, width: 68,
+        height: 54, zIndex: 41, background: dkh(SLATE, 0.46) }} />
+      <div style={{ position: "absolute", left: SX + SW - 44, top: SY + SH + 2, width: 14,
+        height: 14, borderRadius: 14, zIndex: 44, background: GREEN }} />
+
+      {/* ⭐ THE FOOTAGE, inside the frame, cut on the word */}
+      <div style={{ position: "absolute", left: SX, top: SY, width: SW, height: SH, zIndex: 43,
+        overflow: "hidden", borderRadius: 6 }}>
+        <div style={{ position: "absolute", inset: 0, transform: `scale(${punch})`,
+          transformOrigin: "50% 42%" }}>
+          <Sequence from={0} durationInFrames={CUT}>
+            <OffthreadVideo src={staticFile("boris_wide.mp4")} muted
+              style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </Sequence>
+          <Sequence from={CUT}>
+            <OffthreadVideo src={staticFile("boris_tight.mp4")} muted
+              style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </Sequence>
         </div>
-        {/* the name plate — the attribution, on its own strip */}
-        <div style={{ position: "absolute", left: 26, bottom: 14, display: "flex",
-          alignItems: "center", gap: 10, padding: "6px 14px", borderRadius: 8,
-          background: hexa(CREAMB, lamp * 0.92 + 0.06),
-          border: `3px solid ${hexa("#000000", 0.40)}` }}>
-          <div style={{ width: 26, height: 26, borderRadius: 6, background: "#FFFFFF",
+        {/* a faint scan sheen so it reads as a SCREEN rather than a hole in the wall */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none",
+          background: `linear-gradient(184deg, ${hexa("#BFD8F2", 0.10)} 0%, ${hexa("#BFD8F2", 0)} 46%)` }} />
+      </div>
+      <ScreenAura x={SX} y={SY} w={SW} h={SH} c={SKY} k={0.7} z={40} f={f} />
+
+      {/* ⭐ THE LOWER THIRD — the receipt, in the shape every viewer knows */}
+      <div style={{ position: "absolute", left: SX - 18 + 26, top: SY + SH - 96,
+        zIndex: 60, display: "flex", alignItems: "stretch", borderRadius: 10,
+        overflow: "hidden", boxShadow: SH_D,
+        transform: `translateX(${(1 - lower) * -420}px)`, opacity: lower }}>
+        <div style={{ background: CLAY, padding: "10px 14px", display: "flex",
+          alignItems: "center" }}>
+          <div style={{ width: 30, height: 30, borderRadius: 8, background: "#FFFFFF",
             display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Img src={staticFile("claude_logo.png")}
-              style={{ width: 21, height: 21, objectFit: "contain" }} />
+              style={{ width: 25, height: 25, objectFit: "contain" }} />
           </div>
-          <span style={{ ...mono(20, 900), color: "#241F17", letterSpacing: "0.10em" }}>
-            {R.cherny.who}</span>
-          <div style={{ width: 3, height: 20, background: "#B0A794" }} />
-          <span style={{ ...mono(20, 800), color: "#6E6656", letterSpacing: "0.10em" }}>
-            {R.cherny.what}</span>
+        </div>
+        <div style={{ background: "#12151A", padding: "9px 20px", display: "flex",
+          flexDirection: "column", justifyContent: "center" }}>
+          <span style={{ ...mono(29, 900), color: "#F4EAD2", letterSpacing: "0.02em",
+            whiteSpace: "nowrap" }}>{"\u201C" + R.cherny.quote + "\u201D"}</span>
+          <span style={{ ...mono(17, 800), color: "#8E96A4", letterSpacing: "0.14em",
+            whiteSpace: "nowrap", marginTop: 3 }}>
+            {R.cherny.who + "  \u00B7  " + R.cherny.what}</span>
         </div>
       </div>
-      <Pool x={510} y={476} w={900} c={p.key} o={0.10 + lamp * 0.22} z={20} hh={300} />
 
-      {/* the ladder and the Claude who throws the board lever */}
-      <div style={{ position: "absolute", left: 924, top: 372, width: 58, height: 300, zIndex: 42 }}>
-        {[0, 1].map(i => (
-          <div key={"lr" + i} style={{ position: "absolute", left: i * 46, top: 0, width: 11,
-            height: 300, background: dkh(OXIDE, 0.30) }} />
-        ))}
-        {[0, 1, 2, 3, 4].map(i => (
-          <div key={"lg" + i} style={{ position: "absolute", left: 4, top: 30 + i * 56, width: 50,
-            height: 9, background: dkh(OXIDE, 0.16) }} />
-        ))}
-      </div>
-      <div style={{ position: "absolute", left: 872, top: 386, width: 15, height: 74, zIndex: 45,
-        borderRadius: 7, transformOrigin: "50% 100%", transform: `rotate(${-38 + pull * 76}deg)`,
-        background: `linear-gradient(90deg, #9AA2AE 0%, #4E545E 100%)` }} />
-      <Hero f={f} x={946} y={556} size={196} z={56} act={3} ph={2.1}
-        drive={pull * 0.42} reach={-56} strain={pull * 0.5} flip
-        gaze={f > 40 ? -0.8 : 0.2} costume={{ glasses: 1 }} />
-
-      {/* the crowd below, craning up together as the board locks */}
-      {[176, 320, 470, 628].map((x, i) => (
-        <Crew key={"gc" + i} f={f} x={x} y={742} i={i + 6} size={128} z={50} at={i * 3}
+      {/* the room is lit BY the screen, and the crowd below is watching it */}
+      <Pool x={506} y={SY + SH + 40} w={900} c="#BFD8F2" o={0.20} z={20} hh={300} />
+      {[142, 300, 458, 616, 774, 918].map((x, i) => (
+        <Crew key={"gc" + i} f={f} x={x} y={772} i={i + 6} size={150} z={50} at={i * 3}
           loop={f > 56 ? 2 : 3} />
       ))}
-      <Stanchion side="l" c="#1A1F29" w={62} z={90} />
-      <Motes x={520} y={220} w={620} h={340} n={13} f={f} z={41} c="#CFE0F2" />
+      <Stanchion side="l" c="#1A1F29" w={104} z={90} braceY={470} braceW={112} />
+      <Motes x={520} y={240} w={620} h={340} n={13} f={f} z={41} c="#CFE0F2" />
     </Scene>
   );
 };

@@ -760,7 +760,7 @@ export const HookBalloon: React.FC<HP> = ({ dur, rakeX = 0, rakeK = 1, parX = 0 
           HOOK_PLATE 12.1% with nothing but the bare starburst at frame 0.
           [[feedback_frame0_claim_plate]] is the single measured IG-performance
           rule in the repo, so the plate is not optional. */}
-      <SpecPlate x={266} y={322} w={452} s={0.80} z={28}
+      <SpecPlate x={430} y={324} w={452} s={0.88} z={28}
         big={R.bench.value} label={R.bench.label} src={R.bench.src} />
     </Scene>
   );

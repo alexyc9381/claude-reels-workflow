@@ -1,4 +1,5 @@
 import React from "react";
+import { fraunces } from "./fonts";
 import { Img, staticFile, useCurrentFrame } from "remotion";
 import { MONO } from "./SlopKit";
 import {
@@ -439,8 +440,15 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
   };
   /* ⭐ MORE MOTION: the pen does not settle. The big hit decays but a low
      rumble keeps every rail and stall alive for the rest of the scene. */
+  const BRAND_AT = 44;                       /* VO: "brand new model" @ 3.93s */
+  const slam = E(f, BRAND_AT, BRAND_AT + 5, 0, 1, OUT);
+  const bScale = 1 + (1 - slam) * 0.52;
+  const bHot = f < BRAND_AT ? 0 : E(f, BRAND_AT + 2, BRAND_AT + 20, 1, 0.30, OUT);
+  const bShake = f >= BRAND_AT
+    ? Math.sin((f - BRAND_AT) / 1.9) * Math.exp(-(f - BRAND_AT) / 6) * 9 : 0;
   const shake = (f >= 32 ? Math.sin((f - 32) / 2.4) * Math.exp(-(f - 32) / 9) * 11 : 0)
-    + (f > 34 ? Math.sin(f / 3.1) * 2.4 : 0);
+    + (f > 34 ? Math.sin(f / 3.1) * 2.4 : 0)
+    + (f >= BRAND_AT ? Math.sin((f - BRAND_AT) / 2.2) * Math.exp(-(f - BRAND_AT) / 7) * 7 : 0);
   const RIV = [
     { logo: "claude.svg", name: "FABLE 5", c: CLAY, x: 158 },
     { logo: "openai.png", name: "GPT-5.6", c: GREEN, x: 336 },
@@ -482,6 +490,38 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
           );
         })}
       </div>
+
+      {/* ⭐⭐ THE NAME, BRANDED ONTO THE WALL — behind the ox (z 36 vs 58), so
+          the animal still owns the front of the frame. */}
+      {slam > 0 && (
+        <div style={{ position: "absolute", left: 196 + bShake, top: 300, width: 640, height: 164,
+          zIndex: 36, opacity: Math.min(1, slam * 1.7),
+          transform: `scale(${bScale}) rotate(-3deg)`, transformOrigin: "50% 50%" }}>
+          <div style={{ position: "absolute", inset: -24, borderRadius: 28,
+            background: hexa("#FF8A3C", 0.17 * bHot),
+            boxShadow: `0 0 ${34 + bHot * 74}px ${hexa("#FF8A3C", 0.30 + bHot * 0.4)}` }} />
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center",
+            justifyContent: "center", whiteSpace: "nowrap",
+            fontFamily: fraunces.fontFamily, fontWeight: 900, fontSize: 104,
+            letterSpacing: 2, lineHeight: 1, color: "#FFE9C4",
+            textShadow: `0 0 26px ${hexa("#FFD9A0", 0.92)}, 0 0 74px ${hexa("#FF8A3C", 0.55 + bHot * 0.4)}, 0 8px 0 #6B2A0C` }}>OX ALPHA</div>
+        </div>
+      )}
+      <Ring x={516} y={382} f={f} at={BRAND_AT} c="#FF8A3C" />
+      {/* scorch thrown off the wall by the hit */}
+      {f >= BRAND_AT && f < BRAND_AT + 26 && Array.from({ length: 12 }, (_, i) => {
+        const t = (f - BRAND_AT) / 26;
+        const a = (i / 12) * Math.PI * 2 + 0.3;
+        return (
+          <div key={"bs" + i} style={{ position: "absolute", zIndex: 37,
+            left: 516 + Math.cos(a) * t * (150 + rnd(i, 81) * 190),
+            top: 382 + Math.sin(a) * t * (90 + rnd(i, 82) * 130) + t * t * 120,
+            width: 10 + (i % 3) * 7, height: 10 + (i % 3) * 7, borderRadius: "50%",
+            opacity: (1 - t) * 0.9,
+            background: i % 3 ? "#FFD9A0" : "#FF8A3C",
+            boxShadow: `0 0 12px ${hexa("#FF8A3C", 0.75)}` }} />
+        );
+      })}
 
       {/* ⭐ AND THE OX — 2.2x their width, closer to camera, head down */}
       <div style={{ position: "absolute", inset: 0, zIndex: 58,
@@ -530,7 +570,6 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
         costume={{ constr: 1 }} />
       <Contact x={172} y={728} w={96} z={19} o={0.44} />
 
-      <Chip t="ox-alpha" y={150} c={INK} fg={GOLD} s={0.96} z={96} />
     </Scene>
   );
 };
