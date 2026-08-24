@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Audio, Composition, registerRoot, staticFile } from "remotion";
 import { ReelUnsigned, ReelAmber, ReelSteel, ReelQuiet, OX_TOTAL } from "./ClaudeOxReel";
-import { HookGate, HookCrush } from "./OxHooks";
+import { HookGate, HookCrush, HookBoard } from "./OxHooks";
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
 import { CamCtx } from "./OxWorld";
 import { LEVELS, db, SfxTrack, layer } from "./SoundKit";
@@ -106,6 +106,7 @@ const Root: React.FC = () => (<>
       quality so the decision is made on a picture rather than a description. */}
   <Composition id="hook-a-gate" component={HookCut(HookGate)} durationInFrames={75} {...V} />
   <Composition id="hook-b-crush" component={HookCut(HookCrush)} durationInFrames={75} {...V} />
+  <Composition id="hook-c-board" component={HookCut(HookBoard)} durationInFrames={75} {...V} />
 </>);
 
 registerRoot(Root);

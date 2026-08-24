@@ -968,16 +968,44 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
      videos small at the horizon. One dominant object, three subordinate, then
      more than you can count filling the depth behind them. Cut to the MEASURED
      onsets: apps f8 · websites f26 · games f34 · videos f44. */
-  const OUTS = [
-    { at: 8,  x: 116, y: 704, s: 1.24, z: 66 },
-    { at: 26, x: 428, y: 604, s: 0.92, z: 64 },
-    { at: 34, x: 648, y: 520, s: 0.68, z: 62 },
-    { at: 44, x: 782, y: 452, s: 0.50, z: 60 },
-  ];
-  const pop = (i: number) => {
-    const lf = f - OUTS[i].at;
-    return lf < 0 ? 0 : E(lf, 0, 7, 0, 1, BACK);
-  };
+  /* ⛔⛔⛔ THE 20-SECOND DROPOFF WAS HERE, AND `pop()` WAS THE CAUSE.
+     `pop(i) = E(lf, 0, 7, 0, 1, BACK)` is a 7-frame entrance that then returns
+     **1 for ever**. The four windows are ~60% of the visible mass, the last one
+     finished arriving at local f51, and the scene runs to f97 — so the biggest
+     objects in the frame were FROZEN for 46 frames (1.53s). Measured on the
+     render: inter-frame change fell from 13-16 in the scene before to 5-8 for
+     2.7 seconds straight. That is [[feedback_scene_needs_an_arc]] exactly:
+     "every scene ARRIVES then HOLDS, and audit averages hide it" — this scene
+     still scored 9.78 while being dead for a third of the reel's worst stretch.
+
+     ⭐ THE FIX IS NOT NEW OBJECTS, IT IS THE SUBJECT CONTINUING TO ACT
+     ([[feedback_too_fast_is_a_part_count]]). The subject is "the list doesn't
+     end", so the rank became a BELT: each output enters at the front, travels
+     back along the same receding diagonal, shrinks, and leaves at the horizon
+     while the next one enters behind it. The hierarchy is unchanged — one
+     dominant object nearest, each one behind it smaller — but it is now a
+     CONVEYOR rather than a display case, so the biggest mass in the frame is
+     moving for every frame of the scene instead of the first 51.
+     ⭐ And the four spoken nouns still land on their MEASURED onsets: the belt
+     is keyed to f8 / f26 / f34 / f44 and only runs free after that. */
+  const ONS = [8, 26, 34, 44, 57, 70, 83, 96];
+  const belt = (() => {
+    if (f < ONS[0]) return -1;
+    for (let i = ONS.length - 1; i >= 0; i--) {
+      if (f >= ONS[i]) {
+        const nxt = ONS[i + 1] ?? ONS[i] + 13;
+        return i + Math.min(1, (f - ONS[i]) / (nxt - ONS[i]));
+      }
+    }
+    return 0;
+  })();
+  /* the diagonal, sampled from the rank v2 shipped: one step back is
+     +222px, -84px and x0.795 scale */
+  const px = (u: number) => 116 + u * 222;
+  const py = (u: number) => 704 - u * 84;
+  const ps = (u: number) => 1.24 * Math.pow(0.795, u);
+  const KIND = [0, 1, 2, 3, 0, 1, 2, 3];
+  const HOFF = [248, 214, 202, 206];
   const spam = f > 52 ? Math.floor((f - 52) / 3) : 0;
   const count = Math.floor(E(f, 8, dur - 4, 0, 1, IN_Q) * 9999);
   const letGo = E(f, 74, 86, 0, 1, OUT);
@@ -988,16 +1016,10 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
         lamp={{ x: 620, y: 150, r: 320 }} grit={0.6} />
       <SceneWipe f={f} dir={-1} c="#6E5636" z={88} dur={9} n={3} />
 
-      {/* ⭐ ALEX: *"above the screens at 20 secs should be diff claude sprites
-          with outfits."* Six of them, costumes cycled DETERMINISTICALLY through
-          the roster (§5: `costumeFor(i)`, never random — re-renders must match),
-          each on its own action loop and its own phase, landing one per output
-          so the row fills as the rank builds. */}
       {[0, 1, 2, 3, 4, 5].map(i => (
         <Crew key={"cu" + i} f={f} x={128 + i * 152} y={318} i={i * 2 + 3} size={158}
           z={52} at={4 + i * 7} loop={i % 4} />
       ))}
-      {/* the rail they stand on, cropped by both edges */}
       <div style={{ position: "absolute", left: 0, top: 318, width: W, height: 16, zIndex: 50,
         background: `linear-gradient(180deg, ${mxh("#6E5636", 0.22)} 0%, ${dkh("#6E5636", 0.54)} 100%)` }} />
 
@@ -1012,35 +1034,38 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
           transform: `rotate(${(f + i * 30) * 2}deg)` }} />
       ))}
 
-      {/* ⭐ THE RANK — four real things, each smaller and further back */}
-      {pop(0) > 0 && (
-        <div style={{ position: "absolute", left: OUTS[0].x, top: OUTS[0].y - 248 * OUTS[0].s,
-          zIndex: OUTS[0].z, transform: `scale(${pop(0)})`, transformOrigin: "50% 100%" }}>
-          <AppWin x={0} y={0} s={OUTS[0].s} z={OUTS[0].z} f={f} /></div>)}
-      {pop(1) > 0 && (
-        <div style={{ position: "absolute", left: OUTS[1].x, top: OUTS[1].y - 214 * OUTS[1].s,
-          zIndex: OUTS[1].z, transform: `scale(${pop(1)})`, transformOrigin: "50% 100%" }}>
-          <BrowserWin x={0} y={0} s={OUTS[1].s} z={OUTS[1].z} f={f} /></div>)}
-      {pop(2) > 0 && (
-        <div style={{ position: "absolute", left: OUTS[2].x, top: OUTS[2].y - 202 * OUTS[2].s,
-          zIndex: OUTS[2].z, transform: `scale(${pop(2)})`, transformOrigin: "50% 100%" }}>
-          <GameView x={0} y={0} s={OUTS[2].s} z={OUTS[2].z} f={f} /></div>)}
-      {pop(3) > 0 && (
-        <div style={{ position: "absolute", left: OUTS[3].x, top: OUTS[3].y - 206 * OUTS[3].s,
-          zIndex: OUTS[3].z, transform: `scale(${pop(3)})`, transformOrigin: "50% 100%" }}>
-          <VideoView x={0} y={0} s={OUTS[3].s} z={OUTS[3].z} f={f} /></div>)}
-      {/* ⭐ ALEX: *"after each of the websites appear there should be like an aura
-          ring thing wrapping around them."* Two counter-rotating rings on each
-          window's own footprint plus a halo, so it reads as something WRAPPING
-          the thing rather than a burst leaving it. */}
-      {OUTS.map((o, i) => (
-        <Aura key={"au" + i} x={o.x + 150 * o.s} y={o.y - 104 * o.s}
-          w={330 * o.s} h={252 * o.s} f={f} at={o.at + 3} z={o.z - 2}
-          c={[CLAY, TEAL, GREEN, VIOLET][i]} />
-      ))}
-      {OUTS.map((o, i) => (
-        <Ring key={"rg" + i} x={o.x + 150 * o.s} y={o.y - 104 * o.s} f={f} at={o.at} c={p.key} />
-      ))}
+      {/* ⭐ THE BELT — same rank, but it never stops feeding */}
+      {KIND.map((k, i) => {
+        const u = belt - i;
+        if (u < -0.18 || u > 3.9) return null;
+        const sc = ps(Math.max(0, u));
+        const inS = Math.min(1, (u + 0.18) / 0.36);
+        const outS = 1 - Math.max(0, (u - 3.3) / 0.6);
+        const Comp = [AppWin, BrowserWin, GameView, VideoView][k];
+        return (
+          <div key={"ot" + i} style={{ position: "absolute",
+            left: px(Math.max(0, u)), top: py(Math.max(0, u)) - HOFF[k] * sc,
+            zIndex: 66 - Math.round(u * 2), opacity: Math.min(inS, outS),
+            transform: `scale(${inS < 1 ? E(inS * 7, 0, 7, 0, 1, BACK) : 1})`,
+            transformOrigin: "50% 100%" }}>
+            <Comp x={0} y={0} s={sc} z={66} f={f} />
+          </div>
+        );
+      })}
+      {/* the aura rides with the thing it is wrapping */}
+      {KIND.map((k, i) => {
+        const u = belt - i;
+        if (u < 0 || u > 2.4) return null;
+        const sc = ps(u);
+        return (
+          <React.Fragment key={"aw" + i}>
+            <Aura x={px(u) + 150 * sc} y={py(u) - 104 * sc}
+              w={330 * sc} h={252 * sc} f={f} at={ONS[i] + 3} z={62 - Math.round(u * 2)}
+              c={[CLAY, TEAL, GREEN, VIOLET][k]} />
+            <Ring x={px(u) + 150 * sc} y={py(u) - 104 * sc} f={f} at={ONS[i]} c={p.key} />
+          </React.Fragment>
+        );
+      })}
 
       {/* the counter rolling past readable — what "unlimited" looks like */}
       <div style={{ position: "absolute", left: 700, top: 236, width: 244, height: 62, zIndex: 74,
@@ -1109,7 +1134,7 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
       })}
       {BAYS.map((b, i) => (
         <SoftwareBay key={"sb" + i} x={b.x} y={718} s={0.92} z={40} f={f}
-          name={b.name} c={b.c} logo={b.logo} on={seatK(i)} seat={seatK(i)} />
+          name={b.name} c={b.c} logo={b.logo} on={seatK(i)} seat={seatK(i)} seatAt={AT[i]} />
       ))}
 
       {/* the core, carried down the row */}

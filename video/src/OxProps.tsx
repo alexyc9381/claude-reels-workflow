@@ -453,9 +453,23 @@ export const ContextDeck: React.FC<{ y: number; f: number; z?: number; k: number
    bays do not share one tile.
    ------------------------------------------------------------------------- */
 export const SoftwareBay: React.FC<{ x: number; y: number; s?: number; z?: number; f: number;
-  name: string; c: string; on: number; seat: number; logo?: string }> =
-  ({ x, y, s = 1, z = 40, f, name, c, on, seat, logo }) => {
+  name: string; c: string; on: number; seat: number; logo?: string; seatAt?: number }> =
+  ({ x, y, s = 1, z = 40, f, name, c, on, seat, logo, seatAt }) => {
   const wB = 270 * s, hB = 300 * s;
+  /* ⭐ ALEX: *"have those logos on top of the thing shake a bit too, and have
+     glowing behind as well."* Two parts, and the KICK has to be a decay, not a
+     state — `seat` is an ease that reaches 1 and STAYS there, so shaking off it
+     directly would rattle for ever. `seatAt` lets the bay derive its own
+     exp(-t/7) kick from the frame the core actually landed on.
+     ⛔ And a decaying value is ON before its start frame, so `since >= 0` gates
+     it (this reel has been bitten by that three times). */
+  const since = seatAt == null ? 1e6 : f - seatAt;
+  const kick = since >= 0 && since < 30 ? Math.exp(-since / 7) : 0;
+  const idle = on > 0.4 ? 1 : 0.3;
+  const sx = Math.sin(f / 2.1 + x * 0.011) * 2.4 * idle + Math.sin(since * 1.9) * 10 * kick;
+  const sy = Math.cos(f / 2.6 + x * 0.013) * 1.9 * idle + Math.cos(since * 2.2) * 8 * kick;
+  const srot = Math.sin(f / 3.1 + x * 0.02) * 0.55 * idle + Math.sin(since * 1.7) * 2.8 * kick;
+  const pulse = 0.5 + Math.sin(f / 9 + x * 0.02) * 0.5;
   return (
     <div style={{ position: "absolute", left: x - wB / 2, top: y - hB, width: wB, height: hB, zIndex: z }}>
       {/* the bay carcass */}
@@ -467,11 +481,25 @@ export const SoftwareBay: React.FC<{ x: number; y: number; s?: number; z?: numbe
           (reel 115), so the tile is shared and the strip never is. */}
       {logo && (
         <div style={{ position: "absolute", left: wB / 2 - 92 * s, top: -168 * s, width: 184 * s,
-          height: 184 * s, borderRadius: 22 * s, background: "#FFFFFF",
-          border: `${5 * s}px solid ${dkh(c, 0.34)}`, boxShadow: SH,
-          display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <Img src={staticFile(`logos/${logo}`)}
-            style={{ width: 132 * s, height: 132 * s, objectFit: "contain" }} />
+          height: 184 * s,
+          transform: `translate(${sx}px, ${sy}px) rotate(${srot}deg)`,
+          transformOrigin: "50% 100%" }}>
+          {/* ⭐ THE GLOW, behind the tile, in the BAY'S OWN COLOUR — identity is
+              shape AND colour, so the halo carries the colour the shared white
+              tile cannot. Held to the matte palette: no neon, it is the same
+              hue the name strip already uses. */}
+          <div style={{ position: "absolute", left: -76 * s, top: -66 * s, width: 336 * s,
+            height: 336 * s, borderRadius: "50%",
+            background: `radial-gradient(circle, ${hexa(c, (0.24 + pulse * 0.16) * (0.5 + on * 0.5) + kick * 0.34)} 0%, ${hexa(c, 0.16 * (0.4 + on * 0.6))} 40%, ${hexa(c, 0)} 70%)`,
+            transform: `scale(${0.92 + pulse * 0.06 + kick * 0.3})` }} />
+          <div style={{ position: "absolute", left: 0, top: 0, width: 184 * s,
+            height: 184 * s, borderRadius: 22 * s, background: "#FFFFFF",
+            border: `${5 * s}px solid ${dkh(c, 0.34)}`,
+            boxShadow: `${SH}, 0 0 ${(16 + kick * 40) * s}px ${hexa(c, 0.34 + kick * 0.4)}`,
+            display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Img src={staticFile(`logos/${logo}`)}
+              style={{ width: 132 * s, height: 132 * s, objectFit: "contain" }} />
+          </div>
         </div>
       )}
       <div style={{ position: "absolute", left: 6 * s, top: 0, width: wB - 12 * s, height: 46 * s,

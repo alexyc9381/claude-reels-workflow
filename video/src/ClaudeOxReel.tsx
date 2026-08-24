@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
 import { S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, CAM, GRADE } from "./OxScenes";
-import { HookGate } from "./OxHooks";
+import { HookGate, HookCrush, HookBoard } from "./OxHooks";
 import type { Variant } from "./OxScenes";
 import { CamCtx, R } from "./OxWorld";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
@@ -144,27 +144,59 @@ const DUR = {
    ------------------------------------------------------------------------ */
 const S = (fr: number) => fr / FPS;
 
-const SFX: Cue[] = [
-  /* ---- S0 · THE BAY (7) — ⭐ the heaviest cue stack in the reel. Frame 0 is
-     the interrupt, so the bed, the plant hum and the first movement all land
-     on it, and the SEAT at f26 is the hero. */
-  { at: S(L.S0 + 0),  src: "machine_bed.wav",  v: LEVELS.SFX_BED,     dur: 2.6, rate: 0.94 },
-  { at: S(L.S0 + 3),  src: "ratchet.wav",      v: LEVELS.SFX_MID * db(-1), dur: 0.32, rate: 0.94 },
-  { at: S(L.S0 + 8),  src: "ratchet.wav",      v: LEVELS.SFX_MID,     dur: 0.32, rate: 1.03 },
-  { at: S(L.S0 + 13), src: "ratchet.wav",      v: LEVELS.SFX_MID * db(2), dur: 0.34, rate: 1.13 },
-  { at: S(L.S0 + 16), src: "impact_deep.wav",  v: LEVELS.SFX_HERO,    dur: 0.62 },
-  { at: S(L.S0 + 16), src: "chain_clank.wav",  v: LEVELS.SFX_TEXTURE * db(2), dur: 0.50, rate: 0.88, lead: 2 },
-  { at: S(L.S0 + 17), src: "whoosh_heavy.wav", v: LEVELS.SFX_MID * db(1), dur: 0.66 },
-  { at: S(L.S0 + 20), src: "crowd_run.wav",    v: LEVELS.SFX_TEXTURE * db(2), dur: 0.62, rate: 0.78 },
-  { at: S(L.S0 + 27), src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(4), dur: 0.95 },
-  { at: S(L.S0 + 57), src: "stamp_press.wav",  v: LEVELS.SFX_HERO * db(3), dur: 0.34 },
-  { at: S(L.S0 + 57), src: "paper_burn.wav",   v: LEVELS.SFX_TEXTURE * db(3), dur: 0.90, lead: 2 },
-  { at: S(L.S0 + 61), src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(1), dur: 0.80, rate: 0.74 },
+/* ⭐⭐⭐ THE HOOK'S CUES ARE PER CUT, because the hooks are per cut. One shared
+   list would have put ratchet clicks and a gate impact over a wall detonating
+   and over a price board — three pictures, one soundtrack, which is worse than
+   no soundtrack. Every cue below is on an action you can see in ITS cut. */
+const HOOK_SFX: Record<Variant, Cue[]> = {
+  /* THE PEN GATE · winch -> gate -> hooves -> animal -> iron -> animal */
+  unsigned: [
+    { at: 3 / 30,  src: "ratchet.wav",      v: LEVELS.SFX_MID * db(-1), dur: 0.32, rate: 0.94 },
+    { at: 8 / 30,  src: "ratchet.wav",      v: LEVELS.SFX_MID,     dur: 0.32, rate: 1.03 },
+    { at: 13 / 30, src: "ratchet.wav",      v: LEVELS.SFX_MID * db(2), dur: 0.34, rate: 1.13 },
+    { at: 16 / 30, src: "impact_deep.wav",  v: LEVELS.SFX_HERO,    dur: 0.70 },
+    { at: 16 / 30, src: "chain_clank.wav",  v: LEVELS.SFX_TEXTURE * db(2), dur: 0.50, rate: 0.88, lead: 2 },
+    { at: 17 / 30, src: "whoosh_heavy.wav", v: LEVELS.SFX_MID * db(1), dur: 0.66 },
+    { at: 20 / 30, src: "crowd_run.wav",    v: LEVELS.SFX_TEXTURE * db(2), dur: 0.62, rate: 0.78 },
+    { at: 2 / 30,  src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(-3), dur: 1.10, rate: 0.92 },
+    { at: 53 / 30, src: "stamp_press.wav",  v: LEVELS.SFX_HERO * db(3), dur: 0.34 },
+    { at: 53 / 30, src: "paper_burn.wav",   v: LEVELS.SFX_TEXTURE * db(3), dur: 0.90, lead: 2 },
+    /* 2 · the iron lands and the animal answers it */
+    { at: 57 / 30, src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(-4), dur: 0.85, rate: 0.74 },
+  ],
+  /* THE CRUSH · the wall straining -> it goes -> animal -> five tags turning */
+  amber: [
+    { at: 6 / 30,  src: "mech_clank.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.18, rate: 0.82 },
+    { at: 11 / 30, src: "ceramic_crack.wav", v: LEVELS.SFX_TEXTURE * db(2), dur: 0.34, rate: 0.8 },
+    { at: 16 / 30, src: "crash.wav",        v: LEVELS.SFX_HERO * db(1), dur: 0.90 },
+    { at: 16 / 30, src: "impact_deep.wav",  v: LEVELS.SFX_MID * db(2), dur: 0.62, lead: 2 },
+    { at: 18 / 30, src: "whoosh_heavy.wav", v: LEVELS.SFX_MID, dur: 0.60 },
+    { at: 2 / 30,  src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(-3), dur: 1.10, rate: 0.92 },
+    /* 2 · the first price turns over — this cut's stamp beat */
+    { at: 38 / 30, src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(-4), dur: 0.85, rate: 0.78 },
+    { at: 38 / 30, src: "sign_clack.wav",   v: LEVELS.SFX_MID * db(-2), dur: 0.26, rate: 0.94 },
+    { at: 42 / 30, src: "sign_clack.wav",   v: LEVELS.SFX_MID * db(-1), dur: 0.26, rate: 1.00 },
+    { at: 46 / 30, src: "sign_clack.wav",   v: LEVELS.SFX_MID,     dur: 0.26, rate: 1.06 },
+    { at: 50 / 30, src: "sign_clack.wav",   v: LEVELS.SFX_MID * db(1), dur: 0.26, rate: 1.12 },
+    { at: 54 / 30, src: "sign_clack.wav",   v: LEVELS.SFX_HERO * db(-2), dur: 0.34, rate: 1.19 },
+  ],
+  /* THE PRICE BOARD · chains -> animal in -> THREE FLIPS, the price collapsing */
+  steel: [
+    { at: 5 / 30,  src: "chain_clank.wav",  v: LEVELS.SFX_TEXTURE * db(1), dur: 0.46, rate: 0.9 },
+    { at: 16 / 30, src: "whoosh_heavy.wav", v: LEVELS.SFX_MID * db(1), dur: 0.64 },
+    { at: 20 / 30, src: "crowd_run.wav",    v: LEVELS.SFX_TEXTURE * db(2), dur: 0.66, rate: 0.78 },
+    { at: 2 / 30,  src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(-3), dur: 1.10, rate: 0.92 },
+    { at: 40 / 30, src: "split_flap.wav",   v: LEVELS.SFX_MID * db(2), dur: 0.40, rate: 1.00 },
+    { at: 50 / 30, src: "split_flap.wav",   v: LEVELS.SFX_MID * db(3), dur: 0.40, rate: 0.94 },
+    /* 2 · the number lands on zero — this cut's stamp beat */
+    { at: 60 / 30, src: "split_flap.wav",   v: LEVELS.SFX_HERO,    dur: 0.46, rate: 0.86 },
+    { at: 61 / 30, src: "ox_bellow.wav",    v: LEVELS.SFX_HERO * db(-4), dur: 0.85, rate: 0.78 },
+    { at: 61 / 30, src: "impact_deep.wav",  v: LEVELS.SFX_TEXTURE * db(3), dur: 0.60, lead: 2 },
+  ],
+};
 
-  /* ---- S1 · THE SPEC WALL (4). Three placard rows pitched UP a step each, and
-     a DEAD thud on the blank provider row — the one that refuses to print. */
-  { at: S(L.S1 + 6),  src: "deep_engine.wav",  v: LEVELS.SFX_BED,     dur: 1.4, rate: 0.72 },
-  { at: S(L.S1 + 30), src: "impact_deep.wav",  v: LEVELS.SFX_MID,     dur: 0.80, rate: 0.82 },
+const SFX: Cue[] = [
+  /* ---- S0 · the hook's cues live in HOOK_SFX, per cut (see below) ------- */
   /* ⛔ THE THIRD BELLOW IS OUT (Alex: *"remove the ox sound at 3 seconds"*).
      `ox_bellow` is synthesised for this reel by `tools/gen_ox_bellow.py` — the
      183-file house bank has no animal in it at all — and it now fires TWICE, in
@@ -242,7 +274,6 @@ const SFX: Cue[] = [
      (root f878 = scene-local f18), and the reel hard-cuts three frames later. */
   { at: S(L.S10 + 2),  src: "ratchet.wav",     v: LEVELS.SFX_TEXTURE, dur: 0.36, rate: 1.10 },
   { at: S(L.S10 + 6),  src: "gold_stamp.wav",  v: LEVELS.SFX_HERO,    dur: 0.54, rate: 0.92 },
-  { at: S(L.S10 + 12), src: "ox_bellow.wav",   v: LEVELS.SFX_MID,     dur: 0.90, rate: 1.06 },
 ];
 
 /* ---- THE BED -------------------------------------------------------------
@@ -299,7 +330,7 @@ export const BED_GAIN: Record<Variant, number> = {
 export const BED_QUIET = db(-6);
 
 /** a different caption band Y per cut — another axis a perceptual hash reads */
-const CAP_Y: Record<Variant, number> = { unsigned: 1262, amber: 1336, steel: 1194 };
+const CAP_Y: Record<Variant, number> = { unsigned: 1418, amber: 1470, steel: 1376 };
 
 export const makeReel = (v: Variant, quiet = false): React.FC => () => {
   const f = useCurrentFrame();
@@ -308,12 +339,12 @@ export const makeReel = (v: Variant, quiet = false): React.FC => () => {
       <Bg />
       <Audio src={staticFile("119_ox_vo.wav")} volume={LEVELS.DIALOGUE} />
       <Audio src={staticFile(BED[v])} volume={LEVELS.MUSIC * BED_GAIN[v] * (quiet ? BED_QUIET : 1)} />
-      <SfxTrack cues={SFX} />
+      <SfxTrack cues={[...HOOK_SFX[v], ...SFX]} />
 
       <CamCtx.Provider value={{ ...CAM[v] }}>
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE[v] }}>
-            <Sequence from={L.S0} durationInFrames={DUR.S0}><HookGate dur={DUR.S0} /></Sequence>
+            <Sequence from={L.S0} durationInFrames={DUR.S0}>{v === "amber" ? <HookCrush dur={DUR.S0} /> : v === "steel" ? <HookBoard dur={DUR.S0} /> : <HookGate dur={DUR.S0} />}</Sequence>
             <Sequence from={L.S1} durationInFrames={DUR.S1}><S1 v={v} dur={DUR.S1} /></Sequence>
             <Sequence from={L.S2} durationInFrames={DUR.S2}><S2 v={v} dur={DUR.S2} /></Sequence>
             <Sequence from={L.S3} durationInFrames={DUR.S3}><S3 v={v} dur={DUR.S3} /></Sequence>

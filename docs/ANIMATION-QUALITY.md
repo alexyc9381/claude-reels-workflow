@@ -1143,6 +1143,135 @@ needs a LIGHT fill to carry dark type, while the same tier's tick marks sit on a
 need the SATURATED colour to read against it. One value cannot do both jobs.
 
 
+## 19. ⛔⛔⛔ AN ENTRANCE THAT ENDS AT 1 IS A FREEZE (reel 119)
+
+The single line that produced *"at 20 seconds there is a massive dropoff"*:
+
+```js
+const pop = i => E(f - OUTS[i].at, 0, 7, 0, 1, BACK)
+```
+
+`E` clamps, so above its end frame this **returns 1 for ever**. Four output windows, about
+60% of the visible mass, all finished arriving at local f51 in a 97-frame scene — the
+biggest objects in the frame were frozen for 46 frames. Everything still technically moving
+(a 120px counter chip, drifting cards, sprite idles) repaints almost no area.
+
+Measured, mean |frame(n) - frame(n-1)| on a 126x99 downsample:
+
+```
+scene before   13-16
+this scene      5-8   FLAT FOR 2.7 SECONDS
+```
+
+⛔ **THE SCENE SCORED 9.78 AND PASSED**, because the average was carried by the first half.
+This is §9's warning in a new costume, and the column that actually caught it was **HOLD**,
+at **67%** — the worst in the reel. When a note says "dropoff", read HOLD before MOTION.
+
+⭐ **THE FIX IS NEVER NEW OBJECTS — IT IS THE SUBJECT CONTINUING TO ACT** (§13, §12). The
+line was "the list doesn't end", so the RANK became a **BELT**: each output enters at the
+front, travels back along the same receding diagonal, shrinks, and leaves at the horizon
+while the next enters behind it. The hierarchy is untouched — nearest is biggest — but it
+is a conveyor rather than a display case, so the dominant mass is moving on every frame
+instead of the first 51.
+
+**Motion 9.78 -> 18.68 · HOLD 67% -> 15% · the dead stretch 5-8 -> 17-26.**
+
+⭐ **HOW TO FIND THIS ANYWHERE:** scan inter-frame change per scene and compare the FIRST
+half to the SECOND. A scene that arrives and parks shows a cliff. Run it on every scene,
+not the ones you suspect — on 119 it cleared nine and found the one.
+
+⛔ The same clamp bites in the other direction: `E(f, a, b, 1, 0)` is at **full strength
+before frame `a`**, so a decaying flash, a jolt or a particle field is ON from frame 0.
+See `memory/ease-value-outside-its-window.md`.
+
+---
+
+## 20. ⛔⛔⛔ WHEN SEVERAL SCENES COME BACK "BORING" AT ONCE, STRIP THEM SIDE BY SIDE (reel 120)
+
+Alex returned **six timestamps in one message**. Six timestamps reads as six scene failures.
+It was one: **S3, S5, S6, S8, S9 and S10 were all built around the same grey `LampBank` slab.**
+Half the reel was one rectangle in a different room. No single scene was wrong enough to notice;
+the repetition was. ⭐ **Pull a six-frame strip per flagged scene and lay them next to each
+other before rebuilding any of them.**
+
+⭐ **A SCENE NEEDS ITS OWN HERO OBJECT.** The board now appears in exactly two.
+
+### ⛔ Two of the six went DOWN in motion while getting better
+
+| scene | motion | HOLD |
+|---|---|---|
+| S1 text card → riveted plate | **10.54 → 8.65** | 61% → 35% |
+| S3 slab descends → crate dropped | 9.51 → 9.61 | 62% → **29%** |
+| S8 | 10.85 → **12.76** | 73% → 55% |
+| S9 | 10.15 → **11.48** | 83% → **28%** |
+
+S1's 10.54 was a **text card rotating on a prism**, and it was the first shot he called out. A
+large slab sweeping is exactly what the audit pays for. ⭐⭐ **When the note is "boring", read
+HOLD, not MOTION.** Hold is the share of the scene that is not changing; it fell on all six.
+
+### ⭐⭐ The VO's VERB names the fix
+
+*"**dropped** a fix"* → a crate that falls, slams and bursts. *"it **stops** AI by **forcing**
+it"* → a wall he hits flat, **then** a hook that hauls him back — v1 drew only the first verb,
+which is why that scene died after 0.6s of its 3.2. *"**builds** a ledger"* → a rack erected from
+uprights, rails and slots rather than a finished board sitting there.
+
+### ⛔ Two staging failures
+
+- **A barrier you can walk round does not read as "stopped."** A 356px gate mid-room read as a
+  cabinet, and the run ended at a point *inside* it. It has to fill everything past its near face.
+- **Ten of anything narrow is a FENCE.** Ten 80px shutters at 82px pitch rendered as a striped
+  grey wall; widening the piers and lighting the openings did not help, because the defect was
+  the SILHOUETTE. Nine Claudes **falling 620px into the bays** said it instantly.
+
+---
+
+## 21. ⛔⛔⛔ A NEW SUBSTRATE IS NOT A NEW SCENE (reel 120)
+
+Reel 120's S1 was rejected **twice**: first a rotating text card, then **the same words riveted
+to a cast metal plate** — travel, four costed rivet hits, sparks, real drawing. Still the same
+scene, because the words were still the subject.
+
+⭐ **THE TEST BEFORE BUILDING: if you muted the copy, what would be happening?** Both answered
+*"a rectangle arrives."*
+
+The fix is to dramatise the FACT and shrink the receipt to label size. The claim was that
+Anthropic evaluates models on reward-hack-prone coding tasks — i.e. *the makers test for this* —
+so it became a **bench test**: a Claude clamped in a cradle, a scan head sweeping down him, a
+needle slamming into the red, a beacon, the room going red. The test name survives as a **17px
+stencil on the rig**, the size a model number actually is.
+
+⭐ And the same note landed on a PROP one scene later: *"that thing is just way too gray and
+boring."* **GREY + RECTANGULAR is the combination that reads as boring — either one alone
+survives.** The replacement is brass, domed, with turning valve wheels and a backlit nameplate.
+
+---
+
+## 22. ⛔⛔ CHECK WHAT AN EFFECT IS A *FUNCTION OF* BEFORE CHANGING HOW MUCH OF IT THERE IS (reel 120)
+
+Four defects, one shape — the thing on screen was wired to the wrong variable, and **none would
+have been fixed by tuning its magnitude.**
+
+1. **A value that PLATEAUS freezes what it drives.** `E(f,a,b,0,1,OUT)` reaches 1 and stays. A
+   press ram settled at **0.70 and never retracted**, so two of its three slams moved a 246×104
+   block through 30% of its stroke; a lever `min(1, sum of three ramps)` moved **once** in a
+   three-cycle scene; burst debris read off `pop` and hung **motionless at radius 300** for 30
+   frames. ⭐ Anything that should LEAVE needs its own clock and an end; anything that should
+   REPEAT must return; anything that should SWEEP wants `0.5 - 0.5*cos(t)`, not a ramp.
+2. **A bow on a cubic's mid CONTROL POINT drags the BASE TANGENT.** Lifting the 44%-control 220px
+   swung the whole base end up 45°. ⭐ Describe the shape with a sampled CENTRE-LINE:
+   `cy(u) = base + droop*u*u + bow*sin(pi*u)^1.7` — zero AND flat at both ends — and read the
+   rings, grain and highlight off the same function so they can never drift off it.
+3. **An early return above a fragment kills the SIBLINGS.** `if (pop > 0.40) return null;` also
+   deleted the burst. Hide the child, not the component.
+4. **Placement-mirroring never flips a prop's INTERNALS.** `MX(x)` on a rig that fills the frame
+   just slid it sideways — dHash 4. The prop needs its own `flip`, which also leaves its text
+   alone (a `scaleX` on the scene would reverse every label).
+
+See `memory/authored-motion-needs-its-own-driver.md`.
+
+---
+
 ## Related
 [`THE-OPEN.md`](THE-OPEN.md) (the first five seconds, and the correction in §2 above) ·
 [`MEASURING.md`](MEASURING.md) (making a number mean something) ·
@@ -1151,6 +1280,8 @@ need the SATURATED colour to read against it. One value cannot do both jobs.
 [`../REEL-BUILD-LEARNINGS.md`](../REEL-BUILD-LEARNINGS.md) §2 §3 §7 §12 ·
 `memory/reels/plugin-factory-log.md` (the eleven rounds that produced this file) ·
 [`SOUND-DESIGN.md`](SOUND-DESIGN.md) §2b (the audio half of §9's density budget) ·
-`memory/claude107-reel.md` (reel 107 — the source of §5's action loops and all of §9)
+`memory/claude107-reel.md` (reel 107 — the source of §5's action loops and all of §9) ·
+`memory/reels/ox-factory-log.md` (reel 119 — §19, and the four rules its nine hook rounds produced) ·
+`memory/reels/unlazy-factory-log.md` (reel 120 — §20-22, seven review rounds and the delivery findings)
 
 ---
