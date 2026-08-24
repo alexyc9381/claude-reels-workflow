@@ -58,6 +58,50 @@ export const PAR_X: Record<Variant, number> = { hall: 0, amber: -48, steel: 44 }
 /** a per-cut layout lever: the tool wall packs differently in each cut */
 export const WALL_SEED: Record<Variant, number> = { hall: 71, amber: 137, steel: 211 };
 
+/** ⭐⭐⭐ PER-CUT ANIMATION, not per-cut treatment. Alex: *"the other variants
+    need diff animations so it doesnt get flagged for trial reels here."* Right —
+    shot size and grade change how a frame looks; they do not change WHAT IS
+    HAPPENING in it, and a duplicate check that samples frames sees the same
+    events in the same places.
+
+    ⛔ THE CONSTRAINT THAT SHAPES THIS: the SFX bank is per-REEL, not per-cut, so
+    the beat FRAMES cannot move — jitter the timings and every cue in amber and
+    steel drifts off its event. So the beats stay put and the ORDER changes: at
+    any given frame a different object is the one animating. Same audio sync,
+    different picture on every sampled frame.
+
+    `ord` permutes every sequence in the reel (the six stamps, the six ledger
+    slots, the nine agent drops). `lp` / `ph` put the crowd sprites on different
+    action loops and clocks. `MIRROR` flips the STAGING of two scenes per cut —
+    a different two for each — so no pair of cuts shares a layout everywhere. */
+export const VARF: Record<Variant, { ord: 0 | 1 | 2; lp: number; ph: number }> = {
+  hall:  { ord: 0, lp: 0, ph: 0.0 },
+  amber: { ord: 1, lp: 1, ph: 1.1 },
+  steel: { ord: 2, lp: 2, ph: 2.3 },
+};
+
+/** which scene numbers stage-mirror in each cut. ⛔ Only scenes whose props carry
+    no direction-locked text: the run-and-block, the queue, the stamp wall and the
+    bay row. A different PAIR per cut, so every pairing differs somewhere. */
+export const MIRROR: Record<Variant, number[]> = {
+  hall:  [],
+  amber: [4, 8],
+  steel: [2, 9],
+};
+
+/** order the members of a sequence of length n: forward, reversed, or outward
+    from the middle. The Nth BEAT is always at the same frame; which member takes
+    it is what changes. */
+export const seqOrder = (n: number, ord: 0 | 1 | 2): number[] => {
+  const idx = Array.from({ length: n }, (_, i) => i);
+  if (ord === 1) return idx.reverse();
+  if (ord === 2) {
+    const mid = (n - 1) / 2;
+    return idx.slice().sort((a, b) => Math.abs(a - mid) - Math.abs(b - mid) || a - b);
+  }
+  return idx;
+};
+
 export const CAM: Record<Variant, { dx: number; dy: number; s: number; rot: number }> = {
   /* ⛔⛔ THE THREE CUTS WERE A GRADE AND A ZOOM. `dhash_cuts` passed at mean
      26.2 / MIN 16 and Alex still asked whether they were actually different —

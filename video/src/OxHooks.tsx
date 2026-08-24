@@ -402,7 +402,7 @@ export const HookGate: React.FC<HP> = ({ dur }) => {
 export const HookCrush: React.FC<HP> = ({ dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("bay");
-  const CUT = [0, 22, 48];
+  const CUT = [0, 16];
   const shot = CUT.filter(c => f >= c).length - 1;
   const lf = f - CUT[shot];
   const MARKS = ["claude.svg", "openai.png", "gemini.png", "cursor.svg", "windsurf.svg"];
@@ -427,10 +427,10 @@ export const HookCrush: React.FC<HP> = ({ dur }) => {
 
   /* ── SHOT A · the wall, close, trembling harder ────────────────────────── */
   if (shot === 0) {
-    const load = E(lf, 0, 22, 1.0, 8.0, IN_Q);
+    const load = E(lf, 0, 16, 1.0, 8.0, IN_Q);
     const t = Math.sin(lf / 1.7) * load;
     return (
-      <Scene p={p} slug="" push={[0, 22, 1.09]} vig={0.30} glow={hexa(RED, 0.18)}>
+      <Scene p={p} slug="" push={[0, 16, 1.08]} vig={0.30} glow={hexa(RED, 0.18)}>
         <div style={{ position: "absolute", inset: 0, zIndex: 18, background: "#5A626C" }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 20,
           transform: `translate(${t}px, ${t * 0.5}px)` }}>
@@ -454,78 +454,105 @@ export const HookCrush: React.FC<HP> = ({ dur }) => {
     );
   }
 
-  /* ── SHOT B · the ox goes through it and the wall detonates ────────────── */
-  if (shot === 1) {
-    const k = E(lf, 0, 24, 0, 1, IN_Q);
-    const oxX = -260 + k * 1180;
-    return (
-      <Scene p={p} slug="" push={[0, 26, 1.12]} vig={0.26} glow={hexa(GOLD, 0.22)}>
-        <Hall p={p} f={f} dx={0} overhead="truss" bands={3} kind="bay" rake={0.15}
-          rakeRate={5.6} lamp={{ x: 506, y: 176, r: 300 }} grit={0.9} rakeN={7} />
-        {/* thirty pieces of it going in every direction */}
-        {Array.from({ length: 26 }, (_, i) => {
-          const a = (i / 26) * Math.PI * 2;
-          const d = k * (260 + rnd(i, 41) * 620);
-          return (
-            <div key={"db" + i} style={{ position: "absolute", zIndex: 50,
-              left: 470 + Math.cos(a) * d * 1.25,
-              top: 380 + Math.sin(a) * d * 0.85 + k * k * 220,
-              transform: `rotate(${k * (200 + rnd(i, 42) * 500)}deg)`,
-              opacity: 1 - Math.max(0, (k - 0.7) / 0.3) }}>
-              <Slab i={i} x={0} y={0} s={0.34 + rnd(i, 43) * 0.34} />
-            </div>
-          );
-        })}
-        {/* the ox, straight through, left to right */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 62 }}>
-          <Ox x={oxX} y={GY + 30} s={1.24} z={62} f={f} charge={1} strain={0.85}
-            name={R.model.name} />
-        </div>
-        <Contact x={oxX} y={GY + 30} w={520} z={30} o={0.50} />
-        {Array.from({ length: 14 }, (_, i) => (
-          <div key={"dz" + i} style={{ position: "absolute", zIndex: 40,
-            left: oxX - 300 + i * 44, top: 690 - Math.abs(Math.sin(i * 1.6)) * 90,
-            width: 52 + (i % 3) * 20, height: 44, borderRadius: "50%",
-            background: hexa("#D8C49A", 0.30) }} />
-        ))}
-        <div style={{ position: "absolute", inset: 0, zIndex: 76,
-          transform: `translateY(${-k * 34}px)` }}>
-          <ClaimPlate x={506} y={196} w={640} f={f} z={76} num={PLATE.num} line={PLATE.line} />
-        </div>
-      </Scene>
-    );
-  }
-
-  /* ── SHOT C · wide, the last of it falling, the plate standing ─────────── */
-  const fall = E(lf, 0, 22, 0, 1, IN_Q);
+  /* ── SHOT B · ONE CONTINUOUS TAKE. The wall detonates, the animal lands,
+     and then THE PRICE FALLS ON EVERYTHING LEFT STANDING. ───────────────────
+     ⛔ v1 of this hook was three shots with the $0 plate centred and huge in
+     every one of them — hold 46%, and the exact note Alex has already given
+     twice: *"way too boring and it's just a big plain simple card."* The plate
+     is bolted to the WALL here, so when the wall goes, it goes: it is frame-0
+     furniture and it leaves with the thing it was screwed to.
+     ⭐ The payoff is a different MECHANISM from the gate cut's. That one is a
+     BRAND (a mark burned onto one animal). This one is a CASCADE: the five
+     slabs still on the back wall flip their red PAID tags to $0, one after
+     another, after the animal has already gone through. */
+  const k = E(lf, 0, 20, 0, 1, IN_Q);
+  const settle = E(lf, 18, 34, 0, 1, OUT);
+  const oxX = -320 + k * 860;
+  const come = E(lf, 6, 26, 0, 1, OUT);
+  const RACK = [88, 268, 470, 676, 878];
   return (
-    <Scene p={p} slug="" push={[0, 27, 1.10]} vig={0.28} glow={hexa(p.key, 0.18)}>
+    <Scene p={p} slug="" push={[0, 58, 1.11]} vig={0.27} glow={hexa(GOLD, 0.21)}>
       <Hall p={p} f={f} dx={0} overhead="truss" bands={3} kind="bay" rake={0.15}
-        rakeRate={5.0} lamp={{ x: 640, y: 180, r: 300 }} grit={0.8} rakeN={7} />
-      <RunBand y={118} f={f} z={22} rate={5.4} h={13} c={STEEL} hang
-        loads={["#4A5058", "#3E444C", "#5A6068", "#3E444C"]} pitch={172} loadW={76} loadH={54} />
-      {Array.from({ length: 9 }, (_, i) => (
-        <div key={"fb" + i} style={{ position: "absolute", zIndex: 44,
-          left: 90 + i * 104, top: 120 + fall * (420 + rnd(i, 51) * 240),
-          transform: `rotate(${fall * (160 + rnd(i, 52) * 320)}deg)`,
-          opacity: 1 - fall * 0.55 }}>
-          <Slab i={i} x={0} y={0} s={0.30} />
-        </div>
-      ))}
-      {/* the wreckage on the floor */}
-      {Array.from({ length: 7 }, (_, i) => (
-        <div key={"wr" + i} style={{ position: "absolute", zIndex: 34,
-          left: 120 + i * 118, top: 690 - (i % 2) * 14, width: 96, height: 26, borderRadius: 4,
-          background: dkh("#3A3F46", 0.20), transform: `rotate(${(i % 2 ? 1 : -1) * 5}deg)` }} />
-      ))}
-      <div style={{ position: "absolute", inset: 0, zIndex: 60 }}>
-        <Ox x={694} y={GY + 30} s={1.10} z={60} f={f} charge={0.34} flip name={R.model.name} />
+        rakeRate={5.6} lamp={{ x: 506, y: 176, r: 300 }} grit={0.9} rakeN={7} />
+
+      {/* what is LEFT of the wall — and what happens to its prices */}
+      {RACK.map((rx, i) => {
+        const flip = E(lf, 28 + i * 5, 37 + i * 5, 0, 1, OUT);
+        return (
+          <div key={"rk" + i} style={{ position: "absolute", left: rx - 62, top: 214,
+            width: 124, height: 82, zIndex: 26,
+            transform: `rotate(${Math.sin(i * 2.1) * 2.4}deg)` }}>
+            <div style={{ position: "absolute", inset: 0, borderRadius: 8,
+              background: "linear-gradient(164deg,#8E98A2 0%,#4A515A 100%)",
+              border: "4px solid #14171C" }} />
+            <div style={{ position: "absolute", left: 9, top: 10, width: 62, height: 62,
+              borderRadius: 11, background: "#FFFFFF", display: "flex",
+              alignItems: "center", justifyContent: "center" }}>
+              <Img src={staticFile(`logos/${MARKS[i % MARKS.length]}`)}
+                style={{ width: 44, height: 44, objectFit: "contain" }} />
+            </div>
+            {/* the tag turns over: PAID on one face, $0 on the other */}
+            <div style={{ position: "absolute", left: 76, top: 24, width: 40, height: 34,
+              transformStyle: "preserve-3d",
+              transform: `rotateX(${flip * 180}deg)` }}>
+              <div style={{ position: "absolute", inset: 0, borderRadius: 5, background: RED,
+                backfaceVisibility: "hidden", display: "flex", alignItems: "center",
+                justifyContent: "center" }}>
+                <span style={{ ...mono(13, 900), color: "#2A0A06" }}>PAID</span>
+              </div>
+              <div style={{ position: "absolute", inset: 0, borderRadius: 5, background: "#EDE7D6",
+                backfaceVisibility: "hidden", transform: "rotateX(180deg)",
+                boxShadow: `0 0 ${flip * 22}px ${hexa(GOLD, 0.7)}`,
+                display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ ...mono(17, 900), color: "#2A1D06" }}>$0</span>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* the wall going in every direction — the PLATE among the pieces */}
+      {Array.from({ length: 24 }, (_, i) => {
+        const a2 = (i / 24) * Math.PI * 2;
+        const d = k * (280 + rnd(i, 41) * 640);
+        return (
+          <div key={"db" + i} style={{ position: "absolute", zIndex: 50,
+            left: 430 + Math.cos(a2) * d * 1.3,
+            top: 360 + Math.sin(a2) * d * 0.86 + k * k * 260,
+            transform: `rotate(${k * (200 + rnd(i, 42) * 520)}deg)`,
+            opacity: 1 - Math.max(0, (k - 0.62) / 0.38) }}>
+            <Slab i={i} x={0} y={0} s={0.32 + rnd(i, 43) * 0.36} />
+          </div>
+        );
+      })}
+      <div style={{ position: "absolute", inset: 0, zIndex: 74,
+        opacity: 1 - Math.max(0, (k - 0.34) / 0.30),
+        transform: `translate(${k * 210}px, ${-k * 150 + k * k * 420}px) rotate(${k * 34}deg)` }}>
+        <ClaimPlate x={506} y={196} w={640} f={f} z={74} num={PLATE.num} line={PLATE.line} />
       </div>
-      <Contact x={694} y={GY + 30} w={470} z={30} o={0.48} />
-      <ClaimPlate x={340} y={188} w={600} f={f} z={78} num={PLATE.num} line={PLATE.line} />
-      <Hero f={f} x={122} y={748} size={144} z={80} act={2} ph={0.4}
-        cheer={0.8} costume={{ constr: 1 }} />
-      <Contact x={122} y={748} w={108} z={19} o={0.42} />
+
+      {/* the cast, through the hole it made */}
+      {[{ x: 150, s: 176, i: 1 }, { x: 806, s: 148, i: 7 }].map((c, q) => (
+        <Crew key={"cw" + q} f={f} x={c.x - (1 - come) * (200 + q * 60)} y={GY + 54 + q * 12}
+          i={c.i} size={c.s * (0.66 + come * 0.34)} z={64 + q} at={6 + q * 4}
+          loop={q ? 3 : 2} cheer={come > 0.6 ? 1 : 0} />
+      ))}
+
+      {/* THE ANIMAL, straight through it */}
+      <Contact x={oxX} y={GY + 34} w={620} z={30} o={0.50} />
+      <Ox x={oxX} y={GY + 34} s={1.42} z={62} f={f}
+        charge={1 - settle * 0.42} strain={0.9 * (1 - settle)} rug={false} />
+      {Array.from({ length: 12 }, (_, i) => {
+        const t = ((lf * 0.07) + i * 0.083) % 1;
+        return (
+          <div key={"dz" + i} style={{ position: "absolute", zIndex: 40,
+            left: oxX - 240 - t * 200 + rnd(i, 91) * 90,
+            top: GY + 24 - t * 70 - rnd(i, 92) * 26,
+            width: 42 + t * 86, height: 36 + t * 70, borderRadius: "50%",
+            opacity: (1 - t) * 0.72 * (1 - settle * 0.5),
+            background: `radial-gradient(circle at 44% 40%, ${hexa("#EFE4C8", 0.95)} 0%, ${hexa("#D8C49A", 0.7)} 50%, ${hexa("#D8C49A", 0)} 80%)` }} />
+        );
+      })}
     </Scene>
   );
 };

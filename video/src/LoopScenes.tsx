@@ -449,35 +449,55 @@ const FlapCell: React.FC<{ ch: string; f: number; at: number; s?: number }> =
 export const S2: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("gallery");
-  /* ⭐⭐ REAL FOOTAGE OF THE PERSON BEING QUOTED. Alex: *"for 'even the creator
-     of claude code' show a video of the creator of claude code like speaking on
-     stage."* Source: Y Combinator, "Boris Cherny: We Cut 80% of Claude Code's
-     Prompt", the fireside chat at ~1:47. Two beats cut from it, both MUTED:
-     `boris_wide.mp4` (the stage two-shot, so you read that it IS a stage) and
-     `boris_tight.mp4` (him talking).
+  /* ⭐⭐ REAL FOOTAGE OF THE PERSON BEING QUOTED, PRESENTED. Source: Y Combinator,
+     "Boris Cherny: We Cut 80% of Claude Code's Prompt", the fireside chat at
+     ~1:47. Two beats, both MUTED: the stage two-shot (so you read that it IS a
+     stage) and the tight of him talking.
 
-     ⛔ REAL FOOTAGE IS NOT AUTOMATICALLY MOTION — a clip HELD for a sentence
-     measured 3.23 with a 60-frame dead run. So it gets an EDIT: a hard cut from
-     wide to tight on the measured onset of "creator" (6.57s = local f15), and a
-     second scale STEP at f56 as "the future" lands. Never a tween.
-     ⛔ AND IT IS MUTED. The clips carry their own audio and the VO owns this
-     track; `-an` at extract time, `muted` here, belt and braces.
+     ⛔ THE QUOTE IS NOT IN THE PICTURE. A lower third used to carry "MY JOB IS
+     TO WRITE LOOPS" under the screen and Alex cut it: the HEADER BAND above
+     already says it, so the strip was the same words twice — the identical
+     defect this reel had thirteen times over in its first build. The receipt
+     lives in the header; the frame carries the footage.
 
-     ⭐ THE QUOTE SURVIVES AS A LOWER THIRD. The split-flap board that used to
-     carry it was the better-reading half of the old scene, but it cannot share
-     the frame with footage. A broadcast lower third does the same job in a
-     quarter of the space and is a shape every viewer already knows. */
+     ⭐ AND ONE BIG CLAUDE PRESENTS IT. Alex: *"just have like maybe one big
+     claude sprite to the side directing something with a pointer, moving it on
+     the screen."* That is a better shape than a crowd watching: a presenter
+     directing your attention IS the scene's job, the pointer gives the frame a
+     second continuously-moving object, and the tip tracking across the screen
+     is the only thing in the shot that says "look at this bit".
+     ⛔ THE POINTER OBEYS THE RIG: the forearm STARTS on the mascot's own arm and
+     ENDS on the stick, and the stick ends on a tip that is ON the screen. A limb
+     or a stick terminating in mid-air is the banned shape. */
   const CUT = 15;
   const punch = f >= 56 ? 1.07 : 1;
-  const SX = 148, SY = 214, SW = 716, SH = 403;
-  const lower = E(f, 41, 52, 0, 1, OUT);
-  const words = R.cherny.quote.split(" ");
+  const SX = 40, SY = 186, SW = 560, SH = 315;
+
+  /* the tip's path across the screen — four waypoints, eased, never a straight
+     line, so it reads as someone indicating rather than a sweeping laser */
+  const WP = [[420, 372], [148, 248], [462, 428], [232, 300]] as const;
+  const legs = [[6, 26], [30, 54], [58, 80], [84, 97]] as const;
+  let tx = WP[0][0], ty = WP[0][1];
+  for (let i = 0; i < legs.length; i++) {
+    const [a0, b0] = legs[i];
+    const from = WP[i], to = WP[(i + 1) % WP.length];
+    if (f >= a0) {
+      const k = E(f, a0, b0, 0, 1, IO);
+      tx = from[0] + (to[0] - from[0]) * k;
+      ty = from[1] + (to[1] - from[1]) * k;
+    }
+  }
+  /* the hand end of the stick, taken off the hero's own rig */
+  const HX = armX(770, 370, true), HY = armY(740, 370);
+  const len = Math.hypot(tx - HX, ty - HY);
+  const ang = (Math.atan2(ty - HY, tx - HX) * 180) / Math.PI;
+
   return (
     <Scene p={p} slug="" push={[0, dur, 1.058]} vig={0.62} glow={hexa(p.key, 0.22)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="duct" bands={3} kind="shutter"
         rake={0.162} rakeX={RAKE_X0[v]} rakeRate={3.71 * RAKE_K[v]}
-        lamp={{ x: 506, y: 300, r: 400 }} />
-      <ReturnRail y={120} f={f} rate={6.07 * RAKE_K[v]} z={26} c={STEEL} hangers={false} />
+        lamp={{ x: 400, y: 300, r: 400 }} />
+      <ReturnRail y={112} f={f} rate={6.07 * RAKE_K[v]} z={26} c={STEEL} hangers={false} />
 
       {/* the wall-mounted display: a real bezel, a mount arm and a status lamp */}
       <div style={{ position: "absolute", left: SX - 18, top: SY - 18, width: SW + 36,
@@ -485,7 +505,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
         background: `linear-gradient(172deg, #3A414C 0%, #1C2027 62%, #12151A 100%)`,
         border: `6px solid #0C0E12` }} />
       <div style={{ position: "absolute", left: SX + SW / 2 - 34, top: SY + SH + 18, width: 68,
-        height: 54, zIndex: 41, background: dkh(SLATE, 0.46) }} />
+        height: 58, zIndex: 41, background: dkh(SLATE, 0.46) }} />
       <div style={{ position: "absolute", left: SX + SW - 44, top: SY + SH + 2, width: 14,
         height: 14, borderRadius: 14, zIndex: 44, background: GREEN }} />
 
@@ -503,43 +523,50 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
               style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </Sequence>
         </div>
-        {/* a faint scan sheen so it reads as a SCREEN rather than a hole in the wall */}
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none",
           background: `linear-gradient(184deg, ${hexa("#BFD8F2", 0.10)} 0%, ${hexa("#BFD8F2", 0)} 46%)` }} />
       </div>
-      <ScreenAura x={SX} y={SY} w={SW} h={SH} c={SKY} k={0.7} z={40} f={f} />
+      <ScreenAura x={SX} y={SY} w={SW} h={SH} c={SKY} k={0.72} z={40} f={f} />
 
-      {/* ⭐ THE LOWER THIRD — the receipt, in the shape every viewer knows */}
-      <div style={{ position: "absolute", left: SX - 18 + 26, top: SY + SH - 96,
-        zIndex: 60, display: "flex", alignItems: "stretch", borderRadius: 10,
-        overflow: "hidden", boxShadow: SH_D,
-        transform: `translateX(${(1 - lower) * -420}px)`, opacity: lower }}>
-        <div style={{ background: CLAY, padding: "10px 14px", display: "flex",
-          alignItems: "center" }}>
-          <div style={{ width: 30, height: 30, borderRadius: 8, background: "#FFFFFF",
-            display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Img src={staticFile("claude_logo.png")}
-              style={{ width: 25, height: 25, objectFit: "contain" }} />
-          </div>
-        </div>
-        <div style={{ background: "#12151A", padding: "9px 20px", display: "flex",
-          flexDirection: "column", justifyContent: "center" }}>
-          <span style={{ ...mono(29, 900), color: "#F4EAD2", letterSpacing: "0.02em",
-            whiteSpace: "nowrap" }}>{"\u201C" + R.cherny.quote + "\u201D"}</span>
-          <span style={{ ...mono(17, 800), color: "#8E96A4", letterSpacing: "0.14em",
-            whiteSpace: "nowrap", marginTop: 3 }}>
-            {R.cherny.who + "  \u00B7  " + R.cherny.what}</span>
-        </div>
+      {/* ⭐ THE POINTER TIP — a ring on the glass, so the frame shows what he is
+          indicating rather than just that he is indicating */}
+      <div style={{ position: "absolute", left: tx - 27, top: ty - 27, width: 54, height: 54,
+        borderRadius: "50%", zIndex: 58, border: `4px solid ${hexa(GOLD, 0.86)}` }} />
+      <div style={{ position: "absolute", left: tx - 8, top: ty - 8, width: 16, height: 16,
+        borderRadius: "50%", zIndex: 59, background: GOLD }} />
+
+      {/* the stick: a real tapered pointer with a ferrule and a grip */}
+      <div style={{ position: "absolute", left: HX, top: HY - 6, width: len, height: 12,
+        zIndex: 57, transformOrigin: "0% 50%", transform: `rotate(${ang}deg)`,
+        borderRadius: 6,
+        background: `linear-gradient(90deg, #2E2A24 0%, #6E6656 16%, #CFC5AE 92%, #F2E8D2 100%)` }}>
+        <div style={{ position: "absolute", left: 0, top: -3, width: 46, height: 18,
+          borderRadius: 8, background: "#241F19" }} />
+        <div style={{ position: "absolute", left: 46, top: -2, width: 12, height: 16,
+          borderRadius: 3, background: BRASS }} />
       </div>
 
-      {/* the room is lit BY the screen, and the crowd below is watching it */}
-      <Pool x={506} y={SY + SH + 40} w={900} c="#BFD8F2" o={0.20} z={20} hh={300} />
-      {[142, 300, 458, 616, 774, 918].map((x, i) => (
-        <Crew key={"gc" + i} f={f} x={x} y={772} i={i + 6} size={150} z={50} at={i * 3}
-          loop={f > 56 ? 2 : 3} />
+      {/* ⭐ ONE BIG CLAUDE, PRESENTING. He runs the LOOK loop between beats and
+          his gaze tracks the screen, so he is watching the thing he is pointing
+          at rather than the camera. */}
+      <Hero f={f} x={770} y={740} size={370} z={56} act={3} ph={0.8}
+        gaze={-0.9} costume={{ prof: 1 }} flip />
+      {/* ⛔ THE FOREARM CONNECTS BODY TO GRIP, and stops there. v1 ran it 96px
+          PAST the grip, so it read as a second stick crossing the first. */}
+      <Forearm x0={HX + 58} y0={HY + 7} x1={HX} y1={HY} w={27} z={58} />
+      <Contact x={678} y={736} w={190} z={19} o={0.42} />
+
+      {/* the room is lit BY the screen; a foreground rail keeps the floor from
+          reading as empty now that the crowd is gone */}
+      <Pool x={330} y={SY + SH + 70} w={860} c="#BFD8F2" o={0.22} z={20} hh={300} />
+      <div style={{ position: "absolute", left: -40, top: 748, width: W + 80, height: 16,
+        zIndex: 70, borderRadius: 8, background: dkh(SLATE, 0.52) }} />
+      {[60, 300, 540, 780].map((x, i) => (
+        <div key={"pst" + i} style={{ position: "absolute", left: x, top: 748, width: 18,
+          height: 70, zIndex: 69, background: dkh(SLATE, 0.60) }} />
       ))}
       <Stanchion side="l" c="#1A1F29" w={104} z={90} braceY={470} braceW={112} />
-      <Motes x={520} y={240} w={620} h={340} n={13} f={f} z={41} c="#CFE0F2" />
+      <Motes x={330} y={230} w={580} h={330} n={13} f={f} z={41} c="#CFE0F2" />
     </Scene>
   );
 };
