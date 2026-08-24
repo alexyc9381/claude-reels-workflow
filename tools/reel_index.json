@@ -2,10 +2,10 @@
   "counts": {
     "reels_with_code": 102,
     "reels_total": 146,
-    "factory_logs": 59,
+    "factory_logs": 61,
     "storyboards": 63,
     "caption_jsons": 112,
-    "memory_md": 200,
+    "memory_md": 211,
     "creators": 8,
     "packs": 3
   },
@@ -1628,7 +1628,7 @@
       "name": "ox",
       "number": 119,
       "code": "video/src/ClaudeOxReel.tsx",
-      "log": null,
+      "log": "memory/reels/ox-factory-log.md",
       "storyboard": "storyboards/119-ox.md",
       "captions": [
         "video/src/data/words_119ox.json"
@@ -1639,7 +1639,7 @@
       "name": "unlazy",
       "number": 120,
       "code": "video/src/ClaudeUnlazyReel.tsx",
-      "log": null,
+      "log": "memory/reels/unlazy-factory-log.md",
       "storyboard": "storyboards/120-unlazy.md",
       "captions": [
         "video/src/data/words_120unlazy.json"

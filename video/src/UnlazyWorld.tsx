@@ -768,8 +768,13 @@ export const Shutter: React.FC<{ x: number; y: number; w?: number; h?: number; o
     The test name survives as a small stencil ON the rig, the way a real machine
     carries its model number, instead of as a headline. */
 export const TestRig: React.FC<{ x: number; y: number; f: number; s?: number; z?: number;
-  head?: number; needle?: number; alarm?: number; stencil: string }> =
-  ({ x, y, f, s = 1, z = 44, head = 0, needle = 0, alarm = 0, stencil }) => {
+  head?: number; needle?: number; alarm?: number; stencil: string;
+  /** ⭐ swaps the dial and the beacon sides. Placement-mirroring a prop this big
+      does nothing on its own — the rig IS the frame — so the handedness has to
+      flip inside it. Text is untouched, which is the whole reason not to reach
+      for a `scaleX` on the scene. */
+  flip?: boolean }> =
+  ({ x, y, f, s = 1, z = 44, head = 0, needle = 0, alarm = 0, stencil, flip = false }) => {
   const W = 520 * s, H2 = 470 * s;
   const beat = alarm > 0 ? 0.55 + Math.abs(Math.sin(f / 3.4)) * 0.45 : 0;
   return (
@@ -812,7 +817,8 @@ export const TestRig: React.FC<{ x: number; y: number; f: number; s?: number; z?
           background: `linear-gradient(180deg, ${hexa("#8FE6FF", 0.34)} 0%, ${hexa("#8FE6FF", 0)} 100%)` }} />
       )}
       {/* THE VERDICT DIAL — the needle IS the information, so it is big */}
-      <div style={{ position: "absolute", left: W - 168 * s, top: 128 * s, width: 148 * s,
+      <div style={{ position: "absolute", [flip ? "right" : "left"]: W - 168 * s,
+        top: 128 * s, width: 148 * s,
         height: 148 * s, borderRadius: "50%", zIndex: 8, boxShadow: SH_D,
         background: `radial-gradient(52% 48% at 40% 34%, ${PAPER} 0%, ${CREAMB} 62%, ${dkh(CREAMB, 0.20)} 100%)`,
         border: `${8 * s}px solid ${dkh(STEEL, 0.56)}` }}>
@@ -828,7 +834,8 @@ export const TestRig: React.FC<{ x: number; y: number; f: number; s?: number; z?
           marginLeft: -9 * s, marginTop: -9 * s, borderRadius: "50%", background: dkh(STEEL, 0.52) }} />
       </div>
       {/* the beacon on the crown */}
-      <div style={{ position: "absolute", left: 44 * s, top: -34 * s, width: 54 * s, height: 50 * s,
+      <div style={{ position: "absolute", [flip ? "right" : "left"]: 44 * s,
+        top: -34 * s, width: 54 * s, height: 50 * s,
         zIndex: 9, borderRadius: "50% 50% 6px 6px",
         background: alarm > 0
           ? `radial-gradient(50% 50% at 44% 34%, ${mxh(RED, 0.5 + beat * 0.4)} 0%, ${RED} 100%)`
@@ -836,10 +843,10 @@ export const TestRig: React.FC<{ x: number; y: number; f: number; s?: number; z?
         boxShadow: alarm > 0 ? `0 0 ${46 * beat}px ${hexa(RED, 0.8 * beat)}` : "none",
         border: `${4 * s}px solid ${dkh(STEEL, 0.60)}` }} />
       {/* the stencil: the test's NAME, the size a model number actually is */}
-      <div style={{ position: "absolute", left: 22 * s, bottom: 22 * s,
+      <div style={{ position: "absolute", [flip ? "right" : "left"]: 22 * s, bottom: 22 * s,
         ...mono(Math.round(17 * s), 800), color: hexa(SODIUM, 0.88), letterSpacing: 1.5 }}>{stencil}</div>
-      <div style={{ position: "absolute", left: 22 * s, bottom: 44 * s, width: 210 * s, height: 3 * s,
-        background: hexa(SODIUM, 0.42) }} />
+      <div style={{ position: "absolute", [flip ? "right" : "left"]: 22 * s, bottom: 44 * s,
+        width: 210 * s, height: 3 * s, background: hexa(SODIUM, 0.42) }} />
     </div>
   );
 };

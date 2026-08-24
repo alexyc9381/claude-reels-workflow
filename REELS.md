@@ -3,12 +3,12 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 102 reels with code · 59 factory logs · 63 storyboards · 112 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 102 reels with code · 61 factory logs · 63 storyboards · 112 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
-| 120 | **UNLAZY** | [✓](video/src/ClaudeUnlazyReel.tsx) | [1](video/src/data/words_120unlazy.json) | · | [✓](storyboards/120-unlazy.md) | code, no log |
-| 119 | **OX** | [✓](video/src/ClaudeOxReel.tsx) | [1](video/src/data/words_119ox.json) | · | [✓](storyboards/119-ox.md) | code, no log |
+| 120 | **UNLAZY** | [✓](video/src/ClaudeUnlazyReel.tsx) | [1](video/src/data/words_120unlazy.json) | [✓](memory/reels/unlazy-factory-log.md) | [✓](storyboards/120-unlazy.md) | built |
+| 119 | **OX** | [✓](video/src/ClaudeOxReel.tsx) | [1](video/src/data/words_119ox.json) | [✓](memory/reels/ox-factory-log.md) | [✓](storyboards/119-ox.md) | built |
 | 118 | **LOOP** | [✓](video/src/ClaudeLoopReel.tsx) | [3](video/src/data/words_118loop.json) | [✓](memory/reels/loop118-factory-log.md) | [✓](storyboards/118-loop.md) | built |
 | 117 | **KNOW** | [✓](video/src/ClaudeKnowReel.tsx) | [1](video/src/data/words_117know.json) | [✓](memory/reels/know117-factory-log.md) | [✓](storyboards/117-know.md) | built |
 | 116 | **BILL** | [✓](video/src/ClaudeBillReel.tsx) | [1](video/src/data/words_116bill.json) | [✓](memory/reels/bill116-factory-log.md) | [✓](storyboards/116-bill.md) | built |

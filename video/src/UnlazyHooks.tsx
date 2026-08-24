@@ -68,18 +68,24 @@ const Grip: React.FC<{ from: [number, number]; to: [number, number]; size: numbe
    THE HERO PROPS
    ====================================================================== */
 
-/** ⭐ THE TROPHY, POLISHED. Alex: *"maybe lifting the trophy could be good if
-    its more polished."* So: a deeper bowl with a proper waist, a beaded rim, a
-    knurled stem collar, an engraved plinth, TWO specular sweeps, and a `crush`
-    that buckles the bowl inward and sheds gold flakes rather than just
-    squashing the path. */
+/** ⭐ THE TROPHY. Alex: *"the gallon jug thing needs to be skinnier and taller
+    instead of so wide and small."* Correct — the bowl ran 54 wide by 52 tall in
+    a 100-unit box, which is an URN, and the whole prop was in a 452x508 frame so
+    it read squat. It is now **320 x 620** with a bowl 36 wide by 62 tall over a
+    long stem: the silhouette of a cup you win, not a jug you pour from.
+    ⛔ `crush` collapses the bowl inward; the SCENE also collapses the whole
+    object, because a buckled path alone did not read. */
 const Trophy: React.FC<{ x: number; y: number; f: number; s?: number; z?: number;
-  crush?: number }> = ({ x, y, f, s = 1, z = 60, crush = 0 }) => {
-  const w = 452 * s, h = 508 * s;
+  crush?: number;
+  /** ⛔ the plinth used to be hard-wired to `R.bench` — which now DUPLICATES the
+      wall receipt plate two feet away. The engraving is the trophy's own claim. */
+  big?: string; small?: string }> =
+  ({ x, y, f, s = 1, z = 60, crush = 0, big = R.bench.value, small = R.bench.src }) => {
+  const w = 320 * s, h = 620 * s;
   const c = crush;
   return (
     <div style={{ position: "absolute", left: x - w / 2, top: y - h, width: w, height: h, zIndex: z }}>
-      <svg width={w} height={h} viewBox="0 0 100 112" style={{ overflow: "visible" }}>
+      <svg width={w} height={h} viewBox="0 0 100 194" style={{ overflow: "visible" }}>
         <defs>
           <linearGradient id="tAu" x1="0.1" y1="0" x2="0.9" y2="1">
             <stop offset="0%" stopColor={mxh(GOLD, 0.58)} />
@@ -95,69 +101,64 @@ const Trophy: React.FC<{ x: number; y: number; f: number; s?: number; z?: number
         {/* the two handles, which is what makes a cup a TROPHY */}
         {[-1, 1].map(sg => (
           <path key={sg}
-            d={`M${50 + sg * 25} 21 C${50 + sg * 47} 17 ${50 + sg * 50} 47 ${50 + sg * 27} 50`}
-            fill="none" stroke={dkh(GOLD, 0.26)} strokeWidth={8 - c * 3.5}
-            strokeLinecap="round" opacity={1 - c * 0.7} />
+            d={`M${50 + sg * 18} 26 C${50 + sg * 41} 22 ${50 + sg * 44} 68 ${50 + sg * 19} 74`}
+            fill="none" stroke={dkh(GOLD, 0.26)} strokeWidth={7 - c * 3} strokeLinecap="round"
+            opacity={1 - c * 0.7} />
         ))}
-        {/* the bowl: a real waisted profile, buckling inward as it crushes */}
-        <path d={`M23 ${18 + c * 5}
-                  C23 ${44 - c * 10} ${29 + c * 8} ${60 - c * 16} ${39 + c * 3} ${70 - c * 20}
-                  L${61 - c * 3} ${70 - c * 20}
-                  C${71 - c * 8} ${60 - c * 16} 77 ${44 - c * 10} 77 ${18 + c * 5} Z`}
+        {/* the bowl: tall, waisted, buckling inward as it crushes */}
+        <path d={`M32 ${22 + c * 8}
+                  C32 ${62 - c * 14} ${38 + c * 6} ${94 - c * 26} ${45 + c * 2} ${104 - c * 30}
+                  L${55 - c * 2} ${104 - c * 30}
+                  C${62 - c * 6} ${94 - c * 26} 68 ${62 - c * 14} 68 ${22 + c * 8} Z`}
           fill="url(#tAu)" stroke={dkh(GOLD, 0.50)} strokeWidth="2.4" />
-        {/* the buckle crease that appears as it collapses */}
         {c > 0.15 && (
-          <path d={`M26 ${34 + c * 6} Q50 ${48 + c * 14} 74 ${34 + c * 6}`} fill="none"
+          <path d={`M34 ${52 + c * 10} Q50 ${72 + c * 20} 66 ${52 + c * 10}`} fill="none"
             stroke={dkh(GOLD, 0.56)} strokeWidth={2.6} opacity={c} />
         )}
         {/* the beaded rim */}
-        <path d={`M21 ${16 + c * 5} L79 ${16 + c * 5} L79 ${23 + c * 5} L21 ${23 + c * 5} Z`}
+        <path d={`M29 ${18 + c * 8} L71 ${18 + c * 8} L71 ${26 + c * 8} L29 ${26 + c * 8} Z`}
           fill="url(#tRim)" stroke={dkh(GOLD, 0.44)} strokeWidth="1.8" />
-        {Array.from({ length: 13 }, (_, i) => (
-          <circle key={i} cx={23 + i * 4.5} cy={19.5 + c * 5} r="1.5" fill={mxh(GOLD, 0.62)} />
+        {Array.from({ length: 11 }, (_, i) => (
+          <circle key={i} cx={31 + i * 3.8} cy={22 + c * 8} r="1.4" fill={mxh(GOLD, 0.62)} />
         ))}
-        {/* stem, knurled collar, plinth */}
-        <path d={`M45 ${70 - c * 20} L55 ${70 - c * 20} L57 84 L43 84 Z`}
+        {/* a long stem, a knurled collar, then the plinth */}
+        <path d={`M46 ${104 - c * 30} L54 ${104 - c * 30} L56 148 L44 148 Z`}
           fill={dkh(GOLD, 0.20)} stroke={dkh(GOLD, 0.48)} strokeWidth="2" />
-        <rect x="41" y="76" width="18" height="6" fill={dkh(GOLD, 0.40)} />
+        <rect x="42" y="132" width="16" height="8" fill={dkh(GOLD, 0.40)} />
         {Array.from({ length: 7 }, (_, i) => (
-          <rect key={i} x={42 + i * 2.4} y="76" width="1" height="6" fill={mxh(GOLD, 0.40)} />
+          <rect key={i} x={43 + i * 2.1} y="132" width="0.9" height="8" fill={mxh(GOLD, 0.40)} />
         ))}
-        <path d="M29 84 L71 84 L76 97 L24 97 Z" fill={dkh(BRASS, 0.14)}
+        <path d="M33 148 L67 148 L74 166 L26 166 Z" fill={dkh(BRASS, 0.14)}
           stroke={dkh(BRASS, 0.48)} strokeWidth="2" />
-        <path d="M20 97 L80 97 L80 110 L20 110 Z" fill={dkh(OXIDE, 0.30)}
+        <path d="M22 166 L78 166 L78 190 L22 190 Z" fill={dkh(OXIDE, 0.30)}
           stroke={dkh(OXIDE, 0.54)} strokeWidth="2" />
         {/* two speculars — one hot edge, one broad sheen */}
-        <path d={`M32 ${24 + c * 5} C29 40 31 54 37 ${64 - c * 18}`} stroke={hexa("#FFFFFF", 0.40)}
-          strokeWidth="6" fill="none" strokeLinecap="round" />
-        <path d={`M66 ${26 + c * 5} C69 40 68 52 63 ${62 - c * 18}`} stroke={hexa("#FFFFFF", 0.16)}
-          strokeWidth="9" fill="none" strokeLinecap="round" />
+        <path d={`M38 ${32 + c * 8} C35 62 37 84 42 ${96 - c * 26}`} stroke={hexa("#FFFFFF", 0.40)}
+          strokeWidth="4" fill="none" strokeLinecap="round" opacity={1 - c * 0.5} />
+        <path d={`M60 ${36 + c * 8} C63 60 62 80 58 ${94 - c * 26}`} stroke={hexa("#FFFFFF", 0.14)}
+          strokeWidth="7" fill="none" strokeLinecap="round" opacity={1 - c * 0.5} />
+        {/* the gold flaking off as it caves */}
+        {c > 0.2 && Array.from({ length: 9 }, (_, i) => (
+          <rect key={"fl" + i} x={30 + i * 5} y={54 + rnd(i, 9) * 40 + c * 44}
+            width={3 + rnd(i, 3) * 4} height="3" fill={mxh(GOLD, 0.30)}
+            opacity={Math.max(0, 0.9 - c * 0.6)}
+            transform={`rotate(${rnd(i, 5) * 90} 50 90)`} />
+        ))}
       </svg>
-      {/* the engraved plaque — the receipt goes where a winner's name goes */}
-      <div style={{ position: "absolute", left: w * 0.17, top: h * 0.877, width: w * 0.66,
-        height: h * 0.082, background: `linear-gradient(168deg, ${PAPER} 0%, ${CREAMB} 100%)`,
-        border: `${3 * s}px solid ${dkh(BRASS, 0.42)}`, display: "flex", alignItems: "center",
-        justifyContent: "center", gap: 9 * s }}>
-        <span style={{ ...ui(Math.round(36 * s), 900), color: INK,
-          fontFamily: "Fraunces, Georgia, serif" }}>{R.bench.value}</span>
-        <span style={{ ...mono(Math.round(12 * s), 800), color: dkh(MUTE, 0.22) }}>{R.bench.src}</span>
+      {/* the engraved plate on the plinth */}
+      <div style={{ position: "absolute", left: w * 0.20, top: h * 0.885, width: w * 0.60,
+        height: h * 0.062, display: "flex", alignItems: "center", justifyContent: "center",
+        gap: 6 * s, background: `linear-gradient(178deg, ${PAPER} 0%, ${CREAMB} 100%)`,
+        border: `${2.4 * s}px solid ${dkh(BRASS, 0.44)}` }}>
+        <span style={{ ...ui(Math.round(30 * s), 900), color: INK,
+          fontFamily: "Fraunces, Georgia, serif", letterSpacing: 5 }}>{big}</span>
+        <span style={{ ...mono(Math.round(12 * s), 800), color: dkh(MUTE, 0.22) }}>{small}</span>
       </div>
-      {/* gold flakes shedding off it as it goes */}
-      {c > 0.1 && Array.from({ length: 10 }, (_, i) => {
-        const t = Math.min(1, (c - 0.1) * 1.4 + rnd(i, 9) * 0.3);
-        return <div key={"fk" + i} style={{ position: "absolute",
-          left: w * (0.2 + rnd(i, 3) * 0.6) + (rnd(i, 4) - 0.5) * 180 * t,
-          top: h * 0.34 + t * t * 420, width: 12 * s, height: 8 * s,
-          transform: `rotate(${t * 420}deg)`, background: mxh(GOLD, 0.30),
-          opacity: 1 - t * 0.7 }} />;
-      })}
     </div>
   );
 };
 
-/** ⭐ THE HILL AND THE MOUNTAIN — the gag is a SILHOUETTE COMPARISON, so both
-    masses are drawn as paths: a molehill you could step over, and behind it the
-    actual mountain, untouched, with the route still unwalked. */
+/* ⛔ restored: the trophy rewrite above overwrote this in passing. */
 const Massif: React.FC<{ f: number; z?: number; lit?: string }> = ({ f, z = 20, lit = "#E9DABB" }) => (
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ position: "absolute", left: 0,
     top: 0, zIndex: z }}>
@@ -194,14 +195,110 @@ const Massif: React.FC<{ f: number; z?: number; lit?: string }> = ({ f, z = 20, 
   </svg>
 );
 
+/** ⭐⭐ THE FILL COLUMN. Alex: *"the thing is like a trophy like one of the
+    options that needs to be like the thing filling up."* So the third concept is
+    a PROGRESS METER AS AN OBJECT: a tall, slim graduated column on a brass
+    plinth — the trophy silhouette he liked — that fills with every stroke,
+    reaches the DONE band, lights its lamp, and then splits at the base and
+    drains out. "It says 100%" and "it is full" turn out to be different claims,
+    which is the whole reel in one prop. */
+const FillColumn: React.FC<{ x: number; y: number; f: number; s?: number; z?: number;
+  fill?: number; burst?: number; c?: string }> =
+  ({ x, y, f, s = 1, z = 44, fill = 0, burst = 0, c = GOLD }) => {
+  const W2 = 300 * s, H2 = 620 * s;
+  const TUBE_T = 92 * s, TUBE_B = 486 * s;          /* the glass, top and bottom */
+  const span = TUBE_B - TUBE_T;
+  /* it fills to the DONE band, then the split lets it all go */
+  const lvl = Math.max(0, Math.min(1, fill)) * (1 - burst);
+  const top = TUBE_B - span * lvl;
+  const slosh = Math.sin(f / 3.6) * 5 * s * Math.min(1, fill) * (1 - burst);
+  const lit = fill >= 0.97 && burst < 0.25;
+  return (
+    <div style={{ position: "absolute", left: x - W2 / 2, top: y - H2, width: W2, height: H2,
+      zIndex: z }}>
+      {/* the finial, which is what makes it read as a trophy and not a test tube */}
+      <div style={{ position: "absolute", left: W2 / 2 - 20 * s, top: 6 * s, width: 40 * s,
+        height: 40 * s, borderRadius: "50%", zIndex: 6,
+        background: `radial-gradient(50% 50% at 36% 30%, ${mxh(BRASS, 0.56)} 0%, ${BRASS} 52%, ${dkh(BRASS, 0.48)} 100%)`,
+        border: `${4 * s}px solid ${dkh(BRASS, 0.56)}` }} />
+      <div style={{ position: "absolute", left: W2 / 2 - 52 * s, top: 42 * s, width: 104 * s,
+        height: 26 * s, borderRadius: 5 * s, zIndex: 6,
+        background: `linear-gradient(178deg, ${mxh(BRASS, 0.34)} 0%, ${dkh(BRASS, 0.48)} 100%)` }} />
+      {/* the two brass posts down the sides */}
+      {[-1, 1].map(sg => (
+        <div key={"po" + sg} style={{ position: "absolute", left: W2 / 2 + sg * 74 * s - 8 * s,
+          top: 62 * s, width: 16 * s, height: 448 * s, zIndex: 5, borderRadius: 4 * s,
+          background: `linear-gradient(90deg, ${dkh(BRASS, 0.52)} 0%, ${mxh(BRASS, 0.24)} 44%, ${dkh(BRASS, 0.56)} 100%)` }} />
+      ))}
+      {/* the glass */}
+      <div style={{ position: "absolute", left: W2 / 2 - 58 * s, top: TUBE_T, width: 116 * s,
+        height: span, zIndex: 4, borderRadius: 8 * s, overflow: "hidden",
+        background: `linear-gradient(90deg, ${hexa("#DCE8EE", 0.30)} 0%, ${hexa("#FFFFFF", 0.12)} 34%, ${hexa("#B9CBD4", 0.24)} 100%)`,
+        border: `${5 * s}px solid ${dkh(BRASS, 0.50)}`, boxShadow: `inset 0 0 ${18 * s}px ${hexa("#20303A", 0.34)}` }}>
+        {/* the fluid, with a meniscus that sloshes */}
+        {lvl > 0.004 && (<>
+          <div style={{ position: "absolute", left: 0, right: 0, top: top - TUBE_T + slosh,
+            bottom: 0, background: `linear-gradient(180deg, ${mxh(c, 0.20)} 0%, ${c} 34%, ${dkh(c, 0.40)} 100%)` }} />
+          <div style={{ position: "absolute", left: 0, right: 0, top: top - TUBE_T + slosh - 5 * s,
+            height: 11 * s, borderRadius: "50%",
+            background: `linear-gradient(180deg, ${mxh(c, 0.62)} 0%, ${mxh(c, 0.10)} 100%)` }} />
+        </>)}
+        {/* a vertical specular so the glass reads as glass */}
+        <div style={{ position: "absolute", left: 12 * s, top: 8 * s, width: 13 * s, bottom: 8 * s,
+          borderRadius: 7 * s, background: hexa("#FFFFFF", 0.26) }} />
+      </div>
+      {/* graduations up the outside */}
+      {Array.from({ length: 11 }, (_, i) => (
+        <div key={"gd" + i} style={{ position: "absolute", left: W2 / 2 + 60 * s,
+          top: TUBE_B - (span / 10) * i - 2 * s, width: (i % 5 === 0 ? 26 : 15) * s,
+          height: 4 * s, zIndex: 6, background: dkh(BRASS, 0.54) }} />
+      ))}
+      {/* the DONE band at the top of the scale, and the lamp that believes it */}
+      <div style={{ position: "absolute", left: W2 / 2 - 74 * s, top: TUBE_T - 4 * s,
+        width: 148 * s, height: 34 * s, zIndex: 7, borderRadius: 4 * s,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        background: lit ? mxh(VERD, 0.24) : dkh(SLATE, 0.56),
+        border: `${3 * s}px solid ${lit ? dkh(VERD, 0.24) : dkh(SLATE, 0.72)}`,
+        boxShadow: lit ? `0 0 ${26 * s}px ${hexa(VERD, 0.7)}` : "none",
+        ...ui(Math.round(21 * s), 900), letterSpacing: 5 * s,
+        color: lit ? "#EAFBEF" : hexa(PAPER, 0.34) }}>DONE</div>
+      {/* the brass plinth */}
+      <div style={{ position: "absolute", left: W2 / 2 - 84 * s, top: TUBE_B + 8 * s,
+        width: 168 * s, height: 40 * s, zIndex: 5, borderRadius: 4 * s,
+        background: `linear-gradient(178deg, ${mxh(BRASS, 0.28)} 0%, ${dkh(BRASS, 0.44)} 100%)` }} />
+      <div style={{ position: "absolute", left: W2 / 2 - 104 * s, top: TUBE_B + 46 * s,
+        width: 208 * s, height: 46 * s, zIndex: 5, borderRadius: 4 * s, boxShadow: SH_D,
+        background: `linear-gradient(178deg, ${mxh(OXIDE, 0.10)} 0%, ${dkh(OXIDE, 0.44)} 100%)` }} />
+      {/* ⛔ AND THEN THE BOTTOM GOES. A split at the base, and the whole column
+          drains through it — the level is the claim, so losing it IS the beat. */}
+      {burst > 0.02 && (<>
+        <svg width={110 * s} height={70 * s} viewBox="0 0 110 70" style={{ position: "absolute",
+          left: W2 / 2 - 55 * s, top: TUBE_B - 56 * s, zIndex: 8, overflow: "visible" }}>
+          <polyline points="18,8 34,30 24,44 46,62" fill="none" stroke={dkh(INK, 0.10)}
+            strokeWidth="6" strokeLinecap="round" opacity={Math.min(1, burst * 3)} />
+        </svg>
+        <div style={{ position: "absolute", left: W2 / 2 - 26 * s, top: TUBE_B - 14 * s,
+          width: 52 * s, height: 150 * s * burst, zIndex: 3, borderRadius: 6 * s,
+          background: `linear-gradient(180deg, ${c} 0%, ${hexa(c, 0)} 100%)`, opacity: 1 - burst * 0.4 }} />
+        <div style={{ position: "absolute", left: W2 / 2 - 96 * s * burst, top: TUBE_B + 88 * s,
+          width: 192 * s * burst, height: 22 * s, borderRadius: "50%", zIndex: 4,
+          background: `radial-gradient(50% 50% at 50% 50%, ${dkh(c, 0.24)} 0%, ${hexa(c, 0.10)} 100%)` }} />
+      </>)}
+    </div>
+  );
+};
+
 /** ⭐⭐ THE BALLOON — a real teardrop, not a circle. v3 rendered at d=140 on
     frame 0 and read as a green pea; it now opens ALREADY PART INFLATED at 300px
     and reaches 500, which is half the panel. Drawn as an SVG path because a
     balloon's silhouette is a teardrop with a neck and a knot, and that neck is
     what stops it reading as a ball. */
 const Balloon: React.FC<{ x: number; y: number; f: number; p?: number; pop?: number;
-  s?: number; z?: number; dent?: number; wob?: number; popAt?: number }> =
-  ({ x, y, f, p = 0, pop = 0, s = 1, z = 60, dent = 0, wob = 0, popAt = 0 }) => {
+  s?: number; z?: number; dent?: number; wob?: number; popAt?: number;
+  /** ⭐ the rubber's colour. Green is the false PASS, which is the joke — but the
+      colour is also the cheapest thing to A/B, so it is a prop. */
+  c?: string }> =
+  ({ x, y, f, p = 0, pop = 0, s = 1, z = 60, dent = 0, wob = 0, popAt = 0, c = GREEN }) => {
   const d = (300 + p * 200) * s;
   const hh = d * 1.16;
   const bob = Math.sin(f / 13) * 7 * p;
@@ -217,10 +314,10 @@ const Balloon: React.FC<{ x: number; y: number; f: number; p?: number; pop?: num
       <svg width={d} height={hh} viewBox="0 0 100 116" style={{ overflow: "visible" }}>
         <defs>
           <radialGradient id="blG" cx="0.34" cy="0.27" r="0.78">
-            <stop offset="0%" stopColor={mxh(GREEN, 0.72)} />
-            <stop offset="22%" stopColor={mxh(GREEN, 0.26)} />
-            <stop offset="58%" stopColor={GREEN} />
-            <stop offset="100%" stopColor={dkh(GREEN, 0.46)} />
+            <stop offset="0%" stopColor={mxh(c, 0.72)} />
+            <stop offset="22%" stopColor={mxh(c, 0.26)} />
+            <stop offset="58%" stopColor={c} />
+            <stop offset="100%" stopColor={dkh(c, 0.46)} />
           </radialGradient>
         </defs>
         {/* the teardrop body, with the DENT the nose presses into its side */}
@@ -230,18 +327,18 @@ const Balloon: React.FC<{ x: number; y: number; f: number; p?: number; pop?: num
                   L42 100
                   C24 96 4 74 4 48
                   C4 22 22 2 50 2 Z`}
-          fill="url(#blG)" stroke={dkh(GREEN, 0.42)} strokeWidth="2" />
+          fill="url(#blG)" stroke={dkh(c, 0.42)} strokeWidth="2" />
         {/* the neck and the knot */}
-        <path d="M42 99 L58 99 L55 109 L45 109 Z" fill={dkh(GREEN, 0.30)} />
-        <ellipse cx="50" cy="111" rx="8" ry="5" fill={dkh(GREEN, 0.40)} />
+        <path d="M42 99 L58 99 L55 109 L45 109 Z" fill={dkh(c, 0.30)} />
+        <ellipse cx="50" cy="111" rx="8" ry="5" fill={dkh(c, 0.40)} />
         {/* the seam and the two speculars that make rubber read as rubber */}
-        <path d="M50 3 C34 30 33 66 46 99" fill="none" stroke={hexa("#0B2A18", 0.14)} strokeWidth="2" />
+        <path d="M50 3 C34 30 33 66 46 99" fill="none" stroke={hexa(dkh(c, 0.72), 0.30)} strokeWidth="2" />
         <ellipse cx="32" cy="30" rx="12" ry="16" fill={hexa("#FFFFFF", 0.52)} transform="rotate(-22 32 30)" />
         <ellipse cx="70" cy="66" rx="5" ry="14" fill={hexa("#FFFFFF", 0.13)} transform="rotate(14 70 66)" />
       </svg>
       {p > 0.30 && (
         <div style={{ position: "absolute", left: 0, right: 0, top: "34%",
-          ...ui(Math.round(d * 0.23), 900), color: hexa("#EAFBEF", 0.96), textAlign: "center",
+          ...ui(Math.round(d * 0.23), 900), color: hexa(mxh(c, 0.90), 0.98), textAlign: "center",
           letterSpacing: 5, transform: "rotate(-4deg)" }}>DONE</div>
       )}
     </div>)}
@@ -261,7 +358,7 @@ const Balloon: React.FC<{ x: number; y: number; f: number; p?: number; pop?: num
           width: (36 - (i % 3) * 9) * s, height: (17 - (i % 3) * 4) * s,
           borderRadius: "60% 40% 50% 50%", zIndex: 72,
           transform: `rotate(${a2 * 57 + bt * 640}deg)`, opacity: Math.max(0, 1 - bt * 1.25),
-          background: i % 2 ? dkh(GREEN, 0.22) : mxh(GREEN, 0.10) }} />;
+          background: i % 2 ? dkh(c, 0.22) : mxh(c, 0.10) }} />;
       });
     })()}
   </>);
@@ -457,7 +554,23 @@ const Cannon: React.FC<{ x: number; y: number; f: number; s?: number; z?: number
 /* =========================================================================
    THE FIVE CANDIDATES
    ====================================================================== */
+export type Concept = "balloon" | "trophy" | "paint" | "fill";
+
 type HP = { dur: number;
+  /** ⭐⭐ WHICH FALSE CLAIM THE HOOK IS ABOUT. Alex: *"you need to make each hook
+      scene slightly different... they need to be different concepts to a/b test
+      to see what works... maybe its doing something else besides a balloon."*
+      All three run the SAME BEATS on the SAME SET with the same nose, flush,
+      steam and column jam — so the SFX bank, which is per-reel, still lands on
+      every event without a per-cut copy — and only the OBJECT and its failure
+      change. That is what makes it a test: one variable.
+        balloon  inflate and burst   (green DONE, punctured)
+        trophy   hoist and crumple   (gold DONE, foil-thin)
+        paint    cover and strip     (gold over rust, sheets off)
+        fill     fill and drain      (a column reaches DONE, then empties)  */
+  concept?: Concept;
+  /** the balloon's rubber, when the concept is `balloon` */
+  bal?: string;
   /** per-cut levers, passed IN so this file never imports UnlazyScenes.
       ⛔ RAKE PHASE IS MODULO THE BAND PITCH — see [[feedback_rake_phase_is_modulo_pitch]]. */
   rakeX?: number; rakeK?: number; parX?: number };
@@ -577,7 +690,8 @@ export const HookFlag: React.FC<HP> = ({ dur }) => {
 };
 
 /* 3 · BALLOON — its "done" is hot air, and it pops. */
-export const HookBalloon: React.FC<HP> = ({ dur, rakeX = 0, rakeK = 1, parX = 0 }) => {
+export const HookBalloon: React.FC<HP> = ({ dur, rakeX = 0, rakeK = 1, parX = 0,
+  concept = "balloon", bal = GREEN }) => {
   const f = useCurrentFrame();
   const p = bay();
   const SZ = 424, HX = 268, HY = 758;
@@ -677,21 +791,174 @@ export const HookBalloon: React.FC<HP> = ({ dur, rakeX = 0, rakeK = 1, parX = 0 
       <Pool x={600} y={730} w={900} c={p.key} o={0.28} hh={140} z={18} />
       <Column x={862} f={f} hit={HIT} z={40} c={p.lip}
         crack={E(f, HIT, HIT + 20, 0, 1, OUT)} />
-      <Balloon x={686} y={662} f={f} p={pump} pop={pop} s={1} z={44} dent={dent} wob={jud} popAt={POP} />
-      {/* the foot pump: a real bellows, a hose, and both ends on something */}
-      <div style={{ position: "absolute", left: 404, top: 690 - stomp * 18, width: 186,
-        height: 38, zIndex: 52, borderRadius: 7,
-        background: `linear-gradient(178deg, ${mxh(SLATE, 0.34)} 0%, ${dkh(SLATE, 0.48)} 100%)` }} />
-      <div style={{ position: "absolute", left: 418, top: 722 - stomp * 6, width: 158,
-        height: 30 + stomp * 12, zIndex: 51,
-        background: `repeating-linear-gradient(180deg, ${dkh(SLATE, 0.44)} 0 6px, ${dkh(SLATE, 0.62)} 6px 12px)` }} />
-      <div style={{ position: "absolute", left: 404, top: 746, width: 186, height: 20, zIndex: 51,
-        background: dkh(SLATE, 0.60), borderRadius: 5 }} />
-      <svg width={300} height={150} viewBox="0 0 150 75" style={{ position: "absolute", left: 500,
-        top: 646, zIndex: 50, overflow: "visible" }}>
-        <path d="M4 72 C46 72 66 36 104 26 L146 16" fill="none" stroke={dkh(OXIDE, 0.32)}
-          strokeWidth="9" strokeLinecap="round" />
-      </svg>
+      {/* =============== THE HERO OBJECT — one per cut =============== */}
+      {concept === "balloon" && (<>
+        <Balloon x={686} y={662} f={f} p={pump} pop={pop} s={1} z={44} dent={dent} wob={jud}
+          popAt={POP} c={bal} />
+        {/* ⛔⛔ THIS CUT MEASURED THE SAME AS THE OTHER TWO (S0 9.77 / 9.87 /
+            9.14) AND STILL LOOKED EMPTY. Alex: *"there needs to be more motion
+            in the video option 1 like its just way too little."* The metric
+            could not see it because the cause is structural, not per-frame: the
+            balloon LEAVES at f68, so this concept spends its back half with an
+            empty right half while the trophy and the coated part are still
+            standing there. The fix has to put something big back into it.
+
+            ⭐ A BURST BALLOON DOES NOT VANISH, IT FLIES. The remnant rips off
+            the hose and zips across the frame on a wild path, and the freed hose
+            lashes for the rest of the shot. Both are large objects travelling
+            through exactly the space that went quiet. */}
+        {(() => {
+          const t = (f - POP) / 30;
+          if (t <= 0 || t >= 1) return null;
+          const e = 1 - Math.pow(1 - t, 1.9);
+          const zx = 686 - e * 470 + Math.sin(t * 13) * 120 * (1 - t);
+          const zy = 640 - Math.sin(t * Math.PI * 1.6) * 250 - e * 40;
+          const sc = 1 - t * 0.62;
+          return (
+            <div style={{ position: "absolute", left: zx - 70 * sc, top: zy - 46 * sc,
+              width: 140 * sc, height: 92 * sc, zIndex: 71,
+              transform: `rotate(${t * 1180}deg)`, opacity: 1 - t * 0.5,
+              borderRadius: "58% 42% 30% 70% / 60% 34% 66% 40%",
+              background: `linear-gradient(140deg, ${mxh(bal, 0.24)} 0%, ${bal} 44%, ${dkh(bal, 0.46)} 100%)` }}>
+              <div style={{ position: "absolute", right: -22 * sc, top: 30 * sc, width: 44 * sc,
+                height: 13 * sc, borderRadius: 7, background: dkh(bal, 0.36),
+                transform: `rotate(${Math.sin(t * 22) * 40}deg)` }} />
+            </div>
+          );
+        })()}
+        {/* the foot pump: a real bellows, a hose, and both ends on something.
+            ⭐ the stroke travel went 18 -> 34px, because the pumping is half the
+            shot and it was barely moving. */}
+        <div style={{ position: "absolute", left: 404, top: 690 - stomp * 34, width: 186,
+          height: 38, zIndex: 52, borderRadius: 7,
+          background: `linear-gradient(178deg, ${mxh(SLATE, 0.34)} 0%, ${dkh(SLATE, 0.48)} 100%)` }} />
+        <div style={{ position: "absolute", left: 418, top: 722 - stomp * 12, width: 158,
+          height: 30 + stomp * 26, zIndex: 51,
+          background: `repeating-linear-gradient(180deg, ${dkh(SLATE, 0.44)} 0 6px, ${dkh(SLATE, 0.62)} 6px 12px)` }} />
+        <div style={{ position: "absolute", left: 404, top: 746, width: 186, height: 20, zIndex: 51,
+          background: dkh(SLATE, 0.60), borderRadius: 5 }} />
+        {/* ⭐ THE HOSE. It bulges on every stroke, and once the balloon rips off
+            it lashes loose for the rest of the shot — a 300px line whipping
+            through the half of the frame the balloon used to fill. */}
+        {(() => {
+          const lash = f >= POP ? Math.exp(-(f - POP) / 34) : 0;
+          const w1 = Math.sin(f / 2.1) * 78 * lash + stomp * 12;
+          const w2 = Math.cos(f / 1.7) * 62 * lash - stomp * 9;
+          return (
+            <svg width={300} height={200} viewBox="0 0 150 100" style={{ position: "absolute",
+              left: 500, top: 620, zIndex: 50, overflow: "visible" }}>
+              <path d={`M4 98 C${46 + w1 * 0.3} ${98 - w2 * 0.4} ${66 + w1 * 0.5} ${52 + w2 * 0.6}
+                        ${104 + w1 * 0.7} ${42 + w2 * 0.9} L${146 + w1} ${32 + w2}`}
+                fill="none" stroke={dkh(OXIDE, 0.32)} strokeWidth="9" strokeLinecap="round" />
+              {lash > 0.04 && (
+                <circle cx={146 + w1} cy={32 + w2} r="7" fill={dkh(bal, 0.34)} />
+              )}
+            </svg>
+          );
+        })()}
+      </>)}
+
+      {/* ⭐ TROPHY — it declares victory before running anything, and the cup is
+          foil: the nose taps it and the whole bowl caves in. */}
+      {concept === "trophy" && (<>
+        <div style={{ position: "absolute", left: 578, top: 700 - jud * 60, width: 216, height: 54,
+          zIndex: 42, borderRadius: 5, boxShadow: SH_D,
+          background: `linear-gradient(178deg, ${mxh(SLATE, 0.30)} 0%, ${dkh(SLATE, 0.52)} 100%)` }} />
+        {/* ⛔ `Trophy`'s own `crush` buckles the bowl path a little and that did
+            not read at all — the cup looked identical before and after. It has
+            to COLLAPSE: the whole thing loses 46% of its height, spreads, and
+            tips, which is what foil does. */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 44,
+          transformOrigin: `686px ${700 - jud * 60}px`,
+          transform: `scaleY(${1 - pop * 0.46}) scaleX(${1 + pop * 0.18}) rotate(${-pop * 8}deg)` }}>
+          <Trophy x={686} y={706 - pump * 44 - jud * 60} f={f} s={0.80} z={1} crush={pop}
+            big="DONE" small="" />
+        </div>
+
+      </>)}
+
+      {/* ⭐ FILL — the progress meter as an object: it reaches DONE and then
+          the bottom splits and the whole level runs out. */}
+      {concept === "fill" && (<>
+        <FillColumn x={694} y={752} f={f} s={0.99} z={44}
+          fill={Math.min(1, pump)} burst={pop} c={GOLD} />
+        {/* he is working a hand pump into its base, so the level HAS a cause */}
+        <div style={{ position: "absolute", left: 452, top: 700 - stomp * 30, width: 150,
+          height: 34, zIndex: 52, borderRadius: 6,
+          background: `linear-gradient(178deg, ${mxh(SLATE, 0.34)} 0%, ${dkh(SLATE, 0.48)} 100%)` }} />
+        <div style={{ position: "absolute", left: 466, top: 728 - stomp * 10, width: 122,
+          height: 26 + stomp * 22, zIndex: 51,
+          background: `repeating-linear-gradient(180deg, ${dkh(SLATE, 0.44)} 0 6px, ${dkh(SLATE, 0.62)} 6px 12px)` }} />
+        <div style={{ position: "absolute", left: 452, top: 748, width: 150, height: 18, zIndex: 51,
+          background: dkh(SLATE, 0.60), borderRadius: 4 }} />
+        <svg width={220} height={120} viewBox="0 0 110 60" style={{ position: "absolute", left: 540,
+          top: 682, zIndex: 50, overflow: "visible" }}>
+          <path d="M4 54 C34 54 52 30 78 24 L106 20" fill="none" stroke={dkh(OXIDE, 0.32)}
+            strokeWidth="8" strokeLinecap="round" />
+        </svg>
+      </>)}
+
+      {/* ⭐ PAINT — it sprays a failed part gold so it looks finished, and the
+          nose taps it: the coat sheets off and the rust is still under there. */}
+      {concept === "paint" && (<>
+        <div style={{ position: "absolute", left: 500, top: 700, width: 372, height: 50, zIndex: 42,
+          borderRadius: 5, boxShadow: SH_D,
+          background: `linear-gradient(178deg, ${mxh(SLATE, 0.30)} 0%, ${dkh(SLATE, 0.52)} 100%)` }} />
+        <svg width={438} height={344} viewBox="0 0 210 165" style={{ position: "absolute", left: 467,
+          top: 372, zIndex: 46, overflow: "visible" }}>
+          <defs>
+            <linearGradient id="rst2" x1="0" y1="0" x2="0.8" y2="1">
+              <stop offset="0%" stopColor={mxh(OXIDE, 0.18)} />
+              <stop offset="100%" stopColor={dkh(OXIDE, 0.42)} />
+            </linearGradient>
+            <linearGradient id="au3" x1="0" y1="0" x2="0.8" y2="1">
+              <stop offset="0%" stopColor={mxh(GOLD, 0.58)} />
+              <stop offset="52%" stopColor={GOLD} />
+              <stop offset="100%" stopColor={dkh(GOLD, 0.38)} />
+            </linearGradient>
+            <clipPath id="cv2">
+              <rect x="-6" y={165 - 168 * Math.min(1, pump) + pop * 178} width="222" height="178" />
+            </clipPath>
+          </defs>
+          <path d="M22 160 L14 74 L52 24 L128 12 L186 46 L196 122 L162 160 Z" fill="url(#rst2)"
+            stroke={dkh(OXIDE, 0.56)} strokeWidth="3" />
+          <path d="M128 12 L112 62 L166 58 Z" fill={dkh(INK, 0.06)} opacity="0.5" />
+          {Array.from({ length: 9 }, (_, i) => (
+            <path key={i} d={`M${30 + i * 18} 150 l6 -${16 + (i % 3) * 8}`} stroke={dkh(OXIDE, 0.62)}
+              strokeWidth="3" opacity="0.6" />
+          ))}
+          <g clipPath="url(#cv2)">
+            <path d="M22 160 L14 74 L52 24 L128 12 L186 46 L196 122 L162 160 Z" fill="url(#au3)"
+              stroke={dkh(GOLD, 0.46)} strokeWidth="3" />
+            <path d="M40 140 C34 100 44 62 66 40" stroke={hexa("#FFFFFF", 0.34)} strokeWidth="7"
+              fill="none" strokeLinecap="round" />
+            <text x="104" y="104" textAnchor="middle" fontSize="34" fontWeight="900"
+              fill={hexa("#4A3410", 0.82)} letterSpacing="4">DONE</text>
+          </g>
+        </svg>
+        {/* the gold sheeting off the bottom once it is tapped */}
+        {pop > 0.04 && Array.from({ length: 7 }, (_, i) => (
+          <div key={"rn" + i} style={{ position: "absolute", left: 512 + i * 52,
+            top: 690, width: 18, height: pop * (86 + i * 26), zIndex: 48, borderRadius: 9,
+            background: `linear-gradient(180deg, ${GOLD} 0%, ${dkh(GOLD, 0.44)} 100%)` }} />
+        ))}
+        {/* the spray can he keeps hitting it with */}
+        <div style={{ position: "absolute", left: 396, top: 610 - stomp * 14, width: 62, height: 146,
+          zIndex: 52, borderRadius: 10,
+          background: `linear-gradient(90deg, ${dkh(CLAYD, 0.30)} 0%, ${mxh(CLAY, 0.22)} 44%, ${dkh(CLAYD, 0.36)} 100%)`,
+          border: `4px solid ${dkh(CLAYD, 0.44)}` }}>
+          <div style={{ position: "absolute", left: 17, top: -17, width: 28, height: 19,
+            background: dkh(SLATE, 0.40), borderRadius: 4 }} />
+          <div style={{ position: "absolute", left: 8, top: 48, right: 8, height: 32,
+            background: hexa(PAPER, 0.86), borderRadius: 3 }} />
+        </div>
+        {f < POP && (
+          <div style={{ position: "absolute", left: 448, top: 588 - stomp * 14, width: 210,
+            height: 190, zIndex: 50, opacity: 0.35 + stomp * 0.4,
+            clipPath: "polygon(0 44%, 0 56%, 100% 100%, 100% 0)",
+            background: `linear-gradient(90deg, ${hexa(GOLD, 0.52)} 0%, ${hexa(GOLD, 0.05)} 100%)` }} />
+        )}
+      </>)}
 
       <HangTool x={556} y={214} f={f} hit={HIT} kind="wrench" s={0.86} amp={27} ph={0.0} z={22} />
       <HangTool x={702} y={226} f={f} hit={HIT} kind="mallet" s={0.78} amp={34} ph={1.9} z={22} />
@@ -710,7 +977,11 @@ export const HookBalloon: React.FC<HP> = ({ dur, rakeX = 0, rakeK = 1, parX = 0 
         </>} />
       {/* he lets go of the pump the instant it bursts */}
       {f < POP + 4 && (
-        <Grip from={armPt(HXn, HY + kick, SZ, 1)} to={[418, 694 - stomp * 18]} size={SZ} z={64} />
+        <Grip from={armPt(HXn, HY + kick, SZ, 1)} size={SZ} z={64}
+          to={concept === "balloon" ? [418, 694 - stomp * 34]
+            : concept === "trophy" ? [512, 688 - jud * 60]
+            : concept === "fill" ? [466, 704 - stomp * 30]
+            : [420, 640 - stomp * 14]} />
       )}
 
       {/* wood dust out of the socket on every lie — the nose is being EXTRUDED */}
@@ -723,14 +994,32 @@ export const HookBalloon: React.FC<HP> = ({ dur, rakeX = 0, rakeK = 1, parX = 0 
         <Puff key={"ear" + sg} x={HXn + sg * SZ * 0.44} y={HY + kick - SZ * 0.60} f={f}
           at={POP + 2} c="#EFE7DA" n={7} s={0.75} z={70} up={70} />
       ))}
-      <Ring x={686} y={560} f={f} at={POP} c={GREEN} s={1.5} z={78} dur={13} />
-      <Puff x={686} y={600} f={f} at={POP} c="#BFD3C4" n={14} s={1.3} z={74} />
+      <Ring x={686} y={concept === "balloon" ? 560 : 600} f={f} at={POP}
+        c={concept === "balloon" ? bal : GOLD} s={1.5} z={78} dur={13} />
+      <Puff x={686} y={concept === "balloon" ? 600 : 640} f={f} at={POP}
+        c={concept === "balloon" ? mxh(bal, 0.62) : "#D9C489"} n={14} s={1.3} z={74} />
       {/* the scrap of rubber left hanging off the hose */}
-      {pop > 0.5 && (
+      {concept === "balloon" && pop > 0.5 && (
         <div style={{ position: "absolute", left: 668, top: 706, width: 52, height: 26, zIndex: 62,
-          borderRadius: "60% 40% 30% 30%", background: dkh(GREEN, 0.36),
+          borderRadius: "60% 40% 30% 30%", background: dkh(bal, 0.36),
           transform: `rotate(${(pop - 0.5) * 120}deg)` }} />
       )}
+      {/* gold flakes off the trophy and the coat, on their own clock */}
+      {concept !== "balloon" && (() => {
+        const bt = (f - POP) / 30;
+        if (bt <= 0 || bt >= 1) return null;
+        const ease = 1 - Math.pow(1 - bt, 2.4);
+        return Array.from({ length: 16 }, (_, i) => {
+          const a2 = (i / 16) * Math.PI * 2 + rnd(i, 21) * 0.4;
+          const r = (170 + rnd(i, 23) * 190) * ease;
+          return <div key={"gf" + i} style={{ position: "absolute",
+            left: 686 + Math.cos(a2) * r, top: 604 + Math.sin(a2) * r * 0.7 + 470 * bt * bt,
+            width: 30 - (i % 3) * 7, height: 13 - (i % 3) * 3, borderRadius: "50% 40% 60% 40%",
+            zIndex: 72, transform: `rotate(${a2 * 57 + bt * 640}deg)`,
+            opacity: Math.max(0, 1 - bt * 1.25),
+            background: i % 2 ? mxh(GOLD, 0.20) : dkh(GOLD, 0.26) }} />;
+        });
+      })()}
 
       {/* ---- THE STRIKE: splinters off the post, then dust as it grinds in ---- */}
       {f >= HIT && f < HIT + 26 && Array.from({ length: 11 }, (_, i) => {
@@ -760,7 +1049,7 @@ export const HookBalloon: React.FC<HP> = ({ dur, rakeX = 0, rakeK = 1, parX = 0 
           HOOK_PLATE 12.1% with nothing but the bare starburst at frame 0.
           [[feedback_frame0_claim_plate]] is the single measured IG-performance
           rule in the repo, so the plate is not optional. */}
-      <SpecPlate x={430} y={324} w={452} s={0.88} z={28}
+      <SpecPlate x={300} y={324} w={452} s={0.86} z={28}
         big={R.bench.value} label={R.bench.label} src={R.bench.src} />
     </Scene>
   );

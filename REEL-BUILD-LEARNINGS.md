@@ -1967,3 +1967,62 @@ rules and the house constants BEFORE reaching for a gate.**
 **NOISE-BED** (bed cues checked for hiss — the carve-out the old air rule left
 open), and **SWELL-Nms** (the attack scan promoted from a manual step to a gate,
 respecting `from:`). See `docs/SOUND-DESIGN.md` §14-17.
+
+---
+
+## 14. REEL 120 — the delivery half, which is where the real damage was
+
+The animation lessons from this reel live in
+[`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) §20-22 and
+[`memory/reels/unlazy-factory-log.md`](memory/reels/unlazy-factory-log.md). These are the ones
+that belong to §11 Delivery, because none of them would have been caught by any gate we run.
+
+### ⛔⛔⛔ TWO LIVE ARTICLES HAD NEVER BEEN COMMITTED
+
+At delivery, `chenmedialabs` had reels **119 (OX) and 120 (UNLAZY)** live on the domain — both
+URLs 200, both gated downloads 200, both listed on `/guides` — while `src/content/guides.json`,
+`tools/manifest.json` and four `.docx` sat **uncommitted in one working tree**. `git log` still
+ended at reel 116. A deploy from a clean checkout, or from anyone else's machine, would have
+silently dropped two live articles.
+
+⭐ **CHECK `git status` IN THE SITE REPO AT DELIVERY, NOT JUST THE URL.** A 200 proves the deploy
+landed; it says nothing about whether the source survived. This is the *inverse* of reel 117's
+"an UNCOMMITTED guide 404s" — here it did **not** 404, which is worse, because nothing surfaced
+the problem.
+
+⭐ Also stale at delivery: `tools/build_repo_index.py --check`. Run it as part of shipping, not
+only when adding a reel.
+
+### ⛔⛔ THE REEL NUMBER WAS CLAIMED MID-BUILD, AGAIN
+
+`ls Faceless/` at kickoff showed 118 as the highest, so this was built as 119. A **different
+session delivered `119 - OX` at 16:59** while this one was rendering. Caught only by `git status`
+showing an untracked `storyboards/119-ox.md`. **Re-check the next free number AT DELIVERY.**
+The renumber touched the Drive folder + 6 files, the storyboard, the lead-magnet, 3 captions,
+`words_<n>.json`, 3 bed wavs, the index file, every `REEL <n>` comment and the site manifest.
+
+### ⛔⛔ THE AMBER CUT LOSES `HOOK_LUMA` AND `BODY_BLACK` IN TURNS
+
+Amber failed `HOOK_LUMA` three separate times across this build, was fixed each time with
+`brightness()`, and that brightness then failed `BODY_BLACK` at **p10 35.5** once glow was added
+to the scenes. ⭐ **Both are the same lesson from opposite ends: take amber's separation from
+CONTRAST, never brightness.** Contrast pivots at mid-grey, so it lifts the frame-0 mean AND drops
+the shadows; brightness holds the shadows up. `contrast(1.115) brightness(1.080)` held frame 0
+at 140.5 while taking p10 from 35.5 to 29.1.
+
+⛔ Two more luma traps found the same way:
+- **The E1 encode costs 1.3-2.4 luma.** Gate the ENCODED file — a PNG at 141 lands under 140.
+- **A per-cut camera PAN is not luma-neutral.** `dx -100` swung amber's frame 0 onto the dark
+  side of the set and cost **9 luma**. The set is not evenly lit.
+- **The house `WallSign` is 39 luma DARKER than the bone wall it covers** (a 9px slate border, a
+  26px hazard head and a 34px dark footer on a 181px plate). Dropping it into frame 0 broke the
+  ≥140 law; `SpecPlate` carries the same three fields on a near-white field and adds light.
+
+### ⭐ Density: the SFX ceiling is about TEXTURE, not about scoring the beats
+
+Asked for *"more sfx at interesting points to maximize retention"*, the bank went 54 → 74 cues,
+**1.53 → 2.10/sec**, above the 1.0-1.5 house ceiling in `docs/SOUND-DESIGN.md`. That is
+defensible **because every added cue lands on a visible event** — a rivet, a slam, a needle, a
+post planting, a body hitting a gate, an agent landing. The reel that was rejected at 3.82/sec
+was dense with ambience and ticks. ⛔ Run `sfx_audit` BEFORE rendering: `ballast_buzz` and
+`chain_clank` are both AIR (slow attack, no low end), and `gold_stamp` tripped SLAP at 8 uses.

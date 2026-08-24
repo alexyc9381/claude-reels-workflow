@@ -11,7 +11,7 @@ import {
   GatePane, MakerPlate, Crate, SlamGate, Shutter, WOODT, TestRig, GateRig,
 } from "./UnlazyWorld";
 import { Hall, KeyPool, Stanchion, SparePile, Truss, DuctRun } from "./LoopSets";
-import { HookBalloon } from "./UnlazyHooks";
+import { HookBalloon, Concept } from "./UnlazyHooks";
 
 /* ===========================================================================
    REEL 120 · "UNLAZY" — THE SCENES.  Board: storyboards/120-unlazy.md.
@@ -85,8 +85,8 @@ export const VARF: Record<Variant, { ord: 0 | 1 | 2; lp: number; ph: number }> =
     bay row. A different PAIR per cut, so every pairing differs somewhere. */
 export const MIRROR: Record<Variant, number[]> = {
   hall:  [],
-  amber: [4, 8],
-  steel: [2, 9],
+  amber: [1, 4, 6, 8],
+  steel: [2, 3, 5, 9],
 };
 
 /** order the members of a sequence of length n: forward, reversed, or outward
@@ -103,23 +103,28 @@ export const seqOrder = (n: number, ord: 0 | 1 | 2): number[] => {
 };
 
 export const CAM: Record<Variant, { dx: number; dy: number; s: number; rot: number }> = {
-  /* ⛔⛔ THE THREE CUTS WERE A GRADE AND A ZOOM. `dhash_cuts` passed at mean
-     26.2 / MIN 16 and Alex still asked whether they were actually different —
-     correctly. hall 1.036 / amber 1.162 / steel 1.118 is a 12% spread, which is
-     three copies of one shot, not three edits. dHash reads CROP GEOMETRY, so a
-     small camera nudge satisfies it without a viewer seeing anything: exactly
-     [[feedback_green_gate_wrong_way]].
+  /* ⛔⛔ THE TILT AND THE ZOOM ARE OUT. Alex: *"no i dont like that its tilted
+     and zoomed in thats not good."* The wide/medium/tight pass differentiated
+     the cuts by making two of them worse — a 1.25 push cropped the receipt plate
+     and the outer lanes, and a 3-degree roll reads as a mistake, not a choice.
 
-     ⭐ THEY NOW HAVE THREE SHOT SIZES AND THREE FRAMINGS:
-        hall   1.04  level, centred      — the wide
-        steel  1.14  tilted left-down    — the medium, favouring the set
-        amber  1.25  tilted right-up     — the tight, favouring the workers
-     ⛔ The window is `506 ± 486/(push·s)` SHIFTED BY dx, so the tight cut is now
-     the binding constraint: the intersection across all three is scene x
-     229-833. Every hero placement was re-checked against it. */
-  hall:  { dx: 0,   dy: 14,  s: 1.036, rot: -0.5 },
-  steel: { dx: 96,  dy: 36,  s: 1.140, rot: -3.0 },
-  amber: { dx: -96, dy: -10, s: 1.250, rot: 2.8 },
+     ⭐ ALL THREE ARE NOW LEVEL AND AT THE SAME SHOT SIZE. The differentiation
+     lives entirely in `VARF` and `MIRROR` below — event ORDER, crowd loops, and
+     a different mirrored scene pair per cut — which changes what is HAPPENING
+     rather than degrading how it is framed. The camera is back to a nudge whose
+     only job is to keep the hash off a tie.
+     ⛔ With the roll and the zoom gone, dHash fell to MIN 4 at f132 — the scenes
+     with no animation lever (S1, S6) had nothing separating them at all. The
+     answer is a bigger PAN, which reads as framing rather than as a defect, plus
+     mirrors on those scenes.
+     ⛔⛔ AND THE PAN CANNOT GO BIG EITHER: dx -100 swung amber's frame 0 onto
+     the dark right side of the bench — the column, the post and the drums — and
+     HOOK_LUMA fell 144.1 -> 135.4. A horizontal pan is NOT luma-neutral, because
+     the set is not evenly lit. So the pan stays modest, scale stays inside 1%,
+     and the hash is carried by MIRROR instead, which has no such problem. */
+  hall:  { dx: 0,   dy: 14, s: 1.036, rot: 0 },
+  steel: { dx: 56,  dy: 26, s: 1.046, rot: 0 },
+  amber: { dx: -44, dy: 6,  s: 1.042, rot: 0 },
 };
 
 export const GRADE: Record<Variant, string> = {
@@ -137,7 +142,7 @@ export const GRADE: Record<Variant, string> = {
      ban ([[feedback_trial_cut_variants]]) — every Claude is the one house clay.
      Pulled back to 1.30 and the separation taken from contrast instead. */
   amber: "contrast(1.150) saturate(1.30) brightness(1.086)",
-  steel: "contrast(1.245) saturate(1.18) brightness(1.014)",
+  steel: "contrast(1.245) saturate(1.18) brightness(1.052)",
 };
 
 const ROW_Y = (i: number) => (i % 2 ? 566 : 716);
@@ -172,8 +177,30 @@ const ROW_Y = (i: number) => (i % 2 ? 566 : 716);
    and gated. The per-cut levers are passed IN as props rather than imported, so
    that file never has to import this one.
    ========================================================================= */
+/** ⭐⭐ ONE HOOK CONCEPT PER CUT — the A/B test. Same set, same beats, same nose
+    and flush and steam and column jam, so the per-reel SFX bank still lands on
+    every event and the only variable is the false claim itself. */
+export const HOOK_OF: Record<Variant, Concept> = {
+  hall:  "balloon",   /* inflate and burst — the control, the picked one */
+  amber: "balloon",   /* same event, RED rubber — the colour A/B Alex asked for */
+  steel: "fill",      /* fill and drain — the progress meter as an object */
+};
+
+/** ⭐ the rubber, per cut. ⛔ I argued against a red DONE balloon once (green IS
+    the false pass, so red costs the joke) and Alex asked for it anyway — his
+    call, and colour is the cheapest thing there is to test.
+    ⛔⛔ BUT COLOUR ALONE WILL NOT KEEP THE CUTS APART: `dhash_cuts` is GEOMETRY,
+    and a monotonic tone change preserves neighbour ordering
+    ([[feedback_dhash_is_geometry]]) — hall and amber now run the same concept at
+    the same size in the same place, so the hash on S0 is carried by amber's
+    MIRROR list and its event ORDER, not by the paint. Watch the f44 sample. */
+export const BAL_OF: Record<Variant, string> = {
+  hall: GREEN, amber: RED, steel: GREEN,
+};
+
 export const S0: React.FC<SP> = ({ v, dur }) => (
-  <HookBalloon dur={dur} rakeX={RAKE_X0[v]} rakeK={RAKE_K[v]} parX={PAR_X[v]} />
+  <HookBalloon dur={dur} rakeX={RAKE_X0[v]} rakeK={RAKE_K[v]} parX={PAR_X[v]}
+    concept={HOOK_OF[v]} bal={BAL_OF[v]} />
 );
 
 export const S1: React.FC<SP> = ({ v, dur }) => {
@@ -194,6 +221,8 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
      test name is a 17px stencil on the rig, the size a model number really is.
      ⛔ The receipt is still on screen and still first-party — it just is not the
      thing you are looking at any more. */
+  const mir = MIRROR[v].includes(1);
+  const MX = (x: number) => (mir ? W - x : x);
   const DROPHEAD = 6, SCAN = 14, VERDICT = 34, ALARM = 38;
   /* ⛔ v1 OF THIS RAN THE HEAD DOWN IN 8 FRAMES AND PARKED IT — 74% hold on a
      69-frame scene, the same plateau trap as the press ram and the pop debris
@@ -210,7 +239,7 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.158]} vig={0.64} glow={hexa(p.key, 0.20)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="duct" bands={2} kind="bay"
         rake={0.26} rakeX={RAKE_X0[v] + 90} rakeRate={3.4 * RAKE_K[v]}
-        lamp={{ x: 520, y: 190, r: 330 }} grit={0.9} />
+        lamp={{ x: MX(520), y: 190, r: 330 }} grit={0.9} />
       <ToolWall p={p} f={f} x={-24} y={158} cols={10} rows={3} z={16} seed={WALL_SEED[v]} live={6} />
       {/* ⭐ THE MARK, CAST INTO THE BACK WALL AND TURNING. Alex: *"have a big
           claude logo at 3 seconds in the middle area too."* It earns its place
@@ -218,23 +247,23 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
           strapped into it is a Claude, and when the verdict lands the alarm wash
           turns the emblem red along with the room. A slow rotation is also the
           cheapest legitimate motion in a frame ([[MarkCast]]). */}
-      <MarkCast x={506} y={362} s={560} z={20} o={0.58} f={f} spin={0.28} pulse={0.6} />
+      <MarkCast x={MX(506)} y={362} s={560} z={20} o={0.58} f={f} spin={0.28} pulse={0.6} />
       <PartsLine y={700} f={f} rate={7.2 * RAKE_K[v]} z={30} c={p.key} s={1.14} n={6} o={0.40} />
-      <Pool x={506} y={706} w={800} c={p.key} o={0.24} hh={140} z={18} />
+      <Pool x={MX(506)} y={706} w={800} c={p.key} o={0.24} hh={140} z={18} />
 
       {/* the whole room goes red once the verdict lands */}
       {alarm > 0 && (
         <div style={{ position: "absolute", inset: 0, zIndex: 88, pointerEvents: "none",
           opacity: (0.30 + Math.abs(Math.sin(f / 3.4)) * 0.34)
             * E(f, ALARM, ALARM + 5, 0, 1, OUT),
-          background: `radial-gradient(78% 58% at 34% 22%, ${hexa(RED, 0.62)} 0%, ${hexa(RED, 0)} 100%)` }} />
+          background: `radial-gradient(78% 58% at ${mir ? 66 : 34}% 22%, ${hexa(RED, 0.62)} 0%, ${hexa(RED, 0)} 100%)` }} />
       )}
 
-      <TestRig x={470} y={716 + jolt * 0.4} f={f} s={1.02} z={44}
-        head={head} needle={needle} alarm={alarm} stencil={R.admit.term} />
+      <TestRig x={MX(470)} y={716 + jolt * 0.4} f={f} s={1.02} z={44}
+        head={head} needle={needle} alarm={alarm} stencil={R.admit.term} flip={mir} />
 
       {/* ⭐ THE SUBJECT UNDER TEST — a body, in the cradle, reacting */}
-      <Hero f={f + 40} x={392} y={648 + jolt} size={214} z={50} costume={{ constr: 1 }}
+      <Hero f={f + 40} x={MX(392)} y={648 + jolt} size={214} z={50} costume={{ constr: 1 }} flip={mir}
         strain={f < VERDICT ? 0.28 + head * 0.30
           : 0.5 + Math.sin((f - VERDICT) / 3.6) * 0.42}
         act={3} ph={0.6} gaze={0.5}
@@ -242,30 +271,30 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
         stern={f >= VERDICT + 24 ? 1 : 0} />
       {/* the clamp holding him in it, so he reads as UNDER test, not beside it */}
       {[-1, 1].map(sg => (
-        <div key={"cl" + sg} style={{ position: "absolute", left: 392 + sg * 86 - 15,
+        <div key={"cl" + sg} style={{ position: "absolute", left: MX(392) + sg * 86 - 15,
           top: 592 + jolt, width: 30, height: 96, zIndex: 52, borderRadius: 4,
           background: `linear-gradient(90deg, ${dkh(STEEL, 0.54)} 0%, ${mxh(STEEL, 0.14)} 44%, ${dkh(STEEL, 0.60)} 100%)` }} />
       ))}
 
       {/* ⭐ THE MAKERS, watching their own machine fail */}
-      <Hero f={f + 12} x={112} y={784} size={196} z={58} costume={{ prof: 1 }}
+      <Hero f={f + 12} x={MX(112)} y={784} size={196} z={58} costume={{ prof: 1 }} flip={mir}
         strain={0.2} act={1} ph={1.3} gaze={0.9}
         shock={f >= VERDICT && f < VERDICT + 18 ? 1 : 0} />
-      <Hero f={f + 68} x={904} y={776} size={182} z={56} costume={{ suit: 1 }} flip
+      <Hero f={f + 68} x={MX(904)} y={776} size={182} z={56} costume={{ suit: 1 }} flip={!mir}
         strain={0.18} act={1} ph={2.1} gaze={0.9}
         shock={f >= VERDICT + 3 && f < VERDICT + 20 ? 1 : 0}
         stern={f >= VERDICT + 20 ? 1 : 0} />
 
       {/* the scan finding it, and the verdict costing something */}
-      <Ring x={470} y={470} f={f} at={SCAN} c="#8FE6FF" s={1.25} z={76} dur={20} />
-      <Ring x={648} y={492} f={f} at={VERDICT} c={RED} s={1.5} z={80} dur={22} />
-      <Puff x={470} y={640} f={f} at={VERDICT} c="#9FB4C6" n={10} s={0.95} z={72} />
+      <Ring x={MX(470)} y={470} f={f} at={SCAN} c="#8FE6FF" s={1.25} z={76} dur={20} />
+      <Ring x={MX(648)} y={492} f={f} at={VERDICT} c={RED} s={1.5} z={80} dur={22} />
+      <Puff x={MX(470)} y={640} f={f} at={VERDICT} c="#9FB4C6" n={10} s={0.95} z={72} />
       {/* the rig vents once the verdict is in, and he fights the clamp */}
       {f >= VERDICT + 2 && (
-        <Steam x={252} y={606} f={f} at={VERDICT + 2} n={9} s={1.05} z={54} c="#DCE6EE" rate={1.4} />
+        <Steam x={MX(252)} y={606} f={f} at={VERDICT + 2} n={9} s={1.05} z={54} c="#DCE6EE" rate={1.4} />
       )}
       {[VERDICT + 6, VERDICT + 16, VERDICT + 26].map((at, i) => (
-        <Puff key={"tk" + i} x={392} y={556} f={f} at={at} c="#9FB4C6" n={5} s={0.6} z={70} />
+        <Puff key={"tk" + i} x={MX(392)} y={556} f={f} at={at} c="#9FB4C6" n={5} s={0.6} z={70} />
       ))}
       <Edge side="r" c={dkh(p.lip, 0.10)} kind="post" z={93} top={120} />
       <Chip t="THEIR OWN TEST" y={152} x={358} c={hexa("#2B4A66", 0.9)} fg={PAPER} />
@@ -301,6 +330,9 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
      only sat there NOT RUN, which is a passive fact. Now each one takes a hard
      red X in sequence, two per bell, and once the last one lands the whole rack
      goes into an alarm flash. The contradiction stops being implied. */
+  const mir = MIRROR[v].includes(2);
+  const MX = (x: number) => (mir ? W - x : x);
+  const ORD = seqOrder(6, VARF[v].ord);      /* which pane takes which beat */
   const RING = [10, 46, 82];
   const XAT = [18, 27, 54, 63, 90, 97];
   const xDone = XAT.filter(t => f >= t).length;
@@ -347,8 +379,8 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
 
       {/* ⛔ AND THE SIX GATES BEHIND IT NEVER RUN — each one gets STAMPED. */}
       {Array.from({ length: 6 }, (_, i) => (
-        <GatePane key={"g2" + i} x={228 + (i % 3) * 278} y={588 + Math.floor(i / 3) * 172}
-          f={f + i * 6} w={252} s={0.84} z={44} run={0} pass={0} n={i + 1}
+        <GatePane key={"g2" + i} x={MX(228 + (i % 3) * 278)} y={588 + Math.floor(i / 3) * 172}
+          f={f + i * 6 + VARF[v].ph * 9} w={252} s={0.84} z={44} run={0} pass={0} n={i + 1}
           cmd={["npm test", "tsc --noEmit", "grep -r TODO", "node smoke.js", "eslint .", "git diff"][i]} />
       ))}
       {/* the alarm wash over the rack once every gate has been marked */}
@@ -361,7 +393,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
       {/* a red rim round every stamped gate, so the rack itself is alarmed */}
       {alarm > 0 && Array.from({ length: 6 }, (_, i) => (
         <div key={"rim" + i} style={{ position: "absolute",
-          left: 228 + (i % 3) * 278 - 112, top: 588 + Math.floor(i / 3) * 172 - 148,
+          left: MX(228 + (i % 3) * 278) - 112, top: 588 + Math.floor(i / 3) * 172 - 148,
           width: 224, height: 152, zIndex: 51, borderRadius: 6, pointerEvents: "none",
           border: `${3 + flash * 5}px solid ${hexa(RED, 0.55 + flash * 0.45)}`,
           boxShadow: `0 0 ${34 * flash}px ${hexa(RED, 0.85 * flash)}` }} />
@@ -373,9 +405,10 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
           background: `radial-gradient(70% 52% at 50% 62%, ${hexa(RED, 0.74 * flash)} 0%, ${hexa(RED, 0.10 * flash)} 44%, ${hexa("#05060B", 0.62 + flash * 0.16)} 100%)` }} />
       )}
       {/* ⭐ THE STAMPS. A hard slam from 2.4x, a shock ring and grit each time. */}
-      {XAT.map((at, i) => {
+      {XAT.map((at, beat) => {
         if (f < at - 6) return null;
-        const cx = 228 + (i % 3) * 278, cy = 588 + Math.floor(i / 3) * 172 - 84;
+        const i = ORD[beat];                 /* ⭐ the beat is fixed; the PANE is not */
+        const cx = MX(228 + (i % 3) * 278), cy = 588 + Math.floor(i / 3) * 172 - 84;
         const k = E(f, at - 6, at, 2.4, 1, IN_Q);
         const rock = f >= at ? Math.sin((f - at) / 1.9) * Math.exp(-(f - at) / 6) * 5 : 0;
         const lit = 0.86 + flash * 0.14;
@@ -399,16 +432,17 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
       <Pool x={506} y={678} w={940} c={p.key} o={0.18} hh={150} z={19} />
 
       {/* the bell, and the Claudes that keep ringing it */}
-      <Bell x={888} y={786} f={f} hit={hit} s={0.86} z={58} />
+      <Bell x={MX(888)} y={786} f={f} hit={hit} s={0.86} z={58} />
       {RING.map((at, i) => {
         const k = E(f, at - 22, at, 0, 1, IO) - E(f, at + 8, at + 30, 0, 1, IO);
         if (k <= 0.01) return null;
-        return <Hero key={"rg" + i} f={f} x={430} y={800} size={196} z={60}
-          costume={{ constr: 1 }} drive={k} reach={340} act={1} ph={i * 1.3} stern={0.8}
+        return <Hero key={"rg" + i} f={f} x={MX(430)} y={800} size={196} z={60}
+          costume={{ constr: 1 }} drive={mir ? -k : k} reach={340} act={1} flip={mir}
+          ph={i * 1.3 + VARF[v].ph} stern={0.8}
           cheer={f > at && f < at + 12 ? 1 : 0} />;
       })}
       {RING.map((at, i) => (
-        <Ring key={"br" + i} x={888} y={520} f={f} at={at} c={GOLD} s={1.2} z={76} dur={20} />
+        <Ring key={"br" + i} x={MX(888)} y={520} f={f} at={at} c={GOLD} s={1.2} z={76} dur={20} />
       ))}
       <Edge side="l" c={dkh(p.lip, 0.14)} kind="post" z={93} top={150} />
       <Mark x={62} y={168} s={98} z={90} />
@@ -441,6 +475,8 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
      the floor kick and two Claudes jump back, the lid springs off, and the gate
      rack rises out of it. Four beats, one of them an impact that costs
      something, and the receipt is stencilled on the timber. */
+  const mir = MIRROR[v].includes(3);
+  const MX = (x: number) => (mir ? W - x : x);
   const FALL = 4, SLAM = 26, LID = 30, RISE = 44, OPEN = 62;
   const drop = E(f, FALL, SLAM, 0, 1, IN_Q);
   const cy = -150 + drop * 950;   /* the crate's FLOOR, which is what `Crate.y` is */
@@ -453,7 +489,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.192]} vig={0.66} glow={hexa(p.key, 0.20)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="truss" bands={2} kind="bay"
         rake={0.40} rakeX={RAKE_X0[v] + 40} rakeRate={5.6 * RAKE_K[v]}
-        lamp={{ x: 236, y: 176, r: 320 }} grit={1} />
+        lamp={{ x: MX(236), y: 176, r: 320 }} grit={1} />
       <ToolWall p={p} f={f} x={-40} y={158} cols={10} rows={2} z={16} o={0.72}
         seed={WALL_SEED[v]} live={5} />
       <PartsLine y={618} f={f} rate={8.8 * RAKE_K[v]} z={28} c={p.key} s={1.20} n={6} o={0.42} />
@@ -461,7 +497,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
       <div style={{ position: "absolute", left: 0, right: 0, top: 92, height: 17, zIndex: 40,
         background: `linear-gradient(180deg, ${mxh(STEEL, 0.06)} 0%, ${dkh(STEEL, 0.54)} 100%)` }} />
       {f < SLAM && (
-        <div style={{ position: "absolute", left: 522, top: 106, width: 15,
+        <div style={{ position: "absolute", left: MX(530) - 8, top: 106, width: 15,
           height: Math.max(0, cy - 452), zIndex: 42, background: dkh(STEEL, 0.44),
           backgroundImage: `repeating-linear-gradient(180deg, ${dkh(STEEL, 0.68)} 0 8px, ${hexa("#000", 0)} 8px 16px)` }} />
       )}
@@ -473,18 +509,18 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
           DOMED silhouette, six turning valve wheels and live gauges — and it
           rises out of a shaft of light with the crate steaming around it. */}
       {rise > 0.01 && (<>
-        <div style={{ position: "absolute", left: 330, top: 120, width: 400, height: 620,
+        <div style={{ position: "absolute", left: MX(530) - 200, top: 120, width: 400, height: 620,
           zIndex: 41, opacity: Math.min(1, rise * 1.6) * 0.72,
           clipPath: "polygon(30% 0, 70% 0, 100% 100%, 0 100%)",
           background: `linear-gradient(180deg, ${hexa("#FFD9A0", 0.44)} 0%, ${hexa("#FFD9A0", 0)} 100%)` }} />
         <div style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0, zIndex: 44,
           clipPath: `inset(0 0 ${Math.max(0, 100 - rise * 100)}% 0)` }}>
-          <GateRig x={530} y={598 - rise * 44 + kick * 0.3} f={f} s={0.96} z={44}
+          <GateRig x={MX(530)} y={598 - rise * 44 + kick * 0.3} f={f} s={0.96} z={44}
             n={R.gates} glow={Math.min(1, rise * 1.4)} />
         </div>
-        <Steam x={530} y={520} f={f} at={RISE} n={9} s={1.15} z={47} c="#EFE6D4" rate={1.3} />
+        <Steam x={MX(530)} y={520} f={f} at={RISE} n={9} s={1.15} z={47} c="#EFE6D4" rate={1.3} />
       </>)}
-      <Ring x={530} y={520} f={f} at={RISE + 6} c={GOLD} s={1.7} z={77} dur={24} />
+      <Ring x={MX(530)} y={520} f={f} at={RISE + 6} c={GOLD} s={1.7} z={77} dur={24} />
 
       {/* ⭐ AND THEN THE CRATE FALLS APART. The two side walls drop flat
           outward once the rack is up — two 240x340 panels rotating to the deck,
@@ -493,7 +529,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
       {(() => {
         const fall = E(f, OPEN, OPEN + 20, 0, 1, IN_Q);
         return [-1, 1].map(sg => (
-          <div key={"cw" + sg} style={{ position: "absolute", left: 530 + sg * 118 - 120,
+          <div key={"cw" + sg} style={{ position: "absolute", left: MX(530) + sg * 118 - 120,
             top: cy + kick - 340, width: 240, height: 340, zIndex: 56,
             transformOrigin: sg < 0 ? "0% 100%" : "100% 100%",
             transform: `rotate(${sg * fall * 86}deg)`, opacity: 1 - fall * 0.15,
@@ -508,33 +544,33 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
         ));
       })()}
       {f < OPEN + 3 && (
-        <Crate x={530} y={cy + kick} w={470} h={340} z={54} lid={lid}
+        <Crate x={MX(530)} y={cy + kick} w={470} h={340} z={54} lid={lid}
           label="unlazy" sub={`MIT  ·  ${R.repo.stars} STARS`} tag="SKILL / 1" />
       )}
       {[386, 674].map((bx, i) => (
-        <Puff key={"cw" + i} x={bx} y={790} f={f} at={OPEN + 17} c="#B8AE98" n={9} s={0.95} z={73} />
+        <Puff key={"cw" + i} x={MX(bx)} y={790} f={f} at={OPEN + 17} c="#B8AE98" n={9} s={0.95} z={73} />
       ))}
 
       {/* the deck takes it */}
-      <Ring x={530} y={784 + kick} f={f} at={SLAM} c={p.key} s={2.1} z={78} dur={26} />
+      <Ring x={MX(530)} y={784 + kick} f={f} at={SLAM} c={p.key} s={2.1} z={78} dur={26} />
       {[300, 760].map((bx, i) => (
-        <Puff key={"ds" + i} x={bx} y={790} f={f} at={SLAM} c="#C7BCA6" n={13} s={1.35}
+        <Puff key={"ds" + i} x={MX(bx)} y={790} f={f} at={SLAM} c="#C7BCA6" n={13} s={1.35}
           z={74} up={26} />
       ))}
       {/* splinters off the lid */}
       {f >= LID && f < LID + 24 && Array.from({ length: 9 }, (_, q) => {
         const t = (f - LID) / 24;
         return <div key={"lp" + q} style={{ position: "absolute", zIndex: 80,
-          left: 400 + (rnd(q, 51) - 0.5) * 520 * t, top: 300 - 180 * t + 620 * t * t,
+          left: MX(400) + (rnd(q, 51) - 0.5) * 520 * t, top: 300 - 180 * t + 620 * t * t,
           width: 34 - (q % 3) * 8, height: 11, borderRadius: 2, opacity: 1 - t * 0.8,
           transform: `rotate(${q * 47 + t * 520}deg)`, background: dkh(WOODT, 0.24) }} />;
       })}
 
       {/* ⭐ TWO CLAUDES JUMP BACK. The arrival costs somebody something. */}
-      <Hero f={f} x={196} y={790 - jump} size={230} z={56} costume={{ constr: 1 }}
+      <Hero f={f} x={MX(196)} y={790 - jump} size={230} z={56} costume={{ constr: 1 }} flip={mir}
         strain={f < SLAM ? 0.16 : 0.4} act={1} ph={0.2}
         shock={f >= SLAM && f < SLAM + 18 ? 1 : 0} cheer={f > RISE + 30 ? 0.9 : 0} />
-      <Hero f={f} x={862} y={784 - jump * 0.82} size={196} z={52} costume={{ prof: 1 }} flip
+      <Hero f={f} x={MX(862)} y={784 - jump * 0.82} size={196} z={52} costume={{ prof: 1 }} flip={!mir}
         strain={f < SLAM ? 0.14 : 0.34} act={1} ph={1.7}
         shock={f >= SLAM && f < SLAM + 16 ? 1 : 0} cheer={f > RISE + 34 ? 0.8 : 0} />
       <Edge side="l" c={dkh(p.lip, 0.18)} kind="post" z={93} top={140} />
@@ -575,6 +611,9 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
      and a pale slatted panel with guide rails reads as SHELVING. The gate now
      spans everything right of him, its leaf is dark and carries a cast hazard
      boss, and he is stopped ON ITS FACE. */
+  const mir = MIRROR[v].includes(4);
+  const MX = (x: number) => (mir ? W - x : x);
+  const SG = mir ? -1 : 1;
   const RUN = 2, GATE = 12, HIT = 21, PEEL = 30, HOOK = 42, HAUL = 54, SET = 92;
   const GX = 506;                                  /* the gate's near face */
   const drop = E(f, GATE, HIT, 0, 1, IN_Q);
@@ -585,7 +624,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
   const squashed = f >= HIT && f < PEEL;
   /* 80 -> 404 is 324px, one and a half body lengths, ending with his shoulder
      on the leaf; then the hook takes him 210px back to the station he skipped */
-  const hx = 80 + run * 324 - peel * 26 - haul * 214;
+  const hx = MX(80 + run * 324 - peel * 26 - haul * 214);
   const hy = 754 - Math.sin(Math.min(1, run) * Math.PI) * 118 * (f < HIT ? 1 : 0)
     - (f >= HOOK && f < SET ? 108 * Math.min(1, (f - HOOK) / 8) : 0)
     + (f >= SET ? E(f, SET, SET + 6, 108, 0, OUT) : 0);
@@ -594,13 +633,13 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.176]} vig={0.70} glow={hexa(p.key, 0.24)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="truss" bands={2} kind="plant"
         rake={0.30} rakeX={RAKE_X0[v] + 260} rakeRate={3.6 * RAKE_K[v]}
-        lamp={{ x: 330, y: 176, r: 340 }} grit={1} />
+        lamp={{ x: MX(330), y: 176, r: 340 }} grit={1} />
       <div style={{ position: "absolute", inset: 0, zIndex: 24,
-        background: `radial-gradient(70% 46% at 34% 34%, ${hexa(SODIUM, 0.20 + Math.abs(Math.sin(f / 9)) * 0.10)} 0%, ${hexa(SODIUM, 0)} 100%)` }} />
-      <Pool x={330} y={700} w={720} c={p.key} o={0.26} hh={140} z={18} />
+        background: `radial-gradient(70% 46% at ${mir ? 66 : 34}% 34%, ${hexa(SODIUM, 0.20 + Math.abs(Math.sin(f / 9)) * 0.10)} 0%, ${hexa(SODIUM, 0)} 100%)` }} />
+      <Pool x={MX(330)} y={700} w={720} c={p.key} o={0.26} hh={140} z={18} />
       <PartsLine y={300} f={f} rate={6.6 * RAKE_K[v]} z={30} c={p.key} s={1.10} n={6} o={0.36} />
       {/* ⭐ the station he SKIPPED, waiting for him on the way back */}
-      <Station x={186} y={738} f={f} on={f > SET + 4 ? 1 : 0} s={1.10} z={38}
+      <Station x={MX(186)} y={738} f={f} on={f > SET + 4 ? 1 : 0} s={1.10} z={38}
         work={f > SET + 4 ? 1 : 0} />
 
       {/* the overhead rail the hook rides */}
@@ -617,23 +656,23 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
 
       {/* ⭐⭐ THE GATE IS A WALL. It fills everything right of the near face, so
           there is nowhere to go round it — which is the whole word "stops". */}
-      <SlamGate x={GX + 320} y={772} w={640} h={500} drop={drop} z={58} shake={shk} />
-      <Ring x={GX + 30} y={620} f={f} at={HIT} c={SODIUM} s={2.0} z={78} dur={26} />
+      <SlamGate x={MX(GX + 320)} y={772} w={640} h={500} drop={drop} z={58} shake={shk} />
+      <Ring x={MX(GX + 30)} y={620} f={f} at={HIT} c={SODIUM} s={2.0} z={78} dur={26} />
       {[GX - 60, GX + 190].map((bx, i) => (
-        <Puff key={"gd" + i} x={bx} y={756} f={f} at={HIT} c="#C7BCA6" n={12} s={1.25} z={72} />
+        <Puff key={"gd" + i} x={MX(bx)} y={756} f={f} at={HIT} c="#C7BCA6" n={12} s={1.25} z={72} />
       ))}
 
       {/* THE SKIPPER: runs, hits the face flat, peels off, is hooked and hauled */}
       <Hero f={f} x={hx} y={hy} size={236} z={62} costume={{ constr: 1 }}
         strain={squashed ? 0.95 : f >= HAUL && f < SET ? 0.55 : 0.16}
-        act={1} ph={1.4} stern={0.8}
+        act={1} ph={1.4 + VARF[v].ph} stern={0.8} flip={mir}
         shock={f >= HIT && f < HIT + 22 ? 1 : 0}
         pop={squashed ? 0.84 : 1} />
-      <Ring x={hx + 104} y={hy - 156} f={f} at={HIT} c={RED} s={1.3} z={80} dur={18} />
-      <Puff x={hx + 40} y={hy - 12} f={f} at={PEEL + 2} c="#C7BCA6" n={9} s={1} z={74} />
+      <Ring x={hx + SG * 104} y={hy - 156} f={f} at={HIT} c={RED} s={1.3} z={80} dur={18} />
+      <Puff x={hx + SG * 40} y={hy - 12} f={f} at={PEEL + 2} c="#C7BCA6" n={9} s={1} z={74} />
       {/* he digs his heels the whole way back */}
       {f >= HAUL && f < SET && [0, 1, 2, 3, 4].map(i => (
-        <Puff key={"sc" + i} x={378 - (i + 1) / 5 * 214} y={752} f={f}
+        <Puff key={"sc" + i} x={MX(378 - (i + 1) / 5 * 214)} y={752} f={f}
           at={HAUL + 2 + i * 7} c="#B8AE98" n={5} s={0.66} z={70} />
       ))}
       <Edge side="l" c={dkh(p.lip, 0.24)} kind="post" z={93} top={120} />
@@ -668,10 +707,14 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
      spread across the whole duration so no part of the scene is a hold.
      ⛔ AND NOT ONE OF THEM LIGHTS. The ledger existing and the ledger being
      earned are different beats; spending the second one here gives away S6. */
+  const mir = MIRROR[v].includes(5);
+  const MX = (x: number) => (mir ? W - x : x);
+  const SORD = seqOrder(6, VARF[v].ord);   /* which bay takes which beat */
   const POST = [6, 15];
   const RAIL = [24, 32, 40];
   const SLOT = [50, 58, 66, 74, 82, 90];
-  const RX = 302, RW = 430, RY = 250, RH = 300;
+  const RW = 430, RH = 300, RY = 250;
+  const RX = mir ? W - 302 - RW : 302;   /* the rack itself moves, not just its dressing */
   const post = (k: number) => E(f, k, k + 9, 0, 1, BACK);
   const rail = (k: number) => E(f, k, k + 8, 0, 1, BACK);
   const slot = (k: number) => E(f, k, k + 9, 0, 1, BACK);
@@ -680,10 +723,10 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.170]} vig={0.70} glow={hexa(p.key, 0.20)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="duct" bands={2} kind="bay"
         rake={0.28} rakeX={RAKE_X0[v] + 320} rakeRate={3.5 * RAKE_K[v]}
-        lamp={{ x: 232, y: 240, r: 300 }} grit={0.9} />
+        lamp={{ x: MX(232), y: 240, r: 300 }} grit={0.9} />
       <ToolWall p={p} f={f} x={-20} y={150} cols={10} rows={2} z={16} o={0.7}
         seed={WALL_SEED[v]} live={4} />
-      <Pool x={506} y={690} w={840} c={p.key} o={0.24} hh={140} z={18} />
+      <Pool x={MX(506)} y={690} w={840} c={p.key} o={0.24} hh={140} z={18} />
       <PartsLine y={620} f={f} rate={7.6 * RAKE_K[v]} z={52} c={p.key} s={1.10} n={6} o={0.38} />
 
       {/* ---- 1 · TWO UPRIGHTS swing in and plant ---- */}
@@ -723,7 +766,8 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
       })}
 
       {/* ---- 3 · SIX GATE SLOTS slide into the bays, one at a time ---- */}
-      {SLOT.map((at, i) => {
+      {SLOT.map((at, beat) => {
+        const i = SORD[beat];
         const k = slot(at);
         const c = i % 3, r = Math.floor(i / 3);
         const tx = RX + 16 + c * (RW / 3), ty = RY + 30 + r * (RH / 2);
@@ -770,14 +814,19 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
       {/* ⭐ THE FITTER. He hops one bay per slot with a spanner, so the thing
           arriving and the body putting it there are on the same clock. */}
       {(() => {
-        const hop = SLOT.reduce((a, at) => a + E(f, at - 5, at + 4, 0, 1 / 6, IO), 0);
-        const hx = 168 + hop * 620;
+        /* ⭐ the fitter walks to whichever bay is next IN THIS CUT'S ORDER — a
+           sequential lerp toward each target, so a reversed cut works backwards
+           along the rack and a middle-out cut starts in the centre. */
+        const hx = SLOT.reduce((prev, at, beat) => {
+          const k = E(f, at - 8, at + 2, 0, 1, IO);
+          return prev + (168 + (SORD[beat] % 3) * 288 - prev) * k;
+        }, 168);
         return (<>
-          <Hero f={f} x={hx} y={800} size={222} z={58} costume={{ constr: 1 }}
+          <Hero f={f} x={MX(hx)} y={800} size={222} z={58} costume={{ constr: 1 }} flip={mir}
             strain={0.34 + (SLOT.some(at => f >= at - 5 && f < at + 4) ? 0.34 : 0)}
             act={1} ph={0.7} gaze={0.4} cheer={built >= 6 ? 0.9 : 0} />
-          <Forearm x0={hx + 88} y0={688} x1={hx + 128} y1={628} w={24} c={CLAYD} z={60} />
-          <div style={{ position: "absolute", left: hx + 112, top: 588, width: 30, height: 58,
+          <Forearm x0={MX(hx) + (mir ? -88 : 88)} y0={688} x1={MX(hx) + (mir ? -128 : 128)} y1={628} w={24} c={CLAYD} z={60} />
+          <div style={{ position: "absolute", left: MX(hx) + (mir ? -142 : 112), top: 588, width: 30, height: 58,
             zIndex: 61, borderRadius: 5, background: dkh(STEEL, 0.34),
             border: `4px solid ${dkh(STEEL, 0.58)}` }} />
         </>);
@@ -801,6 +850,8 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
 export const S6: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("rig");
+  const mir = MIRROR[v].includes(6);
+  const MX = (x: number) => (mir ? W - x : x);
   const LOAD = 2, PULL = 12, SLAM = 20, SWING = 27, LIT = 37, NEXT = 54, THIRD = 88;
   const cycle = (l: number, s0: number, sw: number, li: number) => ({
     loaded: E(f, l, l + 8, 0, 1, OUT),
@@ -832,10 +883,10 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.176]} vig={0.66} glow={hexa(p.key, 0.22)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="duct" bands={2} kind="plant"
         rake={0.32} rakeX={RAKE_X0[v] + 120} rakeRate={4.0 * RAKE_K[v]}
-        lamp={{ x: 300, y: 200, r: 320 }} grit={1} />
+        lamp={{ x: MX(300), y: 200, r: 320 }} grit={1} />
       <ToolWall p={p} f={f} x={-24} y={148} cols={10} rows={1} z={16} o={0.66}
         seed={WALL_SEED[v]} live={5} />
-      <Pool x={506} y={664} w={880} c={p.key} o={0.24} hh={140} z={18} />
+      <Pool x={MX(506)} y={664} w={880} c={p.key} o={0.24} hh={140} z={18} />
       <PartsLine y={372} f={f} rate={8.4 * RAKE_K[v]} z={34} c={p.key} s={1.20} n={6} o={0.40} />
 
       {/* ⭐ ONE BIG READOUT, BIG ENOUGH TO READ. This is the scene where the
@@ -843,18 +894,18 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
           `$ npm test`, its printing output and its PASS band are all legible at
           thumb distance. It runs three times, its gate number flipping 1 -> 2 ->
           3, instead of three small lamps saying nothing. */}
-      <GatePane x={310} y={630} f={f} w={430} s={1} z={52} n={c3.lit ? 3 : c2.lit ? 3 : c1.lit ? 2 : 1}
+      <GatePane x={MX(310)} y={630} f={f} w={430} s={1} z={52} n={c3.lit ? 3 : c2.lit ? 3 : c1.lit ? 2 : 1}
         cmd={c2.lit ? "grep -r TODO" : c1.lit ? "tsc --noEmit" : "npm test"}
         run={Math.max(c1.needle, c2.needle, c3.needle)}
         pass={[c1.lit, c2.lit, c3.lit].filter(Boolean).length > 0
           && !(f >= NEXT - 6 && f < NEXT + 22) && !(f >= THIRD - 6 && f < THIRD + 22) ? 1 : 0} />
       {/* the six-slot rack behind, filling as each one is earned */}
-      <LampBank x={310} y={344} f={f} w={430} s={0.72} z={40}
+      <LampBank x={MX(310)} y={344} f={f} w={430} s={0.72} z={40}
         lit={[c1.lit, c2.lit, c3.lit].filter(Boolean).length / R.gates} wired={1}
         plates={false} n={R.gates} />
       {/* the part swinging in on the hoist before each cycle */}
       {feedIn > 0 && (
-        <div style={{ position: "absolute", left: 1090 - feedIn * 470, top: 246 + feedIn * 236,
+        <div style={{ position: "absolute", left: MX(1090 - feedIn * 470) - (mir ? 178 : 0), top: 246 + feedIn * 236,
           width: 178, height: 124, zIndex: 60,
           transform: `rotate(${(1 - feedIn) * -22}deg)`,
           background: `linear-gradient(172deg, ${mxh(BRASS, 0.24)} 0%, ${dkh(BRASS, 0.48)} 100%)`,
@@ -862,7 +913,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
       )}
 
       {/* THE PRESS — the CHECK command as a machine */}
-      <Press x={646} y={740} f={f} s={1.24} z={52}
+      <Press x={MX(646)} y={740} f={f} s={1.24} z={52}
         ram={Math.max(c1.ram, c2.ram, c3.ram)} needle={Math.max(c1.needle, c2.needle, c3.needle)}
         loaded={Math.max(c1.loaded, c2.loaded, c3.loaded)} />
       {/* ⛔ THIS WAS A SIDE LEVER AND IT COULD NOT BE HELD. Pivoted at the
@@ -871,10 +922,10 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
           §11's banned shape, the same one the bell cord fixed in the old S0.
           A press handle that comes STRAIGHT DOWN out of the gantry can be
           pulled with a vertical arm from one spot, all the way through. */}
-      <div style={{ position: "absolute", left: 907, top: 286, width: 19,
+      <div style={{ position: "absolute", left: MX(916) - 9, top: 286, width: 19,
         height: 128 + lever * 150, zIndex: 56, borderRadius: 3,
         background: `linear-gradient(90deg, ${dkh(STEEL, 0.44)} 0%, ${mxh(STEEL, 0.28)} 42%, ${dkh(STEEL, 0.52)} 100%)` }} />
-      <div style={{ position: "absolute", left: 872, top: 394 + lever * 150, width: 89, height: 40,
+      <div style={{ position: "absolute", left: MX(916) - 44, top: 394 + lever * 150, width: 89, height: 40,
         zIndex: 57, borderRadius: 9,
         background: `linear-gradient(172deg, ${mxh(STEEL, 0.34)} 0%, ${dkh(STEEL, 0.44)} 100%)`,
         border: `4px solid ${dkh(STEEL, 0.58)}` }}>
@@ -892,14 +943,14 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
           lever there is. He also gives the lever a hand, which is §11's rule
           about a limb that ends in mid air, read from the other end. */}
       {(() => {
-        const HX = 800, HY = 740, SZ = 250;
-        const lx = 916, ly = 414 + lever * 150;   /* the handle, straight down */
+        const HX = MX(800), HY = 740, SZ = 250;
+        const lx = MX(916), ly = 414 + lever * 150;   /* the handle, straight down */
         const heave = Math.max(0, Math.min(1, lever));
         return (<>
           <Hero f={f + 40} x={HX} y={HY} size={SZ} z={58} costume={{ constr: 1 }}
-            strain={0.20 + heave * 0.52} act={1} ph={1.1} lift={-heave * 52}
+            strain={0.20 + heave * 0.52} act={1} ph={1.1} lift={-heave * 52} flip={mir}
             cheer={[LIT, NEXT + 30, THIRD + 30].some(t => f >= t && f < t + 12) ? 1 : 0} />
-          <Forearm x0={HX + SZ * 0.395} y0={HY - SZ * 0.505} x1={lx} y1={ly}
+          <Forearm x0={HX + (mir ? -1 : 1) * SZ * 0.395} y0={HY - SZ * 0.505} x1={lx} y1={ly}
             w={Math.round(SZ * 0.105)} c={CLAYD} z={60} />
           <div style={{ position: "absolute", left: lx - SZ * 0.076, top: ly - SZ * 0.076,
             width: SZ * 0.152, height: SZ * 0.152, borderRadius: "44%", zIndex: 61,
@@ -908,8 +959,8 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
       })()}
       {[SLAM, NEXT + 16, THIRD + 16].map((at, i) => (
         <React.Fragment key={"im" + i}>
-          <Ring x={646} y={606} f={f} at={at} c={p.key} s={1.05} z={80} dur={18} />
-          <Puff x={646} y={622} f={f} at={at} c="#9FC6B0" n={9} s={0.95} z={76} />
+          <Ring x={MX(646)} y={606} f={f} at={at} c={p.key} s={1.05} z={80} dur={18} />
+          <Puff x={MX(646)} y={622} f={f} at={at} c="#9FC6B0" n={9} s={0.95} z={76} />
           {f >= at && f < at + 12 && Array.from({ length: 8 }, (_, q) => {
             const t = (f - at) / 12;
             return <div key={"sp" + q} style={{ position: "absolute", zIndex: 84,
@@ -1019,6 +1070,8 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
      lane is a 300px sprite working in the foreground, the queue behind him runs
      at 232px, and the gate they are waiting on is a real barrier at head
      height. The empty wall is gone because the subject grew into it. */
+  const mir = MIRROR[v].includes(8);
+  const MX = (x: number) => (mir ? W - x : x);
   const CYC = [6, 32, 58, 84];
   const step = CYC.reduce((a, at) => a + E(f, at, at + 13, 0, 1, IO), 0);
   const gate = CYC.reduce((a, at) =>
@@ -1030,28 +1083,28 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.188]} vig={0.70} glow={hexa(p.key, 0.22)}>
       <Hall p={p} f={f} dx={PAR_X[v]} overhead="truss" bands={2} kind="plant"
         rake={0.34} rakeX={RAKE_X0[v] + 200} rakeRate={4.4 * RAKE_K[v]}
-        lamp={{ x: 250, y: 200, r: 320 }} grit={1} />
-      <ToolWall p={p} f={f} x={430} y={130} cols={6} rows={1} z={16} o={0.5}
+        lamp={{ x: MX(250), y: 200, r: 320 }} grit={1} />
+      <ToolWall p={p} f={f} x={mir ? -140 : 430} y={130} cols={6} rows={1} z={16} o={0.5}
         seed={WALL_SEED[v]} live={3} />
-      <Pool x={330} y={700} w={760} c={p.key} o={0.34} hh={170} z={18} />
+      <Pool x={MX(330)} y={700} w={760} c={p.key} o={0.34} hh={170} z={18} />
       <PartsLine y={250} f={f} rate={1.4 + anyCyc * 26} z={30} c={p.key} s={1.20} n={5} o={0.34} />
 
       {/* ⭐ THE ONE LANE, BIG. Station and press scaled so the machine reads as
           the thing everybody is waiting on rather than a desk ornament. */}
-      <Station x={256} y={690} f={f} on={done > 0 ? 1 : 0} s={1.34} z={40} work={1} />
-      <Press x={256} y={690} f={f} s={0.60} z={38} ram={anyCyc} needle={anyCyc} loaded={1} />
-      <Hero f={f} x={272} y={706} size={286} z={54} costume={{ constr: 1 }}
+      <Station x={MX(256)} y={690} f={f} on={done > 0 ? 1 : 0} s={1.34} z={40} work={1} />
+      <Press x={MX(256)} y={690} f={f} s={0.60} z={38} ram={anyCyc} needle={anyCyc} loaded={1} />
+      <Hero f={f} x={MX(272)} y={706} size={286} z={54} costume={{ constr: 1 }} flip={mir}
         strain={0.30 + anyCyc * 0.44} act={1} ph={0.5}
         cheer={CYC.some(at => f >= at + 11 && f < at + 19) ? 1 : 0} />
 
       {/* the barrier the queue waits behind, lifting for exactly one of them */}
-      <div style={{ position: "absolute", left: 486, top: 300 - gate * 172, width: 26,
+      <div style={{ position: "absolute", left: MX(499) - 13, top: 300 - gate * 172, width: 26,
         height: 296, zIndex: 56, borderRadius: 3,
         background: `linear-gradient(90deg, ${dkh(STEEL, 0.58)} 0%, ${mxh(STEEL, 0.12)} 44%, ${dkh(STEEL, 0.62)} 100%)` }} />
-      <div style={{ position: "absolute", left: 460, top: 578 - gate * 172, width: 78, height: 44,
+      <div style={{ position: "absolute", left: MX(499) - 39, top: 578 - gate * 172, width: 78, height: 44,
         zIndex: 57, borderRadius: 4, boxShadow: SH_D,
         background: `repeating-linear-gradient(126deg, ${SODIUM} 0 18px, ${dkh(INK, 0.12)} 18px 36px)` }} />
-      <div style={{ position: "absolute", left: 470, top: 150, width: 58, height: 158, zIndex: 55,
+      <div style={{ position: "absolute", left: MX(499) - 29, top: 150, width: 58, height: 158, zIndex: 55,
         background: `linear-gradient(90deg, ${dkh(STEEL, 0.66)} 0%, ${dkh(STEEL, 0.40)} 50%, ${dkh(STEEL, 0.70)} 100%)` }} />
 
       {/* ⭐ THE QUEUE, at 232px. It shunts forward exactly one place per cycle
@@ -1059,14 +1112,14 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
       {Array.from({ length: 7 }, (_, i) => {
         const x = 626 + i * PITCH - step * PITCH;
         if (x < 548 || x > 1140) return null;
-        return <Crew key={"qc" + i} f={f} x={x} y={712} i={i + 1}
+        return <Crew key={"qc" + i} f={f} x={MX(x)} y={712} i={i + 1}
           size={Math.round(252 - Math.max(0, (x - 626) / PITCH) * 11)} z={50 - i}
-          at={0} loop={i % 2 ? 3 : 0} />;
+          at={0} loop={(i + VARF[v].lp) % 4} flip={mir} />;
       })}
       {CYC.map((at, i) => (<React.Fragment key={"cy" + i}>
-        <Ring x={256} y={506} f={f} at={at + 10} c={SODIUM} s={1.20} z={78} dur={18} />
-        <Puff x={256} y={526} f={f} at={at + 10} c="#C4B49A" n={10} s={1.05} z={74} />
-        <Puff x={598} y={708} f={f} at={at + 2} c="#B8AE98" n={7} s={0.8} z={70} />
+        <Ring x={MX(256)} y={506} f={f} at={at + 10} c={SODIUM} s={1.20} z={78} dur={18} />
+        <Puff x={MX(256)} y={526} f={f} at={at + 10} c="#C4B49A" n={10} s={1.05} z={74} />
+        <Puff x={MX(598)} y={708} f={f} at={at + 2} c="#B8AE98" n={7} s={0.8} z={70} />
       </React.Fragment>))}
       <Edge side="r" c={dkh(p.lip, 0.16)} kind="post" z={93} top={130} />
       <Chip t="1 LANE" y={152} x={452} c={hexa(SODIUM, 0.94)} fg={INK} />
@@ -1105,13 +1158,20 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
      ⛔ 10 IS TEN LANES AND NEVER A REPO STATISTIC — the repo names no number.
      ⭐ "WITHOUT AFFECTING EACH OTHER": lane 3 jams and the other nine run
      straight past it. */
+  const mir = MIRROR[v].includes(9);
+  const MX = (x: number) => (mir ? W - x : x);
   const LEV = 8, N = 10, JAM = 3;
   const lever = E(f, LEV, LEV + 9, 0, 1, BACK) - E(f, LEV + 26, LEV + 38, 0, 1, IO);
-  const DROP = Array.from({ length: N }, (_, i) => (i === 0 ? -99 : 22 + (i - 1) * 8));
+  /* ⭐ nine landing slots at fixed frames; which BAY lands in each one permutes,
+     so the nine drops sweep a different way through the row in every cut. */
+  const BAYS = seqOrder(9, VARF[v].ord).map(i => i + 1);
+  const SLOTAT = Array.from({ length: 9 }, (_, k) => 22 + k * 8);
+  const DROP = Array.from({ length: N }, (_, i) =>
+    (i === 0 ? -99 : SLOTAT[BAYS.indexOf(i)]));
   const FIRE = Array.from({ length: N }, (_, i) => (i === 0 ? 14 : DROP[i] + 16));
   const gates = FIRE.filter((at, i) => i !== JAM && f >= at + 6).length;
   const ledger = Math.min(1, gates / (N - 1));
-  const LX = (i: number) => 214 + (i % 5) * 142 + (i > 4 ? 46 : 0);
+  const LX = (i: number) => MX(214 + (i % 5) * 142 + (i > 4 ? 46 : 0));
   const LY = (i: number) => (i > 4 ? 556 : 742);
   const SZ = (i: number) => (i > 4 ? 132 : 172);
   return (
@@ -1153,7 +1213,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
         const sq = land > 0 && land < 1 ? 1 - Math.sin(land * Math.PI) * 0.13 : 1;
         return (
           <Crew key={"sa" + i} f={f} x={LX(i) - 54} y={LY(i) + 34 + dy} i={i}
-            size={Math.round(SZ(i) * (2 - sq))} z={i > 4 ? 28 : 46} at={0} loop={i % 4}
+            size={Math.round(SZ(i) * (2 - sq))} z={i > 4 ? 28 : 46} at={0} loop={(i + VARF[v].lp) % 4} flip={mir}
             tint={i > 4 ? dkh(CLAY, 0.26) : undefined}
             cheer={f > FIRE[i] && f < FIRE[i] + 16 && i !== JAM ? 1 : 0} />
         );
@@ -1180,12 +1240,12 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
       <Counter x={742} y={168} v={ledger * R.gates} of={R.gates} s={0.94} z={90} c={GOLD} />
 
       {/* the hero throws the lever that releases the other nine */}
-      <Hero f={f} x={886} y={748} size={196} z={58} costume={{ suit: 1 }}
+      <Hero f={f} x={MX(818)} y={748} size={196} z={58} costume={{ suit: 1 }} flip={mir}
         drive={Math.max(0, lever) * 0.30} act={2} ph={0.3} cheer={f > 120 ? 1 : 0} />
-      <div style={{ position: "absolute", left: 922, top: 514, width: 24, height: 118, zIndex: 54,
+      <div style={{ position: "absolute", left: MX(866) - 12, top: 514, width: 24, height: 118, zIndex: 54,
         transformOrigin: "50% 100%", transform: `rotate(${-30 + Math.max(0, lever) * 60}deg)`,
         background: `linear-gradient(90deg, ${dkh(BRASS, 0.50)} 0%, ${mxh(BRASS, 0.14)} 44%, ${dkh(BRASS, 0.56)} 100%)` }} />
-      <Ring x={932} y={510} f={f} at={LEV + 8} c={SODIUM} s={1.0} z={76} dur={16} />
+      <Ring x={MX(864)} y={510} f={f} at={LEV + 8} c={SODIUM} s={1.0} z={76} dur={16} />
       <Mark x={62} y={168} s={104} z={90} />
       <Chip t="TEN LANES" y={152} x={400} c={hexa(VERD, 0.94)} fg={PAPER} />
     </Scene>
