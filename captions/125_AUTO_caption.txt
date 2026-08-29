@@ -1,0 +1,34 @@
+Comment "AUTO" and I'll send you the free setup guide.
+
+👇 READ BELOW
+
+There is a GitHub repo with 350 ready-made automations in it, and you can run any one of them in about a minute without building anything.
+
+It is called awesome-n8n-templates. Every file in it is a finished n8n workflow that somebody already wired, tested and gave away. You do not open a blank canvas. You download one JSON file, hit Workflows then Import from File, add your credentials, and switch it on.
+
+★ 350 workflow files, sorted into 19 categories
+★ 92 for OpenAI and LLM work, 44 for AI research and RAG
+★ 26 for Gmail and email, 26 for Telegram, 21 for Drive and Sheets
+★ 18 for PDF and document processing, 15 for social media
+★ Notion, Slack, WhatsApp, Discord, Airtable, WordPress and DevOps all have their own folders
+★ 24,983 stars, free, and it takes pull requests
+
+The reason this matters is not the count. It is that the hard part of automation was never the idea, it was the ninety minutes of wiring nodes together and finding out on step eleven that the auth is wrong. Somebody else already ate that. You are picking a finished machine off a shelf.
+
+Where to start, honestly. Do not import twenty of them. Pick the one job you do by hand every single day, find the folder it lives in, and run that one. Get it working end to end before you touch a second. The people who get nothing out of repos like this are the ones who import forty workflows on a Sunday and never wire the credentials for any of them.
+
+Two honest notes.
+
+One: these are community templates, not a product. Some are excellent, some are two years old, a few reference nodes that have since changed. Read the workflow before you activate it, especially anything that sends email or posts on your behalf.
+
+Two: free means the templates, not the running. n8n itself is free to self-host and there is a paid cloud tier, and the model calls inside any AI workflow still cost whatever the model costs. Budget for that before you wire up something that runs every fifteen minutes.
+
+The one nobody talks about: the folder that will actually change your week is not the AI one. It is Gmail and Email Automation. Twenty-six workflows, and most people's biggest daily time sink is sitting in their inbox.
+
+Comment "AUTO" and I'll send you the setup guide, with the five to start with and the order to do them in.
+
+.
+.
+.
+
+#n8n #n8nworkflow #automation #nocode #lowcode #aiautomation #workflowautomation #aiagents #aitools #buildinpublic #productivity #saas #opensource #github #aiworkflow #smallbusiness #solopreneur #emailautomation #systems #aiforwork

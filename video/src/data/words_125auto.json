@@ -1,0 +1,532 @@
+[
+{
+"start": 0.0,
+"end": 0.19,
+"word": " There's"
+},
+{
+"start": 0.19,
+"end": 0.29,
+"word": " a"
+},
+{
+"start": 0.29,
+"end": 0.49,
+"word": " GitHub"
+},
+{
+"start": 0.365,
+"end": 0.44,
+"word": " repo"
+},
+{
+"start": 0.44,
+"end": 0.64,
+"word": " with"
+},
+{
+"start": 0.64,
+"end": 0.82,
+"word": " over"
+},
+{
+"start": 1.07,
+"end": 1.71,
+"word": " 30,000"
+},
+{
+"start": 1.71,
+"end": 1.95,
+"word": " stars"
+},
+{
+"start": 1.95,
+"end": 2.11,
+"word": " that"
+},
+{
+"start": 2.07,
+"end": 2.19,
+"word": " gives"
+},
+{
+"start": 2.19,
+"end": 2.33,
+"word": " you"
+},
+{
+"start": 2.33,
+"end": 2.81,
+"word": " 280"
+},
+{
+"start": 2.61,
+"end": 3.01,
+"word": " pre-built"
+},
+{
+"start": 3.01,
+"end": 3.41,
+"word": " automations"
+},
+{
+"start": 3.6,
+"end": 3.84,
+"word": " so"
+},
+{
+"start": 3.84,
+"end": 3.94,
+"word": " you"
+},
+{
+"start": 3.94,
+"end": 4.1,
+"word": " never"
+},
+{
+"start": 4.04,
+"end": 4.14,
+"word": " have"
+},
+{
+"start": 4.14,
+"end": 4.32,
+"word": " to"
+},
+{
+"start": 4.32,
+"end": 4.42,
+"word": " set"
+},
+{
+"start": 4.395,
+"end": 4.435,
+"word": " one"
+},
+{
+"start": 4.47,
+"end": 4.51,
+"word": " up"
+},
+{
+"start": 4.545,
+"end": 4.87,
+"word": " yourself."
+},
+{
+"start": 5.37,
+"end": 5.45,
+"word": " And"
+},
+{
+"start": 5.45,
+"end": 5.57,
+"word": " it"
+},
+{
+"start": 5.57,
+"end": 5.73,
+"word": " takes"
+},
+{
+"start": 5.645,
+"end": 5.76,
+"word": " just"
+},
+{
+"start": 5.76,
+"end": 5.98,
+"word": " one"
+},
+{
+"start": 5.98,
+"end": 6.18,
+"word": " minute"
+},
+{
+"start": 6.4,
+"end": 6.58,
+"word": " to"
+},
+{
+"start": 6.58,
+"end": 6.7,
+"word": " set"
+},
+{
+"start": 6.7,
+"end": 6.96,
+"word": " up."
+},
+{
+"start": 7.05,
+"end": 7.13,
+"word": " So"
+},
+{
+"start": 7.13,
+"end": 7.27,
+"word": " now"
+},
+{
+"start": 7.27,
+"end": 7.41,
+"word": " your"
+},
+{
+"start": 7.41,
+"end": 7.61,
+"word": " emails"
+},
+{
+"start": 7.74,
+"end": 7.96,
+"word": " sort"
+},
+{
+"start": 7.96,
+"end": 8.36,
+"word": " themselves,"
+},
+{
+"start": 8.48,
+"end": 8.54,
+"word": " your"
+},
+{
+"start": 8.555,
+"end": 8.7,
+"word": " leads"
+},
+{
+"start": 8.65,
+"end": 8.81,
+"word": " get"
+},
+{
+"start": 8.81,
+"end": 9.03,
+"word": " followed"
+},
+{
+"start": 9.03,
+"end": 9.19,
+"word": " up"
+},
+{
+"start": 9.19,
+"end": 9.29,
+"word": " on"
+},
+{
+"start": 9.29,
+"end": 9.39,
+"word": " while"
+},
+{
+"start": 9.39,
+"end": 9.51,
+"word": " you"
+},
+{
+"start": 9.51,
+"end": 9.71,
+"word": " sleep,"
+},
+{
+"start": 9.6,
+"end": 9.64,
+"word": " your"
+},
+{
+"start": 9.675,
+"end": 9.9,
+"word": " content"
+},
+{
+"start": 9.9,
+"end": 10.06,
+"word": " gets"
+},
+{
+"start": 10.25,
+"end": 10.55,
+"word": " posted"
+},
+{
+"start": 10.55,
+"end": 10.73,
+"word": " to"
+},
+{
+"start": 10.73,
+"end": 10.93,
+"word": " every"
+},
+{
+"start": 10.805,
+"end": 11.06,
+"word": " social"
+},
+{
+"start": 11.06,
+"end": 11.24,
+"word": " media"
+},
+{
+"start": 11.24,
+"end": 11.74,
+"word": " platform."
+},
+{
+"start": 12.25,
+"end": 12.43,
+"word": " Gmail,"
+},
+{
+"start": 12.69,
+"end": 12.83,
+"word": " Slack,"
+},
+{
+"start": 12.97,
+"end": 13.15,
+"word": " WhatsApp,"
+},
+{
+"start": 13.34,
+"end": 13.46,
+"word": " YouTube,"
+},
+{
+"start": 13.74,
+"end": 13.82,
+"word": " Stripe,"
+},
+{
+"start": 13.92,
+"end": 14.02,
+"word": " over"
+},
+{
+"start": 13.995,
+"end": 14.3,
+"word": " 18"
+},
+{
+"start": 14.3,
+"end": 14.74,
+"word": " categories"
+},
+{
+"start": 14.74,
+"end": 14.94,
+"word": " of"
+},
+{
+"start": 14.94,
+"end": 15.3,
+"word": " automations"
+},
+{
+"start": 15.44,
+"end": 15.62,
+"word": " in"
+},
+{
+"start": 15.62,
+"end": 15.9,
+"word": " total."
+},
+{
+"start": 16.24,
+"end": 16.34,
+"word": " And"
+},
+{
+"start": 16.34,
+"end": 16.42,
+"word": " you"
+},
+{
+"start": 16.42,
+"end": 16.58,
+"word": " don't"
+},
+{
+"start": 16.495,
+"end": 16.55,
+"word": " have"
+},
+{
+"start": 16.57,
+"end": 16.69,
+"word": " to"
+},
+{
+"start": 16.69,
+"end": 16.87,
+"word": " build"
+},
+{
+"start": 16.85,
+"end": 17.05,
+"word": " any"
+},
+{
+"start": 17.05,
+"end": 17.19,
+"word": " of"
+},
+{
+"start": 17.19,
+"end": 17.41,
+"word": " them."
+},
+{
+"start": 17.78,
+"end": 17.9,
+"word": " Just"
+},
+{
+"start": 17.9,
+"end": 18.04,
+"word": " grab"
+},
+{
+"start": 18.04,
+"end": 18.24,
+"word": " one"
+},
+{
+"start": 18.22,
+"end": 18.48,
+"word": " file,"
+},
+{
+"start": 18.6,
+"end": 18.72,
+"word": " click"
+},
+{
+"start": 18.72,
+"end": 19.02,
+"word": " import,"
+},
+{
+"start": 19.1,
+"end": 19.18,
+"word": " and"
+},
+{
+"start": 19.18,
+"end": 19.26,
+"word": " it"
+},
+{
+"start": 19.26,
+"end": 19.4,
+"word": " runs"
+},
+{
+"start": 19.41,
+"end": 19.89,
+"word": " immediately."
+},
+{
+"start": 20.38,
+"end": 20.58,
+"word": " Everyone"
+},
+{
+"start": 20.58,
+"end": 20.76,
+"word": " else"
+},
+{
+"start": 20.76,
+"end": 20.88,
+"word": " is"
+},
+{
+"start": 20.88,
+"end": 21.0,
+"word": " still"
+},
+{
+"start": 20.955,
+"end": 21.05,
+"word": " spending"
+},
+{
+"start": 21.05,
+"end": 21.33,
+"word": " hours"
+},
+{
+"start": 21.33,
+"end": 21.55,
+"word": " doing"
+},
+{
+"start": 21.6,
+"end": 21.76,
+"word": " all"
+},
+{
+"start": 21.76,
+"end": 21.86,
+"word": " of"
+},
+{
+"start": 21.86,
+"end": 21.96,
+"word": " this"
+},
+{
+"start": 22.03,
+"end": 22.17,
+"word": " by"
+},
+{
+"start": 22.17,
+"end": 22.41,
+"word": " hand"
+},
+{
+"start": 22.41,
+"end": 22.65,
+"word": " every"
+},
+{
+"start": 22.57,
+"end": 22.83,
+"word": " day."
+},
+{
+"start": 23.13,
+"end": 23.33,
+"word": " Comment"
+},
+{
+"start": 23.33,
+"end": 23.55,
+"word": " AUTO"
+},
+{
+"start": 23.45,
+"end": 23.65,
+"word": " for"
+},
+{
+"start": 23.65,
+"end": 23.75,
+"word": " the"
+},
+{
+"start": 23.75,
+"end": 23.97,
+"word": " repo."
+}
+]

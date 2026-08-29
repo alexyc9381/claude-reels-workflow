@@ -321,3 +321,50 @@ fact measuring a mangled rake speed. Both numbers were discarded.
 > file, different codec noise).
 
 ---
+
+## ⛔⛔⛔ THE CAMERA IS A PAN, NEVER A ROLL — AND FLATTENING IT IS THE DIAGNOSTIC
+
+Reel 125 is the **fourth** reel to arrive at *"how are these any different from
+the original?"*. `memory/dhash-passes-while-cuts-are-identical.md` diagnosed the
+metric and `memory/three-cuts-three-hooks.md` wrote the answer, and this build
+had still shipped what both forbid: **a crop, a tilt and a tone curve**, at dHash
+**22.2 / MIN 13** — comfortably over the bars, while being one reel three times.
+
+> *"I don't like the second cut, it's just tilted to the right, it doesn't look
+> good."*
+
+⛔ A `rot` spread exists only to move a hash. That is **differentiating by
+DEGRADING** — a cut made worse so a number shifts — and a roll reads as a
+MISTAKE, not a choice. **`rot` is 0 in every cut.**
+⭐ A **PAN** is legitimate: 50px on a 1012px panel is a different FRAMING, which
+is an editorial decision. Keep scale inside ~3% so nothing is cropped out.
+⛔ **A pan is not luma-neutral** — the set is not evenly lit. Re-measure frame 0
+on every cut after any camera change.
+
+### ⭐⭐⭐ Flattening the camera COLLAPSES the hash, and that is the useful part
+
+With the roll and zoom gone the hash fell **22.2 → 12.3, MIN 5**, and the
+per-frame table named the problem exactly:
+
+```
+f30, f91   20 / 23   the HOOK frames — strong, because the mechanisms differ
+f152 on     5 - 14   every BODY frame — weak
+```
+
+> **The body scenes had no variant lever at all. The tilt had been standing in
+> for one.** A per-frame dHash on a flattened camera is the only way to see that.
+
+### ⭐ Give the BODY a lever, and make it CONTENT
+
+Three cuts share one body by design, so the body cannot differ by event. It can
+differ by **what is on screen**: reel 125 draws a different seven-app shelf,
+different mail destinations, a different category order and a different
+three-node workflow per cut — every mark still one of the 24 verified as really
+being in the repo.
+
+⛔ **WHERE THE VO NAMES A MARK, IT DOES NOT MOVE.** The four marks spoken aloud
+and the three named platforms are identical in all three cuts, by law. A variant
+lever may never make a cut say something false.
+
+**Final: dHash mean 22.9 / MIN 14 — the same number as the tilted version, earned
+by three different EVENTS instead of three treatments of one.**

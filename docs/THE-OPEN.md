@@ -419,3 +419,40 @@ have **settled**: `at = -40` renders a clean `$04,800` on frame 0.
 > far enough to be **finished**, not merely started.
 
 ---
+
+## ⭐⭐ REMOVING TEXT REMOVES LUMA — AND THE LEVER IS THE SOCKET, NOT THE TILE
+
+Reel 125 was told *"in the beginning scene, don't have any text — just have all
+the different logos."* Correct note, and the two cream claim plates had been
+silently carrying frame 0: taking them out dropped it **140.0 → 119.2** against
+the 140 floor.
+
+⭐ **The honest replacement is that the LOGOS carry it, so there have to be enough
+of them — and that is arithmetic, not taste.** One 140px white tile replacing a
+near-black socket is worth:
+
+```
+(245 - 22) x 140^2  /  (1012 x 792)  =  +4.7 luma
+```
+
+so six more tiles is +28. Do the sum before rendering.
+
+⛔ **And the lever that finally worked was the SOCKET, not the tile.** Enlarging
+tiles was a wash, because the empty sockets grew with them. Lifting the empty
+socket from near-black to a **recessed mid-grey plate** was +10 at a stroke — and
+it is reel 108's rule arriving as a gate fix: *an empty bay is a bright cream
+plate, not a black hole.* It still leaves each arrival a ~190-point value step.
+
+### ⛔ A continuous fill ramp always has ~1.4 objects IN FLIGHT
+
+Seeding a filling grid by starting `fill` part-way up caught one tile **mid-drop
+on frame 0** — a half-scaled, rotated logo on the one frame guaranteed to be seen.
+Draw the seeded ones as landed OUTRIGHT and start the ramp from the first
+unseeded index.
+
+### ⛔⛔ THE FRAME-0 LAWS APPLY TO EVERY CUT, NOT JUST THE HOUSE ONE
+
+Reel 125's two alternative hooks both opened on an **empty grey room** in their
+first build — no subject, nothing to carry the bar — because the seeding had only
+ever been written for the main cut. Render frame 0 of every trial cut and measure
+each one.

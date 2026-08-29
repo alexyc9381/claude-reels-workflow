@@ -128,3 +128,23 @@ line per memory file, grouped by topic. Its own rules (frontmatter, `[[links]]`,
 | `cover-system/reference/COVER_INDEX.png` | `cover-system/tools/build_cover_index.py` |
 
 Each generated file says so in its header. Edit the generator, not the output.
+
+## ⛔ The generated registry only counts git-TRACKED files, and it keys reels by NAME
+
+Two traps found on reel 125, both silent:
+
+1. **`tools/build_repo_index.py` skips untracked files.** A brand-new reel's code,
+   board and log will not appear in `REELS.md` until they are at least **staged**.
+   The counts look wrong and nothing tells you why.
+2. **A reel is keyed by the name in `Claude<Name>Reel.tsx`,** and names collide:
+   reel 85 already owned `AUTO`, so reel 125's factory log fell back to the
+   digit-stripped key and **attached itself to reel 85's row**, while its
+   storyboard made a third orphan row. Naming the file `ClaudeAuto125Reel.tsx`
+   makes the code, `auto125-factory-log.md` and `125-auto.md` all key to
+   `auto125` and merge into one correct row.
+
+⭐ **Check `grep '^| <n> ' REELS.md` after adding a reel.** The row is the proof;
+the header counts are not.
+
+⛔ And stage ONLY your own files. `git add -A` in this repo sweeps in every other
+in-flight reel's untracked work.

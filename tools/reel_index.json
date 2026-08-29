@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 102,
-    "reels_total": 146,
-    "factory_logs": 61,
-    "storyboards": 63,
-    "caption_jsons": 112,
-    "memory_md": 211,
+    "reels_with_code": 103,
+    "reels_total": 147,
+    "factory_logs": 62,
+    "storyboards": 64,
+    "caption_jsons": 113,
+    "memory_md": 214,
     "creators": 8,
     "packs": 3
   },
@@ -518,6 +518,7 @@
         "video/src/data/words_118loop.json",
         "video/src/data/words_119ox.json",
         "video/src/data/words_120unlazy.json",
+        "video/src/data/words_125auto.json",
         "video/src/data/words_ads.json",
         "video/src/data/words_agency.json",
         "video/src/data/words_ai.json",
@@ -1299,6 +1300,7 @@
       "log": null,
       "storyboard": "storyboards/85-auto.md",
       "captions": [
+        "video/src/data/words_125auto.json",
         "video/src/data/words_auto.json",
         "video/src/data/words_auto_b.json",
         "video/src/data/words_auto_c.json",
@@ -1644,6 +1646,15 @@
       "captions": [
         "video/src/data/words_120unlazy.json"
       ]
+    },
+    {
+      "key": "auto125",
+      "name": "auto",
+      "number": 125,
+      "code": "video/src/ClaudeAuto125Reel.tsx",
+      "log": "memory/reels/auto125-factory-log.md",
+      "storyboard": "storyboards/125-auto.md",
+      "captions": []
     }
   ]
 }

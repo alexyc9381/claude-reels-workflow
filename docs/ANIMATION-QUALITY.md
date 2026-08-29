@@ -337,6 +337,23 @@ The per-scene push crops the panel progressively: at 1.075 the visible width is 
 so 35px is lost each side by the end of the scene; at 1.26 it is 104px each side. Anything at the
 frame edge disappears **only at the end of the shot**, which is why it survives a frame-0 check.
 
+### 5. It is the same colour as what is behind it
+Added on reel 122 round 50, where it happened **twice in one pass**. A supply cable authored
+`#4A423A` and a feed belt authored `#2A2620` both rendered, both at the right coordinates, both on
+top, both on frames the reviewer was looking at — and neither was in the picture, because a dark
+neutral prop on a dark neutral set has no edge. The motion audit cannot see this either: a swept
+edge with a luma delta near zero contributes nothing, so the scene measures exactly as if you had
+not drawn the prop at all.
+
+> A prop's colour is not decoration, it is whether the prop EXISTS. Before drawing anything on a
+> dark set, name the luma step between it and its ground; if you cannot, pick a different value —
+> the reel 122 trunk cable went to `#C46A2A` and became the most legible object in its scene.
+
+The same pass lost two whole props to **z ordering**: the belt at `z 30` sat behind the furnace
+(44), the rack (34) and the hero (62) at once, so it existed for a 66px sliver of its 520px run.
+An overhead conveyor and a mains conduit both had to go OVER everything, which is also where the
+real ones run. **When a prop joins two other props, its z has to beat BOTH of them.**
+
 ---
 
 ## 7. The working loop that actually converges
@@ -1285,3 +1302,229 @@ See `memory/authored-motion-needs-its-own-driver.md`.
 `memory/reels/unlazy-factory-log.md` (reel 120 — §20-22, seven review rounds and the delivery findings)
 
 ---
+
+## 23. ⭐⭐⭐ AN EASE THAT LANDS ON A CUT DECELERATES INTO IT (reel 125)
+
+> *"Don't slow down the animation right before it will change — I keep noticing
+> that the animation always comes to a dead still or almost dead still right
+> before it changes animations."*
+
+He was describing an **easing curve**, and it was true of six of thirteen scenes.
+Measured as the last 8 frames against each scene's own body (cut transient
+excluded from both):
+
+```
+HOOK_A 0.40 · SLOT 0.60 · BENCH2 0.67 · FIELD 0.69 · GATE 0.78 · RANK 0.81
+```
+
+Not a taste note — a systematic authoring habit. **Every event had been written
+to COMPLETE at or before its scene's end, with `IO`/`OUT` easings that decelerate
+to zero.** So every shot arrived at its cut already stopping.
+
+### ⛔⛔ The obvious fix does not work, and that is the useful part
+
+Extending every ramp so it finishes PAST the cut measured **0.26 → 0.24. Nothing.**
+
+> **An `IO` or `OUT` ease DECELERATES toward its end whether or not that end is on
+> screen.** A curve spanning a boundary still arrives at the boundary slowing
+> down. Extending it only moves the cause off-camera.
+
+⭐ **THE RULE: anything that crosses a cut must be `LIN` (constant speed) or `IN`
+(accelerating).** Reel 125's hook convergence went to `IN_Q` — the swarm orbits
+freely and then RUSHES together, fastest at the exact frame it cuts: **0.40 →
+1.12, with its last four frames the fastest of the entire shot.** Cutting on
+acceleration is what editors do, and it reads better: "coming together" became a
+snap instead of a settle.
+
+### ⛔ Two traps inside the same fix
+
+1. **FIX THE WINDOW THAT OWNS THE FRAMES.** The hook's last 8 frames belonged to
+   its second SHOT, so the first round of fixes was measured on frames it does
+   not appear in. Split any scene at its internal cut before touching it.
+2. **CONTINUING MOTION IS NOT ENOUGH IF IT IS SMALL.** Two scenes were "fixed" by
+   letting an n8n execution pulse run past the cut — a **~10px bead, which is
+   2.4px after the audit's 1012→240 downsample.** Invisible to the metric and
+   nearly so to a viewer. Tails need LARGE objects; line work and beads are for
+   the eye, never for the number.
+
+### The tool: `tools/precut_audit.py`
+
+⛔ **`scene_tail_audit` cannot see this.** It splits a scene into QUARTERS, and on
+the same file it rated **SLOT 1.50 "ok"** and **BENCH2 1.32 "ok"** while both were
+measurably dead in their final eight frames. A scene can fire a big event early
+in its last quarter and still flatline into the cut. **The stall a viewer feels
+is the last quarter-SECOND, not the last quarter.**
+
+```bash
+python3 tools/precut_audit.py REEL.mp4 --scenes "$(tools/<reel>_scenes.sh)" --names ...
+#   RATIO = last8 / body     < 0.70 dies · < 0.88 fading
+```
+
+---
+
+## 24. ⭐⭐⭐ HALF A FRAME CAN BE DEAD WHILE EVERY GATE PASSES (reel 125)
+
+> *"There's not enough motion in the top — it's just too boring with the bottom
+> ones only, those moving."*
+
+Every audit in this repo means the whole panel. **Split it and measure the
+halves.** First 1.5s of three trial cuts:
+
+```
+SWARM    top 34.12   bottom 36.34   ratio 0.94    balanced
+CASCADE  top 11.75   bottom  8.03   ratio 1.46    quiet everywhere
+DEAL     top  4.04   bottom 15.17   ratio 0.27    ⛔ the top half is dead
+```
+
+DEAL passed the motion audit, the tail audit **and** the pre-cut audit with half
+its frame doing nothing, because all three average over the panel.
+
+### ⛔⛔⛔ The cause was a z-INDEX, not a rate
+
+The pass-through stream — the device keeping the hook alive — was drawn at
+**z 38, UNDER the seeded tiles at z 54-73.** So in whichever half of the frame was
+already full, the only continuous motion in the shot was invisible. At **z 80** it
+runs in front of the wall and behind the hero, which is also the better read.
+
+> This is §6.2 (*"it is behind something"*) with a new symptom: not a missing
+> effect, but a **dead half-frame**. When one region reads as still and the
+> numbers say the scene is fine, check what is drawn OVER the thing that moves.
+
+### ⛔ Balanced but quiet is still quiet — the MECHANISM sets the ceiling
+
+After the z fix the ratios were even (0.94 / 0.96 / 0.83) at only ~12 absolute
+against the swarm's ~35. **An orbit has twenty large tiles travelling at once; a
+pour or a deal has three in the air.** The fix is MORE OF THE MECHANISM, never a
+foreign element: 38 in the stream instead of 22, larger, arriving every 2.5
+frames. A heavier pour and a faster deal are more of what each hook already is.
+
+---
+
+## 25. ⭐⭐⭐ A GRID FILLING IS ONE IDEA REPEATED N TIMES (reel 125)
+
+Three rounds made a hook's OBJECTS move — they flew in, then idled and chased
+lamps and fired jobs, then wired themselves to each other. Every one was a real
+improvement and the note did not change:
+
+> **Twenty things twitching in twenty fixed squares is a STATIC COMPOSITION with
+> busy contents, and a viewer reads the composition first.**
+
+The LAYOUT never moved. Every fix added motion *inside* a lattice that was itself
+nailed down, and no amount of that reads as movement.
+
+⭐ **MAKE THE LAYOUT THE ANIMATION.** Twenty marks on two **counter-rotating**
+rings, tumbling on their own axes, spiralling in and locking into the grid — four
+kinds of motion at once (ORBIT · TUMBLE · CONVERGE · ARRIVE), which is what
+"varying types of movement" means and why none of it reads as a loop.
+
+| | |
+|---|---|
+| HOOK | **11.72 → 18.94** — weakest scene in the reel to strongest |
+| 0-1s FLOOR | **4.77 → 25.04** |
+
+⭐⭐ **THE FLOOR IS THE NUMBER THAT MATTERS.** Three rounds of adding motion moved
+it 4.68 → 4.77. Moving the layout moved it to 25. **When a note repeats after a
+real improvement, the improvement was answering a different question.**
+
+⛔ **Counter-rotation matters:** one ring of twenty turning together is a WHEEL,
+and a wheel is one idea.
+⛔ **Shrink the radius by ~0.55, never to zero** — collapsing it fully pulls
+everything through the centre and the middle of the move is an unreadable pile.
+Let the LATTICE lerp do the gathering.
+⛔ **A continuous orbit IS settled at frame 0** — it is a steady state, not a
+transition caught halfway.
+
+---
+
+## 26. ⛔⛔ NOBODY HAD CHECKED THE RATE (reel 125)
+
+The hook orbit ran at **0.021 rad/frame = 36 degrees per second** — a third of one
+revolution across a 3.47s shot. Seven rounds of notes argued about WHAT moves;
+none of them checked HOW FAST. **Speed is a first-class parameter and it is the
+one nobody audits.**
+
+⭐ **And RAMP it, do not merely raise it.** Integrate an accelerating rate —
+`w0*f + a*f²` — 0.030 → 0.144 rad/frame, 1.44 revolutions, running straight into
+the convergence so the shot is one continuous wind-up. **20.97 → 25.53.**
+⛔ Speed up the per-object idle with it, or a formation accelerating while its
+members loll at the old rate reads as two animations laid over each other.
+
+### ⛔ A wider stagger is BETTER for a QUEUE — the opposite of §5
+
+Measured on the same hook: `0.85 → 6.39 · 1.4 → 8.09 · 2.2 → 6.99`. §5's "shorten
+the arrival" was measured on ONE object easing in alone. This is a QUEUE, where
+the stagger width sets **how many objects are in flight at the same time.** Two
+house rules pull opposite ways and only the measurement settles it.
+
+### ⛔ And a cream sweep over white tiles is invisible
+
+A travelling band added over a finished board of white tiles measured **8.09 →
+6.74 with HOLD 12% → 31%** — §6.5's dark-on-dark trap in reverse. It was deleted
+rather than left defaulted to zero, **because dead code that still renders is how
+a fix gets credited to the wrong change.**
+
+---
+
+## 27. ⭐⭐ EVERYTHING NEEDS MOTION, NOT JUST THE THING YOU ARE ANIMATING (reel 125)
+
+> *"Between 0-1 second each of those hook things needs to all have motion,
+> everything, not just this here."*
+
+At frame 0 a hook had **ten 150px tiles sitting perfectly still** — most of the
+panel's AREA frozen — while two or three objects in flight carried the shot.
+
+> **A viewer reads the whole frame, not the object you happen to be animating.**
+
+⛔ And the audit cannot see it: a scene measures fine with 90% of its area static,
+because the mean is carried entirely by what moves. **Measure the FLOOR.**
+
+⭐ What "alive" costs, with the measured amplitudes:
+- an **idle** at §5's floor — 4.6px / 2.6° with a second slower harmonic, on a
+  per-object phase so nothing breathes in lockstep
+- a small **status chase** — under the downsample floor, so it is for the eye
+  only, and at full resolution it is the first thing the eye catches
+- a periodic **fire** — a squash, a ring, and something thrown out of the object,
+  staggered so two or three of ten are going off at any instant
+
+```
+0-1s mean delta   6.28 → 8.08      0-1s FLOOR   3.01 → 4.68
+```
+The floor moving more than the mean is the point.
+
+⛔ **A REFACTOR SILENTLY DELETES BEHAVIOUR FOR THE CASES YOU ARE NOT LOOKING AT.**
+Factoring three hook mechanisms into one placement function dropped this
+work-pulse for all of them — the exact defect it had been added to fix.
+
+---
+
+## 28. ⭐ TWO SIZING RULES THAT ARE NOT TASTE (reel 125)
+
+- **A CURSOR MUST BE ~78px.** §1's table has a 30×38 cursor travelling at **~0
+  motion**; a real-sized pointer is invisible to the audit and to a phone screen
+  alike. Give it a click ring that LEAVES (so the click is an event, not a halo)
+  and a real control that DEPRESSES under it, and land the press on the spoken
+  word.
+- **"EVEN IF IT MEANS LESS LOGOS" IS THE RIGHT INSTINCT.** A node is only worth
+  drawing if its ICON is recognisable: a node at 0.118 of canvas width gave a
+  **43px logo**, at 0.170 with the icon at 0.62 of the node it gives **72px**.
+  Dropping one node bought the rest another ~25%. **Fewer, bigger, recognisable
+  beats more and decorative** — §15 again.
+- ⛔ Changing a shared kit constant means every hand-computed geometry derived
+  from it must follow, or it detaches silently.
+
+---
+
+## 29. ⛔⛔ A NUDGE IS NOT A LANDING (reel 125)
+
+> *"When each logo gets on top of the other we need to see like light up etc,
+> more interesting."*
+
+A receiving object scaled 9% and drew a thin ring. When the arrival of one thing
+onto another is the beat a scene EXISTS for, it gets the full reward stack
+(§18): a contained **bloom**, a **26% scale punch** that overshoots and rings out,
+**two** expanding rings at different rates, **eight sparks** on ballistic arcs, and
+the counter **popping** as it ticks.
+
+⛔ Contained, never a screen flash — the bloom is 6.6% of frame width.
+`feedback_no_flashing_transitions` is standing, and §16 is a reel that shipped a
+banned full-frame flash to pass a gate.
