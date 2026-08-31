@@ -206,3 +206,74 @@ it silently) · `landmarks.json` 1240fr 0% miss · `words_clean.json` 136w md5-v
 
 ## STATUS: steps 0-3 done, plan lints 0 findings, design locked. Next = step 4 BUILD (recipe budgets 2-4h),
 then lint / render / verify.
+
+---
+
+## 2026-08-04 — THE GATE THAT COULD NOT SEE THE DEFECT IT EXISTS FOR
+
+⛔⛔⭐ **`bodies86.tsx` declared no `PARADIGM` map, so law 50 had NEVER been evaluated
+on this reel — and the gate printed it as passing.** In `lint_shots.py:294-301` the
+whole law-50 block, *including its own `no paradigm declared` failure*, is nested
+inside `if pm:`; line 923 prints `✓ laws 47 + 48 + 49 + 50 ... pass` unconditionally.
+Reels 78/82/83/84 all declare the map. 86 was the only reel flying blind — through
+seven rounds of "0 findings" and four rejections of the same defect.
+
+⭐ **Writing the map honestly produced the rebuild list objectively. Every shot Alex
+rejected was a paradigm REPEAT; every shot he kept was a singleton. 5 for 5.**
+
+| family | shots | outcome |
+|---|---|---|
+| ACCUMULATE into a grid | Engineering · Folders · Fifty | all 3 rejected |
+| figures in a ROW | Chain · Workflow | both rejected |
+| singletons | Hook · Roles · Split · Stars · Overload · OrgTree | all 6 kept |
+
+So the criterion was **leave the family**, not restyle inside it. Cards → terminals →
+monitors → slabs → pills never could. New paradigms, all five built:
+
+| shot | new paradigm |
+|---|---|
+| 3 Chain | four peers WIRE THEMSELVES together, then ship one artefact |
+| 6 Engineering | a real command RUNS and prints its true output (`Terminal`) |
+| 8 Folders | two labelled feeds DELIVER and SEAT their own parts |
+| 12 Workflow | the path RECONFIGURES to a different specialist |
+| 13 Fifty | one figure REPLICATES into a crowd that outruns the frame |
+
+⛔ **Law 50 compares strings for EXACT equality** — near-duplicates still pass. Its
+durable win is that a new/renamed body now FAILS instead of skipping the check.
+
+### Decisions taken (Alex, 2026-08-04)
+1. **Captions suppressed on shots 7, 8, 9** — the three false-number beats. He had
+   approved shipping the AUDIO as recorded; rendering those numbers as TYPE was a
+   separate decision and this is it. `FALSE_NUMBER_SHOTS` in `Agents.tsx`.
+2. **Header reverted to `10X AI COMPANY` everywhere**, shrunk to size **84** on the
+   4 full-bleed shots. ⛔ Law 108 read only CHARACTER COUNTS, so shrinking alone
+   could never clear it — it assumed every header renders at the shipped size.
+   Made size-aware, anchored **112/54** (the 2.3 factor IS that ratio).
+   ⛔ First attempt anchored 96/56 and immediately failed SHIPPED reel 82. Verified
+   identity across every scene file before keeping it.
+3. **Draft frames before any full render** — `out/86_kit/`.
+
+### Defects found in the drafts and fixed the same pass
+- Chain: four spokes met dead centre → read as an **envelope icon**. Spokes now stop
+  at the sphere's rim; ring rounded; opaque plate under the translucent halftone.
+- Folders: the feed trunk was **completely hidden** behind centred tiles. Spine moved
+  left of the tiles with stubs + collars; the true 3-and-5 split is now legible.
+- Workflow: the input trunk **did not render at all** as `<Tube>` inside `<Part>`
+  (verified by cropping the still). Rebuilt as a plain stroked path. Outlets were at
+  0.34 opacity and vanished — now 0.58 + a lit ring on the connected one, plus a rail.
+- Fifty: crowd at 0.42 read as **wallpaper** — the exact failure the 63-tile version
+  had. Swapping tiles for mascots does not fix a contrast problem; raised to 0.72 and
+  gave the origin a real gradient glow.
+- ⛔ `ENG_LS` declared between two bodies reproduced the **documented** law-96 false
+  positive, same pair (ShotStars → ShotEngineering). Module-level goes ABOVE the bodies.
+
+### Render economics
+`public/` is 7.8G and every bundle copies it. Built `.pub86` (hard links, 619M) and
+bundled ONCE to `.bundle86`, then `remotion still` per frame: **10 stills in ~40s**.
+Both gitignored. Use this for every future still pass on this reel.
+
+### STATE
+Gate 0 findings · plan 0 findings · law 50 now live · reel-86 tsc + lint_text clean ·
+1174 frames. ⚠️ `tsc` repo-wide has 2 errors in `Pilot.tsx` / `system/pack.ts` — NOT
+reel 86, not from this session. **Still open: the 4 mid-shot EDL joins (§0.5) — needs
+a re-cut Alex must HEAR before it is committed.** No full render yet.

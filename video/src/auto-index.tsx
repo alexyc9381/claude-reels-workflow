@@ -2,6 +2,11 @@ import { registerRoot } from "remotion";
 import React from "react";
 import { Composition } from "remotion";
 import { AutoHook, AUTO_HOOK_LEN } from "./AutoHook";
+import { AutoHookQueue, AUTO_HOOKQ_LEN } from "./AutoHookQueue";
+import { AutoReelQueue, AUTO_REELQ_LEN } from "./AutoReelQueue";
+import { AutoVarUnderstudy, AutoVarLights, VAR_LEN } from "./AutoVariants";
+import { AutoObjFlatpack, AutoObjPinata } from "./AutoObjects";
+import { AutoScreenHook, SCREEN_LEN } from "./AutoScreen";
 import { AutoReel, AutoReelB, AutoReelC, AUTO_TOTAL } from "./ClaudeAutoReel";
 
 /* Reel 85 AUTO — three split-test cuts.
@@ -12,6 +17,18 @@ registerRoot(() => React.createElement(React.Fragment, null,
   React.createElement(Composition as any, {
     id: "AutoHook", component: AutoHook, durationInFrames: AUTO_HOOK_LEN,
     width: 1080, height: 1920, fps: 30 }),
+  React.createElement(Composition as any, {
+    id: "AutoHookQueue", component: AutoHookQueue, durationInFrames: AUTO_HOOKQ_LEN,
+    width: 1080, height: 1920, fps: 30 }),
+  React.createElement(Composition as any, {
+    id: "AutoReelQueue", component: AutoReelQueue, durationInFrames: AUTO_REELQ_LEN,
+    width: 1080, height: 1920, fps: 30 }),
+  ...[["Understudy", AutoVarUnderstudy], ["Lights", AutoVarLights],
+      ["Flatpack", AutoObjFlatpack], ["Pinata", AutoObjPinata],
+      ["Screen", AutoScreenHook]].map(([id, Cc]: any) =>
+    React.createElement(Composition as any, {
+      key: id, id: `AutoVar${id}`, component: Cc, durationInFrames: VAR_LEN,
+      width: 1080, height: 1920, fps: 30 })),
   ...[["", AutoReel], ["B", AutoReelB], ["C", AutoReelC]].map(([id, C]: any) =>
     React.createElement(Composition as any, {
       key: id, id: `ClaudeAutoReel${id}`, component: C, durationInFrames: AUTO_TOTAL,

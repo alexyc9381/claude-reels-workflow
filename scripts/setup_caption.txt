@@ -1,0 +1,29 @@
+Comment "SETUP" and I'll DM you the settings checklist plus the interview prompt that gets Claude to actually know you, free. (Follow so the DM lands 📩)
+
+👇 READ BELOW, this is everything that wouldn't fit in the video:
+
+If you tidied your chats into Projects, Claude has never met you in there.
+
+Projects get their own memory. Your voice, your brand, how you like things done, none of it reaches inside a project, and nothing you build in one comes back out.
+
+That is why the same question gets a rich answer in a normal chat and a blank one in a project.
+
+Two more that cost people the most:
+
+1. The email you signed up with is permanent. Claude will not let you change it.
+
+So if you used a work email, everything it learned about you sits behind an address you stop controlling the day you leave.
+
+2. If you imported your memory from another AI, it almost certainly came in lopsided, nearly all work and barely anything about how you actually want to be worked with.
+
+The fix for that one is an interview, not a longer import. You get Claude asking the questions and you answer out loud instead of typing.
+
+None of this is permanent except the email. Chats move in and out of projects whenever you want.
+
+The part nobody warns you about: Claude only really learns you in your normal chats, so the tidier you are, the less it knows.
+
+Save this before your next project.
+
+Comment "SETUP" and I'll send you the checklist.
+
+#claude #claudeai #aitools #aiproductivity #anthropic #aitips #promptengineering #aiworkflow

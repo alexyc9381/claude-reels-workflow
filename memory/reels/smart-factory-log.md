@@ -150,6 +150,101 @@ they END low and STAY low**, which PACK never does.
 sentence. That is a deliberate consequence of moving the claim into the header and is defensible — but it
 means S8 must not re-use the winning hook's mechanic or the reel will pay the same beat twice.
 
+## STAGE 1b (ROUND 7) — REAL BRAND MARKS
+> Alex, 2026-08-03, after seeing round 6's frame 0s: *"more creative options, try to have logos etc more
+> interesting"*
+
+`src/scenes/hookopts89r7.tsx` → `out/hook89_Opt{E,F,G,H}.mp4`. Four different **interaction paradigms**, not
+one mechanic in four costumes ([[reel-idea-generic-diagnosis]]): a ranking, a taming, an accumulation, a
+weighing. Level-1 versions written down and crossed out first, per WORKFLOW.md's step 1.
+
+| | idea | paradigm | level | f0 ink/occ | mean ink |
+|---|---|---|---|---|---|
+| E | **LEADERBOARD** — ollama / transformers / langchain stand as towers of stacked code; one line outgrows all three | ranking | 2 | 10/86 | **18.9%** |
+| F | **OVERRIDE** — the real Claude burst thrashing, snapped still by one sheet | taming | 2 | 8/63 | 9.8% |
+| G | **AVALANCHE** — 199,163 GitHub stars pour in and **resolve into the Claude mark** | accumulation | **3** | 5/67 | 6.6% |
+| H | **THE SCALE** — GitHub-marked mountain of code vs one sheet; the sheet wins | weighing | 2 | 4/54 | 6.3% |
+
+⭐ **G is the only level-3 concept** — the elements ADD UP TO a different object, which is the one move
+WORKFLOW.md says reliably produces a surprise. H is Stage 1b's original starred pick, finally built.
+
+### ⛔ MY OWN FRAME-0 BUG, caught before Alex saw it
+First render had **three of four opening on an empty band** — every ramp was `at(f, 0, N)`, so frame 0 was the
+zero state of everything: E showed four `0`s, G showed one `0`, H showed a bare beam. I had described this
+exact failure to Alex about round 6's option B one message earlier and then shipped it myself.
+**Fix = frame 0 carries its mass.** The premise is not an event: E's rivals are the established giants and do
+not grow (`grow = 1`), G's pour starts before the shot (`at(f, -24, 58)` — the counter opens mid-race at
+118,215), H opens already loaded and already tipped. Only the *consequence* animates.
+
+### ⛔⛔ THE HONEST MEASUREMENT: round 7 is MORE INTERESTING AND THINNER
+Against shipped KEY-83 at **36–66% ink / 94–100% occ**, and against round 6's own B (31–42%) and C (21–35%):
+
+    E  18.9%      F  9.8%      G  6.6%      H  6.3%
+
+⛔ **Do not read the eye instead of the meter here.** G looks the busiest of the four — a bright gold field —
+and measures **5% ink**, because 130 small stars scattered over 848×560 is *texture*, not mass. F reads strong
+on a single high-contrast centred subject and is 8%. This is [[aesthetic-notes-are-measurable]]'s
+"concept fine, drawing starved" exactly: the ideas escalated, the drawing did not follow. Whichever wins must
+be redrawn HEAVIER and BIGGER in the band before it is a candidate to ship, not just re-timed.
+
+### ⭐ NEW TOOL: `tools/logo_to_mark.py`
+⛔ **30 of the 32 files in `public/logos/` have NO ALPHA** — masking them per §56 yields a filled SQUARE, and
+the failure is silent (it looks like a styling bug, not an asset bug). Only `claude.png` and `huggingface.png`
+were maskable. The tool derives alpha from corner-field distance; verified by rendering each in `O.core`
+before building on them. ⚠️ `huggingface.png` flattens to a featureless blob — unusable, dropped.
+Generated into `public/marks89/`: github · claude · anthropics · ollama · langchain-ai.
+
+### ⭐ RENDER COST: batch the options into ONE composition
+`public/` is **7.9 GB** and Remotion copies all of it per render, so four separate renders pay that four
+times. `R7All` = 4 × 96 frames in one composition (`<Sequence>` re-bases each body to its own frame 0), then
+ffmpeg slices it locally for free. **384 frames in 2:57 total**, vs ~4 × that. Do this for every option round.
+
+### ⛔⛔ ROUND 7's RENDERS WERE STALE — the chassis was fixed AFTER they were made
+> Alex, 2026-08-03: *"please reference the key video, like you see the top of my head is chopped off and
+> stuff in this video and we dont see the cgi claude 3d icon here in this video"*
+
+Both faults were in the CHASSIS, not in the four hook bodies, and both were already diagnosed and repaired in
+`Smart89.tsx` (mtime 19:13) **after** `R7All` rendered (~19:05). The videos I sent were built on the broken
+version. Nothing errored; the options simply rendered on the wrong canvas.
+
+| Alex's words | the actual cause, per the file's own gate output |
+|---|---|
+| *"we dont see the cgi claude 3d icon"* | **NO COMPANION AT ALL.** `landmarks.json` (942 frames, 0% no-detection) was generated for this reel and then never wired to anything. The shipped `CardFigure` draws the creature TWICE — `layer="behind"` and `layer="front"` — sandwiching the cutout; that sandwich is the whole illusion, letting it pass behind his head and come out the other side. |
+| *"the top of my head is chopped off"* | **THE HEAD WAS GRADED AWAY FROM THE PLATE.** The house filter on the matte is `${TIGHT} ${MATCH}`; `MATCH` exists precisely to seat the cutout in the plate. It had `TIGHT` only, wrapped in a bespoke `FootageGrade`, so the crown was lit on a different curve from the room behind it. |
+
+Measured by `tools/chassis_diff.py` before the repair: `Progress` **37.8%**, `CardFigure` **53.1%**,
+`FullFigure` **MISSING**. After: 99.4 / 100.0 / 100.0. ⭐ This is [[clone-chassis-or-it-breaks]] reproducing
+itself exactly — a chassis written from a correct understanding of the spec still measured ~50% and produced
+several defects at once.
+
+⛔ **AND A NEW TRAP IN THE GATE ITSELF:** `chassis_diff`'s `grab()` finds a component by plain substring
+search for its declaration, so quoting the gate's own output (`const CardFigure …`) inside a comment in the
+file being graded makes it extract the COMMENT. It scored 4.8% immediately after a byte-for-byte clone, which
+reads exactly like the clone having failed. **Never write those declarations in a comment in a graded file.**
+
+⭐ **THE OPERATIONAL LESSON:** an option round renders against whatever the chassis is at that moment. When
+the chassis changes, every option render is invalid — re-render the batch, do not reason about which options
+"would still be fine". Also: with the Companion wired the render no longer fits in 600s.
+
+### ✅ VERIFIED AGAINST KEY-83 AFTER THE RE-RENDER (2026-08-03)
+⛔ **The obvious measurement was wrong and would have passed.** Sampling "the region above the card" for the
+crown means y 860–1174 — which **overlaps the animation band** (`HERO` is y 560–1120). It returned
+`crown at y=860` for all four options and for KEY: it was measuring the animation, not his head, and the
+identical numbers looked like agreement. **Measure the MATTE, in card space** — the matte is only ever the
+figure, so nothing else can contaminate it. Landmarks for shoulder scale, same method the CROP solve uses.
+
+| | crown above card top | shoulders (landmarks) | shoulder line |
+|---|---|---|---|
+| KEY-83 | 181–187px | 448.7px | +303 vs card top |
+| **SMART-89** | **182–189px** | 473.2px (+5.5%) | +325 (+22px lower) |
+
+⭐ Crown break-out matches the reference **within ~2px** — the head is not chopped and the cutout now seats
+into the plate. Companion present on the shoulder in all four. ⚠️ A first attempt to measure shoulder width
+off the matte SILHOUETTE gave 892–915px vs KEY's 1020 and looked like a real 12% undersize — it was
+confounded by his arms being raised in this shoot. Landmarks 11/12 are the reliable read: +5.5%, fine.
+
+⛔ Render cost with the Companion wired: **11:19 for 384 frames**, up from 2:57. Budget for it.
+
 ## STAGE 6 — STORYBOARD: drafted above for S1; S2-S9 pending the hook pick.
 
 ## GATES — status 2026-08-03
@@ -165,3 +260,55 @@ margin, and on timeout Remotion leaves the PREVIOUS file in place looking like a
 
 ## STATUS: fact-check ✅, structure ✅, facecam ✅, chassis ✅, 4 hooks built + measured, **awaiting Alex's pick**.
 Next = fix the winner's framing fault, then S2–S9.
+
+---
+
+## ROUND 2 (2026-08-04) — THE FACE-HOLD BUG WAS AT THE OTHER END OF THE SHOT
+
+> Alex, after the first fix: *"I still see my face turning to the side sometimes."* He was right.
+
+**The handoff's diagnosis was wrong, and the measurement is why.** It frame-diffed the head region across
+each pause and reported `beat 4 FROZEN 1.03 / beat 6 STILL MOVING 13.03`, sending the search to the end of
+shot 6. Re-measured per frame, **both holds work**: frames 535-538 sit at 1.64-1.82, the same codec noise
+floor as beat 4's. The 13.03 was the **CUT at frame 539** sitting inside the window — `17.98*30 = 539.4`
+truncates to 539 and lands on the cut, while beat 4's `13.10*30 = 393.0` does not. **A rounding asymmetry in
+the PROBE read as a defect in the reel.**
+
+⛔⛔ **AND FRAME-DIFF CANNOT SEE THIS CLASS OF BUG AT ALL.** A hold that pins an *already-turned* face
+measures as perfectly frozen and still looks wrong. ⭐ **Measure the POSE, not the motion.**
+
+### The real root cause: a pause STRADDLES a cut, and `holdAfter` guards only its tail
+Measured from `landmarks.json` (nose offset from shoulder midpoint / shoulder span — the definition already
+in `Smart89.tsx`), every one of the eleven holds pins a facing frame (0.002-0.060). The turn was on the
+**front** of the next shot — he is still rotating back to camera when it begins:
+
+| shot | opens at frame | turn on its first frames |
+|---|---|---|
+| 5 | 393 | 1 frame at 0.158 |
+| **7** | **539** | **4 frames at 0.547-0.574 — a FULL PROFILE** |
+| 8 | 618 | 3 frames at 0.192-0.256 |
+
+So the reel held a facing pose through the end of shot 6, then cut straight into a profile. That cut is the
+69.02 diff the handoff measured and attributed to a failed hold.
+
+### The fix — `holdBefore`, symmetric to `holdAfter`, derived not hand-tuned
+`Smart89Frame` now computes `headHold(trim)` by walking this shoot's landmarks forward from the shot's first
+frame until `turn < TURN_OK (0.10)`, capped at `HEAD_HOLD_MAX = 8` so a bad landmark run can never freeze a
+whole shot. Re-cut the VO and the numbers follow — nothing per-beat to maintain.
+
+### ⭐ NEW GATE: `tools/face_hold.py <scene.tsx>` — exit 1 = do not render
+Models what is actually ON SCREEN per frame (head hold / tail hold / live) and checks the turn of THAT frame.
+⛔ It also asserts the mechanism is **wired** — `headHold` computed, `holdBefore` applied, and a real
+`local < holdBefore` branch — because the pose math alone would happily pass a chassis that never applies the
+hold and print a tick. That is `verify_render.py`'s failure shape (law 121) and it was one edit away here.
+
+    before   shot 7 displays 0.574 turn      after   worst displayed turn anywhere 0.086   ✅ PASS
+
+### Verified in PIXELS, not just in the model
+`out/89_headhold_probe.mp4` (`--frames=530-550`, concurrency 4, 5:40 — the 7.8 GB `public/` copy dominates,
+not the 21 frames). Composition frames 539-542 now differ from frame 543 by **1.51-2.09** in the head region
+(codec floor); frame 540 came out **bit-identical** to 539. Shots 5 and 8 share the identical code path and
+are covered by the gate, but were not separately pixel-checked.
+
+⚠️ Still open: `tools/lint_text.mjs` flags `Smart.tsx:467` (the SMART keyword) although its `TEXT-OK:`
+justification sits three lines above the `<text>` — the linter appears to want it adjacent. Pre-existing.

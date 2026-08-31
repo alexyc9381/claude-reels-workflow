@@ -1,0 +1,31 @@
+Comment "GAUNTLET" and I'll DM you the full three line prompt, the version that writes one for any task, and the guardrails, free. (Follow so the DM lands 📩)
+
+👇 READ BELOW, this is everything that wouldn't fit in the video:
+
+Claude built a playable Call of Duty style shooter from one prompt. Every wall, gun and sound in it is code it wrote itself. Nothing was downloaded.
+
+It is called the Gauntlet Loop, and the whole thing is three lines.
+
+1. The task. What you actually want built, said plainly.
+
+2. The build method. How the work gets split up so no single pass has to be perfect.
+
+3. The bar. This is the line everyone gets wrong.
+
+Most people write "make it really good". That is not a finish line, so Claude stops at the first version that looks fine.
+
+The Gauntlet Loop names a real thing it has to beat instead, and a second Claude keeps stamping the build FAILED until it gets there.
+
+One real run sat there for two hours rejecting its own work, comparing its screenshots against the original photos, round after round.
+
+It is not a games thing. People have pointed it at a floor plan and got a walkable 3D apartment, and at a product page and got a working site with dark mode and animations.
+
+The one catch nobody mentions: do not start a project with it.
+
+With no clear brief it will polish the wrong thing beautifully, and it burns a lot of time and tokens doing it. Get your version one right, then let the loop sharpen it.
+
+Save this one for the next time you are about to accept a first draft.
+
+Comment "GAUNTLET" and I'll send you the prompt.
+
+#claude #claudeai #aitools #promptengineering #buildwithai #aiagents #anthropic #opus

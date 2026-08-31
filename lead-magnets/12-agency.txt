@@ -1,0 +1,50 @@
+TITLE   The Agency Setup Guide
+SUB     286 specialist AI agents, free, inside the tool you already use
+
+H       What you are installing
+P       The Agency is an open source roster of 286 specialist agents across 18 divisions. The repo is msitarzewski/agency-agents. It is MIT licensed, which means you can use it commercially and sell what it helps you make.
+P       Each agent is a single markdown file. Open one and you will find its personality, the rules it must follow and the deliverables it owes you. There is no hidden logic. The file is the product, so you can read it before you trust it.
+
+H       Install it, three ways
+NUM     The desktop app, easiest. Native for macOS, Windows and Linux. It browses the whole roster and installs agents with one click, no terminal needed. Get it at agencyagents.app or run: brew install --cask msitarzewski/agency-agents/agency-agents
+NUM     The install script. Clone the repo, then run: ./scripts/install.sh --tool claude-code
+NUM     By hand, if you only want a few. Copy the files you want: cp engineering/*.md ~/.claude/agents/
+P       It is not locked to Claude Code. The same installer targets Cursor, Codex, Gemini and Osaurus, so you keep the tool you already know.
+
+H       The 18 divisions, by size
+B       Engineering 58
+B       Specialized 57
+B       Marketing 36
+B       Game development 21
+B       Strategy 16
+B       GIS 13
+B       Security 12
+B       Design 10
+B       Sales 9
+B       Testing 9
+B       Paid media 7
+B       Project management 7
+B       Academic 6
+B       Spatial computing 6
+B       Support 6
+B       Finance 5
+B       Product 5
+B       Healthcare 3
+
+H       Pick your first five
+P       286 is a menu, not a team. Loading all of them makes your agent list harder to search and does not make your output better. Install the few that match what you actually ship.
+NUM     Find your bottleneck. The thing you avoid doing is the agent you need.
+NUM     Open that agent file and read its deliverables section before you install it. If the deliverables are not what you want, pick a different one.
+NUM     Install three to five. Use them for a week.
+NUM     Add more only when you hit a job none of them covers.
+
+H       How to actually run one
+P       Once installed, the agent is available to your coding tool the same way any other agent is. Ask for the job in plain language and name the specialist. The agent file supplies the standards, so you do not have to describe them every time.
+QUOTE   The value is not that it writes for you. It is that it already knows what good output looks like for that role, and holds itself to it.
+
+H       Two honest caveats
+B       An agent file is a very good brief, not a guarantee. You still review the output.
+B       The roster moves fast. This repo went from zero to over 139,000 stars in about ten months and it is still being pushed to, so check the division counts against the repo when you install.
+
+RULE
+KEY     AGENCY

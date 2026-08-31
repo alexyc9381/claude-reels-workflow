@@ -1,0 +1,36 @@
+TITLE   The 3 Free Claude Courses
+SUB     Every link from the video, plus what to actually do with each one
+
+H       Why these three
+P       There is a lot of free Claude content and most of it is a tour of the interface. These three are the exception: each one ends with you having built something. They are also genuinely free, on YouTube, no email gate and no upsell to watch them.
+P       Watch them in the order below. The first makes you competent, the second widens what you can point the tool at, and the third is the one that turns it into money.
+
+H       1. Nick Saraev, Claude Code full course
+P       youtu.be/QoQBzR1NIqI
+P       Runtime 4 hours 10 minutes. The deepest of the three and the one to start with. It covers setup, subagents, agent teams, context, skills and MCP, in that order, and each section builds on the last.
+P       Do this: follow along in a real project of your own rather than the demo repo. The setup and context chapters are the two that change how you work every day after.
+
+H       2. AI Master, full Claude course
+P       youtu.be/Fys4oHlXQmQ
+P       Runtime 1 hour 45 minutes. The broad one. It walks the whole product surface rather than Claude Code alone: Chat, Cowork, Claude Code, Design and Routines, with timestamps for each.
+P       Do this: watch the Claude Code chapter at 36:24 first if you have already done course 1, then go back for Cowork and Routines. Those two are where most people find the workflow they did not know existed.
+
+H       3. Nate Herk, build and sell with Claude Code
+P       youtu.be/mpALXah_PBg
+P       Runtime 10 hours. The longest, and the only one of the three that is about earning rather than learning. Setup, tokens, commands, skills, websites, sub agents, agent teams, and a final section on making money with what you built.
+P       Do this: do not watch it end to end. Pick the one deliverable you could sell this month, jump to that section, build the thing, then come back for the rest.
+
+H       The order that actually works
+NUM     Saraev first, for competence. Give it a real project.
+NUM     AI Master second, for range. Skim the surfaces you will not use.
+NUM     Herk third, for money. Build one sellable thing before continuing.
+NUM     Ship something small and paid before you start the next course. The gap between the people who finish courses and the people who earn from them is almost always this step.
+
+H       A note on runtimes
+P       The runtimes above are the real ones, checked against each video rather than copied from a thumbnail. AI Master is 1 hour 45, not 2 hours, and Nate Herk's Claude Code course is the 10 hour one, not his 8 hour n8n course, which is a different video with a similar name.
+
+RULE
+
+P       Everything here is free. Nothing on this page is an affiliate link and none of these creators asked to be included.
+
+KEY     COURSE

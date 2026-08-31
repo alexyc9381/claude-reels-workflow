@@ -1,0 +1,82 @@
+TITLE   The Context Compass
+SUB     One file that points Claude at the right note, the template it uses, and the two prompts that make it read the index before it reads anything else
+
+H       Why a longer prompt stops helping
+P       Pasting more into the chat feels like giving the model more to work with. Past a point it is the opposite: the model now has more to read and no signal about which part matters. Everything you paste competes with everything else you paste, and the thing you actually needed is one item in a pile.
+P       The fix is not a shorter prompt. It is a different shape. Keep the notes where they are, and hand over an ADDRESS instead of the contents.
+
+RULE
+
+H       What the Context Compass actually is
+P       One markdown file, one page, that lives at the root of the project. It contains no notes. It contains pointers to notes.
+B       For every file you keep: what it is, WHEN to reach for it, and where it lives
+B       Nothing else. No content, no summaries, no pasted excerpts
+B       If it grows past one page, you have two projects, not one compass
+QUOTE   The index stores where your ideas are. It does not store your ideas.
+
+RULE
+
+H       The template, copy this
+P       Save this as COMPASS.md in the root of the project. Every line is one file.
+B       # CONTEXT COMPASS
+B       Read this file first. Open only the files this file points to.
+B       ## Research
+B       notes/hooks.md      Use for: opening lines, titles, thumbnails. Not for: scripting.
+B       notes/audience.md   Use for: who this is for, what they already believe.
+B       notes/proof.md      Use for: numbers, screenshots, receipts. Always cite the line you used.
+B       ## Voice
+B       notes/voice.md      Use for: how I write. Read before drafting anything I will publish.
+B       notes/banned.md     Use for: words and shapes I never use.
+B       ## Output
+B       drafts/             Write finished drafts here as YYYY-MM-DD-slug.md
+
+RULE
+
+H       The one thing everybody gets wrong
+P       Most people write an index of WHAT each file is. That is a filing system, and the model still has to guess.
+P       Write an index of WHEN to use each file. "Titles that convert" is a label. "Use for hooks and titles, not for scripting" is a routing instruction, and it is the difference between the model opening two files and the model opening all of them.
+NUM     Every line gets a "Use for:" clause. No exceptions.
+NUM     Add a "Not for:" clause to anything that could be confused with a neighbour.
+NUM     Order the lines by how often you reach for them, not alphabetically.
+
+RULE
+
+H       Prompt 1, the one that makes it read the index first
+P       This is the instruction that changes the order of operations. Put it in your project instructions, or in CLAUDE.md if you are in Claude Code, so you never have to type it again.
+QUOTE   Before answering anything about this project, read COMPASS.md. Use it to decide which files to open. Open only the files it points to, at most three, and tell me which ones you opened and why before you give me the answer.
+P       The "tell me which ones you opened" clause is not decoration. It is how you find out that a line in your compass is worded badly, because you will watch it reach for the wrong file and you will see exactly which line sent it there.
+
+RULE
+
+H       Prompt 2, the one that turns three files into a brief
+P       Run this once the compass is in place. It is the ask that produces something you can work from rather than a wall of quotes.
+QUOTE   Outline a new video on [TOPIC]. Read COMPASS.md, open only what it points to, and come back with: the angle, the three points in order, the strongest proof you found and the file it came from, and anything my notes contradict. Keep it under 200 words.
+P       The "anything my notes contradict" clause is the one people leave out, and it is the most useful line in the prompt. It is the only way you find out that two of your own notes disagree.
+
+RULE
+
+H       Adding a note without breaking anything
+P       This is the part that makes it survive contact with real work.
+NUM     Write the note as its own file, wherever your notes already live.
+NUM     Add ONE line to the compass, with its "Use for:" clause.
+NUM     Do not touch any other line. Nothing else in the system knows or cares that the file exists.
+P       That is the whole maintenance cost. A system where adding a note means rewriting a prompt is a system you will stop using in a fortnight.
+
+RULE
+
+H       Where this stops working, honestly
+B       If your notes are in a tool with no file paths, there is nothing to point at. Export first, or keep the compass as a list of stable links instead.
+B       If two files overlap heavily, the model will pick one and you will not know why. Merge them or add a "Not for:" clause to both.
+B       This routes, it does not summarise. If a single note is fifty pages, the compass will send the model into fifty pages. Split it.
+B       And nothing here updates itself. You add the line. That is the trade for it never surprising you.
+
+RULE
+
+H       The one page version
+B       Keep the notes, send the address
+B       One file, one page, pointers only
+B       Every line says WHEN to use it, not just what it is
+B       Make it read the compass first and say what it opened
+B       Adding a note is adding a line
+
+KEY     ROUTE
