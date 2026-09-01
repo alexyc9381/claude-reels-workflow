@@ -149,7 +149,7 @@ export const Stack: React.FC<{ p: Place; x: number; z?: number; n?: number; s?: 
         border: `4px solid ${hexa("#000", 0.42)}`, borderRadius: 3,
         transform: `rotate(${(rnd(i, 74) - 0.5) * 5}deg)` }}>
         <div style={{ position: "absolute", left: "12%", top: "34%", width: "40%", height: "9px",
-          background: hexa("#FFF", 0.10) }} />
+          background: hexa("#FFFFFF", 0.10) }} />
       </div>
     );
   })}</>
@@ -293,7 +293,7 @@ export const Room: React.FC<{
       ))}
       {floorKind === "tile" && Array.from({ length: 7 }, (_, i) => (
         <div key={"ti" + i} style={{ position: "absolute", left: 0, top: hz + 30 + i * 42,
-          width: W, height: 3, zIndex: 12, background: hexa("#FFF", 0.10) }} />
+          width: W, height: 3, zIndex: 12, background: hexa("#FFFFFF", 0.10) }} />
       ))}
       {floorKind === "slab" && Array.from({ length: 5 }, (_, i) => (
         <div key={"sb" + i} style={{ position: "absolute", left: -60 + i * 236, top: hz,

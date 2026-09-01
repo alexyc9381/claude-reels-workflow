@@ -144,7 +144,7 @@ export const NAME_BANNED = ["SHOPIFY", "AMAZON", "ETSY", "TENCENT", "OPENAI", "E
 export const PLACES: Record<string, Place> = {
   /* 1 · THE TRADE ROW at night under one hard sodium lamp. Frame 0 lives here
      so it is built for >=140: a bright lit shopfront wash under a warm sky. */
-  row:     { back: "#5E4A62", back2: "#F2E2BC", floor: "#8E7C60", floor2: "#5A4C3A",
+  row:     { back: "#8A6E84", back2: "#FBF2D8", floor: "#C4B392", floor2: "#8E7C60",
              lip: "#2A2018", key: "#FFD98E", horizon: 512, grit: "#2A2016" },
   /* 2 · THE FIT-OUT — inside the bare unit, cold daylight through the shutter. */
   fitout:  { back: "#93A6BE", back2: "#EEF0EA", floor: "#B8AC92", floor2: "#7C7460",

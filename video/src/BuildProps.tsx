@@ -44,7 +44,7 @@ const Face: React.FC<{ x: number; y: number; w: number; h: number; c: string; z?
     border: `4px solid ${hexa("#000", 0.46)}`, boxShadow: SH }}>
     {/* the machined highlight — one light direction, top-left, house-wide */}
     <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 5,
-      background: hexa("#FFF", 0.20 + lit * 0.24) }} />
+      background: hexa("#FFFFFF", 0.20 + lit * 0.24) }} />
     {children}
   </div>
 );
@@ -194,7 +194,7 @@ export const NameStrip: React.FC<{ x: number; y: number; i: number; f: number; a
     ⛔ It BOWS under its own weight while it climbs — weight is communicated by
     DEFORMATION, never by size or colour (reel 110). */
 export const Shutter: React.FC<{ x: number; y: number; w: number; h: number; k: number;
-  f: number; z?: number }> = ({ x, y, w: ww, h: hh, k, f, z = 60 }) => {
+  f: number; z?: number; chainX?: number }> = ({ x, y, w: ww, h: hh, k, f, z = 60, chainX }) => {
   const open = Math.min(1, Math.max(0, k));
   const shownH = hh * (1 - open);
   /* the curtain LAGS the chain in proportion to the chain's own velocity */
@@ -210,13 +210,13 @@ export const Shutter: React.FC<{ x: number; y: number; w: number; h: number; k: 
       <div style={{ position: "absolute", left: x, top: y, width: ww, height: Math.max(0, shownH),
         zIndex: z, overflow: "hidden",
         borderRadius: `0 0 ${6 + bow}px ${6 + bow}px`,
-        background: `linear-gradient(180deg, ${dkh(SODIUM, 0.66)} 0%, ${dkh(SODIUM, 0.46)} 100%)`,
+        background: `linear-gradient(180deg, #F6F0DE 0%, #D2C6A8 100%)`,
         transform: `perspective(900px) rotateX(${bow * 0.22}deg)`, transformOrigin: "50% 0%" }}>
         {Array.from({ length: slats }, (_, i) => (
           <div key={"sl" + i} style={{ position: "absolute", left: 0, top: i * (hh / slats),
             width: "100%", height: hh / slats - 3,
-            background: `linear-gradient(180deg, ${hexa("#FFF", 0.13)} 0%, ${hexa("#000", 0.26)} 100%)`,
-            borderBottom: `3px solid ${hexa("#000", 0.42)}` }} />
+            background: `linear-gradient(180deg, ${hexa("#FFFFFF", 0.52)} 0%, ${hexa("#000", 0.13)} 100%)`,
+            borderBottom: `3px solid ${hexa("#000", 0.24)}` }} />
         ))}
       </div>
       {/* the bottom rail — heavier than the curtain, and it swings */}
@@ -227,15 +227,29 @@ export const Shutter: React.FC<{ x: number; y: number; w: number; h: number; k: 
           border: `3px solid ${hexa("#000", 0.5)}`,
           transform: `rotate(${Math.sin(f / 5.4) * bow * 0.09}deg)`, transformOrigin: "50% 0%" }} />
       )}
-      {/* the hauling chain, on the right jamb, running while it lifts */}
-      <div style={{ position: "absolute", left: x + ww + 16, top: y - 34, width: 13,
-        height: hh + 60, zIndex: z + 4, overflow: "hidden", background: hexa("#000", 0.30) }}>
-        {Array.from({ length: 22 }, (_, i) => (
-          <div key={"ch" + i} style={{ position: "absolute", left: 1,
-            top: ((i * 22 - f * 5.6) % (22 * 22) + 22 * 22) % (22 * 22) - 22,
-            width: 11, height: 15, borderRadius: "50%",
-            border: `3px solid ${i % 2 ? "#8E8672" : "#B6AC90"}` }} />
+      {/* ⭐ THE HAULING CHAIN. It hangs IN FRONT of the door at `chainX`, in
+          BRASS against the dark curtain, so the hero's forearm terminates on
+          something the viewer can plainly see. A limb that ends in mid-air is
+          the banned shape (reel 110: it read as a TAIL on every sprite).
+          It is also a full-height travelling band of alternating light and
+          shadow, which is the shape the motion table pays for. */}
+      <div style={{ position: "absolute", left: (chainX ?? ww + 16) + x - 9, top: y - 40,
+        width: 20, height: hh + 74, zIndex: z + 8, overflow: "hidden",
+        background: `linear-gradient(90deg, ${hexa("#000", 0.42)} 0%, ${hexa("#000", 0.16)} 50%, ${hexa("#000", 0.42)} 100%)` }}>
+        {Array.from({ length: 26 }, (_, i) => (
+          <div key={"ch" + i} style={{ position: "absolute", left: 2,
+            top: ((i * 22 - f * 6.4) % (26 * 22) + 26 * 22) % (26 * 22) - 24,
+            width: 16, height: 19, borderRadius: "50%",
+            border: `4px solid ${i % 2 ? "#C9A15A" : "#F0DCA8"}` }} />
         ))}
+      </div>
+      {/* the sprocket the chain runs over, in the box */}
+      <div style={{ position: "absolute", left: (chainX ?? ww + 16) + x - 20, top: y - 34,
+        width: 42, height: 42, borderRadius: "50%", zIndex: z + 9,
+        background: "#4A443A", border: `4px solid ${hexa("#000", 0.5)}`,
+        transform: `rotate(${f * 7}deg)` }}>
+        <div style={{ position: "absolute", left: "50%", top: 3, width: 5, height: 14,
+          marginLeft: -2.5, background: "#C9A15A" }} />
       </div>
     </>
   );
@@ -248,8 +262,8 @@ export const Shutter: React.FC<{ x: number; y: number; w: number; h: number; k: 
 export const AwningBoard: React.FC<{ x: number; y: number; w: number; f: number; z?: number }> =
   ({ x, y, w: ww, f, z = 66 }) => (
   <>
-    <div style={{ position: "absolute", left: x, top: y, width: ww, height: 96, zIndex: z,
-      borderRadius: 6, background: `linear-gradient(178deg, #FBF3DE 0%, #E2D3AE 100%)`,
+    <div style={{ position: "absolute", left: x, top: y, width: ww, height: 120, zIndex: z,
+      borderRadius: 6, background: `linear-gradient(178deg, #FEFAEE 0%, #EADCBC 100%)`,
       border: `5px solid ${dkh(SODIUM, 0.44)}`, display: "flex", alignItems: "center",
       justifyContent: "center", gap: 20, boxShadow: SH_D }}>
       <div style={{ width: 60, height: 60, borderRadius: 14, background: "#FFFFFF",
@@ -269,7 +283,7 @@ export const AwningBoard: React.FC<{ x: number; y: number; w: number; f: number;
     {/* the strip lights under it, blinking on their own clock */}
     {Array.from({ length: 9 }, (_, i) => (
       <div key={"bl" + i} style={{ position: "absolute", left: x + 16 + i * ((ww - 32) / 8),
-        top: y + 100, width: 13, height: 13, borderRadius: "50%", zIndex: z,
+        top: y + 126, width: 13, height: 13, borderRadius: "50%", zIndex: z,
         background: mxh(SODIUM, 0.3 + 0.4 * Math.abs(Math.sin(f / 9 + i * 0.8))) }} />
     ))}
   </>
@@ -345,7 +359,7 @@ export const IronGate: React.FC<{ x: number; y: number; w: number; h: number; f:
         border: `4px solid ${hexa("#000", 0.58)}`,
         transform: `rotate(${bar > 0 && bar < 1 ? Math.sin(f / 3.6) * 1.4 : 0}deg)` }}>
         <div style={{ position: "absolute", left: 14, top: 5, width: 60, height: 5,
-          background: hexa("#FFF", 0.16 + lit * 0.2) }} />
+          background: hexa("#FFFFFF", 0.16 + lit * 0.2) }} />
       </div>
       {/* the hasp — where the guide goes */}
       <div style={{ position: "absolute", left: x + half - 34, top: y + hh * 0.50, width: 68,
@@ -1014,19 +1028,51 @@ export const Turntable: React.FC<{ x: number; y: number; f: number; spin: number
             transform: `rotate(${a + i * 45}deg) scaleY(0.30)`, background: hexa("#000", 0.22) }} />
         ))}
       </div>
-      {/* the model, turning, with its faces relit as it goes */}
-      <div style={{ position: "absolute", left: x - 84, top: y - 214, width: 168, height: 186,
-        zIndex: z + 5, transform: `perspective(900px) rotateY(${a}deg)`,
-        transformOrigin: "50% 100%" }}>
-        <div style={{ position: "absolute", left: 12, top: 32, width: 130, height: 130,
-          borderRadius: 8, border: `5px solid ${hexa("#000", 0.44)}`,
-          background: `linear-gradient(${150 + a * 0.4}deg, ${mxh(CLAY, key)} 0%, ${dkh(CLAY, 0.32)} 100%)` }} />
-        <div style={{ position: "absolute", left: 12, top: 6, width: 130, height: 34,
-          background: mxh(CLAY, key + 0.24), transform: "skewX(-40deg)",
-          transformOrigin: "0% 100%" }} />
-        <div style={{ position: "absolute", left: 142, top: 6, width: 30, height: 152,
-          background: dkh(CLAY, 0.42), transform: "skewY(-40deg)", transformOrigin: "0% 0%" }} />
-      </div>
+      {/* ⛔⛔⛔ THE MODEL IS **NOT** SPUN WITH `rotateY`. A flat div rotated in Y
+          passes through EDGE-ON, and at the sampled frame this scene shipped a
+          MODEL 3px WIDE — a thin red line in the middle of an empty room, which
+          is `memory/feedback_the_camera_not_the_placement`'s "rotateY with no
+          perspective is a shrinking rectangle" arriving one step later: WITH
+          perspective it still degenerates, it just does it more convincingly.
+
+          A turn is drawn instead: the front face NEVER narrows past 0.46, the
+          SIDE face swaps which edge it hangs off as the angle crosses 180°, and
+          the top parallelogram's skew tracks the angle. The rotation is read off
+          the shading and the side face, which is how a viewer reads a turn
+          anyway — nobody measures the width of the front. */}
+      {(() => {
+        const rad = (a * Math.PI) / 180;
+        const c = Math.cos(rad), s2 = Math.sin(rad);
+        const fw = 130 * (0.46 + 0.54 * Math.abs(c));        /* never zero */
+        const sw = 34 * Math.abs(s2) + 12;                    /* the side face */
+        const right = c >= 0;                                 /* which edge it hangs off */
+        const lit = key + 0.18 * c;
+        return (
+          <div style={{ position: "absolute", left: x - fw / 2 - (right ? 0 : sw),
+            top: y - 208, width: fw + sw, height: 182, zIndex: z + 5 }}>
+            {/* the top face — a parallelogram whose skew IS the angle */}
+            <div style={{ position: "absolute", left: right ? 0 : sw, top: 4, width: fw,
+              height: 30, background: mxh(CLAY, Math.max(0.1, lit + 0.26)),
+              transform: `skewX(${-38 * (right ? 1 : -1)}deg)`,
+              transformOrigin: right ? "0% 100%" : "100% 100%" }} />
+            {/* the side face */}
+            <div style={{ position: "absolute", left: right ? fw : 0, top: 4, width: sw,
+              height: 158, background: dkh(CLAY, 0.44),
+              transform: `skewY(${-38 * (right ? 1 : -1)}deg)`,
+              transformOrigin: right ? "0% 0%" : "100% 0%" }} />
+            {/* the front face, and the panel line that makes the turn readable */}
+            <div style={{ position: "absolute", left: right ? 0 : sw, top: 32, width: fw,
+              height: 130, borderRadius: 6, border: `5px solid ${hexa("#000", 0.44)}`,
+              background: `linear-gradient(168deg, ${mxh(CLAY, Math.max(0.04, lit))} 0%, ${dkh(CLAY, 0.30)} 100%)`,
+              overflow: "hidden" }}>
+              <div style={{ position: "absolute", left: fw * (right ? 0.62 : 0.22), top: 10,
+                width: 5, height: 110, background: hexa("#000", 0.26) }} />
+              <div style={{ position: "absolute", left: 10, top: 88, width: fw - 20, height: 5,
+                background: hexa("#000", 0.20) }} />
+            </div>
+          </div>
+        );
+      })()}
       {/* the three lamps, striking in sequence */}
       {[-236, 0, 236].map((dx, i) => {
         const on = Math.max(0, Math.min(1, lamps * 3 - i));
@@ -1090,7 +1136,7 @@ export const EcomCrate: React.FC<{ x: number; y: number; s?: number; z?: number;
       <path d="M39 44 L39 62" stroke={hexa("#BFE8F0", 0.5)} strokeWidth="4" />
     </svg>
     <div style={{ position: "absolute", left: 8 * s, top: 8 * s, width: 32 * s, height: 8 * s,
-      background: hexa("#FFF", 0.18) }} />
+      background: hexa("#FFFFFF", 0.18) }} />
   </div>
 );
 

@@ -9,6 +9,8 @@ import { CamCtx } from "./JudgeWorld";
 import { SfxTrack, LEVELS, db, Cue, layer } from "./SoundKit";
 import { HOOKS, HOOK_BANDS } from "./JudgeHooks";
 import type { HookId } from "./JudgeHooks";
+import { OPENS, OPEN_BANDS } from "./JudgeOpens";
+import type { OpenId } from "./JudgeOpens";
 import words from "./data/words_judge132.json";
 
 /* ===========================================================================
@@ -335,13 +337,19 @@ export const BED_GAIN: Record<Variant, number> = {
 /** the bed-only A/B: identical picture, bed 6 dB down */
 export const BED_QUIET = db(-6);
 
-/** ⛔ THE PICKED HOOK. `stand` IS S0 itself, so the candidate that was chosen
-    and the scene that ships are the same code and cannot drift apart. */
-export const PICKED: HookId = "seal";
+/** ⛔ THE PICKED OPEN. It IS S0 itself, so the candidate that was chosen and the
+    scene that ships are the same code and cannot drift apart.
+    ⛔⛔ ROUND 3, AND THIS ONE IS PROVISIONAL. `docs/THE-OPEN.md` step 1 wants the
+    pick made on RENDERED candidates, not argued for by whoever authored one —
+    twice now I authored a single open and defended it, and twice it came back.
+    Four mechanisms are rendered as their own mp4s in the delivery folder;
+    `haul` is set here only so the reel has an open while the pick is made.
+    Swapping is this one line. */
+export const PICKED: OpenId = "haul";
 
-export const makeReel = (v: Variant, quiet = false, hook: HookId = PICKED): React.FC => () => {
+export const makeReel = (v: Variant, quiet = false, open: OpenId = PICKED): React.FC => () => {
   const f = useCurrentFrame();
-  const S0 = HOOKS[hook];
+  const S0 = OPENS[open];
   return (
     <AbsoluteFill>
       <Bg />
@@ -431,6 +439,37 @@ export const HookCut = (id: HookId): React.FC => () => {
   const f = useCurrentFrame();
   const Cut = HOOKS[id];
   const b = HOOK_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/* =========================================================================
+   ⛔ THE OPEN EXPERIMENT, ROUND 3. `docs/THE-OPEN.md` step 1 says N concepts
+   for scene 0, rendered at full quality, PICKED before the body is defended —
+   and this hook has now been rejected twice because I authored one and defended
+   it instead. Five mechanisms, each on the real chassis with the real VO, bed,
+   captions and rail. None of them is argued for here.
+   ====================================================================== */
+export const OpenCut = (id: OpenId): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS[id];
+  const b = OPEN_BANDS[id];
   return (
     <AbsoluteFill>
       <Bg />

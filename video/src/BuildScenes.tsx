@@ -131,19 +131,30 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
   const L = LAY[v];
   /* the chain leads, the curtain follows — overlapping action, never stepped */
   const chain = E(f, 4, 54, 0, 1, IO);
-  const k = 0.22 + chain * 0.78;
+  const k = 0.34 + chain * 0.66;                  /* PRE-SEEDED AND SETTLED at f0 */
   const strain = E(f, 2, 16, 0, 0.94, OUT) * (1 - E(f, 46, 58, 0, 1, IO));
   const pull = Math.sin(f / 5.2) * 0.10 * (1 - E(f, 48, 60, 0, 1, IO));
 
+  /* ⛔ EVERY OBJECT SITS BELOW THE RESERVED BAND (panel y 112..210). The first
+     render put the awning at y82 and `HookHeader` + the band chip covered the
+     one object carrying HOOK_LUMA and the claim plate. */
+  const AW_Y = 216, OP_Y = 318, OP_H = 330, OP_X = 262 + L.a, OP_W = 500;
+  /* ⛔ READ THE RIG. `Mascot` is a 200-unit viewBox: its right arm rect is
+     x166..192, y86..112, so on a 286px hero at (506, GY) the arm's centre is
+     (506 − 143 + 179·1.43, 706 − 286 + 99·1.43) = (619, 562). The chain is
+     brought TO that point rather than a limb reaching out to it — a forearm
+     that terminates in mid-air reads as a TAIL on every sprite in the reel. */
+  const CH_X = 648 + L.a;
+
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.055]} vig={0.50}>
+    <Scene p={p} slug="" push={[0, dur, 1.055]} vig={0.36}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="none"
         rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
-        lamp={{ x: 214 + L.a * 0.3, y: 122, r: 250 }} floorKind="tarmac" grit={0.9} />
+        lamp={{ x: 190 + L.a * 0.3, y: 236, r: 262 }} floorKind="tarmac" grit={0.9} />
 
       {/* the terrace opposite, in silhouette — depth plane 2 */}
-      {[64, 268, 470].map((x, i) => (
-        <ShopFront key={"sf" + i} x={x + L.b * 0.16} y={p.horizon + 18} s={0.66 + i * 0.06}
+      {[52, 856].map((x, i) => (
+        <ShopFront key={"sf" + i} x={x + L.b * 0.16} y={p.horizon + 18} s={0.70}
           c="#3E3348" z={11} />
       ))}
       {/* ⭐ the background process: traffic crossing the far end, all scene */}
@@ -151,45 +162,53 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
         kind="car" c="#C8B48E" c2="#141018" rail={false} o={0.9} />
 
       {/* the sodium lamp on its bracket — the one practical */}
-      <div style={{ position: "absolute", left: 168, top: 60, width: 96, height: 28, zIndex: 22,
-        borderRadius: "6px 6px 20px 20px", background: "linear-gradient(176deg,#6E6656,#2E2A22)" }} />
-      <div style={{ position: "absolute", left: 258, top: 66, width: 120, height: 11, zIndex: 22,
+      <div style={{ position: "absolute", left: 146, top: 214, width: 92, height: 28, zIndex: 22,
+        borderRadius: "6px 6px 20px 20px", background: "linear-gradient(176deg,#8E8672,#2E2A22)" }} />
+      <div style={{ position: "absolute", left: 232, top: 220, width: 96, height: 11, zIndex: 22,
         background: "#2E2A22" }} />
 
       {/* the shopfront the shutter is set into */}
-      <div style={{ position: "absolute", left: 232 + L.a, top: 186, width: 552, height: 400,
-        zIndex: 30, background: "linear-gradient(176deg,#4A3E30 0%,#241C14 100%)",
-        border: "8px solid rgba(0,0,0,0.5)" }} />
-      {/* what is BEHIND it, revealed as the curtain climbs: three lit bays with
-          machines already mid-cycle. The reveal is the hook's payoff. */}
-      <div style={{ position: "absolute", left: 248 + L.a, top: 200, width: 520, height: 372,
-        zIndex: 32, overflow: "hidden", background: "#120E0A" }}>
+      <div style={{ position: "absolute", left: OP_X - 18, top: OP_Y - 12, width: OP_W + 36,
+        height: OP_H + 30, zIndex: 30,
+        background: "linear-gradient(176deg,#D8C49A 0%,#8E7856 100%)",
+        border: "8px solid rgba(0,0,0,0.42)" }} />
+      {/* ⭐ WHAT IS BEHIND IT — and at frame 0 a 99px strip of it is already
+          visible, LIT, with a flywheel turning in the gap. That is the promise
+          the hook makes and withholds: you can see the shop is running and not
+          yet what is in it. */}
+      <div style={{ position: "absolute", left: OP_X, top: OP_Y, width: OP_W, height: OP_H,
+        zIndex: 32, overflow: "hidden",
+        background: "linear-gradient(178deg,#241A10 0%,#8E6A32 100%)" }}>
         {R.tools.map((t, i) => (
           <React.Fragment key={"by" + i}>
-            <div style={{ position: "absolute", left: 18 + i * 170, top: 40, width: 152,
-              height: 300, background: `linear-gradient(176deg, ${dkh(t.c, 0.40)} 0%, ${dkh(t.c, 0.76)} 100%)`,
+            <div style={{ position: "absolute", left: 14 + i * 164, top: 40, width: 146,
+              height: 224, background: `linear-gradient(176deg, ${dkh(t.c, 0.30)} 0%, ${mxh(t.c, 0.10)} 100%)`,
               border: "4px solid rgba(0,0,0,0.44)" }} />
-            {/* each machine's flywheel, turning at its own rate */}
-            <div style={{ position: "absolute", left: 46 + i * 170, top: 128, width: 96, height: 96,
-              borderRadius: "50%", border: `10px solid ${mxh(t.c, 0.34)}`,
+            {/* the lit floor strip and the flywheel BOTH live in the bottom
+                99px, so the frame-0 gap contains light and motion, not a sliver */}
+            <div style={{ position: "absolute", left: 38 + i * 164, top: 232, width: 100,
+              height: 100, borderRadius: "50%", border: `12px solid ${mxh(t.c, 0.52)}`,
               transform: `rotate(${f * (4.4 + i * 2.1)}deg)` }}>
-              <div style={{ position: "absolute", left: "50%", top: 4, width: 6, height: 28,
-                marginLeft: -3, background: mxh(t.c, 0.66) }} />
+              {[0, 60, 120].map(a => (
+                <div key={"sk" + a} style={{ position: "absolute", left: "50%", top: "50%",
+                  width: 76, height: 7, margin: "-3.5px 0 0 -38px", background: mxh(t.c, 0.62),
+                  transform: `rotate(${a}deg)` }} />
+              ))}
+              <div style={{ position: "absolute", left: "50%", top: "50%", width: 26, height: 26,
+                margin: "-13px 0 0 -13px", borderRadius: "50%", background: dkh(t.c, 0.5),
+                border: `4px solid ${mxh(t.c, 0.7)}` }} />
             </div>
-            <div style={{ position: "absolute", left: 30 + i * 170, top: 262, width: 128,
-              height: 14, background: mxh(t.c, 0.24 + 0.3 * Math.abs(Math.sin(f / 7 + i))) }} />
+            <div style={{ position: "absolute", left: 16 + i * 164, top: 306, width: 142,
+              height: 20, background: mxh(t.c, 0.42 + 0.3 * Math.abs(Math.sin(f / 7 + i))) }} />
           </React.Fragment>
         ))}
       </div>
 
-      <Shutter x={248 + L.a} y={200} w={520} h={372} k={k} f={f} z={40} />
-      <AwningBoard x={252 + L.a} y={82} w={512} f={f} z={66} />
+      <Shutter x={OP_X} y={OP_Y} w={OP_W} h={OP_H} k={k} f={f} z={40} chainX={CH_X - OP_X} />
+      <AwningBoard x={OP_X - 10} y={AW_Y} w={OP_W + 20} f={f} z={66} />
 
       {/* ⭐ THE VILLAIN, PLANTED. Unlit, far right, unremarked. */}
-      <div style={{ position: "absolute", left: 856 + L.c * 0.3, top: 300, width: 150, height: 300,
-        zIndex: 28 }}>
-        <IronGate x={0} y={0} w={150} h={300} f={f} open={0} lit={0} z={28} />
-      </div>
+      <IronGate x={862 + L.c * 0.3} y={336} w={150} h={300} f={f} open={0} lit={0} z={28} />
 
       {/* the hero, hauling. ⛔ HE STAYS DARK: the awning carries the luma bar,
           which is what lets him be the biggest value gap in the reel. */}
@@ -197,15 +216,15 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
       <Hero f={f} x={506 + L.a} y={GY} size={286} z={56} act={1} ph={0.4}
         strain={strain} drive={pull} costume={{ constr: 1 }} tint="#8E4A2E"
         stern={strain > 0.5 ? 1 : 0} />
-      <Forearm x0={560 + L.a} y0={GY - 214} x1={786 + L.a} y1={GY - 366} w={26}
-        c="#8E4A2E" z={58} />
+      {/* ONE short forearm, from the mascot's own arm rect ONTO the chain */}
+      <Forearm x0={615 + L.a} y0={562} x1={CH_X - 4} y1={534} w={25} c="#8E4A2E" z={58} />
 
       {/* the cost of the haul: grit shaken off the shutter box */}
-      {strain > 0.4 && <Fall x={252 + L.a} y={168} w={520} f={f} at={6} z={72} />}
+      {strain > 0.4 && <Fall x={OP_X} y={OP_Y - 46} w={OP_W} f={f} at={6} z={72} />}
       <Puff x={506 + L.a} y={GY} f={f} at={50} c="#C8B48E" z={70} />
 
       <BandChip t={`${R.count} FREE TOOLS · ${R.markets[0]} + ${R.markets[1]}`} c={INK} />
-      <Edge side="l" c="#1A1218" w={104} z={93} kind="post" />
+      <Edge side="l" c="#7E6A5E" w={104} z={93} kind="post" />
     </Scene>
   );
 };

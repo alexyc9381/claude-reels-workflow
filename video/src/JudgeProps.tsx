@@ -1254,3 +1254,81 @@ export const ExhibitWall: React.FC<{
     </div>
   );
 };
+
+/** a gold DONE plaque — the lie in a unit you can stack, throw and scatter.
+    Landscape, because a stack of portrait cards is a tower of edges. */
+export const Plaque: React.FC<{
+  x: number; y: number; w?: number; rot?: number; z?: number; crack?: number; hollow?: number;
+}> = ({ x, y, w: ww = 190, rot = 0, z = 60, crack = 0, hollow = 0 }) => {
+  const hh = ww * 0.62;
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+      zIndex: z, transform: `rotate(${rot}deg)`, transformOrigin: "50% 100%" }}>
+      <svg viewBox="0 0 190 118" width={ww} height={hh} style={{ overflow: "visible" }}>
+        <rect x={0} y={0} width={190} height={118} rx={4} fill={hollow > 0.5 ? "#3A3026" : "#5E2320"} />
+        <rect x={0} y={0} width={190} height={7} fill={hollow > 0.5 ? "#5A4E3E" : "#7A342E"} />
+        <rect x={7} y={7} width={176} height={104} fill="none" stroke={GOLD} strokeWidth={5}
+          opacity={1 - hollow} />
+        <circle cx={38} cy={59} r={24} fill={GOLD} opacity={1 - hollow} />
+        <path d="M 27 59 L 35 69 L 51 47" fill="none" stroke="#4A3208" strokeWidth={6}
+          strokeLinecap="round" strokeLinejoin="round" opacity={1 - hollow} />
+        <text x={116} y={72} textAnchor="middle" fill={hollow > 0.5 ? "#6E6252" : "#F4E6C6"}
+          style={{ ...mono(31, 800), letterSpacing: 4 }}>{R.lie}</text>
+        {crack > 0.02 && (
+          <path d="M 14 8 L 52 46 L 30 70 L 78 104" fill="none" stroke="#2A1C04"
+            strokeWidth={4 * crack} strokeLinecap="round" />
+        )}
+        {hollow > 0.5 && [30, 78, 126, 162].map((cx, i) => (
+          <circle key={i} cx={cx} cy={40 + (i % 2) * 38} r={13} fill="#14100C" />
+        ))}
+      </svg>
+    </div>
+  );
+};
+
+/** the gold FACE of a seal, as a shell that can fall away and leave a carcass */
+export const SealShell: React.FC<{ x: number; y: number; d?: number; z?: number; off: number }> =
+  ({ x, y, d = 420, z = 64, off }) => (
+  <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2 + off * 300, width: d,
+    height: d, zIndex: z, opacity: Math.max(0, 1 - off * 0.7),
+    transform: `rotate(${off * 46}deg) scale(${1 - off * 0.12})` }}>
+    <svg viewBox="0 0 200 200" width={d} height={d} style={{ overflow: "visible" }}>
+      {Array.from({ length: 22 }, (_, i) => {
+        const a = (i / 22) * Math.PI * 2;
+        return <circle key={i} cx={100 + Math.cos(a) * 82} cy={100 + Math.sin(a) * 82} r={19}
+          fill="#B8842A" />;
+      })}
+      <circle cx={100} cy={100} r={84} fill="#C89A38" />
+      <circle cx={100} cy={100} r={78} fill={GOLD} />
+      <circle cx={100} cy={100} r={78} fill="none" stroke="#8E6218" strokeWidth={6} />
+      <path d="M 72 100 L 90 120 L 132 74" fill="none" stroke="#4A3208" strokeWidth={15}
+        strokeLinecap="round" strokeLinejoin="round" />
+      <text x={100} y={158} textAnchor="middle" fill="#4A3208"
+        style={{ ...mono(25, 800), letterSpacing: 5 }}>{R.lie}</text>
+      <ellipse cx={70} cy={62} rx={30} ry={20} fill={hexa("#FFF0C8", 0.34)}
+        transform="rotate(-28 70 62)" />
+    </svg>
+  </div>
+);
+
+/** what the gold was covering: a bare carcass, ribs and empty bays */
+export const SealCarcass: React.FC<{ x: number; y: number; d?: number; z?: number; k: number }> =
+  ({ x, y, d = 420, z = 60, k }) => (
+  <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+    zIndex: z, opacity: k }}>
+    <svg viewBox="0 0 200 200" width={d} height={d} style={{ overflow: "visible" }}>
+      <circle cx={100} cy={100} r={84} fill="#2A2620" />
+      <circle cx={100} cy={100} r={84} fill="none" stroke="#4E463A" strokeWidth={9} />
+      {Array.from({ length: 10 }, (_, i) => {
+        const a = (i / 10) * Math.PI * 2;
+        return <line key={i} x1={100} y1={100} x2={100 + Math.cos(a) * 80} y2={100 + Math.sin(a) * 80}
+          stroke="#4E463A" strokeWidth={7} />;
+      })}
+      <circle cx={100} cy={100} r={26} fill="#171410" />
+      <circle cx={100} cy={100} r={26} fill="none" stroke="#5E5648" strokeWidth={5} />
+      {[[62, 62], [138, 62], [62, 138], [138, 138]].map(([cx, cy], i) => (
+        <circle key={i} cx={cx} cy={cy} r={15} fill="#100E0A" />
+      ))}
+    </svg>
+  </div>
+);
