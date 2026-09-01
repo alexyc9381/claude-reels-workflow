@@ -13,6 +13,8 @@ import {
   Rail10, Counter, Grille, MinuteDial, EvidenceCart, Ship, FeeStack,
 } from "./JdgProps";
 import { RK } from "./JdgHooks";
+import { Dress, WorkBench } from "./JdgDress";
+import type { RoomKind } from "./JdgDress";
 import type { Variant } from "./JdgHooks";
 
 /* ===========================================================================
@@ -181,6 +183,8 @@ export const S1: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.08]} vig={0.40} glow={hexa(BRS, 0.18)}>
       <Chamber p={p} f={f} lit={1} occ="l" bays={5} shaft={420} shaftO={0.30}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail dim={0.34} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="racks" f={f} hz={p.horizon} dim={0.44} lamps={1} pallets={[640]} />
             <Pool x={470} y={556} w={900} c="#FFF6E2" o={0.26} z={12} />
       <Contact x={640 - 168} y={700 - 10} w={336} z={44} o={0.46} />
       <UnitStack x={640} y={700} f={f} w={344} z={60}
@@ -236,6 +240,8 @@ export const S2: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.07]} vig={0.40} glow={hexa(GOLD, 0.20)}>
       <Chamber p={p} f={f} lit={1} occ="r" bays={3} shaft={260} shaftO={0.26}
         rakeRate={RK[v].rate * 0.8} rakeN={RK[v].n} panelN={6} rail={false} horizonDy={20} dim={0.34} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="bench" f={f} hz={p.horizon} dim={0.44} lamps={1} />
       <Grille x={300} y={430} w={420} h={180} z={30} />
       <MinuteDial x={760} y={330} f={f} a={S2_DIAL_A} b={S2_DIAL_B} s={1.5} z={40} />
       <Pool x={520} y={600} w={820} c="#FFF0CE" o={0.24} z={12} />
@@ -288,6 +294,8 @@ export const S3: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.10]} vig={0.36} glow={hexa("#F0DCA8", 0.22)}>
       <Chamber p={p} f={f} lit={1} occ="l" bays={3} shaft={620} shaftO={0.24}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail={false} dim={0.24} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="doors" f={f} hz={p.horizon} dim={0.34} lamps={1} />
             {/* THE OPEN DOORS — daylight blowing in. A hole, full height, square. */}
       <div style={{ position: "absolute", left: 600, top: 150, width: 400, height: 372,
         zIndex: 24, background: `linear-gradient(178deg, #FFFBEE 0%, #F4E4B8 62%, #D8C494 100%)`,
@@ -395,6 +403,8 @@ export const S4: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.055]} vig={0.52} glow={hexa("#BFD8F2", 0.20)}>
       <Chamber p={p} f={f} lit={0.55} occ="both" bays={5} shaft={420} shaftO={0.16}
         rakeRate={RK[v].rate * 0.7} rakeN={RK[v].n} panelN={9} rail dim={0.46} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="hall" f={f} hz={p.horizon} dim={0.56} lamps={1} />
       <EvidenceCart x={506} y={718} f={f} at={S4_CART} w={790} z={42}>
         <div style={{ position: "absolute", inset: 0, transform: `scale(${punch})`,
           transformOrigin: "50% 42%" }}>
@@ -473,6 +483,11 @@ export const S5: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.42} glow={hexa(BRS, 0.20)}>
       <Chamber p={p} f={f} lit={0.6 + on(S5_LAMP) * 0.4} occ="both" bays={5}
         shaft={506} shaftO={0.30} rakeRate={RK[v].rate * 0.8} rakeN={RK[v].n} panelN={9} rail dais dim={0.34} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="hall" f={f} hz={p.horizon} dim={0.44} lamps={1} />
+      {/* the works, seen whole for the first time — benches down both sides */}
+      <WorkBench x={168} y={p.horizon + 128} f={f} w={300} z={26} dim={0.30} />
+      <WorkBench x={854} y={p.horizon + 128} f={f} w={300} z={26} dim={0.30} />
             <Pool x={506} y={520} w={980} c="#FFF6E2" o={0.18 + on(S5_LAMP) * 0.16} z={12} />
       <CutIn f={f} dx={0} dy={-680} at={9} z={50}>
         <BenchDesk x={506} y={478} w={560} h={180} z={50} lit={on(S5_LAMP)} />
@@ -536,6 +551,8 @@ export const S6: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.04]} vig={0.46} glow={hexa("#C9BC9A", 0.14)}>
       <Chamber p={p} f={f} lit={0.5} occ="both" bays={0} shaft={506} shaftO={0}
         panelN={5} rail={false} horizonDy={30} dim={0.4} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="cell" f={f} hz={p.horizon} dim={0.50} lamps={0.5} />
       {/* ONE hanging lamp, and everything outside its cone is black */}
       <div style={{ position: "absolute", left: 498, top: 0, width: 16, height: 176, zIndex: 30,
         background: dkh(OAK, 0.5) }} />
@@ -591,6 +608,8 @@ export const S7: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.12]} vig={0.40} glow={hexa("#F0DCA8", 0.22)}>
       <Chamber p={p} f={f} lit={0.7 + open * 0.3} occ="both" bays={4} shaft={506}
         shaftO={0.22} rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={8} rail={false} dim={0.26} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="doors" f={f} hz={p.horizon} dim={0.36} lamps={1} />
       <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={7} s={1.5} />
       {/* the corridor light behind the doors — they enter as silhouettes and
           resolve into clay as they cross it */}
@@ -693,6 +712,8 @@ export const S8: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.09]} vig={0.52} glow={hexa(GOLD, 0.20)}>
       <Chamber p={p} f={f} lit={0.55} occ="both" bays={0} shaft={506} shaftO={0}
         panelN={6} rail={false} horizonDy={90} dim={0.4} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="bench" f={f} hz={p.horizon} dim={0.50} lamps={1} />
       {/* ⛔ S8 MEASURED 4.43 TWICE, AND THE SECOND TIME WAS BECAUSE THE FIX NEVER
           REACHED THE FILE: the patch anchored on a Pool opacity a previous edit
           had already changed, `str.replace` matched nothing, and the script
@@ -782,6 +803,8 @@ export const S9: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.14]} vig={0.44} glow={hexa(BRS, 0.20)}>
       <Chamber p={p} f={f} lit={0.5 + (lit(S9_JUDGE) + lit(S9_PROS) + lit(S9_DEF)) * 0.17}
         occ="both" bays={5} shaft={506} shaftO={0.24} rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail dais dim={0.34} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="hall" f={f} hz={p.horizon} dim={0.44} lamps={1} />
       <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={8} s={1.5} />
       <CutIn f={f} dx={0} dy={-680} at={7} z={50}>
   <BenchDesk x={506} y={452} w={520} h={168} z={50} lit={lit(S9_JUDGE)} />
@@ -824,6 +847,8 @@ export const S10: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.10]} vig={0.46} glow={hexa(C_PROS, 0.20)}>
       <Chamber p={p} f={f} lit={1} occ="r" bays={3} shaft={210} shaftO={0.30}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail={false} dim={0.34} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="bay" f={f} hz={p.horizon} dim={0.44} lamps={1} pallets={[742]} />
             <Pool x={300} y={556} w={820} c="#FFE9CE" o={0.26} z={12} />
       {/* the work, standing behind the table — still missing leaf 1 */}
       <Contact x={742 - 168} y={716 - 10} w={336} z={44} o={0.46} />
@@ -904,6 +929,8 @@ export const S11: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.09]} vig={0.44} glow={hexa(C_DEF, 0.22)}>
       <Chamber p={p} f={f} lit={1} occ="l" bays={3} shaft={800} shaftO={0.30}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail={false} dim={0.34} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="bay" f={f} hz={p.horizon} dim={0.44} lamps={1} pallets={[700]} />
       <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={7} s={1.5} />
       <Pool x={720} y={556} w={820} c="#E6F6EE" o={0.24} z={12} />
       <CutIn f={f} dx={0} dy={-640} at={7} z={50}>
@@ -947,6 +974,8 @@ export const S12: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.07]} vig={0.48} glow={hexa(C_JUDGE, 0.22)}>
       <Chamber p={p} f={f} lit={0.9} occ="both" bays={5} shaft={506} shaftO={0.22}
         rakeRate={RK[v].rate * 0.8} rakeN={RK[v].n} panelN={9} rail={false} dais dim={0.38} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="hall" f={f} hz={p.horizon} dim={0.48} lamps={1} />
       {/* the bench lamp, and the cone it throws — it SWINGS onto the evidence */}
       <Beam x={506 - swing * 250} y={300} top={140} bot={620} len={430} c={mxh(C_JUDGE, 0.4)}
         o={0.30} z={22} f={f} />
@@ -1004,6 +1033,8 @@ export const S13: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.16]} vig={0.40} glow={hexa(C_JUDGE, 0.24)}>
       <Chamber p={p} f={f} lit={1} occ="both" bays={5} shaft={506} shaftO={0.34}
         rakeRate={RK[v].rate * 1.2} rakeN={RK[v].n} panelN={9} rail dais horizonDy={38} dim={0.28} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="line" f={f} hz={p.horizon} dim={0.38} lamps={1} pallets={[560]} />
       <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={8} s={1.5} />
       <Pool x={506} y={600} w={980} c="#FFF6E2" o={0.28} z={12} />
       {/* ⛔ the villain, still on the shelf, still hollow */}
@@ -1072,6 +1103,8 @@ export const S14: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.08]} vig={0.50} glow={hexa(GOLD, 0.20)}>
       <Chamber p={p} f={f} lit={0.75} occ="both" bays={3} shaft={300} shaftO={0.22}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={6} rail={false} horizonDy={30} dim={0.4} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="store" f={f} hz={p.horizon} dim={0.50} lamps={1} />
       <Grille x={760} y={410} w={340} h={170} z={30} />
       <Pool x={430} y={578} w={700} c="#FFF0CE" o={0.24} z={12} />
       <Counter x={506} y={780} w={880} h={260} z={50} />
@@ -1104,6 +1137,8 @@ export const S15: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.08]} vig={0.44} glow={hexa("#CFD6CE", 0.16)}>
       <Chamber p={p} f={f} lit={0.9} occ="l" bays={3} shaft={430} shaftO={0.22}
         rakeRate={RK[v].rate * 0.9} rakeN={RK[v].n} panelN={6} rail={false} dim={0.34} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="bench" f={f} hz={p.horizon} dim={0.44} lamps={1} pallets={[520]} />
             {(() => {
         const sw = E(f, 0, dur + 8, -280, 300, LIN);   /* the work-light travels */
         return (<>
@@ -1180,6 +1215,8 @@ export const S16: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.10]} vig={0.34} glow={hexa("#FFF3D2", 0.24)}>
       <Chamber p={p} f={f} lit={0.9 + day * 0.4} occ="l" bays={5} shaft={760}
         shaftO={0.28 + day * 0.16} rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail dais dim={0.14} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="hall" f={f} hz={p.horizon} dim={0.24} lamps={1} pallets={[430]} />
       <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={7} s={1.5} />
       {/* the back doors, opening onto daylight on "launch" */}
       <div style={{ position: "absolute", left: 700, top: 168, width: 300, height: 330,
@@ -1225,6 +1262,8 @@ export const S17: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.30} glow={hexa("#FFF3D2", 0.22)}>
       <Chamber p={p} f={f} lit={1} occ="none" bays={6} shaft={506} shaftO={0.20}
         rakeRate={RK[v].rate * 0.7} rakeN={RK[v].n} panelN={10} rail={false} horizonDy={-40} dim={0.1} />
+      {/* ⭐ THE ROOM. `Chamber` is a WALL; this is what is IN it. */}
+      <Dress kind="store" f={f} hz={p.horizon} dim={0.20} lamps={1} />
       <Pool x={506} y={470} w={980} c="#FFFBEE" o={0.24} z={12} />
       {/* the steps */}
       {[0, 1, 2, 3].map(i => (

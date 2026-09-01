@@ -651,25 +651,65 @@ export const Ship: React.FC<{ kind: 0 | 1 | 2; x: number; y: number; f: number; 
 
 /** the brass fee discs on the clerk's counter. ⛔ NO CURRENCY FIGURE — the VO
     names none, and a number under them reads as the price of the run watched. */
+/** ⭐ THE TOKEN HOPPER — tokens going down a chute into a counter, and the
+    counter wheel turning as they go.
+
+    ⛔ This was a stack of flat gold discs that read as PANCAKES. A token is
+    recognisable by its EDGE (milled), its FACE (stamped) and its THICKNESS seen
+    on the stack — all three are drawn now — and the hopper gives them somewhere
+    to go, which is what "burns through" actually means. */
 export const FeeStack: React.FC<{ x: number; y: number; f: number; sweep: number;
-  n?: number; s?: number; z?: number }> = ({ x, y, f, sweep, n = 9, s = 1, z = 70 }) => (<>
-  {Array.from({ length: n }, (_, i) => {
-    const go = sweep + i * 1.6;
-    const lf = f - go;
-    const gone = lf > 0;
-    const dx = gone ? lf * (7 + i * 0.5) : 0;
-    const dy = gone ? Math.max(0, (lf - 4) * (lf - 4) * 1.8) : 0;
-    const rot = gone ? lf * (9 + i * 2) : 0;
-    if (dy > 520) return null;
-    return (
-      <div key={"fd" + i} style={{ position: "absolute", left: x - 34 * s + dx,
-        top: y - (i + 1) * 15 * s + dy, width: 68 * s, height: 15 * s, borderRadius: "50%",
-        zIndex: z + i, transform: `rotate(${rot}deg)`,
-        background: `linear-gradient(178deg, ${BRSL} 0%, ${BRS} 46%, ${BRSD} 100%)`,
-        border: `2px solid ${dkh(BRSD, 0.4)}` }} />
-    );
-  })}
-</>);
+  n?: number; s?: number; z?: number }> = ({ x, y, f, sweep, n = 9, s = 1, z = 70 }) => {
+  const D = 76 * s, TH = 17 * s;
+  return (<>
+    {/* the chute they run down */}
+    <div style={{ position: "absolute", left: x - 30 * s, top: y - 300 * s, width: 60 * s,
+      height: 210 * s, zIndex: z - 2, transform: "rotate(9deg)", transformOrigin: "50% 100%",
+      background: `linear-gradient(96deg, #B4C0C7 0%, #6E787E 54%, #3A454C 100%)` }} />
+    {/* the hopper mouth */}
+    <div style={{ position: "absolute", left: x - 92 * s, top: y - 104 * s, width: 184 * s,
+      height: 104 * s, zIndex: z - 1, clipPath: "polygon(0 0,100% 0,72% 100%,28% 100%)",
+      background: `linear-gradient(178deg, #8E9AA2 0%, #46525A 62%, #2A333A 100%)` }} />
+    {/* the counter wheel — it turns as they go through, which is the whole point */}
+    <div style={{ position: "absolute", left: x + 104 * s, top: y - 128 * s, width: 84 * s,
+      height: 84 * s, borderRadius: "50%", zIndex: z, border: `${7 * s}px solid #2A333A`,
+      background: `radial-gradient(50% 50% at 42% 34%, #F7F1DC 0%, #C9BFA2 100%)` }}>
+      {[0, 1, 2, 3, 4, 5].map(i => (
+        <div key={i} style={{ position: "absolute", left: "50%", top: 5 * s, width: 4 * s,
+          height: 18 * s, marginLeft: -2 * s, background: "#3A3020",
+          transformOrigin: `${2 * s}px ${33 * s}px`,
+          transform: `rotate(${i * 60 + Math.max(0, f - sweep) * 7}deg)` }} />
+      ))}
+    </div>
+    {/* THE TOKENS — a milled edge, a stamped face and real thickness */}
+    {Array.from({ length: n }, (_, i) => {
+      const go = sweep + i * 2.2;
+      const lf = f - go;
+      const gone = lf > 0;
+      const dx = gone ? -lf * (5 + i * 0.4) : 0;
+      const dy = gone ? Math.max(0, (lf - 3) * (lf - 3) * 2.0) : 0;
+      const rot = gone ? lf * (7 + i * 1.6) : 0;
+      if (dy > 420) return null;
+      return (
+        <div key={"tk" + i} style={{ position: "absolute", left: x - D / 2 + dx,
+          top: y - 150 * s - i * TH + dy, width: D, height: TH * 1.9, zIndex: z + i,
+          transform: `rotate(${rot}deg)` }}>
+          <div style={{ position: "absolute", inset: 0, borderRadius: "50%",
+            background: `linear-gradient(178deg, ${BRSL} 0%, ${BRS} 42%, ${dkh(BRSD, 0.2)} 100%)`,
+            border: `${2.5 * s}px solid ${dkh(BRSD, 0.44)}` }} />
+          {/* the milled edge */}
+          {Array.from({ length: 12 }, (_, j) => (
+            <div key={j} style={{ position: "absolute", left: 5 * s + j * (D - 10 * s) / 12,
+              bottom: 1, width: 2.5 * s, height: TH * 0.6, background: hexa("#6B4A12", 0.55) }} />
+          ))}
+          {/* the stamped face */}
+          <div style={{ position: "absolute", left: D * 0.3, top: TH * 0.42, width: D * 0.4,
+            height: TH * 0.7, borderRadius: "50%", background: hexa("#8A6420", 0.45) }} />
+        </div>
+      );
+    })}
+  </>);
+};
 
 /** THE EVIDENCE SHELF — where the hollow shell from the hook ends up, and it
     is STILL HOLLOW in the last act. The villain is caught, never abolished. */
