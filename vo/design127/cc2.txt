@@ -1,0 +1,6 @@
+file 'q1.wav'
+file 'q2.wav'
+file 'q3.wav'
+file 'q4.wav'
+file 'q5.wav'
+file 'q6.wav'

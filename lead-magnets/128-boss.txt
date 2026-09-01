@@ -1,0 +1,69 @@
+TITLE   The Boss Loop
+SUB     How to run a team of Claude sub-agents under one strict reviewer, and the two phase order that stops it eating your entire token budget in a single afternoon
+
+H       What this is, and what it is not
+P       The boss loop is a way of writing one prompt so that Claude does the checking instead of you. You hand it a task, you tell it to spawn a team of worker sub-agents to do the building, and then you add a third instruction that most people leave out: you appoint one agent as a strict boss whose only job is to tear the work apart. The workers build, the boss rejects, they rebuild, and the loop only ends when the boss scores the work as good.
+P       "The boss loop" is our name for it. Nobody in the industry calls it that, and you will not find it in Anthropic's documentation. The published names for this family of technique are loop engineering and agent loops, and the specific two agent version of it is written up on this site as the Gauntlet Loop. If you have read that guide, this one is the fan out and the cost control: what changes when the builder is a TEAM rather than one agent, and what that does to your bill.
+B       The mechanism is real and it is what the Claude Code team themselves describe doing
+B       The name is ours
+B       The part almost nobody warns you about is the token cost, and it is the reason this guide exists
+
+RULE
+
+H       Why a builder cannot grade itself
+P       Every agent setup that disappoints has the same shape. One model does the work, the same model is asked whether the work is good, and it says yes. That is not laziness and it is not something you can fix by asking more firmly.
+NUM     An agent that just produced something has the entire production in its context. It knows why every decision was made, so every decision looks justified. That is the definition of a bad reviewer.
+NUM     Without a reference, "is this good" has no answer. The model returns a plausible score because you asked for one, and that score moves between runs because nothing is anchoring it.
+NUM     A single agent optimises for finishing. It has a step list and it wants the list done, so "good enough" arrives when the steps run out rather than when the quality does.
+P       The fix is structural. You need a reviewer that did not write the thing, holding it against something concrete, and the loop has to end on the reviewer's verdict rather than on the builder's step count.
+QUOTE   Boris Cherny, who built Claude Code, on how he works now: "I don't prompt Claude anymore. I have loops running that prompt Claude and figure out what to do."
+
+RULE
+
+H       The three parts of the prompt
+P       The prompt itself is short. Only the third part is unusual, and it is the one that gets dropped.
+NUM     The task, with a concrete example of what great looks like. Not an adjective. A real reference the model can open, read and measure itself against. "Make it clean" is not a bar. A file, a URL or a named product is.
+NUM     The fan out. Tell it to spawn a team of worker sub-agents and say how the work splits. Claude Code supports nested sub-agents, and Cherny has described running "armies of agents, with agents prompting agents in trees of thousands." In practice you want a handful, each owning a real slice.
+NUM     The boss. One agent, separate from the workers, that did not write the code, whose only job is to grade it against the bar in part one and send it back with specifics. The team's own term for this split is maker and checker.
+P       The loop closes when the boss passes it. Not when the workers say they are done, and not when you get bored of reading.
+
+RULE
+
+H       What the boss should actually be checking
+P       This is where most versions of this prompt go soft. "Review the code" produces a reviewer that comments on variable names. The useful version of the boss checks whether the thing runs.
+P       Cherny's own test for whether an agent has finished is the blunt one: can the agent run the thing? Not whether the unit tests pass, and not whether the diff looks tidy. Actual product usage.
+B       Does it start without errors
+B       Does the specific flow described in the task actually work end to end
+B       Does it match the reference example given in part one, in the ways that matter
+B       What is missing that the task asked for
+P       Give the boss the ability to run the thing and you get a reviewer. Give it only the diff and you get a proofreader.
+
+RULE
+
+H       The cost, and the order that fixes it
+P       Here is the part that is usually left out of the demos. A team of sub-agents that builds, gets rejected, and rebuilds is running many full context passes per round. It is the most expensive way to use Claude that exists short of running it in a while loop overnight, and people discover this when the limit warning arrives rather than when they plan the session.
+P       The fix is not to weaken the loop. It is to run it second.
+NUM     Build the basic prototype normally, in ordinary back and forth, or with a single agent. Cheap, fast, and you are still deciding what the thing is. Do not put the boss loop anywhere near this phase, because you will spend your budget having a strict reviewer critique a version you are about to throw away.
+NUM     Get it to the point where the shape is right and you would not start over. Rough edges are fine. This is the handover point.
+NUM     Now trigger the boss loop, pointed at polish. The bar in part one becomes specific, the workers have real code to improve rather than a blank page, and every expensive round is spent on the version you are actually keeping.
+QUOTE   Prototype cheap, polish expensive. The order is the whole trick, and it is the difference between a technique that works and a technique that works once.
+
+RULE
+
+H       Running it without surprises
+NUM     Set the bar before you start. Write down what the boss is grading against, in one sentence, in the prompt. A vague bar produces an infinite loop, because the boss can always find something.
+NUM     Cap the rounds. Three passes is usually where the returns flatten. Say so in the prompt rather than finding out.
+NUM     Watch the first round in full. If the boss's first rejection is about formatting, your bar is too weak and every later round will be too.
+NUM     Keep the workers' slices genuinely separate. Two agents editing the same file is not a team, it is a merge conflict with extra steps.
+NUM     Check your usage after the first complete loop, before you run the second. You now have a real number for what one round costs on your project, and you can decide how many you want.
+
+RULE
+
+H       When not to use it
+P       This is a polish mechanism with a real price, and it is worth being honest about where it is the wrong tool.
+B       Small, well specified changes. A strict reviewer on a ten line fix is theatre.
+B       Anything where you cannot state the bar concretely. If you cannot name what good looks like, the boss cannot either, and you will pay for it to guess.
+B       Exploration. When you do not yet know what you are building, a critic that rejects everything is actively in the way.
+P       Where it earns its cost is the last mile on something you have already decided to keep, and where you can point at a reference and say make it that good.
+
+KEY     Comment BOSS on the reel for this guide

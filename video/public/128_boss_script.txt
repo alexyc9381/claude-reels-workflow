@@ -1,0 +1,9 @@
+There's a new prompting technique that's been blowing people's minds this week.
+You can build entire apps and websites in a single prompt, and even the creators of Claude think this is the future of AI.
+It's called the boss loop.
+Instead of doing the normal back and forth chats, you give Claude a task and tell it to spawn a team of worker sub-agents.
+But the secret sauce is the third line of the prompt where you assign a strict AI boss.
+The worker agents write the code and the boss tears it apart.
+And they automatically loop and fix errors until the boss gives it a perfect score.
+This burns through tokens fast, so you should only build your basic prototype first, then trigger the boss loop to polish the final product.
+Comment BOSS for the free guide.

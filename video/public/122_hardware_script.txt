@@ -1,0 +1,21 @@
+What would it cost to run Claude locally?
+First, Anthropic has never published the weights for Opus 5, so you literally cannot run it even if you wanted to.
+But let's look at the closest equivalent, Moonshot AI's Kimi K3.
+That model is 2.8 trillion parameters.
+To actually fit that, you need seven RTX Pro 6000 graphics cards.
+And right now those cards are 16,000 dollars each.
+That's over 110,000 dollars in graphics cards alone before you even buy a motherboard.
+And then there's the electric bill.
+So you'll need to pull in 4.2 kilowatts.
+If you leave them running 24-7 at the US average electricity rate, you're paying 565 dollars a month just to power the GPUs.
+But here's the real problem.
+One guy actually tried renting a massive server to run this model, and he got 0.1 tokens per second because his GPUs sat at 1 percent utilization.
+Why?
+And it's because of memory bandwidth.
+He had enough memory to store the massive model, but his system physically cannot move the data fast enough to generate the text.
+Meanwhile, using Opus 5 for an hour of intense coding costs about 70 cents.
+Now there are only three reasons to ever run this locally.
+First, industrial volume, where you can process millions of tokens per day.
+Second, if you have strict data privacy, like healthcare or government.
+And third, if you actually need to run the AI agents 24-7.
+If none of these apply to you, paying 112,000 dollars for hardware that loses value every year makes no sense.

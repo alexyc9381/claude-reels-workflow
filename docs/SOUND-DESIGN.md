@@ -760,3 +760,66 @@ repeated cue in this reel is one of the two lowest-HF samples in the bank
 (`thock` 1.3%, `pickup_chime` 1.2%) and each run is **pitched ascending** rather
 than copy-pasted — which also makes a repeated reward read as PROGRESS. Buy the
 budget back from beats the picture already counts, then state the overage.
+
+---
+
+## ⛔⛔⛔ NEVER LET A FILTER CHOOSE A SPLICE POINT (reel 127)
+
+Reel 127 shipped a first cut whose voiceover was rejected as *"so choppy... way
+too fast and choppy and glitched."* The cause was one line:
+
+```bash
+silenceremove=stop_periods=-1:stop_duration=0.32:stop_silence=0.32:stop_threshold=-40dB
+```
+
+`silenceremove` cuts at the threshold crossing and does **not** crossfade.
+Measured as sample-to-sample steps larger than 6x the local RMS:
+
+```
+RAW take                    2 discontinuities
+after the flub splice       2
+after silenceremove        16      <-- one on almost every pause
+shipped (plus hand trims)  19
+```
+
+Those steps were 0.10-0.19 in passages whose local RMS was 0.016. That is an
+audible click fifteen times in thirty seconds.
+
+### ⭐⭐ AND IT IS ALSO WHY IT SOUNDED FAST
+
+The rate was never high. Measured against the reels either side of it:
+
+```
+127 v1   4.21 w/s overall · worst rolling 5s 5.37 · median beat 0.35s
+126      4.85 w/s          · 5.71                 · 0.29s
+124      4.93 w/s          · 6.27                 · 0.39s
+120      4.10 w/s          · 4.76                 · 0.34s
+```
+
+**It was the SLOWEST read in the recent run and it was heard as the fastest.**
+A hard cut at the threshold removes the decay at the end of a phrase and the
+breath before the next one, so every line arrives on top of the one before it.
+Pace is heard in the gaps, not in the words, and `atempo=1.05` on top of that
+made it worse.
+
+### The rule, and the recipe
+
+> **Every join is placed BY HAND inside a measured silence, has real room tone on
+> both sides, and is crossfaded.** A filter cannot know which quiet moment is a
+> beat and which is a consonant closure — that is `feedback_cut_on_a_word_not_a_dip`
+> restated, and a threshold with a duration guard does not fix it.
+
+`vo/design127/rebuild.py` is the worked version: list the spoken blocks from the
+RMS scan, drop the flubbed ones, assert every boundary is under the silence
+threshold BEFORE cutting anything, then concatenate with a 40ms equal-power
+crossfade at each join. Room tone dissolves into room tone and there is no step
+to hear. Reel 127 v2: **19 discontinuities to 0**, at x1.00 with 0.50s beats.
+
+⭐ **Keep the beats.** Reel 126 deliberately WIDENED its beats to 0.42-0.54s and
+shipped its hook at x1.00 for the same reason. Capping every pause at 0.32s buys
+about a second of runtime and costs the whole rhythm.
+
+⛔ **And measure it, because the ear is not the first check available.** The scan
+is fifteen lines of numpy: `abs(diff(samples))` per 20ms window against that
+window's own RMS. Anything over ~6x is a splice you can hear. Run it on the raw,
+on every intermediate, and on the delivered mix.

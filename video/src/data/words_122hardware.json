@@ -1,0 +1,1302 @@
+[
+{
+"start": 0.0,
+"end": 0.04,
+"word": " What"
+},
+{
+"start": 0.075,
+"end": 0.115,
+"word": " would"
+},
+{
+"start": 0.15,
+"end": 0.23,
+"word": " it"
+},
+{
+"start": 0.23,
+"end": 0.47,
+"word": " cost"
+},
+{
+"start": 0.305,
+"end": 0.42,
+"word": " to"
+},
+{
+"start": 0.42,
+"end": 0.54,
+"word": " run"
+},
+{
+"start": 0.54,
+"end": 0.8,
+"word": " Claude"
+},
+{
+"start": 0.76,
+"end": 1.08,
+"word": " locally?"
+},
+{
+"start": 1.76,
+"end": 1.96,
+"word": " First,"
+},
+{
+"start": 2.06,
+"end": 2.34,
+"word": " Anthropic"
+},
+{
+"start": 2.34,
+"end": 2.46,
+"word": " has"
+},
+{
+"start": 2.415,
+"end": 2.49,
+"word": " never"
+},
+{
+"start": 2.49,
+"end": 2.79,
+"word": " published"
+},
+{
+"start": 2.79,
+"end": 2.95,
+"word": " the"
+},
+{
+"start": 2.95,
+"end": 3.07,
+"word": " weights"
+},
+{
+"start": 3.06,
+"end": 3.22,
+"word": " for"
+},
+{
+"start": 3.22,
+"end": 3.42,
+"word": " Opus"
+},
+{
+"start": 3.42,
+"end": 3.64,
+"word": " 5,"
+},
+{
+"start": 3.7,
+"end": 3.8,
+"word": " so"
+},
+{
+"start": 3.8,
+"end": 3.94,
+"word": " you"
+},
+{
+"start": 3.94,
+"end": 4.16,
+"word": " literally"
+},
+{
+"start": 4.3,
+"end": 4.56,
+"word": " cannot"
+},
+{
+"start": 4.56,
+"end": 4.82,
+"word": " run"
+},
+{
+"start": 4.82,
+"end": 4.98,
+"word": " it"
+},
+{
+"start": 4.98,
+"end": 5.14,
+"word": " even"
+},
+{
+"start": 5.08,
+"end": 5.24,
+"word": " if"
+},
+{
+"start": 5.24,
+"end": 5.34,
+"word": " you"
+},
+{
+"start": 5.34,
+"end": 5.54,
+"word": " wanted"
+},
+{
+"start": 5.76,
+"end": 6.14,
+"word": " to."
+},
+{
+"start": 6.17,
+"end": 6.25,
+"word": " But"
+},
+{
+"start": 6.25,
+"end": 6.41,
+"word": " let's"
+},
+{
+"start": 6.41,
+"end": 6.53,
+"word": " look"
+},
+{
+"start": 6.485,
+"end": 6.525,
+"word": " at"
+},
+{
+"start": 6.56,
+"end": 6.6,
+"word": " the"
+},
+{
+"start": 6.635,
+"end": 6.79,
+"word": " closest"
+},
+{
+"start": 6.71,
+"end": 7.08,
+"word": " equivalent,"
+},
+{
+"start": 7.24,
+"end": 7.44,
+"word": " Moonshot"
+},
+{
+"start": 7.44,
+"end": 7.78,
+"word": " AI's"
+},
+{
+"start": 7.97,
+"end": 8.13,
+"word": " Kimi"
+},
+{
+"start": 8.13,
+"end": 8.49,
+"word": " K3."
+},
+{
+"start": 8.78,
+"end": 8.9,
+"word": " That"
+},
+{
+"start": 8.9,
+"end": 9.1,
+"word": " model"
+},
+{
+"start": 9.1,
+"end": 9.26,
+"word": " is"
+},
+{
+"start": 9.26,
+"end": 9.74,
+"word": " 2.8"
+},
+{
+"start": 9.55,
+"end": 9.89,
+"word": " trillion"
+},
+{
+"start": 9.89,
+"end": 10.35,
+"word": " parameters."
+},
+{
+"start": 10.89,
+"end": 10.99,
+"word": " To"
+},
+{
+"start": 10.99,
+"end": 11.25,
+"word": " actually"
+},
+{
+"start": 11.25,
+"end": 11.41,
+"word": " fit"
+},
+{
+"start": 11.33,
+"end": 11.45,
+"word": " that,"
+},
+{
+"start": 11.51,
+"end": 11.55,
+"word": " you"
+},
+{
+"start": 11.585,
+"end": 11.71,
+"word": " need"
+},
+{
+"start": 11.78,
+"end": 12.0,
+"word": " seven"
+},
+{
+"start": 12.0,
+"end": 12.34,
+"word": " RTX"
+},
+{
+"start": 12.34,
+"end": 12.56,
+"word": " Pro"
+},
+{
+"start": 12.415,
+"end": 12.73,
+"word": " 6000"
+},
+{
+"start": 12.73,
+"end": 13.03,
+"word": " graphics"
+},
+{
+"start": 13.03,
+"end": 13.43,
+"word": " cards."
+},
+{
+"start": 13.88,
+"end": 14.02,
+"word": " And"
+},
+{
+"start": 14.02,
+"end": 14.16,
+"word": " right"
+},
+{
+"start": 14.16,
+"end": 14.32,
+"word": " now"
+},
+{
+"start": 14.34,
+"end": 14.52,
+"word": " those"
+},
+{
+"start": 14.52,
+"end": 14.72,
+"word": " cards"
+},
+{
+"start": 14.72,
+"end": 14.9,
+"word": " are"
+},
+{
+"start": 14.795,
+"end": 15.01,
+"word": " 16,000"
+},
+{
+"start": 15.01,
+"end": 15.47,
+"word": " dollars"
+},
+{
+"start": 15.47,
+"end": 15.91,
+"word": " each."
+},
+{
+"start": 16.4,
+"end": 16.64,
+"word": " That's"
+},
+{
+"start": 16.64,
+"end": 16.76,
+"word": " over"
+},
+{
+"start": 16.76,
+"end": 17.18,
+"word": " 110,000"
+},
+{
+"start": 17.04,
+"end": 17.54,
+"word": " dollars"
+},
+{
+"start": 17.54,
+"end": 17.84,
+"word": " in"
+},
+{
+"start": 17.84,
+"end": 18.1,
+"word": " graphics"
+},
+{
+"start": 18.12,
+"end": 18.34,
+"word": " cards"
+},
+{
+"start": 18.34,
+"end": 18.58,
+"word": " alone"
+},
+{
+"start": 18.58,
+"end": 18.88,
+"word": " before"
+},
+{
+"start": 18.87,
+"end": 19.03,
+"word": " you"
+},
+{
+"start": 19.03,
+"end": 19.17,
+"word": " even"
+},
+{
+"start": 19.17,
+"end": 19.37,
+"word": " buy"
+},
+{
+"start": 19.3,
+"end": 19.42,
+"word": " a"
+},
+{
+"start": 19.42,
+"end": 19.76,
+"word": " motherboard."
+},
+{
+"start": 19.84,
+"end": 19.94,
+"word": " And"
+},
+{
+"start": 19.94,
+"end": 20.02,
+"word": " then"
+},
+{
+"start": 20.02,
+"end": 20.18,
+"word": " there's"
+},
+{
+"start": 20.41,
+"end": 20.49,
+"word": " the"
+},
+{
+"start": 20.49,
+"end": 20.79,
+"word": " electric"
+},
+{
+"start": 20.79,
+"end": 21.03,
+"word": " bill."
+},
+{
+"start": 21.26,
+"end": 21.42,
+"word": " So"
+},
+{
+"start": 21.42,
+"end": 21.54,
+"word": " you'll"
+},
+{
+"start": 21.54,
+"end": 21.62,
+"word": " need"
+},
+{
+"start": 21.615,
+"end": 21.72,
+"word": " to"
+},
+{
+"start": 21.72,
+"end": 21.86,
+"word": " pull"
+},
+{
+"start": 21.86,
+"end": 22.0,
+"word": " in"
+},
+{
+"start": 22.0,
+"end": 22.64,
+"word": " 4.2"
+},
+{
+"start": 22.43,
+"end": 22.91,
+"word": " kilowatts."
+},
+{
+"start": 23.14,
+"end": 23.34,
+"word": " If"
+},
+{
+"start": 23.34,
+"end": 23.44,
+"word": " you"
+},
+{
+"start": 23.44,
+"end": 23.56,
+"word": " leave"
+},
+{
+"start": 23.515,
+"end": 23.59,
+"word": " them"
+},
+{
+"start": 23.59,
+"end": 23.79,
+"word": " running"
+},
+{
+"start": 23.79,
+"end": 24.33,
+"word": " 24-7"
+},
+{
+"start": 24.33,
+"end": 24.49,
+"word": " at"
+},
+{
+"start": 24.49,
+"end": 24.61,
+"word": " the"
+},
+{
+"start": 24.61,
+"end": 24.87,
+"word": " US"
+},
+{
+"start": 24.85,
+"end": 25.15,
+"word": " average"
+},
+{
+"start": 25.15,
+"end": 25.61,
+"word": " electricity"
+},
+{
+"start": 25.61,
+"end": 25.79,
+"word": " rate,"
+},
+{
+"start": 26.22,
+"end": 26.34,
+"word": " you're"
+},
+{
+"start": 26.34,
+"end": 26.5,
+"word": " paying"
+},
+{
+"start": 26.5,
+"end": 27.12,
+"word": " 565"
+},
+{
+"start": 26.76,
+"end": 26.8,
+"word": " dollars"
+},
+{
+"start": 26.835,
+"end": 27.44,
+"word": " a"
+},
+{
+"start": 27.44,
+"end": 27.6,
+"word": " month"
+},
+{
+"start": 27.58,
+"end": 27.82,
+"word": " just"
+},
+{
+"start": 27.82,
+"end": 27.96,
+"word": " to"
+},
+{
+"start": 27.96,
+"end": 28.1,
+"word": " power"
+},
+{
+"start": 28.23,
+"end": 28.35,
+"word": " the"
+},
+{
+"start": 28.35,
+"end": 28.65,
+"word": " GPUs."
+},
+{
+"start": 28.57,
+"end": 28.99,
+"word": " But"
+},
+{
+"start": 28.99,
+"end": 29.23,
+"word": " here's"
+},
+{
+"start": 29.23,
+"end": 29.37,
+"word": " the"
+},
+{
+"start": 29.37,
+"end": 29.57,
+"word": " real"
+},
+{
+"start": 29.57,
+"end": 30.01,
+"word": " problem."
+},
+{
+"start": 30.5,
+"end": 30.58,
+"word": " One"
+},
+{
+"start": 30.58,
+"end": 30.7,
+"word": " guy"
+},
+{
+"start": 30.7,
+"end": 31.08,
+"word": " actually"
+},
+{
+"start": 31.05,
+"end": 31.29,
+"word": " tried"
+},
+{
+"start": 31.29,
+"end": 31.53,
+"word": " renting"
+},
+{
+"start": 31.53,
+"end": 31.71,
+"word": " a"
+},
+{
+"start": 31.71,
+"end": 31.97,
+"word": " massive"
+},
+{
+"start": 32.0,
+"end": 32.26,
+"word": " server"
+},
+{
+"start": 32.26,
+"end": 32.4,
+"word": " to"
+},
+{
+"start": 32.4,
+"end": 32.52,
+"word": " run"
+},
+{
+"start": 32.475,
+"end": 32.515,
+"word": " this"
+},
+{
+"start": 32.55,
+"end": 32.67,
+"word": " model,"
+},
+{
+"start": 32.67,
+"end": 32.79,
+"word": " and"
+},
+{
+"start": 32.79,
+"end": 32.85,
+"word": " he"
+},
+{
+"start": 32.865,
+"end": 32.96,
+"word": " got"
+},
+{
+"start": 32.96,
+"end": 33.64,
+"word": " 0.1"
+},
+{
+"start": 33.64,
+"end": 33.88,
+"word": " tokens"
+},
+{
+"start": 33.89,
+"end": 34.07,
+"word": " per"
+},
+{
+"start": 34.07,
+"end": 34.29,
+"word": " second"
+},
+{
+"start": 34.29,
+"end": 34.51,
+"word": " because"
+},
+{
+"start": 34.65,
+"end": 34.81,
+"word": " his"
+},
+{
+"start": 34.81,
+"end": 35.08,
+"word": " GPUs"
+},
+{
+"start": 35.08,
+"end": 35.35,
+"word": " sat"
+},
+{
+"start": 35.34,
+"end": 35.5,
+"word": " at"
+},
+{
+"start": 35.5,
+"end": 35.66,
+"word": " 1"
+},
+{
+"start": 35.66,
+"end": 35.88,
+"word": " percent"
+},
+{
+"start": 35.75,
+"end": 36.29,
+"word": " utilization."
+},
+{
+"start": 36.86,
+"end": 37.04,
+"word": " Why?"
+},
+{
+"start": 37.46,
+"end": 37.58,
+"word": " And"
+},
+{
+"start": 37.58,
+"end": 37.72,
+"word": " it's"
+},
+{
+"start": 37.72,
+"end": 37.88,
+"word": " because"
+},
+{
+"start": 37.795,
+"end": 37.835,
+"word": " of"
+},
+{
+"start": 37.87,
+"end": 38.02,
+"word": " memory"
+},
+{
+"start": 38.02,
+"end": 38.38,
+"word": " bandwidth."
+},
+{
+"start": 38.55,
+"end": 38.63,
+"word": " He"
+},
+{
+"start": 38.63,
+"end": 38.71,
+"word": " had"
+},
+{
+"start": 38.71,
+"end": 38.89,
+"word": " enough"
+},
+{
+"start": 39.14,
+"end": 39.34,
+"word": " memory"
+},
+{
+"start": 39.34,
+"end": 39.48,
+"word": " to"
+},
+{
+"start": 39.48,
+"end": 39.62,
+"word": " store"
+},
+{
+"start": 39.555,
+"end": 39.66,
+"word": " the"
+},
+{
+"start": 39.66,
+"end": 39.88,
+"word": " massive"
+},
+{
+"start": 39.88,
+"end": 40.14,
+"word": " model,"
+},
+{
+"start": 40.03,
+"end": 40.17,
+"word": " but"
+},
+{
+"start": 40.17,
+"end": 40.31,
+"word": " his"
+},
+{
+"start": 40.31,
+"end": 40.55,
+"word": " system"
+},
+{
+"start": 40.54,
+"end": 41.0,
+"word": " physically"
+},
+{
+"start": 41.0,
+"end": 41.26,
+"word": " cannot"
+},
+{
+"start": 41.26,
+"end": 41.4,
+"word": " move"
+},
+{
+"start": 41.63,
+"end": 41.73,
+"word": " the"
+},
+{
+"start": 41.73,
+"end": 41.95,
+"word": " data"
+},
+{
+"start": 41.95,
+"end": 42.15,
+"word": " fast"
+},
+{
+"start": 42.025,
+"end": 42.16,
+"word": " enough"
+},
+{
+"start": 42.16,
+"end": 42.32,
+"word": " to"
+},
+{
+"start": 42.32,
+"end": 42.58,
+"word": " generate"
+},
+{
+"start": 42.48,
+"end": 42.64,
+"word": " the"
+},
+{
+"start": 42.64,
+"end": 42.92,
+"word": " text."
+},
+{
+"start": 43.43,
+"end": 43.61,
+"word": " Meanwhile,"
+},
+{
+"start": 43.65,
+"end": 43.89,
+"word": " using"
+},
+{
+"start": 43.89,
+"end": 44.17,
+"word": " Opus"
+},
+{
+"start": 43.98,
+"end": 44.14,
+"word": " 5"
+},
+{
+"start": 44.14,
+"end": 44.3,
+"word": " for"
+},
+{
+"start": 44.3,
+"end": 44.46,
+"word": " an"
+},
+{
+"start": 44.46,
+"end": 44.6,
+"word": " hour"
+},
+{
+"start": 44.62,
+"end": 44.76,
+"word": " of"
+},
+{
+"start": 44.76,
+"end": 45.08,
+"word": " intense"
+},
+{
+"start": 45.08,
+"end": 45.32,
+"word": " coding"
+},
+{
+"start": 45.34,
+"end": 45.56,
+"word": " costs"
+},
+{
+"start": 45.56,
+"end": 45.78,
+"word": " about"
+},
+{
+"start": 45.78,
+"end": 46.1,
+"word": " 70"
+},
+{
+"start": 46.06,
+"end": 46.36,
+"word": " cents."
+},
+{
+"start": 46.87,
+"end": 46.97,
+"word": " Now"
+},
+{
+"start": 46.97,
+"end": 47.07,
+"word": " there"
+},
+{
+"start": 47.07,
+"end": 47.15,
+"word": " are"
+},
+{
+"start": 47.145,
+"end": 47.185,
+"word": " only"
+},
+{
+"start": 47.22,
+"end": 47.39,
+"word": " three"
+},
+{
+"start": 47.39,
+"end": 47.65,
+"word": " reasons"
+},
+{
+"start": 47.73,
+"end": 47.87,
+"word": " to"
+},
+{
+"start": 47.87,
+"end": 48.03,
+"word": " ever"
+},
+{
+"start": 48.03,
+"end": 48.19,
+"word": " run"
+},
+{
+"start": 48.105,
+"end": 48.19,
+"word": " this"
+},
+{
+"start": 48.19,
+"end": 48.49,
+"word": " locally."
+},
+{
+"start": 49.02,
+"end": 49.12,
+"word": " First,"
+},
+{
+"start": 49.16,
+"end": 49.58,
+"word": " industrial"
+},
+{
+"start": 49.58,
+"end": 49.86,
+"word": " volume,"
+},
+{
+"start": 49.7,
+"end": 49.8,
+"word": " where"
+},
+{
+"start": 49.8,
+"end": 49.84,
+"word": " you"
+},
+{
+"start": 49.875,
+"end": 49.98,
+"word": " can"
+},
+{
+"start": 50.08,
+"end": 50.4,
+"word": " process"
+},
+{
+"start": 50.4,
+"end": 50.74,
+"word": " millions"
+},
+{
+"start": 50.74,
+"end": 50.96,
+"word": " of"
+},
+{
+"start": 50.96,
+"end": 51.18,
+"word": " tokens"
+},
+{
+"start": 51.09,
+"end": 51.27,
+"word": " per"
+},
+{
+"start": 51.27,
+"end": 51.47,
+"word": " day."
+},
+{
+"start": 51.89,
+"end": 52.15,
+"word": " Second,"
+},
+{
+"start": 52.23,
+"end": 52.27,
+"word": " if"
+},
+{
+"start": 52.305,
+"end": 52.345,
+"word": " you"
+},
+{
+"start": 52.38,
+"end": 52.43,
+"word": " have"
+},
+{
+"start": 52.455,
+"end": 52.495,
+"word": " strict"
+},
+{
+"start": 52.53,
+"end": 52.66,
+"word": " data"
+},
+{
+"start": 52.66,
+"end": 52.96,
+"word": " privacy,"
+},
+{
+"start": 52.88,
+"end": 53.06,
+"word": " like"
+},
+{
+"start": 53.06,
+"end": 53.34,
+"word": " healthcare"
+},
+{
+"start": 53.34,
+"end": 53.54,
+"word": " or"
+},
+{
+"start": 53.54,
+"end": 53.82,
+"word": " government."
+},
+{
+"start": 54.23,
+"end": 54.39,
+"word": " And"
+},
+{
+"start": 54.39,
+"end": 54.53,
+"word": " third,"
+},
+{
+"start": 54.465,
+"end": 54.505,
+"word": " if"
+},
+{
+"start": 54.54,
+"end": 54.58,
+"word": " you"
+},
+{
+"start": 54.615,
+"end": 54.77,
+"word": " actually"
+},
+{
+"start": 54.89,
+"end": 54.99,
+"word": " need"
+},
+{
+"start": 54.99,
+"end": 55.11,
+"word": " to"
+},
+{
+"start": 55.11,
+"end": 55.23,
+"word": " run"
+},
+{
+"start": 55.185,
+"end": 55.225,
+"word": " the"
+},
+{
+"start": 55.26,
+"end": 55.36,
+"word": " AI"
+},
+{
+"start": 55.36,
+"end": 55.6,
+"word": " agents"
+},
+{
+"start": 55.66,
+"end": 56.28,
+"word": " 24-7."
+},
+{
+"start": 56.43,
+"end": 56.65,
+"word": " If"
+},
+{
+"start": 56.65,
+"end": 56.81,
+"word": " none"
+},
+{
+"start": 56.81,
+"end": 56.91,
+"word": " of"
+},
+{
+"start": 56.91,
+"end": 56.99,
+"word": " these"
+},
+{
+"start": 57.1,
+"end": 57.34,
+"word": " apply"
+},
+{
+"start": 57.34,
+"end": 57.54,
+"word": " to"
+},
+{
+"start": 57.54,
+"end": 57.62,
+"word": " you,"
+},
+{
+"start": 57.62,
+"end": 57.76,
+"word": " paying"
+},
+{
+"start": 57.72,
+"end": 58.16,
+"word": " 112,000"
+},
+{
+"start": 58.16,
+"end": 58.8,
+"word": " dollars"
+},
+{
+"start": 58.8,
+"end": 58.96,
+"word": " for"
+},
+{
+"start": 58.96,
+"end": 59.18,
+"word": " hardware"
+},
+{
+"start": 59.13,
+"end": 59.29,
+"word": " that"
+},
+{
+"start": 59.29,
+"end": 59.47,
+"word": " loses"
+},
+{
+"start": 59.47,
+"end": 59.73,
+"word": " value"
+},
+{
+"start": 59.75,
+"end": 59.99,
+"word": " every"
+},
+{
+"start": 59.99,
+"end": 60.17,
+"word": " year"
+},
+{
+"start": 60.17,
+"end": 60.37,
+"word": " makes"
+},
+{
+"start": 60.51,
+"end": 60.73,
+"word": " no"
+},
+{
+"start": 60.73,
+"end": 60.95,
+"word": " sense."
+}
+]

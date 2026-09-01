@@ -292,8 +292,22 @@ const ProgressBarInner: React.FC = () => {
 // house-canonical SECTION HEADER pill (router-reel style): a white card with an emoji/icon
 // BADGE + two bold lines (hot line in clay), sitting just under the status rail on the
 // screen's top edge. Every section gets one; snaps in at the scene's start.
-export const SectionHeader: React.FC<{ f?: number; badge: React.ReactNode; l1: React.ReactNode; l2: React.ReactNode; size?: number; hero?: boolean; badgeBg?: string; badgeBorder?: string }> = ({ f = 0, badge, l1, l2, size = 46, hero = false, badgeBg, badgeBorder }) => {
-  const settle = over(f, 0, fr(0.34), Easing.out(Easing.back(1.3)));
+export const SectionHeader: React.FC<{ f?: number; badge: React.ReactNode; l1: React.ReactNode; l2: React.ReactNode; size?: number; hero?: boolean; badgeBg?: string; badgeBorder?: string; at0?: boolean }> = ({ f = 0, badge, l1, l2, size = 46, hero = false, badgeBg, badgeBorder, at0 = false }) => {
+  /* ⛔⛔⛔ `at0` — THE FIRST HEADER OF A REEL IS PRESENT ON FRAME 0, NOT ANIMATED
+     ONTO IT. This settle ramps opacity 0 -> 1 with a back-ease over 0.34s, and
+     because the same component draws every SECTION BAND it also drew the very
+     first one, so every reel in the house opened on a frame with NO HEADER and
+     popped one in at ~0.2s. Asked for directly on reel 124: *"make sure the hook
+     header is there since 0:00 of the video? not just coming in at around like
+     0.2 seconds ish"*.
+     ⭐ IT IS THE FRAME-0 LAW, not a taste call. THE-OPEN law 1 wants frame 0
+     SETTLED AND LEGIBLE — the one frame a scroller actually sees — and a reel
+     whose claim is still fading up has spent it. It is also free luma: the pill
+     is a large white object, and every reel's HOOK_LUMA reading was taken
+     against a frame that did not yet contain it.
+     ⛔ PASS IT ONLY ON THE FIRST BAND. A mid-reel band change still wants the
+     pop; that one is not frame 0 and nothing is lost by animating it. */
+  const settle = at0 ? 1 : over(f, 0, fr(0.34), Easing.out(Easing.back(1.3)));
   return (
     <div style={{ position: "absolute", left: 0, right: 0, top: 322, display: "flex", justifyContent: "center", zIndex: 200, opacity: Math.min(1, settle), transform: `translateY(${(1 - settle) * -16}px) scale(${0.9 + settle * 0.1})` }}>
       <div style={{ display: "inline-flex", alignItems: "center", gap: hero ? 18 : 15, padding: hero ? "18px 40px 18px 18px" : "12px 28px 12px 12px", borderRadius: hero ? 32 : 28, background: "linear-gradient(180deg,#FFFFFF,#F4EEE2)", border: hero ? "4px solid #ECE5D6" : "3px solid #ECE5D6", boxShadow: "0 26px 56px -14px rgba(20,26,45,0.55), inset 0 2px 0 rgba(255,255,255,0.95)" }}>
@@ -308,7 +322,7 @@ export const SectionHeader: React.FC<{ f?: number; badge: React.ReactNode; l1: R
 };
 
 // the HOOK header = a BIGGER hero SectionHeader with the OFFICIAL orange Claude logo on a WHITE badge.
-export const HookHeader: React.FC<{ big: string; hot: string; f?: number }> = ({ big, hot, f = 0 }) => {
+export const HookHeader: React.FC<{ big: string; hot: string; f?: number; at0?: boolean }> = ({ big, hot, f = 0, at0 = false }) => {
   /* ⛔ AUTO-FIT. At size 56 the header holds about 22 characters before it runs
      off the panel — "THE MAN WHO BUILT CLAUDE CODE" (29) was clipped mid-word on
      the very first frame. Scale to the longer of the two lines rather than
@@ -316,7 +330,7 @@ export const HookHeader: React.FC<{ big: string; hot: string; f?: number }> = ({
   const longest = Math.max(big.length, hot.length);
   const size = Math.round(Math.max(38, Math.min(56, 56 * 22 / longest)));
   return (
-    <SectionHeader f={f} hero size={size} badgeBg="#FFFFFF" badgeBorder="#EDE7DB"
+    <SectionHeader f={f} at0={at0} hero size={size} badgeBg="#FFFFFF" badgeBorder="#EDE7DB"
       badge={<Img src={staticFile("claude_logo.png")} style={{ width: 84, height: 84, objectFit: "contain" }} />}
       l1={<span>{big}</span>} l2={<span style={{ color: CLAY }}>{hot}</span>} />
   );
@@ -444,9 +458,24 @@ const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: numb
     const widths = clines.map((l) => measure(l.words)).sort((a, b) => a - b);
     const p95 = widths.length ? widths[Math.floor((widths.length - 1) * 0.95)] : 0;
     const base = p95 > SAFE ? SAFE / p95 : 1;
+    /* ⛔⛔ ...AND AN OUTLIER STILL SHRANK TOO FAR. Reel 124: "automatically
+       remembers your projects" is FOUR words and 34 characters, because the
+       dangle rule refuses to end a line on "your" and takes a fourth word
+       instead. Measured off the render, it genuinely needs 1513px in a 1080
+       frame, so the honest fit was 42px against the reel's 63px base — a third
+       smaller, and visible as a size change mid-reel, which is the exact note
+       this whole block exists to prevent.
+       ⭐ A FLOOR AT 0.80 OF BASE. The pathological line is allowed to overrun
+       the 904px container and use the frame instead (it is a transform, not a
+       layout box, so it simply gets wider) and it stops at 50px rather than 42.
+       0.80 is not arbitrary: at the widest line this repo has produced it puts
+       the rendered width at 1070px, i.e. inside 1080 with room to spare.
+       ⛔ GROUPING IS STILL UNTOUCHED — build_captions.py reproduces it to anchor
+       every line to a measured onset, and changing it would desync every reel. */
+    const FLOOR = 0.80;
     return (l: typeof clines[number]) => {
       const w = measure(l.words);
-      return Math.min(base, w > SAFE ? SAFE / w : 1);
+      return Math.max(base * FLOOR, Math.min(base, w > SAFE ? SAFE / w : 1));
     };
   }, [clines]);
   const shrink = shrinkFor(cur);

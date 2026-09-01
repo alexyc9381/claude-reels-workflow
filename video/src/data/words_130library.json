@@ -1,0 +1,622 @@
+[
+{
+"start": 0.0,
+"end": 0.58,
+"word": " Anthropic"
+},
+{
+"start": 0.58,
+"end": 0.72,
+"word": " just"
+},
+{
+"start": 0.72,
+"end": 1.0,
+"word": " released"
+},
+{
+"start": 0.97,
+"end": 1.11,
+"word": " their"
+},
+{
+"start": 1.11,
+"end": 1.45,
+"word": " official"
+},
+{
+"start": 1.45,
+"end": 1.73,
+"word": " Claude"
+},
+{
+"start": 1.54,
+"end": 1.7,
+"word": " Code"
+},
+{
+"start": 1.7,
+"end": 1.92,
+"word": " prompt"
+},
+{
+"start": 1.92,
+"end": 2.26,
+"word": " library"
+},
+{
+"start": 2.36,
+"end": 2.48,
+"word": " and"
+},
+{
+"start": 2.48,
+"end": 2.68,
+"word": " it's"
+},
+{
+"start": 2.68,
+"end": 3.04,
+"word": " completely"
+},
+{
+"start": 2.95,
+"end": 3.33,
+"word": " free."
+},
+{
+"start": 3.84,
+"end": 3.96,
+"word": " And"
+},
+{
+"start": 3.96,
+"end": 4.08,
+"word": " these"
+},
+{
+"start": 4.08,
+"end": 4.18,
+"word": " aren't"
+},
+{
+"start": 4.155,
+"end": 4.195,
+"word": " just"
+},
+{
+"start": 4.23,
+"end": 4.37,
+"word": " some"
+},
+{
+"start": 4.37,
+"end": 4.59,
+"word": " random"
+},
+{
+"start": 4.5,
+"end": 4.86,
+"word": " prompts,"
+},
+{
+"start": 4.96,
+"end": 5.14,
+"word": " these"
+},
+{
+"start": 5.14,
+"end": 5.26,
+"word": " are"
+},
+{
+"start": 5.27,
+"end": 5.39,
+"word": " the"
+},
+{
+"start": 5.39,
+"end": 5.73,
+"word": " exact"
+},
+{
+"start": 5.73,
+"end": 6.01,
+"word": " four"
+},
+{
+"start": 6.11,
+"end": 6.37,
+"word": " rules"
+},
+{
+"start": 6.37,
+"end": 6.87,
+"word": " Anthropic's"
+},
+{
+"start": 6.87,
+"end": 7.01,
+"word": " own"
+},
+{
+"start": 6.945,
+"end": 7.23,
+"word": " engineers"
+},
+{
+"start": 7.23,
+"end": 7.47,
+"word": " use"
+},
+{
+"start": 7.47,
+"end": 7.65,
+"word": " when"
+},
+{
+"start": 7.75,
+"end": 7.99,
+"word": " working"
+},
+{
+"start": 7.99,
+"end": 8.19,
+"word": " with"
+},
+{
+"start": 8.19,
+"end": 8.37,
+"word": " Claude"
+},
+{
+"start": 8.265,
+"end": 8.49,
+"word": " Code."
+},
+{
+"start": 8.97,
+"end": 9.19,
+"word": " First,"
+},
+{
+"start": 9.27,
+"end": 9.31,
+"word": " you"
+},
+{
+"start": 9.345,
+"end": 9.45,
+"word": " need"
+},
+{
+"start": 9.72,
+"end": 9.78,
+"word": " to"
+},
+{
+"start": 9.795,
+"end": 9.96,
+"word": " teach"
+},
+{
+"start": 9.96,
+"end": 10.18,
+"word": " Claude"
+},
+{
+"start": 10.035,
+"end": 10.24,
+"word": " reusable"
+},
+{
+"start": 10.24,
+"end": 10.62,
+"word": " skills"
+},
+{
+"start": 10.62,
+"end": 10.78,
+"word": " with"
+},
+{
+"start": 10.78,
+"end": 11.02,
+"word": " slash"
+},
+{
+"start": 11.02,
+"end": 11.22,
+"word": " commands"
+},
+{
+"start": 11.22,
+"end": 11.48,
+"word": " instead"
+},
+{
+"start": 11.48,
+"end": 11.62,
+"word": " of"
+},
+{
+"start": 11.62,
+"end": 12.08,
+"word": " re-prompting"
+},
+{
+"start": 12.18,
+"end": 12.28,
+"word": " it"
+},
+{
+"start": 12.28,
+"end": 12.46,
+"word": " every"
+},
+{
+"start": 12.46,
+"end": 12.66,
+"word": " single"
+},
+{
+"start": 12.58,
+"end": 12.94,
+"word": " time."
+},
+{
+"start": 13.28,
+"end": 13.46,
+"word": " Second,"
+},
+{
+"start": 13.58,
+"end": 13.62,
+"word": " you"
+},
+{
+"start": 13.655,
+"end": 13.7,
+"word": " want"
+},
+{
+"start": 13.73,
+"end": 13.77,
+"word": " to"
+},
+{
+"start": 13.805,
+"end": 13.91,
+"word": " use"
+},
+{
+"start": 13.91,
+"end": 14.09,
+"word": " shift"
+},
+{
+"start": 14.37,
+"end": 14.61,
+"word": " tab"
+},
+{
+"start": 14.61,
+"end": 14.79,
+"word": " to"
+},
+{
+"start": 14.79,
+"end": 15.09,
+"word": " activate"
+},
+{
+"start": 14.87,
+"end": 15.11,
+"word": " plan"
+},
+{
+"start": 15.11,
+"end": 15.25,
+"word": " mode"
+},
+{
+"start": 15.32,
+"end": 15.44,
+"word": " and"
+},
+{
+"start": 15.44,
+"end": 15.58,
+"word": " it"
+},
+{
+"start": 15.58,
+"end": 15.74,
+"word": " maps"
+},
+{
+"start": 15.655,
+"end": 15.74,
+"word": " out"
+},
+{
+"start": 15.74,
+"end": 15.84,
+"word": " your"
+},
+{
+"start": 15.84,
+"end": 16.14,
+"word": " entire"
+},
+{
+"start": 16.13,
+"end": 16.47,
+"word": " project"
+},
+{
+"start": 16.47,
+"end": 16.71,
+"word": " before"
+},
+{
+"start": 16.71,
+"end": 16.97,
+"word": " writing"
+},
+{
+"start": 17.01,
+"end": 17.23,
+"word": " a"
+},
+{
+"start": 17.23,
+"end": 17.45,
+"word": " single"
+},
+{
+"start": 17.45,
+"end": 17.61,
+"word": " line"
+},
+{
+"start": 17.82,
+"end": 17.96,
+"word": " of"
+},
+{
+"start": 17.96,
+"end": 18.18,
+"word": " code."
+},
+{
+"start": 18.36,
+"end": 18.48,
+"word": " Third,"
+},
+{
+"start": 18.58,
+"end": 18.72,
+"word": " drop"
+},
+{
+"start": 18.72,
+"end": 18.9,
+"word": " a"
+},
+{
+"start": 18.9,
+"end": 19.28,
+"word": " CLAUDE.md"
+},
+{
+"start": 19.41,
+"end": 19.65,
+"word": " file"
+},
+{
+"start": 19.65,
+"end": 19.83,
+"word": " into"
+},
+{
+"start": 19.83,
+"end": 20.03,
+"word": " your"
+},
+{
+"start": 20.03,
+"end": 20.27,
+"word": " project"
+},
+{
+"start": 20.105,
+"end": 20.25,
+"word": " and"
+},
+{
+"start": 20.25,
+"end": 20.39,
+"word": " it"
+},
+{
+"start": 20.39,
+"end": 20.79,
+"word": " automatically"
+},
+{
+"start": 20.98,
+"end": 21.26,
+"word": " learns"
+},
+{
+"start": 21.26,
+"end": 21.44,
+"word": " your"
+},
+{
+"start": 21.44,
+"end": 21.6,
+"word": " naming"
+},
+{
+"start": 21.68,
+"end": 22.12,
+"word": " conventions,"
+},
+{
+"start": 22.36,
+"end": 22.54,
+"word": " libraries,"
+},
+{
+"start": 22.64,
+"end": 22.8,
+"word": " and"
+},
+{
+"start": 22.8,
+"end": 22.94,
+"word": " rules"
+},
+{
+"start": 22.875,
+"end": 22.93,
+"word": " for"
+},
+{
+"start": 22.95,
+"end": 23.19,
+"word": " every"
+},
+{
+"start": 23.19,
+"end": 23.51,
+"word": " single"
+},
+{
+"start": 23.44,
+"end": 23.78,
+"word": " session."
+},
+{
+"start": 24.16,
+"end": 24.28,
+"word": " But"
+},
+{
+"start": 24.28,
+"end": 24.46,
+"word": " here's"
+},
+{
+"start": 24.46,
+"end": 24.58,
+"word": " the"
+},
+{
+"start": 24.58,
+"end": 24.76,
+"word": " thing,"
+},
+{
+"start": 24.68,
+"end": 24.82,
+"word": " there's"
+},
+{
+"start": 24.82,
+"end": 25.0,
+"word": " already"
+},
+{
+"start": 25.0,
+"end": 25.24,
+"word": " over"
+},
+{
+"start": 25.43,
+"end": 25.6,
+"word": " a"
+},
+{
+"start": 25.6,
+"end": 25.77,
+"word": " hundred"
+},
+{
+"start": 25.77,
+"end": 26.03,
+"word": " free"
+},
+{
+"start": 25.98,
+"end": 26.3,
+"word": " templates"
+},
+{
+"start": 26.3,
+"end": 26.44,
+"word": " you"
+},
+{
+"start": 26.44,
+"end": 26.6,
+"word": " can"
+},
+{
+"start": 26.515,
+"end": 26.67,
+"word": " copy"
+},
+{
+"start": 26.67,
+"end": 26.89,
+"word": " right"
+},
+{
+"start": 26.89,
+"end": 27.05,
+"word": " now"
+},
+{
+"start": 27.18,
+"end": 27.38,
+"word": " inside"
+},
+{
+"start": 27.38,
+"end": 27.52,
+"word": " of"
+},
+{
+"start": 27.52,
+"end": 27.64,
+"word": " this"
+},
+{
+"start": 27.62,
+"end": 27.94,
+"word": " resource."
+},
+{
+"start": 28.09,
+"end": 28.25,
+"word": " Comment"
+},
+{
+"start": 28.25,
+"end": 28.59,
+"word": " LIBRARY"
+},
+{
+"start": 28.59,
+"end": 28.81,
+"word": " for"
+},
+{
+"start": 28.81,
+"end": 29.17,
+"word": " access."
+}
+]

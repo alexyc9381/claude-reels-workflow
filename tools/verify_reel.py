@@ -40,7 +40,7 @@ USAGE
 Exit 0 = all blocking checks pass. Exit 1 = at least one blocking check FAILED (do not ship).
 Needs ffmpeg on PATH or the project ffmpeg-static. No ffprobe, no numpy — stdlib + ffmpeg only.
 """
-import argparse, array, json, os, re, subprocess, sys, math
+import argparse, array, io, json, os, re, subprocess, sys, math
 
 # ---- ffmpeg discovery (no ffprobe on this machine — use ffmpeg for everything) ----------
 def _ffmpeg():
@@ -202,6 +202,13 @@ def check_captions(words, script, drift_tol):
                         "caption word starts must be monotonic (full drift gate = caption-sync-gate)",
                         blocking=False))
     if script:
+        # ⛔⛔ `--script` TAKES THE TEXT, AND A PATH IS VALID TEXT. Passing
+        # `--script vo/x/script.txt` normalises to the single word
+        # "voxscripttxt" and reports "1 diff" — a REAL-LOOKING ship block on a
+        # reel whose caption is word-for-word correct. It cost three runs on
+        # reel 127. If it names a file that exists, read it.
+        if "\n" not in script and len(script) < 400 and os.path.exists(script):
+            script = io.open(script, encoding="utf-8").read()
         got = " ".join(str(x.get("word", "")).strip() for x in w)
         # ⛔ A NEWLINE IS A WORD BOUNDARY. This stripped `[^a-z0-9 ]` first, which
         # DELETES "\n" rather than collapsing it, so a script file written one

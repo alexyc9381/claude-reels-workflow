@@ -1,0 +1,33 @@
+Comment "MEM" and I'll send you the free setup guide.
+
+👇 READ BELOW
+
+The second brain you have been maintaining by hand just got made redundant.
+
+Anthropic changed how Claude's memory works on August 25. It used to write one rolling summary after a conversation finished. It now writes individual files, grouped by topic, while the conversation is still happening.
+
+★ Memories are FILES, listed under Topics in Memory settings
+★ Read any of them, edit a line, delete one, or reset the lot
+★ Written DURING the chat, not summarised afterwards
+★ On by default on Free, Pro and Max, across web, desktop and mobile
+★ Chat and Cowork now share one memory instead of two separate ones
+
+That last line is the one that actually changes a workflow. Telling Claude how you work in chat used to do nothing for your Cowork tasks. They did not talk to each other. Now they do.
+
+The part nobody mentions: this is not really a memory feature, it is an EDITING feature. Assistants have claimed to remember you for two years and every one of them made it a black box. The difference here is that the box opens. If it has recorded something wrong about your stack, your clients or your writing, you open that file and correct it. Most people never will. The ones who do end up with something genuinely tuned to them, and the gap widens every week.
+
+Two honest notes.
+
+One: default-on applies to the consumer plans. Team and Enterprise are admin controlled and default OFF, so a work account showing nothing is working as intended.
+
+Two: sensitive topics are excluded by default. Health, race, ethnicity, religion, politics and gender identity stay out unless you opt in, and identification numbers, criminal history and immigration status are never stored.
+
+And the catch worth knowing before you turn it on. Cowork tasks get that shared memory because they run in the cloud. Set a task to work on local files and it runs on your machine instead, outside that path. A local task that behaves like a stranger is not broken, it is just not in the cloud.
+
+Comment "MEM" and I'll send you the setup guide, with what to put in it on day one.
+
+.
+.
+.
+
+#claudeai #claude #anthropic #claudecowork #aimemory #secondbrain #obsidian #notetaking #aitools #aiworkflow #productivity #promptengineering #aiassistant #buildinpublic #aiautomation #knowledgemanagement #pkm #aiforwork #llm #aiupdate

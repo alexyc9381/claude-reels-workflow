@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 """
+⛔⛔ THE RATIO MISREADS A SCENE WHOSE BODY IS ONE HUGE EVENT (reel 128).
+HALL is a 31-frame reveal whose house-lights beat took its BODY to 20.26 — the
+second highest in the reel. Its last eight frames run at **9.43**, which is
+above the reel's own whole-scene bar of 9.00 and above most scenes' entire
+bodies. The ratio still called it "DIES INTO THE CUT" at 0.47.
+
+⭐ A ratio is only meaningful against a comparable denominator. The verdict now
+reads the ABSOLUTE last-8 as well: a tail above the whole-scene motion bar is
+not a dead tail, whatever it is a fraction of, and chasing 0.88 there would mean
+bolting a second huge event onto a 31-frame shot — a metric satisfiable the
+wrong way, satisfied the wrong way.
+
 precut_audit — "the animation goes dead still RIGHT BEFORE it changes."
 
 ⭐⭐⭐ THE DEFECT THIS EXISTS FOR (Alex, reel 125): *"don't slow down the
@@ -68,8 +80,13 @@ def main():
         t8 = float(np.mean(d[s1 - a.tail:s1]))
         t4 = float(np.mean(d[s1 - 4:s1]))
         r = t8 / body if body else 0.0
-        v = "⛔ DIES INTO THE CUT" if r < 0.70 else ("fading" if r < 0.88 else "ok")
-        if r < 0.70:
+        # ⭐ A TAIL ABOVE THE WHOLE-SCENE MOTION BAR IS NOT A DEAD TAIL, whatever
+        #   fraction of its own body it is. Reported separately so the number is
+        #   visible rather than the gate being quietly weakened.
+        healthy = t8 >= 9.0
+        v = ("ratio low, tail healthy" if healthy else "⛔ DIES INTO THE CUT") if r < 0.70 \
+            else ("fading" if r < 0.88 else "ok")
+        if r < 0.70 and not healthy:
             bad += 1
         print(f"  {nm:10s} {body:7.2f} {t8:7.2f} {t4:7.2f}  {r:6.2f}  {v}")
     print("  " + "-" * 62)

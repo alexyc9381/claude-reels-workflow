@@ -1,0 +1,622 @@
+[
+{
+"start": 0.0,
+"end": 0.09,
+"word": " Most"
+},
+{
+"start": 0.09,
+"end": 0.25,
+"word": " people"
+},
+{
+"start": 0.25,
+"end": 0.43,
+"word": " don't"
+},
+{
+"start": 0.325,
+"end": 0.4,
+"word": " realize"
+},
+{
+"start": 0.4,
+"end": 0.62,
+"word": " that"
+},
+{
+"start": 0.62,
+"end": 0.7,
+"word": " Claude"
+},
+{
+"start": 0.84,
+"end": 0.98,
+"word": " just"
+},
+{
+"start": 0.98,
+"end": 1.2,
+"word": " dropped"
+},
+{
+"start": 1.2,
+"end": 1.42,
+"word": " slash"
+},
+{
+"start": 1.36,
+"end": 1.66,
+"word": " design"
+},
+{
+"start": 1.66,
+"end": 1.8,
+"word": " and"
+},
+{
+"start": 1.8,
+"end": 2.06,
+"word": " it's"
+},
+{
+"start": 2.06,
+"end": 2.58,
+"word": " absolutely"
+},
+{
+"start": 2.86,
+"end": 3.42,
+"word": " insane."
+},
+{
+"start": 3.6,
+"end": 3.76,
+"word": " So"
+},
+{
+"start": 3.76,
+"end": 3.88,
+"word": " it"
+},
+{
+"start": 3.88,
+"end": 4.24,
+"word": " completely"
+},
+{
+"start": 4.01,
+"end": 4.33,
+"word": " fixes"
+},
+{
+"start": 4.33,
+"end": 4.55,
+"word": " the"
+},
+{
+"start": 4.55,
+"end": 4.71,
+"word": " worst"
+},
+{
+"start": 5.03,
+"end": 5.25,
+"word": " part"
+},
+{
+"start": 5.25,
+"end": 5.39,
+"word": " of"
+},
+{
+"start": 5.39,
+"end": 5.57,
+"word": " AI"
+},
+{
+"start": 5.465,
+"end": 5.53,
+"word": " coding."
+},
+{
+"start": 5.91,
+"end": 6.11,
+"word": " Usually"
+},
+{
+"start": 6.11,
+"end": 6.27,
+"word": " when"
+},
+{
+"start": 6.27,
+"end": 6.35,
+"word": " you"
+},
+{
+"start": 6.35,
+"end": 6.53,
+"word": " ask"
+},
+{
+"start": 6.53,
+"end": 6.71,
+"word": " Claude"
+},
+{
+"start": 6.71,
+"end": 6.83,
+"word": " to"
+},
+{
+"start": 6.83,
+"end": 7.05,
+"word": " design,"
+},
+{
+"start": 7.0,
+"end": 7.04,
+"word": " you"
+},
+{
+"start": 7.075,
+"end": 7.14,
+"word": " get"
+},
+{
+"start": 7.15,
+"end": 7.3,
+"word": " an"
+},
+{
+"start": 7.3,
+"end": 7.6,
+"word": " ugly"
+},
+{
+"start": 7.74,
+"end": 8.06,
+"word": " generic"
+},
+{
+"start": 8.06,
+"end": 8.46,
+"word": " template."
+},
+{
+"start": 8.61,
+"end": 8.79,
+"word": " But"
+},
+{
+"start": 8.79,
+"end": 8.99,
+"word": " now"
+},
+{
+"start": 8.99,
+"end": 9.11,
+"word": " you"
+},
+{
+"start": 9.11,
+"end": 9.23,
+"word": " just"
+},
+{
+"start": 9.36,
+"end": 9.58,
+"word": " open"
+},
+{
+"start": 9.58,
+"end": 9.74,
+"word": " your"
+},
+{
+"start": 9.74,
+"end": 9.9,
+"word": " Claude"
+},
+{
+"start": 9.815,
+"end": 9.89,
+"word": " and"
+},
+{
+"start": 9.89,
+"end": 10.07,
+"word": " type"
+},
+{
+"start": 10.07,
+"end": 10.37,
+"word": " forward"
+},
+{
+"start": 10.37,
+"end": 10.65,
+"word": " slash"
+},
+{
+"start": 10.65,
+"end": 11.07,
+"word": " design,"
+},
+{
+"start": 11.35,
+"end": 11.45,
+"word": " and"
+},
+{
+"start": 11.45,
+"end": 11.61,
+"word": " this"
+},
+{
+"start": 11.54,
+"end": 11.8,
+"word": " connects"
+},
+{
+"start": 11.8,
+"end": 11.94,
+"word": " your"
+},
+{
+"start": 11.94,
+"end": 12.22,
+"word": " local"
+},
+{
+"start": 12.37,
+"end": 12.69,
+"word": " project"
+},
+{
+"start": 12.69,
+"end": 12.97,
+"word": " straight"
+},
+{
+"start": 12.84,
+"end": 13.0,
+"word": " to"
+},
+{
+"start": 13.0,
+"end": 13.16,
+"word": " a"
+},
+{
+"start": 13.16,
+"end": 13.42,
+"word": " visual"
+},
+{
+"start": 13.42,
+"end": 13.88,
+"word": " canvas."
+},
+{
+"start": 14.38,
+"end": 14.48,
+"word": " Then"
+},
+{
+"start": 14.48,
+"end": 14.56,
+"word": " you"
+},
+{
+"start": 14.56,
+"end": 14.72,
+"word": " run"
+},
+{
+"start": 14.66,
+"end": 15.0,
+"word": " slash"
+},
+{
+"start": 15.0,
+"end": 15.32,
+"word": " design"
+},
+{
+"start": 15.32,
+"end": 15.6,
+"word": " sync"
+},
+{
+"start": 15.52,
+"end": 15.74,
+"word": " so"
+},
+{
+"start": 15.74,
+"end": 15.94,
+"word": " Claude"
+},
+{
+"start": 15.94,
+"end": 16.26,
+"word": " actually"
+},
+{
+"start": 16.36,
+"end": 16.58,
+"word": " reads"
+},
+{
+"start": 16.58,
+"end": 16.68,
+"word": " your"
+},
+{
+"start": 16.68,
+"end": 17.0,
+"word": " existing"
+},
+{
+"start": 17.06,
+"end": 17.56,
+"word": " codebase."
+},
+{
+"start": 17.88,
+"end": 17.96,
+"word": " It"
+},
+{
+"start": 17.96,
+"end": 18.14,
+"word": " learns"
+},
+{
+"start": 18.14,
+"end": 18.26,
+"word": " your"
+},
+{
+"start": 18.26,
+"end": 18.56,
+"word": " exact"
+},
+{
+"start": 18.34,
+"end": 18.56,
+"word": " brand"
+},
+{
+"start": 18.56,
+"end": 18.86,
+"word": " colors"
+},
+{
+"start": 18.84,
+"end": 19.08,
+"word": " and"
+},
+{
+"start": 19.08,
+"end": 19.18,
+"word": " your"
+},
+{
+"start": 19.18,
+"end": 19.48,
+"word": " custom"
+},
+{
+"start": 19.48,
+"end": 19.86,
+"word": " parts."
+},
+{
+"start": 20.39,
+"end": 20.45,
+"word": " When"
+},
+{
+"start": 20.465,
+"end": 20.53,
+"word": " you"
+},
+{
+"start": 20.54,
+"end": 20.67,
+"word": " ask"
+},
+{
+"start": 20.69,
+"end": 20.79,
+"word": " it"
+},
+{
+"start": 20.79,
+"end": 20.91,
+"word": " to"
+},
+{
+"start": 20.91,
+"end": 21.03,
+"word": " build"
+},
+{
+"start": 20.985,
+"end": 21.025,
+"word": " a"
+},
+{
+"start": 21.06,
+"end": 21.1,
+"word": " new"
+},
+{
+"start": 21.135,
+"end": 21.32,
+"word": " page,"
+},
+{
+"start": 21.4,
+"end": 21.44,
+"word": " it"
+},
+{
+"start": 21.475,
+"end": 21.6,
+"word": " uses"
+},
+{
+"start": 21.6,
+"end": 21.74,
+"word": " your"
+},
+{
+"start": 21.74,
+"end": 22.1,
+"word": " existing"
+},
+{
+"start": 22.28,
+"end": 22.54,
+"word": " design"
+},
+{
+"start": 22.54,
+"end": 22.86,
+"word": " system"
+},
+{
+"start": 22.86,
+"end": 23.1,
+"word": " instead"
+},
+{
+"start": 23.08,
+"end": 23.24,
+"word": " of"
+},
+{
+"start": 23.24,
+"end": 23.52,
+"word": " guessing."
+},
+{
+"start": 23.87,
+"end": 23.99,
+"word": " And"
+},
+{
+"start": 23.99,
+"end": 24.07,
+"word": " you"
+},
+{
+"start": 24.07,
+"end": 24.21,
+"word": " can"
+},
+{
+"start": 24.21,
+"end": 24.39,
+"word": " fix"
+},
+{
+"start": 24.39,
+"end": 24.55,
+"word": " the"
+},
+{
+"start": 24.55,
+"end": 24.73,
+"word": " layout"
+},
+{
+"start": 24.91,
+"end": 25.07,
+"word": " by"
+},
+{
+"start": 25.07,
+"end": 25.23,
+"word": " just"
+},
+{
+"start": 25.23,
+"end": 25.51,
+"word": " clicking"
+},
+{
+"start": 25.305,
+"end": 25.38,
+"word": " and"
+},
+{
+"start": 25.38,
+"end": 25.58,
+"word": " dragging"
+},
+{
+"start": 25.58,
+"end": 25.84,
+"word": " until"
+},
+{
+"start": 25.99,
+"end": 26.07,
+"word": " you"
+},
+{
+"start": 26.07,
+"end": 26.17,
+"word": " get"
+},
+{
+"start": 26.17,
+"end": 26.33,
+"word": " the"
+},
+{
+"start": 26.33,
+"end": 26.59,
+"word": " perfect"
+},
+{
+"start": 26.47,
+"end": 26.85,
+"word": " result."
+},
+{
+"start": 27.17,
+"end": 27.29,
+"word": " Comment"
+},
+{
+"start": 27.29,
+"end": 27.65,
+"word": " DESIGN"
+},
+{
+"start": 27.66,
+"end": 27.86,
+"word": " for"
+},
+{
+"start": 27.86,
+"end": 28.0,
+"word": " the"
+},
+{
+"start": 28.0,
+"end": 28.14,
+"word": " free"
+},
+{
+"start": 28.14,
+"end": 28.42,
+"word": " guide."
+}
+]

@@ -1,0 +1,27 @@
+Comment "GOOGLE" and I'll send you the free guide.
+
+👇 READ BELOW
+
+Everyone spent this month arguing about Antigravity and Stitch. Google shipped about fifteen new AI tools in the same stretch, and four of the quiet ones will actually do work for you tonight.
+
+Nothing below is a wrapper or a waitlist. These are live Google Labs products you can open in a browser right now.
+
+→ JULES is an autonomous coding agent running on Gemini. You connect it to a GitHub repo and it works the backlog on its own: fixes bugs, writes tests, bumps dependencies, opens the pull requests. Asynchronous, so you are not sat watching it.
+
+→ OPAL turns a plain English description of a workflow into a working mini app you can share with a link. Drag and drop the steps, no code. If you have used n8n, it is the same job with the wiring done for you.
+
+→ MIXBOARD is an AI whiteboard. You drop images, notes and scraps onto a canvas and keep generating until the picture in your head is the picture on the board. It is built for the stage before you know what you want.
+
+→ POMELLI reads your actual website, builds a profile of your brand from it (tone, colours, fonts, imagery) and then writes and designs social posts and ads that match. You give it a URL, not a brief.
+
+Three honest notes, because a reel is forty seconds and this part is not.
+
+One: I say "video editor" about Opal in the voiceover and that is simply wrong, my mistake. Opal is a drag and drop WORKFLOW and mini app builder. Everything else in that line is right, and the animation shows what it actually does.
+
+Two: Mixboard and Pomelli do not publish product logos of their own. They both ship the generic Google Labs beaker, so the reel shows their names instead of inventing a mark for them. Small thing, but a wrong logo is worse than no logo.
+
+Three: "fifteen" is the round number going around and it is roughly right for the month, not an official Google count. The four above are the ones I would actually put in a workflow.
+
+The part nobody mentions: the reason you have not heard of these is not that they are worse. It is that Antigravity and Stitch are the ones that photograph well in a thread. Jules clearing a pull request backlog overnight is invisible, which is exactly why it is worth having.
+
+Comment "GOOGLE" and I'll send you the full list with what each one is genuinely good at, and the two I would skip.

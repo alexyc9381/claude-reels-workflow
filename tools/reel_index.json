@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 103,
-    "reels_total": 147,
+    "reels_with_code": 104,
+    "reels_total": 149,
     "factory_logs": 62,
-    "storyboards": 64,
-    "caption_jsons": 113,
-    "memory_md": 214,
+    "storyboards": 65,
+    "caption_jsons": 114,
+    "memory_md": 217,
     "creators": 8,
     "packs": 3
   },
@@ -235,6 +235,15 @@
       "captions": [
         "video/src/data/words_glm.json"
       ]
+    },
+    {
+      "key": "google129",
+      "name": "Google129",
+      "number": null,
+      "code": "video/src/ClaudeGoogle129Reel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": []
     },
     {
       "key": "haaland",
@@ -559,6 +568,7 @@
         "video/src/data/words_file.json",
         "video/src/data/words_free.json",
         "video/src/data/words_glm.json",
+        "video/src/data/words_google.json",
         "video/src/data/words_haaland.json",
         "video/src/data/words_hermes.json",
         "video/src/data/words_hermes_orig.json",
@@ -1564,7 +1574,8 @@
       "log": null,
       "storyboard": "storyboards/113-go.md",
       "captions": [
-        "video/src/data/words_113go.json"
+        "video/src/data/words_113go.json",
+        "video/src/data/words_google.json"
       ]
     },
     {
@@ -1655,6 +1666,17 @@
       "log": "memory/reels/auto125-factory-log.md",
       "storyboard": "storyboards/125-auto.md",
       "captions": []
+    },
+    {
+      "key": "google",
+      "name": "google",
+      "number": 129,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/129-google.md",
+      "captions": [
+        "video/src/data/words_google.json"
+      ]
     }
   ]
 }

@@ -1,0 +1,33 @@
+Comment "MEM" and I'll send you the free setup guide.
+
+👇 READ BELOW
+
+Claude stopped forgetting you. It now writes its own notes while you are still talking.
+
+Anthropic shipped this on August 25. Memory used to be one rolling summary written after a conversation ended. It is now a set of individual files, grouped by topic, that Claude adds to as you chat.
+
+★ Your memories live as FILES under Topics in Memory settings
+★ You can read, edit or delete any one of them, or reset the whole thing
+★ It writes DURING the conversation now, not as a summary afterwards
+★ On by default on Free, Pro and Max, across web, desktop and mobile
+★ Chat and Cowork finally share one memory, so what it learns in one shows up in the other
+
+That last one is the change people are underrating. Before this, telling Claude how you work in chat did nothing for your Cowork tasks. Now it is one brain.
+
+The part nobody mentions: the interesting bit is not that it remembers, it is that you can OPEN it. Every other assistant that claims memory gives you a black box and asks you to trust it. This one hands you the filing cabinet. If it wrote down something wrong about your stack, your clients or your writing style, you go into Topics, find that file, and fix the line. Most people will never do it. The ones who do will get an assistant that is genuinely calibrated to them inside a week.
+
+Two honest notes.
+
+One: it is on by default on the consumer plans. On Team and Enterprise the admin controls it and it defaults OFF, so if you are on a work account and nothing is showing up, that is why.
+
+Two: sensitive topics are excluded by default. Health, race, ethnicity, religion, politics and gender identity are not saved unless you turn them on yourself, and identification numbers, criminal history and immigration status are never saved at all.
+
+And the catch, which is the whole reason I made this: Cowork tasks carry that memory because they run in the cloud. Set a task to work on files on your own machine and it runs there instead, outside that path. If you have wondered why a local task behaves like it has never met you, that is it.
+
+Comment "MEM" and I'll send you the setup guide, with what to put in it on day one.
+
+.
+.
+.
+
+#claudeai #claude #anthropic #claudecowork #aimemory #secondbrain #obsidian #notetaking #aitools #aiworkflow #productivity #promptengineering #aiassistant #buildinpublic #aiautomation #knowledgemanagement #pkm #aiforwork #llm #aiupdate

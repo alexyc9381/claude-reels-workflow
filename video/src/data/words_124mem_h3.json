@@ -1,0 +1,802 @@
+[
+ {
+  "start": 0.0,
+  "end": 0.04,
+  "word": " So"
+ },
+ {
+  "start": 0.075,
+  "end": 0.34,
+  "word": " Anthropic"
+ },
+ {
+  "start": 0.34,
+  "end": 0.52,
+  "word": " just"
+ },
+ {
+  "start": 0.415,
+  "end": 0.61,
+  "word": " quietly"
+ },
+ {
+  "start": 0.61,
+  "end": 0.81,
+  "word": " drops"
+ },
+ {
+  "start": 0.81,
+  "end": 0.97,
+  "word": " an"
+ },
+ {
+  "start": 0.97,
+  "end": 1.13,
+  "word": " update"
+ },
+ {
+  "start": 1.21,
+  "end": 1.35,
+  "word": " that"
+ },
+ {
+  "start": 1.35,
+  "end": 1.61,
+  "word": " turns"
+ },
+ {
+  "start": 1.61,
+  "end": 1.81,
+  "word": " Claude"
+ },
+ {
+  "start": 1.78,
+  "end": 1.98,
+  "word": " into"
+ },
+ {
+  "start": 1.98,
+  "end": 2.22,
+  "word": " a"
+ },
+ {
+  "start": 2.22,
+  "end": 2.44,
+  "word": " literal"
+ },
+ {
+  "start": 2.58,
+  "end": 2.92,
+  "word": " second"
+ },
+ {
+  "start": 2.92,
+  "end": 3.18,
+  "word": " brain."
+ },
+ {
+  "start": 3.44,
+  "end": 3.52,
+  "word": " This"
+ },
+ {
+  "start": 3.52,
+  "end": 3.66,
+  "word": " is"
+ },
+ {
+  "start": 3.66,
+  "end": 3.88,
+  "word": " insane"
+ },
+ {
+  "start": 3.79,
+  "end": 3.99,
+  "word": " because"
+ },
+ {
+  "start": 3.99,
+  "end": 4.15,
+  "word": " it"
+ },
+ {
+  "start": 4.15,
+  "end": 4.31,
+  "word": " now"
+ },
+ {
+  "start": 4.47,
+  "end": 4.95,
+  "word": " automatically"
+ },
+ {
+  "start": 4.95,
+  "end": 5.27,
+  "word": " remembers"
+ },
+ {
+  "start": 5.27,
+  "end": 5.47,
+  "word": " your"
+ },
+ {
+  "start": 5.47,
+  "end": 5.71,
+  "word": " projects"
+ },
+ {
+  "start": 5.545,
+  "end": 5.62,
+  "word": " and"
+ },
+ {
+  "start": 5.62,
+  "end": 5.92,
+  "word": " preferences"
+ },
+ {
+  "start": 5.92,
+  "end": 6.22,
+  "word": " across"
+ },
+ {
+  "start": 6.28,
+  "end": 6.62,
+  "word": " every"
+ },
+ {
+  "start": 6.62,
+  "end": 6.88,
+  "word": " single"
+ },
+ {
+  "start": 6.88,
+  "end": 7.38,
+  "word": " conversation."
+ },
+ {
+  "start": 7.56,
+  "end": 7.62,
+  "word": " If"
+ },
+ {
+  "start": 7.635,
+  "end": 7.685,
+  "word": " you"
+ },
+ {
+  "start": 7.71,
+  "end": 7.78,
+  "word": " use"
+ },
+ {
+  "start": 7.79,
+  "end": 7.97,
+  "word": " Claude"
+ },
+ {
+  "start": 8.07,
+  "end": 8.120000000000001,
+  "word": " you"
+ },
+ {
+  "start": 8.145,
+  "end": 8.195,
+  "word": " know"
+ },
+ {
+  "start": 8.22,
+  "end": 8.36,
+  "word": " how"
+ },
+ {
+  "start": 8.36,
+  "end": 8.6,
+  "word": " annoying"
+ },
+ {
+  "start": 8.57,
+  "end": 8.71,
+  "word": " it"
+ },
+ {
+  "start": 8.71,
+  "end": 8.83,
+  "word": " is"
+ },
+ {
+  "start": 8.83,
+  "end": 8.93,
+  "word": " when"
+ },
+ {
+  "start": 9.05,
+  "end": 9.21,
+  "word": " it"
+ },
+ {
+  "start": 9.21,
+  "end": 9.37,
+  "word": " keeps"
+ },
+ {
+  "start": 9.285,
+  "end": 9.53,
+  "word": " forgetting"
+ },
+ {
+  "start": 9.53,
+  "end": 10.01,
+  "word": " important"
+ },
+ {
+  "start": 10.01,
+  "end": 10.31,
+  "word": " details"
+ },
+ {
+  "start": 10.24,
+  "end": 10.5,
+  "word": " every"
+ },
+ {
+  "start": 10.5,
+  "end": 10.68,
+  "word": " time"
+ },
+ {
+  "start": 10.68,
+  "end": 10.8,
+  "word": " you"
+ },
+ {
+  "start": 10.8,
+  "end": 10.94,
+  "word": " switch"
+ },
+ {
+  "start": 11.08,
+  "end": 11.42,
+  "word": " chats."
+ },
+ {
+  "start": 11.59,
+  "end": 11.75,
+  "word": " Now"
+ },
+ {
+  "start": 11.99,
+  "end": 12.040000000000001,
+  "word": " Claude"
+ },
+ {
+  "start": 12.065,
+  "end": 12.23,
+  "word": " saves"
+ },
+ {
+  "start": 12.17,
+  "end": 12.43,
+  "word": " details"
+ },
+ {
+  "start": 12.43,
+  "end": 12.85,
+  "word": " dynamically"
+ },
+ {
+  "start": 13.05,
+  "end": 13.23,
+  "word": " in"
+ },
+ {
+  "start": 13.23,
+  "end": 13.33,
+  "word": " the"
+ },
+ {
+  "start": 13.33,
+  "end": 13.65,
+  "word": " background."
+ },
+ {
+  "start": 13.62,
+  "end": 13.74,
+  "word": " So"
+ },
+ {
+  "start": 13.74,
+  "end": 13.82,
+  "word": " you"
+ },
+ {
+  "start": 13.82,
+  "end": 13.94,
+  "word": " can"
+ },
+ {
+  "start": 13.895,
+  "end": 13.95,
+  "word": " go"
+ },
+ {
+  "start": 13.97,
+  "end": 14.11,
+  "word": " into"
+ },
+ {
+  "start": 14.11,
+  "end": 14.31,
+  "word": " your"
+ },
+ {
+  "start": 14.31,
+  "end": 14.51,
+  "word": " settings"
+ },
+ {
+  "start": 14.5,
+  "end": 14.68,
+  "word": " and"
+ },
+ {
+  "start": 14.68,
+  "end": 14.92,
+  "word": " literally"
+ },
+ {
+  "start": 14.92,
+  "end": 15.1,
+  "word": " see"
+ },
+ {
+  "start": 15.12,
+  "end": 15.28,
+  "word": " your"
+ },
+ {
+  "start": 15.28,
+  "end": 15.46,
+  "word": " memories"
+ },
+ {
+  "start": 15.46,
+  "end": 15.86,
+  "word": " categorized"
+ },
+ {
+  "start": 16.0,
+  "end": 16.28,
+  "word": " by"
+ },
+ {
+  "start": 16.28,
+  "end": 16.56,
+  "word": " topic."
+ },
+ {
+  "start": 16.71,
+  "end": 16.77,
+  "word": " You"
+ },
+ {
+  "start": 16.785,
+  "end": 16.93,
+  "word": " can"
+ },
+ {
+  "start": 16.93,
+  "end": 17.03,
+  "word": " click"
+ },
+ {
+  "start": 17.005,
+  "end": 17.12,
+  "word": " on"
+ },
+ {
+  "start": 17.12,
+  "end": 17.28,
+  "word": " any"
+ },
+ {
+  "start": 17.28,
+  "end": 17.56,
+  "word": " file"
+ },
+ {
+  "start": 17.63,
+  "end": 17.77,
+  "word": " to"
+ },
+ {
+  "start": 17.77,
+  "end": 17.89,
+  "word": " edit"
+ },
+ {
+  "start": 17.89,
+  "end": 18.05,
+  "word": " the"
+ },
+ {
+  "start": 18.05,
+  "end": 18.29,
+  "word": " details"
+ },
+ {
+  "start": 18.33,
+  "end": 18.45,
+  "word": " or"
+ },
+ {
+  "start": 18.45,
+  "end": 18.65,
+  "word": " delete"
+ },
+ {
+  "start": 18.65,
+  "end": 18.97,
+  "word": " anything"
+ },
+ {
+  "start": 19.04,
+  "end": 19.2,
+  "word": " you"
+ },
+ {
+  "start": 19.2,
+  "end": 19.36,
+  "word": " want"
+ },
+ {
+  "start": 19.275,
+  "end": 19.325,
+  "word": " it"
+ },
+ {
+  "start": 19.35,
+  "end": 19.400000000000002,
+  "word": " to"
+ },
+ {
+  "start": 19.425,
+  "end": 19.6,
+  "word": " forget."
+ },
+ {
+  "start": 20.0,
+  "end": 20.06,
+  "word": " It"
+ },
+ {
+  "start": 20.075,
+  "end": 20.18,
+  "word": " even"
+ },
+ {
+  "start": 20.18,
+  "end": 20.38,
+  "word": " works"
+ },
+ {
+  "start": 20.36,
+  "end": 20.46,
+  "word": " in"
+ },
+ {
+  "start": 20.46,
+  "end": 20.6,
+  "word": " your"
+ },
+ {
+  "start": 20.6,
+  "end": 20.78,
+  "word": " browser"
+ },
+ {
+  "start": 20.675,
+  "end": 20.91,
+  "word": " across"
+ },
+ {
+  "start": 20.91,
+  "end": 21.09,
+  "word": " the"
+ },
+ {
+  "start": 21.09,
+  "end": 21.31,
+  "word": " desktop"
+ },
+ {
+  "start": 21.26,
+  "end": 21.44,
+  "word": " app"
+ },
+ {
+  "start": 21.44,
+  "end": 21.56,
+  "word": " and"
+ },
+ {
+  "start": 21.56,
+  "end": 21.7,
+  "word": " even"
+ },
+ {
+  "start": 21.74,
+  "end": 21.92,
+  "word": " on"
+ },
+ {
+  "start": 21.92,
+  "end": 22.16,
+  "word": " mobile"
+ },
+ {
+  "start": 22.16,
+  "end": 22.32,
+  "word": " for"
+ },
+ {
+  "start": 22.32,
+  "end": 22.5,
+  "word": " all"
+ },
+ {
+  "start": 22.54,
+  "end": 22.9,
+  "word": " users."
+ },
+ {
+  "start": 23.22,
+  "end": 23.3,
+  "word": " Now"
+ },
+ {
+  "start": 23.3,
+  "end": 23.44,
+  "word": " this"
+ },
+ {
+  "start": 23.44,
+  "end": 23.78,
+  "word": " completely"
+ },
+ {
+  "start": 23.69,
+  "end": 24.03,
+  "word": " changes"
+ },
+ {
+  "start": 24.03,
+  "end": 24.23,
+  "word": " how"
+ },
+ {
+  "start": 24.23,
+  "end": 24.33,
+  "word": " you"
+ },
+ {
+  "start": 24.33,
+  "end": 24.47,
+  "word": " use"
+ },
+ {
+  "start": 24.65,
+  "end": 24.89,
+  "word": " Claude"
+ },
+ {
+  "start": 24.95,
+  "end": 25.03,
+  "word": " but"
+ },
+ {
+  "start": 25.03,
+  "end": 25.19,
+  "word": " there's"
+ },
+ {
+  "start": 25.105,
+  "end": 25.155,
+  "word": " one"
+ },
+ {
+  "start": 25.18,
+  "end": 25.35,
+  "word": " major"
+ },
+ {
+  "start": 25.35,
+  "end": 25.55,
+  "word": " catch"
+ },
+ {
+  "start": 25.59,
+  "end": 25.73,
+  "word": " you"
+ },
+ {
+  "start": 25.73,
+  "end": 25.81,
+  "word": " need"
+ },
+ {
+  "start": 25.81,
+  "end": 25.91,
+  "word": " to"
+ },
+ {
+  "start": 25.91,
+  "end": 26.03,
+  "word": " know"
+ },
+ {
+  "start": 25.985,
+  "end": 26.17,
+  "word": " before"
+ },
+ {
+  "start": 26.17,
+  "end": 26.33,
+  "word": " you"
+ },
+ {
+  "start": 26.33,
+  "end": 26.41,
+  "word": " turn"
+ },
+ {
+  "start": 26.52,
+  "end": 26.68,
+  "word": " this"
+ },
+ {
+  "start": 26.68,
+  "end": 26.92,
+  "word": " on."
+ },
+ {
+  "start": 26.97,
+  "end": 27.23,
+  "word": " If"
+ },
+ {
+  "start": 27.23,
+  "end": 27.35,
+  "word": " you"
+ },
+ {
+  "start": 27.35,
+  "end": 27.45,
+  "word": " set"
+ },
+ {
+  "start": 27.425,
+  "end": 27.475,
+  "word": " your"
+ },
+ {
+  "start": 27.5,
+  "end": 27.64,
+  "word": " tasks"
+ },
+ {
+  "start": 27.64,
+  "end": 27.76,
+  "word": " to"
+ },
+ {
+  "start": 27.76,
+  "end": 27.88,
+  "word": " run"
+ },
+ {
+  "start": 27.94,
+  "end": 28.18,
+  "word": " locally"
+ },
+ {
+  "start": 28.18,
+  "end": 28.28,
+  "word": " on"
+ },
+ {
+  "start": 28.28,
+  "end": 28.34,
+  "word": " your"
+ },
+ {
+  "start": 28.355,
+  "end": 28.58,
+  "word": " machine"
+ },
+ {
+  "start": 28.66,
+  "end": 28.72,
+  "word": " the"
+ },
+ {
+  "start": 28.735,
+  "end": 28.92,
+  "word": " memory"
+ },
+ {
+  "start": 28.92,
+  "end": 29.26,
+  "word": " won't"
+ },
+ {
+  "start": 29.38,
+  "end": 29.52,
+  "word": " sync"
+ },
+ {
+  "start": 29.52,
+  "end": 29.76,
+  "word": " because"
+ },
+ {
+  "start": 29.76,
+  "end": 29.86,
+  "word": " it"
+ },
+ {
+  "start": 29.86,
+  "end": 30.04,
+  "word": " only"
+ },
+ {
+  "start": 29.94,
+  "end": 30.16,
+  "word": " works"
+ },
+ {
+  "start": 30.16,
+  "end": 30.26,
+  "word": " in"
+ },
+ {
+  "start": 30.26,
+  "end": 30.36,
+  "word": " the"
+ },
+ {
+  "start": 30.36,
+  "end": 30.62,
+  "word": " cloud."
+ },
+ {
+  "start": 30.92,
+  "end": 31.06,
+  "word": " Comment"
+ },
+ {
+  "start": 31.06,
+  "end": 31.28,
+  "word": " MEM"
+ },
+ {
+  "start": 31.45,
+  "end": 31.61,
+  "word": " for"
+ },
+ {
+  "start": 31.61,
+  "end": 31.73,
+  "word": " the"
+ },
+ {
+  "start": 31.73,
+  "end": 31.89,
+  "word": " free"
+ },
+ {
+  "start": 31.89,
+  "end": 32.11,
+  "word": " setup."
+ }
+]

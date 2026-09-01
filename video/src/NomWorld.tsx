@@ -686,11 +686,20 @@ export const Scene: React.FC<{ p: Place; slug: string; children: React.ReactNode
   const f = useCurrentFrame();
   const [a, b, to] = push ?? [0, 150, 1.05];
   const sc = E(f, a, b, 1, to, LIN);
+  /* ⛔⛔⛔ TILT_BANNED — THE CAMERA MUST NEVER ROTATE THE WORLD (2026-08-30).
+     `cam.rot` was a dHash variant lever inherited by every reel, and it tilted the
+     ENTIRE panel: the room, the floor, the UI chrome and every screen in it.
+     Alex on reel 127: "why are the screens animations tilted". A screen is a
+     RECTANGLE with a horizon, so a 2-4deg tilt does not read as a second camera,
+     it reads as a BROKEN RENDER — worst on a scene that is itself a UI.
+     The field is still accepted so the 20+ reels that set it keep compiling, but
+     it is DELIBERATELY NOT APPLIED below. Differentiate cuts with dx, dy, scale,
+     RAKE pitch, per-cut LAY and GRADE — none of which touch the horizon. */
   const cam = React.useContext(CamCtx);
   return (
     <Panel glow={glow ?? hexA(p.key, 0.18)}>
       <div style={{ position: "absolute", inset: 0, zIndex: 1, transformOrigin: "50% 56%",
-        transform: `translate(${cam.dx}px, ${cam.dy}px) rotate(${cam.rot}deg) scale(${sc * cam.s})` }}>
+        transform: `translate(${cam.dx}px, ${cam.dy}px) scale(${sc * cam.s})` }}>
         {children}
       </div>
       {/* the vignette, last, over everything — it is what makes one thing rank */}

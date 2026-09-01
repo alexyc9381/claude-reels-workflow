@@ -1,0 +1,11 @@
+Most people are wasting thousands of tokens every time they open Claude, and it's all because of this one default setting you have not turned off yet.
+So here are three Claude mistakes you need to fix right now.
+First, stop telling Claude to act like an expert. With the newest models, you're just wasting your context window.
+Instead, spend those tokens telling Claude exactly where to find the sources and tell it to check its own work before finishing.
+Second, stop writing negative instructions like don't include numbers.
+When you tell the model what not to do, it gets confused.
+So say everything as a positive command, like write smooth flowing text paragraphs.
+Third, turn off automatic tool access.
+Usually Claude loads all of your connectors into the context with every message, so it burns thousands of tokens per session.
+Now go to your settings and switch tool access to load tools when needed so you only pay for tools when they're actually used.
+Comment MISTAKE for access.

@@ -1,0 +1,7 @@
+Anthropic just released their official Claude Code prompt library and it's completely free.
+And these aren't just some random prompts, these are the exact four rules Anthropic's own engineers use when working with Claude Code.
+First, you need to teach Claude reusable skills with slash commands instead of re-prompting it every single time.
+Second, you want to use shift tab to activate plan mode and it maps out your entire project before writing a single line of code.
+Third, drop a CLAUDE.md file into your project and it automatically learns your naming conventions, libraries, and rules for every single session.
+But here's the thing, there's already over a hundred free templates you can copy right now inside of this resource.
+Comment LIBRARY for access.

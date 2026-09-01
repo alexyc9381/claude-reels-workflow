@@ -1,0 +1,1 @@
+between(t,0.82,3.69)+between(t,16.15,21.22)+between(t,22.52,23.5)+between(t,51.73,56.18)+between(t,67.05,70.54)+between(t,73.69,76.18)+between(t,83.76,87.07)+between(t,88.23,93.39)+between(t,94.5,95.83)

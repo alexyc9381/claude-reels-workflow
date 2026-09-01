@@ -22,7 +22,16 @@ import { E, OUT, BACK, IN_Q, hexa, dkh, mxh, squash, G_BLUE, G_RED, G_YEL, G_GRN
    ========================================================================= */
 
 type CProps = { f: number; x: number; y: number; size: number; i?: number; z?: number;
-  at?: number; loop?: number; flip?: boolean; cheer?: number; shock?: number };
+  at?: number; loop?: number; flip?: boolean; cheer?: number; shock?: number;
+  /** ⭐ 0..1 damping on the whole rig, added for reel 129. Alex: *"i hate how
+      the gemini icon keeps swinging around so aggressively."* The rig was
+      AMPLIFIED on reel 116 on his own note that the mascot did not move enough
+      — but 116's cast performs in an empty frame, and 129's stands beside an
+      800px screen recording the viewer is trying to READ, where a body rocking
+      +/-10deg with arms at +/-27deg at 4.3Hz is the loudest thing on screen.
+      ⛔ DEFAULTS TO 1 SO REEL 116 IS UNTOUCHED — the caller opts in, which is
+      `feedback_a_frame_zero_fix_is_shot_local`: a prop defaults OFF. */
+  calm?: number };
 
 /** the shared idle/action rig, so a design is judged on its DRAWING and not on
     whether it happens to have better motion than its neighbour */
@@ -50,7 +59,7 @@ type CProps = { f: number; x: number; y: number; size: number; i?: number; z?: n
    ⛔ LATERAL travel is deliberately capped at 0.12 x size. The cast sits inside
    a measured x band (see `feedback_the_crop_bound_includes_cam`) with only
    ~10px of margin, and a big dx would walk it straight back off the frame. */
-const useRig = (f: number, size: number, i: number, loop?: number, at = 0) => {
+const useRig = (f: number, size: number, i: number, loop?: number, at = 0, calm = 1) => {
   const lf = f - at;
   const inS = E(lf, 0, 8, 0, 1, BACK);
   const sq = squash(lf, 6, 0.16, 3, 11);
@@ -97,7 +106,11 @@ const useRig = (f: number, size: number, i: number, loop?: number, at = 0) => {
     sy = 1 + Math.abs(b) * 0.05;
     arm = 1.2;
   }
-  return { lf, inS, sq, dx, dy, rot, ch, ph, L, sx, sy, arm };
+    /* ⭐ the damping, applied once at the end so every loop is affected
+     identically and the SHAPE of each action survives. */
+  dx *= calm; dy *= calm; rot *= calm; arm *= calm;
+  sx = 1 + (sx - 1) * calm; sy = 1 + (sy - 1) * calm;
+return { lf, inS, sq, dx, dy, rot, ch, ph, L, sx, sy, arm , calm};
 };
 
 
@@ -184,18 +197,18 @@ export const Sparky: React.FC<CProps> = (p) => {
 
 /* ── 2 · GEMBOT — a faceted gem head on a boxy-round body. */
 export const GemBot: React.FC<CProps> = (p) => {
-  const r = useRig(p.f, p.size, p.i ?? 0, p.loop, p.at ?? 0);
+  const r = useRig(p.f, p.size, p.i ?? 0, p.loop, p.at ?? 0, p.calm ?? 1);
   return (
     <Shell p={p} r={r}>
       <defs><linearGradient id={`gm${p.i}`} x1="0" y1="0" x2="0.5" y2="1">
         <stop offset="0%" stopColor="#7DA8FF" /><stop offset="100%" stopColor="#5C6BE8" /></linearGradient></defs>
       {[38, 55].map((lx, j) => (
         <rect key={j} x={lx} y={82} width={8} height={17} rx={3.6} fill="#4A56C4"
-          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (7 + r.arm * 8)   /* ⛔ was 3 deg on every loop but PACE */} ${lx + 4} 84)`} />
+          transform={`rotate(${Math.sin(p.f / 8 + j * 2 + r.ph) * (7 + r.arm * 8) * r.calm} ${lx + 4} 84)`} />
       ))}
       {[[24, -1], [76, 1]].map(([ax, dir], j) => (
         <rect key={"a" + j} x={(ax as number) - 6} y={64} width={12} height={8} rx={4} fill="#4A56C4"
-          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18 * r.arm)} ${ax} 68)`} />
+          transform={`rotate(${(dir as number) * (14 + Math.sin(p.f / 7 + j * 3 + r.ph) * 18 * r.arm * r.calm)} ${ax} 68)`} />
       ))}
       <rect x={31} y={58} width={38} height={28} rx={9} fill="#5C6BE8" />
       <rect x={31} y={74} width={38} height={12} rx={6} fill="#000" opacity={0.13} />

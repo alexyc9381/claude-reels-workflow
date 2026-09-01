@@ -1,0 +1,100 @@
+TITLE   The Usage Setup
+SUB     Three free repos that cut three different parts of what Claude Code costs, the order to install them in, and the one setting that undoes most of the saving
+
+H       Why three, and not one
+P       Almost every "save tokens in Claude Code" post is the same trick told again. Use a cheaper model. Write shorter prompts. Clear your context. All fine, all one lever.
+P       A Claude Code session costs you money in three separate ways, and they are independent. You can attack all three at once because the tools that do it do not overlap.
+B       The RATE. What you pay per token, which is a function of who you buy them from.
+B       The VOLUME. How many tokens come back, which is a function of how much prose the model writes around the code.
+B       The WASTE. Tokens you pay for twice, which is a function of a cache clock you cannot see.
+P       This guide is one repo per lever, in the order that pays back fastest, with what each one actually claims and what it does not.
+
+RULE
+
+H       Lever one, the RATE. deepclaude
+P       github.com/aattaran/deepclaude. 2,254 stars, MIT.
+P       Claude Code is two things bolted together: an agent loop that plans, reads, edits and re-checks, and a model on the other end of an API call. The loop is the part that is good. The model is the part you pay for.
+P       deepclaude separates them. It sets three environment variables for the session so Claude Code's own loop runs completely unchanged and simply talks to a different supplier.
+B       ANTHROPIC_BASE_URL points at the other provider
+B       ANTHROPIC_AUTH_TOKEN carries that provider's key
+B       The model tier variables map Opus, Sonnet and Haiku onto that provider's models
+P       Nothing about your workflow changes. Same tools, same file edits, same slash commands.
+P       The numbers from the repo's own README: DeepSeek V4 Pro is $0.87 per million output tokens against Anthropic's $15.00, and $0.44 per million input against $3.00. That is where the seventeen times figure comes from and it is about PRICE, not speed and not quality.
+QUOTE   Do not run this on work where the model choice is the point. Run it on the volume work.
+
+RULE
+
+H       What deepclaude is genuinely worse at, and how to split your day
+P       This is the part the enthusiasm usually skips. A cheaper model is a different model.
+P       The loop hides a lot of that, because the loop re-reads, re-runs and self-corrects. On mechanical work you will struggle to tell. On work where the first decision matters most, you will.
+B       Send it: refactors, test writing, migrations, boilerplate, renames, docs, log spelunking, anything where the shape is known and the work is volume.
+B       Keep on Anthropic: architecture decisions, debugging something nobody understands yet, anything where being wrong early costs a day.
+P       The practical setup is two shell aliases, not a permanent switch. One command that starts a cheap session, one that starts a normal one, and you choose per task. That single habit is worth more than the price difference, because it stops you making the choice once and forgetting it.
+
+RULE
+
+H       Lever two, the VOLUME. caveman
+P       github.com/JuliusBrussee/caveman. 101,494 stars. MIT for the skill, BSL-1.1 for the engine parts.
+P       Turn it on with /caveman. It has three intensities, lite, full and ultra, and /caveman off puts it back.
+P       What it does is narrow and worth stating exactly: it compresses the PROSE and leaves the technical content alone. The repo's own words are that code, commands and errors stay exact. You lose the hedging, the restatement of your own question, the paragraph explaining what it is about to do, and the summary of what it just did.
+P       Their benchmark is ten prompts and it averages 65 percent fewer output tokens, ranging 22 percent to 87 percent depending on the task.
+
+RULE
+
+H       The caveat on caveman, in the repo's own words
+P       This is the honest bit, and the repo says it before anyone else does.
+QUOTE   The skill only shrinks output tokens. Input and reasoning tokens are untouched, and the skill itself adds roughly 1,000 to 1,500 input tokens per turn. Whole-session savings run smaller than the output number.
+P       So 65 percent is a real measurement of a real thing. It is not 65 percent off your bill.
+P       Where it pays best is long agentic runs with a lot of narration, and anything you read rather than execute. Where it pays worst is short exchanges, because the skill's own overhead is a bigger share of a small turn.
+B       Run it on ultra for a day and see whether the terseness annoys you. Most people settle on full.
+B       Turn it off when you are being taught something rather than served something. Explanations are the thing it removes.
+
+RULE
+
+H       Lever three, the WASTE. super-token-saver
+P       github.com/ww-w-ai/super-token-saver. 31 stars, Apache-2.0. The smallest repo here and the one most people have never heard of.
+P       Install it as a plugin marketplace, then the plugin, then the statusline.
+NUM     /plugin marketplace add ww-w-ai/marketplace
+NUM     /plugin install super-token-saver@ww-w-ai
+NUM     /setup-statusline install
+P       This one is worth understanding rather than just installing, because the problem it solves is invisible and it is probably costing you more than either of the other two.
+
+RULE
+
+H       The cache clock, which is the actual point of this guide
+P       Every prompt you send in a session carries the whole context with it. The provider caches that context so the next prompt is cheap, and the cache has a time to live.
+P       The clock runs from the last API call. Not from your last keystroke, not from how busy the session felt. If you are heads down for two hours the cache stays warm the whole time. If you go to a meeting, come back, and type one more line, that line arrives after the cache has died.
+P       When it has died, the next prompt re-sends the entire context uncached. The repo's own worked example is a 900,000 token context re-sent for 9 dollars, on one prompt, silently.
+P       Their measured figure for the whole plugin is a 45 percent cost reduction on a real day's workload.
+B       Token Guardian tracks idle time and trips at 3,590 seconds, which is the one hour TTL minus a ten second buffer.
+B       When it trips it blocks the prompt rather than letting it send, and shows you how long you were idle.
+B       You then run /s-continue, which restores the prior context with zero model calls, and carry on.
+P       The recovery is the part that makes it worth having. Blocking a bad prompt is a warning. Restoring the session for nothing is a fix.
+
+RULE
+
+H       The setting that undoes most of this
+P       Install order matters less than one habit, and it is the thing people get wrong.
+P       All three of these save money on a session that is already running. None of them help a session you keep restarting. Every fresh session rebuilds context from zero at full price, so the person who clears and restarts twelve times a day is paying the re-send cost twelve times whatever else they installed.
+NUM     Start one session per piece of work and keep it.
+NUM     When you step away, expect the cache to die and let the guard catch it rather than clearing out of habit.
+NUM     Use /s-continue to come back, not a fresh start.
+NUM     Clear only when you genuinely want the model to forget, which is rarer than it feels.
+
+RULE
+
+H       The order to install them in
+NUM     super-token-saver first, and run it for two days before anything else. It has a real cost dashboard, so you get a baseline instead of a feeling. You cannot tell whether the other two helped without this one.
+NUM     caveman second. It is one command and it is reversible in one command, so you learn quickly whether the terseness costs you anything.
+NUM     deepclaude last, and set it up as a per task alias rather than a default. It is the biggest saving and the only one that changes what is answering you.
+
+RULE
+
+H       The short version
+B       Three levers, not one: the rate you pay, the volume you send back, the tokens you pay for twice.
+B       deepclaude swaps the supplier and leaves the agent loop alone. $0.87 against $15.00 per million output.
+B       caveman cuts 65 percent of OUTPUT tokens on its own benchmark. Whole-session savings are smaller and the repo says so.
+B       super-token-saver catches the one hour cache expiry that costs 9 dollars a time and restores the session for nothing.
+B       All three are free. Your session is not. These make the meter run slower, they do not stop it.
+
+KEY     USAGE

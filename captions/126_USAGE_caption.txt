@@ -1,0 +1,33 @@
+Comment "USAGE" and I'll send you the full setup guide.
+
+👇 READ BELOW
+
+Three free GitHub repos. Three different parts of what Claude Code actually costs you.
+
+Most "save tokens" advice is one trick repeated. These three do not overlap, which is the whole point: one cuts the RATE you pay per token, one cuts the VOLUME you send back, and one stops you paying for the same context TWICE.
+
+★ 2,254 · deepclaude → points Claude Code at DeepSeek instead of Anthropic
+★ 101,494 · caveman → strips the filler out of every answer
+★ 31 · super-token-saver → catches the cache before it expires
+
+How each one works:
+
+deepclaude sets ANTHROPIC_BASE_URL for the session, so Claude Code's own agent loop runs unchanged and just talks to a different supplier. DeepSeek V4 Pro is $0.87 per million output tokens against Anthropic's $15.00. Same loop, same tools, a seventeenth of the output price. MIT.
+
+caveman is a skill you turn on with /caveman. It compresses the prose and leaves the technical content alone, and the repo is explicit about it: code, commands and errors stay exact. Their own benchmark averages 65% fewer OUTPUT tokens across ten prompts, ranging 22% to 87% by task.
+
+super-token-saver watches the clock. Claude Code's prompt cache has a one hour TTL, and it expires on time since the last API call, not on how busy you were. Walk away for an hour and the next prompt re-sends the entire context at full uncached price. The repo's own worked example: $9 on a single prompt at 900K tokens. Token Guardian trips at 3,590 seconds idle, blocks that re-send, and restores the session with /s-continue at zero LLM calls.
+
+The part nobody mentions:
+
+caveman's 65% is OUTPUT tokens on the repo's own benchmark, and the repo says so itself: the skill only shrinks output, input and reasoning tokens are untouched, and whole-session savings run smaller than the headline. That is still worth having. It is just not 65% off your bill, and anyone telling you it is has not read the README.
+
+The three repos are free. Your session is not. What these actually do is make the meter run slower, and the reason to run all three is that they slow three different parts of it.
+
+Comment "USAGE" and I'll send you the install order, the exact env vars, and the one setting that undoes most of the saving if you get it wrong.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #deepseek #aitools #aiagents #devtools #opensource #github #promptengineering #tokenoptimization #softwareengineering #buildinpublic #codingtips #airesearch #llm #programming #developertools

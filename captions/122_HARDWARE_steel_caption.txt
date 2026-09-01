@@ -1,0 +1,33 @@
+Comment "HARDWARE" and I'll send you the full cost breakdown.
+
+👇 READ BELOW
+
+The GPUs were idle. That is the whole story.
+
+You cannot run Claude on your own hardware. Anthropic has never released open weights for any Claude model, so the question is really about Moonshot AI's Kimi K3: 2.8 trillion parameters, released July 27, the largest open-weight model shipped.
+
+What that machine costs, every figure sourced:
+
+★ 7 x RTX PRO 6000 Blackwell, 96GB each
+★ $16,000 per card, NVIDIA's own US listing, up from $8,565 at launch
+★ $112,000 in cards alone, before a motherboard, PSUs, chassis or RAM
+★ 600W per card, so 4.2 kW continuous
+★ About $565 a month in electricity at the US average rate, GPUs only
+
+Then someone actually ran it on a rented server and measured it. 0.1 tokens per second. One token every ten seconds. A 500 token answer takes an hour and 23 minutes. He aborted a 128 token benchmark after 17 minutes because it had not finished.
+
+The part nobody mentions: GPU utilization sat between 0 and 1 percent for the entire run, and only 64GB of the available 160GB VRAM was in use. Nothing about that run was short of compute or short of capacity. Every token has to drag its active experts out of system RAM, and that read is the wall. It is a bandwidth problem, and bandwidth is the one thing money does not buy. The money buys the tank, not the pipe.
+
+An hour of intense coding on the Opus 5 API costs about 70 cents.
+
+There are three genuine cases for local: industrial volume, data that legally cannot leave, and agents running around the clock. Outside those three, $112,000 of hardware that loses value every year is a mistake with a receipt.
+
+Honest caveat: seven cards clears the 1-bit build at 594GB. Full precision weights are 1.56TB, which is closer to eighteen cards.
+
+Comment "HARDWARE" and I'll send the sourced breakdown.
+
+.
+.
+.
+
+#claudeai #claudecode #anthropic #locallm #selfhosted #llm #kimik3 #moonshotai #rtxpro6000 #nvidia #gpu #aihardware #memorybandwidth #vram #inference #machinelearning #aiengineering #opensourceai #aitools #buildinpublic

@@ -1,0 +1,79 @@
+TITLE   The Memory Setup
+SUB     What to put in Claude's memory on day one, how to correct it when it gets you wrong, and the one setting that decides whether your tasks can see any of it
+
+H       What actually changed
+P       On August 25, 2026 Anthropic changed how Claude's memory works. It is worth being precise about this, because "the AI remembers you" has been claimed by everyone for two years and this is a different thing from what the others shipped.
+P       Memory used to be a single rolling summary. Claude finished a conversation, wrote a paragraph about you, and that paragraph was the memory. You could not see inside it, you could not correct it, and it was written after the fact.
+P       It is now a set of individual files, grouped by topic, and Claude adds to them while you are still talking rather than summarising once you are done. You can open any one of them, read it, change a line, or delete it.
+B       Settings, then Memory, then Topics
+B       One file per subject, not one paragraph about you
+B       Written during the conversation, not after it
+B       On by default on Free, Pro and Max, across web, desktop and mobile
+B       Chat and Claude Cowork now share the same memory
+
+RULE
+
+H       The part almost nobody will use, and the reason this matters
+P       The interesting feature here is not that it remembers. It is that the box opens.
+P       Every assistant that has claimed memory handed you a black box and asked you to trust it. If it decided something wrong about you, that was the end of the conversation. This one hands you the filing cabinet.
+P       If Claude has written down that you use a framework you moved off six months ago, or that you like a writing style you do not, you go into Topics, find that file, and fix the line. Almost nobody will bother. The people who do will have an assistant that is genuinely calibrated to them inside a week, and the gap widens from there.
+QUOTE   Memory is only worth having if it can be corrected.
+
+RULE
+
+H       Turning it on and checking what is there
+NUM     Open Settings, then Capabilities, then Memory. On Free, Pro and Max it is already on. If you are on a Team or Enterprise account it is controlled by your admin and it defaults to off, so if nothing is appearing this is why.
+NUM     Open Topics. This is the list of files. If you have been using Claude for a while there will already be entries in here.
+NUM     Read them. All of them. This is the only time it takes more than a minute, and it is the step that decides whether the rest is worth anything.
+NUM     Fix anything wrong. Each entry has a box that takes an instruction in plain words, or you can tell Claude directly in a chat.
+NUM     Delete anything you do not want it carrying. There is no penalty for an empty topic.
+
+RULE
+
+H       What to put in it on day one
+P       You do not add memories by filling in a form. You add them by telling Claude, in an ordinary conversation, the things you would otherwise re-explain every week. These are the ones that pay for themselves fastest.
+B       Your stack, specifically. Not "I write Python" but the versions, the framework, the package manager and the two libraries you always reach for.
+B       How you want to be written to. Length, formality, whether you want the reasoning or just the answer, whether you want to be asked before it makes assumptions.
+B       What you are actually working on right now, and what done looks like for it.
+B       The things you have already ruled out, and why. This is the highest value entry in the whole list and the one people forget. Without it you re-litigate the same rejected approach every month.
+B       Your constraints. Budget, deadline, the platform you are stuck on, the tool your team will not switch off.
+B       Who you are writing or building for. An assistant that knows your audience stops giving you generic answers.
+
+RULE
+
+H       What it will not store, and what you can turn on
+P       Some of this is decided for you, and it is worth knowing which parts.
+P       By default Claude does not save topics it treats as personal or sensitive: health, race, ethnicity, religious beliefs, politics and gender identity. If those are exactly the things you are tired of re-explaining, you can switch them on in Memory settings, and after that you get a notice each time something on one of them is saved.
+P       A second group is never stored at all, whatever you switch on: identification numbers such as a social security or government ID number, criminal history, and immigration status.
+P       You can also pause memory at any time, or reset it entirely and start again.
+
+RULE
+
+H       The catch, and it is the reason this guide exists
+P       Chat and Cowork sharing one memory is the biggest practical change in the update. Before it, everything you told Claude in a conversation did nothing for your Cowork tasks. They were two separate brains.
+P       Cowork tasks get that shared memory because they run in the cloud. That is the mechanism, and it is also the limit.
+P       Set a task to work on files on your own machine and it runs there instead, outside that path. If you have ever wondered why a local task behaves like it has never met you, that is the reason. It is not broken and it is not a bug in your setup.
+NUM     If a task needs your memory, let it run in the cloud.
+NUM     If a task needs files that only exist on your laptop, expect it to work without that context, and put what it needs in the task itself.
+NUM     Check which one a task is set to before you blame the output.
+
+RULE
+
+H       A one week test that tells you whether it is working
+P       This takes five minutes to set up and it is the only way to know whether any of this is doing anything for you.
+NUM     Today, tell Claude the six things in the day one list above, in an ordinary conversation. Do not try to be clever about the wording.
+NUM     Open Topics and check they landed. Fix anything it recorded oddly.
+NUM     Do not mention any of it again for a week.
+NUM     At the end of the week, start a completely fresh conversation and ask it for something in your normal line of work.
+NUM     If the answer arrives already in your stack, in your voice, and without the caveats you always have to strip out, it is working. If it does not, go back to Topics and look at what it actually wrote down, because that is the gap.
+
+RULE
+
+H       The short version
+B       It is on already if you are on Free, Pro or Max. Check Topics before you do anything else.
+B       Memories are files. Read them, edit them, delete them.
+B       Tell it your stack, your style, your current work, and the things you have already ruled out.
+B       Sensitive topics are off by default and some categories are never stored at all.
+B       Cowork tasks carry your memory because they run in the cloud. A task pinned to local files does not.
+
+KEY     MEM

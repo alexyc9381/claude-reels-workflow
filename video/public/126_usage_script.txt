@@ -1,0 +1,14 @@
+So you can now 10x your Claude usage for completely free with these 3 GitHub repos.
+They take seconds to install and can save you hundreds of dollars per month.
+Now first is the DeepSeek API plugin.
+Claude is amazing but its API gets expensive fast.
+So you can install this one tool that points Claude Code directly at DeepSeek.
+You get the power of Claude for pennies.
+Second is the Caveman plugin.
+This forces Claude to remove all filler words and it cuts your token usage by 65% by making the AI talk like a caveman.
+And the output stays the exact same while you pay 75% less.
+But this third repo is the most powerful.
+Third is Token Saver.
+When you code with an expired cache it can cost you $9 on a single prompt.
+So this free repo runs in the background and finds when your cache expires, fixing it and saving you thousands of tokens each time.
+Comment USAGE for the free guide.

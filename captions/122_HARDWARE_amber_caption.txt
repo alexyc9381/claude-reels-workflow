@@ -1,0 +1,33 @@
+Comment "HARDWARE" and I'll send you the full cost breakdown.
+
+👇 READ BELOW
+
+$112,000 of graphics cards. And it still runs slower than your phone.
+
+Anthropic has never published the weights for Opus 5, so you cannot run Claude locally at any price. The nearest thing you can actually run is Moonshot AI's Kimi K3, released July 27 at 2.8 trillion parameters. Here is that machine, priced honestly:
+
+★ 7 x RTX PRO 6000, 96GB each, $16,000 a card on NVIDIA's own listing
+★ $112,000 before a motherboard, PSUs, a chassis or RAM
+★ 4.2 kW of continuous draw, because each card is 600W
+★ $565 a month in electricity at the US average rate, GPUs only
+★ The card launched at $8,565. It has been repriced twice in one generation.
+
+Now the part that makes the spending pointless.
+
+Someone rented a big server and ran it properly. 0.1 tokens per second. One token every ten seconds. A 500 token answer takes an hour and 23 minutes. His GPUs sat at 1 percent utilization the whole time and only 64GB of 160GB VRAM was ever in use.
+
+The part nobody mentions: the hardware was never the bottleneck. A Mixture-of-Experts model activates different experts on every token, and if the full set does not fit in GPU memory, each token drags its experts across the bus out of system RAM. That read is the wall. More GPUs do not fix it. Faster GPUs do not fix it. You can buy your way to capacity. You cannot buy your way past bandwidth.
+
+An hour of hard coding on the Opus 5 API is about 70 cents.
+
+Three real reasons to self host: industrial volume, a hard data residency rule, or agents that genuinely run 24/7. If none of those is you, this is not a flex.
+
+One honest note: seven cards is the floor for the 1-bit build at 594GB. Full precision is 1.56TB and needs roughly eighteen.
+
+Comment "HARDWARE" for the breakdown with every source.
+
+.
+.
+.
+
+#claudeai #claudecode #anthropic #locallm #llm #selfhosted #kimik3 #moonshotai #rtxpro6000 #nvidia #aihardware #gpu #vram #memorybandwidth #inference #aiengineering #opensourceai #machinelearning #buildinpublic #aitools

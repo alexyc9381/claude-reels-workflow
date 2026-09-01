@@ -1,0 +1,10 @@
+Delete Obsidian because Claude just solved its biggest problem and built itself a second brain.
+This is insane because it now automatically remembers your projects and preferences across every single conversation.
+If you use Claude you know how annoying it is when it keeps forgetting important details every time you switch chats.
+Now Claude saves details dynamically in the background.
+So you can go into your settings and literally see your memories categorized by topic.
+You can click on any file to edit the details or delete anything you want it to forget.
+It even works in your browser across the desktop app and even on mobile for all users.
+Now this completely changes how you use Claude but there's one major catch you need to know before you turn this on.
+If you set your tasks to run locally on your machine the memory won't sync because it only works in the cloud.
+Comment MEM for the free setup.

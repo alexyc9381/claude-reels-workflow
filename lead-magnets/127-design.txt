@@ -1,0 +1,74 @@
+TITLE   The /design Setup
+SUB     The two commands that turn Claude Code into a real design canvas, what each one actually does, and why the second one is the one that stops Claude guessing
+
+H       What /design actually is
+P       Claude Code can now publish a design. Not describe one, not paste a wall of CSS, but publish a canvas of editable artboards for your UI and print you the link to it.
+P       You run it inside the repo you are already working in. You give it a brief in plain language. Claude drafts the options as artboards, lays them out on one pan and zoom canvas, publishes it, and prints the URL in the terminal. You open it, pick the one you want, adjust it, and tell Claude to implement that one.
+B       It is a RESEARCH PREVIEW, not a finished feature
+B       It needs Claude Code v2.1.233 or later
+B       It is on Pro, Max, Team and Enterprise, and not on the free plan
+B       It runs in the CLI and in Claude Code Desktop, and it is built on artifacts
+P       That version and plan line is the part every post about this leaves out, and it is the reason most people who try the command get told it does not exist.
+
+RULE
+
+H       The shape of a session
+NUM     Open Claude Code in the project you want the design for. The repo matters, because everything in the second half of this guide depends on Claude being able to read it.
+NUM     Run /design with a brief. Describe the thing, not the styling. "A settings page for the billing section" beats "a modern minimal settings page with a purple gradient", because the second one is you doing the design badly.
+NUM     Ask for options. Claude will produce genuinely different directions rather than one page in three colourways, which is the whole reason to look at a canvas instead of a screenshot.
+NUM     Open the printed link. The artboards are laid out side by side on one canvas you can pan and zoom.
+NUM     Pick one, adjust it on the canvas, and tell Claude in the terminal which option to implement.
+QUOTE   The canvas is where you decide. The terminal is where it gets built. Do not try to do either job in the other place.
+
+RULE
+
+H       What you can actually change on the canvas
+P       This is worth being precise about, because "just drag it around until it looks right" oversells it and then people are disappointed by something that is genuinely useful.
+B       Click to select any element on an artboard
+B       Adjust it in a properties panel
+B       Edit text inline, in place
+B       Undo and redo
+B       Save, which publishes a new version for everyone who has the link
+P       That is enough to fix a layout, correct a label, move a block and settle a decision. It is not a full design tool, and it is not trying to be. The moment you want a real change you go back to the terminal and ask for it, which is the right place for it to happen.
+P       Where saving is not enabled for an account, the canvas is still a view and export preview, so you can take a PNG or a PDF out of it.
+
+RULE
+
+H       The second command, and it is the one that matters
+P       /design on its own is a very good guesser. It has never seen your buttons, so it invents some. That is fine for exploring and useless for shipping.
+P       /design-sync is what fixes it. It connects your repo and a Claude Design project in BOTH directions.
+B       PULL imports your design system into the current project, so Claude Code builds against your real components instead of inventing new ones
+B       PUSH sends what you have built in code back to the canvas, so you can carry on editing it there
+P       It syncs incrementally, one component at a time, and never as a wholesale replace. That is a deliberate design choice and it is the reason you can run it on a real codebase without it flattening anything.
+
+RULE
+
+H       What a design system project actually holds
+P       When you pull, the things that come across are the ones a design is actually made of, grouped the way the tooling groups them.
+B       TYPE, your typography scale
+B       COLORS, your real colour tokens rather than an approximation of them
+B       SPACING, your spacing units
+B       COMPONENTS, your own components
+B       BRAND, the identity layer that sits over all of it
+P       Claude Code extracts these into whatever format your project already uses. CSS custom properties, a Tailwind config, a tokens JSON file. It writes them where the build will actually read them, which is the difference between a design system and a document about one.
+
+RULE
+
+H       The order to run them in
+NUM     Run /design-sync FIRST on any project that already has a look. Five minutes here changes every page Claude makes afterwards.
+NUM     Check what came across. Open the tokens file it wrote and confirm the colours and the type scale are the real ones, not the ones from a stale branch.
+NUM     Then run /design for the new screen. It now has your parts to build from.
+NUM     Pick an artboard, adjust it, and implement it.
+NUM     Push back when you have built something on the code side that should exist on the canvas too.
+P       Run them the other way round and you get a beautiful page that looks like nothing else you own, which is the exact problem the whole feature exists to solve.
+
+RULE
+
+H       The honest limits
+B       It is a research preview. It will change, and things that work today may move.
+B       It is not on the free plan, and there is a minimum version.
+B       The canvas editing is selection, a properties panel, inline text and undo. It is not Figma.
+B       A pull is only as good as your codebase. If your colours live in six places and three of them disagree, that is what comes across, and you will see it immediately, which is arguably the most useful thing about running it.
+P       None of that makes it less worth setting up. It makes it worth setting up with the right expectation, which is a design loop that starts in your terminal, gets decided on a canvas, and ends as code built out of your own parts.
+
+KEY     DESIGN

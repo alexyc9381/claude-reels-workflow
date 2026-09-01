@@ -1,0 +1,33 @@
+Comment "HARDWARE" and I'll send you the full cost breakdown.
+
+👇 READ BELOW
+
+You cannot run Claude locally. Not for any amount of money.
+
+Anthropic has never published the weights for Opus 5, so the nearest thing you can actually run is Moonshot AI's Kimi K3, released July 27 at 2.8 trillion parameters. Here is what that machine costs, all of it verified:
+
+★ 7 x RTX PRO 6000 (96GB each) = $112,000 in cards alone
+★ $16,000 per card, which is NVIDIA's own listing, up from $8,565 at launch
+★ 4.2 kW of draw, because each card is 600W
+★ $565 a month in electricity at the US average rate, just for the GPUs
+★ And that is before a motherboard, PSUs, a chassis or RAM
+
+Then comes the part that makes the whole thing pointless.
+
+Someone rented a big server and ran it. He got 0.1 tokens per second. One token every ten seconds. A 500 token answer takes an hour and 23 minutes, and his GPUs sat at 1 percent utilization the entire time.
+
+The part nobody mentions: he had enough memory. That was never the problem. Every token has to drag its active experts out of system RAM, and the bus physically cannot move data that fast. You can buy your way to capacity. You cannot buy your way past memory bandwidth. The money buys the tank, not the pipe.
+
+Meanwhile an hour of hard coding on the Opus 5 API runs about 70 cents.
+
+There are only three real reasons to run a frontier model yourself: industrial volume, a strict data residency rule like healthcare or government, or agents that genuinely need to run 24/7. If none of those is you, $112,000 of hardware that loses value every year is not a flex, it is a mistake.
+
+One honest note: the seven card figure is the floor for the 1-bit quantized build (594GB). The full precision weights are 1.56TB and need roughly eighteen cards.
+
+Comment "HARDWARE" and I'll send you the full breakdown with the sources.
+
+.
+.
+.
+
+#claudeai #claudecode #anthropic #locallm #llm #selfhosted #kimik3 #moonshotai #rtxpro6000 #nvidia #aihardware #gpu #machinelearning #aiengineering #buildinpublic #aitools #opensourceai #inference #vram #memorybandwidth

@@ -1,0 +1,35 @@
+Comment "BOSS" and I'll send you the free prompt.
+
+👇 READ BELOW
+
+The thing that makes an AI coding agent good is not a better model. It is that the thing which WRITES the code is not the thing that decides whether it is finished.
+
+That is the whole trick. You give Claude a task, you tell it to spawn a team of worker sub-agents, and then you add a third line that most people leave out: appoint one agent as a strict boss whose only job is to open the real output, try to run it, and send it back. The workers build. The boss refuses. It loops on its own until the boss scores it perfect.
+
+→ Line 1 is the task, and a real example of the bar you want hit
+→ Line 2 splits it into the smallest independently judgeable pieces, one worker each
+→ Line 3 is the one that matters: a separate boss, with fresh context, who did not build it
+→ The boss opens the actual thing and tries to USE it, not read it
+→ It loops without you in the chat
+
+The reason the third line works is not strictness. It is that a builder grading its own output is checking the plan it already had in its head, so it passes. A checker with fresh context has no plan to defend and no memory of the shortcuts, so it opens the thing and finds it broken. Anthropic's own Claude Code team call this the maker checker split, and Boris Cherny, who built Claude Code, describes real verification as one question: can the agent run the thing? Not do the tests pass. Can it RUN.
+
+He also does not really prompt anymore. His words: "I don't prompt Claude anymore. I have loops running that prompt Claude and figure out what to do." And on scale: "armies of agents, with agents prompting agents in trees of thousands."
+
+Three honest notes, because the reel is thirty seconds and this part is not.
+
+One: I am calling it the boss loop and that is my name for it, not an industry term. What you will find written up is loop engineering, or agent loops. Search those if you want the deeper reading.
+
+Two: it burns tokens. Genuinely fast. Every rejection is a full rebuild and every rebuild is another pass over your codebase, so an unattended loop is a meter running in a room you are not in. Build your rough prototype by hand and cheaply, THEN turn the loop on to polish. That order is not a style preference, it is most of the cost.
+
+Three: an unattended loop without a verifier is a machine that ships bugs with total confidence. The boss is not decoration on top of the fan-out. It is the only reason you can walk away.
+
+The part nobody mentions: the failure mode is not that the boss is too harsh. It is that people write line 3 as "then review the work", which the same agent happily does in the same context and passes. The word that does the work is SEPARATE. If the boss shares the builder's context, you have written a two line prompt with extra steps.
+
+Comment "BOSS" and I'll send you the exact three line prompt, with the boss instruction written out and the two things to cap so it cannot run away with your budget.
+
+.
+.
+.
+
+#claude #claudecode #anthropic #aicoding #vibecoding #agents #subagents #aiagents #promptengineering #loopengineering #buildinpublic #devtools #softwareengineering #codingtips #aitools #automation #buildwithai #ai #techtips #programming

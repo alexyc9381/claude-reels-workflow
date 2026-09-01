@@ -1,0 +1,56 @@
+TITLE   The Official Prompt Library
+SUB     Anthropic publishes 52 free, copy-paste prompts for Claude Code, and three rules that make them work
+
+H       What this actually is
+P       Anthropic maintains a page of ready-made prompts for Claude Code, tagged by task and by role, free, with no account or signup involved. It sits inside their own documentation rather than on a marketing page, which is most of the reason people have never seen it.
+P       Every entry is a full prompt with editable fill-in fields. You change the fields on the page, copy the result, and paste it into Claude Code. There is nothing to install.
+B       Where it lives: code.claude.com/docs/en/prompt-library
+B       52 prompts, counted from the page's own data
+B       15 categories, across 5 phases of the software lifecycle
+B       Discover 7, Design 6, Build 22, Ship 5, Operate 12
+B       Sourced from Anthropic's own material: workflows 23, teams 13, best practices 10, ebook 3, legal 2, security 1
+P       One correction before anything else. The reel this guide belongs to says "over a hundred free templates". That number is wrong: the library holds 52. The count above comes from the page's own data, and the per-phase figures add up to exactly 52 so you can check it yourself. Everything else in the reel is accurate and sourced. This sits in the opening section, in the open, because the site gates everything after section one and a correction nobody can read is not a correction.
+
+RULE
+
+H       Rule one: a slash command is a skill
+P       The most common way people waste tokens is pasting the same instructions into chat over and over. Anthropic's own documentation gives the exact trigger for stopping: create a skill when you keep pasting the same instructions, checklist, or multi-step procedure into chat.
+P       A skill and a slash command are the same object. Put a SKILL.md file at .claude/skills/name/SKILL.md and Claude Code exposes it as /name. The older form, a single markdown file at .claude/commands/name.md, still works and still becomes /name.
+NUM     Write the instructions once, in a file, instead of in the chat box.
+NUM     Save it as .claude/skills/your-name/SKILL.md inside the project.
+NUM     Type /your-name. The whole procedure runs without you retyping it.
+B       Project skills live in .claude/skills/ and travel with the repository
+B       Anything you commit is shared with everyone on the team automatically
+B       The library's prompts are a good starting body for a skill file
+
+RULE
+
+H       Rule two: plan before it writes anything
+P       Plan mode makes Claude map out the work before it touches a file. Enter it by pressing Shift and Tab, or by prefixing a single prompt with /plan. When it is on, the status bar reads plan mode on.
+P       The detail that trips people up: Shift and Tab cycles through the permission modes rather than toggling one. Press it until the status bar actually says plan mode on, and do not assume one press got you there.
+B       Use it for anything touching more than one file
+B       Use it when you are not certain the approach is right, which is when a wrong approach is cheapest to catch
+B       Read the plan it produces. That is the entire point of the mode
+
+RULE
+
+H       Rule three: CLAUDE.md, so it stops asking
+P       A CLAUDE.md file is loaded at the start of every conversation in that project. It is where your conventions live so you never explain them twice.
+P       Put it at ./CLAUDE.md or ./.claude/CLAUDE.md. Both are read. Running /init writes a starting one by reading your project.
+B       Build and test commands, so it stops guessing how to run things
+B       Naming conventions and the libraries you actually use
+B       Project layout, so it looks in the right place first
+B       Your always-do and never-do rules
+B       Keep it under about 200 lines. A long one gets skimmed, which is worse than a short one
+
+RULE
+
+H       How to use the library in practice
+P       The prompts are most useful as raw material rather than as finished things. The workflow that pays off is to take one, fill in the fields, run it once, and then save the version that worked as a skill.
+NUM     Open the library and filter by the phase you are in.
+NUM     Fill in the editable fields with your own paths and behaviours.
+NUM     Run it. Keep what worked, cut what did not.
+NUM     Save the result as a SKILL.md so the second run costs one slash command.
+P       That loop turns a page of templates into a set of commands that are specific to your codebase, which is the version worth having.
+
+KEY     LIBRARY

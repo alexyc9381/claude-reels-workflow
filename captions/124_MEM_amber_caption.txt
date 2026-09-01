@@ -1,0 +1,33 @@
+Comment "MEM" and I'll send you the free setup guide.
+
+👇 READ BELOW
+
+You can open Claude's memory now and read every line of it.
+
+That is the part of the August 25 update nobody is talking about. Memory used to be one rolling summary Claude wrote after a conversation ended, and you could not see inside it. It is now a set of individual files, grouped by topic, that it writes to while you are still talking.
+
+★ Settings, then Memory, then Topics. One file per subject
+★ Open any file and read it. Edit a line. Delete the whole thing
+★ It writes DURING the chat now, not as a summary at the end
+★ On by default on Free, Pro and Max, on web, desktop and mobile
+★ Chat and Cowork share one memory, so what it learns in one shows up in the other
+
+Before this, explaining how you work in chat did nothing for your Cowork tasks. They were two separate brains. Now they are one.
+
+The part nobody mentions: memory is only worth having if it can be corrected. Every other assistant that claims to remember you hands you a black box and asks for trust. This one hands you the filing cabinet. If it has written down something wrong about your stack, your clients or the way you like things written, you go and fix that line yourself. Almost nobody will bother. The people who do will have an assistant calibrated to them inside a week, and it compounds from there.
+
+Two honest notes.
+
+One: on the consumer plans it is on by default. On Team and Enterprise the admin controls it and it defaults OFF, so if you are on a work account and nothing is appearing, that is why.
+
+Two: sensitive subjects are excluded by default. Health, race, ethnicity, religion, politics and gender identity are not saved unless you switch them on, and identification numbers, criminal history and immigration status are never saved at all.
+
+Then the catch. Cowork tasks carry that shared memory because they run in the cloud. Point a task at files on your own machine and it runs there instead, outside that path. That is why a local task can behave like it has never met you.
+
+Comment "MEM" and I'll send you the setup guide, with what to put in it on day one.
+
+.
+.
+.
+
+#claudeai #claude #anthropic #claudecowork #aimemory #secondbrain #obsidian #notionai #aitools #aiworkflow #productivity #promptengineering #aiassistant #buildinpublic #aiautomation #knowledgemanagement #pkm #aiforwork #llm #aiupdate

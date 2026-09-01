@@ -1,0 +1,27 @@
+Comment "MISTAKE" and I'll send you the free guide.
+
+👇 READ BELOW
+
+You are not worse at prompting than you were six months ago. You just have more apps connected, and nobody told you what that costs.
+
+Here is the number, from Anthropic's own docs, not from me. A typical multi server setup, GitHub plus Slack plus Sentry plus Grafana plus Splunk, burns about 55,000 tokens in tool definitions before Claude reads a single word you typed. That is not your prompt. That is the furniture.
+
+Three things are riding along in there, and all three come out in under a minute.
+
+→ 1. Stop telling it to act like an expert. Anthropic's own prompt engineering guidance says modern models are sophisticated enough that heavy handed role prompting is often unnecessary, and that a very specific persona can actively limit how helpful it is. That paragraph you paste at the top is costing you window and buying nothing. Spend those tokens telling it exactly where the sources live and telling it to check its own work before it finishes.
+
+→ 2. Stop writing what you do not want. Anthropic's guidance is one line: tell the AI what TO do instead of what NOT to do. Their own before and after is "Do not use markdown in your response" becoming "Your response should be composed of smoothly flowing prose paragraphs". A negative instruction has no direction in it. The model has to hold the thing you banned in mind the whole time in order to avoid it, which is exactly the wrong place to put your attention and its.
+
+→ 3. Turn off automatic tool access. Settings, then Connectors, then Tool access, then "Load tools when needed". Anthropic's own figure for loading on demand instead of up front is a reduction of over 85 percent, because it pulls in the 3 to 5 tools the request actually needs instead of the whole shelf. They recommend it once you are past roughly 10 connectors, and selection accuracy starts degrading past 30 to 50 tools anyway, so it makes the answers better and not just cheaper.
+
+One honest note, because the frame is where the receipts live. The shipped default is Auto, not everything loaded forever, so this is not silently costing every single person 55k a message. What it is, is the thing that quietly gets worse every time you connect one more app and never look at that setting again. Check it once.
+
+The other two are free and take ten seconds each, and they are the two nobody checks because they feel like good prompting.
+
+Comment "MISTAKE" and I'll send the full 15, with the menu path for the setting and the source for every claim.
+
+.
+.
+.
+
+#claudeai #claudecode #anthropic #promptengineering #contextengineering #aitools #aiworkflow #chatgpt #aiproductivity #promptengineer #aiautomation #buildwithai #mcp #aiagents #techtips #aitipsandtricks #productivityhacks #saas #devtools #aicoding

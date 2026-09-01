@@ -1,0 +1,31 @@
+Comment "DESIGN" and I'll send you the full setup guide.
+
+👇 READ BELOW
+
+Most people still have not seen what the /design command actually puts on screen.
+
+The command is /design. You run it in the repo you are already working in, you give it a brief, and Claude publishes a canvas of editable artboards for your UI and prints you the link. You pick the one you want, tweak it on the canvas, and tell Claude to implement it.
+
+→ /design → publishes a canvas of editable artboards, built on artifacts
+→ the canvas → click to select, a properties panel, edit text inline, undo and redo
+→ Save → publishes a new version for everyone who has the link
+→ /design-sync → pulls your design system INTO the project, one component at a time
+→ the design system → your type, your colors, your spacing, your components, your brand
+
+Why the second command is the one that matters:
+
+/design on its own is a very good guesser. It has no idea what your buttons look like, so it invents some. /design-sync is what fixes that. It reads the codebase you already have, extracts the real tokens, and writes them where Claude Code will actually build against them, so the next page it makes is assembled out of your parts instead of the same stock layout every AI reaches for. It syncs incrementally, one component at a time, never as a wholesale replace, and it goes both ways: what you build in code can be pushed back onto the canvas.
+
+The part nobody mentions:
+
+It is a research preview, it needs v2.1.233 or later, and it is on Pro, Max, Team and Enterprise. Not the free plan. Every post about this leaves that out and then people wonder why the command does not exist for them.
+
+And the honest version of "just click and drag until it looks right" is smaller than it sounds. You select an element, you adjust it in a properties panel, you edit text in place, you undo. That is enough to fix a layout. It is not a full design tool, and the moment you want real change you are back in the terminal telling Claude to implement it, which is exactly where it should happen.
+
+Comment "DESIGN" and I'll send you the setup order, both commands, and what to run first so Claude builds from your system instead of guessing.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #claudedesign #aitools #aiagents #devtools #frontend #uidesign #designsystems #designtokens #vibecoding #buildinpublic #softwareengineering #webdesign #promptengineering #programming #developertools
