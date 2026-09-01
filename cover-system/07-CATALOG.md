@@ -25,6 +25,7 @@ Both numbers are in circulation and both are right about different things. State
 | `src/ReelCovers2.tsx` | `CardCover` | 2 | OS (v1, superseded), RAMSAY |
 | `src/ReelCovers3.tsx` | `SceneCover` | 7 | OS (v2), TAKES, CAROUSEL, DESIGN, CALLBACK, PURGE, PLUGINS |
 | `src/ReelCovers4.tsx` | `SceneCover` | 13 | POWERS, EVOLVE, STACK, ARENA, VAULT, MINT, CREW, BLUEPRINT, CLONE, WORTHY, ATTACK, FACTORY, SOL |
+| `src/ReelCovers5.tsx` | `SceneCover` | 2 | BOSS (reel 128), FREE (reel 131) |
 
 - **23 covers built** in total (3 + 2 + 7 + 13). This is the number in the build memory.
 - **23 scene covers** (3 + 7 + 13). These are the ones on the locked `SceneCover` header slot, the
@@ -402,3 +403,81 @@ numbers are game fiction RECEIPTS, FACTORY 37 SOL 36 OpenAI ChatGPT teal, expire
 WORTHY 27 unverified routing claim, giantSize table TASTE 538 OVERNIGHT 1012, cover worthiness
 checklist, ask which surface first, nocodealex, SceneCover Giant header slot, keyword to reel number
 map, keyword to filename map
+
+
+---
+
+## Set 5 — reel 128 BOSS (added 2026-08-31)
+
+| field | value |
+|---|---|
+| Keyword / CTA | **BOSS** ("Comment BOSS for the free guide") |
+| Backs | reel **128 BOSS**, "the boss loop" — delivered, `boss_full.mp4` |
+| line1 (78px) | `GIVE CLAUDE A `CLAY:STRICT`` |
+| giant | `BOSS` |
+| giantSize | 158 (default — 4 letters, no fit needed; width 424, margins 331/325) |
+| Scene | THE BOSS ROOM: a giant suited/stern Claude on the arena disc, the work bursting off his chest mid-bounce, two hard-hat workers dwarfed in the near plane, the ten-segment rail lit 3/10 on pylons above |
+| Mascot | `HouseMascot` — boss `suit={1} stern={1}`, party `constr={1}` |
+| Source | `src/ReelCovers5.tsx` |
+| Delivered as | `out/BOSS_cover.png` |
+| Verifier | ALL PASS — slot 445..652, margins 331/325, quiet-zone step 23, gutter std 36.6, void 40px |
+
+**Why this headline.** The reel's own on-screen header is `CLAUDE NEEDS / A STRICT BOSS`
+(`ClaudeBoss128Reel.tsx`, `<HookHeader big hot />`). That is third-person commentary, which §2 of the
+copy system forbids on a cover, so the same nouns were turned into an offer addressed to the viewer.
+The result is the HERMES shape verbatim (`GIVE CLAUDE `REAL` / MEMORY`), and the giant is also the CTA
+keyword, so the word the viewer has to type is the biggest thing on the tile.
+
+**Two defects this cover produced, both §E silhouette failures:**
+1. **v1 party at size 152 with a left edge at x36** — the ATTACK edge-hugging signature exactly. Fixed
+   by splitting the planes: the boss stands FAR (ground 1418) and the party stands NEAR (ground 1498)
+   at size 224, so the workers are big enough to read and still dwarfed ~2.7x.
+2. ⛔ **v2 drew the refusal as a crescent shield wedge and it read as a CROISSANT over his face.** A
+   thin arc is not a barrier. Replaced with an 11-point impact star at chest height with the slabs
+   caught mid-bounce — the one shape nobody has to decode.
+
+
+---
+
+## Set 5b — reel 131 FREE (added 2026-08-31)
+
+| field | value |
+|---|---|
+| Keyword / CTA | **FREE** ("Just comment FREE for the link") |
+| Backs | reel **131 FREE**, "one free platform holds every premium AI model" — delivered, 3 cuts |
+| line1 (78px) | `GET `CLAY:EVERY` AI TOOL` |
+| giant | `FREE` |
+| giantSize | 158 (default — 4 letters; width 427, margins 332/321) |
+| Scene | THE FARE HALL counter: six tool tiles on the wall, one slot empty, the seventh arriving on a gold arc into a Claude's raised arms |
+| Source | `src/ReelCovers5.tsx` |
+| Delivered | `out/FREE131_cover.png` -> Drive `Faceless/131 - FREE/131_FREE_cover.png` |
+| Verifier | ALL PASS — slot 445..652, margins 332/321, quiet-zone step 25, void 80px |
+
+**Why this headline.** The reel's frame-0 claim plate is `5 AI SUBSCRIPTIONS / ONE FREE PLATFORM`.
+That is a comparison, and a cover's line1 has to be an offer (§2), so it became the imperative the
+reel's own first line already uses ("Stop paying... you get..."). The giant is the CTA keyword, so the
+word the viewer has to type is the biggest thing on the tile — same move as BOSS.
+
+**⛔ THE REEL'S LEDGER TRAVELS TO THE COVER.** `FreeWorld.R` bans a currency figure, the platform's
+name, and UNLIMITED / FOREVER / BEST / FASTEST. None appears here. The seven tiles carry **no marks and
+no names**: listing contents on a cover is a documented rejection, and GROK has no logo in
+`public/logos` or on the Simple Icons CDN, where a wrong mark would be worse than none.
+
+**Three defects this cover produced:**
+1. **Flat colour plates read as a SWATCH PALETTE**, and the abstract glyphs that replaced them were
+   rejected outright: *"you need to have logos like actual logos rather than just random stuff."* The
+   tiles now carry the REAL marks, inlined as single SVG paths in `src/logoPaths.ts` so the cover stays
+   asset-free. `openai`/`chatgpt` and `grok`/`xai` 404 on the Simple Icons CDN, but the OpenAI mark was
+   sitting in `video/public/logos_official/` — check every logo directory, not just `logos/`. GROK has
+   no mark anywhere, so it ships as a stencilled wordmark, exactly as the reel did.
+2. ⛔ **The moving tile was drawn BEFORE the shelf band and the shelf painted over it.** Authored,
+   positioned, and completely invisible — the same class as reel 131's own `showHead` bug. Draw order
+   is part of the composition. The shelf was deleted: it was also a full-width bar lying exactly across
+   the flight path.
+3. **The tile then landed across the mascot's face.** A house sprite's face is the part a viewer looks
+   for; covering it costs the whole sprite its read. Moved onto the raised arm instead.
+
+⚠️ **line1 has no optical fit — only the giant does.** `GET EVERY AI TOOL FOR` measured 55/52px
+margins, inside the range Alex has already rejected once ("too close to the edges", at 37/30). Dropping
+one word took it to 146/142. **Measure line1's own margins after writing it; the verifier only checks
+the giant.**

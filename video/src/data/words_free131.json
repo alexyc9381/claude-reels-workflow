@@ -1,0 +1,537 @@
+[
+{
+"start": 0.0,
+"end": 0.29,
+"word": " Stop"
+},
+{
+"start": 0.29,
+"end": 0.47,
+"word": " paying"
+},
+{
+"start": 0.47,
+"end": 0.67,
+"word": " for"
+},
+{
+"start": 0.67,
+"end": 1.01,
+"word": " multiple"
+},
+{
+"start": 0.8,
+"end": 1.02,
+"word": " AI"
+},
+{
+"start": 1.02,
+"end": 1.5,
+"word": " subscriptions."
+},
+{
+"start": 2.01,
+"end": 2.05,
+"word": " I"
+},
+{
+"start": 2.085,
+"end": 2.15,
+"word": " just"
+},
+{
+"start": 2.16,
+"end": 2.29,
+"word": " found"
+},
+{
+"start": 2.235,
+"end": 2.31,
+"word": " one"
+},
+{
+"start": 2.31,
+"end": 2.51,
+"word": " free"
+},
+{
+"start": 2.51,
+"end": 2.87,
+"word": " platform"
+},
+{
+"start": 2.82,
+"end": 2.96,
+"word": " that"
+},
+{
+"start": 2.96,
+"end": 3.1,
+"word": " gives"
+},
+{
+"start": 3.1,
+"end": 3.24,
+"word": " you"
+},
+{
+"start": 3.24,
+"end": 3.52,
+"word": " access"
+},
+{
+"start": 3.63,
+"end": 3.83,
+"word": " to"
+},
+{
+"start": 3.83,
+"end": 4.05,
+"word": " every"
+},
+{
+"start": 4.05,
+"end": 4.45,
+"word": " premium"
+},
+{
+"start": 4.34,
+"end": 4.56,
+"word": " AI"
+},
+{
+"start": 4.56,
+"end": 4.76,
+"word": " tool"
+},
+{
+"start": 4.76,
+"end": 4.92,
+"word": " in"
+},
+{
+"start": 4.92,
+"end": 5.04,
+"word": " one"
+},
+{
+"start": 5.37,
+"end": 5.73,
+"word": " place."
+},
+{
+"start": 6.06,
+"end": 6.1,
+"word": " You"
+},
+{
+"start": 6.135,
+"end": 6.22,
+"word": " get"
+},
+{
+"start": 6.22,
+"end": 6.64,
+"word": " ChatGPT,"
+},
+{
+"start": 6.52,
+"end": 6.94,
+"word": " Claude,"
+},
+{
+"start": 7.08,
+"end": 7.3,
+"word": " Gemini,"
+},
+{
+"start": 7.42,
+"end": 7.56,
+"word": " Grok,"
+},
+{
+"start": 7.58,
+"end": 8.04,
+"word": " Perplexity,"
+},
+{
+"start": 8.24,
+"end": 8.34,
+"word": " Kimi"
+},
+{
+"start": 8.48,
+"end": 8.52,
+"word": " and"
+},
+{
+"start": 8.555,
+"end": 8.8,
+"word": " DeepSeek"
+},
+{
+"start": 8.86,
+"end": 9.08,
+"word": " all"
+},
+{
+"start": 9.08,
+"end": 9.22,
+"word": " in"
+},
+{
+"start": 9.22,
+"end": 9.42,
+"word": " one"
+},
+{
+"start": 9.68,
+"end": 10.0,
+"word": " spot."
+},
+{
+"start": 10.1,
+"end": 10.26,
+"word": " No"
+},
+{
+"start": 10.26,
+"end": 10.56,
+"word": " switching"
+},
+{
+"start": 10.56,
+"end": 10.86,
+"word": " tabs"
+},
+{
+"start": 10.7,
+"end": 10.9,
+"word": " and"
+},
+{
+"start": 10.9,
+"end": 11.06,
+"word": " no"
+},
+{
+"start": 11.06,
+"end": 11.32,
+"word": " juggling"
+},
+{
+"start": 11.29,
+"end": 11.89,
+"word": " subscriptions."
+},
+{
+"start": 12.45,
+"end": 12.49,
+"word": " It"
+},
+{
+"start": 12.525,
+"end": 12.67,
+"word": " also"
+},
+{
+"start": 12.67,
+"end": 12.81,
+"word": " has"
+},
+{
+"start": 12.745,
+"end": 12.987,
+"word": " Nano"
+},
+{
+"start": 12.987,
+"end": 13.333,
+"word": " Banana,"
+},
+{
+"start": 13.333,
+"end": 13.68,
+"word": " Seedance,"
+},
+{
+"start": 13.86,
+"end": 14.06,
+"word": " GPT"
+},
+{
+"start": 14.06,
+"end": 14.32,
+"word": " Image"
+},
+{
+"start": 14.32,
+"end": 14.52,
+"word": " all"
+},
+{
+"start": 14.47,
+"end": 14.61,
+"word": " in"
+},
+{
+"start": 14.61,
+"end": 14.87,
+"word": " there."
+},
+{
+"start": 14.99,
+"end": 15.25,
+"word": " Plus"
+},
+{
+"start": 15.25,
+"end": 15.59,
+"word": " top"
+},
+{
+"start": 15.59,
+"end": 15.77,
+"word": " tier"
+},
+{
+"start": 15.8,
+"end": 16.06,
+"word": " reasoning"
+},
+{
+"start": 16.06,
+"end": 16.38,
+"word": " engines"
+},
+{
+"start": 16.38,
+"end": 16.54,
+"word": " on"
+},
+{
+"start": 16.54,
+"end": 16.7,
+"word": " top"
+},
+{
+"start": 16.68,
+"end": 16.8,
+"word": " of"
+},
+{
+"start": 16.8,
+"end": 17.08,
+"word": " that."
+},
+{
+"start": 17.43,
+"end": 17.59,
+"word": " So"
+},
+{
+"start": 17.59,
+"end": 17.71,
+"word": " you"
+},
+{
+"start": 17.71,
+"end": 17.89,
+"word": " literally"
+},
+{
+"start": 17.94,
+"end": 18.14,
+"word": " get"
+},
+{
+"start": 18.14,
+"end": 18.48,
+"word": " text,"
+},
+{
+"start": 18.58,
+"end": 18.82,
+"word": " images,"
+},
+{
+"start": 18.86,
+"end": 18.96,
+"word": " reasoning,"
+},
+{
+"start": 19.2,
+"end": 19.38,
+"word": " everything"
+},
+{
+"start": 19.38,
+"end": 19.6,
+"word": " you're"
+},
+{
+"start": 19.8,
+"end": 20.02,
+"word": " currently"
+},
+{
+"start": 20.02,
+"end": 20.24,
+"word": " paying"
+},
+{
+"start": 20.24,
+"end": 20.44,
+"word": " for"
+},
+{
+"start": 20.44,
+"end": 20.76,
+"word": " separately"
+},
+{
+"start": 20.515,
+"end": 20.74,
+"word": " in"
+},
+{
+"start": 20.74,
+"end": 20.92,
+"word": " one"
+},
+{
+"start": 20.92,
+"end": 21.12,
+"word": " place"
+},
+{
+"start": 21.21,
+"end": 21.37,
+"word": " for"
+},
+{
+"start": 21.37,
+"end": 21.63,
+"word": " free."
+},
+{
+"start": 22.08,
+"end": 22.26,
+"word": " People"
+},
+{
+"start": 22.26,
+"end": 22.42,
+"word": " are"
+},
+{
+"start": 22.42,
+"end": 22.62,
+"word": " paying"
+},
+{
+"start": 22.51,
+"end": 22.67,
+"word": " for"
+},
+{
+"start": 22.67,
+"end": 22.95,
+"word": " 5"
+},
+{
+"start": 22.95,
+"end": 23.43,
+"word": " subscriptions"
+},
+{
+"start": 23.33,
+"end": 23.53,
+"word": " while"
+},
+{
+"start": 23.53,
+"end": 23.69,
+"word": " this"
+},
+{
+"start": 23.69,
+"end": 23.79,
+"word": " one"
+},
+{
+"start": 23.78,
+"end": 23.92,
+"word": " is"
+},
+{
+"start": 23.92,
+"end": 24.28,
+"word": " completely"
+},
+{
+"start": 24.28,
+"end": 24.66,
+"word": " free."
+},
+{
+"start": 25.39,
+"end": 25.51,
+"word": " Want"
+},
+{
+"start": 25.51,
+"end": 25.63,
+"word": " to"
+},
+{
+"start": 25.63,
+"end": 25.79,
+"word": " try"
+},
+{
+"start": 25.705,
+"end": 25.745,
+"word": " it"
+},
+{
+"start": 25.78,
+"end": 25.82,
+"word": " for"
+},
+{
+"start": 25.855,
+"end": 26.12,
+"word": " yourself?"
+},
+{
+"start": 26.34,
+"end": 26.4,
+"word": " Just"
+},
+{
+"start": 26.415,
+"end": 26.64,
+"word": " comment"
+},
+{
+"start": 26.64,
+"end": 26.9,
+"word": " FREE"
+},
+{
+"start": 26.78,
+"end": 26.96,
+"word": " for"
+},
+{
+"start": 26.96,
+"end": 27.08,
+"word": " the"
+},
+{
+"start": 27.08,
+"end": 27.24,
+"word": " link."
+}
+]

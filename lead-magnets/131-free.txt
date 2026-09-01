@@ -1,0 +1,66 @@
+TITLE   Every Premium AI Model in One Place
+SUB     What the one tab route actually is, what it costs you that a subscription does not, and the eight questions to ask before you trust one
+
+H       Why this guide exists
+P       The video is about a single idea: you are probably paying several companies for the same job. Chat, images and reasoning are three different bills in most setups, and each one renews on its own date, which is the part that quietly makes it expensive.
+P       This guide is not a list of coupons. It is the thing underneath: how a one tab route works mechanically, what you actually give up when you take it, and the checks that separate a real aggregator from a wrapper you should not paste your work into.
+P       The link to the platform comes in the DM. This is the part that stays true whichever one you end up using.
+
+RULE
+
+H       What "all of them in one place" actually is
+P       There is no product that contains GPT, Claude and Gemini. What exists is a router: one interface in front of many providers, holding its own key with each of them and forwarding your prompt to whichever model you picked.
+P       That single fact explains almost everything else about the category. The interface is the product; the models are somebody else's. It is why the list changes without warning, why the same model can feel different in two aggregators, and why the honest ones tell you which model answered.
+B       You are the aggregator's user. You are not the model provider's user, and you usually have no account with them at all.
+B       Your prompt takes an extra hop. It goes to the aggregator, then to the provider, and the answer comes back the same way.
+B       The bill you stop paying is the subscription. The cost does not vanish, it moves to whoever is running the router.
+
+RULE
+
+H       The seven the video names, and who actually makes each
+P       Worth knowing, because the maker is who your text ends up with regardless of whose interface you typed it into.
+B       ChatGPT is OpenAI's.
+B       Claude is Anthropic's.
+B       Gemini is Google's.
+B       Grok is xAI's.
+B       Perplexity is Perplexity AI's, and it is the odd one out: it is a search product with models inside it rather than a model.
+B       Kimi is Moonshot AI's.
+B       DeepSeek is DeepSeek's.
+
+H       And the three image and video ones
+P       These were checked on the makers' own pages while this guide was written, because product names in this corner move faster than anything else.
+B       Nano Banana is Google's image model, and it lives inside Gemini. Google's own page for it currently leads with Nano Banana 2.
+B       Seedance is ByteDance's, published under their Seed research group as Seedance 1.0.
+B       GPT Image is OpenAI's, documented in their platform docs as the image generation API rather than as a consumer product.
+P       If a platform lists an image model under a name none of those three companies use, that is worth a second look before you rely on it.
+
+RULE
+
+H       What you give up, honestly
+P       A free route is not a worse model. It is usually the same model with different limits around it, and the limits are the thing to understand before you move real work over.
+NUM     Context. Providers expose several window sizes for the same model, and a router is free to use the cheapest. A long document that worked yesterday can silently get truncated today.
+NUM     Rate. Free tiers are queued. This is fine for one question and painful for a session where you are iterating.
+NUM     Continuity. Your history usually lives with the aggregator, not the provider, so it does not follow you if you leave. Export early rather than at the end.
+NUM     Nothing to escalate to. There is no support contract on a free tier, and no commitment that a model available this week is available next week.
+P       None of this makes the route wrong. It makes it the right tool for exploring and comparing, and the wrong one for a workflow you cannot afford to have change under you.
+
+RULE
+
+H       The eight questions, before you paste anything real in
+NUM     Does it tell you which model answered? An aggregator that hides this can substitute a cheaper model and you would never know.
+NUM     Does it say what it does with your prompts? Look for a plain sentence about training. Absence of a sentence is an answer.
+NUM     Can you export? A conversation history you cannot get out is a conversation history you do not own.
+NUM     Is there a rate limit written down anywhere? A published limit is a promise. An unpublished one is a surprise.
+NUM     Does it name its providers? The honest ones do, because the provider list is the product.
+NUM     Is there an account, or does it work anonymously? Anonymous is fine for a test and bad for anything you want back tomorrow.
+NUM     What happens at the ceiling? Some queue you, some downgrade the model quietly, some just stop. Find out on something you do not care about.
+NUM     Who is running it? A named company with a normal website is a different risk from a page with no owner on it.
+P       Two of those eight are about your text and not about the models. Those are the two most people skip.
+
+RULE
+
+H       The one thing worth doing today
+P       Open whichever route you use and ask the same question of three different models, side by side, on something you actually know the answer to.
+P       That is the whole argument for having them in one place, and it is the only thing a subscription to one of them cannot give you. Not that any single model is better, but that you stop guessing which one to ask.
+
+KEY     FREE

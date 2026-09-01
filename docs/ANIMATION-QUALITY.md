@@ -1272,6 +1272,123 @@ See `memory/authored-motion-needs-its-own-driver.md`.
 
 ---
 
+## 23. ⛔⛔⛔ THE VILLAIN IS **SAMENESS**, NOT UGLINESS (reel 124)
+
+The VO said *every AI website builder gives you the same page*. I drew that page as a grey
+wireframe. Alex, twice:
+
+> *"i dont get why you keep havingt ht boring like gray thing that gets stamped on his face like
+> wtf / and the website on the stamper thing is not interesting its just gray stuff"*
+
+**Two separate failures, stacked.**
+
+1. **GREY + RECTANGULAR is the named boring combination** (§20, and
+   `feedback_dressing_the_words_is_not_redoing_it`). Greyscale motion is
+   `(fraction repainted) × (luma delta)` — a grey slab against a grey ground has almost no delta,
+   so it is *literally* the lowest-scoring thing you can draw.
+2. **It was also FALSE.** Lovable and Replit do not emit grey wireframes. They emit a perfectly
+   attractive landing page. I had drawn the competitor badly instead of drawing it *accurately*.
+
+⭐⭐⭐ **THE RULE: find the property the script is actually disparaging, and depict THAT property.**
+The claim was not "the output is ugly." It was "the output is identical." So the fix was to draw a
+genuinely handsome page — indigo/violet gradient hero, orange CTA, three cards with teal, amber and
+rose icons — and then show it coming out of the press **identical, again and again, onto a stack**.
+Sameness is dramatised by *repetition*, and repetition is free motion.
+
+Drawing the villain ugly is the lazy move and it always costs a round: it makes a dead frame **and**
+it makes a claim the viewer knows is untrue.
+
+---
+
+## 24. ⛔⛔⛔ REAL FOOTAGE HAS A **LEGIBILITY BUDGET** (reel 124)
+
+§9 says real UI and real footage are the biggest single motion lever. Reel 124 is where I learned
+they only pay if the viewer can **recognise the product**:
+
+> *"at 14 seconds the animation is too static like its boring and the wbeiste itself is too small to
+> be able to see and some of the scrolls are wayyy too fast like you need ot be scroling a bit
+> slower at some instances its like going wayyy too quickly"*
+
+Three rules, all learned the expensive way:
+
+- **Big enough to read.** A capture that does not occupy enough of the panel for UI text and layout
+  to register is decoration. It scores fine on motion and communicates nothing.
+- **Slow enough to read.** A scroll that outruns the eye reads as a glitch, not a website.
+- ⛔⛔ **DO NOT SLOW A CAPTURE BY LOWERING `rate` BELOW 1.0.** It does not slow the motion — it
+  **holds frames**. On 124 that pushed HOLD from 67% to **88%**: measurably *more* still, and
+  visibly stuttery. The only fix is to **re-record with a shorter scroll span** (124 landed at
+  1000–1300px) at `rate ≈ 1.0`.
+
+And the fourth, from the same reel and already its own memory: **never draw over the footage.**
+Put every drawn part at a **z BELOW the capture** so it is structurally impossible to cross it —
+see `feedback_arcade_world_means_neon_on_black`.
+
+---
+
+## 25. ⛔⛔⛔ PREDICTABLE MOTION IS NOT ANTICIPATION (reel 124)
+
+> *"at 13 seconds its too static and predictable motion so people would scroll away, and it's not
+> anticipatory either"*
+
+§ "motion needs a destination" is **necessary but not sufficient.** A thing can travel to a real
+destination and still be dead, because the viewer can extrapolate the next second from the current
+one. Nothing is being withheld, so there is no reason to stay.
+
+⭐⭐⭐ **Anticipation is a PROMISED EVENT WHOSE RESOLUTION IS WITHHELD.** The shot must state that
+something is *about* to happen before it happens: a press descending toward a page, a counter
+climbing toward a threshold, a stack growing toward the top of frame.
+
+**The test, at any frame:** *what does the viewer not yet know, that this shot has already promised
+them?* If the answer is "nothing", the shot is decoration no matter what the motion audit says —
+this is the same failure mode as §"a green gate can point the wrong way".
+
+---
+
+## 26. ⛔⛔ WHEN A NOTE LANDS ON THE SAME OBJECT TWICE, THE **OBJECT** IS WRONG (reel 124)
+
+The hook had a mask. I refined it across four rounds — size, then colour, then timing, then
+material — each time treating "still not interesting" as a rendering problem. Round five:
+
+> *"at 4 seconds why ist here that thing on the screen like that mask thing lik ei dont like the
+> mask concept even i the very hook part like please remove nad replace"*
+
+**Four rounds spent tuning a thing that should not have existed.**
+
+⭐⭐ **THE RULE: the second time a note lands on the same object, stop tuning it and replace the
+concept.** A repeated note is not "not enough of it" — it is "not this."
+
+Two corollaries from the same reel:
+
+- **A rejected concept does not get another coat of paint.** Two hook worlds (a tailor's shop, a
+  portrait wall) were rejected outright, not adjusted. See
+  `feedback_dressing_the_words_is_not_redoing_it`.
+- ⭐ **When Alex names reference reels — OX, UNLAZY, BOSS — he is naming a CONCEPT CLASS, not a
+  look.** What those three share is *a body doing physical work against a load*. Copying their
+  palette or camera answers nothing; build an event with weight in it.
+
+---
+
+## 27. ⛔⛔ THE SPRITE'S FACE IS A PERFORMANCE SURFACE, NOT A LANDING PAD (reel 124)
+
+> *"the face of the claude sprite like it should be more interestign compared to whatever boring
+> shape lands on its face right now"*
+
+The audience reads the beat off the face. Landing a prop **on** the face covers the one surface
+carrying the emotion, at exactly the moment the beat happens — so the scene's payoff and the
+scene's acting cancel each other out.
+
+Land props **beside**, **in front of**, or **into the hands of** the sprite, and let the face react
+to them. Same for headers, plates and chips: nothing occludes the face on a beat frame.
+
+**And headers name the OUTCOME, in the viewer's words.** Alex rewrote mine himself:
+
+> *"the header text needs to be a lot better like \"Create 3D AI Websites\""*
+
+Not a description of the set, not a restatement of the theme — the thing the viewer wants to be
+able to *do*. See `feedback_headers_state_the_claim`.
+
+---
+
 ## Related
 [`THE-OPEN.md`](THE-OPEN.md) (the first five seconds, and the correction in §2 above) ·
 [`MEASURING.md`](MEASURING.md) (making a number mean something) ·
@@ -1282,6 +1399,7 @@ See `memory/authored-motion-needs-its-own-driver.md`.
 [`SOUND-DESIGN.md`](SOUND-DESIGN.md) §2b (the audio half of §9's density budget) ·
 `memory/claude107-reel.md` (reel 107 — the source of §5's action loops and all of §9) ·
 `memory/reels/ox-factory-log.md` (reel 119 — §19, and the four rules its nine hook rounds produced) ·
-`memory/reels/unlazy-factory-log.md` (reel 120 — §20-22, seven review rounds and the delivery findings)
+`memory/reels/unlazy-factory-log.md` (reel 120 — §20-22, seven review rounds and the delivery findings) ·
+`memory/reels/web-factory-log.md` (reel 124 — §23-27, the twelve rounds behind them)
 
 ---

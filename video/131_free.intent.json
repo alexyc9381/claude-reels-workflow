@@ -1,0 +1,26 @@
+{
+  "vo_onset_max_s": 0.15,
+  "audio_onset_max_s": 0.15,
+  "music_onset_max_s": 0.15,
+  "ends_tight_max_s": 0.5,
+  "max_short_word_s": 0.8,
+  "caption_drift_tol_s": 0.12,
+  "music_bed": "public/131free_bed.wav",
+  "words_json": "src/data/words_free131.json",
+  "scenes": [
+    { "i": 0,  "f": 0,   "job": "TOLL hook" },
+    { "i": 1,  "f": 60,  "job": "ALLEY the door with no slot" },
+    { "i": 2,  "f": 85,  "job": "HALL lights up bay by bay" },
+    { "i": 3,  "f": 182, "job": "BENCH four plates seat" },
+    { "i": 4,  "f": 227, "job": "RACK seven, one spot" },
+    { "i": 5,  "f": 303, "job": "TABS shut, discs dropped" },
+    { "i": 6,  "f": 374, "job": "PRESS three image models" },
+    { "i": 7,  "f": 450, "job": "LOFT reasoning on top" },
+    { "i": 8,  "f": 523, "job": "LINE text images reasoning" },
+    { "i": 9,  "f": 576, "job": "MERGE five lanes into one" },
+    { "i": 10, "f": 662, "job": "ROW five still paying" },
+    { "i": 11, "f": 700, "job": "GATE the free one" },
+    { "i": 12, "f": 762, "job": "CTA comment FREE" }
+  ],
+  "_note": "Reel 131 FREE. Board storyboards/131-free.md. 828f / 27.60s."
+}

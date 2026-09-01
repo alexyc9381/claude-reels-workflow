@@ -1,0 +1,2 @@
+file '/Users/allyy/Downloads/claude-reels-workflow/vo/121-hardware/parts/hook.wav'
+file '/Users/allyy/Downloads/claude-reels-workflow/vo/121-hardware/parts/body.wav'

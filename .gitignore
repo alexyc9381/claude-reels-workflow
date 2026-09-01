@@ -34,3 +34,8 @@ __pycache__/
 *.pyc
 out/
 *.npy
+
+# per-reel site captures + scroll frame sequences — regenerable via
+# tools/<reel>_capture.mjs and tools/<reel>_frames.mjs; 179MB for reel 124 alone
+video/public/*/frames/
+video/public/web124/

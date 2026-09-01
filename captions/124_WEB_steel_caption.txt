@@ -1,0 +1,23 @@
+Comment "WEB" and I'll send you the link.
+
+👇 READ BELOW
+
+Open these five pages on a desktop with a real scroll wheel. Every one of them is doing a thing you have seen and never had a name for.
+
+→ lenis.darkroom.engineering : smooth scroll, on a page built to demonstrate it. Scroll it fast, then scroll a normal site right after.
+→ gsap.com : the animation library most of this category is standing on. Its own homepage is the reel.
+→ spline.design : 3D scenes composed in a browser with nothing to install.
+→ haoqi.design : a portfolio where the typography itself has weight and reflection. Count how few things are on screen at once.
+→ awwwards.com/websites/3d : the wall of winners, if you want fifty more.
+
+Now study them for the SEQUENCE, not the surface. Scroll each one slowly and write down what happens at 10 percent, at 40 percent and at 80 percent. That list is the thing you are actually trying to reproduce, and it is four or five lines long.
+
+The part nobody mentions: the reason those sites feel expensive is not the 3D. It is that somebody decided what happens at each point of the scroll. Depth with no sequencing is just a page that lags. The tool gets you the layers. Deciding that the product turns to face you at 40 percent and the price arrives at 75 percent is still the job, and it takes an afternoon rather than a month.
+
+Comment "WEB" and I'll send you the tool that does the layers from a single prompt.
+
+.
+.
+.
+
+#webdesign #webdev #3dwebsite #scrollanimation #awwwards #gsap #threejs #webgl #frontend #uidesign #uxdesign #creativecoding #designinspiration #motiondesign #interactiondesign #portfolio #webdesigner #nocode #aitools #buildinpublic

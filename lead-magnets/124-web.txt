@@ -1,0 +1,76 @@
+TITLE   The 3D Scroll Website Playbook
+SUB     What actually makes those sites feel expensive, the real pages to study, and how to get one without writing WebGL
+
+H       Why this exists
+P       Every AI website builder currently returns the same page. A nav bar, a headline, a subhead, a button, three cards, a footer. It is a competent layout and you can spot one from across the room, which is the problem: the thing you are trying to signal is that somebody thought about this, and a template signals the opposite.
+P       The sites people actually stop on are not better laid out. They are DEEPER. That is the whole difference, and once you can name it you can ask for it.
+P       This guide is the mechanism, the real pages that demonstrate each part of it, and the honest costs. Nothing here needs you to write a line of WebGL.
+
+RULE
+
+H       The one idea underneath all of it
+P       A flat page is one plane. Everything on it sits at the same distance from you, so moving down the page only moves content past a window.
+P       A 3D scroll site is several planes at different distances, with objects standing in the gaps between them. Move down the page and the planes move at different rates, the objects turn, and the light changes. Your eye reads that as a place rather than a document.
+NUM     Scroll position is one number. Every layer offset, every camera move, every object that turns to look at you is that single number driving a different curve. That is the entire trick, and it is why these sites feel coordinated rather than busy.
+P       Flat builders never expose that number. The tools worth using hand it to you.
+
+RULE
+
+H       The five layers, and what belongs on each
+P       Take the page you already have and put its parts at five depths. This is the exercise, and it works whether you build it by hand or describe it to a generator.
+B       Layer 1, furthest back: the ground. A gradient, a photograph, a video, or a live 3D scene. It moves the least. It is what everything else is read against.
+B       Layer 2: the headline block. It moves slowly and it is the thing the ground makes room for.
+B       Layer 3: the content row. Cards, features, logos. This is where most of your actual information lives and it moves at roughly the reader's own pace.
+B       Layer 4: the objects. One or two real dimensional things standing in the gap between layers. This is the layer people remember, and one object is almost always enough.
+B       Layer 5, nearest: the chrome. Nav, cursor, buttons, anything the visitor touches. It moves the most and it never gets occluded.
+P       The gaps are the product. If two layers move at the same rate they are one layer wearing two costumes, and the page reads flat however many elements are on it.
+
+RULE
+
+H       Real pages that each demonstrate one part
+P       Open these on a desktop with a real scroll wheel. Every one of them is doing exactly one of the things above better than a description can convey.
+B       lenis.darkroom.engineering. Smooth scroll, and a page built to show you what smooth scroll actually means. Scroll it fast and then scroll a normal site immediately after: the difference is the thing you have been unable to name.
+B       gsap.com. The animation library most of this category is standing on. Its own homepage is a demonstration reel of what scroll driven timelines can do.
+B       spline.design. Three dimensional scenes composed in a browser, with nothing to install. If you want layer 4 and have never touched a 3D tool, start here.
+B       haoqi.design. A portfolio where the typography itself is a dimensional object with weight and reflection. Study how few elements are on screen at once.
+B       tympanus.net/codrops. The archive. Decades of scroll and WebGL techniques with the code next to each one.
+B       awwwards.com/websites/3d. The wall of winners in this exact category, if you want fifty more and a sense of the current ceiling.
+P       Study them for the SEQUENCE, not the surface. Scroll each one slowly and write down what happens at 10 percent, at 40 percent and at 80 percent. That list is the thing you are actually trying to reproduce.
+
+RULE
+
+H       The part nobody mentions
+P       The reason those sites feel expensive is not the 3D. It is that somebody decided what happens at each point of the scroll.
+P       Depth with no sequencing is just a page that lags. You can add five layers, a WebGL background and a floating torus, and if nothing arrives on purpose the result is slower and no more memorable. The tool gets you the layers. Deciding that the product turns to face you at 40 percent and the price arrives at 75 percent is still the job, and it is a job that takes an afternoon rather than a month.
+B       A working method: write the scroll as a sentence list before you build anything. "You land on the object. You scroll and it opens. You scroll and the three cards come past it. You scroll and the price is already there." Four beats is plenty. Most award winning pages have five or six.
+
+RULE
+
+H       The costs, stated honestly
+P       This category has real trade offs and guides that skip them are why people ship one of these and quietly roll it back.
+B       Weight. A 3D scene, a font, and a scroll library is easily a few megabytes before your content. Budget it deliberately and lazy load anything below the first screen.
+B       Mobile. Scroll driven effects behave differently under touch momentum, and a phone will not run the same scene. Plan a reduced version rather than discovering one.
+B       Accessibility. Honour prefers reduced motion. It is one media query and it is the difference between a site that is impressive and a site that makes some people ill.
+B       SEO. Text drawn inside a canvas is not text. Keep your real headings in real HTML behind or beside the effect.
+B       Time to first meaningful paint. A loader is not a personality. If the page cannot show something within about two seconds, cut the scene down rather than adding a percentage counter.
+
+RULE
+
+H       Getting one without building it
+P       The prompt to page tools in this category all work the same way: you describe the site once, they generate the layers and the scroll timeline together, and you edit the result rather than the code. The good ones give you the scroll number to work with. The flat ones do not, and no amount of prompting will add depth to a builder that only knows about documents.
+B       What to ask for in the prompt: name the five layers explicitly, name the one object, and give the four scroll beats. A generator handed "make me a 3D site" will return a template with a parallax header. A generator handed a layer list and a beat list returns something close to what you pictured.
+B       What to check before you commit: can you export the code, can you set a custom domain, and does the free tier let you publish or only preview. Those three answers decide whether the thing you build is yours.
+P       The link to the specific tool from the video is in the message that brought you here.
+
+RULE
+
+H       The checklist
+B       Five layers named, with a different rate on each.
+B       One object, not five.
+B       Four to six scroll beats written as sentences before any building.
+B       Real headings in real HTML.
+B       A reduced motion path, tested.
+B       A mobile version that is a decision rather than an accident.
+B       First paint under two seconds, measured on a phone on a bad connection.
+
+KEY     WEB

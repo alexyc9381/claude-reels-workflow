@@ -1,0 +1,139 @@
+TITLE   15 Claude Mistakes That Cost You Tokens
+SUB     The three from the video, plus twelve more, with the setting path and the source for every one
+
+H       Why this list exists
+P       Almost every "Claude is worse today" post is a context problem wearing a capability costume. The window is finite, most of what fills it was never typed by you, and the parts you did type are often working against the model rather than with it.
+P       Nothing here is a prompt template. Every item is a thing to stop doing or a setting to change, and where a vendor has published a figure or a phrasing, it is quoted rather than paraphrased.
+P       The three in the video are 1, 2 and 3. The rest are the ones that only show up once a session gets long or a workspace gets crowded.
+
+RULE
+
+H       The number that starts all of this
+NUM     Anthropic's own documentation, on managing tool context: a typical multiserver setup of GitHub, Slack, Sentry, Grafana and Splunk can consume about 55,000 tokens in tool definitions before Claude does any work. That is spent before your first word.
+NUM     The same page puts the fix at over 85 percent: loading tools on demand pulls in the 3 to 5 the request actually needs rather than the entire catalogue.
+NUM     And it is not only a cost problem. Anthropic report that tool selection accuracy degrades once you exceed 30 to 50 available tools, so a crowded toolbox makes the answers worse as well as more expensive.
+P       Hold those three numbers in mind for the rest of the list. Most of what follows is the same shape: something is in the window that is not the job.
+
+RULE
+
+H       1. Telling it to act like an expert
+P       The paragraph at the top of your prompt that assigns a persona is the single most copied habit in prompting, and on current models it is mostly dead weight.
+NUM     Anthropic's prompt engineering guidance, verbatim: role prompting defines expert personas and perspectives in how you phrase your query, and while this can be effective, modern models are sophisticated enough that heavy handed role prompting is often unnecessary.
+P       Worse than neutral, sometimes. A very narrow persona, the kind that specifies a world renowned expert who never makes mistakes, constrains the answer rather than improving it. Anthropic's suggested replacement is to be explicit about the perspective you want instead of assigning a character: analyse this portfolio focusing on risk tolerance and long term growth, rather than you are a veteran portfolio manager.
+B       Do this instead: spend those tokens on where the sources are, and on a final instruction to check its own work before it finishes.
+P       Both of those are things the model cannot infer. The costume is something it never needed.
+
+RULE
+
+H       2. Writing what you do not want
+P       Negative instructions feel precise and behave badly. To avoid a thing, the model has to hold the thing in mind, which is the opposite of where you want its attention.
+NUM     Anthropic's guidance is one line: tell the AI what TO do instead of what NOT to do. Their own worked example is "Do not use markdown in your response" becoming "Your response should be composed of smoothly flowing prose paragraphs".
+P       The structural point underneath: a positive instruction has a direction and a negative one does not. "Do not include numbers" leaves an infinite space of acceptable answers. "Write it as continuous prose with the figures spelled out in words" leaves one.
+B       Rewrite rule: for every "don't", ask what you would accept instead, and write that.
+
+RULE
+
+H       3. Leaving tool access on automatic
+P       This is the setting almost nobody has opened.
+B       Where: click the plus button at the lower left of the chat, or type a forward slash. Hover Connectors, then Tool access.
+B       The three modes are Auto, which is the shipped default and lets Claude decide what to load, Always available, which loads every connector at the start of every conversation, and On demand, which loads nothing until Claude searches for what the request needs. In the product the on demand option reads "Load tools when needed".
+NUM     Anthropic's own recommendation: Always available suits fewer than 10 connectors you use constantly. Past roughly 10, or any time conversations start hitting length limits, move to on demand.
+P       An honest note, because it matters. The default is Auto, not Always available, so this is not silently costing everybody the full 55,000 tokens on every message. What it is, is the thing that quietly degrades every time you connect one more app and never revisit the setting. Users running around eleven connectors have reported requests exceeding the context limit by more than 33,000 tokens before the first message.
+
+RULE
+
+H       4. Not saying where the sources are
+P       A model that has to guess where the truth lives will guess. Naming the file, the folder, the URL or the tool converts a research problem into a retrieval problem, and retrieval is the part it is reliably good at.
+B       Weak: use the documentation to answer this.
+B       Strong: the answer is in docs/api/auth.md and in the CHANGELOG entries after v4.2. Read both before answering, and quote the line you used.
+
+RULE
+
+H       5. Not asking it to check its own work
+P       The single cheapest quality instruction available, and it is one clause at the end of a prompt. Verification is a separate pass from generation, and models do not run it unless you say so.
+B       Add: before you finish, re read your answer against the sources and list anything you could not verify.
+P       Related, and from the same Anthropic guidance: give the model explicit permission to express uncertainty rather than guessing. That reduces hallucination more reliably than telling it not to hallucinate, which is itself a mistake number 2.
+
+RULE
+
+H       6. A CLAUDE.md written for a weaker model
+P       Long standing instruction files accumulate. Most of them were written against an older model that genuinely needed the hand holding, and they are now competing with a model that does not.
+NUM     Anthropic's own Claude Code team removed more than 80 percent of the system prompt for their newest models with no measurable loss on coding evaluations.
+B       Do this: delete your instruction file and rebuild it from nothing every few months. Keep only the rules you have watched the model break.
+
+RULE
+
+H       7. Burying the task at the bottom
+P       If the first thousand tokens are context and the actual request is the last line, you have asked the model to hold everything before deciding what it was for.
+B       Do this: state the job in the first sentence, then supply the material, then restate the required output at the end.
+
+RULE
+
+H       8. Re uploading the same files every conversation
+P       Every re upload is a fresh copy of the same tokens. A Project holds the material once and every conversation inside it inherits the knowledge.
+B       Do this: if you have attached the same document three times, it belongs in a Project, not in a message.
+
+RULE
+
+H       9. Not caching a stable prefix
+P       API only, and it is the largest single cost lever most builders never pull.
+NUM     Anthropic's guidance for a high volume agent is to enable prompt caching on tool definitions from day one. Cache writes carry a 25 percent markup over base input pricing and pay back on the second request that hits the cache.
+P       Anything stable belongs in the cached prefix: system prompt, tool definitions, long reference documents. Anything that changes goes after it.
+
+RULE
+
+H       10. Never clearing a thread
+P       A conversation is an append only log. Every earlier turn is re read on every later one, so a long thread is a tax you pay per message for context you stopped needing an hour ago.
+B       Do this: when the topic changes, start a new conversation. When the topic is the same but the history is long, ask for a summary of decisions so far and paste it into a fresh one.
+NUM     On the API the equivalent is context editing, which removes old tool result blocks once they have served their purpose, without restarting the conversation.
+
+RULE
+
+H       11. Asking for no hallucinations
+P       This is mistake 2 in its most common costume. "Do not make anything up" is a negative instruction about an outcome the model cannot directly observe.
+B       Do this instead: if you cannot verify something from the material provided, say so and mark it unverified.
+
+RULE
+
+H       12. One conversation for unrelated jobs
+P       Mixing a code review, a travel plan and a draft email in one thread means every one of them is being answered in the presence of the other two. It costs tokens and it costs precision.
+B       Do this: one thread, one job. The overhead of starting a new conversation is zero and the context saving is the entire history.
+
+RULE
+
+H       13. Describing the format instead of showing it
+P       A paragraph explaining the output shape costs more tokens than an example of it, and lands less reliably.
+B       Do this: paste one short example of exactly what you want back, then say match this structure.
+
+RULE
+
+H       14. No bound on length or scope
+P       Without a bound the model picks one, and it picks generous. You then pay twice, once for the tokens and once for the editing.
+B       Do this: name the ceiling. Under 200 words. Three options, not five. Only the files that changed.
+
+RULE
+
+H       15. Treating extended thinking as free
+P       Reasoning tokens are tokens. On a task with one obvious method, a long deliberation buys nothing and consumes window you will want later in the session.
+B       Do this: reach for extended thinking on genuinely hard, multi constraint problems. Leave it off for retrieval, formatting, summarising and mechanical edits.
+
+RULE
+
+H       The five minute pass
+P       If you only do part of this, do this part, in this order.
+NUM     Open Connectors, then Tool access, and set it deliberately rather than leaving it wherever it landed.
+NUM     Delete every persona paragraph from your saved prompts and instruction files.
+NUM     Search those same files for the word "not" and rewrite each one as a positive instruction.
+NUM     Add one closing clause to your default prompt: check your answer against the sources before finishing and flag anything you could not verify.
+NUM     Start a new conversation whenever the subject changes.
+P       The first three are things you stop paying for. The last two are the two habits that make the remaining tokens do more.
+
+RULE
+
+H       Sources
+B       Anthropic, Manage tool context, platform.claude.com. The 55,000 token multiserver figure, the over 85 percent reduction, the 30 to 50 tool accuracy threshold, prompt caching and context editing.
+B       Anthropic, Prompt engineering best practices, claude.com. Role prompting on modern models, the tell it what TO do rule and its markdown example, and permission to express uncertainty.
+B       Anthropic Help Center, Manage Claude's tool access. The three modes, the menu path and the connector count recommendations.
+B       Anthropic engineering, on reducing the Claude Code system prompt by more than 80 percent for current models.
+
+KEY     MISTAKE

@@ -1,0 +1,8 @@
+There's a new prompting technique that's been blowing people's minds this week.
+You can build entire apps, websites and online tools in a single prompt, and even the creators of Claude think this is the future of AI.
+It's called the Thief Loop.
+Instead of doing the normal back and forth chats, you give Claude a task and tell it to spawn a team of worker subagents.
+But the secret sauce is the third line of the prompt, where you assign an AI thief.
+The workers build it and the thief tries to break in, going after your logins, your payments and your customer list, and they automatically loop and patch every hole until it walks away empty handed.
+This burns through tokens fast, so you should only build your basic prototype first and trigger the Thief Loop before you launch.
+Comment THIEF for the free guide.

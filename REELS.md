@@ -3,10 +3,11 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 102 reels with code · 61 factory logs · 63 storyboards · 112 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 103 reels with code · 62 factory logs · 64 storyboards · 113 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
+| 121 | **MISTAKE** | [✓](video/src/ClaudeMistakeReel.tsx) | [1](video/src/data/words_121mistake.json) | [✓](memory/reels/mistake121-factory-log.md) | [✓](storyboards/121-mistake.md) | built |
 | 120 | **UNLAZY** | [✓](video/src/ClaudeUnlazyReel.tsx) | [1](video/src/data/words_120unlazy.json) | [✓](memory/reels/unlazy-factory-log.md) | [✓](storyboards/120-unlazy.md) | built |
 | 119 | **OX** | [✓](video/src/ClaudeOxReel.tsx) | [1](video/src/data/words_119ox.json) | [✓](memory/reels/ox-factory-log.md) | [✓](storyboards/119-ox.md) | built |
 | 118 | **LOOP** | [✓](video/src/ClaudeLoopReel.tsx) | [3](video/src/data/words_118loop.json) | [✓](memory/reels/loop118-factory-log.md) | [✓](storyboards/118-loop.md) | built |
@@ -150,7 +151,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **SWIPE** | · | · | [✓](memory/reels/swipe-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **UNLOCK** | [✓](video/src/ClaudeUnlockReel.tsx) | [1](video/src/data/words_unlock.json) | · | · | code, no log |
 | · | **VAULT** | [✓](video/src/ClaudeVaultReel.tsx) | [1](video/src/data/words_vault.json) | · | · | code, no log |
-| · | **WORDS** | [✓](video/src/ClaudeWordsReel.tsx) | [109](video/src/data/words_108marketing.json) | · | · | code, no log |
+| · | **WORDS** | [✓](video/src/ClaudeWordsReel.tsx) | [110](video/src/data/words_108marketing.json) | · | · | code, no log |
 | · | **WORTHY** | [✓](video/src/ClaudeWorthyReel.tsx) | [1](video/src/data/words_worthy.json) | · | · | code, no log |
 | · | **XRAY** | · | · | [✓](memory/reels/xray-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 

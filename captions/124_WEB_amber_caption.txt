@@ -1,0 +1,29 @@
+Comment "WEB" and I'll send you the link.
+
+👇 READ BELOW
+
+A flat page is one plane. Everything on it sits the same distance from your eye, so scrolling only drags content past a window.
+
+The sites you actually stop on are not better designed. They are DEEPER. Five or six planes at different distances, objects standing in the gaps, and the whole thing reacting to where you are on the page.
+
+Here is the layer stack, and it is the whole trick:
+
+→ Layer 1, furthest back : the ground. A gradient, a video, or a live 3D scene. It barely moves.
+→ Layer 2 : the headline. Slow.
+→ Layer 3 : the content row. Cards, features, logos. Roughly the reader's own pace.
+→ Layer 4 : the objects. One or two real dimensional things standing between planes.
+→ Layer 5, nearest : the chrome. Nav, cursor, buttons. Moves the most, never gets covered.
+
+Scroll position is one number. Every layer offset, every camera move, every object that turns to look at you is that single number driving a different curve. That is why these pages feel coordinated instead of busy.
+
+Flat builders never hand you that number. The ones worth using do.
+
+The part nobody mentions: the gaps are the product. If two layers move at the same rate they are one layer wearing two costumes, and the page reads flat no matter how many elements you pile onto it.
+
+Comment "WEB" and I'll send you the tool that builds the whole stack from one prompt.
+
+.
+.
+.
+
+#webdesign #webdev #3dwebsite #scrollanimation #parallax #gsap #threejs #webgl #frontend #uidesign #uxdesign #creativecoding #nocode #aitools #aiwebsite #designinspiration #motiondesign #interactiondesign #webdesigner #buildinpublic

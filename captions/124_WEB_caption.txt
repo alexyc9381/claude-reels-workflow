@@ -1,0 +1,29 @@
+Comment "WEB" and I'll send you the link.
+
+👇 READ BELOW
+
+Every AI website builder hands you back the same page. Same nav, same hero, same three cards. You can spot one from across the room.
+
+The thing that actually changed is not the layout. It is DEPTH.
+
+A flat page is one plane. Nothing behind it. A 3D scroll site is five or six planes at different distances, with objects standing between them, and the whole thing reacts to where you are on the page. That is why the good ones feel like a place instead of a poster.
+
+What that actually looks like, on real pages you can open right now:
+
+→ lenis.darkroom.engineering : smooth scroll, and the whole page is built to show you what that means
+→ spline.design : 3D objects composed in the browser, no engine to install
+→ haoqi.design : a portfolio where the type itself is a 3D object
+→ gsap.com : the animation library almost every site on this list is standing on
+→ awwwards.com/websites/3d : the wall of winners, if you want fifty more
+
+The mechanism is simple once you see it. Scroll position is just a number. Every layer, every camera move, every object that turns to look at you is that one number driving a different curve. Flat builders never expose it. The tools that do give you the same page with an axis added.
+
+The part nobody mentions: the reason those sites feel expensive is not the 3D. It is that somebody decided what happens at each point of the scroll. Depth without that decision is just a page that lags. The tool gets you the layers. The sequencing is still the job.
+
+Comment "WEB" and I'll send you the link to the one that does it from a single prompt.
+
+.
+.
+.
+
+#webdesign #webdev #3dwebsite #scrollanimation #gsap #threejs #webgl #frontend #uidesign #uxdesign #creativecoding #nocode #aitools #aiwebsite #webflow #designinspiration #motiondesign #interactiondesign #buildinpublic #indiehackers

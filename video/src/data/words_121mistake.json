@@ -1,0 +1,912 @@
+[
+{
+"start": 0.0,
+"end": 0.26,
+"word": " Most"
+},
+{
+"start": 0.26,
+"end": 0.44,
+"word": " people"
+},
+{
+"start": 0.44,
+"end": 0.58,
+"word": " are"
+},
+{
+"start": 0.515,
+"end": 0.555,
+"word": " wasting"
+},
+{
+"start": 0.59,
+"end": 0.89,
+"word": " thousands"
+},
+{
+"start": 0.89,
+"end": 1.09,
+"word": " of"
+},
+{
+"start": 1.09,
+"end": 1.35,
+"word": " tokens"
+},
+{
+"start": 1.29,
+"end": 1.57,
+"word": " every"
+},
+{
+"start": 1.57,
+"end": 1.77,
+"word": " time"
+},
+{
+"start": 1.77,
+"end": 1.89,
+"word": " they"
+},
+{
+"start": 2.17,
+"end": 2.33,
+"word": " open"
+},
+{
+"start": 2.33,
+"end": 2.53,
+"word": " Claude,"
+},
+{
+"start": 2.405,
+"end": 2.445,
+"word": " and"
+},
+{
+"start": 2.48,
+"end": 2.52,
+"word": " it's"
+},
+{
+"start": 2.555,
+"end": 2.66,
+"word": " all"
+},
+{
+"start": 2.71,
+"end": 2.93,
+"word": " because"
+},
+{
+"start": 2.93,
+"end": 3.05,
+"word": " of"
+},
+{
+"start": 3.05,
+"end": 3.19,
+"word": " this"
+},
+{
+"start": 3.24,
+"end": 3.6,
+"word": " one"
+},
+{
+"start": 3.6,
+"end": 3.88,
+"word": " default"
+},
+{
+"start": 3.88,
+"end": 4.14,
+"word": " setting"
+},
+{
+"start": 4.06,
+"end": 4.22,
+"word": " you"
+},
+{
+"start": 4.22,
+"end": 4.32,
+"word": " have"
+},
+{
+"start": 4.32,
+"end": 4.52,
+"word": " not"
+},
+{
+"start": 4.58,
+"end": 4.78,
+"word": " turned"
+},
+{
+"start": 4.78,
+"end": 4.98,
+"word": " off"
+},
+{
+"start": 4.98,
+"end": 5.3,
+"word": " yet."
+},
+{
+"start": 5.82,
+"end": 5.92,
+"word": " So"
+},
+{
+"start": 5.92,
+"end": 6.12,
+"word": " here"
+},
+{
+"start": 6.12,
+"end": 6.32,
+"word": " are"
+},
+{
+"start": 6.31,
+"end": 6.49,
+"word": " three"
+},
+{
+"start": 6.49,
+"end": 6.69,
+"word": " Claude"
+},
+{
+"start": 6.69,
+"end": 6.95,
+"word": " mistakes"
+},
+{
+"start": 6.79,
+"end": 7.01,
+"word": " you"
+},
+{
+"start": 7.01,
+"end": 7.13,
+"word": " need"
+},
+{
+"start": 7.13,
+"end": 7.25,
+"word": " to"
+},
+{
+"start": 7.25,
+"end": 7.45,
+"word": " fix"
+},
+{
+"start": 7.43,
+"end": 7.67,
+"word": " right"
+},
+{
+"start": 7.67,
+"end": 8.07,
+"word": " now."
+},
+{
+"start": 8.6,
+"end": 8.94,
+"word": " First,"
+},
+{
+"start": 9.08,
+"end": 9.2,
+"word": " stop"
+},
+{
+"start": 9.2,
+"end": 9.4,
+"word": " telling"
+},
+{
+"start": 9.275,
+"end": 9.36,
+"word": " Claude"
+},
+{
+"start": 9.36,
+"end": 9.48,
+"word": " to"
+},
+{
+"start": 9.48,
+"end": 9.58,
+"word": " act"
+},
+{
+"start": 9.555,
+"end": 9.62,
+"word": " like"
+},
+{
+"start": 9.63,
+"end": 9.74,
+"word": " an"
+},
+{
+"start": 9.74,
+"end": 10.0,
+"word": " expert."
+},
+{
+"start": 9.99,
+"end": 10.23,
+"word": " With"
+},
+{
+"start": 10.23,
+"end": 10.37,
+"word": " the"
+},
+{
+"start": 10.37,
+"end": 10.55,
+"word": " newest"
+},
+{
+"start": 10.82,
+"end": 11.12,
+"word": " models,"
+},
+{
+"start": 11.2,
+"end": 11.38,
+"word": " you're"
+},
+{
+"start": 11.38,
+"end": 11.56,
+"word": " just"
+},
+{
+"start": 11.455,
+"end": 11.55,
+"word": " wasting"
+},
+{
+"start": 11.55,
+"end": 11.69,
+"word": " your"
+},
+{
+"start": 11.69,
+"end": 12.03,
+"word": " context"
+},
+{
+"start": 12.08,
+"end": 12.4,
+"word": " window."
+},
+{
+"start": 12.88,
+"end": 13.26,
+"word": " Instead,"
+},
+{
+"start": 13.46,
+"end": 13.54,
+"word": " spend"
+},
+{
+"start": 13.54,
+"end": 13.7,
+"word": " those"
+},
+{
+"start": 13.71,
+"end": 13.95,
+"word": " tokens"
+},
+{
+"start": 13.95,
+"end": 14.21,
+"word": " telling"
+},
+{
+"start": 14.21,
+"end": 14.41,
+"word": " Claude"
+},
+{
+"start": 14.29,
+"end": 14.73,
+"word": " exactly"
+},
+{
+"start": 14.73,
+"end": 14.89,
+"word": " where"
+},
+{
+"start": 14.89,
+"end": 15.01,
+"word": " to"
+},
+{
+"start": 15.01,
+"end": 15.17,
+"word": " find"
+},
+{
+"start": 15.16,
+"end": 15.3,
+"word": " the"
+},
+{
+"start": 15.3,
+"end": 15.56,
+"word": " sources"
+},
+{
+"start": 15.56,
+"end": 15.78,
+"word": " and"
+},
+{
+"start": 15.78,
+"end": 15.88,
+"word": " tell"
+},
+{
+"start": 15.93,
+"end": 15.99,
+"word": " it"
+},
+{
+"start": 16.005,
+"end": 16.11,
+"word": " to"
+},
+{
+"start": 16.11,
+"end": 16.29,
+"word": " check"
+},
+{
+"start": 16.185,
+"end": 16.28,
+"word": " its"
+},
+{
+"start": 16.28,
+"end": 16.54,
+"word": " own"
+},
+{
+"start": 16.54,
+"end": 16.68,
+"word": " work"
+},
+{
+"start": 16.75,
+"end": 16.99,
+"word": " before"
+},
+{
+"start": 16.99,
+"end": 17.41,
+"word": " finishing."
+},
+{
+"start": 18.02,
+"end": 18.22,
+"word": " Second,"
+},
+{
+"start": 18.44,
+"end": 18.6,
+"word": " stop"
+},
+{
+"start": 18.6,
+"end": 18.78,
+"word": " writing"
+},
+{
+"start": 18.81,
+"end": 19.17,
+"word": " negative"
+},
+{
+"start": 19.17,
+"end": 19.63,
+"word": " instructions"
+},
+{
+"start": 19.63,
+"end": 19.83,
+"word": " like"
+},
+{
+"start": 19.71,
+"end": 20.07,
+"word": " don't"
+},
+{
+"start": 20.07,
+"end": 20.25,
+"word": " include"
+},
+{
+"start": 20.25,
+"end": 20.61,
+"word": " numbers."
+},
+{
+"start": 21.22,
+"end": 21.36,
+"word": " When"
+},
+{
+"start": 21.36,
+"end": 21.46,
+"word": " you"
+},
+{
+"start": 21.46,
+"end": 21.58,
+"word": " tell"
+},
+{
+"start": 21.535,
+"end": 21.575,
+"word": " the"
+},
+{
+"start": 21.61,
+"end": 21.68,
+"word": " model"
+},
+{
+"start": 21.685,
+"end": 21.84,
+"word": " what"
+},
+{
+"start": 21.76,
+"end": 22.03,
+"word": " not"
+},
+{
+"start": 22.03,
+"end": 22.21,
+"word": " to"
+},
+{
+"start": 22.21,
+"end": 22.31,
+"word": " do,"
+},
+{
+"start": 22.34,
+"end": 22.5,
+"word": " it"
+},
+{
+"start": 22.5,
+"end": 22.64,
+"word": " gets"
+},
+{
+"start": 22.64,
+"end": 23.24,
+"word": " confused."
+},
+{
+"start": 23.77,
+"end": 23.97,
+"word": " So"
+},
+{
+"start": 23.97,
+"end": 24.15,
+"word": " say"
+},
+{
+"start": 24.15,
+"end": 24.45,
+"word": " everything"
+},
+{
+"start": 24.225,
+"end": 24.4,
+"word": " as"
+},
+{
+"start": 24.4,
+"end": 24.66,
+"word": " a"
+},
+{
+"start": 24.66,
+"end": 24.94,
+"word": " positive"
+},
+{
+"start": 25.19,
+"end": 25.59,
+"word": " command,"
+},
+{
+"start": 25.63,
+"end": 25.85,
+"word": " like"
+},
+{
+"start": 25.85,
+"end": 26.07,
+"word": " write"
+},
+{
+"start": 25.925,
+"end": 26.14,
+"word": " smooth"
+},
+{
+"start": 26.14,
+"end": 26.44,
+"word": " flowing"
+},
+{
+"start": 26.44,
+"end": 26.74,
+"word": " text"
+},
+{
+"start": 26.72,
+"end": 27.18,
+"word": " paragraphs."
+},
+{
+"start": 27.39,
+"end": 28.17,
+"word": " Third,"
+},
+{
+"start": 28.45,
+"end": 28.55,
+"word": " turn"
+},
+{
+"start": 28.55,
+"end": 28.71,
+"word": " off"
+},
+{
+"start": 28.625,
+"end": 28.97,
+"word": " automatic"
+},
+{
+"start": 28.97,
+"end": 29.19,
+"word": " tool"
+},
+{
+"start": 29.19,
+"end": 29.61,
+"word": " access."
+},
+{
+"start": 30.27,
+"end": 30.49,
+"word": " Usually"
+},
+{
+"start": 30.71,
+"end": 30.75,
+"word": " Claude"
+},
+{
+"start": 30.785,
+"end": 30.93,
+"word": " loads"
+},
+{
+"start": 30.94,
+"end": 31.12,
+"word": " all"
+},
+{
+"start": 31.12,
+"end": 31.22,
+"word": " of"
+},
+{
+"start": 31.22,
+"end": 31.32,
+"word": " your"
+},
+{
+"start": 31.32,
+"end": 31.58,
+"word": " connectors"
+},
+{
+"start": 31.41,
+"end": 31.67,
+"word": " into"
+},
+{
+"start": 31.67,
+"end": 31.83,
+"word": " the"
+},
+{
+"start": 31.83,
+"end": 32.15,
+"word": " context"
+},
+{
+"start": 32.2,
+"end": 32.36,
+"word": " with"
+},
+{
+"start": 32.36,
+"end": 32.64,
+"word": " every"
+},
+{
+"start": 32.64,
+"end": 32.98,
+"word": " message,"
+},
+{
+"start": 33.07,
+"end": 33.13,
+"word": " so"
+},
+{
+"start": 33.145,
+"end": 33.23,
+"word": " it"
+},
+{
+"start": 33.23,
+"end": 33.41,
+"word": " burns"
+},
+{
+"start": 33.45,
+"end": 33.83,
+"word": " thousands"
+},
+{
+"start": 33.83,
+"end": 34.05,
+"word": " of"
+},
+{
+"start": 34.05,
+"end": 34.29,
+"word": " tokens"
+},
+{
+"start": 34.26,
+"end": 34.5,
+"word": " per"
+},
+{
+"start": 34.5,
+"end": 34.94,
+"word": " session."
+},
+{
+"start": 35.63,
+"end": 35.67,
+"word": " Now"
+},
+{
+"start": 35.705,
+"end": 35.85,
+"word": " go"
+},
+{
+"start": 35.8,
+"end": 35.9,
+"word": " to"
+},
+{
+"start": 35.9,
+"end": 36.06,
+"word": " your"
+},
+{
+"start": 36.06,
+"end": 36.24,
+"word": " settings"
+},
+{
+"start": 36.135,
+"end": 36.29,
+"word": " and"
+},
+{
+"start": 36.29,
+"end": 36.43,
+"word": " switch"
+},
+{
+"start": 36.57,
+"end": 36.83,
+"word": " tool"
+},
+{
+"start": 36.83,
+"end": 37.03,
+"word": " access"
+},
+{
+"start": 37.03,
+"end": 37.21,
+"word": " to"
+},
+{
+"start": 37.21,
+"end": 37.43,
+"word": " load"
+},
+{
+"start": 37.66,
+"end": 37.92,
+"word": " tools"
+},
+{
+"start": 37.92,
+"end": 38.04,
+"word": " when"
+},
+{
+"start": 38.04,
+"end": 38.26,
+"word": " needed"
+},
+{
+"start": 38.19,
+"end": 38.23,
+"word": " so"
+},
+{
+"start": 38.265,
+"end": 38.35,
+"word": " you"
+},
+{
+"start": 38.35,
+"end": 38.61,
+"word": " only"
+},
+{
+"start": 38.51,
+"end": 38.71,
+"word": " pay"
+},
+{
+"start": 38.71,
+"end": 38.85,
+"word": " for"
+},
+{
+"start": 38.85,
+"end": 39.09,
+"word": " tools"
+},
+{
+"start": 39.07,
+"end": 39.19,
+"word": " when"
+},
+{
+"start": 39.19,
+"end": 39.41,
+"word": " they're"
+},
+{
+"start": 39.41,
+"end": 39.73,
+"word": " actually"
+},
+{
+"start": 39.78,
+"end": 40.24,
+"word": " used."
+},
+{
+"start": 40.76,
+"end": 40.8,
+"word": " I"
+},
+{
+"start": 40.835,
+"end": 40.92,
+"word": " made"
+},
+{
+"start": 40.92,
+"end": 41.06,
+"word": " a"
+},
+{
+"start": 41.06,
+"end": 41.18,
+"word": " list"
+},
+{
+"start": 41.24,
+"end": 41.44,
+"word": " of"
+},
+{
+"start": 41.44,
+"end": 41.68,
+"word": " 15"
+},
+{
+"start": 41.68,
+"end": 41.98,
+"word": " mistakes"
+},
+{
+"start": 41.85,
+"end": 42.09,
+"word": " to"
+},
+{
+"start": 42.09,
+"end": 42.31,
+"word": " avoid"
+},
+{
+"start": 42.28,
+"end": 42.4,
+"word": " in"
+},
+{
+"start": 42.4,
+"end": 42.54,
+"word": " a"
+},
+{
+"start": 42.54,
+"end": 42.66,
+"word": " free"
+},
+{
+"start": 42.66,
+"end": 42.9,
+"word": " guide."
+},
+{
+"start": 43.09,
+"end": 43.25,
+"word": " Comment"
+},
+{
+"start": 43.25,
+"end": 43.67,
+"word": " MISTAKE"
+},
+{
+"start": 43.67,
+"end": 43.93,
+"word": " for"
+},
+{
+"start": 43.93,
+"end": 44.27,
+"word": " access."
+}
+]

@@ -26,6 +26,7 @@ import {
   CoverCrew, CoverBlueprint, CoverClone, CoverWorthy, CoverAttack,
   CoverFactory, CoverSol,
 } from "./ReelCovers4";
+import { CoverBoss, CoverFree131 } from "./ReelCovers5";
 import "./fonts";
 
 const covers: [string, React.FC][] = [
@@ -45,6 +46,8 @@ const covers: [string, React.FC][] = [
   ["CoverCrew", CoverCrew], ["CoverBlueprint", CoverBlueprint],
   ["CoverClone", CoverClone], ["CoverWorthy", CoverWorthy],
   ["CoverAttack", CoverAttack], ["CoverFactory", CoverFactory],
+  // set 5 - reel 128
+  ["CoverBoss", CoverBoss], ["CoverFree131", CoverFree131],
   ["CoverSol", CoverSol],
 ];
 

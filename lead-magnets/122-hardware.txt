@@ -1,0 +1,86 @@
+TITLE   What It Really Costs To Run AI Locally
+SUB     The $112,000 machine, the $565 power bill, and the reason the whole thing still runs at one token every ten seconds
+
+H       The short version
+P       You cannot run Claude on your own hardware. Anthropic has never published open weights for any Claude model, so Opus 5 is not a price question, it is simply unavailable. What people actually mean when they say "run it locally" is running the nearest open-weight equivalent, and as of July 2026 that is Moonshot AI's Kimi K3.
+P       This guide prices that machine honestly, top to bottom, with a source on every number. Then it explains the part that makes most of the spending pointless, which is not the money and is not the GPU.
+
+RULE
+
+H       The model you would actually be running
+NUM     Kimi K3, released 27 July 2026 by Moonshot AI. 2.8 trillion total parameters, of which about 104 billion are active per token. It is a Mixture-of-Experts model: 896 specialist experts, 16 activated per token.
+NUM     1,048,576 token context window. Native text, image and video input. An OpenAI and Anthropic compatible API.
+NUM     Modified MIT licence, permissive enough for commercial use. Training data and training code are not included, so this is open WEIGHT, not open SOURCE. The distinction matters if you were planning to fine tune from scratch.
+P       At the time of release it is the largest open-weight model anyone has shipped. That is the whole reason it is the reference point for this question.
+
+RULE
+
+H       The hardware bill
+P       Start with the number everyone quotes and then look at what it assumes, because the assumption is where the honesty lives.
+NUM     Seven NVIDIA RTX PRO 6000 Blackwell cards, 96GB each, is 672GB of aggregate GPU memory.
+NUM     At NVIDIA's own US Marketplace listing as of August 2026, that card is $16,000. It launched at $8,565 and has been repriced twice inside one generation, driven by the GDDR7 shortage. Seven of them is $112,000.
+P       Now the assumption. Seven cards clears the floor for the 1-bit quantized build only. Unsloth's UD-IQ1_S GGUF needs a little over 594GB of combined RAM and VRAM, so 672GB fits it.
+NUM     The full precision weights as Moonshot shipped them are 1.56TB in MXFP4, averaging about 4.49 stored bits per parameter. At 96GB a card that is roughly eighteen cards, not seven. Anyone quoting seven is quoting the 1-bit number, whether or not they say so.
+P       And $112,000 is cards alone. It does not include a motherboard that can physically host them, four or more power supplies, a chassis, system RAM, or cooling. On a build of this shape those are not rounding errors.
+
+RULE
+
+H       The power bill
+NUM     The RTX PRO 6000 Blackwell has a 600W TDP. Seven cards is 4,200W, or 4.2 kW, before the rest of the system.
+NUM     Left running 24/7 that is roughly 3,066 kWh a month. At the 2026 US residential average, which the EIA puts between 17.65 and 18.83 cents per kWh depending on the month, you are paying about $565 a month to power the GPUs and nothing else.
+P       Two things worth saying out loud. That figure is GPUs only, so the real bill is higher. And 4.2 kW continuous is more than most domestic ring circuits are rated for, which is a wiring conversation before it is a budget conversation.
+
+RULE
+
+H       The part that makes the money irrelevant
+P       Here is the finding that changes the answer, and it comes from someone who actually ran it rather than from a spec sheet.
+NUM     On a rented instance with four A100-SXM4-40GB cards and 2TB of system RAM, running the UD-IQ1_S build, generation measured 0.10 tokens per second, held steady across the sampled window.
+NUM     One token every ten seconds. A 500 token answer takes an hour and 23 minutes. The person running it aborted a 128 token benchmark after 17 minutes because it had not finished.
+NUM     GPU utilization sat between 0 and 1 percent for the entire run, with only 64GB of the available 160GB VRAM in use.
+P       That last line is the one to sit with. The GPUs were idle. Almost none of the memory was in use. Nothing about that run was short of compute or short of capacity.
+
+RULE
+
+H       Why: memory bandwidth, not compute
+P       A Mixture-of-Experts model only activates a fraction of itself per token, which is what makes a 2.8 trillion parameter model tractable at all. But the experts it needs are not the same ones from token to token, and if the full set does not fit in GPU memory, every token has to drag its active experts across the bus out of system RAM.
+P       That read is the wall. It is a bandwidth problem, not a throughput problem, and it does not respond to any of the things people instinctively buy.
+B       Adding GPUs does not help unless you add enough of them to hold the entire model at once. Partial residency does not give you partial speed, it gives you the slow path on nearly every token.
+B       Faster GPUs do not help, because the GPUs are already waiting.
+B       More system RAM does not help. Having the weights is not the same as being able to move them.
+P       This is the sentence worth keeping: you can buy your way to capacity, you cannot buy your way past bandwidth. The money buys the tank. It does not buy the pipe.
+
+RULE
+
+H       What the same work costs to rent
+NUM     Claude Opus 5 is $5 per million input tokens and $25 per million output tokens on Anthropic's published pricing.
+P       An hour of genuinely intense coding, with prompt caching doing its normal job on the repeated context, lands around 70 cents. That is the comparison the hardware has to beat, and against $112,000 of depreciating cards plus $565 a month of electricity, it does not get close for an individual.
+P       Be fair about what that comparison is and is not. Renting is an operating cost that never stops, and it means your code leaves your machine. Those are real objections. They are just not cost objections.
+
+RULE
+
+H       The three cases where local genuinely wins
+P       This is not an argument that nobody should self host. It is an argument that most people asking the question are not in one of these three groups.
+B       Industrial volume. If you are processing millions of tokens a day, every day, the per token economics invert and the capital cost amortises. The crossover is a spreadsheet, not an opinion, and you should actually build it.
+B       Data that cannot leave. Healthcare, government, defence, and anywhere a contract or a regulation says the data stays inside your boundary. Here local is not cheaper, it is required, and cost is the wrong axis entirely.
+B       Genuinely continuous agents. Not "I use AI a lot", but processes that hold context and run without a human present, around the clock. Idle capacity you have already bought is free; idle capacity you are renting is not.
+P       If none of those describe you, the honest answer is that $112,000 of hardware that loses value every year, to run a model slower than the API you already have, is not a flex. It is a mistake with a receipt.
+
+RULE
+
+H       If you still want to try it, do this first
+B       Price the crossover before you price the parts. Take your real token volume for a month, multiply by the API rate, and compare it to capital plus power plus your own time. Most people find the crossover is years away.
+B       Rent before you buy. An hour on a cloud instance with the same configuration costs almost nothing and tells you the actual tokens per second for your setup. That single test is what the 0.1 tokens per second figure came from.
+B       Check aggregate VRAM against the specific build you intend to run, not against the parameter count. 2.8 trillion parameters is not a memory requirement. 594GB at 1-bit and 1.56TB at MXFP4 are memory requirements, and they are very different machines.
+B       Watch utilization, not throughput, when you test. GPUs pinned near zero while tokens trickle out is the bandwidth signature, and it means more or faster GPUs will not fix it.
+
+RULE
+
+H       Sources
+B       Kimi K3 release, parameter count, MoE configuration, context window and licence: Moonshot AI, 27 July 2026.
+B       RTX PRO 6000 Blackwell pricing: NVIDIA US Marketplace listing, August 2026. Launch price $8,565.
+B       RTX PRO 6000 Blackwell 600W TDP: NVIDIA product specification.
+B       US residential electricity average: EIA Electric Power Monthly, 2026 data.
+B       0.10 tokens per second, 0 to 1 percent GPU utilization, four A100-SXM4-40GB, UD-IQ1_S 594GB: published benchmark run, August 2026.
+B       Claude Opus 5 pricing, $5 and $25 per million tokens: Anthropic published API pricing.
+
+KEYWORD HARDWARE
