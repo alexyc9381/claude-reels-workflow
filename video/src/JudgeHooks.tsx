@@ -126,7 +126,11 @@ export const HookStand: React.FC<SP> = ({ v, dur }) => {
     const slam = E(g, 34, 38, 0, 0.15, BACK);
     return Math.max(0, Math.min(1, twitch + climb + slam));
   };
-  const spin = 1 + E(f, 24, 30, 0, 2.2, OUT);
+  /* ⭐ THE LEVER IS SPEED, NOT CONTRAST (ANIMATION-QUALITY §11). Softening
+     the chart grid to stop it reading as a barcode cost the hook 8.56 -> 7.61;
+     the way back is a FASTER sweep, which repaints more per sample and looks no
+     heavier at any instant, not a darker one. */
+  const spin = 1 + E(f, 24, 30, 0, 3.0, OUT);
   const tear = E(f, 35, 62, 0, 1, OUT);
   const lamp = E(f, 36, 41, 0, 1, OUT) * (0.86 + Math.sin(f / 3.1) * 0.14);
   const flinch = E(f, 38, 42, 0, 1, OUT) - E(f, 50, 60, 0, 1, IO);
@@ -164,7 +168,7 @@ export const HookStand: React.FC<SP> = ({ v, dur }) => {
             in a room actually looks like. */}
         <Polygraph x={200} y={GY} h={640} f={f} spin={spin} z={40}
           paperX={-46} paperY={196} paperW={1104} paperH={152} penX={636}
-          nAt={nAt} speed={12} tear={tear} lamp={lamp} />
+          nAt={nAt} speed={17} tear={tear} lamp={lamp} />
 
         {/* the box, the hero, and the work he is swearing to.
             ⛔ HE STANDS ON A STEP INSIDE THE BOX. v1 put him at the ground line

@@ -143,7 +143,7 @@ Value separation is not a note about hue; it is about whether the thing can be s
 and S13 — the three scenes where the per-cut `LAY` offset had been scaled down to 0.3-0.5 while
 every other scene used it whole. Restoring the full offset, plus a per-cut BEAT SHIFT on S4
 (`PJ[v] * 4` frames) and a per-cut PERMUTATION of which hole each of S10's fourteen flags fills,
-took it to **mean 25.9 / MIN 13**.
+took it to **mean 26.2 / MIN 10**.
 
 ⭐ dHash reads GEOMETRY. A grade cannot fix it, and the fix is never to degrade a cut — it is to
 make a different thing be on screen at the same instant.
@@ -153,11 +153,11 @@ make a different thing be on screen at the same instant.
 ## Gates on the delivered file
 
 ```
-MOTION      median 9.14 · 0/16 under bar · 0 dead runs · weakest ROBING 7.4
-LOOK        HOOK_LUMA 153.7 ✓ · BODY_SAT 76.4% ✓ · BODY_BLACK p10 26.1 ✓
+MOTION      median 8.92 · 0/16 under bar · 0 dead runs · weakest ROBING 7.69
+LOOK        HOOK_LUMA 153.7 ✓ · BODY_SAT 76.4% ✓ · BODY_BLACK p10 28.1 ✓
             HOOK_PLATE 13.1% ⚠ (warn-only)
 verify_reel 8/8 · sfx_audit clean · mix >2kHz 33.6% / <250Hz 14.4% both in band
-dHash       mean 25.9 MIN 13 across 3 cuts x 14 timestamps
+dHash       mean 26.2 MIN 10 across 3 cuts x 14 timestamps
 cover       5/5 gates
 ```
 

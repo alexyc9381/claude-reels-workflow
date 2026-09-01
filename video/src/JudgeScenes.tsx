@@ -1171,7 +1171,10 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
             the frame edge inside an orange room — one stop of separation, at the
             crop bound. It is now 214px wide, further in, and the fuel itself is
             the brightest thing in the set, so the LEVEL is the readout. */}
-        <FuelColumn x={244 + dx} y={GY} h={520} level={Math.max(0.06, level)} z={40} f={f} />
+        {/* ⛔ AND IT HAS TO BE IN FRONT OF THE BELT. At z40 the feed crates ran
+            across y470..594 and the fuel line sat at y512 — the one boundary the
+            whole shot exists to show was behind the furniture. */}
+        <FuelColumn x={228 + dx} y={GY} h={520} level={Math.max(0.10, level)} z={52} f={f} />
         {/* ⭐ THE BACKGROUND PROCESS IS THE COST: a belt feeding the throat, and
             it visibly SLOWS when he shutters it. The rate is the readout. */}
         <Runner y={470} f={f} z={44} rate={rate * 1.25} pitch={182} w={172} h={124}
@@ -1338,10 +1341,13 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
           window={{ x: 386, y: 210, w: 240, h: 260 }} />
         {/* the doors spilling light, and the crowd walking in past him */}
         <Pool x={506 + dx} y={496} w={620} c="#FFD8A0" o={0.34} z={19} />
-        <StepPlate x={506 + dx} y={GY + 46 - (1 - E(f, 0, 11, 0, 1, BACK)) * 210} w={600}
+        <StepPlate x={506 + dx} y={GY + 14 - (1 - E(f, 0, 11, 0, 1, BACK)) * 210} w={620}
           hit={hit} z={60} />
         {markIn > 0.01 && (
-          <div style={{ position: "absolute", left: 506 + dx - 44, top: GY - 196, zIndex: 78,
+          /* ⛔ NOTHING LANDS ON THE ONE WORD THE PICTURE SPELLS OUT. At GY-196
+             the mark's plate (114px tall) overlapped the step plate's top edge
+             and covered the U of JUDGE on the closing frame. */
+          <div style={{ position: "absolute", left: 506 + dx - 57, top: GY - 306, zIndex: 78,
             transform: `scale(${markIn})` }}>
             <Mark x={0} y={0} s={88} z={78} plate />
           </div>
@@ -1350,8 +1356,12 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
             on a plate while five letters appeared. They now WALK the full panel
             toward the open doors — four 160px bodies crossing 300px each in 38
             frames is the only large travel this shot can carry. */}
+        {/* ⛔ THEY MUST STILL BE IN FRAME ON THE LAST FRAME. v1 walked them 340px
+            and the closing beat — the frame a viewer screenshots — was an empty
+            step with a plate on it. 210px keeps the cast in the picture while
+            still reading as a crowd going in. */}
         {[0, 1, 2, 3].map(i => (
-          <Crew key={"c" + i} f={f} x={-40 + i * 168 + E(f, 0, dur, 0, 340, LIN) + dx}
+          <Crew key={"c" + i} f={f} x={-24 + i * 158 + E(f, 0, dur, 0, 302, LIN) + dx}
             y={GY - 12} i={i + 4} size={160} z={36} at={-10 + i * 4} loop={0} />
         ))}
         {/* ⛔ WHAT THE DOOR OPENS ON MUST BE A PLACE, NOT A CREAM SLAB — the
@@ -1363,7 +1373,7 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
           return (
             <div style={{ position: "absolute", left: x0, top: 212, width: w0, height: 258,
               zIndex: 17, overflow: "hidden",
-              background: `linear-gradient(180deg, ${dkh("#5A4230", 0.08)} 0%, ${mxh(p.key, 0.30)} 58%, ${mxh(p.key, 0.60)} 100%)` }}>
+              background: `linear-gradient(180deg, ${dkh("#5A4230", 0.14)} 0%, ${mxh(p.key, 0.12)} 58%, ${mxh(p.key, 0.34)} 100%)` }}>
               {[0, 1, 2].map(i => (
                 <div key={"lw" + i} style={{ position: "absolute", left: -14 + i * 14, top: 0,
                   width: 74 - i * 18, height: "100%", background: dkh("#4A3220", 0.08 + i * 0.05),
@@ -1376,8 +1386,8 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
               ))}
               {[0, 1, 2].map(i => (
                 <div key={"lb" + i} style={{ position: "absolute", left: w0 * 0.20 - i * 8,
-                  top: 26 + i * 52, width: w0 * 0.60 + i * 24, height: 11, borderRadius: 4,
-                  background: mxh(p.key, 0.58 - i * 0.12) }} />
+                  top: 26 + i * 52, width: w0 * 0.60 + i * 24, height: 15, borderRadius: 5,
+                  background: mxh(p.key, 0.86 - i * 0.14) }} />
               ))}
               {[0, 1].map(i => (
                 <div key={"fg" + i} style={{ position: "absolute", left: w0 * 0.34 + i * w0 * 0.22,
