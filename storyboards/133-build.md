@@ -296,3 +296,81 @@ across the three trial cuts · no shot under 0.7s (shortest is S4 at 1.29s) · z
 
 ⚠️ **LENGTH: 29.93s** — 0.9s over the 22-29s house range, flagged not trimmed. The script is 127
 words and no line is redundant. See the factory log for the VO arithmetic.
+
+---
+
+# ⭐⭐⭐ REVISION 2 — REAL MARKS, ELEVEN SCENES, ONE OBJECT EACH
+
+**Alex on rev 1:** *"use real logos and graphics wherever possible, right now it's just random
+scenes, not hierarchical enough nor interesting, I can't even tell what's going on in each scene,
+it's way too odd and confusing."*
+
+Three complaints, three causes, and none of them was a polish problem:
+
+| the note | the cause | the fix |
+|---|---|---|
+| *"just random scenes"* | **16 places in 30s = 1.9s each.** Nothing had time to land, and the reel read as a slideshow of rooms. | **ELEVEN scenes.** Each tool owns ONE place for ~5s — long enough to state a name, show the thing, and show what comes out. |
+| *"not hierarchical enough"* | every scene ran a machine **and** a crew **and** a travelling band **and** props, all competing for the same frame. | **ONE dominant object per scene**, at 40-55% of the panel, with nothing else above knee height. The crews come out of the tool scenes entirely. |
+| *"I can't even tell what's going on"* | ⛔ the tools were drawn as **METAPHORS** — a film mill, a cutting lathe, a scan gantry — and **a metaphor has to be DECODED**, which 1.5s does not allow. | each tool now **OPENS ON ITS REAL GITHUB PLATE** and then shows the **literal output**. |
+
+⛔⛔ **THE RULE I QUOTED IN MY OWN FILE AND THEN BROKE.** `BuildProps.tsx` carries reel 115's
+finding verbatim — *at half a second on a phone a viewer RECOGNISES A MARK; they do not decode a
+silhouette* — and I reasoned my way around it: "none of these repos has a brand mark, so draw
+machines." **The mark that mattered was GitHub the whole time**, plus the star counts already
+sitting in the honesty ledger.
+
+## THE MARK TABLE — every one sourced, none an endorsement
+
+| mark | where it appears | the source that licenses it |
+|---|---|---|
+| **GitHub** | the hero plate of all three tool scenes, at 84px | all three ARE public GitHub repos; the star counts are theirs |
+| **Hugging Face** | beside the GPT-SoVITS and Hunyuan3D plates | `tencent/Hunyuan3D-2` is hosted there — 99,849 downloads last month |
+| **TikTok · Instagram · YouTube** | hung over the bench in TOOL 1, on their spoken beat | MoneyPrinterTurbo's OWN README: *"automatic uploads to TikTok, Instagram and YouTube Shorts"* |
+| **Docker** | on the bench in the fit-out | its README's documented deploy method (`docker-compose.release.yml`) |
+| **Shopify** | the product page in the ecom sale | Shopify's own docs: *"Product media can include images, 3D models, and videos"* |
+| **Fiverr · Upwork** | the awning, the counter, the narration beat | spoken in the VO, twice each |
+
+⛔ **Nothing is drawn as a rival, a replacement or an endorsement.** Every mark is either the
+tool's own home or a destination its own documentation names. No retailer is put on a buyer, no
+competitor is put on a loser, and there is still no figure anywhere about money.
+
+## THE ELEVEN SCENES
+
+| # | t0-t1 | dur | the ONE object | what happens |
+|---|---|---|---|---|
+| S0 | 0.00-2.40 | 72f | the roller shutter | he hauls it up on three machines already running |
+| S1 | 2.40-4.73 | 70f | three **repo plates** | craned in and bolted to the wall one-two-three, Docker on the bench |
+| S2 | 4.73-9.90 | 155f | the **MoneyPrinterTurbo plate**, then the **vertical short** | plate lands · CUT · one topic in, and the short builds on *script* / *voiceover* / *final cut*, then TikTok + Instagram + YouTube light over the bench |
+| S3 | 9.90-11.19 | 39f | the finished short | slid across the counter, docket stamped SOLD |
+| S4 | 11.19-16.23 | 151f | the **GPT-SoVITS plate**, then the **waveform** | plate + Hugging Face · CUT · one minute of real waveform in, five speakers out, Fiverr and Upwork on their spoken word |
+| S5 | 16.23-17.71 | 44f | the empty stool | he walks out, the machine keeps cutting |
+| S6 | 17.71-22.61 | 147f | the **Hunyuan3D plate**, then the **mesh** | plate + Hugging Face · CUT · one flat photo drops in and becomes a wireframe mesh with vertex dots; three lamps strike; copies rack up |
+| S7 | 22.61-24.71 | 63f | a **Shopify product page** | the model turning in the page's own 3D viewer |
+| S8 | 24.71-26.06 | 41f | the iron gate | the loaded trolley hits it twice and it does not move |
+| S9 | 26.06-28.75 | 81f | **the guide** | three plates struck on *build* / *market* / *sell*, then the bar lifts |
+| S10 | 28.75-29.93 | 35f | the **BUILD** keyword plate | the goods go through the gate he just opened |
+
+## THE TWO PROPS THAT HAD TO BE REDRAWN TO READ
+
+- ⛔ **The mesh was a pale glass box.** A wireframe at 0.32 alpha over a face at `mxh(TEAL,0.12)`
+  is two near-identical values — the greyscale audit sees what a viewer sees, which is nothing.
+  Face went DARK, wires went bright cyan at 0.78, and **vertex dots** went on the intersections.
+  ⭐ The dots are the fastest "this is a 3D model" cue there is, because that is what a mesh
+  viewer actually draws.
+- ⛔ **The short was a field of colour bands.** A viewer identifies a short-form video by three
+  things and none of them is a band: a **vertical device frame** (now with a notch), **burned-in
+  captions**, and a **scrub bar**. The content inside is a legible little scene that CUTS every
+  14 frames, which is what a short looks like at a glance.
+
+## THE FOUR BUGS THE FIRST REBUILD RENDER EXPOSED
+
+1. ⛔ **The plate was sitting on the hero.** A 560x224 plate centred at y410 covers panel
+   y298-522, and a 232px hero at `GY=706` has his head at y474 — **80% of every hero was behind
+   the hero object.** Plate moved up and left, hero out to the right at size 300.
+2. ⛔ **The Hugging Face mark landed on the sprite's chest** at y540, reading as a badge. It sits
+   beside the plate now. (`feedback_face_is_a_performance_surface`, one body part down.)
+3. ⛔ **The Shopify page was invisible** — its wrapper was `position:absolute` with **no
+   `zIndex`**, which is the documented trap in this world file's own header.
+4. ⛔ **`shopify.svg` ships `fill="#ffffff"`** — white on the house's white mark tile. Set to
+   Shopify's real brand green `#7AB55C`. Every other mark in the reel was already correctly
+   filled; this was the only one.

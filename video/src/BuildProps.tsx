@@ -1278,3 +1278,298 @@ export const KeywordPlate: React.FC<{ x: number; y: number; f: number; at: numbe
     </>
   );
 };
+
+/* ===========================================================================
+   ⭐⭐⭐ THE REAL-MARK KIT — added after Alex rejected v1:
+   *"use real logos and graphics wherever possible, right now it's just random
+    scenes, not hierarchical enough nor interesting, I can't even tell what's
+    going on in each scene, it's way too odd and confusing."*
+
+   ⛔⛔ THE DIAGNOSIS, AND IT IS A RULE I QUOTED IN THIS FILE AND THEN BROKE.
+   Reel 115: *at half a second on a phone a viewer RECOGNISES A MARK; they do
+   not decode a silhouette.* v1 drew each tool as a METAPHOR — a film mill, a
+   cutting lathe, a scan gantry — and asked the viewer to decode three of them
+   in 1.5s each. A metaphor has to be decoded and 1.5s has no time.
+
+   ⭐ EVERY MARK BELOW IS SOURCED, NOT DECORATIVE:
+     GitHub          all three ARE public GitHub repos; the star counts are theirs
+     Hugging Face    `tencent/Hunyuan3D-2` is on HF (99,849 downloads last month)
+     TikTok/IG/YT    MoneyPrinterTurbo's OWN README: "automatic uploads to
+                     TikTok, Instagram and YouTube Shorts"
+     Docker          MPT's README lists Docker Compose as a deployment method
+     Shopify         Shopify's own docs: "Product media can include images,
+                     3D models, and videos"
+     Fiverr/Upwork   both spoken in the VO, twice each
+   ⛔ Nothing is drawn as a rival, a replacement or an endorsement — every mark
+   is either the tool's OWN home or a destination its own docs name.
+   ========================================================================= */
+
+/** the real logo, on a white tile, the way the house draws a mark */
+export const RealMark: React.FC<{ src: string; s?: number; z?: number; x?: number; y?: number;
+  bg?: string; inv?: boolean }> =
+  ({ src, s = 64, z = 80, x, y, bg = "#FFFFFF", inv = false }) => (
+  <div style={{ position: x === undefined ? "relative" : "absolute", left: x, top: y,
+    width: s * 1.32, height: s * 1.32, borderRadius: s * 0.26, zIndex: z, background: bg,
+    border: `${Math.max(2, s * 0.05)}px solid #E8DCC0`, display: "flex", alignItems: "center",
+    justifyContent: "center", boxShadow: SH, flexShrink: 0 }}>
+    <Img src={staticFile("logos/" + src)}
+      style={{ width: s, height: s, objectFit: "contain",
+        filter: inv ? "invert(1)" : undefined }} />
+  </div>
+);
+
+/** ⭐⭐⭐ THE HERO OBJECT OF EVERY TOOL SCENE. A physical plate a Claude can
+    carry, and the thing a viewer RECOGNISES in half a second: the GitHub mark
+    at size, the real owner/name, the real star count, the licence.
+    ⛔ It is NOT a UI screenshot — Alex has rejected those repeatedly (*"object
+    scenes not UI"*). It is a machined sign, bolted, with a lit face. */
+export const RepoPlate: React.FC<{ x: number; y: number; i: number; f: number; s?: number;
+  z?: number; on?: number; lift?: number }> =
+  ({ x, y, i, f, s = 1, z = 78, on = 1, lift = 0 }) => {
+  const t = R.tools[i];
+  const W0 = 560 * s, H0 = 224 * s;
+  return (
+    <div style={{ position: "absolute", left: x - W0 / 2, top: y - H0 / 2 - lift,
+      width: W0, height: H0, zIndex: z, opacity: on,
+      transform: `scale(${0.86 + on * 0.14}) rotate(${(1 - on) * -6}deg)`,
+      borderRadius: 14 * s,
+      background: `linear-gradient(174deg, ${mxh(t.c, 0.30)} 0%, ${dkh(t.c, 0.30)} 100%)`,
+      border: `${7 * s}px solid ${hexa("#000", 0.5)}`, boxShadow: SH_D,
+      display: "flex", alignItems: "center", gap: 18 * s, padding: `0 ${22 * s}px` }}>
+      {/* the machined highlight — one light direction, house-wide */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 6 * s,
+        background: hexa("#FFFFFF", 0.30) }} />
+      <RealMark src="github.svg" s={84 * s} z={z + 1} />
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ ...mono(31 * s, 900), color: "#14100A", letterSpacing: "-0.01em",
+          whiteSpace: "nowrap" }}>{t.n}</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 * s, marginTop: 10 * s }}>
+          <span style={{ ...mono(29 * s, 900), color: "#3A2A08" }}>{"★ " + t.stars}</span>
+          {t.lic && (
+            <span style={{ ...mono(21 * s, 900), color: "#0E1410", background: GREEN,
+              padding: `${3 * s}px ${10 * s}px`, borderRadius: 5 * s,
+              letterSpacing: "0.08em" }}>{t.lic}</span>
+          )}
+          <span style={{ ...mono(21 * s, 900), color: "#0E1410", background: BONE,
+            padding: `${3 * s}px ${10 * s}px`, borderRadius: 5 * s,
+            letterSpacing: "0.06em" }}>$0</span>
+        </div>
+      </div>
+      {/* four bolts, so it reads as a sign and not a card */}
+      {[[14, 14], [W0 - 26, 14], [14, H0 - 26], [W0 - 26, H0 - 26]].map(([bx, by], k) => (
+        <div key={"rb" + k} style={{ position: "absolute", left: bx, top: by, width: 12 * s,
+          height: 12 * s, borderRadius: "50%", background: "#6E6656",
+          border: `${2 * s}px solid ${hexa("#000", 0.5)}` }} />
+      ))}
+    </div>
+  );
+};
+
+/** the three destinations MoneyPrinterTurbo's own README names, as lit signs
+    over the bench — real marks, at a size a phone can read */
+export const DestSigns: React.FC<{ x: number; y: number; f: number; on: number; s?: number;
+  z?: number }> = ({ x, y, f, on, s = 1, z = 82 }) => (
+  <>{["tiktok.svg", "instagram.svg", "youtube.svg"].map((src, i) => {
+    const k = Math.max(0, Math.min(1, on * 3 - i));
+    if (k <= 0) return null;
+    return (
+      <div key={"ds" + i} style={{ position: "absolute", left: x + (i - 1) * 168 * s - 52 * s,
+        top: y - (1 - k) * 44 * s, zIndex: z, opacity: k,
+        transform: `scale(${0.8 + k * 0.2})` }}>
+        {/* the hanger, so the sign is HUNG and not floating */}
+        <div style={{ position: "absolute", left: 50 * s, top: -34 * s, width: 6 * s,
+          height: 34 * s, background: "#6E6656" }} />
+        <RealMark src={src} s={72 * s} z={z} />
+      </div>
+    );
+  })}</>
+);
+
+/** ⭐ THE LITERAL OUTPUT OF TOOL 1: a vertical short, playing, on a real 9:16
+    frame — the format the repo actually emits (1080x1920). Not a metaphor for
+    a video; a video. */
+export const ShortScreen: React.FC<{ x: number; y: number; f: number; build: number;
+  s?: number; z?: number }> = ({ x, y, f, build, s = 1, z = 70 }) => {
+  const W0 = 240 * s, H0 = 426 * s;
+  const play = Math.max(0, build);
+  return (
+    <div style={{ position: "absolute", left: x - W0 / 2, top: y - H0 / 2, width: W0, height: H0,
+      zIndex: z, borderRadius: 16 * s, overflow: "hidden",
+      background: "#0C1014", border: `${8 * s}px solid #2A2620`, boxShadow: SH_D }}>
+      <div style={{ position: "absolute", left: "50%", top: 0, width: 76 * s, height: 18 * s,
+        marginLeft: -38 * s, borderRadius: `0 0 ${10 * s}px ${10 * s}px`, background: "#2A2620",
+        zIndex: 9 }} />
+      {/* the footage: a legible little SCENE that CUTS every ~14 frames, which
+          is what a short looks like at a glance — not a field of colour bands */}
+      {(() => {
+        const shot = Math.floor(f / 14) % 3;
+        const sky = ["#3E6E8E", "#6E4A72", "#8E6A3A"][shot];
+        const gnd = ["#2A4450", "#3E2C46", "#54401E"][shot];
+        return (<>
+          <div style={{ position: "absolute", inset: 0,
+            background: `linear-gradient(180deg, ${sky} 0%, ${gnd} 100%)` }} />
+          <div style={{ position: "absolute", left: 0, bottom: 0, width: "100%", height: H0 * 0.3,
+            background: gnd }} />
+          {/* the subject, in a different place each shot, with a shadow so it sits */}
+          <div style={{ position: "absolute", left: W0 * [0.18, 0.42, 0.28][shot],
+            top: H0 * 0.40 + Math.sin(f / 5) * 5 * s, width: W0 * 0.40, height: W0 * 0.40,
+            borderRadius: shot === 1 ? "50%" : 10 * s, background: "#F2E6C8",
+            border: `${4 * s}px solid ${hexa("#000", 0.42)}` }} />
+          <div style={{ position: "absolute", left: W0 * [0.16, 0.40, 0.26][shot],
+            top: H0 * 0.40 + W0 * 0.40, width: W0 * 0.44, height: 12 * s, borderRadius: "50%",
+            background: hexa("#000", 0.34) }} />
+        </>);
+      })()}
+      {/* burned-in captions — what the repo actually adds */}
+      {play > 0.3 && (
+        <div style={{ position: "absolute", left: 12 * s, right: 12 * s, bottom: 62 * s,
+          textAlign: "center" }}>
+          <span style={{ ...ui(21 * s, 900), color: "#FFF6E2", background: hexa("#000", 0.5),
+            padding: `${4 * s}px ${8 * s}px`, borderRadius: 4 * s, letterSpacing: "0.01em" }}>
+            {["THE SCRIPT", "THE VOICE", "THE CUT"][Math.floor(f / 14) % 3]}
+          </span>
+        </div>
+      )}
+      {/* the scrub bar filling — the render completing */}
+      <div style={{ position: "absolute", left: 12 * s, right: 12 * s, bottom: 26 * s,
+        height: 8 * s, borderRadius: 4 * s, background: hexa("#FFFFFF", 0.24) }}>
+        <div style={{ position: "absolute", left: 0, top: 0, height: "100%",
+          width: `${Math.min(1, play) * 100}%`, borderRadius: 4 * s, background: "#FFF6E2" }} />
+      </div>
+    </div>
+  );
+};
+
+/** ⭐ THE LITERAL OUTPUT OF TOOL 2: one minute of real waveform going in, and a
+    RANK of identical copies coming out — the same waveform, over and over. */
+export const VoiceBank: React.FC<{ x: number; y: number; f: number; feed: number; out: number;
+  s?: number; z?: number }> = ({ x, y, f, feed, out, s = 1, z = 70 }) => {
+  const bars = 34;
+  const wave = (i: number, seed: number) =>
+    18 + Math.abs(Math.sin(i * 0.9 + seed) * Math.cos(i * 0.37 + seed * 1.7)) * 58;
+  return (
+    <>
+      {/* the SOURCE: one minute, with a real waveform in it */}
+      <div style={{ position: "absolute", left: x - 210 * s, top: y - 66 * s, width: 400 * s,
+        height: 132 * s, zIndex: z, borderRadius: 10 * s, background: "#140F22",
+        border: `${6 * s}px solid ${hexa("#000", 0.5)}`, overflow: "hidden" }}>
+        {Array.from({ length: bars }, (_, i) => {
+          const h = wave(i, 0) * s * (i / bars < feed ? 1 : 0.22);
+          return (
+            <div key={"wv" + i} style={{ position: "absolute", left: (10 + i * 11) * s,
+              top: 66 * s - h / 2, width: 6 * s, height: h, borderRadius: 3 * s,
+              background: i / bars < feed ? mxh(VIOLET, 0.5) : dkh(VIOLET, 0.4) }} />
+          );
+        })}
+        <div style={{ position: "absolute", left: 12 * s, top: 8 * s,
+          ...mono(20 * s, 900), color: mxh(VIOLET, 0.7), letterSpacing: "0.1em" }}>
+          {R.tools[1].input}
+        </div>
+      </div>
+      {/* the OUTPUT: the same waveform on a rank of speakers, landing one by one */}
+      {Array.from({ length: 5 }, (_, i) => {
+        const k = Math.max(0, Math.min(1, out * 5 - i));
+        if (k <= 0) return null;
+        return (
+          <div key={"sk" + i} style={{ position: "absolute", left: x + (222 + i * 104) * s,
+            top: y - 62 * s + (1 - k) * 54 * s, width: 104 * s, height: 124 * s, zIndex: z + 1,
+            opacity: Math.min(1, k * 2), transform: `scale(${0.8 + k * 0.2})`,
+            borderRadius: 8 * s, background: `linear-gradient(174deg, ${mxh(VIOLET, 0.24)} 0%, ${dkh(VIOLET, 0.36)} 100%)`,
+            border: `${5 * s}px solid ${hexa("#000", 0.46)}` }}>
+            <div style={{ position: "absolute", left: "50%", top: 30 * s, width: 54 * s,
+              height: 54 * s, margin: `0 0 0 ${-27 * s}px`, borderRadius: "50%",
+              background: "#140F22", border: `${5 * s}px solid ${dkh(VIOLET, 0.2)}` }} />
+            <div style={{ position: "absolute", left: 14 * s, top: 12 * s, width: 34 * s,
+              height: 7 * s, background: hexa("#FFFFFF", 0.3) }} />
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+/** ⭐ THE LITERAL OUTPUT OF TOOL 3: a flat photo becoming a MESH. The wireframe
+    is the whole tell — it is what makes a drawn box read as a 3D MODEL rather
+    than as a box. */
+export const MeshTurn: React.FC<{ x: number; y: number; f: number; k: number; s?: number;
+  z?: number }> = ({ x, y, f, k, s = 1, z = 76 }) => {
+  const a = f * 2.6;
+  const rad = (a * Math.PI) / 180, c = Math.cos(rad), sn = Math.sin(rad);
+  /* ⛔ the front face NEVER passes through edge-on — see
+     memory/feedback_never_let_a_face_pass_through_edge_on */
+  const fw = 208 * s * (0.5 + 0.5 * Math.abs(c));
+  const sw = 56 * s * Math.abs(sn) + 16 * s;
+  const right = c >= 0;
+  const solid = Math.max(0, Math.min(1, k));
+  return (
+    <div style={{ position: "absolute", left: x - fw / 2 - (right ? 0 : sw), top: y - 150 * s,
+      width: fw + sw, height: 300 * s, zIndex: z, opacity: solid }}>
+      {/* top face */}
+      <div style={{ position: "absolute", left: right ? 0 : sw, top: 0, width: fw, height: 46 * s,
+        background: mxh(TEAL, 0.34), transform: `skewX(${-38 * (right ? 1 : -1)}deg)`,
+        transformOrigin: right ? "0% 100%" : "100% 100%" }} />
+      {/* side face */}
+      <div style={{ position: "absolute", left: right ? fw : 0, top: 0, width: sw, height: 250 * s,
+        background: dkh(TEAL, 0.44), transform: `skewY(${-38 * (right ? 1 : -1)}deg)`,
+        transformOrigin: right ? "0% 0%" : "100% 0%" }} />
+      {/* front face + the WIREFRAME that says "mesh" */}
+      <div style={{ position: "absolute", left: right ? 0 : sw, top: 44 * s, width: fw,
+        height: 206 * s, borderRadius: 6 * s, overflow: "hidden",
+        background: `linear-gradient(168deg, ${dkh(TEAL, 0.42)} 0%, ${dkh(TEAL, 0.68)} 100%)`,
+        border: `${5 * s}px solid ${hexa("#000", 0.5)}` }}>
+        {Array.from({ length: 6 }, (_, i) => (
+          <div key={"hz" + i} style={{ position: "absolute", left: 0, top: (i * 206 * s) / 6,
+            width: "100%", height: 3 * s, background: hexa("#8FE8F8", 0.78) }} />
+        ))}
+        {Array.from({ length: 5 }, (_, i) => (
+          <div key={"vt" + i} style={{ position: "absolute", left: (i * fw) / 5, top: 0,
+            width: 3 * s, height: "100%", background: hexa("#8FE8F8", 0.78) }} />
+        ))}
+        {/* the diagonals — a mesh is TRIANGLES, and that is the recognition cue */}
+        {Array.from({ length: 6 }, (_, i) => (
+          <div key={"dg" + i} style={{ position: "absolute", left: -20, top: (i * 206 * s) / 6,
+            width: fw + 40, height: 3 * s, background: hexa("#8FE8F8", 0.5),
+            transform: "rotate(24deg)", transformOrigin: "0% 50%" }} />
+        ))}
+        {/* ⭐ THE VERTEX DOTS. A mesh viewer draws its vertices, and nothing else
+            in this vocabulary says "3D model" as fast as a lit grid of points. */}
+        {Array.from({ length: 30 }, (_, i) => (
+          <div key={"vx" + i} style={{ position: "absolute",
+            left: ((i % 6) * fw) / 5 - 5 * s, top: (Math.floor(i / 6) * 206 * s) / 4 - 5 * s,
+            width: 10 * s, height: 10 * s, borderRadius: "50%", background: "#DFF8FF" }} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/** a real shopfront for the ecom beat — Shopify's own docs say product media
+    can include 3D models, so the mark is depicting the market, not endorsing */
+export const EcomFront: React.FC<{ x: number; y: number; s?: number; f: number; z?: number }> =
+  ({ x, y, s = 1, f, z = 40 }) => (
+  <>
+    <div style={{ position: "absolute", left: x - 210 * s, top: y - 330 * s, width: 420 * s,
+      height: 330 * s, zIndex: z, borderRadius: 10 * s,
+      background: "linear-gradient(176deg,#F2EEE2 0%,#C6C0AE 100%)",
+      border: `${8 * s}px solid ${hexa("#000", 0.44)}` }}>
+      <div style={{ position: "absolute", left: 24 * s, top: 22 * s, display: "flex",
+        alignItems: "center", gap: 14 * s }}>
+        <RealMark src="shopify.svg" s={54 * s} z={z + 2} />
+        <span style={{ ...ui(30 * s, 900), color: "#1A1813" }}>PRODUCT PAGE</span>
+      </div>
+      {/* the 3D viewer on the page, turning */}
+      <div style={{ position: "absolute", left: 24 * s, top: 104 * s, width: 200 * s,
+        height: 196 * s, borderRadius: 8 * s, background: "#1E262C",
+        border: `${5 * s}px solid ${hexa("#000", 0.4)}`, overflow: "hidden" }}>
+        <MeshTurn x={100 * s} y={104 * s} f={f} k={1} s={0.42 * s} z={z + 3} />
+      </div>
+      {[0, 1, 2].map(i => (
+        <div key={"ln" + i} style={{ position: "absolute", left: 248 * s, top: (118 + i * 44) * s,
+          width: (140 - i * 34) * s, height: 16 * s, borderRadius: 4 * s,
+          background: hexa("#2A241C", 0.24) }} />
+      ))}
+      <div style={{ position: "absolute", left: 248 * s, top: 256 * s, width: 148 * s,
+        height: 44 * s, borderRadius: 6 * s, background: "#3F9E74" }} />
+    </div>
+  </>
+);

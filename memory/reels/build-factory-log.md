@@ -163,3 +163,75 @@ three onset **0 ms**, three different passages of two real house tracks.
 
 Related: `project_ai_niche_shortform` · `reels_125plus_on_matchtern_drive` ·
 `feedback_hook_simplicity` · `judge132-reel` (the flub-hunting method this build extended)
+
+---
+
+# ⭐⭐⭐ REVISION 2 — "I CAN'T EVEN TELL WHAT'S GOING ON"
+
+**Alex on rev 1:** *"use real logos and graphics wherever possible, right now it's just random
+scenes not hierarchical enough nor interesting nor i cant even tell whats going on in each scene
+here its wayy too odd and confusing."*
+
+Three complaints, three separate causes. None was a polish problem and none was fixable by tuning.
+
+| the note | the measured cause | the fix |
+|---|---|---|
+| *"just random scenes"* | **16 places in 30s = 1.9s per scene.** No idea had time to land, so a legitimate variety rule (*a new light and colour every 2-4s*) had turned the reel into a slideshow of rooms. | **ELEVEN scenes.** Each tool owns ONE place for ~5s. |
+| *"not hierarchical enough"* | every scene ran a machine **and** a crew **and** a travelling band **and** props. And the hero objects measured **14-16% of the panel** when my own storyboard specified **40-55%**. | one dominant object, scaled to the number the board already asked for; the crews come out of the tool scenes entirely. |
+| *"I can't even tell what's going on"* | ⛔ the three tools were drawn as **METAPHORS** — a film mill, a cutting lathe, a scan gantry. **A metaphor has to be DECODED and 1.5s has no time.** | each tool OPENS on its **real GitHub plate** and then shows the **literal output**. |
+
+## ⛔⛔⛔ THE RULE WAS IN MY OWN FILE, IN CAPITALS, AND I REASONED PAST IT
+
+`BuildProps.tsx` carries reel 115's finding verbatim:
+
+> *at half a second on a phone, a viewer RECOGNISES A MARK; they do not decode a silhouette.*
+
+and then, four lines later, my own comment explaining why it did not apply here: *"none of these
+three repos has a recognisable brand mark, so the NAME STRIP and the star count have to do that
+job."* Both halves of that sentence are true and the conclusion is wrong. **The mark that mattered
+was GitHub**, which all three repos share, plus the star counts already sitting in the honesty
+ledger. A missing *product* mark is not the absence of any mark.
+
+⭐ **THE GENERAL FORM: when a rule seems not to apply, check whether you have defined its subject
+too narrowly.** I read "mark" as "brand logo of this specific product" and concluded there was
+none. The category was "anything a viewer recognises without decoding it", and there were six.
+
+## THE MARK TABLE — every one sourced before it was drawn
+
+| mark | the source that licenses it |
+|---|---|
+| **GitHub** | all three ARE public repos; the star counts are theirs |
+| **Hugging Face** | `tencent/Hunyuan3D-2` is hosted there, 99,849 downloads last month |
+| **TikTok · Instagram · YouTube** | MoneyPrinterTurbo's OWN README: *"automatic uploads to TikTok, Instagram and YouTube Shorts"* |
+| **Docker** | its README's documented deploy method |
+| **Shopify** | Shopify's own docs: *"Product media can include images, 3D models, and videos"* |
+| **Fiverr · Upwork** | spoken in the VO, twice each |
+
+⛔ Nothing is drawn as a rival, a replacement or an endorsement. Every mark is either the tool's own
+home or a destination its own documentation names.
+
+## ⛔ FIVE BUGS THE REBUILD'S FIRST RENDER EXPOSED, ALL FOUND BY LOOKING
+
+1. **The plate was sitting on the hero.** A 560x224 plate centred at y410 covers panel y298-522,
+   and a 232px hero at `GY=706` has his head at y474 — **80% of every hero was behind the object
+   he was presenting**, which is why the sprites read as bugs at the bottom of frame.
+2. **The Hugging Face mark landed on the sprite's chest** at y540 and read as a badge. That is
+   `feedback_face_is_a_performance_surface` one body part down.
+3. **The Shopify page was invisible** — its wrapper was `position:absolute` with **no `zIndex`**,
+   which is the trap written in `BuildWorld.tsx`'s own header.
+4. ⛔⛔ **`shopify.svg` ships `fill="#ffffff"`** — white on the house's white mark tile. Every other
+   mark in the reel was correctly filled; this was the only one, and it renders as a blank square
+   rather than as an error. ⭐ **Audit the FILL of every mark before trusting the tile.**
+5. **The phone at s=1.46 started at panel y119**, inside the reserved plate band, and the speaker
+   rank ran to x1228 — a third of the OUTPUT was off-panel, and the output is the scene's point.
+
+## ⭐⭐ THE TRADE THAT TURNED OUT NOT TO BE A TRADE
+
+Longer, calmer scenes cost motion: the rebuild's first pass measured **6.16 overall with S2 under
+bar at 3.94**, against 8.60 before. The instinct is that legibility and the motion metric are
+opposed here, and they are not: **scaling the hero objects from 14-16% of the panel to the
+storyboard's own 40-55% is more hierarchical, more legible AND the only shape the motion table
+pays for** (LARGE x BRIGHT x FAST). One change, all three notes.
+
+⭐ And the look gate came out the best in the repo on the way: **BODY_SAT 67.7%** against AGENCY's
+57.9, with the black point held at 26.5.

@@ -15,6 +15,7 @@ import {
   MillCabinet, WordTile, MillLine, ReelCan, TradeCounter, Docket, Stall,
   VoiceBooth, Stool, DeadMic, Lathe, ScanGantry, PhotoPrint, Turntable,
   ShopFront, EcomCrate, Trolley, Guide, StrikePress, KeywordPlate,
+  RealMark, RepoPlate, DestSigns, ShortScreen, VoiceBank, MeshTurn, EcomFront,
 } from "./BuildProps";
 import { Room, Jamb, Stack, Overhead } from "./HwSets";
 
@@ -1226,6 +1227,451 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
           is allowed above y 300 in the middle third of this shot. */}
       <KeywordPlate x={506} y={224} f={f} at={4} s={1} z={92} />
       <Edge side="r" c="#241A14" w={92} z={93} kind="post" />
+    </Scene>
+  );
+};
+
+/* ===========================================================================
+   ⭐⭐⭐ THE REBUILD — Alex on v1: *"use real logos and graphics wherever
+   possible, right now it's just random scenes, not hierarchical enough nor
+   interesting, I can't even tell what's going on in each scene, it's way too
+   odd and confusing."*  Three complaints, three causes, three fixes:
+
+   1. "JUST RANDOM SCENES" — 16 places in 30s is 1.9s each, and no idea had
+      time to land. Consolidated to ELEVEN: each tool now owns ONE place for
+      about five seconds, which is long enough to state a name, show the thing
+      and show what comes out.
+   2. "NOT HIERARCHICAL ENOUGH" — every v1 scene ran a machine AND a crew AND a
+      travelling band AND props, all competing. Every scene below has ONE
+      dominant object at 40-55% of the panel and nothing else above knee height.
+   3. "I CAN'T TELL WHAT'S GOING ON" — the tools were drawn as METAPHORS (a film
+      mill, a cutting lathe, a scan gantry) and a metaphor has to be DECODED.
+      ⛔ This is reel 115's rule, which is quoted in BuildProps.tsx and which I
+      then broke: *at half a second on a phone a viewer RECOGNISES A MARK; they
+      do not decode a silhouette.* Each tool now OPENS on its real GitHub plate
+      — real owner/name, real star count, real licence — and then shows the
+      literal output: a vertical short playing, a waveform copied onto a rank of
+      speakers, a photo becoming a wireframe mesh.
+
+   ⛔ EVERY MARK IS SOURCED. GitHub (all three are public repos), Hugging Face
+   (`tencent/Hunyuan3D-2`), TikTok/Instagram/YouTube (MoneyPrinterTurbo's OWN
+   README names them as upload targets), Docker (its README's deploy method),
+   Shopify (their docs: product media can include 3D models), Fiverr and Upwork
+   (spoken twice each). Nothing is drawn as a rival or a replacement.
+   ========================================================================= */
+
+/** the shared bench every tool scene is staged on — one place, one light, and
+    a DARK ground so the lit hero object is the only thing that ranks */
+const ToolRoom: React.FC<{ p: any; f: number; v: Variant; lampX: number }> =
+  ({ p, f, v, lampX }) => (
+  <>
+    <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="rack" overhead="tray"
+      rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.6} rakeN={RAKE_N[v]}
+      lamp={{ x: lampX, y: 250, r: 300 }} floorKind="slab" grit={0.7} />
+    {/* the bench the hero object sits on — a real surface, edge to edge */}
+    <Runner y={716} f={f} z={13} rate={11.4} pitch={182} w={132} h={62} kind="crate"
+      c={mxh(p.key, 0.06)} c2={dkh(p.grit, -0.2)} rail o={0.6} />
+    <div style={{ position: "absolute", left: -40, top: 700, width: W + 80, height: 22,
+      zIndex: 12, background: dkh(p.lip, -0.16) }} />
+    <div style={{ position: "absolute", left: -40, top: 722, width: W + 80, height: 90,
+      zIndex: 11, background: `linear-gradient(180deg, ${dkh(p.floor2, 0.2)} 0%, ${dkh(p.floor2, 0.5)} 100%)` }} />
+  </>
+);
+
+/* =========================================================================
+   T1 · MONEY PRINTER TURBO — 4.73 to 9.90s (155f) · ESCALATE 1
+   VO: "First, Money Printer Turbo. Just type one word or topic and it writes a
+        script, records the voiceover, and edits the final video"
+
+   ⭐ THE NAME FIRST, AS A REAL MARK: the plate lands, is held for a beat, then
+   the camera cuts to the bench and the short is BUILT on the three spoken
+   words. The beats are the measured caption onsets, not an even spread.
+   ====================================================================== */
+export const T1: React.FC<SP> = ({ v, dur }) => {
+  const f = useCurrentFrame();
+  const p = asPlace("mill");
+  const L = LAY[v];
+  const CUT = 46;
+  const plate = E(f, 4, 16, 0, 1, BACK);
+  /* the three stages, on their measured word onsets (local frames) */
+  const s1 = E(f, 78, 92, 0, 1, OUT);      /* "writes a script"       */
+  const s2 = E(f, 100, 114, 0, 1, OUT);    /* "records the voiceover" */
+  const s3 = E(f, 123, 140, 0, 1, OUT);    /* "edits the final video" */
+  const build = (s1 + s2 + s3) / 3;
+
+  if (f < CUT) {
+    /* ---- the NAME, big, on a bare stage. One object, nothing else. ------ */
+    return (
+      <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.58}>
+        <ToolRoom p={p} f={f} v={v} lampX={506 + L.a * 0.3} />
+        <RepoPlate x={452 + L.a * 0.3} y={330} i={0} f={f} s={1.28} z={78} on={plate}
+          lift={(1 - plate) * -40} />
+        <Contact x={706 + L.a * 0.3} y={GY - 12} w={244} o={0.4} />
+        <Hero f={f} x={818 + L.a * 0.3} y={GY} size={300} z={56} act={2} ph={0.4}
+          costume={{ chef: 1 }} tint="#8E4A2E" cheer={plate > 0.8 ? 1 : 0} gaze={-0.6} />
+        <BandChip t="ONE TOPIC · A FINISHED VIDEO" c={INK} />
+        <Edge side="l" c="#1C1308" w={98} z={93} kind="post" />
+      </Scene>
+    );
+  }
+  /* ---- the CUT: the bench, and the short being made on it -------------- */
+  return (
+    <Scene p={asPlace("millc")} slug="" push={[0, dur, 1.06]} vig={0.56}>
+      <ToolRoom p={asPlace("millc")} f={f} v={v} lampX={330 + L.b * 0.3} />
+
+      {/* the ONE topic going in — a real typed word on a real key card */}
+      <div style={{ position: "absolute", left: 96 + L.b * 0.3, top: 268, width: 250, height: 92,
+        zIndex: 60, borderRadius: 8, background: "linear-gradient(174deg,#F8F2E2,#CFC4A8)",
+        border: "6px solid #2A241C", display: "flex", alignItems: "center",
+        justifyContent: "center", boxShadow: SH }}>
+        <span style={{ ...mono(30, 900), color: "#2A241C", letterSpacing: "0.06em" }}>
+          {R.tools[0].input}
+        </span>
+      </div>
+      {/* the pipe from the word to the screen, filling as the stages complete */}
+      <div style={{ position: "absolute", left: 346 + L.b * 0.3, top: 304, width: 250, height: 20,
+        zIndex: 58, background: "#1A2A22", border: "3px solid rgba(0,0,0,0.4)" }}>
+        <div style={{ position: "absolute", left: 0, top: 0, height: "100%",
+          width: `${build * 100}%`, background: mxh(GREEN, 0.24) }} />
+      </div>
+
+      {/* ⭐ THE HERO: the vertical short, playing, at 45% of the panel height */}
+      <ShortScreen x={748 + L.b * 0.3} y={468} f={f} build={build} s={1.20} z={70} />
+
+      {/* the three stages, each a lit lamp on the bench with its own word */}
+      {[["SCRIPT", s1], ["VOICEOVER", s2], ["FINAL CUT", s3]].map(([t, k], i) => (
+        <React.Fragment key={"st" + i}>
+          <div style={{ position: "absolute", left: 62 + i * 186 + L.b * 0.3, top: 596,
+            width: 168, height: 62, zIndex: 62, borderRadius: 7,
+            background: (k as number) > 0.5 ? mxh(GREEN, 0.14) : "#16201A",
+            border: `4px solid ${hexa("#000", 0.44)}`, display: "flex", alignItems: "center",
+            justifyContent: "center" }}>
+            <span style={{ ...mono(21, 900), letterSpacing: "0.06em",
+              color: (k as number) > 0.5 ? "#0E1A12" : hexa("#BFE8CE", 0.28) }}>{t as string}</span>
+          </div>
+          {(k as number) > 0 && (k as number) < 1 && (
+            <Ring x={146 + i * 186 + L.b * 0.3} y={626} f={f} at={[78, 100, 123][i]}
+              c="#BFE8CE" z={64} s={0.5} />
+          )}
+        </React.Fragment>
+      ))}
+
+      {/* the three destinations its OWN README names, hung over the bench */}
+      <DestSigns x={730 + L.b * 0.3} y={222} f={f} on={E(f, 132, 152, 0, 1, OUT)} s={1} z={82} />
+
+      <Contact x={82 + L.c * 0.3} y={GY - 12} w={216} o={0.38} />
+      <Hero f={f} x={182 + L.c * 0.3} y={GY} size={268} z={56} act={1} ph={2.1}
+        drive={[78, 100, 123].reduce((a, at) =>
+          a + (E(f, at - 5, at, 0, 1, IN_Q) - E(f, at, at + 12, 0, 1, OUT)) * -0.26, 0)}
+        costume={{ glasses: 1 }} tint="#8E4A2E" gaze={0.8} cheer={f > 142 ? 1 : 0} />
+
+      <BandChip t="SCRIPT · VOICEOVER · FINAL CUT" c={INK} />
+      <Edge side="r" c="#050C0A" w={100} z={93} kind="rail" />
+    </Scene>
+  );
+};
+
+/* =========================================================================
+   T2 · GPT SoVITS — 11.19 to 16.23s (151f) · ESCALATE 2
+   VO: "Second, GPT SoVITS. One minute of your voice is enough to clone it, so
+        sell narration services on Fiverr and Upwork"
+   ====================================================================== */
+export const T2: React.FC<SP> = ({ v, dur }) => {
+  const f = useCurrentFrame();
+  const p = asPlace("booth");
+  const L = LAY[v];
+  const CUT = 47;
+  const plate = E(f, 4, 16, 0, 1, BACK);
+  const feed = E(f, 52, 78, 0, 1, IO);      /* "one minute of your voice" */
+  const out = E(f, 76, 120, 0, 1, IO);      /* "is enough to clone it"    */
+  const mkt = E(f, 96, 116, 0, 1, OUT);     /* "on Fiverr and Upwork"     */
+
+  if (f < CUT) {
+    return (
+      <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.58}>
+        <ToolRoom p={p} f={f} v={v} lampX={506 + L.a * 0.3} />
+        <RepoPlate x={452 + L.a * 0.3} y={330} i={1} f={f} s={1.28} z={78} on={plate}
+          lift={(1 - plate) * -40} />
+        {/* ⛔ the Hugging Face mark sits BESIDE the plate, never on the sprite —
+            v1 put it at y540 and it landed on his chest like a badge */}
+        <div style={{ position: "absolute", left: 154 + L.a * 0.3, top: 452, zIndex: 80,
+          opacity: E(f, 18, 30, 0, 1, OUT) }}>
+          <RealMark src="huggingface.svg" s={64} z={80} />
+        </div>
+        <Contact x={706 + L.a * 0.3} y={GY - 12} w={240} o={0.4} />
+        <Hero f={f} x={818 + L.a * 0.3} y={GY} size={296} z={56} act={2} ph={1.6}
+          costume={{ prof: 1 }} tint="#8E4A2E" cheer={plate > 0.8 ? 1 : 0} gaze={-0.6} />
+        <BandChip t="CLONE YOUR OWN VOICE" c={INK} />
+        <Edge side="l" c="#150F24" w={100} z={93} kind="post" />
+      </Scene>
+    );
+  }
+  return (
+    <Scene p={asPlace("lathe")} slug="" push={[0, dur, 1.06]} vig={0.56}>
+      <ToolRoom p={asPlace("lathe")} f={f} v={v} lampX={300 + L.b * 0.3} />
+
+      {/* the mic the minute is recorded on — one real object, big */}
+      <div style={{ position: "absolute", left: 120 + L.b * 0.3, top: 258, width: 20, height: 130,
+        zIndex: 58, background: "linear-gradient(90deg,#8E8672,#3A3448)" }} />
+      <div style={{ position: "absolute", left: 92 + L.b * 0.3, top: 376, width: 78, height: 104,
+        zIndex: 60, borderRadius: "39px 39px 12px 12px",
+        background: "linear-gradient(176deg,#6E7A88,#1E252C)", border: "5px solid rgba(0,0,0,0.5)" }}>
+        {[0, 1, 2, 3].map(i => (
+          <div key={"mg" + i} style={{ position: "absolute", left: 13, right: 13, top: 16 + i * 15,
+            height: 6, borderRadius: 3, background: hexa("#000", 0.46) }} />
+        ))}
+      </div>
+
+      {/* ⭐ THE HERO: one minute of real waveform in, a rank of copies out */}
+      <VoiceBank x={252 + L.b * 0.3} y={430} f={f} feed={feed} out={out} s={1.04} z={70} />
+
+      {/* the two marketplaces, real marks, arriving on their spoken word */}
+      {mkt > 0 && (
+        <div style={{ position: "absolute", left: 342 + L.b * 0.3, top: 594, zIndex: 84,
+          display: "flex", gap: 22, opacity: mkt,
+          transform: `translateY(${(1 - mkt) * 26}px)` }}>
+          <RealMark src="si_fiverr.svg" s={62} z={84} />
+          <RealMark src="si_upwork.svg" s={64} z={84} />
+        </div>
+      )}
+
+      <Contact x={790 + L.c * 0.3} y={GY - 12} w={190} o={0.36} />
+      <Hero f={f} x={890 + L.c * 0.3} y={GY} size={272} z={56} act={3} ph={0.9}
+        drive={E(f, 48, 56, 0, 1, IO) * -0.24}
+        costume={{ glasses: 1 }} tint="#8E4A2E" gaze={-0.9}
+        shock={out > 0.4 && out < 0.8 ? 1 : 0} cheer={out > 0.9 ? 1 : 0} />
+
+      <BandChip t={`${R.tools[1].input} OF AUDIO · UNLIMITED TAKES`} c={INK} />
+      <Edge side="r" c="#06070F" w={104} z={93} kind="rail" />
+    </Scene>
+  );
+};
+
+/* =========================================================================
+   T3 · HUNYUAN 3D — 17.71 to 22.61s (147f) · ESCALATE 3
+   VO: "Third, Hunyuan 3D. It turns one flat photo into a real 3D model you can
+        spin, light, and reuse."
+   ====================================================================== */
+export const T3: React.FC<SP> = ({ v, dur }) => {
+  const f = useCurrentFrame();
+  const p = asPlace("shop3");
+  const L = LAY[v];
+  const CUT = 43;
+  const plate = E(f, 4, 16, 0, 1, BACK);
+  const drop = E(f, 48, 66, 0, 1, IO);       /* the flat photo goes in      */
+  const mesh = E(f, 70, 96, 0, 1, OUT);      /* "a real 3D model"           */
+  const lamps = E(f, 110, 126, 0, 1, LIN);   /* "light,"                    */
+  const reuse = E(f, 128, 146, 0, 1, OUT);   /* "and reuse."                */
+
+  if (f < CUT) {
+    return (
+      <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.56}>
+        <ToolRoom p={p} f={f} v={v} lampX={506 + L.a * 0.3} />
+        <RepoPlate x={452 + L.a * 0.3} y={330} i={2} f={f} s={1.28} z={78} on={plate}
+          lift={(1 - plate) * -40} />
+        <div style={{ position: "absolute", left: 154 + L.a * 0.3, top: 452, zIndex: 80,
+          opacity: E(f, 18, 30, 0, 1, OUT) }}>
+          <RealMark src="huggingface.svg" s={64} z={80} />
+        </div>
+        <Contact x={706 + L.a * 0.3} y={GY - 12} w={240} o={0.4} />
+        <Hero f={f} x={818 + L.a * 0.3} y={GY} size={296} z={56} act={2} ph={1.9}
+          costume={{ cop: 1 }} tint="#8E4A2E" cheer={plate > 0.8 ? 1 : 0} gaze={-0.6} />
+        <BandChip t="ONE PHOTO · A REAL 3D MODEL" c={INK} />
+        <Edge side="l" c="#0B1116" w={100} z={93} kind="post" />
+      </Scene>
+    );
+  }
+  return (
+    <Scene p={asPlace("turn")} slug="" push={[0, dur, 1.06]} vig={0.50}>
+      <ToolRoom p={asPlace("turn")} f={f} v={v} lampX={300 + L.b * 0.3} />
+
+      {/* the ONE flat photo, dropping in, face-on and readable the whole way */}
+      <div style={{ position: "absolute", left: 118 + L.b * 0.3, top: 250 + drop * 132,
+        width: 190, height: 234, zIndex: 66, borderRadius: 5, opacity: 1 - mesh * 0.9,
+        background: "linear-gradient(174deg,#F8F3E6,#CFC6B0)", border: "7px solid #FFFFFF",
+        transform: `rotate(${-8 + drop * 8}deg)`, boxShadow: SH }}>
+        <div style={{ position: "absolute", left: 14, top: 14, right: 14, bottom: 42,
+          background: "linear-gradient(168deg,#3E6E7A,#2A3A44)", overflow: "hidden" }}>
+          <div style={{ position: "absolute", left: "22%", bottom: 0, width: "56%", height: "56%",
+            borderRadius: "8px 8px 0 0", background: mxh(CLAY, 0.14) }} />
+        </div>
+        <div style={{ position: "absolute", left: 0, right: 0, bottom: 10, textAlign: "center",
+          ...mono(15, 900), color: "#2A241C", letterSpacing: "0.1em" }}>{R.tools[2].input}</div>
+      </div>
+
+      {/* ⭐ THE HERO: it becomes a MESH — the wireframe is what says 3D MODEL */}
+      <MeshTurn x={640 + L.b * 0.3} y={438} f={f} k={mesh} s={1.42} z={76} />
+
+      {/* "light," — three real lamps striking in an ascending run */}
+      {[-210, 0, 210].map((dx, i) => {
+        const on = Math.max(0, Math.min(1, lamps * 3 - i));
+        return (
+          <React.Fragment key={"lm" + i}>
+            <div style={{ position: "absolute", left: 620 + dx + L.b * 0.3 - 34, top: 168,
+              width: 68, height: 44, zIndex: 62, borderRadius: "6px 6px 22px 22px",
+              background: "linear-gradient(176deg,#6E6656,#2E2A22)",
+              border: "4px solid rgba(0,0,0,0.46)" }}>
+              <div style={{ position: "absolute", left: 8, bottom: 3, right: 8, height: 12,
+                borderRadius: 3, background: mxh("#FFF3D6", 0.1 + on * 0.8) }} />
+            </div>
+            {on > 0 && (
+              <div style={{ position: "absolute", left: 620 + dx + L.b * 0.3 - 108, top: 210,
+                width: 216, height: 300, zIndex: 60, opacity: on * 0.26,
+                clipPath: "polygon(38% 0, 62% 0, 100% 100%, 0 100%)",
+                background: `linear-gradient(180deg, ${hexa("#FFF3D6", 0.9)} 0%, ${hexa("#FFF3D6", 0)} 100%)` }} />
+            )}
+          </React.Fragment>
+        );
+      })}
+
+      {/* "and reuse." — copies rack up on the shelf, each landing hard */}
+      {Array.from({ length: 3 }, (_, i) => {
+        const k = reuse * 3 - i;
+        if (k <= 0) return null;
+        const q = Math.min(1, k);
+        return (
+          <div key={"rc" + i} style={{ position: "absolute", left: 852 + L.c * 0.3,
+            top: 232 + i * 122 + (1 - q) * -54, width: 108, height: 108, zIndex: 68,
+            opacity: Math.min(1, k * 2.2), transform: `scale(${0.74 + q * 0.26})`,
+            borderRadius: 8, background: `linear-gradient(172deg, ${mxh(TEAL, 0.2)} 0%, ${dkh(TEAL, 0.4)} 100%)`,
+            border: "5px solid rgba(0,0,0,0.44)", overflow: "hidden" }}>
+            {[0, 1, 2].map(j => (
+              <div key={"w" + j} style={{ position: "absolute", left: 0, top: 26 + j * 26,
+                width: "100%", height: 2, background: hexa("#BFE8F0", 0.3) }} />
+            ))}
+          </div>
+        );
+      })}
+
+      <Contact x={104 + L.a * 0.3} y={GY - 12} w={186} o={0.34} />
+      <Hero f={f} x={178 + L.a * 0.3} y={GY} size={268} z={56} act={1} ph={0.5}
+        drive={E(f, 44, 52, 0, 1, IO) * 0.24 - E(f, 52, 62, 0, 1, OUT) * 0.24}
+        costume={{ suit: 1 }} tint="#8E4A2E" gaze={0.7} cheer={f > 138 ? 1 : 0} />
+
+      <BandChip t="SPIN IT · LIGHT IT · REUSE IT" c={INK} />
+      <Edge side="r" c="#221E16" w={98} z={93} kind="post" />
+    </Scene>
+  );
+};
+
+/* =========================================================================
+   SALE_A · THE COUNTER — 9.90 to 11.19s (39f) · PAYOFF 1
+   VO: "to sell to businesses."
+   ⛔ NO MONEY. The transaction is a docket stamped SOLD and two real marks.
+   ====================================================================== */
+export const SALE_A: React.FC<SP> = ({ v, dur }) => {
+  const f = useCurrentFrame();
+  const p = asPlace("counter");
+  const L = LAY[v];
+  const slide = E(f, 3, 17, 0, 1, IO);
+  return (
+    <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.50}>
+      <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="lampbar"
+        rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.6} rakeN={RAKE_N[v]}
+        floorKind="tile" grit={0.6}
+        window={{ x: 84 + L.a * 0.2, y: 250, w: 300, h: 214 }} />
+      <TradeCounter x={210 + L.b * 0.2} y={492} w={620} z={52} />
+      {/* the finished short crossing the counter — the SAME object T1 made */}
+      <div style={{ position: "absolute", left: 300 + slide * 320 + L.b * 0.2,
+        top: 300 - Math.sin(slide * Math.PI) * 26, zIndex: 80,
+        transform: `rotate(${-6 + slide * 6}deg)` }}>
+        <ShortScreen x={0} y={0} f={f} build={1} s={0.52} z={80} />
+      </div>
+      <Docket x={790 + L.c * 0.2} y={556} f={f} at={20} s={0.94} z={84} />
+      <Forearm x0={1006} y0={498} x1={866} y1={470} w={30} c="#7E6A56" z={82} />
+      <Forearm x0={1006} y0={562} x1={880} y1={528} w={30} c="#7E6A56" z={82} />
+      <Contact x={150 + L.a * 0.2} y={GY - 12} w={188} o={0.36} />
+      <Hero f={f} x={240 + L.a * 0.2} y={GY} size={230} z={56} act={1} ph={0.3}
+        drive={E(f, 3, 12, 0, 1, IO) * 0.30} costume={{ suit: 1 }} tint="#8E4A2E"
+        cheer={f > 26 ? 1 : 0} />
+      <BandChip t="SELL IT TO BUSINESSES" c={INK} />
+      <Edge side="r" c="#1E1A14" w={96} z={93} kind="wall" />
+    </Scene>
+  );
+};
+
+/* =========================================================================
+   SALE_B · THE ECOM PAGE — 22.61 to 24.71s (63f) · PAYOFF 3
+   VO: "So sell this to ecom brands and businesses."
+   ⭐ Shopify's own docs say product media can include 3D models, so the mark is
+   depicting the MARKET the model is sold into, never endorsing anything.
+   ====================================================================== */
+export const SALE_B: React.FC<SP> = ({ v, dur }) => {
+  const f = useCurrentFrame();
+  const p = asPlace("dock");
+  const L = LAY[v];
+  const land = E(f, 8, 26, 0, 1, OUT);
+  return (
+    <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.52}>
+      <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="gantry"
+        rake={0.11 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.2} rakeN={RAKE_N[v]}
+        floorKind="tile" grit={0.6} />
+      {/* ⭐ THE HERO: a real product page with the model turning ON it */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 44,
+        transform: `translateY(${(1 - land) * -90}px)`, opacity: land }}>
+        <EcomFront x={640 + L.b * 0.2} y={620} s={1.12} f={f} z={44} />
+      </div>
+      <Docket x={230 + L.a * 0.2} y={520} f={f} at={34} s={0.86} z={84} />
+      <Contact x={126 + L.a * 0.2} y={GY - 12} w={190} o={0.36} />
+      <Hero f={f} x={214 + L.a * 0.2} y={GY} size={232} z={56} act={1} ph={1.4}
+        drive={(E(f, 6, 12, 0, 1, IN_Q) - E(f, 12, 24, 0, 1, OUT)) * 0.28}
+        costume={{ constr: 1 }} tint="#8E4A2E" cheer={f > 44 ? 1 : 0} />
+      <BandChip t="SELL 3D TO ECOM BRANDS" c={INK} />
+      <Edge side="l" c="#0F1318" w={100} z={93} kind="wall" />
+    </Scene>
+  );
+};
+
+/* =========================================================================
+   SETUP2 · THE FIT-OUT — 2.40 to 4.73s (70f) · SETUP
+   VO: "And the best part, they take just five minutes to set up."
+   ⭐ REBUILT AROUND THE REAL MARKS: three repo plates are craned in and bolted
+   to the wall one-two-three, with Docker on the bench — its README's own deploy
+   method — and a clock whose minute hand barely travels.
+   ====================================================================== */
+export const SETUP2: React.FC<SP> = ({ v, dur }) => {
+  const f = useCurrentFrame();
+  const p = asPlace("fitout");
+  const L = LAY[v];
+  const AT = [6, 26, 46];
+  return (
+    <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.54}>
+      <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="rack" overhead="gantry"
+        rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.2} rakeN={RAKE_N[v]}
+        floorKind="slab" grit={0.6}
+        window={{ x: 720 + L.b * 0.2, y: 250, w: 240, h: 200 }} />
+      <WallClock x={128 + L.a * 0.4} y={318} s={140} f={f} z={30} />
+
+      {/* the three real plates, bolted to the wall one at a time */}
+      {R.tools.map((t, i) => {
+        const at = AT[i];
+        const k = E(f, at, at + 14, 0, 1, BACK);
+        if (k <= 0) return null;
+        return (
+          <React.Fragment key={"rp" + i}>
+            <RepoPlate x={556 + L.b * 0.2} y={276 + i * 116} i={i} f={f} s={0.72} z={70 + i}
+              on={k} lift={(1 - k) * 70} />
+            {k >= 1 && <Ring x={556 + L.b * 0.2} y={276 + i * 116} f={f} at={at + 13}
+              c={mxh(t.c, 0.4)} z={74} s={0.6} />}
+          </React.Fragment>
+        );
+      })}
+
+      {/* Docker on the bench — the deploy method its own README documents */}
+      <div style={{ position: "absolute", left: 156 + L.a * 0.4, top: 470, zIndex: 66,
+        display: "flex", alignItems: "center", gap: 14, opacity: E(f, 30, 44, 0, 1, OUT) }}>
+        <RealMark src="docker.svg" s={58} z={66} />
+        <span style={{ ...mono(24, 900), color: "#2A241C", background: BONE,
+          padding: "6px 12px", borderRadius: 5, letterSpacing: "0.08em" }}>{R.setup}</span>
+      </div>
+
+      <Contact x={786 + L.c * 0.2} y={GY - 12} w={188} o={0.36} />
+      <Hero f={f} x={874 + L.c * 0.2} y={GY} size={232} z={56} act={1} ph={1.2}
+        drive={AT.reduce((a, at) => a + (E(f, at + 8, at + 13, 0, 1, IN_Q) -
+          E(f, at + 13, at + 22, 0, 1, OUT)) * -0.32, 0)}
+        costume={{ constr: 1 }} tint="#8E4A2E" cheer={f > 62 ? 1 : 0} />
+      <BandChip t={`${R.setup} TO SET UP · ALL THREE`} c={INK} />
+      <Edge side="r" c="#1E1A14" w={104} z={93} kind="wall" />
     </Scene>
   );
 };
