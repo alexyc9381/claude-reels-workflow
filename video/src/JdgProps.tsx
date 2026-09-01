@@ -3,7 +3,7 @@ import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, rnd, SH, SH_D, dkh, mxh,
   Contact, Pool, Ring, Puff, mono, ui, CLAY, INK, RED, GREEN,
   PLASTER, PLASTERD, OAK, OAKD, OAKL, BRS, BRSD, BRSL, FACE, FACED, VOID,
-  C_JUDGE, C_PROS, C_DEF, R, settle, antic, load, stroke, STEP,
+  C_JUDGE, C_PROS, C_DEF, R, settle, antic, load, stroke, STEP, Mark,
   BLOCKS, BLOCK_DEAD, lerpHex, W,
 } from "./JdgWorld";
 
@@ -195,18 +195,21 @@ export const BlockLine: React.FC<{ f: number; y: number; z?: number; rate?: numb
       zIndex: z, background: `linear-gradient(180deg, ${BRSL} 0%, ${BRSD} 100%)` }} />
     {Array.from({ length: n }, (_, i) => {
       const x = (((i * pitch + f * rate) % span) + span) % span - 160;
-      const c = lerpHex(BLOCKS[i % BLOCKS.length], "#AFD2DA", back);
-      const bw = 118 * s, bhh = 52 * s;
+      const bw = 152 * s;
       return (
         <React.Fragment key={"bl" + i}>
           <div style={{ position: "absolute", left: x + bw / 2 - 3, top: y - 4, width: 6,
-            height: 20, zIndex: z + 1, background: dkh(BRSD, 0.2) }} />
-          <div style={{ position: "absolute", left: x, top: y + 16, width: bw, height: bhh,
-            zIndex: z + 2, borderRadius: 4, boxShadow: SH,
-            background: `linear-gradient(172deg, ${mxh(c, 0.26)} 0%, ${c} 46%, ${dkh(c, 0.4)} 100%)`,
-            border: `3px solid ${dkh(c, 0.26)}` }}>
-            <div style={{ position: "absolute", left: 10, right: 10, top: bhh * 0.34, height: 6,
-              borderRadius: 3, background: hexa("#FFFFFF", 0.30) }} />
+            height: 22, zIndex: z + 1, background: dkh(BRSD, 0.2) }} />
+          {/* ⭐ ALEX CHOSE "the conveyor carries parts of the hero object". It was
+              carrying coloured bars, which is the shapes note one layer down. It
+              carries the same finished UNITS the hero is holding up — the line
+              that keeps feeding him work to sign off — hazed back with brightness
+              and desaturation rather than darkness, so it stays background AND
+              keeps paying frame-0 luma. */}
+          <div style={{ position: "absolute", inset: 0, zIndex: z + 2,
+            opacity: 1 - back * 0.42,
+            filter: `saturate(${(1 - back * 0.55).toFixed(2)}) brightness(${(1 + back * 0.34).toFixed(2)})` }}>
+            <Unit kind={i} x={x + bw / 2} y={y + 20 + 46 * s} w={bw} z={z + 2} lamp={1} f={f} />
           </div>
         </React.Fragment>
       );
@@ -631,37 +634,17 @@ export const Ship: React.FC<{ kind: 0 | 1 | 2; x: number; y: number; f: number; 
   s?: number; z?: number }> = ({ kind, x, y, f, at, s = 1, z = 66 }) => {
   const lf = f - at;
   if (lf < -16) return null;
-  const inX = E(lf, -16, 0, -620, 0, IN_Q);
+  const inX = E(lf, -16, 0, -640, 0, IN_Q);
   const set = lf >= 0 ? settle(lf, 0, 9, 13, 2.5) : 0;
   const bob = lf >= 0 ? Math.sin(lf / 7) * 4 : 0;
-  /* ⛔ THREE DIFFERENT BUILDS, NOT THREE CRATES — and not three cream slabs
-     either. Each is made of the same saturated blocks the tower is made of, in a
-     different arrangement, so "an app, a site, a tool" reads as three things
-     somebody BUILT out of the same material. */
-  const SHAPES: number[][][] = [
-    [[0], [1], [2], [3]],                    /* APP  — tall and narrow */
-    [[0, 1, 2], [3, 4, 5]],                  /* SITE — wide, two courses */
-    [[0, 1], [2, 3], [4]],                   /* TOOL — squat, stepped */
-  ];
-  const rows = SHAPES[kind];
-  const bw = 74 * s, bh = 56 * s;
-  const wide = Math.max(...rows.map(r => r.length)) * bw;
+  /* ⛔ THREE DIFFERENT PRODUCTS, and they are the reel's own units — a phone, a
+     monitor and a toolbox for "apps, websites and tools". Three crates would
+     carry ONE bit of information; three nameable devices carry three. */
+  const KIND = [1, 0, 3][kind];
   return (
-    <div style={{ position: "absolute", left: x - wide / 2, top: y - rows.length * bh,
-      zIndex: z, transform: `translate(${inX + set}px, ${bob}px)` }}>
-      {rows.map((row, r) => row.map((bi, c) => {
-        const col = BLOCKS[bi % BLOCKS.length];
-        return (
-          <div key={`s${r}-${c}`} style={{ position: "absolute",
-            left: (wide - row.length * bw) / 2 + c * bw, top: r * bh,
-            width: bw - 5, height: bh - 5, borderRadius: 5, boxShadow: SH,
-            background: `linear-gradient(172deg, ${mxh(col, 0.28)} 0%, ${col} 46%, ${dkh(col, 0.4)} 100%)`,
-            border: `3px solid ${dkh(col, 0.5)}` }}>
-            <div style={{ position: "absolute", left: 8, right: 8, top: bh * 0.30, height: 6,
-              borderRadius: 3, background: mxh(col, 0.68) }} />
-          </div>
-        );
-      }))}
+    <div style={{ position: "absolute", inset: 0, zIndex: z,
+      transform: `translate(${inX + set}px, ${bob}px)` }}>
+      <Unit kind={KIND} x={x} y={y} w={286 * s} z={z} lamp={1} f={f} />
     </div>
   );
 };
@@ -708,3 +691,632 @@ export const Shelf: React.FC<{ x: number; y: number; f: number; w?: number; z?: 
       color: hexa(FACED, 0.6), letterSpacing: 2 }}>EXHIBIT A</div>
   </div>
 );
+
+/* =========================================================================
+   ⭐⭐⭐ THREE RECOGNISABLE OBJECTS — THE HOOK CANDIDATES.
+
+   ⛔⛔⛔ SECOND REJECTION ON THE SAME AXIS. v1 was paper; v2 replaced it with a
+   TOWER OF BLOCKS and got: *"each of the animations are too boring still, just
+   primarily shapes when it should be interesting objects."*
+   ⭐ [[feedback_recognition_beats_craft_on_a_hook_object]] is explicit about why
+   a better-drawn shape scores worse: reel 130 went blank cards -> ONE prompt card
+   at architectural scale with 17 drawn parts -> a TYPEWRITER, and only the third
+   needed no decoding. **A rectangle is what "I don't know what I'm looking at"
+   means**, and a stack of rectangles is still a rectangle.
+   ⭐ THE TEST, BEFORE DRAWING: could a stranger NAME this in half a second, sound
+   off, from the silhouette alone? A typewriter, a padlock, a fire extinguisher —
+   yes. A crate, a slab, a "module", a tower of blocks — no.
+   ⭐ AND ALL THREE STAY ON SUBJECT, because recognition is the constraint, not a
+   licence to leave the topic: each one is A THING SOMEBODY BUILT, and the whole
+   reel asks one question about it — DOES IT HOLD?
+   ========================================================================= */
+
+/** ⭐ A CAR, side on. Nine features a viewer identifies a car BY, all drawn:
+    body · cabin with two windows · bonnet slope · boot · two wheels with hubs and
+    tyres · headlight · bumper · door shut-line · wing mirror. Parts detach. */
+export const Car: React.FC<{
+  x: number; y: number; f: number; w?: number; z?: number;
+  /** part i falls off at this frame: 0 wheelF · 1 wheelR · 2 bumper · 3 bonnet · 4 door */
+  off?: Record<number, number>;
+  lit?: number; sag?: number; hit?: number; tint?: string;
+  /** ⭐ 0..1 — how far the press has taken it. Drives the ONE thing a viewer
+      reads as "it is losing": the roof comes down, the tyres bulge out under it,
+      the glass crazes and the wheels splay. A progressive state the whole shot
+      counts toward is what [[feedback_a_wobble_is_not_a_clock]] means by a
+      visible countdown; parts falling off at unrelated frames is a texture. */
+  crush?: number;
+}> = ({ x, y, f, w: ww = 460, z = 60, off = {}, lit = 1, sag = 0, hit = 0, tint, crush = 0 }) => {
+  const K = Math.max(0, Math.min(1, crush));
+  const H = ww * 0.42 * (1 - K * 0.42), R = ww * 0.115;
+  const C = tint || "#E4572E";
+  const paint = lit > 0.5 ? C : lerpHex(C, "#6E5A50", 0.26);
+  const gone = (i: number) => off[i] !== undefined && f >= off[i];
+  const drop = (i: number, gx: number, gy: number, spin: number) => {
+    const lf = f - (off[i] ?? 0);
+    return { dx: gx * lf * lf * 0.9, dy: gy + lf * lf * 1.5, rot: spin * lf * 7 };
+  };
+  const ring = hit > 0 ? Math.sin(f * 2.1) * 5 * hit : 0;
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - H - R, width: ww,
+      height: H + R, zIndex: z, transform: `translate(${ring}px, ${sag * 0.5}px) rotate(${sag * 0.5}deg)`,
+      transformOrigin: "50% 100%" }}>
+      {/* WHEELS — the single most identifying feature, so they are drawn first
+          and they are big enough to read at thumb distance */}
+      {[0, 1].map(i => {
+        const cx = i === 0 ? ww * 0.76 : ww * 0.24;
+        const g = gone(i) ? drop(i, i === 0 ? 1.4 : -0.9, 0, i === 0 ? 1 : -1) : { dx: 0, dy: 0, rot: 0 };
+        if (g.dy > 620) return null;
+        const splay = K * (i === 0 ? 34 : -34);
+        return (
+          <div key={"wh" + i} style={{ position: "absolute", left: cx - R + g.dx + splay,
+            top: H - R * 0.42 + g.dy, width: R * 2 * (1 + K * 0.16), height: R * 2 * (1 - K * 0.22),
+            borderRadius: "50%",
+            zIndex: 4, transform: `rotate(${g.rot}deg)`, background: "#1E2428",
+            border: `${R * 0.16}px solid #11161A`, boxShadow: SH }}>
+            <div style={{ position: "absolute", inset: R * 0.42, borderRadius: "50%",
+              background: `radial-gradient(50% 50% at 42% 36%, #E8EDF0 0%, #9AA6AE 62%, #5E686E 100%)` }} />
+            {[0, 60, 120].map(a => (
+              <div key={a} style={{ position: "absolute", left: "50%", top: R * 0.5,
+                width: 3, height: R, marginLeft: -1.5, background: "#7C868C",
+                transformOrigin: `1.5px ${R * 0.5}px`, transform: `rotate(${a + g.rot}deg)` }} />
+            ))}
+          </div>
+        );
+      })}
+      {/* BODY — a real car profile: bonnet slope up into a cabin, then a boot */}
+      <div style={{ position: "absolute", left: 0, top: H * 0.44, width: ww, height: H * 0.56,
+        zIndex: 3, borderRadius: `${ww * 0.05}px ${ww * 0.05}px ${ww * 0.03}px ${ww * 0.03}px`,
+        background: `linear-gradient(174deg, ${mxh(paint, 0.34)} 0%, ${paint} 40%, ${dkh(paint, 0.4)} 100%)`,
+        border: `3px solid ${dkh(paint, 0.5)}`, boxShadow: SH_D }} />
+      {/* CABIN — the roofline is what makes it a car and not a box */}
+      <div style={{ position: "absolute", left: ww * 0.26, top: H * 0.05, width: ww * 0.46,
+        height: H * 0.46, zIndex: 2,
+        clipPath: "polygon(14% 0, 86% 0, 100% 100%, 0 100%)",
+        background: `linear-gradient(174deg, ${mxh(paint, 0.26)} 0%, ${paint} 70%)` }} />
+      {/* the glass crazes as the roof comes down — one cause, several effects */}
+      {K > 0.18 && [0, 1, 2].map(i => (
+        <div key={"cr" + i} style={{ position: "absolute", left: ww * (0.30 + i * 0.09),
+          top: H * 0.12, width: 3, height: H * 0.30 * Math.min(1, (K - 0.18) * 3),
+          zIndex: 9, background: hexa("#F2FAFF", 0.85),
+          transform: `rotate(${(i - 1) * 16}deg)` }} />
+      ))}
+      {[0.30, 0.52].map((k, i) => (
+        <div key={"win" + i} style={{ position: "absolute", left: ww * k, top: H * 0.12,
+          width: ww * 0.17, height: H * 0.30, zIndex: 5, borderRadius: 4,
+          clipPath: i ? "polygon(0 0,100% 0,100% 100%,0 100%)" : "polygon(18% 0,100% 0,100% 100%,0 100%)",
+          background: `linear-gradient(168deg, #BFE2F2 0%, #6FA8C8 74%, #3E7392 100%)` }} />
+      ))}
+      {/* HEADLIGHT + BUMPER + DOOR LINE + MIRROR */}
+      <div style={{ position: "absolute", left: ww * 0.955, top: H * 0.56, width: ww * 0.045,
+        height: H * 0.16, zIndex: 6, borderRadius: 3,
+        background: lit > 0.5 ? "#FFF3C4" : "#5A5E58" }} />
+      {(() => {
+        const g = gone(2) ? drop(2, 1.1, 0, 1.4) : { dx: 0, dy: 0, rot: 0 };
+        if (g.dy > 620) return null;
+        return (
+          <div style={{ position: "absolute", left: ww * 0.94 + g.dx, top: H * 0.74 + g.dy,
+            width: ww * 0.10, height: H * 0.13, zIndex: 6, borderRadius: 3,
+            transform: `rotate(${g.rot}deg)`, background: "#B9C3C9",
+            border: `2px solid #7E888E` }} />
+        );
+      })()}
+      {(() => {
+        const g = gone(3) ? drop(3, -0.5, 0, -2.2) : null;
+        const openK = g ? 1 : 0;
+        if (g && g.dy > 620) return null;
+        return (
+          <div style={{ position: "absolute", left: ww * 0.70 + (g ? g.dx : 0),
+            top: H * 0.44 + (g ? g.dy : 0), width: ww * 0.29, height: H * 0.16, zIndex: 7,
+            borderRadius: 4, transformOrigin: "0% 100%",
+            transform: `rotate(${g ? g.rot : 0}deg)`,
+            background: `linear-gradient(174deg, ${mxh(paint, 0.4)} 0%, ${dkh(paint, 0.2)} 100%)`,
+            border: `2px solid ${dkh(paint, 0.5)}` }} />
+        );
+      })()}
+      <div style={{ position: "absolute", left: ww * 0.46, top: H * 0.46, width: 3,
+        height: H * 0.5, zIndex: 8, background: hexa("#000", 0.32) }} />
+      <div style={{ position: "absolute", left: ww * 0.235, top: H * 0.30, width: ww * 0.05,
+        height: H * 0.07, zIndex: 8, borderRadius: 2, background: dkh(paint, 0.3) }} />
+    </div>
+  );
+};
+
+/** ⭐ A LADDER, leaning. Two stiles and N rungs — a silhouette nobody has to
+    decode, and "does it hold your weight?" is the whole reel in one object. */
+export const Ladder: React.FC<{ x: number; y: number; f: number; h?: number; z?: number;
+  rungs?: number; snap?: Record<number, number>; lean?: number; tint?: string }> =
+  ({ x, y, f, h: hh = 470, z = 60, rungs = 7, snap = {}, lean = -12, tint }) => {
+  const wdt = hh * 0.30, C = tint || "#F2A93B";
+  return (
+    <div style={{ position: "absolute", left: x - wdt / 2, top: y - hh, width: wdt, height: hh,
+      zIndex: z, transformOrigin: "50% 100%", transform: `rotate(${lean}deg)` }}>
+      {[0, 1].map(i => (
+        <div key={"st" + i} style={{ position: "absolute", left: i ? wdt - 20 : 0, top: 0,
+          width: 20, height: hh, borderRadius: 4, boxShadow: SH,
+          background: `linear-gradient(96deg, ${mxh(C, 0.32)} 0%, ${C} 46%, ${dkh(C, 0.42)} 100%)`,
+          border: `3px solid ${dkh(C, 0.5)}` }} />
+      ))}
+      {Array.from({ length: rungs }, (_, i) => {
+        const at = snap[i];
+        const broke = at !== undefined && f >= at;
+        const lf = broke ? f - at : 0;
+        if (broke && lf * lf * 1.6 > 640) return null;
+        return (
+          <div key={"rg" + i} style={{ position: "absolute", left: 12,
+            top: 26 + i * ((hh - 60) / (rungs - 1)) + (broke ? lf * lf * 1.6 : 0),
+            width: wdt - 24, height: 15, borderRadius: 4,
+            transform: `rotate(${broke ? lf * 9 : 0}deg)`,
+            opacity: broke ? Math.max(0, 1 - lf / 22) : 1, boxShadow: SH,
+            background: `linear-gradient(178deg, ${mxh(C, 0.28)} 0%, ${dkh(C, 0.3)} 100%)`,
+            border: `2px solid ${dkh(C, 0.52)}` }} />
+        );
+      })}
+    </div>
+  );
+};
+
+/** ⭐ A BRIDGE — two piers, a deck and a truss. "Does it take the load?" is the
+    literal question the reel asks, and a truck crossing it is the test. */
+export const Bridge: React.FC<{ x: number; y: number; f: number; w?: number; z?: number;
+  /** deck section i drops out at this frame (0..3) */
+  drop?: Record<number, number>; lit?: number; tint?: string }> =
+  ({ x, y, f, w: ww = 620, z = 60, drop = {}, lit = 1, tint }) => {
+  const C = tint || "#2FA8A0";
+  const paint = lit > 0.5 ? C : lerpHex(C, "#4A5257", 0.48);
+  const dw = ww / 4, th = 26;
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - 210, width: ww, height: 210,
+      zIndex: z }}>
+      {[0.06, 0.94].map((k, i) => (
+        <div key={"pr" + i} style={{ position: "absolute", left: ww * k - 22, top: 40,
+          width: 44, height: 170, zIndex: 2, boxShadow: SH,
+          background: `linear-gradient(96deg, #A9B2B8 0%, #616A70 100%)` }} />
+      ))}
+      {[0, 1, 2, 3].map(i => {
+        const at = drop[i];
+        const fell = at !== undefined && f >= at;
+        const lf = fell ? f - at : 0;
+        if (fell && lf * lf * 1.7 > 560) return null;
+        return (
+          <React.Fragment key={"dk" + i}>
+            <div style={{ position: "absolute", left: i * dw, top: 116 + (fell ? lf * lf * 1.7 : 0),
+              width: dw - 4, height: th, zIndex: 4, borderRadius: 3, boxShadow: SH,
+              transform: `rotate(${fell ? lf * (i % 2 ? 5 : -5) : 0}deg)`,
+              opacity: fell ? Math.max(0, 1 - lf / 20) : 1,
+              background: `linear-gradient(178deg, ${mxh(paint, 0.3)} 0%, ${paint} 46%, ${dkh(paint, 0.4)} 100%)`,
+              border: `3px solid ${dkh(paint, 0.5)}` }} />
+            {/* the truss above each section — what makes it a BRIDGE and not a plank */}
+            {!fell && [0, 1].map(j => (
+              <div key={j} style={{ position: "absolute", left: i * dw + j * (dw / 2), top: 62,
+                width: dw / 2 - 3, height: 54, zIndex: 3,
+                borderTop: `6px solid ${dkh(paint, 0.24)}`,
+                borderLeft: `5px solid ${dkh(paint, 0.3)}`,
+                transform: `skewX(${j ? 12 : -12}deg)` }} />
+            ))}
+          </React.Fragment>
+        );
+      })}
+    </div>
+  );
+};
+
+
+/** ⭐⭐⭐ THE PRESS — the approaching second thing.
+
+    [[feedback_a_wobble_is_not_a_clock]]: anticipation needs a PREDICTABLE threat,
+    a VISIBLE COUNTDOWN and a DENIED payoff, and *a state cannot be a clock —
+    something has to be travelling toward the moment*. A car quietly shedding
+    parts has none of the three: you cannot predict which part, there is nothing
+    counting down, and nothing is withheld.
+    ⛔ A hydraulic press descending on a ratchet has all three, and it is in frame
+    on the FIRST frame, which is what makes the shot anticipatory rather than
+    merely surprising: a big steel head, two guide rails, and a toothed bar whose
+    teeth you can literally count off as it comes down.
+    ⛔ AND THE TENSION GROWS INTO THE CUT — the head is still descending on the
+    last frame. Letting it relax after the payoff tells the viewer the danger has
+    passed while the hook is still playing. */
+export const Press: React.FC<{ x: number; y: number; f: number; w?: number; z?: number;
+  /** 0..1 — how far down the head has come */
+  k?: number; teeth?: number; lit?: number }> =
+  ({ x, y, f, w: ww = 620, z = 70, k = 0, teeth = 8, lit = 1 }) => {
+  const K = Math.max(0, Math.min(1, k));
+  const TOP = y - 560, TRAVEL = 300;
+  const headY = TOP + K * TRAVEL;
+  return (<>
+    {/* the two guide rails — they are what say "this can only go one way" */}
+    {[-1, 1].map(sd => (
+      <div key={"rl" + sd} style={{ position: "absolute", left: x + sd * (ww / 2 - 16) - 11,
+        top: TOP - 40, width: 22, height: 620, zIndex: z - 2,
+        background: `linear-gradient(96deg, #D6DEE3 0%, #939EA5 52%, #5A646B 100%)` }} />
+    ))}
+    {/* THE RATCHET BAR — the countdown, and it is countable */}
+    <div style={{ position: "absolute", left: x + ww / 2 + 22, top: TOP - 30, width: 26,
+      height: 600, zIndex: z - 1, background: "#2E363B" }} />
+    {Array.from({ length: teeth }, (_, i) => {
+      const ty = TOP - 20 + i * (TRAVEL / (teeth - 1));
+      const passed = headY >= ty - 4;
+      return (
+        <div key={"th" + i} style={{ position: "absolute", left: x + ww / 2 + 24, top: ty,
+          width: 22, height: 12, zIndex: z, clipPath: "polygon(0 0,100% 50%,0 100%)",
+          background: passed ? "#FF5A3C" : "#8E9AA2" }} />
+      );
+    })}
+    {/* THE HEAD — a heavy slab with two hydraulic rams into it */}
+    {[0.3, 0.7].map((kx, i) => (
+      <div key={"rm" + i} style={{ position: "absolute", left: x - ww / 2 + ww * kx - 17,
+        top: TOP - 120, width: 34, height: headY - TOP + 120, zIndex: z,
+        background: `linear-gradient(96deg, #F0F5F8 0%, #B8C4CB 46%, #78838A 100%)` }} />
+    ))}
+    <div style={{ position: "absolute", left: x - ww / 2, top: headY, width: ww, height: 78,
+      zIndex: z + 1, borderRadius: 5, boxShadow: SH_D,
+      background: `linear-gradient(178deg, #EDF3F6 0%, #AFBBC2 44%, #5E686E 100%)`,
+      border: `4px solid #3A444B` }}>
+      {[0.12, 0.5, 0.88].map((bx, i) => (
+        <div key={i} style={{ position: "absolute", left: `${bx * 100}%`, top: 14, width: 20,
+          height: 20, marginLeft: -10, borderRadius: "50%", background: "#5A646B",
+          border: "3px solid #39424A" }} />
+      ))}
+      {/* the warning stripe on the face — a press is a thing you stay out from under */}
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 14,
+        background: "repeating-linear-gradient(115deg,#F2B33B 0 14px,#2A333A 14px 28px)" }} />
+    </div>
+  </>);
+};
+
+/** ⭐⭐⭐ THE STATUS LAMP — the claim, as an object.
+
+    "Lying to your face" needs the LIE on screen, not just the failure. Every
+    Claude Code user knows one image: the green all-clear. So the claim is a
+    signal lamp on a post — a big lens, a hood, a bracket — lit hard green and
+    throwing green onto the floor, and it is the thing the hero is standing next
+    to vouching for. The whole hook is built on ONE fact: **it never goes red.**
+    ⛔ It is a LAMP, not a tick or a badge, because a symbol is a shape and
+    [[feedback_recognition_beats_craft_on_a_hook_object]] wants an object you can
+    name from its silhouette. */
+export const StatusLamp: React.FC<{ x: number; y: number; f: number; s?: number;
+  z?: number; on?: number; flicker?: number }> = ({ x, y, f, s = 1, z = 70, on = 1, flicker = 0 }) => {
+  const d = 128 * s;
+  const jit = flicker > 0 ? (Math.sin(f * 2.7) > 0.2 ? 1 : 0.72) : 1;
+  const lit = on * jit;
+  const C = "#3FD07A";
+  return (<>
+    <div style={{ position: "absolute", left: x - 11 * s, top: y - 300 * s, width: 22 * s,
+      height: 300 * s, zIndex: z - 2,
+      background: `linear-gradient(96deg, #8E9AA2 0%, #4E585E 60%, #2E363B 100%)` }} />
+    {/* the hood over the lens — what makes it a signal lamp and not a circle */}
+    <div style={{ position: "absolute", left: x - d * 0.62, top: y - 300 * s - d * 0.72,
+      width: d * 1.24, height: d * 0.46, zIndex: z + 2, borderRadius: `${d * 0.5}px ${d * 0.5}px 0 0`,
+      background: `linear-gradient(178deg, #6E787E 0%, #39424A 100%)` }} />
+    <div style={{ position: "absolute", left: x - d / 2, top: y - 300 * s - d * 0.42,
+      width: d, height: d, borderRadius: "50%", zIndex: z + 1,
+      border: `${d * 0.09}px solid #39424A`, boxShadow: SH_D,
+      background: lit > 0.4
+        ? `radial-gradient(50% 50% at 40% 32%, #EBFFF2 0%, ${C} 46%, ${dkh(C, 0.5)} 100%)`
+        : `radial-gradient(50% 50% at 40% 32%, #2A3430 0%, #131A17 100%)` }} />
+    {lit > 0.4 && <Pool x={x} y={y - 300 * s + d * 0.7} w={d * 3.4} c={C} o={0.30 * lit} z={z - 3} />}
+    {lit > 0.4 && <Pool x={x} y={y - 26} w={d * 3.0} c={C} o={0.26 * lit} z={z - 4} />}
+  </>);
+};
+
+/* =========================================================================
+   ⭐⭐⭐ THREE OBJECTS FOR A BODY TO WORK AGAINST.
+
+   ⛔⛔⛔ FIVE HOOKS WERE REJECTED BEFORE THESE, AND ALL FIVE HAD THE SAME
+   DEFECT — the one [[feedback_a_hook_needs_a_body_not_a_mechanism]] already
+   describes: *"an apparatus performing, with a Claude standing next to it. An
+   apparatus has no intention, so there is nothing to anticipate."* A board
+   shedding leaves, a tower collapsing, a car losing parts, a press descending,
+   cars dropping off a bench — in every one the OBJECT did the work and the hero
+   watched.
+   ⭐ Reel 119 went **7.88 -> 15.63** on the fix, and it is not more motion: it is
+   *"a character doing physical work against a load."* So these three exist only
+   to be RESISTED. Each is drawn so that a body braced against it is the subject
+   and the object is what he is losing to.
+   ========================================================================= */
+
+/** ⭐ A STEEL LOCKER whose door he is holding shut. The gap is the countdown:
+    every slam opens it wider and you can see more of what is inside. */
+export const Locker: React.FC<{ x: number; y: number; f: number; w?: number; h?: number;
+  z?: number; gap?: number; burst?: number }> =
+  ({ x, y, f, w: ww = 340, h: hh = 470, z = 56, gap = 0, burst = -1 }) => {
+  const open = Math.max(0, Math.min(1, gap));
+  const blown = burst >= 0 && f >= burst;
+  const bk = blown ? Math.min(1, (f - burst) / 26) : 0;
+  const swing = blown ? 18 + bk * 96 : open * 16;
+  return (<>
+    <Contact x={x - ww / 2 - 16} y={y - 6} w={ww + 32} z={z - 1} o={0.46} />
+    {/* the carcass, and the MESS inside it — visible through the gap */}
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+      zIndex: z, background: `linear-gradient(174deg, #7E8C95 0%, #46545C 66%, #26313A 100%)`,
+      border: `5px solid #101619`, boxShadow: SH_D }}>
+      {Array.from({ length: 9 }, (_, i) => {
+        const c = BLOCKS[i % BLOCKS.length];
+        const push = (open + bk * 2.2) * (18 + i * 9);
+        return (
+          <div key={"ms" + i} style={{ position: "absolute",
+            left: 12 + (i % 3) * (ww / 3.2) + push * 0.5,
+            top: 22 + Math.floor(i / 3) * (hh / 3.4) + Math.sin(f / 7 + i) * 3 * (open + 0.2),
+            width: ww / 3.6, height: hh / 4.4, borderRadius: 4,
+            background: `linear-gradient(172deg, ${mxh(c, 0.26)} 0%, ${c} 48%, ${dkh(c, 0.44)} 100%)`,
+            border: `3px solid ${dkh(c, 0.52)}` }} />
+        );
+      })}
+    </div>
+    {/* THE DOOR — hinged on the far side, and it is what he is fighting */}
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+      zIndex: z + 6, transformOrigin: "0% 50%",
+      transform: `perspective(1100px) rotateY(${-swing}deg)`,
+      background: `linear-gradient(96deg, #A9B7BF 0%, #6E7C85 54%, #3E4A52 100%)`,
+      border: `5px solid #101619`, boxShadow: SH_D }}>
+      {[0.24, 0.5, 0.76].map((k, i) => (
+        <div key={"vt" + i} style={{ position: "absolute", left: 26, right: 26, top: hh * k,
+          height: 12, borderRadius: 3, background: hexa("#0B1013", 0.7) }} />
+      ))}
+      <div style={{ position: "absolute", right: 22, top: hh * 0.46, width: 20, height: 74,
+        borderRadius: 10, background: `linear-gradient(96deg, ${BRSL} 0%, ${BRSD} 100%)` }} />
+      {/* the green all-clear he is vouching with, screwed to the door */}
+      <div style={{ position: "absolute", left: ww * 0.5 - 26, top: hh * 0.12, width: 52,
+        height: 52, borderRadius: "50%", border: "5px solid #101619",
+        background: `radial-gradient(50% 50% at 40% 32%, #EBFFF2 0%, #3FD07A 46%, #1E6B41 100%)` }} />
+    </div>
+  </>);
+};
+
+/** ⭐ THE LOAD he is holding up — courses that keep landing on top of him. */
+export const Load: React.FC<{ x: number; y: number; f: number; w?: number; z?: number;
+  lands?: number[]; drop?: number }> =
+  ({ x, y, f, w: ww = 420, z = 66, lands = [], drop = -1 }) => {
+  const fell = drop >= 0 && f >= drop;
+  const fk = fell ? Math.min(1, (f - drop) / 44) : 0;
+  return (<>
+    {lands.map((at, i) => {
+      if (f < at - 12) return null;
+      const dz = E(f, at - 12, at, -420, 0, IN_Q);
+      const set = f >= at ? settle(f - at, 0, 8, 11, 2.3) : 0;
+      const c = BLOCKS[i % BLOCKS.length];
+      const cw = ww * (1 - i * 0.06);
+      return (
+        <div key={"ld" + i} style={{ position: "absolute", left: x - cw / 2,
+          top: y - (i + 1) * 62 + dz + set + fk * fk * 620,
+          width: cw, height: 56, borderRadius: 6, zIndex: z + i, boxShadow: SH,
+          transform: `translateX(${fell ? fk * fk * (i % 2 ? 470 : -470) : 0}px) rotate(${fell ? fk * (i % 2 ? 82 : -82) : 0}deg)`,
+          background: `linear-gradient(172deg, ${mxh(c, 0.3)} 0%, ${c} 46%, ${dkh(c, 0.42)} 100%)`,
+          border: `3px solid ${dkh(c, 0.5)}` }}>
+          <div style={{ position: "absolute", left: 58, right: 20, top: 22, height: 8,
+            borderRadius: 4, background: mxh(c, 0.72) }} />
+          <div style={{ position: "absolute", left: 16, top: 14, width: 30, height: 30,
+            borderRadius: "50%", border: "4px solid #17211E",
+            background: `radial-gradient(50% 50% at 40% 32%, #EBFFF2 0%, #3FD07A 46%, #1E6B41 100%)` }} />
+        </div>
+      );
+    })}
+  </>);
+};
+
+/** ⭐ A PRESSURE TANK he is plugging. Every split is a jet, and the jets are big
+    and bright so the frame is full of travelling water rather than of a prop. */
+export const Tank: React.FC<{ x: number; y: number; f: number; w?: number; h?: number;
+  z?: number; splits?: Array<[number, number, number]>; blow?: number }> =
+  ({ x, y, f, w: ww = 360, h: hh = 400, z = 56, splits = [], blow = -1 }) => {
+  const blown = blow >= 0 && f >= blow;
+  return (<>
+    <Contact x={x - ww / 2 - 14} y={y - 6} w={ww + 28} z={z - 1} o={0.46} />
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+      zIndex: z, borderRadius: `${ww * 0.16}px ${ww * 0.16}px 12px 12px`,
+      background: `linear-gradient(96deg, #7FD0D8 0%, #2FA8A0 42%, #125A58 100%)`,
+      border: `5px solid #0C3E3D`, boxShadow: SH_D }}>
+      {[0.26, 0.62].map((k, i) => (
+        <div key={"bd" + i} style={{ position: "absolute", left: -6, right: -6, top: hh * k,
+          height: 18, background: `linear-gradient(180deg, ${BRSL} 0%, ${BRSD} 100%)` }} />
+      ))}
+      <div style={{ position: "absolute", left: ww * 0.5 - 30, top: -34, width: 60, height: 40,
+        borderRadius: 6, background: `linear-gradient(96deg, ${BRSL} 0%, ${BRSD} 100%)` }} />
+      {/* the gauge, pegged, and it is the countdown */}
+      <div style={{ position: "absolute", left: ww * 0.5 - 34, top: hh * 0.12, width: 68,
+        height: 68, borderRadius: "50%", border: "5px solid #0C3E3D",
+        background: `radial-gradient(50% 50% at 42% 34%, #F7F1DC 0%, #D3C9AC 100%)` }}>
+        <div style={{ position: "absolute", left: "50%", top: 8, width: 4, height: 24,
+          marginLeft: -2, background: "#C4331C", transformOrigin: "2px 22px",
+          transform: `rotate(${-70 + Math.min(140, splits.length * 34 + (blown ? 60 : 0))}deg)` }} />
+      </div>
+    </div>
+    {/* THE JETS — large, bright and travelling, one per split still open */}
+    {splits.map(([sx, sy, at], i) => {
+      if (f < at) return null;
+      const lf = f - at;
+      const plugged = !blown && lf > 8;
+      const len = plugged ? 26 : Math.min(300, 40 + lf * 26);
+      const dir = i % 2 ? 1 : -1;
+      return (
+        <React.Fragment key={"jt" + i}>
+          <div style={{ position: "absolute", left: x + sx, top: y - hh + sy,
+            width: len, height: 20 + (plugged ? 0 : 12), zIndex: z + 4, borderRadius: 10,
+            transformOrigin: "0% 50%", transform: `scaleX(${dir}) rotate(${-14 + i * 9}deg)`,
+            background: `linear-gradient(90deg, ${hexa("#EAFBFF", 0.95)} 0%, ${hexa("#8FE0F0", 0.5)} 60%, ${hexa("#8FE0F0", 0)} 100%)` }} />
+          {!plugged && Array.from({ length: 4 }, (_, j) => {
+            const t = ((lf * 0.09 + j / 4) % 1);
+            return (
+              <div key={j} style={{ position: "absolute",
+                left: x + sx + dir * (40 + t * 260), top: y - hh + sy + t * t * 150,
+                width: 22, height: 22, borderRadius: "50%", zIndex: z + 5,
+                opacity: 0.8 * (1 - t), background: hexa("#DFF6FF", 0.9) }} />
+            );
+          })}
+        </React.Fragment>
+      );
+    })}
+  </>);
+};
+
+/** ⭐⭐⭐ A SHIPPED UNIT — one of five recognisable devices, each with the green
+    sign-off lamp still lit on it.
+
+    ⛔ The load was five flat coloured BARS, which is the "shapes, not objects"
+    note one layer down: the hero was right and what he was holding was not. The
+    VO names what he ships — *"entire apps, websites, and tools"* — so the load is
+    a phone, a monitor, a laptop, a toolbox and a router: things a stranger can
+    name from the silhouette, stacked on one Claude, every one of them still
+    showing the all-clear he gave it. What is crushing him is his own sign-offs.
+    ⭐ AND THE LAMPS FLICKER UNDER STRAIN — the claims themselves wavering while
+    he insists they are fine. */
+export const Unit: React.FC<{ kind: number; x: number; y: number; w?: number; z?: number;
+  lamp?: number; f?: number }> = ({ kind, x, y, w: ww = 300, z = 66, lamp = 1, f = 0 }) => {
+  const k = kind % 5;
+  const c = BLOCKS[k];
+  const hh = ww * 0.30;
+  const lit = lamp > 0.5 && (lamp >= 1 || Math.sin(f * 1.9 + k) > -0.25);
+  const Lamp = (
+    <div style={{ position: "absolute", left: 14, top: hh * 0.5 - 15, width: 30, height: 30,
+      borderRadius: "50%", zIndex: 6, border: "4px solid #17211E",
+      background: lit
+        ? `radial-gradient(50% 50% at 40% 32%, #EBFFF2 0%, #3FD07A 46%, #1E6B41 100%)`
+        : `radial-gradient(50% 50% at 40% 32%, #2A3430 0%, #131A17 100%)` }} />
+  );
+  const body: React.CSSProperties = {
+    position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+    zIndex: z, borderRadius: 7, boxShadow: SH,
+    background: `linear-gradient(172deg, ${mxh(c, 0.32)} 0%, ${c} 44%, ${dkh(c, 0.4)} 100%)`,
+    border: `3px solid ${dkh(c, 0.5)}`,
+  };
+  /* ⭐ THE MAKER'S MARK — on the unit, beside its own all-clear */
+  const Badge = <Mark x={ww * 0.5 - hh * 0.30} y={hh * 0.5 - hh * 0.30} s={hh * 0.46} z={7} />;
+  if (k === 0) return (   /* A MONITOR — screen, bezel, stand */
+    <div style={body}>{Lamp}{Badge}
+      <div style={{ position: "absolute", left: 60, top: 12, right: 22, bottom: 24, borderRadius: 4,
+        background: `linear-gradient(168deg, #BFE2F2 0%, #6FA8C8 74%, #2E5E7C 100%)` }} />
+      <div style={{ position: "absolute", left: ww * 0.5 - 34, bottom: -14, width: 68, height: 16,
+        borderRadius: 4, background: dkh(c, 0.5) }} />
+    </div>
+  );
+  if (k === 1) return (   /* A PHONE — tall rounded slab, notch, home bar */
+    <div style={{ ...body, borderRadius: 16 }}>{Lamp}{Badge}
+      <div style={{ position: "absolute", left: 62, top: 10, right: 18, bottom: 18, borderRadius: 10,
+        background: `linear-gradient(168deg, #2B3440 0%, #151C25 100%)` }} />
+      <div style={{ position: "absolute", left: ww * 0.56, top: 14, width: 44, height: 9,
+        borderRadius: 5, background: "#0B1016" }} />
+      <div style={{ position: "absolute", right: 26, top: hh * 0.44, width: 8, height: hh * 0.3,
+        borderRadius: 4, background: hexa("#8FA6BC", 0.7) }} />
+    </div>
+  );
+  if (k === 2) return (   /* A LAPTOP — a lid at an angle over a base */
+    <div style={body}>{Lamp}{Badge}
+      <div style={{ position: "absolute", left: 58, top: -hh * 0.52, width: ww * 0.62, height: hh * 0.62,
+        borderRadius: 5, transformOrigin: "0% 100%", transform: "rotate(-9deg)",
+        background: `linear-gradient(168deg, ${dkh(c, 0.2)} 0%, ${dkh(c, 0.46)} 100%)`,
+        border: `3px solid ${dkh(c, 0.55)}` }}>
+        <div style={{ position: "absolute", inset: 7, borderRadius: 3,
+          background: `linear-gradient(168deg, #BFE2F2 0%, #5E93B4 100%)` }} />
+      </div>
+      <div style={{ position: "absolute", left: 62, top: hh * 0.42, right: 24, height: 10,
+        borderRadius: 3, background: hexa("#12181E", 0.5) }} />
+    </div>
+  );
+  if (k === 3) return (   /* A TOOLBOX — handle over a lid, two latches */
+    <div style={body}>{Lamp}{Badge}
+      <div style={{ position: "absolute", left: ww * 0.46, top: -hh * 0.36, width: ww * 0.26,
+        height: hh * 0.38, borderTopLeftRadius: 20, borderTopRightRadius: 20,
+        border: `8px solid ${dkh(c, 0.5)}`, borderBottom: "none" }} />
+      <div style={{ position: "absolute", left: 56, right: 20, top: hh * 0.5, height: 7,
+        background: hexa("#000", 0.34) }} />
+      {[0.34, 0.78].map((q, i) => (
+        <div key={i} style={{ position: "absolute", left: ww * q, top: hh * 0.36, width: 26,
+          height: 26, borderRadius: 4, background: BRSL, border: `3px solid ${BRSD}` }} />
+      ))}
+    </div>
+  );
+  return (               /* A ROUTER — a slab with two aerials and port lights */
+    <div style={body}>{Lamp}{Badge}
+      {[0.44, 0.72].map((q, i) => (
+        <div key={i} style={{ position: "absolute", left: ww * q, top: -hh * 0.5, width: 9,
+          height: hh * 0.54, borderRadius: 5, background: dkh(c, 0.5),
+          transformOrigin: "50% 100%", transform: `rotate(${i ? 16 : -12}deg)` }} />
+      ))}
+      {[0, 1, 2, 3].map(i => (
+        <div key={"pl" + i} style={{ position: "absolute", left: 66 + i * 34, bottom: 12, width: 20,
+          height: 10, borderRadius: 3, background: i < 3 ? "#3FD07A" : hexa("#0B1016", 0.6) }} />
+      ))}
+    </div>
+  );
+};
+
+/** ⭐⭐⭐ A STACK OF SHIPPED UNITS — the reel's hero artifact, in the hook's own
+    vocabulary.
+
+    ⛔ It replaces `Tower` (six coloured blocks) everywhere, because the blocks
+    were the "shapes, not objects" note and the hook now says what the work IS: a
+    toolbox, a monitor, a laptop, a phone and a router, each with the Claude mark
+    on it and each still showing the green all-clear it was signed off with.
+    The same switch carries the whole reel:
+      hook  5 units on ONE Claude, and they come down on him
+      S1    the crew takes them off him — but ONE stays
+      S10   the prosecutor PULLS UNITS OUT from under the stack
+      S11   the defense rams them back and takes the weight
+      S13   ⭐ he stands up straight under the full load and it HOLDS
+    Tower's API is kept so the scene code did not have to be rewritten around it. */
+export const UnitStack: React.FC<{
+  x: number; y: number; f: number; w?: number; z?: number;
+  blocks?: number[]; out?: Record<number, number>; seat?: Record<number, number>;
+  lit?: number; lean?: number; fall?: number; hit?: number;
+  spikes?: Array<[number, number]>;
+}> = ({ x, y, f, w: ww = 330, z = 60, blocks = [0, 1, 2, 3, 4], out = {}, seat = {},
+        lit = 1, lean = 0, fall = -1, hit = 0, spikes = [] }) => {
+  const KINDS = [3, 0, 2, 1, 4];
+  const pitch = ww * 0.20;
+  const fallen = fall >= 0 && f >= fall;
+  const fk = fallen ? Math.min(1, (f - fall) / 44) : 0;
+  const ring = hit > 0 ? Math.sin(f * 2.0) * 6 * hit : 0;
+  return (
+    <div style={{ position: "absolute", inset: 0, zIndex: z,
+      transformOrigin: `${x}px ${y}px`,
+      transform: `rotate(${lean}deg) translateX(${ring}px)` }}>
+      {KINDS.map((kind, i) => {
+        const isOut = out[i] !== undefined && f >= out[i];
+        const seatAt = seat[i];
+        const seating = seatAt !== undefined;
+        if (seating && f < seatAt - 14) return null;
+        if (!blocks.includes(i) && !seating) return null;
+        let dx = 0, dy = 0, rot = 0, op = 1;
+        if (out[i] !== undefined && f >= out[i] - 7 && f < out[i]) {
+          const k = E(f, out[i] - 7, out[i], 0, 1, IN_Q);
+          const sd = i % 2 ? 1 : -1;
+          rot = sd * k * 13; dx = sd * k * 24; dy = k * 5;
+        }
+        if (isOut) {
+          const lf = f - out[i];
+          const sd = i % 2 ? 1 : -1;
+          dx = sd * (24 + lf * lf * 2.0); dy = lf * lf * 0.8; rot = sd * (13 + lf * 8);
+          op = Math.max(0, 1 - Math.abs(dx) / 880);
+          if (Math.abs(dx) > 920) return null;
+        } else if (fallen && i >= 1) {
+          const sd = i % 2 ? 1 : -1;
+          dx = sd * fk * fk * 560; dy = fk * fk * 620; rot = sd * fk * 84;
+          op = Math.max(0, 1 - fk * 0.8);
+        }
+        const k = seating ? E(f, seatAt - 14, seatAt, 0, 1, IN_Q) : 1;
+        const over = seating ? settle(f, seatAt, 8, 12, 2.5) : 0;
+        const inY = seating ? (1 - k) * -360 : 0;
+        return (
+          <div key={"us" + i} style={{ position: "absolute", inset: 0, opacity: (seating ? k : 1) * op,
+            transform: `translate(${dx}px, ${inY + dy}px) rotate(${rot}deg)`,
+            transformOrigin: `${x}px ${y - i * pitch}px` }}>
+            <Unit kind={kind} x={x} y={y - i * pitch + over} w={ww - i * 18} z={z + i}
+              lamp={lit} f={f} />
+          </div>
+        );
+      })}
+      {spikes.map(([course, at], i) => {
+        if (f < at) return null;
+        const lf = f - at;
+        const drive = E(lf, 0, 5, -170, 0, IN_Q) + settle(lf, 5, 7, 10, 2.2);
+        return (
+          <div key={"sp" + i} style={{ position: "absolute", left: x - 7 + (i - 1) * 52,
+            top: y - course * pitch - 96 + drive, width: 14, height: 92, zIndex: z + 9,
+            background: `linear-gradient(180deg, ${mxh(RED, 0.2)} 0%, ${dkh(RED, 0.45)} 100%)` }}>
+            <div style={{ position: "absolute", left: -9, top: -14, width: 34, height: 24,
+              borderRadius: 3, background: RED }} />
+          </div>
+        );
+      })}
+    </div>
+  );
+};

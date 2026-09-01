@@ -9,7 +9,7 @@ import {
   settle, antic, load, stroke, STEP, STEP3, STEP4,
 } from "./JdgWorld";
 import {
-  Tower, BlockLine, Console, Plinth, BenchDesk, Gavel, Block, Nameplate,
+  UnitStack, Unit, BlockLine, Console, Plinth, BenchDesk, Gavel, Block, Nameplate,
   Rail10, Counter, Grille, MinuteDial, EvidenceCart, Ship, FeeStack,
 } from "./JdgProps";
 import { RK } from "./JdgHooks";
@@ -183,7 +183,7 @@ export const S1: React.FC<P> = ({ v, dur }) => {
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail dim={0.34} />
             <Pool x={470} y={556} w={900} c="#FFF6E2" o={0.26} z={12} />
       <Contact x={640 - 168} y={700 - 10} w={336} z={44} o={0.46} />
-      <Tower x={640} y={700} f={f} w={344} z={60}
+      <UnitStack x={640} y={700} f={f} w={344} z={60}
         blocks={[0, 1]} seat={{ 2: S1_SEAT0, 3: S1_SEAT0 + 12, 5: S1_SEAT1 }} lit={1} />
       {/* ⭐⭐ COURSE 4 IS NEVER SEATED. The villain's integrity depends on it: the
           CLAIM is made here and the PROOF is withheld until S13. */}
@@ -240,7 +240,7 @@ export const S2: React.FC<P> = ({ v, dur }) => {
       <MinuteDial x={760} y={330} f={f} a={S2_DIAL_A} b={S2_DIAL_B} s={1.5} z={40} />
       <Pool x={520} y={600} w={820} c="#FFF0CE" o={0.24} z={12} />
       <Counter x={506} y={772} w={840} h={250} z={50} />
-      <CutIn f={f} dx={-880} dy={0} at={6} z={62}>
+      <CutIn f={f} dx={0} dy={-600} at={7} z={62}>
         <Console x={430} y={548} f={f} w={520} z={62} slots={f >= S2_STAMP ? 3 : 1} />
       </CutIn>
       {/* the stamp — a discrete stroke with a real arrival */}
@@ -265,6 +265,10 @@ export const S2: React.FC<P> = ({ v, dur }) => {
       {chip(`${R.setup} SETUP`, 150, C_JUDGE)}
       <Motes x={506} y={340} w={860} h={400} n={12} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
       <Cross f={f} from={1180} to={-260} a={-18} b={dur + 34} y={730} i={5} size={262} z={58} stack={2} />
+
+      {/* the counter-crossing: its BURST phase lands on the cut, so the shot
+          is accelerating out rather than settling (§23) */}
+      <Cross f={f} from={1180} to={-300} a={dur - 13} b={dur + 60} y={766} i={14} size={262} z={59} stack={2} />
 
     </Scene>
   );
@@ -326,7 +330,7 @@ export const S3: React.FC<P> = ({ v, dur }) => {
       {/* the chute the ONE prompt feeds — the source half of the mechanism (§10) */}
       <div style={{ position: "absolute", left: 150, top: 168, width: 300, height: 34,
         zIndex: 40, background: `linear-gradient(180deg, ${BRSL} 0%, ${BRSD} 100%)` }} />
-      <CutIn f={f} dx={-560} dy={0} at={6} z={68}>
+      <CutIn f={f} dx={0} dy={-640} at={8} z={68}>
   <div style={{ position: "absolute", left: 200 + E(f, 0, S3_CHUTE, -380, 0, IN_Q),
         top: 196, width: 128, height: 54, zIndex: 68, borderRadius: 5, boxShadow: SH,
         background: `linear-gradient(172deg, ${mxh(BLOCKS[1], 0.28)} 0%, ${BLOCKS[1]} 46%, ${dkh(BLOCKS[1], 0.4)} 100%)`,
@@ -445,6 +449,10 @@ export const S4: React.FC<P> = ({ v, dur }) => {
           borderRadius: 8 }} />
       </div>
 
+      {/* the counter-crossing: its BURST phase lands on the cut, so the shot
+          is accelerating out rather than settling (§23) */}
+      <Cross f={f} from={-300} to={1180} a={dur - 13} b={dur + 60} y={766} i={14} size={262} z={59} stack={2} />
+
     </Scene>
   );
 };
@@ -466,7 +474,7 @@ export const S5: React.FC<P> = ({ v, dur }) => {
       <Chamber p={p} f={f} lit={0.6 + on(S5_LAMP) * 0.4} occ="both" bays={5}
         shaft={506} shaftO={0.30} rakeRate={RK[v].rate * 0.8} rakeN={RK[v].n} panelN={9} rail dais dim={0.34} />
             <Pool x={506} y={520} w={980} c="#FFF6E2" o={0.18 + on(S5_LAMP) * 0.16} z={12} />
-      <CutIn f={f} dx={0} dy={-460} at={5} z={50}>
+      <CutIn f={f} dx={0} dy={-680} at={9} z={50}>
         <BenchDesk x={506} y={478} w={560} h={180} z={50} lit={on(S5_LAMP)} />
       </CutIn>
       {/* the two tables, arriving after the bench — the room builds head-down */}
@@ -497,6 +505,10 @@ export const S5: React.FC<P> = ({ v, dur }) => {
       ))}
       <Motes x={506} y={300} w={900} h={420} n={13} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
       <Cross f={f} from={-220} to={1180} a={-18} b={dur + 34} y={716} i={2} size={262} z={58} />
+
+      {/* the counter-crossing: its BURST phase lands on the cut, so the shot
+          is accelerating out rather than settling (§23) */}
+      <Cross f={f} from={1180} to={-300} a={dur - 13} b={dur + 60} y={766} i={14} size={262} z={59} stack={2} />
 
     </Scene>
   );
@@ -533,7 +545,7 @@ export const S6: React.FC<P> = ({ v, dur }) => {
       <Beam x={506} y={214} top={90} bot={700} len={470} c="#FFF0CE" o={0.44} z={20} f={f} />
       <Pool x={506} y={584} w={860} c="#FFF0CE" o={0.50} z={22} />
       {/* the narrow table, with the GROOVE this has worn into it */}
-      <CutIn f={f} dx={0} dy={-620} at={6} z={50}>
+      <CutIn f={f} dx={0} dy={-720} at={7} z={50}>
         <div style={{ position: "absolute", left: 236, top: 578, width: 540, height: 130,
           zIndex: 50, background: `linear-gradient(174deg, ${OAKL} 0%, ${dkh(OAK, 0.5)} 100%)`,
           boxShadow: SH_D }} />
@@ -626,7 +638,7 @@ export const S7: React.FC<P> = ({ v, dur }) => {
 
       {/* the TASK lands on the table first — the trigger, and it is a BODY that
           picks it up */}
-      <CutIn f={f} dx={-760} dy={0} at={6} z={50}>
+      <CutIn f={f} dx={0} dy={-600} at={8} z={50}>
         <div style={{ position: "absolute", left: 96, top: 640, width: 300, height: 110,
           zIndex: 50, background: `linear-gradient(174deg, ${OAKL} 0%, ${dkh(OAK, 0.44)} 100%)` }} />
       </CutIn>
@@ -638,8 +650,8 @@ export const S7: React.FC<P> = ({ v, dur }) => {
           border: `3px solid ${dkh(BLOCKS[2], 0.5)}` }} />
       )}
       {/* the same shutter idea on the inside face of the double doors */}
-      <div style={{ position: "absolute", left: 226, top: 110,
-        width: 560, height: 560 * Math.max(0, E(f, -12, 17, 1, 0, IN_Q)), zIndex: 36,
+      <div style={{ position: "absolute", left: 196, top: 100,
+        width: 620, height: 640 * Math.max(0, E(f, -3, 22, 1, 0, LIN)), zIndex: 36,
         background: `linear-gradient(180deg, ${dkh(OAK, 0.16)} 0%, ${dkh(OAK, 0.5)} 100%)`,
         borderBottom: `8px solid ${BRSD}` }} />
       {f >= S7_TASK && <Ring x={246} y={640} f={f} at={S7_TASK} c={BRSL} z={70} s={0.7} />}
@@ -701,7 +713,7 @@ export const S8: React.FC<P> = ({ v, dur }) => {
           <Pool x={506 + sw} y={470} w={820} c="#FFF6D8" o={0.34} z={22} />
         </>);
       })()}
-      <CutIn f={f} dx={-820} dy={0} at={6} z={62}>
+      <CutIn f={f} dx={0} dy={-640} at={9} z={62}>
   <Console x={506} y={470} f={f} w={720} z={62}
         slots={f >= S8_L3B ? 3 : f >= S8_L3A ? 2 : 1}
         keys={[S8_L3A, S8_L3A + 5, S8_L3B + 4]} />
@@ -771,7 +783,7 @@ export const S9: React.FC<P> = ({ v, dur }) => {
       <Chamber p={p} f={f} lit={0.5 + (lit(S9_JUDGE) + lit(S9_PROS) + lit(S9_DEF)) * 0.17}
         occ="both" bays={5} shaft={506} shaftO={0.24} rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail dais dim={0.34} />
       <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={8} s={1.5} />
-      <CutIn f={f} dx={0} dy={-380} at={5} z={50}>
+      <CutIn f={f} dx={0} dy={-680} at={7} z={50}>
   <BenchDesk x={506} y={452} w={520} h={168} z={50} lit={lit(S9_JUDGE)} />
       </CutIn>
       {[[268, C_PROS, S9_PROS], [744, C_DEF, S9_DEF]].map(([tx, tc, at], i) => (
@@ -815,8 +827,8 @@ export const S10: React.FC<P> = ({ v, dur }) => {
             <Pool x={300} y={556} w={820} c="#FFE9CE" o={0.26} z={12} />
       {/* the work, standing behind the table — still missing leaf 1 */}
       <Contact x={742 - 168} y={716 - 10} w={336} z={44} o={0.46} />
-      <CutIn f={f} dx={890} dy={0} at={6} z={58}>
-        <Tower x={742} y={730} f={f} w={330} z={58}
+      <CutIn f={f} dx={0} dy={-720} at={8} z={58}>
+        <UnitStack x={742} y={730} f={f} w={330} z={58}
           blocks={[0, 1, 2, 3, 5]}
           out={{ 1: S10_C1, 3: S10_C2, 5: S10_C3 }}
           lit={f < S10_C3 ? 1 : 0}
@@ -825,7 +837,7 @@ export const S10: React.FC<P> = ({ v, dur }) => {
           spikes={f >= S10_FLAGS ? [[0, S10_FLAGS], [2, S10_FLAGS + 5], [4, S10_FLAGS + 10]] : []} />
       </CutIn>
       {/* the table */}
-      <CutIn f={f} dx={-880} dy={0} at={6} z={50}>
+      <CutIn f={f} dx={0} dy={-600} at={9} z={50}>
         <div style={{ position: "absolute", left: 60, top: 640, width: 460, height: 130,
           zIndex: 50, background: `linear-gradient(174deg, ${OAKL} 0%, ${dkh(OAK, 0.46)} 100%)`,
           borderTop: `5px solid ${mxh(OAKL, 0.3)}`, boxShadow: SH_D }} />
@@ -894,13 +906,13 @@ export const S11: React.FC<P> = ({ v, dur }) => {
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail={false} dim={0.34} />
       <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={7} s={1.5} />
       <Pool x={720} y={556} w={820} c="#E6F6EE" o={0.24} z={12} />
-      <CutIn f={f} dx={900} dy={0} at={5} z={50}>
+      <CutIn f={f} dx={0} dy={-640} at={7} z={50}>
         <div style={{ position: "absolute", left: 492, top: 640, width: 460, height: 130,
           zIndex: 50, background: `linear-gradient(174deg, ${OAKL} 0%, ${dkh(OAK, 0.46)} 100%)`,
           borderTop: `5px solid ${mxh(OAKL, 0.3)}`, boxShadow: SH_D }} />
       </CutIn>
-      <CutIn f={f} dx={900} dy={0} at={5} z={70}>
-        <Tower x={700} y={730} f={f} w={330} z={70}
+      <CutIn f={f} dx={0} dy={-680} at={8} z={70}>
+        <UnitStack x={700} y={730} f={f} w={330} z={70}
           blocks={[0, 2, 4]} seat={{ 1: S11_SWEEP, 3: S11_SWEEP + 3, 5: S11_SWEEP + 6 }}
           lit={f >= S11_SWEEP ? 1 : 0}
           lean={E(f, 0, S11_SWEEP, 5.5, 0, OUT)} />
@@ -939,7 +951,7 @@ export const S12: React.FC<P> = ({ v, dur }) => {
       <Beam x={506 - swing * 250} y={300} top={140} bot={620} len={430} c={mxh(C_JUDGE, 0.4)}
         o={0.30} z={22} f={f} />
       <Pool x={506 - swing * 250} y={676} w={640} c={mxh(C_JUDGE, 0.4)} o={0.40} z={24} />
-      <CutIn f={f} dx={0} dy={-420} at={5} z={50}>
+      <CutIn f={f} dx={0} dy={-720} at={9} z={50}>
   <BenchDesk x={506} y={618} w={760} h={250} z={50} lit={1} />
       </CutIn>
       <Block x={760} y={598} s={1.15} z={66} />
@@ -952,7 +964,7 @@ export const S12: React.FC<P> = ({ v, dur }) => {
         lift={E(f, S12_RISE, S12_RISE + 8, 0, 76, BACK)} />
       {/* the evidence, under the swinging light — and the flags are READ off it */}
       <Contact x={216 - 130} y={716 - 8} w={260} z={44} o={0.44} />
-      <Tower x={216} y={716} f={f} w={232} z={58} blocks={[0, 1, 2, 3, 5]} lit={0}
+      <UnitStack x={216} y={716} f={f} w={232} z={58} blocks={[0, 1, 2, 3, 5]} lit={0}
         spikes={[[0, -30], [2, -26], [4, -22]]} lean={2.2} />
       {[0, 1, 2].map(i => (
         f >= S12_READ + i * 4 && f < S12_READ + i * 4 + 16
@@ -966,6 +978,10 @@ export const S12: React.FC<P> = ({ v, dur }) => {
       {/* the counter-crossing: its BURST phase lands on the cut, so the
           scene is accelerating out rather than settling (§23) */}
       <Cross f={f} from={-280} to={1180} a={dur - 13} b={dur + 60} y={762} i={13} size={252} z={59} stack={2} />
+
+      {/* the counter-crossing: its BURST phase lands on the cut, so the shot
+          is accelerating out rather than settling (§23) */}
+      <Cross f={f} from={-300} to={1180} a={dur - 13} b={dur + 60} y={766} i={14} size={262} z={59} stack={2} />
 
     </Scene>
   );
@@ -997,12 +1013,12 @@ export const S13: React.FC<P> = ({ v, dur }) => {
           it catches it. */}
       <div style={{ position: "absolute", left: 46, top: 502, width: 200, height: 16,
         zIndex: 34, background: `linear-gradient(180deg, ${OAKL} 0%, ${dkh(OAK, 0.5)} 100%)` }} />
-      <Tower x={146} y={502} f={f} w={140} z={35} blocks={[0, 1, 4]} lit={0} lean={-3.5} />
+      <UnitStack x={146} y={502} f={f} w={140} z={35} blocks={[0, 1, 4]} lit={0} lean={-3.5} />
 
       {/* THE WORK — pass 3 fills the bay S1 left dark */}
       <Contact x={560 - 186} y={734 - 10} w={372} z={44} o={0.48} />
-      <CutIn f={f} dx={0} dy={-700} at={6} z={60}>
-        <Tower x={560} y={748} f={f} w={372} z={60}
+      <CutIn f={f} dx={0} dy={-600} at={7} z={60}>
+        <UnitStack x={560} y={748} f={f} w={372} z={60}
           blocks={[0, 1, 2]}
           seat={{ 3: S13_P1, 5: S13_P2, 4: S13_P3 }}
           lit={f >= S13_P3 ? 1 : 0} hit={hit}
@@ -1116,7 +1132,7 @@ export const S15: React.FC<P> = ({ v, dur }) => {
           zIndex: 34, borderRadius: 3,
           background: `linear-gradient(180deg, #9AA29C 0%, #4E5451 100%)` }} />
       ))}
-      <CutIn f={f} dx={-900} dy={0} at={6} z={50}>
+      <CutIn f={f} dx={0} dy={-640} at={8} z={50}>
         <div style={{ position: "absolute", left: 236, top: 636, width: 560, height: 128,
           zIndex: 50, background: `linear-gradient(174deg, #7C837E 0%, #3B403D 100%)`,
           borderTop: `5px solid #949B96`, boxShadow: SH_D }} />
@@ -1124,8 +1140,8 @@ export const S15: React.FC<P> = ({ v, dur }) => {
       {/* the prototype: 300px against the hero board's 500 — visibly the small
           version, which is the whole point of the line */}
       <Contact x={520 - 118} y={706 - 8} w={236} z={44} o={0.44} />
-      <CutIn f={f} dx={-900} dy={0} at={6} z={60}>
-        <Tower x={520} y={724} f={f} w={248} z={60}
+      <CutIn f={f} dx={0} dy={-680} at={9} z={60}>
+        <UnitStack x={520} y={724} f={f} w={248} z={60}
           blocks={[]} seat={{ 0: 4, 1: S15_L2, 2: S15_L3 }}
           lit={f >= S15_DONE ? 1 : 0} />
       </CutIn>
@@ -1175,7 +1191,7 @@ export const S16: React.FC<P> = ({ v, dur }) => {
       <div style={{ position: "absolute", inset: 0, zIndex: 60,
         transform: `translate(${out * 470}px, ${-out * 60}px) scale(${1 - out * 0.24})`,
         opacity: 1 - out * 0.5 }}>
-        <Tower x={430} y={724} f={f} w={248} z={60}
+        <UnitStack x={430} y={724} f={f} w={248} z={60}
           blocks={[]} lit={1}
           seat={{ 0: S16_SET, 1: S16_SET + 2, 2: S16_SET + 4 }} />
       </div>

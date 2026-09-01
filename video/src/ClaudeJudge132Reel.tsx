@@ -133,16 +133,30 @@ const s0Cues = (hook: HookId): Cue[] => {
     { at: S(44), src: "impact_deep.wav", v: LEVELS.SFX_HERO, dur: 0.90, rate: 0.82 },
     { at: S(58), src: "rebuild_thud.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.85, rate: 0.86 },
   ];
-  /* B · THE STACK (76f) — the hero cue is the RAIL SNAP, not an impact. */
+  /* ⭐ B · HOLDING IT UP (76f) — THE PICKED CUT, and the bank follows the CHAIN
+     rather than a metronome: he takes the weight (f2), his knees go (f7), the
+     FLOOR CRACKS (f15), the stack tilts (f26), the top unit slides (f32) and the
+     whole lot comes down (f44). Each link gets the sound of the thing that
+     actually happens, and the crack is the only bright cue in it because a
+     splitting floor is the one event up there. */
   if (hook === "stack") return [
-    { at: 0.00, src: "stage_hum.wav", v: LEVELS.SFX_BED * db(5), dur: 2.05, rate: 0.84, lead: 0 },
-    ...[7, 15, 26, 32].map((fr, i) => ({
-      at: S(fr), src: "mallet_tap.wav", v: LEVELS.SFX_MID * db(i * 0.5),
-      dur: 0.26, rate: STEP4[i] * 0.90,
-    })),
-    { at: S(44), src: "bamboo_crack.wav", v: LEVELS.SFX_HERO * db(-4), dur: 0.44, rate: 0.84 },
-    { at: S(46), src: "impact_deep.wav", v: LEVELS.SFX_HERO * db(-3), dur: 0.90, rate: 0.88 },
+    { at: 0.00, src: "stage_hum.wav", v: LEVELS.SFX_BED * db(5), dur: 2.05, rate: 0.82, lead: 0 },
+    /* he takes it — a low seat, not a tap */
+    { at: S(2), src: "slate_whump.wav", v: LEVELS.SFX_MID * db(1), dur: 0.20, rate: 0.80 },
+    /* the knees */
+    { at: S(7), src: "rebuild_thud.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.85, rate: 0.84 },
+    /* ⭐ THE FLOOR CRACKING — the countdown, and the one bright transient in the
+       shot, because everything else here is weight */
+    { at: S(15), src: "bamboo_crack.wav", v: LEVELS.SFX_HERO * db(-6), dur: 0.44, rate: 0.92 },
+    /* the tilt, and the slide off the back */
+    { at: S(26), src: "mech_clank.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.16, rate: 0.82 },
+    { at: S(32), src: "wrench_clank.wav", v: LEVELS.SFX_MID, dur: 0.10, rate: 0.88 },
+    /* it comes down on him */
+    { at: S(44), src: "impact_deep.wav", v: LEVELS.SFX_HERO * db(1), dur: 0.90, rate: 0.80 },
+    { at: S(46), src: "sub.wav", v: LEVELS.SFX_MID * db(-2), dur: 0.80, rate: 0.82 },
+    { at: S(52), src: "slate_whump.wav", v: LEVELS.SFX_MID * db(-2), dur: 0.20, rate: 1.06 },
   ];
+
   /* C · THE SEAL (76f) — a coil, a drive and a punch-through. */
   return [
     { at: 0.00, src: "stage_hum.wav", v: LEVELS.SFX_BED * db(5), dur: 2.05, rate: 0.84, lead: 0 },

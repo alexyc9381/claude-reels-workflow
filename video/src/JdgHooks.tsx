@@ -3,13 +3,13 @@ import { useCurrentFrame } from "remotion";
 import { HookHeader } from "./SlopKit";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, rnd, SH, SH_D, dkh, mxh,
-  Scene, Cam, Contact, Pool, Ring, Puff, Motes, Beam, Mark, Hero, Crew, Forearm,
+  Scene, Cam, Contact, Pool, Ring, Puff, Motes, Beam, Mark, Hero, Crew, Forearm, Sweat,
   mono, ui, CLAY, INK, GREEN, RED, GOLD,
-  Chamber, asPlace, PLASTER, PLASTERD, OAK, OAKD, OAKL, BRS, BRSD, BRSL,
+  Chamber, asPlace, PLASTER, PLASTERD, OAK, OAKD, OAKL, BRS, BRSD, BRSL, BLOCKS,
   FACE, FACED, VOID, C_JUDGE, C_PROS, C_DEF, R,
   settle, antic, load, stroke, STEP,
 } from "./JdgWorld";
-import { Tower, BlockLine, Plinth, Nameplate } from "./JdgProps";
+import { Car, Ladder, Bridge, Press, StatusLamp, Locker, Load, Tank, Unit, Tower, BlockLine, Plinth, Nameplate } from "./JdgProps";
 
 /* ===========================================================================
    REEL 132 · "JUDGE" — THE HOOK, THREE CONCEPTS.
@@ -102,17 +102,9 @@ export const HDR_HOT = "ITS OWN WORK";
     CLAIM rather than a description, and the chip carries what you GET
     ([[feedback_the_band_states_the_value]]): the name alone says what the thing
     is called, not what it does for you. Four words a line. */
-export const HookChrome: React.FC<{ f: number }> = ({ f }) => (<>
+export const HookChrome: React.FC<{ f: number }> = ({ f }) => (
   <HookHeader big={HDR_BIG} hot={HDR_HOT} f={f} at0 />
-  <div style={{ position: "absolute", left: 0, right: 0, top: 516, textAlign: "center",
-    zIndex: 199, opacity: E(f, 3, 11, 0, 1, OUT) }}>
-    <span style={{ ...mono(25, 900), letterSpacing: 4, color: "#2A2116",
-      background: `linear-gradient(180deg,${BRSL},${BRS})`, padding: "10px 24px",
-      borderRadius: 9, border: `3px solid ${dkh(BRSD, 0.3)}` }}>
-      {R.loopName} · {R.setup} SETUP
-    </span>
-  </div>
-</>);
+);
 
 /* THE BEATS — one shared table, so all three cuts are cut to the same words and
    only the PICTURE differs. ⛔ If these stop matching `words_132judge.json`,
@@ -194,106 +186,114 @@ const OathHand: React.FC<{ x: number; y: number; size: number; down: number; z?:
   </>);
 };
 
+/* ── SHARED: the room every option is staged in ─────────────────────────── */
+const HookRoom: React.FC<{ v: Variant; f: number; shaft: number }> = ({ v, f, shaft }) => (<>
+  <Chamber p={asPlace("box")} f={f} lit={1} occ="l" bays={4} shaft={shaft} shaftO={0.34}
+    rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={8} rail horizonDy={-16} occW={112} />
+  <ShaftDust f={f} x={shaft + 30} w={520} z={22} />
+  <Pool x={330} y={548} w={1010} c="#FFFCF2" o={0.84} z={12} />
+  <Pool x={700} y={702} w={1010} c="#FFFCF2" o={0.86} z={12} />
+  <Pool x={506} y={382} w={1010} c="#EAF6FA" o={0.34} z={11} />
+</>);
+
+const Gallery: React.FC<{ f: number; pay: number; e2: number }> = ({ f, pay, e2 }) => (
+  <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 452,
+    overflow: "hidden", zIndex: 26 }}>
+    {[336, 566, 828].map((gx, i) => (
+      <Crew key={"gl" + i} f={f} x={gx} y={556} i={i + 3} size={206} z={26}
+        at={-14} loop={[3, 0, 3][i]} tint={dkh(CLAY, 0.10)}
+        cheer={f >= pay ? 0.6 : f >= e2 ? 0.25 : 0} />
+    ))}
+  </div>
+);
+
 /* =========================================================================
-   A · THE OATH — a Claude swears the thing he built is finished, and it comes
-   down beside him while he does. He never looks at it.
+   ⭐⭐⭐ ALL THREE OF THESE ARE A BODY DOING PHYSICAL WORK AGAINST A LOAD, AND
+   THAT IS THE WHOLE POINT OF THE REBUILD.
 
-   ⛔⛔⛔ REBUILT AFTER REJECTION ON THE CONCEPT. v1 was a paper exhibit board on
-   an easel shedding paper leaves, and Alex: *"the animation concept is wayyy too
-   boring, like it's literally just the papers concept."* Every gate was green —
-   motion 10.66 median, HOLD 8%, PRE-CUT 1.30, LUMA 147.9. The gates cannot see
-   that a reel is made of stationery. [[feedback_the_metric_makes_paper]]
-   ⭐ THE RE-MAP: nobody's work is a DOCUMENT. It is a THING THEY BUILT. So the
-   hook is a Claude and a TOWER he stacked, in six saturated colours, and the
-   beats stop being pages coming loose and start being COURSES KNOCKED OUT of a
-   structure that then can't hold itself up.
+   Five hooks were rejected before them and every one had the same defect, which
+   [[feedback_a_hook_needs_a_body_not_a_mechanism]] already names: *"an apparatus
+   performing, with a Claude standing next to it. An apparatus has no intention,
+   so there is nothing to anticipate."*
+   ⭐ Reel 119 went 7.88 -> 15.63 on the fix, and it is not more motion — it is a
+   CHARACTER STRAINING. So in all three the hero is under load from frame 0, the
+   strain peaks in the COIL before each hit (`load()`), and the anticipation is
+   the thing 119 puts its whole first beat on: *a rope going tight with nothing
+   happening yet.*
+   ⭐⭐ AND IT IS THE SAME SHAPE AS THE LIE. He is holding it together WHILE
+   telling you it is fine — the thumbs-up never comes down, in any of the three,
+   including after he has lost. That is what "to your face" means.
+   ========================================================================= */
 
-   Same clock — every beat is a word at `onset − 4`:
-     f0  (settled)   he stands beside his tower, all six courses LIT
-     f2  "new"       his hand SLAMS UP for the oath
-     f7  "prompting" he KNOCKS the stack to show it is solid   <- the trigger
-     f15 "technique" a course drops OUT of the middle; the stack sags
-     f26 "stops"     two more go, and the lights start dying
-     f32 "Claude"    it leans hard, still standing on nothing
-     f44 "lying"     ⭐ the whole top half comes down
-     f66 "face"      he is still swearing, to a stump
+/** the free hand, held at camera the whole way through — the claim that never
+    gets withdrawn. ⛔ It is the LAST thing to move in every one of these. */
+const ThumbUp: React.FC<{ x: number; y: number; size: number; z?: number; k?: number }> =
+  ({ x, y, size, z = 66, k = 1 }) => {
+  const u = size / 200, s = 30 * u;
+  return (
+    <div style={{ position: "absolute", left: x - size / 2 + 14 * u, top: y - size + 78 * u,
+      width: s, height: s * 1.5, zIndex: z, borderRadius: 5,
+      background: dkh(CLAY, 0.04), transform: `rotate(${-16 * k}deg)` }}>
+      <div style={{ position: "absolute", left: -s * 0.34, top: -s * 0.5, width: s * 0.52,
+        height: s * 0.86, borderRadius: 4, background: CLAY,
+        transform: `rotate(${-14 * k}deg)` }} />
+    </div>
+  );
+};
+
+/* =========================================================================
+   A · HOLDING THE DOOR SHUT — his back is against it, his feet are skidding, and
+   the mess inside is winning an inch at a time.
    ========================================================================= */
 export const HookOath: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
-  const p = asPlace("box");
-
-  const armDown = 1 - E(f, 2, 7, 0, 1, BACK)
-                + stroke(f, B.TRIG, 1, 4) - stroke(f, B.TRIG + 9, 1, 10);
-  const approach = E(f, 0, 9, -84, 0, IN_Q);
-  const plant = E(f, 2, 8, 0, 1, BACK) - E(f, B.TRIG, B.TRIG + 5, 0, 1, OUT);
-  const jolt = f >= B.TRIG ? settle(f, B.TRIG, 1, 15, 2.4) : 0;
-
-  const HX = 720, HY = 760;            /* the tower, standing on the floor */
-  const SX = 196, SFEET = 678, SIZE = 384;
-
-  /* it LEANS as it loses courses, and the lean is still opening at f76 (§23) */
-  const lean = E(f, B.E1, B.E1 + 14, 0, 2.6, OUT)
-             + E(f, B.E2, B.E2 + 14, 0, 5.0, OUT)
-             + E(f, B.PAY, 88, 0, 84, IN_Q);
-  const slide = E(f, B.PAY + 4, 92, 0, 300, IN_Q);
-  const gaze = E(f, B.LAST, B.LAST + 7, 0, -1, OUT);
-  const shock = E(f, B.E2, B.E2 + 6, 0, 0.35, OUT) + E(f, B.PAY, B.PAY + 5, 0, 0.55, OUT);
-
+  const HITS = [B.TRIG, B.E1, B.E2, B.E3];
+  /* ⭐ THE COUNTDOWN IS THE GAP, and each slam is a stroke with a COIL in front
+     of it — the strain peaks before the hit, which is where a body is most
+     visibly loaded. */
+  const gap = HITS.reduce((a, at, i) => a + stroke(f, at, 0.20 + i * 0.05, 5)
+                                          - stroke(f, at + 6, 0.13 + i * 0.03, 7), 0.06);
+  const skid = HITS.reduce((a, at, i) => a + (f >= at ? E(f, at, at + 8, 0, 15 + i * 5, OUT) : 0), 0);
+  const strain = 0.5 + HITS.reduce((a, at) => a + load(f, at - 7, at) * 0.5, 0);
+  const LX = 726, LY = 726, SX = 452, SFEET = 734, SIZE = 380;
+  const blown = f >= B.PAY;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
-      <Chamber p={p} f={f} lit={1} occ="l" bays={4} shaft={300} shaftO={0.34}
-        rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={8} rail horizonDy={-16} occW={112} />
-      {/* ⭐ THE BAND IS THE MATERIAL THE REEL IS ABOUT. Removing the paper removed
-          the reel's only full-width travelling element; a conveyor of the same
-          blocks the tower is built from puts it back in the right substance. */}
-      <BlockLine f={f} y={286} z={30} rate={RK[v].rate * 1.5} n={6} s={1.55} />
-      <ShaftDust f={f} x={330} w={520} z={22} />
-      <Pool x={330} y={548} w={1010} c="#FFFCF2" o={0.72} z={12} />
-      <Pool x={700} y={702} w={1010} c="#FFFCF2" o={0.68} z={12} />
-      <Pool x={506} y={382} w={1010} c="#EAF6FA" o={0.20} z={11} />
-
-      {/* ── THE TOWER. 300px wide against a 1012px panel, air on both sides, and
-             it is the saturated side of the contrast on a deep teal chamber. ── */}
-      <Contact x={HX - 176} y={HY - 10} w={352} z={44} o={0.48} />
-      <div style={{ position: "absolute", inset: 0, zIndex: 60,
-        transform: `translateX(${slide}px)` }}>
-      <Tower x={HX} y={HY} f={f} w={330} z={60}
-        blocks={[0, 1, 2, 3, 4, 5]}
-        out={{ 3: B.E1, 1: B.E2 }}
-        lit={f < B.E2 ? 1 : 0} lean={lean} fall={B.PAY} />
-      </div>
-
-      {f >= B.E1 && <Puff x={HX} y={HY - 210} f={f} at={B.E1} n={9} s={1.2} c="#CFC4AE" z={66} />}
-      {f >= B.E2 && <Puff x={HX} y={HY - 260} f={f} at={B.E2} n={11} s={1.4} c="#CFC4AE" z={66} />}
-      {f >= B.PAY && <Puff x={HX} y={HY - 40} f={f} at={B.PAY} n={16} s={1.9} c="#CFC4AE" z={66} />}
-      {f >= B.PAY && <Ring x={HX} y={HY - 120} f={f} at={B.PAY} c={BRSL} z={67} s={1.7} dur={28} />}
-
-      {/* ── THE HERO, FULL BODY ON THE FLOOR ── */}
-      <Contact x={SX - 122 + approach} y={SFEET - 8} w={244} z={46} o={0.44} />
-      <Hero f={f} x={SX + approach} y={SFEET} size={SIZE} z={48} costume={{}} tint={CLAY}
-        gaze={gaze} shock={Math.min(1, shock)} strain={plant * 0.34}
-        lift={plant * 16} act={3} ph={0.6} />
-      <OathHand x={SX + approach} y={SFEET} size={SIZE} down={armDown} z={64} />
-      {/* the other hand rests ON the thing he is swearing about — and it is still
-          there, on nothing, once the stack has gone */}
-      <div style={{ position: "absolute", zIndex: 64,
-        left: HX - 236, top: 486 + jolt * 9,
-        width: SIZE * 0.21, height: SIZE * 0.155, borderRadius: 5,
-        background: dkh(CLAY, 0.06),
-        transform: `rotate(${-7 + jolt * 5}deg)` }} />
-      {f >= B.TRIG && f < B.TRIG + 18 &&
-        <Ring x={HX - 172} y={508} f={f} at={B.TRIG} c={BRSL} z={70} s={0.7} dur={17} />}
-
-      {/* the gallery, behind the rail, on their own loops */}
-      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 452,
-        overflow: "hidden", zIndex: 26 }}>
-        {[336, 566, 828].map((gx, i) => (
-          <Crew key={"gl" + i} f={f} x={gx} y={556} i={i + 3} size={206} z={26}
-            at={-14} loop={[3, 0, 3][i]} tint={dkh(CLAY, 0.34)}
-            cheer={f >= B.PAY ? 0.6 : f >= B.E2 ? 0.25 : 0} />
-        ))}
-      </div>
-
+    <Scene p={asPlace("box")} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
+      <HookRoom v={v} f={f} shaft={300} />
+      <BlockLine f={f} y={240} z={30} rate={RK[v].rate * 1.5} n={6} s={1.35} back={0.68} />
+      <Locker x={LX} y={LY} f={f} w={356} h={492} z={56} gap={gap} burst={B.PAY} />
+      {/* what gets out once he loses — big, saturated, and still travelling */}
+      {blown && Array.from({ length: 7 }, (_, i) => {
+        const lf = f - B.PAY - i;
+        if (lf < 0) return null;
+        const c = BLOCKS[i % BLOCKS.length];
+        const px = LX - 40 - lf * (11 + i * 2.4);
+        const py = LY - 300 + i * 34 + lf * lf * 1.5;
+        if (px < -180 || py > 900) return null;
+        return (
+          <div key={"out" + i} style={{ position: "absolute", left: px - 62, top: py - 24,
+            width: 124, height: 48, zIndex: 72, borderRadius: 5, boxShadow: SH,
+            transform: `rotate(${-lf * 8 - i * 20}deg)`,
+            background: `linear-gradient(172deg, ${mxh(c, 0.28)} 0%, ${c} 46%, ${dkh(c, 0.42)} 100%)`,
+            border: `3px solid ${dkh(c, 0.5)}` }} />
+        );
+      })}
+      {HITS.map((at, i) => (
+        f >= at && f < at + 12
+          ? <Puff key={"h" + i} x={LX - 170} y={LY - 240} f={f} at={at} n={7} s={1.0} c="#CFC4AE" z={70} />
+          : null
+      ))}
+      {blown && <Ring x={LX} y={LY - 250} f={f} at={B.PAY} c={BRSL} z={74} s={1.9} dur={30} />}
+      {/* ── THE BODY, BRACED. `strain` squashes and trembles him; the skid is the
+             ground he is losing. ── */}
+      <Contact x={SX - 122 - skid} y={SFEET - 8} w={244} z={46} o={0.46} />
+      <Hero f={f} x={SX - skid} y={SFEET + (blown ? E(f, B.PAY, B.PAY + 10, 0, 40, OUT) : 0)}
+        size={SIZE} z={62} costume={{}} tint={CLAY}
+        strain={blown ? 0.2 : Math.min(0.95, strain)}
+        shock={blown ? E(f, B.PAY, B.PAY + 6, 0, 0.85, OUT) : 0}
+        gaze={0.35} act={1} ph={0.4} />
+      <ThumbUp x={SX - skid} y={SFEET} size={SIZE} z={68} />
+      <Gallery f={f} pay={B.PAY} e2={B.E2} />
       <Motes x={506} y={330} w={880} h={420} n={14} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
       <Mark x={58} y={152} s={84} z={92} />
     </Scene>
@@ -301,88 +301,180 @@ export const HookOath: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 };
 
 /* =========================================================================
-   B · THE STACK — he keeps ADDING courses and claiming each one, and the stack
-   goes past the angle it can hold. The load keeps ARRIVING, which is what makes
-   a shot anticipatory rather than merely precarious
-   ([[feedback_anticipation_is_a_changing_state]]).
+   B · HOLDING IT UP — he is under everything he has signed off, and it is his own
+   green lights that are crushing him.
+
+   ⛔⛔⛔ ELEVATED AFTER "the concept is right but it is still boring somehow."
+   The concept WAS right and the shot was still one thing happening five times:
+   a slab lands, he sinks, repeat. [[ANIMATION-QUALITY §31.4]] names that exactly
+   — *"a causal chain, not one event repeated. Reel 129's failed hooks repeated
+   ONE event — rain falling, boxes landing, a ball rolling — which is a texture,
+   not a story."* Reel 119's chain is five DIFFERENT events, each caused by the
+   last: the pin drops -> the slack leaves the chain -> the ox digs in -> the rig
+   moves -> the dial spins past its stop.
+
+   ⭐ SO THIS IS A CHAIN NOW, AND EVERY LINK IS CAUSED BY THE ONE BEFORE IT:
+     f2  "new"       he TAKES the weight — locks his arms and sets his grip
+     f7  "prompting" because his arms lock, his KNEES go
+     f15 "technique" because his knees go, his feet splay and THE FLOOR CRACKS
+     f26 "stops"     because the floor gives on one side, the STACK TILTS
+     f32 "Claude"    because it tilts, the TOP UNIT STARTS TO SLIDE off the back
+     f44 "lying"     ⭐ the slide takes the balance and the whole lot comes down
+     f66 "face"      it is still scattering, and his thumb is still up
+
+   ⭐⭐ AND ONE CAUSE, SEVERAL VISIBLE EFFECTS (§31.3): the strain drives the sink,
+   the tremble, the sweat, the crack widening AND the green lamps flickering — his
+   own sign-offs wavering while he insists they are fine.
+   ⛔ THE CRACK IS THE COUNTDOWN. [[feedback_a_wobble_is_not_a_clock]] wants a
+   VISIBLE countdown, not an unstable-looking state: the split under his feet
+   grows on every beat and you can see how far it has left to go.
    ========================================================================= */
 export const HookStack: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
-  const p = asPlace("box");
-  const LAND = [-8, B.TRIG, B.E1, B.E2, B.E3];
-  const RX = 560, RY = 700;
-  const down = LAND.filter(a => f >= a).length;
-  const snapped = f >= B.PAY;
-  const lean = LAND.reduce((a, at, i) => a + (f >= at ? E(f, at, at + 10, 0, 1.5 + i * 0.7, OUT) : 0), 0)
-             + (snapped ? E(f, B.PAY, 96, 0, 26, IN_Q) : 0);
+  const GRIP = 2, KNEES = B.TRIG, FLOOR = B.E1, TILT = B.E2, SLIDE = B.E3;
+  const blown = f >= B.PAY;
+
+  /* the chain, each link a function of the one before it */
+  const grip  = E(f, GRIP, GRIP + 6, 0, 1, BACK);
+  const knees = E(f, KNEES, KNEES + 9, 0, 1, OUT);
+  const crack = E(f, FLOOR, FLOOR + 10, 0, 1, OUT) + E(f, TILT, TILT + 10, 0, 0.6, OUT)
+              + E(f, B.PAY, 92, 0, 1.4, IN_Q);
+  const tilt  = E(f, TILT, TILT + 12, 0, 5.5, OUT) + E(f, SLIDE, SLIDE + 10, 0, 4, OUT)
+              + (blown ? E(f, B.PAY, 90, 0, 22, IN_Q) : 0);
+  const slide = E(f, SLIDE, B.PAY + 4, 0, 96, IN_Q);
+  const sink  = grip * 10 + knees * 34 + E(f, FLOOR, FLOOR + 10, 0, 22, OUT)
+              + E(f, TILT, TILT + 10, 0, 20, OUT) + E(f, SLIDE, SLIDE + 10, 0, 26, OUT);
+  const strain = 0.30 + grip * 0.16 + knees * 0.22 + E(f, FLOOR, FLOOR + 8, 0, 0.14, OUT)
+               + E(f, TILT, TILT + 8, 0, 0.12, OUT) + E(f, SLIDE, SLIDE + 8, 0, 0.10, OUT);
+
+  const HX = 540, HFEET = 748, SIZE = 392;
+  const STACK_Y = HFEET - SIZE * 0.94 + sink;
+  const KINDS = [3, 0, 2, 1, 4];
+  const LAND = [-6, GRIP, KNEES, FLOOR, TILT];
+
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
-      <Chamber p={p} f={f} lit={1} occ="r" bays={4} shaft={640} shaftO={0.34}
-        rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail horizonDy={-16} />
-      <BlockLine f={f} y={286} z={30} rate={RK[v].rate * 1.5} n={6} s={1.55} />
-      <ShaftDust f={f} x={680} w={520} z={22} />
-      <Pool x={660} y={556} w={900} c="#FFF9EC" o={0.50} z={12} />
-      <Contact x={RX - 180} y={RY - 10} w={360} z={44} o={0.46} />
-      <Tower x={RX} y={RY} f={f} w={318} z={60}
-        blocks={[0, 1]} seat={{ 2: LAND[1], 3: LAND[2], 4: LAND[3], 5: LAND[4] }}
-        lit={snapped ? 0 : 1} lean={lean} fall={snapped ? B.PAY : -1} />
-      {LAND.slice(1).map((at, i) => (
-        f >= at ? <Puff key={"p" + i} x={RX} y={RY - 150 - i * 60} f={f} at={at} n={8} s={1.1}
-          c="#CFC4AE" z={66} /> : null
+    <Scene p={asPlace("box")} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
+      <HookRoom v={v} f={f} shaft={640} />
+      <BlockLine f={f} y={190} z={30} rate={RK[v].rate * 1.5} n={6} s={1.35} back={0.68} />
+
+      {/* ⭐ THE CRACK — the countdown, under his feet, growing on every link */}
+      {crack > 0.02 && (<>
+        <div style={{ position: "absolute", left: HX - 30, top: HFEET - 12,
+          width: 6 + crack * 300, height: 13, zIndex: 42, borderRadius: 3,
+          transform: "rotate(-3deg)", background: `linear-gradient(90deg, ${hexa("#0B0F12", 0.9)} 0%, ${hexa("#0B0F12", 0.35)} 100%)` }} />
+        <div style={{ position: "absolute", left: HX - 20 - crack * 190, top: HFEET - 6,
+          width: 6 + crack * 190, height: 10, zIndex: 42, borderRadius: 3,
+          transform: "rotate(4deg)", background: `linear-gradient(270deg, ${hexa("#0B0F12", 0.85)} 0%, ${hexa("#0B0F12", 0.3)} 100%)` }} />
+        {crack > 0.5 && <Puff x={HX + 70} y={HFEET} f={f} at={FLOOR} n={6} s={1.0} c="#CFC4AE" z={44} />}
+      </>)}
+
+      {/* ⭐ THE STACK — five NAMEABLE devices, each still showing the all-clear he
+          gave it, and the whole stack tilts as the floor goes under one side */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 66,
+        transformOrigin: `${HX}px ${STACK_Y}px`, transform: `rotate(${tilt}deg)` }}>
+        {KINDS.map((kind, i) => {
+          if (f < LAND[i] - 12) return null;
+          const dz = E(f, LAND[i] - 12, LAND[i], -440, 0, IN_Q);
+          const set = f >= LAND[i] ? settle(f - LAND[i], 0, 8, 11, 2.3) : 0;
+          const top = i === KINDS.length - 1;
+          const fk = blown ? Math.min(1, (f - B.PAY) / 44) : 0;
+          const sx = blown ? fk * fk * (i % 2 ? 520 : -520) : (top ? slide : 0);
+          const sy = blown ? fk * fk * 660 : 0;
+          const rr = blown ? fk * (i % 2 ? 88 : -88) : (top ? slide * 0.16 : 0);
+          if (sy > 700) return null;
+          return (
+            <div key={"u" + i} style={{ position: "absolute", inset: 0,
+              transform: `translate(${sx}px, ${sy}px) rotate(${rr}deg)`,
+              transformOrigin: `${HX}px ${STACK_Y - i * 64}px`,
+              opacity: blown ? Math.max(0, 1 - fk * 0.75) : 1 }}>
+              <Unit kind={kind} x={HX} y={STACK_Y - i * 64 + dz + set} w={392 - i * 22}
+                z={66 + i} lamp={blown ? 0 : (strain > 0.62 ? 0.5 : 1)} f={f} />
+            </div>
+          );
+        })}
+      </div>
+
+      {[GRIP, KNEES, FLOOR, TILT, SLIDE].map((at, i) => (
+        f >= at && f < at + 12
+          ? <Puff key={"c" + i} x={HX} y={STACK_Y - i * 50} f={f} at={at} n={7} s={1.0}
+              c="#CFC4AE" z={72} />
+          : null
       ))}
-      {snapped && <Ring x={RX} y={RY - 120} f={f} at={B.PAY} c={BRSL} z={70} s={1.7} dur={28} />}
-      <Contact x={216} y={664} w={220} z={44} o={0.44} />
-      <Hero f={f} x={310} y={672} size={392} z={48} costume={{}} tint={CLAY}
-        strain={snapped ? 0 : Math.min(0.8, down * 0.15)}
-        shock={E(f, B.PAY, B.PAY + 6, 0, 0.85, OUT)}
-        gaze={E(f, B.AFT, B.AFT + 8, 0, 0.7, OUT)} act={1} ph={0.4} />
+      {blown && <Ring x={HX} y={HFEET - 220} f={f} at={B.PAY} c={BRSL} z={76} s={1.9} dur={30} />}
+      {blown && <Puff x={HX} y={HFEET - 40} f={f} at={B.PAY} n={16} s={1.9} c="#CFC4AE" z={72} />}
+
+      {/* the two arms taking it, bending as he goes down */}
+      {!blown && [-1, 1].map(sd => (
+        <div key={"arm" + sd} style={{ position: "absolute",
+          left: HX + sd * SIZE * 0.34 - 19, top: HFEET - SIZE * 0.88 + sink,
+          width: 38, height: SIZE * 0.32 - sink * 0.34, zIndex: 68, borderRadius: 6,
+          background: `linear-gradient(96deg, ${mxh(CLAY, 0.16)} 0%, ${dkh(CLAY, 0.14)} 100%)`,
+          transform: `rotate(${sd * (9 + sink * 0.14)}deg)`, transformOrigin: "50% 100%" }} />
+      ))}
+      <Contact x={HX - 124} y={HFEET - 8} w={248} z={46} o={0.46} />
+      <Hero f={f} x={HX} y={HFEET} size={SIZE} z={62} costume={{}} tint={CLAY}
+        strain={blown ? 0.15 : Math.min(0.96, strain)} lift={-sink * 0.42}
+        shock={blown ? E(f, B.PAY, B.PAY + 6, 0, 0.85, OUT) : 0}
+        gaze={0.3} act={1} ph={0.2} />
+      {/* ⛔ THE SWEAT IS ON THE STILLEST PART OF HIM — §11: effort wants a
+          secondary emitter where the body is NOT moving, or it reads as noise. */}
+      {!blown && strain > 0.55 &&
+        <Sweat x={HX + 74} y={HFEET - SIZE * 0.66 + sink} f={f} at={FLOOR} n={3} z={70} />}
+      <ThumbUp x={HX} y={HFEET} size={SIZE} z={70} />
+      <Gallery f={f} pay={B.PAY} e2={B.E2} />
+      {/* ⭐ THE CROWD IS CLAUDES, AND THEY ARE IN THE FIRST SECOND — characters
+          stop scrolls, and these are the audience filter as much as the mark is */}
+      {[128, 862, 962].map((gx, i) => (
+        <Crew key={"fg" + i} f={f} x={gx} y={772} i={i + 7} size={226} z={54} at={-12}
+          loop={[3, 1, 0][i]} cheer={f >= B.PAY ? 0.5 : 0} />
+      ))}
       <Motes x={506} y={330} w={880} h={420} n={14} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
-      <Mark x={58} y={152} s={84} z={92} />
+      <Mark x={40} y={214} s={118} z={92} />
+      <Mark x={886} y={214} s={92} z={92} />
     </Scene>
   );
 };
 
 /* =========================================================================
-   C · THE PRESS — he drives a certification press down onto the stack to mark it
-   finished, and it goes straight THROUGH, because the middle courses are hollow.
+   C · PLUGGING THE LEAKS — every split he jams shut opens two more, and you can
+   count the limbs he has left.
    ========================================================================= */
 export const HookSeal: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
-  const p = asPlace("box");
-  const HX = 620, HY = 706;
-  const swing = antic(f, B.TRIG, B.E2, 0.34);
-  const through = E(f, B.E3, B.PAY, 0, 1, IN_Q);
-  const sealY = swing * 300 + through * 250;
+  const SPL: Array<[number, number, number]> = [
+    [150, 90, B.TRIG], [162, 210, B.E1], [140, 320, B.E2], [166, 150, B.E3], [148, 262, B.AFT],
+  ];
+  const open = SPL.filter(([, , at]) => f >= at);
+  const strain = 0.3 + open.length * 0.13 + SPL.reduce((a, [, , at]) => a + load(f, at - 7, at) * 0.3, 0);
+  const TX = 660, TY = 738, SX = 306, SFEET = 736, SIZE = 386;
+  const blown = f >= B.PAY;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
-      <Chamber p={p} f={f} lit={1} occ="both" bays={4} shaft={430} shaftO={0.36}
-        rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail horizonDy={-16} />
-      <BlockLine f={f} y={286} z={30} rate={RK[v].rate * 1.5} n={7} s={1.55} />
-      <ShaftDust f={f} x={470} w={560} z={22} />
-      <Pool x={470} y={560} w={960} c="#FFF9EC" o={0.50} z={12} />
-      <Contact x={HX - 176} y={HY - 10} w={352} z={44} o={0.46} />
-      <Tower x={HX} y={HY} f={f} w={312} z={60}
-        blocks={[0, 1, 2, 3, 4, 5]} out={{ 3: B.E3 }}
-        lit={f < B.E3 ? 1 : 0} fall={B.PAY}
-        lean={E(f, B.E3, B.E3 + 12, 0, 3, OUT) + E(f, B.PAY, 96, 0, 18, IN_Q)} />
-      {f < B.PAY + 8 && (
-        <div style={{ position: "absolute", left: HX - 96, top: HY - 620 + sealY,
-          width: 192, height: 118, zIndex: through > 0.3 ? 55 : 76, borderRadius: 8,
-          opacity: through > 0.82 ? Math.max(0, 1 - (through - 0.82) * 5.5) : 1,
-          background: `linear-gradient(172deg, ${BRSL} 0%, ${BRS} 46%, ${BRSD} 100%)`,
-          border: `7px solid ${dkh(BRSD, 0.44)}`, display: "flex", alignItems: "center",
-          justifyContent: "center", ...mono(30, 900), color: "#2A2116", letterSpacing: 2 }}>
-          OK
-        </div>
-      )}
-      {f >= B.E3 && <Puff x={HX} y={HY - 250} f={f} at={B.E3} n={13} s={1.5} c="#CFC4AE" z={70} />}
-      {f >= B.PAY && <Ring x={HX} y={HY - 200} f={f} at={B.PAY} c={BRSL} z={71} s={1.7} dur={28} />}
-      <Contact x={158} y={664} w={216} z={44} o={0.44} />
-      <Hero f={f} x={252} y={672} size={392} z={48} costume={{}} tint={CLAY}
-        strain={load(f, B.TRIG, B.E2) * 0.9 + (f >= B.E3 && f < B.PAY ? 0.4 : 0)}
-        drive={swing * 0.22} reach={70}
-        shock={E(f, B.PAY, B.PAY + 6, 0, 0.9, OUT)}
-        gaze={E(f, B.LAST, B.LAST + 6, 0, 0.8, OUT)} act={1} ph={0.2} />
+    <Scene p={asPlace("box")} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
+      <HookRoom v={v} f={f} shaft={430} />
+      <BlockLine f={f} y={196} z={30} rate={RK[v].rate * 1.5} n={6} s={1.35} back={0.68} />
+      <Tank x={TX} y={TY} f={f} w={368} h={430} z={56} splits={SPL} blow={blown ? B.PAY : -1} />
+      {/* ⭐ THE LIMBS HE HAS LEFT — each new split takes one, and the last beat
+          leaves him with none, which is the countdown made countable. */}
+      {open.slice(0, 4).map(([sx, sy], i) => (
+        <div key={"limb" + i} style={{ position: "absolute", left: TX + sx - 66,
+          top: TY - 430 + sy - 16, width: 74, height: 34, zIndex: 70, borderRadius: 6,
+          background: dkh(CLAY, 0.04), transform: `rotate(${-8 + i * 5}deg)` }} />
+      ))}
+      {SPL.map(([, , at], i) => (
+        f >= at && f < at + 12
+          ? <Puff key={"s" + i} x={TX + 120} y={TY - 300 + i * 50} f={f} at={at} n={7} s={1.0}
+              c="#DFF6FF" z={70} />
+          : null
+      ))}
+      {blown && <Ring x={TX} y={TY - 240} f={f} at={B.PAY} c="#DFF6FF" z={74} s={1.9} dur={30} />}
+      <Contact x={SX - 122} y={SFEET - 8} w={244} z={46} o={0.46} />
+      <Hero f={f} x={SX} y={SFEET} size={SIZE} z={62} costume={{}} tint={CLAY}
+        strain={blown ? 0.2 : Math.min(0.95, strain)}
+        shock={blown ? E(f, B.PAY, B.PAY + 6, 0, 0.9, OUT) : 0}
+        gaze={0.35} act={1} ph={0.5}
+        drive={0.24 * Math.sin(f / 6)} reach={40} />
+      <ThumbUp x={SX} y={SFEET} size={SIZE} z={68} />
+      <Gallery f={f} pay={B.PAY} e2={B.E2} />
       <Motes x={506} y={330} w={880} h={420} n={14} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
       <Mark x={58} y={152} s={84} z={92} />
     </Scene>
@@ -395,4 +487,4 @@ export const HOOKS: Record<HookId, React.FC<{ v: Variant; dur: number }>> = {
 
 /** ⛔ SET BY `tools/hook_score.py`, NOT BY TASTE. The four numbers that decided
     it are recorded in the factory log. */
-export const PICKED: HookId = "oath";
+export const PICKED: HookId = "stack";

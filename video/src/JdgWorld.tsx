@@ -183,7 +183,7 @@ export const PRIOR_BANNED = ["GAUNTLET", "BOSS", "REJECT", "PASS", "PERFECT",
 export const PLACES: Record<string, Place> = {
   /** S0 — the witness box. The clerestory shaft is the key. */
   box: {
-    back: "#5AA2B2", back2: "#173C46", floor: "#C0A578", floor2: "#8A7250",
+    back: "#63ADBD", back2: "#1D444F", floor: "#CBB184", floor2: "#96805C",
     lip: "#FFDCA0", key: BRS, horizon: 486, grit: "#5E4E36",
   },
   /** S1 · S5 · S9 · S13 · S16 — the chamber. The one room used four times, so
