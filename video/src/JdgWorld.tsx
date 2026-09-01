@@ -94,12 +94,34 @@ export type { Place };
    the black point and the silhouettes. Neither job is done by the hero object,
    which is the whole point of THE-OPEN's "a gate carried by the wrong object
    deforms that object" — the exhibit is free to be the size it should be. */
+/* ⛔⛔⛔ REJECTED ONCE, AND THE NOTE WAS THE WORLD ITSELF. Alex: *"the animation
+   concept is wayyy too boring, like it's literally just the papers concept, it
+   needs to be so much more interesting, vibrant."*
+   ⭐ [[feedback_the_metric_makes_paper]] predicted this exactly: the motion audit
+   rewards large bright objects arriving, so every low-scoring scene gets answered
+   with another cream rectangle and the reel becomes flying stationery. Reel 107
+   wrote it down, reel 120 did it anyway, and so did this one — a paper exhibit
+   board, paper leaves, paper charge cards, a paper docket, and a clerk carrying
+   a stack of FILES pasted into every scene to fix the motion gate.
+   ⭐⭐ THE FIX IS THE MAPPING, RE-DERIVED FROM THE ACTOR: the work is not a
+   DOCUMENT, it is a THING THAT WAS BUILT — so it is a TOWER OF BLOCKS, a crew
+   stacks it, the prosecutor knocks blocks OUT of it, the defense rams them back,
+   and the judge drops a weight on it. Not one sheet of paper in the reel.
+   ⭐ And the room went with it: an oak-and-parchment courthouse is BEIGE BY
+   CONSTRUCTION. This one is a deep saturated teal chamber under hot gold light,
+   which is where "vibrant" actually comes from — chroma in the SET, not a filter. */
 export const PLASTER = "#D9CDB4", PLASTERD = "#A9977A";
-export const OAK = "#4A3222", OAKD = "#1E140D", OAKL = "#6B4A31";
+export const OAK = "#1B4650", OAKD = "#081A20", OAKL = "#2E6C78";
 /** the brass every fitting in this building is made of */
-export const BRS = "#C79A4E", BRSD = "#7A5A25", BRSL = "#E8C982";
+export const BRS = "#F2A93B", BRSD = "#9A6412", BRSL = "#FFD37A";
 /** the cream face of a finished-looking panel — THE THING THAT LIES */
 export const FACE = "#E6DFCC", FACED = "#B7AE97";
+/** ⭐ THE SIX BLOCK PAINTS — the work is built out of these, and they are the
+    reel's saturation. Six clearly distinct hues so a missing block is legible
+    by COLOUR as well as by gap. ⛔ No violet: it failed as a mid-tone accent on
+    reel 117 and it is reel 127's villain paint. */
+export const BLOCKS = ["#E4572E", "#F2A93B", "#2FA8A0", "#3E8FD8", "#4FBF63", "#D9436E"] as const;
+export const BLOCK_DEAD = "#3A4348";
 /** the black inside a hollow frame. It is a HOLE, and a hole has no gradient. */
 export const VOID = "#0A0806";
 /** the three roles, as three paints. ⭐ AN ACCENT SET IS ONLY AS LEGIBLE AS ITS
@@ -108,7 +130,7 @@ export const VOID = "#0A0806";
       JUDGE  #E7C46A 7.31 · PROS #D9614A 3.92 · DEF #6FBFA6 5.44
     ⛔ PROS at 3.92 was the worst member and it was LIFTED to #E2755C = 4.94,
     which clears the 4.5 line the house uses. Nothing else moved. */
-export const C_JUDGE = "#E7C46A", C_PROS = "#E2755C", C_DEF = "#6FBFA6";
+export const C_JUDGE = "#FFC93C", C_PROS = "#FF5A3C", C_DEF = "#25D0C0";
 
 /* ---- THE LEDGER -----------------------------------------------------------
    ⛔ Everything the frame is allowed to assert. Checked 2026-09-01.
@@ -161,39 +183,39 @@ export const PRIOR_BANNED = ["GAUNTLET", "BOSS", "REJECT", "PASS", "PERFECT",
 export const PLACES: Record<string, Place> = {
   /** S0 — the witness box. The clerestory shaft is the key. */
   box: {
-    back: "#93805C", back2: "#2A1D10", floor: "#A79B82", floor2: "#776D5B",
-    lip: "#C9B994", key: BRS, horizon: 486, grit: "#6B6252",
+    back: "#5AA2B2", back2: "#173C46", floor: "#C0A578", floor2: "#8A7250",
+    lip: "#FFDCA0", key: BRS, horizon: 486, grit: "#5E4E36",
   },
   /** S1 · S5 · S9 · S13 · S16 — the chamber. The one room used four times, so
       it carries the differentiation burden: see the board's table. */
   well: {
-    back: "#6B593A", back2: "#160E07", floor: "#726852", floor2: "#40392D",
-    lip: "#9A8A66", key: BRS, horizon: 470, grit: "#3F392D",
+    back: "#245C68", back2: "#071518", floor: "#7E6140", floor2: "#463521",
+    lip: "#E8BE80", key: BRS, horizon: 470, grit: "#33281A",
   },
   /** S12 — up at the bench. A higher horizon, because we are looking UP. */
   bench: {
-    back: "#615032", back2: "#120C06", floor: "#6F6550", floor2: "#3D372B",
-    lip: "#978763", key: C_JUDGE, horizon: 548, grit: "#3D362B",
+    back: "#1E5460", back2: "#061214", floor: "#6E5638", floor2: "#3C2E1E",
+    lip: "#D9B075", key: C_JUDGE, horizon: 548, grit: "#2C2216",
   },
   /** S10 — the prosecution side, keyed hard from the left */
   pros: {
-    back: "#68472C", back2: "#140B06", floor: "#756851", floor2: "#41392D",
-    lip: "#9D8764", key: C_PROS, horizon: 458, grit: "#41382C",
+    back: "#5A2A28", back2: "#170808", floor: "#7A4A32", floor2: "#42281B",
+    lip: "#E09A6A", key: C_PROS, horizon: 458, grit: "#33200F",
   },
   /** S11 — the defense side, the MIRROR: keyed from the right, cooler */
   def: {
-    back: "#3C5C53", back2: "#08110F", floor: "#626D64", floor2: "#353D37",
-    lip: "#839186", key: C_DEF, horizon: 458, grit: "#343C38",
+    back: "#12595C", back2: "#041618", floor: "#4E7068", floor2: "#25352F",
+    lip: "#8FD4C4", key: C_DEF, horizon: 458, grit: "#1B2B26",
   },
   /** S2 · S8 · S14 — the clerk's counter, warm and low */
   counter: {
-    back: "#765D2F", back2: "#170F06", floor: "#7C6E4F", floor2: "#463D2B",
-    lip: "#A8925E", key: GOLD, horizon: 476, grit: "#463D2B",
+    back: "#2A5E52", back2: "#081814", floor: "#8A6A40", floor2: "#4A3A22",
+    lip: "#F0C87E", key: GOLD, horizon: 476, grit: "#352A18",
   },
   /** S3 · S7 — the back doors, with daylight beyond */
   doors: {
-    back: "#625234", back2: "#110D07", floor: "#7B6E54", floor2: "#453C2D",
-    lip: "#A59166", key: "#F0DCA8", horizon: 466, grit: "#443D2B",
+    back: "#26606C", back2: "#071618", floor: "#846A44", floor2: "#4A3A24",
+    lip: "#F4D08E", key: "#F0DCA8", horizon: 466, grit: "#37291A",
   },
   /** S6 — the interview room. Deliberately the smallest, dimmest place here. */
   cell: {
@@ -202,13 +224,13 @@ export const PLACES: Record<string, Place> = {
   },
   /** S15 — the plain workbench behind the well. No brass at all. */
   bench2: {
-    back: "#505C57", back2: "#0D100F", floor: "#6A716C", floor2: "#3A3F3C",
-    lip: "#8E9590", key: "#CFD6CE", horizon: 452, grit: "#393E3C",
+    back: "#2A4E5E", back2: "#081418", floor: "#5E6A70", floor2: "#30383C",
+    lip: "#A8BCC4", key: "#CFD6CE", horizon: 452, grit: "#2A3236",
   },
   /** S17 — outside, on the steps. The reel's highest luma. */
   steps: {
-    back: "#66747F", back2: "#1E262C", floor: "#635B4D", floor2: "#1D1B10",
-    lip: "#918771", key: "#FFF3D2", horizon: 430, grit: "#3B372D",
+    back: "#3E86A8", back2: "#164256", floor: "#A08662", floor2: "#5E4C34",
+    lip: "#EFD8A6", key: "#FFF3D2", horizon: 430, grit: "#6A563A",
   },
 };
 export const asPlace = (k: keyof typeof PLACES): Place => PLACES[k];
@@ -254,6 +276,11 @@ export const Chamber: React.FC<{
       hook passes `dim={0}` and the body rooms pass 0.3-0.5, which takes the
       plaster and the glass down WITHOUT touching the lit areas or the shading. */
   dim?: number;
+  /** the frame-edge occluder's width. ⭐ It is 18% of the panel and near-black,
+      so on a frame that has to clear the >=140 law it is the single largest dark
+      mass in the picture. The hook narrows it; the body keeps it wide, because
+      the body wants the black point DOWN. */
+  occW?: number;
   /** the wainscot's panel pitch — ⭐ THE PER-CUT dHASH LEVER. It has to be the
       PITCH, not the phase: a different phase inside the same pitch lands in the
       same cells of an 8x8 hash and collapses to nothing (130 measured MIN 5/64
@@ -266,7 +293,7 @@ export const Chamber: React.FC<{
   dais?: boolean;
 }> = ({ p, f, z = 4, lit = 1, occ = "l", bays = 5, shaft = 300, shaftO = 0.30,
         panelN = 9, rail = true, horizonDy = 0, dais = false, rakeRate = 1.7,
-        dim = 0, rakeN }) => {
+        dim = 0, rakeN, occW = 182 }) => {
   const hz = p.horizon + horizonDy;
   const wainTop = Math.round(hz * 0.46);
   const D = (h: string) => (dim > 0 ? dkh(h, dim) : h);
@@ -288,8 +315,8 @@ export const Chamber: React.FC<{
         const bx = Math.round(bw * 0.42 + i * bw * 1.06);
         return (
           <React.Fragment key={"by" + i}>
-            <div style={{ position: "absolute", left: bx, top: 34, width: bw * 0.60,
-              height: wainTop - 74, zIndex: z + 1, background: `linear-gradient(178deg, ${D("#FBF3DC")} 0%, ${D("#EBDCB2")} 74%, ${D("#D8C79A")} 100%)`,
+            <div style={{ position: "absolute", left: bx, top: 30, width: bw * 0.72,
+              height: wainTop - 62, zIndex: z + 1, background: `linear-gradient(178deg, ${D("#FFFCF0")} 0%, ${D("#F7EBC8")} 74%, ${D("#E8D9AC")} 100%)`,
               border: `7px solid ${dkh(PLASTERD, 0.24)}` }} />
             {/* the mullion — without it a window is a lit rectangle */}
             <div style={{ position: "absolute", left: bx + bw * 0.30 - 3, top: 34, width: 6,
@@ -374,12 +401,12 @@ export const Chamber: React.FC<{
       {/* THE OCCLUDER — the mass cropped by the frame edge, IN FRONT. Ten reels
           shipped without one and read as dioramas. */}
       {(occ === "l" || occ === "both") && (
-        <div style={{ position: "absolute", left: -78, top: -40, width: 182, bottom: -30,
+        <div style={{ position: "absolute", left: -78, top: -40, width: occW, bottom: -30,
           zIndex: 88, background: `linear-gradient(96deg, #07050300 0%, ${dkh(p.back, 0.80)} 8%, ${dkh(p.back, 0.86)} 74%, ${hexa("#000", 0.80)} 100%)`,
           borderRight: `5px solid ${hexa("#000", 0.62)}` }} />
       )}
       {(occ === "r" || occ === "both") && (
-        <div style={{ position: "absolute", right: -78, top: -40, width: 182, bottom: -30,
+        <div style={{ position: "absolute", right: -78, top: -40, width: occW, bottom: -30,
           zIndex: 88, background: `linear-gradient(264deg, #07050300 0%, ${dkh(p.back, 0.80)} 8%, ${dkh(p.back, 0.86)} 74%, ${hexa("#000", 0.80)} 100%)`,
           borderLeft: `5px solid ${hexa("#000", 0.62)}` }} />
       )}

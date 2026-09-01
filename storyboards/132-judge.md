@@ -430,3 +430,55 @@ biggest rise, and the peak (10) beats the hook (8).
 ## Related
 [`docs/ANIMATION-QUALITY.md`](../docs/ANIMATION-QUALITY.md) §31 (the hook) · §9 (density) ·
 [`docs/THE-OPEN.md`](../docs/THE-OPEN.md) · [`118-loop.md`](118-loop.md) · [`128-boss.md`](128-boss.md)
+
+---
+
+## ⛔⛔⛔ v1 WAS REJECTED ON THE CONCEPT, WITH EVERY GATE GREEN
+
+Alex: *"the animation concept is wayyy too boring, like it's literally just the papers concept,
+it needs to be so much more interesting, vibrant."*
+
+v1 measured motion median **11.37 with 0/18 scenes under bar**, precut 2/18, the look gate
+holding, verify_reel 8/8, dHash 23.6 / MIN 13, and the delivered mp4 re-transcribing at 0.994.
+None of that can see that a reel is made of stationery.
+
+**What it actually was:** a paper exhibit board on an easel · paper leaves tearing off it ·
+paper charge cards stacking · a 780px paper docket filling a whole scene · and a clerk carrying
+a stack of FILES pasted into eight scenes to satisfy the motion and scene-open gates.
+[[feedback_the_metric_makes_paper]] predicts this exactly and it has now happened three times
+(107, 120, 132). ⭐ The tell was free: `grep "HERO ARTIFACT" storyboards/1[12]*.md` returns a
+cream CARD, SHEET, BOARD, PLATE or FILE for **eight of the last twelve reels.**
+
+## ⭐⭐ THE RE-MAP — one question generates the whole vocabulary
+
+> **"What did somebody BUILD?"** — not "what represents the idea?"
+
+Nobody's app is a document. So the hero artifact is **THE TOWER**: six saturated courses a crew
+stacks, and every beat becomes physical.
+
+| the VO line | v1 (paper) | ⭐ v2 (the actor) |
+|---|---|---|
+| the work | an exhibit board of paper leaves | **a stack of six saturated courses** |
+| "lying to your face" | leaves tear off a board | **courses knocked out; it stands on nothing and goes over** |
+| "73% more accurate" | leaves flying back in | **the crew RE-STACKS it — one course left out** |
+| "one minute to set up" | a sheet slid across a counter | **a console, its slots filling** |
+| "ship apps, websites, tools" | three cream slabs | **three different BUILDS of the same blocks** |
+| "the third line of the prompt" | a docket under a desk lamp | **three slots; the third takes three role KEYS** |
+| "builds a case for everything wrong" | stacking paper charge cards | **THE PROSECUTOR KNOCKS COURSES OUT** |
+| "the defense argues back" | sweeping cards off a table | **SHE RAMS THEM BACK IN** — the opposite motion, which is the point |
+| "rules on the evidence" | a gavel and read-ticks | **the judge drops a WEIGHT on it** |
+| "until the work is bulletproof" | leaves seating | **three rebuild passes, then the weight lands and it HOLDS** |
+| the gate-filler | a clerk carrying files | **a Claude carrying a COURSE** |
+
+## AND THE ROOM WENT WITH THEM
+An oak-and-parchment courthouse is **BEIGE BY CONSTRUCTION**. v2 is a deep saturated teal
+chamber under hot gold light, with the six block hues as the reel's chroma. "Vibrant" is not a
+grade or a filter — it is colour in the OBJECTS.
+
+## v2 NUMBERS (35.26s, 1056f, x1.00)
+motion median **9.72 · 0/18 under bar** · precut 1/18 · **BODY_SAT 37.8% → 63.5%** (AGENCY, the
+only reel that ever passed the pale-drift study, is 57.9) · BODY_BLACK p10 12.5 · HOOK_LUMA
+143.8 · frame 0 of all three cuts over the 140 law (143.8 / 148.5 / 143.1) · sfx clean at 1.48
+cues/sec · verify_reel 8/8 · dHash **22.6 / MIN 11** · delivered mp4 re-transcribed **0.994**.
+⚠️ Still flagged: 3 of 18 scenes open under the dead line (S0 the hook, S7, S15); R1 pacing
+fails at x1.00 (4.95 wps); 35.26s against a 22-29s range; and it is 118's script a third time.

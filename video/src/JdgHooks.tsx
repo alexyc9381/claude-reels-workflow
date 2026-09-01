@@ -9,7 +9,7 @@ import {
   FACE, FACED, VOID, C_JUDGE, C_PROS, C_DEF, R,
   settle, antic, load, stroke, STEP,
 } from "./JdgWorld";
-import { Exhibit, EaselOnly, Plinth, Nameplate } from "./JdgProps";
+import { Tower, BlockLine, Plinth, Nameplate } from "./JdgProps";
 
 /* ===========================================================================
    REEL 132 · "JUDGE" — THE HOOK, THREE CONCEPTS.
@@ -195,136 +195,105 @@ const OathHand: React.FC<{ x: number; y: number; size: number; down: number; z?:
 };
 
 /* =========================================================================
-   A · THE OATH — a Claude swears his work is finished while the work comes
-   apart on its easel beside him, and he does not look at it until the last beat.
+   A · THE OATH — a Claude swears the thing he built is finished, and it comes
+   down beside him while he does. He never looks at it.
 
-   ⛔⛔ THE WITNESS BOX CAME OUT OF THIS SHOT AND THAT WAS TWO FIXES AT ONCE.
-   It was a 452x250 slab of dark oak across the bottom third: it cropped the hero
-   to a shapeless mass (he read as a salmon blob, not a character) AND it was
-   most of the luma deficit the band scan kept flagging in bands 8-11, because
-   the thing sitting on the lit stone floor was a near-black rectangle.
-   ⭐ Standing him on the floor in full body fixed the silhouette and the gate
-   together — which is THE-OPEN's *"a gate carried by the wrong object deforms
-   that object"* read from the other end.
+   ⛔⛔⛔ REBUILT AFTER REJECTION ON THE CONCEPT. v1 was a paper exhibit board on
+   an easel shedding paper leaves, and Alex: *"the animation concept is wayyy too
+   boring, like it's literally just the papers concept."* Every gate was green —
+   motion 10.66 median, HOLD 8%, PRE-CUT 1.30, LUMA 147.9. The gates cannot see
+   that a reel is made of stationery. [[feedback_the_metric_makes_paper]]
+   ⭐ THE RE-MAP: nobody's work is a DOCUMENT. It is a THING THEY BUILT. So the
+   hook is a Claude and a TOWER he stacked, in six saturated colours, and the
+   beats stop being pages coming loose and start being COURSES KNOCKED OUT of a
+   structure that then can't hold itself up.
 
-   ⭐ ANTICIPATION TO THE DEFINITION IN [[feedback_a_wobble_is_not_a_clock]]:
-   a PREDICTABLE THREAT (the face is coming off), a VISIBLE COUNTDOWN (leaf 1,
-   then leaf 2, then the rest) and a DENIED PAYOFF until the word "lying".
+   Same clock — every beat is a word at `onset − 4`:
+     f0  (settled)   he stands beside his tower, all six courses LIT
+     f2  "new"       his hand SLAMS UP for the oath
+     f7  "prompting" he KNOCKS the stack to show it is solid   <- the trigger
+     f15 "technique" a course drops OUT of the middle; the stack sags
+     f26 "stops"     two more go, and the lights start dying
+     f32 "Claude"    it leans hard, still standing on nothing
+     f44 "lying"     ⭐ the whole top half comes down
+     f66 "face"      he is still swearing, to a stump
    ========================================================================= */
 export const HookOath: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("box");
 
-  /* ⭐ ONE CAUSE: the oath. Everything below is a function of it. */
-  const RAISE = 2;                                   /* "new"      onset 0.20s - 4f */
-  const approach = E(f, 0, 9, -84, 0, IN_Q);         /* he walks the last step in */
-  const armDown = 1 - E(f, RAISE, RAISE + 5, 0, 1, BACK)      /* it SLAMS up */
+  const armDown = 1 - E(f, 2, 7, 0, 1, BACK)
                 + stroke(f, B.TRIG, 1, 4) - stroke(f, B.TRIG + 9, 1, 10);
-  /* he plants himself as the hand goes up — a 416px body moving is worth far
-     more repaint than a 54px hand, and it is the same intention */
-  const plant = E(f, RAISE, RAISE + 6, 0, 1, BACK) - E(f, B.TRIG, B.TRIG + 5, 0, 1, OUT);
+  const approach = E(f, 0, 9, -84, 0, IN_Q);
+  const plant = E(f, 2, 8, 0, 1, BACK) - E(f, B.TRIG, B.TRIG + 5, 0, 1, OUT);
   const jolt = f >= B.TRIG ? settle(f, B.TRIG, 1, 15, 2.4) : 0;
 
-  const HX = 690, HY = 588;            /* the board, on its easel */
-  const SX = 218, SFEET = 670;         /* the hero, feet inside the 672 band */
-  const SIZE = 416;
+  const HX = 720, HY = 760;            /* the tower, standing on the floor */
+  const SX = 196, SFEET = 678, SIZE = 384;
 
-  /* ⭐ THE LAST BEAT IS A TOPPLE, AND IT IS STILL ACCELERATING AT f76.
-     PRE-CUT measured 0.49 against a 0.70 "dies" line for three builds running,
-     because the chain finished at f66 and the frame then held. §23: an OUT/IO
-     ease decelerates into its end whether or not that end is on screen, so
-     extending one past the cut fixes nothing — the motion has to still be
-     accelerating when the cut lands. `IN_Q` over a window that ENDS at f104,
-     sampled at f76, is barely a third of the way in and gaining.
-     ⭐ It also gives the shot a better last image than "he holds still": he is
-     still swearing while the whole thing goes over. */
-  const tip = E(f, B.E3, B.E3 + 16, 0, -2.6, OUT)
-            + E(f, B.PAY, B.PAY + 18, 0, -5.0, IN_Q)
-            + E(f, B.AFT + 2, 88, 0, -84, IN_Q);
-  const slide = E(f, B.AFT + 2, 88, 0, 330, IN_Q);
+  /* it LEANS as it loses courses, and the lean is still opening at f76 (§23) */
+  const lean = E(f, B.E1, B.E1 + 14, 0, 2.6, OUT)
+             + E(f, B.E2, B.E2 + 14, 0, 5.0, OUT)
+             + E(f, B.PAY, 88, 0, 84, IN_Q);
+  const slide = E(f, B.PAY + 4, 92, 0, 300, IN_Q);
   const gaze = E(f, B.LAST, B.LAST + 7, 0, -1, OUT);
   const shock = E(f, B.E2, B.E2 + 6, 0, 0.35, OUT) + E(f, B.PAY, B.PAY + 5, 0, 0.55, OUT);
 
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.20)}>
-      <Chamber p={p} f={f} lit={1} occ="l" bays={4} shaft={300} shaftO={0.36} rakeRate={RK[v].rate} rakeN={RK[v].n}
-        panelN={8} rail horizonDy={-16} />
+    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
+      <Chamber p={p} f={f} lit={1} occ="l" bays={4} shaft={300} shaftO={0.34}
+        rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={8} rail horizonDy={-16} occW={112} />
+      {/* ⭐ THE BAND IS THE MATERIAL THE REEL IS ABOUT. Removing the paper removed
+          the reel's only full-width travelling element; a conveyor of the same
+          blocks the tower is built from puts it back in the right substance. */}
+      <BlockLine f={f} y={286} z={30} rate={RK[v].rate * 1.5} n={6} s={1.55} />
       <ShaftDust f={f} x={330} w={520} z={22} />
-      <Pool x={330} y={556} w={980} c="#FFF9EC" o={0.60} z={12} />
-      <Pool x={720} y={700} w={880} c="#FFF9EC" o={0.42} z={12} />
-      <Pool x={506} y={430} w={1000} c="#FFF3D6" o={0.20} z={11} />
+      <Pool x={330} y={548} w={1010} c="#FFFCF2" o={0.72} z={12} />
+      <Pool x={700} y={702} w={1010} c="#FFFCF2" o={0.68} z={12} />
+      <Pool x={506} y={382} w={1010} c="#EAF6FA" o={0.20} z={11} />
 
-      {/* ── THE BOARD. 500px = 49% of the panel, air on both sides, well under
-             THE-OPEN's 85% line, and it is the LIGHT side of the contrast. ── */}
+      {/* ── THE TOWER. 300px wide against a 1012px panel, air on both sides, and
+             it is the saturated side of the contrast on a deep teal chamber. ── */}
+      <Contact x={HX - 176} y={HY - 10} w={352} z={44} o={0.48} />
       <div style={{ position: "absolute", inset: 0, zIndex: 60,
-        transform: `translate(${jolt * 5.5}px, ${slide + jolt * 9}px) rotate(${jolt * 1.4}deg)`,
-        transformOrigin: "66% 100%" }}>
-        <Exhibit x={HX} y={HY} f={f} w={500} z={60}
-          leaves={[0, 1, 2]}
-          out={{ 1: B.E1, 0: B.E2 }}
-          lamp={f < B.E2 ? (f >= B.TRIG && f < B.TRIG + 3 ? 0 : 1) : 0} tip={tip} fall={B.PAY} easel={false} />
+        transform: `translateX(${slide}px)` }}>
+      <Tower x={HX} y={HY} f={f} w={330} z={60}
+        blocks={[0, 1, 2, 3, 4, 5]}
+        out={{ 3: B.E1, 1: B.E2 }}
+        lit={f < B.E2 ? 1 : 0} lean={lean} fall={B.PAY} />
       </div>
-      {/* the easel is left STANDING and EMPTY when the board goes off it —
-          the shot's last image, and the reel's thesis in one prop */}
-      <EaselOnly x={HX} y={HY} w={500} z={44} />
 
-      {/* the board's pinned notes, shaken off by the same jolt and STILL FALLING
-          at the cut — one of the two things that fixes the PRE-CUT ratio */}
-      {[0, 1, 2, 3, 4].map(i => {
-        const go = B.E2 + i * 6;
-        const lf = f - go;
-        if (lf < 0) return null;
-        const dy = lf * lf * 0.62, dx = (rnd(i, 12) - 0.5) * lf * 5;
-        if (dy > 520) return null;
-        return (
-          <div key={"tg" + i} style={{ position: "absolute", left: HX - 200 + i * 92 + dx,
-            top: HY - 300 + dy, width: 66, height: 44, zIndex: 63, borderRadius: 2,
-            opacity: Math.max(0, 1 - dy / 470), transform: `rotate(${lf * 6}deg)`,
-            background: FACE, border: `2px solid ${dkh(FACED, 0.3)}` }} />
-        );
-      })}
-      {f >= B.PAY && <Puff x={HX} y={HY - 20} f={f} at={B.PAY} n={14} s={1.8} c="#CFC4AE" z={66} />}
-      {f >= B.PAY && <Ring x={HX} y={HY - 180} f={f} at={B.PAY} c={FACE} z={67} s={1.6} dur={26} />}
-      {f >= B.E2 && <Puff x={HX} y={HY - 200} f={f} at={B.E2} n={9} s={1.2} c="#CFC4AE" z={66} />}
+      {f >= B.E1 && <Puff x={HX} y={HY - 210} f={f} at={B.E1} n={9} s={1.2} c="#CFC4AE" z={66} />}
+      {f >= B.E2 && <Puff x={HX} y={HY - 260} f={f} at={B.E2} n={11} s={1.4} c="#CFC4AE" z={66} />}
+      {f >= B.PAY && <Puff x={HX} y={HY - 40} f={f} at={B.PAY} n={16} s={1.9} c="#CFC4AE" z={66} />}
+      {f >= B.PAY && <Ring x={HX} y={HY - 120} f={f} at={B.PAY} c={BRSL} z={67} s={1.7} dur={28} />}
 
-      {/* ── THE HERO, FULL BODY ON THE FLOOR. ── */}
-      <Contact x={SX - 122 + approach} y={SFEET - 8} w={244} z={46} o={0.42} />
+      {/* ── THE HERO, FULL BODY ON THE FLOOR ── */}
+      <Contact x={SX - 122 + approach} y={SFEET - 8} w={244} z={46} o={0.44} />
       <Hero f={f} x={SX + approach} y={SFEET} size={SIZE} z={48} costume={{}} tint={CLAY}
         gaze={gaze} shock={Math.min(1, shock)} strain={plant * 0.34}
         lift={plant * 16} act={3} ph={0.6} />
       <OathHand x={SX + approach} y={SFEET} size={SIZE} down={armDown} z={64} />
-      {/* the swearing hand, resting ON the work */}
+      {/* the other hand rests ON the thing he is swearing about — and it is still
+          there, on nothing, once the stack has gone */}
       <div style={{ position: "absolute", zIndex: 64,
-        left: HX - 262, top: 496 + jolt * 9 + slide,
+        left: HX - 236, top: 486 + jolt * 9,
         width: SIZE * 0.21, height: SIZE * 0.155, borderRadius: 5,
         background: dkh(CLAY, 0.06),
         transform: `rotate(${-7 + jolt * 5}deg)` }} />
       {f >= B.TRIG && f < B.TRIG + 18 &&
-        <Ring x={SX + approach + SIZE * 0.40} y={SFEET - SIZE * 0.52} f={f} at={B.TRIG} c={BRSL} z={70}
-          s={0.7} dur={17} />}
+        <Ring x={HX - 172} y={508} f={f} at={B.TRIG} c={BRSL} z={70} s={0.7} dur={17} />}
 
-      {/* ⭐ THE GALLERY — three bodies behind the rail, each on its own action
-          loop and its own phase, so the top of the frame is never still. They
-          are 150px against a 416px hero and sit in shadow, so they read as the
-          room rather than competing with the subject
-          ([[feedback_a_dense_room_is_not_a_system]] — count the things
-          mistakable for the subject, and keep that count at one). */}
+      {/* the gallery, behind the rail, on their own loops */}
       <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 452,
         overflow: "hidden", zIndex: 26 }}>
         {[336, 566, 828].map((gx, i) => (
-          <Crew key={"gl" + i} f={f} x={gx} y={556} i={i + 3} size={150} z={26}
+          <Crew key={"gl" + i} f={f} x={gx} y={556} i={i + 3} size={206} z={26}
             at={-14} loop={[3, 0, 3][i]} tint={dkh(CLAY, 0.34)}
             cheer={f >= B.PAY ? 0.6 : f >= B.E2 ? 0.25 : 0} />
         ))}
       </div>
 
-      {/* ⛔ THE ROOM JOLT USED TO LIVE ON AN EMPTY <div> HERE AND MOVED NOTHING.
-          The strike's visible consequences are now: the board lurches on its
-          easel, the pinned notes shake loose, dust comes off the crossbar and
-          the seal flickers — one cause, four effects (§31.3). */}
-      {f >= B.TRIG && f < B.TRIG + 20 &&
-        <Puff x={HX} y={HY + 10} f={f} at={B.TRIG} n={7} s={1.0} c="#CFC4AE" z={58} />}
-
       <Motes x={506} y={330} w={880} h={420} n={14} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
       <Mark x={58} y={152} s={84} z={92} />
     </Scene>
@@ -332,109 +301,41 @@ export const HookOath: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
 };
 
 /* =========================================================================
-   B · THE STACK — he keeps stacking claim-plates on the rail in front of him and
-   the rail BOWS further with every one. On "lying" it snaps and the stack goes
-   through it.
-
-   ⭐ THE PUREST ANTICIPATION SHAPE OF THE THREE, and the reason is
-   [[feedback_anticipation_is_a_changing_state]]: a load past its angle HELD
-   STILL opened dead at 3.23. Here the load keeps ARRIVING, and the next plate is
-   already in the air before the last one lands — a second thing travelling
-   toward the moment is what makes a shot anticipatory rather than merely tense.
+   B · THE STACK — he keeps ADDING courses and claiming each one, and the stack
+   goes past the angle it can hold. The load keeps ARRIVING, which is what makes
+   a shot anticipatory rather than merely precarious
+   ([[feedback_anticipation_is_a_changing_state]]).
    ========================================================================= */
 export const HookStack: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("box");
-  const LAND = [-8, B.TRIG, B.E1, B.E2, B.E3];   /* plate 0 is already down at f0 */
-  const RX = 548, RY = 468;
-
+  const LAND = [-8, B.TRIG, B.E1, B.E2, B.E3];
+  const RX = 560, RY = 700;
   const down = LAND.filter(a => f >= a).length;
-  const bowT = LAND.reduce((s, a, i) => s + (f >= a ? 1 : 0) * (5 + i * 3.4), 0);
   const snapped = f >= B.PAY;
-  const bow = snapped ? 0 : bowT + (f >= LAND[down - 1] ? settle(f, LAND[down - 1], 5, 10, 2.2) : 0);
-  const creak = !snapped && down >= 3 ? Math.sin(f * 0.9) * (down - 2) * 0.9 : 0;
-
+  const lean = LAND.reduce((a, at, i) => a + (f >= at ? E(f, at, at + 10, 0, 1.5 + i * 0.7, OUT) : 0), 0)
+             + (snapped ? E(f, B.PAY, 96, 0, 26, IN_Q) : 0);
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.20)}>
-      <Chamber p={p} f={f} lit={1} occ="r" bays={4} shaft={640} shaftO={0.36} rakeRate={RK[v].rate} rakeN={RK[v].n}
-        panelN={7} rail horizonDy={-16} />
+    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
+      <Chamber p={p} f={f} lit={1} occ="r" bays={4} shaft={640} shaftO={0.34}
+        rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail horizonDy={-16} />
+      <BlockLine f={f} y={286} z={30} rate={RK[v].rate * 1.5} n={6} s={1.55} />
       <ShaftDust f={f} x={680} w={520} z={22} />
-      <Pool x={660} y={556} w={900} c="#FFF6E2" o={0.46} z={12} />
-      <Pool x={300} y={706} w={760} c="#FFF6E2" o={0.28} z={12} />
-
-      {/* the stand the plates are piling onto — a lectern top, not a whole box,
-          so it does not eat the lit floor the way the witness box did */}
-      <div style={{ position: "absolute", left: RX - 190, top: RY + 8, width: 380, height: 250,
-        zIndex: 46, background: `linear-gradient(174deg, ${OAKL} 0%, ${dkh(OAK, 0.4)} 100%)`,
-        boxShadow: SH_D }} />
-      <Contact x={RX - 210} y={RY + 250} w={420} z={45} o={0.44} />
-
-      {/* THE RAIL — it BOWS. ⭐ WEIGHT IS COMMUNICATED BY DEFORMATION, not by
-          size or colour: the rail is the only thing here that reports the load,
-          and it reports it by bending. */}
-      {!snapped && (
-        <div style={{ position: "absolute", left: RX - 320, top: RY - 20, width: 640, height: 30,
-          zIndex: 64, transform: `translateY(${bow * 0.9 + creak}px)`,
-          clipPath: `path("M0,14 Q320,${14 + bow * 2.0} 640,14 L640,30 Q320,${30 + bow * 2.0} 0,30 Z")`,
-          background: `linear-gradient(180deg, ${BRSL} 0%, ${BRS} 42%, ${BRSD} 100%)` }} />
-      )}
-      {snapped && [-1, 1].map(sd => {
-        const lf = f - B.PAY;
-        return (
-          <div key={"rh" + sd} style={{ position: "absolute",
-            left: RX + sd * (320 + lf * 10) - (sd < 0 ? 0 : 320), top: RY - 20 + lf * lf * 1.0,
-            width: 320, height: 30, zIndex: 64,
-            transform: `rotate(${sd * lf * 3.2}deg)`,
-            background: `linear-gradient(180deg, ${BRSL} 0%, ${BRSD} 100%)` }} />
-        );
-      })}
-
-      {/* THE PLATES — each is a CLAIM Claude is making about the work. */}
-      {LAND.map((at, i) => {
-        if (f < at - 12) return null;
-        const lf = f - at;
-        const drop = E(lf, -12, 0, -460, 0, IN_Q);
-        const set = lf >= 0 ? settle(lf, 0, 6, 11, 2.3) : 0;
-        const fall = snapped ? (f - B.PAY) : 0;
-        const fy = snapped ? fall * fall * 1.15 : 0;
-        const fx = snapped ? (rnd(i, 21) - 0.5) * fall * 8 : 0;
-        if (fy > 560) return null;
-        return (
-          <div key={"pl" + i} style={{ position: "absolute",
-            left: RX - 168 + fx + (rnd(i, 22) - 0.5) * 24,
-            top: RY - 44 - i * 38 + drop + set + bow * 0.9 + fy,
-            width: 336, height: 38, zIndex: 66 + i, borderRadius: 3,
-            transform: `rotate(${snapped ? fall * (i % 2 ? 5 : -4) : (rnd(i, 23) - 0.5) * 2.2}deg)`,
-            opacity: snapped ? Math.max(0, 1 - fy / 500) : 1,
-            background: `linear-gradient(178deg, ${BRSL} 0%, ${BRS} 44%, ${BRSD} 100%)`,
-            border: `3px solid ${dkh(BRSD, 0.42)}`, boxShadow: SH,
-            display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ ...mono(17, 900), color: "#2A2116", letterSpacing: 3 }}>
-              {["ALL TESTS PASS", "NO ERRORS", "FULLY WIRED", "SHIP READY", "DONE"][i]}
-            </span>
-          </div>
-        );
-      })}
-
-      {/* the NEXT plate, already in the air — `LIN`, so it is still moving when
-          the rail goes */}
-      {!snapped && f >= B.E3 - 12 && (
-        <div style={{ position: "absolute", left: RX - 168,
-          top: RY - 44 - 5 * 38 + E(f, B.E3 - 12, B.PAY, -340, -40, LIN),
-          width: 336, height: 38, zIndex: 72, borderRadius: 3, opacity: 0.95,
-          background: `linear-gradient(178deg, ${BRSL} 0%, ${BRSD} 100%)`,
-          border: `3px solid ${dkh(BRSD, 0.42)}` }} />
-      )}
-
-      {snapped && <Puff x={RX} y={RY + 110} f={f} at={B.PAY} n={15} s={1.8} c="#CFC4AE" z={74} />}
-      {snapped && <Ring x={RX} y={RY} f={f} at={B.PAY} c={BRSL} z={75} s={1.6} dur={26} />}
-
-      <Contact x={RX - 110} y={664} w={220} z={44} o={0.42} />
-      <Hero f={f} x={RX} y={672} size={372} z={48} costume={{}} tint={CLAY}
+      <Pool x={660} y={556} w={900} c="#FFF9EC" o={0.50} z={12} />
+      <Contact x={RX - 180} y={RY - 10} w={360} z={44} o={0.46} />
+      <Tower x={RX} y={RY} f={f} w={318} z={60}
+        blocks={[0, 1]} seat={{ 2: LAND[1], 3: LAND[2], 4: LAND[3], 5: LAND[4] }}
+        lit={snapped ? 0 : 1} lean={lean} fall={snapped ? B.PAY : -1} />
+      {LAND.slice(1).map((at, i) => (
+        f >= at ? <Puff key={"p" + i} x={RX} y={RY - 150 - i * 60} f={f} at={at} n={8} s={1.1}
+          c="#CFC4AE" z={66} /> : null
+      ))}
+      {snapped && <Ring x={RX} y={RY - 120} f={f} at={B.PAY} c={BRSL} z={70} s={1.7} dur={28} />}
+      <Contact x={216} y={664} w={220} z={44} o={0.44} />
+      <Hero f={f} x={310} y={672} size={392} z={48} costume={{}} tint={CLAY}
         strain={snapped ? 0 : Math.min(0.8, down * 0.15)}
         shock={E(f, B.PAY, B.PAY + 6, 0, 0.85, OUT)}
         gaze={E(f, B.AFT, B.AFT + 8, 0, 0.7, OUT)} act={1} ph={0.4} />
-
       <Motes x={506} y={330} w={880} h={420} n={14} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
       <Mark x={58} y={152} s={84} z={92} />
     </Scene>
@@ -442,72 +343,46 @@ export const HookStack: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => 
 };
 
 /* =========================================================================
-   C · THE SEAL — he drives a brass certification seal down onto the board to
-   mark it finished, and it punches straight THROUGH, because there is nothing
-   behind the face. The certification is what breaks it.
-
-   ⭐ AN ACTION IS A DISTANCE, NOT A STATE CHANGE ([[ANIMATION-QUALITY §11]]):
-   the seal travels ~310px with a real coil, and the arrival COSTS something.
+   C · THE PRESS — he drives a certification press down onto the stack to mark it
+   finished, and it goes straight THROUGH, because the middle courses are hollow.
    ========================================================================= */
 export const HookSeal: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("box");
-  const HX = 632, HY = 566;
-
-  /* ⭐ `antic` is the whole shape: COIL back and HOLD (the beat a viewer reads as
-     "he is about to"), DRIVE through IN_Q, and never simply stop. */
+  const HX = 620, HY = 706;
   const swing = antic(f, B.TRIG, B.E2, 0.34);
   const through = E(f, B.E3, B.PAY, 0, 1, IN_Q);
-  const sealY = swing * 300 + through * 230;
-
+  const sealY = swing * 300 + through * 250;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.20)}>
-      <Chamber p={p} f={f} lit={1} occ="both" bays={4} shaft={430} shaftO={0.38} rakeRate={RK[v].rate} rakeN={RK[v].n}
-        panelN={9} rail horizonDy={-16} />
+    <Scene p={p} slug="" push={[0, dur, 1.062]} vig={0.34} glow={hexa(BRS, 0.22)}>
+      <Chamber p={p} f={f} lit={1} occ="both" bays={4} shaft={430} shaftO={0.36}
+        rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail horizonDy={-16} />
+      <BlockLine f={f} y={286} z={30} rate={RK[v].rate * 1.5} n={7} s={1.55} />
       <ShaftDust f={f} x={470} w={560} z={22} />
-      <Pool x={470} y={560} w={940} c="#FFF6E2" o={0.46} z={12} />
-      <Pool x={700} y={710} w={780} c="#FFF6E2" o={0.28} z={12} />
-
-      <Exhibit x={HX} y={HY} f={f} w={504} z={60}
-        leaves={[0, 1, 2]} out={{ 1: B.E3 }}
-        lamp={f < B.E3 ? 1 : 0} fall={B.PAY} />
-
-      {/* THE SEAL — a brass disc on a handle. ⛔ 176px is ~35% of the board's
-          width: a hand prop over ~40% of what it acts on stops reading as itself. */}
+      <Pool x={470} y={560} w={960} c="#FFF9EC" o={0.50} z={12} />
+      <Contact x={HX - 176} y={HY - 10} w={352} z={44} o={0.46} />
+      <Tower x={HX} y={HY} f={f} w={312} z={60}
+        blocks={[0, 1, 2, 3, 4, 5]} out={{ 3: B.E3 }}
+        lit={f < B.E3 ? 1 : 0} fall={B.PAY}
+        lean={E(f, B.E3, B.E3 + 12, 0, 3, OUT) + E(f, B.PAY, 96, 0, 18, IN_Q)} />
       {f < B.PAY + 8 && (
-        <div style={{ position: "absolute", left: HX - 88, top: HY - 470 + sealY,
-          width: 176, height: 176, zIndex: through > 0.3 ? 55 : 76,
-          opacity: through > 0.82 ? Math.max(0, 1 - (through - 0.82) * 5.5) : 1 }}>
-          <div style={{ position: "absolute", left: 66, top: -100, width: 46, height: 114,
-            borderRadius: 8, background: `linear-gradient(96deg, ${OAKL} 0%, ${dkh(OAK, 0.34)} 100%)` }} />
-          <div style={{ position: "absolute", inset: 0, borderRadius: "50%",
-            background: `radial-gradient(50% 50% at 40% 32%, ${BRSL} 0%, ${BRS} 54%, ${BRSD} 100%)`,
-            border: `7px solid ${dkh(BRSD, 0.44)}`, display: "flex", alignItems: "center",
-            justifyContent: "center" }}>
-            <span style={{ ...mono(30, 900), color: "#2A2116", letterSpacing: 2 }}>OK</span>
-          </div>
+        <div style={{ position: "absolute", left: HX - 96, top: HY - 620 + sealY,
+          width: 192, height: 118, zIndex: through > 0.3 ? 55 : 76, borderRadius: 8,
+          opacity: through > 0.82 ? Math.max(0, 1 - (through - 0.82) * 5.5) : 1,
+          background: `linear-gradient(172deg, ${BRSL} 0%, ${BRS} 46%, ${BRSD} 100%)`,
+          border: `7px solid ${dkh(BRSD, 0.44)}`, display: "flex", alignItems: "center",
+          justifyContent: "center", ...mono(30, 900), color: "#2A2116", letterSpacing: 2 }}>
+          OK
         </div>
       )}
-
-      {/* the HOLE the seal made — a real void with a torn lip */}
-      {f >= B.PAY && (
-        <div style={{ position: "absolute", left: HX - 100, top: HY - 300, width: 200, height: 168,
-          zIndex: 62, background: VOID, borderRadius: 6,
-          border: `4px solid ${dkh(FACED, 0.5)}`,
-          transform: `scale(${E(f, B.PAY, B.PAY + 6, 0.2, 1, BACK)})` }} />
-      )}
-
       {f >= B.E3 && <Puff x={HX} y={HY - 250} f={f} at={B.E3} n={13} s={1.5} c="#CFC4AE" z={70} />}
-      {f >= B.PAY && <Ring x={HX} y={HY - 230} f={f} at={B.PAY} c={FACE} z={71} s={1.6} dur={26} />}
-      {f >= B.PAY && <Puff x={HX} y={HY - 30} f={f} at={B.PAY} n={15} s={1.8} c="#CFC4AE" z={70} />}
-
-      <Contact x={248 - 108} y={664} w={216} z={44} o={0.42} />
-      <Hero f={f} x={248} y={672} size={372} z={48} costume={{}} tint={CLAY}
+      {f >= B.PAY && <Ring x={HX} y={HY - 200} f={f} at={B.PAY} c={BRSL} z={71} s={1.7} dur={28} />}
+      <Contact x={158} y={664} w={216} z={44} o={0.44} />
+      <Hero f={f} x={252} y={672} size={392} z={48} costume={{}} tint={CLAY}
         strain={load(f, B.TRIG, B.E2) * 0.9 + (f >= B.E3 && f < B.PAY ? 0.4 : 0)}
         drive={swing * 0.22} reach={70}
         shock={E(f, B.PAY, B.PAY + 6, 0, 0.9, OUT)}
         gaze={E(f, B.LAST, B.LAST + 6, 0, 0.8, OUT)} act={1} ph={0.2} />
-
       <Motes x={506} y={330} w={880} h={420} n={14} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
       <Mark x={58} y={152} s={84} z={92} />
     </Scene>

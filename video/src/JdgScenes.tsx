@@ -4,14 +4,13 @@ import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, rnd, SH, SH_D, dkh, mxh, lerpHex,
   Scene, Cam, Contact, Pool, Ring, Puff, Motes, Beam, Mark, Hero, Crew, costumeFor,
   mono, ui, CLAY, INK, GREEN, RED, GOLD, MUTE,
-  Chamber, asPlace, PLASTER, PLASTERD, OAK, OAKD, OAKL, BRS, BRSD, BRSL,
+  Chamber, asPlace, PLASTER, PLASTERD, OAK, OAKD, OAKL, BRS, BRSD, BRSL, BLOCKS,
   FACE, FACED, VOID, C_JUDGE, C_PROS, C_DEF, R,
   settle, antic, load, stroke, STEP, STEP3, STEP4,
 } from "./JdgWorld";
 import {
-  Exhibit, EaselOnly, Plinth, BenchDesk, Gavel, Block, Nameplate, Docket,
-  CaseStack, Rail10, Counter, Grille, MinuteDial, Sheet, EvidenceCart, Ship,
-  FeeStack, Shelf,
+  Tower, BlockLine, Console, Plinth, BenchDesk, Gavel, Block, Nameplate,
+  Rail10, Counter, Grille, MinuteDial, EvidenceCart, Ship, FeeStack,
 } from "./JdgProps";
 import { RK } from "./JdgHooks";
 import type { Variant } from "./JdgHooks";
@@ -104,14 +103,25 @@ const Cross: React.FC<{ f: number; from: number; to: number; a: number; b: numbe
   return (
     <>
       <Crew f={f} x={x} y={y} i={i} size={size} z={z} at={a} loop={1} flip={flip} />
-      {Array.from({ length: stack }, (_, k) => (
-        <div key={"cs" + k} style={{ position: "absolute",
-          left: x + (flip ? -1 : 1) * size * 0.34 - 66,
-          top: y - size * 0.86 - k * 30 + Math.sin(f / 6 + k) * 3,
-          width: 132, height: 26, zIndex: z + 1, borderRadius: 3,
-          background: `linear-gradient(178deg, #F4EEDC 0%, ${FACED} 100%)`,
-          border: `2px solid ${dkh(FACED, 0.32)}` }} />
-      ))}
+      {/* ⛔ THIS CARRIED A STACK OF PAPER FILES THROUGH EVERY SCENE IN THE REEL —
+          pasted in to fix the motion and scene-open gates, and it is a big part of
+          why the whole thing read as "the papers concept". It carries a COURSE of
+          the tower now: the same material the work is made of, saturated, and it
+          reads as somebody bringing a part to a build. */}
+      {Array.from({ length: Math.max(1, stack - 1) }, (_, k) => {
+        const c = BLOCKS[(i + k) % BLOCKS.length];
+        return (
+          <div key={"cs" + k} style={{ position: "absolute",
+            left: x + (flip ? -1 : 1) * size * 0.30 - 62,
+            top: y - size * 0.92 - k * 52 + Math.sin(f / 6 + k) * 3,
+            width: 124, height: 48, zIndex: z + 1, borderRadius: 5, boxShadow: SH,
+            background: `linear-gradient(172deg, ${mxh(c, 0.28)} 0%, ${c} 46%, ${dkh(c, 0.4)} 100%)`,
+            border: `3px solid ${dkh(c, 0.5)}` }}>
+            <div style={{ position: "absolute", left: 10, right: 10, top: 15, height: 6,
+              borderRadius: 3, background: mxh(c, 0.66) }} />
+          </div>
+        );
+      })}
     </>
   );
 };
@@ -171,10 +181,12 @@ export const S1: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.08]} vig={0.40} glow={hexa(BRS, 0.18)}>
       <Chamber p={p} f={f} lit={1} occ="l" bays={5} shaft={420} shaftO={0.30}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail dim={0.34} />
-      <Pool x={470} y={556} w={900} c="#FFF6E2" o={0.26} z={12} />
-      <EaselOnly x={640} y={584} w={508} z={44} />
-      <Exhibit x={640} y={584} f={f} w={508} z={60} easel={false}
-        leaves={[]} seat={{ 0: S1_SEAT0, 2: S1_SEAT1 }} lamp={0} />
+            <Pool x={470} y={556} w={900} c="#FFF6E2" o={0.26} z={12} />
+      <Contact x={640 - 168} y={700 - 10} w={336} z={44} o={0.46} />
+      <Tower x={640} y={700} f={f} w={344} z={60}
+        blocks={[0, 1]} seat={{ 2: S1_SEAT0, 3: S1_SEAT0 + 12, 5: S1_SEAT1 }} lit={1} />
+      {/* ⭐⭐ COURSE 4 IS NEVER SEATED. The villain's integrity depends on it: the
+          CLAIM is made here and the PROOF is withheld until S13. */}
       {/* ⭐ THE DARK BAY. Leaf 1 is deliberately never seated in this scene. */}
 
       {/* the ten-segment rail — a LENGTH, not a number */}
@@ -228,8 +240,9 @@ export const S2: React.FC<P> = ({ v, dur }) => {
       <MinuteDial x={760} y={330} f={f} a={S2_DIAL_A} b={S2_DIAL_B} s={1.5} z={40} />
       <Pool x={520} y={600} w={820} c="#FFF0CE" o={0.24} z={12} />
       <Counter x={506} y={772} w={840} h={250} z={50} />
-      <Sheet x={470} y={534} f={f} a={0} b={S2_SLIDE} from={-560} w={280} z={68}
-        drop={S2_DROP} />
+      <CutIn f={f} dx={-880} dy={0} at={6} z={62}>
+        <Console x={430} y={548} f={f} w={520} z={62} slots={f >= S2_STAMP ? 3 : 1} />
+      </CutIn>
       {/* the stamp — a discrete stroke with a real arrival */}
       {f >= S2_STAMP - 9 && f < S2_DROP && (() => {
         const lf = f - S2_STAMP;
@@ -271,7 +284,7 @@ export const S3: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.10]} vig={0.36} glow={hexa("#F0DCA8", 0.22)}>
       <Chamber p={p} f={f} lit={1} occ="l" bays={3} shaft={620} shaftO={0.24}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail={false} dim={0.24} />
-      {/* THE OPEN DOORS — daylight blowing in. A hole, full height, square. */}
+            {/* THE OPEN DOORS — daylight blowing in. A hole, full height, square. */}
       <div style={{ position: "absolute", left: 600, top: 150, width: 400, height: 372,
         zIndex: 24, background: `linear-gradient(178deg, #FFFBEE 0%, #F4E4B8 62%, #D8C494 100%)`,
         border: `10px solid ${dkh(OAK, 0.3)}` }} />
@@ -314,7 +327,10 @@ export const S3: React.FC<P> = ({ v, dur }) => {
       <div style={{ position: "absolute", left: 150, top: 168, width: 300, height: 34,
         zIndex: 40, background: `linear-gradient(180deg, ${BRSL} 0%, ${BRSD} 100%)` }} />
       <CutIn f={f} dx={-560} dy={0} at={6} z={68}>
-  <Sheet x={264} y={214} f={f} a={0} b={S3_CHUTE} from={-360} w={190} z={68} lines={3} />
+  <div style={{ position: "absolute", left: 200 + E(f, 0, S3_CHUTE, -380, 0, IN_Q),
+        top: 196, width: 128, height: 54, zIndex: 68, borderRadius: 5, boxShadow: SH,
+        background: `linear-gradient(172deg, ${mxh(BLOCKS[1], 0.28)} 0%, ${BLOCKS[1]} 46%, ${dkh(BLOCKS[1], 0.4)} 100%)`,
+        border: `3px solid ${dkh(BLOCKS[1], 0.5)}` }} />
       </CutIn>
       {f >= S3_CHUTE && <Ring x={264} y={210} f={f} at={S3_CHUTE} c={BRSL} z={70} s={0.7} />}
       {chip("ONE PROMPT IN", 150, BRSL)}
@@ -449,7 +465,7 @@ export const S5: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.42} glow={hexa(BRS, 0.20)}>
       <Chamber p={p} f={f} lit={0.6 + on(S5_LAMP) * 0.4} occ="both" bays={5}
         shaft={506} shaftO={0.30} rakeRate={RK[v].rate * 0.8} rakeN={RK[v].n} panelN={9} rail dais dim={0.34} />
-      <Pool x={506} y={520} w={980} c="#FFF6E2" o={0.18 + on(S5_LAMP) * 0.16} z={12} />
+            <Pool x={506} y={520} w={980} c="#FFF6E2" o={0.18 + on(S5_LAMP) * 0.16} z={12} />
       <CutIn f={f} dx={0} dy={-460} at={5} z={50}>
         <BenchDesk x={506} y={478} w={560} h={180} z={50} lit={on(S5_LAMP)} />
       </CutIn>
@@ -505,7 +521,7 @@ export const S6: React.FC<P> = ({ v, dur }) => {
   const sx = PASS.reduce((acc, at, i) =>
     acc + stroke(f, at, i % 2 ? -300 : 300, Math.max(3, 7 - i)), -150);
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.04]} vig={0.62} glow={hexa("#C9BC9A", 0.10)}>
+    <Scene p={p} slug="" push={[0, dur, 1.04]} vig={0.46} glow={hexa("#C9BC9A", 0.14)}>
       <Chamber p={p} f={f} lit={0.5} occ="both" bays={0} shaft={506} shaftO={0}
         panelN={5} rail={false} horizonDy={30} dim={0.4} />
       {/* ONE hanging lamp, and everything outside its cone is black */}
@@ -514,17 +530,20 @@ export const S6: React.FC<P> = ({ v, dur }) => {
       <div style={{ position: "absolute", left: 446, top: 168, width: 120, height: 52, zIndex: 32,
         borderRadius: "50% 50% 12% 12%",
         background: `linear-gradient(178deg, ${dkh(OAK, 0.2)} 0%, #F6E8C4 84%)` }} />
-      <Beam x={506} y={214} top={90} bot={640} len={430} c="#F6E8C4" o={0.30} z={20} f={f} />
-      <Pool x={506} y={584} w={640} c="#F6E8C4" o={0.34} z={22} />
+      <Beam x={506} y={214} top={90} bot={700} len={470} c="#FFF0CE" o={0.44} z={20} f={f} />
+      <Pool x={506} y={584} w={860} c="#FFF0CE" o={0.50} z={22} />
       {/* the narrow table, with the GROOVE this has worn into it */}
-      <CutIn f={f} dx={0} dy={-400} at={5} z={50}>
+      <CutIn f={f} dx={0} dy={-620} at={6} z={50}>
         <div style={{ position: "absolute", left: 236, top: 578, width: 540, height: 130,
           zIndex: 50, background: `linear-gradient(174deg, ${OAKL} 0%, ${dkh(OAK, 0.5)} 100%)`,
           boxShadow: SH_D }} />
         <div style={{ position: "absolute", left: 266, top: 590, width: 480, height: 9, zIndex: 51,
           borderRadius: 5, background: hexa("#000", 0.42) }} />
       </CutIn>
-      <Sheet x={506 + sx} y={584} f={f} a={-18} b={dur + 34} from={0} w={190} z={68} lines={3} />
+      <div style={{ position: "absolute", left: 506 + sx - 66, top: 548, width: 132, height: 54,
+        zIndex: 68, borderRadius: 5, boxShadow: SH,
+        background: `linear-gradient(172deg, ${mxh(BLOCKS[0], 0.28)} 0%, ${BLOCKS[0]} 46%, ${dkh(BLOCKS[0], 0.4)} 100%)`,
+        border: `3px solid ${dkh(BLOCKS[0], 0.5)}` }} />
       <Contact x={158} y={696} w={200} z={44} o={0.4} />
       <Contact x={676} y={696} w={200} z={44} o={0.4} />
       <Hero f={f} x={258} y={704} size={312} z={52} costume={{}} tint={CLAY}
@@ -560,6 +579,7 @@ export const S7: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.12]} vig={0.40} glow={hexa("#F0DCA8", 0.22)}>
       <Chamber p={p} f={f} lit={0.7 + open * 0.3} occ="both" bays={4} shaft={506}
         shaftO={0.22} rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={8} rail={false} dim={0.26} />
+      <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={7} s={1.5} />
       {/* the corridor light behind the doors — they enter as silhouettes and
           resolve into clay as they cross it */}
       <div style={{ position: "absolute", left: 306, top: 130, width: 400, height: 400,
@@ -610,11 +630,16 @@ export const S7: React.FC<P> = ({ v, dur }) => {
         <div style={{ position: "absolute", left: 96, top: 640, width: 300, height: 110,
           zIndex: 50, background: `linear-gradient(174deg, ${OAKL} 0%, ${dkh(OAK, 0.44)} 100%)` }} />
       </CutIn>
-      <Sheet x={246} y={646} f={f} a={S7_TASK - 8} b={S7_TASK} from={-300} w={200} z={68}
-        lines={3} drop={S7_PICK} />
+      {f < S7_PICK && (
+        <div style={{ position: "absolute", left: 180 + E(f, S7_TASK - 8, S7_TASK, -320, 0, IN_Q),
+          top: 592 + (f >= S7_TASK ? settle(f - S7_TASK, 0, 8, 11, 2.3) : 0),
+          width: 132, height: 54, zIndex: 68, borderRadius: 5, boxShadow: SH,
+          background: `linear-gradient(172deg, ${mxh(BLOCKS[2], 0.28)} 0%, ${BLOCKS[2]} 46%, ${dkh(BLOCKS[2], 0.4)} 100%)`,
+          border: `3px solid ${dkh(BLOCKS[2], 0.5)}` }} />
+      )}
       {/* the same shutter idea on the inside face of the double doors */}
       <div style={{ position: "absolute", left: 226, top: 110,
-        width: 560, height: 520 * Math.max(0, E(f, -10, 14, 1, 0, IN_Q)), zIndex: 36,
+        width: 560, height: 560 * Math.max(0, E(f, -12, 17, 1, 0, IN_Q)), zIndex: 36,
         background: `linear-gradient(180deg, ${dkh(OAK, 0.16)} 0%, ${dkh(OAK, 0.5)} 100%)`,
         borderBottom: `8px solid ${BRSD}` }} />
       {f >= S7_TASK && <Ring x={246} y={640} f={f} at={S7_TASK} c={BRSL} z={70} s={0.7} />}
@@ -677,7 +702,9 @@ export const S8: React.FC<P> = ({ v, dur }) => {
         </>);
       })()}
       <CutIn f={f} dx={-820} dy={0} at={6} z={62}>
-  <Docket x={506} y={462} f={f} w={780} z={62} lines={lines} stamp={S8_STAMP} />
+  <Console x={506} y={470} f={f} w={720} z={62}
+        slots={f >= S8_L3B ? 3 : f >= S8_L3A ? 2 : 1}
+        keys={[S8_L3A, S8_L3A + 5, S8_L3B + 4]} />
       </CutIn>
       {f >= S8_L3A - 10 && [0, 1, 2, 3, 4, 5].map(i => {
         const at = S8_L3A + i * 3;
@@ -743,6 +770,7 @@ export const S9: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.14]} vig={0.44} glow={hexa(BRS, 0.20)}>
       <Chamber p={p} f={f} lit={0.5 + (lit(S9_JUDGE) + lit(S9_PROS) + lit(S9_DEF)) * 0.17}
         occ="both" bays={5} shaft={506} shaftO={0.24} rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail dais dim={0.34} />
+      <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={8} s={1.5} />
       <CutIn f={f} dx={0} dy={-380} at={5} z={50}>
   <BenchDesk x={506} y={452} w={520} h={168} z={50} lit={lit(S9_JUDGE)} />
       </CutIn>
@@ -784,13 +812,17 @@ export const S10: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.10]} vig={0.46} glow={hexa(C_PROS, 0.20)}>
       <Chamber p={p} f={f} lit={1} occ="r" bays={3} shaft={210} shaftO={0.30}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail={false} dim={0.34} />
-      <Pool x={300} y={556} w={820} c="#FFE9CE" o={0.26} z={12} />
+            <Pool x={300} y={556} w={820} c="#FFE9CE" o={0.26} z={12} />
       {/* the work, standing behind the table — still missing leaf 1 */}
-      <CutIn f={f} dx={880} dy={0} at={6} z={40}><EaselOnly x={742} y={548} w={392} z={40} /></CutIn>
+      <Contact x={742 - 168} y={716 - 10} w={336} z={44} o={0.46} />
       <CutIn f={f} dx={890} dy={0} at={6} z={58}>
-        <Exhibit x={742} y={548} f={f} w={392} z={58} easel={false}
-          leaves={[0, 2]} lamp={0}
-          flags={f >= S10_FLAGS ? [[0, S10_FLAGS], [1, S10_FLAGS + 5], [2, S10_FLAGS + 10]] : []} />
+        <Tower x={742} y={730} f={f} w={330} z={58}
+          blocks={[0, 1, 2, 3, 5]}
+          out={{ 1: S10_C1, 3: S10_C2, 5: S10_C3 }}
+          lit={f < S10_C3 ? 1 : 0}
+          lean={E(f, S10_C1, S10_C1 + 12, 0, 2.4, OUT) + E(f, S10_C2, S10_C2 + 12, 0, 3.4, OUT)
+              + E(f, S10_C4, S10_C4 + 14, 0, 4.6, OUT)}
+          spikes={f >= S10_FLAGS ? [[0, S10_FLAGS], [2, S10_FLAGS + 5], [4, S10_FLAGS + 10]] : []} />
       </CutIn>
       {/* the table */}
       <CutIn f={f} dx={-880} dy={0} at={6} z={50}>
@@ -798,7 +830,16 @@ export const S10: React.FC<P> = ({ v, dur }) => {
           zIndex: 50, background: `linear-gradient(174deg, ${OAKL} 0%, ${dkh(OAK, 0.46)} 100%)`,
           borderTop: `5px solid ${mxh(OAKL, 0.3)}`, boxShadow: SH_D }} />
       </CutIn>
-      <CaseStack x={290} y={644} f={f} ats={[S10_C1, S10_C2, S10_C3, S10_C4]} w={330} z={70} />
+      {/* ⛔ "BUILDS A CASE" WAS DRAWN AS A STACK OF PAPER CHARGE CARDS. The ACTOR
+          is not a filing clerk, he is somebody TAKING THE THING APART: each beat
+          is a course knocked clean out of the stack, and the courses above it are
+          left standing on nothing. [[feedback_the_metric_makes_paper]] */}
+      {[S10_C1, S10_C2, S10_C3, S10_C4].map((at, i) => (
+        f >= at && f < at + 22
+          ? <Puff key={"kp" + i} x={742} y={640 - i * 40} f={f} at={at} n={10} s={1.3}
+              c="#CFC4AE" z={72} />
+          : null
+      ))}
       {[S10_C1, S10_C2, S10_C3, S10_C4].map((at, i) => (
         f >= at && f < at + 20
           ? <Ring key={"r" + i} x={290} y={636 - i * 40} f={f} at={at} c={C_PROS} z={76} s={0.7} dur={18} />
@@ -818,9 +859,17 @@ export const S10: React.FC<P> = ({ v, dur }) => {
           scene is accelerating out rather than settling (§23) */}
       <Cross f={f} from={1180} to={-280} a={dur - 13} b={dur + 60} y={762} i={13} size={252} z={59} stack={2} />
 
+      {/* the knocked-out courses pile at his feet, and the last one is still
+          travelling when the scene cuts (§23) */}
       <div style={{ position: "absolute", inset: 0, zIndex: 71,
-        transform: `translate(${E(f, dur - 24, dur + 34, 0, 900, IN_Q)}px, ${E(f, dur - 24, dur + 34, 0, -120, IN_Q)}px)` }}>
-        <CaseStack x={290} y={644} f={f} ats={[-40, -36, -32, -28]} w={330} z={71} />
+        transform: `translate(${E(f, dur - 24, dur + 34, 0, -760, IN_Q)}px, ${E(f, dur - 24, dur + 34, 0, -90, IN_Q)}px)` }}>
+        {[0, 1, 2].map(i => (
+          <div key={"kd" + i} style={{ position: "absolute", left: 210 + i * 26, top: 690 - i * 46,
+            width: 132, height: 44, borderRadius: 5, zIndex: 71, boxShadow: SH,
+            transform: `rotate(${(i - 1) * 5}deg)`,
+            background: `linear-gradient(172deg, ${mxh(BLOCKS[i * 2], 0.26)} 0%, ${BLOCKS[i * 2]} 46%, ${dkh(BLOCKS[i * 2], 0.42)} 100%)`,
+            border: `3px solid ${dkh(BLOCKS[i * 2], 0.5)}` }} />
+        ))}
       </div>
 
     </Scene>
@@ -843,6 +892,7 @@ export const S11: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.09]} vig={0.44} glow={hexa(C_DEF, 0.22)}>
       <Chamber p={p} f={f} lit={1} occ="l" bays={3} shaft={800} shaftO={0.30}
         rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={7} rail={false} dim={0.34} />
+      <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={7} s={1.5} />
       <Pool x={720} y={556} w={820} c="#E6F6EE" o={0.24} z={12} />
       <CutIn f={f} dx={900} dy={0} at={5} z={50}>
         <div style={{ position: "absolute", left: 492, top: 640, width: 460, height: 130,
@@ -850,8 +900,10 @@ export const S11: React.FC<P> = ({ v, dur }) => {
           borderTop: `5px solid ${mxh(OAKL, 0.3)}`, boxShadow: SH_D }} />
       </CutIn>
       <CutIn f={f} dx={900} dy={0} at={5} z={70}>
-        <CaseStack x={700} y={644} f={f} ats={[-20, -16, -12, -8]} w={330} z={70}
-          sweep={S11_SWEEP} />
+        <Tower x={700} y={730} f={f} w={330} z={70}
+          blocks={[0, 2, 4]} seat={{ 1: S11_SWEEP, 3: S11_SWEEP + 3, 5: S11_SWEEP + 6 }}
+          lit={f >= S11_SWEEP ? 1 : 0}
+          lean={E(f, 0, S11_SWEEP, 5.5, 0, OUT)} />
       </CutIn>
       {f >= S11_SWEEP && <Ring x={700} y={560} f={f} at={S11_SWEEP} c={C_DEF} z={78} s={1.5} dur={24} />}
       {f >= S11_SWEEP && <Puff x={700} y={600} f={f} at={S11_SWEEP} n={13} s={1.5} c="#CFC4AE" z={74} />}
@@ -899,9 +951,9 @@ export const S12: React.FC<P> = ({ v, dur }) => {
         stern={0.85} act={3} ph={0.2}
         lift={E(f, S12_RISE, S12_RISE + 8, 0, 76, BACK)} />
       {/* the evidence, under the swinging light — and the flags are READ off it */}
-      <EaselOnly x={216} y={706} w={300} z={40} />
-      <Exhibit x={216} y={706} f={f} w={300} z={58} easel={false} leaves={[0, 2]} lamp={0}
-        flags={[[0, -30], [1, -26], [2, -22]]} />
+      <Contact x={216 - 130} y={716 - 8} w={260} z={44} o={0.44} />
+      <Tower x={216} y={716} f={f} w={232} z={58} blocks={[0, 1, 2, 3, 5]} lit={0}
+        spikes={[[0, -30], [2, -26], [4, -22]]} lean={2.2} />
       {[0, 1, 2].map(i => (
         f >= S12_READ + i * 4 && f < S12_READ + i * 4 + 16
           ? <Ring key={"rd" + i} x={180 + i * 42} y={600} f={f} at={S12_READ + i * 4} c={RED}
@@ -936,15 +988,25 @@ export const S13: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.16]} vig={0.40} glow={hexa(C_JUDGE, 0.24)}>
       <Chamber p={p} f={f} lit={1} occ="both" bays={5} shaft={506} shaftO={0.34}
         rakeRate={RK[v].rate * 1.2} rakeN={RK[v].n} panelN={9} rail dais horizonDy={38} dim={0.28} />
+      <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={8} s={1.5} />
       <Pool x={506} y={600} w={980} c="#FFF6E2" o={0.28} z={12} />
       {/* ⛔ the villain, still on the shelf, still hollow */}
-      <Shelf x={126} y={598} f={f} w={280} z={34} />
+      {/* ⛔ THE VILLAIN, STILL THERE AND STILL DEAD. The original stack sits on a
+          plinth behind the action — grey, courses missing, exactly as the hook
+          left it. The loop does not abolish work that looks finished and isn't;
+          it catches it. */}
+      <div style={{ position: "absolute", left: 46, top: 502, width: 200, height: 16,
+        zIndex: 34, background: `linear-gradient(180deg, ${OAKL} 0%, ${dkh(OAK, 0.5)} 100%)` }} />
+      <Tower x={146} y={502} f={f} w={140} z={35} blocks={[0, 1, 4]} lit={0} lean={-3.5} />
 
       {/* THE WORK — pass 3 fills the bay S1 left dark */}
-      <CutIn f={f} dx={0} dy={-680} at={6} z={44}><EaselOnly x={560} y={606} w={470} z={44} /></CutIn>
+      <Contact x={560 - 186} y={734 - 10} w={372} z={44} o={0.48} />
       <CutIn f={f} dx={0} dy={-700} at={6} z={60}>
-        <Exhibit x={560} y={606} f={f} w={470} z={60} easel={false}
-          leaves={[0, 2]} seat={{ 1: S13_P3 }} lamp={f >= S13_P3 ? 1 : 0} hit={hit} />
+        <Tower x={560} y={748} f={f} w={372} z={60}
+          blocks={[0, 1, 2]}
+          seat={{ 3: S13_P1, 5: S13_P2, 4: S13_P3 }}
+          lit={f >= S13_P3 ? 1 : 0} hit={hit}
+          lean={E(f, 0, S13_P1, 4.5, 0, OUT)} />
       </CutIn>
 
       {/* the three rebuild passes — each faster, and each throws its own ring */}
@@ -1026,7 +1088,7 @@ export const S15: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.08]} vig={0.44} glow={hexa("#CFD6CE", 0.16)}>
       <Chamber p={p} f={f} lit={0.9} occ="l" bays={3} shaft={430} shaftO={0.22}
         rakeRate={RK[v].rate * 0.9} rakeN={RK[v].n} panelN={6} rail={false} dim={0.34} />
-      {(() => {
+            {(() => {
         const sw = E(f, 0, dur + 8, -280, 300, LIN);   /* the work-light travels */
         return (<>
           <Pool x={506 + sw} y={562} w={760} c="#F2F6F0" o={0.30} z={12} />
@@ -1061,11 +1123,11 @@ export const S15: React.FC<P> = ({ v, dur }) => {
       </CutIn>
       {/* the prototype: 300px against the hero board's 500 — visibly the small
           version, which is the whole point of the line */}
-      <EaselOnly x={520} y={636} w={300} z={44} />
+      <Contact x={520 - 118} y={706 - 8} w={236} z={44} o={0.44} />
       <CutIn f={f} dx={-900} dy={0} at={6} z={60}>
-        <Exhibit x={520} y={636} f={f} w={300} z={60} easel={false}
-          leaves={[]} seat={{ 0: S15_L1, 1: S15_L2, 2: S15_L3 }}
-          lamp={f >= S15_DONE ? 1 : 0} />
+        <Tower x={520} y={724} f={f} w={248} z={60}
+          blocks={[]} seat={{ 0: 4, 1: S15_L2, 2: S15_L3 }}
+          lit={f >= S15_DONE ? 1 : 0} />
       </CutIn>
       {[S15_L1, S15_L2, S15_L3].map((at, i) => (
         f >= at && f < at + 16
@@ -1102,6 +1164,7 @@ export const S16: React.FC<P> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.10]} vig={0.34} glow={hexa("#FFF3D2", 0.24)}>
       <Chamber p={p} f={f} lit={0.9 + day * 0.4} occ="l" bays={5} shaft={760}
         shaftO={0.28 + day * 0.16} rakeRate={RK[v].rate} rakeN={RK[v].n} panelN={9} rail dais dim={0.14} />
+      <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={7} s={1.5} />
       {/* the back doors, opening onto daylight on "launch" */}
       <div style={{ position: "absolute", left: 700, top: 168, width: 300, height: 330,
         zIndex: 24, opacity: day,
@@ -1112,8 +1175,8 @@ export const S16: React.FC<P> = ({ v, dur }) => {
       <div style={{ position: "absolute", inset: 0, zIndex: 60,
         transform: `translate(${out * 470}px, ${-out * 60}px) scale(${1 - out * 0.24})`,
         opacity: 1 - out * 0.5 }}>
-        <Exhibit x={430} y={576} f={f} w={300} z={60} easel={false}
-          leaves={[0, 1, 2]} lamp={1}
+        <Tower x={430} y={724} f={f} w={248} z={60}
+          blocks={[]} lit={1}
           seat={{ 0: S16_SET, 1: S16_SET + 2, 2: S16_SET + 4 }} />
       </div>
       {/* the three plates light in sequence — the loop is armed */}

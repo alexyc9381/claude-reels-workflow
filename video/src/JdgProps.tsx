@@ -4,6 +4,7 @@ import {
   Contact, Pool, Ring, Puff, mono, ui, CLAY, INK, RED, GREEN,
   PLASTER, PLASTERD, OAK, OAKD, OAKL, BRS, BRSD, BRSL, FACE, FACED, VOID,
   C_JUDGE, C_PROS, C_DEF, R, settle, antic, load, stroke, STEP,
+  BLOCKS, BLOCK_DEAD, lerpHex, W,
 } from "./JdgWorld";
 
 /* ===========================================================================
@@ -50,179 +51,166 @@ import {
      S10    a flag driven THROUGH the missing leaf
      S13    pass 3 restores it, and the gavel lands and leaves NO MARK
    ========================================================================= */
-/** ⭐ THE EASEL ON ITS OWN — so the board can come OFF it and leave it standing
-    and empty, which is the hook's last image and the reel's thesis in one prop.
-    ⛔ Drawn here rather than inside `Exhibit` because a topple has to move the
-    board WITHOUT moving what it was resting on. */
-export const EaselOnly: React.FC<{ x: number; y: number; w?: number; z?: number }> =
-  ({ x, y, w: ww = 520, z = 44 }) => (<>
-    <Contact x={x - ww * 0.42} y={y + 176} w={ww * 0.84} z={z - 1} o={0.42} />
-    {[-1, 1].map(sd => (
-      <div key={"lg" + sd} style={{ position: "absolute", left: x + sd * (ww * 0.30) - 13,
-        top: y - 30, width: 26, height: 216, zIndex: z, transformOrigin: "50% 0%",
-        transform: `rotate(${sd * 9}deg)`,
-        background: `linear-gradient(96deg, ${OAKL} 0%, ${dkh(OAK, 0.34)} 100%)` }} />
-    ))}
-    <div style={{ position: "absolute", left: x - ww * 0.36, top: y - 14, width: ww * 0.72,
-      height: 22, zIndex: z + 1, borderRadius: 3,
-      background: `linear-gradient(180deg, ${mxh(OAKL, 0.28)} 0%, ${dkh(OAK, 0.3)} 100%)` }} />
-  </>);
+/* =========================================================================
+   ⭐⭐⭐ THE TOWER — THE HERO ARTIFACT, AND IT IS THE THING THAT WAS BUILT.
 
-export const Exhibit: React.FC<{
+   ⛔⛔⛔ THIS REPLACES AN EXHIBIT BOARD MADE OF PAPER LEAVES, WHICH WAS REJECTED
+   ON THE CONCEPT: *"it's literally just the papers concept."* The board was the
+   third drawing of this artifact and all three were flat rectangles — first six
+   cream bays that rendered as a RADIATOR, then a board of paper leaves on an
+   easel, and the whole reel grew paper around it: charge cards, a docket, a
+   clerk carrying files through every scene.
+   ⭐ [[feedback_the_metric_makes_paper]] names the mechanism: the motion audit
+   rewards large bright objects arriving, so every low scene gets answered with
+   another cream rectangle. Its fix is to RE-MAP FROM THE ACTOR. The work is not
+   a document — nobody's app is a document — it is A THING SOMEBODY BUILT. So it
+   is a stack of big saturated blocks, and every beat in the reel becomes
+   physical: a crew STACKS it, the prosecutor KNOCKS BLOCKS OUT, the defense RAMS
+   them back in, the judge DROPS A WEIGHT on it.
+
+   Three bars, same as before:
+     name it in 2 words   -> "a tower"
+     can a body do that   -> build it, knock it down, prop it up, crush it
+     ⭐ IS IT THE SUBJECT -> it is the thing you shipped, and it is on trial
+
+   ⭐ AND IT CARRIES THE REEL'S SATURATION. Six distinct saturated hues stacked
+   against a deep teal chamber is where "vibrant" comes from — chroma in the
+   OBJECTS, not a filter over beige ones.
+   ========================================================================= */
+export const Tower: React.FC<{
   x: number; y: number; f: number; w?: number; z?: number;
-  /** which of the three leaves are present */
-  leaves?: number[];
-  /** per-leaf tear-away: leaf i rips off starting at frame `out[i]` */
+  /** which of the six courses are IN. A course not listed is a GAP. */
+  blocks?: number[];
+  /** course i is knocked OUT sideways from frame `out[i]` */
   out?: Record<number, number>;
-  /** per-leaf seat: leaf i flies IN and lands at frame `seat[i]` */
+  /** course i is rammed back IN, landing at frame `seat[i]` */
   seat?: Record<number, number>;
-  /** the APPROVED seal: 1 = green and lit, 0 = dead */
-  lamp?: number;
-  /** the board leans on its easel */
-  tip?: number;
-  /** every remaining leaf goes at once, from this frame */
+  /** 0..1 — how lit the whole stack is. A dead tower is grey. */
+  lit?: number;
+  /** the whole stack leans (deg) — it sags toward the side it lost */
+  lean?: number;
+  /** everything above this course comes down from `fall` */
   fall?: number;
-  /** red flags driven in: [leafIndex, atFrame] */
-  flags?: Array<[number, number]>;
-  /** the gavel rings OFF it — the board does NOT deform. That IS "bulletproof". */
+  /** a weight is landing on it: 1 = the frame RINGS and does not deform */
   hit?: number;
-  /** draw the easel legs (off for wall-mounted uses) */
-  easel?: boolean;
-}> = ({ x, y, f, w: ww = 520, z = 60, leaves = [0, 1, 2], out = {},
-        seat = {}, lamp = 1, tip = 0, fall = -1, flags = [], hit = 0, easel = true }) => {
-  const hh = Math.round(ww * 0.74);
-  const lw = (ww - 34) / 3;
+  /** red spikes driven in: [course, atFrame] */
+  spikes?: Array<[number, number]>;
+}> = ({ x, y, f, w: ww = 300, z = 60, blocks = [0, 1, 2, 3, 4, 5], out = {},
+        seat = {}, lit = 1, lean = 0, fall = -1, hit = 0, spikes = [] }) => {
+  const bh = Math.round(ww * 0.335);
+  const N = 6;
   const fallen = fall >= 0 && f >= fall;
-  /* ⛔ THE FACE GOES OVER 30 FRAMES, ACCELERATING, AND IS STILL CROSSING THE
-     FRAME AT THE CUT. v1 finished in 16 and then held, which is half of why all
-     three cuts measured a PRE-CUT ratio under 0.70. §23: an OUT/IO ease
-     decelerates into its end whether or not that end is on screen. */
-  const fk = fallen ? Math.min(1, (f - fall) / 30) : 0;
-  const ringOff = hit > 0 ? Math.sin((f) * 1.7) * 7 * hit : 0;
-  return (<>
-    {/* THE EASEL — a wooden tripod. This is the half that makes it recognisable;
-        a board with no easel is just a rectangle. */}
-    {easel && (<>
-      <Contact x={x - ww * 0.42} y={y + 176} w={ww * 0.84} z={z - 3} o={0.42} />
-      {[-1, 1].map(sd => (
-        <div key={"lg" + sd} style={{ position: "absolute", left: x + sd * (ww * 0.30) - 11,
-          top: y - 30, width: 22, height: 214, zIndex: z - 2, transformOrigin: "50% 0%",
-          transform: `rotate(${sd * 9}deg)`,
-          background: `linear-gradient(96deg, ${OAKL} 0%, ${dkh(OAK, 0.34)} 100%)` }} />
-      ))}
-      {/* the crossbar the board actually rests on */}
-      <div style={{ position: "absolute", left: x - ww * 0.36, top: y - 14, width: ww * 0.72,
-        height: 20, zIndex: z - 1, borderRadius: 3,
-        background: `linear-gradient(180deg, ${mxh(OAKL, 0.24)} 0%, ${dkh(OAK, 0.3)} 100%)` }} />
-    </>)}
-
-    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
-      zIndex: z, transformOrigin: "50% 100%",
-      transform: `rotate(${tip}deg) translateX(${ringOff}px)` }}>
-      {/* the BACKING FRAME — what is left when the work is gone. ⛔ A HOLE HAS NO
-          GRADIENT: the room stops at it. A dimmer over a dark ground deletes the
-          object, so the empty state is a real VOID with cross-bracing in it, not
-          a faded panel ([[feedback_a_dimmer_on_a_dark_ground]]). */}
-      <div style={{ position: "absolute", inset: 0, borderRadius: 5,
-        background: `linear-gradient(172deg, ${BRSL} 0%, ${BRS} 28%, ${BRSD} 100%)`,
-        border: `5px solid ${dkh(BRSD, 0.42)}`, boxShadow: SH_D }} />
-      <div style={{ position: "absolute", left: 14, top: 14, right: 14, bottom: 14,
-        background: VOID, border: `2px solid ${hexa("#000", 0.7)}` }} />
-      {[0.30, 0.70].map((k, i) => (
-        <div key={"br" + i} style={{ position: "absolute", left: 14, right: 14,
-          top: 14 + (hh - 28) * k - 4, height: 8,
-          background: `linear-gradient(180deg, ${dkh(BRSD, 0.24)} 0%, ${dkh(BRSD, 0.6)} 100%)` }} />
-      ))}
-
-      {/* THE THREE LEAVES OF THE WORK ITSELF */}
-      {[0, 1, 2].map(i => {
-        const lx = 17 + i * lw;
+  const fk = fallen ? Math.min(1, (f - fall) / 44) : 0;
+  /* ⛔ THE HIT DOES NOT DEFORM IT. That IS "bulletproof": the weight recoils and
+     the stack RINGS. A squash here would say it gave. */
+  const ring = hit > 0 ? Math.sin(f * 1.9) * 6 * hit : 0;
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - bh * N, width: ww,
+      height: bh * N, zIndex: z, transformOrigin: "50% 100%",
+      transform: `rotate(${lean}deg) translateX(${ring}px)` }}>
+      {Array.from({ length: N }, (_, i) => {
         const isOut = out[i] !== undefined && f >= out[i];
         const seatAt = seat[i];
         const seating = seatAt !== undefined;
         if (seating && f < seatAt - 14) return null;
-        if (!leaves.includes(i) && !seating) return null;
-        let dy = 0, rot = 0, op = 1, ox = 0;
-        /* ⭐ A LEAF PEELS BEFORE IT GOES. The first build cut straight from
-           "attached" to "falling", which left an 8-frame hole between the oath
-           strike (f7) and the first consequence (f15) where the whole frame
-           measured 0.72-0.88 — the 0-1s FLOOR the hook score kept failing on.
-           A peel is a LARGE object rotating about its own top corner: it is the
-           consequence arriving IMMEDIATELY and escalating, instead of a gap and
-           then an event. §31.4 — a causal chain, not one event after a wait. */
+        if (!blocks.includes(i) && !seating) return null;
+        let dx = 0, dy = 0, rot = 0, op = 1;
         if (out[i] !== undefined && f >= out[i] - 7 && f < out[i]) {
+          /* the TIP: it works loose and leans out before it leaves */
           const k = E(f, out[i] - 7, out[i], 0, 1, IN_Q);
-          rot = k * 26; ox = k * 10; dy = k * 6;
+          const sd = i % 2 ? 1 : -1;
+          rot = sd * k * 15; dx = sd * k * 22; dy = k * 5;
         }
         if (isOut) {
+          /* it is KNOCKED OUT sideways and keeps going — real distance, still
+             travelling when it leaves frame (§23) */
           const lf = f - out[i];
-          dy = lf * lf * 1.25; rot = 26 + lf * (i - 1 || 1) * 3.6;
-          op = Math.max(0, 1 - dy / 700);
-          if (dy > hh + 480) return null;
-        } else if (fallen) {
-          dy = fk * fk * 980; rot = fk * (i - 1) * 13 + fk * 5;
-          op = Math.max(0, 1 - fk * 0.9);
+          const sd = i % 2 ? 1 : -1;
+          dx = sd * (22 + lf * lf * 2.1); dy = lf * lf * 0.7; rot = sd * (15 + lf * 8);
+          op = Math.max(0, 1 - Math.abs(dx) / 860);
+          if (Math.abs(dx) > 900) return null;
+        } else if (fallen && i >= 1) {
+          const sd = i % 2 ? 1 : -1;
+          dx = sd * fk * fk * 880; dy = fk * fk * 900; rot = sd * fk * 104;
+          op = Math.max(0, 1 - fk * 0.85);
         }
         const k = seating ? E(f, seatAt - 14, seatAt, 0, 1, IN_Q) : 1;
-        const over = seating ? settle(f, seatAt, 8, 12, 2.6) : 0;
-        const inY = seating ? (1 - k) * -340 : 0;
+        const over = seating ? settle(f, seatAt, 9, 12, 2.5) : 0;
+        const inX = seating ? (1 - k) * (i % 2 ? 640 : -640) : 0;
+        const c = BLOCKS[i % BLOCKS.length];
+        const paint = lit > 0.5 ? c : lerpHex(c, BLOCK_DEAD, 0.45);
+        /* each course is narrower as it goes up, so the silhouette is a TOWER */
+        const cw = ww * (1 - i * 0.055);
         return (
-          <div key={"lf" + i} style={{ position: "absolute", left: lx, top: 17 + over,
-            width: lw - 6, height: hh - 34, borderRadius: 2,
-            opacity: (seating ? k : 1) * op,
-            transformOrigin: "0% 0%",
-            transform: `translate(${ox}px, ${inY + dy}px) rotate(${rot}deg)`,
-            background: `linear-gradient(168deg, #F4EEDC 0%, ${FACE} 58%, ${FACED} 100%)`,
-            border: `2px solid ${dkh(FACED, 0.26)}` }}>
-            {/* ⭐ REAL WORK ON IT, so the board is a REPORT and not a blank tile:
-                a heading bar, ruled copy, and on the middle leaf a bar chart. */}
-            <div style={{ position: "absolute", left: 10, top: 12, width: (lw - 26) * 0.82,
-              height: 15, borderRadius: 2, background: i === 1 ? CLAY : hexa("#3B3527", 0.72) }} />
-            {[0, 1, 2, 3, 4, 5].map(j => (
-              <div key={j} style={{ position: "absolute", left: 10, top: 42 + j * 19,
-                width: (lw - 26) * (0.94 - ((i + j) % 3) * 0.22), height: 6, borderRadius: 2,
-                background: hexa("#3B3527", 0.40) }} />
+          <div key={"bk" + i} style={{ position: "absolute",
+            left: (ww - cw) / 2 + dx + inX, top: (N - 1 - i) * bh + dy + over,
+            width: cw, height: bh - 5, borderRadius: 5, opacity: (seating ? k : 1) * op,
+            transform: `rotate(${rot}deg)`, boxShadow: SH,
+            background: `linear-gradient(172deg, ${mxh(paint, 0.46)} 0%, ${paint} 44%, ${dkh(paint, 0.34)} 100%)`,
+            border: `3px solid ${dkh(paint, 0.5)}` }}>
+            {/* the lit face — a course that is WORKING glows along its front */}
+            <div style={{ position: "absolute", left: 12, right: 12, top: bh * 0.30,
+              height: 9, borderRadius: 5,
+              background: lit > 0.5 ? mxh(paint, 0.86) : hexa("#000", 0.30) }} />
+            {[0.16, 0.84].map((r, j) => (
+              <div key={j} style={{ position: "absolute", left: cw * r - 9, top: bh * 0.56,
+                width: 18, height: 18, borderRadius: 4,
+                background: lit > 0.5 ? hexa(mxh(paint, 0.8), 0.9) : hexa("#000", 0.3) }} />
             ))}
-            {i === 1 && [0, 1, 2, 3].map(j => (
-              <div key={"bc" + j} style={{ position: "absolute", left: 12 + j * 22,
-                bottom: 16, width: 15, height: 26 + j * 17, borderRadius: 2,
-                background: hexa(CLAY, 0.78) }} />
-            ))}
-            {i === 2 && (
-              <div style={{ position: "absolute", left: 10, bottom: 16,
-                width: (lw - 26) * 0.7, height: 5, background: hexa("#3B3527", 0.55) }} />
-            )}
           </div>
         );
       })}
-
-      {/* the red flags the prosecutor drives in */}
-      {flags.map(([leaf, at], i) => {
+      {/* the gap a knocked-out course leaves is a real HOLE with the courses
+          above it resting on nothing */}
+      {spikes.map(([course, at], i) => {
         if (f < at) return null;
         const lf = f - at;
-        const drive = E(lf, 0, 5, -140, 0, IN_Q) + settle(lf, 5, 6, 10, 2.2);
+        const drive = E(lf, 0, 5, -170, 0, IN_Q) + settle(lf, 5, 7, 10, 2.2);
         return (
-          <div key={"fl" + i} style={{ position: "absolute", left: 17 + leaf * lw + lw * 0.40,
-            top: -58 + drive, width: 10, height: 96, zIndex: 6,
-            background: `linear-gradient(180deg, ${dkh(RED, 0.06)} 0%, ${dkh(RED, 0.5)} 100%)` }}>
-            <div style={{ position: "absolute", left: 8, top: 2, width: 52, height: 32,
-              background: RED, clipPath: "polygon(0 0,100% 0,74% 50%,100% 100%,0 100%)" }} />
+          <div key={"sp" + i} style={{ position: "absolute", left: ww * 0.5 - 7 + (i - 1) * 46,
+            top: (N - 1 - course) * bh - 60 + drive, width: 14, height: 84, zIndex: 6,
+            background: `linear-gradient(180deg, ${mxh(RED, 0.2)} 0%, ${dkh(RED, 0.45)} 100%)` }}>
+            <div style={{ position: "absolute", left: -9, top: -14, width: 32, height: 22,
+              borderRadius: 3, background: RED }} />
           </div>
         );
       })}
-
-      {/* THE APPROVED SEAL — a real lit roundel, not a flat disc. Reel 129's
-          finding: a lens lit FROM WITHIN reads as ON where a pale square reads
-          as a blank card. */}
-      <div style={{ position: "absolute", right: -44, top: hh * 0.10, width: 112, height: 112,
-        borderRadius: "50%", border: `7px solid ${dkh(BRSD, 0.4)}`, zIndex: 8,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        ...mono(27, 900), color: lamp > 0.5 ? "#0B3A24" : "#3A3E39", letterSpacing: 1,
-        background: lamp > 0.5
-          ? `radial-gradient(50% 50% at 42% 34%, #DFFBE6 0%, ${GREEN} 56%, ${dkh(GREEN, 0.5)} 100%)`
-          : `radial-gradient(50% 50% at 42% 34%, #2A2E29 0%, #14170F 100%)` }}>OK</div>
     </div>
-    {lamp > 0.5 && <Pool x={x + ww / 2} y={y - hh * 0.72} w={230} c={GREEN} o={0.22} z={z - 4} />}
+  );
+};
+
+/** ⭐⭐ THE BLOCK LINE — an overhead conveyor carrying courses across the room.
+    ⛔ THIS EXISTS BECAUSE REMOVING THE PAPER REMOVES THE REEL'S ONLY FULL-WIDTH
+    TRAVELLING BAND, and that is the single biggest lever in the measured motion
+    table (one scene 10.44 against its neighbour 2.83 at identical push). Reel
+    120 lost 11.03 -> 5.23 on one scene the moment its dockets came out, and got
+    it back with a parts line in METAL rather than in paper. Same move here: the
+    band is the material the reel is actually about. */
+export const BlockLine: React.FC<{ f: number; y: number; z?: number; rate?: number;
+  n?: number; s?: number; back?: number }> =
+  ({ f, y, z = 30, rate = 3.2, n = 7, s = 1, back = 0.52 }) => {
+  const span = W + 320, pitch = span / n;
+  return (<>
+    <div style={{ position: "absolute", left: -20, right: -20, top: y - 16, height: 12,
+      zIndex: z, background: `linear-gradient(180deg, ${BRSL} 0%, ${BRSD} 100%)` }} />
+    {Array.from({ length: n }, (_, i) => {
+      const x = (((i * pitch + f * rate) % span) + span) % span - 160;
+      const c = lerpHex(BLOCKS[i % BLOCKS.length], "#AFD2DA", back);
+      const bw = 118 * s, bhh = 52 * s;
+      return (
+        <React.Fragment key={"bl" + i}>
+          <div style={{ position: "absolute", left: x + bw / 2 - 3, top: y - 4, width: 6,
+            height: 20, zIndex: z + 1, background: dkh(BRSD, 0.2) }} />
+          <div style={{ position: "absolute", left: x, top: y + 16, width: bw, height: bhh,
+            zIndex: z + 2, borderRadius: 4, boxShadow: SH,
+            background: `linear-gradient(172deg, ${mxh(c, 0.26)} 0%, ${c} 46%, ${dkh(c, 0.4)} 100%)`,
+            border: `3px solid ${dkh(c, 0.26)}` }}>
+            <div style={{ position: "absolute", left: 10, right: 10, top: bhh * 0.34, height: 6,
+              borderRadius: 3, background: hexa("#FFFFFF", 0.30) }} />
+          </div>
+        </React.Fragment>
+      );
+    })}
   </>);
 };
 
@@ -358,83 +346,74 @@ export const Nameplate: React.FC<{ x: number; y: number; f: number; at: number;
 };
 
 /* =========================================================================
-   THE DOCKET — the three-line prompt, as a real document under a desk lamp.
-   ⛔ NOT 118's vertical lectern slab. This is paper, flat, seen from above.
-   ⭐ Line 3 is struck in letter-block by letter-block, on the words.
+   ⭐ THE CONSOLE — "the third line of the prompt", as a thing a body OPERATES.
+
+   ⛔ THIS REPLACES A PAPER DOCKET UNDER A DESK LAMP. It was the most literal
+   possible drawing of "a line of a prompt" and it was the single most static
+   scene in the reel twice over — a 780px near-white rectangle with dashes on it.
+   ⭐ The ACTOR here is not a document, it is somebody CONFIGURING the run: three
+   slots on a lit console, and the third one takes three ROLE KEYS that get
+   slammed home. That is the same information as a third line of text, delivered
+   as a physical act with saturated colour on it.
+   ⛔ [[feedback_substitute_the_text_never_delete_it]] — the line is not dropped,
+   it is SUBSTITUTED by a graphic that says the same thing.
    ========================================================================= */
-export const Docket: React.FC<{ x: number; y: number; f: number; w?: number; z?: number;
-  /** how many of the three lines are struck: 0..3, fractional for line 3 */
-  lines?: number; stamp?: number }> =
-  ({ x, y, f, w: ww = 540, z = 62, lines = 3, stamp = -1 }) => {
-  const hh = Math.round(ww * 0.70);
+export const Console: React.FC<{ x: number; y: number; f: number; w?: number; z?: number;
+  /** how many of the three slots are filled, 0..3 */
+  slots?: number;
+  /** the three role keys slam home at these frames */
+  keys?: number[];
+}> = ({ x, y, f, w: ww = 620, z = 62, slots = 3, keys = [] }) => {
+  const hh = Math.round(ww * 0.46);
+  const sw = (ww - 90) / 3;
   return (
     <div style={{ position: "absolute", left: x - ww / 2, top: y - hh / 2, width: ww, height: hh,
-      zIndex: z, background: `linear-gradient(172deg, #F6F0DF 0%, #DED5BE 100%)`,
-      boxShadow: SH_D, border: `2px solid ${hexa("#8B8065", 0.5)}` }}>
-      {/* ⛔⛔ THE FIRST VERSION OF THIS WAS A BLANK WHITE SLAB. On the contact
-          sheet S8 read as an empty page with two rows of faint dashes on it, and
-          it measured STATIC twice — a 780x530 field of near-white is both the
-          least interesting object you can put on screen and, per
-          [[feedback_a_lit_rectangle_is_a_screen]], a SHAPE problem that moving it
-          does not fix. A filed court document has a ruled head, a case number, a
-          margin rule, punched holes, a signature block and a seal. */}
-      <div style={{ position: "absolute", left: 30, top: 22, width: ww - 60, height: 7,
-        background: hexa("#6E644E", 0.85) }} />
-      <div style={{ position: "absolute", left: 30, top: 38, width: (ww - 60) * 0.52, height: 22,
-        borderRadius: 3, background: hexa("#3B3527", 0.80) }} />
-      <div style={{ position: "absolute", right: 30, top: 38, width: (ww - 60) * 0.24, height: 22,
-        borderRadius: 3, background: hexa(C_PROS, 0.72) }} />
-      <div style={{ position: "absolute", left: 96, top: 70, bottom: 70, width: 3,
-        background: hexa(C_PROS, 0.45) }} />
-      {[0.28, 0.5, 0.72].map((k, i) => (
-        <div key={"ph" + i} style={{ position: "absolute", left: 44, top: hh * k - 11,
-          width: 22, height: 22, borderRadius: "50%", background: hexa("#8B8065", 0.34) }} />
-      ))}
-      <div style={{ position: "absolute", left: 118, bottom: 34, width: (ww - 240) * 0.5,
-        height: 5, background: hexa("#3B3527", 0.55) }} />
-      <div style={{ position: "absolute", left: 118, bottom: 52, width: (ww - 240) * 0.34,
-        height: 12, borderRadius: 2, background: hexa("#3B3527", 0.34) }} />
-      <div style={{ position: "absolute", right: 42, bottom: 30, width: 92, height: 92,
-        borderRadius: "50%", border: `6px solid ${hexa(C_PROS, 0.62)}`,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        ...mono(15, 900), color: hexa(C_PROS, 0.8), letterSpacing: 1 }}>SEAL</div>
-      {R.docket.map((t, i) => {
-        const done = lines - i;
-        if (done <= 0) return null;
+      zIndex: z, borderRadius: 10, boxShadow: SH_D,
+      background: `linear-gradient(172deg, ${mxh(OAKL, 0.16)} 0%, ${OAK} 40%, ${dkh(OAK, 0.5)} 100%)`,
+      border: `6px solid ${dkh(OAKD, -0.3)}` }}>
+      {/* the three slots, left to right — the third is the one that matters */}
+      {[0, 1, 2].map(i => {
+        const on = i < slots;
         const hot = i === 2;
-        /* line 3 arrives as discrete letter-blocks, never a fade */
-        const nb = 14;
-        const shown = hot ? Math.max(0, Math.min(nb, Math.round(done * nb))) : nb;
         return (
-          <div key={"ln" + i} style={{ position: "absolute", left: 34, top: 96 + i * 76,
-            display: "flex", alignItems: "center", gap: 9 }}>
-            <div style={{ width: 30, height: 30, borderRadius: 3,
-              background: hot ? C_JUDGE : hexa("#8B8065", 0.30),
-              display: "flex", alignItems: "center", justifyContent: "center",
-              ...mono(18, 900), color: hot ? "#241B0C" : "#4A4335" }}>{i + 1}</div>
-            {Array.from({ length: nb }, (_, j) => (
-              <div key={j} style={{ width: (ww - 130) / nb - 5,
-                height: hot ? 24 : 17, borderRadius: 2,
-                opacity: j < shown ? 1 : 0,
-                background: hot ? dkh(C_PROS, 0.05) : hexa("#3B3527", 0.78) }} />
-            ))}
+          <div key={"sl" + i} style={{ position: "absolute", left: 30 + i * (sw + 15), top: 26,
+            width: sw, height: hh - 100, borderRadius: 7,
+            background: on
+              ? `linear-gradient(178deg, ${mxh(hot ? C_JUDGE : GREEN, 0.34)} 0%, ${hot ? C_JUDGE : GREEN} 54%, ${dkh(hot ? C_JUDGE : GREEN, 0.44)} 100%)`
+              : `linear-gradient(178deg, #16323A 0%, #081A20 100%)`,
+            border: `4px solid ${on ? dkh(hot ? C_JUDGE : GREEN, 0.5) : "#0A2028"}`,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            ...mono(hot ? 40 : 34, 900), color: on ? "#12240E" : "#2A4A54" }}>
+            {i + 1}
           </div>
         );
       })}
-      {/* the stamp, landing beside line 3 */}
-      {stamp >= 0 && f >= stamp - 8 && (() => {
-        const lf = f - stamp;
-        const dz = E(lf, -8, 0, -150, 0, IN_Q);
-        const s = lf >= 0 ? 1 + settle(lf, 0, 0.08, 9, 2.1) : 1.5;
+      {/* the three ROLE KEYS, slamming into the third slot */}
+      {keys.map((at, i) => {
+        if (f < at - 12) return null;
+        const c = [C_JUDGE, C_PROS, C_DEF][i];
+        const drop = E(f, at - 12, at, -340, 0, IN_Q);
+        const set = f >= at ? settle(f - at, 0, 9, 11, 2.3) : 0;
         return (
-          <div style={{ position: "absolute", left: ww - 176, top: hh - 118,
-            width: 138, height: 88, borderRadius: 6, transform: `translateY(${dz}px) scale(${s})`,
-            border: `6px solid ${hexa(C_PROS, 0.9)}`, display: "flex", alignItems: "center",
-            justifyContent: "center", ...mono(26, 900), color: C_PROS, letterSpacing: 2 }}>
-            FILED
+          <div key={"ky" + i} style={{ position: "absolute", left: ww - 78 - (2 - i) * 82,
+            top: hh - 74 + drop + set, width: 70, height: 62, borderRadius: 6, zIndex: 5,
+            boxShadow: SH,
+            background: `linear-gradient(172deg, ${mxh(c, 0.32)} 0%, ${c} 48%, ${dkh(c, 0.42)} 100%)`,
+            border: `4px solid ${dkh(c, 0.52)}` }}>
+            <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, height: 10,
+              borderRadius: 3, background: hexa("#000", 0.36) }} />
           </div>
         );
-      })()}
+      })}
+      {/* the run bar across the foot — a LENGTH, no numeral */}
+      <div style={{ position: "absolute", left: 30, bottom: 20, width: ww - 240, height: 20,
+        borderRadius: 5, background: "#081A20", border: `3px solid #0A2028`, padding: 3,
+        display: "flex", gap: 3 }}>
+        {Array.from({ length: 8 }, (_, i) => (
+          <div key={"rb" + i} style={{ flex: 1, borderRadius: 2,
+            background: i < Math.round(slots * 2.6) ? GREEN : hexa("#000", 0.5) }} />
+        ))}
+      </div>
     </div>
   );
 };
@@ -652,53 +631,37 @@ export const Ship: React.FC<{ kind: 0 | 1 | 2; x: number; y: number; f: number; 
   s?: number; z?: number }> = ({ kind, x, y, f, at, s = 1, z = 66 }) => {
   const lf = f - at;
   if (lf < -16) return null;
-  const inX = E(lf, -16, 0, -520, 0, IN_Q);
-  const set = lf >= 0 ? settle(lf, 0, 8, 13, 2.5) : 0;
-  const bob = lf >= 0 ? Math.sin((lf) / 7) * 3.4 : 0;
-  const base: React.CSSProperties = { position: "absolute", zIndex: z,
-    transform: `translate(${inX + set}px, ${bob}px)` };
-  if (kind === 0) return (  /* APP — a tall rounded slab with a header band */
-    <div style={{ ...base, left: x - 62 * s, top: y - 210 * s, width: 124 * s, height: 210 * s,
-      borderRadius: 18 * s, background: `linear-gradient(168deg, ${FACE} 0%, ${FACED} 100%)`,
-      border: `4px solid ${dkh(FACED, 0.4)}`, boxShadow: SH }}>
-      <div style={{ position: "absolute", left: 10, top: 12, right: 10, height: 30 * s,
-        borderRadius: 5, background: CLAY }} />
-      {[0, 1, 2, 3].map(i => (
-        <div key={i} style={{ position: "absolute", left: 12, top: 58 * s + i * 30 * s,
-          width: (100 - (i % 2) * 30) * s, height: 12 * s, borderRadius: 3,
-          background: hexa("#3B3527", 0.42) }} />
-      ))}
-    </div>
-  );
-  if (kind === 1) return (  /* SITE — a WIDE board with a nav strip */
-    <div style={{ ...base, left: x - 145 * s, top: y - 150 * s, width: 290 * s, height: 150 * s,
-      borderRadius: 7 * s, background: `linear-gradient(168deg, ${FACE} 0%, ${FACED} 100%)`,
-      border: `4px solid ${dkh(FACED, 0.4)}`, boxShadow: SH }}>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 26 * s,
-        background: dkh(OAK, 0.1) }} />
-      {[0, 1, 2].map(i => (
-        <div key={i} style={{ position: "absolute", left: 14 + i * 44 * s, top: 8 * s,
-          width: 32 * s, height: 10 * s, borderRadius: 2, background: hexa(FACE, 0.6) }} />
-      ))}
-      <div style={{ position: "absolute", left: 16, top: 44 * s, width: 150 * s, height: 22 * s,
-        borderRadius: 3, background: hexa("#3B3527", 0.5) }} />
-      <div style={{ position: "absolute", right: 16, top: 44 * s, width: 92 * s,
-        height: 82 * s, borderRadius: 4, background: hexa(CLAY, 0.75) }} />
-    </div>
-  );
-  return (  /* TOOL — a squat chest with a HANDLE and two latches */
-    <div style={{ ...base, left: x - 105 * s, top: y - 130 * s, width: 210 * s, height: 130 * s,
-      borderRadius: 8 * s, background: `linear-gradient(168deg, ${dkh(BRS, 0.05)} 0%, ${BRSD} 100%)`,
-      border: `4px solid ${dkh(BRSD, 0.44)}`, boxShadow: SH }}>
-      <div style={{ position: "absolute", left: 70 * s, top: -26 * s, width: 70 * s, height: 30 * s,
-        borderTopLeftRadius: 18, borderTopRightRadius: 18,
-        border: `7px solid ${dkh(OAK, 0.2)}`, borderBottom: "none" }} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 52 * s, height: 8 * s,
-        background: hexa("#000", 0.34) }} />
-      {[0.22, 0.78].map((k, i) => (
-        <div key={i} style={{ position: "absolute", left: 210 * s * k - 16 * s, top: 40 * s,
-          width: 32 * s, height: 32 * s, borderRadius: 4, background: OAKL }} />
-      ))}
+  const inX = E(lf, -16, 0, -620, 0, IN_Q);
+  const set = lf >= 0 ? settle(lf, 0, 9, 13, 2.5) : 0;
+  const bob = lf >= 0 ? Math.sin(lf / 7) * 4 : 0;
+  /* ⛔ THREE DIFFERENT BUILDS, NOT THREE CRATES — and not three cream slabs
+     either. Each is made of the same saturated blocks the tower is made of, in a
+     different arrangement, so "an app, a site, a tool" reads as three things
+     somebody BUILT out of the same material. */
+  const SHAPES: number[][][] = [
+    [[0], [1], [2], [3]],                    /* APP  — tall and narrow */
+    [[0, 1, 2], [3, 4, 5]],                  /* SITE — wide, two courses */
+    [[0, 1], [2, 3], [4]],                   /* TOOL — squat, stepped */
+  ];
+  const rows = SHAPES[kind];
+  const bw = 74 * s, bh = 56 * s;
+  const wide = Math.max(...rows.map(r => r.length)) * bw;
+  return (
+    <div style={{ position: "absolute", left: x - wide / 2, top: y - rows.length * bh,
+      zIndex: z, transform: `translate(${inX + set}px, ${bob}px)` }}>
+      {rows.map((row, r) => row.map((bi, c) => {
+        const col = BLOCKS[bi % BLOCKS.length];
+        return (
+          <div key={`s${r}-${c}`} style={{ position: "absolute",
+            left: (wide - row.length * bw) / 2 + c * bw, top: r * bh,
+            width: bw - 5, height: bh - 5, borderRadius: 5, boxShadow: SH,
+            background: `linear-gradient(172deg, ${mxh(col, 0.28)} 0%, ${col} 46%, ${dkh(col, 0.4)} 100%)`,
+            border: `3px solid ${dkh(col, 0.5)}` }}>
+            <div style={{ position: "absolute", left: 8, right: 8, top: bh * 0.30, height: 6,
+              borderRadius: 3, background: mxh(col, 0.68) }} />
+          </div>
+        );
+      }))}
     </div>
   );
 };
