@@ -266,7 +266,7 @@ export const S2: React.FC<P> = ({ v, dur }) => {
       {f >= S2_STAMP && <Ring x={470} y={520} f={f} at={S2_STAMP} c={BRSL} z={80} s={0.9} />}
       {f >= S2_STAMP && <Puff x={470} y={540} f={f} at={S2_STAMP} n={9} s={1.1} c="#CFC4AE" z={72} />}
       <Contact x={720} y={686} w={220} z={44} o={0.40} />
-      <Hero f={f} x={830} y={694} size={330} z={52} costume={{ girl: 1, glasses: 1 }}
+      <Hero f={f} x={812} y={664} size={318} z={46} costume={{ girl: 1, glasses: 1 }}
         tint={CLAY} act={1} ph={0.8} drive={E(f, 0, S2_SLIDE, 0.3, 0, OUT)} reach={60} />
       {chip(`${R.setup} SETUP`, 150, C_JUDGE)}
       <Motes x={506} y={340} w={860} h={400} n={12} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
@@ -807,25 +807,23 @@ export const S9: React.FC<P> = ({ v, dur }) => {
       <Dress kind="hall" f={f} hz={p.horizon} dim={0.44} lamps={1} />
       <BlockLine f={f} y={296} z={30} rate={RK[v].rate * 1.5} n={8} s={1.5} />
       <CutIn f={f} dx={0} dy={-680} at={7} z={50}>
-  <BenchDesk x={506} y={452} w={520} h={168} z={50} lit={lit(S9_JUDGE)} />
+  <BenchDesk x={506} y={492} w={580} h={188} z={52} lit={lit(S9_JUDGE)} />
       </CutIn>
       {[[268, C_PROS, S9_PROS], [744, C_DEF, S9_DEF]].map(([tx, tc, at], i) => (
         <div key={"tb" + i} style={{ position: "absolute", left: (tx as number) - 152,
-          top: 638, width: 304, height: 124, zIndex: 52,
+          top: 660, width: 316, height: 132, zIndex: 52,
           background: `linear-gradient(174deg, ${lerpHex(dkh(OAKL, 0.42), OAKL, lit(at as number))} 0%, ${dkh(OAK, 0.5)} 100%)`,
           borderTop: `5px solid ${mxh(OAKL, 0.3)}`, boxShadow: SH_D }} />
       ))}
       {/* the three plates, on the three words */}
-      <Nameplate x={506} y={352} f={f} at={S9_JUDGE} t="JUDGE" c={C_JUDGE} w={250} z={78} />
-      <Nameplate x={268} y={632} f={f} at={S9_PROS} t="PROSECUTOR" c={C_PROS} w={286} z={78} />
-      <Nameplate x={744} y={632} f={f} at={S9_DEF} t="DEFENSE" c={C_DEF} w={250} z={78} />
+      <Nameplate x={506} y={422} f={f} at={S9_JUDGE} t="JUDGE" c={C_JUDGE} w={250} z={78} />
+      <Nameplate x={236} y={734} f={f} at={S9_PROS} t="PROSECUTOR" c={C_PROS} w={258} z={78} />
+      <Nameplate x={764} y={734} f={f} at={S9_DEF} t="DEFENSE" c={C_DEF} w={234} z={78} />
       {/* and a body arrives into each position WITH its plate */}
-      <Crew f={f} x={506} y={442} i={9} size={286} z={48} at={S9_JUDGE + 2} loop={3}
-        tint={dkh(C_JUDGE, 0.20)} />
-      <Crew f={f} x={268} y={700} i={2} size={252} z={54} at={S9_PROS + 2} loop={1} />
-      <Crew f={f} x={744} y={700} i={7} size={252} z={54} at={S9_DEF + 2} loop={1} flip />
+      <Crew f={f} x={506} y={438} i={9} size={318} z={44} at={S9_JUDGE + 2} loop={3} />
+      <Crew f={f} x={236} y={702} i={2} size={292} z={44} at={S9_PROS + 2} loop={1} />
+      <Crew f={f} x={764} y={702} i={7} size={292} z={44} at={S9_DEF + 2} loop={1} flip />
       <Motes x={506} y={300} w={900} h={420} n={13} f={f} z={82} c={mxh("#F3E6C6", 0.3)} />
-      <Cross f={f} from={-260} to={1180} a={-18} b={dur + 34} y={744} i={12} size={262} z={57} stack={2} />
 
     </Scene>
   );
@@ -939,15 +937,15 @@ export const S11: React.FC<P> = ({ v, dur }) => {
           borderTop: `5px solid ${mxh(OAKL, 0.3)}`, boxShadow: SH_D }} />
       </CutIn>
       <CutIn f={f} dx={0} dy={-680} at={8} z={70}>
-        <UnitStack x={700} y={730} f={f} w={330} z={70}
+        <UnitStack x={498} y={730} f={f} w={330} z={70}
           blocks={[0, 2, 4]} seat={{ 1: S11_SWEEP, 3: S11_SWEEP + 3, 5: S11_SWEEP + 6 }}
           lit={f >= S11_SWEEP ? 1 : 0}
           lean={E(f, 0, S11_SWEEP, 5.5, 0, OUT)} />
       </CutIn>
       {f >= S11_SWEEP && <Ring x={700} y={560} f={f} at={S11_SWEEP} c={C_DEF} z={78} s={1.5} dur={24} />}
       {f >= S11_SWEEP && <Puff x={700} y={600} f={f} at={S11_SWEEP} n={13} s={1.5} c="#CFC4AE" z={74} />}
-      <Contact x={796} y={686} w={210} z={44} o={0.42} />
-      <Hero f={f} x={892} y={694} size={330} z={52} costume={{ suit: 1, glasses: 1 }}
+      <Contact x={716} y={694} w={228} z={44} o={0.42} />
+      <Hero f={f} x={830} y={702} size={306} z={52} costume={{ suit: 1, glasses: 1 }}
         tint={CLAY} flip act={1} ph={0.9}
         drive={stroke(f, S11_SWING, 0.9, 4) - stroke(f, S11_SWEEP + 3, 0.9, 8)} reach={110} />
       {chip("AND SOMEBODY PUSHES BACK", 150, C_DEF)}
@@ -988,7 +986,7 @@ export const S12: React.FC<P> = ({ v, dur }) => {
       {f >= S12_GAVEL && <Ring x={760} y={584} f={f} at={S12_GAVEL} c={C_JUDGE} z={76} s={1.3} dur={26} />}
       {f >= S12_GAVEL && <Puff x={760} y={598} f={f} at={S12_GAVEL} n={11} s={1.3} c="#CFC4AE" z={70} />}
       {/* the judge rises INTO frame behind the bench */}
-      <Hero f={f} x={430} y={628} size={360} z={48} costume={{ prof: 1 }} tint={CLAY}
+      <Hero f={f} x={392} y={598} size={392} z={48} costume={{ prof: 1 }} tint={CLAY}
         stern={0.85} act={3} ph={0.2}
         lift={E(f, S12_RISE, S12_RISE + 8, 0, 76, BACK)} />
       {/* the evidence, under the swinging light — and the flags are READ off it */}
@@ -1042,14 +1040,14 @@ export const S13: React.FC<P> = ({ v, dur }) => {
           plinth behind the action — grey, courses missing, exactly as the hook
           left it. The loop does not abolish work that looks finished and isn't;
           it catches it. */}
-      <div style={{ position: "absolute", left: 46, top: 502, width: 200, height: 16,
+      <div style={{ position: "absolute", left: 18, top: 498, width: 180, height: 16,
         zIndex: 34, background: `linear-gradient(180deg, ${OAKL} 0%, ${dkh(OAK, 0.5)} 100%)` }} />
-      <UnitStack x={146} y={502} f={f} w={140} z={35} blocks={[0, 1, 4]} lit={0} lean={-3.5} />
+      <UnitStack x={104} y={498} f={f} w={132} z={35} blocks={[0, 1, 4]} lit={0} lean={-3.5} />
 
       {/* THE WORK — pass 3 fills the bay S1 left dark */}
-      <Contact x={560 - 186} y={734 - 10} w={372} z={44} o={0.48} />
+      <Contact x={636 - 186} y={734 - 10} w={372} z={44} o={0.48} />
       <CutIn f={f} dx={0} dy={-600} at={7} z={60}>
-        <UnitStack x={560} y={748} f={f} w={372} z={60}
+        <UnitStack x={636} y={748} f={f} w={372} z={60}
           blocks={[0, 1, 2]}
           seat={{ 3: S13_P1, 5: S13_P2, 4: S13_P3 }}
           lit={f >= S13_P3 ? 1 : 0} hit={hit}
@@ -1075,7 +1073,7 @@ export const S13: React.FC<P> = ({ v, dur }) => {
         <Crew key={"g" + i} f={f} x={gx} y={704} i={i + 4} size={206} z={54} at={-8}
           loop={2} cheer={f >= S13_HIT ? 0.8 : 0} />
       ))}
-      <Hero f={f} x={356} y={712} size={330} z={52} costume={{ suit: 1 }} tint={CLAY}
+      <Hero f={f} x={330} y={722} size={300} z={52} costume={{ suit: 1 }} tint={CLAY}
         cheer={f >= S13_HIT ? 0.9 : 0} act={2} ph={0.4} />
       {chip("IT TAKES THE HIT", 150, GREEN)}
       <Motes x={506} y={300} w={900} h={430} n={14} f={f} z={84} c={mxh("#F3E6C6", 0.3)} />
@@ -1112,7 +1110,7 @@ export const S14: React.FC<P> = ({ v, dur }) => {
       <FeeStack x={560} y={520} f={f} sweep={S14_FAST} n={9} s={1.5} z={70} />
       {f >= S14_SWEEP && <Puff x={470} y={540} f={f} at={S14_SWEEP} n={8} s={1.0} c="#CFC4AE" z={72} />}
       <Contact x={776} y={690} w={200} z={44} o={0.4} />
-      <Hero f={f} x={866} y={698} size={318} z={52} costume={{ girl: 1, glasses: 1 }}
+      <Hero f={f} x={846} y={668} size={306} z={46} costume={{ girl: 1, glasses: 1 }}
         tint={CLAY} flip act={1} ph={1.2}
         drive={stroke(f, S14_SWEEP - 3, 0.8, 4) - stroke(f, S14_FAST, 0.8, 9)} reach={120} />
       <Motes x={470} y={340} w={640} h={380} n={11} f={f} z={80} c={mxh("#F3E6C6", 0.28)} />
@@ -1237,8 +1235,8 @@ export const S16: React.FC<P> = ({ v, dur }) => {
       <Nameplate x={186} y={624} f={f} at={S16_P2} t="PROS" c={C_PROS} w={170} z={78} pool={false} />
       <Nameplate x={664} y={624} f={f} at={S16_P2 + 4} t="DEFENSE" c={C_DEF} w={210} z={78} pool={false} />
       {f >= S16_LAUNCH && <Ring x={700} y={470} f={f} at={S16_LAUNCH} c="#FFFBEE" z={80} s={2.0} dur={30} />}
-      <Contact x={800} y={700} w={200} z={44} o={0.36} />
-      <Hero f={f} x={890} y={708} size={318} z={52} costume={{ suit: 1 }} tint={CLAY}
+      <Contact x={758} y={700} w={200} z={44} o={0.36} />
+      <Hero f={f} x={848} y={708} size={300} z={52} costume={{ suit: 1 }} tint={CLAY}
         cheer={f >= S16_LAUNCH ? 0.8 : 0} act={2} ph={0.3} />
       <Motes x={506} y={300} w={900} h={430} n={13} f={f} z={84} c={mxh("#FFF3D2", 0.3)} />
       <Cross f={f} from={-260} to={1180} a={-18} b={dur + 34} y={748} i={7} size={262} z={57} stack={2} />

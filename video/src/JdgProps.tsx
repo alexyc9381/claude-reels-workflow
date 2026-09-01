@@ -266,21 +266,46 @@ export const WitnessBox: React.FC<{ x: number; y: number; f: number; w?: number;
    ========================================================================= */
 export const BenchDesk: React.FC<{ x: number; y: number; w?: number; h?: number;
   z?: number; lit?: number }> = ({ x, y, w: ww = 640, h: hh = 220, z = 50, lit = 1 }) => (<>
+  {/* ⛔ THIS READ AS A FLAT TEAL SLAB. A bench is a moulded front: a plinth at
+      the floor, a panelled body with real bevels, a moulding, a brass rail and a
+      lit desk surface with a reading lamp on it. Seven parts, and every one of
+      them is why a viewer names it. */}
   <Contact x={x - ww / 2 - 20} y={y - 12} w={ww + 40} z={z - 1} o={0.5} />
-  <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
-    zIndex: z, background: `linear-gradient(174deg, ${OAKL} 0%, ${OAK} 26%, ${dkh(OAK, 0.58)} 100%)`,
+  {/* the plinth */}
+  <div style={{ position: "absolute", left: x - ww / 2 - 14, top: y - 26, width: ww + 28,
+    height: 26, zIndex: z, background: `linear-gradient(180deg, ${dkh(OAK, 0.24)} 0%, ${dkh(OAK, 0.6)} 100%)` }} />
+  {/* the body */}
+  <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh - 22,
+    zIndex: z + 1, background: `linear-gradient(174deg, ${mxh(OAKL, 0.12 * lit)} 0%, ${OAK} 30%, ${dkh(OAK, 0.5)} 100%)`,
     boxShadow: SH_D }}>
     {[0, 1, 2, 3].map(i => (
-      <div key={"bp" + i} style={{ position: "absolute", left: 18 + i * (ww - 36) / 4,
-        top: 24, width: (ww - 36) / 4 - 16, height: hh - 58,
-        background: `linear-gradient(174deg, ${hexa(dkh(OAK, 0.18), 0.9)} 0%, ${hexa(dkh(OAK, 0.5), 0.9)} 100%)`,
-        borderTop: `3px solid ${hexa(OAKL, 0.42)}` }} />
+      <div key={"bp" + i} style={{ position: "absolute", left: 20 + i * (ww - 40) / 4,
+        top: 26, width: (ww - 40) / 4 - 18, height: hh - 84,
+        background: `linear-gradient(174deg, ${hexa(dkh(OAK, 0.14), 0.9)} 0%, ${hexa(dkh(OAK, 0.44), 0.9)} 100%)`,
+        borderTop: `4px solid ${hexa(mxh(OAKL, 0.3), 0.85)}`,
+        borderLeft: `3px solid ${hexa(OAKL, 0.4)}`,
+        borderBottom: `4px solid ${hexa("#000", 0.42)}` }} />
     ))}
   </div>
-  {/* the desk top, the brightest horizontal in the frame when the lamp is on */}
-  <div style={{ position: "absolute", left: x - ww / 2 - 22, top: y - hh - 20, width: ww + 44,
-    height: 24, zIndex: z + 2,
-    background: `linear-gradient(180deg, ${mxh(OAKL, 0.4 * lit)} 0%, ${OAKL} 40%, ${dkh(OAK, 0.5)} 100%)` }} />
+  {/* the moulding under the top */}
+  <div style={{ position: "absolute", left: x - ww / 2 - 18, top: y - hh - 6, width: ww + 36,
+    height: 14, zIndex: z + 2,
+    background: `linear-gradient(180deg, ${mxh(OAKL, 0.34)} 0%, ${dkh(OAK, 0.34)} 100%)` }} />
+  {/* the desk surface — the brightest horizontal in the frame when the lamp is on */}
+  <div style={{ position: "absolute", left: x - ww / 2 - 24, top: y - hh - 26, width: ww + 48,
+    height: 22, zIndex: z + 3, borderRadius: 3,
+    background: `linear-gradient(180deg, ${mxh(OAKL, 0.30 + 0.34 * lit)} 0%, ${OAKL} 44%, ${dkh(OAK, 0.4)} 100%)` }} />
+  {/* the brass rail across the front */}
+  <div style={{ position: "absolute", left: x - ww / 2 - 10, top: y - hh + 6, width: ww + 20,
+    height: 11, zIndex: z + 4,
+    background: `linear-gradient(180deg, ${BRSL} 0%, ${BRS} 44%, ${BRSD} 100%)` }} />
+  {/* the reading lamp on the desk */}
+  <div style={{ position: "absolute", left: x + ww * 0.32, top: y - hh - 74, width: 12, height: 50,
+    zIndex: z + 5, background: dkh(BRSD, 0.2) }} />
+  <div style={{ position: "absolute", left: x + ww * 0.28, top: y - hh - 96, width: 72, height: 30,
+    zIndex: z + 6, borderRadius: "36px 36px 6px 6px",
+    background: `linear-gradient(178deg, ${dkh(GREEN, 0.2)} 0%, ${dkh(GREEN, 0.56)} 100%)` }} />
+  {lit > 0.4 && <Pool x={x + ww * 0.32} y={y - hh - 26} w={300} c="#FFE9B8" o={0.28 * lit} z={z + 2} />}
 </>);
 
 /** the gavel and its block. ⭐ THE STRIKE IS A DISCRETE STROKE, and on the
