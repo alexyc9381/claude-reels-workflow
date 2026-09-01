@@ -1332,3 +1332,170 @@ export const SealCarcass: React.FC<{ x: number; y: number; d?: number; z?: numbe
     </svg>
   </div>
 );
+
+/* =========================================================================
+   THE BARE-STAGE HOOK PROPS.  ⛔ ONE DOMINANT OBJECT EACH — see
+   `feedback_hook_simplicity`: *"concepts need to be simpler, not so much stuff
+   going on, very hierarchical but still visually appealing and striking"*, and
+   its correction *"it cant just be this basic... keep our backgrounds, just
+   hold them down."* Reduce IDEAS, not LAYERS.
+   ====================================================================== */
+
+/** a colossal gold-sealed DONE certificate that can be TORN IN HALF, and has
+    nothing behind the tear. `split` 0..1 opens the two halves apart. */
+export const BigCert: React.FC<{
+  x: number; y: number; h?: number; z?: number; split?: number; strain?: number; f: number;
+}> = ({ x, y, h: hh = 620, z = 60, split = 0, strain = 0, f }) => {
+  const ww = hh * 0.74;
+  const gap = split * ww * 0.62;
+  const half = (side: -1 | 1) => (
+    <div style={{ position: "absolute", left: side < 0 ? 0 : ww / 2, top: 0, width: ww / 2,
+      height: hh, overflow: "hidden",
+      transform: `translateX(${side * gap}px) rotate(${side * split * 13}deg)`,
+      transformOrigin: side < 0 ? "100% 50%" : "0% 50%" }}>
+      <svg viewBox="0 0 460 620" width={ww} height={hh}
+        style={{ position: "absolute", left: side < 0 ? 0 : -ww / 2, top: 0, overflow: "visible" }}>
+        <rect x={0} y={0} width={460} height={620} rx={7} fill={OXBLOOD} />
+        <rect x={0} y={0} width={460} height={20} fill="#7A342E" />
+        <rect x={26} y={26} width={408} height={568} fill="none" stroke={GOLD} strokeWidth={10} />
+        <rect x={44} y={44} width={372} height={532} fill="none" stroke={hexa(GOLD, 0.5)} strokeWidth={5} />
+        <text x={230} y={112} textAnchor="middle" fill="#F4E6C6"
+          style={{ ...mono(66, 800), letterSpacing: 12 }}>{R.lie}</text>
+        {Array.from({ length: 9 }, (_, i) => (
+          <rect key={i} x={74} y={168 + i * 34} rx={4}
+            width={i === 8 ? 150 : 312 - (i % 3) * 46} height={15}
+            fill={hexa("#E8DCC8", 0.30 + (i % 3) * 0.10)} />
+        ))}
+        <g transform="translate(230,506)">
+          {Array.from({ length: 20 }, (_, i) => {
+            const a = (i / 20) * Math.PI * 2;
+            return <circle key={i} cx={Math.cos(a) * 56} cy={Math.sin(a) * 56} r={14} fill="#C08A2E" />;
+          })}
+          <circle cx={0} cy={0} r={56} fill={GOLD} />
+          <circle cx={0} cy={0} r={56} fill="none" stroke="#8E6218" strokeWidth={5} />
+          <path d="M -20 2 L -6 20 L 22 -16" fill="none" stroke="#4A3208" strokeWidth={11}
+            strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      </svg>
+      {/* the ragged edge, drawn only on the inner side */}
+      {split > 0.02 && (
+        <div style={{ position: "absolute", [side < 0 ? "right" : "left"]: -1, top: 0, width: 22,
+          height: hh, background: dkh(OXBLOOD, 0.34),
+          clipPath: side < 0
+            ? "polygon(0% 0%, 100% 4%, 20% 12%, 100% 22%, 25% 32%, 100% 42%, 15% 54%, 100% 64%, 30% 74%, 100% 86%, 20% 94%, 100% 100%, 0% 100%)"
+            : "polygon(100% 0%, 0% 4%, 80% 12%, 0% 22%, 75% 32%, 0% 42%, 85% 54%, 0% 64%, 70% 74%, 0% 86%, 80% 94%, 0% 100%, 100% 100%)" }} />
+      )}
+    </div>
+  );
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+      zIndex: z, transform: `scaleX(${1 + strain * 0.03})` }}>
+      {half(-1)}
+      {half(1)}
+    </div>
+  );
+};
+
+/** a gleaming DONE beam spanning a gap. `bow` sags it, `snap` breaks it in two. */
+export const DoneBeam: React.FC<{
+  x: number; y: number; w?: number; z?: number; bow?: number; snap?: number;
+}> = ({ x, y, w: ww = 800, z = 50, bow = 0, snap = 0 }) => {
+  /* ⛔ 66px OF BEAM ACROSS 800 READS AS A RULE, NOT A SPAN. A thing a body
+     walks on has to look like it could carry one. */
+  const hh = 92;
+  const drop = snap * 300;
+  const piece = (side: -1 | 1) => (
+    <div style={{ position: "absolute", left: side < 0 ? 0 : ww / 2, top: 0, width: ww / 2,
+      height: hh, transformOrigin: side < 0 ? "0% 50%" : "100% 50%",
+      transform: `rotate(${side * snap * 42}deg) translateY(${snap * 26}px)` }}>
+      <div style={{ position: "absolute", inset: 0,
+        background: `linear-gradient(180deg, #F6E2B0 0%, ${GOLD} 42%, #A5802E 100%)` }} />
+      <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 9,
+        background: "#FFF4D2" }} />
+      <div style={{ position: "absolute", left: 0, bottom: 0, width: "100%", height: 12,
+        background: "#8E6218" }} />
+      {snap > 0.02 && (
+        <div style={{ position: "absolute", [side < 0 ? "right" : "left"]: 0, top: 0, width: 26,
+          height: hh, background: "#5E4414",
+          clipPath: side < 0 ? "polygon(0 0, 100% 18%, 20% 44%, 100% 72%, 0 100%)"
+                             : "polygon(100% 0, 0 18%, 80% 44%, 0 72%, 100% 100%)" }} />
+      )}
+    </div>
+  );
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh / 2 + bow * 46 + drop,
+      width: ww, height: hh, zIndex: z }}>
+      {piece(-1)}
+      {piece(1)}
+      {snap < 0.02 && (
+        <div style={{ position: "absolute", left: ww * 0.5 - 110, top: 24, width: 220, height: 46,
+          textAlign: "center", color: "#4A3208", ...mono(42, 800), letterSpacing: 10 }}>{R.lie}</div>
+      )}
+    </div>
+  );
+};
+
+/** a handsome, finished-looking product front, held up by ONE prop.
+    ⛔ IT IS NOT DRAWN UGLY. The claim is that it is a FRONT, not that it is bad
+    work — so it is the best-looking object in the reel until it goes over. */
+export const Facade: React.FC<{
+  x: number; y: number; w?: number; z?: number; fall?: number; propBend?: number; f: number;
+}> = ({ x, y, w: ww = 760, z = 50, fall = 0, propBend = 0, f }) => {
+  const hh = ww * 0.80;
+  return (<>
+    {/* the single prop, and it BENDS before it snaps */}
+    {fall < 0.06 && (
+      <div style={{ position: "absolute", left: x + ww * 0.30, top: y - hh * 0.52, width: 20,
+        height: hh * 0.54, zIndex: z + 2, transformOrigin: "50% 100%",
+        transform: `rotate(${10 + propBend * 9}deg) skewX(${-propBend * 8}deg)`,
+        background: `linear-gradient(90deg, #C09A5E 0%, #7A5A2E 100%)` }} />
+    )}
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+      zIndex: z, transformOrigin: "50% 100%",
+      transform: `perspective(1400px) rotateX(${fall * 84}deg)` }}>
+      <div style={{ position: "absolute", inset: 0, borderRadius: 10, overflow: "hidden",
+        background: "#F6F3EC", boxShadow: SH_D }}>
+        <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: hh * 0.11,
+          background: "#2A3038" }}>
+          {[0, 1, 2].map(i => (
+            <div key={i} style={{ position: "absolute", left: 18 + i * 26, top: hh * 0.036,
+              width: 15, height: 15, borderRadius: 8,
+              background: ["#E05A4A", "#E7B24C", "#3F9E74"][i] }} />
+          ))}
+        </div>
+        <div style={{ position: "absolute", left: 0, top: hh * 0.11, width: "100%", height: hh * 0.40,
+          background: `linear-gradient(120deg, #5B5FA8 0%, #8B72B0 100%)` }}>
+          <div style={{ position: "absolute", left: ww * 0.07, top: hh * 0.09, width: ww * 0.52,
+            height: hh * 0.075, borderRadius: 5, background: hexa("#FFFFFF", 0.9) }} />
+          <div style={{ position: "absolute", left: ww * 0.07, top: hh * 0.20, width: ww * 0.34,
+            height: hh * 0.045, borderRadius: 4, background: hexa("#FFFFFF", 0.52) }} />
+          <div style={{ position: "absolute", left: ww * 0.07, top: hh * 0.28, width: ww * 0.21,
+            height: hh * 0.078, borderRadius: 7, background: EMBER }} />
+        </div>
+        {[0, 1, 2].map(i => (
+          <div key={"c" + i} style={{ position: "absolute", left: ww * (0.06 + i * 0.312),
+            top: hh * 0.57, width: ww * 0.27, height: hh * 0.34, borderRadius: 8,
+            background: "#EAE5D8" }}>
+            <div style={{ position: "absolute", left: ww * 0.03, top: hh * 0.035, width: ww * 0.085,
+              height: ww * 0.085, borderRadius: 12, background: [TEAL, SODIUM, "#D96A88"][i] }} />
+            <div style={{ position: "absolute", left: ww * 0.03, top: hh * 0.17, width: ww * 0.19,
+              height: hh * 0.03, background: "#C8C2B2" }} />
+            <div style={{ position: "absolute", left: ww * 0.03, top: hh * 0.225, width: ww * 0.13,
+              height: hh * 0.03, background: "#D4CEC0" }} />
+          </div>
+        ))}
+        {/* the DONE badge it is wearing */}
+        <div style={{ position: "absolute", right: ww * 0.05, top: hh * 0.14, width: ww * 0.15,
+          height: ww * 0.15, borderRadius: "50%", background: GOLD,
+          border: `${ww * 0.014}px solid #8E6218`, display: "flex", alignItems: "center",
+          justifyContent: "center", color: "#4A3208", ...mono(Math.round(ww * 0.036), 800) }}>✓</div>
+      </div>
+    </div>
+    {/* what was behind it all along: two poles and air */}
+    {fall > 0.35 && [x - ww * 0.28, x + ww * 0.28].map((px, i) => (
+      <div key={"sc" + i} style={{ position: "absolute", left: px - 11, top: y - hh * 0.86,
+        width: 22, height: hh * 0.86, zIndex: z - 2, opacity: Math.min(1, (fall - 0.35) * 3),
+        background: `linear-gradient(90deg, #6E6A5E 0%, #3A382E 100%)` }} />
+    ))}
+  </>);
+};

@@ -11,6 +11,8 @@ import { HOOKS, HOOK_BANDS } from "./JudgeHooks";
 import type { HookId } from "./JudgeHooks";
 import { OPENS, OPEN_BANDS } from "./JudgeOpens";
 import type { OpenId } from "./JudgeOpens";
+import { OPENS2, OPEN2_BANDS } from "./JudgeOpens2";
+import type { Open2Id } from "./JudgeOpens2";
 import words from "./data/words_judge132.json";
 
 /* ===========================================================================
@@ -470,6 +472,32 @@ export const OpenCut = (id: OpenId): React.FC => () => {
   const f = useCurrentFrame();
   const Cut = OPENS[id];
   const b = OPEN_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/** round 4 — the BARE-STAGE opens. One dominant object each, a different object
+    in every one, the court held down behind them. */
+export const Open2Cut = (id: Open2Id): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS2[id];
+  const b = OPEN2_BANDS[id];
   return (
     <AbsoluteFill>
       <Bg />

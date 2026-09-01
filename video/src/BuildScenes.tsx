@@ -130,10 +130,11 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
   const p = asPlace("row");
   const L = LAY[v];
   /* the chain leads, the curtain follows — overlapping action, never stepped */
-  const chain = E(f, 4, 54, 0, 1, IO);
+  const chain = E(f, 4, 40, 0, 1, IO);
   const k = 0.34 + chain * 0.66;                  /* PRE-SEEDED AND SETTLED at f0 */
-  const strain = E(f, 2, 16, 0, 0.94, OUT) * (1 - E(f, 46, 58, 0, 1, IO));
-  const pull = Math.sin(f / 5.2) * 0.10 * (1 - E(f, 48, 60, 0, 1, IO));
+  const OUTS = [42, 52, 62];                      /* three goods, one-two-three */
+  const strain = E(f, 2, 14, 0, 0.94, OUT) * (1 - E(f, 34, 44, 0, 1, IO));
+  const pull = Math.sin(f / 5.2) * 0.10 * (1 - E(f, 36, 46, 0, 1, IO));
 
   /* ⛔ EVERY OBJECT SITS BELOW THE RESERVED BAND (panel y 112..210). The first
      render put the awning at y82 and `HookHeader` + the band chip covered the
@@ -204,6 +205,36 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
         ))}
       </div>
 
+      {/* ⭐ THE ARRIVAL. Three finished goods come out of the three bays and land
+          on the kerb, each with a squash and a ring — LARGE, BRIGHT, TRAVELLING,
+          which is the only combination the motion table registers. The reveal
+          alone measured 4.75: a shutter climbing over 50 frames repaints ~2.9%
+          of the panel per sample, so the hook needed an EVENT, not more curtain. */}
+      {R.tools.map((t, i) => {
+        const at = OUTS[i];
+        const outk = E(f, at, at + 13, 0, 1, OUT);
+        if (outk <= 0) return null;
+        const sq = squash(f - at - 11, 6, 0.20, 3, 12);
+        const gx = OP_X + 84 + i * 164;
+        return (
+          <React.Fragment key={"go" + i}>
+            <div style={{ position: "absolute", left: gx - 56 + (i - 1) * 132 * outk,
+              top: 560 + outk * 128,
+              width: 112, height: 112, zIndex: 62, borderRadius: i === 1 ? "50%" : 8,
+              transform: `scale(1, ${sq}) rotate(${(1 - outk) * -18}deg)`,
+              transformOrigin: "50% 100%",
+              background: `linear-gradient(172deg, ${mxh(t.c, 0.26)} 0%, ${dkh(t.c, 0.34)} 100%)`,
+              border: "5px solid rgba(0,0,0,0.46)" }}>
+              <div style={{ position: "absolute", left: 12, top: 14, width: 44, height: 9,
+                background: "rgba(255,255,255,0.28)" }} />
+            </div>
+            {outk >= 1 && <Ring x={gx + (i - 1) * 132} y={694} f={f} at={at + 12}
+              c={mxh(t.c, 0.5)} z={64} s={0.66} />}
+            <Contact x={gx - 58 + (i - 1) * 132 * outk} y={686} w={116} o={0.34 * outk} z={61} />
+          </React.Fragment>
+        );
+      })}
+
       <Shutter x={OP_X} y={OP_Y} w={OP_W} h={OP_H} k={k} f={f} z={40} chainX={CH_X - OP_X} />
       <AwningBoard x={OP_X - 10} y={AW_Y} w={OP_W + 20} f={f} z={66} />
 
@@ -221,7 +252,9 @@ export const S0: React.FC<SP> = ({ v, dur }) => {
 
       {/* the cost of the haul: grit shaken off the shutter box */}
       {strain > 0.4 && <Fall x={OP_X} y={OP_Y - 46} w={OP_W} f={f} at={6} z={72} />}
-      <Puff x={506 + L.a} y={GY} f={f} at={50} c="#C8B48E" z={70} />
+      <Runner y={252} f={f} z={20} rate={11.4} pitch={188} w={148} h={62} kind="bead"
+        c="#F0DCA8" c2="#2A2018" rail={false} o={0.60} />
+      <Puff x={506 + L.a} y={GY} f={f} at={38} c="#C8B48E" z={70} />
 
       <BandChip t={`${R.count} FREE TOOLS · ${R.markets[0]} + ${R.markets[1]}`} c={INK} />
       <Edge side="l" c="#7E6A5E" w={104} z={93} kind="post" />
@@ -353,8 +386,8 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
             marginLeft: -2.5, background: dkh(SODIUM, 0.30) }} />
         </div>
       ))}
-      <Runner y={196} f={f} z={20} rate={7.6} pitch={188} w={128} h={54} kind="load"
-        c="#E0B876" c2="#1A1208" rail hang={10} o={0.92} />
+      <Runner y={252} f={f} z={20} rate={10.8} pitch={176} w={144} h={66} kind="load"
+        c="#E0B876" c2="#1A1208" rail hang={12} o={0.95} />
 
       <MillCabinet x={272 + L.a} y={330} w={468} h={300} f={f} lit={lit} z={40} />
       <NameStrip x={506 + L.a} y={252} i={0} f={f} at={12} kind="flap" s={1} z={76} />
@@ -511,7 +544,7 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
           border: "4px solid rgba(0,0,0,0.4)",
           transform: `rotate(${f * (1.4 + (i % 3) * 0.8)}deg)` }} />
       ))}
-      <Runner y={640} f={f} z={22} rate={7.0} pitch={158} w={110} h={52} kind="bead"
+      <Runner y={640} f={f} z={22} rate={10.4} pitch={156} w={132} h={64} kind="bead"
         c="#D8C4F4" c2="#1A1230" rail o={0.9} />
 
       <VoiceBooth x={188 + L.a} y={272} w={430} h={352} f={f} door={1} onAir={onAir} z={42}>
@@ -552,7 +585,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
         rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.6} rakeN={RAKE_N[v]}
         lamp={{ x: 300 + L.a * 0.3, y: 176, r: 246 }} floorKind="slab" grit={0.8} />
 
-      <Runner y={218} f={f} z={20} rate={8.2} pitch={172} w={116} h={56} kind="crate"
+      <Runner y={252} f={f} z={20} rate={11.0} pitch={168} w={136} h={66} kind="crate"
         c="#C4B08E" c2="#0E1024" rail hang={12} o={0.88} />
 
       <Lathe x={470 + L.b * 0.4} y={470} f={f} feed={feed} out={out} z={46} />
@@ -599,7 +632,7 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
 
       {/* ⭐ the full-width overhead rail carrying the discs to the stalls —
           §1's highest-value shape, mounted as something the row would contain */}
-      <Runner y={214} f={f} z={30} rate={9.8} pitch={148} w={104} h={58} kind="bead"
+      <Runner y={244} f={f} z={30} rate={11.8} pitch={152} w={128} h={70} kind="bead"
         c="#EFE7D4" c2="#1E4A34" rail hang={16} o={1} />
 
       <Stall x={286 + L.a * 0.3} y={GY - 30} mark={ord[0] === 0 ? "fiverr" : "upwork"}
@@ -659,11 +692,11 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
       <div style={{ position: "absolute", left: 700 + L.c * 0.3, top: 380, width: 268, height: 42,
         zIndex: 44, borderRadius: 4, background: "linear-gradient(178deg,#2A4A56,#0C1E24)",
         border: "4px solid rgba(0,0,0,0.5)" }} />
-      {Array.from({ length: 5 }, (_, i) => {
-        const k = ((f * 0.032 + i * 0.2) % 1);
+      {Array.from({ length: 6 }, (_, i) => {
+        const k = ((f * 0.052 + i * 0.166) % 1);
         return (
           <div key={"au" + i} style={{ position: "absolute", left: 712 + L.c * 0.3 + k * 234,
-            top: 330, width: 52, height: 52, zIndex: 46, borderRadius: "50%",
+            top: 316, width: 86, height: 86, zIndex: 46, borderRadius: "50%",
             background: `radial-gradient(56% 56% at 36% 30%, ${mxh(TEAL, 0.3)} 0%, ${dkh(TEAL, 0.4)} 100%)`,
             border: "4px solid rgba(0,0,0,0.42)" }} />
         );
@@ -717,7 +750,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
             background: dkh(TEAL, 0.56), transform: "skewY(-42deg)", transformOrigin: "0% 0%" }} />
         </div>
       ))}
-      <Runner y={210} f={f} z={22} rate={8.6} pitch={162} w={112} h={54} kind="fan"
+      <Runner y={248} f={f} z={22} rate={11.2} pitch={160} w={132} h={66} kind="fan"
         c="#BFE0EE" c2="#101A20" rail o={0.86} />
 
       {/* the rig and the plate it is writing on */}
@@ -766,19 +799,19 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.07]} vig={0.62}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="plant" overhead="none"
         rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
-        lamp={{ x: 506 + L.a * 0.3, y: 156, r: 234 }} floorKind="slab" grit={0.9} />
+        lamp={{ x: 506 + L.a * 0.3, y: 244, r: 268 }} floorKind="slab" grit={0.9} />
 
-      <Runner y={648} f={f} z={22} rate={7.4} pitch={176} w={124} h={56} kind="crate"
+      <Runner y={648} f={f} z={22} rate={10.6} pitch={172} w={140} h={66} kind="crate"
         c="#9EB0BC" c2="#0C1216" rail o={0.84} />
 
-      <ScanGantry x={272 + L.b * 0.3} y={140} w={468} f={f} grip={grip}
+      <ScanGantry x={272 + L.b * 0.3} y={230} w={468} f={f} grip={grip}
         strain={refuse} lift={tear} z={44} />
-      <PhotoPrint x={506 + L.b * 0.3} y={470 - tear * 178} turn={tear} f={f} s={1.05} z={78} />
+      <PhotoPrint x={506 + L.b * 0.3} y={580 - tear * 150} turn={tear} f={f} s={0.85} z={78} />
 
       {/* the cost of the tear: a crack, and a shower of scale */}
       {tear > 0 && tear < 0.5 && (<>
-        <Ring x={506 + L.b * 0.3} y={460} f={f} at={22} c="#CFE6F4" z={80} s={0.86} />
-        <Fall x={412 + L.b * 0.3} y={470} w={190} f={f} at={22} z={79} />
+        <Ring x={506 + L.b * 0.3} y={556} f={f} at={22} c="#CFE6F4" z={80} s={0.86} />
+        <Fall x={412 + L.b * 0.3} y={566} w={190} f={f} at={22} z={79} />
       </>)}
 
       {/* the hero slots the print in and then braces against the refusal */}
@@ -821,10 +854,10 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
         rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.8} rakeN={RAKE_N[v]}
         floorKind="tile" grit={0.6} />
 
-      <Runner y={188} f={f} z={20} rate={8.0} pitch={168} w={118} h={52} kind="load"
+      <Runner y={244} f={f} z={20} rate={11.0} pitch={166} w={138} h={64} kind="load"
         c="#E8E0CC" c2="#2E2A20" rail hang={10} o={0.8} />
 
-      <Turntable x={470 + L.b * 0.3} y={556} f={f} spin={spin} lamps={lamps} z={46} />
+      <Turntable x={498 + L.b * 0.3} y={596} f={f} spin={spin} lamps={lamps} z={46} />
 
       {/* "reuse" — the copies racking up on the shelf behind, each landing hard */}
       {Array.from({ length: 4 }, (_, i) => {
@@ -850,7 +883,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
       <Hero f={f} x={244 + L.a * 0.3} y={GY} size={236} z={56} act={1} ph={0.5}
         drive={E(f, 24, 30, 0, 1, IO) * 0.24 - E(f, 30, 40, 0, 1, OUT) * 0.24}
         strain={E(f, 44, 50, 0, 0.5, OUT) * (1 - E(f, 56, 62, 0, 1, IO))}
-        costume={{ beard: 1 }} tint="#8E4A2E" cheer={f > 54 ? 1 : 0} gaze={0.7} />
+        costume={{ suit: 1 }} tint="#8E4A2E" cheer={f > 54 ? 1 : 0} gaze={0.7} />
 
       <BandChip t="SPIN IT · LIGHT IT · REUSE IT" c={INK} />
       <Edge side="r" c="#221E16" w={100} z={93} kind="post" />
@@ -946,42 +979,69 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
   const p = asPlace("gate");
   const L = LAY[v];
   /* two shoves, and the trolley comes back both times */
-  const shove = E(f, 6, 13, 0, 1, IN_Q) - E(f, 13, 22, 0, 1, OUT)
-              + E(f, 24, 30, 0, 1, IN_Q) - E(f, 30, 38, 0, 1, OUT);
+  const shove = E(f, 4, 12, 0, 1, IN_Q) - E(f, 12, 21, 0, 1, OUT)
+              + E(f, 22, 29, 0, 1, IN_Q) - E(f, 29, 38, 0, 1, OUT);
+  /* the load carries on when the barrow stops — a damped ring, never a stop */
+  const hit1 = f >= 12 ? Math.sin((f - 12) * 0.74) * Math.exp(-(f - 12) / 7) : 0;
+  const hit2 = f >= 29 ? Math.sin((f - 29) * 0.74) * Math.exp(-(f - 29) / 7) : 0;
+  const ring = hit1 + hit2;
 
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.66}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="house" overhead="none"
         rake={0.09 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.4} rakeN={RAKE_N[v]}
-        floorKind="tarmac" grit={0.9} />
+        lamp={{ x: 224, y: 356, r: 300 }} floorKind="tarmac" grit={0.9} />
 
-      {/* the three shops still glowing warm BEHIND him — what he already has */}
+      {/* ⭐⭐ THE THREE SHOPS HE ALREADY OWNS, GLOWING BEHIND HIM — and they are
+          the MOTIVATED LIGHT that makes him readable. The first pass put a
+          near-black hero on the darkest set in the reel and he was invisible in
+          the delivered frame: `name which side of the contrast your subject is
+          on` (reel 110). He is lit from behind-left by his own workshops, which
+          is also the sentence the scene is making — everything he has built is
+          behind him and the gate is in front. */}
       {R.tools.map((t, i) => (
-        <div key={"gl" + i} style={{ position: "absolute", left: 40 + i * 108, top: 402,
-          width: 84, height: 150, zIndex: 14,
-          background: `linear-gradient(176deg, ${dkh(t.c, 0.44)} 0%, ${dkh(t.c, 0.80)} 100%)`,
-          border: "3px solid rgba(0,0,0,0.5)" }}>
-          <div style={{ position: "absolute", left: 12, top: 22, right: 12, height: 40,
-            background: mxh(t.c, 0.10 + 0.12 * Math.abs(Math.sin(f / 11 + i))) }} />
-        </div>
+        <React.Fragment key={"gl" + i}>
+          <div style={{ position: "absolute", left: 138 + i * 138, top: 342, width: 118,
+            height: 226, zIndex: 70,
+            background: `linear-gradient(176deg, ${dkh(t.c, 0.30)} 0%, ${dkh(t.c, 0.62)} 100%)`,
+            border: "4px solid rgba(0,0,0,0.5)" }}>
+            <div style={{ position: "absolute", left: 14, top: 26, right: 14, height: 84,
+              background: mxh(t.c, 0.34 + 0.16 * Math.abs(Math.sin(f / 11 + i))) }} />
+            <div style={{ position: "absolute", left: 14, bottom: 18, right: 14, height: 22,
+              background: mxh(t.c, 0.18) }} />
+          </div>
+          {/* each shop throws a shaped pool onto the tarmac — never a full fill */}
+          <div style={{ position: "absolute", left: 118 + i * 138, top: 560, width: 240,
+            height: 190, zIndex: 71, opacity: 0.34, transform: "skewX(-20deg)",
+            background: `linear-gradient(180deg, ${hexa(t.c, 0.62)} 0%, ${hexa(t.c, 0)} 100%)` }} />
+        </React.Fragment>
       ))}
 
       <IronGate x={556 + L.b * 0.2} y={252} w={392} h={396} f={f} open={0} lit={0} z={62} wide />
 
       {/* the loaded trolley, shoved at it, coming back both times */}
-      <Trolley x={430 + shove * 74 + L.b * 0.2} y={GY} f={f} tip={shove * 3.2} z={58} />
+      <Trolley x={430 + shove * 168 + ring * 26 + L.b * 0.2} y={GY} f={f}
+        tip={shove * 5.4 + ring * 3.2} z={74} />
 
       {/* the hero, driving with his whole body, and getting nowhere */}
-      <Contact x={210 + shove * 60} y={GY - 12} w={198} o={0.34} />
-      <Hero f={f} x={300 + shove * 60} y={GY} size={248} z={60} act={1} ph={0.6}
+      <Contact x={210 + shove * 150} y={GY - 12} w={198} o={0.34} z={72} />
+      <Hero f={f} x={300 + shove * 150} y={GY} size={248} z={76} act={1} ph={0.6}
         drive={shove * 0.30} strain={Math.min(0.92, Math.abs(shove) * 1.5)}
         costume={{ prof: 1 }} tint="#8E4A2E" stern={1} />
-      <Forearm x0={356 + shove * 60} y0={GY - 178} x1={444 + shove * 74} y1={GY - 198}
-        w={24} c="#8E4A2E" z={62} />
+      <Forearm x0={356 + shove * 150} y0={GY - 178} x1={452 + shove * 168 + ring * 26}
+        y1={GY - 202} w={24} c="#8E4A2E" z={78} />
+      {/* ⭐ THE BACKGROUND PROCESS, and it is the one shape the motion table
+          actually pays for: a full-width high-contrast band travelling the
+          tarmac. Litter blowing down a shut alley is what the place would
+          contain, so it is furniture and costs the hierarchy nothing. */}
+      <Runner y={686} f={f} z={73} rate={12.6} pitch={176} w={124} h={68} kind="bead"
+        c="#8E86A6" c2="#0A0910" rail={false} o={0.5} />
 
       {/* the cost of the shove: dust off the tarmac, and nothing else moves */}
-      <Puff x={430 + L.b * 0.2} y={GY} f={f} at={13} c="#4A4458" z={70} />
-      <Puff x={430 + L.b * 0.2} y={GY} f={f} at={30} c="#4A4458" z={70} />
+      <Puff x={556 + L.b * 0.2} y={GY} f={f} at={12} c="#6E6482" z={80} />
+      <Puff x={556 + L.b * 0.2} y={GY} f={f} at={29} c="#6E6482" z={80} />
+      <Ring x={556 + L.b * 0.2} y={GY - 90} f={f} at={12} c="#6E6482" z={79} s={0.9} />
+      <Ring x={556 + L.b * 0.2} y={GY - 90} f={f} at={29} c="#6E6482" z={79} s={0.9} />
 
       <BandChip t="THE TOOLS ARE NOT THE HARD PART" c={RED} fg="#FFF0EC" />
       <Edge side="l" c="#050408" w={122} z={93} kind="wall" />
@@ -1015,6 +1075,10 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
     (E(f, 30, 34, 0, 1, OUT) + E(f, 36, 40, 0, 1, OUT) + E(f, 48, 52, 0, 1, OUT)) / 3));
   const lift = E(f, 58, 76, 0, 1, IO);            /* into the hasp, then OPEN */
   const carry = E(f, 52, 62, 0, 1, IO);
+  /* the guide is CARRIED IN and set on the stand across the first 26 frames,
+     so the peak scene opens on an arrival instead of on a parked object */
+  const bring = E(f, 2, 22, 0, 1, IO);
+  const settle = f > 22 ? Math.sin((f - 22) * 0.7) * Math.exp(-(f - 22) / 8) * 5 : 0;
 
   return (
     <Scene p={p} slug="" push={[0, dur, 1.055]} vig={0.54}
@@ -1029,6 +1093,8 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
         rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
         lamp={{ x: 300 + L.a * 0.3, y: 210, r: 262 }} floorKind="tarmac" grit={0.8} />
 
+      <Runner y={250} f={f} z={68} rate={11.6} pitch={170} w={134} h={64} kind="bead"
+        c="#FFD9A0" c2="#241628" rail hang={14} o={0.72} />
       <IronGate x={556 + L.b * 0.2} y={252} w={392} h={396} f={f} open={lift} lit={struck}
         z={62} wide />
 
@@ -1037,8 +1103,9 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
         zIndex: 78, borderRadius: 4, background: "linear-gradient(178deg,#8E7A5E,#3A3024)",
         border: "4px solid rgba(0,0,0,0.46)" }} />
       <StrikePress x={330 + L.a * 0.3} y={0} f={f} hits={HITS} z={88} />
-      <Guide x={330 + L.a * 0.3 + carry * 218} y={412 - carry * 42} f={f} struck={struck}
-        s={0.86} z={82} rot={carry * 12} />
+      <Guide x={330 + L.a * 0.3 - (1 - bring) * 470 + carry * 218}
+        y={412 - carry * 42 - (1 - bring) * 96} f={f} struck={struck}
+        s={0.86} z={82} rot={(1 - bring) * -22 + settle + carry * 12} />
 
       {/* the cost of each strike: sparks and a ring, ascending */}
       {HITS.map((at, i) => (

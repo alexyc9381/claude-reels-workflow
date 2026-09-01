@@ -1,0 +1,29 @@
+{
+  "reel": "133-build",
+  "fps": 30,
+  "total": 898,
+  "voDuration": 29.93,
+  "L": [0, 2.40, 4.73, 6.27, 9.90, 11.19, 12.77, 14.23,
+        16.23, 17.71, 19.13, 20.48, 22.61, 24.71, 26.06, 28.75],
+  "Lframes": { "S0": 0, "S1": 72, "S2": 142, "S3": 188, "S4": 297, "S5": 336,
+               "S6": 383, "S7": 427, "S8": 487, "S9": 531, "S10": 574, "S11": 614,
+               "S12": 678, "S13": 741, "S14": 782, "S15": 863 },
+  "scenes": [
+    { "i": 0,  "job": "ROW hook shutter" },
+    { "i": 1,  "job": "FITOUT 3 machines" },
+    { "i": 2,  "job": "MILL named" },
+    { "i": 3,  "job": "LINE 3 stations" },
+    { "i": 4,  "job": "COUNTER sale 1" },
+    { "i": 5,  "job": "BOOTH named" },
+    { "i": 6,  "job": "LATHE clone" },
+    { "i": 7,  "job": "STALLS sale 2" },
+    { "i": 8,  "job": "EMPTY booth" },
+    { "i": 9,  "job": "SHOP3 named" },
+    { "i": 10, "job": "RIG tear out" },
+    { "i": 11, "job": "TURN spin light" },
+    { "i": 12, "job": "DOCK sale 3" },
+    { "i": 13, "job": "GATE blocked" },
+    { "i": 14, "job": "KEY the guide" },
+    { "i": 15, "job": "OPEN cta" }
+  ]
+}

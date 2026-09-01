@@ -1,6 +1,6 @@
 import React from "react";
 import { Composition, registerRoot } from "remotion";
-import { makeReel, JUDGE_TOTAL, HookCut, OpenCut } from "./ClaudeJudge132Reel";
+import { makeReel, JUDGE_TOTAL, HookCut, OpenCut, Open2Cut } from "./ClaudeJudge132Reel";
 
 /* Reel 132 "JUDGE". Board: storyboards/132-judge.md.
    1044 frames = 34.80s. The cut removes 32.07s of SIX `cut cut` retakes and
@@ -19,6 +19,12 @@ export const ReelQuiet = makeReel("house", true);
    on the real chassis, PICKED before the body is defended. Four MECHANISMS:
    measurement / revelation / impact / accumulation. */
 const Root: React.FC = () => (<>
+  {/* round 4 — BARE STAGE, one dominant object each, a different object in
+      every one. `feedback_hook_simplicity` is the rule round 3 broke. */}
+  <Composition id="bare-A-tear"   component={Open2Cut("tear")}   durationInFrames={100} {...V} />
+  <Composition id="bare-B-beam"   component={Open2Cut("beam")}   durationInFrames={100} {...V} />
+  <Composition id="bare-C-facade" component={Open2Cut("facade")} durationInFrames={100} {...V} />
+  <Composition id="bare-D-scale"  component={Open2Cut("scale")}  durationInFrames={100} {...V} />
   {/* round 3 — five MECHANISMS, none defended */}
   <Composition id="open-A-tower"  component={OpenCut("tower")}  durationInFrames={100} {...V} />
   <Composition id="open-B-stamp"  component={OpenCut("stamp")}  durationInFrames={100} {...V} />

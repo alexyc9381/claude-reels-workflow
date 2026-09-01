@@ -930,7 +930,7 @@ export const ScanGantry: React.FC<{ x: number; y: number; w: number; f: number; 
   strain: number; lift: number; z?: number }> =
   ({ x, y, w: ww, f, grip, strain, lift, z = 44 }) => {
   const bow = strain * 22;
-  const chain = 96 + lift * -150;
+  const chain = 172 - lift * 120;   /* ALWAYS POSITIVE: 172 -> 52 */
   return (
     <>
       {/* the beam, bowing under the load it cannot yet move */}
@@ -953,7 +953,7 @@ export const ScanGantry: React.FC<{ x: number; y: number; w: number; f: number; 
       {/* the tongs — drawn, tapered, and they CLOSE */}
       <svg width="200" height="130" viewBox="0 0 200 130"
         style={{ position: "absolute", left: x + ww / 2 - 100, top: y + 12 + bow * 0.8 + chain,
-          zIndex: z + 4 }}>
+          zIndex: 84 }}>
         <path d={`M100 4 L100 30 M100 30 L${64 + grip * 20} 62 L${52 + grip * 22} 118`}
           fill="none" stroke="#5E6870" strokeWidth="13" strokeLinecap="round" />
         <path d={`M100 30 L${136 - grip * 20} 62 L${148 - grip * 22} 118`}
@@ -969,12 +969,12 @@ export const ScanGantry: React.FC<{ x: number; y: number; w: number; f: number; 
     volume, so the viewer decodes it at the instant it arrives. */
 export const PhotoPrint: React.FC<{ x: number; y: number; turn: number; f: number; s?: number;
   z?: number }> = ({ x, y, turn, f, s = 1, z = 78 }) => {
-  const rot = -26 + turn * 26;
+  const rot = turn * -34;   /* 0 (face-on, readable) -> -34, never edge-on */
   const solid = E(turn, 0.42, 1, 0, 1, IO);
   return (
     <div style={{ position: "absolute", left: x - 96 * s, top: y - 118 * s, width: 192 * s,
       height: 236 * s, zIndex: z,
-      transform: `perspective(820px) rotateY(${rot * 3.2}deg) rotateX(${-8 + turn * 8}deg)` }}>
+      transform: `perspective(820px) rotateY(${rot}deg) rotateX(${-6 + turn * 6}deg)` }}>
       {/* the flat print */}
       <div style={{ position: "absolute", inset: 0, borderRadius: 5, opacity: 1 - solid * 0.86,
         background: `linear-gradient(174deg, #F6F1E4 0%, #CFC6B0 100%)`,
@@ -1043,31 +1043,31 @@ export const Turntable: React.FC<{ x: number; y: number; f: number; spin: number
       {(() => {
         const rad = (a * Math.PI) / 180;
         const c = Math.cos(rad), s2 = Math.sin(rad);
-        const fw = 130 * (0.46 + 0.54 * Math.abs(c));        /* never zero */
-        const sw = 34 * Math.abs(s2) + 12;                    /* the side face */
+        const fw = 168 * (0.46 + 0.54 * Math.abs(c));        /* never zero */
+        const sw = 44 * Math.abs(s2) + 14;                    /* the side face */
         const right = c >= 0;                                 /* which edge it hangs off */
         const lit = key + 0.18 * c;
         return (
           <div style={{ position: "absolute", left: x - fw / 2 - (right ? 0 : sw),
-            top: y - 208, width: fw + sw, height: 182, zIndex: z + 5 }}>
+            top: y - 258, width: fw + sw, height: 232, zIndex: z + 5 }}>
             {/* the top face — a parallelogram whose skew IS the angle */}
             <div style={{ position: "absolute", left: right ? 0 : sw, top: 4, width: fw,
-              height: 30, background: mxh(CLAY, Math.max(0.1, lit + 0.26)),
+              height: 38, background: mxh(CLAY, Math.max(0.1, lit + 0.26)),
               transform: `skewX(${-38 * (right ? 1 : -1)}deg)`,
               transformOrigin: right ? "0% 100%" : "100% 100%" }} />
             {/* the side face */}
             <div style={{ position: "absolute", left: right ? fw : 0, top: 4, width: sw,
-              height: 158, background: dkh(CLAY, 0.44),
+              height: 204, background: dkh(CLAY, 0.44),
               transform: `skewY(${-38 * (right ? 1 : -1)}deg)`,
               transformOrigin: right ? "0% 0%" : "100% 0%" }} />
             {/* the front face, and the panel line that makes the turn readable */}
-            <div style={{ position: "absolute", left: right ? 0 : sw, top: 32, width: fw,
-              height: 130, borderRadius: 6, border: `5px solid ${hexa("#000", 0.44)}`,
+            <div style={{ position: "absolute", left: right ? 0 : sw, top: 40, width: fw,
+              height: 168, borderRadius: 6, border: `5px solid ${hexa("#000", 0.44)}`,
               background: `linear-gradient(168deg, ${mxh(CLAY, Math.max(0.04, lit))} 0%, ${dkh(CLAY, 0.30)} 100%)`,
               overflow: "hidden" }}>
               <div style={{ position: "absolute", left: fw * (right ? 0.62 : 0.22), top: 10,
-                width: 5, height: 110, background: hexa("#000", 0.26) }} />
-              <div style={{ position: "absolute", left: 10, top: 88, width: fw - 20, height: 5,
+                width: 6, height: 144, background: hexa("#000", 0.26) }} />
+              <div style={{ position: "absolute", left: 10, top: 114, width: fw - 20, height: 6,
                 background: hexa("#000", 0.20) }} />
             </div>
           </div>
