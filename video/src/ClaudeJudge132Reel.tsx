@@ -347,11 +347,11 @@ export const BED_QUIET = db(-6);
     Four mechanisms are rendered as their own mp4s in the delivery folder;
     `haul` is set here only so the reel has an open while the pick is made.
     Swapping is this one line. */
-export const PICKED: OpenId = "haul";
+export const PICKED: Open2Id = "scale";
 
-export const makeReel = (v: Variant, quiet = false, open: OpenId = PICKED): React.FC => () => {
+export const makeReel = (v: Variant, quiet = false, open: Open2Id = PICKED): React.FC => () => {
   const f = useCurrentFrame();
-  const S0 = OPENS[open];
+  const S0 = OPENS2[open];
   return (
     <AbsoluteFill>
       <Bg />

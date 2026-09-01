@@ -226,37 +226,143 @@ export const Open2Facade: React.FC<SP> = ({ v, dur }) => {
    ====================================================================== */
 export const Open2Scale: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
-  const lean = E(f, 2, 26, 0, 1, IO);
-  const jab = E(f, 30, 36, 0, 1, IN_Q) - E(f, 44, 58, 0, 0.8, IO);
-  const holes = Math.floor(E(f, 34, 62, 0, 10.99, OUT));
-  const shrink = E(f, 30, 44, 0, 1, OUT);
-  const BIGX = 330, SMX = 742;
+  /* ⭐⭐ MOTION WITHOUT PUTTING THE PROPS BACK IN. `feedback_hook_simplicity` is
+     explicit that a bare hook measures low and that the answer is *the SCALE of
+     the one object travelling far*, never more objects. So everything that moves
+     here is one of the three things already in frame:
+       the GIANT   strides 168px toward camera and grows 404 -> 548 (a 548px mass
+                   crossing a sixth of the panel is the biggest swept area
+                   available in a two-figure frame)
+       the BRIEF   is knocked clean out of the small one's hands and crosses
+                   520px up and out of frame, shedding fourteen pages
+       the SMALL   is driven 190px backwards with his heels dug in
+     Three travels, no new props, and the frame still holds exactly two figures
+     and one object. */
+  /* ⛔ AND THE TIMING WAS THE OTHER HALF OF "NEEDS MORE MOTION". v1 spent its
+     first 34 frames — 1.1s of an 80-frame open — on a man walking slowly, and
+     put its ONE event at the end. The stride now finishes at f14 and there are
+     TWO strikes, at f16 and f46, so something lands inside the first half second
+     and again before the tail. Front-load the events; do not add objects. */
+  const stride = E(f, 0, 14, 0, 1, OUT);
+  const lean = E(f, 8, 18, 0, 1, IO);
+  const jab = E(f, 12, 16, 0, 1, IN_Q) - E(f, 24, 34, 0, 0.9, IO)
+            + E(f, 42, 46, 0, 0.9, IN_Q) - E(f, 56, 68, 0, 0.8, IO);
+  const strike = f >= 16;
+  const strike2 = f >= 46;
+  const fly = E(f, 16, 62, 0, 1, OUT);
+  const drivenBack = E(f, 16, 34, 0, 1, OUT) + E(f, 46, 62, 0, 0.42, OUT);
+  const holes = strike ? (strike2 ? 11 : 6) : 0;
+  const jolt = (strike && f < 26 ? Math.sin((f - 16) * 1.5) * Math.exp(-(f - 16) / 5) * 15 : 0)
+             + (strike2 && f < 56 ? Math.sin((f - 46) * 1.5) * Math.exp(-(f - 46) / 5) * 12 : 0);
+  /* the giant's footfalls, so 168px of travel reads as WEIGHT and not a slide */
+  const step = Math.abs(Math.sin(stride * Math.PI * 2.5));
+  /* ⛔ THE GIANT HAD NO CEILING AND ATE THE FRAME. At 548 his head sat under
+     the header and the small one became a corner detail — hierarchy so extreme
+     there was nothing left to look at but a torso. 470 keeps his crown 126px
+     clear and keeps the scale gap at 2.1x, which is what BOSS actually runs. */
+  /* ⭐ THE GAP IS THE MECHANISM, so it is the thing that grows: 2.0x at frame 0
+     and 2.9x by the jab. And the travel is the only place motion can come from
+     in a two-figure frame, so all three of them are pushed as far as the panel
+     allows — 240px of stride, 250px of driven-back, 520px of brief. */
+  /* ⛔ AND THEN THE TRAVELS RAN OFF THE PANEL. Pushed to 250px of driven-back
+     and 520px of brief, BOTH the small Claude and the object left the frame by
+     f50 and the tail was a big empty suit. Swept area only counts while it is
+     ON SCREEN: the travels are now sized to the panel, not to the metric. */
+  const BIGX = 148 + stride * 196;
+  const BIGS = 380 + stride * 120;
+  const SMX = 700 + Math.min(1, drivenBack) * 138;
+  const BX0 = 530, BY0 = GY - 200;
   return (
-    <Stage dur={dur} f={f} poolX={640}>
-      {/* the giant's shadow reaching across the floor toward the small one */}
-      <div style={{ position: "absolute", left: 210, top: 690, width: 300 + lean * 360, height: 60,
-        borderRadius: "50%", zIndex: 40, filter: "blur(10px)",
-        background: `radial-gradient(ellipse, rgba(20,14,8,${0.42 + lean * 0.2}) 0%, rgba(20,14,8,0) 74%)` }} />
-      <Contact x={BIGX - 200} y={GY} w={400} z={41} o={0.42} />
-      <Hero f={f} x={BIGX} y={GY} size={548} z={54} act={3} ph={0.9}
-        costume={{ suit: 1 }} stern={1} drive={lean * 0.16 + jab * 0.10}
+    <Stage dur={dur} f={f} poolX={620}>
+      {/* his shadow arrives before he does */}
+      {/* ⭐⭐ THE CAST SHADOW IS THE MOTION. `motion ~= (fraction of the panel
+          repainted per 0.1s) x (luma DELTA)`, and a mid-brown suit crossing
+          mid-brown boards has almost no delta however far it travels. A hard
+          near-black shadow sweeping the lit floor with him does: it is 300px
+          wide, it reaches 640px across as he closes, and it is the darkest thing
+          in a bright frame. No new object — it is his own shadow. */}
+      <div style={{ position: "absolute", left: BIGX - 120, top: 596,
+        width: 300 + lean * 380 + jab * 90, height: 116, zIndex: 39,
+        transform: "skewX(-34deg)",
+        background: `linear-gradient(90deg, rgba(16,11,6,${0.52 + lean * 0.20}) 0%, rgba(16,11,6,${0.34 + lean * 0.18}) 62%, rgba(16,11,6,0) 100%)` }} />
+      <div style={{ position: "absolute", left: BIGX - 190, top: 688,
+        width: 380 + lean * 220, height: 58, borderRadius: "50%", zIndex: 40, filter: "blur(11px)",
+        background: `radial-gradient(ellipse, rgba(20,14,8,${0.44 + lean * 0.20}) 0%, rgba(20,14,8,0) 74%)` }} />
+      <Contact x={BIGX - BIGS * 0.36} y={GY} w={BIGS * 0.72} z={41} o={0.42} />
+      <Hero f={f} x={BIGX} y={GY - step * 9} size={BIGS} z={54} act={0} ph={0.9}
+        costume={{ suit: 1 }} stern={1} drive={lean * 0.14 + Math.max(0, jab) * 0.12}
         gaze={0.55} tint="#8E4A2E" />
-      {/* the jab: a forearm that STARTS on his own arm and ENDS on the brief */}
-      {/* ⛔ THE JAB MUST LAND ON THE THING. v1 stopped it 190px short and it
-          read as a stub off his side. It now reaches the brief's own edge, which
-          is the only limb geometry that cannot be misread. */}
-      <Forearm x0={BIGX + 548 * 0.30} y0={GY - 548 * 0.44}
-        x1={SMX - 236 + (1 - jab) * 130} y1={GY - 262} w={42} c="#7A3A22" z={56} />
-      <Contact x={SMX - 96} y={GY} w={192} z={41} o={0.30} />
-      <Hero f={f} x={SMX} y={GY} size={224} z={60} act={1} ph={0.2} flip
-        costume={{ constr: 1 }} strain={shrink * 0.7} shock={shrink}
-        drive={shrink * 0.16} lift={-shrink * 14} />
-      <Forearm x0={SMX - 224 * 0.34} y0={GY - 224 * 0.50} x1={SMX - 108} y1={GY - 286}
-        w={24} c={CLAYD} z={61} />
-      <Brief x={SMX - 162} y={GY - 186} w={182} s={0} z={62} f={f} rot={-9}
-        holes={holes} lit={E(f, 36, 62, 0, 0.5, OUT)} />
-      {jab > 0.6 && <Puff x={SMX - 148} y={GY - 250} f={f} at={36} c="#D8C8A4" z={66} n={11} />}
-      <Steam x={SMX} y={GY - 214} f={f} at={30} n={7} z={66} s={0.9} />
+      {/* ⛔ THE JAB LANDS ON THE THING. A forearm that starts on his own arm rect
+          and ends on the brief is the only limb geometry that cannot be misread. */}
+      {/* ⛔ AND IT RETRACTS. A forearm parked at full extension for forty frames
+          reads as a bar bolted to his side. */}
+      {jab > 0.04 && (
+        <Forearm x0={BIGX + BIGS * 0.30} y0={GY - BIGS * 0.44}
+          x1={BX0 + 60 - (1 - jab) * 170} y1={BY0 - 46} w={26 + BIGS * 0.022}
+          c="#7A3A22" z={56} />
+      )}
+      {stride < 1 && step > 0.8 && (
+        <Puff x={BIGX - 40} y={GY} f={f} at={f} c="#CFC0A0" z={44} n={7} s={0.8} />
+      )}
+
+      {/* the small one, driven back, heels dug in */}
+      {drivenBack > 0.04 && (
+        <div style={{ position: "absolute", left: 700, top: GY - 12, width: Math.min(1, drivenBack) * 150,
+          height: 15, zIndex: 43, background: hexa("#2A2016", 0.38) }} />
+      )}
+      <Contact x={SMX - 90} y={GY} w={180} z={41} o={0.30} />
+      <Hero f={f} x={SMX} y={GY} size={200} z={60} act={1} ph={0.2} flip
+        costume={{ constr: 1 }} strain={Math.min(1, drivenBack * 0.85)}
+        shock={E(f, 14, 20, 0, 1, OUT) - E(f, 34, 42, 0, 0.7, IO) + E(f, 44, 50, 0, 0.7, OUT) - E(f, 68, 80, 0, 1, IO)}
+        drive={Math.min(1, drivenBack) * 0.26} stern={E(f, 68, 80, 0, 1, OUT)}
+        lift={-E(f, 46, 54, 0, 22, OUT)} />
+      {!strike && (
+        <Forearm x0={SMX - 200 * 0.34} y0={GY - 200 * 0.50} x1={BX0 + 74} y1={BY0 - 40}
+          w={24} c={CLAYD} z={61} />
+      )}
+
+      {/* ⭐ THE OBJECT TRAVELS **ACROSS** THE FRAME, NOT OUT OF IT. v1 knocked it
+          up and out of the top in ten frames, which spends the travel where the
+          panel cannot see it. It now goes the other way — 450px LEFT past the
+          giant's legs, tumbling, then hits the boards and skids to a stop at his
+          feet, which also says who took it. The three travels now oppose each
+          other: brief left, small one right, giant forward. */}
+      <Brief x={BX0 - fly * 400} y={BY0 - Math.sin(fly * Math.PI) * 168 + fly * 206 + jolt * 0.4}
+        w={182} z={62} f={f} s={0} rot={-9 - fly * 380} holes={holes}
+        lit={strike ? E(f, 34, 60, 0, 0.55, OUT) : 0} />
+      {fly > 0.72 && (
+        <div style={{ position: "absolute", left: BX0 - fly * 400 - 110, top: GY - 14,
+          width: 220, height: 14, zIndex: 43, background: hexa("#2A2016", 0.30) }} />
+      )}
+      {/* the pages it sheds, fourteen of them, across the whole width */}
+      {strike && Array.from({ length: 20 }, (_, i) => {
+        const k = E(f, 16 + i * 0.8, 16 + i * 0.8 + 42, 0, 1, OUT);
+        /* ⛔ AND THEY WENT ACROSS HIS FACE. Sent low and wide instead, so the
+           twenty of them sweep the FLOOR — which is the lit half of the frame
+           and therefore where a cream page has any luma delta at all. */
+        const dx = -60 - rnd(i, 3) * 620 + (i % 3) * 90;
+        const dy = -60 - rnd(i, 7) * 130 + k * k * 620;
+        return (
+          <div key={"pg" + i} style={{ position: "absolute", left: BX0 + dx * k - 50,
+            top: BY0 - 110 + dy * k, width: 132, height: 168, zIndex: 63,
+            opacity: Math.max(0, 1 - k * 0.5),
+            transform: `rotate(${i * 37 + k * 420}deg)`, background: "#EFE7D6",
+            boxShadow: SH }}>
+            {[0, 1, 2, 3].map(j => (
+              <div key={j} style={{ position: "absolute", left: 16, top: 24 + j * 26, width: 94 - j * 20,
+                height: 8, background: hexa("#8C8578", 0.42) }} />
+            ))}
+          </div>
+        );
+      })}
+      {strike && <Ring x={BX0} y={BY0 - 90} f={f} at={16} c="#FFE8B0" z={70} s={2.1} dur={22} />}
+      {strike && <Puff x={BX0} y={BY0 - 60} f={f} at={16} c="#D8C8A4" z={69} n={17} />}
+      {strike2 && <Ring x={SMX - 60} y={GY - 190} f={f} at={46} c="#FFE8B0" z={70} s={1.7} dur={20} />}
+      {strike2 && <Puff x={SMX - 40} y={GY - 20} f={f} at={46} c="#D8C8A4" z={69} n={13} />}
+      {/* ⭐ A SECOND BEAT, because one jab in eighty frames leaves a long tail.
+          He presses in again at f56 and the small one drops to one knee — more
+          body travel from the two figures already in frame. */}
+      <Steam x={SMX} y={GY - 210} f={f} at={18} n={9} z={66} s={1.0} />
     </Stage>
   );
 };
