@@ -19,7 +19,7 @@ import {
 } from "./BuildProps";
 import {
   Typewriter, StudioMic, FilmRun, TapeDeck, Chair, Plinth, EnamelSign, ClonePop,
-  LoadedBarrow, FilmShelf, ForeMass, WaveWall,
+  LoadedBarrow, FilmShelf, ForeMass, WaveWall, FreeLoad, ShipLabel,
 } from "./BuildDraw";
 import { Room, Jamb, Stack, Overhead } from "./HwSets";
 
@@ -130,139 +130,128 @@ const BandChip: React.FC<{ t: string; c?: string; fg?: string }> =
    ⭐ THE GATE IS PLANTED HERE, far right, UNLIT, and never mentioned again
    until S13. It is the villain and it is good ironwork, not a grey slab.
    ====================================================================== */
+/* =========================================================================
+   S0 · THE FREE LOAD — 0.00 to 2.40s (72f) · HOOK
+   VO: "You can sell these three free Claude plugins on Fiverr and Upwork."
+
+   ⭐⭐⭐ REBUILT AGAINST OX AND UNLAZY, FRAME-STRIPPED RATHER THAN REMEMBERED.
+   Both of those hooks do the same three things and the old shutter did none:
+     ONE COLOSSAL OBJECT   the ox is ~55% of the panel; the balloon grows to 45%
+     IT ENTERS OR GROWS    the ox walks in from frame right; the balloon inflates
+     THE WORD IS ON IT     `FREE` on the ox's flank; `DONE` on the balloon
+   and in both the Claude is SMALL beside it. That scale gap IS the image. A
+   shutter rising is a hole changing size — nothing arrives, so nothing dwarfs
+   anyone.
+
+   ⭐⭐ AND A BEAT ON EVERY SPOKEN WORD (Alex: *"each word needs to have
+   animations"*). Onsets read out of the caption JSON, not spaced by eye:
+
+     f0  "You"      the load is ALREADY moving in, 30% on frame — settled, not starting
+     f6  "sell"     he takes the strain and the whole load LURCHES
+     f10 "three"    it lands square and the three crates are countable
+     f14 "free"     ⭐ FREE brands across the front in burnt stencil — the ox's flank
+     f26 "Claude"   the Claude mark stamps onto the end crate
+     f31 "plugins"  the three crate fronts drop and a machine is turning in each
+     f48 "Fiverr"   a shipping label slaps on
+     f53 "Upwork"   the second label slaps on
+
+   ⛔ `feedback_hook_simplicity` is intact: ONE idea (a colossal free delivery)
+   on an empty stage. The count of BEATS went up; the count of IDEAS did not.
+   ====================================================================== */
 export const S0: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("row");
   const L = LAY[v];
-  /* the chain leads, the curtain follows — overlapping action, never stepped */
-  const chain = E(f, 4, 40, 0, 1, IO);
-  const k = 0.34 + chain * 0.66;                  /* PRE-SEEDED AND SETTLED at f0 */
-  const OUTS = [42, 52, 62];                      /* three goods, one-two-three */
-  const strain = E(f, 2, 14, 0, 0.94, OUT) * (1 - E(f, 34, 44, 0, 1, IO));
-  const pull = Math.sin(f / 5.2) * 0.10 * (1 - E(f, 36, 46, 0, 1, IO));
 
-  /* ⛔ EVERY OBJECT SITS BELOW THE RESERVED BAND (panel y 112..210). The first
-     render put the awning at y82 and `HookHeader` + the band chip covered the
-     one object carrying HOOK_LUMA and the claim plate. */
-  const AW_Y = 216, OP_Y = 318, OP_H = 330, OP_X = 262 + L.a, OP_W = 500;
-  /* ⛔ READ THE RIG. `Mascot` is a 200-unit viewBox: its right arm rect is
-     x166..192, y86..112, so on a 286px hero at (506, GY) the arm's centre is
-     (506 − 143 + 179·1.43, 706 − 286 + 99·1.43) = (619, 562). The chain is
-     brought TO that point rather than a limb reaching out to it — a forearm
-     that terminates in mid-air reads as a TAIL on every sprite in the reel. */
-  const CH_X = 648 + L.a;
+  /* ⛔ FRAME 0 IS PRE-SEEDED AND SETTLED: the load is already 30% on frame and
+     travelling, so the shot opens mid-event rather than on a still. */
+  const roll = 0.30 + E(f, 0, 30, 0, 0.70, IO);
+  const lurch = (E(f, 6, 11, 0, 1, IN_Q) - E(f, 11, 22, 0, 1, OUT)) * 1.8;
+  const brand = E(f, 14, 26, 0, 1, OUT);          /* "free"    */
+  const mark = E(f, 26, 34, 0, 1, BACK);          /* "Claude"  */
+  const open = E(f, 31, 52, 0, 1, OUT);           /* "plugins" */
+  const lab1 = E(f, 48, 56, 0, 1, BACK);          /* "Fiverr"  */
+  const lab2 = E(f, 53, 61, 0, 1, BACK);          /* "Upwork"  */
+  const strain = E(f, 2, 10, 0, 0.92, OUT) * (1 - E(f, 30, 42, 0, 1, IO));
+
+  const LX = 1240 - roll * 520 + L.b * 0.7;       /* stops clear of the hero */
 
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.055]} vig={0.36}>
+    <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.40}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="none"
-        rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
-        lamp={{ x: 190 + L.a * 0.3, y: 236, r: 262 }} floorKind="tarmac" grit={0.9} />
+        rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.2} rakeN={RAKE_N[v]}
+        lamp={{ x: 210 + L.a * 0.4, y: 236, r: 268 }} floorKind="tarmac" grit={0.9} />
 
-      {/* the terrace opposite, in silhouette — depth plane 2 */}
-      {[52, 856].map((x, i) => (
-        <ShopFront key={"sf" + i} x={x + L.b * 0.16} y={p.horizon + 18} s={0.70}
-          c="#3E3348" z={11} />
+      {/* the row behind, held DOWN — the object is the subject, not the street */}
+      {[36, 852].map((x, i) => (
+        <ShopFront key={"sf" + i} x={x + L.b * 0.3} y={p.horizon + 16} s={0.70}
+          c="#4A3C58" z={11} />
       ))}
-      {/* ⭐ the background process: traffic crossing the far end, all scene */}
-      <Runner y={p.horizon - 26} f={f} z={13} rate={6.4} pitch={214} w={150} h={62}
-        kind="car" c="#C8B48E" c2="#141018" rail={false} o={0.9} />
+      <Runner y={p.horizon - 28} f={f} z={13} rate={6.0} pitch={214} w={150} h={62}
+        kind="car" c="#C8B48E" c2="#141018" rail={false} o={0.7} />
 
-      {/* the sodium lamp on its bracket — the one practical */}
-      <div style={{ position: "absolute", left: 146, top: 214, width: 92, height: 28, zIndex: 22,
-        borderRadius: "6px 6px 20px 20px", background: "linear-gradient(176deg,#8E8672,#2E2A22)" }} />
-      <div style={{ position: "absolute", left: 232, top: 220, width: 96, height: 11, zIndex: 22,
+      {/* the sodium lamp — the one practical, and it carries frame-0 luma with
+          the awning board rather than making the hero pay for it */}
+      <div style={{ position: "absolute", left: 158, top: 214, width: 98, height: 30, zIndex: 22,
+        borderRadius: "6px 6px 22px 22px", background: "linear-gradient(176deg,#8E8672,#2E2A22)" }} />
+      <div style={{ position: "absolute", left: 250, top: 220, width: 92, height: 12, zIndex: 22,
         background: "#2E2A22" }} />
+      <AwningBoard x={78 + L.a * 0.4} y={248} w={492} f={f} z={30} />
+      {/* the lamp's pool on the tarmac — a shaped cone from a real source, which
+          is the sanctioned way to buy frame-0 luma (never the palette's stops) */}
+      <div style={{ position: "absolute", left: 40 + L.a * 0.4, top: 520, width: 470, height: 250,
+        zIndex: 14, opacity: 0.34, transform: "skewX(-16deg)",
+        background: `linear-gradient(180deg, ${hexa("#FFD98E", 0.78)} 0%, ${hexa("#FFD98E", 0)} 100%)` }} />
 
-      {/* the shopfront the shutter is set into */}
-      <div style={{ position: "absolute", left: OP_X - 18, top: OP_Y - 12, width: OP_W + 36,
-        height: OP_H + 30, zIndex: 30,
-        background: "linear-gradient(176deg,#D8C49A 0%,#8E7856 100%)",
-        border: "8px solid rgba(0,0,0,0.42)" }} />
-      {/* ⭐ WHAT IS BEHIND IT — and at frame 0 a 99px strip of it is already
-          visible, LIT, with a flywheel turning in the gap. That is the promise
-          the hook makes and withholds: you can see the shop is running and not
-          yet what is in it. */}
-      <div style={{ position: "absolute", left: OP_X, top: OP_Y, width: OP_W, height: OP_H,
-        zIndex: 32, overflow: "hidden",
-        background: "linear-gradient(178deg,#241A10 0%,#8E6A32 100%)" }}>
-        {R.tools.map((t, i) => (
-          <React.Fragment key={"by" + i}>
-            <div style={{ position: "absolute", left: 14 + i * 164, top: 40, width: 146,
-              height: 224, background: `linear-gradient(176deg, ${dkh(t.c, 0.30)} 0%, ${mxh(t.c, 0.10)} 100%)`,
-              border: "4px solid rgba(0,0,0,0.44)" }} />
-            {/* the lit floor strip and the flywheel BOTH live in the bottom
-                99px, so the frame-0 gap contains light and motion, not a sliver */}
-            <div style={{ position: "absolute", left: 38 + i * 164, top: 232, width: 100,
-              height: 100, borderRadius: "50%", border: `12px solid ${mxh(t.c, 0.52)}`,
-              transform: `rotate(${f * (4.4 + i * 2.1)}deg)` }}>
-              {[0, 60, 120].map(a => (
-                <div key={"sk" + a} style={{ position: "absolute", left: "50%", top: "50%",
-                  width: 76, height: 7, margin: "-3.5px 0 0 -38px", background: mxh(t.c, 0.62),
-                  transform: `rotate(${a}deg)` }} />
-              ))}
-              <div style={{ position: "absolute", left: "50%", top: "50%", width: 26, height: 26,
-                margin: "-13px 0 0 -13px", borderRadius: "50%", background: dkh(t.c, 0.5),
-                border: `4px solid ${mxh(t.c, 0.7)}` }} />
-            </div>
-            <div style={{ position: "absolute", left: 16 + i * 164, top: 306, width: 142,
-              height: 20, background: mxh(t.c, 0.42 + 0.3 * Math.abs(Math.sin(f / 7 + i))) }} />
-          </React.Fragment>
-        ))}
-      </div>
+      {/* ⭐⭐⭐ THE COLOSSAL OBJECT — 780px wide on a 1012px panel, ~58% of it,
+          and it is travelling in from frame right on every one of the first 30
+          frames. This is the ox. */}
+      <FreeLoad x={LX} y={706} f={f} s={0.96} z={60}
+        brand={brand} mark={mark} open={open} lurch={lurch} />
 
-      {/* ⭐ THE ARRIVAL. Three finished goods come out of the three bays and land
-          on the kerb, each with a squash and a ring — LARGE, BRIGHT, TRAVELLING,
-          which is the only combination the motion table registers. The reveal
-          alone measured 4.75: a shutter climbing over 50 frames repaints ~2.9%
-          of the panel per sample, so the hook needed an EVENT, not more curtain. */}
-      {R.tools.map((t, i) => {
-        const at = OUTS[i];
-        const outk = E(f, at, at + 13, 0, 1, OUT);
-        if (outk <= 0) return null;
-        const sq = squash(f - at - 11, 6, 0.20, 3, 12);
-        const gx = OP_X + 84 + i * 164;
+      {/* the chain he is hauling it in on */}
+      {/* ⛔ a 13px repeating gradient reads as a HAZARD STRIPE, not a chain. A
+          tow strap is what actually hauls a pallet, and it draws cleanly: a
+          webbing band, a darker edge, and stitching down its length. */}
+      {(() => {
+        const w = Math.max(0, LX - 384 - 300 - L.a * 0.4);
         return (
-          <React.Fragment key={"go" + i}>
-            <div style={{ position: "absolute", left: gx - 56 + (i - 1) * 132 * outk,
-              top: 560 + outk * 128,
-              width: 112, height: 112, zIndex: 62, borderRadius: i === 1 ? "50%" : 8,
-              transform: `scale(1, ${sq}) rotate(${(1 - outk) * -18}deg)`,
-              transformOrigin: "50% 100%",
-              background: `linear-gradient(172deg, ${mxh(t.c, 0.26)} 0%, ${dkh(t.c, 0.34)} 100%)`,
-              border: "5px solid rgba(0,0,0,0.46)" }}>
-              <div style={{ position: "absolute", left: 12, top: 14, width: 44, height: 9,
-                background: "rgba(255,255,255,0.28)" }} />
-            </div>
-            {outk >= 1 && <Ring x={gx + (i - 1) * 132} y={694} f={f} at={at + 12}
-              c={mxh(t.c, 0.5)} z={64} s={0.66} />}
-            <Contact x={gx - 58 + (i - 1) * 132 * outk} y={686} w={116} o={0.34 * outk} z={61} />
-          </React.Fragment>
+          <div style={{ position: "absolute", left: 300 + L.a * 0.4, top: 478, width: w,
+            height: 22, zIndex: 62, transform: `rotate(${-2 + lurch * 0.5}deg)`,
+            transformOrigin: "0% 50%",
+            background: `linear-gradient(180deg, #D8B466 0%, #A8843E 52%, #6E5426 100%)`,
+            borderTop: "2px solid rgba(255,255,255,0.28)",
+            borderBottom: "2px solid rgba(0,0,0,0.44)" }}>
+            <div style={{ position: "absolute", left: 0, right: 0, top: 8, height: 2,
+              background: `repeating-linear-gradient(90deg, ${hexa("#4A3618", 0.7)} 0 9px, transparent 9px 18px)` }} />
+            {/* the hook where the strap meets the pallet */}
+            <div style={{ position: "absolute", right: -14, top: -7, width: 26, height: 36,
+              borderRadius: "0 14px 14px 0", border: "6px solid #8E8672",
+              borderLeft: "none" }} />
+          </div>
         );
-      })}
+      })()}
 
-      <Shutter x={OP_X} y={OP_Y} w={OP_W} h={OP_H} k={k} f={f} z={40} chainX={CH_X - OP_X} />
-      <AwningBoard x={OP_X - 10} y={AW_Y} w={OP_W + 20} f={f} z={66} />
+      {/* ⭐ THE SMALL CLAUDE — the scale gap IS the image. 210 against a 780px
+          load, hauling, with his whole body in the strain. */}
+      <Contact x={66 + L.a * 0.4} y={GY - 12} w={212} o={0.42} z={56} />
+      <Hero f={f} x={168 + L.a * 0.4} y={GY} size={244} z={58} act={1} ph={0.4}
+        strain={strain} drive={lurch * 0.12}
+        costume={{ constr: 1 }} tint="#8E4A2E" stern={strain > 0.5 ? 1 : 0} />
+      <Forearm x0={228 + L.a * 0.4} y0={GY - 176} x1={306 + L.a * 0.4} y1={486}
+        w={25} c="#8E4A2E" z={60} />
 
-      {/* ⭐ THE VILLAIN, PLANTED. Unlit, far right, unremarked. */}
-      <IronGate x={862 + L.c * 0.3} y={336} w={150} h={300} f={f} open={0} lit={0} z={28} />
+      {/* the cost of the haul, and of the landing */}
+      {strain > 0.4 && <Steam x={168 + L.a * 0.4} y={GY - 250} f={f} at={4} n={5} z={70} />}
+      <Puff x={LX} y={GY} f={f} at={11} c="#C8B48E" z={70} />
+      <Ring x={LX} y={GY - 20} f={f} at={11} c="#F2E4C4" z={71} s={1.2} />
 
-      {/* the hero, hauling. ⛔ HE STAYS DARK: the awning carries the luma bar,
-          which is what lets him be the biggest value gap in the reel. */}
-      <Contact x={392 + L.a} y={GY - 12} w={228} o={0.42} />
-      <Hero f={f} x={506 + L.a} y={GY} size={286} z={56} act={1} ph={0.4}
-        strain={strain} drive={pull} costume={{ constr: 1 }} tint="#8E4A2E"
-        stern={strain > 0.5 ? 1 : 0} />
-      {/* ONE short forearm, from the mascot's own arm rect ONTO the chain */}
-      <Forearm x0={615 + L.a} y0={562} x1={CH_X - 4} y1={534} w={25} c="#8E4A2E" z={58} />
-
-      {/* the cost of the haul: grit shaken off the shutter box */}
-      {strain > 0.4 && <Fall x={OP_X} y={OP_Y - 46} w={OP_W} f={f} at={6} z={72} />}
-      <Runner y={252} f={f} z={20} rate={11.4} pitch={188} w={148} h={62} kind="bead"
-        c="#F0DCA8" c2="#2A2018" rail={false} o={0.60} />
-      <Puff x={506 + L.a} y={GY} f={f} at={38} c="#C8B48E" z={70} />
+      {/* the two marketplaces, slapped on as shipping labels on their own words */}
+      <ShipLabel x={LX - 172} y={392} src="si_fiverr.svg" k={lab1} s={0.92} z={92} rot={-6} />
+      <ShipLabel x={LX + 150} y={372} src="si_upwork.svg" k={lab2} s={0.92} z={92} rot={7} />
 
       <BandChip t={`${R.count} FREE TOOLS · ${R.markets[0]} + ${R.markets[1]}`} c={INK} />
-      <Edge side="l" c="#7E6A5E" w={104} z={93} kind="post" />
+      <Edge side="l" c="#241A22" w={88} z={93} kind="post" />
     </Scene>
   );
 };

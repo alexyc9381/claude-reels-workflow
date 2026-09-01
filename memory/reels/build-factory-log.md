@@ -364,3 +364,74 @@ The worst scene went p10 50.3 → 19.5.
 
 ⚠️ **Motion median 6.90 vs the 9.00 bar** — the honest cost of eleven calm, legible scenes built
 around one real object each. Flagged, not churned back toward busy.
+
+---
+
+# ⭐⭐⭐ REVISION 4 — THE HOOK, AGAINST OX AND UNLAZY
+
+**Alex:** *"focus on the hook scenes specifically and it needs to be way better elevated and more
+interesting please reference the OX video and the UNLAZY videos to see how it works, each word
+needs to have animations."*
+
+## ⭐ I FRAME-STRIPPED BOTH RATHER THAN REASONING FROM MEMORY
+
+Seven frames from each reel's first 2.2s, laid on one sheet with mine. The two references do the
+identical three things and the old hook did **none** of them:
+
+| | OX 119 | UNLAZY 120 | BUILD rev3 hook |
+|---|---|---|---|
+| **ONE COLOSSAL OBJECT** | a black ox, ~55% of the panel | a balloon grown to ~45% | none |
+| **IT ENTERS OR GROWS** | walks in from frame right | inflates across the frame | a shutter rises in place |
+| **THE WORD IS ON IT** | `FREE` branded on its flank | `DONE` on the balloon | on a small awning board |
+
+and in both, **the Claude is SMALL beside it — that scale gap IS the image.**
+
+⭐⭐⭐ **THE DIAGNOSIS THIS PRODUCED: A SHUTTER RISING IS A HOLE CHANGING SIZE, NOT AN OBJECT
+ARRIVING.** There is nothing to be dwarfed by, so the hook had no scale contrast to trade on however
+well the reveal was staged. `feedback_hook_simplicity` says ONE dominant object on an empty stage —
+which is exactly what an ox is — and I had read "dominant" as "the thing the shot is about" rather
+than as "the thing that is physically huge".
+
+## THE REBUILD — a colossal load, and a beat on every spoken word
+
+A 780px pallet of three crates hauled in from frame right by a 244px Claude on a tow strap. Beats
+read out of the caption JSON, never spaced by eye:
+
+```
+f0  "You"      the load is ALREADY 30% on frame and travelling — settled, not starting
+f6  "sell"     he takes the strain and the whole load LURCHES
+f10 "three"    it lands square and the three crates are countable
+f14 "free"     ⭐ FREE brands across the front in burnt stencil — the ox's flank
+f26 "Claude"   the Claude mark stamps onto the middle crate
+f31 "plugins"  the three crate fronts drop and a dial is turning in each
+f48 "Fiverr"   a shipping label slaps on
+f53 "Upwork"   the second label slaps on
+```
+
+⛔ **AND THIS DOES NOT BREAK `feedback_hook_simplicity`.** The count of BEATS went to eight; the
+count of IDEAS stayed at one — a colossal free delivery. Reducing ideas and reducing beats are
+different dials, and Alex asked for the second one to go up.
+
+## Three staging corrections the first pass needed
+
+- ⛔ **The load ran over the Claude.** It travelled to LX=540 and buried him by f28. The scale gap
+  only reads while BOTH are in frame — in OX the small Claude stands clear at the left the whole
+  time. Travel shortened so the load's left edge lands at x346.
+- ⛔ **Three rotating spokes on a ring is a FLOWER, not a machine.** The crate interiors read as
+  orange asterisks. Replaced with a real machine face: a dial with tick marks and a needle that
+  actually swings, plus an output slot — the same vocabulary as the bench machines.
+- ⛔ **A 13px repeating gradient is a HAZARD STRIPE, not a chain.** Replaced with a tow strap:
+  webbing, a lit top edge, a dark bottom edge, stitching, and a hook where it meets the pallet.
+
+## ⛔ And frame 0 paid for the darker load
+
+`HOOK_LUMA` fell to **137.6**. The fix was NOT the palette: the crates' top lip was
+`mxh(SODIUM, 0.10)`, barely lighter than their front face, so they read flat AND cost luma. Lighting
+the **third face** properly (0.40) fixed both, and a shaped light pool from the street lamp — a real
+source — took it to **141.1**.
+
+## Gates on the rev-4 delivered file
+
+`MOTION mean 6.73 · 0/11 under bar · 0 dead runs · hook 5.82` ·
+`HOOK_LUMA 141.1 ✓ · BODY_SAT 65.9% ✓ · BODY_BLACK p10 19.6 ✓` ·
+`verify_reel 8/8` · `dHash mean 22.2 MIN 11` · **11 of 11 ingested to the Drive server.**

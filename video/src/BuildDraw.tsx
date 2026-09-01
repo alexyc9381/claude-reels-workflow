@@ -623,3 +623,145 @@ export const WaveWall: React.FC<{ x: number; y: number; w: number; h?: number; f
     </div>
   );
 };
+
+/* =========================================================================
+   13 · THE FREE LOAD — the hook's colossal object.
+
+   ⛔⛔⛔ WHY THIS EXISTS. Alex: *"focus on the hook scenes specifically, it needs
+   to be way better, elevated and more interesting, reference the OX video and
+   the UNLAZY videos to see how it works, each word needs to have animations."*
+
+   ⭐ I FRAME-STRIPPED BOTH RATHER THAN REASONING FROM MEMORY, and the two hooks
+   do the identical three things:
+
+     | | OX 119 | UNLAZY 120 | BUILD rev3 hook |
+     | ONE COLOSSAL OBJECT   | a black ox, ~55% of the panel | a balloon grown to ~45% | none |
+     | IT ENTERS OR GROWS    | walks in from frame right     | inflates across frame   | a shutter rises in place |
+     | THE WORD IS ON IT     | `FREE` branded on its flank   | `DONE` on the balloon   | on a small awning |
+
+   and in both, the Claude is SMALL beside it — that scale gap is the whole
+   image. A shutter going up in a wall is a hole changing size; it is not an
+   object arriving, so there is nothing to be dwarfed by.
+
+   ⛔ AND THIS DOES NOT BREAK `feedback_hook_simplicity`. That rule says ONE
+   dominant object and an empty stage, which is exactly what the ox is. The
+   count of IDEAS stays at one — a colossal free delivery — while the count of
+   BEATS on it goes to seven, one per spoken word.
+   ====================================================================== */
+export const FreeLoad: React.FC<{ x: number; y: number; f: number; s?: number; z?: number;
+  brand?: number; mark?: number; open?: number; lurch?: number }> =
+  ({ x, y, f, s = 1, z = 60, brand = 0, mark = 0, open = 0, lurch = 0 }) => {
+  const W0 = 780 * s, H0 = 470 * s;
+  /* each crate front drops on its own hinge, staggered, so "plugins" reveals
+     three machines rather than one lid */
+  const lid = (i: number) => E(open * 3 - i, 0, 1, 0, 1, OUT);
+  return (
+    <div style={{ position: "absolute", left: x - W0 / 2, top: y - H0, width: W0, height: H0,
+      zIndex: z, transform: `rotate(${lurch * 1.2}deg)`, transformOrigin: "50% 100%" }}>
+      <svg width={W0} height={H0 + 90 * s} viewBox="0 0 780 560">
+        {/* the pallet the load rides on — a real one, with stringers */}
+        <path d="M8 512 L772 512 L756 548 L24 548 Z" fill={SH_(OXIDE, 0.44)} stroke={ED} strokeWidth="5" />
+        {[60, 300, 540].map((px, i) => (
+          <rect key={"st" + i} x={px} y="512" width="120" height="36" fill={SH_(OXIDE, 0.58)} />
+        ))}
+        {/* ⭐ THREE CRATES, COUNTABLE — the "three" beat lands on their number */}
+        {[0, 1, 2].map(i => {
+          const cx0 = 24 + i * 250, cw = 232;
+          return (
+            <g key={"cr" + i}>
+              {/* the crate body: front face + a top lip = a SOLID */}
+              <path d={`M${cx0} 512 L${cx0} 150 L${cx0 + cw} 150 L${cx0 + cw} 512 Z`}
+                fill={SH_(SODIUM, 0.30 - i * 0.04)} stroke={ED} strokeWidth="5" />
+              <path d={`M${cx0} 150 L${cx0 + cw} 150 L${cx0 + cw - 26} 112 L${cx0 + 26} 112 Z`}
+                fill={LI(SODIUM, 0.40)} stroke={ED} strokeWidth="5" />
+              {/* slats — fine repeated detail that survives the downsample */}
+              {[0, 1, 2, 3, 4].map(j => (
+                <rect key={"sl" + j} x={cx0 + 10} y={172 + j * 68} width={cw - 20} height="12"
+                  fill={hexa("#000", 0.20)} />
+              ))}
+              {/* corner braces */}
+              {[[cx0 + 6, 156], [cx0 + cw - 26, 156], [cx0 + 6, 470], [cx0 + cw - 26, 470]].map(([bx, by], k) => (
+                <rect key={"cb" + k} x={bx} y={by} width="20" height="42" rx="3"
+                  fill={SH_(OXIDE, 0.30)} stroke={ED} strokeWidth="3" />
+              ))}
+              {/* ⭐ THE FRONT DROPS on "plugins" and a machine is inside */}
+              {open > 0 && (
+                <g>
+                  <rect x={cx0 + 14} y="168" width={cw - 28} height="332"
+                    fill={dkh(["#E7A94C", "#8B72B0", "#7FC0C9"][i], 0.66)} />
+                  <rect x={cx0 + 40} y="212" width={cw - 80} height="120" rx="6"
+                    fill={dkh(["#E7A94C", "#8B72B0", "#7FC0C9"][i], 0.34)} stroke={ED} strokeWidth="4" />
+                  {/* a real machine face — a dial with a moving needle and a
+                      slot, the same vocabulary as the bench machines */}
+                  <circle cx={cx0 + cw / 2} cy="400" r="46"
+                    fill={dkh(["#E7A94C", "#8B72B0", "#7FC0C9"][i], 0.5)}
+                    stroke={mxh(["#E7A94C", "#8B72B0", "#7FC0C9"][i], 0.3)} strokeWidth="8" />
+                  {[-60, -30, 0, 30, 60].map(a => (
+                    <path key={"tk" + a} d={`M${cx0 + cw / 2} 366 L${cx0 + cw / 2} 376`}
+                      stroke={mxh(["#E7A94C", "#8B72B0", "#7FC0C9"][i], 0.5)} strokeWidth="4"
+                      transform={`rotate(${a} ${cx0 + cw / 2} 400)`} />
+                  ))}
+                  <path d={`M${cx0 + cw / 2} 400 L${cx0 + cw / 2} 368`}
+                    stroke="#FFF3D6" strokeWidth="6" strokeLinecap="round"
+                    transform={`rotate(${Math.sin(f / 7 + i) * 58} ${cx0 + cw / 2} 400)`} />
+                  <circle cx={cx0 + cw / 2} cy="400" r="8" fill="#FFF3D6" />
+                  <rect x={cx0 + 46} y="452" width={cw - 92} height="18" rx="4"
+                    fill={mxh(["#E7A94C", "#8B72B0", "#7FC0C9"][i], 0.42)} />
+                  {/* the front panel, hinged open at the bottom */}
+                  <path d={`M${cx0 + 4} 512 L${cx0 + cw - 4} 512 L${cx0 + cw - 4} ${512 - 350 * (1 - lid(i))} L${cx0 + 4} ${512 - 350 * (1 - lid(i))} Z`}
+                    fill={SH_(SODIUM, 0.34)} stroke={ED} strokeWidth="5" />
+                </g>
+              )}
+            </g>
+          );
+        })}
+        {/* ⭐⭐ THE WORD, BRANDED ACROSS THE LOAD — this is the ox's flank.
+            It is drawn as a burnt-in stencil, not a label: it belongs to the
+            object, which is why it reads at a glance and at thumbnail size. */}
+        {brand > 0 && (
+          <g opacity={brand}>
+            <rect x="70" y="236" width={640 * Math.min(1, brand * 1.4)} height="132" rx="8"
+              fill={hexa("#2A1C04", 0.34)} />
+            <text x="390" y="344" textAnchor="middle" fill="#FFF3D6" fontSize={140}
+              fontFamily="Georgia, serif" fontWeight="900" letterSpacing="6"
+              stroke={hexa("#7A4A10", 0.9)} strokeWidth="5"
+              transform={`scale(${0.86 + brand * 0.14} 1) translate(${(1 - brand) * 60} 0)`}>FREE</text>
+          </g>
+        )}
+        {/* the Claude mark, stamped on the end crate on its own word */}
+        {mark > 0 && (
+          <g opacity={mark} transform={`translate(390 232) scale(${0.7 + mark * 0.3})`}>
+            <rect x="-52" y="-52" width="104" height="104" rx="22" fill="#FFFFFF"
+              stroke="#E8DCC0" strokeWidth="5" />
+          </g>
+        )}
+      </svg>
+      {mark > 0 && (
+        <Img src={staticFile("claude_logo.png")}
+          style={{ position: "absolute", left: 362 * s, top: 194 * s, width: 84 * s,
+            height: 84 * s, objectFit: "contain", opacity: mark,
+            transform: `scale(${0.7 + mark * 0.3})` }} />
+      )}
+    </div>
+  );
+};
+
+/** the two marketplace marks, slapped on as SHIPPING LABELS on their own words */
+export const ShipLabel: React.FC<{ x: number; y: number; src: string; k: number;
+  s?: number; z?: number; rot?: number }> = ({ x, y, src, k, s = 1, z = 92, rot = -5 }) => {
+  if (k <= 0) return null;
+  return (
+    <div style={{ position: "absolute", left: x - 84 * s, top: y - 60 * s, width: 168 * s,
+      height: 120 * s, zIndex: z, opacity: Math.min(1, k * 2),
+      transform: `scale(${0.4 + k * 0.6}) rotate(${rot * k}deg)`, transformOrigin: "50% 50%",
+      background: "#FBF6EA", borderRadius: 8 * s, border: `${5 * s}px solid #2A241C`,
+      boxShadow: SH_D, display: "flex", flexDirection: "column", alignItems: "center",
+      justifyContent: "center", gap: 6 * s }}>
+      <Img src={staticFile("logos/" + src)}
+        style={{ width: 56 * s, height: 56 * s, objectFit: "contain" }} />
+      {/* the perforation strip that makes it a LABEL and not a card */}
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 22 * s, height: 3 * s,
+        background: `repeating-linear-gradient(90deg, ${hexa("#2A241C", 0.4)} 0 7px, transparent 7px 14px)` }} />
+    </div>
+  );
+};
