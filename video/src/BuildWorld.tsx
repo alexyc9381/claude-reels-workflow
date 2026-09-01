@@ -177,8 +177,8 @@ export const PLACES: Record<string, Place> = {
   rig:     { back: "#141A20", back2: "#39454E", floor: "#28323A", floor2: "#101619",
              lip: "#060A0D", key: "#CFE6F4", horizon: 538, grit: "#070B0E" },
   /* 12 · THE TURNTABLE under a three-lamp rig. The brightest body set. */
-  turn:    { back: "#8E8578", back2: "#F6F0E0", floor: "#C8BCA2", floor2: "#8A8068",
-             lip: "#302A20", key: "#FFF8E8", horizon: 476, grit: "#221E16" },
+  turn:    { back: "#1E7A86", back2: "#A8E2E6", floor: "#CEC2A8", floor2: "#8A8068",
+             lip: "#123A40", key: "#FFF8E8", horizon: 476, grit: "#0E2A30" },
   /* 13 · THE LOADING DOCK — cold mid blue, roller door up, a van backed in. */
   dock:    { back: "#2E3E52", back2: "#8CA2BA", floor: "#6E7686", floor2: "#343C48",
              lip: "#12161C", key: "#E2EEFA", horizon: 500, grit: "#0F1318" },

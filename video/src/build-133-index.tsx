@@ -13,10 +13,19 @@ import { makeReel, BUILD_TOTAL, HookCut } from "./ClaudeBuild133Reel";
    flagged, not trimmed. */
 const V = { fps: 30, width: 1080, height: 1920 } as const;
 
-export const ReelHouse = makeReel("house");
-export const ReelAmber = makeReel("amber");
-export const ReelSteel = makeReel("steel");
-export const ReelQuiet = makeReel("house", true);
+/* ⛔⛔ THREE CUTS = THREE HOOKS, NOT THREE GRADES (`memory/three-cuts-three-hooks`).
+   Camera + contrast + rake + bed is a crop, a tilt, a tone curve and a bed —
+   **nothing that HAPPENS is different**, and a dHash passes the whole time
+   because it measures PIXELS, NOT EVENTS. Each cut opens on a different
+   one-word MECHANISM on a different axis:
+     house  REVELATION    the shutter goes up on three machines already running
+     amber  LOAD          a crate stencilled FREE is winched onto the counter
+     steel  ACCUMULATION  goods pour out faster and faster and a van fills
+   The body is the same reel; the SFX bank is keyed off `L`, so it still lands. */
+export const ReelHouse = makeReel("house", false, "shutter");
+export const ReelAmber = makeReel("amber", false, "haul");
+export const ReelSteel = makeReel("steel", false, "belt");
+export const ReelQuiet = makeReel("house", true, "shutter");
 
 /* ⛔ docs/THE-OPEN.md step 1: N concepts for scene 0, rendered at full quality
    on the real chassis, PICKED before the body is defended. Four MECHANISMS:

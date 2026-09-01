@@ -291,6 +291,28 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
 
       <WallClock x={148 + L.a * 0.4} y={250} s={158} f={f} z={30} />
 
+      {/* the painted bay markings — a workshop floor carries them, each bay in
+          ITS OWN tool's colour, so the saturation IS the information */}
+      {R.tools.map((t, i) => (
+        <React.Fragment key={"bay" + i}>
+          <div style={{ position: "absolute", left: 206 + i * 246 + L.b * 0.2, top: GY - 96,
+            width: 258, height: 132, zIndex: 13,
+            background: hexa(t.c, 0.34), border: `7px solid ${hexa(t.c, 0.66)}` }} />
+          <div style={{ position: "absolute", left: 206 + i * 246 + L.b * 0.2, top: GY - 96,
+            width: 258, height: 16, zIndex: 14,
+            background: `repeating-linear-gradient(122deg, ${hexa(t.c, 0.7)} 0 18px, transparent 18px 36px)` }} />
+        </React.Fragment>
+      ))}
+      {/* the tool board on the back wall — saturated racking, not grey shelving */}
+      <div style={{ position: "absolute", left: 96 + L.a * 0.3, top: 262, width: 300, height: 168,
+        zIndex: 15, background: dkh(GREEN, 0.36), border: "6px solid rgba(0,0,0,0.42)" }}>
+        {Array.from({ length: 12 }, (_, i) => (
+          <div key={"tb" + i} style={{ position: "absolute", left: 18 + (i % 4) * 70,
+            top: 20 + Math.floor(i / 4) * 48, width: 44, height: 32, borderRadius: 3,
+            background: [CLAY, GOLD, TEAL, VIOLET][i % 4] }} />
+        ))}
+      </div>
+
       {/* the three beds, and each one reads while it is still EMPTY */}
       {R.tools.map((t, i) => (
         <MachineBed key={"bd" + i} x={228 + i * 246 + L.b * 0.2} y={GY - 26} w={214} i={i}
@@ -377,13 +399,16 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
 
       {/* the wall of spools behind — a dense, on-topic SET is worth more than
           any effect (§1), and every one of them turns */}
-      {Array.from({ length: 18 }, (_, i) => (
-        <div key={"sw" + i} style={{ position: "absolute", left: 62 + (i % 6) * 158,
-          top: 210 + Math.floor(i / 6) * 116, width: 86, height: 86, zIndex: 16,
-          borderRadius: "50%", border: `9px solid ${dkh(SODIUM, 0.52 - lit * 0.16)}`,
-          transform: `rotate(${f * (2.2 + (i % 4) * 1.3)}deg)`, opacity: 0.9 }}>
-          <div style={{ position: "absolute", left: "50%", top: 3, width: 5, height: 20,
-            marginLeft: -2.5, background: dkh(SODIUM, 0.30) }} />
+      {Array.from({ length: 8 }, (_, i) => (
+        <div key={"sw" + i} style={{ position: "absolute", left: 40 + (i % 4) * 252,
+          top: 306 + Math.floor(i / 4) * 208, width: 158, height: 158, zIndex: 16,
+          borderRadius: "50%", border: `18px solid ${dkh(SODIUM, 0.50 - lit * 0.16)}`,
+          transform: `rotate(${f * (5.4 + (i % 4) * 2.6)}deg)`, opacity: 0.92 }}>
+          {[0, 60, 120].map(a => (
+            <div key={"sp" + a} style={{ position: "absolute", left: "50%", top: "50%",
+              width: 118, height: 10, margin: "-5px 0 0 -59px",
+              background: dkh(SODIUM, 0.34 - lit * 0.14), transform: `rotate(${a}deg)` }} />
+          ))}
         </div>
       ))}
       <Runner y={252} f={f} z={20} rate={10.8} pitch={176} w={144} h={66} kind="load"
@@ -447,6 +472,26 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
         rot={-8 + feed * 8} />
 
       <MillLine f={f} beats={[32, 54, 77]} z={44} />
+
+      {/* ⭐ THE LINE'S OUTPUT, ARRIVING CONTINUOUSLY. Six finished reels ride
+          out along the delivery rail and stack at the far end — large, bright,
+          travelling, and spread across the WHOLE duration rather than bunched,
+          so the scene never arrives and holds. */}
+      {Array.from({ length: 6 }, (_, i) => {
+        const at = 14 + i * 15;
+        const k = E(f, at, at + 30, 0, 1, IO);
+        if (k <= 0) return null;
+        return (
+          <div key={"ou" + i} style={{ position: "absolute", left: 60 + k * 860,
+            top: 664 - Math.sin(k * Math.PI) * 44, width: 96, height: 96, zIndex: 66,
+            borderRadius: "50%", transform: `rotate(${k * 300}deg)`,
+            background: `radial-gradient(56% 56% at 36% 30%, #C6CED4 0%, #2E353A 100%)`,
+            border: "5px solid rgba(0,0,0,0.46)" }}>
+            <div style={{ position: "absolute", left: 26, top: 26, width: 44, height: 44,
+              borderRadius: "50%", background: mxh(SODIUM, 0.3) }} />
+          </div>
+        );
+      })}
 
       {/* the hero works the line — his drive lands on each station's beat */}
       <Contact x={806 + L.c * 0.3} y={GY - 12} w={190} o={0.38} />
@@ -917,7 +962,7 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
       ))}
 
       {/* ⭐ the conveyor running out through the door — full width, alternating */}
-      <Runner y={556} f={f} z={30} rate={9.0} pitch={172} w={128} h={62} kind="crate"
+      <Runner y={556} f={f} z={30} rate={12.4} pitch={166} w={144} h={72} kind="crate"
         c="#BFD8EE" c2="#1A222C" rail o={1} />
 
       {/* the van backed into the bay, its tailgate down */}
@@ -932,11 +977,12 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
         zIndex: 44, background: "#8E9299", transform: "rotate(9deg)", transformOrigin: "100% 50%" }} />
 
       {/* the crates going out, spread across the whole scene */}
-      {[6, 22, 38].map((at, i) => {
-        const k = E(f, at, at + 22, 0, 1, IO);
+      {[4, 13, 22, 31, 40, 49].map((at, i) => {
+        const k = E(f, at, at + 24, 0, 1, IO);
+        if (k <= 0) return null;
         return (
-          <EcomCrate key={"ec" + i} x={330 + k * 320 + L.b * 0.2} y={512 - Math.sin(k * Math.PI) * 34}
-            s={0.94} z={60 + i} rot={-6 + k * 12} />
+          <EcomCrate key={"ec" + i} x={286 + k * 384 + L.b * 0.2}
+            y={508 - Math.sin(k * Math.PI) * 42} s={0.90} z={60 + i} rot={-8 + k * 16} />
         );
       })}
       <Docket x={866 + L.c * 0.3} y={630} f={f} at={44} s={0.82} z={84} />

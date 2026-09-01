@@ -645,3 +645,187 @@ export const CoverJudge: React.FC = () => (
 );
 
 export const CoverJudgeProof = cropProof(CoverJudge);
+
+/* ==========================================================================
+   SET 7 — reel 133 BUILD.  Chassis imported, never duplicated (03 §A).
+
+   THE REEL, IN ITS OWN WORDS (133_build_script.txt / storyboards/133-build.md):
+     "You can sell these three free Claude plugins on Fiverr and Upwork... and
+      the best part, they take just five minutes to set up."   CTA keyword: BUILD.
+
+   WORLD = THE TRADE ROW, the reel's own set. The hook is a Claude hauling the
+   shutter up on his own unit and finding three machines already running behind
+   it; the cover is that shop one beat later — open, lit, and with the first
+   finished goods out on the kerb. Nothing here is invented: the awning, the
+   three bays, the goods and the two marketplace marks are all objects the reel
+   actually draws.
+
+   ⛔ THE TWO MARKS ARE THE ONLY BRANDS ON THE TILE, and both are SPOKEN in the
+   VO. Real simple-icons paths from `MARKS`, never an invented glyph. No
+   retailer, no vendor, and NO MONEY FIGURE anywhere — Alex states no number
+   about earnings, so the tile states none either. `$0` is what the tools cost.
+
+   ⛔⛔ V1 FAILED `giant margins 0/1` AND WAS BOTTOM-HEAVY. line1 ran
+   "3 FREE AI TOOLS TO" — 18 characters at size 78 spans the full 1080 canvas
+   edge to edge — and the shop sat at y800..1500 with 340px of empty kerb under
+   it. Both are the same mistake: the copy and the art were authored to the
+   1080x1920 canvas instead of to the 4:5 tile (y285..1635) that the grid
+   actually shows. line1 is 15 characters now and the set fills the tile.
+   ========================================================================== */
+
+/* ---------- geometry, stated once so every prop can be re-seated ----------
+   Everything load-bearing lives inside the 1:1 band y420..1500, and the shop
+   fills the tile rather than sitting at the bottom of it. */
+const B_FASCIA = 812;        // > 780, the quiet-zone floor — the type sits on sky only
+const B_OPEN_T = 996;
+const B_OPEN_B = 1296;
+const B_KERB = 1296;
+const B_GROUND = 1478;       // the hero and the goods stand here, NEAR camera
+const B_HERO = 292;
+/* ⛔ x > 956 is eaten by the IG feed's like/comment/share rail. 794 + 146 = 940. */
+const B_CX = 794;
+
+/** one lit machine bay behind the raised shutter — three of them, three
+    colours, and each one MID-CYCLE, which is the whole promise of the hook.
+    ⛔ Drawn as a MACHINE (cabinet, lit port, spoked flywheel, output slot), not
+    a coloured rectangle: v1's bays read as three flat swatches with wheels. */
+const BuildBay: React.FC<{ x: number; c: string; phase: number }> = ({ x, c, phase }) => (
+  <>
+    {/* the cabinet */}
+    <div style={{ position: "absolute", left: x, top: B_OPEN_T + 14, width: 236, height: 268,
+      background: `linear-gradient(176deg, ${c} 0%, ${c}77 100%)`,
+      border: "7px solid rgba(0,0,0,0.5)" }} />
+    {/* the lit inspection port */}
+    <div style={{ position: "absolute", left: x + 26, top: B_OPEN_T + 36, width: 184, height: 100,
+      background: "#1A1208", border: "6px solid rgba(0,0,0,0.5)" }}>
+      <div style={{ position: "absolute", left: 14, top: 38, width: 156, height: 12,
+        background: `${c}DD` }} />
+      <div style={{ position: "absolute", left: 14, top: 62, width: 96, height: 12,
+        background: `${c}88` }} />
+    </div>
+    {/* the flywheel — real spokes and a hub, so it reads as machinery */}
+    <div style={{ position: "absolute", left: x + 68, top: B_OPEN_T + 150, width: 100, height: 100,
+      borderRadius: "50%", border: `15px solid ${c}` }}>
+      {[0, 60, 120].map((a) => (
+        <div key={`sp${x}${a}`} style={{ position: "absolute", left: "50%", top: "50%",
+          width: 70, height: 10, margin: "-5px 0 0 -35px", background: c,
+          transform: `rotate(${a + phase}deg)` }} />
+      ))}
+      <div style={{ position: "absolute", left: "50%", top: "50%", width: 30, height: 30,
+        margin: "-15px 0 0 -15px", borderRadius: "50%", background: "#241A0E" }} />
+    </div>
+    {/* the output slot, lit */}
+    <div style={{ position: "absolute", left: x + 16, top: B_OPEN_T + 258, width: 204, height: 20,
+      background: `${c}EE` }} />
+  </>
+);
+
+/** a finished good out on the kerb — one per bay, already made and already out */
+const BuildGood: React.FC<{ cx: number; c: string; round?: boolean }> = ({ cx, c, round }) => (
+  <>
+    <div style={{ position: "absolute", left: cx - 92, top: B_GROUND - 20, width: 184, height: 42,
+      borderRadius: "50%", filter: "blur(8px)",
+      background: "radial-gradient(ellipse, rgba(30,20,10,0.62) 0%, rgba(30,20,10,0) 72%)" }} />
+    <div style={{ position: "absolute", left: cx - 78, top: B_GROUND - 158, width: 156, height: 156,
+      borderRadius: round ? "50%" : 12,
+      background: `linear-gradient(172deg, ${c} 0%, ${c}88 100%)`,
+      border: "7px solid rgba(0,0,0,0.5)" }}>
+      <div style={{ position: "absolute", left: 20, top: 22, width: 58, height: 12,
+        background: "rgba(255,255,255,0.32)" }} />
+      {round && (
+        <div style={{ position: "absolute", left: "50%", top: "50%", width: 34, height: 34,
+          margin: "-17px 0 0 -17px", borderRadius: "50%", background: "rgba(0,0,0,0.4)" }} />
+      )}
+    </div>
+  </>
+);
+
+const RowScene: React.FC = () => (
+  <>
+    {/* L1 · the sodium night sky — bleeds, and the type sits on it, on nothing else */}
+    <div style={{ position: "absolute", inset: 0,
+      background: "linear-gradient(180deg,#8E76A2 0%,#D6BCC6 16%,#F6E6CA 30%,#F2DCB2 42%,#DCAE82 60%,#B8845E 78%,#8E6448 100%)" }} />
+    <Bloom x={540} y={1140} r={400} c="rgba(255,232,178,0.38)" />
+
+    {/* L2 · the terrace opposite, in silhouette — depth, and it stays BELOW the type */}
+    {[-40, 168, 878].map((x, i) => (
+      <div key={`tr${i}`} style={{ position: "absolute", left: x, top: 846 + i * 30,
+        width: 244, height: 520, background: "#6E5A80" }} />
+    ))}
+    {/* the sodium lamp on its bracket, the one practical */}
+    <div style={{ position: "absolute", left: 62, top: 800, width: 116, height: 34,
+      borderRadius: "6px 6px 26px 26px", background: "linear-gradient(176deg,#8E8672,#2E2A22)" }} />
+    <div style={{ position: "absolute", left: 168, top: 808, width: 96, height: 13,
+      background: "#2E2A22" }} />
+
+    {/* L3 · the unit — fascia, awning board, and the rolled-up shutter box */}
+    <div style={{ position: "absolute", left: 74, top: B_FASCIA, width: 932, height: 500,
+      background: "linear-gradient(176deg,#E0CBA0 0%,#8E7856 100%)",
+      border: "11px solid rgba(0,0,0,0.44)" }} />
+    <div style={{ position: "absolute", left: 108, top: B_FASCIA + 24, width: 864, height: 96,
+      borderRadius: 8, background: "linear-gradient(178deg,#FEFAEE 0%,#EADCBC 100%)",
+      border: "7px solid #B8894A", display: "flex", alignItems: "center",
+      justifyContent: "center", gap: 30 }}>
+      {(["fiverr", "upwork"] as const).map((k) => (
+        <div key={k} style={{ width: 68, height: 68, borderRadius: 16, background: "#FFFFFF",
+          border: "4px solid #E8DCC0", display: "flex", alignItems: "center",
+          justifyContent: "center" }}>
+          <svg width="48" height="48" viewBox={MARKS[k].vb}>
+            <path d={MARKS[k].d} fill={MARKS[k].c} />
+          </svg>
+        </div>
+      ))}
+      <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: 50, color: "#1A1813",
+        letterSpacing: "0.01em" }}>$0 · FREE</span>
+    </div>
+    {/* the curtain rolled into its box — the shutter is UP, which is the beat */}
+    <div style={{ position: "absolute", left: 108, top: B_OPEN_T - 54, width: 864, height: 48,
+      borderRadius: 6, background: "linear-gradient(178deg,#A99A78 0%,#3A342A 100%)",
+      border: "5px solid rgba(0,0,0,0.5)" }} />
+
+    {/* L4 · what is behind it — three lit bays, all three mid-cycle */}
+    <div style={{ position: "absolute", left: 108, top: B_OPEN_T, width: 864, height: B_OPEN_B - B_OPEN_T,
+      overflow: "hidden", background: "linear-gradient(178deg,#2A1E12 0%,#96702E 100%)" }} />
+    <BuildBay x={134} c="#E7A94C" phase={0} />
+    <BuildBay x={422} c="#8B72B0" phase={26} />
+    <BuildBay x={710} c="#7FC0C9" phase={52} />
+
+    {/* L5 · the kerb — full-bleed band, so no crop reveals a seam */}
+    <div style={{ position: "absolute", left: 0, top: B_KERB, width: 1080, height: 1920 - B_KERB,
+      background: "linear-gradient(180deg,#B8A078 0%,#9A8060 26%,#7A6448 62%,#54432E 100%)" }} />
+    <div style={{ position: "absolute", left: 0, top: B_KERB, width: 1080, height: 200,
+      background: "radial-gradient(ellipse at 46% 0%, rgba(255,232,178,0.5) 0%, rgba(255,232,178,0) 74%)" }} />
+
+    {/* L6 · the goods already out on the kerb, and the hero who put them there */}
+    <BuildGood cx={168} c="#E7A94C" />
+    <BuildGood cx={356} c="#8B72B0" round />
+    <BuildGood cx={544} c="#7FC0C9" />
+    <div style={{ position: "absolute", left: B_CX - 132, top: B_GROUND - 24, width: 264, height: 52,
+      borderRadius: "50%", filter: "blur(9px)",
+      background: "radial-gradient(ellipse, rgba(30,20,10,0.64) 0%, rgba(30,20,10,0) 72%)" }} />
+    <div style={{ position: "absolute", left: B_CX - B_HERO / 2, top: B_GROUND - B_HERO,
+      width: B_HERO, height: B_HERO }}>
+      <HouseMascot size={B_HERO} constr={1} cheer={1} />
+    </div>
+
+    {/* foreground kerb lip, blurred: depth without touching the hero */}
+    <div style={{ position: "absolute", left: -40, top: 1690, width: 1160, height: 230,
+      background: "linear-gradient(180deg,rgba(90,72,50,0) 0%,rgba(84,66,44,0.5) 46%,rgba(64,50,32,0.78) 100%)",
+      filter: "blur(3px)" }} />
+  </>
+);
+
+/* ================= THE COVER ============================================
+   line1 hands off to the giant, which is the CTA keyword the viewer has to
+   type, so the keyword is the biggest thing on the tile. Exactly one CLAY
+   accent, on FREE — the word doing the enticing. BUILD is 5 letters, so it
+   takes SceneCover's default 158 and clears the >=110px margin without a fit. */
+export const CoverBuild: React.FC = () => (
+  <SceneCover
+    scene={<RowScene />}
+    line1={<>3 <span style={{ color: CLAY }}>FREE</span> AI TOOLS</>}
+    giant={<>BUILD</>}
+  />
+);
+
+export const CoverBuildProof = cropProof(CoverBuild);
