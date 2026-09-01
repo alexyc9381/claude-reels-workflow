@@ -1,0 +1,887 @@
+[
+{
+"start": 0.0,
+"end": 0.42,
+"word": " Everyone's"
+},
+{
+"start": 0.42,
+"end": 0.72,
+"word": " hyping"
+},
+{
+"start": 0.72,
+"end": 0.96,
+"word": " anti"
+},
+{
+"start": 0.96,
+"end": 1.24,
+"word": "-gravity"
+},
+{
+"start": 1.24,
+"end": 1.42,
+"word": " in"
+},
+{
+"start": 1.42,
+"end": 1.68,
+"word": " Stitch"
+},
+{
+"start": 1.68,
+"end": 1.8,
+"word": " right"
+},
+{
+"start": 1.8,
+"end": 1.96,
+"word": " now,"
+},
+{
+"start": 2.06,
+"end": 2.14,
+"word": " but"
+},
+{
+"start": 2.14,
+"end": 2.3,
+"word": " Google"
+},
+{
+"start": 2.3,
+"end": 2.68,
+"word": " actually"
+},
+{
+"start": 2.68,
+"end": 2.94,
+"word": " launched"
+},
+{
+"start": 2.94,
+"end": 3.28,
+"word": " 15"
+},
+{
+"start": 3.28,
+"end": 3.48,
+"word": " new"
+},
+{
+"start": 3.48,
+"end": 3.68,
+"word": " AI"
+},
+{
+"start": 3.68,
+"end": 3.9,
+"word": " tools"
+},
+{
+"start": 3.9,
+"end": 4.14,
+"word": " and"
+},
+{
+"start": 4.14,
+"end": 4.34,
+"word": " some"
+},
+{
+"start": 4.34,
+"end": 4.42,
+"word": " of"
+},
+{
+"start": 4.42,
+"end": 4.52,
+"word": " them"
+},
+{
+"start": 4.52,
+"end": 4.66,
+"word": " might"
+},
+{
+"start": 4.66,
+"end": 4.8,
+"word": " be"
+},
+{
+"start": 4.8,
+"end": 5.22,
+"word": " incredibly"
+},
+{
+"start": 5.22,
+"end": 5.64,
+"word": " helpful"
+},
+{
+"start": 5.64,
+"end": 5.92,
+"word": " for"
+},
+{
+"start": 5.92,
+"end": 6.16,
+"word": " you."
+},
+{
+"start": 6.86,
+"end": 7.14,
+"word": " First,"
+},
+{
+"start": 7.44,
+"end": 7.58,
+"word": " Jules,"
+},
+{
+"start": 7.7,
+"end": 7.76,
+"word": " an"
+},
+{
+"start": 7.76,
+"end": 8.2,
+"word": " autonomous"
+},
+{
+"start": 8.2,
+"end": 8.5,
+"word": " coding"
+},
+{
+"start": 8.5,
+"end": 8.76,
+"word": " agent"
+},
+{
+"start": 8.76,
+"end": 9.0,
+"word": " powered"
+},
+{
+"start": 9.0,
+"end": 9.2,
+"word": " by"
+},
+{
+"start": 9.2,
+"end": 9.46,
+"word": " Gemini."
+},
+{
+"start": 9.98,
+"end": 10.14,
+"word": " Hooked"
+},
+{
+"start": 10.14,
+"end": 10.24,
+"word": " up"
+},
+{
+"start": 10.24,
+"end": 10.36,
+"word": " to"
+},
+{
+"start": 10.36,
+"end": 10.52,
+"word": " GitHub"
+},
+{
+"start": 10.52,
+"end": 10.72,
+"word": " and"
+},
+{
+"start": 10.72,
+"end": 10.82,
+"word": " it"
+},
+{
+"start": 10.82,
+"end": 10.94,
+"word": " clears"
+},
+{
+"start": 10.94,
+"end": 11.12,
+"word": " your"
+},
+{
+"start": 11.12,
+"end": 11.28,
+"word": " pull"
+},
+{
+"start": 11.28,
+"end": 11.52,
+"word": " request"
+},
+{
+"start": 11.52,
+"end": 11.82,
+"word": " backlog"
+},
+{
+"start": 11.82,
+"end": 12.08,
+"word": " on"
+},
+{
+"start": 12.08,
+"end": 12.18,
+"word": " its"
+},
+{
+"start": 12.18,
+"end": 12.32,
+"word": " own,"
+},
+{
+"start": 12.46,
+"end": 12.66,
+"word": " fixing"
+},
+{
+"start": 12.66,
+"end": 12.92,
+"word": " bugs,"
+},
+{
+"start": 13.06,
+"end": 13.22,
+"word": " writing"
+},
+{
+"start": 13.22,
+"end": 13.52,
+"word": " tests,"
+},
+{
+"start": 13.76,
+"end": 14.02,
+"word": " updating"
+},
+{
+"start": 14.02,
+"end": 14.46,
+"word": " dependencies"
+},
+{
+"start": 14.46,
+"end": 14.78,
+"word": " all"
+},
+{
+"start": 14.78,
+"end": 14.86,
+"word": " in"
+},
+{
+"start": 14.86,
+"end": 14.96,
+"word": " the"
+},
+{
+"start": 14.96,
+"end": 15.3,
+"word": " background."
+},
+{
+"start": 15.84,
+"end": 16.22,
+"word": " Second,"
+},
+{
+"start": 16.56,
+"end": 16.56,
+"word": " Google"
+},
+{
+"start": 16.56,
+"end": 16.88,
+"word": " Opal,"
+},
+{
+"start": 17.42,
+"end": 17.56,
+"word": " a"
+},
+{
+"start": 17.56,
+"end": 17.74,
+"word": " drag"
+},
+{
+"start": 17.74,
+"end": 17.84,
+"word": " and"
+},
+{
+"start": 17.84,
+"end": 17.98,
+"word": " drop"
+},
+{
+"start": 17.98,
+"end": 18.16,
+"word": " video"
+},
+{
+"start": 18.16,
+"end": 18.42,
+"word": " editor"
+},
+{
+"start": 18.42,
+"end": 18.66,
+"word": " for"
+},
+{
+"start": 18.66,
+"end": 18.82,
+"word": " AI,"
+},
+{
+"start": 18.94,
+"end": 19.2,
+"word": " basically"
+},
+{
+"start": 19.2,
+"end": 19.4,
+"word": " an"
+},
+{
+"start": 19.4,
+"end": 19.62,
+"word": " AI"
+},
+{
+"start": 19.62,
+"end": 19.82,
+"word": " native"
+},
+{
+"start": 19.82,
+"end": 20.22,
+"word": " alternative"
+},
+{
+"start": 20.22,
+"end": 20.52,
+"word": " to"
+},
+{
+"start": 20.52,
+"end": 20.86,
+"word": " N8N."
+},
+{
+"start": 21.24,
+"end": 21.5,
+"word": " Describe"
+},
+{
+"start": 21.5,
+"end": 21.64,
+"word": " a"
+},
+{
+"start": 21.64,
+"end": 21.88,
+"word": " workflow"
+},
+{
+"start": 21.88,
+"end": 22.04,
+"word": " in"
+},
+{
+"start": 22.04,
+"end": 22.2,
+"word": " plain"
+},
+{
+"start": 22.2,
+"end": 22.44,
+"word": " English"
+},
+{
+"start": 22.44,
+"end": 22.6,
+"word": " and"
+},
+{
+"start": 22.6,
+"end": 22.7,
+"word": " it"
+},
+{
+"start": 22.7,
+"end": 22.84,
+"word": " turns"
+},
+{
+"start": 22.84,
+"end": 23.0,
+"word": " that"
+},
+{
+"start": 23.0,
+"end": 23.16,
+"word": " into"
+},
+{
+"start": 23.16,
+"end": 23.32,
+"word": " a"
+},
+{
+"start": 23.32,
+"end": 23.56,
+"word": " working"
+},
+{
+"start": 23.56,
+"end": 23.74,
+"word": " mini"
+},
+{
+"start": 23.74,
+"end": 23.94,
+"word": "-app,"
+},
+{
+"start": 24.08,
+"end": 24.18,
+"word": " no"
+},
+{
+"start": 24.18,
+"end": 24.42,
+"word": " coding"
+},
+{
+"start": 24.42,
+"end": 24.86,
+"word": " required."
+},
+{
+"start": 25.34,
+"end": 25.38,
+"word": " Third,"
+},
+{
+"start": 25.56,
+"end": 25.92,
+"word": " Mixboard."
+},
+{
+"start": 26.44,
+"end": 26.6,
+"word": " It's"
+},
+{
+"start": 26.6,
+"end": 26.68,
+"word": " an"
+},
+{
+"start": 26.68,
+"end": 26.88,
+"word": " AI"
+},
+{
+"start": 26.88,
+"end": 27.16,
+"word": " whiteboard"
+},
+{
+"start": 27.16,
+"end": 27.32,
+"word": " from"
+},
+{
+"start": 27.32,
+"end": 27.56,
+"word": " Google"
+},
+{
+"start": 27.56,
+"end": 27.82,
+"word": " Labs."
+},
+{
+"start": 27.82,
+"end": 28.3,
+"word": " You"
+},
+{
+"start": 28.3,
+"end": 28.52,
+"word": " drop"
+},
+{
+"start": 28.52,
+"end": 28.76,
+"word": " different"
+},
+{
+"start": 28.76,
+"end": 28.96,
+"word": " images"
+},
+{
+"start": 28.96,
+"end": 29.22,
+"word": " and"
+},
+{
+"start": 29.22,
+"end": 29.4,
+"word": " text"
+},
+{
+"start": 29.4,
+"end": 29.62,
+"word": " onto"
+},
+{
+"start": 29.62,
+"end": 29.78,
+"word": " the"
+},
+{
+"start": 29.78,
+"end": 30.02,
+"word": " canvas"
+},
+{
+"start": 30.02,
+"end": 30.24,
+"word": " and"
+},
+{
+"start": 30.24,
+"end": 30.5,
+"word": " generate"
+},
+{
+"start": 30.5,
+"end": 30.82,
+"word": " images"
+},
+{
+"start": 30.82,
+"end": 31.1,
+"word": " until"
+},
+{
+"start": 31.1,
+"end": 31.2,
+"word": " you"
+},
+{
+"start": 31.2,
+"end": 31.32,
+"word": " get"
+},
+{
+"start": 31.32,
+"end": 31.66,
+"word": " exactly"
+},
+{
+"start": 31.66,
+"end": 31.88,
+"word": " what"
+},
+{
+"start": 31.88,
+"end": 32.0,
+"word": " you"
+},
+{
+"start": 32.0,
+"end": 32.28,
+"word": " wanted."
+},
+{
+"start": 32.78,
+"end": 32.82,
+"word": " Great"
+},
+{
+"start": 32.82,
+"end": 33.0,
+"word": " for"
+},
+{
+"start": 33.0,
+"end": 33.24,
+"word": " visual"
+},
+{
+"start": 33.24,
+"end": 33.7,
+"word": " thinking."
+},
+{
+"start": 34.34,
+"end": 34.38,
+"word": " Fourth,"
+},
+{
+"start": 34.58,
+"end": 34.7,
+"word": " Google"
+},
+{
+"start": 34.7,
+"end": 35.08,
+"word": " Pimeli."
+},
+{
+"start": 35.72,
+"end": 35.84,
+"word": " It's"
+},
+{
+"start": 35.84,
+"end": 35.92,
+"word": " an"
+},
+{
+"start": 35.92,
+"end": 36.12,
+"word": " AI"
+},
+{
+"start": 36.12,
+"end": 36.38,
+"word": " marketing"
+},
+{
+"start": 36.38,
+"end": 36.7,
+"word": " tool,"
+},
+{
+"start": 36.8,
+"end": 36.88,
+"word": " just"
+},
+{
+"start": 36.88,
+"end": 37.06,
+"word": " give"
+},
+{
+"start": 37.06,
+"end": 37.12,
+"word": " it"
+},
+{
+"start": 37.12,
+"end": 37.26,
+"word": " your"
+},
+{
+"start": 37.26,
+"end": 37.52,
+"word": " website"
+},
+{
+"start": 37.52,
+"end": 37.68,
+"word": " and"
+},
+{
+"start": 37.68,
+"end": 37.8,
+"word": " it"
+},
+{
+"start": 37.8,
+"end": 38.0,
+"word": " studies"
+},
+{
+"start": 38.0,
+"end": 38.2,
+"word": " your"
+},
+{
+"start": 38.2,
+"end": 38.42,
+"word": " brand,"
+},
+{
+"start": 38.5,
+"end": 38.56,
+"word": " your"
+},
+{
+"start": 38.56,
+"end": 38.82,
+"word": " colors,"
+},
+{
+"start": 38.82,
+"end": 38.96,
+"word": " and"
+},
+{
+"start": 38.96,
+"end": 39.06,
+"word": " your"
+},
+{
+"start": 39.06,
+"end": 39.36,
+"word": " fonts."
+},
+{
+"start": 40.0,
+"end": 40.1,
+"word": " Then"
+},
+{
+"start": 40.1,
+"end": 40.2,
+"word": " it"
+},
+{
+"start": 40.2,
+"end": 40.36,
+"word": " writes"
+},
+{
+"start": 40.36,
+"end": 40.5,
+"word": " and"
+},
+{
+"start": 40.5,
+"end": 40.72,
+"word": " designs"
+},
+{
+"start": 40.72,
+"end": 40.96,
+"word": " social"
+},
+{
+"start": 40.96,
+"end": 41.2,
+"word": " media"
+},
+{
+"start": 41.2,
+"end": 41.5,
+"word": " posts"
+},
+{
+"start": 41.5,
+"end": 41.8,
+"word": " and"
+},
+{
+"start": 41.8,
+"end": 42.06,
+"word": " ads"
+},
+{
+"start": 42.06,
+"end": 42.22,
+"word": " that"
+},
+{
+"start": 42.22,
+"end": 42.4,
+"word": " match"
+},
+{
+"start": 42.4,
+"end": 42.56,
+"word": " your"
+},
+{
+"start": 42.56,
+"end": 42.78,
+"word": " brand"
+},
+{
+"start": 42.78,
+"end": 43.22,
+"word": " automatically."
+},
+{
+"start": 43.78,
+"end": 43.9,
+"word": " There"
+},
+{
+"start": 43.9,
+"end": 43.98,
+"word": " are"
+},
+{
+"start": 43.98,
+"end": 44.12,
+"word": " many"
+},
+{
+"start": 44.12,
+"end": 44.36,
+"word": " tools"
+},
+{
+"start": 44.36,
+"end": 44.52,
+"word": " on"
+},
+{
+"start": 44.52,
+"end": 44.66,
+"word": " this"
+},
+{
+"start": 44.66,
+"end": 44.8,
+"word": " list,"
+},
+{
+"start": 44.96,
+"end": 45.02,
+"word": " just"
+},
+{
+"start": 45.02,
+"end": 45.26,
+"word": " comment"
+},
+{
+"start": 45.26,
+"end": 45.52,
+"word": " Google"
+},
+{
+"start": 45.52,
+"end": 45.74,
+"word": " for"
+},
+{
+"start": 45.74,
+"end": 46.06,
+"word": " access."
+}
+]

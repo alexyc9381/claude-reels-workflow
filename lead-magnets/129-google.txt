@@ -1,0 +1,74 @@
+TITLE   The Four Google Tools Worth Your Time
+SUB     Google shipped about fifteen new AI tools this month and the internet argued about two of them. Here is what the other thirteen contain, which four are genuinely useful, and exactly how to start with each.
+
+H       Why you have not heard of these
+P       Antigravity and Stitch got the threads. They are both real and both good, and they are also the two that photograph well: an agent-first IDE and a tool that turns a prompt into a UI are easy to screenshot and easy to argue about.
+P       The four below are harder to make a thread out of, because what they do happens while you are not watching. An agent clearing a pull request backlog overnight has no screenshot. That is the entire reason this list exists.
+B       Every tool here is live right now, in a browser, no waitlist
+B       All four are Google Labs or Google products, not wrappers
+B       None of them needs a card to try
+P       One honesty note before the list. "Fifteen" is the round number going around for the month. It is roughly right and it is not an official Google count. Treat it as "a lot, more than the two you have heard of".
+
+RULE
+
+H       1. Jules, the one that works while you sleep
+P       Jules is an autonomous coding agent running on Gemini. You connect it to a GitHub repository and it works asynchronously: it picks up tasks, fixes bugs, writes tests, updates dependencies and opens pull requests, without you sitting in a chat window steering it.
+P       The distinction that matters is asynchronous. A coding assistant waits for you. Jules is given a job and goes away and does it, and you review the pull request afterwards like you would a colleague's.
+NUM     Connect Jules to a GitHub repo you own. Start with one that is not business critical.
+NUM     Give it something small, bounded and boring. Dependency bumps and missing test coverage are the ideal first job, because you can tell instantly whether the result is right.
+NUM     Let it run and come back to the pull request. Read the diff, do not skim it.
+NUM     Only widen its scope once you have merged two or three of its PRs without edits.
+QUOTE   Treat the first week as an interview, not an install. You are finding out what it is good at, and the cheapest way to learn that is on work you could redo yourself in ten minutes.
+P       The realistic limit: it is very good at mechanical, well specified, locally verifiable work. It is not a substitute for you on anything that needs a decision about what the product should be.
+
+RULE
+
+H       2. Opal, plain English into a working mini app
+P       Opal is a drag and drop builder for AI workflows. You describe what you want in ordinary language, it lays the steps out as a chain you can see and rearrange, and it gives you a working mini app with a link you can share.
+P       If you have used n8n, this is the same job with the wiring done for you. If you have not, the useful comparison is: it is the difference between describing a process and building one.
+B       Describe the workflow in a sentence, then adjust the steps it produces
+B       Rearrange, add and remove steps by dragging them
+B       Publish and share it with a link, so other people can run it
+B       No code at any point
+P       I get this wrong in the reel's voiceover and it is worth correcting here: I call Opal a "video editor". It is not. It is a workflow and mini app builder. Everything else in that line is accurate and the animation shows the right thing, but the words were wrong and it is my error.
+P       The best first project is something you already do by hand every week and resent. A form that arrives, gets sorted, and emails you a summary is the canonical example and it takes about ten minutes.
+
+RULE
+
+H       3. Mixboard, for the stage before you know what you want
+P       Mixboard is an AI whiteboard from Google Labs. You drop images, text, notes and scraps onto an open canvas, and you generate new images against that context, repeatedly, until what is on the board matches what is in your head.
+P       Its value is not that it makes images. Plenty of things make images. Its value is that it holds a messy pile of half formed references in one place while you work out what you are actually after.
+NUM     Start by dropping in what already exists: real photos, screenshots, colours, a competitor's page, a scribbled note.
+NUM     Generate against that pile rather than from a blank prompt box. The context is the point.
+NUM     Reject fast and keep going. The rejects are information about what you do not want.
+NUM     Stop when the board, not any single image, looks like the thing.
+P       This is the tool on the list with the clearest "before" state. Use it when a brief does not exist yet, and stop using it the moment one does.
+
+RULE
+
+H       4. Pomelli, which reads your site instead of your brief
+P       Pomelli is an AI marketing tool. You give it your website URL. It reads the site and builds a profile of your brand from what is actually there: your tone of voice, your fonts, your colour palette, your imagery. Then it writes and designs social posts and ads that match.
+P       The reason that ordering matters is that every other tool of this kind asks you to describe your brand, and most people describe the brand they wish they had. Pomelli starts from the one that exists on the page.
+B       Input is a URL, not a creative brief
+B       It extracts tone, fonts, colour and imagery into a reusable profile
+B       Output is written copy AND designed assets, on brand, ready to edit
+B       Best on a site that already looks like you want it to look
+P       The obvious failure mode: if your website is old, off brand or half finished, Pomelli will faithfully reproduce that. Fix the site first, or point it at whichever page is most on brand.
+
+RULE
+
+H       Two the reel does not cover, and why
+P       Mixboard and Pomelli do not publish product logos of their own. Both serve the generic Google Labs beaker, which is why the video shows their names rather than an icon. It is a small thing and it is the honest one: a wrong logo is worse than no logo.
+P       Antigravity and Stitch are genuinely worth your time too. The point of the reel is not that they are bad, it is that the crowd around them is the reason thirteen other things shipped unnoticed.
+
+RULE
+
+H       How to actually start, this week
+NUM     Pick ONE. Four new tools at once is how all four get abandoned by Friday.
+NUM     If you write code, start with Jules and give it a dependency bump.
+NUM     If you do not, start with Opal and automate the weekly thing you already resent.
+NUM     If you are stuck at the "I do not know what this should look like" stage, that is Mixboard.
+NUM     If you have a real site and no time to post, that is Pomelli.
+QUOTE   The tools that win are not the ones with the best demo. They are the ones that quietly remove a job you were going to do anyway.
+
+KEY     Comment GOOGLE for this guide

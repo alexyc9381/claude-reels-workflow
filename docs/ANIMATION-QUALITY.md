@@ -1528,3 +1528,196 @@ the counter **popping** as it ticks.
 ⛔ Contained, never a screen flash — the bloom is 6.6% of frame width.
 `feedback_no_flashing_transitions` is standing, and §16 is a reel that shipped a
 banned full-frame flash to pass a gate.
+
+---
+
+## 30. ⛔⛔ THREE WAYS A THING WAS ON SCREEN AND NOT SEEN (reel 127)
+
+All three were found by the **contact sheet**, none by a gate, and all three had
+passed a typecheck, a render and a motion audit first. §12's routine — pull a
+sheet every round, before believing any green number — found each of them in
+about thirty seconds.
+
+### ⭐⭐⭐ A DIMMER ON A DARK GROUND DELETES THE OBJECT
+
+The peak scene builds a page out of the viewer's own components. It carried
+*"this page is not lit yet"* as `opacity: 0.34 + live * 0.66` on the page itself,
+over a near-black board well — so before the lighting beat it was **62% opacity
+over near-black**, and three sheets in a row read the scene identically:
+*coloured squares on a grey grid.* The page was drawn, correct, and on top. It
+had no value left to be seen with.
+
+> **Put the incompleteness in the ROOM, never in the subject's own value.** The
+> subject renders at full value from its first row; what changes is the key, the
+> floor pool and the vignette. That is where the emphasis belongs anyway — a page
+> is not dimmer before it is approved, the room is.
+
+This is §6.5 through a different door: there it is a dark PAINT on a dark set,
+here it is a dark ground showing through a correct paint. The motion audit cannot
+see either, because a swept edge with a near-zero luma delta contributes nothing.
+⭐ The check costs one sentence at authoring time: **name the luma step between
+this object and what is behind it, AFTER the opacity.**
+
+### ⭐⭐ A SLOW CONTENT FILL MAKES THE PAYOFF UNREADABLE
+
+The hero artifact is a board carrying three artboards, and each one's content
+filled over **52 frames** so that something was always still arriving (§23's
+tail rule, correctly applied). The result was that a sheet frame sampled anywhere
+in the first two thirds of the scene caught two of the three faces as blank grey
+panels — the payoff existed and could not be read at the moment a viewer sees it.
+
+> **Legibility and a live tail are not a trade-off, they are two parts of one
+> ramp.** 86% of the content in 18 frames, then the last 14% creeping over 58
+> more, `LIN`. A viewer can name the page inside half a second and the largest
+> object in the frame is still changing when the cut lands.
+
+⛔ And the same beat had the opposite bug first: driving all three faces off ONE
+shared ramp. A payoff of "three different options" is **N DISCRETE ARRIVALS**
+(§1: N pops beat one long tween), each able to land on its own spoken word.
+
+### ⛔⛔ THE HEADER ALREADY SAID IT
+
+Six scenes printed the reel's claim **twice**: a `Chip` inside the panel repeating
+the `HookHeader` above it, in two cases verbatim and word for word. Each had been
+written scene by scene, against the board, and each looked right in isolation.
+They are only visible as duplicates when the frames are laid out together.
+
+> **Root owns the WORDS, the scene owns the PICTURE.** A scene-level chip earns
+> its place only when it carries something the band cannot — a count that moves,
+> a receipt the header has no room for. Otherwise the shot's one-text-chip budget
+> has already been spent by the chrome.
+
+⭐ It is also §9's text budget with an off-by-one nobody checks: "ONE text chip
+per shot" is easy to obey per scene and easy to break across the chassis.
+
+### ⛔ And the render that "succeeded" against the old file
+
+A TDZ (`lift` used before its declaration) failed the render, the audits ran
+anyway against the **previous** mp4, and the numbers came back identical — which
+read as "the change did nothing" rather than "the change never ran". `tsc` had
+already printed the error above the audit output. **Assert the render's own exit,
+and treat an unchanged number after a real edit as a build failure until proven
+otherwise.** `memory/feedback_a_silent_patch_reports_success`.
+
+## Related (30)
+`memory/design127-reel.md` · `memory/feedback_a_dimmer_on_a_dark_ground.md` ·
+`memory/feedback_a_cue_shorter_than_its_attack.md` (the audio half: a cue whose
+`dur` is under its own ATTACK is ABSENT, not quiet, and every row-counting audit
+still counts it)
+
+---
+
+## 31. ⛔⛔⛔ WHY A HOOK GETS REBUILT EIGHT TIMES (reel 129)
+
+Reel 129's hook was rejected **eight times**. The notes barely changed:
+
+> *"not interesting"* · *"I don't understand what's going on"* · *"needs to be way
+> more anticipatory"* · *"a big long stick"* · *"just moving back and forth"*
+
+Every gate in this repo was green for most of those rounds. Motion median 15.89,
+0/17 scenes under bar, HOOK_LUMA 149, verify_reel 8/8. **The suite cannot see any
+of the four faults below**, which is the reason this section exists.
+
+The fix did not come from another round of restaging. It came from **reading the
+source of the two hooks that worked** — `OxScenes.S0Pull` and
+`UnlazyHooks.HookBalloon` — instead of looking at their frames.
+
+### ⭐⭐⭐ 31.1 EVERY BEAT IS A WORD
+
+Reel 120's hook carries this comment, verbatim:
+
+```
+f68  "and"       the nose punctures the balloon        POP
+f76  "lying"     lurch 3, the nose crosses the frame
+f85  "to you"    lurch 4 — the tip STRIKES THE POST
+f93  "about it"  it shoves HIM back 90px
+```
+
+The beats are not invented numbers. They are **the voiceover**. Reel 119 does the
+same thing (`pin` f6 · `taut` f10 · `dig` f14 · `drag` f22, against its own line).
+
+Reel 129's eight hooks used f4, f12, f22 — evenly spaced because even spacing
+*felt* right. Nothing in the picture was ever inevitable, and no amount of
+redrawing fixed that, because the fault was in the CLOCK, not the drawing.
+
+⭐ **The house lead is 4 frames** (`feedback_the_picture_leads_the_voice`): a beat
+belongs at `word_onset - 4`.
+
+⛔ **`tools/beat_audit.py` now measures this.** It reads each scene's named beat
+constants and reports which land on a word. On 129 it found **ten of seventeen
+scenes had no named beat constants at all** — they were animating to a metronome —
+and that reel 129's S14 fired its three artefacts *18, 7 and 12 frames before* the
+words "brand", "colours" and "fonts" were spoken.
+
+```bash
+python3 tools/beat_audit.py video/src/RowScenes.tsx \
+    video/src/data/words_google.json --starts 0,51,108,...
+```
+
+### ⭐⭐ 31.2 DISCRETE STROKES, NOT RAMPS
+
+Reel 120 builds its whole hook out of this:
+
+```ts
+const stroke = (at: number, v: number) => E(f, at, at + 6, 0, v, BACK);
+const pump = stroke(6, 0.19) + stroke(14, 0.18) + stroke(22, 0.17) + ...
+```
+
+Six punches with overshoot, summed. **That is the answer to "just moving back and
+forth."** A constant ramp has no future in it: at any moment the next half-second
+looks exactly like the last, so there is nothing to anticipate. A stroke has a
+wind-up, a hit and a settle, and the gap before the next one is where the question
+lives.
+
+⛔ A ramp still SCORES — `scene_motion_audit` measures repaint, and a slide
+repaints as much as a hit. This is invisible to the suite by construction.
+
+### ⭐⭐ 31.3 ONE CAUSE, FOUR VISIBLE EFFECTS
+
+Reel 120, in its own words: each lie *"swells the balloon AND judders it AND
+extrudes the nose"* while the hero crosses in front of it. One number drives
+several simultaneous changes.
+
+Reel 129's rebuilt S1 does the same — every lamp bank that strikes lights its
+roundels, throws a pool on the floor, jolts the room and pops the marks, all off
+one `jolt` accumulator.
+
+### ⭐ 31.4 A CAUSAL CHAIN, NOT ONE EVENT REPEATED
+
+Reel 119: the pin drops → the slack leaves the chain → the ox digs in → the rig
+moves → the dial spins past its stop. **Five different events, each caused by the
+last.** Reel 129's failed hooks repeated ONE event — rain falling, boxes landing,
+a ball rolling — which is a texture, not a story.
+
+⭐ And the chain should START WITH A BODY. 129's S1 begins with a Claude throwing
+a breaker; the lights are his consequence.
+
+---
+
+## 32. ⛔⛔ THE CONTAINER BECOMES THE THING YOU SEE (reel 129)
+
+> *"I still see one rectangle with white on it, not interesting."*
+
+The house convention is **"real marks on WHITE tiles"**, and it exists for a real
+reason: several product logos are dark-on-transparent and measure 72/255 on a dark
+plate, against the 140 frame-0 law. So every mark in the reel sat on a white
+square — and after fifteen of them, **the white square was the thing on screen and
+the mark was a detail inside it.**
+
+⭐ **The fix is the SHAPE and the MATERIAL, never the mark.** Reel 129 replaced
+every tile with an **illuminated roundel on a post** — a lit station sign:
+
+- round kills the rectangle;
+- the glass is lit *from within*, with a filament glare across it, instead of
+  being flat white — so it reads as a sign that is ON rather than a blank card;
+- it throws its own halo and a pool onto the floor, which is where the luma the
+  white tile was protecting actually comes from;
+- it SWINGS on its post when its bank strikes, so the lighting beat has a body;
+- and the unlit state finally reads — thirteen dark discs waiting on posts is a
+  picture, where thirteen dim squares is nothing.
+
+Frame 0 held at 150.7 through the swap, so the brightness the convention existed
+to protect survived the convention being broken.
+
+⛔ **A convention you inherited is still a decision you are making.** This one had
+been applied in every scene of the reel without anyone choosing it there.
