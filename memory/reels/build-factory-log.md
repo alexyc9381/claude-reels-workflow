@@ -259,3 +259,108 @@ thirteen minutes of nothing for the overwrite. Written up as
 `risk_drive_mount_fileprovider_corrupt`, which covers a dead domain; this one fires with a
 perfectly healthy one, on one operation, and only when REPLACING work, which is what a revision
 always is.
+
+---
+
+# ⭐⭐⭐ REVISION 3 — "TOO MUCH RELYING ON SHAPES"
+
+**Alex on rev 2:** *"each of the scenes are not good whatsoever here like these scenes are just too
+much relying on shapes and the animations are not good needs to be redone significantly needs to
+be way better here."*
+
+## ⛔⛔⛔ IT IS COUNTABLE, AND THE COUNT IS DAMNING
+
+A script over `BuildProps.tsx`, counting drawn elements per exported prop:
+
+```
+  4 of 35 props use ANY inline <svg>.   The other 31 are stacked <div>s.
+  median drawn elements per prop:  6
+  the HERO objects:  RepoPlate 6 · ShortScreen 9 · VoiceBank 6 · MeshTurn 8 · EcomFront 5
+```
+
+`feedback_props_need_real_drawing` records reel 106 getting this note verbatim — *"everything just
+reads as a whole lot of nothing even though there's more stuff"* — and clearing it by taking ONE
+object from 4 elements to ~22. I had that memory, quoted its sibling rule in this very file, and
+still shipped a reel of rounded rectangles.
+
+⭐⭐⭐ **AND REV 2 MADE IT WORSE WHILE FIXING SOMETHING ELSE.** Rev 1's note was "I can't tell what's
+going on", and my fix was to put a REAL LOGO on the object. That fixed recognition and deepened the
+actual defect, because **a rounded rectangle with a logo on it is a STICKER.** Nine stickers in a
+row is what he watched. Recognition and craft are different axes and I traded one for the other
+without noticing.
+
+## THE SECOND HALF OF THE NOTE HAS THE SAME ROOT
+
+*"the animations are not good"* is not a separate complaint. **A sticker cannot ACT.** There is no
+mechanism to fail, no part to deform, nothing for a body to grip. Once the props became real
+machines the scenes got what §2 has always asked for for free: a before state, a visible trigger,
+travel, and an arrival that costs something — performed by a Claude.
+
+## WHAT REPLACED THEM
+
+| beat | the drawn object | why it reads |
+|---|---|---|
+| *"writes a script"* | a **TYPEWRITER** — platen, knurled knobs, paper bail, nine type bars, **24 individual keys**, ribbon spools, four feet | nameable from the outline; the struck key goes DOWN and its bar goes UP |
+| *"records the voiceover"* | a **STUDIO MIC** — ribbon body, 8 grille slots, shock-mount ring with **six suspension cords**, circular pop shield, stand | the most recognisable object in audio |
+| *"edits the final video"* | a **FILM STRIP** — sprocket holes down **both** edges, coloured frames, running full width | pure silhouette, and it is also the highest-value shape in the motion table, so it pays twice |
+| *"one minute of your voice"* | a **TAPE DECK** — two reels with six spokes each, real tape path over a head and capstan, **a VU meter whose needle swings on the signal** | the minute is visibly being consumed |
+| *"a real 3D model"* | a **CHAIR** — flat paper cut-out becoming a solid with a seat top, a side face, four legs and a slatted back | ⭐ anyone can name a chair from its outline, so FLAT→SOLID needs no caption. It is also the reel's one curved-silhouette object among a world of rectangles |
+| *"enough to clone it"* | **FOUR MORE CLAUDES**, same size, popping in one at a time | ⛔ rev 2 drew this as a rank of speaker boxes — four more rectangles for the one beat that is literally about copying HIM |
+
+## ⛔ AND A CLONE THAT IS SMALLER THAN THE ORIGINAL IS A CHILD, NOT A COPY
+
+First pass drew the clones at 172 against the hero's 252 and they read as his kids. Same size is
+the entire point of the beat. Fixed at 244 each, standing in a row.
+
+## ⭐⭐ THE STAGING FIX THAT WAS ALSO A HIERARCHY FIX
+
+T1's first pass put THREE Claudes at three machines: three small sprites crowding three objects in
+1012px, and nothing ranked — Alex's *"not hierarchical"* note in a new costume. Replaced with **ONE
+Claude who WALKS THE BENCH**, station to station, so the beats are joined by TRAVEL instead of by a
+cut. More hierarchical, and the large-object-crossing-frame shape the motion table pays for.
+
+## ⛔ Two staging bugs the first rebuild render exposed
+
+- The typewriter's sheet stood clear of the platen and read as a floating white rectangle. **A
+  sheet in a typewriter is GRIPPED by the roller** — it has to overlap it.
+- A stray white crescent on the booth wall was `Room`'s own practical BULB (a 52px disc at the lamp
+  position, z5) showing from behind the foam wedges at z14. The booth is lit by its mic lamp and
+  the rig instead.
+
+## ⭐⭐ THE ANIMATION HALF OF THE NOTE — EACH SCENE AROSE AND PARKED
+
+With the props redrawn, the motion audit read `6.18 overall, 0/11 under bar` but with per-scene
+MINIMA of **1.29 / 1.40 / 1.56** on the three tool scenes. That gap between a 4-5 mean and a ~1.4
+floor is the exact signature `docs/ANIMATION-QUALITY` §19 describes: **a scene that arrives and
+parks shows a cliff, and HOLD is the column that catches it.** Each tool scene had 1-2 seconds
+where the beat had landed and the next had not started.
+
+⭐ **THE FIX IS ANTICIPATION, NOT DECORATION** — the shot has to say something is ABOUT to happen:
+
+| scene | what filled the gap | measured |
+|---|---|---|
+| T1 | the film run **never stops** (the shop is working before he arrives) and ACCELERATES onto the beat; the typewriter spins up from f26 instead of waiting for f78 | 4.38 → **6.10**, min 1.29 → **3.41** |
+| T2 | a **live waveform wall**, scrolling, 660px wide | 4.49 → **5.64**, min 1.40 → **2.05** |
+| T3 | the turntable turns **from the moment the chair exists** (f56) rather than for a 48-frame window | 5.37 → **5.58** |
+
+⛔⛔ **AND THE ONE THAT DIDN'T WORK IS THE MOST USEFUL DATA POINT.** T2's first anticipation pass
+was a charge ring on the floor under each empty spot before its clone popped — dramatically correct,
+and it moved the scene **4.49 → 4.53, i.e. nothing.** A 184px ring OUTLINE repaints almost no area.
+`reference_motion_arithmetic` predicts that exactly: motion is *(fraction of panel repainted per
+0.1s) x luma delta*, and an outline has no area. **The idea was right and the SHAPE was wrong** —
+replaced with a 660px scrolling waveform, which is the same beat's information at 40x the swept
+area.
+
+## Gates on the rev-3 file
+
+`MOTION mean 6.71 · 0/11 under bar · 0 dead runs` ·
+`HOOK_LUMA 142.5 ✓ · BODY_SAT 66.9% ✓ · BODY_BLACK p10 19.9 ✓ · HOOK_PLATE 7.7% ⚠` ·
+`verify_reel 8/8`.
+
+⭐ **BODY_BLACK went 35.7 (FAIL) → 19.9**, better than AGENCY's 25.0, and the fix touched no
+palette stop: four **foreground masses** — a C-stand, a cutter flag and two mixing-desk edges,
+cropped by the panel edge — which is also exactly what `look_audit`'s DEPTH note asks for by eye.
+The worst scene went p10 50.3 → 19.5.
+
+⚠️ **Motion median 6.90 vs the 9.00 bar** — the honest cost of eleven calm, legible scenes built
+around one real object each. Flagged, not churned back toward busy.
