@@ -440,3 +440,208 @@ export const CoverFree131: React.FC = () => (
 );
 
 export const CoverFree131Proof = cropProof(CoverFree131);
+
+/* ==========================================================================
+   SET 6 — reel 132 JUDGE.  Chassis imported, never duplicated (03 §A).
+
+   THE REEL, IN ITS OWN WORDS (132_judge_script.txt / storyboards/132-judge.md):
+     "a new prompting technique that stops Claude from lying to your face...
+      the secret sauce is in the third line of the prompt where you assign a
+      judge, a prosecutor, and a defense... they loop and rebuild until the
+      work is bulletproof."   CTA keyword: JUDGE.
+
+   WORLD = THE COURT OF THE WORK, the reel's own set. The defendant is not a
+   person, it is the output Claude swore was finished: a gilt, gold-sealed
+   brief reading DONE, standing in the dock under a Claude in a wig.
+
+   ⛔ THE VILLAIN IS NOT DRAWN UGLY. The brief is the handsomest object on the
+   tile, because the claim the reel makes is that the output is DISHONEST, not
+   that it is shabby (ANIMATION-QUALITY §23). Drawing it grey would make a dead
+   frame AND a claim the viewer knows is untrue.
+   ⛔ NOTHING STRUCTURAL ABOVE y780 — the quiet zone. The gallery starts at 812,
+   the bench at 1156, and everything above that is lit air.
+   ========================================================================== */
+
+/* ⛔ THE QUIET ZONE IS A HARD LINE AND THE HERO IS WHAT BREAKS IT. v1 ran a
+   620px judge off a bench at y1156, which put his head top at 623 and the wig
+   at 561 — INSIDE the giant's own row (514..672). Both failing checks were the
+   same object: `giant margins 267/80` was measuring the wig, not the type, and
+   `quiet zone max step 115` was the wig's edge. The bench moved down and the
+   judge shrank until his crown clears 780 with the wig ON the head rather than
+   floating above it. */
+const J_FLOOR = 1546;          // drawn floor line, full-bleed band starts here
+const J_BENCH = 1300;          // the bench top — the judge is cut by it
+const J_GROUND = 1620;         // where the brief and the dock stand, NEAR camera
+const JUDGE_SIZE = 520;
+const JUDGE_CX = 566;          // right edge 826, clear of the IG feed rail at x>956
+
+/** the wig — the one silhouette feature that makes a Claude read as a JUDGE at
+    150px. Hue does none of the work here; the shape does all of it. */
+const CoverWig: React.FC<{ cx: number; top: number; w: number }> = ({ cx, top, w }) => (
+  <svg viewBox="0 0 184 140" width={w} height={w * 0.76}
+    style={{ position: "absolute", left: cx - w / 2, top }}>
+    <path d="M 24 56 Q 24 6 92 6 Q 160 6 160 56 L 160 74 Q 150 66 138 74 L 138 56 Q 138 30 92 30 Q 46 30 46 56 L 46 74 Q 34 66 24 74 Z"
+      fill="#EFEADC" />
+    <path d="M 22 72 q -8 34 8 54 q 16 8 26 -4 q 8 -22 2 -50 z" fill="#EFEADC" />
+    <path d="M 162 72 q 8 34 -8 54 q -16 8 -26 -4 q -8 -22 -2 -50 z" fill="#EFEADC" />
+    {[0, 1, 2, 3, 4, 5].map((i) => (
+      <path key={i} d={`M ${30 + i * 26} 20 q 10 12 0 26`} fill="none" stroke="#CFC8B4" strokeWidth={3} />
+    ))}
+  </svg>
+);
+
+/** the gavel, raised. Drawn as a real object: a head with a banded face, a
+    shaft with a collar, and the block it is about to meet. */
+const CoverGavel: React.FC<{ x: number; y: number; s: number; rot: number }> = ({ x, y, s, rot }) => (
+  <div style={{ position: "absolute", left: x, top: y, transform: `rotate(${rot}deg)`,
+    transformOrigin: "10% 90%" }}>
+    <svg viewBox="0 0 240 110" width={240 * s} height={110 * s}>
+      <rect x={58} y={46} width={172} height={19} rx={9} fill="#6E4A24" />
+      <rect x={58} y={46} width={172} height={6} rx={3} fill="#A97C46" />
+      <rect x={212} y={36} width={26} height={38} rx={9} fill="#8A5E34" />
+      <rect x={4} y={12} width={76} height={84} rx={11} fill="#5E3E1E" />
+      <rect x={4} y={12} width={76} height={16} rx={8} fill="#8A5E34" />
+      <rect x={4} y={12} width={15} height={84} fill="#4A2E14" />
+      <rect x={0} y={22} width={12} height={64} rx={5} fill="#C9A15A" />
+    </svg>
+  </div>
+);
+
+/** the defendant: the gold-sealed brief that says DONE and is not */
+const CoverBrief: React.FC<{ cx: number; bottom: number; w: number; rot: number }> =
+  ({ cx, bottom, w, rot }) => (
+  <div style={{ position: "absolute", left: cx - w / 2, top: bottom - w * 1.3, width: w,
+    height: w * 1.3, transform: `rotate(${rot}deg)`, transformOrigin: "50% 100%" }}>
+    <svg viewBox="0 0 200 260" width={w} height={w * 1.3}>
+      <rect x={0} y={0} width={200} height={260} rx={4} fill="#5E2320" />
+      <rect x={0} y={0} width={200} height={9} fill="#7A342E" />
+      <rect x={12} y={12} width={176} height={236} fill="none" stroke={GOLD} strokeWidth={4} />
+      <rect x={19} y={19} width={162} height={222} fill="none" stroke="rgba(231,178,76,0.55)" strokeWidth={2} />
+      <text x={100} y={44} textAnchor="middle" fill="#F4E6C6"
+        style={{ fontFamily: "ui-monospace,Menlo,monospace", fontWeight: 800, fontSize: 34,
+          letterSpacing: 6 }}>DONE</text>
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+        <rect key={i} x={32} y={68 + i * 16} rx={2}
+          width={i === 7 ? 74 : 136 - (i % 3) * 18} height={7}
+          fill={`rgba(232,220,200,${0.3 + (i % 3) * 0.1})`} />
+      ))}
+      <g transform="translate(100,206)">
+        {[...Array(18)].map((_, i) => {
+          const a = (i / 18) * Math.PI * 2;
+          return <circle key={i} cx={Math.cos(a) * 30} cy={Math.sin(a) * 30} r={7.5} fill="#C08A2E" />;
+        })}
+        <circle cx={0} cy={0} r={30} fill={GOLD} />
+        <circle cx={0} cy={0} r={30} fill="none" stroke="#8E6218" strokeWidth={2.6} />
+        <circle cx={0} cy={0} r={21} fill="none" stroke="#8E6218" strokeWidth={2} />
+        <path d="M -11 1 L -3 10 L 12 -8" fill="none" stroke="#4A3208" strokeWidth={6}
+          strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+      <rect x={36} y={190} width={44} height={44} rx={9} fill="#3F9E74" />
+      <path d="M 46 212 L 55 222 L 71 200" fill="none" stroke="#04241C" strokeWidth={6}
+        strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  </div>
+);
+
+const CourtScene: React.FC = () => (
+  <>
+    {/* L0 · the hall: warm stone, lit from a clerestory the frame never shows */}
+    {/* ⛔ AND NO GRADIENT STOP MAY LAND IN THE QUIET ZONE EITHER. A 40% stop on
+        a 1920 canvas is y768, i.e. a luma step 12px above the line. The stops
+        are pushed to 54/80% so the band the type sits on is dead flat. */}
+    <div style={{ position: "absolute", inset: 0,
+      background: "linear-gradient(180deg,#F2E7D2 0%,#EFE3CC 54%,#C9AE86 80%,#A98C62 100%)" }} />
+    <Bloom x={540} y={1080} r={560} c="rgba(255,240,206,0.72)" />
+
+    {/* L1 · the gallery, in silhouette, starting BELOW the quiet zone */}
+    {[...Array(16)].map((_, i) => {
+      const row = i < 9 ? 0 : 1;
+      const j = i - row * 9;
+      const y = 900 + row * 96;
+      const sz = 86 - row * 12;
+      return (
+        <div key={`g${i}`} style={{
+          position: "absolute", left: 18 + j * 122 + row * 58, top: y,
+          width: sz, height: sz * 1.16, borderRadius: `${sz}px ${sz}px 6px 6px`,
+          background: row === 0 ? "rgba(96,68,36,0.34)" : "rgba(96,68,36,0.24)",
+        }} />
+      );
+    })}
+
+    {/* L2 · the panelled back wall of the court, and the ruling lamp over the
+        bench. The lamp is the only lit fitting and it is directly above him,
+        which is what makes the whole tile point at one place. */}
+    <div style={{ position: "absolute", left: -40, top: 1090, width: 1160, height: 190,
+      background: "linear-gradient(180deg,#8A5E34 0%,#5E3C1E 100%)" }} />
+    {[0, 1, 2, 3, 4].map((i) => (
+      <div key={`pn${i}`} style={{ position: "absolute", left: 20 + i * 214, top: 1112,
+        width: 178, height: 146, border: "7px solid #A87A46", boxSizing: "border-box" }} />
+    ))}
+    <div style={{ position: "absolute", left: JUDGE_CX - 92, top: 1002, width: 184, height: 34,
+      borderRadius: 12, background: "linear-gradient(180deg,#FFF6DC 0%,#F0D89E 100%)" }} />
+    <div style={{ position: "absolute", left: JUDGE_CX - 300, top: 1020, width: 600, height: 330,
+      background: "radial-gradient(ellipse at 50% 0%, rgba(255,244,214,0.72) 0%, rgba(255,244,214,0) 72%)" }} />
+
+    {/* L3 · THE JUDGE — the largest element in the 4:5 crop, cut by his bench */}
+    <div style={{ position: "absolute", left: JUDGE_CX - JUDGE_SIZE / 2,
+      top: J_BENCH - JUDGE_SIZE * 0.86 }}>
+      <HouseMascot size={JUDGE_SIZE} lf={20} suit={1} stern={1} gaze={-0.35} />
+    </div>
+    {/* ⛔ AND THE WIG MUST BE WIDER THAN THE HEAD. At 318 its two side curls
+        fell INSIDE the 343px face and landed straight over the eyes — the
+        reel-124 note verbatim: the face is the surface the beat is read off,
+        never a landing pad. At 430 the curls hang either side of the face, the
+        cap sits on the crown, and the eyes are clear. */}
+    <CoverWig cx={JUDGE_CX} top={J_BENCH - JUDGE_SIZE * 0.86 - 44} w={430} />
+    <CoverGavel x={JUDGE_CX + 190} y={J_BENCH - 322} s={1.18} rot={-46} />
+
+    {/* L4 · THE BENCH — one solid mass, full bleed, and it occludes him */}
+    <div style={{ position: "absolute", left: -40, top: J_BENCH, width: 1160, height: 246,
+      background: "linear-gradient(180deg,#A87A46 0%,#7A5230 46%,#4E3218 100%)" }} />
+    <div style={{ position: "absolute", left: -40, top: J_BENCH, width: 1160, height: 18,
+      background: "#C9964E" }} />
+    {[0, 1, 2, 3].map((i) => (
+      <div key={`bp${i}`} style={{ position: "absolute", left: 26 + i * 268, top: J_BENCH + 48,
+        width: 226, height: 150, border: "8px solid #9E6C3A", boxSizing: "border-box" }} />
+    ))}
+
+    {/* L5 · THE FLOOR */}
+    <div style={{ position: "absolute", left: 0, top: J_FLOOR, width: 1080, height: 1920 - J_FLOOR,
+      background: "linear-gradient(180deg,#C9A26B 0%,#BE9459 30%,#A87C44 64%,#8A6234 100%)" }} />
+    <div style={{ position: "absolute", left: 0, top: J_FLOOR, width: 1080, height: 230,
+      background: "radial-gradient(ellipse at 50% 0%, rgba(255,242,210,0.5) 0%, rgba(255,242,210,0) 70%)" }} />
+
+    {/* L6 · THE DEFENDANT — the work itself, in the dock, NEAR camera. It is the
+        second-biggest thing on the tile and it is the one object carrying the
+        premise: it looks finished and it is on trial. */}
+    <div style={{ position: "absolute", left: 700, top: J_GROUND - 22, width: 316, height: 58,
+      borderRadius: "50%", filter: "blur(8px)",
+      background: "radial-gradient(ellipse, rgba(62,38,14,0.66) 0%, rgba(62,38,14,0) 72%)" }} />
+    <CoverBrief cx={858} bottom={J_GROUND} w={252} rot={-7} />
+    <div style={{ position: "absolute", left: 700, top: J_GROUND - 4, width: 320, height: 96,
+      background: "linear-gradient(180deg,#7A5230 0%,#3E2812 100%)" }} />
+    <div style={{ position: "absolute", left: 700, top: J_GROUND - 4, width: 320, height: 12,
+      background: "#A87A46" }} />
+
+    {/* foreground floor lip, blurred: depth without touching the hero */}
+    <div style={{ position: "absolute", left: -40, top: 1690, width: 1160, height: 230,
+      background: "linear-gradient(180deg,rgba(108,72,36,0) 0%,rgba(100,66,32,0.5) 46%,rgba(84,54,26,0.74) 100%)",
+      filter: "blur(3px)" }} />
+  </>
+);
+
+/* ================= THE COVER ============================================
+   line1 states the dread in the viewer's own words and hands off to the giant,
+   which is both the fix and the CTA keyword the viewer has to type — so the
+   keyword is the biggest thing on the tile. Exactly one CLAY accent, on the
+   word that does the enticing. JUDGE is 5 letters, so it takes SceneCover's
+   default 158 and clears the >=110px margin without a fit. */
+export const CoverJudge: React.FC = () => (
+  <SceneCover
+    scene={<CourtScene />}
+    line1={<>CLAUDE <span style={{ color: CLAY }}>LIES</span>. ADD A</>}
+    giant={<>JUDGE</>}
+  />
+);
+
+export const CoverJudgeProof = cropProof(CoverJudge);

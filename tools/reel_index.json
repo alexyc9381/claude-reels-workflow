@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 103,
-    "reels_total": 147,
-    "factory_logs": 62,
-    "storyboards": 64,
-    "caption_jsons": 113,
-    "memory_md": 214,
+    "reels_with_code": 106,
+    "reels_total": 150,
+    "factory_logs": 64,
+    "storyboards": 67,
+    "caption_jsons": 116,
+    "memory_md": 223,
     "creators": 8,
     "packs": 3
   },
@@ -519,6 +519,7 @@
         "video/src/data/words_119ox.json",
         "video/src/data/words_120unlazy.json",
         "video/src/data/words_121mistake.json",
+        "video/src/data/words_122hardware.json",
         "video/src/data/words_ads.json",
         "video/src/data/words_agency.json",
         "video/src/data/words_ai.json",
@@ -558,6 +559,7 @@
         "video/src/data/words_factory.json",
         "video/src/data/words_file.json",
         "video/src/data/words_free.json",
+        "video/src/data/words_free131.json",
         "video/src/data/words_glm.json",
         "video/src/data/words_haaland.json",
         "video/src/data/words_hermes.json",
@@ -615,6 +617,7 @@
         "video/src/data/words_unlock.json",
         "video/src/data/words_vault.json",
         "video/src/data/words_video.json",
+        "video/src/data/words_web.json",
         "video/src/data/words_words.json",
         "video/src/data/words_worthy.json"
       ]
@@ -1392,7 +1395,8 @@
       "log": null,
       "storyboard": "storyboards/97-free.md",
       "captions": [
-        "video/src/data/words_free.json"
+        "video/src/data/words_free.json",
+        "video/src/data/words_free131.json"
       ]
     },
     {
@@ -1655,6 +1659,39 @@
       "storyboard": "storyboards/121-mistake.md",
       "captions": [
         "video/src/data/words_121mistake.json"
+      ]
+    },
+    {
+      "key": "hardware",
+      "name": "hardware",
+      "number": 122,
+      "code": "video/src/ClaudeHardwareReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/122-hardware.md",
+      "captions": [
+        "video/src/data/words_122hardware.json"
+      ]
+    },
+    {
+      "key": "web",
+      "name": "web",
+      "number": 124,
+      "code": "video/src/ClaudeWebReel.tsx",
+      "log": "memory/reels/web-factory-log.md",
+      "storyboard": "storyboards/124-web.md",
+      "captions": [
+        "video/src/data/words_web.json"
+      ]
+    },
+    {
+      "key": "free131",
+      "name": "free",
+      "number": 131,
+      "code": "video/src/ClaudeFree131Reel.tsx",
+      "log": "memory/reels/free131-factory-log.md",
+      "storyboard": "storyboards/131-free.md",
+      "captions": [
+        "video/src/data/words_free131.json"
       ]
     }
   ]

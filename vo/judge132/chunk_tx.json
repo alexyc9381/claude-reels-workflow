@@ -1,0 +1,122 @@
+[
+ {
+  "i": 0,
+  "a": 0.0,
+  "b": 0.345292,
+  "text": "you"
+ },
+ {
+  "i": 1,
+  "a": 0.684479,
+  "b": 1.93927,
+  "text": "Thank you very much."
+ },
+ {
+  "i": 2,
+  "a": 2.86246,
+  "b": 4.41642,
+  "text": "There's a new prompting technique? Cut, cut."
+ },
+ {
+  "i": 3,
+  "a": 4.99075,
+  "b": 6.61106,
+  "text": "There's a new prompting technique. Cut, cut."
+ },
+ {
+  "i": 4,
+  "a": 6.92423,
+  "b": 9.7159,
+  "text": "There's a new prompting technique that stops cloud from lying to your face."
+ },
+ {
+  "i": 5,
+  "a": 10.4354,
+  "b": 13.2188,
+  "text": "But the crazy part, it makes your output 73% more accurate."
+ },
+ {
+  "i": 6,
+  "a": 15.3999,
+  "b": 15.7029,
+  "text": "cut cut"
+ },
+ {
+  "i": 7,
+  "a": 16.5715,
+  "b": 18.1808,
+  "text": "But the crazy part, it makes... cut cut."
+ },
+ {
+  "i": 8,
+  "a": 18.992,
+  "b": 22.818,
+  "text": "But the crazy part, it makes your outputs 73% more accurate and it takes just 1 minute to set up."
+ },
+ {
+  "i": 9,
+  "a": 24.5668,
+  "b": 30.0354,
+  "text": "People are using it to ship entire apps, websites, and tools from a single prompt, and even the creators of cloud think this is the future of AI."
+ },
+ {
+  "i": 10,
+  "a": 31.4047,
+  "b": 32.3855,
+  "text": "It's called a judge loop."
+ },
+ {
+  "i": 11,
+  "a": 35.2369,
+  "b": 39.5436,
+  "text": "Instead of doing the normal back and forth chats, you give Claude a task and tell it to spawn a team of elite subagents."
+ },
+ {
+  "i": 12,
+  "a": 40.4779,
+  "b": 44.4794,
+  "text": "but the secret sauce is in the third line of the promontory to assign a judge, a prosecutor, and a defense."
+ },
+ {
+  "i": 13,
+  "a": 45.8813,
+  "b": 52.6158,
+  "text": "The prosecutor builds a case for everything wrong with your work, the defense argues back, and the judge rules on the evidence, so they loop and rebuild until the work is bulletproof."
+ },
+ {
+  "i": 14,
+  "a": 55.2823,
+  "b": 55.8096,
+  "text": "dispersed."
+ },
+ {
+  "i": 15,
+  "a": 56.1157,
+  "b": 56.4053,
+  "text": "cut."
+ },
+ {
+  "i": 16,
+  "a": 56.9177,
+  "b": 61.4215,
+  "text": "This burns through tokens fast so you should only build your basic prototype first and trigger the judge loop before your launch."
+ },
+ {
+  "i": 17,
+  "a": 62.2083,
+  "b": 63.4531,
+  "text": "Comment judge for the free guide."
+ },
+ {
+  "i": 18,
+  "a": 63.7712,
+  "b": 64.0319,
+  "text": "you"
+ },
+ {
+  "i": 19,
+  "a": 64.5296,
+  "b": 65.8903,
+  "text": ""
+ }
+]
