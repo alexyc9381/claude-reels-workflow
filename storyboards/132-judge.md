@@ -5,18 +5,21 @@
 > no mark.
 > **Format:** single dark panel · clone `ClaudeLibrary130Reel.tsx` (reel 130) chrome verbatim
 > **Arc:** TRIAL (villain → vindication). The villain wins the hook and is not beaten until S13.
-> **Villain:** **THE HOLLOW EXHIBIT** — work that *looks* finished. Its RULE: it is never
-> destroyed, only *caught*. It is still on the evidence shelf, still hollow, in the last frame.
+> **Villain:** **THE HOLLOW TOWER** — work that *looks* finished. Its RULE: it is never
+> destroyed, only *caught*. The original stack is still standing behind the payoff at S13, still
+> grey, still missing its courses.
 > **Hero cast:** THE WITNESS (clay, no costume) · THE JUDGE (`prof` + `stern`) ·
 > THE PROSECUTOR (`suit`, tint dark) · THE DEFENSE (`suit`, tint light) · THE FIRM
 > (8 sub-agents, `suit`/`glasses`/`beard`/`girl`/`cop`/`chef`/`fro`/`prof` cycled by
 > `costumeFor(i)`) · THE CLERK (`girl` + `glasses`).
-> ⛔ **NUMBER SPINE:** the 3-line docket (line 3 is the one that matters) · 3 nameplates
-> `JUDGE · PROSECUTOR · DEFENSE` · a 10-segment accuracy rail (**no numeral**) · 3 loop passes ·
-> keyword `JUDGE`.
-> ⛔ **HERO ARTIFACT:** **THE EXHIBIT** — a brass-framed slab of work on a plinth. Hollow at the
-> hook, refilled at S1 *with one bay left dark*, flagged at S10, defended at S11, ruled at S12,
-> and at S13 the gavel comes down on it and leaves **no mark**. Everything else is decoration.
+> ⛔ **NUMBER SPINE:** the console's 3 slots (slot 3 is the one that matters) · 3 nameplates
+> `JUDGE · PROSECUTOR · DEFENSE` · 6 courses in the tower (**no numeral anywhere**) · 3 loop
+> passes · keyword `JUDGE`.
+> ⛔ **HERO ARTIFACT:** **THE TOWER** — six saturated courses somebody stacked. Knocked down at
+> the hook, re-stacked at S1 *with one course left out*, spiked at S10, rammed back at S11, ruled
+> at S12, and at S13 the weight comes down and it **holds**. Everything else is decoration.
+> ⛔⛔ **v1 SHIPPED THIS AS A PAPER EXHIBIT BOARD AND WAS REJECTED ON THE CONCEPT.** See the
+> section at the foot of this board — it is the third time this repo has made that mistake.
 
 ---
 
