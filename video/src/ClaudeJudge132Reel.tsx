@@ -337,7 +337,7 @@ export const BED_QUIET = db(-6);
 
 /** ⛔ THE PICKED HOOK. `stand` IS S0 itself, so the candidate that was chosen
     and the scene that ships are the same code and cannot drift apart. */
-export const PICKED: HookId = "stand";
+export const PICKED: HookId = "seal";
 
 export const makeReel = (v: Variant, quiet = false, hook: HookId = PICKED): React.FC => () => {
   const f = useCurrentFrame();

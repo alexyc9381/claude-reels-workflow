@@ -19,7 +19,7 @@ export const ReelQuiet = makeReel("house", true);
    on the real chassis, PICKED before the body is defended. Four MECHANISMS:
    measurement / revelation / impact / accumulation. */
 const Root: React.FC = () => (<>
-  <Composition id="hook-1-stand" component={HookCut("stand")} durationInFrames={100} {...V} />
+  <Composition id="hook-0-seal"  component={HookCut("seal")}  durationInFrames={100} {...V} />
   <Composition id="hook-2-light" component={HookCut("light")} durationInFrames={100} {...V} />
   <Composition id="hook-3-gavel" component={HookCut("gavel")} durationInFrames={100} {...V} />
   <Composition id="hook-4-wall"  component={HookCut("wall")}  durationInFrames={100} {...V} />

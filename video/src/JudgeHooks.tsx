@@ -3,12 +3,14 @@ import { useCurrentFrame } from "remotion";
 import {
   W, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
   Scene, Cam, Chip, Mark, MarkPlate, Contact, Edge, Ring, Puff, Steam, Motes,
-  Crew, Hero, Forearm, costumeFor, squash, mono, ui, Rake,
+  Crew, Hero, Forearm, costumeFor, squash, mono, ui, Rake, Runner, Sweat, Fall,
   R, asPlace, GY, BAND_Y, SAFE3,
   CLAY, CLAYD, GOLD, GREEN, RED, PAPER, CREAMB, INK, MUTE, TEAL, STEEL,
   BRASS, SODIUM, VIOLET, EMBER, OXIDE, SLATE, COPPER, OXBLOOD,
 } from "./JudgeWorld";
-import { Brief, Polygraph, WitnessBox, EvidenceBoard, Gavel } from "./JudgeProps";
+import {
+  Brief, Polygraph, WitnessBox, EvidenceBoard, Gavel, BigSeal, RawWork, Gallery, ExhibitWall,
+} from "./JudgeProps";
 import { Room, Jamb, Overhead } from "./HwSets";
 
 /* ===========================================================================
@@ -39,10 +41,11 @@ import { Room, Jamb, Overhead } from "./HwSets";
    lamp bank, a mass rising before it falls, a wall filling toward its top edge.
    ========================================================================= */
 
-export type HookId = "stand" | "light" | "gavel" | "wall";
+export type HookId = "seal" | "stand" | "light" | "gavel" | "wall";
 type SP = { v: any; dur: number };
 
 export const HOOK_BANDS: Record<HookId, { big: string; hot: string }> = {
+  seal:  { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
   stand: { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
   light: { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
   gavel: { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
@@ -91,121 +94,157 @@ const EvidenceWall: React.FC<{ x: number; y: number; w: number; h: number; z?: n
 );
 
 /* =========================================================================
-   HOOK 1 · `stand` — THE POLYGRAPH.  ⭐ THIS IS ALSO S0 ITSELF, so the
-   candidate that gets picked and the scene that ships are the same code and
-   cannot drift apart.
+   HOOK 1 · `seal` — THE LOAD HE CANNOT HOLD UP.  ⭐ THIS IS ALSO S0 ITSELF, so
+   the candidate that gets picked and the scene that ships are the same code.
 
-   MECHANISM: measurement. He swears the work is DONE; the instrument disagrees
-   and tears its own paper saying so; the seal is still gleaming at the end.
+   ⛔⛔⛔ v1 OF THIS HOOK MADE A MACHINE THE SUBJECT. A colossal chart recorder
+   measured the lie and tore its own paper, and the Claude stood in the corner
+   watching it. Alex: *"the begining scene needs to be way more interesting like
+   OX UNLAZY BOSS."* Frame-stripped all three rather than remembered, and every
+   one of them is the same shape:
+
+     OX      a 400px bull CHARGES and a Claude is roped to it
+     UNLAZY  a Claude has a pipe in his mouth INFLATING a giant DONE balloon
+             until it bursts and blows him back
+     BOSS    a colossal boss LOOMS over a small Claude holding work up at him
+
+   **A CLAUDE IS THE SUBJECT AND PHYSICAL WORK IS BEING DONE THROUGH HIS BODY
+   AGAINST A LOAD.** Nothing was happening to mine, so nothing was happening.
+   No amount of tuning the recorder would have reached that.
+
+   THE LOAD IS THE VILLAIN MADE LIFTABLE: the gold `DONE` seal, 460px of it,
+   held over a 240px Claude, cracking under its own weight because the claim
+   cannot carry itself. He gets ONE lift attempt and it fails.
 
    The event, four parts (§2):
-     before   f0  he is already in the box, arm out, brief held toward camera,
-                  the drum already running with a FLAT trace on 220px of paper
-     trigger  f6  the needle twitches — the first promise
-     travel   f14 it climbs, and the climb ACCELERATES (IN_Q, not OUT) so you can
-                  see where it is going before it gets there
-     arrival  f34 full deflection, the pen TEARS 300px of sheet, the LIE lamp
-                  strikes as a shaped cone, he flinches, and light shows THROUGH
-                  the brief for the first time — it is hollow
-   ⛔ AND IT DOES NOT RESOLVE: f52 he sets his jaw and the seal is untouched.
-   A hook that resolves has spent the reel.
+     before   f0  already under it, already compressed, TWO cracks already run,
+                  steam already rising, shards already on the floor
+     trigger  f8  the cracks start spreading and he sinks
+     travel   f26 HE DRIVES — the seal rises 34px and he almost gets it, then it
+                  drops back further than it started. The mechanism FAILS FIRST.
+     arrival  f46 it SHATTERS: 34 shards, a ring, dust, he drops into a squat
+   ⛔ AND IT DOES NOT RESOLVE. What is revealed under the gold is the REAL work,
+   raw and half-built, hanging where the lie was. The problem is now WORSE.
    ====================================================================== */
-export const HookStand: React.FC<SP> = ({ v, dur }) => {
+export const HookSeal: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("stand");
 
-  /* ⭐ THE NEEDLE AS A FUNCTION OF FRAME, not a value at this frame. The trace
-     reads its own history off this, so every millimetre of ink is the value the
-     needle actually held when that paper passed the nib — and the paper SCROLLS,
-     which turns the receipt into the reel's background process.
-     ⛔ THE CLIMB IS `IN_Q`, NOT `OUT`. An accelerating rise tells you where it
-     is going before it gets there; a decelerating one has already arrived. */
-  const nAt = (g: number) => {
-    const twitch = E(g, 6, 9, 0, 0.19, OUT) - E(g, 10, 14, 0, 0.15, IO);
-    const climb = E(g, 14, 34, 0, 0.86, IN_Q);
-    const slam = E(g, 34, 38, 0, 0.15, BACK);
-    return Math.max(0, Math.min(1, twitch + climb + slam));
-  };
-  /* ⭐ THE LEVER IS SPEED, NOT CONTRAST (ANIMATION-QUALITY §11). Softening
-     the chart grid to stop it reading as a barcode cost the hook 8.56 -> 7.61;
-     the way back is a FASTER sweep, which repaints more per sample and looks no
-     heavier at any instant, not a darker one. */
-  const spin = 1 + E(f, 24, 30, 0, 3.0, OUT);
-  const tear = E(f, 35, 62, 0, 1, OUT);
-  const lamp = E(f, 36, 41, 0, 1, OUT) * (0.86 + Math.sin(f / 3.1) * 0.14);
-  const flinch = E(f, 38, 42, 0, 1, OUT) - E(f, 50, 60, 0, 1, IO);
-  const kick = f > 38 ? Math.sin((f - 38) * 0.9) * Math.exp(-(f - 38) / 9) * 15 : 0;
-  const hollow = E(f, 42, 62, 0, 0.42, OUT);
-  const stern = E(f, 52, 62, 0, 1, OUT);
+  /* ⭐ THE FAILURE IS A PROCESS YOU CAN SEE COMING (§25). Cracks spread on their
+     own accelerating clock, so at any frame the viewer can read how much is
+     left — that is anticipation, as opposed to a thing that simply happens. */
+  const fail = Math.min(1,
+    0.18 + E(f, 6, 26, 0, 0.34, LIN) + E(f, 34, 46, 0, 0.44, IN_Q));
+  /* the ONE lift attempt, and it loses ground */
+  const drive = E(f, 26, 32, 0, 1, OUT) - E(f, 33, 40, 0, 1, IN_Q);
+  /* ⛔ THE LOAD HAS TO VISIBLY LOSE GROUND. A 6->38px sag on a 792 panel is a
+     state change, not an action (§11: under about a third of the object's own
+     size and the eye cannot resolve it). It now travels 60px down and 46px back
+     up on the failed lift, and it TILTS as it slips. */
+  const sag = 6 + E(f, 4, 26, 0, 30, IO) - drive * 46 + E(f, 34, 46, 0, 30, IN_Q);
+  const tilt = -2 - E(f, 8, 26, 0, 5, IO) + drive * 4 - E(f, 34, 46, 0, 6, IN_Q);
+  const strain = Math.min(1, 0.50 + E(f, 4, 26, 0, 0.22, IO) + drive * 0.22
+    + E(f, 34, 46, 0, 0.26, IN_Q)) * (1 - E(f, 52, 62, 0, 0.55, OUT));
+  const burst = E(f, 46, 74, 0, 1, OUT);
+  const gone = f >= 46;
+  const squat = E(f, 46, 50, 0, 1, IN_Q) - E(f, 56, 70, 0, 0.8, OUT);
+  /* ⛔ THE REVEAL WAS ARRIVING TOO SLOWLY TO BE THE PAYOFF. It now lands
+     inside eight frames of the shatter, which is where the eye still is. */
+  const reveal = E(f, 50, 60, 0, 1, BACK);
+  const look = E(f, 48, 54, 0, 1, OUT) - E(f, 64, 74, 0, 1, IO);
+  const stern = E(f, 66, 76, 0, 1, OUT);
+  const shake = gone && f < 54 ? Math.sin((f - 46) * 1.6) * Math.exp(-(f - 46) / 5) * 13 : 0;
+
+  /* ⛔ THE LOAD WAS COVERING HIS FACE. At 460px over a 240px hero the seal's
+     bottom edge sat across his eyes for the whole first half — the strain is
+     the beat, and the surface it is read off was behind the prop. The seal now
+     rests ON THE CROWN and never reaches the eye band, and the SCALE came from
+     shrinking the body instead: 400 over 214 is 1.87x his height, which is the
+     ratio OX's bull and BOSS's boss actually run at. */
+  const HX = 470, HS = 214, HEAD = GY - HS;
 
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.34} glow={hexa(p.key, 0.16)}>
-      <Cam s={1.0} z={1}>
-        <Room p={p} f={f} bands={2} kind="shelf" overhead="joist"
-          rake={0.06} rakeRate={1.9} rakeN={5} floorKind="boards" grit={0.5}
-          lamp={{ x: 856, y: 196, r: 176 }} window={null} />
+      <Cam s={1.0} y={shake * 0.4} z={1}>
+        <Room p={p} f={f} bands={2} kind="shelf" overhead="gantry"
+          rake={0.08} rakeRate={2.4} rakeN={5} floorKind="boards" grit={0.6}
+          lamp={{ x: 862, y: 150, r: 180 }} window={null} />
 
-        {/* ⭐ THE WALL CARRIES THE GATES SO THE SUBJECT DOES NOT HAVE TO
-            (reel 110). One unbroken cream field behind the action with the
-            court's own mark pressed into it: HOOK_LUMA and the claim plate both
-            live here, which leaves the polygraph free to be near-black and the
-            Claude free to be small and saturated. That value gap is the biggest
-            in the reel, and it is bought with the SUBJECT's value, never by
-            lifting the palette's dark stop. */}
-        <EvidenceWall x={506} y={680} w={900} h={300} z={14} f={f} />
-        <div style={{ position: "absolute", left: 56, top: 672, width: 900, height: 26, zIndex: 16,
-          background: `linear-gradient(180deg, #A87A46 0%, #5E3C1E 100%)` }} />
+        {/* ⭐ DENSITY, DEVICE 1: a wall of real case files. OX fills a floor with
+            hundreds of coins, BOSS runs a wall of thirty wireframes, UNLAZY six
+            terminals with real code. This reel shipped one object on an empty
+            floor. Twenty-four files, countable, with readable rows. */}
+        <ExhibitWall x={506} y={572} w={1010} h={258} z={16} f={f} cols={9} rows={3}
+          c="#7A5230" lit={0.55} flagged={0} />
 
-        {/* ⭐⭐⭐ THE COLOSSAL OBJECT AND THE BACKGROUND PROCESS ARE THE SAME
-            MACHINE: 640px of near-black recorder standing on the boards, and
-            660px of lit chart paper scrolling out of it on its own dark guide
-            plate with the pen carriage riding the new end. */}
-        {/* ⛔⛔ THE BAND HAS TO CROSS THE WHOLE PANEL. v1 ran 660px of paper in
-            the left two thirds and the hook measured 4.84 — the lowest scene in
-            the reel — because 10% of the panel cannot carry a shot however
-            interesting it is. The chart is now FULL BLEED at 1104x152 (21% of
-            the panel) and it runs BEHIND the box, which is also what a recorder
-            in a room actually looks like. */}
-        <Polygraph x={200} y={GY} h={640} f={f} spin={spin} z={40}
-          paperX={-46} paperY={196} paperW={1104} paperH={152} penX={636}
-          nAt={nAt} speed={17} tear={tear} lamp={lamp} />
+        {/* the overhead run — a background process the room would actually have */}
+        <Runner y={118} f={f} z={14} rate={7.4} pitch={186} w={152} h={78}
+          c="#C9B48C" c2="#2E2116" kind="crate" rail hang={20} o={0.9} />
 
-        {/* the box, the hero, and the work he is swearing to.
-            ⛔ HE STANDS ON A STEP INSIDE THE BOX. v1 put him at the ground line
-            behind a 178px front panel and 61% of the sprite — the whole face —
-            was hidden by furniture on the one frame guaranteed to be seen. */}
-        <WitnessBox x={812} y={GY} w={348} h={192} z={62} />
-        <Contact x={694} y={GY} w={236} z={41} o={0.36} />
-        <Hero f={f} x={812} y={GY - 116} size={296} z={56} act={3} ph={0.6}
-          costume={{ constr: 1 }} shock={flinch} stern={stern} gaze={-0.55} />
-        {/* ⛔ THE FOREARM CONNECTS TWO THINGS THAT ARE BOTH ON SCREEN — the only
-            limb geometry that cannot be misread as a tail (reel 110, two rounds). */}
-        <Forearm x0={812 - 296 * 0.30} y0={GY - 116 - 296 * 0.46}
-          x1={752} y1={GY - 268 + kick * 0.5} w={27} c={CLAYD} z={58} />
-        {/* ⛔ THE LAST BEAT OF THE HOOK IS A PROMISE, NOT THE PAYOFF. Three
-            pinholes open and the light behind shows through — the work is
-            hollow. The other eleven holes, and the flags that make them, are
-            S10's job; spending them here would spend the reel. */}
-        {/* ⛔ AND IT MOVED INTO HIS OWN SILHOUETTE, WHICH IS TWO FIXES AT ONCE.
-            Held out in mid-frame it (a) split the hook into two competing
-            objects — a machine AND a document — where a hook is ONE image, and
-            (b) severed the cream wall behind it, which is what `HOOK_PLATE` was
-            reading at 9.9%: a plate far below its own area is a dark LINE
-            through it, not a size problem. Inside the box it is clearly HIS, the
-            wall behind is one field, and its top edge sits well below the eye
-            band, so nothing lands on the face. */}
-        <Brief x={748} y={GY - 78 + kick} w={172} s={0} z={60} f={f}
-          rot={-6 + kick * 0.4} lit={hollow} holes={f > 46 ? 3 : 0} />
+        {/* the hazard band the work is staged on */}
+        <div style={{ position: "absolute", left: -40, top: 664, width: 1100, height: 26,
+          zIndex: 22, overflow: "hidden", background: "#2A2116" }}>
+          {Array.from({ length: 26 }, (_, i) => (
+            <div key={i} style={{ position: "absolute", left: i * 46 - 20, top: -6, width: 26,
+              height: 40, transform: "skewX(-26deg)", background: i % 2 ? "#E7B24C" : "#241C12" }} />
+          ))}
+        </div>
 
-        {/* the cable — it is why the two objects are ONE machine and not two
-            props sharing a room */}
-        <svg viewBox="0 0 1012 792" width={1012} height={792}
-          style={{ position: "absolute", left: 0, top: 0, zIndex: 39, overflow: "visible" }}>
-          <path d={`M 700 ${GY - 40} Q 500 ${GY + 40} 268 ${GY - 70}`} fill="none"
-            stroke="#141A20" strokeWidth={12} strokeLinecap="round" />
-        </svg>
+        {/* ⭐ DENSITY, DEVICE 2: the public gallery, either side of the dock, in
+            two ranks with a value ramp. BOSS carries a band like this in EVERY
+            body frame; it is the single most repeated device in the reference
+            reels and a court has one for free. */}
+        <Gallery f={f} x0={-56} x1={300} y={GY + 22} n={6} ranks={2} size={130} z={30}
+          at={-24} react={gone ? 1 : 0} seed={0} />
+        <Gallery f={f} x0={680} x1={1064} y={GY + 22} n={6} ranks={2} size={130} z={30}
+          at={-20} react={gone ? 1 : 0} seed={2} />
 
-        <Edge side="r" c="#2E1C0C" w={74} z={88} top={170} />
+        {/* ⭐⭐⭐ THE LOAD AND THE BODY UNDER IT */}
+        <Contact x={HX - 118} y={GY} w={236} z={41} o={0.42} />
+        <Hero f={f} x={HX} y={GY} size={HS} z={60} act={1} ph={0.4}
+          costume={{ constr: 1 }} strain={strain} shock={look} stern={stern}
+          lift={-squat * 26} gaze={0.1} />
+        {/* ⛔ THE ONLY LIMB GEOMETRY THAT SURVIVES is a forearm that STARTS on
+            the mascot's own arm rect and ENDS on the thing it holds (reel 110,
+            two rounds lost to a hand-drawn arm that read as a tail). */}
+        {!gone && (<>
+          <Forearm x0={HX - HS * 0.38} y0={HEAD + HS * 0.50} x1={HX - 62}
+            y1={496 + sag} w={26} c={CLAYD} z={61} />
+          <Forearm x0={HX + HS * 0.38} y0={HEAD + HS * 0.50} x1={HX + 62}
+            y1={496 + sag} w={26} c={CLAYD} z={61} />
+        </>)}
+        <BigSeal x={HX} y={292 + sag} d={400} z={62} f={f} fail={fail} burst={burst}
+          bow={Math.min(1, fail * 0.8)} rot={tilt + shake * 0.2} />
+
+        {/* ⭐ EFFORT WANTS AN EMITTER ON THE STILLEST PART. A pressing sprite's
+            head is the one thing not acting, so it steams — from frame 0. */}
+        {/* ⭐ EFFORT WANTS AN EMITTER ON THE STILLEST PART, and on a pressing
+            sprite that is the head — which is also why the seal cannot be
+            allowed to sit on it. Steam runs from frame 0. */}
+        <Steam x={HX - 78} y={HEAD + 30} f={f} at={-14} n={9} z={64} s={1.15} c="#E8DCC0" />
+        <Steam x={HX + 78} y={HEAD + 30} f={f} at={-8} n={9} z={64} s={1.15} c="#E8DCC0" />
+        <Sweat x={HX} y={HEAD + 70} f={f} at={2} n={11} z={65} />
+        {/* the scale falling off the seal as it goes — before it goes */}
+        <Fall x={HX} y={470 + sag} w={330} f={f} at={-10} n={14} z={59} c="#E7B24C" rate={1.4} />
+
+        {gone && <Ring x={HX} y={306} f={f} at={46} c="#FFE8B0" z={74} s={2.4} dur={24} />}
+        {/* the floor takes the load too: shards that already fell, and the dust
+            they kicked up. Nothing in a reel lands and simply stops. */}
+        {[0, 1, 2, 3, 4].map(i => (
+          <div key={"fl" + i} style={{ position: "absolute",
+            left: 250 + i * 118 + rnd(i, 3) * 40, top: 690 + rnd(i, 9) * 12,
+            width: 30 + rnd(i, 5) * 26, height: 15, zIndex: 44,
+            transform: `rotate(${(rnd(i, 7) - 0.5) * 50}deg)`,
+            clipPath: "polygon(0% 30%, 46% 0%, 100% 22%, 78% 100%, 18% 84%)",
+            background: i % 2 ? "#C89A38" : GOLD }} />
+        ))}
+        {gone && <Puff x={HX} y={GY - 40} f={f} at={48} c="#D8C8A4" z={70} n={17} />}
+
+        {/* ⛔ AND IT DOES NOT RESOLVE: what the gold was hiding is the real work,
+            raw and half-built, hanging exactly where the lie was. */}
+        {reveal > 0.01 && <RawWork x={HX} y={318} w={356} z={58} k={reveal} f={f} />}
+
+        <Edge side="r" c="#2E1C0C" w={78} z={90} top={150} />
       </Cam>
 
       <Chip t={R.lie} y={BAND_Y} x={SAFE3.cx} c={GREEN} fg="#04241C" s={0.94} z={94} />
@@ -356,7 +395,8 @@ export const HookWall: React.FC<SP> = ({ v, dur }) => {
 };
 
 export const HOOKS: Record<HookId, React.FC<SP>> = {
-  stand: HookStand,
+  seal: HookSeal,
+  stand: HookSeal,   /* the old machine-led open is retired; `stand` now aliases the rebuild */
   light: HookLight,
   gavel: HookGavel,
   wall: HookWall,

@@ -13,6 +13,7 @@ import {
   Brief, Polygraph, WitnessBox, AccuracyDial, MinuteTimer, RollerDoor,
   AppShell, PageSlab, BenchTool, SealPress, LoopRail, PromptRack, Alcove,
   EvidenceBoard, Gavel, ProvingRam, FuelColumn, BigLever, StepPlate, Folder, Wig,
+  Gallery, ExhibitWall,
 } from "./JudgeProps";
 import { Room, Jamb, Stack, Overhead } from "./HwSets";
 
@@ -97,6 +98,33 @@ const LAY: Record<Variant, { a: number; b: number; c: number }> = {
 const seqOrder = (v: Variant, n: number) =>
   Array.from({ length: n }, (_, i) => (i + PJ[v] * 2) % n);
 
+/* ⭐⭐⭐ THE DENSITY PASS (Alex: *"the animations quality is just not anywhere
+   near as good nor interesting here"*).
+
+   Measured off OX / UNLAZY / BOSS body frames rather than remembered: BOSS
+   carries 8-12 Claudes in a band across the bottom of EVERY body frame plus a
+   wall of real UI behind; OX fills a floor with hundreds of coins and a 60-tile
+   grid; UNLAZY runs six terminals with real code and five red X marks. This
+   reel shipped body scenes with ONE object on an empty floor and 0-2 sprites.
+
+   It is a DENSITY gap, not a polish gap, and it has two shapes — both of which
+   a court supplies for free: a public GALLERY and WALLS OF CASE FILES. Every
+   scene below now carries at least one, sized and placed for that room rather
+   than pasted in, and the gallery REACTS on the scene's own beat so it is cast
+   rather than wallpaper. */
+
+/** ⭐⭐⭐ THE FRONT BAND. Read off BOSS's own frames: its crowd is not in the
+    corners, it is a rank across the FULL WIDTH at 150-200px, near camera, and
+    CROPPED BY THE BOTTOM EDGE — which is also the depth cue the reel-94 audit
+    called out (a mass cropped by the panel edge, in front of the action).
+    ⛔ It covers the hero's legs and that is correct; BOSS's boss loses his too. */
+const FrontBand: React.FC<{ f: number; n?: number; size?: number; seed?: number;
+  react?: number; at?: number; z?: number; x0?: number; x1?: number }> =
+  ({ f, n = 7, size = 168, seed = 0, react = 0, at = -22, z = 70, x0 = -90, x1 = 1102 }) => (
+  <Gallery f={f} x0={x0} x1={x1} y={GY + 96} n={n} ranks={1} size={size} z={z}
+    at={at} react={react} seed={seed} />
+);
+
 /** the one text chip a shot is allowed, in the reserved band */
 const BandChip: React.FC<{ t: string; c?: string; fg?: string }> =
   ({ t, c = INK, fg = "#F6F2E8" }) => <Chip t={t} y={BAND_Y} c={c} fg={fg} s={0.94} z={94} />;
@@ -174,10 +202,22 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
         {land > 0.01 && <Ring x={465 + dx} y={410} f={f} at={60} c={GREEN} z={70} s={1.5} dur={20} />}
         {land > 0.01 && <Puff x={465 + dx} y={720} f={f} at={61} c="#9EBDAE" z={52} n={11} />}
 
-        {[0, 1].map(i => (
-          <Crew key={"c" + i} f={f} x={128 + i * 138} y={GY + 6} i={i + 3} size={150}
-            z={33} at={-16} loop={i % 2 === 0 ? 1 : 3} />
+        {/* the rest of the bench: eight more instruments on the back wall, each
+            with its own needle, so the room reads as a test floor */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <div key={"ig" + i} style={{ position: "absolute", left: 40 + i * 122 + dx * 0.4,
+            top: 236 + (i % 2) * 46, width: 92, height: 92, borderRadius: "50%", zIndex: 13,
+            background: `linear-gradient(160deg, #2E4A42 0%, #14231F 100%)`,
+            border: "6px solid #1A2E28" }}>
+            <div style={{ position: "absolute", left: 42, top: 20, width: 5, height: 30,
+              background: hexa("#8FE0BE", 0.72),
+              transform: `rotate(${-40 + Math.sin(f / 13 + i) * 34}deg)`,
+              transformOrigin: "50% 100%" }} />
+            <div style={{ position: "absolute", left: 38, top: 44, width: 14, height: 14,
+              borderRadius: 8, background: "#3F5A52" }} />
+          </div>
         ))}
+        <FrontBand f={f} n={6} size={162} seed={1} react={land} at={-16} />
         <Edge side="l" c="#08120E" w={96} z={90} top={120} />
       </Cam>
       <BandChip t="73% MORE ACCURATE" c={GREEN} fg="#04241C" />
@@ -225,7 +265,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
           costume={{ constr: 1 }} cheer={bell} gaze={-0.6} />
         <Forearm x0={840 + dx - 244 * 0.34} y0={GY - 244 * 0.50}
           x1={636 + dx} y1={300} w={24} c={CLAYD} z={58} />
-        <Crew f={f} x={146} y={GY + 4} i={6} size={158} z={33} at={-14} loop={1} />
+        <FrontBand f={f} n={4} size={176} seed={3} react={bell} at={-14} x0={-110} x1={640} />
         <Edge side="r" c="#0A1610" w={88} z={90} top={130} />
       </Cam>
       <BandChip t="1 MINUTE TO SET UP" c={SODIUM} fg="#2A1C04" />
@@ -294,6 +334,19 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
           );
         })}
 
+        {/* the yard: stacked pallets on both sides, because a dock that ships
+            three things a second is not an empty apron */}
+        {[[46, 3], [140, 5], [880, 4], [962, 6]].map(([sx, n], i) => (
+          <React.Fragment key={"pl" + i}>
+            {Array.from({ length: n as number }, (_, j) => (
+              <div key={j} style={{ position: "absolute", left: (sx as number) + dx + (j % 2) * 7,
+                top: 690 - j * 34, width: 96, height: 32, zIndex: 40,
+                background: j % 2 ? "#8A6A42" : "#A0805A",
+                borderTop: "4px solid #C09A66" }} />
+            ))}
+          </React.Fragment>
+        ))}
+        <FrontBand f={f} n={7} size={158} seed={5} react={0} at={26} />
         {/* the single prompt slot, front centre — ONE input */}
         <div style={{ position: "absolute", left: 466 + dx, top: 690, width: 80, height: 58,
           zIndex: 60, background: "#2A3038", borderRadius: 5 }}>
@@ -370,10 +423,17 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
         {/* ⛔ TWO SPRITES AT PROPER SCALE BEAT THREE ANTS. v1 ran three at 104
             below the ground line and they read as clutter in the corner of the
             contact sheet, not as a cast. */}
-        {[0, 1].map(i => (
-          <Crew key={"c" + i} f={f} x={128 + i * 132} y={GY + 8} i={i + 9} size={148}
-            z={33} at={-14} loop={i === 1 ? 2 : 3} />
+        {/* the plates already struck today, racked — countable, and it says the
+            house does this constantly rather than once for the camera */}
+        {Array.from({ length: 12 }, (_, i) => (
+          <div key={"rp" + i} style={{ position: "absolute", left: 690 + (i % 4) * 78 + dx * 0.5,
+            top: 250 + Math.floor(i / 4) * 62, width: 66, height: 46, zIndex: 13,
+            background: `linear-gradient(180deg, #C9A15A 0%, #7A5A22 100%)` }}>
+            <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 7,
+              background: "#E4C486" }} />
+          </div>
         ))}
+        <FrontBand f={f} n={5} size={172} seed={7} react={struck} at={-14} x0={-100} x1={760} />
         <Edge side="r" c="#180806" w={92} z={90} top={126} />
       </Cam>
       <BandChip t="THE HOUSE MARK GOES ON IT" c={GOLD} fg="#2A1C04" />
@@ -448,6 +508,11 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
               border: "7px solid #7A5230" }} />
           </div>
         ))}
+        {/* ⭐ THE REVEAL IS OF A FULL ROOM. A courtroom with nobody in it is a
+            floor plan; ten in the public gallery and the whole beat lands. */}
+        <Gallery f={f} x0={-50} x1={1060} y={GY + 30} n={9} ranks={2} size={124} z={30}
+          at={2} react={0} seed={9} />
+        <FrontBand f={f} n={6} size={182} seed={19} react={0} at={4} />
         <Contact x={806 + dx} y={GY} w={196} z={41} o={0.32} />
         <Hero f={f} x={856 + dx} y={GY} size={228} z={58} act={0} ph={0.7}
           costume={{ constr: 1 }} drive={open * 0.20} gaze={-0.5} />
@@ -537,6 +602,13 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
               width: 140 - (j % 3) * 30, height: 9, background: "#C8C2B2" }} />
           ))}
         </div>
+        {/* ⭐ THE QUEUE IS THE JOKE. The old way is not empty, it is a corridor
+            full of people waiting their turn on the same shuttle — which is a
+            crowd that means something rather than one pasted in for density. */}
+        {[0, 1, 2, 3, 4].map(i => (
+          <Crew key={"q" + i} f={f} x={70 + i * 84 + dx} y={GY - 96 - i * 9} i={i + 8}
+            size={92 - i * 7} z={26 - i} at={-20} loop={3} tint={i > 1 ? "#A85A38" : undefined} />
+        ))}
         <Contact x={236 + dx} y={GY} w={186} z={41} o={0.30} />
         <Contact x={696 + dx} y={GY} w={186} z={41} o={0.30} />
         <Hero f={f} x={286 + dx} y={GY} size={218} z={56} act={1} ph={0.0}
@@ -717,10 +789,18 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
         <Forearm x0={842 + dx - 256 * 0.34} y0={GY - 256 * 0.50}
           x1={648 + dx} y1={GY - 214 + bow * 10} w={25} c={CLAYD} z={58} />
         <Steam x={842 + dx} y={GY - 262} f={f} at={16} n={7} z={62} s={1.0} c="#B8E4EE" />
-        {[0, 1].map(i => (
-          <Crew key={"c" + i} f={f} x={126 + i * 134} y={GY + 6} i={i + 6} size={146}
-            z={33} at={-14} loop={3} />
+        {/* the other racks on the floor, receding, all cold */}
+        {[0, 1, 2].map(i => (
+          <div key={"or" + i} style={{ position: "absolute", left: 34 + i * 292 + dx * 0.4,
+            top: 268 - i * 8, width: 244, height: 150, zIndex: 12,
+            background: `linear-gradient(180deg, #14343C 0%, #08181C 100%)` }}>
+            {[0, 1, 2].map(j => (
+              <div key={j} style={{ position: "absolute", left: 14, top: 16 + j * 44,
+                width: 216, height: 26, borderRadius: 3, background: "#2E5660" }} />
+            ))}
+          </div>
         ))}
+        <FrontBand f={f} n={5} size={166} seed={11} react={lit} at={-14} x0={-110} x1={700} />
         <Edge side="r" c="#041216" w={90} z={90} top={124} />
       </Cam>
       <BandChip t={`LINE ${R.lines} DOES THE WORK`} c="#041216" fg="#9EE0EE" />
@@ -837,6 +917,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
             </React.Fragment>
           );
         })}
+        <FrontBand f={f} n={6} size={156} seed={25} react={0} at={-16} z={68} />
         <Edge side="l" c="#120C1E" w={86} z={90} top={132} />
       </Cam>
       <BandChip t="JUDGE · PROSECUTOR · DEFENSE" c="#140E22" fg="#D6BCFF" />
@@ -872,6 +953,9 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="shelf" overhead="tray"
           rake={0.13} rakeX={RAKE_X[v]} rakeRate={4.4 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="slab" grit={0.7} lamp={null} window={null} />
+        {/* the archive the exhibit came out of, behind the light box */}
+        <ExhibitWall x={506 + dx} y={706} w={1040} h={300} z={13} f={f} cols={10} rows={3}
+          c="#4A5560" lit={0.3} flagged={Math.min(9, n)} />
         <EvidenceBoard x={430 + dx} y={606} w={700} h={452} z={20} glow={glow} f={f} />
         <Brief x={430 + dx} y={596} w={286} s={0.22} z={40} f={f}
           holes={n} flags={Math.max(0, n - 1)} lit={glow * 0.92}
@@ -918,6 +1002,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
             </div>
           );
         })}
+        <FrontBand f={f} n={7} size={152} seed={21} react={0} at={-18} z={68} />
         <Contact x={128 + dx} y={GY} w={216} z={41} o={0.34} />
         <Hero f={f} x={186 + dx} y={GY} size={254} z={56} act={1} ph={0.2}
           costume={R.roles[1].costume as any} stern={0.8} drive={0.16 * strike} />
@@ -1011,6 +1096,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
           <Beam x={512 + dx} y={200} top={90} bot={470} len={330} c="#FFF8E4"
             o={0.30 * lampOn} z={41} f={f} />
         </>)}
+        <FrontBand f={f} n={6} size={158} seed={23} react={struck ? lampOn : 0} at={-20} z={72} />
         <Contact x={130 + dx} y={GY} w={200} z={41} o={0.30} />
         <Hero f={f} x={186 + dx} y={GY} size={232} z={56} act={1} ph={0.1}
           costume={R.roles[2].costume as any} drive={-0.10 + E(f, 20, 26, 0, 0.22, OUT)}
@@ -1128,6 +1214,7 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
         {hit === 1 && <Fall x={472 + dx} y={584} w={330} f={f} at={52} n={18} z={72} c="#FF9A4A" />}
         {hit === 1 && <Puff x={472 + dx} y={632} f={f} at={52} c="#E0B080" z={73} n={15} />}
 
+        <FrontBand f={f} n={6} size={170} seed={13} react={hit} at={-10} />
         <Contact x={742 + dx} y={GY} w={214} z={41} o={0.32} />
         <Hero f={f} x={796 + dx} y={GY} size={244} z={56} act={2} ph={0.6}
           costume={{ constr: 1 }} cheer={E(f, 53, 61, 0, 1, OUT)} shock={hit ? 0.55 : 0} />
@@ -1174,7 +1261,11 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
         {/* ⛔ AND IT HAS TO BE IN FRONT OF THE BELT. At z40 the feed crates ran
             across y470..594 and the fuel line sat at y512 — the one boundary the
             whole shot exists to show was behind the furniture. */}
-        <FuelColumn x={228 + dx} y={GY} h={520} level={Math.max(0.10, level)} z={52} f={f} />
+        {/* ⛔ A 214px BONE STANDPIPE IN AN ORANGE ROOM READS AS A SLAB. Narrower,
+            darker cased, and the FUEL is the only bright thing in it, so the
+            level line is the readout rather than the tube. */}
+        <FuelColumn x={206 + dx} y={GY} h={500} w={144} level={Math.max(0.10, level)}
+          z={52} f={f} />
         {/* ⭐ THE BACKGROUND PROCESS IS THE COST: a belt feeding the throat, and
             it visibly SLOWS when he shutters it. The rate is the readout. */}
         <Runner y={470} f={f} z={44} rate={rate * 1.25} pitch={182} w={172} h={124}
@@ -1224,6 +1315,7 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
         </div>
         <Contact x={356 + dx} y={GY} w={210} z={41} o={0.34} />
 
+        <FrontBand f={f} n={5} size={164} seed={15} react={0} at={-6} x0={-90} x1={780} />
         <Contact x={848 + dx} y={GY} w={206} z={41} o={0.32} />
         <Hero f={f} x={898 + dx} y={GY} size={240} z={56} act={1} ph={0.4}
           costume={{ constr: 1 }} strain={E(f, 52, 58, 0, 0.8, OUT) - E(f, 62, 70, 0, 0.9, OUT)}
@@ -1306,10 +1398,7 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
         <Forearm x0={790 + dx + 254 * 0.34} y0={GY - 254 * 0.50}
           x1={846 + dx} y1={GY - 300 + throwK * 130} w={25} c={CLAYD} z={58} />
         {swing > 0.95 && <Ring x={506 + dx} y={470} f={f} at={34} c="#F0F8FF" z={74} s={1.6} dur={18} />}
-        {[0, 1].map(i => (
-          <Crew key={"c" + i} f={f} x={128 + i * 140} y={GY + 4} i={i + 1} size={152}
-            z={33} at={-14} loop={2} />
-        ))}
+        <FrontBand f={f} n={6} size={168} seed={17} react={E(f, 36, 46, 0, 1, OUT)} at={-14} />
         <Edge side="l" c="#1A2026" w={90} z={90} top={124} />
       </Cam>
       <BandChip t="RUN IT BEFORE YOU LAUNCH" c="#1A2026" fg="#EAF4FF" />
@@ -1360,9 +1449,12 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
             and the closing beat — the frame a viewer screenshots — was an empty
             step with a plate on it. 210px keeps the cast in the picture while
             still reading as a crowd going in. */}
-        {[0, 1, 2, 3].map(i => (
-          <Crew key={"c" + i} f={f} x={-24 + i * 158 + E(f, 0, dur, 0, 302, LIN) + dx}
-            y={GY - 12} i={i + 4} size={160} z={36} at={-10 + i * 4} loop={0} />
+        {/* ⛔ THE BAND GOES **BEHIND** THE KEYWORD HERE. Everywhere else it is
+            the near plane; on the CTA it was covering the one word the picture
+            spells out in full, which is the whole call to action. */}
+        {[0, 1, 2, 3, 4, 5].map(i => (
+          <Crew key={"c" + i} f={f} x={-70 + i * 172 + E(f, 0, dur, 0, 240, LIN) + dx}
+            y={GY + 52} i={i + 4} size={170} z={44} at={-10 + i * 3} loop={0} />
         ))}
         {/* ⛔ WHAT THE DOOR OPENS ON MUST BE A PLACE, NOT A CREAM SLAB — the
             same note the muster hall got. It is a lit hall receding away, with

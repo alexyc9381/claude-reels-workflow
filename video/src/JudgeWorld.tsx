@@ -140,8 +140,13 @@ export const NAME_BANNED = ["GPT", "CURSOR", "COPILOT", "GEMINI", "DEVIN"] as co
 export const PLACES: Record<string, Place> = {
   /* 1 · THE STAND — bone-panelled court corner under a hard warm clerestory.
      Frame 0 lives here so it is built for >=140. */
-  stand:  { back: "#B6BCC4", back2: "#F6F2E6", floor: "#D8C7A6", floor2: "#B29A72",
-            lip: "#4A3A26", key: "#FFDC9E", horizon: 498, grit: "#2A2016" },
+  /* ⛔ THE ARCHIVE WALL COST THE HOOK 10 POINTS OF FRAME-0 LUMA (153.7 -> 143.4),
+     because the density that fixed the picture is darker than the empty cream
+     field it replaced. The answer is NOT to lighten the wall back into mush —
+     it is to lift the ROOM around it, which is what a clerestory over an archive
+     does anyway. Brightness is the MEAN; the seal and the crowd keep the SPREAD. */
+  stand:  { back: "#C4CAD2", back2: "#FBF8EE", floor: "#E4D3B2", floor2: "#BEA67E",
+            lip: "#4A3A26", key: "#FFE4B0", horizon: 498, grit: "#2A2016" },
   /* 2 · THE INSTRUMENT BENCH — ink-green machine room, one brass gauge lit. */
   dial:   { back: "#0E1E1A", back2: "#274038", floor: "#1C2E28", floor2: "#0A1512",
             lip: "#050C0A", key: "#8FE0BE", horizon: 516, grit: "#050A08" },

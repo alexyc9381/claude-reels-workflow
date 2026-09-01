@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  W, E, OUT, IO, BACK, LIN, hexa, dkh, mxh, rnd, SH, SH_D, mono, ui,
+  W, E, OUT, IO, BACK, LIN, hexa, dkh, mxh, rnd, SH, SH_D, mono, ui, Crew,
   CLAY, CLAYD, GOLD, GREEN, RED, PAPER, CREAMB, INK, MUTE, TEAL, STEEL,
   BRASS, SODIUM, VIOLET, EMBER, OXIDE, SLATE, COPPER, OXBLOOD, WIG, INDIGO, MAG, R,
 } from "./JudgeWorld";
@@ -914,8 +914,8 @@ export const FuelColumn: React.FC<{ x: number; y: number; h?: number; w?: number
         part is now a lit bone standpipe, which puts the fuel line between two
         legible fields. */}
     <div style={{ position: "absolute", inset: 0, borderRadius: 12,
-      background: `linear-gradient(90deg, #6E6252 0%, #C6BCA6 34%, #8A7E6A 100%)`,
-      border: "9px solid #2A2018" }} />
+      background: `linear-gradient(90deg, #2A241C 0%, #5A5044 34%, #322C24 100%)`,
+      border: "10px solid #170F0A" }} />
     <div style={{ position: "absolute", left: 11, bottom: 11, right: 11, height: (hh - 22) * level,
       background: `linear-gradient(180deg, #FFD07A 0%, ${EMBER} 100%)` }} />
     <div style={{ position: "absolute", left: 11, bottom: 11 + (hh - 22) * level - 12, right: 11,
@@ -1007,3 +1007,250 @@ export const Wig: React.FC<{ x: number; y: number; s?: number; z?: number }> =
     </svg>
   </div>
 );
+
+/* =========================================================================
+   ⭐⭐⭐ THE LOAD.  Rebuilt after Alex: *"the begining scene needs to be way
+   more interesting like OX UNLAZY BOSS"*.
+
+   Frame-stripped all three rather than reasoning from memory, and the shape is
+   the same in every one: **a CLAUDE is the subject and physical work is being
+   done through his body against a LOAD.** OX ropes a charging bull. UNLAZY has
+   a pipe in his mouth inflating a giant DONE balloon until it bursts. BOSS puts
+   a colossal boss over a small Claude holding work up at him.
+
+   v1 of this hook made a chart recorder the subject and left the Claude
+   standing in the corner watching it. Nothing happened TO him, so nothing
+   happened. That is not a polish problem and no amount of tuning the machine
+   would have reached it.
+
+   THE SEAL is the villain of this reel made liftable: the gold `DONE` he is
+   holding over his head, cracking under its own weight because the claim cannot
+   carry itself.
+   ⛔ WEIGHT IS DEFORMATION. It BOWS on a sampled centre-line, the cracks spread
+   on their own clock, and the shards fall before it goes.
+   ====================================================================== */
+export const BigSeal: React.FC<{
+  x: number; y: number; d?: number; z?: number; f: number;
+  /** 0..1 — how far the failure has progressed. Drives cracks, bow and sag. */
+  fail?: number;
+  /** 0..1 — the shatter itself */
+  burst?: number;
+  bow?: number; rot?: number;
+}> = ({ x, y, d = 460, z = 62, f, fail = 0, burst = 0, bow = 0, rot = 0 }) => {
+  const cracks = Math.min(11, Math.floor(fail * 12));
+  const gone = burst > 0.02;
+  return (
+    <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+      zIndex: z, transform: `rotate(${rot}deg) scaleY(${1 - bow * 0.06}) scaleX(${1 + bow * 0.04})`,
+      transformOrigin: "50% 100%", opacity: gone ? Math.max(0, 1 - burst * 3.2) : 1 }}>
+      <svg viewBox="0 0 200 200" width={d} height={d} style={{ overflow: "visible" }}>
+        {/* the scalloped rim — 22 lobes, which is what makes a disc read as a SEAL */}
+        {Array.from({ length: 22 }, (_, i) => {
+          const a = (i / 22) * Math.PI * 2;
+          return <circle key={i} cx={100 + Math.cos(a) * 82} cy={100 + Math.sin(a) * 82} r={19}
+            fill="#B8842A" />;
+        })}
+        <circle cx={100} cy={100} r={84} fill="#C89A38" />
+        <circle cx={100} cy={100} r={78} fill={GOLD} />
+        <circle cx={100} cy={100} r={78} fill="none" stroke="#8E6218" strokeWidth={6} />
+        <circle cx={100} cy={100} r={60} fill="none" stroke="#8E6218" strokeWidth={4} />
+        {/* the device pressed into it: the tick, and the word it is lying about */}
+        <path d="M 72 100 L 90 120 L 132 74" fill="none" stroke="#4A3208" strokeWidth={15}
+          strokeLinecap="round" strokeLinejoin="round" />
+        <text x={100} y={158} textAnchor="middle" fill="#4A3208"
+          style={{ ...mono(25, 800), letterSpacing: 5 }}>{R.lie}</text>
+        {/* the highlight, so it reads as cast metal and not a flat disc */}
+        <ellipse cx={70} cy={62} rx={30} ry={20} fill={hexa("#FFF0C8", 0.34)}
+          transform="rotate(-28 70 62)" />
+        {/* ⭐ THE CRACKS ARE THE ANTICIPATION. They spread from the rim inward on
+            their own clock, each one longer than the last, so at any frame the
+            viewer can see how much is left. */}
+        {Array.from({ length: 11 }, (_, i) => {
+          if (i >= cracks) return null;
+          const a = (i / 11) * Math.PI * 2 + 0.4;
+          /* ⛔ A CRACK THAT STOPS AT THE RIM IS A SCRATCH. These run to the hub. */
+          const r0 = 84, r1 = 84 - (34 + rnd(i, 3) * 52) * Math.min(1, fail * 1.6);
+          const mx = 100 + Math.cos(a + 0.16) * ((r0 + r1) / 2);
+          const my = 100 + Math.sin(a + 0.16) * ((r0 + r1) / 2);
+          return (
+            <path key={"ck" + i}
+              d={`M ${100 + Math.cos(a) * r0} ${100 + Math.sin(a) * r0} Q ${mx} ${my} ${100 + Math.cos(a - 0.2) * r1} ${100 + Math.sin(a - 0.2) * r1}`}
+              fill="none" stroke="#3A2606" strokeWidth={3 + fail * 4} strokeLinecap="round" />
+          );
+        })}
+      </svg>
+      {/* the shatter: 34 shards of real gold, not a puff */}
+      {gone && Array.from({ length: 52 }, (_, i) => {
+        const a = (i / 52) * Math.PI * 2 + rnd(i, 7) * 0.5;
+        /* ⛔ THE BLAST WAS LEAVING FRAME BEFORE IT COULD BE SEEN. 200-540px of
+           throw plus 620 of drop put most of 52 shards off-panel within four
+           frames of the break, so the payoff read as the seal simply vanishing.
+           Half the throw, and they stay in the picture while they fall. */
+        const sp = 110 + rnd(i, 11) * 210;
+        const px = d / 2 + Math.cos(a) * sp * burst;
+        const py = d / 2 + Math.sin(a) * sp * burst + burst * burst * 380;
+        const s = 26 + rnd(i, 5) * 46;
+        return (
+          <div key={"sh" + i} style={{ position: "absolute", left: px - s / 2, top: py - s / 2,
+            width: s, height: s * 0.8, zIndex: z + 2, opacity: Math.max(0, 1 - burst * 0.55),
+            transform: `rotate(${i * 47 + burst * 420}deg)`,
+            clipPath: "polygon(0% 30%, 46% 0%, 100% 22%, 78% 100%, 18% 84%)",
+            background: i % 3 === 0 ? "#B8842A" : i % 3 === 1 ? GOLD : "#F0D07A" }} />
+        );
+      })}
+    </div>
+  );
+};
+
+/** what was UNDER the seal all along: the real work, unfinished. Raw frame,
+    visible fixings, holes you can see the room through.
+    ⛔ IT IS NOT DRAWN UGLY — it is drawn UNFINISHED. Bright bare timber and
+    clean metal, honestly half-built, which is a different claim from shabby. */
+export const RawWork: React.FC<{ x: number; y: number; w?: number; z?: number; k: number; f: number }> =
+  ({ x, y, w: ww = 330, z = 58, k, f }) => {
+  const hh = ww * 0.78;
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh / 2, width: ww, height: hh,
+      zIndex: z, opacity: k, transform: `scale(${0.86 + k * 0.14}) rotate(${(1 - k) * -7}deg)` }}>
+      {/* ⛔⛔ NOT A WIREFRAME. v1 drew this as a grid of bare struts and that is
+          reel 124's exact rejected shape — a grey outline standing in for a
+          thing. What is under the gold seal is REAL WORK, honestly half-built:
+          solid finished panels on one side, bright bare metal that IS done, and
+          open bays you can see the room through on the other. Unfinished is a
+          different claim from ugly, and it has to be drawn as one. */}
+      <svg viewBox="0 0 330 258" width={ww} height={hh} style={{ overflow: "visible" }}>
+        <rect x={6} y={6} width={318} height={246} rx={5} fill="#5A4A34" />
+        <rect x={6} y={6} width={318} height={13} fill="#8A7450" />
+        {/* the half that is genuinely FINISHED — solid, painted, working */}
+        <rect x={18} y={30} width={140} height={210} fill="#3F6E5E" />
+        <rect x={18} y={30} width={140} height={11} fill="#6EA492" />
+        <rect x={32} y={54} width={112} height={54} rx={4} fill="#8AC4B0" />
+        {[0, 1, 2].map(i => (
+          <rect key={"r" + i} x={32} y={124 + i * 30} width={112 - i * 22} height={13} rx={3}
+            fill={hexa("#CFE8DE", 0.62 - i * 0.14)} />
+        ))}
+        <rect x={32} y={214} width={62} height={16} rx={4} fill="#E7B24C" />
+        {/* the half that is NOT — open bays, exposed studs, a cable hanging */}
+        {[0, 1, 2].map(i => (
+          <rect key={"s" + i} x={176 + i * 52} y={30} width={16} height={210} fill="#8A7450" />
+        ))}
+        {[0, 1].map(i => (
+          <rect key={"b" + i} x={192 + i * 52} y={40 + i * 30} width={36} height={190 - i * 40}
+            fill="#1E2A26" />
+        ))}
+        <rect x={168} y={120} width={148} height={12} fill="#8A7450" />
+        <path d="M 240 132 q 18 44 -8 74 q -20 22 4 34" fill="none" stroke="#2E3A36"
+          strokeWidth={7} strokeLinecap="round" />
+        {/* the fixings, showing, because nobody has covered them yet */}
+        {[[24, 24], [306, 24], [24, 234], [306, 234], [166, 24], [166, 234]].map(([cx, cy], i) => (
+          <circle key={"f" + i} cx={cx} cy={cy} r={8} fill="#C9A15A" />
+        ))}
+      </svg>
+    </div>
+  );
+};
+
+/* =========================================================================
+   ⭐⭐⭐ THE TWO DEVICES THAT MAKE OX / UNLAZY / BOSS LOOK DENSE.
+
+   Measured off their own delivered body frames rather than remembered: BOSS
+   carries **8 to 12 Claudes in a band across the bottom of EVERY body frame**
+   plus a back wall of real UI; OX fills a floor with hundreds of coins and a
+   60-tile grid; UNLAZY runs six terminals with real code and five red X marks.
+
+   This reel shipped body scenes with ONE object on an empty floor and 0-2
+   sprites, and Alex: *"the animations quality is just not anywhere near as good
+   nor interesting."* It is not a polish gap, it is a DENSITY gap, and it has
+   exactly two shapes. Both are on-theme here for free: a court has a public
+   GALLERY and it has WALLS OF CASE FILES.
+   ====================================================================== */
+
+/** ⭐ THE GALLERY BAND. N Claudes across the frame in R ranks, back ranks in
+    progressively darker clay — size alone is a texture, the VALUE RAMP is what
+    makes depth readable, and it is the axis the greyscale audit can see.
+    ⛔ Pitch is arithmetic: `spacing >= 0.85 x size`, computed here, not guessed. */
+export const Gallery: React.FC<{
+  f: number; x0?: number; x1?: number; y: number; n?: number; ranks?: number;
+  size?: number; z?: number; at?: number; react?: number; seed?: number;
+}> = ({ f, x0 = -30, x1 = 1042, y, n = 9, ranks = 2, size = 116, z = 26, at = -24,
+        react = 0, seed = 0 }) => (
+  <>{Array.from({ length: ranks }, (_, r) => {
+    const per = Math.ceil(n / ranks);
+    const sz = size * (1 - r * 0.20);
+    const span = (x1 - x0) * (1 - r * 0.06);
+    const pitch = span / (per + 1);
+    return Array.from({ length: per }, (_, i) => {
+      const idx = r * per + i;
+      const tint = r === 0 ? undefined : r === 1 ? "#A85A38" : "#7E4028";
+      return (
+        <Crew key={`gal${seed}${r}${i}`} f={f + idx * 7} i={idx + seed * 3}
+          x={x0 + pitch * (i + 1) + (r % 2) * pitch * 0.5}
+          y={y - r * sz * 0.34} size={sz} z={z - r * 3} at={at + idx * 2}
+          loop={react > 0.5 ? 2 : (idx + seed) % 4} tint={tint}
+          cheer={react > 0.5 ? react : 0} />
+      );
+    });
+  })}</>
+);
+
+/** ⭐ THE EXHIBIT WALL. Rows of real case files with readable rulings, tabs and
+    reference marks — countable multiplicity, which is the other half of what
+    the reference reels do. `lit` runs a light down it so the wall is also the
+    scene's background process. */
+export const ExhibitWall: React.FC<{
+  x: number; y: number; w?: number; h?: number; z?: number; f: number;
+  cols?: number; rows?: number; c?: string; lit?: number; flagged?: number;
+}> = ({ x, y, w: ww = 980, h: hh = 320, z = 16, f, cols = 8, rows = 3,
+        c = "#7A5230", lit = 0.4, flagged = 0 }) => {
+  const cw = ww / cols, ch = hh / rows;
+  const sweep = ((f * 7) % (ww + 300)) - 150;
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+      zIndex: z, overflow: "hidden" }}>
+      {/* ⛔ THE WALL MUST NOT COMPETE WITH THE HERO. v1 ran 24 pale tiles at the
+          same value as the gold, and on the strip the wall was the second thing
+          you saw. The carcass is now near-black, the files sit INSIDE
+          pigeonholes with a lip and a shadow, and the whole thing reads as
+          storage the seal is lit against. */}
+      {/* ⛔ AND THE CARCASS CANNOT BE BLACK EITHER. At 0.62/0.80 the wall took
+          frame-0 luma from 153.7 to 140.5 — passing with no margin — and left
+          the claim plate as nothing but the header pill. A mid oak carcass keeps
+          the files reading against it and gives the frame its brightness back. */}
+      <div style={{ position: "absolute", inset: 0,
+        background: `linear-gradient(180deg, ${dkh(c, 0.18)} 0%, ${dkh(c, 0.44)} 100%)` }} />
+      {Array.from({ length: cols * rows }, (_, i) => {
+        const cx = (i % cols) * cw, cy = Math.floor(i / cols) * ch;
+        const flag = i < flagged;
+        const face = flag ? "#B4342A" : [ "#C9B48C", "#B8A279", "#D6C4A0" ][i % 3];
+        const lean = (rnd(i, 5) - 0.5) * 5;
+        const nf = 3 + (i % 2);
+        return (
+          <div key={"ex" + i} style={{ position: "absolute", left: cx + 5, top: cy + 5,
+            width: cw - 10, height: ch - 10, background: dkh(c, 0.56),
+            boxShadow: "inset 0 6px 12px rgba(0,0,0,0.5)" }}>
+            {/* three or four bound files standing in the hole, at real depth */}
+            {Array.from({ length: nf }, (_, j) => (
+              <div key={j} style={{ position: "absolute", bottom: 3,
+                left: 6 + j * ((cw - 22) / nf),
+                width: (cw - 26) / nf - 3, height: ch - 22 - (j % 2) * 7,
+                transform: `rotate(${lean * (j % 2 ? 1 : -0.6)}deg)`, transformOrigin: "50% 100%",
+                background: flag ? ["#B4342A", "#8E2A22"][j % 2] : ["#DCC9A2", "#C2AA80", "#EADCBE"][j % 3] }}>
+                <div style={{ position: "absolute", left: 0, top: "22%", width: "100%", height: 3,
+                  background: hexa("#3A2E18", 0.34) }} />
+                <div style={{ position: "absolute", left: 0, top: "46%", width: "100%", height: 3,
+                  background: hexa("#3A2E18", 0.22) }} />
+              </div>
+            ))}
+            {/* the hole's own lip, so it reads as JOINERY and not a painted square */}
+            <div style={{ position: "absolute", left: -3, bottom: -4, width: cw - 4, height: 7,
+              background: mxh(c, 0.24) }} />
+          </div>
+        );
+      })}
+      {/* the light running the wall — the background process, and it is what a
+          clerk's lamp on a runner actually does */}
+      <div style={{ position: "absolute", left: sweep, top: -20, width: 190, height: hh + 40,
+        background: `linear-gradient(90deg, ${hexa("#FFE8B8", 0)} 0%, ${hexa("#FFE8B8", 0.30 * lit)} 50%, ${hexa("#FFE8B8", 0)} 100%)` }} />
+    </div>
+  );
+};
