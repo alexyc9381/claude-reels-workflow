@@ -235,3 +235,27 @@ pays for** (LARGE x BRIGHT x FAST). One change, all three notes.
 
 ⭐ And the look gate came out the best in the repo on the way: **BODY_SAT 67.7%** against AGENCY's
 57.9, with the black point held at 26.5.
+
+## ⛔⛔⛔ AND THE DELIVERY ALMOST SHIPPED THE REJECTED CUT
+
+Revision 2 was copied over revision 1 at the same filenames. Every local check passed —
+checksums matched the mount, `ls` showed the new size and mtime, the DriveFS daemon was running,
+a neighbouring reel's files still carried their item-ids — and **the `com.google.drivefs.item-id`
+xattr on all eleven delivered files was gone and stayed gone for thirteen minutes.**
+
+⭐⭐⭐ **A FAILED OVERWRITE IS THE WORST-SHAPED DELIVERY BUG THERE IS.** A failed *create* leaves
+nothing at the path and is obvious. A failed *overwrite* leaves **the previous version live on the
+server under the new file's name** — so Alex would have opened `133_BUILD_house.mp4`, expecting
+the rebuild he had just asked for, and been served **the exact cut he had rejected**, with a
+checksum saying the delivery was correct.
+
+> **A checksum against the mount proves the COPY. The item-id proves the UPLOAD. An overwrite can
+> pass the first and fail the second forever.**
+
+**The fix:** guard that every file has a non-empty local original, `rm` the mount copies, settle
+five seconds, then copy as a fresh CREATE. All eleven files ingested **inside 60 seconds**, against
+thirteen minutes of nothing for the overwrite. Written up as
+`feedback_drive_overwrite_never_ingests` — it is the missing half of
+`risk_drive_mount_fileprovider_corrupt`, which covers a dead domain; this one fires with a
+perfectly healthy one, on one operation, and only when REPLACING work, which is what a revision
+always is.
