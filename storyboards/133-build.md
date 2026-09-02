@@ -374,3 +374,62 @@ competitor is put on a loser, and there is still no figure anywhere about money.
 4. ⛔ **`shopify.svg` ships `fill="#ffffff"`** — white on the house's white mark tile. Set to
    Shopify's real brand green `#7AB55C`. Every other mark in the reel was already correctly
    filled; this was the only one.
+
+---
+
+## REVISION 6 — THE PRICE TAG (the hook, rebuilt for "too cluttered")
+
+> *"hook scene seems too cluttered and not straightfowrad enoguh ehre"* — Alex, rev 5
+
+### The count that made the note objective
+
+The defect was never object COUNT, it was REPEATS. On the shipped payoff frame:
+
+| idea | said how many times | where |
+|---|---|---|
+| free / $0 | **4** | header pill · band chip · `$0 · FREE` plate · FREE stencilled on the crates |
+| Fiverr / Upwork | **3** | header pill · band chip · two shipping labels |
+
+The band chip read `3 FREE TOOLS · FIVERR + UPWORK` directly beneath a header
+reading `3 FREE AI TOOLS / SELL THEM ON FIVERR`. A near-verbatim duplicate,
+stacked. Five boxes of type and none of them was the hero.
+
+### And it failed the mute test
+
+`feedback_illustrate_the_sentence_not_the_set`: the VO verb is **SELL**. The
+image was a Claude dragging a pallet in — that is DELIVERY. Nothing in frame
+showed an exchange, a price, or a buyer.
+
+### The rebuild
+
+**ONE object: a price tag.** It is the object of selling, and its two faces
+carry the entire sentence — `$0` on the front, the marketplaces on the back.
+
+| f | word | what happens |
+|---|---|---|
+| 0 | *"You can sell…"* | an EMPTY, bright, cool shop front. Frame-0 luma **151.1** (bar 140) |
+| 6 | | the tag's tip enters the top of frame |
+| 0-20 | *"…these three free"* | a 570px near-black tag swings down on a real chain |
+| 20 | | it lands; damped swing `sin((f-20)·0.36)·e^(-(f-20)/30)·12` |
+| 26 | *"Claude"* | **`$0`** stamps onto the face — the only type in frame that is not the header |
+| 40 | *"on"* | the card begins its TURN (drawn, front clamped ≥0.46, never edge-on) |
+| 48 | *"Fiverr"* | the reverse lands: the real fiverr mark in its own green on the black card |
+| 53 | *"Upwork"* | a rule draws and the Upwork mark lands under it — **same card** |
+
+### What was removed
+`$0 · FREE` plate · the S0 band chip · both shipping labels · the FreeLoad pallet,
+its three crates, three dials and the tow strap. Two ideas now, not five.
+
+### Value structure — `feedback_eyecatch_is_value_structure`
+New place `front`: pale COOL slate-blue ground (`#6E86AE` → `#FDFBF4`), a
+near-black mass that **ARRIVES** rather than sitting in frame 0, and one hot
+accent (the brand greens, plus the Claude's own coral). The hook shipped on
+`row` — warm sodium purple over cream over gold — the exact warm-on-warm mush
+the memory names.
+
+⛔ Both card faces stay near-black. The first build made the reverse Fiverr
+green and put `si_fiverr.svg` on it — which ships `fill="#1DBF73"`, the identical
+green, so the mark rendered invisible. Same trap as `shopify.svg` on a white tile.
+
+⛔ Both marketplaces ride on ONE card. Hung as a second tag, Upwork clipped to
+the word "up": a 570px card on a 1012px panel leaves 113px of room.

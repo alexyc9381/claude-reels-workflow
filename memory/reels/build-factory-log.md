@@ -435,3 +435,723 @@ source — took it to **141.1**.
 `MOTION mean 6.73 · 0/11 under bar · 0 dead runs · hook 5.82` ·
 `HOOK_LUMA 141.1 ✓ · BODY_SAT 65.9% ✓ · BODY_BLACK p10 19.6 ✓` ·
 `verify_reel 8/8` · `dHash mean 22.2 MIN 11` · **11 of 11 ingested to the Drive server.**
+
+---
+
+## REVISION 5 — "more interesting, more options, no brown sprite"
+
+> *"hook scene needs to be more interesting give a few more potential options and dont have a brown claude sprite here"*
+
+### The brown sprite was mine, not the house's
+
+`SlopKit.tsx:31` → `const C = tint || "#D97757"`. The house clay IS the Claude orange. I had been
+passing `tint="#8E4A2E"` — a mud brown — in **31 places** (27 in `BuildScenes.tsx`, 4 in
+`BuildHooks.tsx`) to "sit the sprite into the workshop". Checked OX 119 and UNLAZY 120: **neither
+passes `tint` anywhere.** They let the clay be clay and darken the SET instead.
+
+Stripped all 31 with `re.sub(r'\s*tint="#8E4A2E"', '', s)`. Every gate stayed green and BODY_SAT
+went **66.0%** (bar 34) because the hero is now a saturated object instead of a brown one.
+
+⭐ **The generalisable bit: a "tint" prop is a licence to break the character.** The set is the
+place to lose contrast, never the hero.
+
+### Three more hooks, built on the mechanism axis
+
+The first four (`shutter/haul/belt/stamp`) predate the OX/UNLAZY frame-strip, so three of them have
+no colossal object carrying the word — which is exactly why the note came back. The three new ones
+each take a different mechanism and give the payoff word 45-60% of the panel:
+
+| id | mechanism | the object | why it might win |
+|---|---|---|---|
+| `vault` | REVELATION | 620px round vault door, FREE cut into the face, spoked handwheel turning, swings open on three running machines | widest silhouette; the turn is real geometry, not a rotateY |
+| `tag` | SCALE | 470×360 swing tag drops on a chain, `$0` at fontSize 150, FREE under it, damped swing `sin((f-22)·0.34)·e^(-(f-22)/34)·13` | **most legible at thumbnail size — the number IS the object** |
+| `pile` | ACCUMULATION | chute stencilled FREE pours 14 machines, they pile past the Claude's chest | closest to UNLAZY's growth shape; most energy |
+
+⛔ `HOOKS` had to move to the END of `BuildHooks.tsx` — TS2448, the map referenced
+`HookVault/HookTag/HookPile` above their own declarations.
+
+### What still ships
+
+`PICKED = "shutter"` — the rev-4 FreeLoad. It is the only one of the seven with a beat on **every
+one of the eight spoken hook words**, which is the "each word needs animations" note from rev 4.
+`tag` and `pile` are the strongest alternates and are one line away.
+
+### Gates after the change
+```
+HOOK_LUMA   142.2   (bar 140, frame 0 only)      ✓
+BODY_SAT     66.0%  (bar 34)                     ✓
+BODY_BLACK   19.6   (bar ≤35)                    ✓
+motion mean   6.94  · scenes under bar 0/11 · no static stretch ≥0.6s
+```
+Motion mean is still under the 9.00 house median — standing flag, reported not hidden.
+
+### Delivery
+Delete-then-create per [[feedback_drive_overwrite_never_ingests]]. **15/15 files carry a
+`com.google.drivefs.item-id#S` inside ~30s**, including the seven hook previews and their READ ME.
+
+---
+
+## REVISION 6 — THE PRICE TAG
+
+> *"hook scene seems too cluttered and not straightfowrad enoguh ehre"*
+
+### The object count PASSED and the frame was still wrong
+
+`feedback_hook_simplicity` says count the objects. I counted: one 780px pallet, one Claude. Clean.
+**The rule's own test said the frame was fine.** What was actually wrong is a different count:
+
+```
+"free" / "$0"        said FOUR times   header · band chip · $0 plate · FREE on the crates
+"Fiverr" / "Upwork"  said THREE times  header · band chip · two shipping labels
+```
+
+The band chip read `3 FREE TOOLS · FIVERR + UPWORK` directly under a header reading `3 FREE AI
+TOOLS / SELL THEM ON FIVERR`. **Clutter is density of STATEMENTS, not of objects.** New standing
+rule: [[feedback_cluttered_is_a_repeat_count]].
+
+⭐ And each box had been added on a different round, each answering a real note, each defensible on
+its own. Four redundant headlines is not a decision anyone makes; it is an accretion.
+
+### The mute test found the deeper defect
+
+The VO verb is **SELL** and the picture was a Claude dragging a pallet in — DELIVERY. Replaced with
+**a price tag**: the object of selling, whose two faces carry the whole sentence.
+
+| f | word | beat |
+|---|---|---|
+| 0 | *"You can sell…"* | empty, bright, cool shop front — frame-0 luma **151.2** |
+| 0-20 | *"…three free"* | a 570px near-black tag swings down on a real link chain |
+| 26 | *"Claude"* | **`$0`** stamps on — the only type in frame that is not the header |
+| 40 | *"on"* | the card TURNS (drawn, front clamped ≥0.46, never edge-on) |
+| 48 | *"Fiverr"* | the real fiverr mark on the reverse |
+| 53 | *"Upwork"* | a rule draws, the Upwork mark lands under it — **same card** |
+
+Deleted: the `$0` plate, the S0 band chip, both shipping labels, the pallet, three crates, three
+dials, the tow strap. New place `front` — pale COOL slate-blue, per
+[[feedback_eyecatch_is_value_structure]]; the old hook was warm sodium on warm gold, the exact
+"monochrome mush" that memory names.
+
+### ⭐⭐ Deleting four elements RAISED the motion score
+
+```
+frame-0 luma  142.2 -> 151.2      motion mean  6.94 -> 7.22
+```
+`feedback_hook_simplicity` warns a bare hook scores low and says buy it back with SCALE. A 570px
+tag falling 454px and then turning repaints more panel than six small props parked in place.
+**Simplifying and scoring well are only in tension if the one survivor does not move.**
+
+### Two bugs, both memory in a new costume
+- ⛔ reverse face set to Fiverr green + `si_fiverr.svg`, which ships `fill="#1DBF73"` — the
+  identical green, so the mark was invisible. The `shopify.svg`-on-white trap again. Fixed by
+  keeping BOTH faces near-black, which also holds the value structure through the turn.
+- ⛔ the tag pivoted on its card centre, putting the chain 224px from the eyelet. **Anything that
+  hangs takes its pivot AND its coordinate from the attachment point.**
+- ⛔ Upwork as a SECOND hanging tag clipped to the word "up" — a 570px card on a 1012px panel
+  leaves 113px. Both marks moved onto the one card, which is also strictly simpler.
+
+### Gates
+```
+HOOK_LUMA 151.2 ✓   BODY_SAT 66.0% ✓   BODY_BLACK 19.6 ✓
+motion 7.22 · 0/11 under bar · no static stretch
+verify_reel 5/5 blocking ✓        dHash mean 22.1 · MIN 11 (bars 14/10) ✓
+```
+Hook id renamed `shutter` -> `price` (the deliverable names its files by that id).
+Delivered delete-then-create: **16/16 item-ids in ~30s**, plus `133_BUILD_hook_before_after.png`.
+
+---
+
+## REVISION 7 — THE DENSITY PASS
+
+> *"still not enough motion and interesting stuff, a bit too static, interesting components even needs to be elevated a lot"*
+
+**This was the number I had been REPORTING as a standing flag for four rounds instead of fixing.**
+`feedback_the_crowd_is_a_near_band` says this exact note is a DENSITY note, and reel 132 took it at
+a HIGHER score than this reel was at — 8.92 against my 7.22.
+
+### The shape of the deficit was in the per-scene table, not the mean
+
+```
+S0 9.07  S1 9.35  S2 6.41  S3 10.27  S4 6.02  S5 8.01
+S6 5.48  S7 6.97  S8 6.46  S9 7.99   S10 10.73
+```
+⭐ **The three TOOL scenes are 15.11s of a 29.93s reel — over half — and they were the three lowest
+in it.** Every scene under 2.2s scored 8-10.7; every scene over 4.9s scored 5.5-6.4. That is not a
+coincidence, it is "arrives and parks".
+
+Counted off the contact sheet against the reference table:
+
+| | OX 119 | UNLAZY 120 | BOSS 128 | **133 before** |
+|---|---|---|---|---|
+| sprites per body frame | 3-6 | 2-5 | 8-12 | **1** |
+| near-camera crowd band | — | — | every frame | **one scene** |
+| countable wall content | yes | yes | yes | **T3's wall was BLANK TEAL** |
+
+### What actually moved the number, in order
+
+| change | effect |
+|---|---|
+| ⭐⭐⭐ **content that FLIES from the machine to the wall on arcs** | **the big one** — S2 7.16→9.35 |
+| near band, forced onto Crew's BIG loops (PACE/HOP) | +0.4 |
+| T2's three clones bobbing instead of holding an idle | S4 7.02→7.90 |
+| T2's copies spread f76-104 → f30-102 | the first half stops being empty |
+| T3's chair DOLLIES while it turns instead of spinning on the spot | S6 5.83→7.85 |
+| near bands on the two remaining low scenes | S7 +0.9 · S8 +1.2 |
+| S6 pre-seeded (it opened on 8 dead frames, min 1.69) | +0.03 |
+
+⛔⛔ **A SWAY IS NOT MOTION.** The first band let `Crew`'s loop fall out of `(i+seed)%5`, so three
+of five members drew WORK — a 7° lean that repaints its own outline. The whole first pass with a
+band AND a filling wall moved the reel **7.22 → 7.49**. Forcing PACE/HOP and making the wall items
+FLY took the same elements to **8.35**. Same components, same count; the difference is travel.
+
+⛔ **And a bigger band is not free.** At 244px it buried T2's clones — the money shot of that
+scene. `feedback_hook_simplicity`'s trade-off in reverse: the band is sized per scene by what that
+scene's own subject can afford, not by the audit.
+
+### ⛔⛔⛔ THE COSTUME BUG — TWO `COSTUMES` ARRAYS IN THE CLONE CHAIN, DIFFERENT ORDERS
+
+Alex had already said no brown sprites. I excluded the brown-hair costumes at indices **6 and 7**,
+verified against `BillWorld`. **The reel imports `HwWorld`, where girl/fro are at 4 and 5** — so my
+"fix" removed `suit` and `prof` and kept both brown ones. The brown was still there and I only
+caught it by sampling the pixel (`#634122` = `fro`'s `#6B4A2F` under the grade).
+
+⭐ Then a third: **`prof` is a brown TWEED BLAZER (`#6E5A3C`)** — not hair, a body garment, so it
+reads as a brown-torsoed Claude, which is worse. It was on T2's hero and all three clones.
+**Grep the costume block for brown FILLS; never trust the costume's NAME or an array's order.**
+Final exclusion: girl(4), fro(5), prof(7). `prof` → `suit` in 5 places.
+
+### Final
+```
+motion  7.22 -> 8.71   0/11 under bar · no static stretch   (house median 9.00)
+HOOK_LUMA 151.2 ✓  BODY_SAT 63.6% ✓  BODY_BLACK 19.4 ✓
+verify_reel 5/5 ✓   dHash mean 22.9 · MIN 13 (bars 14/10) ✓
+```
+Delivered delete-then-create: **16/16 item-ids**, plus `133_BUILD_density_before_after.png`.
+
+---
+
+## REVISION 9 — SWAP PICKED, GEMS RECUT
+
+> *"the first option is best but it needs to be more interesting polished the gems and stuff here as well more interesting throughout as well here"*
+
+`PICKED: HookId = "swap"`. `makeReel` reads it for the reel's first Sequence, so the shipped opening
+and the candidate preview are the same code and cannot drift.
+
+### ⛔ "MORE INTERESTING **THROUGHOUT**" IS A DIFFERENT NOTE FROM "MORE INTERESTING"
+
+The first swap had three launches and a payoff and **nothing between them** — the middle third was
+three objects sliding at a constant rate. Rev 9 puts a beat on every spoken word and gives the room
+a process that never stops:
+
+| f | word | beat |
+|---|---|---|
+| 0 | *"You"* | the belt is ALREADY running, a gem already a third across |
+| 6 | *"sell"* | ⭐ he WINDS UP and shoves — the stone accelerates off his hands |
+| 10 / 14 | *"three" / "free"* | two more launch on their own shoves; three are countable |
+| 26 | *"Claude"* | all three cross the lamp pool and FLARE |
+| 31 | *"plugins"* | each name plate snaps on under its own stone |
+| 40 | *"on"* | the return rail starts, the first order comes back |
+| 48 / 55 | *"Fiverr" / "Upwork"* | the mark lands CENTRE alone at ~55% of panel, then pairs |
+
+⭐ **The single biggest lever was the ROLLER BELT** — seventeen rollers turning the full width for
+the whole take. It is continuous, it is the room's own process, and it is what makes the middle of
+the shot alive instead of three sliding objects ([[feedback_a_sway_is_not_motion]]).
+
+### ⭐⭐⭐ WHAT MAKES A GEM LOOK LIKE A GEM — four things, all of them drawn
+
+The first cut was twelve flat facets and read as a **coloured arrowhead**. The outline is not what
+does it; light doing four different things inside the stone is:
+
+1. **FACETS at many angles** — six crown, six pavilion, six lower-girdle, each on its own tint off
+   the tool's colour so no two neighbours match.
+2. **DISPERSION (the "fire")** — thin spectral slivers where facets meet, warm on one side and cool
+   on the other. ⭐ **This is the single thing that separates a gem from a plastic bead.**
+3. **BRILLIANCE** — three internal facets flashing OUT OF PHASE, so the stone is never twice the same.
+4. **A CAUSTIC** — the coloured light it throws on the surface under it. A gem is a light SOURCE in
+   a shot, not a shape sitting in one.
+
+Thirty-one drawn elements. Plus the flare is a function of **distance from the lamp**, not of the
+clock, so the stones brighten because they pass under a light rather than because I said so.
+
+### The measurements
+```
+hook preview   9.39 -> 11.96      (the jester, the previous house best, was 10.90)
+hook in-reel                14.69
+REEL OVERALL   8.71 -> 9.17       ⭐ FIRST TIME THIS REEL CLEARS THE 9.00 HOUSE MEDIAN
+HOOK_LUMA 142.4 ✓  BODY_SAT 63.6% ✓  BODY_BLACK 19.4 ✓  0/11 under bar · no static stretch
+verify_reel 5/5 ✓   dHash mean 22.7 · MIN 13 ✓
+```
+
+### ⛔⛔ THE SAME JSX MISTAKE TWICE IN ONE SESSION
+A `{/* comment */}` placed inside a `.map()` return or a `cond ? ( … ) : null` makes **two sibling
+expressions where one is required** — TS1005, and the render silently keeps using the stale mp4 so
+the numbers look like the edit did nothing. **A JSX comment goes ABOVE the expression, never as its
+first child.** Both times I only caught it because the measured number did not move.
+
+Delivered delete-then-create: **20/20 item-ids**, plus `133_BUILD_opening.png`.
+
+---
+
+## REVISION 10 — HIERARCHY
+
+> *"each scene is not interesting hierarchical enough etc main focus not interesting here"*
+
+### ⛔⛔⛔ THE DENSITY PASS BOUGHT MOTION AND PAID FOR IT IN HIERARCHY
+
+Rev 7 added crowd bands and wall content and took motion 7.22 → 8.71. Rev 9's hook took the reel to
+9.17. **And this note is the bill for rev 7.** Reel 90 named it exactly: *"that is not hierarchy,
+that is a crowded frame with no first place."*
+
+Contact-sheeted all eleven scenes and named, per scene, the VO line's subject against what actually
+dominates the frame. **In eight of eleven the hero sat at 15-25% of the panel — the same visual
+weight as the crowd band, the wall content and the room.** The hook's gem is ~32% and glows; the
+body could not follow it.
+
+### The three moves, in the order that mattered
+
+**1 · THE CROWD IS LIT WRONG, AND THE FIX IS NOT A TINT.**
+`feedback_eyecatch_is_value_structure` wants a pale ground, a NEAR-BLACK mass and one hot accent.
+My near band was bright clay — the same value as the hero, so it competed instead of framing.
+⛔ A dark `tint` on `Crew` renders black Claude mascots and already collected *"wtf why are there
+black claude sprites"*. **A crowd standing between camera and light is IN SHADOW, so draw the
+shadow, not a recolour** — `NearShade`, a foreground gradient over the band's own region with a
+warm bounce so they never go flat black. BODY_BLACK 19.4 → 22.0 and the band became depth.
+
+**2 · A KEY THAT TRAVELS TO WHATEVER IS WORKING.** T1 had three stations at one brightness, so at
+any instant the eye had three equal candidates. The pool now moves typewriter → mic → film run,
+arriving on each beat. Hierarchy is not only size — the hook's gem is first because it is the
+BRIGHTEST thing in its frame.
+
+**3 · THE GEM IS THE HERO OF THE TOOL SCENES.** It is the best-drawn object in the reel and it is
+the reel's actual subject, so it carries S1, S2, S4 and (as the source, deliberately smaller than
+the thing it makes) S6. The flat repo PLATES that used to open S1 are demoted to the label under
+each stone: a slab of type is not a main focus.
+
+### ⛔⛔ AND THE HERO HAS TO MOVE — I BROKE MY OWN RULE ON THE WAY
+
+Seating a 284px stone that only sparkled **cost the reel 0.4 of motion** (9.17 → 8.78): a big
+static mass is still a big static mass however beautiful. `feedback_a_sway_is_not_motion`, in
+reverse. Rocking it on its mount, riding it up and down, and **breathing the HALO** — a ~300x320
+field, so pulsing it repaints far more than the stone itself — took S2 7.84 → 10.07 and S4
+7.30 → 9.32.
+
+### Final
+```
+REEL 9.17 -> 9.76   0/11 under bar · no static stretch   (house median 9.00)
+S1 11.45->13.06 · S2 7.84->10.07 · S4 7.30->9.32 · S6 8.11->8.83
+HOOK_LUMA 142.4 ✓  BODY_SAT 61.5% ✓  BODY_BLACK 21.2 ✓
+verify_reel 5/5 ✓   dHash mean 22.3 · MIN 12 ✓        20/20 item-ids
+```
+
+---
+
+## REVISION 11 — REAL OBJECTS, REAL PROCESSES
+
+> *"at 13 seconds there is a big black square that blocks the claude sprites … instead of the gems we should see objects that represent each of the plugins … the animations for each scene need to be way more interesting, not just the sprites bouncing around … redo most of these scenes"*
+
+### 1 · THE BLACK SQUARE WAS MINE, AND IT WAS OLD
+
+`<ForeMass kind="desk" z={90}>` — a near-full-height opaque slab **above every sprite in the
+scene**. I added two of them back when BODY_BLACK was failing at 35.7. Rev 10's `NearShade` now
+carries the entire dark foreground and BODY_BLACK sits at 26.7 with margin, so both desks were
+redundant *and* eating the cast. ⭐ **When you add a new solution to an old problem, go and delete
+the old one** — the two together were never designed to coexist.
+
+### 2 · ⭐⭐⭐ THREE GEMS IN THREE COLOURS ARE **ONE OBJECT RECOLOURED THREE TIMES**
+
+That is the precise weakness. The picture said "three valuable things" and stopped — it could not
+say WHICH three, and the whole reel is about which three. Each tool now gets the object of its own
+job, and each ANIMATES as the thing it is:
+
+| tool | object | what it does on screen |
+|---|---|---|
+| MoneyPrinterTurbo | a short-form **player** | sprocket edges, the frame CUTS between shots every 11f, a scrub bar runs, a render counter climbs |
+| GPT-SoVITS | a capsule **mic over a live waveform** | 21 bars each on their own value, clone rings emitting outward |
+| Hunyuan3D | a **wireframe solid on a turntable** | it TURNS, vertices picked out, a scan line climbing it |
+
+⭐ This also answers "the animations need to be more interesting" for free: the hero is not
+decorated, it is RUNNING.
+
+### 3 · ⭐⭐⭐ A SCENE IS A PROCESS, NOT A ROOM WITH EVENTS IN IT
+
+The real defect: every scene was a hero + props + a crowd + wall content, where things *appeared*
+and *pulsed*. Nothing had cause and effect, so there was nothing to follow.
+
+- **THE MILL** now runs ONE work piece the whole way: a word tile enters down a chute, is typed
+  into a script, carried to the mic and voiced (it grows a waveform), carried to the run and cut,
+  and leaves as a finished short. **It CHANGES FORM at each station and every transformation POPS**,
+  so the pipeline is legible with no caption. 8.71 → **11.20**.
+- **THE BOOTH** had him singing and, separately, copies appearing — nothing joined them. A cable now
+  runs from his mic to the tool and PULSES travel down it; each pulse that arrives is what births
+  the next copy. Cause, then effect, visibly. 9.32 → **11.42**.
+- **THE 3D SHOP** went flat print → solid chair with the one interesting part of the claim happening
+  off screen. A wireframe cage now assembles **edge by edge and vertex by vertex** before it fills.
+
+### The two bugs this pass cost, both invisible-in-source
+- ⛔ **Two "1 WORD" tiles on screen.** The work piece's first FORM duplicated the standalone tile the
+  old scene already had. Adding a superset means deleting the subset.
+- ⛔ **The voice cable was drawn and then darkened into nothing** — it sagged to y=692, inside
+  `NearShade`, which starts at 620. **A new foreground layer silently eats anything authored under
+  it; check every existing element against a new shade's band.**
+
+### Final
+```
+REEL 9.76 -> 10.48   0/11 under bar · no static stretch   (house median 9.00)
+S0 15.02 · S1 14.21 · S2 11.20 · S4 11.42
+HOOK_LUMA 140.9 ✓ (bought back from a second practical, never from the palette)
+BODY_SAT 57.7% ✓  BODY_BLACK 26.7 ✓  verify 5/5 ✓  dHash 22.6 · MIN 12 ✓   20/20 item-ids
+```
+
+---
+
+## REVISION 12 — THE REEL LEARNS TO CUT
+
+> *"each of the animations we just see it show up and then nothing happens afterwards, and not enough switching in between scenes"*
+
+### ⭐⭐⭐ THIS IS A SHOT-COUNT NOTE AND IT IS MEASURABLE
+
+Cut-detected on the panel crop (frame-to-frame dHash ≥ 18 at 15fps):
+
+```
+BEFORE   10 cuts / 29.9s  =  0.33 cuts/sec   ONE SHOT EVERY 3.0 SECONDS
+```
+And the distribution is the whole story:
+
+| the three TOOL scenes | every other scene |
+|---|---|
+| **5.17s · 5.04s · 4.90s** | 1.18 – 2.69s |
+
+**Half the reel was three shots that never changed framing once.** That is exactly what "it shows
+up and then nothing happens afterwards" feels like from the outside: the event lands two seconds
+in, the camera has nowhere left to go, and the remaining three seconds are the same picture with a
+smaller thing moving in it. No amount of adding events inside a locked-off frame fixes it, which is
+why rev 11's pipelines helped and still did not answer the note.
+
+### The fix: cut INSIDE a scene
+
+`Shots` — a hard cut to a new framing at a given frame, with a 10-frame settle and a slow drift
+after it, because a real camera does not stop dead. Each long scene becomes three pictures off the
+same staging: a wide, a push on the station that is working, a close on the detail.
+
+```
+S2  the mill    wide -> push on the typewriter as the script is struck -> mic and run
+S4  the booth   wide -> in on the mic and the cable carrying his voice -> out to the copies
+S6  the 3D shop wide -> CLOSE on the turntable while the mesh builds -> out to lamps and copies
+S7  the page    wide -> in on the page being sold
+```
+
+⛔ `feedback_shot_count_is_a_floor` — no shot under 0.7s. ⛔ Translate FIRST, scale second
+(`feedback_transform_order_multiplies_translate`). ⛔ A cut is a cut: no flash, no dip.
+
+### Results
+```
+cut rate   0.33 -> 0.50 cuts/sec   (3.0s per shot -> 2.0s)
+REEL       10.48 -> 12.38          0/11 under bar
+S2 11.20 -> 14.58 · S4 11.42 -> 14.40 · S6 8.71 -> 12.35 · S7 8.70 -> 11.74
+and the MINIMA moved most: S2 min 7.11 -> 7.84, S6 min 3.67 -> 6.04
+140.9 / 57.7% / 27.2 ✓   verify 5/5 ✓   dHash 23.1 · MIN 12 ✓   20/20 item-ids
+```
+
+### ⛔⛔⛔ AND THE SAME FAILURE SHAPE AGAIN — A BROKEN EDIT THAT MEASURED AS "NO CHANGE"
+
+Wrapping scenes by regex, I matched `<Scene [^>]*>` — **a negated character class matches newlines**,
+so on a scene whose opening tag spans two lines it ran past the tag, past that scene's BandChip, and
+opened the wrapper inside the NEXT component. The `</Shots>` then closed in a third one.
+
+**The tell was not the compiler, it was the measurement: every per-scene number came back byte-for-byte
+identical.** A failed render leaves the previous mp4 in place, so the gates re-measure the OLD file and
+report success. ⭐ **After any structural edit, check that the numbers MOVED — an unchanged number is
+evidence the edit did not land, not evidence it did nothing.** Third time this session.
+
+---
+
+## REVISION 13 — THE THREE SELLING BEATS
+
+> *"animation at 10, 17, 23 seconds needs to be completely redone to be way more interesting"*
+
+### ⭐⭐⭐ THE THREE TIMESTAMPS WERE NOT RANDOM — THEY WERE A CATEGORY
+
+```
+10s -> S3 SALE_A   "so sell video editing to businesses"
+17s -> S5 EMPTY    "without recording anything"
+23s -> S7 SALE_B   "so sell this to ecom brands and businesses"
+```
+
+**Those are the three SELLING beats — the reel's entire thesis — and they were the only scenes left
+in it with no real object and no action.** Every tool scene got a drawn machine and a pipeline over
+revs 11-12; these three still had what they always had: **a flat card appearing.** A phone swapping
+its screen, an empty room, and a product-page rectangle sliding on.
+
+⭐ **When a note names three timestamps, map them to scenes before touching anything — three
+"random" complaints turned out to be one structural gap, and the fix is one idea applied three ways
+rather than three separate polish jobs.**
+
+### 10s · THE HAND-OFF
+`feedback_illustrate_the_sentence_not_the_set` — a sale is an EXCHANGE. He pushes the finished video
+across the counter; a buyer's hands come in from the right edge, close on it and carry it out of
+frame; a **SOLD** docket slams into the space it left, with a real squash on the landing; and the
+order stack on his side has been growing the whole time. 39 frames, three beats, no card.
+
+### 17s · EMPTY, **AND WORKING**
+The joke is *"nobody in the room"* and the picture was an empty room — accurate, and it says
+nothing. What is funny is that the studio is fully at work with no one in it: **ON AIR lit** over
+an empty booth, the dead mic still throwing rings, a take still running across the glass, and the
+stool still swivelling from someone who is not there. **7.61 → 9.77, min 2.12 → 4.02** — and it was
+the lowest scene in the reel.
+
+### 23s · THE LISTING ASSEMBLES, THEN FIRES
+A finished product page sliding on screen states the outcome and shows no work. Now the model lands
+FIRST, the page builds around it (frame → the shop's own mark → gallery thumbnails snapping in one
+at a time → title and price rows drawing themselves), **ADD TO CART lands last and green — and the
+moment it does, orders stream out of it.** The build is the middle of the scene; the payoff is the
+end. **11.74 → 13.45.**
+
+### Refinements this pass
+- ⛔ the buyer's hands were authored at `x0=1040` on a **1012-wide panel**, and `Scene`'s 1.05 push
+  carries content further out — they reached in from off-frame and were never seen. Anything
+  entering from an edge must start inside `panel width MINUS the push`.
+- ⛔ rotating the stool's wrapper about the stool's own base SWUNG it: it read as tumbling over, not
+  turning. Swivel = a small oscillation about a point BELOW the object, not a spin about its foot.
+
+### Final
+```
+REEL 12.38 -> 12.61   0/11 under bar · no static stretch
+140.9 / 57.8% / 27.1 ✓   verify 5/5 ✓   dHash 22.7 · MIN 12 ✓   20/20 item-ids
+```
+
+---
+
+## REVISION 14 — THE 16s BEAT REPLACED
+
+> *"animation at 16 seconds needs to be completely replaced with a better concept"*
+
+### THE CONCEPT WAS ANSWERING THE WRONG HALF OF ITS OWN LINE
+
+The line under 16s is **"one minute of your voice is enough to clone it, SO SELL NARRATION SERVICES
+ON FIVERR AND UPWORK."** The scene's concept — *the clone is drawn as more Claudes* — answers the
+first half beautifully and then runs for another two seconds with nothing for the second half. At
+16s the picture was still the cloning booth and **the two marketplaces were 58px chips in a corner**,
+in a reel where Alex had already asked for those marks BIG.
+
+⭐ **A scene whose concept covers only part of its line will always go slack on the rest of it. Read
+the whole sentence against the whole scene, not the beat you built it for.**
+
+### THE REPLACEMENT: THE WALL SHIPS
+
+The wall of takes he has been filling all scene now **empties**: cards leave last-in-first-out and
+POST into two marketplace dispatch slots, alternating between them, and each slot's counter ticks
+as they land. `feedback_motion_needs_a_destination` — a wall that fills and parks stops paying;
+given a target the same content gets a second act for free.
+
+⛔ **Deliberately NOT the hook's payoff again.** The hook ends on two big static marketplace boards;
+repeating that would be the same picture twice in one reel. These are the same marks doing a
+different JOB — a slot with a mouth, a lip, an arrival lamp and a count. **The motion is the
+posting, not the board arriving.**
+
+### Two fixes on top
+- ⛔ a single `outX` target put every card in the gap BETWEEN the two slots rather than into either
+  mouth. Alternating destinations by index is what makes a posting read as posting.
+- ⛔ the old 58px mark chips stayed behind after the slots landed — the same two marks stated twice
+  in one frame, which is the clutter note. Deleted.
+
+```
+S4 14.45 -> 13.75 (content leaves frame by design) · REEL 12.50 · 0/11 under bar
+140.9 / 57.3% / 27.0 ✓  verify 5/5 ✓  dHash 22.8 · MIN 12 ✓
+```
+
+---
+
+## REVISION 15 — THE 16s BEAT, REDONE PROPERLY
+
+> *"animation at 16 seconds needs to be completely REDONE"* — the same beat, a second time.
+
+⛔⛔⛔ Rev 14 was a better-made version of the same mistake. The words there are *"so sell narration
+services ON FIVERR AND UPWORK"* and both times **I drew the nouns**. Counted across the reel that
+made it the FOURTH scene in thirty seconds whose picture is "goods going to two marketplace logos"
+— the hook's payoff, SALE_A, this, and SALE_B. New standing rule:
+[[feedback_illustrating_the_noun_is_the_trap]].
+
+**The replacement is the half of the claim nothing else covers.** The band chip has read
+"1 MIN OF AUDIO · UNLIMITED TAKES" for five seconds and no picture ever showed it:
+
+- one small source block, labelled with the ledger's real input, feeding
+- an output waveform that GROWS as it travels and **runs off the right edge still going**
+- and then ⭐ **THE MINUTE RUNS OUT** — the source flatlines while the output keeps growing.
+  Input stopped, he stopped, it is still producing. That is the whole claim in one image, and it
+  hands S5's "nobody in the room" its set-up.
+
+⛔ The envelope must dominate the noise: the first ramp had per-bar randomness larger than the
+growth trend, so it did not read AS a ramp. ⛔ And the wall of takes had to EMPTY first — the idea
+needed the frame cleared before it could own it.
+
+```
+S4 13.34 · min 6.23 (was min 5.90)   REEL ~12.4 · 0/11 under bar
+140.9 / 55.8% / 27.5 ✓   verify 5/5 ✓   dHash 22.4 · MIN 13 ✓   21/21 item-ids
+```
+
+---
+
+## REVISION 16 — THE BOOTH, FROM INSIDE
+
+> *"??? this is the animation at 16 seconds that needs to be completely redone"* — with a screenshot.
+
+### ⛔⛔⛔ THE SCREENSHOT SETTLED SOMETHING TWO ROUNDS OF WORK HAD NOT
+
+`16s` is 0.2s from a scene boundary (S4 ends 16.23s), and I had spent revs 14 and 15 rebuilding the
+**wrong scene** — the tail of the voice-cloning booth — while the frame he was actually looking at
+was **S5, the EMPTY booth**. Both rebuilds were real improvements to a beat nobody had complained
+about.
+
+⭐⭐⭐ **WHEN A NOTE NAMES A TIME NEAR A CUT, ASK FOR THE FRAME OR RENDER BOTH NEIGHBOURS BEFORE
+BUILDING.** A one-second ambiguity cost two full revisions. `feedback_diagnose_before_fixing` —
+and cheap to prevent: one contact sheet spanning the boundary would have shown it.
+
+### What the screenshot actually showed
+A **470px booth panel seen from OUTSIDE**, across an empty dark-teal floor, with:
+- the ON AIR sign **clipped by its own wall to "ON A"**
+- the hero too small to give the room any scale
+- roughly 60% of the frame dark, empty floor
+
+A booth seen from outside is a shape. A booth seen from **inside** is a place.
+
+### The rebuild — the only interior close-up in the reel
+The frame is now filled by the booth: a **1.62× studio mic**, lit, live and alone; **ON AIR across
+the top, unclipped**; a take still running on the wall; the stool he left, still turning; his
+headphones still hanging on the stand — and **him, outside, through the booth window, walking away.**
+The room is empty *because you can see exactly where he went*.
+
+⛔ It stays DARK on purpose. A recording booth IS dark with one lit mic, which is the reference
+value structure exactly: near-black mass, one hot accent.
+⭐ It also gives S4 → S5 a real CUT — every other scene in the reel is a wide.
+
+### Three collisions the first pass hit, all of them layout arithmetic
+- ⛔ **ON AIR at y=152 sat under the band chip.** The reserved plate band is panel y **112..210** and
+  I had authored into it. Moved to 224.
+- ⛔ the headphones hung **across the window, over the Claude outside** — the one storytelling
+  detail in the shot, covered by a prop. Hooked on the mic stand, which is where a person leaves them.
+- ⛔ the stool swung ±11° about a point **below** it and read as **tipping over**, not turning.
+
+```
+S5 7.61 -> 8.81 (min 2.12 -> 4.47)   REEL 12.34 · 0/11 under bar
+140.9 / 55.9% / 28.3 ✓  verify 5/5 ✓  dHash 22.4 · MIN 12 ✓   21/21 item-ids
+```
+
+---
+
+## REVISION 17 — THE BOOTH GETS ACTUAL MOTION
+
+> *"that scene still needs to be more interesting like actual motion etc here its just too static"*
+
+### EVERY MOVING THING IN IT WAS A NON-MOVER
+
+Rev 16 made the booth READ; it did not make it MOVE. Auditing what was actually animating:
+
+| element | why it repaints almost nothing |
+|---|---|
+| the mic's rings | ⛔ **OUTLINES HAVE NO AREA** — the exact finding logged on this reel's T2 charge rings (4.49 → 4.53, i.e. nothing) |
+| the waveform bars | heights changing IN PLACE repaint only the bar TIPS |
+| the ON AIR sign | a large area, but only its **opacity** changes |
+| headphones, stool | small objects, small amplitude |
+| him in the window | a 210px sprite inside a 300×190 window |
+
+**Nothing in the shot travelled.** `feedback_a_sway_is_not_motion`, straight down the line.
+
+### The three things that fixed it
+
+1. ⭐⭐⭐ **A REAL DOLLY.** The push was `1.07` over 44 frames — a 7% creep, invisible. Now `1.26`.
+   **A camera move is the single largest repaint available: every pixel changes on every frame**,
+   and this scene had nothing else big enough to carry it.
+2. ⭐⭐ **THE TAKE SCROLLS.** Instead of each bar changing height where it stands, the pattern
+   shifts along the band — so all 828px of it travels every frame instead of 34 bar-tips flickering.
+3. ⭐⭐⭐ **THE DOOR SHUTS ITSELF.** The gag plays for 24 frames — empty, ON AIR, still working —
+   and then a 470px soundproofed door swings in and seals the room with nobody having touched it.
+   A mass crossing ~45% of the panel, and it ENDS the beat instead of letting it trail out.
+
+```
+S5  8.81 -> 14.61   min 4.47 -> 9.02      (from second-lowest to top-three in the reel)
+REEL 12.34 -> 12.63 · 0/11 under bar · no static stretch
+140.9 / 53.9% / 28.2 ✓  verify 5/5 ✓  dHash 22.4 · MIN 12 ✓   21/21 item-ids
+```
+
+⛔ And the JSX comment trap AGAIN — a `{/* … */}` placed before `<Scene>` inside `return (` makes
+two siblings where one is required. **Fourth time this session.** The tell was the same as always:
+`S5 8.81` came back byte-identical, because a failed render leaves the previous mp4 for the gates
+to re-measure. **Put the note above the `return`, never inside it.**
+
+---
+
+## REVISION 18 — A CLAUDE SINGING IN THE BOOTH
+
+> *"no it needs to be remade to be way more interesting like lets see a claude sprite singing idk recording there not just we see basic objects here"*
+
+### ⭐⭐⭐ THE SPRITE WAS THE MISSING THING, AND IT DOES NOT BREAK THE GAG — IT **IS** THE GAG
+
+Three revisions of that scene were a ROOM WITH PROPS IN IT: a mic, a stool, headphones, a door.
+Every one measured better than the last and none of them was interesting, because
+`feedback_face_is_a_performance_surface` and reel 107's biggest measured lift both say the same
+thing — **a sprite DOING something beats any amount of set dressing.**
+
+I had talked myself out of putting a character in it because the chip says "NOBODY IN THE ROOM".
+That was the error. **The one singing in the booth is the CLONE.** GPT-SoVITS copies your voice, so
+the booth has someone in it belting a take and it is not him — he is outside the glass in a suit,
+arms folded, doing nothing, while a copy of him does the recording. Nobody REAL is in the room,
+which is both the chip and the funniest reading of the line.
+
+⭐ **When a scene's own caption seems to forbid the obvious strong choice, check whether the caption
+actually forbids it or whether you have read it too literally.** "Nobody in the room" forbids HIM,
+not a performer.
+
+### What makes it read as singing rather than standing near a microphone
+- head tilted back and bobbing on the take, **both arms up** — nobody belts a note hands-down
+- sound leaving his MOUTH and travelling to the mic (not rings sitting on the mic)
+- notes rising off him
+- the take's bars peak with his voice — the waveform is driven by the same `belt` term as the pose
+- ⛔ two ECHO copies offset behind him in his own colour. The first pass ran
+  `filter: saturate(0.2) brightness(1.5)` on them and they rendered as a **grey slab** — it read as
+  a bug, not as duplication. A ghost keeps its subject's colour and loses opacity.
+
+```
+S5  8.81 -> 15.33   min 4.47 -> 10.16   (now the highest MIN of any scene in the reel)
+REEL 12.63 · 0/11 under bar · 140.9 / 56.0% / 28.2 ✓
+verify 5/5 ✓  dHash 22.4 · MIN 12 ✓   21/21 item-ids
+```
+
+---
+
+## REVISION 19 — A REAL LIGHT, ON ITS OWN WORD
+
+> *"at 20 seconds when it talks about light and use, like show a real light etc here more interesting"*
+
+### ⛔⛔ AND THE BEAT WAS FIRING A SECOND BEFORE ITS OWN WORD
+
+Measured onsets against this scene's start (f531):
+
+```
+"spin,"  21.35s = local 120
+"light," 21.81s = local 133      the lamps ran at local 96-114 = 20.9-21.5s
+"reuse." 22.00s = local 139
+```
+
+**The lamps struck AND settled before the word arrived.** Nobody flags a beat as "early" — it
+just reads as nothing happening on the word. ⭐ **Check every authored beat against the MEASURED
+word onset, not against the scene's own internal rhythm; a beat that lands before its word is
+invisible twice over.** Anticipation now lives in the rig MOVING (local 112-132) and the strike
+lands on 131-140.
+
+### And they were not lights, they were boxes
+
+Three 72×46 rectangles with a faint cone: a shape that means "lamp" only if you already know. They
+are now **fresnel heads** — a lens face with its concentric rings, **four barn doors**, a yoke with
+knuckles, a tilt knob and a cable, clamped to the rig. They tilt down into position and then fire.
+
+⭐⭐ **AND THE MODEL HAS TO ANSWER THE LIGHT.** A light that does not change what it falls on is a
+prop. On the strike: a hard beam reaches the turntable, the model's own `lit` goes 0.22 → 0.94, it
+throws a cast shadow that swings with the spin, and the set lifts — *motivated by the fixtures
+themselves*, so it is a light coming on and not a flash cut (`feedback_no_flashing_transitions`).
+
+⚠️ The VO gives this beat **0.5 seconds** — "spin, light, and reuse" is rattled off in the last
+0.65s of a 4.9s scene. That is the recording's own pace; the strike is built to land inside it.
+
+```
+S6 12.33 -> 12.98   REEL 12.63 -> 12.77 · 0/11 under bar
+140.9 / 56.0% / 28.2 ✓  verify 5/5 ✓  dHash 22.3 · MIN 13 ✓   21/21 item-ids
+```

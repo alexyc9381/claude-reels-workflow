@@ -146,6 +146,15 @@ export const PLACES: Record<string, Place> = {
      so it is built for >=140: a bright lit shopfront wash under a warm sky. */
   row:     { back: "#8A6E84", back2: "#FBF2D8", floor: "#C4B392", floor2: "#8E7C60",
              lip: "#2A2018", key: "#FFD98E", horizon: 512, grit: "#2A2016" },
+  /* 1b · THE SHOP FRONT AT DAWN — the HOOK's own place (rev 6).
+     ⛔⛔⛔ `feedback_eyecatch_is_value_structure`: OX 119 and BOSS 128 both run a
+     pale COOL ground with a NEAR-BLACK mass that ARRIVES. The hook shipped on
+     `row` — warm sodium purple over cream over gold — which is the exact
+     "warm mid-tone on warm mid-tone, monochrome mush at thumbnail size" the
+     memory names. This is the cool half of that structure; the near-black is
+     the PriceTag, and it drops in at f14 so frame 0 still clears >= 140. */
+  front:   { back: "#6E86AE", back2: "#FDFBF4", floor: "#B6B8B2", floor2: "#6E7276",
+             lip: "#1C2028", key: "#FFF8E8", horizon: 470, grit: "#12161C" },
   /* 2 · THE FIT-OUT — inside the bare unit, cold daylight through the shutter. */
   fitout:  { back: "#93A6BE", back2: "#EEF0EA", floor: "#B8AC92", floor2: "#7C7460",
              lip: "#2E2A22", key: "#FFF2D6", horizon: 486, grit: "#1E1A14" },

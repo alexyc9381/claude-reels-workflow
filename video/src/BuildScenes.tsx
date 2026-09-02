@@ -20,6 +20,7 @@ import {
 import {
   Typewriter, StudioMic, FilmRun, TapeDeck, Chair, Plinth, EnamelSign, ClonePop,
   LoadedBarrow, FilmShelf, ForeMass, WaveWall, FreeLoad, ShipLabel,
+  PriceTag, TagChain, NearBand, ContentWall, NearShade, HeroKey, ToolObject, Shots, DispatchSlot,
 } from "./BuildDraw";
 import { Room, Jamb, Stack, Overhead } from "./HwSets";
 
@@ -106,6 +107,26 @@ const seqOrder = (v: Variant, n: number) =>
   Array.from({ length: n }, (_, i) => (i + PJ[v] * 2) % n);
 
 /** the one text chip a shot is allowed, in the reserved band */
+/* ⛔⛔ NO BROWN ON THE SPRITES, ANYWHERE (Alex, twice). `costumeFor` in the
+   chassis cycles all TWELVE costumes off the sprite's index, and two of them
+   are brown HAIR — **4 `girl` and 5 `fro` IN `HwWorld`, which is the array this
+   reel actually uses.** ⛔⛔⛔ THERE ARE TWO `COSTUMES` ARRAYS IN THE CLONE CHAIN
+   AND THEY ARE IN DIFFERENT ORDERS: `BillWorld` puts girl/fro at 6/7,
+   `HwWorld` at 4/5. The first fix excluded 6 and 7, which in `HwWorld` are
+   `suit` and `prof` — so it removed two innocent costumes and kept both brown
+   ones. Verify the array in the module the reel IMPORTS, never the first one
+   grep finds.
+   ⛔ AND `prof` (7) IS ALSO BROWN — a TWEED BLAZER, `#6E5A3C`. It is not hair,
+   it is a body garment, so it reads as a brown-torsoed Claude, which is worse.
+   Grep the costume block for brown FILLS rather than trusting the name. On a
+   crowd those
+   read as a brown lump sitting on a clay sprite. Every `Crew` in this reel
+   takes its costume index through `wear()` instead, which is the same twelve
+   minus those two: builder, engineer, glasses, suit, chef, beard, cop, wizard,
+   samurai, stern. */
+const WEAR = [0, 1, 2, 3, 6, 8, 9, 10, 11];
+const wear = (n: number) => WEAR[((n % WEAR.length) + WEAR.length) % WEAR.length];
+
 const BandChip: React.FC<{ t: string; c?: string; fg?: string }> =
   ({ t, c = INK, fg = "#F6F2E8" }) => <Chip t={t} y={BAND_Y} c={c} fg={fg} s={0.94} z={94} />;
 
@@ -160,98 +181,84 @@ const BandChip: React.FC<{ t: string; c?: string; fg?: string }> =
    ====================================================================== */
 export const S0: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
-  const p = asPlace("row");
+  const p = asPlace("front");
   const L = LAY[v];
 
-  /* ⛔ FRAME 0 IS PRE-SEEDED AND SETTLED: the load is already 30% on frame and
-     travelling, so the shot opens mid-event rather than on a still. */
-  const roll = 0.30 + E(f, 0, 30, 0, 0.70, IO);
-  const lurch = (E(f, 6, 11, 0, 1, IN_Q) - E(f, 11, 22, 0, 1, OUT)) * 1.8;
-  const brand = E(f, 14, 26, 0, 1, OUT);          /* "free"    */
-  const mark = E(f, 26, 34, 0, 1, BACK);          /* "Claude"  */
-  const open = E(f, 31, 52, 0, 1, OUT);           /* "plugins" */
-  const lab1 = E(f, 48, 56, 0, 1, BACK);          /* "Fiverr"  */
-  const lab2 = E(f, 53, 61, 0, 1, BACK);          /* "Upwork"  */
-  const strain = E(f, 2, 10, 0, 0.92, OUT) * (1 - E(f, 30, 42, 0, 1, IO));
+  /* ---- THE BEATS. One object, one word per beat, nothing said twice. -------
+     f0-13  "You can sell these three"  an EMPTY lit shop front. Bright, cool,
+            and the chain is already paying out of the gantry, so the shot opens
+            on an event in progress rather than a still.
+     f14    "free"    ⭐ THE TAG DROPS — the near-black mass ARRIVES
+     f22              it lands and swings, damped
+     f26    "Claude"  the $0 stamps onto the face
+     f40    "on"      the tag begins its TURN
+     f48    "Fiverr"  the reverse lands: Fiverr green, the real mark
+     f53    "Upwork"  ONE supporting tag drops behind it
+     ---------------------------------------------------------------------- */
+  const drop  = E(f, 0, 20, 0, 1, IO);                     /* "free"    */
+  const swing = f > 20 ? Math.sin((f - 20) * 0.36) * Math.exp(-(f - 20) / 30) * 12 : 0;
+  const zero  = E(f, 26, 38, 0, 1, BACK);                  /* "Claude"  */
+  const turn  = E(f, 40, 52, 0, 1, IO);                    /* "on"      */
+  const two   = E(f, 53, 64, 0, 1, BACK);                  /* "Upwork"  */
+  const look  = E(f, 10, 24, 0, 1, IO);
 
-  const LX = 1240 - roll * 520 + L.b * 0.7;       /* stops clear of the hero */
+  /* ⛔ THE TAG HANGS BY ITS EYELET. `TX` is the GROMMET, so the chain meets the
+     card where a chain actually would, and the swing pivots there.
+     ⛔ AND IT STARTS ABOVE THE FRAME. The first build left the pre-drop card
+     parked in shot at f0 — a black slab with no $0 and no chain on it, which
+     is a blob, not an object. It now enters with ~30px of its tip showing at
+     f0, so the shot still opens mid-event (`feedback_frame0_preseed_needs_z`)
+     without the mass being there before it arrives. */
+  const TX = 408 + L.b * 0.7;
+  const TY = -150 + drop * 454;
+  const CHAIN = Math.max(0, TY + 8);
 
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.40}>
-      <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="none"
+    <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.38}>
+      <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="gantry"
         rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.2} rakeN={RAKE_N[v]}
-        lamp={{ x: 210 + L.a * 0.4, y: 236, r: 268 }} floorKind="tarmac" grit={0.9} />
+        lamp={{ x: 506 + L.a * 0.4, y: 210, r: 320 }} floorKind="slab" grit={0.7} />
 
-      {/* the row behind, held DOWN — the object is the subject, not the street */}
-      {[36, 852].map((x, i) => (
-        <ShopFront key={"sf" + i} x={x + L.b * 0.3} y={p.horizon + 16} s={0.70}
-          c="#4A3C58" z={11} />
+      {/* ⛔ THE WORLD STAYS — `feedback_hook_simplicity` says strip IDEAS, not
+          LAYERS. The row is still behind, held right down at 0.62 scale and
+          well off the tag's axis, so it reads as depth and never as content. */}
+      {[16, 880].map((x, i) => (
+        <ShopFront key={"sf" + i} x={x + L.b * 0.3} y={p.horizon + 10} s={0.62}
+          c="#41506E" z={11} />
       ))}
-      <Runner y={p.horizon - 28} f={f} z={13} rate={6.0} pitch={214} w={150} h={62}
-        kind="car" c="#C8B48E" c2="#141018" rail={false} o={0.7} />
+      <Runner y={p.horizon - 34} f={f} z={13} rate={5.4} pitch={226} w={150} h={58}
+        kind="car" c="#D8DCD8" c2="#1A2028" rail={false} o={0.5} />
 
-      {/* the sodium lamp — the one practical, and it carries frame-0 luma with
-          the awning board rather than making the hero pay for it */}
-      <div style={{ position: "absolute", left: 158, top: 214, width: 98, height: 30, zIndex: 22,
-        borderRadius: "6px 6px 22px 22px", background: "linear-gradient(176deg,#8E8672,#2E2A22)" }} />
-      <div style={{ position: "absolute", left: 250, top: 220, width: 92, height: 12, zIndex: 22,
-        background: "#2E2A22" }} />
-      <AwningBoard x={78 + L.a * 0.4} y={248} w={492} f={f} z={30} />
-      {/* the lamp's pool on the tarmac — a shaped cone from a real source, which
-          is the sanctioned way to buy frame-0 luma (never the palette's stops) */}
-      <div style={{ position: "absolute", left: 40 + L.a * 0.4, top: 520, width: 470, height: 250,
-        zIndex: 14, opacity: 0.34, transform: "skewX(-16deg)",
-        background: `linear-gradient(180deg, ${hexa("#FFD98E", 0.78)} 0%, ${hexa("#FFD98E", 0)} 100%)` }} />
+      {/* the daylight pool on the slab — the sanctioned way to buy frame-0 luma */}
+      <div style={{ position: "absolute", left: 178 + L.a * 0.4, top: 512, width: 660, height: 250,
+        zIndex: 14, opacity: 0.30, transform: "skewX(-13deg)",
+        background: `linear-gradient(180deg, ${hexa("#FFF8E8", 0.86)} 0%, ${hexa("#FFF8E8", 0)} 100%)` }} />
 
-      {/* ⭐⭐⭐ THE COLOSSAL OBJECT — 780px wide on a 1012px panel, ~58% of it,
-          and it is travelling in from frame right on every one of the first 30
-          frames. This is the ox. */}
-      <FreeLoad x={LX} y={706} f={f} s={0.96} z={60}
-        brand={brand} mark={mark} open={open} lurch={lurch} />
+      {/* the chain, already paying out at frame 0 */}
+      <TagChain x={TX} y={-24} len={CHAIN} s={0.92} z={57} rot={swing * 0.45} />
 
-      {/* the chain he is hauling it in on */}
-      {/* ⛔ a 13px repeating gradient reads as a HAZARD STRIPE, not a chain. A
-          tow strap is what actually hauls a pallet, and it draws cleanly: a
-          webbing band, a darker edge, and stitching down its length. */}
-      {(() => {
-        const w = Math.max(0, LX - 384 - 300 - L.a * 0.4);
-        return (
-          <div style={{ position: "absolute", left: 300 + L.a * 0.4, top: 478, width: w,
-            height: 22, zIndex: 62, transform: `rotate(${-2 + lurch * 0.5}deg)`,
-            transformOrigin: "0% 50%",
-            background: `linear-gradient(180deg, #D8B466 0%, #A8843E 52%, #6E5426 100%)`,
-            borderTop: "2px solid rgba(255,255,255,0.28)",
-            borderBottom: "2px solid rgba(0,0,0,0.44)" }}>
-            <div style={{ position: "absolute", left: 0, right: 0, top: 8, height: 2,
-              background: `repeating-linear-gradient(90deg, ${hexa("#4A3618", 0.7)} 0 9px, transparent 9px 18px)` }} />
-            {/* the hook where the strap meets the pallet */}
-            <div style={{ position: "absolute", right: -14, top: -7, width: 26, height: 36,
-              borderRadius: "0 14px 14px 0", border: "6px solid #8E8672",
-              borderLeft: "none" }} />
-          </div>
-        );
-      })()}
+      {/* ⭐⭐⭐ THE ONE OBJECT. 620px on a 1012px panel = 61%, which leaves air on
+          both sides for a silhouette to form (`feedback_hook_simplicity`: past
+          ~85% of panel width there is none). Near-black on a pale cool ground,
+          and it ARRIVES rather than sitting in frame 0. */}
+      <PriceTag x={TX} y={TY} s={0.92} z={62} rot={swing}
+        turn={turn} zero={zero} mark="si_fiverr.svg" markC="#1DBF73"
+        mark2="si_upwork.svg" two={two} />
 
-      {/* ⭐ THE SMALL CLAUDE — the scale gap IS the image. 210 against a 780px
-          load, hauling, with his whole body in the strain. */}
-      <Contact x={66 + L.a * 0.4} y={GY - 12} w={212} o={0.42} z={56} />
-      <Hero f={f} x={168 + L.a * 0.4} y={GY} size={244} z={58} act={1} ph={0.4}
-        strain={strain} drive={lurch * 0.12}
-        costume={{ constr: 1 }} tint="#8E4A2E" stern={strain > 0.5 ? 1 : 0} />
-      <Forearm x0={228 + L.a * 0.4} y0={GY - 176} x1={306 + L.a * 0.4} y1={486}
-        w={25} c="#8E4A2E" z={60} />
 
-      {/* the cost of the haul, and of the landing */}
-      {strain > 0.4 && <Steam x={168 + L.a * 0.4} y={GY - 250} f={f} at={4} n={5} z={70} />}
-      <Puff x={LX} y={GY} f={f} at={11} c="#C8B48E" z={70} />
-      <Ring x={LX} y={GY - 20} f={f} at={11} c="#F2E4C4" z={71} s={1.2} />
+      {/* ⭐ THE SMALL CLAUDE — the scale gap IS the image. He watches it come
+          down, flinches on the stamp, and points it out on the turn. */}
+      <Contact x={158 + L.a * 0.4} y={GY - 12} w={198} o={0.34} z={56} />
+      <Hero f={f} x={158 + L.a * 0.4} y={GY} size={232} z={58} act={3} ph={0.4}
+        costume={{ constr: 1 }} gaze={look} shock={zero > 0.15 && zero < 0.75 ? 1 : 0}
+        cheer={turn > 0.55 ? 1 : 0} />
 
-      {/* the two marketplaces, slapped on as shipping labels on their own words */}
-      <ShipLabel x={LX - 172} y={392} src="si_fiverr.svg" k={lab1} s={0.92} z={92} rot={-6} />
-      <ShipLabel x={LX + 150} y={372} src="si_upwork.svg" k={lab2} s={0.92} z={92} rot={7} />
-
-      <BandChip t={`${R.count} FREE TOOLS · ${R.markets[0]} + ${R.markets[1]}`} c={INK} />
-      <Edge side="l" c="#241A22" w={88} z={93} kind="post" />
+      {/* ⛔ NO BandChip HERE. The header already reads "3 FREE AI TOOLS / SELL
+          THEM ON FIVERR"; the chip read "3 FREE TOOLS · FIVERR + UPWORK", a
+          near-verbatim duplicate stacked directly beneath it. Together with the
+          old $0 plate and the crate stencil that was FOUR statements of "free"
+          and THREE of the marketplaces in one frame. That is the clutter note. */}
+      <Edge side="l" c="#1C2028" w={88} z={93} kind="post" />
     </Scene>
   );
 };
@@ -360,7 +367,7 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
       <Hero f={f} x={856 + L.c * 0.7} y={GY} size={232} z={56} act={1} ph={1.2}
         drive={AT.reduce((a, at) => a + (E(f, at + 10, at + 15, 0, 1, IN_Q) -
           E(f, at + 15, at + 24, 0, 1, OUT)) * -0.34, 0)}
-        costume={{ constr: 1 }} tint="#8E4A2E" cheer={f > 62 ? 1 : 0} />
+        costume={{ constr: 1 }} cheer={f > 62 ? 1 : 0} />
 
       <BandChip t={`${R.setup} TO SET UP`} c={INK} />
       <Edge side="r" c="#1E1A14" w={112} z={93} kind="wall" />
@@ -416,7 +423,7 @@ export const S2: React.FC<SP> = ({ v, dur }) => {
       <Contact x={126 + L.c * 0.7} y={GY - 12} w={186} o={0.4} />
       <Hero f={f} x={216 + L.c * 0.7} y={GY} size={226} z={56} act={3} ph={0.8}
         drive={E(f, 3, 8, 0, 1, IN_Q) * -0.4 + E(f, 8, 18, 0, 1, OUT) * 0.4}
-        costume={{ chef: 1 }} tint="#8E4A2E" cheer={lit > 0.8 ? 1 : 0} />
+        costume={{ chef: 1 }} cheer={lit > 0.8 ? 1 : 0} />
       <div style={{ position: "absolute", left: 292 + L.c * 0.7, top: GY - 268, width: 30,
         height: 76, zIndex: 54, borderRadius: 5,
         background: "linear-gradient(176deg,#8E8672,#3A342A)",
@@ -492,7 +499,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
       <Hero f={f} x={896 + L.c * 0.3} y={GY} size={228} z={56} act={1} ph={2.1}
         drive={[32, 54, 77].reduce((a, at) =>
           a + (E(f, at - 4, at, 0, 1, IN_Q) - E(f, at, at + 11, 0, 1, OUT)) * -0.30, 0)}
-        costume={{ glasses: 1 }} tint="#8E4A2E" gaze={-0.5}
+        costume={{ glasses: 1 }} gaze={-0.5}
         cheer={f > 96 ? 1 : 0} />
 
       {/* the arrival that costs: rings and recoil on each station */}
@@ -530,7 +537,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
 
       {/* the queue outside the window — the businesses, on four action loops */}
       {[0, 1, 2].map(i => (
-        <Crew key={"q" + i} f={f} x={132 + i * 118 + L.a * 0.7} y={p.horizon + 34} i={i + 4}
+        <Crew key={"q" + i} f={f} x={132 + i * 118 + L.a * 0.7} y={p.horizon + 34} i={wear(i + 4)}
           size={104} z={16} at={0} tint="#6E6656" />
       ))}
 
@@ -546,7 +553,7 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
 
       <Contact x={186 + L.a * 0.7} y={GY - 12} w={188} o={0.36} />
       <Hero f={f} x={276 + L.a * 0.7} y={GY} size={230} z={56} act={1} ph={0.3}
-        drive={E(f, 3, 12, 0, 1, IO) * 0.30} costume={{ suit: 1 }} tint="#8E4A2E"
+        drive={E(f, 3, 12, 0, 1, IO) * 0.30} costume={{ suit: 1 }}
         cheer={f > 26 ? 1 : 0} />
 
       <BandChip t="SELL IT TO BUSINESSES" c={INK} />
@@ -587,7 +594,7 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
         c="#D8C4F4" c2="#1A1230" rail o={0.9} />
 
       <VoiceBooth x={188 + L.a} y={272} w={430} h={352} f={f} door={1} onAir={onAir} z={42}>
-        <Crew f={f} x={402 + L.a} y={600} i={7} size={172} z={44} at={0} tint="#8E4A2E" />
+        <Crew f={f} x={402 + L.a} y={600} i={wear(7)} size={172} z={44} at={0} />
       </VoiceBooth>
       <NameStrip x={403 + L.a} y={188} i={1} f={f} at={12} kind="turn" s={1} z={76} />
       <ProvStrip x={252 + L.a} y={648} i={1} s={1} z={74} on={E(f, 22, 30, 0, 1, OUT)} />
@@ -595,7 +602,7 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
       {/* the hero swings the disc round — the trigger */}
       <Contact x={766 + L.c * 0.3} y={GY - 12} w={182} o={0.36} />
       <Hero f={f} x={852 + L.c * 0.3} y={GY} size={222} z={56} act={0} ph={1.6}
-        drive={E(f, 6, 16, 0, 1, IO) * -0.26} costume={{ prof: 1 }} tint="#8E4A2E" />
+        drive={E(f, 6, 16, 0, 1, IO) * -0.26} costume={{ suit: 1 }} />
 
       <BandChip t="CLONE YOUR OWN VOICE" c={INK} />
       <Edge side="l" c="#150F24" w={102} z={93} kind="post" />
@@ -634,7 +641,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
       <Contact x={150 + L.a * 0.3} y={GY - 12} w={196} o={0.4} />
       <Hero f={f} x={244 + L.a * 0.3} y={GY} size={240} z={56} act={3} ph={0.9}
         drive={E(f, 2, 9, 0, 1, IO) * 0.34 - E(f, 12, 22, 0, 1, OUT) * 0.34}
-        costume={{ glasses: 1 }} tint="#8E4A2E" gaze={0.9}
+        costume={{ glasses: 1 }} gaze={0.9}
         shock={out > 0.5 ? 1 : 0} cheer={out > 0.86 ? 1 : 0} />
 
       {/* the cut: swarf coming off the cutter, continuously, while it works */}
@@ -681,15 +688,15 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
 
       {/* the crowd working the stalls — four different action loops */}
       {[0, 1, 2, 3].map(i => (
-        <Crew key={"cw" + i} f={f} x={186 + i * 214} y={GY} i={i + 2} size={122} z={54}
-          at={4 + i * 3} tint="#8E4A2E" />
+        <Crew key={"cw" + i} f={f} x={186 + i * 214} y={GY} i={wear(i + 2)} size={122} z={54}
+          at={4 + i * 3} />
       ))}
 
       {/* the hero hangs the job board — the trigger for the rail */}
       <Contact x={468} y={GY - 12} w={198} o={0.38} />
       <Hero f={f} x={562} y={GY} size={244} z={58} act={2} ph={0.2}
         drive={E(f, 4, 12, 0, 1, IO) * 0.22 - E(f, 12, 22, 0, 1, OUT) * 0.22}
-        costume={{ suit: 1 }} tint="#8E4A2E" cheer={f > 46 ? 1 : 0} />
+        costume={{ suit: 1 }} cheer={f > 46 ? 1 : 0} />
 
       <BandChip t="NARRATION, ON BOTH MARKETPLACES" c={INK} />
       <Edge side="l" c="#16241A" w={96} z={93} kind="post" />
@@ -713,44 +720,159 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("boothc");
   const L = LAY[v];
-  const leave = E(f, 8, 26, 0, 1, IO);
-  const door = E(f, 20, 34, 0, 1, IO);
+
+  /* ⭐⭐⭐ THE ONE SINGING IN THE BOOTH IS THE CLONE.
+     *"lets see a claude sprite singing idk recording there, not just basic
+     objects."*  He is right, and it is not in tension with "NOBODY IN THE ROOM"
+     — it IS the claim. GPT-SoVITS copies your voice, so the booth has someone
+     in it belting a take and **it is not him**: he is outside the glass with
+     his arms folded, doing nothing, while a copy of him does the recording.
+
+     ⛔ The last two versions were a room with props in it — a mic, a stool, a
+     door. `feedback_face_is_a_performance_surface` and reel 107's biggest
+     measured lift both say the same thing: a SPRITE DOING SOMETHING beats any
+     amount of set dressing. The gag needs a performer to be a gag at all.
+
+     ⛔ `Scene` push walks content off-frame: at 1.26 keep left >= 120. */
+  const away = E(f, 6, 26, 0, 1, IO);          /* the real one steps back   */
+  const bob = Math.sin(f / 4.4);               /* the take he is belting    */
+  const belt = 0.55 + Math.abs(Math.sin(f / 4.4)) * 0.45;
 
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.58}>
-      <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="column" overhead="duct"
-        rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.4} rakeN={RAKE_N[v]}
-        lamp={{ x: 300 + L.b * 0.3, y: 190, r: 230 }} floorKind="boards" grit={0.7} />
-
-      <VoiceBooth x={168 + L.a * 0.4} y={230} w={470} h={396} f={f} door={door} onAir={0} z={42}>
-        <Stool x={402 + L.a * 0.4} y={600} s={1.15} z={54} />
-        <DeadMic x={272 + L.a * 0.4} y={470} f={f} s={1.05} z={58} />
-      </VoiceBooth>
-
-      {/* the lathe keeps working, on its own, behind the glass */}
-      <div style={{ position: "absolute", left: 700 + L.c * 0.3, top: 380, width: 268, height: 42,
-        zIndex: 44, borderRadius: 4, background: "linear-gradient(178deg,#2A4A56,#0C1E24)",
-        border: "4px solid rgba(0,0,0,0.5)" }} />
-      {Array.from({ length: 6 }, (_, i) => {
-        const k = ((f * 0.052 + i * 0.166) % 1);
-        return (
-          <div key={"au" + i} style={{ position: "absolute", left: 712 + L.c * 0.3 + k * 234,
-            top: 316, width: 86, height: 86, zIndex: 46, borderRadius: "50%",
-            background: `radial-gradient(56% 56% at 36% 30%, ${mxh(TEAL, 0.3)} 0%, ${dkh(TEAL, 0.4)} 100%)`,
-            border: "4px solid rgba(0,0,0,0.42)" }} />
-        );
-      })}
-      <div style={{ position: "absolute", left: 806 + L.c * 0.3, top: 250, width: 62, height: 62,
-        zIndex: 48, borderRadius: "50%", border: `9px solid ${mxh(TEAL, 0.4)}`,
-        transform: `rotate(${f * 11}deg)` }}>
-        <div style={{ position: "absolute", left: "50%", top: 3, width: 5, height: 18,
-          marginLeft: -2.5, background: mxh(TEAL, 0.7) }} />
+    <Scene p={p} slug="" push={[0, dur, 1.26]} vig={0.52}>
+      {/* the foam wall, close, filling the frame */}
+      <div style={{ position: "absolute", inset: -20, zIndex: 10,
+        background: `linear-gradient(184deg, ${dkh(VIOLET, 0.36)} 0%, ${dkh(VIOLET, 0.66)} 100%)` }} />
+      <div style={{ position: "absolute", left: -30, top: -20, right: -30, height: 660,
+        zIndex: 11, overflow: "hidden" }}>
+        {Array.from({ length: 84 }, (_, i) => (
+          <div key={"fw" + i} style={{ position: "absolute", left: (i % 12) * 96 - 20,
+            top: Math.floor(i / 12) * 96, width: 92, height: 92,
+            background: (i + Math.floor(i / 12)) % 2 ? dkh(VIOLET, 0.46) : dkh(VIOLET, 0.62),
+            clipPath: "polygon(0 0, 100% 0, 50% 100%)" }} />
+        ))}
       </div>
 
-      {/* the hero walks OUT of frame and pulls the door shut */}
-      <Contact x={556 + leave * 300} y={GY - 12} w={176 * (1 - leave * 0.3)} o={0.36 * (1 - leave)} />
-      <Hero f={f} x={646 + leave * 300} y={GY} size={224 - leave * 30} z={60} act={0} ph={0.7}
-        drive={leave * 0.5} costume={{ glasses: 1 }} tint="#8E4A2E" gaze={-1} />
+      {/* ON AIR — below the reserved plate band (panel y 112..210) */}
+      <div style={{ position: "absolute", left: 250 + L.a * 0.4, top: 224, width: 512, height: 86,
+        zIndex: 70, borderRadius: 10, display: "flex", alignItems: "center",
+        justifyContent: "center", border: "8px solid rgba(0,0,0,0.6)",
+        background: `linear-gradient(178deg, ${mxh(RED, 0.30)}, ${dkh(RED, 0.30)})`,
+        opacity: 0.72 + Math.abs(Math.sin(f / 8)) * 0.28,
+        ...ui(52, 900), color: "#FFF0EC", letterSpacing: 11 }}>ON AIR</div>
+
+      {/* the take he is laying down — it SCROLLS, and it peaks with his voice */}
+      <div style={{ position: "absolute", left: 92 + L.a * 0.4, top: 340, width: 828, height: 84,
+        zIndex: 30, display: "flex", alignItems: "center", gap: 6, opacity: 0.92 }}>
+        {Array.from({ length: 34 }, (_, i) => {
+          const q = i + f * 1.15;
+          return (
+            <div key={"ew" + i} style={{ flex: 1, borderRadius: 2,
+              background: hexa(Math.floor(q) % 3 ? "#8EE4F2" : "#F2F8FA", 0.92),
+              height: (8 + Math.abs(Math.sin(q * 1.5)) * 70) * belt }} />
+          );
+        })}
+      </div>
+
+      {/* ⭐ THE SIGNAL ECHOES BEHIND HIM — two offset ghosts of the same pose,
+          which is what says COPY without a caption */}
+      <HeroKey x={470 + L.a * 0.4} y={470} r={340} c="#C9A8FF" z={40} k={1.0} />
+      {[-1, 1].map((d) => (
+        <div key={"gh" + d} style={{ position: "absolute", left: 0, top: 0, zIndex: 52,
+          opacity: 0.26 + belt * 0.16,
+          transform: `translate(${d * (26 + belt * 16)}px, ${-bob * 7}px)`,
+          filter: `hue-rotate(${d * 12}deg)` }}>
+          <Hero f={f} x={470 + L.a * 0.4} y={GY - 6} size={268} z={52} act={3} ph={0.5}
+            costume={{ prof: 0 }} cheer={1} gaze={0} />
+        </div>
+      ))}
+
+      {/* ⭐⭐⭐ THE CLONE, SINGING — head back, mouth open, riding the take */}
+      <div style={{ position: "absolute", left: 0, top: 0, zIndex: 58,
+        transform: `translateY(${-Math.abs(bob) * 18}px) rotate(${-4 + bob * 5.5}deg)`,
+        transformOrigin: `${470 + L.a * 0.4}px ${GY}px` }}>
+        <Contact x={470 + L.a * 0.4} y={GY - 12} w={244} o={0.34} z={54} />
+        <Hero f={f} x={470 + L.a * 0.4} y={GY} size={268} z={58} act={3} ph={0.5}
+          drive={bob * 0.5} strain={belt * 0.35} cheer={1} gaze={0}
+          costume={{ glasses: 1 }} />
+      </div>
+      {/* the arm that is holding the note */}
+      {/* both arms up — nobody belts a note with their hands by their sides */}
+      <Forearm x0={530 + L.a * 0.4} y0={GY - 190} x1={618 + L.a * 0.4}
+        y1={GY - 282 - belt * 30} w={28} c={CLAY} z={59} />
+      <Forearm x0={410 + L.a * 0.4} y0={GY - 190} x1={330 + L.a * 0.4}
+        y1={GY - 262 - belt * 24} w={27} c={CLAY} z={59} />
+
+      {/* the mic he is singing into, in FRONT of him where it belongs */}
+      <StudioMic x={230 + L.a * 0.4} y={648} s={1.30} f={f} live={belt} z={64} />
+      {/* ⭐ WHAT SINGING LOOKS LIKE — sound leaving his MOUTH and travelling to
+          the mic, plus the notes it carries. Without these he is a sprite
+          standing near a microphone; with them he is performing into it. */}
+      {[0, 1, 2, 3].map((k) => {
+        const t = ((f / 15) + k / 4) % 1;
+        return (
+          <div key={"vr" + k} style={{ position: "absolute",
+            left: 386 + L.a * 0.4 - t * 150, top: 500 - 34 - t * 26,
+            width: 34 + t * 96, height: 34 + t * 78, zIndex: 60, borderRadius: "50%",
+            background: `radial-gradient(circle, ${hexa("#EADCFF", (1 - t) * 0.55)} 0%, ${hexa("#EADCFF", 0)} 70%)` }} />
+        );
+      })}
+      {[0, 1, 2].map((k) => {
+        const t = ((f / 26) + k / 3) % 1;
+        return (
+          <svg key={"nt" + k} width="46" height="52" viewBox="0 0 46 52"
+            style={{ position: "absolute", left: 360 + L.a * 0.4 - t * 120 + (k % 2) * 26,
+              top: 470 - t * 150, zIndex: 61, opacity: (1 - t) * 0.9,
+              transform: `rotate(${-14 + t * 26}deg)` }}>
+            <ellipse cx="15" cy="40" rx="13" ry="10" fill="#EADCFF"
+              stroke="#2A1E42" strokeWidth="4" transform="rotate(-18 15 40)" />
+            <rect x="25" y="6" width="5" height="34" fill="#EADCFF" stroke="#2A1E42" strokeWidth="3" />
+            <path d="M28 6 Q42 10 40 22 Q38 12 28 16 Z" fill="#EADCFF"
+              stroke="#2A1E42" strokeWidth="3" />
+          </svg>
+        );
+      })}
+
+      {/* ⭐ AND HIM, OUTSIDE THE GLASS, ARMS FOLDED, NOT RECORDING ANYTHING */}
+      <div style={{ position: "absolute", left: 664 + L.c * 0.4, top: 396, width: 300, height: 208,
+        zIndex: 20, borderRadius: 6, overflow: "hidden",
+        background: `linear-gradient(176deg, ${mxh(TEAL, 0.20)} 0%, ${dkh(TEAL, 0.44)} 100%)`,
+        border: "9px solid rgba(0,0,0,0.62)" }}>
+        <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 56,
+          background: hexa("#0A1A1E", 0.6) }} />
+        <div style={{ position: "absolute", left: 96 + away * 22, bottom: 6,
+          transform: "scale(0.62)", transformOrigin: "50% 100%" }}>
+          <Hero f={f} x={0} y={0} size={230} z={22} act={1} ph={1.9}
+            costume={{ suit: 1 }} gaze={-0.9} stern={1} />
+        </div>
+      </div>
+      <div style={{ position: "absolute", left: 664 + L.c * 0.4, top: 396, width: 300, height: 208,
+        zIndex: 21, borderRadius: 6, pointerEvents: "none",
+        background: `linear-gradient(122deg, ${hexa("#FFFFFF", 0.16)} 0%, ${hexa("#FFFFFF", 0)} 46%)` }} />
+
+      {/* the door seals the room on its own, with the copy still working */}
+      {(() => {
+        const shut = E(f, 24, 44, 0, 1, IN_Q);
+        if (shut <= 0) return null;
+        return (
+          <div style={{ position: "absolute", left: 1012 - shut * 440, top: 236,
+            width: 440, height: 560, zIndex: 84,
+            transform: `perspective(1400px) rotateY(${34 - shut * 34}deg)`,
+            transformOrigin: "100% 50%",
+            background: `linear-gradient(96deg, ${dkh(VIOLET, 0.72)} 0%, ${dkh(VIOLET, 0.52)} 100%)`,
+            border: "9px solid rgba(0,0,0,0.66)", borderRadius: 6 }}>
+            {Array.from({ length: 6 }, (_, k) => (
+              <div key={"dp" + k} style={{ position: "absolute", left: 24 + (k % 2) * 196,
+                top: 34 + Math.floor(k / 2) * 172, width: 182, height: 150, borderRadius: 5,
+                background: hexa("#FFFFFF", 0.06), border: `4px solid ${hexa("#000000", 0.30)}` }} />
+            ))}
+            <div style={{ position: "absolute", left: 138, top: 176, width: 164, height: 208,
+              borderRadius: "50%", background: hexa(TEAL, 0.16), border: "10px solid rgba(0,0,0,0.5)" }} />
+            <div style={{ position: "absolute", left: 28, top: 268, width: 22, height: 96,
+              borderRadius: 11, background: mxh(STEEL, 0.3), border: "4px solid rgba(0,0,0,0.5)" }} />
+          </div>
+        );
+      })()}
 
       <BandChip t="NOBODY IN THE ROOM" c={INK} />
       <Edge side="r" c="#040C0F" w={104} z={93} kind="rail" />
@@ -806,7 +928,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
       <Contact x={182 + L.c * 0.3} y={GY - 12} w={190} o={0.38} />
       <Hero f={f} x={272 + L.c * 0.3} y={GY} size={232} z={56} act={1} ph={1.9}
         strain={E(f, 4, 12, 0, 0.6, OUT) * (1 - E(f, 30, 40, 0, 1, IO))}
-        costume={{ cop: 1 }} tint="#8E4A2E" stern={1} />
+        costume={{ cop: 1 }} stern={1} />
 
       <BandChip t="ONE PHOTO · A REAL 3D MODEL" c={INK} />
       <Edge side="l" c="#0B1116" w={100} z={93} kind="post" />
@@ -858,7 +980,7 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
       <Hero f={f} x={878 + L.c * 0.3} y={GY} size={226} z={56} act={1} ph={1.1}
         strain={refuse * 0.9}
         drive={E(f, 0, 6, 0, 1, IO) * -0.30 + E(f, 6, 14, 0, 1, OUT) * 0.30}
-        costume={{ constr: 1 }} tint="#8E4A2E" stern={refuse > 0.4 ? 1 : 0}
+        costume={{ constr: 1 }} stern={refuse > 0.4 ? 1 : 0}
         shock={tear > 0.2 && tear < 0.7 ? 1 : 0} />
       {/* ⭐ EFFORT WANTS AN EMITTER ON THE STILLEST PART — steam off the head */}
       {refuse > 0.5 && <Steam x={878 + L.c * 0.3} y={GY - 232} f={f} at={14} n={5} z={70} />}
@@ -922,7 +1044,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
       <Hero f={f} x={244 + L.a * 0.3} y={GY} size={236} z={56} act={1} ph={0.5}
         drive={E(f, 24, 30, 0, 1, IO) * 0.24 - E(f, 30, 40, 0, 1, OUT) * 0.24}
         strain={E(f, 44, 50, 0, 0.5, OUT) * (1 - E(f, 56, 62, 0, 1, IO))}
-        costume={{ suit: 1 }} tint="#8E4A2E" cheer={f > 54 ? 1 : 0} gaze={0.7} />
+        costume={{ suit: 1 }} cheer={f > 54 ? 1 : 0} gaze={0.7} />
 
       <BandChip t="SPIN IT · LIGHT IT · REUSE IT" c={INK} />
       <Edge side="r" c="#221E16" w={100} z={93} kind="post" />
@@ -983,14 +1105,14 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
 
       {/* the hero loads, and a crew works the tailgate */}
       {[0, 1].map(i => (
-        <Crew key={"dc" + i} f={f} x={556 + i * 132 + L.c * 0.3} y={GY} i={i + 8} size={128}
-          z={54} at={2 + i * 4} tint="#8E4A2E" />
+        <Crew key={"dc" + i} f={f} x={556 + i * 132 + L.c * 0.3} y={GY} i={wear(i + 8)} size={128}
+          z={54} at={2 + i * 4} />
       ))}
       <Contact x={152 + L.a * 0.7} y={GY - 12} w={196} o={0.38} />
       <Hero f={f} x={246 + L.a * 0.7} y={GY} size={240} z={56} act={1} ph={1.4}
         drive={[6, 22, 38].reduce((a, at) =>
           a + (E(f, at - 4, at, 0, 1, IN_Q) - E(f, at, at + 12, 0, 1, OUT)) * 0.28, 0)}
-        costume={{ constr: 1 }} tint="#8E4A2E" cheer={f > 52 ? 1 : 0} />
+        costume={{ constr: 1 }} cheer={f > 52 ? 1 : 0} />
 
       <BandChip t="SELL TO ECOM BRANDS" c={INK} />
       <Edge side="l" c="#0F1318" w={104} z={93} kind="wall" />
@@ -1067,9 +1189,9 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
       <Contact x={210 + shove * 150} y={GY - 12} w={198} o={0.34} z={72} />
       <Hero f={f} x={300 + shove * 150} y={GY} size={248} z={76} act={1} ph={0.6}
         drive={shove * 0.30} strain={Math.min(0.92, Math.abs(shove) * 1.5)}
-        costume={{ prof: 1 }} tint="#8E4A2E" stern={1} />
+        costume={{ suit: 1 }} stern={1} />
       <Forearm x0={356 + shove * 150} y0={GY - 178} x1={452 + shove * 168 + ring * 26}
-        y1={GY - 202} w={24} c="#8E4A2E" z={78} />
+        y1={GY - 202} w={24} c={CLAY} z={78} />
       {/* ⭐ THE BACKGROUND PROCESS, and it is the one shape the motion table
           actually pays for: a full-width high-contrast band travelling the
           tarmac. Litter blowing down a shut alley is what the place would
@@ -1083,6 +1205,13 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
       <Ring x={556 + L.b * 0.7} y={GY - 90} f={f} at={12} c="#6E6482" z={79} s={0.9} />
       <Ring x={556 + L.b * 0.7} y={GY - 90} f={f} at={29} c="#6E6482" z={79} s={0.9} />
 
+      {/* ⭐ THE QUEUE THE GATE IS HOLDING UP — the crowd IS the point of this
+          scene, so it is the one place the band is also the argument. */}
+      <NearBand f={f} n={4} y={870} size={200} pitch={262} x0={-34} z={86}
+        at={0} seed={9} dx={L.c * 0.9} />
+
+      <HeroKey x={556 + L.b * 0.7} y={470} r={330} c="#FFD2C4" z={33} k={0.86} />
+      <NearShade top={634} z={88} k={0.50} />
       <BandChip t="THE TOOLS ARE NOT THE HARD PART" c={RED} fg="#FFF0EC" />
       <Edge side="l" c="#050408" w={122} z={93} kind="wall" />
     </Scene>
@@ -1163,8 +1292,9 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
           a + (E(f, at - 4, at, 0, 1, IN_Q) - E(f, at, at + 10, 0, 1, OUT)) * -0.26, 0)
           + carry * 0.18}
         strain={E(f, 58, 66, 0, 0.6, OUT) * (1 - E(f, 70, 78, 0, 1, IO))}
-        costume={{ prof: 1 }} tint="#8E4A2E" cheer={lift > 0.6 ? 1 : 0} />
+        costume={{ suit: 1 }} cheer={lift > 0.6 ? 1 : 0} />
 
+      <HeroKey x={470 + L.b * 0.7} y={500} r={310} c="#FFE7A8" z={33} k={1.0} />
       <BandChip t="THE FREE GUIDE" c={GOLD} fg="#2A1C04" />
       <Edge side="l" c="#120B0C" w={112} z={93} kind="wall" />
     </Scene>
@@ -1208,13 +1338,13 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
       {/* the goods going through, and the crowd on the far side */}
       <Trolley x={300 + walk * 250} y={GY} f={f} tip={0} z={52} />
       {[0, 1, 2].map(i => (
-        <Crew key={"ct" + i} f={f} x={706 + i * 104} y={GY - 40} i={i + 5} size={104} z={44}
-          at={i * 3} tint="#8E4A2E" />
+        <Crew key={"ct" + i} f={f} x={706 + i * 104} y={GY - 40} i={wear(i + 5)} size={104} z={44}
+          at={i * 3} />
       ))}
 
       <Contact x={168 + walk * 250} y={GY - 12} w={190} o={0.34} />
       <Hero f={f} x={258 + walk * 250} y={GY} size={238} z={56} act={2} ph={0.4}
-        drive={walk * 0.16} costume={{ constr: 1 }} tint="#8E4A2E" cheer={1} />
+        drive={walk * 0.16} costume={{ constr: 1 }} cheer={1} />
 
       {/* ⛔ ITS OWN COLUMN: the plate sits in the reserved band, nothing else
           is allowed above y 300 in the middle third of this shot. */}
@@ -1302,7 +1432,19 @@ export const SALE_A: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("counter");
   const L = LAY[v];
-  const slide = E(f, 3, 17, 0, 1, IO);
+  /* ⭐⭐⭐ THE HAND-OFF. 39 frames, three beats, and the beat IS the sentence:
+     *"so sell video editing to businesses."*
+
+     ⛔ What was here was a flat card sliding across a counter while two stray
+     forearms hovered — the reel's whole THESIS is that you can sell these, and
+     all three selling beats were the only scenes in the reel with no object and
+     no action. `feedback_illustrate_the_sentence_not_the_set`: a sale is an
+     EXCHANGE — the goods leave in someone's hands and the paper comes back. */
+  const push = E(f, 0, 13, 0, 1, IO);        /* he pushes it across       */
+  const grab = E(f, 12, 22, 0, 1, IO);       /* the buyer's hands close   */
+  const away = E(f, 20, 39, 0, 1, IN_Q);     /* it goes, and keeps going  */
+  const slam = E(f, 22, 30, 0, 1, OUT);      /* SOLD lands where it was   */
+  const HX = 300 + push * 300 + away * 520 + L.b * 0.7;
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.50}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="lampbar"
@@ -1310,19 +1452,55 @@ export const SALE_A: React.FC<SP> = ({ v, dur }) => {
         floorKind="tile" grit={0.6}
         window={{ x: 84 + L.a * 0.7, y: 250, w: 300, h: 214 }} />
       <TradeCounter x={210 + L.b * 0.7} y={492} w={620} z={52} />
-      {/* the finished short crossing the counter — the SAME object T1 made */}
-      <div style={{ position: "absolute", left: 300 + slide * 320 + L.b * 0.7,
-        top: 300 - Math.sin(slide * Math.PI) * 26, zIndex: 80,
-        transform: `rotate(${-6 + slide * 6}deg)` }}>
-        <ShortScreen x={0} y={0} f={f} build={1} s={0.52} z={80} />
+      <HeroKey x={470 + L.b * 0.7} y={420} r={300} c="#FFF4DE" z={33} k={0.95} />
+
+      {/* the order stack on his side, GROWING — the sale before this one */}
+      {Array.from({ length: 5 }, (_, i) => {
+        const k = E(f, i * 6, i * 6 + 8, 0, 1, OUT);
+        if (k <= 0) return null;
+        return (
+          <div key={"os" + i} style={{ position: "absolute", left: 96 + L.a * 0.7 + (i % 2) * 7,
+            top: 470 - i * 9, width: 132, height: 16, zIndex: 60 + i, opacity: k,
+            transform: `rotate(${(i % 2 ? 2 : -2)}deg) scaleY(${k})`,
+            background: "linear-gradient(178deg,#FBF6EA,#CFC4A8)", border: "3px solid #2A241C" }} />
+        );
+      })}
+
+      {/* ⭐ THE FINISHED VIDEO, LEAVING — the same object the mill made */}
+      <div style={{ position: "absolute", left: 0, top: 0, zIndex: 80,
+        opacity: 1 - away * 0.9 }}>
+        <ToolObject x={HX} y={444 - Math.sin(push * Math.PI) * 26} s={0.62 - away * 0.16}
+          i={0} f={f} z={80} rot={-6 + push * 8 + away * 22} label={false}
+          glow={1.1} live={1} />
       </div>
-      <Docket x={790 + L.c * 0.7} y={556} f={f} at={20} s={0.94} z={84} />
-      <Forearm x0={1006} y0={498} x1={866} y1={470} w={30} c="#7E6A56" z={82} />
-      <Forearm x0={1006} y0={562} x1={880} y1={528} w={30} c="#7E6A56" z={82} />
+
+      {/* ⭐ THE BUYER'S HANDS — they come IN, they CLOSE, they take it out of
+          frame. Cropped by the right edge, which is also the depth cue. */}
+      {[0, 1].map((i) => (
+        <Forearm key={"bh" + i} x0={996} y0={448 + i * 74}
+          x1={996 - grab * 234 - away * 70} y1={432 + i * 60 - grab * 12}
+          w={31 - i * 3} c="#7E6A56" z={82} />
+      ))}
+
+      {/* ⭐ SOLD, SLAMMED DOWN where the goods were — with a real squash */}
+      {slam > 0 && (
+        <div style={{ position: "absolute", left: 452 + L.b * 0.7, top: 452, zIndex: 88,
+          transform: `translateY(${(1 - slam) * -180}px) scale(${1 + (1 - slam) * 0.5}, ${1 - Math.max(0, 1 - Math.abs(slam - 0.55) / 0.18) * 0.28})`,
+          transformOrigin: "50% 100%" }}>
+          <div style={{ padding: "10px 22px", background: "#FBF6EA",
+            border: "6px solid #B4392C", borderRadius: 6, transform: "rotate(-7deg)",
+            ...ui(38, 900), color: "#B4392C", letterSpacing: 4 }}>{R.sold}</div>
+        </div>
+      )}
+      {slam > 0.3 && <Ring x={520 + L.b * 0.7} y={470} f={f} at={26} c="#E8C7B8" z={87} s={1.3} />}
+
       <Contact x={150 + L.a * 0.7} y={GY - 12} w={188} o={0.36} />
       <Hero f={f} x={240 + L.a * 0.7} y={GY} size={230} z={56} act={1} ph={0.3}
-        drive={E(f, 3, 12, 0, 1, IO) * 0.30} costume={{ suit: 1 }} tint="#8E4A2E"
-        cheer={f > 26 ? 1 : 0} />
+        drive={push * 0.5} strain={push * 0.5} costume={{ suit: 1 }}
+        cheer={slam > 0.5 ? 1 : 0} gaze={0.9} />
+      <Forearm x0={296 + L.a * 0.7} y0={GY - 168} x1={316 + push * 170 + L.a * 0.7} y1={462}
+        w={26} c={CLAY} z={58} />
+      <NearShade top={648} z={88} k={0.46} />
       <BandChip t="SELL IT TO BUSINESSES" c={INK} />
       <Edge side="r" c="#1E1A14" w={96} z={93} kind="wall" />
     </Scene>
@@ -1342,20 +1520,116 @@ export const SALE_B: React.FC<SP> = ({ v, dur }) => {
   const land = E(f, 8, 26, 0, 1, OUT);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.52}>
+      {/* two shots: the counter, then in on the page that is being sold */}
+      <Shots f={f} shots={[
+        { at: 0,  s: 1.00, x: 0,   y: 0,   drift: 0.06 },
+        { at: 32, s: 1.26, x: -84, y: -34, drift: 0.06 },
+      ]}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="gantry"
         rake={0.11 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.2} rakeN={RAKE_N[v]}
         floorKind="tile" grit={0.6} />
-      {/* ⭐ THE HERO: a real product page with the model turning ON it */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 44,
-        transform: `translateY(${(1 - land) * -90}px)`, opacity: land }}>
-        <EcomFront x={640 + L.b * 0.7} y={620} s={1.12} f={f} z={44} />
-      </div>
-      <Docket x={230 + L.a * 0.7} y={520} f={f} at={34} s={0.86} z={84} />
+      {/* ⭐⭐⭐ THE LISTING ASSEMBLES AROUND THE MODEL, THEN THE ORDERS COME.
+          A finished product page sliding on screen is a card appearing — it
+          states the outcome and shows no work. Now the model lands FIRST, the
+          page builds around it piece by piece, ADD TO CART lands last and
+          green, and the moment it does, orders start flying out of it. The
+          build is the middle of the scene and the payoff is the end of it. */}
+      {(() => {
+        const PX = 596 + L.b * 0.7, PY = 300;
+        const drop = E(f, 2, 16, 0, 1, BACK);       /* the model lands       */
+        const frame = E(f, 14, 24, 0, 1, OUT);      /* the page draws round it */
+        const thumbs = E(f, 24, 38, 0, 1, OUT);     /* the gallery snaps in  */
+        const rows = E(f, 34, 46, 0, 1, OUT);       /* title and price       */
+        const cart = E(f, 44, 54, 0, 1, BACK);      /* ADD TO CART, green    */
+        return (
+          <>
+            {/* the page panel, drawing outward from the model */}
+            <div style={{ position: "absolute", left: PX - 300, top: PY - 30, width: 600,
+              height: 356, zIndex: 44, opacity: frame,
+              transform: `scaleY(${0.2 + frame * 0.8})`, transformOrigin: "50% 30%",
+              background: "linear-gradient(176deg,#FBF7EC 0%,#E2DCCC 100%)",
+              border: "7px solid #22262E", borderRadius: 10 }} />
+            {/* the shop's own mark, top-left of its own page */}
+            {frame > 0.5 && <RealMark src="shopify.svg" s={46} z={49}
+              x={PX - 272} y={PY + 4} />}
+            {frame > 0.5 && (
+              <div style={{ position: "absolute", left: PX - 214, top: PY + 8, zIndex: 49,
+                ...ui(27, 900), color: "#22262E", letterSpacing: 1 }}>PRODUCT PAGE</div>
+            )}
+            {/* ⭐ THE MODEL — it lands before the page exists and keeps turning */}
+            <div style={{ position: "absolute", left: 0, top: 0, zIndex: 52,
+              opacity: Math.min(1, drop * 2) }}>
+              <ToolObject x={PX - 150} y={PY + 272 - (1 - drop) * 150} s={1.06}
+                i={2} f={f} z={52} rot={(1 - drop) * -18} label={false}
+                glow={1.1 + (1 - drop) * 0.8} live={1} />
+            </div>
+            {/* the gallery thumbnails snapping in, one at a time */}
+            {[0, 1, 2].map((k) => {
+              const q = Math.min(1, Math.max(0, thumbs * 3.4 - k));
+              if (q <= 0) return null;
+              return (
+                <div key={"th" + k} style={{ position: "absolute", left: PX - 268 + k * 74,
+                  top: PY + 268, width: 62, height: 52, zIndex: 53, opacity: q,
+                  transform: `scale(${0.5 + q * 0.5})`, borderRadius: 5,
+                  background: hexa(R.tools[2].c, 0.42), border: "4px solid #22262E" }} />
+              );
+            })}
+            {/* the title and price rows typing themselves in */}
+            {[0, 1, 2].map((k) => {
+              const q = Math.min(1, Math.max(0, rows * 3.4 - k));
+              if (q <= 0) return null;
+              return (
+                <div key={"rw" + k} style={{ position: "absolute", left: PX + 24,
+                  top: PY + 74 + k * 34, height: k ? 12 : 20, zIndex: 53,
+                  width: (k ? 200 : 246) * q, borderRadius: 3,
+                  background: hexa("#22262E", k ? 0.30 : 0.72) }} />
+              );
+            })}
+            {/* ADD TO CART — the last thing that lands, and the thing that fires */}
+            {cart > 0 && (
+              <div style={{ position: "absolute", left: PX + 24, top: PY + 202, zIndex: 54,
+                padding: "11px 26px", borderRadius: 7, background: "#3F9E74",
+                border: "5px solid #1E5C43", transform: `scale(${0.6 + cart * 0.4})`,
+                ...ui(24, 900), color: "#F2FBF6", letterSpacing: 2 }}>ADD TO CART</div>
+            )}
+            {/* ⭐ AND THE ORDERS COME — a stream out of the button, to the right */}
+            {cart > 0.6 && Array.from({ length: 6 }, (_, k) => {
+              const t = ((f - 50) / 26 + k * 0.17) % 1;
+              if (t < 0) return null;
+              return (
+                <div key={"or" + k} style={{ position: "absolute",
+                  left: PX + 120 + t * 420, top: PY + 206 - t * 190 - (k % 3) * 16,
+                  width: 62, height: 44, zIndex: 84, opacity: (1 - t) * 0.95,
+                  transform: `rotate(${t * (k % 2 ? 40 : -40)}deg)`, borderRadius: 4,
+                  background: "linear-gradient(178deg,#FBF6EA,#D8CFB8)",
+                  border: "4px solid #2A241C" }}>
+                  <div style={{ position: "absolute", left: 7, top: 9, right: 7, height: 4,
+                    background: hexa("#2A241C", 0.5) }} />
+                  <div style={{ position: "absolute", left: 7, top: 19, right: 20, height: 4,
+                    background: hexa("#2A241C", 0.3) }} />
+                </div>
+              );
+            })}
+          </>
+        );
+      })()}
       <Contact x={126 + L.a * 0.7} y={GY - 12} w={190} o={0.36} />
       <Hero f={f} x={214 + L.a * 0.7} y={GY} size={232} z={56} act={1} ph={1.4}
         drive={(E(f, 6, 12, 0, 1, IN_Q) - E(f, 12, 24, 0, 1, OUT)) * 0.28}
-        costume={{ constr: 1 }} tint="#8E4A2E" cheer={f > 44 ? 1 : 0} />
-      <ForeMass side="l" kind="desk" c="#0C1016" z={90} s={1.0} />
+        costume={{ constr: 1 }} cheer={f > 44 ? 1 : 0} />
+      {/* ⛔⛔ THE `desk` FOREMASS WAS A BLACK SLAB ACROSS THE SPRITES. Alex, at
+          13s: *"there is a big black square that blocks the claude sprites."*
+          It is a near-full-height opaque mass at z90 — ABOVE every sprite in
+          the scene — added back when BODY_BLACK was failing at 35.7. `NearShade`
+          now carries the whole dark foreground and BODY_BLACK sits at 21.2 with
+          margin, so the slab is redundant AND it was eating the cast. */}
+      {/* the buyers this line is about, near camera and cropped by the edge */}
+      <NearBand f={f} n={4} y={866} size={202} pitch={268} x0={-40} z={86}
+        at={2} seed={7} dx={L.b * 0.9} />
+
+      <HeroKey x={606 + L.b * 0.7} y={470} r={300} c="#E8F2FF" z={33} k={0.92} />
+      <NearShade top={628} z={88} k={0.54} />
+      </Shots>
       <BandChip t="SELL 3D TO ECOM BRANDS" c={INK} />
     </Scene>
   );
@@ -1381,17 +1655,35 @@ export const SETUP2: React.FC<SP> = ({ v, dur }) => {
         window={{ x: 720 + L.b * 0.7, y: 250, w: 240, h: 200 }} />
       <WallClock x={128 + L.a * 0.4} y={318} s={140} f={f} z={30} />
 
-      {/* the three real plates, bolted to the wall one at a time */}
+      {/* ⭐⭐⭐ THREE GEMS LAND IN THREE MOUNTS, one per beat. The scene used to
+          bolt up two flat repo PLATES — a slab of type is not a main focus, and
+          "main focus not interesting" is what came back. The stones are the
+          subject of the whole reel, so they are the subject of this shot; the
+          plate is demoted to the label under each one. */}
       {R.tools.map((t, i) => {
         const at = AT[i];
-        const k = E(f, at, at + 14, 0, 1, BACK);
-        if (k <= 0) return null;
+        const k = E(f, at, at + 16, 0, 1, BACK);
+        const cx = 234 + i * 272 + L.b * 0.7;
         return (
-          <React.Fragment key={"rp" + i}>
-            <RepoPlate x={556 + L.b * 0.7} y={276 + i * 116} i={i} f={f} s={0.72} z={70 + i}
-              on={k} lift={(1 - k) * 70} />
-            {k >= 1 && <Ring x={556 + L.b * 0.7} y={276 + i * 116} f={f} at={at + 13}
-              c={mxh(t.c, 0.4)} z={74} s={0.6} />}
+          <React.Fragment key={"gm" + i}>
+            {/* the empty socket it drops into — visible BEFORE it arrives, so
+                the shot promises each landing (`predictable is not anticipation`
+                cuts the other way: an empty mount is a question) */}
+            <div style={{ position: "absolute", left: cx - 62, top: 560, width: 124, height: 26,
+              zIndex: 38, borderRadius: "50%",
+              background: `radial-gradient(ellipse, ${hexa("#0B0F16", 0.6)} 0%, ${hexa("#0B0F16", 0)} 72%)` }} />
+            <div style={{ position: "absolute", left: cx - 46, top: 548, width: 92, height: 30,
+              zIndex: 39, background: `linear-gradient(180deg, ${mxh(STEEL, 0.24)} 0%, ${dkh(STEEL, 0.5)} 100%)`,
+              border: "5px solid rgba(0,0,0,0.52)", borderRadius: 5 }} />
+            {k > 0 ? (
+              <>
+                <ToolObject x={cx} y={556 - (1 - k) * 240 + k * Math.sin(f / 11 + i) * 12}
+                  s={1.16 + k * Math.sin(f / 8 + i) * 0.06} i={i} f={f} z={72}
+                  rot={(1 - k) * (i % 2 ? 16 : -16) + k * Math.sin(f / 13 + i) * 8}
+                  glow={0.7 + k * (0.9 + Math.abs(Math.sin(f / 6.2 + i)) * 0.7)} live={k} />
+                {k >= 1 && <Ring x={cx} y={556} f={f} at={at + 15} c={mxh(t.c, 0.5)} z={74} s={0.9} />}
+              </>
+            ) : null}
           </React.Fragment>
         );
       })}
@@ -1408,8 +1700,9 @@ export const SETUP2: React.FC<SP> = ({ v, dur }) => {
       <Hero f={f} x={874 + L.c * 0.7} y={GY} size={232} z={56} act={1} ph={1.2}
         drive={AT.reduce((a, at) => a + (E(f, at + 8, at + 13, 0, 1, IN_Q) -
           E(f, at + 13, at + 22, 0, 1, OUT)) * -0.32, 0)}
-        costume={{ constr: 1 }} tint="#8E4A2E" cheer={f > 62 ? 1 : 0} />
+        costume={{ constr: 1 }} cheer={f > 62 ? 1 : 0} />
       <ForeMass side="l" kind="stand" c="#141118" z={90} s={0.95} />
+      <HeroKey x={506 + L.b * 0.7} y={470} r={356} c="#FFF3D6" z={33} k={1.0} />
       <BandChip t={`${R.setup} TO SET UP · ALL THREE`} c={INK} />
       <Edge side="r" c="#1E1A14" w={104} z={93} kind="wall" />
     </Scene>
@@ -1463,6 +1756,17 @@ export const T1: React.FC<SP> = ({ v, dur }) => {
 
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.54}>
+      {/* ⭐⭐⭐ THREE SHOTS, NOT ONE. 5.17s on a locked-off frame is why this
+          scene "shows up and then nothing happens": the wide states the room in
+          the first second and then has nowhere to go. It now cuts to a push on
+          the typewriter as the script is struck, and again to the mic and the
+          run as the piece is carried down the bench — the same staging, three
+          pictures. */}
+      <Shots f={f} shots={[
+        { at: 0,   s: 1.00, x: 0,    y: 0,   drift: 0.06 },
+        { at: 58,  s: 1.30, x: 142,  y: -30, drift: 0.05 },
+        { at: 106, s: 1.22, x: -176, y: -18, drift: 0.07 },
+      ]}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="shelf" overhead="joist"
         rake={0.11 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
         lamp={{ x: 506 + L.a * 0.7, y: 258, r: 300 }} floorKind="boards" grit={0.7} />
@@ -1479,6 +1783,15 @@ export const T1: React.FC<SP> = ({ v, dur }) => {
           what was bare brick through the middle of the frame */}
       <FilmShelf x={-20} y={452} w={1060} f={f} rows={1} z={18} />
 
+      {/* ⭐⭐ COUNTABLE CONTENT: twelve FINISHED SHORTS racking up on the wall,
+          one at a time, right across the scene. `feedback_the_crowd_is_a_near_
+          band` — not texture, things a viewer could count, and "real content
+          arriving" is the third row of the motion table. It is also literally
+          what the mill makes, so it earns its place. */}
+      <ContentWall x={62 + L.c * 0.5} y={296} w={912} rows={1} f={f}
+        kind="thumb" c={GOLD} z={19} fromX={846 + L.b * 0.7} fromY={560} arc={230}
+        cols={8} k={E(f, 8, 152, 0, 1, LIN)} />
+
       {/* the bench: a top lip and a front face, so it is a SOLID, not a bar */}
       <div style={{ position: "absolute", left: -40, top: 634, width: W + 80, height: 24,
         zIndex: 34, background: mxh(OXIDE, 0.16) }} />
@@ -1489,19 +1802,107 @@ export const T1: React.FC<SP> = ({ v, dur }) => {
           width: 6, height: 56, zIndex: 35, background: hexa("#000", 0.20) }} />
       ))}
 
+      {/* ⭐⭐⭐ THE PLUGIN THAT DRIVES THE MILL. It is the biggest and brightest
+          thing in the shot, which is the whole point — the stations are what it
+          DOES, not what the scene is about. It pulses on each finished beat. */}
+      {/* ⛔⛔ IT HAS TO MOVE. The first seating put a 284px stone in the middle
+          of the shot that only sparkled, and the reel LOST 0.4 of motion — my
+          own `feedback_a_sway_is_not_motion` in reverse. It now rocks on its
+          mount, rides up and down, and its halo breathes; the halo is a
+          ~300x320 field, so pulsing it repaints far more than the stone does. */}
+      <ToolObject x={700 + L.b * 0.7 + Math.sin(f / 15) * 22}
+        y={556 + Math.sin(f / 11) * 20} s={1.42 + Math.sin(f / 9) * 0.07} i={0} f={f} z={66}
+        rot={Math.sin(f / 13) * 11} label={false}
+        glow={1.1 + Math.abs(Math.sin(f / 6.5)) * 0.9 + Math.max(b1, Math.max(b2, b3)) * 1.0}
+        live={Math.max(b1, Math.max(b2, b3))} />
+      {/* the bracket it hangs in, so it is MOUNTED and not floating */}
+      <div style={{ position: "absolute", left: 686 + L.b * 0.7, top: 236, width: 28,
+        height: 118, zIndex: 64, background: dkh(OXIDE, 0.5) }} />
+
+      {/* ⭐⭐⭐ THE WORK PIECE — the thing that makes this a SCENE and not three
+          machines idling near each other. *"the animations need to be way more
+          interesting... not just the sprites bouncing around."*
+
+          ONE object enters at the left as a word tile and you can follow it the
+          whole way: it is typed into a script, carried to the mic and voiced,
+          carried to the run and cut, and leaves as a finished short. It CHANGES
+          FORM at each station, so the pipeline is legible without a caption,
+          and it is travelling for most of the take, which is also where the
+          motion comes from (`feedback_a_sway_is_not_motion`). */}
+      {(() => {
+        const X1 = 196 + L.b * 0.7, X2 = 540 + L.b * 0.7, X3 = 846 + L.b * 0.7;
+        const inn = E(f, 6, 26, 0, 1, IO);            /* drops onto the bench  */
+        const t1 = E(f, 74, 98, 0, 1, IO);            /* carried to the mic    */
+        const t2 = E(f, 120, 142, 0, 1, IO);          /* carried to the run    */
+        const out = E(f, 146, 155, 0, 1, IN_Q);       /* leaves, still rising  */
+        const px = X1 - (1 - inn) * 90 + (X2 - X1) * t1 + (X3 - X2) * t2;
+        const py = 566 - (1 - inn) * 250
+          - Math.sin(t1 * Math.PI) * 66 - Math.sin(t2 * Math.PI) * 66 - out * 210;
+        /* the form it is IN right now — 0 word · 1 script · 2 voiced · 3 cut */
+        const form = f > 138 ? 3 : f > 108 ? 2 : f > 62 ? 1 : 0;
+        /* every transformation POPS, so you cannot miss that it changed */
+        const pop = 1 + Math.max(0, 1 - Math.abs(f - 62) / 7) * 0.30
+          + Math.max(0, 1 - Math.abs(f - 108) / 7) * 0.30
+          + Math.max(0, 1 - Math.abs(f - 138) / 7) * 0.34;
+        const W = 118, H = 78;
+        return (
+          <div style={{ position: "absolute", left: px - W / 2, top: py - H, width: W, height: H,
+            zIndex: 68, opacity: 1 - out * 0.85,
+            transform: `scale(${pop}) rotate(${-6 + t1 * 6 + t2 * 6 + out * 16}deg)`,
+            transformOrigin: "50% 100%" }}>
+            <div style={{ position: "absolute", inset: 0, borderRadius: 5,
+              border: "5px solid #2A241C", overflow: "hidden",
+              background: form >= 3 ? "#14181E"
+                : "linear-gradient(174deg,#F8F2E2,#CFC4A8)" }}>
+              {form === 0 ? (
+                <div style={{ position: "absolute", inset: 0, display: "flex",
+                  alignItems: "center", justifyContent: "center",
+                  ...mono(19, 900), color: "#2A241C" }}>{R.tools[0].input}</div>
+              ) : null}
+              {form === 1 || form === 2 ? (
+                <>
+                  {Array.from({ length: 5 }, (_, k) => (
+                    <div key={"tl" + k} style={{ position: "absolute", left: 10, top: 11 + k * 10,
+                      height: 4, width: (k % 2 ? 78 : 92), background: hexa("#2A241C", 0.55) }} />
+                  ))}
+                </>
+              ) : null}
+              {form === 2 ? (
+                <div style={{ position: "absolute", left: 8, right: 8, bottom: 8, height: 20,
+                  display: "flex", alignItems: "flex-end", gap: 3 }}>
+                  {Array.from({ length: 13 }, (_, k) => (
+                    <div key={"wb" + k} style={{ flex: 1, background: GOLD,
+                      height: 4 + Math.abs(Math.sin(k * 1.6 + f / 3.4)) * 16 }} />
+                  ))}
+                </div>
+              ) : null}
+              {form === 3 ? (
+                <>
+                  <div style={{ position: "absolute", inset: 0,
+                    background: `linear-gradient(150deg, ${hexa(GOLD, 0.5)}, ${hexa("#7A4A18", 0.7)})` }} />
+                  <div style={{ position: "absolute", left: 46, top: 24, width: 0, height: 0,
+                    borderTop: "13px solid transparent", borderBottom: "13px solid transparent",
+                    borderLeft: "22px solid #FFF6E4" }} />
+                  <div style={{ position: "absolute", left: 8, right: 8, bottom: 7, height: 5,
+                    background: hexa("#000", 0.5) }} />
+                  <div style={{ position: "absolute", left: 8, bottom: 7, height: 5,
+                    width: `${20 + ((f * 3) % 70)}%`, background: "#FFF6E4" }} />
+                </>
+              ) : null}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* the in-feed chute the word arrives down — it comes from somewhere */}
+      <div style={{ position: "absolute", left: 86 + L.b * 0.7, top: 286, width: 82, height: 34,
+        zIndex: 42, background: dkh(OXIDE, 0.42), transform: "skewX(-16deg)" }} />
+
       {/* ---- station 1 · THE TYPEWRITER ------------------------------------ */}
       <Typewriter x={196 + L.b * 0.7} y={640} s={0.94} f={f}
         hit={Math.max(spin * 0.55, b1)} page={b1} z={44} />
-      {/* the ONE word being fed in, before the hammering starts */}
-      {drop < 1 && (
-        <div style={{ position: "absolute", left: 128 + L.b * 0.7, top: 330 + drop * 190,
-          width: 116, height: 54, zIndex: 66, borderRadius: 5,
-          background: "linear-gradient(174deg,#F8F2E2,#CFC4A8)", border: "5px solid #2A241C",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          transform: `rotate(${-10 + drop * 10}deg)` }}>
-          <span style={{ ...mono(20, 900), color: "#2A241C" }}>{R.tools[0].input}</span>
-        </div>
-      )}
+      {/* ⛔ the old standalone word tile is GONE — it is now the work piece's
+          first FORM, and having both put two "1 WORD" tiles on screen at once. */}
       {/* ---- station 2 · THE STUDIO MIC ------------------------------------ */}
       <StudioMic x={540 + L.b * 0.7} y={644} s={0.76} f={f} live={b2} z={44} />
       {/* ---- station 3 · the film coming DOWN off the overhead run --------- */}
@@ -1528,7 +1929,7 @@ export const T1: React.FC<SP> = ({ v, dur }) => {
             <Hero f={f} x={hx} y={GY} size={228} z={62} act={striding ? 0 : 1} ph={0.4}
               drive={working && !striding ? Math.sin(f / 2.6) * 0.24 : 0}
               strain={working && !striding ? 0.38 : 0}
-              costume={{ chef: 1 }} tint="#8E4A2E"
+              costume={{ chef: 1 }}
               cheer={b3 >= 1 ? 1 : 0} gaze={striding ? 0.8 : -0.3} />
           </>
         );
@@ -1537,6 +1938,30 @@ export const T1: React.FC<SP> = ({ v, dur }) => {
       {/* the maker's plate, bolted to the bench end where a real one lives */}
       <EnamelSign x={112 + L.c * 0.7} y={392} i={0} s={1.0} z={74} on={E(f, 20, 34, 0, 1, OUT)} />
 
+      {/* ⭐⭐⭐ THE NEAR-CAMERA BAND — the mill's own CUTTING-ROOM CREW, working
+          the bench in front of camera with their legs cropped by the panel.
+          Five sprites at ~180px on their own loops is ~18% of the panel
+          repainting every frame, which is the single biggest lever in the
+          motion table; one Claude walking a bench was 6.41. They sit BELOW the
+          three machines so nothing the scene is about is covered. */}
+      <NearBand f={f} n={5} y={858} size={216} pitch={230} x0={-58} z={84}
+        at={4} seed={1} dx={L.a * 0.9} />
+
+      {/* ⭐⭐⭐ THE KEY TRAVELS TO WHATEVER IS WORKING. "Main focus not
+          interesting" is a HIERARCHY note: this scene had three stations at the
+          same brightness, so at any instant the eye had three equal candidates
+          and no first place. The pool now moves typewriter -> mic -> film run,
+          arriving on each beat, so there is exactly one subject at a time and
+          the shot TELLS you which. */}
+      {(() => {
+        const kx = 210 + E(f, 92, 108, 0, 330, IO) + E(f, 114, 132, 0, 306, IO);
+        const ky = 596 - E(f, 114, 132, 0, 150, IO);
+        const pk = 0.72 + Math.max(b1, Math.max(b2, b3)) * 0.5;
+        return <HeroKey x={kx + L.b * 0.7} y={ky} r={300} c="#FFE7B0" z={33} k={pk} />;
+      })()}
+      <NearShade top={604} z={88} k={0.60} />
+
+      </Shots>
       <BandChip t="ONE TOPIC · A FINISHED VIDEO" c={INK} />
       <Edge side="r" c="#1C1308" w={92} z={93} kind="post" />
     </Scene>
@@ -1560,11 +1985,22 @@ export const T2: React.FC<SP> = ({ v, dur }) => {
   const step = E(f, 0, 20, 0, 1, IO);                    /* he walks up to it */
   const sing = E(f, 22, 40, 0, 1, OUT);
   const run = E(f, 30, 60, 0, 1, IO);
-  const POPS = [76, 90, 104];
+  /* ⛔ THE TAIL WENT STILL AT THE FRONT. All three copies used to land inside a
+     28-frame window at f76-104, leaving the first HALF of a 151-frame scene
+     with one hero and nothing else — which is most of why this scene measured
+     6.02. Spread across the whole take (`feedback_the_tail_goes_still`). */
+  const POPS = [30, 66, 102];
   const mkt = E(f, 118, 138, 0, 1, OUT);
 
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.54}>
+      {/* three shots: the room, then in on the mic and the cable carrying his
+          voice across, then back out as the copies arrive */}
+      <Shots f={f} shots={[
+        { at: 0,   s: 1.00, x: 0,    y: 0,   drift: 0.06 },
+        { at: 50,  s: 1.32, x: 168,  y: -24, drift: 0.05 },
+        { at: 100, s: 0.98, x: -10, y: 14, drift: 0.05 },
+      ]}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="column" overhead="duct"
         rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.2} rakeN={RAKE_N[v]}
         lamp={null} floorKind="boards" grit={0.7} />
@@ -1585,6 +2021,71 @@ export const T2: React.FC<SP> = ({ v, dur }) => {
       <WaveWall x={286 + L.b * 0.7} y={286} w={660} h={128} f={f}
         live={0.3 + sing * 0.7} z={22} />
 
+      {/* ⭐⭐ COUNTABLE CONTENT: the rack of TAKES filling up, each card with its
+          own live waveform and its own number. The flat foam wall was texture;
+          this is countable, and it is what "unlimited takes" actually looks
+          like on a booth wall. */}
+      {/* ⛔ THE FOAM WEDGES WERE 38% OF THE PANEL DOING NOTHING — texture, which
+          is exactly what `feedback_the_crowd_is_a_near_band` says does not
+          count. Sixteen takes now rack up over it, each flying out of the mic
+          he is singing into. */}
+      <ContentWall x={128 + L.c * 0.5} y={286} w={832} rows={2} f={f}
+        kind="take" c={VIOLET} z={23} fromX={176 + L.b * 0.7} fromY={620} arc={150}
+        cols={8} k={E(f, 10, 96, 0, 1, LIN)}
+        outX={250 + L.c * 0.5} outY={384} outX2={250 + L.c * 0.5} outY2={384}
+        out={E(f, 92, 116, 0, 1, LIN)} />
+
+      {/* ⭐⭐⭐ THE PLUGIN DOING THE CLONING — big, lit, and pulsing with the
+          note he is holding. It occludes the takes wall on purpose: the hero is
+          in FRONT of its supporting layer, which is what hierarchy means. */}
+      <ToolObject x={676 + L.b * 0.7 + Math.sin(f / 14) * 24}
+        y={566 + Math.sin(f / 10) * 22} s={1.38 + Math.sin(f / 8) * 0.08} i={1} f={f} z={66}
+        rot={Math.sin(f / 12) * 12} label={false}
+        glow={1.0 + Math.abs(Math.sin(f / 5.8)) * 1.0 + sing * 1.0} live={sing * 0.8} />
+
+      {/* ⭐⭐⭐ THE VOICE MAKES A JOURNEY. Before this the scene was: he sings,
+          and separately some copies appear. Nothing connected the two, so there
+          was no mechanism to watch. A cable now runs from his mic to the tool,
+          PULSES travel down it while he holds the note, and each pulse that
+          arrives is what births the next copy. Cause, then effect, visibly. */}
+      {(() => {
+        /* ⛔ RUN IT ABOVE THE SHADE LINE. The first path sagged to y=692 —
+           inside `NearShade`, which starts at 620 — so the cable and every
+           pulse on it were drawn and then darkened into nothing. */
+        const AX = 206 + L.b * 0.7, AY = 534, BX = 676 + L.b * 0.7, BY = 560;
+        return (
+          <>
+            {/* the cable itself, with a real sag */}
+            <svg width={W} height={H} style={{ position: "absolute", left: 0, top: 0, zIndex: 55,
+              pointerEvents: "none" }}>
+              <path d={`M${AX} ${AY} Q${(AX + BX) / 2} ${AY + 62} ${BX} ${BY}`}
+                fill="none" stroke="#1B1526" strokeWidth="11" strokeLinecap="round" />
+              <path d={`M${AX} ${AY} Q${(AX + BX) / 2} ${AY + 62} ${BX} ${BY}`}
+                fill="none" stroke={hexa("#D8BEFF", 0.44)} strokeWidth="4" />
+            </svg>
+            {/* the pulses running along it — one per copy, and they ARRIVE just
+                before the copy they cause */}
+            {sing > 0.2 && Array.from({ length: 5 }, (_, k) => {
+              const tt = ((f / 30) + k * 0.2) % 1;
+              const qx = AX + (BX - AX) * tt;
+              const qy = AY + (BY - AY) * tt + Math.sin(tt * Math.PI) * 62;
+              return (
+                <React.Fragment key={"pl" + k}>
+                  <div style={{ position: "absolute", left: qx - 26, top: qy - 26,
+                    width: 52, height: 52, borderRadius: "50%", zIndex: 56,
+                    background: `radial-gradient(circle, ${hexa("#D8BEFF", 0.55)} 0%, ${hexa("#D8BEFF", 0)} 70%)`,
+                    opacity: 0.4 + Math.sin(tt * Math.PI) * 0.6 }} />
+                  <div style={{ position: "absolute", left: qx - 15, top: qy - 15,
+                    width: 30, height: 30, borderRadius: "50%", zIndex: 57,
+                    background: "#F6EEFF", border: "4px solid #7B5AB8",
+                    opacity: 0.42 + Math.sin(tt * Math.PI) * 0.58 }} />
+                </React.Fragment>
+              );
+            })}
+          </>
+        );
+      })()}
+
       {/* ⭐ THE MIC HE SINGS INTO — the object the whole scene is about */}
       <StudioMic x={176 + L.b * 0.7} y={672} s={0.92} f={f} live={sing} z={64} />
       {/* the tape deck consuming the minute, beside him */}
@@ -1594,7 +2095,7 @@ export const T2: React.FC<SP> = ({ v, dur }) => {
       <Contact x={94 + step * 128 + L.a * 0.7} y={GY - 12} w={214} o={0.36} z={50} />
       <Hero f={f} x={190 + step * 128 + L.a * 0.7} y={GY} size={244} z={58} act={3} ph={0.6}
         drive={sing > 0.4 ? Math.sin(f / 4.4) * 0.10 : 0}
-        costume={{ prof: 1 }} tint="#8E4A2E" gaze={-0.8}
+        costume={{ suit: 1 }} gaze={-0.8}
         cheer={sing > 0.6 ? 1 : 0} />
 
       {/* ⭐⭐ THE CLONES. Four of HIM, each snapped into being by its own ring,
@@ -1615,27 +2116,141 @@ export const T2: React.FC<SP> = ({ v, dur }) => {
             )}
             <ClonePop x={cx} y={GY - 10} f={f} at={at} s={1.15} z={52} />
             {k > 0 && <Contact x={cx - 96} y={GY - 12} w={192} o={0.30 * k} z={51} />}
+            {/* ⭐⭐ THEY BOB ON THEIR OWN PHASE. Three 244px heroes holding an
+                idle is ~22% of the panel very nearly static, and an idle is not
+                an action loop (`feedback_action_loop_is_not_a_scene`). A 52px
+                peak-to-peak bob per copy, each on its own phase, is also just
+                what singing looks like. */}
             {k > 0 && <div style={{ position: "absolute", left: 0, top: 0, zIndex: 56,
-              opacity: k, transform: `scale(${0.7 + k * 0.3})`, transformOrigin: `${cx}px ${GY}px` }}>
+              opacity: k,
+              transform: `translateY(${Math.sin(f / 5.2 + i * 2.1) * 26 * k}px) scale(${0.7 + k * 0.3})`,
+              transformOrigin: `${cx}px ${GY}px` }}>
               <Hero f={f + i * 11} x={cx} y={GY} size={244} z={56} act={3} ph={i * 0.9}
-                costume={{ prof: 1 }} tint="#8E4A2E" cheer={1} gaze={-0.6} />
+                costume={{ suit: 1 }} cheer={1} gaze={-0.6} />
             </div>}
           </React.Fragment>
         );
       })}
 
-      {/* the two marketplaces, real marks, on their spoken word */}
-      {mkt > 0 && (
-        <div style={{ position: "absolute", left: 380 + L.c * 0.7, top: 258, zIndex: 84,
-          display: "flex", gap: 20, opacity: mkt,
-          transform: `translateY(${(1 - mkt) * -26}px)` }}>
-          <RealMark src="si_fiverr.svg" s={58} z={84} />
-          <RealMark src="si_upwork.svg" s={60} z={84} />
-        </div>
-      )}
+      {/* ⛔ the 58px mark chips that used to sit here are GONE. The dispatch
+          slots now carry both marks at 160px, and saying the same two things
+          again in the same frame is the clutter note. */}
 
       <EnamelSign x={116 + L.a * 0.7} y={258} i={1} s={1.0} z={74} on={E(f, 12, 26, 0, 1, OUT)} />
-      <ForeMass side="l" kind="desk" c="#100C18" z={90} s={1.1} />
+      {/* ⭐⭐⭐ THE NEAR-CAMERA BAND — the booth's QUEUE, the people waiting for a
+          slot, cropped by the bottom edge. It sits just below the clones' feet
+          so the pop-ins stay the money shot, and it fills the dead purple floor
+          that was the bottom third of every frame in this scene. */}
+      <NearBand f={f} n={5} y={876} size={196} pitch={226} x0={-46} z={86}
+        at={10} seed={3} dx={L.b * 0.9} />
+
+      {/* the key starts tight on the mic he is singing into and OPENS OUT as
+          the copies arrive — the subject genuinely changes, so the light does */}
+      <HeroKey x={190 + E(f, 26, 96, 0, 430, IO) + L.a * 0.7} y={600}
+        r={250 + E(f, 26, 110, 0, 190, IO)} c="#E2CCFF" z={33}
+        k={0.8 + sing * 0.4} />
+      <NearShade top={620} z={88} k={0.56} />
+
+      </Shots>
+      {/* ⭐⭐⭐ THE THIRD ACT, REDONE — AND DELIBERATELY NOT ABOUT MARKETPLACES.
+          Second rejection on this beat, so per `feedback_repeated_note_means_
+          wrong_object` the fault is the SUBJECT, not the execution. And it was:
+          the words at 16s are "on Fiverr and Upwork", so I illustrated the
+          NOUNS — twice, first as chips and then as dispatch slots.
+
+          ⛔⛔ COUNTED ACROSS THE REEL, THAT MADE IT THE **FOURTH** TIME IN 30
+          SECONDS THE PICTURE WAS "GOODS GOING TO TWO MARKETPLACE LOGOS":
+          the hook's payoff, SALE_A's sold docket, this, and SALE_B's orders.
+          `feedback_one_prop_five_scenes` — one idea in four scenes is four
+          boring notes. The marketplaces are ALREADY covered three times; this
+          scene has to carry the half of the claim nothing else does.
+
+          ⭐ That half is the SCALE GAP: **one minute in, and it never stops
+          coming out.** The band chip has said "1 MIN OF AUDIO · UNLIMITED
+          TAKES" the whole scene and no picture had ever shown it. One tiny
+          source block feeds a waveform that GROWS as it travels and pours off
+          the right edge of frame still going — so the beat also does not
+          resolve, which is what "unlimited" means. */}
+      {(() => {
+        const pour = E(f, 108, 130, 0, 1, OUT);     /* the output opens up   */
+        const SX = 214 + L.c * 0.5, SY = 384;       /* the one-minute source */
+        const N = 30;
+        return (
+          <>
+            {/* ⭐ THE SOURCE — small, finite, and labelled with the real input */}
+            <div style={{ position: "absolute", left: SX - 60, top: SY - 42, width: 120,
+              height: 84, zIndex: 66, borderRadius: 7,
+              background: `linear-gradient(176deg, ${mxh(VIOLET, 0.26)}, ${dkh(VIOLET, 0.5)})`,
+              border: "6px solid rgba(0,0,0,0.55)", opacity: Math.min(1, pour * 3) }}>
+              <div style={{ position: "absolute", left: 9, right: 9, top: 12, height: 34,
+                display: "flex", alignItems: "center", gap: 3 }}>
+                {/* ⭐⭐⭐ THE PUNCH — the minute RUNS OUT. At f132 the source
+                    flatlines and the output goes on growing anyway, which is
+                    the claim in one image: the input stopped, you stopped, and
+                    it is still producing. */}
+                {Array.from({ length: 9 }, (_, k) => {
+                  const spent = E(f, 126, 136, 0, 1, IO);
+                  return (
+                    <div key={"sw" + k} style={{ flex: 1, borderRadius: 1,
+                      background: hexa("#F0E4FF", 0.9 - spent * 0.35),
+                      height: (6 + Math.abs(Math.sin(k * 1.7 + f / 4)) * 24) * (1 - spent) + spent * 3 }} />
+                  );
+                })}
+              </div>
+              <div style={{ position: "absolute", left: 0, right: 0, bottom: 8,
+                textAlign: "center", ...mono(19, 900),
+                color: hexa("#F0E4FF", 0.95 - E(f, 126, 136, 0, 1, IO) * 0.45) }}>
+                {R.tools[1].input}</div>
+              {/* the flatline it leaves behind */}
+              {E(f, 126, 136, 0, 1, IO) > 0.2 && (
+                <div style={{ position: "absolute", left: 9, right: 9, top: 27, height: 3,
+                  background: hexa("#F0E4FF", 0.8) }} />
+              )}
+            </div>
+
+            {/* ⭐⭐⭐ AND WHAT COMES OUT — a waveform that GROWS as it travels and
+                runs off the right edge of frame still going. The bars are live,
+                so the whole ribbon repaints every frame. */}
+            {Array.from({ length: N }, (_, k) => {
+              const t = k / (N - 1);
+              const bx = SX + 66 + t * 900;
+              if (bx > 1080) return null;
+              /* ⭐ THE GAP IS THE IMAGE: ~22px of bar at the source against ~270px
+                 by the frame edge, so the ratio reads without a caption. */
+              const grow = pour * (0.10 + t * t * 2.1);
+              /* ⛔ the first build had the NOISE bigger than the ENVELOPE, so
+                 neighbouring bars jumped around and the growth was masked.
+                 The envelope now carries it and the noise only textures it. */
+              const h = grow * (132 + Math.abs(Math.sin(k * 0.9 + f / 3.1)) * 58);
+              const w = 11 + t * 21;
+              return (
+                <div key={"pw" + k} style={{ position: "absolute", left: bx, top: SY - h / 2,
+                  width: w, height: h, zIndex: 64, borderRadius: 4,
+                  background: `linear-gradient(180deg, ${hexa("#F0E4FF", 0.95)} 0%, ${hexa("#B79BE8", 0.9)} 100%)`,
+                  border: "3px solid rgba(20,10,34,0.5)" }} />
+              );
+            })}
+            {/* the trough it pours along, so it is a CHANNEL and not floating */}
+            <div style={{ position: "absolute", left: SX + 56, top: SY + 160, width: 940,
+              height: 12, zIndex: 74, opacity: pour,
+              background: `linear-gradient(90deg, ${dkh(VIOLET, 0.5)} 0%, ${dkh(VIOLET, 0.2)} 100%)` }} />
+
+            {/* the key follows the output, so the ribbon is unambiguously first */}
+            <HeroKey x={SX + 470} y={SY} r={400} c="#E8D8FF" z={63} k={pour * 1.1} />
+
+            {/* the count of finished takes — it only counts what is on screen */}
+            {pour > 0.4 && (
+              <div style={{ position: "absolute", left: 716 + L.c * 0.5, top: 226, zIndex: 88,
+                padding: "8px 18px", borderRadius: 7, background: "#15171C",
+                border: `4px solid ${hexa(VIOLET, 0.9)}`,
+                ...mono(30, 900), color: "#F0E4FF", letterSpacing: 2 }}>
+                {`+${String(Math.floor((f - 96) * 2.4)).padStart(3, "0")}`}
+              </div>
+            )}
+          </>
+        );
+      })()}
+
       <BandChip t={`${R.tools[1].input} OF AUDIO · UNLIMITED TAKES`} c={INK} />
       <Edge side="r" c="#150F24" w={92} z={93} kind="rail" />
     </Scene>
@@ -1657,47 +2272,194 @@ export const T3: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("turn");
   const L = LAY[v];
-  const carry = E(f, 8, 34, 0, 1, IO);        /* he carries the print in     */
+  /* ⛔ THE SCENE OPENED ON EIGHT DEAD FRAMES — `min 1.69`, the lowest in the
+     reel. `feedback_frame0_preseed_needs_z`: open mid-event, not on a still. */
+  const carry = E(f, 0, 30, 0, 1, IO);        /* he carries the print in     */
   const scan = E(f, 34, 54, 0, 1, IO);        /* the head crosses it FIRST   */
   const solid = E(f, 52, 78, 0, 1, OUT);      /* "into a REAL 3D model"      */
   const spin = E(f, 56, 147, 0, 1, LIN);      /* it turns from the moment it exists */
-  const lamps = E(f, 96, 114, 0, 1, LIN);     /* "LIGHT it"                  */
-  const reuse = E(f, 118, 142, 0, 1, OUT);    /* "and REUSE it"              */
+  /* ⛔⛔ THE LIGHT BEAT WAS FIRING A SECOND BEFORE ITS OWN WORD. Measured
+     onsets against this scene's start (f531): **"spin," 21.35s = local 120 ·
+     "light," 21.81s = local 133 · "reuse." 22.00s = local 139.** The lamps ran
+     at local 96-114, i.e. 20.9-21.5s — struck, and settled, before the word
+     arrived. Anticipation now lives in the RIG MOVING (from 112) and the strike
+     lands ON the word. */
+  const rig = E(f, 112, 132, 0, 1, IO);       /* the heads swing into place  */
+  const lamps = E(f, 131, 140, 0, 1, IN_Q);   /* "LIGHT" — they STRIKE       */
+  const reuse = E(f, 139, 147, 0, 1, OUT);    /* "and REUSE"                 */
   const push = (E(f, 84, 92, 0, 1, IN_Q) - E(f, 92, 108, 0, 1, OUT)) * 0.34;
 
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.48}>
+      {/* three shots: the shop, a CLOSE on the turntable while the mesh builds
+          itself, then out to the lamps and the copies racking up */}
+      <Shots f={f} shots={[
+        { at: 0,  s: 1.00, x: 0,   y: 0,   drift: 0.06 },
+        { at: 48, s: 1.46, x: -46, y: -70, drift: 0.05 },
+        { at: 98, s: 1.14, x: -60, y: -18, drift: 0.07 },
+      ]}>
       <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="shelf" overhead="lampbar"
         rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.8} rakeN={RAKE_N[v]}
         floorKind="tile" grit={0.6} />
 
       {/* three real lamps on the rig, striking in an ascending run */}
-      {[-224, 0, 224].map((dx, i) => {
-        const on = Math.max(0, Math.min(1, lamps * 3 - i));
+      {/* ⭐⭐⭐ REAL STUDIO LIGHTS.  *"when it talks about light, show a real
+          light."*  What was here was three 72x46 boxes with a faint cone — a
+          shape that means "lamp" only if you already know. These are fresnel
+          heads: a lens face with its rings, four BARN DOORS, a yoke, a tilt
+          knob and a cable, mounted on the rig — and they SWING INTO POSITION
+          first and STRIKE on the word, so the movement promises the strike
+          (`feedback_predictable_is_not_anticipation`). */}
+      {[-232, 6, 244].map((dx, i) => {
+        const on = Math.max(0, Math.min(1, lamps * 3.4 - i * 0.7));
+        const LX = 552 + dx + L.b * 0.7;
+        const tilt = -46 + rig * 46 + i * 2;          /* the heads come down */
+        const flare = Math.max(0, 1 - Math.abs(lamps * 3.4 - i * 0.7 - 1) * 3);
         return (
           <React.Fragment key={"lm" + i}>
-            <div style={{ position: "absolute", left: 552 + dx + L.b * 0.7 - 36, top: 230,
-              width: 72, height: 46, zIndex: 30, borderRadius: "6px 6px 24px 24px",
-              background: "linear-gradient(176deg,#7E7462,#2E2A22)",
-              border: "4px solid rgba(0,0,0,0.48)" }}>
-              <div style={{ position: "absolute", left: 9, bottom: 3, right: 9, height: 13,
-                borderRadius: 3, background: mxh("#FFF3D6", 0.08 + on * 0.82) }} />
+            {/* the yoke it hangs in, and the bar it is clamped to */}
+            <div style={{ position: "absolute", left: LX - 6, top: 196, width: 12, height: 44,
+              zIndex: 29, background: dkh(STEEL, 0.55) }} />
+            <div style={{ position: "absolute", left: LX - 62, top: 236, width: 124, height: 116,
+              zIndex: 31, transformOrigin: "50% 8%",
+              transform: `rotate(${tilt * 0.34}deg)` }}>
+              <svg width="124" height="116" viewBox="0 0 124 116" style={{ overflow: "visible" }}>
+                {/* the yoke arms */}
+                <path d="M14 6 L14 52 M110 6 L110 52" stroke={dkh(STEEL, 0.5)} strokeWidth="9" />
+                <circle cx="14" cy="52" r="9" fill={mxh(STEEL, 0.2)} stroke="#15171C" strokeWidth="4" />
+                <circle cx="110" cy="52" r="9" fill={mxh(STEEL, 0.2)} stroke="#15171C" strokeWidth="4" />
+                {/* the body */}
+                <rect x="22" y="24" width="80" height="62" rx="7"
+                  fill="url(#lampbody)" stroke="#15171C" strokeWidth="6" />
+                <defs><linearGradient id="lampbody" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stopColor="#8E8672" /><stop offset="1" stopColor="#2E2A22" />
+                </linearGradient></defs>
+                {/* ⭐ THE BARN DOORS — the thing that makes it read as a LAMP */}
+                <path d="M18 86 L2 108 L40 108 Z" fill="#22201C" stroke="#15171C" strokeWidth="4" />
+                <path d="M106 86 L122 108 L84 108 Z" fill="#22201C" stroke="#15171C" strokeWidth="4" />
+                <rect x="16" y="82" width="92" height="12" rx="3" fill="#3A362E"
+                  stroke="#15171C" strokeWidth="4" />
+                {/* the lens, with its fresnel rings, going HOT on the strike */}
+                <ellipse cx="62" cy="86" rx="34" ry="12"
+                  fill={mxh("#FFF3D6", 0.06 + on * 0.9)} stroke="#15171C" strokeWidth="4" />
+                {[24, 16, 8].map((r, q) => (
+                  <ellipse key={"fr" + q} cx="62" cy="86" rx={r} ry={r * 0.36} fill="none"
+                    stroke={hexa("#FFFFFF", 0.18 + on * 0.4)} strokeWidth="2.5" />
+                ))}
+                {/* the tilt knob and the cable that make it real kit */}
+                <circle cx="110" cy="52" r="5" fill="#C9A15A" />
+                <path d="M62 24 Q68 4 88 2" fill="none" stroke="#1A1814" strokeWidth="6" />
+              </svg>
             </div>
+            {/* ⭐ THE BEAM — a hard cone that reaches the turntable, plus the
+                flare at the lens on the frame it fires */}
             {on > 0 && (
-              <div style={{ position: "absolute", left: 552 + dx + L.b * 0.7 - 116, top: 274,
-                width: 232, height: 340, zIndex: 28, opacity: on * 0.28,
-                clipPath: "polygon(38% 0, 62% 0, 100% 100%, 0 100%)",
-                background: `linear-gradient(180deg, ${hexa("#FFF3D6", 0.9)} 0%, ${hexa("#FFF3D6", 0)} 100%)` }} />
+              <>
+                <div style={{ position: "absolute", left: LX - 210, top: 336, width: 420, height: 400,
+                  zIndex: 42, opacity: on * 0.66,
+                  clipPath: "polygon(43% 0, 57% 0, 100% 100%, 0 100%)",
+                  background: `linear-gradient(180deg, ${hexa("#FFF3D6", 0.95)} 0%, ${hexa("#FFF3D6", 0)} 100%)` }} />
+                <div style={{ position: "absolute", left: LX - 86, top: 288, width: 172, height: 172,
+                  zIndex: 43, borderRadius: "50%", opacity: on,
+                  background: `radial-gradient(circle, ${hexa("#FFF8E4", 0.85)} 0%, ${hexa("#FFF8E4", 0)} 70%)` }} />
+              </>
+            )}
+            {flare > 0.05 && (
+              <div style={{ position: "absolute", left: LX - 190, top: 210, width: 380, height: 380,
+                zIndex: 44, borderRadius: "50%", opacity: flare,
+                background: `radial-gradient(circle, ${hexa("#FFFFFF", 0.9)} 0%, ${hexa("#FFF3D6", 0.4)} 30%, ${hexa("#FFF3D6", 0)} 68%)` }} />
             )}
           </React.Fragment>
         );
       })}
 
+      {/* the whole set lifts as three heads strike — motivated by the lamps
+          themselves, so it is a light coming on and not a flash transition
+          (`feedback_no_flashing_transitions`) */}
+      {lamps > 0 && (
+        <div style={{ position: "absolute", inset: 0, zIndex: 45, pointerEvents: "none",
+          opacity: lamps * 0.22, mixBlendMode: "screen",
+          background: `radial-gradient(120% 90% at 50% 34%, ${hexa("#FFF3D6", 0.9)} 0%, ${hexa("#FFF3D6", 0)} 74%)` }} />
+      )}
+
+      {/* ⭐ AND THE MODEL HAS TO ANSWER THE LIGHT — a hard cast shadow on the
+          turntable that only exists once the lamps are on. A light that does
+          not change what it falls on is a prop, not a light. */}
+      {lamps > 0 && (
+        <div style={{ position: "absolute", left: 556 + L.b * 0.7 - 200, top: 690, width: 400,
+          height: 54, zIndex: 41, opacity: lamps * 0.5, borderRadius: "50%",
+          background: `radial-gradient(ellipse, ${hexa("#0A1A20", 0.85)} 0%, ${hexa("#0A1A20", 0)} 72%)`,
+          transform: `translateX(${Math.sin(spin * 6.2) * 26}px)` }} />
+      )}
+
+      {/* ⭐⭐ COUNTABLE CONTENT: the rack of FINISHED MODELS, each on its own
+          mini turntable at its own angle. This wall was BLANK TEAL — the worst
+          offender on the contact sheet and the reason T3 scored 5.48, the
+          lowest scene in the reel. A 3D shop stores what it has made. */}
+      <ContentWall x={72 + L.c * 0.5} y={312} w={880} rows={1} f={f}
+        kind="model" c={TEAL} z={19} fromX={556 + L.b * 0.7} fromY={600} arc={220}
+        cols={8} k={E(f, 0, 144, 0, 1, LIN)} />
+
       <Plinth x={556 + L.b * 0.7} y={690} s={1.12} f={f}
         spin={spin + PJ[v] * 0.17} z={40} />
       {/* ⭐ THE OBJECT: a flat print of a chair that BECOMES a chair */}
-      <Chair x={556 + L.b * 0.7 - (1 - carry) * 320} y={666 - (1 - carry) * 40}
-        s={1.30} solid={solid} spin={spin + PJ[v] * 0.17} lit={0.24 + lamps * 0.3} z={70} />
+      {/* ⭐⭐ IT DOLLIES IN WHILE IT TURNS. A 90-frame spin on the spot is an
+          ACTION LOOP, not a scene — `feedback_motion_needs_a_destination`. The
+          chair now GROWS and RISES the whole time it is turning, so the biggest
+          bright object in frame is repainting every frame instead of rotating
+          inside its own outline. */}
+      {/* ⭐⭐ THE OBJECT IS THE HERO HERE, SO IT IS SIZED LIKE ONE. It was 1.30
+          and read at the same weight as the rack behind it and the crowd in
+          front — three equal candidates and no first place. */}
+      <Chair x={556 + L.b * 0.7 - (1 - carry) * 320}
+        y={672 - (1 - carry) * 40 - spin * 64}
+        s={1.62 + spin * 0.40} solid={solid} spin={spin + PJ[v] * 0.17}
+        lit={0.22 + lamps * 0.72} z={70} />
+      {/* ⭐ the plugin doing the scanning — the SOURCE, deliberately smaller
+          than the thing it makes, so the two do not fight for first place */}
+      <ToolObject x={198 + L.a * 0.7 + Math.sin(f / 16) * 18}
+        y={520 + Math.sin(f / 12) * 18} s={0.94 + Math.sin(f / 9) * 0.06} i={2} f={f} z={64}
+        rot={Math.sin(f / 14) * 10} label={false}
+        glow={0.9 + Math.abs(Math.sin(f / 6)) * 0.9 + scan * 1.1} live={scan} />
+
+      {/* ⭐⭐⭐ THE MESH BUILDS BEFORE IT SOLIDIFIES. The scene used to go flat
+          print -> solid chair with nothing in between, so the one interesting
+          part of the claim — that a photo becomes GEOMETRY — happened off
+          screen. A wireframe cage now assembles edge by edge over the print,
+          vertex by vertex, and only then fills in. */}
+      {(() => {
+        const wire = E(f, 40, 74, 0, 1, IO);
+        if (wire <= 0 || solid >= 1) return null;
+        const CX = 556 + L.b * 0.7, CY = 520;
+        const N = 14;
+        const pts = Array.from({ length: N }, (_, k) => {
+          const th = (k / N) * Math.PI * 2 + spin * 2.2;
+          const rr = 118 + (k % 3) * 26;
+          return [CX + Math.cos(th) * rr, CY + Math.sin(th) * rr * 0.62 - (k % 4) * 22];
+        });
+        const shown = Math.floor(wire * N);
+        return (
+          <svg width={W} height={H} style={{ position: "absolute", left: 0, top: 0, zIndex: 72,
+            pointerEvents: "none", opacity: 1 - solid * 0.9 }}>
+            {pts.slice(0, shown).map((q, k) => {
+              const nx = pts[(k + 1) % N], mx = pts[(k + 5) % N];
+              return (
+                <React.Fragment key={"wf" + k}>
+                  <line x1={q[0]} y1={q[1]} x2={nx[0]} y2={nx[1]}
+                    stroke="#0A2026" strokeWidth="7" />
+                  <line x1={q[0]} y1={q[1]} x2={nx[0]} y2={nx[1]}
+                    stroke="#EAFBFF" strokeWidth="4" />
+                  {k % 2 === 0 && (
+                    <line x1={q[0]} y1={q[1]} x2={mx[0]} y2={mx[1]}
+                      stroke={hexa("#BFE8F0", 0.4)} strokeWidth="2" />
+                  )}
+                  <circle cx={q[0]} cy={q[1]} r="7.5" fill="#EAFBFF" stroke="#0A2026" strokeWidth="3" />
+                </React.Fragment>
+              );
+            })}
+          </svg>
+        );
+      })()}
 
       {/* ⭐ THE SCAN HEAD — it crosses the flat print before anything happens to
           it, which is the shot stating that something is ABOUT to */}
@@ -1729,16 +2491,29 @@ export const T3: React.FC<SP> = ({ v, dur }) => {
       <Hero f={f} x={214 + L.a * 0.7 + push * 180} y={GY} size={268} z={58} act={1} ph={0.5}
         drive={carry < 1 ? 0.22 : push}
         strain={push > 0.1 ? 0.5 : 0}
-        costume={{ suit: 1 }} tint="#8E4A2E" gaze={0.7}
+        costume={{ suit: 1 }} gaze={0.7}
         cheer={reuse > 0.5 ? 1 : 0} />
       {push > 0.08 && (
         <Forearm x0={286 + L.a * 0.7 + push * 180} y0={GY - 176}
-          x1={392 + L.a * 0.7 + push * 180} y1={GY - 196} w={24} c="#8E4A2E" z={60} />
+          x1={392 + L.a * 0.7 + push * 180} y1={GY - 196} w={24} c={CLAY} z={60} />
       )}
 
       <EnamelSign x={118 + L.a * 0.7} y={258} i={2} s={1.0} z={74} on={E(f, 12, 26, 0, 1, OUT)} />
       <ForeMass side="l" kind="stand" c="#171310" z={90} s={1.05} />
       <ForeMass side="r" kind="flag" c="#141110" z={89} s={0.9} />
+      {/* ⭐⭐⭐ THE NEAR-CAMERA BAND — the shop's RECEIVING CREW, the ecom buyers
+          the next line sells to, cropped by the bottom edge. Placed below the
+          chair on the plinth so the turn stays clean. */}
+      <NearBand f={f} n={5} y={860} size={214} pitch={228} x0={-52} z={86}
+        at={6} seed={5} dx={L.c * 0.9} />
+
+      {/* the object on the plinth is the only subject in this scene, so the
+          key sits on it and comes UP as the three lamps strike */}
+      <HeroKey x={556 + L.b * 0.7} y={578} r={318} c="#EAF6FF" z={33}
+        k={0.66 + lamps * 0.6} />
+      <NearShade top={612} z={88} k={0.58} />
+
+      </Shots>
       <BandChip t="SPIN IT · LIGHT IT · REUSE IT" c={INK} />
     </Scene>
   );

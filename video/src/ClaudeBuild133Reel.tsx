@@ -244,7 +244,11 @@ export const BED_QUIET = db(-6);
 /** ⛔ THE PICKED HOOK. `shutter` IS S0 itself, so the candidate that was chosen
     and the scene that ships are the same code and cannot drift apart.
     ⏳ Not yet picked by Alex — four candidates render as their own comps. */
-export const PICKED: HookId = "shutter";
+/* ⭐ PICKED (rev 9): Alex chose SWAP. `makeReel` reads this for the reel's first
+   Sequence, so the shipped opening and the candidate preview are the same code.
+   The mechanism is EXCHANGE — three gems out along the belt, orders back the
+   other way, crossing — which is the line's actual verb. Measured 11.96. */
+export const PICKED: HookId = "swap";
 
 export const makeReel = (v: Variant, quiet = false, hook: HookId = PICKED): React.FC => () => {
   const f = useCurrentFrame();

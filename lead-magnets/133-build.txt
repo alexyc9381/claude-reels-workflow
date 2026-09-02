@@ -1,0 +1,72 @@
+TITLE   Three Free AI Tools You Can Sell as a Service
+SUB     The exact repos behind the video, what each one really does, and the honest version of what it takes to charge for them
+
+H       What this is
+P       Three open source projects that turn one small input into a finished product. A topic into a short video. A minute of your voice into a cloned voice. A single photo into a 3D model. All three are free, all three install in minutes, and all three produce something a business already pays a freelancer for.
+P       This guide is the part the video did not have room for: the actual repos, the actual inputs and outputs, what each one is genuinely good at, and the part nobody puts in a reel, which is that the tools are the easy half.
+
+RULE
+
+H       The three tools
+P       Star counts were checked against each repository's own page on 2 September 2026 and will have moved since.
+
+H       1. MoneyPrinterTurbo
+B       What it does: you give it one topic and it writes the script, generates the voiceover, pulls the footage, adds subtitles and cuts a finished short video.
+B       Input: one word or one topic line. Output: a finished vertical video.
+B       Roughly 119,300 stars, MIT licence.
+B       Its own README documents automatic uploads to TikTok, Instagram and YouTube Shorts.
+B       Docker is the deployment method its README documents, which is the fastest way to get it running without fighting a Python environment.
+P       What it is honestly good at: volume. Faceless channels, product explainer loops, bulk social content where the brief is loose and the client wants ten of something rather than one perfect one.
+P       What it is not: a replacement for an editor on anything where the cut carries the idea. It assembles competently. It does not have taste.
+
+H       2. GPT-SoVITS
+B       What it does: voice cloning and text to speech from a very small sample.
+B       Input: one minute of clean audio. Output: a cloned voice you can then type into.
+B       Roughly 61,400 stars, MIT licence.
+P       What it is honestly good at: narration at volume in a voice that stays consistent across a hundred files, and language coverage. Once the voice exists you never book studio time for that voice again.
+P       What it is not: a licence to clone somebody else's voice. Use your own, or a voice you have written permission for. This is the one item on this list that can get you into real trouble, and it is worth being boring about.
+
+H       3. Hunyuan3D
+B       What it does: generates a textured 3D model from a single image.
+B       Input: one flat photo. Output: a mesh with texture you can spin, light and reuse.
+B       Roughly 14,700 stars. Weights are on Hugging Face under tencent/Hunyuan3D-2.
+B       Shopify's own documentation states that product media can include images, 3D models and videos, which is the clearest existing demand for this output.
+P       What it is honestly good at: getting a usable model out of a product photo fast, for a listing, a configurator or an AR view.
+P       What it is not: production geometry. Expect to clean up topology for anything going into a game engine or a manufacturing pipeline.
+
+RULE
+
+H       BUILD
+P       Get all three running before you speak to anybody. The whole pitch depends on being able to turn a request around the same day, and you cannot do that while you are still reading install docs.
+NUM     Run MoneyPrinterTurbo through Docker first. It is the heaviest of the three and the one most likely to expose a missing dependency on your machine.
+NUM     Install GPT-SoVITS next and clone your own voice with a clean one minute sample. Record it in a quiet room, not in a car.
+NUM     Install Hunyuan3D last and pull the weights from Hugging Face. Feed it three product photos you already have and look hard at the meshes before you promise anyone anything.
+NUM     Make one finished sample of each, using your own material. Not a demo from the repo. Yours.
+P       That is the whole build step. It is genuinely short, which is why it is also the part that is worth the least.
+
+RULE
+
+H       MARKET
+P       Nobody buys a repo. They buy a finished thing with their name on it.
+NUM     Pick one output and one buyer. Ten shorts a month for local gyms is a business. All three tools for anybody is not.
+NUM     Publish the three samples you made, with the input next to the output. The before and after is the entire pitch and it takes ten seconds to understand.
+NUM     Put a price on it publicly. A page with a price filters out everybody who was never going to pay, which is most of the enquiries you would otherwise answer for free.
+NUM     Go where the brief is already written. On Fiverr and Upwork people are actively posting the job you can now do. That is a shorter path than persuading somebody they need it.
+
+RULE
+
+H       SELL
+P       This is the section the video is honest about and most videos are not. The tools are free. Selling them is the hard part.
+B       Your competition is not other AI users. It is a human freelancer who has done it four hundred times and will not miss a deadline.
+B       Speed is your actual product. If you can return a first draft the same day, that is worth more to most buyers than the last ten percent of quality.
+B       Charge for the outcome, not the render. Nobody is buying GPU minutes. They are buying a finished video, a finished voiceover, a finished model.
+B       Expect to do the last mile by hand. Every one of these three needs a human pass before it goes to a client, and pretending otherwise is how you get a refund request.
+B       Keep your own samples current. The models improve every few months and last year's output starts to look like last year's output.
+
+RULE
+
+H       The honest summary
+P       Three free tools, each turning one small input into something businesses already buy. Installing them is an afternoon. Building a business on them is the same work as any other service business: pick one buyer, show finished proof, price it publicly, and deliver faster than the person you are competing with.
+P       The tools remove the excuse. They do not remove the work.
+
+KEY     BUILD
