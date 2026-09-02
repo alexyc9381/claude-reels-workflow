@@ -1979,7 +1979,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
           background: dkh(BRASS, 0.40), borderRadius: 5 }} />
         <div style={{ position: "absolute", left: 108, top: 400, zIndex: 46,
           transform: `rotate(${-13 + Math.sin(f / 34) * 1.6}deg)`, transformOrigin: "42% 100%" }}>
-          <GHero f={f} x={100} y={228} size={383} z={46} costume={{ constr: 1 }} act={3} ph={2.1}
+          <GHero f={f} x={834} y={228} size={232} z={46} costume={{ constr: 1 }} act={3} ph={2.1}
             drive={0} gaze={0} />
         </div>
         {/* the Zs — small, but they are the only thing that says asleep */}
@@ -2015,7 +2015,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
             what he is GIVEN, then what he ANSWERS. That is the sentence. */}
         {/* 1 · THE ASK — the repo, the branch, and the job, in Google's words */}
         {f >= 2 && f < 42 && (
-          <Shot x={556} y={450} w={880} f={f} at={2} ratio={0.511}
+          <Shot x={492} y={396} w={946} f={f} at={2} ratio={0.511}
             src="broll/shots/jules_ask.png" label="jules.google" z={58} />
         )}
         {/* 2 · THE ANSWER — it comes back with a plan. Hard PUNCH in, no tween:
@@ -2023,7 +2023,7 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
         {f >= 42 && (
           <div style={{ position: "absolute", inset: 0, zIndex: 59,
             transform: `scale(${f >= 66 ? 1.10 : 1})`, transformOrigin: "50% 46%" }}>
-            <Shot x={556} y={482} w={880} f={f} at={42} ratio={0.637} chrome="bare"
+            <Shot x={492} y={412} w={946} f={f} at={42} ratio={0.637} chrome="bare"
               src="broll/shots/jules_plan.png" z={59} />
           </div>
         )}
@@ -2149,13 +2149,13 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
         {f >= SEAT + 26 && (
           <div style={{ position: "absolute", inset: 0, zIndex: 60,
             transform: `translateX(${(1 - E(f, SEAT + 26, SEAT + 40, 0, 1, OUT)) * 620}px)` }}>
-            <Shot x={690} y={276} w={560} f={f} at={SEAT + 26} ratio={0.712} chrome="bare"
+            <Shot x={508} y={352} w={860} f={f} at={SEAT + 26} ratio={0.712} chrome="bare"
               src="broll/shots/jules_ship.png" z={60} />
           </div>
         )}
 
         {/* ⭐ HE DRIVES IT IN — foreground, nothing over him */}
-        <GHero f={f} x={186} y={834} size={392} z={72} costume={{ constr: 1 }}
+        <GHero f={f} x={196} y={834} size={300} z={72} costume={{ constr: 1 }}
           strain={0.52 * (1 - push) + 0.2}
           drive={push * 0.34 - kick * 0.30} reach={104} act={1} ph={0.6} />
       </Cam>
@@ -2356,11 +2356,11 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
             beat" — the thing that took a held b-roll shot 3.23 -> 4.40. */}
         <div style={{ position: "absolute", inset: 0, zIndex: 40,
           transform: `scale(${f >= dur - 13 ? 1.11 : 1})`, transformOrigin: "50% 46%" }}>
-          <Broll x={506} y={392} w={880} f={f} at={2} src="broll/opal_nodes.mp4"
+          <Broll x={492} y={368} w={946} f={f} at={2} src="broll/opal_nodes.mp4"
             label="OPAL · WORKFLOW" punch={40} z={40} bv={VARBV[v]} />
         </div>
         {/* and he reaches into it as the shot ends, so a BODY crosses the cut */}
-        <GHero f={f} x={868} y={780} size={300} z={44} costume={{ glasses: 1 }}
+        <GHero f={f} x={846} y={780} size={214} z={44} costume={{ glasses: 1 }}
           act={1} ph={1.6} flip
           drive={E(f, dur - 22, dur + 8, 0, 0.34, IN_Q)} reach={110} />
         {/* ⭐ the one he carries — a full-panel-width travel */}
@@ -2416,7 +2416,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
             six of them was what Alex saw as "just rectangles". What Opal does is
             in Google's own footage above; the drawn layer is now only the
             CHARACTER, working it. */}
-        <GHero f={f} x={264} y={700} size={406} z={62} costume={{ glasses: 1 }} act={1} ph={0.9}
+        <GHero f={f} x={198} y={700} size={236} z={62} costume={{ glasses: 1 }} act={1} ph={0.9}
           drive={carry * 0.30} reach={120} gaze={0.4} />
         {/* ⭐ OFFICIAL: "Introducing Opal" (Google for Developers) */}
         {/* ⛔ last8 3.89 against a body of 18.37 — ratio 0.21, the worst tail in
@@ -2494,7 +2494,7 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
             a new stacking context, which has hidden a whole cast twice already. */}
         <div style={{ position: "absolute", inset: 0, zIndex: 58,
           transform: `scale(${f >= 77 ? 1.13 : 1})`, transformOrigin: "58% 40%" }}>
-          <Broll x={618} y={286} w={720} f={f} at={2} src="broll/opal_build.mp4"
+          <Broll x={492} y={352} w={930} f={f} at={2} src="broll/opal_build.mp4"
             label="OPAL" punch={44} z={58} bv={VARBV[v]} />
         </div>
         <BaySlam f={f} at={6} mark={R.tools[1].mark} x={186} y={112} z={94} />
@@ -2586,11 +2586,11 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
         <MarkTile x={62} y={620} s={78} src={R.feeds.n8n} z={88} f={f} at={N8N} seed={2} />
 
         {/* ── RIGHT: Opal, wiring ITSELF. Google's own footage, not a drawing. ── */}
-        <Broll x={730} y={356} w={520} f={f} at={0} src="broll/opal_nodes.mp4"
+        <Broll x={500} y={370} w={926} f={f} at={0} src="broll/opal_nodes.mp4"
           label="OPAL" punch={34} z={50} bv={VARBV[v]} />
 
         {/* ⭐ HE IS THREADING THE LEFT ONE, IN FRONT OF EVERYTHING, UNOBSTRUCTED */}
-        <GHero f={f} x={272} y={812} size={438} z={62} costume={{ glasses: 1 }}
+        <GHero f={f} x={838} y={812} size={236} z={62} costume={{ glasses: 1 }}
           strain={0.30 + heave * 0.44} drive={-heave * 0.22} reach={96}
           act={1} ph={1.4} flip />
       </Cam>
@@ -2629,7 +2629,7 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
         <Runner y={82} f={f} z={16} rate={25.4} pitch={276} w={218} h={98} c="#B98CE8" c2="#150A26" kind="cell" />
 
         {/* ⭐ THE REAL CANVAS, receiving it */}
-        <Broll x={654} y={368} w={640} f={f} at={0} src="broll/opal_nodes.mp4"
+        <Broll x={496} y={372} w={932} f={f} at={0} src="broll/opal_nodes.mp4"
           label="OPAL · WORKFLOW" punch={30} z={40} bv={VARBV[v]} />
 
         {/* the intake the ribbon disappears into — a real slot with a lit lip */}
@@ -2659,7 +2659,7 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
         ))}
 
         {/* he feeds it in — clear of the footage, in the near corner */}
-        <GHero f={f} x={126} y={812} size={352} z={66} costume={{ glasses: 1 }}
+        <GHero f={f} x={150} y={812} size={246} z={66} costume={{ glasses: 1 }}
           act={1} ph={0.2} drive={0.14 + Math.sin(f / 7) * 0.10} reach={80} />
       </Cam>
     </Scene>
@@ -2727,7 +2727,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
             Opal a "video editor"; this is the product, from Google's launch
             video, showing the node graph. The strongest correction available is
             Google showing you the thing itself. */}
-        <Broll x={506} y={392} w={880} f={f} at={8} src="broll/opal_nodes.mp4"
+        <Broll x={492} y={370} w={946} f={f} at={8} src="broll/opal_nodes.mp4"
           label="OPAL · WORKFLOW" punch={38} z={70} bv={VARBV[v]} />
         <Ring x={726} y={604} f={f} at={33} c={OVIO} s={1.0} z={76} />
         {/* ⛔ §23 · the app booted at f41 of 66 and the scene died into the cut
@@ -2747,7 +2747,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
             ))}
           </div>
         )}
-        <GHero f={f} x={790} y={760} size={357} z={62} costume={{ glasses: 1 }} act={3} ph={1.8}
+        <GHero f={f} x={846} y={760} size={232} z={62} costume={{ glasses: 1 }} act={3} ph={1.8}
           gaze={-0.3} cheer={f > 52 ? 0.5 : 0} />
         {/* ⭐ TRAY 2 FULL */}
         <OutTray x={230} y={758} w={250} f={f} fill={E(f, 46, dur, 0, 1, LIN)} kind="app"
@@ -2821,12 +2821,12 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
             <Img src={staticFile(MB_REAL[6 + j])} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
         )))}
-        <GHero f={f} x={862} y={780} size={367} z={62} costume={{ prof: 1 }} act={0} ph={0.7}
+        <GHero f={f} x={852} y={780} size={228} z={62} costume={{ prof: 1 }} act={0} ph={0.7}
           gaze={-0.6} shock={drop > 0.85 && drop < 1 ? 0.5 : 0} flip />
         {/* ⛔ THE NAME, because Google publishes no mark for it. And the LABS
             beaker beside it, as Labs' own mark — that distinction is the point. */}
         {/* ⭐ OFFICIAL: "Introducing Mixboard | Google Labs" */}
-        <Broll x={506} y={392} w={700} f={f} at={38} src="broll/mixboard_gen.mp4"
+        <Broll x={492} y={372} w={936} f={f} at={38} src="broll/mixboard_gen.mp4"
           label="MIXBOARD" punch={64} z={64} bv={VARBV[v]} />
         {/* ⛔ THE OFFICIAL LOCKUP IS THE LABS BEAKER + THE WORDMARK. Mixboard
             publishes no product icon of its own — `mixboard_favicon_32x32.png`
@@ -2865,7 +2865,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
         <BayRoom f={f} p={P} z={2} num="04" floorY={560} />
         <Runner y={640} f={f} z={12} rate={5.8} pitch={230} w={150} h={54} c="#8A6A34" c2="#2A1C0A" kind="crate" />
         <WhiteBoard x={128} y={216} w={760} h={430} drop={1} f={f} z={26} />
-        <Broll x={506} y={372} w={820} f={f} at={26} src="broll/mixboard_board.mp4"
+        <Broll x={492} y={366} w={940} f={f} at={26} src="broll/mixboard_board.mp4"
           label="MIXBOARD · LIVE" punch={54} z={40} bv={VARBV[v]} />
         {/* ⛔ arrivals spread across the FULL duration, never the first third */}
         {PINS.map((p, i) => (
@@ -2904,7 +2904,7 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
               borderRadius: 4, boxShadow: SH, transform: `rotate(${k * 280}deg)` }} />
           );
         })}
-        <GHero f={f} x={880} y={786} size={393} z={64} costume={{ prof: 1 }} act={1} ph={0.3}
+        <GHero f={f} x={856} y={786} size={232} z={64} costume={{ prof: 1 }} act={1} ph={0.3}
           drive={Math.sin(f / 8) * 0.3} reach={90} flip />
         <MarkTile x={128} y={150} s={70} src={null} name="MIXBOARD" z={88} />
       </Cam>
@@ -2994,7 +2994,7 @@ export const S12: React.FC<SP> = ({ v, dur }) => {
             {held && <Ring x={520} y={430} f={f} at={LAND + 6} c={GOLD} s={2.4} z={78} dur={22} />}
           </>);
         })()}
-        <GHero f={f} x={880} y={786} size={354} z={66} costume={{ prof: 1 }} act={1} ph={1.1}
+        <GHero f={f} x={858} y={786} size={236} z={66} costume={{ prof: 1 }} act={1} ph={1.1}
           drive={f > KEEP + 12 ? 0 : Math.sin(f / 4.2) * 0.34} reach={80}
           cheer={f > KEEP + 16 ? 0.7 : 0} flip />
         {/* ⛔⛔ §23 · THE WORST OFFENDER IN THE REEL (ratio 0.06): the keeper
@@ -3081,10 +3081,10 @@ export const S13: React.FC<SP> = ({ v, dur }) => {
             </div>
           );
         })}
-        <GHero f={f} x={862} y={772} size={348} z={62} costume={{ suit: 1 }} act={0} ph={1.6}
+        <GHero f={f} x={852} y={772} size={230} z={62} costume={{ suit: 1 }} act={0} ph={1.6}
           gaze={-0.5} flip />
         {/* ⭐ OFFICIAL: "Introducing Pomelli | Google Labs" */}
-        <Broll x={606} y={264} w={720} f={f} at={20} src="broll/pomelli_cards.mp4"
+        <Broll x={492} y={356} w={936} f={f} at={20} src="broll/pomelli_cards.mp4"
           label="POMELLI" punch={52} z={64} bv={VARBV[v]} />
         {/* ⛔ Pomelli serves the same generic Labs beaker (checked by eye:
             `foundry_about/assets/favicon-48x48.png` is the beaker, tinted pink).
@@ -3132,7 +3132,7 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
             frame ran to 1128 — so Google's own headline read "Pomelli will
             understa... your Busines". Same defect as the Jules capture: real
             footage you cannot read is a texture. Centred and sized to fit. */}
-        <Broll x={520} y={232} w={580} f={f} at={2} src="broll/pomelli_dna.mp4"
+        <Broll x={492} y={318} w={924} f={f} at={2} src="broll/pomelli_dna.mp4"
           label="BUSINESS DNA" punch={52} z={62} bv={VARBV[v]} />
         {/* ⭐ the reader keeps FEEDING: pages queue in from the right the whole
             scene, so the machine is processing a site, not holding one sheet. */}
@@ -3246,7 +3246,7 @@ export const S14: React.FC<SP> = ({ v, dur }) => {
             );
           })}
         </>)}
-        <GHero f={f} x={848} y={786} size={383} z={62} costume={{ suit: 1 }} act={1} ph={0.5}
+        <GHero f={f} x={846} y={786} size={236} z={62} costume={{ suit: 1 }} act={1} ph={0.5}
           drive={feed * 0.3} reach={70} gaze={-0.5} flip />
       </Cam>
     </Scene>
@@ -3350,11 +3350,11 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
         {/* ⛔ §11: an emitter on the STILLEST part of the frame */}
         {/* ⭐ THE REAL OUTPUT: Google's launch footage of the posts and ads
             Pomelli generates, beside the press printing them. */}
-        <Broll x={430} y={272} w={800} f={f} at={4} src="broll/pomelli_posts.mp4"
+        <Broll x={492} y={330} w={936} f={f} at={4} src="broll/pomelli_posts.mp4"
           label="POMELLI · ON BRAND" punch={54} z={60} bv={VARBV[v]} />
         <Steam x={334} y={306} f={f} at={0} n={7} s={1.5} z={58} c="#BEE8DC" rate={1.3} />
         {/* hands behind his back: no drive, no reach, act 3 (LOOK) only */}
-        <GHero f={f} x={880} y={786} size={381} z={62} costume={{ suit: 1 }} act={3} ph={2.4}
+        <GHero f={f} x={852} y={786} size={234} z={62} costume={{ suit: 1 }} act={3} ph={2.4}
           drive={0} gaze={-0.7} flip />
         {/* ⭐ TRAY 4 FULL — heaped */}
         <OutTray x={286} y={846} w={290} f={f} fill={E(f, 20, dur - 4, 0, 1, LIN)} kind="ad"

@@ -1721,3 +1721,40 @@ to protect survived the convention being broken.
 
 ⛔ **A convention you inherited is still a decision you are making.** This one had
 been applied in every scene of the reel without anyone choosing it there.
+
+---
+
+## 33. ⭐⭐ THE FOOTAGE IS THE SHOT, THE SPRITE IS THE PRESENTER (reel 129)
+
+> *"For each of the tools just do the videos of the things the whole time, like
+> taking up most of the screen, and you can have the sprite as a small part on
+> the side."*
+
+Reel 129 shipped its four tool sections with real product captures at **51-86% of
+panel width** and the cast at **300-438px** — up to 43% of the frame. Audited as a
+table it was obvious and it had never been looked at as a table:
+
+```
+  scene  kind   width          sprite
+  S7     Broll   520 (51%)      438px   <- the footage is the smaller object
+  S4     Shot    560 (55%)      392px
+  S14    Broll   580 (57%)      383px
+  S8     Broll   640 (63%)      352px
+```
+
+⛔ `feedback_official_footage_must_be_legible` already said *"real footage at 43%
+of panel is a texture, not footage"* — and every one of these was near or under
+that line while a drawn sprite took the frame.
+
+⭐ **THE RULE.** When a scene's job is to show what a product DOES, the capture is
+the shot:
+
+- **footage ≥ 90% of panel width** (on a 1012px panel: `w` 920-946, `x` ~492);
+- **the cast drops to ~230px** and sits at the side, IN FRONT of the panel — a
+  presenter beside a screen, not a co-star;
+- ⛔ **the sprite band is `x 208..879`**, so at that footage size the sprite
+  cannot clear the panel. It is supposed to overlap it. Do not shrink the
+  footage to make room.
+
+⭐ This is also the cheapest motion in the reel: a 946px capture repaints five
+times the area a 520px one does, for free, because the pixels were already there.

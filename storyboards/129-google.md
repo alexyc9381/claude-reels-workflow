@@ -610,3 +610,33 @@ Peak 10.0 (S16) beats the hook 9.5. Villain undefeated until S16.
 ## Related
 `docs/THE-OPEN.md` (S0 is authored to it) · `docs/ANIMATION-QUALITY.md` §1 §2 §3 §5 §9 §11 §13 §23 §24 §25 ·
 `docs/SOUND-DESIGN.md` · `storyboards/STORYBOARD-SPEC.md` · `storyboards/116-bill.md` (prior art)
+
+
+---
+
+## THE FOOTAGE PASS (2026-09-02)
+
+Alex: *"for each of the tools just do the videos of the things the whole time like
+taking up most of the screen and you can have the sprite as a small part on the side."*
+
+Every real capture in the four tool sections was re-sized to **~92% of panel width**
+(`w` 920-946 at `x` ~492) and every sprite in those scenes dropped to **~230px** at the
+side, in front of the panel. Before this pass the captures ran 51-86% and the cast ran
+300-438px — in S7 the drawn sprite was LARGER than the footage it was standing next to.
+
+| scene | tool | before | after |
+|---|---|---|---|
+| S3 | JULES  | 880 | 946 |
+| S4 | GITHUB | 560 | 860 |
+| S6 | OPAL   | 880 / 720 | 946 / 930 |
+| S7 | OPAL   | **520** | 926 |
+| S8 | OPAL   | 640 | 932 |
+| S9 | OPAL   | 880 | 946 |
+| S10 | MIXBOARD | 700 | 936 |
+| S11 | MIXBOARD | 820 | 940 |
+| S13 | POMELLI  | 720 | 936 |
+| S14 | POMELLI  | **580** | 924 |
+| S15 | POMELLI  | 800 | 936 |
+
+⛔ The sprite band is `x 208..879`, so at this footage size the cast CANNOT clear the
+panel — it overlaps it by design. See `docs/ANIMATION-QUALITY.md` §33.
