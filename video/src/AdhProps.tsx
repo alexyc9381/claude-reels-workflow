@@ -285,6 +285,149 @@ export const TodoList: React.FC<{ x: number; y: number; w: number; h: number; z?
   );
 };
 
+
+/* ---- THE STAMP — the load the hook's body works against ------------------- */
+/** ⭐⭐⭐ WEIGHT IS DEFORMATION (ANIMATION-QUALITY §11, and the FREE hook's own
+    comment: *"a rigid stick reads as someone holding a prop"*). So this stamp
+    has a SPRING that visibly compresses on the blow, a barrel that squashes,
+    and a handle that keeps travelling a few px after the face has stopped.
+    Drawn as a real tool: a turned knob with a highlight, a shaft with a collar,
+    a knurled band, a barrel with a lit edge, a rubber face, and the word it
+    puts down moulded into that face. */
+export const StampTool: React.FC<{ x: number; y: number; s?: number; z?: number; rot?: number;
+  press?: number; recoil?: number }> =
+  ({ x, y, s = 1, z = 86, rot = 0, press = 0, recoil = 0 }) => {
+  const W0 = 128 * s, H0 = 176 * s;
+  const squash = 1 + press * 0.10;
+  return (
+    <div style={{ position: "absolute", left: x - W0 / 2, top: y - H0, width: W0, height: H0,
+      zIndex: z, transform: `rotate(${rot + recoil * 2.2}deg)`, transformOrigin: "50% 100%" }}>
+      {/* 1 · the knob, turned, with a highlight */}
+      <div style={{ position: "absolute", left: W0 * 0.20, top: 0, width: W0 * 0.60, height: H0 * 0.20,
+        borderRadius: `${W0 * 0.3}px ${W0 * 0.3}px ${W0 * 0.10}px ${W0 * 0.10}px`,
+        background: `linear-gradient(180deg, ${mxh(BRASS, 0.34)}, ${BRASS} 44%, ${dkh(BRASS, 0.36)})`,
+        border: `${2.4 * s}px solid ${hexa(INK, 0.42)}` }}>
+        <div style={{ position: "absolute", left: "18%", top: "16%", width: "26%", height: "30%",
+          borderRadius: "50%", background: hexa("#FFFFFF", 0.4) }} />
+      </div>
+      {/* 2 · the shaft, and it SHORTENS as the spring takes the blow */}
+      <div style={{ position: "absolute", left: W0 * 0.40, top: H0 * 0.19,
+        width: W0 * 0.20, height: H0 * (0.20 - press * 0.07),
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.44)}, ${mxh(STEEL, 0.24)} 42%, ${dkh(STEEL, 0.48)})` }} />
+      {/* 3 · THE SPRING — three coils that compress. The tell that it is heavy. */}
+      {[0, 1, 2].map((i) => (
+        <div key={"sp" + i} style={{ position: "absolute", left: W0 * 0.30,
+          top: H0 * (0.235 + i * (0.052 - press * 0.020)), width: W0 * 0.40,
+          height: H0 * 0.024, borderRadius: H0 * 0.012,
+          background: `linear-gradient(180deg, ${mxh(STEEL, 0.3)}, ${dkh(STEEL, 0.4)})` }} />
+      ))}
+      {/* 4 · the collar */}
+      <div style={{ position: "absolute", left: W0 * 0.26, top: H0 * (0.40 - press * 0.06),
+        width: W0 * 0.48, height: H0 * 0.06, borderRadius: 3 * s,
+        background: `linear-gradient(180deg, ${mxh(STEEL, 0.2)}, ${dkh(STEEL, 0.42)})`,
+        border: `${1.8 * s}px solid ${hexa("#000", 0.4)}` }} />
+      {/* 5 · the barrel, squashing under the blow */}
+      <div style={{ position: "absolute", left: W0 * (0.5 - 0.36 * squash), top: H0 * (0.46 - press * 0.06),
+        width: W0 * 0.72 * squash, height: H0 * (0.34 + press * 0.05), borderRadius: 7 * s,
+        background: `linear-gradient(90deg, ${dkh(CLAY, 0.34)}, ${CLAY} 40%, ${dkh(CLAY, 0.40)})`,
+        border: `${2.6 * s}px solid ${hexa(INK, 0.4)}`, boxShadow: SH }}>
+        {/* 6 · a knurled band — fine repeated detail */}
+        <div style={{ position: "absolute", left: 0, right: 0, top: "26%", height: "20%",
+          background: `repeating-linear-gradient(90deg, ${hexa("#000", 0.22)} 0 ${3 * s}px, transparent ${3 * s}px ${6 * s}px)` }} />
+        <div style={{ position: "absolute", left: "8%", right: "8%", top: "8%", height: 2.4 * s,
+          borderRadius: 2, background: hexa("#FFFFFF", 0.30) }} />
+      </div>
+      {/* 7 · the rubber face, with the word moulded into it */}
+      <div style={{ position: "absolute", left: W0 * 0.10, top: H0 * (0.80 - press * 0.01),
+        width: W0 * 0.80, height: H0 * 0.16, borderRadius: 4 * s,
+        background: `linear-gradient(180deg, ${dkh(OKGREEN, 0.10)}, ${dkh(OKGREEN, 0.42)})`,
+        border: `${2.2 * s}px solid ${hexa("#000", 0.46)}`,
+        display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <span style={{ ...ui(H0 * 0.085, 900), color: hexa("#FFFFFF", 0.82), letterSpacing: 2 }}>DONE</span>
+      </div>
+    </div>
+  );
+};
+
+/* ---- THE CLAIM BOARD — the wall of rows he stamps ------------------------ */
+/** the LOAD. A mounted checklist board: a steel frame with corner brackets, a
+    paper sheet with ruling and a punched margin, `n` rows each with a checkbox,
+    a claim bar and an EMPTY receipt slot, and a tally plate. `jolt` shakes the
+    whole board when it is struck, because nothing in a reel lands and stops. */
+export const ClaimBoard: React.FC<{ x: number; y: number; w: number; h: number; z?: number;
+  f: number; done: number; hit?: number; jolt?: number; big?: string }> =
+  ({ x, y, w, h, z = 60, f, done, hit = -1, jolt = 0, big }) => {
+  const k = w / 460;
+  const rows = 6;
+  const rowH = h * 0.108;
+  const top = h * 0.28;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h,
+      zIndex: z, transform: `translate(${jolt * 3}px, ${jolt * 5}px) rotate(${jolt * 0.5}deg)` }}>
+      {/* 1 · the steel frame */}
+      <div style={{ position: "absolute", left: -10 * k, top: -10 * k, right: -10 * k, bottom: -10 * k,
+        borderRadius: 8 * k,
+        background: `linear-gradient(160deg, ${mxh(STEEL, 0.14)}, ${dkh(STEEL, 0.44)})`,
+        border: `${3 * k}px solid ${hexa("#000", 0.42)}`, boxShadow: SH_D }} />
+      {/* 2 · corner brackets with bolts */}
+      {[[0, 0], [1, 0], [0, 1], [1, 1]].map(([cx, cy], i) => (
+        <div key={"cb" + i} style={{ position: "absolute",
+          left: cx ? w - 26 * k : -6 * k, top: cy ? h - 26 * k : -6 * k,
+          width: 32 * k, height: 32 * k, borderRadius: 4 * k,
+          background: `linear-gradient(180deg, ${mxh(STEEL, 0.22)}, ${dkh(STEEL, 0.4)})`,
+          border: `${2 * k}px solid ${hexa("#000", 0.36)}` }}>
+          <div style={{ position: "absolute", left: "34%", top: "34%", width: "32%", height: "32%",
+            borderRadius: "50%",
+            background: `radial-gradient(circle at 34% 30%, ${hexa("#FFF", 0.3)}, ${hexa("#000", 0.6)})` }} />
+        </div>
+      ))}
+      {/* 3 · the sheet */}
+      <div style={{ position: "absolute", inset: 0, borderRadius: 4 * k,
+        background: `linear-gradient(172deg, #FDFCF7, ${UISH} 52%, ${UISH2} 88%)`,
+        boxShadow: `inset 0 ${3 * k}px ${8 * k}px ${hexa(INK, 0.16)}` }} />
+      {/* 4 · ruling + a red margin rule */}
+      {Array.from({ length: rows }, (_, i) => (
+        <div key={"rl" + i} style={{ position: "absolute", left: w * 0.10, right: w * 0.05,
+          top: top + i * rowH + rowH * 0.84, height: 1, background: hexa(LINKB, 0.18) }} />
+      ))}
+      <div style={{ position: "absolute", left: w * 0.075, top: h * 0.06, bottom: h * 0.05,
+        width: 2 * k, background: hexa(DIFFR, 0.32) }} />
+      {/* 5 · the header, with the mark and a tally plate */}
+      <div style={{ position: "absolute", left: w * 0.10, top: h * 0.07, right: w * 0.06,
+        display: "flex", alignItems: "center", gap: w * 0.028 }}>
+        <MarkTile rel d={h * 0.115} z={2} />
+        <span style={{ ...ui(h * 0.072, 900), color: hexa(INK, 0.72), letterSpacing: 2.4 }}>TODO</span>
+        <div style={{ marginLeft: "auto", padding: `${4 * k}px ${12 * k}px`, borderRadius: 5 * k,
+          background: hexa(INK, 0.08), border: `${2 * k}px solid ${hexa(INK, 0.22)}` }}>
+          <span style={{ fontFamily: "Fraunces, serif", fontWeight: 900, fontSize: h * 0.115,
+            color: INK, lineHeight: 1 }}>{big}</span>
+        </div>
+      </div>
+      <div style={{ position: "absolute", left: w * 0.10, right: w * 0.06, top: h * 0.225, height: 3,
+        background: hexa(INK, 0.24) }} />
+      {/* 6 · the rows */}
+      {Array.from({ length: rows }, (_, i) => {
+        const on = i < done;
+        const struck = i === hit;
+        return (
+          <div key={"br" + i} style={{ position: "absolute", left: w * 0.10, right: w * 0.06,
+            top: top + i * rowH, height: rowH * 0.82, display: "flex", alignItems: "center",
+            gap: w * 0.026 }}>
+            <CheckBox rel s={rowH * 0.74} k={on ? 1 : 0} z={3} />
+            <div style={{ height: rowH * 0.28, width: `${40 + (i * 11) % 34}%`, borderRadius: rowH * 0.14,
+              background: `linear-gradient(180deg, ${hexa(TASKS[i].c, on ? 0.4 : 0.72)}, ${hexa(dkh(TASKS[i].c, 0.22), on ? 0.34 : 0.62)})` }} />
+            {/* ⛔ THE RECEIPT SLOT IS EMPTY ON EVERY STAMPED ROW. That is the joke,
+                and it is legible on frame 0 with no narration. */}
+            <div style={{ marginLeft: "auto", width: w * 0.13, height: rowH * 0.44, borderRadius: 3,
+              flexShrink: 0, border: `${1.8 * k}px solid ${hexa(INK, 0.20)}`,
+              background: `repeating-linear-gradient(116deg, transparent 0 ${3 * k}px, ${hexa(INK, 0.11)} ${3 * k}px ${4.6 * k}px)` }} />
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 /* ---- THE SESSION CHROME — one fitout layer, in every room ----------------- */
 /** ⭐⭐⭐ THE ROOM, AND THE THING ALEX'S "TOO BASIC" NOTE LANDS ON HARDEST — it is
     the background of all eleven scenes, so whatever it lacks, the whole reel

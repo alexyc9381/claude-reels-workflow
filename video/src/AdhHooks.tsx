@@ -3,14 +3,14 @@ import { useCurrentFrame } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D, mono, ui,
   Scene, Cam, Contact, Edge, Ring, Puff, Steam, Fall, Pool,
-  Crew, Hero, asPlace, R, TASKS, GY, BAND_Y, SAFE3,
+  Crew, Hero, Forearm, Runner, asPlace, R, TASKS, GY, BAND_Y, SAFE3, SLATE,
   CLAY, GOLD, GREEN, RED, INK, BRASS, BONE, STEEL, SKY, VIOLET, TEAL, MUTE,
   TERM, TERM2, UISH, UISH2, DIFFG, DIFFR, CARET, OKGREEN, WARN, CREAM_TICKET,
 } from "./AdhWorld";
 import { Room } from "./HwSets";
 import {
   SesFit, PaneWall, Pane, PromptRail, PaneStack, TodoList, TickPile, DoneChip, AnswerCard,
-  CheckBox, ErrStack, Toast, Dev, MarkTile,
+  CheckBox, ErrStack, Toast, Dev, MarkTile, StampTool, ClaimBoard,
 } from "./AdhProps";
 import { PASS, shotAt } from "./AdhScenes";
 import type { Variant, Shot } from "./AdhScenes";
@@ -49,82 +49,73 @@ import type { Variant, Shot } from "./AdhScenes";
 export type HookId = "wander" | "spike" | "scorch";
 
 /* =========================================================================
-   spike · ACCUMULATION — rows tick themselves faster than answers ship.
-   ⭐ The interesting-frame problem is solved by a RATE that keeps rising: at f0
-   four rows are already on the pile, and by the cut there are sixteen, arriving
-   quicker each time, while exactly ONE answer leaves.
+   spike · LOAD — he is CARRYING the work he is stamping done.
+   ⭐ A body against a load, built to the same template as `wander`: he is bowed
+   under a tower of unstamped rows, and every time he stamps the top one the
+   tower gets TALLER, not shorter. The blow costs, the tower jolts, a sheet
+   slides, and at the cut he is still under it.
    ====================================================================== */
 export const SPIKE_HOOK: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("desk");
-  /* ⛔ REV 1 STOPPED ARRIVING AT f84 AND ITS LAST QUARTER MEASURED 2.58. An
-     ACCUMULATION that stops accumulating is just a pile. They now run to the
-     cut and keep shortening: 18,16,14,12,10,8,7,6,5,5,5 frames apart. */
-  const AT = [16, 34, 50, 64, 76, 86, 94, 101, 107, 112, 117, 122];
-  const landed = AT.filter((a) => f >= a).length;
-  const inFlight = AT.find((a) => f >= a - 12 && f < a);
-  const flightK = inFlight !== undefined ? E(f, inFlight - 12, inFlight, 0, 1, IN_Q) : 0;
-  const jolt = AT.reduce((a, at) => Math.max(a, f >= at ? Math.exp(-(f - at) / 4.5) : 0), 0);
-  const chip = [30, 62, 88, 118].reduce((a, at) => Math.max(a, f >= at ? Math.exp(-(f - at) / 4) : 0), 0);
-  const ship = E(f, 34, 78, 0, 1, IN_Q);
-  const ship2 = E(f, 100, 134, 0, 1, IN_Q);
-  const err = E(f, 40, dur, 0, 1, LIN);
-  const ctx = 1 - E(f, 0, dur, 0, 0.5, LIN);
-
-  const SHOT: Shot[] = [{ at: 0, s: 1.16, x: 0, y: 30 },
-    { at: 54, s: 1.36, x: -160, y: 46 },
-    { at: 100, s: 1.10, x: 70, y: 18 }];
+  const SLAMS = [22, 48, 70, 88, 104, 118];
+  const near = SLAMS.reduce((acc, at) => (Math.abs(f - at) < Math.abs(f - acc) ? at : acc), SLAMS[0]);
+  const up = E(f, near - 20, near - 7, 0, 1, IO);
+  const drop = E(f, near - 7, near, 0, 1, IN_Q);
+  const raised = Math.max(0, up - drop);
+  const press = SLAMS.reduce((a2, at) => Math.max(a2, f >= at && f < at + 9 ? Math.exp(-(f - at) / 3.2) : 0), 0);
+  const recoil = SLAMS.reduce((a2, at) => a2 + (f > at ? Math.sin((f - at) * 0.8) * Math.exp(-(f - at) / 5.5) * 6 : 0), 0);
+  const jolt = SLAMS.reduce((a2, at) => Math.max(a2, f >= at ? Math.sin((f - at) * 0.9) * Math.exp(-(f - at) / 4.2) : 0), 0);
+  /* ⭐ THE LOAD GROWS. Every blow adds two rows to what he is carrying. */
+  const carried = 5 + SLAMS.filter((at) => f >= at).length * 2;
+  const bow = 0.28 + carried * 0.028 + press * 0.4;      /* WEIGHT IS DEFORMATION */
+  const sag = carried * 3.1 + press * 12;
+  const done = 2 + SLAMS.filter((at) => f >= at).length;
+  const devX = 316, size = 322;
+  const stampX = 548, stampY = 356 - raised * 112 + drop * 50 + press * 10;
+  const SHOT: Shot[] = [{ at: 0, s: 1.10, x: 0, y: 24 },
+    { at: 58, s: 1.28, x: -140, y: 40 }, { at: 104, s: 1.06, x: 60, y: 16 }];
   const sh = shotAt(f, SHOT);
-
   return (
     <Scene p={p} slug="" push={[0, dur, 1.07]} vig={0.42}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
         <Room p={p} f={f} bands={0} kind="shelf" overhead="none" rake={0.09} rakeRate={3.2}
           floorKind="tile" grit={0.5} window={null} />
-        <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={ctx} run={1} />
-        <PaneWall f={f} z={20} y0={12} h={164} n={6} lit={[1, 3]} signLit={1} />
-        <ErrStack x={190} y={470} f={f} at={40} k={err} z={58} n={16} s={1.0} />
-
-        <PromptRail f={f} z={70} topY={654} lampBarY={214} lamps={[1, 1, 1]} />
-
-        {/* the claim plate: the todo list standing on the rail, unread */}
-        <TodoList x={188} y={274} w={272} h={368} z={78} f={f}
-          ticks={[true, true, false, false, false, false]} big={`${R.done}/${R.tasks}`} sub="TODO"
-          stand rot={-3} hard={2} />
-
-        {/* THE PILE, dead centre and huge — the one dominant object */}
-        <TickPile x={620} y={GY - 20} s={2.0} z={80} f={f} jolt={jolt} slips={4 + landed} />
-        {flightK > 0.02 && (
-          <div style={{ position: "absolute", left: 566, top: 120 + flightK * 300, width: 148, height: 40,
-            zIndex: 84, borderRadius: 4, background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
-            border: `3px solid ${hexa(INK, 0.25)}`,
-            transform: `rotate(${-24 + flightK * 30}deg)`, display: "flex", alignItems: "center",
-            gap: 6, paddingLeft: 6 }}>
-            <CheckBox rel s={26} k={1} z={2} />
-            <div style={{ width: 74, height: 6, borderRadius: 3, background: hexa(INK, 0.12) }} />
-          </div>
-        )}
-        {AT.map((at) => f >= at && f < at + 18 ? (
-          <React.Fragment key={at}>
-            <Puff x={620} y={GY - 44} f={f} at={at} c="#E8DCC0" z={86} n={7} s={0.7} />
-            <Ring x={620} y={GY - 40} f={f} at={at} c={mxh(DIFFG, 0.4)} z={86} s={0.5} dur={12} />
+        <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={1 - E(f, 0, dur, 0, 0.5, LIN)} run={1} />
+        <Runner y={276} f={f} z={11} rate={8.4} pitch={206} w={146} h={80}
+          c={mxh(UISH, 0.10)} c2={dkh(SLATE, 0.16)} kind="crate" rail={false} />
+        <Runner y={324} f={f} z={12} rate={-12.0} pitch={254} w={182} h={94}
+          c={mxh(UISH2, 0.02)} c2={dkh(SLATE, 0.28)} kind="crate" rail={false} />
+        <div style={{ position: "absolute", left: 356, top: 116, width: 520, height: GY - 116,
+          zIndex: 16, opacity: 0.40, clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
+          background: `linear-gradient(180deg, ${hexa(GOLD, 0.56)} 0%, ${hexa(GOLD, 0.04)} 100%)` }} />
+        <Pool x={616} y={GY - 54} w={560} c={GOLD} o={0.30} z={17} />
+        <PaneWall f={f} z={20} y0={12} h={150} n={6} lit={[0, 3]} signLit={1} />
+        <ClaimBoard x={616} y={382} w={424} h={372} z={60} f={f} done={done} jolt={jolt}
+          big={`${done}/${R.tasks}`} />
+        {/* ⭐ THE TOWER HE IS UNDER, and it keeps growing */}
+        {Array.from({ length: carried }, (_, i) => (
+          <div key={"cy" + i} style={{ position: "absolute",
+            left: devX - 96 + (rnd(i * 3.7, 1) - 0.5) * 26 + sag * 0.12,
+            top: GY - size - 30 - i * 21 + sag * 0.3,
+            width: 192, height: 26, zIndex: 70 + i, borderRadius: 4,
+            background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
+            border: `2px solid ${hexa(INK, 0.2)}`, boxShadow: SH,
+            transform: `rotate(${(rnd(i * 2.1, 1) - 0.5) * 7 + jolt * 1.6}deg)` }} />
+        ))}
+        {SLAMS.map((at) => f >= at && f < at + 16 ? (
+          <React.Fragment key={"sk" + at}>
+            <Puff x={616} y={404} f={f} at={at} c="#E8DCC0" z={80} n={10} s={0.9} />
+            <Ring x={616} y={396} f={f} at={at} c={mxh(GOLD, 0.45)} z={80} s={0.75} dur={14} />
           </React.Fragment>
         ) : null)}
-
-        <DoneChip x={866} y={GY - 40} s={1.2} z={80} ring={chip} />
-        {ship > 0.001 && ship < 1 && (
-          <AnswerCard x={470 + ship * 60} y={606 + ship * 240} w={220 + ship * 240} z={86}
-            items={[true, true, false, false, false, false]} rot={ship * 5} />
-        )}
-        {ship2 > 0.001 && (
-          <AnswerCard x={470 + ship2 * 70} y={600 + ship2 * 130} w={200 + ship2 * 300} z={88}
-            items={[true, false, false, false, false, false]} rot={ship2 * 7} bad={1} />
-        )}
-
-        <Contact x={330} y={GY - 6} w={190} o={0.34} z={44} />
-        <Dev f={f} x={330} y={GY} i={0} size={324} z={62} at={-14} loop={1} extra={{ glasses: 1 }}
-          gaze={1.0} cheer={E(f, 88, 100, 0, 1, BACK)} />
-
+        <Forearm x0={devX + 112} y0={GY - size * 0.56 + sag * 0.2} x1={stampX} y1={stampY - 22}
+          w={28} c={CLAY} z={84} />
+        <StampTool x={stampX} y={stampY} s={1.28} z={86} rot={-6 + recoil} press={press} recoil={recoil * 0.1} />
+        <Contact x={devX} y={GY - 6} w={200} o={0.36} z={44} />
+        <Dev f={f} x={devX} y={GY + sag * 0.16} i={0} size={size} z={62} at={-14} loop={1}
+          extra={{ glasses: 1 }} shock={bow} gaze={0.7} />
+        <Steam x={devX} y={GY - size * 0.98} f={f} at={2} n={7} z={64} s={0.85} c="#D8CFC0" rate={1.4} />
         <PaneStack x={W - 30} y={H - 4} n={6} z={94} s={0.9} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={86} z={92} kind="post" />
       </Cam>
@@ -133,76 +124,79 @@ export const SPIKE_HOOK: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) =>
 };
 
 /* =========================================================================
-   scorch · SPREAD — he grins at camera while the session fails behind him,
-   pane by pane. ⭐ Dramatic irony, and the hero NEVER reacts: the moment he
-   notices it stops being irony and becomes an event he is having.
+   scorch · BURIAL — the work falls on him faster than he can stamp it.
+   ⭐ The third mechanism, and the only one where the load MOVES ON ITS OWN: rows
+   rain down from the top of frame, pile round his feet, and he never looks up.
+   By the cut he is buried to the chest and still stamping.
    ====================================================================== */
 export const SCORCH_HOOK: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("desk");
-  /* five panes fail in a run, left to right, then the WALL goes — the spread
-     has to reach somewhere or the last quarter is five red lamps idling. */
-  const FAIL = [12, 28, 46, 66, 88];
-  const failK = (i: number) => E(f, FAIL[i], FAIL[i] + 12, 0, 1, OUT);
-  const err = (i: number) => E(f, FAIL[i] + 4, dur, 0, 0.9, LIN);
-  const wallFail = E(f, 104, 134, 0, 1, OUT);
-  const chip = f >= 26 ? Math.exp(-(f - 26) / 4.5) : 0;
-  const ship = E(f, 28, 72, 0, 1, IN_Q);
-  const BX = [30, 216, 402, 588, 774];
-  const ctx = 1 - E(f, 0, dur, 0, 0.62, LIN);
-
-  /* ⛔ THE STEEL CUT OPENS ON THIS HOOK AND IT MISSED THE FRAME-0 LUMA LAW BY
-     1.5 (138.5 against 140). The fix is not a brightness lever — that is the
-     exact move `look_audit` warns about — it is MORE LIT CONTENT: the todo
-     list, which is the brightest object in the world and the one the whole
-     reel is about, drawn at the size it deserves. 344x452 measures 148.0.
-     ⭐ And measured on the FULL CUT, never on the solo hook comp, which reads
-     ~13 luma lower because it carries no header band. */
-  const SHOT: Shot[] = [{ at: 0, s: 1.06, x: 0, y: 16 },
-    { at: 56, s: 1.32, x: 150, y: -20 },
-    { at: 104, s: 1.06, x: -60, y: 34 }];
+  const SLAMS = [20, 44, 64, 82, 98, 114];
+  const near = SLAMS.reduce((acc, at) => (Math.abs(f - at) < Math.abs(f - acc) ? at : acc), SLAMS[0]);
+  const up = E(f, near - 18, near - 6, 0, 1, IO);
+  const drop = E(f, near - 6, near, 0, 1, IN_Q);
+  const raised = Math.max(0, up - drop);
+  const press = SLAMS.reduce((a2, at) => Math.max(a2, f >= at && f < at + 9 ? Math.exp(-(f - at) / 3.2) : 0), 0);
+  const recoil = SLAMS.reduce((a2, at) => a2 + (f > at ? Math.sin((f - at) * 0.8) * Math.exp(-(f - at) / 5.5) * 6 : 0), 0);
+  const jolt = SLAMS.reduce((a2, at) => Math.max(a2, f >= at ? Math.sin((f - at) * 0.9) * Math.exp(-(f - at) / 4.2) : 0), 0);
+  const done = 2 + SLAMS.filter((at) => f >= at).length;
+  /* ⭐ THE RAIN. 16 sheets on their own staggered clocks — stagger = cycle/slots */
+  const RAIN = Array.from({ length: 16 }, (_, i) => 8 + i * 7);
+  const buried = E(f, 20, dur, 0, 1, LIN);
+  const devX = 330, size = 326;
+  const stampX = 556, stampY = 352 - raised * 108 + drop * 48 + press * 10;
+  const SHOT: Shot[] = [{ at: 0, s: 1.06, x: 0, y: 18 },
+    { at: 56, s: 1.26, x: 120, y: -6 }, { at: 104, s: 1.04, x: -50, y: 30 }];
   const sh = shotAt(f, SHOT);
-
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.44}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
         <Room p={p} f={f} bands={0} kind="shelf" overhead="none" rake={0.10} rakeRate={3.6}
           floorKind="tile" grit={0.5} window={null} />
-        <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={ctx} run={1} />
-        <PaneWall f={f} z={20} y0={12} h={168} n={6} lit={[0, 2, 4]} signLit={1} />
-
-        {/* the five panes that fail, left to right */}
-        {BX.map((x, i) => (
-          <Pane key={"sp" + i} x={x} y={352} w={172} h={186} z={44 + i} f={f}
-            on={0.9} run={1 - failK(i)} fail={failK(i)} seed={i + 1} />
-        ))}
-        {BX.map((x, i) => err(i) > 0.02 ? (
-          <ErrStack key={"se" + i} x={x + 86} y={396} f={f} at={FAIL[i] + 4} k={err(i)} z={56 + i}
-            n={12} s={0.8} />
+        <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={1 - E(f, 0, dur, 0, 0.62, LIN)} run={1} />
+        <Runner y={268} f={f} z={11} rate={9.2} pitch={198} w={142} h={78}
+          c={mxh(UISH, 0.10)} c2={dkh(SLATE, 0.16)} kind="crate" rail={false} />
+        <div style={{ position: "absolute", left: 340, top: 112, width: 520, height: GY - 112,
+          zIndex: 16, opacity: 0.40, clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
+          background: `linear-gradient(180deg, ${hexa(GOLD, 0.54)} 0%, ${hexa(GOLD, 0.04)} 100%)` }} />
+        <Pool x={624} y={GY - 54} w={560} c={GOLD} o={0.30} z={17} />
+        <PaneWall f={f} z={20} y0={12} h={152} n={6} lit={[2, 5]} signLit={1} />
+        <ClaimBoard x={624} y={378} w={420} h={368} z={60} f={f} done={done} jolt={jolt}
+          big={`${done}/${R.tasks}`} />
+        {/* THE RAIN — each sheet on its own clock, falling to the pile */}
+        {RAIN.map((at, i) => {
+          const k = E(f, at, at + 30, 0, 1, IN_Q);
+          if (k <= 0.001) return null;
+          const rx = 120 + rnd(i * 5.3, 1) * 720;
+          return (
+            <div key={"rn" + i} style={{ position: "absolute", left: rx,
+              top: -70 + k * (GY - 40 - rnd(i * 2.7, 1) * 90),
+              width: 168, height: 34, zIndex: 74, borderRadius: 4,
+              background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
+              border: `2px solid ${hexa(INK, 0.2)}`, boxShadow: SH,
+              transform: `rotate(${-30 + k * (52 + rnd(i * 1.9, 1) * 40)}deg)` }} />
+          );
+        })}
+        {/* the pile he is standing in, rising */}
+        <div style={{ position: "absolute", left: -40, right: -40, top: GY - 20 - buried * 130,
+          height: 190, zIndex: 88, borderRadius: "40% 34% 0 0",
+          background: `linear-gradient(180deg, ${UISH} 0%, ${UISH2} 40%, ${dkh(UISH2, 0.16)} 100%)`,
+          border: `4px solid ${hexa(INK, 0.14)}` }} />
+        {SLAMS.map((at) => f >= at && f < at + 16 ? (
+          <React.Fragment key={"sc" + at}>
+            <Puff x={624} y={398} f={f} at={at} c="#E8DCC0" z={80} n={10} s={0.9} />
+            <Ring x={624} y={392} f={f} at={at} c={mxh(GOLD, 0.45)} z={80} s={0.75} dur={14} />
+          </React.Fragment>
         ) : null)}
-        {/* the wall itself goes */}
-        {wallFail > 0.02 && (<>
-          <ErrStack x={330} y={230} f={f} at={104} k={wallFail} z={68} n={20} s={1.3} />
-          <ErrStack x={690} y={222} f={f} at={112} k={wallFail} z={67} n={15} s={1.1} />
-        </>)}
-
-        <PromptRail f={f} z={70} topY={654} lampBarY={214} lamps={[1, 1, 1]} />
-        <TodoList x={676} y={286} w={392} h={506} z={78} f={f}
-          ticks={[true, true, false, false, false, false]} big={`${R.done}/${R.tasks}`} sub="TODO"
-          stand rot={2} hard={2} />
-        <TickPile x={890} y={GY - 46} s={1.1} z={80} f={f} jolt={0} slips={5 + (f >= 20 ? 1 : 0)} />
-        <DoneChip x={140} y={GY - 52} s={1.0} z={80} ring={chip} />
-        {ship > 0.001 && ship < 1 && (
-          <AnswerCard x={440 + ship * 60} y={606 + ship * 250} w={230 + ship * 250} z={86}
-            items={[true, true, false, false, false, false]} rot={ship * 6} />
-        )}
-
-        {/* ⛔ HE NEVER LOOKS BACK. Down the lens, grinning, the whole shot. */}
-        <Contact x={300} y={GY - 6} w={200} o={0.36} z={44} />
-        <Dev f={f} x={300} y={GY} i={0} size={348} z={62} at={-14} loop={2} extra={{ glasses: 1 }}
-          gaze={0} cheer={E(f, 8, 22, 0, 1, BACK)} />
-
-        <PaneStack x={W - 40} y={H - 6} n={6} z={94} s={0.9} />
+        <Forearm x0={devX + 114} y0={GY - size * 0.56} x1={stampX} y1={stampY - 22} w={28}
+          c={CLAY} z={84} />
+        <StampTool x={stampX} y={stampY} s={1.30} z={86} rot={-7 + recoil} press={press} recoil={recoil * 0.1} />
+        <Contact x={devX} y={GY - 6} w={202} o={0.36} z={44} />
+        {/* ⛔ HE NEVER LOOKS UP. Down at the board, stamping, the whole shot. */}
+        <Dev f={f} x={devX} y={GY} i={0} size={size} z={62} at={-14} loop={1}
+          extra={{ glasses: 1 }} gaze={0.4} shock={press * 0.5} />
+        <PaneStack x={W - 36} y={H - 6} n={6} z={94} s={0.9} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={86} z={92} kind="post" />
       </Cam>
     </Scene>

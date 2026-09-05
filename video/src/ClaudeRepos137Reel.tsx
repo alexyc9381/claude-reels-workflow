@@ -86,18 +86,54 @@ const S = (fr: number) => fr / FPS;
    lands on words, and nothing lands on a sentence-final word (the tail ducks
    below take care of the bed; the cues stay clear of the tails by placement).
    -------------------------------------------------------------------------- */
+/* ===========================================================================
+   ⛔⛔ THE HOOK'S CUES ARE PER HOOK (Alex, rev 5: "trial version 3, the SFX are not
+   aligned with the animation"). One shared bank meant the LIFT hook's beats — gems
+   landing at f14/24/36/48, the absorb at f58 — played over the DROP and PIT hooks,
+   whose parts land at 28/52/76 and 30/48/66. Three cuts are three hook COMPONENTS,
+   so they are three cue banks ([[feedback_three_cuts_three_hooks_fix_all_three]]).
+   ⛔ "setup." runs f84-93, so nothing above TEXTURE fires after f84.
+   ========================================================================= */
+export const HOOK_SFX: Record<HookId, Cue[]> = {
+  lift: [
+    { at: S(0),  src: "stage_hum.wav",  v: LEVELS.SFX_BED,  dur: 2.0,  rate: 0.88 },
+    { at: S(0),  src: "sub.wav",        v: LEVELS.SFX_HERO, dur: 0.6,  rate: 0.7 },
+    { at: S(6),  src: "mech_clank.wav", v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.92 },
+    { at: S(12), src: "mech_clank.wav", v: LEVELS.SFX_MID,  dur: 0.16, rate: 1.06 },
+    { at: S(14), src: "ratchet.wav",    v: LEVELS.SFX_MID,  dur: 0.32, rate: 0.94 },
+    ...[14, 24, 36, 48].map((a2, i) => ({ at: S(a2), src: i % 2 ? "c_collect.wav" : "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.4), dur: i % 2 ? 0.22 : 0.14, rate: 0.94 + i * 0.06 })),
+    { at: S(58), src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.20, rate: 0.84 },
+    { at: S(58), src: "sub.wav",        v: LEVELS.SFX_MID,  dur: 0.30, rate: 0.8 },
+    { at: S(58), src: "c_power.wav",    v: LEVELS.SFX_MID * db(-2), dur: 0.46, rate: 1.0 },
+    { at: S(60), src: "metal_ping.wav", v: LEVELS.SFX_MID,  dur: 0.30, rate: 1.1 },
+    { at: S(66), src: "wrench_clank.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.18, rate: 0.9 },
+    { at: S(66), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.30, rate: 1.1 },
+  ],
+  drop: [
+    { at: S(0),  src: "stage_hum.wav",  v: LEVELS.SFX_BED,  dur: 2.0,  rate: 0.88 },
+    { at: S(0),  src: "sub.wav",        v: LEVELS.SFX_HERO, dur: 0.6,  rate: 0.7 },
+    ...[14, 38, 62, 88].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.5), dur: 0.14, rate: 1.24 - i * 0.06 })),
+    ...[28, 52, 76].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.22, rate: 0.94 - i * 0.06 })),
+    ...[28, 52, 76].map((a2, i) => ({ at: S(a2), src: "sub.wav", v: LEVELS.SFX_MID * db(-2 + i), dur: 0.30, rate: 0.82 - i * 0.03 })),
+    { at: S(78), src: "c_collect.wav", v: LEVELS.SFX_TEXTURE * db(0), dur: 0.22, rate: 0.96 },
+    { at: S(30), src: "metal_ping.wav", v: LEVELS.SFX_MID,  dur: 0.30, rate: 1.06 },
+    { at: S(78), src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.30, rate: 1.05 },
+  ],
+  pit: [
+    { at: S(0),  src: "stage_hum.wav",  v: LEVELS.SFX_BED,  dur: 2.0,  rate: 0.88 },
+    { at: S(0),  src: "motor_sag.wav",  v: LEVELS.SFX_MID * db(-2), dur: 0.55, rate: 1.05 },
+    { at: S(16), src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.22, rate: 0.86 },
+    { at: S(16), src: "sub.wav",        v: LEVELS.SFX_HERO, dur: 0.42, rate: 0.7 },
+    ...[26, 44, 62].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-2 + i), dur: 0.14, rate: 1.2 - i * 0.07 })),
+    ...[30, 48, 66].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.20, rate: 0.98 - i * 0.05 })),
+    { at: S(68), src: "c_collect.wav", v: LEVELS.SFX_TEXTURE * db(0), dur: 0.22, rate: 0.98 },
+    { at: S(32), src: "metal_ping.wav", v: LEVELS.SFX_MID,  dur: 0.30, rate: 1.12 },
+    { at: S(68), src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.30, rate: 1.08 },
+    { at: S(98), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 1.0 },
+  ],
+};
+
 export const SFX: Cue[] = [
-  /* ---- S0 · THE LIFT: ram hiss, two jolts that refuse, the rise, the lock */
-  { at: S(L.S0 + 0),  src: "stage_hum.wav",   v: LEVELS.SFX_BED,  dur: 2.0, rate: 0.88 },
-  { at: S(L.S0 + 0),  src: "sub.wav",         v: LEVELS.SFX_HERO, dur: 0.6, rate: 0.7 },
-  { at: S(L.S0 + 6),  src: "mech_clank.wav",  v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.92 },
-  { at: S(L.S0 + 12), src: "mech_clank.wav",  v: LEVELS.SFX_MID,  dur: 0.16, rate: 1.06 },
-  { at: S(L.S0 + 14), src: "ratchet.wav",     v: LEVELS.SFX_MID,  dur: 0.32, rate: 0.94 },
-  ...[24, 36, 48].map((a2, i) => ({ at: S(L.S0 + a2), src: "tick.wav", v: LEVELS.SFX_TEXTURE * db(-2 + i), dur: 0.10, rate: 0.9 + i * 0.08 })),
-  { at: S(L.S0 + 58), src: "mech_clank.wav",  v: LEVELS.SFX_HERO, dur: 0.20, rate: 0.84 },
-  { at: S(L.S0 + 58), src: "sub.wav",         v: LEVELS.SFX_MID,  dur: 0.30, rate: 0.8 },
-  { at: S(L.S0 + 60), src: "metal_ping.wav",  v: LEVELS.SFX_MID,  dur: 0.30, rate: 1.1 },
-  { at: S(L.S0 + 66), src: "wrench_clank.wav", v: LEVELS.SFX_TEXTURE, dur: 0.18, rate: 0.9 },
 
   /* ---- S1 · TAG: the chain drops, the lamp snaps */
   /* ⛔ "First, AnyDoc." fills the whole 1s scene, so its cues are TEXTURE-level ticks only */
@@ -191,11 +227,8 @@ export const SFX: Cue[] = [
      a gem landing is a collect, the absorb is a power-up, a scan head is a shine, a line going
      green is a blip, the MODEL seating is an unlock. ⛔ None of them lands on a sentence-final word
      — tools/rps_cue_collisions.py is run after every one of these. */
-  ...[14, 24, 36, 48].map((a2, i) => ({ at: S(L.S0 + a2), src: "c_collect.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.4), dur: 0.22, rate: 0.94 + i * 0.06 })),
-  { at: S(L.S0 + 58), src: "c_power.wav",     v: LEVELS.SFX_MID * db(-2), dur: 0.46, rate: 1.0 },
-  { at: S(L.S0 + 66), src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.30, rate: 1.1 },
   ...[11, 43, 75].map((a2, i) => ({ at: S(L.S3 + a2), src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE * db(-3 + i * 0.5), dur: 0.34, rate: 0.96 + i * 0.07 })),
-  ...[50, 62, 74].map((a2, i) => ({ at: S(L.S4 + a2), src: "blip3.wav", v: LEVELS.SFX_TEXTURE * db(-4 + i), dur: 0.09, rate: 1.05 + i * 0.1 })),
+  ...[54, 72].map((a2, i) => ({ at: S(L.S4 + a2), src: "blip3.wav", v: LEVELS.SFX_TEXTURE * db(-4 + i), dur: 0.09, rate: 1.05 + i * 0.12 })),
   { at: S(L.S6 + 24), src: "blip5.wav",       v: LEVELS.SFX_TEXTURE * db(-3), dur: 0.10, rate: 0.9 },
   { at: S(L.S6 + 52), src: "blip5.wav",       v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.10, rate: 0.82 },
   { at: S(L.S8 + 65), src: "c_collect.wav",   v: LEVELS.SFX_MID * db(-3), dur: 0.20, rate: 0.8 },
@@ -250,7 +283,7 @@ export const makeReel = (v: Variant, quiet = false, hook: HookId = HOOK_OF[v]): 
       <Bg />
       <Audio src={staticFile("repos137_vo.wav")} volume={LEVELS.DIALOGUE} />
       <Audio src={staticFile(BED[v])} volume={(fr) => LEVELS.MUSIC * BED_GAIN[v] * (quiet ? BED_QUIET : 1) * bedMix(fr)} />
-      <SfxTrack cues={SFX} />
+      <SfxTrack cues={[...HOOK_SFX[hook], ...SFX]} />
 
       <CamCtx.Provider value={{ ...CAM[v] }}>
         <AssemblyCtx.Provider value={true}>

@@ -356,3 +356,50 @@ the same way, build the object that satisfies both.
 the next sentence's first word.** A re-time is never just an audio edit: re-run the cue-collision map, the
 intent manifest and every in-scene beat that was written as an absolute frame. READ lost 6 frames and its
 tick at f130 simply never fired.
+
+## STAGE 15 — REV 5: the article, a 1.4s hole, and three cuts sharing one hook bank
+
+### 1. The article is LIVE
+`vercel --prod` from `~/Downloads/chenmedialabs`, then all four domains re-aliased to the new
+deployment. Verified 200 WITH the headline on `chen.media`, `www.chen.media` and `chenmedialabs.com`:
+`/guides/four-repos-that-upgrade-your-claude-setup-anydoc-herdr-deepseek-harness-and-omniroute`.
+⭐ The same re-alias fixed **132 JUDGE, 134 AGENTS and 135 AGENCY**, all of which were 404 because
+`chen.media` had been pinned to an 8-day-old deployment ([[risk_vercel_alias_pinned]] again).
+⚠️ The guide is committed on `judge-132-guide` (c9b0611, pushed) and NOT on `main`; a cherry-pick
+conflicted because main is 79 commits behind, and it was aborted rather than resolved in a working
+copy other sessions share. Live today; at risk only if someone deploys from `main`.
+
+### 2. *"at 32 seconds it literally goes still and nothing happens, it just stays there staring"*
+⛔ **A per-frame trace proved it exactly: frames 964-1006 ran at motion 0.8-1.4 — 43 consecutive
+frames, 1.4 seconds, of a held picture.** The scene mean was 8.2 and the tail ratio 1.33, both green.
+⭐ **A scene average cannot see a HOLE any more than it can see a tail** — when a note names a
+MOMENT, trace the frames ([[feedback_a_scene_average_cannot_see_a_tail]]).
+
+Three fixes, in the order they were tried, and what each was worth:
+
+| fix | frames under 2.0 |
+|---|---|
+| (start) a needle sweeping and nothing else | **43 of 89** |
+| a CREDITS counter falling to zero, the feed dying, a LOW BALANCE strobe | 39 of 89 |
+| + the 430px hero PACES and the camera pushes 0.26 | 17 of 105 |
+| + a **700px feed line whose fluid recedes across the frame** in 30 frames | **0 of 105**, floor 2.18 |
+
+⛔ **A big object is not enough — the TRAVEL has to survive the downsample.** A 430px sprite pacing
+±86px over a 17-frame cycle moves ~5px/frame, which is **1px** after the audit's 1012→240 reduction.
+The 40px floor is about how far a thing MOVES, not how big it is ([[reference_motion_arithmetic]]).
+
+### 3. *"trial version 3, the SFX are not aligned with the animation"*
+⛔⛔ **One `SFX` bank was played over three different hooks.** The cues were written for LIFT — gems
+landing at f14/24/36/48, the absorb at f58 — while DROP lands its parts at 28/52/76 and PIT at
+30/48/66. Every hero hit in two of the three cuts fired against nothing.
+⭐ **Three cuts are three hook COMPONENTS, so they are three cue banks**
+([[feedback_three_cuts_three_hooks_fix_all_three]]). `HOOK_SFX: Record<HookId, Cue[]>`, and the
+reel plays `[...HOOK_SFX[hook], ...SFX]`. ⛔ `tools/rps_intent.py` and `tools/rps_cue_collisions.py`
+had to be taught to read the `lift` bank too, or they grade a reel whose first 3.4s declares no cues.
+⛔ The split pushed `c_collect` to 5 uses at 66% bright and `tick` to 7 at 81% — both **SLAP**. The
+mechanical half of each landing moved to `thock` (1.3% bright).
+
+### Rev 5 delivered (2026-09-05)
+verify 9/9 ×3 · motion 11.59 / 14.24 / 11.53, 0/14 failing, 0/14 stalls · encoded house
+HOOK_LUMA 152.7 · BODY_SAT 53.2% · p10 28.6 · **dHash mean 23.2 · MIN 11 · PASS** · sfx clean ·
+110 cues, 0 collisions. The 32s window: **0 frames under motion 2.0** (floor 2.18, was 0.82).

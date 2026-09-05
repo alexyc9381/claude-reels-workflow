@@ -18,6 +18,13 @@ src = open(SRC).read()
 blk = re.search(r'export const L = \{(.*?)\} as const;', src, re.S).group(1)
 L = {m.group(1): int(m.group(2)) for m in re.finditer(r'\b(S\d+):\s*(\d+)', blk)}
 sfx = re.search(r'export const SFX: Cue\[\] = \[(.*?)\n\];', src, re.S).group(1)
+# ⛔ the hook's cues live in HOOK_SFX, one bank per hook (rev 5). The house cut plays `lift`, so that
+#    is the bank these gates read — otherwise they grade a reel whose first 3.4s has no cues at all.
+_hb = re.search(r'export const HOOK_SFX: Record<HookId, Cue\[\]> = \{(.*?)\n\};', src, re.S)
+if _hb:
+    _lift = re.search(r'\n  lift: \[(.*?)\n  \],', _hb.group(1), re.S)
+    if _lift:
+        sfx = sfx + "\n" + re.sub(r'at: S\((\d+)\)', r'at: S(L.S0 + \1)', _lift.group(1))
 
 cues = []
 # runs: ...[a, b, c].map((a2, i) => ({ at: S(L.S3 + a2)

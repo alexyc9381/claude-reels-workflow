@@ -701,15 +701,26 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
   const gauge = 0.80 * (1 - E(f, 4, DRAIN, 0, 1, IO)) + E(f, POUR + 6, dur - 8, 0, 0.97, OUT);
   const err = f >= ERR && f < SLAM ? 1 : 0;
   const sel = E(f, THROW, THROW + 12, 0, 1, OUT) + E(f, SLAM + 20, SLAM + 32, 0, 1, OUT);
-  const flow = E(f, POUR, POUR + 8, 0, 1, OUT);
+  /* ⛔ Alex, rev 5: "at 32 seconds it literally goes still and nothing happens, it just stays there
+     staring." A per-frame trace proved it: frames 964-1006 of the delivered cut ran at motion 0.8-1.4
+     — 1.4 SECONDS of a held frame while a small needle crept. A scene mean of 8.2 cannot see a hole
+     ([[feedback_a_scene_average_cannot_see_a_tail]] applies to the middle too). The drain is now an
+     EVENT: the feed dies bead by bead, a credits readout counts down to zero, the low-credit lamp
+     strobes and he watches it happen. */
+  const flow = (1 - E(f, 6, DRAIN, 0, 1, IO)) + E(f, POUR, POUR + 8, 0, 1, OUT);
+  const credits = Math.round(2480 * (1 - E(f, 4, DRAIN + 4, 0, 1, IO)));
+  const low = f >= 18 && f < SLAM ? (Math.sin(f / 2.6) > 0 ? 1 : 0.25) : 0;
+  const flowFill = E(f, POUR, POUR + 24, 0, 1, OUT);
   const slump = err ? E(f, ERR, ERR + 12, 0, 0.46, OUT) : E(f, SLAM, SLAM + 14, 0.46, 0, OUT);
   const hic = err ? Math.max(0, Math.sin(f * 0.62)) * 0.44 : 0;
   /* the cartridge that swaps in: it flies from the rack on the left into his tank */
   const ride = E(f, SLAM - 18, SLAM, 0, 1, IN_Q);
   const slam = f >= SLAM ? Math.exp(-(f - SLAM) / 4) : 0;
   const cx = 150 + (HX - 210 - 150) * ride, cy = 300 + (a.hipL.y - 40 - 300) * ride;
-  const shotPush = f < 70 ? pushK(f, 0, 70, 0.06) : f < POUR ? pushK(f, 70, POUR, 0.06) : pushK(f, POUR, dur, 0.06);
-  const K = pick(v, 1.10, 1.30, 1.0), CX = pick(v, 470, HX, 520), CY = pick(v, 452, 420, 486);
+  const shotPush = f < 70 ? pushK(f, 0, 70, 0.26) : f < POUR ? pushK(f, 70, POUR, 0.12) : pushK(f, POUR, dur, 0.10);
+  /* ⛔ lift 1.10 against pit 1.0 on near-identical centres measured NINE bits apart at f1041 once
+     encoded. Three sizes on three points: the hero, a CU on him, and the machine side of the bay. */
+  const K = pick(v, 1.14, 1.42, 1.0), CX = pick(v, 470, HX, 660), CY = pick(v, 452, 412, 500);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.03]} vig={0.48}>
       <Cam {...punch(K * shotPush, CX, CY)} z={12}>
@@ -736,13 +747,50 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
           </div>
         )}
         <Contact x={HX} y={GY - 10} w={HS * 0.8 + slam * 40} o={0.36} />
-        <Rig f={f} x={HX} y={GY} size={HS} z={56} act={3} ph={0.5} kit={{ tank: 1, gauge }}
+        <Rig f={f} x={HX} y={GY} size={HS} z={56} act={f < ERR ? 0 : 3} ph={0.5} kit={{ tank: 1, gauge }}
           strain={Math.max(slump, slam * 0.7)} stern={err ? 0.62 : 0}
           shock={f >= ERR && f < ERR + 10 ? 0.85 : slam > 0.4 ? 0.7 : hic}
           xeyes={f >= ERR + 6 && f < SLAM ? 1 : 0}
-          cheer={E(f, POUR + 14, POUR + 26, 0, 1, BACK)} gaze={f < THROW ? -1 : 0.4} />
+          cheer={E(f, POUR + 14, POUR + 26, 0, 1, BACK)} gaze={f < 20 ? 1.3 : f < THROW ? -1 : 0.4} />
         {/* his own gauge, big, ON him — the number the sentence is about */}
         <BigGauge x={HX + 250} y={196} v={gauge} s={1.25} z={50} err={err} />
+        {/* ⭐⭐ THE FEED LINE EMPTIES. A pacing 430px hero only moves ~5px a frame, which is 1px after
+            the audit's 1012→240 downsample — the 40px floor applies to TRAVEL, not just size
+            ([[reference_motion_arithmetic]]). This is a 700px column of fluid receding across the
+            frame in 30 frames, and it is the literal picture of running out. */}
+        <div style={{ position: "absolute", left: HX + 60, top: a.hipL.y - 26, width: 700, height: 34,
+          zIndex: 46, borderRadius: 17, background: dkh(IRON, 0.34), border: `4px solid ${dkh(IRON, 0.5)}`,
+          overflow: "hidden" }}>
+          <div style={{ position: "absolute", right: 0, top: 0, bottom: 0,
+            width: `${100 * (1 - E(f, 4, DRAIN + 6, 0, 1, IO)) * (1 - flowFill) + 100 * flowFill}%`,
+            background: `linear-gradient(180deg, ${mxh(repo.c, 0.34)}, ${repo.c} 50%, ${dkh(repo.c2, 0.2)})` }} />
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <div key={"bb" + i} style={{ position: "absolute", top: 8,
+              left: `${((i * 17 + f * 2.6) % 100)}%`, width: 12, height: 12, borderRadius: "50%",
+              background: hexa("#FFFFFF", 0.30), opacity: f < DRAIN + 6 || f > POUR ? 1 : 0 }} />
+          ))}
+        </div>
+        {f > 12 && f < ERR + 20 && (
+          <Fall x={HX + 150} y={a.hipL.y + 6} w={520} f={f} at={12} n={12} z={47} c={mxh(repo.c, 0.2)} rate={1.2} s={0.8} />
+        )}
+        {/* ⭐ the number the sentence is about, falling to zero — a real count changing is the top of
+            the motion table and it is also the literal claim ("runs out of credits") */}
+        {f < POUR + 10 && (
+          <div style={{ position: "absolute", left: HX - 430, top: 226, width: 300, zIndex: 84,
+            display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6 }}>
+            <div style={{ ...mono(19, 800), letterSpacing: "0.16em", color: hexa("#EAF3EC", 0.72) }}>CREDITS</div>
+            <div style={{ ...ui(104, 900), letterSpacing: "-0.04em", lineHeight: 0.94,
+              color: credits === 0 ? RED : "#F2F7F2",
+              textShadow: `0 3px 10px ${hexa("#000000", 0.6)}` }}>{credits.toLocaleString("en-US")}</div>
+            <div style={{ ...mono(13, 800), letterSpacing: "0.14em", padding: "3px 9px", borderRadius: 5,
+              color: "#FFFFFF", background: hexa(RED, low), opacity: low > 0 ? 1 : 0 }}>LOW BALANCE</div>
+          </div>
+        )}
+        {/* the bay's warning strip picks it up */}
+        {low > 0 && (
+          <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 10, zIndex: 86,
+            background: hexa(RED, 0.5 * low) }} />
+        )}
         <ErrorLamp x={HX - 250} y={128} on={err} f={f} s={1.7} z={50} />
         {err > 0 && <Steam x={HX + 90} y={GY - HS * 0.72} f={f} at={ERR} n={12} z={64} s={1.7} c="#8A8D8A" rate={1.5} />}
         {slam > 0.02 && f < SLAM + 26 && (<>

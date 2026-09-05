@@ -3,7 +3,7 @@ import { useCurrentFrame } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D, lerpHex, mono, ui,
   Scene, Cam, Contact, Edge, Ring, Puff, Steam, Sweat, Fall, Motes, Pool, Rake,
-  Crew, Hero, Forearm, costumeFor, squash, asPlace, R, TASKS, GY, BAND_Y, SAFE3,
+  Crew, Hero, Forearm, Runner, costumeFor, squash, asPlace, R, TASKS, GY, BAND_Y, SAFE3,
   CLAY, GOLD, GREEN, RED, INK, BRASS, COPPER, BONE, STEEL, SLATE, TEAL, SKY, VIOLET, MUTE,
   TERM, TERM2, TERM3, UISH, UISH2, DIFFG, DIFFR, CARET, OKGREEN, WARN, CREAM_TICKET,
 } from "./AdhWorld";
@@ -12,6 +12,7 @@ import {
   MarkTile, CodeLines, CheckBox, TodoList, SesFit, Pane, PaneWall, PromptRail, AnswerCard,
   TickPile, DoneChip, SkillFile, StopHook, LedgerTable, CmdLine, OutputBlock, ExitStamp,
   Toast, ErrStack, SysCard, Fleck, Selector, WallClock, PaneStack, Bin, Dev,
+  StampTool, ClaimBoard,
 } from "./AdhProps";
 
 /* ===========================================================================
@@ -124,25 +125,49 @@ export const CUTS: Record<string, number[]> = {
 
 
 /* =========================================================================
-   S0 · THE SESSION — the hook.  135 frames.  3 shots.
+   S0 · THE STAMP — the hook.  135 frames.  ⭐ REBUILT ON THE HOUSE TEMPLATE.
+
    "The rumors are true, Claude is secretly getting distracted, skipping your
     tasks, and lying to you about it."
 
-   ⭐ MECHANISM: **WANDER.** A body leaves the row it is standing at, and the
-   row gets ticked anyway. The object he leaves it for is a NOTIFICATION, which
-   is what actually distracts an agent and is a thing this product has.
+   ⛔⛔⛔ REV 3's HOOK FAILED SIX OF THE EIGHT POINTS IN
+   `feedback_read_the_winning_hook_do_not_just_measure_it`, which is the file
+   that says: READ THE WINNING HOOK'S CODE, measuring its output only gives you
+   the score. Reel 131 FREE's picked hook (`FreeHooks.HookToll`) documents the
+   whole shape, and this is built to it.
 
-   ⭐⭐⭐ THE FOUR VERBS OF THE SENTENCE ARE FOUR DRAWN EVENTS, ON THEIR OWN
-   FRAMES. Rev 1 measured 2.46 motion in its third quarter because every event
-   finished by f76 and the two most important verbs had nothing on them at all.
-   The word times are measured, not guessed:
-     "distracted"  f50-66   the toast crosses and he turns after it
-     "skipping"    f71-92   THREE rows tick themselves, f68 / f80 / f93
-     "lying"       f101-132 an EMPTY answer card runs the rail, and the
-                            DONE chip fires a second time over it
-   ⛔ THE GATES RIDE THE TODO LIST, THE PROMPT RAIL AND THE SESSION BAR, never
-   a dark prop, which is what lets the pane wall stay near-black across the top
-   third and hold the reel's biggest value spread.
+   MECHANISM: **STAMP.** A body against a load. Reel 119 measured PULL — a body
+   working against a load — beating two abstract candidates outright, and reel
+   112 measured the same hero in the same set going 8.94 -> 14.09 purely by
+   making his BODY change shape. So the hook is not "there is a todo list"
+   (a state) and not "cards arrive" (an arrangement); it is ONE Claude putting
+   DONE on work he has not done, once, with his whole body.
+
+   THE EVENT, all four parts:
+     BEFORE   f0 is settled and ALREADY THE JOKE — he is mid-swing with the
+              stamp raised, the spring already BOWED under its weight, effort
+              coming off him, three rows behind him green and every one of their
+              RECEIPT SLOTS EMPTY. No narration needed to read it.
+     TRIGGER  f13 he commits; f19 the stamp starts down.
+     TRAVEL   f19-27 the stamp falls 172px and he drops and SQUASHES with it —
+              0.52 of his own body width, which clears §11's one-third floor.
+              Under that it is a state change the eye cannot resolve at 30fps.
+     ARRIVAL  f27 SLAM, and it COSTS: a damped recoil through the arm, the whole
+              board JOLTS, a dust puff, a ring, and a loose sheet slides off the
+              stack. f31 the tally ticks 3/6 -> 4/6.
+     ⛔ f48 HE LIFTS THE NEXT STAMP. It does not resolve.
+
+   ⭐⭐⭐ AND THE SENTENCE IS STAGED ON ITS OWN WORDS, measured, not guessed:
+     "distracted" f50-66  a notification slides in and HIS HEAD TURNS TO IT
+     "skipping"   f71-92  SLAM 2 — landed while he is still looking away
+     "lying"      f101-132 SLAM 3, faster, head never coming back, and at f126
+                  he is already lifting the fourth. The claim of the reel, in
+                  one image: he is stamping DONE on work he is not even watching.
+
+   ⭐⭐⭐ THE SET IS WORTH MORE THAN THE EFFECTS. Two `Runner` bands of unstamped
+   work cross behind him at different depths and rates — the single biggest
+   per-scene lever in the measured motion table — plus a shaped lamp cone and
+   its pool, which is where the saturated colour on a bone frame comes from.
    ====================================================================== */
 export const PASS: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
@@ -151,56 +176,57 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
   const OP: Record<Variant, number> = { house: 0, amber: 0, steel: 2 };
   const o = OP[v];
 
-  /* the notification crosses the WHOLE panel — LARGE x BRIGHT x FAST, and it
-     means something: it is the thing he follows instead of the row. */
-  const toast = E(f, o + 2, o + 88, 132, 1150, LIN);
-  const look = E(f, o + 8, o + 16, 0, 1, OUT);
-  /* THE TICK HE DID NOT EARN */
-  const reach = E(f, o + 14, o + 20, 0, 1, OUT);
-  const tick = E(f, o + 20, o + 24, 0, 1, IN_Q);
-  const ticked = f >= o + 24;
-  /* THE DONE CHIP — the lie, and the loudest beat of the hook */
-  const chip = f >= o + 30 ? Math.exp(-(f - o - 30) / 4.5) : 0;
-  /* HIS WALK — after the notification, and he never looks back */
-  const walk = E(f, o + 24, o + 66, 0, 356, IO);
-  /* the answer leaving, two of six rows filled */
-  const ship = E(f, o + 32, o + 76, 0, 1, IN_Q);
+  /* ── the beat clock, in this shot's own frames ─────────────────────────── */
+  const COMMIT = 13, DOWN = 19, SLAM = 27, TICK = 31, LIFT = 48;
+  const SLAM2 = 80, SLAM3 = 108, LIFT3 = 126;
+  const SLAMS = [SLAM, SLAM2, SLAM3];
 
-  /* ⭐⭐⭐ "SKIPPING YOUR TASKS" IS AN ARRIVAL RUN. Three rows tick themselves
-     onto the pile across exactly f68-93, each a cream slab crossing ~600px of a
-     dark panel, and the pile's COUNT goes up on every one — an arrival, with a
-     number that changes (`feedback_hold_needs_arrivals_not_travel`). */
-  const ARR = [68, 80, 93];
-  const arrived = ARR.filter((a) => f >= o + a).length;
-  const fallK = (a: number) => E(f, o + a - 17, o + a, 0, 1, IN_Q);
+  /* the raise before each blow, and the SPRING BOWS under the weight — a rigid
+     stick reads as someone holding a prop (§11: WEIGHT IS DEFORMATION) */
+  const cycle = (at: number) => {
+    const up = E(f, at - 26, at - 8, 0, 1, IO);          /* raise */
+    const drop = E(f, at - 8, at, 0, 1, IN_Q);           /* the fall */
+    return { up, drop };
+  };
+  const near = SLAMS.reduce((acc, at) => (Math.abs(f - at) < Math.abs(f - acc) ? at : acc), SLAM);
+  const { up, drop } = cycle(near);
+  const raised = Math.max(0, up - drop);
+  /* the blow itself, and the damped recoil that follows it */
+  const press = SLAMS.reduce((a2, at) =>
+    Math.max(a2, f >= at && f < at + 9 ? Math.exp(-(f - at) / 3.2) : 0), 0);
+  const recoil = SLAMS.reduce((a2, at) =>
+    a2 + (f > at ? Math.sin((f - at) * 0.8) * Math.exp(-(f - at) / 5.5) * 6.5 : 0), 0);
+  /* the board takes it */
+  const jolt = SLAMS.reduce((a2, at) =>
+    Math.max(a2, f >= at ? Math.sin((f - at) * 0.9) * Math.exp(-(f - at) / 4.4) : 0), 0);
 
-  /* ⭐⭐⭐ "LYING TO YOU ABOUT IT" IS AN EMPTY ANSWER. It runs the prompt rail
-     right to left, growing 190 -> 490px, and is cropped by the bottom edge at
-     the end instead of dropping out of the visible band the way rev 1's did. */
-  const lie = E(f, o + 100, o + 134, 0, 1, IN_Q);
-  const chip2 = f >= o + 101 ? Math.exp(-(f - o - 101) / 5) : 0;
+  /* HIS BODY. He drops INTO the blow and squashes — the measured lever that
+     moved reel 112 from 8.94 to 14.09 with the set untouched. */
+  const dropY = drop * 40 - raised * 14;
+  const strain = 0.34 + raised * 0.5 + press * 0.5;
 
-  const jolt = [24, ...ARR].reduce((a, at) => Math.max(a, f >= o + at ? Math.exp(-(f - o - at) / 5) : 0), 0);
+  /* the rows that go green, one per blow */
+  const done = 3 + SLAMS.filter((at) => f >= at).length;
 
-  /* THE COST — failing lines stacking on the wall he is not looking at. Rev 1's
-     Hitchcock clock, in this world's own material. It SPREADS: a second stack
-     at f78 and a third at f92, so the back half keeps gaining area. */
-  const err1 = E(f, o + 36, dur, 0, 1, LIN);
-  const err2 = E(f, o + 78, dur, 0, 1, LIN);
-  const err3 = E(f, o + 92, dur, 0, 1, LIN);
-  const ctx = 1 - E(f, 0, dur, 0, 0.55, LIN);
+  /* ⭐ "SECRETLY GETTING DISTRACTED" (f50-66) — a notification crosses and HIS
+     HEAD TURNS TO IT, and it never comes back. Every blow after this lands
+     while he is looking somewhere else. */
+  const toast = E(f, o + 46, o + 132, 1120, 250, IO);
+  const away = E(f, o + 52, o + 66, 0, 1, OUT);
 
-  const devX = 300 + walk + L.a * 0.4;
+  /* the stamp's own position, hinged off his shoulder */
+  const devX = 296 + L.a * 0.4;
+  const size = 334;
+  const shX = devX + 118, shY = GY - size * 0.56;
+  const stampX = 528 + L.b * 0.3;
+  const stampY = 372 - raised * 118 + drop * 54 + press * 10;
 
-  /* ⭐⭐⭐ THREE SHOTS. Measured: the delivered hooks of the eight reels this
-     repo has shipped run 9.33 to 17.80 mean motion, and a single locked framing
-     could not reach the band. The cuts sit in MEASURED gaps between words: f67
-     is the gap after "distracted," (ends f66) before "skipping" (f71); f102 is
-     inside "lying" (f101-105), landing on the word it illustrates.
-     ⛔ 67 / 35 / 33 frames = 2.23s · 1.17s · 1.10s, all over the 0.7s floor. */
-  const SHOT: Shot[] = shotsFor(v, [{ at: 0, s: 1.14, x: 0, y: 22 },
-    { at: 67, s: 1.30, x: -190, y: 40 },
-    { at: 102, s: 1.18, x: 96, y: 48 }]);
+  /* the loose sheet the blow knocks off the stack */
+  const slide = SLAMS.reduce((a2, at) => Math.max(a2, E(f, at, at + 26, 0, 1, OUT)), 0);
+
+  const SHOT: Shot[] = shotsFor(v, [{ at: 0, s: 1.06, x: 0, y: 16 },
+    { at: 67, s: 1.22, x: -120, y: 34 },
+    { at: 102, s: 1.10, x: 74, y: 24 }]);
   const sh = shotAt(f, SHOT);
 
   return (
@@ -209,104 +235,66 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="none"
           rake={0.09 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={3.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
-        <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={ctx} run={1} />
+        <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={1 - E(f, 0, dur, 0, 0.5, LIN)} run={1} />
 
-        {/* ⛔ THE NEAR-BLACK MASS, AND IT IS FURNITURE: a rack of dormant panes
-            across the top third, cropped by the frame. */}
-        <PaneWall f={f} z={20} y0={12} h={168} n={6} lit={[1, 4]} signLit={1} />
+        {/* ⭐ TWO BANDS OF UNSTAMPED WORK CROSSING BEHIND HIM, at two depths and
+            two rates. The measured table's biggest per-scene lever, and it means
+            something: the work is arriving faster than he is faking it. */}
+        <Runner y={286} f={f} z={11} rate={7.6} pitch={214} w={150} h={84}
+          c={mxh(UISH, 0.10)} c2={dkh(SLATE, 0.14)} kind="crate" rail={false} />
+        <Runner y={332} f={f} z={12} rate={-11.2} pitch={262} w={186} h={98}
+          c={mxh(UISH2, 0.02)} c2={dkh(SLATE, 0.26)} kind="crate" rail={false} />
 
-        {/* the cost, on the wall behind him, growing to the cut */}
-        <ErrStack x={300 + L.b * 0.3} y={470} f={f} at={o + 36} k={err1} z={58} n={15} s={1.05} />
-        <ErrStack x={392 + L.b * 0.3} y={452} f={f} at={o + 78} k={err2} z={57} n={12} s={0.9} />
-        <ErrStack x={162 + L.b * 0.3} y={462} f={f} at={o + 92} k={err3} z={56} n={11} s={0.82} />
+        {/* ⭐ THE LAMP CONE — a SHAPED cone, never a full-frame fill, and it is
+            where the saturated colour on a bone frame comes from. */}
+        <div style={{ position: "absolute", left: 380, top: 120, width: 520, height: GY - 120,
+          zIndex: 16, opacity: 0.40,
+          clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
+          background: `linear-gradient(180deg, ${hexa(GOLD, 0.56)} 0%, ${hexa(GOLD, 0.04)} 100%)` }} />
+        <Pool x={612} y={GY - 54} w={560} c={GOLD} o={0.30} z={17} />
 
-        {/* THE DISTRACTION — a notification crossing the entire panel */}
-        <Toast x={toast} y={GY - 40} s={0.92} z={50} f={f} hue={SKY} />
+        <PaneWall f={f} z={20} y0={12} h={150} n={6} lit={[1, 4]} signLit={1} />
 
-        {/* THE PROMPT RAIL running toward camera */}
-        <PromptRail f={f} z={70} topY={688} lampBarY={214} lamps={[1, 1, 1]}
-          lampX={[386 + L.c * 0.3, 536 + L.c * 0.3, 686 + L.c * 0.3]} dx={L.c * 0.2} />
-
-        {/* ⭐⭐ THE FRAME-0 CLAIM PLATE, AND IT IS THE TODO LIST — the measured IG
-            lever: a cream plate in the middle third at frame 0, carrying the
-            real mark and one big number. It is not an overlay; it is the object
-            the whole reel is about. It leaves at f14 and the STAND stays. */}
-        {!ticked && (
-          <TodoList x={636 + L.c * 0.4 - reach * 40} y={286 - reach * 26} w={292} h={392} z={78} f={f}
-            ticks={[true, true, false, false, false, false]} big={`${R.done}/${R.tasks}`} sub="TODO"
-            stand rot={-2 + reach * 9} hard={2} />
-        )}
-        <div style={{ position: "absolute", left: 636 + L.c * 0.4 + 100, top: 662, width: 88, height: 18,
-          zIndex: 76, borderRadius: "50%",
-          background: `linear-gradient(180deg, ${mxh(STEEL, 0.24)}, ${dkh(STEEL, 0.34)})` }} />
-
-        {/* THE VILLAIN — the pile of rows ticked without being run */}
-        <TickPile x={845 + L.c * 0.4} y={GY - 96} s={1.38} z={80} f={f} jolt={jolt}
-          slips={4 + arrived} />
-        {/* the row currently ticking itself, in flight */}
-        {reach > 0.02 && !ticked && (
-          <div style={{ position: "absolute", left: 636 + L.c * 0.4 + (845 - 636) * tick - 90,
-            top: 286 + 160 * tick, width: 190, height: 40, zIndex: 82, borderRadius: 4,
+        {/* THE LOAD — the wall of rows, and it JOLTS when it is struck */}
+        <ClaimBoard x={612 + L.c * 0.4} y={382} w={430} h={378} z={60} f={f}
+          done={done} jolt={jolt} big={`${done}/${R.tasks}`} />
+        {/* the loose sheet the blow knocks off */}
+        {slide > 0.02 && (
+          <div style={{ position: "absolute", left: 812 + L.c * 0.4 + slide * 74,
+            top: 236 + slide * 322, width: 150, height: 42, zIndex: 66, borderRadius: 4,
             background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
-            border: `3px solid ${hexa(INK, 0.22)}`, boxShadow: SH,
-            transform: `rotate(${-14 + tick * 30}deg)` }} />
+            border: `3px solid ${hexa(INK, 0.2)}`, boxShadow: SH,
+            transform: `rotate(${slide * 62}deg)`, opacity: 1 - slide * 0.35 }} />
         )}
-        {ticked && <Puff x={845 + L.c * 0.4} y={GY - 96} f={f} at={o + 24} c="#E8DCC0" z={83} n={9} s={0.8} />}
-        {ticked && <Ring x={845 + L.c * 0.4} y={GY - 88} f={f} at={o + 24} c={mxh(DIFFG, 0.4)} z={83} s={0.6} dur={14} />}
 
-        {/* ⭐ THE SKIPPED ROWS ARRIVING — three of them, on the words */}
-        {ARR.map((a) => {
-          const k = fallK(a);
-          return k > 0.02 && k < 1 ? (
-            <div key={"ft" + a} style={{ position: "absolute", left: 800 + L.c * 0.4 - k * 39,
-              top: -80 + k * 610, width: 190, height: 44, zIndex: 84, borderRadius: 4,
-              background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
-              border: `3px solid ${hexa(INK, 0.24)}`, boxShadow: SH,
-              transform: `rotate(${-32 + k * 46}deg)`, display: "flex", alignItems: "center",
-              gap: 8, paddingLeft: 8 }}>
-              <CheckBox rel s={28} k={1} z={2} />
-              <div style={{ width: 92, height: 7, borderRadius: 3, background: hexa(INK, 0.12),
-                border: `1px dashed ${hexa(INK, 0.22)}` }} />
-            </div>
-          ) : null;
-        })}
-        {ARR.map((a) => f >= o + a && f < o + a + 16 ? (
-          <React.Fragment key={"fp" + a}>
-            <Puff x={845 + L.c * 0.4} y={GY - 96} f={f} at={o + a} c="#E8DCC0" z={86} n={7} s={0.7} />
-            <Ring x={845 + L.c * 0.4} y={GY - 88} f={f} at={o + a} c={mxh(DIFFG, 0.4)} z={86} s={0.5} dur={12} />
+        {/* THE BLOW LANDS AND IT COSTS */}
+        {SLAMS.map((at) => f >= at && f < at + 18 ? (
+          <React.Fragment key={"sl" + at}>
+            <Puff x={612 + L.c * 0.4} y={382 + 26} f={f} at={at} c="#E8DCC0" z={70} n={11} s={0.95} />
+            <Ring x={612 + L.c * 0.4} y={382 + 18} f={f} at={at} c={mxh(GOLD, 0.45)} z={70} s={0.8} dur={15} />
           </React.Fragment>
         ) : null)}
 
-        {/* THE DONE CHIP — the lie, twice. Left of frame, in the one region
-            where nothing else ever moves. */}
-        <DoneChip x={182 + L.c * 0.4} y={GY - 92} s={1.15} z={80} ring={Math.max(chip, chip2)} />
-        {chip > 0.1 && <Ring x={182 + L.c * 0.4} y={GY - 104} f={f} at={o + 30} c={mxh(GOLD, 0.5)} z={84} s={0.7} dur={18} />}
-        {chip2 > 0.1 && <Ring x={182 + L.c * 0.4} y={GY - 104} f={f} at={o + 101} c={mxh(GOLD, 0.5)} z={84} s={0.85} dur={22} />}
+        {/* HIS ARM, then the STAMP hinged on the end of it */}
+        <Forearm x0={shX} y0={shY} x1={stampX} y1={stampY - 24} w={30} c={CLAY} z={84} />
+        <StampTool x={stampX} y={stampY} s={1.34} z={86} rot={-8 + recoil} press={press} recoil={recoil * 0.1} />
 
-        {/* THE ANSWER — two of six, travelling toward camera and OUT of frame */}
-        {ship > 0.001 && ship < 1 && (
-          <AnswerCard x={506 + L.c * 0.3 - 40 + ship * 60} y={606 + ship * 250} w={230 + ship * 250}
-            z={86} items={[true, true, false, false, false, false]} rot={ship * 6} />
-        )}
-        {/* ⛔ THE LIE, AND IT IS EMPTY. Same route, nothing on it, on the frames
-            that say "lying to you about it." */}
-        {lie > 0.001 && (
-          <AnswerCard x={884 + L.c * 0.3 - lie * 474} y={556 + lie * 132} w={190 + lie * 300}
-            z={88} items={[false, false, false, false, false, false]} rot={-lie * 10} bad={1} />
+        {/* THE CLAUDE — one body against the load */}
+        <Contact x={devX} y={GY - 6} w={206} o={0.36} z={44} />
+        <Dev f={f} x={devX} y={GY + dropY} i={0} size={size} z={62} at={o - 14} loop={1}
+          extra={{ glasses: 1 }} gaze={away * 1.5}
+          shock={strain * 0.72} cheer={E(f, o + 96, o + 108, 0, 0.7, BACK)} />
+        {/* effort off the STILLEST part of him — his head — while he strains */}
+        {strain > 0.5 && (
+          <Steam x={devX} y={GY - size * 0.98} f={f} at={o + 2} n={6} z={64} s={0.8}
+            c="#D8CFC0" rate={1.2} />
         )}
 
-        {/* THE CLAUDE — he is the subject, and what he DOES is leave */}
-        <Contact x={devX} y={GY - 6} w={196} o={0.36} z={44} />
-        <Dev f={f} x={devX} y={GY} i={0} size={331} z={62} at={o - 14} loop={3}
-          gaze={look * 1.4} extra={{ glasses: 1 }}
-          shock={E(f, o + 8, o + 14, 0, 0.5, OUT) - E(f, o + 20, o + 30, 0, 0.5, IO)}
-          cheer={E(f, o + 96, o + 106, 0, 1, BACK) - E(f, o + 128, dur, 0, 1, IO)} />
-        {walk > 4 && walk < 350 && (
-          <Steam x={devX} y={GY - 300} f={f} at={o + 26} n={5} z={64} s={0.7} c="#D8CFC0" rate={0.9} />
-        )}
+        {/* ⭐ "SECRETLY GETTING DISTRACTED" — it slides in and he never looks back */}
+        <Toast x={toast} y={GY - 168} s={0.86} z={78} f={f} hue={SKY} />
 
-        {/* ⛔ THE OCCLUDER — a mass cropped by the panel edge, IN FRONT. */}
-        <PaneStack x={W - 40 + L.c * 0.2} y={H - 6} n={6} z={94} s={0.9} />
+        {/* ⛔ THE NEAR-EDGE CROP IN FRONT OF THE ACTION */}
+        <PaneStack x={W - 34 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.92} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={86} z={92} kind="post" />
       </Cam>
     </Scene>
