@@ -752,3 +752,166 @@ export const Composer: React.FC<{ x: number; y: number; f: number; at: number; s
     </div>
   );
 };
+
+/* =========================================================================
+   ⭐⭐⭐ THE REPO CARD — GitHub's OWN object, and the reel's real subject.
+
+   ⛔ The note that produced it (Alex, 2026-09-05): *"more on brand ... github
+   themed ig moreso ... and more on brand with whats being spoken since its a
+   bit off topic here at times."* The hook's sentence is **"These four brand new
+   open source GITHUB REPOS will completely upgrade your Claude setup"** and the
+   frame showed four anonymous machine parts on chains. A viewer with the sound
+   off would say "car parts", never "repos" — the MUTE TEST failure in
+   [[feedback_illustrate_the_sentence_not_the_set]], and the exact defect in
+   [[feedback_real_marks_are_the_props]]: a metaphor for the mechanism is not
+   the subject.
+
+   So the thing that travels is now the repo itself, drawn the way GitHub draws
+   it: the repo octicon, `owner/name` with the owner muted and the name in
+   GitHub's link blue, the Public pill, the real description, and the footer row
+   every repo page has — language dot, star count, licence. Every string here is
+   read from the GitHub API (2026-09-05), none is invented.
+
+   The PART is what it becomes on arrival. Card in the air, hardware on the body:
+   one substitution that says "repo" and "upgrade" in the same beat.
+   ====================================================================== */
+
+/** GitHub's own glyphs, drawn from the octicons 16px grid (not approximated). */
+export const Octicon: React.FC<{ kind: "repo" | "star" | "fork" | "issue" | "pr" | "check"; s: number; c: string; o?: number }> =
+  ({ kind, s, c, o = 1 }) => {
+  const d = {
+    repo: "M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8Z",
+    star: "M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z",
+    fork: "M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z",
+    issue: "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z",
+    pr: "M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z",
+    check: "M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z",
+  }[kind];
+  return (
+    <svg width={s} height={s} viewBox="0 0 16 16" style={{ display: "block", opacity: o, flexShrink: 0 }}>
+      <path d={d} fill={c} fillRule="evenodd" />
+    </svg>
+  );
+};
+
+/** GitHub's card colours, sampled from the light theme. */
+export const GH = { bg: "#FFFFFF", line: "#D0D7DE", link: "#0969DA", text: "#1F2328", mute: "#59636E",
+  green: "#1A7F37", star: "#EAC54F" } as const;
+
+/**
+ * The repo card. `w` is its width; everything scales off it, so the same object
+ * is a 250px payload falling on the hero and a 470px title card in the tag beat.
+ *  - `count` 0..1 eases the star number to its real value (eased ONCE, by the caller —
+ *    feedback_when_the_info_is_the_number_the_box_is_decoration)
+ *  - `install` 0..1 fills the green progress bar and stamps the tick: the card is
+ *    being APPLIED, which is the sentence's verb
+ *  - `open` 0..1 folds it in on its own vertical (a card arriving, never a fade)
+ */
+export const RepoCard: React.FC<{ repo: Repo; x: number; y: number; w?: number; z?: number; f: number;
+  count?: number; install?: number; open?: number; rot?: number; desc?: boolean; dim?: number }> =
+  ({ repo, x, y, w = 300, z = 66, f, count = 1, install = 0, open = 1, rot = 0, desc = true, dim = 0 }) => {
+  const u = w / 300;                                   /* one card unit */
+  const k = Math.max(0, Math.min(1, open));
+  const shown = Math.round(repo.stars * Math.max(0, Math.min(1, count))).toLocaleString("en-US");
+  const [owner, nm] = repo.repo.split("/");
+  /* ⛔ `diegosouzapw/OmniRoute` truncated to `diegosouzapw/On` and `deepseek-ai/deepseek-harness`
+     lost its tail on the first probe: a REAL repo name rendered wrong is worse than a small one.
+     The line scales to its own length so every character survives at every card size. */
+  const fit = Math.min(1, 18 / repo.repo.length);
+  const ins = Math.max(0, Math.min(1, install));
+  const pad = 14 * u;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y, width: w, zIndex: z,
+      transformOrigin: "50% 0%", transform: `rotate(${rot}deg) scaleY(${0.72 + 0.28 * k})`, opacity: k }}>
+      <div style={{ position: "relative", background: GH.bg, border: `${2.4 * u}px solid ${GH.line}`,
+        borderRadius: 9 * u, boxShadow: SH_D, padding: `${pad}px ${pad}px ${11 * u}px`,
+        filter: dim > 0 ? `brightness(${1 - dim * 0.34})` : undefined }}>
+        {/* row 1 — the repo glyph, owner/name, and the Public pill GitHub puts on every public repo */}
+        <div style={{ display: "flex", alignItems: "center", gap: 7 * u }}>
+          <Octicon kind="repo" s={20 * u} c={GH.mute} />
+          <div style={{ ...ui(21 * u * fit, 800), color: GH.link, whiteSpace: "nowrap",
+            letterSpacing: "-0.01em", flexShrink: 0 }}>
+            <span style={{ color: GH.mute, fontWeight: 600 }}>{owner}/</span>{nm}
+          </div>
+          {/* the Public pill is decoration; a long repo name is content, so the pill yields to it */}
+          {fit > 0.92 && (
+            <div style={{ marginLeft: "auto", border: `${1.6 * u}px solid ${GH.line}`, borderRadius: 20 * u,
+              padding: `${1.5 * u}px ${8 * u}px`, ...ui(11 * u, 700), color: GH.mute, whiteSpace: "nowrap",
+              flexShrink: 0 }}>Public</div>
+          )}
+        </div>
+        {/* row 2 — the repo's real one-line description */}
+        {desc && (
+          <div style={{ ...ui(14.5 * u, 500), color: GH.mute, marginTop: 8 * u, lineHeight: 1.34,
+            display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+            {repo.desc}
+          </div>
+        )}
+        {/* row 3 — the footer every repo page has: language dot, stars, licence */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14 * u, marginTop: 11 * u }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 5 * u }}>
+            <div style={{ width: 11 * u, height: 11 * u, borderRadius: "50%", background: repo.langC,
+              border: `${1 * u}px solid ${hexa("#000000", 0.14)}` }} />
+            <div style={{ ...ui(13 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{repo.lang}</div>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 5 * u }}>
+            <Octicon kind="star" s={13 * u} c={GH.star} />
+            <div style={{ ...ui(13 * u, 800), color: GH.text, whiteSpace: "nowrap" }}>{shown}</div>
+          </div>
+          <div style={{ ...ui(13 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{repo.lic}</div>
+          {/* the repo's own mark, bottom-right, where a repo page puts the org avatar */}
+          <div style={{ marginLeft: "auto", width: 26 * u, height: 26 * u, borderRadius: 6 * u,
+            background: repo.markBg, border: `${1.4 * u}px solid ${GH.line}`, display: "flex",
+            alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <Img src={staticFile("logos/" + repo.mark)} style={{ width: 19 * u, height: 19 * u, objectFit: "contain" }} />
+          </div>
+        </div>
+        {/* ⭐ INSTALLING — the card is being APPLIED. A real bar that fills, then a tick.
+            This is the beat's verb, drawn, and it is the one hot colour on the card. */}
+        {ins > 0.001 && (
+          <div style={{ position: "absolute", left: pad, right: pad, bottom: -7 * u, height: 6 * u,
+            borderRadius: 4 * u, background: hexa(GH.line, 0.9), overflow: "hidden" }}>
+            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${ins * 100}%`,
+              background: `linear-gradient(90deg, ${GH.green}, ${mxh(GH.green, 0.3)})` }} />
+          </div>
+        )}
+        {ins > 0.98 && (
+          <div style={{ position: "absolute", right: -10 * u, top: -10 * u, width: 30 * u, height: 30 * u,
+            borderRadius: "50%", background: GH.green, display: "flex", alignItems: "center",
+            justifyContent: "center", boxShadow: SH }}>
+            <Octicon kind="check" s={19 * u} c="#FFFFFF" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+/** the GitHub wordmark on a lit shop sign — the ≥96px real mark the per-scene
+    contract in [[feedback_real_marks_are_the_props]] asks for, made diegetic. */
+export const GhSign: React.FC<{ x: number; y: number; w?: number; z?: number; on?: number; f: number }> =
+  ({ x, y, w = 300, z = 30, on = 1, f }) => {
+  const u = w / 300, k = Math.max(0, Math.min(1, on));
+  const flick = k * (0.94 + 0.06 * Math.sin(f / 5.5));
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y, width: w, height: 84 * u, zIndex: z }}>
+      {/* the two brackets holding it off the wall */}
+      {[0.16, 0.84].map((p, i) => (
+        <div key={i} style={{ position: "absolute", left: w * p - 3 * u, top: -16 * u, width: 6 * u, height: 18 * u,
+          background: dkh(IRON, 0.28) }} />
+      ))}
+      <div style={{ position: "absolute", inset: 0, borderRadius: 10 * u, background: "#161B22",
+        border: `${3 * u}px solid ${dkh(IRON, 0.2)}`, boxShadow: SH_D, display: "flex", alignItems: "center",
+        justifyContent: "center", gap: 12 * u, opacity: 0.5 + 0.5 * k }}>
+        <Img src={staticFile("logos/github.svg")}
+          style={{ width: 46 * u, height: 46 * u, filter: `invert(1) brightness(${0.7 + 0.3 * flick})` }} />
+        <div style={{ ...ui(31 * u, 900), color: hexa("#FFFFFF", 0.5 + 0.5 * flick), letterSpacing: "-0.02em" }}>GitHub</div>
+      </div>
+      {/* the pool it throws on the wall below */}
+      {k > 0.05 && (
+        <div style={{ position: "absolute", left: -w * 0.16, top: 78 * u, width: w * 1.32, height: 120 * u,
+          zIndex: -1, opacity: 0.16 * k, background: `radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, transparent 70%)` }} />
+      )}
+    </div>
+  );
+};

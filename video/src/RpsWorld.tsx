@@ -94,18 +94,24 @@ export type Repo = {
   name: string; repo: string; stars: number; starsStr: string; lic: string;
   c: string; c2: string; mark: string; markBg: string; part: "INTAKE" | "HUD" | "CORE" | "TANK";
   cos: number[]; place: string; tagName: string; tagSub: string;
+  /* ⭐ GitHub's OWN fields, read from the API 2026-09-05 — the repo card is the subject's
+     own object, not a garage tag with a badge on it (feedback_real_marks_are_the_props) */
+  lang: string; langC: string; desc: string;
 };
 export const REPOS: Repo[] = [
-  { key: "anydoc", name: "anydoc", repo: "firecrawl/anydoc", stars: 20358, starsStr: "20,358",
+  { key: "anydoc", name: "anydoc", repo: "firecrawl/anydoc", stars: 20397, starsStr: "20,397",
+    lang: "Rust", langC: "#DEA584", desc: "Convert Word, PowerPoint, Excel, EPUB, CSV and PDF to clean Markdown.",
     lic: "MIT", c: "#7FC0C9", c2: "#2E7C86", mark: "firecrawl.png", markBg: "#FFFFFF",
     part: "INTAKE", cos: [0, 1, 4], place: "paper", tagName: "anydoc", tagSub: "MIT · GITHUB" },
-  { key: "herdr", name: "herdr", repo: "herdrdev/herdr", stars: 35413, starsStr: "35,413",
+  { key: "herdr", name: "herdr", repo: "herdrdev/herdr", stars: 35522, starsStr: "35,522",
+    lang: "Rust", langC: "#DEA584", desc: "The runtime your coding agents live on.",
     lic: "Apache-2.0", c: "#E7B24C", c2: "#8A5F14", mark: "herdr.png", markBg: "#DADADA",
     part: "HUD", cos: [6, 7, 0], place: "cockpit", tagName: "herdr", tagSub: "APACHE-2.0 · GITHUB" },
-  { key: "dsh", name: "deepseek-harness", repo: "deepseek-ai/deepseek-harness", stars: 212632,
-    starsStr: "212,632", lic: "MIT", c: "#8A8EE6", c2: "#3A3E8E", mark: "deepseek.svg",
+  { key: "dsh", name: "deepseek-harness", repo: "deepseek-ai/deepseek-harness", stars: 213060,
+    starsStr: "213,060", lang: "TypeScript", langC: "#3178C6", desc: "DeepSeek Harness: Everything is a Plugin.", lic: "MIT", c: "#8A8EE6", c2: "#3A3E8E", mark: "deepseek.svg",
     markBg: "#FFFFFF", part: "CORE", cos: [9, 1, 3], place: "engine", tagName: "DeepSeek", tagSub: "HARNESS · MIT · GITHUB" },
-  { key: "omni", name: "OmniRoute", repo: "diegosouzapw/OmniRoute", stars: 61383, starsStr: "61,383",
+  { key: "omni", name: "OmniRoute", repo: "diegosouzapw/OmniRoute", stars: 61564, starsStr: "61,564",
+    lang: "TypeScript", langC: "#3178C6", desc: "One endpoint, 352 providers, 1200+ models. Never stop coding.",
     lic: "MIT", c: "#5FBF8E", c2: "#2E7A52", mark: "omniroute.png", markBg: "#FFFFFF",
     part: "TANK", cos: [8, 0, 2], place: "fuel", tagName: "OmniRoute", tagSub: "MIT · GITHUB" },
 ];

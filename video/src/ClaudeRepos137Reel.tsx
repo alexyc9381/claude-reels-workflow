@@ -13,9 +13,9 @@ import words from "./data/words_repos137.json";
    REEL 137 · "REPOS" — THE SHOP.  Board: storyboards/137-repos.md.
 
    Subject: four brand-new open-source repos that upgrade a Claude setup —
-   firecrawl/anydoc (★20,358 MIT), herdrdev/herdr (★35,413 Apache-2.0),
-   deepseek-ai/deepseek-harness (★212,632 MIT), diegosouzapw/OmniRoute
-   (★61,383 MIT). Every figure verified 2026-09-05 against the GitHub API and
+   firecrawl/anydoc (★20,397 MIT), herdrdev/herdr (★35,522 Apache-2.0),
+   deepseek-ai/deepseek-harness (★213,060 MIT), diegosouzapw/OmniRoute
+   (★61,564 MIT). Every figure verified 2026-09-05 against the GitHub API and
    each README; the ledger is `RpsWorld.R` / `REPOS`.
 
    ⭐ THE WORLD IS THE WORD THE SCRIPT TURNS ON: "UPGRADE". A tuning shop for
@@ -266,10 +266,10 @@ export const makeReel = (v: Variant, quiet = false, hook: HookId = HOOK_OF[v]): 
    ====================================================================== */
 const BANDS = [
   { from: L.S0,  big: "UPGRADE YOUR CLAUDE",  hot: "4 FREE REPOS" },
-  { from: L.S1,  big: "ANYDOC · ★20,358",     hot: "ALSO PDF · EPUB · CSV" },
-  { from: L.S5,  big: "HERDR · ★35,413",      hot: "SEE WHO IS BLOCKED" },
-  { from: L.S8,  big: "DEEPSEEK HARNESS",     hot: "★212,632 · MODEL IS A PLUGIN" },
-  { from: L.S11, big: "OMNIROUTE · ★61,383",  hot: "352 PROVIDERS · 150+ FREE" },
+  { from: L.S1,  big: "ANYDOC · ★20,397",     hot: "ALSO PDF · EPUB · CSV" },
+  { from: L.S5,  big: "HERDR · ★35,522",      hot: "SEE WHO IS BLOCKED" },
+  { from: L.S8,  big: "DEEPSEEK HARNESS",     hot: "★213,060 · MODEL IS A PLUGIN" },
+  { from: L.S11, big: "OMNIROUTE · ★61,564",  hot: "352 PROVIDERS · 150+ FREE" },
   { from: L.S13, big: "COMMENT REPOS",        hot: "ALL 4 LINKS · FREE" },
 ];
 const SectionBand: React.FC<{ f: number }> = ({ f }) => {

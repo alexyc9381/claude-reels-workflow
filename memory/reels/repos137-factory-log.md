@@ -20,10 +20,10 @@ GitHub API and each README on 2026-09-05:
 
 | spoken | repo | ★ | licence | what the frame may assert |
 |---|---|---|---|---|
-| AnyDoc | `firecrawl/anydoc` | 20,358 | MIT | Word/PowerPoint/Excel/PDF/EPUB/CSV → GitHub-Flavored Markdown, single-digit ms |
-| herder | `herdrdev/herdr` | 35,413 | Apache-2.0 | one pane per agent, WORKING / BLOCKED / IDLE, workspaces + splits |
-| the deep sea | `deepseek-ai/deepseek-harness` | 212,632 | MIT | "Everything is a Plugin", the model adapter included |
-| Omnirout | `diegosouzapw/OmniRoute` | 61,383 | MIT | 352 providers · 150+ free · quota-aware fallback · ~1.47B free tokens/mo |
+| AnyDoc | `firecrawl/anydoc` | 20,397 | MIT | Word/PowerPoint/Excel/PDF/EPUB/CSV → GitHub-Flavored Markdown, single-digit ms |
+| herder | `herdrdev/herdr` | 35,522 | Apache-2.0 | one pane per agent, WORKING / BLOCKED / IDLE, workspaces + splits |
+| the deep sea | `deepseek-ai/deepseek-harness` | 213,060 | MIT | "Everything is a Plugin", the model adapter included |
+| Omnirout | `diegosouzapw/OmniRoute` | 61,564 | MIT | 352 providers · 150+ free · quota-aware fallback · ~1.47B free tokens/mo |
 
 ⛔ The VO says "millions of free tokens every single day". The frame shows the README's own
 `~1.47B FREE TOKENS / MO` and never a per-day figure, which would be derived.
@@ -105,7 +105,7 @@ math with the four parts drawn INSIDE its transform so a part rides his squash) 
   ratchet held at 2 uses. 99 cues / 41.2s = 2.4/sec — above the 1.0-1.5 band, on the 135 precedent
   (Alex asked for more), every cue on an action.
 - Headers carry a fact the VO does not say: `ALSO PDF · EPUB · CSV`, `SEE WHO IS BLOCKED`,
-  `★212,632 · MODEL IS A PLUGIN`, `352 PROVIDERS · 150+ FREE`.
+  `★213,060 · MODEL IS A PLUGIN`, `352 PROVIDERS · 150+ FREE`.
 
 ### The first probe pass (18 stills) — what a contact sheet found before any render
 - the feed chute was a 140px grey slab across the pegboard → 92px, warm oxide
@@ -176,3 +176,47 @@ parallel) · the VO says "millions of free tokens every single day", the frame s
 word_audible cannot transcribe herdr / deepseek-harness / omniroute in isolation (proper nouns) · cue rate
 2.4/sec, above the 1.0-1.5 band on the 135 precedent, every cue on an action · HOLD high on TAG2 75% / SPLIT
 72% (reported, not gated) · `REELS.md` does not list 137 until the files are committed.
+
+## STAGE 10 — REV 2: "more on brand with what's being spoken" (Alex, after delivery)
+
+> *"the animations especially the hook scene here needs to be more interesting and more on brand with like
+> whats going on with the animation github themed ig moreso and more detailed and more on brand yeah with
+> whats being spoken since its a bit off topic here at times"*
+
+**Diagnosed in one pass, not by generating concepts:** a short script printed the VO words falling under
+every scene onset, and the two columns were read against each other.
+
+| scene | the sentence under it | what the frame held | verdict |
+|---|---|---|---|
+| **LIFT (hook)** | "These four brand new open source **GitHub repos** will completely **upgrade** your **Claude setup**" | four anonymous machine parts on chains | ⛔ **the word GitHub is spoken in the first four words of the reel and was nowhere in the picture** |
+| JAM | Office files "break the formatting" | files down a chute, he chokes, debris piles | ✅ |
+| PRESS | "strips all the junk … in milliseconds" | the anydoc press stripping files | ✅ |
+| READ | "turns them into clean markdown" | a markdown sheet going green line by line | ✅ |
+| CRAM / SPLIT | "gets really messy" → "dedicated workspaces and split panels" | crammed agents → a wall of panels | ✅ |
+| PLUGS / SWAP | "everything is literally a plugin" → "replace its brain" | plugboard → a claw swapping his core | ✅ |
+| MANIFOLD | "runs out of credits … swaps to another model" | gauge to E, manifold, refill, tally | ✅ |
+
+Eleven of fourteen were already staging their own line. **The hook was the outlier and it was the one Alex
+named.** The MUTE TEST said it outright: with the sound off a viewer says "car parts", never "repos".
+
+### What was built
+- **`RepoCard`** — GitHub's own object: repo octicon, `owner/name` (owner muted, name in the real link blue
+  `#0969DA`), the Public pill, the repo's real one-line description, and the footer every repo page has:
+  language dot in the real linguist colour, star count, licence. Every string from the GitHub API,
+  re-queried 2026-09-05 (which also refreshed the stars: 20,397 · 35,522 · 213,060 · 61,564).
+- **The verb, drawn.** The card's install bar fills as it closes on the hero, a green tick stamps at the
+  landing, the card is consumed and the hardware it carried seats on his body. Card in the air, hardware on
+  the body.
+- **`GhSign`** — the real GitHub mark at 286px on the shop wall, lit, diegetic.
+- **`GhFitout`** in all fourteen rooms — the contribution graph in each room's own value ramp with cells
+  filling as the reel plays, a commit rail whose branch forks and merges back, octicon stencils. One
+  component, palette from the `Place`.
+- **The three title beats are repo pages**, not luggage tags with a badge; **the CTA wall carries the four
+  repo cards** under `ALL 4 LINKS · FREE`.
+
+### Caught on probe stills, before any render
+- ⛔ **Four legible cards at once was an unreadable pile.** ONE dominant card; the rest hang as hardware; the
+  second card is still installing at the cut.
+- ⛔ **`diegosouzapw/OmniRoute` rendered as `diegosouzapw/On`** — `nowrap + overflow:hidden` truncating a real
+  repo name. The line now scales to its own length and the Public pill yields to it.
+- ⛔ **The contribution graph was invisible**, drawn at z16 under `ShopWall`'s brick courses at z18 → z19.

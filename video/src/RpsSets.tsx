@@ -7,6 +7,7 @@ import {
   REPOS, GY, mono, ui,
 } from "./RpsWorld";
 import type { Place, Repo, Kit } from "./RpsWorld";
+import { Octicon, RepoCard } from "./RpsProps";
 
 /* ===========================================================================
    REEL 137 · "REPOS" — THE SETS.  Board: storyboards/137-repos.md.
@@ -407,14 +408,22 @@ export const HangPart: React.FC<{ repo: Repo; x: number; y: number; size?: numbe
 
 /** the whole hoist: chain, hook, the part, the tag beside it */
 export const Hoist: React.FC<{ repo: Repo; x: number; len: number; f: number; z?: number; swing?: number;
-  partSize?: number; tag?: boolean; tagFace?: number; tagLit?: number; partK?: number; hidePart?: boolean }> =
-  ({ repo, x, len, f, z = 60, swing = 0, partSize = 200, tag = true, tagFace = 1, tagLit = 0.6, partK = 1, hidePart = false }) => {
+  partSize?: number; tag?: boolean; tagFace?: number; tagLit?: number; partK?: number; hidePart?: boolean;
+  card?: boolean; cardW?: number; install?: number; count?: number }> =
+  ({ repo, x, len, f, z = 60, swing = 0, partSize = 200, tag = true, tagFace = 1, tagLit = 0.6, partK = 1,
+     hidePart = false, card = false, cardW = 268, install = 0, count = 1 }) => {
   const rad = (swing * Math.PI) / 180;
   const ex = x + Math.sin(rad) * len, ey = Math.cos(rad) * len;
   return (<>
     <Chain x={x} top={0} len={len} z={z} swing={swing} />
     <Hook x={ex} y={ey} z={z + 1} swing={swing * 0.6} />
-    {!hidePart && <HangPart repo={repo} x={ex} y={ey + 50} size={partSize} z={z + 2} f={f} swing={swing * 0.5} k={partK} />}
+    {/* ⭐ what hangs on the chain is the REPO, not an anonymous part: the sentence
+        says "four open source GitHub repos", so that is what descends. The part is
+        what it BECOMES on arrival (feedback_illustrate_the_sentence_not_the_set). */}
+    {!hidePart && (card
+      ? <RepoCard repo={repo} x={ex} y={ey + 26} w={cardW} z={z + 2} f={f} count={count} install={install}
+          rot={swing * 0.5} />
+      : <HangPart repo={repo} x={ex} y={ey + 50} size={partSize} z={z + 2} f={f} swing={swing * 0.5} k={partK} />)}
     {tag && <Tag repo={repo} x={ex + 120} y={ey + 30} f={f} s={0.62} z={z + 3} swing={swing * 0.8 + Math.sin(f / 9) * 2}
       face={tagFace} lit={tagLit} />}
   </>);
@@ -452,3 +461,89 @@ export const LightColumn: React.FC<{ x: number; on: number; w?: number; c?: stri
     background: `linear-gradient(180deg, ${hexa(c, 0.9)} 0%, ${hexa(c, 0.25)} 70%, ${hexa(c, 0)} 100%)`,
     clipPath: `polygon(${50 - 8 * on}% 0%, ${50 + 8 * on}% 0%, 100% 100%, 0% 100%)` }} />
 );
+
+/* =========================================================================
+   ⭐⭐ THE GITHUB FITOUT — the layer that makes the SHOP a GitHub shop.
+
+   ⛔ The note (Alex, 2026-09-05): *"more on brand ... github themed ig moreso
+   and more detailed."* The garage was a good stage for UPGRADE and said GitHub
+   nowhere. One component, drawn in EVERY room, taking its whole palette from
+   that room's own `Place` — the pattern that worked on reel 132
+   ([[feedback_rooms_need_an_architecture_layer]]), where the same move paid for
+   itself in motion because built walls parallax and flat gradients do not.
+
+   ⛔ DETAIL AND CONTRAST ARE DIFFERENT DIALS: everything here sits in a narrow
+   value band around the wall's own value, so the props and the sprites keep
+   every hard edge and every hot colour in the frame. `lift` is the only knob.
+   The contribution cells are the one exception and they are capped at 0.42.
+
+   ⛔ AND EVERY ROOM MUST NOT BE ONE ROOM REPAINTED: `seed` drives the
+   ARCHITECTURE (graph width, which glyphs, whether the branch forks up or down,
+   the rail's height), not a hue.
+   ====================================================================== */
+export const GhFitout: React.FC<{ p: Place; f: number; seed?: number; z?: number; lift?: number;
+  graphX?: number; graphY?: number; cols?: number; rail?: boolean }> =
+  ({ p, f, seed = 0, z = 16, lift = 1, graphX = 96, graphY = 214, cols = 0, rail = true }) => {
+  const wall = p.back;
+  /* the four contribution steps, built OUT of the wall's own value so a dim room
+     stays dim — GitHub's ramp in shape, this room's ramp in value */
+  const step = [mxh(wall, 0.10), mxh(wall, 0.20), mxh(wall, 0.33), mxh(wall, 0.46)];
+  const hot = "#3FA45B";                                   /* the one real green, used sparingly */
+  const N = cols || (13 + (seed % 4) * 3);
+  const cell = 17, gap = 5, ROWS = 7;
+  const gw = N * (cell + gap), gh = ROWS * (cell + gap);
+  const railY = p.horizon - 128 - (seed % 3) * 26;
+  const up = seed % 2 === 0 ? -1 : 1;
+  return (<>
+    {/* ---- the contribution graph, painted on the wall ------------------- */}
+    <div style={{ position: "absolute", left: graphX, top: graphY, width: gw, height: gh, zIndex: z,
+      opacity: 0.86 * lift }}>
+      {Array.from({ length: ROWS * N }, (_, i) => {
+        const r = i % ROWS, c = Math.floor(i / ROWS);
+        const q = rnd(seed * 7 + c, r);
+        /* ⭐ the graph FILLS as the reel plays: a wave of cells reaching their
+           value left to right, so the wall itself is never a still image */
+        const t = E(f, c * 1.7 + r * 0.5, c * 1.7 + r * 0.5 + 10, 0, 1, OUT);
+        const lvl = q > 0.82 ? 3 : q > 0.62 ? 2 : q > 0.36 ? 1 : 0;
+        const live = q > 0.93;
+        return (
+          <div key={i} style={{ position: "absolute", left: c * (cell + gap), top: r * (cell + gap),
+            width: cell, height: cell, borderRadius: 3.4,
+            background: live ? hexa(hot, 0.55 * t) : step[lvl],
+            opacity: 0.42 + 0.58 * t }} />
+        );
+      })}
+    </div>
+    {/* ---- the commit rail: a branch that forks off the trunk and merges back */}
+    {rail && (
+      <div style={{ position: "absolute", left: 0, top: railY, width: W, height: 90, zIndex: z }}>
+        <div style={{ position: "absolute", left: 0, top: 44, width: W, height: 3,
+          background: hexa(mxh(wall, 0.34), 0.7) }} />
+        {/* the fork: out of the trunk, along, and back in */}
+        <svg width={W} height={90} style={{ position: "absolute", left: 0, top: 0 }}>
+          <path d={`M ${W * 0.30} 45 C ${W * 0.36} 45, ${W * 0.36} ${45 + up * 30}, ${W * 0.42} ${45 + up * 30} L ${W * 0.60} ${45 + up * 30} C ${W * 0.66} ${45 + up * 30}, ${W * 0.66} 45, ${W * 0.72} 45`}
+            fill="none" stroke={hexa(mxh(wall, 0.40), 0.72)} strokeWidth={3} />
+        </svg>
+        {/* the commit dots, one lighting at a time as the head moves along */}
+        {Array.from({ length: 11 }, (_, i) => {
+          const cx = 60 + i * ((W - 120) / 10);
+          const on = E(f, i * 5, i * 5 + 6, 0, 1, OUT) * (1 - E(f, i * 5 + 40, i * 5 + 52, 0, 1, LIN));
+          return (
+            <div key={i} style={{ position: "absolute", left: cx - 7, top: 38, width: 14, height: 14,
+              borderRadius: "50%", border: `3px solid ${hexa(mxh(wall, 0.42), 0.8)}`,
+              background: on > 0.2 ? hexa(hot, 0.34 * on) : hexa(mxh(wall, 0.16), 0.8) }} />
+          );
+        })}
+      </div>
+    )}
+    {/* ---- octicon stencils, painted on the wall the way a workshop stencils a bay */}
+    {(["issue", "pr", "fork"] as const).map((kd, i) => {
+      const xs = [W - 150, W - 96, W - 150][(i + seed) % 3];
+      return (
+        <div key={kd} style={{ position: "absolute", left: xs, top: 250 + i * 62, zIndex: z, opacity: 0.20 * lift }}>
+          <Octicon kind={kd} s={44} c={mxh(wall, 0.5)} />
+        </div>
+      );
+    })}
+  </>);
+};

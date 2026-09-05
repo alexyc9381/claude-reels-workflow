@@ -9,11 +9,11 @@ import {
 import type { Kit, Repo } from "./RpsWorld";
 import { Room } from "./HwSets";
 import {
-  ShopWall, BayLamp, TyreStack, Toolbox, Drum, Bench, Lift, Chain, Hook, Tag, HangPart, Hoist, CrewBand, LightColumn,
+  ShopWall, BayLamp, TyreStack, Toolbox, Drum, Bench, Lift, Chain, Hook, Tag, HangPart, Hoist, CrewBand, LightColumn, GhFitout,
 } from "./RpsSets";
 import {
   FileCard, Chute, Debris, Press, MdSheet, SheetBelt, Monitor, Rack, Claw, Core, Manifold, BigGauge, ErrorLamp,
-  TokenHopper, Tally, Composer,
+  TokenHopper, Tally, Composer, RepoCard, GhSign,
 } from "./RpsProps";
 import type { FileKind } from "./RpsProps";
 
@@ -113,10 +113,16 @@ const TagBeat: React.FC<SP & { repo: Repo; seed: number }> = ({ v, dur, repo, se
       <Cam {...punch(1.34 * pushK(f, 0, dur, 0.07), 520, 330)} z={12}>
         <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
+        <GhFitout p={p} f={f} seed={seed} z={16} graphX={70} graphY={236} cols={11} />
         <ShopWall p={p} f={f} seed={seed} bay={null} door={seed % 2 === 0} pegX={600} pegW={360} />
         <BayLamp x={780 + L.b} y={170} c={repo.c} on={lamp} f={f} z={40} label={repo.tagName} s={1.15} />
-        <Hoist repo={repo} x={hx} len={len} f={f} z={60} swing={ring(f - 9, 6, 3, 34)} partSize={230} tag={false} />
-        <Tag repo={repo} x={hx + 250 + L.c} y={len + 10} f={f} s={1.05} z={70} swing={ring(f - 9, 10, 3.2, 40)} face={face} lit={lamp} count={count} />
+        {/* ⭐ THE TITLE BEAT IS THE REPO PAGE, not a luggage tag with a logo on it: owner/name in
+            GitHub's link blue, the Public pill, the real description, and the footer every repo
+            has — language dot, star count, licence. Three of these in the reel, so the claim
+            "open source GitHub repos" is made in GitHub's own vocabulary each time it is spoken. */}
+        <Hoist repo={repo} x={hx - 210 + L.c * 0.4} len={len + 26} f={f} z={58} swing={ring(f - 9, 6, 3, 34)} partSize={188} tag={false} />
+        <RepoCard repo={repo} x={hx + 168 + L.c} y={len - 34} w={492} z={70} f={f} count={count}
+          open={face} rot={ring(f - 9, 3.4, 3.2, 40)} install={E(f, dur - 15, dur - 4, 0, 1, LIN)} />
         <CrewBand f={f} repo={repo} n={4} size={180} seed={BANDSEED[v] + seed} at={-40} />
       </Cam>
     </Scene>
@@ -150,11 +156,21 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
   const third = f >= ARR[2];
   /* ⭐ after the third hit the model is BROKEN: hiccup jumps to the cut, and a late fourth cough */
   const hic = f >= ARR[2] + 12 ? Math.max(0, Math.sin((f - ARR[2] - 12) * 0.62)) * 0.42 : 0;
+  /* ⛔ the amber cut's JAM stalled in its last quarter (TAIL 0.55): the late burst was debris only,
+     and debris is small. A tail needs an ARRIVAL, and the biggest object in frame is the hero — so
+     he GIVES OUT: 30px of the 236px sprite sinking is worth more than any amount of confetti
+     ([[feedback_hold_needs_arrivals_not_travel]], [[reference_motion_arithmetic]]). */
+  const slump = E(f, 72, dur, 0, 1, LIN);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.045]} vig={0.44}>
-      <Cam {...pick(v, WIDE, punch(1.16, HX - 40, 470), punch(1.08, 520, 470))} z={12}>
+      {/* ⛔ the amber cut's JAM still stalled after the slump was added (TAIL 0.52): an OUT ease
+          front-loads, so 74-80 moved and 80-99 sat — the plateau trap in
+          [[feedback_authored_motion_needs_its_own_driver]]. A continuous in-panel PUSH repaints every
+          pixel to the cut without adding an object, and the slump is linear now so it never settles. */}
+      <Cam {...punch(pick(v, 1.0, 1.16, 1.08) * pushK(f, 54, dur, 0.085), pick(v, 506, HX - 40, 520), pick(v, 491, 470, 470))} z={12}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.08} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.55} window={null} />
+      <GhFitout p={p} f={f} seed={11} z={19} graphX={88} graphY={242} cols={11} />
       <ShopWall p={p} f={f} seed={1} bay={repo} door pegX={520} pegW={420} />
       <Chute {...chute} w={92} z={34} c="#8C6A46" />
       {/* the files coming down the chute, one at a time */}
@@ -169,9 +185,15 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
       {/* what comes out the other side, and the pile it makes */}
       <Debris x={HX - 40} y={mouth.y + 10} f={f} bursts={[...ARR, ARR[2] + 20]} n={third ? 18 : 14} seed={v === "house" ? 0 : v === "amber" ? 3 : 5} z={70} spread={0.55} />
       {ARR.map((at) => (f >= at && f < at + 20 ? <Puff key={at} x={HX - 30} y={mouth.y + 20} f={f} at={at} c="#E8E0D0" z={72} n={7} s={0.9} up={0.3} /> : null))}
-      <Contact x={HX} y={GY - 10} w={HS * 0.8} o={0.34} />
-      <Rig f={f} x={HX} y={GY} size={HS} z={56} act={3} gaze={-1.2} strain={jolt * 0.55} shock={jolt > 0.2 ? 0.8 : hic}
+      <Contact x={HX} y={GY - 10 + slump * 30} w={HS * 0.8 + slump * 30} o={0.34} />
+      <Rig f={f} x={HX} y={GY + slump * 30} size={HS} z={56} act={3} gaze={-1.2}
+        strain={Math.max(jolt * 0.55, slump * 0.62)} shock={jolt > 0.2 ? 0.8 : hic}
         xeyes={third ? 1 : 0} ph={0.6} />
+      {/* the pile gives way with him */}
+      {f >= 78 && f < 99 && (<>
+        <Fall x={HX - 150} y={GY - 120} w={300} f={f} at={78} n={16} z={72} c={mxh(BONE, 0.1)} rate={1.5} s={1.2} />
+        <Puff x={HX - 20} y={GY - 40} f={f} at={80} c="#E8E0D0" z={73} n={10} s={1.3} up={0.18} />
+      </>)}
       {/* the crew in front, flinching on each hit */}
       <CrewBand f={f} repo={repo} n={4} size={186} seed={BANDSEED[v]} at={-40} />
       <TyreStack x={-30 + L.c} n={3} s={1.0} z={90} />
@@ -206,6 +228,7 @@ export const PRESS: React.FC<SP> = ({ v, dur }) => {
       <Cam s={sh.s} x={sh.x} y={sh.y} z={12}>
         <Room p={p} f={f} bands={3} kind="shelf" overhead="lampbar" rake={0.09} rakeX={RAKE_X[v]} rakeRate={3.4 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="tile" grit={0.55} lamp={{ x: 520, y: 150, r: 220 }} window={null} />
+        <GhFitout p={p} f={f} seed={12} z={19} graphX={114} graphY={256} cols={12} />
         <ShopWall p={p} f={f} seed={2} bay={repo} door={false} pegX={640} pegW={340} />
         <Bench x={PX + 40} y={GY} w={720} z={30} />
         <Press x={PX} y={PY} f={f} feeds={feeds} s={1} z={44} />
@@ -264,6 +287,7 @@ export const READ: React.FC<SP> = ({ v, dur }) => {
       <Cam s={sh.s * (f >= 58 ? pushK(f, 58, 135, 0.08) : 1)} x={sh.x} y={sh.y} z={12}>
         <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.09} rakeX={RAKE_X[v]} rakeRate={3.2 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={{ x: 60, y: 130, w: 220, h: 170 }} />
+        <GhFitout p={p} f={f} seed={13} z={19} graphX={62} graphY={270} cols={13} />
         <ShopWall p={p} f={f} seed={3} bay={repo} door={false} pegX={330} pegW={330} />
         <SheetBelt y={beltY} f={f} z={36} rate={7.2 + (v === "steel" ? 1 : 0)} s={0.58} />
         <Contact x={HX} y={GY - 10} w={HS * 0.8} o={0.34} />
@@ -312,6 +336,7 @@ export const CRAM: React.FC<SP> = ({ v, dur }) => {
       <Cam {...pick(v, punch(1.16, MX, 400), punch(1.42, MX, 372), punch(1.06, MX - 30, 440))} z={12}>
         <Room p={p} f={f} bands={2} kind="shelf" overhead="duct" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.6 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="boards" grit={0.5} lamp={{ x: 560, y: 120, r: 240 }} window={null} />
+        <GhFitout p={p} f={f} seed={14} z={19} graphX={88} graphY={228} cols={10} />
         <ShopWall p={p} f={f} seed={4} bay={repo} door={false} pegX={40} pegW={300} />
         <Bench x={MX} y={GY} w={700} z={30} />
         {/* the mug and the keyboard on the bench */}
@@ -353,6 +378,7 @@ export const SPLIT: React.FC<SP> = ({ v, dur }) => {
       <Cam s={pushK(f, 0, dur, 0.06)} x={0} y={0} z={12}>
       <Room p={p} f={f} bands={2} kind="shelf" overhead="duct" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.6 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="boards" grit={0.5} lamp={{ x: 560, y: 120, r: 240 }} window={null} />
+      <GhFitout p={p} f={f} seed={15} z={19} graphX={114} graphY={242} cols={11} />
       <ShopWall p={p} f={f} seed={4} bay={repo} door={false} pegX={40} pegW={300} />
       <Bench x={MX} y={GY} w={700} z={30} />
       <Monitor x={MX} y={GY - 172} f={f} w={560} h={380} arrivals={arrivals} split={grow} splitAt={6} states={states} s={1} printAt={36} />
@@ -384,6 +410,7 @@ export const PLUGS: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.48}>
       <Room p={p} f={f} bands={3} kind="rack" overhead="tray" rake={0.08} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="tile" grit={0.55} lamp={{ x: 600, y: 140, r: 230 }} window={null} />
+      <GhFitout p={p} f={f} seed={16} z={19} graphX={62} graphY={256} cols={12} />
       <ShopWall p={p} f={f} seed={5} bay={repo} door={false} pegX={40} pegW={240} />
       <Hoist repo={repo} x={860 + L.a * 0.3} len={len} f={f} z={60} swing={ring(f - 9, 4, 3, 16)} partSize={200} tag={false} />
       <Tag repo={repo} x={860 + L.a * 0.3 - 20} y={len + 190} f={f} s={0.86} z={70} swing={ring(f - 9, 8, 3.2, 18)} face={face} lit={1} />
@@ -439,6 +466,7 @@ export const SWAP: React.FC<SP> = ({ v, dur }) => {
         : pick(v, punch(1.58 * pushK(f, 71, dur, 0.05), HX, 470), punch(1.72 * pushK(f, 71, dur, 0.05), HX, 500), punch(1.42 * pushK(f, 71, dur, 0.05), HX - 40, 450)))} z={12}>
         <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.4 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="tile" grit={0.5} lamp={{ x: 506, y: 130, r: 260 }} window={null} />
+        <GhFitout p={p} f={f} seed={17} z={19} graphX={88} graphY={270} cols={13} />
         <ShopWall p={p} f={f} seed={6} bay={repo} door={false} pegX={700} pegW={300} />
         {/* the dumb core visible in the dome, then gone, then the new one */}
         <Contact x={HX} y={GY - 10} w={HS * 0.8} o={0.36} />
@@ -490,6 +518,7 @@ export const GODTIER: React.FC<SP> = ({ v, dur }) => {
       <Cam {...pick(v, WIDE, punch(1.14, HX, 450), punch(1.06, HX + 20, 470))} z={12}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.05} rakeX={RAKE_X[v]} rakeRate={2.2 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.6} window={null} />
+      <GhFitout p={p} f={f} seed={18} z={19} graphX={114} graphY={228} cols={10} />
       <ShopWall p={p} f={f} seed={7} bay={null} door={false} pegX={40} pegW={300} lift={0.35} />
       {LAMPS.map((l, i) => <BayLamp key={l.r.key} x={l.x + L.b * 0.2} y={104} c={l.r.c} on={E(f, 8 + i * 6, 12 + i * 6, 0, 1, OUT)} f={f} z={30} s={1.2} />)}
       <LightColumn x={HX} on={col} w={340} c="#FFE7A8" z={22} top={60} />
@@ -535,6 +564,7 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
       <Cam s={sh.s * shotPush} x={sh.x * shotPush} y={sh.y * shotPush} z={12}>
         <Room p={p} f={f} bands={3} kind="rack" overhead="tray" rake={0.08} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="slab" grit={0.55} lamp={{ x: 380, y: 130, r: 220 }} window={null} />
+        <GhFitout p={p} f={f} seed={19} z={19} graphX={62} graphY={242} cols={11} />
         <ShopWall p={p} f={f} seed={8} bay={repo} door={false} pegX={40} pegW={220} lift={0.8} />
         <Manifold x={400 + L.a * 0.2} y={300} f={f} sel={sel} flow={flow} s={1} z={44} outX={out.x} outY={out.y} beadsAt={74} />
         <BigGauge x={HX + 30} y={230} v={gauge} s={1.05} z={50} err={err} />
@@ -572,6 +602,7 @@ export const ROLLOUT: React.FC<SP> = ({ v, dur }) => {
     <Scene p={p} slug="" push={[0, dur, 1.03]} vig={0.4}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.08} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
+      <GhFitout p={p} f={f} seed={20} z={19} graphX={88} graphY={256} cols={12} />
       <ShopWall p={p} f={f} seed={9} bay={null} door pegX={640} pegW={330} />
       {REPOS.map((r, i) => <BayLamp key={"lp" + r.key} x={160 + i * 232 + L.b * 0.2} y={30} c={r.c} on={E(f, 34 + i * 6, 38 + i * 6, 0, 1, OUT)} f={f} z={30} s={1.0} />)}
       {f >= SEND && f < SEND + 24 && (<>
@@ -582,7 +613,16 @@ export const ROLLOUT: React.FC<SP> = ({ v, dur }) => {
       {REPOS.map((r, i) => (
         <React.Fragment key={r.key}>
           <Chain x={160 + i * 232 + L.b * 0.2} top={0} len={110} z={60} swing={Math.sin(f / 11 + i) * 1.5 + ring(f - SEND - i * 3, 9, 3, 22)} />
-          <Tag repo={r} x={160 + i * 232 + L.b * 0.2} y={104} f={f} s={0.78} z={66} swing={Math.sin(f / 11 + i) * 2 + ring(f - SEND - i * 3, 14, 3, 24)} face={1} lit={1} />
+          {/* ⭐ the CTA says ALL 4 LINKS · FREE, so the wall carries the four REPO CARDS themselves,
+              compact — the last frame of the reel is four real GitHub repos, named and starred. */}
+          {/* ⛔ swapping the tag for a card halved the tail wave and ROLLOUT went from fading to
+              STALLS (Q4 5.24, TAIL 0.53). A tail needs ARRIVALS, not travel
+              ([[feedback_hold_needs_arrivals_not_travel]]): the four install bars now COMPLETE
+              across the last half-second, one green tick stamping every three frames, so the last
+              thing the reel does is finish four things. */}
+          <RepoCard repo={r} x={160 + i * 232 + L.b * 0.2} y={112} w={226} z={66} f={f} desc={false}
+            rot={Math.sin(f / 11 + i) * 1.4 + ring(f - SEND - i * 3, 11, 3, 24)}
+            install={E(f, SEND - 16 + i * 3, SEND + i * 3, 0, 1, LIN)} />
         </React.Fragment>
       ))}
       <Lift x={HX} y={GY} rise={rise} f={f} w={340} z={40} steamAt={2} />

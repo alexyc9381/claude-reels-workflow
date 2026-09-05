@@ -4,7 +4,7 @@
 > **Arc:** TRANSFORMATION (stock → maxed). Each bay carries its own before → turn → after.
 > **Villains:** four, one per bay, each made physical and each undefeated until its own bay: THE JAM (Office files break the formatting) · THE CRAM (four agents in one window) · THE DIM CORE (an agent gone dumb) · THE EMPTY TANK (credits out, error lamp).
 > **Hero cast:** YOUR CLAUDE (the hero, house clay, never tinted; gains a part per bay: INTAKE · HUD · CORE · TANK, and a cape at god tier) · THE PIT CREW (Claudes in `constr` hard hats, tinted per bay from the `REPOS` table) · four AGENTS inside the herdr screen (small Claudes, costumes cycled).
-> ⛔ **NUMBER SPINE:** 4 · anydoc ★20,358 MIT · single-digit milliseconds · PowerPoint / Word / Excel → Markdown · herdr ★35,413 Apache-2.0 · WORKING / BLOCKED / IDLE · deepseek-harness ★212,632 MIT · Everything is a Plugin · OmniRoute ★61,383 MIT · 352 providers · 150+ free · ~1.47B free tokens / mo · REPOS.
+> ⛔ **NUMBER SPINE:** 4 · anydoc ★20,397 MIT · single-digit milliseconds · PowerPoint / Word / Excel → Markdown · herdr ★35,522 Apache-2.0 · WORKING / BLOCKED / IDLE · deepseek-harness ★213,060 MIT · Everything is a Plugin · OmniRoute ★61,564 MIT · 352 providers · 150+ free · ~1.47B free tokens / mo · REPOS.
 > ⛔ **HERO ARTIFACT:** the fully upgraded Claude rolling off the lift with all four parts on him (S10 reveal, S13 hold). Everything before it is the road to him.
 
 **VO** `~/Downloads/REPOS Sep 5.m4a` (81.78s raw) → `video/public/repos137_vo.wav` **41.18s / 1236 frames**.
@@ -17,13 +17,13 @@ Six flubs removed (a false start at the head, `and it turns them into clean mark
 
 | figure | value | source |
 |---|---|---|
-| **anydoc** | `firecrawl/anydoc` · **★20,358** · MIT · Rust · created 2026-08-03 | API |
+| **anydoc** | `firecrawl/anydoc` · **★20,397** · MIT · Rust · created 2026-08-03 | API |
 | what it does | Word, PowerPoint, Excel (+ OpenDocument, RTF, EPUB, CSV, PDF) → GitHub-Flavored Markdown, "in single-digit milliseconds" | README |
-| **herdr** | `herdrdev/herdr` · **★35,413** · Apache-2.0 · Rust · herdr.dev | API |
+| **herdr** | `herdrdev/herdr` · **★35,522** · Apache-2.0 · Rust · herdr.dev | API |
 | what it does | "the runtime your coding agents live on" · panes marked WORKING / BLOCKED / IDLE · workspaces, tabs, splits · runs Claude Code, Codex, Cursor, OpenCode | README |
-| **DeepSeek Harness** | `deepseek-ai/deepseek-harness` · **★212,632** · MIT · TypeScript · created 2026-08-13 | API |
+| **DeepSeek Harness** | `deepseek-ai/deepseek-harness` · **★213,060** · MIT · TypeScript · created 2026-08-13 | API |
 | what it does | "Everything is a Plugin" — model adapter, tools, sessions, the loop itself are swappable plugins · `npx @deepseek-ai/dsh web` · developer preview | README |
-| **OmniRoute** | `diegosouzapw/OmniRoute` · **★61,383** · MIT · TypeScript | API |
+| **OmniRoute** | `diegosouzapw/OmniRoute` · **★61,564** · MIT · TypeScript | API |
 | what it does | one endpoint · 352 providers (150+ free) · 1200+ models · quota-aware auto-fallback · ~1.47B free tokens / month · works with Claude Code, Codex, Cursor, OpenCode, Cline, Copilot | README |
 
 **Spoken vs shown:** the VO says "millions of free tokens every single day"; the frame shows the README's own figure, `~1.47B FREE TOKENS / MO`, and never a per-day number (derived figures are not receipts). "herdr" is spoken "herder", "DeepSeek" is spoken "deep sea"; the captions carry the real names. No currency string appears anywhere in the reel; "free" is the VO's word.
@@ -98,7 +98,7 @@ The word the script turns on is **UPGRADE** (spoken twice). The place where an u
 - **VO:** "First, AnyDoc."
 - **SET:** BAY 1, pale paper wall and teal fittings.
 - **CAMERA:** locked, tight on the hoist hook.
-- **BLOCKING:** the INTAKE part drops into frame on its chain, overshoots, rocks; its tag swings round to face camera on the rock: the anydoc mark on a white tile, `anydoc`, `★20,358`, `MIT`. The bay lamp snaps teal.
+- **BLOCKING:** the INTAKE part drops into frame on its chain, overshoots, rocks; its tag swings round to face camera on the rock: the anydoc mark on a white tile, `anydoc`, `★20,397`, `MIT`. The bay lamp snaps teal.
 - **LIGHT:** teal bay lamp, paper wall.
 - **SFX:** chain drop + `lamp_clunk` on the snap.
 - **TAKEAWAY:** the first repo, named, with its receipt.
@@ -134,7 +134,7 @@ The word the script turns on is **UPGRADE** (spoken twice). The place where an u
 
 ### S5 · THE TAG — 468–492 (0.80s) · **CU, insert** · SETUP
 - **VO:** "Next is herdr."
-- **BLOCKING:** the HUD part drops on its chain, rocks, the tag swings to camera: the herdr ram, `herdr`, `★35,413`, `Apache-2.0`. The bay lamp snaps amber.
+- **BLOCKING:** the HUD part drops on its chain, rocks, the tag swings to camera: the herdr ram, `herdr`, `★35,522`, `Apache-2.0`. The bay lamp snaps amber.
 - **SFX:** chain drop + `lamp_clunk`.
 
 ### S6 · THE CRAM — 492–583 (3.03s) · **CU on the screen** · SETUP (the villain)
@@ -160,7 +160,7 @@ The word the script turns on is **UPGRADE** (spoken twice). The place where an u
 - **VO:** "Then check out the DeepSeek Harness, where everything is literally a plugin."
 - **SET:** BAY 3, indigo: a harness RACK stands in the bay — a steel frame with six labelled sockets, a DeepSeek mark cast on the header, cables to the floor.
 - **CAMERA:** locked, push 1.05.
-- **BLOCKING:** f0-22 the DOME part drops on its chain and its tag swings to camera (`deepseek-harness ★212,632 · MIT`) — the title beat folded into the scene. f24-88 cartridges fly in from the sides and CLICK into the sockets one after another (tools · memory · skills · sessions · UI · MODEL last, the biggest, glowing). Each click lights its socket lamp.
+- **BLOCKING:** f0-22 the DOME part drops on its chain and its tag swings to camera (`deepseek-harness ★213,060 · MIT`) — the title beat folded into the scene. f24-88 cartridges fly in from the sides and CLICK into the sockets one after another (tools · memory · skills · sessions · UI · MODEL last, the biggest, glowing). Each click lights its socket lamp.
 - **ACCUMULATOR:** sockets filled 0 → 6.
 - **SFX:** `mech_clank` per click, ascending `ticket_click` on the lamps.
 - **TAKEAWAY:** every part of the agent is a plug.
@@ -184,7 +184,7 @@ The word the script turns on is **UPGRADE** (spoken twice). The place where an u
 
 ### S11 · THE TAG — 958–995 (1.23s) · **CU, insert** · SETUP
 - **VO:** "But finally, OmniRoute."
-- **BLOCKING:** the TANK part drops on its chain, rocks, the tag swings to camera: the OmniRoute icon, `OmniRoute`, `★61,383`, `MIT`. The bay lamp snaps green.
+- **BLOCKING:** the TANK part drops on its chain, rocks, the tag swings to camera: the OmniRoute icon, `OmniRoute`, `★61,564`, `MIT`. The bay lamp snaps green.
 - **SFX:** chain drop + `lamp_clunk`.
 
 ### S12 · THE MANIFOLD — 995–1170 (5.83s) · **M → CU → W (three shots)** · TURN + PAYOFF (bay 4)
@@ -199,7 +199,7 @@ The word the script turns on is **UPGRADE** (spoken twice). The place where an u
 - **VO:** "Comment the word REPOS for all the links."
 - **SET:** the main floor, all four bay lamps lit.
 - **CAMERA:** locked wide.
-- **BLOCKING:** the lift lowers the upgraded Claude to the floor (f0-30); behind him the four tags hang lit in a row (marks + names); the crew band cheers; the COMPOSER slides in below him and types `REPOS` letter by letter, SEND pulses; nothing else enters its band.
+- **BLOCKING:** the lift lowers the upgraded Claude to the floor (f0-30); behind him the four REPO CARDS hang lit in a row (owner/name, stars, licence), their install bars completing one after another across the tail; the crew band cheers; the COMPOSER slides in below him and types `REPOS` letter by letter, SEND pulses; nothing else enters its band.
 - **SFX:** hydraulic lower, `ui_tap` per letter, `stamp_press` on SEND.
 - **TAKEAWAY:** comment REPOS.
 
@@ -209,10 +209,10 @@ The word the script turns on is **UPGRADE** (spoken twice). The place where an u
 | from | big | hot |
 |---|---|---|
 | S0 | UPGRADE YOUR CLAUDE | 4 FREE REPOS |
-| S1 | ANYDOC · ★20,358 | ALSO PDF · EPUB · CSV |
-| S5 | HERDR · ★35,413 | SEE WHO IS BLOCKED |
-| S8 | DEEPSEEK HARNESS | ★212,632 · THE MODEL IS A PLUGIN |
-| S11 | OMNIROUTE · ★61,383 | 352 PROVIDERS · 150+ FREE |
+| S1 | ANYDOC · ★20,397 | ALSO PDF · EPUB · CSV |
+| S5 | HERDR · ★35,522 | SEE WHO IS BLOCKED |
+| S8 | DEEPSEEK HARNESS | ★213,060 · THE MODEL IS A PLUGIN |
+| S11 | OMNIROUTE · ★61,564 | 352 PROVIDERS · 150+ FREE |
 | S13 | COMMENT REPOS | ALL 4 LINKS · FREE |
 
 ## THE CRITIC PASS
@@ -240,3 +240,53 @@ at its own SIZE; the cut FRAMES never move (the SFX bank and the cut detector sh
 Probe stills at the five weak frames after the change: house/amber 13·22·19·18·15, house/steel 17·10·21·17·14,
 amber/steel 22·24·22·15·19 — then steel's PRESS opening went to the CU (the 10). Final numbers from
 `tools/dhash_cuts.py` on the delivered encodes are in the factory log.
+
+## REV 2 — "MORE ON BRAND WITH WHAT'S BEING SPOKEN" (Alex, 2026-09-05, after the first delivery)
+
+> *"the animations especially the hook scene here needs to be more interesting and more on brand with
+> like whats going on with the animation github themed ig moreso and more detailed and more on brand
+> yeah with whats being spoken since its a bit off topic here at times"*
+
+**Diagnosed by writing the VO under every scene onset and reading the two columns against each other.**
+Eleven of fourteen scenes already staged their own sentence (JAM chokes on Office files, READ turns a sheet
+green, CRAM crams, SPLIT splits, SWAP swaps a brain, MANIFOLD runs dry and refills). **The hook was the
+outlier and it was the one Alex named.** Its sentence is:
+
+> *"These four brand new open source **GitHub repos** will completely **upgrade** your **Claude setup**."*
+
+and the frame showed four anonymous machine parts on chains in a garage. **MUTE TEST: a viewer would say
+"car parts", never "repos"** — [[feedback_illustrate_the_sentence_not_the_set]]. The word GitHub is spoken in
+the first four words of the reel and appeared nowhere in the picture. That is also
+[[feedback_real_marks_are_the_props]] exactly: a metaphor for the mechanism is not the subject.
+
+### What changed
+1. **The thing that travels is now the REPO.** A `RepoCard` drawn the way GitHub draws one: the repo
+   octicon, `owner/name` with the owner muted and the name in GitHub's link blue `#0969DA`, the Public
+   pill, the repo's **real** one-line description, and the footer every repo page has — language dot in
+   the real linguist colour, star count, licence. Every string read from the GitHub API on 2026-09-05.
+2. **The verb is INSTALL, drawn.** The card's progress bar fills as it closes on him, a green tick stamps
+   at the landing, the card is consumed and **the hardware it carried seats on his body.** Card in the air,
+   hardware on the body: one substitution that says REPO and UPGRADE in the same beat.
+3. **ONE dominant card.** The first probe hung four legible cards at once and they were an unreadable pile
+   ([[feedback_hook_simplicity]], [[feedback_cluttered_is_a_repeat_count]]). Now: one card arriving, big
+   enough to read on a phone; the repos he has not reached yet hang as the hardware they become; the second
+   card is descending and **still installing at the cut** — the unresolved event.
+4. **`GhSign`** puts the real GitHub mark on the shop at 286px, diegetic, lit — the ≥96px real-mark contract.
+5. **`GhFitout` in every room**: the contribution graph in the room's own value ramp with cells filling as
+   the reel plays, a commit rail with a branch that forks and merges, and octicon stencils. One component,
+   palette from the `Place`, `lift` the only knob — the reel-132 pattern
+   ([[feedback_rooms_need_an_architecture_layer]]), which answers "more detailed" and pays for itself in
+   motion because a built wall parallaxes and a flat gradient does not.
+6. **The three title beats are repo pages now**, not luggage tags with a logo, so the claim "open source
+   GitHub repos" is made in GitHub's own vocabulary each time a repo is named.
+7. **The CTA wall carries the four repo cards themselves** under `ALL 4 LINKS · FREE`.
+8. **Star counts refreshed from the API** (20,397 · 35,522 · 213,060 · 61,564) so the header band and the
+   card on screen at the same moment agree.
+
+### Two defects the probes caught before the render
+- ⛔ **`diegosouzapw/OmniRoute` rendered as `diegosouzapw/On`** and `deepseek-ai/deepseek-harness` lost its
+  tail: `nowrap + overflow hidden` truncated a REAL repo name. The line now scales to its own length, and
+  the Public pill yields when the name needs the room.
+- ⛔ **The contribution graph was invisible**: drawn at z16, under `ShopWall`'s brick courses at z18. Moved
+  to z19 and the value steps widened. Same class as every other "the effect exists in the code but not in
+  the video" bug in this repo.
