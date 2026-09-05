@@ -56,11 +56,11 @@ type SP = { v: any; dur: number };
 export type OpenId = "tower" | "stamp" | "haul" | "charge" | "scan";
 
 export const OPEN_BANDS: Record<OpenId, { big: string; hot: string }> = {
-  tower:  { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  stamp:  { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  haul:   { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  charge: { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  scan:   { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
+  tower:  { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  stamp:  { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  haul:   { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  charge: { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  scan:   { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
 };
 
 /* ---- the shared set. Identical in all five so the PICK is about the

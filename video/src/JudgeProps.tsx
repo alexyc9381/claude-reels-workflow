@@ -839,10 +839,19 @@ export const Gavel: React.FC<{ x: number; y: number; k: number; z?: number; s?: 
         borderRadius: 6 * s, background: `linear-gradient(180deg, #8A5E34 0%, #4E3218 100%)` }} />
       <div style={{ position: "absolute", left: -6 * s, top: 26 * s, width: 132 * s, height: 7 * s,
         background: "#A87A46" }} />
-      <div style={{ position: "absolute", left: 60 * s, top: 34 * s, width: 0, height: 0, zIndex: 2,
-        transform: `rotate(${ang}deg)`, transformOrigin: "0 100%" }}>
+      {/* ⛔⛔ THE SWING PIVOTED AT THE HEAD. In this drawing the head sits at
+          x 6-70 and the handle runs right to x 202 — and the rotation origin was
+          parked at SVG (54, 74), i.e. AT THE HEAD. So rotating it swung the
+          HANDLE around a stationary head, which is not how a hammer works and
+          reads as broken the moment anyone looks at it.
+          ⭐ A gavel pivots at the GRIP — the far end of the handle — and the
+          head describes the arc. Origin moved to SVG (202, 45): the container
+          goes to (208s, 5s) and the drawing is re-offset by the same amount, so
+          the struck pose at k=1 is pixel-identical and only the ARC changes. */}
+      <div style={{ position: "absolute", left: 208 * s, top: 5 * s, width: 0, height: 0, zIndex: 2,
+        transform: `rotate(${ang}deg)`, transformOrigin: "0 0" }}>
         <svg viewBox="0 0 210 90" width={210 * s} height={90 * s}
-          style={{ position: "absolute", left: -54 * s, top: -74 * s, overflow: "visible" }}>
+          style={{ position: "absolute", left: -202 * s, top: -45 * s, overflow: "visible" }}>
           <rect x={54} y={38} width={148} height={15} rx={7} fill="#6E4A24" />
           <rect x={54} y={38} width={148} height={4} rx={2} fill="#9E7440" />
           <rect x={186} y={30} width={22} height={30} rx={7} fill="#8A5E34" />
@@ -992,21 +1001,65 @@ export const Folder: React.FC<{ x: number; y: number; rot?: number; c?: string; 
 );
 
 /** the wig that makes the JUDGE a different SILHOUETTE, not a labelled twin */
+/* ⭐⭐ A BARRISTER'S WIG IS CURLS, NOT A SMOOTH SHAPE. v1 was a dome with two
+   soft lobes and at 500px it read as a white blob with ears. The real object is
+   rows of tight frizz across the crown, two stacked side ROLLS, and a tail —
+   and it is that repeated curl, drawn small and many, that makes it recognisable
+   at a glance ([[feedback_props_need_real_drawing]]). */
 export const Wig: React.FC<{ x: number; y: number; s?: number; z?: number }> =
-  ({ x, y, s = 1, z = 61 }) => (
-  <div style={{ position: "absolute", left: x - 92 * s, top: y - 96 * s, width: 184 * s,
-    height: 140 * s, zIndex: z }}>
-    <svg viewBox="0 0 184 140" width={184 * s} height={140 * s} style={{ overflow: "visible" }}>
-      <path d="M 24 56 Q 24 6 92 6 Q 160 6 160 56 L 160 74 Q 150 66 138 74 L 138 56 Q 138 30 92 30 Q 46 30 46 56 L 46 74 Q 34 66 24 74 Z"
-        fill={WIG} />
-      <path d="M 22 72 q -8 34 8 54 q 16 8 26 -4 q 8 -22 2 -50 z" fill={WIG} />
-      <path d="M 162 72 q 8 34 -8 54 q -16 8 -26 -4 q -8 -22 -2 -50 z" fill={WIG} />
-      {Array.from({ length: 6 }, (_, i) => (
-        <path key={i} d={`M ${30 + i * 26} 20 q 10 12 0 26`} fill="none" stroke="#C8C2B0" strokeWidth={3} />
-      ))}
-    </svg>
-  </div>
-);
+  ({ x, y, s = 1, z = 61 }) => {
+  const SH_W = "#C6BFAC", DK = "#A9A28E";
+  const rows = [
+    { y: 30, x0: 30, n: 9, r: 11 },
+    { y: 48, x0: 24, n: 10, r: 12 },
+    { y: 67, x0: 22, n: 10, r: 12 },
+  ];
+  return (
+    <div style={{ position: "absolute", left: x - 100 * s, top: y - 96 * s, width: 200 * s,
+      height: 156 * s, zIndex: z }}>
+      <svg viewBox="0 0 200 156" width={200 * s} height={156 * s} style={{ overflow: "visible" }}>
+        {/* the crown mass */}
+        <path d="M 26 74 Q 26 12 100 12 Q 174 12 174 74 L 174 92 Q 100 102 26 92 Z" fill={WIG} />
+        {/* the frizz: three rows of curls across it, each with its own shadow */}
+        {rows.map((rw, ri) => (
+          <g key={ri}>
+            {Array.from({ length: rw.n }, (_, i) => {
+              const cx = rw.x0 + i * ((200 - rw.x0 * 2) / (rw.n - 1));
+              return (
+                <g key={i}>
+                  <circle cx={cx} cy={rw.y + 2.5} r={rw.r} fill={DK} opacity={0.45} />
+                  <circle cx={cx} cy={rw.y} r={rw.r} fill={WIG} />
+                  <circle cx={cx - rw.r * 0.28} cy={rw.y - rw.r * 0.3} r={rw.r * 0.34}
+                    fill="#FBF8EE" opacity={0.7} />
+                </g>
+              );
+            })}
+          </g>
+        ))}
+        {/* the two side ROLLS — stacked horizontal curls, the wig's real tell */}
+        {[0, 1].map(sd => {
+          const cx = sd === 0 ? 22 : 178;
+          return (
+            <g key={"rl" + sd}>
+              {[0, 1, 2, 3].map(k => (
+                <g key={k}>
+                  <ellipse cx={cx} cy={94 + k * 19} rx={31} ry={12} fill={DK} opacity={0.5} />
+                  <ellipse cx={cx} cy={92 + k * 19} rx={30} ry={11.5} fill={WIG} />
+                  <ellipse cx={cx - 7} cy={89 + k * 19} rx={13} ry={4.5} fill="#FBF8EE" opacity={0.6} />
+                </g>
+              ))}
+            </g>
+          );
+        })}
+        {/* the tail down the back */}
+        <path d="M 84 96 q -6 34 4 52 q 12 7 24 0 q 10 -18 4 -52 z" fill={WIG} />
+        <path d="M 84 96 q -6 34 4 52 q 6 3 12 3 q -8 -26 -4 -55 z" fill={DK} opacity={0.35} />
+        {/* the parting */}
+        <path d="M 100 14 L 100 88" stroke={DK} strokeWidth={2.4} opacity={0.5} fill="none" />
+      </svg>
+    </div>
+  );
+};
 
 /* =========================================================================
    ⭐⭐⭐ THE LOAD.  Rebuilt after Alex: *"the begining scene needs to be way
@@ -1499,3 +1552,244 @@ export const Facade: React.FC<{
     ))}
   </>);
 };
+
+/* =========================================================================
+   ⭐⭐⭐ THE ANTICIPATION PROPS.  `feedback_predictable_is_not_anticipatory`:
+   *"anticipation = a promised event whose resolution is WITHHELD"* and the test
+   at any frame is *"what does the viewer not yet know, that this shot has
+   already promised them?"* Every one of these carries a COUNTDOWN the viewer can
+   read — bolts left, a closing gap, degrees past balance — and none of them
+   resolves inside the hook.
+   ====================================================================== */
+
+/** ⭐ THE BOLTED PANEL. A gold `DONE` door with something behind it pushing.
+    `bulge` bows its four edges outward on real quadratic control points; `gone`
+    is how many of the six bolts have popped, which is the countdown; `leak` is
+    how much light is getting out through the lifted seams. */
+export const BoltedPanel: React.FC<{
+  x: number; y: number; w?: number; h?: number; z?: number; f: number;
+  bulge?: number; gone?: number; leak?: number; order?: number[];
+}> = ({ x, y, w: ww = 600, h: hh = 560, z = 54, f, bulge = 0, gone = 0, leak = 0,
+        order = [2, 3, 0, 5, 1, 4] }) => {
+  const B = bulge;
+  /* the outline: each edge bows out on its own control point, so the panel is
+     genuinely under pressure rather than scaled up */
+  /* ⛔ THE BOW WAS TOO SMALL TO READ AS PRESSURE. 46px on a 600px panel is 7%;
+     under a thumb that is a rounded corner. 96/84 is a belly. */
+  const bx = 96 * B, by = 84 * B;
+  const path = `M 0 0
+    Q ${ww / 2} ${-by} ${ww} 0
+    Q ${ww + bx} ${hh / 2} ${ww} ${hh}
+    Q ${ww / 2} ${hh + by} 0 ${hh}
+    Q ${-bx} ${hh / 2} 0 0 Z`;
+  const BOLTS: Array<[number, number]> = [
+    [0.10, 0.09], [0.50, 0.055], [0.90, 0.09],
+    [0.10, 0.91], [0.50, 0.945], [0.90, 0.91],
+  ];
+  const popped = (i: number) => order.indexOf(i) < gone;
+  return (
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+      zIndex: z }}>
+      {/* what is behind it, getting out through the lifted seams */}
+      <div style={{ position: "absolute", left: -26, top: -26, width: ww + 52, height: hh + 52,
+        zIndex: z - 2, borderRadius: 12,
+        background: `radial-gradient(ellipse at 50% 50%, ${hexa("#FFF4D2", 0.95 * leak)} 0%, ${hexa("#FFD98E", 0.62 * leak)} 52%, ${hexa("#FFD98E", 0)} 100%)` }} />
+      <svg viewBox={`${-bx - 8} ${-by - 8} ${ww + bx * 2 + 16} ${hh + by * 2 + 16}`}
+        width={ww + bx * 2 + 16} height={hh + by * 2 + 16}
+        style={{ position: "absolute", left: -bx - 8, top: -by - 8, zIndex: z, overflow: "visible" }}>
+        <defs>
+          <linearGradient id={`bp${Math.round(x)}`} x1="0" y1="0" x2="0.4" y2="1">
+            <stop offset="0%" stopColor="#F6E2B0" />
+            <stop offset="38%" stopColor={GOLD} />
+            <stop offset="100%" stopColor="#9E7828" />
+          </linearGradient>
+        </defs>
+        <path d={path} fill={`url(#bp${Math.round(x)})`} stroke="#7A5A18" strokeWidth={9} />
+        {/* the raised border and the plate, so it reads as CAST, not painted */}
+        <path d={path} fill="none" stroke={hexa("#FFF4D2", 0.55)} strokeWidth={4}
+          transform={`translate(0,6) scale(${1 - 0.028}) translate(${ww * 0.014},${hh * 0.014})`} />
+        {/* ⭐⭐⭐ COFFERED PANELS, AND THEY ARE WHAT MAKES THIS MOVE. A flat gold
+            field bowing on its outline repaints only its EDGES — the same
+            "uniform field translating repaints nothing" that cost the chart
+            paper two rounds. Six raised sections with dark reveals between them
+            SPREAD as the door bulges: the reveals widen, the light behind comes
+            through them, and the whole face repaints instead of the rim. It is
+            also simply what a door of this weight looks like. */}
+        {Array.from({ length: 6 }, (_, i) => {
+          const cx = i % 2, cy = Math.floor(i / 2);
+          const gapx = 0.030 + B * 0.030, gapy = 0.024 + B * 0.026;
+          const cwd = (1 - gapx * 3) / 2, cht = (1 - gapy * 4) / 3;
+          const px = gapx + cx * (cwd + gapx), py = gapy + cy * (cht + gapy);
+          const push = B * (cx === 0 ? -1 : 1) * 10;
+          return (
+            <g key={"cof" + i} transform={`translate(${push}, ${B * (cy - 1) * 12})`}>
+              <rect x={px * ww} y={py * hh} width={cwd * ww} height={cht * hh} rx={7}
+                fill={hexa("#3A2A08", 0.34 + B * 0.30)} />
+              <rect x={px * ww + 7} y={py * hh + 7} width={cwd * ww - 14} height={cht * hh - 14}
+                rx={5} fill={i % 2 ? "#E9C264" : "#EFCC74"} />
+              <rect x={px * ww + 7} y={py * hh + 7} width={cwd * ww - 14} height={9} rx={4}
+                fill={hexa("#FFF4D2", 0.62)} />
+              <rect x={px * ww + 7} y={py * hh + cht * hh - 18} width={cwd * ww - 14} height={9}
+                rx={4} fill={hexa("#8E6218", 0.44)} />
+            </g>
+          );
+        })}
+        <rect x={ww * 0.20} y={hh * 0.36} width={ww * 0.60} height={hh * 0.24} rx={10}
+          fill="#8E6218" opacity={0.30} />
+        <text x={ww / 2} y={hh * 0.545} textAnchor="middle" fill="#4A3208"
+          style={{ ...mono(Math.round(ww * 0.155), 800), letterSpacing: ww * 0.03 }}>{R.lie}</text>
+        {/* the stress that says PRESSURE: radial creases from the belly out */}
+        {B > 0.06 && Array.from({ length: 10 }, (_, i) => {
+          const a = (i / 10) * Math.PI * 2;
+          const r0 = ww * 0.16, r1 = ww * (0.20 + B * 0.30);
+          return <line key={"cr" + i}
+            x1={ww / 2 + Math.cos(a) * r0} y1={hh / 2 + Math.sin(a) * r0 * (hh / ww)}
+            x2={ww / 2 + Math.cos(a) * r1} y2={hh / 2 + Math.sin(a) * r1 * (hh / ww)}
+            stroke={hexa("#FFF6DE", 0.16 + B * 0.30)} strokeWidth={5 + B * 7} />;
+        })}
+        <ellipse cx={ww * 0.34} cy={hh * 0.24} rx={ww * 0.16} ry={hh * 0.10}
+          fill={hexa("#FFF8E6", 0.30)} transform={`rotate(-24 ${ww * 0.34} ${hh * 0.24})`} />
+        {/* ⛔ GOLD + RECTANGULAR IS STILL RECTANGULAR. Two hinge straps, a ring
+            handle and a strapped rail are what make it read as a DOOR that is
+            being held shut rather than a slab with a word on it. */}
+        {[hh * 0.18, hh * 0.78].map((sy, i) => (
+          <g key={"hg" + i}>
+            <rect x={-6} y={sy} width={ww * 0.30} height={hh * 0.055} rx={6} fill="#8A6A2E" />
+            <rect x={-6} y={sy} width={ww * 0.30} height={hh * 0.016} rx={4} fill="#D8B36A" />
+            <circle cx={ww * 0.255} cy={sy + hh * 0.028} r={hh * 0.020} fill="#5E4414" />
+          </g>
+        ))}
+        <rect x={ww * 0.06} y={hh * 0.485} width={ww * 0.88} height={hh * 0.030} rx={5}
+          fill="#8A6A2E" opacity={0.72} />
+        <circle cx={ww * 0.845} cy={hh * 0.50} r={hh * 0.062} fill="none"
+          stroke="#8A6A2E" strokeWidth={hh * 0.022} />
+        <circle cx={ww * 0.845} cy={hh * 0.50} r={hh * 0.062} fill="none"
+          stroke="#D8B36A" strokeWidth={hh * 0.008} />
+      </svg>
+      {/* THE COUNTDOWN. Six brass bolts, and each one that goes is a fact the
+          viewer can count without being told. */}
+      {BOLTS.map(([px, py], i) => {
+        const out = popped(i);
+        const at = order.indexOf(i);
+        const k = out ? Math.min(1, (gone - at) * 0.5) : 0;
+        return (
+          <div key={"bolt" + i} style={{ position: "absolute",
+            left: px * ww - 27 + (out ? (px - 0.5) * 300 * k : 0),
+            top: py * hh - 27 + (out ? -160 * k + 420 * k * k : 0),
+            width: 54, height: 54, zIndex: z + 3, opacity: out ? Math.max(0, 1 - k * 1.1) : 1,
+            transform: out ? `rotate(${k * 620}deg)` : undefined }}>
+            <svg viewBox="0 0 54 54" width={54} height={54}>
+              <circle cx={27} cy={27} r={25} fill="#8A6A2E" />
+              <polygon points="27,6 45,17 45,37 27,48 9,37 9,17" fill="#D8B36A" />
+              <polygon points="27,11 40,19 40,35 27,43 14,35 14,19" fill="#B08E42" />
+              <circle cx={22} cy={20} r={5} fill={hexa("#FFF4D2", 0.5)} />
+            </svg>
+          </div>
+        );
+      })}
+      {/* ⭐ THE SEAM LIFTS WHERE A BOLT HAS GONE. A wedge of light at each freed
+          corner is the difference between "a glow behind it" and "it is coming
+          open at that corner, and there are N corners left". */}
+      {BOLTS.map(([px, py], i) => {
+        if (!popped(i)) return null;
+        const top = py < 0.5;
+        return (
+          <div key={"wg" + i} style={{ position: "absolute",
+            left: px * ww - 84, top: top ? -30 : hh - 24, width: 168, height: 54,
+            zIndex: z + 1,
+            background: `radial-gradient(ellipse at 50% ${top ? "100%" : "0%"}, ${hexa("#FFF6DE", 0.92)} 0%, ${hexa("#FFD98E", 0.42)} 46%, ${hexa("#FFD98E", 0)} 100%)` }} />
+        );
+      })}
+      {/* what is squeezing out of the seam, one sheet at a time */}
+      {Array.from({ length: 3 }, (_, i) => {
+        const showAt = [0.42, 0.66, 0.86];
+        if (leak < showAt[i]) return null;
+        const k = Math.min(1, (leak - showAt[i]) * 6);
+        return (
+          <div key={"sq" + i} style={{ position: "absolute",
+            left: ww * (0.24 + i * 0.28) - 46, top: -18 - k * 44, width: 92, height: 116,
+            zIndex: z + 2, transform: `rotate(${-16 + i * 15}deg)`, background: "#EFE7D6",
+            boxShadow: SH }}>
+            {[0, 1, 2].map(j => (
+              <div key={j} style={{ position: "absolute", left: 13, top: 20 + j * 20,
+                width: 64 - j * 15, height: 6, background: hexa("#8C8578", 0.40) }} />
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+/** ⭐ THE DESCENDING HEAD. `gap` is the distance left in px and it is the whole
+    readout — the shot promises contact from frame 0 and never delivers it. */
+export const VerdictHead: React.FC<{
+  x: number; y: number; w?: number; z?: number; gap: number; f: number;
+}> = ({ x, y, w: ww = 700, z = 60, gap, f }) => {
+  const hh = ww * 0.46;
+  const hum = Math.sin(f / 3.4) * Math.max(0, 1.6 - gap / 140);
+  return (<>
+    {/* the two guide columns, so the mass reads as GUIDED and unstoppable */}
+    {[x - ww / 2 - 66, x + ww / 2 + 18].map((cx, i) => (
+      <div key={i} style={{ position: "absolute", left: cx, top: -60, width: 48,
+        height: y - gap + 60, zIndex: z - 4,
+        background: `linear-gradient(90deg, #3A424A 0%, #171D24 100%)` }}>
+        <div style={{ position: "absolute", left: 0, top: 0, width: 13, height: "100%",
+          background: "#5A646E" }} />
+      </div>
+    ))}
+    <div style={{ position: "absolute", left: x - ww / 2, top: y - gap - hh + hum,
+      width: ww, height: hh, zIndex: z }}>
+      <svg viewBox="0 0 700 322" width={ww} height={hh} style={{ overflow: "visible" }}>
+        <rect x={60} y={0} width={580} height={150} rx={14} fill="#4A545E" />
+        <rect x={60} y={0} width={580} height={26} rx={13} fill="#8A96A2" />
+        {/* ⛔ A GREY BOX IS THE BANNED SHAPE. Hazard chevrons and a brass band
+            are what a thing that comes down on your work actually wears. */}
+        <g clipPath="url(#vhc)">
+          {Array.from({ length: 16 }, (_, i) => (
+            <rect key={i} x={62 + i * 38} y={96} width={20} height={52}
+              transform={`skewX(-26)`} fill={i % 2 ? "#E7B24C" : "#232B33"} />
+          ))}
+        </g>
+        <defs><clipPath id="vhc"><rect x={60} y={96} width={580} height={52} /></clipPath></defs>
+        <rect x={60} y={88} width={580} height={10} fill="#8A6A2E" />
+        <rect x={120} y={150} width={460} height={44} fill="#39434D" />
+        <rect x={30} y={194} width={640} height={110} rx={9}
+          fill="url(#vh)" stroke="#7A5A18" strokeWidth={8} />
+        <defs>
+          <linearGradient id="vh" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#F6E2B0" /><stop offset="100%" stopColor="#A5802E" />
+          </linearGradient>
+        </defs>
+        <text x={350} y={272} textAnchor="middle" fill="#4A3208"
+          style={{ ...mono(62, 800), letterSpacing: 12 }}>{R.lie}</text>
+      </svg>
+    </div>
+    {/* the shadow it throws on what is under it — the gap made visible */}
+    <div style={{ position: "absolute", left: x - ww * 0.46, top: y - 22,
+      width: ww * 0.92, height: 46, borderRadius: "50%", zIndex: z - 6, filter: "blur(9px)",
+      background: `radial-gradient(ellipse, rgba(14,10,6,${Math.min(0.68, 0.72 - gap / 900)}) 0%, rgba(14,10,6,0) 74%)` }} />
+  </>);
+};
+
+/** ⭐ THE MONOLITH PAST BALANCE. `tip` in degrees; the shot states which way it
+    is going from frame 0 and never lets it land. */
+export const Monolith: React.FC<{
+  x: number; y: number; w?: number; h?: number; z?: number; tip: number; f: number;
+}> = ({ x, y, w: ww = 380, h: hh = 620, z = 54, tip, f }) => (
+  <div style={{ position: "absolute", left: x - ww / 2, top: y - hh, width: ww, height: hh,
+    zIndex: z, transformOrigin: "100% 100%", transform: `rotate(${tip}deg)` }}>
+    <div style={{ position: "absolute", inset: 0, borderRadius: 6,
+      background: `linear-gradient(104deg, #F6E2B0 0%, ${GOLD} 34%, #9E7828 100%)`,
+      border: "9px solid #7A5A18", boxShadow: SH_D }}>
+      <div style={{ position: "absolute", left: 20, top: 20, right: 20, bottom: 20,
+        border: `5px solid ${hexa("#FFF4D2", 0.42)}` }} />
+      <div style={{ position: "absolute", left: 0, top: hh * 0.40, width: "100%",
+        textAlign: "center", color: "#4A3208", ...mono(Math.round(ww * 0.24), 800),
+        letterSpacing: ww * 0.05 }}>{R.lie}</div>
+      <div style={{ position: "absolute", left: ww * 0.5 - ww * 0.16, top: hh * 0.62,
+        width: ww * 0.32, height: ww * 0.32, borderRadius: "50%", background: "#C89A38",
+        border: `${ww * 0.02}px solid #8E6218` }} />
+    </div>
+  </div>
+);

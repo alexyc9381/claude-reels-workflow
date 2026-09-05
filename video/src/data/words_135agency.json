@@ -1,0 +1,367 @@
+[
+ {
+  "start": 0.0,
+  "end": 0.04,
+  "word": " You"
+ },
+ {
+  "start": 0.075,
+  "end": 0.115,
+  "word": " can"
+ },
+ {
+  "start": 0.15,
+  "end": 0.19,
+  "word": " own"
+ },
+ {
+  "start": 0.225,
+  "end": 0.265,
+  "word": " a"
+ },
+ {
+  "start": 0.3,
+  "end": 0.42,
+  "word": " full"
+ },
+ {
+  "start": 0.42,
+  "end": 0.59,
+  "word": " AI"
+ },
+ {
+  "start": 0.59,
+  "end": 0.89,
+  "word": " agency"
+ },
+ {
+  "start": 0.89,
+  "end": 1.09,
+  "word": " right"
+ },
+ {
+  "start": 1.09,
+  "end": 1.25,
+  "word": " now"
+ },
+ {
+  "start": 1.53,
+  "end": 1.69,
+  "word": " for"
+ },
+ {
+  "start": 1.69,
+  "end": 2.09,
+  "word": " exactly"
+ },
+ {
+  "start": 2.09,
+  "end": 2.34,
+  "word": " zero"
+ },
+ {
+  "start": 2.34,
+  "end": 2.921,
+  "word": " dollars."
+ },
+ {
+  "start": 3.156,
+  "end": 3.216,
+  "word": " You"
+ },
+ {
+  "start": 3.231,
+  "end": 3.336,
+  "word": " get"
+ },
+ {
+  "start": 3.336,
+  "end": 3.516,
+  "word": " a"
+ },
+ {
+  "start": 3.516,
+  "end": 3.736,
+  "word": " massive"
+ },
+ {
+  "start": 3.806,
+  "end": 4.026,
+  "word": " team"
+ },
+ {
+  "start": 4.026,
+  "end": 4.226,
+  "word": " of"
+ },
+ {
+  "start": 4.226,
+  "end": 4.396,
+  "word": " specialist"
+ },
+ {
+  "start": 4.396,
+  "end": 5.0,
+  "word": " agents."
+ },
+ {
+  "start": 5.106,
+  "end": 5.206,
+  "word": " We're"
+ },
+ {
+  "start": 5.206,
+  "end": 5.426,
+  "word": " talking"
+ },
+ {
+  "start": 5.426,
+  "end": 5.656,
+  "word": " front"
+ },
+ {
+  "start": 5.656,
+  "end": 5.816,
+  "word": " end"
+ },
+ {
+  "start": 5.816,
+  "end": 6.156,
+  "word": " designers,"
+ },
+ {
+  "start": 6.376,
+  "end": 6.451,
+  "word": " ad"
+ },
+ {
+  "start": 6.451,
+  "end": 6.526,
+  "word": " writers,"
+ },
+ {
+  "start": 6.686,
+  "end": 6.726,
+  "word": " and"
+ },
+ {
+  "start": 6.761,
+  "end": 6.886,
+  "word": " Reddit"
+ },
+ {
+  "start": 7.046,
+  "end": 7.486,
+  "word": " wizards."
+ },
+ {
+  "start": 7.496,
+  "end": 7.556,
+  "word": " They"
+ },
+ {
+  "start": 7.571,
+  "end": 7.716,
+  "word": " all"
+ },
+ {
+  "start": 7.716,
+  "end": 7.876,
+  "word": " have"
+ },
+ {
+  "start": 7.936,
+  "end": 8.056,
+  "word": " their"
+ },
+ {
+  "start": 8.056,
+  "end": 8.276,
+  "word": " own"
+ },
+ {
+  "start": 8.276,
+  "end": 8.756,
+  "word": " personality"
+ },
+ {
+  "start": 8.816,
+  "end": 9.036,
+  "word": " and"
+ },
+ {
+  "start": 9.036,
+  "end": 9.656,
+  "word": " process."
+ },
+ {
+  "start": 9.656,
+  "end": 9.716,
+  "word": " It"
+ },
+ {
+  "start": 9.731,
+  "end": 9.916,
+  "word": " plugs"
+ },
+ {
+  "start": 9.916,
+  "end": 10.096,
+  "word": " straight"
+ },
+ {
+  "start": 10.096,
+  "end": 10.276,
+  "word": " into"
+ },
+ {
+  "start": 10.276,
+  "end": 10.476,
+  "word": " Claude"
+ },
+ {
+  "start": 10.476,
+  "end": 10.676,
+  "word": " Code,"
+ },
+ {
+  "start": 10.676,
+  "end": 10.796,
+  "word": " and"
+ },
+ {
+  "start": 10.796,
+  "end": 10.916,
+  "word": " the"
+ },
+ {
+  "start": 10.916,
+  "end": 11.086,
+  "word": " desktop"
+ },
+ {
+  "start": 11.086,
+  "end": 11.266,
+  "word": " app"
+ },
+ {
+  "start": 11.266,
+  "end": 11.586,
+  "word": " installs"
+ },
+ {
+  "start": 11.586,
+  "end": 11.806,
+  "word": " your"
+ },
+ {
+  "start": 11.806,
+  "end": 11.966,
+  "word": " dream"
+ },
+ {
+  "start": 12.006,
+  "end": 12.246,
+  "word": " team"
+ },
+ {
+  "start": 12.246,
+  "end": 12.366,
+  "word": " in"
+ },
+ {
+  "start": 12.366,
+  "end": 12.546,
+  "word": " one"
+ },
+ {
+  "start": 12.786,
+  "end": 13.046,
+  "word": " click."
+ },
+ {
+  "start": 13.046,
+  "end": 13.106,
+  "word": " You"
+ },
+ {
+  "start": 13.121,
+  "end": 13.226,
+  "word": " just"
+ },
+ {
+  "start": 13.226,
+  "end": 13.426,
+  "word": " became"
+ },
+ {
+  "start": 13.476,
+  "end": 13.636,
+  "word": " an"
+ },
+ {
+  "start": 13.636,
+  "end": 13.856,
+  "word": " AI"
+ },
+ {
+  "start": 13.856,
+  "end": 14.156,
+  "word": " agency"
+ },
+ {
+  "start": 14.176,
+  "end": 14.396,
+  "word": " owner"
+ },
+ {
+  "start": 14.396,
+  "end": 14.556,
+  "word": " for"
+ },
+ {
+  "start": 14.556,
+  "end": 14.836,
+  "word": " free,"
+ },
+ {
+  "start": 15.036,
+  "end": 15.316,
+  "word": " comment"
+ },
+ {
+  "start": 15.316,
+  "end": 15.756,
+  "word": " AGENCY"
+ },
+ {
+  "start": 15.756,
+  "end": 15.936,
+  "word": " and"
+ },
+ {
+  "start": 15.936,
+  "end": 16.046,
+  "word": " I'll"
+ },
+ {
+  "start": 16.046,
+  "end": 16.126,
+  "word": " send"
+ },
+ {
+  "start": 16.126,
+  "end": 16.246,
+  "word": " you"
+ },
+ {
+  "start": 16.246,
+  "end": 16.326,
+  "word": " the"
+ },
+ {
+  "start": 16.326,
+  "end": 16.546,
+  "word": " repo."
+ }
+]

@@ -155,7 +155,10 @@ export const PERDAY_BANNED = ["/ DAY", "PER DAY", "A DAY", "TOKENS / D"] as cons
    the iron stay dark — brightness is the mean, hierarchy is the spread.
    ========================================================================= */
 export const PLACES: Record<string, Place> = {
-  floor:   { back: "#C6BBA8", back2: "#EDE6D7", floor: "#C7BCA4", floor2: "#786C5C",
+  /* ⛔ frame-0 luma is a FLOOR-place property: the white repo cards used to carry ~10 luma of the
+     hook's opening frame and the gems replaced them with saturated colour, which reads brighter and
+     measures darker (139.5 against the 140 law). The room itself makes up the difference. */
+  floor:   { back: "#D2C7B2", back2: "#F2ECDE", floor: "#D2C7AE", floor2: "#7F7362",
              lip: "#2A241C", key: "#FFD98A", horizon: 470, grit: "#1A160F" },
   paper:   { back: "#3F6C74", back2: "#CDDBD9", floor: "#A3B3B1", floor2: "#4F6567",
              lip: "#152224", key: "#C4F0F4", horizon: 484, grit: "#0E1A1C" },
@@ -209,6 +212,62 @@ export const SAFE3 = { x0: 128, x1: 862, cx: 495 } as const;
    ====================================================================== */
 export type Kit = { intake?: number; hud?: number; core?: number; tank?: number;
   coreLit?: number; gauge?: number; hudLamps?: number[]; hudOn?: number; cape?: number };
+
+/* =========================================================================
+   ⭐⭐ THE BRAIN — Alex, rev 3: *"I want to see a big brain, like a pink brain,
+   that gets transplanted on the guy's head, instead of that little dot in line."*
+   The DeepSeek Harness beat is the reel's emotional turn ("replace its brain with
+   a smarter one") and it was carried by a 24px sphere behind glass.
+
+   Drawn, not approximated ([[feedback_props_need_real_drawing]]): a lumpy two-lobe
+   silhouette, a central fissure, five gyri per hemisphere, a cerebellum lump and a
+   stem. `lit` runs it from a dead grey-mauve to live pink, and only the live one
+   breathes — a dim brain that pulses is not a dim brain.
+   ====================================================================== */
+export const Brain: React.FC<{ x: number; y: number; s?: number; z?: number; f: number;
+  lit?: number; rot?: number; squash?: number }> =
+  ({ x, y, s = 160, z = 70, f, lit = 1, rot = 0, squash = 0 }) => {
+  const k = Math.max(0, Math.min(1, lit));
+  const puls = 1 + 0.035 * Math.sin(f / 6) * k;
+  const W2 = s, H2 = s * 0.94;
+  /* ⛔ lerpHex is hex-in/RGB-out and must never nest (the house note at the top of this file) —
+     every value below is a leaf, used directly as a colour. */
+  const lerp = (a: string, b: string) => lerpHex(a, b, k);
+  const hi = lerp("#A79BA4", "#F6BACA"), base = lerp("#8A7E88", "#E48EA8"), lo = lerp("#5E5460", "#C0567C");
+  const ink = lerp("#4C4350", "#A93C61");
+  return (
+    <div style={{ position: "absolute", left: x - W2 / 2, top: y - H2 / 2, width: W2, height: H2, zIndex: z,
+      transform: `rotate(${rot}deg) scale(${puls}, ${puls * (1 - squash * 0.18)})`, transformOrigin: "50% 80%" }}>
+      <svg viewBox="0 0 200 178" width={W2} height={H2} style={{ display: "block", overflow: "visible" }}>
+        <defs>
+          <linearGradient id={`bg${Math.round(x)}${Math.round(y)}`} x1="0" y1="0" x2="0.3" y2="1">
+            <stop offset="0%" stopColor={hi} /><stop offset="52%" stopColor={base} /><stop offset="100%" stopColor={lo} />
+          </linearGradient>
+        </defs>
+        {/* the stem, behind */}
+        <rect x="88" y="140" width="24" height="30" rx="10" fill={ink} />
+        {/* the silhouette */}
+        <path d="M100,6 C130,2 154,14 163,34 C184,41 194,60 187,80 C197,97 190,118 171,126 C167,146 146,158 124,153 C113,163 87,163 76,153 C54,158 33,146 29,126 C10,118 3,97 13,80 C6,60 16,41 37,34 C46,14 70,2 100,6 Z"
+          fill={`url(#bg${Math.round(x)}${Math.round(y)})`} stroke={ink} strokeWidth="3.5" strokeLinejoin="round" />
+        {/* the central fissure */}
+        <path d="M100,10 C95,38 105,64 98,92 C93,118 101,136 100,150" fill="none" stroke={ink}
+          strokeWidth="4.5" strokeLinecap="round" opacity="0.9" />
+        {/* five gyri a side, mirrored */}
+        {[["M38,46 C58,54 56,74 36,78"], ["M26,90 C48,96 50,116 30,122"], ["M62,26 C76,42 70,60 52,58"],
+          ["M54,104 C74,108 76,130 58,136"], ["M78,144 C86,128 80,114 64,112"]].map(([d], i) => (
+          <g key={i}>
+            <path d={d} fill="none" stroke={ink} strokeWidth="4" strokeLinecap="round" opacity="0.62" />
+            <path d={d} fill="none" stroke={ink} strokeWidth="4" strokeLinecap="round" opacity="0.62"
+              transform="translate(200,0) scale(-1,1)" />
+          </g>
+        ))}
+        {/* the wet highlight that makes it read as tissue and not a rock */}
+        <path d="M52,28 C70,20 88,20 100,26" fill="none" stroke={hexa("#FFFFFF", 0.5 * (0.4 + 0.6 * k))}
+          strokeWidth="7" strokeLinecap="round" />
+      </svg>
+    </div>
+  );
+};
 
 const PartBadge: React.FC<{ src: string; s: number; bg?: string }> = ({ src, s, bg = "#FFFFFF" }) => (
   <div style={{ position: "absolute", width: s, height: s, borderRadius: s * 0.24, background: bg,
@@ -322,10 +381,8 @@ export const Parts: React.FC<{ u: number; kit: Kit; f: number }> = ({ u, kit, f 
           borderRadius: `${42 * u}px ${42 * u}px 4px 4px`, overflow: "hidden",
           background: `linear-gradient(180deg, ${hexa("#DDF1FF", 0.34)} 0%, ${hexa("#8FB4CC", 0.22)} 100%)`,
           border: `${2 * u}px solid ${hexa("#CFE6F2", 0.7)}` }}>
-          <div style={{ position: "absolute", left: 30 * u, top: 16 * u, width: 24 * u, height: 24 * u,
-            borderRadius: "50%", opacity: 0.35 + 0.65 * coreLit,
-            background: `radial-gradient(circle at 40% 36%, ${mxh(dsh.c, 0.5)} 0%, ${dsh.c} 42%, ${dkh(dsh.c2, 0.2)} 100%)`,
-            transform: `scale(${0.7 + 0.3 * coreLit + Math.sin(f / 5) * 0.05 * coreLit})` }} />
+          {/* ⭐ the core IS the brain, so the thing swapped in S9 is the thing worn everywhere else */}
+          <Brain x={48 * u} y={30 * u} s={58 * u} z={1} f={f} lit={coreLit} />
           <div style={{ position: "absolute", left: 40 * u, top: 40 * u, width: 4 * u, height: 16 * u,
             background: dkh(BRASS, 0.3) }} />
           <div style={{ position: "absolute", left: 14 * u, top: 6 * u, width: 22 * u, height: 8 * u,

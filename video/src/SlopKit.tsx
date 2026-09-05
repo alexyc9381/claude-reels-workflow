@@ -378,6 +378,26 @@ const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: numb
       }
       if (!changed) break;
     }
+    // ⛔⛔⛔ NO ORPHANED SENTENCE-FINAL WORD. `endsSent` forces a break, so any
+    // sentence whose last word falls just after a 3-word break lands ALONE on
+    // its own line — it flashes up as one word and is replaced. Alex reported
+    // this twice on reel 135 as *"the word 'dollars' / 'agents' is getting cut
+    // off"*, and it is: the WORD is on screen for a few frames on its own while
+    // the voice is still finishing it. Nothing to do with the audio, which
+    // measured clean both times.
+    // ⭐ A one-word line that ends a sentence goes back onto the line before it.
+    // Four words is already tolerated everywhere else in this function.
+    for (let i = out.length - 1; i > 0; i--) {
+      const ln = out[i];
+      if (ln.words.length !== 1) continue;
+      if (!/[.!?]$/.test(ln.words[0].w.trim())) continue;
+      const prev = out[i - 1];
+      if (prev.words.length >= 4) continue;              // 5 would need a shrink
+      if (ln.words[0].s - prev.words[prev.words.length - 1].e > 0.34) continue;  // a real pause
+      prev.words.push(ln.words[0]);
+      prev.end = ln.words[0].e;
+      out.splice(i, 1);
+    }
     // A hand-off can push a line to 5 words ("on the internet is telling" = 1054px,
     // needing a 0.81x shrink). Split anything over 4, then settle the danglers again.
     for (let pass = 0; pass < 3; pass++) {
@@ -409,7 +429,21 @@ const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: numb
   for (let i = 0; i < clines.length; i++) {
     const ln = clines[i];
     const gate = i > 0 ? Math.max(ln.start, Math.min(clines[i - 1].end + 0.05, ln.start + 0.5)) : 0;
-    if (t + lead >= gate) cur = ln;
+    /* ⛔⛔⛔ A LINE MAY NOT BE REPLACED WHILE ITS OWN LAST WORD IS STILL BEING
+       SPOKEN. `lead` pulls the next line forward 120ms so the reader sees it
+       just before it is said — which is right, EXCEPT when the previous line's
+       last word runs into that window. Alex on reel 135, twice: *"the word
+       'agents' is cut off"*. The audio was complete: the line "team of
+       specialist agents." retired at 4.786 and the word ran to 4.921, so its
+       last 135ms played under the NEXT sentence's text. Three other
+       sentence-final words on that reel did the same (wizards, process, click).
+       Clamping the switch to the previous line's end costs at most `lead` and
+       can never retire a line early. Measured by tools/word_caption_audit.py,
+       which also proves the stored `end` really is the end of the word — a
+       released stop or a sibilant routinely runs 100-200ms past whisper's
+       estimate, and that drift is the other half of this bug. */
+    const swap = i > 0 ? Math.max(gate - lead, clines[i - 1].end) : 0;
+    if (t >= swap) cur = ln;
   }
   const done = t + lead >= cur.end;
   // FORCE ONE LINE: rough-measure the phrase and scale the whole row down if it would overflow.

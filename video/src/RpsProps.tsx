@@ -4,7 +4,7 @@ import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
   Crew, Puff, Ring, Contact,
   CLAY, CLAYD, GOLD, GREEN, RED, SKY, INK, MUTE, BRASS, SLATE, IRON, CHROME, BONE, TEAL,
-  REPOS, MODELS, R, GY, repoBy, mono, ui,
+  REPOS, MODELS, R, GY, repoBy, mono, ui, lerpHex,
 } from "./RpsWorld";
 import type { Repo } from "./RpsWorld";
 
@@ -352,18 +352,77 @@ export const Monitor: React.FC<{ x: number; y: number; f: number; w?: number; h?
             return <path key={i} d={d} fill="none" stroke={c} strokeWidth={grow > 0.5 ? 6 : 11} strokeLinecap="round" opacity={0.92} />;
           })}
         </svg>
-        {/* ⭐ REAL CONTENT ARRIVING: once split, every working panel PRINTS output, a
-            line every six frames — the third row of the motion table, and the
-            thing a panel per agent actually buys you */}
+        {/* ⭐⭐ EACH PANE IS A REAL WORKSPACE (Alex, rev 3: "each of the screens needs to be way
+            more interesting, way better detailed, not just lines"). Per pane: a header with the
+            agent's name and its live status chip, a file tree, SYNTAX-COLOURED code printing a
+            line every six frames, and a progress bar that fills. Grey bars became code. */}
         {grow > 0.5 && arrivals.map((at, i) => {
           if (i >= cols * rows) return null;
           const st = states[i] ?? 1;
-          const px0 = (i % cols) * cellW + 26, py0 = Math.floor(i / cols) * cellH + cellH * 0.40;
-          const nLines = st > 0.5 ? Math.max(0, Math.min(7, Math.floor((f - printAt - i * 4) / 6))) : st < 0 ? 1 : 0;
-          return Array.from({ length: nLines }, (_, k) => (
-            <div key={"pl" + i + "-" + k} style={{ position: "absolute", left: px0, top: py0 + k * 12, width: (cellW - 70) * (0.45 + ((k * 7 + i * 3) % 5) * 0.11),
-              height: 7, borderRadius: 2, background: k === nLines - 1 ? AGENT_C[i % AGENT_C.length] : hexa(INK, 0.55) }} />
-          ));
+          const cx0 = (i % cols) * cellW, cy0 = Math.floor(i / cols) * cellH;
+          const ac = AGENT_C[i % AGENT_C.length];
+          const stC = st > 0.5 ? "#1A7F37" : st < 0 ? RED : "#8A8F98";
+          const stT = st > 0.5 ? "WORKING" : st < 0 ? "BLOCKED" : "IDLE";
+          const nLines = st > 0.5 ? Math.max(0, Math.min(6, Math.floor((f - printAt - i * 4) / 6))) : st < 0 ? 1 : 0;
+          const prog = st > 0.5 ? Math.max(0, Math.min(1, (f - printAt - i * 4) / 46)) : st < 0 ? 0.34 : 0;
+          const TOK = ["#C7502B", "#2B5EA8", "#1A7F37", hexa(INK, 0.5)];
+          return (
+            <div key={"pane" + i} style={{ position: "absolute", left: cx0 + 10, top: cy0 + 7,
+              width: cellW - 20, height: cellH - 14, zIndex: 6 }}>
+              {/* the pane header: whose pane it is, and what it is doing right now */}
+              <div style={{ display: "flex", alignItems: "center", gap: 6, height: 16 }}>
+                <div style={{ width: 9, height: 9, borderRadius: "50%", background: ac, flexShrink: 0 }} />
+                <div style={{ ...mono(11, 800), color: hexa(INK, 0.74), letterSpacing: "0.04em" }}>agent-{i + 1}</div>
+                <div style={{ flex: 1 }} />
+                <div style={{ ...mono(9, 800), color: "#FFFFFF", background: stC, borderRadius: 3,
+                  padding: "1.5px 5px", letterSpacing: "0.08em",
+                  opacity: st > 0.5 ? 0.72 + 0.28 * Math.abs(Math.sin(f / 9 + i)) : 1 }}>{stT}</div>
+              </div>
+              <div style={{ position: "absolute", left: 0, top: 20, width: cellW - 20, height: 1.5,
+                background: hexa(INK, 0.13) }} />
+              {/* the file tree down the left of the pane */}
+              <div style={{ position: "absolute", left: 0, top: 28 }}>
+                {[0, 1, 2, 3, 4].map((r) => (
+                  <div key={r} style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 6 }}>
+                    <div style={{ width: 7, height: 8, borderRadius: 1.5,
+                      background: r === (i % 3) ? ac : hexa(INK, 0.28) }} />
+                    <div style={{ width: 17 + ((r * 7 + i * 5) % 4) * 6, height: 5, borderRadius: 2,
+                      background: hexa(INK, r === (i % 3) ? 0.42 : 0.20) }} />
+                  </div>
+                ))}
+              </div>
+              <div style={{ position: "absolute", left: 52, top: 26, bottom: 12, width: 1.5,
+                background: hexa(INK, 0.11) }} />
+              {/* the code it is printing — tokens, not bars */}
+              {Array.from({ length: nLines }, (_, k2) => {
+                const seed = k2 * 7 + i * 3;
+                const toks = 2 + (seed % 3);
+                return (
+                  <div key={"cl" + k2} style={{ position: "absolute", left: 62, top: 30 + k2 * 13,
+                    display: "flex", alignItems: "center", gap: 5,
+                    opacity: k2 === nLines - 1 ? 0.55 + 0.45 * Math.abs(Math.sin(f / 3)) : 1 }}>
+                    <div style={{ ...mono(8, 700), color: hexa(INK, 0.26), width: 12 }}>{k2 + 1}</div>
+                    {Array.from({ length: toks }, (_, t2) => (
+                      <div key={t2} style={{ width: 16 + ((seed + t2 * 5) % 6) * 11, height: 6, borderRadius: 2,
+                        background: TOK[(seed + t2) % TOK.length] }} />
+                    ))}
+                  </div>
+                );
+              })}
+              {/* blocked panes show the reason, not just a red lamp */}
+              {st < 0 && (
+                <div style={{ position: "absolute", left: 62, top: 46, display: "flex", alignItems: "center", gap: 5 }}>
+                  <div style={{ ...mono(10, 800), color: RED, letterSpacing: "0.04em" }}>waiting on input</div>
+                </div>
+              )}
+              {/* the pane's own progress */}
+              <div style={{ position: "absolute", left: 62, right: 6, bottom: 8, height: 5, borderRadius: 3,
+                background: hexa(INK, 0.12), overflow: "hidden" }}>
+                <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${prog * 100}%`,
+                  background: st < 0 ? RED : ac }} />
+              </div>
+            </div>
+          );
         })}
         {/* dividers */}
         {divV > 0 && <div style={{ position: "absolute", left: cellW - 4, top: 0, width: 8, height: screen.h * divV, background: dkh(herdr.c2, 0.1), borderRadius: 4 }} />}
@@ -813,61 +872,48 @@ export const RepoCard: React.FC<{ repo: Repo; x: number; y: number; w?: number; 
   const u = w / 300;                                   /* one card unit */
   const k = Math.max(0, Math.min(1, open));
   const shown = Math.round(repo.stars * Math.max(0, Math.min(1, count))).toLocaleString("en-US");
-  const [owner, nm] = repo.repo.split("/");
-  /* ⛔ `diegosouzapw/OmniRoute` truncated to `diegosouzapw/On` and `deepseek-ai/deepseek-harness`
-     lost its tail on the first probe: a REAL repo name rendered wrong is worse than a small one.
-     The line scales to its own length so every character survives at every card size. */
-  const fit = Math.min(1, 18 / repo.repo.length);
+  const [owner] = repo.repo.split("/");
   const ins = Math.max(0, Math.min(1, install));
-  const pad = 14 * u;
+  const pad = 13 * u;
+  const MK = (desc ? 92 : 60) * u;                     /* the mark is the biggest thing on the card */
   return (
     <div style={{ position: "absolute", left: x - w / 2, top: y, width: w, zIndex: z,
       transformOrigin: "50% 0%", transform: `rotate(${rot}deg) scaleY(${0.72 + 0.28 * k})`, opacity: k }}>
       <div style={{ position: "relative", background: GH.bg, border: `${2.4 * u}px solid ${GH.line}`,
-        borderRadius: 9 * u, boxShadow: SH_D, padding: `${pad}px ${pad}px ${11 * u}px`,
+        borderRadius: 10 * u, boxShadow: SH_D, padding: `${pad}px ${pad}px ${pad}px`,
+        display: "flex", alignItems: "center", gap: 13 * u,
         filter: dim > 0 ? `brightness(${1 - dim * 0.34})` : undefined }}>
-        {/* row 1 — the repo glyph, owner/name, and the Public pill GitHub puts on every public repo */}
-        <div style={{ display: "flex", alignItems: "center", gap: 7 * u }}>
-          <Octicon kind="repo" s={20 * u} c={GH.mute} />
-          <div style={{ ...ui(21 * u * fit, 800), color: GH.link, whiteSpace: "nowrap",
-            letterSpacing: "-0.01em", flexShrink: 0 }}>
-            <span style={{ color: GH.mute, fontWeight: 600 }}>{owner}/</span>{nm}
-          </div>
-          {/* the Public pill is decoration; a long repo name is content, so the pill yields to it */}
-          {fit > 0.92 && (
-            <div style={{ marginLeft: "auto", border: `${1.6 * u}px solid ${GH.line}`, borderRadius: 20 * u,
-              padding: `${1.5 * u}px ${8 * u}px`, ...ui(11 * u, 700), color: GH.mute, whiteSpace: "nowrap",
-              flexShrink: 0 }}>Public</div>
-          )}
+        {/* ⭐ THE MARK IS THE CARD. Alex, rev 3: "too much text on those cards, I wanna see more
+            graphics heavy" — the description paragraph is gone, the owner/name line is a caption,
+            and the two things a viewer actually reads are the repo's LOGO and its STAR COUNT. */}
+        <div style={{ width: MK, height: MK, borderRadius: 13 * u, background: repo.markBg, flexShrink: 0,
+          border: `${2 * u}px solid ${GH.line}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Img src={staticFile("logos/" + repo.mark)} style={{ width: MK * 0.72, height: MK * 0.72, objectFit: "contain" }} />
         </div>
-        {/* row 2 — the repo's real one-line description */}
-        {desc && (
-          <div style={{ ...ui(14.5 * u, 500), color: GH.mute, marginTop: 8 * u, lineHeight: 1.34,
-            display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
-            {repo.desc}
-          </div>
-        )}
-        {/* row 3 — the footer every repo page has: language dot, stars, licence */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14 * u, marginTop: 11 * u }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 * u, minWidth: 0, flex: 1 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 5 * u }}>
-            <div style={{ width: 11 * u, height: 11 * u, borderRadius: "50%", background: repo.langC,
-              border: `${1 * u}px solid ${hexa("#000000", 0.14)}` }} />
-            <div style={{ ...ui(13 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{repo.lang}</div>
+            <Octicon kind="repo" s={13 * u} c={GH.mute} />
+            <div style={{ ...ui(12.5 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{owner}/</div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 5 * u }}>
-            <Octicon kind="star" s={13 * u} c={GH.star} />
-            <div style={{ ...ui(13 * u, 800), color: GH.text, whiteSpace: "nowrap" }}>{shown}</div>
-          </div>
-          <div style={{ ...ui(13 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{repo.lic}</div>
-          {/* the repo's own mark, bottom-right, where a repo page puts the org avatar */}
-          <div style={{ marginLeft: "auto", width: 26 * u, height: 26 * u, borderRadius: 6 * u,
-            background: repo.markBg, border: `${1.4 * u}px solid ${GH.line}`, display: "flex",
-            alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <Img src={staticFile("logos/" + repo.mark)} style={{ width: 19 * u, height: 19 * u, objectFit: "contain" }} />
+          <div style={{ ...ui((desc ? 31 : 24) * u, 800), color: GH.link, whiteSpace: "nowrap",
+            letterSpacing: "-0.02em", lineHeight: 1.06 }}>{repo.tagName}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 * u, marginTop: 3 * u }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 4 * u }}>
+              <Octicon kind="star" s={(desc ? 19 : 14) * u} c={GH.star} />
+              <div style={{ ...ui((desc ? 23 : 17) * u, 800), color: GH.text, whiteSpace: "nowrap",
+                letterSpacing: "-0.02em" }}>{shown}</div>
+            </div>
+            <div style={{ width: 10 * u, height: 10 * u, borderRadius: "50%", background: repo.langC,
+              border: `${1 * u}px solid ${hexa("#000000", 0.14)}`, flexShrink: 0 }} />
+            <div style={{ ...ui(12.5 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{repo.lang}</div>
+            <div style={{ ...ui(12.5 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{repo.lic}</div>
           </div>
         </div>
-        {/* ⭐ INSTALLING — the card is being APPLIED. A real bar that fills, then a tick.
-            This is the beat's verb, drawn, and it is the one hot colour on the card. */}
+        {/* the GitHub mark, small, where a repo page puts it */}
+        <div style={{ position: "absolute", right: 9 * u, top: 9 * u, opacity: 0.5 }}>
+          <Img src={staticFile("logos/github.svg")} style={{ width: 15 * u, height: 15 * u }} />
+        </div>
+        {/* ⭐ INSTALLING — the card is being APPLIED: a real bar that fills, then a tick. */}
         {ins > 0.001 && (
           <div style={{ position: "absolute", left: pad, right: pad, bottom: -7 * u, height: 6 * u,
             borderRadius: 4 * u, background: hexa(GH.line, 0.9), overflow: "hidden" }}>
@@ -876,10 +922,10 @@ export const RepoCard: React.FC<{ repo: Repo; x: number; y: number; w?: number; 
           </div>
         )}
         {ins > 0.98 && (
-          <div style={{ position: "absolute", right: -10 * u, top: -10 * u, width: 30 * u, height: 30 * u,
+          <div style={{ position: "absolute", right: -11 * u, top: -11 * u, width: 32 * u, height: 32 * u,
             borderRadius: "50%", background: GH.green, display: "flex", alignItems: "center",
             justifyContent: "center", boxShadow: SH }}>
-            <Octicon kind="check" s={19 * u} c="#FFFFFF" />
+            <Octicon kind="check" s={20 * u} c="#FFFFFF" />
           </div>
         )}
       </div>
@@ -911,6 +957,196 @@ export const GhSign: React.FC<{ x: number; y: number; w?: number; z?: number; on
       {k > 0.05 && (
         <div style={{ position: "absolute", left: -w * 0.16, top: 78 * u, width: w * 1.32, height: 120 * u,
           zIndex: -1, opacity: 0.16 * k, background: `radial-gradient(ellipse at 50% 0%, #FFFFFF 0%, transparent 70%)` }} />
+      )}
+    </div>
+  );
+};
+
+/* =========================================================================
+   ⭐⭐ THE REPO GEM — Alex, rev 3: *"I want to see four glowing gems that come
+   into the middle of the screen ... to the front of the screen ... so it's more
+   interesting."*  The descending cards read as information; a gem flying at the
+   camera reads as a PRIZE, and four of them converging on one hero is the top
+   row of the motion table besides.
+
+   ⛔ It still has to say REPO, so each gem carries that repo's REAL mark on its
+   table and its star count under it — the card's two graphic facts, on a gem.
+   ⛔ And it is CUT AND SHADED, not a blurred blob: a table, four crown facets, a
+   pavilion, a specular. The halo is a soft pool at 0.34, not a neon bloom — the
+   room around it stays lit, so this is a bright object in a lit shop and never
+   neon-on-black ([[feedback_arcade_world_means_neon_on_black]]).
+   ====================================================================== */
+export const Gem: React.FC<{ repo: Repo; x: number; y: number; s?: number; z?: number; f: number;
+  lit?: number; spin?: number; mark?: boolean; stars?: number; label?: boolean }> =
+  ({ repo, x, y, s = 190, z = 70, f, lit = 1, spin = 0, mark = true, stars = 1, label = true }) => {
+  const k = Math.max(0, Math.min(1, lit));
+  const pulse = 0.9 + 0.1 * Math.sin(f / 6 + x / 90);
+  const CUT = "polygon(28% 0%, 72% 0%, 100% 34%, 50% 100%, 0% 34%)";
+  const shown = Math.round(repo.stars * Math.max(0, Math.min(1, stars))).toLocaleString("en-US");
+  return (
+    <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, height: s, zIndex: z }}>
+      {/* the pool of light it throws — soft and wide, never a bloom ring */}
+      <div style={{ position: "absolute", left: -s * 0.46, top: -s * 0.42, width: s * 1.92, height: s * 1.92,
+        borderRadius: "50%", opacity: 0.34 * k * pulse, zIndex: -1,
+        background: `radial-gradient(circle, ${hexa(mxh(repo.c, 0.5), 0.9)} 0%, ${hexa(repo.c, 0.35)} 34%, ${hexa(repo.c, 0)} 70%)` }} />
+      <div style={{ position: "absolute", inset: 0, transform: `rotate(${spin}deg)` }}>
+        {/* the body */}
+        <div style={{ position: "absolute", inset: 0, clipPath: CUT, boxShadow: SH_D,
+          background: `linear-gradient(160deg, ${mxh(repo.c, 0.62)} 0%, ${repo.c} 38%, ${dkh(repo.c2, 0.18)} 100%)` }} />
+        {/* the table, flat and brightest */}
+        <div style={{ position: "absolute", left: "28%", top: 0, width: "44%", height: "34%",
+          background: `linear-gradient(180deg, ${mxh(repo.c, 0.78)}, ${mxh(repo.c, 0.36)})`,
+          borderBottom: `${s * 0.012}px solid ${hexa("#FFFFFF", 0.45)}` }} />
+        {/* two crown facets */}
+        <div style={{ position: "absolute", inset: 0, clipPath: "polygon(28% 0%, 0% 34%, 26% 34%)",
+          background: hexa("#FFFFFF", 0.20) }} />
+        <div style={{ position: "absolute", inset: 0, clipPath: "polygon(72% 0%, 100% 34%, 74% 34%)",
+          background: hexa("#000000", 0.16) }} />
+        {/* the pavilion, split so the point reads */}
+        <div style={{ position: "absolute", inset: 0, clipPath: "polygon(50% 34%, 100% 34%, 50% 100%)",
+          background: hexa("#000000", 0.20) }} />
+        <div style={{ position: "absolute", inset: 0, clipPath: "polygon(0% 34%, 50% 34%, 50% 100%)",
+          background: hexa("#FFFFFF", 0.10) }} />
+        {/* the specular — one hard highlight is what makes a facet read as cut */}
+        <div style={{ position: "absolute", left: "31%", top: "3%", width: "16%", height: "24%",
+          background: hexa("#FFFFFF", 0.62 * pulse), clipPath: "polygon(0 0, 100% 0, 60% 100%, 0 70%)" }} />
+      </div>
+      {/* the repo's real mark, set into the table */}
+      {mark && (
+        <div style={{ position: "absolute", left: s * 0.335, top: s * 0.055, width: s * 0.33, height: s * 0.235,
+          borderRadius: s * 0.05, background: repo.markBg, display: "flex", alignItems: "center",
+          justifyContent: "center", boxShadow: SH, zIndex: 2 }}>
+          <Img src={staticFile("logos/" + repo.mark)}
+            style={{ width: s * 0.20, height: s * 0.20, objectFit: "contain" }} />
+        </div>
+      )}
+      {/* name + stars, as small graphic chips — the card's two facts, no paragraph */}
+      {label && (
+        <div style={{ position: "absolute", left: -s * 0.19, top: s * 1.0, width: s * 1.38, zIndex: 3,
+          display: "flex", flexDirection: "column", alignItems: "center", gap: s * 0.022 }}>
+          <div style={{ ...ui(s * 0.15 * Math.min(1, 8 / repo.tagName.length), 900), color: "#FFF6E4", letterSpacing: "-0.02em",
+            textShadow: `0 ${s * 0.012}px ${s * 0.03}px rgba(0,0,0,.65)`, whiteSpace: "nowrap" }}>{repo.tagName}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: s * 0.03, background: hexa("#12100C", 0.62),
+            borderRadius: s * 0.06, padding: `${s * 0.012}px ${s * 0.055}px` }}>
+            <Octicon kind="star" s={s * 0.10} c={GH.star} />
+            <div style={{ ...ui(s * 0.105, 800), color: "#FFF6E4", whiteSpace: "nowrap" }}>{shown}</div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* =========================================================================
+   ⭐⭐ THE DOC MORPH — Alex, rev 3: *"I don't want the main focus to be just the
+   machine. I want the focus to be the DOCUMENT, like how they transform ...
+   showing a more interesting animation on how they transform."*
+
+   So the transformation is drawn as a transformation, not a crossfade: the
+   Office junk PEELS OFF the page and flies away piece by piece — the coloured
+   header band, the pie chart, the shape block, the tinted table cells — while
+   the ragged proportional lines SNAP to aligned monospace and pick up their `#`
+   and `-` markers. Same page throughout, so the eye tracks one object changing
+   ([[feedback_make_an_action_read]]: an action is a DISTANCE, not a state swap).
+   ====================================================================== */
+export const DocMorph: React.FC<{ x: number; y: number; w?: number; t?: number; kind?: FileKind;
+  f: number; z?: number; rot?: number }> =
+  ({ x, y, w = 330, t = 0, kind = "ppt", f, z = 70, rot = 0 }) => {
+  const u = w / 330, H2 = w * 1.28;
+  const k = Math.max(0, Math.min(1, t));
+  const tint = { ppt: "#C7502B", doc: "#2B5EA8", xls: "#1E7145" }[kind];
+  const icon = { ppt: "ft_powerpoint.svg", doc: "ft_word.svg", xls: "ft_excel.svg" }[kind];
+  /* each junk piece leaves on its own clock, so the page sheds rather than dissolves */
+  const gone = (i: number) => Math.max(0, Math.min(1, (k - 0.08 - i * 0.13) / 0.40));
+  const paper = lerpHex("#FFFFFF", "#F7F2E4", k);
+  const LINES = [0.86, 0.62, 0.94, 0.55, 0.78, 0.7, 0.9, 0.48];
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - H2 / 2, width: w, height: H2, zIndex: z,
+      transform: `rotate(${rot}deg)`, transformOrigin: "50% 50%" }}>
+      <div style={{ position: "absolute", inset: 0, background: paper, borderRadius: 7 * u, boxShadow: SH_D,
+        border: `${2.4 * u}px solid ${lerpHex("#D8D2C4", "#CFC6AE", k)}`,
+        overflow: k > 0.02 && k < 0.98 ? "visible" : "hidden" }}>
+        {/* 1 — the coloured header band shrinks to a markdown `#` heading rule */}
+        <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: (46 - 30 * k) * u,
+          background: lerpHex(tint, "#F7F2E4", k) }} />
+        <div style={{ position: "absolute", left: 16 * u, top: (14 + 4 * k) * u, width: (150 - 44 * k) * u,
+          height: (16 - 4 * k) * u, borderRadius: 3 * u,
+          background: lerpHex("#FFFFFF", "#1F2328", k), opacity: 0.92 }} />
+        {/* the `#` that arrives as the band leaves */}
+        {k > 0.55 && (
+          <div style={{ position: "absolute", left: 16 * u - 13 * u, top: 15 * u, ...mono(17 * u, 800),
+            color: "#C7502B", opacity: (k - 0.55) / 0.45 }}>#</div>
+        )}
+        {/* 2 — the file badge, which flips to a markdown chip */}
+        <div style={{ position: "absolute", right: 12 * u, top: 11 * u, width: 30 * u, height: 30 * u,
+          borderRadius: 6 * u, background: "#FFFFFF", border: `${1.6 * u}px solid #E2DCCC`,
+          display: "flex", alignItems: "center", justifyContent: "center", opacity: 1 - gone(4) }}>
+          <Img src={staticFile("logos/" + icon)} style={{ width: 21 * u, height: 21 * u, objectFit: "contain" }} />
+        </div>
+        {k > 0.7 && (
+          <div style={{ position: "absolute", right: 12 * u, top: 13 * u, ...mono(13 * u, 800), color: "#1A7F37",
+            border: `${1.6 * u}px solid #1A7F37`, borderRadius: 5 * u, padding: `${2 * u}px ${6 * u}px`,
+            opacity: (k - 0.7) / 0.3 }}>MD</div>
+        )}
+        {/* 3 — the body lines: ragged + proportional, then aligned mono with markers */}
+        {LINES.map((wd, i) => {
+          const top = (64 + i * 21) * u;
+          const align = k;                                     /* ragged -> flush */
+          const wide = wd + (0.92 - wd) * align;
+          const mk = i === 2 || i === 3 || i === 6;
+          return (
+            <React.Fragment key={i}>
+              {mk && k > 0.5 && (
+                <div style={{ position: "absolute", left: 16 * u, top: top - 2 * u, ...mono(13 * u, 800),
+                  color: "#C7502B", opacity: (k - 0.5) / 0.5 }}>-</div>
+              )}
+              <div style={{ position: "absolute", left: (16 + (mk ? 14 * k : 0)) * u, top,
+                width: (298 - (mk ? 14 * k : 0)) * u * wide * 0.94, height: (9 - 1.6 * k) * u, borderRadius: 2 * u,
+                background: lerpHex(i % 3 === 0 ? "#7A8794" : "#9AA3AC", "#3A3F45", k) }} />
+            </React.Fragment>
+          );
+        })}
+        {/* 4 — the junk: a pie chart, a shape block and a tinted table. Each PEELS OFF and flies. */}
+        {[0, 1, 2].map((i) => {
+          const g = gone(i);
+          if (g >= 1) return null;
+          const dx = g * (i === 1 ? 400 : -380) * u, dy = -g * (250 + i * 90) * u;
+          const st: React.CSSProperties = { position: "absolute", opacity: 1 - g,
+            transform: `translate(${dx}px, ${dy}px) rotate(${g * (i % 2 ? 128 : -140)}deg) scale(${1 - g * 0.28})` };
+          if (i === 0) return (
+            <div key={i} style={{ ...st, left: 210 * u, top: 240 * u, width: 82 * u, height: 82 * u,
+              borderRadius: "50%", background: `conic-gradient(${tint} 0 42%, #E8B23C 42% 68%, #4E8FD1 68% 100%)`,
+              border: `${2 * u}px solid #FFFFFF` }} />
+          );
+          if (i === 1) return (
+            <div key={i} style={{ ...st, left: 22 * u, top: 250 * u, width: 108 * u, height: 62 * u,
+              borderRadius: 5 * u, background: `linear-gradient(140deg, ${mxh(tint, 0.3)}, ${tint})`,
+              border: `${2 * u}px solid #FFFFFF` }} />
+          );
+          return (
+            <div key={i} style={{ ...st, left: 22 * u, top: 336 * u, width: 268 * u, height: 60 * u,
+              display: "grid", gridTemplateColumns: "repeat(4,1fr)", gridTemplateRows: "repeat(3,1fr)", gap: 2 * u }}>
+              {Array.from({ length: 12 }, (_, c) => (
+                <div key={c} style={{ background: c < 4 ? tint : hexa(tint, 0.16 + (c % 3) * 0.1) }} />
+              ))}
+            </div>
+          );
+        })}
+        {/* 5 — what the junk becomes: a clean mono table */}
+        {k > 0.62 && (
+          <div style={{ position: "absolute", left: 20 * u, top: 250 * u, right: 20 * u,
+            opacity: (k - 0.62) / 0.38, ...mono(13 * u, 700), color: "#3A3F45", lineHeight: 1.6 }}>
+            <div>| region | total |</div>
+            <div>|--------|-------|</div>
+            <div>| north  |  ####  |</div>
+            <div>| south  |  ###   |</div>
+          </div>
+        )}
+      </div>
+      {/* the shed pieces leave a little chaff behind them */}
+      {k > 0.12 && k < 0.9 && (
+        <div style={{ position: "absolute", left: -30 * u, top: 120 * u, width: 40 * u, height: 40 * u,
+          borderRadius: 3 * u, background: hexa(tint, 0.5), transform: `rotate(${k * 200}deg)`, opacity: 0.5 }} />
       )}
     </div>
   );

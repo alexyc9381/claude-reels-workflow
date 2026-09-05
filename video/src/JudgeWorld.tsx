@@ -215,3 +215,319 @@ export const BAND_Y = 132;
       SAFE FOR ALL THREE   ->  x 132..866  (734px, not 1012)
     Anything that must be readable in every cut is laid out inside this. */
 export const SAFE3 = { x0: 132, x1: 866, cx: 499 } as const;
+
+/* ===========================================================================
+   ⭐⭐⭐ FITOUT — the architecture layer, added after Alex's note *"background
+   more detailed, more polished, very good coloring"* on reel 132.
+
+   THE DIAGNOSIS, off a fifteen-frame contact sheet of the body: the rebuilt
+   HOOK had mullioned clerestory lights, panelling with real stiles, rails and
+   mouldings, a carved crest, a brass-edged baize rail and converging boards.
+   **Every BODY scene was a flat colour field with one prop standing on it.**
+   Same reel, two completely different levels of finish.
+
+   ⛔ AND THE FIX MUST NOT BE FIFTEEN HAND-BUILT SETS. This draws the same
+   architecture in EVERY room and takes its entire palette from that room's own
+   `Place`, so each scene keeps its hue and its value and simply gains
+   structure: a cornice, a clerestory of lit openings, pilasters, a panelled
+   dado with mouldings, and a skirting.
+
+   ⭐ DETAIL AND CONTRAST ARE DIFFERENT DIALS ([[feedback_hook_simplicity]]).
+   Everything here is genuinely built and all of it sits inside a narrow band
+   around the wall's own value, so the props and the sprites keep every hard
+   edge in the frame. `lift` is the only knob: raise it in a set that needs the
+   walls to carry more, drop it where a prop has to dominate.
+   ========================================================================= */
+export const Fitout: React.FC<{ p: Place; f: number; seed?: number; lift?: number;
+  arch?: boolean; z?: number }> = ({ p, f, seed = 0, lift = 1, arch = true, z = 5 }) => {
+  /* ⛔⛔ AND FIFTEEN ROOMS MUST NOT BE ONE ROOM REPAINTED
+     ([[feedback_villain_is_sameness_not_ugliness]]). The seed drives the
+     ARCHITECTURE, not a hue: how many lights, arched or square, how high the
+     dado sits, how many pilasters, and whether the upper wall carries a
+     clerestory at all or a louvred vent band instead. */
+  const hz = p.horizon;
+  const V = seed % 5;
+  const corn = hz * (0.26 + (seed % 3) * 0.035);
+  const dado = hz * (0.56 + (seed % 4) * 0.035);
+  const nOpen = [5, 4, 7, 6, 3][V];
+  const nPil = [6, 8, 5, 7, 6][V];
+  const louvre = V === 1 || V === 4;          // a vent band instead of glass
+  const nBay = [7, 9, 6, 8, 5][V];
+  const W = 1140, X0 = -60;
+  return (<>
+    {/* the wall above the dado, and the light washing down it */}
+    <div style={{ position: "absolute", left: X0, top: 0, width: W, height: dado, zIndex: z,
+      background: `linear-gradient(180deg, ${mxh(p.back, 0.26 * lift)} 0%, ${p.back} 62%, ${dkh(p.back, 0.10)} 100%)` }} />
+
+    {/* THE CLERESTORY: real openings, and they are the only bright thing up there */}
+    {Array.from({ length: nOpen }, (_, i) => {
+      const w = (W - 40) / nOpen - 46;
+      const x = X0 + 34 + i * ((W - 40) / nOpen);
+      return (
+        <React.Fragment key={"cw" + i}>
+          <div style={{ position: "absolute", left: x - 11, top: corn * 0.20 - 10,
+            width: w + 22, height: corn * 0.86 + 12, zIndex: z + 1,
+            borderRadius: arch && !louvre && V !== 2 ? `${w / 2}px ${w / 2}px 5px 5px` : 5,
+            background: `linear-gradient(180deg, ${mxh(p.back, 0.44)}, ${dkh(p.back, 0.24)})` }} />
+          <div style={{ position: "absolute", left: x, top: corn * 0.20, width: w,
+            height: corn * 0.86, zIndex: z + 2,
+            borderRadius: arch && !louvre && V !== 2 ? `${w / 2}px ${w / 2}px 3px 3px` : 3,
+            background: louvre
+              ? `repeating-linear-gradient(180deg, ${hexa(dkh(p.back, 0.42), 0.85)} 0 6px, ${hexa(mxh(p.back, 0.34), 0.8)} 6px 13px)`
+              : `linear-gradient(180deg, ${mxh(p.key, 0.62 * lift)} 0%, ${hexa(p.key, 0.55 * lift)} 72%, ${hexa(p.key, 0.24 * lift)} 100%)` }} />
+          {[0, 1].map(k => (
+            <div key={k} style={{ position: "absolute", left: x + w * (0.34 + k * 0.32),
+              top: corn * 0.22, width: 5, height: corn * 0.82, zIndex: z + 3,
+              background: hexa(dkh(p.back, 0.3), 0.6) }} />
+          ))}
+          <div style={{ position: "absolute", left: x, top: corn * 0.62, width: w, height: 4,
+            zIndex: z + 3, background: hexa(dkh(p.back, 0.3), 0.5) }} />
+        </React.Fragment>
+      );
+    })}
+    {/* the wash the clerestory throws down the wall — a louvre throws none */}
+    {louvre ? null : (
+      <div style={{ position: "absolute", left: X0, top: corn, width: W, height: hz * 0.22,
+        zIndex: z + 3, background: `linear-gradient(180deg, ${hexa(p.key, 0.30 * lift)}, ${hexa(p.key, 0)})` }} />
+    )}
+
+    {/* CORNICE — three members, because one rectangle is a stripe not a moulding */}
+    <div style={{ position: "absolute", left: X0, top: corn + 4, width: W, height: 13, zIndex: z + 4,
+      background: `linear-gradient(180deg, ${mxh(p.back, 0.46)}, ${dkh(p.back, 0.16)})` }} />
+    <div style={{ position: "absolute", left: X0, top: corn + 17, width: W, height: 7, zIndex: z + 4,
+      background: hexa(dkh(p.back, 0.34), 0.7) }} />
+
+    {/* PILASTERS, cornice to dado */}
+    {Array.from({ length: nPil }, (_, i) => {
+      const x = X0 + 30 + i * ((W - 60) / (nPil - 1)) - 17;
+      return (
+        <React.Fragment key={"pl" + i}>
+          <div style={{ position: "absolute", left: x, top: corn + 24, width: 34,
+            height: dado - corn - 24, zIndex: z + 5,
+            background: `linear-gradient(90deg, ${mxh(p.back, 0.34)}, ${p.back} 46%, ${dkh(p.back, 0.24)})` }} />
+          <div style={{ position: "absolute", left: x - 7, top: corn + 24, width: 48, height: 12,
+            zIndex: z + 6, background: `linear-gradient(180deg, ${mxh(p.back, 0.5)}, ${dkh(p.back, 0.1)})` }} />
+        </React.Fragment>
+      );
+    })}
+
+    {/* THE PANELLED DADO: stile, rail, and a moulded panel inside each bay */}
+    <div style={{ position: "absolute", left: X0, top: dado, width: W, height: hz - dado,
+      zIndex: z + 7,
+      background: `linear-gradient(180deg, ${mxh(p.back, 0.16)} 0%, ${dkh(p.back, 0.18)} 62%, ${dkh(p.back, 0.34)} 100%)` }} />
+    <div style={{ position: "absolute", left: X0, top: dado - 9, width: W, height: 15, zIndex: z + 8,
+      background: `linear-gradient(180deg, ${mxh(p.back, 0.52)}, ${dkh(p.back, 0.12)})` }} />
+    {Array.from({ length: nBay }, (_, i) => {
+      const bw = (W - 40) / nBay;
+      const x = X0 + 20 + i * bw;
+      return (
+        <React.Fragment key={"dp" + i}>
+          <div style={{ position: "absolute", left: x + 14, top: dado + 20, width: bw - 46,
+            height: hz - dado - 44, zIndex: z + 9,
+            background: `linear-gradient(160deg, ${mxh(p.back, 0.10)}, ${dkh(p.back, 0.26)})`,
+            boxShadow: `inset 2px 2px 0 ${hexa(mxh(p.back, 0.5), 0.5)}, inset -2px -2px 0 ${hexa(dkh(p.back, 0.5), 0.6)}` }} />
+        </React.Fragment>
+      );
+    })}
+    {/* skirting */}
+    <div style={{ position: "absolute", left: X0, top: hz - 15, width: W, height: 15, zIndex: z + 10,
+      background: `linear-gradient(180deg, ${mxh(p.back, 0.30)}, ${dkh(p.back, 0.40)})` }} />
+  </>);
+};
+
+/* ===========================================================================
+   ⭐⭐⭐ BUSTLE — the WORK layer. Added after Alex: *"way more interesting
+   animations throughout, more detailed."*
+
+   THE DIAGNOSIS, off a frame-strip of three body scenes rather than a guess:
+   **the dominant verb in the whole body was APPEAR.** Roller doors go up and
+   three UI cards fade and scale in place. A team of sub-agents MATERIALISES at
+   the foot of a lit stair instead of marching in. The hero Claude stands to one
+   side and watches it happen. That is the exact defect `ANIMATION-QUALITY` §11
+   names — **an ACTION is a DISTANCE, not a state change** — and it is the same
+   note that killed this reel's very first hook ("left the Claude watching it").
+
+   ⭐ So every room now has PEOPLE DOING PHYSICAL WORK in the mid-ground, on
+   four real jobs, each with the three things that make an action read:
+     TRAVEL        a carrier crosses ~1200px; a cart crosses the full panel.
+     DEFORMATION   the hauler's whole body compresses on the pull (`strain`),
+                   which is WEIGHT — [[feedback_make_an_action_read]].
+     AN EMITTER    effort shows on the STILLEST part: puffs at the hammer's
+                   contact, grit under the cart, dust off the hauler's heels.
+   ⛔ And they are on their own phases and periods, so a room reads as a WORKING
+   room and not as a chorus line ([[feedback_action_loop_is_not_a_scene]] — this
+   is what the floor does WHILE the scene happens; every scene still owes its
+   own four-part event).
+   ========================================================================= */
+const JOBS = ["carry", "haul", "hammer", "cart", "sweep", "press"] as const;
+
+export const Bustle: React.FC<{ f: number; seed?: number; y?: number; n?: number;
+  z?: number; s?: number }> = ({ f, seed = 0, y = 668, n = 1, z = 30, s = 1 }) => (
+  <div style={{ position: "absolute", inset: 0, zIndex: z, opacity: 0.66,
+    filter: "blur(1.1px)" }}>
+  {Array.from({ length: n }, (_, i) => {
+    const job = JOBS[(seed * 3 + i * 5) % 6];
+    const size = (128 + ((seed + i) % 3) * 18 - i * 20) * s;
+    const ph = ((seed * 7 + i * 23) % 60);
+    const yy = y - i * 38 + ((seed + i) % 3) * 10;
+    const cos = costumeFor(seed * 2 + i * 3);
+
+    if (job === "carry") {
+      const P = 168, t = (((f + ph) / P) % 1 + 1) % 1;
+      const lap = Math.floor((f + ph) / P);
+      const right = lap % 2 === 0;
+      const x = right ? -150 + t * 1320 : 1170 - t * 1320;
+      const bob = Math.abs(Math.sin((f + ph) / 4.6));
+      return (
+        <React.Fragment key={"bz" + i}>
+          <Forearm x0={x - size * 0.26} y0={yy - size * 0.56} x1={x - size * 0.30}
+            y1={yy - size * 0.92 - bob * 5} w={size * 0.10} z={z + 1} />
+          <Forearm x0={x + size * 0.26} y0={yy - size * 0.56} x1={x + size * 0.30}
+            y1={yy - size * 0.92 - bob * 5} w={size * 0.10} z={z + 1} />
+          <div style={{ position: "absolute", left: x - size * 0.44,
+            top: yy - size * 1.06 - bob * 5, width: size * 0.88, height: size * 0.26,
+            zIndex: z + 2, borderRadius: 4, boxShadow: SH,
+            transform: `rotate(${Math.sin((f + ph) / 9) * 3.4}deg)`,
+            background: `linear-gradient(160deg,${mxh(GOLD, 0.34)},${dkh(GOLD, 0.24)})` }} />
+          <Hero f={f} x={x} y={yy} size={size} z={z} costume={cos} flip={!right}
+            act={1} strain={0.22} ph={ph / 9} />
+          <Contact x={x} y={yy + 3} w={size * 0.8} o={0.34} z={z - 1} />
+        </React.Fragment>
+      );
+    }
+    if (job === "haul") {
+      const P = 46, t = (((f + ph) / P) % 1 + 1) % 1;
+      const pull = Math.max(0, Math.sin(t * Math.PI * 2));       // heave, then recover
+      const x = 150 + ((seed * 137 + i * 211) % 620);
+      return (
+        <React.Fragment key={"bz" + i}>
+          {/* the rope, and it goes TAUT on the heave */}
+          <div style={{ position: "absolute", left: x + size * 0.22, top: yy - size * 0.62,
+            width: 300 + pull * 26, height: 6, zIndex: z + 1, borderRadius: 3,
+            transformOrigin: "0% 50%", transform: `rotate(${-9 - pull * 5}deg)`,
+            background: `linear-gradient(180deg,#C9B48C,#8A7550)` }} />
+          <Forearm x0={x + size * 0.20} y0={yy - size * 0.56}
+            x1={x + size * 0.46} y1={yy - size * 0.64} w={size * 0.11} z={z + 2} />
+          <Hero f={f} x={x - pull * 20} y={yy} size={size} z={z} costume={cos}
+            strain={0.30 + pull * 0.52} act={1} ph={ph / 7} />
+          {pull > 0.86 ? <Fall x={x - 18} y={yy - 6} w={size} f={f} at={f - 1} n={3}
+            z={z + 1} c="#C8B896" rate={1.2} /> : null}
+          <Contact x={x} y={yy + 3} w={size * 0.8} o={0.34} z={z - 1} />
+        </React.Fragment>
+      );
+    }
+    if (job === "hammer") {
+      const P = 34, t = (((f + ph) / P) % 1 + 1) % 1;
+      const swing = t < 0.62 ? -58 + (t / 0.62) * 58 : -58 * ((t - 0.62) / 0.38);
+      const hit = t > 0.55 && t < 0.66;
+      const x = 190 + ((seed * 271 + i * 157) % 560);
+      return (
+        <React.Fragment key={"bz" + i}>
+          <div style={{ position: "absolute", left: x + size * 0.30, top: yy - size * 0.30,
+            width: size * 0.52, height: size * 0.30, zIndex: z - 1, borderRadius: 4,
+            transform: `translateY(${hit ? 3 : 0}px)`, boxShadow: SH,
+            background: `linear-gradient(180deg,#8A6A48,#4E3A26)` }} />
+          <div style={{ position: "absolute", left: x + size * 0.18, top: yy - size * 0.60,
+            width: size * 0.52, height: size * 0.10, zIndex: z + 2, borderRadius: 5,
+            transformOrigin: "0% 50%", transform: `rotate(${swing}deg)`,
+            background: `linear-gradient(180deg,#C08A52,#6E4A2E)` }}>
+            <div style={{ position: "absolute", right: -size * 0.10, top: -size * 0.07,
+              width: size * 0.20, height: size * 0.24, borderRadius: 3,
+              background: `linear-gradient(160deg,#6E7A88,#39414C)` }} />
+          </div>
+          <Forearm x0={x + size * 0.10} y0={yy - size * 0.56}
+            x1={x + size * 0.22} y1={yy - size * 0.58} w={size * 0.11} z={z + 1} />
+          <Hero f={f} x={x} y={yy} size={size} z={z} costume={cos}
+            act={1} strain={hit ? 0.5 : 0.2} ph={ph / 8} />
+          {hit ? <Puff x={x + size * 0.56} y={yy - size * 0.30} f={f} at={f} c="#E4D8BC" z={z + 3} /> : null}
+          <Contact x={x} y={yy + 3} w={size * 0.8} o={0.34} z={z - 1} />
+        </React.Fragment>
+      );
+    }
+    if (job === "sweep") {
+      /* a long push-broom crossing the floor: the broom head is the travelling
+         mass and the grit in front of it is the emitter. */
+      const P = 190, t = (((f + ph) / P) % 1 + 1) % 1;
+      const lap = Math.floor((f + ph) / P), right = lap % 2 === 0;
+      const x = right ? -130 + t * 1300 : 1150 - t * 1300;
+      const lean = Math.sin((f + ph) / 5.5) * 5;
+      return (
+        <React.Fragment key={"bz" + i}>
+          <div style={{ position: "absolute", left: x + (right ? size * 0.24 : -size * 0.86),
+            top: yy - size * 0.50, width: size * 0.62, height: size * 0.10, zIndex: z + 1,
+            borderRadius: 5, transformOrigin: right ? "0% 50%" : "100% 50%",
+            transform: `rotate(${right ? 42 + lean : -42 - lean}deg)`,
+            background: `linear-gradient(180deg,#C08A52,#6E4A2E)` }} />
+          <div style={{ position: "absolute", left: x + (right ? size * 0.62 : -size * 0.96),
+            top: yy - size * 0.10, width: size * 0.34, height: size * 0.13, zIndex: z + 1,
+            borderRadius: 4, background: `linear-gradient(180deg,#8A6A48,#4E3A26)` }} />
+          <Forearm x0={x + (right ? size * 0.22 : -size * 0.22)} y0={yy - size * 0.54}
+            x1={x + (right ? size * 0.40 : -size * 0.40)} y1={yy - size * 0.44}
+            w={size * 0.10} z={z + 2} />
+          <Hero f={f} x={x} y={yy} size={size} z={z} costume={cos} flip={!right}
+            act={1} strain={0.26} ph={ph / 7} />
+          <Fall x={x + (right ? size * 0.9 : -size * 0.9)} y={yy - 4} w={size * 0.7} f={f}
+            at={0} n={3} z={z + 1} c="#C8B896" rate={0.8} />
+          <Contact x={x} y={yy + 3} w={size * 0.8} o={0.34} z={z - 1} />
+        </React.Fragment>
+      );
+    }
+    if (job === "press") {
+      /* squat, then press a crate overhead. ⭐ WEIGHT IS DEFORMATION: he
+         compresses to 0.86 at the bottom and the crate stalls before it goes. */
+      const P = 58, t = (((f + ph) / P) % 1 + 1) % 1;
+      const up = t < 0.20 ? 0 : t < 0.55 ? E(t * 100, 20, 55, 0, 1, IO) : t < 0.82 ? 1 : 1 - (t - 0.82) / 0.18;
+      const sq = t < 0.20 ? t / 0.20 : 1 - up;
+      const x = 170 + ((seed * 419 + i * 97) % 600);
+      const cy = yy - size * (0.62 + up * 0.68);
+      return (
+        <React.Fragment key={"bz" + i}>
+          <div style={{ position: "absolute", left: x - size * 0.32, top: cy - size * 0.20,
+            width: size * 0.64, height: size * 0.34, zIndex: z + 2, borderRadius: 4,
+            boxShadow: SH, transform: `rotate(${Math.sin((f + ph) / 6) * 2.6}deg)`,
+            background: `linear-gradient(160deg,${mxh(GOLD, 0.30)},${dkh(GOLD, 0.28)})` }} />
+          {[-1, 1].map(sd => (
+            <Forearm key={sd} x0={x + sd * size * 0.24} y0={yy - size * 0.54}
+              x1={x + sd * size * 0.28} y1={cy + size * 0.10} w={size * 0.10} z={z + 1} />
+          ))}
+          <Hero f={f} x={x} y={yy} size={size} z={z} costume={cos} act={1}
+            strain={0.30 + sq * 0.55} ph={ph / 5} />
+          {up > 0.92 ? <Sweat x={x} y={yy - size * 0.62} f={f} at={f - 1} n={2} z={z + 1} /> : null}
+          <Contact x={x} y={yy + 3} w={size * 0.8} o={0.34} z={z - 1} />
+        </React.Fragment>
+      );
+    }
+    /* cart */
+    const P = 214, t = (((f + ph) / P) % 1 + 1) % 1;
+    const x = -190 + t * 1400;
+    const roll = (f * 7) % 360;
+    return (
+      <React.Fragment key={"bz" + i}>
+        <div style={{ position: "absolute", left: x + size * 0.30, top: yy - size * 0.56,
+          width: size * 0.74, height: size * 0.46, zIndex: z + 1, borderRadius: 4,
+          boxShadow: SH, background: `linear-gradient(160deg,#9A7550,#5E4630)` }}>
+          <div style={{ position: "absolute", left: size * 0.06, top: size * 0.06,
+            width: size * 0.62, height: size * 0.14,
+            background: hexa(GOLD, 0.75) }} />
+        </div>
+        {[0, 1].map(k => (
+          <div key={k} style={{ position: "absolute", left: x + size * (0.40 + k * 0.44),
+            top: yy - size * 0.16, width: size * 0.20, height: size * 0.20, zIndex: z + 2,
+            borderRadius: "50%", transform: `rotate(${roll}deg)`,
+            background: `radial-gradient(circle at 40% 34%, #8A7550, #3E3222)` }}>
+            <div style={{ position: "absolute", left: "46%", top: 0, width: "8%", height: "100%",
+              background: hexa("#D9C9A2", 0.7) }} />
+          </div>
+        ))}
+        <Forearm x0={x + size * 0.20} y0={yy - size * 0.54}
+          x1={x + size * 0.34} y1={yy - size * 0.46} w={size * 0.11} z={z + 3} />
+        <Hero f={f} x={x} y={yy} size={size} z={z} costume={cos} act={1}
+          strain={0.34} ph={ph / 6} />
+        <Fall x={x + size * 0.6} y={yy} w={size * 0.7} f={f} at={0} n={2} z={z} c="#C8B896" rate={0.7} />
+        <Contact x={x} y={yy + 3} w={size * 0.8} o={0.34} z={z - 1} />
+      </React.Fragment>
+    );
+  })}
+  </div>
+);
+

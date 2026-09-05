@@ -2,7 +2,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
-  Scene, Cam, Contact, Motes, Ring, Puff, Steam, Fall, Crew, Forearm, Rig, anchors,
+  Scene, Cam, Contact, Motes, Ring, Puff, Steam, Fall, Crew, Forearm, Rig, anchors, Brain,
   CLAY, GOLD, GREEN, RED, INK, MUTE, BRASS, IRON, CHROME, BONE, SKY,
   REPOS, repoBy, asPlace, GY, BAND_Y, SAFE3, R, mono, ui,
 } from "./RpsWorld";
@@ -13,7 +13,7 @@ import {
 } from "./RpsSets";
 import {
   FileCard, Chute, Debris, Press, MdSheet, SheetBelt, Monitor, Rack, Claw, Core, Manifold, BigGauge, ErrorLamp,
-  TokenHopper, Tally, Composer, RepoCard, GhSign,
+  TokenHopper, Tally, Composer, RepoCard, GhSign, DocMorph,
 } from "./RpsProps";
 import type { FileKind } from "./RpsProps";
 
@@ -142,7 +142,9 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
   const p = asPlace("paper");
   const L = LAY[v];
   const repo = repoBy("anydoc");
-  const HX = 560 + L.a, HS = 236;
+  /* ⛔ Alex, rev 3: "we should see the Claude sprite bigger in the screen, it's way too small" —
+     236 put him at a quarter of the panel height while the chute and the crew took the rest. */
+  const HX = 552 + L.a, HS = 330;
   const a = anchors(HX, GY, HS);
   const mouth = { x: HX, y: GY - HS * 0.5 };
   /* the chute comes off the gantry beam, narrow and warm, and ends just above his mouth */
@@ -167,7 +169,10 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
           front-loads, so 74-80 moved and 80-99 sat — the plateau trap in
           [[feedback_authored_motion_needs_its_own_driver]]. A continuous in-panel PUSH repaints every
           pixel to the cut without adding an object, and the slump is linear now so it never settles. */}
-      <Cam {...punch(pick(v, 1.0, 1.16, 1.08) * pushK(f, 54, dur, 0.085), pick(v, 506, HX - 40, 520), pick(v, 491, 470, 470))} z={12}>
+      {/* ⛔ 1.06 / 1.20 on the same centre measured EIGHT bits apart at f153 once encoded — the
+          nudge trap again (feedback_variants_need_shot_sizes). Three real sizes on three centres:
+          the bay, a CU on the choke, and a medium down on the pile. */}
+      <Cam {...punch(pick(v, 1.06, 1.46, 1.20) * pushK(f, 54, dur, 0.085), pick(v, 520, HX - 10, 470), pick(v, 470, 424, 512))} z={12}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.08} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.55} window={null} />
       <GhFitout p={p} f={f} seed={11} z={19} graphX={88} graphY={242} cols={11} />
@@ -195,7 +200,7 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
         <Puff x={HX - 20} y={GY - 40} f={f} at={80} c="#E8E0D0" z={73} n={10} s={1.3} up={0.18} />
       </>)}
       {/* the crew in front, flinching on each hit */}
-      <CrewBand f={f} repo={repo} n={4} size={186} seed={BANDSEED[v]} at={-40} />
+      <CrewBand f={f} repo={repo} n={3} size={170} seed={BANDSEED[v]} at={-40} x0={150} />
       <TyreStack x={-30 + L.c} n={3} s={1.0} z={90} />
       </Cam>
     </Scene>
@@ -207,9 +212,11 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
    Shot A wide on the bench; shot B punch to the rollers at f52.
    ====================================================================== */
 const PRESS_SHOTS: Record<Variant, Shot[]> = {
-  house: [{ at: 0, ...WIDE }, { at: 52, ...punch(1.42, 500, 410) }],
-  amber: [{ at: 0, ...punch(1.22, 520, 445) }, { at: 52, ...punch(1.56, 560, 380) }],   /* medium on the press, then tight on the rollers */
-  steel: [{ at: 0, ...punch(1.5, 380, 440) }, { at: 52, ...punch(1.24, 560, 450) }],    /* CU on the hand feeding the intake, then a loose medium */
+  house: [{ at: 0, ...punch(1.12, 470, 452) }, { at: 52, ...punch(1.30, 560, 440) }],
+  amber: [{ at: 0, ...punch(1.30, 520, 448) }, { at: 52, ...punch(1.58, 600, 424) }],   /* tight on the page */
+  /* ⛔ steel framed the same centre at 1.0 against house's 1.12 and the two cuts measured FOUR bits
+     apart at f255. It frames the EXIT side instead — the markdown coming out, not the page going in. */
+  steel: [{ at: 0, ...punch(1.36, 726, 448) }, { at: 52, ...punch(1.14, 470, 456) }],
 };
 export const PRESS: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
@@ -231,23 +238,30 @@ export const PRESS: React.FC<SP> = ({ v, dur }) => {
         <GhFitout p={p} f={f} seed={12} z={19} graphX={114} graphY={256} cols={12} />
         <ShopWall p={p} f={f} seed={2} bay={repo} door={false} pegX={640} pegW={340} />
         <Bench x={PX + 40} y={GY} w={720} z={30} />
-        <Press x={PX} y={PY} f={f} feeds={feeds} s={1} z={44} />
-        {/* each file: from the hero's hand into the intake slot, shrinking as it goes in */}
-        {feeds.map((fd) => {
-          const t = E(f, fd.at - 8, fd.at + 8, 0, 1, IO);
-          if (f < fd.at - 9 || f > fd.at + 8) return null;
-          const inn = E(f, fd.at + 2, fd.at + 8, 0, 1, IN_Q);
-          return <FileCard key={fd.at} kind={fd.kind} x={hand.x + (slotIn.x - hand.x) * t} y={hand.y + (slotIn.y - hand.y) * t}
-            s={0.9} rot={-8 * (1 - t)} z={62} o={1 - inn} squash={inn * 0.6} />;
+        <Press x={PX} y={PY} f={f} feeds={feeds} s={0.86} z={44} />
+        {/* ⭐⭐ THE DOCUMENT IS THE SUBJECT (Alex, rev 3: "I don't want the main focus to be just
+            the machine — I want the focus to be the document, how they transform"). Each file
+            crosses the frame at 310px, and the press is the aperture it passes THROUGH: the junk
+            peels off inside the rollers and what leaves the far side is markdown. */}
+        {feeds.map((fd, i2) => {
+          const t0 = fd.at - 6, t1 = fd.at + 40;
+          if (f < t0 || f > t1 + 6) return null;
+          const trav = E(f, t0, t1, 0, 1, LIN);
+          const dx = 92 + (940 - 92) * trav;
+          /* ⛔ a 17-frame morph read as a JUMP on the probe: 0.57s is not enough for a viewer to
+             see junk leave a page. 30 frames, and the pieces travel far enough to be read as
+             leaving rather than fading ([[feedback_make_an_action_read]]). */
+          const morph = E(f, t0 + 9, t0 + 39, 0, 1, IO);
+          const dy = 452 - 26 * Math.sin(trav * Math.PI);
+          return (
+            <DocMorph key={"dm" + fd.at} x={dx} y={dy} w={310} t={morph} kind={fd.kind} f={f} z={68}
+              rot={-5 + 10 * trav} />
+          );
         })}
-        {/* each clean sheet: out of the far slot, slides right, drops onto a stack */}
-        {feeds.map((fd, i) => {
-          const t = E(f, fd.at + 18, fd.at + 40, 0, 1, OUT);
-          if (f < fd.at + 18) return null;
-          const drop = E(f, fd.at + 40, fd.at + 52, 0, 1, IN_Q);
-          const x = slotOut.x + 40 + t * 150, y = slotOut.y + drop * (GY - 190 - slotOut.y) - i * 6;
-          return <MdSheet key={"out" + i} x={x} y={y} s={0.78} rot={-4 + i * 3} z={62 + i} lines={11} />;
-        })}
+        {/* the rollers bite as each one passes: chaff off the underside */}
+        {feeds.map((fd) => (f >= fd.at + 8 && f < fd.at + 30
+          ? <Puff key={"pf" + fd.at} x={PX + 30} y={PY - 96} f={f} at={fd.at + 8} c="#E9E1CE" z={72} n={8} s={1.0} up={0.25} />
+          : null))}
         <Contact x={HX} y={GY - 10} w={HS * 0.8} o={0.34} />
         <Forearm x0={HX + HS * 0.30} y0={GY - HS * 0.52} x1={hand.x + 10} y1={hand.y} w={20} z={58} />
         <Rig f={f} x={HX} y={GY} size={HS} z={56} act={1} gaze={1.2} ph={0.3}
@@ -264,13 +278,19 @@ export const PRESS: React.FC<SP> = ({ v, dur }) => {
    READS it line by line; each line goes green; a tick lands.  135 frames.
    Shot A tight on the sheet (0-58), shot B wide on the reader.
    ====================================================================== */
-const READ_SHOTS: Shot[] = [{ at: 0, ...punch(1.46, 420, 520) }, { at: 58, s: 1.0, x: 0, y: 0 }];
+/* ⛔ READ was still on the generic `shotsFor` nudge, which gave amber 1.56 and steel 1.52 on the
+   same centre — EIGHT bits apart at f356. Explicit sizes, like every other scene. */
+const READ_SHOTS: Record<Variant, Shot[]> = {
+  house: [{ at: 0, ...punch(1.46, 420, 520) }, { at: 58, ...WIDE }],
+  amber: [{ at: 0, ...punch(1.18, 520, 462) }, { at: 58, ...punch(1.20, 580, 436) }],
+  steel: [{ at: 0, ...punch(1.78, 386, 548) }, { at: 58, ...punch(1.08, 452, 486) }],
+};
 export const READ: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("paper");
   const L = LAY[v];
   const repo = repoBy("anydoc");
-  const sh = useShot(f, v, READ_SHOTS);
+  const sh = shotAt(f, READ_SHOTS[v]);
   const HX = 690 + L.a * 0.4, HS = 244;
   const beltY = 600;
   /* the hero sheet: along the belt, then lifted into his hands and turned to camera */
@@ -375,13 +395,16 @@ export const SPLIT: React.FC<SP> = ({ v, dur }) => {
   const states = [1, 1, f < 62 ? -1 : 1, 0];
   return (
     <Scene p={p} slug="" push={[0, dur, 1.04]} vig={0.46}>
-      <Cam s={pushK(f, 0, dur, 0.06)} x={0} y={0} z={12}>
+      <Cam {...punch(pick(v, 1.10, 1.24, 1.0) * pushK(f, 0, dur, 0.06), pick(v, 540, 560, 512), pick(v, 430, 416, 452))} z={12}>
       <Room p={p} f={f} bands={2} kind="shelf" overhead="duct" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.6 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="boards" grit={0.5} lamp={{ x: 560, y: 120, r: 240 }} window={null} />
       <GhFitout p={p} f={f} seed={15} z={19} graphX={114} graphY={242} cols={11} />
       <ShopWall p={p} f={f} seed={4} bay={repo} door={false} pegX={40} pegW={300} />
-      <Bench x={MX} y={GY} w={700} z={30} />
-      <Monitor x={MX} y={GY - 172} f={f} w={560} h={380} arrivals={arrivals} split={grow} splitAt={6} states={states} s={1} printAt={36} />
+      <Bench x={MX} y={GY + 46} w={700} z={30} />
+      {/* ⛔ the enriched panes put the top row behind the reserved plate band (y 112-210): the
+          monitor stood 470px tall with its top at y-6. Shorter and lower, so both rows of pane
+          headers, code and status chips sit inside the visible band. */}
+      <Monitor x={MX} y={GY - 108} f={f} w={560} h={300} arrivals={arrivals} split={grow} splitAt={6} states={states} s={0.86} printAt={36} />
       <Contact x={150} y={GY - 10} w={180} o={0.34} />
       <Rig f={f} x={150 + L.b * 0.3} y={GY} size={222} z={56} act={3} gaze={1.2} ph={0.4}
         cheer={E(f, 36, 46, 0, 1, BACK) - E(f, 70, 80, 0, 0.5, IO)} shock={E(f, 4, 10, 0, 0.6, OUT) - E(f, 14, 20, 0, 0.6, OUT)} />
@@ -448,12 +471,18 @@ export const SWAP: React.FC<SP> = ({ v, dur }) => {
   const tear = E(f, 52, 54, 0, 1, OUT);
   const liftUp = E(f, 52, 66, 0, 1, IN_Q);
   const clawY = -40 + (domeY + 6 + 40) * descend - liftUp * (domeY + 140);
-  const swingIn = E(f, 54, 66, 0, 1, OUT);
+  const swingIn = E(f, 57, 67, 0, 1, OUT);
   const dropIn = E(f, 66, 71, 0, 1, IN_Q);
-  const newX = 900 + (HX - 900) * swingIn, newY = -60 + (domeY - 130 + 60) * swingIn + dropIn * 130;
+  const newX = 1010 + (HX - 1010) * swingIn, newY = -70 + (domeY - 130 + 70) * swingIn + dropIn * 130;
   const locked = f >= 71;
   const coreLit = locked ? E(f, 71, 79, 0.2, 1, OUT) : f >= 52 ? 0 : flicker;
-  const kit: Kit = { core: 1, coreLit: f >= 52 && !locked ? 0 : coreLit };
+  /* ⛔ Alex, rev 3: "I want to see a BIG brain, like a PINK brain, that gets transplanted on the
+     guy's head, instead of that little dot in line." The dome comes OFF for this beat — the swap is
+     open surgery, and the brain is 62% of his height, on his head, not a bead behind glass. */
+  const kit: Kit = { core: 0 };
+  const BRS = HS * 0.62;
+  const brainY = a.headTop - HS * 0.20;
+  const outY = brainY + (clawY - brainY) * E(f, 52, 68, 0, 1, IN_Q);
   /* ⭐ "getting dumb" is a MALFUNCTION you can see: hiccup jumps every ten frames (the Mascot's
      own `shock` jump, driven periodically), not a slow sway that repaints nothing */
   const hic = f < 28 ? Math.max(0, Math.sin(f * 0.62)) * 0.42 : 0;
@@ -474,18 +503,30 @@ export const SWAP: React.FC<SP> = ({ v, dur }) => {
           gaze={locked ? 0.3 : 0} strain={refuse ? 0.7 : tear > 0 && f < 58 ? 0.4 : dropIn > 0.9 && f < 78 ? 0.5 : f < 28 ? 0.12 : 0}
           shock={hic} stern={locked ? E(f, 74, 84, 0.6, 0, OUT) : 0} cheer={E(f, 86, 94, 0, 1, BACK)} />
         {/* the dim core being lifted out by the claw */}
-        {f >= 52 && f < 68 && <Core x={HX} y={clawY + 30} r={HS * 0.08} lit={0} c={repo.c} c2={repo.c2} f={f} z={72} />}
+        {/* the DIM brain: on his head, dead grey, twitching — then torn out and carried up */}
+        {f < 70 && (
+          <Brain x={f < 52 ? HX : HX - 86 * E(f, 52, 70, 0, 1, IN_Q)} y={f < 52 ? brainY : outY} s={BRS} z={f < 52 ? 54 : 76} f={f}
+            lit={f < 52 ? 0.10 + 0.06 * flicker : 0.05}
+            rot={f < 52 ? Math.sin(f / 7) * 1.6 : -14 + Math.sin(f / 4) * 6}
+            squash={refuse ? 0.5 : 0} />
+        )}
         {descend > 0 && f < 70 && <Claw x={HX} y={clawY} open={1 - closeJaw + (f >= 66 ? E(f, 66, 70, 0, 1, OUT) : 0)} f={f} z={74} s={2.0} />}
         {f < 48 && <Steam x={HX} y={domeY - 10} f={f} at={0} n={9} z={76} s={1.4} c="#B9BCE8" rate={1.4} />}
         {refuse > 0 && <Steam x={HX} y={domeY - 20} f={f} at={46} n={6} z={76} s={1.0} c="#E8E0F0" />}
         {tear > 0 && f < 76 && <Fall x={HX - 140} y={domeY} w={280} f={f} at={52} n={24} z={76} c={mxh(repo.c, 0.2)} rate={1.8} s={1.5} />}
         {tear > 0 && f < 76 && <Fall x={HX - 60} y={domeY - 20} w={120} f={f} at={53} n={8} z={76} c={mxh(GOLD, 0.2)} rate={2.0} s={1.0} />}
         {tear > 0 && f < 72 && <Ring x={HX} y={domeY} f={f} at={52} c={mxh(repo.c, 0.4)} z={75} s={1.2} dur={16} />}
-        {/* the smarter core swings in on its own chain, bigger and bright */}
-        {swingIn > 0 && f < 73 && (<>
-          <Chain x={newX} top={0} len={Math.max(0, newY - 40)} z={70} swing={(1 - swingIn) * 18} />
-          <Core x={newX} y={newY} r={HS * 0.13} lit={1} c={repo.c} c2={repo.c2} f={f} z={72} />
+        {/* ⭐ the SMARTER brain swings in on its own chain — bigger than the one that came out,
+            live pink, and it lands ON his head */}
+        {swingIn > 0 && !locked && (<>
+          <Chain x={newX} top={0} len={Math.max(0, newY - BRS * 0.4)} z={70} swing={(1 - swingIn) * 18} />
+          <Brain x={newX} y={newY} s={BRS * 1.14} z={72} f={f} lit={0.55 + 0.45 * swingIn}
+            rot={(1 - swingIn) * 12} />
         </>)}
+        {locked && (
+          <Brain x={HX} y={brainY} s={BRS * 1.14} z={54} f={f} lit={1}
+            squash={f < 80 ? E(f, 71, 74, 0, 1, OUT) - E(f, 74, 80, 0, 1, OUT) : 0} />
+        )}
         {locked && f < 100 && (<>
           <Ring x={HX} y={domeY} f={f} at={71} c={mxh(repo.c, 0.5)} z={75} s={2.6} dur={22} />
           <Ring x={HX} y={domeY} f={f} at={75} c={mxh(GOLD, 0.4)} z={75} s={1.8} dur={20} />
@@ -597,9 +638,13 @@ export const ROLLOUT: React.FC<SP> = ({ v, dur }) => {
   const rise = 150 - 140 * E(f, 0, 30, 0, 1, IO) + ring(f - 30, 12, 2.6, 16);
   const platTop = GY - 18 - rise - 26;
   const kit: Kit = { intake: 1, hud: 1, core: 1, tank: 1, coreLit: 1, gauge: 0.95, hudLamps: [1, 1, 1], hudOn: 1, cape: 1 };
-  const SEND = 56;                                        /* the SEND press, clear of "links." (ends 40.31, +0.2) */
+  const SEND = 42;                                        /* the SEND press at 40.40s — 0.09s clear of "links." (ends 40.31) */
   return (
     <Scene p={p} slug="" push={[0, dur, 1.03]} vig={0.4}>
+      {/* ⛔ Q1 is the lift lowering and the composer sliding in, so the scene mean is high and the
+          tail reads as a stall even with four install ticks in it. A continuous push repaints every
+          pixel to the cut ([[feedback_authored_motion_needs_its_own_driver]]). */}
+      <Cam {...punch(pick(v, 1.0, 1.10, 1.05) * pushK(f, 8, dur, 0.10), pick(v, 506, 540, 476), pick(v, 470, 452, 486))} z={12}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.08} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
       <GhFitout p={p} f={f} seed={20} z={19} graphX={88} graphY={256} cols={12} />
@@ -635,6 +680,7 @@ export const ROLLOUT: React.FC<SP> = ({ v, dur }) => {
             size={184 - (i % 3) * 8} z={84 + (i % 2)} at={-40} loop={2} tint={r.c} flip={i % 2 === 1} cheer={1} />
         ))}
       </div>
+    </Cam>
     </Scene>
   );
 };

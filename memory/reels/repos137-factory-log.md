@@ -260,3 +260,59 @@ right for the *overwrite* failure it was written for, but it must not be the las
 then `mv` onto the final name.** A rename inside DriveFS keeps the id the staged file already earned
 (verified: `1KJLW2ywWHtt…` survived the rename byte-for-byte). The script also skips any file already
 live with a matching id and size, because re-uploading re-poisons the name.
+
+## STAGE 12 — REV 3: nine notes off the delivered cut (Alex, 2026-09-05)
+
+| # | note | what was done |
+|---|---|---|
+| 1 | *"the background music sounds like it's near the END of the soundtrack, whereas it should be the BEGINNING"* | ⛔ the v1 picks were `ados@121s`, `ebm@44s`, `ados@175s` — chosen by an energy heuristic that never asked WHERE in the track a passage came from. All three re-cut off the front: `ados@0.75` · `ebm@4.61` (its first full downbeat, after a 4.5s fade-in intro) · `ados@11.99`. Onsets 0.015 / 0.000 / 0.030s. |
+| 2 | *"at 4s the Claude sprite is way too small"* (THE JAM) | hero 236 → **330**, camera 1.0 → 1.06, crew band 4 → 3 at 170 so it does not crowd him |
+| 3 | *"too much text on those cards, I wanna see more graphics heavy"* | `RepoCard` rebuilt: the repo's **mark is the biggest thing on it** (92u), the name is 31u, the star count 23u, the description paragraph and the owner/name line are gone (owner survives as a 12u caption). |
+| 4 | *"at 10s I don't want the focus to be the machine — I want the DOCUMENT, how they transform"* | new `DocMorph`: a 310px page crosses the frame and **sheds its Office junk** — the coloured header band, the pie chart, the shape block and the tinted table each **peel off and fly** on their own clock, while ragged proportional lines snap to aligned monospace and pick up `#` and `-`. The press is the aperture it passes through, at 0.86 scale behind it. |
+| 5 | *"at 21s each of the screens needs to be way more interesting, better detailed, not just lines"* | every split pane is a workspace now: agent name + live **WORKING / BLOCKED / IDLE** chip, a file tree, **syntax-coloured** code printing a line every six frames, a per-pane progress bar, and `waiting on input` on the blocked one. |
+| 6 | *"at 26s I want a BIG PINK BRAIN transplanted on the guy's head, not that little dot"* | new `Brain`: a two-lobe silhouette with a central fissure, five gyri a side, a cerebellum lump and a stem, `lit` running dead grey-mauve → live pink. The dome comes OFF for S9 — the dead brain sits on his head, the claw tears it out and carries it up-left, the **live pink one swings in from the right at 1.14×** and lands on his head. It is also what lives under the dome everywhere else. |
+| 7 | *"it needs to end right when it says the last word"* | 1236 → **1222 frames** (41.18s → 40.73s). "links." ends at 40.31s, so the tail went from 0.87s to 0.42s — just the SEND stamp, which moved to f1212 (40.40s, 0.09s clear of the word). |
+| 8 | *"the Claude sprite in the middle at the beginning, bigger"* | hook hero 262 → **336**, and the rise cut 296 → 190 because a taller hero puts his head into the reserved plate band. |
+| 9 | *"the hook isn't that interesting — I want four GLOWING GEMS that come to the front middle of the screen"* | new `Gem`: a cut stone with a table, crown facets, a pavilion, a specular and a soft light pool, carrying that repo's real mark and its star count. Four of them fly in from off-frame to a **shallow arc across the front of the panel**, landing on the three texture ticks already in the bank (f24 · f36 · f48); the first docks into him on the hero clank at f58 and its hardware seats on his hip; the second lifts off at f78 and is still travelling at the cut. All three hooks carry gems, each with its own delivery (flown in · dropped · run in by the pit crew). |
+
+### Caught on probes, before the render
+- ⛔ **frame-0 luma fell to 138.4** — the white repo cards had been carrying ~10 luma of the opening frame and saturated gems read brighter while measuring darker. The `floor` place itself was lifted (`#C6BBA8` → `#D2C7B2`) and the first gem now enters before f0: **144.0**.
+- ⛔ **a 17-frame doc morph read as a JUMP.** 0.57s is not enough for a viewer to watch junk leave a page — widened to 30 frames and the pieces now travel 400px instead of 240.
+- ⛔ **the enriched panes were behind the reserved plate band**: the monitor stood 470px tall with its top at y −6. Shorter (300) and lower (GY−108).
+- ⛔ `mix()` takes two arguments and `lerpHex` is the three-argument one; and a local `const dark` shadowed the imported helper of the same name.
+
+## STAGE 13 — rev 3 delivered (2026-09-05)
+
+All three cuts, gates on the **encoded** deliverables:
+
+| | lift (house) | drop (amber) | pit (steel) |
+|---|---|---|---|
+| verify_reel | 9/9 | 9/9 | 9/9 |
+| motion median · failing | 10.74 · 0/14 | 12.54 · 0/14 | 10.96 · 0/14 |
+| tails stalling | 0/14 | 0/14 | 0/14 |
+| HOOK_LUMA (encoded) | 152.7 | 158.0 | 148.5 |
+| BODY_SAT · p10 | 54.0% · 25.6 | 56.4% · 25.9 | 57.5% · 28.4 |
+| open gate mean | 11.51 | 19.51 | 12.29 |
+| ENDS_TIGHT | 0.14s | 0.12s | 0.14s |
+
+**dHash on the delivered encodes: mean 23.8 · MIN 12 · PASS.** sfx_audit clean. 94 cues, 0 collisions.
+Delivered 40.79s each, `yuv420p` / `bt709` / `tv`, 1222 frames.
+
+### Three gates that only failed after the rev-3 edits
+- ⛔ **SFX_CUES: a DEAD cue at 40.87s in all three cuts.** The source had already been fixed (SEND moved to
+  f42) — `verify_reel` reads `video/137_repos.intent.json`, which is GENERATED from the source by
+  `tools/rps_intent.py` and had not been regenerated. ⭐ **A manifest built from the code is only true at
+  the moment you build it: regenerate it in the same breath as any beat or length change**, or the ship
+  gate grades the reel you used to have ([[feedback_the_audit_scene_list_drifted]] in a new costume).
+- ⛔ **dHash MIN collapsed 11 → 4**, at f255 (PRESS, house/steel 4) and f356 (READ, amber/steel 8). Two
+  causes, both the same mistake: steel's new PRESS shot framed the same centre at 1.0 against house's 1.12,
+  and READ was still on the generic `shotsFor` nudge, which gave amber 1.56 and steel 1.52. Explicit sizes
+  on explicit centres fixed both. Then **the encode cost three more bits** and exposed JAM at 8 (1.06 vs
+  1.20 on one centre) → three real sizes: the bay, a CU on the choke, a medium down on the pile. **12.**
+- ⛔ **ROLLOUT stalled in all three** after the trim: Q1 is the lift lowering and the composer sliding in,
+  so the scene mean is high and four install ticks in Q4 could not lift the ratio. A continuous in-panel
+  push from f8 fixed it, the same lever as JAM.
+
+⭐ **Every dHash failure this reel has had was the same shape**: two cuts framing the SAME CENTRE at scales
+within ~15% of each other. The fix is never a regrade or a nudge; it is a different SHOT SIZE on a different
+POINT ([[feedback_variants_need_shot_sizes]]). Measure it on the ENCODE, never the raw render.

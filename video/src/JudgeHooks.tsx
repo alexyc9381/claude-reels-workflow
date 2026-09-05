@@ -45,11 +45,11 @@ export type HookId = "seal" | "stand" | "light" | "gavel" | "wall";
 type SP = { v: any; dur: number };
 
 export const HOOK_BANDS: Record<HookId, { big: string; hot: string }> = {
-  seal:  { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  stand: { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  light: { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  gavel: { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  wall:  { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
+  seal:  { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  stand: { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  light: { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  gavel: { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  wall:  { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
 };
 
 /* --------------------------------------------------------------------------

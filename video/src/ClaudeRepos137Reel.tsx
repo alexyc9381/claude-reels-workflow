@@ -38,7 +38,10 @@ import words from "./data/words_repos137.json";
    ========================================================================= */
 
 const FPS = 30;
-export const RPS_TOTAL = 1236;                       /* 41.18s x 30fps, +0.31s tail air */
+/* ⛔ Alex, rev 3: "it needs to end RIGHT WHEN it says the last word". The last word "links."
+   ends at 40.31s and the reel ran to 41.18s — 0.87s of air after the CTA. 1222 frames = 40.73s
+   leaves only the SEND stamp (0.34s from f1212) and lands the cut on its decay. */
+export const RPS_TOTAL = 1222;                       /* 40.73s x 30fps; last word ends 40.31s */
 
 /** ⛔ EVERY ONSET BELOW IS A SPLICE JOIN, i.e. a point of MEASURED SILENCE in
     the cut file — never a stored word end (which whisper places 20-200ms
@@ -176,7 +179,9 @@ export const SFX: Cue[] = [
   { at: S(L.S13 + 9),  src: "motor_sag.wav",  v: LEVELS.SFX_MID * db(-3), dur: 0.40, rate: 0.9 },
   { at: S(L.S13 + 30), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.8 },
   ...[22, 26, 30, 34, 38].map((a2, i) => ({ at: S(L.S13 + a2), src: "ui_tap.wav", v: LEVELS.SFX_TEXTURE * db(-1 + (i % 3) * 0.6), dur: 0.10, rate: 1.0 + (i % 3) * 0.06 })),
-  { at: S(L.S13 + 56), src: "stamp_press.wav", v: LEVELS.SFX_HERO, dur: 0.30, lead: 0 },
+  /* ⛔ the reel was trimmed to 1222 and SEND moved to f42; this cue sat at f56 = 40.87s, past the
+     end of the file, and verify_reel called it DEAD. A cue is a beat, not a constant. */
+  { at: S(L.S13 + 42), src: "stamp_press.wav", v: LEVELS.SFX_HERO, dur: 0.30, lead: 0 },
 ];
 
 /* ---- THE MUSIC -----------------------------------------------------------

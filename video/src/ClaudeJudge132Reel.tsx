@@ -13,6 +13,14 @@ import { OPENS, OPEN_BANDS } from "./JudgeOpens";
 import type { OpenId } from "./JudgeOpens";
 import { OPENS2, OPEN2_BANDS } from "./JudgeOpens2";
 import type { Open2Id } from "./JudgeOpens2";
+import { OPENS3, OPEN3_BANDS } from "./JudgeOpens3";
+import { OPENS4, OPEN4_BANDS, type Open4Id } from "./JudgeOpens4";
+import { OPENS5, OPEN5_BANDS, type Open5Id } from "./JudgeOpens5";
+import { OPENS6, OPEN6_BANDS, type Open6Id } from "./JudgeOpens6";
+import { OPENS7, OPEN7_BANDS, type Open7Id } from "./JudgeOpens7";
+import { OPENS8, OPEN8_BANDS, type Open8Id } from "./JudgeOpens8";
+import { OPENS9, OPEN9_BANDS, type Open9Id } from "./JudgeOpens9";
+import type { Open3Id } from "./JudgeOpens3";
 import words from "./data/words_judge132.json";
 
 /* ===========================================================================
@@ -53,28 +61,28 @@ import words from "./data/words_judge132.json";
    ========================================================================= */
 
 const FPS = 30;
-export const JUDGE_TOTAL = 1044;                  /* CUT 34.80s x 30fps */
+export const JUDGE_TOTAL = 1038;                  /* CUT 34.80s x 30fps */
 
 /** ⛔ Re-derived WITH `CUT` and `durationInFrames` every time the VO changes.
     Every onset below was read out of `data/words_judge132.json` by
     pattern-matching the beat's opening words, never by a hardcoded index. */
 export const L = {
   S0: 0,     /* STAND    hook · "There's a new prompting technique"   0.00s */
-  S1: 80,    /* DIAL     "but the crazy part"                         2.68s */
-  S2: 160,   /* DIALC    "and it takes just 1 minute"                 5.32s */
-  S3: 211,   /* DOCK     "People are using it to ship"                7.04s */
-  S4: 299,   /* SEAL     "and even the creators of Claude"            9.96s */
-  S5: 372,   /* CHAMBER  "It's called the Judge Loop"                12.40s */
-  S6: 412,   /* HALL     "Instead of doing the normal back and forth" 13.72s */
-  S7: 458,   /* MUSTER   "you give Claude a task"                    15.26s */
-  S8: 541,   /* RACK     "But the secret sauce is in the third line" 18.02s */
-  S9: 596,   /* ROBING   "where you assign a judge"                  19.88s */
-  S10: 663,  /* BOARD    "The prosecutor builds a case"              22.10s */
-  S11: 731,  /* FLOOR    "the defense argues back"                   24.36s */
-  S12: 793,  /* PIT      "so they loop and rebuild"                  26.44s */
-  S13: 856,  /* FURNACE  "This burns through tokens fast"            28.54s */
-  S14: 952,  /* BAY      "trigger the Judge Loop before your launch" 31.74s */
-  S15: 1006, /* STEPS    "Comment Judge for the free guide"          33.52s */
+  S1: 74,    /* DIAL     "but the crazy part"                         2.68s */
+  S2: 154,   /* DIALC    "and it takes just 1 minute"                 5.32s */
+  S3: 205,   /* DOCK     "People are using it to ship"                7.04s */
+  S4: 293,   /* SEAL     "and even the creators of Claude"            9.96s */
+  S5: 366,   /* CHAMBER  "It's called the Judge Loop"                12.40s */
+  S6: 406,   /* HALL     "Instead of doing the normal back and forth" 13.72s */
+  S7: 452,   /* MUSTER   "you give Claude a task"                    15.26s */
+  S8: 535,   /* RACK     "But the secret sauce is in the third line" 18.02s */
+  S9: 590,   /* ROBING   "where you assign a judge"                  19.88s */
+  S10: 657,  /* BOARD    "The prosecutor builds a case"              22.10s */
+  S11: 725,  /* FLOOR    "the defense argues back"                   24.36s */
+  S12: 787,  /* PIT      "so they loop and rebuild"                  26.44s */
+  S13: 850,  /* FURNACE  "This burns through tokens fast"            28.54s */
+  S14: 946,  /* BAY      "trigger the Judge Loop before your launch" 31.74s */
+  S15: 1000, /* STEPS    "Comment Judge for the free guide"          33.52s */
   END: JUDGE_TOTAL,
 } as const;
 
@@ -134,24 +142,28 @@ export const SFX: Cue[] = [
      name and every one of them is the shape that produced *"a puff of air
      throughout the video"* for five review rounds on reel 115. */
   { at: S(L.S0 + 0),  src: "engine_idle.wav",   v: LEVELS.SFX_BED,  dur: 2.7, rate: 0.92 },
-  { at: S(L.S0 + 0),  src: "sub.wav",          v: LEVELS.SFX_HERO, dur: 1.1, rate: 0.72 },
-  /* ⭐ THE NEEDLE IS AUDIBLE BEFORE IT IS DRAMATIC. Three ticks, ascending,
-     on the twitch and the climb — the sound carries the same anticipation the
-     picture does. `sorter_tick` is 0.09s and low: it cannot swell or hiss. */
-  ...[6, 16, 26].map((a, i) => ({
-    at: S(L.S0 + a), src: "data.wav",
-    v: LEVELS.SFX_TEXTURE * db(i * 0.9), dur: 0.14, rate: 0.92 + i * 0.13,
-  })),
-  /* the pen tearing the sheet: the movement is the impact, the texture is the
-     rip. One event with grit, not two hits. */
-  ...layer(S(L.S0 + 34),
-    { src: "impact_deep.wav",  v: LEVELS.SFX_HERO,    dur: 1.0, rate: 0.84 },
-    { src: "slate_whump.wav",  v: LEVELS.SFX_MID,     dur: 0.6, rate: 0.90 }),
-  { at: S(L.S0 + 36), src: "neon_on.wav",      v: LEVELS.SFX_MID,  dur: 0.5, rate: 0.88 },
-  /* ⛔ ONE STEP DOWN, NEVER UP. The last cue of the hook is lower and quieter
-     than the tear: the hook must NOT resolve, and a rising repeat reads as
-     progress. The seal is still gleaming when this lands. */
-  { at: S(L.S0 + 52), src: "thock.wav",        v: LEVELS.SFX_MID,  dur: 0.5, rate: 0.78 },
+  /* sub.wav is 96.6% under 250Hz — with two slams in the open it is what tips
+     the mix out of band. HERO -> MID and shorter. */
+  { at: S(L.S0 + 0),  src: "sub.wav",          v: LEVELS.SFX_MID,  dur: 0.8, rate: 0.78 },
+  /* ⛔ CUED TO `gavel`, TWO STRIKES. Re-cue scene 0 every time scene 0 changes. */
+  { at: S(L.S0 + 12), src: "ratchet.wav",      v: LEVELS.SFX_TEXTURE, dur: 0.5, rate: 0.62 },
+  /* ⭐ f33 — THE FIRST SLAM. Heaviest stack in the reel. */
+  ...layer(S(L.S0 + 33),
+    { src: "impact_deep.wav",  v: LEVELS.SFX_HERO,    dur: 1.1, rate: 0.80 },
+    { src: "slate_whump.wav",  v: LEVELS.SFX_MID,     dur: 0.7, rate: 0.82 }),
+  { at: S(L.S0 + 33), src: "bang_on.wav",      v: LEVELS.SFX_MID,  dur: 0.6, rate: 0.88 },
+  { at: S(L.S0 + 38), src: "punch_thud.wav",   v: LEVELS.SFX_MID,  dur: 0.5, rate: 0.86 },
+  { at: S(L.S0 + 46), src: "fling.wav",        v: LEVELS.SFX_TEXTURE, dur: 0.4, rate: 1.02 },
+  /* f48 — he holds up the NEXT one, and f63 it goes the same way, faster */
+  { at: S(L.S0 + 48), src: "sign_clack.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.3, rate: 0.96 },
+  /* ⛔ the second strike is MID, not HERO, and drops the whump: two full-weight
+     slams put <250Hz at 14.9% against a 14.5% ceiling. A repeat should be
+     lighter than the original anyway — that is what makes it read as a repeat. */
+  { at: S(L.S0 + 63), src: "impact_deep.wav", v: LEVELS.SFX_MID, dur: 1.0, rate: 0.90 },
+  { at: S(L.S0 + 67), src: "punch_thud.wav",   v: LEVELS.SFX_MID,  dur: 0.5, rate: 0.90 },
+  /* ⛔ ONE STEP DOWN, NEVER UP — the third going up, quietest of the three,
+     because the loop does not resolve and neither should the sound. */
+  { at: S(L.S0 + 76), src: "sign_clack.wav",   v: LEVELS.SFX_TEXTURE, dur: 0.3, rate: 0.86 },
 
   /* ---- S1 · THE DIAL. A switch, a motor sagging under load, two clanks as
      the segment ring fills, one green tone on 73. 6 cues. ----------------- */
@@ -347,11 +359,16 @@ export const BED_QUIET = db(-6);
     Four mechanisms are rendered as their own mp4s in the delivery folder;
     `haul` is set here only so the reel has an open while the pick is made.
     Swapping is this one line. */
-export const PICKED: Open2Id = "scale";
+/* ⭐⭐⭐ ROUND 9. `fall` — the first open in this reel with an ARRIVAL. Ten
+   candidates withheld the payoff (the tower never fell, the glass never reached,
+   the fifth bolt held) because I over-applied the anticipation rule to the EVENT
+   instead of to the ANSWER. THE-OPEN.md, corrected by reel 104: a before state,
+   a trigger, travel, and an arrival that COSTS SOMETHING. */
+export const PICKED: Open9Id = "gavel";
 
-export const makeReel = (v: Variant, quiet = false, open: Open2Id = PICKED): React.FC => () => {
+export const makeReel = (v: Variant, quiet = false, open: Open9Id = PICKED): React.FC => () => {
   const f = useCurrentFrame();
-  const S0 = OPENS2[open];
+  const S0 = OPENS9[open];
   return (
     <AbsoluteFill>
       <Bg />
@@ -401,7 +418,7 @@ export const makeReel = (v: Variant, quiet = false, open: Open2Id = PICKED): Rea
    tell you what is on offer, it is describing the reel instead of the product.
    ====================================================================== */
 const BANDS = [
-  { from: L.S0,  big: "CLAUDE SAYS IT'S DONE",  hot: "IT ISN'T" },
+  { from: L.S0,  big: "STOP CLAUDE LYING",  hot: "3 LINES OF PROMPT" },
   { from: L.S1,  big: "73% MORE ACCURATE",      hot: "IN ONE MINUTE" },
   { from: L.S3,  big: "SHIP APPS AND SITES",    hot: "FROM ONE PROMPT" },
   { from: L.S5,  big: "THE JUDGE LOOP",         hot: "3 LINES OF PROMPT" },
@@ -498,6 +515,192 @@ export const Open2Cut = (id: Open2Id): React.FC => () => {
   const f = useCurrentFrame();
   const Cut = OPENS2[id];
   const b = OPEN2_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/** round 5 — the ANTICIPATION opens. Each carries a countdown the viewer can
+    read, and none of them resolves inside the hook. */
+export const Open3Cut = (id: Open3Id): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS3[id];
+  const b = OPEN3_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/** round 6 — ILLUSTRATE THE SENTENCE. The line is *"stops Claude from LYING
+    TO YOUR FACE"* and rounds 1-5 all drew the courtroom instead of the lie. */
+export const Open4Cut = (id: Open4Id): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS4[id];
+  const b = OPEN4_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/** round 7 — SUSPENSE = DRAMATIC IRONY + A CLOCK. Round 6 drew the lie but
+    every candidate was a LOOP, so there was nothing to wait for. */
+export const Open5Cut = (id: Open5Id): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS5[id];
+  const b = OPEN5_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/** round 8 — THE VALUE STRUCTURE. Warm-on-warm with no black and nothing cool
+    is a monochrome mush at thumbnail size; OX and BOSS are both pale COOL
+    ground + a NEAR-BLACK mass + one hot accent + countable lit content. */
+export const Open6Cut = (id: Open6Id): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS6[id];
+  const b = OPEN6_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/** round 9 — IT ACTUALLY HAPPENS. THE-OPEN.md: an open needs a BEFORE state, a
+    TRIGGER, TRAVEL and AN ARRIVAL THAT COSTS SOMETHING. Ten hooks in a row
+    withheld the arrival; this one lands. */
+export const Open7Cut = (id: Open7Id): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS7[id];
+  const b = OPEN7_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/** round 10 — ONE BIG THING AND A QUIET ROOM. OX and BOSS, pulled at full size,
+    both put ONE huge object in a soft desaturated room. Round 9 answered the
+    eye-catch note by ADDING; both references win by removing. */
+export const Open8Cut = (id: Open8Id): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS8[id];
+  const b = OPEN8_BANDS[id];
+  return (
+    <AbsoluteFill>
+      <Bg />
+      <Audio src={staticFile("132_judge_vo.wav")} volume={LEVELS.DIALOGUE} />
+      <Audio src={staticFile(BED.house)} volume={LEVELS.MUSIC * BED_GAIN.house} />
+      <SfxTrack cues={SFX.filter(c => c.at < 100 / FPS + 0.4)} />
+      <CamCtx.Provider value={{ ...CAM.house }}>
+        <AssemblyCtx.Provider value={true}>
+          <div style={{ position: "absolute", inset: 0, filter: GRADE.house }}>
+            <Sequence from={0} durationInFrames={100}><Cut v="house" dur={80} /></Sequence>
+          </div>
+        </AssemblyCtx.Provider>
+      </CamCtx.Provider>
+      <ProgressBar />
+      <KaraokeCaption words={words as any} fps={FPS} top={CAP_Y.house} />
+      <HookHeader big={b.big} hot={b.hot} f={f + 12} />
+    </AbsoluteFill>
+  );
+};
+
+/** round 11 — THE SHOT ALEX DESCRIBED: a prisoner at the stand, a colossal
+    judge, and the gavel comes down. Two characters, a power gap, one enormous
+    event and a verdict stamped across the work. */
+export const Open9Cut = (id: Open9Id): React.FC => () => {
+  const f = useCurrentFrame();
+  const Cut = OPENS9[id];
+  const b = OPEN9_BANDS[id];
   return (
     <AbsoluteFill>
       <Bg />

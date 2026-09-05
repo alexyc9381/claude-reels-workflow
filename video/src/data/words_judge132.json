@@ -1,872 +1,872 @@
 [
  {
   "start": 0.0,
-  "end": 0.42,
+  "end": 0.235,
   "word": " There's"
  },
  {
-  "start": 0.42,
-  "end": 0.5,
+  "start": 0.235,
+  "end": 0.315,
   "word": " a"
  },
  {
-  "start": 0.5,
-  "end": 0.66,
+  "start": 0.315,
+  "end": 0.475,
   "word": " new"
  },
  {
-  "start": 0.66,
-  "end": 0.9,
+  "start": 0.475,
+  "end": 0.715,
   "word": " prompting"
  },
  {
-  "start": 0.9,
-  "end": 1.2,
+  "start": 0.715,
+  "end": 1.015,
   "word": " technique"
  },
  {
-  "start": 1.2,
-  "end": 1.36,
+  "start": 1.015,
+  "end": 1.175,
   "word": " that"
  },
  {
-  "start": 1.36,
-  "end": 1.6,
+  "start": 1.175,
+  "end": 1.415,
   "word": " stops"
  },
  {
-  "start": 1.6,
-  "end": 1.78,
+  "start": 1.415,
+  "end": 1.595,
   "word": " Claude"
  },
  {
-  "start": 1.78,
-  "end": 1.98,
+  "start": 1.595,
+  "end": 1.795,
   "word": " from"
  },
  {
-  "start": 1.98,
-  "end": 2.16,
+  "start": 1.795,
+  "end": 1.975,
   "word": " lying"
  },
  {
-  "start": 2.16,
-  "end": 2.32,
+  "start": 1.975,
+  "end": 2.135,
   "word": " to"
  },
  {
-  "start": 2.32,
-  "end": 2.46,
+  "start": 2.135,
+  "end": 2.275,
   "word": " your"
  },
  {
-  "start": 2.46,
-  "end": 2.68,
+  "start": 2.275,
+  "end": 2.495,
   "word": " face,"
  },
  {
-  "start": 2.68,
-  "end": 3.04,
+  "start": 2.495,
+  "end": 2.855,
   "word": " but"
  },
  {
-  "start": 3.04,
-  "end": 3.16,
+  "start": 2.855,
+  "end": 2.975,
   "word": " the"
  },
  {
-  "start": 3.16,
-  "end": 3.38,
+  "start": 2.975,
+  "end": 3.195,
   "word": " crazy"
  },
  {
-  "start": 3.38,
-  "end": 3.6,
+  "start": 3.195,
+  "end": 3.415,
   "word": " part,"
  },
  {
-  "start": 3.62,
-  "end": 3.7,
+  "start": 3.435,
+  "end": 3.515,
   "word": " it"
  },
  {
-  "start": 3.7,
-  "end": 3.84,
+  "start": 3.515,
+  "end": 3.655,
   "word": " makes"
  },
  {
-  "start": 3.84,
-  "end": 3.96,
+  "start": 3.655,
+  "end": 3.775,
   "word": " your"
  },
  {
-  "start": 3.96,
-  "end": 4.16,
+  "start": 3.775,
+  "end": 3.975,
   "word": " output"
  },
  {
-  "start": 4.16,
-  "end": 4.7,
+  "start": 3.975,
+  "end": 4.515,
   "word": " 73"
  },
  {
-  "start": 4.7,
-  "end": 4.94,
+  "start": 4.515,
+  "end": 4.755,
   "word": "%"
  },
  {
-  "start": 4.94,
-  "end": 5.12,
+  "start": 4.755,
+  "end": 4.935,
   "word": " more"
  },
  {
-  "start": 5.12,
-  "end": 5.32,
+  "start": 4.935,
+  "end": 5.135,
   "word": " accurate"
  },
  {
-  "start": 5.32,
-  "end": 5.42,
+  "start": 5.135,
+  "end": 5.235,
   "word": " and"
  },
  {
-  "start": 5.42,
-  "end": 5.54,
+  "start": 5.235,
+  "end": 5.355,
   "word": " it"
  },
  {
-  "start": 5.54,
-  "end": 5.66,
+  "start": 5.355,
+  "end": 5.475,
   "word": " takes"
  },
  {
-  "start": 5.66,
-  "end": 5.84,
+  "start": 5.475,
+  "end": 5.655,
   "word": " just"
  },
  {
-  "start": 5.84,
-  "end": 6.0,
+  "start": 5.655,
+  "end": 5.815,
   "word": " 1"
  },
  {
-  "start": 6.0,
-  "end": 6.16,
+  "start": 5.815,
+  "end": 5.975,
   "word": " minute"
  },
  {
-  "start": 6.16,
-  "end": 6.32,
+  "start": 5.975,
+  "end": 6.135,
   "word": " to"
  },
  {
-  "start": 6.32,
-  "end": 6.44,
+  "start": 6.135,
+  "end": 6.255,
   "word": " set"
  },
  {
-  "start": 6.44,
-  "end": 6.72,
+  "start": 6.255,
+  "end": 6.535,
   "word": " up."
  },
  {
-  "start": 7.04,
-  "end": 7.24,
+  "start": 6.855,
+  "end": 7.055,
   "word": " People"
  },
  {
-  "start": 7.24,
-  "end": 7.34,
+  "start": 7.055,
+  "end": 7.155,
   "word": " are"
  },
  {
-  "start": 7.34,
-  "end": 7.5,
+  "start": 7.155,
+  "end": 7.315,
   "word": " using"
  },
  {
-  "start": 7.5,
-  "end": 7.6,
+  "start": 7.315,
+  "end": 7.415,
   "word": " it"
  },
  {
-  "start": 7.6,
-  "end": 7.72,
+  "start": 7.415,
+  "end": 7.535,
   "word": " to"
  },
  {
-  "start": 7.72,
-  "end": 7.84,
+  "start": 7.535,
+  "end": 7.655,
   "word": " ship"
  },
  {
-  "start": 7.84,
-  "end": 8.18,
+  "start": 7.655,
+  "end": 7.995,
   "word": " entire"
  },
  {
-  "start": 8.18,
-  "end": 8.4,
+  "start": 7.995,
+  "end": 8.215,
   "word": " apps,"
  },
  {
-  "start": 8.54,
-  "end": 8.74,
+  "start": 8.355,
+  "end": 8.555,
   "word": " websites,"
  },
  {
-  "start": 8.88,
-  "end": 8.94,
+  "start": 8.695,
+  "end": 8.755,
   "word": " and"
  },
  {
-  "start": 8.94,
-  "end": 9.12,
+  "start": 8.755,
+  "end": 8.935,
   "word": " tools"
  },
  {
-  "start": 9.12,
-  "end": 9.26,
+  "start": 8.935,
+  "end": 9.075,
   "word": " from"
  },
  {
-  "start": 9.26,
-  "end": 9.42,
+  "start": 9.075,
+  "end": 9.235,
   "word": " a"
  },
  {
-  "start": 9.42,
-  "end": 9.62,
+  "start": 9.235,
+  "end": 9.435,
   "word": " single"
  },
  {
-  "start": 9.62,
-  "end": 9.88,
+  "start": 9.435,
+  "end": 9.695,
   "word": " prompt,"
  },
  {
-  "start": 9.96,
-  "end": 10.02,
+  "start": 9.775,
+  "end": 9.835,
   "word": " and"
  },
  {
-  "start": 10.02,
-  "end": 10.14,
+  "start": 9.835,
+  "end": 9.955,
   "word": " even"
  },
  {
-  "start": 10.14,
-  "end": 10.34,
+  "start": 9.955,
+  "end": 10.155,
   "word": " the"
  },
  {
-  "start": 10.34,
-  "end": 10.48,
+  "start": 10.155,
+  "end": 10.295,
   "word": " creators"
  },
  {
-  "start": 10.48,
-  "end": 10.7,
+  "start": 10.295,
+  "end": 10.515,
   "word": " of"
  },
  {
-  "start": 10.7,
-  "end": 10.84,
+  "start": 10.515,
+  "end": 10.655,
   "word": " Claude"
  },
  {
-  "start": 10.84,
-  "end": 11.02,
+  "start": 10.655,
+  "end": 10.835,
   "word": " think"
  },
  {
-  "start": 11.02,
-  "end": 11.16,
+  "start": 10.835,
+  "end": 10.975,
   "word": " this"
  },
  {
-  "start": 11.16,
-  "end": 11.26,
+  "start": 10.975,
+  "end": 11.075,
   "word": " is"
  },
  {
-  "start": 11.26,
-  "end": 11.42,
+  "start": 11.075,
+  "end": 11.235,
   "word": " the"
  },
  {
-  "start": 11.42,
-  "end": 11.66,
+  "start": 11.235,
+  "end": 11.475,
   "word": " future"
  },
  {
-  "start": 11.66,
-  "end": 11.84,
+  "start": 11.475,
+  "end": 11.655,
   "word": " of"
  },
  {
-  "start": 11.84,
-  "end": 12.04,
+  "start": 11.655,
+  "end": 11.855,
   "word": " AI."
  },
  {
-  "start": 12.4,
-  "end": 12.54,
+  "start": 12.215,
+  "end": 12.355,
   "word": " It's"
  },
  {
-  "start": 12.54,
-  "end": 12.66,
+  "start": 12.355,
+  "end": 12.475,
   "word": " called"
  },
  {
-  "start": 12.66,
-  "end": 12.82,
+  "start": 12.475,
+  "end": 12.635,
   "word": " the"
  },
  {
-  "start": 12.82,
-  "end": 13.0,
+  "start": 12.635,
+  "end": 12.815,
   "word": " Judge"
  },
  {
-  "start": 13.0,
-  "end": 13.2,
+  "start": 12.815,
+  "end": 13.015,
   "word": " Loop."
  },
  {
-  "start": 13.72,
-  "end": 13.88,
+  "start": 13.535,
+  "end": 13.695,
   "word": " Instead"
  },
  {
-  "start": 13.88,
-  "end": 14.0,
+  "start": 13.695,
+  "end": 13.815,
   "word": " of"
  },
  {
-  "start": 14.0,
-  "end": 14.14,
+  "start": 13.815,
+  "end": 13.955,
   "word": " doing"
  },
  {
-  "start": 14.14,
-  "end": 14.26,
+  "start": 13.955,
+  "end": 14.075,
   "word": " the"
  },
  {
-  "start": 14.26,
-  "end": 14.44,
+  "start": 14.075,
+  "end": 14.255,
   "word": " normal"
  },
  {
-  "start": 14.44,
-  "end": 14.64,
+  "start": 14.255,
+  "end": 14.455,
   "word": " back"
  },
  {
-  "start": 14.64,
-  "end": 14.76,
+  "start": 14.455,
+  "end": 14.575,
   "word": " and"
  },
  {
-  "start": 14.76,
-  "end": 14.92,
+  "start": 14.575,
+  "end": 14.735,
   "word": " forth"
  },
  {
-  "start": 14.92,
-  "end": 15.18,
+  "start": 14.735,
+  "end": 14.995,
   "word": " chats,"
  },
  {
-  "start": 15.26,
-  "end": 15.3,
+  "start": 15.075,
+  "end": 15.115,
   "word": " you"
  },
  {
-  "start": 15.3,
-  "end": 15.44,
+  "start": 15.115,
+  "end": 15.255,
   "word": " give"
  },
  {
-  "start": 15.44,
-  "end": 15.58,
+  "start": 15.255,
+  "end": 15.395,
   "word": " Claude"
  },
  {
-  "start": 15.58,
-  "end": 15.76,
+  "start": 15.395,
+  "end": 15.575,
   "word": " a"
  },
  {
-  "start": 15.76,
-  "end": 15.92,
+  "start": 15.575,
+  "end": 15.735,
   "word": " task"
  },
  {
-  "start": 15.92,
-  "end": 16.1,
+  "start": 15.735,
+  "end": 15.915,
   "word": " and"
  },
  {
-  "start": 16.1,
-  "end": 16.22,
+  "start": 15.915,
+  "end": 16.035,
   "word": " tell"
  },
  {
-  "start": 16.22,
-  "end": 16.3,
+  "start": 16.035,
+  "end": 16.115,
   "word": " it"
  },
  {
-  "start": 16.3,
-  "end": 16.36,
+  "start": 16.115,
+  "end": 16.175,
   "word": " to"
  },
  {
-  "start": 16.36,
-  "end": 16.52,
+  "start": 16.175,
+  "end": 16.335,
   "word": " spawn"
  },
  {
-  "start": 16.52,
-  "end": 16.66,
+  "start": 16.335,
+  "end": 16.475,
   "word": " a"
  },
  {
-  "start": 16.66,
-  "end": 16.8,
+  "start": 16.475,
+  "end": 16.615,
   "word": " team"
  },
  {
-  "start": 16.8,
-  "end": 16.94,
+  "start": 16.615,
+  "end": 16.755,
   "word": " of"
  },
  {
-  "start": 16.94,
-  "end": 17.22,
+  "start": 16.755,
+  "end": 17.035,
   "word": " elite"
  },
  {
-  "start": 17.22,
-  "end": 17.48,
+  "start": 17.035,
+  "end": 17.295,
   "word": " sub"
  },
  {
-  "start": 17.48,
-  "end": 17.68,
+  "start": 17.295,
+  "end": 17.495,
   "word": "-agents."
  },
  {
-  "start": 18.02,
-  "end": 18.14,
+  "start": 17.835,
+  "end": 17.955,
   "word": " But"
  },
  {
-  "start": 18.14,
-  "end": 18.3,
+  "start": 17.955,
+  "end": 18.115,
   "word": " the"
  },
  {
-  "start": 18.3,
-  "end": 18.52,
+  "start": 18.115,
+  "end": 18.335,
   "word": " secret"
  },
  {
-  "start": 18.52,
-  "end": 18.8,
+  "start": 18.335,
+  "end": 18.615,
   "word": " sauce"
  },
  {
-  "start": 18.8,
-  "end": 18.9,
+  "start": 18.615,
+  "end": 18.715,
   "word": " is"
  },
  {
-  "start": 18.9,
-  "end": 19.0,
+  "start": 18.715,
+  "end": 18.815,
   "word": " in"
  },
  {
-  "start": 19.0,
-  "end": 19.16,
+  "start": 18.815,
+  "end": 18.975,
   "word": " the"
  },
  {
-  "start": 19.16,
-  "end": 19.32,
+  "start": 18.975,
+  "end": 19.135,
   "word": " third"
  },
  {
-  "start": 19.32,
-  "end": 19.46,
+  "start": 19.135,
+  "end": 19.275,
   "word": " line"
  },
  {
-  "start": 19.46,
-  "end": 19.56,
+  "start": 19.275,
+  "end": 19.375,
   "word": " of"
  },
  {
-  "start": 19.56,
-  "end": 19.72,
+  "start": 19.375,
+  "end": 19.535,
   "word": " the"
  },
  {
-  "start": 19.72,
-  "end": 19.88,
+  "start": 19.535,
+  "end": 19.695,
   "word": " prompt"
  },
  {
-  "start": 19.88,
-  "end": 20.08,
+  "start": 19.695,
+  "end": 19.895,
   "word": " where"
  },
  {
-  "start": 20.08,
-  "end": 20.14,
+  "start": 19.895,
+  "end": 19.955,
   "word": " you"
  },
  {
-  "start": 20.14,
-  "end": 20.32,
+  "start": 19.955,
+  "end": 20.135,
   "word": " assign"
  },
  {
-  "start": 20.32,
-  "end": 20.52,
+  "start": 20.135,
+  "end": 20.335,
   "word": " a"
  },
  {
-  "start": 20.52,
-  "end": 20.6,
+  "start": 20.335,
+  "end": 20.415,
   "word": " judge,"
  },
  {
-  "start": 20.76,
-  "end": 20.84,
+  "start": 20.575,
+  "end": 20.655,
   "word": " a"
  },
  {
-  "start": 20.84,
-  "end": 21.2,
+  "start": 20.655,
+  "end": 21.015,
   "word": " prosecutor,"
  },
  {
-  "start": 21.3,
-  "end": 21.38,
+  "start": 21.115,
+  "end": 21.195,
   "word": " and"
  },
  {
-  "start": 21.38,
-  "end": 21.58,
+  "start": 21.195,
+  "end": 21.395,
   "word": " a"
  },
  {
-  "start": 21.58,
-  "end": 21.78,
+  "start": 21.395,
+  "end": 21.595,
   "word": " defense."
  },
  {
-  "start": 22.1,
-  "end": 22.28,
+  "start": 21.915,
+  "end": 22.095,
   "word": " The"
  },
  {
-  "start": 22.28,
-  "end": 22.66,
+  "start": 22.095,
+  "end": 22.475,
   "word": " prosecutor"
  },
  {
-  "start": 22.66,
-  "end": 22.92,
+  "start": 22.475,
+  "end": 22.735,
   "word": " builds"
  },
  {
-  "start": 22.92,
-  "end": 23.04,
+  "start": 22.735,
+  "end": 22.855,
   "word": " a"
  },
  {
-  "start": 23.04,
-  "end": 23.18,
+  "start": 22.855,
+  "end": 22.995,
   "word": " case"
  },
  {
-  "start": 23.18,
-  "end": 23.34,
+  "start": 22.995,
+  "end": 23.155,
   "word": " for"
  },
  {
-  "start": 23.34,
-  "end": 23.62,
+  "start": 23.155,
+  "end": 23.435,
   "word": " everything"
  },
  {
-  "start": 23.62,
-  "end": 23.86,
+  "start": 23.435,
+  "end": 23.675,
   "word": " wrong"
  },
  {
-  "start": 23.86,
-  "end": 24.0,
+  "start": 23.675,
+  "end": 23.815,
   "word": " with"
  },
  {
-  "start": 24.0,
-  "end": 24.12,
+  "start": 23.815,
+  "end": 23.935,
   "word": " your"
  },
  {
-  "start": 24.12,
-  "end": 24.26,
+  "start": 23.935,
+  "end": 24.075,
   "word": " work,"
  },
  {
-  "start": 24.36,
-  "end": 24.42,
+  "start": 24.175,
+  "end": 24.235,
   "word": " the"
  },
  {
-  "start": 24.42,
-  "end": 24.66,
+  "start": 24.235,
+  "end": 24.475,
   "word": " defense"
  },
  {
-  "start": 24.66,
-  "end": 24.96,
+  "start": 24.475,
+  "end": 24.775,
   "word": " argues"
  },
  {
-  "start": 24.96,
-  "end": 25.26,
+  "start": 24.775,
+  "end": 25.075,
   "word": " back,"
  },
  {
-  "start": 25.32,
-  "end": 25.4,
+  "start": 25.135,
+  "end": 25.215,
   "word": " and"
  },
  {
-  "start": 25.4,
-  "end": 25.54,
+  "start": 25.215,
+  "end": 25.355,
   "word": " the"
  },
  {
-  "start": 25.54,
-  "end": 25.68,
+  "start": 25.355,
+  "end": 25.495,
   "word": " judge"
  },
  {
-  "start": 25.68,
-  "end": 25.92,
+  "start": 25.495,
+  "end": 25.735,
   "word": " rules"
  },
  {
-  "start": 25.92,
-  "end": 26.08,
+  "start": 25.735,
+  "end": 25.895,
   "word": " on"
  },
  {
-  "start": 26.08,
-  "end": 26.22,
+  "start": 25.895,
+  "end": 26.035,
   "word": " the"
  },
  {
-  "start": 26.22,
-  "end": 26.44,
+  "start": 26.035,
+  "end": 26.255,
   "word": " evidence,"
  },
  {
-  "start": 26.44,
-  "end": 26.6,
+  "start": 26.255,
+  "end": 26.415,
   "word": " so"
  },
  {
-  "start": 26.6,
-  "end": 26.7,
+  "start": 26.415,
+  "end": 26.515,
   "word": " they"
  },
  {
-  "start": 26.7,
-  "end": 26.86,
+  "start": 26.515,
+  "end": 26.675,
   "word": " loop"
  },
  {
-  "start": 26.86,
-  "end": 27.0,
+  "start": 26.675,
+  "end": 26.815,
   "word": " and"
  },
  {
-  "start": 27.0,
-  "end": 27.26,
+  "start": 26.815,
+  "end": 27.075,
   "word": " rebuild"
  },
  {
-  "start": 27.26,
-  "end": 27.5,
+  "start": 27.075,
+  "end": 27.315,
   "word": " until"
  },
  {
-  "start": 27.5,
-  "end": 27.7,
+  "start": 27.315,
+  "end": 27.515,
   "word": " the"
  },
  {
-  "start": 27.7,
-  "end": 27.82,
+  "start": 27.515,
+  "end": 27.635,
   "word": " work"
  },
  {
-  "start": 27.82,
-  "end": 28.04,
+  "start": 27.635,
+  "end": 27.855,
   "word": " is"
  },
  {
-  "start": 28.04,
-  "end": 28.54,
+  "start": 27.855,
+  "end": 28.355,
   "word": " bulletproof."
  },
  {
-  "start": 28.54,
-  "end": 28.96,
+  "start": 28.355,
+  "end": 28.775,
   "word": " This"
  },
  {
-  "start": 28.96,
-  "end": 29.2,
+  "start": 28.775,
+  "end": 29.015,
   "word": " burns"
  },
  {
-  "start": 29.2,
-  "end": 29.38,
+  "start": 29.015,
+  "end": 29.195,
   "word": " through"
  },
  {
-  "start": 29.38,
-  "end": 29.62,
+  "start": 29.195,
+  "end": 29.435,
   "word": " tokens"
  },
  {
-  "start": 29.62,
-  "end": 29.88,
+  "start": 29.435,
+  "end": 29.695,
   "word": " fast,"
  },
  {
-  "start": 30.0,
-  "end": 30.02,
+  "start": 29.815,
+  "end": 29.835,
   "word": " so"
  },
  {
-  "start": 30.02,
-  "end": 30.08,
+  "start": 29.835,
+  "end": 29.895,
   "word": " you"
  },
  {
-  "start": 30.08,
-  "end": 30.18,
+  "start": 29.895,
+  "end": 29.995,
   "word": " should"
  },
  {
-  "start": 30.18,
-  "end": 30.36,
+  "start": 29.995,
+  "end": 30.175,
   "word": " only"
  },
  {
-  "start": 30.36,
-  "end": 30.56,
+  "start": 30.175,
+  "end": 30.375,
   "word": " build"
  },
  {
-  "start": 30.56,
-  "end": 30.68,
+  "start": 30.375,
+  "end": 30.495,
   "word": " your"
  },
  {
-  "start": 30.68,
-  "end": 30.94,
+  "start": 30.495,
+  "end": 30.755,
   "word": " basic"
  },
  {
-  "start": 30.94,
-  "end": 31.3,
+  "start": 30.755,
+  "end": 31.115,
   "word": " prototype"
  },
  {
-  "start": 31.3,
-  "end": 31.56,
+  "start": 31.115,
+  "end": 31.375,
   "word": " first"
  },
  {
-  "start": 31.56,
-  "end": 31.74,
+  "start": 31.375,
+  "end": 31.555,
   "word": " and"
  },
  {
-  "start": 31.74,
-  "end": 31.92,
+  "start": 31.555,
+  "end": 31.735,
   "word": " trigger"
  },
  {
-  "start": 31.92,
-  "end": 32.1,
+  "start": 31.735,
+  "end": 31.915,
   "word": " the"
  },
  {
-  "start": 32.1,
-  "end": 32.28,
+  "start": 31.915,
+  "end": 32.095,
   "word": " Judge"
  },
  {
-  "start": 32.28,
-  "end": 32.4,
+  "start": 32.095,
+  "end": 32.215,
   "word": " Loop"
  },
  {
-  "start": 32.4,
-  "end": 32.7,
+  "start": 32.215,
+  "end": 32.515,
   "word": " before"
  },
  {
-  "start": 32.7,
-  "end": 32.86,
+  "start": 32.515,
+  "end": 32.675,
   "word": " your"
  },
  {
-  "start": 32.86,
-  "end": 33.14,
+  "start": 32.675,
+  "end": 32.955,
   "word": " launch."
  },
  {
-  "start": 33.52,
-  "end": 33.7,
+  "start": 33.335,
+  "end": 33.515,
   "word": " Comment"
  },
  {
-  "start": 33.7,
-  "end": 33.98,
+  "start": 33.515,
+  "end": 33.795,
   "word": " Judge"
  },
  {
-  "start": 33.98,
-  "end": 34.18,
+  "start": 33.795,
+  "end": 33.995,
   "word": " for"
  },
  {
-  "start": 34.18,
-  "end": 34.26,
+  "start": 33.995,
+  "end": 34.075,
   "word": " the"
  },
  {
-  "start": 34.26,
-  "end": 34.42,
+  "start": 34.075,
+  "end": 34.235,
   "word": " free"
  },
  {
-  "start": 34.42,
-  "end": 34.64,
+  "start": 34.235,
+  "end": 34.455,
   "word": " guide."
  }
 ]

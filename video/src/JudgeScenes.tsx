@@ -1,6 +1,7 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import {
+  Fitout, Bustle,
   W, H, SAFE, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
   Scene, Cam, Chip, Plate, BigNum, Contact, Mark, MarkPlate, MarkCast, Edge,
   R, PLACES, asPlace, vivid, mono, ui, Rake, Runner, Ring, Puff, Pool, Steam, Sweat, Fall, Motes,
@@ -120,9 +121,16 @@ const seqOrder = (v: Variant, n: number) =>
     ⛔ It covers the hero's legs and that is correct; BOSS's boss loses his too. */
 const FrontBand: React.FC<{ f: number; n?: number; size?: number; seed?: number;
   react?: number; at?: number; z?: number; x0?: number; x1?: number }> =
-  ({ f, n = 7, size = 168, seed = 0, react = 0, at = -22, z = 70, x0 = -90, x1 = 1102 }) => (
-  <Gallery f={f} x0={x0} x1={x1} y={GY + 96} n={n} ranks={1} size={size} z={z}
-    at={at} react={react} seed={seed} />
+  ({ f, n = 5, size = 150, seed = 0, react = 0, at = -22, z = 70, x0 = -90, x1 = 1102 }) => (
+  /* ⛔ THE BAND IS A TEXTURE, NOT A CAST. At n=7, 168px and full contrast it was
+     seven readable faces standing in front of the subject. BOSS runs its crowd
+     as a soft low-contrast mass you never read an individual in — that is what
+     makes it a depth cue instead of competition. */
+  <div style={{ position: "absolute", inset: 0, zIndex: z, opacity: 0.62,
+    filter: "blur(1.5px)" }}>
+    <Gallery f={f} x0={x0} x1={x1} y={GY + 96} n={n} ranks={1} size={size} z={z}
+      at={at} react={react} seed={seed} />
+  </div>
 );
 
 /** the one text chip a shot is allowed, in the reserved band */
@@ -144,12 +152,32 @@ const BandChip: React.FC<{ t: string; c?: string; fg?: string }> =
 export const S1: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("dial");
+  /* ⛔⛔ v1 WAS ONE SMOOTH 40-FRAME EASE AND A LINEAR COUNTER. The needle glided
+     0 -> 73 while the lever slid and the hero held it, and `k` was authored
+     INDEPENDENTLY of the pull — so nothing on screen was driving the number.
+     That is `ANIMATION-QUALITY` §12 exactly: *a FLOAT is not a LIFT — when
+     movement is authored directly instead of as the OUTPUT of something, more
+     frames and more distance will not fix it. Draw the MECHANISM and let it
+     FAIL first.*
+     ⭐ Now it is FOUR HEAVES with a STALL in the middle: he yanks, the needle
+     jumps and sags back, he yanks again, and on the third the thing STICKS —
+     0.05 of movement for a full heave — before the fourth breaks it and drives
+     it home. The counter is `pull` itself, so the number cannot move unless he
+     moves it. */
+  const HEAVE = [9, 23, 41, 58];
+  const GAIN = [0.34, 0.30, 0.05, 0.62];
+  const SAG  = [0.09, 0.08, 0.02, 0.05];
   const grip = E(f, 2, 8, 0, 1, OUT);
-  const bow = E(f, 10, 18, 0, 1, OUT) - E(f, 18, 24, 0, 1, IO);   /* it refuses first */
-  const pull = E(f, 18, 58, 0, 1, IO);
-  const k = E(f, 20, 62, 0, 1, LIN);                              /* the COUNT */
-  const land = E(f, 60, 66, 0, 1, BACK);
-  const strain = Math.min(1, grip * 0.4 + pull * 0.75) * (1 - E(f, 62, 70, 0, 0.9, OUT));
+  const pull = Math.max(0, Math.min(1, HEAVE.reduce((a, at, i) =>
+    a + E(f, at, at + 6, 0, GAIN[i], IN_Q) - E(f, at + 6, at + 13, 0, SAG[i], OUT), 0)));
+  const stall = f >= 40 && f < 54 ? E(f, 40, 47, 0, 1, OUT) - E(f, 50, 56, 0, 1, OUT) : 0;
+  const bow = HEAVE.reduce((a, at) =>
+    a + E(f, at, at + 4, 0, 1, IN_Q) - E(f, at + 4, at + 12, 0, 1, OUT), 0);
+  const k = pull;                                   /* the COUNT *is* the pull */
+  const land = E(f, 62, 69, 0, 1, BACK);
+  const strain = Math.max(0, Math.min(1, grip * 0.35 + pull * 0.5 + stall * 0.45
+    + HEAVE.reduce((a, at) => a + E(f, at, at + 4, 0, 0.35, IN_Q)
+      - E(f, at + 4, at + 12, 0, 0.35, OUT), 0))) * (1 - E(f, 64, 72, 0, 0.9, OUT));
   const dx = LAY[v].a;
   return (
     <Scene p={p} slug="" push={[0, dur, 1.105]} vig={0.50} glow={hexa(p.key, 0.16)}>
@@ -157,48 +185,120 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="rack" overhead="tray"
           rake={0.11} rakeX={RAKE_X[v]} rakeRate={3.6 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="slab" grit={0.8} lamp={{ x: 350 + dx, y: 128, r: 220 }} window={null} />
+        <Fitout p={p} f={f} seed={0} />
+        <Bustle f={f} seed={0} n={1} z={34} />
         {/* the background process: a pipe run overhead, always moving */}
         <Runner y={112} f={f} z={17} rate={7.8} pitch={182} w={161} h={82}
           c="#4A6A5E" c2="#0A1614" kind="cell" rail hang={0} o={0.9} />
 
-        {/* the plinth the gauge is bolted to — it takes the load too */}
-        <div style={{ position: "absolute", left: 300 + dx, top: 520 + land * 6, width: 330,
-          height: 200, zIndex: 30, background: `linear-gradient(180deg, #2A3A34 0%, #0E1A16 100%)` }}>
-          <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 12,
-            background: "#44605A" }} />
-          {[0, 1, 2, 3].map(i => (
-            <div key={i} style={{ position: "absolute", left: 24 + i * 84, top: 26, width: 16,
-              height: 16, borderRadius: 8, background: "#16241E" }} />
-          ))}
-        </div>
-        <AccuracyDial x={465 + dx} y={410 - bow * 8} d={410} k={k} z={44} f={f} />
+        {/* ⛔⛔ v2 GOT THE IDEA RIGHT AND THE SCALE WRONG. Two stacks at 40px a
+            course, sitting low enough that the gallery band cut their feet off,
+            and everything finished by f60 of an 80-frame scene — small, and then
+            a dead tail. ⭐ NOW IT IS A RACE, at OX's scale: 300px courses, both
+            stacks building at once, and the left one COLLAPSES under its own
+            flags at f44 while the right keeps going. The comparison is an EVENT,
+            not a diagram. */}
 
-        {/* the linkage from the dial to the lever — the two are one machine */}
-        <svg viewBox="0 0 1012 792" width={1012} height={792}
-          style={{ position: "absolute", left: 0, top: 0, zIndex: 42, overflow: "visible" }}>
-          <path d={`M ${640 + dx} ${430 + bow * 14} L ${760 + dx} ${470 - pull * 40}`}
-            fill="none" stroke="#59636D" strokeWidth={16} strokeLinecap="round" />
-          <path d={`M ${640 + dx} ${430 + bow * 14} L ${760 + dx} ${470 - pull * 40}`}
-            fill="none" stroke="#8C98A4" strokeWidth={5} strokeLinecap="round" />
-        </svg>
-        {/* the lever he hauls */}
-        <div style={{ position: "absolute", left: 758 + dx, top: 470 - pull * 40, width: 0, height: 0,
-          zIndex: 50, transform: `rotate(${-52 + pull * 96}deg)`, transformOrigin: "0 0" }}>
-          <div style={{ position: "absolute", left: -8, top: -230, width: 17, height: 236,
-            borderRadius: 8, background: `linear-gradient(90deg, #98A4B0 0%, #4A545E 100%)` }} />
-          <div style={{ position: "absolute", left: -24, top: -262, width: 48, height: 48,
-            borderRadius: "50%", background: `linear-gradient(160deg, ${RED} 0%, #7A2018 100%)` }} />
-        </div>
+        {/* LEFT — WITHOUT. It builds too, and then it goes over. */}
+        {Array.from({ length: 5 }, (_, i) => {
+          const at = 4 + i * 7;
+          if (f < at) return null;
+          const rise = E(f, at, at + 5, 0, 1, BACK);
+          const fall = f < 44 ? 0 : Math.min(1, (f - 44 - i * 1.5) / 13);
+          const g = fall * fall;
+          return (
+            <div key={"lw" + i} style={{ position: "absolute",
+              left: 96 + dx - (60 + i * 46) * g,
+              top: 604 - i * 56 + (1 - rise) * 150 + (560 - (604 - i * 56)) * g,
+              width: 296, height: 52, zIndex: 30 + i, borderRadius: 4, opacity: rise,
+              boxShadow: SH, transform: `rotate(${-2 - i * 2 - g * (34 + i * 16)}deg)`,
+              background: `linear-gradient(170deg,#78847C,#404C46)` }}>
+              {[0, 1].map(k2 => (
+                <div key={k2} style={{ position: "absolute", left: 40 + k2 * 118, top: -34,
+                  width: 13, height: 40, background: RED, transformOrigin: "50% 100%",
+                  transform: `rotate(${-16 + k2 * 26 + g * 60}deg)` }}>
+                  <div style={{ position: "absolute", left: 9, top: 0, width: 40, height: 26,
+                    background: RED, boxShadow: SH }} />
+                </div>
+              ))}
+            </div>
+          );
+        })}
+        {f >= 44 ? (<>
+          <Puff x={214 + dx} y={640} f={f} at={45} c="#8A9A92" z={44} n={10} />
+          <Fall x={214 + dx} y={630} w={420} f={f} at={45} n={12} z={43} c="#6E7A72" rate={1.8} />
+        </>) : null}
+        <Contact x={244 + dx} y={GY - 60} w={330} z={29} o={0.34} />
+        <div style={{ position: "absolute", left: 96 + dx, top: 646, width: 296, textAlign: "center",
+          ...mono(30, 800), letterSpacing: 3, zIndex: 46, color: hexa("#A8BCB2", 0.9) }}>WITHOUT</div>
 
-        <Contact x={790 + dx} y={GY} w={230} z={41} o={0.34} />
-        <Hero f={f} x={848 + dx} y={GY} size={262} z={56} act={1} ph={0.4}
-          costume={{ constr: 1 }} strain={strain} drive={-pull * 0.14} stern={strain} />
+        {/* RIGHT — WITH. Eight courses, each one SLAMMED, right through to f76. */}
+        {Array.from({ length: 8 }, (_, i) => {
+          const at = 5 + i * 9;
+          if (f < at) return null;
+          const rise = E(f, at, at + 5, 0, 1, BACK);
+          const hit = f >= at + 4 && f < at + 9;
+          return (
+            <React.Fragment key={"rw" + i}>
+              <div style={{ position: "absolute", left: 470 + dx,
+                top: 604 - i * 56 + (1 - rise) * 210, width: 306,
+                height: 52 * (hit ? 0.9 : 1), zIndex: 30 + i, borderRadius: 4, opacity: rise,
+                boxShadow: SH, transformOrigin: "50% 100%",
+                transform: `rotate(${(1 - rise) * -14}deg)`,
+                background: `linear-gradient(170deg,${mxh(GOLD, 0.36)},${dkh(GOLD, 0.26)})` }}>
+                <div style={{ position: "absolute", left: 16, top: 13, width: 26, height: 26,
+                  borderRadius: "50%", background: GREEN }}>
+                  <div style={{ position: "absolute", left: 5, top: 12, width: 9, height: 4,
+                    background: "#04241C", transform: "rotate(44deg)" }} />
+                  <div style={{ position: "absolute", left: 10, top: 7, width: 14, height: 4,
+                    background: "#04241C", transform: "rotate(-44deg)" }} />
+                </div>
+              </div>
+              {hit ? (<>
+                <Puff x={623 + dx} y={606 - i * 56} f={f} at={at + 4} c="#EBDFC0" z={45} n={6} />
+                <Ring x={623 + dx} y={606 - i * 56} f={f} at={at + 4} c={GOLD} z={46} />
+              </>) : null}
+            </React.Fragment>
+          );
+        })}
+        <Contact x={623 + dx} y={GY - 60} w={352} z={29} o={0.40} />
+        <div style={{ position: "absolute", left: 470 + dx, top: 646, width: 306, textAlign: "center",
+          ...mono(30, 800), letterSpacing: 3, zIndex: 46, color: hexa("#F6EBCE", 0.95) }}>WITH THE LOOP</div>
+
+        {/* the number lands on the difference, once, and only once */}
+        {f >= 62 ? (
+          <div style={{ position: "absolute", left: 464 + dx, top: 148 + (1 - land) * 50,
+            width: 318, height: 142, zIndex: 60, borderRadius: 11, boxShadow: SH_D,
+            opacity: E(f, 62, 66, 0, 1, OUT),
+            transform: `scale(${E(f, 62, 69, 1.6, 1, IN_Q)})`, transformOrigin: "50% 100%",
+            background: `linear-gradient(168deg,#33A176,#12543C)` }}>
+            <div style={{ position: "absolute", left: 0, top: 14, width: 318, textAlign: "center",
+              ...mono(80, 800), letterSpacing: 2, color: "#EAFBF2" }}>+73%</div>
+            <div style={{ position: "absolute", left: 0, top: 100, width: 318, textAlign: "center",
+              ...mono(26, 800), letterSpacing: 3, color: hexa("#EAFBF2", 0.85) }}>MORE ACCURATE</div>
+          </div>
+        ) : null}
+        {f >= 64 ? <Ring x={623 + dx} y={220} f={f} at={64} c={GREEN} z={61} s={1.6} dur={18} /> : null}
+
+        <Contact x={790 + dx + stall * 26} y={GY} w={230} z={41} o={0.34} />
+        <Hero f={f} x={848 + dx + stall * 26} y={GY} size={262} z={56} act={1} ph={0.4}
+          costume={{ constr: 1 }} strain={strain} drive={-pull * 0.20} stern={strain} />
         <Forearm x0={848 + dx - 262 * 0.34} y0={GY - 262 * 0.50}
-          x1={772 + dx} y1={470 - pull * 40 - 150 + pull * 120} w={25} c={CLAYD} z={58} />
+          x1={766 + dx} y1={560 - pull * 150} w={25} c={CLAYD} z={58} />
         {/* ⭐ EFFORT WANTS AN EMITTER ON THE STILLEST PART. A pressing sprite's
             head is the one thing not acting, so it steams. */}
         <Steam x={848 + dx} y={GY - 268} f={f} at={16} n={9} z={62} s={1.15} c="#CFE4DA" />
         <Sweat x={848 + dx} y={GY - 200} f={f} at={30} n={7} z={63} />
+        {/* every heave shakes the plinth and the glass — the effort has to land
+            somewhere other than the needle, or the needle is still a float */}
+        {HEAVE.filter(at => f >= at && f < at + 16).map(at => (
+          <React.Fragment key={"hv" + at}>
+            <Puff x={465 + dx} y={706} f={f} at={at + 1} c="#9EBDAE" z={52} n={6} />
+            <Fall x={520 + dx} y={700} w={340} f={f} at={at + 1} n={6} z={51} c="#7E9A8E" rate={1.4} />
+            <Ring x={790 + dx} y={GY - 20} f={f} at={at + 2} c="#8FE0BE" z={53} />
+          </React.Fragment>
+        ))}
+        {stall > 0.3 ? <Sweat x={848 + dx} y={GY - 236} f={f} at={42} n={6} z={64} /> : null}
         {land > 0.01 && <Ring x={465 + dx} y={410} f={f} at={60} c={GREEN} z={70} s={1.5} dur={20} />}
         {land > 0.01 && <Puff x={465 + dx} y={720} f={f} at={61} c="#9EBDAE" z={52} n={11} />}
 
@@ -236,53 +336,156 @@ export const S1: React.FC<SP> = ({ v, dur }) => {
 export const S2: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("dialc");
-  const drop = E(f, 2, 8, 0, 1, IN_Q);
-  const flag = E(f, 8, 12, 0, 1, BACK);
-  const sweep = E(f, 10, 34, 0, 1, LIN);
-  const bell = E(f, 34, 38, 0, 1, BACK);
+  /* ⛔⛔ SCRAPPED TWICE. v1 was a CLOCK (a second dial, straight after the first).
+     v2 was three blocks dropping into a frame — accurate, and inert.
+     ⭐ "IT TAKES JUST 1 MINUTE TO SET UP" is not about a duration, it is about
+     how little you have to DO. So: he slams the three-line card into the floor
+     slot and THE WHOLE COURT ERECTS ITSELF — the bench rises out of the floor,
+     two tables swing up either side, three lamps drop and strike on, and the
+     three role plaques snap onto them. One gesture, an entire apparatus, and a
+     minute strip that fills a single segment while it happens. That is the
+     claim, and large objects rising is the top of the motion table besides. */
+  const SLAM = 6;
+  const slam = E(f, 1, SLAM, 0, 1, IN_Q);
+  const RISE = [9, 15, 20, 25, 30, 35];       /* bench, tableL, tableR, 3 lamps */
+  const ready = E(f, 40, 47, 0, 1, BACK);
+  const strip = E(f, SLAM, 46, 0, 1, LIN);
   const dx = LAY[v].b;
+  const r = (i: number) => E(f, RISE[i], RISE[i] + 9, 0, 1, BACK);
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.120]} vig={0.46} glow={hexa(p.key, 0.20)}>
+    <Scene p={p} slug="" push={[0, dur, 1.120]} vig={0.46} glow={hexa(p.key, 0.18 + ready * 0.14)}>
       <Cam s={1.04} x={dx * 0.4} z={1}>
         <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="rack" overhead="tray"
           rake={0.09} rakeX={RAKE_X[v]} rakeRate={4.2 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="slab" grit={0.7} lamp={{ x: 520 + dx, y: 160, r: 250 }} window={null} />
-        <Runner y={96} f={f} z={17} rate={9.6} pitch={168} w={148} h={76}
-          c="#6E5A2E" c2="#120E06" kind="crate" rail o={0.85} />
-        <div style={{ position: "absolute", left: 180 + dx, top: 560, width: 660, height: 170,
-          zIndex: 28, background: `linear-gradient(180deg, #4A3A22 0%, #1C1408 100%)` }}>
-          <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 13,
-            background: "#7A6034" }} />
+        <Fitout p={p} f={f} seed={1} />
+        <Bustle f={f} seed={1} n={1} z={34} />
+
+        {/* THE SLOT, and the three-line card he puts in it */}
+        <div style={{ position: "absolute", left: 428 + dx, top: 656, width: 172, height: 26,
+          zIndex: 40, borderRadius: 5, boxShadow: SH,
+          background: `linear-gradient(180deg,#1A2620,#0A120E)` }} />
+        <div style={{ position: "absolute", left: 448 + dx, top: 560 - (1 - slam) * 210,
+          width: 132, height: 96, zIndex: 42, opacity: 1 - E(f, SLAM, SLAM + 4, 0, 1, LIN),
+          borderRadius: 5, boxShadow: SH_D,
+          transform: `rotate(${(1 - slam) * -16}deg)`,
+          background: `linear-gradient(168deg,${mxh(GOLD, 0.44)},${dkh(GOLD, 0.22)})` }}>
+          {[0, 1, 2].map(i => (
+            <div key={i} style={{ position: "absolute", left: 14, top: 20 + i * 22,
+              width: 104 - i * 22, height: 9, borderRadius: 4, background: hexa("#3A2A0C", 0.55) }} />
+          ))}
         </div>
-        <MinuteTimer x={470 + dx} y={400} d={280} k={sweep} flag={flag} z={50} />
-        {/* the brass token falling into the throat — the whole "setup" gesture */}
-        <div style={{ position: "absolute", left: 596 + dx, top: 236 + drop * 92, width: 40,
-          height: 40, borderRadius: "50%", zIndex: 54, opacity: 1 - E(f, 8, 11, 0, 1, LIN),
-          background: `linear-gradient(160deg, #F0D89E 0%, #8A6626 100%)` }} />
-        {bell > 0.01 && <Ring x={470 + dx} y={400} f={f} at={34} c={SODIUM} z={70} s={1.4} dur={18} />}
+        {f >= SLAM ? (<>
+          <Ring x={514 + dx} y={668} f={f} at={SLAM} c={GREEN} z={44} s={1.6} dur={20} />
+          <Puff x={514 + dx} y={656} f={f} at={SLAM} c="#9EE0BE" z={44} n={10} />
+        </>) : null}
+
+        {/* ⭐ THE BENCH comes up out of the floor */}
+        <div style={{ position: "absolute", left: 356 + dx, top: 356 + (1 - r(0)) * 330,
+          width: 312, height: 210, zIndex: 30, opacity: r(0) > 0.02 ? 1 : 0, boxShadow: SH_D,
+          background: `linear-gradient(168deg,#7A5236 0%,#3A2416 54%,#1A1008 100%)` }}>
+          <div style={{ position: "absolute", left: 0, top: 0, width: 312, height: 16,
+            background: `linear-gradient(180deg,#B4834E,#7A5236)` }} />
+          <div style={{ position: "absolute", left: 34, top: 52, width: 244, height: 128,
+            borderRadius: 5, border: `9px solid ${hexa("#5A3A24", 0.85)}` }} />
+        </div>
+        {/* the two tables swing up either side */}
+        {[0, 1].map(i => (
+          <div key={"tb" + i} style={{ position: "absolute",
+            left: (i === 0 ? 92 : 700) + dx, top: 520, width: 218, height: 132, zIndex: 32,
+            opacity: r(1 + i) > 0.02 ? 1 : 0, boxShadow: SH_D,
+            transformOrigin: i === 0 ? "0% 100%" : "100% 100%",
+            transform: `rotate(${(1 - r(1 + i)) * (i === 0 ? -84 : 84)}deg)`,
+            background: `linear-gradient(168deg,#6E4A30,#2E1C10)` }}>
+            <div style={{ position: "absolute", left: 0, top: 0, width: 218, height: 13,
+              background: "#A0714A" }} />
+          </div>
+        ))}
+        {/* three lamps drop and strike on, one per role */}
+        {[0, 1, 2].map(i => {
+          const k = r(3 + i);
+          const lx = [201, 512, 809][i] + dx;
+          return (
+            <React.Fragment key={"lp" + i}>
+              <div style={{ position: "absolute", left: lx - 6, top: 120,
+                width: 12, height: 120 * k, zIndex: 33, background: "#3A4A44" }} />
+              <div style={{ position: "absolute", left: lx - 52, top: 120 + 120 * k,
+                width: 104, height: 34, zIndex: 34, borderRadius: "6px 6px 30px 30px",
+                opacity: k > 0.02 ? 1 : 0, boxShadow: SH,
+                background: `linear-gradient(180deg,#6E7A74,#2A3630)` }} />
+              {k > 0.9 ? (<>
+                <Beam x={lx} y={158 + 120 * k} top={70} bot={330} len={330} c="#FFE8B8"
+                  o={0.26} z={20} f={f} />
+                <Ring x={lx} y={166 + 120 * k} f={f} at={RISE[3 + i] + 8} c="#FFE8B8" z={35} />
+              </>) : null}
+            </React.Fragment>
+          );
+        })}
+        {/* every piece LANDS. A thing that rises silently into place is a
+            transition; a thing that arrives with grit under it is an EVENT. */}
+        {RISE.map((at, i) => (
+          f >= at + 7 && f < at + 20 ? (
+            <React.Fragment key={"ld" + i}>
+              <Puff x={[512, 201, 809, 201, 512, 809][i] + dx} y={[566, 652, 652, 292, 292, 292][i]}
+                f={f} at={at + 7} c="#9EC0B0" z={49} n={7} />
+              <Ring x={[512, 201, 809, 201, 512, 809][i] + dx} y={[566, 652, 652, 292, 292, 292][i]}
+                f={f} at={at + 7} c="#8FE0BE" z={48} />
+            </React.Fragment>
+          ) : null
+        ))}
+        {/* the three role plaques snap on */}
+        {R.roles.map((role, i) => {
+          const k = E(f, RISE[3 + i] + 6, RISE[3 + i] + 13, 0, 1, BACK);
+          if (k <= 0.02) return null;
+          const lx = [201, 512, 809][i] + dx;
+          return (
+            <div key={"pq" + i} style={{ position: "absolute", left: lx - 88,
+              top: (i === 1 ? 470 : 528) - (1 - k) * 30, width: 176, height: 46, zIndex: 44,
+              opacity: k, borderRadius: 5, boxShadow: SH,
+              transform: `scale(${E(f, RISE[3 + i] + 6, RISE[3 + i] + 13, 1.4, 1, IN_Q)})`,
+              background: `linear-gradient(180deg,${mxh(role.c, 0.3)},${dkh(role.c, 0.28)})` }}>
+              <div style={{ position: "absolute", left: 0, top: 12, width: 176, textAlign: "center",
+                ...mono(22, 800), letterSpacing: 1.6, color: "#FBF6EA" }}>{role.n}</div>
+            </div>
+          );
+        })}
+
+        {/* the minute strip: sixty segments, and the whole build costs one */}
+        <div style={{ position: "absolute", left: 856 + dx, top: 236, width: 58, height: 300,
+          zIndex: 46, borderRadius: 6, boxShadow: SH,
+          background: `linear-gradient(180deg,#2A2210,#120C04)` }}>
+          {Array.from({ length: 20 }, (_, i) => (
+            <div key={i} style={{ position: "absolute", left: 8, top: 8 + i * 14.6, width: 42,
+              height: 9, borderRadius: 2,
+              background: i < Math.round(strip * 2.4) ? SODIUM : hexa("#5E4E2A", 0.32) }} />
+          ))}
+        </div>
+        <div style={{ position: "absolute", left: 828 + dx, top: 196, width: 114, textAlign: "center",
+          ...mono(30, 800), letterSpacing: 2, zIndex: 47, color: hexa("#FFD79A", 0.95) }}>1 MIN</div>
+
+        {/* READY */}
+        {ready > 0.02 ? (
+          <div style={{ position: "absolute", left: 386 + dx, top: 258 - ready * 8, width: 252,
+            height: 62, zIndex: 60, borderRadius: 8, opacity: ready, boxShadow: SH_D,
+            transform: `scale(${E(f, 40, 47, 1.5, 1, IN_Q)})`,
+            background: `linear-gradient(180deg,#2E8C64,#12543C)` }}>
+            <div style={{ position: "absolute", left: 0, top: 16, width: 252, textAlign: "center",
+              ...mono(32, 800), letterSpacing: 3, color: "#EAFBF2" }}>READY</div>
+          </div>
+        ) : null}
+        {ready > 0.3 ? <Ring x={512 + dx} y={288} f={f} at={42} c={GREEN} z={61} s={1.6} dur={18} /> : null}
+
         <Contact x={786 + dx} y={GY} w={210} z={41} o={0.32} />
         <Hero f={f} x={840 + dx} y={GY} size={244} z={56} act={2} ph={0.8}
-          costume={{ constr: 1 }} cheer={bell} gaze={-0.6} />
-        <Forearm x0={840 + dx - 244 * 0.34} y0={GY - 244 * 0.50}
-          x1={636 + dx} y1={300} w={24} c={CLAYD} z={58} />
-        <FrontBand f={f} n={4} size={176} seed={3} react={bell} at={-14} x0={-110} x1={640} />
-        <Edge side="r" c="#0A1610" w={88} z={90} top={130} />
+          costume={{ constr: 1 }} cheer={ready} gaze={-0.6}
+          drive={-E(f, 2, SLAM, 0, 0.26, IN_Q) + E(f, SLAM, SLAM + 8, 0, 0.26, OUT)} />
+        <FrontBand f={f} n={4} size={172} seed={3} react={ready} at={-14} x0={-110} x1={640} />
       </Cam>
       <BandChip t="1 MINUTE TO SET UP" c={SODIUM} fg="#2A1C04" />
     </Scene>
   );
 };
 
-/* =========================================================================
-   S3 · THE DELIVERY DOCK — 7.04 to 9.96s (88f) · ESCALATE
-   VO: "People are using it to ship entire apps, websites, and tools from a
-        single prompt,"
-
-   ⛔ THREE DOORS IS NOT THREE CONTAINERS (§3). Each opening shows a DIFFERENT
-   machine finishing a DIFFERENT job: a list landing row by row, a page
-   assembling nav-hero-cards, a spindle cutting a part. The doors are staggered
-   across the FULL duration, not bunched in the first third.
-   ====================================================================== */
 export const S3: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("dock");
@@ -296,6 +499,8 @@ export const S3: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="gantry"
           rake={0.06} rakeX={RAKE_X[v]} rakeRate={2.6 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="tarmac" grit={0.6} lamp={null} window={null} />
+        <Fitout p={p} f={f} seed={2} />
+        <Bustle f={f} seed={2} n={1} z={34} />
         {/* the background process: the overhead gantry actually carries things */}
         <Runner y={150} f={f} z={16} rate={8.7} pitch={196} w={168} h={91}
           c="#B4BAC0" c2="#141A20" kind="load" rail hang={22} o={0.95} />
@@ -389,17 +594,26 @@ export const S4: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="column" overhead="joist"
           rake={0.15} rakeX={RAKE_X[v]} rakeRate={4.6 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} lamp={{ x: 420 + dx, y: 110, r: 240 }} window={null} />
+        <Fitout p={p} f={f} seed={3} />
+        <Bustle f={f} seed={3} n={1} z={34} />
         <Runner y={126} f={f} z={16} rate={6.7} pitch={172} w={153} h={79}
           c="#B08A4A" c2="#1A0A06" kind="load" rail hang={18} o={0.85} />
         {/* the overhead that makes the press read: one shaped cone on the ram,
             never a full-frame fill */}
         <Beam x={420 + dx} y={96} top={150} bot={520} len={460} c="#FFD8A0" o={0.30} z={22} f={f} />
-        <SealPress x={420 + dx} y={GY + 26} f={f} drop={drop} struck={struck} z={40} s={1.06}>
-          {/* the mark arriving IN the brass — a mark, never a sentence */}
-          <div style={{ position: "absolute", left: 118, top: 322, zIndex: 6, opacity: struck }}>
-            <MarkCast x={70} y={22} s={86} z={6} o={struck} f={f} spin={0} pulse={struck} />
+        <SealPress x={420 + dx} y={GY + 26} f={f} drop={drop} struck={struck} z={40} s={1.06} />
+        {/* ⭐ THE MARK IS IMPRESSED INTO THE PLATE AND TRAVELS WITH IT. It lands
+            on the anvil when the press strikes, the press lifts away empty, and
+            when he picks the plate up the mark goes with the plate. */}
+        {struck > 0.02 ? (
+          <div style={{ position: "absolute",
+            left: (420 + dx) + ((745 + dx) - (420 + dx)) * lift - 43,
+            top: (GY - 92) + ((470 - lift * 130 - 4) - (GY - 92)) * lift - 43,
+            zIndex: 63, opacity: struck,
+            transform: `scale(${E(f, 21 + bo, 26 + bo, 1.8, 1, IN_Q)}) rotate(${lift * -8}deg)` }}>
+            <MarkCast x={43} y={43} s={86} z={6} o={struck} f={f} spin={0} pulse={struck} />
           </div>
-        </SealPress>
+        ) : null}
         {struck > 0.4 && <Ring x={420 + dx} y={GY - 66} f={f} at={22} c={SODIUM} z={68} s={1.7} dur={20} />}
         {struck > 0.4 && <Puff x={420 + dx} y={GY - 30} f={f} at={22} c="#E0B080" z={66} n={13} />}
         {/* ⛔ HOLD WAS 54%: the press struck at f22 of 73 and then nothing moved
@@ -468,6 +682,8 @@ export const S5: React.FC<SP> = ({ v, dur }) => {
           rake={0.13 * light} rakeX={RAKE_X[v]} rakeRate={2.4 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="boards" grit={0.6} lamp={null}
           window={{ x: 396, y: 96, w: 220, h: 150 }} />
+        <Fitout p={p} f={f} seed={4} />
+        <Bustle f={f} seed={4} n={1} z={34} />
         {/* the clerestory falling on the bench — the reveal needs a light
             DIRECTION or it is a floor plan */}
         <Beam x={506 + dx} y={216} top={200} bot={620} len={380} c="#FFE0A8"
@@ -551,6 +767,8 @@ export const S6: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="column" overhead="duct"
           rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.0 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.8} lamp={null} window={null} />
+        <Fitout p={p} f={f} seed={5} />
+        <Bustle f={f} seed={5} n={1} z={34} />
         {/* the one flickering strip — the only light in the reel that stutters */}
         <Strip x={506 + dx} y={126} w={330} on={0.55 + (rnd(Math.floor(f / 3), 2) > 0.22 ? 0.45 : 0)}
           c="#C8D6E2" z={30} f={f} />
@@ -647,6 +865,8 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="lampbar"
           rake={0.16} rakeX={RAKE_X[v]} rakeRate={5.2 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="boards" grit={0.6} lamp={{ x: 506 + dx, y: 108, r: 260 }} window={null} />
+        <Fitout p={p} f={f} seed={6} />
+        <Bustle f={f} seed={6} n={1} z={34} />
         {/* the tall doors the team comes through */}
         {[0, 1].map(i => (
           <div key={"d" + i} style={{ position: "absolute",
@@ -684,27 +904,50 @@ export const S7: React.FC<SP> = ({ v, dur }) => {
         </div>
 
         {/* the task crate the hero drops on the floor plate */}
-        <div style={{ position: "absolute", left: 176 + dx, top: 380 + drop * 250, width: 132,
-          height: 108, zIndex: 60, opacity: 1 - E(f, 22, 30, 0, 1, LIN),
-          transform: `rotate(${carry * 8 - drop * 12}deg)` }}>
-          <div style={{ position: "absolute", inset: 0, background: "#8A5E2E",
-            border: "6px solid #4A2E10" }} />
-          <div style={{ position: "absolute", left: 8, top: 22, width: 116, height: 8, background: "#C08A3E" }} />
-          <div style={{ position: "absolute", left: 8, top: 62, width: 116, height: 8, background: "#C08A3E" }} />
+        <div style={{ position: "absolute", left: 150 + dx, top: 330 + drop * 286, width: 196,
+          height: 158, zIndex: 60, opacity: 1 - E(f, 22, 30, 0, 1, LIN), boxShadow: SH_D,
+          transform: `rotate(${carry * 8 - drop * 14}deg)` }}>
+          <div style={{ position: "absolute", inset: 0, borderRadius: 5, background: "#96682E",
+            border: "8px solid #4A2E10" }} />
+          <div style={{ position: "absolute", left: 12, top: 30, width: 172, height: 12, background: "#D29A46" }} />
+          <div style={{ position: "absolute", left: 12, top: 86, width: 172, height: 12, background: "#D29A46" }} />
+          <div style={{ position: "absolute", left: 0, top: 118, width: 196, textAlign: "center",
+            ...mono(26, 800), letterSpacing: 2, color: hexa("#3A2408", 0.8) }}>TASK</div>
         </div>
         {drop > 0.9 && <Ring x={242 + dx} y={GY - 20} f={f} at={19} c="#FFE0A0" z={64} s={1.6} dur={22} />}
         {drop > 0.9 && <Puff x={242 + dx} y={GY - 6} f={f} at={19} c="#E0C48A" z={62} n={15} />}
 
-        {/* THE BACK RANK — 6, smaller, darker clay */}
-        {back.map(i => (
-          <Crew key={"b" + i} f={f} x={140 + i * 152 + dx} y={GY - 62} i={i + 4} size={104}
-            z={36} at={30 + i * 6} loop={(i + 1) % 4} tint="#8A4A2E" />
-        ))}
-        {/* THE FRONT RANK — 5, bigger, full clay, staggered across the FULL shot */}
-        {front.map(i => (
-          <Crew key={"f" + i} f={f} x={186 + i * 158 + dx} y={GY + 42} i={i} size={138}
-            z={50} at={36 + i * 9} loop={i % 4} />
-        ))}
+        {/* ⛔⛔ "SPAWN A TEAM" HAS TO BE A SPAWN. v1 popped eleven crew in at fixed
+            marks across the whole 83 frames — which reads as people standing
+            around, not as a team arriving. They now come OUT OF THE DOORWAY:
+            each starts 44px tall at the far end of the lit corridor and walks
+            toward camera to full size and its own mark. That is the line
+            ("tell it to spawn a team of elite sub-agents") happening on screen,
+            and it is the top row of the motion table besides. */}
+        {back.map(i => {
+          const at = 24 + i * 4;
+          if (f < at) return null;
+          const k = E(f, at, at + 26, 0, 1, OUT);
+          const tx = 140 + i * 152 + dx, ty = GY - 62, ts = 104;
+          return (
+            <Crew key={"b" + i} f={f} x={506 + dx + (tx - 506 - dx) * k}
+              y={392 + (ty - 392) * k} i={i + 4} size={44 + (ts - 44) * k}
+              z={36} at={at} loop={(i + 1) % 4} tint="#8A4A2E" />
+          );
+        })}
+        {front.map(i => {
+          const at = 30 + i * 6;
+          if (f < at) return null;
+          const k = E(f, at, at + 28, 0, 1, OUT);
+          const tx = 186 + i * 158 + dx, ty = GY + 42, ts = 138;
+          return (
+            <React.Fragment key={"f" + i}>
+              <Crew f={f} x={506 + dx + (tx - 506 - dx) * k} y={404 + (ty - 404) * k}
+                i={i} size={44 + (ts - 44) * k} z={50} at={at} loop={i % 4} />
+              {k > 0.92 ? <Puff x={tx} y={ty} f={f} at={at + 26} c="#E0C48A" z={49} n={4} /> : null}
+            </React.Fragment>
+          );
+        })}
         <Contact x={840 + dx} y={GY} w={192} z={41} o={0.30} />
         <Hero f={f} x={886 + dx} y={GY - 4} size={224} z={57} act={2} ph={0.9}
           costume={{ constr: 1 }} drive={-carry * 0.20} cheer={E(f, 52, 62, 0, 1, OUT)} />
@@ -741,6 +984,8 @@ export const S8: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="rack" overhead="tray"
           rake={0.16} rakeX={RAKE_X[v]} rakeRate={5.8 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="slab" grit={0.7} lamp={{ x: 780 + dx, y: 130, r: 210 }} window={null} />
+        <Fitout p={p} f={f} seed={7} />
+        <Bustle f={f} seed={7} n={1} z={34} />
         <Runner y={106} f={f} z={16} rate={10.2} pitch={176} w={156} h={85}
           c="#2E6A76" c2="#04161A" kind="cell" rail o={0.9} />
         <PromptRack x={430 + dx} y={GY} w={430} z={46} seat={seat} bow={bow} lit={lit} />
@@ -832,6 +1077,8 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="column" overhead="joist"
           rake={0.15} rakeX={RAKE_X[v]} rakeRate={4.8 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} lamp={null} window={null} />
+        <Fitout p={p} f={f} seed={8} />
+        <Bustle f={f} seed={8} n={1} z={34} />
         <Runner y={104} f={f} z={16} rate={6.4} pitch={188} w={163} h={79}
           c="#8A72B8" c2="#140E22" kind="crate" rail hang={16} o={0.8} />
         {R.roles.map((role, i) => {
@@ -868,7 +1115,7 @@ export const S9: React.FC<SP> = ({ v, dur }) => {
                 cheer={i === 1 ? E(f, AT[i] + 10, AT[i] + 18, 0, 0.7, OUT) : 0} />
               {/* the equipment — what makes each a different SILHOUETTE */}
               {i === 0 && on > 0.4 && (<>
-                <Wig x={ax} y={GY - step - size * 0.86} s={size / 236} z={61} />
+                <Wig x={ax} y={GY - step - size * 0.62} s={(size / 236) * 0.92} z={52} />
                 <div style={{ position: "absolute", left: ax + 62, top: GY - step - 190, zIndex: 62,
                   opacity: on }}><Gavel x={0} y={0} k={0.4 + Math.sin(f / 9) * 0.16} z={62} s={0.72} /></div>
               </>)}
@@ -953,39 +1200,55 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={2} kind="shelf" overhead="tray"
           rake={0.13} rakeX={RAKE_X[v]} rakeRate={4.4 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="slab" grit={0.7} lamp={null} window={null} />
+        <Fitout p={p} f={f} seed={9} />
+        <Bustle f={f} seed={9} n={1} z={34} />
         {/* the archive the exhibit came out of, behind the light box */}
         <ExhibitWall x={506 + dx} y={706} w={1040} h={300} z={13} f={f} cols={10} rows={3}
           c="#4A5560" lit={0.3} flagged={Math.min(9, n)} />
         <EvidenceBoard x={430 + dx} y={606} w={700} h={452} z={20} glow={glow} f={f} />
         <Brief x={430 + dx} y={596} w={286} s={0.22} z={40} f={f}
           holes={n} flags={Math.max(0, n - 1)} lit={glow * 0.92}
-          rot={-1 + strike * 1.6 + PJ[v] * 1.4} seed={PJ[v]} />
+          rot={-1 + strike * 1.6 + PJ[v] * 1.4 + n * 0.42} seed={PJ[v]} />
         {/* ⭐ THE FLAG IN FLIGHT. v1 seated each flag the frame it existed, so
             fourteen strikes produced no TRAVEL at all — the scene measured 6.89
             with the busiest picture in the reel. The newest flag now crosses
             ~300px from the prosecutor's hand in four frames, which is the only
             part of this beat the audit can actually see. */}
-        {n > 0 && (() => {
-          const i = n - 1, at = AT[i];
-          const k = E(f, at, at + 4, 0, 1, IN_Q);
+        {/* ⛔⛔ ONE FLAG, FOUR FRAMES. Fourteen strikes across 68 frames with a
+            single 4-frame flight meant ~56 of those frames had NOTHING crossing
+            the panel — which is why the busiest picture in the reel measured 83%
+            HOLD. ⭐ The last FIVE are in flight at once on 11-frame arcs, so
+            there are always two or three crossing, they spin as they fly, and
+            the case visibly builds rather than appearing. */}
+        {Array.from({ length: 5 }, (_, q) => {
+          const i = n - 1 - q;
+          if (i < 0) return null;
+          const at = AT[i];
+          const k = E(f, at, at + 11, 0, 1, IN_Q);
           if (k >= 1) return null;
           const sd = PJ[v];
           const tx = 430 + dx - 143 + ((26 + ((i + sd) % 4) * 44 + rnd(i + sd * 5, 3) * 16) / 200) * 286;
           const ty = 596 - 372 + ((34 + Math.floor(i / 4) * 54 + rnd(i + sd * 5, 7) * 20) / 260) * 372;
           const x0 = 258 + dx, y0 = GY - 250;
           return (
-            <div style={{ position: "absolute", left: x0 + (tx - x0) * k - 3,
-              top: y0 + (ty - y0) * k - 40 - Math.sin(k * Math.PI) * 70,
-              width: 62, height: 62, zIndex: 66,
-              transform: `rotate(${-40 + k * 40}deg)` }}>
-              <svg viewBox="0 0 62 62" width={62} height={62} style={{ overflow: "visible" }}>
+            <div key={"ff" + i} style={{ position: "absolute", left: x0 + (tx - x0) * k - 3,
+              top: y0 + (ty - y0) * k - 40 - Math.sin(k * Math.PI) * 110,
+              width: 72, height: 72, zIndex: 66,
+              transform: `rotate(${-40 + k * 40 + (1 - k) * 300 * (i % 2 ? 1 : -1)}deg)` }}>
+              <svg viewBox="0 0 62 62" width={72} height={72} style={{ overflow: "visible" }}>
                 <rect x={5} y={2} width={5} height={56} fill="#2C2A26" />
                 <path d="M 10 5 L 50 16 L 10 30 Z" fill={RED} />
                 <path d="M 10 5 L 50 16 L 10 18 Z" fill="#E06A56" />
               </svg>
             </div>
           );
-        })()}
+        })}
+        {/* ⭐ AND THE WORK SAGS UNDER THE CASE. Fourteen flags going in and the
+            brief hanging perfectly level is the tell that nothing is landing. */}
+        {n > 0 ? (
+          <Fall x={430 + dx} y={596} w={300} f={f} at={AT[Math.max(0, n - 1)]} n={5} z={64}
+            c="#8A94A0" rate={1.4} />
+        ) : null}
         {/* the case being BUILT — the pulled flags stack up the right edge.
             ⭐ The stack's lean is permuted per cut too, so the tallest column is
             in a different place at every sampled instant. */}
@@ -1011,7 +1274,6 @@ export const S10: React.FC<SP> = ({ v, dur }) => {
         {n > 0 && <Puff x={430 + dx} y={520} f={f} at={last} c="#D8E4F0" z={62} n={7} s={0.8} />}
         <Edge side="r" c="#0A0F14" w={92} z={90} top={124} />
       </Cam>
-      <BandChip t="IT PROSECUTES YOUR OWN WORK" c="#0A0F14" fg="#DCE8F2" />
     </Scene>
   );
 };
@@ -1033,10 +1295,22 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("floor");
   const OUT_AT = [2, 11, 20], BACK_AT = [8, 17];
-  const rule = E(f, 31, 37, 0.55, 1, IN_Q);
-  const struck = f >= 36 ? 1 : 0;
-  const jolt = f > 36 ? Math.sin((f - 36) * 1.3) * Math.exp(-(f - 36) / 6.5) * 14 : 0;
-  const lampOn = E(f, 38, 46, 0, 1, OUT);
+  /* ⛔ v1 moved the gavel from 0.55 to 1.0 over six frames and called it a
+     strike — no windup, so it read as a wobble. A strike is a RAISE you can see
+     coming, a fall, and a bounce ([[feedback_make_an_action_read]]). */
+  const HITS = [22, 48];
+  let rule = 0.50;
+  for (const h of HITS) {
+    if (f < h - 16) break;
+    rule = f < h - 4 ? E(f, h - 16, h - 4, 0.50, 0.04, OUT)
+         : f < h ? E(f, h - 4, h, 0.04, 1, IN_Q)
+         : 1 + Math.sin((f - h) * 1.6) * 0.12 * Math.exp(-(f - h) / 5);
+  }
+  rule = Math.max(0, Math.min(1.12, rule));
+  const lastH = HITS.filter(h => f >= h).slice(-1)[0];
+  const struck = f >= HITS[0] ? 1 : 0;
+  const jolt = lastH ? Math.sin((f - lastH) * 1.3) * Math.exp(-(f - lastH) / 6.5) * 16 : 0;
+  const lampOn = E(f, 24, 32, 0, 1, OUT);
   const dx = LAY[v].b * 0.35;
   return (
     <Scene p={p} slug="" push={[0, dur, 1.105]} vig={0.52}
@@ -1045,6 +1319,8 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="column" overhead="joist"
           rake={0.09 * (1 - struck * 0.6)} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="boards" grit={0.7} lamp={null} window={null} />
+        <Fitout p={p} f={f} seed={10} />
+        <Bustle f={f} seed={10} n={1} z={34} />
         {/* the gallery, behind, in silhouette — the room has a reason to exist */}
         {Array.from({ length: 7 }, (_, i) => (
           <Crew key={"g" + i} f={f} x={92 + i * 138} y={GY - 118} i={i + 2} size={96}
@@ -1083,12 +1359,30 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
           <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 14,
             background: "#B4854A" }} />
         </div>
-        <Contact x={452 + dx} y={392} w={166} z={39} o={0.30} />
-        <Hero f={f} x={512 + dx} y={392} size={196} z={44} act={3} ph={1.4}
-          costume={R.roles[0].costume as any} stern={1} drive={rule * 0.12} />
-        <Wig x={512 + dx} y={392 - 196 * 0.86} s={0.86} z={46} />
-        <Gavel x={588 + dx} y={352} k={rule} z={70} s={1.5} />
-        {struck === 1 && <Ring x={640 + dx} y={392} f={f} at={36} c="#FFF2D0" z={74} s={1.5} dur={16} />}
+        <Contact x={452 + dx} y={402} w={280} z={39} o={0.34} />
+        <Hero f={f} x={512 + dx} y={402} size={330} z={44} act={3} ph={1.4}
+          costume={R.roles[0].costume as any} stern={1} drive={rule * 0.14} />
+        <Wig x={512 + dx} y={402 - 330 * 0.62} s={(330 / 236) * 0.92} z={42} />
+        <Gavel x={636 + dx} y={330} k={rule} z={70} s={2.2} />
+        {HITS.filter(h => f >= h && f < h + 20).map(h => (
+          <React.Fragment key={"hk" + h}>
+            <Ring x={690 + dx} y={372} f={f} at={h} c="#FFF2D0" z={74} s={1.6} dur={16} />
+            <Ring x={690 + dx} y={372} f={f} at={h + 3} c="#FFF2D0" z={74} s={1.2} dur={14} />
+            <Puff x={676 + dx} y={362} f={f} at={h} c="#EFE2C2" z={75} n={9} />
+            <Fall x={600 + dx} y={378} w={460} f={f} at={h} n={13} z={73} c="#C8B896" rate={1.8} />
+          </React.Fragment>
+        ))}
+        {/* ⭐ AND THE EVIDENCE ON THE BENCH LEAVES THE TABLE. A strike that moves
+            nothing but itself is a gesture; one that throws the papers is a RULING. */}
+        {lastH ? [0, 1, 2, 3].map(i => {
+          const kk = Math.min(1, (f - lastH) / 18);
+          const sd = i % 2 ? 1 : -1;
+          return (
+            <Folder key={"jp" + i} x={470 + dx + i * 44 + sd * 190 * kk}
+              y={372 - 120 * Math.sin(kk * Math.PI) + kk * kk * 210}
+              rot={-14 + sd * 220 * kk} c={i % 2 ? RED : TEAL} s={0.9} z={73} />
+          );
+        }) : null}
         {/* ONE ruling lamp above the bench, and nothing else lit */}
         {lampOn > 0.01 && (<>
           <div style={{ position: "absolute", left: 470 + dx, top: 176, width: 84, height: 26,
@@ -1106,7 +1400,6 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
           costume={R.roles[1].costume as any} stern={0.7} shock={struck ? lampOn : 0} />
         <Edge side="l" c="#0A0704" w={90} z={90} top={126} />
       </Cam>
-      <BandChip t="IT RULES ON EVIDENCE" c="#0A0704" fg="#FFCE7A" />
     </Scene>
   );
 };
@@ -1131,290 +1424,426 @@ export const S11: React.FC<SP> = ({ v, dur }) => {
 export const S12: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("pit");
-  /* three passes, each SHORTER than the one before, so the loop visibly
-     accelerates and the third arrival lands on the word "bulletproof" */
-  const PASS: Array<[number, number]> = [[2, 24], [24, 42], [42, 55]];
-  const ARC = [1, 1, 0.5];              /* pass III is a HALF turn, so it ENDS at
-                                           the bottom — on the anvil */
-  const BASE = [0, 1, 2];
-  let pi = 0;
-  for (let i = 0; i < PASS.length; i++) if (f >= PASS[i][0]) pi = i;
-  const [pa, pb] = PASS[pi];
-  const carriage = (g: number) => E(g, pa, pb, 0, 1, IO);
-  const k = carriage(f);
-  /* ⛔ OVERLAPPING ACTION, NEVER QUANTISED STEPS (§13). The carriage runs one
-     continuous ease; the hanging load LAGS in proportion to the carriage's own
-     velocity (central difference) and rings out as a damped pendulum after it
-     stops. That is what pays for the smoothing — the load keeps moving through
-     exactly the frames a stepped version would sit still in. */
-  const vel = (carriage(f + 1) - carriage(f - 1)) * 0.5;
-  const ring = f > pb ? Math.sin((f - pb) * 0.62) * Math.exp(-(f - pb) / 6.5) * 26 : 0;
-  const lag = -vel * 620 + ring;
-  const th = (BASE[pi] + k * ARC[pi]) * Math.PI * 2 - Math.PI / 2;
-  const CX = 470, CY = 244, RR = 326, RY = 150;
-  const bx = CX + Math.cos(th) * RR + lag;
-  const by = CY + Math.sin(th) * RY + 186;
-  /* the hero artifact's STATE is the story: gold+hollow -> seal cracked ->
-     banded -> a solid chamfered plate */
-  const state = [0, 0.52, 0.80, 1][Math.min(3, pi + (k > 0.88 ? 1 : 0))];
-  const crack = pi === 0 ? E(f, 13, 22, 0, 1, OUT) : 0;
-  /* the hammer: the tie rods lead, the mass follows, and it retracts after */
-  const ram = E(f, 49, 53, 0, 1, IN_Q) - E(f, 58, 63, 0, 1, IO);
-  const hit = f >= 52 ? 1 : 0;
-  const recoil = f > 52 ? Math.sin((f - 52) * 1.5) * Math.exp(-(f - 52) / 5) * 15 : 0;
+  /* ⛔⛔ SCRAPPED. v1-v3 were a carriage on an orbit — a diagram of a loop, and
+     the word the line actually lands on is **BULLETPROOF**, which the orbit never
+     touched. ⭐ THIS IS A PROVING RANGE. The same plate is fired on three times
+     and you watch what it survives:
+        PASS I   it SHATTERS — the whole thing bursts and the pieces fly.
+        PASS II  it DENTS — it holds, buckled, and he has to straighten it.
+        PASS III it RINGS — unmarked, sparks off it, and the ring is the payoff.
+     Loop, rebuild, bulletproof, in that order, with escalating stakes and a
+     result you can read without the caption. */
+  const FIRE = [14, 34, 56];
+  const REBUILD = [22, 44];
+  const nf = FIRE.filter(x => f >= x).length;
+  const pass = Math.min(2, nf === 0 ? 0 : nf - 1 + (f >= FIRE[Math.min(2, nf - 1)] + 14 ? 1 : 0));
+  const stage = Math.min(2, nf === 0 ? 0 : (f >= (REBUILD[nf - 1] ?? 999) ? nf : nf - 1));
+  const lastF = FIRE.filter(x => f >= x).slice(-1)[0];
+  const hitK = lastF !== undefined ? Math.min(1, (f - lastF) / 16) : 0;
+  const recoil = lastF !== undefined
+    ? Math.sin((f - lastF) * 1.5) * Math.exp(-(f - lastF) / 5) * 17 : 0;
+  /* the ram: winds back, fires, recovers — three times, faster each time */
+  const ramK = FIRE.reduce((acc, x, i) => {
+    if (f < x - 11) return acc;
+    return f < x ? E(f, x - 11, x, 0, 1, IN_Q) : 1 - E(f, x, x + 9 - i * 2, 0, 1, OUT);
+  }, 0);
+  const PX = 470, PY = 470;
   const dx = LAY[v].c * 0.3;
   return (
     <Scene p={p} slug="" push={[0, dur, 1.120]} vig={0.42} glow={hexa(p.key, 0.24)}>
       <Cam s={1.02} x={dx * 0.3} y={recoil * 0.4} z={1}>
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="column" overhead="gantry"
-          rake={0.11} rakeX={RAKE_X[v]} rakeRate={4.6 * RAKE_K[v]} rakeN={RAKE_N[v]}
-          floorKind="slab" grit={0.9} lamp={null} window={null} />
+          rake={0.12} rakeX={RAKE_X[v]} rakeRate={4.0 * RAKE_K[v]} rakeN={RAKE_N[v]}
+          floorKind="slab" grit={0.9} lamp={{ x: 470 + dx, y: 150, r: 250 }} window={null} />
+        <Fitout p={p} f={f} seed={11} />
+        <Bustle f={f} seed={11} n={1} z={34} />
 
-        {/* ⭐⭐ THE FURNACE TRENCH. This set is the darkest in the reel and it can
-            be, because everything that matters is a SILHOUETTE against a hot
-            floor: the anvil, the hammer and the hero are all read as dark shapes
-            on a bright field, which is the biggest value gap after the hook and
-            the one thing "I can't tell what that is" is usually missing. */}
-        <div style={{ position: "absolute", left: 20 + dx, top: 596, width: 972, height: 196,
-          zIndex: 12, background: `linear-gradient(0deg, #FFE0A0 0%, #FF8A32 40%, ${hexa("#FF8A32", 0)} 100%)` }} />
-        <div style={{ position: "absolute", left: 20 + dx, top: 686, width: 972, height: 106,
-          zIndex: 13, background: `linear-gradient(0deg, #FFF2D0 0%, #FFA346 100%)` }} />
-        {/* the trench mouth itself — a hard bright edge, so the anvil and the
-            hammer read as SILHOUETTES rather than as dark shapes on a dark wall */}
-        <div style={{ position: "absolute", left: 20 + dx, top: 682, width: 972, height: 16,
-          zIndex: 14, background: "#FFF6DE" }} />
-        {Array.from({ length: 9 }, (_, i) => (
-          <div key={"em" + i} style={{ position: "absolute",
-            left: 70 + i * 108 + Math.sin(f / 9 + i) * 22 + dx,
-            top: 690 - ((f * 2.4 + i * 40) % 210), width: 13, height: 13, borderRadius: 7,
-            zIndex: 15, background: hexa("#FFD08A", 0.30 + (i % 3) * 0.2) }} />
+        {/* THE THREE PASS LAMPS — the loop, as a counter you can read */}
+        {[0, 1, 2].map(i => (
+          <div key={"pl" + i} style={{ position: "absolute", left: 214 + dx + i * 176, top: 196,
+            width: 148, height: 52, zIndex: 26, borderRadius: 7, boxShadow: SH,
+            background: i <= stage
+              ? `linear-gradient(180deg,${mxh(GOLD, 0.4)},${dkh(GOLD, 0.24)})`
+              : `linear-gradient(180deg,#3A3126,#1A140C)` }}>
+            <div style={{ position: "absolute", left: 0, top: 13, width: 148, textAlign: "center",
+              ...mono(26, 800), letterSpacing: 3,
+              color: i <= stage ? "#2E2006" : hexa("#8A7A5E", 0.45) }}>
+              {["PASS I", "PASS II", "PASS III"][i]}
+            </div>
+          </div>
         ))}
-        <Motes x={506 + dx} y={300} w={620} h={380} n={14} f={f} z={34} c="#FFB870" />
 
-        {/* THE LOOP, RUNNING FOR REAL — planted at S5 and paid off here */}
-        <LoopRail cx={CX + dx} cy={CY} r={RR} k={(BASE[pi] + k * ARC[pi]) % 1} z={22}
-          c="#6E5A44" pass={R.passes[Math.min(2, pi)]} />
-
-        {/* THE HERO ARTIFACT, hanging from the carriage, changing every pass */}
-        <Brief x={bx + dx} y={by} w={210} s={state} z={60} f={f} crack={crack}
-          rot={lag * 0.045} />
-        <div style={{ position: "absolute", left: bx + dx - 5, top: by - 272, width: 10,
-          height: 86, zIndex: 58, background: "#39434D" }} />
-
-        {/* the anvil block, dark against the hot floor */}
-        <div style={{ position: "absolute", left: 346 + dx, top: 618 + recoil * 0.5, width: 252,
-          height: 92, zIndex: 52, background: `linear-gradient(180deg, #3A3026 0%, #0E0C08 100%)` }}>
-          <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 12,
-            background: "#6E6050" }} />
-          <div style={{ position: "absolute", left: -18, top: 62, width: 288, height: 30,
-            background: "#100E0A" }} />
+        {/* THE ANVIL */}
+        <div style={{ position: "absolute", left: 300 + dx, top: 588 + recoil * 0.5, width: 340,
+          height: 112, zIndex: 44, boxShadow: SH_D,
+          background: `linear-gradient(180deg,#4A3E30 0%,#120E08 100%)` }}>
+          <div style={{ position: "absolute", left: 0, top: 0, width: 340, height: 14,
+            background: "#7E6E58" }} />
         </div>
-        <ProvingRam x={472 + dx} y={GY} k={ram} z={66} drop={196} w={360} h={472} />
-        {hit === 1 && <Ring x={472 + dx} y={614} f={f} at={52} c="#FFD8A0" z={74} s={2.0} dur={20} />}
-        {hit === 1 && <Fall x={472 + dx} y={584} w={330} f={f} at={52} n={18} z={72} c="#FF9A4A" />}
-        {hit === 1 && <Puff x={472 + dx} y={632} f={f} at={52} c="#E0B080" z={73} n={15} />}
 
-        <FrontBand f={f} n={6} size={170} seed={13} react={hit} at={-10} />
-        <Contact x={742 + dx} y={GY} w={214} z={41} o={0.32} />
-        <Hero f={f} x={796 + dx} y={GY} size={244} z={56} act={2} ph={0.6}
-          costume={{ constr: 1 }} cheer={E(f, 53, 61, 0, 1, OUT)} shock={hit ? 0.55 : 0} />
+        {/* ⭐ THE PLATE. Its THICKNESS is the rebuild and its FATE is the point. */}
+        {(() => {
+          const th = [26, 46, 72][stage];
+          const w = 300;
+          const burst = stage === 0 && lastF === FIRE[0] ? hitK : 0;
+          const dent = stage === 1 && lastF === FIRE[1] ? hitK : 0;
+          if (burst > 0.02) {
+            return (<>
+              {Array.from({ length: 9 }, (_, i) => {
+                const sd = i % 2 ? 1 : -1;
+                const g = burst * burst;
+                return (
+                  <div key={"sh" + i} style={{ position: "absolute",
+                    left: PX + dx - 150 + i * 34 + sd * (110 + i * 26) * g,
+                    top: PY + 96 - 190 * Math.sin(burst * Math.PI) + g * 300,
+                    width: 40, height: 26, zIndex: 52, borderRadius: 3,
+                    transform: `rotate(${sd * 300 * g + i * 30}deg)`, boxShadow: SH,
+                    background: `linear-gradient(160deg,${mxh(GOLD, 0.3)},${dkh(GOLD, 0.34)})` }} />
+                );
+              })}
+            </>);
+          }
+          return (
+            <div style={{ position: "absolute", left: PX + dx - w / 2,
+              top: PY + 96 - th + recoil * 0.3, width: w, height: th, zIndex: 52,
+              borderRadius: 4, boxShadow: SH_D,
+              transform: `scaleY(${1 - dent * 0.22}) rotate(${dent * 3}deg)`,
+              transformOrigin: "50% 100%",
+              background: stage === 2
+                ? `linear-gradient(170deg,#B9C4CE 0%,#71808E 46%,#39434D 100%)`
+                : `linear-gradient(170deg,${mxh(GOLD, 0.36)},${dkh(GOLD, 0.28)})` }}>
+              {stage === 2 ? [0, 1, 2, 3].map(i => (
+                <div key={i} style={{ position: "absolute", left: 18 + i * 72, top: 12,
+                  width: 46, height: 8, borderRadius: 4, background: hexa("#EAF2FA", 0.4) }} />
+              )) : null}
+              {dent > 0.3 ? (
+                <div style={{ position: "absolute", left: w * 0.36, top: 0, width: w * 0.28,
+                  height: th * 0.4, borderRadius: "0 0 40% 40%",
+                  background: hexa("#3A2A0C", 0.45) }} />
+              ) : null}
+            </div>
+          );
+        })()}
+
+        {/* the rebuild between passes: courses laid back on, thicker */}
+        {REBUILD.map((at, i) => (
+          f >= at && f < at + 12 ? (
+            <React.Fragment key={"rb" + i}>
+              <Puff x={PX + dx} y={PY + 70} f={f} at={at} c="#E4C48A" z={54} n={9} />
+              <Fall x={PX + dx} y={PY + 60} w={330} f={f} at={at} n={9} z={53}
+                c="#C8A46E" rate={1.4} />
+            </React.Fragment>
+          ) : null
+        ))}
+
+        {/* THE RAM overhead, and it fires three times */}
+        <ProvingRam x={PX + dx} y={GY} k={ramK} z={66} drop={220} w={360} h={472} />
+
+        {/* every shot: rings, sparks, grit — and pass III adds a bright RING OUT */}
+        {FIRE.filter(x => f >= x && f < x + 22).map((x, i) => (
+          <React.Fragment key={"fx" + x}>
+            <Ring x={PX + dx} y={PY + 80} f={f} at={x} c="#FFD8A0" z={74} s={2.0} dur={20} />
+            <Ring x={PX + dx} y={PY + 80} f={f} at={x + 4} c="#FFD8A0" z={74} s={1.5} dur={16} />
+            <Puff x={PX + dx} y={PY + 70} f={f} at={x} c="#E0B080" z={73} n={16} />
+            <Fall x={PX + dx} y={PY + 60} w={420} f={f} at={x} n={18} z={72} c="#FF9A4A" rate={1.9} />
+          </React.Fragment>
+        ))}
+        {stage === 2 && lastF === FIRE[2] ? (<>
+          <Ring x={PX + dx} y={PY + 60} f={f} at={FIRE[2] + 2} c="#EAF6FF" z={76} s={2.6} dur={26} />
+          <Ring x={PX + dx} y={PY + 60} f={f} at={FIRE[2] + 7} c="#EAF6FF" z={76} s={2.2} dur={22} />
+          {Array.from({ length: 12 }, (_, i) => {
+            const g = Math.min(1, (f - FIRE[2]) / 20);
+            const an = (i / 12) * Math.PI * 2;
+            return (
+              <div key={"sp" + i} style={{ position: "absolute",
+                left: PX + dx + Math.cos(an) * 200 * g - 5,
+                top: PY + 60 + Math.sin(an) * 120 * g - 5, width: 10, height: 10,
+                borderRadius: "50%", zIndex: 77, opacity: 1 - g,
+                background: "#FFF0C4" }} />
+            );
+          })}
+        </>) : null}
+
+        <FrontBand f={f} n={5} size={166} seed={13} react={hitK > 0.1 ? 1 : 0} at={-10} />
+        <Contact x={790 + dx} y={GY} w={220} z={41} o={0.32} />
+        <Hero f={f} x={844 + dx} y={GY} size={252} z={56} act={2} ph={0.6}
+          costume={{ constr: 1 }} shock={stage < 2 && hitK < 0.5 ? 0.7 : 0}
+          cheer={stage === 2 ? E(f, FIRE[2] + 4, FIRE[2] + 14, 0, 1, OUT) : 0} />
         <Edge side="l" c="#060302" w={86} z={90} top={118} />
       </Cam>
-      <BandChip t="IT LOOPS UNTIL IT HOLDS" c="#060302" fg="#FFC06A" />
+      <BandChip t="UNTIL IT HOLDS" c="#0A0704" fg="#FFCE7A" />
     </Scene>
   );
 };
 
-/* =========================================================================
-   S13 · THE FURNACE — 28.54 to 31.74s (96f) · FALL
-   VO: "This burns through tokens fast, so you should only build your basic
-        prototype first and"
-
-   ⛔ NO QUANTITY IS SPOKEN, SO NO NUMERAL IS DRAWN. The column has hoops and a
-   level and nothing else — an invented token count is the most believable kind
-   of wrong. See `COST_BANNED`.
-   ⭐ AND THE ADVICE IS THE CONTRAST: he shutters the throat, the rate halves,
-   and he sets a ROUGH prototype down beside it — bare frame, visible fixings,
-   no seal, no gold. Unfinished-but-real, never scruffy: raw timber and bright
-   bare metal against the black, because grey + rectangular is what reads as
-   boring and this beat is the advice.
-   ====================================================================== */
 export const S13: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("furnace");
-  const feed = E(f, 0, 56, 0, 1, LIN);
-  const shut = E(f, 56, 64, 0, 1, IN_Q);
-  const level = 0.92 - feed * 0.58 - (1 - shut) * 0 + shut * 0.02;
-  const set = E(f, 70, 84, 0, 1, OUT);
-  const rate = 8.4 * (1 - shut * 0.55);
-  const dx = LAY[v].c;   /* dHash 10 house/amber at f932 — full offset */
+  /* ⛔⛔ SCRAPPED. v1 fed CRATES down a belt into a throat — generic cargo, when
+     the line says "this burns through TOKENS fast". ⭐ Now the cost is literal
+     and it is the highest-motion shape available: a hopper pouring a TORRENT OF
+     GOLD TOKENS into the fire, forty of them in the air at once, each one
+     flaring out as it hits. The gauge beside it empties while you watch.
+     Then he SLAMS the gate — the stream stops dead, the survivors pile up — and
+     sets a small rough PROTOTYPE on the bench. Burn, stop, build small. */
+  const SHUT = 54;
+  const shut = E(f, SHUT, SHUT + 6, 0, 1, IN_Q);
+  const burn = f < SHUT ? 1 : 1 - shut;
+  const level = Math.max(0.08, 0.94 - E(f, 0, SHUT, 0, 0.72, LIN));
+  const set = E(f, 66, 80, 0, 1, OUT);
+  const dx = LAY[v].c;
+  const HX = 250, MOUTH_X = 596, MOUTH_Y = 520;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.105]} vig={0.48} glow={hexa(p.key, 0.24 * (1 - shut * 0.4))}>
+    <Scene p={p} slug="" push={[0, dur, 1.105]} vig={0.48} glow={hexa(p.key, 0.26 * (0.5 + burn * 0.5))}>
       <Cam x={dx * 0.3} z={1}>
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="plant" overhead="duct"
           rake={0.17} rakeX={RAKE_X[v]} rakeRate={5.6 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="slab" grit={0.9} lamp={{ x: 660 + dx, y: 470, r: 200 }} window={null} />
-        {/* ⛔ THE READOUT WAS INVISIBLE. v1 ran a 156px column of dark brown at
-            the frame edge inside an orange room — one stop of separation, at the
-            crop bound. It is now 214px wide, further in, and the fuel itself is
-            the brightest thing in the set, so the LEVEL is the readout. */}
-        {/* ⛔ AND IT HAS TO BE IN FRONT OF THE BELT. At z40 the feed crates ran
-            across y470..594 and the fuel line sat at y512 — the one boundary the
-            whole shot exists to show was behind the furniture. */}
-        {/* ⛔ A 214px BONE STANDPIPE IN AN ORANGE ROOM READS AS A SLAB. Narrower,
-            darker cased, and the FUEL is the only bright thing in it, so the
-            level line is the readout rather than the tube. */}
-        <FuelColumn x={206 + dx} y={GY} h={500} w={144} level={Math.max(0.10, level)}
-          z={52} f={f} />
-        {/* ⭐ THE BACKGROUND PROCESS IS THE COST: a belt feeding the throat, and
-            it visibly SLOWS when he shutters it. The rate is the readout. */}
-        <Runner y={470} f={f} z={44} rate={rate * 1.25} pitch={182} w={172} h={124}
-          c="#F0BC5E" c2="#100502" kind="crate" rail o={0.98} />
-        {/* the throat, and the shutter that comes across it */}
-        <div style={{ position: "absolute", left: 596 + dx, top: 470, width: 190, height: 120,
-          zIndex: 46, background: "#1A0E06", border: "9px solid #4A2A12" }}>
-          <div style={{ position: "absolute", inset: 8,
-            background: `linear-gradient(0deg, #FFD07A 0%, #E0500E 100%)`,
-            opacity: 1 - shut * 0.82 }} />
+        <Fitout p={p} f={f} seed={12} />
+        <Bustle f={f} seed={12} n={1} z={34} />
+
+        {/* THE HOPPER, and it is visibly emptying */}
+        <div style={{ position: "absolute", left: HX + dx - 130, top: 168, width: 260, height: 190,
+          zIndex: 42, boxShadow: SH_D,
+          background: `linear-gradient(180deg,#5A4A2E 0%,#2A2012 100%)`,
+          clipPath: "polygon(0 0, 100% 0, 74% 100%, 26% 100%)" }}>
+          <div style={{ position: "absolute", left: 0, bottom: 0, width: 260,
+            height: `${level * 100}%`, clipPath: "polygon(0 0, 100% 0, 74% 100%, 26% 100%)",
+            background: `linear-gradient(180deg,${mxh(GOLD, 0.5)},${dkh(GOLD, 0.1)})` }} />
         </div>
-        <div style={{ position: "absolute", left: 596 + dx, top: 470, width: 190,
-          height: 120 * shut, zIndex: 47, background: "#39302A" }}>
+        <div style={{ position: "absolute", left: HX + dx - 34, top: 352, width: 68, height: 44,
+          zIndex: 43, background: `linear-gradient(180deg,#6E5A34,#2A2012)` }} />
+
+        {/* ⭐ THE TOKENS. Forty in the air, falling from the hopper into the
+            mouth on a parabola, each flaring out where it lands. */}
+        {Array.from({ length: 40 }, (_, i) => {
+          const P = 44, t = (((f * 1.6 + i * 3.1) / P) % 1 + 1) % 1;
+          if (f >= SHUT && t < 0.5) return null;
+          const jx = (rnd(i, 3) - 0.5) * 46;
+          const x = HX + dx + jx + (MOUTH_X - HX) * t;
+          const y = 386 + (MOUTH_Y - 386) * t * t + Math.sin(t * Math.PI) * -40;
+          const fade = t > 0.86 ? 1 - (t - 0.86) / 0.14 : 1;
+          return (
+            <div key={"tk" + i} style={{ position: "absolute", left: x - 15, top: y - 15,
+              width: 30, height: 30, borderRadius: "50%", zIndex: 50, opacity: fade * burn,
+              transform: `scaleX(${0.5 + Math.abs(Math.sin(f / 3 + i)) * 0.5})`, boxShadow: SH,
+              background: `radial-gradient(circle at 36% 30%, #FBE7A8, #A87A22)` }} />
+          );
+        })}
+
+        {/* THE MOUTH — everything that reaches it goes */}
+        <div style={{ position: "absolute", left: MOUTH_X + dx - 108, top: MOUTH_Y - 62,
+          width: 216, height: 148, zIndex: 46, boxShadow: SH_D,
+          background: "#180C04", border: "10px solid #4A2A12" }}>
+          <div style={{ position: "absolute", inset: 8, opacity: 0.25 + burn * 0.75,
+            background: `linear-gradient(0deg,#FFD07A 0%,#E0500E 100%)` }} />
+        </div>
+        <div style={{ position: "absolute", left: MOUTH_X + dx - 108, top: MOUTH_Y - 62,
+          width: 216, height: 148 * shut, zIndex: 47,
+          background: `linear-gradient(180deg,#4A423A,#241E18)` }}>
           {Array.from({ length: 5 }, (_, i) => (
-            <div key={i} style={{ position: "absolute", left: 0, top: i * 24, width: "100%",
-              height: 24, borderBottom: "3px solid #221C18" }} />
+            <div key={i} style={{ position: "absolute", left: 0, top: i * 30, width: "100%",
+              height: 30, borderBottom: "3px solid #14100C" }} />
           ))}
         </div>
-        <Fall x={690 + dx} y={430} w={200} f={f} at={2} n={12} z={48} c="#FFB25A" rate={1.6} />
-        {/* ⛔ HOLD WAS 56%. The throat shutting is the POINT of the second half,
-            so the second half cannot go still: embers keep climbing the whole
-            shot and the belt keeps running under the shutter at half rate. */}
+        {burn > 0.2 ? (<>
+          <Fall x={MOUTH_X + dx} y={MOUTH_Y - 80} w={240} f={f} at={0} n={14} z={48}
+            c="#FFB25A" rate={1.9} />
+          <Puff x={MOUTH_X + dx} y={MOUTH_Y - 70} f={f} at={Math.max(0, f - 2)} c="#FFC98A" z={49} n={5} />
+        </>) : null}
+        {f >= SHUT ? (<>
+          <Ring x={MOUTH_X + dx} y={MOUTH_Y} f={f} at={SHUT} c="#FFD8A0" z={62} s={1.6} dur={18} />
+          <Puff x={MOUTH_X + dx} y={MOUTH_Y - 40} f={f} at={SHUT} c="#E0B080" z={62} n={12} />
+          {/* the survivors: tokens that did not go in, piling on the sill */}
+          {Array.from({ length: 9 }, (_, i) => (
+            <div key={"sv" + i} style={{ position: "absolute",
+              left: MOUTH_X + dx - 120 + i * 28 + (i % 2) * 9,
+              top: MOUTH_Y + 78 - (i % 3) * 12, width: 30, height: 30, borderRadius: "50%",
+              zIndex: 51, opacity: E(f, SHUT + 2 + i, SHUT + 8 + i, 0, 1, OUT), boxShadow: SH,
+              background: `radial-gradient(circle at 36% 30%, #FBE7A8, #A87A22)` }} />
+          ))}
+        </>) : null}
+
+        {/* the gauge, and it is the whole cost argument in one line */}
+        <FuelColumn x={92 + dx} y={GY} h={470} w={116} level={level} z={52} f={f} />
+
+        {/* embers never stop, so the second half cannot go still */}
         {Array.from({ length: 12 }, (_, i) => (
           <div key={"eb" + i} style={{ position: "absolute",
-            left: 120 + i * 74 + Math.sin(f / 8 + i * 1.7) * 26 + dx,
+            left: 150 + i * 74 + Math.sin(f / 8 + i * 1.7) * 26 + dx,
             top: 700 - ((f * (2.6 + (i % 3) * 0.8) + i * 52) % 330),
             width: 15, height: 15, borderRadius: 8, zIndex: 50,
-            background: hexa("#FFD08A", 0.24 + (i % 4) * 0.16) }} />
+            background: hexa("#FFD08A", (0.24 + (i % 4) * 0.16) * (0.4 + burn * 0.6)) }} />
         ))}
 
-        {/* the rough prototype he sets down — real, unfinished, not scruffy */}
-        <div style={{ position: "absolute", left: 300 + dx, top: 560 - (1 - set) * 200,
-          width: 214, height: 150, zIndex: 58, opacity: set }}>
-          <svg viewBox="0 0 214 150" width={214} height={150} style={{ overflow: "visible" }}>
-            <rect x={6} y={22} width={202} height={122} fill="none" stroke="#B08A50" strokeWidth={9} />
-            <rect x={6} y={22} width={202} height={9} fill="#D8AE6E" />
-            <rect x={44} y={54} width={128} height={62} fill="#7E868E" />
-            <rect x={44} y={54} width={128} height={10} fill="#AAB2BA" />
-            {[26, 188].map((cx, i) => (
-              <g key={i}>
-                <circle cx={cx} cy={38} r={7} fill="#E0C48A" />
-                <circle cx={cx} cy={128} r={7} fill="#E0C48A" />
-              </g>
-            ))}
-            <rect x={78} y={0} width={58} height={24} fill="#5E4A32" />
-          </svg>
+        {/* ⭐ AND THEN THE SMALL ONE. "Build your basic prototype first" — a rough
+            uncased thing, set down deliberately once the fire is shut. */}
+        <div style={{ position: "absolute", left: 300 + dx, top: 566 - (1 - set) * 210,
+          width: 232, height: 158, zIndex: 58, opacity: set, boxShadow: SH_D,
+          transform: `rotate(${(1 - set) * -12}deg)` }}>
+          <div style={{ position: "absolute", inset: 0, borderRadius: 5,
+            background: `linear-gradient(168deg,#8A94A0,#4A545E)`,
+            border: "7px dashed #B6C0CA" }} />
+          {[0, 1, 2].map(i => (
+            <div key={i} style={{ position: "absolute", left: 20 + i * 68, top: 34,
+              width: 52, height: 34, borderRadius: 4, background: hexa("#C6D0DA", 0.5) }} />
+          ))}
+          <div style={{ position: "absolute", left: 0, top: 104, width: 232, textAlign: "center",
+            ...mono(26, 800), letterSpacing: 2, color: hexa("#E4ECF4", 0.85) }}>PROTOTYPE</div>
         </div>
-        <Contact x={356 + dx} y={GY} w={210} z={41} o={0.34} />
+        {set > 0.85 ? <Puff x={416 + dx} y={716} f={f} at={78} c="#C8B896" z={59} n={7} /> : null}
 
-        <FrontBand f={f} n={5} size={164} seed={15} react={0} at={-6} x0={-90} x1={780} />
-        <Contact x={848 + dx} y={GY} w={206} z={41} o={0.32} />
-        <Hero f={f} x={898 + dx} y={GY} size={240} z={56} act={1} ph={0.4}
-          costume={{ constr: 1 }} strain={E(f, 52, 58, 0, 0.8, OUT) - E(f, 62, 70, 0, 0.9, OUT)}
-          drive={-shut * 0.20 + set * 0.10} stern={shut} />
-        <Forearm x0={898 + dx - 240 * 0.34} y0={GY - 240 * 0.50}
-          x1={790 + dx} y1={506} w={25} c={CLAYD} z={58} />
-        <Steam x={898 + dx} y={GY - 246} f={f} at={48} n={7} z={62} s={1.0} c="#F0C89A" />
-        <Edge side="l" c="#120503" w={92} z={90} top={120} />
+        <FrontBand f={f} n={5} size={164} seed={17} react={f >= SHUT ? 1 : 0} at={-12} />
+        <Contact x={782 + dx} y={GY} w={216} z={41} o={0.32} />
+        <Hero f={f} x={836 + dx} y={GY} size={248} z={56} act={1} ph={1.2}
+          costume={{ constr: 1 }} strain={burn * 0.4}
+          cheer={E(f, SHUT + 6, SHUT + 16, 0, 1, OUT)} />
+        <Forearm x0={836 + dx - 248 * 0.34} y0={GY - 248 * 0.50}
+          x1={MOUTH_X + dx + 118} y1={MOUTH_Y - 20} w={25} c={CLAYD} z={58} />
+        <Edge side="r" c="#0E0602" w={84} z={90} top={120} />
       </Cam>
-      <BandChip t="PROTOTYPE FIRST" c="#120503" fg="#FFB25A" />
+      <BandChip t="PROTOTYPE FIRST" c="#140802" fg="#FFC98A" />
     </Scene>
   );
 };
 
-/* =========================================================================
-   S14 · THE LAUNCH BAY — 31.74 to 33.52s (54f) · PAYOFF
-   VO: "trigger the Judge Loop before your launch."
-
-   ⭐ THE LOOP ARRIVES WHERE IT BELONGS — swinging in overhead and locking over
-   the cradle IN FRONT OF the doors, which is the whole instruction drawn as a
-   position. The doors only START to open; the reel does not launch anything,
-   because the VO does not.
-   ⛔ THE THROW IS A REAL DISTANCE: the lever covers 45% of its arc in six
-   frames, and he goes with it (drive, not a wrist).
-   ====================================================================== */
 export const S14: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("bay");
-  const reach = E(f, 2, 10, 0, 1, OUT);
-  const throwK = E(f, 12, 18, 0, 1, IN_Q);
-  const swing = E(f, 18, 34, 0, 1, IO);
-  const doors = E(f, 38, 54, 0, 0.34, OUT);
+  /* ⛔⛔ SCRAPPED. The line is "**TRIGGER** the Judge Loop **BEFORE** your launch"
+     and v1 showed neither — a thing was thrown onto a cradle and some doors
+     cracked. ⭐ Now the whole shot is the ORDER OF TWO ACTIONS: the launch doors
+     are already opening on a bright bay with the finished work sitting on the
+     cradle, and he reaches PAST the launch handle to slam the JUDGE LOOP lever
+     FIRST. The loop lamp goes green, the seal drops onto the work, and only
+     THEN do the doors open the rest of the way. Trigger, then launch. */
+  const REACH = 3, PULL = 11, GREEN = 17, SEAL = 24, GO = 33;
+  const pull = E(f, PULL, PULL + 5, 0, 1, IN_Q);
+  const green = E(f, GREEN, GREEN + 6, 0, 1, OUT);
+  const seal = E(f, SEAL, SEAL + 8, 0, 1, BACK);
+  const doors = E(f, 0, 12, 0, 0.22, OUT) + E(f, GO, GO + 16, 0, 0.62, IO);
+  const roll = E(f, GO + 5, GO + 21, 0, 1, IN_Q);
   const dx = LAY[v].b * 0.3;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.100]} vig={0.34} glow={hexa(p.key, 0.16)}>
+    <Scene p={p} slug="" push={[0, dur, 1.100]} vig={0.34} glow={hexa(p.key, 0.16 + green * 0.12)}>
       <Cam x={dx * 0.3} z={1}>
         <Room p={p} f={f} dx={PAR_X[v]} bands={3} kind="house" overhead="gantry"
           rake={0.06} rakeX={RAKE_X[v]} rakeRate={2.6 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="slab" grit={0.5} lamp={null} window={null} />
-        {/* the tall doors at the back, just cracking */}
+        <Fitout p={p} f={f} seed={13} />
+        <Bustle f={f} seed={13} n={1} z={34} />
+
+        {/* the bay beyond — bright, and it widens only after the lever */}
+        <div style={{ position: "absolute", left: 506 + dx - 250, top: 210, width: 500, height: 350,
+          zIndex: 14, overflow: "hidden",
+          background: `linear-gradient(180deg,#F6FAFF 0%,#CFE2F4 60%,#A8C2DC 100%)` }}>
+          {[0, 1, 2, 3].map(i => (
+            <div key={"hz" + i} style={{ position: "absolute", left: 40 - i * 12, top: 60 + i * 62,
+              width: 420 + i * 30, height: 10, background: hexa("#7E9AB4", 0.4 - i * 0.07) }} />
+          ))}
+        </div>
         {[0, 1].map(i => (
           <div key={"d" + i} style={{ position: "absolute",
-            left: 316 + i * 190 - (i === 0 ? doors * 120 : -doors * 120) + dx, top: 236,
-            width: 190, height: 330, zIndex: 18,
-            background: `linear-gradient(${i === 0 ? 100 : 260}deg, #6E7A86 0%, #2A343E 100%)` }}>
-            {Array.from({ length: 5 }, (_, j) => (
-              <div key={j} style={{ position: "absolute", left: 16, top: 24 + j * 60, width: 158,
-                height: 40, background: "#39434D" }} />
+            left: 506 + dx - 250 + i * 250 - (i === 0 ? doors * 250 : 0),
+            top: 210, width: 250 + (i === 1 ? doors * 250 : 0) * 0, height: 350, zIndex: 18,
+            transform: `translateX(${(i === 0 ? -1 : 1) * doors * 250}px)`,
+            background: `linear-gradient(${i === 0 ? 100 : 260}deg,#8A99A8 0%,#3E4A56 100%)`,
+            boxShadow: SH_D }}>
+            {[0, 1, 2].map(k2 => (
+              <div key={k2} style={{ position: "absolute", left: 0, top: 40 + k2 * 100,
+                width: "100%", height: 14, background: hexa("#B6C4D2", 0.4) }} />
             ))}
           </div>
         ))}
-        {doors > 0.05 && (
-          <div style={{ position: "absolute", left: 380 + dx, top: 236, width: 250, height: 330,
-            zIndex: 16, background: `linear-gradient(180deg, ${mxh(p.key, 0.60)} 0%, ${mxh(p.key, 0.18)} 100%)` }} />
-        )}
-        {doors > 0.05 && (
-          <Pool x={506 + dx} y={566} w={520 * doors * 2.4} c="#F0F8FF" o={0.30 * doors} z={19} />
-        )}
-        {/* the cradle and the finished plate on it */}
-        <div style={{ position: "absolute", left: 392 + dx, top: 622, width: 230, height: 86,
-          zIndex: 44, background: `linear-gradient(180deg, #4A545E 0%, #1A2026 100%)` }}>
-          <div style={{ position: "absolute", left: 0, top: 0, width: "100%", height: 11,
-            background: "#7E8A96" }} />
+
+        {/* ⭐ THE TWO CONTROLS, SIDE BY SIDE — and the ORDER is the whole scene */}
+        <div style={{ position: "absolute", left: 690 + dx, top: 470, width: 250, height: 152,
+          zIndex: 46, borderRadius: 8, boxShadow: SH_D,
+          background: `linear-gradient(180deg,#4A545E,#1E262E)` }}>
+          <div style={{ position: "absolute", left: 0, top: 0, width: 250, height: 12,
+            background: "#6E7C8A" }} />
         </div>
-        <Brief x={506 + dx} y={628} w={228} s={1} z={50} f={f} rot={-2} />
-        {/* the finished plate gets the one warm accent in a cold room, so the
-            thing the whole reel has been rebuilding is what the eye lands on */}
-        <Pool x={506 + dx} y={600} w={420} c="#FFD8A0" o={0.26} z={43} />
-        {/* the loop swinging in and LOCKING over the cradle, in front of the doors */}
-        <div style={{ position: "absolute", left: 0, top: 0, width: W, height: 792, zIndex: 30,
-          transform: `translate(${(1 - swing) * 640}px, 0px)`, opacity: 0.4 + swing * 0.6 }}>
-          <LoopRail cx={506 + dx} cy={286} r={272} k={0.14 + swing * 0.7} z={30} c="#5A6672"
-            pass={R.passes[2]} />
+        {/* the JUDGE LOOP lever — the one he pulls FIRST */}
+        <div style={{ position: "absolute", left: 748 + dx, top: 470, width: 0, height: 0, zIndex: 52,
+          transform: `rotate(${-42 + pull * 78}deg)`, transformOrigin: "0 0" }}>
+          <div style={{ position: "absolute", left: -11, top: -132, width: 22, height: 138,
+            borderRadius: 11, background: `linear-gradient(90deg,#A8B4C0,#4E5862)` }} />
+          <div style={{ position: "absolute", left: -26, top: -164, width: 52, height: 52,
+            borderRadius: "50%", boxShadow: SH,
+            background: `radial-gradient(circle at 36% 30%, #F4A28C, #A8321E)` }} />
         </div>
-        <BigLever x={848 + dx} y={GY} k={throwK} z={50} h={320} />
-        <Contact x={740 + dx} y={GY} w={214} z={41} o={0.32} />
-        <Hero f={f} x={790 + dx} y={GY} size={254} z={56} act={1} ph={0.5}
-          costume={{ constr: 1 }} strain={throwK * (1 - E(f, 20, 28, 0, 1, OUT))}
-          drive={reach * 0.24 + throwK * 0.20} cheer={E(f, 36, 46, 0, 1, OUT)} />
-        <Forearm x0={790 + dx + 254 * 0.34} y0={GY - 254 * 0.50}
-          x1={846 + dx} y1={GY - 300 + throwK * 130} w={25} c={CLAYD} z={58} />
-        {swing > 0.95 && <Ring x={506 + dx} y={470} f={f} at={34} c="#F0F8FF" z={74} s={1.6} dur={18} />}
-        <FrontBand f={f} n={6} size={168} seed={17} react={E(f, 36, 46, 0, 1, OUT)} at={-14} />
-        <Edge side="l" c="#1A2026" w={90} z={90} top={124} />
+        <div style={{ position: "absolute", left: 690 + dx, top: 592, width: 250, textAlign: "center",
+          ...mono(24, 800), letterSpacing: 2, zIndex: 47, color: hexa("#CFE0F0", 0.9) }}>JUDGE LOOP</div>
+        {/* the loop lamp: red until he pulls, green after */}
+        <div style={{ position: "absolute", left: 872 + dx, top: 496, width: 46, height: 46,
+          borderRadius: "50%", zIndex: 48, boxShadow: SH,
+          background: green > 0.5
+            ? `radial-gradient(circle at 36% 30%, #B6F6D2, #1E8A56)`
+            : `radial-gradient(circle at 36% 30%, #F0A090, #8A2418)` }} />
+        {green > 0.1 ? <Ring x={895 + dx} y={519} f={f} at={GREEN} c="#7EE0AC" z={54} /> : null}
+
+        {/* THE WORK on the cradle, and the seal that drops on it after the loop */}
+        <div style={{ position: "absolute", left: 236 + dx, top: 560, width: 300, height: 46,
+          zIndex: 40, borderRadius: 5, boxShadow: SH,
+          background: `linear-gradient(180deg,#7E8A96,#39434D)` }} />
+        <div style={{ position: "absolute", left: 262 + dx + roll * 420, top: 452,
+          width: 250, height: 112, zIndex: 44, borderRadius: 6, boxShadow: SH_D,
+          transform: `rotate(${roll * 5}deg)`,
+          background: `linear-gradient(168deg,#6E7C8A 0%,#3E4A56 46%,#1C242E 100%)` }}>
+          {[0, 1, 2].map(i => (
+            <div key={i} style={{ position: "absolute", left: 20 + i * 74, top: 22, width: 52,
+              height: 10, borderRadius: 5, background: hexa("#EAF2FA", 0.6) }} />
+          ))}
+          {seal > 0.05 ? (
+            <div style={{ position: "absolute", left: 88, top: 52, width: 74, height: 74,
+              borderRadius: "50%", opacity: Math.min(1, seal), boxShadow: SH,
+              transform: `scale(${E(f, SEAL, SEAL + 8, 1.9, 1, IN_Q)})`,
+              background: `radial-gradient(circle at 36% 30%, #7EE0AC, #1E8A56)` }}>
+              <div style={{ position: "absolute", left: 18, top: 38, width: 16, height: 6,
+                borderRadius: 3, background: "#04241C", transform: "rotate(44deg)" }} />
+              <div style={{ position: "absolute", left: 27, top: 26, width: 30, height: 6,
+                borderRadius: 3, background: "#04241C", transform: "rotate(-44deg)" }} />
+            </div>
+          ) : null}
+        </div>
+        {seal > 0.5 ? <Ring x={387 + dx} y={540} f={f} at={SEAL + 4} c="#7EE0AC" z={50} s={1.5} /> : null}
+        {f >= GO ? (<>
+          <Puff x={340 + dx} y={604} f={f} at={GO} c="#D6E2EE" z={49} n={12} />
+          <Fall x={400 + dx} y={596} w={460} f={f} at={GO} n={13} z={48} c="#B6C4D2" rate={1.9} />
+          <Ring x={506 + dx} y={540} f={f} at={GO} c="#EAF4FF" z={50} s={1.8} dur={20} />
+          {/* the wake behind it, so a 250px object crossing 420px reads as SPEED */}
+          {Array.from({ length: 6 }, (_, i) => {
+            const g = Math.max(0, roll - i * 0.09);
+            if (g <= 0) return null;
+            return (
+              <div key={"wk" + i} style={{ position: "absolute", left: 262 + dx + g * 420,
+                top: 452, width: 250, height: 112, zIndex: 43, borderRadius: 6,
+                opacity: 0.18 * (1 - i / 6),
+                background: `linear-gradient(168deg,#6E7C8A,#1C242E)` }} />
+            );
+          })}
+          {/* and the bay light floods the room once the doors are wide */}
+          <div style={{ position: "absolute", left: -60, top: 0, width: 1140, height: 792,
+            zIndex: 19, opacity: E(f, GO + 6, GO + 18, 0, 0.34, OUT),
+            background: `radial-gradient(ellipse at 50% 42%, ${hexa("#F4FAFF", 0.62)}, ${hexa("#F4FAFF", 0)} 62%)` }} />
+        </>) : null}
+
+        {/* he reaches PAST the launch handle for the loop lever */}
+        <Contact x={640 + dx} y={GY} w={220} z={41} o={0.32} />
+        <Hero f={f} x={606 + dx} y={GY} size={262} z={56} act={1} ph={0.5}
+          costume={{ constr: 1 }} drive={E(f, REACH, PULL, 0, 0.24, OUT)}
+          strain={pull * 0.5} cheer={green} />
+        <Forearm x0={606 + dx + 262 * 0.30} y0={GY - 262 * 0.50}
+          x1={748 + dx - Math.sin((-42 + pull * 78) * Math.PI / 180) * 120}
+          y1={470 - Math.cos((-42 + pull * 78) * Math.PI / 180) * 120} w={26} c={CLAYD} z={58} />
+        <FrontBand f={f} n={5} size={160} seed={19} react={green} at={-12} />
+        <Edge side="l" c="#1A222A" w={78} z={90} top={140} />
       </Cam>
-      <BandChip t="RUN IT BEFORE YOU LAUNCH" c="#1A2026" fg="#EAF4FF" />
+      <BandChip t="TRIGGER IT BEFORE YOU LAUNCH" c="#0A1016" fg="#CFE0F0" />
     </Scene>
   );
 };
 
-/* =========================================================================
-   S15 · THE FRONT STEPS — 33.52 to 34.80s (38f) · CTA
-   VO: "Comment Judge for the free guide."
-
-   ⛔ THE KEYWORD IS THE ONLY WORD THE PICTURE SPELLS OUT IN FULL, and it is
-   stamped one letter at a time, each one step up, with the mark pressed in last.
-   ⛔ HARD CUT ON THE KEYWORD: the first letter lands on the measured onset of
-   "Judge" (33.94s -> local f13), not on the start of the sentence.
-   ====================================================================== */
 export const S15: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("steps");
@@ -1428,6 +1857,8 @@ export const S15: React.FC<SP> = ({ v, dur }) => {
           rake={0.15} rakeX={RAKE_X[v]} rakeRate={4.6 * RAKE_K[v]} rakeN={RAKE_N[v]}
           floorKind="slab" grit={0.6} lamp={null}
           window={{ x: 386, y: 210, w: 240, h: 260 }} />
+        <Fitout p={p} f={f} seed={14} />
+        <Bustle f={f} seed={14} n={1} z={34} />
         {/* the doors spilling light, and the crowd walking in past him */}
         <Pool x={506 + dx} y={496} w={620} c="#FFD8A0" o={0.34} z={19} />
         <StepPlate x={506 + dx} y={GY + 14 - (1 - E(f, 0, 11, 0, 1, BACK)) * 210} w={620}

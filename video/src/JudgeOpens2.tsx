@@ -47,16 +47,16 @@ type SP = { v: any; dur: number };
 export type Open2Id = "tear" | "beam" | "facade" | "scale";
 
 export const OPEN2_BANDS: Record<Open2Id, { big: string; hot: string }> = {
-  tear:   { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  beam:   { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  facade: { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
-  scale:  { big: "CLAUDE SAYS IT'S DONE", hot: "IT ISN'T" },
+  tear:   { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  beam:   { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  facade: { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
+  scale:  { big: "STOP CLAUDE LYING", hot: "3 LINES OF PROMPT" },
 };
 
 /* ---- THE HELD-DOWN STAGE. The reel's own court, at about half strength: back
    panelling, a floor line, ONE pool of light and a few motes. No crowd, no
    archive, no gantry, no stripes. --------------------------------------- */
-const Stage: React.FC<{ children: React.ReactNode; dur: number; f: number; poolX?: number }> =
+export const Stage: React.FC<{ children: React.ReactNode; dur: number; f: number; poolX?: number }> =
   ({ children, dur, f, poolX = 506 }) => {
   const p = asPlace("stand");
   return (
