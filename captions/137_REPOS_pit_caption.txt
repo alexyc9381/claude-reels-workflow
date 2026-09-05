@@ -1,0 +1,29 @@
+Comment "REPOS" and I'll send you all four links plus the setup guide.
+
+👇 READ BELOW
+
+Your Claude setup is stock. Four open source repos turn it into a god tier one.
+
+anydoc (firecrawl/anydoc, MIT, 20k+ stars) strips the junk out of Word, PowerPoint and Excel files and hands Claude clean Markdown in single digit milliseconds. It also reads PDF, EPUB and CSV.
+
+herdr (herdrdev/herdr, Apache 2.0, 35k+ stars) gives every coding agent its own pane and marks each one working, blocked or idle, so you never hunt for the stuck one again. Close the lid, the agents keep running.
+
+DeepSeek Harness (deepseek-ai/deepseek-harness, MIT, 212k+ stars) is an agent runtime where everything is a plugin, including the model. When your agent gets dumb, you swap its brain and keep the rest.
+
+OmniRoute (diegosouzapw/OmniRoute, MIT, 61k+ stars) is a free AI gateway. When Claude runs out of credits or errors, it reroutes to another model automatically. Its own catalog counts roughly 1.47B free tokens a month across 352 providers.
+
+★ anydoc → Office files to clean Markdown
+★ herdr → one pane per agent, with a status lamp
+★ DeepSeek Harness → the model is a plugin you can replace
+★ OmniRoute → auto fallback to another model, 150+ free tiers
+
+The part nobody mentions:
+None of these make Claude smarter. They remove the four ways a session dies: bad input, a tangled screen, a model you cannot change, and a limit you cannot get past. Fix the plumbing and the same model suddenly feels like a different one.
+
+Comment "REPOS" and I'll send you the four links and the guide on which one to install first.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #opensource #github #aitools #aicoding #vibecoding #devtools #aiagents #buildinpublic #softwaredevelopment #programming #aiworkflow #automation #deepseek #markdown #freetools #techtools #developers

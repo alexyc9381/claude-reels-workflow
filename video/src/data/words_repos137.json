@@ -1,0 +1,832 @@
+[
+ {
+  "start": 0.0,
+  "end": 0.12,
+  "word": " These"
+ },
+ {
+  "start": 0.12,
+  "end": 0.28,
+  "word": " four"
+ },
+ {
+  "start": 0.28,
+  "end": 0.355,
+  "word": " brand"
+ },
+ {
+  "start": 0.355,
+  "end": 0.47,
+  "word": " new"
+ },
+ {
+  "start": 0.47,
+  "end": 0.63,
+  "word": " open"
+ },
+ {
+  "start": 0.63,
+  "end": 0.85,
+  "word": " source"
+ },
+ {
+  "start": 0.85,
+  "end": 1.09,
+  "word": " GitHub"
+ },
+ {
+  "start": 1.09,
+  "end": 1.39,
+  "word": " repos"
+ },
+ {
+  "start": 1.39,
+  "end": 1.58,
+  "word": " will"
+ },
+ {
+  "start": 1.58,
+  "end": 2.04,
+  "word": " completely"
+ },
+ {
+  "start": 2.04,
+  "end": 2.42,
+  "word": " upgrade"
+ },
+ {
+  "start": 2.42,
+  "end": 2.6,
+  "word": " your"
+ },
+ {
+  "start": 2.6,
+  "end": 2.76,
+  "word": " Claude"
+ },
+ {
+  "start": 2.79,
+  "end": 3.09,
+  "word": " setup."
+ },
+ {
+  "start": 3.15,
+  "end": 3.49,
+  "word": " First,"
+ },
+ {
+  "start": 3.69,
+  "end": 4.211,
+  "word": " AnyDoc."
+ },
+ {
+  "start": 4.41,
+  "end": 4.67,
+  "word": " Feeding"
+ },
+ {
+  "start": 4.67,
+  "end": 4.99,
+  "word": " PowerPoint"
+ },
+ {
+  "start": 4.99,
+  "end": 5.17,
+  "word": " or"
+ },
+ {
+  "start": 5.17,
+  "end": 5.245,
+  "word": " Word"
+ },
+ {
+  "start": 5.245,
+  "end": 5.48,
+  "word": " files"
+ },
+ {
+  "start": 5.48,
+  "end": 5.66,
+  "word": " to"
+ },
+ {
+  "start": 5.66,
+  "end": 5.78,
+  "word": " an"
+ },
+ {
+  "start": 5.78,
+  "end": 5.855,
+  "word": " AI"
+ },
+ {
+  "start": 5.855,
+  "end": 6.01,
+  "word": " model"
+ },
+ {
+  "start": 6.01,
+  "end": 6.33,
+  "word": " usually"
+ },
+ {
+  "start": 6.33,
+  "end": 6.59,
+  "word": " breaks"
+ },
+ {
+  "start": 6.68,
+  "end": 6.86,
+  "word": " the"
+ },
+ {
+  "start": 6.86,
+  "end": 7.566,
+  "word": " formatting."
+ },
+ {
+  "start": 7.7,
+  "end": 7.76,
+  "word": " So"
+ },
+ {
+  "start": 7.775,
+  "end": 7.92,
+  "word": " this"
+ },
+ {
+  "start": 7.92,
+  "end": 8.03,
+  "word": " tool"
+ },
+ {
+  "start": 8.03,
+  "end": 8.25,
+  "word": " strips"
+ },
+ {
+  "start": 8.25,
+  "end": 8.43,
+  "word": " all"
+ },
+ {
+  "start": 8.43,
+  "end": 8.55,
+  "word": " the"
+ },
+ {
+  "start": 8.55,
+  "end": 8.67,
+  "word": " junk"
+ },
+ {
+  "start": 8.67,
+  "end": 8.83,
+  "word": " from"
+ },
+ {
+  "start": 8.83,
+  "end": 9.19,
+  "word": " PowerPoint,"
+ },
+ {
+  "start": 9.29,
+  "end": 9.41,
+  "word": " Word,"
+ },
+ {
+  "start": 9.62,
+  "end": 9.7,
+  "word": " and"
+ },
+ {
+  "start": 9.7,
+  "end": 9.86,
+  "word": " Excel"
+ },
+ {
+  "start": 9.86,
+  "end": 9.98,
+  "word": " files"
+ },
+ {
+  "start": 9.98,
+  "end": 10.18,
+  "word": " in"
+ },
+ {
+  "start": 10.18,
+  "end": 11.036,
+  "word": " milliseconds,"
+ },
+ {
+  "start": 11.13,
+  "end": 11.21,
+  "word": " and"
+ },
+ {
+  "start": 11.21,
+  "end": 11.31,
+  "word": " it"
+ },
+ {
+  "start": 11.31,
+  "end": 11.385,
+  "word": " turns"
+ },
+ {
+  "start": 11.385,
+  "end": 11.425,
+  "word": " them"
+ },
+ {
+  "start": 11.46,
+  "end": 11.58,
+  "word": " into"
+ },
+ {
+  "start": 11.58,
+  "end": 11.82,
+  "word": " clean"
+ },
+ {
+  "start": 11.82,
+  "end": 12.14,
+  "word": " markdown,"
+ },
+ {
+  "start": 12.22,
+  "end": 12.28,
+  "word": " which"
+ },
+ {
+  "start": 12.295,
+  "end": 12.4,
+  "word": " is"
+ },
+ {
+  "start": 12.4,
+  "end": 12.5,
+  "word": " just"
+ },
+ {
+  "start": 12.5,
+  "end": 12.68,
+  "word": " a"
+ },
+ {
+  "start": 12.68,
+  "end": 12.98,
+  "word": " simple"
+ },
+ {
+  "start": 12.98,
+  "end": 13.22,
+  "word": " text"
+ },
+ {
+  "start": 13.26,
+  "end": 13.52,
+  "word": " format"
+ },
+ {
+  "start": 13.52,
+  "end": 13.68,
+  "word": " that"
+ },
+ {
+  "start": 13.68,
+  "end": 13.82,
+  "word": " AI"
+ },
+ {
+  "start": 13.87,
+  "end": 14.03,
+  "word": " can"
+ },
+ {
+  "start": 14.03,
+  "end": 14.31,
+  "word": " actually"
+ },
+ {
+  "start": 14.31,
+  "end": 14.41,
+  "word": " read"
+ },
+ {
+  "start": 14.41,
+  "end": 15.116,
+  "word": " perfectly."
+ },
+ {
+  "start": 15.57,
+  "end": 15.71,
+  "word": " Next"
+ },
+ {
+  "start": 15.71,
+  "end": 15.85,
+  "word": " is"
+ },
+ {
+  "start": 15.85,
+  "end": 16.271,
+  "word": " herdr."
+ },
+ {
+  "start": 16.45,
+  "end": 16.63,
+  "word": " Managing"
+ },
+ {
+  "start": 16.63,
+  "end": 17.07,
+  "word": " multiple"
+ },
+ {
+  "start": 17.07,
+  "end": 17.2,
+  "word": " agents"
+ },
+ {
+  "start": 17.2,
+  "end": 17.36,
+  "word": " in"
+ },
+ {
+  "start": 17.36,
+  "end": 17.48,
+  "word": " a"
+ },
+ {
+  "start": 17.48,
+  "end": 17.68,
+  "word": " normal"
+ },
+ {
+  "start": 17.68,
+  "end": 17.9,
+  "word": " coding"
+ },
+ {
+  "start": 17.9,
+  "end": 18.12,
+  "word": " window"
+ },
+ {
+  "start": 18.12,
+  "end": 18.34,
+  "word": " gets"
+ },
+ {
+  "start": 18.43,
+  "end": 18.71,
+  "word": " really"
+ },
+ {
+  "start": 18.71,
+  "end": 19.301,
+  "word": " messy."
+ },
+ {
+  "start": 19.42,
+  "end": 19.5,
+  "word": " So"
+ },
+ {
+  "start": 19.5,
+  "end": 19.64,
+  "word": " this"
+ },
+ {
+  "start": 19.64,
+  "end": 19.715,
+  "word": " tool"
+ },
+ {
+  "start": 19.715,
+  "end": 19.95,
+  "word": " upgrades"
+ },
+ {
+  "start": 19.95,
+  "end": 20.09,
+  "word": " your"
+ },
+ {
+  "start": 20.09,
+  "end": 20.32,
+  "word": " screen"
+ },
+ {
+  "start": 20.32,
+  "end": 20.5,
+  "word": " with"
+ },
+ {
+  "start": 20.5,
+  "end": 20.84,
+  "word": " dedicated"
+ },
+ {
+  "start": 20.84,
+  "end": 21.23,
+  "word": " workspaces"
+ },
+ {
+  "start": 21.23,
+  "end": 21.43,
+  "word": " and"
+ },
+ {
+  "start": 21.43,
+  "end": 21.59,
+  "word": " split"
+ },
+ {
+  "start": 21.59,
+  "end": 22.261,
+  "word": " panels."
+ },
+ {
+  "start": 22.51,
+  "end": 22.73,
+  "word": " Then"
+ },
+ {
+  "start": 22.73,
+  "end": 22.91,
+  "word": " check"
+ },
+ {
+  "start": 22.91,
+  "end": 22.985,
+  "word": " out"
+ },
+ {
+  "start": 22.985,
+  "end": 23.025,
+  "word": " the"
+ },
+ {
+  "start": 23.06,
+  "end": 23.11,
+  "word": " DeepSeek"
+ },
+ {
+  "start": 23.135,
+  "end": 23.36,
+  "word": " Harness,"
+ },
+ {
+  "start": 23.36,
+  "end": 23.52,
+  "word": " where"
+ },
+ {
+  "start": 23.52,
+  "end": 23.82,
+  "word": " everything"
+ },
+ {
+  "start": 23.82,
+  "end": 23.98,
+  "word": " is"
+ },
+ {
+  "start": 23.98,
+  "end": 24.24,
+  "word": " literally"
+ },
+ {
+  "start": 24.65,
+  "end": 24.85,
+  "word": " a"
+ },
+ {
+  "start": 24.85,
+  "end": 25.05,
+  "word": " plugin."
+ },
+ {
+  "start": 25.34,
+  "end": 25.54,
+  "word": " So"
+ },
+ {
+  "start": 25.54,
+  "end": 25.6,
+  "word": " if"
+ },
+ {
+  "start": 25.615,
+  "end": 25.72,
+  "word": " your"
+ },
+ {
+  "start": 25.72,
+  "end": 25.795,
+  "word": " agent"
+ },
+ {
+  "start": 25.795,
+  "end": 25.9,
+  "word": " starts"
+ },
+ {
+  "start": 25.9,
+  "end": 26.12,
+  "word": " getting"
+ },
+ {
+  "start": 26.12,
+  "end": 26.32,
+  "word": " dumb,"
+ },
+ {
+  "start": 26.4,
+  "end": 26.48,
+  "word": " you"
+ },
+ {
+  "start": 26.48,
+  "end": 26.62,
+  "word": " can"
+ },
+ {
+  "start": 26.62,
+  "end": 26.88,
+  "word": " literally"
+ },
+ {
+  "start": 26.92,
+  "end": 27.24,
+  "word": " replace"
+ },
+ {
+  "start": 27.24,
+  "end": 27.42,
+  "word": " its"
+ },
+ {
+  "start": 27.42,
+  "end": 27.56,
+  "word": " brain"
+ },
+ {
+  "start": 27.56,
+  "end": 27.72,
+  "word": " with"
+ },
+ {
+  "start": 27.72,
+  "end": 27.84,
+  "word": " a"
+ },
+ {
+  "start": 27.84,
+  "end": 28.0,
+  "word": " smarter"
+ },
+ {
+  "start": 28.0,
+  "end": 28.556,
+  "word": " one."
+ },
+ {
+  "start": 29.11,
+  "end": 29.31,
+  "word": " And"
+ },
+ {
+  "start": 29.31,
+  "end": 29.43,
+  "word": " you"
+ },
+ {
+  "start": 29.43,
+  "end": 29.54,
+  "word": " instantly"
+ },
+ {
+  "start": 29.54,
+  "end": 29.76,
+  "word": " get"
+ },
+ {
+  "start": 29.76,
+  "end": 29.9,
+  "word": " a"
+ },
+ {
+  "start": 29.9,
+  "end": 30.02,
+  "word": " god"
+ },
+ {
+  "start": 30.02,
+  "end": 30.2,
+  "word": " tier"
+ },
+ {
+  "start": 30.2,
+  "end": 30.5,
+  "word": " fully"
+ },
+ {
+  "start": 30.5,
+  "end": 30.67,
+  "word": " custom"
+ },
+ {
+  "start": 30.67,
+  "end": 31.511,
+  "word": " assistant."
+ },
+ {
+  "start": 31.94,
+  "end": 31.98,
+  "word": " But"
+ },
+ {
+  "start": 32.015,
+  "end": 32.28,
+  "word": " finally,"
+ },
+ {
+  "start": 32.44,
+  "end": 32.931,
+  "word": " OmniRoute."
+ },
+ {
+  "start": 33.16,
+  "end": 33.28,
+  "word": " If"
+ },
+ {
+  "start": 33.28,
+  "end": 33.48,
+  "word": " Claude"
+ },
+ {
+  "start": 33.48,
+  "end": 33.555,
+  "word": " runs"
+ },
+ {
+  "start": 33.555,
+  "end": 33.62,
+  "word": " out"
+ },
+ {
+  "start": 33.63,
+  "end": 33.76,
+  "word": " of"
+ },
+ {
+  "start": 33.76,
+  "end": 33.87,
+  "word": " credits"
+ },
+ {
+  "start": 33.87,
+  "end": 34.01,
+  "word": " or"
+ },
+ {
+  "start": 34.01,
+  "end": 34.21,
+  "word": " gives"
+ },
+ {
+  "start": 34.21,
+  "end": 34.35,
+  "word": " an"
+ },
+ {
+  "start": 34.35,
+  "end": 34.49,
+  "word": " error,"
+ },
+ {
+  "start": 34.71,
+  "end": 35.03,
+  "word": " OmniRoute"
+ },
+ {
+  "start": 35.03,
+  "end": 35.51,
+  "word": " automatically"
+ },
+ {
+  "start": 35.51,
+  "end": 35.69,
+  "word": " swaps"
+ },
+ {
+  "start": 35.69,
+  "end": 35.87,
+  "word": " to"
+ },
+ {
+  "start": 35.87,
+  "end": 36.07,
+  "word": " another"
+ },
+ {
+  "start": 36.07,
+  "end": 36.29,
+  "word": " model,"
+ },
+ {
+  "start": 36.29,
+  "end": 36.47,
+  "word": " so"
+ },
+ {
+  "start": 36.47,
+  "end": 36.55,
+  "word": " you"
+ },
+ {
+  "start": 36.55,
+  "end": 36.69,
+  "word": " get"
+ },
+ {
+  "start": 36.79,
+  "end": 37.11,
+  "word": " millions"
+ },
+ {
+  "start": 37.11,
+  "end": 37.33,
+  "word": " of"
+ },
+ {
+  "start": 37.33,
+  "end": 37.49,
+  "word": " free"
+ },
+ {
+  "start": 37.49,
+  "end": 37.81,
+  "word": " tokens"
+ },
+ {
+  "start": 37.81,
+  "end": 38.13,
+  "word": " every"
+ },
+ {
+  "start": 38.13,
+  "end": 38.33,
+  "word": " single"
+ },
+ {
+  "start": 38.33,
+  "end": 38.861,
+  "word": " day."
+ },
+ {
+  "start": 39.0,
+  "end": 39.18,
+  "word": " Comment"
+ },
+ {
+  "start": 39.18,
+  "end": 39.32,
+  "word": " the"
+ },
+ {
+  "start": 39.32,
+  "end": 39.42,
+  "word": " word"
+ },
+ {
+  "start": 39.42,
+  "end": 39.72,
+  "word": " REPOS"
+ },
+ {
+  "start": 39.72,
+  "end": 39.86,
+  "word": " for"
+ },
+ {
+  "start": 39.86,
+  "end": 39.98,
+  "word": " all"
+ },
+ {
+  "start": 39.99,
+  "end": 40.09,
+  "word": " the"
+ },
+ {
+  "start": 40.09,
+  "end": 40.31,
+  "word": " links."
+ }
+]

@@ -1,0 +1,178 @@
+# 137 · REPOS — THE SHOP (factory log)
+
+**Keyword** REPOS · **VO** `~/Downloads/REPOS Sep 5.m4a` (81.78s raw) · **prefix** `Rps` ·
+**Board** `storyboards/137-repos.md` · **Lead magnet** `lead-magnets/137-repos.txt` ·
+**Built** 2026-09-05, overnight, unattended (Alex asleep; kickoff prompt verbatim from `docs/KICKOFF-PROMPT.md`).
+
+## STAGE 0 — the number, and the parallel session
+
+Two VOs landed within a minute (`REPOS Sep 5`, `ADHD Sep 5`), so per [[feedback_reel_number_is_not_a_lock]]
+the number was checked in three places before claiming it. `ls Faceless/` said 136 was free; **it was
+not** — the ADHD session created `136 - ADHD` seconds before this one looked, and neither the tsx
+tree nor the site manifest had caught up yet. REPOS is **137**, claimed in the Drive folder, in
+`video/src/ClaudeRepos137Reel.tsx` and in `storyboards/137-repos.md` inside two minutes of finding out.
+⭐ The Drive folder is the fastest of the three registers and the one the other session actually read.
+
+## STAGE 1 — the subject, verified live
+
+The VO names four repos by ear: "AnyDoc", "herder", "the deep sea", "Omnirout". Resolved against the
+GitHub API and each README on 2026-09-05:
+
+| spoken | repo | ★ | licence | what the frame may assert |
+|---|---|---|---|---|
+| AnyDoc | `firecrawl/anydoc` | 20,358 | MIT | Word/PowerPoint/Excel/PDF/EPUB/CSV → GitHub-Flavored Markdown, single-digit ms |
+| herder | `herdrdev/herdr` | 35,413 | Apache-2.0 | one pane per agent, WORKING / BLOCKED / IDLE, workspaces + splits |
+| the deep sea | `deepseek-ai/deepseek-harness` | 212,632 | MIT | "Everything is a Plugin", the model adapter included |
+| Omnirout | `diegosouzapw/OmniRoute` | 61,383 | MIT | 352 providers · 150+ free · quota-aware fallback · ~1.47B free tokens/mo |
+
+⛔ The VO says "millions of free tokens every single day". The frame shows the README's own
+`~1.47B FREE TOKENS / MO` and never a per-day figure, which would be derived.
+
+## STAGE 2 — the VO: six flubs a whole-file pass called clean
+
+`faster-whisper medium.en` over the whole take reported ONE `cut cut`. Chunking the raw at every
+measured silence ([[feedback_whole_file_transcription_hides_flubs]]) found **six**:
+
+1. `0.13-3.84  These four brand new cut cut.` — a false start at the HEAD
+2. `18.50-21.94  …simple text format that I- cut cut` — inside the anydoc sentence
+3. `31.59-34.14  Managing multiple agents in a normal coding window, cut cut.`
+4. `39.42-42.54  So this tool upgrades your screen with dedicated workspaces and s- cut cut.`
+5. `47.56-50.53  Then check out Coco. / Bent. Cut, cut.`
+6. `55.72-57.07  so if your agent starts cut cut` — inside the DeepSeek sentence
+
+plus 19.9s of dead air (3.5s and 3.3s inside the anydoc line alone) and two hallucinated
+"Thank you"s that whisper wrote over noise blips.
+
+**The cut:** 14 keep-windows, every edge in measured silence (all 14 below −46 dB on a 10ms RMS
+scan), 0.16s of the take's own tail after each sentence and 0.10s before each onset → **0.26s at
+sentence boundaries**, 0.22s at the one mid-sentence join. Spliced in numpy with 4ms crossfades,
+then `highpass 75 · alimiter 0.93 · loudnorm I=-16 TP=-1.5 LRA=11`.
+
+**Tempo is piecewise** (R1 is binding): hook windows capped at 3.95 wps, every other window at
+4.45, ×1.10 wherever that leaves room. K1 (the hook line) runs at ×1.0 — it is already 4.10 wps in
+the recording. K10 ("so if your agent starts getting dumb…") is 4.50 wps raw and runs at ×1.0. K13
+(the OmniRoute sentence, 26 words) at ×1.003. Result: **41.18s / 1236 frames**, overall 4.03 wps,
+hook 0-10s 3.9, worst 5s window 4.45.
+
+⚠️ **41.18s is outside the 22-29s house range.** Four repos need it. Flagged, not trimmed.
+
+Re-transcribed the CUT file chunk by chunk: `CUT count: 0`, 165 words heard of 166.
+`tools/build_captions.py` (medium.en): 166 words, 58 lines, 58 anchored to a measured onset.
+
+## STAGE 6 — the board
+
+World = **THE SHOP**, a tuning garage for Claudes (the word the script turns on is UPGRADE, spoken
+twice). Four bays, one repo each, one villain each (THE JAM · THE CRAM · THE DIM CORE · THE EMPTY
+TANK), each beaten once in its own bay. Hero artifact = the upgraded Claude (dome + HUD boom + tank +
+intake + cape), withheld until S10. Full cards in `storyboards/137-repos.md`.
+
+Rejected worlds, with the reel that already owns each: armory/loadout (69), assembly line (37), a
+laptop on a desk (135's hook), a tower or any climb (134), an arcade (124), a playhouse (135), a
+night street (94/133), a courtroom (132), a toll row (131), a gym (110).
+
+## STAGE 7 — the build
+
+Files: `RpsWorld.tsx` (palette, ledger `R`, the `REPOS` colour table, seven places, the `Rig` — Hero's
+math with the four parts drawn INSIDE its transform so a part rides his squash) · `RpsSets.tsx`
+(`ShopWall`, `BayLamp`, `TyreStack`, `Toolbox`, `Drum`, `Bench`, `Lift` with scissors that open,
+`Chain`/`Hook`/`Tag`/`HangPart`/`Hoist`, `CrewBand`, `LightColumn`) · `RpsProps.tsx` (`FileCard`,
+`Chute`, `Debris`, `Press`, `MdSheet`, `SheetBelt`, `Monitor`, `Rack`/`Cartridge`, `Claw`, `Core`,
+`Manifold`/`Canister`/`BigGauge`/`ErrorLamp`, `TokenHopper`, `Tally`, `Composer`) · `RpsScenes.tsx`
+(14 scenes, `CAM`/`GRADE`/`shotsFor`/`punch`) · `RpsHooks.tsx` (three hooks) ·
+`ClaudeRepos137Reel.tsx` · `rps-137-index.tsx`.
+
+⛔⛔ THREE CUTS = THREE HOOKS: `lift` ELEVATION (house) · `drop` LOAD (amber) · `pit` SWARM (steel).
+
+### Build notes worth keeping
+- ⛔ **`Hero` is a closed component, so a part drawn as a sibling floats off him the moment he
+  squashes under a load** — exactly the beat where a part lands. `Rig` copies Hero's math and draws
+  the parts in the same transform. Mascot geometry read off the SVG, not assumed: head top at 22% of
+  the box, eyes at 35-48%, hip line at 64%, feet at 92%.
+- ⛔ **The Mascot blinks at `lf` 0-4 of every 84**, so frame 0 of every scene — and the reel's
+  thumbnail — caught the hero with his eyes shut. `Rig` offsets `lf` by 31.
+- ⛔ **A hanging part's box offset has to put the part's TOP under the hook**: the HUD boom starts at
+  −46 rig units and the dome at −20, so both hung ABOVE the hook (behind the header pill) until the
+  offsets went negative. Found on a frame strip, invisible in the code.
+- ⛔ **zsh does not word-split an unquoted variable**: `set -- $spec` in a probe loop passed the whole
+  line as the composition id and eighteen stills silently rendered nothing. `read -r a b c` instead.
+- ⛔ **`afade … st=` is STREAM time**: on an `-ss`-seeked input the fade-out sat 80s in the past and
+  silenced the whole bed (−91 dB, `I = -inf`). Cut first with `asetpts=PTS-STARTPTS`, then filter.
+- Beds: three passages from the two house tracks (ados @122.1s, ebm @44.4s, ados @174.3s), scored
+  `head*1.2 + mid*1.4 - max(0,tail-mid)*2 + floor*1.5` over a 1s RMS envelope, the spectrum chain
+  from [[feedback_bed_spectrum_not_level]], loudnorm −18, onset 0.00s on all three.
+- SFX: first bank flagged `coin_slide` (noise bed + air), `glitch_counter` (hiss), `resolve` (176ms
+  attack = air), `ratchet` (6 uses at 67% bright = SLAP). Each replaced by the object's own sound;
+  ratchet held at 2 uses. 99 cues / 41.2s = 2.4/sec — above the 1.0-1.5 band, on the 135 precedent
+  (Alex asked for more), every cue on an action.
+- Headers carry a fact the VO does not say: `ALSO PDF · EPUB · CSV`, `SEE WHO IS BLOCKED`,
+  `★212,632 · MODEL IS A PLUGIN`, `352 PROVIDERS · 150+ FREE`.
+
+### The first probe pass (18 stills) — what a contact sheet found before any render
+- the feed chute was a 140px grey slab across the pegboard → 92px, warm oxide
+- the bench cut across the hero's chest in the jam → gone from that scene
+- the debris scattered 600px and never piled → half the velocity, bigger fragments
+- the press was a grey slab on a teal wall → a yellow machine with ink trim
+- the markdown sheet was held over the hero's face → beside him, he looks left at it
+- the "crammed" agents were 180px apart → 118px sprites on a 110px spread, ribbons 11px
+- the tally sat on top of the canister rack → under it
+
+## STAGE 8 — render → gates → fix, four times (all on `tools/rps_gates.sh`, run SERIALLY)
+
+| pass | what failed | what changed |
+|---|---|---|
+| v1 | motion: LIFT 4.01 · SPLIT 5.70 · SWAP 3.16 · MANIFOLD 4.74 (bar 9 on the median, 4 per scene) | LIFT: a two-stage rise + a tracking push · SPLIT: printing lines in every working pane + a 6% push · SWAP: hiccup JUMPS (the Mascot's own `shock`, driven periodically) not a sway, a 2× claw, a punch to the face on the lock · MANIFOLD: 40px beads, 56px tokens, a push per shot |
+| v2 | tails stalling: TAG1/2/4, JAM, ROLLOUT | star counters run to the cut + a push · JAM: hiccups after the third hit and a late fourth cough · ROLLOUT: the tag wave + puffs after SEND |
+| v2 | 23 cue / sentence-final collisions | BEATS retimed onto the action words (PowerPoint · Word · breaks · MODEL on "a" · lock on "brain" · SEND at f56); fanfare + bell cut; tag beats texture-only |
+| v3 | 5 scene-opening hits 0.18-0.25s after a sentence end (measured ends) | moved 2-3 frames later; the checker learned `lead: 0` |
+| v3 | ⛔ dHash across the three cuts: mean 17.9 but **MIN 6** (house/amber at the SWAP CU; 8 at PRESS; 9 at CRAM) | the generic per-cut offsets (±5% · ±50px) were a NUDGE. Each cut now has its own SHOT SIZE in JAM · PRESS · CRAM · SWAP · GOD TIER (table in the storyboard) — [[feedback_variants_need_shot_sizes]] confirmed again |
+| v4 | house: all green (verify 9/9 · motion median 9.68, 0/14 · tails 0/14 · luma 150.3 · sat 62.0% · p10 30.4 · hook 150.1 / 11.52 · captions ok) · dHash **mean 20.2 MIN 11 PASS** | — |
+| v4 | ⛔ the two TRIAL hooks were STATIC: drop 3.58 · pit 3.88 (the house lift: 9.35). Both ran on a LOCKED camera; the 5s open gate still passed on the mean (8.39 / 7.84) because seconds 4-5 belong to the tag beat and the jam | drop: the camera TILTS with each falling part and settles, pushes 1.10→1.18, the platform DIPS under each landing, each hook LOWERS 24px before it lets go · pit: the camera PANS with the dolly, JOLTS on the lurch, pushes 1.14→1.22; each runner drags a dust trail |
+
+⭐ **A 5-second mean hides a 3-second hook.** The open gate's buckets for the drop cut read 3.0 · 3.6 · 3.9 · 17.7 · 13.8 —
+PASS on the mean, and the hook itself was a third of the house's. Read the per-scene row for the hook, not the open mean.
+
+⭐ **Every hook that measured well here has a camera that MOVES with the event** (lift: tracks the rise · drop: tilts with
+the fall · pit: pans with the dolly). A locked camera on a 250px moving object is 8% of the panel repainting; a 1px/frame
+track is every edge in the set.
+
+⭐ The bay-lamp label read `DEEPSEEK-HA` on a frame strip: `repo.name` is 16 characters, the label box 180px. Labels now use
+`tagName`. Found on a strip, invisible in the code (the fourth time this reel).
+
+## STAGE 9 — the delivered files, measured where they ship (2026-09-05 05:35)
+
+E1 encode on all three cuts (`libx264 high · yuv420p · crf 18 · bt709/tv · aac 256k 48k · faststart`), then
+every gate re-run on the ENCODED house file ([[feedback_delivery_encode_pixfmt]]: the encode moves the numbers):
+
+| | house `137_REPOS.mp4` (lift) | amber `_drop` | steel `_pit` |
+|---|---|---|---|
+| verify_reel | 9/9 | 9/9 | 9/9 |
+| motion median · failing | 9.68 · 0/14 | 10.64 · 0/14 | 9.71 · 0/14 |
+| the HOOK's own row | 9.35 | 15.94 (was 3.58) | 7.15 (was 3.88) |
+| tails stalling | 0/14 | 0/14 | 0/14 |
+| HOOK_LUMA raw → encoded | 150.3 → 148.4 | 156.6 | 149.3 |
+| BODY_SAT · BODY_BLACK p10 | 64.0% · 26.5 (encoded) | 61.3% · 26.4 | 60.7% · 28.3 |
+| open gate (5s mean · buckets) | 11.55 · 8.7 12.8 8.2 15.7 12.3 | 16.57 · 12.7 17.9 15.8 22.7 13.8 | 10.02 · 10.0 6.9 5.2 16.0 12.0 |
+| captions (word_caption_audit --cuts) | ✅ every line outlives its word | — | — |
+| cue collisions (`rps_cue_collisions.py`) | 100 cues · 0 | same bank | same bank |
+
+**dHash on the three DELIVERED encodes: mean 20.4 · MIN 10 → PASS** (the one 10 is lift/pit at f1184, the
+wide CTA shot; the raw renders read 12 there — the encode costs a bit or two, so leave headroom above 10 next time).
+
+**Delivered to `Faceless/137 - REPOS/`** via `tools/rps_deliver.sh` (delete → settle → create → item-id + size
+loop): `137_REPOS.mp4` (21,225,245) · `137_REPOS_drop.mp4` (21,668,118) · `137_REPOS_pit.mp4` (21,537,236) ·
+three caption files (1,851 each) · `137_REPOS_sheet.png` — **7/7 with real Drive item-ids and matching sizes.**
+No .docx delivered ([[feedback_reel_deliverable_is_the_article]]).
+
+**The article is built and committed but NOT LIVE.** `source-docs/REPOS - Four Repos That Upgrade Your Claude
+Setup.docx` + the manifest entry are committed on `judge-132-guide` (c9b0611, pushed); `npm run content` built
+31 blocks / 1,321 words, slug `four-repos-that-upgrade-your-claude-setup-anydoc-herdr-deepseek-harness-and-omniroute`.
+⛔ `vercel --prod` was blocked by the session's permission classifier, so the deploy is Alex's step. Also found
+while checking: `chenmedialabs.com/guides/*` 308-redirects to `chen.media`, and `chen.media` + `www.chen.media`
+are ALIASED TO AN 8-DAY-OLD DEPLOYMENT, so the 132 / 134 / 135 guides are **404 today** too
+([[risk_vercel_alias_pinned]]). One `--prod` + two `alias set` calls fix all four.
+
+**Known and accepted:** 41.18s (outside 22-29s; four repos need it) · number 137 not 136 (ADHD took 136 in
+parallel) · the VO says "millions of free tokens every single day", the frame shows the README's `~1.47B / MO` ·
+word_audible cannot transcribe herdr / deepseek-harness / omniroute in isolation (proper nouns) · cue rate
+2.4/sec, above the 1.0-1.5 band on the 135 precedent, every cue on an action · HOLD high on TAG2 75% / SPLIT
+72% (reported, not gated) · `REELS.md` does not list 137 until the files are committed.

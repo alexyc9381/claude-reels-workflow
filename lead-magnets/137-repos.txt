@@ -1,0 +1,77 @@
+TITLE   Four Repos That Upgrade Your Claude Setup
+SUB     anydoc, herdr, DeepSeek Harness and OmniRoute: what each one actually does, how to install it, and which one to start with
+
+H       What this is
+P       Four open source GitHub repositories, each fixing one specific thing that goes wrong when you use Claude for real work. None of them is a prompt pack. Each is a tool you install once, and each one solves a problem you have probably already hit: office files that turn to mush, a terminal full of tangled agents, a model you cannot swap, and a usage limit that stops you mid task.
+P       The star counts, licences and figures below were read from the GitHub API and each repository's README on 5 September 2026. They move. Check the repo, not this page, before you quote one.
+B       firecrawl/anydoc, MIT, over 20,000 stars. Converts Word, PowerPoint, Excel, PDF and more into clean Markdown.
+B       herdrdev/herdr, Apache 2.0, over 35,000 stars. A terminal workspace that runs your coding agents in their own panes and tells you which one is stuck.
+B       deepseek-ai/deepseek-harness, MIT, over 212,000 stars. An agent runtime where every part, including the model, is a plugin you can swap.
+B       diegosouzapw/OmniRoute, MIT, over 61,000 stars. A free AI gateway that reroutes to another model when Claude runs out of credits or errors.
+
+RULE
+
+H       1. anydoc: feed Claude office files without breaking them
+P       Paste a PowerPoint or a Word document into an AI model and the formatting gets in the way. Tables lose their columns, headings become body text, slide order gets scrambled. The model is reading the junk that wrapped the content, not the content.
+P       anydoc, built by the Firecrawl team in Rust, strips that layer off. It reads Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV and text based PDF, and writes GitHub Flavored Markdown with one consistent output whatever went in. The README's own claim is single digit milliseconds per document, and every format goes through the same document model and the same Markdown serializer, so a table from Excel and a table from Word come out looking identical.
+NUM     Install the agent skill so Claude Code can call it on its own: npx skills add firecrawl/anydoc
+NUM     Or use it directly from the command line: npx @firecrawl/anydoc report.docx, or with -o to write a file.
+NUM     Or import it: npm install @firecrawl/anydoc for Node, pip install firecrawl-anydoc for Python, cargo add anydoc for Rust. There is also a WebAssembly build that runs in the browser so files never leave your machine.
+P       One honest limit. anydoc reads text based PDFs locally but does no OCR. A scanned PDF fails with a NeedsOcr error unless you opt into the hosted Firecrawl Parse route, which sends that document off your machine. If your PDFs are scans, know that before you point it at a folder.
+
+RULE
+
+H       2. herdr: stop running four agents in one window
+P       Once you run more than one coding agent at a time, a normal terminal turns into a wall of interleaved output. You cannot tell which agent is waiting on you, which one finished, and which one has been stuck for ten minutes.
+P       herdr is a single Rust binary that gives each agent its own pane inside a persistent workspace. Every pane is marked working, blocked or idle, so the stuck one is visible without scrolling. It is a background server, so you can close the laptop or drop the network and the agents keep running; you reattach later from any terminal, including over SSH. It runs the tools you already use: Claude Code, Codex, Cursor, OpenCode and others. It does not wrap or replace them, it owns their terminals.
+NUM     Install: curl -fsSL https://herdr.dev/install.sh | sh, or brew install herdr on a Mac.
+NUM     Start it where the work lives by running herdr in your project folder, then launch your agents in separate panes.
+NUM     Detach with ctrl+b q. Run herdr again to reattach. The agents never stopped.
+P       The part people miss: herdr exposes a socket API that agents themselves can drive, so one agent can spawn a pane, prompt another agent, and wait until that agent is genuinely blocked. That is the beginning of agent to agent orchestration without writing an orchestrator.
+
+RULE
+
+H       3. DeepSeek Harness: replace the brain, keep the agent
+P       Most agent frameworks bolt you to one model. When it starts giving weak answers you rebuild the whole setup around a different one, and every tool, memory and session you wired up comes with it.
+P       DeepSeek Harness, released by DeepSeek on 13 August 2026, is built on an everything is a plugin architecture. The model adapter is a plugin. So are the tools, the skills, the sessions, the sandboxes, the storage, the scheduler, the agent loop itself and the user interface. Swapping the model means swapping one plugin, and the rest of your assistant stays exactly as you built it.
+NUM     Try it with one command, no clone: npx @deepseek-ai/dsh web. It opens a local web UI at 127.0.0.1:3080.
+NUM     Or run from source: clone deepseek-ai/deepseek-harness, then pnpm install, pnpm run build and pnpm dsh web.
+NUM     Browse community plugins under the dsh-plugin topic on GitHub. Add that topic to your own plugin repo so others can find it.
+QUOTE   The README says it plainly: the project is a developer preview and there will be compatibility breaking changes. Build on it knowing that, and read the safety notice before you run it.
+
+RULE
+
+H       4. OmniRoute: never stop because Claude ran out
+P       The most common way a Claude session ends is not a bug, it is a limit. Credits run out or an error comes back and the work stops until it resets.
+P       OmniRoute is a free, MIT licensed AI gateway. You point Claude Code, Codex, Cursor, OpenCode, Cline or Copilot at one local endpoint, and behind it sit hundreds of providers and models, including a large free tier. When the active model runs out of quota or errors, OmniRoute's quota aware fallback moves the request to the next model automatically, so the session keeps going.
+B       The README counts 352 providers, over 150 of them with free tiers, and over 1,200 unique models.
+B       Its own catalog puts the recurring free budget at roughly 1.47 billion tokens per month across the pools with a published allowance. That figure is re audited by the maintainers and moves in both directions.
+B       Two compression layers, RTK and Caveman, trim prompt size. The README claims 15 to 95 percent token savings depending on the content.
+B       Runs as an npm package, a desktop app or a PWA, with MCP and A2A support and a dashboard that shows live quota per provider.
+P       The honest caveat. A free tier belongs to the provider offering it, and each has its own terms. OmniRoute marks 13 providers as avoid in its own terms risk catalog. Read that list before you send anything sensitive through a pool you did not choose yourself.
+
+RULE
+
+H       Which one to install first
+P       Pick by the problem that stopped you most recently, not by star count.
+NUM     Documents come in as Word or PowerPoint and Claude mangles them: anydoc. Five minutes, no configuration.
+NUM     You run two or more agents at once and lose track of them: herdr. One binary, and it changes how the whole day feels.
+NUM     Claude hits its limit while you are mid task: OmniRoute. It takes an evening to set up the providers you trust, and then the problem is gone.
+NUM     You want to build your own assistant and keep the freedom to change the model later: DeepSeek Harness. This is the largest commitment of the four and the one still marked preview.
+
+RULE
+
+H       Honest limits
+B       These are four separate projects by four separate teams. They do not know about each other, and nothing here is affiliated with Anthropic.
+B       anydoc does not OCR. herdr is a terminal tool and assumes you live in one. DeepSeek Harness is a developer preview. OmniRoute is only as free as the providers behind it stay free.
+B       Stars are a popularity signal, not a quality guarantee. Read a repo's issues tab before you rely on it for work that matters.
+
+RULE
+
+H       The first hour
+NUM     Install anydoc's skill and convert one real document you have struggled with. Compare the Markdown to the original.
+NUM     Install herdr, open two panes, run Claude Code in one and anything else in the other. Detach and reattach once so you trust it.
+NUM     Install OmniRoute and point one tool at it. Watch the dashboard the first time a request falls over to another model.
+NUM     Open DeepSeek Harness's web UI once and look at the plugin list. Do not build on it yet, just see what a fully swappable agent looks like.
+
+KEY     Comment REPOS on the reel and this guide, with all four links, is what you get.
