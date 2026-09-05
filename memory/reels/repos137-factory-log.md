@@ -220,3 +220,43 @@ named.** The MUTE TEST said it outright: with the sound off a viewer says "car p
 - ⛔ **`diegosouzapw/OmniRoute` rendered as `diegosouzapw/On`** — `nowrap + overflow:hidden` truncating a real
   repo name. The line now scales to its own length and the Public pill yields to it.
 - ⛔ **The contribution graph was invisible**, drawn at z16 under `ShopWall`'s brick courses at z18 → z19.
+
+## STAGE 11 — the rev-2 numbers, and a delivery bug that ate the live files
+
+All three cuts, gates re-run on the **encoded** deliverables:
+
+| | lift (house) | drop (amber) | pit (steel) |
+|---|---|---|---|
+| verify_reel | 9/9 | 9/9 | 9/9 |
+| motion median · failing | 9.97 · 0/14 | 10.63 · 0/14 | 9.84 · 0/14 |
+| **the HOOK's own row** | **11.59** (was 9.35) | **20.31** (was 3.58) | **9.43** (was 3.88) |
+| tails stalling | 0/14 | 0/14 | 0/14 |
+| HOOK_LUMA (encoded) | 151.3 | 153.4 | 144.3 |
+| BODY_SAT · p10 | 61.5% · 26.5 | 57.5% · 26.3 | 58.9% · 27.9 |
+| open gate mean | 15.03 (was 11.55) | 21.26 | 13.39 |
+
+dHash on the delivered encodes **mean 20.6 · MIN 11 · PASS**. sfx_audit clean. Cue collisions 0/100.
+JAM tail 0.62 → 0.84 (house), 0.52 → 0.72 (amber), 0.60 → 0.81 (steel) once the front-loaded slump
+was replaced by a continuous in-panel push.
+
+### ⛔⛔⛔ DELETE-THEN-CREATE DESTROYED A LIVE DELIVERY — the name is what gets stuck, not the folder
+
+`rps_deliver.sh` deleted the morning's seven verified files and re-copied the rev-2 ones under the
+**same names**. Result: **0/7 ingested after 18 minutes**, and the Drive API showed *nothing* named
+`137_REPOS` on the server — the old set was gone and the new set had never arrived. Three probes
+found the actual rule:
+
+| probe | result |
+|---|---|
+| a 14-byte file under a **brand-new** name in the same folder | item-id in **25s** |
+| a **22MB** mp4 under a **brand-new** name in the same folder | item-id in **30s** |
+| the seven **reused** names | **never**, 18 min |
+
+So it is not size, not the folder, not the mount. ⭐ **A name that DriveFS has a pending delete for
+will not accept a new file.** Delete-then-create ([[feedback_drive_overwrite_never_ingests]]) is still
+right for the *overwrite* failure it was written for, but it must not be the last step.
+
+⭐ **THE FIX, now in `tools/rps_deliver.sh`: stage under a unique name, WAIT for the real item-id,
+then `mv` onto the final name.** A rename inside DriveFS keeps the id the staged file already earned
+(verified: `1KJLW2ywWHtt…` survived the rename byte-for-byte). The script also skips any file already
+live with a matching id and size, because re-uploading re-poisons the name.
