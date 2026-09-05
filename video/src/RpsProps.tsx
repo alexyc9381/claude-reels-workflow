@@ -291,8 +291,10 @@ export const SheetBelt: React.FC<{ y: number; f: number; z?: number; rate?: numb
    ====================================================================== */
 const AGENT_C = [CLAY, SKY, GOLD, GREEN, "#8B72B0"];
 export const Monitor: React.FC<{ x: number; y: number; f: number; w?: number; h?: number; z?: number;
-  arrivals: number[]; split?: number; splitAt?: number; states?: number[]; s?: number; printAt?: number }> =
-  ({ x, y, f, w = 560, h = 380, z = 44, arrivals, split = 0, splitAt = 9999, states = [1, 1, -1, 0, 1], s = 1, printAt = 9999 }) => {
+  arrivals: number[]; split?: number; splitAt?: number; states?: number[]; s?: number; printAt?: number;
+  messStep?: number }> =
+  ({ x, y, f, w = 560, h = 380, z = 44, arrivals, split = 0, splitAt = 9999, states = [1, 1, -1, 0, 1], s = 1,
+     printAt = 9999, messStep = 0 }) => {
   const herdr = repoBy("herdr");
   const grow = split;                                  /* 0 = one window, 1 = the wall */
   const WD = w + grow * 300, HT = h + grow * 90;
@@ -352,6 +354,54 @@ export const Monitor: React.FC<{ x: number; y: number; f: number; w?: number; h?
             return <path key={i} d={d} fill="none" stroke={c} strokeWidth={grow > 0.5 ? 6 : 11} strokeLinecap="round" opacity={0.92} />;
           })}
         </svg>
+        {/* ⭐⭐ THE MESS (Alex, rev 4: "the animation with all of the messy coding agents window needs
+            to be way more interesting"). A dozen half-overlapping terminal windows piled on one
+            screen, each jittering on its own clock, three of them throwing an error dot — the actual
+            picture of running four agents in one window. As `grow` runs they FLY to the four panes,
+            so the split is the payoff of this mess and not a separate idea. */}
+        {/* ⛔ all eleven windows existing from frame 0 gave CRAM a Q1 of 16 and a Q4 of 3.7 — the
+            pile ARRIVED and then sat. `messStep` staggers them so windows keep landing right up to
+            the cut, which is also what the sentence says is happening. */}
+        {grow < 0.98 && Array.from({ length: 11 }, (_, i) => {
+            const born = i * messStep;
+            if (f < born) return null;
+            const pop = E(f, born, born + 6, 0, 1, BACK);
+            const r1 = rnd(i * 3 + 1, 7), r2 = rnd(i * 5 + 2, 11), r3 = rnd(i * 7 + 3, 5);
+            const ww = 168 + r1 * 96, wh = 104 + r2 * 66;
+            const mx = (screen.w - sidebar) * (0.04 + 0.62 * r1) - ww * 0.2;
+            const my = screen.h * (0.05 + 0.52 * r2);
+            const jx = Math.sin(f / (5 + r3 * 4) + i) * 4.5 * (1 - grow);
+            const jy = Math.cos(f / (6 + r1 * 4) + i * 2) * 3.5 * (1 - grow);
+            const slot = i % (cols * rows);
+            const tx = (slot % cols) * cellW + cellW * 0.5 - ww * 0.5;
+            const ty = Math.floor(slot / cols) * cellH + cellH * 0.32;
+            const gx = mx + (tx - mx) * grow + jx, gy = my + (ty - my) * grow + jy;
+            const err = i % 4 === 1;
+            const ac = AGENT_C[i % AGENT_C.length];
+            return (
+              <div key={"mw" + i} style={{ position: "absolute", left: gx, top: gy, width: ww, height: wh,
+                zIndex: 3 + (i % 5), borderRadius: 6, background: "#FBF7EC", opacity: (1 - grow * 0.92) * pop,
+                border: `2px solid ${hexa(INK, 0.28)}`, boxShadow: SH, overflow: "hidden",
+                transform: `rotate(${(r3 - 0.5) * 3 * (1 - grow)}deg) scale(${0.7 + 0.3 * pop})` }}>
+                <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 15,
+                  background: hexa(INK, 0.11), display: "flex", alignItems: "center", gap: 3, paddingLeft: 5 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: err ? RED : ac }} />
+                  <div style={{ width: 30 + r1 * 26, height: 4, borderRadius: 2, background: hexa(INK, 0.3) }} />
+                </div>
+                {Array.from({ length: 3 + Math.floor(r2 * 4) }, (_, l) => (
+                  <div key={l} style={{ position: "absolute", left: 7, top: 22 + l * 10,
+                    width: (ww - 22) * (0.3 + rnd(i * 11 + l, 9) * 0.66), height: 4.5, borderRadius: 2,
+                    background: l === 0 ? hexa(ac, 0.85) : hexa(INK, 0.22 + (l % 3) * 0.08) }} />
+                ))}
+                {err && (
+                  <div style={{ position: "absolute", right: 6, bottom: 5, width: 16, height: 16, borderRadius: "50%",
+                    background: RED, color: "#FFF", ...ui(12, 900), display: "flex", alignItems: "center",
+                    justifyContent: "center", lineHeight: 1,
+                    opacity: 0.55 + 0.45 * Math.abs(Math.sin(f / 6 + i)) }}>!</div>
+                )}
+              </div>
+            );
+        })}
         {/* ⭐⭐ EACH PANE IS A REAL WORKSPACE (Alex, rev 3: "each of the screens needs to be way
             more interesting, way better detailed, not just lines"). Per pane: a header with the
             agent's name and its live status chip, a file tree, SYNTAX-COLOURED code printing a
@@ -363,8 +413,8 @@ export const Monitor: React.FC<{ x: number; y: number; f: number; w?: number; h?
           const ac = AGENT_C[i % AGENT_C.length];
           const stC = st > 0.5 ? "#1A7F37" : st < 0 ? RED : "#8A8F98";
           const stT = st > 0.5 ? "WORKING" : st < 0 ? "BLOCKED" : "IDLE";
-          const nLines = st > 0.5 ? Math.max(0, Math.min(6, Math.floor((f - printAt - i * 4) / 6))) : st < 0 ? 1 : 0;
-          const prog = st > 0.5 ? Math.max(0, Math.min(1, (f - printAt - i * 4) / 46)) : st < 0 ? 0.34 : 0;
+          const nLines = st > 0.5 ? Math.max(0, Math.min(8, Math.floor((f - printAt - i * 4) / 5))) : st < 0 ? 1 : 0;
+          const prog = st > 0.5 ? Math.max(0, Math.min(1, (f - printAt - i * 4) / 62)) : st < 0 ? 0.34 : 0;
           const TOK = ["#C7502B", "#2B5EA8", "#1A7F37", hexa(INK, 0.5)];
           return (
             <div key={"pane" + i} style={{ position: "absolute", left: cx0 + 10, top: cy0 + 7,
@@ -897,16 +947,13 @@ export const RepoCard: React.FC<{ repo: Repo; x: number; y: number; w?: number; 
           </div>
           <div style={{ ...ui((desc ? 31 : 24) * u, 800), color: GH.link, whiteSpace: "nowrap",
             letterSpacing: "-0.02em", lineHeight: 1.06 }}>{repo.tagName}</div>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 * u, marginTop: 3 * u }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 4 * u }}>
-              <Octicon kind="star" s={(desc ? 19 : 14) * u} c={GH.star} />
-              <div style={{ ...ui((desc ? 23 : 17) * u, 800), color: GH.text, whiteSpace: "nowrap",
-                letterSpacing: "-0.02em" }}>{shown}</div>
-            </div>
-            <div style={{ width: 10 * u, height: 10 * u, borderRadius: "50%", background: repo.langC,
-              border: `${1 * u}px solid ${hexa("#000000", 0.14)}`, flexShrink: 0 }} />
-            <div style={{ ...ui(12.5 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{repo.lang}</div>
-            <div style={{ ...ui(12.5 * u, 600), color: GH.mute, whiteSpace: "nowrap" }}>{repo.lic}</div>
+          {/* ⛔ Alex, rev 4: "don't need to have Rust or MIT mentioned, just the name and the stars."
+              The language dot and the licence were repo-page furniture; the STAR COUNT is the only
+              number that earns its place, so it gets the whole row and 30u of type. */}
+          <div style={{ display: "flex", alignItems: "center", gap: 6 * u, marginTop: 5 * u }}>
+            <Octicon kind="star" s={(desc ? 25 : 17) * u} c={GH.star} />
+            <div style={{ ...ui((desc ? 30 : 20) * u, 900), color: GH.text, whiteSpace: "nowrap",
+              letterSpacing: "-0.03em" }}>{shown}</div>
           </div>
         </div>
         {/* the GitHub mark, small, where a repo page puts it */}
@@ -977,14 +1024,22 @@ export const GhSign: React.FC<{ x: number; y: number; w?: number; z?: number; on
    neon-on-black ([[feedback_arcade_world_means_neon_on_black]]).
    ====================================================================== */
 export const Gem: React.FC<{ repo: Repo; x: number; y: number; s?: number; z?: number; f: number;
-  lit?: number; spin?: number; mark?: boolean; stars?: number; label?: boolean }> =
-  ({ repo, x, y, s = 190, z = 70, f, lit = 1, spin = 0, mark = true, stars = 1, label = true }) => {
+  lit?: number; spin?: number; mark?: boolean; stars?: number; label?: boolean; shake?: number }> =
+  ({ repo, x, y, s = 190, z = 70, f, lit = 1, spin = 0, mark = true, stars = 1, label = true, shake = 0 }) => {
   const k = Math.max(0, Math.min(1, lit));
+  /* ⛔ Alex, rev 4: "the gems should be moving or shaking or glowing, more interesting." A gem that
+     sits still is a shape; these BREATHE (halo + scale), JITTER on their own clock, sweep a GLINT
+     across the facets every 40 frames, and carry three sparks orbiting the crown. */
   const pulse = 0.9 + 0.1 * Math.sin(f / 6 + x / 90);
+  const breathe = 1 + 0.045 * Math.sin(f / 7.5 + x / 70) * k;
+  const jx = Math.sin(f / 3.1 + x / 40) * 2.2 * k + Math.sin(f * 1.7) * 5 * shake;
+  const jy = Math.cos(f / 3.7 + x / 55) * 2.0 * k + Math.cos(f * 1.9) * 5 * shake;
+  const glint = ((f + x / 3) % 46) / 46;          /* 0..1, sweeps the face */
   const CUT = "polygon(28% 0%, 72% 0%, 100% 34%, 50% 100%, 0% 34%)";
   const shown = Math.round(repo.stars * Math.max(0, Math.min(1, stars))).toLocaleString("en-US");
   return (
-    <div style={{ position: "absolute", left: x - s / 2, top: y - s / 2, width: s, height: s, zIndex: z }}>
+    <div style={{ position: "absolute", left: x - s / 2 + jx, top: y - s / 2 + jy, width: s, height: s, zIndex: z,
+      transform: `scale(${breathe})`, transformOrigin: "50% 60%" }}>
       {/* the pool of light it throws — soft and wide, never a bloom ring */}
       <div style={{ position: "absolute", left: -s * 0.46, top: -s * 0.42, width: s * 1.92, height: s * 1.92,
         borderRadius: "50%", opacity: 0.34 * k * pulse, zIndex: -1,
@@ -1010,7 +1065,26 @@ export const Gem: React.FC<{ repo: Repo; x: number; y: number; s?: number; z?: n
         {/* the specular — one hard highlight is what makes a facet read as cut */}
         <div style={{ position: "absolute", left: "31%", top: "3%", width: "16%", height: "24%",
           background: hexa("#FFFFFF", 0.62 * pulse), clipPath: "polygon(0 0, 100% 0, 60% 100%, 0 70%)" }} />
+        {/* ⭐ the GLINT: a bright bar sweeping the whole cut, clipped to the stone */}
+        {glint < 0.34 && (
+          <div style={{ position: "absolute", inset: 0, clipPath: CUT, overflow: "hidden" }}>
+            <div style={{ position: "absolute", top: "-40%", bottom: "-40%", width: "26%",
+              left: `${-30 + glint * 3.4 * 100}%`, transform: "rotate(18deg)",
+              background: `linear-gradient(90deg, ${hexa("#FFFFFF", 0)}, ${hexa("#FFFFFF", 0.55 * k)}, ${hexa("#FFFFFF", 0)})` }} />
+          </div>
+        )}
       </div>
+      {/* three sparks orbiting the crown, each on its own radius and clock */}
+      {k > 0.25 && [0, 1, 2].map((i) => {
+        const a2 = f / (13 + i * 4) + i * 2.1;
+        const rr = s * (0.52 + 0.07 * i);
+        const sz = s * (0.055 - i * 0.008);
+        return (
+          <div key={"sp" + i} style={{ position: "absolute", left: s / 2 + Math.cos(a2) * rr - sz / 2,
+            top: s * 0.44 + Math.sin(a2) * rr * 0.52 - sz / 2, width: sz, height: sz, borderRadius: "50%",
+            background: hexa("#FFF8E6", 0.85 * k * (0.5 + 0.5 * Math.sin(f / 4 + i))), zIndex: 3 }} />
+        );
+      })}
       {/* the repo's real mark, set into the table */}
       {mark && (
         <div style={{ position: "absolute", left: s * 0.335, top: s * 0.055, width: s * 0.33, height: s * 0.235,
@@ -1056,75 +1130,89 @@ export const DocMorph: React.FC<{ x: number; y: number; w?: number; t?: number; 
   const k = Math.max(0, Math.min(1, t));
   const tint = { ppt: "#C7502B", doc: "#2B5EA8", xls: "#1E7145" }[kind];
   const icon = { ppt: "ft_powerpoint.svg", doc: "ft_word.svg", xls: "ft_excel.svg" }[kind];
-  /* each junk piece leaves on its own clock, so the page sheds rather than dissolves */
-  const gone = (i: number) => Math.max(0, Math.min(1, (k - 0.08 - i * 0.13) / 0.40));
-  const paper = lerpHex("#FFFFFF", "#F7F2E4", k);
   const LINES = [0.86, 0.62, 0.94, 0.55, 0.78, 0.7, 0.9, 0.48];
+  /* ⭐⭐ Alex, rev 4: "have a SLIDER thing that swipes down or from the side on the documents, kind
+     of showing HOW it does that." So the page is two complete layers — the Office original and the
+     finished Markdown — and a bright scan head wipes left to right across it. Everything behind the
+     head is converted, everything ahead of it is untouched, and each piece of junk flies off at the
+     moment the head reaches ITS column. The mechanism is visible, not implied. */
+  const head = k;                                   /* 0..1 across the page */
+  const HX = head * 100;                            /* the head's x, in % */
+  const gone = (px: number) => Math.max(0, Math.min(1, (head - px) / 0.16));
+  const office = (
+    <>
+      <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: 46 * u, background: tint }} />
+      <div style={{ position: "absolute", left: 16 * u, top: 14 * u, width: 150 * u, height: 16 * u,
+        borderRadius: 3 * u, background: "#FFFFFF", opacity: 0.92 }} />
+      <div style={{ position: "absolute", right: 12 * u, top: 11 * u, width: 30 * u, height: 30 * u,
+        borderRadius: 6 * u, background: "#FFFFFF", border: `${1.6 * u}px solid #E2DCCC`,
+        display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Img src={staticFile("logos/" + icon)} style={{ width: 21 * u, height: 21 * u, objectFit: "contain" }} />
+      </div>
+      {LINES.map((wd, i) => (
+        <div key={"o" + i} style={{ position: "absolute", left: 16 * u, top: (64 + i * 21) * u,
+          width: 298 * u * wd * 0.94, height: 9 * u, borderRadius: 2 * u,
+          background: i % 3 === 0 ? "#7A8794" : "#9AA3AC" }} />
+      ))}
+    </>
+  );
+  const markdown = (
+    <>
+      <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: 46 * u, background: "#F7F2E4" }} />
+      <div style={{ position: "absolute", left: 16 * u, top: 15 * u, ...mono(17 * u, 800), color: "#C7502B" }}>#</div>
+      <div style={{ position: "absolute", left: 32 * u, top: 18 * u, width: 106 * u, height: 12 * u,
+        borderRadius: 3 * u, background: "#1F2328" }} />
+      <div style={{ position: "absolute", right: 12 * u, top: 13 * u, ...mono(13 * u, 800), color: "#1A7F37",
+        border: `${1.6 * u}px solid #1A7F37`, borderRadius: 5 * u, padding: `${2 * u}px ${6 * u}px` }}>MD</div>
+      {LINES.map((wd, i) => {
+        const mk = i === 2 || i === 3 || i === 6;
+        return (
+          <React.Fragment key={"m" + i}>
+            {mk && <div style={{ position: "absolute", left: 16 * u, top: (62 + i * 21) * u,
+              ...mono(13 * u, 800), color: "#C7502B" }}>-</div>}
+            <div style={{ position: "absolute", left: (16 + (mk ? 14 : 0)) * u, top: (64 + i * 21) * u,
+              width: (298 - (mk ? 14 : 0)) * u * 0.92 * 0.94, height: 7.4 * u, borderRadius: 2 * u,
+              background: "#3A3F45" }} />
+          </React.Fragment>
+        );
+      })}
+      <div style={{ position: "absolute", left: 20 * u, top: 250 * u, right: 20 * u,
+        ...mono(13 * u, 700), color: "#3A3F45", lineHeight: 1.6 }}>
+        <div>| region | total |</div><div>|--------|-------|</div>
+        <div>| north  |  ####  |</div><div>| south  |  ###   |</div>
+      </div>
+    </>
+  );
   return (
     <div style={{ position: "absolute", left: x - w / 2, top: y - H2 / 2, width: w, height: H2, zIndex: z,
       transform: `rotate(${rot}deg)`, transformOrigin: "50% 50%" }}>
-      <div style={{ position: "absolute", inset: 0, background: paper, borderRadius: 7 * u, boxShadow: SH_D,
-        border: `${2.4 * u}px solid ${lerpHex("#D8D2C4", "#CFC6AE", k)}`,
-        overflow: k > 0.02 && k < 0.98 ? "visible" : "hidden" }}>
-        {/* 1 — the coloured header band shrinks to a markdown `#` heading rule */}
-        <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: (46 - 30 * k) * u,
-          background: lerpHex(tint, "#F7F2E4", k) }} />
-        <div style={{ position: "absolute", left: 16 * u, top: (14 + 4 * k) * u, width: (150 - 44 * k) * u,
-          height: (16 - 4 * k) * u, borderRadius: 3 * u,
-          background: lerpHex("#FFFFFF", "#1F2328", k), opacity: 0.92 }} />
-        {/* the `#` that arrives as the band leaves */}
-        {k > 0.55 && (
-          <div style={{ position: "absolute", left: 16 * u - 13 * u, top: 15 * u, ...mono(17 * u, 800),
-            color: "#C7502B", opacity: (k - 0.55) / 0.45 }}>#</div>
-        )}
-        {/* 2 — the file badge, which flips to a markdown chip */}
-        <div style={{ position: "absolute", right: 12 * u, top: 11 * u, width: 30 * u, height: 30 * u,
-          borderRadius: 6 * u, background: "#FFFFFF", border: `${1.6 * u}px solid #E2DCCC`,
-          display: "flex", alignItems: "center", justifyContent: "center", opacity: 1 - gone(4) }}>
-          <Img src={staticFile("logos/" + icon)} style={{ width: 21 * u, height: 21 * u, objectFit: "contain" }} />
-        </div>
-        {k > 0.7 && (
-          <div style={{ position: "absolute", right: 12 * u, top: 13 * u, ...mono(13 * u, 800), color: "#1A7F37",
-            border: `${1.6 * u}px solid #1A7F37`, borderRadius: 5 * u, padding: `${2 * u}px ${6 * u}px`,
-            opacity: (k - 0.7) / 0.3 }}>MD</div>
-        )}
-        {/* 3 — the body lines: ragged + proportional, then aligned mono with markers */}
-        {LINES.map((wd, i) => {
-          const top = (64 + i * 21) * u;
-          const align = k;                                     /* ragged -> flush */
-          const wide = wd + (0.92 - wd) * align;
-          const mk = i === 2 || i === 3 || i === 6;
-          return (
-            <React.Fragment key={i}>
-              {mk && k > 0.5 && (
-                <div style={{ position: "absolute", left: 16 * u, top: top - 2 * u, ...mono(13 * u, 800),
-                  color: "#C7502B", opacity: (k - 0.5) / 0.5 }}>-</div>
-              )}
-              <div style={{ position: "absolute", left: (16 + (mk ? 14 * k : 0)) * u, top,
-                width: (298 - (mk ? 14 * k : 0)) * u * wide * 0.94, height: (9 - 1.6 * k) * u, borderRadius: 2 * u,
-                background: lerpHex(i % 3 === 0 ? "#7A8794" : "#9AA3AC", "#3A3F45", k) }} />
-            </React.Fragment>
-          );
-        })}
-        {/* 4 — the junk: a pie chart, a shape block and a tinted table. Each PEELS OFF and flies. */}
-        {[0, 1, 2].map((i) => {
-          const g = gone(i);
+      <div style={{ position: "absolute", inset: 0, background: "#FFFFFF", borderRadius: 7 * u, boxShadow: SH_D,
+        border: `${2.4 * u}px solid #D8D2C4` }}>
+        {/* the untouched original, revealed AHEAD of the head */}
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: 5 * u,
+          clipPath: `inset(0 0 0 ${HX}%)` }}>{office}</div>
+        {/* the finished markdown, revealed BEHIND it */}
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: 5 * u,
+          background: "#F7F2E4", clipPath: `inset(0 ${100 - HX}% 0 0)` }}>{markdown}</div>
+        {/* the junk: each piece leaves when the head reaches its own column */}
+        {[{ px: 0.70, l: 210, t: 240, kind: "pie" }, { px: 0.16, l: 22, t: 250, kind: "block" },
+          { px: 0.30, l: 22, t: 336, kind: "table" }].map((j2, i) => {
+          const g = gone(j2.px);
           if (g >= 1) return null;
-          const dx = g * (i === 1 ? 400 : -380) * u, dy = -g * (250 + i * 90) * u;
-          const st: React.CSSProperties = { position: "absolute", opacity: 1 - g,
-            transform: `translate(${dx}px, ${dy}px) rotate(${g * (i % 2 ? 128 : -140)}deg) scale(${1 - g * 0.28})` };
-          if (i === 0) return (
-            <div key={i} style={{ ...st, left: 210 * u, top: 240 * u, width: 82 * u, height: 82 * u,
+          const st: React.CSSProperties = { position: "absolute", opacity: 1 - g, zIndex: 4,
+            transform: `translate(${g * (i === 1 ? 400 : -380) * u}px, ${-g * (250 + i * 90) * u}px) rotate(${g * (i % 2 ? 128 : -140)}deg) scale(${1 - g * 0.28})` };
+          if (j2.kind === "pie") return (
+            <div key={i} style={{ ...st, left: j2.l * u, top: j2.t * u, width: 82 * u, height: 82 * u,
               borderRadius: "50%", background: `conic-gradient(${tint} 0 42%, #E8B23C 42% 68%, #4E8FD1 68% 100%)`,
               border: `${2 * u}px solid #FFFFFF` }} />
           );
-          if (i === 1) return (
-            <div key={i} style={{ ...st, left: 22 * u, top: 250 * u, width: 108 * u, height: 62 * u,
+          if (j2.kind === "block") return (
+            <div key={i} style={{ ...st, left: j2.l * u, top: j2.t * u, width: 108 * u, height: 62 * u,
               borderRadius: 5 * u, background: `linear-gradient(140deg, ${mxh(tint, 0.3)}, ${tint})`,
               border: `${2 * u}px solid #FFFFFF` }} />
           );
           return (
-            <div key={i} style={{ ...st, left: 22 * u, top: 336 * u, width: 268 * u, height: 60 * u,
+            <div key={i} style={{ ...st, left: j2.l * u, top: j2.t * u, width: 268 * u, height: 60 * u,
               display: "grid", gridTemplateColumns: "repeat(4,1fr)", gridTemplateRows: "repeat(3,1fr)", gap: 2 * u }}>
               {Array.from({ length: 12 }, (_, c) => (
                 <div key={c} style={{ background: c < 4 ? tint : hexa(tint, 0.16 + (c % 3) * 0.1) }} />
@@ -1132,22 +1220,22 @@ export const DocMorph: React.FC<{ x: number; y: number; w?: number; t?: number; 
             </div>
           );
         })}
-        {/* 5 — what the junk becomes: a clean mono table */}
-        {k > 0.62 && (
-          <div style={{ position: "absolute", left: 20 * u, top: 250 * u, right: 20 * u,
-            opacity: (k - 0.62) / 0.38, ...mono(13 * u, 700), color: "#3A3F45", lineHeight: 1.6 }}>
-            <div>| region | total |</div>
-            <div>|--------|-------|</div>
-            <div>| north  |  ####  |</div>
-            <div>| south  |  ###   |</div>
-          </div>
+        {/* ⭐ THE SCAN HEAD: a bright bar with a warm edge, sparks trailing off it */}
+        {head > 0.005 && head < 0.995 && (
+          <>
+            <div style={{ position: "absolute", left: `calc(${HX}% - ${3 * u}px)`, top: -6 * u, bottom: -6 * u,
+              width: 6 * u, background: "#FFF3D0", boxShadow: `0 0 ${16 * u}px ${hexa("#FFC94A", 0.9)}`, zIndex: 6 }} />
+            <div style={{ position: "absolute", left: `calc(${HX}% - ${34 * u}px)`, top: 0, bottom: 0,
+              width: 34 * u, zIndex: 5,
+              background: `linear-gradient(90deg, ${hexa("#1A7F37", 0)}, ${hexa("#1A7F37", 0.22)})` }} />
+            {[0, 1, 2, 3].map((i) => (
+              <div key={"sk" + i} style={{ position: "absolute", left: `calc(${HX}% - ${(4 + i * 9) * u}px)`,
+                top: `${12 + ((f * 7 + i * 61) % 76)}%`, width: 5 * u, height: 5 * u, borderRadius: "50%",
+                background: hexa("#FFE9A6", 0.9 - i * 0.2), zIndex: 7 }} />
+            ))}
+          </>
         )}
       </div>
-      {/* the shed pieces leave a little chaff behind them */}
-      {k > 0.12 && k < 0.9 && (
-        <div style={{ position: "absolute", left: -30 * u, top: 120 * u, width: 40 * u, height: 40 * u,
-          borderRadius: 3 * u, background: hexa(tint, 0.5), transform: `rotate(${k * 200}deg)`, opacity: 0.5 }} />
-      )}
     </div>
   );
 };

@@ -79,13 +79,13 @@ export const SPIKE_HOOK: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) =>
   return (
     <Scene p={p} slug="" push={[0, dur, 1.07]} vig={0.42}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} bands={1} kind="shelf" overhead="none" rake={0.09} rakeRate={3.2}
+        <Room p={p} f={f} bands={0} kind="shelf" overhead="none" rake={0.09} rakeRate={3.2}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={ctx} run={1} />
         <PaneWall f={f} z={20} y0={12} h={164} n={6} lit={[1, 3]} signLit={1} />
         <ErrStack x={190} y={470} f={f} at={40} k={err} z={58} n={16} s={1.0} />
 
-        <PromptRail f={f} z={70} topY={598} lampBarY={214} lamps={[1, 1, 1]} />
+        <PromptRail f={f} z={70} topY={654} lampBarY={214} lamps={[1, 1, 1]} />
 
         {/* the claim plate: the todo list standing on the rail, unread */}
         <TodoList x={188} y={274} w={272} h={368} z={78} f={f}
@@ -122,7 +122,7 @@ export const SPIKE_HOOK: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) =>
         )}
 
         <Contact x={330} y={GY - 6} w={190} o={0.34} z={44} />
-        <Dev f={f} x={330} y={GY} i={0} size={280} z={62} at={-14} loop={1} extra={{ glasses: 1 }}
+        <Dev f={f} x={330} y={GY} i={0} size={324} z={62} at={-14} loop={1} extra={{ glasses: 1 }}
           gaze={1.0} cheer={E(f, 88, 100, 0, 1, BACK)} />
 
         <PaneStack x={W - 30} y={H - 4} n={6} z={94} s={0.9} />
@@ -166,7 +166,7 @@ export const SCORCH_HOOK: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) =
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.44}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} bands={1} kind="shelf" overhead="none" rake={0.10} rakeRate={3.6}
+        <Room p={p} f={f} bands={0} kind="shelf" overhead="none" rake={0.10} rakeRate={3.6}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={ctx} run={1} />
         <PaneWall f={f} z={20} y0={12} h={168} n={6} lit={[0, 2, 4]} signLit={1} />
@@ -186,8 +186,8 @@ export const SCORCH_HOOK: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) =
           <ErrStack x={690} y={222} f={f} at={112} k={wallFail} z={67} n={15} s={1.1} />
         </>)}
 
-        <PromptRail f={f} z={70} topY={598} lampBarY={214} lamps={[1, 1, 1]} />
-        <TodoList x={676} y={276} w={344} h={452} z={78} f={f}
+        <PromptRail f={f} z={70} topY={654} lampBarY={214} lamps={[1, 1, 1]} />
+        <TodoList x={676} y={286} w={392} h={506} z={78} f={f}
           ticks={[true, true, false, false, false, false]} big={`${R.done}/${R.tasks}`} sub="TODO"
           stand rot={2} hard={2} />
         <TickPile x={890} y={GY - 46} s={1.1} z={80} f={f} jolt={0} slips={5 + (f >= 20 ? 1 : 0)} />
@@ -199,7 +199,7 @@ export const SCORCH_HOOK: React.FC<{ v: Variant; dur: number }> = ({ v, dur }) =
 
         {/* ⛔ HE NEVER LOOKS BACK. Down the lens, grinning, the whole shot. */}
         <Contact x={300} y={GY - 6} w={200} o={0.36} z={44} />
-        <Dev f={f} x={300} y={GY} i={0} size={300} z={62} at={-14} loop={2} extra={{ glasses: 1 }}
+        <Dev f={f} x={300} y={GY} i={0} size={348} z={62} at={-14} loop={2} extra={{ glasses: 1 }}
           gaze={0} cheer={E(f, 8, 22, 0, 1, BACK)} />
 
         <PaneStack x={W - 40} y={H - 6} n={6} z={94} s={0.9} />

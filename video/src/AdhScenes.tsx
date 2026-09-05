@@ -206,7 +206,7 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.09]} vig={0.40}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.4} bands={1} kind="shelf" overhead="none"
+        <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="none"
           rake={0.09 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={3.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={ctx} run={1} />
@@ -224,7 +224,7 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
         <Toast x={toast} y={GY - 40} s={0.92} z={50} f={f} hue={SKY} />
 
         {/* THE PROMPT RAIL running toward camera */}
-        <PromptRail f={f} z={70} topY={632} lampBarY={214} lamps={[1, 1, 1]}
+        <PromptRail f={f} z={70} topY={688} lampBarY={214} lamps={[1, 1, 1]}
           lampX={[386 + L.c * 0.3, 536 + L.c * 0.3, 686 + L.c * 0.3]} dx={L.c * 0.2} />
 
         {/* ⭐⭐ THE FRAME-0 CLAIM PLATE, AND IT IS THE TODO LIST — the measured IG
@@ -297,7 +297,7 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
 
         {/* THE CLAUDE — he is the subject, and what he DOES is leave */}
         <Contact x={devX} y={GY - 6} w={196} o={0.36} z={44} />
-        <Dev f={f} x={devX} y={GY} i={0} size={286} z={62} at={o - 14} loop={3}
+        <Dev f={f} x={devX} y={GY} i={0} size={331} z={62} at={o - 14} loop={3}
           gaze={look * 1.4} extra={{ glasses: 1 }}
           shock={E(f, o + 8, o + 14, 0, 0.5, OUT) - E(f, o + 20, o + 30, 0, 0.5, IO)}
           cheer={E(f, o + 96, o + 106, 0, 1, BACK) - E(f, o + 128, dur, 0, 1, IO)} />
@@ -333,7 +333,7 @@ export const CARD: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.52}>
       <Cam x={L.a * 0.4} y={0} s={1.06} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.4} bands={1} kind="shelf" overhead="none"
+        <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="none"
           rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.2} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
         <SesFit p={p} f={f} seed={4} z={5} lift={1.0} ctx={0.7} run={read} />
@@ -345,10 +345,10 @@ export const CARD: React.FC<SP> = ({ v, dur }) => {
           open={open} lit={lit} />
         <Ring x={506 + L.b * 0.4} y={410} f={f} at={16} c={mxh(TEAL, 0.4)} z={84} s={0.9} dur={18} />
         {land > 0.1 && <Puff x={506 + L.b * 0.4} y={418} f={f} at={16} c="#CFE8F0" z={84} n={10} s={0.9} />}
-        <PromptRail f={f} z={70} topY={640} lampBarY={214} lamps={[1, 1, 0]}
-          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#7E939C" />
+        <PromptRail f={f} z={70} topY={696} lampBarY={214} lamps={[1, 1, 0]}
+          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={252 + L.a * 0.3} y={GY - 6} w={190} o={0.34} z={44} />
-        <Dev f={f} x={252 + L.a * 0.3} y={GY} i={0} size={278} z={62} at={-14} loop={3}
+        <Dev f={f} x={252 + L.a * 0.3} y={GY} i={0} size={322} z={62} at={-14} loop={3}
           extra={{ glasses: 1 }} gaze={0.9} shock={E(f, 16, 22, 0, 0.7, OUT) - E(f, 30, 44, 0, 0.7, IO)} />
         <PaneStack x={W - 26 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.85} />
         <Edge side="r" c={dkh(p.floor2, 0.34)} w={80} z={92} kind="post" />
@@ -388,7 +388,7 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.50}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.5} bands={1} kind="shelf" overhead="lampbar"
+        <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="lampbar"
           rake={0.14 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.4} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
         <SesFit p={p} f={f} seed={2} z={5} lift={1.0} ctx={0.85} run={1} />
@@ -449,7 +449,7 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
 
         {/* HE SIDESTEPS. 132px, body leaning away, and the card passes where he was. */}
         <Contact x={MX(392) + dodge * (flip ? 132 : -132) + L.a * 0.3} y={GY - 6} w={188} o={0.34} z={44} />
-        <Dev f={f} x={MX(392) + dodge * (flip ? 132 : -132) + L.a * 0.3} y={GY} i={0} size={282}
+        <Dev f={f} x={MX(392) + dodge * (flip ? 132 : -132) + L.a * 0.3} y={GY} i={0} size={327}
           z={62} at={-14} loop={1} extra={{ glasses: 1 }} flip={flip}
           gaze={dodge * (flip ? 1.2 : -1.2)} />
 
@@ -468,7 +468,7 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
             ticks={[true, true, false, true, true, true]} hard={2} rot={-5} sub="TODO"
             big={`5/${R.tasks}`} struck={[false, false, false, true, true, true]} />
           <Contact x={700 + L.a * 0.3} y={GY - 6} w={200} o={0.32} z={44} />
-          <Crew f={f} x={700 + L.a * 0.3} y={GY} i={2} size={294} z={64} at={62} loop={3} />
+          <Crew f={f} x={700 + L.a * 0.3} y={GY} i={2} size={329} z={64} at={62} loop={3} />
         </>)}
 
         <PaneStack x={W - 34 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.88} />
@@ -502,7 +502,7 @@ export const INSTALL: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.54}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.4} bands={1} kind="shelf" overhead="none"
+        <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="none"
           rake={0.11 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
         <SesFit p={p} f={f} seed={5} z={5} lift={0.9} ctx={0.62} run={install} />
@@ -515,10 +515,10 @@ export const INSTALL: React.FC<SP> = ({ v, dur }) => {
           w={272} z={80} open={install} rot={-3 + lift * 5} lit={lit} />
         {land > 0.05 && <Ring x={506 + L.b * 0.4} y={470} f={f} at={38} c={mxh(VIOLET, 0.4)} z={84} s={1.0} dur={20} />}
         {land > 0.05 && <Puff x={506 + L.b * 0.4} y={476} f={f} at={38} c="#C8CCF0" z={84} n={11} s={0.95} />}
-        <PromptRail f={f} z={70} topY={640} lampBarY={214} lamps={[1, install > 0.5 ? 1 : 0, 0]}
-          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#6E74A8" />
+        <PromptRail f={f} z={70} topY={696} lampBarY={214} lamps={[1, install > 0.5 ? 1 : 0, 0]}
+          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={772 + L.a * 0.3} y={GY - 6} w={190} o={0.34} z={44} />
-        <Dev f={f} x={772 + L.a * 0.3} y={GY} i={0} size={280} z={62} at={-14} loop={2}
+        <Dev f={f} x={772 + L.a * 0.3} y={GY} i={0} size={324} z={62} at={-14} loop={2}
           extra={{ glasses: 1 }} cheer={E(f, 64, 74, 0, 1, BACK)} gaze={-0.8} />
         <PaneStack x={-10 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.85} />
         <Edge side="r" c={dkh(p.floor2, 0.34)} w={82} z={92} kind="post" />
@@ -562,7 +562,7 @@ export const GATE: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.48}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.5} bands={1} kind="shelf" overhead="lampbar"
+        <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="lampbar"
           rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.6} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
         <SesFit p={p} f={f} seed={6} z={5} lift={1.0} ctx={0.5} run={1} />
@@ -596,12 +596,12 @@ export const GATE: React.FC<SP> = ({ v, dur }) => {
           z={86} items={[true, true, false, false, false, false]} rot={shove * 8} bad={1} />
         {shove > 0.6 && <Puff x={666 + L.b * 0.4 - 60} y={GY - 190} f={f} at={f} c="#F0D8B0" z={88} n={5} s={0.6} />}
 
-        <PromptRail f={f} z={70} topY={648} lampBarY={214} lamps={[1, 0, 0]}
-          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#B49A6A" />
+        <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[1, 0, 0]}
+          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
 
         {/* HE SHOVES. Body compresses, feet slide, effort off the head. */}
         <Contact x={402 + L.a * 0.3 + shove * 26 + back} y={GY - 6} w={190} o={0.34} z={44} />
-        <Dev f={f} x={402 + L.a * 0.3 + shove * 26 + back} y={GY} i={0} size={288} z={62} at={0}
+        <Dev f={f} x={402 + L.a * 0.3 + shove * 26 + back} y={GY} i={0} size={334} z={62} at={0}
           loop={1} extra={{ glasses: 1 }} gaze={look}
           shock={shove * 0.5 + give * 0.4} />
         {shove > 0.3 && (
@@ -641,7 +641,7 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.44}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.4} bands={1} kind="shelf" overhead="lampbar"
+        <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="lampbar"
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.2} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={7} z={5} lift={1.05} ctx={0.6} run={1} />
@@ -677,10 +677,10 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
           ) : null
         ))}
 
-        <PromptRail f={f} z={70} topY={638} lampBarY={214} lamps={[1, 1, rows >= 6 ? 1 : 0]}
-          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#B6D8C8" />
+        <PromptRail f={f} z={70} topY={694} lampBarY={214} lamps={[1, 1, rows >= 6 ? 1 : 0]}
+          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={452 + L.a * 0.3} y={GY - 6} w={192} o={0.34} z={44} />
-        <Dev f={f} x={452 + L.a * 0.3} y={GY} i={0} size={284} z={62} at={-14} loop={1}
+        <Dev f={f} x={452 + L.a * 0.3} y={GY} i={0} size={329} z={62} at={-14} loop={1}
           extra={{ glasses: 1 }} gaze={0.9} cheer={tear} />
         <PaneStack x={W - 30 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.88} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={84} z={92} kind="post" />
@@ -723,7 +723,7 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.52}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.5} bands={1} kind="shelf" overhead="none"
+        <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="none"
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.8} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
         <SesFit p={p} f={f} seed={8} z={5} lift={0.95} ctx={0.42} run={out} />
@@ -753,10 +753,10 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
             items={[true, true, true, true, false, false]} rot={ship * 4} />
         )}
 
-        <PromptRail f={f} z={70} topY={646} lampBarY={214} lamps={[1, 1, green ? 1 : 0]}
-          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#8A6A46" />
+        <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[1, 1, green ? 1 : 0]}
+          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={676 + L.a * 0.3} y={GY - 6} w={190} o={0.34} z={44} />
-        <Dev f={f} x={676 + L.a * 0.3} y={GY} i={0} size={280} z={62} at={-14} loop={1}
+        <Dev f={f} x={676 + L.a * 0.3} y={GY} i={0} size={324} z={62} at={-14} loop={1}
           extra={{ glasses: 1 }} gaze={-0.9} cheer={E(f, 86, 96, 0, 1, BACK)} />
         <PaneStack x={-14 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.86} />
         <Edge side="r" c={dkh(p.floor2, 0.34)} w={82} z={92} kind="post" />
@@ -780,7 +780,7 @@ export const ASIDE: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.07]} vig={0.50}>
       <Cam x={L.a * 0.4} y={0} s={1.04} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.4} bands={1} kind="shelf" overhead="lampbar"
+        <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="lampbar"
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
         <SesFit p={p} f={f} seed={9} z={5} lift={1.0} ctx={0.16 + (1 - drop) * 0.2} run={1} />
@@ -791,8 +791,8 @@ export const ASIDE: React.FC<SP> = ({ v, dur }) => {
             on={0.5 + warn * 0.5} run={warn} seed={i + 3} />
         ))}
         <WallClock x={506 + L.b * 0.4} y={224} s={1.15} z={62} f={f} rate={2.4} />
-        <PromptRail f={f} z={70} topY={646} lampBarY={214} lamps={[1, 1, 1]}
-          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#A6803E" />
+        <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[1, 1, 1]}
+          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <AnswerCard x={506 + L.c * 0.3 - drop * 30} y={624 + drop * 150} w={250 + drop * 150}
           z={86} items={[true, true, true, true, false, false]} rot={-drop * 5} />
         <PaneStack x={W - 24 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.86} />
@@ -830,7 +830,7 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.56}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.5} bands={1} kind="shelf" overhead="none"
+        <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="none"
           rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.4} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
         <SesFit p={p} f={f} seed={10} z={5} lift={0.95} ctx={0.3} run={0.5} />
@@ -865,10 +865,10 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
         ) : null)}
         <WallClock x={636 + L.b * 0.4} y={200} s={1.0} z={62} f={f} rate={3.2} />
         <Selector x={846 + L.c * 0.4} y={252} s={0.78} z={88} k={0} from={1} to={1} />
-        <PromptRail f={f} z={70} topY={648} lampBarY={214} lamps={[1, 0, 0]}
-          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#4A6690" />
+        <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[1, 0, 0]}
+          lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={286 + L.a * 0.3 + shunt * 40} y={GY - 6} w={186} o={0.32} z={44} />
-        <Dev f={f} x={286 + L.a * 0.3 + shunt * 40} y={GY} i={0} size={272} z={62} at={-14} loop={1}
+        <Dev f={f} x={286 + L.a * 0.3 + shunt * 40} y={GY} i={0} size={315} z={62} at={-14} loop={1}
           extra={{ glasses: 1 }} gaze={0.6} />
         <PaneStack x={W - 18 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.84} />
         <Edge side={flip ? "r" : "l"} c={dkh(p.floor2, 0.34)} w={82} z={92} kind="post" />
@@ -906,7 +906,7 @@ export const FANOUT: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.40}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.5} bands={1} kind="shelf" overhead="lampbar"
+        <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="lampbar"
           rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={11} z={5} lift={1.05} ctx={0.55} run={1} />
@@ -938,10 +938,10 @@ export const FANOUT: React.FC<SP> = ({ v, dur }) => {
             z={92} items={[true, true, true, true, true, true]} rot={ship * 5} />
         )}
 
-        <PromptRail f={f} z={70} topY={664} lampBarY={214} lamps={[1, 1, 1]}
+        <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[1, 1, 1]}
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} />
         <Contact x={846 + L.a * 0.3} y={GY - 6} w={188} o={0.32} z={44} />
-        <Dev f={f} x={846 + L.a * 0.3} y={GY} i={0} size={272} z={64} at={-14} loop={2}
+        <Dev f={f} x={846 + L.a * 0.3} y={GY} i={0} size={315} z={64} at={-14} loop={2}
           extra={{ glasses: 1 }} cheer={E(f, 64, 76, 0, 1, BACK)} />
         <PaneStack x={-16 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.88} />
         <Edge side={flip ? "l" : "r"} c={dkh(p.floor2, 0.34)} w={84} z={92} kind="post" />
@@ -979,7 +979,7 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.40}>
       <Cam x={L.a * 0.3} y={0} s={1.0} z={12}>
-        <Room p={p} f={f} dx={L.a * 0.4} bands={1} kind="shelf" overhead="lampbar"
+        <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="lampbar"
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={12} z={5} lift={1.2} ctx={0.8} run={1} />
@@ -1038,13 +1038,13 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
         {chip > 0.1 && <Ring x={806 + L.c * 0.3} y={GY - 132} f={f} at={40} c={mxh(GOLD, 0.5)} z={86} s={0.8} dur={20} />}
 
         <Contact x={430 + L.a * 0.3} y={GY - 6} w={196} o={0.34} z={44} />
-        <Dev f={f} x={430 + L.a * 0.3} y={GY} i={0} size={280} z={64} at={-14} loop={2}
+        <Dev f={f} x={430 + L.a * 0.3} y={GY} i={0} size={324} z={64} at={-14} loop={2}
           extra={{ glasses: 1 }} cheer={E(f, 44, 54, 0, 1, BACK)} />
         <Contact x={646 + L.a * 0.3} y={GY - 6} w={186} o={0.32} z={44} />
-        <Crew f={f} x={646 + L.a * 0.3} y={GY} i={2} size={266} z={62} at={-14} loop={2} flip
+        <Crew f={f} x={646 + L.a * 0.3} y={GY} i={2} size={297} z={62} at={-14} loop={2} flip
           cheer={E(f, 48, 58, 0, 1, BACK)} />
 
-        <PromptRail f={f} z={76} topY={646} lampBarY={202} lamps={[1, 1, 1]}
+        <PromptRail f={f} z={76} topY={700} lampBarY={202} lamps={[1, 1, 1]}
           lampX={[356 + L.c * 0.3, 526 + L.c * 0.3, 696 + L.c * 0.3]} dx={L.c * 0.2} />
         <PaneStack x={W - 30 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.9} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={86} z={92} kind="rail" />

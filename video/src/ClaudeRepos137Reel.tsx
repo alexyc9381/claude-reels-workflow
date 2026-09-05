@@ -41,7 +41,7 @@ const FPS = 30;
 /* ⛔ Alex, rev 3: "it needs to end RIGHT WHEN it says the last word". The last word "links."
    ends at 40.31s and the reel ran to 41.18s — 0.87s of air after the CTA. 1222 frames = 40.73s
    leaves only the SEND stamp (0.34s from f1212) and lands the cut on its decay. */
-export const RPS_TOTAL = 1222;                       /* 40.73s x 30fps; last word ends 40.31s */
+export const RPS_TOTAL = 1190;                       /* 39.67s x 30fps; last word ends 39.24s */
 
 /** ⛔ EVERY ONSET BELOW IS A SPLICE JOIN, i.e. a point of MEASURED SILENCE in
     the cut file — never a stored word end (which whisper places 20-200ms
@@ -49,18 +49,18 @@ export const RPS_TOTAL = 1222;                       /* 40.73s x 30fps; last wor
 export const L = {
   S0: 0,      /* LIFT      hook · "These four brand new open source..."      0.00s */
   S1: 102,    /* TAG1      "First, AnyDoc."                                   3.41s */
-  S2: 132,    /* JAM       "Feeding PowerPoint or Word files..."              4.41s */
-  S3: 231,    /* PRESS     "So this tool strips all the junk..."              7.70s */
-  S4: 333,    /* READ      "and it turns them into clean markdown..."        11.11s */
-  S5: 468,    /* TAG2      "Next is herdr."                                  15.60s */
-  S6: 492,    /* CRAM      "Managing multiple agents..."                     16.40s */
-  S7: 583,    /* SPLIT     "So this tool upgrades your screen..."            19.42s */
-  S8: 671,    /* PLUGS     "Then check out the DeepSeek Harness..."          22.37s */
-  S9: 760,    /* SWAP      "So if your agent starts getting dumb..."         25.33s */
-  S10: 873,   /* GODTIER   "and you instantly get a god tier..."             29.11s */
-  S11: 958,   /* TAG4      "But finally, OmniRoute."                         31.94s */
-  S12: 995,   /* MANIFOLD  "If Claude runs out of credits..."                33.16s */
-  S13: 1170,  /* ROLLOUT   "Comment the word REPOS for all the links."       39.00s */
+  S2: 131,    /* JAM       "Feeding PowerPoint or Word files..."              4.41s */
+  S3: 230,    /* PRESS     "So this tool strips all the junk..."              7.70s */
+  S4: 332,    /* READ      "and it turns them into clean markdown..."        11.11s */
+  S5: 461,    /* TAG2      "Next is herdr."                                  15.60s */
+  S6: 485,    /* CRAM      "Managing multiple agents..."                     16.40s */
+  S7: 576,    /* SPLIT     "So this tool upgrades your screen..."            19.42s */
+  S8: 663,    /* PLUGS     "Then check out the DeepSeek Harness..."          22.37s */
+  S9: 746,    /* SWAP      "So if your agent starts getting dumb..."         25.33s */
+  S10: 850,   /* GODTIER   "and you instantly get a god tier..."             29.11s */
+  S11: 928,   /* TAG4      "But finally, OmniRoute."                         31.94s */
+  S12: 963,   /* MANIFOLD  "If Claude runs out of credits..."                33.16s */
+  S13: 1138,  /* ROLLOUT   "Comment the word REPOS for all the links."       39.00s */
   END: RPS_TOTAL,
 } as const;
 
@@ -121,7 +121,7 @@ export const SFX: Cue[] = [
   { at: S(L.S4 + 58), src: "thock.wav",       v: LEVELS.SFX_TEXTURE, dur: 0.14, rate: 1.0, lead: 0 },
   ...[64, 74, 84, 94].map((a2, i) => ({ at: S(L.S4 + a2), src: "pickup_chime.wav", v: LEVELS.SFX_TEXTURE * db(-3), dur: 0.22, rate: 0.9 + i * 0.09 })),
   /* the tick lands after "perfectly." has finished (14.83 + 0.2), lead 0 so it stays clear */
-  { at: S(L.S4 + 131), src: "gold_stamp.wav", v: LEVELS.SFX_HERO, dur: 0.20, rate: 1.0, lead: 0 },
+  { at: S(L.S4 + 88),  src: "gold_stamp.wav", v: LEVELS.SFX_HERO, dur: 0.20, rate: 1.0, lead: 0 },
 
   /* ---- S5 · TAG */
   { at: S(L.S5 + 9),  src: "tick.wav",        v: LEVELS.SFX_TEXTURE, dur: 0.06, rate: 0.85 },
@@ -139,7 +139,7 @@ export const SFX: Cue[] = [
   { at: S(L.S7 + 62), src: "ui_tap.wav",      v: LEVELS.SFX_MID,  dur: 0.12, rate: 1.1 },
 
   /* ---- S8 · THE PLUGBOARD: the tag drops, six cartridges click, the model seats */
-  { at: S(L.S8 + 9),  src: "thock.wav",       v: LEVELS.SFX_MID,  dur: 0.18, rate: 0.9 },
+  { at: S(L.S8 + 13), src: "thock.wav",       v: LEVELS.SFX_MID,  dur: 0.18, rate: 0.9 },
   ...[26, 34, 42, 50, 58].map((a2, i) => ({ at: S(L.S8 + a2), src: "mech_clank.wav", v: LEVELS.SFX_MID * db(-4 + i * 0.8), dur: 0.16, rate: 0.96 + i * 0.05 })),
   /* the MODEL seats at f65 = 24.53s, finished before "plugin." (24.85) */
   { at: S(L.S8 + 65), src: "mech_clank.wav",  v: LEVELS.SFX_HERO, dur: 0.20, rate: 0.82 },
@@ -152,11 +152,15 @@ export const SFX: Cue[] = [
   { at: S(L.S9 + 52), src: "ceramic_crack.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.26, rate: 0.9 },
   /* the lock at f71 = 27.70s is finished before "one." (28.00), the sentence's last word */
   { at: S(L.S9 + 71), src: "impact_deep.wav", v: LEVELS.SFX_HERO, dur: 0.30, rate: 1.0 },
+  /* ⭐ the brain lands and POWERS UP — Alex, rev 4: "it should start glowing and making some
+     interesting sound because it's elevated". A game power-up under the impact, not instead of it. */
+  { at: S(L.S9 + 58), src: "c_power.wav",  v: LEVELS.SFX_MID * db(-3), dur: 0.50, rate: 0.92 },
+  { at: S(L.S9 + 64), src: "c_powerbig.wav", v: LEVELS.SFX_MID * db(-4), dur: 0.34, rate: 0.9 },
   { at: S(L.S9 + 71), src: "sub.wav",         v: LEVELS.SFX_MID,  dur: 0.26, rate: 0.8 },
   { at: S(L.S9 + 72), src: "pickup_chime.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.24, rate: 1.18 },
 
   /* ---- S10 · GOD TIER: the column snaps, four lamps, the fanfare, a bell */
-  { at: S(L.S10 + 4),  src: "spotlight_snap.wav", v: LEVELS.SFX_HERO, dur: 0.30, rate: 1.0 },
+  { at: S(L.S10 + 9),  src: "spotlight_snap.wav", v: LEVELS.SFX_HERO, dur: 0.30, rate: 1.0 },
   ...[8, 14, 20, 26].map((a2, i) => ({ at: S(L.S10 + a2), src: "neon_on.wav", v: LEVELS.SFX_MID * db(-4 + i), dur: 0.30, rate: 0.9 + i * 0.09 })),
   { at: S(L.S10 + 30), src: "gold_stamp.wav", v: LEVELS.SFX_MID * db(-2), dur: 0.22, rate: 0.9 },
 
@@ -177,11 +181,25 @@ export const SFX: Cue[] = [
 
   /* ---- S13 · THE ROLL-OUT: the lift lowers, the keyword types, SEND */
   { at: S(L.S13 + 9),  src: "motor_sag.wav",  v: LEVELS.SFX_MID * db(-3), dur: 0.40, rate: 0.9 },
-  { at: S(L.S13 + 30), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.8 },
-  ...[22, 26, 30, 34, 38].map((a2, i) => ({ at: S(L.S13 + a2), src: "ui_tap.wav", v: LEVELS.SFX_TEXTURE * db(-1 + (i % 3) * 0.6), dur: 0.10, rate: 1.0 + (i % 3) * 0.06 })),
+  { at: S(L.S13 + 26), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.8 },
+  ...[4, 8, 12, 16, 19].map((a2, i) => ({ at: S(L.S13 + a2), src: "ui_tap.wav", v: LEVELS.SFX_TEXTURE * db(-1 + (i % 3) * 0.6), dur: 0.10, rate: 1.0 + (i % 3) * 0.06 })),
   /* ⛔ the reel was trimmed to 1222 and SEND moved to f42; this cue sat at f56 = 40.87s, past the
      end of the file, and verify_reel called it DEAD. A cue is a beat, not a constant. */
-  { at: S(L.S13 + 42), src: "stamp_press.wav", v: LEVELS.SFX_HERO, dur: 0.30, lead: 0 },
+  { at: S(L.S13 + 22), src: "stamp_press.wav", v: LEVELS.SFX_HERO, dur: 0.30, lead: 0 },
+  /* ⭐⭐ REV 4 — Alex: "have more SFX design here and better SFX design here." Every new event gets
+     its own cue, LAYERED under the existing hit rather than replacing it (docs/SOUND-DESIGN §2b):
+     a gem landing is a collect, the absorb is a power-up, a scan head is a shine, a line going
+     green is a blip, the MODEL seating is an unlock. ⛔ None of them lands on a sentence-final word
+     — tools/rps_cue_collisions.py is run after every one of these. */
+  ...[14, 24, 36, 48].map((a2, i) => ({ at: S(L.S0 + a2), src: "c_collect.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.4), dur: 0.22, rate: 0.94 + i * 0.06 })),
+  { at: S(L.S0 + 58), src: "c_power.wav",     v: LEVELS.SFX_MID * db(-2), dur: 0.46, rate: 1.0 },
+  { at: S(L.S0 + 66), src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.30, rate: 1.1 },
+  ...[11, 43, 75].map((a2, i) => ({ at: S(L.S3 + a2), src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE * db(-3 + i * 0.5), dur: 0.34, rate: 0.96 + i * 0.07 })),
+  ...[50, 62, 74].map((a2, i) => ({ at: S(L.S4 + a2), src: "blip3.wav", v: LEVELS.SFX_TEXTURE * db(-4 + i), dur: 0.09, rate: 1.05 + i * 0.1 })),
+  { at: S(L.S6 + 24), src: "blip5.wav",       v: LEVELS.SFX_TEXTURE * db(-3), dur: 0.10, rate: 0.9 },
+  { at: S(L.S6 + 52), src: "blip5.wav",       v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.10, rate: 0.82 },
+  { at: S(L.S8 + 65), src: "c_collect.wav",   v: LEVELS.SFX_MID * db(-3), dur: 0.20, rate: 0.8 },
+  { at: S(L.S12 + 96), src: "c_collect.wav",  v: LEVELS.SFX_MID * db(-4), dur: 0.24, rate: 0.86 },
 ];
 
 /* ---- THE MUSIC -----------------------------------------------------------

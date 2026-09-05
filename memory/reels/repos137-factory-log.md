@@ -316,3 +316,43 @@ Delivered 40.79s each, `yuv420p` / `bt709` / `tv`, 1222 frames.
 ⭐ **Every dHash failure this reel has had was the same shape**: two cuts framing the SAME CENTRE at scales
 within ~15% of each other. The fix is never a regrade or a nudge; it is a different SHOT SIZE on a different
 POINT ([[feedback_variants_need_shot_sizes]]). Measure it on the ENCODE, never the raw render.
+
+## STAGE 14 — REV 4: thirteen notes, and a VO re-time (Alex, 2026-09-05)
+
+| # | note | what was done |
+|---|---|---|
+| 1 | *"the pauses in between scenes are too long"* | ⛔ Measured: 4.28s of gaps, four over 0.4s. The 13 gaps were tightened IN THE CUT (never re-spliced from raw — the 14 keep-windows already removed six flubs), cutting only from the longest sub −45 dB run inside each gap and always leaving 45ms of it, because **the stored word END runs early and the head of a "gap" is the word's RELEASE**. 7 gaps tightened, **1.072s removed**, reel 1222 → **1190 frames**. The tightened take was re-transcribed and diffed: 163 of 166 words, differences only the known proper-noun mishears. |
+| 2 | hook gems *"moving or shaking or glowing, more interesting"* | the `Gem` now breathes (halo + scale), jitters on its own clock, sweeps a **glint** across the facets every 46 frames, throws three orbiting sparks, and **shakes** on arrival |
+| 3 | *"the Claude sprite needs to be bigger in the hook. When it eats the gem it should change colour and look upgraded, with SFX"* | hook hero 336 → **372**; on the dock a full-body **flash** in the repo's colour decays over 10 frames, a soft aura stays for the rest of the hook, motes rise off him, and `c_power.wav` layers under the existing clank. ⛔ The flash is a FLASH — the hero is never permanently tinted, that is what makes him Claude |
+| 4 | *"at 5 seconds the Claude sprite is quite small"* | JAM hero 330 → **402** and the camera pulled back to hold him |
+| 5 | *"the cards need better design — no Rust or MIT, just the name and the stars; more Claude sprites around; not that long"* | the language dot and licence are gone and the **star count owns the row at 30u**; three crew Claudes now POP UP around the card on staggered beats; the card is home by f7 instead of f9-18 so the second half of the beat belongs to the reaction |
+| 6 | *"at 8 seconds have a SLIDER that swipes on the documents showing how it does that"* | `DocMorph` rebuilt as a **two-layer wipe**: the Office original ahead of a bright scan head, the finished Markdown behind it, junk flying off as the head reaches each column, sparks trailing. PRESS motion **9.2 → 26.3** |
+| 7 | *"at 14 seconds the anydoc doc going green needs to be a lot more elevated"* | the same scan head runs DOWN the sheet, each of eleven lines lands its own green tick, and the finished sheet sails out of frame |
+| 8 | *"at 19 seconds the messy coding agents window needs to be way more interesting"* | eleven half-overlapping terminal windows, each jittering, three throwing error dots, **arriving one at a time** across the scene |
+| 9 | *"at 21 seconds the split panels need to be more interesting"* | the mess windows **fly into the four panes**, so the split is the payoff of the mess and not a separate idea; panes print longer |
+| 10 | *"at 24 seconds more elevated"* | every plugboard seat now jolts the whole rack, fires a ring and dust at its own socket, and the MODEL lands last with the bay flaring |
+| 11 | *"at 28 seconds the new brain should GLOW, yellow, and the room gets darker"* | a gold halo on the live brain, motes, and a scrim at z50 — **under** the hero and the brain — so the room dims and the two things the sentence is about are the only lit objects |
+| 12 | *"at 33 seconds the sprite is so small, scrap the concept and completely redo"* | MANIFOLD rebuilt: hero 240 → **430**, centre frame, carrying all three beats himself (his gauge falls to E → a real model canister flies off the shelf and SLAMS into his tank → tokens pour in and the counter runs). The manifold is the machine behind him now |
+| 13 | *"more SFX design and better SFX design"* | 100 → **104 cues** (2.52/sec): a collect per gem landing, a power-up on the absorb, a shine per scan head, blips on the lines going green, a collect on the MODEL seating. ⛔ `c_unlock.wav` measured as **AIR** and was replaced |
+
+### Rev 4 delivered (2026-09-05) — 1190 frames / 39.67s
+
+| | lift (house) | drop (amber) | pit (steel) |
+|---|---|---|---|
+| verify_reel | 9/9 | 9/9 | 9/9 |
+| motion median · failing | 11.59 · 0/14 | 14.24 · 0/14 | 11.53 · 0/14 |
+| tails stalling | 0/14 | 0/14 | 0/14 |
+| open gate mean | 12.49 | 20.47 | 13.39 |
+
+Encoded house: HOOK_LUMA 152.7 · BODY_SAT 53.2% · p10 28.2 · look holds · 9/9.
+**dHash on the delivered encodes: mean 22.4 · MIN 10 · PASS.** sfx_audit clean, 0 cue collisions.
+
+⭐ **PRESS 9.2 → 26.3 from one prop change.** The scan-head wipe is the single biggest motion jump any
+scene in this reel has had, because a bright bar crossing a 310px page repaints a quarter of the panel
+every frame while ALSO being the clearest statement of what the tool does. When a note and a metric point
+the same way, build the object that satisfies both.
+
+⛔ **Tightening the VO moved every scene after S4 earlier, and four hero cues that had been safe landed on
+the next sentence's first word.** A re-time is never just an audio edit: re-run the cue-collision map, the
+intent manifest and every in-scene beat that was written as an absolute frame. READ lost 6 frames and its
+tick at f130 simply never fired.

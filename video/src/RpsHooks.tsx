@@ -2,7 +2,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
-  Scene, Cam, Contact, Ring, Puff, Steam, Fall, Crew, Forearm, Rig, anchors,
+  Scene, Cam, Contact, Ring, Puff, Steam, Fall, Crew, Forearm, Rig, anchors, Motes,
   CLAY, GOLD, GREEN, RED, INK, IRON, CHROME, BONE,
   REPOS, repoBy, asPlace, GY, mono, ui,
 } from "./RpsWorld";
@@ -76,11 +76,12 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
   const L = LAY[v];
   /* ⛔ Alex, rev 3: "the Claude sprite in the middle, I want it BIGGER, so it takes more of the
      screen" — 262 was a third of the panel height. 336 with the lift under him fills it. */
-  const HX = 506 + L.a * 0.2, HS = 336;
+  /* ⛔ Alex, rev 4: bigger again. 372 is half the panel height with the lift under him. */
+  const HX = 506 + L.a * 0.2, HS = 372;
   const jolt = (E(f, 5, 8, 0, 1, OUT) - E(f, 8, 12, 0, 1, OUT)) * 12 + (E(f, 11, 13, 0, 1, OUT) - E(f, 13, 16, 0, 1, OUT)) * 16;
   /* ⛔ a 336px hero cannot rise as far as a 262px one: 296px of lift put his head into the
      reserved plate band (y 112-210). 190 keeps his head top at ~224 at the cut. */
-  const rise = 6 + 148 * E(f, 14, 52, 0, 1, IO) + 42 * E(f, 60, 100, 0, 1, IO);
+  const rise = 6 + 118 * E(f, 14, 52, 0, 1, IO) + 34 * E(f, 60, 100, 0, 1, IO);
   const platTop = GY - 18 - rise - 26;
   const a = anchors(HX, platTop + 20, HS);
   /* ⭐⭐ FOUR GLOWING GEMS, FLOWN TO THE FRONT OF FRAME (Alex, rev 3). Each carries its repo's real
@@ -99,6 +100,13 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
   /* ⭐ the SECOND gem lifts off the arc at f78 and is still travelling at the cut — the open ends
      on a question, not on a finished thing (THE-OPEN). */
   const rise2 = E(f, 78, 102, 0, 1, IO);
+  /* ⭐⭐ HE EATS IT AND POWERS UP (Alex, rev 4: "when it eats the gem it should change colour and
+     look upgraded"). ⛔ The hero is never permanently tinted — that is what makes him Claude
+     ([[feedback_colour_the_sprite_not_the_plate]]) — so the change is a FLASH: a full-body wash in
+     the repo's colour that decays over 14 frames, then a soft rim that stays for the rest of the
+     hook, plus sparks off the top. Bright, then upgraded, still orange. */
+  const flash = docked ? Math.max(0, 1 - (f - 58) / 10) : 0;
+  const aura = E(f, 58, 72, 0, 1, OUT);
   const camS = 1 + 0.07 * E(f, 14, 100, 0, 1, LIN);
   const camY = 0.22 * (rise - 6);
   return (
@@ -138,9 +146,25 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
         const bob = Math.sin(f / 9 + i * 1.9) * 4 * t;
         return (
           <Gem key={r.key} repo={r} x={gx} y={gy + bob} s={gs} z={88 + i} f={f} lit={t}
-            spin={(1 - t) * (i % 2 ? 26 : -26)} stars={count} label={t > 0.85 && !(i === 0 && dock > 0.2)} />
+            spin={(1 - t) * (i % 2 ? 26 : -26)} stars={count} label={t > 0.85 && !(i === 0 && dock > 0.2)}
+            shake={Math.max(0, 1 - Math.abs(f - GARR[i]) / 7) + (i === 0 ? Math.max(0, 1 - Math.abs(f - 52) / 6) : 0)} />
         );
       })}
+      {/* ⭐ the power-up: a wash over his whole body, a rim that stays, sparks off the crown */}
+      {aura > 0.02 && (
+        <div style={{ position: "absolute", left: HX - HS * 0.60, top: platTop + 20 - HS * 0.92,
+          width: HS * 1.20, height: HS * 1.05, zIndex: 55, borderRadius: "46% 46% 30% 30%",
+          background: `radial-gradient(ellipse at 50% 55%, ${hexa(mxh(REPOS[0].c, 0.4), 0.30 * aura)} 0%, ${hexa(REPOS[0].c, 0)} 72%)` }} />
+      )}
+      {flash > 0.01 && (
+        <div style={{ position: "absolute", left: HX - HS * 0.42, top: platTop + 20 - HS * 0.86,
+          width: HS * 0.84, height: HS * 0.90, zIndex: 78, borderRadius: 18,
+          background: hexa(mxh(REPOS[0].c, 0.55), 0.42 * flash),
+          mixBlendMode: "screen" as const }} />
+      )}
+      {docked && f < 96 && (
+        <Motes x={HX - HS * 0.42} y={platTop + 20 - HS * 1.06} w={HS * 0.84} h={HS * 0.7} n={14} f={f} z={80} c="#FFF3D6" />
+      )}
       {/* the dock costs: a ring, sparks off the hip, dust off the platform */}
       {docked && f < 84 && (<>
         <Ring x={a.hipL.x} y={a.hipL.y} f={f} at={58} c={mxh(REPOS[0].c, 0.4)} z={92} s={1.6} dur={18} />

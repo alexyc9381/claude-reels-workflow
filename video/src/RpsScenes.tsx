@@ -4,7 +4,7 @@ import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
   Scene, Cam, Contact, Motes, Ring, Puff, Steam, Fall, Crew, Forearm, Rig, anchors, Brain,
   CLAY, GOLD, GREEN, RED, INK, MUTE, BRASS, IRON, CHROME, BONE, SKY,
-  REPOS, repoBy, asPlace, GY, BAND_Y, SAFE3, R, mono, ui,
+  REPOS, MODELS, repoBy, asPlace, GY, BAND_Y, SAFE3, R, mono, ui,
 } from "./RpsWorld";
 import type { Kit, Repo } from "./RpsWorld";
 import { Room } from "./HwSets";
@@ -13,7 +13,7 @@ import {
 } from "./RpsSets";
 import {
   FileCard, Chute, Debris, Press, MdSheet, SheetBelt, Monitor, Rack, Claw, Core, Manifold, BigGauge, ErrorLamp,
-  TokenHopper, Tally, Composer, RepoCard, GhSign, DocMorph,
+  TokenHopper, Tally, Composer, RepoCard, GhSign, DocMorph, Canister, Octicon,
 } from "./RpsProps";
 import type { FileKind } from "./RpsProps";
 
@@ -101,29 +101,44 @@ const TagBeat: React.FC<SP & { repo: Repo; seed: number }> = ({ v, dur, repo, se
   const f = useCurrentFrame();
   const p = asPlace(repo.place);
   const L = LAY[v];
-  const drop = E(f, 0, 9, 0, 1, OUT);
-  const len = 60 + 190 * drop + ring(f - 9, 26, 2.4, 40) + 14 * E(f, 12, dur, 0, 1, LIN);
-  const face = E(f, 6, 18, 0.15, 1, BACK);
-  const lamp = E(f, 11, 14, 0, 1, OUT) * (f >= 16 && f < 18 ? 0.5 : 1);
-  /* ⭐ the star count is still climbing when the cut lands — the tail never sits */
-  const count = E(f, 8, dur - 1, 0, 1, OUT);
+  /* ⛔ Alex, rev 4: "make sure it's not that long showing the GitHub cards, those are wasting time."
+     The beat is one second of VO and cannot be shortened, so it stops being a PAUSE instead: the
+     card is home by f7 rather than f9-18, and the second half belongs to the crew reacting to it. */
+  const drop = E(f, 0, 7, 0, 1, OUT);
+  const len = 60 + 190 * drop + ring(f - 7, 30, 2.2, 30) + 14 * E(f, 10, dur, 0, 1, LIN);
+  const face = E(f, 3, 11, 0.2, 1, BACK);
+  const lamp = E(f, 8, 11, 0, 1, OUT) * (f >= 13 && f < 15 ? 0.5 : 1);
+  const count = E(f, 5, dur - 1, 0, 1, OUT);
   const hx = 420 + L.a;
+  /* ⭐ "more Claude sprites around it": three of them POP UP around the card on their own beats,
+     one either side and one under it, each cheering as it lands. A crowd doing one action needs
+     SLOTS, so they arrive 5 frames apart ([[feedback_crowd_needs_slots_not_a_mark]]). */
+  const POP = [6, 11, 16];
+  const CREW = [{ x: hx - 250, y: 610, s: 210 }, { x: hx + 470, y: 636, s: 196 }, { x: hx + 120, y: 700, s: 224 }];
   return (
     <Scene p={p} slug="" push={[0, dur, 1.04]} vig={0.44}>
       <Cam {...punch(1.34 * pushK(f, 0, dur, 0.07), 520, 330)} z={12}>
         <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
-        <GhFitout p={p} f={f} seed={seed} z={16} graphX={70} graphY={236} cols={11} />
+        <GhFitout p={p} f={f} seed={seed} z={19} graphX={70} graphY={236} cols={11} />
         <ShopWall p={p} f={f} seed={seed} bay={null} door={seed % 2 === 0} pegX={600} pegW={360} />
         <BayLamp x={780 + L.b} y={170} c={repo.c} on={lamp} f={f} z={40} label={repo.tagName} s={1.15} />
-        {/* ⭐ THE TITLE BEAT IS THE REPO PAGE, not a luggage tag with a logo on it: owner/name in
-            GitHub's link blue, the Public pill, the real description, and the footer every repo
-            has — language dot, star count, licence. Three of these in the reel, so the claim
-            "open source GitHub repos" is made in GitHub's own vocabulary each time it is spoken. */}
-        <Hoist repo={repo} x={hx - 210 + L.c * 0.4} len={len + 26} f={f} z={58} swing={ring(f - 9, 6, 3, 34)} partSize={188} tag={false} />
+        {/* the title beat is the repo itself: its mark, its name, its star count — nothing else */}
+        <Hoist repo={repo} x={hx - 210 + L.c * 0.4} len={len + 26} f={f} z={58} swing={ring(f - 7, 6, 3, 30)} partSize={188} tag={false} />
         <RepoCard repo={repo} x={hx + 168 + L.c} y={len - 34} w={492} z={70} f={f} count={count}
-          open={face} rot={ring(f - 9, 3.4, 3.2, 40)} install={E(f, dur - 15, dur - 4, 0, 1, LIN)} />
-        <CrewBand f={f} repo={repo} n={4} size={180} seed={BANDSEED[v] + seed} at={-40} />
+          open={face} rot={ring(f - 7, 3.4, 3.0, 34)} install={E(f, dur - 13, dur - 3, 0, 1, LIN)} />
+        {/* the sparks off the chain when it snaps taut, so the landing costs something */}
+        {f >= 7 && f < 24 && <Puff x={hx + 168 + L.c} y={len + 30} f={f} at={7} c="#E8E0D0" z={69} n={9} s={1.1} up={0.3} />}
+        {CREW.map((c, i2) => {
+          const k = E(f, POP[i2], POP[i2] + 7, 0, 1, BACK);
+          if (k <= 0) return null;
+          return (
+            <Crew key={"tc" + i2} f={f} x={c.x + L.c * 0.3} y={c.y + (1 - k) * 150} i={repo.cos[i2 % repo.cos.length] + i2 * 3}
+              size={c.s} z={86 + i2} at={POP[i2]} loop={i2 === 1 ? 2 : 0} tint={repo.c} flip={i2 === 1}
+              cheer={E(f, POP[i2] + 5, POP[i2] + 12, 0, 1, OUT)} />
+          );
+        })}
+        <CrewBand f={f} repo={repo} n={3} size={172} seed={BANDSEED[v] + seed} at={-40} x0={120} />
       </Cam>
     </Scene>
   );
@@ -144,7 +159,7 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
   const repo = repoBy("anydoc");
   /* ⛔ Alex, rev 3: "we should see the Claude sprite bigger in the screen, it's way too small" —
      236 put him at a quarter of the panel height while the chute and the crew took the rest. */
-  const HX = 552 + L.a, HS = 330;
+  const HX = 540 + L.a, HS = 402;
   const a = anchors(HX, GY, HS);
   const mouth = { x: HX, y: GY - HS * 0.5 };
   /* the chute comes off the gantry beam, narrow and warm, and ends just above his mouth */
@@ -172,7 +187,7 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
       {/* ⛔ 1.06 / 1.20 on the same centre measured EIGHT bits apart at f153 once encoded — the
           nudge trap again (feedback_variants_need_shot_sizes). Three real sizes on three centres:
           the bay, a CU on the choke, and a medium down on the pile. */}
-      <Cam {...punch(pick(v, 1.06, 1.46, 1.20) * pushK(f, 54, dur, 0.085), pick(v, 520, HX - 10, 470), pick(v, 470, 424, 512))} z={12}>
+      <Cam {...punch(pick(v, 1.02, 1.34, 1.14) * pushK(f, 54, dur, 0.085), pick(v, 520, HX - 10, 470), pick(v, 452, 410, 496))} z={12}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.08} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.55} window={null} />
       <GhFitout p={p} f={f} seed={11} z={19} graphX={88} graphY={242} cols={11} />
@@ -226,7 +241,9 @@ export const PRESS: React.FC<SP> = ({ v, dur }) => {
   const sh = shotAt(f, PRESS_SHOTS[v]);
   const PX = 520 + L.a * 0.3, PY = GY - 172;                 /* the press stands on the bench */
   const feeds = [{ at: 8, kind: "ppt" as FileKind }, { at: 40, kind: "doc" as FileKind }, { at: 72, kind: "xls" as FileKind }];
-  const HX = 150, HS = 214;
+  /* ⛔ Alex, rev 4: "have the Claude sprite on the side" — he was there but at 214px he read as
+     a bystander next to a 310px page. */
+  const HX = 138, HS = 300;
   const hand = { x: HX + HS * 0.36, y: GY - HS * 0.5 };
   const slotIn = { x: PX - 190, y: PY - 100 };
   const slotOut = { x: PX + 210, y: PY - 84 };
@@ -291,20 +308,31 @@ export const READ: React.FC<SP> = ({ v, dur }) => {
   const L = LAY[v];
   const repo = repoBy("anydoc");
   const sh = shotAt(f, READ_SHOTS[v]);
-  const HX = 690 + L.a * 0.4, HS = 244;
+  /* ⛔ Alex, rev 4: "the animation for how the anydoc doc goes down and green needs to be a lot more
+     interesting and elevated." It was a small sheet drifting while a bar of colour crept down it.
+     Now: the sheet arrives FAST, he hoists it to 1.95x in front of him, and the SAME scan head that
+     strips the file in S3 runs down it turning every line green — one visual language for one
+     product, and each line lands its own tick. The read finishes at f88 where the hero cue is. */
+  const HX = 700 + L.a * 0.4, HS = 300;
   const beltY = 600;
-  /* the hero sheet: along the belt, then lifted into his hands and turned to camera */
-  const ride = E(f, 0, 36, 0, 1, LIN);
-  const lift = E(f, 36, 54, 0, 1, OUT);
-  const sx = -80 + (HX - 330 + 80) * ride, sy = beltY - 100 * 0.72 - 10 - lift * 150 - 30 * E(f, 62, 118, 0, 1, LIN);
-  const ss = 1.3 + lift * 0.45, rot = -3 + lift * -6;
-  const read = E(f, 62, 118, 0, 1, LIN);
+  const ride = E(f, 0, 24, 0, 1, OUT);
+  const lift = E(f, 24, 40, 0, 1, OUT);
+  /* ⛔ steel's READ still stalled (TAIL 0.53): everything finished at f88 and the last 41 frames
+     were a held pose. The finished sheet now LEAVES — it sails up and out of frame from f98, which
+     is a 500px object travelling all the way to the cut ([[feedback_motion_needs_a_destination]]). */
+  const away = E(f, 98, dur, 0, 1, IN_Q);
+  const sx = -80 + (HX - 372 + 80) * ride + away * 210,
+        sy = beltY - 100 * 0.72 - 10 - lift * 196 - 22 * E(f, 46, dur, 0, 1, LIN) - away * 470;
+  const ss = (1.30 + lift * 0.65) * (1 - away * 0.34), rot = -3 + lift * -5 + away * 26;
+  const read = E(f, 46, 88, 0, 1, LIN);
   /* the tick lands at f126 = 15.30s, clear of "perfectly." (ends 14.83, +0.2 for whisper's early end) */
-  const tick = E(f, 130, 135, 0, 1, BACK);
+  /* ⛔ the tightened VO made READ 129 frames, so a tick at f130 never fired — and its hero cue
+     could not live in the last 30 frames anyway, which are all "perfectly." */
+  const tick = E(f, 88, 95, 0, 1, BACK);
   const gaze = read > 0 && read < 1 ? -1.6 + Math.sin(read * Math.PI * 11) * 0.8 : -0.6;   /* he looks LEFT at the sheet */
   return (
     <Scene p={p} slug="" push={[0, dur, 1.03]} vig={0.42}>
-      <Cam s={sh.s * (f >= 58 ? pushK(f, 58, 135, 0.08) : 1)} x={sh.x} y={sh.y} z={12}>
+      <Cam s={sh.s * pushK(f, 40, dur, 0.13)} x={sh.x} y={sh.y} z={12}>
         <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.09} rakeX={RAKE_X[v]} rakeRate={3.2 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={{ x: 60, y: 130, w: 220, h: 170 }} />
         <GhFitout p={p} f={f} seed={13} z={19} graphX={62} graphY={270} cols={13} />
@@ -317,13 +345,36 @@ export const READ: React.FC<SP> = ({ v, dur }) => {
         {lift > 0.2 && (<>
           <Forearm x0={HX - HS * 0.36} y0={GY - HS * 0.55} x1={sx + 90} y1={sy + 30} w={20} z={64} />
         </>)}
-        <MdSheet x={sx} y={sy} s={ss} rot={rot} z={66} read={f >= 62 ? read : -1} lines={11} />
-        {/* each line going green fires a small ring at that line — eleven arrivals across the read */}
+        <MdSheet x={sx} y={sy} s={ss} rot={rot} z={66} read={f >= 46 ? read : -1} lines={11} />
+        {/* ⭐ THE SCAN HEAD, running DOWN the sheet — the same object the press uses, so the viewer
+            learns one mechanism and sees it twice */}
+        {read > 0.001 && read < 0.999 && (<>
+          <div style={{ position: "absolute", left: sx - 128 * ss, top: sy - 124 * ss + read * 232 * ss,
+            width: 256 * ss, height: 5 * ss, zIndex: 69, background: "#FFF3D0",
+            boxShadow: `0 0 ${14 * ss}px ${hexa("#7BD98F", 0.95)}`, transform: `rotate(${rot}deg)` }} />
+          <div style={{ position: "absolute", left: sx - 128 * ss, top: sy - 124 * ss + read * 232 * ss - 30 * ss,
+            width: 256 * ss, height: 30 * ss, zIndex: 68, transform: `rotate(${rot}deg)`,
+            background: `linear-gradient(180deg, ${hexa(GREEN, 0)}, ${hexa(GREEN, 0.26)})` }} />
+        </>)}
+        {/* each line going green lands its own tick — eleven arrivals across the read */}
         {Array.from({ length: 11 }, (_, i) => {
-          const at = 62 + Math.round(i * 56 / 11);
+          const at = 46 + Math.round(i * 42 / 11);
           if (f < at || f > at + 12) return null;
-          return <Ring key={"lr" + i} x={sx + 20} y={sy - 122 * ss + (14 + i * 19) * ss} f={f} at={at} c={mxh(GREEN, 0.3)} z={67} s={0.55} dur={12} />;
+          const ly = sy - 122 * ss + (14 + i * 19) * ss;
+          return (
+            <React.Fragment key={"lr" + i}>
+              <Ring x={sx + 20} y={ly} f={f} at={at} c={mxh(GREEN, 0.3)} z={67} s={0.62} dur={12} />
+              <div style={{ position: "absolute", left: sx + 108 * ss, top: ly - 9 * ss, width: 18 * ss, height: 18 * ss,
+                borderRadius: "50%", background: GREEN, zIndex: 70, display: "flex", alignItems: "center",
+                justifyContent: "center", opacity: Math.max(0, 1 - (f - at) / 22),
+                transform: `scale(${0.4 + 0.6 * Math.min(1, (f - at) / 4)})` }}>
+                <Octicon kind="check" s={12 * ss} c="#FFFFFF" />
+              </div>
+            </React.Fragment>
+          );
         })}
+        {/* it is finished: the sheet lifts a little and throws motes */}
+        {f >= 88 && <Motes x={sx - 130 * ss} y={sy - 130 * ss} w={260 * ss} h={250 * ss} n={16} f={f} z={71} c="#CFF3D8" />}
         {/* the tick lands beside him, with a ring */}
         {tick > 0 && (<>
           <div style={{ position: "absolute", left: HX + 40, top: GY - HS - 40, width: 110, height: 110, zIndex: 80, borderRadius: "50%",
@@ -353,7 +404,7 @@ export const CRAM: React.FC<SP> = ({ v, dur }) => {
   const jolt = arrivals.reduce((m, at) => { const t = f - at + 10; return t >= 0 && t < 8 ? Math.max(m, 1 - t / 8) : m; }, 0);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.5}>
-      <Cam {...pick(v, punch(1.16, MX, 400), punch(1.42, MX, 372), punch(1.06, MX - 30, 440))} z={12}>
+      <Cam {...punch(pick(v, 1.16, 1.42, 1.06) * pushK(f, 10, dur, 0.10), pick(v, MX, MX, MX - 30), pick(v, 400, 372, 440))} z={12}>
         <Room p={p} f={f} bands={2} kind="shelf" overhead="duct" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.6 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="boards" grit={0.5} lamp={{ x: 560, y: 120, r: 240 }} window={null} />
         <GhFitout p={p} f={f} seed={14} z={19} graphX={88} graphY={228} cols={10} />
@@ -366,7 +417,7 @@ export const CRAM: React.FC<SP> = ({ v, dur }) => {
           background: `linear-gradient(180deg, ${mxh(IRON, 0.2)}, ${dkh(IRON, 0.3)})`,
           backgroundImage: `repeating-linear-gradient(90deg, ${hexa("#000000", 0.25)} 0 2px, transparent 2px 18px)` }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 44, transform: `translateY(${jolt * 4}px) rotate(${jolt * 0.4}deg)` }}>
-          <Monitor x={MX} y={GY - 172} f={f} w={560} h={380} arrivals={arrivals} split={0} />
+          <Monitor x={MX} y={GY - 172} f={f} w={560} h={380} arrivals={arrivals} split={0} messStep={7} />
         </div>
         <Contact x={150} y={GY - 10} w={180} o={0.34} />
         <Rig f={f} x={150 + L.b * 0.3} y={GY} size={222} z={56} act={3} gaze={1.4} stern={E(f, 20, 40, 0, 1, OUT)}
@@ -395,7 +446,7 @@ export const SPLIT: React.FC<SP> = ({ v, dur }) => {
   const states = [1, 1, f < 62 ? -1 : 1, 0];
   return (
     <Scene p={p} slug="" push={[0, dur, 1.04]} vig={0.46}>
-      <Cam {...punch(pick(v, 1.10, 1.24, 1.0) * pushK(f, 0, dur, 0.06), pick(v, 540, 560, 512), pick(v, 430, 416, 452))} z={12}>
+      <Cam {...punch(pick(v, 1.10, 1.24, 1.0) * pushK(f, 18, dur, 0.12), pick(v, 540, 560, 512), pick(v, 430, 416, 452))} z={12}>
       <Room p={p} f={f} bands={2} kind="shelf" overhead="duct" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.6 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="boards" grit={0.5} lamp={{ x: 560, y: 120, r: 240 }} window={null} />
       <GhFitout p={p} f={f} seed={15} z={19} graphX={114} graphY={242} cols={11} />
@@ -427,22 +478,50 @@ export const PLUGS: React.FC<SP> = ({ v, dur }) => {
   const drop = E(f, 0, 9, 0, 1, OUT);
   const len = 40 + 150 * drop + ring(f - 9, 20, 2.4, 12);
   const face = E(f, 6, 18, 0.15, 1, BACK);
-  const plugs = [12, 20, 28, 36, 44, 51];             /* seats at +14: the MODEL seats at f65 = 24.53s, clear of "plugin." */
+  const plugs = [12, 20, 28, 36, 44, 51];             /* seats at +14: the MODEL seats last */
   const lastSeat = plugs[5] + 14;
+  /* ⛔ Alex, rev 4: "the animation at 24 seconds needs to be more elevated and more interesting."
+     Six cartridges clicked into sockets with nothing to show for it. Now every seat COSTS: the whole
+     rack jolts, a ring fires at that socket, dust comes off it, and the MODEL — the one the sentence
+     is actually about — arrives last, biggest, with the room flaring behind it. */
+  const seat = plugs.map((a) => a + 14);
+  const jolt = seat.reduce((m, at) => { const d = f - at; return d >= 0 && d < 9 ? Math.max(m, Math.exp(-d / 3)) : m; }, 0);
+  const RKX = 520 + L.a * 0.3;
+  const flare = f >= lastSeat ? Math.max(0, 1 - (f - lastSeat) / 16) : 0;
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.48}>
+      <Cam {...punch(pick(v, 1.06, 1.24, 1.0) * pushK(f, 8, dur, 0.07), pick(v, 500, 540, 470), pick(v, 452, 424, 486))} z={12}>
       <Room p={p} f={f} bands={3} kind="rack" overhead="tray" rake={0.08} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="tile" grit={0.55} lamp={{ x: 600, y: 140, r: 230 }} window={null} />
       <GhFitout p={p} f={f} seed={16} z={19} graphX={62} graphY={256} cols={12} />
       <ShopWall p={p} f={f} seed={5} bay={repo} door={false} pegX={40} pegW={240} />
       <Hoist repo={repo} x={860 + L.a * 0.3} len={len} f={f} z={60} swing={ring(f - 9, 4, 3, 16)} partSize={200} tag={false} />
       <Tag repo={repo} x={860 + L.a * 0.3 - 20} y={len + 190} f={f} s={0.86} z={70} swing={ring(f - 9, 8, 3.2, 18)} face={face} lit={1} />
-      <Rack x={520 + L.a * 0.3} y={GY} f={f} plugs={plugs} s={1} z={42} />
-      <Contact x={150} y={GY - 10} w={170} o={0.34} />
-      <Rig f={f} x={150 + L.b * 0.3} y={GY} size={214} z={56} act={3} gaze={1.3} ph={0.7}
-        cheer={E(f, lastSeat, lastSeat + 8, 0, 1, BACK)} shock={plugs.some((a) => f >= a + 14 && f < a + 18) ? 0.5 : 0} />
-      <CrewBand f={f} repo={repo} n={4} size={184} seed={BANDSEED[v] + 6} at={-40} />
+      {/* the rack jolts on every seat — the impact is on the WHOLE machine, not just the socket */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 42,
+        transform: `translate(${jolt * 5}px, ${jolt * 7}px) rotate(${jolt * 0.5}deg)` }}>
+        <Rack x={RKX} y={GY} f={f} plugs={plugs} s={1} z={42} />
+      </div>
+      {/* each seat throws a ring and dust at its own socket */}
+      {seat.map((at, i) => (f >= at && f < at + 22 ? (
+        <React.Fragment key={"st" + i}>
+          <Ring x={RKX - 190 + (i % 3) * 190} y={GY - 300 + Math.floor(i / 3) * 136} f={f} at={at}
+            c={mxh(i === 5 ? GOLD : repo.c, 0.4)} z={74} s={i === 5 ? 2.0 : 1.2} dur={18} />
+          <Puff x={RKX - 190 + (i % 3) * 190} y={GY - 286 + Math.floor(i / 3) * 136} f={f} at={at}
+            c="#CED2F2" z={74} n={i === 5 ? 12 : 7} s={i === 5 ? 1.3 : 0.9} up={0.25} />
+        </React.Fragment>
+      ) : null))}
+      {/* ⭐ the MODEL lands last and the bay flares behind it */}
+      {flare > 0.01 && (
+        <div style={{ position: "absolute", left: RKX - 460, top: GY - 560, width: 920, height: 560, zIndex: 41,
+          borderRadius: "50%", background: `radial-gradient(ellipse, ${hexa(mxh(GOLD, 0.4), 0.34 * flare)} 0%, ${hexa(GOLD, 0)} 66%)` }} />
+      )}
+      <Contact x={150} y={GY - 10} w={210} o={0.34} />
+      <Rig f={f} x={150 + L.b * 0.3} y={GY} size={266} z={56} act={3} gaze={1.3} ph={0.7}
+        cheer={E(f, lastSeat, lastSeat + 8, 0, 1, BACK)} shock={jolt > 0.35 ? 0.55 : 0} strain={jolt * 0.3} />
+      <CrewBand f={f} repo={repo} n={3} size={176} seed={BANDSEED[v] + 6} at={-40} x0={420} />
       <TyreStack x={W + 30 + L.c} n={3} s={0.95} z={90} />
+      </Cam>
     </Scene>
   );
 };
@@ -486,6 +565,9 @@ export const SWAP: React.FC<SP> = ({ v, dur }) => {
   /* ⭐ "getting dumb" is a MALFUNCTION you can see: hiccup jumps every ten frames (the Mascot's
      own `shock` jump, driven periodically), not a slow sway that repaints nothing */
   const hic = f < 28 ? Math.max(0, Math.sin(f * 0.62)) * 0.42 : 0;
+  /* the room dims as the live brain arrives and comes back up once it is seated */
+  const roomDark = E(f, 54, 68, 0, 1, OUT) * (1 - E(f, 88, dur, 0, 0.75, IO));
+  const glow = E(f, 57, 70, 0, 1, OUT) * (0.86 + 0.14 * Math.sin(f / 5));
   return (
     <Scene p={p} slug="" push={[0, dur, 1.02]} vig={0.5}>
       {/* ⭐ a CUT IN CLOSE on the turn: the lock at f71 punches to the face, the one moment the
@@ -527,6 +609,20 @@ export const SWAP: React.FC<SP> = ({ v, dur }) => {
           <Brain x={HX} y={brainY} s={BRS * 1.14} z={54} f={f} lit={1}
             squash={f < 80 ? E(f, 71, 74, 0, 1, OUT) - E(f, 74, 80, 0, 1, OUT) : 0} />
         )}
+        {/* ⭐⭐ Alex, rev 4: "when the new brain comes in it should start GLOWING ... glowing yellow
+            etc, and everything around it, the room, gets darker." The scrim sits at z50 — under the
+            hero (56) and under the brain (54/72) — so the ROOM dims and the two things the sentence
+            is about are the only lit objects left. */}
+        {roomDark > 0.01 && (
+          <div style={{ position: "absolute", inset: 0, zIndex: 50, pointerEvents: "none",
+            background: `radial-gradient(ellipse 46% 40% at ${((HX / W) * 100).toFixed(1)}% ${((brainY / H) * 100).toFixed(1)}%, ${hexa("#0A0714", 0)} 0%, ${hexa("#0A0714", 0.42 * roomDark)} 58%, ${hexa("#07050F", 0.72 * roomDark)} 100%)` }} />
+        )}
+        {glow > 0.01 && (<>
+          <div style={{ position: "absolute", left: HX - BRS * 1.5, top: brainY - BRS * 1.4,
+            width: BRS * 3.0, height: BRS * 2.8, zIndex: 52, borderRadius: "50%",
+            background: `radial-gradient(circle, ${hexa("#FFE9A6", 0.55 * glow)} 0%, ${hexa("#FFC94A", 0.28 * glow)} 34%, ${hexa("#FFB020", 0)} 68%)` }} />
+          <Motes x={HX - BRS * 0.8} y={brainY - BRS * 1.0} w={BRS * 1.6} h={BRS * 1.5} n={16} f={f} z={75} c="#FFE9A6" />
+        </>)}
         {locked && f < 100 && (<>
           <Ring x={HX} y={domeY} f={f} at={71} c={mxh(repo.c, 0.5)} z={75} s={2.6} dur={22} />
           <Ring x={HX} y={domeY} f={f} at={75} c={mxh(GOLD, 0.4)} z={75} s={1.8} dur={20} />
@@ -590,36 +686,76 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
   const p = asPlace("fuel");
   const L = LAY[v];
   const repo = repoBy("omni");
-  const sh = useShot(f, v, MAN_SHOTS);
-  const HX = 800 + L.a * 0.2, HS = 240;
-  const gauge = 0.72 * (1 - E(f, 0, 34, 0, 1, IO)) + E(f, 88, 150, 0, 0.97, OUT);
-  const err = f >= 36 && f < 84 ? 1 : 0;
-  const sel = E(f, 60, 74, 0, 1, OUT) + E(f, 146, 158, 0, 1, OUT);
-  const flow = E(f, 74, 80, 0, 1, OUT);
-  const slump = err ? E(f, 36, 50, 0, 0.40, OUT) : E(f, 84, 96, 0.40, 0, OUT);
-  const hic = err ? Math.max(0, Math.sin(f * 0.62)) * 0.42 : 0;
-  const out = { x: HX - 40, y: GY - HS * 0.66 };
-  const shotPush = f < 58 ? pushK(f, 0, 58, 0.065) : f < 120 ? pushK(f, 58, 120, 0.065) : pushK(f, 120, dur, 0.06);
+  /* ⛔⛔ SCRAPPED AND REDONE (Alex, rev 4: "at 33 seconds the animation is not good, the Claude
+     sprite is so small, the animation part needs to be scrapped concept and completely redone").
+     The old scene was a wall of plumbing with a 240px hero parked at the edge of it — the props
+     were the subject and he was set dressing. The sentence has three beats and the HERO carries
+     all three, at 430px, in the middle of frame:
+       1. "runs out of credits or gives an error"  — his own gauge falls to E, he sags, ERROR fires
+       2. "swaps to another model"                 — a rotary throws and a MODEL CARTRIDGE slams in
+       3. "millions of free tokens every day"      — tokens pour in, the gauge sweeps to F, count up
+     The manifold survives as the machine BEHIND him, not the thing being looked at. */
+  const HX = 470 + L.a * 0.2, HS = 430;
+  const a = anchors(HX, GY, HS);
+  const DRAIN = 34, ERR = 44, THROW = 76, SLAM = 96, POUR = 118;
+  const gauge = 0.80 * (1 - E(f, 4, DRAIN, 0, 1, IO)) + E(f, POUR + 6, dur - 8, 0, 0.97, OUT);
+  const err = f >= ERR && f < SLAM ? 1 : 0;
+  const sel = E(f, THROW, THROW + 12, 0, 1, OUT) + E(f, SLAM + 20, SLAM + 32, 0, 1, OUT);
+  const flow = E(f, POUR, POUR + 8, 0, 1, OUT);
+  const slump = err ? E(f, ERR, ERR + 12, 0, 0.46, OUT) : E(f, SLAM, SLAM + 14, 0.46, 0, OUT);
+  const hic = err ? Math.max(0, Math.sin(f * 0.62)) * 0.44 : 0;
+  /* the cartridge that swaps in: it flies from the rack on the left into his tank */
+  const ride = E(f, SLAM - 18, SLAM, 0, 1, IN_Q);
+  const slam = f >= SLAM ? Math.exp(-(f - SLAM) / 4) : 0;
+  const cx = 150 + (HX - 210 - 150) * ride, cy = 300 + (a.hipL.y - 40 - 300) * ride;
+  const shotPush = f < 70 ? pushK(f, 0, 70, 0.06) : f < POUR ? pushK(f, 70, POUR, 0.06) : pushK(f, POUR, dur, 0.06);
+  const K = pick(v, 1.10, 1.30, 1.0), CX = pick(v, 470, HX, 520), CY = pick(v, 452, 420, 486);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.03]} vig={0.48}>
-      <Cam s={sh.s * shotPush} x={sh.x * shotPush} y={sh.y * shotPush} z={12}>
+      <Cam {...punch(K * shotPush, CX, CY)} z={12}>
         <Room p={p} f={f} bands={3} kind="rack" overhead="tray" rake={0.08} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="slab" grit={0.55} lamp={{ x: 380, y: 130, r: 220 }} window={null} />
-        <GhFitout p={p} f={f} seed={19} z={19} graphX={62} graphY={242} cols={11} />
+        <GhFitout p={p} f={f} seed={19} z={19} graphX={62} graphY={236} cols={11} />
         <ShopWall p={p} f={f} seed={8} bay={repo} door={false} pegX={40} pegW={220} lift={0.8} />
-        <Manifold x={400 + L.a * 0.2} y={300} f={f} sel={sel} flow={flow} s={1} z={44} outX={out.x} outY={out.y} beadsAt={74} />
-        <BigGauge x={HX + 30} y={230} v={gauge} s={1.05} z={50} err={err} />
-        <ErrorLamp x={HX + 190} y={70} on={err} f={f} s={1.3} z={50} />
-        <Contact x={HX} y={GY - 10} w={HS * 0.8} o={0.36} />
+        {/* the machine, BEHIND him and half out of frame — staging, not the subject */}
+        <Manifold x={880 + L.a * 0.2} y={252} f={f} sel={sel} flow={flow} s={0.86} z={40}
+          outX={HX + 120} outY={a.hipL.y - 30} beadsAt={POUR} />
+        {/* the shelf of models on the left: the one that gets picked LIGHTS, the rest dim */}
+        {MODELS.slice(0, 3).map((m, i2) => {
+          const picked = i2 === 1;
+          const flown = picked && ride > 0.02;
+          if (flown) return null;
+          return <Canister key={m.n} x={92 + i2 * 96} y={392} logo={m.logo} c={m.c} s={0.72} z={42}
+            live={picked ? E(f, THROW, THROW + 10, 0, 1, OUT) : 0} />;
+        })}
+        {/* ⭐ the swap itself: the DeepSeek canister leaves the shelf and SLAMS into his tank */}
+        {ride > 0.02 && f < SLAM + 8 && (
+          <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 78,
+            transform: `rotate(${-26 + 26 * ride}deg)`, transformOrigin: `${cx}px ${cy}px` }}>
+            <Canister x={cx} y={cy} logo={MODELS[1].logo} c={MODELS[1].c} s={0.95} z={78} live={1} />
+          </div>
+        )}
+        <Contact x={HX} y={GY - 10} w={HS * 0.8 + slam * 40} o={0.36} />
         <Rig f={f} x={HX} y={GY} size={HS} z={56} act={3} ph={0.5} kit={{ tank: 1, gauge }}
-          strain={slump} stern={err ? 0.6 : 0} shock={f >= 36 && f < 46 ? 0.8 : hic}
-          xeyes={f >= 46 && f < 84 ? 1 : 0} cheer={E(f, 128, 138, 0, 1, BACK)} gaze={f < 58 ? -1 : 0} />
-        {err > 0 && <Steam x={HX + 70} y={GY - HS * 0.7} f={f} at={40} n={10} z={64} s={1.5} c="#8A8D8A" rate={1.4} />}
-        {f >= 120 && (<>
-          <TokenHopper x={HX - 250} y={GY} f={f} at={120} s={0.9} z={60} n={28} />
-          <Tally x={330} y={396} k={E(f, 122, 170, 0, 1, OUT)} s={0.92} z={82} />
+          strain={Math.max(slump, slam * 0.7)} stern={err ? 0.62 : 0}
+          shock={f >= ERR && f < ERR + 10 ? 0.85 : slam > 0.4 ? 0.7 : hic}
+          xeyes={f >= ERR + 6 && f < SLAM ? 1 : 0}
+          cheer={E(f, POUR + 14, POUR + 26, 0, 1, BACK)} gaze={f < THROW ? -1 : 0.4} />
+        {/* his own gauge, big, ON him — the number the sentence is about */}
+        <BigGauge x={HX + 250} y={196} v={gauge} s={1.25} z={50} err={err} />
+        <ErrorLamp x={HX - 250} y={128} on={err} f={f} s={1.7} z={50} />
+        {err > 0 && <Steam x={HX + 90} y={GY - HS * 0.72} f={f} at={ERR} n={12} z={64} s={1.7} c="#8A8D8A" rate={1.5} />}
+        {slam > 0.02 && f < SLAM + 26 && (<>
+          <Ring x={HX - 150} y={a.hipL.y - 30} f={f} at={SLAM} c={mxh(repo.c, 0.4)} z={80} s={1.9} dur={20} />
+          <Puff x={HX - 150} y={a.hipL.y - 10} f={f} at={SLAM} c="#DCEFE2" z={80} n={12} s={1.3} up={0.25} />
         </>)}
-        <CrewBand f={f} repo={repo} n={4} size={182} seed={BANDSEED[v] + 8} at={-40} x1={560} cheer={E(f, 130, 140, 0, 1, OUT)} />
+        {/* the tokens pour into him and the counter runs — the payoff, over his shoulder */}
+        {f >= POUR && (<>
+          <TokenHopper x={HX + 120} y={GY} f={f} at={POUR} s={1.05} z={60} n={30} />
+          <Tally x={250 + L.c} y={430} k={E(f, POUR + 4, dur - 4, 0, 1, OUT)} s={1.02} z={82} />
+        </>)}
+        <CrewBand f={f} repo={repo} n={3} size={176} seed={BANDSEED[v] + 8} at={-40} x0={620}
+          cheer={E(f, POUR + 16, POUR + 28, 0, 1, OUT)} />
         <TyreStack x={-30 + L.c} n={3} s={0.95} z={90} />
       </Cam>
     </Scene>
@@ -638,7 +774,7 @@ export const ROLLOUT: React.FC<SP> = ({ v, dur }) => {
   const rise = 150 - 140 * E(f, 0, 30, 0, 1, IO) + ring(f - 30, 12, 2.6, 16);
   const platTop = GY - 18 - rise - 26;
   const kit: Kit = { intake: 1, hud: 1, core: 1, tank: 1, coreLit: 1, gauge: 0.95, hudLamps: [1, 1, 1], hudOn: 1, cape: 1 };
-  const SEND = 42;                                        /* the SEND press at 40.40s — 0.09s clear of "links." (ends 40.31) */
+  const SEND = 22;                                        /* SEND at 38.67s, finishing before "links." starts (39.02) */
   return (
     <Scene p={p} slug="" push={[0, dur, 1.03]} vig={0.4}>
       {/* ⛔ Q1 is the lift lowering and the composer sliding in, so the scene mean is high and the

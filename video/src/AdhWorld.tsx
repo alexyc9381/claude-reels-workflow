@@ -109,6 +109,30 @@ export const UISH = "#F4F1EA", UISH2 = "#E3DED1", UILINE = "#CFC8B8";
 export const DIFFG = "#3F9E74", DIFFR = "#C44A3A", CARET = "#D97757";
 export const OKGREEN = "#2F7F5C", WARN = "#E7A94C", LINKB = "#4E7FC4";
 export const CREAM_TICKET = "#F6F0DE";
+
+/* ---- ⭐⭐⭐ THE SYNTAX PALETTE — the answer to "just simple single colors" ----
+   Alex, 2026-09-05, on rev 2: *"the themeing is not good enough like its too
+   basic and just simple single colors here its not interesting enough."*
+   Every wall and every pane in this world is made of `CodeLines`, and they were
+   drawing ONE colour at one opacity. Real code on a real screen is TOKENISED,
+   and that is both the honest thing to draw and a free source of colour
+   variety in every single frame of the reel: a keyword is not the colour of a
+   string, and a comment is not the colour of a number.
+   ⛔ MATTE, and picked to sit inside the house palette rather than a stock
+   editor theme — these are the reel's own hues at code-line weight. */
+export const SYN = {
+  kw:  "#C08CE0",   /* keyword   */
+  str: "#7FC98F",   /* string    */
+  num: "#E7B24C",   /* number    */
+  fn:  "#6FA8E8",   /* function  */
+  var: "#E8E2D4",   /* plain     */
+  com: "#8A8578",   /* comment   */
+  err: "#C44A3A",   /* error     */
+} as const;
+/** the weighted token order a line is built from — plain dominates, so the
+    accents READ as accents instead of turning the wall into confetti. */
+export const SYN_MIX = [SYN.var, SYN.var, SYN.kw, SYN.var, SYN.fn, SYN.str,
+                        SYN.var, SYN.num, SYN.com, SYN.var, SYN.kw, SYN.str] as const;
 /* kept so v1 props that are still referenced keep compiling until they are cut */
 export const IRON = "#221F1C", IRON2 = "#3A3532", TILE = "#EAE4D4", TILE2 = "#D9D2C0";
 export const LAMP = "#F2B45A", FLAME = "#F0842E", FLAME2 = "#FFD25A", SOOT = "#26221E";
