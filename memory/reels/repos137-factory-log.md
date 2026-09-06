@@ -554,3 +554,67 @@ lifts every cut, including the one that was already approved
 ### Delivered
 verify 9/9 ×3 · motion 10.59 / 11.19 / 10.54, 0/11 failing, **0/11 stalls** · encoded house
 HOOK_LUMA 170.8 · sat 52.0% · p10 28.8 · **dHash 23.9 / 11** · sfx clean · 104 cues, 0 collisions.
+
+## STAGE 20 — REV 10: the gems glow, and cut 2 gets a moving point of interest
+
+> *"the first and second ones here … also the final note on the gem in the beginning scene here is not
+> good and it should be glowing and stuff here glowing neon."*
+
+### ⛔⛔ A STANDING RULE WAS OVERRIDDEN ON PURPOSE — and the override is bounded
+
+`feedback_reel_matte_palette` says, in Alex's own words from reels 46, 79 and 124:
+**"⛔ NO COLOURED GLOW. Kill every `boxShadow: 0 0 Npx <colour>` … never emissive bloom."** He then
+asked for glowing neon by name. Both are real, so the question is what the rule is actually
+protecting against, and its own text answers it: **neon-on-BLACK** — "dark navy/near-black
+backgrounds with glowing accents are the #1 'looks coded' tell."
+
+So the glow was built and **fenced**:
+- it exists **only on the four `Gem`s in the hook**, behind a `glow` prop that defaults on for them
+  and is never passed by a body scene;
+- the ground under it is the near-white `Cyc` bay, not a dark set, so nothing reads as a screen;
+- every body scene keeps the matte palette, solid paints and dark drop-shadows, untouched.
+
+⭐ The general lesson: **when a note collides with a standing rule, read the rule for its FAILURE
+MODE, not its wording.** A ban on emissive bloom written from three neon-on-black rejections is not a
+ban on a lit stone on white paper. Say so out loud to Alex either way — an unflagged override is how
+a rule quietly dies.
+
+### What "glowing" is made of
+
+A halo alone measured as a brighter shape, not a lit one. Five layers, all driven by the existing
+`pulse` so they breathe on the gem's own clock:
+
+| layer | size | what it does |
+|---|---|---|
+| wide pool | `s * 2.44` | the light it throws on the bay |
+| hot core halo | `s * 1.40` | white at the centre, so there is a source not a wash |
+| 8 light rays | `0.62–0.88 s`, rotating `f * 0.7` | length modulated per-ray on `sin(f/5 + i·0.9)` |
+| comet trail | `s * 2.6 * trail` | only while `k < 1`, i.e. while it is still flying in |
+| emissive core | inside the stone, clipped to `CUT` | ⭐ what makes it read as LIT rather than bright |
+
+Gem sizes went up with it (132→140 house, 128→136 amber, 126→134 steel) — a halo on a small stone
+just looks like blur.
+
+### Cut 2: a boundary that exists is not a boundary that MOVES
+
+The charge sweep was a conic gradient whose edge advanced. That is an edge, and an edge repaints —
+but it has no point of interest, so the eye has nothing to track. Added:
+- a **charge head**: a 10px bar riding the leading edge of the sweep, white at the tip falling to
+  transparent at the hub, so the fill has something to *watch*;
+- **burst spokes**: 7 rays per landed quarter, thrown outward over 20 frames in that repo's colour,
+  so the beat has a consequence outside the disc.
+
+### ⛔ THE JSX MULTI-LINE COMMENT BUG, THIRD OCCURRENCE
+
+`{/* … */` instead of `{/* … */}` for the third time this reel — TS1005 reported at a line far from
+the cause every time. It is now a permanent pre-render scan alongside the full-width-unicode-in-hex
+scan:
+
+```bash
+grep -Pzo '\{/\*(?:(?!\*/).)*\*/(?!\})' video/src/Rps*.tsx   # must be empty
+```
+
+### Delivered
+verify 9/9 ×3 · motion 10.59 / 11.19 / 10.54, 0/11 failing, **0/11 stalls** · hook motion
+19.89 / 10.41 / 6.81 · encoded house HOOK_LUMA 170.8 · sat 52.0% · p10 28.8 · **dHash 23.9 / 11** ·
+sfx clean · 104 cues, 0 collisions · 7 files live in `Faceless/137 - REPOS/` with real item-ids.

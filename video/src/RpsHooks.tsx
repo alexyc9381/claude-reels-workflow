@@ -145,8 +145,8 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
         const FROM = [{ x: -180, y: 120 }, { x: 1190, y: 150 }, { x: -160, y: 700 }, { x: 1200, y: 660 }][i];
         const TO = [{ x: RX, y: RY - 232 }, { x: RX + 232, y: RY }, { x: RX, y: RY + 232 }, { x: RX - 232, y: RY }][i];
         return <Gem key={r.key} repo={r} x={FROM.x + (TO.x - FROM.x) * k} y={FROM.y + (TO.y - FROM.y) * k}
-          s={132 + 34 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 40} stars={1}
-          label={false} shake={i === 3 ? 0.6 : 0} />;
+          s={140 + 40 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 40} stars={1}
+          label={false} shake={i === 3 ? 0.6 : 0} glow={1} trail={Math.max(0, 1 - k) * 0.9} />;
       })}
       {SLOT.slice(0, 3).map((at, i) => (f >= at && f < at + 26 ? (
         <React.Fragment key={"sm" + at}>
@@ -246,6 +246,25 @@ export const DROPHOOK: React.FC<SP> = ({ v, dur }) => {
         zIndex: 44, borderRadius: "50%", background: `conic-gradient(${CLAY} 0deg, ${mxh(CLAY, 0.3)} ${deg}deg, transparent ${deg}deg)`,
         WebkitMaskImage: "radial-gradient(circle, transparent 0 88%, #000 88.5%)",
         maskImage: "radial-gradient(circle, transparent 0 88%, #000 88.5%)" }} />
+      {/* ⭐ the charge HEAD: a bright bar riding the leading edge of the sweep, so the fill has a
+          moving point of interest instead of a boundary that merely exists */}
+      {deg0 > 2 && deg0 < 358 && (
+        <div style={{ position: "absolute", left: CX - 5, top: CY - D * 0.56, width: 10, height: D * 0.56,
+          zIndex: 48, transformOrigin: "50% 100%", transform: `rotate(${deg0}deg)`, borderRadius: 5,
+          background: `linear-gradient(180deg, ${hexa("#FFF6E2", 0.95)}, ${hexa(CLAY, 0.55)} 55%, ${hexa(CLAY, 0)})` }} />
+      )}
+      {/* light spokes bursting outward on each quarter that lands */}
+      {SLAM.slice(0, 3).map((at, i) => {
+        const t = f - at;
+        if (t < 0 || t > 20) return null;
+        const e = 1 - t / 20;
+        return Array.from({ length: 7 }, (_, r2) => (
+          <div key={"sp" + at + r2} style={{ position: "absolute", left: CX, top: CY - 3, width: D * (0.5 + 0.5 * (1 - e)),
+            height: 6, zIndex: 49, transformOrigin: "0% 50%", borderRadius: 3, opacity: 0.55 * e,
+            transform: `rotate(${-90 + i * 90 + (r2 - 3) * 11}deg)`,
+            background: `linear-gradient(90deg, ${hexa(mxh(REPOS[i].c, 0.5), 0.9)}, ${hexa(REPOS[i].c, 0)})` }} />
+        ));
+      })}
       {/* the mark, dead grey underneath and full colour above, revealed by the charge */}
       <div style={{ position: "absolute", left: CX - D / 2, top: CY - D / 2, width: D, height: D, zIndex: 46,
         opacity: flick, filter: `grayscale(1) brightness(0.62) contrast(0.9)`,
@@ -276,8 +295,8 @@ export const DROPHOOK: React.FC<SP> = ({ v, dur }) => {
         const tx = CX + Math.cos(ang) * D * 0.55, ty = CY + Math.sin(ang) * D * 0.55;
         const fx = CX + Math.cos(ang) * 1180, fy = CY + Math.sin(ang) * 1180;
         return <Gem key={r.key} repo={r} x={fx + (tx - fx) * k} y={fy + (ty - fy) * k}
-          s={128 + 32 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 36} stars={1}
-          label={false} shake={i === 3 ? 0.6 : 0} />;
+          s={136 + 36 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 36} stars={1}
+          label={false} shake={i === 3 ? 0.6 : 0} glow={1} trail={Math.max(0, 1 - k) * 0.9} />;
       })}
       {SLAM.slice(0, 3).map((at, i) => (f >= at && f < at + 26 ? (
         <React.Fragment key={"cm" + at}>
@@ -377,8 +396,8 @@ export const PITHOOK: React.FC<SP> = ({ v, dur }) => {
         const fx = i % 2 === 0 ? -190 : 1200, fy = 250 + i * 90;
         const tx = CX - 100 + i * 66, ty = GY - 74;
         return <Gem key={r.key} repo={r} x={fx + (tx - fx) * k} y={fy + (ty - fy) * k}
-          s={126 + 30 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 34} stars={1}
-          label={false} shake={i === 3 ? 0.6 : 0} />;
+          s={134 + 34 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 34} stars={1}
+          label={false} shake={i === 3 ? 0.6 : 0} glow={1} trail={Math.max(0, 1 - k) * 0.9} />;
       })}
       {SLAM.slice(0, 3).map((at, i) => (f >= at && f < at + 26 ? (
         <React.Fragment key={"gm" + at}>

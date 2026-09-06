@@ -1024,8 +1024,10 @@ export const GhSign: React.FC<{ x: number; y: number; w?: number; z?: number; on
    neon-on-black ([[feedback_arcade_world_means_neon_on_black]]).
    ====================================================================== */
 export const Gem: React.FC<{ repo: Repo; x: number; y: number; s?: number; z?: number; f: number;
-  lit?: number; spin?: number; mark?: boolean; stars?: number; label?: boolean; shake?: number }> =
-  ({ repo, x, y, s = 190, z = 70, f, lit = 1, spin = 0, mark = true, stars = 1, label = true, shake = 0 }) => {
+  lit?: number; spin?: number; mark?: boolean; stars?: number; label?: boolean; shake?: number;
+  glow?: number; trail?: number }> =
+  ({ repo, x, y, s = 190, z = 70, f, lit = 1, spin = 0, mark = true, stars = 1, label = true, shake = 0,
+     glow = 1, trail = 0 }) => {
   const k = Math.max(0, Math.min(1, lit));
   /* ⛔ Alex, rev 4: "the gems should be moving or shaking or glowing, more interesting." A gem that
      sits still is a shape; these BREATHE (halo + scale), JITTER on their own clock, sweep a GLINT
@@ -1040,10 +1042,37 @@ export const Gem: React.FC<{ repo: Repo; x: number; y: number; s?: number; z?: n
   return (
     <div style={{ position: "absolute", left: x - s / 2 + jx, top: y - s / 2 + jy, width: s, height: s, zIndex: z,
       transform: `scale(${breathe})`, transformOrigin: "50% 60%" }}>
-      {/* the pool of light it throws — soft and wide, never a bloom ring */}
-      <div style={{ position: "absolute", left: -s * 0.46, top: -s * 0.42, width: s * 1.92, height: s * 1.92,
-        borderRadius: "50%", opacity: 0.34 * k * pulse, zIndex: -1,
-        background: `radial-gradient(circle, ${hexa(mxh(repo.c, 0.5), 0.9)} 0%, ${hexa(repo.c, 0.35)} 34%, ${hexa(repo.c, 0)} 70%)` }} />
+      {/* ⛔⛔ COLOURED GLOW, ON PURPOSE. [[feedback_reel_matte_palette]] bans emissive bloom outright
+          ("no boxShadow 0 0 Npx colour") and it is a rule written from Alex's own notes on reels
+          46, 79 and 124. He asked for it here by name: *"it should be glowing and stuff, glowing
+          neon."* ⭐ The failure that rule guards against is neon-on-BLACK — glowing accents on a dark
+          ground reading as vibecoded UI. This bay is near-WHITE and the glow is confined to the four
+          GEMS in the hook; every body scene keeps the matte palette untouched. */}
+      {/* the wide soft pool */}
+      <div style={{ position: "absolute", left: -s * 0.72, top: -s * 0.68, width: s * 2.44, height: s * 2.44,
+        borderRadius: "50%", opacity: 0.46 * k * glow * pulse, zIndex: -2,
+        background: `radial-gradient(circle, ${hexa(mxh(repo.c, 0.62), 0.95)} 0%, ${hexa(repo.c, 0.5)} 26%, ${hexa(repo.c, 0.18)} 46%, ${hexa(repo.c, 0)} 70%)` }} />
+      {/* the tight hot core halo */}
+      <div style={{ position: "absolute", left: -s * 0.20, top: -s * 0.16, width: s * 1.40, height: s * 1.40,
+        borderRadius: "50%", opacity: 0.72 * k * glow * pulse, zIndex: -1,
+        background: `radial-gradient(circle, ${hexa("#FFFFFF", 0.9)} 0%, ${hexa(mxh(repo.c, 0.7), 0.8)} 22%, ${hexa(repo.c, 0)} 62%)` }} />
+      {/* ⭐ light rays, pulsing on their own clock */}
+      {glow > 0.05 && Array.from({ length: 8 }, (_, i) => {
+        const len = s * (0.62 + 0.26 * Math.abs(Math.sin(f / 5 + i * 0.9))) * k * glow;
+        return (
+          <div key={"ry" + i} style={{ position: "absolute", left: "50%", top: "50%", width: len, height: s * 0.028,
+            marginTop: -s * 0.014, zIndex: -1, transformOrigin: "0% 50%", borderRadius: s * 0.014,
+            transform: `rotate(${i * 45 + f * 0.7}deg)`, opacity: 0.5 * k * glow,
+            background: `linear-gradient(90deg, ${hexa("#FFF6E2", 0.9)}, ${hexa(repo.c, 0.5)} 40%, ${hexa(repo.c, 0)})` }} />
+        );
+      })}
+      {/* the comet trail while it is travelling */}
+      {trail > 0.02 && (
+        <div style={{ position: "absolute", left: "50%", top: "50%", width: s * 2.6 * trail, height: s * 0.5,
+          marginTop: -s * 0.25, zIndex: -2, transformOrigin: "0% 50%", borderRadius: s * 0.25,
+          transform: `rotate(${spin > 0 ? 158 : 202}deg)`, opacity: 0.5 * trail * glow,
+          background: `linear-gradient(90deg, ${hexa(mxh(repo.c, 0.5), 0.8)}, ${hexa(repo.c, 0)})` }} />
+      )}
       <div style={{ position: "absolute", inset: 0, transform: `rotate(${spin}deg)` }}>
         {/* the body */}
         <div style={{ position: "absolute", inset: 0, clipPath: CUT, boxShadow: SH_D,
@@ -1065,6 +1094,10 @@ export const Gem: React.FC<{ repo: Repo; x: number; y: number; s?: number; z?: n
         {/* the specular — one hard highlight is what makes a facet read as cut */}
         <div style={{ position: "absolute", left: "31%", top: "3%", width: "16%", height: "24%",
           background: hexa("#FFFFFF", 0.62 * pulse), clipPath: "polygon(0 0, 100% 0, 60% 100%, 0 70%)" }} />
+        {/* the emissive core inside the stone: what makes it read as LIT and not merely bright */}
+        <div style={{ position: "absolute", left: "26%", top: "14%", width: "48%", height: "44%",
+          borderRadius: "50%", opacity: 0.5 * k * glow * pulse,
+          background: `radial-gradient(circle, ${hexa("#FFFFFF", 0.95)} 0%, ${hexa(mxh(repo.c, 0.75), 0.7)} 44%, ${hexa(repo.c, 0)} 78%)` }} />
         {/* ⭐ the GLINT: a bright bar sweeping the whole cut, clipped to the stone */}
         {glint < 0.34 && (
           <div style={{ position: "absolute", inset: 0, clipPath: CUT, overflow: "hidden" }}>
