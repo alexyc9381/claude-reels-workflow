@@ -512,3 +512,45 @@ round later. The mark is never cut up.
 ### Delivered
 verify 9/9 ×3 · motion 10.59 / 11.19 / 10.54, 0/11 failing, **0/11 stalls** · encoded house
 HOOK_LUMA 182.9 · sat 52.0% · p10 28.8 · **dHash 24.3 / 11** · sfx clean · 104 cues, 0 collisions.
+
+## STAGE 19 — REV 9: cut 3 is the reference, so lift 1 and 2 to it
+
+> *"the third one is pretty good here, the first one should be elevated and improve significantly way
+> more here and the last one here."*
+
+⭐ **An approved cut is a specification.** Rather than guess at "elevated", the GROW cut was read for
+what made it work and each of those levers was checked against the other two:
+
+| lever | grow (approved) | spin-up (before) | charge (before) |
+|---|---|---|---|
+| how big the mark gets | **566px** | 248px, inside a heavy ring | 486px, fixed |
+| does it change SIZE | yes, four steps | no | no |
+| is the progress STATED | yes, plinth sockets fill L→R | only the socket colour | only the fill angle |
+| something crossing frame between beats | orbiting repos | rotation only | collar only |
+
+So both were given the missing levers, not a new idea:
+- **the mark itself** 46% → **65%** of the rotor face, and the ring slimmed 0.115 → 0.095
+- **SPEED ARCS** off the rim whose LENGTH is the live degrees-per-frame, so the eye reads acceleration
+  rather than "it is spinning"
+- an **RPM readout** climbing 144 → 4,992 and an **UPGRADED %** climbing 0 → 77 — a real number moving
+  is the top of the motion table and it states the claim
+- both assemblies **grow and rise** as they come up, so the beat has scale as well as its own verb
+
+⭐⭐ **AND THE BAY ITSELF WAS THE FLOOR UNDER ALL THREE.** `Cyc` was a flat gradient sheet: no floor,
+no horizon, no key, so the mark floated on paper. It is now a real cyclorama — wall, floor plane with
+a horizon seam, a warming overhead key, corner falloff for value structure, and the shop's gantry
+cropped by the top edge — plus `Contact2`, the shadow the mark drops on the floor. That one change
+lifts every cut, including the one that was already approved
+([[feedback_rooms_need_an_architecture_layer]]).
+
+| hook motion | before | after |
+|---|---|---|
+| spin-up (house) | 13.79 | **19.91** |
+| charge (amber) | 7.96 | **10.27** |
+| grow (steel) | 8.15 | 6.74 (mechanism untouched, new bay) |
+
+⛔ Both rings first grew past the panel and lost their housing to the crop — capped at 638 and 574.
+
+### Delivered
+verify 9/9 ×3 · motion 10.59 / 11.19 / 10.54, 0/11 failing, **0/11 stalls** · encoded house
+HOOK_LUMA 170.8 · sat 52.0% · p10 28.8 · **dHash 23.9 / 11** · sfx clean · 104 cues, 0 collisions.

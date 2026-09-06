@@ -30,6 +30,10 @@ const Root: React.FC = () => (<>
   <Composition id="hook-0-wander" component={HookCut("wander")} durationInFrames={135} {...V} />
   <Composition id="hook-1-spike"  component={HookCut("spike")}  durationInFrames={135} {...V} />
   <Composition id="hook-2-scorch" component={HookCut("scorch")} durationInFrames={135} {...V} />
+  {/* ⭐ ROUND 3 — three FRESH mechanisms after the column test. See AdhHooks.tsx. */}
+  <Composition id="hook-a-cutout"   component={HookCut("cutout")}   durationInFrames={135} {...V} />
+  <Composition id="hook-b-dial"     component={HookCut("dial")}     durationInFrames={135} {...V} />
+  <Composition id="hook-c-carousel" component={HookCut("carousel")} durationInFrames={135} {...V} />
   <Composition id="adh-house" component={ReelHouse} durationInFrames={ADH_TOTAL} {...V} />
   <Composition id="adh-amber" component={ReelAmber} durationInFrames={ADH_TOTAL} {...V} />
   <Composition id="adh-steel" component={ReelSteel} durationInFrames={ADH_TOTAL} {...V} />

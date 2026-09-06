@@ -4,12 +4,12 @@ import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
   Scene, Cam, Contact, Ring, Puff, Steam, Fall, Crew, Forearm, Rig, anchors, Motes,
   CLAY, GOLD, GREEN, RED, INK, IRON, CHROME, BONE, BRASS,
-  REPOS, repoBy, asPlace, GY, mono, ui,
+  REPOS, repoBy, asPlace, GY, mono, ui, lerpHex,
 } from "./RpsWorld";
 import type { Kit, Repo } from "./RpsWorld";
 import { Room } from "./HwSets";
 import { ShopWall, BayLamp, TyreStack, Toolbox, Drum, Lift, Chain, Hook, Tag, HangPart, Hoist, CrewBand, GhFitout } from "./RpsSets";
-import { RepoCard, GhSign, Gem, Sled, Rotor, Cyc } from "./RpsProps";
+import { RepoCard, GhSign, Gem, Sled, Rotor, Cyc, Contact2 } from "./RpsProps";
 import { LAY, RAKE_K, RAKE_X, RAKE_N, punch } from "./RpsScenes";
 import type { Variant, SP } from "./RpsScenes";
 
@@ -99,24 +99,39 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
   const filled = SLOT.filter((t) => f >= t).length;
   const lit = Math.min(1, filled / 3.2) * (0.72 + 0.28 * Math.min(1, f / 60));
   const judder = f < SLOT[0] ? 1 : Math.max(0, 1 - (f - SLOT[0]) / 8);
-  const RX = 506 + L.a * 0.3, RY = 424;
+  /* ⭐ it also COMES UP as it spins up: the whole assembly grows 560 → 700 and rises, so the beat
+     has scale as well as rotation — the lever that made cut 3 read ([[feedback_make_an_action_read]]). */
+  const grow = 520 + 118 * Math.min(1, filled / 3);
+  const RX = 506 + L.a * 0.3, RY = 448 - (grow - 520) * 0.20;
   const camS = 1.0 + 0.085 * E(f, 0, dur, 0, 1, LIN);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.30}>
       <Cam s={camS} x={0} y={0} z={12}>
       {/* the bright test bay: the near-white ground the note asked for, warming as it spins up */}
-      <Cyc z={20} warm={Math.min(1, filled / 3)} />
+      <Cyc z={20} warm={Math.min(1, filled / 3)} f={f} />
       <GhFitout p={p} f={f} seed={0} z={22} graphX={54} graphY={196} cols={8} rail={false} lift={0.34} />
       {/* the shop is still under it: the hazard lip and the crew keep it in the world */}
       <div style={{ position: "absolute", left: -20, top: GY - 4, width: W + 40, height: 16, zIndex: 30,
         background: `repeating-linear-gradient(-45deg, ${GOLD} 0 22px, ${INK} 22px 44px)`, opacity: 0.9 }} />
-      <GhSign x={196} y={252} w={252} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
+      <GhSign x={190} y={214} w={244} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
       {/* the mount the rotor turns in */}
-      <div style={{ position: "absolute", left: RX - 34, top: RY, width: 68, height: GY - RY, zIndex: 40,
+      <div style={{ position: "absolute", left: RX - 34, top: RY, width: 68, height: Math.max(0, GY - RY), zIndex: 40,
         background: `linear-gradient(90deg, ${dkh(IRON, 0.34)}, ${mxh(IRON, 0.12)} 45%, ${dkh(IRON, 0.42)})` }} />
       <div style={{ position: "absolute", left: RX - 150, top: GY - 26, width: 300, height: 30, zIndex: 40,
         borderRadius: 8, background: `linear-gradient(180deg, ${mxh(IRON, 0.1)}, ${dkh(IRON, 0.44)})`, boxShadow: SH_D }} />
-      <Rotor x={RX} y={RY} f={f} d={540} z={60} angle={angle} lit={lit} filled={filled} judder={judder} hit={hit} />
+      <Contact2 x={RX} y={GY - 10} w={grow * 0.86} o={0.30 + 0.12 * lit} z={44} />
+      <Rotor x={RX} y={RY} f={f} d={grow} z={60} angle={angle} lit={lit} filled={filled} judder={judder} hit={hit} rate={sp} />
+      {/* ⭐ the tacho: a real number climbing with the rotor, the shop's own way of saying FASTER */}
+      <div style={{ position: "absolute", left: 214, top: 536, zIndex: 96, display: "flex",
+        flexDirection: "column", alignItems: "flex-start", gap: 4 }}>
+        <div style={{ ...mono(17, 800), letterSpacing: "0.18em", color: hexa("#5C5346", 0.8) }}>RPM</div>
+        <div style={{ ...ui(88, 900), letterSpacing: "-0.04em", lineHeight: 0.92,
+          color: lerpHex("#7A7266", "#C7502B", lit) }}>{Math.round(sp * 480).toLocaleString("en-US")}</div>
+        <div style={{ width: 190, height: 9, borderRadius: 5, background: hexa("#7A7266", 0.24), overflow: "hidden" }}>
+          <div style={{ position: "absolute", width: `${Math.min(100, (sp / 10.4) * 100) * 1.9}px`, height: 9,
+            borderRadius: 5, background: `linear-gradient(90deg, ${GOLD}, ${CLAY})` }} />
+        </div>
+      </div>
       {/* it fights the lock before the first repo: sparks off the rim and smoke off the mount */}
       {f < SLOT[0] + 6 && (<>
         <Fall x={RX - 40} y={RY + 250} w={180} f={f} at={0} n={12} z={72} c={mxh(GOLD, 0.3)} rate={2.2} s={1.0} />
@@ -170,17 +185,20 @@ export const DROPHOOK: React.FC<SP> = ({ v, dur }) => {
      TRAVEL   the charge sweeps 90° round the mark, colour chasing it.
      ⛔ f92 the fourth repo is still incoming and a quarter of the logo is still grey at the cut. */
   const SLAM = [11, 34, 60, 92];
-  const D = 486;
-  const CX = 506 + L.a * 0.3, CY = 424;
   const hit = SLAM.slice(0, 3).reduce((m, at) => { const d = f - at; return d >= 0 && d < 12 ? Math.max(m, Math.exp(-d / 3.2)) : m; }, 0);
   /* the charge angle: each repo sweeps another quarter, and it eases so the sweep is watchable */
   /* ⛔ a colour fill changes no geometry: the first render measured 5.21 = STATIC. The charge now
      CREEPS between slams as well as jumping on them, and the housing carries a toothed ring that
      turns the whole time — motion is repaint, and only a moving EDGE repaints
      ([[reference_motion_arithmetic]]). */
-  let deg = Math.min(26, f * 0.30);
-  SLAM.forEach((at, i) => { if (i < 3) deg += 84 * E(f, at, at + 17, 0, 1, OUT); });
+  let deg0 = Math.min(26, f * 0.30);
+  SLAM.forEach((at, i) => { if (i < 3) deg0 += 84 * E(f, at, at + 17, 0, 1, OUT); });
+  const deg = deg0;
   const teeth = f * 1.9;
+  /* ⛔ Alex, rev 9: cut 2 needs elevating too. The mark grows with the charge (486 → 642) so the
+     beat has scale as well as colour, and the progress is stated as a real number. */
+  const D = 470 + 104 * Math.min(1, deg0 / 270);
+  const CX = 506 + L.a * 0.3, CY = 446 - (D - 470) * 0.18;
   const warm = Math.min(1, deg / 270);
   const flick = f < SLAM[0] ? (Math.sin(f / 1.7) > 0.4 ? 1 : 0.72) : 1;
   const camS = 1.06 + 0.11 * E(f, 0, dur, 0, 1, LIN);
@@ -188,11 +206,23 @@ export const DROPHOOK: React.FC<SP> = ({ v, dur }) => {
   return (
     <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.30}>
       <Cam s={camS} x={0} y={0} z={12}>
-      <Cyc z={20} warm={warm} />
+      <Cyc z={20} warm={warm} f={f} />
       <GhFitout p={p} f={f} seed={2} z={22} graphX={62} graphY={188} cols={8} rail={false} lift={0.34} />
       <div style={{ position: "absolute", left: -20, top: GY - 4, width: W + 40, height: 16, zIndex: 30,
         background: `repeating-linear-gradient(-45deg, ${GOLD} 0 22px, ${INK} 22px 44px)`, opacity: 0.9 }} />
-      <GhSign x={806} y={240} w={252} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
+      <GhSign x={818} y={210} w={244} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
+      <Contact2 x={CX} y={GY - 10} w={D * 0.94} o={0.30 + 0.12 * warm} z={36} />
+      {/* ⭐ the charge, stated: a real percentage climbing with the sweep */}
+      <div style={{ position: "absolute", left: 214, top: 534, zIndex: 96, display: "flex",
+        flexDirection: "column", alignItems: "flex-start", gap: 4 }}>
+        <div style={{ ...mono(17, 800), letterSpacing: "0.18em", color: hexa("#5C5346", 0.8) }}>UPGRADED</div>
+        <div style={{ ...ui(88, 900), letterSpacing: "-0.04em", lineHeight: 0.92,
+          color: lerpHex("#7A7266", "#C7502B", warm) }}>{Math.round((deg0 / 360) * 100)}%</div>
+        <div style={{ width: 196, height: 9, borderRadius: 5, background: hexa("#7A7266", 0.24), overflow: "hidden" }}>
+          <div style={{ position: "absolute", width: `${(deg0 / 360) * 196}px`, height: 9, borderRadius: 5,
+            background: `linear-gradient(90deg, ${GOLD}, ${CLAY})` }} />
+        </div>
+      </div>
       {/* the housing: a white face inside a near-black rim, so the white bay keeps its value structure */}
       {/* the toothed collar, turning the whole time */}
       <div style={{ position: "absolute", left: CX - D * 0.68, top: CY - D * 0.68, width: D * 1.36, height: D * 1.36,

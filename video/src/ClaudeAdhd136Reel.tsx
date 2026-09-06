@@ -367,7 +367,7 @@ const bedMix = (f: number) => bedEnv(f) * tailDuck(f / FPS);
    reel has ever produced, it sits near the TOP of the shipped band (9.33-17.80),
    and it is the only one of the three that is legible in a single frame — a
    giant green ALL CLEAR board with a burning room behind it. */
-export const PICKED: HookId = "scorch";
+export const PICKED: HookId = "carousel";
 
 export const makeReel = (v: Variant, quiet = false, hook: HookId = PICKED): React.FC => () => {
   const f = useCurrentFrame();

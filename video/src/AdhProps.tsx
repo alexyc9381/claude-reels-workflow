@@ -673,6 +673,352 @@ export const Flurry: React.FC<{ x: number; y: number; f: number; at: number; n?:
     })}
   </>);
 
+
+/* ---- THE SPINNER — a gyro top on a pole, and it WOBBLES ------------------- */
+/** for hook concept A. A weighted top spinning on a mast: the task's colour in
+    its rim, a spin that reads (a bright sector sweeping), and a WOBBLE that
+    grows as it is neglected until it falls off. `life` 1 = spinning true,
+    0 = gone. */
+export const Spinner: React.FC<{ x: number; yTop: number; h: number; f: number; life: number;
+  hue?: string; z?: number; s?: number; seed?: number }> =
+  ({ x, yTop, h, f, life, hue = CLAY, z = 60, s = 1, seed = 1 }) => {
+  const dead = life <= 0.02;
+  const wob = (1 - life) * 26;
+  const lean = Math.sin(f / 5.5 + seed) * wob;
+  const d = 108 * s;
+  const fall = dead ? Math.min(1, (f % 200) / 40) : 0;
+  return (
+    <>
+      {/* the mast */}
+      <div style={{ position: "absolute", left: x - 6 * s, top: yTop, width: 12 * s, height: h,
+        zIndex: z, transformOrigin: "50% 100%", transform: `rotate(${lean * 0.28}deg)`,
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.46)}, ${mxh(STEEL, 0.26)}, ${dkh(STEEL, 0.5)})` }} />
+      {/* the top itself */}
+      {!dead && (
+        <div style={{ position: "absolute", left: x - d / 2, top: yTop - d * 0.42, width: d,
+          height: d * 0.5, zIndex: z + 1,
+          transformOrigin: "50% 100%", transform: `rotate(${lean}deg)` }}>
+          <div style={{ position: "absolute", inset: 0, borderRadius: "50%",
+            background: `conic-gradient(from ${(f * 22) % 360}deg, ${mxh(hue, 0.42)} 0deg 60deg, ${dkh(hue, 0.30)} 60deg 180deg, ${mxh(hue, 0.24)} 180deg 240deg, ${dkh(hue, 0.36)} 240deg 360deg)`,
+            border: `${3.4 * s}px solid ${hexa("#000", 0.44)}`, boxShadow: SH }} />
+          <div style={{ position: "absolute", left: "34%", top: "20%", width: "32%", height: "44%",
+            borderRadius: "50%",
+            background: `radial-gradient(circle at 36% 30%, ${mxh(STEEL, 0.34)}, ${dkh(STEEL, 0.4)})` }} />
+        </div>
+      )}
+      {/* once it is gone it is ON THE FLOOR, still rocking */}
+      {dead && (
+        <div style={{ position: "absolute", left: x - d * 0.5 - 40 * s, top: yTop + h - 22 * s,
+          width: d, height: d * 0.36, zIndex: z + 1, borderRadius: "50%",
+          transform: `rotate(${70 + Math.sin(f / 7) * 6}deg)`,
+          background: `linear-gradient(180deg, ${dkh(hue, 0.24)}, ${dkh(hue, 0.5)})`,
+          border: `${3 * s}px solid ${hexa("#000", 0.4)}`, opacity: 0.9 }} />
+      )}
+    </>
+  );
+};
+
+/* ---- THE CUTOUT — a flat stand-in of the hero ---------------------------- */
+/** for hook concept A.
+    ⛔⛔ REV 1 OF THIS DREW ITS OWN PLYWOOD BODY and the frame strip killed it:
+    a beige box with two black rectangle eyes. It read as a cardboard robot, it
+    was not recognisable as the mascot, so "that one is a FAKE" could not land —
+    and it put the exact squares-and-rectangles on screen that this whole
+    rebuild exists to remove.
+    ⭐ THE FIX: it is THE REAL MASCOT, frozen. A constant `f` means the sprite
+    never breathes, blinks or shifts weight while the real one across the room
+    does all three, and a wood filter plus a seam, a grain and a bracing strut
+    say what it is made of. Same silhouette, no life in it. */
+export const Cutout: React.FC<{ x: number; y: number; size?: number; z?: number; f: number;
+  lean?: number; fall?: number }> =
+  ({ x, y, size = 300, z = 60, f, lean = 0, fall = 0 }) => {
+  const sway = Math.sin(f / 9) * (1.4 + lean * 8);
+  return (
+    <div style={{ position: "absolute", left: x - size / 2, top: y - size * 1.02, width: size,
+      height: size * 1.02, zIndex: z, transformOrigin: "50% 100%",
+      transform: `rotate(${sway + fall * 78}deg) translateY(${fall * 44}px)` }}>
+      {/* THE BRACING STRUT — behind, so it is the first thing the move reveals */}
+      <div style={{ position: "absolute", left: size * 0.60, top: size * 0.34, width: size * 0.055,
+        height: size * 0.70, transformOrigin: "50% 100%", transform: "rotate(26deg)",
+        background: `linear-gradient(90deg, ${dkh(BRASS, 0.5)}, ${mxh(BRASS, 0.24)}, ${dkh(BRASS, 0.44)})`,
+        boxShadow: SH }} />
+      <div style={{ position: "absolute", left: size * 0.24, bottom: 0, width: size * 0.52,
+        height: size * 0.05, borderRadius: size * 0.024,
+        background: `linear-gradient(180deg, ${mxh(BRASS, 0.3)}, ${dkh(BRASS, 0.42)})` }} />
+      {/* THE FLAT COPY — the real sprite, held on one frame so it never moves */}
+      <div style={{ position: "absolute", inset: 0,
+        filter: "saturate(0.24) sepia(0.42) brightness(1.16) contrast(0.94)" }}>
+        <Dev f={22} x={size / 2} y={size * 0.98} i={0} size={size * 0.96} z={2} at={0} loop={0}
+          extra={{ glasses: 1 }} gaze={0} cheer={1} />
+      </div>
+      {/* the ply seam and the grain, over the top of it */}
+      <div style={{ position: "absolute", left: size * 0.10, top: size * 0.20, width: size * 0.80,
+        height: size * 0.72, opacity: 0.20, mixBlendMode: "multiply",
+        background: `repeating-linear-gradient(94deg, transparent 0 9px, ${hexa(INK, 0.5)} 9px 10px)` }} />
+      <div style={{ position: "absolute", left: size * 0.10, right: size * 0.10, top: size * 0.54,
+        height: 2, background: hexa(INK, 0.22) }} />
+      {/* the hard cut edge down its right side — the tell that it has no back */}
+      <div style={{ position: "absolute", left: size * 0.72, top: size * 0.20, width: size * 0.035,
+        height: size * 0.66, borderRadius: size * 0.01,
+        background: `linear-gradient(90deg, ${hexa(BRASS, 0.0)}, ${hexa(dkh(BRASS, 0.34), 0.75)})` }} />
+    </div>
+  );
+};
+
+/* ---- THE BIG GAUGE — a dial the size of his body ------------------------- */
+/** for hook concept C. The same `Gauge` language at hero scale, plus a needle
+    that can be FORCED: `push` drags it back toward the green against `truth`. */
+export const BigGauge: React.FC<{ x: number; y: number; d?: number; z?: number; f: number;
+  truth: number; push?: number }> =
+  ({ x, y, d = 420, z = 70, f, truth, push = 0 }) => {
+  const shown = Math.max(0, truth - push);
+  const ang = -120 + Math.min(1, shown) * 240;
+  const judder = push > 0.05 ? Math.sin(f * 1.7) * 3.4 * push : 0;
+  return (
+    <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d, zIndex: z,
+      borderRadius: "50%",
+      background: `radial-gradient(circle at 34% 28%, ${UISH}, ${dkh(UISH2, 0.18)})`,
+      border: `${d * 0.055}px solid ${dkh(STEEL, 0.42)}`, boxShadow: SH_D }}>
+      <div style={{ position: "absolute", inset: d * 0.055, borderRadius: "50%",
+        background: `conic-gradient(from 150deg, ${hexa(OKGREEN, 0.55)} 0deg 96deg, ${hexa(WARN, 0.5)} 96deg 150deg, ${hexa(DIFFR, 0.62)} 150deg 240deg, transparent 240deg)` }} />
+      <div style={{ position: "absolute", inset: d * 0.13, borderRadius: "50%", background: UISH }} />
+      {Array.from({ length: 13 }, (_, i) => (
+        <div key={"bt" + i} style={{ position: "absolute", left: "50%", top: d * 0.075,
+          width: d * 0.012, height: d * 0.062, background: hexa(INK, 0.5),
+          transformOrigin: `50% ${d / 2 - d * 0.075}px`,
+          transform: `translateX(-50%) rotate(${-120 + i * 20}deg)` }} />
+      ))}
+      <div style={{ position: "absolute", left: "50%", top: "14%", width: d * 0.026, height: "38%",
+        background: DIFFR, borderRadius: d * 0.013, transformOrigin: "50% 100%",
+        transform: `translateX(-50%) rotate(${ang + judder}deg)` }} />
+      <div style={{ position: "absolute", left: "50%", top: "50%", width: d * 0.10, height: d * 0.10,
+        marginLeft: -d * 0.05, marginTop: -d * 0.05, borderRadius: "50%",
+        background: `radial-gradient(circle at 34% 30%, ${mxh(STEEL, 0.3)}, ${dkh(STEEL, 0.46)})` }} />
+      <div style={{ position: "absolute", left: "50%", top: "66%", transform: "translateX(-50%)" }}>
+        <MarkTile rel d={d * 0.11} z={2} />
+      </div>
+    </div>
+  );
+};
+
+
+/* ---- CRACKS + SHARDS — glass giving way under a hand ---------------------- */
+export const Cracks: React.FC<{ x: number; y: number; d: number; k: number; z?: number; seed?: number }> =
+  ({ x, y, d, k, z = 90, seed = 3 }) => {
+  if (k <= 0.01) return null;
+  const arms = 8;
+  return (
+    <svg width={d} height={d} viewBox="0 0 100 100"
+      style={{ position: "absolute", left: x - d / 2, top: y - d / 2, zIndex: z }}>
+      {Array.from({ length: arms }, (_, i) => {
+        const a = (i / arms) * Math.PI * 2 + rnd(seed + i, 3) * 0.7;
+        const pts: number[][] = [[50, 50]]; let cx = 50, cy = 50;
+        for (let t = 0; t < 4; t++) {
+          const len = 5.5 + rnd(seed + i * 7 + t, 5) * 8.5;
+          const ang = a + (rnd(seed + i * 3 + t, 9) - 0.5) * 0.85;
+          cx += Math.cos(ang) * len; cy += Math.sin(ang) * len; pts.push([cx, cy]);
+        }
+        const dd = pts.map((q, j) => (j ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1)).join(" ");
+        return (
+          <g key={"ck" + i}>
+            <path d={dd} fill="none" stroke={hexa("#FFFFFF", 0.86)} strokeWidth={1.25}
+              strokeDasharray={70} strokeDashoffset={70 * (1 - Math.min(1, k * 1.25))} />
+            <path d={dd} fill="none" stroke={hexa("#000000", 0.34)} strokeWidth={2.4}
+              strokeDasharray={70} strokeDashoffset={70 * (1 - Math.min(1, k * 1.25))} />
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+/** flung glass — hard-edged triangles that TRAVEL, not a particle puff. */
+export const Shards: React.FC<{ x: number; y: number; f: number; at: number; n?: number;
+  z?: number; s?: number; c?: string }> =
+  ({ x, y, f, at, n = 14, z = 96, s = 1, c = "#DDE6EA" }) => {
+  const lf = f - at;
+  if (lf < 0) return null;
+  return (
+    <>
+      {Array.from({ length: n }, (_, i) => {
+        const a = (i / n) * Math.PI * 2 + rnd(i, 11) * 0.5;
+        const sp = (150 + rnd(i, 4) * 340) * s;
+        const t = Math.min(1, lf / 30);
+        const dx = Math.cos(a) * sp * t;
+        const dy = Math.sin(a) * sp * t + t * t * 190 * s;
+        const w = (14 + rnd(i, 6) * 26) * s;
+        return (
+          <div key={"sd" + i} style={{ position: "absolute", left: x + dx - w / 2, top: y + dy - w / 2,
+            width: w, height: w, zIndex: z, opacity: Math.max(0, 1 - t * 1.05),
+            transform: `rotate(${lf * (5 + rnd(i, 8) * 9)}deg)`,
+            clipPath: "polygon(50% 0%, 100% 78%, 8% 96%)",
+            background: `linear-gradient(140deg, ${hexa("#FFFFFF", 0.92)}, ${hexa(c, 0.5)})` }} />
+        );
+      })}
+    </>
+  );
+};
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE DRUM — the elevated CAROUSEL. Built after tiling four of my frames
+   against four of OX's and four of UNLAZY's, which is the only check that
+   answers "not as interesting as the other ones"
+   (`feedback_put_your_frames_next_to_a_winners`). What they had and I did not:
+
+     1 · a CLAIM PLATE in real type, with the Claude mark, from frame 0
+     2 · a HERO OBJECT at roughly twice the body — an ox, a bell, a vault floor
+     3 · a body WORKING against a load, not a body presenting a load
+     4 · a frame whose POPULATION CHANGES, in numbers
+
+   The nine loose canisters were also an INVENTED object
+   (`feedback_an_invented_object_costs_the_open`), so they are gone: the drum
+   carries SIX GREEN TICKS, one per row of this reel's own todo table, which is
+   the object the whole script is about and needs no decoding.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/** one green tick, drawn as a DISC — never a rounded square. `off` swings it
+    out of its bay and drops it. */
+/** ⛔ REV 1 tinted the whole disc with the row's TASK hue and the six read as
+    random coloured balls once they were loose. THE TICK IS THE VILLAIN AND THE
+    VILLAIN HAS ONE COLOUR (`feedback_colour_the_sprite_not_the_plate`): the face
+    is always green, and the row's hue is a RIM, which is where the variety goes. */
+export const TickDisc: React.FC<{ x: number; y: number; d: number; z?: number; off?: number;
+  spin?: number; hue?: string; dead?: number; rel?: boolean }> =
+  ({ x, y, d, z = 70, off = 0, spin = 0, hue = OKGREEN, dead = 0, rel = false }) => (
+  <div style={{ position: "absolute", left: (rel ? 0 : x - d / 2), top: (rel ? 0 : y - d / 2) + off * off * 360,
+    width: d, height: d, zIndex: z, borderRadius: "50%",
+    transform: `rotate(${spin + off * 420}deg)`, opacity: 1 - off * 0.35,
+    background: `radial-gradient(circle at 34% 26%, ${mxh(OKGREEN, 0.44)}, ${OKGREEN} 46%, ${dkh(OKGREEN, 0.32)})`,
+    border: `${d * 0.07}px solid ${hue}`, boxShadow: SH_D,
+    display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <svg width={d * 0.58} height={d * 0.58} viewBox="0 0 24 24">
+      <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke={dead > 0.5 ? hexa("#FFF", 0.3) : "#FFFFFF"}
+        strokeWidth={4.2} strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  </div>
+);
+
+/** THE DRUM — a rotary magazine roughly twice the hero's height. Six round
+    bays, six hatches that bang open together, six empty bores behind them. */
+export const Drum: React.FC<{ x: number; y: number; r: number; f: number; spin: number;
+  z?: number; tilt?: number; open: (i: number) => number; hues: string[] }> =
+  ({ x, y, r, f, spin, z = 50, tilt = 0, open, hues }) => {
+  const N = 6, br = r * 0.62, bd = r * 0.46;
+  return (
+    <div style={{ position: "absolute", left: x - r, top: y - r, width: r * 2, height: r * 2,
+      zIndex: z, transformOrigin: "50% 88%", transform: `rotate(${tilt}deg)` }}>
+      {/* the drum body */}
+      <div style={{ position: "absolute", inset: 0, borderRadius: "50%",
+        background: `radial-gradient(circle at 36% 26%, ${mxh(STEEL, 0.62)}, ${mxh(STEEL, 0.28)} 54%, ${dkh(STEEL, 0.28)} 100%)`,
+        border: `${r * 0.055}px solid ${dkh(STEEL, 0.44)}`, boxShadow: SH_D }} />
+      {/* the toothed collar — fine repeated teeth, and it TURNS */}
+      {Array.from({ length: 40 }, (_, k) => {
+        const a = spin * 0.6 + (k / 40) * Math.PI * 2;
+        return (
+          <div key={"dt" + k} style={{ position: "absolute",
+            left: r + Math.cos(a) * r * 0.955 - r * 0.022, top: r + Math.sin(a) * r * 0.955 - r * 0.042,
+            width: r * 0.044, height: r * 0.084, borderRadius: r * 0.012,
+            transform: `rotate(${(a * 180) / Math.PI + 90}deg)`,
+            background: `linear-gradient(180deg, ${mxh(BRASS, 0.34)}, ${dkh(BRASS, 0.3)})` }} />
+        );
+      })}
+      {/* six bays */}
+      {Array.from({ length: N }, (_, i) => {
+        const a = spin + (i / N) * Math.PI * 2;
+        const bx = r + Math.cos(a) * br, by = r + Math.sin(a) * br;
+        const o = open(i);
+        return (
+          <React.Fragment key={"db" + i}>
+            {/* the bore — black, and it is the payoff */}
+            <div style={{ position: "absolute", left: bx - bd / 2, top: by - bd / 2, width: bd,
+              height: bd, borderRadius: "50%", zIndex: 2,
+              background: `radial-gradient(circle at 44% 30%, ${dkh(INK, 0.04)}, #080706 76%)`,
+              border: `${bd * 0.07}px solid ${dkh(STEEL, 0.5)}`,
+              boxShadow: `inset 0 ${bd * 0.09}px ${bd * 0.2}px ${hexa("#000", 0.9)}` }} />
+            {/* ⛔⛔ REV 1 PUT AN OPAQUE STEEL HATCH OVER EACH TICK, so frame 0
+                showed six grey lids and the six GREEN TICKS the whole hook is
+                about did not exist until f72. The setup has to be legible in the
+                thumbnail. ⭐ THE TICK IS ITS OWN COVER: it hangs on a hinge, it
+                is the first thing you see, and it swings off to leave the bore. */}
+            <div style={{ position: "absolute", left: bx - bd / 2, top: by - bd / 2, width: bd,
+              height: bd, zIndex: 6, transformOrigin: "4% 50%",
+              transform: `rotate(${o * 114}deg)`, opacity: o > 0.92 ? 0 : 1 }}>
+              {/* ⛔ REV 2 spun the tick with the drum and the checkmark rotated
+                  to point sideways, so it stopped reading as a tick at all. A
+                  GLYPH ONLY READS UPRIGHT: the orbit supplies the travel, the
+                  face stays level. */}
+              <TickDisc rel x={bd / 2} y={bd / 2} d={bd * 0.96} z={2}
+                spin={-o * 114} hue={hues[i % hues.length]} />
+              {/* the hinge it hangs on */}
+              <div style={{ position: "absolute", left: -bd * 0.06, top: bd * 0.40, width: bd * 0.16,
+                height: bd * 0.2, borderRadius: bd * 0.05,
+                background: `linear-gradient(180deg, ${mxh(BRASS, 0.34)}, ${dkh(BRASS, 0.36)})` }} />
+            </div>
+          </React.Fragment>
+        );
+      })}
+      {/* the hub, wearing the real mark */}
+      <div style={{ position: "absolute", left: r - r * 0.20, top: r - r * 0.20, width: r * 0.40,
+        height: r * 0.40, borderRadius: "50%", zIndex: 8,
+        background: `radial-gradient(circle at 36% 28%, ${mxh(BONE, 0.5)}, ${dkh(BRASS, 0.24)})`,
+        border: `${r * 0.03}px solid ${dkh(BRASS, 0.46)}`, boxShadow: SH,
+        display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <MarkTile rel d={r * 0.26} z={2} />
+      </div>
+    </div>
+  );
+};
+
+/** THE CLAIM PLATE — the thing every winning frame has and mine did not: the
+    claim, in real type, with the mark, legible at frame 0. The green card FALLS
+    AWAY to show the red one underneath, so the correction is a travel. */
+export const ClaimPlate: React.FC<{ x: number; y: number; w: number; f: number; flip: number;
+  z?: number; jolt?: number }> = ({ x, y, w, f, flip, z = 90, jolt = 0 }) => {
+  const h = w * 0.30, k = w / 700;
+  const card = (bg: string, bd: string, mark: React.ReactNode, big: string, sub: string,
+    col: string, style: React.CSSProperties) => (
+    <div style={{ position: "absolute", left: 0, top: 0, width: w, height: h, borderRadius: 16 * k,
+      background: bg, border: `${5 * k}px solid ${bd}`, boxShadow: SH_D,
+      display: "flex", alignItems: "center", gap: 22 * k, paddingLeft: 26 * k, ...style }}>
+      {mark}
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <span style={{ ...ui(74 * k, 900), color: col, letterSpacing: 1, lineHeight: 1 }}>{big}</span>
+        <span style={{ ...mono(23 * k, 700), color: hexa(INK, 0.5), letterSpacing: 3 }}>{sub}</span>
+      </div>
+    </div>
+  );
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h,
+      zIndex: z, transform: `translate(${jolt * 4}px, ${jolt * 6}px) rotate(${jolt * 0.6}deg)` }}>
+      {/* the truth, underneath */}
+      {card(`linear-gradient(176deg, ${mxh(DIFFR, 0.24)}, ${dkh(DIFFR, 0.12)})`, dkh(DIFFR, 0.42),
+        <div style={{ width: 84 * k, height: 84 * k, borderRadius: "50%", flexShrink: 0,
+          background: hexa("#FFFFFF", 0.94), display: "flex", alignItems: "center",
+          justifyContent: "center" }}>
+          <svg width={50 * k} height={50 * k} viewBox="0 0 24 24">
+            <path d="M6 6 L18 18 M18 6 L6 18" stroke={DIFFR} strokeWidth={4.6} strokeLinecap="round" />
+          </svg>
+        </div>, "0 OF 6 RAN", "NOTHING WAS CHECKED", "#FFFFFF", {})}
+      {/* the claim, on top of it, falling off */}
+      {flip < 1 && card(`linear-gradient(176deg, ${mxh(BONE, 0.86)}, ${mxh(BONE, 0.4)})`,
+        dkh(BRASS, 0.34),
+        <div style={{ width: 84 * k, height: 84 * k, borderRadius: "50%", flexShrink: 0,
+          background: `radial-gradient(circle at 34% 28%, ${mxh(OKGREEN, 0.4)}, ${dkh(OKGREEN, 0.28)})`,
+          display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <svg width={50 * k} height={50 * k} viewBox="0 0 24 24">
+            <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.4}
+              strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>, "6 OF 6 DONE", "CLAUDE CODE  ·  THIS SESSION", dkh(INK, 0.0),
+        { transformOrigin: "6% 100%",
+          transform: `rotate(${flip * 26}deg) translate(${flip * 60}px, ${flip * flip * 420}px)`,
+          opacity: 1 - flip * 0.25 })}
+      <MarkTile x={w - 54 * k} y={h - 34 * k} d={44 * k} z={4} o={0.9} />
+    </div>
+  );
+};
+
 /* ---- THE BAY WALL — the density device, and it is why OX and UNLAZY look full */
 /** ⭐⭐⭐ ALEX NAMED THE TWO REELS: *"check the OX video and unlazy videos… its too
     much focused on squares and rectangles rather than actually interesting

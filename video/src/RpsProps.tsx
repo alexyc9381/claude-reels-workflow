@@ -1373,9 +1373,9 @@ export const Sled: React.FC<{ x: number; y: number; f: number; s?: number; z?: n
    ⛔ The mark is the REAL `claude.svg`, never redrawn.
    ====================================================================== */
 export const Rotor: React.FC<{ x: number; y: number; f: number; d?: number; z?: number;
-  angle?: number; lit?: number; filled?: number; judder?: number; hit?: number }> =
-  ({ x, y, f, d = 540, z = 60, angle = 0, lit = 0, filled = 0, judder = 0, hit = 0 }) => {
-  const R = d / 2, RING = d * 0.115;
+  angle?: number; lit?: number; filled?: number; judder?: number; hit?: number; rate?: number }> =
+  ({ x, y, f, d = 540, z = 60, angle = 0, lit = 0, filled = 0, judder = 0, hit = 0, rate = 0 }) => {
+  const R = d / 2, RING = d * 0.095;
   const k = Math.max(0, Math.min(1, lit));
   const jx = Math.sin(f * 1.9) * 5 * judder, jy = Math.cos(f * 2.3) * 4 * judder;
   const SOCK = [0, 90, 180, 270];
@@ -1406,11 +1406,22 @@ export const Rotor: React.FC<{ x: number; y: number; f: number; d?: number; z?: 
         background: `radial-gradient(circle at 42% 34%, #FFFFFF 0%, #F4EFE6 62%, #E2DACB 100%)`,
         border: `${d * 0.012}px solid #CFC6B4`, boxShadow: `inset 0 ${d * 0.02}px ${d * 0.05}px ${hexa("#000000", 0.16)}` }} />
       {/* ⭐ THE REAL CLAUDE MARK, dead grey while it is stuck and full colour once it runs */}
-      <div style={{ position: "absolute", left: d * 0.27, top: d * 0.27, width: d * 0.46, height: d * 0.46,
+      <div style={{ position: "absolute", left: d * 0.175, top: d * 0.175, width: d * 0.65, height: d * 0.65,
         zIndex: 3, transform: `rotate(${angle * 0.5}deg) scale(${0.92 + 0.08 * k + hit * 0.05})`,
         filter: `grayscale(${(1 - k) * 0.92}) contrast(${0.86 + 0.34 * k}) brightness(${0.72 + 0.42 * k})` }}>
         <Img src={staticFile("logos/claude.svg")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
       </div>
+      {/* ⭐ SPEED ARCS off the rim — their length is the actual degrees-per-frame, so the eye reads
+          acceleration and not just rotation */}
+      {rate > 0.6 && [0, 1, 2, 3, 4, 5].map((i) => {
+        const len = Math.min(78, rate * 7.5);
+        return (
+          <div key={"ar" + i} style={{ position: "absolute", left: "50%", top: "50%", width: len, height: d * 0.018,
+            marginTop: -d * 0.009, zIndex: 6, borderRadius: d * 0.01, transformOrigin: "0% 50%",
+            transform: `rotate(${angle * 0.7 + i * 60}deg) translateX(${R * 1.03}px)`,
+            background: `linear-gradient(90deg, ${hexa(CLAY, 0.72)}, ${hexa(CLAY, 0)})` }} />
+        );
+      })}
       {/* the four sockets on the rim: empty and dark, then filled and lit */}
       {SOCK.map((deg, i) => {
         const on = i < filled;
@@ -1439,12 +1450,44 @@ export const Rotor: React.FC<{ x: number; y: number; f: number; d?: number; z?: 
   );
 };
 
-/** the bright test-bay ground the rotor stands on — the "white background" the note asked for,
-    kept off pure white so the mark and the ring both keep their edges. */
-export const Cyc: React.FC<{ z?: number; warm?: number }> = ({ z = 8, warm = 0 }) => (
-  <div style={{ position: "absolute", left: -40, top: -40, width: W + 80, height: H + 80, zIndex: z,
-    background: `linear-gradient(180deg, ${lerpHex("#F7F4EC", "#FDF3E4", warm)} 0%, ${lerpHex("#EFEADF", "#F8E9D4", warm)} 58%, ${lerpHex("#D9D2C4", "#E6D4BB", warm)} 100%)` }}>
-    <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: H * 0.30,
-      background: `linear-gradient(180deg, ${hexa("#B9AF9C", 0)}, ${hexa("#B9AF9C", 0.5)})` }} />
-  </div>
+/** the bright test bay. ⛔ Alex, rev 9: cuts 1 and 2 need "elevating significantly". The first pass
+    was a flat gradient sheet — no floor, no horizon, no key, so the mark floated on paper. This is a
+    real cyclorama: a wall, a floor plane with a horizon seam, a soft overhead key that warms as the
+    mark comes up, a falloff into the corners, and the shop's own gantry cropped by the top edge so
+    the bay is still a place in this world ([[feedback_rooms_need_an_architecture_layer]]). */
+export const Cyc: React.FC<{ z?: number; warm?: number; f?: number }> = ({ z = 8, warm = 0, f = 0 }) => {
+  const HZ = 618;                                    /* where the wall meets the floor */
+  const wall = lerpHex("#F4F0E7", "#FBEFDD", warm);
+  const wall2 = lerpHex("#E7E1D4", "#F3E2C9", warm);
+  const floor = lerpHex("#D8D1C2", "#E7D6BA", warm);
+  return (<>
+    <div style={{ position: "absolute", left: -40, top: -40, width: W + 80, height: HZ + 40, zIndex: z,
+      background: `linear-gradient(180deg, ${wall} 0%, ${wall} 46%, ${wall2} 100%)` }} />
+    {/* the floor plane, receding */}
+    <div style={{ position: "absolute", left: -40, top: HZ, width: W + 80, height: H - HZ + 40, zIndex: z,
+      background: `linear-gradient(180deg, ${lerpHex("#CFC7B6", "#DFCCAE", warm)} 0%, ${floor} 22%, ${lerpHex("#B7AF9E", "#C9B698", warm)} 100%)` }} />
+    <div style={{ position: "absolute", left: -40, top: HZ - 3, width: W + 80, height: 5, zIndex: z + 1,
+      background: hexa("#9A9182", 0.5) }} />
+    {/* the overhead key, warming as it comes up */}
+    <div style={{ position: "absolute", left: W * 0.5 - 520, top: -260, width: 1040, height: 900, zIndex: z + 1,
+      borderRadius: "50%", opacity: 0.5 + 0.3 * warm,
+      background: `radial-gradient(ellipse at 50% 30%, ${hexa(lerpHex("#FFFFFF", "#FFE9C8", warm), 0.9)} 0%, ${hexa("#FFFFFF", 0)} 62%)` }} />
+    {/* falloff into the corners, so the frame has a value structure and not one flat tone */}
+    <div style={{ position: "absolute", inset: -40, zIndex: z + 2, pointerEvents: "none",
+      background: `radial-gradient(ellipse 74% 62% at 50% 44%, ${hexa("#6E6455", 0)} 0%, ${hexa("#6E6455", 0.10)} 68%, ${hexa("#584F42", 0.30)} 100%)` }} />
+    {/* the shop's gantry, cropped by the top edge */}
+    <div style={{ position: "absolute", left: -20, top: 44, width: W + 40, height: 26, zIndex: z + 3,
+      background: `linear-gradient(180deg, ${mxh(IRON, 0.14)}, ${dkh(IRON, 0.4)})`, boxShadow: SH }} />
+    {[0.14, 0.42, 0.7, 0.94].map((px, i) => (
+      <div key={"hg" + i} style={{ position: "absolute", left: W * px - 5, top: 70, width: 10, height: 54 + i * 12,
+        zIndex: z + 3, background: dkh(IRON, 0.3) }} />
+    ))}
+  </>);
+};
+
+/** the shadow the mark drops on the bay floor — what makes it sit IN the space. */
+export const Contact2: React.FC<{ x: number; y: number; w: number; o?: number; z?: number }> =
+  ({ x, y, w, o = 0.34, z = 30 }) => (
+  <div style={{ position: "absolute", left: x - w / 2, top: y - w * 0.10, width: w, height: w * 0.20, zIndex: z,
+    borderRadius: "50%", background: `radial-gradient(ellipse, ${hexa("#4A4236", o)} 0%, ${hexa("#4A4236", o * 0.45)} 48%, ${hexa("#4A4236", 0)} 76%)` }} />
 );
