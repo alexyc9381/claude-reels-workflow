@@ -1239,3 +1239,106 @@ export const DocMorph: React.FC<{ x: number; y: number; w?: number; t?: number; 
     </div>
   );
 };
+
+/* =========================================================================
+   ⭐⭐⭐ THE SLED — the load the hook's body works against.
+
+   ⛔ Alex, rev 6: *"the first 5 seconds are not interesting enough whatsoever,
+   people scrolled away hard within the first even 3 seconds."* Written in a column,
+   the three hooks this reel has had were one concept in three costumes:
+
+     round 1  four PARTS hang on chains · a Claude on a lift RISES · one LOCKS on
+     round 2  four REPO CARDS descend    · a Claude on a lift RISES · one INSTALLS
+     round 3  four GEMS fly to the front · a Claude on a lift RISES · one is ABSORBED
+
+   → *in all of these, objects come to a Claude who is standing still.* **PASSIVE
+   ACCRETION.** The objects travelled; the hero received. Every winning hook in this
+   repo is ONE BODY AGAINST A LOAD, mid-action at f0, travelling at least a third of
+   its own body width ([[feedback_read_the_winning_hook_do_not_just_measure_it]],
+   [[feedback_one_concept_four_costumes]]).
+
+   So he DRAGS. This is the load: a flatbed piled with the reel's own four villains —
+   the Office files that break the model, the tangled agent window, the dead core and
+   the dry drum — on wheels that ROLL (rotation derived from distance, not a spin), a
+   tow bar, and hazard stripes. Every repo that lands makes it move further.
+   ====================================================================== */
+export const Sled: React.FC<{ x: number; y: number; f: number; s?: number; z?: number;
+  roll?: number; lift?: number; jolt?: number }> =
+  ({ x, y, f, s = 1, z = 50, roll = 0, lift = 0, jolt = 0 }) => {
+  const W2 = 560 * s, BED = 46 * s, WR = 54 * s;
+  const left = x - W2 / 2, bedTop = y - WR - BED - lift * 26 * s;
+  /* ⛔ the wheels turn because the sled MOVED, not because time passed — a wheel spinning
+     off `f` reads as a prop that is on, and a wheel spinning off distance reads as weight. */
+  const deg = -(roll / (2 * Math.PI * WR)) * 360;
+  const tilt = lift * -4 + jolt * 1.6;
+  return (
+    <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: z,
+      transform: `rotate(${tilt}deg)`, transformOrigin: `${x}px ${y}px` }}>
+      {/* the two wheels, with spokes and a hub so the rotation is visible */}
+      {[left + W2 * 0.20, left + W2 * 0.78].map((wx, i) => (
+        <div key={"wh" + i} style={{ position: "absolute", left: wx - WR, top: y - WR * 2, width: WR * 2, height: WR * 2,
+          borderRadius: "50%", background: `radial-gradient(circle at 42% 38%, ${mxh(IRON, 0.12)} 0 38%, #201D19 40%)`,
+          border: `${5 * s}px solid #17150F`, boxShadow: SH_D,
+          transform: `rotate(${deg + i * 23}deg)` }}>
+          {[0, 1, 2, 3].map((k) => (
+            <div key={k} style={{ position: "absolute", left: "50%", top: "50%", width: WR * 1.5, height: 5 * s,
+              marginLeft: -WR * 0.75, marginTop: -2.5 * s, background: mxh(IRON, 0.24),
+              transform: `rotate(${k * 45}deg)`, borderRadius: 2 }} />
+          ))}
+          <div style={{ position: "absolute", left: "50%", top: "50%", width: WR * 0.5, height: WR * 0.5,
+            marginLeft: -WR * 0.25, marginTop: -WR * 0.25, borderRadius: "50%",
+            background: `linear-gradient(180deg, ${mxh(BRASS, 0.2)}, ${dkh(BRASS, 0.4)})` }} />
+        </div>
+      ))}
+      {/* the bed, with a hazard skirt */}
+      <div style={{ position: "absolute", left, top: bedTop, width: W2, height: BED, zIndex: 2, borderRadius: 5 * s,
+        background: `linear-gradient(180deg, ${mxh(IRON, 0.2)} 0%, ${IRON} 40%, ${dkh(IRON, 0.4)} 100%)`, boxShadow: SH_D }} />
+      <div style={{ position: "absolute", left, top: bedTop + BED - 12 * s, width: W2, height: 14 * s, zIndex: 3,
+        background: `repeating-linear-gradient(-45deg, ${GOLD} 0 18px, ${INK} 18px 36px)`, opacity: 0.92 }} />
+      {/* the tow bar, angled up to the hero's shoulder */}
+      <div style={{ position: "absolute", left: left + W2 - 6 * s, top: bedTop - 96 * s, width: 150 * s, height: 11 * s,
+        zIndex: 4, borderRadius: 6 * s, transformOrigin: "0% 50%", transform: "rotate(-33deg)",
+        background: `linear-gradient(180deg, ${mxh(IRON, 0.3)}, ${dkh(IRON, 0.34)})` }} />
+      {/* ⭐ THE CARGO IS THE REEL'S OWN FOUR VILLAINS, stacked and strapped */}
+      <div style={{ position: "absolute", left: left + 372 * s, top: bedTop - 172 * s, width: 172 * s, height: 174 * s,
+        zIndex: 4, borderRadius: 5 * s, background: `linear-gradient(150deg, ${mxh("#8C6A46", 0.2)}, #6E5236)`,
+        border: `${4 * s}px solid #4E3A26`, boxShadow: SH_D, display: "flex", flexWrap: "wrap",
+        alignContent: "center", justifyContent: "center", gap: 8 * s, padding: 10 * s }}>
+        {["ft_word.svg", "ft_powerpoint.svg", "ft_excel.svg", "ft_word.svg"].map((ic, i) => (
+          <div key={ic + i} style={{ width: 62 * s, height: 62 * s, borderRadius: 9 * s, background: "#FFFFFF",
+            display: "flex", alignItems: "center", justifyContent: "center", boxShadow: SH }}>
+            <Img src={staticFile("logos/" + ic)} style={{ width: 44 * s, height: 44 * s, objectFit: "contain" }} />
+          </div>
+        ))}
+      </div>
+      {/* a dead monitor, screen cracked and dark */}
+      <div style={{ position: "absolute", left: left + 176 * s, top: bedTop - 122 * s, width: 172 * s, height: 124 * s,
+        zIndex: 4, borderRadius: 7 * s, background: "#2E2822", border: `${5 * s}px solid #1E1A16`, boxShadow: SH_D }}>
+        <div style={{ position: "absolute", inset: 8 * s, background: "#151A22", borderRadius: 3 * s, overflow: "hidden" }}>
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} style={{ position: "absolute", left: 8 * s, top: (10 + i * 20) * s,
+              width: (40 + i * 26) * s, height: 6 * s, borderRadius: 2, background: hexa("#8A93A0", 0.5) }} />
+          ))}
+          <div style={{ position: "absolute", left: "18%", top: 0, bottom: 0, width: 3 * s,
+            background: hexa("#FFFFFF", 0.35), transform: "rotate(9deg)" }} />
+        </div>
+      </div>
+      {/* the dry drum, tipped, and a dead core beside it */}
+      <div style={{ position: "absolute", left: left + 44 * s, top: bedTop - 118 * s, width: 96 * s, height: 120 * s,
+        zIndex: 4, borderRadius: 8 * s, boxShadow: SH_D,
+        background: `linear-gradient(90deg, ${dkh(GREEN, 0.44)} 0%, ${dkh(GREEN, 0.2)} 40%, ${dkh(GREEN, 0.5)} 100%)`,
+        border: `${3 * s}px solid ${dkh(GREEN, 0.6)}` }}>
+        <div style={{ position: "absolute", left: 0, right: 0, top: 28 * s, height: 12 * s, background: hexa("#000000", 0.3) }} />
+        <div style={{ position: "absolute", left: 0, right: 0, top: 66 * s, height: 12 * s, background: hexa("#000000", 0.3) }} />
+      </div>
+      <div style={{ position: "absolute", left: left + 150 * s, top: bedTop - 76 * s, width: 64 * s, height: 64 * s,
+        zIndex: 4, borderRadius: "50%", background: `radial-gradient(circle at 40% 36%, #6E6478, #35303C)`,
+        border: `${4 * s}px solid #241F2A`, boxShadow: SH }} />
+      {/* the strap over the whole load */}
+      {/* ⛔ the strap was CLAY and read on the probe as a salmon line crossing the frame at the
+          hero's chest — the same hue as the sprite. Dark webbing, and it sits over the load. */}
+      <div style={{ position: "absolute", left: left + 12 * s, top: bedTop - 78 * s, width: W2 - 24 * s, height: 11 * s,
+        zIndex: 6, background: `linear-gradient(180deg, #554C40 0%, #3A342B 50%, #221E19 100%)`, borderRadius: 3 }} />
+    </div>
+  );
+};

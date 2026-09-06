@@ -7,7 +7,7 @@ import {
   squash, costumeFor,
   CLAY, GOLD, GREEN, RED, INK, BRASS, COPPER, BONE, STEEL, SLATE, ROSE, MUTE, SKY, VIOLET, TEAL,
   TERM, TERM2, TERM3, UISH, UISH2, UILINE, DIFFG, DIFFR, CARET, OKGREEN, WARN, LINKB,
-  CREAM_TICKET, flameC, TASKS, R, SYN, SYN_MIX,
+  CREAM_TICKET, flameC, TASKS, R, SYN, SYN_MIX, BAND_Y, Pool, Steam, Contact,
 } from "./AdhWorld";
 
 /* ===========================================================================
@@ -285,6 +285,496 @@ export const TodoList: React.FC<{ x: number; y: number; w: number; h: number; z?
   );
 };
 
+
+
+/* ---- THE SWEEP — the highest-value shape in the measured motion table ----- */
+/** ⭐⭐⭐ Read straight out of reel 131 FREE's S4: *"a full-width high-contrast
+    band travelling the rack, which is the highest-value shape in the motion
+    table AND the thing the line actually means."* A soft-edged band that
+    crosses the panel on a beat. It is not a flash and not a transition wipe —
+    it is a light travelling across the thing that just changed, so it reads as
+    the change PROPAGATING rather than as an effect laid on top. */
+export const Sweep: React.FC<{ k: number; y: number; h?: number; c?: string; z?: number;
+  w?: number; from?: number; to?: number; o?: number }> =
+  ({ k, y, h = 130, c = "#FFFFFF", z = 78, w = 240, from = -260, to = 1080, o = 0.42 }) => (
+  k <= 0 || k >= 1 ? null : (
+    <div style={{ position: "absolute", left: from + k * (to - from), top: y, width: w, height: h,
+      zIndex: z, pointerEvents: "none",
+      background: `linear-gradient(90deg, ${hexa(c, 0)} 0%, ${hexa(c, o)} 58%, ${hexa(c, 0)} 100%)` }} />
+  )
+);
+
+/* ---- THE PIP ROW — the reel's own progress, countable at a glance --------- */
+/** the tally strip elite scenes carry in the reserved band: one pip per task,
+    each filling in its OWN colour as its row closes, with the unfilled ones
+    held small and dark. `feedback_when_the_info_is_the_number_the_box_is_
+    decoration` — the pip IS the number, so it never gets a label. */
+export const PipRow: React.FC<{ lit: number; y?: number; z?: number; d?: number; pop?: number;
+  f?: number; at?: number }> =
+  ({ lit, y = BAND_Y + 6, z = 92, d = 42, pop = -1, f = 0, at = 0 }) => (
+  <div style={{ position: "absolute", left: 0, right: 0, top: y, zIndex: z,
+    display: "flex", justifyContent: "center", gap: 11 }}>
+    {TASKS.map((t, i) => {
+      const on = i < lit;
+      /* ⭐ AN ASCENDING RUN, NOT A SIMULTANEOUS FLASH — a staggered run is what
+         makes a repeated reward read as PROGRESS instead of as repetition. */
+      const pk = pop >= 0 && f >= at + i * 2.4 && f < at + 12 + i * 2.4
+        ? Math.sin((f - at - i * 2.4) / 12 * Math.PI) * 0.16 : 0;
+      return (
+        <div key={"pp" + i} style={{ width: d, height: d, borderRadius: d * 0.28,
+          background: on ? mxh(t.c, 0.14) : hexa("#0A0A0C", 0.42),
+          border: `4px solid ${on ? mxh(t.c, 0.42) : hexa("#FFFFFF", 0.16)}`,
+          transform: `scale(${(on ? 1 : 0.80) + pk})`,
+          boxShadow: on ? `inset 0 3px 0 ${hexa("#FFFFFF", 0.26)}` : "none" }} />
+      );
+    })}
+  </div>
+);
+
+
+
+
+
+/* ---- THE PROMPT — and it is not a white rectangle ------------------------ */
+/** ⭐⭐⭐ ALEX: *"the prompts square papers etc needs to be way more interesting
+    here where right now its not whatsoever."* He is right: every sheet in this
+    reel was a rounded rect with a checkbox and one coloured bar, repeated. A
+    real prompt in a real session has an ASKER, WORDS, a TIME and a VERDICT, and
+    drawing those gives the object both meaning and a silhouette:
+
+      · a PAPERCLIP over the top-left corner — a bent wire, so the card's
+        outline is no longer a plain rectangle (move 3: silhouette variety)
+      · a TORN LEFT EDGE, perforated, so it reads as pulled off a run
+      · an ASKER: a round avatar chip and a name bar
+      · the WORDS: three or four ragged lines in SYNTAX colours, never one bar
+      · a VERDICT PILL top-right — green DONE, and beside it
+      · an EMPTY RECEIPT SLOT, hatched, which is the whole joke of the reel
+      · a COFFEE RING, because a circle among the rectangles is worth more than
+        another rectangle (`feedback_props_need_real_drawing`) */
+export const PromptCard: React.FC<{ x: number; y: number; w?: number; z?: number; rot?: number;
+  seed?: number; done?: number; hue?: string; clip?: boolean; ring?: boolean; f?: number;
+  compact?: boolean }> =
+  ({ x, y, w = 240, z = 70, rot = 0, seed = 1, done = 1, hue = CLAY, clip = true,
+     ring = false, f = 0, compact = false }) => {
+  const h = w * (compact ? 0.19 : 0.40);
+  const k = w / 240;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h,
+      zIndex: z, transform: `rotate(${rot}deg)` }}>
+      {/* 1 · the sheet */}
+      <div style={{ position: "absolute", inset: 0, borderRadius: 5 * k,
+        background: `linear-gradient(174deg, #FEFDF9, ${UISH} 54%, ${UISH2} 88%)`,
+        border: `${2.6 * k}px solid ${hexa(INK, 0.22)}`, boxShadow: SH }} />
+      {/* 2 · the TORN LEFT EDGE — pulled off a run */}
+      <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 7 * k,
+        overflow: "hidden" }}>
+        {Array.from({ length: 9 }, (_, i) => (
+          <div key={"tl" + i} style={{ position: "absolute", left: -3 * k, top: i * (h / 9),
+            width: 10 * k, height: h / 9 - 1, borderRadius: "0 50% 50% 0",
+            background: UISH2, transform: `translateX(${rnd(seed + i, 1) * 3 * k}px)` }} />
+        ))}
+      </div>
+      {/* 3 · the ASKER — a round avatar and a name bar */}
+      <div style={{ position: "absolute", left: 15 * k, top: 9 * k, width: 19 * k, height: 19 * k,
+        borderRadius: "50%",
+        background: `linear-gradient(180deg, ${mxh(hue, 0.24)}, ${dkh(hue, 0.22)})`,
+        border: `${1.8 * k}px solid ${hexa(INK, 0.22)}` }} />
+      <div style={{ position: "absolute", left: 40 * k, top: 13 * k, width: 46 * k, height: 5 * k,
+        borderRadius: 3, background: hexa(INK, 0.34) }} />
+      {!compact && (
+        <div style={{ position: "absolute", left: 40 * k, top: 22 * k, width: 28 * k, height: 4 * k,
+          borderRadius: 2, background: hexa(INK, 0.16) }} />
+      )}
+      {/* 4 · THE WORDS, in syntax colour, ragged — never one bar */}
+      <CodeLines x={compact ? 40 * k : 15 * k} y={compact ? 24 * k : 38 * k}
+        w={w * (compact ? 0.34 : 0.56)} n={compact ? 1 : 3} gap={9 * k} h={4.4 * k}
+        c={INK} o={0.62} seed={seed * 3.7} run={1} z={3} syntax={1} dark={1} />
+      {/* 5 · the VERDICT PILL */}
+      <div style={{ position: "absolute", right: 12 * k, top: 10 * k, height: 17 * k,
+        paddingLeft: 7 * k, paddingRight: 7 * k, borderRadius: 9 * k,
+        background: done > 0.5 ? hexa(OKGREEN, 0.9) : hexa(INK, 0.10),
+        border: `${1.6 * k}px solid ${done > 0.5 ? dkh(OKGREEN, 0.3) : hexa(INK, 0.2)}`,
+        display: "flex", alignItems: "center", gap: 4 * k }}>
+        {done > 0.5 && (
+          <svg width={9 * k} height={9 * k} viewBox="0 0 24 24">
+            <path d="M6 12 L10 16 L18 7" fill="none" stroke="#FFF" strokeWidth={4}
+              strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )}
+        <div style={{ width: 22 * k, height: 4 * k, borderRadius: 2,
+          background: hexa(done > 0.5 ? "#FFFFFF" : INK, done > 0.5 ? 0.85 : 0.22) }} />
+      </div>
+      {/* 6 · THE EMPTY RECEIPT SLOT — the joke, on every card */}
+      <div style={{ position: "absolute", right: 12 * k, bottom: compact ? 5 * k : 9 * k,
+        width: 40 * k, height: compact ? 10 * k : 15 * k, borderRadius: 3, border: `${1.8 * k}px solid ${hexa(INK, 0.20)}`,
+        background: `repeating-linear-gradient(116deg, transparent 0 ${3 * k}px, ${hexa(INK, 0.11)} ${3 * k}px ${4.6 * k}px)` }} />
+      {/* 7 · a COFFEE RING — a circle among the rectangles */}
+      {ring && (
+        <div style={{ position: "absolute", left: w * 0.52, top: h * 0.44, width: 30 * k,
+          height: 30 * k, borderRadius: "50%", border: `${3 * k}px solid ${hexa(dkh(BRASS, 0.3), 0.26)}` }} />
+      )}
+      {/* 8 · THE PAPERCLIP — a bent wire over the corner, so the outline is not
+             a plain rectangle any more */}
+      {clip && (
+        <svg width={30 * k} height={40 * k} viewBox="0 0 30 40"
+          style={{ position: "absolute", left: 6 * k, top: -12 * k, zIndex: 4 }}>
+          <path d="M9 34 L9 10 C9 3, 21 3, 21 10 L21 30 C21 35, 13 35, 13 30 L13 13"
+            fill="none" stroke={mxh(STEEL, 0.28)} strokeWidth={3.4} strokeLinecap="round" />
+          <path d="M9 34 L9 10 C9 3, 21 3, 21 10 L21 30"
+            fill="none" stroke={hexa("#FFFFFF", 0.5)} strokeWidth={1.2} strokeLinecap="round" />
+        </svg>
+      )}
+    </div>
+  );
+};
+
+/* ---- THE FLURRY — paper that actually flies ------------------------------ */
+/** ⭐ "more interesting motion in the hook" — sheets knocked loose by each blow,
+    each on its OWN clock, tumbling with real rotation and lateral drift, then
+    settling into a pile. Every sheet is a `PromptCard`, so what is flying is
+    the reel's own object rather than a blank rectangle. */
+export const Flurry: React.FC<{ x: number; y: number; f: number; at: number; n?: number;
+  z?: number; s?: number; spread?: number }> =
+  ({ x, y, f, at, n = 6, z = 88, s = 1, spread = 300 }) => (<>
+    {Array.from({ length: n }, (_, i) => {
+      const t = f - at - i * 3;
+      if (t < 0 || t > 52) return null;
+      const k = Math.min(1, t / 46);
+      const r = rnd(i * 4.3 + at, 1);
+      const dx = (r - 0.5) * spread;
+      /* a real tumble: gravity in y, drift in x, spin that slows as it settles */
+      const px = x + dx * k;
+      const py = y + (-70 + 340 * k * k) * s;
+      const rot = (r > 0.5 ? 1 : -1) * (40 + r * 260) * (1 - Math.pow(1 - k, 2));
+      return (
+        <PromptCard key={"fl" + i} x={px} y={py} w={150 * s} z={z + i} rot={rot}
+          seed={i + at} done={1} hue={TASKS[i % 6].c} clip={r > 0.6} ring={r > 0.82} />
+      );
+    })}
+  </>);
+
+/* ---- THE BAY WALL — the density device, and it is why OX and UNLAZY look full */
+/** ⭐⭐⭐ ALEX NAMED THE TWO REELS: *"check the OX video and unlazy videos… its too
+    much focused on squares and rectangles rather than actually interesting
+    animation concepts."* Put beside them, the difference is not motion and not
+    element counts — it is that EVERY FRAME OF THEIRS IS FULL. `UnlazyWorld`'s
+    `ToolWall` is a 10x3 grid of FOUR different hand-drawn tools (a spanner, a
+    clamp, a machined part, a coil of cable) hung on rails, each swaying on its
+    own clock, dressed into nearly every scene. That is thirty-odd objects of
+    four different silhouettes behind the action, and it is the single reason
+    those frames read as PLACES rather than as diagrams. Mine had a flat wall.
+
+    This is the same device built from THIS world's objects, so it stays on
+    topic and gains four silhouettes the reel did not have:
+      0 · a SKILL FILE on a hook — a card with a folded corner (a diagonal)
+      1 · a COIL OF CABLE on a peg — a ring, the frame's only true circle
+      2 · a SUB-AGENT BAY — a lit alcove with a tiny Claude plate
+      3 · a MODULE with pin teeth — fine repeated detail at the edge of
+          resolution, which is move 2 of `feedback_props_need_real_drawing`
+    ⭐ AND IT CARRIES THE COLOUR. Each unit takes a hue from the `TASKS` table,
+    so the back wall is where the frame's colour variety comes from, exactly as
+    the crate stacks do in OX. */
+export const BayWall: React.FC<{ p: any; f: number; x?: number; y?: number; cols?: number;
+  rows?: number; z?: number; o?: number; seed?: number; live?: number }> =
+  ({ p, f, x = -20, y = 150, cols = 10, rows = 3, z = 16, o = 1, seed = 71, live = 5 }) => {
+  const light = p.back2 || "#FFFFFF";
+  return (
+    <div style={{ position: "absolute", left: x, top: y, zIndex: z, opacity: o }}>
+      {Array.from({ length: rows }, (_, r) => (
+        <div key={"rail" + r} style={{ position: "absolute", left: 0, top: r * 108 + 62,
+          width: cols * 104, height: 9,
+          background: `linear-gradient(180deg, ${mxh(STEEL, 0.1)}, ${dkh(p.back2 || "#888", 0.60)})` }} />
+      ))}
+      {Array.from({ length: cols * rows }, (_, i) => {
+        const c = i % cols, r = Math.floor(i / cols);
+        const kind = Math.floor(rnd(i, seed) * 4);
+        const sway = i % 11 < live ? Math.sin(f / (21 + (i % 4) * 5) + i) * 3.0 : 0;
+        const bx = c * 104 + 18, by = r * 108 + 68;
+        const dep = 1 - r * 0.08;
+        const hue = TASKS[i % 6].c;
+        const met = mxh(STEEL, 0.16 * dep), metd = dkh(STEEL, 0.50);
+        return (
+          <div key={"bw" + i} style={{ position: "absolute", left: bx, top: by, zIndex: 2,
+            transformOrigin: "50% 0%", transform: `rotate(${sway}deg)` }}>
+            {kind === 0 && (<>{/* a skill file on a hook — a folded-corner card */}
+              <div style={{ position: "absolute", left: 32, top: 0, width: 6, height: 16, background: metd }} />
+              <div style={{ position: "absolute", left: 12, top: 14, width: 54, height: 66, borderRadius: 4,
+                background: `linear-gradient(172deg, ${mxh(UISH, 0.2)}, ${dkh(UISH2, 0.14)})`,
+                border: `3px solid ${hexa(INK, 0.26)}` }}>
+                <div style={{ position: "absolute", right: 0, top: 0, width: 17, height: 17,
+                  background: `linear-gradient(225deg, ${hexa(INK, 0.22)} 50%, transparent 50%)` }} />
+                <div style={{ position: "absolute", left: 8, top: 26, right: 8, height: 4,
+                  borderRadius: 2, background: hexa(hue, 0.7) }} />
+                <div style={{ position: "absolute", left: 8, top: 36, width: 22, height: 4,
+                  borderRadius: 2, background: hexa(INK, 0.2) }} />
+              </div></>)}
+            {kind === 1 && (<>{/* a coil of cable — the frame's only true circle */}
+              <div style={{ position: "absolute", left: 12, top: 6, width: 54, height: 54,
+                borderRadius: "50%", border: `11px solid ${dkh(hue, 0.30)}` }} />
+              <div style={{ position: "absolute", left: 30, top: 54, width: 9, height: 26,
+                borderRadius: 4, background: dkh(hue, 0.34) }} /></>)}
+            {kind === 2 && (<>{/* a sub-agent bay — a lit alcove with a Claude plate */}
+              <div style={{ position: "absolute", left: 8, top: 6, width: 62, height: 68, borderRadius: 6,
+                background: `linear-gradient(180deg, ${dkh(TERM, 0.04)}, #0B0A09)`,
+                border: `3px solid ${hexa("#000", 0.5)}`,
+                boxShadow: `inset 0 3px 7px ${hexa("#000", 0.7)}` }}>
+                <div style={{ position: "absolute", left: 8, top: 8, right: 8, height: 4, borderRadius: 2,
+                  background: hexa(light, 0.42) }} />
+                <div style={{ position: "absolute", left: 8, top: 17, width: 26, height: 4, borderRadius: 2,
+                  background: hexa(hue, 0.8) }} />
+                <div style={{ position: "absolute", left: 18, top: 30, width: 26, height: 26,
+                  borderRadius: 7, background: hexa(CLAY, 0.9) }}>
+                  <div style={{ position: "absolute", left: 5, top: 9, width: 5, height: 5,
+                    background: INK }} />
+                  <div style={{ position: "absolute", left: 15, top: 9, width: 5, height: 5,
+                    background: INK }} />
+                </div>
+              </div></>)}
+            {kind === 3 && (<>{/* a module with PIN TEETH — fine repeated detail */}
+              <div style={{ position: "absolute", left: 10, top: 12, width: 58, height: 46, borderRadius: 4,
+                background: `linear-gradient(172deg, ${mxh(hue, 0.18 * dep)} 0%, ${dkh(hue, 0.46)} 100%)`,
+                border: `3px solid ${dkh(hue, 0.58)}` }}>
+                <div style={{ position: "absolute", left: 6, top: 8, right: 6, height: 12, borderRadius: 2,
+                  background: hexa("#000", 0.28) }} />
+              </div>
+              <div style={{ position: "absolute", left: 12, top: 58, width: 54, height: 10,
+                background: `repeating-linear-gradient(90deg, ${met} 0 4px, transparent 4px 8px)` }} />
+              <div style={{ position: "absolute", left: 34, top: 0, width: 7, height: 14,
+                background: metd }} /></>)}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+/* ---- THE TOWER — the load, and it DWARFS him ----------------------------- */
+/** ⭐⭐⭐ THE SCALE LESSON, TAKEN OFF THE WINNERS' OWN FRAMES. Put side by side
+    with reel 122 HARDWARE and 135 AGENCY, the difference was not detail and it
+    was not motion count:
+      · 122's hook is a TINY Claude holding up three GPU cards that are each
+        wider than he is tall, and they are TILTING.
+      · 135's hook goes from an empty desk to FIFTEEN characters in 28 frames.
+      · mine was one hero and one board, the same size in every frame, with a
+        digit changing.
+    So: the load has to be BIG relative to the body, and it has to be VISIBLY
+    UNSTABLE. This is a stack of unproved task rows that rises past the top of
+    frame, leans further with every row added, and sheds sheets when it is
+    struck. `lean` is its own driver so the whole tower rotates about its base.
+*/
+export const RowTower: React.FC<{ x: number; yBase: number; n: number; w?: number; z?: number;
+  f: number; lean?: number; jolt?: number; hit?: number; tally?: string }> =
+  ({ x, yBase, n, w = 300, z = 66, f, lean = 0, jolt = 0, hit = -1, tally }) => {
+  const rowH = w * 0.115;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: yBase - n * rowH * 0.92 - 40,
+      width: w, height: n * rowH * 0.92 + 40, zIndex: z,
+      transformOrigin: "50% 100%",
+      transform: `rotate(${lean * 7 + jolt * 1.8}deg) translateX(${jolt * 4}px)` }}>
+      {/* ⭐ EVERY ROW IS A REAL PROMPT — an asker, words in syntax colour, a green
+          verdict, an EMPTY receipt, and some of them a paperclip and a coffee
+          ring, so the stack's outline is ragged instead of being nine identical
+          white bars. That was the *"prompts square papers"* note. */}
+      {Array.from({ length: n }, (_, i) => {
+        const r = rnd(i * 3.1, 1);
+        const off = (r - 0.5) * w * 0.13;
+        const rot = (rnd(i * 1.7, 1) - 0.5) * 8;
+        return (
+          <PromptCard key={"rt" + i} compact x={w / 2 + off}
+            y={(n - 1 - i) * rowH * 0.92 + rowH * 0.5} w={w} z={2 + i} rot={rot}
+            seed={i * 2 + 1} done={1} hue={TASKS[i % 6].c}
+            clip={r > 0.62} ring={r > 0.86} />
+        );
+      })}
+      {/* ⭐ THE TALLY RIDES THE TOWER. One load, one number — the hook is an
+          IMAGE, not a room, and a second board fighting this one for the same
+          fact was the thing making the frame busy. */}
+      {tally && (
+        <div style={{ position: "absolute", left: w * 0.5 - w * 0.24, top: n * rowH * 0.92 - rowH * 0.1,
+          width: w * 0.48, height: rowH * 1.25, borderRadius: 7, zIndex: 4,
+          background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
+          border: `4px solid ${hexa(INK, 0.26)}`, boxShadow: SH_D,
+          display: "flex", alignItems: "center", justifyContent: "center", gap: w * 0.03 }}>
+          <MarkTile rel d={rowH * 0.72} z={2} />
+          <span style={{ fontFamily: "Fraunces, serif", fontWeight: 900, fontSize: rowH * 0.86,
+            color: INK, lineHeight: 1 }}>{tally}</span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ---- THE CAST — many Claudes, which is what the winners' frames are full of */
+/** ⭐⭐ 135 AGENCY's hook fills with FIFTEEN characters. A pane is not a cast.
+    Ten sub-agents in this reel are ten CLAUDES at ten desks, each on its own
+    slot clock, each in a different costume from the house table, each with its
+    own little screen. Population change is the thing the winners' frames do
+    that mine did not. */
+export const AgentRow: React.FC<{ f: number; y: number; n: number; open: (i: number) => number;
+  done?: (i: number) => number; z?: number; x0?: number; pitch?: number; size?: number;
+  seedOff?: number }> =
+  ({ f, y, n, open, done = () => 0, z = 60, x0 = 64, pitch = 96, size = 128, seedOff = 0 }) => (<>
+    {Array.from({ length: n }, (_, i) => {
+      const k = open(i);
+      if (k <= 0.02) return null;
+      const d = done(i);
+      const x = x0 + i * pitch;
+      return (
+        <React.Fragment key={"ag" + i}>
+          {/* the little screen each one works at */}
+          <div style={{ position: "absolute", left: x - size * 0.30, top: y - size * 1.02,
+            width: size * 0.62, height: size * 0.44, zIndex: z + i, borderRadius: 5,
+            background: `linear-gradient(180deg, ${TERM2}, ${TERM})`,
+            border: `2px solid ${hexa("#000", 0.5)}`, transform: `scale(${k})`,
+            transformOrigin: "50% 100%" }}>
+            <CodeLines x={5} y={5} w={size * 0.50} n={3} gap={size * 0.075} h={2.6}
+              c="#FFFFFF" o={0.5} seed={i + 3 + seedOff} run={1} z={2} f={f}
+              syntax={1} scroll={d > 0.5 ? 0 : 2.2 + (i % 3) * 0.6} />
+            {d > 0.4 && (
+              <div style={{ position: "absolute", right: 3, bottom: 3, width: size * 0.10,
+                height: size * 0.10, borderRadius: 2, background: hexa(DIFFG, 0.92) }} />
+            )}
+          </div>
+          <Contact x={x} y={y - 4} w={size * 0.62} o={0.3} z={z + i} />
+          <Dev f={f} x={x} y={y} i={i + seedOff} size={size * (0.86 + 0.14 * k)} z={z + 1 + i}
+            at={0} loop={i % 4} extra={{ glasses: i % 3 === 0 ? 1 : 0 }}
+            cheer={d} />
+        </React.Fragment>
+      );
+    })}
+  </>);
+
+/* ---- THE WORKSPACE — the PLACE the session lives in ----------------------- */
+/** ⭐⭐⭐ ALEX, REV 5: *"the scenes afterwards are too much like just shapes
+    rectangles squares… it needs to be significantly better and more themed."*
+    He is right and it is measurable: this reel's scenes file was **6%**
+    non-rectangular against **21%** for `FreeScenes`. Choosing "a Claude Code
+    session" as the world made every object a rectangle — panes, cards, boards,
+    lists — and `feedback_props_need_real_drawing` move 3 is exactly this:
+    *"SILHOUETTE VARIETY. Open, splayed, leaning, face-down, plus one CURVED
+    object among the rectangles. A stack of identical rects reads as a bar
+    chart, not a pile."*
+
+    The fix is not to abandon the theme, it is to stop drawing a SCREENSHOT and
+    draw the PLACE the screen is in. A dev desk is full of curves and diagonals:
+    an anglepoise arm, a conical shade, a mug with a handle, a keyboard in
+    perspective, cables that drape, a chair back, a plant. All of it is on
+    topic, none of it is a rectangle, and it gives every scene a foreground and
+    a depth the panes alone never had.
+
+    Painted from the room's own `Place` so it never looks pasted on. */
+export const DeskFit: React.FC<{ p: any; f: number; z?: number; seed?: number; side?: "l" | "r";
+  lamp?: number; mug?: number }> =
+  ({ p, f, z = 30, seed = 1, side = "l", lamp = 1, mug = 1 }) => {
+  const ink = p.grit || "#141414";
+  const key = p.key || "#FFE2A8";
+  const wood = mxh(dkh(BRASS, 0.44), 0.10);
+  const mir = side === "r";
+  const X = (x: number) => (mir ? W - x : x);
+  return (
+    <>
+      {/* 1 · THE DESK — a trapezoid in perspective, not a rectangle */}
+      <div style={{ position: "absolute", left: -80, right: -80, top: p.horizon - 26, height: 120,
+        zIndex: z, clipPath: "polygon(7% 0%, 93% 0%, 100% 100%, 0% 100%)",
+        background: `linear-gradient(180deg, ${mxh(wood, 0.22)} 0%, ${wood} 44%, ${dkh(wood, 0.30)} 100%)`,
+        boxShadow: SH_D }} />
+      {/* its lit front edge */}
+      <div style={{ position: "absolute", left: -80, right: -80, top: p.horizon - 26, height: 6,
+        zIndex: z + 1, background: hexa("#FFFFFF", 0.24) }} />
+
+      {/* 2 · THE ANGLEPOISE — two diagonal arms and a CONICAL shade */}
+      <div style={{ position: "absolute", left: X(112), top: p.horizon - 34, width: 62, height: 16,
+        zIndex: z + 3, borderRadius: "50%",
+        background: `linear-gradient(180deg, ${mxh(STEEL, 0.2)}, ${dkh(STEEL, 0.42)})` }} />
+      <div style={{ position: "absolute", left: X(138), top: p.horizon - 190, width: 11, height: 160,
+        zIndex: z + 2, transformOrigin: "50% 100%", transform: `rotate(${mir ? 15 : -15}deg)`,
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.44)}, ${mxh(STEEL, 0.22)}, ${dkh(STEEL, 0.46)})` }} />
+      <div style={{ position: "absolute", left: X(176), top: p.horizon - 276, width: 11, height: 116,
+        zIndex: z + 2, transformOrigin: "50% 100%", transform: `rotate(${mir ? -42 : 42}deg)`,
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.44)}, ${mxh(STEEL, 0.22)}, ${dkh(STEEL, 0.46)})` }} />
+      {/* the shade — a real cone */}
+      <div style={{ position: "absolute", left: X(mir ? 300 : 232) - 44, top: p.horizon - 322,
+        width: 88, height: 62, zIndex: z + 4,
+        clipPath: "polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)",
+        background: `linear-gradient(180deg, ${mxh(CLAY, 0.28)}, ${dkh(CLAY, 0.26)})` }} />
+      <div style={{ position: "absolute", left: X(mir ? 300 : 232) - 46, top: p.horizon - 264,
+        width: 92, height: 15, zIndex: z + 4, borderRadius: "50%",
+        background: lamp > 0.5 ? mxh(key, 0.5) : dkh(CLAY, 0.4) }} />
+      {/* the cone of light and the pool it lands in */}
+      {lamp > 0.5 && (<>
+        <div style={{ position: "absolute", left: X(mir ? 300 : 232) - 150, top: p.horizon - 256,
+          width: 300, height: 280, zIndex: z + 1, opacity: 0.34,
+          clipPath: "polygon(38% 0%, 62% 0%, 100% 100%, 0% 100%)",
+          background: `linear-gradient(180deg, ${hexa(key, 0.52)} 0%, ${hexa(key, 0.02)} 100%)` }} />
+        <Pool x={X(mir ? 300 : 232)} y={p.horizon - 6} w={330} c={key} o={0.26} z={z + 2} />
+      </>)}
+
+      {/* 3 · THE MUG — a cylinder with a CURVED handle, and it steams */}
+      {mug > 0.5 && (<>
+        <div style={{ position: "absolute", left: X(mir ? 842 : 828), top: p.horizon - 78,
+          width: 62, height: 68, zIndex: z + 5, borderRadius: "10px 10px 22px 22px",
+          background: `linear-gradient(90deg, ${dkh(UISH2, 0.18)}, ${UISH} 44%, ${dkh(UISH2, 0.24)})`,
+          border: `3px solid ${hexa(INK, 0.26)}` }} />
+        <div style={{ position: "absolute", left: X(mir ? 812 : 886), top: p.horizon - 66,
+          width: 30, height: 34, zIndex: z + 4, borderRadius: "50%",
+          border: `8px solid ${dkh(UISH2, 0.2)}`, borderLeftColor: "transparent" }} />
+        <div style={{ position: "absolute", left: X(mir ? 852 : 838), top: p.horizon - 92,
+          width: 42, height: 10, zIndex: z + 6, borderRadius: "50%",
+          background: dkh(CLAY, 0.34) }} />
+        <Steam x={X(mir ? 873 : 859)} y={p.horizon - 96} f={f} at={0} n={4} z={z + 6} s={0.5}
+          c="#E8E0D2" rate={0.7} />
+      </>)}
+
+      {/* 4 · THE KEYBOARD — a trapezoid in perspective with real key rows */}
+      <div style={{ position: "absolute", left: X(mir ? 700 : 336), top: p.horizon + 16, width: 300,
+        height: 62, zIndex: z + 5, clipPath: "polygon(6% 0%, 94% 0%, 100% 100%, 0% 100%)",
+        background: `linear-gradient(180deg, ${mxh(ink, 0.34)}, ${dkh(ink, 0.1)})`,
+        boxShadow: SH }}>
+        {[0, 1, 2].map((r) => (
+          <div key={"kr" + r} style={{ position: "absolute", left: 16 + r * 5, right: 16 + r * 5,
+            top: 12 + r * 15, height: 7, borderRadius: 2,
+            background: `repeating-linear-gradient(90deg, ${hexa("#FFFFFF", 0.20)} 0 12px, transparent 12px 17px)` }} />
+        ))}
+      </div>
+
+      {/* 5 · CABLES — the one genuinely organic line in the frame */}
+      <svg width={W} height={260} style={{ position: "absolute", left: 0, top: p.horizon - 70,
+        zIndex: z + 2, overflow: "visible" }}>
+        <path d={`M ${X(mir ? 660 : 352)} 4 C ${X(mir ? 600 : 412)} 96, ${X(mir ? 520 : 492)} 22, ${X(mir ? 452 : 560)} 84`}
+          fill="none" stroke={hexa(ink, 0.62)} strokeWidth={7} strokeLinecap="round" />
+        <path d={`M ${X(mir ? 880 : 132)} 10 C ${X(mir ? 830 : 182)} 110, ${X(mir ? 770 : 242)} 40, ${X(mir ? 712 : 300)} 96`}
+          fill="none" stroke={hexa(ink, 0.44)} strokeWidth={5} strokeLinecap="round" />
+      </svg>
+
+      {/* 6 · THE PLANT — organic leaves, the only thing in frame with no straight edge */}
+      <div style={{ position: "absolute", left: X(mir ? 66 : 906), top: p.horizon - 150, width: 96,
+        height: 156, zIndex: z + 5 }}>
+        <svg width="96" height="120" viewBox="0 0 96 120" style={{ position: "absolute", top: 0 }}>
+          {[[48, 8, -34], [48, 8, 0], [48, 8, 34], [48, 22, -58], [48, 22, 58]].map((L2, i) => (
+            <path key={"lf" + i}
+              d={`M 48 118 C ${28 + i * 6} 80, ${20 + i * 10} 40, ${L2[0] + L2[2]} ${L2[1]}
+                  C ${64 + i * 6} 44, ${62 + i * 4} 84, 48 118 Z`}
+              fill={hexa(i % 2 ? "#4E8A5E" : "#3E7450", 0.92)} />
+          ))}
+        </svg>
+        <div style={{ position: "absolute", left: 22, top: 108, width: 52, height: 46,
+          clipPath: "polygon(6% 0%, 94% 0%, 84% 100%, 16% 100%)",
+          background: `linear-gradient(180deg, ${mxh(CLAY, 0.16)}, ${dkh(CLAY, 0.28)})` }} />
+      </div>
+
+      {/* 7 · THE CHAIR BACK — a curved mass cropped by the near edge */}
+      <div style={{ position: "absolute", left: X(mir ? 760 : 82) - 130, top: p.horizon + 34,
+        width: 260, height: 220, zIndex: z + 8,
+        borderRadius: "120px 120px 24px 24px",
+        background: `linear-gradient(180deg, ${dkh(ink, 0.02)}, ${dkh(ink, 0.34)})`,
+        border: `4px solid ${hexa("#000", 0.4)}` }}>
+        <div style={{ position: "absolute", left: 22, right: 22, top: 20, bottom: 40,
+          borderRadius: "100px 100px 14px 14px",
+          background: `repeating-linear-gradient(112deg, ${hexa("#FFFFFF", 0.05)} 0 9px, transparent 9px 18px)` }} />
+      </div>
+    </>
+  );
+};
 
 /* ---- THE STAMP — the load the hook's body works against ------------------- */
 /** ⭐⭐⭐ WEIGHT IS DEFORMATION (ANIMATION-QUALITY §11, and the FREE hook's own

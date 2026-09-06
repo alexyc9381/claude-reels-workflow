@@ -95,42 +95,43 @@ const S = (fr: number) => fr / FPS;
    ⛔ "setup." runs f84-93, so nothing above TEXTURE fires after f84.
    ========================================================================= */
 export const HOOK_SFX: Record<HookId, Cue[]> = {
+  /* HAUL — he heaves against a stuck load (thocks at 0/7/14), then a repo lands on him at
+     f10/32/58 and each surge ends on a thump as the wheels cross a joint at f30/58/92.
+     ⛔ "setup." runs f84-93: nothing above TEXTURE fires after f84. */
   lift: [
     { at: S(0),  src: "stage_hum.wav",  v: LEVELS.SFX_BED,  dur: 2.0,  rate: 0.88 },
     { at: S(0),  src: "sub.wav",        v: LEVELS.SFX_HERO, dur: 0.6,  rate: 0.7 },
-    { at: S(6),  src: "mech_clank.wav", v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.92 },
-    { at: S(12), src: "mech_clank.wav", v: LEVELS.SFX_MID,  dur: 0.16, rate: 1.06 },
-    { at: S(14), src: "ratchet.wav",    v: LEVELS.SFX_MID,  dur: 0.32, rate: 0.94 },
-    ...[14, 24, 36, 48].map((a2, i) => ({ at: S(a2), src: i % 2 ? "c_collect.wav" : "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.4), dur: i % 2 ? 0.22 : 0.14, rate: 0.94 + i * 0.06 })),
-    { at: S(58), src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.20, rate: 0.84 },
-    { at: S(58), src: "sub.wav",        v: LEVELS.SFX_MID,  dur: 0.30, rate: 0.8 },
-    { at: S(58), src: "c_power.wav",    v: LEVELS.SFX_MID * db(-2), dur: 0.46, rate: 1.0 },
-    { at: S(60), src: "metal_ping.wav", v: LEVELS.SFX_MID,  dur: 0.30, rate: 1.1 },
-    { at: S(66), src: "wrench_clank.wav",  v: LEVELS.SFX_TEXTURE, dur: 0.18, rate: 0.9 },
-    { at: S(66), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.30, rate: 1.1 },
+    ...[0, 7, 14].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.4), dur: 0.14, rate: 0.72 + i * 0.05 })),
+    ...[10, 32, 58].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.22, rate: 0.94 - i * 0.05 })),
+    ...[10, 32, 58].map((a2, i) => ({ at: S(a2), src: "sub.wav", v: LEVELS.SFX_MID * db(-2 + i), dur: 0.32, rate: 0.8 - i * 0.03 })),
+    ...[12, 34, 60].map((a2, i) => ({ at: S(a2), src: "metal_ping.wav", v: LEVELS.SFX_MID * db(-2 + i * 0.6), dur: 0.28, rate: 1.02 + i * 0.07 })),
+    { at: S(30), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.8 },
+    { at: S(60), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(0), dur: 0.30, rate: 0.94 },
+    { at: S(92), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 0.86 },
   ],
+  /* PRESS — the load is on him; it lands at f12/34/60 and he pushes it back up each time */
   drop: [
     { at: S(0),  src: "stage_hum.wav",  v: LEVELS.SFX_BED,  dur: 2.0,  rate: 0.88 },
     { at: S(0),  src: "sub.wav",        v: LEVELS.SFX_HERO, dur: 0.6,  rate: 0.7 },
-    ...[14, 38, 62, 88].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.5), dur: 0.14, rate: 1.24 - i * 0.06 })),
-    ...[28, 52, 76].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.22, rate: 0.94 - i * 0.06 })),
-    ...[28, 52, 76].map((a2, i) => ({ at: S(a2), src: "sub.wav", v: LEVELS.SFX_MID * db(-2 + i), dur: 0.30, rate: 0.82 - i * 0.03 })),
-    { at: S(78), src: "c_collect.wav", v: LEVELS.SFX_TEXTURE * db(0), dur: 0.22, rate: 0.96 },
-    { at: S(30), src: "metal_ping.wav", v: LEVELS.SFX_MID,  dur: 0.30, rate: 1.06 },
-    { at: S(78), src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.30, rate: 1.05 },
+    ...[0, 7].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.5), dur: 0.14, rate: 0.7 + i * 0.06 })),
+    ...[12, 34, 60].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.24, rate: 0.88 - i * 0.05 })),
+    ...[12, 34, 60].map((a2, i) => ({ at: S(a2), src: "sub.wav", v: LEVELS.SFX_MID * db(-1 + i), dur: 0.34, rate: 0.76 - i * 0.02 })),
+    ...[14, 36, 62].map((a2, i) => ({ at: S(a2), src: "metal_ping.wav", v: LEVELS.SFX_MID * db(-2 + i * 0.6), dur: 0.28, rate: 0.98 + i * 0.08 })),
+    { at: S(62), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(0), dur: 0.30, rate: 0.9 },
   ],
+  /* TEAM HAUL — same load, the crew on the tailgate; repos land at f14/36/62, thumps at f34/62 */
   pit: [
     { at: S(0),  src: "stage_hum.wav",  v: LEVELS.SFX_BED,  dur: 2.0,  rate: 0.88 },
     { at: S(0),  src: "motor_sag.wav",  v: LEVELS.SFX_MID * db(-2), dur: 0.55, rate: 1.05 },
-    { at: S(16), src: "mech_clank.wav", v: LEVELS.SFX_HERO, dur: 0.22, rate: 0.86 },
-    { at: S(16), src: "sub.wav",        v: LEVELS.SFX_HERO, dur: 0.42, rate: 0.7 },
-    ...[26, 44, 62].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-2 + i), dur: 0.14, rate: 1.2 - i * 0.07 })),
-    ...[30, 48, 66].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.20, rate: 0.98 - i * 0.05 })),
-    { at: S(68), src: "c_collect.wav", v: LEVELS.SFX_TEXTURE * db(0), dur: 0.22, rate: 0.98 },
-    { at: S(32), src: "metal_ping.wav", v: LEVELS.SFX_MID,  dur: 0.30, rate: 1.12 },
-    { at: S(68), src: "chrome_shine.wav", v: LEVELS.SFX_TEXTURE * db(-2), dur: 0.30, rate: 1.08 },
-    { at: S(98), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 1.0 },
+    ...[0, 7, 14].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.4), dur: 0.14, rate: 0.76 + i * 0.05 })),
+    ...[14, 36, 62].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.22, rate: 0.98 - i * 0.05 })),
+    ...[14, 36, 62].map((a2, i) => ({ at: S(a2), src: "sub.wav", v: LEVELS.SFX_MID * db(-2 + i), dur: 0.32, rate: 0.82 - i * 0.03 })),
+    ...[16, 38, 64].map((a2, i) => ({ at: S(a2), src: "metal_ping.wav", v: LEVELS.SFX_MID * db(-2 + i * 0.6), dur: 0.28, rate: 1.06 + i * 0.06 })),
+    { at: S(34), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.84 },
+    { at: S(66), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(0), dur: 0.30, rate: 0.98 },
+    { at: S(96), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 0.9 },
   ],
+
 };
 
 export const SFX: Cue[] = [

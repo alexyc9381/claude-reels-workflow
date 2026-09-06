@@ -119,6 +119,27 @@ def scan_reels():
             held = reels.get(key)
             if held and held.get("storyboard") and held.get("number") not in (None, num):
                 key = f"{key}{num}"
+            # ⛔ THE MIRROR OF THE LOG FALLBACK ABOVE, AND IT WAS MISSING.
+            # `Claude<Name><n>Reel.tsx` keys on name+number ("adhd136", "repos137")
+            # while a storyboard keys on the name alone ("adhd", "repos"), so a reel
+            # whose code file carries its number rendered as TWO rows: a numbered one
+            # saying "log-only, code in Drive" and an unnumbered one saying "code, no
+            # log" — with the code sitting in the repo the whole time. Reel 131 FREE
+            # only escaped by accident, because three reels are called FREE and the
+            # name-collision branch above had already pushed it onto the numbered key.
+            # ⭐ Fold the numbered entry into this one when it is the same reel: it
+            # has code, and this key does not.
+            numbered = reels.get(f"{key}{num}")
+            if numbered is not None and numbered.get("code") and not (held or {}).get("code"):
+                merged = reels.pop(f"{key}{num}")
+                base = reels.setdefault(key, merged)
+                if base is not merged:
+                    for fld in ("code", "log", "storyboard"):
+                        if base.get(fld) is None and merged.get(fld) is not None:
+                            base[fld] = merged[fld]
+                    for c in merged.get("captions", []):
+                        if c not in base["captions"]:
+                            base["captions"].append(c)
             r = touch(key, storyboard=f"storyboards/{f}", name=name)
             # a storyboard's number is the best id we have; keep the highest (part2 > part1 etc.)
             if r["number"] is None or num >= r["number"]:

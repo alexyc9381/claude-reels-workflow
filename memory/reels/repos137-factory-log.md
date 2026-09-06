@@ -403,3 +403,51 @@ mechanical half of each landing moved to `thock` (1.3% bright).
 verify 9/9 ×3 · motion 11.59 / 14.24 / 11.53, 0/14 failing, 0/14 stalls · encoded house
 HOOK_LUMA 152.7 · BODY_SAT 53.2% · p10 28.6 · **dHash mean 23.2 · MIN 11 · PASS** · sfx clean ·
 110 cues, 0 collisions. The 32s window: **0 frames under motion 2.0** (floor 2.18, was 0.82).
+
+## STAGE 16 — REV 6: the hook was one concept in three costumes
+
+Alex: *"the first 5 seconds are not interesting enough whatsoever, people scrolled away hard within
+the first even 3 seconds."* Third hook on this reel.
+
+⛔ **Measured first, against three reels that shipped** (panel crop, 0-6s): mean frame-to-frame Δ
+**5.26** against FREE 4.87 / JUDGE 6.79 / BUILD 5.14, f0 subject **9.86%** against 8.95 / 27.99 /
+14.61. **Dead centre of the band.** Not churn, not a pale frame 0 — so no measurement could have
+found it, and the only tool that could was the column:
+
+| round | the hook |
+|---|---|
+| 1 | four PARTS on chains · a Claude on a lift RISES · one LOCKS on |
+| 2 | four REPO CARDS descend · a Claude on a lift RISES · one INSTALLS |
+| 3 | four GEMS fly to the front · a Claude on a lift RISES · one is ABSORBED |
+
+> *in all of these, objects come to a Claude who is standing still, and one attaches to him.*
+
+**PASSIVE ACCRETION**, three costumes. Written up as
+[[feedback_passive_accretion_is_the_hook_trap]]. Against the winning-hook checklist it failed five of
+eight: no body working, f0 not already the joke, the event spread over 58 frames, the hero barely
+travelling while the props did, and a wait in the last third.
+
+### All three cuts rebuilt as ONE BODY AGAINST A LOAD
+New prop `Sled`: a flatbed on wheels that **roll off distance, not off `f`**, carrying the reel's own
+four villains — the Office files, the tangled agent window, a dead core and a dry drum.
+
+| cut | mechanism | travel |
+|---|---|---|
+| house | **HAUL** — drags it left to right; each repo slams into him and he gets further | 560px / **1.7 body widths** |
+| amber | **PRESS** — the load is ON him; he pushes it back up, and it sheds at the cut | 338px / 0.88 |
+| steel | **TEAM HAUL** — crew on the tailgate, travelling right to left | 392px / 1.06 |
+
+| | the accretion hooks | the haul |
+|---|---|---|
+| mean Δ 0-3.4s | 5.26 | **5.82** |
+| min Δ | 1.14 | **1.50** |
+| frames under Δ2.0 | — | **9** (FREE 15 · JUDGE 14 · BUILD 19) |
+| min subject share | 2.10% | **7.94%** (winners 2.25-6.44%) |
+
+⭐ **A hero who receives is only as interesting as the thing arriving. A hero who WORKS is interesting
+between the arrivals** — which is the stretch a viewer actually scrolls in.
+
+Delivered: verify 9/9 ×3 · motion 11.59 / 12.16 / 11.53, 0/14 failing, 0/14 stalls · encoded house
+HOOK_LUMA 151.3 · sat 53.2% · p10 28.5 · **dHash 23.5 / 11** · sfx clean · 104 cues, 0 collisions.
+⛔ Two more full-width characters inside hex colours (`#55４C40`, after `#C05türk` in rev 3); there is
+now an ASCII scan over every `Rps*.tsx` hex token.

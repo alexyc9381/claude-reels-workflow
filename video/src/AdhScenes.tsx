@@ -12,7 +12,8 @@ import {
   MarkTile, CodeLines, CheckBox, TodoList, SesFit, Pane, PaneWall, PromptRail, AnswerCard,
   TickPile, DoneChip, SkillFile, StopHook, LedgerTable, CmdLine, OutputBlock, ExitStamp,
   Toast, ErrStack, SysCard, Fleck, Selector, WallClock, PaneStack, Bin, Dev,
-  StampTool, ClaimBoard,
+  StampTool, ClaimBoard, Sweep, PipRow, DeskFit, RowTower, AgentRow, BayWall,
+  PromptCard, Flurry,
 } from "./AdhProps";
 
 /* ===========================================================================
@@ -215,13 +216,26 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
   const away = E(f, o + 52, o + 66, 0, 1, OUT);
 
   /* the stamp's own position, hinged off his shoulder */
-  const devX = 296 + L.a * 0.4;
-  const size = 334;
+  const devX = 262 + L.a * 0.4;
+  const size = 356;
   const shX = devX + 118, shY = GY - size * 0.56;
-  const stampX = 528 + L.b * 0.3;
-  const stampY = 372 - raised * 118 + drop * 54 + press * 10;
+  /* ⛔ THE RESERVED BAND. Nothing may enter panel y 112..210 (`BAND_Y`), and the
+     raised stamp and the board header were both sitting inside it, which is why
+     they read as clipped. The stamp is 202px tall at s=1.15, so its base has to
+     stay at or below 420 at full raise: 486 - 66 = 420, top = 218. */
+  const stampX = 542 + L.b * 0.3;
+  const stampY = 566 - raised * 70 + drop * 46 + press * 9;
 
-  /* the loose sheet the blow knocks off the stack */
+  /* ⭐⭐⭐ "MORE INTERESTING MOTION IN THE HOOK". Two travelling events per blow,
+     both made of the reel's OWN object rather than blank rectangles:
+       IN   a prompt flies in from off-frame right and SLAPS onto the tower,
+            12 frames ahead of each blow — the work arriving faster than he
+            fakes it, and an arrival is what a hold is scored against
+       OUT  the blow knocks a FLURRY of sheets loose, each on its own clock,
+            tumbling with real rotation and lateral drift before it settles
+     ⛔ Neither is a fade: both cross real distance, which is the only kind of
+     motion the eye resolves at 30fps on a phone. */
+  const inK = (at: number) => E(f, at - 22, at - 6, 0, 1, IN_Q);
   const slide = SLAMS.reduce((a2, at) => Math.max(a2, E(f, at, at + 26, 0, 1, OUT)), 0);
 
   const SHOT: Shot[] = shotsFor(v, [{ at: 0, s: 1.06, x: 0, y: 16 },
@@ -236,6 +250,16 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
           rake={0.09 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={3.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={1 - E(f, 0, dur, 0, 0.5, LIN)} run={1} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x3 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={72 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.72}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : 2} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={1} side="l" lamp={1} mug={1} />
 
         {/* ⭐ TWO BANDS OF UNSTAMPED WORK CROSSING BEHIND HIM, at two depths and
             two rates. The measured table's biggest per-scene lever, and it means
@@ -251,33 +275,66 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
           zIndex: 16, opacity: 0.40,
           clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
           background: `linear-gradient(180deg, ${hexa(GOLD, 0.56)} 0%, ${hexa(GOLD, 0.04)} 100%)` }} />
-        <Pool x={612} y={GY - 54} w={560} c={GOLD} o={0.30} z={17} />
+        <Pool x={648} y={GY - 54} w={560} c={GOLD} o={0.30} z={17} />
 
         <PaneWall f={f} z={20} y0={12} h={150} n={6} lit={[1, 4]} signLit={1} />
 
-        {/* THE LOAD — the wall of rows, and it JOLTS when it is struck */}
-        <ClaimBoard x={612 + L.c * 0.4} y={382} w={430} h={378} z={60} f={f}
+        {/* ⭐⭐⭐ THE LOAD, AND IT DWARFS HIM. Side by side with 122 HARDWARE (a
+            tiny Claude under three tilting GPU cards) and 135 AGENCY (an empty
+            desk filling with fifteen characters in 28 frames), rev 6's frame
+            was one hero and one board of his own size with a digit changing.
+            The stack now starts at NINE rows, runs off the top of frame, GROWS
+            by two on every blow and LEANS further as it does. He is stamping
+            the bottom of something that is about to come down on him. */}
+        <RowTower x={686 + L.c * 0.4} yBase={584} n={9 + SLAMS.filter((at) => f >= at).length * 2}
+          w={332} z={66} f={f} lean={0.4 + SLAMS.filter((at) => f >= at).length * 0.5} jolt={jolt} />
+        <ClaimBoard x={648 + L.c * 0.4} y={414} w={404} h={330} z={60} f={f}
           done={done} jolt={jolt} big={`${done}/${R.tasks}`} />
+        {/* ⭐ THE PROMPTS FLYING IN — one per blow, from off-frame, slapping on */}
+        {SLAMS.map((at) => {
+          const k = inK(at);
+          return k > 0.02 && k < 1 ? (
+            <PromptCard key={"in" + at} x={1180 - k * 470 + L.c * 0.3}
+              y={210 + k * 176} w={228} z={90}
+              rot={-38 + k * 46} seed={at} done={1} hue={TASKS[at % 6].c}
+              clip ring={at % 2 === 0} />
+          ) : null;
+        })}
+        {/* ⭐ AND THE FLURRY THE BLOW KNOCKS LOOSE */}
+        {SLAMS.map((at) => (
+          <Flurry key={"fu" + at} x={660 + L.c * 0.4} y={470} f={f} at={at} n={6} z={88}
+            s={0.92} spread={340} />
+        ))}
         {/* the loose sheet the blow knocks off */}
         {slide > 0.02 && (
-          <div style={{ position: "absolute", left: 812 + L.c * 0.4 + slide * 74,
-            top: 236 + slide * 322, width: 150, height: 42, zIndex: 66, borderRadius: 4,
+          <div style={{ position: "absolute", left: 838 + L.c * 0.4 + slide * 74,
+            top: 262 + slide * 300, width: 150, height: 42, zIndex: 66, borderRadius: 4,
             background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
             border: `3px solid ${hexa(INK, 0.2)}`, boxShadow: SH,
             transform: `rotate(${slide * 62}deg)`, opacity: 1 - slide * 0.35 }} />
         )}
 
+        {/* ⭐ THE SWEEP — a band crosses the board on every blow, so the change
+            PROPAGATES rather than just appearing. Highest-value shape in the
+            measured motion table. */}
+        {SLAMS.map((at) => (
+          <Sweep key={"sw" + at} k={E(f, at, at + 15, 0, 1, IO)} y={232} h={380}
+            c="#FFF0C8" z={76} w={230} o={0.44} />
+        ))}
+        {/* ⭐ the reel's own tally, in the reserved band, filling in a run */}
+        <PipRow lit={done} f={f} at={SLAM} pop={1} z={92} />
+
         {/* THE BLOW LANDS AND IT COSTS */}
         {SLAMS.map((at) => f >= at && f < at + 18 ? (
           <React.Fragment key={"sl" + at}>
-            <Puff x={612 + L.c * 0.4} y={382 + 26} f={f} at={at} c="#E8DCC0" z={70} n={11} s={0.95} />
-            <Ring x={612 + L.c * 0.4} y={382 + 18} f={f} at={at} c={mxh(GOLD, 0.45)} z={70} s={0.8} dur={15} />
+            <Puff x={648 + L.c * 0.4} y={414 + 22} f={f} at={at} c="#E8DCC0" z={70} n={11} s={0.95} />
+            <Ring x={648 + L.c * 0.4} y={414 + 14} f={f} at={at} c={mxh(GOLD, 0.45)} z={70} s={0.8} dur={15} />
           </React.Fragment>
         ) : null)}
 
         {/* HIS ARM, then the STAMP hinged on the end of it */}
         <Forearm x0={shX} y0={shY} x1={stampX} y1={stampY - 24} w={30} c={CLAY} z={84} />
-        <StampTool x={stampX} y={stampY} s={1.34} z={86} rot={-8 + recoil} press={press} recoil={recoil * 0.1} />
+        <StampTool x={stampX} y={stampY} s={1.15} z={86} rot={-8 + recoil} press={press} recoil={recoil * 0.1} />
 
         {/* THE CLAUDE — one body against the load */}
         <Contact x={devX} y={GY - 6} w={206} o={0.36} z={44} />
@@ -325,6 +382,16 @@ export const CARD: React.FC<SP> = ({ v, dur }) => {
           rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.2} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
         <SesFit p={p} f={f} seed={4} z={5} lift={1.0} ctx={0.7} run={read} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x2 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={31 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={4} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={2} side="r" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={4} h={140} n={5} lit={[2]} signLit={lit} />
         {/* the shaft it comes down */}
         <div style={{ position: "absolute", left: 506 - 150 + L.b * 0.3, top: 96, width: 300,
@@ -380,6 +447,16 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
           rake={0.14 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.4} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
         <SesFit p={p} f={f} seed={2} z={5} lift={1.0} ctx={0.85} run={1} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x3 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={17 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={3} side="l" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={6} h={150} n={6} lit={[0, 3]} signLit={0.9} />
 
         {/* the prompt cards coming down the rail. ⛔ THE HARD ONE IS THE DARKEST
@@ -494,6 +571,16 @@ export const INSTALL: React.FC<SP> = ({ v, dur }) => {
           rake={0.11 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
         <SesFit p={p} f={f} seed={5} z={5} lift={0.9} ctx={0.62} run={install} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x2 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={53 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={4} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={4} side="r" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={0} h={132} n={5} lit={[1]} signLit={lit} />
         {/* the shaft */}
         <div style={{ position: "absolute", left: 506 - 130 + L.b * 0.3, top: 84, width: 260,
@@ -554,6 +641,16 @@ export const GATE: React.FC<SP> = ({ v, dur }) => {
           rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.6} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
         <SesFit p={p} f={f} seed={6} z={5} lift={1.0} ctx={0.5} run={1} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x3 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={29 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={5} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={5} side="l" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={4} h={150} n={6} lit={[2, 5]} signLit={1} />
 
         {/* the row he walked away from, and what is under it */}
@@ -633,6 +730,16 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.2} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={7} z={5} lift={1.05} ctx={0.6} run={1} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x2 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={41 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={5} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={6} side="r" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={6} h={146} n={6} lit={[1, 4]} signLit={1} />
 
         {/* the pile going in the bin */}
@@ -665,6 +772,9 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
           ) : null
         ))}
 
+        {/* the band that crosses the ledger as its last row closes */}
+        <Sweep k={E(f, 74, 96, 0, 1, IO)} y={180} h={330} c="#CFF2DC" z={86} w={250} o={0.40} />
+        <PipRow lit={rows} f={f} at={24} pop={1} z={92} />
         <PromptRail f={f} z={70} topY={694} lampBarY={214} lamps={[1, 1, rows >= 6 ? 1 : 0]}
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={452 + L.a * 0.3} y={GY - 6} w={192} o={0.34} z={44} />
@@ -715,6 +825,16 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.8} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
         <SesFit p={p} f={f} seed={8} z={5} lift={0.95} ctx={0.42} run={out} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x3 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={67 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={7} side="l" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={0} h={138} n={5} lit={[2]} signLit={1} />
 
         {/* the command, typing */}
@@ -772,6 +892,16 @@ export const ASIDE: React.FC<SP> = ({ v, dur }) => {
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
         <SesFit p={p} f={f} seed={9} z={5} lift={1.0} ctx={0.16 + (1 - drop) * 0.2} run={1} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x2 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={13 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={4} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={8} side="r" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={4} h={144} n={6} lit={[0, 1, 2, 3, 4, 5]} signLit={1} />
         {/* the whole row goes amber at once — one arrival, frame-wide */}
         {[0, 1, 2, 3].map((i) => (
@@ -822,6 +952,16 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
           rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.4} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
         <SesFit p={p} f={f} seed={10} z={5} lift={0.95} ctx={0.3} run={0.5} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x3 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={83 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={5} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={9} side="l" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={2} h={140} n={5} lit={[step % 5]} signLit={0.7} />
         {/* ⛔ MEASURED 5.40, STILL STATIC. Ten identical panes with one lit means
             NINE dark rectangles filling the middle of the frame and never
@@ -831,10 +971,24 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
             middle, printing hard, with a progress bar that creeps the whole
             beat. Same fact, and the thing that is working is the thing you can
             see working. */}
-        {Array.from({ length: 10 }, (_, i) => (
-          <Pane key={"np" + i} x={(flip ? W - 104 - i * 96 : 26 + i * 96) + L.b * 0.3} y={214}
-            w={90} h={104} z={40 + i} f={f}
-            on={i === step ? 1 : 0.14} run={0} done={done(i) ? 1 : 0} seed={i + 1} label={false} />
+        {/* ⭐ THE QUEUE STRIP TRAVELS. "One task at a time" is not ten lamps with
+            one lit — it is the whole queue SHIFTING one slot every time a row
+            closes, so the set itself moves and the fact is a travelling change
+            rather than a state (`feedback_a_sway_is_not_motion`). */}
+        {Array.from({ length: 10 }, (_, i) => {
+          const advance = E(f, 6, 74, 0, 4.2, LIN);          /* smooth, not stepped */
+          const x = (flip ? W - 104 - i * 96 : 26 + i * 96) + L.b * 0.3
+            + (flip ? advance * 96 : -advance * 96);
+          return (
+            <Pane key={"np" + i} x={x} y={214} w={90} h={104} z={40 + i} f={f}
+              on={i === step ? 1 : 0.14} run={0} done={done(i) ? 1 : 0} seed={i + 1}
+              label={false} />
+          );
+        })}
+        {/* a band crosses the strip as each row closes */}
+        {[0, 1, 2, 3, 4].map((i) => (
+          <Sweep key={"nsw" + i} k={E(f, 6 + i * 15, 6 + i * 15 + 13, 0, 1, IO)} y={200}
+            h={132} c="#CFE0FA" z={70} w={200} o={0.34} />
         ))}
         {/* the lane that is actually running */}
         <Pane x={286 + L.b * 0.35} y={356} w={432} h={244} z={58} f={f}
@@ -886,11 +1040,44 @@ export const FANOUT: React.FC<SP> = ({ v, dur }) => {
   const flip = mir(v, 9);
   const turn = E(f, 18, 62, 0, 1, IO);
   const N = 10;
-  /* stagger = cycle / slots */
-  const openAt = (i: number) => 40 + i * 6;
+  /* ⭐⭐⭐ THE SET ITSELF RE-FLOWS, WHICH IS WHAT ELITE SCENES DO AND MINE DID
+     NOT. Reel 131 FREE's S4 makes "all in one spot" by CONTRACTING the rack's
+     pitch 232 -> 124 so seven plates slide together, and its own comment says
+     why: *"the compress IS the event, and it is a large travelling change
+     rather than a lamp turning on."*
+     The line here is "it runs up to 10 sub-agents in parallel", so the ONE pane
+     he has been working in SPLITS into ten: every pane's x, y, w AND h is
+     interpolated from the single big rect to its own grid slot, so the whole
+     set travels at once instead of a grid fading up. */
+  const split = E(f, 34, 78, 0, 1, IO);
+  const ONE = { x: 236, y: 250, w: 540, h: 322 };
+  /* ⛔⛔ A SYMMETRIC GRID IS MIRROR-INVARIANT, so the MIRROR lever does nothing
+     to it: house vs steel measured **3 bits** of dHash at f945 — a duplicate
+     risk — because ten identical panes in a 5x2 grid look the same flipped.
+     ⭐ Variants need STRUCTURE, not a regrade (`feedback_variants_need_shot_
+     sizes`), so each cut fans out into a genuinely different ARRANGEMENT: five
+     across in two rows, four across in three, or two across in five. Same ten
+     lanes, three different pictures. */
+  const GRID: Record<Variant, { cols: number; pw: number; ph: number; gx: number; gy: number; x0: number; y0: number }> = {
+    house: { cols: 5, pw: 172, ph: 170, gx: 186, gy: 194, x0: 30, y0: 228 },
+    amber: { cols: 4, pw: 196, ph: 132, gx: 212, gy: 150, x0: 78, y0: 214 },
+    steel: { cols: 2, pw: 210, ph: 104, gx: 226, gy: 118, x0: 268, y0: 190 },
+  };
+  const G = GRID[v];
+  const slot = (i: number) => {
+    const col = i % G.cols, row = Math.floor(i / G.cols);
+    return { x: (flip ? W - G.pw - 30 - col * G.gx : G.x0 + col * G.gx) + L.b * 0.3,
+             y: G.y0 + row * G.gy, w: G.pw, h: G.ph };
+  };
+  const lerp = (a: number, b: number) => a + (b - a) * split;
+  /* stagger = cycle / slots — each lane opens on its own clock once it is free */
+  const openAt = (i: number) => 60 + i * 6;
   const runK = (i: number) => E(f, openAt(i), openAt(i) + 12, 0, 1, OUT);
   const doneK = (i: number) => E(f, openAt(i) + 40, openAt(i) + 52, 0, 1, OUT);
-  const ship = E(f, 122, dur, 0, 1, IN_Q);
+  const ship = E(f, 126, dur, 0, 1, IN_Q);
+  const sweep = E(f, 92, 118, 0, 1, IO);
+  const lit = Math.min(6, Array.from({ length: N }, (_, i) => i)
+    .filter((i) => f >= openAt(i) + 52).length);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.40}>
       <Cam x={sh.x} y={sh.y} s={sh.s} z={12}>
@@ -898,25 +1085,52 @@ export const FANOUT: React.FC<SP> = ({ v, dur }) => {
           rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={11} z={5} lift={1.05} ctx={0.55} run={1} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x2 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={23 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={10} side="r" lamp={1} mug={1} />
         {/* ⛔ THE BRIGHTEST SCENE STILL NEEDS SOMETHING BLACK IN IT — rev 1's
             payoff had no dark mass and its p10 came back at 76.1. */}
         <PaneWall f={f} z={20} y0={0} h={150} n={6} lit={[0, 2, 3, 5]} signLit={1} />
 
-        {/* THE TEN PANES, in two rows of five, opening in a staggered run */}
+        {/* ⭐ THE ONE PANE BECOMING TEN — the set travelling, not a grid fading */}
         {Array.from({ length: N }, (_, i) => {
-          const col = i % 5, row = Math.floor(i / 5);
-          const x = (flip ? W - 200 - col * 186 : 30 + col * 186) + L.b * 0.3;
-          return (
+          const sl = slot(i);
+          const x = lerp(ONE.x, sl.x), y = lerp(ONE.y, sl.y);
+          const w = lerp(ONE.w, sl.w), h = lerp(ONE.h, sl.h);
+          /* before the split they occupy the SAME rect, so the other nine are
+             held back until the set has actually opened up */
+          const vis = i === 0 ? 1 : Math.min(1, Math.max(0, (split - 0.14) * 2.6));
+          return vis <= 0 ? null : (
             <React.Fragment key={"fp" + i}>
-              <Pane x={x} y={228 + row * 194} w={172} h={170} z={44 + i} f={f}
-                on={runK(i)} run={runK(i)} done={doneK(i)} seed={i + 1} />
+              <div style={{ position: "absolute", inset: 0, zIndex: 44 + i, opacity: vis }}>
+                <Pane x={x} y={y} w={w} h={h} z={44 + i} f={f}
+                  on={i === 0 ? 1 : Math.max(runK(i), vis * 0.85)}
+                  run={i === 0 ? 1 : runK(i)} done={doneK(i)} seed={i + 1 + (v === 'amber' ? 11 : v === 'steel' ? 23 : 0)} />
+              </div>
               {doneK(i) > 0.5 && doneK(i) < 1 && (
-                <Ring x={x + 86} y={228 + row * 194 + 85} f={f} at={openAt(i) + 46}
+                <Ring x={x + w / 2} y={y + h / 2} f={f} at={openAt(i) + 46}
                   c={mxh(GREEN, 0.4)} z={90} s={0.5} dur={12} />
               )}
             </React.Fragment>
           );
         })}
+        {/* ⭐⭐⭐ AND A CAST, NOT A GRID. 135 AGENCY's hook fills with fifteen
+            characters; ten sub-agents here are ten CLAUDES at ten desks, each on
+            its own slot clock and its own costume, arriving as the session
+            splits. Population change is the thing the winners' frames do. */}
+        <AgentRow f={f} y={GY - 8} n={N} x0={72 + L.b * 0.2} pitch={92} size={126} z={64}
+          open={(i) => E(f, openAt(i) - 4, openAt(i) + 10, 0, 1, BACK)}
+          done={(i) => doneK(i)} seedOff={v === "amber" ? 3 : v === "steel" ? 6 : 0} />
+        {/* ⭐ the band that crosses the grid the moment it is whole */}
+        <Sweep k={sweep} y={206} h={436} c="#CFF2DC" z={86} w={264} o={0.40} />
+        <PipRow lit={lit} f={f} at={60} pop={1} z={92} />
 
         <Selector x={506 + L.c * 0.4} y={624} s={1.05} z={88} k={turn} from={1} to={R.agents} />
         {turn > 0.98 && <Ring x={506 + L.c * 0.4} y={624} f={f} at={62} c={mxh(GOLD, 0.5)} z={90} s={0.8} dur={20} />}
@@ -971,6 +1185,16 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={12} z={5} lift={1.2} ctx={0.8} run={1} />
+        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
+            own objects: skill files on hooks, cable coils, lit sub-agent bays
+            and pin-toothed modules, 10x2 on rails, each swaying. This is why
+            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
+          seed={47 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={5} o={0.92}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
+            cables, plant, chair back — the silhouette variety the note asked for */}
+        <DeskFit p={p} f={f} z={30} seed={11} side="l" lamp={1} mug={1} />
         <PaneWall f={f} z={20} y0={8} h={146} n={6} lit={[0, 1, 2, 3, 4, 5]} signLit={1} />
 
         {/* THE KEYWORD CARD — four checkboxes, ticked one per beat */}
@@ -1025,6 +1249,8 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
         <DoneChip x={806 + L.c * 0.3} y={GY - 120} s={1.05} z={80} ring={chip} />
         {chip > 0.1 && <Ring x={806 + L.c * 0.3} y={GY - 132} f={f} at={40} c={mxh(GOLD, 0.5)} z={86} s={0.8} dur={20} />}
 
+        <Sweep k={E(f, 30, 52, 0, 1, IO)} y={200} h={400} c="#FFF0C8" z={86} w={250} o={0.42} />
+        <PipRow lit={6} f={f} at={6} pop={1} z={92} />
         <Contact x={430 + L.a * 0.3} y={GY - 6} w={196} o={0.34} z={44} />
         <Dev f={f} x={430 + L.a * 0.3} y={GY} i={0} size={324} z={64} at={-14} loop={2}
           extra={{ glasses: 1 }} cheer={E(f, 44, 54, 0, 1, BACK)} />
