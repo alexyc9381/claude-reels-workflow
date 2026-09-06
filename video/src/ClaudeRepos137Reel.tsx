@@ -93,6 +93,20 @@ const S = (fr: number) => fr / FPS;
    whose parts land at 28/52/76 and 30/48/66. Three cuts are three hook COMPONENTS,
    so they are three cue banks ([[feedback_three_cuts_three_hooks_fix_all_three]]).
    ⛔ "setup." runs f84-93, so nothing above TEXTURE fires after f84.
+   ⭐⭐ THE COMPLETION IS IN TWO PARTS, BECAUSE THE HOOK HAS NO SILENCE IN IT (Alex, rev 12: "have
+   like a game completion sound at the final gem of the hook animation"). The VO runs wall to wall
+   0.00-3.09s and the fourth repo docks at f92 / f92 / f94 — on top of "setup.", the hook's
+   sentence-final word — and every cue also plays 0.1s EARLY on the J-cut lead. So it is split the
+   way a game splits it:
+     · ON THE GEM   f92/92/94   `c_1up`, 0.09s at TEXTURE — the collect BLIP, on the frame the
+                                repo lands, short and quiet enough to leave the word alone
+     · ON THE CUT   f105        `c_powerbig` at MID + `c_clear` on top — the stage-clear FLOURISH,
+                                blooming across the hook→TAG cut
+   ⛔⛔ THE SAFE WINDOW IS MEASURED ON THE MIX, NOT READ OFF THE CAPTION FILE. The words json puts
+   "setup." at 2.79-3.09; whisper on the delivered mix puts it at **3.02-3.26**. A first pass moved
+   the fanfare to 3.20s believing that was 110ms of clear air — it was 180ms INSIDE the word, and
+   `word_audible` heard 'concept.' Fix 3 of [[feedback_cues_land_on_sentence_ends]] says exactly
+   this and it still cost two renders. Measured clean: "setup." -> 'Cloud setup.' ok.
    ========================================================================= */
 export const HOOK_SFX: Record<HookId, Cue[]> = {
   /* HAUL — he heaves against a stuck load (thocks at 0/7/14), then a repo lands on him at
@@ -108,6 +122,9 @@ export const HOOK_SFX: Record<HookId, Cue[]> = {
     { at: S(30), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.8 },
     { at: S(60), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(0), dur: 0.30, rate: 0.94 },
     { at: S(92), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 0.86 },
+    { at: S(92),  src: "c_1up.wav",      v: LEVELS.SFX_TEXTURE, dur: 0.09, rate: 1.04 },
+    { at: S(105), src: "c_powerbig.wav", v: LEVELS.SFX_MID * db(-2), dur: 0.28, rate: 1.00 },
+    { at: S(105), src: "c_clear.wav",    v: LEVELS.SFX_TEXTURE * db(3), dur: 0.14, rate: 1.00 },
   ],
   /* PRESS — the load is on him; it lands at f12/34/60 and he pushes it back up each time */
   drop: [
@@ -118,6 +135,10 @@ export const HOOK_SFX: Record<HookId, Cue[]> = {
     ...[12, 34, 60].map((a2, i) => ({ at: S(a2), src: "sub.wav", v: LEVELS.SFX_MID * db(-1 + i), dur: 0.34, rate: 0.76 - i * 0.02 })),
     ...[14, 36, 62].map((a2, i) => ({ at: S(a2), src: "metal_ping.wav", v: LEVELS.SFX_MID * db(-2 + i * 0.6), dur: 0.28, rate: 0.98 + i * 0.08 })),
     { at: S(62), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(0), dur: 0.30, rate: 0.9 },
+    { at: S(92), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 0.82 },
+    { at: S(92),  src: "c_1up.wav",      v: LEVELS.SFX_TEXTURE, dur: 0.09, rate: 0.98 },
+    { at: S(105), src: "c_powerbig.wav", v: LEVELS.SFX_MID * db(-2), dur: 0.28, rate: 0.94 },
+    { at: S(105), src: "c_clear.wav",    v: LEVELS.SFX_TEXTURE * db(3), dur: 0.14, rate: 0.94 },
   ],
   /* TEAM HAUL — same load, the crew on the tailgate; repos land at f14/36/62, thumps at f34/62 */
   pit: [
@@ -129,7 +150,10 @@ export const HOOK_SFX: Record<HookId, Cue[]> = {
     ...[14, 38, 64].map((a2, i) => ({ at: S(a2), src: "metal_ping.wav", v: LEVELS.SFX_MID * db(-2 + i * 0.6), dur: 0.28, rate: 1.06 + i * 0.06 })),
     { at: S(30), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.84 },
     { at: S(66), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(0), dur: 0.30, rate: 0.98 },
-    { at: S(96), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 0.9 },
+    { at: S(94), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 0.9 },
+    { at: S(94),  src: "c_1up.wav",      v: LEVELS.SFX_TEXTURE, dur: 0.09, rate: 1.12 },
+    { at: S(105), src: "c_powerbig.wav", v: LEVELS.SFX_MID * db(-2), dur: 0.28, rate: 1.06 },
+    { at: S(105), src: "c_clear.wav",    v: LEVELS.SFX_TEXTURE * db(3), dur: 0.14, rate: 1.08 },
   ],
 
 };

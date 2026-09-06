@@ -666,3 +666,47 @@ it ([[feedback_props_need_real_drawing]]).
 verify 9/9 ×3 · motion **10.59 / 11.54 / 10.70**, 0/11 failing, 0/11 stalls · hook 17.42 / 11.99 /
 8.46 · encoded house HOOK_LUMA 170.8 · sat 49.2% · p10 28.7 · look holds · **dHash 24.5 / 11** ·
 sfx clean (`motor_sag` 86.6% <250Hz, nowhere near AIR) · 105 cues, 0 collisions · 7/7 item-ids.
+
+## STAGE 22 — REV 12: the game completion sound, and where it is actually allowed to go
+
+> *"have like a game completion sound at the final gem of the hook animation here."*
+
+The fourth repo docks at f92 / f92 / f94 — **on top of "setup."**, the hook's sentence-final word —
+and the hook's VO runs WALL TO WALL, 0.00 to 3.09s, with not one gap in it. On top of that every cue
+in this reel plays **0.1s EARLY** on the J-cut lead (`rps_cue_collisions` models it), so a cue asked
+for "at the gem" actually starts 123ms before that word has finished. Split it the way a game does:
+
+| | frame | cue | job |
+|---|---|---|---|
+| on the gem | 92 / 92 / 94 | `c_1up` 0.09s @ TEXTURE | the collect BLIP, on the landing frame |
+| on the cut | 105 | `c_powerbig` 0.28s @ MID−2 + `c_clear` @ TEXTURE+3 | the stage-clear FLOURISH, blooming across the hook→TAG cut |
+
+### ⛔⛔⛔ THE SAFE WINDOW IS MEASURED ON THE MIX, NOT READ OFF THE CAPTION FILE
+
+This cost two full renders and it is the whole lesson of the round.
+
+| source | where "setup." is |
+|---|---|
+| `words_repos137.json` (the caption file) | 2.79 – **3.09** |
+| whisper, on the delivered MIX | 3.02 – **3.26** |
+
+A first pass put the fanfare at 3.20s believing that was 110ms of clear air after the word. It was
+**180ms INSIDE it**, and `word_audible` heard the isolated slice as **'concept.'** — the word gone.
+A second pass at f92 with a louder ping read as **'Clutch.'** Fix 3 of
+[[feedback_cues_land_on_sentence_ends]] says *"use the MEASURED end of the word, not the word file's"*
+in those words, and I read the rule, quoted it, and then used the word file anyway.
+
+⭐ The other half of the lesson: **a collision checker passing is not the word surviving.**
+`rps_cue_collisions` reported **0 collisions** for the 3.20s placement, because it grades against the
+caption file too. The only test that found it was re-transcribing the slice off the render
+([[feedback_transcribe_the_deliverable]]). A probe that renders `--frames=0-150` is useless here as
+well: whisper needs the sentence around the word to place it, so the loop is a FULL render each time.
+
+Measured clean on the delivered encode: `setup. -> 'Cloud setup.' ok`, and the remaining NOT-AUDIBLE
+list is byte-identical to the shipped v25 (`Anydoc.` `with.` `Herr.` `AmiRoute.` `links.` — the
+standing proper-noun false positives).
+
+### Delivered
+verify 9/9 ×3 · motion 10.59 / 11.54 / 10.70, 0/11 failing · hook 17.42 / 11.99 / 8.46 · encoded
+HOOK_LUMA 170.8 · sat 49.2% · p10 28.7 · look holds · dHash 24.5 / 11 · sfx clean (`c_1up` 4ms
+attack, `c_clear` 6ms, `c_powerbig` 4ms) · **108 cues, 0 collisions** · item-ids on all three.
