@@ -145,6 +145,11 @@ export const SFX: Cue[] = [
   ...[0, 6, 44].map((a2, i) => ({ at: S(L.S2 + a2), src: "ticket_click.wav", v: LEVELS.SFX_TEXTURE, dur: 0.14, rate: 0.9 + i * 0.1 })),
   ...[13, 24, 62].map((a2, i) => ({ at: S(L.S2 + a2), src: "punch_thud.wav", v: LEVELS.SFX_HERO * db(-3 + i * 1.5), dur: 0.28, rate: 0.9 + i * 0.06 })),
   ...[14, 25, 63].map((a2, i) => ({ at: S(L.S2 + a2), src: "ceramic_crack.wav", v: LEVELS.SFX_MID * db(-4), dur: 0.24, rate: 1.0 + i * 0.1 })),
+  /* ⭐ HE GOES CRITICAL ON THE THIRD FILE (rev 11). `motor_sag` pitched down is the shop's own
+     "a machine is dying" sound and it is already in this bank; it layers UNDER the third punch so
+     the sound and the picture turn on the same frame. 0.30s, ending at 6.73s — clear of
+     "formatting." (6.82) ([[feedback_a_cue_may_be_a_transient_not_a_texture]]). */
+  { at: S(L.S2 + 62), src: "motor_sag.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.30, rate: 0.72 },
 
   /* ---- S3 · THE PRESS: rollers grab, chaff falls, a sheet slides out, the dial ticks */
   { at: S(L.S3 + 8),  src: "ratchet.wav",     v: LEVELS.SFX_MID * db(-2), dur: 0.30, rate: 1.04 },

@@ -398,10 +398,27 @@ export const Parts: React.FC<{ u: number; kit: Kit; f: number }> = ({ u, kit, f 
 export const Rig: React.FC<{ f: number; x: number; y: number; size: number; z?: number;
   drive?: number; strain?: number; flip?: boolean; costume?: Record<string, number>;
   gaze?: number; cheer?: number; reach?: number; shock?: number; stern?: number; pop?: number;
-  act?: number; ph?: number; lift?: number; kit?: Kit; xeyes?: number }> =
+  act?: number; ph?: number; lift?: number; kit?: Kit; xeyes?: number;
+  heat?: number; drain?: number }> =
   ({ f, x, y, size, z = 56, drive = 0, strain = 0, flip = false, costume = {},
      gaze = 0, cheer = 0, reach = 96, shock = 0, stern = 0, pop = 1, act = 3, ph = 0, lift = 0,
-     kit = {}, xeyes = 0 }) => {
+     kit = {}, xeyes = 0, heat = 0, drain = 0 }) => {
+  /* ⭐⭐ THE HERO'S BODY IS THE STATUS BAR (Alex, rev 11: "make the Claude start turning red with
+     each file and like steaming etc because it's dying"). Every pain beat in this reel happens TO
+     him, so his paint carries it rather than a lamp or a readout — the actor mapping, not the
+     artefact one ([[feedback_the_metric_makes_paper]], [[feedback_colour_the_sprite_not_the_plate]]).
+       heat  0 -> 1  OVERLOADED: clay warms to red, then to a scorched brick. He boils, hops slower.
+       drain 0 -> 1  STARVED / DUMB: the colour goes out of him toward ash.
+     ⛔ ONE TABLE, ONE CALL. `lerpHex` returns `rgb(...)`, so a stop is never fed back into a colour
+     helper ([[feedback_nested_colour_helpers_go_black]]) — each branch mixes two HEX constants once. */
+  const HOT = "#C44A3A", SCORCH = "#8E2A19", ASH = "#A9A096";
+  const hz = Math.max(0, Math.min(1, heat)), dz = Math.max(0, Math.min(1, drain));
+  const tint = dz > 0.02 ? lerpHex(CLAY, ASH, dz)
+    : hz > 0.02 ? (hz < 0.55 ? lerpHex(CLAY, HOT, hz / 0.55) : lerpHex(HOT, SCORCH, (hz - 0.55) / 0.45))
+    : undefined;
+  /* the boil: a fast shiver that only exists when he is hot, on its own driver so it never merges
+     with the strain tremble below ([[feedback_authored_motion_needs_its_own_driver]]) */
+  const boil = hz > 0.05 ? Math.sin(f * 2.35 + ph) * 3.0 * hz : 0;
   const beat = Math.min(1, Math.max(Math.abs(drive), strain) * 1.7);
   const k = 1 - beat;
   let ax = 0, ay = 0, ar = 0, aGaze = 0, aCheer = 0;
@@ -427,7 +444,7 @@ export const Rig: React.FC<{ f: number; x: number; y: number; size: number; z?: 
   const tremble = strain > 0.5 ? Math.sin(f * 1.9) * 3.4 * (strain - 0.5) * 2 : 0;
   const sy = 1 - strain * 0.16;
   const sx = 1 + strain * 0.12;
-  const dx = (flip ? -1 : 1) * (drive * reach + ax) + tremble;
+  const dx = (flip ? -1 : 1) * (drive * reach + ax) + tremble + boil;
   const dy = strain * size * 0.05 + ay - lift;
   const rot = (flip ? -1 : 1) * (drive * 7 - strain * 2 + ar);
   const u = size / 200;
@@ -441,8 +458,8 @@ export const Rig: React.FC<{ f: number; x: number; y: number; size: number; z?: 
         {/* ⛔ the Mascot blinks at lf 0-4 of every 84: offset it so frame 0 of a scene
             — and the reel's thumbnail — never catches the hero with his eyes shut */}
         <Mascot lf={f + 31} size={size} gaze={gaze + aGaze} nodAmp={2.6 + strain * 2 + k * 1.4}
-          nodSpeed={10} cheer={Math.max(cheer, aCheer)} shock={shock} stern={stern} xeyes={xeyes}
-          {...costume} />
+          nodSpeed={10 + hz * 6 + dz * 7} cheer={Math.max(cheer, aCheer)} shock={shock} stern={stern}
+          xeyes={xeyes} {...costume} tint={tint} />
       </div>
     </div>
   );

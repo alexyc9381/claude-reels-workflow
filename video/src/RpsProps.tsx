@@ -1524,3 +1524,50 @@ export const Contact2: React.FC<{ x: number; y: number; w: number; o?: number; z
   <div style={{ position: "absolute", left: x - w / 2, top: y - w * 0.10, width: w, height: w * 0.20, zIndex: z,
     borderRadius: "50%", background: `radial-gradient(ellipse, ${hexa("#4A4236", o)} 0%, ${hexa("#4A4236", o * 0.45)} 48%, ${hexa("#4A4236", 0)} 76%)` }} />
 );
+
+/* ⭐⭐ VENT — the steam coming off an overloaded Claude. House `Steam` is a column of
+   circles on a wrapping counter, so wisps POP in at full alpha and read as bubbles
+   ([[feedback_props_need_real_drawing]], [[feedback_a_wrapping_counter_reads_as_chop]]).
+   These are drawn: each wisp is an asymmetric blob that ramps IN and OUT over its own
+   life, GROWS as it climbs, and CURLS harder the higher it gets, so the plume has a
+   silhouette instead of a texture. `hot` bends the colour toward the scorch so the
+   steam belongs to the body it is coming off. */
+export const Vent: React.FC<{ x: number; y: number; f: number; at: number; n?: number; z?: number;
+  s?: number; rate?: number; hot?: number; spread?: number; seed?: number }> =
+  ({ x, y, f, at, n = 8, z = 74, s = 1, rate = 1, hot = 0, spread = 1, seed = 0 }) => {
+  const lf = f - at;
+  if (lf < 0) return null;
+  /* ⛔⛔ THE COLOUR IS MIXED AS NUMBERS, NOT THROUGH A HELPER. `lerpHex` emits `rgb(...)` and
+     `hexa` parses HEX, so `hexa(lerpHex(...))` is NaN and the wisps render BLACK — which is
+     exactly what the first render of this prop did, dark circles all over the pegboard
+     ([[feedback_nested_colour_helpers_go_black]]). Mix the channels, emit one rgba. */
+  const hz = Math.max(0, Math.min(1, hot));
+  const R0 = 240 + (226 - 240) * hz, G0 = 233 + (176 - 233) * hz, B0 = 221 + (150 - 221) * hz;
+  const rgb = `${Math.round(R0)},${Math.round(G0)},${Math.round(B0)}`;
+  return (<>{Array.from({ length: n }, (_, i) => {
+    /* each wisp owns its phase, so the plume never pulses as one body */
+    const t = ((lf * rate * 0.036) + rnd(i + seed, 9)) % 1;
+    const side = i % 2 ? 1 : -1;
+    /* ⛔ EQUAL BLOBS WITH HARD EDGES READ AS BUBBLES, not as steam — the first render of this
+       was a string of balloons up the pegboard. Two fixes: every wisp gets its own size off
+       `rnd`, and the fill is a radial FALLOFF so the edge dissolves instead of drawing a circle. */
+    const vary = 0.66 + rnd(i + seed, 17) * 0.9;
+    const grow = (34 + t * 96) * vary;
+    /* the curl: drift widens with height and reverses, which is what makes it read as steam
+       rather than as a rising dot */
+    const curl = Math.sin(t * 4.4 + i * 1.3) * (16 + t * 58) * spread;
+    /* ⛔ a sine fade is ZERO at t=0, so the plume detached from the body it was coming off and
+       floated as a cloud further up the wall. It ramps in over the first sixth of the life now,
+       which is what puts a wisp actually ON him ([[feedback_make_an_action_read]]). */
+    const fade = Math.min(1, t * 6) * (1 - Math.max(0, (t - 0.5) / 0.5));
+    const a1 = (0.88 * fade).toFixed(3), a2 = (0.48 * fade).toFixed(3);
+    return (
+      <div key={"vn" + seed + i} style={{ position: "absolute",
+        left: x + (side * 15 * spread + curl) * s - grow * s * 0.5,
+        top: y - (2 + t * 214) * s - grow * s * 0.5,
+        width: grow * s, height: grow * s * (1.04 - t * 0.18), zIndex: z,
+        transform: `rotate(${(side * (12 + t * 128)).toFixed(1)}deg)`,
+        background: `radial-gradient(circle at 46% 44%, rgba(${rgb},${a1}) 0%, rgba(${rgb},${a2}) 40%, rgba(${rgb},0) 68%)` }} />
+    );
+  })}</>);
+};

@@ -618,3 +618,51 @@ grep -Pzo '\{/\*(?:(?!\*/).)*\*/(?!\})' video/src/Rps*.tsx   # must be empty
 verify 9/9 ×3 · motion 10.59 / 11.19 / 10.54, 0/11 failing, **0/11 stalls** · hook motion
 19.89 / 10.41 / 6.81 · encoded house HOOK_LUMA 170.8 · sat 52.0% · p10 28.8 · **dHash 23.9 / 11** ·
 sfx clean · 104 cues, 0 collisions · 7 files live in `Faceless/137 - REPOS/` with real item-ids.
+
+## STAGE 21 — REV 11: the hero's body is the status bar
+
+> *"after it feeds the last file at 6 seconds, make the claude start turning red with each file and
+> like steaming etc becuase its dying / like add more interesting stuff like that here throughout
+> the animation."*
+
+⭐⭐⭐ **THE NOTE NAMED ONE BEAT AND THE FIX IS A DEVICE.** "Throughout" is the operative word: the
+answer is not a red Claude at 6s, it is a rule the whole reel obeys, so the viewer learns to read his
+paint. Every pain beat in this reel already happens TO him — he is the one the files jam, the one
+watching four agents fight over a window, the one whose model goes dumb, the one whose tank runs
+dry — and in all four he was standing there in stock clay. Two states on `Rig` carry all of it:
+
+| state | what it means | where it fires |
+|---|---|---|
+| `heat` 0→1 | OVERLOADED — clay → `#C44A3A` → scorched `#8E2A19`, he boils and hops slower | JAM (up), PRESS + READ (down), CRAM (up), SPLIT (down) |
+| `drain` 0→1 | STARVED / DUMB — the colour goes OUT of him to ash `#A9A096` | SWAP's dumb model, MANIFOLD's empty tank |
+
+⭐ This is the ACTOR mapping the metric rule keeps asking for
+([[feedback_the_metric_makes_paper]]): the state is on the WORKER, never on a gauge. And it is one
+table, one call — `Mascot` already takes a `tint`, so the sprite is coloured, not the plate
+([[feedback_colour_the_sprite_not_the_plate]]).
+
+### The named beat
+The three files arrive at f42 / f53 / f91 of the merged scene = 4.80s / 5.17s / **6.43s**. Each takes
+him a third of the way over. On the third: the fault lamp snaps on, `motor_sag` pitched to 0.72 lands
+under the same punch, he goes scorched, and then he sinks and dies with the steam still coming off.
+
+### ⛔ THREE BUGS, ALL MINE, ALL CAUGHT ON THE PROBE
+
+1. **THE STEAM RENDERED BLACK.** `hexa(lerpHex(a, b, t), α)` — `lerpHex` emits `rgb(...)` and `hexa`
+   parses HEX, so the alpha was NaN and every wisp painted black. Dark circles all over the pegboard.
+   Exactly [[feedback_nested_colour_helpers_go_black]], written down and walked into anyway. The prop
+   mixes its channels as NUMBERS now and emits one `rgba`.
+2. **THE PLUME DETACHED FROM THE BODY.** A `sin(t·π)` fade is ZERO at t=0, so no wisp was ever visible
+   at the emitter and the steam floated as a cloud further up the wall with a gap under it. It ramps
+   in over the first sixth of the life now, which is what puts a wisp actually ON him.
+3. **THE DEBRIS DID NOT SINK WITH HIM.** Once the slump was deepened, the late fourth cough hung over
+   the face doing the dying. It rides the same offset as the hero.
+
+⛔ And a fourth, in the drawing rather than the code: equal blobs with hard edges read as BUBBLES, not
+as steam — a string of balloons up the pegboard. Per-wisp size off `rnd` plus a radial FALLOFF fixed
+it ([[feedback_props_need_real_drawing]]).
+
+### Delivered
+verify 9/9 ×3 · motion **10.59 / 11.54 / 10.70**, 0/11 failing, 0/11 stalls · hook 17.42 / 11.99 /
+8.46 · encoded house HOOK_LUMA 170.8 · sat 49.2% · p10 28.7 · look holds · **dHash 24.5 / 11** ·
+sfx clean (`motor_sag` 86.6% <250Hz, nowhere near AIR) · 105 cues, 0 collisions · 7/7 item-ids.

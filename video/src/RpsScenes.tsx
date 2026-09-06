@@ -2,7 +2,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
-  Scene, Cam, Contact, Motes, Ring, Puff, Steam, Fall, Crew, Forearm, Rig, anchors, Brain,
+  Scene, Cam, Contact, Motes, Ring, Puff, Steam, Sweat, Fall, Crew, Forearm, Rig, anchors, Brain,
   CLAY, GOLD, GREEN, RED, INK, MUTE, BRASS, IRON, CHROME, BONE, SKY,
   REPOS, MODELS, repoBy, asPlace, GY, BAND_Y, SAFE3, R, mono, ui,
 } from "./RpsWorld";
@@ -13,7 +13,7 @@ import {
 } from "./RpsSets";
 import {
   FileCard, Chute, Debris, Press, MdSheet, SheetBelt, Monitor, Rack, Claw, Core, Manifold, BigGauge, ErrorLamp,
-  TokenHopper, Tally, Composer, RepoCard, GhSign, DocMorph, Canister, Octicon,
+  TokenHopper, Tally, Composer, RepoCard, GhSign, DocMorph, Canister, Octicon, Vent,
 } from "./RpsProps";
 import type { FileKind } from "./RpsProps";
 
@@ -202,6 +202,16 @@ export const JAM: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
      he GIVES OUT: 30px of the 236px sprite sinking is worth more than any amount of confetti
      ([[feedback_hold_needs_arrivals_not_travel]], [[reference_motion_arithmetic]]). */
   const slump = E(f, 72 + lead, dur, 0, 1, LIN);
+  /* ⭐⭐ HE COOKS, AND THE REEL NOW DOES THIS EVERYWHERE (Alex, rev 11: "after it feeds the last
+     file at 6 seconds, make the Claude start turning red with each file and like steaming etc
+     because it's dying"). Each file that goes in takes his paint one step further over — clay,
+     red, scorched — so the back half of the JAM is a BODY FAILING, not debris piling up. The
+     third file lands at f91 = 6.43s of the reel, the exact moment the note names.
+     ⭐ The device is the whole arc, not this scene: heat rises in the two OVERLOAD scenes (JAM,
+     CRAM) and falls through their payoffs (PRESS, SPLIT), and `drain` does the same job for the
+     two STARVED beats (SWAP's dumb model, MANIFOLD's empty tank). His body is the status bar. */
+  const heat = ARR.reduce((m, at, i) => Math.max(m, E(f, at, at + 13, 0, 0.34 + i * 0.33, OUT)), 0);
+  const dying = E(f, ARR[2] + 4, ARR[2] + 26, 0, 1, OUT);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.045]} vig={0.44}>
       {/* ⛔ the amber cut's JAM still stalled after the slump was added (TAIL 0.52): an OUT ease
@@ -228,12 +238,30 @@ export const JAM: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
         return <FileCard key={k} kind={k} x={x} y={y} s={1.1 - into * 0.6} rot={-32 + t * 20} z={64} o={1 - into * 0.9} />;
       })}
       {/* what comes out the other side, and the pile it makes */}
-      <Debris x={HX - 40} y={mouth.y + 10} f={f} bursts={[...ARR, ARR[2] + 20]} n={third ? 18 : 14} seed={v === "house" ? 0 : v === "amber" ? 3 : 5} z={70} spread={0.55} />
-      {ARR.map((at) => (f >= at && f < at + 20 ? <Puff key={at} x={HX - 30} y={mouth.y + 20} f={f} at={at} c="#E8E0D0" z={72} n={7} s={0.9} up={0.3} /> : null))}
-      <Contact x={HX} y={GY - 10 + slump * 30} w={HS * 0.8 + slump * 30} o={0.34} />
-      <Rig f={f} x={HX} y={GY + slump * 30} size={HS} z={56} act={3} gaze={-1.2}
-        strain={Math.max(jolt * 0.55, slump * 0.62)} shock={jolt > 0.2 ? 0.8 : hic}
-        xeyes={third ? 1 : 0} ph={0.6} />
+      {/* ⛔ the debris did NOT sink with him, so once the slump was deepened the late cough hung
+          over the face that is doing the dying. It rides the same offset now. */}
+      <Debris x={HX - 40} y={mouth.y + 34 + slump * 30 + dying * 16} f={f} bursts={[...ARR, ARR[2] + 20]} n={third ? 18 : 14} seed={v === "house" ? 0 : v === "amber" ? 3 : 5} z={70} spread={0.55} />
+      {ARR.map((at) => (f >= at && f < at + 20 ? <Puff key={at} x={HX - 30} y={mouth.y + 40 + slump * 30} f={f} at={at} c="#E8E0D0" z={72} n={7} s={0.9} up={0.3} /> : null))}
+      <Contact x={HX} y={GY - 10 + slump * 30 + dying * 16} w={HS * 0.8 + slump * 30} o={0.34} />
+      <Rig f={f} x={HX} y={GY + slump * 30 + dying * 16} size={HS} z={56} act={3} gaze={-1.2}
+        strain={Math.max(jolt * 0.55, slump * 0.62, dying * 0.5)} shock={jolt > 0.2 ? 0.8 : hic}
+        xeyes={third ? 1 : 0} ph={0.6} heat={heat} />
+      {/* ⭐ the steam: TWO plumes on their own clocks off the head and the shoulder. One column
+          reads as a texture; two read as a body venting, and the pair opens as he heats. */}
+      {heat > 0.06 && (<>
+        <Vent x={HX - 40} y={a.headTop + 26 + slump * 30 + dying * 16} f={f} at={ARR[0] + 4} n={11} z={74}
+          s={0.40 + heat * 0.95} rate={0.7 + heat * 1.5} hot={heat} spread={0.9} seed={1} />
+        <Vent x={HX + 104} y={a.headTop + 84 + slump * 30 + dying * 16} f={f} at={ARR[1] + 2} n={8} z={74}
+          s={0.32 + heat * 0.82} rate={0.6 + heat * 1.4} hot={heat} spread={1.25} seed={5} />
+      </>)}
+      {/* and he sweats it out from the second file on — heat plus effort is what reads as
+          "about to fail" at thumbnail size, where a face cannot */}
+      {heat > 0.55 && <Sweat x={HX} y={GY - HS * 0.70 + slump * 30} f={f} at={ARR[1] + 6} n={7} z={73} s={0.78} rate={1.3} />}
+      {/* the bay's own fault lamp answers him once he is over */}
+      {/* ⛔ the lamp used to come up eight frames AFTER the third file, so it had no cue of its
+          own and read as unmotivated. It snaps on WITH the impact now, under the same hit
+          ([[feedback_cues_land_on_sentence_ends]] keeps it off "formatting."). */}
+      <ErrorLamp x={HX + 250} y={196} on={E(f, ARR[2], ARR[2] + 5, 0, 1, OUT)} f={f} s={0.9} z={50} />
       {/* the pile gives way with him */}
       {f >= 78 && f < 99 && (<>
         <Fall x={HX - 150} y={GY - 120} w={300} f={f} at={78} n={16} z={72} c={mxh(BONE, 0.1)} rate={1.5} s={1.2} />
@@ -272,6 +300,10 @@ export const PRESS: React.FC<SP> = ({ v, dur }) => {
   const hand = { x: HX + HS * 0.36, y: GY - HS * 0.5 };
   const slotIn = { x: PX - 190, y: PY - 100 };
   const slotOut = { x: PX + 210, y: PY - 84 };
+  /* ⭐ THE PAYOFF OF THE JAM IS ON HIS BODY. He walks in still scorched from the chute and comes
+     down one step for every file the press strips — the sentence is "this tool strips all the
+     junk", and the thing being relieved is him. */
+  const heat = Math.max(0, 0.86 - E(f, 4, 26, 0, 0.24, OUT) - E(f, 36, 58, 0, 0.20, OUT) - E(f, 68, 92, 0, 0.20, OUT));
   return (
     <Scene p={p} slug="" push={[0, dur, 1.03]} vig={0.48}>
       <Cam s={sh.s} x={sh.x} y={sh.y} z={12}>
@@ -306,8 +338,11 @@ export const PRESS: React.FC<SP> = ({ v, dur }) => {
           : null))}
         <Contact x={HX} y={GY - 10} w={HS * 0.8} o={0.34} />
         <Forearm x0={HX + HS * 0.30} y0={GY - HS * 0.52} x1={hand.x + 10} y1={hand.y} w={20} z={58} />
-        <Rig f={f} x={HX} y={GY} size={HS} z={56} act={1} gaze={1.2} ph={0.3}
+        <Rig f={f} x={HX} y={GY} size={HS} z={56} act={1} gaze={1.2} ph={0.3} heat={heat}
           cheer={E(f, 26, 34, 0, 0.6, OUT) - E(f, 40, 46, 0, 0.6, OUT) + E(f, 88, 96, 0, 1, BACK)} />
+        {/* the last of the steam coming off him, thinning as the press takes the load */}
+        {heat > 0.10 && <Vent x={HX - 24} y={GY - HS * 0.86} f={f} at={0} n={7} z={74}
+          s={0.28 + heat * 0.66} rate={0.5 + heat * 1.1} hot={heat} spread={0.85} seed={3} />}
         <CrewBand f={f} repo={repo} n={4} size={184} seed={BANDSEED[v] + 2} at={-40} x0={300} />
         <Drum x={W + 20 + L.c} y={H + 40} s={1.1} z={90} c={dkh(repo.c2, 0.1)} />
       </Cam>
@@ -365,7 +400,10 @@ export const READ: React.FC<SP> = ({ v, dur }) => {
         <SheetBelt y={beltY} f={f} z={36} rate={7.2 + (v === "steel" ? 1 : 0)} s={0.58} />
         <Contact x={HX} y={GY - 10} w={HS * 0.8} o={0.34} />
         <Rig f={f} x={HX} y={GY} size={HS} z={56} act={3} gaze={gaze} ph={0.9} cheer={tick}
-          stern={read > 0 && read < 1 ? 0.35 : 0} />
+          stern={read > 0 && read < 1 ? 0.35 : 0} heat={0.22 * (1 - E(f, 6, 34, 0, 1, OUT))} />
+        {/* the last wisp leaves him as the clean sheet arrives: the recovery finishes ON SCREEN */}
+        {f < 30 && <Vent x={HX + 20} y={GY - HS * 0.88} f={f} at={0} n={5} z={74}
+          s={0.34 * (1 - E(f, 4, 30, 0, 1, OUT))} rate={0.7} hot={0.2} spread={0.8} seed={7} />}
         {/* two forearms holding the sheet once it is lifted */}
         {lift > 0.2 && (<>
           <Forearm x0={HX - HS * 0.36} y0={GY - HS * 0.55} x1={sx + 90} y1={sy + 30} w={20} z={64} />
@@ -427,6 +465,10 @@ export const CRAM: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
   const MX = 560 + L.a * 0.3;
   const arrivals = [10 + lead, 26 + lead, 46 + lead, 66 + lead];
   const jolt = arrivals.reduce((m, at) => { const t = f - at + 10; return t >= 0 && t < 8 ? Math.max(m, 1 - t / 8) : m; }, 0);
+  /* ⭐ THE SAME DEVICE ON THE SECOND OVERLOAD. Four agents crammed into one window is the same
+     shape as three files down one chute, so it costs him the same way — a step of heat per agent,
+     and he is scorched by the fourth. */
+  const heat = arrivals.reduce((m, at, i) => Math.max(m, E(f, at, at + 12, 0, 0.20 + i * 0.24, OUT)), 0);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.5}>
       <Cam {...punch(pick(v, 1.16, 1.42, 1.06) * pushK(f, 2, dur, 0.14), pick(v, MX, MX, MX - 30), pick(v, 400, 372, 440))} z={12}>
@@ -447,7 +489,14 @@ export const CRAM: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
         </div>
         <Contact x={150} y={GY - 10} w={180} o={0.34} />
         <Rig f={f} x={150 + L.b * 0.3} y={GY} size={222} z={56} act={3} gaze={1.4} stern={E(f, 20 + lead, 40 + lead, 0, 1, OUT)}
-          shock={jolt > 0.3 ? 0.7 : 0} ph={0.4} />
+          shock={jolt > 0.3 ? 0.7 : 0} ph={0.4} heat={heat} strain={heat * 0.34} />
+        {heat > 0.08 && (<>
+          <Vent x={150 + L.b * 0.3 - 26} y={GY - 222 * 0.84} f={f} at={arrivals[0] + 4} n={8} z={74}
+            s={0.30 + heat * 0.72} rate={0.6 + heat * 1.4} hot={heat} spread={0.9} seed={2} />
+          <Vent x={150 + L.b * 0.3 + 62} y={GY - 222 * 0.58} f={f} at={arrivals[1] + 2} n={6} z={74}
+            s={0.24 + heat * 0.58} rate={0.5 + heat * 1.2} hot={heat} spread={1.2} seed={6} />
+        </>)}
+        {heat > 0.6 && <Sweat x={150 + L.b * 0.3} y={GY - 222 * 0.70} f={f} at={arrivals[2] + 4} n={6} z={73} s={0.66} rate={1.3} />}
         <CrewBand f={f} repo={repo} n={4} size={184} seed={BANDSEED[v] + 4} at={-40} />
         <Drum x={W + 10 + L.c} y={H + 40} s={1.0} z={90} c={dkh(repo.c2, 0.2)} />
       </Cam>
@@ -484,7 +533,11 @@ export const SPLIT: React.FC<SP> = ({ v, dur }) => {
       <Monitor x={MX} y={GY - 108} f={f} w={560} h={300} arrivals={arrivals} split={grow} splitAt={6} states={states} s={0.86} printAt={36} />
       <Contact x={150} y={GY - 10} w={180} o={0.34} />
       <Rig f={f} x={150 + L.b * 0.3} y={GY} size={222} z={56} act={3} gaze={1.2} ph={0.4}
+        heat={0.62 * (1 - E(f, 6, 40, 0, 1, OUT))}
         cheer={E(f, 36, 46, 0, 1, BACK) - E(f, 70, 80, 0, 0.5, IO)} shock={E(f, 4, 10, 0, 0.6, OUT) - E(f, 14, 20, 0, 0.6, OUT)} />
+      {/* he cools as the wall of panels opens — the split is what takes the load off him */}
+      {f < 44 && <Vent x={150 + L.b * 0.3 - 20} y={GY - 222 * 0.86} f={f} at={0} n={7} z={74}
+        s={0.62 * (1 - E(f, 4, 42, 0, 1, OUT))} rate={0.9} hot={0.5} spread={0.9} seed={4} />}
       <CrewBand f={f} repo={repo} n={4} size={184} seed={BANDSEED[v] + 5} at={-40} cheer={E(f, 40, 50, 0, 1, OUT)} />
       <Drum x={W + 10 + L.c} y={H + 40} s={1.0} z={90} c={dkh(repo.c2, 0.2)} />
       </Cam>
@@ -607,7 +660,10 @@ export const SWAP: React.FC<SP> = ({ v, dur }) => {
         <ShopWall p={p} f={f} seed={6} bay={repo} door={false} pegX={700} pegW={300} />
         {/* the dumb core visible in the dome, then gone, then the new one */}
         <Contact x={HX} y={GY - 10} w={HS * 0.8} o={0.36} />
+        {/* ⭐ "GETTING DUMB" IS THE OTHER FAILURE STATE. Not heat — the colour going OUT of him,
+            all the way to ash, and back the instant the live brain seats. */}
         <Rig f={f} x={HX} y={GY} size={HS} z={56} act={f >= 84 ? 2 : 3} ph={1.1} kit={kit} xeyes={dumb > 0.5 ? 1 : 0}
+          drain={dumb * 0.88}
           gaze={locked ? 0.3 : 0} strain={refuse ? 0.7 : tear > 0 && f < 58 ? 0.4 : dropIn > 0.9 && f < 78 ? 0.5 : f < 28 ? 0.12 : 0}
           shock={hic} stern={locked ? E(f, 74, 84, 0.6, 0, OUT) : 0} cheer={E(f, 86, 94, 0, 1, BACK)} />
         {/* the dim core being lifted out by the claw */}
@@ -739,6 +795,9 @@ export const MANIFOLD: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
   const flowFill = E(f, POUR, POUR + 24, 0, 1, OUT);
   const slump = err ? E(f, ERR, ERR + 12, 0, 0.46, OUT) : E(f, SLAM, SLAM + 14, 0.46, 0, OUT);
   const hic = err ? Math.max(0, Math.sin(f * 0.62)) * 0.44 : 0;
+  /* ⭐ AND THE EMPTY TANK DRAINS HIM AS WELL — the same ash the dumb model put on him at 25s, so
+     the two "your agent is dead" beats rhyme and the pour reads as the cure. */
+  const starve = E(f, 8 + lead, ERR + 6, 0, 0.9, IO) * (1 - E(f, POUR, POUR + 16, 0, 1, OUT));
   /* the cartridge that swaps in: it flies from the rack on the left into his tank */
   const ride = E(f, SLAM - 18, SLAM, 0, 1, IN_Q);
   const slam = f >= SLAM ? Math.exp(-(f - SLAM) / 4) : 0;
@@ -775,7 +834,7 @@ export const MANIFOLD: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
         )}
         <Contact x={HX} y={GY - 10} w={HS * 0.8 + slam * 40} o={0.36} />
         <Rig f={f} x={HX} y={GY} size={HS} z={56} act={f < ERR ? 0 : 3} ph={0.5} kit={{ tank: 1, gauge }}
-          strain={Math.max(slump, slam * 0.7)} stern={err ? 0.62 : 0}
+          drain={starve} strain={Math.max(slump, slam * 0.7)} stern={err ? 0.62 : 0}
           shock={f >= ERR && f < ERR + 10 ? 0.85 : slam > 0.4 ? 0.7 : hic}
           xeyes={f >= ERR + 6 && f < SLAM ? 1 : 0}
           cheer={E(f, POUR + 14, POUR + 26, 0, 1, BACK)} gaze={f < 20 ? 1.3 : f < THROW ? -1 : 0.4} />
