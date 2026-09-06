@@ -13,7 +13,7 @@ import {
   TickPile, DoneChip, SkillFile, StopHook, LedgerTable, CmdLine, OutputBlock, ExitStamp,
   Toast, ErrStack, SysCard, Fleck, Selector, WallClock, PaneStack, Bin, Dev,
   StampTool, ClaimBoard, Sweep, PipRow, DeskFit, RowTower, AgentRow, BayWall,
-  PromptCard, Flurry,
+  PromptCard, Flurry, JobCan, Gauge, TestRig, Conveyor,
 } from "./AdhProps";
 
 /* ===========================================================================
@@ -177,88 +177,54 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
   const OP: Record<Variant, number> = { house: 0, amber: 0, steel: 2 };
   const o = OP[v];
 
-  /* ── the beat clock, in this shot's own frames ─────────────────────────── */
-  const COMMIT = 13, DOWN = 19, SLAM = 27, TICK = 31, LIFT = 48;
-  const SLAMS = [SLAM, 52];
+  /* ⛔⛔⛔ SCRAPPED AND REMADE. Alex: *"no this hook is horrible just scrap it
+     completely and remake it again."*
+     ⭐⭐⭐ AND FOUR REJECTIONS OF ONE HOOK IS ONE PROBLEM. All three previous
+     versions shared a concept — **a hero performing a repetitive falsifying
+     action on a queue** (ticking rows / stamping rows / capping cans). Three
+     costumes, one idea, which is why four rounds of better drawing never moved
+     the note (`feedback_one_concept_four_costumes`).
 
-  /* the raise before each blow, and the SPRING BOWS under the weight — a rigid
-     stick reads as someone holding a prop (§11: WEIGHT IS DEFORMATION) */
-  const cycle = (at: number) => {
-    const up = E(f, at - 26, at - 8, 0, 1, IO);          /* raise */
-    const drop = E(f, at - 8, at, 0, 1, IN_Q);           /* the fall */
-    return { up, drop };
-  };
-  const near = SLAMS.reduce((acc, at) => (Math.abs(f - at) < Math.abs(f - acc) ? at : acc), SLAM);
-  const { up, drop } = cycle(near);
-  const raised = Math.max(0, up - drop);
-  /* the blow itself, and the damped recoil that follows it */
-  const press = SLAMS.reduce((a2, at) =>
-    Math.max(a2, f >= at && f < at + 9 ? Math.exp(-(f - at) / 3.2) : 0), 0);
-  const recoil = SLAMS.reduce((a2, at) =>
-    a2 + (f > at ? Math.sin((f - at) * 0.8) * Math.exp(-(f - at) / 5.5) * 6.5 : 0), 0);
-  /* the board takes it */
-  const jolt = SLAMS.reduce((a2, at) =>
-    Math.max(a2, f >= at ? Math.sin((f - at) * 0.9) * Math.exp(-(f - at) / 4.4) : 0), 0);
+     MECHANISM: **HOLLOW.** A sealed thing turns out to be empty. Not an action
+     repeated on a queue — a single CONTAINER FAILING, once, in close-up.
 
-  /* HIS BODY. He drops INTO the blow and squashes — the measured lever that
-     moved reel 112 from 8.94 to 14.09 with the set untouched. */
-  const dropY = drop * 40 - raised * 14;
-  const strain = 0.34 + raised * 0.5 + press * 0.5;
+     THE EVENT, all four parts:
+       BEFORE   f0 he stands beside a job canister the size of his own body,
+                sealed, green-capped, hand resting on it, presenting it. The
+                gauge on the rig behind him reads ZERO and he is not looking.
+       TRIGGER  f13 he throws the release lever.
+       TRAVEL   f19-27 the shell SPLITS and the two halves swing 150px apart —
+                0.43 of his own body width each, and the whole object opens.
+       ARRIVAL  f27 it is EMPTY. Nothing inside but a lit floor. It COSTS: the
+                halves recoil, dust, a ring, the rig's lamp flips RED and its
+                needle slams back to zero.
+       ⛔ f52 HE IS ALREADY SEALING THE NEXT ONE. It does not resolve.
+     ⭐ Then the sentence's own order, on measured words: the notification lands
+     on "distracted" (f50-66), he walks off on "skipping" (f66-100), and on
+     "lying" (f101-132) the cans behind him seal THEMSELVES, green, untested. */
+  const PULL = 13, OPEN = 19, EMPTY = 27, NEXT = 52;
+  const pull = E(f, o + PULL, o + OPEN, 0, 1, OUT);
+  const open = E(f, o + OPEN, o + EMPTY, 0, 1, IO);
+  const bang = f >= o + EMPTY ? Math.exp(-(f - o - EMPTY) / 4.6) : 0;
+  const shellRecoil = f >= o + EMPTY
+    ? Math.sin((f - o - EMPTY) * 0.8) * Math.exp(-(f - o - EMPTY) / 5.5) * 9 : 0;
+  const halfX = open * 150 + shellRecoil;
 
-  /* the rows that go green, one per blow */
-
-  /* ⭐⭐⭐ THE SENTENCE TURNS ON **DISTRACTED**, AND THAT HAS TO BE THE PICTURE.
-     `feedback_illustrate_the_sentence_not_the_set`: run the MUTE TEST on the
-     hook's verb. Muted, rev 9 read as "a Claude stamps a stack" — which is the
-     LYING clause, not the DISTRACTED one, and "distracted" is the word the whole
-     reel turns on. It was demoted to a toast sliding past behind him.
-     The shot is now the sentence, in its own measured order:
-       f0-27    he stamps once. The job, and the lie: DONE on an empty receipt.
-       f46-66   "getting distracted" — a notification lands BIG, centre frame,
-                and he TURNS to it.
-       f66-100  "skipping your tasks" — he WALKS AWAY toward it, 190px, over
-                half his own body width, and the prompts keep flying in and
-                PILE UP UNSTAMPED behind him.
-       f100-135 "lying to you about it" — the rows tick themselves green in an
-                ascending run while he is not even looking, and the tower sheds.
-     ⛔ He never comes back. The shot does not resolve. */
-  const toast = E(f, o + 40, o + 58, 1180, 738, OUT);   /* it ARRIVES, and it is
-     BIG enough to be the reason he turns — but ⛔ not frame-covering: at s=1.22
-     centred it hid the hero, the tower and the blow all at once and the hook
-     lost 1.9 of motion to one static rectangle. */
+  const toast = E(f, o + 40, o + 58, 1180, 730, OUT);
   const away = E(f, o + 52, o + 66, 0, 1, OUT);
-  const leave = E(f, o + 66, o + 100, 0, 190, IO);          /* he goes after it */
-  /* the rows that tick themselves while he is gone — an ascending run */
-  const SELF = [102, 110, 118, 126];
+  const leave = E(f, o + 66, o + 100, 0, 196, IO);
+  /* the ones that seal THEMSELVES once he is gone */
+  const SELF = [102, 112, 122, 130];
   const selfDone = SELF.filter((a2) => f >= o + a2).length;
-  const done = 3 + SLAMS.filter((at) => f >= at).length + selfDone;
+  const sealK = (i: number) => E(f, o + SELF[i] - 12, o + SELF[i], 0, 1, IN_Q);
 
-  /* the stamp's own position, hinged off his shoulder */
-  const devX = 262 + L.a * 0.4 - leave;
+  const devX = 276 + L.a * 0.4 - leave;
   const size = 356;
-  const shX = devX + 118, shY = GY - size * 0.56;
-  /* ⛔ THE RESERVED BAND. Nothing may enter panel y 112..210 (`BAND_Y`), and the
-     raised stamp and the board header were both sitting inside it, which is why
-     they read as clipped. The stamp is 202px tall at s=1.15, so its base has to
-     stay at or below 420 at full raise: 486 - 66 = 420, top = 218. */
-  const stampX = 542 + L.b * 0.3;
-  const stampY = 566 - raised * 70 + drop * 46 + press * 9;
+  const lever = E(f, o + PULL, o + PULL + 7, 0, 1, OUT);
 
-  /* ⭐⭐⭐ "MORE INTERESTING MOTION IN THE HOOK". Two travelling events per blow,
-     both made of the reel's OWN object rather than blank rectangles:
-       IN   a prompt flies in from off-frame right and SLAPS onto the tower,
-            12 frames ahead of each blow — the work arriving faster than he
-            fakes it, and an arrival is what a hold is scored against
-       OUT  the blow knocks a FLURRY of sheets loose, each on its own clock,
-            tumbling with real rotation and lateral drift before it settles
-     ⛔ Neither is a fade: both cross real distance, which is the only kind of
-     motion the eye resolves at 30fps on a phone. */
-  const inK = (at: number) => E(f, at - 22, at - 6, 0, 1, IN_Q);
-  const slide = SLAMS.reduce((a2, at) => Math.max(a2, E(f, at, at + 26, 0, 1, OUT)), 0);
-
-  const SHOT: Shot[] = shotsFor(v, [{ at: 0, s: 1.06, x: 0, y: 16 },
-    { at: 67, s: 1.22, x: -120, y: 34 },
-    { at: 102, s: 1.10, x: 74, y: 24 }]);
+  const SHOT: Shot[] = shotsFor(v, [{ at: 0, s: 1.10, x: 0, y: 18 },
+    { at: 67, s: 1.24, x: -120, y: 32 },
+    { at: 102, s: 1.08, x: 76, y: 22 }]);
   const sh = shotAt(f, SHOT);
 
   return (
@@ -268,133 +234,117 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
           rake={0.09 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={3.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
         <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={1 - E(f, 0, dur, 0, 0.5, LIN)} run={1} />
-        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
-            own objects: skill files on hooks, cable coils, lit sub-agent bays
-            and pin-toothed modules, 10x3 on rails, each swaying. This is why
-            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={72 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.72}
           rows={v === "amber" ? 2 : v === "steel" ? 3 : 2} />
-        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
-            cables, plant, chair back — the silhouette variety the note asked for */}
-        <DeskFit p={p} f={f} z={30} seed={1} side="l" lamp={1} mug={1} />
-
-        {/* ⭐ TWO BANDS OF UNSTAMPED WORK CROSSING BEHIND HIM, at two depths and
-            two rates. The measured table's biggest per-scene lever, and it means
-            something: the work is arriving faster than he is faking it. */}
-        <Runner y={286} f={f} z={11} rate={7.6} pitch={214} w={150} h={84}
-          c={mxh(UISH, 0.10)} c2={dkh(SLATE, 0.14)} kind="crate" rail={false} />
-        <Runner y={332} f={f} z={12} rate={-11.2} pitch={262} w={186} h={98}
-          c={mxh(UISH2, 0.02)} c2={dkh(SLATE, 0.26)} kind="crate" rail={false} />
-
-        {/* ⭐ THE LAMP CONE — a SHAPED cone, never a full-frame fill, and it is
-            where the saturated colour on a bone frame comes from. */}
         <div style={{ position: "absolute", left: 380, top: 120, width: 520, height: GY - 120,
-          zIndex: 16, opacity: 0.40,
-          clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
+          zIndex: 16, opacity: 0.40, clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
           background: `linear-gradient(180deg, ${hexa(GOLD, 0.56)} 0%, ${hexa(GOLD, 0.04)} 100%)` }} />
-        <Pool x={648} y={GY - 54} w={560} c={GOLD} o={0.30} z={17} />
+        <Pool x={620} y={GY - 54} w={560} c={GOLD} o={0.30} z={17} />
 
-        <PaneWall f={f} z={20} y0={12} h={150} n={6} lit={[1, 4]} signLit={1} />
+        {/* the rig behind him: its needle sits at ZERO and its lamp is RED,
+            because nothing was ever run through it */}
+        <TestRig x={868 + L.b * 0.3} y={GY - 44} s={0.92} z={44} f={f}
+          clamp={0.2} run={0.02} verdict={0} lever={0.06} />
 
-        {/* ⭐⭐⭐ THE LOAD, AND IT DWARFS HIM. Side by side with 122 HARDWARE (a
-            tiny Claude under three tilting GPU cards) and 135 AGENCY (an empty
-            desk filling with fifteen characters in 28 frames), rev 6's frame
-            was one hero and one board of his own size with a digit changing.
-            The stack now starts at NINE rows, runs off the top of frame, GROWS
-            by two on every blow and LEANS further as it does. He is stamping
-            the bottom of something that is about to come down on him. */}
-        <RowTower x={686 + L.c * 0.4} yBase={584} n={9 + SLAMS.filter((at) => f >= at).length * 2}
-          w={332} z={66} f={f} lean={0.4 + SLAMS.filter((at) => f >= at).length * 0.5} jolt={jolt} />
-        <ClaimBoard x={648 + L.c * 0.4} y={414} w={404} h={330} z={60} f={f}
-          done={done} jolt={jolt} big={`${done}/${R.tasks}`} />
-        {/* ⛔ FRAME-0 LUMA WAS 140.6 AGAINST A `>= 140` LAW — 0.6 of margin on a
-            hard gate is not margin. Two prompts already lying on the desk in
-            the foreground: bright paper where the frame needs it, on topic, and
-            they give the near ground something to be. */}
-        <PromptCard x={196 + L.a * 0.3} y={GY - 88} w={252} z={91} rot={-7}
-          seed={3} done={1} hue={SKY} clip ring />
-        <PromptCard x={378 + L.a * 0.3} y={GY - 52} w={236} z={90} rot={5}
-          seed={8} done={1} hue={VIOLET} clip={false} />
-        {/* ⭐ "LYING TO YOU ABOUT IT" — the rows tick THEMSELVES while he is gone,
-            in an ascending run, each with its own ring. He is not even here. */}
-        {SELF.map((a2, i) => f >= o + a2 && f < o + a2 + 16 ? (
-          <React.Fragment key={"sf" + a2}>
-            <Ring x={700 + L.c * 0.4} y={330 + i * 46} f={f} at={o + a2}
-              c={mxh(OKGREEN, 0.45)} z={94} s={0.5} dur={13} />
-            <Puff x={700 + L.c * 0.4} y={330 + i * 46} f={f} at={o + a2} c="#CFE8D8"
-              z={94} n={6} s={0.6} />
-          </React.Fragment>
-        ) : null)}
-        {/* ⭐ THE PROMPTS FLYING IN — and after he leaves they just PILE UP */}
-        {[20, 46, 70, 88, 104, 120].map((at) => {
-          const k = inK(at);
-          return k > 0.02 && k < 1 ? (
-            <PromptCard key={"in" + at} x={1180 - k * 470 + L.c * 0.3}
-              y={210 + k * 176} w={228} z={90}
-              rot={-38 + k * 46} seed={at} done={0} hue={TASKS[at % 6].c}
-              clip ring={at % 2 === 0} />
-          ) : null;
-        })}
-        {/* the ones that landed after he walked off, stacking UNSTAMPED */}
-        {[70, 88, 104, 120].map((at, i) => f >= o + at ? (
-          <PromptCard key={"pu" + at} x={392 + L.c * 0.3 + i * 26} y={GY - 46 - i * 20} w={196}
-            z={84 + i} rot={-9 + i * 6} seed={at} done={0} hue={TASKS[at % 6].c}
-            clip={i % 2 === 0} />
-        ) : null)}
-        {/* ⭐ AND THE FLURRY THE BLOW KNOCKS LOOSE */}
-        {SLAMS.map((at) => (
-          <Flurry key={"fu" + at} x={660 + L.c * 0.4} y={470} f={f} at={at} n={6} z={88}
-            s={0.92} spread={340} />
-        ))}
-        {/* the loose sheet the blow knocks off */}
-        {slide > 0.02 && (
-          <div style={{ position: "absolute", left: 838 + L.c * 0.4 + slide * 74,
-            top: 262 + slide * 300, width: 150, height: 42, zIndex: 66, borderRadius: 4,
-            background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
-            border: `3px solid ${hexa(INK, 0.2)}`, boxShadow: SH,
-            transform: `rotate(${slide * 62}deg)`, opacity: 1 - slide * 0.35 }} />
+        <Conveyor y={GY - 74} f={f} z={40} x0={-80} w={1180} rate={1.4} s={1.04} />
+
+        {/* ⭐⭐⭐ THE BIG ONE — body-sized, sealed, and it OPENS ONTO NOTHING.
+            Drawn as two half-shells that swing apart, with a lit empty floor
+            between them, so the emptiness is a SHAPE and not an absence. */}
+        <div style={{ position: "absolute", left: 596 + L.c * 0.3 - 150, top: GY - 372,
+          width: 300, height: 344, zIndex: 78 }}>
+          {/* the lit interior floor — what you see when it opens */}
+          <div style={{ position: "absolute", left: 42, right: 42, top: 44, bottom: 26,
+            borderRadius: "18px 18px 90px 90px",
+            background: `linear-gradient(180deg, ${dkh(TERM, 0.06)}, #070706 68%, ${hexa(GOLD, 0.10)})`,
+            boxShadow: `inset 0 8px 24px ${hexa("#000", 0.85)}` }}>
+            {open > 0.4 && (
+              <div style={{ position: "absolute", left: "18%", right: "18%", bottom: "12%",
+                height: 26, borderRadius: "50%", background: hexa(GOLD, 0.16) }} />
+            )}
+          </div>
+          {/* the two half-shells */}
+          {[-1, 1].map((sgn) => (
+            <div key={"hs" + sgn} style={{ position: "absolute", top: 22,
+              left: sgn < 0 ? 8 - halfX : undefined, right: sgn > 0 ? 8 - halfX : undefined,
+              width: 146, height: 300,
+              borderRadius: sgn < 0 ? "22px 6px 6px 78px" : "6px 22px 78px 6px",
+              transform: `rotate(${sgn * open * 7}deg)`, transformOrigin: sgn < 0 ? "0% 40%" : "100% 40%",
+              background: sgn < 0
+                ? `linear-gradient(90deg, ${dkh(STEEL, 0.46)}, ${mxh(STEEL, 0.28)} 70%, ${mxh(STEEL, 0.04)})`
+                : `linear-gradient(90deg, ${mxh(STEEL, 0.04)}, ${mxh(STEEL, 0.28)} 30%, ${dkh(STEEL, 0.48)})`,
+              border: `4px solid ${hexa("#000", 0.5)}`, boxShadow: SH_D }}>
+              {/* banding + bolts, so it reads as a pressure shell */}
+              {[0.16, 0.54, 0.84].map((t, i) => (
+                <div key={"bn" + i} style={{ position: "absolute", left: -4, right: -4, top: `${t * 100}%`,
+                  height: 16, background: `linear-gradient(180deg, ${mxh(STEEL, 0.34)}, ${dkh(STEEL, 0.4)})`,
+                  border: `2px solid ${hexa("#000", 0.34)}` }} />
+              ))}
+              {[0.24, 0.62].map((t, i) => (
+                <div key={"bl" + i} style={{ position: "absolute", [sgn < 0 ? "right" : "left"]: 12,
+                  top: `${t * 100}%`, width: 13, height: 13, borderRadius: "50%",
+                  background: `radial-gradient(circle at 34% 30%, ${hexa("#FFF", 0.34)}, ${hexa("#000", 0.6)})` } as any} />
+              ))}
+            </div>
+          ))}
+          {/* the green cap across the seam — the claim, before it opens */}
+          <div style={{ position: "absolute", left: 60 + halfX * 0.0, top: 0, width: 180, height: 52,
+            borderRadius: "58px 58px 10px 10px", opacity: 1 - open,
+            background: `linear-gradient(180deg, ${mxh(OKGREEN, 0.36)}, ${dkh(OKGREEN, 0.28)})`,
+            border: `5px solid ${hexa("#000", 0.44)}`, zIndex: 4 }}>
+            <div style={{ position: "absolute", left: 22, right: 22, top: 9, height: 4,
+              borderRadius: 2, background: hexa("#FFFFFF", 0.44) }} />
+          </div>
+        </div>
+        {/* it COSTS */}
+        {f >= o + EMPTY && f < o + EMPTY + 20 && (<>
+          <Ring x={596 + L.c * 0.3} y={GY - 210} f={f} at={o + EMPTY} c={mxh(DIFFR, 0.45)} z={92}
+            s={1.1} dur={18} />
+          <Puff x={596 + L.c * 0.3} y={GY - 200} f={f} at={o + EMPTY} c="#E8D8C8" z={92} n={12} s={1.0} />
+        </>)}
+
+        {/* ⛔ f52: HE IS ALREADY SEALING THE NEXT ONE */}
+        {f >= o + NEXT - 16 && (
+          <JobCan x={286 + L.c * 0.2} y={GY - 62} s={1.44} z={74} hue={TASKS[2].c}
+            capped={E(f, o + NEXT, o + NEXT + 10, 0, 1, BACK)} proved={0}
+            rot={Math.sin(f / 10) * 2} f={f} seed={4} />
         )}
-
-        {/* ⭐ THE SWEEP — a band crosses the board on every blow, so the change
-            PROPAGATES rather than just appearing. Highest-value shape in the
-            measured motion table. */}
-        {SLAMS.map((at) => (
-          <Sweep key={"sw" + at} k={E(f, at, at + 15, 0, 1, IO)} y={232} h={380}
-            c="#FFF0C8" z={76} w={230} o={0.44} />
-        ))}
-        {/* ⭐ the reel's own tally, in the reserved band, filling in a run */}
-        <PipRow lit={done} f={f} at={SLAM} pop={1} z={92} />
-
-        {/* THE BLOW LANDS AND IT COSTS */}
-        {SLAMS.map((at) => f >= at && f < at + 18 ? (
-          <React.Fragment key={"sl" + at}>
-            <Puff x={648 + L.c * 0.4} y={414 + 22} f={f} at={at} c="#E8DCC0" z={70} n={11} s={0.95} />
-            <Ring x={648 + L.c * 0.4} y={414 + 14} f={f} at={at} c={mxh(GOLD, 0.45)} z={70} s={0.8} dur={15} />
-          </React.Fragment>
+        {/* and the ones that seal THEMSELVES after he walks off */}
+        {SELF.map((a2, i) => f >= o + a2 - 14 ? (
+          <JobCan key={"sf" + a2} x={396 + i * 132 + L.c * 0.2} y={GY - 62} s={1.32}
+            z={76 + i} hue={TASKS[(i + 3) % 6].c} capped={sealK(i)} proved={0}
+            rot={(i % 2 ? 5 : -4)} f={f} seed={i + 7} />
+        ) : null)}
+        {SELF.map((a2, i) => f >= o + a2 && f < o + a2 + 15 ? (
+          <Ring key={"sr" + a2} x={396 + i * 132 + L.c * 0.2} y={GY - 150} f={f} at={o + a2}
+            c={mxh(OKGREEN, 0.45)} z={93} s={0.6} dur={13} />
         ) : null)}
 
-        {/* HIS ARM, then the STAMP hinged on the end of it */}
-        <Forearm x0={shX} y0={shY} x1={stampX} y1={stampY - 24} w={30} c={CLAY} z={84} />
-        <StampTool x={stampX} y={stampY} s={1.15} z={86} rot={-8 + recoil} press={press} recoil={recoil * 0.1} />
+        {/* ⭐ THE LEVER HE PULLS */}
+        <div style={{ position: "absolute", left: 452 + L.b * 0.3, top: GY - 250, width: 14,
+          height: 118, borderRadius: 7, zIndex: 80, transformOrigin: "50% 100%",
+          transform: `rotate(${-24 + lever * 58}deg)`,
+          background: `linear-gradient(90deg, ${dkh(STEEL, 0.42)}, ${mxh(STEEL, 0.3)}, ${dkh(STEEL, 0.46)})` }}>
+          <div style={{ position: "absolute", left: -9, top: -16, width: 32, height: 32,
+            borderRadius: "50%",
+            background: `radial-gradient(circle at 34% 30%, ${mxh(CLAY, 0.34)}, ${dkh(CLAY, 0.26)})` }} />
+        </div>
 
-        {/* THE CLAUDE — one body against the load */}
-        <Contact x={devX} y={GY - 6} w={206} o={0.36} z={44} />
-        <Dev f={f} x={devX} y={GY + dropY} i={0} size={size} z={62} at={o - 14} loop={1}
+        <Contact x={devX} y={GY - 6} w={208} o={0.36} z={44} />
+        <Dev f={f} x={devX} y={GY} i={0} size={size} z={62} at={o - 14} loop={1}
           extra={{ glasses: 1 }} gaze={away * 1.5}
-          shock={strain * 0.72} cheer={E(f, o + 96, o + 108, 0, 0.7, BACK)} />
-        {/* effort off the STILLEST part of him — his head — while he strains */}
-        {strain > 0.5 && (
-          <Steam x={devX} y={GY - size * 0.98} f={f} at={o + 2} n={6} z={64} s={0.8}
-            c="#D8CFC0" rate={1.2} />
-        )}
+          shock={pull * 0.4 + bang * 0.8}
+          cheer={E(f, o + 2, o + 12, 0, 0.8, BACK) - E(f, o + EMPTY, o + EMPTY + 8, 0, 0.8, IO)} />
 
-        {/* ⭐ "SECRETLY GETTING DISTRACTED" — it slides in and he never looks back */}
-        <Toast x={toast} y={GY - 268} s={0.94} z={92} f={f} hue={SKY} />
+        <Toast x={toast} y={GY - 268} s={0.94} z={96} f={f} hue={SKY} />
+        <Sweep k={E(f, o + EMPTY, o + EMPTY + 16, 0, 1, IO)} y={232} h={380} c="#FFD8C0"
+          z={90} w={240} o={0.44} />
+        <PipRow lit={1 + selfDone} f={f} at={o + EMPTY} pop={1} z={94} />
 
-        {/* ⛔ THE NEAR-EDGE CROP IN FRONT OF THE ACTION */}
-        <PaneStack x={W - 34 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.92} />
-        <Edge side="l" c={dkh(p.floor2, 0.34)} w={86} z={92} kind="post" />
+        <DeskFit p={p} f={f} z={30} seed={1} side="l" lamp={1} mug={1} />
+        <PaneStack x={W - 34 + L.c * 0.2} y={H - 4} n={6} z={95} s={0.92} />
+        <Edge side="l" c={dkh(p.floor2, 0.34)} w={86} z={93} kind="post" />
       </Cam>
     </Scene>
   );
@@ -817,12 +767,13 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
         {/* ⭐ MEASURED 9.68 with 47% HOLD. Prompts fly in and CLIP to the rail as
             the ledger prints, so the beat has arrivals across its whole span
             rather than a table filling in place. */}
+        {/* canisters roll in and queue as the ledger prints */}
         {[16, 32, 48, 64].map((at, i) => {
-          const k = E(f, at, at + 16, 0, 1, OUT);
+          const k = E(f, at, at + 22, 0, 1, IO);
           return k > 0.02 ? (
-            <PromptCard key={"lg" + at} x={1120 - k * 620 + L.c * 0.3}
-              y={214 + i * 40 - (1 - k) * 60} w={208} z={90 + i}
-              rot={-30 + k * 34} seed={at} done={0} hue={TASKS[i].c} clip={i % 2 === 0} />
+            <JobCan key={"lg" + at} x={1140 - k * (700 - i * 116) + L.c * 0.3}
+              y={GY - 96} s={1.14} z={90 + i} hue={TASKS[i].c} capped={0} proved={0}
+              rot={Math.sin(f / 8 + i) * 3} f={f} seed={i + 2} />
           ) : null;
         })}
         {/* the band that crosses the ledger as its last row closes */}
@@ -899,11 +850,13 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
         <ExitStamp x={786 + L.c * 0.4} y={318} s={1.0} z={90} k={stamp1} />
         <ExitStamp x={786 + L.c * 0.4} y={438} s={0.9} z={90} k={stamp2} />
         {/* ⭐ the row that finally has a receipt, leaving */}
+        {/* the job that finally HAS a seal, leaving */}
         {E(f, 88, dur, 0, 1, IN_Q) > 0.02 && (
-          <PromptCard x={300 + L.c * 0.3 - E(f, 88, dur, 0, 1, IN_Q) * 190}
-            y={GY - 150 + E(f, 88, dur, 0, 1, IN_Q) * 150}
-            w={228 + E(f, 88, dur, 0, 1, IN_Q) * 130} z={94}
-            rot={E(f, 88, dur, 0, 1, IN_Q) * 9} seed={7} done={1} hue={GREEN} clip ring />
+          <JobCan x={330 + L.c * 0.3 - E(f, 88, dur, 0, 1, IN_Q) * 200}
+            y={GY - 120 + E(f, 88, dur, 0, 1, IN_Q) * 150}
+            s={1.24 + E(f, 88, dur, 0, 1, IN_Q) * 0.7} z={94}
+            hue={GREEN} capped={1} proved={1} rot={E(f, 88, dur, 0, 1, IN_Q) * 10}
+            f={f} seed={7} />
         )}
         {[66, 82].map((at) => (
           <Flurry key={"rf" + at} x={786 + L.c * 0.4} y={370} f={f} at={at} n={3} z={93}
@@ -1052,8 +1005,10 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
         {/* ⭐ MEASURED 9.15 with 54% HOLD. ONE prompt crawls the full width across
             the whole beat — "one task at a time" as a single continuous travel —
             and every close sheds paper. */}
-        <PromptCard x={E(f, 4, dur - 6, -180, 1160) + L.b * 0.3} y={470} w={244} z={86}
-          rot={-4} seed={5} done={0} hue={CLAY} clip />
+        {/* ONE canister crawls the full width — "one task at a time", as travel */}
+        <Conveyor y={GY - 78} f={f} z={40} x0={-80} w={1180} rate={1.1} s={1.0} />
+        <JobCan x={E(f, 4, dur - 6, -180, 1160) + L.b * 0.3} y={GY - 68} s={1.5} z={86}
+          hue={CLAY} capped={0} proved={0} rot={Math.sin(f / 10) * 3} f={f} seed={5} />
         {[6, 21, 36, 51, 66].map((at) => (
           <Flurry key={"nf" + at} x={506 + L.b * 0.3} y={420} f={f} at={at} n={3} z={88}
             s={0.66} spread={260} />
@@ -1325,13 +1280,15 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
         {/* ⭐ MEASURED 8.22, the weakest scene. Four proved prompts fly in on the
             four spoken letters and land in a fan, each with a FILLED receipt —
             the reel's own object, arriving, on the beat. */}
+        {/* ⛔ NO PAPER. Four PROVED canisters land on the four spoken letters,
+            each with its round seal — the object the reel is actually about. */}
         {[8, 15, 22, 29].map((at, i) => {
-          const k = E(f, at, at + 14, 0, 1, OUT);
+          const k = E(f, at, at + 14, 0, 1, BACK);
           return k > 0.02 ? (
-            <PromptCard key={"cta" + at} x={186 + i * 34 + k * 40 + L.c * 0.3}
-              y={GY - 132 - i * 22 + (1 - k) * -220} w={214} z={88 + i}
-              rot={-16 + i * 9 + (1 - k) * -28} seed={at} done={1} hue={TASKS[i].c}
-              clip={i % 2 === 0} ring={i === 1} />
+            <JobCan key={"cta" + at} x={168 + i * 128 + L.c * 0.3}
+              y={GY - 128 + (1 - k) * -260} s={1.26} z={88 + i}
+              hue={TASKS[i].c} capped={1} proved={k} rot={(1 - k) * (i % 2 ? 26 : -26)}
+              f={f} seed={i} />
           ) : null;
         })}
         {[8, 15, 22, 29].map((at) => (

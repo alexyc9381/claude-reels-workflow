@@ -335,6 +335,226 @@ export const PipRow: React.FC<{ lit: number; y?: number; z?: number; d?: number;
 
 
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE MACHINE VOCABULARY.  ⛔⛔⛔ NO PAPER. NO SQUARES. NO RECTANGLES.
+
+   Alex, three times, escalating: *"too much like just shapes rectangles
+   squares"* → *"the prompts square papers etc needs to be way more
+   interesting"* → *"i dont want to see papers or squares or rectangles those
+   are just wayyy too boring."*
+
+   `feedback_repeated_note_means_wrong_object`: a note that repeats on the same
+   object means the OBJECT is wrong, and I kept answering it by drawing the
+   rectangle better. The root cause is the WORLD — "a Claude Code session" has
+   nothing in it but panes, cards and lists, so every fix produced more of them.
+
+   ⭐ The winners' vocabulary is MACHINES AND CHARACTERS, not documents: OX has
+   a live ox, a vault and crates; UNLAZY has a bell, a conveyor, a gate arch and
+   a bullpen. So the subject gets re-mapped onto a PROVING RIG, and every noun
+   below is round, cylindrical or piped:
+
+     a task              → a JOB CANISTER, a cylinder with a lit core
+     "saying it is done" → slapping a GREEN CAP on without running it
+     "prove its work"    → THE TEST RIG: a chamber, two pistons, a pressure
+                           GAUGE with a real needle, a lever and pipework
+     a verdict           → the needle swinging and a round LAMP going green
+     the queue           → a CONVEYOR on round rollers
+     ten sub-agents      → ten rigs on ten benches
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/** THE JOB CANISTER — the reel's new atom. A cylinder, not a card. */
+export const JobCan: React.FC<{ x: number; y: number; s?: number; z?: number; hue?: string;
+  capped?: number; proved?: number; rot?: number; f?: number; seed?: number }> =
+  ({ x, y, s = 1, z = 70, hue = CLAY, capped = 0, proved = 0, rot = 0, f = 0, seed = 1 }) => {
+  const w = 96 * s, h = 132 * s;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - h, width: w, height: h, zIndex: z,
+      transform: `rotate(${rot}deg)`, transformOrigin: "50% 100%" }}>
+      {/* 1 · the body — a cylinder: two vertical shades and a curved base */}
+      <div style={{ position: "absolute", left: 0, top: h * 0.14, width: w, height: h * 0.78,
+        borderRadius: `${w * 0.12}px ${w * 0.12}px ${w * 0.44}px ${w * 0.44}px`,
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.46)} 0%, ${mxh(STEEL, 0.30)} 34%, ${mxh(STEEL, 0.06)} 56%, ${dkh(STEEL, 0.50)} 100%)`,
+        border: `${2.6 * s}px solid ${hexa("#000", 0.46)}`, boxShadow: SH }} />
+      {/* 2 · the LIT CORE — a round window with the task's own colour in it */}
+      <div style={{ position: "absolute", left: w * 0.22, top: h * 0.34, width: w * 0.56,
+        height: w * 0.56, borderRadius: "50%",
+        background: `radial-gradient(circle at 38% 32%, ${mxh(hue, 0.42)}, ${dkh(hue, 0.30)})`,
+        border: `${3 * s}px solid ${hexa("#000", 0.5)}`,
+        boxShadow: `inset 0 ${2 * s}px ${4 * s}px ${hexa("#000", 0.4)}` }}>
+        <div style={{ position: "absolute", left: "20%", top: "14%", width: "26%", height: "22%",
+          borderRadius: "50%", background: hexa("#FFFFFF", 0.44) }} />
+      </div>
+      {/* 3 · two banding rings — fine repeated detail, and they say CYLINDER */}
+      {[0.24, 0.80].map((t, i) => (
+        <div key={"bd" + i} style={{ position: "absolute", left: -w * 0.03, top: h * t,
+          width: w * 1.06, height: h * 0.055, borderRadius: h * 0.03,
+          background: `linear-gradient(180deg, ${mxh(STEEL, 0.34)}, ${dkh(STEEL, 0.4)})`,
+          border: `${1.6 * s}px solid ${hexa("#000", 0.36)}` }} />
+      ))}
+      {/* 4 · THE CAP — green when he has declared it done */}
+      <div style={{ position: "absolute", left: w * 0.10, top: capped > 0.02 ? 0 : -h * 0.2,
+        width: w * 0.80, height: h * 0.19, borderRadius: `${w * 0.34}px ${w * 0.34}px ${w * 0.08}px ${w * 0.08}px`,
+        opacity: Math.min(1, capped * 1.6),
+        background: `linear-gradient(180deg, ${mxh(proved > 0.5 ? OKGREEN : DIFFG, 0.36)}, ${dkh(proved > 0.5 ? OKGREEN : DIFFG, 0.28)})`,
+        border: `${2.4 * s}px solid ${hexa("#000", 0.44)}` }}>
+        <div style={{ position: "absolute", left: "16%", right: "16%", top: "18%", height: 2.4 * s,
+          borderRadius: 2, background: hexa("#FFFFFF", 0.42) }} />
+      </div>
+      {/* 5 · the PROOF TAG — a round seal, and ONLY a run puts it there */}
+      {proved > 0.02 && (
+        <div style={{ position: "absolute", left: w * 0.62, top: h * 0.62, width: w * 0.40,
+          height: w * 0.40, borderRadius: "50%", transform: `scale(${Math.min(1, proved)})`,
+          background: `radial-gradient(circle at 36% 30%, ${mxh(OKGREEN, 0.4)}, ${dkh(OKGREEN, 0.36)})`,
+          border: `${3 * s}px solid ${hexa("#FFFFFF", 0.6)}`, display: "flex",
+          alignItems: "center", justifyContent: "center" }}>
+          <svg width="64%" height="64%" viewBox="0 0 24 24">
+            <path d="M6 12 L10 16 L18 7" fill="none" stroke="#FFF" strokeWidth={4}
+              strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/** THE GAUGE — a real dial: bezel, ticks, a red arc, a green arc, a needle. */
+export const Gauge: React.FC<{ x: number; y: number; s?: number; z?: number; k?: number;
+  fail?: number; f?: number }> = ({ x, y, s = 1, z = 84, k = 0, fail = 0, f = 0 }) => {
+  const d = 118 * s;
+  const ang = -120 + Math.max(0, Math.min(1, k)) * 240 + (k > 0.02 && k < 1 ? Math.sin(f / 2.2) * 5 : 0);
+  return (
+    <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d, zIndex: z,
+      borderRadius: "50%",
+      background: `radial-gradient(circle at 36% 30%, ${UISH}, ${dkh(UISH2, 0.16)})`,
+      border: `${7 * s}px solid ${dkh(STEEL, 0.40)}`, boxShadow: SH_D }}>
+      {/* the two arcs */}
+      <div style={{ position: "absolute", inset: 8 * s, borderRadius: "50%",
+        background: `conic-gradient(from 150deg, ${hexa(DIFFR, 0.5)} 0deg 96deg, ${hexa(OKGREEN, 0.5)} 96deg 240deg, transparent 240deg)` }} />
+      <div style={{ position: "absolute", inset: 18 * s, borderRadius: "50%", background: UISH }} />
+      {/* ticks */}
+      {Array.from({ length: 11 }, (_, i) => (
+        <div key={"gt" + i} style={{ position: "absolute", left: "50%", top: 12 * s, width: 2.6 * s,
+          height: 9 * s, background: hexa(INK, 0.5), transformOrigin: `50% ${d / 2 - 12 * s}px`,
+          transform: `translateX(-50%) rotate(${-120 + i * 24}deg)` }} />
+      ))}
+      {/* the needle + hub */}
+      <div style={{ position: "absolute", left: "50%", top: "16%", width: 4 * s, height: "36%",
+        background: DIFFR, transformOrigin: "50% 100%",
+        transform: `translateX(-50%) rotate(${ang}deg)`, borderRadius: 2 }} />
+      <div style={{ position: "absolute", left: "50%", top: "50%", width: 14 * s, height: 14 * s,
+        marginLeft: -7 * s, marginTop: -7 * s, borderRadius: "50%",
+        background: `radial-gradient(circle at 34% 30%, ${mxh(STEEL, 0.3)}, ${dkh(STEEL, 0.44)})` }} />
+    </div>
+  );
+};
+
+/** THE TEST RIG — the machine that proves a canister. Chamber, two PISTONS that
+    actually extend, a gauge, a lever that throws, pipework, and a verdict lamp. */
+export const TestRig: React.FC<{ x: number; y: number; s?: number; z?: number; f: number;
+  clamp?: number; run?: number; verdict?: number; lever?: number }> =
+  ({ x, y, s = 1, z = 60, f, clamp = 0, run = 0, verdict = 0, lever = 0 }) => {
+  const w = 420 * s, h = 340 * s;
+  return (
+    <div style={{ position: "absolute", left: x - w / 2, top: y - h, width: w, height: h, zIndex: z }}>
+      {/* 1 · the frame */}
+      <div style={{ position: "absolute", left: 0, top: h * 0.20, width: w, height: h * 0.80,
+        borderRadius: 12 * s,
+        background: `linear-gradient(178deg, ${mxh(SLATE, 0.16)}, ${dkh(SLATE, 0.32)} 60%, ${dkh(SLATE, 0.5)})`,
+        border: `${4 * s}px solid ${hexa("#000", 0.5)}`, boxShadow: SH_D }} />
+      {/* 2 · the CHAMBER — a round port, not a window */}
+      <div style={{ position: "absolute", left: w * 0.30, top: h * 0.30, width: w * 0.34,
+        height: w * 0.34, borderRadius: "50%",
+        background: `radial-gradient(circle at 40% 34%, ${dkh(TERM, 0.02)}, #060606)`,
+        border: `${8 * s}px solid ${dkh(STEEL, 0.36)}`,
+        boxShadow: `inset 0 ${4 * s}px ${9 * s}px ${hexa("#000", 0.8)}` }}>
+        {/* the eight bolts round the port */}
+        {Array.from({ length: 8 }, (_, i) => (
+          <div key={"pb" + i} style={{ position: "absolute", left: "50%", top: -7 * s,
+            width: 8 * s, height: 8 * s, borderRadius: "50%",
+            background: `radial-gradient(circle at 34% 30%, ${hexa("#FFF", 0.34)}, ${hexa("#000", 0.6)})`,
+            transformOrigin: `50% ${w * 0.17 + 7 * s}px`,
+            transform: `translateX(-50%) rotate(${i * 45}deg)` }} />
+        ))}
+      </div>
+      {/* 3 · TWO PISTONS that close on the job */}
+      {[0, 1].map((i) => (
+        <React.Fragment key={"pi" + i}>
+          <div style={{ position: "absolute", left: i ? w * 0.66 : w * 0.10, top: h * 0.44,
+            width: w * 0.24, height: h * 0.12, borderRadius: 6 * s,
+            background: `linear-gradient(180deg, ${mxh(STEEL, 0.12)}, ${dkh(STEEL, 0.42)})`,
+            border: `${2.6 * s}px solid ${hexa("#000", 0.44)}` }} />
+          <div style={{ position: "absolute",
+            left: i ? w * 0.62 - clamp * w * 0.05 : w * 0.28 + clamp * w * 0.05,
+            top: h * 0.475, width: w * 0.10 + clamp * w * 0.04, height: h * 0.052,
+            borderRadius: 4 * s,
+            background: `linear-gradient(180deg, ${mxh(STEEL, 0.42)}, ${dkh(STEEL, 0.14)})` }} />
+        </React.Fragment>
+      ))}
+      {/* 4 · PIPEWORK — curves, the opposite of a rectangle */}
+      <svg width={w} height={h} style={{ position: "absolute", left: 0, top: 0, zIndex: 3,
+        overflow: "visible", pointerEvents: "none" }}>
+        <path d={`M ${w * 0.06} ${h * 0.34} C ${w * 0.02} ${h * 0.62}, ${w * 0.16} ${h * 0.70}, ${w * 0.24} ${h * 0.86}`}
+          fill="none" stroke={dkh(BRASS, 0.24)} strokeWidth={13 * s} strokeLinecap="round" />
+        <path d={`M ${w * 0.94} ${h * 0.32} C ${w * 0.99} ${h * 0.58}, ${w * 0.86} ${h * 0.68}, ${w * 0.78} ${h * 0.86}`}
+          fill="none" stroke={dkh(BRASS, 0.32)} strokeWidth={10 * s} strokeLinecap="round" />
+      </svg>
+      {/* 5 · THE GAUGE, and it reads the run */}
+      <Gauge x={w * 0.80} y={h * 0.34} s={0.72 * s} z={6} k={run} f={f} />
+      {/* 6 · THE LEVER — it throws through 62 degrees */}
+      <div style={{ position: "absolute", left: w * 0.14, top: h * 0.24, width: 11 * s,
+        height: h * 0.22, borderRadius: 6 * s, transformOrigin: "50% 100%",
+        transform: `rotate(${-28 + lever * 62}deg)`,
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.4)}, ${mxh(STEEL, 0.3)}, ${dkh(STEEL, 0.44)})`,
+        zIndex: 6 }}>
+        <div style={{ position: "absolute", left: -6 * s, top: -12 * s, width: 23 * s, height: 23 * s,
+          borderRadius: "50%",
+          background: `radial-gradient(circle at 34% 30%, ${mxh(CLAY, 0.34)}, ${dkh(CLAY, 0.26)})` }} />
+      </div>
+      {/* 7 · THE VERDICT LAMP — round, in a bezel */}
+      <div style={{ position: "absolute", left: w * 0.44, top: h * 0.06, width: 46 * s, height: 46 * s,
+        borderRadius: "50%", zIndex: 6, border: `${5 * s}px solid ${dkh(STEEL, 0.42)}`,
+        background: verdict > 0.5
+          ? `radial-gradient(circle at 38% 32%, ${mxh(OKGREEN, 0.44)}, ${dkh(OKGREEN, 0.3)})`
+          : `radial-gradient(circle at 38% 32%, ${mxh(DIFFR, 0.30)}, ${dkh(DIFFR, 0.4)})` }}>
+        <div style={{ position: "absolute", left: "22%", top: "16%", width: "28%", height: "22%",
+          borderRadius: "50%", background: hexa("#FFFFFF", 0.4) }} />
+      </div>
+      {/* 8 · the maker's plate, with the mark */}
+      <div style={{ position: "absolute", left: w * 0.06, bottom: h * 0.05, zIndex: 6 }}>
+        <MarkTile rel d={30 * s} z={2} />
+      </div>
+    </div>
+  );
+};
+
+/** THE CONVEYOR — round rollers and a moving belt, the queue with no paper. */
+export const Conveyor: React.FC<{ y: number; f: number; z?: number; x0?: number; w?: number;
+  rate?: number; s?: number }> =
+  ({ y, f, z = 40, x0 = -80, w = 1180, rate = 2.6, s = 1 }) => (
+  <div style={{ position: "absolute", left: x0, top: y, width: w, height: 62 * s, zIndex: z }}>
+    {/* the belt */}
+    <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 24 * s, borderRadius: 6 * s,
+      background: `linear-gradient(180deg, ${dkh(SLATE, 0.10)}, ${dkh(SLATE, 0.42)})`,
+      border: `${2.6 * s}px solid ${hexa("#000", 0.44)}`, overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0,
+        background: `repeating-linear-gradient(90deg, ${hexa("#FFFFFF", 0.09)} 0 ${18 * s}px, transparent ${18 * s}px ${36 * s}px)`,
+        transform: `translateX(${(f * rate) % (36 * s)}px)` }} />
+    </div>
+    {/* THE ROLLERS — circles, and they TURN */}
+    {Array.from({ length: Math.ceil(w / (74 * s)) }, (_, i) => (
+      <div key={"rl" + i} style={{ position: "absolute", left: i * 74 * s + 12 * s, top: 24 * s,
+        width: 34 * s, height: 34 * s, borderRadius: "50%",
+        background: `radial-gradient(circle at 36% 32%, ${mxh(STEEL, 0.24)}, ${dkh(STEEL, 0.46)})`,
+        border: `${2.2 * s}px solid ${hexa("#000", 0.4)}` }}>
+        <div style={{ position: "absolute", left: "46%", top: "8%", width: 3 * s, height: "42%",
+          background: hexa("#000", 0.34), transformOrigin: "50% 100%",
+          transform: `rotate(${(f * rate * 5 + i * 40) % 360}deg)` }} />
+      </div>
+    ))}
+  </div>
+);
+
 /* ---- THE PROMPT — and it is not a white rectangle ------------------------ */
 /** ⭐⭐⭐ ALEX: *"the prompts square papers etc needs to be way more interesting
     here where right now its not whatsoever."* He is right: every sheet in this

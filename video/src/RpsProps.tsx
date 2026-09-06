@@ -1348,3 +1348,103 @@ export const Sled: React.FC<{ x: number; y: number; f: number; s?: number; z?: n
     </div>
   );
 };
+
+/* =========================================================================
+   ⭐⭐⭐ THE ROTOR — the real Claude mark, huge, in a machine that will not turn.
+
+   ⛔ Alex, rev 8, rejecting the haul: *"I don't understand the concept of the gem
+   coming in and he's wheeling the thing, wtf is he even wheeling, it looks so odd
+   and out of place, it doesn't even seem on topic with Claude — maybe it should be
+   a big logo of Claude with white background idk."*
+
+   Rounds 1-3 were passive accretion and round 4 fixed the SHAPE but introduced a
+   different defect: the load was an INVENTED object. A viewer has three seconds and
+   spent them decoding a cart. ⭐ Take the half-formed image from the person who knows
+   the script — "idk" marks uncertainty about the DRAWING, never about the instinct
+   ([[feedback_illustrate_the_sentence_not_the_set]]) — and the house rules already
+   agreed with it: *"striking comes from SCALE and REAL BRAND COLOUR, a single logo
+   at 416px in the product's own colour beats six props"* ([[feedback_hook_simplicity]])
+   and *"the hero scene carries the Claude mark at 200px+"*
+   ([[feedback_real_marks_are_the_props]]).
+
+   So the hook IS the Claude mark, 300px, on a near-white cyclorama, mounted in a
+   dark steel rotor that judders and stalls. Four GitHub repos slot into its rim and
+   it spins up: grey and stuck → full colour and running. Nothing to decode.
+   ⛔ The mark is the REAL `claude.svg`, never redrawn.
+   ====================================================================== */
+export const Rotor: React.FC<{ x: number; y: number; f: number; d?: number; z?: number;
+  angle?: number; lit?: number; filled?: number; judder?: number; hit?: number }> =
+  ({ x, y, f, d = 540, z = 60, angle = 0, lit = 0, filled = 0, judder = 0, hit = 0 }) => {
+  const R = d / 2, RING = d * 0.115;
+  const k = Math.max(0, Math.min(1, lit));
+  const jx = Math.sin(f * 1.9) * 5 * judder, jy = Math.cos(f * 2.3) * 4 * judder;
+  const SOCK = [0, 90, 180, 270];
+  return (
+    <div style={{ position: "absolute", left: x - R + jx, top: y - R + jy, width: d, height: d, zIndex: z }}>
+      {/* the light it throws once it is running — a pool, never a bloom ring */}
+      {k > 0.04 && (
+        <div style={{ position: "absolute", left: -R * 0.55, top: -R * 0.55, width: d * 1.55, height: d * 1.55,
+          borderRadius: "50%", zIndex: -1, opacity: 0.42 * k,
+          background: `radial-gradient(circle, ${hexa("#FFD9A8", 0.85)} 0%, ${hexa(CLAY, 0.34)} 38%, ${hexa(CLAY, 0)} 70%)` }} />
+      )}
+      {/* the ring: the near-black mass that gives the white ground its value structure */}
+      <div style={{ position: "absolute", inset: 0, borderRadius: "50%", boxShadow: SH_D,
+        background: `conic-gradient(from ${angle}deg, #23201C 0deg, #3E3831 22deg, #23201C 45deg, #453E36 68deg, #23201C 90deg)`,
+        transform: `scale(${1 + hit * 0.03})` }} />
+      {/* the machined face of the ring, with teeth that make the rotation visible */}
+      <div style={{ position: "absolute", inset: RING * 0.30, borderRadius: "50%", overflow: "hidden",
+        background: "#191713", transform: `rotate(${angle}deg)` }}>
+        {Array.from({ length: 36 }, (_, i) => (
+          <div key={"t" + i} style={{ position: "absolute", left: "50%", top: 0, width: d * 0.018,
+            height: RING * 0.62, marginLeft: -d * 0.009, transformOrigin: `50% ${R - RING * 0.30}px`,
+            transform: `rotate(${i * 10}deg)`, borderRadius: 2,
+            background: i % 3 === 0 ? mxh(BRASS, 0.1) : hexa("#6E655A", 0.75) }} />
+        ))}
+      </div>
+      {/* the hub the mark sits on — near-white, so the logo reads at any size */}
+      <div style={{ position: "absolute", inset: RING, borderRadius: "50%",
+        background: `radial-gradient(circle at 42% 34%, #FFFFFF 0%, #F4EFE6 62%, #E2DACB 100%)`,
+        border: `${d * 0.012}px solid #CFC6B4`, boxShadow: `inset 0 ${d * 0.02}px ${d * 0.05}px ${hexa("#000000", 0.16)}` }} />
+      {/* ⭐ THE REAL CLAUDE MARK, dead grey while it is stuck and full colour once it runs */}
+      <div style={{ position: "absolute", left: d * 0.27, top: d * 0.27, width: d * 0.46, height: d * 0.46,
+        zIndex: 3, transform: `rotate(${angle * 0.5}deg) scale(${0.92 + 0.08 * k + hit * 0.05})`,
+        filter: `grayscale(${(1 - k) * 0.92}) contrast(${0.86 + 0.34 * k}) brightness(${0.72 + 0.42 * k})` }}>
+        <Img src={staticFile("logos/claude.svg")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+      </div>
+      {/* the four sockets on the rim: empty and dark, then filled and lit */}
+      {SOCK.map((deg, i) => {
+        const on = i < filled;
+        return (
+          <div key={"s" + i} style={{ position: "absolute", left: "50%", top: "50%", width: d * 0.20, height: d * 0.13,
+            marginLeft: -d * 0.10, marginTop: -d * 0.065, zIndex: 4,
+            transform: `rotate(${deg + angle}deg) translateY(${-R + RING * 0.5}px)` }}>
+            <div style={{ position: "absolute", inset: 0, borderRadius: d * 0.022,
+              background: on
+                ? `linear-gradient(180deg, ${mxh(REPOS[i].c, 0.3)}, ${REPOS[i].c} 55%, ${dkh(REPOS[i].c2, 0.2)})`
+                : "#141210",
+              border: `${d * 0.008}px solid ${on ? dkh(REPOS[i].c2, 0.4) : "#0C0B09"}`,
+              boxShadow: on ? SH : undefined, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              {on && (
+                <div style={{ width: d * 0.075, height: d * 0.075, borderRadius: d * 0.016, background: REPOS[i].markBg,
+                  display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Img src={staticFile("logos/" + REPOS[i].mark)}
+                    style={{ width: d * 0.055, height: d * 0.055, objectFit: "contain" }} />
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+/** the bright test-bay ground the rotor stands on — the "white background" the note asked for,
+    kept off pure white so the mark and the ring both keep their edges. */
+export const Cyc: React.FC<{ z?: number; warm?: number }> = ({ z = 8, warm = 0 }) => (
+  <div style={{ position: "absolute", left: -40, top: -40, width: W + 80, height: H + 80, zIndex: z,
+    background: `linear-gradient(180deg, ${lerpHex("#F7F4EC", "#FDF3E4", warm)} 0%, ${lerpHex("#EFEADF", "#F8E9D4", warm)} 58%, ${lerpHex("#D9D2C4", "#E6D4BB", warm)} 100%)` }}>
+    <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: H * 0.30,
+      background: `linear-gradient(180deg, ${hexa("#B9AF9C", 0)}, ${hexa("#B9AF9C", 0.5)})` }} />
+  </div>
+);

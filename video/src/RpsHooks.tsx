@@ -1,15 +1,15 @@
 import React from "react";
-import { useCurrentFrame } from "remotion";
+import { useCurrentFrame, Img, staticFile } from "remotion";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D,
   Scene, Cam, Contact, Ring, Puff, Steam, Fall, Crew, Forearm, Rig, anchors, Motes,
-  CLAY, GOLD, GREEN, RED, INK, IRON, CHROME, BONE,
+  CLAY, GOLD, GREEN, RED, INK, IRON, CHROME, BONE, BRASS,
   REPOS, repoBy, asPlace, GY, mono, ui,
 } from "./RpsWorld";
 import type { Kit, Repo } from "./RpsWorld";
 import { Room } from "./HwSets";
 import { ShopWall, BayLamp, TyreStack, Toolbox, Drum, Lift, Chain, Hook, Tag, HangPart, Hoist, CrewBand, GhFitout } from "./RpsSets";
-import { RepoCard, GhSign, Gem, Sled } from "./RpsProps";
+import { RepoCard, GhSign, Gem, Sled, Rotor, Cyc } from "./RpsProps";
 import { LAY, RAKE_K, RAKE_X, RAKE_N, punch } from "./RpsScenes";
 import type { Variant, SP } from "./RpsScenes";
 
@@ -74,112 +74,74 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("floor");
   const L = LAY[v];
-  /* ⭐⭐⭐ MECHANISM: HAUL. ONE BODY AGAINST A LOAD.
-     ⛔ The three hooks before this one were PASSIVE ACCRETION in three costumes — parts, then
-     cards, then gems, all coming to a Claude standing still on a lift while he received them.
-     Measured, the open was already inside the winners' band (mean Δ 5.26 against 4.87-6.79, f0
-     subject 9.9% against 9.0-28.0%), so it was never churn and never a pale frame 0: it was the
-     SHAPE ([[feedback_one_concept_four_costumes]]).
+  /* ⭐⭐⭐ MECHANISM: SPIN-UP. The Claude mark IS the hook.
+     ⛔ Round 4 (a Claude dragging a loaded sled) fixed the SHAPE but broke legibility: *"wtf is he
+     even wheeling ... it doesn't even seem on topic with Claude — maybe it should be a big logo of
+     Claude with white background."* An invented object costs the viewer the three seconds the reel
+     has. So the object is the one thing nobody has to decode.
 
-     Against the winning-hook checklist ([[feedback_read_the_winning_hook_do_not_just_measure_it]]):
-     BEFORE   f0 he is ALREADY mid-pull — rope taut, body bowed, heels dug in, steam off him, and
-              the sled has NOT moved. Legible with the sound off: he is dragging his own junk.
-     TRIGGER  f10 the first repo SLAMS into him. It costs: recoil, a ring, dust off the floor.
-     TRAVEL   f12-30 he goes 120px, then 190, then 250 — 560px total against a 330px body, so
-              **1.7 body widths**, where the floor is a third and half is good.
-     ARRIVAL  each surge ends on a thump: the wheels cross a floor joint, he recoils, dust.
-     ⛔ IT DOES NOT RESOLVE — the fourth repo is still in the air at the cut, and he is mid-stride.
-     ⭐ And the last third is a BODY ACTION, not a wait: he is running with it. */
-  const HS = 384;
-  const SLAM = [10, 32, 58, 92];                       /* the repos landing on him */
-  const seg = [0, 96, 250, 420];                       /* cumulative distance after each */
-  let dist = 0;
-  for (let i = 0; i < 3; i++) {
-    const a = SLAM[i] + 2, b = SLAM[i] + (i === 0 ? 18 : i === 1 ? 24 : 32);
-    dist += (seg[i + 1] - seg[i]) * E(f, a, b, 0, 1, OUT);
+     BEFORE   f0 the mark is DEAD GREY in a stalled rotor: it judders, strains against the lock and
+              does not turn. Sparks off the rim. Legible with the sound off — this Claude is stock.
+     TRIGGER  f10 the first repo SLOTS into the rim. It costs: a clank, a ring, sparks, a kick.
+     TRAVEL   the rotor TURNS. 96° after the first, 300° after the second, 700° after the third —
+              a 540px wheel, so the rim travels ~2,900px in the hook.
+     ARRIVAL  each socket fills, its quadrant lights, the mark gains colour and the ground warms.
+     ⛔ IT DOES NOT RESOLVE — the fourth repo is still flying in at the cut, one socket still dark. */
+  const SLOT = [10, 32, 58, 92];
+  const SPD  = [0.30, 2.6, 6.0, 10.4];                 /* degrees per frame after each repo */
+  let angle = 0, sp = SPD[0];
+  for (let i = 0; i < Math.min(f, 102); i++) {
+    const stage = SLOT.filter((t) => i >= t).length;
+    sp = SPD[Math.min(3, stage)];
+    angle += sp + (i < SLOT[0] ? Math.sin(i / 2.6) * 1.6 : 0);
   }
-  /* ⭐ BEFORE the first repo lands he is not merely "straining" — he HEAVES: rocks back and throws
-     his weight forward on a 7-frame cycle, the sled creeps a few px and slips back, the wheels kick
-     dust. A held strain pose measured 11 frames under Δ2.0; a heave is an action loop with travel
-     ([[feedback_action_loop_is_not_a_scene]], [[feedback_a_sway_is_not_motion]] — this one TRAVELS). */
-  const heave = f < SLAM[0] + 2 ? Math.sin(f / 3.4) : 0;
-  const HX = 336 + dist + heave * 9 + L.a * 0.2;
-  const hit = SLAM.slice(0, 3).reduce((m, at) => { const d = f - at; return d >= 0 && d < 12 ? Math.max(m, Math.exp(-d / 3.4)) : m; }, 0);
-  /* the thump at the end of each surge — the wheels crossing a joint */
-  const THUMP = [30, 58, 92];
-  const thump = THUMP.reduce((m, at) => { const d = f - at; return d >= 0 && d < 10 ? Math.max(m, Math.exp(-d / 3)) : m; }, 0);
-  /* he strains hardest BEFORE the first repo, and less after each one — the load getting easier
-     is the whole claim, drawn */
-  const eff = f < SLAM[0] ? 0.92 : f < SLAM[1] ? 0.72 : f < SLAM[2] ? 0.5 : 0.3;
-  const a = anchors(HX, GY, HS);
-  /* ⛔ on the first probe the sled sat mostly off-frame left for half the hook, so f0 did not read
-     as "he is dragging something" — the checklist's law 2. It starts 62% in frame, cropped by the
-     left edge, which is also the near-edge mass the winners all have. */
-  const sledX = HX - 262 - heave * 4, sledY = GY + 6;
-  const camS = 1.02 + 0.10 * E(f, 0, dur, 0, 1, LIN);
+  const hit = SLOT.slice(0, 3).reduce((m, at) => { const d = f - at; return d >= 0 && d < 12 ? Math.max(m, Math.exp(-d / 3.2)) : m; }, 0);
+  const filled = SLOT.filter((t) => f >= t).length;
+  const lit = Math.min(1, filled / 3.2) * (0.72 + 0.28 * Math.min(1, f / 60));
+  const judder = f < SLOT[0] ? 1 : Math.max(0, 1 - (f - SLOT[0]) / 8);
+  const RX = 506 + L.a * 0.3, RY = 424;
+  const camS = 1.0 + 0.085 * E(f, 0, dur, 0, 1, LIN);
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.40}>
-      {/* ⛔ NO CAMERA TRANSLATE. `Cam` is scale-then-translate, so any x offset slides the 1012-wide
-          set and exposes bare stage at the edge — the black strip Alex saw on cuts 1 and 3
-          ([[feedback_the_crop_bound_includes_cam]]). The travel happens INSIDE the frame instead. */}
+    <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.30}>
       <Cam s={camS} x={0} y={0} z={12}>
-      <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
-        rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
-      <GhFitout p={p} f={f} seed={0} z={19} graphX={64} graphY={232} cols={9} rail={false} />
-      <ShopWall p={p} f={f} seed={0} bay={null} door pegX={560} pegW={400} />
-      <GhSign x={232} y={330} w={268} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
-      {/* the load, cropped by the left edge at f0 and fully in frame by the cut */}
-      <Sled x={sledX} y={sledY} f={f} s={1} z={50} roll={dist} lift={Math.min(1, dist / 420) * 0.8} jolt={thump} heroSide="right" />
-      {/* ⛔ the first probe drew this as a pale bar and it read as a pink pipe crossing the frame.
-          It is a steel TOW BAR he has both hands on: dark, thick, angled up to his grip, and it
-          shudders on every hit. */}
-      <div style={{ position: "absolute", left: sledX + 236, top: GY - 214 + thump * 6,
-        width: Math.max(0, HX - sledX - 250), height: 14, zIndex: 54, borderRadius: 7,
-        transformOrigin: "0% 50%", transform: `rotate(${-13 + hit * 3}deg)`, boxShadow: SH_D,
-        background: `linear-gradient(180deg, #6A635A 0%, #3E3931 45%, #201D18 100%)` }} />
-      <Contact x={HX} y={GY - 10} w={HS * 0.86 + thump * 40} o={0.4} />
-      {/* ⭐ he LEANS INTO IT: `drive` is the forward-lean the rig already has, and it never drops
-          to zero until the last surge, so the last third is a body action */}
-      <Rig f={f} x={HX} y={GY} size={HS} z={56} act={f >= SLAM[2] ? 0 : 1} ph={0.3}
-        drive={0.5 + 0.35 * hit + heave * 0.22} strain={eff * (0.7 + 0.3 * hit) + Math.max(0, -heave) * 0.2} gaze={0.5}
-        shock={hit > 0.45 || thump > 0.5 ? 0.7 : 0} reach={30}
-        cheer={f >= SLAM[2] + 8 ? E(f, SLAM[2] + 8, SLAM[2] + 20, 0, 0.8, OUT) : 0} />
-      {/* effort comes off the STILLEST part of him: steam off the shoulders while he is stuck */}
-      {f < SLAM[1] && <Steam x={HX - 40} y={GY - HS * 0.86} f={f} at={0} n={9} z={72} s={1.25} c="#DDD5C4" rate={1.5} />}
-      {/* the wheels kick as he heaves and they refuse to roll */}
-      {f < SLAM[0] + 4 && [0, 6, 12].map((at) => (f >= at && f < at + 14
-        ? <Puff key={"hv" + at} x={sledX + 116} y={GY + 2} f={f} at={at} c="#DED6C6" z={53} n={8} s={1.0} up={0.12} />
-        : null))}
-      {/* ⭐ the repos ARRIVE ON HIM — arcing in from the top right and slamming into his shoulder */}
+      {/* the bright test bay: the near-white ground the note asked for, warming as it spins up */}
+      <Cyc z={20} warm={Math.min(1, filled / 3)} />
+      <GhFitout p={p} f={f} seed={0} z={22} graphX={54} graphY={196} cols={8} rail={false} lift={0.34} />
+      {/* the shop is still under it: the hazard lip and the crew keep it in the world */}
+      <div style={{ position: "absolute", left: -20, top: GY - 4, width: W + 40, height: 16, zIndex: 30,
+        background: `repeating-linear-gradient(-45deg, ${GOLD} 0 22px, ${INK} 22px 44px)`, opacity: 0.9 }} />
+      <GhSign x={196} y={252} w={252} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
+      {/* the mount the rotor turns in */}
+      <div style={{ position: "absolute", left: RX - 34, top: RY, width: 68, height: GY - RY, zIndex: 40,
+        background: `linear-gradient(90deg, ${dkh(IRON, 0.34)}, ${mxh(IRON, 0.12)} 45%, ${dkh(IRON, 0.42)})` }} />
+      <div style={{ position: "absolute", left: RX - 150, top: GY - 26, width: 300, height: 30, zIndex: 40,
+        borderRadius: 8, background: `linear-gradient(180deg, ${mxh(IRON, 0.1)}, ${dkh(IRON, 0.44)})`, boxShadow: SH_D }} />
+      <Rotor x={RX} y={RY} f={f} d={540} z={60} angle={angle} lit={lit} filled={filled} judder={judder} hit={hit} />
+      {/* it fights the lock before the first repo: sparks off the rim and smoke off the mount */}
+      {f < SLOT[0] + 6 && (<>
+        <Fall x={RX - 40} y={RY + 250} w={180} f={f} at={0} n={12} z={72} c={mxh(GOLD, 0.3)} rate={2.2} s={1.0} />
+        <Steam x={RX + 210} y={RY + 210} f={f} at={0} n={8} z={72} s={1.2} c="#CFC9BC" rate={1.6} />
+      </>)}
+      {/* ⭐ the repos fly in from the four corners and SLOT into the rim */}
       {REPOS.map((r, i) => {
-        const at = SLAM[i], t0 = at - 16;
-        if (f < t0 || (i < 3 && f > at + 6)) return null;
+        const at = SLOT[i], t0 = at - 17;
+        if (f < t0 || (i < 3 && f > at + 5)) return null;
         const k = E(f, t0, at, 0, 1, IN_Q);
-        const gx = HX + 470 - 400 * k, gy = -150 + (a.headTop + 30 + 150) * k;
-        return <Gem key={r.key} repo={r} x={gx} y={gy} s={150 + 30 * k} z={92} f={f} lit={Math.min(1, k * 1.6)}
-          spin={(1 - k) * 34} stars={1} label={false} shake={i === 3 ? 0.6 : 0} />;
+        const FROM = [{ x: -180, y: 120 }, { x: 1190, y: 150 }, { x: -160, y: 700 }, { x: 1200, y: 660 }][i];
+        const TO = [{ x: RX, y: RY - 232 }, { x: RX + 232, y: RY }, { x: RX, y: RY + 232 }, { x: RX - 232, y: RY }][i];
+        return <Gem key={r.key} repo={r} x={FROM.x + (TO.x - FROM.x) * k} y={FROM.y + (TO.y - FROM.y) * k}
+          s={132 + 34 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 40} stars={1}
+          label={false} shake={i === 3 ? 0.6 : 0} />;
       })}
-      {/* every landing costs: a ring, sparks off the shoulder, dust off the floor */}
-      {SLAM.slice(0, 3).map((at) => (f >= at && f < at + 24 ? (
-        <React.Fragment key={"im" + at}>
-          <Ring x={a.headTop ? HX + 40 : HX} y={a.headTop + 40} f={f} at={at} c={mxh(GOLD, 0.4)} z={94} s={1.7} dur={18} />
-          <Fall x={HX - 60} y={a.headTop + 30} w={200} f={f} at={at} n={14} z={94} c={mxh(GOLD, 0.3)} rate={1.8} s={1.1} />
-          <Puff x={HX - 90} y={GY - 16} f={f} at={at} c="#E4DCC8" z={58} n={12} s={1.3} up={0.15} />
+      {SLOT.slice(0, 3).map((at, i) => (f >= at && f < at + 26 ? (
+        <React.Fragment key={"sm" + at}>
+          <Ring x={RX} y={RY} f={f} at={at} c={mxh(REPOS[i].c, 0.4)} z={94} s={2.6 + i * 0.4} dur={22} />
+          <Fall x={RX - 130} y={RY - 190} w={260} f={f} at={at} n={16} z={94} c={mxh(GOLD, 0.3)} rate={2.0} s={1.2} />
+          <Puff x={RX} y={GY - 26} f={f} at={at} c="#E4DCC8" z={58} n={12} s={1.3} up={0.14} />
         </React.Fragment>
       ) : null))}
-      {/* the wheels bite: dust off BOTH wheels, restruck on every surge so it never settles */}
-      {SLAM.slice(0, 3).map((at) => (f >= at && f < at + 30 ? (
-        <React.Fragment key={"dz" + at}>
-          <Puff x={sledX - 110} y={GY + 4} f={f} at={at} c="#DED6C6" z={52} n={10} s={1.15} up={0.1} />
-          <Puff x={sledX + 150} y={GY + 4} f={f} at={at + 4} c="#D6CEBE" z={52} n={9} s={1.0} up={0.08} />
-        </React.Fragment>
-      ) : null))}
-      {/* ⭐ on the last surge the load finally breaks loose: cargo comes off the back */}
-      {f >= SLAM[2] + 6 && (
-        <Fall x={sledX - 190} y={GY - 300} w={300} f={f} at={SLAM[2] + 6} n={18} z={88} c={mxh(BONE, 0.16)} rate={2.0} s={1.5} />
-      )}
+      {/* the crew watching it come up */}
       <ShopCrew f={f} v={v} />
-      <TyreStack x={-60 + L.c} n={3} s={1.0} z={96} />
       </Cam>
     </Scene>
   );
@@ -198,91 +160,103 @@ export const DROPHOOK: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("floor");
   const L = LAY[v];
-  /* ⭐⭐⭐ MECHANISM: PRESS. ONE BODY UNDER A LOAD — the vertical answer to the haul.
-     ⛔ Same rebuild as the house hook: this was PASSIVE ACCRETION too (four parts fall on a Claude
-     who stands and receives them). Now the load is ON him and the travel is HIS OWN BODY:
-     BEFORE   f0 he is already buckling — knees bent, arms locked over his head, the loaded sled
-              bed pressing down on him and 30px lower than it should be. Steam off his shoulders.
-     TRIGGER  f12 the first repo lands ON the load. It costs: the whole stack jolts, dust, recoil.
-     TRAVEL   he PUSHES BACK UP: 62px, then 108, then 168 — 338px on a 384px body, so 0.88 of his
-              own height, where the floor is a third.
-     ⛔ IT DOES NOT RESOLVE — the fourth repo is still falling at the cut and he is mid-press. */
-  const HS = 384;
-  const LAND = [12, 34, 60, 114];
-  const seg = [0, 62, 170, 338];
-  let up = 0;
-  for (let i = 0; i < 3; i++) {
-    const a = LAND[i] + 2, b = LAND[i] + (i === 0 ? 16 : i === 1 ? 22 : 42);
-    up += (seg[i + 1] - seg[i]) * E(f, a, b, 0, 1, OUT);
-  }
-  const hit = LAND.slice(0, 3).reduce((m, at) => { const d = f - at; return d >= 0 && d < 12 ? Math.max(m, Math.exp(-d / 3.2)) : m; }, 0);
-  /* he is pressed 96px into the floor at f0 and rises out of it */
-  const squat = 96 - up * 0.28;
-  const HX = 506 + L.a * 0.2;
-  const a2 = anchors(HX, GY, HS);
-  const eff = f < LAND[0] ? 0.95 : f < LAND[1] ? 0.76 : f < LAND[2] ? 0.54 : 0.32;
-  const heave = f < LAND[0] + 2 ? Math.sin(f / 3.2) : 0;
-  const bedY = a2.headTop + 26 - up + heave * 5;
-  const camS = 1.04 + 0.09 * E(f, 0, dur, 0, 1, LIN) + 0.09 * E(f, 74, dur, 0, 1, LIN);
-  /* ⛔ Q4 was the third slow press and one falling gem (TAIL 0.43 → 0.55, still flagged). As he
-     drives it up the last time the LOAD LETS GO: the bed tips and the cargo slides off, which is
-     several objects travelling through the frames a viewer was otherwise watching nothing in. */
-  const shed = E(f, 76, dur, 0, 1, IN_Q);
+  /* ⭐⭐⭐ MECHANISM: CHARGE. The mark stays WHOLE and fills with colour.
+     ⛔ The first attempt split the mark into four quarters and flew them in. On the probe a quadrant
+     of a sunburst reads as a grey ARROW, not as a piece of the Claude logo — the same legibility
+     failure that killed the sled, one round later. The mark is never cut up: it is there, entire and
+     dead grey, from frame 0, and each repo charges a quarter turn of it.
+     BEFORE   f0 the whole logo, unmistakable, DEAD GREY, flickering, with an empty charge ring.
+     TRIGGER  f11 a repo slams into the ring at 12 o'clock. It costs: ring, sparks, a kick.
+     TRAVEL   the charge sweeps 90° round the mark, colour chasing it.
+     ⛔ f92 the fourth repo is still incoming and a quarter of the logo is still grey at the cut. */
+  const SLAM = [11, 34, 60, 92];
+  const D = 486;
+  const CX = 506 + L.a * 0.3, CY = 424;
+  const hit = SLAM.slice(0, 3).reduce((m, at) => { const d = f - at; return d >= 0 && d < 12 ? Math.max(m, Math.exp(-d / 3.2)) : m; }, 0);
+  /* the charge angle: each repo sweeps another quarter, and it eases so the sweep is watchable */
+  /* ⛔ a colour fill changes no geometry: the first render measured 5.21 = STATIC. The charge now
+     CREEPS between slams as well as jumping on them, and the housing carries a toothed ring that
+     turns the whole time — motion is repaint, and only a moving EDGE repaints
+     ([[reference_motion_arithmetic]]). */
+  let deg = Math.min(26, f * 0.30);
+  SLAM.forEach((at, i) => { if (i < 3) deg += 84 * E(f, at, at + 17, 0, 1, OUT); });
+  const teeth = f * 1.9;
+  const warm = Math.min(1, deg / 270);
+  const flick = f < SLAM[0] ? (Math.sin(f / 1.7) > 0.4 ? 1 : 0.72) : 1;
+  const camS = 1.06 + 0.11 * E(f, 0, dur, 0, 1, LIN);
+  const MASK = `conic-gradient(#000 0deg, #000 ${deg}deg, transparent ${deg}deg, transparent 360deg)`;
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.03]} vig={0.40}>
-      <Cam s={camS} x={0} y={0.30 * up} z={12}>
-      <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
-        rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
-      <GhFitout p={p} f={f} seed={2} z={19} graphX={80} graphY={244} cols={12} />
-      <ShopWall p={p} f={f} seed={0} bay={null} door pegX={560} pegW={400} />
-      <GhSign x={214} y={352} w={262} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
-      {/* ⭐ THE LOAD IS OVER HIS HEAD — the same sled, tipped onto him, riding on his arms */}
-      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 62,
-        transform: `translateY(${bedY - GY - 6}px) rotate(${-2.5 + hit * 2 - shed * 13}deg)`, transformOrigin: `${HX}px ${GY}px` }}>
-        <Sled x={HX - 30} y={GY + 6} f={f} s={0.94} z={62} roll={0} lift={0} jolt={hit} />
+    <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.30}>
+      <Cam s={camS} x={0} y={0} z={12}>
+      <Cyc z={20} warm={warm} />
+      <GhFitout p={p} f={f} seed={2} z={22} graphX={62} graphY={188} cols={8} rail={false} lift={0.34} />
+      <div style={{ position: "absolute", left: -20, top: GY - 4, width: W + 40, height: 16, zIndex: 30,
+        background: `repeating-linear-gradient(-45deg, ${GOLD} 0 22px, ${INK} 22px 44px)`, opacity: 0.9 }} />
+      <GhSign x={806} y={240} w={252} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
+      {/* the housing: a white face inside a near-black rim, so the white bay keeps its value structure */}
+      {/* the toothed collar, turning the whole time */}
+      <div style={{ position: "absolute", left: CX - D * 0.68, top: CY - D * 0.68, width: D * 1.36, height: D * 1.36,
+        zIndex: 38, borderRadius: "50%", overflow: "hidden", background: "#1B1814",
+        transform: `rotate(${teeth}deg)`, boxShadow: SH_D }}>
+        {Array.from({ length: 30 }, (_, i) => (
+          <div key={"tt" + i} style={{ position: "absolute", left: "50%", top: 0, width: D * 0.022,
+            height: D * 0.09, marginLeft: -D * 0.011, transformOrigin: `50% ${D * 0.68}px`,
+            transform: `rotate(${i * 12}deg)`, borderRadius: 2,
+            background: i % 3 === 0 ? mxh(BRASS, 0.1) : hexa("#6E655A", 0.8) }} />
+        ))}
       </div>
-      {/* ⭐ TWO ARMS LOCKED ON THE UNDERSIDE. Without them the load reads as floating; with them the
-          hero is visibly holding it, and they shorten as he presses so the push has a distance. */}
-      <Forearm x0={HX - HS * 0.30} y0={GY - HS * 0.56} x1={HX - HS * 0.20} y1={bedY + 26} w={26} z={64} />
-      <Forearm x0={HX + HS * 0.30} y0={GY - HS * 0.56} x1={HX + HS * 0.20} y1={bedY + 26} w={26} z={64} />
-      {/* the pads his hands press into, so the contact point is drawn */}
-      {[-1, 1].map((sgn) => (
-        <div key={sgn} style={{ position: "absolute", left: HX + sgn * HS * 0.20 - 26, top: bedY + 8,
-          width: 52, height: 26, zIndex: 65, borderRadius: 7,
-          background: `linear-gradient(180deg, ${mxh(IRON, 0.2)}, ${dkh(IRON, 0.4)})`, boxShadow: SH }} />
-      ))}
-      <Contact x={HX} y={GY - 10} w={HS * 0.9 + hit * 40} o={0.42} />
-      <Rig f={f} x={HX} y={GY} size={HS} z={56} act={3} ph={0.3}
-        strain={Math.min(1, eff + hit * 0.3 + Math.max(0, -heave) * 0.15)} lift={Math.min(1, up / 338)}
-        shock={hit > 0.5 ? 0.75 : 0} gaze={-0.4} reach={40}
-        cheer={f >= LAND[2] + 10 ? E(f, LAND[2] + 10, LAND[2] + 22, 0, 0.7, OUT) : 0} />
-      {/* effort off the stillest part of him while he is pinned */}
-      {f < LAND[1] && <Steam x={HX + 70} y={GY - HS * 0.80} f={f} at={0} n={9} z={72} s={1.3} c="#DDD5C4" rate={1.5} />}
-      {/* the repos land ON the load, from straight above */}
+      <div style={{ position: "absolute", left: CX - D * 0.60, top: CY - D * 0.60, width: D * 1.20, height: D * 1.20,
+        zIndex: 40, borderRadius: "50%", boxShadow: SH_D,
+        background: `radial-gradient(circle at 44% 36%, #FFFFFF 0%, #F2ECE1 60%, #DCD4C4 100%)`,
+        border: `${D * 0.030}px solid #262119` }} />
+      <div style={{ position: "absolute", left: CX - 32, top: CY + D * 0.54, width: 64, height: GY - CY - D * 0.54, zIndex: 39,
+        background: `linear-gradient(90deg, ${dkh(IRON, 0.34)}, ${mxh(IRON, 0.12)} 45%, ${dkh(IRON, 0.42)})` }} />
+      {/* ⭐ THE CHARGE RING — it fills as the repos land, the one graphic that says "loading" */}
+      <div style={{ position: "absolute", left: CX - D * 0.545, top: CY - D * 0.545, width: D * 1.09, height: D * 1.09,
+        zIndex: 44, borderRadius: "50%", background: `conic-gradient(${CLAY} 0deg, ${mxh(CLAY, 0.3)} ${deg}deg, transparent ${deg}deg)`,
+        WebkitMaskImage: "radial-gradient(circle, transparent 0 88%, #000 88.5%)",
+        maskImage: "radial-gradient(circle, transparent 0 88%, #000 88.5%)" }} />
+      {/* the mark, dead grey underneath and full colour above, revealed by the charge */}
+      <div style={{ position: "absolute", left: CX - D / 2, top: CY - D / 2, width: D, height: D, zIndex: 46,
+        opacity: flick, filter: `grayscale(1) brightness(0.62) contrast(0.9)`,
+        transform: `scale(${1 + hit * 0.03})` }}>
+        <Img src={staticFile("logos/claude.svg")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+      </div>
+      {deg > 0.5 && (
+        <div style={{ position: "absolute", left: CX - D / 2, top: CY - D / 2, width: D, height: D, zIndex: 47,
+          WebkitMaskImage: MASK, maskImage: MASK, transform: `scale(${1 + hit * 0.03})` }}>
+          <Img src={staticFile("logos/claude.svg")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+        </div>
+      )}
+      {warm > 0.05 && (
+        <div style={{ position: "absolute", left: CX - D * 0.9, top: CY - D * 0.9, width: D * 1.8, height: D * 1.8,
+          zIndex: 41, borderRadius: "50%", opacity: 0.4 * warm,
+          background: `radial-gradient(circle, ${hexa("#FFD9A8", 0.85)} 0%, ${hexa(CLAY, 0.3)} 40%, ${hexa(CLAY, 0)} 70%)` }} />
+      )}
+      {/* it is not running yet: sparks off the rim while it is grey */}
+      {f < SLAM[0] + 6 && (
+        <Fall x={CX - 60} y={CY + D * 0.5} w={200} f={f} at={0} n={12} z={72} c={mxh(GOLD, 0.3)} rate={2.2} s={1.0} />
+      )}
+      {/* the repos, each slamming into the ring where its quarter begins */}
       {REPOS.map((r, i) => {
-        const at = LAND[i], t0 = at - 18;
-        if (f < t0 || (i < 3 && f > at + 6)) return null;
+        const at = SLAM[i], t0 = at - 17;
+        if (f < t0 || (i < 3 && f > at + 5)) return null;
         const k = E(f, t0, at, 0, 1, IN_Q);
-        return <Gem key={r.key} repo={r} x={HX - 130 + i * 92} y={-190 + (bedY - 96 + 190) * k}
-          s={150 + 26 * k} z={92} f={f} lit={Math.min(1, k * 1.6)} spin={(1 - k) * 30} stars={1}
+        const ang = (-90 + i * 90) * Math.PI / 180;
+        const tx = CX + Math.cos(ang) * D * 0.55, ty = CY + Math.sin(ang) * D * 0.55;
+        const fx = CX + Math.cos(ang) * 1180, fy = CY + Math.sin(ang) * 1180;
+        return <Gem key={r.key} repo={r} x={fx + (tx - fx) * k} y={fy + (ty - fy) * k}
+          s={128 + 32 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 36} stars={1}
           label={false} shake={i === 3 ? 0.6 : 0} />;
       })}
-      {LAND.slice(0, 3).map((at) => (f >= at && f < at + 24 ? (
-        <React.Fragment key={"lm" + at}>
-          <Ring x={HX} y={bedY - 40} f={f} at={at} c={mxh(GOLD, 0.4)} z={94} s={1.9} dur={18} />
-          <Fall x={HX - 130} y={bedY - 30} w={280} f={f} at={at} n={16} z={94} c={mxh(GOLD, 0.3)} rate={1.8} s={1.1} />
-          <Puff x={HX} y={GY - 14} f={f} at={at} c="#E4DCC8" z={58} n={12} s={1.3} up={0.15} />
+      {SLAM.slice(0, 3).map((at, i) => (f >= at && f < at + 26 ? (
+        <React.Fragment key={"cm" + at}>
+          <Ring x={CX} y={CY} f={f} at={at} c={mxh(REPOS[i].c, 0.4)} z={94} s={2.5 + i * 0.4} dur={22} />
+          <Fall x={CX - 140} y={CY - 150} w={280} f={f} at={at} n={16} z={94} c={mxh(GOLD, 0.3)} rate={2.0} s={1.2} />
+          <Puff x={CX} y={GY - 26} f={f} at={at} c="#E4DCC8" z={58} n={12} s={1.3} up={0.14} />
         </React.Fragment>
       ) : null))}
-      {/* the cargo coming off the high side as it tips */}
-      {shed > 0.02 && (<>
-        <Fall x={HX - 300} y={bedY - 120} w={340} f={f} at={78} n={22} z={90} c={mxh(BONE, 0.16)} rate={2.1} s={1.6} />
-        <Fall x={HX - 220} y={bedY - 60} w={260} f={f} at={86} n={14} z={90} c={mxh(GOLD, 0.24)} rate={1.9} s={1.3} />
-        <Puff x={HX - 260} y={GY - 20} f={f} at={90} c="#E4DCC8" z={58} n={12} s={1.4} up={0.12} />
-      </>)}
       <ShopCrew f={f} v={v} />
-      <TyreStack x={-50 + L.c} n={3} s={1.0} z={96} />
-      <Toolbox x={W + 26 - L.c} y={H + 30} s={1.1} z={96} />
       </Cam>
     </Scene>
   );
@@ -302,89 +276,88 @@ export const PITHOOK: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const p = asPlace("floor");
   const L = LAY[v];
-  /* ⭐⭐⭐ MECHANISM: TEAM HAUL. ONE BODY AGAINST A LOAD, WITH A CREW BEHIND IT.
-     ⛔ The third costume of the same passive shape (a crew ran gems to a Claude who stood on a
-     dolly). Now he is on the rope and the pit crew are on the tailgate: same load, opposite end of
-     the frame, and it travels RIGHT TO LEFT so the picture is not the house hook mirrored.
-     BEFORE   f0 rope taut, three crew shoving the back, and it has not moved.
-     TRIGGER  f14 the first repo lands on the crew's end.
-     TRAVEL   84 → 208 → 392px, 1.06 of his own body width.
-     ⛔ the fourth is still in the air at the cut. */
-  const HS = 366;
-  const SLAM = [14, 36, 62, 94];
-  const seg = [0, 78, 196, 340];
-  let dist = 0;
-  for (let i = 0; i < 3; i++) {
-    const a2 = SLAM[i] + 2, b = SLAM[i] + (i === 0 ? 18 : i === 1 ? 24 : 32);
-    dist += (seg[i + 1] - seg[i]) * E(f, a2, b, 0, 1, OUT);
-  }
-  const heave = f < SLAM[0] + 2 ? Math.sin(f / 3.6) : 0;
-  const HX = 656 - dist - heave * 9 + L.a * 0.2;
-  const hit = SLAM.slice(0, 3).reduce((m, at) => { const d = f - at; return d >= 0 && d < 12 ? Math.max(m, Math.exp(-d / 3.4)) : m; }, 0);
-  const THUMP = [34, 62, 96];
-  const thump = THUMP.reduce((m, at) => { const d = f - at; return d >= 0 && d < 10 ? Math.max(m, Math.exp(-d / 3)) : m; }, 0);
-  const eff = f < SLAM[0] ? 0.92 : f < SLAM[1] ? 0.7 : f < SLAM[2] ? 0.48 : 0.28;
-  const a = anchors(HX, GY, HS);
-  const sledX = HX + 262 + heave * 4, sledY = GY + 6;
-  const camS = 1.04 + 0.11 * E(f, 0, dur, 0, 1, LIN);
+  /* ⭐⭐⭐ MECHANISM: SCALE-UP. The same mark, upgraded by getting BIGGER.
+     Three cuts, three verbs on one object nobody has to decode: the house SPINS it up, the amber
+     CHARGES it, and this one GROWS it. Geometry differs on every axis, which is also what keeps the
+     three cuts apart on the dHash.
+     BEFORE   f0 the mark is small, grey and low in a big empty white bay — a stock setup, dwarfed.
+     TRIGGER  f12 a repo docks under it and it JUMPS a size. It costs: ring, sparks, floor kick.
+     TRAVEL   150 → 250 → 380 → 520px across the hook, and it rises as it grows.
+     ⛔ f94 the fourth repo is still on its way in and it is not full size at the cut. */
+  const SLAM = [12, 36, 62, 94];
+  /* ⛔ 150px at f0 put the subject at ~2% of the panel — winners never open under 8.9%
+     ([[feedback_frame0_is_the_thumbnail_measure_it_against_winners]]). It starts readable and still
+     more than doubles. */
+  const SZ = [246, 330, 434, 566];
+  let d = SZ[0];
+  SLAM.forEach((at, i) => { if (i < 3) d += (SZ[i + 1] - SZ[i]) * E(f, at, at + 15, 0, 1, BACK); });
+  const stage = SLAM.filter((t) => f >= t).length;
+  const lit = Math.min(1, stage / 3);
+  const hit = SLAM.slice(0, 3).reduce((m, at) => { const dd = f - at; return dd >= 0 && dd < 12 ? Math.max(m, Math.exp(-dd / 3.2)) : m; }, 0);
+  const CX = 506 + L.a * 0.3;
+  const CY = 566 - (d - SZ[0]) * 0.34;
+  const camS = 1.0 + 0.09 * E(f, 0, dur, 0, 1, LIN);
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.40}>
-      {/* same fix as the haul: no translate, so no bare stage at the panel edge */}
+    <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.30}>
       <Cam s={camS} x={0} y={0} z={12}>
-      <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
-        rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
-      <GhFitout p={p} f={f} seed={5} z={19} graphX={82} graphY={248} cols={12} />
-      <ShopWall p={p} f={f} seed={0} bay={null} door pegX={560} pegW={400} />
-      <GhSign x={790} y={344} w={262} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
-      <Sled x={sledX} y={sledY} f={f} s={1} z={50} roll={-dist} lift={Math.min(1, dist / 340) * 0.7} jolt={thump} heroSide="left" />
-      {/* the tow bar, running back to the sled */}
-      <div style={{ position: "absolute", left: HX + 40, top: GY - 224 + thump * 6,
-        width: Math.max(0, sledX - HX - 60), height: 14, zIndex: 54, borderRadius: 7,
-        transformOrigin: "0% 50%", transform: `rotate(${11 - hit * 3}deg)`, boxShadow: SH_D,
-        background: `linear-gradient(180deg, #6A635A 0%, #3E3931 45%, #201D18 100%)` }} />
-      {/* ⭐ the pit crew, shoulders into the tailgate — the load is a TEAM problem */}
-      {[0, 1, 2].map((i) => (
-        <Crew key={"pc" + i} f={f} x={sledX + 286 + i * 84} y={GY + 6} i={REPOS[i].cos[0] + i * 3} size={196}
-          z={49 - i} at={-30} loop={1} tint={REPOS[i].c} flip
-          cheer={hit > 0.5 ? 0.5 : 0} />
+      <Cyc z={20} warm={lit} />
+      <GhFitout p={p} f={f} seed={5} z={22} graphX={58} graphY={192} cols={8} rail={false} lift={0.34} />
+      <div style={{ position: "absolute", left: -20, top: GY - 4, width: W + 40, height: 16, zIndex: 30,
+        background: `repeating-linear-gradient(-45deg, ${GOLD} 0 22px, ${INK} 22px 44px)`, opacity: 0.9 }} />
+      <GhSign x={200} y={228} w={252} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
+      {/* the plinth it stands on, which never changes size — so the mark's growth has a reference */}
+      <div style={{ position: "absolute", left: CX - 150, top: GY - 34, width: 300, height: 34, zIndex: 40,
+        borderRadius: 8, background: `linear-gradient(180deg, ${mxh(IRON, 0.12)}, ${dkh(IRON, 0.44)})`, boxShadow: SH_D }} />
+      {/* the four sockets in the plinth face, filling left to right */}
+      {[0, 1, 2, 3].map((i) => (
+        <div key={"pk" + i} style={{ position: "absolute", left: CX - 122 + i * 66, top: GY - 26, width: 46, height: 18,
+          zIndex: 42, borderRadius: 4,
+          background: i < stage ? `linear-gradient(180deg, ${mxh(REPOS[i].c, 0.3)}, ${REPOS[i].c})` : "#141210",
+          border: `2px solid ${i < stage ? dkh(REPOS[i].c2, 0.4) : "#0C0B09"}` }} />
       ))}
-      {/* dust off both wheels, restruck on every surge */}
-      {SLAM.slice(0, 3).map((at) => (f >= at && f < at + 30 ? (
-        <React.Fragment key={"dz" + at}>
-          <Puff x={sledX + 110} y={GY + 4} f={f} at={at} c="#DED6C6" z={52} n={10} s={1.15} up={0.1} />
-          <Puff x={sledX - 150} y={GY + 4} f={f} at={at + 4} c="#D6CEBE" z={52} n={9} s={1.0} up={0.08} />
-        </React.Fragment>
-      ) : null))}
-      {f >= SLAM[2] + 6 && (
-        <Fall x={sledX + 60} y={GY - 300} w={300} f={f} at={SLAM[2] + 6} n={18} z={88} c={mxh(BONE, 0.16)} rate={2.0} s={1.5} />
+      {lit > 0.05 && (
+        <div style={{ position: "absolute", left: CX - d * 0.9, top: CY - d * 0.9, width: d * 1.8, height: d * 1.8,
+          zIndex: 41, borderRadius: "50%", opacity: 0.4 * lit,
+          background: `radial-gradient(circle, ${hexa("#FFD9A8", 0.85)} 0%, ${hexa(CLAY, 0.3)} 40%, ${hexa(CLAY, 0)} 70%)` }} />
       )}
-      <Contact x={HX} y={GY - 10} w={HS * 0.86 + thump * 40} o={0.4} />
-      <Rig f={f} x={HX} y={GY} size={HS} z={56} act={f >= SLAM[2] ? 0 : 1} ph={0.6} flip
-        drive={0.5 + 0.35 * hit + heave * 0.2} strain={eff * (0.7 + 0.3 * hit)} gaze={-0.5}
-        shock={hit > 0.45 || thump > 0.5 ? 0.7 : 0} reach={30}
-        cheer={f >= SLAM[2] + 8 ? E(f, SLAM[2] + 8, SLAM[2] + 20, 0, 0.8, OUT) : 0} />
-      {f < SLAM[1] && <Steam x={HX + 44} y={GY - HS * 0.86} f={f} at={0} n={9} z={72} s={1.25} c="#DDD5C4" rate={1.5} />}
-      {f < SLAM[0] + 4 && [0, 7, 14].map((at) => (f >= at && f < at + 14
-        ? <Puff key={"hv" + at} x={sledX - 110} y={GY + 2} f={f} at={at} c="#DED6C6" z={53} n={8} s={1.0} up={0.12} />
-        : null))}
-      {/* the repos come down onto the crew's end and the whole load surges */}
-      {REPOS.map((r, i) => {
-        const at = SLAM[i], t0 = at - 16;
-        if (f < t0 || (i < 3 && f > at + 6)) return null;
-        const k = E(f, t0, at, 0, 1, IN_Q);
-        const gx = sledX + 260 - 180 * k, gy = -150 + (GY - 300 + 150) * k;
-        return <Gem key={r.key} repo={r} x={gx} y={gy} s={148 + 28 * k} z={92} f={f} lit={Math.min(1, k * 1.6)}
-          spin={(1 - k) * -32} stars={1} label={false} shake={i === 3 ? 0.6 : 0} />;
+      {/* ⭐ THE MARK, growing a size on every repo */}
+      {/* ⛔ a scale STEP then a hold measured 4.62 = STATIC. The mark turns the whole time — it is a
+          symmetric sunburst, so rotation reads as running, not as a spinning logo — and the repos
+          already docked ORBIT it, so something is always crossing the frame. */}
+      {[0, 1, 2, 3].map((i) => {
+        if (i >= stage) return null;
+        const a2 = f / 22 + i * 1.57;
+        const rr = d * 0.62 + 40;
+        return <Gem key={"orb" + i} repo={REPOS[i]} x={CX + Math.cos(a2) * rr} y={CY + Math.sin(a2) * rr * 0.42}
+          s={84} z={Math.sin(a2) > 0 ? 62 : 58} f={f} lit={0.9} spin={0} stars={1} label={false} />;
       })}
-      {SLAM.slice(0, 3).map((at) => (f >= at && f < at + 24 ? (
-        <React.Fragment key={"pm" + at}>
-          <Ring x={sledX + 90} y={GY - 260} f={f} at={at} c={mxh(GOLD, 0.4)} z={94} s={1.7} dur={18} />
-          <Fall x={sledX + 10} y={GY - 270} w={220} f={f} at={at} n={14} z={94} c={mxh(GOLD, 0.3)} rate={1.8} s={1.1} />
-          <Puff x={sledX + 150} y={GY - 12} f={f} at={at} c="#E4DCC8" z={58} n={12} s={1.3} up={0.15} />
+      <div style={{ position: "absolute", left: CX - d / 2, top: CY - d / 2, width: d, height: d, zIndex: 60,
+        transform: `scale(${1 + hit * 0.05}) rotate(${f * 1.15 + hit * 4}deg)`,
+        filter: `grayscale(${(1 - lit) * 0.92}) brightness(${0.68 + 0.44 * lit}) contrast(${0.88 + 0.3 * lit})` }}>
+        <Img src={staticFile("logos/claude.svg")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+      </div>
+      {f < SLAM[0] + 6 && (
+        <Fall x={CX - 60} y={GY - 60} w={180} f={f} at={0} n={10} z={72} c={mxh(GOLD, 0.3)} rate={2.2} s={0.9} />
+      )}
+      {/* the repos, coming in low and docking into the plinth */}
+      {REPOS.map((r, i) => {
+        const at = SLAM[i], t0 = at - 17;
+        if (f < t0 || (i < 3 && f > at + 5)) return null;
+        const k = E(f, t0, at, 0, 1, IN_Q);
+        const fx = i % 2 === 0 ? -190 : 1200, fy = 250 + i * 90;
+        const tx = CX - 100 + i * 66, ty = GY - 74;
+        return <Gem key={r.key} repo={r} x={fx + (tx - fx) * k} y={fy + (ty - fy) * k}
+          s={126 + 30 * k} z={92} f={f} lit={Math.min(1, k * 1.7)} spin={(1 - k) * 34} stars={1}
+          label={false} shake={i === 3 ? 0.6 : 0} />;
+      })}
+      {SLAM.slice(0, 3).map((at, i) => (f >= at && f < at + 26 ? (
+        <React.Fragment key={"gm" + at}>
+          <Ring x={CX} y={GY - 30} f={f} at={at} c={mxh(REPOS[i].c, 0.4)} z={94} s={2.2 + i * 0.5} dur={22} />
+          <Fall x={CX - 150} y={GY - 90} w={300} f={f} at={at} n={16} z={94} c={mxh(GOLD, 0.3)} rate={2.0} s={1.2} />
+          <Puff x={CX} y={GY - 20} f={f} at={at} c="#E4DCC8" z={58} n={14} s={1.4} up={0.14} />
         </React.Fragment>
       ) : null))}
-      <ShopCrew f={f} v={v} y={H + 78} />
-      <Toolbox x={W + 26 - L.c} y={H + 30} s={1.1} z={96} />
+      <ShopCrew f={f} v={v} />
       </Cam>
     </Scene>
   );

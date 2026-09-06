@@ -122,12 +122,12 @@ export const HOOK_SFX: Record<HookId, Cue[]> = {
   /* TEAM HAUL — same load, the crew on the tailgate; repos land at f14/36/62, thumps at f34/62 */
   pit: [
     { at: S(0),  src: "stage_hum.wav",  v: LEVELS.SFX_BED,  dur: 2.0,  rate: 0.88 },
-    { at: S(0),  src: "motor_sag.wav",  v: LEVELS.SFX_MID * db(-2), dur: 0.55, rate: 1.05 },
-    ...[0, 7, 14].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.4), dur: 0.14, rate: 0.76 + i * 0.05 })),
-    ...[14, 36, 62].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.22, rate: 0.98 - i * 0.05 })),
-    ...[14, 36, 62].map((a2, i) => ({ at: S(a2), src: "sub.wav", v: LEVELS.SFX_MID * db(-2 + i), dur: 0.32, rate: 0.82 - i * 0.03 })),
-    ...[16, 38, 64].map((a2, i) => ({ at: S(a2), src: "metal_ping.wav", v: LEVELS.SFX_MID * db(-2 + i * 0.6), dur: 0.28, rate: 1.06 + i * 0.06 })),
-    { at: S(34), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.84 },
+    { at: S(0),  src: "sub.wav",        v: LEVELS.SFX_HERO, dur: 0.6,  rate: 0.7 },
+    ...[0, 6].map((a2, i) => ({ at: S(a2), src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(-1 + i * 0.5), dur: 0.14, rate: 0.74 + i * 0.06 })),
+    ...[12, 36, 62].map((a2, i) => ({ at: S(a2), src: "mech_clank.wav", v: LEVELS.SFX_HERO * db(-1 + i), dur: 0.22, rate: 0.98 - i * 0.05 })),
+    ...[12, 36, 62].map((a2, i) => ({ at: S(a2), src: "sub.wav", v: LEVELS.SFX_MID * db(-2 + i), dur: 0.32, rate: 0.82 - i * 0.03 })),
+    ...[14, 38, 64].map((a2, i) => ({ at: S(a2), src: "metal_ping.wav", v: LEVELS.SFX_MID * db(-2 + i * 0.6), dur: 0.28, rate: 1.06 + i * 0.06 })),
+    { at: S(30), src: "thock.wav",      v: LEVELS.SFX_MID,  dur: 0.16, rate: 0.84 },
     { at: S(66), src: "chrome_shine.wav",  v: LEVELS.SFX_TEXTURE * db(0), dur: 0.30, rate: 0.98 },
     { at: S(96), src: "thock.wav",      v: LEVELS.SFX_TEXTURE * db(-1), dur: 0.14, rate: 0.9 },
   ],

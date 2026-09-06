@@ -355,7 +355,19 @@ const bedMix = (f: number) => bedEnv(f) * tailDuck(f / FPS);
 /** ⛔⛔ THREE CUTS = THREE HOOKS, NOT THREE GRADES. `wander` IS S0 itself, so
     the candidate that gets picked and the scene that ships are the same code
     and cannot drift apart. */
-export const PICKED: HookId = "wander";
+/* ⭐⭐⭐ RE-PICKED ON MEASUREMENT after Alex scrapped the previous hook. Three
+   genuinely different mechanisms were built at full quality and measured as
+   solo comps (docs/THE-OPEN.md step 1, which I had skipped for four rounds):
+
+       THE FRONT  (scorch)  motion **20.24**   a screen conceals a room
+       SPLIT      (spike)   motion   8.25      a body divides
+       HOLLOW     (wander)  motion   7.48      a sealed thing is empty
+
+   THE FRONT wins outright and is not close: it is the highest-motion hook this
+   reel has ever produced, it sits near the TOP of the shipped band (9.33-17.80),
+   and it is the only one of the three that is legible in a single frame — a
+   giant green ALL CLEAR board with a burning room behind it. */
+export const PICKED: HookId = "scorch";
 
 export const makeReel = (v: Variant, quiet = false, hook: HookId = PICKED): React.FC => () => {
   const f = useCurrentFrame();

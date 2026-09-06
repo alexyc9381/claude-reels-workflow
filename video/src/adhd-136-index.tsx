@@ -16,13 +16,13 @@ const V = { fps: 30, width: 1080, height: 1920 } as const;
 /* ⛔⛔ THREE CUTS = THREE HOOKS, NOT THREE GRADES. Each opens on a different
    one-word MECHANISM, and the bodies differ by rake phase, contrast, a level
    camera nudge, per-cut layout and a different MIRROR subset:
-     house   WANDER        a body walks off the job after a cake
-     amber   ACCUMULATION  tickets stab themselves onto a spike, faster
-     steel   SPREAD        the line catches fire behind a grinning cook */
-export const ReelHouse = makeReel("house", false, "wander");
+     house   THE FRONT   a giant ALL CLEAR board hides a room that is failing
+     amber   SPLIT       one Claude becomes two, and only one of them works
+     steel   HOLLOW      a body-sized sealed job opens onto nothing */
+export const ReelHouse = makeReel("house", false, "scorch");
 export const ReelAmber = makeReel("amber", false, "spike");
-export const ReelSteel = makeReel("steel", false, "scorch");
-export const ReelQuiet = makeReel("house", true, "wander");
+export const ReelSteel = makeReel("steel", false, "wander");
+export const ReelQuiet = makeReel("house", true, "scorch");
 
 /* ⛔ docs/THE-OPEN.md step 1: N concepts for scene 0, rendered at full quality
    on the real chassis, PICKED before the body is defended. */

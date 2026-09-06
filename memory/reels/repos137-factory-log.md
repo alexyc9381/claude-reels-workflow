@@ -474,3 +474,41 @@ verify 9/9 ×3 · motion 10.45 / 11.54 / 10.54, 0/11 failing, **0/11 stalls** ·
 HOOK_LUMA 151.1 · sat 52.1% · p10 28.8 · **dHash 23.8 / 11** · sfx clean · 104 cues, 0 collisions.
 ⛔ A third full-width character in a hex colour (`#55４C40`); the ASCII scan over `Rps*.tsx` now runs
 as part of the edit pass.
+
+## STAGE 18 — REV 8: the hook is the Claude mark
+
+> *"I don't really understand the concept of the gem coming in and he's wheeling the thing — wtf is he
+> even wheeling, it looks so odd and out of place, it doesn't even seem on topic with Claude. Maybe it
+> should be a big logo of Claude with white background idk."* · *"trial reel concept 2 doesn't really
+> make much sense either."*
+
+⛔⛔ **Round 4 had the right SHAPE and the wrong OBJECT.** The haul was one body against a load,
+travelling 1.7 body widths, and measured at or above three shipped reels on every axis — and a sled
+piled with villains is still a thing a viewer has to *work out*, which costs the three seconds the
+reel is buying. **No gate can measure recognisability.** Written up as
+[[feedback_an_invented_object_costs_the_open]].
+
+⭐ The half-formed image was the answer, and two standing rules had already said it: *"a single logo at
+416px in the product's own colour beats six props"* and *"the hero scene carries the Claude mark at
+200px+."* So the hook IS the mark — the real `claude.svg`, dead grey at f0, going full colour as four
+GitHub repos dock into it, on a near-white bay. Nothing to decode.
+
+**Three cuts = three VERBS on one object**, which also separates them on geometry alone:
+
+| cut | verb | first render | after |
+|---|---|---|---|
+| house | **SPIN-UP** — a stalled rotor; each repo slots into the rim and it turns faster (0.3 → 10.4 °/frame) | 13.79 | 13.79 |
+| amber | **CHARGE** — the mark fills with colour a quarter-turn per repo, behind a turning collar | **5.21 STATIC** | 7.96 |
+| steel | **GROW** — 246 → 566px, a size jump per repo, docked repos orbiting it | **4.62 STATIC** | 8.15 |
+
+⛔ **A state change on a logo is not motion.** A colour fill changes no geometry and a scale step is
+followed by a hold; both measured STATIC first time. Fixed with something turning the whole time and
+something crossing the frame between beats — only a moving EDGE repaints.
+
+⛔ A first pass split the mark into four quadrants and flew them in. On the probe **a quadrant of a
+sunburst reads as a grey ARROW**, not as a piece of the Claude logo — the same legibility failure one
+round later. The mark is never cut up.
+
+### Delivered
+verify 9/9 ×3 · motion 10.59 / 11.19 / 10.54, 0/11 failing, **0/11 stalls** · encoded house
+HOOK_LUMA 182.9 · sat 52.0% · p10 28.8 · **dHash 24.3 / 11** · sfx clean · 104 cues, 0 collisions.
