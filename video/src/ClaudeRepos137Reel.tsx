@@ -48,18 +48,18 @@ export const RPS_TOTAL = 1190;                       /* 39.67s x 30fps; last wor
     early). The next window's first word starts 0.08-0.10s after each. */
 export const L = {
   S0: 0,      /* LIFT      hook · "These four brand new open source..."      0.00s */
-  S1: 102,    /* TAG1      "First, AnyDoc."                                   3.41s */
-  S2: 131,    /* JAM       "Feeding PowerPoint or Word files..."              4.41s */
+  S1: 102,    /* JAM       "First, AnyDoc." + the anydoc card, then the jam      3.41s */
+  S2: 131,    /* xJAMBODY  (hosted by S1 — cue anchor only, not a scene)        4.41s */
   S3: 230,    /* PRESS     "So this tool strips all the junk..."              7.70s */
   S4: 332,    /* READ      "and it turns them into clean markdown..."        11.11s */
-  S5: 461,    /* TAG2      "Next is herdr."                                  15.60s */
-  S6: 485,    /* CRAM      "Managing multiple agents..."                     16.40s */
+  S5: 461,    /* CRAM      "Next is herdr." + the herdr card, then the cram    15.60s */
+  S6: 485,    /* xCRAMBODY (hosted by S5 — cue anchor only, not a scene)       16.40s */
   S7: 576,    /* SPLIT     "So this tool upgrades your screen..."            19.42s */
   S8: 663,    /* PLUGS     "Then check out the DeepSeek Harness..."          22.37s */
   S9: 746,    /* SWAP      "So if your agent starts getting dumb..."         25.33s */
   S10: 850,   /* GODTIER   "and you instantly get a god tier..."             29.11s */
-  S11: 928,   /* TAG4      "But finally, OmniRoute."                         31.94s */
-  S12: 963,   /* MANIFOLD  "If Claude runs out of credits..."                33.16s */
+  S11: 928,   /* MANIFOLD  "But finally, OmniRoute." + the card, then the bay   31.94s */
+  S12: 963,   /* xMANBODY  (hosted by S11 — cue anchor only, not a scene)      33.16s */
   S13: 1138,  /* ROLLOUT   "Comment the word REPOS for all the links."       39.00s */
   END: RPS_TOTAL,
 } as const;
@@ -290,18 +290,17 @@ export const makeReel = (v: Variant, quiet = false, hook: HookId = HOOK_OF[v]): 
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE[v] }}>
             <Sequence from={L.S0} durationInFrames={DUR.S0}><S0 v={v} dur={DUR.S0} /></Sequence>
-            <Sequence from={L.S1} durationInFrames={DUR.S1}><TAG1 v={v} dur={DUR.S1} /></Sequence>
-            <Sequence from={L.S2} durationInFrames={DUR.S2}><JAM v={v} dur={DUR.S2} /></Sequence>
+            {/* ⛔ the three title beats are no longer scenes: the next scene starts `lead` frames
+                early and the repo card rides in at the top of it (Alex, rev 7). */}
+            <Sequence from={L.S1} durationInFrames={DUR.S1 + DUR.S2}><JAM v={v} dur={DUR.S1 + DUR.S2} lead={DUR.S1} /></Sequence>
             <Sequence from={L.S3} durationInFrames={DUR.S3}><PRESS v={v} dur={DUR.S3} /></Sequence>
             <Sequence from={L.S4} durationInFrames={DUR.S4}><READ v={v} dur={DUR.S4} /></Sequence>
-            <Sequence from={L.S5} durationInFrames={DUR.S5}><TAG2 v={v} dur={DUR.S5} /></Sequence>
-            <Sequence from={L.S6} durationInFrames={DUR.S6}><CRAM v={v} dur={DUR.S6} /></Sequence>
+            <Sequence from={L.S5} durationInFrames={DUR.S5 + DUR.S6}><CRAM v={v} dur={DUR.S5 + DUR.S6} lead={DUR.S5} /></Sequence>
             <Sequence from={L.S7} durationInFrames={DUR.S7}><SPLIT v={v} dur={DUR.S7} /></Sequence>
             <Sequence from={L.S8} durationInFrames={DUR.S8}><PLUGS v={v} dur={DUR.S8} /></Sequence>
             <Sequence from={L.S9} durationInFrames={DUR.S9}><SWAP v={v} dur={DUR.S9} /></Sequence>
             <Sequence from={L.S10} durationInFrames={DUR.S10}><GODTIER v={v} dur={DUR.S10} /></Sequence>
-            <Sequence from={L.S11} durationInFrames={DUR.S11}><TAG4 v={v} dur={DUR.S11} /></Sequence>
-            <Sequence from={L.S12} durationInFrames={DUR.S12}><MANIFOLD v={v} dur={DUR.S12} /></Sequence>
+            <Sequence from={L.S11} durationInFrames={DUR.S11 + DUR.S12}><MANIFOLD v={v} dur={DUR.S11 + DUR.S12} lead={DUR.S11} /></Sequence>
             <Sequence from={L.S13} durationInFrames={DUR.S13}><ROLLOUT v={v} dur={DUR.S13} /></Sequence>
           </div>
         </AssemblyCtx.Provider>

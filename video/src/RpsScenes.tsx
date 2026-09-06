@@ -23,6 +23,26 @@ import type { FileKind } from "./RpsProps";
 
 export type Variant = "house" | "amber" | "steel";
 export type SP = { v: Variant; dur: number };
+/* ⛔ Alex, rev 7: "I don't want to see just an animation for a GitHub repo card — let's see the next
+   animation and the card can be at the top." The three title beats stop being scenes: the NEXT scene
+   starts `lead` frames early and plays underneath, and the repo card rides in as a badge at the top
+   and leaves. Every internal beat of the host scene is offset by `lead`, so its action still lands on
+   the same words and every SFX cue (anchored to the LATER L key) is untouched. */
+export type SPL = SP & { lead?: number };
+/** the title card, riding at the top of whatever scene it introduces */
+export const CardTop: React.FC<{ repo: Repo; f: number; lead: number; v: Variant; x?: number }> = ({ repo, f, lead, v, x = 506 }) => {
+  const inn = E(f, 0, 7, 0, 1, BACK);
+  const out = E(f, lead + 4, lead + 13, 0, 1, IN_Q);
+  if (out >= 1) return null;
+  const k = inn * (1 - out);
+  return (
+    <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 120,
+      opacity: k, transform: `translate(${(1 - inn) * 240 + out * -200}px, ${out * -40}px)` }}>
+      <RepoCard repo={repo} x={x + LAY[v].c * 0.4} y={232} w={352} z={120} f={f} desc={false}
+        count={E(f, 2, Math.max(8, lead), 0.9, 1, OUT)} rot={-1.2 + Math.sin(f / 9) * 0.8} />
+    </div>
+  );
+};
 
 /* ---- the three cuts: camera, grade, rake, layout ------------------------ */
 export const CAM: Record<Variant, { dx: number; dy: number; s: number; rot: number }> = {
@@ -152,7 +172,7 @@ export const TAG4: React.FC<SP> = (p) => <TagBeat {...p} repo={repoBy("omni")} s
    coughs out broken formatting that PILES UP.  99 frames, M, push 1.04.
    ====================================================================== */
 const FILES: FileKind[] = ["ppt", "doc", "xls"];
-export const JAM: React.FC<SP> = ({ v, dur }) => {
+export const JAM: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("paper");
   const L = LAY[v];
@@ -166,8 +186,12 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
   const chute = { x0: 930, y0: 110, x1: HX + 130, y1: mouth.y - 70 };
   /* ⭐ the impacts land on the WORDS: "PowerPoint" f13, "Word" f24, "breaks" f62 — and never on
      "formatting.", the sentence's last word (feedback_cues_land_on_sentence_ends) */
-  const DROPS = [-5, 6, 44];
-  const ARR = DROPS.map((d) => d + 18);
+  /* ⛔ the ARRIVALS are fixed (they carry the SFX and land on "PowerPoint" / "Word" / "breaks"), but
+     the first file's FALL now starts at f2 so it is travelling through the whole title window
+     instead of the window being a held card. */
+  const ARR0 = [13 + lead, 24 + lead, 62 + lead];
+  const DROPS = [2, ARR0[1] - 18, ARR0[2] - 18];
+  const ARR = ARR0;
   /* the jolt on each arrival: a strain pulse that decays */
   const jolt = ARR.reduce((m, at) => { const t = f - at; return t >= 0 && t < 14 ? Math.max(m, 1 - t / 14) : m; }, 0);
   const third = f >= ARR[2];
@@ -177,7 +201,7 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
      and debris is small. A tail needs an ARRIVAL, and the biggest object in frame is the hero — so
      he GIVES OUT: 30px of the 236px sprite sinking is worth more than any amount of confetti
      ([[feedback_hold_needs_arrivals_not_travel]], [[reference_motion_arithmetic]]). */
-  const slump = E(f, 72, dur, 0, 1, LIN);
+  const slump = E(f, 72 + lead, dur, 0, 1, LIN);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.045]} vig={0.44}>
       {/* ⛔ the amber cut's JAM still stalled after the slump was added (TAIL 0.52): an OUT ease
@@ -187,12 +211,13 @@ export const JAM: React.FC<SP> = ({ v, dur }) => {
       {/* ⛔ 1.06 / 1.20 on the same centre measured EIGHT bits apart at f153 once encoded — the
           nudge trap again (feedback_variants_need_shot_sizes). Three real sizes on three centres:
           the bay, a CU on the choke, and a medium down on the pile. */}
-      <Cam {...punch(pick(v, 1.02, 1.34, 1.14) * pushK(f, 54, dur, 0.085), pick(v, 520, HX - 10, 470), pick(v, 452, 410, 496))} z={12}>
+      <Cam {...punch(pick(v, 1.02, 1.34, 1.14) * pushK(f, 2, dur, 0.14), pick(v, 520, HX - 10, 470), pick(v, 452, 410, 496))} z={12}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.08} rakeX={RAKE_X[v]} rakeRate={3.0 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.55} window={null} />
       <GhFitout p={p} f={f} seed={11} z={19} graphX={88} graphY={242} cols={11} />
       <ShopWall p={p} f={f} seed={1} bay={repo} door pegX={520} pegW={420} />
       <Chute {...chute} w={92} z={34} c="#8C6A46" />
+      {lead > 0 && <CardTop repo={repo} f={f} lead={lead} v={v} x={264} />}
       {/* the files coming down the chute, one at a time */}
       {FILES.map((k, i) => {
         const t = E(f, DROPS[i], ARR[i], 0, 1, IN_Q);
@@ -394,17 +419,17 @@ export const READ: React.FC<SP> = ({ v, dur }) => {
 /* =========================================================================
    S6 · THE CRAM — four agents crammed into ONE window.  91 frames, CU.
    ====================================================================== */
-export const CRAM: React.FC<SP> = ({ v, dur }) => {
+export const CRAM: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("cockpit");
   const L = LAY[v];
   const repo = repoBy("herdr");
   const MX = 560 + L.a * 0.3;
-  const arrivals = [10, 26, 46, 66];
+  const arrivals = [10 + lead, 26 + lead, 46 + lead, 66 + lead];
   const jolt = arrivals.reduce((m, at) => { const t = f - at + 10; return t >= 0 && t < 8 ? Math.max(m, 1 - t / 8) : m; }, 0);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.5}>
-      <Cam {...punch(pick(v, 1.16, 1.42, 1.06) * pushK(f, 10, dur, 0.10), pick(v, MX, MX, MX - 30), pick(v, 400, 372, 440))} z={12}>
+      <Cam {...punch(pick(v, 1.16, 1.42, 1.06) * pushK(f, 2, dur, 0.14), pick(v, MX, MX, MX - 30), pick(v, 400, 372, 440))} z={12}>
         <Room p={p} f={f} bands={2} kind="shelf" overhead="duct" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.6 * RAKE_K[v]}
           rakeN={RAKE_N[v]} floorKind="boards" grit={0.5} lamp={{ x: 560, y: 120, r: 240 }} window={null} />
         <GhFitout p={p} f={f} seed={14} z={19} graphX={88} graphY={228} cols={10} />
@@ -417,10 +442,11 @@ export const CRAM: React.FC<SP> = ({ v, dur }) => {
           background: `linear-gradient(180deg, ${mxh(IRON, 0.2)}, ${dkh(IRON, 0.3)})`,
           backgroundImage: `repeating-linear-gradient(90deg, ${hexa("#000000", 0.25)} 0 2px, transparent 2px 18px)` }} />
         <div style={{ position: "absolute", inset: 0, zIndex: 44, transform: `translateY(${jolt * 4}px) rotate(${jolt * 0.4}deg)` }}>
-          <Monitor x={MX} y={GY - 172} f={f} w={560} h={380} arrivals={arrivals} split={0} messStep={7} />
+          <Monitor x={MX} y={GY - 172} f={f} w={560} h={380} arrivals={arrivals} split={0} messStep={3} />
+        {lead > 0 && <CardTop repo={repo} f={f} lead={lead} v={v} x={286} />}
         </div>
         <Contact x={150} y={GY - 10} w={180} o={0.34} />
-        <Rig f={f} x={150 + L.b * 0.3} y={GY} size={222} z={56} act={3} gaze={1.4} stern={E(f, 20, 40, 0, 1, OUT)}
+        <Rig f={f} x={150 + L.b * 0.3} y={GY} size={222} z={56} act={3} gaze={1.4} stern={E(f, 20 + lead, 40 + lead, 0, 1, OUT)}
           shock={jolt > 0.3 ? 0.7 : 0} ph={0.4} />
         <CrewBand f={f} repo={repo} n={4} size={184} seed={BANDSEED[v] + 4} at={-40} />
         <Drum x={W + 10 + L.c} y={H + 40} s={1.0} z={90} c={dkh(repo.c2, 0.2)} />
@@ -681,7 +707,7 @@ export const GODTIER: React.FC<SP> = ({ v, dur }) => {
    S12 · THE MANIFOLD — runs dry, swaps, fills. 175 frames, three shots.
    ====================================================================== */
 const MAN_SHOTS: Shot[] = [{ at: 0, ...punch(1.22, 760, 430) }, { at: 58, ...punch(1.28, 400, 330) }, { at: 120, s: 1.0, x: 0, y: 0 }];
-export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
+export const MANIFOLD: React.FC<SPL> = ({ v, dur, lead = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("fuel");
   const L = LAY[v];
@@ -697,8 +723,8 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
      The manifold survives as the machine BEHIND him, not the thing being looked at. */
   const HX = 470 + L.a * 0.2, HS = 430;
   const a = anchors(HX, GY, HS);
-  const DRAIN = 34, ERR = 44, THROW = 76, SLAM = 96, POUR = 118;
-  const gauge = 0.80 * (1 - E(f, 4, DRAIN, 0, 1, IO)) + E(f, POUR + 6, dur - 8, 0, 0.97, OUT);
+  const DRAIN = 34 + lead, ERR = 44 + lead, THROW = 76 + lead, SLAM = 96 + lead, POUR = 118 + lead;
+  const gauge = 0.80 * (1 - E(f, 4 + lead, DRAIN, 0, 1, IO)) + E(f, POUR + 6, dur - 8, 0, 0.97, OUT);
   const err = f >= ERR && f < SLAM ? 1 : 0;
   const sel = E(f, THROW, THROW + 12, 0, 1, OUT) + E(f, SLAM + 20, SLAM + 32, 0, 1, OUT);
   /* ⛔ Alex, rev 5: "at 32 seconds it literally goes still and nothing happens, it just stays there
@@ -709,7 +735,7 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
      strobes and he watches it happen. */
   const flow = (1 - E(f, 6, DRAIN, 0, 1, IO)) + E(f, POUR, POUR + 8, 0, 1, OUT);
   const credits = Math.round(2480 * (1 - E(f, 4, DRAIN + 4, 0, 1, IO)));
-  const low = f >= 18 && f < SLAM ? (Math.sin(f / 2.6) > 0 ? 1 : 0.25) : 0;
+  const low = f >= 18 + lead && f < SLAM ? (Math.sin(f / 2.6) > 0 ? 1 : 0.25) : 0;
   const flowFill = E(f, POUR, POUR + 24, 0, 1, OUT);
   const slump = err ? E(f, ERR, ERR + 12, 0, 0.46, OUT) : E(f, SLAM, SLAM + 14, 0.46, 0, OUT);
   const hic = err ? Math.max(0, Math.sin(f * 0.62)) * 0.44 : 0;
@@ -717,7 +743,7 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
   const ride = E(f, SLAM - 18, SLAM, 0, 1, IN_Q);
   const slam = f >= SLAM ? Math.exp(-(f - SLAM) / 4) : 0;
   const cx = 150 + (HX - 210 - 150) * ride, cy = 300 + (a.hipL.y - 40 - 300) * ride;
-  const shotPush = f < 70 ? pushK(f, 0, 70, 0.26) : f < POUR ? pushK(f, 70, POUR, 0.12) : pushK(f, POUR, dur, 0.10);
+  const shotPush = f < 70 + lead ? pushK(f, lead, 70 + lead, 0.26) : f < POUR ? pushK(f, 70 + lead, POUR, 0.12) : pushK(f, POUR, dur, 0.10);
   /* ⛔ lift 1.10 against pit 1.0 on near-identical centres measured NINE bits apart at f1041 once
      encoded. Three sizes on three points: the hero, a CU on him, and the machine side of the bay. */
   const K = pick(v, 1.14, 1.42, 1.0), CX = pick(v, 470, HX, 660), CY = pick(v, 452, 412, 500);
@@ -728,6 +754,7 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
           rakeN={RAKE_N[v]} floorKind="slab" grit={0.55} lamp={{ x: 380, y: 130, r: 220 }} window={null} />
         <GhFitout p={p} f={f} seed={19} z={19} graphX={62} graphY={236} cols={11} />
         <ShopWall p={p} f={f} seed={8} bay={repo} door={false} pegX={40} pegW={220} lift={0.8} />
+        {lead > 0 && <CardTop repo={repo} f={f} lead={lead} v={v} x={716} />}
         {/* the machine, BEHIND him and half out of frame — staging, not the subject */}
         <Manifold x={880 + L.a * 0.2} y={252} f={f} sel={sel} flow={flow} s={0.86} z={40}
           outX={HX + 120} outY={a.hipL.y - 30} beadsAt={POUR} />
@@ -762,7 +789,7 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
           zIndex: 46, borderRadius: 17, background: dkh(IRON, 0.34), border: `4px solid ${dkh(IRON, 0.5)}`,
           overflow: "hidden" }}>
           <div style={{ position: "absolute", right: 0, top: 0, bottom: 0,
-            width: `${100 * (1 - E(f, 4, DRAIN + 6, 0, 1, IO)) * (1 - flowFill) + 100 * flowFill}%`,
+            width: `${100 * (1 - E(f, 4 + lead, DRAIN + 6, 0, 1, IO)) * (1 - flowFill) + 100 * flowFill}%`,
             background: `linear-gradient(180deg, ${mxh(repo.c, 0.34)}, ${repo.c} 50%, ${dkh(repo.c2, 0.2)})` }} />
           {[0, 1, 2, 3, 4, 5].map((i) => (
             <div key={"bb" + i} style={{ position: "absolute", top: 8,
@@ -770,8 +797,8 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
               background: hexa("#FFFFFF", 0.30), opacity: f < DRAIN + 6 || f > POUR ? 1 : 0 }} />
           ))}
         </div>
-        {f > 12 && f < ERR + 20 && (
-          <Fall x={HX + 150} y={a.hipL.y + 6} w={520} f={f} at={12} n={12} z={47} c={mxh(repo.c, 0.2)} rate={1.2} s={0.8} />
+        {f > 12 + lead && f < ERR + 20 && (
+          <Fall x={HX + 150} y={a.hipL.y + 6} w={520} f={f} at={12 + lead} n={12} z={47} c={mxh(repo.c, 0.2)} rate={1.2} s={0.8} />
         )}
         {/* ⭐ the number the sentence is about, falling to zero — a real count changing is the top of
             the motion table and it is also the literal claim ("runs out of credits") */}

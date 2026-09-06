@@ -451,3 +451,26 @@ Delivered: verify 9/9 ×3 · motion 11.59 / 12.16 / 11.53, 0/14 failing, 0/14 st
 HOOK_LUMA 151.3 · sat 53.2% · p10 28.5 · **dHash 23.5 / 11** · sfx clean · 104 cues, 0 collisions.
 ⛔ Two more full-width characters inside hex colours (`#55４C40`, after `#C05türk` in rev 3); there is
 now an ASCII scan over every `Rps*.tsx` hex token.
+
+## STAGE 17 — REV 7: the black edge, the card as a badge, and the press pose
+
+| note | cause | fix |
+|---|---|---|
+| *"the far right of the screen is just black, cuts 1 and 3"* | ⛔ `Cam` is **scale-then-translate**, so the `x={-0.45 * dist}` I used to follow the haul slid the 1012-wide set and left bare stage at the panel edge. Covering a 252px translate would have needed s ≥ 1.99 ([[feedback_the_crop_bound_includes_cam]]). | **no camera translate at all.** The travel happens inside the frame: house 560 → 420px, steel 392 → 340px, both still ≥ 1.0 body widths |
+| *"they need to be way more elevated"* | — | dust off BOTH wheels restruck on every surge, the load breaking loose and shedding cargo on the last surge, camera push 0.06 → 0.10/0.11 |
+| *"I don't want to see just an animation for a GitHub repo card — let's see the next animation and the card can be at the top"* | the three title beats were whole scenes whose only content was a card | the beats stop being scenes: `JAM`, `CRAM` and `MANIFOLD` take a **`lead`** and start that many frames early, every internal beat offset by it, with `CardTop` riding the card in at the top of the panel and out again. ⛔ Every SFX cue is anchored to the LATER `L` key, so **not one cue moved.** |
+| *"trial cut 2 doesn't look like it's pushing it up"* | the Mascot has no arms-overhead pose, so a bed floating above him read as a bed floating above him | two `Forearm`s locked on the underside plus drawn hand pads, and they shorten as he presses so the push has a distance |
+
+### ⛔ AND THE AUDIT'S SCENE LIST DRIFTED THE MOMENT THE BEATS MERGED
+With the title beats hosted, `TAG1` and `TAG2` were still in the scene list, so the audit graded two
+29- and 24-frame windows **whose first quarter is the scene cut itself** — Q1 42 and 53 against Q4 1.5
+and 2.2, reported as STALLS. Filling the windows with real action lifted Q2-Q4 (1.26 → 4.28) but could
+never fix a ratio whose numerator is a cut. ⭐ **The list, not the reel, was wrong.** A key whose
+comment name now starts with `x` is a CUE ANCHOR, not a scene, and `tools/rps_scenes.sh` skips it:
+14 slices → **11**, and stalls 2/14 → **0/11** ([[feedback_the_audit_scene_list_drifted]]).
+
+### Delivered
+verify 9/9 ×3 · motion 10.45 / 11.54 / 10.54, 0/11 failing, **0/11 stalls** · encoded house
+HOOK_LUMA 151.1 · sat 52.1% · p10 28.8 · **dHash 23.8 / 11** · sfx clean · 104 cues, 0 collisions.
+⛔ A third full-width character in a hex colour (`#55４C40`); the ASCII scan over `Rps*.tsx` now runs
+as part of the edit pass.

@@ -1263,8 +1263,14 @@ export const DocMorph: React.FC<{ x: number; y: number; w?: number; t?: number; 
    tow bar, and hazard stripes. Every repo that lands makes it move further.
    ====================================================================== */
 export const Sled: React.FC<{ x: number; y: number; f: number; s?: number; z?: number;
-  roll?: number; lift?: number; jolt?: number }> =
-  ({ x, y, f, s = 1, z = 50, roll = 0, lift = 0, jolt = 0 }) => {
+  roll?: number; lift?: number; jolt?: number; heroSide?: "left" | "right" }> =
+  ({ x, y, f, s = 1, z = 50, roll = 0, lift = 0, jolt = 0, heroSide = "right" }) => {
+  /* ⛔ the cargo nearest the HERO is the only cargo a viewer reliably sees, because the far end is
+     always the end cropped by the panel edge. `heroSide` puts the Office files at that end without
+     mirroring the sled (which would flip the file logos). */
+  const CG = heroSide === "right"
+    ? { files: 372, mon: 176, drum: 44, core: 150 }
+    : { files: 24, mon: 236, drum: 448, core: 396 };
   const W2 = 560 * s, BED = 46 * s, WR = 54 * s;
   const left = x - W2 / 2, bedTop = y - WR - BED - lift * 26 * s;
   /* ⛔ the wheels turn because the sled MOVED, not because time passed — a wheel spinning
@@ -1296,11 +1302,11 @@ export const Sled: React.FC<{ x: number; y: number; f: number; s?: number; z?: n
       <div style={{ position: "absolute", left, top: bedTop + BED - 12 * s, width: W2, height: 14 * s, zIndex: 3,
         background: `repeating-linear-gradient(-45deg, ${GOLD} 0 18px, ${INK} 18px 36px)`, opacity: 0.92 }} />
       {/* the tow bar, angled up to the hero's shoulder */}
-      <div style={{ position: "absolute", left: left + W2 - 6 * s, top: bedTop - 96 * s, width: 150 * s, height: 11 * s,
-        zIndex: 4, borderRadius: 6 * s, transformOrigin: "0% 50%", transform: "rotate(-33deg)",
+      <div style={{ position: "absolute", left: heroSide === "right" ? left + W2 - 6 * s : left - 144 * s, top: bedTop - 96 * s, width: 150 * s, height: 11 * s,
+        zIndex: 4, borderRadius: 6 * s, transformOrigin: heroSide === "right" ? "0% 50%" : "100% 50%", transform: `rotate(${heroSide === "right" ? -33 : 33}deg)`,
         background: `linear-gradient(180deg, ${mxh(IRON, 0.3)}, ${dkh(IRON, 0.34)})` }} />
       {/* ⭐ THE CARGO IS THE REEL'S OWN FOUR VILLAINS, stacked and strapped */}
-      <div style={{ position: "absolute", left: left + 372 * s, top: bedTop - 172 * s, width: 172 * s, height: 174 * s,
+      <div style={{ position: "absolute", left: left + CG.files * s, top: bedTop - 172 * s, width: 172 * s, height: 174 * s,
         zIndex: 4, borderRadius: 5 * s, background: `linear-gradient(150deg, ${mxh("#8C6A46", 0.2)}, #6E5236)`,
         border: `${4 * s}px solid #4E3A26`, boxShadow: SH_D, display: "flex", flexWrap: "wrap",
         alignContent: "center", justifyContent: "center", gap: 8 * s, padding: 10 * s }}>
@@ -1312,7 +1318,7 @@ export const Sled: React.FC<{ x: number; y: number; f: number; s?: number; z?: n
         ))}
       </div>
       {/* a dead monitor, screen cracked and dark */}
-      <div style={{ position: "absolute", left: left + 176 * s, top: bedTop - 122 * s, width: 172 * s, height: 124 * s,
+      <div style={{ position: "absolute", left: left + CG.mon * s, top: bedTop - 122 * s, width: 172 * s, height: 124 * s,
         zIndex: 4, borderRadius: 7 * s, background: "#2E2822", border: `${5 * s}px solid #1E1A16`, boxShadow: SH_D }}>
         <div style={{ position: "absolute", inset: 8 * s, background: "#151A22", borderRadius: 3 * s, overflow: "hidden" }}>
           {[0, 1, 2, 3].map((i) => (
@@ -1324,14 +1330,14 @@ export const Sled: React.FC<{ x: number; y: number; f: number; s?: number; z?: n
         </div>
       </div>
       {/* the dry drum, tipped, and a dead core beside it */}
-      <div style={{ position: "absolute", left: left + 44 * s, top: bedTop - 118 * s, width: 96 * s, height: 120 * s,
+      <div style={{ position: "absolute", left: left + CG.drum * s, top: bedTop - 118 * s, width: 96 * s, height: 120 * s,
         zIndex: 4, borderRadius: 8 * s, boxShadow: SH_D,
         background: `linear-gradient(90deg, ${dkh(GREEN, 0.44)} 0%, ${dkh(GREEN, 0.2)} 40%, ${dkh(GREEN, 0.5)} 100%)`,
         border: `${3 * s}px solid ${dkh(GREEN, 0.6)}` }}>
         <div style={{ position: "absolute", left: 0, right: 0, top: 28 * s, height: 12 * s, background: hexa("#000000", 0.3) }} />
         <div style={{ position: "absolute", left: 0, right: 0, top: 66 * s, height: 12 * s, background: hexa("#000000", 0.3) }} />
       </div>
-      <div style={{ position: "absolute", left: left + 150 * s, top: bedTop - 76 * s, width: 64 * s, height: 64 * s,
+      <div style={{ position: "absolute", left: left + CG.core * s, top: bedTop - 76 * s, width: 64 * s, height: 64 * s,
         zIndex: 4, borderRadius: "50%", background: `radial-gradient(circle at 40% 36%, #6E6478, #35303C)`,
         border: `${4 * s}px solid #241F2A`, boxShadow: SH }} />
       {/* the strap over the whole load */}

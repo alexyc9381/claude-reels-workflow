@@ -92,7 +92,7 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
      ⭐ And the last third is a BODY ACTION, not a wait: he is running with it. */
   const HS = 384;
   const SLAM = [10, 32, 58, 92];                       /* the repos landing on him */
-  const seg = [0, 120, 310, 560];                      /* cumulative distance after each */
+  const seg = [0, 96, 250, 420];                       /* cumulative distance after each */
   let dist = 0;
   for (let i = 0; i < 3; i++) {
     const a = SLAM[i] + 2, b = SLAM[i] + (i === 0 ? 18 : i === 1 ? 24 : 32);
@@ -116,17 +116,20 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
      as "he is dragging something" — the checklist's law 2. It starts 62% in frame, cropped by the
      left edge, which is also the near-edge mass the winners all have. */
   const sledX = HX - 262 - heave * 4, sledY = GY + 6;
-  const camS = 1.0 + 0.06 * E(f, 0, dur, 0, 1, LIN);
+  const camS = 1.02 + 0.10 * E(f, 0, dur, 0, 1, LIN);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.40}>
-      <Cam s={camS} x={-0.45 * dist} y={0} z={12}>
+      {/* ⛔ NO CAMERA TRANSLATE. `Cam` is scale-then-translate, so any x offset slides the 1012-wide
+          set and exposes bare stage at the edge — the black strip Alex saw on cuts 1 and 3
+          ([[feedback_the_crop_bound_includes_cam]]). The travel happens INSIDE the frame instead. */}
+      <Cam s={camS} x={0} y={0} z={12}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
       <GhFitout p={p} f={f} seed={0} z={19} graphX={64} graphY={232} cols={9} rail={false} />
       <ShopWall p={p} f={f} seed={0} bay={null} door pegX={560} pegW={400} />
       <GhSign x={232} y={330} w={268} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
       {/* the load, cropped by the left edge at f0 and fully in frame by the cut */}
-      <Sled x={sledX} y={sledY} f={f} s={1} z={50} roll={dist} lift={Math.min(1, dist / 560) * 0.8} jolt={thump} />
+      <Sled x={sledX} y={sledY} f={f} s={1} z={50} roll={dist} lift={Math.min(1, dist / 420) * 0.8} jolt={thump} heroSide="right" />
       {/* ⛔ the first probe drew this as a pale bar and it read as a pink pipe crossing the frame.
           It is a steel TOW BAR he has both hands on: dark, thick, angled up to his grip, and it
           shudders on every hit. */}
@@ -164,8 +167,17 @@ export const LIFTHOOK: React.FC<SP> = ({ v, dur }) => {
           <Puff x={HX - 90} y={GY - 16} f={f} at={at} c="#E4DCC8" z={58} n={12} s={1.3} up={0.15} />
         </React.Fragment>
       ) : null))}
-      {/* the wheels bite: dust kicked up behind the sled the whole way */}
-      {dist > 4 && <Puff x={sledX + 120} y={GY + 4} f={f} at={SLAM[0]} c="#DED6C6" z={52} n={9} s={1.0} up={0.1} />}
+      {/* the wheels bite: dust off BOTH wheels, restruck on every surge so it never settles */}
+      {SLAM.slice(0, 3).map((at) => (f >= at && f < at + 30 ? (
+        <React.Fragment key={"dz" + at}>
+          <Puff x={sledX - 110} y={GY + 4} f={f} at={at} c="#DED6C6" z={52} n={10} s={1.15} up={0.1} />
+          <Puff x={sledX + 150} y={GY + 4} f={f} at={at + 4} c="#D6CEBE" z={52} n={9} s={1.0} up={0.08} />
+        </React.Fragment>
+      ) : null))}
+      {/* ⭐ on the last surge the load finally breaks loose: cargo comes off the back */}
+      {f >= SLAM[2] + 6 && (
+        <Fall x={sledX - 190} y={GY - 300} w={300} f={f} at={SLAM[2] + 6} n={18} z={88} c={mxh(BONE, 0.16)} rate={2.0} s={1.5} />
+      )}
       <ShopCrew f={f} v={v} />
       <TyreStack x={-60 + L.c} n={3} s={1.0} z={96} />
       </Cam>
@@ -229,6 +241,16 @@ export const DROPHOOK: React.FC<SP> = ({ v, dur }) => {
         transform: `translateY(${bedY - GY - 6}px) rotate(${-2.5 + hit * 2 - shed * 13}deg)`, transformOrigin: `${HX}px ${GY}px` }}>
         <Sled x={HX - 30} y={GY + 6} f={f} s={0.94} z={62} roll={0} lift={0} jolt={hit} />
       </div>
+      {/* ⭐ TWO ARMS LOCKED ON THE UNDERSIDE. Without them the load reads as floating; with them the
+          hero is visibly holding it, and they shorten as he presses so the push has a distance. */}
+      <Forearm x0={HX - HS * 0.30} y0={GY - HS * 0.56} x1={HX - HS * 0.20} y1={bedY + 26} w={26} z={64} />
+      <Forearm x0={HX + HS * 0.30} y0={GY - HS * 0.56} x1={HX + HS * 0.20} y1={bedY + 26} w={26} z={64} />
+      {/* the pads his hands press into, so the contact point is drawn */}
+      {[-1, 1].map((sgn) => (
+        <div key={sgn} style={{ position: "absolute", left: HX + sgn * HS * 0.20 - 26, top: bedY + 8,
+          width: 52, height: 26, zIndex: 65, borderRadius: 7,
+          background: `linear-gradient(180deg, ${mxh(IRON, 0.2)}, ${dkh(IRON, 0.4)})`, boxShadow: SH }} />
+      ))}
       <Contact x={HX} y={GY - 10} w={HS * 0.9 + hit * 40} o={0.42} />
       <Rig f={f} x={HX} y={GY} size={HS} z={56} act={3} ph={0.3}
         strain={Math.min(1, eff + hit * 0.3 + Math.max(0, -heave) * 0.15)} lift={Math.min(1, up / 338)}
@@ -290,30 +312,31 @@ export const PITHOOK: React.FC<SP> = ({ v, dur }) => {
      ⛔ the fourth is still in the air at the cut. */
   const HS = 366;
   const SLAM = [14, 36, 62, 94];
-  const seg = [0, 84, 208, 392];
+  const seg = [0, 78, 196, 340];
   let dist = 0;
   for (let i = 0; i < 3; i++) {
     const a2 = SLAM[i] + 2, b = SLAM[i] + (i === 0 ? 18 : i === 1 ? 24 : 32);
     dist += (seg[i + 1] - seg[i]) * E(f, a2, b, 0, 1, OUT);
   }
   const heave = f < SLAM[0] + 2 ? Math.sin(f / 3.6) : 0;
-  const HX = 700 - dist - heave * 9 + L.a * 0.2;
+  const HX = 656 - dist - heave * 9 + L.a * 0.2;
   const hit = SLAM.slice(0, 3).reduce((m, at) => { const d = f - at; return d >= 0 && d < 12 ? Math.max(m, Math.exp(-d / 3.4)) : m; }, 0);
   const THUMP = [34, 62, 96];
   const thump = THUMP.reduce((m, at) => { const d = f - at; return d >= 0 && d < 10 ? Math.max(m, Math.exp(-d / 3)) : m; }, 0);
   const eff = f < SLAM[0] ? 0.92 : f < SLAM[1] ? 0.7 : f < SLAM[2] ? 0.48 : 0.28;
   const a = anchors(HX, GY, HS);
-  const sledX = HX + 270 + heave * 4, sledY = GY + 6;
-  const camS = 1.02 + 0.07 * E(f, 0, dur, 0, 1, LIN);
+  const sledX = HX + 262 + heave * 4, sledY = GY + 6;
+  const camS = 1.04 + 0.11 * E(f, 0, dur, 0, 1, LIN);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.40}>
-      <Cam s={camS} x={0.45 * dist} y={0} z={12}>
+      {/* same fix as the haul: no translate, so no bare stage at the panel edge */}
+      <Cam s={camS} x={0} y={0} z={12}>
       <Room p={p} f={f} bands={2} kind="rack" overhead="gantry" rake={0.07} rakeX={RAKE_X[v]} rakeRate={2.8 * RAKE_K[v]}
         rakeN={RAKE_N[v]} floorKind="slab" grit={0.5} window={null} />
       <GhFitout p={p} f={f} seed={5} z={19} graphX={82} graphY={248} cols={12} />
       <ShopWall p={p} f={f} seed={0} bay={null} door pegX={560} pegW={400} />
       <GhSign x={790} y={344} w={262} z={26} on={E(f, 2, 8, 0.5, 1, OUT)} f={f} />
-      <Sled x={sledX} y={sledY} f={f} s={1} z={50} roll={-dist} lift={Math.min(1, dist / 392) * 0.7} jolt={thump} />
+      <Sled x={sledX} y={sledY} f={f} s={1} z={50} roll={-dist} lift={Math.min(1, dist / 340) * 0.7} jolt={thump} heroSide="left" />
       {/* the tow bar, running back to the sled */}
       <div style={{ position: "absolute", left: HX + 40, top: GY - 224 + thump * 6,
         width: Math.max(0, sledX - HX - 60), height: 14, zIndex: 54, borderRadius: 7,
@@ -321,10 +344,20 @@ export const PITHOOK: React.FC<SP> = ({ v, dur }) => {
         background: `linear-gradient(180deg, #6A635A 0%, #3E3931 45%, #201D18 100%)` }} />
       {/* ⭐ the pit crew, shoulders into the tailgate — the load is a TEAM problem */}
       {[0, 1, 2].map((i) => (
-        <Crew key={"pc" + i} f={f} x={sledX + 300 + i * 92} y={GY + 6} i={REPOS[i].cos[0] + i * 3} size={196}
+        <Crew key={"pc" + i} f={f} x={sledX + 286 + i * 84} y={GY + 6} i={REPOS[i].cos[0] + i * 3} size={196}
           z={49 - i} at={-30} loop={1} tint={REPOS[i].c} flip
           cheer={hit > 0.5 ? 0.5 : 0} />
       ))}
+      {/* dust off both wheels, restruck on every surge */}
+      {SLAM.slice(0, 3).map((at) => (f >= at && f < at + 30 ? (
+        <React.Fragment key={"dz" + at}>
+          <Puff x={sledX + 110} y={GY + 4} f={f} at={at} c="#DED6C6" z={52} n={10} s={1.15} up={0.1} />
+          <Puff x={sledX - 150} y={GY + 4} f={f} at={at + 4} c="#D6CEBE" z={52} n={9} s={1.0} up={0.08} />
+        </React.Fragment>
+      ) : null))}
+      {f >= SLAM[2] + 6 && (
+        <Fall x={sledX + 60} y={GY - 300} w={300} f={f} at={SLAM[2] + 6} n={18} z={88} c={mxh(BONE, 0.16)} rate={2.0} s={1.5} />
+      )}
       <Contact x={HX} y={GY - 10} w={HS * 0.86 + thump * 40} o={0.4} />
       <Rig f={f} x={HX} y={GY} size={HS} z={56} act={f >= SLAM[2] ? 0 : 1} ph={0.6} flip
         drive={0.5 + 0.35 * hit + heave * 0.2} strain={eff * (0.7 + 0.3 * hit)} gaze={-0.5}

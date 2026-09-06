@@ -179,8 +179,7 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
 
   /* ── the beat clock, in this shot's own frames ─────────────────────────── */
   const COMMIT = 13, DOWN = 19, SLAM = 27, TICK = 31, LIFT = 48;
-  const SLAM2 = 80, SLAM3 = 108, LIFT3 = 126;
-  const SLAMS = [SLAM, SLAM2, SLAM3];
+  const SLAMS = [SLAM, 52];
 
   /* the raise before each blow, and the SPRING BOWS under the weight — a rigid
      stick reads as someone holding a prop (§11: WEIGHT IS DEFORMATION) */
@@ -207,16 +206,35 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
   const strain = 0.34 + raised * 0.5 + press * 0.5;
 
   /* the rows that go green, one per blow */
-  const done = 3 + SLAMS.filter((at) => f >= at).length;
 
-  /* ⭐ "SECRETLY GETTING DISTRACTED" (f50-66) — a notification crosses and HIS
-     HEAD TURNS TO IT, and it never comes back. Every blow after this lands
-     while he is looking somewhere else. */
-  const toast = E(f, o + 46, o + 132, 1120, 250, IO);
+  /* ⭐⭐⭐ THE SENTENCE TURNS ON **DISTRACTED**, AND THAT HAS TO BE THE PICTURE.
+     `feedback_illustrate_the_sentence_not_the_set`: run the MUTE TEST on the
+     hook's verb. Muted, rev 9 read as "a Claude stamps a stack" — which is the
+     LYING clause, not the DISTRACTED one, and "distracted" is the word the whole
+     reel turns on. It was demoted to a toast sliding past behind him.
+     The shot is now the sentence, in its own measured order:
+       f0-27    he stamps once. The job, and the lie: DONE on an empty receipt.
+       f46-66   "getting distracted" — a notification lands BIG, centre frame,
+                and he TURNS to it.
+       f66-100  "skipping your tasks" — he WALKS AWAY toward it, 190px, over
+                half his own body width, and the prompts keep flying in and
+                PILE UP UNSTAMPED behind him.
+       f100-135 "lying to you about it" — the rows tick themselves green in an
+                ascending run while he is not even looking, and the tower sheds.
+     ⛔ He never comes back. The shot does not resolve. */
+  const toast = E(f, o + 40, o + 58, 1180, 738, OUT);   /* it ARRIVES, and it is
+     BIG enough to be the reason he turns — but ⛔ not frame-covering: at s=1.22
+     centred it hid the hero, the tower and the blow all at once and the hook
+     lost 1.9 of motion to one static rectangle. */
   const away = E(f, o + 52, o + 66, 0, 1, OUT);
+  const leave = E(f, o + 66, o + 100, 0, 190, IO);          /* he goes after it */
+  /* the rows that tick themselves while he is gone — an ascending run */
+  const SELF = [102, 110, 118, 126];
+  const selfDone = SELF.filter((a2) => f >= o + a2).length;
+  const done = 3 + SLAMS.filter((at) => f >= at).length + selfDone;
 
   /* the stamp's own position, hinged off his shoulder */
-  const devX = 262 + L.a * 0.4;
+  const devX = 262 + L.a * 0.4 - leave;
   const size = 356;
   const shX = devX + 118, shY = GY - size * 0.56;
   /* ⛔ THE RESERVED BAND. Nothing may enter panel y 112..210 (`BAND_Y`), and the
@@ -290,16 +308,40 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
           w={332} z={66} f={f} lean={0.4 + SLAMS.filter((at) => f >= at).length * 0.5} jolt={jolt} />
         <ClaimBoard x={648 + L.c * 0.4} y={414} w={404} h={330} z={60} f={f}
           done={done} jolt={jolt} big={`${done}/${R.tasks}`} />
-        {/* ⭐ THE PROMPTS FLYING IN — one per blow, from off-frame, slapping on */}
-        {SLAMS.map((at) => {
+        {/* ⛔ FRAME-0 LUMA WAS 140.6 AGAINST A `>= 140` LAW — 0.6 of margin on a
+            hard gate is not margin. Two prompts already lying on the desk in
+            the foreground: bright paper where the frame needs it, on topic, and
+            they give the near ground something to be. */}
+        <PromptCard x={196 + L.a * 0.3} y={GY - 88} w={252} z={91} rot={-7}
+          seed={3} done={1} hue={SKY} clip ring />
+        <PromptCard x={378 + L.a * 0.3} y={GY - 52} w={236} z={90} rot={5}
+          seed={8} done={1} hue={VIOLET} clip={false} />
+        {/* ⭐ "LYING TO YOU ABOUT IT" — the rows tick THEMSELVES while he is gone,
+            in an ascending run, each with its own ring. He is not even here. */}
+        {SELF.map((a2, i) => f >= o + a2 && f < o + a2 + 16 ? (
+          <React.Fragment key={"sf" + a2}>
+            <Ring x={700 + L.c * 0.4} y={330 + i * 46} f={f} at={o + a2}
+              c={mxh(OKGREEN, 0.45)} z={94} s={0.5} dur={13} />
+            <Puff x={700 + L.c * 0.4} y={330 + i * 46} f={f} at={o + a2} c="#CFE8D8"
+              z={94} n={6} s={0.6} />
+          </React.Fragment>
+        ) : null)}
+        {/* ⭐ THE PROMPTS FLYING IN — and after he leaves they just PILE UP */}
+        {[20, 46, 70, 88, 104, 120].map((at) => {
           const k = inK(at);
           return k > 0.02 && k < 1 ? (
             <PromptCard key={"in" + at} x={1180 - k * 470 + L.c * 0.3}
               y={210 + k * 176} w={228} z={90}
-              rot={-38 + k * 46} seed={at} done={1} hue={TASKS[at % 6].c}
+              rot={-38 + k * 46} seed={at} done={0} hue={TASKS[at % 6].c}
               clip ring={at % 2 === 0} />
           ) : null;
         })}
+        {/* the ones that landed after he walked off, stacking UNSTAMPED */}
+        {[70, 88, 104, 120].map((at, i) => f >= o + at ? (
+          <PromptCard key={"pu" + at} x={392 + L.c * 0.3 + i * 26} y={GY - 46 - i * 20} w={196}
+            z={84 + i} rot={-9 + i * 6} seed={at} done={0} hue={TASKS[at % 6].c}
+            clip={i % 2 === 0} />
+        ) : null)}
         {/* ⭐ AND THE FLURRY THE BLOW KNOCKS LOOSE */}
         {SLAMS.map((at) => (
           <Flurry key={"fu" + at} x={660 + L.c * 0.4} y={470} f={f} at={at} n={6} z={88}
@@ -348,7 +390,7 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
         )}
 
         {/* ⭐ "SECRETLY GETTING DISTRACTED" — it slides in and he never looks back */}
-        <Toast x={toast} y={GY - 168} s={0.86} z={78} f={f} hue={SKY} />
+        <Toast x={toast} y={GY - 268} s={0.94} z={92} f={f} hue={SKY} />
 
         {/* ⛔ THE NEAR-EDGE CROP IN FRONT OF THE ACTION */}
         <PaneStack x={W - 34 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.92} />
@@ -772,6 +814,17 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
           ) : null
         ))}
 
+        {/* ⭐ MEASURED 9.68 with 47% HOLD. Prompts fly in and CLIP to the rail as
+            the ledger prints, so the beat has arrivals across its whole span
+            rather than a table filling in place. */}
+        {[16, 32, 48, 64].map((at, i) => {
+          const k = E(f, at, at + 16, 0, 1, OUT);
+          return k > 0.02 ? (
+            <PromptCard key={"lg" + at} x={1120 - k * 620 + L.c * 0.3}
+              y={214 + i * 40 - (1 - k) * 60} w={208} z={90 + i}
+              rot={-30 + k * 34} seed={at} done={0} hue={TASKS[i].c} clip={i % 2 === 0} />
+          ) : null;
+        })}
         {/* the band that crosses the ledger as its last row closes */}
         <Sweep k={E(f, 74, 96, 0, 1, IO)} y={180} h={330} c="#CFF2DC" z={86} w={250} o={0.40} />
         <PipRow lit={rows} f={f} at={24} pop={1} z={92} />
@@ -845,6 +898,17 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
         {/* the exit codes, stamped */}
         <ExitStamp x={786 + L.c * 0.4} y={318} s={1.0} z={90} k={stamp1} />
         <ExitStamp x={786 + L.c * 0.4} y={438} s={0.9} z={90} k={stamp2} />
+        {/* ⭐ the row that finally has a receipt, leaving */}
+        {E(f, 88, dur, 0, 1, IN_Q) > 0.02 && (
+          <PromptCard x={300 + L.c * 0.3 - E(f, 88, dur, 0, 1, IN_Q) * 190}
+            y={GY - 150 + E(f, 88, dur, 0, 1, IN_Q) * 150}
+            w={228 + E(f, 88, dur, 0, 1, IN_Q) * 130} z={94}
+            rot={E(f, 88, dur, 0, 1, IN_Q) * 9} seed={7} done={1} hue={GREEN} clip ring />
+        )}
+        {[66, 82].map((at) => (
+          <Flurry key={"rf" + at} x={786 + L.c * 0.4} y={370} f={f} at={at} n={3} z={93}
+            s={0.68} spread={220} />
+        ))}
         {stamp1 > 0.6 && <Ring x={786 + L.c * 0.4} y={318} f={f} at={66} c={mxh(GOLD, 0.4)} z={91} s={0.95} dur={14} />}
         {stamp2 > 0.6 && <Ring x={786 + L.c * 0.4} y={438} f={f} at={82} c={mxh(GOLD, 0.4)} z={91} s={0.95} dur={14} />}
         {f >= 66 && f < 82 && <Puff x={786 + L.c * 0.4} y={318} f={f} at={66} c="#E8DCC0" z={91} n={8} s={0.75} />}
@@ -985,6 +1049,15 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
               label={false} />
           );
         })}
+        {/* ⭐ MEASURED 9.15 with 54% HOLD. ONE prompt crawls the full width across
+            the whole beat — "one task at a time" as a single continuous travel —
+            and every close sheds paper. */}
+        <PromptCard x={E(f, 4, dur - 6, -180, 1160) + L.b * 0.3} y={470} w={244} z={86}
+          rot={-4} seed={5} done={0} hue={CLAY} clip />
+        {[6, 21, 36, 51, 66].map((at) => (
+          <Flurry key={"nf" + at} x={506 + L.b * 0.3} y={420} f={f} at={at} n={3} z={88}
+            s={0.66} spread={260} />
+        ))}
         {/* a band crosses the strip as each row closes */}
         {[0, 1, 2, 3, 4].map((i) => (
           <Sweep key={"nsw" + i} k={E(f, 6 + i * 15, 6 + i * 15 + 13, 0, 1, IO)} y={200}
@@ -1249,6 +1322,22 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
         <DoneChip x={806 + L.c * 0.3} y={GY - 120} s={1.05} z={80} ring={chip} />
         {chip > 0.1 && <Ring x={806 + L.c * 0.3} y={GY - 132} f={f} at={40} c={mxh(GOLD, 0.5)} z={86} s={0.8} dur={20} />}
 
+        {/* ⭐ MEASURED 8.22, the weakest scene. Four proved prompts fly in on the
+            four spoken letters and land in a fan, each with a FILLED receipt —
+            the reel's own object, arriving, on the beat. */}
+        {[8, 15, 22, 29].map((at, i) => {
+          const k = E(f, at, at + 14, 0, 1, OUT);
+          return k > 0.02 ? (
+            <PromptCard key={"cta" + at} x={186 + i * 34 + k * 40 + L.c * 0.3}
+              y={GY - 132 - i * 22 + (1 - k) * -220} w={214} z={88 + i}
+              rot={-16 + i * 9 + (1 - k) * -28} seed={at} done={1} hue={TASKS[i].c}
+              clip={i % 2 === 0} ring={i === 1} />
+          ) : null;
+        })}
+        {[8, 15, 22, 29].map((at) => (
+          <Flurry key={"cf" + at} x={300 + L.c * 0.3} y={GY - 190} f={f} at={at} n={3} z={93}
+            s={0.7} spread={220} />
+        ))}
         <Sweep k={E(f, 30, 52, 0, 1, IO)} y={200} h={400} c="#FFF0C8" z={86} w={250} o={0.42} />
         <PipRow lit={6} f={f} at={6} pop={1} z={92} />
         <Contact x={430 + L.a * 0.3} y={GY - 6} w={196} o={0.34} z={44} />
