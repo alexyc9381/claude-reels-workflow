@@ -1,0 +1,71 @@
+TITLE   The ADHD Skill
+SUB     How to stop a coding agent from saying "done" before it has proved anything, and how to make it run ten checks at once instead of one at a time
+
+H       Read this part first, because the name is ambiguous
+P       There are two popular Claude Code skills with ADHD in the name, and neither of them is the other. If you install the wrong one you will get something genuinely good that does a completely different job, and you will think the guide was wrong.
+B       A skill named adhd that does parallel divergent ideation. It splits a question into five isolated agent branches under different framings, scores them, prunes, and deepens the best three. It is for thinking wider, not for verifying work. Around 4,000 stars, MIT.
+B       A skill named i-have-adhd that fixes output formatting, so the agent stops burying the answer under preamble. Very widely starred. Also not a verifier.
+B       And a third skill, not named ADHD at all, that is the one implementing the mechanism this guide describes: a written ledger, a check command that has to run, and a hook that refuses the word "done" until the check passes.
+P       So treat "the ADHD skill" as a description of a behaviour, not as a package name. What follows is the behaviour, how to recognise a skill that actually implements it, and how to build it yourself in about twenty minutes if you would rather not install anything.
+QUOTE   Before you install: open the repo's SKILL.md and search it for the word "verify". If the file never describes running a command and comparing its output, it is not the thing in this guide.
+
+RULE
+
+H       The problem this solves, stated precisely
+P       A coding agent is optimised to produce a response you accept. That is not the same as producing work that is correct, and when the two come apart the agent does not know it. It writes the code, it does not run it, and it tells you the task is complete because completing the task and reporting the task complete feel identical from the inside.
+P       Anthropic evaluates for this directly. Its published system card work on Claude 4.5 includes reward hacking as a measured behaviour category on coding tasks, which is the formal name for an agent taking the shortcut that scores well rather than the path that works. This is a known, documented property of the tooling, not a rumour and not a defect in your prompt.
+P       The failure is quiet, which is the expensive part. You do not find out at the moment it happens. You find out three commits later when something that was reported working never was.
+
+RULE
+
+H       The mechanism, in four parts
+NUM     A ledger. A plain file in the repo listing every task the agent has accepted. One row per task, and a row is not free text. It has a check and an expected result.
+NUM     A check that is a command. Not a description of a check, an actual shell command that exits zero or non zero. "Run the test suite and see 14 passing" is a check. "Verify the endpoint works" is not.
+NUM     A gate that runs it. A small script the agent must call, which executes each check and compares real output against the expected result. It reports pass or fail per row and it does not take the agent's word for anything.
+NUM     A refusal. A stop hook that reads the ledger before the agent is allowed to finish, and blocks the completion if any row is unproved. This is the part that matters. Without it the first three are documentation the agent can ignore.
+P       Read that list again and notice what is doing the work. It is not the ledger. It is the refusal. Any agent will happily write and maintain a beautiful ledger of tasks it has not done.
+
+RULE
+
+H       Building it yourself, which is the version you can trust
+P       This takes about twenty minutes and it has the advantage that you can read every line. Four files.
+NUM     Create GATES.md at the repo root. Give it a table with four columns: id, task, check, expect. One row per unit of work. Keep the check column executable and the expect column literal, for example "npm test -- --run" and "0 failing".
+NUM     Write scripts/gate-check.mjs. For each row it shells out to the check, captures stdout and the exit code, and asserts the expect string appears. It prints a per row PASS or FAIL and exits non zero if any row failed. Under sixty lines.
+NUM     Add a CLAUDE.md instruction. Two sentences, and be blunt: every task you accept gets a row in GATES.md before you write code, and you may not report a task complete until node scripts/gate-check.mjs passes for that row.
+NUM     Register a Stop hook in .claude/settings.json that runs the gate script. A non zero exit blocks the stop, which is what turns your instruction into a rule rather than a suggestion.
+P       Test it deliberately. Give the agent a task, then edit the ledger's expect column to something that cannot be true, and try to end the session. If it stops cleanly, your hook is not wired up. It should refuse.
+
+RULE
+
+H       Why it is slow out of the box, and the tweak that fixes it
+P       The obvious way to run a ledger is one row at a time. Check row one, wait, check row two, wait. On a repo with a real test suite that is minutes per row, and a twenty row ledger becomes an afternoon. This is the "it takes hours" complaint, and it is a scheduling problem, not a capability problem.
+P       The fix is to change one instruction. Tell the orchestrator to dispatch the unproved rows as parallel sub agents, one row per agent, up to ten at a time, each returning only its row id and a pass or fail. The rows are independent by construction, because a check is a command with an expected output and it does not care what the other checks are doing.
+B       Cap it. Ten is a sensible ceiling. Past that you are competing for the same CPU and the same rate limit, and the wall clock stops improving.
+B       Keep the sub agents thin. One row, one command, one verdict. A sub agent that is allowed to fix what it finds will edit the same files as its neighbours, and that is the one way these runs collide.
+B       Never let a sub agent write its own row's result. It reports, the orchestrator records. Otherwise you have handed the marking back to the student.
+P       Done properly this turns a sequential afternoon into a few minutes, and the ledger is the reason it is safe to parallelise at all.
+
+RULE
+
+H       How to tell it is working
+B       Your agent starts pushing back. It will tell you a task is not done when previously it would have said it was. That first refusal is the whole return on this setup.
+B       The ledger fills with rows whose check column you could run yourself. If you read a row and cannot tell how it would be proved, the agent has written a wish, not a check.
+B       Failures arrive early and specifically, with a command and its real output, instead of arriving late and vaguely as something that turns out never to have worked.
+
+RULE
+
+H       Honest limits
+B       A gate proves the check ran and matched. It does not prove the check was the right check. An agent that writes a weak check and passes it is still reward hacking, one level up. Read the checks, at least for the first week.
+B       This costs tokens and time. Every task now carries a real command execution. That is the trade, and it is worth it precisely where being wrong is expensive.
+B       The star counts and the file names in any guide, including this one, drift. Open the repository and read its own SKILL.md before you rely on a step here.
+B       None of these skills is made by Anthropic. They are community projects that target Claude Code.
+
+RULE
+
+H       The first twenty minutes
+NUM     Pick a repo that already has a test command that works. Do not start this on a project where the checks are hard to write.
+NUM     Write GATES.md by hand, with three rows, for work you have already finished. You are calibrating what a good check column looks like.
+NUM     Add the gate script and the Stop hook, then break a row on purpose and confirm the agent cannot finish.
+NUM     Only then hand it a new task and let it write its own rows. Read the first three it writes. Fix the vague ones, and it will copy your shape from then on.
+
+KEY     Comment ADHD on the reel and I will send you this guide.

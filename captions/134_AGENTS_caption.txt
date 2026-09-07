@@ -1,0 +1,27 @@
+Comment "AGENTS" and I'll send you the repo plus the setup guide.
+
+👇 READ BELOW
+
+You are running one general AI and asking it to do nine jobs.
+That is why the output is average.
+
+The repo is wshobson/agents. 39.4k stars, 202 specialized agents, MIT licensed, free.
+Each one is a role: a frontend engineer, a backend engineer, a security auditor, an SRE, a database specialist. You install the marketplace once and call the role you need.
+
+★ 39.4k stars
+→ 202 agents across architecture, languages, infrastructure, security, data, ML, docs, business and SEO
+→ 94 plugins, 183 skills, 105 commands
+→ 16 orchestrators for running several agents on one job
+→ works in Claude Code, and also Codex, Cursor, OpenCode, Copilot and Antigravity
+
+Here is the mechanism. A general model holds one context and one set of instructions, so every extra requirement dilutes the last one. A specialized agent carries its own instructions, its own conventions and its own definition of done, so it is not negotiating with eight other jobs while it works. Point four of them at one app and each returns work in its own lane instead of one model averaging across all four.
+
+The part nobody mentions: the win is not that the agents are smarter. It is that you stop rewriting the same context every session. The role already knows what good looks like, so your prompt gets to be the actual task.
+
+Comment "AGENTS" and I'll send you the repo link and the guide on wiring a four agent team to one build.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #aiagents #subagents #aitools #aicoding #vibecoding #buildinpublic #devtools #softwareengineering #opensource #github #aiautomation #codingtips #aiforbeginners #programming #techtools #aiworkflow #developers

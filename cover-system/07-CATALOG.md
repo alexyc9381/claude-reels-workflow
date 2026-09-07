@@ -26,6 +26,7 @@ Both numbers are in circulation and both are right about different things. State
 | `src/ReelCovers3.tsx` | `SceneCover` | 7 | OS (v2), TAKES, CAROUSEL, DESIGN, CALLBACK, PURGE, PLUGINS |
 | `src/ReelCovers4.tsx` | `SceneCover` | 13 | POWERS, EVOLVE, STACK, ARENA, VAULT, MINT, CREW, BLUEPRINT, CLONE, WORTHY, ATTACK, FACTORY, SOL |
 | `src/ReelCovers5.tsx` | `SceneCover` | 2 | BOSS (reel 128), FREE (reel 131) |
+| `src/ReelCovers6.tsx` | `SceneCover` | 3 | LIBRARY (130), UNLAZY (120), FREE v2 (131) |
 
 - **23 covers built** in total (3 + 2 + 7 + 13). This is the number in the build memory.
 - **23 scene covers** (3 + 7 + 13). These are the ones on the locked `SceneCover` header slot, the
@@ -481,3 +482,229 @@ no names**: listing contents on a cover is a documented rejection, and GROK has 
 margins, inside the range Alex has already rejected once ("too close to the edges", at 37/30). Dropping
 one word took it to 146/142. **Measure line1's own margins after writing it; the verifier only checks
 the giant.**
+
+
+---
+
+## Sets 8-10 — LIBRARY 130, UNLAZY 120, FREE 131 v2 (added 2026-09-02)
+
+| | LIBRARY (130) | UNLAZY (120) | FREE v2 (131) |
+|---|---|---|---|
+| line1 | `52 `CLAY:FREE` PROMPTS` | `CLAUDE `CLAY:FAKES` DONE` | `CLAY:7` PREMIUM MODELS` |
+| giant | `LIBRARY` | `UNLAZY` | `FREE` |
+| scene | the prompt counter: a card-drawer wall, one drawer pulled open, the hero PROMPT CARD with its category tab, Claude mark and punched fill-in slots | **the brass DONE press, huge, slammed down and stopped dead on the gate bar**, with the run's printout below it | one dark panel holding all seven marks, the fares dropping away under it |
+| delivered | `Faceless/130 - LIBRARY/130_LIBRARY_cover.png` | `Faceless/120 - UNLAZY/120_UNLAZY_cover.png` | `Faceless/131 - FREE/131_FREE_cover_v2.png` |
+
+**⛔ LIBRARY prints 52 and nothing implies more.** The delivered VO says "over a hundred" and it is
+wrong; the library holds 52. The storyboard's revision block flags it as unresolved at delivery and
+the live article corrects it, so the cover must not inherit the error.
+
+**⛔ UNLAZY's line1 is deliberately not "CLAUDE LIES."** That is reel 132 JUDGE's line1, and these
+sit in the same grid — two covers opening on the same sentence is the sameness failure.
+
+**⭐ FREE v2 is a real variant, not a regrade.** v1 is six white tiles spread across a cream wall;
+v2 is one near-black panel holding all seven. That inverts both value structure and geometry, which
+are the two things a dHash measures — recolouring v1 would have scored as a duplicate.
+
+### Three defects this round produced
+
+1. ⛔ **A prop in the header quiet zone fails two checks at once, and only one names it.** UNLAZY's
+   DONE stamp sat at y628, inside y336..780. The verifier reported `header slot: text runs to y=779`
+   — which reads as a type problem and is not. The quiet-zone step jumped to 194 against a limit of
+   40. **Read the quiet-zone number before believing the header-slot message.**
+2. ⛔ **`line1` has no optical fit and the verifier does not check it.** All three shipped at 20
+   characters and measured 67/62, 44/42 and 69/66 — against the 37/30 Alex has already rejected as
+   "too close to the edges". Measured rate: **~50px of margin per character.** 20 chars is the
+   ceiling only when the words are narrow; 15-17 is the safe band. Always scan y430..505 separately.
+3. ⛔ **A count element contradicted its own headline.** Every ledger row drew a tick, including the
+   row still being proven, while the whole claim is that a gate only flips once evidence prints. The
+   unearned slot is now a dark empty gate — a different VALUE, not just a different hue (§C).
+
+
+### ⛔⛔ UNLAZY v1 was a CHECKLIST, and it was rejected: *"the unlazy one needs to be way better"*
+
+Two standing rules diagnosed it, and neither is about taste:
+
+1. **"GREY + RECTANGULAR is the named boring combination"**
+   ([[feedback_villain_is_sameness_not_ugliness]]). v1 was a dark rectangle carrying six grey rows —
+   close to the lowest-scoring thing that can be drawn.
+2. **It argued the WRONG CLAIM.** The reel's claim is that Claude *rubber-stamps* work it never did.
+   A tidy board of green ticks is a picture of a job going WELL. A picture that argues the wrong
+   claim cannot be rescued by making it prettier — which is exactly what a "make it better" note
+   tempts you to try.
+
+⛔ **And in the grid it collided with LIBRARY**, which is also a big light rectangle ruled with
+horizontal lines. Two tiles, one silhouette. **Always lay the new cover beside its neighbours at
+150px before shipping; a silhouette clash is invisible at full size.**
+
+**The rebuild made the VILLAIN the image:** the brass DONE press, huge, stopped dead on the gate
+bar, with the run's printout underneath as what the gate actually accepts. One object, nameable in
+half a second, and a silhouette nothing else in the set owns.
+
+Two ordering bugs it produced, both invisible in code and obvious in the render:
+- **The impact was centred on the die and sat straight on the word DONE** — the one thing on the
+  press that has to stay legible. It belongs at the CONTACT CORNER.
+- **The bar was drawn BEFORE the press, so it passed behind the die** and read as a red line lying
+  nearby. Drawn AFTER, the die is visibly stopped ON it. **Depth order is what makes a barrier a
+  barrier.**
+
+
+---
+
+## Sets 12-15 — UNLAZY v2, SQUAD, SIMS, AGENCY (added 2026-09-05, `src/ReelCovers8.tsx`)
+
+| | UNLAZY v2 (120) | SQUAD (112) | SIMS (136) | AGENCY (135) |
+|---|---|---|---|---|
+| line1 | `NOW IT `CLAY:PROVES` IT:` | `7 `CLAY:FREE` REPOS, ONE` | `RUN `CLAY:9` CLAUDES LIKE` | `OWN A `CLAY:273`-AGENT` |
+| giant | `UNLAZY` | `SQUAD` | `SIMS` | `AGENCY` |
+| scene | the printout it must now hand over, unspooling from the rig, the DONE press tipped and idle | the summoning floor: 7 bound volumes thrown in a radial ring round one Claude on a lit disc | the 2D office: 9 agents at 9 desks, an envelope crossing the floor | the house wardrobe: a costume rail running off both frame edges, one taken off it |
+| delivered | `_Archive/*REELS 90-129/120 - UNLAZY/120_UNLAZY_cover_v2.png` | `_Archive/*REELS 90-129/112 - SQUAD/112_SQUAD_cover.png` | `136 - SIMS/136_SIMS_cover.png` | `135 - AGENCY/135_AGENCY_cover.png` |
+
+⛔ **SET 11 (reel 134 AGENTS) HAS NO SOURCE.** It lived in an untracked `ReelCovers7.tsx` that was
+overwritten on 2026-09-05. The delivered PNG survives; the scene does not. See
+`feedback_untracked_file_is_one_write_from_gone`.
+
+### ⭐ THE VERIFIER COULD NOT TELL A DESCENDER FROM A WRAP
+
+`SQUAD` is the first giant in the set with a descender. Its Q tail reaches y671 on a **single 573px
+line with 256px margins**, and the old check failed it twice over:
+
+```
+FAIL header slot   text runs to y=671 - the giant WRAPPED, reduce giantSize
+FAIL quiet zone    max step 225 (limit 40)
+```
+
+Both were false. `check_header_slot` used "any ink past 665" as a wrap proxy — safe only because
+every previous giant (BOSS, FREE, LIBRARY, UNLAZY, JUDGE, BUILD, SIMS, AGENCY) is descender-free.
+And `check_quiet_zone` scanned from a hard y665, so it read the glyph tail as architecture.
+
+**The fix, in `tools/verify_cover.py`:** a wrapped second line is a LINE; a descender is one glyph's
+tail. Past 665 the check now measures the tail's x-span against the giant's width and passes it only
+when it is **≤22% wide and ends by y700**. The quiet-zone scan starts below the headline's measured
+ink instead of a constant. Shrinking `SQUAD` to satisfy the old rule would have cost ~30% of the word
+for nothing.
+
+⚠️ **Regression run after the change: the whole shipped set still passes, and the one failure is
+`AGENTS134_cover.png` — ink to y779, real geometry in its quiet zone.** That is a genuine defect in a
+delivered cover, it pre-dates this change (779 > the 700 ceiling, so the new descender path cannot
+reach it), and it cannot be re-rendered because that cover's source is the one that was lost.
+
+
+---
+
+## ⛔⛔⛔ 2026-09-05 — A COVER IS A THUMBNAIL (applies to every cover from here)
+
+*"treat them like thumbnails so they need to be way more hierarchical and the main thing you want to
+focus on like bigger and in the middle."*
+
+Five covers were recomposed against a rule the handbook already had (§K.1) but that I had been
+satisfying only technically:
+
+- **hero >=55% of the 1080 frame, CENTRED on x=540 (±60)**
+- **every other object <=40% of the hero, at the periphery**
+- **anything that still competes is CUT** — reel 120 v1's receipt was deleted outright, because it is
+  v2's whole subject and it was splitting the hierarchy
+
+| cover | before | after |
+|---|---|---|
+| 120 UNLAZY | press 548px, receipt + operator at comparable weight | press **740px** centred, receipt cut, operator a 150px scale cue |
+| 120 UNLAZY v2 | printout 330px, off-centre, aspect 1.72 | sheet **530px** centred, aspect re-cut to 1.19 so it fills width |
+| 112 SQUAD | mascot 300px at x470, volumes 134-182 | mascot **462px** dead centre, ring scaled to 160-210 |
+| 136 SIMS | nine identical desks, 150-202px | **6 / 2 / 1 pyramid**, one 460px hero desk centred |
+| 135 AGENCY | uniform 190px rail, hero costume 158px | rail down to 122px, hero costume **380px** centred |
+
+⛔ **N EQUAL OBJECTS IS N SUBJECTS, WHICH IS NONE.** SIMS's nine-desk grid was the clearest case: a
+perfectly even layout has no hierarchy at all. Keep the count, break the evenness.
+
+⚠️ **A ROTATED HERO IS SEATED BY ITS BOUNDING BOX.** Enlarging the press to 740x629 at -6deg lifted
+its corner 37px to y763, inside the quiet zone — and the verifier reports that as *"the giant
+WRAPPED"*, which points at the type. Rise = `((w·sin t + h·cos t) − h) / 2`. Compute before placing.
+
+
+### ⛔⛔⛔ 135 AGENCY REBUILT — a reel's METAPHOR does not transfer to its cover
+
+*"the AI agency graphic does not represent an agency.... its literally just clothes like wtf."*
+
+The first version took reel 135's own mapping table literally — "273 costumes on one travelling rail
+= 273 agents" — and drew the rail. That device works in the reel because a VO explains it over twenty
+seconds. A cover has no VO: half a second, a rack of coats, a clothes shop.
+
+**Take the reel's SUBJECT and LANGUAGE, not a metaphor that needed narration.** An agency is
+specialists, so the rebuild is specialists: a 470px suited owner dead centre and sixteen Claudes
+massed behind on two ranks, each cycling a different costume lever, which reads as "273 specialists,
+18 divisions" with no caption.
+
+⛔ It had to stay clear of reel 136 SIMS, which is also "lots of Claudes" — SIMS is a SPARSE ROOM of
+desks and monitors, AGENCY is a DENSE CROWD of bodies with no furniture at all.
+⛔ The stage opening was first drawn as a bordered light shape and read as a stray thin ARC across the
+crowd. An arch is a SOLID MASS a shade off its wall, never an outline.
+
+
+---
+
+## Set 16 — reel 137 REPOS (added 2026-09-06)
+
+| field | value |
+|---|---|
+| line1 / giant | `CLAY:4` FREE REPOS` / `GOD TIER` |
+| source | the reel's own band `UPGRADE YOUR CLAUDE / 4 FREE REPOS`, plus its logline: *"turn a stock Claude into a god-tier one"* |
+| scene | the reel's declared HERO ARTIFACT verbatim — the fully upgraded Claude rolling off the lift with all four parts on him (INTAKE · HUD · CORE · TANK) and the god-tier cape |
+| delivered | `Faceless/137 - REPOS/137_REPOS_cover.png` |
+
+⛔ **NO STAR FIGURES AND NO REPO NAMES.** The reel earns ★20,397 / ★35,522 / ★213,060 / ★61,564 by
+saying them; four names on a cover is the "text things that shouldn't be there" rejection.
+
+### ⛔⛔⛔ REBUILT — "GOD TIER" HAS TO LOOK LIKE A GOD
+
+*"make it more look like a god or something like that right now it just looks kind of odd and
+misplaced."* The first pass bolted the reel's four upgrade PARTS onto the sprite literally — a funnel,
+a tank, a screen, a disc. With no VO those read as appliances stuck to a mascot: odd, and the headline
+said GOD TIER while the picture said plumbing. **Same class as the reel-135 costume rail: the reel's
+own device does not survive without its narration.**
+
+⭐ **The fix is ICONOGRAPHY, not more parts.** What reads as divine in half a second is a RADIANT
+AUREOLE, a CROWN, a raised PEDESTAL, and small figures looking UP. The four repos survive as four
+haloed ORBS — relics, not fittings — so the count is kept and nothing has to be decoded.
+
+⛔ **A halo has to be BIGGER than the thing it haloes.** The first burst ran r=386 against a 640px
+hero, so the rays cleared his silhouette by ~60px and it simply did not read as a halo. The ring is
+now drawn bright and thick and sits clear of the body.
+
+### Two earlier defects, both about the hero being unreadable
+
+1. ⛔⛔ **THE HUD WENT ACROSS HIS EYES AND THE CAPE SWALLOWED HIM.** A 720px cape in a red one step
+   off the clay body, plus a visor over the face, produced a single red blob with no character in it.
+   [[feedback_face_is_a_performance_surface]] — **the eyes are the one region nothing may cover.**
+   The four parts now sit on the HEAD-TOP, the two SHOULDERS and the CHEST BAND, which is exactly
+   where the house costume levers live, and the cape is small enough to show only at the shoulders.
+2. ⛔ **A warm hero on a warm wall is half of a blob.** The bay wall was re-shifted COOL grey so the
+   clay sprite separates from it — the same value-structure point as
+   [[feedback_eyecatch_is_value_structure]].
+
+⭐ And the sprite is bigger than it looks: the Mascot viewBox carries ~22% empty space above the body,
+so a 700px sprite draws a ~510px visible figure. **Size the hero by its DRAWN extent, not its box.**
+
+
+---
+
+## Set 17 — reel 136 ADHD (added 2026-09-06)
+
+| field | value |
+|---|---|
+| line1 / giant | `CLAUDE HAS `CLAY:ADHD`` / `ONE FIX` — both from its own band `CLAUDE HAS ADHD / ONE SKILL FIXES IT` |
+| scene | the session panel (Claude mark + draining context meter), two dim todo rows, and one enormous green tick struck through in red |
+| delivered | `Faceless/136 - ADHD/136_ADHD_cover.png` |
+
+⛔⛔⛔ **THIS REEL'S WORLD WAS REJECTED ONCE ALREADY, SO THE COVER INHERITS THE CONSTRAINT.** Rev 1 was
+a restaurant kitchen: *"it's like a cooking theme. This is not good... it should be just a theme
+related to Claude and stuff like that."* Every gate had been green. The board's rev-2 answer binds the
+cover too — **what travels is Claude Code's TODO LIST with checkboxes**, and the world is the session
+chrome. Nothing the product does not have.
+
+⛔ **It also had to not look like reel 120 UNLAZY**, which is the same subject re-recorded. 120 v1 is
+a warm gold press in a municipal hall, 120 v2 a cream printout; this is a DARK PRODUCT UI. Different
+world, different value, different silhouette.
+
+⛔ **TWO SYMBOLS STACKED ON ONE SHAPE MEANS THE LOUDER ONE IS THE ONLY ONE.** v1 struck the tick with a
+full X and the X won outright — the tick underneath was invisible and the object read as "a green
+square, cancelled". ONE diagonal, run across the tick's short axis, cancels it and leaves it legible.

@@ -78,6 +78,20 @@ def check_header_slot(a):
     if not (SLOT_TOP_MIN <= top <= SLOT_TOP_MAX):
         return False, f"slot top y={top}, expected {SLOT_TOP_MIN}..{SLOT_TOP_MAX}"
     if bot > SLOT_BOT_MAX:
+        # ⛔ A DESCENDER IS NOT A WRAP. Every giant shipped before 2026-09-05
+        # (BOSS, FREE, LIBRARY, UNLAZY, JUDGE, BUILD...) is descender-free, so
+        # "any ink past 665" was a safe wrap proxy. SQUAD's Q tail reaches 671
+        # on a single 573px line with 256px margins, and the old check called it
+        # a wrap and told you to shrink a word that fits.
+        # The two are separable by WIDTH: a wrapped second line is a line, a
+        # descender is one glyph's tail.
+        tail = a[SLOT_BOT_MAX + 1:bot + 1].sum(axis=2) < 210
+        tail_cols = np.where(tail.any(axis=0))[0]
+        giant_cols = np.where((a[520:SLOT_BOT_MAX].sum(axis=2) < TEXT_SUM).any(axis=0))[0]
+        if len(tail_cols) and len(giant_cols):
+            span = (tail_cols.max() - tail_cols.min() + 1) / (giant_cols.max() - giant_cols.min() + 1)
+            if span <= 0.22 and bot <= 700:
+                return True, f"slot y={top}..{bot} (descender {span:.0%} of giant width, not a wrap)"
         return False, f"text runs to y={bot} - the giant WRAPPED, reduce giantSize"
     return True, f"slot y={top}..{bot}"
 
@@ -99,8 +113,14 @@ def check_quiet_zone(a):
     """Nothing structural above y780. The client read the set as inconsistent
     even though placement was pixel-identical, because one scene's columns rose
     into the band so its type sat on architecture while the rest sat on sky."""
+    # ⛔ Start the lower scan BELOW the headline's actual ink, not at a fixed
+    # 665. This check is about SCENE geometry; a glyph descender crossing 665 is
+    # type, and reading it as architecture reported step 225 on a clean scene.
+    ink = np.where((a[380:780].sum(axis=2) < 210).any(axis=1))[0]
+    dn_from = max(665, (380 + int(ink.max()) + 3) if len(ink) else 665)
+    dn_from = min(dn_from, 706)          # never skip more than the deepest descender
     up = int(np.abs(np.diff(a[QUIET_TOP:430], axis=0)).max())
-    dn = int(np.abs(np.diff(a[665:QUIET_BOT + 1], axis=0)).max())
+    dn = int(np.abs(np.diff(a[dn_from:QUIET_BOT + 1], axis=0)).max())
     worst = max(up, dn)
     ok = worst <= QUIET_MAX_STEP
     return ok, f"max step {worst} (limit {QUIET_MAX_STEP}, grain floor ~23)"

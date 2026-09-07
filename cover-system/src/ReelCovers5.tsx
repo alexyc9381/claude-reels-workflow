@@ -125,7 +125,7 @@ const BossRoomScene: React.FC = () => (
         covers were built, shown and rejected. Quiet above y780. */}
     <div style={{
       position: "absolute", left: 0, top: 0, width: 1080, height: 1200,
-      background: "linear-gradient(180deg,#EFE3D0 0%,#F6EEDD 20%,#FBF3E4 44%,#EFE0C6 66%,#D8C6A6 86%,#BFAE92 100%)",
+      background: "linear-gradient(180deg,#EFE3D0 0%,#F6EEDD 20%,#FBF3E4 44%,#EFE0C6 66%,#D8B475 86%,#BF9E67 100%)",
     }} />
 
     {/* L1 · atmosphere only in the quiet band: the house lights, no geometry */}
@@ -138,9 +138,9 @@ const BossRoomScene: React.FC = () => (
         cast and the gold rail need a cold ground behind them to separate. */}
     <div style={{
       position: "absolute", left: -40, top: 892, width: 1160, height: 236,
-      background: "linear-gradient(180deg,#8E9AAB 0%,#77839A 46%,#5D6980 100%)",
+      background: "linear-gradient(180deg,#28384F 0%,#232F47 46%,#1D273B 100%)",
     }} />
-    <div style={{ position: "absolute", left: -40, top: 892, width: 1160, height: 10, background: "#A8B3C2" }} />
+    <div style={{ position: "absolute", left: -40, top: 892, width: 1160, height: 10, background: "#869FC2" }} />
     {[0, 1, 2].map((row) => {
       const y = 916 + row * 60;
       const sz = 32 - row * 3;
@@ -188,7 +188,7 @@ const BossRoomScene: React.FC = () => (
       position: "absolute", left: -40, top: 1094, width: 1160, height: 96,
       background: "linear-gradient(180deg,#C2A87E 0%,#A98D62 60%,#8E7349 100%)",
     }} />
-    <div style={{ position: "absolute", left: -40, top: 1094, width: 1160, height: 9, background: "#DCC69C" }} />
+    <div style={{ position: "absolute", left: -40, top: 1094, width: 1160, height: 9, background: "#DCB977" }} />
 
     {/* L4 · THE FLOOR — ONE solid full-width band. height = 1920 - top. */}
     <div style={{
@@ -341,7 +341,7 @@ const ToolTile: React.FC<{ x: number; y: number; s: number; slug?: string; word?
       }} />
       <div style={{
         position: "absolute", inset: 0, borderRadius: s * 0.235, boxSizing: "border-box",
-        background: "linear-gradient(168deg,#FFFFFF 0%,#F6F2EA 68%,#EBE5D9 100%)",
+        background: "linear-gradient(168deg,#FFFFFF 0%,#F6F2EA 68%,#EBDDC2 100%)",
         border: `${Math.round(s * 0.035)}px solid #2E2519`,
       }} />
       {m ? (
@@ -365,10 +365,21 @@ const FareHallScene: React.FC = () => (
     {/* L0 · the hall, daylight — the storyboard's BRIGHTEST place. Quiet >780 */}
     <div style={{
       position: "absolute", left: 0, top: 0, width: 1080, height: 1380,
-      background: "linear-gradient(180deg,#EFE9DA 0%,#F7F2E6 20%,#FCF8EE 44%,#F2EADA 66%,#E4D9C3 88%,#D2C5AA 100%)",
+      background: "linear-gradient(180deg,#EFE9DA 0%,#F7F2E6 20%,#FCF8EE 44%,#F2EADA 66%,#E4CB98 88%,#D2B476 100%)",
     }} />
     <Bloom x={540} y={430} r={600} c="rgba(255,253,246,0.82)" />
     <Bloom x={430} y={980} r={520} c="rgba(255,250,232,0.44)" />
+
+    {/* ⛔ THIS SCENE HAD NO DARK MASS AT ALL — white tiles floating on cream,
+        which measured 21.7% saturation and 5.4% near-black against POWERS' 34.5
+        and 27.9, and read as the palest tile in the grid. The counter wall gives
+        the mass, and white marks on a near-black ground is the strongest value
+        pair available ([[feedback_eyecatch_is_value_structure]]). */}
+    <div style={{
+      position: "absolute", left: -40, top: 790, width: 1160, height: 448,
+      background: "linear-gradient(180deg,#2A3242 0%,#232A38 58%,#1C222D 100%)",
+    }} />
+    <div style={{ position: "absolute", left: -40, top: 790, width: 1160, height: 10, background: "#7E90AD" }} />
 
     {/* L2 · THE ONE COUNTER — every tool on it. This is what the headline
         names, so it owns the frame (03 §K.1). Four over two, one slot empty. */}
@@ -389,10 +400,10 @@ const FareHallScene: React.FC = () => (
     </svg>
 
     {/* L4 · THE FLOOR — one solid full-width band, height = 1920 - top */}
-    <div style={{ position: "absolute", left: -40, top: F_FLOOR - 22, width: 1160, height: 22, background: "#D9CCB2" }} />
+    <div style={{ position: "absolute", left: -40, top: F_FLOOR - 22, width: 1160, height: 22, background: "#D9BB7F" }} />
     <div style={{
       position: "absolute", left: 0, top: F_FLOOR, width: 1080, height: 1920 - F_FLOOR,
-      background: "linear-gradient(180deg,#C7B698 0%,#B6A583 36%,#9C8B6A 70%,#83734F 100%)",
+      background: "linear-gradient(180deg,#C7A66B 0%,#B69A62 36%,#9C8B6A 70%,#83734F 100%)",
     }} />
     <div style={{
       position: "absolute", left: 0, top: F_FLOOR, width: 1080, height: 210,
@@ -485,7 +496,7 @@ const CoverWig: React.FC<{ cx: number; top: number; w: number }> = ({ cx, top, w
     <path d="M 22 72 q -8 34 8 54 q 16 8 26 -4 q 8 -22 2 -50 z" fill="#EFEADC" />
     <path d="M 162 72 q 8 34 -8 54 q -16 8 -26 -4 q -8 -22 -2 -50 z" fill="#EFEADC" />
     {[0, 1, 2, 3, 4, 5].map((i) => (
-      <path key={i} d={`M ${30 + i * 26} 20 q 10 12 0 26`} fill="none" stroke="#CFC8B4" strokeWidth={3} />
+      <path key={i} d={`M ${30 + i * 26} 20 q 10 12 0 26`} fill="none" stroke="#CFBF91" strokeWidth={3} />
     ))}
   </svg>
 );
@@ -744,31 +755,31 @@ const RowScene: React.FC = () => (
   <>
     {/* L1 · the sodium night sky — bleeds, and the type sits on it, on nothing else */}
     <div style={{ position: "absolute", inset: 0,
-      background: "linear-gradient(180deg,#8E76A2 0%,#D6BCC6 16%,#F6E6CA 30%,#F2DCB2 42%,#DCAE82 60%,#B8845E 78%,#8E6448 100%)" }} />
+      background: "linear-gradient(180deg,#8057A2 0%,#D69AB1 16%,#F6E6CA 30%,#F2DCB2 42%,#DCAE82 60%,#B8845E 78%,#8E6448 100%)" }} />
     <Bloom x={540} y={1140} r={400} c="rgba(255,232,178,0.38)" />
 
     {/* L2 · the terrace opposite, in silhouette — depth, and it stays BELOW the type */}
     {[-40, 168, 878].map((x, i) => (
       <div key={`tr${i}`} style={{ position: "absolute", left: x, top: 846 + i * 30,
-        width: 244, height: 520, background: "#6E5A80" }} />
+        width: 244, height: 520, background: "#644580" }} />
     ))}
     {/* the sodium lamp on its bracket, the one practical */}
     <div style={{ position: "absolute", left: 62, top: 800, width: 116, height: 34,
-      borderRadius: "6px 6px 26px 26px", background: "linear-gradient(176deg,#8E8672,#2E2A22)" }} />
+      borderRadius: "6px 6px 26px 26px", background: "linear-gradient(176deg,#8E7C4E,#2E2A22)" }} />
     <div style={{ position: "absolute", left: 168, top: 808, width: 96, height: 13,
       background: "#2E2A22" }} />
 
     {/* L3 · the unit — fascia, awning board, and the rolled-up shutter box */}
     <div style={{ position: "absolute", left: 74, top: B_FASCIA, width: 932, height: 500,
-      background: "linear-gradient(176deg,#E0CBA0 0%,#8E7856 100%)",
+      background: "linear-gradient(176deg,#E0BE79 0%,#8E7856 100%)",
       border: "11px solid rgba(0,0,0,0.44)" }} />
     <div style={{ position: "absolute", left: 108, top: B_FASCIA + 24, width: 864, height: 96,
-      borderRadius: 8, background: "linear-gradient(178deg,#FEFAEE 0%,#EADCBC 100%)",
+      borderRadius: 8, background: "linear-gradient(178deg,#FEFAEE 0%,#EACA80 100%)",
       border: "7px solid #B8894A", display: "flex", alignItems: "center",
       justifyContent: "center", gap: 30 }}>
       {(["fiverr", "upwork"] as const).map((k) => (
         <div key={k} style={{ width: 68, height: 68, borderRadius: 16, background: "#FFFFFF",
-          border: "4px solid #E8DCC0", display: "flex", alignItems: "center",
+          border: "4px solid #E8CC8C", display: "flex", alignItems: "center",
           justifyContent: "center" }}>
           <svg width="48" height="48" viewBox={MARKS[k].vb}>
             <path d={MARKS[k].d} fill={MARKS[k].c} />
@@ -780,7 +791,7 @@ const RowScene: React.FC = () => (
     </div>
     {/* the curtain rolled into its box — the shutter is UP, which is the beat */}
     <div style={{ position: "absolute", left: 108, top: B_OPEN_T - 54, width: 864, height: 48,
-      borderRadius: 6, background: "linear-gradient(178deg,#A99A78 0%,#3A342A 100%)",
+      borderRadius: 6, background: "linear-gradient(178deg,#A9915B 0%,#3A301F 100%)",
       border: "5px solid rgba(0,0,0,0.5)" }} />
 
     {/* L4 · what is behind it — three lit bays, all three mid-cycle */}

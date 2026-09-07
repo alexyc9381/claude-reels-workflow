@@ -2,10 +2,14 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import { E, OUT, IO, BACK, IN_Q, LIN, W, H, hexa, dkh, mxh, rnd, mono, ui, SH,
   Scene, Cam, Mark, MarkCast, Hero, Crew, Contact, squash, GY,
-  CLAY, GOLD, DIFFG, DIFFR, INK, TEAL, PAGE, RAIL, RAILHI, VIOLET } from "./IntWorld";
+  CLAY, GOLD, DIFFG, DIFFR, INK, TEAL, PAGE, RAIL, RAILHI, VIOLET, FileSlab, R } from "./IntWorld";
 import { ShopWall, BayLamp, LightColumn } from "./RpsSets";
 import { PLACES as RPS_PLACES } from "./RpsWorld";
 import { Link, HangChain, Hammer, Sparks, Work, IRONC } from "./IntShop";
+import { CodeLines, Gauge, PipRow, TickDisc, Flurry, Shards, Cracks } from "./AdhProps";
+import { Bay, BAYS, HitPlate } from "./IntBays";
+import { Alcove, RollerDoor, Folder } from "./JudgeProps";
+import { Toolbox, Drum, Bench } from "./RpsSets";
 
 /* ===========================================================================
    REEL 140 · "INTENT" — THE BODY, IN THE FORGE.
@@ -27,6 +31,16 @@ import { Link, HangChain, Hammer, Sparks, Work, IRONC } from "./IntShop";
    TURNS wherever the finished artifact appears.
    ========================================================================= */
 
+/* ⛔⛔⛔ EVERY SHIPPED SCENE IN THIS REPO PUSHES. ADHD 136 runs 1.05-1.09 and
+   REPOS 137 runs 1.02-1.06 on EVERY scene; all eighteen of mine were 1.0, i.e.
+   no camera move anywhere in the reel. A slow push repaints the WHOLE panel on
+   every frame, which is why the house does it and why seven of my scenes came
+   back STATIC while holding perfectly good events: the events were small and
+   the thing that filled the frame never moved
+   ([[feedback_a_small_moving_thing_on_a_big_still_thing_measures_still]]).
+   The values below are NOT uniform — a constant push across fifteen scenes is
+   its own kind of sameness — and the slowest go to the scenes that already
+   carry the most motion. */
 type SP = { v?: unknown; dur: number; at?: number };
 const HOT = "#F0842E";
 const P = RPS_PLACES;
@@ -79,6 +93,34 @@ export const BgForge: React.FC<{ f: number; x: number; y?: number; s?: number;
       floorY={y + 30} power={0.65} />}
   </>);
 };
+
+/** ⭐⭐ THE NEAR BAND. Two levers in one component.
+    MOTION: `docs/ANIMATION-QUALITY` §5 — sprites need an ACTION LOOP, not an
+    idle, and a band of them repaints real area every frame, which a single
+    hero landing once cannot. My scenes carried one to three onlookers standing
+    still; the shipped reels run six to nine on staggered loops.
+    DENSITY: `feedback_the_crowd_is_a_near_band` — the crowd IS the near band,
+    and it is most of the difference between 8-9 distinct things on screen and
+    the 17-23 the approved reels hold.
+    ⛔ They ARRIVE on staggered frames rather than being present at frame 0:
+    `feedback_hold_needs_arrivals_not_travel`. */
+const Band: React.FC<{ f: number; n?: number; y?: number; size?: number; z?: number;
+  seed?: number; from?: number; every?: number; cheer?: number; x0?: number; x1?: number }> =
+  ({ f, n = 7, y = GY + 26, size = 126, z = 56, seed = 0, from = 4, every = 6,
+     cheer = 0, x0 = 96, x1 = W - 96 }) => (
+  <>{Array.from({ length: n }, (_, i) => {
+    const pitch = (x1 - x0) / Math.max(1, n - 1);
+    const at = from + i * every;
+    const near = i % 3 === 0;
+    return <Crew key={"bd" + i} f={f} i={i + seed * 5} at={at}
+      x={x0 + i * pitch + ((i * 7 + seed) % 5) * 6}
+      y={y + (i % 2) * 16 + (near ? 12 : 0)}
+      size={size * (near ? 1.12 : 0.9)} z={z + (near ? 4 : 0)}
+      loop={(i + seed) % 5} flip={i > n / 2}
+      tint={(i + seed) % 4 === 0 ? CLAY : (i + seed) % 4 === 2 ? TEAL : undefined}
+      cheer={cheer} />;
+  })}</>
+);
 
 /** the anvil, drawn once */
 const Anvil: React.FC<{ x: number; y: number; s?: number; z?: number }> =
@@ -201,21 +243,33 @@ export const F_BLIND: React.FC<SP> = ({ dur }) => {
 export const F_FIX: React.FC<SP> = ({ dur }) => {
   const f = useCurrentFrame();
   const CX = W / 2, CY = 430, SEAT = 18;
-  const y = E(f, 2, SEAT, -280, CY, OUT);
+  const y = E(f, 2, SEAT, -760, CY, OUT);       /* falls from off-frame, not just above */
   const seated = f >= SEAT;
+  /* ⛔⛔ THE HERO WAS INVISIBLE IN THIS SCENE AND IN S7, and the repo had
+     already written down why: "A transformed wrapper with NO zIndex VANISHES."
+     A `transform` makes the div a stacking context, so the slab's own z-64 was
+     resolved INSIDE a static, unpositioned parent and painted under the room's
+     ground plane. The squash value was never the problem — the wrapper was. */
   const sq = seated ? squash(f - SEAT, 0, 0.16, 3, 12) : 1;
   return (
-    <Scene p={P.paper} slug="" push={[0, dur, 1.0]} vig={0.30}>
+    <Scene p={P.paper} slug="" push={[0, dur, 1.09]} vig={0.30}>
       <Cam x={Math.sin(f / 24) * 3} y={seated ? Math.sin(f * 2.8) * 6 * Math.max(0, 1 - (f - SEAT) / 12) : 0} s={1} z={12}>
-        <Shop f={f} lit={seated ? 1 : 0.5} seed={9} chains={5} key_="#C4F0F4" />
-        <Anvil x={CX} y={700} s={0.8} />
-        <div style={{ transform: `scaleY(${sq}) scaleX(${2 - sq})`, transformOrigin: "50% 100%" }}>
-          <Link x={CX} y={y} r={196} rot={0} heat={0} z={64} />
+        <Bay p={BAYS.fix} f={f} shell="vault" seed={9} lit={seated ? 1 : 0.5} />
+        <Alcove x={128} y={430} w={186} h={272} z={16} c="#7FE6EE" on={seated ? 0.8 : 0.3} t="PROBLEM" />
+        <Alcove x={W - 128} y={430} w={186} h={272} z={16} c="#7FE6EE" on={seated ? 0.6 : 0.2} t="CONSTRAINTS" />
+        <HitPlate x={CX} y={GY - 12} w={470} hit={seated && f < SEAT + 8 ? 1 : 0} z={30} />
+        <PipRow lit={seated ? 1 : 0.2} y={72} z={70} d={13} f={f} at={SEAT} />
+        {/* the sentence NAMES the object — so the object is what lands */}
+        <MarkCast x={CX} y={y} s={470} z={54} f={f} spin={1.4} pulse={0.5} o={0.26} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 64,
+          transform: `scaleY(${sq}) scaleX(${2 - sq})`, transformOrigin: "50% 100%" }}>
+          <FileSlab x={CX} y={y} w={392} h={520} z={64} f={f} name={R.hero}
+            fields={R.fields} fieldsIn={seated ? E(f, SEAT, SEAT + 30, 0, 1, OUT) : 0}
+            glowK={seated ? 1 : 0.2} />
         </div>
-        <MarkCast x={CX} y={y} s={168} z={68} f={f} spin={2.8} pulse={0.7} />
         {seated && <Sparks f={f} at={SEAT} x={CX} y={y + 60} n={40} z={94} floorY={720} />}
-        <Crew f={f} x={168} y={GY + 20} i={2} size={140} z={60} at={-14} tint={CLAY} />
-        <Crew f={f} x={W - 168} y={GY + 20} i={5} size={140} z={60} at={-14} flip />
+        <Band f={f} n={9} seed={1} y={GY + 22} size={152} z={58} from={SEAT + 1} every={3} />
+        {seated && <Flurry x={CX} y={GY - 20} f={f} at={SEAT} n={26} z={92} s={1.5} spread={520} />}
       </Cam>
     </Scene>
   );
@@ -229,27 +283,41 @@ export const F_HOWWHY: React.FC<SP> = ({ dur }) => {
   const f = useCurrentFrame();
   const LX = 296, RX = W - 296, CY = 452;
   const whyK = E(f, 56, 76, 0, 1, BACK);
+  /* ⭐ THE COMPARISON IS AN EVENT. Both files TRAVEL in from opposite edges,
+     and when the sentence turns on "why" the intent.md STEPS FORWARD while
+     CLAUDE.md falls back — a size change on the two biggest objects in frame,
+     which is the only kind of motion the audit (and the eye) actually rewards
+     [[feedback_a_small_moving_thing_on_a_big_still_thing_measures_still]]. */
+  const lIn = E(f, 2, 22, 0, 1, OUT);                 /* CLAUDE.md from the left */
+  const rIn = E(f, 26, 50, 0, 1, BACK);               /* intent.md up from below */
+  const lK = 1 - whyK * 0.30;                         /* it recedes             */
+  const rK = 0.86 + whyK * 0.30;                      /* it comes forward       */
+  const settleK = E(f, 96, 124, 0, 1, IO);
   return (
-    <Scene p={P.floor} slug="" push={[0, dur, 1.0]} vig={0.32}>
+    <Scene p={P.floor} slug="" push={[0, dur, 1.085]} vig={0.32}>
       <Cam x={Math.sin(f / 28) * 4} s={1} z={12}>
-        <Shop f={f} lit={0.8} seed={11} chains={6} lampX={RX} />
-        <Anvil x={LX} y={704} s={0.66} />
-        <Anvil x={RX} y={704} s={0.78} />
-        {/* LEFT — a bundle of plain rods: rules, many and small */}
-        {Array.from({ length: 5 }, (_, i) => {
-          const k = E(f, 4 + i * 7, 4 + i * 7 + 8, 0, 1, OUT);
-          if (k <= 0.01) return null;
-          return <div key={"r" + i} style={{ position: "absolute", left: LX - 92,
-            top: CY - 60 + i * 30, width: 184, height: 20, borderRadius: 10, zIndex: 60,
-            opacity: k, transform: `translateX(${(1 - k) * -30}px) rotate(${(i % 2 ? 1 : -1) * 2}deg)`,
-            background: `linear-gradient(180deg, #8E877C, #56504A)`,
-            border: "3px solid #38332C" }} />;
-        })}
-        {/* RIGHT — ONE link, bigger, mark turning */}
-        <Link x={RX} y={CY} r={172} rot={0} heat={0} z={64} o={0.35 + whyK * 0.65} />
-        {whyK > 0.05 && <MarkCast x={RX} y={CY} s={148} z={68} f={f} spin={3.0} pulse={0.8} o={whyK} />}
+        <Bay p={BAYS.howwhy} f={f} shell="rack" seed={11} lit={0.85} />
+        <Folder x={168} y={GY + 18} rot={-9} c="#C08A3E" s={0.95} z={54} />
+        <Folder x={W - 176} y={GY + 26} rot={7} c="#A8742E" s={0.9} z={54} />
+        <Bench x={W / 2} y={GY + 40} w={520} s={0.8} z={44} />
+        {/* ⭐ THE COMPARISON IS THE SHOT, and it is a comparison of two REAL
+            files — so both are drawn as files. CLAUDE.md arrives first, pale and
+            smaller, its face carrying working lines; intent.md arrives second,
+            dark and bigger, its face carrying the five real section headings.
+            Nothing is asserted that the ledger does not hold. */}
+        <FileSlab x={-190 + (LX + 190) * lIn} y={CY - whyK * 26} w={286 * lK} h={382 * lK}
+          z={60} f={f} name={R.other} pale o={lIn} glowK={0} rot={-3 + whyK * 3} />
+        <CodeLines x={-190 + (LX + 190) * lIn - 116 * lK} y={CY - whyK * 26 - 74 * lK}
+          w={232 * lK} n={8} h={9} gap={17} c="#6E675E" o={0.55 * lIn}
+          seed={6} f={f} scroll={0.5} z={64} indent />
+        <MarkCast x={RX} y={CY} s={430 * rK} z={54} f={f} spin={1.6} pulse={0.5} o={0.24 * whyK} />
+        <FileSlab x={RX} y={H + 300 - (H + 300 - CY) * rIn - settleK * 30} w={368 * rK}
+          h={492 * rK} z={64} f={f} name={R.hero}
+          fields={R.fields} fieldsIn={E(f, 60, 96, 0, 1, OUT)} o={rIn}
+          glowK={whyK} rot={3 - whyK * 3} />
         {whyK > 0.4 && <Sparks f={f} at={56} x={RX} y={CY + 40} n={34} z={92} floorY={720} />}
-        <Crew f={f} x={W / 2} y={GY + 24} i={1} size={150} z={62} at={-14} tint={CLAY} />
+        <Band f={f} n={8} seed={3} y={GY + 24} size={128} z={60} from={10} every={7}
+          cheer={whyK > 0.6 ? 1 : 0} />
       </Cam>
     </Scene>
   );
@@ -266,12 +334,27 @@ export const F_REFUSE: React.FC<SP> = ({ dur }) => {
   const AX = 640, AY = 664, BAR = 46, SET = 76;
   const barY = E(f, BAR, BAR + 9, -200, AY - 250, OUT);
   const down = E(f, SET, SET + 20, 0, 1, IO);
+  const RISE = E(f, SET + 22, SET + 62, 0, 1, OUT);
   return (
-    <Scene p={P.press} slug="" push={[0, dur, 1.0]} vig={0.42}>
+    <Scene p={P.press} slug="" push={[0, dur, 1.095]} vig={0.42}>
       <Cam x={Math.sin(f / 30) * 4 + (f >= BAR && f < BAR + 8 ? Math.sin(f * 8) * 7 : 0)} s={1} z={12}>
-        <Shop f={f} lit={0.75} seed={13} chains={6} key_="#9FE7EF" lampX={AX} />
+        <Bay p={BAYS.forge} f={f} shell="brick" seed={13} lit={0.78} />
+        <Toolbox x={132} y={GY + 8} s={0.95} z={48} c="#C4802A" />
+        <Drum x={952} y={GY + 12} s={0.9} z={46} c="#8A6A2E" />
+        <Gauge x={W - 132} y={330} s={0.85} z={50} k={0.7} f={f} fail={f >= BAR ? 1 : 0} />
         <Anvil x={AX} y={AY} s={0.92} />
-        <Work stage={0} x={AX} y={AY - 150} r={158} heat={0.7} sq={1} z={62} />
+        {/* ⭐ THE REFUSAL, DRAWN: an intent.md with NOTHING IN IT. The blank
+            face is the reason he has to put the hammer down, so the obstacle
+            and the subject are the same object. An orange billet said nothing. */}
+        {/* ⭐ THE THIRD BEAT. He winds up (1), the bar drops (2) — and then this
+            scene ran another 66 frames on nothing. So once the hammer is down
+            the blank file RISES and turns to face camera: the thing that stopped
+            him is what the shot ends on. */}
+        <FileSlab x={AX} y={AY - 230 - RISE * 150} w={330 + RISE * 150} h={440 + RISE * 200}
+          z={62} f={f} name={R.hero} fields={R.fields} fieldsIn={0}
+          glowK={0.15 + RISE * 0.7} rot={(1 - RISE) * 5} />
+        <MarkCast x={AX} y={AY - 230 - RISE * 150} s={520 * (0.6 + RISE * 0.6)} z={54}
+          f={f} spin={1.3} pulse={0.4} o={0.24 * RISE} />
         {f < SET && <Hammer f={f} px={356} py={392} reach={286} z={92} />}
         {/* the hammer laid down on the anvil once he stops */}
         {f >= SET && (
@@ -289,9 +372,12 @@ export const F_REFUSE: React.FC<SP> = ({ dur }) => {
         <Hero f={f} x={296} y={GY + 26} size={392} z={70} costume={{ constr: 1 }}
           gaze={0.8} strain={f >= BAR && f < SET ? 1 : 0.2}
           shock={f >= BAR && f < BAR + 14 ? 1 : 0} act={1} />
-        {Array.from({ length: 3 }, (_, i) => (
-          <Crew key={i} f={f} x={880 + i * 66} y={GY - 40} i={i + 4} size={96} z={54} at={-14} />
-        ))}
+        {/* ⛔ 162 frames — the longest scene in the reel — on three events. A
+            forge is never idle, so a second smith works his own anvil on his own
+            clock for the whole beat: "it costs the hierarchy nothing because it
+            is furniture, and it is the difference between a shot and a still." */}
+        <BgForge f={f} x={946} y={GY - 24} s={0.72} ph={9} z={34} beat={19} />
+        <Band f={f} n={8} seed={5} y={GY + 22} size={150} z={54} from={BAR + 4} every={6} />
       </Cam>
     </Scene>
   );
@@ -310,25 +396,41 @@ export const F_ASK: React.FC<SP> = ({ dur }) => {
   const done = AT.filter((a) => f >= a).length;
   const since = done ? f - AT[done - 1] : 99;
   const struck = since < 3;
+  /* ⭐ FOUR ANSWERS, FOUR SIZE STEPS. The file does not just fill — it GROWS on
+     each clause, so the biggest object in frame changes on every beat. */
+  const grow = AT.reduce((a, t) => a + E(f, t, t + 14, 0, 0.25, OUT), 0);
   return (
-    <Scene p={P.cockpit} slug="" push={[0, dur, 1.0]} vig={0.46}>
+    <Scene p={P.cockpit} slug="" push={[0, dur, 1.09]} vig={0.46}>
       <Cam x={Math.sin(f / 32) * 3 + (struck ? Math.sin(f * 9) * 6 : 0)} s={1} z={12}>
-        <Shop f={f} lit={0.62} seed={17} chains={5} key_="#FFDC9E" lampX={AX} dim={0.18} />
-        <Anvil x={AX} y={AY} s={0.95} />
-        <Work stage={1} x={AX} y={AY - 150} r={186} heat={0.8} sq={struck ? 0.8 : 1} z={62} />
-        {/* four punch marks, one per question, staying once struck */}
+        <Bay p={BAYS.ask} f={f} shell="glass" seed={17} lit={0.72} dim={0.10} />
+        <Bench x={AX} y={GY + 30} w={600} s={0.9} z={40} />
+        <Alcove x={116} y={392} w={176} h={250} z={16} c="#7CE8A8" on={0.6} t="WHO IS IT FOR" />
+        <TickDisc x={W - 116} y={230} d={70} z={58} spin={0.4} hue="#7CE8A8"
+          off={Math.max(0, 1 - done / 4)} />
+        {/* ⭐ FOUR ARRIVALS ON FOUR CLAUSES — and each one lands IN the file, so
+            the count and the subject are one object. The answer fills the thing
+            the last scene showed empty; that is the reel's smallest arc. */}
+        <MarkCast x={AX} y={AY - 250} s={470} z={54} f={f} spin={1.5} pulse={0.5} o={0.22} />
+        <FileSlab x={AX} y={AY - 250 - grow * 60} w={366 + grow * 120} h={492 + grow * 160}
+          z={62} f={f} name={R.hero} fields={R.fields} fieldsIn={done / 4}
+          glowK={done / 4} rot={struck ? (done % 2 ? 1.6 : -1.6) : 0} />
+        {/* the four question cards dealt in, one per clause */}
         {AT.map((a, i) => f >= a && (
-          <div key={i} style={{ position: "absolute", left: AX - 150 + i * 100 - 26,
-            top: AY - 168, width: 52, height: 52, borderRadius: "50%", zIndex: 72,
-            transform: `scale(${Math.min(1, (f - a) / 5)})`,
-            background: `radial-gradient(circle at 36% 30%, ${hexa("#FFE9A8", 0.9)}, ${hexa("#8A3C08", 0.9)})`,
-            border: `4px solid ${hexa("#5A2604", 0.9)}` }} />
+          <div key={i} style={{ position: "absolute", left: 76 + i * 30,
+            top: AY - 470 + i * 96, width: 214, height: 74, borderRadius: 8, zIndex: 74,
+            opacity: Math.min(1, (f - a) / 8),
+            transform: `translateX(${(1 - E(f, a, a + 14, 0, 1, OUT)) * -420}px) rotate(${i % 2 ? 3 : -3}deg)`,
+            background: `linear-gradient(180deg, #F4F0E6, #CFC7B6)`,
+            border: "4px solid #6E6558", display: "flex", alignItems: "center", padding: "0 10px" }}>
+            <span style={{ ...mono(11, 800), color: "#3A3229", lineHeight: 1.25 }}>{R.questions[i]}</span>
+          </div>
         ))}
         {done > 0 && <Sparks f={f} at={AT[done - 1]} x={AX - 150 + (done - 1) * 100}
           y={AY - 190} n={38} z={96} floorY={AY + 30} />}
         <Hero f={f} x={278} y={GY + 26} size={380} z={70} costume={{ constr: 1 }}
           gaze={0.9} strain={struck ? 1 : 0.25} act={1} />
         <Hammer f={f} px={348} py={396} reach={280} z={92} />
+        <Band f={f} n={8} seed={7} y={GY + 22} size={148} z={54} from={6} every={11} />
       </Cam>
     </Scene>
   );
@@ -346,14 +448,22 @@ export const F_STAMP: React.FC<SP> = ({ dur }) => {
   const hit = f >= DOWN;
   const sq = hit ? squash(f - DOWN, 0, 0.17, 3, 12) : 1;
   return (
-    <Scene p={P.floor} slug="" push={[0, dur, 1.0]} vig={0.28}>
+    <Scene p={P.floor} slug="" push={[0, dur, 1.09]} vig={0.28}>
       <Cam x={Math.sin(f / 22) * 3} y={hit ? Math.sin(f * 3.4) * 9 * Math.max(0, 1 - (f - DOWN) / 13) : 0} s={1} z={12}>
-        <Shop f={f} lit={1} seed={19} chains={6} lampX={CX} />
-        <Anvil x={CX} y={706} s={0.85} />
-        <div style={{ transform: `scaleY(${sq}) scaleX(${2 - sq})`, transformOrigin: "50% 100%" }}>
-          <Link x={CX} y={CY} r={196} rot={0} heat={hit ? Math.max(0, 0.8 - (f - DOWN) / 30) : 0.6} z={62} />
+        <Bay p={BAYS.stamp} f={f} shell="plant" seed={19} lit={1} />
+        <HitPlate x={CX} y={GY + 6} w={520} hit={hit ? 1 : 0} z={30} />
+        <Drum x={148} y={GY + 14} s={0.95} z={46} c="#3E5C8E" />
+        <Drum x={214} y={GY + 20} s={0.78} z={45} c="#2E4670" />
+        <Gauge x={W - 140} y={318} s={0.9} z={50} k={hit ? 1 : 0.3} f={f} />
+        {/* "all of that gets saved into an intent.md file" — the ram strikes and
+            the five fields are IN the face when it lifts. The save is visible. */}
+        {hit && <MarkCast x={CX} y={CY} s={480} z={54} f={f} spin={2.4} pulse={0.7} o={0.28} />}
+        <div style={{ position: "absolute", inset: 0, zIndex: 64,
+          transform: `scaleY(${sq}) scaleX(${2 - sq})`, transformOrigin: "50% 100%" }}>
+          <FileSlab x={CX} y={CY} w={396} h={520} z={62} f={f} name={R.hero}
+            fields={R.fields} fieldsIn={hit ? E(f, DOWN, DOWN + 22, 0, 1, OUT) : 0}
+            glowK={hit ? 1 : 0.15} />
         </div>
-        {hit && <MarkCast x={CX} y={CY} s={172} z={70} f={f} spin={3.2} pulse={0.9} />}
         {/* the press ram */}
         <div style={{ position: "absolute", left: CX - 190, top: py, width: 380, height: 190,
           zIndex: 90, borderRadius: 12,
@@ -361,7 +471,8 @@ export const F_STAMP: React.FC<SP> = ({ dur }) => {
         <div style={{ position: "absolute", left: CX - 16, top: 0, width: 32,
           height: Math.max(0, py), zIndex: 88, background: "#5C564E" }} />
         {hit && <Sparks f={f} at={DOWN} x={CX} y={CY - 40} n={70} z={96} floorY={720} power={1.2} />}
-        <Crew f={f} x={172} y={GY + 20} i={3} size={132} z={60} at={-14} tint={CLAY} />
+        <Band f={f} n={8} seed={11} y={GY + 20} size={124} z={58} from={2} every={4}
+          cheer={hit ? 1 : 0} />
       </Cam>
     </Scene>
   );
@@ -375,16 +486,24 @@ export const F_TURN: React.FC<SP> = ({ dur }) => {
   const f = useCurrentFrame();
   const sh = E(f, 4, 30, 0, 1, OUT);
   return (
-    <Scene p={P.engine} slug="" push={[0, dur, 1.0]} vig={0.40}>
+    <Scene p={P.engine} slug="" push={[0, dur, 1.05]} vig={0.40}>
       <Cam x={Math.sin(f / 20) * 3} s={1} z={12}>
-        <Shop f={f} lit={0.4 + sh * 0.6} seed={23} chains={8} key_="#B9BDFF" />
-        {Array.from({ length: 7 }, (_, i) => {
-          const born = 6 + i * 5;
+        <Bay p={BAYS.turn} f={f} shell="server" seed={23} lit={0.4 + sh * 0.6} />
+        <PipRow lit={sh} y={70} z={70} d={13} f={f} at={4} />
+        {/* ⭐ THE DENSITY DEVICE: one wall of ONE repeated object, so "here's
+            where it gets much more interesting" is answered by SCALE — eighteen
+            of them behind the shutter, and one lit in front to keep the rank. */}
+        {Array.from({ length: 18 }, (_, i) => {
+          const col = i % 6, row = Math.floor(i / 6);
+          const born = 6 + col * 4 + row * 2;
           const k = E(f, born, born + 7, 0, 1, BACK);
-          return <Link key={i} x={150 + i * 132} y={412 + (i % 2) * 34} r={84}
-            rot={i % 2 ? 90 : 0} z={58} heat={f - born < 16 ? Math.max(0, 0.8 - (f - born) / 18) : 0}
-            o={sh * k} />;
+          return <FileSlab key={i} x={104 + col * 176} y={252 + row * 190} w={148} h={198}
+            z={40 + row} f={f} name={R.tree[i % R.tree.length]} pale={(i + row) % 3 === 0}
+            rot={(i % 2 ? 2.4 : -2.4)} o={sh * k * (0.5 + row * 0.22)} mark={false} />;
         })}
+        <MarkCast x={W / 2} y={604} s={430} z={60} f={f} spin={1.8} pulse={0.6} o={0.26 * sh} />
+        <FileSlab x={W / 2} y={604} w={352} h={470} z={66} f={f} name={R.hero}
+          fields={R.fields} fieldsIn={E(f, 22, 48, 0, 1, OUT)} o={sh} glowK={sh} />
         <div style={{ position: "absolute", left: -40, top: -20 - sh * 620, width: W + 80,
           height: 660, zIndex: 92,
           background: `repeating-linear-gradient(180deg, #3A342C 0 26px, #23201B 26px 52px)`,
@@ -440,20 +559,26 @@ export const F_FAR: React.FC<SP> = ({ dur }) => {
   const f = useCurrentFrame();
   const on = E(f, 14, 28, 0, 1, OUT);
   return (
-    <Scene p={P.engine} slug="" push={[0, dur, 1.0]} vig={0.52}>
+    <Scene p={P.engine} slug="" push={[0, dur, 1.03]} vig={0.52}>
       <Cam x={Math.sin(f / 26) * 3} s={1} z={12}>
-        <Shop f={f} lit={0.22} seed={31} chains={7} key_="#B9BDFF" dim={0.28} />
-        {Array.from({ length: 9 }, (_, i) => {
-          const t = ((f * 0.010 + i / 9) % 1);
-          const sc = 0.22 + t * t * 1.05;
-          return <Link key={i} x={880 - t * 640} y={392 + t * 210} r={130 * sc}
-            rot={i % 2 ? 90 : 0} z={30} heat={0} o={0.25 + t * 0.6} />;
+        <Bay p={BAYS.far} f={f} shell="deep" seed={31} lit={0.30 + on * 0.5} dim={0.16} />
+        {/* ⛔ this beat is meant to be the QUIET one, and quiet became EMPTY —
+            one small pale slab in a dark room. Quiet is about how much HAPPENS,
+            not how much is THERE: the run is the same nine files, drawn big
+            enough to fill the hall they are running down. */}
+        {Array.from({ length: 11 }, (_, i) => {
+          const t = ((f * 0.010 + i / 11) % 1);
+          const sc = 0.30 + t * t * 1.55;
+          return <FileSlab key={i} x={912 - t * 700} y={352 + t * 300} w={250 * sc}
+            h={334 * sc} z={30 + i} f={f} name={R.hero} pale={i % 3 === 0} mark={false}
+            glowK={t} o={0.52 + t * 0.45} rot={i % 2 ? 2 : -2} />;
         })}
         <div style={{ position: "absolute", left: 902, top: 350, width: 60, height: 60,
           borderRadius: "50%", zIndex: 70, opacity: on, transform: `scale(${0.5 + on * 0.5})`,
           background: `radial-gradient(circle at 34% 30%, #FFE9A8, ${hexa(GOLD, 0.7)})`,
           border: `4px solid ${dkh(GOLD, 0.44)}` }} />
-        <Crew f={f} x={230} y={GY + 20} i={3} size={140} z={54} at={-14} tint={CLAY} />
+        <Band f={f} n={6} seed={23} y={GY + 30} size={150} z={54} from={6} every={9}
+          x0={130} x1={W - 130} />
       </Cam>
     </Scene>
   );
@@ -474,9 +599,14 @@ export const F_LOOP: React.FC<SP> = ({ dur }) => {
   const grow = Math.min(n, Math.floor(E(f, 6, CLOSEA, 0, n, LIN)));
   const spin = closed ? (f - CLOSEA) * 1.5 : 0;
   return (
-    <Scene p={P.floor} slug="" push={[0, dur, 1.0]} vig={0.30}>
+    <Scene p={P.floor} slug="" push={[0, dur, 1.03]} vig={0.30}>
       <Cam x={Math.sin(f / 34) * 5 + (f >= CLOSEA && f < CLOSEA + 10 ? Math.sin(f * 8) * 9 : 0)} s={1} z={12}>
-        <Shop f={f} lit={closed ? 1 : 0.7} seed={37} chains={7} lampX={CX} />
+        {/* ⭐ THE ONE PLACE IN THE BODY THE RING BELONGS. "start the entire
+            process again autonomously" IS a closed loop, so the shape earns
+            itself here and nowhere else — which is exactly why it can carry
+            the peak instead of being wallpaper. */}
+        <Bay p={BAYS.loop} f={f} shell="vault" seed={37} lit={closed ? 1 : 0.68} />
+        <HitPlate x={CX} y={GY + 10} w={620} hit={closed && f < CLOSEA + 8 ? 1 : 0} z={30} />
         {/* the fault lamp — the issue nobody reported */}
         {f >= FAULT && f < CLOSEA && (
           <div style={{ position: "absolute", left: 880, top: 200, width: 96, height: 96,
@@ -490,8 +620,13 @@ export const F_LOOP: React.FC<SP> = ({ dur }) => {
           const x = CX + Math.cos(a) * RAD, y = CY + Math.sin(a) * RAD * 0.72;
           const born = 6 + (i / n) * (CLOSEA - 6);
           const k = E(f, born, born + 8, 0, 1, BACK);
+          /* ⛔ the links cooled to grey exactly as the ring closed, so the
+             brightest MOMENT in the reel was its dullest FRAME. The loop is
+             running once it closes — a running loop stays hot. */
           return <Link key={i} x={x} y={y} r={84} rot={(a * 180) / Math.PI + (i % 2 ? 90 : 0)}
-            z={60 + (i % 4)} heat={f - born < 20 ? Math.max(0, 0.9 - (f - born) / 22) : 0} o={k} />;
+            z={60 + (i % 4)} o={k}
+            heat={closed ? 0.55 + Math.sin(f / 7 + i) * 0.18
+              : f - born < 20 ? Math.max(0.25, 0.9 - (f - born) / 22) : 0.25} />;
         })}
         <MarkCast x={CX} y={CY} s={210} z={74} f={f} spin={closed ? 4.0 : 1.4} pulse={closed ? 1 : 0.3} />
         {closed && <Sparks f={f} at={CLOSEA} x={CX + RAD} y={CY} n={80} z={96}
@@ -514,9 +649,9 @@ export const F_LOOP: React.FC<SP> = ({ dur }) => {
 export const F_SHIFT: React.FC<SP> = ({ dur }) => {
   const f = useCurrentFrame();
   return (
-    <Scene p={P.floor} slug="" push={[0, dur, 1.0]} vig={0.26}>
+    <Scene p={P.floor} slug="" push={[0, dur, 1.085]} vig={0.26}>
       <Cam x={Math.sin(f / 36) * 5} s={1} z={12}>
-        <Shop f={f} lit={1} seed={41} chains={8} />
+        <Bay p={BAYS.shift} f={f} shell="yard" seed={41} lit={1} />
         {[236, 540, 844].map((x, i) => {
           const ph = i * 9;
           const t = ((f + ph) % 18) / 18;
@@ -524,9 +659,29 @@ export const F_SHIFT: React.FC<SP> = ({ dur }) => {
             : t < 0.78 ? -112 + E(t, 0.62, 0.78, 0, 120, IO) : 8;
           const struck = t >= 0.76 && t < 0.84;
           return (<React.Fragment key={i}>
-            <Anvil x={x} y={676} s={0.62} />
-            <Work stage={(Math.floor((f + ph) / 18)) % 5} x={x} y={560} r={96}
-              heat={0.7} sq={struck ? 0.8 : 1} z={62} />
+            {/* ⛔ the last three rings in the reel were here, as forging
+                stages. The sentence is "runs the entire software development
+                process" — so what comes off each station is a FINISHED FILE. */}
+            <div style={{ position: "absolute", left: x - 118, top: 596, width: 236, height: 30,
+              zIndex: 44, background: `linear-gradient(180deg, #8A5038, #4A2818)` }} />
+            {/* ⭐ THE CYCLE: each station lifts its finished file away and the
+                next one is already under the hammer. Three stations x one file
+                each was three stills; a works that "runs the entire process"
+                has to be seen to REPEAT. */}
+            {[0, 1].map((q) => {
+              const period = 36, ph2 = i * 11 + q * 18;
+              const t = (((f + ph2) % period) / period);
+              const lift = E(t, 0.62, 1, 0, 1, IO);
+              const born = E(t, 0, 0.12, 0, 1, OUT);
+              return <FileSlab key={q} x={x} y={498 - lift * 430}
+                w={(186 + lift * 40) * born} h={(248 + lift * 54) * born}
+                z={62 + q} f={f} name={R.chain[(i + q) % R.chain.length]}
+                pale={(i + q) % 3 === 1} fields={(i + q) % 3 === 0 ? R.fields : undefined}
+                fieldsIn={(i + q) % 3 === 0 ? 1 : 0} mark={(i + q) % 3 !== 1}
+                o={1 - E(t, 0.88, 1, 0, 1, LIN)}
+                rot={struck ? (i % 2 ? 2.5 : -2.5) : 0}
+                glowK={struck ? 1 : 0.3} />;
+            })}
             <div style={{ position: "absolute", left: x - 10, top: 150, width: 20,
               height: 210, zIndex: 88, background: "#5C564E" }} />
             <div style={{ position: "absolute", left: x - 62, top: 340, width: 124, height: 60,
@@ -536,10 +691,8 @@ export const F_SHIFT: React.FC<SP> = ({ dur }) => {
             {struck && <Sparks f={f} at={f} x={x} y={520} n={28} z={94} floorY={700} power={0.8} />}
           </React.Fragment>);
         })}
-        {Array.from({ length: 5 }, (_, i) => (
-          <Crew key={i} f={f} x={130 + i * 200} y={GY + 40} i={i + 2} size={116} z={52} at={-14}
-            flip={i > 2} cheer={f > 60 ? 1 : 0} />
-        ))}
+        <Band f={f} n={9} seed={13} y={GY + 40} size={146} z={52} from={4} every={5}
+          cheer={f > 60 ? 1 : 0} />
       </Cam>
     </Scene>
   );
@@ -553,24 +706,30 @@ export const F_SHIFT: React.FC<SP> = ({ dur }) => {
 export const F_CLOSE: React.FC<SP> = ({ dur }) => {
   const f = useCurrentFrame();
   const CX = W / 2, CY = 420;
+  const fwd = 0.72 + E(f, 10, 96, 0, 0.34, IO);       /* it comes to camera */
   return (
-    <Scene p={P.cockpit} slug="" push={[0, dur, 1.0]} vig={0.36}>
+    <Scene p={P.cockpit} slug="" push={[0, dur, 1.09]} vig={0.36}>
       <Cam x={Math.sin(f / 30) * 4} s={1} z={12}>
-        <Shop f={f} lit={0.85} seed={43} chains={6} key_="#FFC978" lampX={CX} />
-        {Array.from({ length: 12 }, (_, i) => {
-          const t0 = 2 + i * 10;
-          const k = E(f, t0, t0 + 40, 0, 1, LIN);
+        <Bay p={BAYS.close} f={f} shell="glass" seed={43} lit={0.66} />
+        <Alcove x={122} y={404} w={180} h={256} z={16} c="#BEE2F8" on={0.55} t="OPEN QUESTIONS" />
+        <Alcove x={W - 122} y={404} w={180} h={256} z={16} c="#BEE2F8" on={0.4} t="AFFECTED USERS" />
+        {/* ⭐ "not about giving Claude more context" — so CONTEXT is what streams
+            past and never stops: eighteen ordinary repo files crossing at three
+            depths, big enough to repaint real area. The one file that STAYS is
+            the one the sentence is about, and it comes forward as they pass. */}
+        {Array.from({ length: 18 }, (_, i) => {
+          const t0 = 1 + i * 7;
+          const k = E(f, t0, t0 + 46, 0, 1, LIN);
           if (k <= 0.001 || k >= 0.999) return null;
-          return <div key={i} style={{ position: "absolute", left: -160 + k * (W + 320),
-            top: 210 + (i % 3) * 150, width: 150, height: 22, borderRadius: 11, zIndex: 40,
-            opacity: 0.7, transform: `rotate(${(i % 2 ? 3 : -3)}deg)`,
-            background: `linear-gradient(180deg, #8E877C, #4E4842)`, border: "3px solid #33302B" }} />;
+          const lane = i % 3, sc = 0.62 + lane * 0.26;
+          return <FileSlab key={i} x={-180 + k * (W + 360)} y={188 + lane * 176}
+            w={150 * sc} h={200 * sc} z={38 + lane} f={f} name={R.tree[i % R.tree.length]}
+            pale={i % 3 === 0} mark={false} o={0.5 + lane * 0.2} rot={(i % 2 ? 4 : -4)} />;
         })}
-        <Anvil x={CX} y={700} s={0.8} />
-        <Link x={CX} y={CY} r={230} rot={0} heat={0} z={70} />
-        <MarkCast x={CX} y={CY} s={200} z={76} f={f} spin={3.4} pulse={0.8} />
-        <Crew f={f} x={148} y={GY + 24} i={2} size={130} z={60} at={-14} tint={CLAY} />
-        <Crew f={f} x={W - 148} y={GY + 24} i={5} size={130} z={60} at={-14} flip />
+        <MarkCast x={CX} y={CY} s={560 * fwd} z={58} f={f} spin={1.8} pulse={0.5} o={0.26} />
+        <FileSlab x={CX} y={CY + 40 - fwd * 40} w={428 * fwd} h={564 * fwd} z={70} f={f}
+          name={R.hero} fields={R.fields} fieldsIn={E(f, 6, 44, 0, 1, OUT)} glowK={1} />
+        <Band f={f} n={7} seed={19} y={GY + 24} size={126} z={60} from={8} every={9} />
       </Cam>
     </Scene>
   );
@@ -584,14 +743,15 @@ export const F_CTA: React.FC<SP> = ({ dur }) => {
   const f = useCurrentFrame();
   const CX = W / 2, CY = 400;
   return (
-    <Scene p={P.floor} slug="" push={[0, dur, 1.0]} vig={0.34}>
+    <Scene p={P.floor} slug="" push={[0, dur, 1.075]} vig={0.34}>
       <Cam x={Math.sin(f / 20) * 3} s={1} z={12}>
-        <Shop f={f} lit={1} seed={47} chains={7} lampX={CX} />
-        <Link x={CX} y={CY} r={214} rot={0} heat={0} z={64} />
-        <MarkCast x={CX} y={CY} s={196} z={72} f={f} spin={5.0} pulse={1} />
+        <Bay p={BAYS.cta} f={f} shell="rack" seed={47} lit={1} />
+        <PipRow lit={1} y={70} z={70} d={13} f={f} at={2} />
+        <FileSlab x={CX} y={CY + 40} w={400} h={528} z={64} f={f} name={R.hero}
+          fields={R.fields} fieldsIn={1} glowK={1} />
+        <MarkCast x={CX} y={CY - 210} s={252} z={78} f={f} spin={5.0} pulse={1} />
         <Sparks f={f} at={2} x={CX} y={CY + 60} n={54} z={94} floorY={GY + 30} />
-        <Crew f={f} x={166} y={GY + 26} i={2} size={140} z={60} at={-10} tint={CLAY} cheer={1} />
-        <Crew f={f} x={W - 166} y={GY + 26} i={6} size={140} z={60} at={-10} flip cheer={1} />
+        <Band f={f} n={9} seed={17} y={GY + 26} size={130} z={58} from={2} every={3} cheer={1} />
       </Cam>
     </Scene>
   );

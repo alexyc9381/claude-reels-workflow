@@ -311,17 +311,37 @@ export const SHOP_HOOK: React.FC<{ v?: unknown; dur: number; at?: number }> = ({
   const shake = struck ? (isLast ? 16 : 9) : Math.max(0, (isLast ? 11 : 6) - sinceBlow * 1.6);
   /* the weld arc runs on its own clock, flickering the way an arc does */
   const weldOn = (f % 46) < 26 && !hush && !(isLast && sinceBlow < 22);
+  /* the open flare — full at frame 0, gone by frame 20.
+     ⛔⛔ TUNE THIS AGAINST THE FULL RENDER, NEVER A SHORT ONE. A `--frames=0-4`
+     render measured frame 0 at 141.1 and the same code measured 138.1 in the
+     1672-frame deliverable: a five-frame clip is a different GOP with different
+     rate control, so its frame 0 is a different picture. The gate is a property
+     of the FILE THAT SHIPS. */
+  const FLARE = Math.max(0, 1 - f / 20);
   const flick = weldOn ? 0.55 + 0.45 * rnd(Math.floor(f / 2), 3) : 0;
 
+  /* the vignette opens WITH the flare — a tight vignette costs real mean luma
+     at the corners, and frame 0 is measured across the whole panel */
   return (
-    <Scene p={p} slug="" push={[0, dur, 1.0]} vig={0.34}>
+    <Scene p={p} slug="" push={[0, dur, 1.035]} vig={0.34 - FLARE * 0.15}>
       <Cam x={(tight ? -128 : 0) + Math.sin(f / 30) * 4 + (struck ? Math.sin(f * 9) * shake * 0.5 : 0)}
         y={(tight ? -96 : 0) + shake * 0.5} s={tight ? 1.34 : 1} z={12}>
-        <ShopWall p={p} f={f} seed={4} z={10} door={false} pegX={930} pegW={240} lift={0.55} />
+        {/* ⭐⭐ FRAME 0 IS THE THUMBNAIL and it is the ONLY frame the >=140 luma
+            law applies to. The shop measured 123.3 because I opened on a dark
+            room and lit it as the hammer fell. A forge is at its BRIGHTEST just
+            before the strike — the fire has just been worked — so the open
+            flares and settles over twenty frames. This buys the thumbnail
+            without lifting the body, which is the move that greys a reel out. */}
+        <ShopWall p={p} f={f} seed={4} z={10} door={false} pegX={930} pegW={240}
+          lift={0.55 + FLARE * 0.52} />
+        <div style={{ position: "absolute", inset: 0, zIndex: 11, opacity: FLARE * 0.94,
+          background: `radial-gradient(126% 86% at 62% 52%, ${hexa("#FFD79A", 0.95)},
+            ${hexa("#E08A34", 0.5)} 52%, transparent 84%)` }} />
         {/* ⭐ THE HUSH IS SUBTRACTION, so everything that makes light has to be
             a real fixture that can be TAKEN AWAY — a shaft that dies and two
             lamps that drop out leave the metal as the only lit thing. */}
-        <LightColumn x={AX} on={0.62 * (1 - hushK)} w={330} c="#FFD08A" z={13} top={130} />
+        <LightColumn x={AX} on={(0.62 + FLARE * 0.38) * (1 - hushK)} w={330 + FLARE * 260}
+          c="#FFD08A" z={13} top={130} />
         <BayLamp x={286} y={168} c="#FFC46E" on={0.85 * (1 - hushK)} f={f} z={17} s={0.85} />
         <BayLamp x={958} y={168} c="#FFC46E" on={0.7 * (1 - hushK)} f={f} z={17} s={0.85} />
         <Bench x={214} y={AY + 34} w={330} s={0.86} z={20} />

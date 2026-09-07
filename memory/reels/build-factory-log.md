@@ -1155,3 +1155,28 @@ themselves*, so it is a light coming on and not a flash cut (`feedback_no_flashi
 S6 12.33 -> 12.98   REEL 12.63 -> 12.77 · 0/11 under bar
 140.9 / 56.0% / 28.2 ✓  verify 5/5 ✓  dHash 22.3 · MIN 13 ✓   21/21 item-ids
 ```
+
+---
+
+## SHIPPED — 2026-09-02
+
+**Article live:** `https://chen.media/guides/three-free-ai-tools-you-can-sell-as-a-service`
+⭐ The canonical domain is now **chen.media**; `chenmedialabs.com` 308-redirects to it. Verify
+against chen.media, because a redirect body greps as zero and reads like a missing page.
+
+Verified cache-busted: article 200 · listed on `/guides` · gated `.docx` 200 (4,721 bytes) ·
+`/api/subscribe` returns `{"configured":true,"subscribers":1679}`.
+
+Spec at `lead-magnets/133-build.txt`. Slug shortened 84 -> 45 chars to match the house 52-57.
+No earnings figures anywhere; star counts are dated to the day they were checked; the "the tools
+are free, selling them is the hard part" section is the reel's own S8 line, kept public rather than
+gated so the honest half is not behind the email wall.
+
+⛔⛔ **CONCURRENT-SESSION COLLISION, SITE REPO.** I edited `tools/manifest.json` at 14:33 and the
+reel-132 session committed at 14:34, sweeping my reel-133 entry into a commit titled *"Publish the
+reel 132 JUDGE guide"*. Both guides are in it and nothing was lost, but `git status` came back
+CLEAN and briefly looked like the edit had vanished. ⭐ **When a repo you just edited reports clean,
+`git show HEAD:<file>` before redoing the work.**
+
+Pushed: `claude-reels-workflow` a99c7bc (reel-133 files only; the 132/Judge working tree left
+untouched for that session) and `chenmedialabs` 00b1f30.

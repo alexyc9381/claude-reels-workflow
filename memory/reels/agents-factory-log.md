@@ -1,208 +1,368 @@
-# AGENTS — factory log (reel 86)
+# Reel 134 · AGENTS — factory log
 
-> ⛔ Opened STAGE 0, 2026-08-03 per [[factory-log-first]] — before any storyboard or build.
-> ⚠️ Arrived **PRE-LOCKED as an Alex VO recording** (`IMG_3414.MOV`, 296.4s raw, 14 "cut cut" retakes),
-> script supplied in `~/Downloads/August 2nd.txt`. Stages 0-4 did **NOT** run as a gated process.
-> **NOT a gated ship** — same status as SERENA/TOOL/POSTS/ARSENAL/REPO. This is a **BUILD task**.
+**Built 2026-09-02 from Alex's recorded VO** (`AGENTS Sep 2.m4a`). Phase A did not run: the
+script arrived as a finished recording, so this log starts at the VO cut and covers B through E.
 
-## SUBJECT: a GitHub repo of 50+ role-specialised agents — "an AI company"
-Keyword: **AGENTS**. Video 4 of the five recorded 2026-08-02.
+## Subject and ledger (verified live 2026-09-02 on the repo's own GitHub page)
 
-## STAGE 0 — SOURCE
-| field | value |
-|---|---|
-| door | Alex-authored script, batch of 5 |
-| comp | ⛔ **NONE ON FILE** — same gap as REPO/reel 85. Recording already happened; flagging, not pretending. |
+`wshobson/agents` — a multi-harness marketplace of role-specific agents for Claude Code.
 
-## LOCKED VO (cut 2026-08-03, 41.0s, 18 source spans, EDL `out/vo5/video4-AGENTS.edl.json`)
-Verified clean: markers ✓ 0 survive · duplicate takes ✓ none · checked on the **word-level** transcript of
-the finished audio, not the raw and not segment text ([[vo-take-cutting-pipeline]]).
-
-> Someone just open-sourced a Github repo that lets you spin up an entire AI company with AI employees.
-> Engineers, marketers, product managers, designers, each one runs as its own agent. And then they coordinate
-> with each other to ship real ideas. · But the crazy thing is, this thing got over 10,000 stars in a single
-> week. The engineering department alone has seven agents. Design has seven, marketing has eight. Product
-> management, testing, spatial computing. Over 50 agents for roles that you'd find across a real company. ·
-> So instead of one big AI trying to do everything, it structures it across an actual org chart. Specialized
-> agents with clear roles and workflows between them. · One person with this repo has an output of a 50
-> person startup. Comment AGENTS and I'll send you the guide immediately.
-
-## STAGE 0.5 — ⛔⛔ FACT-CHECK FAILED. THE BUILD IS BLOCKED ON A DECISION.
-Repo identified as **`contains-studio/agents`** — the department names and "engineering has seven" pin it
-exactly; no other candidate matches. Checked live 2026-08-03 via GitHub API + directory listing.
-
-| VO claim | real | verdict |
+| figure | value | where it appears |
 |---|---|---|
-| "over 10,000 stars" | **12,396** | ✅ true |
-| "engineering department alone has seven agents" | engineering = **7** | ✅ true |
-| "design has seven" | design = **5** | ❌ wrong |
-| "marketing has eight" | marketing = **7** | ❌ wrong |
-| "over 50 agents total" | **37 agent files** across 8 folders | ❌ wrong, and by a lot |
-| "spatial computing" department | **does not exist** — no file anywhere matches | ❌ invented |
-| "open-sourced" | **license: none** (no LICENSE file) | ⚠️ technically all-rights-reserved |
-| "got 10,000 stars in a single week" | created **2025-07-28**, last push **2025-07-28** | ⚠️ **that week was TWELVE MONTHS AGO** |
+| agents | **202** | the repo plate, and the S3 band |
+| stars | **39.4k** | the repo plate, counter runs to it |
+| price | **$0** | the repo plate and the S6 pay board |
+| plugins / skills / commands / orchestrators | 94 / 183 / 105 / 16 | caption + article only |
 
-Real folders: engineering 7 · design 5 · marketing 7 · product 3 · project-management 3 ·
-studio-operations 5 · testing 5 · bonus 2.
+The VO says "200" and "over 39,000"; both are round readings of the sourced figures, so the
+screen carries the sourced ones and nothing on it is unverifiable.
 
-### ⛔ TWO INDEPENDENT BLOCKERS
-1. **[[premise-staleness-rerun-test]] (kill-rule 10) fires.** The repo's moment was July-August **2025**.
-   It has not received a single push since the day it was created, over a year ago. "Someone JUST
-   open-sourced" and "in a single week" are both false as of today.
-2. **Four of eight checkable claims are wrong**, and the house GitHub format puts REAL screenshots on
-   screen. A card showing "37 agents" under a VO saying "over 50" reads as a lie the viewer catches; a card
-   omitting the count to hide the gap is the tell that the number was made up. ⛔ SERENA only worked because
-   every claim survived first.
+## The VO cut — the part worth keeping
 
-### Options (Alex's call — the VO is locked audio, so I cannot fix this in the edit)
-- **A. KILL** on the rerun test. Cleanest; the catalogue already has VAULT as the anti-example of shipping a
-  premise that failed its own gate.
-- **B. RE-RECORD the two number lines** ("design has seven, marketing has eight" → "design has five,
-  marketing has seven"; "over 50 agents" → "nearly 40 agents"), drop "spatial computing", and soften "just
-  open-sourced". Cheap — it is two sentences — and then every on-screen card can be real.
-- **C. SHIP AS IS** with on-screen cards restricted to the true claims only (12,396 stars, engineering 7,
-  the real department list) and no total. ⚠️ The VO still states three false numbers aloud.
+Raw 44.58s -> 28.13s. **Two "cut cut" flub takes were dropped, and neither was visible to a
+whole-file transcription**, because whisper merges a flubbed take with its retake and emits the
+sentence once. They showed up only as impossibly long WORDS:
 
-### ⭐ DECISION (Alex, 2026-08-03): **OPTION C — SHIP AS IS.**
-Concern was raised with the evidence above and he reaffirmed. Proceeding on his call.
-
-⛔ **THE BINDING CONSTRAINT THAT FALLS OUT OF IT — on-screen copy carries ONLY verified claims.**
-| allowed on screen | banned from screen |
+| whisper emitted | what was actually there |
 |---|---|
-| **12,396 ★** (real, live) | any TOTAL agent count (VO says 50+, real is 37) |
-| **ENGINEERING · 7 AGENTS** (real) | design count · marketing count |
-| the 8 real folder names | "spatial computing" — does not exist |
-| the real repo card / URL | "MIT"/"open source" badge — there is NO licence |
-| | any "this week" / "just released" framing |
+| `'has'` spanning **2.34s** | "and it is over" · **cut cut** · retake from 8.33s |
+| `'have'` spanning **7.80s** | "...you can have a" · **cut cut / stop stop** · 2.9s silence · retake from 19.20s |
 
-The VO still says three wrong numbers aloud; that is the accepted cost of the decision. What the build
-controls is that **nothing rendered on screen is false**, so no frame can be screenshotted against him.
+⭐ **The check that found them: scan every word for an absurd duration, then re-transcribe that
+region on its own.** A gap list built from whisper's own word boundaries reported five gaps and
+missed both flubs, because the flub was inside a word, not between two.
 
-## ⛔⛔ THE CORRECTION THAT MATTERS MOST — I WAS BUILDING THE WRONG FORMAT
-Alex: *"did you even follow the github video editing workflow? for the face videos?"* … *"yes im not
-building the faceless videos"*.
+⛔ **And every cut point came from a 10ms RMS scan, not a word time.** Whisper's boundaries ran
+up to 0.3s early throughout. One boundary had a **breath at 26.69** and the real word at 27.03;
+cutting to the breath left 0.45s of dead air that `silencedetect` reported as speech.
 
-**I had been building full-bleed animated scenes with no face in them.** Reels 82/83/84 are FACE reels: his
-facecam sits in a card (`CARD {x:68, w:945, y:1180, r:38}`) with the animation band ABOVE it. A face reel
-needs **12 assets**; I had produced ONE (`clean.mp4`) for reel 85 and none for 86, and I had skipped the
-storyboard gate entirely. Every hook option I showed him was unusable by construction.
+Result: lead 0.00s, every mid gap 0.19-0.22s, tail 0.09s.
 
-## FACE-REEL PIPELINE — run properly for reel 86 (2026-08-03)
-| asset | state |
+## R1 — flagged, not fudged
+
+| check | bar | measured |
+|---|---|---|
+| tempo | house x1.10 | **x1.00** (the take already runs 4.09 wps against a 3.96 anchor) |
+| hook window 0-10s | <= 4.0 | **3.60 PASS** |
+| worst 5s window | <= 4.5 | **5.40 at t=14.5 ⚠️** |
+
+The 5.40 is the recording's own pace on the four-role list at zero speed-up. Slowing a line Alex
+delivered fast would be an artificial edit, and the retention-critical window passes with room.
+
+## The hook — 4 candidates, `rack` picked
+
+Four different MECHANISMS rendered at full quality on the real chassis (`docs/THE-OPEN.md` step 1):
+`rack` MULTIPLICATION · `crew` DEPLOYMENT · `tower` SCALE GAP · `deal` HANDOVER.
+
+**Picked `rack`**, because the line's verb is **GIVES** and it is the only candidate where the
+picture IS the sentence: one repo, 202 plates, countable. The three unpicked ones are kept in
+source and two of them ship as the amber and steel cuts' openings.
+
+## The five bugs that cost a round each
+
+1. ⛔ **Every plate in the rack rendered BLACK.** `lerp()` returned `rgb(...)` and was fed to
+   `dkh`/`mxh`, which parse hex: `parseInt("gb(239,...)", 16)` = NaN and every channel resolved
+   to 0. It does not throw and the style is not dropped. This is `feedback_nested_colour_helpers_go_black`
+   exactly, and it read as "the fill animation is broken" rather than as a one-line bug.
+2. ⛔ **`crew`'s frame 0 was an empty room** — the crate started at x=1060 on a 1012 panel, so
+   THE-OPEN law 2 failed outright. The contact sheet showed it instantly.
+3. ⛔ **The rack was behind all nine scenes.** Defensible on paper (it IS the repo, and it is the
+   countable content the density rule wants) and still the same wall of pale rectangles in eight
+   of nine frames. `feedback_one_prop_five_scenes`. The build floor got its own `PartsWall`.
+4. ⛔ **S4 opened on a huge flat grey blank and held it for 40 frames** (5.67, 74% HOLD). A blank
+   slab is a BEFORE STATE, not a shot. Rebuilt as carried-in-and-dropped: 5.67 -> 8.22.
+5. ⛔ **The blueprint's drafting lines were 3px** — 0.7px after the audit's 1012->240 downsample,
+   and just as invisible on a phone. 11px strokes struck in four groups.
+
+## Gates at delivery
+
+| gate | result |
 |---|---|
-| `clean.mp4` | ✅ 1080x1920, 41.33s, 17 spans conformed from `IMG_3414.MOV` via the VO's own EDL |
-| `vo.wav` | ✅ 41.0s, marker-clean |
-| `landmarks.json` | ✅ 1240 frames, **0% no-detection** |
-| `words_raw/clean.json` | ✅ 135 words, proper nouns repaired |
-| `matte.mov` | ⏳ ProRes 4444 alpha, in progress |
-| `shots/takes/cues.json`, `bed_pocket.wav` | ⏳ pending |
+| motion | median **9.66** (bar 9.00), **0/9** scenes under bar, 0 dead runs |
+| look_audit | HOOK_LUMA **144.8** · BODY_SAT **58.9%** · BODY_BLACK p10 **20.1** — green |
+| verify_reel | **8/8** blocking checks |
+| dHash trial cuts | mean **24.9**, MIN **10** — PASS |
+| SFX | audit clean, **1.49 audible events/sec** (band 1.0-1.5), 0 risers |
+| guards | EARN / CLAIM / NAME / VENDOR all zero rendered hits; 0 em-dashes |
 
-### ⛔ CONCURRENCY DESTROYED THE FOOTAGE TWICE — never background a job that reads an asset you are rewriting
-`clean.mp4` silently became a **2160x3840 / 51.6s** file (the wrong shoot's dimensions and length) because
-`make_matte.py`'s ffmpeg child was live on it while I re-conformed. It then had `landmarks.json` extracted
-FROM that corrupted file — 1547 frames of the wrong footage — and every constant derived from it was wrong.
-**Printing the size right after writing is not a check**; the clobber lands a moment later. Now: write, probe
-in the same breath, probe again 3s later.
+⭐ **HOOK_LUMA had to be re-earned after the camera change.** Widening the house cut's framing
+dropped frame 0 to 139.0 against the >=140 law. Fixed the sanctioned way — a bigger daylight
+window, a real shaft and floor pools — never by lifting the palette's dark stop.
 
-### ⛔⛔ `tools/solve_crop.py` IS BROKEN AND ITS OUTPUT WAS NEARLY USED
-Fed reel 84's OWN footage it returns `CROP width 420` against the **1276** that reel shipped, and prints
-"coverage GAP" on a reel that shipped clean. Two independent faults: (1) the stored house target said
-**shoulders 310px**, measured off reel 79 — but Alex's "make my face bigger" change moved the shipped
-constants to **451px (83) / 472px (84)** and the tool was never updated; (2) it derives through reel 78 as a
-reference whose footage is a different resolution, so the ratio is wrong even after the target is fixed.
-Marked broken in-file with the four-line direct method inline.
+⚠️ **The weakest scene is RELAY at 7.09**, and the HOOK at 7.63 is the accepted hierarchy trade.
 
-**⭐ The rule that falls out of it: a derivation tool that cannot reproduce the SHIPPED catalogue is wrong
-about the house, not the other way round.** Validate any such tool by re-deriving a shipped reel first.
+## Delivered
 
-### ✅ REEL 86 CONSTANTS — derived directly, verified against reel 84's shipped look
-```
-const CROP = {width: 1346, left: -175, top: -920};   // -> nose (494, 88)  shoulders 472px
-const FULL = {width: 2310, left: -567, top: -909};   // -> nose (582,820)  shoulders 810px
-```
-He sits **1.054x smaller** in this shoot than in reel 84, so this shoot needs a genuinely tighter crop —
-exactly the per-shoot difference law 92 exists for. Cached at `public/footage86/crop.json`.
+`Drive/Faceless/134 - AGENTS/` — 3 cuts, 3 captions, cover, storyboard, contact sheet.
+**All nine confirmed against DriveFS's own item database with real Drive file ids**, not by `cp`
+returning 0 (`risk_drive_mount_fileprovider_corrupt`).
 
-## ⛔⛔⛔ THE REAL CORRECTION — I WAS IN THE WRONG SYSTEM ENTIRELY
-Alex: *"this is for chenbuildsai not reel 84 or reel 79 like we are building the video for chenbuildsai
-which is a completely different editing system."*
+## ⛔ NOT DONE: the article is staged, not live
 
-**`~/Downloads/brand-system` IS `chenbuildsai-editing-system`, and it has its OWN documented pipeline that I
-never opened.** I was treating it as the claude-reels-workflow chassis — cloning reel 84's scene file,
-solving crops against reel 79's stored target, inventing furnace/hourglass hooks freehand. All of it was the
-wrong method, not merely wrong output.
+The lead magnet is built (`lead-magnets/134-agents.txt` -> `source-docs/` -> `guides.json`,
+slug `the-202-agent-dev-team-how-to-put-four-claude-agents-on-one-build`) but **the deploy was
+blocked**, so the reel is not finished by the standing rule. And `alias ls` shows the apex is
+**pinned to a 29-day-old deployment** — the same trap as 2026-08-09 and 2026-08-17, so a plain
+`--prod` will not publish it. See `agents134-reel`.
 
-⭐ **What chenbuildsai actually is** — `docs/START-HERE.md` → `docs/RECIPE-NEW-REEL.md`, 89 laws in
-`docs/LAWS.md`, values in `PRODUCTION.md`, 45 techniques in `packs/REFERENCE-TECHNIQUES.md`. It is
-**register-driven with a plan linter**, and its README says *"Never skip step 1."*
+---
 
-```
-0 assets → 1 SEGMENT the VO → 2 WRITE THE PLAN (must lint 0 findings)
-→ 3 DESIGN (escalation procedure) → 4 BUILD → 5 LINT → 6 RENDER + VERIFY
-```
+## REV 13 — the middle of the reel was still the old world
 
-`src/system/grammar.ts` picks each shot's form from its CLAIM, never for variety:
-FACE (stakes/direct address) · BOARD (one piece of evidence) · OBJECT (abstract mechanics) ·
-SCREEN (**proof — a tool actually running**) · PHOTO (human stakes) · TYPE (one number, max one per reel).
-Enforced: shot 1.2-3.4s · maxRunSameRegister 2 · maxShotsWithoutFace 4 · maxRunSameMove 1 ·
-minGroundFlipRate 0.3 · **minScreenShots 1** ("a reel with no SCREEN shot asserts but never proves").
+**Note:** *"at 14 and 17 seconds it needs to be removed completely… literally scrap that animation and
+redo it"* · *"each of the scenes like frontend engineer, backend engineer, it needs to be way better
+for each scene."*
 
-⛔ **The recipe's own warning, which explains every "too basic" note in the catalogue:**
-*"If a reel comes back 'too basic', the cost was skipping step 3. It is the cheapest step and the only one
-that changes the ceiling."* Step 3 is 30-60 min; build is 2-4h. I had been going straight to build.
+**Defect:** rev 12 changed the reel's WORLD from a flat industrial floor to a tower, and rebuilt the
+three scenes Alex had pointed at. S4 and S5 — 12.67-18.50s, a fifth of the runtime — were still the
+old build line. Same note, one scene-block earlier, one whole review round.
 
-## ⛔⛔ TOOLS TAKE `$F`, NOT ARGV — this silently put VIDEO 2's AUDIO IN VIDEO 4's SLOT
-`clean_words.py` opens with `F = os.environ.get('F', 'public/footage78')`. Passing paths as arguments is
-**ignored**. Running the chain without exporting F left `public/footage86/vo.wav` byte-identical to
-ARMY (md5 `440cf1c37ae9`, 51.34s) instead of AGENTS (`6b56cba087a2`, 41.03s) — and I only caught it because
-the segmented transcript said *"his name is Affaan… comment the word army"*. This is the seventh instance of
-the hardcoded-path family ([[reel-tools-hardcoded-to-old-reel]]); `tools/reelpath.py` exists for exactly this
-and these tools predate it. **Always `export F=public/footage<N>`, then verify the artefact's md5/duration
-against the source before trusting any downstream step.**
+**Rule produced:** [`feedback_fix_the_reel_not_the_scene`] — when a rebuild changes the SET rather than
+a prop, the unit of work is the REEL. List every scene against the new world in that same pass.
 
-## ✅ STEPS 0-2 DONE PROPERLY (2026-08-03)
-| step | state |
-|---|---|
-| 0 assets | clean.mp4 ✅ · vo.wav ✅ (md5-verified AGENTS) · landmarks ✅ 1240fr 0% miss · words_clean ✅ 136w · matte ⏳ |
-| 1 segment | 13 spoken segments; 5 over the 3.4s ceiling split at their clause break, the 0.30s "Engineers," fragment merged forward |
-| 2 plan | `plans/agents.ts` → **plan valid — 0 findings** · 16 shots · FACE 5 · OBJECT 5 · BOARD 3 · SCREEN 2 · TYPE 1 |
+**Measurement that found the second defect:** the first cut of the lift scored **5.09 (STATIC)**. The
+car is ~170px on a 1012x792 panel: ~3% of the frame repainting. Under
+`motion ≈ (fraction repainted per 0.1s) × (luma delta)` no amount of craft inside a 3% object can
+score. Re-shot as a **camera ride** — the car holds screen centre, the building falls past — and the
+repaint fraction goes to ~100%.
 
-⭐ **The fact-check drove the registers, not variety.** Every beat stating a FALSE number (design 7,
-marketing 8, "over 50 agents", spatial computing) is **FACE** — he says it, nothing on screen corroborates
-it. The three beats whose numbers are TRUE (12,396 stars · engineering = 7 · the real folder names) get
-SCREEN/BOARD, where evidence belongs. Shot 10 shows only `product/` and `testing/` and never draws the
-invented third department. **No frame can be screenshotted against him.**
+| scene | before | after |
+|---|---|---|
+| LIFT-A | 7.81 | 14.16 |
+| LIFT-B | 5.09 STATIC | 17.45 |
+| WALL | 8.69 | 10.50 |
+| OFFICES | 11.09 | 10.39 |
+| median | 9.32 | **10.50** |
 
-## ✅ STEP 3 — CONCEPT ESCALATION (`plans/agents-design.md`)
-Ran the `WORKFLOW.md` ladder on all 11 non-FACE shots: level-1 written down and crossed out, then quantity →
-viewpoint → **what the elements ADD UP TO**, then the four motion layers, then the law-20 camera gate.
-Budget respected — the recipe allows 2 level-3 per 9 shots, so **3 of 11**, on thesis / mechanism / payoff.
+**Third defect, caught by grep not by eye:** `CUT_TICKS` is derived from the `SHOTS` map, and the map
+still declared `S4:[0,42]`, `S5:[0,46]`. The lift is one continuous ride, so a `slate_whump` fired at a
+cut that no longer existed — **a sound with no picture**. The map now declares `[0]` for both and the
+lift's real events (four floor landings, each pitched a step higher) are cued explicitly.
 
-**The ladder's test is a NOUN CHANGE** — can you name what you are looking at differently at the end than at
-the start? All three pass:
+**Gates after:** motion 0/9 failing (median 10.50) · look ✅ (HOOK_LUMA 147.5, BODY_SAT 63.0%,
+BODY_BLACK p10 19.9) · dHash mean 25.9 MIN 15 · verify_reel 6/7 + 1 warn, all blocking passed ·
+sfx_audit clean.
 
-| shot | claim | the level-3 move | noun change |
-|---|---|---|---|
-| 1 (thesis) | "spins up an entire AI company" | a 40-block skyscraper assembles; the last 6 frames widen and it is sitting **inside an open folder on a desk** | company → a folder's contents |
-| 12 (mechanism) | "structures it across an actual org chart" | the chart's connectors **straighten into `├── └──` and the role boxes become folder names** | org chart → a file tree |
-| 14 (payoff) | "the output of a 50 person startup" | fifty lit desks from above; the pull resolves them into **one person at one desk** | fifty desks → one person |
+---
 
-⭐ **Shot 12 is the best idea in the reel because the joke IS the fact** — this "company" really is a
-directory listing. It also pays shot 1's folder reveal off without repeating it.
+## REV 14 — the seam, the open floor, and a laptop that didn't fit
 
-⛔ **Shots 7 and 9 are deliberately LEVEL 1.** They are the two most checkable frames in the reel (the seven
-real engineering filenames; the two real folder tabs). *Legibility beats cleverness where a viewer can
-count.* Cleverness there earns nothing and loses everything if it is wrong.
+Three notes, three different classes of defect — worth keeping apart:
 
-⛔ Law 20 gates recorded per shot: shot 1's folder rim must not exist at the close framing, and shot 14's
-silhouette must be unreadable before the pull — check both on the contact sheet or the reveal is spoiled.
+1. **A BUG.** 23s: `NightTower` hard-coded panel coordinates and was rendered inside a 623x399 laptop
+   lid, so a fifth of it was outside the frame. `overflow:hidden` hid the evidence. Rule:
+   [`feedback_a_prop_cannot_draw_in_panel_coordinates`]. Two companions found in the same pass — a
+   declared prop (`k`) never referenced in the body, and a zero-size `transform` wrapper becoming the
+   containing block and re-basing its children off-frame.
+2. **A WORLD MISMATCH.** 7s was still the flat industrial floor: third occurrence of
+   [`feedback_fix_the_reel_not_the_scene`] on one reel.
+3. **A SEAM.** 4.09s: the scene arrived EMPTY after the busiest frame in the reel. A scene must arrive
+   already running — pre-seed the state and put an event ON the cut, not after it.
 
-Energy peaks at shot 1, second peak at 12, resolves at 14, then FACE for the CTA — **decelerating after the
-thesis**, as the recipe requires.
+| scene | before | after |
+|---|---|---|
+| OFFICES (7.01-10.49s) | 7.55 | **14.57** |
+| reel median | 10.50 | **14.16** |
 
-## ✅ ASSETS COMPLETE + VERIFIED
-`clean.mp4` 1080x1920/41.33s · `matte.mov` **prores yuva444p12le** (alpha survived — VP9 would have dropped
-it silently) · `landmarks.json` 1240fr 0% miss · `words_clean.json` 136w md5-verified AGENTS · `vo.wav` 41.03s.
+Gates: motion 0/9 · look ✅ · dHash mean 25.7 MIN 15 · verify all blocking · sfx clean.
 
-## STATUS: steps 0-3 done, plan lints 0 findings, design locked. Next = step 4 BUILD (recipe budgets 2-4h),
-then lint / render / verify.
+---
+
+## REV 15 — a wrapping counter, and an artifact that changed too politely
+
+**"Choppy" was `f % 40`.** The runner teleported at every wrap and froze for the 10 frames before it.
+⛔ The motion audit scored the scene 14.57 *while it was visibly broken* — a discontinuity repaints the
+whole panel, so a teleport reads as more motion, not less. New rule:
+[`feedback_a_wrapping_counter_reads_as_chop`]. Rebuilt as a monotonic four-leg run over the scene's own
+52 frames, with the hero riding the same camera as the floor.
+
+**"More drastic, larger than life" was a SIZE and a PHYSICS note, not a graphics one.** The lift
+artifact was ~1.5% of the panel and every stage was an internal edit. It now grows 1.8x across the
+four floors (bursting out of the car), gains a real offset sheet per stage so the stack thickens, and
+each layer lands with an overshoot, a flash and a shock ring.
+
+Gates: motion 0/9 (median 11.92) · look ✅ · dHash mean 25.3 MIN 13 · verify all blocking · sfx clean.
+
+---
+
+## REV 16 — the counter, the top-out, the fitout, and a hundred identical windows
+
+- **The 202 plate → 132px type**, counting steadily across the whole hook, with five pitched detents
+  and a stamp on the landing. Two defects behind it: a **double ease** (caller + component) that made
+  the number arrive in the first second, and the **SLAP gate**, which structurally collides with
+  counters — 5+ uses must be under 35% bright, so the tick has to be a dark detent.
+  Rule: [`feedback_when_the_info_is_the_number_the_box_is_decoration`].
+- **4s: an ease-out is not an ending.** The crane decelerated; now the building tops out — cap drops
+  with overshoot, dust, mast beacon, and a light wave up the whole height.
+- **9s/10s: the missing MIDDLE layer.** Architecture + content with nothing between reads as "not
+  detailed". One shared `BayFitout` fixed all three rooms. S3's wall had the same arrive-empty defect
+  as the S1 seam — caught late, second occurrence on one reel.
+- **22s + CTA: sameness, not sparsity.** Six window interiors at the same element count. CTA stars
+  converge on the keyword instead of falling past it.
+
+Gates: motion 0/9 (median 11.72) · look ✅ · dHash mean 25.7 MIN 13 · verify all blocking · sfx clean.
+
+---
+
+## REV 17/18 — the gate, real graphics, outside, and the stars beat
+
+- **The gate sound.** Two of my first three picks were on the standing forever-ban and the third
+  measured as an air swell. Measuring the whole bank first — attack, >2kHz, <250Hz — and casting each
+  sample to a ROLE (latch, load, mass, running, stops) got it in one.
+- **The first half-second** was the emptiest in the reel. Beacons, a judder against the latch, seam
+  dust, sweeping chevrons — all caused by the gate rather than decorating it.
+- **Grey bars are a placeholder, not a graphic.** One `DiscSymbol` vocabulary (building · site · stack ·
+  shield) now serves both the office screens and the lift artifact, so the reel says the same thing
+  twice in two places instead of two different abstractions.
+- **"Boring for four seconds" was a COMPOSITION note.** S7 and S8 were the same grid at the same scale.
+  Improving the cells did nothing; changing the SHOT did. The CTA is now outside the building, at street
+  level, looking up.
+- **A 2.9s held framing is a shot-count problem.** The stars beat became three shots — close on the
+  star button, wide on the queue, up at the tower. 9.71 → 15.20.
+
+Gates: motion 0/9 (median 14.32) · look ✅ · dHash mean 25.2 MIN 13 · verify all blocking · sfx clean.
+
+---
+
+## REV 19 — the padlock, three shots in the hook, the roster
+
+- **"I can't tell what that graphic is" is a SIZE problem.** A hexagon-with-keyhole is a hexagon at
+  84px. Swapped for a red padlock with a shackle that drops. An accent set is only as legible as its
+  worst member — the other three symbols read instantly and hid it.
+- **"Just scrolling up" — a constant-velocity move stops being read.** The eye locks to the rate after
+  about a second. Broken into three shots on the cuts `SHOTS.S0` had declared all along. Fifth time on
+  this reel that the shot map and the scene had drifted apart.
+- **"More elevated" at 4-6s meant DENSITY OF CAUSE, not more frames.** One cursor became nine, each
+  landing on its own frame, with the plate kicking and a ballistic fountain out of the button.
+- **"The same thing for two seconds" was two halves of one frame sharing a texture.** The laptop now
+  shows a team roster, not another window grid.
+
+Gates: motion 0/9 (median 13.99) · look ✅ · dHash mean 25.3 MIN 13 · verify all blocking · sfx clean.
+
+---
+
+## REV 20 — real sprites everywhere, two bars off the action, a legible $0
+
+- **Both "covered" notes were measurable, not taste.** A chip pinned at BAND_Y with a lift car rising
+  through BAND_Y; a 148x44 plate holding a string that needed ~300px. Neither is visible in code
+  review — both are obvious in one cropped frame. Crop and LOOK before defending a layout.
+- **I re-introduced the blob.** Rev 2 established "claude sprites, not little rectangles". I obeyed it
+  at 200px and quietly broke it at 90px, in the tower windows and again on the roster cards, on the
+  assumption the rig would not read small. It reads fine.
+- **`<Shots z={26}>` is a stacking context** — anything drawn after it at a higher z covers the whole
+  group, building included. Second stacking-context trap on this reel after the transform wrappers.
+
+Gates: motion 0/9 (median 14.21) · look ✅ · dHash mean 25.9 MIN 13 · verify all blocking · sfx clean.
+
+---
+
+## REV 21 — the stars beat was the wrong concept three times
+
+Three stagings of one beat, all rejected, and all three were **★ glyphs plus a rising number**. The
+sentence contains a noun ("stars") and a number ("39,000") and I illustrated both literally each time.
+The fix was to state the CLAIM instead: *this one beat everything else* → a skyline where our building
+outgrows every other tower, camera pulling back to hold the crown.
+
+Also: the hook's last 13 frames had nothing left to do once the cap landed, so shot 3 became a pull
+back that reveals the whole tower and hands into the skyline.
+
+Gates: motion 0/9 (median 13.06) · look ✅ · dHash mean 25.3 MIN 13 · verify all blocking · sfx clean.
+
+---
+
+## REV 22 — the pour exits, the climb gets a mechanism, the CTA states the action
+
+- **An exit is part of an entrance.** The crowd pour ended exactly where the shot cut, so it froze then
+  vanished. Author motion PAST the cut and let the cut interrupt it.
+- **A good-looking graphic nearly smuggled in an unsourced number.** I drew a "#N ON GITHUB" rank badge
+  because the race needed a scoreboard; `#1` is on the reel's own CLAIM_BANNED list precisely for that
+  moment. Deleted before render.
+- **A readout that duplicates the picture and occludes it is pure cost.** The four-dot floor indicator
+  told the viewer what the car's own position already told them, over the top of the car.
+- **A keyword is a title; an action is an instruction.** The CTA now shows the comment being typed and
+  posted rather than showing the word and hoping.
+- **dHash floor hit again on a brand-new scene** — identical geometry in all three cuts. Any new scene
+  needs per-variant GEOMETRY from the start, not grade.
+
+Gates: motion 0/9 (median 14.22) · look ✅ · dHash mean 25.4 MIN 12 · verify all blocking · sfx clean.
+
+---
+
+## REV 23 — three hook cuts, sorted Drive, article blocked
+
+- **I only ever previewed the main cut.** Two of the three delivered cuts opened with rev-2 hooks from
+  the superseded world — the very defect twenty revisions had been spent removing from the body.
+  Contact-sheet EVERY cut.
+- Two new hooks written in the current world (a lobby split-flap directory; a dive down the face from
+  the roof). dHash mean 25.9, MIN 12 across the three.
+- Drive folder rebuilt, named by hook, with a README and a hooks-comparison sheet.
+- ⛔ Wiping the folder deleted the cover, which the reel build does not regenerate — its only source is
+  `cover-system/out/`. Check for build-external assets before clearing a delivery folder.
+
+---
+
+## REV 27 — the VO did not start at zero, and every gate said it did
+
+`verify_reel`'s `VO_ONSET_0` passed on every render of this reel while there was a 0.2s dead head,
+because it reads the whisper transcript and whisper anchored the first word at 0.000 — on a **mouth
+click**, not a word. RMS at 10ms told the truth in one command.
+Rule: [`feedback_vo_cut_to_silence_not_whisper`] now covers the HEAD of the file, not just cut points.
+
+Fixed as a rigid 4-frame shift of the whole reel (VO + all three beds trimmed, every `L` entry, the
+total, the caption word times, and the three hooks' tail curves). 25.53 → 25.45s.
+
+Opening shot 3.10x → 1.98x, which then exposed three frame-0 faults, all measured: dead grey board
+(mounts added — and my first mounts were darker than the board, 130.9), the hero card still mid-flight,
+and its sprite still inside `Crew`'s entrance.
+
+---
+
+## REV 28 — diagnosing the skip rate
+
+Measuring the reel against ITSELF proved nothing; measuring frame 0 against four reels that performed
+found the cause in two numbers — the claim pill was at opacity 0 on the thumbnail frame (3.7% ink vs
+16.6-23.5%), and the subject filled 0.62% of the panel vs 3.3-23.8%. Both fixed and both now inside the
+winners' range.
+
+The wider lesson: `look_audit` and `scene_motion_audit` both crop to 41% of the frame. Every quality
+number this build has produced describes a slice, and the full frame moves ~2.2x less than the panel
+does. Frame 0 is the whole frame and it is the feed thumbnail — compare it to winners at feed scale.
+
+---
+
+## REV 29 — the open was churning, and the audit rewarded it
+
+The single most useful measurement of this whole build: **mean frame-to-frame delta of the panel over
+0-6s, against reels that performed.** 134 sat at 12.46 with 52 jumps; the winners sit at 4.51-6.55 with
+3-15. Twelve rounds of "boring" answered with more cuts had produced a reel nobody could settle on, and
+`scene_motion_audit` reported 0/9 failing at every step because churn scores high.
+
+Rebuilt the open as one locked framing with one event (the doors open, 200 engineers walk out past the
+camera). 52 jumps → 2, delta 12.46 → 5.15.
+
+---
+
+## REV 30 — the blank plate, and spiky vs low motion
+
+- **13s was a bug**: `LiftApp` renders nothing at stage 0 and S4 holds stage 0 for 58 frames, so its
+  hero object was a grey slab for two seconds. Stage 0 is now the job ticket.
+- **0-3s elevated without churn**: anticipation (them massed behind the doors before it opens), depth
+  (a second occupied floor), escalation (one, then three, then the flood). Two of the three are static,
+  so 0-6s stayed at Δ 5.01.
+- **The measurement that mattered most this whole build**: near-frozen 12-frame windows across the reel.
+  134 had **62** against the winners' **2-4**, while its average was in their band. That spiky shape is
+  what every "at X seconds it's boring" note was pointing at. 62 → 6 with continuous low-level motion —
+  crawls, camera drift, linear eases, overlapping steps. Never a burst.
+
+---
+
+## REV 31 — the hook peaked and then coasted
+
+Third and last shape problem in the open. After fixing churn (12.46 → 5.01) and dead windows (62 → 6),
+it still did not hold — because the motion PEAKED on the door-opening beat and coasted at ~3.0 either
+side, against the winners' sustained 4.5-6.5. Neither a scene average nor a reel average shows this;
+only a 10-frame bucket profile does.
+
+Causes: the trigger fired at f18 (leaving 0.33-0.67s empty) and `near = t*t` made every walker slow for
+most of its travel. Doors from f6, linear travel, wider lateral spread, continuous push.
+Quietest bucket 1.84 → 4.31.

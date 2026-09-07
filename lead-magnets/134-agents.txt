@@ -1,0 +1,68 @@
+TITLE   The 202 Agent Dev Team
+SUB     How to install a marketplace of specialized Claude Code agents and put four of them on one build
+
+H       What this actually is
+P       Every serious Claude Code user eventually hits the same wall. You have one model, one context window and one set of instructions, and you keep asking it to be a frontend engineer, a database designer and a security reviewer in the same session. Every extra requirement dilutes the last one, so the output drifts toward average.
+P       wshobson/agents is a marketplace that fixes the shape of that problem rather than the prompt. It ships 202 role-specific agents, each with its own instructions, its own conventions and its own definition of done, generated from a single Markdown source into whatever harness you run.
+B       Repo: github.com/wshobson/agents
+B       39.4k stars, and it is free
+B       202 agents across architecture, languages, infrastructure, security, data, machine learning, docs, business and SEO
+B       94 plugins, 183 skills, 105 commands, 16 orchestrators
+B       Runs in Claude Code, and also Codex, Cursor, OpenCode, GitHub Copilot and Antigravity
+
+RULE
+
+H       The mistake almost everyone makes first
+P       They try to install all of it. Do not.
+P       The unit of installation is the PLUGIN, not the agent. Skills and agents come along with the plugin, and Claude auto-discovers which one matches your task from the description you type. That discovery is a matching problem, so a bloated install makes it worse, not better: you are handing the selector 202 candidates when your repo only ever needed six.
+QUOTE   Install two or three domain plugins that match what you actually build. Add more when a real task has no match, never in advance.
+
+RULE
+
+H       Setting it up
+NUM     Register the catalog once. In Claude Code, run /plugin marketplace add wshobson/agents
+NUM     Install a domain plugin, not everything. For example /plugin install backend-development
+NUM     Add one or two more only if your work genuinely spans them. Common honest pairs are backend-development plus security-scanning, or frontend plus unit-testing.
+NUM     Run /plugin on its own to list every command you now have. This is the discovery step people skip, and it is the only place you see the real names.
+NUM     Try one command against a real file, not a toy. For example /unit-testing:test-generate src/api/users.py
+
+RULE
+
+H       The two ways to call an agent, and when each is right
+P       There are two invocation paths and they are not interchangeable.
+B       SLASH COMMAND, shaped /plugin-name:command-name arguments. Use it when you know exactly which role you want and you want the run to be repeatable. Example: /backend-development:feature-development OAuth2 integration
+B       NATURAL LANGUAGE, where you name the agent in a sentence. Use it mid-conversation when the context you have already built matters more than the exact command. Example: "Use backend-architect to design the authentication API" or "Have security-auditor scan for OWASP vulnerabilities"
+P       The slash form starts clean. The sentence form inherits the session. Reach for the sentence form when the previous twenty minutes of conversation are the reason the agent will get it right.
+
+RULE
+
+H       Putting four agents on one build
+P       This is the part the video shows and does not explain. There are two ways to do it, and the second is the one worth learning.
+P       The first is an ORCHESTRATOR, a single command that runs a sequence for you. There are 16 of them. The full-stack one is the clearest example.
+B       /full-stack-orchestration:full-stack-feature "user dashboard"
+P       That one line runs backend-architect, then database-architect, then frontend-developer, then test-automator, then security-auditor, then deployment-engineer, then observability-engineer, handing the work down the chain.
+P       The second way is to COMPOSE the commands yourself, in order, in one session. It is slower to type and better in almost every real case, because you read each stage's output before the next one builds on it.
+B       /backend-development:feature-development payment API
+B       /security-scanning:security-hardening
+B       /unit-testing:test-generate
+B       /comprehensive-review:full-review
+QUOTE   Use an orchestrator to see the shape of a workflow. Use composition once you know which stage you actually need to inspect.
+
+RULE
+
+H       Four things that are true and are not obvious
+NUM     The agents are not smarter models. They are the same model carrying a role's context so you stop rewriting it. That is the entire mechanism, and it is why the gain shows up on your second session rather than your first.
+NUM     Auto-discovery reads your task DESCRIPTION. Vague task text selects a vague agent. "Fix the bug" matches nothing useful; "trace a memory leak in the checkout flow" routes correctly.
+NUM     It is not Claude-only. The same Markdown source generates harness-native artifacts for Codex, Cursor, OpenCode, Copilot and Antigravity, so the role definitions survive a tool change. That is the real reason to standardize on a marketplace instead of your own scattered prompt files.
+NUM     A role's value is its definition of DONE, not its job title. When you write your own agent later, spend the effort on the acceptance criteria, not on the persona paragraph. That is the half everyone skips and it is the half that changes the output.
+
+RULE
+
+H       A first week that actually works
+NUM     Day one, install one plugin for the thing you build most. Run /plugin and read the command list end to end.
+NUM     Day two, take a task you already finished by hand and re-run it through the matching agent. Compare the two outputs. You are calibrating, not shipping.
+NUM     Day three, compose two commands in sequence on one real change, and read the intermediate output before the second runs.
+NUM     Day four, run one orchestrator on a small feature to see the full chain, then decide which stages you want to keep manual.
+NUM     Day five, write down the two roles you reached for most. Those are the only ones worth customizing, and now you know why.
+
+KEY     AGENTS

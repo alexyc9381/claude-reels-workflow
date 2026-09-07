@@ -202,6 +202,12 @@ def check_captions(words, script, drift_tol):
                         "caption word starts must be monotonic (full drift gate = caption-sync-gate)",
                         blocking=False))
     if script:
+        # ⛔ `--script` is LITERAL TEXT, and a path looks exactly like text: passing
+        # `--script public/foo.txt` compares the captions against the FILENAME,
+        # normalises to one word, and reports "1 diff" — a ship-block that says
+        # nothing about the reel. If it names a readable file, read it.
+        if os.path.exists(script) and len(script) < 4096 and "\n" not in script:
+            script = open(script, encoding="utf-8").read()
         got = " ".join(str(x.get("word", "")).strip() for x in w)
         # ⛔ A NEWLINE IS A WORD BOUNDARY. This stripped `[^a-z0-9 ]` first, which
         # DELETES "\n" rather than collapsing it, so a script file written one

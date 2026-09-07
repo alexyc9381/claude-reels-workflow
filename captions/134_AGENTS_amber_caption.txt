@@ -1,0 +1,25 @@
+Comment "AGENTS" and I'll send you the repo plus the setup guide.
+
+👇 READ BELOW
+
+202 specialized AI engineers. One GitHub repo. Free.
+
+It is wshobson/agents, and it has 39.4k stars. Instead of one general model doing everything, each agent is a role with its own instructions and its own definition of done: a frontend engineer, a backend engineer, a security auditor, an SRE, a database specialist.
+
+★ 39.4k stars
+→ 202 agents across architecture, languages, infrastructure, security, data, ML, docs, business and SEO
+→ 94 plugins, 183 skills, 105 commands
+→ 16 orchestrators, so several agents can work one job in sequence
+→ runs in Claude Code, Codex, Cursor, OpenCode, Copilot and Antigravity
+
+The mistake almost everyone makes is installing all of it. The unit of installation is the plugin, not the agent, and Claude picks the right one by matching your task description. Hand the selector 202 candidates when your repo only ever needed six and you have made discovery worse, not better. Two or three domain plugins is the whole setup.
+
+The part nobody mentions: these are not smarter models. It is the same model carrying a role's context so you stop re-explaining your conventions every session. That is why the gain shows up on your second session rather than your first.
+
+Comment "AGENTS" and I'll send you the repo link and the guide on wiring a four agent team to one build.
+
+.
+.
+.
+
+#claudecode #anthropic #claudeai #aiagents #subagents #aicoding #vibecoding #devtools #opensource #github #softwareengineering #aiautomation #programming #codingtips #buildinpublic #aitools #developer #techtips #aiworkflow #coding

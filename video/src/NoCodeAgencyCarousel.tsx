@@ -172,7 +172,7 @@ const Line: React.FC<{ top?: number; children: React.ReactNode; light?: boolean 
 );
 
 /* ---------------------------------------------------------------- logos */
-const LOGO_EXT: Record<string, string> = { github: "svg", github_white: "svg", claude: "svg", cursor: "svg", copilot: "svg", gemini: "svg" };
+const LOGO_EXT: Record<string, string> = { github: "svg", github_white: "svg", claude: "svg", cursor: "svg", copilot: "svg", gemini: "svg", codex: "svg" };
 const LogoBadge: React.FC<{ brand: string; size?: number }> = ({ brand, size = 78 }) => (
   <div style={{ width: size, height: size, borderRadius: size * 0.26, background: "#fff", display: "grid", placeItems: "center", boxShadow: "0 12px 24px -12px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.05)" }}>
     <Img src={staticFile(`logos_official/${brand}.${LOGO_EXT[brand]}`)} style={{ width: size * 0.58, height: size * 0.58, objectFit: "contain" }} />
@@ -299,7 +299,7 @@ const Departments: React.FC = () => (
   <>
     <AbsoluteFill style={{ background: WARM.wall }} />
     <Fitout p={WARM} horizon={318} />
-    <WallSign kicker="the org chart" size={70} top={180} max={1000}>18 TEAMS, <HL>ONE CLICK</HL></WallSign>
+    <WallSign kicker="the org chart" size={80} top={180} max={1000}><HL>ONE CLICK</HL> INSTALL</WallSign>
     <CardStack top={392}>
       <Card h={188} big="59" title="Engineering" sub="they build the product" costume={{ hardHat: 1 }} lf={20}
         blurb={<>web, mobile, APIs, AI features and the infrastructure under them</>} />
@@ -395,10 +395,15 @@ const TheSeventh: React.FC = () => {
           <Mascot lf={a.lf} size={124} gaze={2} nodAmp={0} {...a.c} />
         </div>
       ))}
-      <div style={{ position: "absolute", top: 1006, left: 0, right: 0, display: "flex", justifyContent: "center", zIndex: 30 }}>
-        <div style={{ maxWidth: 900, background: "linear-gradient(178deg,#F6EBD4 0%,#EADCBE 100%)", borderRadius: 14, padding: "18px 34px", textAlign: "center", boxShadow: `0 22px 40px -22px rgba(40,26,14,0.8), inset 0 0 0 2px ${hexA(BRASS, 0.6)}` }}>
-          <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 600, fontSize: 38, lineHeight: 1.2, color: INK, letterSpacing: "-0.02em" }}>
-            It decides who picks up what. Skip it and that job stays <span style={{ color: RUST }}>yours</span>.
+      {/* ⛔ short. one goal in, the whole thing out. the old version explained
+         routing in three lines when two carry it. */}
+      <div style={{ position: "absolute", top: 998, left: 0, right: 0, display: "flex", justifyContent: "center", zIndex: 30 }}>
+        <div style={{ width: 900, background: "linear-gradient(178deg,#F6EBD4 0%,#EADCBE 100%)", borderRadius: 14, padding: "22px 34px 24px", textAlign: "center", boxShadow: `0 22px 40px -22px rgba(40,26,14,0.8), inset 0 0 0 2px ${hexA(BRASS, 0.6)}` }}>
+          <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 700, fontSize: 46, lineHeight: 1.08, color: INK, letterSpacing: "-0.02em" }}>
+            Give it one goal.
+          </div>
+          <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 600, fontSize: 36, lineHeight: 1.22, color: INK, marginTop: 8 }}>
+            It manages your other agents and builds the whole thing <span style={{ color: RUST }}>without you</span>.
           </div>
         </div>
       </div>
@@ -422,7 +427,7 @@ const Cta: React.FC = () => (
       WANT THE <HL>FREE SETUP</HL>?
     </div>
     <div style={{ position: "absolute", top: 378, left: 110, right: 110, textAlign: "center", fontFamily: inter.fontFamily, fontWeight: 600, fontSize: 32, color: "#5C4C39", lineHeight: 1.3, zIndex: 30 }}>
-      Comment <span style={{ color: INK, fontWeight: 800 }}>"AGENCY"</span> and I'll send you the seven, plus how to wire them together.
+      Comment <span style={{ color: INK, fontWeight: 800 }}>"AGENCY"</span> and I'll send you the seven, plus how to use them together.
     </div>
     <div style={{ position: "absolute", top: 500, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 16, zIndex: 30 }}>
       <div style={{ padding: "16px 28px", borderRadius: 16, background: INK, color: PAPER, fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 29 }}>🔖 Save this</div>
@@ -434,8 +439,8 @@ const Cta: React.FC = () => (
     <div style={{ position: "absolute", top: 992, left: 70, right: 70, textAlign: "center", fontFamily: fraunces.fontFamily, fontWeight: 600, fontSize: 36, color: INK, lineHeight: 1.2, zIndex: 30 }}>
       One click from their desktop app. No terminal.
     </div>
-    <div style={{ position: "absolute", top: 1062, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 20, zIndex: 30 }}>
-      {["claude", "cursor", "copilot", "gemini"].map((b) => <LogoBadge key={b} brand={b} size={68} />)}
+    <div style={{ position: "absolute", top: 1062, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 17, zIndex: 30 }}>
+      {["claude", "cursor", "codex", "copilot", "gemini"].map((b) => <LogoBadge key={b} brand={b} size={66} />)}
     </div>
     <Vignette />
   </>

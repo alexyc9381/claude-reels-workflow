@@ -2,7 +2,7 @@ import React from "react";
 import { useCurrentFrame } from "remotion";
 import { E, OUT, IO, BACK, IN_Q, LIN, W, H, hexa, dkh, mxh, rnd, mono, SH,
   Scene, Cam, MarkCast, Hero, Crew, Contact, squash, GY,
-  CLAY, GOLD, DIFFG, DIFFR, INK, TEAL, VIOLET } from "./IntWorld";
+  CLAY, GOLD, DIFFG, DIFFR, INK, TEAL, VIOLET, FileSlab, R } from "./IntWorld";
 import { Link, Sparks } from "./IntShop";
 /* ⭐⭐⭐ THE ARCHITECTURE LAYER. `feedback_rooms_need_an_architecture_layer`:
    "'background more detailed, more polished' = ONE component, not fifteen sets."
@@ -16,6 +16,7 @@ import { Link, Sparks } from "./IntShop";
    not. ⛔ Everything it draws sits in a narrow band around the wall's own value,
    so the props and sprites keep every hard edge in the frame. */
 import { Fitout } from "./JudgeWorld";
+import { HitPlate } from "./IntBays";
 /* ⭐⭐⭐ THE MEASURED CLASS DEFECT. Shipped scenes compose 17-23 DISTINCT drawn
    components; mine composed 8-9, i.e. a third of the content. Every note in this
    build — "shape heavy", "same scene over and over", "why am I looking at a ring
@@ -26,7 +27,7 @@ import { Fitout } from "./JudgeWorld";
    things it can name — not more rectangles. These are the house's own drawn
    props, already approved on shipped reels. */
 import { Toolbox, Drum, TyreStack, Bench, Hook, Chain } from "./RpsSets";
-import { Gallery, Alcove, Folder, ExhibitWall, AppShell, PageSlab, Plaque, StepPlate } from "./JudgeProps";
+import { Gallery, Alcove, Folder, ExhibitWall, AppShell, PageSlab } from "./JudgeProps";
 import { BayLamp, LightColumn, Lift } from "./RpsSets";
 import { Cracks, Shards, Flurry, Gauge, Station, JobCan, TickDisc, Spinner,
          BigGauge, CodeLines, PipRow } from "./AdhProps";
@@ -77,7 +78,7 @@ export const R_ATRIUM: React.FC<SP> = ({ dur }) => {
   const P = pl("#1E3A5C", "#9FC6E4", "#7E96AC", "#3E5468", "#16222E", "#DCEEFA", "#101A24", 466);
   const N = 8;
   return (
-    <Scene p={P} slug="" push={[0, dur, 1.0]} vig={0.24}>
+    <Scene p={P} slug="" push={[0, dur, 1.07]} vig={0.24}>
       <Cam x={Math.sin(f / 30) * 4} s={1} z={12}>
         <Fitout p={P} f={f} seed={2} lift={0.9} arch z={5} />
         {/* full-height glazing — vertical mullions, a bright sky behind */}
@@ -114,8 +115,19 @@ export const R_ATRIUM: React.FC<SP> = ({ dur }) => {
         <div style={{ position: "absolute", left: W / 2 - 200, top: 596, width: 400, height: 104,
           zIndex: 52, borderRadius: 8,
           background: "linear-gradient(180deg, #E6EEF6, #A8BECE)", border: "5px solid #6E8CA4" }} />
-        <Link x={W / 2} y={392} r={286} rot={0} heat={0} z={60} />
-        <MarkCast x={W / 2} y={392} s={244} z={64} f={f} spin={2.4} pulse={0.8} />
+        {/* ⛔⛔⛔ THE RING WAS THE WHOLE NOTE. "why am i just looking a ring so
+            much" was not about this scene — the forged link was the hero of
+            THIRTEEN OF FIFTEEN scenes, because I picked a chain as the reel's
+            metaphor and then had nothing else to put on screen. It also read as
+            a TYRE at 286px. The subject of this reel is a FILE, and the house
+            rule is already written down: use the subject's OWN object, never an
+            invented one. So the ring survives in exactly two places — the hook,
+            which forges it, and the loop, which closes it — and everywhere else
+            the hero is the artifact the script is actually about. */}
+        <MarkCast x={W / 2} y={412} s={640} z={48} f={f} spin={1.1} pulse={0.45} o={0.30} />
+        <FileSlab x={W / 2} y={412} w={456} h={604} z={60} f={f} name={R.hero}
+          fields={R.fields} fieldsIn={E(f, 16, 52, 0, 1, OUT)}
+          glowK={E(f, 8, 26, 0, 1, OUT)} />
         <Contact x={W / 2 - 210} y={590} w={420} z={50} o={0.34} />
 
         {/* the room is a PLACE, not a backdrop: lit alcoves along the wall, a
@@ -125,7 +137,6 @@ export const R_ATRIUM: React.FC<SP> = ({ dur }) => {
         <PipRow lit={Math.min(1, f / 40)} y={64} z={70} d={13} f={f} at={6} />
         <AppShell x={W - 196} y={470} f={f} k={Math.min(1, Math.max(0, (f - 14) / 26))} z={44} s={0.62} />
         <PageSlab x={168} y={478} f={f} k={Math.min(1, Math.max(0, (f - 22) / 26))} z={44} s={0.58} />
-        <Plaque x={W / 2} y={128} w={300} z={17} />
         <CodeLines x={352} y={214} w={330} n={7} h={9} gap={15} c="#9FC4DE" o={0.5}
           seed={4} f={f} scroll={0.5} syntax={0.5} z={18} />
         <Alcove x={112} y={168} w={200} h={210} z={16} c="#DCEEFA" on={0.8} t="PROBLEM" />
@@ -162,7 +173,7 @@ export const R_SITE: React.FC<SP> = ({ dur }) => {
   const NB = 22, FALL = 96;
   const fall = Math.max(0, (f - FALL) / 34);
   return (
-    <Scene p={P} slug="" push={[0, dur, 1.0]} vig={0.42}>
+    <Scene p={P} slug="" push={[0, dur, 1.045]} vig={0.42}>
       <Cam x={Math.sin(f / 26) * 5 + (f >= FALL && f < FALL + 16 ? Math.sin(f * 8) * 10 : 0)}
         y={f >= FALL && f < FALL + 16 ? 6 : 0} s={1} z={12}>
         <Fitout p={P} f={f} seed={7} lift={0.72} arch={false} z={5} />
@@ -249,7 +260,7 @@ export const R_SITE: React.FC<SP> = ({ dur }) => {
         <Cracks x={556} y={302} d={300} k={Math.min(1, Math.max(0, (f - 84) / 12))} z={62} seed={3} />
         <Shards x={556} y={330} f={f} at={96} n={16} z={64} s={1.15} c="#C8B49A" />
         <Flurry x={556} y={GY - 10} f={f} at={99} n={22} z={63} s={1.3} spread={340} />
-        <StepPlate x={556} y={GY + 4} w={330} hit={f >= 99 ? 1 : 0} z={43} />
+        <HitPlate x={556} y={GY + 4} w={330} hit={f >= 99 ? 1 : 0} z={43} />
         <Toolbox x={92} y={GY + 6} s={0.95} z={48} c="#B8402E" />
         <Drum x={318} y={GY + 10} s={0.9} z={46} c="#C4802A" />
         <Drum x={392} y={GY + 16} s={0.75} z={45} c="#7E5A20" />
@@ -283,7 +294,7 @@ export const R_LINE: React.FC<SP> = ({ dur }) => {
   const x = BX[stage] * prog + BX[Math.max(0, stage - 1)] * (1 - prog);
   const BELT = 560;
   return (
-    <Scene p={P} slug="" push={[0, dur, 1.0]} vig={0.34}>
+    <Scene p={P} slug="" push={[0, dur, 1.04]} vig={0.34}>
       <Cam x={Math.sin(f / 30) * 4} s={1} z={12}>
         <Fitout p={P} f={f} seed={11} lift={0.85} arch z={5} />
         {/* the hall */}
@@ -325,8 +336,19 @@ export const R_LINE: React.FC<SP> = ({ dur }) => {
             width: 56, height: 44, zIndex: 27, background: hexa("#0E0820", 0.7) }} />;
         })}
         {/* the artifact travelling the line */}
-        <Link x={x} y={BELT - 196} r={238} rot={0} heat={0} z={64} />
-        <MarkCast x={x} y={BELT - 196} s={204} z={68} f={f} spin={2.8} pulse={0.6} />
+        {/* ⭐ "a full spec, then an implementation plan, and actually build and
+            test" is FOUR NAMED ARTIFACTS, so the line hands over four — each one
+            finished at its own station, on its own beat. The count IS the
+            information (`feedback_graphical_over_textual`). */}
+        <MarkCast x={x} y={BELT - 210} s={300} z={60} f={f} spin={2.2} pulse={0.5} o={0.34} />
+        {R.chain.map((nm, i) => {
+          const born = 8 + i * 30;
+          const k = E(f, born, born + 14, 0, 1, BACK);
+          if (k <= 0.01) return null;
+          return <FileSlab key={nm} x={186 + i * 236} y={BELT - 210 + (1 - k) * -70}
+            w={188} h={252} z={64 + i} f={f} name={nm} pale={i > 0} o={k}
+            glowK={i === 0 ? 1 : 0} />;
+        })}
         {stage > 0 && f - AT[stage - 1] < 18 && (
           <Sparks f={f} at={AT[stage - 1]} x={BX[stage]} y={BELT - 236} n={46} z={92}
             floorY={BELT + 10} />

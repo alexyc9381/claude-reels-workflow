@@ -1,0 +1,7 @@
+This GitHub repo gives you 200 AI engineers that work for you 24/7 completely free.
+It's called Agents and it already has over 39,000 GitHub stars.
+Instead of having one AI do everything, you can have a frontend engineer, backend engineer, security auditor, and hundreds of other specialized roles.
+You can tell your team to build an app, have one agent plan the architecture, another build the frontend, another handle the backend, and another review the code for security.
+And they don't need salaries or sleep, so they can keep working forever.
+You literally get an entire AI dev team on your laptop.
+Comment Agents for the free repo.

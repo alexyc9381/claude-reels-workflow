@@ -1,0 +1,87 @@
+TITLE   The intent.md Setup Guide
+SUB     The file that tells Claude WHY, the four questions it asks you, and the chain it starts
+
+H       What this actually is
+P       CLAUDE.md tells Claude how to work in your repo. Style, commands, the things not to touch. It is a rules file, and it is the one almost everybody already has.
+P       intent.md is the other half. It records what someone wants, why they want it, and the constraints it has to respect, and it is committed to version control before anyone designs or codes anything. Anthropic describes it as a proto specification in the originator's own terms, and it is the first artifact in the AI native SDLC playbook.
+B       Source: the AI Native SDLC Playbook on claude.com and the Capture as intent.md lesson on Claude Academy
+B       It is a plain markdown file. There is nothing to install.
+B       It lives in your repo, next to CLAUDE.md, and it gets committed like any other file
+
+RULE
+
+H       Why a rules file was never going to be enough
+P       The failure it fixes is not that the model writes bad code. Models write fine code. The failure is that it writes fine code for the wrong thing, confidently, and then loses the reason halfway through a long task.
+P       Context is what the model can see. Intent is what you are trying to accomplish. No amount of pasted codebase produces the second one, because it was never written down anywhere. A wrong build shipped fast is still a wrong build.
+QUOTE   CLAUDE.md answers how we work here. intent.md answers why we are doing this at all.
+
+RULE
+
+H       The five sections, and these are the real ones
+P       Copy this straight into a file called intent.md at the root of your repo. Keep it short. It is a proto spec, not a requirements document, and a long one defeats the point.
+NUM     Problem. What cannot be done today, in plain language, from the point of view of the person who is stuck.
+NUM     Proposed outcome. What is different once this exists. Write the change, not the feature.
+NUM     Affected users and systems. Who this touches and what it touches. This is the section that catches scope creep early.
+NUM     Constraints. Budget, deadline, stack, compliance, the things that are not negotiable.
+NUM     Open questions. What you genuinely do not know yet. Leaving this honest is what stops the model inventing an answer.
+P       An intent file also carries a title, an author and a status. Status starts at draft and only moves once somebody has actually read it.
+
+RULE
+
+H       The template
+P       Paste this as intent.md and fill it in. Twelve lines is a perfectly good intent file.
+B       # Intent: <short name for the change>
+B       Author: <you>  ·  Status: draft
+B       ## Problem
+B       ## Proposed outcome
+B       ## Affected users and systems
+B       ## Constraints
+B       ## Open questions
+
+RULE
+
+H       The four questions Claude asks you
+P       You do not write the file cold. You describe the idea in your own words and Claude interviews you, asking the questions an analyst would ask. There are four, and they map onto the sections above.
+NUM     What are you building
+NUM     Who is it for
+NUM     What constraints does it have
+NUM     What does success actually look like
+P       Answer them badly and you get a bad intent file, which is still better than no intent file, because a bad one is visible in the diff and an assumption in someone's head is not.
+
+RULE
+
+H       The prompts, in order
+P       Run these in Claude Code, in the repo, in one session. Do not skip straight to build. The whole value is in the order.
+NUM     I want to describe an idea before we build anything. Do not write code yet. Interview me the way an analyst would: scope, users, constraints, and what success looks like. Ask one question at a time and wait for my answer.
+NUM     Now write that up as intent.md at the repo root, using the sections Problem, Proposed outcome, Affected users and systems, Constraints, Open questions. Keep it under one page. Put anything you are unsure about in Open questions rather than guessing.
+NUM     Read intent.md and tell me what is still ambiguous. Do not fix it, just list it. I will answer, then you update the file.
+NUM     Commit intent.md on its own branch and open it for review. The file is the deliverable for this step, not the code.
+NUM     Only once I have approved intent.md: turn it into spec.md, then an implementation plan, then build it and write the tests.
+P       That last prompt is the one people run first, and it is why they get confident wrong output. Approving the intent before the spec exists is the whole method.
+
+RULE
+
+H       The chain it starts
+P       intent.md is stage one, not the whole thing. Each stage ends by writing its artifact to version control, so the reasoning ends up in the repo instead of in a chat window somebody closed.
+B       Plan  →  intent.md
+B       Design  →  spec.md
+B       Build  →  the code, guided by CLAUDE.md
+B       Test  →  the diff and its tests
+B       Then deploy, then maintain
+P       The useful property is that every step is reviewable by a human at the point where a human is cheap. Rejecting a paragraph in intent.md costs a minute. Rejecting a merged feature costs a week.
+
+RULE
+
+H       How to actually adopt it without a process rollout
+P       Nobody needs a meeting for this. Three habits get you most of the value.
+NUM     One intent file per change, not per project. Name it after the change and let it be short lived.
+NUM     Put intent.md in the pull request description as well as the repo. Reviewers read the PR, not the file tree.
+NUM     Keep Open questions open. The instinct is to empty that section before showing anyone. Resist it, because that section is the only honest record of what the team has not decided.
+
+RULE
+
+H       Where this is going
+P       The reason this is worth doing now rather than later is what it makes possible. Once the reason for a piece of work is written somewhere a machine can read, an agent that notices the app broke can write a new intent file, plan the fix and run the chain again, because the thing it was always missing is finally on disk.
+P       That is the honest version of the claim. It is a direction the artifact chain makes reachable, not a feature shipping on a date.
+
+KEY     INTENT

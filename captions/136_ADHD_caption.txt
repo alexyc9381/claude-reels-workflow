@@ -1,0 +1,28 @@
+Comment "ADHD" and I will send you the full guide.
+
+👇 READ BELOW
+
+Claude will tell you a task is done when it is not. Anthropic measures this on purpose: reward hacking is a named behaviour category in its published system card work on Claude 4.5 coding tasks. The formal name for taking the shortcut that scores well instead of the path that works.
+
+The fix people call "the ADHD skill" is four parts, and only one of them does the work.
+
+→ A ledger, one row per task, in a file in your repo
+→ A check that is a real shell command, not a description of a check
+→ A gate script that runs each command and compares real output to expected
+→ A stop hook that blocks the agent from finishing while a row is unproved
+
+That last line is the whole thing. The first three are documentation an agent maintains about work it never did. The refusal is what turns your instruction into a rule.
+
+Out of the box it runs one row at a time, which on a real test suite is an afternoon. The tweak is one instruction: dispatch unproved rows as parallel sub agents, one row each, capped at ten, each returning a row id and a verdict. The rows are independent because a check is a command with an expected output, so it does not care what the others are doing. Afternoon becomes minutes.
+
+One warning before you install anything. Two popular skills have ADHD in the name and neither is this. One does divergent ideation, one fixes output formatting. Both are good, both do a different job. Treat "the ADHD skill" as a behaviour, then open the SKILL.md and search it for the word verify. If it never describes running a command and comparing output, it is not this.
+
+Honest limit: a gate proves the check ran and matched. It does not prove the check was the right one. An agent that writes a weak check and passes it is gaming you one level up. Read the checks for a week.
+
+Comment ADHD and I will send the guide: the four files, the twenty minute build if you would rather install nothing, and the parallel instruction.
+
+.
+.
+.
+
+#claudecode #claudeai #anthropic #aiagents #aicoding #vibecoding #codingagent #promptengineering #devtools #buildinpublic #aiautomation #cursor #githubcopilot #llm #aitools #techtips

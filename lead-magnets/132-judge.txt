@@ -1,0 +1,57 @@
+TITLE   The Judge Loop
+SUB     The three lines that put Claude's own output on trial, the stopping rule that keeps it from looping forever, and an honest account of what it costs
+
+H       What this is
+P       Claude hands you work and tells you it is done. Sometimes it is. The Judge Loop is a way of not having to take its word for it: instead of you reading the output and hunting for what is wrong, you make the model do that job, adversarially, before it ever reaches you.
+P       It is three lines on the end of a normal prompt. There is nothing to install, no framework, and no new tool. This guide is the exact wording, the rule that stops it, and the part the video did not have room for, which is when it is worth running and when it is a waste of money.
+
+RULE
+
+H       The three lines
+P       Line one is your task, written exactly as you would have written it anyway. Lines two and three are the whole technique.
+NUM     Your task, as normal. Be specific about what finished looks like, because that is what the judge will measure against.
+NUM     Spawn a team of sub-agents to do this work rather than answering directly.
+NUM     Assign three of them as PROSECUTOR, DEFENSE and JUDGE. The prosecutor's only job is to build the strongest possible case that the output is wrong. The defense answers each charge with evidence from the work itself. The judge rules on the evidence and returns a verdict plus a list of defects. Rebuild against the verdict and repeat.
+P       That is it. The reason it works is not that the model gets smarter on the second pass. It is that "find everything wrong with this" is a genuinely different task from "write this", and a model asked to attack its own output will surface things it will never volunteer while it is still in the mood to please you.
+
+RULE
+
+H       What each role actually does
+H       The prosecutor
+B       Give it one instruction: argue that the work fails. Not "review it", not "give feedback". Adversarial framing is doing the real work here, and softening it to "suggest improvements" produces the same agreeable notes you were trying to escape.
+B       Ask for charges, not impressions. A charge names the specific line, file, claim or behaviour it is about.
+B       This is the role that catches the confident wrong answer, because it is the only one being paid to look for it.
+H       The defense
+B       Its job is to answer each charge with evidence from the work, or to concede it. Conceding is a real outcome and should be allowed explicitly, or you get lawyering rather than checking.
+B       This is the role that stops the loop turning into demolition. Without it, the prosecutor's list gets acted on wholesale, including the parts that were fine.
+H       The judge
+B       It rules on the evidence, not on the argument. Ask it to mark each charge as upheld, dismissed, or unproven, and to say why in one line.
+B       It returns the defect list that the next rebuild works from. Everything dismissed is dropped, which is what keeps pass three shorter than pass one.
+
+RULE
+
+H       The stopping rule
+P       This is the part most people leave out, and it is the part that decides whether the loop costs you two passes or twenty.
+NUM     Stop when the judge upholds no charge that changes the output. Not when the prosecutor runs out of things to say, because it never will.
+NUM     Set a hard cap anyway. Three passes is a sensible default for most work. If it is still failing on pass four, the task description is the problem, not the output.
+NUM     Ask the judge to state the verdict in a fixed form, for example VERDICT: HOLDS or VERDICT: DEFECTS FOUND, so you can see at a glance whether another pass is needed without reading the whole ruling.
+P       Without an explicit stopping rule the loop does not converge, because there is always one more objection available to a model that has been told to object.
+
+RULE
+
+H       When to run it
+B       Run it on the thing you are about to ship, not on every message. It is a final check, not a working style.
+B       Build the rough version first, with normal prompting, and get it to the point where it does the job. Then trigger the loop.
+B       It is worth most on work where being wrong is expensive and being slow is not: anything going in front of a customer, anything touching money, anything you will not personally read line by line.
+B       It is worth least on exploratory work, drafts, and anything you were going to rewrite anyway.
+
+RULE
+
+H       Honest notes
+B       The 73 percent accuracy figure comes from the video. I have not been able to point it at a single published study, and you should treat it as a claim about the shape of the result rather than a measured number for your own work. What is well established is the underlying idea: asking a model to critique or attack its own output surfaces errors that a single pass does not, and this has been written about under names like self-critique, self-refinement and multi-agent debate for a while now.
+B       The claim that the creators of Claude think this is the future of AI is a paraphrase of general public comments about multi-agent systems. It is not a quote about this specific prompt, and nobody at Anthropic has endorsed the Judge Loop by name.
+B       It really does burn tokens. Three roles arguing across three passes is close to an order of magnitude more usage than answering once. That is the actual reason for the prototype-first advice, and it is worth checking against your own plan's limits before you make it a habit.
+B       Sub-agents are not required. The same three roles run perfectly well as three turns in one conversation. Sub-agents mainly buy you isolation, so the prosecutor is not reading the defense's reasoning before it writes its charges, and that isolation is a real part of why it works.
+B       None of this makes the output correct. It makes the output harder to be confidently wrong in, which is a different and more achievable thing.
+
+KEY     Comment JUDGE on the reel and I will send this guide.

@@ -125,12 +125,18 @@ def _ffmpeg():
     return "ffmpeg"
 
 
-def frames(mp4, fps, w, h):
+def frames(mp4, fps, w, h, limit=0):
     """Panel-cropped RGB frames as one array. ⛔ Crop to the PANEL — the cream chassis
-       outside it is identical in every reel and drags every metric to the same value."""
+       outside it is identical in every reel and drags every metric to the same value.
+
+       ⛔ `limit` caps how many frames are decoded. Without it `plate_at_f0` asked
+       for the WHOLE reel at full panel size to use frame 0 — 1672 x 1012 x 1300 x 3
+       is 6.6GB, so the audit was SIGKILLed (exit 137) on every reel long enough to
+       matter, and a killed gate prints nothing and looks like a gate that passed."""
     p = subprocess.run([_ffmpeg(), "-v", "error", "-i", mp4,
-                        "-vf", f"crop={PW}:{PH}:{PX}:{PY},fps={fps},scale={w}:{h}",
-                        "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True)
+                        "-vf", f"crop={PW}:{PH}:{PX}:{PY},fps={fps},scale={w}:{h}"]
+                       + (["-frames:v", str(limit)] if limit else [])
+                       + ["-f", "rawvideo", "-pix_fmt", "rgb24", "-"], capture_output=True)
     a = np.frombuffer(p.stdout, dtype=np.uint8)
     n = len(a) // (w * h * 3)
     if n == 0:
@@ -155,7 +161,7 @@ def plate_at_f0(mp4):
     did not perform all measured 7.7-9.0% — which looked like "a bit less plate" until the box
     was printed: ~900x105 at y0, i.e. the shared header pill. They had no plate at all."""
     from scipy import ndimage
-    a = frames(mp4, 30, PW, PH)[0]
+    a = frames(mp4, 30, PW, PH, limit=1)[0]
     r, b = a[..., 0], a[..., 2]
     m = (luma(a) > 168) & (sat(a) < 0.34) & (r >= b)
     lab, n = ndimage.label(m)

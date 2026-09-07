@@ -1,0 +1,15 @@
+Anthropic just introduced a file that matters more than a CLAUDE.md file.
+And even the creator of Claude Code said that this will change vibe coding forever.
+Because the biggest problem with AI coding isn't getting to write code, it's getting to actually understand what you're trying to build and remember that throughout the entire process.
+So the fix is a file called the intent.md.
+While CLAUDE.md tells Claude how to work, intent.md tells it why you're building something in the first place.
+But what's special about intent.md is instead of opening Claude Code and immediately telling it to build something, you first explain your idea.
+Then Claude interviews you, asking what you're building, who it's for, what constraints it has, and what success actually looks like.
+And all of that gets saved into an intent.md file.
+But here's where it gets much more interesting.
+Claude can turn it into a full spec, then an implementation plan, and actually build and test the feature automatically.
+But Anthropic's end goal goes even further.
+Eventually, AI agents could monitor your app, detect an issue, create a new intent file, plan the fix, and start the entire process again autonomously.
+Basically, we're moving from an AI that writes code to AI that autonomously runs the entire software development process.
+So intent.md isn't really about giving Claude more context, it's more about giving AI agents what you're actually trying to accomplish.
+For the free setup guide, comment INTENT.

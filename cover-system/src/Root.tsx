@@ -27,6 +27,12 @@ import {
   CoverFactory, CoverSol,
 } from "./ReelCovers4";
 import { CoverBoss, CoverFree131, CoverJudge, CoverBuild } from "./ReelCovers5";
+import { CoverLibrary, CoverUnlazy, CoverFree131v2 } from "./ReelCovers6";
+/* ⛔ reel 134 AGENTS was registered here from an untracked `ReelCovers7.tsx`
+   that was lost on 2026-09-05. The delivered PNG survives (out/AGENTS134_cover.png,
+   Drive Faceless/134 - AGENTS/) but the scene must be rebuilt to re-render it. */
+import { CoverJob } from "./ReelCovers9";
+import { CoverUnlazyV2, CoverSquad, CoverSims, CoverAgency135, CoverRepos, CoverAdhd, CoverMistake, CoverHardware, CoverWeb } from "./ReelCovers8";
 import "./fonts";
 
 const covers: [string, React.FC][] = [
@@ -52,6 +58,15 @@ const covers: [string, React.FC][] = [
   ["CoverJudge", CoverJudge],
   // set 7 - reel 133
   ["CoverBuild", CoverBuild],
+  ["CoverLibrary", CoverLibrary], ["CoverUnlazy", CoverUnlazy],
+  ["CoverFree131v2", CoverFree131v2],
+  // sets 12-15
+  ["CoverUnlazyV2", CoverUnlazyV2], ["CoverSquad", CoverSquad],
+  ["CoverSims", CoverSims], ["CoverAgency135", CoverAgency135],
+  ["CoverRepos", CoverRepos], ["CoverAdhd", CoverAdhd],
+  ["CoverMistake", CoverMistake], ["CoverHardware", CoverHardware], ["CoverWeb", CoverWeb],
+  // set 21 - reel 139 JOB
+  ["CoverJob", CoverJob],
   ["CoverSol", CoverSol],
 ];
 

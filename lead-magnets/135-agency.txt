@@ -1,0 +1,85 @@
+TITLE   The Free AI Agency
+SUB     How to install 273 specialist agents into Claude Code, and which ones are actually worth installing
+
+H       What this actually is
+P       The Agency is a public GitHub repository holding a cast of AI specialists. Not prompt templates, not a starter pack. Each one is a written character with a name, a domain, a working process and a stated definition of done, and each one drops into Claude Code as an agent you can call by name.
+P       The reason it is worth your time is not the count. It is that somebody has already done the boring half of the work: deciding what a Reddit Community Builder should care about that a Frontend Developer should not, and writing that difference down.
+B       Repo: github.com/msitarzewski/agency-agents
+B       Over 149,000 stars and 24,000 forks, MIT licensed, free
+B       273 agents counted across 18 divisions
+B       A native desktop app for macOS, Windows and Linux that installs them for you
+B       Installs into Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, Windsurf, Qwen, OpenCode and Osaurus
+
+RULE
+
+H       The mistake almost everyone makes on day one
+P       They install all 273. Do not.
+P       An agent roster is a selection problem before it is a capability problem. When you type a request, something has to decide which specialist should answer it, and that decision gets worse as the candidate list grows. Handing the selector 273 options when your work only ever touches six is not thoroughness, it is noise you have to wade through every single session.
+P       There is a second reason, and it is more concrete. OpenCode's runtime currently registers only about 119 agents and silently drops the rest, which the repo documents in its own README. A full install on that harness means a roster where some agents exist and some quietly do not, with nothing telling you which is which.
+QUOTE   Install the two or three divisions that match what you actually ship. Add a fourth when a real task has no match, never in advance.
+
+RULE
+
+H       The 18 divisions, and roughly what sits in each
+P       This is the map nobody publishes, and it is the thing that makes the roster navigable. Counted from the repo's own tables.
+B       Engineering, 59 agents. The largest by a wide margin. Frontend, backend, mobile, infrastructure, refactoring.
+B       Specialized, 57. The catch-all, and worth browsing rather than assuming.
+B       Marketing, 36. Content, community, SEO, lifecycle, and the Reddit builder.
+B       Game Development, 21. Systems, level design, economy, live ops.
+B       GIS, 13. Geospatial, mapping, remote sensing.
+B       Security, 12. Auditing, threat modelling, compliance.
+B       Design, 10 and Sales, 10.
+B       Testing, 9. Unit, integration, load, and test strategy.
+B       Paid Media, 7 and Project Management, 7.
+B       Support, 6. Spatial Computing, 6. Academic, 6.
+B       Product, 5. Finance, 5. Healthcare, 3. Research, 1.
+P       If you build software, Engineering plus Testing plus Security is a complete working set and it is 80 agents, not 273. If you make content, Marketing plus Design plus Paid Media is 53. Pick the row that describes your week.
+
+RULE
+
+H       Installing it, the fast way and the honest way
+NUM     The fast way. Download the desktop app from agencyagents.app, or on a Mac run brew install --cask msitarzewski/agency-agents/agency-agents. It browses the whole roster, installs into whichever tools you have, and keeps itself updated. No clone, no scripts.
+NUM     The honest way, if you would rather see what lands on disk. Clone the repo, then run ./scripts/install.sh --tool claude-code to place every agent, or copy one division by hand with cp engineering/*.md ~/.claude/agents/
+NUM     Restrict the install to what you want. The installer takes --division, which is the flag that keeps you under the OpenCode ceiling and keeps your roster legible.
+NUM     Verify. Open Claude Code and check ~/.claude/agents/ actually contains the .md files you expected. An agent that did not land fails silently later, at the moment you needed it.
+
+RULE
+
+H       How to actually call one
+P       Two paths, and they are not interchangeable.
+B       By name, mid-conversation. Say "activate Frontend Developer mode and help me build this React component". Use this when the last twenty minutes of context are the reason the agent will get it right.
+B       From a clean start, when you want a repeatable run and no inherited assumptions. Open a fresh session and name the agent in the first message.
+P       The sentence form inherits your session. The clean form does not. Most people only ever use the first and then wonder why an agent seems to carry over opinions from an unrelated task.
+
+RULE
+
+H       The three the video names, and why those three
+P       Frontend Developer sits in Engineering. Ad Creative Strategist sits in Paid Media. Reddit Community Builder sits in Marketing. They are three genuinely different divisions on purpose, because the useful demonstration is not that a repo has many agents, it is that the agents disagree with each other in ways that are productive.
+P       Give the same landing page to all three. The Frontend Developer will talk about component structure and load. The Ad Creative Strategist will talk about the hook and the offer. The Reddit Community Builder will tell you the tone will get you downvoted. None of them is wrong, and no single general purpose session gives you all three readings without you doing the work of asking three times in three different voices.
+
+RULE
+
+H       Routing, which is the part that decides whether this is useful
+P       A roster with no routing is a filing cabinet. The habit worth building is deciding, before you type, which of three jobs you are doing.
+NUM     Making something. Name the builder for the domain and let it lead. One agent, one deliverable.
+NUM     Checking something. Name a different agent from a different division, and give it the first one's output. The value is in the disagreement, so never let the same agent mark its own work.
+NUM     Deciding something. Ask two agents with opposing incentives, then decide yourself. Security and Engineering is the classic pair. So is Paid Media and Product.
+P       That is the whole method. Build with one, check with another, decide with two.
+
+RULE
+
+H       Honest limits
+B       273 agents is not 273 employees. Every one of them is the same underlying model reading different instructions, so they share its blind spots. A security agent does not make your code secure, it makes one more pass over it with security in mind.
+B       The roster grows by contribution, so quality varies by division. Engineering and Marketing are heavily worked. Research has a single agent. Read the agent file before you rely on it; they are plain Markdown and take a minute.
+B       The count moves. It was over 230 when the README's prose was written and 273 in the tables when this guide was made. Check the repo rather than any article, including this one.
+B       Nothing here is affiliated with Anthropic. It is a community project that happens to target Claude Code first.
+
+RULE
+
+H       The first hour, if you want a plan
+NUM     Install the desktop app and point it at one division that matches your actual work.
+NUM     Open ~/.claude/agents/ and read three of the agent files end to end. This is the step that teaches you what an agent is.
+NUM     Take one task you already finished this week and run it again through the matching agent. Compare.
+NUM     Then run the same task through an agent from a different division and read the disagreement. That gap is the product.
+
+KEY     Comment AGENCY on the reel and I will send you this guide.
