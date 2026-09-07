@@ -304,6 +304,22 @@ export const SFX: Cue[] = [
    ⛔⛔⛔ THE HOUSE BED IS A REAL TRACK, not a synthesised pad (Alex, reel 116).
    ⛔ THE THREE CUTS GET DIFFERENT PASSAGES, not one file at three volumes — an
    audio-only variant is a pixel duplicate. */
+/* ⛔⛔ THE BED WAS CUT FROM THE WRONG PART OF THE TRACK. Alex: *"the BG MUSIC is
+   at the wrong timing like right now its near the end of the soundtrack... when
+   it should be the beginning suspenseful piano part."* Measured, and he is
+   right: the old file opened at a **1302 Hz spectral centroid** — bright, dense,
+   the signature of a mid-arrangement section — and only rose 4.5 dB across the
+   whole reel. The source pack it came from is no longer on disk, so all that
+   survived was the wrong 35.3s of it.
+   ⭐ Re-cut from `piano_rise.wav` at 0.00s: it opens at **226 Hz** and climbs to
+   467 while gaining 8.6 dB across the reel — sparse low piano that actually
+   builds under the voice.
+   ⛔ AND THE THREE "DIFFERENT PASSAGES" WERE ONE FILE COPIED THREE TIMES —
+   byte-identical, same mtime. They are three real offsets now (0 / 5.5 / 11s),
+   all still inside the piano opening.
+   ⭐ Each is loudness-matched to the old bed's RMS, so `BED_GAIN` below is still
+   solved and the bed still sits 10.7 dB under the VO before it.
+   ⛔ Originals kept in `public/_bed_backup/`. */
 const BED: Record<Variant, string> = {
   house: "136adhd_bed.wav",
   amber: "136adhd_bed_amber.wav",
@@ -367,7 +383,7 @@ const bedMix = (f: number) => bedEnv(f) * tailDuck(f / FPS);
    reel has ever produced, it sits near the TOP of the shipped band (9.33-17.80),
    and it is the only one of the three that is legible in a single frame — a
    giant green ALL CLEAR board with a burning room behind it. */
-export const PICKED: HookId = "carousel";
+export const PICKED: HookId = "crush";
 
 export const makeReel = (v: Variant, quiet = false, hook: HookId = PICKED): React.FC => () => {
   const f = useCurrentFrame();
@@ -383,17 +399,17 @@ export const makeReel = (v: Variant, quiet = false, hook: HookId = PICKED): Reac
       <CamCtx.Provider value={{ ...CAM[v] }}>
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE[v] }}>
-            <Sequence from={L.S0} durationInFrames={DUR.S0}><S0 v={v} dur={DUR.S0} /></Sequence>
-            <Sequence from={L.S1} durationInFrames={DUR.S1}><CARD v={v} dur={DUR.S1} /></Sequence>
-            <Sequence from={L.S2} durationInFrames={DUR.S2}><QUEUE v={v} dur={DUR.S2} /></Sequence>
-            <Sequence from={L.S3} durationInFrames={DUR.S3}><INSTALL v={v} dur={DUR.S3} /></Sequence>
-            <Sequence from={L.S4} durationInFrames={DUR.S4}><GATE v={v} dur={DUR.S4} /></Sequence>
-            <Sequence from={L.S5} durationInFrames={DUR.S5}><LEDGER v={v} dur={DUR.S5} /></Sequence>
-            <Sequence from={L.S6} durationInFrames={DUR.S6}><RUNSC v={v} dur={DUR.S6} /></Sequence>
-            <Sequence from={L.S7} durationInFrames={DUR.S7}><ASIDE v={v} dur={DUR.S7} /></Sequence>
-            <Sequence from={L.S8} durationInFrames={DUR.S8}><NIGHT v={v} dur={DUR.S8} /></Sequence>
-            <Sequence from={L.S9} durationInFrames={DUR.S9}><FANOUT v={v} dur={DUR.S9} /></Sequence>
-            <Sequence from={L.S10} durationInFrames={DUR.S10}><CTA v={v} dur={DUR.S10} /></Sequence>
+            <Sequence from={L.S0} durationInFrames={DUR.S0}><S0 v={v} dur={DUR.S0} at={L.S0} /></Sequence>
+            <Sequence from={L.S1} durationInFrames={DUR.S1}><CARD v={v} dur={DUR.S1} at={L.S1} /></Sequence>
+            <Sequence from={L.S2} durationInFrames={DUR.S2}><QUEUE v={v} dur={DUR.S2} at={L.S2} /></Sequence>
+            <Sequence from={L.S3} durationInFrames={DUR.S3}><INSTALL v={v} dur={DUR.S3} at={L.S3} /></Sequence>
+            <Sequence from={L.S4} durationInFrames={DUR.S4}><GATE v={v} dur={DUR.S4} at={L.S4} /></Sequence>
+            <Sequence from={L.S5} durationInFrames={DUR.S5}><LEDGER v={v} dur={DUR.S5} at={L.S5} /></Sequence>
+            <Sequence from={L.S6} durationInFrames={DUR.S6}><RUNSC v={v} dur={DUR.S6} at={L.S6} /></Sequence>
+            <Sequence from={L.S7} durationInFrames={DUR.S7}><ASIDE v={v} dur={DUR.S7} at={L.S7} /></Sequence>
+            <Sequence from={L.S8} durationInFrames={DUR.S8}><NIGHT v={v} dur={DUR.S8} at={L.S8} /></Sequence>
+            <Sequence from={L.S9} durationInFrames={DUR.S9}><FANOUT v={v} dur={DUR.S9} at={L.S9} /></Sequence>
+            <Sequence from={L.S10} durationInFrames={DUR.S10}><CTA v={v} dur={DUR.S10} at={L.S10} /></Sequence>
           </div>
         </AssemblyCtx.Provider>
       </CamCtx.Provider>

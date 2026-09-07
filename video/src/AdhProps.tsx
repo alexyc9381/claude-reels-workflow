@@ -2,6 +2,7 @@ import React from "react";
 import { Img, staticFile } from "remotion";
 import { fraunces, inter } from "./fonts";
 import { Mascot } from "./SlopKit";
+import WORDS_RAW from "./data/words_adhd136.json";
 import {
   W, H, E, OUT, IO, BACK, IN_Q, LIN, hexa, dkh, mxh, rnd, SH, SH_D, lerpHex, mono, ui,
   squash, costumeFor,
@@ -57,9 +58,9 @@ export const MarkTile: React.FC<{ x?: number; y?: number; d: number; logo?: "cla
     be seen to be WORKING rather than just being on. */
 export const CodeLines: React.FC<{ x: number; y: number; w: number; n: number; gap?: number;
   h?: number; c?: string; o?: number; seed?: number; run?: number; z?: number; indent?: boolean;
-  f?: number; scroll?: number; syntax?: number; dark?: number }> =
+  f?: number; scroll?: number; syntax?: number; dark?: number ; adv?: number }> =
   ({ x, y, w, n, gap = 14, h = 6, c = "#FFFFFF", o = 0.20, seed = 1, run = 1, z = 6, indent = true,
-     f = 0, scroll = 0, syntax = 0, dark = 0 }) => {
+     f = 0, scroll = 0, syntax = 0, dark = 0, adv: advIn }) => {
   /* ⭐⭐⭐ A LINE IS TOKENS, NOT A BAR. Rev 2 shipped every wall and every pane as
      single-colour bars at one opacity and Alex's note was exactly that: *"too
      basic and just simple single colors."* A line is now 2-4 SEGMENTS with real
@@ -70,7 +71,9 @@ export const CodeLines: React.FC<{ x: number; y: number; w: number; n: number; g
      ⛔ AND THE SCROLL IS NOT A WRAPPING COUNTER (`feedback_a_wrapping_counter_
      reads_as_chop`): lines advance a constant px/frame and the content index
      steps by exactly one as a line leaves the top, so nothing teleports. */
-  const adv = scroll > 0 ? f * scroll : 0;
+  /* ⭐ `adv` lets the caller drive the scroll off the WORD CLOCK instead of the
+     frame clock, so the scrollback prints a line per spoken word. */
+  const adv = advIn !== undefined ? advIn : (scroll > 0 ? f * scroll : 0);
   const off = scroll > 0 ? adv % gap : 0;
   const base = scroll > 0 ? Math.floor(adv / gap) : 0;
   return (
@@ -974,7 +977,10 @@ export const Drum: React.FC<{ x: number; y: number; r: number; f: number; spin: 
     claim, in real type, with the mark, legible at frame 0. The green card FALLS
     AWAY to show the red one underneath, so the correction is a travel. */
 export const ClaimPlate: React.FC<{ x: number; y: number; w: number; f: number; flip: number;
-  z?: number; jolt?: number }> = ({ x, y, w, f, flip, z = 90, jolt = 0 }) => {
+  z?: number; jolt?: number; big?: string; sub?: string; truth?: string; truthSub?: string }> =
+  ({ x, y, w, f, flip, z = 90, jolt = 0, big = "6 OF 6 DONE",
+     sub = "CLAUDE CODE  \u00B7  THIS SESSION", truth = "0 OF 6 RAN",
+     truthSub = "NOTHING WAS CHECKED" }) => {
   const h = w * 0.30, k = w / 700;
   const card = (bg: string, bd: string, mark: React.ReactNode, big: string, sub: string,
     col: string, style: React.CSSProperties) => (
@@ -983,7 +989,8 @@ export const ClaimPlate: React.FC<{ x: number; y: number; w: number; f: number; 
       display: "flex", alignItems: "center", gap: 22 * k, paddingLeft: 26 * k, ...style }}>
       {mark}
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-        <span style={{ ...ui(74 * k, 900), color: col, letterSpacing: 1, lineHeight: 1 }}>{big}</span>
+        <span style={{ ...ui(64 * k, 900), color: col, letterSpacing: 1, lineHeight: 1,
+          whiteSpace: "nowrap" }}>{big}</span>
         <span style={{ ...mono(23 * k, 700), color: hexa(INK, 0.5), letterSpacing: 3 }}>{sub}</span>
       </div>
     </div>
@@ -999,7 +1006,7 @@ export const ClaimPlate: React.FC<{ x: number; y: number; w: number; f: number; 
           <svg width={50 * k} height={50 * k} viewBox="0 0 24 24">
             <path d="M6 6 L18 18 M18 6 L6 18" stroke={DIFFR} strokeWidth={4.6} strokeLinecap="round" />
           </svg>
-        </div>, "0 OF 6 RAN", "NOTHING WAS CHECKED", "#FFFFFF", {})}
+        </div>, truth, truthSub, "#FFFFFF", {})}
       {/* the claim, on top of it, falling off */}
       {flip < 1 && card(`linear-gradient(176deg, ${mxh(BONE, 0.86)}, ${mxh(BONE, 0.4)})`,
         dkh(BRASS, 0.34),
@@ -1010,11 +1017,585 @@ export const ClaimPlate: React.FC<{ x: number; y: number; w: number; f: number; 
             <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.4}
               strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </div>, "6 OF 6 DONE", "CLAUDE CODE  ·  THIS SESSION", dkh(INK, 0.0),
+        </div>, big, sub, dkh(INK, 0.0),
         { transformOrigin: "6% 100%",
           transform: `rotate(${flip * 26}deg) translate(${flip * 60}px, ${flip * flip * 420}px)`,
           opacity: 1 - flip * 0.25 })}
       <MarkTile x={w - 54 * k} y={h - 34 * k} d={44 * k} z={4} o={0.9} />
+    </div>
+  );
+};
+
+
+/* ---- THE STATION — one desk of the bullpen ------------------------------- */
+/** A monitor on a stand, a desk, a chair. `done` flips the screen from live
+    work to a big green tick, which is the whole lie: the tick appears when the
+    body LEAVES. Drawn small enough to put twelve of them in one frame. */
+export const Station: React.FC<{ x: number; y: number; s?: number; z?: number; f: number;
+  done?: number; hue?: string; seed?: number }> =
+  ({ x, y, s = 1, z = 40, f, done = 0, hue = SKY, seed = 1 }) => {
+  const W2 = 120 * s, H2 = 86 * s;
+  const lit = 1 - done;
+  return (
+    <>
+      {/* the desk */}
+      <div style={{ position: "absolute", left: x - 92 * s, top: y - 6 * s, width: 184 * s,
+        height: 15 * s, borderRadius: 4 * s, zIndex: z,
+        background: `linear-gradient(180deg, ${mxh(BRASS, 0.28)}, ${dkh(BRASS, 0.34)})`,
+        boxShadow: SH }} />
+      {[-1, 1].map((k) => (
+        <div key={"dl" + k} style={{ position: "absolute", left: x + k * 74 * s - 5 * s,
+          top: y + 9 * s, width: 10 * s, height: 46 * s, zIndex: z - 1,
+          background: `linear-gradient(90deg, ${dkh(BRASS, 0.44)}, ${mxh(BRASS, 0.1)})` }} />
+      ))}
+      {/* the stand */}
+      <div style={{ position: "absolute", left: x - 8 * s, top: y - 26 * s, width: 16 * s,
+        height: 26 * s, zIndex: z + 1,
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.44)}, ${mxh(STEEL, 0.2)})` }} />
+      <div style={{ position: "absolute", left: x - 34 * s, top: y - 10 * s, width: 68 * s,
+        height: 9 * s, borderRadius: 4 * s, zIndex: z + 1,
+        background: `linear-gradient(180deg, ${mxh(STEEL, 0.24)}, ${dkh(STEEL, 0.44)})` }} />
+      {/* the monitor */}
+      <div style={{ position: "absolute", left: x - W2 / 2, top: y - 26 * s - H2, width: W2,
+        height: H2, borderRadius: 7 * s, zIndex: z + 2,
+        background: `linear-gradient(160deg, ${mxh(STEEL, 0.2)}, ${dkh(STEEL, 0.44)})`,
+        border: `${3 * s}px solid ${dkh(STEEL, 0.5)}`, boxShadow: SH_D, padding: 5 * s }}>
+        <div style={{ position: "absolute", inset: 5 * s, borderRadius: 3 * s, overflow: "hidden",
+          background: done > 0.5 ? `linear-gradient(170deg, ${mxh(OKGREEN, 0.2)}, ${dkh(OKGREEN, 0.2)})`
+            : `linear-gradient(170deg, ${dkh(TERM, 0.04)}, ${dkh(TERM, 0.3)})` }}>
+          {/* live work: code rows that SCROLL, so a manned desk is never still */}
+          {lit > 0.5 && Array.from({ length: 5 }, (_, r) => {
+            const adv = (f * 0.9 + seed * 7 + r * 5) % 200;
+            return (
+              <div key={"sl" + r} style={{ position: "absolute", left: 6 * s,
+                top: (7 + r * 13) * s, height: 4 * s, borderRadius: 2 * s,
+                width: (22 + ((seed * 13 + r * 29 + Math.floor(adv / 40) * 17) % 62)) * s,
+                background: r === 2 ? hexa(hue, 0.9) : hexa(SYN_MIX[(seed + r) % SYN_MIX.length], 0.8) }} />
+            );
+          })}
+          {lit > 0.5 && (
+            <div style={{ position: "absolute", left: 6 * s, top: (7 + 5 * 13) * s, width: 6 * s,
+              height: 5 * s, background: CARET, opacity: Math.sin(f / 3) > 0 ? 1 : 0.15 }} />
+          )}
+          {/* the tick that appears when nobody is there */}
+          {done > 0.02 && (
+            <div style={{ position: "absolute", left: "50%", top: "50%", width: 48 * s * done,
+              height: 48 * s * done, marginLeft: -24 * s * done, marginTop: -24 * s * done,
+              borderRadius: "50%", background: `radial-gradient(circle at 34% 28%, ${mxh(OKGREEN, 0.44)}, ${dkh(OKGREEN, 0.24)})`,
+              display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width={30 * s * done} height={30 * s * done} viewBox="0 0 24 24">
+                <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.4}
+                  strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          )}
+        </div>
+        {/* the state lamp on the bezel */}
+        <div style={{ position: "absolute", right: 7 * s, bottom: -1 * s, width: 7 * s, height: 7 * s,
+          borderRadius: "50%", background: done > 0.5 ? OKGREEN : hexa(hue, 0.9) }} />
+      </div>
+      {/* the chair, and it stays behind when the body goes */}
+      <div style={{ position: "absolute", left: x - 30 * s, top: y + 26 * s, width: 60 * s,
+        height: 40 * s, borderRadius: `${18 * s}px ${18 * s}px ${5 * s}px ${5 * s}px`, zIndex: z + 6,
+        transform: `rotate(${done > 0.5 ? (seed % 2 ? 13 : -11) + Math.sin(f / 5.4 + seed) * 5 : 0}deg)`,
+        transformOrigin: "50% 100%",
+        background: `linear-gradient(170deg, ${mxh(CLAY, 0.06)}, ${dkh(CLAY, 0.4)})`,
+        border: `${2.5 * s}px solid ${dkh(CLAY, 0.5)}` }} />
+    </>
+  );
+};
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE GIANT TICK — the hero object, and it HOLDS STILL.
+
+   ⛔⛔⛔ Alex on the bullpen: *"its literally just them bouncing around and the
+   hook animation isnt hierarchical here either."* Both halves of that are one
+   rule, and it is written in `docs/93-video-hooks.md` in the house's own words:
+
+     > **The hero holds still and stays the biggest thing by 3-4x. That is the
+     > hierarchy. The motion is carried entirely by the supporting layer, which
+     > is ONE object repeated** — a ring of marks orbiting, a grid trembling, a
+     > belt running. **Twenty copies of one object is still one idea, so the
+     > frame never splits.**
+
+   The bullpen broke both: twelve DIFFERENT bodies at one size, each on its own
+   clock. Twelve ideas, no rank, and `docs/ANIMATION-QUALITY.md` §"Density is a
+   SHAPE" names the result exactly — *"every scene has the same amount going on
+   reads as busy AND unranked, which is what 'not hierarchical' means when you
+   hear it about motion rather than about light."*
+
+   ⭐ And the value structure comes from the same doc: **brightness is the MEAN,
+   hierarchy is the SPREAD.** So this is a deep saturated green mass and a set of
+   near-black bores against a LIT board — a ~150 mean and a ~190 spread, rather
+   than a bright hero on a dark ground, which measures at 55.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/** the checkmark as a real drawn object: a thick bevelled stroke with a dark
+    underside, an inner highlight and a cut edge. Never a circle with a tick in it. */
+export const GiantTick: React.FC<{ x: number; y: number; d: number; z?: number;
+  bores?: Array<{ u: number; k: number }>; breathe?: number }> =
+  ({ x, y, d, z = 60, bores = [], breathe = 0 }) => {
+  const S = d / 24;
+  /* the two segments of the glyph, in viewBox units, so a bore can be placed at
+     a normalised distance `u` along the whole stroke */
+  const A = [5, 12.5, 10, 17.5], B = [10, 17.5, 19, 6.5];
+  const lenA = Math.hypot(A[2] - A[0], A[3] - A[1]);
+  const lenB = Math.hypot(B[2] - B[0], B[3] - B[1]);
+  const tot = lenA + lenB;
+  const at = (u: number) => {
+    const t = u * tot;
+    if (t <= lenA) { const q = t / lenA; return [A[0] + (A[2] - A[0]) * q, A[1] + (A[3] - A[1]) * q]; }
+    const q = (t - lenA) / lenB; return [B[0] + (B[2] - B[0]) * q, B[1] + (B[3] - B[1]) * q];
+  };
+  return (
+    <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+      zIndex: z, transform: `scale(${1 + breathe * 0.012})` }}>
+      <svg width={d} height={d} viewBox="0 0 24 24" style={{ overflow: "visible" }}>
+        <defs>
+          <linearGradient id="gtf" x1="0" y1="0" x2="0.3" y2="1">
+            <stop offset="0%" stopColor={mxh(OKGREEN, 0.34)} />
+            <stop offset="54%" stopColor={OKGREEN} />
+            <stop offset="100%" stopColor={dkh(OKGREEN, 0.34)} />
+          </linearGradient>
+          <mask id="gtm">
+            <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.6}
+              strokeLinecap="round" strokeLinejoin="round" />
+          </mask>
+        </defs>
+        {/* the dark underside, offset — this is what gives it thickness */}
+        <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke={dkh(OKGREEN, 0.56)}
+          strokeWidth={5.0} strokeLinecap="round" strokeLinejoin="round"
+          transform="translate(0.34 0.46)" />
+        <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="url(#gtf)" strokeWidth={4.6}
+          strokeLinecap="round" strokeLinejoin="round" />
+        {/* the lit top edge, clipped to the stroke */}
+        <g mask="url(#gtm)">
+          <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke={hexa("#FFFFFF", 0.34)}
+            strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"
+            transform="translate(-0.12 -1.2)" />
+        </g>
+      </svg>
+      {/* THE BORES — near-black, punched into the stroke where a task went in.
+          They are the SPREAD: a ~10-luma hole in a ~115-luma mass on a ~200 board. */}
+      {bores.map((b, i) => {
+        const [ux, uy] = at(b.u);
+        const bd = 3.05 * S * Math.min(1, b.k);
+        if (b.k <= 0.02) return null;
+        return (
+          <div key={"bo" + i} style={{ position: "absolute", left: ux * S - bd / 2,
+            top: uy * S - bd / 2, width: bd, height: bd, borderRadius: "50%",
+            background: `radial-gradient(circle at 44% 30%, ${dkh(INK, 0.05)}, #060505 74%)`,
+            boxShadow: `inset 0 ${bd * 0.1}px ${bd * 0.22}px ${hexa("#000", 0.9)}, 0 0 0 ${bd * 0.05}px ${dkh(OKGREEN, 0.6)}` }} />
+        );
+      })}
+    </div>
+  );
+};
+
+/** the supporting layer, and there is only ONE of it: a task chip. Eighteen
+    identical copies of this orbit the tick, which is why the frame never splits. */
+export const TaskChip: React.FC<{ x: number; y: number; d: number; z?: number; hue: string;
+  spin?: number; dim?: number }> = ({ x, y, d, z = 50, hue, spin = 0, dim = 0 }) => (
+  <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+    zIndex: z, borderRadius: d * 0.24, transform: `rotate(${spin}deg)`,
+    background: `linear-gradient(162deg, ${mxh(hue, 0.14)}, ${dkh(hue, 0.36)})`,
+    border: `${d * 0.07}px solid ${dkh(hue, 0.54)}`, boxShadow: SH,
+    opacity: 1 - dim * 0.5 }}>
+    <div style={{ position: "absolute", left: "18%", top: "22%", width: "64%", height: "9%",
+      borderRadius: 99, background: hexa("#FFFFFF", 0.34) }} />
+    <div style={{ position: "absolute", left: "18%", top: "44%", width: "44%", height: "9%",
+      borderRadius: 99, background: hexa("#FFFFFF", 0.2) }} />
+    <div style={{ position: "absolute", left: "18%", top: "66%", width: "54%", height: "9%",
+      borderRadius: 99, background: hexa("#FFFFFF", 0.14) }} />
+  </div>
+);
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE DONE PRESS + THE BLANK ROW — the physical joke, built from the product's
+   own objects.
+
+   ⭐ Alex picked the OX-shaped option — *"one absurd literal image that IS the
+   joke, no mechanism"* — and then added the constraint that decides everything
+   about how it is drawn: *"even if it is one of these like it has to still
+   signal to our target claude ai audience."*
+
+   ⛔ A car-sized rubber stamp on a factory belt is A FACTORY, which is the
+   kitchen rejection again ([[feedback_the_world_must_speak_the_subjects_brand]]):
+   the world never says the brand. So every part of the joke is a thing Claude
+   Code actually has — the press wears the REAL MARK and stamps a GREEN TICK, and
+   what rides the belt is the TODO ROW, with its checkbox and its command line.
+   ⭐ And the command line is EMPTY. That is the whole joke, and it needs no
+   decoding: a machine putting DONE on rows where nothing was ever run.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/** one todo row — the ONE object repeated, and the thing that travels. */
+export const TodoRow: React.FC<{ x: number; y: number; s?: number; z?: number; hue: string;
+  ticked?: number; squash?: number; rot?: number }> =
+  ({ x, y, s = 1, z = 60, hue, ticked = 0, squash = 0, rot = 0 }) => {
+  const W2 = 208 * s, H2 = 84 * s;
+  return (
+    <div style={{ position: "absolute", left: x - W2 / 2, top: y - H2 / 2, width: W2,
+      height: H2 * (1 - squash * 0.22), zIndex: z, borderRadius: 12 * s,
+      transform: `rotate(${rot}deg)`,
+      background: ticked > 0.5
+        ? `linear-gradient(168deg, ${mxh(OKGREEN, 0.74)}, ${mxh(OKGREEN, 0.42)})`
+        : `linear-gradient(168deg, ${mxh(BONE, 0.86)}, ${mxh(BONE, 0.54)})`,
+      border: `${3.4 * s}px solid ${ticked > 0.5 ? dkh(OKGREEN, 0.34) : dkh(BRASS, 0.34)}`,
+      boxShadow: SH, display: "flex", alignItems: "center", gap: 11 * s,
+      paddingLeft: 12 * s, paddingRight: 12 * s, overflow: "hidden" }}>
+      {/* the checkbox — round, so it is a pip and not one more rectangle */}
+      <div style={{ width: 40 * s, height: 40 * s, borderRadius: "50%", flexShrink: 0,
+        background: ticked > 0.5
+          ? `radial-gradient(circle at 34% 28%, ${mxh(OKGREEN, 0.4)}, ${dkh(OKGREEN, 0.28)})`
+          : hexa(INK, 0.06),
+        border: `${3.6 * s}px solid ${ticked > 0.5 ? dkh(OKGREEN, 0.44) : hexa(INK, 0.3)}`,
+        display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {ticked > 0.5 && (
+          <svg width={24 * s} height={24 * s} viewBox="0 0 24 24">
+            <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.6}
+              strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )}
+      </div>
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 7 * s }}>
+        {/* the task name */}
+        <div style={{ height: 11 * s, width: "76%", borderRadius: 99, background: hexa(hue, 0.85) }} />
+        {/* ⭐ THE COMMAND LINE, AND IT IS EMPTY — a dashed hollow where the thing
+            that would have proved it should be. This is the joke, drawn. */}
+        <div style={{ height: 15 * s, width: "88%", borderRadius: 5 * s,
+          border: `${2.4 * s}px dashed ${hexa(INK, 0.34)}`, background: hexa(INK, 0.04),
+          display: "flex", alignItems: "center", paddingLeft: 6 * s }}>
+          <div style={{ width: 7 * s, height: 8 * s, background: hexa(INK, 0.28) }} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/** THE PRESS — the hero. A stamping machine wearing the real Claude mark, with
+    a green DONE pad for a face. `drop` 0..1 drives the ram all the way down. */
+export const DonePress: React.FC<{ x: number; yTop: number; w: number; h: number; f: number;
+  drop: number; z?: number; heat?: number }> =
+  ({ x, yTop, w, h, f, drop, z = 70, heat = 0 }) => {
+  const colW = w * 0.13;
+  const headH = h * 0.30;
+  const ramTop = yTop + headH * 0.94;
+  const travel = h * 0.42 * drop;
+  return (
+    <>
+      {/* the two guide columns, with fine repeated teeth down their inner faces */}
+      {[-1, 1].map((k) => (
+        <React.Fragment key={"pc" + k}>
+          <div style={{ position: "absolute", left: x + k * (w / 2 - colW / 2) - colW / 2,
+            top: yTop, width: colW, height: h, zIndex: z, borderRadius: 7,
+            background: `linear-gradient(90deg, ${dkh(STEEL, 0.2)}, ${mxh(STEEL, 0.5)}, ${dkh(STEEL, 0.28)})`,
+            border: `4px solid ${dkh(STEEL, 0.52)}`, boxShadow: SH_D }} />
+          {Array.from({ length: 16 }, (_, t) => (
+            <div key={"pt" + k + t} style={{ position: "absolute",
+              left: x + k * (w / 2 - colW / 2) - colW / 2 + (k < 0 ? colW - 8 : 2),
+              top: yTop + 14 + t * (h - 28) / 16, width: 7, height: 9, zIndex: z + 1,
+              background: hexa(dkh(BRASS, 0.2), 0.9) }} />
+          ))}
+        </React.Fragment>
+      ))}
+      {/* the crown — the mark lives here, so the machine is branded, not generic */}
+      <div style={{ position: "absolute", left: x - w / 2, top: yTop, width: w, height: headH,
+        zIndex: z + 4, borderRadius: 12,
+        background: `linear-gradient(168deg, ${mxh(STEEL, 0.34)}, ${dkh(STEEL, 0.4)})`,
+        border: `6px solid ${dkh(STEEL, 0.52)}`, boxShadow: SH_D,
+        display: "flex", alignItems: "center", justifyContent: "center", gap: w * 0.05 }}>
+        <MarkTile rel d={headH * 0.52} z={2} />
+        <span style={{ ...ui(headH * 0.40, 900), color: "#F6EFDC", letterSpacing: 3 }}>DONE</span>
+      </div>
+      {/* the hydraulic ram */}
+      <div style={{ position: "absolute", left: x - w * 0.09, top: ramTop,
+        width: w * 0.18, height: h * 0.30 + travel, zIndex: z + 2,
+        background: `linear-gradient(90deg, ${dkh(STEEL, 0.24)}, ${mxh(STEEL, 0.56)}, ${dkh(STEEL, 0.3)})` }} />
+      {/* the hoses, and they FLEX with the stroke */}
+      <svg width={w * 1.5} height={h} style={{ position: "absolute", left: x - w * 0.75, top: yTop,
+        zIndex: z + 3, overflow: "visible" }}>
+        {[-1, 1].map((k) => (
+          <path key={"ph" + k}
+            d={`M ${w * 0.75 + k * w * 0.1} ${headH * 0.9} q ${k * w * 0.42} ${h * (0.18 + drop * 0.1)} ${k * w * 0.30} ${h * 0.42 + travel}`}
+            fill="none" stroke={dkh(INK, 0.12)} strokeWidth={11} strokeLinecap="round" />
+        ))}
+      </svg>
+      {/* THE STAMP HEAD — a green DONE pad, and it is what comes down */}
+      <div style={{ position: "absolute", left: x - w * 0.34, top: ramTop + h * 0.30 + travel,
+        width: w * 0.68, height: h * 0.19, zIndex: z + 6, borderRadius: 10,
+        background: `linear-gradient(172deg, ${mxh(OKGREEN, 0.34)}, ${dkh(OKGREEN, 0.3)})`,
+        border: `6px solid ${dkh(OKGREEN, 0.46)}`, boxShadow: SH_D,
+        display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <svg width={h * 0.13} height={h * 0.13} viewBox="0 0 24 24">
+          <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.6}
+            strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+      {/* the pressure gauge on the frame, climbing as it runs hotter */}
+      <Gauge x={x + w * 0.62} y={yTop + headH * 1.5} s={0.9} z={z + 5} f={f}
+        k={Math.min(1, 0.3 + heat * 0.7)} fail={heat > 0.8 ? 1 : 0} />
+    </>
+  );
+};
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE WORD BEAT — every spoken word gets its own event.
+
+   ⭐ Alex: *"for each word there like each word should have a new animation or
+   something interesting happening - please implement this throughout the entire
+   video."*
+
+   147 words, and their onsets are already on the reel's timeline in
+   `data/words_adhd136.json` — the same file the karaoke captions read, so a beat
+   can never drift from the word it is firing on. ⛔ Do not re-derive these from
+   the audio; reuse the caption source or they WILL disagree.
+
+   ⛔ AND 147 COPIES OF ONE POP IS NOT AN ANIMATION, IT IS A STROBE
+   (`feedback_cluttered_is_a_repeat_count`: cluttered is a REPEAT count, not an
+   object count). So the beat cycles TEN different events on a deterministic
+   ladder, each at a different place in the panel, each in a hue from the reel's
+   own task ramp — and the last four words are always alive at once, so the
+   events OVERLAP into continuous motion instead of blinking one at a time.
+   ⛔ No rectangles anywhere in the set: rings, motes, arcs, discs, streaks,
+   pips, crosses, waves, toothed collars.
+   ═══════════════════════════════════════════════════════════════════════════ */
+type WBW = { f0: number; f1: number; w: string };
+export const WB: WBW[] = (WORDS_RAW as Array<{ start: number; end: number; word: string }>)
+  .map((q) => ({ f0: Math.round(q.start * 30), f1: Math.round(q.end * 30), w: q.word.trim() }));
+
+/** the word active at frame `f`, in REEL frames (not scene-local). */
+export const wordAt = (f: number): { i: number; lf: number; len: number; w: string } | null => {
+  let i = -1;
+  for (let k = 0; k < WB.length; k++) { if (f >= WB[k].f0) i = k; else break; }
+  if (i < 0) return null;
+  return { i, lf: f - WB[i].f0, len: Math.max(3, WB[i].f1 - WB[i].f0), w: WB[i].w };
+};
+
+const Beat: React.FC<{ i: number; lf: number; z: number; s: number }> = ({ i, lf, z, s }) => {
+  const kind = i % 10;
+  const hue = TASKS[i % 6].c;
+  const x = 108 + rnd(i, 3) * 796;
+  const y = 208 + rnd(i, 7) * 432;
+  const t = Math.min(1, lf / 20);
+  const o = 1 - t;
+  if (o <= 0.02) return null;
+  /* ⛔ FIRST PASS MOVED THE REEL 9.49 -> 9.72 AND THAT IS NOTHING. The events
+     were thin outlines, and a stroke repaints almost no area — `MEASURING`'s
+     first law is swept AREA x luma delta, and a 7px ring on a 1012px panel is
+     neither. Everything below is now FILLED and roughly twice the size, and each
+     word also lifts the light where it lands, which is the only term that
+     repaints a large fraction of the frame. */
+  const S = s * 2.0;
+  switch (kind) {
+    case 0: { /* RING */
+      const d = (40 + t * 190) * S;
+      return <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+        borderRadius: "50%", zIndex: z, border: `${(16 - t * 11) * S}px solid ${hexa(hue, o * 0.9)}`,
+        background: `radial-gradient(circle, ${hexa(hue, o * 0.30)}, transparent 68%)` }} />;
+    }
+    case 1: { /* MOTES */
+      return <>{Array.from({ length: 9 }, (_, k) => {
+        const a = (k / 9) * Math.PI * 2 + rnd(i, 5);
+        const r = t * (52 + rnd(i + k, 2) * 96) * S, d = (9 + rnd(i + k, 4) * 12) * S;
+        return <div key={"m" + k} style={{ position: "absolute", left: x + Math.cos(a) * r - d / 2,
+          top: y + Math.sin(a) * r - d / 2 + t * t * 40, width: d, height: d, borderRadius: "50%",
+          zIndex: z, background: hexa(hue, o * 0.9) }} />;
+      })}</>;
+    }
+    case 2: { /* IGNITE */
+      const d = (108 + Math.sin(t * Math.PI) * 74) * S;
+      return <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+        borderRadius: "50%", zIndex: z,
+        background: `radial-gradient(circle at 38% 32%, ${hexa("#FFFFFF", o * 0.9)}, ${hexa(hue, o * 0.7)} 44%, transparent 72%)` }} />;
+    }
+    case 3: { /* ARC — a chevron sweeping */
+      const d = 132 * S;
+      return <svg width={d} height={d} viewBox="0 0 24 24" style={{ position: "absolute",
+        left: x - d / 2 + t * 70, top: y - d / 2, zIndex: z, opacity: o }}>
+        <path d="M8 4 L16 12 L8 20" fill="none" stroke={hue} strokeWidth={6.4}
+          strokeLinecap="round" strokeLinejoin="round" /></svg>;
+    }
+    case 4: { /* TICK */
+      const d = (78 - t * 26) * S;
+      return <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2 - t * 34, width: d,
+        height: d, borderRadius: "50%", zIndex: z, opacity: o,
+        background: `radial-gradient(circle at 34% 28%, ${mxh(OKGREEN, 0.4)}, ${dkh(OKGREEN, 0.28)})`,
+        display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <svg width={d * 0.56} height={d * 0.56} viewBox="0 0 24 24">
+          <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.6}
+            strokeLinecap="round" strokeLinejoin="round" /></svg></div>;
+    }
+    case 5: { /* STREAK */
+      const w2 = (60 + t * 150) * S;
+      return <div style={{ position: "absolute", left: x - w2 / 2 + t * 120, top: y,
+        width: w2, height: 14 * S, borderRadius: 99, zIndex: z,
+        background: `linear-gradient(90deg, transparent, ${hexa(hue, o)}, transparent)` }} />;
+    }
+    case 6: { /* PIP ROW — five pips lighting in an ascending run */
+      return <>{Array.from({ length: 5 }, (_, k) => {
+        const on = Math.max(0, Math.min(1, (lf - k * 2.2) / 5));
+        const d = 20 * S;
+        return <div key={"p" + k} style={{ position: "absolute", left: x + k * 27 * S, top: y,
+          width: d, height: d, borderRadius: "50%", zIndex: z,
+          background: hexa(hue, on * o * 0.95), border: `${2 * S}px solid ${hexa(hue, o * 0.4)}` }} />;
+      })}</>;
+    }
+    case 7: { /* CROSS */
+      const d = (86 + t * 30) * S;
+      return <svg width={d} height={d} viewBox="0 0 24 24" style={{ position: "absolute",
+        left: x - d / 2, top: y - d / 2, zIndex: z, opacity: o,
+        transform: `rotate(${t * 26}deg)` }}>
+        <path d="M6 6 L18 18 M18 6 L6 18" stroke={DIFFR} strokeWidth={6.2} strokeLinecap="round" /></svg>;
+    }
+    case 8: { /* WAVE — a wide low arc crossing */
+      const w2 = 330 * S;
+      return <svg width={w2} height={70 * S} viewBox="0 0 100 22" style={{ position: "absolute",
+        left: x - w2 / 2 + (t - 0.5) * 130, top: y, zIndex: z, opacity: o * 0.8 }}>
+        <path d="M2 18 Q 26 2 50 12 T 98 6" fill="none" stroke={hexa(hue, 0.95)} strokeWidth={5.4}
+          strokeLinecap="round" /></svg>;
+    }
+    default: { /* SPIN — a toothed collar turning once */
+      const d = 104 * S;
+      return <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+        zIndex: z, opacity: o, transform: `rotate(${t * 190}deg)` }}>
+        {Array.from({ length: 12 }, (_, k) => {
+          const a = (k / 12) * Math.PI * 2;
+          return <div key={"s" + k} style={{ position: "absolute",
+            left: d / 2 + Math.cos(a) * d * 0.42 - 4 * S, top: d / 2 + Math.sin(a) * d * 0.42 - 8 * S,
+            width: 8 * S, height: 16 * S, borderRadius: 3 * S,
+            transform: `rotate(${(a * 180) / Math.PI}deg)`, background: hexa(hue, 0.9) }} />;
+        })}</div>;
+    }
+  }
+};
+
+/** Drop this inside a scene's `Cam`. `rf` is the REEL frame — scenes run inside a
+    `Sequence`, so `useCurrentFrame()` there is scene-local and would fire the
+    wrong words. Every scene must pass its own offset. */
+/** how many words have STARTED by reel-frame `f`. */
+export const wordCount = (f: number): number => {
+  let n = 0;
+  for (let k = 0; k < WB.length; k++) { if (f >= WB[k].f0) n = k + 1; else break; }
+  return n;
+};
+
+/** ⭐⭐ THE SESSION PRINTS AS HE SPEAKS.
+    Alex on the overlay version: *"i dont like how theres those random shapes
+    coming up... those only are applicable to like the first scene to represent
+    distraction but after its annoying and doesnt really align with whats being
+    spoken."* Correct — an abstract glyph over a scene about a ledger means
+    nothing. ⭐ The reel's world IS a Claude Code session, so the on-topic
+    reaction to a word is the one the product actually has: **a line of output
+    arrives.** This returns a continuously-advancing scroll that STEPS once per
+    word (eased over 7 frames, so it is never the teleport a wrapping counter
+    would be — `feedback_a_wrapping_counter_reads_as_chop`). */
+export const wordScroll = (f: number, rowH = 22): number => {
+  const n = wordCount(f);
+  if (n <= 0) return 0;
+  const k = Math.min(1, Math.max(0, (f - WB[n - 1].f0) / 7));
+  return (n - 1 + k * k * (3 - 2 * k)) * rowH;
+};
+
+/** 0..1, spiking on each word onset and gone in ~9 frames. The character's own
+    reaction to being spoken about — the most on-topic and by far the most
+    visible per-word event available, because he is the biggest thing in every
+    scene and he is NOT a shape laid over it. */
+export const wordPulse = (f: number): number => {
+  const n = wordCount(f);
+  if (n <= 0) return 0;
+  const lf = f - WB[n - 1].f0;
+  return Math.max(0, Math.exp(-lf / 3.4) * (1 - lf / 14));
+};
+
+/** ⭐ THE ROOM'S LIGHT ANSWERS THE VOICE. Not a shape and not an overlay glyph:
+    a warm key lift, anchored where the scene's action is, that swells on the
+    word and is gone in nine frames. It is the only per-word term that repaints a
+    large fraction of the panel, which is why the shape version measured 11.93
+    and the honest small ones measured 9.5 — and unlike the shapes it cannot be
+    "off topic", because light is not a subject.
+    ⛔ Warm and low. A white full-panel flash every 0.2s is
+    `feedback_no_flashing_transitions`. */
+export const WordLight: React.FC<{ rf: number; x?: number; y?: number; z?: number; k?: number }> =
+  ({ rf, x = 506, y = 520, z = 92, k = 1 }) => {
+  const g = wordPulse(rf) * 0.42 * k;
+  if (g <= 0.01) return null;
+  return (
+    <div style={{ position: "absolute", left: 0, top: 0, width: 1012, height: 792, zIndex: z,
+      pointerEvents: "none",
+      background: `radial-gradient(circle at ${x}px ${y}px, ${hexa("#FFF2D8", g * 0.5)} 0%, ${hexa("#FFE6BE", g * 0.22)} 38%, transparent 70%)` }} />
+  );
+};
+
+export const WordBeat: React.FC<{ rf: number; z?: number; s?: number; n?: number }> =
+  ({ rf, z = 99, s = 1, n = 4 }) => {
+  const cur = wordAt(rf);
+  if (!cur) return null;
+  const out: React.ReactNode[] = [];
+  for (let k = 0; k < n; k++) {
+    const i = cur.i - k;
+    if (i < 0) continue;
+    const lf = rf - WB[i].f0;
+    if (lf < 0 || lf > 21) continue;
+    out.push(<Beat key={"b" + i} i={i} lf={lf} z={z + k} s={s} />);
+    if (k === 0) {
+      /* ⭐ THE ROOM ANSWERS THE WORD. A soft key lift centred where the beat
+         landed: it repaints a large fraction of the panel, which is the only
+         thing that actually registers, and it reads as the light reacting rather
+         than as confetti. Warm, low, and gone in 10 frames — never a flash
+         (`feedback_no_flashing_transitions`). */
+      const g = Math.exp(-lf / 4.4) * 0.5;
+      const gx = 108 + rnd(i, 3) * 796, gy = 208 + rnd(i, 7) * 432;
+      out.push(<div key={"g" + i} style={{ position: "absolute", left: 0, top: 0, width: 1012,
+        height: 792, zIndex: z - 2, pointerEvents: "none",
+        background: `radial-gradient(circle at ${gx}px ${gy}px, ${hexa("#FFF3DC", g * 0.34)} 0%, ${hexa("#FFE9C4", g * 0.14)} 34%, transparent 66%)` }} />);
+    }
+  }
+  return <>{out}</>;
+};
+
+
+/* ---- THE HARD PART — the thing he is dodging ----------------------------- */
+/** ⛔ MUTE TEST. Alex: *"the animations have to represent and align with whats
+    being spoken wayy better here."* The line under this scene is *"Claude keeps
+    DODGING the HARD PARTS of your prompts"* — and the scene had a `dodge`
+    variable moving him 132px sideways with NOTHING TO DODGE AROUND. A swerve
+    past empty air is not a dodge (`feedback_illustrate_the_sentence_not_the_set`).
+    So the hard part is drawn as a thing: a heavy dark mass, visibly weightier
+    than the light cards he does take, with a red difficulty read on it, and it
+    ROLLS — it is coming at him whether he deals with it or not. */
+export const HardPart: React.FC<{ x: number; y: number; s?: number; z?: number; f: number;
+  roll?: number; hue?: string; seed?: number }> =
+  ({ x, y, s = 1, z = 60, f, roll = 0, hue = VIOLET, seed = 1 }) => {
+  const d = 148 * s;
+  return (
+    <div style={{ position: "absolute", left: x - d / 2, top: y - d / 2, width: d, height: d,
+      zIndex: z, transform: `rotate(${roll}deg)` }}>
+      {/* the mass — dark, heavy, and NOT a rectangle */}
+      <div style={{ position: "absolute", inset: 0, borderRadius: "42% 58% 46% 54% / 52% 44% 56% 48%",
+        background: `radial-gradient(circle at 34% 28%, ${mxh(hue, 0.14)}, ${dkh(hue, 0.42)} 54%, ${dkh(INK, 0.06)} 100%)`,
+        border: `${5 * s}px solid ${dkh(INK, 0.1)}`, boxShadow: SH_D }} />
+      {/* the teeth round its edge — fine repeated detail, so it reads as awkward */}
+      {Array.from({ length: 14 }, (_, k) => {
+        const a = (k / 14) * Math.PI * 2 + rnd(seed + k, 3) * 0.2;
+        return (
+          <div key={"ht" + k} style={{ position: "absolute",
+            left: d / 2 + Math.cos(a) * d * 0.44 - 5 * s, top: d / 2 + Math.sin(a) * d * 0.44 - 9 * s,
+            width: 10 * s, height: 18 * s, borderRadius: 4 * s,
+            transform: `rotate(${(a * 180) / Math.PI + 90}deg)`,
+            background: `linear-gradient(180deg, ${dkh(hue, 0.2)}, ${dkh(INK, 0.08)})` }} />
+        );
+      })}
+      {/* the difficulty read — three red pips, all lit */}
+      <div style={{ position: "absolute", left: d * 0.26, top: d * 0.42, display: "flex", gap: 7 * s }}>
+        {[0, 1, 2].map((k) => (
+          <div key={"hp" + k} style={{ width: 15 * s, height: 15 * s, borderRadius: "50%",
+            background: `radial-gradient(circle at 34% 30%, ${mxh(DIFFR, 0.4)}, ${dkh(DIFFR, 0.24)})`,
+            border: `${2.5 * s}px solid ${dkh(DIFFR, 0.5)}` }} />
+        ))}
+      </div>
     </div>
   );
 };
@@ -1041,9 +1622,26 @@ export const ClaimPlate: React.FC<{ x: number; y: number; w: number; f: number; 
     so the back wall is where the frame's colour variety comes from, exactly as
     the crate stacks do in OX. */
 export const BayWall: React.FC<{ p: any; f: number; x?: number; y?: number; cols?: number;
-  rows?: number; z?: number; o?: number; seed?: number; live?: number }> =
-  ({ p, f, x = -20, y = 150, cols = 10, rows = 3, z = 16, o = 1, seed = 71, live = 5 }) => {
+  rows?: number; z?: number; o?: number; seed?: number; live?: number; rf?: number; w0?: number }> =
+  ({ p, f, x = -20, y = 150, cols = 10, rows = 3, z = 16, o = 1, seed = 71, live = 5, rf, w0 = 0 }) => {
   const light = p.back2 || "#FFFFFF";
+  /* ⭐⭐ ONE MORE BAY WAKES ON EVERY SPOKEN WORD.
+     Alex on the overlay version: *"i dont like how theres those random shapes
+     coming up... doesnt really align with whats being spoken."* So the reaction
+     is the SCENE'S OWN OBJECT, not a glyph laid over it: this wall is the
+     reel's density device — skill files, cable coils, lit sub-agent bays — and a
+     word wakes the next bay in it. It ACCUMULATES rather than popping in and
+     out, it is spread across the whole panel, and it means something on topic:
+     the session is doing more the longer he talks.
+     ⛔ Cells wake in a SHUFFLED order, never left-to-right, or it reads as a
+     progress bar. */
+  const wake = (i: number): number => {
+    if (rf === undefined) return i % 11 < live ? 1 : 0;
+    const slot = Math.floor(rnd(i, seed + 3) * cols * rows);
+    const wi = w0 + slot;
+    if (wi >= WB.length) return 0;
+    return E(rf, WB[wi].f0, WB[wi].f0 + 8, 0, 1, BACK);
+  };
   return (
     <div style={{ position: "absolute", left: x, top: y, zIndex: z, opacity: o }}>
       {Array.from({ length: rows }, (_, r) => (
@@ -1054,14 +1652,21 @@ export const BayWall: React.FC<{ p: any; f: number; x?: number; y?: number; cols
       {Array.from({ length: cols * rows }, (_, i) => {
         const c = i % cols, r = Math.floor(i / cols);
         const kind = Math.floor(rnd(i, seed) * 4);
-        const sway = i % 11 < live ? Math.sin(f / (21 + (i % 4) * 5) + i) * 3.0 : 0;
+        const lit = wake(i);
+        const sway = lit > 0.05 ? Math.sin(f / (21 + (i % 4) * 5) + i) * 3.0 * lit : 0;
         const bx = c * 104 + 18, by = r * 108 + 68;
         const dep = 1 - r * 0.08;
         const hue = TASKS[i % 6].c;
         const met = mxh(STEEL, 0.16 * dep), metd = dkh(STEEL, 0.50);
         return (
           <div key={"bw" + i} style={{ position: "absolute", left: bx, top: by, zIndex: 2,
-            transformOrigin: "50% 0%", transform: `rotate(${sway}deg)` }}>
+            transformOrigin: "50% 0%", transform: `rotate(${sway}deg) scale(${1 + lit * 0.07})` }}>
+            {/* the bay's own lamp — this is what the word actually turns on */}
+            {lit > 0.02 && (
+              <div style={{ position: "absolute", left: 4, top: -6, width: 70, height: 92,
+                borderRadius: 10, zIndex: 0, opacity: lit,
+                background: `radial-gradient(ellipse at 50% 40%, ${hexa(hue, 0.5)} 0%, ${hexa(hue, 0.16)} 46%, transparent 74%)` }} />
+            )}
             {kind === 0 && (<>{/* a skill file on a hook — a folded-corner card */}
               <div style={{ position: "absolute", left: 32, top: 0, width: 6, height: 16, background: metd }} />
               <div style={{ position: "absolute", left: 12, top: 14, width: 54, height: 66, borderRadius: 4,
@@ -1507,8 +2112,12 @@ const lum = (hex: string) => {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 };
 export const SesFit: React.FC<{ p: any; f: number; seed?: number; z?: number; lift?: number;
-  ctx?: number; run?: number; theme?: "light" | "dark" }> =
-  ({ p, f, seed = 1, z = 5, lift = 1, ctx = 1, run = 1, theme }) => {
+  ctx?: number; run?: number; theme?: "light" | "dark"; rf?: number }> =
+  ({ p, f, seed = 1, z = 5, lift = 1, ctx = 1, run = 1, theme, rf }) => {
+  /* ⭐ when the reel frame is supplied the scrollback advances ONE LINE PER
+     SPOKEN WORD instead of at a constant rate, so the back wall of every scene
+     is reacting to the voice. Falls back to the old constant scroll if not. */
+  const ADV = rf === undefined ? f * 2.3 : wordScroll(rf, 22);
   const wallTop = 96 * lift;
   const wallBot = p.horizon - 8;
   /* ⭐⭐⭐ THE EDITOR FOLLOWS THE SCENE'S OWN LIGHT.
@@ -1582,7 +2191,7 @@ export const SesFit: React.FC<{ p: any; f: number; seed?: number; z?: number; li
         zIndex: z + 2, background: hexa("#000", 0.26),
         borderRight: `1px solid ${hexa(light, 0.10)}` }}>
         {Array.from({ length: 15 }, (_, i) => {
-          const adv = f * 2.3, off = adv % 22;
+          const adv = ADV, off = adv % 22;
           return <div key={"nn" + i} style={{ position: "absolute", left: 5, top: i * 22 - off,
             width: 11, height: 3, borderRadius: 1, background: hexa(light, 0.22) }} />;
         })}
@@ -1591,7 +2200,7 @@ export const SesFit: React.FC<{ p: any; f: number; seed?: number; z?: number; li
       <div style={{ position: "absolute", left: 26, top: wallTop + 96, width: 22, height: H0 - 152,
         zIndex: z + 2, overflow: "hidden" }}>
         {Array.from({ length: 16 }, (_, i) => {
-          const adv = f * 2.3, off = adv % 22, src = Math.floor(adv / 22) + i;
+          const adv = ADV, off = adv % 22, src = Math.floor(adv / 22) + i;
           const r = rnd(seed * 11.3 + src * 5.7, 1);
           const c = r > 0.72 ? DIFFG : r > 0.52 ? DIFFR : light;
           return <div key={"g" + i} style={{ position: "absolute", left: 3, top: i * 22 - off,
@@ -1602,9 +2211,11 @@ export const SesFit: React.FC<{ p: any; f: number; seed?: number; z?: number; li
       {/* 7 · the scrollback, TOKENISED, at two depths */}
       <CodeLines x={58} y={wallTop + 96} w={352} n={15} gap={22} h={7} c={light} o={0.46}
         seed={seed * 2.1} run={run} z={z + 2} f={f} scroll={2.3} syntax={0.9}
+        adv={rf === undefined ? undefined : ADV}
         dark={isLight ? 1 : 0} />
       <CodeLines x={596} y={wallTop + 116} w={306} n={12} gap={24} h={7} c={light} o={0.26}
         seed={seed * 3.7} run={run} z={z + 2} f={f} scroll={1.55} syntax={0.5}
+        adv={rf === undefined ? undefined : ADV * 0.68}
         dark={isLight ? 1 : 0} />
       {/* 8 · the MINIMAP, with a viewport box that travels */}
       <div style={{ position: "absolute", right: 6, top: wallTop + 96, width: 30, height: H0 - 152,
@@ -2344,28 +2955,43 @@ export const ErrStack: React.FC<{ x: number; y: number; f: number; at: number; k
     source line under it. Guarded by QUOTE_BANNED in AdhWorld. */
 export const SysCard: React.FC<{ x: number; y: number; w?: number; z?: number; open?: number;
   lit?: number }> = ({ x, y, w = 460, z = 80, open = 1, lit = 1 }) => {
+  /* ⛔ Alex: *"at 5 seconds like that paper should show moreso related to claude
+     like the logo etc not so much text."* Rev 1 was three stacked lines of type
+     and a chart — a document, not a Claude document. It is now the MARK first,
+     at a third of the card, with ONE line of finding beside it. Everything the
+     eye lands on says whose card this is
+     (`feedback_real_marks_are_the_props`: the hero scene carries the Claude mark
+     at 200px+; `feedback_graphical_over_textual`: the info goes in the graphic). */
   const h = w * 0.62;
   return (
     <div style={{ position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h, zIndex: z,
       borderRadius: w * 0.03, background: `linear-gradient(176deg, #FFFFFF, ${UISH} 62%, ${UISH2})`,
       border: `${Math.max(3, w * 0.008)}px solid ${hexa(INK, 0.22)}`, boxShadow: SH_D,
       opacity: Math.min(1, open * 1.2) }}>
-      <div style={{ position: "absolute", left: w * 0.06, top: h * 0.09, right: w * 0.06, height: 3,
-        background: hexa(INK, 0.18) }} />
-      <div style={{ position: "absolute", left: w * 0.06, top: h * 0.18, ...ui(w * 0.072, 900),
-        color: INK, letterSpacing: 1.5 }}>{R.receipt.term}</div>
-      <div style={{ position: "absolute", left: w * 0.06, top: h * 0.34, ...ui(w * 0.062, 800),
-        color: hexa(INK, 0.62), letterSpacing: 1.5 }}>{R.receipt.term2}</div>
-      <div style={{ position: "absolute", left: w * 0.06, right: w * 0.06, top: h * 0.52, height: 2,
-        background: hexa(INK, 0.14) }} />
-      <div style={{ position: "absolute", left: w * 0.06, top: h * 0.60, ...ui(w * 0.040, 800),
-        color: hexa(INK, 0.44), letterSpacing: 1.2 }}>{R.receipt.src}</div>
-      {/* the little bar chart every eval page has */}
-      <div style={{ position: "absolute", right: w * 0.07, bottom: h * 0.10, display: "flex",
-        alignItems: "flex-end", gap: w * 0.018, height: h * 0.30 }}>
-        {[0.32, 0.54, 0.42, 0.78, 0.6].map((v, i) => (
-          <div key={"bc" + i} style={{ width: w * 0.038, height: `${v * 100}%`, borderRadius: 3,
-            background: hexa(i === 3 ? DIFFR : INK, i === 3 ? 0.82 : 0.2) }} />
+      {/* the mark, big, on its own ground — the first thing you read */}
+      <div style={{ position: "absolute", left: w * 0.05, top: h * 0.19, width: w * 0.26,
+        height: w * 0.26, borderRadius: w * 0.045, background: "#FFFFFF",
+        border: `${w * 0.008}px solid ${hexa(INK, 0.12)}`, boxShadow: SH,
+        display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <MarkTile rel d={w * 0.175} z={2} />
+      </div>
+      {/* ONE line of finding, and it is the only sentence on the card */}
+      {/* ⛔ at 0.082w in a 0.52w column this wrapped to THREE lines and read as a
+          block of type again, which is the note. Sized to fit. */}
+      <div style={{ position: "absolute", left: w * 0.35, top: h * 0.27, right: w * 0.05,
+        ...ui(w * 0.056, 900), color: INK, letterSpacing: 0, lineHeight: 1.08 }}>
+        {R.receipt.term}
+      </div>
+      <div style={{ position: "absolute", left: w * 0.35, right: w * 0.05, top: h * 0.56, height: 3,
+        background: hexa(DIFFR, 0.7) }} />
+      <div style={{ position: "absolute", left: w * 0.35, top: h * 0.62, ...mono(w * 0.034, 800),
+        color: hexa(INK, 0.42), letterSpacing: 1.2 }}>{R.receipt.src}</div>
+      {/* the eval bars, with the one that matters in red */}
+      <div style={{ position: "absolute", left: w * 0.055, bottom: h * 0.08, display: "flex",
+        alignItems: "flex-end", gap: w * 0.020, height: h * 0.22 }}>
+        {[0.32, 0.54, 0.42, 0.92, 0.6].map((v, i) => (
+          <div key={"bc" + i} style={{ width: w * 0.042, height: `${v * 100}%`, borderRadius: 3,
+            background: hexa(i === 3 ? DIFFR : INK, i === 3 ? 0.88 : 0.18) }} />
         ))}
       </div>
     </div>
@@ -2461,9 +3087,9 @@ export const Bin: React.FC<{ x: number; y: number; s?: number; z?: number; spike
     invented hat. */
 export const Dev: React.FC<{ f: number; x: number; y: number; i: number; size: number; z?: number;
   at?: number; loop?: number; tint?: string; flip?: boolean; cheer?: number; extra?: Record<string, number>;
-  gaze?: number; shock?: number; stern?: number }> =
+  gaze?: number; shock?: number; stern?: number; beat?: number }> =
   ({ f, x, y, i, size, z = 48, at = 0, loop, tint, flip = false, cheer: cheerIn = 0, extra = {}, gaze: gazeIn = 0,
-     shock = 0, stern = 0 }) => {
+     shock = 0, stern = 0, beat = 0 }) => {
   const lf = f - at;
   if (lf < -2) return null;
   const inS = E(lf, 0, 8, 0, 1, BACK);
@@ -2477,7 +3103,8 @@ export const Dev: React.FC<{ f: number; x: number; y: number; i: number; size: n
   else { gaze = Math.sin(f / 21 + ph) * 1.0; rot = Math.sin(f / 21 + ph) * 4.2; nod = 5.2; }
   return (
     <div style={{ position: "absolute", left: x - size / 2 + dx, top: y - size + dy, width: size, height: size, zIndex: z,
-      transform: `scale(${inS * sq}) rotate(${rot}deg) ${flip ? "scaleX(-1)" : ""}`, transformOrigin: "50% 100%" }}>
+      transform: `scale(${inS * sq}) scaleX(${1 + beat * 0.055}) scaleY(${1 - beat * 0.05}) rotate(${rot + beat * 1.8}deg) ${flip ? "scaleX(-1)" : ""}`,
+      transformOrigin: "50% 100%" }}>
       {/* ⛔ NO `chef={1}`. That single lever was most of what made v1 read as a
           kitchen, and the note was about exactly that. The cast is the house
           Mascot in its own clay, wearing what this world's people wear. */}

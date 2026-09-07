@@ -1,0 +1,31 @@
+Comment "GRAVITY" and I'll send you the install and the free tier setup.
+
+👇 READ BELOW
+
+You do not have to switch editors to get Antigravity. Google shipped it as an extension.
+
+On August 20 Google released official Antigravity extensions for VS Code, Visual Studio, Zed, JetBrains and Xcode. The VS Code one is on the Marketplace under the publisher Google, currently v1.2.0, and it is sitting at 208,494 installs. It puts the agent side panel, inline diffs and interactive plans inside the editor you already have open.
+
+The part people miss is the model list. Antigravity's free plan is not Gemini only.
+
+★ Gemini 3.8 Flash → the fast one, unlimited tab completions
+★ Gemini 3.1 Pro → the heavier Google model
+★ Claude Sonnet 4.6 → in the same picker
+★ Claude Opus 4.6 → also in the same picker
+★ gpt-oss-120b → OpenAI's open weights model
+★ $0 → the plan is free, with basic weekly rate limits
+
+So one dropdown inside VS Code gives you models from three different labs, billed through a Google account, on a plan that costs nothing.
+
+The part nobody mentions:
+Four months ago the story was that Antigravity was going to replace VS Code. That was always the wrong frame. Google did not need you to move house, it needed distribution, and an extension is distribution. The editor war ended the way these usually end, with the challenger moving in as a panel. You keep your keybindings, your extensions and your muscle memory, and the agent arrives as a tab.
+
+One honest note: it installs a local background service called agy on first launch, and the free tier's rate limits reset weekly rather than hourly. Neither is a dealbreaker, but nobody puts them in the headline.
+
+Comment "GRAVITY" and I'll send you the install steps and which model to pick for which job.
+
+.
+.
+.
+
+#antigravity #vscode #googleantigravity #claudecode #claudeai #anthropic #gemini #aicoding #aitools #vibecoding #devtools #aiagents #buildinpublic #softwaredevelopment #programming #freetools #developers #codingtools #ide #aiworkflow

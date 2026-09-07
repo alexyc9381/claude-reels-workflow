@@ -1,0 +1,67 @@
+TITLE   Antigravity Inside VS Code
+SUB     Google's official extension, the free tier's real model list, and the five minute setup
+
+H       What this is
+P       On 20 August 2026 Google released official Antigravity extensions for five editors: Visual Studio Code, Visual Studio, Zed, JetBrains and Xcode. Before that, using Antigravity meant using Antigravity, the standalone agent first IDE. Now it arrives as a panel in the editor you already have open, and it brings the same account, the same plan and the same model list with it.
+P       Everything below was read from antigravity.google and the Visual Studio Marketplace listing on 6 September 2026. Install counts and model names move. Check the listing and the pricing page, not this guide, before you quote a number.
+B       Publisher Google, extension id Google.google-antigravity, currently v1.2.0, 208,494 installs.
+B       Requires VS Code 1.90 or later on macOS, Linux or Windows, and a Google account on any Antigravity plan including the free one.
+B       The free plan carries Gemini 3.8 Flash, Gemini 3.7 Flash, Gemini 3.6 Flash, Gemini 3.1 Pro, Claude Sonnet and Opus 4.6, and gpt-oss-120b.
+B       Unlimited tab completions and unlimited command requests, with basic weekly rate limits.
+
+RULE
+
+H       1. Install it, in about two minutes
+P       There is nothing to clone and no key to paste. The extension is on the Marketplace under Google's own publisher account, which is the part worth checking: search results for AI extensions are full of community ports, and the publisher row is how you tell them apart.
+NUM     Open the Extensions sidebar with Cmd+Shift+X on a Mac, or Ctrl+Shift+X on Windows and Linux.
+NUM     Search for Google Antigravity and confirm the publisher reads Google with a verified tick. Click Install.
+NUM     Click the Antigravity icon in the Activity Bar and sign in with your Google account. The free tier is enough; no card is asked for.
+P       On first launch the extension installs a local backend service called agy. That is normal and documented, but it is worth knowing that a background process appears on your machine, because nobody puts it in the announcement post.
+
+RULE
+
+H       2. What the panel actually does
+P       This is not a chat box bolted to the sidebar. The extension's own description lists four things, and the difference between them matters when you are deciding whether to keep it open.
+B       Converse with agents in dedicated side panels, so a long running task has somewhere to live that is not your terminal.
+B       Review granular inline diffs, in the editor, on the real file, before anything is written.
+B       Inspect interactive plans, which is the step where you catch an agent about to do the wrong thing cheaply.
+B       Execute multi step engineering tasks without leaving the editor, which is the whole point of the release.
+P       The plan inspector is the one people underuse. An agent that shows you its plan before it edits is an agent you can stop for free, and stopping early is most of what makes agentic editing survivable on a real codebase.
+
+RULE
+
+H       3. The free tier's model list, which is the actual news
+P       The headline everywhere was that Antigravity came to VS Code. The more useful fact is what the free plan gives you access to, because it is not a Google only list.
+B       Gemini 3.8 Flash, Gemini 3.7 Flash and Gemini 3.6 Flash for fast work and completions.
+B       Gemini 3.1 Pro for the heavier reasoning passes.
+B       Claude Sonnet 4.6 and Claude Opus 4.6, in the same picker, billed through your Google account.
+B       gpt-oss-120b, OpenAI's open weights model.
+P       So a single dropdown inside VS Code reaches models from three different labs on a plan that costs nothing. That is unusual, and it is the reason this release matters more than an editor integration normally would.
+P       Which one to pick, in practice: Flash for completions and small edits where latency is what you feel, Gemini 3.1 Pro or Claude Opus 4.6 for a plan over an unfamiliar codebase, Claude Sonnet 4.6 for the long middle stretch of an implementation where you want speed without losing the thread, and gpt-oss-120b when you want a second opinion from a different family before committing to an approach.
+
+RULE
+
+H       4. The limits, stated plainly
+P       Free tiers are where the fine print lives, so here it is in one place rather than spread across a pricing page.
+B       The plan advertises unlimited tab completions and unlimited command requests. Those two are genuinely uncapped.
+B       Agent requests sit under basic weekly rate limits. Weekly, not hourly, which changes how you pace a big task: burn the Pro and Claude budget early in the week and you wait, rather than waiting an hour.
+B       The extension needs a Google account. There is no bring your own Anthropic or OpenAI key path on this route; the models are billed through Google.
+B       It installs the agy background service locally on first launch.
+P       None of that is a reason to skip it. It is a reason to know what you are agreeing to before you point it at a work repository.
+
+RULE
+
+H       5. The thing that actually happened here
+P       Four months ago the framing was that Antigravity would replace VS Code, and a lot of people wrote that down as a prediction. It was the wrong shape for the story. A new editor has to win your keybindings, your extensions and your muscle memory, and almost nothing wins all three.
+P       An extension does not have to win any of them. Google did not need you to move house, it needed distribution, and shipping to five editors on one day is distribution. The challenger moved in as a panel, which is how most of these end.
+P       The practical consequence for you is small and good: you can try an agent first workflow for the cost of one install, keep everything you already have configured, and turn it off by unchecking a box if it does not suit you.
+
+RULE
+
+H       Where to check before you rely on any of this
+B       The Marketplace listing for the publisher, version and install count.
+B       antigravity.google/pricing for the current free plan model list and its limits.
+B       antigravity.google/docs/ide/extensions/vscode for the install steps and the agy service note.
+P       All three change. This guide was accurate on 6 September 2026 and is not a substitute for reading the page you are about to depend on.
+
+KEY     Comment GRAVITY on the reel and this guide, with the install steps and the model list, is what you get.

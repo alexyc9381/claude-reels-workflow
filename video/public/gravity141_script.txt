@@ -1,0 +1,6 @@
+So you can now use Antigravity inside VS Code.
+Google just launched its official Antigravity extension for VS Code.
+And instead of switching to another editor, you can bring Antigravity's AI coding experience into VS Code.
+And the crazy part, the free plan gives you access to models like Gemini, Claude Opus, Claude Sonnet, and GPT.
+So it's crazy how a few months ago people were saying VS Code was getting replaced by Antigravity, and they're basically sitting together now.
+For access, comment GRAVITY.

@@ -13,7 +13,7 @@ import {
   TickPile, DoneChip, SkillFile, StopHook, LedgerTable, CmdLine, OutputBlock, ExitStamp,
   Toast, ErrStack, SysCard, Fleck, Selector, WallClock, PaneStack, Bin, Dev,
   StampTool, ClaimBoard, Sweep, PipRow, DeskFit, RowTower, AgentRow, BayWall,
-  PromptCard, Flurry, JobCan, Gauge, TestRig, Conveyor,
+  PromptCard, Flurry, JobCan, Gauge, TestRig, Conveyor, wordCount, wordPulse, WordLight, HardPart,
 } from "./AdhProps";
 
 /* ===========================================================================
@@ -51,7 +51,7 @@ import {
    ========================================================================= */
 
 export type Variant = "house" | "amber" | "steel";
-type SP = { v: Variant; dur: number };
+type SP = { v: Variant; dur: number ; at?: number };
 
 /* ---- the three cuts ------------------------------------------------------
    ⛔ AN AUDIO-ONLY VARIANT IS A PIXEL DUPLICATE. The measured lever ranking is
@@ -170,7 +170,7 @@ export const CUTS: Record<string, number[]> = {
    per-scene lever in the measured motion table — plus a shaped lamp cone and
    its pool, which is where the saturated colour on a bone frame comes from.
    ====================================================================== */
-export const PASS: React.FC<SP> = ({ v, dur }) => {
+export const PASS: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("desk");
   const L = LAY[v];
@@ -233,10 +233,10 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="none"
           rake={0.09 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={3.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
-        <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={1 - E(f, 0, dur, 0, 0.5, LIN)} run={1} />
+        <SesFit p={p} f={f} seed={1} z={5} lift={1.1} ctx={1 - E(f, 0, dur, 0, 0.5, LIN)} run={1} rf={f + at} />
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={72 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.72}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : 2} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : 2} rf={f + at} w0={wordCount(at)} />
         <div style={{ position: "absolute", left: 380, top: 120, width: 520, height: GY - 120,
           zIndex: 16, opacity: 0.40, clipPath: "polygon(40% 0%, 60% 0%, 100% 100%, 0% 100%)",
           background: `linear-gradient(180deg, ${hexa(GOLD, 0.56)} 0%, ${hexa(GOLD, 0.04)} 100%)` }} />
@@ -335,7 +335,7 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
         <Dev f={f} x={devX} y={GY} i={0} size={size} z={62} at={o - 14} loop={1}
           extra={{ glasses: 1 }} gaze={away * 1.5}
           shock={pull * 0.4 + bang * 0.8}
-          cheer={E(f, o + 2, o + 12, 0, 0.8, BACK) - E(f, o + EMPTY, o + EMPTY + 8, 0, 0.8, IO)} />
+          cheer={E(f, o + 2, o + 12, 0, 0.8, BACK) - E(f, o + EMPTY, o + EMPTY + 8, 0, 0.8, IO)} beat={wordPulse(f + at)} />
 
         <Toast x={toast} y={GY - 268} s={0.94} z={96} f={f} hue={SKY} />
         <Sweep k={E(f, o + EMPTY, o + EMPTY + 16, 0, 1, IO)} y={232} h={380} c="#FFD8C0"
@@ -345,6 +345,8 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
         <DeskFit p={p} f={f} z={30} seed={1} side="l" lamp={1} mug={1} />
         <PaneStack x={W - 34 + L.c * 0.2} y={H - 4} n={6} z={95} s={0.92} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={86} z={93} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -358,7 +360,7 @@ export const PASS: React.FC<SP> = ({ v, dur }) => {
    ⭐ The card DROPS down the session and LANDS: an arrival with a cost, not a
    fade-in, and he stiffens on the landing frame.
    ====================================================================== */
-export const CARD: React.FC<SP> = ({ v, dur }) => {
+export const CARD: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("sysc");
   const L = LAY[v];
@@ -366,6 +368,11 @@ export const CARD: React.FC<SP> = ({ v, dur }) => {
   const land = f >= 16 ? Math.exp(-(f - 16) / 5) : 0;
   const open = E(f, 18, 30, 0, 1, OUT);
   const lit = E(f, 20, 26, 0, 1, LIN);
+  /* ⛔ MUTE TEST: the verb is ADMITTED, and the scene only DROPPED a card. An
+     admission is a line you can point at, so the line is now found and read:
+     an underline sweeps it, a highlight closes on it, and it holds. */
+  const underline = E(f, 30, 54, 0, 1, IO);
+  const hl = E(f, 44, 56, 0, 1, BACK);
   const read = E(f, 30, dur, 0, 1, LIN);
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.52}>
@@ -373,14 +380,14 @@ export const CARD: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="none"
           rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.2} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
-        <SesFit p={p} f={f} seed={4} z={5} lift={1.0} ctx={0.7} run={read} />
+        <SesFit p={p} f={f} seed={4} z={5} lift={1.0} ctx={0.7} run={read} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x2 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={31 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={4} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={2} side="r" lamp={1} mug={1} />
@@ -396,9 +403,28 @@ export const CARD: React.FC<SP> = ({ v, dur }) => {
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={252 + L.a * 0.3} y={GY - 6} w={190} o={0.34} z={44} />
         <Dev f={f} x={252 + L.a * 0.3} y={GY} i={0} size={322} z={62} at={-14} loop={3}
-          extra={{ glasses: 1 }} gaze={0.9} shock={E(f, 16, 22, 0, 0.7, OUT) - E(f, 30, 44, 0, 0.7, IO)} />
+          extra={{ glasses: 1 }} gaze={0.9} shock={E(f, 16, 22, 0, 0.7, OUT) - E(f, 30, 44, 0, 0.7, IO)} beat={wordPulse(f + at)} />
         <PaneStack x={W - 26 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.85} />
         <Edge side="r" c={dkh(p.floor2, 0.34)} w={80} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        {/* ⭐ THE ADMISSION, FOUND AND READ */}
+        {underline > 0.01 && (
+          <>
+            <div style={{ position: "absolute", left: 506 + L.b * 0.4 - 68,
+              top: 200 + drop * 200 + land * 14 + 34, width: 300 * underline, height: 8,
+              zIndex: 96, borderRadius: 4,
+              background: `linear-gradient(90deg, ${hexa(DIFFR, 0.95)}, ${hexa(DIFFR, 0.3)})` }} />
+            {hl > 0.01 && (
+              <div style={{ position: "absolute", left: 506 + L.b * 0.4 - 76,
+                top: 200 + drop * 200 + land * 14 - 12, width: 320, height: 52,
+                zIndex: 95, borderRadius: 9, opacity: hl,
+                background: hexa(DIFFR, 0.16), border: `4px solid ${hexa(DIFFR, 0.66 * hl)}`,
+                transform: `scale(${1 + (1 - hl) * 0.12})` }} />
+            )}
+            <Ring x={506 + L.b * 0.4} y={200 + drop * 200 + 46} f={f} at={44} c={mxh(DIFFR, 0.4)} z={97} s={1.2} dur={20} />
+          </>
+        )}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -415,12 +441,18 @@ export const CARD: React.FC<SP> = ({ v, dur }) => {
    ⭐ WHAT HE DODGES IS THE ROW THAT NEEDS A COMMAND RUN — `TASKS[i].needsRun`,
    the one table, so the hard row means the same thing in every scene.
    ====================================================================== */
-export const QUEUE: React.FC<SP> = ({ v, dur }) => {
+export const QUEUE: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("queue");
   const L = LAY[v];
+  /* ⛔ Alex: *"why are there two claude sprites, there should just be one at 8
+     seconds... put it to the middle without a cut and then have him go red and
+     go crazy."* Both were mine: I ADDED a centred mascot instead of moving the
+     one already in the scene, and the shot cut at f62 landed exactly on the
+     move. There is one sprite, it WALKS to the middle, and the camera holds
+     through it — the cut now comes earlier, before he starts. */
   const SHOT: Shot[] = shotsFor(v, [{ at: 0, s: 1.00, x: 0, y: 0 },
-    { at: 62, s: 1.24, x: -190, y: -40 }]);
+    { at: 44, s: 1.16, x: -120, y: -26 }]);
   const sh = shotAt(f, SHOT);
   const flip = mir(v, 2);
   const MX = (x: number) => (flip ? W - x : x);
@@ -428,6 +460,22 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
   const AT = [4, 24, 44, 78];
   const dodge = AT.reduce((a, at) =>
     a + (E(f, at, at + 7, 0, 1, OUT) - E(f, at + 12, at + 22, 0, 1, IO)), 0);
+  /* ⛔ MUTE TEST: the line is "Claude keeps DODGING the HARD PARTS of your
+     prompts", and this scene swerved him 132px past EMPTY AIR. Four hard parts
+     now roll through on the same line he is standing on — he steps around every
+     one, and they pile up untouched behind him. The dodge finally has an object.
+     (`feedback_illustrate_the_sentence_not_the_set`) */
+  /* ⭐ ONE SPRITE. He walks to the middle of his own mess and comes apart there:
+     the tint bleeds CLAY -> RED, the eyes go to crosses, the body wobbles on its
+     own clock, and none of it is a cut. */
+  const walk = E(f, 58, 84, 0, 1, IO);
+  const crazy = E(f, 66, 92, 0, 1, OUT);
+  const dodgeX = MX(392) + dodge * (flip ? 132 : -132) + L.a * 0.3;
+  const heroX = dodgeX + walk * ((506 + L.a * 0.2) - dodgeX);
+  const wob = (Math.sin(f / 3.1) * 5.4 + Math.sin(f / 1.7) * 2.2) * crazy;
+  const dart = (Math.sin(f / 2.3) * 1.0 + Math.sin(f / 1.3) * 0.6) * crazy;
+  const hardX = (i: number) => 1180 - E(f, AT[i] - 10, AT[i] + 46, 0, 1140, LIN);
+  const hardRoll = (i: number) => E(f, AT[i] - 10, AT[i] + 46, 0, 300, LIN);
   const rowX = (i: number) => E(f, AT[i], AT[i] + 14, 1040, 640 - i * 8, IO);
   const parked = (i: number) => f >= AT[i] + 14;
   const shipK = (i: number) => E(f, AT[i] + 10, AT[i] + 26, 0, 1, IN_Q);
@@ -438,14 +486,14 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="lampbar"
           rake={0.14 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.4} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
-        <SesFit p={p} f={f} seed={2} z={5} lift={1.0} ctx={0.85} run={1} />
+        <SesFit p={p} f={f} seed={2} z={5} lift={1.0} ctx={0.85} run={1} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x3 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={17 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={3} side="l" lamp={1} mug={1} />
@@ -505,10 +553,39 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
         })}
 
         {/* HE SIDESTEPS. 132px, body leaning away, and the card passes where he was. */}
-        <Contact x={MX(392) + dodge * (flip ? 132 : -132) + L.a * 0.3} y={GY - 6} w={188} o={0.34} z={44} />
-        <Dev f={f} x={MX(392) + dodge * (flip ? 132 : -132) + L.a * 0.3} y={GY} i={0} size={327}
-          z={62} at={-14} loop={1} extra={{ glasses: 1 }} flip={flip}
-          gaze={dodge * (flip ? 1.2 : -1.2)} />
+        <Contact x={heroX} y={GY - 6} w={188 + crazy * 46} o={0.34} z={44} />
+        {[0, 1, 2, 3].map((i) => {
+          const hx = hardX(i);
+          if (hx < -160 || hx > 1200) return null;
+          return (
+            <HardPart key={"hd" + i} x={MX(hx)} y={GY - 96} s={1.06} z={70 + i} f={f}
+              roll={hardRoll(i) * (flip ? -1 : 1)} hue={TASKS[(i * 2 + 1) % 6].c} seed={i + 2} />
+          );
+        })}
+        {/* the ones he has already stepped around, heaped up and never opened */}
+        {[0, 1, 2, 3].map((i) => (f >= AT[i] + 40 ? (
+          <HardPart key={"hp" + i} x={MX(126 + i * 34)} y={GY - 34 - i * 20} s={0.72}
+            z={58 + i} f={f} roll={-14 + i * 9} hue={TASKS[(i * 2 + 1) % 6].c} seed={i + 9} />
+        ) : null))}
+        <div style={{ position: "absolute", left: 0, top: 0, width: 1012, height: 792, zIndex: 62,
+          transformOrigin: `${heroX}px ${GY}px`,
+          transform: `rotate(${wob}deg) translateY(${-Math.abs(Math.sin(f / 3.4)) * 15 * crazy}px)` }}>
+          <Dev f={f} x={heroX} y={GY} i={0} size={327 + crazy * 52}
+            z={2} at={-14} loop={1} flip={flip && walk < 0.3}
+            extra={{ glasses: 1, xeyes: crazy > 0.55 ? 1 : 0 }}
+            tint={crazy > 0.02 ? lerpHex(CLAY, RED, Math.min(1, crazy * 0.92)) : undefined}
+            gaze={dodge * (flip ? 1.2 : -1.2) + dart}
+            shock={crazy * (0.5 + Math.abs(Math.sin(f / 2.9)) * 0.5)}
+            beat={wordPulse(f + at)} />
+        </div>
+        {crazy > 0.4 && (
+          <>
+            <Ring x={heroX} y={GY - 300} f={f} at={72} c={mxh(RED, 0.4)} z={68} s={1.3} dur={22} />
+            <Ring x={heroX} y={GY - 300} f={f} at={88} c={mxh(DIFFR, 0.34)} z={68} s={1.5} dur={22} />
+            <Puff x={heroX} y={GY - 320} f={f} at={74} c="#E8C0B0" z={69} n={13} s={1.05} />
+            <Steam x={heroX} y={GY - 330} f={f} at={70} n={9} z={69} s={1.0} c="#E8C8C0" rate={1.7} />
+          </>
+        )}
 
         {/* the half-answers he DOES ship, one per dodge, toward camera */}
         {[0, 1, 2, 3].map((i) => (
@@ -525,11 +602,12 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
             ticks={[true, true, false, true, true, true]} hard={2} rot={-5} sub="TODO"
             big={`5/${R.tasks}`} struck={[false, false, false, true, true, true]} />
           <Contact x={700 + L.a * 0.3} y={GY - 6} w={200} o={0.32} z={44} />
-          <Crew f={f} x={700 + L.a * 0.3} y={GY} i={2} size={329} z={64} at={62} loop={3} />
         </>)}
 
         <PaneStack x={W - 34 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.88} />
         <Edge side={flip ? "r" : "l"} c={dkh(p.floor2, 0.34)} w={84} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -544,7 +622,7 @@ export const QUEUE: React.FC<SP> = ({ v, dur }) => {
    leaves behind is the gate the next scene runs on.
    ⛔ NO REPO PATH, NO OWNER, NO STAR COUNT, NO INSTALL COMMAND (NAME_BANNED).
    ====================================================================== */
-export const INSTALL: React.FC<SP> = ({ v, dur }) => {
+export const INSTALL: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("install");
   const L = LAY[v];
@@ -562,14 +640,14 @@ export const INSTALL: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="none"
           rake={0.11 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
-        <SesFit p={p} f={f} seed={5} z={5} lift={0.9} ctx={0.62} run={install} />
+        <SesFit p={p} f={f} seed={5} z={5} lift={0.9} ctx={0.62} run={install} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x2 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={53 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={4} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={4} side="r" lamp={1} mug={1} />
@@ -586,9 +664,11 @@ export const INSTALL: React.FC<SP> = ({ v, dur }) => {
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={772 + L.a * 0.3} y={GY - 6} w={190} o={0.34} z={44} />
         <Dev f={f} x={772 + L.a * 0.3} y={GY} i={0} size={324} z={62} at={-14} loop={2}
-          extra={{ glasses: 1 }} cheer={E(f, 64, 74, 0, 1, BACK)} gaze={-0.8} />
+          extra={{ glasses: 1 }} cheer={E(f, 64, 74, 0, 1, BACK)} gaze={-0.8} beat={wordPulse(f + at)} />
         <PaneStack x={-10 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.85} />
         <Edge side="r" c={dkh(p.floor2, 0.34)} w={82} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -605,26 +685,72 @@ export const INSTALL: React.FC<SP> = ({ v, dur }) => {
    and its fourth quarter measured 3.50; it now cuts LATER and TIGHTER, onto the
    row, and the cut itself lands inside the quarter that was failing.
    ====================================================================== */
-export const GATE: React.FC<SP> = ({ v, dur }) => {
+export const GATE: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("gate");
   const L = LAY[v];
-  const SHOT: Shot[] = shotsFor(v, [{ at: 0, s: 1.04, x: 0, y: 20 },
-    { at: 48, s: 1.30, x: -110, y: -120 },
-    { at: 104, s: 1.34, x: 210, y: -30 }]);
+  /* ⛔⛔ SCRAPPED AND REBUILT. Alex: *"at 15 seconds that animation has to be
+     completely scrapped and represent moreso what is being spoken there."* 15s
+     is frame 450, which is this scene, and the line is:
+        "It STOPS the AI from LOSING FOCUS and TAKING SHORTCUTS
+         by FORCING IT TO PROVE ITS WORK."
+     Rev 1 staged a man shoving a card at a bar four times — one action, four
+     times, and none of it was a shortcut or a proof.
+
+     ⭐ THE REBUILD IS THE PRODUCT'S OWN MECHANIC, AS A PHYSICAL SEQUENCE:
+       f0-24   he is already striding for the lit EXIT with an unproved answer.
+               The stop hook SLAMS across it.                    → "it stops"
+       f28-74  THREE different ways round, and a bar for each: he ducks UNDER, he
+               climbs OVER, he darts for the SIDE HATCH. Three silhouettes, three
+               refusals, escalating.                → "losing focus / shortcuts"
+       f78-125 the gate lights a slot and states its terms. He feeds the blank
+               answer in — REJECTED, red, spat back. He runs the command, a
+               receipt prints with an exit stamp, he feeds THAT in, and the bar
+               starts to lift as we cut.                    → "prove its work"
+     ⛔ It does not finish opening. */
+  /* ⛔ REV 1 OF THE REBUILD POINTED THE CAMERA AT THE DESK and the EXIT — the
+     one object the whole scene is about — was off frame, so all you saw was a
+     man and a card again. The shots now aim at the doorway. */
+  const SHOT: Shot[] = shotsFor(v, [{ at: 0, s: 1.02, x: -232, y: 14 },
+    { at: 30, s: 1.14, x: -286, y: -38 },
+    { at: 80, s: 1.08, x: -196, y: -8 }]);
   const sh = shotAt(f, SHOT);
 
-  const toast = E(f, 2, 44, 1100, -180, LIN);
-  const look = E(f, 6, 14, 0, 1, OUT) - E(f, 34, 46, 0, 1, IO);
-  const tries = [20, 34, 50, 66];
-  const shove = tries.reduce((a, at) =>
-    Math.max(a, E(f, at, at + 8, 0, 1, OUT) - E(f, at + 10, at + 18, 0, 1, IO)), 0);
-  const give = E(f, 84, 96, 0, 1, OUT);
-  /* ⛔ AND HE WALKS THE RIGHT WAY. He ends AT the row he skipped, not across
-     the room from it — rev 1 sent him 300px away from the thing he then lifted. */
-  const back = E(f, 92, 114, 0, -232, IO);
-  const openRow = E(f, 112, 124, 0, 1, OUT);
-  const ruin = E(f, 118, dur, 0, 1, LIN);
+  const EXIT_X = 742;
+  /* the four bars, each one killing a different route out */
+  const BARS: Array<{ at: number; y: number }> = [
+    { at: 14, y: GY - 306 }, { at: 32, y: GY - 92 },
+    { at: 50, y: GY - 452 }, { at: 66, y: GY - 196 },
+  ];
+  const barK = (i: number) => E(f, BARS[i].at, BARS[i].at + 7, 0, 1, IN_Q);
+  const slam = BARS.reduce((a2, q) => {
+    const d = f - q.at - 7;
+    return Math.max(a2, d >= 0 && d < 14 ? Math.sin(d * 0.9) * Math.exp(-d / 4.4) : 0);
+  }, 0);
+  /* every bar keeps ringing on its own clock once it has landed — a steel bar
+     that goes perfectly still the frame after it slams reads as a picture */
+  const ring = (i: number) => {
+    const d = f - BARS[i].at - 7;
+    return d < 0 ? 0 : Math.sin(d * 0.62 + i) * Math.exp(-d / 26) * 2.4 + Math.sin(d / 7 + i) * 0.5;
+  };
+
+  /* his route: stride · recoil · duck · climb · dart · to the slot · and back */
+  const stride = E(f, 0, 14, 236, 544, IO);
+  const recoil = E(f, 14, 22, 0, -74, OUT);
+  const duck = E(f, 26, 32, 0, 1, OUT) - E(f, 36, 44, 0, 1, IO);
+  const climb = E(f, 44, 50, 0, 1, OUT) - E(f, 54, 62, 0, 1, IO);
+  const dart = E(f, 60, 66, 0, 1, OUT) - E(f, 70, 78, 0, 1, IO);
+  const toRun = E(f, 92, 104, 0, -330, IO) + E(f, 110, 122, 0, 330, IO);
+  const hx = stride + recoil + duck * 96 + climb * 54 + dart * 126 + toRun;
+  const hy = -climb * 164 + duck * 10 + dart * 26;
+
+  /* the slot, its verdict, and the receipt that finally satisfies it */
+  const feed1 = E(f, 78, 86, 0, 1, OUT) - E(f, 88, 96, 0, 1, IO);
+  const reject = E(f, 86, 96, 0, 1, OUT) - E(f, 104, 112, 0, 1, IO);
+  const printK = E(f, 100, 112, 0, 1, BACK);
+  const feed2 = E(f, 116, 124, 0, 1, OUT);
+  const lift = E(f, 124, dur, 0, 1, OUT);
+  const good = feed2 > 0.5 ? 1 : 0;
 
   return (
     <Scene p={p} slug="" push={[0, dur, 1.05]} vig={0.48}>
@@ -632,62 +758,116 @@ export const GATE: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="lampbar"
           rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.6} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
-        <SesFit p={p} f={f} seed={6} z={5} lift={1.0} ctx={0.5} run={1} />
-        {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
-            own objects: skill files on hooks, cable coils, lit sub-agent bays
-            and pin-toothed modules, 10x3 on rails, each swaying. This is why
-            the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
+        <SesFit p={p} f={f} seed={6} z={5} lift={1.0} ctx={0.5} run={1} rf={f + at} />
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={29 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={5} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
-        {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
-            cables, plant, chair back — the silhouette variety the note asked for */}
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         <DeskFit p={p} f={f} z={30} seed={5} side="l" lamp={1} mug={1} />
-        <PaneWall f={f} z={20} y0={4} h={150} n={6} lit={[2, 5]} signLit={1} />
+        <Runner y={286} f={f} z={18} rate={5.8} pitch={210} w={108} h={60} kind="cell"
+          c={dkh(GOLD, 0.26)} c2={mxh(BRASS, 0.18)} o={0.72} />
 
-        {/* the row he walked away from, and what is under it */}
-        {openRow > 0.02 && (
-          <div style={{ position: "absolute", left: 150 + L.b * 0.3 - 84, top: 402 - openRow * 132,
-            width: 168, height: 40, zIndex: 60, borderRadius: 6,
-            background: `linear-gradient(176deg, #FFFFFF, ${UISH2})`,
-            border: `3px solid ${hexa(INK, 0.24)}`, boxShadow: SH,
-            transform: `rotate(${openRow * -16}deg)`, display: "flex", alignItems: "center",
-            gap: 8, paddingLeft: 8 }}>
-            <CheckBox rel s={26} k={1} z={2} />
-            <div style={{ width: 82, height: 7, borderRadius: 3, background: hexa(INK, 0.12) }} />
+        {/* ⭐ THE WAY OUT — lit, open, and the only bright thing on that side */}
+        {/* ⛔ at z=22 the doorway sat BEHIND the room's shelving and read as
+            wallpaper. It is an OPENING, so it goes in front of the furniture and
+            gets a jamb, a lintel and a light that breathes. */}
+        <div style={{ position: "absolute", left: EXIT_X - 182, top: 198, width: 364, height: GY - 190,
+          zIndex: 34, borderRadius: "24px 24px 0 0",
+          background: `linear-gradient(178deg, #FFF6E2 0%, ${mxh(GOLD, 0.78)} 40%, ${mxh(GOLD, 0.42)} 100%)`,
+          border: `14px solid ${dkh(BRASS, 0.44)}`, boxShadow: SH_D,
+          opacity: 0.92 + Math.sin(f / 9) * 0.08 }} />
+        {[-1, 1].map((k) => (
+          <div key={"jm" + k} style={{ position: "absolute", left: EXIT_X + k * 196 - 16, top: 190,
+            width: 32, height: GY - 182, zIndex: 35,
+            background: `linear-gradient(90deg, ${dkh(BRASS, 0.5)}, ${mxh(BRASS, 0.2)}, ${dkh(BRASS, 0.52)})` }} />
+        ))}
+        <Pool x={EXIT_X} y={GY - 12} w={420} hh={190} c={mxh(GOLD, 0.7)} o={0.5} z={24} />
+
+        {/* THE BARS. Four routes out, four refusals. */}
+        {BARS.map((q, i) => {
+          const k = barK(i);
+          if (k <= 0.01) return null;
+          const bounce = slam * (i === BARS.length - 1 || f < q.at + 22 ? 1 : 0.3);
+          return (
+            <div key={"br" + i} style={{ position: "absolute", left: EXIT_X - 214,
+              top: q.y - 28 - (1 - k) * 320, width: 428, height: 58, zIndex: 78,
+              borderRadius: 10, transform: `rotate(${bounce * 0.8 + ring(i) * 0.4}deg) translateY(${ring(i) * 1.6}px)`,
+              background: `repeating-linear-gradient(56deg, ${dkh(INK, 0.06)} 0 22px, ${mxh(GOLD, 0.34)} 22px 44px)`,
+              border: `6px solid ${dkh(STEEL, 0.5)}`, boxShadow: SH_D }} />
+          );
+        })}
+        {BARS.map((q, i) => (
+          <React.Fragment key={"bf" + i}>
+            <Ring x={EXIT_X} y={q.y} f={f} at={q.at + 7} c={mxh(DIFFR, 0.4)} z={90} s={1.3} dur={16} />
+            <Puff x={EXIT_X - 120} y={q.y + 20} f={f} at={q.at + 7} c="#E8D8B0" z={90} n={9} s={0.9} />
+          </React.Fragment>
+        ))}
+
+        {/* ⭐ THE GATE'S OWN TERMS — a slot that says what it wants, and judges */}
+        <div style={{ position: "absolute", left: EXIT_X - 96, top: GY - 392 - lift * 120,
+          width: 192, height: 108, zIndex: 86, borderRadius: 12,
+          background: `linear-gradient(168deg, ${mxh(STEEL, 0.26)}, ${dkh(STEEL, 0.42)})`,
+          border: `6px solid ${dkh(STEEL, 0.54)}`, boxShadow: SH_D,
+          display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+          gap: 8 }}>
+          <div style={{ width: 132, height: 13, borderRadius: 7,
+            background: hexa(INK, 0.7), boxShadow: `inset 0 2px 5px ${hexa("#000", 0.8)}` }} />
+          <div style={{ width: 54, height: 54, borderRadius: "50%",
+            background: `radial-gradient(circle at 34% 30%, ${mxh(good ? OKGREEN : DIFFR, 0.44)}, ${dkh(good ? OKGREEN : DIFFR, 0.3)})`,
+            border: `5px solid ${dkh(STEEL, 0.5)}` }}>
+            <svg width={44} height={44} viewBox="0 0 24 24">
+              {good
+                ? <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.6}
+                    strokeLinecap="round" strokeLinejoin="round" />
+                : <path d="M7 7 L17 17 M17 7 L7 17" stroke="#FFFFFF" strokeWidth={4.6}
+                    strokeLinecap="round" />}
+            </svg>
+          </div>
+        </div>
+
+        {/* the blank answer, fed in and spat back out */}
+        <AnswerCard x={EXIT_X - 268 + feed1 * 176 - reject * 300} y={GY - 336 + reject * 120}
+          w={214} z={88} items={[true, true, false, false, false, false]}
+          rot={-6 + reject * 34} bad={1} />
+
+        {/* ⭐ HE GOES AND RUNS IT — a command, an output, and a stamped receipt */}
+        {printK > 0.02 && (
+          <>
+            <OutputBlock x={286 + L.b * 0.3} y={430} w={300} z={72} f={f} k={printK} seed={4} fail={0} />
+            <ExitStamp x={286 + L.b * 0.3} y={534} k={printK} z={76} fail={0} s={1.05} />
+          </>
+        )}
+        {/* the receipt travelling back to the slot */}
+        {f > 112 && (
+          <div style={{ position: "absolute", left: 300 + E(f, 112, 124, 0, 470, IO), top: 452,
+            width: 132, height: 74, zIndex: 92, borderRadius: 8,
+            transform: `rotate(${-8 + E(f, 112, 124, 0, 14, IO)}deg)`,
+            background: `linear-gradient(170deg, #FFFFFF, ${UISH2})`,
+            border: `4px solid ${dkh(OKGREEN, 0.4)}`, boxShadow: SH,
+            display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <svg width={40} height={40} viewBox="0 0 24 24">
+              <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke={OKGREEN} strokeWidth={4.6}
+                strokeLinecap="round" strokeLinejoin="round" /></svg>
           </div>
         )}
-        {ruin > 0.02 && <ErrStack x={150 + L.b * 0.3} y={470} f={f} at={118} k={ruin} z={57} n={16} s={1.1} />}
-        {openRow > 0.5 && <Ring x={150 + L.b * 0.3} y={404} f={f} at={118} c={mxh(DIFFR, 0.4)} z={61} s={1.0} dur={16} />}
+        <Ring x={EXIT_X} y={GY - 340} f={f} at={124} c={mxh(OKGREEN, 0.4)} z={94} s={1.5} dur={20} />
 
-        {/* the callback: another notification crosses, behind everything */}
-        <Toast x={toast} y={GY + 18} s={0.62} z={29} f={f} hue={VIOLET} />
-
-        {/* ⭐ THE STOP HOOK. It is DOWN from frame 1 — the before state is
-            legible without waiting — and the lamp is RED the whole beat. */}
-        <StopHook x={666 + L.b * 0.4} y={GY - 30} w={520} z={84} down={1} lamp={0} f={f}
-          shake={shove} />
-
-        {/* the answer he keeps shoving at it */}
-        <AnswerCard x={666 + L.b * 0.4 - 250 + shove * 150} y={GY - 190} w={230}
-          z={86} items={[true, true, false, false, false, false]} rot={shove * 8} bad={1} />
-        {shove > 0.6 && <Puff x={666 + L.b * 0.4 - 60} y={GY - 190} f={f} at={f} c="#F0D8B0" z={88} n={5} s={0.6} />}
-
-        <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[1, 0, 0]}
+        <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[good, 0, 0]}
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
 
-        {/* HE SHOVES. Body compresses, feet slide, effort off the head. */}
-        <Contact x={402 + L.a * 0.3 + shove * 26 + back} y={GY - 6} w={190} o={0.34} z={44} />
-        <Dev f={f} x={402 + L.a * 0.3 + shove * 26 + back} y={GY} i={0} size={334} z={62} at={0}
-          loop={1} extra={{ glasses: 1 }} gaze={look}
-          shock={shove * 0.5 + give * 0.4} />
-        {shove > 0.3 && (
-          <Steam x={402 + L.a * 0.3 + shove * 26} y={GY - 306} f={f} at={20} n={9} z={70} s={0.9}
-            c="#E8D8B8" rate={1.4} />
+        {/* HIM — striding, blocked, ducking, climbing, darting, and finally proving */}
+        <Contact x={hx} y={GY - 6} w={190 - climb * 60} o={0.34} z={44} />
+        <Dev f={f} x={hx} y={GY + hy} i={0} size={334 - duck * 74} z={62} at={0}
+          loop={1} extra={{ glasses: 1 }} gaze={0.4 - dart * 0.8}
+          shock={Math.max(slam * 0.7, reject * 0.6)}
+          cheer={feed2 * 0.8} beat={wordPulse(f + at)} />
+        {slam > 0.4 && (
+          <Steam x={hx} y={GY - 300} f={f} at={f} n={7} z={70} s={0.9} c="#E8D8B8" rate={1.5} />
         )}
 
         <PaneStack x={W - 20 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.9} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={84} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -700,7 +880,7 @@ export const GATE: React.FC<SP> = ({ v, dur }) => {
    and the SAME object comes back as a table with CHECK and EXPECT columns. One
    object replacing another says both the noun and the verb.
    ====================================================================== */
-export const LEDGER: React.FC<SP> = ({ v, dur }) => {
+export const LEDGER: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("ledger");
   const L = LAY[v];
@@ -708,7 +888,13 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
     { at: 40, s: 1.20, x: -120, y: 54 }]);
   const sh = shotAt(f, SHOT);
   const bin = E(f, 8, 26, 0, 1, IN_Q);
-  const rows = Math.min(6, Math.floor(E(f, 24, 78, 0, 6.4, LIN)));
+  /* ⛔ MUTE TEST: the verb is BUILDS. One row every nine frames reads as a
+     table that was always there. The build is now rhythmic — a row every five
+     frames — and each one LANDS: it drops in, overshoots and settles, and a rule
+     draws across under it. */
+  const rows = Math.min(6, Math.floor(E(f, 18, 52, 0, 6.4, LIN)));
+  const rowAt = (i: number) => 18 + i * 5.4;
+  const rowIn = (i: number) => E(f, rowAt(i), rowAt(i) + 9, 0, 1, BACK);
   /* ⛔ MEASURED: this scene STALLS in its last quarter. The table finished
      printing at f78 and then sat there while a `tear` value drove nothing but a
      face. The sheet now actually comes OFF and travels to the rail it gets
@@ -721,14 +907,14 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="lampbar"
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.2} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
-        <SesFit p={p} f={f} seed={7} z={5} lift={1.05} ctx={0.6} run={1} />
+        <SesFit p={p} f={f} seed={7} z={5} lift={1.05} ctx={0.6} run={1} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x2 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={41 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={5} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={6} side="r" lamp={1} mug={1} />
@@ -747,6 +933,20 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
         <div style={{ position: "absolute", left: 300 + L.c * 0.4, right: 96 - L.c * 0.4, top: 150,
           height: 16, zIndex: 74, borderRadius: 4,
           background: `linear-gradient(180deg, ${mxh(STEEL, 0.34)}, ${dkh(STEEL, 0.38)})` }} />
+        {/* ⭐ EACH ROW LANDING — the verb is BUILDS, so the build has a beat */}
+        {[0, 1, 2, 3, 4, 5].map((i) => {
+          const k = rowIn(i);
+          if (k <= 0.02 || k >= 0.99) return null;
+          return (
+            <React.Fragment key={"rl" + i}>
+              <div style={{ position: "absolute", left: 666 + L.c * 0.4 - tear * 200 - 196,
+                top: 278 - tear * 44 + i * 44, width: 392 * k, height: 5, zIndex: 92, borderRadius: 3,
+                background: `linear-gradient(90deg, ${hexa(OKGREEN, 0.95)}, transparent)` }} />
+              <Ring x={666 + L.c * 0.4 - tear * 200} y={280 - tear * 44 + i * 44} f={f} at={rowAt(i) + 5}
+                c={mxh(OKGREEN, 0.4)} z={93} s={0.42} dur={11} />
+            </React.Fragment>
+          );
+        })}
         <LedgerTable x={666 + L.c * 0.4 - tear * 200} y={214 - tear * 44} w={392} z={82} f={f}
           rows={rows} title />
         {clip > 0.02 && (
@@ -783,9 +983,11 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={452 + L.a * 0.3} y={GY - 6} w={192} o={0.34} z={44} />
         <Dev f={f} x={452 + L.a * 0.3} y={GY} i={0} size={329} z={62} at={-14} loop={1}
-          extra={{ glasses: 1 }} gaze={0.9} cheer={tear} />
+          extra={{ glasses: 1 }} gaze={0.9} cheer={tear} beat={wordPulse(f + at)} />
         <PaneStack x={W - 30 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.88} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={84} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -806,7 +1008,7 @@ export const LEDGER: React.FC<SP> = ({ v, dur }) => {
    TINY. The OUTPUT BLOCK is now the biggest object on the set and it prints
    through exactly that window.
    ====================================================================== */
-export const RUNSC: React.FC<SP> = ({ v, dur }) => {
+export const RUNSC: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("run");
   const L = LAY[v];
@@ -815,12 +1017,26 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
     { at: 84, s: 1.00, x: 0, y: 0 }]);
   const sh = shotAt(f, SHOT);
 
-  const type = E(f, 25, 40, 0, 1, LIN);
-  const out = E(f, 40, 76, 0, 1, LIN);
-  const stamp1 = E(f, 60, 68, 0, 1, IN_Q);
-  const stamp2 = E(f, 76, 84, 0, 1, IN_Q);
-  const green = f >= 86;
-  const ship = E(f, 92, dur, 0, 1, IN_Q);
+  /* ⛔⛔ 21 SECONDS IS THIS SCENE. Alex: *"make a lot of the animations way more
+     interesting and elevated throughout... like at 21 seconds."* The line is
+     "the AI has to RUN COMMANDS and VERIFY THE OUTPUT before giving you the
+     answer", and rev 1 had all the right objects — a command line, an output
+     block, two exit stamps — with NOTHING BETWEEN THEM. The command appeared,
+     the output appeared, a stamp appeared. Nothing ran and nothing was checked.
+     ⭐ The two missing verbs are now beats of their own: a RUN state you can see
+     working, and a VERIFY where calipers close on the output, a scan sweeps it
+     and it is matched against an EXPECT chip before anything is stamped. */
+  const type = E(f, 4, 26, 0, 1, LIN);
+  const runK = E(f, 26, 48, 0, 1, LIN) - E(f, 58, 66, 0, 1, IO);
+  const out = E(f, 44, 72, 0, 1, LIN);
+  const cal = E(f, 62, 76, 0, 1, OUT);
+  const scan = E(f, 66, 86, 0, 1, IO);
+  const match = E(f, 84, 92, 0, 1, BACK);
+  const stamp1 = E(f, 88, 95, 0, 1, IN_Q);
+  const stamp2 = E(f, 96, 103, 0, 1, IN_Q);
+  const kick = f >= 88 && f < 104 ? Math.sin((f - 88) * 0.8) * Math.exp(-(f - 88) / 4.6) : 0;
+  const green = f >= 92;
+  const ship = E(f, 100, dur, 0, 1, IN_Q);
 
   return (
     <Scene p={p} slug="" push={[0, dur, 1.06]} vig={0.52}>
@@ -828,14 +1044,14 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="none"
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.8} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
-        <SesFit p={p} f={f} seed={8} z={5} lift={0.95} ctx={0.42} run={out} />
+        <SesFit p={p} f={f} seed={8} z={5} lift={0.95} ctx={0.42} run={out} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x3 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={67 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={7} side="l" lamp={1} mug={1} />
@@ -845,9 +1061,59 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
         <CmdLine x={430 + L.b * 0.4} y={272} w={470} z={82} f={f} type={type} />
         {/* ⭐ THE OUTPUT — the biggest object on this set, printing through the
             quarter that used to be dead */}
+        {/* IT IS RUNNING — a spinner and a busy bar on the command line itself */}
+        {runK > 0.02 && (
+          <>
+            <div style={{ position: "absolute", left: 430 + L.b * 0.4 + 200, top: 300, width: 34,
+              height: 34, zIndex: 88, borderRadius: "50%", opacity: Math.min(1, runK * 3),
+              border: `5px solid ${hexa(CARET, 0.24)}`, borderTopColor: CARET,
+              transform: `rotate(${f * 17}deg)` }} />
+            <div style={{ position: "absolute", left: 430 + L.b * 0.4 - 230, top: 310, width: 400,
+              height: 8, zIndex: 87, borderRadius: 4, overflow: "hidden",
+              background: hexa("#000", 0.4), opacity: Math.min(1, runK * 3) }}>
+              <div style={{ position: "absolute", left: `${((f * 3.2) % 140) - 40}%`, top: 0,
+                width: "40%", height: "100%",
+                background: `linear-gradient(90deg, transparent, ${CARET}, transparent)` }} />
+            </div>
+          </>
+        )}
         <OutputBlock x={430 + L.b * 0.4} y={352} w={470} z={80} k={out} seed={5} f={f} />
+        {/* ⭐ VERIFY, DRAWN: calipers close on the output, a scan sweeps it, and
+            it is matched against what was EXPECTED before anything is stamped */}
+        {cal > 0.02 && [-1, 1].map((k) => (
+          <div key={"cal" + k} style={{ position: "absolute",
+            left: 430 + L.b * 0.4 + k * (300 - cal * 62) - 9, top: 296, width: 18, height: 132,
+            zIndex: 86, borderRadius: 5, opacity: Math.min(1, cal * 2),
+            background: `linear-gradient(180deg, ${mxh(SKY, 0.4)}, ${dkh(SKY, 0.3)})` }} />
+        ))}
+        {scan > 0.02 && scan < 0.99 && (
+          <div style={{ position: "absolute", left: 430 + L.b * 0.4 - 250, top: 300 + scan * 118,
+            width: 500, height: 12, zIndex: 89, borderRadius: 6,
+            background: `linear-gradient(90deg, transparent, ${hexa(mxh(SKY, 0.6), 0.95)}, transparent)` }} />
+        )}
+        {cal > 0.05 && (
+          <div style={{ position: "absolute", left: 430 + L.b * 0.4 + 266, top: 336, width: 150,
+            height: 62, zIndex: 88, borderRadius: 10, opacity: Math.min(1, cal * 2),
+            background: `linear-gradient(168deg, ${mxh(BONE, 0.9)}, ${mxh(BONE, 0.52)})`,
+            border: `4px solid ${match > 0.5 ? dkh(OKGREEN, 0.44) : dkh(BRASS, 0.34)}`,
+            boxShadow: SH, display: "flex", alignItems: "center", justifyContent: "center", gap: 9 }}>
+            <div style={{ width: 62, height: 9, borderRadius: 99, background: hexa(INK, 0.3) }} />
+            {match > 0.05 && (
+              <div style={{ width: 38 * match, height: 38 * match, borderRadius: "50%",
+                background: `radial-gradient(circle at 34% 28%, ${mxh(OKGREEN, 0.42)}, ${dkh(OKGREEN, 0.28)})`,
+                display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width={24 * match} height={24 * match} viewBox="0 0 24 24">
+                  <path d="M5 12.5 L10 17.5 L19 6.5" fill="none" stroke="#FFFFFF" strokeWidth={4.8}
+                    strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </div>
+            )}
+          </div>
+        )}
+        <Ring x={430 + L.b * 0.4 + 300} y={366} f={f} at={84} c={mxh(OKGREEN, 0.4)} z={91} s={1.1} dur={18} />
         {/* the exit codes, stamped */}
-        <ExitStamp x={786 + L.c * 0.4} y={318} s={1.0} z={90} k={stamp1} />
+        <div style={{ position: "absolute", left: 0, top: 0, transform: `translateY(${kick * 7}px)` }}>
+          <ExitStamp x={786 + L.c * 0.4} y={318} s={1.06} z={90} k={stamp1} />
+        </div>
         <ExitStamp x={786 + L.c * 0.4} y={438} s={0.9} z={90} k={stamp2} />
         {/* ⭐ the row that finally has a receipt, leaving */}
         {/* the job that finally HAS a seal, leaving */}
@@ -882,9 +1148,11 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={676 + L.a * 0.3} y={GY - 6} w={190} o={0.34} z={44} />
         <Dev f={f} x={676 + L.a * 0.3} y={GY} i={0} size={324} z={62} at={-14} loop={1}
-          extra={{ glasses: 1 }} gaze={-0.9} cheer={E(f, 86, 96, 0, 1, BACK)} />
+          extra={{ glasses: 1 }} gaze={-0.9} cheer={E(f, 86, 96, 0, 1, BACK)} beat={wordPulse(f + at)} />
         <PaneStack x={-14 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.86} />
         <Edge side="r" c={dkh(p.floor2, 0.34)} w={82} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -896,26 +1164,30 @@ export const RUNSC: React.FC<SP> = ({ v, dur }) => {
    goes amber at once and the context meter is nearly empty. 37 frames is 1.2s
    and two events is all it can hold.
    ====================================================================== */
-export const ASIDE: React.FC<SP> = ({ v, dur }) => {
+export const ASIDE: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("aside");
   const L = LAY[v];
   const warn = E(f, 4, 16, 0, 1, OUT);
   const drop = E(f, 20, dur, 0, 1, IO);
+  /* ⛔ MUTE TEST: "there is a CATCH" and nothing caught. A pawl now falls into
+     the gear and the whole place JAMS — one hard stop, and the shudder after it. */
+  const pawl = E(f, 12, 19, 0, 1, IN_Q);
+  const jam = f >= 19 && f < 40 ? Math.sin((f - 19) * 1.5) * Math.exp(-(f - 19) / 5.5) : 0;
   return (
     <Scene p={p} slug="" push={[0, dur, 1.07]} vig={0.50}>
       <Cam x={L.a * 0.4} y={0} s={1.04} z={12}>
         <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="lampbar"
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={5.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.6} window={null} />
-        <SesFit p={p} f={f} seed={9} z={5} lift={1.0} ctx={0.16 + (1 - drop) * 0.2} run={1} />
+        <SesFit p={p} f={f} seed={9} z={5} lift={1.0} ctx={0.16 + (1 - drop) * 0.2} run={1} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x2 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={13 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={4} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={8} side="r" lamp={1} mug={1} />
@@ -925,13 +1197,40 @@ export const ASIDE: React.FC<SP> = ({ v, dur }) => {
           <Pane key={"aw" + i} x={92 + i * 216 + L.b * 0.3} y={352} w={190} h={150} z={44} f={f}
             on={0.5 + warn * 0.5} run={warn} seed={i + 3} />
         ))}
-        <WallClock x={506 + L.b * 0.4} y={224} s={1.15} z={62} f={f} rate={2.4} />
+        {/* ⭐ THE CATCH — a toothed wheel turning, and the pawl that drops into
+            it and jams the place. "There is a catch" with something catching. */}
+        <div style={{ position: "absolute", left: 690 + L.b * 0.3, top: 402, width: 172, height: 172,
+          zIndex: 84, borderRadius: "50%",
+          transform: `rotate(${(f * 2.4) * (1 - pawl) + jam * 6}deg)`,
+          background: `radial-gradient(circle at 36% 30%, ${mxh(STEEL, 0.42)}, ${dkh(STEEL, 0.42)})`,
+          border: `9px solid ${dkh(STEEL, 0.5)}`, boxShadow: SH_D }}>
+          {Array.from({ length: 12 }, (_, k) => {
+            const a = (k / 12) * Math.PI * 2;
+            return (
+              <div key={"gt" + k} style={{ position: "absolute",
+                left: 86 + Math.cos(a) * 82 - 9, top: 86 + Math.sin(a) * 82 - 15,
+                width: 18, height: 30, borderRadius: 5,
+                transform: `rotate(${(a * 180) / Math.PI + 90}deg)`,
+                background: `linear-gradient(180deg, ${mxh(BRASS, 0.3)}, ${dkh(BRASS, 0.34)})` }} />
+            );
+          })}
+        </div>
+        <div style={{ position: "absolute", left: 756 + L.b * 0.3, top: 292 + pawl * 92,
+          width: 34, height: 138, zIndex: 86, borderRadius: 9, transformOrigin: "50% 0%",
+          transform: `rotate(${-28 + pawl * 28 + jam * 5}deg)`,
+          background: `linear-gradient(90deg, ${dkh(DIFFR, 0.34)}, ${mxh(DIFFR, 0.18)}, ${dkh(DIFFR, 0.4)})`,
+          border: `4px solid ${dkh(INK, 0.1)}`, boxShadow: SH }} />
+        <Ring x={772 + L.b * 0.3} y={438} f={f} at={19} c={mxh(DIFFR, 0.42)} z={90} s={1.3} dur={20} />
+        <Puff x={772 + L.b * 0.3} y={438} f={f} at={19} c="#E8D4B4" z={90} n={11} s={1.0} />
+        <WallClock x={506 + L.b * 0.4} y={224} s={1.15} z={62} f={f} rate={11} />
         <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[1, 1, 1]}
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <AnswerCard x={506 + L.c * 0.3 - drop * 30} y={624 + drop * 150} w={250 + drop * 150}
           z={86} items={[true, true, true, true, false, false]} rot={-drop * 5} />
         <PaneStack x={W - 24 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.86} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={82} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -944,7 +1243,7 @@ export const ASIDE: React.FC<SP> = ({ v, dur }) => {
    MOVES along the row as each row closes, so "one at a time" is a travelling
    fact rather than a caption. ⛔ No duration is printed anywhere (TIME_BANNED).
    ====================================================================== */
-export const NIGHT: React.FC<SP> = ({ v, dur }) => {
+export const NIGHT: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("night");
   const L = LAY[v];
@@ -968,14 +1267,14 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="none"
           rake={0.10 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={4.4} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.7} window={null} />
-        <SesFit p={p} f={f} seed={10} z={5} lift={0.95} ctx={0.3} run={0.5} />
+        <SesFit p={p} f={f} seed={10} z={5} lift={0.95} ctx={0.3} run={0.5} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x3 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={83 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={5} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={9} side="l" lamp={1} mug={1} />
@@ -1033,15 +1332,17 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
           <Ring key={"ns" + i} x={502 + L.b * 0.35} y={478} f={f} at={f} c={mxh(CARET, 0.4)}
             z={62} s={0.8} dur={12} />
         ) : null)}
-        <WallClock x={636 + L.b * 0.4} y={200} s={1.0} z={62} f={f} rate={3.2} />
+        <WallClock x={636 + L.b * 0.4} y={200} s={1.0} z={62} f={f} rate={11} />
         <Selector x={846 + L.c * 0.4} y={252} s={0.78} z={88} k={0} from={1} to={1} />
         <PromptRail f={f} z={70} topY={700} lampBarY={214} lamps={[1, 0, 0]}
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} surface="#23262B" />
         <Contact x={286 + L.a * 0.3 + shunt * 40} y={GY - 6} w={186} o={0.32} z={44} />
         <Dev f={f} x={286 + L.a * 0.3 + shunt * 40} y={GY} i={0} size={315} z={62} at={-14} loop={1}
-          extra={{ glasses: 1 }} gaze={0.6} />
+          extra={{ glasses: 1 }} gaze={0.6} beat={wordPulse(f + at)} />
         <PaneStack x={W - 18 + L.c * 0.2} y={H - 4} n={5} z={94} s={0.84} />
         <Edge side={flip ? "r" : "l"} c={dkh(p.floor2, 0.34)} w={82} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -1057,7 +1358,7 @@ export const NIGHT: React.FC<SP> = ({ v, dur }) => {
    ⛔ "without them messing each other up" is drawn: each pane keeps its OWN
    row, and no two ever hold the same one.
    ====================================================================== */
-export const FANOUT: React.FC<SP> = ({ v, dur }) => {
+export const FANOUT: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("fanout");
   const L = LAY[v];
@@ -1112,20 +1413,56 @@ export const FANOUT: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.5} bands={0} kind="shelf" overhead="lampbar"
           rake={0.13 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
-        <SesFit p={p} f={f} seed={11} z={5} lift={1.05} ctx={0.55} run={1} />
+        <SesFit p={p} f={f} seed={11} z={5} lift={1.05} ctx={0.55} run={1} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x2 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={23 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={6} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={10} side="r" lamp={1} mug={1} />
         {/* ⛔ THE BRIGHTEST SCENE STILL NEEDS SOMETHING BLACK IN IT — rev 1's
             payoff had no dark mass and its p10 came back at 76.1. */}
         <PaneWall f={f} z={20} y0={0} h={150} n={6} lit={[0, 2, 3, 5]} signLit={1} />
+        {/* ⛔ MUTE TEST: the line that opens this scene is "the trick is to TWEAK
+            THE INSTRUCTIONS", and nothing was tweaked — the panes just split. The
+            edit is now drawn, and it happens BEFORE the split so it causes it:
+            a caret lands in the instruction line and the value goes 1 -> 10. */}
+        {(() => {
+          const caret = E(f, 2, 10, 0, 1, OUT);
+          const wipe = E(f, 12, 22, 0, 1, IO);
+          const set = E(f, 22, 32, 0, 1, BACK);
+          const nudge = E(f, 12, 20, 0, 1, OUT) - E(f, 22, 30, 0, 1, IO);
+          return (
+            <div style={{ position: "absolute", left: 252, top: 176, width: 508, height: 96,
+              zIndex: 88, borderRadius: 14, transform: `translateY(${-nudge * 5}px)`,
+              background: `linear-gradient(168deg, ${mxh(BONE, 0.88)}, ${mxh(BONE, 0.5)})`,
+              border: `5px solid ${dkh(BRASS, 0.32)}`, boxShadow: SH_D,
+              display: "flex", alignItems: "center", gap: 16, paddingLeft: 20 }}>
+              <MarkTile rel d={48} z={2} />
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 9 }}>
+                <div style={{ height: 9, width: "62%", borderRadius: 99, background: hexa(SKY, 0.8) }} />
+                <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
+                  <div style={{ height: 9, width: 92, borderRadius: 99, background: hexa(INK, 0.24) }} />
+                  {/* the value being edited, struck out and replaced */}
+                  <div style={{ position: "relative", minWidth: 78, height: 38, borderRadius: 9,
+                    background: hexa(INK, 0.06), border: `2px solid ${hexa(INK, 0.2)}`,
+                    display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ ...mono(26, 800), color: dkh(INK, 0.0), opacity: 1 - wipe }}>1</span>
+                    <span style={{ position: "absolute", ...mono(28, 900), color: OKGREEN,
+                      opacity: set, transform: `scale(${0.5 + set * 0.5})` }}>10</span>
+                    {/* the caret that made the edit */}
+                    <div style={{ position: "absolute", right: -9, top: 5, width: 4, height: 28,
+                      background: CARET, opacity: caret * (1 - set) * (Math.sin(f / 2.6) > 0 ? 1 : 0.2) }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* ⭐ THE ONE PANE BECOMING TEN — the set travelling, not a grid fading */}
         {Array.from({ length: N }, (_, i) => {
@@ -1172,9 +1509,11 @@ export const FANOUT: React.FC<SP> = ({ v, dur }) => {
           lampX={[366 + L.c * 0.3, 526 + L.c * 0.3, 686 + L.c * 0.3]} />
         <Contact x={846 + L.a * 0.3} y={GY - 6} w={188} o={0.32} z={44} />
         <Dev f={f} x={846 + L.a * 0.3} y={GY} i={0} size={315} z={64} at={-14} loop={2}
-          extra={{ glasses: 1 }} cheer={E(f, 64, 76, 0, 1, BACK)} />
+          extra={{ glasses: 1 }} cheer={E(f, 64, 76, 0, 1, BACK)} beat={wordPulse(f + at)} />
         <PaneStack x={-16 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.88} />
         <Edge side={flip ? "l" : "r"} c={dkh(p.floor2, 0.34)} w={84} z={92} kind="post" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );
@@ -1189,7 +1528,7 @@ export const FANOUT: React.FC<SP> = ({ v, dur }) => {
    ⛔ REV 1's CTA measured 6.41, the weakest scene in the reel, because its one
    completed answer sat motionless for the whole beat. It leaves now.
    ====================================================================== */
-export const CTA: React.FC<SP> = ({ v, dur }) => {
+export const CTA: React.FC<SP> = ({ v, dur, at = 0 }) => {
   const f = useCurrentFrame();
   const p = asPlace("close");
   const L = LAY[v];
@@ -1212,14 +1551,14 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
         <Room p={p} f={f} dx={L.a * 0.4} bands={0} kind="shelf" overhead="lampbar"
           rake={0.12 * RAKE_K[v]} rakeX={RAKE_X[v]} rakeRate={6.0} rakeN={RAKE_N[v]}
           floorKind="tile" grit={0.5} window={null} />
-        <SesFit p={p} f={f} seed={12} z={5} lift={1.2} ctx={0.8} run={1} />
+        <SesFit p={p} f={f} seed={12} z={5} lift={1.2} ctx={0.8} run={1} rf={f + at} />
         {/* ⭐ THE DENSITY DEVICE — UNLAZY's `ToolWall` pattern in this world's
             own objects: skill files on hooks, cable coils, lit sub-agent bays
             and pin-toothed modules, 10x2 on rails, each swaying. This is why
             the OX and UNLAZY frames read as PLACES and mine read as diagrams. */}
         <BayWall p={p} f={f} x={-20} y={150} cols={10} z={16}
           seed={47 + (v === "amber" ? 7 : v === "steel" ? 19 : 0)} live={5} o={0.92}
-          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} />
+          rows={v === "amber" ? 2 : v === "steel" ? 3 : undefined} rf={f + at} w0={wordCount(at)} />
         {/* ⭐ THE PLACE, not a screenshot: desk, anglepoise, mug, keyboard,
             cables, plant, chair back — the silhouette variety the note asked for */}
         <DeskFit p={p} f={f} z={30} seed={11} side="l" lamp={1} mug={1} />
@@ -1299,7 +1638,7 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
         <PipRow lit={6} f={f} at={6} pop={1} z={92} />
         <Contact x={430 + L.a * 0.3} y={GY - 6} w={196} o={0.34} z={44} />
         <Dev f={f} x={430 + L.a * 0.3} y={GY} i={0} size={324} z={64} at={-14} loop={2}
-          extra={{ glasses: 1 }} cheer={E(f, 44, 54, 0, 1, BACK)} />
+          extra={{ glasses: 1 }} cheer={E(f, 44, 54, 0, 1, BACK)} beat={wordPulse(f + at)} />
         <Contact x={646 + L.a * 0.3} y={GY - 6} w={186} o={0.32} z={44} />
         <Crew f={f} x={646 + L.a * 0.3} y={GY} i={2} size={297} z={62} at={-14} loop={2} flip
           cheer={E(f, 48, 58, 0, 1, BACK)} />
@@ -1308,6 +1647,8 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
           lampX={[356 + L.c * 0.3, 526 + L.c * 0.3, 696 + L.c * 0.3]} dx={L.c * 0.2} />
         <PaneStack x={W - 30 + L.c * 0.2} y={H - 4} n={6} z={94} s={0.9} />
         <Edge side="l" c={dkh(p.floor2, 0.34)} w={86} z={92} kind="rail" />
+        {/* ⭐ the room's own light answers each spoken word */}
+        <WordLight rf={f + at} z={92} />
       </Cam>
     </Scene>
   );

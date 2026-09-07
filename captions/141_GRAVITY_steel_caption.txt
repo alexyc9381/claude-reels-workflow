@@ -1,0 +1,29 @@
+Comment "GRAVITY" and I'll send you the install and the free tier setup.
+
+👇 READ BELOW
+
+The free plan inside VS Code now reaches Gemini, Claude and GPT from one dropdown.
+
+Google shipped official Antigravity extensions on August 20 for VS Code, Visual Studio, Zed, JetBrains and Xcode. The VS Code listing is under the publisher Google, v1.2.0, 208,494 installs so far. It adds agent side panels, inline diffs and interactive plans to the editor you already have open, so there is no migration and nothing to rebuild.
+
+What makes it worth the two minutes is the model list on the free tier:
+
+★ Gemini 3.8 Flash → fast edits and completions
+★ Gemini 3.1 Pro → the heavier reasoning pass
+★ Claude Sonnet 4.6 → the long implementation stretch
+★ Claude Opus 4.6 → planning an unfamiliar codebase
+★ gpt-oss-120b → a second opinion from a different family
+★ Unlimited tab completions, $0 a month
+
+The part nobody mentions:
+The interesting number is not the install count, it is that a Google product is handing you Anthropic and OpenAI models on its own free tier. That only makes sense if the thing being competed for is where you write code, not which model you write it with. The editor is the distribution channel, and the models are the commodity.
+
+Two honest notes: a local service called agy installs on first launch, and the free tier's rate limits reset weekly, not hourly.
+
+Comment "GRAVITY" and I'll send you the install steps and the model picking guide.
+
+.
+.
+.
+
+#antigravity #vscode #googleantigravity #claudecode #claudeai #anthropic #gemini #openai #gptoss #aicoding #aitools #vibecoding #devtools #aiagents #buildinpublic #programming #freetools #developers #ide #aiworkflow

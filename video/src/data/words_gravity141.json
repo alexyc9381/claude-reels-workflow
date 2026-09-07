@@ -1,0 +1,422 @@
+[
+{
+"start": 0.0,
+"end": 0.2,
+"word": " So"
+},
+{
+"start": 0.2,
+"end": 0.3,
+"word": " you"
+},
+{
+"start": 0.3,
+"end": 0.44,
+"word": " can"
+},
+{
+"start": 0.375,
+"end": 0.415,
+"word": " now"
+},
+{
+"start": 0.45,
+"end": 0.55,
+"word": " use"
+},
+{
+"start": 0.55,
+"end": 1.07,
+"word": " Antigravity"
+},
+{
+"start": 1.01,
+"end": 1.27,
+"word": " inside"
+},
+{
+"start": 1.27,
+"end": 1.53,
+"word": " VS"
+},
+{
+"start": 1.53,
+"end": 1.77,
+"word": " Code."
+},
+{
+"start": 1.92,
+"end": 2.08,
+"word": " Google"
+},
+{
+"start": 2.08,
+"end": 2.28,
+"word": " just"
+},
+{
+"start": 2.28,
+"end": 2.54,
+"word": " launched"
+},
+{
+"start": 2.48,
+"end": 2.64,
+"word": " its"
+},
+{
+"start": 2.64,
+"end": 2.98,
+"word": " official"
+},
+{
+"start": 2.98,
+"end": 3.52,
+"word": " Antigravity"
+},
+{
+"start": 3.55,
+"end": 3.87,
+"word": " extension"
+},
+{
+"start": 3.87,
+"end": 4.09,
+"word": " for"
+},
+{
+"start": 4.09,
+"end": 4.35,
+"word": " VS"
+},
+{
+"start": 4.33,
+"end": 4.59,
+"word": " Code."
+},
+{
+"start": 5.01,
+"end": 5.07,
+"word": " And"
+},
+{
+"start": 5.085,
+"end": 5.31,
+"word": " instead"
+},
+{
+"start": 5.31,
+"end": 5.43,
+"word": " of"
+},
+{
+"start": 5.43,
+"end": 5.63,
+"word": " switching"
+},
+{
+"start": 5.53,
+"end": 5.69,
+"word": " to"
+},
+{
+"start": 5.69,
+"end": 5.91,
+"word": " another"
+},
+{
+"start": 5.91,
+"end": 6.17,
+"word": " editor,"
+},
+{
+"start": 6.26,
+"end": 6.3,
+"word": " you"
+},
+{
+"start": 6.335,
+"end": 6.44,
+"word": " can"
+},
+{
+"start": 6.44,
+"end": 6.58,
+"word": " bring"
+},
+{
+"start": 6.62,
+"end": 7.34,
+"word": " Antigravity's"
+},
+{
+"start": 7.34,
+"end": 7.48,
+"word": " AI"
+},
+{
+"start": 7.48,
+"end": 7.76,
+"word": " coding"
+},
+{
+"start": 7.67,
+"end": 8.09,
+"word": " experience"
+},
+{
+"start": 8.09,
+"end": 8.35,
+"word": " into"
+},
+{
+"start": 8.35,
+"end": 8.61,
+"word": " VS"
+},
+{
+"start": 8.62,
+"end": 8.86,
+"word": " Code."
+},
+{
+"start": 8.94,
+"end": 8.98,
+"word": " And"
+},
+{
+"start": 9.015,
+"end": 9.1,
+"word": " the"
+},
+{
+"start": 9.1,
+"end": 9.34,
+"word": " crazy"
+},
+{
+"start": 9.39,
+"end": 9.61,
+"word": " part,"
+},
+{
+"start": 9.71,
+"end": 9.77,
+"word": " the"
+},
+{
+"start": 9.785,
+"end": 9.93,
+"word": " free"
+},
+{
+"start": 10.04,
+"end": 10.24,
+"word": " plan"
+},
+{
+"start": 10.24,
+"end": 10.42,
+"word": " gives"
+},
+{
+"start": 10.42,
+"end": 10.54,
+"word": " you"
+},
+{
+"start": 10.54,
+"end": 10.8,
+"word": " access"
+},
+{
+"start": 10.81,
+"end": 11.01,
+"word": " to"
+},
+{
+"start": 11.01,
+"end": 11.21,
+"word": " models"
+},
+{
+"start": 11.21,
+"end": 11.39,
+"word": " like"
+},
+{
+"start": 11.33,
+"end": 11.71,
+"word": " Gemini,"
+},
+{
+"start": 11.95,
+"end": 12.07,
+"word": " Claude"
+},
+{
+"start": 12.07,
+"end": 12.49,
+"word": " Opus,"
+},
+{
+"start": 12.79,
+"end": 12.95,
+"word": " Claude"
+},
+{
+"start": 12.95,
+"end": 13.29,
+"word": " Sonnet,"
+},
+{
+"start": 13.39,
+"end": 13.43,
+"word": " and"
+},
+{
+"start": 13.465,
+"end": 13.83,
+"word": " GPT."
+},
+{
+"start": 14.01,
+"end": 14.05,
+"word": " So"
+},
+{
+"start": 14.085,
+"end": 14.23,
+"word": " it's"
+},
+{
+"start": 14.23,
+"end": 14.47,
+"word": " crazy"
+},
+{
+"start": 14.37,
+"end": 14.55,
+"word": " how"
+},
+{
+"start": 14.55,
+"end": 14.67,
+"word": " a"
+},
+{
+"start": 14.67,
+"end": 14.81,
+"word": " few"
+},
+{
+"start": 14.91,
+"end": 15.11,
+"word": " months"
+},
+{
+"start": 15.11,
+"end": 15.31,
+"word": " ago"
+},
+{
+"start": 15.31,
+"end": 15.59,
+"word": " people"
+},
+{
+"start": 15.53,
+"end": 15.69,
+"word": " were"
+},
+{
+"start": 15.69,
+"end": 15.91,
+"word": " saying"
+},
+{
+"start": 15.91,
+"end": 16.21,
+"word": " VS"
+},
+{
+"start": 16.17,
+"end": 16.41,
+"word": " Code"
+},
+{
+"start": 16.41,
+"end": 16.57,
+"word": " was"
+},
+{
+"start": 16.57,
+"end": 16.75,
+"word": " getting"
+},
+{
+"start": 16.8,
+"end": 17.2,
+"word": " replaced"
+},
+{
+"start": 17.2,
+"end": 17.36,
+"word": " by"
+},
+{
+"start": 17.36,
+"end": 17.96,
+"word": " Antigravity,"
+},
+{
+"start": 18.03,
+"end": 18.15,
+"word": " and"
+},
+{
+"start": 18.15,
+"end": 18.37,
+"word": " they're"
+},
+{
+"start": 18.37,
+"end": 18.71,
+"word": " basically"
+},
+{
+"start": 18.53,
+"end": 18.83,
+"word": " sitting"
+},
+{
+"start": 18.83,
+"end": 19.17,
+"word": " together"
+},
+{
+"start": 19.17,
+"end": 19.45,
+"word": " now."
+},
+{
+"start": 19.92,
+"end": 20.0,
+"word": " For"
+},
+{
+"start": 20.0,
+"end": 20.24,
+"word": " access,"
+},
+{
+"start": 20.44,
+"end": 20.54,
+"word": " comment"
+},
+{
+"start": 20.515,
+"end": 20.72,
+"word": " GRAVITY."
+}
+]

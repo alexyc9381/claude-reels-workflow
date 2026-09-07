@@ -19,7 +19,13 @@ const V = { fps: 30, width: 1080, height: 1920 } as const;
      house   THE FRONT   a giant ALL CLEAR board hides a room that is failing
      amber   SPLIT       one Claude becomes two, and only one of them works
      steel   HOLLOW      a body-sized sealed job opens onto nothing */
-export const ReelHouse = makeReel("house", false, "scorch");
+/* ⛔⛔ `PICKED` WAS A DECOY. This line hardcoded "scorch", so setting
+   `PICKED = "crush"` in the reel file changed nothing and the house cut rendered
+   the old ALL CLEAR board — the same trap as
+   `feedback_three_cuts_three_hooks_fix_all_three`, one level up: the COMP INDEX
+   decides, not the constant. The house cut now takes the default so `PICKED`
+   actually governs it. */
+export const ReelHouse = makeReel("house", false);
 export const ReelAmber = makeReel("amber", false, "spike");
 export const ReelSteel = makeReel("steel", false, "wander");
 export const ReelQuiet = makeReel("house", true, "scorch");
@@ -34,6 +40,13 @@ const Root: React.FC = () => (<>
   <Composition id="hook-a-cutout"   component={HookCut("cutout")}   durationInFrames={135} {...V} />
   <Composition id="hook-b-dial"     component={HookCut("dial")}     durationInFrames={135} {...V} />
   <Composition id="hook-c-carousel" component={HookCut("carousel")} durationInFrames={135} {...V} />
+  <Composition id="hook-d-bullpen"  component={HookCut("bullpen")}  durationInFrames={135} {...V} />
+  <Composition id="hook-e-absorb"   component={HookCut("absorb")}   durationInFrames={135} {...V} />
+  <Composition id="hook-f-press"    component={HookCut("press")}    durationInFrames={135} {...V} />
+  {/* ⭐ ROUND 4 — three mechanisms taken off the winners' own code */}
+  <Composition id="hook-g-strip"    component={HookCut("strip")}    durationInFrames={135} {...V} />
+  <Composition id="hook-h-crush"    component={HookCut("crush")}    durationInFrames={135} {...V} />
+  <Composition id="hook-i-fan"      component={HookCut("fan")}      durationInFrames={135} {...V} />
   <Composition id="adh-house" component={ReelHouse} durationInFrames={ADH_TOTAL} {...V} />
   <Composition id="adh-amber" component={ReelAmber} durationInFrames={ADH_TOTAL} {...V} />
   <Composition id="adh-steel" component={ReelSteel} durationInFrames={ADH_TOTAL} {...V} />

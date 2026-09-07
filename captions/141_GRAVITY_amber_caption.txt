@@ -1,0 +1,31 @@
+Comment "GRAVITY" and I'll send you the install and the free tier setup.
+
+👇 READ BELOW
+
+Google put Antigravity inside VS Code. You do not switch editors, it comes to yours.
+
+The extension shipped on August 20 for five editors at once: VS Code, Visual Studio, Zed, JetBrains and Xcode. On the Marketplace it is published by Google, v1.2.0, 208,494 installs. Once it is in, you get the agent side panel, inline diffs and interactive plans without leaving the window you already work in.
+
+Then you open the model picker and realise it is not a Google only list.
+
+→ Gemini 3.8 Flash and 3.1 Pro
+→ Claude Sonnet 4.6
+→ Claude Opus 4.6
+→ gpt-oss-120b
+→ Unlimited tab completions
+→ $0 a month, basic weekly rate limits
+
+Three labs, one dropdown, one Google account, nothing to pay.
+
+The part nobody mentions:
+Everyone framed this as Antigravity replacing VS Code, and that was never how it was going to go. New editors have to beat your keybindings, your extensions and your habits, and almost nothing beats all three. An extension does not have to beat any of them. Google was never chasing your editor, it was chasing distribution, and shipping to five IDEs in a day is distribution.
+
+Worth knowing before you install: it puts a local background service called agy on your machine on first launch, and the free tier's limits reset weekly rather than hourly, so pace a big job accordingly.
+
+Comment "GRAVITY" and I'll send you the setup and which model to use for which job.
+
+.
+.
+.
+
+#antigravity #vscode #googleantigravity #claudecode #claudeai #anthropic #gemini #openai #aicoding #aitools #vibecoding #devtools #aiagents #buildinpublic #programming #freetools #developers #codingtools #ide #softwareengineering

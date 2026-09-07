@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 112,
-    "reels_total": 156,
-    "factory_logs": 68,
-    "storyboards": 71,
-    "caption_jsons": 123,
-    "memory_md": 227,
+    "reels_with_code": 114,
+    "reels_total": 158,
+    "factory_logs": 69,
+    "storyboards": 72,
+    "caption_jsons": 125,
+    "memory_md": 228,
     "creators": 8,
     "packs": 3
   },
@@ -263,6 +263,17 @@
       "storyboard": null,
       "captions": [
         "video/src/data/words_haaland.json"
+      ]
+    },
+    {
+      "key": "intent140",
+      "name": "Intent140",
+      "number": null,
+      "code": "video/src/ClaudeIntent140Reel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_intent140.json"
       ]
     },
     {
@@ -583,9 +594,11 @@
         "video/src/data/words_free.json",
         "video/src/data/words_free131.json",
         "video/src/data/words_glm.json",
+        "video/src/data/words_gravity141.json",
         "video/src/data/words_haaland.json",
         "video/src/data/words_hermes.json",
         "video/src/data/words_hermes_orig.json",
+        "video/src/data/words_intent140.json",
         "video/src/data/words_jarvis1.json",
         "video/src/data/words_jobs.json",
         "video/src/data/words_judge132.json",
@@ -1769,6 +1782,17 @@
       "captions": [
         "video/src/data/words_repos137.json",
         "video/src/data/words_repos137.pre-fix.json"
+      ]
+    },
+    {
+      "key": "gravity141",
+      "name": "gravity",
+      "number": 141,
+      "code": "video/src/ClaudeGravity141Reel.tsx",
+      "log": "memory/reels/gravity141-factory-log.md",
+      "storyboard": "storyboards/141-gravity.md",
+      "captions": [
+        "video/src/data/words_gravity141.json"
       ]
     }
   ]
