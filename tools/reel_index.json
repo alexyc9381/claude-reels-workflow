@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 87,
-    "reels_total": 130,
-    "factory_logs": 53,
-    "storyboards": 47,
+    "reels_with_code": 88,
+    "reels_total": 133,
+    "factory_logs": 58,
+    "storyboards": 48,
     "caption_jsons": 97,
-    "memory_md": 193,
+    "memory_md": 199,
     "creators": 8,
     "packs": 3
   },
@@ -421,15 +421,13 @@
       ]
     },
     {
-      "key": "route",
-      "name": "Route",
+      "key": "route123",
+      "name": "Route123",
       "number": null,
-      "code": "video/src/ClaudeRouteReel.tsx",
+      "code": "video/src/ClaudeRoute123Reel.tsx",
       "log": null,
       "storyboard": null,
-      "captions": [
-        "video/src/data/words_route.json"
-      ]
+      "captions": []
     },
     {
       "key": "rowboat",
@@ -705,6 +703,15 @@
       ]
     },
     {
+      "key": "course",
+      "name": "course",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/course-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
       "key": "court",
       "name": "court",
       "number": null,
@@ -861,6 +868,15 @@
       "number": null,
       "code": null,
       "log": "memory/reels/lean-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "local",
+      "name": "local",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/local-factory-log.md",
       "storyboard": null,
       "captions": []
     },
@@ -1340,7 +1356,7 @@
       "name": "agency",
       "number": 94,
       "code": "video/src/ClaudeAgencyReel.tsx",
-      "log": null,
+      "log": "memory/reels/agency-factory-log.md",
       "storyboard": "storyboards/94-agency.md",
       "captions": [
         "video/src/data/words_agency.json"
@@ -1406,7 +1422,7 @@
       "name": "apple",
       "number": 100,
       "code": "video/src/ClaudeAppleReel.tsx",
-      "log": null,
+      "log": "memory/reels/apple-factory-log.md",
       "storyboard": "storyboards/100-apple.md",
       "captions": [
         "video/src/data/words_apple.json"
@@ -1452,6 +1468,17 @@
       "storyboard": "storyboards/104-plugin.md",
       "captions": [
         "video/src/data/words_plugin.json"
+      ]
+    },
+    {
+      "key": "route",
+      "name": "route",
+      "number": 123,
+      "code": "video/src/ClaudeRouteReel.tsx",
+      "log": "memory/reels/route-factory-log.md",
+      "storyboard": "storyboards/123-route.md",
+      "captions": [
+        "video/src/data/words_route.json"
       ]
     }
   ]

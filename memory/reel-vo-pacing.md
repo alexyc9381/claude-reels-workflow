@@ -7,6 +7,8 @@ metadata:
   originSessionId: 6935b818-3baa-4b70-a825-a96fb25f8083
 ---
 
+> **2026-09-07 OVERRIDE:** Alex explicitly requests **1.03x the original recording** for Remotion / NoCodeAlex reels. Never slow speech to satisfy caption reading-speed gates. The older 1.07x / variable slowdown recommendations below are historical and are superseded by [his latest feedback](alex-claude-motion-and-voice.md).
+
 **STANDING RULE: tighten every reel's VO pacing** (Alex, 2026-06-22 — wants less dead air + faster delivery to help 2-second retention). Two mechanisms, applied at different stages:
 
 **1) Global speedup ~7% (pitch-preserved), every reel.** Alex's natural VO ≈ 2.7 words/sec → ~2.9 at 7% — still crisp + clearly intelligible. 8% is fine for punchier; **~10–12% is the ceiling** before it sounds rushed and captions flash too fast to read. **Protect the value/payoff lines** (the prompt/result the viewer came for) — don't let the speedup rush those. The truly best "faster" is recording with more pace/energy (Nate Herk / Ray Fu deliver fast + confident) — post-speedup is a shortcut, see [[nateherk-style-reference]].
