@@ -214,7 +214,26 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
   const tremble = f < B.trigger ? Math.sin(f * 1.9) * 4.2 * strain : 0;
   /* the seam leaks before it gives: settled at frame 0 means AT REST, NOT INERT */
   const leak = f < B.trigger ? E(f, 0, B.trigger, 0.18, 0.62, LIN) : 1;
-  const HX = mx, HY = 764, HS = 224;
+  /* ⛔⛔ ALEX, on the hook: *"it needs to be elevated a lot here like glowing idk
+     more interesting stuff like the claude guy bigger and when he opens the door
+     he flys."* He is right, and it is the better idea: the product is called
+     ANTIGRAVITY, so the thing behind the door should take his weight. The hook
+     stops being a man opening a door and becomes a man who opens a door and is
+     LIFTED BY WHAT IS BEHIND IT — one image, one mechanism, and the brand's own
+     literal meaning as the payoff.
+     ⭐ HS 224 -> 336 (1.5x): he is now the dominant figure, not a prop-sized one.
+     ⭐ BEATS: he strains -> f14 IT GIVES -> f22 his feet leave the deck -> he
+     rises, tilts back and glows as the field takes him, all the way to the cut. */
+  const HS = 336;
+  const fly = E(f, B.trigger + 5, B.trigger + 34, 0, 1, IO);   /* the lift */
+  const HX = mx + fly * 74;
+  /* ⛔ capped twice: 392 flew his head into the header pill, 286 still put it over
+     the ANTIGRAVITY listing plate. He also DRIFTS as he rises — a body in a field
+     does not go straight up, and the drift carries him clear of the plate. */
+  const HY = 792 - fly * 244;
+  /* he does not rise smoothly — a body entering a field wobbles as it finds trim */
+  const sway = fly > 0 ? Math.sin((f - B.trigger - 8) * 0.42) * 9 * fly : 0;
+  const tiltF = fly * -19 + (fly > 0 ? Math.sin((f - B.trigger - 5) * 0.34) * 5 * fly : 0);
   /* ⭐ THE CROWD: the repeated object that carries the motion, arriving across the
      FULL tail rather than bunched. Value ramp by rank so depth reads in greyscale. */
   const CROWD = Array.from({ length: 14 }, (_, i) => {
@@ -223,7 +242,11 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
     const t = E(f, at, 16, 0, 1, OUT);
     const dir = i % 2 ? 1 : -1;
     const spread = 92 + Math.floor(i / 2) * 74;
-    return { i, rank, at, t, x: mx + dir * spread * t, y: 712 - rank * 24,
+    /* ⭐ and once the field is open it takes THEM too — the whole crowd drifts up,
+       staggered, so the lift is a property of the room and not a trick on one guy */
+    const cl = E(f, at + 10, at + 34, 0, 1, IO);
+    return { i, rank, at, t, x: mx + dir * spread * t,
+      y: 712 - rank * 24 - cl * (108 + rank * 26) + Math.sin(f * 0.3 + i) * 5 * cl,
       size: 96 - rank * 16, tint: ["#D97757", "#C1653F", "#A9552F"][rank], z: 62 - rank * 2 };
   });
   return (
@@ -278,13 +301,39 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
       ) : null)}
       {/* ⭐⭐ THE HERO — one figure, dead centre, doing one thing. WEIGHT IS
           DEFORMATION: he squashes under strain and trembles before it gives. */}
-      <div style={{ position: "absolute", left: tremble, top: 0, width: W, height: H, zIndex: 60 }}>
+      <div style={{ position: "absolute", left: tremble + sway, top: 0, width: W, height: H, zIndex: 60 }}>
+        {/* ⭐ ZERO-G READS AS THE ROOM LETTING GO OF EVERYTHING, not one man rising:
+            grit lifts off the deck and drifts up past him. Without this he looks
+            like he is standing on something. */}
+        {fly > 0 && Array.from({ length: 16 }, (_, i) => {
+          const t = ((f - B.trigger - 5 + i * 3) % 34) / 34;
+          if (t < 0) return null;
+          const sz = 5 + (i % 3) * 4;
+          return (
+            <div key={"gz" + i} style={{ position: "absolute", zIndex: 59,
+              left: mx - 250 + (i * 97) % 500 + Math.sin(f * 0.11 + i) * 16,
+              top: 812 - t * 470, width: sz, height: sz, borderRadius: 2,
+              background: hexa("#FFD79A", 0.75 * fly * (1 - t)),
+              transform: `rotate(${t * 220 + i * 30}deg)` }} />
+          );
+        })}
+        {/* ⭐ THE GLOW — the field's light on HIM, not a lamp in the room. It grows
+            with the lift, so the glow is the cause and the rise is the effect. */}
+        {fly > 0 && (
+          <div style={{ position: "absolute", left: HX - HS * 0.95, top: HY - HS * 1.5,
+            width: HS * 1.9, height: HS * 1.9, zIndex: 58, pointerEvents: "none",
+            background: `radial-gradient(circle, ${hexa("#FFE6B0", 0.72 * fly)} 0%, ${hexa("#F0AE44", 0.34 * fly)} 34%, transparent 66%)` }} />
+        )}
+        <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 60,
+          transform: `rotate(${tiltF}deg)`, transformOrigin: `${HX}px ${HY}px`,
+          filter: fly > 0 ? `drop-shadow(0 0 ${26 * fly}px ${hexa("#FFD27A", 0.95 * fly)}) brightness(${1 + fly * 0.14})` : undefined }}>
         <Hero f={f} x={HX} y={HY} size={HS} z={60}
           strain={strain} drive={0} act={1} costume={{ constr: 1 }}
-          cheer={f > B.seat[1] ? 1 : 0} shock={f >= B.trigger && f < B.trigger + 10 ? 1 : 0} />
+          cheer={f > B.trigger + 12 ? 1 : 0} shock={f >= B.trigger && f < B.trigger + 10 ? 1 : 0} />
+        </div>
         {/* ⛔ READ THE RIG: `Mascot` draws its own arms, so the only safe geometry is
             two forearms that START on them and END on the handles — both on screen. */}
-        {f < B.trigger + 10 && [-1, 1].map((s2) => (
+        {f < B.trigger + 8 && [-1, 1].map((s2) => (
           <Forearm key={"fa" + s2} x0={HX + s2 * 54} y0={HY - HS * 0.48}
             x1={mx + s2 * (34 + swing * 196)} y1={my + MH * 0.74}
             w={26} c="#C4674A" z={61} />
@@ -313,7 +362,7 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
             background: hexa("#D8C9AC", (1 - t) * 0.5) }} />
         );
       })}
-      <Contact x={HX} y={HY} w={214} z={24} o={0.42} />
+      <Contact x={HX} y={792} w={214 * (1 - fly * 0.55)} z={24} o={0.42 * (1 - fly * 0.8)} />
     </Scene>
   );
 };

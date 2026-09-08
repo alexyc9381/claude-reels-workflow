@@ -410,8 +410,12 @@ export const SETDOWN: React.FC<SP> = ({ v, dur }) => {
      ⭐ REBUILT AS ONE IDEA: the panel is never a flying slab. It OPENS OUT of the
      editor's right edge the way a real side panel does, and its three capabilities
      type in one per spoken word, at a crop tight enough to actually read.
-     ⭐ SHOT: TIGHT (ww 3000, was 2100 — a 1.43x crop, the house answer to "too
-     small" being CROP, not enlarge).
+     ⭐ SHOT: ww 2500. ⛔ REV 8 OVERSHOT TO 3000 and Alex came back with "so zoomed
+     in and jittery". Two causes, both from the tight crop: the camera was moving
+     830px in 12 frames (a whip pan, and at 3000 every pixel of it is magnified),
+     and `live` steps the code by a WHOLE LINE, which is 80px at ww 3000 against
+     56px at 2100 — the same scroll reads as a jolt once you crop into it.
+     So: 2500, short slow moves, and a much calmer scroll rate.
      BEATS (scene starts f188):
        "bring"          f193  local  5   the panel cracks open at the edge
        "Antigravity's"  f199  local 11   AGENTS types in
@@ -425,12 +429,12 @@ export const SETDOWN: React.FC<SP> = ({ v, dur }) => {
     <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.05]} vig={0.20}>
       <BayStage f={f} v={v} crowd={7}>
       <Screen y={128}>
-        <UiStage f={f} ww={3000} wh={1600} z={62} vy={128 + L.wy} vh={452}
+        <UiStage f={f} ww={2200} wh={1240} z={62} vy={128 + L.wy} vh={452}
         /* ⛔ framing: fy 620 put the panel HEADER and its first agent row above the
              viewport, and fx 1500 cut every code line mid-indent at the left edge. */
-        keys={[[0, 1320 + L.fx, 470 + L.fy], [CAPS[0], 2070 + L.fx, 430 + L.fy]]}>
-        <VsCode x={0} y={0} w={3000} h={1600} z={1} f={f}
-          panel={open} capAt={CAPS} mark title="loader.ts" branch="main" live={0.5} />
+        keys={[[0, 1080 + L.fx, 430 + L.fy], [CAPS[2], 1420 + L.fx, 420 + L.fy]]}>
+        <VsCode x={0} y={0} w={2200} h={1240} z={1} f={f}
+          panel={open} capAt={CAPS} mark title="loader.ts" branch="main" live={0.2} />
       </UiStage>
       </Screen>
       {/* the seam the panel opens along — one lit edge, on the object, not a slab */}
@@ -460,15 +464,15 @@ export const DOCK: React.FC<SP> = ({ v, dur }) => {
   const DK = 19, CAPS = [0, 3, 8];
   const seat = f >= 26 ? Math.sin((f - 26) * 0.62) * 5 * Math.exp(-(f - 26) / 7) : 0;
   return (
-    <Scene p={asPlace(f >= DK ? "bayLit" : "bay")} slug="" push={[0, dur, 1.04]} vig={0.20}>
+    <Scene p={asPlace(f >= DK ? "bayLit" : "bay")} slug="" push={[0, dur, 1.05]} vig={0.20}>
       <BayStage f={f} v={v} lit crowd={7}>
       <div style={{ position: "absolute", left: seat, top: 0, width: W, height: H, zIndex: 60 }}>
         <Screen y={128}>
-          <UiStage f={f} ww={3000} wh={1600} z={62} vy={128 + L.wy} vh={452}
-          keys={[[0, 2070 + L.fx, 430 + L.fy], [DK, 1240 + L.fx, 500 + L.fy], [30, 1300 + L.fx, 530 + L.fy]]}>
-          <VsCode x={0} y={0} w={3000} h={1600} z={1} f={f}
+          <UiStage f={f} ww={2200} wh={1240} z={62} vy={128 + L.wy} vh={452}
+          keys={[[0, 1480 + L.fx, 430 + L.fy]]}>
+          <VsCode x={0} y={0} w={2200} h={1240} z={1} f={f}
             panel={1} mark diffAt={f >= DK ? DK : -1} capAt={CAPS}
-            title="loader.ts" branch="main" live={0.7} />
+            title="loader.ts" branch="main" live={0.25} />
         </UiStage>
         </Screen>
       </div>
