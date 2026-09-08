@@ -397,88 +397,87 @@ export const MOVE: React.FC<SP> = ({ v, dur }) => {
 export const SETDOWN: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const L = LAY[v];
-  /* ⛔⛔⛔ ALEX, on ~7s: *"i have no clue whats going on with that bigggggg wall of
-     text wtf."* He is right, and the previous two rounds were tuning the wrong
-     dial. Zoom was never the problem — A WHOLE IDE IS SIXTY SMALL EQUAL ELEMENTS,
-     and at any crop that is a wall of text. Rev 8 showed ~10 code lines plus a
-     panel plus a diff block: roughly 60 words on screen at once.
-     ⭐ SHOW ONE THING. This is the AGENTS panel and nothing else — a header and
-     three rows, SEVEN WORDS total, at 3x the size they were. Still the real
-     product UI in real Dark+ colours; just the part the sentence is about.
-     BEATS (scene starts f188): "bring" f193 the panel lands · then one agent row
-     per beat at f199 / f206 / f213 · "AI" f220 the first one starts working. */
-  const IN = 5, ROWS = [11, 18, 25];
-  const inn = E(f, IN, IN + 10, 0, 1, BACK);
-  /* ⛔ cutting the wall of text cost motion: 8.07 -> 5.08 with a 21-frame hold,
-     because three small rows arriving on a big still card repaint almost nothing.
-     Same fix PRICE needed — the PANEL takes each row, so the object that moves is
-     the whole 872x470 card. Plus a slow scroll on the context lines behind it, so
-     something is always alive without adding a single word. */
-  const kick = [IN, ...ROWS, 30].reduce((a, at) =>
-    a + (f >= at ? Math.sin((f - at) * 1.05) * 11 * Math.exp(-(f - at) / 4) : 0), 0);
-  const lean = ROWS.reduce((a, at) =>
-    a + (f >= at ? Math.sin((f - at) * 0.9) * 1.1 * Math.exp(-(f - at) / 5) : 0), 0);
-  const CW = 872, CH = 470, CX = 506 + L.a * 0.4 - CW / 2, CY = 176 + L.wy;
-  const AG = [
-    { n: "refactor loader", c: "#D97757" },
-    { n: "add tests",       c: "#7B8FF7" },
-    { n: "check types",     c: "#4EC9B0" },
+  /* ⛔⛔⛔ THIRD REJECTION ON THIS BEAT, AND THAT MEANS THE OBJECT IS WRONG.
+     rev 8  "idk whats even going on with that bigggggg wall of text"   (full IDE)
+     rev 9  same note again                                            (tighter IDE)
+     rev 10 "way too much text animation"                              (two UI cards)
+     Every one of my three answers was A RECTANGLE WITH WORDS IN IT that animates
+     in. I kept tuning the amount of text instead of noticing that he does not want
+     to READ at 7-8s, he wants to WATCH. The reel already carries the real product
+     UI at 2s, 3.5s, 5s and 9s — this beat does not owe it a fourth panel.
+     ⭐ SO: NO UI HERE AT ALL. "Antigravity's AI coding experience" IS the agents,
+     and an agent is a Claude, not a row in a list. Three of them march into your
+     editor and take stations under the VS Code mark. Big sprites, real marks,
+     TWO WORDS on screen. [[feedback_repeated_note_means_wrong_object]]
+     BEATS (scene starts f188):
+       "bring"          f193  the bay doors part, amber floods in from outside
+       "Antigravity's"  f199  ⭐ agent 1 walks in     f206 agent 2     f213 agent 3
+       "AI"             f220  all three are at their stations and start working    */
+  /* ⛔ f10-35 measured dead. Two reasons: agent 2's start x and end x were BOTH
+     506, so it never walked at all — it just faded in on the spot — and the other
+     two only travelled 260px. They now all come OUT OF THE DOORWAY and fan to
+     their stations, growing as they come, so each one is a real traverse with a
+     scale ramp instead of a fade. Re-timed so the last lands at 31 of 36. */
+  const OPEN = 2, ARR = [4, 11, 18], STEP = 14, ALL = 30;
+  const open = E(f, OPEN, OPEN + 11, 0, 1, OUT);
+  const done = E(f, ALL, ALL + 6, 0, 1, BACK);
+  const AGENTS = [
+    { tint: "#D97757", i: 0,  x: 246 },
+    { tint: "#7B8FF7", i: 3,  x: 506 },
+    { tint: "#4EC9B0", i: 12, x: 766 },
   ];
   return (
-    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.06]} vig={0.20}>
-      <BayStage f={f} v={v} crowd={7}>
-      {/* the editor is still THERE — three dim lines behind, so the panel reads as
-          being inside something — but it is context, not content */}
-      <div style={{ position: "absolute", left: CX - 44, top: CY - 34, width: CW + 88, height: CH + 68,
-        zIndex: 56, borderRadius: 14, background: VS.bg, border: `5px solid #0B0D11`, boxShadow: SH_D }} />
-      {[0, 1, 2, 3, 4, 5].map((i) => (
-        <div key={"bl" + i} style={{ position: "absolute", left: CX - 26,
-          top: CY - 12 + ((i * 34 - f * 1.15) % 204),
-          zIndex: 57, ...mono(21, 600), color: hexa(VS.dim, 0.30), whiteSpace: "nowrap" }}>
-          {["const raw = await read(path)", "if (!parsed.version) {", "  throw new Error(...)", "}",
-            "return { ...parsed }", "}"][i]}
-        </div>
+    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.07]} vig={0.20}>
+      <BayStage f={f} v={v} crowd={2}>
+      {/* ⭐ THE MARK, big and lit, so the room is unmistakably VS Code */}
+      {/* ⛔ the mark was 192px floating in an empty cream band and the frame was
+          bottom-heavy: everything happened in the lower third. It is now 300px and
+          the doorway is raised behind it, so the top half carries weight too. */}
+      <RigWall f={f} y={72} rows={1} cols={9} seed={L.seed + 6} z={12} o={0.30} s={0.5} amp={9} c="#C6B48E" />
+      <VscTile x={506 + L.a * 0.4 - 150} y={118 + L.wy} s={300} z={46} />
+      {/* the doors they come through, and the amber that comes with them */}
+      {[-1, 1].map((sd) => (
+        <div key={"dr" + sd} style={{ position: "absolute", zIndex: 34,
+          left: 506 + L.a * 0.4 + sd * (176 + open * 340) - 176, top: 268 + L.wy,
+          width: 352, height: 420, borderRadius: 8, boxShadow: SH_D,
+          background: `linear-gradient(${sd > 0 ? 270 : 90}deg,#33404F 0%,#1A222C 78%)` }} />
       ))}
-      {/* ⭐ THE PANEL — one object, seven words, big enough to read at a glance */}
-      <div style={{ position: "absolute", left: CX, top: CY + kick, width: CW, height: CH, zIndex: 62,
-        borderRadius: 10, background: VS.side, border: `4px solid #0E1116`, boxShadow: SH_D,
-        opacity: inn, transformOrigin: "50% 0%",
-        transform: `translateY(${(1 - inn) * -70}px) scale(${0.94 + inn * 0.06}) rotate(${lean}deg)` }}>
-        <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: 74,
-          borderRadius: "6px 6px 0 0", background: VS.act, display: "flex", alignItems: "center",
-          gap: 14, paddingLeft: 20, borderBottom: `3px solid #0E1116` }}>
-          <div style={{ width: 44, height: 44, borderRadius: 9, overflow: "hidden" }}>
-            <Img src={staticFile("logos/antigravity.png")} style={{ width: 44, height: 44, objectFit: "contain" }} />
-          </div>
-          <span style={{ ...mono(25, 800), color: hexa(BONE, 0.95), letterSpacing: "0.12em" }}>AGENTS</span>
-        </div>
-        {AG.map((g, i) => {
-          const on = E(f, ROWS[i], ROWS[i] + 8, 0, 1, BACK);
-          const busy = i === 0 && f >= 30;
-          const done = f >= ROWS[i] + 16 && !busy;
-          return (
-            <div key={"ag" + i} style={{ position: "absolute", left: 20, top: 100 + i * 116,
-              right: 20, height: 96, borderRadius: 9, opacity: on,
-              transform: `translateX(${(1 - on) * -180}px)`,
-              background: hexa("#FFFFFF", 0.06), border: `3px solid ${hexa(g.c, 0.45)}`,
-              display: "flex", alignItems: "center", gap: 18, paddingLeft: 20 }}>
-              <div style={{ width: 52, height: 52, borderRadius: 11, background: g.c,
-                display: "flex", alignItems: "center", justifyContent: "center", gap: 7 }}>
-                <div style={{ width: 8, height: 8, borderRadius: 2, background: "#0E1016" }} />
-                <div style={{ width: 8, height: 8, borderRadius: 2, background: "#0E1016" }} />
-              </div>
-              <span style={{ ...mono(29, 700), color: hexa(VS.text, 0.96) }}>{g.n}</span>
-              {busy ? (
-                <div style={{ marginLeft: "auto", marginRight: 22, width: 34, height: 34,
-                  borderRadius: "50%", border: `5px solid ${hexa(VS.type, 0.25)}`,
-                  borderTopColor: VS.type, transform: `rotate(${f * 20}deg)` }} />
-              ) : done ? (
-                <span style={{ marginLeft: "auto", marginRight: 24, ...mono(31, 900), color: "#6FCF6F" }}>✓</span>
-              ) : null}
-            </div>
-          );
-        })}
-      </div>
+      <div style={{ position: "absolute", left: 506 + L.a * 0.4 - open * 352, top: 268 + L.wy,
+        width: open * 704, height: 420, zIndex: 30, overflow: "hidden",
+        background: "linear-gradient(180deg,#3A2A12 0%,#8A6524 44%,#E0A64C 100%)" }} />
+      {/* the light it throws into the bay, across everything */}
+      <div style={{ position: "absolute", left: 0, top: 300, width: W, height: 500, zIndex: 31,
+        pointerEvents: "none",
+        background: `radial-gradient(ellipse 54% 60% at 50% 40%, ${hexa("#FFCE78", 0.30 * open)} 0%, transparent 72%)` }} />
+      {/* ⭐ THE AGENTS — they walk IN, and then they WORK. Nothing is a panel. */}
+      {AGENTS.map((g, i) => {
+        const t = E(f, ARR[i], ARR[i] + STEP, 0, 1, IO);
+        const cx0 = 506 + L.a * 0.4;
+        const px = cx0 + (g.x - 506) * t;
+        const py = 470 + (686 - 470) * t - Math.sin(t * Math.PI) * 22;  /* out and down */
+        const gs = (0.42 + 0.58 * t) * (214 - (i % 2) * 12);
+        return (
+          <React.Fragment key={"ag" + i}>
+            {/* the station lamp each one lights when it arrives */}
+            <div style={{ position: "absolute", left: px - 46, top: 594 + L.wy, width: 92, height: 14,
+              zIndex: 44, borderRadius: 7, opacity: t * t,
+              background: hexa(g.tint, 0.9),
+              boxShadow: `0 0 ${26 + done * 30}px ${8 + done * 6}px ${hexa(g.tint, (0.5 + done * 0.4) * t)}` }} />
+            <Crew f={f + i * 11} x={px} y={py} i={g.i} size={Math.round(gs)}
+              z={62 + i} at={ARR[i]} loop={i} tint={g.tint} flip={i === 2}
+              cheer={f >= ALL ? 1 : 0} />
+            <Contact x={px} y={686} w={176 * t} z={26} o={0.34 * t} />
+          </React.Fragment>
+        );
+      })}
+      {/* ⭐ ALL THREE IN: the doorway surges and the bay takes their colour */}
+      <div style={{ position: "absolute", left: 0, top: 220, width: W, height: 560, zIndex: 33,
+        pointerEvents: "none", opacity: done,
+        background: `radial-gradient(ellipse 58% 56% at 50% 46%, ${hexa("#FFD98F", 0.38)} 0%, transparent 74%)` }} />
+      {/* THE HERO DOES: he holds the door and watches them file past him */}
+      <Hero f={f} x={96 + L.a + L.hx * 0.3} y={704} size={226} z={70}
+        act={3} gaze={0.95} stern={0.4} cheer={f > ARR[2] ? 1 : 0} costume={{ constr: 1 }} />
+      <Contact x={96 + L.a} y={704} w={190} z={24} o={0.32} />
       </BayStage>
     </Scene>
   );
@@ -487,70 +486,68 @@ export const SETDOWN: React.FC<SP> = ({ v, dur }) => {
 export const DOCK: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const L = LAY[v];
-  /* ⭐ SHOT 2, same rule: ONE thing. The sentence lands on "into VS Code", and the
-     thing that goes into VS Code is the DIFF — so this is two lines of code, huge,
-     and the error count falling. Ten words on screen instead of sixty.
-     BEATS (starts f224): "coding" f224 the file bar · "experience" f230 the old
-     line is struck · "into" f243 ⭐ the new line drops in · "VS Code." f250 the
-     status bar goes 3 errors -> 0 and the window seats. */
-  const CUT = 6, IN = 19, OK = 26;
-  const drop = E(f, IN, IN + 9, 0, 1, BACK);
-  const seat = f >= OK ? Math.sin((f - OK) * 0.62) * 6 * Math.exp(-(f - OK) / 6) : 0;
-  /* the card takes the cut and the drop, so the object that moves is the editor */
-  const kick = [CUT, IN, OK, 34].reduce((a, at) =>
-    a + (f >= at ? Math.sin((f - at) * 1.1) * 12 * Math.exp(-(f - at) / 4) : 0), 0);
-  const lean = f >= IN ? Math.sin((f - IN) * 0.85) * 1.3 * Math.exp(-(f - IN) / 6) : 0;
-  /* ⭐ and the count falls one at a time rather than switching 3 -> 0 */
-  const probs = f >= OK + 6 ? 0 : f >= OK + 3 ? 1 : f >= OK ? 2 : 3;
-  const CW = 900, CX = 506 + L.a * 0.4 - CW / 2, CY = 214 + L.wy;
+  /* ⭐ SHOT 2, and it stays physical. "AI coding experience INTO VS Code" — so the
+     three agents HAND THE WORK UP into the mark: a plate goes from one to the next
+     and gets seated into the VS Code frame, which then lights.
+     ⛔ Two words of UI on the plate and nothing else. The diff already had its own
+     scene at 8-9s in rev 10 and he called it text animation; the DEPICTION of a fix
+     is a part being fitted, not a listing of the lines that changed.
+     BEATS (starts f224): "coding" f224 they start passing · "experience" f230 the
+     plate is up · "into" f243 ⭐ IT SEATS in the mark · "VS Code." f250 the mark
+     lights and all three throw their arms up.                                     */
+  const P1 = 4, P2 = 11, SEAT = 19, LIT = 26;
+  const MX = 506 + L.a * 0.4, MY = 176 + L.wy;
+  /* the plate's path: agent 1 -> agent 2 -> agent 3 -> up into the mark */
+  const leg = f < P2 ? 0 : f < SEAT ? 1 : 2;
+  const lt = leg === 0 ? E(f, P1, P2, 0, 1, IO) : leg === 1 ? E(f, P2, SEAT, 0, 1, IO) : E(f, SEAT, SEAT + 8, 0, 1, IO);
+  const PATH: Array<[number, number]> = [[246, 560], [506, 520], [766, 560], [MX, MY + 342]];
+  const px = PATH[leg][0] + (PATH[leg + 1][0] - PATH[leg][0]) * lt + (L.a * 0.4);
+  const py = PATH[leg][1] + (PATH[leg + 1][1] - PATH[leg][1]) * lt - Math.sin(lt * Math.PI) * 62;
+  const kick = f >= SEAT + 8 ? Math.sin((f - SEAT - 8) * 1.2) * 12 * Math.exp(-(f - SEAT - 8) / 5) : 0;
+  const lit = E(f, LIT, LIT + 9, 0, 1, OUT);
   return (
-    <Scene p={asPlace(f >= IN ? "bayLit" : "bay")} slug="" push={[0, dur, 1.06]} vig={0.20}>
-      <BayStage f={f} v={v} lit crowd={7}>
-      <div style={{ position: "absolute", left: CX + seat, top: CY + kick, width: CW, height: 396,
-        zIndex: 60, borderRadius: 12, background: VS.bg, border: "5px solid #0B0D11", boxShadow: SH_D,
-        transformOrigin: "50% 100%", transform: `rotate(${lean}deg)` }}>
-        {/* the file bar, so it is unmistakably an editor and not a card */}
-        <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: 62, background: VS.act,
-          display: "flex", alignItems: "center", gap: 12, paddingLeft: 18,
-          borderBottom: `3px solid #0B0D11`, borderRadius: "7px 7px 0 0" }}>
-          <div style={{ width: 15, height: 15, borderRadius: "50%", background: "#E8A33C" }} />
-          <span style={{ ...mono(23, 700), color: hexa(BONE, 0.92) }}>loader.ts</span>
-          <span style={{ marginLeft: "auto", marginRight: 20, ...mono(19, 700),
-            color: probs === 0 ? "#6FCF6F" : "#E08078" }}>{probs} problems</span>
-        </div>
-        {/* ⭐ THE DIFF — two lines, and they are the only text in the frame */}
-        <div style={{ position: "absolute", left: 20, top: 106, right: 20, height: 84, borderRadius: 8,
-          background: hexa("#C05A55", f >= CUT ? 0.20 : 0.08), display: "flex", alignItems: "center",
-          gap: 16, paddingLeft: 20, borderLeft: `7px solid ${hexa("#E08078", 0.9)}` }}>
-          <span style={{ ...mono(34, 900), color: "#E08078" }}>−</span>
-          <span style={{ ...mono(30, 600), color: "#E08078", whiteSpace: "nowrap",
-            textDecoration: f >= CUT ? "line-through" : undefined,
-            opacity: f >= CUT ? 0.72 : 1 }}>const raw = read(p)</span>
-        </div>
-        <div style={{ position: "absolute", left: 20, top: 210, right: 20, height: 84, borderRadius: 8,
-          background: hexa("#4EA24E", 0.22), display: "flex", alignItems: "center",
-          gap: 16, paddingLeft: 20, borderLeft: `7px solid ${hexa("#6FCF6F", 0.95)}`,
-          opacity: drop, transform: `translateY(${(1 - drop) * -104}px)` }}>
-          <span style={{ ...mono(34, 900), color: "#8FD98F" }}>+</span>
-          <span style={{ ...mono(30, 600), color: "#8FD98F", whiteSpace: "nowrap" }}>const raw = await read(path)</span>
-          {f % 16 < 9 && <div style={{ width: 4, height: 38, background: hexa(AGV, 0.95) }} />}
-        </div>
-        <div style={{ position: "absolute", left: 0, bottom: 0, right: 0, height: 46,
-          background: probs === 0 ? "#2C8A46" : VS.status, borderRadius: "0 0 7px 7px",
-          display: "flex", alignItems: "center", paddingLeft: 18, gap: 18 }}>
-          <span style={{ ...mono(18, 700), color: "#FFFFFF" }}>⎇ main</span>
-          <span style={{ ...mono(18, 700), color: hexa("#FFFFFF", 0.94) }}>
-            ⊗ {probs}  ⚠ {Math.max(0, probs - 1)}
-          </span>
-        </div>
+    <Scene p={asPlace(f >= LIT ? "bayLit" : "bay")} slug="" push={[0, dur, 1.07]} vig={0.20}>
+      <BayStage f={f} v={v} lit crowd={2}>
+      {/* the mark, and the socket in it the plate goes into */}
+      <RigWall f={f} y={72} rows={1} cols={9} seed={L.seed + 6} z={12} o={0.30} s={0.5} amp={9} c="#C6B48E" />
+      {/* ⛔ the plate used to seat ON the mark and cover it. The frame is taller
+          now so there is a real SLOT under the mark for it to go into. */}
+      <div style={{ position: "absolute", left: MX - 176, top: MY - 62 + kick, width: 352, height: 470,
+        zIndex: 38, borderRadius: 22, background: hexa("#0E1620", 0.55),
+        border: `6px solid ${lit > 0 ? hexa(GREEN, 0.85 * lit) : "#26313F"}`,
+        boxShadow: lit > 0 ? `0 0 ${46 * lit}px ${14 * lit}px ${hexa(GREEN, 0.45 * lit)}` : SH_D }} />
+      <VscTile x={MX - 150} y={MY - 34 + kick} s={300} z={46} />
+      {/* ⭐ THE PART being handed up the line — two words, and it is an OBJECT */}
+      <div style={{ position: "absolute", left: px - 118, top: py - 37, width: 148, height: 80,
+        zIndex: 74, borderRadius: 10, boxShadow: SH_D,
+        background: `linear-gradient(180deg,${hexa(GREEN, 0.9)} 0%,#2C6B37 100%)`,
+        border: "4px solid #17351F", display: "flex", alignItems: "center", justifyContent: "center",
+        ...mono(27, 900), color: "#0B1A10", letterSpacing: "0.04em",
+        transform: `rotate(${Math.sin(lt * 3.1 + leg) * 13}deg) scale(${f >= SEAT + 8 ? 1 - 0.12 * lit : 1})` }}>
+        FIXED
       </div>
-      {/* the arrival, on the object */}
-      {f >= IN && f < IN + 12 && (
-        <div style={{ position: "absolute", left: 506 - 280, top: CY + 40, width: 560, height: 560,
-          zIndex: 86, borderRadius: "50%", pointerEvents: "none",
-          border: `${6 * (1 - E(f, IN, IN + 12, 0, 1, OUT))}px solid ${hexa(GREEN, 0.55 * (1 - E(f, IN, IN + 12, 0, 1, OUT)))}`,
-          transform: `scale(${0.3 + E(f, IN, IN + 12, 0, 1, OUT) * 0.95})` }} />
+      {/* the seat flash, on the object */}
+      {f >= SEAT + 8 && f < SEAT + 20 && (
+        <div style={{ position: "absolute", left: MX - 230, top: MY - 60, width: 460, height: 460,
+          zIndex: 84, borderRadius: "50%", pointerEvents: "none",
+          border: `${7 * (1 - E(f, SEAT + 8, SEAT + 20, 0, 1, OUT))}px solid ${hexa(GREEN, 0.65 * (1 - E(f, SEAT + 8, SEAT + 20, 0, 1, OUT)))}`,
+          transform: `scale(${0.3 + E(f, SEAT + 8, SEAT + 20, 0, 1, OUT)})` }} />
       )}
+      {/* the three of them, working the line and then cheering the seat */}
+      {[{ t: "#D97757", i: 0, x: 246 }, { t: "#7B8FF7", i: 3, x: 506 }, { t: "#4EC9B0", i: 12, x: 766 }].map((g, i) => (
+        <React.Fragment key={"ag" + i}>
+          <div style={{ position: "absolute", left: MX + (g.x - 506) - 46, top: 594 + L.wy, width: 92, height: 14,
+            zIndex: 44, borderRadius: 7, background: hexa(g.t, 0.9),
+            boxShadow: `0 0 ${26 + lit * 22}px 8px ${hexa(g.t, 0.5)}` }} />
+          <Crew f={f + i * 11} x={MX + (g.x - 506)} y={686 - (leg === i ? 16 : 0)} i={g.i}
+            size={214 - i % 2 * 12} z={62 + i} at={0} loop={i} tint={g.t} flip={i === 2}
+            cheer={f >= LIT ? 1 : 0} />
+          <Contact x={MX + (g.x - 506)} y={686} w={166} z={26} o={0.34} />
+        </React.Fragment>
+      ))}
+      <Hero f={f} x={96 + L.a + L.hx * 0.3} y={704} size={226} z={70}
+        act={3} gaze={0.95} cheer={f >= LIT ? 1 : 0} stern={0.2} costume={{ constr: 1 }} />
+      <Contact x={96 + L.a} y={704} w={190} z={24} o={0.32} />
       </BayStage>
     </Scene>
   );
