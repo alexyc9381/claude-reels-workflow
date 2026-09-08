@@ -3,17 +3,21 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 114 reels with code · 69 factory logs · 72 storyboards · 125 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 115 reels with code · 76 factory logs · 76 storyboards · 125 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
 | 141 | **GRAVITY** | [✓](video/src/ClaudeGravity141Reel.tsx) | [1](video/src/data/words_gravity141.json) | [✓](memory/reels/gravity141-factory-log.md) | [✓](storyboards/141-gravity.md) | built |
+| 140 | **INTENT** | [✓](video/src/ClaudeIntent140Reel.tsx) | [1](video/src/data/words_intent140.json) | [✓](memory/reels/intent140-factory-log.md) | [✓](storyboards/140-intent.md) | built |
 | 137 | **REPOS** | [✓](video/src/ClaudeRepos137Reel.tsx) | [2](video/src/data/words_repos137.json) | [✓](memory/reels/repos137-factory-log.md) | [✓](storyboards/137-repos.md) | built |
 | 136 | **ADHD** | [✓](video/src/ClaudeAdhd136Reel.tsx) | [1](video/src/data/words_adhd136.json) | [✓](memory/reels/adhd-factory-log.md) | [✓](storyboards/136-adhd.md) | built |
+| 135 | **AGENCY** | [✓](video/src/ClaudeAgency135Reel.tsx) | · | [✓](memory/reels/agency135-factory-log.md) | [✓](storyboards/135-agency.md) | built |
+| 134 | **AGENTS** | [✓](video/src/ClaudeAgents134Reel.tsx) | [1](video/src/data/words_134agents.json) | [✓](memory/reels/agents-factory-log.md) | [✓](storyboards/134-agents.md) | built |
 | 133 | **BUILD** | [✓](video/src/ClaudeBuild133Reel.tsx) | [1](video/src/data/words_133build.json) | [✓](memory/reels/build-factory-log.md) | [✓](storyboards/133-build.md) | built |
 | 132 | **JUDGE** | [✓](video/src/ClaudeJudge132Reel.tsx) | [1](video/src/data/words_judge132.json) | [✓](memory/reels/judge-factory-log.md) | [✓](storyboards/132-judge.md) | built |
 | 131 | **FREE** | [✓](video/src/ClaudeFree131Reel.tsx) | [1](video/src/data/words_free131.json) | [✓](memory/reels/free131-factory-log.md) | [✓](storyboards/131-free.md) | built |
 | 124 | **WEB** | [✓](video/src/ClaudeWebReel.tsx) | [1](video/src/data/words_web.json) | [✓](memory/reels/web-factory-log.md) | [✓](storyboards/124-web.md) | built |
+| 123 | **ROUTE** | [✓](video/src/ClaudeRouteReel.tsx) | [1](video/src/data/words_route.json) | [✓](memory/reels/route-factory-log.md) | [✓](storyboards/123-route.md) | built |
 | 122 | **HARDWARE** | [✓](video/src/ClaudeHardwareReel.tsx) | [1](video/src/data/words_122hardware.json) | · | [✓](storyboards/122-hardware.md) | code, no log |
 | 121 | **MISTAKE** | [✓](video/src/ClaudeMistakeReel.tsx) | [1](video/src/data/words_121mistake.json) | [✓](memory/reels/mistake121-factory-log.md) | [✓](storyboards/121-mistake.md) | built |
 | 120 | **UNLAZY** | [✓](video/src/ClaudeUnlazyReel.tsx) | [1](video/src/data/words_120unlazy.json) | [✓](memory/reels/unlazy-factory-log.md) | [✓](storyboards/120-unlazy.md) | built |
@@ -36,13 +40,13 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | 103 | **TRADE** | [✓](video/src/ClaudeTradeReel.tsx) | · | · | [✓](storyboards/103-trade.md) | code, no log |
 | 102 | **SEO** | [✓](video/src/ClaudeSeoReel.tsx) | [1](video/src/data/words_seo.json) | [✓](memory/reels/seo-factory-log.md) | [✓](storyboards/102-seo.md) | built |
 | 101 | **COMPRESS** | [✓](video/src/ClaudeCompressReel.tsx) | [1](video/src/data/words_compress.json) | · | [✓](storyboards/101-compress.md) | code, no log |
-| 100 | **APPLE** | [✓](video/src/ClaudeAppleReel.tsx) | [1](video/src/data/words_apple.json) | · | [✓](storyboards/100-apple.md) | code, no log |
+| 100 | **APPLE** | [✓](video/src/ClaudeAppleReel.tsx) | [1](video/src/data/words_apple.json) | [✓](memory/reels/apple-factory-log.md) | [✓](storyboards/100-apple.md) | built |
 | 99 | **REPO** | [✓](video/src/ClaudeRepoReel.tsx) | [3](video/src/data/words_repo.json) | [✓](memory/reels/repo-factory-log.md) | [✓](storyboards/99-repo.md) | built |
 | 98 | **NOMAD** | [✓](video/src/ClaudeNomadReel.tsx) | [1](video/src/data/words_nomad.json) | · | [✓](storyboards/98-nomad.md) | code, no log |
 | 97 | **FREE** | [✓](video/src/ClaudeFreeReel.tsx) | [2](video/src/data/words_free.json) | · | [✓](storyboards/97-free.md) | code, no log |
 | 96 | **AWESOME** | [✓](video/src/ClaudeAwesomeReel.tsx) | [1](video/src/data/words_awesome.json) | · | [✓](storyboards/96-awesome.md) | code, no log |
 | 95 | **TOOLS** | [✓](video/src/ClaudeToolsReel.tsx) | [1](video/src/data/words_tools.json) | · | [✓](storyboards/95-tools.md) | code, no log |
-| 94 | **AGENCY** | [✓](video/src/ClaudeAgencyReel.tsx) | [2](video/src/data/words_135agency.json) | · | [✓](storyboards/94-agency.md) | code, no log |
+| 94 | **AGENCY** | [✓](video/src/ClaudeAgencyReel.tsx) | [2](video/src/data/words_135agency.json) | [✓](memory/reels/agency-factory-log.md) | [✓](storyboards/94-agency.md) | built |
 | 93 | **VIDEO** | [✓](video/src/ClaudeVideoReel.tsx) | [1](video/src/data/words_video.json) | · | [✓](storyboards/93-video.md) | code, no log |
 | 92 | **JOBS** | [✓](video/src/ClaudeJobsReel.tsx) | [1](video/src/data/words_jobs.json) | · | [✓](storyboards/92-jobs.md) | code, no log |
 | 89 | **AI** | [✓](video/src/ClaudeAiReel.tsx) | [2](video/src/data/words_ai.json) | · | [✓](storyboards/89-ai.md) | code, no log |
@@ -80,9 +84,6 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | 45 | **EVOLVE** | · | · | [✓](memory/reels/evolve-factory-log.md) | [✓](storyboards/45-evolve.md) | log-only *(code in Drive / sibling project)* |
 | 41 | **SLASH** | [✓](video/src/ClaudeSlashReel.tsx) | [1](video/src/data/words_slash.json) | [✓](memory/reels/slash-factory-log.md) | [✓](storyboards/41-slash.md) | built |
 | · | **ADS** | [✓](video/src/ClaudeAdsReel.tsx) | [2](video/src/data/words_ads.json) | · | · | code, no log |
-| · | **AGENCY135** | [✓](video/src/ClaudeAgency135Reel.tsx) | · | · | · | code, no log |
-| · | **AGENTS** | · | [1](video/src/data/words_134agents.json) | [✓](memory/reels/agents-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
-| · | **AGENTS134** | [✓](video/src/ClaudeAgents134Reel.tsx) | · | · | · | code, no log |
 | · | **ARCADE** | · | · | [✓](memory/reels/arcade-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **ARENA** | [✓](video/src/ClaudeArenaReel.tsx) | [1](video/src/data/words_arena.json) | · | · | code, no log |
 | · | **ARMY** | · | · | [✓](memory/reels/army-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
@@ -103,6 +104,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **CONTENT** | [✓](video/src/ClaudeContentReel.tsx) | [1](video/src/data/words_content.json) | · | · | code, no log |
 | · | **CONTROL** | [✓](video/src/ClaudeControlReel.tsx) | [1](video/src/data/words_control.json) | · | · | code, no log |
 | · | **COUNCIL** | [✓](video/src/ClaudeCouncilReel.tsx) | [1](video/src/data/words_council.json) | [✓](memory/reels/council-factory-log.md) | · | built |
+| · | **COURSE** | · | · | [✓](memory/reels/course-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **COURT** | · | · | [✓](memory/reels/court-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **CREW** | [✓](video/src/ClaudeCrewReel.tsx) | [1](video/src/data/words_crew.json) | · | · | code, no log |
 | · | **DEALS** | · | · | [✓](memory/reels/deals-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
@@ -127,11 +129,11 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **HAALAND** | [✓](video/src/ClaudeHaalandReel.tsx) | [1](video/src/data/words_haaland.json) | · | · | code, no log |
 | · | **HIRED** | · | · | [✓](memory/reels/hired-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **IMPRINT** | · | · | [✓](memory/reels/imprint-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
-| · | **INTENT140** | [✓](video/src/ClaudeIntent140Reel.tsx) | [1](video/src/data/words_intent140.json) | · | · | code, no log |
 | · | **JARVIS** | [✓](video/src/ClaudeJarvisReel.tsx) | [2](video/src/data/duck_jarvis1.json) | [✓](memory/reels/jarvis-factory-log.md) | · | built |
 | · | **LEADS** | [✓](video/src/ClaudeLeadsReel.tsx) | [1](video/src/data/words_leads.json) | · | · | code, no log |
 | · | **LEAN** | · | · | [✓](memory/reels/lean-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **LISTICLE** | [✓](video/src/ClaudeListicleReel.tsx) | [1](video/src/data/words_listicle.json) | · | · | code, no log |
+| · | **LOCAL** | · | · | [✓](memory/reels/local-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **LOOPS** | [✓](video/src/ClaudeLoopsReel.tsx) | [2](video/src/data/words_loops.json) | · | · | code, no log |
 | · | **LOOPSREAL** | [✓](video/src/ClaudeLoopsRealReel.tsx) | · | · | · | code, no log |
 | · | **LOT** | [✓](video/src/ClaudeLotReel.tsx) | [1](video/src/data/words_autopilot.json) | · | · | code, no log |
@@ -152,7 +154,7 @@ Every reel unioned across its three scattered homes (code / factory log / storyb
 | · | **RENT** | · | · | [✓](memory/reels/rent-factory-log.md) | · | log-only *(code in Drive / sibling project)* |
 | · | **RETIRE** | [✓](video/src/ClaudeRetireReel.tsx) | [1](video/src/data/words_retire.json) | [✓](memory/reels/retire-factory-log.md) | · | built |
 | · | **ROAST** | [✓](video/src/ClaudeRoastReel.tsx) | [1](video/src/data/words_roast.json) | · | · | code, no log |
-| · | **ROUTE** | [✓](video/src/ClaudeRouteReel.tsx) | [1](video/src/data/words_route.json) | · | · | code, no log |
+| · | **ROUTE123** | [✓](video/src/ClaudeRoute123Reel.tsx) | · | · | · | code, no log |
 | · | **ROWBOAT** | [✓](video/src/ClaudeRowboatReel.tsx) | [2](video/src/data/words_rowboat.json) | · | · | code, no log |
 | · | **SHARP** | [✓](video/src/ClaudeSharpReel.tsx) | [1](video/src/data/words_sharp.json) | · | · | code, no log |
 | · | **SITE** | [✓](video/src/ClaudeSiteReel.tsx) | [1](video/src/data/words_site.json) | · | · | code, no log |

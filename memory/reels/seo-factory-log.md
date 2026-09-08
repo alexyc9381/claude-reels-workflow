@@ -375,5 +375,90 @@ the gate stays red for the wrong reason.
 answer: **one object TRANSFORMS, it is not replaced.** agents/ punches in,
 annotates, then the SAME window re-crops to skills/ — one image throughout.
 
-## NEXT: annotation kit (arrive → punch → mark), Roster to one window, options pass.
+## STAGE 6 — HOOK, 8 ROUNDS. THE CLUTTER WAS THE SCREENSHOT.
+
+Options pass run (18 draft stills, one bundle, 29s), then 6 animated hook
+candidates, then 4 frame-0 concepts per `docs/THE-OPEN.md`. Alex picked **C1 the
+drop** — Claude abseiling a real page — and the remaining work was making it hit
+the approved numbers.
+
+### ⛔⛔ `hero_share.py` SETTLED "TOO CLUTTERED" IN ONE RUN
+| | hero | blobs |
+|---|---|---|
+| `hook_A_final` — APPROVED | 97.1% | **2** |
+| real dense site @940px | 69.8% | 9 |
+| punched to 1180 + brackets deleted | 72.4% | **18** ← worse |
+| + spotlight scrim | 45.7% | 17 |
+| **simple white page authored in HTML, 610px slab** | **90.5%** | **2** |
+
+Deleting elements made it WORSE, which is MEASURING.md's signal that the model is
+wrong. **A real marketing page is inherently 20+ disconnected elements**; punching
+in makes each bigger, not fewer. Full detail: [[real-page-is-the-clutter]].
+
+### Other things this stage cost, all now written down
+- ⛔ **law 103 bit THREE times in one hook** — the page column, C1's sprite through
+  the headline (`SEO … DE`), C4's top tile row at y=400. Now arithmetic:
+  `floorFor(size) = TOP + size*0.92`, plus a pixel gate on the header block.
+- ⛔ **"glitchy sprite" was the WALK CYCLE**, not the frame rate — `Mascot` hops,
+  squashes and pumps its legs while hanging, and `crispEdges` shimmers at
+  fractional positions. [[mascot-walk-cycle-in-midair]].
+- ⛔ **scroll ceiling ~26 px/frame** at 30fps. Peaked at 67.9. Written as a
+  module-level `throw`, it then caught my own retry at 27.3. Final 9.1.
+- ⛔ **IG danger zone** — the page spanned x -64..1116 on a 1080 frame. Contained
+  at 330..940, sprite beside it at 85..295.
+- ⛔ `kit/Satellites` lands at y≈122, **inside the header block** — band-local
+  replacement needed; do not edit the kit, every shipped reel is calibrated on it.
+- ⛔ `kit/Wedges` mounts its own 1080x1920 viewBox and squashes inside the band.
+- ⛔ A `scale(k, 1)` "pull-back" SQUASHES rather than recedes. A camera move is a
+  similarity transform.
+- ⚠️ ffmpeg is NOT on PATH on this machine. Only Remotion's, and it needs
+  `DYLD_LIBRARY_PATH=node_modules/@remotion/compositor-darwin-arm64`. Its build
+  also lacks the `pad` filter — use PIL for contact sheets.
+- ⚠️ `pub6/` is now 1.9GB and is copied on every render.
+
+### Assets added
+`pub6/seo14/14-site-tall.png` (rankenstein.pro 1280x4200, dark) ·
+`pub6/seo14/14-white-site.png` (**authored** simple page, 760x2600, the one in use)
+
+## STAGE 7 — SHIPPED. Delivered 2026-08-08 to
+`gdst:"Claude Reels/Face/*Videos/14 - SEO/"` — `14 - SEO.mp4` (31,782,614 B),
+`caption.txt` (1,868 B), `SEO - The Free SEO Agency Setup.docx` (13,028 B).
+All three cloud-verified non-zero (⛔ the desktop mount writes 0-byte files).
+
+Final render `out/14-SEO-v19.mp4`, 24.51s, 734 frames. 19 versions.
+
+### The lessons this stage actually produced
+- ⛔⛔ **A LOW-RES SOURCE CANNOT BE SHARPENED BY CROPPING HARDER.** `probe_a6.png`
+  is 820px wide; a 290px slice shown at 620 is a **2.14x UPSCALE**. Alex called
+  it blurry twice and my "zoom in more" pass punched *further* into the same
+  small source, making it worse. Fix: re-capture at
+  `--force-device-scale-factor=2` (2800x3200) so the region is WIDER than its
+  display width. **The rule: source region >= display width, or it cannot be
+  sharp.** ⭐ Only `probe_a6` was low-res; every GitHub capture is 1360 and safe.
+- ⛔⛔ **THREE SILENT NO-MATCHES on `Seo.tsx` and one on `bodies14.tsx`.** A
+  multi-line string replace that does not match is a NO-OP that reports success:
+  the headers render came back with the old text still in it, and `Guide`'s ring
+  was drawn 228px off its target for a full render. Switched to line-range edits
+  with assertions on the boundary lines.
+- ⛔ **A GATE AT ITS OWN RESOLUTION IS NOISE.** The VO drift check at 10ms hops
+  reported "+1 hop = SHIFTED, breaks lip sync". At 2ms hops with sub-hop
+  interpolation: **0.016 frames**. Same shape as the safe-zone gate reporting the
+  entire 60px strip as bleeding (it was the chassis vignette).
+- ⛔ **EVERY EDL SEAM NEEDS A PICTURE CUT ON IT.** Seam at frame 672 sat 21
+  frames from the nearest cut = the "I turn away at 22 seconds" note.
+- ⛔ **`trim` MUST DERIVE FROM `from`, NOT FROM `s.at`.** The head trim clamped
+  shot 0's `from` to 0 and left its `trim` at 0, putting shot 0 alone NINE FRAMES
+  out of lip sync.
+- ⭐ The enhanced VO needed LESS gain but landed QUIETER: de-reverb raised the
+  crest factor 20.8 -> 21.4 dB, so at the same peak ceiling it sits lower in RMS.
+- ⛔ Headers can pass law 136 AND law 114 and still say nothing. "43 AT ONCE" is
+  a quantity with no unit of value. The test is: can a viewer ACT on it, CHECK
+  it, or REPEAT it.
+
+## STILL OPEN
+⛔ Alex has never ruled on **"and it fixes your actual website for you"** (11.0s).
+The repo's README says verbatim *"Claude SEO does not edit or write to the user's
+website, all analysis is local and diagnostic only."* The picture asserts no
+mechanism (the squeegee wipe) and the lead-magnet doc ships the correction in a
+green callout, but the LINE is still as recorded ([[recording-beats-script]]).
 

@@ -1,0 +1,10 @@
+{
+  "_source": "github.com/enescingoz/awesome-n8n-templates — verified against the GitHub API + the full 374-file tree (storyboards/85-auto.md)",
+  "_regenerate": "⛔ re-pull these on the DAY you record. They drift fast: 24,302 stars / 280 workflows / 18 categories (Jul 31) became 24,983 / 350 / 19 by Aug 29.",
+  "verified": { "stars": "24302", "workflows": "280", "categories": "18" },
+  "entities": ["github","gmail","slack","whatsapp","notion","telegram","discord","airtable","openai","wordpress","drive","sheets","instagram","youtube","reddit","auto","n8n"],
+  "allow_numbers": ["24000"],
+  "_allow_numbers_why": "'over 24,000 stars' is a deliberate round-DOWN of 24,302 — true as stated. ⛔ Never acknowledge a round-UP: v2 said 30,000 against a real 24,983.",
+  "acknowledged_entities": [],
+  "_acknowledged_why": "⛔ 'Stripe' is deliberately NOT acknowledged. It is in zero files and zero README lines. v1 hid it in the build (the graphic cuts away on the word) and left the script alone, so the v2 re-read said it again. Fix the SCRIPT."
+}

@@ -1,0 +1,11 @@
+Most people don't realize they're building AI skills completely wrong.
+They stuff their prompts with so much information that the AI breaks down, or they waste hours searching GitHub for outdated templates.
+There's a much better way to do this.
+Now don't shove all your notes into the AI, it just gets confused.
+Instead build a context compass.
+This is one main document that points Claude right to your best ideas.
+When you ask the AI to outline a new YouTube video it reads your context compass first
+and it pulls the exact research you need and gives you a clear summary.
+You can add new notes anytime without breaking the system.
+Claude will even write your final script and save it directly for you.
+Comment route for the free guide.

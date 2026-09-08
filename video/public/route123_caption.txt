@@ -1,0 +1,49 @@
+Comment "ROUTE" and I'll send you the Context Compass template, the exact file plus the two prompts that make Claude read it first, free. (Follow so the DM lands 📩)
+
+👇 READ BELOW
+
+Most people paste their whole pile of notes into the chat and then wonder why the answers got worse.
+
+A longer prompt is not more context. Past a point the model has more to read and no signal about which part matters, so everything you paste competes with everything else you paste.
+
+The fix is not a shorter prompt. It is a different shape.
+
+Keep the notes where they are and hand over an address instead of the contents.
+
+★ One markdown file at the root of the project. Call it COMPASS.md
+
+★ It contains no notes. It contains pointers to notes
+
+★ One line per file: what it is, when to reach for it, where it lives
+
+★ If it grows past one page you have two projects, not one compass
+
+Then you tell Claude to read that file before it reads anything else, and it opens two or three files instead of two hundred.
+
+Here is the part almost everyone gets wrong.
+
+Most people write an index of what each file is. That is a filing system, and the model still has to guess.
+
+Write an index of when to use each file. "Titles that convert" is a label. "Use for hooks and titles, not for scripting" is a routing instruction, and that clause is the whole difference.
+
+One more clause worth stealing: make it tell you which files it opened and why, before it answers.
+
+You will watch it reach for the wrong file, and you will see exactly which line in your compass sent it there. That is how the index gets good.
+
+And adding a note is adding a line. Write the file, add one line with its "use for" clause, touch nothing else. A system where adding a note means rewriting a prompt is a system you stop using in a fortnight.
+
+Two honest limits, because they matter.
+
+Nothing here updates itself. You add the line. That is the trade for it never surprising you.
+
+And this routes, it does not summarise. If one note is fifty pages, the compass will send Claude into fifty pages. Split it first.
+
+Save this one, then go and write the file. It takes about ten minutes and it is the highest leverage ten minutes in the whole setup.
+
+Comment "ROUTE" and I'll send you the template and both prompts.
+
+.
+.
+.
+
+#claudeai #claudecode #anthropic #aiworkflow #promptengineering #contextengineering #secondbrain #notetaking #obsidian #notion #markdown #buildinpublic #aitools #contentcreation #youtubetips #creatorworkflow #aiforcreators #productivity #knowledgemanagement #writingworkflow

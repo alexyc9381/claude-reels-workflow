@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 114,
-    "reels_total": 158,
-    "factory_logs": 69,
-    "storyboards": 72,
+    "reels_with_code": 115,
+    "reels_total": 160,
+    "factory_logs": 76,
+    "storyboards": 76,
     "caption_jsons": 125,
-    "memory_md": 228,
+    "memory_md": 237,
     "creators": 8,
     "packs": 3
   },
@@ -21,24 +21,6 @@
         "video/src/data/words_ads.json",
         "video/src/data/words_leads.json"
       ]
-    },
-    {
-      "key": "agency135",
-      "name": "Agency135",
-      "number": null,
-      "code": "video/src/ClaudeAgency135Reel.tsx",
-      "log": null,
-      "storyboard": null,
-      "captions": []
-    },
-    {
-      "key": "agents134",
-      "name": "Agents134",
-      "number": null,
-      "code": "video/src/ClaudeAgents134Reel.tsx",
-      "log": null,
-      "storyboard": null,
-      "captions": []
     },
     {
       "key": "arena",
@@ -266,17 +248,6 @@
       ]
     },
     {
-      "key": "intent140",
-      "name": "Intent140",
-      "number": null,
-      "code": "video/src/ClaudeIntent140Reel.tsx",
-      "log": null,
-      "storyboard": null,
-      "captions": [
-        "video/src/data/words_intent140.json"
-      ]
-    },
-    {
       "key": "leads",
       "name": "Leads",
       "number": null,
@@ -450,15 +421,13 @@
       ]
     },
     {
-      "key": "route",
-      "name": "Route",
+      "key": "route123",
+      "name": "Route123",
       "number": null,
-      "code": "video/src/ClaudeRouteReel.tsx",
+      "code": "video/src/ClaudeRoute123Reel.tsx",
       "log": null,
       "storyboard": null,
-      "captions": [
-        "video/src/data/words_route.json"
-      ]
+      "captions": []
     },
     {
       "key": "rowboat",
@@ -672,17 +641,6 @@
       ]
     },
     {
-      "key": "agents",
-      "name": "agents",
-      "number": null,
-      "code": null,
-      "log": "memory/reels/agents-factory-log.md",
-      "storyboard": null,
-      "captions": [
-        "video/src/data/words_134agents.json"
-      ]
-    },
-    {
       "key": "arcade",
       "name": "arcade",
       "number": null,
@@ -762,6 +720,15 @@
       "captions": [
         "video/src/data/words_council.json"
       ]
+    },
+    {
+      "key": "course",
+      "name": "course",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/course-factory-log.md",
+      "storyboard": null,
+      "captions": []
     },
     {
       "key": "court",
@@ -920,6 +887,15 @@
       "number": null,
       "code": null,
       "log": "memory/reels/lean-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
+    {
+      "key": "local",
+      "name": "local",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/local-factory-log.md",
       "storyboard": null,
       "captions": []
     },
@@ -1401,7 +1377,7 @@
       "name": "agency",
       "number": 94,
       "code": "video/src/ClaudeAgencyReel.tsx",
-      "log": null,
+      "log": "memory/reels/agency-factory-log.md",
       "storyboard": "storyboards/94-agency.md",
       "captions": [
         "video/src/data/words_135agency.json",
@@ -1471,7 +1447,7 @@
       "name": "apple",
       "number": 100,
       "code": "video/src/ClaudeAppleReel.tsx",
-      "log": null,
+      "log": "memory/reels/apple-factory-log.md",
       "storyboard": "storyboards/100-apple.md",
       "captions": [
         "video/src/data/words_apple.json"
@@ -1718,6 +1694,17 @@
       ]
     },
     {
+      "key": "route",
+      "name": "route",
+      "number": 123,
+      "code": "video/src/ClaudeRouteReel.tsx",
+      "log": "memory/reels/route-factory-log.md",
+      "storyboard": "storyboards/123-route.md",
+      "captions": [
+        "video/src/data/words_route.json"
+      ]
+    },
+    {
       "key": "web",
       "name": "web",
       "number": 124,
@@ -1762,6 +1749,26 @@
       ]
     },
     {
+      "key": "agents",
+      "name": "agents",
+      "number": 134,
+      "code": "video/src/ClaudeAgents134Reel.tsx",
+      "log": "memory/reels/agents-factory-log.md",
+      "storyboard": "storyboards/134-agents.md",
+      "captions": [
+        "video/src/data/words_134agents.json"
+      ]
+    },
+    {
+      "key": "agency135",
+      "name": "agency",
+      "number": 135,
+      "code": "video/src/ClaudeAgency135Reel.tsx",
+      "log": "memory/reels/agency135-factory-log.md",
+      "storyboard": "storyboards/135-agency.md",
+      "captions": []
+    },
+    {
       "key": "adhd",
       "name": "adhd",
       "number": 136,
@@ -1782,6 +1789,17 @@
       "captions": [
         "video/src/data/words_repos137.json",
         "video/src/data/words_repos137.pre-fix.json"
+      ]
+    },
+    {
+      "key": "intent140",
+      "name": "intent",
+      "number": 140,
+      "code": "video/src/ClaudeIntent140Reel.tsx",
+      "log": "memory/reels/intent140-factory-log.md",
+      "storyboard": "storyboards/140-intent.md",
+      "captions": [
+        "video/src/data/words_intent140.json"
       ]
     },
     {
