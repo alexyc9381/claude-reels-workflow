@@ -424,91 +424,161 @@ export const MOVE: React.FC<SP> = ({ v, dur }) => {
    travel (the tilt) · arrival (three cables snap taut f16/f22/f28).
    ACCUMULATOR: the cables, one after another.
    ====================================================================== */
+/* =========================================================================
+   ⭐⭐ THE WORKS — Antigravity's machine hall, and the only INTERIOR in the reel.
+   ⛔⛔⛔ FOURTH REJECTION OF 6-10s: *"needs to be redone to be more interesting
+   concepts here, right now its literally just way too basic and boring just simple
+   shapes."* My four previous answers were a full IDE, a cropped IDE, two UI cards,
+   and three sprites walking in — and what every one of them SHARED was not text or
+   sprites: it was THE SHOT. All four were a locked wide shot of one object in the
+   middle of the bay, which is also every other shot in this reel. Making the object
+   nicer could never fix that.
+   ⭐ So 6-10s is now the reel's one TRAVELLING shot: the camera flies THROUGH the
+   VS Code door into these works, watches the thing get built, and pulls back out
+   through the door onto the changed editor. A journey, with a beginning and an end,
+   and machinery with actual mechanism in it rather than slabs.
+   ====================================================================== */
+const Works: React.FC<{ f: number; run: number; z?: number; dy?: number; seed?: number; k?: number }> =
+  ({ f, run, z = 20, dy = 0, seed = 0, k = 1 }) => (
+  <>
+    {/* the hall itself: amber, deep, with a lit ceiling run */}
+    <div style={{ position: "absolute", left: -120, top: -80 + dy, width: W + 240, height: H,
+      zIndex: z, background: `linear-gradient(180deg,#4A3312 0%,#8A6524 ${36 + dy * 0.10}%,#C08A34 ${70 + dy * 0.10}%,#5E441B 100%)` }} />
+    {/* ceiling lamps running away from camera — the depth cue */}
+    {[0, 1, 2, 3, 4].map((i) => (
+      <div key={"cl" + i} style={{ position: "absolute", zIndex: z + 1,
+        left: 506 + seed * 9 - (210 - i * 40) * k, top: 40 + dy * 0.5 + i * (34 * k),
+        width: (210 - i * 40) * 2 * k, height: 12 - i * 1.6,
+        borderRadius: 6, background: hexa("#FFE9BC", 0.9 - i * 0.14),
+        boxShadow: `0 0 ${30 - i * 4}px ${9 - i}px ${hexa("#FFC96B", 0.5 - i * 0.08)}` }} />
+    ))}
+    {/* ⭐ GEARS — real teeth, meshed, turning against each other */}
+    {[{ x: 168 + seed * 14, y: 250 + dy * 0.7, r: 96 * k, d: 1 }, { x: 316 - seed * 10, y: 302 + dy * 0.5, r: 62 * k, d: -1 },
+      { x: 858 - seed * 16, y: 236 + dy * 0.8, r: 108 * k, d: -1 }, { x: 706 + seed * 12, y: 300 + dy * 0.4, r: 66 * k, d: 1 }].map((g, k2) => (
+      <div key={"gr" + k2} style={{ position: "absolute", left: g.x - g.r, top: g.y - g.r,
+        width: g.r * 2, height: g.r * 2, zIndex: z + 4,
+        transform: `rotate(${f * 2.4 * g.d * (96 / g.r)}deg)` }}>
+        <div style={{ position: "absolute", inset: g.r * 0.22, borderRadius: "50%",
+          background: `radial-gradient(circle at 34% 30%, #8A7048 0%, #4A3A22 70%, #2A2012 100%)`,
+          border: `${Math.max(3, g.r * 0.06)}px solid #6B5530` }} />
+        {Array.from({ length: 12 }, (_, t) => (
+          <div key={t} style={{ position: "absolute", left: "50%", top: 0,
+            width: g.r * 0.20, height: g.r * 0.30, marginLeft: -g.r * 0.10, borderRadius: 3,
+            background: "linear-gradient(180deg,#9A7C4E 0%,#5A4728 100%)",
+            transformOrigin: `50% ${g.r}px`, transform: `rotate(${t * 30}deg)` }} />
+        ))}
+        <div style={{ position: "absolute", left: "50%", top: "50%", width: g.r * 0.24, height: g.r * 0.24,
+          marginLeft: -g.r * 0.12, marginTop: -g.r * 0.12, borderRadius: "50%", background: "#241A0E" }} />
+      </div>
+    ))}
+    {/* ⭐ PISTONS — they stroke, out of phase, against a header rail */}
+    <div style={{ position: "absolute", left: 120, top: 402 + dy, width: 772, height: 20, zIndex: z + 3,
+      borderRadius: 10, background: "linear-gradient(180deg,#8A7048 0%,#3E301A 100%)" }} />
+    {[0, 1, 2, 3, 4].map((i) => {
+      const st = (Math.sin(f * 0.34 - i * 1.1) + 1) / 2;
+      return (
+        <React.Fragment key={"pi" + i}>
+          <div style={{ position: "absolute", left: 176 + seed * 8 + i * 152, top: 422 + dy, width: 22,
+            height: 46 + st * 62, zIndex: z + 3, borderRadius: 5,
+            background: "linear-gradient(90deg,#D8C79A 0%,#8A7048 60%,#4A3A22 100%)" }} />
+          <div style={{ position: "absolute", left: 158 + seed * 8 + i * 152, top: 468 + dy + st * 62, width: 58, height: 30,
+            zIndex: z + 4, borderRadius: 6, background: "linear-gradient(180deg,#9A7C4E 0%,#4A3A22 100%)" }} />
+        </React.Fragment>
+      );
+    })}
+    {/* ⭐ THE LINE — a belt with parts riding it, always running */}
+    <div style={{ position: "absolute", left: -40, top: 566 + dy * 1.6, width: W + 80, height: 44, zIndex: z + 5,
+      background: "linear-gradient(180deg,#3A2E18 0%,#241B0C 100%)",
+      borderTop: "4px solid #6B5530", borderBottom: "4px solid #1A1409" }} />
+    {Array.from({ length: 14 }, (_, i) => (
+      <div key={"bt" + i} style={{ position: "absolute", zIndex: z + 6,
+        left: ((i * 84 + f * 4.4 * run) % (W + 120)) - 60, top: 572 + dy * 1.6,
+        width: 26, height: 32, borderRadius: 4,
+        background: i % 3 === 0 ? hexa(AGV, 0.92) : "linear-gradient(180deg,#7A6238 0%,#3A2E18 100%)" }} />
+    ))}
+    {/* pipes overhead, with pressure lights that run along them */}
+    {[0, 1].map((i) => (
+      <React.Fragment key={"pp" + i}>
+        <div style={{ position: "absolute", left: -20, top: 150 + dy * 0.6 + i * 44, width: W + 40, height: 16,
+          zIndex: z + 2, borderRadius: 8, background: "linear-gradient(180deg,#7A6238 0%,#3A2E18 100%)" }} />
+        {Array.from({ length: 7 }, (_, k) => (
+          <div key={k} style={{ position: "absolute", zIndex: z + 3,
+            left: ((k * 160 + f * (7 + i * 3) * run) % (W + 80)) - 40, top: 153 + dy * 0.6 + i * 44,
+            width: 20, height: 10, borderRadius: 5, background: hexa("#FFD98F", 0.85) }} />
+        ))}
+      </React.Fragment>
+    ))}
+  </>
+);
+
 export const SETDOWN: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const L = LAY[v];
-  /* ⛔⛔⛔ THIRD REJECTION ON THIS BEAT, AND THAT MEANS THE OBJECT IS WRONG.
-     rev 8  "idk whats even going on with that bigggggg wall of text"   (full IDE)
-     rev 9  same note again                                            (tighter IDE)
-     rev 10 "way too much text animation"                              (two UI cards)
-     Every one of my three answers was A RECTANGLE WITH WORDS IN IT that animates
-     in. I kept tuning the amount of text instead of noticing that he does not want
-     to READ at 7-8s, he wants to WATCH. The reel already carries the real product
-     UI at 2s, 3.5s, 5s and 9s — this beat does not owe it a fourth panel.
-     ⭐ SO: NO UI HERE AT ALL. "Antigravity's AI coding experience" IS the agents,
-     and an agent is a Claude, not a row in a list. Three of them march into your
-     editor and take stations under the VS Code mark. Big sprites, real marks,
-     TWO WORDS on screen. [[feedback_repeated_note_means_wrong_object]]
+  /* ⭐⭐ THE FLY-THROUGH. See the note on `Works` above for why the previous four
+     versions all failed the same way. This is the reel's one travelling shot.
      BEATS (scene starts f188):
-       "bring"          f193  the bay doors part, amber floods in from outside
-       "Antigravity's"  f199  ⭐ agent 1 walks in     f206 agent 2     f213 agent 3
-       "AI"             f220  all three are at their stations and start working    */
-  /* ⛔ f10-35 measured dead. Two reasons: agent 2's start x and end x were BOTH
-     506, so it never walked at all — it just faded in on the spot — and the other
-     two only travelled 260px. They now all come OUT OF THE DOORWAY and fan to
-     their stations, growing as they come, so each one is a real traverse with a
-     scale ramp instead of a fade. Re-timed so the last lands at 31 of 36. */
-  const OPEN = 2, ARR = [4, 11, 18], STEP = 14, ALL = 30;
-  const open = E(f, OPEN, OPEN + 11, 0, 1, OUT);
-  const done = E(f, ALL, ALL + 6, 0, 1, BACK);
-  const AGENTS = [
-    { tint: "#D97757", i: 0,  x: 246 },
-    { tint: "#7B8FF7", i: 3,  x: 506 },
-    { tint: "#4EC9B0", i: 12, x: 766 },
-  ];
+       "bring"          f193  local  5  the VS Code door splits
+       "Antigravity's"  f199  local 11  ⭐ the camera goes THROUGH it — the frame
+                                        scales past us and the works arrive
+       "AI"             f220  local 32  we are inside, the line is running          */
+  const GO = 5 + Math.round(L.dc * 1.6), THRU = 30 + Math.round(L.dc * 2.4);
+  const t = E(f, GO, THRU, 0, 1, IO);
+  const split = E(f, GO, GO + 10, 0, 1, OUT);
+  /* the exterior rushes past the lens; the interior comes up to meet us */
+  const outS = 1 + t * t * 5.4;
+  const inS = 0.46 + t * 0.54;
+  const CX = 506 + L.a * 0.4, CY = 400 + L.wy;
   return (
-    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.07]} vig={0.20}>
-      <BayStage f={f} v={v} crowd={2}>
-      {/* ⭐ THE MARK, big and lit, so the room is unmistakably VS Code */}
-      {/* ⛔ the mark was 192px floating in an empty cream band and the frame was
-          bottom-heavy: everything happened in the lower third. It is now 300px and
-          the doorway is raised behind it, so the top half carries weight too. */}
-      <RigWall f={f} y={72} rows={1} cols={9} seed={L.seed + 6} z={12} o={0.30} s={0.5} amp={9} c="#C6B48E" />
-      <VscTile x={506 + L.a * 0.4 - 150} y={118 + L.wy} s={300} z={46} />
-      {/* the doors they come through, and the amber that comes with them */}
-      {[-1, 1].map((sd) => (
-        <div key={"dr" + sd} style={{ position: "absolute", zIndex: 34,
-          left: 506 + L.a * 0.4 + sd * (176 + open * 340) - 176, top: 268 + L.wy,
-          width: 352, height: 420, borderRadius: 8, boxShadow: SH_D,
-          background: `linear-gradient(${sd > 0 ? 270 : 90}deg,#33404F 0%,#1A222C 78%)` }} />
-      ))}
-      <div style={{ position: "absolute", left: 506 + L.a * 0.4 - open * 352, top: 268 + L.wy,
-        width: open * 704, height: 420, zIndex: 30, overflow: "hidden",
-        background: "linear-gradient(180deg,#3A2A12 0%,#8A6524 44%,#E0A64C 100%)" }} />
-      {/* the light it throws into the bay, across everything */}
-      <div style={{ position: "absolute", left: 0, top: 300, width: W, height: 500, zIndex: 31,
-        pointerEvents: "none",
-        background: `radial-gradient(ellipse 54% 60% at 50% 40%, ${hexa("#FFCE78", 0.30 * open)} 0%, transparent 72%)` }} />
-      {/* ⭐ THE AGENTS — they walk IN, and then they WORK. Nothing is a panel. */}
-      {AGENTS.map((g, i) => {
-        const t = E(f, ARR[i], ARR[i] + STEP, 0, 1, IO);
-        const cx0 = 506 + L.a * 0.4;
-        const px = cx0 + (g.x - 506) * t;
-        const py = 470 + (686 - 470) * t - Math.sin(t * Math.PI) * 22;  /* out and down */
-        const gs = (0.42 + 0.58 * t) * (214 - (i % 2) * 12);
+    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.05]} vig={0.22}>
+      {/* ---- INTERIOR: coming up to meet the lens ---- */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 18,
+        /* ⛔ the interior used to fade in over 10 frames while the exterior was
+           already dark, so the middle of the pass was a BLACK FRAME. It is up
+           before the doors are even fully split now. */
+        opacity: E(f, GO, GO + 5, 0, 1, OUT),
+        transform: `scale(${inS})`, transformOrigin: `${CX}px ${CY}px` }}>
+        <Works f={f} run={1} z={18} dy={L.wy * 1.5} seed={L.seed} k={1 + (L.rp - 1) * 0.3} />
+      </div>
+      {/* the three agents, at their stations inside, revealed as we arrive */}
+      {[{ t2: "#D97757", i: 0, x: 236 }, { t2: "#7B8FF7", i: 3, x: 506 }, { t2: "#4EC9B0", i: 12, x: 776 }].map((g, i) => {
+        const on = E(f, 16 + i * 5, 16 + i * 5 + 9, 0, 1, OUT);
         return (
           <React.Fragment key={"ag" + i}>
-            {/* the station lamp each one lights when it arrives */}
-            <div style={{ position: "absolute", left: px - 46, top: 594 + L.wy, width: 92, height: 14,
-              zIndex: 44, borderRadius: 7, opacity: t * t,
-              background: hexa(g.tint, 0.9),
-              boxShadow: `0 0 ${26 + done * 30}px ${8 + done * 6}px ${hexa(g.tint, (0.5 + done * 0.4) * t)}` }} />
-            <Crew f={f + i * 11} x={px} y={py} i={g.i} size={Math.round(gs)}
-              z={62 + i} at={ARR[i]} loop={i} tint={g.tint} flip={i === 2}
-              cheer={f >= ALL ? 1 : 0} />
-            <Contact x={px} y={686} w={176 * t} z={26} o={0.34 * t} />
+            <Crew f={f + i * 11} x={CX + (g.x - 506) * inS} y={648} i={g.i}
+              size={Math.round(96 + on * 116)} z={54 + i} at={16 + i * 5} loop={i} tint={g.t2}
+              flip={i === 2} />
+            <Contact x={CX + (g.x - 506) * inS} y={648} w={168 * on} z={26} o={0.3 * on} />
           </React.Fragment>
         );
       })}
-      {/* ⭐ ALL THREE IN: the doorway surges and the bay takes their colour */}
-      <div style={{ position: "absolute", left: 0, top: 220, width: W, height: 560, zIndex: 33,
-        pointerEvents: "none", opacity: done,
-        background: `radial-gradient(ellipse 58% 56% at 50% 46%, ${hexa("#FFD98F", 0.38)} 0%, transparent 74%)` }} />
-      {/* THE HERO DOES: he holds the door and watches them file past him */}
-      <Hero f={f} x={96 + L.a + L.hx * 0.3} y={704} size={226} z={70}
-        act={3} gaze={0.95} stern={0.4} cheer={f > ARR[2] ? 1 : 0} costume={{ constr: 1 }} />
-      <Contact x={96 + L.a} y={704} w={190} z={24} o={0.32} />
-      </BayStage>
+      {/* ---- EXTERIOR: the door we are going through, rushing past ---- */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 70,
+        opacity: 1 - E(f, GO + 8, GO + 20, 0, 1, IO),
+        transform: `scale(${outS})`, transformOrigin: `${CX}px ${CY}px` }}>
+        {/* the wall it is set into, so there is something for the door to be IN */}
+        <div style={{ position: "absolute", left: -200, top: -200, width: W + 400, height: H + 400,
+          background: "#E9E2D2" }} />
+        <div style={{ position: "absolute", left: CX - 262, top: CY - 262, width: 524, height: 524,
+          borderRadius: 20, boxSizing: "border-box", border: "8px solid #23364B",
+          background: `linear-gradient(180deg,${mxh("#0B1A2B", split * 0.75)} 0%,${mxh("#3A2A12", split * 0.85)} 100%)` }} />
+        {/* the two leaves, splitting on the word */}
+        {[-1, 1].map((sd) => (
+          <div key={"lf" + sd} style={{ position: "absolute", top: CY - 250,
+            left: CX + sd * (125 + split * 268) - 125, width: 250, height: 500, borderRadius: 8,
+            background: `linear-gradient(${sd > 0 ? 270 : 90}deg,#33404F 0%,#16202B 82%)`,
+            boxShadow: SH_D }} />
+        ))}
+        <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H,
+          opacity: 1 - split }}>
+          <VscTile x={CX - 104} y={CY - 104} s={208} z={6} />
+        </div>
+      </div>
+      {/* the light that comes out of it and washes the lens as we pass */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 80,
+        pointerEvents: "none",
+        background: `radial-gradient(circle at 50% ${((CY / H) * 100).toFixed(0)}%, ${hexa("#FFE0A0", 0.62 * Math.sin(Math.min(1, t / 0.55) * Math.PI))} 0%, transparent 62%)` }} />
+      <Edge side="l" c={dkh(GUNMETAL, 0.5)} w={30} z={92} kind="wall" />
+      <Edge side="r" c={dkh(GUNMETAL, 0.56)} w={26} z={92} kind="wall" />
     </Scene>
   );
 };
@@ -516,69 +586,87 @@ export const SETDOWN: React.FC<SP> = ({ v, dur }) => {
 export const DOCK: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const L = LAY[v];
-  /* ⭐ SHOT 2, and it stays physical. "AI coding experience INTO VS Code" — so the
-     three agents HAND THE WORK UP into the mark: a plate goes from one to the next
-     and gets seated into the VS Code frame, which then lights.
-     ⛔ Two words of UI on the plate and nothing else. The diff already had its own
-     scene at 8-9s in rev 10 and he called it text animation; the DEPICTION of a fix
-     is a part being fitted, not a listing of the lines that changed.
-     BEATS (starts f224): "coding" f224 they start passing · "experience" f230 the
-     plate is up · "into" f243 ⭐ IT SEATS in the mark · "VS Code." f250 the mark
-     lights and all three throw their arms up.                                     */
-  const P1 = 4, P2 = 11, SEAT = 19, LIT = 26;
-  const MX = 506 + L.a * 0.4, MY = 176 + L.wy;
-  /* the plate's path: agent 1 -> agent 2 -> agent 3 -> up into the mark */
-  const leg = f < P2 ? 0 : f < SEAT ? 1 : 2;
-  const lt = leg === 0 ? E(f, P1, P2, 0, 1, IO) : leg === 1 ? E(f, P2, SEAT, 0, 1, IO) : E(f, SEAT, SEAT + 8, 0, 1, IO);
-  const PATH: Array<[number, number]> = [[246, 560], [506, 520], [766, 560], [MX, MY + 342]];
-  const px = PATH[leg][0] + (PATH[leg + 1][0] - PATH[leg][0]) * lt + (L.a * 0.4);
-  const py = PATH[leg][1] + (PATH[leg + 1][1] - PATH[leg][1]) * lt - Math.sin(lt * Math.PI) * 62;
-  const kick = f >= SEAT + 8 ? Math.sin((f - SEAT - 8) * 1.2) * 12 * Math.exp(-(f - SEAT - 8) / 5) : 0;
-  const lit = E(f, LIT, LIT + 9, 0, 1, OUT);
+  /* ⭐ SHOT 2 — the second half of the journey. Inside the works the part is built
+     on the line, and then we PULL BACK OUT through the door onto the editor, which
+     is now running Antigravity. The move is the payoff: "into VS Code" is a place
+     we physically return to.
+     BEATS (starts f224):
+       "coding"      f224  local  0  the works are running, the part is on the line
+       "experience"  f230  local  6  it is lifted off and locked together
+       "into"        f243  local 19  ⭐ it is fired down the chute and we pull back
+       "VS Code."    f250  local 26  we are outside again and the mark is lit amber */
+  const LOCK = 6 + Math.round(L.dc), FIRE = 19 + Math.round(L.dc * 2), OUT_T = 40 + Math.round(L.dc * 2);
+  const lock = E(f, LOCK, LOCK + 9, 0, 1, BACK);
+  const fire = E(f, FIRE, FIRE + 8, 0, 1, IN_Q);
+  const back = E(f, FIRE, OUT_T, 0, 1, IO);
+  const CX = 506 + L.a * 0.4, CY = 400 + L.wy;
+  /* the reverse of SETDOWN: interior falls away, exterior comes back to meet us */
+  const inS = 1 - back * 0.66;
+  /* ⛔ the exterior used to dissolve in across a 6.4x -> 1x scale, so for a dozen
+     frames a giant half-transparent VS Code mark and a cream wall swept over the
+     works. A pull-back should POP, not cross-dissolve: the range is now small and
+     the fade is the last six frames only. */
+  const outS = 2.05 - back * 1.05;
   return (
-    <Scene p={asPlace(f >= LIT ? "bayLit" : "bay")} slug="" push={[0, dur, 1.07]} vig={0.20}>
-      <BayStage f={f} v={v} lit crowd={2}>
-      {/* the mark, and the socket in it the plate goes into */}
-      <RigWall f={f} y={72} rows={1} cols={9} seed={L.seed + 6} z={12} o={0.30} s={0.5} amp={9} c="#C6B48E" />
-      {/* ⛔ the plate used to seat ON the mark and cover it. The frame is taller
-          now so there is a real SLOT under the mark for it to go into. */}
-      <div style={{ position: "absolute", left: MX - 176, top: MY - 62 + kick, width: 352, height: 470,
-        zIndex: 38, borderRadius: 22, background: hexa("#0E1620", 0.55),
-        border: `6px solid ${lit > 0 ? hexa(GREEN, 0.85 * lit) : "#26313F"}`,
-        boxShadow: lit > 0 ? `0 0 ${46 * lit}px ${14 * lit}px ${hexa(GREEN, 0.45 * lit)}` : SH_D }} />
-      <VscTile x={MX - 150} y={MY - 34 + kick} s={300} z={46} />
-      {/* ⭐ THE PART being handed up the line — two words, and it is an OBJECT */}
-      <div style={{ position: "absolute", left: px - 118, top: py - 37, width: 148, height: 80,
-        zIndex: 74, borderRadius: 10, boxShadow: SH_D,
-        background: `linear-gradient(180deg,${hexa(GREEN, 0.9)} 0%,#2C6B37 100%)`,
-        border: "4px solid #17351F", display: "flex", alignItems: "center", justifyContent: "center",
-        ...mono(27, 900), color: "#0B1A10", letterSpacing: "0.04em",
-        transform: `rotate(${Math.sin(lt * 3.1 + leg) * 13}deg) scale(${f >= SEAT + 8 ? 1 - 0.12 * lit : 1})` }}>
-        FIXED
+    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.04]} vig={0.22}>
+      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 18,
+        opacity: 1 - E(f, OUT_T - 8, OUT_T - 2, 0, 1, IO),
+        transform: `scale(${inS})`, transformOrigin: `${CX}px ${CY}px` }}>
+        <Works f={f} run={1 + fire * 2.2} z={18} dy={L.wy * 1.5} seed={L.seed} k={1 + (L.rp - 1) * 0.3} />
       </div>
-      {/* the seat flash, on the object */}
-      {f >= SEAT + 8 && f < SEAT + 20 && (
-        <div style={{ position: "absolute", left: MX - 230, top: MY - 60, width: 460, height: 460,
-          zIndex: 84, borderRadius: "50%", pointerEvents: "none",
-          border: `${7 * (1 - E(f, SEAT + 8, SEAT + 20, 0, 1, OUT))}px solid ${hexa(GREEN, 0.65 * (1 - E(f, SEAT + 8, SEAT + 20, 0, 1, OUT)))}`,
-          transform: `scale(${0.3 + E(f, SEAT + 8, SEAT + 20, 0, 1, OUT)})` }} />
-      )}
-      {/* the three of them, working the line and then cheering the seat */}
-      {[{ t: "#D97757", i: 0, x: 246 }, { t: "#7B8FF7", i: 3, x: 506 }, { t: "#4EC9B0", i: 12, x: 766 }].map((g, i) => (
+      {/* ⭐ THE PART — assembled on the line, locked, then FIRED down the chute */}
+      <div style={{ position: "absolute", zIndex: 62,
+        left: CX - 68 * inS + fire * 0, top: (556 - lock * 176 - fire * 470) * 1,
+        width: 136 * inS, height: 108 * inS, opacity: 1 - back * 1.4,
+        transform: `rotate(${lock * -8 + fire * 26}deg) scale(${1 + fire * 0.3})` }}>
+        <div style={{ position: "absolute", inset: 0, borderRadius: 12, boxShadow: SH_D,
+          background: `linear-gradient(180deg,${hexa(AGV, 0.95)} 0%,#9A6E1E 100%)`,
+          border: "5px solid #4A340C" }} />
+        {/* it is a PART, with fixings — not a slab */}
+        {[[18, 18], [104, 18], [18, 74], [104, 74]].map(([bx, by], k) => (
+          <div key={k} style={{ position: "absolute", left: bx * inS, top: by * inS,
+            width: 16 * inS, height: 16 * inS, borderRadius: "50%",
+            background: "#3A2A0A", border: `${3 * inS}px solid #C9A15A` }} />
+        ))}
+        <div style={{ position: "absolute", left: "50%", top: "50%", width: 46 * inS, height: 46 * inS,
+          marginLeft: -23 * inS, marginTop: -23 * inS, borderRadius: 8, overflow: "hidden" }}>
+          <Img src={staticFile("logos/antigravity.png")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+        </div>
+      </div>
+      {/* the three of them working the line, receding as we pull out */}
+      {[{ t2: "#D97757", i: 0, x: 236 }, { t2: "#7B8FF7", i: 3, x: 506 }, { t2: "#4EC9B0", i: 12, x: 776 }].map((g, i) => (
         <React.Fragment key={"ag" + i}>
-          <div style={{ position: "absolute", left: MX + (g.x - 506) - 46, top: 594 + L.wy, width: 92, height: 14,
-            zIndex: 44, borderRadius: 7, background: hexa(g.t, 0.9),
-            boxShadow: `0 0 ${26 + lit * 22}px 8px ${hexa(g.t, 0.5)}` }} />
-          <Crew f={f + i * 11} x={MX + (g.x - 506)} y={686 - (leg === i ? 16 : 0)} i={g.i}
-            size={214 - i % 2 * 12} z={62 + i} at={0} loop={i} tint={g.t} flip={i === 2}
-            cheer={f >= LIT ? 1 : 0} />
-          <Contact x={MX + (g.x - 506)} y={686} w={166} z={26} o={0.34} />
+          <Crew f={f + i * 11} x={CX + (g.x - 506) * inS} y={648 - (1 - inS) * 90}
+            i={g.i} size={Math.round(212 * inS)} z={54 + i} at={0} loop={i} tint={g.t2}
+            flip={i === 2} cheer={f >= FIRE ? 1 : 0} />
         </React.Fragment>
       ))}
-      <Hero f={f} x={96 + L.a + L.hx * 0.3} y={704} size={226} z={70}
-        act={3} gaze={0.95} cheer={f >= LIT ? 1 : 0} stern={0.2} costume={{ constr: 1 }} />
-      <Contact x={96 + L.a} y={704} w={190} z={24} o={0.32} />
-      </BayStage>
+      {/* ---- EXTERIOR coming back to meet us, and it is CHANGED ---- */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 70,
+        opacity: E(f, OUT_T - 9, OUT_T - 3, 0, 1, OUT),
+        transform: `scale(${outS})`, transformOrigin: `${CX}px ${CY}px` }}>
+        <div style={{ position: "absolute", left: -200, top: -200, width: W + 400, height: H + 400,
+          background: "#E9E2D2" }} />
+        <div style={{ position: "absolute", left: CX - 262, top: CY - 262, width: 524, height: 524,
+          borderRadius: 20, background: "#0B1A2B", border: `8px solid ${hexa(AGV, 0.85)}`,
+          boxSizing: "border-box",
+          boxShadow: `0 0 ${70 * back}px ${20 * back}px ${hexa(AGV, 0.4 * back)}` }} />
+        {/* ⛔ this used to ride the whole 6.4x -> 1x scale, so a giant half-
+            transparent VS Code mark swept across the works mid-move and read as a
+            broken overlay. It only appears once the frame is nearly home. */}
+        <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H,
+          opacity: E(f, OUT_T - 7, OUT_T - 1, 0, 1, OUT) }}>
+          <VscTile x={CX - 128} y={CY - 128} s={256} z={6} />
+        </div>
+        {/* the mark it now carries, seated in the corner of the frame */}
+        <div style={{ position: "absolute", left: CX + 96, top: CY + 96, width: 116, height: 116,
+          zIndex: 8, borderRadius: 18, overflow: "hidden", boxShadow: SH_D,
+          opacity: E(f, OUT_T - 12, OUT_T - 2, 0, 1, BACK) }}>
+          <Img src={staticFile("logos/antigravity.png")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+        </div>
+      </div>
+      <Edge side="l" c={dkh(GUNMETAL, 0.5)} w={30} z={92} kind="wall" />
+      <Edge side="r" c={dkh(GUNMETAL, 0.56)} w={26} z={92} kind="wall" />
     </Scene>
   );
 };
