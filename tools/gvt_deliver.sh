@@ -26,7 +26,15 @@ fail=0
 for f in "$@"; do
   b=$(basename "$f"); dst="$D/$b"; lsz=$(stat -f %z "$f")
   # already live and identical? leave it alone — re-uploading re-poisons the name.
-  if [ -e "$dst" ] && [ -n "$(idof "$dst")" ] && [ "$(stat -f %z "$dst")" = "$lsz" ]; then
+  # ⛔⛔ COMPARE CONTENT, NOT SIZE (2026-09-07). This tested size only, and on the
+  # reel 141 bed recut it skipped BOTH changed .wav files: a re-cut bed is the same
+  # duration, sample rate and channel count as the one it replaces, so it is
+  # byte-size identical and content-different. The script printed "already live"
+  # for two stale files and exited 0. Any regenerated asset with a fixed output
+  # length hits this — beds, normalised stems, fixed-duration renders.
+  if [ -e "$dst" ] && [ -n "$(idof "$dst")" ] \
+     && [ "$(stat -f %z "$dst")" = "$lsz" ] \
+     && [ "$(md5 -q "$dst")" = "$(md5 -q "$f")" ]; then
     echo "  = $b already live, id=$(idof "$dst" | cut -c1-12)… — skipped"; continue
   fi
   stage="$D/.stg_$$_$(date +%s)_$b"

@@ -122,9 +122,27 @@ def write(a, path):
     p.communicate((np.clip(a, -1, 1) * 32767).astype("<i2").tobytes())
 
 # ⭐ THREE GENUINELY DIFFERENT PASSAGES, and the third comes off a different track.
+# ⛔⛔ ALEX, 2026-09-07: *"this isnt the right part of the bg soundtrack... its not
+# like the beginning intense part."* He was right and the old comment was wrong about
+# its own cut. MEASURED on the source, per-2s RMS across the first 70s:
+#
+#     8s   -21.1 -> -16.7   the build starts
+#    14s   -15.8 -> -11.9   the first peak, then it DROPS OUT
+#    16-42s              -21 to -27 dB, the sparsest stretch in the whole track
+#    44s   -22.4 -> -15.5   ⭐ +6.8 dB, THE FULL BAND ENTERS and stays
+#    60s   -16.5 -> -11.8   the restatement inside that same section
+#
+# The house bed was cut at **36.0s**, which the comment called "the driving
+# mid-section" and which actually measures **-24.2 dB — one of the quietest
+# passages in the track**. `shape()` levels per-2s RMS, so the cut still hit the
+# house -18.4 dB target; what it could not do is put instruments back. That is
+# exactly what he heard: correct loudness, thin material.
+# ⭐ House now starts at the band entry, which IS "the beginning of the intense
+# part", and amber takes the loudest window inside the same section so the two
+# stay distinct. [[feedback_the_bed_can_be_cut_from_the_wrong_part]]
 PASSAGES = [
-    ("gravity141_bed.wav",       "sun",  36.0),   # house: the driving mid-section
-    ("gravity141_bed_amber.wav", "sun",  92.0),   # amber: the later restatement
+    ("gravity141_bed.wav",       "sun",  45.0),   # house: the band entry, -15.3 dB
+    ("gravity141_bed_amber.wav", "sun",  61.0),   # amber: the restatement, -14.9 dB
     ("gravity141_bed_steel.wav", "elbm", 48.0),   # steel: a different song entirely
 ]
 
@@ -134,22 +152,52 @@ def raw_centroid(a, st, dur=DUR):
     S = np.abs(np.fft.rfft(s0 * np.hanning(len(s0)))); fr = np.fft.rfftfreq(len(s0), 1 / SR)
     return float((S * fr).sum() / (S.sum() + 1e-9))
 
-def pick(a, lo, hi, used):
+def pick(a, lo, hi, used, near=None):
     """⭐ THE PASSAGE IS CHOSEN BY MEASUREMENT, NOT BY A GUESSED TIMESTAMP.
        Score = darkest raw centroid (a bright passage fights the voice and lands
-       the bed outside the shipped band) + strongest opening downbeat, and at
-       least 18s away from a passage already used so two cuts cannot share one."""
+       the bed outside the shipped band) + how loud the passage is, and at least
+       18s away from a passage already used so two cuts cannot share one.
+
+       ⛔⛔ THE BUG THIS EXISTS TO NOT REPEAT (Alex, 2026-09-07: *"this isnt the
+       right part of the bg soundtrack... its not like the beginning intense
+       part"*). `lvl` used to be measured over **the first 2 SECONDS of a 21.45s
+       window**, so the score rewarded a loud ONSET followed by literally
+       anything. On this track that reliably chose 14.25s — the first peak, which
+       DROPS OUT two seconds later into the sparsest stretch in the song. The bed
+       then passed every gate, because `shape()` levels per-2s RMS and `finish()`
+       normalises to the house -18.4 dB: correct loudness, thin material, which is
+       precisely what he heard.
+       ⭐ The window is now scored ACROSS ITS WHOLE LENGTH, and its WORST 2s is
+       scored too, so a passage that dies halfway cannot win on its first bar.
+       ⭐ And `near` is finally honoured: the timestamps in PASSAGES used to be
+       decoration — the code ignored them and the comments beside them drifted out
+       of date, which is how one came to describe a -24 dB passage as "driving"."""
     best, bst = None, -1e9
+    W2 = SR * 2
     t = lo
     while t < hi:
         if len(a) > int((t + DUR + 1) * SR) and all(abs(t - u) > 18.0 for u in used):
             c = raw_centroid(a, t)
-            w = SR // 8; pr = rms_prof(a[int(t * SR): int((t + 2) * SR)], w)
-            lvl = float(np.mean(pr)) if len(pr) else 0.0
+            seg = a[int(t * SR): int((t + DUR) * SR)]
+            w = SR // 8
+            full = rms_prof(seg, w)
+            lvl = float(np.mean(full)) if len(full) else 0.0
+            # the quietest two seconds anywhere in the window — the dropout test
+            subs = [float(np.sqrt(np.mean(seg[i:i + W2] ** 2)))
+                    for i in range(0, max(1, len(seg) - W2), W2)]
+            floor = min(subs) if subs else 0.0
             if lvl > 0.05:
-                sc = -c / 1000.0 + lvl * 4.0
+                sc = -c / 1000.0 + lvl * 4.0 + floor * 6.0
+                if near is not None:
+                    # ⛔ this was /90 and it was decoration: the score difference
+                    # between a good passage and the track's biggest climax is
+                    # larger than 1 point, so a "gentle pull" never moved the
+                    # answer and `near` still meant nothing. /22 makes the hint
+                    # actually decide between comparable passages while still
+                    # letting measurement reject a genuinely bad one.
+                    sc -= abs(t - near) / 22.0
                 if sc > bst: bst, best = sc, t
-        t += 2.0
+        t += 1.0
     return best if best is not None else lo
 
 cache = {}
@@ -157,7 +205,7 @@ used: dict = {}
 for name, tk, near in PASSAGES:
     if tk not in cache: cache[tk] = load(TRACKS[tk]); used[tk] = []
     src = cache[tk]
-    st = best_downbeat(src, pick(src, 12.0, max(14.0, len(src) / SR - DUR - 2), used[tk]), span=2.0)
+    st = best_downbeat(src, pick(src, 12.0, max(14.0, len(src) / SR - DUR - 2), used[tk], near), span=2.0)
     used[tk].append(st)
     seg = src[int(st * SR): int((st + DUR + 1.0) * SR)].copy()
     seg = finish(shape(midrange(seg)))
