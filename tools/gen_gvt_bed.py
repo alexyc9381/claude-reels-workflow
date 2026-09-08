@@ -141,7 +141,9 @@ def write(a, path):
 # part", and amber takes the loudest window inside the same section so the two
 # stay distinct. [[feedback_the_bed_can_be_cut_from_the_wrong_part]]
 PASSAGES = [
-    ("gravity141_bed.wav",       "sun",  45.0),   # house: the band entry, -15.3 dB
+    # ⭐ house: STARTS AT 8.0s as instructed — the build — and crossfades to the
+    #   band entry at 8.6s in, because the source collapses to -31 dB at 19s.
+    ("gravity141_bed.wav",       "sun",  [(8.0, 9.0), (44.6, 13.4)]),
     ("gravity141_bed_amber.wav", "sun",  61.0),   # amber: the restatement, -14.9 dB
     ("gravity141_bed_steel.wav", "elbm", 48.0),   # steel: a different song entirely
 ]
@@ -200,14 +202,42 @@ def pick(a, lo, hi, used, near=None):
         t += 1.0
     return best if best is not None else lo
 
+def splice(a, parts, xf=0.42):
+    """⛔ ALEX, 2026-09-07: *"the bg music needs to start at around 8 seconds of the
+       actual bg music soundtrack."* Measured, a straight 21.45s cut from 8.0s is
+       eight seconds of the build and then ELEVEN of collapse — the track falls to
+       -19 dB at 17s and -31 dB at 19s, and `shape()` clips its lift at 2.2x
+       (+6.8 dB), so it cannot put the band back. It would audibly die a third of
+       the way through the reel.
+       ⭐ So a passage can be a LIST: take the eight seconds he asked for, then
+       continue from the band entry, joined on an equal-power crossfade at a bar
+       line. The bed still STARTS at 8s, which is the instruction, and it stays up."""
+    out = None
+    n = int(xf * SR)
+    for (st, dur) in parts:
+        seg = a[int(st * SR): int((st + dur) * SR)].copy()
+        if out is None:
+            out = seg; continue
+        m = min(n, len(out) // 2, len(seg) // 2)
+        t = np.linspace(0, 1, m)
+        out[-m:] = out[-m:] * np.cos(t * np.pi / 2) + seg[:m] * np.sin(t * np.pi / 2)
+        out = np.concatenate([out, seg[m:]])
+    return out
+
 cache = {}
 used: dict = {}
 for name, tk, near in PASSAGES:
     if tk not in cache: cache[tk] = load(TRACKS[tk]); used[tk] = []
     src = cache[tk]
-    st = best_downbeat(src, pick(src, 12.0, max(14.0, len(src) / SR - DUR - 2), used[tk], near), span=2.0)
-    used[tk].append(st)
-    seg = src[int(st * SR): int((st + DUR + 1.0) * SR)].copy()
+    if isinstance(near, list):
+        # an explicit edit: the timestamps are the instruction, not a hint
+        st = near[0][0]
+        used[tk].append(st)
+        seg = splice(src, near)
+    else:
+        st = best_downbeat(src, pick(src, 12.0, max(14.0, len(src) / SR - DUR - 2), used[tk], near), span=2.0)
+        used[tk].append(st)
+        seg = src[int(st * SR): int((st + DUR + 1.0) * SR)].copy()
     seg = finish(shape(midrange(seg)))
     out = os.path.join(OUT_DIR, name)
     write(seg, out)
