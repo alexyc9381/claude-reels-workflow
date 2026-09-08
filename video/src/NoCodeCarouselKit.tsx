@@ -182,7 +182,11 @@ export const LogoBadge: React.FC<{ brand: string; size?: number }> = ({ brand, s
 );
 
 
-   the hierarchy is information and not decoration.                        */
+/* ------------------------------------------------------------ THE CARD
+   A HORIZONTAL card: big sprite left like a hero introduction, and the
+   card's HEIGHT carries the ranking, so the hierarchy is information and
+   not decoration. Every type size derives from h, so one number sets the
+   whole card and a stack of different heights stays consistent.          */
 export const Card: React.FC<{ h: number; n?: string; title: string; sub: string; blurb: React.ReactNode; costume: Record<string, number>; lf: number; hero?: boolean; big?: string }> = ({ h, n, title, sub, blurb, costume, lf, hero, big }) => (
   <div style={{
     height: h, display: "flex", alignItems: "center", gap: 18, marginBottom: 16,

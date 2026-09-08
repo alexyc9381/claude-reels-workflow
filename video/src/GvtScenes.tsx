@@ -595,18 +595,42 @@ export const DOCK: React.FC<SP> = ({ v, dur }) => {
        "experience"  f230  local  6  it is lifted off and locked together
        "into"        f243  local 19  ⭐ it is fired down the chute and we pull back
        "VS Code."    f250  local 26  we are outside again and the mark is lit amber */
-  const LOCK = 6 + Math.round(L.dc), FIRE = 19 + Math.round(L.dc * 2), OUT_T = 40 + Math.round(L.dc * 2);
-  const lock = E(f, LOCK, LOCK + 9, 0, 1, BACK);
-  const fire = E(f, FIRE, FIRE + 8, 0, 1, IN_Q);
-  const back = E(f, FIRE, OUT_T, 0, 1, IO);
+  /* ⛔⛔ ALEX, on ~8s: *"too boring with just them bouncing around, so fking boring,
+     and the square doesnt come in even till way later."* Both true. The three
+     agents stood in a row running idle loops — nobody was WORKING — and the part
+     drifted up a diagonal from the bottom-left corner, small and late, so it never
+     read as arriving at all, let alone as being made.
+     ⭐ REBUILT AS AN ACTUAL LINE. The part is ON SCREEN AT FRAME 0, big, entering
+     from the left on the belt, and it is BUILT as it travels: each agent LUNGES
+     and strikes a module onto it as it reaches them, one per spoken word, and the
+     part grows with every hit. On "into" the last strike launches it at the lens.
+     BEATS (starts f224):
+       "coding"      f224  local  0  the part is already moving, station 1 ahead
+       "experience"  f230  local  6  ⭐ STRIKE 1 — agent 1 lunges, part grows
+                     f236  local 12  ⭐ STRIKE 2
+       "into"        f243  local 19  ⭐ STRIKE 3, and it LAUNCHES at the camera
+       "VS Code."    f250  local 26  we pull back out onto the changed editor      */
+  const HITS = [6, 12, 19];
+  const FIRE = 19, OUT_T = 40 + Math.round(L.dc * 2);
+  const fire = E(f, FIRE, FIRE + 9, 0, 1, IN_Q);
+  const back = E(f, FIRE + 2, OUT_T, 0, 1, IO);
   const CX = 506 + L.a * 0.4, CY = 400 + L.wy;
-  /* the reverse of SETDOWN: interior falls away, exterior comes back to meet us */
   const inS = 1 - back * 0.66;
-  /* ⛔ the exterior used to dissolve in across a 6.4x -> 1x scale, so for a dozen
-     frames a giant half-transparent VS Code mark and a cream wall swept over the
-     works. A pull-back should POP, not cross-dissolve: the range is now small and
-     the fade is the last six frames only. */
   const outS = 2.05 - back * 1.05;
+  /* the part rides the belt left -> right, then leaves toward the lens */
+  /* ⛔ "the square doesnt come in even till way later" — it started at -300, which
+     is off-frame, so the first quarter of the scene had nothing in it. It is now
+     already entering on frame 0. */
+  const travel = E(f, 0, FIRE, 44, 812, LIN);   /* absolute x: ON SCREEN at frame 0 */
+  const grown = HITS.filter((h) => f >= h).length;          /* it gets bigger per hit */
+  const kicks = HITS.reduce((a, h) => a + (f >= h
+    ? Math.sin((f - h) * 1.35) * 9 * Math.exp(-(f - h) / 3.4) : 0), 0);
+  const px = CX + (travel - 506) * inS;
+  /* ⛔ and it rode at 556, which is the agents' chest height, so the part swallowed
+     whichever one was striking it and hid the lunge entirely. It runs on an
+     overhead rail now, clear above their heads, and they reach UP to it. */
+  const py = 452 - fire * 400 + kicks;
+  const pScale = (0.58 + grown * 0.13) * inS * (1 + fire * 1.9);
   return (
     <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.04]} vig={0.22}>
       <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 18,
@@ -614,33 +638,71 @@ export const DOCK: React.FC<SP> = ({ v, dur }) => {
         transform: `scale(${inS})`, transformOrigin: `${CX}px ${CY}px` }}>
         <Works f={f} run={1 + fire * 2.2} z={18} dy={L.wy * 1.5} seed={L.seed} k={1 + (L.rp - 1) * 0.3} />
       </div>
-      {/* ⭐ THE PART — assembled on the line, locked, then FIRED down the chute */}
+      {/* the rail it hangs from, and its trolley — it is CARRIED, not floating */}
+      <div style={{ position: "absolute", left: -40, top: (416 - fire * 400) * 1, width: W + 80, height: 13,
+        zIndex: 60, opacity: 1 - fire, borderRadius: 7,
+        background: "linear-gradient(180deg,#9A7C4E 0%,#4A3A22 100%)" }} />
+      {f < FIRE + 4 && (
+        <div style={{ position: "absolute", left: px - 26, top: 420 - fire * 400 + kicks * 0.4,
+          width: 52, height: 30, zIndex: 61, borderRadius: 5, opacity: 1 - fire,
+          background: "linear-gradient(180deg,#C9CFD4 0%,#5A6068 100%)" }} />
+      )}
+      {/* ⭐ THE PART — on screen from frame 0, on the rail, and it GROWS per strike */}
       <div style={{ position: "absolute", zIndex: 62,
-        left: CX - 68 * inS + fire * 0, top: (556 - lock * 176 - fire * 470) * 1,
-        width: 136 * inS, height: 108 * inS, opacity: 1 - back * 1.4,
-        transform: `rotate(${lock * -8 + fire * 26}deg) scale(${1 + fire * 0.3})` }}>
-        <div style={{ position: "absolute", inset: 0, borderRadius: 12, boxShadow: SH_D,
-          background: `linear-gradient(180deg,${hexa(AGV, 0.95)} 0%,#9A6E1E 100%)`,
-          border: "5px solid #4A340C" }} />
-        {/* it is a PART, with fixings — not a slab */}
-        {[[18, 18], [104, 18], [18, 74], [104, 74]].map(([bx, by], k) => (
-          <div key={k} style={{ position: "absolute", left: bx * inS, top: by * inS,
-            width: 16 * inS, height: 16 * inS, borderRadius: "50%",
-            background: "#3A2A0A", border: `${3 * inS}px solid #C9A15A` }} />
-        ))}
-        <div style={{ position: "absolute", left: "50%", top: "50%", width: 46 * inS, height: 46 * inS,
-          marginLeft: -23 * inS, marginTop: -23 * inS, borderRadius: 8, overflow: "hidden" }}>
+        left: px - 118 * pScale, top: py - 84 * pScale,
+        width: 236 * pScale, height: 168 * pScale, opacity: 1 - back * 1.6,
+        transform: `rotate(${grown * -4 + fire * 30}deg)` }}>
+        <div style={{ position: "absolute", inset: 0, borderRadius: 14 * pScale, boxShadow: SH_D,
+          background: `linear-gradient(180deg,${hexa(AGV, 0.96)} 0%,#9A6E1E 100%)`,
+          border: `${6 * pScale}px solid #4A340C` }} />
+        {/* the modules the agents put on it — one appears per strike */}
+        {[0, 1, 2].map((k) => k < grown ? (
+          <div key={"md" + k} style={{ position: "absolute",
+            left: (22 + k * 66) * pScale, top: 104 * pScale,
+            width: 52 * pScale, height: 40 * pScale, borderRadius: 6 * pScale,
+            background: ["#D97757", "#7B8FF7", "#4EC9B0"][k],
+            border: `${3 * pScale}px solid #2A1E06`,
+            transform: `scale(${E(f, HITS[k], HITS[k] + 6, 1.9, 1, BACK)})` }} />
+        ) : null)}
+        <div style={{ position: "absolute", left: "50%", top: 14 * pScale,
+          width: 74 * pScale, height: 74 * pScale, marginLeft: -37 * pScale,
+          borderRadius: 10 * pScale, overflow: "hidden" }}>
           <Img src={staticFile("logos/antigravity.png")} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
         </div>
       </div>
-      {/* the three of them working the line, receding as we pull out */}
-      {[{ t2: "#D97757", i: 0, x: 236 }, { t2: "#7B8FF7", i: 3, x: 506 }, { t2: "#4EC9B0", i: 12, x: 776 }].map((g, i) => (
-        <React.Fragment key={"ag" + i}>
-          <Crew f={f + i * 11} x={CX + (g.x - 506) * inS} y={648 - (1 - inS) * 90}
-            i={g.i} size={Math.round(212 * inS)} z={54 + i} at={0} loop={i} tint={g.t2}
-            flip={i === 2} cheer={f >= FIRE ? 1 : 0} />
+      {/* ⭐ THE STRIKES — sparks off the part where each module lands */}
+      {HITS.map((h, k) => (f >= h && f < h + 10) ? (
+        <React.Fragment key={"sp" + k}>
+          {Array.from({ length: 9 }, (_, q) => {
+            const t = E(f, h, h + 10, 0, 1, OUT);
+            return (
+              <div key={q} style={{ position: "absolute", zIndex: 76,
+                left: px + Math.cos(q * 0.9 + k) * 190 * t,
+                top: py - 30 + Math.sin(q * 1.4 + k) * 90 * t + t * t * 180,
+                width: 11 - (q % 3) * 3, height: 11 - (q % 3) * 3, borderRadius: "50%",
+                background: hexa("#FFE0A0", 0.95 * (1 - t)) }} />
+            );
+          })}
+          <div style={{ position: "absolute", zIndex: 75, left: px - 150, top: py - 150,
+            width: 300, height: 300, borderRadius: "50%", pointerEvents: "none",
+            border: `${6 * (1 - E(f, h, h + 10, 0, 1, OUT))}px solid ${hexa(AGV, 0.75 * (1 - E(f, h, h + 10, 0, 1, OUT)))}`,
+            transform: `scale(${0.2 + E(f, h, h + 10, 0, 1, OUT)})` }} />
         </React.Fragment>
-      ))}
+      ) : null)}
+      {/* ⛔ they used to stand in a row running idle loops — "bouncing around".
+          Each one now LUNGES at the part as it reaches them and recoils off it. */}
+      {[{ t2: "#D97757", i: 0, x: 236 }, { t2: "#7B8FF7", i: 3, x: 506 }, { t2: "#4EC9B0", i: 12, x: 776 }].map((g, i2) => {
+        const h = HITS[i2];
+        const lunge = f >= h - 4 && f < h + 9
+          ? (f < h ? E(f, h - 4, h, 0, 1, IN_Q) * 46 : E(f, h, h + 9, 46, 0, OUT)) : 0;
+        return (
+          <React.Fragment key={"ag" + i2}>
+            <Crew f={f + i2 * 11} x={CX + (g.x - 506) * inS + lunge * 0.5} y={648 - (1 - inS) * 90 + lunge * 0.4}
+              i={g.i} size={Math.round(212 * inS)} z={54 + i2} at={0} loop={i2} tint={g.t2}
+              flip={i2 === 2} cheer={f >= h && f < h + 6 ? 1 : (f >= FIRE ? 1 : 0)} />
+          </React.Fragment>
+        );
+      })}
       {/* ---- EXTERIOR coming back to meet us, and it is CHANGED ---- */}
       <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 70,
         opacity: E(f, OUT_T - 9, OUT_T - 3, 0, 1, OUT),
