@@ -52,7 +52,13 @@ const FPS = 30;
 /** ⛔ the last word "GRAVITY." truly ends at 23.07s (f692) — measured off the
     mix, not read off the word file, whose stored ends run 11-20 frames early
     here. 695 frames = 23.17s lands the hard cut 3 frames after it. */
-export const GVT_TOTAL = 637;
+/* ⛔ ALEX: "end the video right when i say the word gravity."
+   Measured off the mix, not the stored word end: "GRAVITY." STORES at f622 but its
+   /i/ tail really runs to f631.5 (the stored ends on this take run 9-20 frames
+   early — feedback_no_cut_may_land_inside_a_word). 637 left 15 frames sitting
+   after the stored end with the caption already retired, which is the pause he is
+   seeing. Ends at 633: two frames past the last audible sample, nothing more. */
+export const GVT_TOTAL = 633;
 
 /** ⛔ EVERY BOUNDARY BELOW SITS IN A MEASURED GAP AFTER THE SENTENCE-FINAL
     WORD'S TRUE END. Safe windows, measured on the delivered mix against its own

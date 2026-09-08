@@ -226,7 +226,11 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
      rises, tilts back and glows as the field takes him, all the way to the cut. */
   const HS = 336;
   const fly = E(f, B.trigger + 5, B.trigger + 34, 0, 1, IO);   /* the lift */
-  const HX = mx + fly * 74;
+  /* ⛔ ALEX: "why is the beginning claude sprite covering the antigravity logo when
+     it comes out." He was rising straight up the centre, which is exactly where the
+     mark is revealed. He now flies OUT of the doorway to the right, so the mark he
+     just uncovered is never behind him. */
+  const HX = mx + fly * 206;   /* clear of the mark, still inside the frame */
   /* ⛔ capped twice: 392 flew his head into the header pill, 286 still put it over
      the ANTIGRAVITY listing plate. He also DRIFTS as he rises — a body in a field
      does not go straight up, and the drift carries him clear of the plate. */
