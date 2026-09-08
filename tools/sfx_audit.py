@@ -74,8 +74,26 @@ for c in cues:
     p = os.path.join(root, c)
     if not os.path.exists(p):
         bad.append((c, ["MISSING"])); print(f"  \u26d4 {c:22s} MISSING — this cue never plays"); continue
-    w = wave.open(p); n = w.getnframes(); sr = w.getframerate(); ch = w.getnchannels()
-    raw = np.frombuffer(w.readframes(n), dtype=np.int16).astype(np.float32) / 32768
+    # ⛔ A GATE THAT CRASHES IS A GATE THAT PASSES EVERYTHING AFTER IT. The bank
+    # holds .mp3 and float/extensible .wav, and `wave.open` raises on both — on
+    # reel 143 that aborted the audit at the SEVENTH cue of twenty-four, with
+    # seventeen unexamined. Decode anything non-PCM through ffmpeg instead.
+    try:
+        w = wave.open(p); n = w.getnframes(); sr = w.getframerate(); ch = w.getnchannels()
+        raw = np.frombuffer(w.readframes(n), dtype=np.int16).astype(np.float32) / 32768
+    except Exception:
+        import subprocess
+        sr, ch = 44100, 1
+        try:
+            _ff = os.path.join(os.path.dirname(__file__), "node_modules/ffmpeg-static/ffmpeg")
+            _ff = _ff if os.path.exists(_ff) else "ffmpeg"
+            pcm = subprocess.run([_ff, "-v", "error", "-i", p, "-f", "s16le", "-ac", "1",
+                                  "-ar", str(sr), "-"], capture_output=True, check=True).stdout
+        except Exception as e:
+            bad.append((c, ["UNREADABLE"]))
+            print(f"  ⛔ {c:22s} UNREADABLE — {e}")
+            continue
+        raw = np.frombuffer(pcm, dtype=np.int16).astype(np.float32) / 32768
     a = raw.reshape(-1, ch).mean(1) if ch > 1 and len(raw) % ch == 0 else raw[::max(ch, 1)]
     dur = len(a) / sr
     env = np.abs(a); atk = int(np.argmax(env)) / sr * 1000
