@@ -1403,3 +1403,72 @@ able to *do*. See `feedback_headers_state_the_claim`.
 `memory/reels/web-factory-log.md` (reel 124 — §23-27, the twelve rounds behind them)
 
 ---
+
+---
+
+## 13. ⛔⛔ A SCENE NEEDS A BEGINNING AND AN END — the four-part check
+
+Reel 141 took **thirteen revisions** and most of the notes were one of four failures.
+Alex, 2026-09-07, asking for it to become standing practice:
+
+> *"each of the scenes needs to have like a beginning and end or whatever, like an
+> actual scene, not just bouncing around or doing nothing or static kind of thing."*
+
+Run this on every scene **before** rendering. Every item is something that came back.
+
+### 1. Does the scene END somewhere it did not START?
+
+Write the start state and the end state as one line each. If you cannot, there is no
+scene yet. A mechanism that moves and then holds has a *stop*, not an end — reel
+141's balance drew that note verbatim: *"it just stops when the rightside drops."*
+
+### 2. Is everything that moves GETTING somewhere?
+
+```bash
+grep -nE 'Math\.(sin|cos)\s*\(\s*f\s*[*+/-]' src/*.tsx | grep -v 'exp('
+```
+
+| keep | delete |
+|---|---|
+| `sin(x) * exp(-x/n)` — a damped settle, the tail of a directional move | a bare `sin(f*k)` — it runs forever and arrives nowhere |
+| a gait bob gated to `t > 0 && t < 1` — only while walking | a tremble on a body that is otherwise still |
+| a flicker that is a STATE (a failing sign, before it is replaced) | a pendulum still rocking after its mechanism has stopped |
+
+### 3. ⭐ Do the CHARACTERS have a JOB, or a loop?
+
+**The most repeated note on the whole reel** — *"just them bouncing around so fking
+boring."* Three sprites in a row playing idle animations is not a scene however good
+the idles are. A character has to **act on an object and leave it changed**: strike
+it, carry it, load it, tip it. That beat only landed when each agent lunged and
+struck a module onto a part that visibly grew as it travelled.
+
+> **When a beat is about a capability, draw the capability as a BODY DOING WORK, not
+> as a list of its features.** "Antigravity's AI coding experience" is three agents;
+> an agent is a Claude, not a row in a panel.
+
+### 4. Is the subject ON SCREEN AT FRAME 0?
+
+*"the square doesnt come in even till way later"* — it started at `x = -300`, so the
+first quarter of the scene was empty. Anything entering should already be entering on
+frame 0. Same family, and it cost three attempts on its own: **check the camera push
+covers frame 0.** The hook read `push={[24, 58, 1.11]}` and the most important
+half-second in the reel had no camera move at all — 0.89 motion. Starting it at frame
+0 tripled it, after two rounds of adding content that could not have fixed it.
+
+### ⭐ The diagnostic that found all four
+
+`scene_motion_audit` samples and rewards PEAKS, so a reel of spikes separated by flat
+nothing scores well and still looks still. Trace **per frame** instead:
+
+```python
+d = np.abs(np.diff(panel_frames, axis=0)).mean(axis=(1, 2))   # mean |delta| in the crop
+```
+
+On 141 the audit reported *"median 12.82, 0/12 failing"* while the per-frame median
+was **2.87, with 66% of the reel under 4.0** and eight of twelve scenes going dead at
+the **tail**. Always report the dead run's POSITION as well as its length: head,
+middle and tail are three different bugs (§7, and `feedback_a_scene_average_cannot_see_a_tail`).
+
+⛔ And do not answer a low number with motion the story does not have — that is §9's
+warning, and it is what produced the flying-stationery reel. Give the scene the event
+it was missing instead.

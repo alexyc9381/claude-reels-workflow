@@ -7,6 +7,7 @@ import {
   WARM, Fitout, Vignette, DeskUnit, ProgressRail, CountChip, Handle, SwipeCue,
   HL, WallSign, Card, CardStack, LogoBadge,
 } from "./NoCodeCarouselKit";
+import { ChamberBg, CHAMBER, PANELS, ARCHIVE, DOORS } from "./CouncilWorld";
 
 /* =========================================================================
    NO-CODE ALEX · THE CLAUDE COUNCIL
@@ -54,8 +55,8 @@ const Bench: React.FC = () => {
   const TOP = 430, BW = 1000, BX = 40, BY = 604;
   return (
     <>
-      <AbsoluteFill style={{ background: WARM.wall }} />
-      <Fitout p={WARM} horizon={640} />
+      <AbsoluteFill style={{ background: CHAMBER.wall2 }} />
+      <ChamberBg p={CHAMBER} variant="arches" horizon={640} />
       {/* the council, drawn first so the bench can occlude them into SEATS */}
       {COUNCIL.map((c, i) => (
         <div key={i} style={{ position: "absolute", left: seatX[i], top: TOP, width: 172, display: "grid", placeItems: "center", zIndex: 10 }}>
@@ -117,8 +118,8 @@ const TintCard: React.FC<{ s: Seat; h: number }> = ({ s, h }) => (
 );
 const Council: React.FC = () => (
   <>
-    <AbsoluteFill style={{ background: WARM.wall }} />
-    <Fitout p={WARM} horizon={318} />
+    <AbsoluteFill style={{ background: PANELS.wall2 }} />
+    <ChamberBg p={PANELS} variant="panels" horizon={1080} />
     <WallSign kicker="the council" size={72} top={180} max={1000}>FOUR ANGLES, <HL>NO FLATTERY</HL></WallSign>
     <CardStack top={392}>
       {COUNCIL.map((s, i) => <TintCard key={i} s={s} h={196} />)}
@@ -140,8 +141,8 @@ const Stamp: React.FC<{ label: string; c: string; live?: boolean }> = ({ label, 
 );
 const Verdict: React.FC = () => (
   <>
-    <AbsoluteFill style={{ background: WARM.wall }} />
-    <Fitout p={WARM} horizon={556} />
+    <AbsoluteFill style={{ background: CHAMBER.wall2 }} />
+    <ChamberBg p={CHAMBER} variant="drape" horizon={620} />
     <WallSign kicker="the ruling" size={74} top={176} max={1000}>YOU GET A <HL>VERDICT</HL></WallSign>
     <div style={{ position: "absolute", top: 402, left: 0, right: 0, display: "flex", justifyContent: "center", zIndex: 25 }}>
       <div style={{ position: "relative", display: "grid", placeItems: "center" }}>
@@ -169,8 +170,8 @@ const Verdict: React.FC = () => (
 /* 4 · THE SHARED NOTE — the part everyone misses. Format: one hero object. */
 const Memory: React.FC = () => (
   <>
-    <AbsoluteFill style={{ background: WARM.wall }} />
-    <Fitout p={WARM} horizon={470} />
+    <AbsoluteFill style={{ background: ARCHIVE.wall2 }} />
+    <ChamberBg p={ARCHIVE} variant="shelves" horizon={646} />
     <WallSign kicker="the part everyone misses" size={70} top={172} max={1000}>IT <HL>REMEMBERS</HL> YOUR IDEA</WallSign>
     <svg style={{ position: "absolute", top: 0, left: 0 }} width={1080} height={1350}>
       {/* four feeds into one ledger */}
@@ -214,34 +215,37 @@ const Memory: React.FC = () => (
   </>
 );
 
-/* 5 · THE CTA */
+/* 5 · THE CTA — the chamber doors. ⛔ the room went DARK, so every line of
+   copy moves onto a cream placard; ink on walnut measures ~1.3:1. */
 const Cta: React.FC = () => (
   <>
-    <AbsoluteFill style={{ background: WARM.wall }} />
-    <Fitout p={WARM} horizon={840} />
-    <div style={{ position: "absolute", top: 164, left: 0, right: 0, textAlign: "center", zIndex: 30 }}>
-      <div style={{ display: "inline-block", background: "#241A12", borderRadius: 10, padding: "13px 42px", boxShadow: `inset 0 0 0 3px ${hexA(BRASS, 0.6)}, 0 18px 34px -16px rgba(0,0,0,0.6)` }}>
-        <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 700, fontSize: 34, letterSpacing: "0.2em", color: BRASS }}>THE COUNCIL</span>
+    <AbsoluteFill style={{ background: DOORS.wall2 }} />
+    <ChamberBg p={DOORS} variant="doors" horizon={840} />
+    <div style={{ position: "absolute", top: 132, left: 0, right: 0, textAlign: "center", zIndex: 30 }}>
+      <div style={{ display: "inline-block", background: "#241A12", borderRadius: 10, padding: "12px 40px", boxShadow: `inset 0 0 0 3px ${hexA(BRASS, 0.7)}, 0 18px 34px -16px rgba(0,0,0,0.7)` }}>
+        <span style={{ fontFamily: fraunces.fontFamily, fontWeight: 700, fontSize: 32, letterSpacing: "0.2em", color: BRASS }}>THE COUNCIL</span>
       </div>
     </div>
-    <div style={{ position: "absolute", top: 272, left: 70, right: 70, textAlign: "center", fontFamily: fraunces.fontFamily, fontWeight: 600, fontSize: 74, color: INK, letterSpacing: "-0.02em", lineHeight: 1.04, zIndex: 30 }}>
-      WANT THE <HL>FREE SETUP</HL>?
+    <div style={{ position: "absolute", top: 232, left: 52, right: 52, zIndex: 35 }}>
+      <div style={{ background: "linear-gradient(178deg,#F7EDD8 0%,#EADCBE 100%)", borderRadius: 18, padding: "26px 30px 28px", textAlign: "center", boxShadow: `0 30px 52px -24px rgba(0,0,0,0.85), inset 0 0 0 3px ${hexA(BRASS, 0.7)}, inset 0 0 0 6px rgba(255,255,255,0.5)` }}>
+        <div style={{ fontFamily: fraunces.fontFamily, fontWeight: 700, fontSize: 60, color: INK, letterSpacing: "-0.025em", lineHeight: 1.04, whiteSpace: "nowrap" }}>WANT THE <HL>FREE SETUP</HL>?</div>
+        <div style={{ fontFamily: inter.fontFamily, fontWeight: 600, fontSize: 30, color: "#5C4C39", lineHeight: 1.3, marginTop: 14 }}>
+          Comment <span style={{ color: INK, fontWeight: 800 }}>"ROAST"</span> and I'll send the prompt for all four, plus the shared note.
+        </div>
+      </div>
     </div>
-    <div style={{ position: "absolute", top: 378, left: 110, right: 110, textAlign: "center", fontFamily: inter.fontFamily, fontWeight: 600, fontSize: 32, color: "#5C4C39", lineHeight: 1.3, zIndex: 30 }}>
-      Comment <span style={{ color: INK, fontWeight: 800 }}>"ROAST"</span> and I'll send the prompt for all four, plus the shared note.
+    <div style={{ position: "absolute", top: 486, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 16, zIndex: 30 }}>
+      <div style={{ padding: "16px 28px", borderRadius: 16, background: "#F5F1E8", color: INK, fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 29 }}>🔖 Save this</div>
+      <div style={{ padding: "16px 30px", borderRadius: 16, background: CLAY, color: "#fff", fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 29, boxShadow: `0 14px 30px -10px ${hexA(CLAY, 0.8)}` }}>+ Follow @nocodealex</div>
     </div>
-    <div style={{ position: "absolute", top: 500, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 16, zIndex: 30 }}>
-      <div style={{ padding: "16px 28px", borderRadius: 16, background: INK, color: PAPER, fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 29 }}>🔖 Save this</div>
-      <div style={{ padding: "16px 30px", borderRadius: 16, background: CLAY, color: "#fff", fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 29, boxShadow: `0 14px 30px -10px ${hexA(CLAY, 0.7)}` }}>+ Follow @nocodealex</div>
+    <div style={{ position: "absolute", top: 600, left: 0, right: 0, display: "flex", justifyContent: "center", zIndex: 25 }}>
+      <DeskUnit w={330} sprite={<Mascot lf={27} size={242} judge={1} tint="#6C87A8" cheer={0.3} gaze={2} nodAmp={0} />} />
     </div>
-    <div style={{ position: "absolute", top: 604, left: 0, right: 0, display: "flex", justifyContent: "center", zIndex: 25 }}>
-      <DeskUnit w={340} sprite={<Mascot lf={27} size={248} judge={1} tint="#6C87A8" cheer={0.3} gaze={2} nodAmp={0} />} />
-    </div>
-    <div style={{ position: "absolute", top: 992, left: 70, right: 70, textAlign: "center", fontFamily: fraunces.fontFamily, fontWeight: 600, fontSize: 36, color: INK, lineHeight: 1.2, zIndex: 30 }}>
+    <div style={{ position: "absolute", top: 1012, left: 60, right: 60, textAlign: "center", fontFamily: fraunces.fontFamily, fontWeight: 700, fontSize: 36, color: "#F7E9CC", lineHeight: 1.2, zIndex: 30, textShadow: "0 3px 14px rgba(0,0,0,0.85)" }}>
       Catch the fatal flaw in 10 minutes, not 6 months.
     </div>
-    <div style={{ position: "absolute", top: 1062, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 17, zIndex: 30 }}>
-      {["claude", "cursor", "codex"].map((b) => <LogoBadge key={b} brand={b} size={66} />)}
+    <div style={{ position: "absolute", top: 1080, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 17, zIndex: 30 }}>
+      {["claude", "cursor", "codex"].map((b) => <LogoBadge key={b} brand={b} size={62} />)}
     </div>
     <Vignette />
   </>
@@ -260,7 +264,7 @@ export const NoCodeCouncilCarousel: React.FC = () => {
       {s.type === "cta" && <Cta />}
       <ProgressRail i={i} n={N} />
       <CountChip i={i} n={N} />
-      {s.type !== "bench" && <Handle />}
+      {s.type !== "bench" && <Handle light />}
       {s.type !== "cta" && <SwipeCue />}
     </AbsoluteFill>
   );
