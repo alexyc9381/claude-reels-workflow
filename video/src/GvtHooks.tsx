@@ -208,12 +208,27 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
   /* ⭐ WEIGHT IS DEFORMATION: a heavy leaf does not ease to a stop, it overshoots
      its hinge and rebounds. 5deg of it, decaying over ~10 frames. */
   const rebound = f >= B.trigger + 18 ? Math.sin((f - B.trigger - 18) * 0.62) * 0.075 * Math.exp(-(f - B.trigger - 18) / 8) : 0;
-  const swing = Math.max(0, swing0 + rebound);
+  /* ⭐ THE DOOR GIVES GROUND BEFORE IT GIVES. Three visible steps in the first
+     14 frames — he sets, drives, hauls, and each one prises it a little further —
+     so 0-0.5s is an escalation with a destination rather than a held frame. */
+  const pre = f < B.trigger
+    ? 0.092 * ([0, 5, 10].reduce((a, at) => a + (f >= at ? E(f, at, at + 4, 0, 1, OUT) : 0), 0) / 3)
+    : 0;
+  const swing = Math.max(0, swing0 + rebound) + pre;
   /* before the trigger he is STRAINING, and strain is deformation + a tremble */
   const strain = f < B.trigger ? E(f, 0, B.trigger, 0.35, 1, LIN) : Math.max(0, 1 - (f - B.trigger) / 10);
-  const tremble = f < B.trigger ? Math.sin(f * 1.9) * 4.2 * strain : 0;
+  /* ⛔ "no back and forth swaying bs": a tremble is a sway — it has no destination,
+     and on a body that is otherwise still it reads as an idle. The pre-trigger move
+     is now a WIND-UP: he loads back against the bar in three steps and then it
+     gives, which is a beginning and an end. */
+  const set = [0, 5, 10].reduce((a, at) => a + (f >= at ? E(f, at, at + 5, 0, 1, OUT) : 0), 0) / 3;
+  const tremble = f < B.trigger ? -set * 31 + (f >= 12 ? (f - 12) * 5.5 : 0) : 0;
   /* the seam leaks before it gives: settled at frame 0 means AT REST, NOT INERT */
-  const leak = f < B.trigger ? E(f, 0, B.trigger, 0.18, 0.62, LIN) : 1;
+  /* ⭐ and the seam ANSWERS in the same three steps, so the first half second is a
+     conversation with a destination instead of a held frame */
+  const leak = f < B.trigger
+    ? 0.14 + 0.62 * ([0, 5, 10].reduce((a, at) => a + (f >= at ? E(f, at, at + 4, 0, 1, OUT) : 0), 0) / 3)
+    : 1;
   /* ⛔⛔ ALEX, on the hook: *"it needs to be elevated a lot here like glowing idk
      more interesting stuff like the claude guy bigger and when he opens the door
      he flys."* He is right, and it is the better idea: the product is called
@@ -253,8 +268,12 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
       y: 712 - rank * 24 - cl * (108 + rank * 26) + Math.sin(f * 0.3 + i) * 5 * cl,
       size: 96 - rank * 16, tint: ["#D97757", "#C1653F", "#A9552F"][rank], z: 62 - rank * 2 };
   });
+  /* ⛔⛔ THE PUSH USED TO START AT FRAME 24. The first 0.8s of the reel — the single
+     most important half-second in it — had NO camera move at all, which is why 0-15
+     measured 0.89 and read as a held frame however much I put into the seam. A 16px
+     light bar is 0.5% of the panel; the camera is 100% of it. */
   return (
-    <Scene p={asPlace("bay")} slug="" push={[24, 58, 1.11]} vig={0.10}>
+      <Scene p={asPlace("bay")} slug="" push={[0, 58, 1.14]} vig={0.10}>
       <Hall f={f} a={a} lift={lift} open={swing} />
       {/* the doorway's own jamb, so the leaves read as fitted into something */}
       <div style={{ position: "absolute", left: mx - MW / 2 - 18, top: my - 16, width: MW + 36,
@@ -343,16 +362,31 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
             w={26} c="#C4674A" z={61} />
         ))}
       </div>
-      {/* ⭐ EFFORT WANTS AN EMITTER ON THE STILLEST PART: steam off the head, which
-          is the one part not acting while the arms and body do. */}
-      {f < B.trigger + 12 && Array.from({ length: 7 }, (_, i) => {
-        const p = ((f * 0.05 + i * 0.16) % 1);
+      {/* ⛔⛔ ALEX, on 0-0.5s: *"way too boring with just the claude sprite standing
+          in front of the gate doing nothing kind of smoking."* This WAS an effort
+          emitter — white puffs off his head — and he read it as smoking, which is
+          fair: it was the only thing moving for the first fifteen frames, and puffs
+          drifting off a still figure is what smoking looks like. Gone.
+          ⭐ What replaces it is directional: the CROWBAR GOES IN. He sets it, drives
+          it into the seam, and hauls — three steps with a destination — and the seam
+          answers by opening in three visible stages before it gives at f14. */}
+      {f < B.trigger + 3 && [0, 1, 2].map((k) => {
+        const at = k * 5;
+        const on = E(f, at, at + 4, 0, 1, OUT);
+        const h = MH * (0.30 + k * 0.22);
         return (
-          <div key={"st" + i} style={{ position: "absolute",
-            left: HX - 70 + (i % 2 ? 112 : 0) + Math.sin(f / 7 + i) * 14,
-            top: HY - HS - 4 - p * 92, width: 21 + p * 28, height: 21 + p * 28,
-            borderRadius: "50%", zIndex: 66,
-            background: hexa("#FFFFFF", (1 - p) * 0.82 * Math.min(1, strain + 0.35)) }} />
+          <React.Fragment key={"sk" + k}>
+            {/* the seam itself, opening further on every step */}
+            <div style={{ position: "absolute", zIndex: 66,
+              left: mx - (7 + on * 9) / 2, top: my + (MH - h) / 2, width: 7 + on * 9, height: h,
+              borderRadius: 4, background: hexa("#FFE9BC", 0.5 + on * 0.5),
+              boxShadow: `0 0 ${20 + on * 34}px ${6 + on * 12}px ${hexa("#FFC96B", 0.45 + on * 0.4)}` }} />
+            {/* and the burst where the bar is biting */}
+            <div style={{ position: "absolute", zIndex: 67,
+              left: mx - 46 + on * 12, top: my + MH * 0.58 - 46, width: 92, height: 92,
+              borderRadius: "50%", opacity: on * (1 - on) * 3.4,
+              background: `radial-gradient(circle, ${hexa("#FFF0CC", 0.85)} 0%, transparent 66%)` }} />
+          </React.Fragment>
         );
       })}
       {/* the floor takes the load: dust off the base on the frame it gives */}

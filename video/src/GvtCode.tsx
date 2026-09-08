@@ -421,7 +421,7 @@ export const VsCode: React.FC<{
           <div style={{ marginTop: 12 * s, width: 74 * s, height: 20 * s, borderRadius: 3 * s,
             background: install > 0 ? "#2D2D2D" : VS.accent, overflow: "hidden",
             display: "flex", alignItems: "center", justifyContent: "center",
-            transform: `scale(${install > 0 && install < 0.1 ? 0.94 : 1})` }}>
+            transform: `scale(${install > 0 && install < 0.28 ? 0.92 : 1})` }}>
             {install > 0 && (
               <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${install * 74 * s}px`,
                 background: VS.accent }} />

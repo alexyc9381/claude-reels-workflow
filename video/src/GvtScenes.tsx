@@ -247,11 +247,21 @@ export const SOCKET: React.FC<SP> = ({ v, dur }) => {
   /* ⭐ "for VS Code" is a fact with FOUR MORE in it: the extension shipped for
      five editors on the same day. They land on the word, with VS Code lit. */
   const CLICK = 17, IDE = 10;
-  const install = E(f, CLICK, 20, 0, 1, IO);
-  const kick = f >= CLICK && f < CLICK + 5 ? (1 - (f - CLICK) / 5) * 5 : 0;
+  /* ⛔⛔ ALEX, on 3-4s: *"when he clicks the install thing it should show more and
+     be more interesting, right now its literally just opening it and then clicking
+     it and boring there like it kinda unclicks."* The cause: install ramped
+     E(f, CLICK, 20) — CLICK is 17, so the whole install ran in THREE FRAMES. The
+     progress bar and the "Installing" label were both already drawn and neither was
+     ever on screen long enough to see; the button just flipped, which is exactly
+     what "it kinda unclicks" looks like.
+     ⭐ 15 frames now, so the press, the fill and the finish are three separate
+     things you can watch — a beginning and an end. */
+  const install = E(f, CLICK, CLICK + 15, 0, 1, IO);
+  const DONE = CLICK + 15;
+  const kick = f >= CLICK && f < CLICK + 5 ? (1 - (f - CLICK) / 5) * 7 : 0;
   const cur = E(f, 4, 13, 0, 1, IO);         /* the cursor's travel to the button */
   return (
-    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.03]} vig={0.20}>
+    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.07]} vig={0.20}>
       <BayStage f={f} v={v} crowd={7}>
       {/* the viewport walks to the Install button on "for", and the click lands on
           "VS" with the button filling a third of the frame */}
@@ -268,8 +278,28 @@ export const SOCKET: React.FC<SP> = ({ v, dur }) => {
       {/* the pointer, travelling to the button and pressing it */}
       <div style={{ position: "absolute", left: 700 - cur * 190,
         top: 300 + cur * 128 + L.wy + (f >= CLICK && f < CLICK + 4 ? 6 : 0), zIndex: 88,
-        width: 0, height: 0, borderLeft: `18px solid ${BONE}`, borderBottom: "26px solid transparent",
-        transform: "rotate(-16deg)", filter: "drop-shadow(0 3px 4px rgba(0,0,0,0.55))" }} />
+        width: 0, height: 0, borderLeft: `26px solid ${BONE}`, borderBottom: "38px solid transparent",
+        transform: `rotate(-16deg) scale(${f >= CLICK && f < CLICK + 4 ? 0.84 : 1})`,
+        filter: "drop-shadow(0 4px 5px rgba(0,0,0,0.6))" }} />
+      {f >= DONE && f < DONE + 14 && (() => {
+        const t = E(f, DONE, DONE + 12, 0, 1, IO);
+        return (
+          <div style={{ position: "absolute", zIndex: 90,
+            left: 470 - t * 386, top: 396 + L.wy - t * 250 - Math.sin(t * Math.PI) * 56,
+            width: 74 - t * 26, height: 74 - t * 26, borderRadius: 14, overflow: "hidden",
+            boxShadow: SH_D, transform: `rotate(${t * -22}deg)` }}>
+            <Img src={staticFile("logos/antigravity.png")}
+              style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+          </div>
+        );
+      })()}
+      {/* it lands in the activity bar and the bar takes the hit */}
+      {f >= DONE + 12 && f < DONE + 22 && (
+        <div style={{ position: "absolute", left: 84, top: 146 + L.wy, width: 150, height: 150,
+          zIndex: 89, borderRadius: "50%", pointerEvents: "none",
+          border: `${5 * (1 - E(f, DONE + 12, DONE + 22, 0, 1, OUT))}px solid ${hexa(AGV, 0.8 * (1 - E(f, DONE + 12, DONE + 22, 0, 1, OUT)))}`,
+          transform: `scale(${0.4 + E(f, DONE + 12, DONE + 22, 0, 1, OUT) * 0.9})` }} />
+      )}
       {f >= CLICK && f < CLICK + 9 && (
         <div style={{ position: "absolute", left: 508, top: 432 + L.wy, zIndex: 86,
           width: 70 * E(f, CLICK, CLICK + 9, 0.4, 1, OUT), height: 70 * E(f, CLICK, CLICK + 9, 0.4, 1, OUT),
@@ -908,7 +938,14 @@ export const RIVALS: React.FC<SP> = ({ v, dur }) => {
                 mechanism keeps living after the tilt has settled. Bigger too — at
                 92px they were the smallest things in their own scene. */}
             <div style={{ position: "absolute", left: px - 58, top: py - 214, width: 116, height: 116,
-              zIndex: 58, transform: `rotate(${-tilt * 0.75 + Math.sin(f * 0.26 + (isVs ? 0 : 1.6)) * 5}deg)`,
+              /* ⛔ "no back and forth swaying bs": this carried a perpetual
+                 Math.sin(f) wobble on top of the beam angle, so the marks kept
+                 rocking after the balance had made its point — motion with no
+                 destination, which is the definition of a sway. They now follow
+                 the beam and NOTHING ELSE: the beam's own jolt and bottom-out
+                 already decay, so these move while it moves and are still when
+                 it stops. [[feedback_a_sway_is_not_motion]] */
+              zIndex: 58, transform: `rotate(${-tilt * 0.82}deg)`,
               transformOrigin: "50% -22%" }}>
               {isVs ? <VscTile x={0} y={0} s={116} z={58} />
                     : <Tile x={0} y={0} src="antigravity.png" full s={116} z={58} />}
