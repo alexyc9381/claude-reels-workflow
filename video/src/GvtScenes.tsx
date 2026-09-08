@@ -221,9 +221,9 @@ export const LISTING: React.FC<SP> = ({ v, dur }) => {
       {/* the tick's own call-out ring, on the word "official" */}
       {f >= TICK && f < TICK + 12 && (
         <div style={{ position: "absolute", left: 506, top: 386 + L.wy, zIndex: 84,
-          width: 62 * E(f, TICK, 8, 2.6, 1, OUT), height: 62 * E(f, TICK, 8, 2.6, 1, OUT),
+          width: 62 * E(f, TICK, TICK + 8, 2.6, 1, OUT), height: 62 * E(f, TICK, TICK + 8, 2.6, 1, OUT),
           marginLeft: -31, marginTop: -31, borderRadius: "50%",
-          border: `5px solid ${hexa(SKY, 1 - E(f, TICK + 2, 10, 0, 1, LIN))}` }} />
+          border: `5px solid ${hexa(SKY, 1 - E(f, TICK + 2, (TICK + 2) + 10, 0, 1, LIN))}` }} />
       )}
     </BayStage>
     </Scene>
@@ -272,9 +272,9 @@ export const SOCKET: React.FC<SP> = ({ v, dur }) => {
         transform: "rotate(-16deg)", filter: "drop-shadow(0 3px 4px rgba(0,0,0,0.55))" }} />
       {f >= CLICK && f < CLICK + 9 && (
         <div style={{ position: "absolute", left: 508, top: 432 + L.wy, zIndex: 86,
-          width: 70 * E(f, CLICK, 9, 0.4, 1, OUT), height: 70 * E(f, CLICK, 9, 0.4, 1, OUT),
+          width: 70 * E(f, CLICK, CLICK + 9, 0.4, 1, OUT), height: 70 * E(f, CLICK, CLICK + 9, 0.4, 1, OUT),
           marginLeft: -35, marginTop: -35, borderRadius: "50%",
-          border: `4px solid ${hexa(SKY, 1 - E(f, CLICK, 9, 0, 1, LIN))}` }} />
+          border: `4px solid ${hexa(SKY, 1 - E(f, CLICK, CLICK + 9, 0, 1, LIN))}` }} />
       )}
     </BayStage>
     </Scene>
@@ -327,8 +327,8 @@ export const MOVE: React.FC<SP> = ({ v, dur }) => {
      snap home is fast and eased hard, so it reads as a rejection, not a step */
   const slot = (i: number) => rx + i * (TW + GAP);
   const hx = f >= SNAP
-    ? slot(raw) + E(f, SNAP, 6, 0, 1, IO) * (slot(0) - slot(raw))
-    : slot(sel) + (sel < STEPS.length - 1 ? E(f, STEPS[sel + 1] - 5, 5, 0, 1, IO) * (TW + GAP) : 0);
+    ? slot(raw) + E(f, SNAP, SNAP + 6, 0, 1, IO) * (slot(0) - slot(raw))
+    : slot(sel) + (sel < STEPS.length - 1 ? E(f, STEPS[sel + 1] - 5, STEPS[sel + 1], 0, 1, IO) * (TW + GAP) : 0);
   const drag = E(f, 26, JAM - 26, 0, 1, OUT);
   const jolt = f >= JAM && f < JAM + 8 ? (1 - (f - JAM) / 8) * 7 : 0;
   return (
@@ -397,118 +397,90 @@ export const MOVE: React.FC<SP> = ({ v, dur }) => {
 export const SETDOWN: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const L = LAY[v];
-  /* ⛔⛔ REV 3, ALIGNMENT: this scene used to show crates being SET DOWN while the
-     voice says "you can bring Antigravity's AI". The picture was about not moving
-     and the words are about BRINGING. Crates-down belongs to the previous line
-     ("instead of switching"), so this scene now shows the thing the words name:
-     the Antigravity panel crossing the frame toward your editor.
-     ⭐ BEATS (scene starts f188):
-       "bring"         f193  it launches from off-frame
-       "Antigravity's" f199  it travels, its contents resolving as it comes
-       "AI"            f220  it arrives at the window's edge, ready for the dock  */
-  const GO = 5;
-  const t = E(f, GO, 27, 0, 1, IO);
+  /* ⛔⛔ ALEX, on 6-11s: *"the animations are horrendous like idk whats even going
+     on there."* He is right and the cause was structural, not decorative:
+       1. SETDOWN, DOCK and PRICE were THE SAME SHOT — one 2100px VS Code window
+          through a 960px viewport, three times running, so 4.5s had no cut in it.
+       2. This scene drew a 420x424 ANTIGRAVITY panel FLYING ACROSS the frame whose
+          contents were 6px grey bars, and DOCK then drew a SECOND panel at 330x400,
+          and VsCode drew a THIRD one docked. The same object, three sizes, and for
+          ~8 frames it was an EMPTY BLACK BOX mid-handoff.
+       3. Every UiStage camera move was an instant teleport (the E() bug), so the
+          three shots also lurched.
+     ⭐ REBUILT AS ONE IDEA: the panel is never a flying slab. It OPENS OUT of the
+     editor's right edge the way a real side panel does, and its three capabilities
+     type in one per spoken word, at a crop tight enough to actually read.
+     ⭐ SHOT: TIGHT (ww 3000, was 2100 — a 1.43x crop, the house answer to "too
+     small" being CROP, not enlarge).
+     BEATS (scene starts f188):
+       "bring"          f193  local  5   the panel cracks open at the edge
+       "Antigravity's"  f199  local 11   AGENTS types in
+                        f206  local 18   INLINE DIFFS
+                        f213  local 25   PLANS
+       "AI"             f220  local 32   the panel is full and the edge light seats */
+  const OPEN = 5, CAPS = [11, 18, 25];
+  const open = E(f, OPEN, OPEN + 12, 0, 1, OUT);
+  const seat = E(f, 30, 36, 0, 1, BACK);
   return (
-    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.0]} vig={0.20}>
+    <Scene p={asPlace("bay")} slug="" push={[0, dur, 1.05]} vig={0.20}>
       <BayStage f={f} v={v} crowd={7}>
-      {/* your editor, waiting, with its right edge open and lit */}
       <Screen y={128}>
-        <UiStage f={f} ww={2100} wh={1120} z={62} vy={128 + L.wy} vh={452}
-        keys={[[0, 900 + L.fx, 430 + L.fy], [GO + 8, 1300 + L.fx, 430 + L.fy]]}>
-        <VsCode x={0} y={0} w={2100} h={1120} z={1} f={f}
-          panel={0} mark title="loader.ts" branch="main" live={0.5} />
+        <UiStage f={f} ww={3000} wh={1600} z={62} vy={128 + L.wy} vh={452}
+        /* ⛔ framing: fy 620 put the panel HEADER and its first agent row above the
+             viewport, and fx 1500 cut every code line mid-indent at the left edge. */
+        keys={[[0, 1320 + L.fx, 470 + L.fy], [CAPS[0], 2070 + L.fx, 430 + L.fy]]}>
+        <VsCode x={0} y={0} w={3000} h={1600} z={1} f={f}
+          panel={open} capAt={CAPS} mark title="loader.ts" branch="main" live={0.5} />
       </UiStage>
       </Screen>
-      <div style={{ position: "absolute", left: 966, top: 150 + L.wy, width: 12, height: 496,
-        zIndex: 68, background: hexa(AGV, 0.25 + t * 0.55) }} />
-      {/* the panel itself, crossing the frame */}
-      <div style={{ position: "absolute", left: 1120 - t * 700, top: 186 + L.wy,
-        width: 420, height: 424, zIndex: 74, borderRadius: 8, background: "#1B1B1B",
-        border: `4px solid ${hexa(AGV, 0.85)}`, boxShadow: SH_D,
-        transform: `rotate(${(1 - t) * 6}deg) scale(${0.86 + t * 0.14})` }}>
-        <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: 56,
-          background: AGV, display: "flex", alignItems: "center", gap: 11, paddingLeft: 14 }}>
-          <div style={{ width: 38, height: 38, borderRadius: 8, background: "#FFF",
-            display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Img src={staticFile("logos/antigravity.png")} style={{ width: 30, height: 30, objectFit: "contain" }} />
-          </div>
-          <span style={{ ...mono(18, 800), color: "#2A2010", letterSpacing: "0.08em" }}>ANTIGRAVITY</span>
-        </div>
-        {/* its contents resolve as it travels, so the arrival is not a slab */}
-        {G.panel.map((row, i) => (
-          <div key={"pr" + i} style={{ position: "absolute", left: 12, right: 12, top: 74 + i * 80,
-            height: 68, borderRadius: 4, background: hexa("#FFFFFF", 0.05),
-            borderLeft: `5px solid ${[AGV, "#4EA24E", SKY][i]}`,
-            opacity: E(f, GO + 6 + i * 6, 7, 0, 1, OUT) }}>
-            <div style={{ position: "absolute", left: 10, top: 8, ...mono(10, 800),
-              color: [AGV, "#4EA24E", SKY][i], letterSpacing: "0.10em", fontSize: 13 }}>{row}</div>
-            {[0, 1].map((k) => (
-              <div key={k} style={{ position: "absolute", left: 10, top: 28 + k * 12,
-                width: 200 - k * 62 - i * 20, height: 5, borderRadius: 2,
-                background: hexa(BONE, 0.30) }} />
-            ))}
-          </div>
-        ))}
-      </div>
-    </BayStage>
+      {/* the seam the panel opens along — one lit edge, on the object, not a slab */}
+      <div style={{ position: "absolute", left: 506 - 486 + 24, top: 150 + L.wy,
+        width: 968, height: 496, zIndex: 76, pointerEvents: "none",
+        boxShadow: `inset 0 0 0 ${3 * seat}px ${hexa(AGV, 0.55 * seat)}`,
+        borderRadius: 8 }} />
+      </BayStage>
     </Scene>
   );
 };
 
-/* =========================================================================
-   S6 · THE DOCK — ⭐ THE BIGGEST EVENT IN THE REEL GETS THE STILLEST CAMERA.
-   The whole upside rig descends on four cables and docks onto the shared wall,
-   and the room's light direction changes on the same frame.  60f, WIDE, LOCKED.
-   EVENT: before (the rig high) · trigger (the descent) · travel (34f of it,
-   with weight: it decelerates and overshoots 9px) · arrival (DOCK at f36).
-   ACCUMULATOR: agents f40, diff f46, plan f52 — the three things the panel does.
-   ====================================================================== */
 export const DOCK: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const L = LAY[v];
-  /* ⭐ BEATS ON THEIR WORDS (scene starts f224):
-       "coding experience" f224  the panel is at the edge, its three rows lit
-       "into"              f243  it slides IN and the code makes room for it
-       "VS Code."          f250  DOCKED. The window is one thing again, and the
-                                 diff starts landing in the code beside it.       */
-  /* ⭐ "coding experience into VS Code" names three things the panel does, so
-     they arrive one per word rather than all together:
-       "coding"     f224  AGENTS         local  0
-       "experience" f230  INLINE DIFFS   local  6
-       "into"       f243  PLANS          local 19                              */
-  const IN = 19, DK = 26, CAPS = [1, 7, 19];
-  const slide = E(f, IN, DK - IN + 4, 0, 1, OUT);
-  const over = f >= DK ? Math.sin((f - DK) * 0.7) * 6 * Math.exp(-(f - DK) / 6) : 0;
-  const shake = f >= DK && f < DK + 6 ? (1 - (f - DK) / 6) * 4 : 0;
+  /* ⭐ SHOT 2 of the rebuilt run, and it is a DIFFERENT shot from SETDOWN: the
+     panel is already open, so the camera leaves it and travels to the CODE, where
+     the diff lands. One continuous idea across the two scenes, two framings.
+     ⛔ The second, duplicate 330x400 panel that used to live here is gone — it was
+     the empty black box. There is now exactly ONE panel in the reel, the real one
+     inside the editor.
+     BEATS (scene starts f224):
+       "coding"      f224  local  0  the panel's agents are working
+       "experience"  f230  local  6  the camera starts back toward the code
+       "into"        f243  local 19  ⭐ THE DIFF LANDS — red line struck, green in
+       "VS Code."    f250  local 26  the window seats: errors 3 -> 0 on the status bar */
+  const DK = 19, CAPS = [0, 3, 8];
+  const seat = f >= 26 ? Math.sin((f - 26) * 0.62) * 5 * Math.exp(-(f - 26) / 7) : 0;
   return (
-    <Scene p={asPlace(f >= DK ? "bayLit" : "bay")} slug="" push={[0, dur, 1.02]} vig={0.20}>
+    <Scene p={asPlace(f >= DK ? "bayLit" : "bay")} slug="" push={[0, dur, 1.04]} vig={0.20}>
       <BayStage f={f} v={v} lit crowd={7}>
-      {/* held on the window's right edge, which is where the panel arrives */}
-      <div style={{ position: "absolute", left: over, top: shake * (f % 2 ? 1 : -1),
-        width: W, height: H, zIndex: 60 }}>
+      <div style={{ position: "absolute", left: seat, top: 0, width: W, height: H, zIndex: 60 }}>
         <Screen y={128}>
-          <UiStage f={f} ww={2100} wh={1120} z={62} vy={128 + L.wy} vh={452}
-          keys={[[0, 1180 + L.fx, 430 + L.fy], [IN, 1500 + L.fx, 430 + L.fy], [DK, 1560 + L.fx, 430 + L.fy]]}>
-          <VsCode x={0} y={0} w={2100} h={1120} z={1} f={f}
-            panel={slide} mark diffAt={f >= DK ? DK : -1} capAt={CAPS}
+          <UiStage f={f} ww={3000} wh={1600} z={62} vy={128 + L.wy} vh={452}
+          keys={[[0, 2070 + L.fx, 430 + L.fy], [DK, 1240 + L.fx, 500 + L.fy], [30, 1300 + L.fx, 530 + L.fy]]}>
+          <VsCode x={0} y={0} w={3000} h={1600} z={1} f={f}
+            panel={1} mark diffAt={f >= DK ? DK : -1} capAt={CAPS}
             title="loader.ts" branch="main" live={0.7} />
         </UiStage>
-      </Screen>
+        </Screen>
       </div>
-      {/* the last of the travelling panel, handing off to the docked one */}
-      {f < IN + 3 && (
-        <div style={{ position: "absolute", left: 700, top: 176 + L.wy, width: 330, height: 400,
-          zIndex: 70, borderRadius: 8, background: "#1B1B1B", border: `4px solid ${hexa(AGV, 0.85)}`,
-          opacity: 1 - E(f, IN, 3, 0, 1, LIN) }}>
-          <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: 46, background: AGV }} />
-        </div>
+      {/* ⭐ THE ARRIVAL, on the object: the diff line flashes where it lands, and
+          the frame gives one ring rather than a caption telling you it happened */}
+      {f >= DK && f < DK + 12 && (
+        <div style={{ position: "absolute", left: 506 - 300, top: 300 + L.wy,
+          width: 600, height: 600, zIndex: 86, borderRadius: "50%", pointerEvents: "none",
+          border: `${5 * (1 - E(f, DK, DK + 12, 0, 1, OUT))}px solid ${hexa(GREEN, 0.5 * (1 - E(f, DK, DK + 12, 0, 1, OUT)))}`,
+          transform: `scale(${0.3 + E(f, DK, DK + 12, 0, 1, OUT) * 0.9})` }} />
       )}
-      {/* the dock, called out once where it happens */}
-      {f >= DK && f < DK + 10 && (
-        <div style={{ position: "absolute", left: 506, top: 138 + L.wy, width: 10, height: 496,
-          zIndex: 84, background: hexa(AGV, 1 - E(f, DK, 10, 0, 1, LIN)) }} />
-      )}
-    </BayStage>
+      </BayStage>
     </Scene>
   );
 };
@@ -523,79 +495,109 @@ export const DOCK: React.FC<SP> = ({ v, dur }) => {
 export const PRICE: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const L = LAY[v];
-  /* ⛔ REV 3: a dock tonnage board with spinning digits was a sign ABOUT a price.
-     The sentence names "the free PLAN", so the frame shows the plan — the real
-     pricing card, inside the editor, on the words that name it.
-     ⭐ BEATS (scene starts f268):
-       "the crazy part" f270  the plan card slides up over the editor
-       "the free plan"  f291  it resolves to Individual · Free
-       "gives you"      f307  $0 stamps
-       "access"         f316  the two unlimited allowances snap in            */
-  const CARD = 10, PLAN = 23, ZERO = 39, ALLOW = 45;
-  const up = E(f, CARD, 10, 0, 1, OUT);
+  /* ⛔⛔ THE THIRD SHOT OF THE SAME EDITOR. SETDOWN, DOCK and PRICE all framed the
+     same VS Code window, so 6-11s had no cut in it — which is most of why Alex
+     could not tell what was going on. This scene also SCRIMMED the editor to 62%
+     black to read as a modal, which dimmed the one thing still repainting, and
+     then held a still card for 1.43s of its 1.8s.
+     ⭐ REBUILT AS A DIFFERENT PLACE: we leave the editor entirely. The plan is a
+     real board craned down into the bay and landed, which is this world's own
+     vocabulary, and every number on it arrives as its own beat.
+     ⭐ SIX ARRIVALS SPREAD ACROSS THE FULL 54 FRAMES (doc §9: an arrival inside
+     the first third leaves the rest dead).
+     BEATS (scene starts f268):
+       "crazy"   f273  local  5  the board drops in on its chains
+       "part,"   f282  local 14  it LANDS — recoil, dust, the deck takes the weight
+       "free"    f294  local 26  the plan name resolves
+       "plan"    f301  local 33  ⭐ $0 stamps
+       "gives"   f307  local 39  allowance 1 slams in from the left
+       "you"     f313  local 45  allowance 2
+       "access"  f316  local 48  the rate-limit line, and the crowd turns          */
+  const DROP = 2, LAND = 12, NAME = 24, ZERO = 31, A1 = 38, A2 = 44, FOOT = 49;
+  const drop = E(f, DROP, LAND, -430, 0, IO);
+  const bounce = f >= LAND ? Math.sin((f - LAND) * 0.55) * 13 * Math.exp(-(f - LAND) / 6) : 0;
+  /* ⛔ f26-53 measured DEAD even with four beats in it: each beat was a small row
+     on an 812x372 board, and a small change on a big still object repaints almost
+     nothing. A heavy plate takes every stamp, so the WHOLE BOARD now recoils on
+     each arrival — same events, but the area that moves is the board, not a row. */
+  const kick = [NAME, ZERO, A1, A2, FOOT].reduce((a, at) =>
+    a + (f >= at ? Math.sin((f - at) * 0.9) * 9 * Math.exp(-(f - at) / 4.5) : 0), 0);
+  const tip = [ZERO, A1, A2].reduce((a, at) =>
+    a + (f >= at ? Math.sin((f - at) * 0.8) * 0.9 * Math.exp(-(f - at) / 5) : 0), 0);
+  const BX = 506 + L.a * 0.3, BW = 812, BH = 372, BY = 214 + L.wy;
   return (
-    <Scene p={asPlace("bayLit")} slug="" push={[0, dur, 1.02]} vig={0.20}>
-      <BayStage f={f} v={v} lit crowd={7}>
-      <Screen y={128}>
-        <UiStage f={f} ww={2100} wh={1120} z={62} vy={128 + L.wy} vh={452}
-        keys={[[0, 1000 + L.fx, 430 + L.fy], [PLAN, 1180 + L.fx, 430 + L.fy]]}>
-        <VsCode x={0} y={0} w={2100} h={1120} z={1} f={f}
-          panel={1} mark title="loader.ts" branch="main" live={0.9} />
-      </UiStage>
-      </Screen>
-      {/* ⛔ ALEX, on components overlaying: a panel floating with the code still
-          fully lit behind it reads as CLUTTER. A real modal DIMS what it covers,
-          which is also what makes it read as one thing on top of another. */}
-      <div style={{ position: "absolute", left: 16, top: 120 + L.wy, width: 980, height: 468,
-        zIndex: 80, borderRadius: 12, background: hexa("#080B10", 0.62 * up) }} />
-      {/* the plan card, over the stage, the way a real upgrade panel opens */}
-      <div style={{ position: "absolute", left: 506 - 412, top: 176 + L.wy + (1 - up) * 120,
-        width: 824, height: 404, zIndex: 82, borderRadius: 10, background: "#232323",
-        border: `3px solid #454545`, boxShadow: SH_D, opacity: up }}>
-        <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: 44, background: "#2D2D2D",
-          display: "flex", alignItems: "center", paddingLeft: 14, gap: 10 }}>
-          <div style={{ width: 26, height: 26, borderRadius: 5, background: "#FFF",
-            display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Img src={staticFile("logos/antigravity.png")} style={{ width: 21, height: 21, objectFit: "contain" }} />
+    <Scene p={asPlace("bayLit")} slug="" push={[0, dur, 1.09]} vig={0.22}>
+      <BayStage f={f} v={v} lit crowd={8}>
+      {/* the two chains it comes down on, so it is CRANED and not floating */}
+      {[-1, 1].map((side) => (
+        <div key={"ch" + side} style={{ position: "absolute", left: BX + side * 300 - 4,
+          top: 0, width: 8, height: BY + drop + bounce + kick + 24, zIndex: 58,
+          background: `repeating-linear-gradient(180deg,${CHROME} 0px,${CHROME} 7px,#2B3446 7px,#2B3446 14px)` }} />
+      ))}
+      {/* ⭐ THE BOARD — one dominant object, its own light, in the bay's material */}
+      <div style={{ position: "absolute", left: BX - BW / 2, top: BY + drop + bounce + kick,
+        width: BW, height: BH, zIndex: 60, borderRadius: 12, boxShadow: SH_D,
+        transform: `rotate(${tip}deg)`, transformOrigin: "50% 0%",
+        background: "linear-gradient(180deg,#2A3340 0%,#141A24 100%)",
+        border: "5px solid #0B1018" }}>
+        <div style={{ position: "absolute", left: 0, top: 0, right: 0, height: 62,
+          borderRadius: "7px 7px 0 0", background: `linear-gradient(180deg,${AGV} 0%,#C9922F 100%)`,
+          display: "flex", alignItems: "center", gap: 12, paddingLeft: 18 }}>
+          <div style={{ width: 40, height: 40, borderRadius: 9, overflow: "hidden" }}>
+            <Img src={staticFile("logos/antigravity.png")} style={{ width: 40, height: 40, objectFit: "contain" }} />
           </div>
-          <span style={{ ...mono(13, 800), color: hexa(BONE, 0.9), letterSpacing: "0.10em" }}>PLANS</span>
+          <span style={{ ...mono(21, 800), color: "#241B08", letterSpacing: "0.10em" }}>THE FREE PLAN</span>
         </div>
-        {/* the plan row, resolving on "the free plan" */}
-        <div style={{ position: "absolute", left: 18, top: 66, right: 18, height: 84, borderRadius: 8,
-          background: f >= PLAN ? hexa(GREEN, 0.16) : hexa("#FFFFFF", 0.04),
-          border: `2px solid ${f >= PLAN ? hexa(GREEN, 0.75) : "#3C3C3C"}` }}>
-          <div style={{ position: "absolute", left: 18, top: 16, ...mono(23, 800), color: BONE }}>
-            {f >= PLAN ? "Individual" : "Select a plan"}
+        {/* the plan name, then the price stamping on its own word */}
+        <div style={{ position: "absolute", left: 20, top: 82, right: 20, height: 96, borderRadius: 9,
+          background: f >= NAME ? hexa(GREEN, 0.17) : hexa("#FFFFFF", 0.05),
+          border: `3px solid ${f >= NAME ? hexa(GREEN, 0.8) : "#39424F"}` }}>
+          <div style={{ position: "absolute", left: 20, top: 16, ...mono(30, 800), color: BONE }}>
+            {f >= NAME ? "Individual" : "Select a plan"}
           </div>
-          <div style={{ position: "absolute", left: 18, top: 50, ...mono(14, 600), color: hexa(BONE, 0.6) }}>
-            {f >= PLAN ? "no card required" : ""}
+          <div style={{ position: "absolute", left: 20, top: 56, ...mono(16, 600), color: hexa(BONE, 0.62) }}>
+            {f >= NAME ? "no card required" : ""}
           </div>
-          <div style={{ position: "absolute", right: 20, top: 10, ...mono(52, 900),
-            color: f >= ZERO ? GREEN : hexa(BONE, 0.35),
-            transform: `scale(${f >= ZERO ? E(f, ZERO, 7, 1.35, 1, BACK) : 1})` }}>
+          <div style={{ position: "absolute", right: 24, top: 8, ...mono(62, 900),
+            color: f >= ZERO ? GREEN : hexa(BONE, 0.3),
+            transform: `scale(${f >= ZERO ? E(f, ZERO, ZERO + 8, 1.45, 1, BACK) : 1})` }}>
             {f >= ZERO ? G.price : "$--"}
           </div>
         </div>
-        {/* the two allowances the page actually prints */}
-        {G.allowances.map((a, i) => {
-          const on = E(f, ALLOW + i * 5, 6, 0, 1, BACK);
+        {/* the two allowances, each SLAMMING in from off the board's own left edge */}
+        {G.allowances.map((al, i) => {
+          const at = i === 0 ? A1 : A2;
+          const on = E(f, at, at + 7, 0, 1, BACK);
           return (
-            <div key={"al" + i} style={{ position: "absolute", left: 18, top: 172 + i * 62, right: 18,
-              height: 52, borderRadius: 7, background: hexa(GREEN, 0.14),
-              border: `2px solid ${hexa(GREEN, 0.55)}`, display: "flex", alignItems: "center",
-              paddingLeft: 16, gap: 12, opacity: on,
-              transform: `translateX(${(1 - on) * -700}px)` }}>
-              <span style={{ ...mono(20, 900), color: GREEN }}>✓</span>
-              <span style={{ ...mono(17, 700), color: hexa(BONE, 0.94), letterSpacing: "0.03em" }}>{a}</span>
+            <div key={"al" + i} style={{ position: "absolute", left: 20, top: 194 + i * 62, right: 20,
+              height: 54, borderRadius: 8, background: hexa(GREEN, 0.15),
+              border: `3px solid ${hexa(GREEN, 0.6)}`, display: "flex", alignItems: "center",
+              paddingLeft: 18, gap: 14, opacity: on,
+              transform: `translateX(${(1 - on) * -820}px)` }}>
+              <span style={{ ...mono(22, 900), color: GREEN }}>✓</span>
+              <span style={{ ...mono(19, 700), color: hexa(BONE, 0.95) }}>{al}</span>
             </div>
           );
         })}
-        <div style={{ position: "absolute", left: 20, bottom: 14, ...mono(14, 600),
-          color: hexa(BONE, 0.55), opacity: E(f, ALLOW + 10, 6, 0, 1, OUT) }}>
+        <div style={{ position: "absolute", left: 22, bottom: 14, ...mono(15, 600),
+          color: hexa(BONE, 0.6), opacity: E(f, FOOT, FOOT + 6, 0, 1, OUT) }}>
           basic weekly rate limits
         </div>
       </div>
-    </BayStage>
+      {/* the landing: dust off the deck where the weight went in */}
+      {f >= LAND && f < LAND + 16 && [-1, 1].map((side) => (
+        <div key={"du" + side} style={{ position: "absolute", zIndex: 66,
+          left: BX + side * 300 - 60 + side * E(f, LAND, LAND + 16, 0, 90, OUT),
+          top: BY + BH - 10 + drop, width: 120, height: 26, borderRadius: "50%",
+          background: hexa("#C9B79A", 0.4 * (1 - E(f, LAND, LAND + 16, 0, 1, OUT))),
+          transform: `scale(${0.5 + E(f, LAND, LAND + 16, 0, 1.6, OUT)})` }} />
+      ))}
+      {/* THE HERO DOES: he takes the weight as it lands, then looks up at the $0 */}
+      <Hero f={f} x={104 + L.a + L.hx * 0.3} y={GY + 96} size={252} z={82}
+        act={f >= ZERO ? 3 : 1} gaze={f >= ZERO ? 1 : 0.3}
+        strain={f >= LAND && f < ZERO ? 0.9 : 0.2} stern={0.5} costume={{ constr: 1 }} />
+      <Contact x={104 + L.a} y={GY + 96} w={210} z={24} o={0.34} />
+      </BayStage>
     </Scene>
   );
 };
@@ -625,7 +627,7 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
        "Gemini," f340 · "Claude Opus," f358 · "Claude Sonnet," f384 · "GPT." f404 */
   const OPEN = 8;
   const ROWS = [18, 36, 62, 82];
-  const open = E(f, OPEN, 9, 0, 1, BACK);
+  const open = E(f, OPEN, OPEN + 9, 0, 1, BACK);
   const SW = 800, SH2 = 386, sx = 506 - SW / 2, sy = 178 + L.wy;
   return (
     <Scene p={asPlace("bayLit")} slug="" push={[0, dur, 1.03]} vig={0.20}>
@@ -659,7 +661,7 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
         </div>
         {G.models.map((m, i) => {
           const at = ROWS[i];
-          const t = E(f, at - 10, 10, 0, 1, OUT);
+          const t = E(f, at - 10, (at - 10) + 10, 0, 1, OUT);
           const landed = f >= at;
           const hot = landed && i === (Math.floor(f / 8) % 4);
           return (
@@ -682,7 +684,7 @@ export const MANIFOLD: React.FC<SP> = ({ v, dur }) => {
         })}
         {/* the page's own fifth line, on the tail where "GPT." finishes */}
         <div style={{ position: "absolute", left: 22, bottom: 12, ...mono(15, 700),
-          color: hexa(GREEN, 0.95), opacity: E(f, 92, 6, 0, 1, OUT) }}>
+          color: hexa(GREEN, 0.95), opacity: E(f, 92, 92 + 6, 0, 1, OUT) }}>
           + {G.moreModels}
         </div>
       </div>
@@ -717,11 +719,18 @@ export const RIVALS: React.FC<SP> = ({ v, dur }) => {
   const load = CROSS.reduce((n, _, i) => n + prog(i), 0);
   /* ⭐ and it OVERSHOOTS and settles, so the tip ARRIVES instead of easing to a
      stop — a beam this loaded does not stop dead, and the settle is the beat. */
+  /* ⛔ 3.89 with a 41-FRAME DEAD RUN. Eight arrivals were in it and none of them
+     registered, because each was a ~100px sprite stepping onto a pan while the
+     mechanism itself moved smoothly and slowly. A balance taking a body LURCHES.
+     Each landing now jolts the beam, which carries both rods, both pans, both
+     marks and both labels with it — the same events, a hugely larger repaint. */
+  const jolt = CROSS.reduce((a, at) => a + (f >= at + RUN
+    ? Math.sin((f - at - RUN) * 1.15) * 1.9 * Math.exp(-(f - at - RUN) / 4.2) : 0), 0);
   const base = (load / CROSS.length) * 21 - 3;
   const ring = f > CROSS[CROSS.length - 1] + RUN
     ? Math.sin((f - CROSS[CROSS.length - 1] - RUN) * 0.55) * 2.4
       * Math.exp(-(f - CROSS[CROSS.length - 1] - RUN) * 0.11) : 0;
-  const tilt = base + ring;
+  const tilt = base + ring + jolt;
   const BX = 506 + L.a * 0.3, BY = 262 + L.wy, BW = 604, ROD = 214;
   const drop = (side: -1 | 1) => side * Math.tan((tilt * Math.PI) / 180) * (BW / 2);
   /* where each pan's FLOOR is — the crowd stands on exactly this */
@@ -820,7 +829,7 @@ export const RIVALS: React.FC<SP> = ({ v, dur }) => {
           The RIGHT pan bottoms out at y~658, so nothing here rises above that. */}
       {[0, 1, 2, 3, 4].map((i) => {
         const at = 2 + i * 6;
-        const turn = E(f, at, 10, 0, 1, IO);
+        const turn = E(f, at, at + 10, 0, 1, IO);
         return (
           <Crew key={"nb" + i} f={f + i * 13} x={-58 + i * 236 + L.a * 0.5 + turn * 30}
             y={892 - (i % 2) * 14} i={[2, 7, 9, 14, 6][i]} size={212 - (i % 2) * 18}
@@ -847,51 +856,130 @@ export const RIVALS: React.FC<SP> = ({ v, dur }) => {
 export const REPLACE: React.FC<SP> = ({ v, dur }) => {
   const f = useCurrentFrame();
   const L = LAY[v];
-  const ARR = 50;
+  /* ⛔⛔ ALEX, on 14-17s: *"the animations are horrible like its so boring."* This
+     was the worst scene in the reel by 2x — mean 2.63 with a 63-FRAME DEAD RUN,
+     i.e. the entire 2.1s was one still image with a single event in it. The ball
+     was drawn, hung, drifted a few pixels and the scene cut. The storyboard called
+     that "unresolved on purpose"; it cost a tenth of the reel.
+     ⭐ REBUILT: the ball LANDS. The line is reporting what people SAID — "VS Code
+     was getting replaced" — so the claim gets played out in full, and TOGETHER
+     disproves it two seconds later. That is a stronger read AND a real event.
+     ⭐ FIVE BEATS ACROSS THE FULL 64 FRAMES, each moving the BIGGEST thing in
+     frame (the façade), because a small change on a big still object repaints
+     almost nothing — the lesson PRICE cost 43 dead frames to learn.
+     BEATS (scene starts f477):
+       "VS Code"      f477  local  0  the façade, the ball drawn back and waiting
+       "was getting"  f492  local 15  ⭐ THE SWING — it crosses the whole frame
+       "replaced"     f504  local 27  ⭐ IMPACT: shake, windows blow dark in a wave
+       "by"           f516  local 39  the REPLACED banner slams across the façade
+       "Antigravity," f521  local 44  the mark rises out of the breach, dust falls */
+  const WIND = 12, HIT = 24, BANNER = 36, MARK = 44, SEAT = 55;
+  /* ⛔ the first cut left the ball HANGING at x=640 over open air: it never
+     visibly touched anything, and it then sat in front of the breach hiding both
+     the damage and the mark that rises out of it. It now swings THROUGH — hit at
+     HIT, gone off-frame left by SEAT — which also fills the tail that measured
+     21 dead frames, because a 300px object crossing the frame repaints a lot. */
+  const swing = E(f, WIND, HIT, 0, 1, IN_Q);          /* accelerating INTO the hit */
+  const thru  = E(f, HIT, SEAT + 4, 0, 1, IO);       /* and following through, out of frame */
+  const shake = f >= HIT ? Math.sin((f - HIT) * 1.5) * 19 * Math.exp(-(f - HIT) / 5) : 0;
+  const rock  = f >= HIT ? Math.sin((f - HIT) * 1.1) * 1.5 * Math.exp(-(f - HIT) / 7) : 0;
   return (
-    <Scene p={asPlace("city")} slug="" push={[0, dur, 1.0]} vig={0.54}>
-      {/* the parapet, close */}
-      <div style={{ position: "absolute", left: -40, top: 300, width: W + 80, height: 520, zIndex: 24,
-        background: `linear-gradient(96deg, ${mxh("#1E2A3C", 0.14)} 0%, #1E2A3C 42%, #131C2A 100%)`,
-        borderTop: `10px solid #0B1220` }} />
-      {Array.from({ length: 18 }, (_, i) => (
-        <div key={"pw" + i} style={{ position: "absolute", left: 20 + (i % 6) * 168,
-          top: 356 + Math.floor(i / 6) * 122, width: 122, height: 80, zIndex: 26,
-          background: ((i * 5) % 7) > 2
-            ? hexa("#8FC0F0", 0.62 + 0.34 * Math.max(0, Math.sin(f / 9 - i * 0.7)))
-            : hexa("#0A1220", 0.8),
-          borderBottom: "4px solid #0B1220" }} />
-      ))}
-      <VscTile x={78 + L.a} y={196} s={104} z={40} />
-      {/* ⛔ 4.97 AGAINST A BAR OF 9. The banner finishes hauling at f40 and the
-          ball stops at f45, so the back third of the scene had nothing in it. A
-          hauling crowd is a process, not a beat: the gantry crew keeps walking
-          the banner tight all scene, and a service gondola runs the parapet. */}
-      <Rake f={f} y={90} h={170} c="#3E5680" o={0.42} rate={(1.6) * L.rk} z={12} n={4} skew={-6} />
-      <Runner y={(648) + L.ry} f={f} z={23} rate={(9.4) * L.rk} pitch={Math.round((172) * L.rp)} w={128} h={68}
-        c="#5E7EA8" c2="#0B1220" kind="car" rail={false} o={0.72} />
-      <Banner x={214 + L.a} y={206 + L.dy} w={640 + L.hx * 0.4} t="REPLACED" s={0.94} z={44} f={f}
-        haulFrom={0} haulTo={40} />
-      {/* THE OCCLUDER: the ball near-camera, cropped by the right edge */}
-      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 78,
-        transform: `translateX(${E(f, 2, ARR - 2, 720 + L.fx, 0, OUT)
-          + (f >= ARR ? Math.sin((f - ARR) * 0.42) * 26 * Math.exp(-(f - ARR) / 7) : 0)}px)` }}>
-        <WreckingBall x={892 + L.a + L.hx * 0.5} y={252 + L.dy} s={1.62 + L.dc * 0.06} z={78}
-          swing={f >= ARR ? Math.sin((f - ARR) * 0.30) * 0.06 : -0.04} chainTop={-286} />
+    <Scene p={asPlace("city")} slug="" push={[0, dur, 1.08]} vig={0.54}>
+      {/* ⭐ the whole façade is inside the shake, so the impact moves the BIGGEST
+          object in frame rather than a prop in front of it */}
+      <div style={{ position: "absolute", left: shake, top: shake * 0.4, width: W, height: H,
+        zIndex: 20, transform: `rotate(${rock}deg)`, transformOrigin: "50% 100%" }}>
+        <div style={{ position: "absolute", left: -40, top: 300, width: W + 80, height: 520, zIndex: 24,
+          background: `linear-gradient(96deg, ${mxh("#1E2A3C", 0.14)} 0%, #1E2A3C 42%, #131C2A 100%)`,
+          borderTop: `10px solid #0B1220` }} />
+        {/* ⭐ the windows blow out in a WAVE from the impact point, so the damage
+            travels across the façade instead of switching state all at once */}
+        {Array.from({ length: 18 }, (_, i) => {
+          const col = i % 6, row = Math.floor(i / 6);
+          const dist = Math.abs(col - 4.6) + row * 0.5;
+          const dark = f >= HIT + dist * 2.6;
+          const lit = ((i * 5) % 7) > 2;
+          return (
+            <div key={"pw" + i} style={{ position: "absolute", left: 20 + col * 168,
+              top: 356 + row * 122, width: 122, height: 80, zIndex: 26,
+              background: dark ? hexa("#0A1220", 0.92)
+                : lit ? hexa("#8FC0F0", 0.62 + 0.34 * Math.max(0, Math.sin(f / 9 - i * 0.7)))
+                      : hexa("#0A1220", 0.8),
+              transform: `scale(${dark && f < HIT + dist * 2.6 + 4 ? 1.08 : 1})`,
+              borderBottom: "4px solid #0B1220" }} />
+          );
+        })}
+        <VscTile x={78 + L.a} y={196} s={104} z={40} />
       </div>
-      {/* the gap it stops in: a lit sliver that proves it never touched */}
-      {f >= ARR && (
-        <div style={{ position: "absolute", left: 690 + L.a, top: 300, width: 18, height: 320,
-          zIndex: 80, background: hexa(SKY, 0.30 + Math.sin(f / 4) * 0.06) }} />
+      <Rake f={f} y={90} h={170} c="#3E5680" o={0.42} rate={1.6 * L.rk} z={12} n={4} skew={-6} />
+      <Runner y={648 + L.ry} f={f} z={23} rate={9.4 * L.rk} pitch={Math.round(172 * L.rp)} w={128} h={68}
+        c="#5E7EA8" c2="#0B1220" kind="car" rail={false} o={0.72} />
+      {/* ⭐ THE SWING — it travels the whole frame and it CONNECTS */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 78,
+        transform: `translateX(${(1 - swing) * (760 + L.fx) - thru * 1180}px) rotate(${(1 - swing) * 15 - thru * 26 - rock}deg)`,
+        transformOrigin: "50% -18%" }}>
+        <WreckingBall x={640 + L.a + L.hx * 0.5} y={252 + L.dy} s={1.62 + L.dc * 0.06} z={78}
+          swing={f >= HIT ? Math.sin((f - HIT) * 0.5) * 0.05 : 0} chainTop={-286} />
+      </div>
+      {/* the breach it opens, and the debris that leaves it */}
+      {f >= HIT && (
+        <div style={{ position: "absolute", left: 640 + L.a, top: 318, width: 150, height: 320,
+          zIndex: 30, transform: `scaleX(${E(f, HIT, HIT + 7, 0, 1, OUT)})`, transformOrigin: "50% 0%",
+          clipPath: "polygon(38% 0%,62% 4%,52% 22%,74% 30%,58% 52%,78% 66%,46% 84%,60% 100%,22% 92%,34% 66%,14% 48%,30% 26%,18% 12%)",
+          background: `linear-gradient(180deg,${hexa(SKY, 0.55)} 0%,${hexa("#05070C", 0.92)} 68%)` }} />
       )}
-      {/* the crowd on the gantry, hauling */}
+      {/* ⭐ SEAT: the mark takes the breach and the frame gives one ring — the last
+          beat now lands at 86% of the duration instead of 69%, so nothing coasts */}
+      {f >= SEAT && f < SEAT + 10 && (
+        <div style={{ position: "absolute", left: 720 + L.a - 260, top: 210, width: 520, height: 520,
+          zIndex: 88, borderRadius: "50%", pointerEvents: "none",
+          border: `${6 * (1 - E(f, SEAT, SEAT + 10, 0, 1, OUT))}px solid ${hexa(AGV, 0.6 * (1 - E(f, SEAT, SEAT + 10, 0, 1, OUT)))}`,
+          transform: `scale(${0.3 + E(f, SEAT, SEAT + 10, 0, 1, OUT)})` }} />
+      )}
+      {f >= HIT && f < HIT + 26 && Array.from({ length: 14 }, (_, i) => {
+        const t = E(f, HIT + i, HIT + i + 20, 0, 1, OUT);
+        return (
+          <div key={"db" + i} style={{ position: "absolute", zIndex: 82,
+            left: 700 + L.a + Math.cos(i * 1.9) * 280 * t,
+            top: 380 + Math.sin(i * 1.3) * 110 * t + t * t * 380,
+            width: 26 - (i % 3) * 6, height: 20 - (i % 3) * 5, borderRadius: 3,
+            background: hexa("#3A4658", 0.9 * (1 - t)),
+            transform: `rotate(${t * 320 + i * 40}deg)` }} />
+        );
+      })}
+      {/* ⭐ THE TAIL BEAT. f43-63 measured dead — the ball had gone, the mark had
+          seated, and 0.7s of a still night façade ran to the cut. The next line is
+          "and they're sitting together now", so the claim starts to FAIL here: the
+          banner's far end tears loose and swings down. A 640px object rotating is
+          a large repaint, it is the biggest thing left in frame, and it hands the
+          reversal to TOGETHER instead of just stopping. */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 44,
+        transform: `rotate(${E(f, SEAT, SEAT + 9, 0, 13, IO)}deg) translateY(${E(f, SEAT, SEAT + 9, 0, 26, IO)}px)`,
+        transformOrigin: `${214 + L.a}px ${216 + L.dy}px` }}>
+        <Banner x={214 + L.a} y={206 + L.dy} w={640 + L.hx * 0.4} t="REPLACED" s={0.94} z={44} f={f}
+          haulFrom={BANNER} haulTo={BANNER + 12} />
+      </div>
+      {/* the breach throws light, so the darkest scene in the reel has one lit edge */}
+      {f >= HIT && (
+        <div style={{ position: "absolute", left: 640 + L.a - 70, top: 300, width: 290, height: 360,
+          zIndex: 29, pointerEvents: "none", borderRadius: "50%",
+          background: `radial-gradient(ellipse at center, ${hexa(SKY, 0.30 * E(f, HIT, HIT + 8, 0, 1, OUT))} 0%, transparent 70%)` }} />
+      )}
+      {/* the mark rising out of the breach on its own word */}
+      {f >= MARK && (
+        <div style={{ position: "absolute", left: 658 + L.a, top: 330 - E(f, MARK, MARK + 13, 0, 128, OUT),
+          zIndex: 86, opacity: E(f, MARK, MARK + 8, 0, 1, OUT),
+          transform: `scale(${E(f, SEAT, SEAT + 8, 1, 1.16, BACK)})` }}>
+          <Tile x={0} y={0} src="antigravity.png" full s={124} z={86} />
+        </div>
+      )}
+      {/* the crowd, and the hero taking the hit through the parapet */}
       {Array.from({ length: 5 }, (_, i) => (
-        <Crew key={"rc" + i} f={f + i * 7} x={128 + i * 122 + L.a} y={GY + 40} i={[0,1,3,4,5][i % 5]} size={148}
-          z={70} at={0} loop={1} />
+        <Crew key={"rc" + i} f={f + i * 7} x={128 + i * 122 + L.a + shake * 0.5} y={GY + 40}
+          i={[0,1,3,4,5][i % 5]} size={148} z={70} at={0} loop={1} />
       ))}
-      {/* THE HERO DOES: he braces against the parapet, watching the ball come in */}
-      <Hero f={f} x={636 + L.a + L.hx} y={GY + 74} size={274} z={72} flip
-        act={3} shock={f >= ARR - 6 && f < ARR + 12 ? 1 : 0} strain={f > ARR ? 0.5 : 0.2}
+      <Hero f={f} x={636 + L.a + L.hx + shake} y={GY + 74} size={274} z={72} flip
+        act={3} shock={f >= HIT - 4 && f < HIT + 14 ? 1 : 0} strain={f > HIT ? 0.7 : 0.2}
         stern={1} costume={{ constr: 1 }} />
     </Scene>
   );
@@ -908,7 +996,7 @@ export const TOGETHER: React.FC<SP> = ({ v, dur }) => {
   const L = LAY[v];
   const MEET = 21;
   const close = E(f, 0, MEET, 1, 0, OUT);      /* 1 = apart, 0 = touching */
-  const lit = E(f, MEET + 2, 8, 0, 1, OUT);
+  const lit = E(f, MEET + 2, MEET + 2 + 8, 0, 1, OUT);
   return (
     <Scene p={asPlace("cityJoined")} slug="" push={[0, dur, 1.0]} vig={0.34}>
       {/* ⛔ the payoff measured 58 — the darkest scene in the reel, on the beat
@@ -953,16 +1041,16 @@ export const TOGETHER: React.FC<SP> = ({ v, dur }) => {
           word "together" (f565 = local 24). Rev 5 put a small editor in the corner
           and the whole point of the sentence sat in the background. */}
       <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, zIndex: 80,
-        opacity: E(f, MEET + 2, 10, 0, 1, OUT),
-        transform: `translateY(${(1 - E(f, MEET + 2, 10, 0, 1, BACK)) * 52}px)` }}>
+        opacity: E(f, MEET + 2, MEET + 2 + 10, 0, 1, OUT),
+        transform: `translateY(${(1 - E(f, MEET + 2, MEET + 2 + 10, 0, 1, BACK)) * 52}px)` }}>
         <VsCode x={116 + L.a} y={404} w={780} h={292} z={80} f={f}
           panel={1} mark diffAt={MEET + 8} title="loader.ts" branch="main" live={1} />
       </div>
       {f >= 24 && (
         <div style={{ position: "absolute", left: 506 + L.a - 216, top: 268, width: 432, height: 108,
           zIndex: 90, borderRadius: 14, background: "#F3EBD8", border: "4px solid #C9BE9E",
-          boxShadow: SH_D, opacity: E(f, 24, 8, 0, 1, OUT),
-          transform: `scale(${E(f, 24, 9, 0.80, 1, BACK)})` }}>
+          boxShadow: SH_D, opacity: E(f, 24, 24 + 8, 0, 1, OUT),
+          transform: `scale(${E(f, 24, 24 + 9, 0.80, 1, BACK)})` }}>
           <VscTile x={44} y={24} s={60} z={91} />
           <div style={{ position: "absolute", left: 206, top: 28, width: 3, height: 52,
             background: hexa("#5B5340", 0.5) }} />
@@ -1010,7 +1098,7 @@ export const CTA: React.FC<SP> = ({ v, dur }) => {
           scene starts at f595, so they strike from local 18 at two frames apart */}
       <div style={{ position: "absolute", left: 0, right: 0, top: 466 + L.wy, textAlign: "center",
         zIndex: 85, ...mono(20, 800), color: hexa(BONE, 0.62), letterSpacing: "0.22em",
-        opacity: E(f, 2, 6, 0, 1, OUT) * (1 - E(f, 16, 4, 0, 1, LIN)) }}>COMMENT</div>
+        opacity: E(f, 2, 6, 0, 1, OUT) * (1 - E(f, 16, 16 + 4, 0, 1, LIN)) }}>COMMENT</div>
       <CommentPlate x={506} y={492} word={G.keyword} s={1.16} z={86} f={f} at={18} per={2} c={AGV} />
       {/* NEAR-CAMERA CREW BAND */}
       {/* THE HERO DOES: he reaches up and the letters land where he points */}

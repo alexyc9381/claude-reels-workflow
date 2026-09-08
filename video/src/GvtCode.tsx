@@ -401,7 +401,7 @@ export const VsCode: React.FC<{
             </div>
             <div>
               <div style={{ ...mono(12 * s, 800), color: VS.text,
-                transform: nameAt !== undefined ? `scale(${E(f, nameAt, 8, 1.5, 1, OUT)})` : undefined,
+                transform: nameAt !== undefined ? `scale(${E(f, nameAt, nameAt + 8, 1.5, 1, OUT)})` : undefined,
                 transformOrigin: "0% 50%" }}>{G.extName}</div>
               <div style={{ ...mono(8.5 * s, 500), color: hexa(VS.text, 0.62), marginTop: 3 * s }}>
                 {G.publisher} · {G.version} · {G.installs} installs
@@ -410,7 +410,7 @@ export const VsCode: React.FC<{
                 <div style={{ display: "inline-flex", alignItems: "center", gap: 5 * s,
                   marginTop: 6 * s, padding: `${3 * s}px ${7 * s}px`, borderRadius: 3 * s,
                   background: hexa("#4EA24E", 0.9),
-                  transform: `scale(${E(f, newAt, 7, 1.4, 1, BACK)})`, transformOrigin: "0% 50%" }}>
+                  transform: `scale(${E(f, newAt, newAt + 7, 1.4, 1, BACK)})`, transformOrigin: "0% 50%" }}>
                   <span style={{ ...mono(8 * s, 900), color: "#0C1410", letterSpacing: "0.1em" }}>NEW</span>
                   <span style={{ ...mono(8 * s, 700), color: "#0C1410" }}>{G.launched}</span>
                 </div>
@@ -435,14 +435,14 @@ export const VsCode: React.FC<{
               gap: 6 * s, flexWrap: "wrap", maxWidth: 300 * s }}>
               {G.ides.map((d, i) => {
                 const at = ideAt + (i === 0 ? 7 : i * 2);
-                const t = E(f, at - 8, 8, 0, 1, OUT);
+                const t = E(f, at - 8, (at - 8) + 8, 0, 1, OUT);
                 const me = i === 0;
                 return (
                   <div key={"ide" + i} style={{ display: "flex", alignItems: "center", gap: 5 * s,
                     padding: `${4 * s}px ${7 * s}px`, borderRadius: 4 * s, opacity: t,
                     background: me && f >= at ? hexa("#0078D4", 0.34) : hexa("#FFFFFF", 0.05),
                     border: `${1.5 * s}px solid ${me && f >= at ? "#3E9BE8" : hexa(VS.text, 0.14)}`,
-                    transform: `translateY(${(1 - t) * 16 * s}px) scale(${me && f >= at ? E(f, at, 7, 1.18, 1, BACK) : 1})` }}>
+                    transform: `translateY(${(1 - t) * 16 * s}px) scale(${me && f >= at ? E(f, at, at + 7, 1.18, 1, BACK) : 1})` }}>
                     <div style={{ width: 15 * s, height: 15 * s, borderRadius: 3 * s, background: "#FFF",
                       display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <Img src={staticFile("logos/" + d.mark)} style={{ width: 12 * s, height: 12 * s, objectFit: "contain" }} />
@@ -477,7 +477,7 @@ export const VsCode: React.FC<{
                  the full width of the dropdown and lands, so four arrivals are
                  four TRAVELS rather than four opacity changes. */
               const at = pickerAt ? pickerAt[i] : -999;
-              const t = pickerAt ? E(f, at - 9, 9, 0, 1, OUT) : (i < pickerRows ? 1 : 0);
+              const t = pickerAt ? E(f, at - 9, (at - 9) + 9, 0, 1, OUT) : (i < pickerRows ? 1 : 0);
               const landed = pickerAt ? f >= at : i < pickerRows;
               return (
               <div key={"mp" + i} style={{ display: "flex", alignItems: "center", gap: 8 * s,
@@ -535,7 +535,7 @@ export const VsCode: React.FC<{
           <div style={{ position: "absolute", left: 8 * s, top: (TAB + 8 * s), right: 8 * s }}>
             {[["AGENTS", VS.type], ["INLINE DIFFS", "#4EA24E"], ["PLANS", VS.fn]].map((row, i) => {
               const at = capAt ? capAt[i] : (diffAt < 0 ? 0 : diffAt) + i * 4;
-              const t = E(f, at, 7, 0, 1, OUT);
+              const t = E(f, at, at + 7, 0, 1, OUT);
               return (
               <div key={"pr" + i} style={{ marginBottom: 8 * s, padding: `${6 * s}px ${7 * s}px`,
                 background: hexa("#FFFFFF", 0.05), borderLeft: `${3 * s}px solid ${row[1]}`,
@@ -708,7 +708,12 @@ export const UiStage: React.FC<{
     if (i + 1 < keys.length) {
       const [nf, nx, ny] = keys[i + 1];
       if (f >= kf && f < nf) {
-        const t = E(f, nf - 12, 12, 0, 1, IO);   /* the move takes 12 frames, arriving ON the next beat */
+        /* ⛔⛔ THE LURCH. E(f, a, b) takes START and END FRAMES — and when b <= a it
+           silently degrades to `f >= b ? vb : va`, an instant snap, no error. This
+           was written `E(f, nf - 12, (nf - 12) + 12)`, so every camera move in the reel either
+           teleported or completed inside one frame and then sat. It is the single
+           reason 6-11s reads as a random lurching screen recording. */
+        const t = E(f, nf - 12, nf, 0, 1, IO);   /* 12 frames, ARRIVING on the next beat */
         fx = kx + (nx - kx) * t; fy = ky + (ny - ky) * t;
       }
     }

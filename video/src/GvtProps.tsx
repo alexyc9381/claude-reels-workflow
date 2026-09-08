@@ -196,8 +196,8 @@ export const ListingBoard: React.FC<{ x: number; y: number; s?: number; z?: numb
   f: number; markAt?: number; tickAt?: number }> =
   ({ x, y, s = 1, z = 78, f, markAt = 26, tickAt = 38 }) => {
   const w = 460 * s, h = 224 * s;
-  const mk = E(f, markAt, 8, 0, 1, BACK);
-  const tk = E(f, tickAt, 5, 0, 1, BACK);
+  const mk = E(f, markAt, markAt + 8, 0, 1, BACK);
+  const tk = E(f, tickAt, tickAt + 5, 0, 1, BACK);
   return (
     <div style={{ position: "absolute", left: x - w / 2, top: y, width: w, height: h, zIndex: z }}>
       <div style={{ position: "absolute", inset: 0, borderRadius: 12 * s, background: BONE,
@@ -231,7 +231,7 @@ export const ListingBoard: React.FC<{ x: number; y: number; s?: number; z?: numb
       {/* the five IDEs it shipped for, as small keyed tiles */}
       <div style={{ position: "absolute", left: 22 * s, top: 176 * s, display: "flex", gap: 9 * s }}>
         {G.ides.map((d, i) => (
-          <div key={"ide" + i} style={{ opacity: E(f, markAt + 6 + i * 3, 6, 0.25, 1, OUT) }}>
+          <div key={"ide" + i} style={{ opacity: E(f, markAt + 6 + i * 3, (markAt + 6 + i * 3) + 6, 0.25, 1, OUT) }}>
             {d.mark === "vscode.svg"
               ? <VscTile x={0} y={0} s={34 * s} z={z + 2} />
               : <Tile x={0} y={0} src={d.mark} s={34 * s} z={z + 2} />}
@@ -264,7 +264,7 @@ export const SocketRail: React.FC<{ x: number; y: number; s?: number; z?: number
           background: dkh(IRON, 0.3), borderRadius: `0 0 ${5 * s}px ${5 * s}px` }} />
         {/* four contact pins that light in sequence */}
         {[0, 1, 2, 3].map((i) => {
-          const on = E(f, p0 + i * 3, 3, 0, 1, OUT);
+          const on = E(f, p0 + i * 3, (p0 + i * 3) + 3, 0, 1, OUT);
           return (
             <div key={"pin" + i} style={{ position: "absolute", left: (22 + i * 44) * s, bottom: 10 * s,
               width: 26 * s, height: 9 * s, borderRadius: 2 * s,
@@ -310,7 +310,7 @@ export const FlapCounter: React.FC<{ x: number; y: number; v: string; label?: st
     <div style={{ position: "absolute", left: x, top: y, zIndex: z, display: "flex", gap: 4 * s,
       alignItems: "flex-end" }}>
       {chars.map((ch, i) => {
-        const settle = E(f, at + i * 2, 9, 0, 1, OUT);
+        const settle = E(f, at + i * 2, (at + i * 2) + 9, 0, 1, OUT);
         const rolling = settle < 1;
         const shown = ch === "," ? "," : rolling
           ? String(Math.floor(((f * 7 + i * 13) % 10)))
@@ -418,7 +418,7 @@ export const RollDoor: React.FC<{ x: number; y: number; w: number; h: number; op
    ------------------------------------------------------------------------ */
 export const AgentPanel: React.FC<{ x: number; y: number; s?: number; z?: number; f: number;
   at: number }> = ({ x, y, s = 1, z = 66, f, at }) => {
-  const on = E(f, at, 7, 0, 1, OUT);
+  const on = E(f, at, at + 7, 0, 1, OUT);
   const w = 156 * s, h = 112 * s;
   return (
     <div style={{ position: "absolute", left: x, top: y, width: w, height: h, zIndex: z,
@@ -431,7 +431,7 @@ export const AgentPanel: React.FC<{ x: number; y: number; s?: number; z?: number
         <div key={"ag" + i} style={{ position: "absolute", left: 8 * s, top: (28 + i * 26) * s,
           width: w - 16 * s, height: 20 * s, borderRadius: 3 * s, background: hexa(AGV, 0.12),
           borderLeft: `${4 * s}px solid ${[AGV, GREEN, SKY][i]}`,
-          opacity: E(f, at + 3 + i * 3, 5, 0, 1, OUT) }}>
+          opacity: E(f, at + 3 + i * 3, (at + 3 + i * 3) + 5, 0, 1, OUT) }}>
           <div style={{ position: "absolute", left: 9 * s, top: 7 * s, width: (72 - i * 16) * s,
             height: 5 * s, background: hexa(BONE, 0.42) }} />
         </div>
@@ -442,7 +442,7 @@ export const AgentPanel: React.FC<{ x: number; y: number; s?: number; z?: number
 
 export const DiffSheet: React.FC<{ x: number; y: number; s?: number; z?: number; f: number;
   at: number }> = ({ x, y, s = 1, z = 66, f, at }) => {
-  const open = E(f, at, 9, 0, 1, OUT);
+  const open = E(f, at, at + 9, 0, 1, OUT);
   const w = 150 * s, h = 124 * s;
   return (
     <div style={{ position: "absolute", left: x, top: y, width: w, height: h * open, zIndex: z,
@@ -468,7 +468,7 @@ export const DiffSheet: React.FC<{ x: number; y: number; s?: number; z?: number;
 export const PlanCard: React.FC<{ x: number; y: number; s?: number; z?: number; f: number;
   at: number }> = ({ x, y, s = 1, z = 66, f, at }) => {
   const w = 146 * s, h = 108 * s;
-  const un = E(f, at, 10, 0, 1, BACK);
+  const un = E(f, at, at + 10, 0, 1, BACK);
   return (
     <div style={{ position: "absolute", left: x, top: y, width: w, height: h, zIndex: z,
       transform: `perspective(420px) rotateX(${(1 - un) * -78}deg)`, transformOrigin: "50% 0%" }}>
@@ -479,7 +479,7 @@ export const PlanCard: React.FC<{ x: number; y: number; s?: number; z?: number; 
       {[0, 1, 2, 3].map((i) => (
         <div key={"pl" + i} style={{ position: "absolute", left: 9 * s, top: (28 + i * 19) * s,
           display: "flex", alignItems: "center", gap: 7 * s,
-          opacity: E(f, at + 4 + i * 2, 4, 0, 1, OUT) }}>
+          opacity: E(f, at + 4 + i * 2, (at + 4 + i * 2) + 4, 0, 1, OUT) }}>
           <div style={{ width: 12 * s, height: 12 * s, borderRadius: 3 * s,
             background: i < 2 ? GREEN : "transparent", border: `${2 * s}px solid ${i < 2 ? GREEN : hexa(INK, 0.3)}` }} />
           <div style={{ width: (94 - i * 15) * s, height: 5 * s, background: hexa(INK, 0.34) }} />
@@ -527,12 +527,12 @@ export const PricePlate: React.FC<{ x: number; y: number; s?: number; z?: number
         color: hexa(BONE, 0.5), letterSpacing: "0.16em" }}>FREE PLAN</div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 42 * s, textAlign: "center",
         ...mono(96 * s, 900), color: stopped ? GREEN : hexa(BONE, 0.72),
-        transform: stopped ? `scale(${1 + E(f, stopAt, 6, 0.08, 0, OUT)})` : undefined }}>
+        transform: stopped ? `scale(${1 + E(f, stopAt, stopAt + 6, 0.08, 0, OUT)})` : undefined }}>
         {stopped ? G.price : "$" + String(Math.floor(((f * 17) % 90) + 9))}
       </div>
       {/* the two allowance strips, which snap in after the digits stop */}
       {G.allowances.map((a, i) => {
-        const on = E(f, stopAt + 8 + i * 8, 5, 0, 1, BACK);
+        const on = E(f, stopAt + 8 + i * 8, (stopAt + 8 + i * 8) + 5, 0, 1, BACK);
         return (
           <div key={"al" + i} style={{ position: "absolute", left: 16 * s, top: (146 + i * 0) * s,
             width: w - 32 * s, height: 30 * s, borderRadius: 4 * s, background: hexa(GREEN, 0.14),
@@ -549,8 +549,8 @@ export const PricePlate: React.FC<{ x: number; y: number; s?: number; z?: number
         borderRadius: 4 * s, background: hexa(GREEN, 0.14), border: `${2 * s}px solid ${hexa(GREEN, 0.5)}`,
         display: "flex", alignItems: "center", paddingLeft: 10 * s, ...mono(13 * s, 800),
         color: hexa(BONE, 0.9), letterSpacing: "0.05em",
-        opacity: E(f, stopAt + 8, 5, 0, 1, OUT),
-        transform: `translateY(${(1 - E(f, stopAt + 8, 5, 0, 1, BACK)) * 26 * s}px)` }}>
+        opacity: E(f, stopAt + 8, (stopAt + 8) + 5, 0, 1, OUT),
+        transform: `translateY(${(1 - E(f, stopAt + 8, (stopAt + 8) + 5, 0, 1, BACK)) * 26 * s}px)` }}>
         {G.allowances[0]}
       </div>
     </div>
@@ -598,7 +598,7 @@ export const Manifold: React.FC<{ x: number; y: number; s?: number; z?: number; 
         background: `linear-gradient(180deg, ${mxh(IRON, 0.32)} 0%, ${dkh(IRON, 0.34)} 100%)` }} />
       {[0, 1, 2, 3, 4].map((i) => {
         const seated = i < seats.length && f >= seats[i];
-        const on = i < seats.length ? E(f, seats[i], 5, 0, 1, OUT) : 0.55 + Math.sin(f / 9) * 0.2;
+        const on = i < seats.length ? E(f, seats[i], seats[i] + 5, 0, 1, OUT) : 0.55 + Math.sin(f / 9) * 0.2;
         const cx = w * (0.11 + i * 0.195);
         return (
           <React.Fragment key={"sk" + i}>
@@ -729,8 +729,8 @@ export const DeckerWindow: React.FC<{ x: number; y: number; s?: number; z?: numb
   at: number; showModels?: boolean }> =
   ({ x, y, s = 1, z = 80, f, at, showModels = true }) => {
   const w = 640 * s, h = 400 * s;
-  const on = E(f, at, 12, 0, 1, OUT);
-  const split = E(f, at + 8, 14, 0, 1, OUT);
+  const on = E(f, at, at + 12, 0, 1, OUT);
+  const split = E(f, at + 8, (at + 8) + 14, 0, 1, OUT);
   return (
     <div style={{ position: "absolute", left: x - w / 2, top: y, width: w, height: h, zIndex: z,
       opacity: on, transform: `translateY(${(1 - on) * 40 * s}px)` }}>
@@ -756,7 +756,7 @@ export const DeckerWindow: React.FC<{ x: number; y: number; s?: number; z?: numb
             <div key={"dw" + i} style={{ position: "absolute", left: 14 * s, top: (34 + i * 22) * s,
               width: (300 - i * 60) * s, height: 12 * s, borderRadius: 2 * s,
               background: hexa(AGV, 0.3 - i * 0.06),
-              opacity: E(f, at + 14 + i * 3, 5, 0, 1, OUT) }} />
+              opacity: E(f, at + 14 + i * 3, (at + 14 + i * 3) + 5, 0, 1, OUT) }} />
           ))}
         </div>
         {/* the VS CODE half, on the floor */}
@@ -777,7 +777,7 @@ export const DeckerWindow: React.FC<{ x: number; y: number; s?: number; z?: numb
               <div key={"ml" + i} style={{ display: "flex", alignItems: "center", gap: 7 * s,
                 marginBottom: 7 * s, padding: `${5 * s}px ${7 * s}px`, borderRadius: 5 * s,
                 background: hexa("#05070C", 0.5), border: `${1.5 * s}px solid ${hexa(m.c, 0.5)}`,
-                opacity: E(f, at + 18 + i * 3, 5, 0, 1, OUT) }}>
+                opacity: E(f, at + 18 + i * 3, (at + 18 + i * 3) + 5, 0, 1, OUT) }}>
                 <div style={{ width: 18 * s, height: 18 * s, borderRadius: 4 * s, background: "#FFF",
                   display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Img src={staticFile("logos/" + m.mark)} style={{ width: 13 * s, height: 13 * s, objectFit: "contain" }} />
@@ -803,10 +803,10 @@ export const CommentPlate: React.FC<{ x: number; y: number; word: string; s?: nu
       display: "flex", alignItems: "center", justifyContent: "center", gap: 6 * s,
       background: "#1A222C", borderRadius: 10 * s, border: `${4 * s}px solid ${hexa(c, 0.45)}`,
       boxShadow: SH_D,
-      opacity: E(f, at - 5, 5, 0, 1, OUT),
-      transform: `scale(${0.86 + E(f, at - 5, 6, 0, 1, BACK) * 0.14})` }}>
+      opacity: E(f, at - 5, (at - 5) + 5, 0, 1, OUT),
+      transform: `scale(${0.86 + E(f, at - 5, (at - 5) + 6, 0, 1, BACK) * 0.14})` }}>
       {chars.map((ch, i) => {
-        const k = E(f, at + i * per, 4, 0, 1, BACK);
+        const k = E(f, at + i * per, (at + i * per) + 4, 0, 1, BACK);
         return (
           <span key={"cp" + i} style={{ ...mono(56 * s, 900), color: c, opacity: k,
             transform: `scale(${0.6 + k * 0.4}) translateY(${(1 - k) * -18 * s}px)`,

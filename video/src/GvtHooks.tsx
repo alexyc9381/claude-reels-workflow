@@ -240,10 +240,10 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
         <div style={{ position: "absolute", inset: 0,
           background: `radial-gradient(52% 62% at 50% 56%, ${hexa("#FFE7AE", 0.30 + leak * 0.66)} 0%, ${hexa("#E0A94C", 0.22)} 58%, transparent 84%)` }} />
         {/* the Antigravity mark rising in the gap on the last beat */}
-        <div style={{ position: "absolute", left: MW / 2 - 62, top: MH * 0.30 + (1 - E(f, B.seat[1], 12, 0, 1, BACK)) * 120,
+        <div style={{ position: "absolute", left: MW / 2 - 62, top: MH * 0.30 + (1 - E(f, B.seat[1], B.seat[1] + 12, 0, 1, BACK)) * 120,
           width: 124, height: 124, borderRadius: 26, background: "#FFFFFF",
           border: "4px solid #E8DCC0", display: "flex", alignItems: "center", justifyContent: "center",
-          opacity: E(f, B.seat[1], 10, 0, 1, OUT), boxShadow: SH_D }}>
+          opacity: E(f, B.seat[1], B.seat[1] + 10, 0, 1, OUT), boxShadow: SH_D }}>
           <Img src={staticFile("logos/antigravity.png")} style={{ width: 96, height: 96, objectFit: "contain" }} />
         </div>
         {/* ⭐ THE HAND-OFF IS A SENTENCE: the next line is "Google just launched its
@@ -251,8 +251,8 @@ const Shot: React.FC<{ f: number; id: HookId; a: number; lift: number }> = ({ f,
         <div style={{ position: "absolute", left: MW / 2 - 84, top: MH * 0.30 + 148,
           width: 168, height: 44, borderRadius: 9, background: hexa("#FFFFFF", 0.94),
           display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-          opacity: E(f, B.seat[2], 8, 0, 1, OUT),
-          transform: `scale(${E(f, B.seat[2], 8, 1.3, 1, BACK)})` }}>
+          opacity: E(f, B.seat[2], B.seat[2] + 8, 0, 1, OUT),
+          transform: `scale(${E(f, B.seat[2], B.seat[2] + 8, 1.3, 1, BACK)})` }}>
           <Img src={staticFile("logos/google.svg")} style={{ width: 24, height: 24, objectFit: "contain" }} />
           <span style={{ ...mono(17, 800), color: "#241F17", letterSpacing: "0.04em" }}>OFFICIAL</span>
         </div>
