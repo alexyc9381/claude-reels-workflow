@@ -24,6 +24,26 @@ learnings be remembered and pushed to this repository.
 The first delivery had passed numerical checks. That did not establish creative quality or
 perceived SFX audibility. Treat the reported defect as the starting point for the revision.
 
+## Later feedback: the post-hook drop at about three seconds
+
+Later on September 9, Alex reported that X144 still did not retain viewers and explicitly
+identified a consistent drop after the hook, at roughly three seconds. He said the body
+animations did not provide enough interesting stimulation. This supersedes any inference
+that the revised X144 creative was approved because it passed checks or was delivered.
+The timing is user-reported; no analytics curve or exact percentage was supplied.
+
+- Treat **the hook-to-body handoff, approximately 3–7 seconds**, as a separate creative review.
+  The first tool introduction must start a new visible event immediately and deliver a
+  meaningful transformation. A strong opener followed by a nameplate and a quiet setup fails.
+- Carry curiosity into the body with a new question, obstacle, change of scale, task or
+  consequence. Use close inserts when a mechanism deserves scrutiny; a cut alone is not a payoff.
+- Review the whole body for repeated staging, verbs, props and action timing. Replace weak
+  concepts or empty setup time before adding more decorative motion, sounds or transitions.
+- Keep hierarchy and clarity. More stimulation does not mean indiscriminate cuts, camera
+  movement, flashing or a higher cue count. The primary subject must do something worth watching.
+- Record the intended post-hook event and inspect its beginning, middle and tail in the export.
+  Passing motion, audio and look checks remains technical evidence, never proof of retention.
+
 ## Choose the representation for the idea
 
 - **Show the relationship and consequence.** Cost, accumulation, overload, conversion,
