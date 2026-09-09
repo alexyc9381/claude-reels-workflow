@@ -1472,3 +1472,32 @@ middle and tail are three different bugs (§7, and `feedback_a_scene_average_can
 ⛔ And do not answer a low number with motion the story does not have — that is §9's
 warning, and it is what produced the flying-stationery reel. Give the scene the event
 it was missing instead.
+
+
+## 28. X144: abstract the relationship, keep the scene grounded
+
+Alex's September 9 feedback named a specific failure: at about 12 seconds, a PDF stayed on
+screen while a counter changed from 1,500 to 3,000. Repeated paper scenes and slow travel
+made the information literal but uninteresting. The response was to replace the scene's
+concept with expanding token demand, followed by a different accumulation/overload event.
+
+Use the [X144 learning](../memory/alex-abstract-animation-and-audible-sfx.md) before the next
+board or overhaul:
+
+- Choose recognizable UI/files when they prove a workflow. Choose a clear physical metaphor
+  when it makes a relationship, consequence or transformation easier to see. Map its parts
+  to the narration and test the action on mute; novelty alone is insufficient.
+- Keep numbers as labels on a visible event. A new font, counter, PDF skin or camera move
+  does not answer feedback about the concept.
+- Time anticipation, travel, contact and reaction to the words. Inspect the head and tail
+  after shortening travel, and the lead-in before the first named item in a list.
+- Let the original Claude sprite act on the mechanism and react with its face visible.
+  Keep grounded sets and hierarchy; a busy background or camera cannot do that job.
+- Inspect native-size frames during movement as well as contact sheets. The X144 review
+  found labels crossing a rising platform and an opening lid after the middle frames looked
+  clean. Remove redundant copy when the action already communicates it.
+
+The cinematic-place rule still applies; it is not a ban on abstraction. Motion/colour gates
+remain checks of execution. Do not satisfy them with decorative activity or claim they
+establish audience engagement. For the parallel sound failure, use
+[`SOUND-DESIGN.md`](SOUND-DESIGN.md) §18.

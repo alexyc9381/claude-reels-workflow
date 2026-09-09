@@ -1,15 +1,24 @@
 {
   "counts": {
-    "reels_with_code": 115,
-    "reels_total": 160,
-    "factory_logs": 76,
-    "storyboards": 76,
-    "caption_jsons": 125,
-    "memory_md": 237,
+    "reels_with_code": 116,
+    "reels_total": 163,
+    "factory_logs": 77,
+    "storyboards": 77,
+    "caption_jsons": 126,
+    "memory_md": 239,
     "creators": 8,
     "packs": 3
   },
   "reels": [
+    {
+      "key": "143department",
+      "name": "143-department",
+      "number": null,
+      "code": null,
+      "log": "memory/reels/143-department-factory-log.md",
+      "storyboard": null,
+      "captions": []
+    },
     {
       "key": "ads",
       "name": "Ads",
@@ -161,6 +170,17 @@
       "storyboard": null,
       "captions": [
         "video/src/data/words_crew.json"
+      ]
+    },
+    {
+      "key": "dept143",
+      "name": "Dept143",
+      "number": null,
+      "code": "video/src/ClaudeDept143Reel.tsx",
+      "log": null,
+      "storyboard": null,
+      "captions": [
+        "video/src/data/words_dept143.json"
       ]
     },
     {
@@ -554,6 +574,7 @@
         "video/src/data/words_council.json",
         "video/src/data/words_crew.json",
         "video/src/data/words_delete.json",
+        "video/src/data/words_dept143.json",
         "video/src/data/words_design.json",
         "video/src/data/words_designstack.json",
         "video/src/data/words_erase.json",
@@ -1812,6 +1833,15 @@
       "captions": [
         "video/src/data/words_gravity141.json"
       ]
+    },
+    {
+      "key": "department",
+      "name": "department",
+      "number": 143,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/143-department.md",
+      "captions": []
     }
   ]
 }

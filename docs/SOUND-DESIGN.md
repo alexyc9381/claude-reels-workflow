@@ -760,3 +760,31 @@ repeated cue in this reel is one of the two lowest-HF samples in the bank
 (`thock` 1.3%, `pickup_chime` 1.2%) and each run is **pitched ascending** rather
 than copy-pasted — which also makes a repeated reward read as PROGRESS. Buy the
 budget back from beats the picture already counts, then state the overage.
+
+
+## 18. X144: a cue can pass the presence check and remain buried
+
+Alex reported essentially no sound effects in the first X144 delivery even though declared
+cue windows contained audio. **`verify_reel.py`'s full-mix cue-energy check cannot distinguish
+an effect from narration or music.** Keep the check for delivery problems; do not call it an
+audibility test. See the [dated feedback and example](../memory/alex-abstract-animation-and-audible-sfx.md).
+
+For each primary action:
+
+1. Read or solo the actual SFX stem at its rendered gain and timestamp, alongside the voice
+   and music stems. Do not infer an effect's level from total-mix energy or subtract stems
+   from a limited/encoded mix.
+2. Check transient timing, tail and short-window perceived level, then listen in the full
+   export at a normal playback level. Include small-speaker playback when available. State
+   the limit if only numerical inspection was possible.
+3. Adjust source choice, gain, useful frequency content and modest music pockets while
+   preserving speech and the chosen soundtrack. A low impact may need a quiet mechanical
+   texture to retain definition; indiscriminate peak gain is not the remedy.
+4. Recheck bans, repeated bright transients, density, clipping and the final export. Sound
+   primary contacts and changes throughout the story, not every decorative movement.
+
+X144's revised effect stem was about 15 dB stronger in whole-reel RMS and used 61 cues over
+45.67 seconds. These document that revision, **not a universal boost, cue quota or perceptual
+threshold**. Nominal gain and whole-reel RMS alone do not establish audibility; source,
+spectrum, duration and competing content matter (§2). No voice retiming or processing was
+needed to address this feedback.

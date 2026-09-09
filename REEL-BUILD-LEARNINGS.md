@@ -25,6 +25,11 @@ render, or a re-record. Read the section that matches what you are about to do.
 | 11 | [Delivery](#11-delivery) | put anything in Drive |
 | 12 | [**How to diagnose**](#12-how-to-diagnose-the-reasoning-not-the-rules) | you are about to "fix" something |
 
+**September 9, 2026 — [X144 animation and sound feedback](memory/alex-abstract-animation-and-audible-sfx.md):**
+read before storyboarding or revising a reel that feels slow, too literal or missing effects.
+Choose clear physical metaphors where useful, time complete actions to the words, and verify
+SFX against the actual voice/music stems. The note links the animation, sound and storyboard checks.
+
 ---
 
 ## 1. Colour & style

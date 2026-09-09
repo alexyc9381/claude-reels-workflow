@@ -36,17 +36,18 @@ artifact** stop the board from drifting into decoration that doesn't pay the pro
 
 ---
 
-## 1. The per-scene card (the skeleton — fill all seven, in order)
+## 1. The per-scene card (the skeleton — fill all eight, in order)
 
 ```
 SCENE n — <t0> to <t1>s (<dur>s) · <SHOT> · <BEAT: HOOK / SETUP / TURN / ESCALATE / PAYOFF / CTA>
   VO:       "<the exact spoken line for this scene>"
   SET:      <a real PLACE — floor, walls, light source, 4–6 depth planes, world props>   → SET-AND-LIGHT.md
   CAMERA:   <angle + move; STILL by default, ≤1 motivated move>                           → CAMERA-GRAMMAR.md
-  BLOCKING: <who's on screen · WHO moves (one hero) · what they do, beat-by-beat>
+  BLOCKING: <one hero · before → anticipation → action/contact → after/reaction · VO word/frame>
   LIGHT:    <one committed direction + mood; hero reads against ground by LIGHTNESS>       → SET-AND-LIGHT.md
   SFX:      <cues, L[i]+local relative>                                                    (memory: sfx-root-timeline-trap)
   TAKEAWAY: <the single thing this scene lands — if you can't name it, cut the scene>
+  REPRESENTATION: <literal proof or physical metaphor · element → narrated meaning>
 ```
 
 The three companion libraries fill the hard parts:
@@ -83,6 +84,10 @@ profile that dies at 12s). **Run this pass on every board and record it in the b
 
 - **Swipe points** — tag each second 0–5s: is there a reason to keep watching, or a "I've seen this" repeat?
 - **Repeated base-object** — do two scenes reuse the same set/prop? (the CALLBACK S1=S2 failure)
+- **Literal overuse** — is the idea carried only by another PDF/card/counter? Keep useful UI proof,
+  but rebuild weak repeats as clear, narration-mapped events. Cinematic grounding permits abstraction.
+- **Action gaps** — inspect the first, middle and last part of each scene, including time before the
+  first list item. Fast arrivals must lead to a result or the next event, not a newly exposed hold.
 - **Payoff spent early** — is the promise delivered before the hero earns it?
 - **Villain integrity** — does the antagonist lose more than once before the peak?
 - **Intensity curve** — plot it; flag any belly sag and any peak that only ties the hook.
@@ -104,6 +109,11 @@ The board is the **intent manifest**: its SFX cues, its hero artifact, its beats
 [`verify_reel.py`](../tools/verify_reel.py) and the build check the render against. A board specified to this
 spec is also a board a builder can't accidentally leave things out of — because every scene names exactly
 what must be on screen.
+
+The [X144 feedback](../memory/alex-abstract-animation-and-audible-sfx.md) adds a companion
+mix review: cue timestamps are intent, not proof of audibility. Check actual stems and the
+combined export using [sound design §18](../docs/SOUND-DESIGN.md), alongside the existing
+motion/look checks and native-size collision review.
 
 ## Related
 - [`52-callback.md`](52-callback.md) — the reference board; read it as the worked example of this spec.

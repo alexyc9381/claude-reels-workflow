@@ -1,16 +1,26 @@
 ---
 name: reel-chassis-cinematic-not-abstract
-description: "⛔⛔ Alex, reel 68 CHART (FURIOUS): the default reel style is the CINEMATIC BLUEPRINT — every scene is a real PLACE (room + floor + light + depth + Claude sprite characters acting), like CALLBACK's shredder room. NOT abstract shapes/nodes floating on a dark panel. Clone CALLBACK/ClaudeFactoryReel/GptSolReel, NOT ClaudeSimulateReel."
+description: "⛔⛔ Default to the CINEMATIC BLUEPRINT: a real place, light, depth and Claude sprites acting. September 9, 2026 clarification: clear narration-mapped abstract metaphors are welcome inside grounded scenes; the CHART rejection concerned disconnected objects floating on a dark panel, not abstraction itself. Clone the requested reference or CALLBACK/ClaudeFactoryReel/GptSolReel."
 metadata: 
   node_type: memory
   type: feedback
   originSessionId: c11a18d3-cdde-49be-8d02-1ec0e33a8674
 ---
 
-# ⛔⛔ CINEMATIC ENVIRONMENT, never an abstract diagram
+# ⛔⛔ CINEMATIC ENVIRONMENT with grounded visual metaphors
 
 > Alex, reel 68 CHART, 2026-07-19: *"this video is fucking shit what the fuck? you didn't follow my github
 > whatsoever for video editing guidelines... this ENTIRE VIDEO NEEDS TO BE REDONE COMPLETELY FROM THE GROUND UP."*
+
+## September 9, 2026 clarification — abstraction is welcome when it explains the idea
+
+Alex's X144 feedback explicitly asks for more abstract, interesting representations of
+resource cost and other ideas, instead of repeated PDFs and literal counters. Preserve
+cinematic grounding and recognizable Claude actions; this rule does **not** prohibit clear
+physical metaphors. Keep useful browser/file proof where it earns its place. The historical
+“make it literal” response below addressed the particular CHART hook, not every future
+scene. See [[alex-abstract-animation-and-audible-sfx]] for the current decision and review
+checks, alongside [[alex-claude-motion-and-voice]]'s browser/illustration balance.
 
 ## What I did wrong
 I cloned **`ClaudeSimulateReel.tsx`** and built every scene as **abstract objects floating on a dark panel** —
