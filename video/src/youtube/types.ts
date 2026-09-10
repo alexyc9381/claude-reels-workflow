@@ -58,7 +58,8 @@ export type YouTubeEditManifest = {
     points: { frame: number; x: number; y: number }[];
     size: number;
     layer?: "front" | "behind-person";
-    appearance?: "glowing-cube" | "glowing-ember" | "graphic";
+    appearance?: "original" | "glowing-cube" | "glowing-ember" | "graphic";
+    assetSource?: string;
     actions?: {
       fromFrame: number;
       durationInFrames: number;

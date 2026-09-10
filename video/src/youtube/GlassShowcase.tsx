@@ -8,14 +8,15 @@ import {
   useVideoConfig,
 } from "remotion";
 import { premium } from "./design";
+import { BRAND, displayFont, bodyFont } from "./brand";
 
 export const glass: React.CSSProperties = {
-  background:
-    "linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,255,255,.09))",
+  background: "linear-gradient(135deg,rgba(18,18,18,.77),rgba(18,18,18,.48))",
+  color: BRAND.cream,
   backdropFilter: "blur(24px) saturate(135%)",
-  border: "1px solid rgba(255,255,255,.65)",
+  border: "1px solid rgba(255,255,255,.32)",
   boxShadow:
-    "inset 0 1px 0 #ffffffaa,inset 0 -1px 0 #ffffff22,0 24px 65px #25366622",
+    "inset 0 1px 0 #ffffff55,inset 0 -1px 0 #ffffff12,0 24px 65px #1A181333",
   borderRadius: 32,
 };
 export const GlassPanel: React.FC<{
@@ -28,7 +29,8 @@ export const GlassPanel: React.FC<{
       ...glass,
       ...(smoked
         ? {
-            background: "linear-gradient(140deg,#213345a0,#151d344d)",
+            background:
+              "linear-gradient(140deg,rgba(12,12,12,.88),rgba(12,12,12,.7))",
             color: "#fff",
             borderColor: "#ffffff55",
           }
@@ -42,7 +44,7 @@ export const GlassPanel: React.FC<{
 export const GlassBackdrop = () => {
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ background: "#c9d8e6", overflow: "hidden" }}>
+    <AbsoluteFill style={{ background: BRAND.cream, overflow: "hidden" }}>
       <div
         style={{
           position: "absolute",
@@ -50,7 +52,7 @@ export const GlassBackdrop = () => {
           height: 950,
           left: -150 + Math.sin(f / 110) * 65,
           top: 300,
-          background: "radial-gradient(ellipse,#71c7da,transparent 65%)",
+          background: "radial-gradient(ellipse,#D2724E,transparent 65%)",
         }}
       />
       <div
@@ -60,7 +62,7 @@ export const GlassBackdrop = () => {
           height: 1100,
           left: 800,
           top: -370 + Math.sin(f / 130) * 55,
-          background: "radial-gradient(ellipse,#dfa29d,transparent 65%)",
+          background: "radial-gradient(ellipse,#B8501Faa,transparent 65%)",
         }}
       />
       <div
@@ -70,7 +72,7 @@ export const GlassBackdrop = () => {
           height: 1200,
           left: 700,
           top: 350,
-          background: "radial-gradient(ellipse,#9a9bd2,transparent 67%)",
+          background: "radial-gradient(ellipse,#CF954477,transparent 67%)",
         }}
       />
       <svg
@@ -129,7 +131,7 @@ const eyebrow: React.CSSProperties = {
   fontSize: 18,
   fontWeight: 650,
   letterSpacing: 3,
-  color: "#485775",
+  color: "#E8B29A",
 };
 
 export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
@@ -151,6 +153,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
               left: 200,
               top: 410,
               fontSize: 130,
+              fontFamily: displayFont,
               fontWeight: 650,
               color: "#ffffff80",
               letterSpacing: -5,
@@ -169,7 +172,14 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
             })}
           >
             <div style={eyebrow}>IN PLAIN ENGLISH</div>
-            <div style={{ fontSize: 42, fontWeight: 600, marginTop: 13 }}>
+            <div
+              style={{
+                fontSize: 42,
+                fontFamily: displayFont,
+                fontWeight: 600,
+                marginTop: 13,
+              }}
+            >
               Context window
             </div>
             <div
@@ -177,7 +187,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                 fontSize: 29,
                 lineHeight: 1.45,
                 marginTop: 12,
-                color: "#273349",
+                color: "#ECE9E2",
               }}
             >
               The information an AI can consider at one time.
@@ -217,7 +227,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                 marginTop: 30,
                 display: "inline-block",
                 padding: "18px 36px",
-                background: "#27364c",
+                background: "#B8501F",
                 borderRadius: 20,
                 color: "white",
                 fontSize: 26,
@@ -297,7 +307,14 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
               })}
             >
               <div style={eyebrow}>0{i + 1}</div>
-              <div style={{ fontSize: 40, letterSpacing: -1, marginTop: 50 }}>
+              <div
+                style={{
+                  fontSize: 40,
+                  fontFamily: displayFont,
+                  letterSpacing: -1,
+                  marginTop: 50,
+                }}
+              >
                 {s}
               </div>
               <div
@@ -305,7 +322,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                   fontSize: 25,
                   lineHeight: 1.5,
                   marginTop: 27,
-                  color: "#45516a",
+                  color: "#E3DAD2",
                 }}
               >
                 {
@@ -332,7 +349,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                     width: `${progress * (i === 2 ? 100 : 75)}%`,
                     height: 6,
                     borderRadius: 8,
-                    background: "#637ba1",
+                    background: "#D2724E",
                   }}
                 />
               </div>
@@ -355,7 +372,8 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
             <div style={eyebrow}>CHAPTER 02</div>
             <div
               style={{
-                fontSize: 89,
+                fontSize: 68,
+                fontFamily: displayFont,
                 letterSpacing: -4,
                 lineHeight: 1.04,
                 marginTop: 54,
@@ -365,14 +383,14 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
               <br />
               Then make it yours.
             </div>
-            <div style={{ fontSize: 26, marginTop: 35, color: "#53627a" }}>
+            <div style={{ fontSize: 26, marginTop: 35, color: "#E3DAD2" }}>
               From a working draft to your own workflow.
             </div>
           </GlassPanel>
         </>
       )}
       {kind === "comparison" &&
-        ["Clear glass", "Smoked glass"].map((s, i) => (
+        ["Light smoke", "Deep smoke"].map((s, i) => (
           <GlassPanel
             key={s}
             smoked={i === 1}
@@ -385,10 +403,17 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
               opacity: progress,
             })}
           >
-            <div style={{ ...eyebrow, color: i ? "#d7e1ed" : "#485775" }}>
+            <div style={{ ...eyebrow, color: i ? "#d7e1ed" : "#E8B29A" }}>
               0{i + 1} / SURFACE OPTION
             </div>
-            <div style={{ fontSize: 53, letterSpacing: -2, marginTop: 53 }}>
+            <div
+              style={{
+                fontSize: 53,
+                fontFamily: displayFont,
+                letterSpacing: -2,
+                marginTop: 53,
+              }}
+            >
               {s}
             </div>
             <div
@@ -396,12 +421,12 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                 fontSize: 28,
                 lineHeight: 1.55,
                 marginTop: 30,
-                color: i ? "#edf0f8" : "#42516b",
+                color: i ? "#edf0f8" : "#E3DAD2",
               }}
             >
               {i
                 ? "More separation over bright or visually busy footage."
-                : "Light, airy surfaces for designed explanations and calmer backgrounds."}
+                : "More of the orange brand background shows through the black glass."}
             </div>
             <div
               style={{
@@ -470,12 +495,20 @@ export const GlassScene: React.FC<{ kind: GlassKind; still?: boolean }> = ({
   return (
     <AbsoluteFill
       style={{
-        fontFamily: "-apple-system,BlinkMacSystemFont,sans-serif",
-        color: "#233044",
+        fontFamily: bodyFont,
+        color: BRAND.ink,
       }}
     >
       <GlassBackdrop />
-      <div style={{ position: "absolute", left: 110, top: 69, ...eyebrow }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 110,
+          top: 69,
+          ...eyebrow,
+          color: BRAND.clayDark,
+        }}
+      >
         NO CODE ALEX / GLASS STUDIES
       </div>
       <div
@@ -484,6 +517,7 @@ export const GlassScene: React.FC<{ kind: GlassKind; still?: boolean }> = ({
           left: 110,
           top: 156,
           fontSize: 66,
+          fontFamily: displayFont,
           fontWeight: 600,
           letterSpacing: -2,
           opacity: p,
@@ -497,7 +531,7 @@ export const GlassScene: React.FC<{ kind: GlassKind; still?: boolean }> = ({
           right: 100,
           top: 78,
           fontSize: 17,
-          color: "#57657c",
+          color: "#6D5548",
         }}
       >
         {labels[kind]}
@@ -518,9 +552,9 @@ export const GlassGallery = () => (
 export const GlassOverview = () => (
   <AbsoluteFill
     style={{
-      background: "#e4eaf0",
-      fontFamily: "-apple-system,sans-serif",
-      color: "#25334a",
+      background: BRAND.cream,
+      fontFamily: bodyFont,
+      color: BRAND.ink,
     }}
   >
     <div
@@ -529,6 +563,7 @@ export const GlassOverview = () => (
         left: 75,
         top: 48,
         fontSize: 47,
+        fontFamily: displayFont,
         fontWeight: 600,
         letterSpacing: -1,
       }}
@@ -541,11 +576,11 @@ export const GlassOverview = () => (
         left: 77,
         top: 112,
         fontSize: 24,
-        color: "#5c6b82",
+        color: "#6D5548",
       }}
     >
-      Six reusable components. Clear and smoked glass. Preview direction, not
-      final approval.
+      Fraunces + Inter. Translucent black glass. No Code Alex clay-orange
+      backgrounds.
     </div>
     {glassKinds.map((kind, i) => (
       <div

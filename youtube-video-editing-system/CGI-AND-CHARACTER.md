@@ -1,5 +1,9 @@
 # Mini Claude — 2D, 3D, and recorded-footage integration
 
+## Canonical footage companion — correction
+
+Use the existing ChenBuildsAI `public/cube.mov`, not the recreated rigs described below. `OriginalClaude.tsx` reuses its original alpha video, baked animation, and warm glow grade; this is now the assembly default. See `ORIGINAL-CGI-AND-BRAND.md` for the exact source, checksum, media setup, and remaining compositing work. The action presets below apply to the procedural/graphic experiments, not the original pre-render's limbs. The original needs new source-rig renders for additional articulated actions.
+
 ## Sources actually inspected
 
 - `claude-reels-workflow/video/src/ClaudeCrewReel.tsx`: canonical 200×200 pixel silhouette, terracotta body, two black eyes, side arms, four feet. Extracted into `video/src/youtube/Claude.tsx`, not imported with the whole reel.

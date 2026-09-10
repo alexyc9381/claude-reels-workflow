@@ -13,6 +13,7 @@ import type { EditSegment, YouTubeEditManifest } from "./types";
 import { DESIGN } from "./design";
 import { Definition, MotionGraphic } from "./MotionGraphics";
 import { Claude3D } from "./Claude";
+import { OriginalClaude } from "./OriginalClaude";
 import { GlowingClaude, ContactLight } from "./GlowingClaude";
 import { editTimeline, openingScale } from "./timing";
 export { durationInOutputFrames } from "./timing";
@@ -65,6 +66,7 @@ const Clip: React.FC<{
       globalFrame >= a.fromFrame &&
       globalFrame < a.fromFrame + a.durationInFrames,
   );
+  const original = !m.cgi?.appearance || m.cgi.appearance === "original";
   const presenterScale = p
     ? (fullPresenter && p.width < p.height ? Math.min : Math.max)(
         box.width / p.width,
@@ -82,7 +84,7 @@ const Clip: React.FC<{
   const sprite =
     m.cgi && point && p ? (
       <>
-        {m.cgi.appearance !== "graphic" && (
+        {!original && m.cgi.appearance !== "graphic" && (
           <div
             style={{
               position: "absolute",
@@ -120,12 +122,14 @@ const Clip: React.FC<{
           style={{
             position: "absolute",
             left: point.x * p.width - m.cgi.size / 2,
-            top: point.y * p.height - m.cgi.size / 2,
+            top: point.y * p.height - m.cgi.size * (original ? 0.87 : 0.5),
             width: m.cgi.size,
             height: m.cgi.size,
           }}
         >
-          {m.cgi.appearance === "graphic" ? (
+          {original ? (
+            <OriginalClaude size={m.cgi.size} source={m.cgi.assetSource} />
+          ) : m.cgi.appearance === "graphic" ? (
             <Claude3D
               size={m.cgi.size}
               frame={action ? globalFrame - action.fromFrame : globalFrame}

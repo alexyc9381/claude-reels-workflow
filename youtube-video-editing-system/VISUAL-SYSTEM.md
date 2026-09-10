@@ -2,6 +2,8 @@
 
 Source: Alex's explicit September 10 brief. Framework: Remotion.
 
+Latest brand correction: glass components use Fraunces display + Inter supporting text, translucent black panels, and cream/clay-orange/amber backgrounds from the existing No Code Alex reel. See `ORIGINAL-CGI-AND-BRAND.md`. The earlier cool-blue layout below is a legacy first-pass implementation, not the newly requested brand direction; it must be re-skinned before final production approval.
+
 ## Layout and footage
 
 - Work on a 1920×1080 design grid, scaled to a 3840×2160 output composition. Vector typography and geometry remain sharp. Record screens at native high resolution; a 4K export is not proof that a low-resolution source is sharp.
