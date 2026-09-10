@@ -13,6 +13,7 @@ import type { EditSegment, YouTubeEditManifest } from "./types";
 import { DESIGN } from "./design";
 import { Definition, MotionGraphic } from "./MotionGraphics";
 import { Claude3D } from "./Claude";
+import { GlowingClaude, ContactLight } from "./GlowingClaude";
 import { editTimeline, openingScale } from "./timing";
 export { durationInOutputFrames } from "./timing";
 
@@ -81,6 +82,22 @@ const Clip: React.FC<{
   const sprite =
     m.cgi && point && p ? (
       <>
+        {m.cgi.appearance !== "graphic" && (
+          <div
+            style={{
+              position: "absolute",
+              left: point.x * p.width,
+              top: point.y * p.height,
+            }}
+          >
+            <ContactLight
+              size={m.cgi.size}
+              frame={action ? globalFrame - action.fromFrame : globalFrame}
+              fps={fps}
+              action={action?.action}
+            />
+          </div>
+        )}
         <div
           style={{
             position: "absolute",
@@ -91,7 +108,12 @@ const Clip: React.FC<{
             borderRadius: "50%",
             background: "#21180d66",
             filter: "blur(5px)",
-            opacity: action?.action === "hop" ? 0.3 : 0.7,
+            opacity:
+              m.cgi.appearance === "graphic"
+                ? action?.action === "hop"
+                  ? 0.3
+                  : 0.7
+                : 0,
           }}
         />
         <div
@@ -103,12 +125,22 @@ const Clip: React.FC<{
             height: m.cgi.size,
           }}
         >
-          <Claude3D
-            size={m.cgi.size}
-            frame={action ? globalFrame - action.fromFrame : globalFrame}
-            fps={fps}
-            action={action?.action}
-          />
+          {m.cgi.appearance === "graphic" ? (
+            <Claude3D
+              size={m.cgi.size}
+              frame={action ? globalFrame - action.fromFrame : globalFrame}
+              fps={fps}
+              action={action?.action}
+            />
+          ) : (
+            <GlowingClaude
+              size={m.cgi.size}
+              frame={action ? globalFrame - action.fromFrame : globalFrame}
+              fps={fps}
+              action={action?.action}
+              form={m.cgi.appearance === "glowing-ember" ? "ember" : "cube"}
+            />
+          )}
         </div>
       </>
     ) : null;

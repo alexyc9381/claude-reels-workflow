@@ -17,6 +17,7 @@ Read [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editi
 | `TRANSFER-LOG.md` | what was recovered from the 2026-08 OBS course editor and what was deliberately not promoted |
 | `VISUAL-SYSTEM.md` | screen/presenter framing, opening push, definition cards, premium motion, resolution |
 | `CGI-AND-CHARACTER.md` | original sprite lineage, articulated 3D actions, tracking/mattes, sound, preview commands |
+| `GLASS-AND-GLOW.md` | glowing CGI correction, preserved flat option, six glass component studies |
 | `COURSE-EDITING-PROFILE.md` | follow-along course and lesson rules |
 | `SCREEN-DEMO-PROFILE.md` | screen-led tutorial and software-demo rules |
 | `TALKING-HEAD-PROFILE.md` | presenter-led YouTube rules |
