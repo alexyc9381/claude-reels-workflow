@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 116,
-    "reels_total": 163,
-    "factory_logs": 77,
-    "storyboards": 77,
-    "caption_jsons": 126,
-    "memory_md": 240,
+    "reels_with_code": 117,
+    "reels_total": 164,
+    "factory_logs": 78,
+    "storyboards": 78,
+    "caption_jsons": 128,
+    "memory_md": 241,
     "creators": 8,
     "packs": 3
   },
@@ -600,6 +600,7 @@
         "video/src/data/words_libraries.json",
         "video/src/data/words_limits.json",
         "video/src/data/words_listicle.json",
+        "video/src/data/words_lm146.json",
         "video/src/data/words_loops.json",
         "video/src/data/words_loops_alex.json",
         "video/src/data/words_md.json",
@@ -1842,6 +1843,19 @@
       "log": null,
       "storyboard": "storyboards/143-department.md",
       "captions": []
+    },
+    {
+      "key": "lm146",
+      "name": "lm",
+      "number": 146,
+      "code": "video/src/ClaudeLM146Reel.tsx",
+      "log": "memory/reels/lm146-factory-log.md",
+      "storyboard": "storyboards/146-lm.md",
+      "captions": [
+        "video/src/data/edl_lm146.json",
+        "video/src/data/words_glm.json",
+        "video/src/data/words_lm146.json"
+      ]
     }
   ]
 }
