@@ -144,3 +144,5 @@
 
 - [Real logos; SETUP reference boundary](alex-abstract-animation-and-audible-sfx.md#setup-real-logos-and-an-independent-creative-direction): verify product identity, preserve official marks, and invent fresh SETUP staging from narration.
 - [Characters and memorable visual events](alex-abstract-animation-and-audible-sfx.md#turn-the-narrated-action-into-a-memorable-character-or-event): Alex’s token-eating monster example; perform the spoken verb through an expressive obstacle and consequence, rather than defaulting to PDFs/counters.
+
+- [SETUP revision: active hook, real tool operations, brief GitHub proof, no footer notes](alex-abstract-animation-and-audible-sfx.md#setup-revision-active-hook-better-value-scenes-no-footer-notes): quick opening zoom with an active Claude, replace the rejected scary Headroom character and seven-second ribbons, depict Read/Edit/Grep through useful work, keep stars very brief and remove bottom-left explanatory subtext.

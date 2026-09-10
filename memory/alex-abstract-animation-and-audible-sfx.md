@@ -1,6 +1,6 @@
 ---
 name: alex-abstract-animation-and-audible-sfx
-description: "Alex's September 9, 2026 X144 feedback: replace boring repeated PDF/counter scenes with clear physical metaphors, keep motion fast and causal, and verify effects in their actual stems instead of trusting full-mix energy."
+description: "Alex's September 9, 2026 X144 and SETUP feedback: active quick-zoom hook, strong post-hook value actions, no scary Headroom creature, real tool operations, very brief GitHub proof, no bottom-left footer notes, and audible action-matched SFX."
 metadata:
   node_type: memory
   type: feedback
@@ -80,6 +80,42 @@ for the same level of visual stimulation and imagination in SETUP.
   replace logos or imply unsupported claims about a product.
 - Review the whole body as a sequence of worthwhile events, including the first event
   after the hook. Elaborate decoration on an uninteresting premise does not satisfy this feedback.
+
+## SETUP revision: active hook, better value scenes, no footer notes
+
+Alex rejected the delivered SETUP animation again on September 9. Passing its technical
+checks did not make the hook or body acceptable. This feedback supersedes any assumption
+that the earlier context-creature concept was approved.
+
+- **The hook needs a quick zoom-in and immediate performance.** Claude standing in place
+  is not an interesting hook. Start with a visible action or developing problem at frame
+  zero; give the sprite anticipation, contact, reaction and a consequence. A camera move
+  supports that event; it cannot be the only event. Check that the subject remains visible
+  and that no logo crosses the face during the zoom or action.
+- **Replace the scary Headroom creature.** Alex explicitly disliked the big scary character.
+  His earlier token-eating monster example was about inventiveness, not approval of every
+  monster or an instruction to use one in SETUP. Choose a fresh compression mechanism.
+- **Replace the weak seven-second concept.** The token ribbons were still boring. The
+  same-answer / lower-token-cost claim needs a clear, consequential visual comparison,
+  with preserved output and a visibly smaller resource cost; do not fall back to a counter.
+- **Read, Edit and Grep must do recognizable work.** Circles containing those names were
+  rejected. Open meaningful source content, change something identifiable, locate matching
+  references, and reveal the useful result. Tool names identify the operation, rather than
+  substituting for an operation. Keep the result legible and do not hide it behind shapes.
+- **Keep GitHub popularity very brief and prioritize value.** Alex says viewers often leave
+  when he mentions stars. Avoid a dedicated long stars scene or celebratory star animation.
+  If the existing narration mentions stars, use a short proof insert while a useful product
+  demonstration continues. In this revision the target is 0.60 seconds, not a universal
+  duration rule for all future reels.
+- **Never put explanatory subtext at the very bottom-left of the animation.** Alex explicitly
+  rejected the “illustration / compression of supported context” footer and asked for all
+  such notes to be removed. This is a direct visual preference, not a request to exaggerate
+  product claims. Keep demonstrations accurate and put relevant qualifications in the
+  companion resources/QA rather than adding tiny production commentary to the reel.
+- **Improve the whole sequence, not just the named defects.** Review the 0–3s hook,
+  3–7s handoff and every later payoff for meaningful action, variety and clear visual
+  hierarchy. Replace a weak premise before polishing its geometry. Retention is not
+  established by motion scores, cue counts or delivery status.
 
 ## Choose the representation for the idea
 
