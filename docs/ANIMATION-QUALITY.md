@@ -1501,3 +1501,22 @@ The cinematic-place rule still applies; it is not a ban on abstraction. Motion/c
 remain checks of execution. Do not satisfy them with decorative activity or claim they
 establish audience engagement. For the parallel sound failure, use
 [`SOUND-DESIGN.md`](SOUND-DESIGN.md) §18.
+
+
+## 29. SETUP: polish the setting and the performance together
+
+Alex's follow-up asked for X-level visual detail, stronger animation in every scene, varied
+backgrounds, and removal of the redundant “More plugins ≠ more useful” hook line. Read the
+[indexed SETUP learning](../memory/alex-setup-2d-detail-and-performance.md) before applying it.
+X is now an explicit reference for detail; its earlier retention problems still stand.
+
+Use layered 2D sets, practical light, deep shadows and material-specific construction details
+while preserving the hero silhouette. Give the operation a cause and a result: moving gears,
+locking bolts or evidence transfers should follow the task, not serve as perpetual decoration.
+Let Claude perform and react through the original rig; keep role/costume selection separate
+from staggered animation clocks. Inspect faces, labels and contact through motion at phone size.
+The top-1% line needs an earned visual payoff; the three hook tools need distinct activations.
+Remove redundant slogans and footer commentary rather than increasing reading load.
+
+These improvements supplement the hook-to-body and audible-SFX rules in §28. Neither a more
+detailed background nor a passing per-scene score establishes interest or a full benchmark pass.

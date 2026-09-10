@@ -449,6 +449,11 @@ cp ~/Downloads/Claude-Reels-Final/NN_*.mp4 \
   "$HOME/Library/CloudStorage/GoogleDrive-<acct>/My Drive/Claude Reels/"
 ```
 
+**E2 verification and presentation:** the finished reel must be a standalone MP4 in its
+main Drive folder. Lead with its direct video preview URL; editable-source ZIPs are secondary.
+Verify the cloud file's parent, MIME type and size after upload—`cp` alone is not delivery.
+See [standalone MP4 first](memory/social-assets-to-gdrive.md#standalone-mp4-first--setup-september-10).
+
 - **E3 caption** (`memory/caption-structure.md`) — ⛔ opens with `Comment "<KEYWORD>"`, then `👇 READ BELOW`, then the value. CTA first, never buried.
 - **E4 lead magnet** (`memory/lead-magnet-docs.md`) — ⛔⛔ **the LIVE ARTICLE on
   chenmedialabs.com**, not a file (Alex, 2026-08-18). The `.docx` is still built, but only as

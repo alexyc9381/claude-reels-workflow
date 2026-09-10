@@ -44,6 +44,10 @@ The timing is user-reported; no analytics curve or exact percentage was supplied
 - Record the intended post-hook event and inspect its beginning, middle and tail in the export.
   Passing motion, audio and look checks remains technical evidence, never proof of retention.
 
+Later clarification: Alex subsequently chose X as a reference for **visual detail and
+professional polish**. That permission does not establish retention success or approve its
+pacing. See [SETUP detail and performance](alex-setup-2d-detail-and-performance.md#resolve-the-x-reference-correctly).
+
 ## SETUP: real logos and an independent creative direction
 
 On September 9, Alex explicitly said: use real logos whenever possible, and do not take

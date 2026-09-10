@@ -34,3 +34,27 @@ Discovered 2026-07-14 while cleaning reel 52. Two hard-won facts:
    - The jam here: I copied a 25MB file into a mirrored folder and its upload stuck at `size=0` with `ITEM_UPLOAD_ALREADY_IN_PROGRESS`, retrying every 10s and blocking everything behind it. Symptom in the web UI = files listed with a "—" file size.
    - Diagnose: `tail ~/Library/Application\ Support/Google/DriveFS/Logs/drive_fs.txt | grep -i ITEM_UPLOAD_ALREADY_IN_PROGRESS`. Fix: delete the stuck item, then quit + relaunch Google Drive, then re-do the delete.
    - ⭐ **ALWAYS verify Drive deletions/uploads against the CLOUD**, not the mount: use the Drive MCP `search_files` with `parentId = '<folder id>'` (52 - BALL = `1PotkCzOjPp6WLDQ5HFQviLtF-Z6Es4V5`) and check titles + fileSize. `fileSize: "0"` = a failed/stuck upload, not a real file.
+
+
+## Standalone MP4 first — SETUP September 10
+
+Source: Alex's X/SETUP production chat, session `01a08599-e5ab-7f11-abc6-56b80d83ece5`.
+After receiving a video link and a ZIP-subfolder link, Alex clarified that the video should
+be its own playable file in Drive, without downloading and unpacking a ZIP. The standalone
+MP4 already existed; the response led him toward the source folder instead of the video.
+
+- Upload the final render as a **standalone `video/mp4` in the reel's main Drive folder**.
+  A source archive is supplementary and must never be the only way to access the video.
+- Preserve the one-current-video rule. For a revision, update the existing canonical MP4
+  in place when it is the verified target; keep its Drive file ID and direct preview link.
+- Keep any requested editable source ZIP separately, such as in a `ZIP` subfolder. Do not
+  infer that “put it in Drive” requires a ZIP or create a source folder by default.
+- Lead the delivery message with the **direct video preview URL**. Clearly label any
+  secondary source/download link. Do not route the viewer into the ZIP subfolder to watch.
+- Verify the completed upload server-side: correct parent, MIME type, nonzero size matching
+  the local export, and returned preview URL. A local copy or queued UI navigation is not
+  upload verification. Do not claim playback was tested unless it actually was; Drive may
+  still be processing its preview after accepting the MP4.
+
+This clarification changes delivery presentation, not the user's sharing permissions or
+which folders should be public. Keep existing organization and sharing unless instructed.
