@@ -150,3 +150,5 @@
 - [September 10: immediate value and useful Similarweb/Semrush outcomes](alex-abstract-animation-and-audible-sfx.md#september-10-immediate-utility-and-competitive-intelligence-payoffs): another SETUP rejection; get directly into the useful event, show acquisition/search evidence becoming a decision, elevate the entire body, and never mistake technical passes for approval.
 
 - [R4 was worse: reject the panel-based rebuild](alex-abstract-animation-and-audible-sfx.md#september-10-follow-up-the-panel-based-rebuild-was-worse): Alex explicitly rejected basic squares/rectangles and the boring, slow hook. Replace the visual premise; test actual short motion before another full build. 3D experiments are not a user-approved style.
+
+- [SETUP: return the hook tests to 2D](alex-abstract-animation-and-audible-sfx.md#september-10-return-setup-hooks-to-2d): Alex rejected the R5 3D aspect and explicitly requested more interesting 2D hooks using the GitHub system. Change the concept and performance as well as the renderer; preserve the original sprite, quick push and causal events.

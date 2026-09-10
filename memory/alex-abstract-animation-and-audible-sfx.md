@@ -169,6 +169,25 @@ that creative direction, not approval with a request for a small timing adjustme
   use modeled physical props; Alex has not selected or approved a 3D style simply by rejecting
   rectangles. Increased mesh detail, scene-motion values and extra effects are not creative approval.
 
+## September 10: return SETUP hooks to 2D
+
+Alex reviewed the R5 hook probes and said he did not like the 3D aspect, or that it was not
+executed well, and explicitly asked to see better, more interesting **2D hooks based on the
+GitHub system**. The modeled-prop experiments are rejected for this revision.
+
+- **Use the established 2D pipeline for the next SETUP hooks.** Remotion/SVG illustration,
+  the original Claude sprite and the house chassis answer this request. Do not continue
+  polishing Three.js meshes, tabletop lighting or the R5 physical render aesthetic.
+- **The technique change is not the creative fix by itself.** Keep the prior requirements:
+  immediate performance, a short opening zoom, one dominant meaningful event, a consequence,
+  real product marks, audible action-matched sound and a useful handoff after the hook.
+- **Use the repository's event and depiction rules.** Compare each concept against
+  `docs/THE-OPEN.md` and `docs/ANIMATION-QUALITY.md`: before state, trigger, travel, contact,
+  reaction and a changed result. A flattened version of three passive labels is still weak.
+- **Do not turn this into an invented universal ban.** This is a clear direction for the
+  current SETUP revision. Alex expressed uncertainty about 3D itself versus its execution;
+  he did not approve a 3D style or say that every future project must exclude it.
+
 ## Choose the representation for the idea
 
 - **Show the relationship and consequence.** Cost, accumulation, overload, conversion,
