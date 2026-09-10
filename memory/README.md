@@ -12,6 +12,7 @@ Open [`MEMORY.md`](MEMORY.md) — it is the hand-maintained index that gets load
 | `*.md` (root) | one note per topic — standing rules, style references, per-reel scripts, toolchain, Matchtern |
 | `reels/` | per-reel **factory logs** (`<name>-factory-log.md`), one per reel/carousel produced |
 | `reels/evidence/` | raw supporting artifacts for logs (comp transcripts, VO word JSON, card math) |
+| `archive/` | retired notes preserved for provenance; never load as active rules |
 | `*.md.build` | occasional build-note sidecar next to a script file |
 
 ## Conventions

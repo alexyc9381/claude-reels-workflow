@@ -24,4 +24,4 @@ Open [`target_sent.txt`](target_sent.txt) for the human-readable script. The mac
 ## Related
 - [`../build_captions.py`](../build_captions.py) — consumer/corrector; emits `../video/src/data/captions.json`.
 - The reel caption pipeline (faster-whisper onset-anchored) is a separate path — memory: `caption-sync-gate`, `caption-structure`.
-- Matchtern long-form context — memory: `matchtern-longform-video-style`.
+- Historical Matchtern long-form context — archived at `memory/archive/matchtern-longform-video-style.md`; do not apply it to NoCodeAlex YouTube work.

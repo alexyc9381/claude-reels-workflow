@@ -31,6 +31,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 | **understand the whole reel pipeline** | [`CLAUDE-REELS-PLAYBOOK.md`](CLAUDE-REELS-PLAYBOOK.md) — the production manual |
 | **find a specific reel's files** (code/log/storyboard/captions) | [`REELS.md`](REELS.md) — the generated registry |
 | **build or edit a reel** | [`video/`](video/) (the Remotion project) — start at `video/src/Root.tsx` |
+| **build a long-form NoCodeAlex YouTube video** | [`youtube-video-editing-system/`](youtube-video-editing-system/) — start with the memory contract, then copy the per-video project template |
 | **ship a reel / check a finished render is complete** | [`tools/verify_reel.py`](tools/verify_reel.py) — the ship-gate (VO@0, soundtrack audible@0, cues fire, captions match). Exit 1 = don't ship |
 | **check the reel still LOOKS like the ones that worked** | [`tools/look_audit.py`](tools/look_audit.py) — ⭐ the colour/contrast gate. Across reels 93→105 saturation fell **47%** and the black point rose **95%** while motion moved +2.6%, so every one of them passed the motion audit while the picture went pale. Blocks on body saturation and black point; the ≥140 luma law is **frame 0 ONLY**. See [`docs/ANIMATION-QUALITY.md`](docs/ANIMATION-QUALITY.md) §8 |
 | **build a SET (not a prop on a wall)** | [`video/src/WorldKit.tsx`](video/src/WorldKit.tsx) — the depth engine promoted out of reel 94, the only reel that had one: `Surface` (sky · haze · three parallax bands · ground · kerb · grit · overhead), `Occluder` (the mass cropped by the frame edge that ten reels shipped without), `Cone`, `StreetLamp`, `Contact`, and 10 palettes that keep their shadows |
@@ -85,6 +86,7 @@ Each has its own `README.md` (same skeleton — Purpose / Start here / Layout / 
 | [`transcripts/`](transcripts/) | reference VO transcripts |
 | [`tools/`](tools/) | ffmpeg/whisper toolchain + motion audits + **the index generator** |
 | [`docs/`](docs/) | conventions + dated design specs |
+| [`youtube-video-editing-system/`](youtube-video-editing-system/) | NoCodeAlex 16:9 long-form production contract + per-video template |
 
 **Root files:** [`CLAUDE-REELS-PLAYBOOK.md`](CLAUDE-REELS-PLAYBOOK.md) (the manual) ·
 [`SPLIT-SCREEN-FORMAT.md`](SPLIT-SCREEN-FORMAT.md) (the two-screen tutorial layout) ·

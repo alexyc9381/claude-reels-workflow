@@ -1,0 +1,82 @@
+---
+name: youtube-video-editing-system
+description: Canonical long-form 16:9 YouTube editing system for Alex / @nocodealex; separate from the short-form reel system and retired Matchtern VSL style
+metadata:
+  node_type: memory
+  type: project
+---
+
+# YouTube video editing system
+
+This is the canonical entry point for **Alex / @nocodealex long-form YouTube videos**. It covers landscape videos, tutorials, explainers, case studies, and recorded builds. It does not govern vertical Instagram/TikTok reels.
+
+## Scope boundary
+
+- Long-form YouTube and NoCodeAlex only.
+- Use **Remotion** for authored graphics and the edit. Supporting transcription, audio work, and verification may use FFmpeg.
+- Do not inherit Matchtern branding, school imagery, VSL graphics, captions, or delivery rules. The former Matchtern long-form style is archived.
+- Do not stretch the short-form reel chassis across a longer timeline. Reuse proven primitives only when they serve the YouTube story.
+- A reference video or an explicit creative brief defines the look for each series. Until one is approved, do not invent a permanent house style.
+
+## Default technical contract
+
+- Canvas: 16:9, normally 1920x1080.
+- Frame rate: preserve the source cadence when practical; otherwise use 30 fps.
+- Audio: dialogue is the priority; music and effects must duck beneath speech.
+- Captions: optional for long-form. If used, captions must be hand-corrected and designed for landscape viewing rather than copied from the 9:16 karaoke system.
+- Source footage, music, generated media, and finished renders stay outside Git. Git stores the edit code, manifests, transcripts, plans, and verification records.
+
+## Per-video structure
+
+Create one folder from `youtube-video-editing-system/PROJECT.template.md` and keep these artifacts together:
+
+1. `BRIEF.md` — audience, promise, format, reference, CTA, and delivery target.
+2. `TRANSCRIPT.md` — corrected transcript with unusable takes marked.
+3. `PAPER-EDIT.md` — story sections, selects, removals, and the reason each section earns its time.
+4. `GRAPHICS.md` — every overlay/cutaway tied to a spoken beat; no decorative filler.
+5. `EDIT.md` — timeline map, source in/out points, music plan, and revision decisions.
+6. `QA.md` — render checks, factual checks, audio checks, and final approval state.
+
+## Production loop
+
+### 0. Intake and source lock
+
+Identify the audience, one-sentence promise, target duration, source footage, reference videos, required facts, CTA, and delivery destination. Inventory every source before editing.
+
+### 1. Transcript and paper edit
+
+Transcribe, correct names and technical terms, mark retakes, and build the narrative before polishing visuals. Every section must either advance the promise, prove it, demonstrate it, or close it.
+
+### 2. Structure gate
+
+Approve the hook, section order, payoff, and CTA on paper. Do not start a graphics-heavy build while the narrative is still moving.
+
+### 3. Assembly cut
+
+Build the clean talking-head or screen-recording edit first. Remove failed takes, dead air, repetition, and accidental pauses while preserving natural comprehension.
+
+### 4. Visual plan
+
+Assign one purpose to each authored visual: clarify, prove, orient, compare, demonstrate, or reset attention. Alternate among footage, screen recording, restrained overlays, and earned full-screen sequences according to the material. Sameness across several consecutive beats is a defect.
+
+### 5. Graphics and captions
+
+Build visuals from the approved plan. Use real product UI, logos, screenshots, charts, and source material when they are the evidence. Do not replace proof with generic decoration. Correct every caption against the transcript.
+
+### 6. Sound
+
+Clean and level dialogue first, then add music and action-matched effects. Inspect the actual stems at problem timestamps. A loudness measurement does not establish that speech is intelligible or that an effect is tasteful.
+
+### 7. Review renders
+
+Render the opening, one dense middle section, one screen-recording section, and the ending before committing to a full render. Review at native 16:9 size with sound.
+
+### 8. Ship gate
+
+Verify the full render, not just the source timeline: correct duration and resolution, no missing media, corrected captions, intelligible dialogue, no clipped mix, factual claims sourced, CTA present, and delivery file playable from start to finish.
+
+## Current status
+
+The system and project contract are established. The **NoCodeAlex long-form visual style is intentionally unclaimed** until Alex supplies or approves the first reference set. The first completed YouTube video should convert its approved, repeatable decisions into a separate style note linked from here.
+
+See also [[video-editing-toolchain]], [[alex-claude-motion-and-voice]], and `youtube-video-editing-system/README.md`.

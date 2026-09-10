@@ -17,4 +17,4 @@ Official Matchtern brand system on disk: `~/Downloads/Matchtern Design System/` 
 
 **Copy rules:** no em dashes; "your child" (speaking to a parent), not "students"; "venture-backed companies" not "startups"; "matchtern.org" not ".com".
 
-Other logo copies in `~/Downloads/`: `Matchtern Logo.png`, `Matchtern (1).png` (all the same mark). Used by [[matchtern-longform-video-style]].
+Other logo copies in `~/Downloads/`: `Matchtern Logo.png`, `Matchtern (1).png` (all the same mark). The retired Matchtern long-form VSL used these assets; they are not part of the NoCodeAlex YouTube system.

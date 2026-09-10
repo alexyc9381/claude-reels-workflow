@@ -7,7 +7,7 @@ metadata:
   originSessionId: 6fa51af1-dc7c-4c53-9b91-ef60b808e957
 ---
 
-Short-form (vertical 9:16 TikTok/IG Reels) Matchtern UGC edits — distinct from the 16:9 [[matchtern-longform-video-style]]. Raw clips are vertical 4K/60fps `.mov` (e.g. `Research_ScriptUGCRaw.mov`); transcode to 1080×1920 30fps H.264 first.
+Short-form (vertical 9:16 TikTok/IG Reels) Matchtern UGC edits. The former Matchtern 16:9 VSL style is archived and must not be used for NoCodeAlex YouTube work. Raw clips are vertical 4K/60fps `.mov` (e.g. `Research_ScriptUGCRaw.mov`); transcode to 1080×1920 30fps H.264 first.
 
 **Captions (Alex's explicit 2026-06-17 preference):** FULL opacity (not faded), **auto-appearing word-by-word synced to audio, with NO animate-in / animate-out** (hard cut, no fade/scale). Big bold Inter 900, white with thick black outline, active word in a **logo-blue (#2440BD) highlight box**. Lower third (~paddingBottom 470 at 1080×1920). Built in `ShortCaptions.tsx`.
 

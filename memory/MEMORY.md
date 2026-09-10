@@ -125,6 +125,9 @@
 - [Claude Max spin giveaway](claude-max-spin-giveaway.md)
 - [Lead-magnet .docx builder](reel-lead-magnet-builder.md) — `tools/make_lead_magnet.py`, zero-dependency OOXML (python-docx is NOT installed); hard-fails on em-dashes, on a Matchtern footer, and on a missing keyword line
 
+## YouTube
+- [⛔ YouTube video editing system](youtube-video-editing-system.md) — canonical NoCodeAlex 16:9 long-form entry point; Remotion, paper edit, graphics plan, review renders, ship gate; never inherit the retired Matchtern VSL style
+
 ## Matchtern
 - [Design system](matchtern-design-system.md) — brand colors, fonts, logo, copy rules
 - [⛔ No em dashes](no-em-dashes-in-copy.md) — ZERO em dashes in ANY Matchtern copy + pre-ship grep
@@ -132,7 +135,8 @@
 - [Primary messaging](matchtern-primary-messaging.md) — "stand out in admissions" · [Ad imagery](matchtern-ad-imagery-representation.md) — South Asian + Asian people
 - [Ad economics](matchtern-ad-economics.md) — Meta ~$50/opt-in; $2k cold offer ≈ 0.4x ROAS; needs a tripwire
 - [Static ad pipeline](matchtern-static-ad-pipeline.md) · [Meta campaign builder](matchtern-meta-campaign-builder.md) (builds PAUSED) · [Apply landing page](matchtern-apply-landing-page.md)
-- [Long-form video style](matchtern-longform-video-style.md) 16:9 · [Short-form](matchtern-shortform-video-style.md) 9:16 · [Ivy.insider pipeline](ivy-insider-pipeline.md)
+- [Short-form video style](matchtern-shortform-video-style.md) 9:16 · [Ivy.insider pipeline](ivy-insider-pipeline.md)
+- Historical only: [archived Matchtern long-form VSL style](archive/matchtern-longform-video-style.md)
 
 ## Reel 124 craft rules (added 2026-09-01)
 - [⛔⛔⛔ The villain is SAMENESS, not ugliness](feedback_villain_is_sameness_not_ugliness.md) — reel 124: drawing the competitor grey is a dead frame AND a false claim

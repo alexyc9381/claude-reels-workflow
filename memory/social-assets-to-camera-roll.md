@@ -27,6 +27,6 @@ zsh script; imports jpg/png/mp4/mov/heic; idempotent via a `.photos_imported.log
 Do this for every asset pipeline (export IG-ready files first per each one's own convention, THEN import):
 - [[1609plus-style-replica]] carousels → album "Matchtern IG"
 - [[matchtern-static-ad-pipeline]] FB/IG image ads → album "Matchtern Ads"
-- [[venture-style-pipeline]] and [[matchtern-longform-video-style]] videos → album "Matchtern Video"
+- [[venture-style-pipeline]] and active Matchtern short-form videos → album "Matchtern Video"
 
 Everything imported also lands in the phone's Recents/camera roll regardless of album.

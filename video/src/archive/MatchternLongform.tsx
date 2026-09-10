@@ -8,9 +8,13 @@ import {
   staticFile,
   useCurrentFrame,
 } from "remotion";
-import { Captions, BottomScrim } from "./components/Captions";
-import { Watermark } from "./components/Watermark";
-import { TIMELINE } from "./data/timeline";
+import { Captions, BottomScrim } from "../components/Captions";
+import { Watermark } from "../components/Watermark";
+import { TIMELINE } from "../data/timeline";
+
+// ARCHIVED 2026-09-10: retained for historical reference only.
+// This composition is deliberately not registered in Root.tsx and must not be
+// used as the starting point for NoCodeAlex YouTube work.
 
 // Gentle breathing zoom + small punch-ins on emphasis beats (talking-head sections).
 const PUNCHES = [24.7, 48.9, 126.4, 143.0, 182.4].map((s) => Math.round(s * 30));

@@ -5,7 +5,10 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 6fa51af1-dc7c-4c53-9b91-ef60b808e957
+  status: archived
 ---
+
+> **ARCHIVED 2026-09-10.** This is historical Matchtern VSL guidance, not an active editing system. Do not load or apply it to NoCodeAlex work. The active long-form system is [[youtube-video-editing-system]].
 
 Alex has TWO distinct Matchtern video-editing styles. This one is for **long-form 16:9** (YouTube/VSL/landscape), NOT the vertical short-form TikTok/Reels style ([[matchtern-shortform-video-style]] is the karaoke-caption one — do not mix them).
 

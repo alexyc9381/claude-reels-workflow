@@ -8,7 +8,7 @@ Open `src/Root.tsx` first — it registers every reel as a `<Composition>` (id, 
 ## Layout
 | path | what |
 |---|---|
-| `package.json` | Remotion 4.0.370, React 19.2, `@remotion/three`; `npm run studio` / `render` scripts (name is still `matchtern-longform`) |
+| `package.json` | Remotion 4.0.370, React 19.2, `@remotion/three`; `npm run studio` and `npm run compositions` (the package name is a historical infrastructure name) |
 | `src/index.ts` | entry — `registerRoot(RemotionRoot)` |
 | `src/Root.tsx` | registers every `<Composition>`; the master reel index |
 | `src/Claude<Name>Reel.tsx` | one file per reel (e.g. `ClaudeSimulateReel.tsx`, `ClaudeFactoryReel.tsx`); the scene bodies + VO/SFX/caption wiring |
