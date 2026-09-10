@@ -2,11 +2,13 @@
 
 `YouTubeEdit.tsx` is the shared assembly layer for the three NoCodeAlex long-form profiles. It reads a frame-based manifest produced by `youtube-video-editing-system/tools/build_edl.py`.
 
-The component is not registered as a generic composition because a valid source file and manifest are required. Each real video adds a small registration module with:
+Use the isolated `src/youtube-preview.tsx` entry. Its generic `YouTubeEdit` composition accepts `{manifest: edit}` props and derives duration/fps. A real video can also add a small registration module with:
 
 - its imported `edit.json` manifest;
 - `durationInOutputFrames(edit)` as the composition duration;
 - the manifest's `outputFps`;
-- 1920x1080 unless the project brief explicitly says otherwise.
+- 3840x2160 for the master, 1920x1080 for review.
 
 Source media lives under the active project's ignored `public/` path, not in Git. Focus crops are reviewed editorial decisions recorded per segment. They are not generated from cursor or pixel motion at render time.
+
+See `youtube-video-editing-system/VISUAL-SYSTEM.md` and `CGI-AND-CHARACTER.md` at repository root for the visual contract, source-matched person masks/tracking, action presets, sound generation, preview media, and exact render commands. Run `npm run test:youtube` from `video/` for deterministic timing and pose tests.

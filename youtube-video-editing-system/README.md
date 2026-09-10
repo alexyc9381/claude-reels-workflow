@@ -1,4 +1,4 @@
-# youtube-video-editing-system — NoCodeAlex long-form YouTube production
+# No Code Alex YouTube editing system
 
 ## Purpose
 
@@ -15,6 +15,8 @@ Read [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editi
 | `README.md` | subsystem map and boundary |
 | `PROJECT.template.md` | required brief, paper edit, graphics plan, and ship gate for one video |
 | `TRANSFER-LOG.md` | what was recovered from the 2026-08 OBS course editor and what was deliberately not promoted |
+| `VISUAL-SYSTEM.md` | screen/presenter framing, opening push, definition cards, premium motion, resolution |
+| `CGI-AND-CHARACTER.md` | original sprite lineage, articulated 3D actions, tracking/mattes, sound, preview commands |
 | `COURSE-EDITING-PROFILE.md` | follow-along course and lesson rules |
 | `SCREEN-DEMO-PROFILE.md` | screen-led tutorial and software-demo rules |
 | `TALKING-HEAD-PROFILE.md` | presenter-led YouTube rules |
@@ -36,6 +38,8 @@ Read [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editi
 - The external folder historically named `matchtern-longform` became shared Remotion infrastructure for many NoCodeAlex reels. Its name is legacy; it is not the active Matchtern long-form style.
 - Do not apply 9:16 caption density, safe zones, or reel pacing to a 16:9 timeline by default.
 - Do not lock a permanent house style from one draft. Record a rule only after Alex approves it or repeated evidence supports it.
+
+The September 10 requirements are recorded in `VISUAL-SYSTEM.md`; the rendered examples are the first implementation, awaiting visual feedback. Use the isolated `video/src/youtube-preview.tsx` entry for this system. It avoids unrelated missing short-form imports in the legacy shared root.
 
 ## Related
 

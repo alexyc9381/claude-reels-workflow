@@ -15,7 +15,7 @@ export type EditSegment = {
 };
 
 export type OverlayEvent = {
-  type: "spec" | "step" | "tool" | "waited" | "note";
+  type: "spec" | "step" | "tool" | "waited" | "note" | "definition";
   fromFrame: number;
   durationInFrames: number;
   title: string;
@@ -31,7 +31,39 @@ export type YouTubeEditManifest = {
   outputFps: number;
   sourceWidth?: number;
   sourceHeight?: number;
-  chromeCrop?: {top: number; right: number; bottom: number; left: number};
+  chromeCrop?: { top: number; right: number; bottom: number; left: number };
   segments: EditSegment[];
   overlays?: OverlayEvent[];
+  presenter?: {
+    source: string;
+    fps: number;
+    width: number;
+    height: number;
+    offsetSeconds?: number;
+    side?: "left" | "right";
+    positionY?: number;
+    backgroundBlur?: number;
+    foregroundFrames?: string[];
+  };
+  audioMaster?: "source" | "presenter" | "mute";
+  openingSeconds?: number;
+  graphics?: {
+    kind: "workflow" | "context" | "sprite";
+    fromFrame: number;
+    durationInFrames: number;
+    title?: string;
+  }[];
+  cgi?: {
+    source: string;
+    points: { frame: number; x: number; y: number }[];
+    size: number;
+    layer?: "front" | "behind-person";
+    actions?: {
+      fromFrame: number;
+      durationInFrames: number;
+      action: "idle" | "walk" | "hop" | "cheer" | "surprised";
+      sound?: string;
+      volume?: number;
+    }[];
+  };
 };

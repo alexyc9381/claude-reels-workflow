@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "compositions": "remotion compositions src/index.ts",
-    "studio": "remotion studio src/index.ts"
+    "studio": "remotion studio src/index.ts",
+    "youtube:studio": "remotion studio src/youtube-preview.tsx",
+    "youtube:compositions": "remotion compositions src/youtube-preview.tsx",
+    "test:youtube": "esbuild src/youtube/tests.ts --bundle --platform=node --outfile=out/youtube-tests.cjs && node out/youtube-tests.cjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

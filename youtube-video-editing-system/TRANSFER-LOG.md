@@ -33,3 +33,14 @@ Source inspected: the local OBS course workspaces `obs-edit-0819` and `obs-edit-
 - `edit.schema.json` defines the stable handoff between analysis and Remotion.
 - `video/src/youtube/YouTubeEdit.tsx` assembles every segment from that manifest and applies reviewed focus crops and overlays.
 - `video/src/youtube/profiles.ts` contains the three profile defaults without baking them into individual compositions.
+
+## September 10 — visual and character integration
+
+Alex explicitly requested new graphics, a presenter inset, and character integrations for YouTube; these are new YouTube choices, not course-style inheritance. `VISUAL-SYSTEM.md` records those requirements. `CGI-AND-CHARACTER.md` distinguishes code actually ported from prerequisites still needed on each shoot.
+
+- Extended the shared EDL to cut synchronized presenter footage and select a single audio master; changed to cumulative frame rounding.
+- Replaced simple crop masking with a measured chrome crop followed by aspect-preserving fit and optional reviewed focus zoom.
+- Added large screen-on-gradient framing, substantial rounded facecam, fast-to-slow opening push, and source-matted background blur support.
+- Added definition cards, three premium-motion graphic scenes, and the original short-form 2D Claude silhouette.
+- Adapted ChenBuildsAI cube geometry and source-specific CGI compositing concepts; added articulated idle/walk/hop/surprise/cheer motion and original optional sound accents.
+- Old acoustic/privacy/module gates remain documented production checks, not newly automated detectors. No new recording has been fully edited or segmented in this integration pass.

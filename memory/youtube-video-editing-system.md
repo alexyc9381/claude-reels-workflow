@@ -6,7 +6,7 @@ metadata:
   type: project
 ---
 
-# YouTube video editing system
+# No Code Alex YouTube editing system
 
 This is the canonical entry point for **Alex / @nocodealex long-form YouTube videos**. It covers landscape videos, tutorials, explainers, case studies, and recorded builds. It does not govern vertical Instagram/TikTok reels.
 
@@ -16,11 +16,11 @@ This is the canonical entry point for **Alex / @nocodealex long-form YouTube vid
 - Use **Remotion** for authored graphics and the edit. Supporting transcription, audio work, and verification may use FFmpeg.
 - Do not inherit Matchtern branding, school imagery, VSL graphics, captions, or delivery rules. The former Matchtern long-form style is archived.
 - Do not stretch the short-form reel chassis across a longer timeline. Reuse proven primitives only when they serve the YouTube story.
-- A reference video or an explicit creative brief defines the look for each series. Until one is approved, do not invent a permanent house style.
+- Alex's September 10 brief defines the initial visual direction in `youtube-video-editing-system/VISUAL-SYSTEM.md`. Rendered examples are v1 proposals; do not treat them as approved final art direction.
 
 ## Default technical contract
 
-- Canvas: 16:9, normally 1920x1080.
+- Canvas: 16:9, 3840x2160 master when source quality supports it; 1920x1080 review renders. Upscaling old recordings does not restore missing detail.
 - Frame rate: preserve the source cadence when practical; otherwise use 30 fps.
 - Audio: dialogue is the priority; music and effects must duck beneath speech.
 - Captions: optional for long-form. If used, captions must be hand-corrected and designed for landscape viewing rather than copied from the 9:16 karaoke system.
@@ -91,6 +91,6 @@ Verify the full render, not just the source timeline: correct duration and resol
 
 ## Current status
 
-The core system and three editing profiles are established. The **NoCodeAlex long-form visual style is intentionally unclaimed** until Alex supplies or approves the first reference set. The first completed YouTube video should convert its approved, repeatable decisions into a separate style note linked from here.
+The core system, three editing profiles, large-screen/rounded-presenter layout, definition cards, three graphic sequences, and articulated mini Claude are implemented. The opening uses a fast push that slows into a settle. See `youtube-video-editing-system/VISUAL-SYSTEM.md` and `CGI-AND-CHARACTER.md` for implementation boundaries and source-specific prerequisites.
 
 See also [[video-editing-toolchain]], [[alex-claude-motion-and-voice]], `youtube-video-editing-system/TRANSFER-LOG.md`, and `youtube-video-editing-system/README.md`.
