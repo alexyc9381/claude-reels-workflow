@@ -97,4 +97,6 @@ The core system, three editing profiles, large-screen/rounded-presenter layout, 
 
 Sprite motion must not freeze at touchdown: anticipate, absorb impact, rebound subtly, let limbs follow through, and settle before the next move. Keep the shadow on the contact plane. Use the shared `naturalHop` pose for the white-glass 2D companion; do not clamp a travel arc to a static pose at contact. Keep glass and text steady rather than applying the character's bounce to the entire graphic.
 
+The 2D companion now has interpolated facial reactions synchronized to the same takeoff/contact times: focused, alert, impact squint, pleased recovery. Keep its established two-eye silhouette. Sound is a restrained, action-timed palette rather than an effect on every facial change. See `youtube-video-editing-system/SOUND-AND-FACIAL-REACTIONS.md`; the audible preview awaits Alex's listening feedback and is not a final dialogue mix.
+
 See also [[video-editing-toolchain]], [[alex-claude-motion-and-voice]], `youtube-video-editing-system/TRANSFER-LOG.md`, and `youtube-video-editing-system/README.md`.

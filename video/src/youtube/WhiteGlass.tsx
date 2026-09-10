@@ -9,6 +9,7 @@ import {
 } from "remotion";
 import { BRAND, bodyFont, displayFont } from "./brand";
 import { Claude2D } from "./Claude";
+import { hopFace, relayFace, type FacePose } from "./face-motion";
 import {
   clamp01,
   easeOut,
@@ -240,6 +241,7 @@ export const SpriteActor: React.FC<{
   cheer?: number;
   opacity?: number;
   pose?: SpriteLandingPose;
+  face?: FacePose;
 }> = ({
   t,
   x,
@@ -250,6 +252,7 @@ export const SpriteActor: React.FC<{
   cheer = 0,
   opacity = 1,
   pose = restingSprite(),
+  face,
 }) => (
   <div
     style={{
@@ -288,6 +291,7 @@ export const SpriteActor: React.FC<{
         size={size}
         cheer={cheer}
         armSwing={pose.armSwing}
+        face={face}
       />
     </div>
   </div>
@@ -462,6 +466,7 @@ const DefinitionStudy: React.FC<{ t: number }> = ({ t }) => {
         y={481}
         size={170}
         pose={pose}
+        face={hopFace(t, 0.2, 0.9)}
       />
       <div
         style={{
@@ -618,6 +623,7 @@ const RelayStudy: React.FC<{ t: number }> = ({ t }) => {
         y={745}
         size={160}
         pose={pose}
+        face={relayFace(t)}
         opacity={phase1}
       />
       <div
@@ -733,6 +739,7 @@ const FocusStudy: React.FC<{ t: number }> = ({ t }) => {
         y={790}
         size={135}
         pose={pose}
+        face={hopFace(t, 0.85, 0.8)}
       />
       <div
         style={{

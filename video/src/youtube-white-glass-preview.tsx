@@ -1,5 +1,11 @@
 import React from "react";
-import { AbsoluteFill, Composition, registerRoot } from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  Composition,
+  staticFile,
+  registerRoot,
+} from "remotion";
 import {
   WhiteGlassGallery,
   WhiteGlassScene,
@@ -7,6 +13,62 @@ import {
 } from "./youtube/WhiteGlass";
 import { naturalHop } from "./youtube/glass-motion";
 import { BRAND, bodyFont, displayFont } from "./youtube/brand";
+import { Claude2D } from "./youtube/Claude";
+import { facePresets } from "./youtube/face-motion";
+
+const WhiteGlassWithSound = () => (
+  <>
+    <WhiteGlassGallery />
+    <Audio src={staticFile("sfx-premium/glass-mix.wav")} />
+  </>
+);
+const FaceLibrary = () => (
+  <AbsoluteFill
+    style={{ background: BRAND.cream, color: BRAND.ink, fontFamily: bodyFont }}
+  >
+    <div
+      style={{
+        position: "absolute",
+        top: 45,
+        left: 70,
+        fontFamily: displayFont,
+        fontSize: 50,
+      }}
+    >
+      Claude’s reaction vocabulary
+    </div>
+    <div
+      style={{
+        position: "absolute",
+        top: 118,
+        left: 73,
+        fontSize: 24,
+        color: BRAND.clayDark,
+      }}
+    >
+      Same familiar silhouette. Expression through eyes and gaze.
+    </div>
+    {Object.entries(facePresets).map(([name, face], i) => (
+      <div
+        key={name}
+        style={{
+          position: "absolute",
+          left: 75 + i * 310,
+          top: 225,
+          width: 260,
+          textAlign: "center",
+        }}
+      >
+        <Claude2D frame={20} size={260} face={face} />
+        <div
+          style={{ fontSize: 25, marginTop: 20, textTransform: "capitalize" }}
+        >
+          {name}
+        </div>
+      </div>
+    ))}
+  </AbsoluteFill>
+);
 
 const LandingFrames = () => (
   <AbsoluteFill
@@ -73,6 +135,22 @@ const LandingFrames = () => (
 
 registerRoot(() => (
   <>
+    <Composition
+      id="WhiteGlassSound"
+      component={WhiteGlassWithSound}
+      durationInFrames={720}
+      fps={30}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="FaceLibrary"
+      component={FaceLibrary}
+      durationInFrames={1}
+      fps={30}
+      width={1920}
+      height={650}
+    />
     <Composition
       id="LandingFrames"
       component={LandingFrames}

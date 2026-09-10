@@ -1,0 +1,21 @@
+{
+  "duration": 24,
+  "sampleRate": 48000,
+  "cues": [
+    { "at": 0.2, "sound": "glide", "gain": 0.75, "pan": 0.15 },
+    { "at": 1.1, "sound": "land", "gain": 0.8, "pan": 0.2 },
+    { "at": 1.3, "sound": "glass", "gain": 0.7, "pan": 0.1 },
+    { "at": 8.35, "sound": "glass", "gain": 0.42, "pan": -0.2 },
+    { "at": 9.7, "sound": "glide", "gain": 0.8, "pan": -0.12 },
+    { "at": 10.75, "sound": "land", "gain": 0.72, "pan": 0 },
+    { "at": 10.95, "sound": "tap", "gain": 0.7, "pan": 0 },
+    { "at": 12, "sound": "glide", "gain": 0.7, "pan": 0.13 },
+    { "at": 13.15, "sound": "land", "gain": 0.75, "pan": 0.2 },
+    { "at": 13.48, "sound": "glass", "gain": 0.8, "pan": 0.2 },
+    { "at": 16.15, "sound": "glide", "gain": 0.4, "pan": 0 },
+    { "at": 16.85, "sound": "glide", "gain": 0.48, "pan": 0.12 },
+    { "at": 17.65, "sound": "land", "gain": 0.55, "pan": 0.12 },
+    { "at": 17.76, "sound": "tap", "gain": 0.72, "pan": 0.2 },
+    { "at": 17.95, "sound": "glass", "gain": 0.5, "pan": 0.2 }
+  ]
+}

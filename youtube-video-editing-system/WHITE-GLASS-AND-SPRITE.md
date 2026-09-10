@@ -1,5 +1,7 @@
 # White optical glass + the 2D Claude
 
+Latest addition: [SOUND-AND-FACIAL-REACTIONS.md](SOUND-AND-FACIAL-REACTIONS.md) documents the audible v6 preview, reusable SFX palette, and action-synchronized facial reactions. Earlier silent-preview statements below describe the v4/v5 studies; the silent composition is still available.
+
 ## Latest decisions
 
 Alex confirmed `cube.mov` is the correct existing glowing CGI animation. Keep that file as the footage companion; do not recreate it. Alex now wants **white-colored glass only**, superseding the black-glass direction. Preserve No Code Alex Fraunces/Inter and cream/clay-orange/amber branding. The new visual studies below are proposals, not yet approved final art.

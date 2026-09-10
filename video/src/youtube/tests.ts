@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { characterPose } from "./character-motion";
 import { editTimeline, openingScale, durationInOutputFrames } from "./timing";
 import type { YouTubeEditManifest } from "./types";
+import { hopFace, facePresets, relayFace } from "./face-motion";
 import {
   easeOut,
   easeInOut,
@@ -112,6 +113,24 @@ for (const fps of [24, 30, 60])
       );
     }
   }
+assert.deepEqual(hopFace(0, 1, 1), facePresets.neutral);
+assert.ok(hopFace(0.95, 1, 1).leftOpen < 0.7);
+assert.ok(hopFace(1.4, 1, 1).leftOpen > 1.2);
+assert.ok(hopFace(2.1, 1, 1).leftOpen < 0.2);
+assert.ok(hopFace(2.6, 1, 1).happy > 0.95);
+for (let f = 0; f < 480; f++) {
+  const t = f / 60,
+    a = relayFace(t),
+    b = relayFace(t + 1e-5);
+  assert.deepEqual(a, relayFace(t));
+  for (const key of Object.keys(a) as (keyof typeof a)[]) {
+    assert.ok(Number.isFinite(a[key]));
+    assert.ok(Math.abs(a[key] - b[key]) < 0.005, "no facial hard-switch");
+  }
+  assert.ok(
+    a.leftOpen >= 0.14 && a.rightOpen >= 0.14 && a.happy >= 0 && a.happy <= 1,
+  );
+}
 console.log(
   "Passed: EDL timing, segment validation, opening zoom, character poses, glass easing, bounded sprite travel, landing continuity, impact/recovery, and seek determinism at 24/30/60fps.",
 );

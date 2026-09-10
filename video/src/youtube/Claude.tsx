@@ -2,6 +2,7 @@ import React from "react";
 import { ThreeCanvas } from "@remotion/three";
 import { useVideoConfig } from "remotion";
 import { characterPose, type ClaudeAction } from "./character-motion";
+import type { FacePose } from "./face-motion";
 
 // Extracted base silhouette from ClaudeCrewReel.tsx, also shared by the
 // chenbuildsai Mascot.tsx. Keep the pixel silhouette and terracotta identity.
@@ -10,7 +11,8 @@ export const Claude2D: React.FC<{
   size?: number;
   cheer?: number;
   armSwing?: number;
-}> = ({ frame, size = 240, cheer = 0, armSwing = 0 }) => {
+  face?: FacePose;
+}> = ({ frame, size = 240, cheer = 0, armSwing = 0, face }) => {
   const blink = frame % 84 < 5 ? 0.15 : 1;
   return (
     <svg
@@ -41,16 +43,37 @@ export const Claude2D: React.FC<{
         ))}
       </g>
       <rect x="34" y="44" width="132" height="10" fill="white" opacity=".16" />
-      {[70, 116].map((x) => (
-        <rect
-          key={x}
-          x={x}
-          y={70 + (26 - 26 * blink) / 2}
-          width="15"
-          height={26 * blink}
-          fill="#151312"
-        />
-      ))}
+      {[70, 116].map((x, i) =>
+        face ? (
+          <g key={x} transform={`translate(${face.gazeX},${face.gazeY})`}>
+            <rect
+              x={x}
+              y={83 - 13 * (i ? face.rightOpen : face.leftOpen)}
+              width={15}
+              height={26 * (i ? face.rightOpen : face.leftOpen)}
+              fill="#151312"
+              opacity={1 - face.happy}
+            />
+            <path
+              d={`M${x - 1} 88 Q${x + 7.5} 74 ${x + 16} 88`}
+              fill="none"
+              stroke="#151312"
+              strokeWidth={7}
+              strokeLinecap="square"
+              opacity={face.happy}
+            />
+          </g>
+        ) : (
+          <rect
+            key={x}
+            x={x}
+            y={70 + (26 - 26 * blink) / 2}
+            width="15"
+            height={26 * blink}
+            fill="#151312"
+          />
+        ),
+      )}
     </svg>
   );
 };
