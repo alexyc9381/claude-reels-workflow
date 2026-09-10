@@ -1,0 +1,11 @@
+Qwen3.8 27B is a 27 billion parameter variant that you can actually run on regular computers.
+If you do want to run it locally, the easiest way is to download LM Studio here. It's a totally free app.
+You could come over to the model search, search for Qwen3.8, and this is the official version straight from Qwen on Hugging Face.
+You can get 4-bit, 5-bit, 6-bit, and 8-bit quantization.
+Now that just means the amount of compression it has. So the more quantized it is, you're going to lose a little bit of intelligence essentially.
+So you want to run the best one that your computer will let you run with the least amount of compression.
+And the nice thing about LM Studio here is that if you click on any of these models or variations, it'll tell you if it can even run on your computer.
+And once you have that model downloaded, you can click on My Models.
+So if I select Uncensored, click on my little cog icon and then click Use in New Chat, you can see it then pulls in that model.
+And now I can use this model completely uncensored in chat and it will think, it will use code and pretty much do anything you expect new models to do.
+Comment LM for the setup.

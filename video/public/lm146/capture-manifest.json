@@ -1,0 +1,127 @@
+{
+  "chat-prompt": {
+    "seconds": 2.728,
+    "captured_frames": 10,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "quant": {
+    "seconds": 3.288,
+    "captured_frames": 24,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "website-detail": {
+    "seconds": 1.116,
+    "captured_frames": 8,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "code-final": {
+    "seconds": 1.4009999999999998,
+    "captured_frames": 10,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "official-model38": {
+    "seconds": 1.313,
+    "captured_frames": 10,
+    "capture_method": "CUA native/browser screenshot stream; original timestamps preserved; edit uses real UI actions"
+  },
+  "chat-format-response": {
+    "seconds": 14.416,
+    "captured_frames": 90,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "fit": {
+    "seconds": 2.729,
+    "captured_frames": 20,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "quant-list": {
+    "seconds": 17.666,
+    "captured_frames": 22,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "official-model": {
+    "seconds": 1.1480000000000001,
+    "captured_frames": 10,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "search38": {
+    "seconds": 4.142,
+    "captured_frames": 41,
+    "capture_method": "CUA native/browser screenshot stream; original timestamps preserved; edit uses real UI actions"
+  },
+  "website-os": {
+    "seconds": 6.2669999999999995,
+    "captured_frames": 15,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "all-quants": {
+    "seconds": 16.176000000000002,
+    "captured_frames": 20,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "search": {
+    "seconds": 3.46,
+    "captured_frames": 38,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "download-model": {
+    "seconds": 3.1,
+    "captured_frames": 8,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "use-new-chat": {
+    "seconds": 4.245,
+    "captured_frames": 22,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "model-config": {
+    "seconds": 2.164,
+    "captured_frames": 13,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "chat-finished": {
+    "seconds": 2.636,
+    "captured_frames": 8,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "community38": {
+    "seconds": 2.3609999999999998,
+    "captured_frames": 13,
+    "capture_method": "CUA native/browser screenshot stream; original timestamps preserved; edit uses real UI actions"
+  },
+  "my-models": {
+    "seconds": 2.3320000000000003,
+    "captured_frames": 15,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "fit38": {
+    "seconds": 2.516,
+    "captured_frames": 12,
+    "capture_method": "CUA native/browser screenshot stream; original timestamps preserved; edit uses real UI actions"
+  },
+  "chat-code": {
+    "seconds": 6.965,
+    "captured_frames": 60,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "chat-response": {
+    "seconds": 21.946,
+    "captured_frames": 80,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "open-search": {
+    "seconds": 2.364,
+    "captured_frames": 20,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "quant-scroll": {
+    "seconds": 6.463,
+    "captured_frames": 8,
+    "capture_method": "CUA actual screen capture with original timestamps"
+  },
+  "quant38": {
+    "seconds": 2.32,
+    "captured_frames": 15,
+    "capture_method": "CUA native/browser screenshot stream; original timestamps preserved; edit uses real UI actions"
+  }
+}

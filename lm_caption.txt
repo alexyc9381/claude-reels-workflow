@@ -1,0 +1,19 @@
+Comment "LM" and I'll DM you the full local AI setup guide and three ready-to-use prompts. Follow so the DM lands 📩
+
+👇 READ BELOW, the part that matters before you download:
+
+Qwen3.8-27B brings a 27-billion-parameter language model to a local setup. Whether it fits depends on your computer and the version you choose.
+
+LM Studio gives you a free desktop app for finding models, checking the hardware estimate, and opening a local chat.
+
+Lower-bit downloads generally need less memory, with a possible quality tradeoff. A file size is not your total RAM requirement: the app, context, and other programs need room too.
+
+The video shows the real 27B hardware warning on this Mac, then switches to a clearly labeled 1.7B community model for the live chat. Once a model and its runtime are downloaded, basic local chat can work offline.
+
+The guide includes the exact setup sequence, the full-model versus MTP file trap, three prompts, and fixes for common loading problems.
+
+Save this before your next model download.
+
+Comment "LM" for the setup.
+
+#LMStudio #Qwen #LocalAI #AITools #NoCode

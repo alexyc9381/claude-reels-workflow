@@ -1,0 +1,302 @@
+{
+  "duration": 45.6,
+  "cue_count": 29,
+  "cue_rate": 0.6359649122807017,
+  "voice_RMS_dB": -20.41142341275634,
+  "music_RMS_dB": -34.091487884521484,
+  "sfx_RMS_dB": -32.149240917278526,
+  "peak_prelimit": 0.9185648835264146,
+  "music_source": "User house soundtrack: Another Day Of Sun instrumental; 13.95s source offset",
+  "cues": [
+    {
+      "seconds": 0,
+      "frame": 0,
+      "name": "impact",
+      "role": "hero",
+      "action": "opening model block and immediate camera push",
+      "gain_db": -2.99,
+      "sfx_A120_db": -24.73,
+      "tail_s": 0.64
+    },
+    {
+      "seconds": 0.4,
+      "frame": 12,
+      "name": "lever",
+      "role": "support",
+      "action": "Claude starts pushing the model",
+      "gain_db": -7.53,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 1.2,
+      "frame": 36,
+      "name": "paper",
+      "role": "support",
+      "action": "hook punches into the physical load action",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 3.0,
+      "frame": 90,
+      "name": "paper",
+      "role": "support",
+      "action": "official Qwen3.8 model proof appears",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 1.6,
+      "frame": 48,
+      "name": "thock",
+      "role": "hero",
+      "action": "model reaches laptop",
+      "gain_db": -3.07,
+      "sfx_A120_db": -29.81,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 1.9,
+      "frame": 57,
+      "name": "unlock",
+      "role": "support",
+      "action": "local AI state lights up",
+      "gain_db": -23.49,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.28
+    },
+    {
+      "seconds": 4.9333,
+      "frame": 148,
+      "name": "paper",
+      "role": "support",
+      "action": "official download page appears",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 6.7833,
+      "frame": 204,
+      "name": "key",
+      "role": "support",
+      "action": "operating system choices open",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 9.2667,
+      "frame": 278,
+      "name": "key",
+      "role": "support",
+      "action": "Qwen search is entered",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 9.3967,
+      "frame": 282,
+      "name": "terminal",
+      "role": "support",
+      "action": "matching model result resolves",
+      "gain_db": -5.72,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 11.7667,
+      "frame": 353,
+      "name": "paper",
+      "role": "support",
+      "action": "official Qwen model card appears",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 13.9,
+      "frame": 417,
+      "name": "thock",
+      "role": "support",
+      "action": "quantization close-up lands",
+      "gain_db": -5.26,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 14.33,
+      "frame": 430,
+      "name": "key",
+      "role": "texture",
+      "action": "camera follows the next spoken bit-depth option",
+      "gain_db": -12.6,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 14.77,
+      "frame": 443,
+      "name": "key",
+      "role": "texture",
+      "action": "camera follows the next spoken bit-depth option",
+      "gain_db": -12.6,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 15.37,
+      "frame": 461,
+      "name": "key",
+      "role": "texture",
+      "action": "camera follows the next spoken bit-depth option",
+      "gain_db": -12.6,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 17.2,
+      "frame": 516,
+      "name": "lever",
+      "role": "support",
+      "action": "size versus precision scale begins",
+      "gain_db": -7.53,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 19.8,
+      "frame": 594,
+      "name": "pickup",
+      "role": "texture",
+      "action": "precision end of scale settles",
+      "gain_db": -25.32,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.33
+    },
+    {
+      "seconds": 21.8667,
+      "frame": 656,
+      "name": "paper",
+      "role": "support",
+      "action": "higher precision options come into focus",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 25.3,
+      "frame": 759,
+      "name": "thock",
+      "role": "support",
+      "action": "hardware estimate close-up",
+      "gain_db": -5.26,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 28.6,
+      "frame": 858,
+      "name": "unlock",
+      "role": "hero",
+      "action": "smaller model shows a positive fit",
+      "gain_db": -18.49,
+      "sfx_A120_db": -27.0,
+      "tail_s": 0.28
+    },
+    {
+      "seconds": 30.8667,
+      "frame": 926,
+      "name": "key",
+      "role": "support",
+      "action": "My Models opens",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 33.6,
+      "frame": 1008,
+      "name": "key",
+      "role": "support",
+      "action": "model configuration opens",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 36.37,
+      "frame": 1091,
+      "name": "thock",
+      "role": "support",
+      "action": "Use in New Chat is selected",
+      "gain_db": -5.26,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 36.65,
+      "frame": 1100,
+      "name": "terminal",
+      "role": "support",
+      "action": "model loads locally",
+      "gain_db": -5.72,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 38.1833,
+      "frame": 1146,
+      "name": "terminal",
+      "role": "support",
+      "action": "local model reasoning appears",
+      "gain_db": -5.72,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 40.3633,
+      "frame": 1211,
+      "name": "unlock",
+      "role": "hero",
+      "action": "formatted Python code is shown",
+      "gain_db": -18.49,
+      "sfx_A120_db": -27.0,
+      "tail_s": 0.28
+    },
+    {
+      "seconds": 43.7,
+      "frame": 1311,
+      "name": "paper",
+      "role": "support",
+      "action": "setup comment card appears",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 44.17,
+      "frame": 1325,
+      "name": "thock",
+      "role": "support",
+      "action": "LM button press",
+      "gain_db": -5.26,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 44.47,
+      "frame": 1334,
+      "name": "unlock",
+      "role": "hero",
+      "action": "Claude celebrates completed setup",
+      "gain_db": -18.49,
+      "sfx_A120_db": -27.0,
+      "tail_s": 0.28
+    }
+  ]
+}

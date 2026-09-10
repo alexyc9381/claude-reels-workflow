@@ -1,0 +1,1 @@
+import React from 'react';import {Composition,registerRoot} from 'remotion';import {LM146Cover} from './LM146Cover';registerRoot(()=> <Composition id="LMCover" component={LM146Cover} durationInFrames={2} fps={30} width={1080} height={1920}/>);
