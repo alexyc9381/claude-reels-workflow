@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { characterPose } from "./character-motion";
 import { editTimeline, openingScale, durationInOutputFrames } from "./timing";
 import type { YouTubeEditManifest } from "./types";
+import { easeOut, easeInOut, settle, relayPosition } from "./glass-motion";
 const m: YouTubeEditManifest = {
   version: 1,
   profile: "screen-demo",
@@ -51,6 +52,19 @@ for (const action of ["idle", "walk", "hop", "cheer", "surprised"] as const)
     assert.ok(Object.values(pose).every(Number.isFinite));
     assert.ok(pose.sy > 0 && pose.sx > 0);
   }
+for (const ease of [easeOut, easeInOut, settle]) {
+  assert.equal(ease(-1, 0, 1), 0);
+  assert.equal(ease(2, 0, 1), 1);
+}
+assert.deepEqual(relayPosition(0), { x: 290, y: 610 });
+assert.equal(relayPosition(6).x, 1300);
+assert.ok(Math.abs(relayPosition(6).y - 610) < 1e-8);
+for (let frame = 0; frame < 240; frame++) {
+  const a = relayPosition(frame / 30);
+  assert.deepEqual(a, relayPosition(frame / 30));
+  assert.ok(Object.values(a).every(Number.isFinite));
+  assert.ok(a.x >= 290 && a.x <= 1300 && a.y >= 480 && a.y <= 610);
+}
 console.log(
-  "Passed: cumulative EDL timing, segment validation, opening zoom, deterministic character poses, hop phases, finite transforms.",
+  "Passed: cumulative EDL timing, segment validation, opening zoom, deterministic character poses, hop phases, finite transforms, glass easing endpoints, and bounded seek-safe sprite hand-offs.",
 );

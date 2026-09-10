@@ -2,7 +2,7 @@
 
 Source: Alex's explicit September 10 brief. Framework: Remotion.
 
-Latest brand correction: glass components use Fraunces display + Inter supporting text, translucent black panels, and cream/clay-orange/amber backgrounds from the existing No Code Alex reel. See `ORIGINAL-CGI-AND-BRAND.md`. The earlier cool-blue layout below is a legacy first-pass implementation, not the newly requested brand direction; it must be re-skinned before final production approval.
+Latest brand correction: glass components use Fraunces display + Inter supporting text, **white-only translucent panels**, and cream/clay-orange/amber backgrounds from the existing No Code Alex reel. See `WHITE-GLASS-AND-SPRITE.md` for optical layers, easing, and purposeful 2D Claude integration. The earlier cool-blue layout below is a legacy first-pass implementation, not the newly requested brand direction; it must be re-skinned before final production approval.
 
 ## Layout and footage
 

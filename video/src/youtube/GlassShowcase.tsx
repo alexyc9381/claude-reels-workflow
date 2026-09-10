@@ -11,17 +11,19 @@ import { premium } from "./design";
 import { BRAND, displayFont, bodyFont } from "./brand";
 
 export const glass: React.CSSProperties = {
-  background: "linear-gradient(135deg,rgba(18,18,18,.77),rgba(18,18,18,.48))",
-  color: BRAND.cream,
+  background:
+    "linear-gradient(135deg,rgba(255,255,255,.7),rgba(255,255,255,.3))",
+  color: BRAND.ink,
   backdropFilter: "blur(24px) saturate(135%)",
   border: "1px solid rgba(255,255,255,.32)",
   boxShadow:
-    "inset 0 1px 0 #ffffff55,inset 0 -1px 0 #ffffff12,0 24px 65px #1A181333",
+    "inset 2px 3px 3px #ffffffee,inset -2px -3px 4px #ffffff88,inset 0 0 0 6px #ffffff22,0 24px 65px #6A3F2525",
   borderRadius: 32,
 };
 export const GlassPanel: React.FC<{
   children: React.ReactNode;
   style?: React.CSSProperties;
+  /** Legacy prop: now selects denser WHITE frost, never black glass. */
   smoked?: boolean;
 }> = ({ children, style, smoked = false }) => (
   <div
@@ -30,8 +32,8 @@ export const GlassPanel: React.FC<{
       ...(smoked
         ? {
             background:
-              "linear-gradient(140deg,rgba(12,12,12,.88),rgba(12,12,12,.7))",
-            color: "#fff",
+              "linear-gradient(140deg,rgba(255,255,255,.91),rgba(255,255,255,.76))",
+            color: BRAND.ink,
             borderColor: "#ffffff55",
           }
         : {}),
@@ -97,12 +99,7 @@ export const GlassBackdrop = () => {
   );
 };
 export type GlassKind =
-  | "definition"
-  | "callout"
-  | "workflow"
-  | "chapter"
-  | "comparison"
-  | "screen";
+  "definition" | "callout" | "workflow" | "chapter" | "comparison" | "screen";
 export const glassKinds: GlassKind[] = [
   "definition",
   "callout",
@@ -131,7 +128,7 @@ const eyebrow: React.CSSProperties = {
   fontSize: 18,
   fontWeight: 650,
   letterSpacing: 3,
-  color: "#E8B29A",
+  color: "#B8501F",
 };
 
 export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
@@ -187,7 +184,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                 fontSize: 29,
                 lineHeight: 1.45,
                 marginTop: 12,
-                color: "#ECE9E2",
+                color: "#352920",
               }}
             >
               The information an AI can consider at one time.
@@ -262,7 +259,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
               transform: `translateX(${(1 - progress) * 24}px)`,
             })}
           >
-            <div style={{ ...eyebrow, color: "#e3d3c1" }}>
+            <div style={{ ...eyebrow, color: "#B8501F" }}>
               THE IMPORTANT PART
             </div>
             <div style={{ fontSize: 35, lineHeight: 1.25, marginTop: 22 }}>
@@ -273,7 +270,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                 fontSize: 25,
                 lineHeight: 1.45,
                 marginTop: 20,
-                color: "#eef2fb",
+                color: "#4D3D31",
               }}
             >
               Reuse it in your next conversation.
@@ -322,7 +319,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                   fontSize: 25,
                   lineHeight: 1.5,
                   marginTop: 27,
-                  color: "#E3DAD2",
+                  color: "#4D3D31",
                 }}
               >
                 {
@@ -383,14 +380,14 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
               <br />
               Then make it yours.
             </div>
-            <div style={{ fontSize: 26, marginTop: 35, color: "#E3DAD2" }}>
+            <div style={{ fontSize: 26, marginTop: 35, color: "#4D3D31" }}>
               From a working draft to your own workflow.
             </div>
           </GlassPanel>
         </>
       )}
       {kind === "comparison" &&
-        ["Light smoke", "Deep smoke"].map((s, i) => (
+        ["Clear frost", "Soft white"].map((s, i) => (
           <GlassPanel
             key={s}
             smoked={i === 1}
@@ -403,7 +400,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
               opacity: progress,
             })}
           >
-            <div style={{ ...eyebrow, color: i ? "#d7e1ed" : "#E8B29A" }}>
+            <div style={{ ...eyebrow, color: i ? "#B8501F" : "#B8501F" }}>
               0{i + 1} / SURFACE OPTION
             </div>
             <div
@@ -421,12 +418,12 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
                 fontSize: 28,
                 lineHeight: 1.55,
                 marginTop: 30,
-                color: i ? "#edf0f8" : "#E3DAD2",
+                color: i ? "#4D3D31" : "#4D3D31",
               }}
             >
               {i
                 ? "More separation over bright or visually busy footage."
-                : "More of the orange brand background shows through the black glass."}
+                : "The orange brand background shows through the white glass."}
             </div>
             <div
               style={{
@@ -475,7 +472,7 @@ export const GlassContent: React.FC<{ kind: GlassKind; progress?: number }> = ({
               opacity: progress,
             })}
           >
-            <div style={{ ...eyebrow, color: "#dbe3ec" }}>SCREEN DEMO</div>
+            <div style={{ ...eyebrow, color: "#B8501F" }}>SCREEN DEMO</div>
             <div style={{ fontSize: 29, marginTop: 12 }}>
               A small callout. The real interface stays visible.
             </div>
@@ -579,7 +576,7 @@ export const GlassOverview = () => (
         color: "#6D5548",
       }}
     >
-      Fraunces + Inter. Translucent black glass. No Code Alex clay-orange
+      Fraunces + Inter. Translucent white glass. No Code Alex clay-orange
       backgrounds.
     </div>
     {glassKinds.map((kind, i) => (

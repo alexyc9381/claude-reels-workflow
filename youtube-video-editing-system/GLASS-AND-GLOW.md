@@ -1,6 +1,6 @@
 # Glass and glowing CGI — September 10 revision
 
-> Historical v2 study, superseded by [ORIGINAL-CGI-AND-BRAND.md](ORIGINAL-CGI-AND-BRAND.md). The canonical default is now the existing `cube.mov` (`original`), not the recreated shader. Current glass is black translucent over No Code Alex orange/cream backgrounds with Fraunces/Inter. The specifications below describe the earlier proposal, not the current default or approved direction.
+> Historical v2 study. The canonical CGI default is the confirmed existing `cube.mov` (`original`), not the recreated shader; provenance is in [ORIGINAL-CGI-AND-BRAND.md](ORIGINAL-CGI-AND-BRAND.md). Current glass is **white only**, with purposeful 2D Claude choreography: [WHITE-GLASS-AND-SPRITE.md](WHITE-GLASS-AND-SPRITE.md). The specifications below describe the earlier proposal, not the current default or approved direction.
 
 Alex clarified that the flat articulated cube is useful for authored animations, but is not the intended CGI-on-footage look. Keep both treatments. The CGI treatment must visibly emit warm light. Alex also requested transparent glass-style editing components; these studies await visual feedback, not blanket final approval.
 

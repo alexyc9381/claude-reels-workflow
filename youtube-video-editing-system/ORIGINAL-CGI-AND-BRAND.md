@@ -1,5 +1,7 @@
 # Original CGI and brand glass — September 10 correction
 
+**Latest:** Alex has confirmed this `cube.mov` is the correct original. The black-glass proposal below is superseded by [WHITE-GLASS-AND-SPRITE.md](WHITE-GLASS-AND-SPRITE.md): white-only glass, optical depth, eased choreography, and the reused 2D Claude. The asset provenance below remains canonical.
+
 Alex requested the already-created glowing CGI character, not a replacement model. Previous flat rig and `GlowingClaude.tsx` shader studies are experimental authored-animation alternatives, not the canonical footage companion. Previous cyan/lavender glass backgrounds are superseded.
 
 ## Existing ChenBuildsAI asset — recovered, not recreated

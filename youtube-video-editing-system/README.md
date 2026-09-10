@@ -6,7 +6,7 @@ This subsystem holds the text-first production contract for 16:9 @nocodealex You
 
 ## Start here
 
-Current CGI/brand correction: [ORIGINAL-CGI-AND-BRAND.md](ORIGINAL-CGI-AND-BRAND.md). Reuse the real ChenBuildsAI `cube.mov`; review the black-glass/orange brand components through `video/src/youtube-brand-review.tsx`.
+Current direction: [WHITE-GLASS-AND-SPRITE.md](WHITE-GLASS-AND-SPRITE.md). White-only optical glass and purposeful 2D Claude choreography; preview via `video/src/youtube-white-glass-preview.tsx`. Alex confirmed the original CGI in [ORIGINAL-CGI-AND-BRAND.md](ORIGINAL-CGI-AND-BRAND.md); keep that exact asset for footage.
 
 Read [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editing-system.md), then copy [`PROJECT.template.md`](PROJECT.template.md) into a per-video planning folder before touching the edit.
 

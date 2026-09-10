@@ -91,7 +91,7 @@ Verify the full render, not just the source timeline: correct duration and resol
 
 ## Current status
 
-Alex explicitly wants the already-created glowing CGI, not a recreation. Use `original` (the default): ChenBuildsAI's verified `public/cube.mov`, recovered from its Git-ignored working media. The earlier `glowing-cube` and rounded shader models are experimental alternatives only. Glass studies now use Fraunces/Inter, translucent black surfaces, and No Code Alex cream/clay-orange backgrounds. See `youtube-video-editing-system/ORIGINAL-CGI-AND-BRAND.md` for source checksum, current preview entry, and integration limits.
+Alex confirmed ChenBuildsAI's verified `public/cube.mov` is the correct original glowing CGI. Use `original` (the default), not a recreation. The earlier `glowing-cube` and rounded shader models are experimental alternatives only. Alex's latest direction is **white glass only**, with Fraunces/Inter and No Code Alex cream/clay-orange backgrounds; black glass is superseded. Optical surface studies and purposeful 2D Claude interactions are in `youtube-video-editing-system/WHITE-GLASS-AND-SPRITE.md`. See `ORIGINAL-CGI-AND-BRAND.md` for the CGI source checksum and integration limits.
 
 The core system, three editing profiles, large-screen/rounded-presenter layout, definition cards, three graphic sequences, and articulated mini Claude are implemented. The opening uses a fast push that slows into a settle. See `youtube-video-editing-system/VISUAL-SYSTEM.md` and `CGI-AND-CHARACTER.md` for implementation boundaries and source-specific prerequisites.
 
