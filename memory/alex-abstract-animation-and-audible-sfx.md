@@ -146,6 +146,29 @@ technical checks; that delivery is still **not creative approval**.
   actionable report payoff in the rendered video at phone size. Technical gates and honest
   review evidence remain necessary; neither establishes improved audience retention.
 
+## September 10 follow-up: the panel-based rebuild was worse
+
+Alex explicitly rejected R4 as “wayyyy worse,” calling its graphics basic squares and
+rectangles and its hook boring and insufficiently fast. This is a stronger rejection of
+that creative direction, not approval with a request for a small timing adjustment.
+
+- **Do not re-stage R4's sliding panels, rounded rectangles and labels as the next fix.**
+  Perspective, folds, different colors and a passing motion median did not make those scenes
+  compelling. The subject needs a meaningful action, visible consequence and character performance.
+- **The hook needs an event immediately.** A product claim plus Claude beside a panel still
+  failed. The opening must establish recognizable Claude identity and carry fast, purposeful
+  travel/contact/reaction into a useful reveal.
+- **Rethink the concept before another full export.** Make short motion probes of materially
+  different approaches, inspect their action and clarity, and use a concrete visual choice
+  to calibrate taste when repeated full builds miss the target. A beautiful still cannot
+  establish pacing or animation quality.
+- **Keep the established balance and constraints.** This does not authorize removing every
+  useful prompt/search/task anchor, replacing the original sprite anatomy, using generated
+  illustrated environments, changing voice speed or copying rejected SETUP choreography.
+- **Do not infer that a rendering technique is the user's preference.** The next experiments
+  use modeled physical props; Alex has not selected or approved a 3D style simply by rejecting
+  rectangles. Increased mesh detail, scene-motion values and extra effects are not creative approval.
+
 ## Choose the representation for the idea
 
 - **Show the relationship and consequence.** Cost, accumulation, overload, conversion,
