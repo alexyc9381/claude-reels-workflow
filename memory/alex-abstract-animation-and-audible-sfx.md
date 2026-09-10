@@ -1,6 +1,6 @@
 ---
 name: alex-abstract-animation-and-audible-sfx
-description: "Alex's September 9, 2026 X144 and SETUP feedback: active quick-zoom hook, strong post-hook value actions, no scary Headroom creature, real tool operations, very brief GitHub proof, no bottom-left footer notes, and audible action-matched SFX."
+description: "Alex's September 9–10, 2026 X144 and SETUP feedback: active quick-zoom hook, strong post-hook value actions, no scary Headroom creature, real tool operations, very brief GitHub proof, no bottom-left footer notes, and audible action-matched SFX."
 metadata:
   node_type: memory
   type: feedback
@@ -116,6 +116,35 @@ that the earlier context-creature concept was approved.
   3–7s handoff and every later payoff for meaningful action, variety and clear visual
   hierarchy. Replace a weak premise before polishing its geometry. Retention is not
   established by motion scores, cue counts or delivery status.
+
+## September 10: immediate utility and competitive-intelligence payoffs
+
+Alex rejected the next delivered SETUP revision as well. He said the hook still needed to
+get straight into it, the whole video felt too slow and insufficiently elevated, and the
+Similarweb and Semrush sections were especially uninteresting and did not convey enough
+value. The previous cart, press, fuel comparison and source-drawer creative had passed
+technical checks; that delivery is still **not creative approval**.
+
+- **Start with the useful transformation already happening.** Establish the benefit before
+  spending time on a product introduction or prop setup. An opening zoom is supporting
+  craft; it does not replace a compelling opening event.
+- **Make each provider's purpose visible.** Similarweb should reveal where a competitor's
+  visitors come from; Semrush should reveal relevant competitor search/keyword evidence.
+  Turn those findings into a useful research decision or brief. A logo followed by a generic
+  chart or a box labeled report does not explain why the viewer should care.
+- **Keep fictional demonstrations distinct from factual claims.** Use reserved example
+  domains, avoid fabricated live rankings or traffic measurements, and document demonstration
+  limits in companion resources. Do not add bottom-left production footnotes to the video.
+- **Elevate the whole body's craft and pace.** Replace weak premises, shorten empty setup,
+  stage one clear primary action, vary physical transformations and recognizable task graphics,
+  and show a consequence before the next beat. Camera motion, tiny moving details and extra
+  cuts do not satisfy this request on their own.
+- **Calibrate against explicit references when available.** Ask for a creator or reel if the
+  desired craft remains underspecified, while continuing work supported by the concrete
+  feedback. Do not silently treat a prior rejected SETUP edit as an endorsed reference.
+- Review the opening, the 3–7 second handoff, the Similarweb-to-Semrush transition and the
+  actionable report payoff in the rendered video at phone size. Technical gates and honest
+  review evidence remain necessary; neither establishes improved audience retention.
 
 ## Choose the representation for the idea
 
