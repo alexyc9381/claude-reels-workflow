@@ -14,6 +14,13 @@ Read [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editi
 |---|---|
 | `README.md` | subsystem map and boundary |
 | `PROJECT.template.md` | required brief, paper edit, graphics plan, and ship gate for one video |
+| `TRANSFER-LOG.md` | what was recovered from the 2026-08 OBS course editor and what was deliberately not promoted |
+| `COURSE-EDITING-PROFILE.md` | follow-along course and lesson rules |
+| `SCREEN-DEMO-PROFILE.md` | screen-led tutorial and software-demo rules |
+| `TALKING-HEAD-PROFILE.md` | presenter-led YouTube rules |
+| `edit.schema.json` | frame-based contract consumed by Remotion |
+| `tools/build_edl.py` | voice-activity + hard-cut maps to a deterministic edit manifest |
+| `tools/project.input.example.json` | copyable analysis-to-EDL input with no shoot-specific timestamps |
 | `projects/<slug>/` | future text/code artifacts for an individual video; never raw media or renders |
 
 ## Conventions
@@ -35,4 +42,5 @@ Read [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editi
 - [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editing-system.md) — canonical rules
 - [`../memory/video-editing-toolchain.md`](../memory/video-editing-toolchain.md) — transcription, Remotion, and FFmpeg tooling
 - [`../video/`](../video/) — shared Remotion codebase
+- [`../video/src/youtube/`](../video/src/youtube/) — reusable Remotion assembly component and profile presets
 - [`../memory/archive/matchtern-longform-video-style.md`](../memory/archive/matchtern-longform-video-style.md) — retired historical style

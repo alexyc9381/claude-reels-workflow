@@ -37,6 +37,16 @@ Create one folder from `youtube-video-editing-system/PROJECT.template.md` and ke
 5. `EDIT.md` — timeline map, source in/out points, music plan, and revision decisions.
 6. `QA.md` — render checks, factual checks, audio checks, and final approval state.
 
+## Editing profiles
+
+Choose one profile in the brief. All profiles share the same source-ingest, EDL, privacy, marker, audio, caption, and ship gates.
+
+- **Course lesson:** follow-along teaching, natural module boundaries, readable screen details, and deliberately restored thinking space. See `youtube-video-editing-system/COURSE-EDITING-PROFILE.md`.
+- **Screen demo:** screen recording is the evidence; focus regions, app changes, sensitive information, and silent visual activity receive special handling. See `youtube-video-editing-system/SCREEN-DEMO-PROFILE.md`.
+- **Talking head:** presenter-led YouTube with selective proof, B-roll, and authored graphics. See `youtube-video-editing-system/TALKING-HEAD-PROFILE.md`.
+
+The reusable Remotion assembly component lives at `video/src/youtube/YouTubeEdit.tsx`. It consumes a frame-based edit manifest rather than embedding source timestamps in JSX.
+
 ## Production loop
 
 ### 0. Intake and source lock
@@ -55,6 +65,8 @@ Approve the hook, section order, payoff, and CTA on paper. Do not start a graphi
 
 Build the clean talking-head or screen-recording edit first. Remove failed takes, dead air, repetition, and accidental pauses while preserving natural comprehension.
 
+The assembly is **voice-driven, not energy-driven**: typing, mouse clicks, music, loading sounds, and room noise are not speech. Start from voice activity, retain short natural gaps, then subtract reviewed hard cuts. The edit manifest is the single source of truth for both picture and sound.
+
 ### 4. Visual plan
 
 Assign one purpose to each authored visual: clarify, prove, orient, compare, demonstrate, or reset attention. Alternate among footage, screen recording, restrained overlays, and earned full-screen sequences according to the material. Sameness across several consecutive beats is a defect.
@@ -71,12 +83,14 @@ Clean and level dialogue first, then add music and action-matched effects. Inspe
 
 Render the opening, one dense middle section, one screen-recording section, and the ending before committing to a full render. Review at native 16:9 size with sound.
 
+Before the visual pass, inspect every long silent span with high on-screen motion. A voice-driven cut cannot distinguish a loading shimmer or typing from a useful silent demonstration.
+
 ### 8. Ship gate
 
 Verify the full render, not just the source timeline: correct duration and resolution, no missing media, corrected captions, intelligible dialogue, no clipped mix, factual claims sourced, CTA present, and delivery file playable from start to finish.
 
 ## Current status
 
-The system and project contract are established. The **NoCodeAlex long-form visual style is intentionally unclaimed** until Alex supplies or approves the first reference set. The first completed YouTube video should convert its approved, repeatable decisions into a separate style note linked from here.
+The core system and three editing profiles are established. The **NoCodeAlex long-form visual style is intentionally unclaimed** until Alex supplies or approves the first reference set. The first completed YouTube video should convert its approved, repeatable decisions into a separate style note linked from here.
 
-See also [[video-editing-toolchain]], [[alex-claude-motion-and-voice]], and `youtube-video-editing-system/README.md`.
+See also [[video-editing-toolchain]], [[alex-claude-motion-and-voice]], `youtube-video-editing-system/TRANSFER-LOG.md`, and `youtube-video-editing-system/README.md`.

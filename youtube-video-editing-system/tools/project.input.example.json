@@ -1,0 +1,31 @@
+{
+  "profile": "course",
+  "source": "youtube/example/source.mp4",
+  "source_fps": 60,
+  "output_fps": 30,
+  "source_width": 1920,
+  "source_height": 1080,
+  "source_duration_seconds": 30,
+  "pause_max": 0.5,
+  "head": 0.1,
+  "tail": 0.18,
+  "chrome_crop": {
+    "top": 0,
+    "right": 0,
+    "bottom": 0,
+    "left": 0
+  },
+  "vad": [
+    [1, 4.2],
+    [4.5, 8.8],
+    [12, 18]
+  ],
+  "hard_cuts": [
+    {
+      "start": 4.9,
+      "end": 6.1,
+      "kind": "retake",
+      "reason": "example only: replace with a reviewed source-time cut"
+    }
+  ]
+}

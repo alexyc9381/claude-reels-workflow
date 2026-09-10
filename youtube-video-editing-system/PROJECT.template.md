@@ -5,6 +5,7 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 ## Brief
 
 - Channel/identity: @nocodealex
+- Editing profile: course | screen-demo | talking-head
 - Audience:
 - One-sentence promise:
 - Format: tutorial | explainer | case study | recorded build | other
@@ -20,6 +21,18 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 | source | path or URL | role | duration | usable? | notes |
 |---|---|---|---:|---|---|
 | | | | | | |
+
+## Automated assembly settings
+
+- Source FPS:
+- Output FPS:
+- Maximum untouched non-speech gap: 0.50s by default
+- Voice-onset padding: 0.10s by default
+- Voice-release padding: 0.18s by default
+- Teaching pause restoration: off | 0.35s at approved sentence ends
+- Per-recording paths reset and checked: yes | no
+- Final acoustic marker sweep: pending | pass | fail
+- Silent/high-motion spans visually reviewed: pending | pass | fail
 
 ## Transcript corrections
 
@@ -61,6 +74,10 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 - [ ] Full render plays from beginning to end.
 - [ ] Resolution, frame rate, and duration match the brief.
 - [ ] No missing, stale, or offline media.
+- [ ] Picture and sound were built from the same frame-based EDL.
+- [ ] Final acoustic marker sweep is fresh and clean.
+- [ ] Long silent/high-motion spans were visually reviewed before deletion.
+- [ ] On-screen and spoken privacy sweeps are complete.
 - [ ] Names, jargon, numbers, and captions are hand-checked.
 - [ ] Dialogue remains intelligible throughout.
 - [ ] Music and effects do not clip or mask speech.

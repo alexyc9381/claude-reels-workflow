@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nocodealex.local/youtube-edit.schema.json",
+  "title": "NoCodeAlex YouTube edit manifest",
+  "type": "object",
+  "required": ["version", "profile", "source", "sourceFps", "outputFps", "segments"],
+  "properties": {
+    "version": { "const": 1 },
+    "profile": { "enum": ["course", "screen-demo", "talking-head"] },
+    "source": { "type": "string", "minLength": 1 },
+    "sourceFps": { "type": "number", "exclusiveMinimum": 0 },
+    "outputFps": { "type": "number", "exclusiveMinimum": 0 },
+    "sourceWidth": { "type": "integer", "minimum": 1 },
+    "sourceHeight": { "type": "integer", "minimum": 1 },
+    "chromeCrop": {
+      "type": "object",
+      "required": ["top", "right", "bottom", "left"],
+      "properties": {
+        "top": { "type": "number", "minimum": 0 },
+        "right": { "type": "number", "minimum": 0 },
+        "bottom": { "type": "number", "minimum": 0 },
+        "left": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["sourceStartFrame", "sourceEndFrame"],
+        "properties": {
+          "sourceStartFrame": { "type": "integer", "minimum": 0 },
+          "sourceEndFrame": { "type": "integer", "minimum": 1 },
+          "reason": { "type": "string" },
+          "focus": {
+            "type": "object",
+            "required": ["scale", "x", "y", "target"],
+            "properties": {
+              "scale": { "type": "number", "minimum": 1, "maximum": 2 },
+              "x": { "type": "number", "minimum": 0, "maximum": 1 },
+              "y": { "type": "number", "minimum": 0, "maximum": 1 },
+              "target": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "overlays": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "fromFrame", "durationInFrames", "title"],
+        "properties": {
+          "type": { "enum": ["spec", "step", "tool", "waited", "note"] },
+          "fromFrame": { "type": "integer", "minimum": 0 },
+          "durationInFrames": { "type": "integer", "minimum": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "detail": { "type": "string" },
+          "anchor": { "enum": ["top-left", "top-right", "bottom-left", "bottom-right"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "properties": {
+        "sourceDurationSeconds": { "type": "number", "minimum": 0 },
+        "keptSeconds": { "type": "number", "minimum": 0 },
+        "removedSeconds": { "type": "number", "minimum": 0 },
+        "pauseMax": { "type": "number", "minimum": 0 },
+        "head": { "type": "number", "minimum": 0 },
+        "tail": { "type": "number", "minimum": 0 },
+        "hardCuts": { "type": "array" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
