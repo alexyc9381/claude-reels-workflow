@@ -44,6 +44,43 @@ The timing is user-reported; no analytics curve or exact percentage was supplied
 - Record the intended post-hook event and inspect its beginning, middle and tail in the export.
   Passing motion, audio and look checks remains technical evidence, never proof of retention.
 
+## SETUP: real logos and an independent creative direction
+
+On September 9, Alex explicitly said: use real logos whenever possible, and do not take
+animation reference from the already built SETUP video. This is a creative-reference
+boundary, not a prohibition on reusing the canonical narration, measured captions,
+original sprite rig or shared chassis.
+
+- Source recognizable tool and service marks from the brand's own assets or a verified
+  brand collection. Download locally, record the source, preserve color and aspect ratio,
+  use a suitable light plate, and inspect the rendered identity at phone size.
+- An organization or developer avatar is not automatically a product logo. Verify the
+  identity; if a plugin has no standalone mark, use its accurate name with an appropriate
+  verified parent-platform mark. Do not invent a replacement logo or present a prop as one.
+- Do not use the existing SETUP edit, its storyboard, hook studies or rejected animation
+  as a creative template. Derive fresh staging and choreography from the narration and
+  general workflow guidance. A recolor or a new logo over the same choreography is insufficient.
+
+## Turn the narrated action into a memorable character or event
+
+Alex then gave the PDF/token reel as an example: an actual monster eating Claude tokens
+could have expressed the idea much more interestingly than its basic animation. He asked
+for the same level of visual stimulation and imagination in SETUP.
+
+- Before falling back to PDFs, counters, cards or generic diagrams, explore a character,
+  adversary, obstacle, transformation or physical event that performs the spoken verb.
+  “Eating tokens” can become an actual consuming creature, with appetite, anticipation,
+  bites, depletion, reaction and a visible consequence.
+- This is a request for a more inventive strategy, not a requirement to put the same
+  monster in every reel. Map the metaphor to the specific meaning of the narration.
+- Give Claude a role in the event: recognize the problem, brace, operate, catch, recover
+  or celebrate. Expressive reactions must follow a cause rather than repeating idle bobs.
+- Preserve comprehension and hierarchy. The viewer should understand what is being used,
+  lost, preserved or gained. Real logos identify products; metaphor characters do not
+  replace logos or imply unsupported claims about a product.
+- Review the whole body as a sequence of worthwhile events, including the first event
+  after the hook. Elaborate decoration on an uninteresting premise does not satisfy this feedback.
+
 ## Choose the representation for the idea
 
 - **Show the relationship and consequence.** Cost, accumulation, overload, conversion,

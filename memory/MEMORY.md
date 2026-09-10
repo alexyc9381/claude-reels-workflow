@@ -141,3 +141,6 @@
 - [⛔⛔ A note repeating on the same object = wrong OBJECT](feedback_repeated_note_means_wrong_object.md) — four rounds tuning reel 124's mask, then "remove the mask concept entirely"
 - [⛔⛔ The sprite's FACE is a performance surface](feedback_face_is_a_performance_surface.md) — never land a prop/plate/header on it; headers name the OUTCOME in the viewer's words
 - [⛔⛔⛔ A successful `cp` into the Drive mount is NOT delivery](risk_drive_mount_fileprovider_corrupt.md) — the File Provider domain can freeze while DriveFS stays healthy; verify against the server
+
+- [Real logos; SETUP reference boundary](alex-abstract-animation-and-audible-sfx.md#setup-real-logos-and-an-independent-creative-direction): verify product identity, preserve official marks, and invent fresh SETUP staging from narration.
+- [Characters and memorable visual events](alex-abstract-animation-and-audible-sfx.md#turn-the-narrated-action-into-a-memorable-character-or-event): Alex’s token-eating monster example; perform the spoken verb through an expressive obstacle and consequence, rather than defaulting to PDFs/counters.
