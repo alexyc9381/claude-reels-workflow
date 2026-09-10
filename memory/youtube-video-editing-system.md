@@ -95,4 +95,6 @@ Alex confirmed ChenBuildsAI's verified `public/cube.mov` is the correct original
 
 The core system, three editing profiles, large-screen/rounded-presenter layout, definition cards, three graphic sequences, and articulated mini Claude are implemented. The opening uses a fast push that slows into a settle. See `youtube-video-editing-system/VISUAL-SYSTEM.md` and `CGI-AND-CHARACTER.md` for implementation boundaries and source-specific prerequisites.
 
+Sprite motion must not freeze at touchdown: anticipate, absorb impact, rebound subtly, let limbs follow through, and settle before the next move. Keep the shadow on the contact plane. Use the shared `naturalHop` pose for the white-glass 2D companion; do not clamp a travel arc to a static pose at contact. Keep glass and text steady rather than applying the character's bounce to the entire graphic.
+
 See also [[video-editing-toolchain]], [[alex-claude-motion-and-voice]], `youtube-video-editing-system/TRANSFER-LOG.md`, and `youtube-video-editing-system/README.md`.

@@ -13,9 +13,12 @@ import {
   clamp01,
   easeOut,
   easeInOut,
-  settle,
-  hop,
   relayPosition,
+  naturalHop,
+  relayLandingPose,
+  restingSprite,
+  footClearance,
+  type SpriteLandingPose,
 } from "./glass-motion";
 
 const ink = BRAND.ink;
@@ -236,6 +239,7 @@ export const SpriteActor: React.FC<{
   angle?: number;
   cheer?: number;
   opacity?: number;
+  pose?: SpriteLandingPose;
 }> = ({
   t,
   x,
@@ -245,6 +249,7 @@ export const SpriteActor: React.FC<{
   angle = 0,
   cheer = 0,
   opacity = 1,
+  pose = restingSprite(),
 }) => (
   <div
     style={{
@@ -254,8 +259,6 @@ export const SpriteActor: React.FC<{
       width: size,
       height: size,
       opacity,
-      transform: `rotate(${angle}deg) scale(${scale})`,
-      transformOrigin: "50% 92%",
     }}
   >
     <div
@@ -263,14 +266,30 @@ export const SpriteActor: React.FC<{
         position: "absolute",
         left: "22%",
         right: "22%",
-        bottom: "3%",
+        top: "89%",
         height: 12,
         borderRadius: "50%",
         background: "#823b2129",
-        filter: "blur(8px)",
+        filter: `blur(${5 + pose.lift * 0.035}px)`,
+        transform: `scaleX(${Math.max(0.45, 1 - pose.lift / 210)})`,
+        opacity: Math.max(0.25, 1 - pose.lift / 180),
       }}
     />
-    <Claude2D frame={Math.round(t * 30)} size={size} cheer={cheer} />
+    <div
+      style={{
+        width: size,
+        height: size,
+        transform: `translateY(${-pose.lift - footClearance(angle + pose.tilt, size, scale * pose.sx)}px) rotate(${angle + pose.tilt}deg) scale(${scale * pose.sx},${scale * pose.sy})`,
+        transformOrigin: "50% 92%",
+      }}
+    >
+      <Claude2D
+        frame={Math.round(t * 30)}
+        size={size}
+        cheer={cheer}
+        armSwing={pose.armSwing}
+      />
+    </div>
   </div>
 );
 
@@ -338,7 +357,8 @@ export const WhiteGlassScene: React.FC<{
 const DefinitionStudy: React.FC<{ t: number }> = ({ t }) => {
   const p = easeOut(t, 0.65, 0.9),
     copy = easeOut(t, 1.1, 0.5),
-    sprite = easeInOut(t, 0.18, 0.8);
+    sprite = easeInOut(t, 0.2, 0.9);
+  const pose = naturalHop(t, 0.2, 0.9, 55);
   return (
     <>
       <SceneHeader index="01" name="The definition reveal" />
@@ -438,11 +458,10 @@ const DefinitionStudy: React.FC<{ t: number }> = ({ t }) => {
       </WhiteGlassSurface>
       <SpriteActor
         t={t}
-        x={1250 + sprite * 280}
-        y={481 - hop(t, 0.2, 0.9, 55)}
+        x={1250 + sprite * 280 + pose.carry}
+        y={481}
         size={170}
-        scale={0.94 + 0.06 * settle(t, 0.95, 0.45)}
-        cheer={easeOut(t, 1, 0.3) * (1 - easeOut(t, 1.6, 0.4))}
+        pose={pose}
       />
       <div
         style={{
@@ -461,9 +480,10 @@ const DefinitionStudy: React.FC<{ t: number }> = ({ t }) => {
 
 const RelayStudy: React.FC<{ t: number }> = ({ t }) => {
   const pos = relayPosition(t);
+  const pose = relayLandingPose(t);
   const phase1 = easeOut(t, 0.35, 0.75),
-    phase2 = easeOut(t, 2.35, 0.65),
-    phase3 = easeOut(t, 4.05, 0.75);
+    phase2 = easeOut(t, 2.7, 0.65),
+    phase3 = easeOut(t, 5.05, 0.75);
   const travel = clamp01((pos.x - 290) / 1010);
   return (
     <>
@@ -539,7 +559,7 @@ const RelayStudy: React.FC<{ t: number }> = ({ t }) => {
         radius={170}
         t={t}
         frost={0.2}
-        sweepAt={2.45}
+        sweepAt={2.8}
         style={{ opacity: phase2, transform: `scale(${0.9 + 0.1 * phase2})` }}
       >
         <div style={{ textAlign: "center", paddingTop: 60 }}>
@@ -555,7 +575,7 @@ const RelayStudy: React.FC<{ t: number }> = ({ t }) => {
         height={436}
         t={t}
         frost={0.44}
-        sweepAt={4.25}
+        sweepAt={5.2}
         style={{
           opacity: phase3,
           transform: `perspective(1800px) translateY(${(1 - phase3) * 60}px) rotateY(${(1 - phase3) * -7}deg)`,
@@ -595,10 +615,9 @@ const RelayStudy: React.FC<{ t: number }> = ({ t }) => {
       <SpriteActor
         t={t}
         x={pos.x}
-        y={pos.y + 135}
+        y={745}
         size={160}
-        angle={hop(t, 1.7, 1.05, 5) - hop(t, 3.35, 1.15, 5)}
-        cheer={easeOut(t, 4.55, 0.3) * (1 - easeOut(t, 5.2, 0.45))}
+        pose={pose}
         opacity={phase1}
       />
       <div
@@ -619,9 +638,10 @@ const RelayStudy: React.FC<{ t: number }> = ({ t }) => {
 
 const FocusStudy: React.FC<{ t: number }> = ({ t }) => {
   const screen = easeOut(t, 0.15, 0.8),
-    callout = easeOut(t, 1.4, 0.7),
+    callout = easeOut(t, 1.65, 0.7),
     actor = easeInOut(t, 0.85, 0.8);
-  const tap = clamp01((t - 1.5) / 0.65);
+  const pose = naturalHop(t, 0.85, 0.8, 45);
+  const tap = easeInOut(t, 1.76, 0.65);
   return (
     <>
       <SceneHeader index="03" name="The quiet screen companion" />
@@ -675,7 +695,7 @@ const FocusStudy: React.FC<{ t: number }> = ({ t }) => {
         t={t}
         frost={0.76}
         studioRefraction={false}
-        sweepAt={1.7}
+        sweepAt={1.95}
         radius={36}
         style={{
           opacity: callout,
@@ -697,8 +717,8 @@ const FocusStudy: React.FC<{ t: number }> = ({ t }) => {
       <div
         style={{
           position: "absolute",
-          left: 1195,
-          top: 732,
+          left: 1180,
+          top: 824,
           width: 55,
           height: 55,
           borderRadius: "50%",
@@ -709,10 +729,10 @@ const FocusStudy: React.FC<{ t: number }> = ({ t }) => {
       />
       <SpriteActor
         t={t}
-        x={950 + actor * 130}
-        y={790 - hop(t, 0.85, 0.8, 45)}
+        x={950 + actor * 130 + pose.carry}
+        y={790}
         size={135}
-        cheer={easeOut(t, 1.4, 0.25) * (1 - easeOut(t, 2.1, 0.3))}
+        pose={pose}
       />
       <div
         style={{

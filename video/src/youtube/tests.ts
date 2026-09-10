@@ -2,7 +2,15 @@ import assert from "node:assert/strict";
 import { characterPose } from "./character-motion";
 import { editTimeline, openingScale, durationInOutputFrames } from "./timing";
 import type { YouTubeEditManifest } from "./types";
-import { easeOut, easeInOut, settle, relayPosition } from "./glass-motion";
+import {
+  easeOut,
+  easeInOut,
+  settle,
+  relayPosition,
+  naturalHop,
+  restingSprite,
+  footClearance,
+} from "./glass-motion";
 const m: YouTubeEditManifest = {
   version: 1,
   profile: "screen-demo",
@@ -57,14 +65,53 @@ for (const ease of [easeOut, easeInOut, settle]) {
   assert.equal(ease(2, 0, 1), 1);
 }
 assert.deepEqual(relayPosition(0), { x: 290, y: 610 });
-assert.equal(relayPosition(6).x, 1300);
-assert.ok(Math.abs(relayPosition(6).y - 610) < 1e-8);
+assert.equal(relayPosition(6.5).x, 1300);
+assert.ok(Math.abs(relayPosition(6.5).y - 610) < 1e-8);
 for (let frame = 0; frame < 240; frame++) {
   const a = relayPosition(frame / 30);
   assert.deepEqual(a, relayPosition(frame / 30));
   assert.ok(Object.values(a).every(Number.isFinite));
-  assert.ok(a.x >= 290 && a.x <= 1300 && a.y >= 480 && a.y <= 610);
+  assert.ok(a.x >= 290 && a.x <= 1308 && a.y >= 480 && a.y <= 610);
 }
+assert.deepEqual(naturalHop(0, 1, 1, 100), restingSprite());
+assert.deepEqual(naturalHop(3.1, 1, 1, 100), restingSprite());
+assert.ok(
+  naturalHop(0.99, 1, 1, 100).sy < 0.92,
+  "anticipation before lift-off",
+);
+assert.ok(
+  naturalHop(2.11, 1, 1, 100).sy < 0.87,
+  "absorb impact instead of freezing",
+);
+assert.ok(naturalHop(2.36, 1, 1, 100).sy > 1, "small recovery overshoot");
+for (const boundary of [0.82, 1, 2, 2.11, 2.66, 2.96, 3.005]) {
+  const a = naturalHop(boundary - 1e-6, 1, 1, 100),
+    b = naturalHop(boundary + 1e-6, 1, 1, 100);
+  for (const key of Object.keys(a) as (keyof typeof a)[])
+    assert.ok(
+      Math.abs(a[key] - b[key]) < 0.01,
+      `continuous ${key} at ${boundary}`,
+    );
+}
+for (const fps of [24, 30, 60])
+  for (let frame = 0; frame < fps * 4; frame++) {
+    const t = frame / fps,
+      p = naturalHop(t, 1, 1, 100);
+    assert.deepEqual(p, naturalHop(t, 1, 1, 100), "landing remains seek-safe");
+    assert.ok(Object.values(p).every(Number.isFinite));
+    assert.ok(p.sy >= 0.85 && p.sy <= 1.1 && p.sx > 0 && p.lift >= 0);
+    const floor = footClearance(p.tilt, 160, p.sx);
+    for (const footX of [52, 69, 77, 94, 124, 141, 149, 166]) {
+      const bottom =
+        (footX / 200 - 0.5) * 160 * p.sx * Math.sin((p.tilt * Math.PI) / 180) -
+        floor -
+        p.lift;
+      assert.ok(
+        bottom <= 1e-8,
+        "tilted soles never penetrate the contact plane",
+      );
+    }
+  }
 console.log(
-  "Passed: cumulative EDL timing, segment validation, opening zoom, deterministic character poses, hop phases, finite transforms, glass easing endpoints, and bounded seek-safe sprite hand-offs.",
+  "Passed: EDL timing, segment validation, opening zoom, character poses, glass easing, bounded sprite travel, landing continuity, impact/recovery, and seek determinism at 24/30/60fps.",
 );

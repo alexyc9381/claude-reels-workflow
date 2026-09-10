@@ -9,7 +9,8 @@ export const Claude2D: React.FC<{
   frame: number;
   size?: number;
   cheer?: number;
-}> = ({ frame, size = 240, cheer = 0 }) => {
+  armSwing?: number;
+}> = ({ frame, size = 240, cheer = 0, armSwing = 0 }) => {
   const blink = frame % 84 < 5 ? 0.15 : 1;
   return (
     <svg
@@ -20,8 +21,20 @@ export const Claude2D: React.FC<{
       style={{ overflow: "visible" }}
     >
       <g fill="#D97757">
-        <rect x="8" y={86 - cheer * 26} width="26" height="26" />
-        <rect x="166" y={86 - cheer * 26} width="26" height="26" />
+        <rect
+          x="8"
+          y={86 - cheer * 26}
+          width="26"
+          height="26"
+          transform={`rotate(${-armSwing} 34 99)`}
+        />
+        <rect
+          x="166"
+          y={86 - cheer * 26}
+          width="26"
+          height="26"
+          transform={`rotate(${armSwing} 166 99)`}
+        />
         <rect x="34" y="44" width="132" height="102" />
         {[52, 77, 124, 149].map((x) => (
           <rect key={x} x={x} y="146" width="17" height="38" />

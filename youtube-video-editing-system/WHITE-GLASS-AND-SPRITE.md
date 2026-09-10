@@ -22,6 +22,19 @@ It already had easing, but most elements shared one slow fade/slide and the surf
 
 ## Three implemented review scenes
 
+### Landing refinement (v5)
+
+Alex flagged abrupt stops at touchdown. The old clamped sine arc ended all vertical motion at contact and moved the shadow with the sprite. `naturalHop` now supplies a shared, seek-safe pose to every sprite in this gallery:
+
+- .18s anticipation, then a ballistic arc and brief launch stretch.
+- .11s impact absorption down to .86 vertical scale, anchored at the 92%-height foot plane. Width increases modestly during compression instead of uniformly shrinking the character.
+- A damped body rebound and slight forward carry/lean, fading smoothly to rest. Arm rotation trails body recovery by .045s. The total post-contact tail is 1.005s; it is not an endless idle bounce.
+- The shadow remains on the ground/contact plane while the sprite lifts; opacity, width, and softness respond to height.
+- Workflow takeoffs are now 1.7s and 4.0s, contacts 2.75s and 5.15s. The first settle finishes before the next anticipation. Panel reveals and the screen-callout cue were retimed to the contacts.
+- White glass and text do not inherit the spring. Keep their restrained ease-out and reading hold. Avoid a simultaneous cheer gesture during impact; the landing itself supplies the expression.
+
+This is authored animation, not a physics solver. The original glowing CGI file is untouched. `LandingFrames` in the preview entry is a six-phase visual regression strip. Tests check position continuity at phase boundaries, impact compression, recovery overshoot, bounded transforms, and deterministic evaluation at 24/30/60fps.
+
 | Time | Component | What Claude does | Reading behavior |
 |---|---|---|---|
 | 0–8s | Definition reveal | Arrives at the panel edge and cues the reveal | Term and plain-language definition resolve after the glass starts settling |

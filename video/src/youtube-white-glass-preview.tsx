@@ -1,9 +1,86 @@
 import React from "react";
-import { Composition, registerRoot } from "remotion";
-import { WhiteGlassGallery, WhiteGlassScene } from "./youtube/WhiteGlass";
+import { AbsoluteFill, Composition, registerRoot } from "remotion";
+import {
+  WhiteGlassGallery,
+  WhiteGlassScene,
+  SpriteActor,
+} from "./youtube/WhiteGlass";
+import { naturalHop } from "./youtube/glass-motion";
+import { BRAND, bodyFont, displayFont } from "./youtube/brand";
+
+const LandingFrames = () => (
+  <AbsoluteFill
+    style={{ background: BRAND.cream, color: BRAND.ink, fontFamily: bodyFont }}
+  >
+    <div
+      style={{
+        position: "absolute",
+        left: 60,
+        top: 35,
+        fontFamily: displayFont,
+        fontSize: 46,
+      }}
+    >
+      Contact → absorb → rebound → settle
+    </div>
+    {[0, 0.11, 0.3, 0.5, 0.75, 1.01].map((after, i) => (
+      <div
+        key={after}
+        style={{
+          position: "absolute",
+          left: 40 + i * 315,
+          top: 140,
+          width: 290,
+          height: 400,
+        }}
+      >
+        <div style={{ fontSize: 23, color: BRAND.clayDark }}>
+          {
+            [
+              "Contact",
+              "Absorb",
+              "Rebound",
+              "Follow-through",
+              "Settle",
+              "Rest",
+            ][i]
+          }
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 302,
+            width: 280,
+            height: 2,
+            background: "#B8501F44",
+          }}
+        />
+        <SpriteActor
+          t={2 + after}
+          x={10}
+          y={63}
+          size={260}
+          pose={naturalHop(2 + after, 1, 1, 100)}
+        />
+        <div style={{ position: "absolute", top: 335, fontSize: 21 }}>
+          +{after.toFixed(2)} seconds
+        </div>
+      </div>
+    ))}
+  </AbsoluteFill>
+);
 
 registerRoot(() => (
   <>
+    <Composition
+      id="LandingFrames"
+      component={LandingFrames}
+      durationInFrames={1}
+      fps={30}
+      width={1920}
+      height={600}
+    />
     <Composition
       id="WhiteGlass"
       component={WhiteGlassGallery}
