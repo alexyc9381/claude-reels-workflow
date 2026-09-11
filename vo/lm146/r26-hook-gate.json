@@ -1,0 +1,23 @@
+{
+  "crop": "crop=1012:930:34:490",
+  "luma": 170.56430053710938,
+  "motion_first5": 7.959980970621109,
+  "per_second": [
+    6.282535529136657,
+    6.473353224992752,
+    14.492938888072967,
+    5.2768728792667385,
+    7.274204331636429
+  ],
+  "luma_bar": 140,
+  "motion_bar": 4,
+  "shots_authored": 1,
+  "authored_actions": [
+    "rapid hoist and chip impact",
+    "keyboard power wave and circuit boot",
+    "mouse press and jump into processor",
+    "large processor shutters and active signals",
+    "continuous return to actual website"
+  ],
+  "passed": true
+}

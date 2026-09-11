@@ -154,3 +154,32 @@ The final word is measured from the original processed voice, including its cons
 - Full-resolution first-frame/early motion and final CTA samples were inspected. Browser playback covered the 0–7s opening into the actual website and 42s through the immediate ending. The final setup word remains identifiable in a short-clip transcription; exact cut timing is based on the waveform, not ASR word times.
 
 Standalone source package 3.2.0 bundles successfully as 1080×1920 / 1344 frames. Its rendered frame1 is pixel-identical to the main source render. The archive passes ZIP integrity validation and contains SHA-256 checksums.
+
+
+## R24 revision brief
+
+Alex still finds R23 slow and boring and asks for faster pacing and more visible activity. R23's first-five-second average obscured its weak 1–2s and 2–3s buckets (2.76 and 2.15). This is a choreography change: halve the chip descent to f32, give its contact a visible laptop/Claude recoil and a keyboard power wave, bring the mouse press to f57 and the jump to f64–82, then use the landing to open a large split processor display before the continuous monitor expansion from f118. The newly exposed circuit paths and packets show the personal computer becoming active. Keep one main causal action at a time, expressive original Claude, the exact all-caps title, right-side clearance, no actual recording through f150, and the final 44.800s cut after setup. Render and review the entire short opening before a full export. Retention is not established by technical scores.
+
+
+### R24 probe → R25 staging correction
+
+The short R24 probe improved the first 0–2s, but the processor action and jump were too small inside the unchanged wide laptop frame. Its 2–3s and 3–4s motion buckets fell to 1.92 and 2.79. Do not ship on the higher five-second average (5.68). R25 makes the mouse click and jump reveal the computer's interior: the display expands to 836×760 at f87, while the exterior keyboard/hoist recede. Original Claude stays 280px and follows the changing display center. The processor shutters and active traces therefore occupy the primary stage. From f142 the same window returns smoothly to the 836×504 native website overview; captured pixels still appear only after f150 and settle by f169. This change of scale reveals the processor doing work and keeps the face/inner action readable.
+
+
+### R26 finish before full render
+
+R25 makes the middle readable and active (2–3s bucket14.74; 3–4s5.28), but its late handoff delays the next large movement until4.73s and leaves the final bucket at2.51. R26 begins the return to the real screen proportions at4.20s while the processor packets are still running. No captured pixels appear before5s. The exterior mouse and keyboard now finish receding by f76, preventing the ghosted mouse over the enlarged processor seen at f82. The continuous shared rectangle still settles atf169 before the nativef172 click. These are visual corrections to the preview, not claims of retention.
+
+
+### R26 final checks and delivery
+
+- Final five-second hook motion is 7.960 (R23: 4.498); each one-second bucket is now above 4: 6.283,6.473,14.493,5.277,7.274. Same 1012×930 crop at (34,490), excluding the header, progress rail and captions, and unchanged thresholds. The larger view is an authored reveal of the active processor, not a claim that pixel change alone predicts retention. Frame-0 hook-gate luma 170.56 ≥140.
+- The scene hook now passes its separate motion target: 7.86 ≥6. All dead runs remain ≤12 frames. Overall median 4.55 remains below 9; six later scenes remain below the per-scene threshold. Those known body limitations are retained honestly.
+- Look: body saturation 35.8% and p10=26.3 pass. Report-only body luma 166.2 and hook-plate warning remain.
+- Audio/caption/export: 9/9 verify checks pass; 67/67 cues fire; original voice at 0, music at 0, audio at 40ms, continuous music and 0.04s dead audio tail. Caption check is canonical text plus monotonicity; no new full measured drift pass is claimed. Eight unchanged bank files pass SFX audit. Loudness: -17.14 LUFS, LRA 2.10, true peak -1.31 dBFS.
+- Final MP4 is 7,768,180 bytes, H.264 yuv420p / TV range / BT.709, 1080×1920 at 30fps, AAC stereo 48kHz. Both streams and container end at 44.800s. Faststart moov precedes mdat.
+- Native download frame 195, loading frame 1082 and final CTA frame 1343 are pixel-identical to R23 before encoding. The unchanged narration/end-cut timing is preserved. Full-resolution frames inspected the impact/reaction, large processor/face, disappearing exterior mouse, shutters, and transition. Browser playback checked the complete opening into the actual website.
+
+Delivery replaces the existing MP4, editable ZIP and notes file IDs in 146 - LM. The cover, post caption, subtitles, actual demonstration and published guide remain unchanged.
+
+Standalone source3.3.0 bundles as1080×1920 /1344frames, and its frame1 is pixel-identical to the main source. ZIP integrity and file checksums were verified.

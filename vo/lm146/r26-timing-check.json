@@ -1,0 +1,40 @@
+{
+  "picture_frames": 1344,
+  "fps": 30,
+  "end_seconds": 44.8,
+  "prior_end_seconds": 45.6,
+  "voice_source_seconds": 44.8408333333,
+  "voice_release_note": "5ms RMS windows: final substantial release at 44.750\u201344.765s; low-level consonant decay through approximately 44.800s. Only final 40.8ms quiet tail omitted.",
+  "final_taper_ms": 5,
+  "CTA_rate": 1.5,
+  "CTA_reaction_complete_seconds": 44.67777777777778,
+  "last_sfx_tail_seconds": 44.6689,
+  "opening_events_frames": {
+    "moving_crank": 0,
+    "chip_impact": 32,
+    "power_wave": 35,
+    "mouse_press": 57,
+    "jump_start": 64,
+    "jump_land": 82,
+    "processor_view_full": 87,
+    "shutters_start": 92,
+    "shutters_open": 116,
+    "return_to_website_shape": 126,
+    "first_recorded_pixels_after": 150,
+    "website_settled": 169,
+    "native_OS_click": 172
+  },
+  "processor_view": {
+    "width": 836,
+    "height": 760,
+    "left": 122,
+    "top": 530
+  },
+  "first_frame_chip_travel_before_camera_px": 17.644137931034482,
+  "first_frame_crank_turn_degrees": 17.875862068965517,
+  "unchanged_full_frames_from_R23": {
+    "195": true,
+    "1082": true,
+    "1343": true
+  }
+}
