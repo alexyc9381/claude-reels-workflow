@@ -234,3 +234,118 @@ treat the earlier file's metadata as proof of the new bytes.
 
 Reusable findings are indexed in [DEPARTMENT source and motion proof](../alex-department-source-and-motion-proof.md)
 and linked to [Alex's LM corrections](../alex-lm-hooks-demo-and-delivery.md).
+
+
+## September 11 user rejection: recreate is not revise
+
+Alex rejected the delivered revision as recreating what he already had, and said
+the opening concept and many animations throughout were not good. This supersedes
+any inference of creative approval from the preceding technical passes.
+
+New revision intake, before authoring: the repeated workshop/machine/rack staging
+is the primary defect. Keep original narration, captions, house chrome and sprite
+identity; replace the creative action and framing throughout. Passing motion
+checks is a build floor, not evidence that this request has been fulfilled.
+
+Candidate hook mechanisms: (A) an overwhelmed founder catches five oversized job
+props and passes them to specialists; (B) five competing desk lights pull one
+founder between jobs; (C) a founder conducts five departments into an ensemble.
+A is selected for a motion probe because its problem and relief read without
+decoding an abstract mechanism. B risks looking like five labeled panels; C spends
+too long establishing a metaphor. The user's standing request authorizes autonomous
+iteration, so the revision proceeds while reviewable probes are built.
+
+
+### Rebuild review rounds (not acceptance)
+
+1. Entire storyboard and all 31 shot bodies replaced. First motion preview found
+   props reading as a floating icon row, weak hand contact, and repeating low-edge
+   characters. The hook's first motion was still a sway. These were creative defects
+   even before any motion score was measured.
+2. Replaced the hook's sway with crossing, gravity-shaped juggling arcs; specialists
+   catch the work. Reframed its final shot around a large campaign result, with other
+   specialists receding in depth. Enlarged primary characters; a camera produces
+   a print and the design's major blocks physically change positions. Native review
+   exposed missing support under the elevated hook characters; desks/platforms added.
+3. Whole-reel motion review found empty lead-ins and parked tails in several new
+   scenes. Changed local action windows to start immediately and run into a result;
+   expanded meaningful travel in the paint, edit, design, statement/variance, contract,
+   fit and guide handoff actions. The new sound map expands to 102 layers over 71.07s.
+   Full expanded audit caught repeated bright c_bump/key samples hidden by the prior
+   helper-based audit. Reduced each bright sample to fewer than five uses and replaced
+   the extra contacts with measured mallet/wood cues.
+
+The short opening draft was shared for optional direction feedback while independent
+body refinements continued. No response or delivery is treated as creative approval.
+
+4. Native whole-body review checked complete actor/prop bounds, not just center points.
+   Upper office floors and hook platforms now support the characters. The design
+   introduction depicts a browser layout rather than a house plan. Finished work is
+   larger in the campaign and team shots so it reads at phone size.
+5. Strengthened the physical results: a display is erected while painted, the content
+   performer jumps for the camera, the camera prints the shot, identical sites spread
+   into a fan before one is recomposed, and a finished brief closes the team handoff.
+   The music-only low shelf is +1.5dB at 150Hz; the input is attenuated 2dB before EQ
+   and that headroom restored in the mix, so the prepared stem stays below full scale.
+   Narration processing, speed and caption timing are unchanged.
+
+The first rebuild imported eight transitive source files; the later performance pass adds DeptPerformance.ts as the ninth. DeptScenes, DeptWorld
+and DeptHookPolish are retained as historical source but are not in this render's
+dependency graph. Shared SlopKit chrome and the original Mascot anatomy are retained.
+
+6. Full-film and phone playback review found the generic suit staying upright and the
+   team handing over its result too late. The suit now tips, drops and spills across
+   the floor as Claude escapes; the team starts its transfer earlier and the final
+   brief continues traveling through the cut. Specialist catch hands follow the props.
+   The DEPARTMENT registry had been split across source abbreviation `dept143`,
+   number-first log `143department`, and storyboard `department`. Verified aliases
+   now join all four assets into one complete reel row; every unrelated row was
+   compared against HEAD and remains unchanged. The rejected board moved into
+   `storyboards/archive/`, leaving one canonical current board.
+
+7. Native catch-frame review rejected overextended hand links: they created long
+   crossing lines instead of contact. Links now appear only near the catch. Removed
+   detached sleeve overlays that obscured the tailor scene; the suit itself rotates
+   and falls, and the escaping face stays inside the safe edge. The campaign copy
+   sheet now has a separate weighted placement. The v8 source render passes all
+   31 scene floors with median 9.04; final encoded-file checks follow below.
+
+8. Full decoded-frame QA caught 16 quiet frames at SKILL FILE's tail and 13 at the
+   storefront head; action travel was extended into those intervals. Alex then
+   explicitly called the repeated speed predictable and boring. The next performance
+   pass replaces the shared glide rhythm with 31 individually authored action clocks,
+   without retiming narration. Sound cues are inverse-mapped to maintain contact.
+   Original sprite stride, anticipatory lean, gaze and recoil are staggered; the
+   camera closes its aperture, lenses inspect along authored paths, and Claude Code
+   has a typing cursor. Retention and creative acceptance remain unclaimed.
+
+9. Strengthened secondary task motion after reviewing the varied-speed pass: tools
+   turn and travel with the specialists' work gestures, the film strip is tall enough
+   to read its changing frames, the camera print is larger, and the finished phone
+   keeps moving into the cut. Campaign copy lands with weight; the site rebuild and
+   reconciliation statement remain dominant while their actors react. These changes
+   preserve each action's distinct speed curve.
+
+10. Final staging review found the new website was drawn in front of its peeling
+    stencil, hiding the removal. The stencil now peels from the front and reveals
+    the changed composition underneath. Reconciliation lifts the abacus into the
+    comparison; the instant print contains the original Claude rig from the shot,
+    replacing the reused abstract campaign artwork.
+
+### Final encoded delivery checks — performance revision
+
+- 1080×1920, 30fps, 2132 frames / 71.0667s; actual full-range BT.601 to
+  limited-range BT.709 conversion, H.264/yuv420p + AAC 48kHz.
+- All 31 scene floors pass; median motion 9.14 against 9.0. All 2132 frames
+  decoded; longest panel run below 0.6 is 9 frames (bar 12). Frame0→1 MAD 12.36.
+- Verifier 9/9; script/caption match; prepared voice unchanged from ASR-checked
+  source. There are 102 SFX layers across 101 starts; actual isolated SFX stem
+  measured separately. Bank clean; mix >2kHz 37.1%, <250Hz 9.7%, both in band.
+- Look blocking checks pass: hook luma171.3, body saturation67.5%, black p10=26.5.
+  Header-pill and body-luma108.3 are nonblocking advisories, retained in the reports.
+- Native frames and whole-film contact sheets reviewed, with phone playback of the
+  performance pass. Three isolated-package/source frames match exactly: 0,1150,1968.
+- Source package contains nine transitive files, original voice and only required
+  media. The canonical current board, indexed rejection/timing learnings and complete
+  DEPARTMENT registry row are included or linked. No creative acceptance, audience
+  retention result or human listening check is claimed by these technical results.

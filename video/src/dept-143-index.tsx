@@ -3,7 +3,7 @@ import { Composition, registerRoot } from "remotion";
 import { Reel, DEPT_TOTAL, SFX } from "./ClaudeDept143Reel";
 import {SfxTrack} from './SoundKit';
 
-/* Reel 143 "DEPARTMENT". Board: storyboards/143-department.md.
+/* Reel 143 "DEPARTMENT". Active board: storyboards/143-department-rebuild.md.
    2132 frames = 71.07s. Eleven `cut cut` flubs cut from a 154.69s raw take,
    five of them on one sentence. Every scene boundary is the midpoint of a
    MEASURED silence in the delivered mix, so no cut lands inside a word.

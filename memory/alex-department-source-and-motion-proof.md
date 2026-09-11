@@ -1,6 +1,6 @@
 ---
 name: alex-department-source-and-motion-proof
-description: DEPARTMENT September 11 production findings on source parity, physical hook follow-through, safe moving bounds and honest audio verification
+description: DEPARTMENT recreation rejection, varied action speeds, detailed sprite performance, source parity, safe moving bounds and honest audio verification
 metadata:
   type: workflow_learning
   source: DEPARTMENT revision and measured review on 2026-09-11
@@ -14,6 +14,65 @@ Read with [Alex's LM corrections](alex-lm-hooks-demo-and-delivery.md),
 
 These are production findings and interpretations of Alex's requested changes.
 They are not new user quotations or measured audience-retention results.
+
+## Explicit rejection after delivery: a recreation is not an improvement
+
+Alex rejected the September 11 delivered edit: “why did you just recreate the one
+that i already had,” and said the opening concept and many animations throughout
+were not good. The preceding source/motion/encoding findings are technical findings
+only. They must never be retrieved as evidence that this creative was accepted.
+
+The specific failure was preserving most of the existing factory staging while
+treating a new hook mechanism, safer placement and passing motion scores as a
+substantial creative revision. When the user rejects the concept throughout, audit
+repeated staging and verbs across the entire film. Name what will happen differently
+in each section before polishing its timing or materials.
+
+Create a before/after concept ledger, then judge a moving hook probe and a whole-body
+contact sheet. “Claude beside a machine while props arrive” remains the same idea
+with different props. A new revision needs different consequential actions and
+compositions, while retaining narration and shared chrome unless those were rejected.
+A newly authored code file or a high pixel-difference score alone does not establish
+that the creative has meaningfully improved. User approval must remain separate.
+
+The next rebuild changes the hook to handling and handing off five jobs; the body
+uses a storefront campaign, shoot/edit/finished reel, a physically recomposed design,
+statement/variance inspection, contract-clause review, and a fit/customize metaphor.
+These are the revision's proposed solutions, not a claim of acceptance or retention.
+
+## Judge continuity and contact, not just activity
+
+The rebuild's sampled motion audit passed while a full decoded-frame trace found
+16 near-still frames at the end of the skill explanation and 13 at the storefront
+opening. Large arrivals can hide short idle intervals in a scene average. Run both
+checks, then remove the empty lead-in or parked tail through the meaningful action.
+Do not fill a quiet interval with unrelated camera shake or decorative particles.
+
+More motion can also make the picture worse. Long hand links crossing the frame
+read as stretched lines, not a catch. Show contact only when the hand and prop are
+close enough to make the gesture plausible. Detached sleeve shapes obscured the
+actor without adding useful cloth behavior; moving the actual garment preserved
+the metaphor and the reaction. Keep the expression readable through the action.
+
+A hook's first mechanism needs a consequence before it feels finished: overload
+leads to a catch, then useful work. This is the production interpretation of Alex's
+repeated requests for immediate, anticipatory interest; it is not a retention claim.
+
+## Uniform easing is predictable too
+
+Alex then asked for detailed animation throughout and explicitly rejected using the
+same motion speed across the video as predictable and boring. Vary the timing of
+the operation itself: a catch accelerates, a weighted object resists then releases,
+and an inspection deliberately slows before a quick correction. Changing the
+whole video playback speed would also change the narration and does not answer this.
+
+Each of the 31 actions now has its own monotone timing curve, preserving scene and
+voice boundaries. Original Claude walking strides, work leans, eye leads and recoil
+have staggered phases; they are task actions, not one synchronized bob. Secondary
+shutter, lens-path and typing details follow the operation. Retiming a visual event
+requires retiming its sound through the inverse curve. Check the rendered result,
+including every-frame continuity, because a slow segment can create an idle interval.
+This implementation is a response to the feedback, not a record of user acceptance.
 
 ## Resolve the source before revising a delivered movie
 

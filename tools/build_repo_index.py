@@ -51,11 +51,16 @@ def norm(s):
     """A reel's identity key: lowercase, strip non-alphanumerics. 'Callback' == 'callback'."""
     return re.sub(r"[^a-z0-9]", "", s.lower())
 
+# Verified naming aliases for the same reel. DEPARTMENT's source abbreviation and
+# number-first log otherwise create three disconnected registry entries.
+REEL_ALIASES = {"dept143": "department", "143department": "department"}
+
 # ---- gather the three scattered sources --------------------------------------
 def scan_reels():
     reels = {}   # key -> dict
 
     def touch(key, **kw):
+        key = REEL_ALIASES.get(key, key)
         r = reels.setdefault(key, {"key": key, "name": key, "number": None,
                                    "code": None, "log": None, "storyboard": None, "captions": []})
         for k, v in kw.items():
@@ -158,7 +163,8 @@ def scan_reels():
                 stem = f[:-5]  # drop .json
                 if norm(stem) in GENERIC or not keep(f"video/src/data/{f}"):
                     continue
-                if key in norm(stem):
+                names = [key] + [alias for alias, target in REEL_ALIASES.items() if target == key]
+                if any(name in norm(stem) for name in names):
                     r["captions"].append(f"video/src/data/{f}")
 
     return reels
