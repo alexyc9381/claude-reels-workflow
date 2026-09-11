@@ -13,7 +13,7 @@ const Symbol:React.FC<{kind:string}>=({kind})=><svg viewBox="0 0 60 60" width="5
 </svg>;
 
 export const DemoHeader:React.FC<{scene:string;f:number}>=({scene,f})=>{
- if(scene==='hook')return <HookHeader big="QWEN3.8 · 27B" hot="ON YOUR COMPUTER" f={f+12}/>;
+ if(scene==='hook')return <HookHeader big="HOW TO RUN" hot="TOP AI MODELS LOCALLY" f={f+12}/>;
  if(scene==='cta')return <HookHeader big="COMMENT LM" hot="FOR THE SETUP" f={f+8}/>;
  const [a,b,icon]=HEADS[scene];return <SectionHeader f={f+5} badge={<Symbol kind={icon}/>} l1={a} l2={<span style={{color:CLAY}}>{b}</span>} size={a.length>15?40:46}/>;
 };

@@ -282,3 +282,8 @@ Operational checks: [animation craft](../docs/ANIMATION-QUALITY.md),
 ## LM September 10: standard chrome and active mini-Claude
 
 Alex explicitly rejected the custom thin progress line and top-left text, and requested more interesting mini-Claude animation beyond the screen recording. Use the actual shared ProgressBar and centered SectionHeader/HookHeader system, with enough clearance for the moving score. Keep the visible cursor and real setup process. Give the mini sprite distinct jobs and expressions tied to demonstrated actions; do not treat a small generic nod/recoil as the full performance. Remove unrelated branding/footer text. The R16 implementation is a revision, not evidence of user approval.
+
+
+## LM146 hook correction, September 10
+
+For this demo reel, Alex wants 0–5 seconds primarily animated, then a smooth transition into actual setup capture. He rejected the quiet stretch after the crank at 3–5s and warned that right-edge artwork could be cut off. Use a new causal action immediately after the first one finishes; protect the right-side margin through the peak camera transform. Exact final hook header: “HOW TO RUN TOP AI MODELS LOCALLY”, all caps. This is task-specific feedback and an instruction to proceed, not a general approval of an earlier render.

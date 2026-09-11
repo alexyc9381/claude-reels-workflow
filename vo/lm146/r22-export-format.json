@@ -1,0 +1,36 @@
+{
+  "file": "146-LM-Final.mp4",
+  "bytes": 7838659,
+  "sha256": "c491e357a9a028434efd914826e0a69f0a9330aa3f398173f671dcd4d7ba8cc1",
+  "moov_before_mdat": true,
+  "atoms": [
+    {
+      "type": "ftyp",
+      "offset": 0,
+      "size": 32
+    },
+    {
+      "type": "moov",
+      "offset": 32,
+      "size": 50361
+    },
+    {
+      "type": "free",
+      "offset": 50393,
+      "size": 8
+    },
+    {
+      "type": "mdat",
+      "offset": 50401,
+      "size": 7788258
+    }
+  ],
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "video_codec": "h264",
+  "pixel_format": "yuv420p",
+  "color_range": "tv",
+  "color_space": "bt709",
+  "container_duration_seconds": 45.654
+}

@@ -16,10 +16,17 @@ bank=P/'sfx'
 missing=[name for name in ['impact','lever','thock','unlock','key','paper','terminal','pickup'] if not (bank/(name+'.wav')).exists()]
 if missing:raise FileNotFoundError('Restore video/public/lm146/sfx from LM146-Source.zip: '+', '.join(missing))
 E=json.loads((R/'vo/lm146/edl.json').read_text());S={x['name']:round(x['start']*30)/30 for x in E}
-cues=[(0,'impact','hero','opening computer and immediate push'),(14/30,'lever','support','Claude anticipates and travels toward the mouse'),(22/30,'thock','hero','Claude contacts and presses the mouse'),(38/30,'paper','support','camera enters the actual model window')]
+cues=[(0,'impact','hero','AI chip and Claude on the first frame with immediate camera push')]
 def c(scene,frame,name,action,role='support'):cues.append((S[scene]+frame/30,name,role,action))
-for f in [83,95]:c('hook',f,'key','original-model URL and Open in browser click')
-c('hook',101,'paper','official Qwen source opens')
+for f in [9,30,50]:c('hook',f,'lever','Claude cranks the hoist; the attached AI chip descends','texture')
+c('hook',64,'thock','AI chip seats in the laptop socket','hero')
+c('hook',70,'unlock','the illustrated local processor wakes','support')
+c('hook',84,'pickup','the final signal reaches the laptop core','texture')
+c('hook',73,'paper','Claude moves from the crank to the mouse','texture')
+c('hook',90,'key','Claude physically presses the illustrated mouse')
+c('hook',96,'lever','Claude launches into the local computer','texture')
+c('hook',124,'thock','Claude lands inside the illustrated display','texture')
+c('hook',150,'paper','the illustrated display expands into the real website')
 for f in [24,43,65]:c('download',f,'key','OS menu, OS selection, and installer Download click')
 c('download',102,'paper','installed LM Studio app opens')
 for f in [15,35,77,103,118]:c('search',f,'key','model-search and original-source navigation click')

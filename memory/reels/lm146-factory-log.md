@@ -1,6 +1,6 @@
 # LM146: original voice, real LM Studio demo
 
-> R4 below is historical and was rejected by the user. R10 is also superseded. The current revision is R16; see the final record at the end.
+> R4 below is historical and was rejected by the user. R10 is also superseded. The current revision is R22; see the final record at the end.
 
 ## Source and scope
 User commissioned a finished reel from LM sep 10.m4a, specifically prioritizing real screen recording over elaborate animation. Original Drive ID: 1Vqil5y0781zDzYW72oW3VjbPZtKimfFD. Source duration 150.14s; edited narration 44.83s at the house 1.03x, delivered picture 45.60s. User supplied the script and topic; no new topic-selection or viral-performance claim is made.
@@ -105,3 +105,30 @@ The R15 color audit exposed a pale surround: 30.5% saturation and black-point p1
 - Full-resolution frames reviewed across all scene types, plus motion playback of the 24.5s quantization-to-loading segment and the 20.4s hardware-to-CTA segment. Late checks cover magnifier/face clearance, first-step/capture separation and final set contrast. Remotion render succeeds.
 
 Delivery uses the same Drive MP4, ZIP and notes IDs; GitHub carries the updated code and records, and the source ZIP carries all native captures, the original voice, audio stems, tools and final audits. The linked guide remains unchanged because the real download/model/prompt sequence is unchanged.
+
+## R17 revision brief
+
+User requires the first 0–5 seconds to be primarily animation, followed by a smooth interesting transition into screen capture, and supplies the exact hook header: “How to Run Top AI Locally”. Replace the early recorded UI with a causal 2D installation metaphor: original Claude operates a geared hoist to seat an AI chip in a laptop, the laptop wakes, and Claude presses a mouse. At 5 seconds the illustrated monitor expands into the actual LM Studio website frame. Finish the move before the original OS-menu click at frame 172. Preserve narration, caption timing, original app evidence, and all later scene actions.
+
+Mapping: chip = local AI model; hoist/socket = bringing the model onto a personal computer; activated laptop = running locally; monitor-to-website handoff = beginning the real setup. No claim that the illustrated installation is actual 27B execution. Review the entire 0–7 seconds, not only stills.
+
+## R18–R22 opening review and user steering
+
+The user reviewed R18 and identified the laptop’s proximity to the right edge and a loss of activity at 3–5s after the crank. They also changed the title to the exact all-caps “HOW TO RUN TOP AI MODELS LOCALLY”, then instructed us to proceed. R18 is not approved merely because it rendered.
+
+R20 inset the illustration and increased processor activation. R21 replaced the generic robot face with original Claude physically jumping into the laptop. R22 moved the post-crank actions earlier: chip seats at f64; mouse press at f90; jump f96–124; landing opens the monitor from f126 into the real website. Actual capture starts fading in only after f150 and reaches its final 836×504 overview at f169, before the real f172 OS-menu click. No source-screen action is shown before five seconds. This is a drawn metaphor for bringing AI onto a computer, not footage of running 27B.
+
+The hook’s artwork is inset with an 88% layout transform; its opening push is 4.3%. Essential rightmost artwork stays near x960 or inward. The hoist cable renders in front of the illustrated screen so it remains visibly attached; the crank stays behind Claude to protect the face. The later actual demo and disclosure are unchanged. Sound is re-timed to the new physical actions: 68 cues / 45.6s = 1.491/sec, with the original voice and house music preserved.
+
+Opening probe: frame-0 luma 173.46, first-five-second motion 4.38 against 4.0; the formerly quiet 3–4s and 4–5s buckets now measure 4.70 and 7.02. Same stage crop and thresholds as R16. Final full-export checks follow.
+
+### R22 final delivery checks
+
+Final video is 7,838,659 bytes, H.264 yuv420p / TV range / BT.709, 1080×1920 at 30fps, AAC stereo. Remotion renders directly with BT.709 and PNG intermediates; stream-copy faststart puts moov before mdat. Container duration is 45.654s, including normal AAC padding around the 45.6s picture. The previous default Remotion export used full-range yuvj420p, so the delivery settings now explicitly select the compatible output format.
+
+- verify_reel: 9/9 pass; 68/68 cues; first audio 40ms; original voice 0s; music continuous; 0.08s dead audio tail.
+- SFX: all eight source files pass. Loudness -17.1 LUFS, LRA 2.1 LU, true peak -1.3 dBFS.
+- Hook: final luma 171.51 ≥140; first-five-second motion 4.382 ≥4.0. The 3–4s and 4–5s buckets are 4.689 and 6.990.
+- Look: body saturation 35.7% ≥34%; black point p10 26.3 ≤35. Report-only body luma 166.2 and header-plate warning remain.
+- All scenes meet the ≤12-frame dead-run limit. The stricter overall motion audit still fails: median 4.36 vs9, 8/11 scenes below the scene target. The hook passes its dedicated opening gate but its 4.23 scene-average motion remains under the separate 6.0 scene threshold. No all-gates-passed claim.
+- Frames 195 and 1082 are pixel-identical to R16 before final video encoding, confirming the later demonstration staging is preserved. Final decoded hook and loading frames were visually inspected. The 7.5s opening movie was replayed through the website handoff; intermediate hook and transition frames were inspected at full resolution.

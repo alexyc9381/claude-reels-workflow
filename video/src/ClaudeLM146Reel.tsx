@@ -2,7 +2,8 @@ import React from 'react';
 import {AbsoluteFill,Audio,Freeze,Img,OffthreadVideo,Easing,interpolate,staticFile,useCurrentFrame} from 'remotion';
 import {Bg,KaraokeCaption,Mascot,ProgressBar} from './SlopKit';
 import {DemoHeader,DemoSet,DemoCompanion} from './LM146AnimationKit';
-import {inter,fraunces} from './fonts';
+import {inter} from './fonts';
+import {LM146Hook,hookPortal} from './LM146Hook';
 import words from './data/words_lm146.json';
 import edl from './data/edl_lm146.json';
 
@@ -60,39 +61,25 @@ const Screen:React.FC<ScreenProps>=(props)=>{
  const fx=Math.max(0,Math.min(sw-fw,pt[0]-fw*.47)),fy=Math.max(oy,Math.min(sh-fh,pt[1]-fh*.43));
  const play=video&&f>=video.start&&(video.end===undefined||f<video.end);
  const source=(style:React.CSSProperties)=>play?<Freeze frame={Math.min(video.max,Math.max(0,Math.floor((f-video.start)*(video.rate||1)+(video.offset||0))))}><OffthreadVideo src={asset(video.name)} muted style={style}/></Freeze>:<div style={{...style,height:Number(style.width)*sh/sw}}><Img src={name==='official'?staticFile('lm146/official-model38-last.png'):asset(name+'.png')} style={{width:'100%',display:'block'}}/>{name==='43-q6-menu'&&<div style={{position:'absolute',left:(788/sw*100)+'%',top:(308/sh*100)+'%',width:(93/sw*100)+'%',height:(62/sh*100)+'%',overflow:'hidden'}}><Img src={asset(name+'.png')} style={{position:'absolute',width:(sw/93*100)+'%',maxWidth:'none',left:(-903/93*100)+'%',top:(-308/62*100)+'%'}}/></div>}</div>;
+ const rootF=useCurrentFrame(),intro=scene==='download'&&rootF<173;
+ const portal=intro?hookPortal(rootF):{left:122,top:476,width:836,height:504,radius:22};
+ const reveal=intro?ease(rootF,150,160):1,lens=intro?ease(rootF,162,173):1;
+ const overviewScale=portal.width/836;
  const zoom=650/fw;
  return <>
-  <DemoSet scene={scene} f={f} clicks={clicks}/>
-  <div style={{position:'absolute',left:122,top:scene==='hook'?508:476,width:836,height:504,borderRadius:22,overflow:'hidden',background:'#fff',boxShadow:'0 20px 36px #050E1C80,0 0 0 2px #DFE6F033'}}>
-   {source({position:'absolute',width:836,top:-oy*bscale,left:0,maxWidth:'none'})}
+  <div style={{opacity:intro?ease(rootF,150,168):1}}><DemoSet scene={scene} f={f} clicks={clicks}/></div>
+  <div style={{position:'absolute',left:portal.left,top:portal.top,width:portal.width,height:portal.height,borderRadius:portal.radius,opacity:reveal,overflow:'hidden',background:'#fff',boxShadow:'0 20px 36px #050E1C80,0 0 0 2px #DFE6F033'}}>
+   <div style={{position:'absolute',width:836,height:504,transform:`scale(${overviewScale})`,transformOrigin:'0 0'}}>
+   {(!intro||rootF>=150)&&source({position:'absolute',width:836,top:-oy*bscale,left:0,maxWidth:'none'})}
    <div style={{position:'absolute',left:fx*bscale,top:(fy-oy)*bscale,width:fw*bscale,height:fh*bscale,border:'3px solid #6241E9',borderRadius:9,background:'#6241E908',boxShadow:'0 0 0 1px #ffffff90'}}/>
    <Cursor x={pt[0]*bscale} y={(pt[1]-oy)*bscale} f={f} clicks={clicks} size={46}/>
+   </div>
   </div>
-  <div style={{position:'absolute',left:58,top:1104,width:650,height:306,borderRadius:23,overflow:'hidden',background:'#fff',boxShadow:'0 17px 35px #17243C2B,0 0 0 4px #6241E9'}}>
-   {source({position:'absolute',left:-fx*zoom,top:-fy*zoom,width:sw*zoom,maxWidth:'none'})}
+  <div style={{position:'absolute',left:58,top:1104+(1-lens)*36,width:650,height:306,opacity:lens,borderRadius:23,overflow:'hidden',background:'#fff',boxShadow:'0 17px 35px #17243C2B,0 0 0 4px #6241E9'}}>
+   {(!intro||rootF>=150)&&source({position:'absolute',left:-fx*zoom,top:-fy*zoom,width:sw*zoom,maxWidth:'none'})}
    <Cursor x={(pt[0]-fx)*zoom} y={(pt[1]-fy)*zoom} f={f} clicks={clicks} size={57}/>
   </div>
  </>;
-};
-
-const Hook:React.FC=()=>{
- const f=useCurrentFrame(),trigger=22,p=pressAt(f,[trigger]);
- const pre=ease(f,5,13)*(1-ease(f,14,21));const travel=ease(f,14,22),recover=ease(f,24,37);
- const into=ease(f,38,55),zoom=1+.045*ease(f,0,16)*(1-into);
- if(f>=55)return <>
-  <Screen f={f} states={[[55,'06-5bit'],[83,'41-source-url'],[101,'official']]} cameras={[[55,[493,82,620]],[77,[492,261,620]],[100,[492,261,620]],[101,[0,77,540]],[118,[0,77,635]],[145,[0,87,635]]]} points={[[55,782,295],[78,682,645],[83,682,645],[92,765,592],[95,765,592],[100,765,592],[101,254,118],[119,218,115],[145,238,115]]} clicks={[83,95]} />
-  <DemoCompanion scene="hook" f={f} clicks={[83,95]} success={101}/>
- </>;
- return <div style={{position:'absolute',inset:0,transform:`scale(${zoom})`,transformOrigin:'50% 52%'}}>
-  <div style={{position:'absolute',inset:0,opacity:into}}><DemoSet scene="hook" f={f} clicks={[22]}/></div>
-  <div style={{position:'absolute',left:65,top:1285,width:950,height:24,borderRadius:'50%',background:'#25264822',filter:'blur(13px)',opacity:1-into}}/>
-  <div style={{position:'absolute',left:lerp(184,122,into),top:lerp(600,508,into),width:lerp(806,836,into),height:lerp(560,504,into),borderRadius:30,background:'#192339',border:`${lerp(17,0,into)}px solid #192339`,boxShadow:'0 26px 44px #19233940',overflow:'hidden'}}>
-   <Screen f={f} states={[[0,'05-4bit'],[22,'06-5bit']]} cameras={[[0,[90,78,1025]],[22,[90,78,1025]],[38,[90,78,1025]],[55,[0,40,1200]]]} points={[[0,484,457],[9,452,448],[21,276,408],[22,276,408],[34,279,406],[55,782,295]]} clicks={[22]} width={lerp(772,836,into)} height={lerp(526,504,into)} left={0} top={0} border={false}/>
-  </div>
-  <div style={{position:'absolute',left:142,top:1159,width:890,height:38,borderRadius:'4px 4px 45px 45px',background:'linear-gradient(#BFC6D3,#737F96)',boxShadow:'0 20px 34px #19233935',opacity:1-into}}><div style={{margin:'0 auto',width:270,height:11,borderRadius:'0 0 12px 12px',background:'#526077'}}/></div>
-  <div style={{position:'absolute',left:328,top:1002,width:116,height:156,borderRadius:'55px 55px 35px 35px',background:'linear-gradient(135deg,#fff,#C0C7D4)',border:'4px solid #202E46',transform:`translateY(${p*9}px) scaleY(${1-p*.1})`,boxShadow:`0 ${15-p*10}px 0 #637089`,opacity:1-into}}><div style={{position:'absolute',top:0,left:54,width:3,height:70,background:'#47546B'}}/><div style={{position:'absolute',top:20,left:45,width:19,height:33,borderRadius:10,background:PURPLE}}/></div>
-  <div style={{position:'absolute',left:lerp(6,73,travel)-17*pre-15*recover,top:881+18*pre-9*recover,transform:`rotate(${-8*pre+8*travel*(1-recover)}deg) scale(${1+.05*pre},${1-.11*pre})`,transformOrigin:'50% 95%',opacity:1-into}}><Mascot lf={f+22} size={312} nodAmp={0} gaze={7} stern={pre*.85} shock={.58*ease(f,23,28)*(1-ease(f,29,37))} cheer={.65*recover}/></div>
- </div>;
 };
 
 const CTA:React.FC<{f:number}>=({f})=>{
@@ -152,8 +139,9 @@ export const ClaudeLM146Reel:React.FC=()=>{
  }
  return <AbsoluteFill style={{fontFamily:inter.fontFamily}}><Bg/>
  <div style={{position:'absolute',inset:0,zIndex:300,transform:'translateY(-48px)',pointerEvents:'none'}}><ProgressBar/></div>
- <DemoHeader scene={scene} f={lf}/>
- {scene==='hook'?<Hook/>:scene==='cta'?<CTA f={lf}/>:<><Screen scene={scene} f={lf} states={states} cameras={cameras} points={points} clicks={clicks} height={height} top={top} video={video}/><DemoCompanion scene={scene} f={lf} clicks={clicks} success={success}/></>}
+ {f<170?<div style={{position:'absolute',inset:0,zIndex:200,pointerEvents:'none'}}><div style={{opacity:1-ease(f,150,159)}}><DemoHeader scene="hook" f={f}/></div>{f>=150&&<div style={{opacity:ease(f,159,168)}}><DemoHeader scene="download" f={f-150}/></div>}</div>:<DemoHeader scene={scene} f={lf}/>}
+ {f<170&&<LM146Hook f={f}/>}
+ {scene==='hook'?null:scene==='cta'?<CTA f={lf}/>:<><Screen scene={scene} f={lf} states={states} cameras={cameras} points={points} clicks={clicks} height={height} top={top} video={video}/><div style={{opacity:scene==='download'?ease(f,165,176):1}}><DemoCompanion scene={scene} f={lf} clicks={clicks} success={success}/></div></>}
  {scene==='fit'&&lf>=45&&lf<94&&<div style={{position:'absolute',left:62,top:1052,fontSize:27,lineHeight:1.2,fontWeight:650,color:'#EDF1F8'}}>This Mac: smaller 1.7B model.</div>}
  <KaraokeCaption words={words} top={1475}/><Audio src={staticFile('lm146/master.wav')}/>
  </AbsoluteFill>;
