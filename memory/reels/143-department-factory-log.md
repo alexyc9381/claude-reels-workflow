@@ -289,9 +289,10 @@ body refinements continued. No response or delivery is treated as creative appro
    and that headroom restored in the mix, so the prepared stem stays below full scale.
    Narration processing, speed and caption timing are unchanged.
 
-The first rebuild imported eight transitive source files; the later performance pass adds DeptPerformance.ts as the ninth. DeptScenes, DeptWorld
-and DeptHookPolish are retained as historical source but are not in this render's
-dependency graph. Shared SlopKit chrome and the original Mascot anatomy are retained.
+The current rebuild imports eight transitive source files. The rejected speed-ramp
+pass temporarily added DeptPerformance.ts as a ninth file; that file is removed.
+DeptScenes, DeptWorld and DeptHookPolish are retained as historical source but are
+not in this render's dependency graph. Shared SlopKit chrome and the original Mascot anatomy are retained.
 
 6. Full-film and phone playback review found the generic suit staying upright and the
    team handing over its result too late. The suit now tips, drops and spills across
@@ -334,7 +335,7 @@ dependency graph. Shared SlopKit chrome and the original Mascot anatomy are reta
     comparison; the instant print contains the original Claude rig from the shot,
     replacing the reused abstract campaign artwork.
 
-### Final encoded delivery checks — performance revision
+### Historical encoded checks — rejected performance revision
 
 - 1080×1920, 30fps, 2132 frames / 71.0667s; actual full-range BT.601 to
   limited-range BT.709 conversion, H.264/yuv420p + AAC 48kHz.
@@ -360,3 +361,20 @@ speeds; an individual movement should not change speed halfway through. The prio
 scene-clock and inverse-sound advice is withdrawn, and its implementation removed.
 The current source uses real local frames and per-object fixed travel durations.
 This correction supersedes the historical speed-ramp review and its technical passes.
+
+### Corrected steady-motion delivery checks
+
+- The final encoded correction uses real local frames with fixed travel durations
+  for each object/action. Shared time warps and inverse sound mapping are removed.
+- All 31 scene motion floors pass; median 9.30. All 2132 frames decode; the longest
+  panel run below 0.6 MAD is 7 frames against the 12-frame bar. Frame 0→1 MAD is 5.31.
+- Verifier 9/9, script/caption match, 101/101 declared SFX starts have audible energy.
+  The 102-layer cue map uses 14 files. Mix balance remains 37.1% above 2kHz and
+  9.7% below 250Hz. Narration processing and caption timing are unchanged.
+- Look blocking checks pass: hook luma169.5, body saturation67.6%, black p10=26.5.
+  Header-pill and body-luma108.3 remain nonblocking advisories in the actual report.
+- Native frames 0,1150,1968 from the isolated eight-source package match the corrected
+  source bundle exactly. The final file is 1080×1920, 30fps, 71.0667s, H.264/yuv420p
+  limited BT.709 with AAC 48kHz; the range and matrix are converted during encoding.
+- These checks establish technical integrity only; they do not establish creative
+  approval, audience retention, or a human listening check.
