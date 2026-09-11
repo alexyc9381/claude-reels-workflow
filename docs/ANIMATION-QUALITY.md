@@ -1,5 +1,7 @@
 # ANIMATION QUALITY — why the first pass is never good enough, and what actually fixes it
 
+Revision case study: [DEPARTMENT source and motion proof](../memory/alex-department-source-and-motion-proof.md). Read alongside the indexed LM feedback when a hook moves but its cause and payoff are unclear.
+
 **LM follow-up:** [frame-zero action, post-action continuity and demo legibility](../memory/alex-lm-hooks-demo-and-delivery.md).
 Read before interpreting “faster hook”, “more animation”, “show the setup” or “too close to the edge”.
 

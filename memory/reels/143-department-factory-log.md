@@ -164,3 +164,73 @@ level moved **+5.35 dB** (i.e. essentially untouched) while p99 was held to
 +3.97 and the peak landed at -1.01 dBFS. **Nothing was compressed, re-voiced or
 restored** — [[alex-vo-recordings]] holds.
 ⭐ Measure the STEM against previous stems before blaming the mix.
+
+
+## September 11 2026 revision intake
+
+Opened before proposing a new animation concept. Alex requested an elevated full edit from the
+DEPARTMENT recording, with immediate subject action plus a slight camera push, strong hierarchy,
+expressive original Claude sprites, detailed sets and repeated visual/sound review. Existing
+September 8 edits were found in Drive folder 143 - DEPARTMENT and this repo.
+
+Source identified through connected Drive: DEPARTMENT.m4a, file ID
+1ij6kCWoXxYwd607uDBeUMjJpImp9jXvp, 3,427,234 bytes, modified September 8 08:40:46 UTC.
+No newer same-name voice file was found in the VOs folder. Downloaded source is being checked
+against the stored speech-span edit before reuse. Earlier gates above are historical, not new passes.
+
+Intake status: reviewing existing storyboard, animations, source voice, claims and missing assets.
+The newly indexed LM guidance is required input; LM-specific tutorial timing is not imposed here.
+Next: rebuild source audio, inspect baseline hook and all scenes, then record concrete revision defects.
+
+
+### September 11 completed revision — source and final export
+
+The historical R1–R8 gates above are not evidence for this revision. The current output
+was built from the DEPARTMENT Drive voice with SHA256
+`6c5a0a6e566dcb4608a41644b0496cebb09549312afa7f86269679663b4f0bb0`.
+Eighteen keeper passages remove retakes; 1.03x playback preserves the full message.
+The last spoken word ends at approximately 70.92s; the 71.0667s export keeps its tail.
+LM's request to cut on “setup” belongs to LM and was not applied to this different script.
+
+| Review | Defect found | Change and evidence |
+|---|---|---|
+| Source parity | Drive's FULL hook differed from Git's hat tower | Built a new reproducible green dispatch-machine hook in `DeptHookPolish.tsx`; the older movie is not claimed as reproduced |
+| Opening rounds 1–2 | Lever and gear motion did not change enough of the subject; motion 3.99 | Added large, individually routed SKILL.md sheets and increased visible compression |
+| Opening round 3 | Agent launch ended too early; motion 5.47 | Staggered landings, contact squash, expression changes and five different finished work products |
+| Opening round 4 | Follow-through and hierarchy needed verification | Hook motion 6.01 before delivery encode; final 6.04; operator pixels change between f0 and f1 |
+| Body bounds | Edge operators, props and CTA crowded right edge | Moved each operator with its props/shadow; reduced walks and TEAM push; narrowed and centered keyword board |
+| Final full export | Every scene passed, but overall median 8.85 was below 9.00 | Larger centered MOST approach and distinct work products rising into TEAM bays; final median 9.32, all 29 scenes at least 6.0 |
+| Audio | Missing legacy cue filenames; excessive repeated accents; helper-based cue count hidden from regex | Replaced missing files, reduced bright/redundant layers, expanded 106 actual layer cues and rendered a separate SFX stem |
+| Delivery color | Remotion picture was full-range BT.601 matrix with incomplete tags | Converted actual pixels to limited-range BT.709 before tagging and final AAC mux |
+| Resource accuracy | Marketing README count lagged its directory; finance/legal READMEs stale | Marketing header now 45+; guide explains 50 current marketing entries and verifies 8 finance/9 legal skill folders |
+
+Final checks on the delivered MP4: typecheck; 9/9 verifier checks; scene motion
+median **9.32**, **0/29 failing**, hook **6.04**; all 2132 decoded frames checked,
+longest panel difference run below 0.6 **one frame** (bar 12). First-frame actor
+difference **4.9095**; final 1.5 seconds of hook average panel difference **2.4891**.
+Hook luma **161.2**, body saturation **68.2%**, body black p10 **9.6**.
+The look tool retains its nonblocking “header pill” advisory; it is not reported as absent.
+Caption words were compared to fresh ASR, with brand spelling corrected and UI UX tokenization
+normalized; largest matched-word timing difference **0.088s**.
+
+Audio inventory: **106 layers**, **15 files**, **103 actual start timestamps**.
+The actual SFX-only stem measures **−14.59 dBFS peak** and **−47.16 dB A-weighted
+whole-track RMS**; it contains effect energy in 309 of 711 100ms windows. Individual
+cue gain/level estimates are separately included in the source package. A cue energy
+check on the complete mix alone cannot prove an effect is audible over narration.
+No missing, banned air, hiss or swell cues were found. These are measured audio
+checks, not a claim that a person listened to the final mix.
+
+Companion guide: [Build your AI team with Claude skills](https://chen.media/guides/build-your-ai-team-with-claude-skills),
+keyword **DEPARTMENT**, 1348 words with all five departments, exact source links,
+install commands, customization and tests. Published and full-body/download verified.
+Site source commit `b3b9332`; deployment `dpl_4E5bHxUqJ9osNKGUdBUypuFQhKPf`.
+
+Drive delivery uses the existing canonical file ID `14IvVB1jWwDofGqaHGR_JCIWzd0VIbBHV`.
+Old FULL, HOOK and small versions are preserved in **Archive - previous cuts**.
+The main folder contains one current MP4 plus caption, frame zero and the source archive.
+The current upload receipt is kept with the local delivery notes; this log does not
+treat the earlier file's metadata as proof of the new bytes.
+
+Reusable findings are indexed in [DEPARTMENT source and motion proof](../alex-department-source-and-motion-proof.md)
+and linked to [Alex's LM corrections](../alex-lm-hooks-demo-and-delivery.md).

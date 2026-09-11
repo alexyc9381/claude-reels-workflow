@@ -1,3 +1,4 @@
+import {DeptArtifact} from "./DeptHookPolish";
 import React from "react";
 import { useCurrentFrame, Img, staticFile } from "remotion";
 import {
@@ -251,7 +252,7 @@ export const HOOK: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
 export const DEPTS_SCENE: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
   const f = useCurrentFrame();
   const ATS = [6, 24, 42, 60, 78];
-  const BX = [46, 232, 418, 604, 790];
+  const BX = [62, 232, 402, 572, 742];
   /* ---- SHOT B: low along the bench, five SKILL.md sheets slide in and stack.
      ⭐ This is what sets up S2 — the next sentence is "and a skill is just a
      markdown file", so the last beat of this scene puts the file in your hand. */
@@ -288,7 +289,7 @@ export const DEPTS_SCENE: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) =>
             );
           })}
           <Contact x={840} y={GY - 6} w={200} o={0.4} z={40} />
-          <Hero f={f} x={912} y={GY + 24} size={252} z={70} costume={{}} act={1}
+          <Hero f={f} x={824} y={GY + 24} size={252} z={70} costume={{}} act={1}
             drive={Math.sin(f / 5.6) * 0.22} flip />
           <CrewBand f={f} n={3} at={2} seed={7} y={GY + 136} size={166} z={76} />
         </Works>
@@ -375,7 +376,7 @@ export const SKILL: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
   const open = E(f, 3, 30, 0.08, 1, IO);
   /* SHOT A is 87 frames, SHOT B is 81. The walk lives in B and covers 4..58. */
   const walk = cut === 1 ? E(f, 4, 58, 0, 1, IO) : 0;
-  const wx = 128 + walk * 706;
+  const wx = 155 + walk * 485;
   const kit = [0.26, 0.52, 0.80].map(p => (walk > p ? 1 : 0));
   return (
     <Scene p={asPlace("bench")} slug="" push={[0, dur, 1.06]} vig={0.42}>
@@ -420,8 +421,8 @@ export const SKILL: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
                 ...mono(17, 800), color: "#241708" }}>{["##", "##", "##", "```"][i]}</div>
             );
           })}
-          <Contact x={806} y={GY - 6} w={178} o={0.4} z={40} />
-          <Hero f={f} x={880} y={GY + 6} size={226} z={58} costume={{}} act={1} flip
+          <Contact x={725} y={GY - 6} w={178} o={0.4} z={40} />
+          <Hero f={f} x={799} y={GY + 6} size={226} z={58} costume={{}} act={1} flip
             drive={E(f, 4, 24, 0, 0.42, OUT) - E(f, 30, 52, 0, 0.42, OUT)} />
         </>) : (<>
           {/* SHOT B — a plain Claude WALKS the file's length and is CHANGED by it.
@@ -516,11 +517,11 @@ export const MKT: React.FC<SP> = ({ dur }) => {
             background: "#2A1B0C" }} />
         </div>
         <Poster x={556} y={362 - eject * 60} w={158} z={52} k={eject} c={CLAY} />
-        <Contact x={758} y={GY - 6} w={190} o={0.4} z={40} />
-        <Hero f={f} x={846} y={GY + 6} size={228} z={54} costume={DEPT.mkt.costume} act={1}
+        <Contact x={710} y={GY - 6} w={190} o={0.4} z={40} />
+        <Hero f={f} x={798} y={GY + 6} size={228} z={54} costume={DEPT.mkt.costume} act={1}
           drive={Math.sin(f / 5.6) * 0.30} stern={Math.sin(f / 5.6) > 0.4 ? 1 : 0}
           cheer={f > 30 && Math.sin(f / 5.6) > 0.86 ? 1 : 0} />
-        <JobHat id="cap" x={846} y={GY + 6 - 208} s={0.52} z={60} rot={Math.sin(f / 9) * 5} />
+        <JobHat id="cap" x={798} y={GY + 6 - 208} s={0.52} z={60} rot={Math.sin(f / 9) * 5} />
         <BayHead f={f} at={2} no={DEPT.mkt.no} name={DEPT.mkt.name} c={DEPT.mkt.key} />
         <CrewBand f={f} n={4} at={0} seed={1} y={GY + 124} size={152} z={72} />
       </Works>
@@ -766,10 +767,10 @@ export const GATE: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
               </React.Fragment>
             );
           })}
-          <Contact x={786} y={GY - 6} w={180} o={0.4} z={40} />
-          <Hero f={f} x={866} y={GY + 6} size={216} z={54} costume={DEPT.dsg.costume} act={1}
+          <Contact x={724} y={GY - 6} w={180} o={0.4} z={40} />
+          <Hero f={f} x={804} y={GY + 6} size={216} z={54} costume={DEPT.dsg.costume} act={1}
             drive={Math.sin(f / 6.2) * 0.26} pop={E(f, 0, 8, 0.8, 1, BACK)} />
-          <JobHat id="beret" x={866} y={GY + 6 - 198} s={0.50} z={60} rot={Math.sin(f / 11) * 4} />
+          <JobHat id="beret" x={804} y={GY + 6 - 198} s={0.50} z={60} rot={Math.sin(f / 11) * 4} />
           <BayHead f={f} at={4} no={DEPT.dsg.no} name={DEPT.dsg.name} c={DEPT.dsg.key} />
           <CrewBand f={f} n={3} at={2} seed={8} y={GY + 126} size={156} z={72} />
         </Works>
@@ -847,8 +848,8 @@ export const TWO: React.FC<SP> = ({ dur }) => {
         {[2, 16].map((a, i) => f >= a + 8 && f < a + 26
           ? <Ring key={"rg" + i} x={i ? 694 : 318} y={526} f={f} at={a + 8} c={i ? GOLD : SKY} z={82} s={0.8} dur={17} />
           : null)}
-        <Contact x={880} y={GY - 6} w={150} o={0.38} z={40} />
-        <Hero f={f} x={932} y={GY + 6} size={190} z={54} costume={DEPT.dsg.costume} act={3} flip
+        <Contact x={758} y={GY - 6} w={150} o={0.38} z={40} />
+        <Hero f={f} x={810} y={GY + 6} size={190} z={54} costume={DEPT.dsg.costume} act={3} flip
           drive={Math.sin(f / 5.4) * 0.18} gaze={-0.9}
           shock={(f > 8 && f < 18) || (f > 22 && f < 32) ? 1 : 0} cheer={f > 40 ? 1 : 0} />
         <CrewBand f={f} n={3} at={0} seed={9} y={GY + 126} size={154} z={72} />
@@ -971,10 +972,10 @@ export const FIN: React.FC<SP> = ({ dur }) => {
             width: 200, height: 20, zIndex: 50, borderRadius: 3, background: hexa("#F2ECD8", 0.86),
             transform: `translateX(${Math.sin(f / 9 + i) * 8}px)` }} />
         ))}
-        <Contact x={800} y={GY - 6} w={176} o={0.4} z={40} />
-        <Hero f={f} x={870} y={GY + 6} size={220} z={54} costume={DEPT.fin.costume} act={1}
+        <Contact x={732} y={GY - 6} w={176} o={0.4} z={40} />
+        <Hero f={f} x={802} y={GY + 6} size={220} z={54} costume={DEPT.fin.costume} act={1}
           drive={Math.sin(f / 6) * 0.26} stern={Math.sin(f / 6) > 0.5 ? 1 : 0} />
-        <JobHat id="visor" x={870} y={GY + 6 - 202} s={0.50} z={60} rot={Math.sin(f / 10) * 4} />
+        <JobHat id="visor" x={802} y={GY + 6 - 202} s={0.50} z={60} rot={Math.sin(f / 10) * 4} />
         <BayHead f={f} at={2} no={DEPT.fin.no} name={DEPT.fin.name} c={DEPT.fin.key} />
         <CrewBand f={f} n={4} at={0} seed={12} y={GY + 124} size={152} z={72} />
       </Works>
@@ -1035,8 +1036,8 @@ export const LEDGER: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
                 transform: `rotate(${i * 45}deg)` }} />
             ))}
           </div>
-          <Contact x={840} y={GY - 6} w={160} o={0.4} z={40} />
-          <Hero f={f} x={902} y={GY + 6} size={196} z={54} costume={DEPT.fin.costume} act={1} flip
+          <Contact x={748} y={GY - 6} w={160} o={0.4} z={40} />
+          <Hero f={f} x={810} y={GY + 6} size={196} z={54} costume={DEPT.fin.costume} act={1} flip
             drive={Math.sin(f / 5.4) * 0.30} />
         </>) : (<>
           {/* the statement prints and travels out */}
@@ -1087,10 +1088,10 @@ export const LEGAL: React.FC<SP> = ({ dur }) => {
           height: 200, zIndex: 44, borderRadius: "2px 2px 0 0",
           background: `linear-gradient(90deg, ${mxh(OXBLOOD, 0.2)} 0%, ${dkh(OXBLOOD, 0.22)} 100%)`,
           boxShadow: SH }} />
-        <Contact x={784} y={GY - 6} w={182} o={0.4} z={40} />
-        <Hero f={f} x={858} y={GY + 6} size={224} z={54} costume={DEPT.leg.costume} act={3}
+        <Contact x={726} y={GY - 6} w={182} o={0.4} z={40} />
+        <Hero f={f} x={800} y={GY + 6} size={224} z={54} costume={DEPT.leg.costume} act={3}
           drive={Math.sin(f / 6.6) * 0.18} stern={1} gaze={-0.6} />
-        <JobHat id="wig" x={858} y={GY + 6 - 206} s={0.52} z={60} rot={Math.sin(f / 12) * 3.4} />
+        <JobHat id="wig" x={800} y={GY + 6 - 206} s={0.52} z={60} rot={Math.sin(f / 12) * 3.4} />
         <BayHead f={f} at={2} no={DEPT.leg.no} name={DEPT.leg.name} c={DEPT.leg.key} />
         <CrewBand f={f} n={4} at={0} seed={16} y={GY + 124} size={152} z={72} />
       </Works>
@@ -1140,8 +1141,8 @@ export const CONTRACT: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
           })}
           <Tally f={f} at={2} dur={50} to={9} x={412} y={266} s={1.24} z={88} c={BONE}
             label={`LEGAL ${DEPT.leg.unit}`} />
-          <Contact x={840} y={GY - 6} w={166} o={0.4} z={40} />
-          <Hero f={f} x={904} y={GY + 6} size={200} z={54} costume={DEPT.leg.costume} act={1} flip
+          <Contact x={746} y={GY - 6} w={166} o={0.4} z={40} />
+          <Hero f={f} x={810} y={GY + 6} size={200} z={54} costume={DEPT.leg.costume} act={1} flip
             drive={Math.sin(f / 5.4) * 0.28} />
         </>) : (<>
           {/* the contract unrolls the full width under a stamping arm */}
@@ -1204,8 +1205,8 @@ export const MOST: React.FC<SP> = ({ dur }) => {
         <Beam x={506} y={214} top={260} bot={640} len={470} c="#FFEDC0" o={0.24} z={17} f={f} />
         <Motes x={506} y={280} w={520} h={400} n={16} f={f} z={40} c="#F3E6C6" />
         {/* THE ONE THING STILL MOVING */}
-        <Contact x={430 + walk * 4} y={GY + 14} w={200 + walk * 90} o={0.42} z={40} />
-        <Hero f={f} x={506} y={GY + 28 + walk * 26} size={220 + walk * 96} z={60} costume={{}}
+        <Contact x={430 + walk * 4} y={GY + 14} w={200 + walk * 125} o={0.42} z={40} />
+        <Hero f={f} x={506} y={GY + 28 + walk * 26} size={220 + walk * 144} z={60} costume={{}}
           act={0} drive={walk < 1 ? 0.16 : 0} gaze={walk > 0.7 ? 0 : 0.5}
           stern={walk > 0.86 ? 1 : 0} />
       </Works>
@@ -1384,8 +1385,8 @@ export const REWRITE: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
           </svg>
         )}
         {f >= 44 && <Ring x={500} y={430 - rise * 60} f={f} at={44} c={GOLD} z={82} s={1.5} dur={26} />}
-        <Contact x={824} y={GY - 6} w={186} o={0.4} z={40} />
-        <Hero f={f} x={892} y={GY + 6} size={222} z={60} costume={{}} act={2}
+        <Contact x={748} y={GY - 6} w={186} o={0.4} z={40} />
+        <Hero f={f} x={816} y={GY + 6} size={222} z={60} costume={{}} act={2}
           cheer={custom > 0.55 ? 1 : 0} gaze={-0.9} shock={f > 10 && f < 26 ? 1 : 0} />
         <CrewBand f={f} n={3} at={0} seed={24} y={GY + 130} size={158} z={72} />
       </Works>
@@ -1403,8 +1404,8 @@ export const REWRITE: React.FC<SP & { cut?: 0 | 1 }> = ({ dur, cut = 0 }) => {
    ====================================================================== */
 export const TEAM: React.FC<SP> = ({ dur }) => {
   const f = useCurrentFrame();
-  const BX = [46, 232, 418, 604, 790];
-  const pull = E(f, 0, dur, 1.10, 1.0, IO);   /* the ONE pull-back in the reel */
+  const BX = [62, 232, 402, 572, 742];
+  const pull = E(f, 0, dur, 1.03, 1.0, IO);   /* the ONE pull-back in the reel */
   return (
     <Scene p={asPlace("floorLit")} slug="" push={[0, dur, 1.02]} vig={0.28}>
       <Works f={f} key0="#5E4030" deep="#281A11" lamp={mxh(CLAY, 0.34)} runner="load" rate={8.2}
@@ -1451,6 +1452,14 @@ export const TEAM: React.FC<SP> = ({ dur }) => {
               </React.Fragment>
             );
           })}
+          {/* Each department raises a distinct completed work product into its bay. */}
+          <svg width={1012} height={792} style={{position:'absolute',inset:0,zIndex:46,pointerEvents:'none'}}>
+            {DEPTS.map((d,i)=>{
+              const at=4+i*11,k=E(f,at,at+26,0,1,IO);
+              if(k<=0)return null;
+              return <DeptArtifact key={d.k} i={i} x={BX[i]+96} y={660-k*250} s={.72+k*.31} rot={(1-k)*(i%2?22:-22)}/>;
+            })}
+          </svg>
           {/* the hero walks in HATLESS and stops */}
           <Contact x={430} y={GY + 74} w={230} o={0.44} z={62} />
           <Hero f={f} x={506} y={GY + 92} size={264} z={70} costume={{}} act={0}
@@ -1478,7 +1487,7 @@ export const CTA: React.FC<SP> = ({ dur }) => {
             the rest of the scene held. They now run to f50 and the five packs
             follow to f96, so something is arriving right through the CTA. */}
         {/* the reserved CTA column: y 250..430, nothing else enters it */}
-        <LetterBoard f={f} at={4} per={4.6} word={D.keyword} x={62} y={272} w={888} z={84} />
+        <LetterBoard f={f} at={4} per={4.6} word={D.keyword} x={116} y={272} w={780} z={84} />
         <CommentChip f={f} at={54} x={300} y={478} t="COMMENT IT ↓" s={0.94} z={88} />
         {/* the five packs, stacked and stamped, under the word */}
         {DEPTS.map((d, i) => {
@@ -1498,7 +1507,7 @@ export const CTA: React.FC<SP> = ({ dur }) => {
             </div>
           );
         })}
-        <Mark x={866} y={472} s={74} z={88} />
+        <Mark x={790} y={472} s={74} z={88} />
         <CrewBand f={f} n={5} at={0} seed={26} y={GY + 132} size={162} z={72} />
       </Works>
     </Scene>

@@ -3,11 +3,12 @@ import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remo
 import { Bg, ProgressBar, KaraokeCaption, AssemblyCtx, HookHeader } from "./SlopKit";
 import { CamCtx } from "./DeptWorld";
 import {
-  HOOK, DEPTS_SCENE, SKILL, MKT, PACK45, SOCIAL, GATE, TWO, GENERIC, FIN, LEDGER,
+  DEPTS_SCENE, SKILL, MKT, PACK45, SOCIAL, GATE, TWO, GENERIC, FIN, LEDGER,
   LEGAL, CONTRACT, MOST, HEAP, REWRITE, TEAM, CTA,
 } from "./DeptScenes";
 import { SfxTrack, LEVELS, db, Cue } from "./SoundKit";
 import words from "./data/words_dept143.json";
+import {DeptHookPolish} from './DeptHookPolish';
 
 /* ===========================================================================
    REEL 143 · "DEPARTMENT" — THE ASSEMBLY.  Board: storyboards/143-department.md.
@@ -43,8 +44,8 @@ import words from "./data/words_dept143.json";
 const FPS = 30;
 const S = (fr: number) => fr / FPS;
 
-/** ⛔ the last word "below." truly ends at 70.85s (f2126). 2132 frames = 71.07s
-    lands the hard out six frames after it — long enough not to clip the /oʊ/
+/** ⛔ the last word "below." truly ends at 70.92s (verified ASR). 2132 frames = 71.07s
+    lands the hard out about four frames after it — long enough not to clip the /oʊ/
     tail, short enough that no dead beat sits on the end. */
 export const DEPT_TOTAL = 2132;
 
@@ -75,7 +76,7 @@ export const L = {
     cut to a new FRAMING — but §2 first: each of these shots owns an EVENT, it
     is not a cut used as a substitute for one. */
 const B = {
-  HOOK_B: 92, DEPTS_B: 238, SKILL_B: 400, PACK_B: 596,
+  DEPTS_B: 238, SKILL_B: 400, PACK_B: 596,
   SOC_B: 720, SOC_C: 800, GATE_B: 940, GEN_B: 1120, GEN_C: 1180,
   LED_B: 1355, CON_B: 1530, REW_B: 1820,
 } as const;
@@ -117,10 +118,9 @@ const B = {
    ⭐ RATE, NOT A NEW FILE. No BRIGHT sample is used 5+ times (the SLAP gate).
    -------------------------------------------------------------------------- */
 
-/** a hard cut: a low movement plus its own sub, landing ON the cut frame */
+/** A low impact cues a change of department; reserve layered sub for the hook and gate. */
 const cut = (fr: number, v = 1, r = 1): Cue[] => [
   { at: S(fr), src: "impact.wav", v: LEVELS.SFX_MID * db(-1) * v, dur: 0.62, rate: 0.98 * r },
-  { at: S(fr), src: "sub.wav", v: LEVELS.SFX_TEXTURE * v, dur: 0.42, rate: 0.72 * r, lead: 2 },
 ];
 /** a softer join inside one department — one cue, not two */
 const softCut = (fr: number, r = 1): Cue[] => [
@@ -134,30 +134,21 @@ const run = (frs: number[], base: Omit<Cue, "at" | "rate">, r0 = 0.92, step = 0.
   frs.map((fr, i) => ({ ...base, at: S(fr), v: base.v * db(-i * 0.5), rate: r0 + i * step }));
 
 export const SFX: Cue[] = [
-  /* === S0 HOOK f0-144 ====================================================
-     ⭐ FRAME 0 GETS THE HEAVIEST CUE STACK IN THE REEL — it is the interrupt,
-     and it is three LOW sources together so it is felt rather than heard. */
-  { at: S(0),  src: "impact.wav", v: LEVELS.SFX_HERO,          dur: 0.62, rate: 0.90, lead: 0 },
-  { at: S(0),  src: "boom.wav",   v: LEVELS.SFX_MID,           dur: 0.55, rate: 0.82, lead: 0 },
-  { at: S(0),  src: "sub.wav",    v: LEVELS.SFX_MID * db(-2),  dur: 0.42, rate: 0.58, lead: 0 },
-  /* the two hats that arrive; each landing COSTS him something */
-  { at: S(22), src: "m_stomp.wav", v: LEVELS.SFX_HERO * db(-2), dur: 0.12, rate: 0.78 },
-  { at: S(22), src: "sub.wav",     v: LEVELS.SFX_TEXTURE,       dur: 0.42, rate: 0.64, lead: 2 },
-  { at: S(56), src: "m_stomp.wav", v: LEVELS.SFX_HERO,          dur: 0.12, rate: 0.68 },
-  { at: S(56), src: "boom.wav",    v: LEVELS.SFX_MID * db(-3),  dur: 0.55, rate: 0.72, lead: 2 },
-  /* the split-flap stepping, and the work landing on the counter */
-  ...run([18, 50], { src: "pop.wav", v: LEVELS.SFX_TEXTURE * db(3), dur: 0.13 }, 0.86, 0.09),
-  ...cut(B.HOOK_B, 1.0, 1.04),
-  { at: S(98),  src: "paper.wav", v: LEVELS.SFX_MID, dur: 0.30, rate: 1.04 },   /* the ticket flips */
-  { at: S(112), src: "twang.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.50, rate: 1.22 }, /* the hats lift */
+  /* Revised hook: sounds belong to contact, module seating, release and landing. */
+  {at:S(0),src:"thock.wav",v:LEVELS.SFX_HERO,dur:0.16,rate:0.86,lead:0},
+  {at:S(0),src:"sub.wav",v:LEVELS.SFX_TEXTURE,dur:0.42,rate:0.72,lead:0},
+  ...run([17,37,57],{src:"blip3.wav",v:LEVELS.SFX_MID*db(-3),dur:0.22},0.9,0.09),
+  {at:S(63),src:"twang.wav",v:LEVELS.SFX_MID*db(-2),dur:0.5,rate:1.12},
+  ...run([84,98,112],{src:"c_stomp.wav",v:LEVELS.SFX_MID*db(-8),dur:0.12},0.86,0.06),
+
+  {at:S(111),src:"paper.wav",v:LEVELS.SFX_TEXTURE,dur:0.30,rate:0.86},
 
   /* === S1 DEPTS f144-313 ================================================= */
   ...cut(L.S1),
   /* five lamps strike, one per bay, ASCENDING */
   ...run([158, 176, 194, 212, 230], { src: "blip3.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.22 }, 0.88, 0.085),
-  ...run([158, 176, 194, 212, 230], { src: "m_bump.wav", v: LEVELS.SFX_TEXTURE, dur: 0.09 }, 0.84, 0.09),
   ...softCut(B.DEPTS_B),
-  ...run([252, 276], { src: "pop.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.13 }, 0.90, 0.07),
+  ...run([276], { src: "pop.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.13 }, 0.90, 0.07),
 
   /* === S2 SKILL f313-481 ================================================= */
   ...cut(L.S2, 0.92),
@@ -165,11 +156,11 @@ export const SFX: Cue[] = [
   ...softCut(B.SKILL_B, 1.06),
   /* the four sections lighting under his feet */
   ...run([418, 440], { src: "blip1.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.22 }, 0.90, 0.09),
-  { at: S(466), src: "m_stomp.wav", v: LEVELS.SFX_HERO * db(-4), dur: 0.12, rate: 0.94 },
+  { at: S(466), src: "c_stomp.wav", v: LEVELS.SFX_HERO * db(-8), dur: 0.12, rate: 0.94 },
 
   /* === S3 MKT f481-530 =================================================== */
   ...cut(L.S3),
-  { at: S(504), src: "m_bump.wav", v: LEVELS.SFX_MID, dur: 0.09, rate: 0.86 },   /* the poster ejects */
+  { at: S(504), src: "c_bump.wav", v: LEVELS.SFX_MID * db(-4), dur: 0.09, rate: 0.86 },   /* the poster ejects */
 
   /* === S4 PACK45 f530-657 ================================================
      ⛔ 45 tiles do NOT get 45 cues. The house ceiling is 1.5/sec and a rejected
@@ -178,7 +169,7 @@ export const SFX: Cue[] = [
   { at: S(534), src: "crash.wav", v: LEVELS.SFX_HERO * db(-5), dur: 0.70, rate: 1.04 }, /* the crate bursts */
   ...run([550, 578], { src: "thock.wav", v: LEVELS.SFX_MID * db(-2), dur: 0.16 }, 0.86, 0.11),
   ...softCut(B.PACK_B),
-  ...run([618, 638], { src: "key.wav", v: LEVELS.SFX_TEXTURE * db(2), dur: 0.04 }, 0.96, 0.08),
+  ...run([618, 638], { src: "key.wav", v: LEVELS.SFX_TEXTURE * db(-8), dur: 0.04 }, 0.96, 0.08),
 
   /* === S5 SOCIAL f657-866 ================================================ */
   ...cut(L.S5),
@@ -191,7 +182,7 @@ export const SFX: Cue[] = [
 
   /* === S6 GATE f866-987 ==================================================
      ⭐ a STOP is a sound too: the belt runs down rather than cutting out. */
-  { at: S(L.S6), src: "m_pipe.wav", v: LEVELS.SFX_HERO * db(-3), dur: 0.42, rate: 0.60, lead: 0 },
+  { at: S(L.S6), src: "thock.wav", v: LEVELS.SFX_HERO * db(-3), dur: 0.42, rate: 0.60, lead: 0 },
   { at: S(L.S6), src: "sub.wav",    v: LEVELS.SFX_MID,           dur: 0.42, rate: 0.54, lead: 0 },
   ...run([900, 922], { src: "thock.wav", v: LEVELS.SFX_TEXTURE * db(3), dur: 0.16 }, 0.70, 0.08),
   ...cut(B.GATE_B, 1.08, 1.02),
@@ -207,7 +198,7 @@ export const SFX: Cue[] = [
      ⭐ THE VILLAIN'S SOUND IS REPETITION: the same press stroke at the same
      pitch, over and over. That IS the claim, so it is deliberately not varied. */
   ...cut(L.S8, 1.02, 0.94),
-  ...[1056, 1078, 1100].map(a => ({ at: S(a), src: "m_stomp.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.12, rate: 0.74 })),
+  ...[1056, 1078, 1100].map(a => ({ at: S(a), src: "c_stomp.wav", v: LEVELS.SFX_MID * db(-7), dur: 0.12, rate: 0.74 })),
   ...softCut(B.GEN_B, 1.04),
   ...run([1126, 1140], { src: "thock.wav", v: LEVELS.SFX_MID, dur: 0.16 }, 0.84, 0.12),
   ...cut(B.GEN_C, 1.06, 1.08),
@@ -232,31 +223,30 @@ export const SFX: Cue[] = [
   ...run([1482, 1508, 1526], { src: "thock.wav", v: LEVELS.SFX_MID, dur: 0.16 }, 0.76, 0.09), /* seals */
   ...softCut(B.CON_B, 1.02),
   { at: S(1534), src: "paper.wav", v: LEVELS.SFX_MID, dur: 0.30, rate: 0.70 },           /* it unrolls */
-  ...run([1550, 1572], { src: "m_bump.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.09 }, 0.78, 0.11),
+  ...run([1550, 1572], { src: "c_bump.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.09 }, 0.78, 0.11),
 
   /* === S13 MOST f1584-1637 · THE TROUGH ==================================
      ⛔ THE QUIETEST SCENE IN THE REEL, ON PURPOSE. A payoff needs something to
      be louder than. Two low cues as the floor stops, and then nothing at all. */
   { at: S(L.S13), src: "sub.wav",    v: LEVELS.SFX_MID,      dur: 0.42, rate: 0.48, lead: 0 },
-  { at: S(L.S13), src: "m_pipe.wav", v: LEVELS.SFX_TEXTURE,  dur: 0.42, rate: 0.54, lead: 0 },
+  { at: S(L.S13), src: "thock.wav", v: LEVELS.SFX_TEXTURE,  dur: 0.42, rate: 0.54, lead: 0 },
 
   /* === S14 HEAP f1637-1737 · THE VILLAIN WINS ============================ */
   ...cut(L.S14, 0.94, 0.92),
   ...run([1652, 1682], { src: "pop.wav", v: LEVELS.SFX_MID * db(-1), dur: 0.13 }, 0.72, 0.07),
-  { at: S(1698), src: "m_bump.wav", v: LEVELS.SFX_TEXTURE * db(3), dur: 0.09, rate: 0.62 },
+  { at: S(1698), src: "c_bump.wav", v: LEVELS.SFX_TEXTURE * db(3), dur: 0.09, rate: 0.62 },
   /* ⭐ and then a DULL thud and NOTHING. The silence after it is the joke. */
   { at: S(1704), src: "sub.wav", v: LEVELS.SFX_HERO * db(-3), dur: 0.42, rate: 0.46 },
   
   /* === S15 REWRITE f1737-1904 · THE PEAK ================================= */
   ...cut(L.S15, 1.08, 1.0),
   { at: S(1745), src: "paper.wav",  v: LEVELS.SFX_MID, dur: 0.30, rate: 0.92 },           /* lifted */
-  { at: S(1774), src: "m_pipe.wav", v: LEVELS.SFX_MID, dur: 0.42, rate: 1.10 },           /* fed in */
-  { at: S(1788), src: "key.wav", v: LEVELS.SFX_TEXTURE * db(3), dur: 0.04, rate: 0.92 },
+  { at: S(1774), src: "thock.wav", v: LEVELS.SFX_MID, dur: 0.42, rate: 1.10 },           /* fed in */
+  { at: S(1788), src: "key.wav", v: LEVELS.SFX_TEXTURE * db(-8), dur: 0.04, rate: 0.92 },
   ...cut(B.REW_B, 1.10, 0.96),
   { at: S(1832), src: "twang.wav", v: LEVELS.SFX_MID * db(-2), dur: 0.50, rate: 0.92 },   /* the ink floods */
   ...run([1852, 1870], { src: "blip5.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.22 }, 0.90, 0.13),
   { at: S(1878), src: "impact.wav", v: LEVELS.SFX_HERO * db(-5), dur: 0.62, rate: 1.12 }, /* the name stamps */
-  { at: S(1886), src: "m_powerup.wav", v: LEVELS.SFX_MID * db(-3), dur: 0.49, rate: 1.0 },
 
   /* === S16 TEAM f1904-2013 · THE PAYOFF =================================== */
   ...cut(L.S16, 1.06, 1.02),
@@ -270,11 +260,7 @@ export const SFX: Cue[] = [
   { at: S(2056), src: "pop.wav", v: LEVELS.SFX_MID, dur: 0.13, rate: 1.0 },
   ];
 
-/* ⛔⛔ THE BED IS PRE-TRIMMED TO ITS OWN FIRST DOWNBEAT (0.22s of the source),
-   because a soundtrack that "does not start at 0s" is usually the TRACK's own
-   intro air and not the envelope. Shaped to the house spectrum: lows out of the
-   voice's body, presence lifted toward the shipped 1200-1700Hz band, and the
-   sibilance region shelved so it never fights the consonants.  */
+/* House instrumental, trimmed at source 13.95s; original tempo, 5dB sentence-tail duck. */
 const BED = "dept143_bed.wav";
 const CAP_Y = 1272;
 export const BED_GAIN = db(5.0);
@@ -309,8 +295,7 @@ export const Reel: React.FC<{ quiet?: boolean }> = ({ quiet = false }) => {
         <AssemblyCtx.Provider value={true}>
           <div style={{ position: "absolute", inset: 0, filter: GRADE }}>
             {/* S0 HOOK — 2 shots, and the FIRST one carries the event */}
-            <Sequence from={L.S0} durationInFrames={B.HOOK_B - L.S0}><HOOK dur={B.HOOK_B - L.S0} cut={0} /></Sequence>
-            <Sequence from={B.HOOK_B} durationInFrames={L.S1 - B.HOOK_B}><HOOK dur={L.S1 - B.HOOK_B} cut={1} /></Sequence>
+            <Sequence from={L.S0} durationInFrames={L.S1}><DeptHookPolish dur={L.S1} /></Sequence>
 
             <Sequence from={L.S1} durationInFrames={B.DEPTS_B - L.S1}><DEPTS_SCENE dur={B.DEPTS_B - L.S1} cut={0} /></Sequence>
             <Sequence from={B.DEPTS_B} durationInFrames={L.S2 - B.DEPTS_B}><DEPTS_SCENE dur={L.S2 - B.DEPTS_B} cut={1} /></Sequence>
@@ -372,19 +357,19 @@ export const Reel: React.FC<{ quiet?: boolean }> = ({ quiet = false }) => {
    — the one frame guaranteed to be seen, and the feed thumbnail.
    ====================================================================== */
 const BANDS = [
-  { from: L.S0,  big: "AN ENTIRE AI TEAM",     hot: "FOR $0" },
+  { from: L.S0,  big: "BUILD YOUR AI TEAM",     hot: "5 FREE SKILL PACKS" },
   { from: L.S1,  big: "ONE FREE PACK",         hot: "PER DEPARTMENT" },
   { from: L.S2,  big: "A SKILL IS ONE FILE",   hot: "SKILL.md" },
-  { from: L.S3,  big: "45 MARKETING SKILLS",   hot: "AD CREATIVES · COPYWRITING" },
+  { from: L.S3,  big: "45+ MARKETING SKILLS",   hot: "AD CREATIVES · COPYWRITING" },
   { from: L.S5,  big: "17 SOCIAL SKILLS",      hot: "SCRIPTS · THUMBNAILS · IDS" },
   { from: L.S6,  big: "PAST CONTENT",          hot: "INTO THE BUILD" },
   { from: L.S7,  big: "UI UX PRO + TASTE",     hot: "DESIGN JUDGMENT" },
   { from: L.S8,  big: "NOT THE GENERIC",       hot: "AI LOOK" },
   { from: L.S9,  big: "8 FINANCE SKILLS",      hot: "STATEMENTS · VARIANCE" },
   { from: L.S11, big: "9 LEGAL SKILLS",        hot: "CONTRACTS · BRIEFS" },
-  { from: L.S13, big: "THE PART THAT MATTERS", hot: "ALMOST EVERYONE SKIPS IT" },
+  { from: L.S13, big: "THE PART THAT MATTERS", hot: "MAKE THEM YOURS" },
   { from: L.S15, big: "MAKE CLAUDE REWRITE IT", hot: "AROUND YOUR BUSINESS" },
-  { from: L.S16, big: "YOUR OWN AI TEAM",      hot: "FIVE DEPARTMENTS · $0" },
+  { from: L.S16, big: "YOUR OWN AI TEAM",      hot: "FIVE DEPARTMENTS" },
   { from: L.S17, big: "COMMENT DEPARTMENT",    hot: "FOR THE SETUP GUIDE" },
 ];
 const SectionBand: React.FC<{ f: number }> = ({ f }) => {

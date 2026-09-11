@@ -1,6 +1,7 @@
 import React from "react";
 import { Composition, registerRoot } from "remotion";
-import { Reel, DEPT_TOTAL, L } from "./ClaudeDept143Reel";
+import { Reel, DEPT_TOTAL, SFX } from "./ClaudeDept143Reel";
+import {SfxTrack} from './SoundKit';
 
 /* Reel 143 "DEPARTMENT". Board: storyboards/143-department.md.
    2132 frames = 71.07s. Eleven `cut cut` flubs cut from a 154.69s raw take,
@@ -13,6 +14,7 @@ const V = { fps: 30, width: 1080, height: 1920 } as const;
 
 export const ReelMain: React.FC = () => <Reel />;
 export const ReelQuiet: React.FC = () => <Reel quiet />;
+export const ReelSfx: React.FC = () => <SfxTrack cues={SFX}/>;
 
 /** ⭐ the hook, on its own, so it can be judged and re-cut without paying for a
     full render. ⛔ A solo hook comp has the reel's captions and progress rail by
@@ -20,6 +22,7 @@ export const ReelQuiet: React.FC = () => <Reel quiet />;
 const Root: React.FC = () => (<>
   <Composition id="dept-143" component={ReelMain} durationInFrames={DEPT_TOTAL} {...V} />
   <Composition id="dept-143-quiet" component={ReelQuiet} durationInFrames={DEPT_TOTAL} {...V} />
+  <Composition id="dept-143-sfx" component={ReelSfx} durationInFrames={DEPT_TOTAL} {...V} />
 </>);
 
 registerRoot(Root);

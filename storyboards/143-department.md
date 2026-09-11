@@ -1,4 +1,8 @@
 # STORYBOARD — REEL 143 DEPARTMENT (Stage 6)
+
+> Current delivery: September 11 revision below. The original September 8 board and its
+> checkboxes are retained as history; its hat-tower opening and two-cut hook are superseded.
+> Final source uses one continuously evolving 144-frame opening, followed by 28 body shots.
 > **Logline:** one person running every department themselves gets five free Claude skill packs — and the part that matters is not installing them, it is making Claude rewrite them around *your* business.
 > **Format:**   single dark panel · chassis cloned from reel 141 GRAVITY (`Gvt*` → `Dept*`, which re-exports `HwWorld` verbatim)
 > **Arc:**      value-first WITH a villain
@@ -186,3 +190,67 @@ says the winner is the calmest, and a payoff needs something to be louder than.
 - [x] ≥2 hard-cut framings in 5s, **and an EVENT inside the first** (the §2 correction: a cut is not an event)
 - [x] the header is constant across the cuts
 - [x] a transient on every cut, frame 0 heaviest
+
+
+## September 11 revision board
+
+The Drive FULL file has a newer green team machine hook than the Git source's hat tower.
+Neither is treated as a fresh approval. This pass rebuilds a reproducible opening and reviews
+the body against the source VO. Alex authorized autonomous iterative completion while asleep;
+we select the concept here without waiting for a new approval round.
+
+### Revised scene 0 0 to 4.8 seconds
+VO remains the original solo-founder / AI-team / zero-dollars line.
+Set: a bright cream and teal dispatch workshop with wall channels, meshed brass gears,
+a driven piston and a floor bench. Four depth planes; top-left light, grounded contact shadows.
+Camera: slight 1.00 to 1.065 push beginning at frame zero.
+Representation: physical metaphor. Claude is the operator; five skill modules are five
+departments; the drive routes specialized knowledge into five agents. It is not a claim of
+automatic hiring, or proof that Claude usage has no cost.
+Blocking: frame zero already contains the large operator pulling a lever and a running drive.
+f0–28 compression builds and the first skill seats; f28–66 five slots activate in overlapping
+steps; f66–104 the agents travel out into separate work positions. f104–143 they land with
+individual impact absorption, use their tools and produce outputs while the operator reacts.
+No pause after release, no unreadable small confetti, no long camera-only approach.
+Sound: tactile drive contact, sparse rising activation notes, launch and distinct landings.
+Header: BUILD YOUR AI TEAM / 5 FREE SKILL PACKS. The free claim refers to downloadable skills.
+Takeaway: one person can equip specialized agents for five departments.
+
+### Body review fixes selected before code
+S2: keep the readable file, bring Claude and his completed work inside the right safe bound;
+reduce walk distance so the hammer/created object do not finish outside the panel.
+S1, S4, S6–S12, S15: inspect the main operator at maximum push, bring edge operators inward
+and couple expression changes to each visible contact and result.
+S13: retain the purposeful short contrast beat, but make the hero's approach and stop readable.
+S15–S16: customized work must be the largest result and lead into five functioning departments.
+S17: finish on the complete spoken CTA without an extra end-card hold.
+
+### Internal critical review
+Swipe risk at 3–5s: resolved in the board by traveling agents, staggered landings and first outputs.
+Repeated base object: racks, conveyor, design press, ledger and legal seal stay distinct; the file
+is reserved for explaining skills and customizing them. No additional filler cards are proposed.
+Hierarchy risk: moving gear detail can compete with faces; slow subordinate gears after release,
+keep the operator large initially, then transfer the focal weight to the cast and their outputs.
+These are intentions until full-quality frames, playback and gates verify them.
+
+
+### September 11 final blocking and review
+
+The completed opening feeds large SKILL.md sheets into five machine sockets while Claude
+compresses the lever from frame zero. Five agents launch at staggered frames, absorb their
+landings, change expression and raise distinct results: poster, phone, blueprint, ledger,
+and legal scroll. These results continue through the final 1.5 seconds of the opening.
+The TEAM payoff reuses those five result shapes, rising into the five workspaces.
+MOST brings the hero forward to a larger, centered final pose before the customization lesson.
+The original turn, departmental examples, customization sequence and complete CTA remain.
+
+Final native frames reviewed: the hook, department examples, centered MOST approach,
+five distinct TEAM results, and the completed keyword board. Moving actor/prop groups
+and the keyword were brought inside the safe bounds. Scenery still crops for depth.
+
+Final export: 2132 frames at 30 fps, 71.0667 seconds, 1080 by 1920.
+All 29 motion scenes pass the 6.0 floor; median 9.32 exceeds 9.0, hook 6.04.
+Every-frame panel trace has no low-motion run longer than one frame at the documented
+0.6 threshold (limit 12). Actor pixels are already changing at frame zero.
+Look checks pass; the header-pill advisory remains nonblocking.
+These measurements and visual reviews do not predict audience retention.

@@ -1,5 +1,7 @@
 # Reel Build Learnings
 
+See [DEPARTMENT source and motion proof](memory/alex-department-source-and-motion-proof.md) for source/render mismatch, physical follow-through, moving safe bounds and expanded cue verification.
+
 Hard-won rules from building the Claude reels. Every entry below cost a revision cycle, a failed
 render, or a re-record. Read the section that matches what you are about to do.
 
