@@ -2,19 +2,18 @@ import React from 'react';
 import {Img, staticFile, useCurrentFrame} from 'remotion';
 import {Panel, Mascot} from './SlopKit';
 import {inter} from './fonts';
-import {actionFrame} from './DeptPerformance';
 
 /* DEPARTMENT creative reset. None of the rejected factory staging is imported.
    Frame coordinates are panel-local. Motion is authored as travel/contact/result,
    not the former kit's perpetual Hero and conveyor loops. */
 const W=1012,H=792,INK='#182329',PAPER='#F4E7C5',CLAY='#D97757';
-const PerformanceCtx=React.createContext({f:0,kind:'hook',cut:0});
+const ActingCtx=React.createContext({f:0,kind:'hook',cut:0});
 const colors=['#D66D46','#398D9E','#8260A5','#398B64','#A14E48'];
 const costumes=[{constr:1},{glasses:1},{beard:1},{prof:1},{suit:1}];
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
 const p=(f:number,a:number,b:number)=>clamp((f-a)/(b-a));
-const e=(f:number,a:number,b:number)=>1-Math.pow(1-p(f,a,b),3);
-const io=(f:number,a:number,b:number)=>{const t=p(f,a,b);return t*t*(3-2*t);};
+// Each movement has a fixed duration and steady travel; no shared speed ramp.
+const travel=(f:number,a:number,b:number)=>p(f,a,b);
 const mix=(a:number,b:number,t:number)=>a+(b-a)*t;
 const kick=(f:number,at:number,amp=12)=>f<at?0:amp*Math.sin((f-at)*.55)*Math.exp(-(f-at)/8);
 const arc=(t:number,h:number)=>-4*h*t*(1-t);
@@ -85,7 +84,7 @@ const Prop:React.FC<{kind:PropKind;x:number;y:number;s?:number;r?:number;c?:stri
 
 const Sprite:React.FC<{f:number;x:number;y:number;size?:number;i?:number;rot?:number;lean?:number;hit?:number;walk?:number;cheer?:number;shock?:number;stern?:number;gaze?:number;z?:number;plain?:boolean}>=
  ({f,x,y,size=240,i=0,rot=0,lean=0,hit=0,walk=0,cheer=0,shock=0,stern=0,gaze=0,z=35,plain=false})=>{
-  const ctx=React.useContext(PerformanceCtx);
+  const ctx=React.useContext(ActingCtx);
   const active=['office','skill','marketing','gateway','design','finance','legal','custom','team'].includes(ctx.kind);
   const beats=ctx.kind==='finance'?[16,31,52]:ctx.kind==='legal'?[24,43]:ctx.kind==='marketing'?[12,28,46]:ctx.kind==='design'?[9,26,43]:ctx.kind==='custom'?[17,36,62]:[14,35,58];
   const phase=ctx.f-i*3.7,dir=i%2?-1:1;
@@ -175,7 +174,7 @@ export const REBUILD_SHOTS=[
 const Hook:React.FC<{f:number;cut:number}>=({f,cut})=>{
  const g=f+(cut===0?0:cut===1?44:88);
  if(cut===0){
-  const lean=mix(-7,11,io(f,0,35))+kick(f,18,5),catch0=e(f,-6,18);
+  const lean=mix(-7,11,travel(f,0,35))+kick(f,18,5),catch0=travel(f,-6,18);
   return <><Svg z={15}><Desk x={514} y={727} w={790} c="#D7BB83"/>
    {tasks.map((k,i)=>{const pose=juggle(f,i);return <Prop key={k} kind={k} x={pose.x} y={pose.y} s={[.90,.85,.88,.79,.86][i]} r={pose.r}/>;})}</Svg>
    <Sprite f={f} x={mix(479,528,catch0)} y={713+kick(f,18,11)} size={340} rot={lean} hit={p(f,5,35)*.9} i={0} stern={.8} shock={f>22?1:0} gaze={f<20?-1:1}/>
@@ -184,7 +183,7 @@ const Hook:React.FC<{f:number;cut:number}>=({f,cut})=>{
   </>;
  }
  if(cut===2){
-  const q=io(f,-5,53),late=io(f,4,55);
+  const q=travel(f,-5,53),late=travel(f,4,55);
   const positions=[[200,615],[700,348],[852,460],[731,595]];
   return <><Svg z={14}><Desk x={529} y={699} w={837} c='#CFB781'/>
    <g transform={'translate(0 '+mix(-234,23,q)+')'}><Poster x={mix(780,532,q)} y={mix(426,431,q)} s={mix(.74,1.79,q)} reveal={q}/><path d='M374 219 H634' stroke='#674B31' strokeWidth='14'/></g>
@@ -192,40 +191,40 @@ const Hook:React.FC<{f:number;cut:number}>=({f,cut})=>{
    <Prop kind='megaphone' x={mix(261,291,late)} y={493} s={.9} r={mix(-32,9,late)}/>
    {[0,1,2].map(i=><path key={i} d={'M'+(356+i*16)+' '+(447-i*9)+' Q'+(380+i*19)+' 486 '+(355+i*16)+' '+(517+i*10)} fill='none' stroke='#C18F43' strokeWidth='5' opacity={late>i*.25?1:0}/>)}
   </Svg>
-  {positions.map(([x,y],i)=><Sprite key={i} f={f+i*13} x={x-36} y={y} size={i===0?181:154} i={i+1} rot={mix(-9,8,io(f,i*7,32+i*7))} cheer={f>25+i*4?1:0}/>)}
+  {positions.map(([x,y],i)=><Sprite key={i} f={f+i*13} x={x-36} y={y} size={i===0?181:154} i={i+1} rot={mix(-9,8,travel(f,i*7,32+i*7))} cheer={f>25+i*4?1:0}/>)}
   <Sprite f={f} x={mix(148,329,late)} y={748} size={323} i={0} rot={-5+late*9} cheer={late>.7?1:0}/>
   <HandLink x={mix(148,329,late)} y={748} size={323} tx={264} ty={558} side={-1}/>
   </>;
  }
  const xs=[136,306,476,646,816];
  return <><Svg z={15}><Desk x={506} y={743} w={880} c="#C9AE78"/>
-  {tasks.map((k,i)=>{const q=io(g,43+i*4,64+i*4),use=0,pose=juggle(44,i);return <g key={k}>
+  {tasks.map((k,i)=>{const q=travel(g,43+i*4,64+i*4),use=0,pose=juggle(44,i);return <g key={k}>
    <Prop kind={k} x={mix(pose.x,xs[i]+66,q)} y={mix(pose.y,591,q)+arc(q,54)} s={mix(1.10,.69,q)+use*.1} r={mix([-35,24,-23,18,37][i],0,q)+kick(g,67+i*5,12)}/>
    {cut===2&&<g transform={tr(xs[i],326,.58)} opacity={use}>
     {i===0?<Poster x={0} y={0} s={.8} reveal={use}/>:i===1?<Prop kind="camera" x={0} y={0} s={.8} r={-5+use*5}/>:i===2?<path d="M-84 51 V-61 H82 V51Z M-60 29 V-37 H58 V29Z M-8-37 V29" stroke="#866AAA" strokeWidth="14" fill="#EEDCB7"/>:i===3?<><path d="M-80 63 H84 M-60 47 V-8 M-10 47 V-47 M40 47 V-21" stroke="#3E8866" strokeWidth="20"/><path d="M-68-31 L-6-75 L55-58" stroke="#DDAE58" strokeWidth="9" fill="none"/></>:<><path d="M-61-80 H61 V80 H-61Z" fill={PAPER}/><path d="M-38-44 H36 M-38-16 H36" stroke="#9F7957" strokeWidth="10"/><path d="M-32 35 L-10 58 L39 0" stroke="#52875C" strokeWidth="13" fill="none"/></>}
    </g>}
   </g>;})}</Svg>
-  {xs.map((x,i)=>{const t=e(g,39+i*4,61+i*4);return <Sprite key={i} f={g+i*13} x={x} y={mix(904,690,t)+arc(t,70)} size={220} i={i} rot={mix(i%2?20:-20,0,t)+kick(g,61+i*4,7)} hit={Math.max(0,kick(g,61+i*4,.7))} walk={t<1?1:0} cheer={g>97+i*5?1:0} stern={g<81?1:0}/>;})}
-  {xs.map((x,i)=>{const q=io(g,43+i*4,64+i*4),t=e(g,39+i*4,61+i*4),pose=juggle(44,i);if(q<.9)return null;return <HandLink key={i} x={x} y={mix(904,690,t)+arc(t,70)} size={220} tx={mix(pose.x,xs[i]+66,q)} ty={mix(pose.y,591,q)+arc(q,54)}/>;})}
-  {cut===2&&<Sprite f={g} x={mix(508,502,e(g,88,114))} y={mix(835,784,e(g,88,109))} size={218} plain rot={kick(g,109,5)} cheer={1}/>}
+  {xs.map((x,i)=>{const t=travel(g,39+i*4,61+i*4);return <Sprite key={i} f={g+i*13} x={x} y={mix(904,690,t)+arc(t,70)} size={220} i={i} rot={mix(i%2?20:-20,0,t)+kick(g,61+i*4,7)} hit={Math.max(0,kick(g,61+i*4,.7))} walk={t<1?1:0} cheer={g>97+i*5?1:0} stern={g<81?1:0}/>;})}
+  {xs.map((x,i)=>{const q=travel(g,43+i*4,64+i*4),t=travel(g,39+i*4,61+i*4),pose=juggle(44,i);if(q<.9)return null;return <HandLink key={i} x={x} y={mix(904,690,t)+arc(t,70)} size={220} tx={mix(pose.x,xs[i]+66,q)} ty={mix(pose.y,591,q)+arc(q,54)}/>;})}
+  {cut===2&&<Sprite f={g} x={mix(508,502,travel(g,88,114))} y={mix(835,784,travel(g,88,109))} size={218} plain rot={kick(g,109,5)} cheer={1}/>}
  </>;
 };
 
 const Office:React.FC<{f:number;cut:number}>=({f,cut})=>{
  if(cut===1)return <><Svg z={15}><path d="M120 209 H892 L943 675 H69Z" fill="#BCA477" stroke="#213333" strokeWidth="11"/><path d="M151 242 H861 L897 636 H111Z" fill="#E9D9AB"/>
   <Prop kind="brief" x={506} y={440} s={1.05}/>
-  {tasks.map((k,i)=>{const t=io(f,i*8-4,42+i*8),a=(i/5)*Math.PI*2-Math.PI/2;return <Prop key={k} kind={k} x={mix(506+Math.cos(a)*393,506+Math.cos(a)*207,t)} y={mix(430+Math.sin(a)*265,430+Math.sin(a)*165,t)} s={mix(.84,1.37,t)} r={mix(36*(i%2?1:-1),0,t)}/>;})}
- </Svg><Sprite f={f} x={746} y={773} size={184} plain rot={mix(14,-3,e(f,28,58))} cheer={f>56?1:0}/></>;
+  {tasks.map((k,i)=>{const t=travel(f,i*8-4,42+i*8),a=(i/5)*Math.PI*2-Math.PI/2;return <Prop key={k} kind={k} x={mix(506+Math.cos(a)*393,506+Math.cos(a)*207,t)} y={mix(430+Math.sin(a)*265,430+Math.sin(a)*165,t)} s={mix(.84,1.37,t)} r={mix(36*(i%2?1:-1),0,t)}/>;})}
+ </Svg><Sprite f={f} x={746} y={773} size={184} plain rot={mix(14,-3,travel(f,28,58))} cheer={f>56?1:0}/></>;
  const pos=[[199,402],[484,433],[793,400],[327,698],[711,698]];
  return <><Svg z={10}><path d="M51 484 H962 V509 H51Z M470 168 V501" stroke="#162D36" strokeWidth="12"/>
   <path d="M62 487 H262 V721 H62 M952 487 H834 V721 H952" fill="none" stroke="#779A94" strokeWidth="12"/>
   {[535,586,637,688].map(y=><path key={y} d={'M62 '+y+' H262 M834 '+y+' H952'} stroke="#799890" strokeWidth="7"/>)}
-  {pos.map(([x,y],i)=><g key={i}><Desk x={x} y={y+54} w={i<3?245:292} c={i%2?'#B48C65':'#BAAD7D'}/><Prop kind={tasks[i]} x={x+43-48*io(f,35+i*6,68+i*6)} y={y-105+28*io(f,35+i*6,68+i*6)+arc(io(f,35+i*6,68+i*6),35)} s={.62} r={mix(-35,0,e(f,i*8,28+i*8))+mix(0,i%2?29:-29,io(f,35+i*6,68+i*6))}/></g>)}
- </Svg>{pos.map(([x,y],i)=>{const t=e(f,i*6-6,28+i*6),work=io(f,35+i*6,68+i*6);return <Sprite key={i} f={f+i*13} x={x-259+259*t+work*43} y={y+(i<3?76:30)} size={i<3?218:246} i={i} walk={t<1?1:0} rot={-9+work*17} cheer={work>.8?1:0} stern={work<.8?1:0}/>;})}</>;
+  {pos.map(([x,y],i)=><g key={i}><Desk x={x} y={y+54} w={i<3?245:292} c={i%2?'#B48C65':'#BAAD7D'}/><Prop kind={tasks[i]} x={x+43-48*travel(f,35+i*6,68+i*6)} y={y-105+28*travel(f,35+i*6,68+i*6)+arc(travel(f,35+i*6,68+i*6),35)} s={.62} r={mix(-35,0,travel(f,i*8,28+i*8))+mix(0,i%2?29:-29,travel(f,35+i*6,68+i*6))}/></g>)}
+ </Svg>{pos.map(([x,y],i)=>{const t=travel(f,i*6-6,28+i*6),work=travel(f,35+i*6,68+i*6);return <Sprite key={i} f={f+i*13} x={x-259+259*t+work*43} y={y+(i<3?76:30)} size={i<3?218:246} i={i} walk={t<1?1:0} rot={-9+work*17} cheer={work>.8?1:0} stern={work<.8?1:0}/>;})}</>;
 };
 
 const Skill:React.FC<{f:number;cut:number}>=({f,cut})=>{
- const t=p(f,-4,86),use=io(f,cut===0?22:-5,cut===0?84:79);
+ const t=p(f,-4,86),use=travel(f,cut===0?22:-5,cut===0?84:79);
  return <><Svg z={15}><Desk x={510} y={664} w={806}/></Svg>
   <Svg z={25}>{cut===0?<g transform={tr(mix(831,349,t),mix(511,383,t),mix(1.1,2.12,t),mix(-19,0,t))}>
    <Prop kind="file" x={0} y={0} s={1} progress={t}/><Label x={-2} y={-4} t="ROLE → TASK" size={15}/><Label x={-2} y={49} t="HOW TO WORK" size={14}/>
@@ -237,7 +236,7 @@ const Skill:React.FC<{f:number;cut:number}>=({f,cut})=>{
 };
 
 const Marketing:React.FC<{f:number;cut:number}>=({f,cut})=>{
- const q=cut===1?p(f,-8,65):io(f,-4,cut===0?40:53),late=cut===1?p(f,-6,65):io(f,24,cut===2?60:63);
+ const q=cut===1?p(f,-8,65):travel(f,-4,cut===0?40:53),late=cut===1?p(f,-6,65):travel(f,24,cut===2?60:63);
  return <><Svg z={15}>
   {cut===0?<g transform={'rotate('+mix(-17,0,q)+' 515 678)'}><path d="M215 178 H817 V668 H215Z" fill="#E6C48E" stroke="#704332" strokeWidth="16"/>
    <path d={'M245 632 V'+mix(622,212,q)+' H787 V632Z'} fill='#276B72'/>
@@ -264,12 +263,12 @@ const Film:React.FC<{f:number;x:number;y:number;w?:number;h?:number}>=({f,x,y,w=
    {[17,48,79,110,141].map(xx=><g key={xx}><rect x={xx} y="7" width="16" height="8" fill="#D6C59E"/><rect x={xx} y={h-15} width="16" height="8" fill="#D6C59E"/></g>)}
   </g>;})}</g></g>;
 const Social:React.FC<{f:number;cut:number}>=({f,cut})=>{
- const q=io(f,-4,cut===2?65:58),late=io(f,20,78);
+ const q=travel(f,-4,cut===2?65:58),late=travel(f,20,78);
  if(cut===0)return <><Sprite f={f} x={mix(475,600,q)} y={665+arc(p(f,-4,45),150)} size={418} hit={Math.max(0,kick(f,45,.8))} i={1} rot={mix(-12,8,q)} cheer={q>.6?1:0} gaze={-1}/>
   <Svg z={50}><path d="M211 536 L138 747 M211 536 L275 747 M211 536 V746" stroke="#B3B9A5" strokeWidth="14"/>
-   <Prop kind="camera" x={215} y={476} s={1.30} progress={1-Math.sin(Math.PI*p(f,16,28))}/><g transform={tr(213,mix(533,640,io(f,32,62)),.70)} opacity={e(f,31,37)}><rect x='-81' y='-105' width='162' height='210' fill={PAPER} stroke='#30434B' strokeWidth='6'/><rect x='-68' y='-92' width='136' height='160' fill='#6CACAA'/><foreignObject x='-77' y='-85' width='154' height='154'><div><Mascot lf={39} size={154} glasses={1} nodAmp={0} nodSpeed={1000} gaze={-1}/></div></foreignObject><path d='M-55 85 H55' stroke='#B4A480' strokeWidth='5'/></g>
+   <Prop kind="camera" x={215} y={476} s={1.30} progress={1-Math.sin(Math.PI*p(f,16,28))}/><g transform={tr(213,mix(533,640,travel(f,32,62)),.70)} opacity={travel(f,31,37)}><rect x='-81' y='-105' width='162' height='210' fill={PAPER} stroke='#30434B' strokeWidth='6'/><rect x='-68' y='-92' width='136' height='160' fill='#6CACAA'/><foreignObject x='-77' y='-85' width='154' height='154'><div><Mascot lf={39} size={154} glasses={1} nodAmp={0} nodSpeed={1000} gaze={-1}/></div></foreignObject><path d='M-55 85 H55' stroke='#B4A480' strokeWidth='5'/></g>
    <g transform={tr(692,239,.96,mix(-8,3,q))}><path d="M-110-34 H110 V57 H-110Z" fill="#18313D" stroke="#C1D0BA" strokeWidth="6"/>
-    <g transform={'rotate('+mix(-28,0,e(f,-4,17))+' -110 -34)'}><path d="M-110-62 H110 V-32 H-110Z" fill={PAPER}/>{[-90,-40,10,60].map(x=><path key={x} d={'M'+x+' -62 l30 0 -22 30 -30 0Z'} fill="#253D4A"/>)}</g>
+    <g transform={'rotate('+mix(-28,0,travel(f,-4,17))+' -110 -34)'}><path d="M-110-62 H110 V-32 H-110Z" fill={PAPER}/>{[-90,-40,10,60].map(x=><path key={x} d={'M'+x+' -62 l30 0 -22 30 -30 0Z'} fill="#253D4A"/>)}</g>
     <Label x={0} y={24} t="TAKE 01" c={PAPER} size={25}/></g>
    {f>17&&f<34&&<path d="M120 391 L97 372 M160 364 L152 337 M231 359 L239 330" stroke="#E6C16D" strokeWidth="7"/>}
   </Svg></>;
@@ -281,14 +280,14 @@ const Social:React.FC<{f:number;cut:number}>=({f,cut})=>{
  return <><Svg z={20}><Prop kind="phone" x={mix(627,453,q)} y={mix(452,390,q)} s={mix(1.63,2.60,q)} c="#4A7490"/><g transform={tr(mix(627,453,q),mix(452,390,q),mix(.74,1.18,q))}>
   <defs><clipPath id="portrait-film"><rect x="-98" y="-148" width="196" height="278" rx="14"/></clipPath></defs>
   <g clipPath="url(#portrait-film)"><rect x="-98" y="-148" width="196" height="278" fill="#B9C6A5"/>
-   <g transform={'translate('+mix(0,-414,io(f,4,64))+' 0)'}>{[0,1,2].map(i=><g key={i} transform={'translate('+(i*207)+' 0)'}><rect x="-98" y="-148" width="196" height="278" fill={['#6EA5A7','#D7A66D','#7A7C9E'][i]}/><circle cy="-18" r="48" fill="#D97757"/><path d="M-95 142 Q-7-36 92 142" fill={['#3D576F','#8B4E44','#424D5F'][i]}/><path d="M-70 91 H70 M-54 113 H54" stroke={PAPER} strokeWidth="11"/></g>)}</g>
+   <g transform={'translate('+mix(0,-414,travel(f,4,64))+' 0)'}>{[0,1,2].map(i=><g key={i} transform={'translate('+(i*207)+' 0)'}><rect x="-98" y="-148" width="196" height="278" fill={['#6EA5A7','#D7A66D','#7A7C9E'][i]}/><circle cy="-18" r="48" fill="#D97757"/><path d="M-95 142 Q-7-36 92 142" fill={['#3D576F','#8B4E44','#424D5F'][i]}/><path d="M-70 91 H70 M-54 113 H54" stroke={PAPER} strokeWidth="11"/></g>)}</g>
   </g></g><path d="M316 623 H688" stroke="#81B3AD" strokeWidth="8" strokeLinecap="round"/>
   <path d={'M316 623 H'+mix(340,688,q)} stroke="#E9BB67" strokeWidth="8" strokeLinecap="round"/>
  </Svg><Sprite f={f} x={mix(178,743,q)} y={726} size={272} i={1} rot={mix(-7,10,q)} cheer={1}/></>;
 };
 
 const Gateway:React.FC<{f:number;cut:number}>=({f,cut})=>{
- const q=io(f,-5,cut===0?70:45);
+ const q=travel(f,-5,cut===0?70:45);
  return <><Svg z={18}><path d="M209 217 H830 V589 H209Z" fill="#E6CAA3" stroke="#463346" strokeWidth="13"/>
   <path d="M242 253 H792 V535 H242Z M242 300 H792 M269 332 H510 V498 H269Z M545 335 H763 M545 384 H733 M545 432 H746" fill="none" stroke="#7F7395" strokeWidth="10"/>
   {cut===0?<><path d={'M183 103 H'+mix(856,240,q)+' V710 H183Z'} fill="#665172" stroke="#2B293D" strokeWidth="11"/>
@@ -311,7 +310,7 @@ const Website:React.FC<{x:number;y:number;s?:number;fresh?:number;open?:number}>
   </>}
  </g></g>;
 const Design:React.FC<{f:number;cut:number}>=({f,cut})=>{
- const q=io(f,-4,cut===0?56:cut===1?72:cut===2?58:51),late=io(f,13,69);
+ const q=travel(f,-4,cut===0?56:cut===1?72:cut===2?58:51),late=travel(f,13,69);
  if(cut===0)return <><Svg z={16}><Desk x={502} y={711} w={857}/><Website x={mix(651,511,q)} y={mix(449,405,q)} s={mix(.75,1.19,q)} fresh={q}/><Prop kind="caliper" x={mix(265,409,q)} y={mix(247,383,q)} s={1.07} r={mix(-33,0,q)}/><Prop kind="palette" x={mix(800,697,late)} y={mix(510,429,late)} s={.85}/>
   <Label x={252} y={207} t="UI UX PRO" c={PAPER} size={25}/><Label x={787} y={234} t="TASTE" c={PAPER} size={25}/>
  </Svg><Sprite f={f} x={322} y={771} size={255} i={2} rot={mix(-12,8,q)} stern={1}/></>;
@@ -332,7 +331,7 @@ const Design:React.FC<{f:number;cut:number}>=({f,cut})=>{
 const Statement:React.FC<{x:number;y:number;s?:number;reveal?:number;variance?:number}>=({x,y,s=1,reveal=1,variance=0})=><g transform={tr(x,y,s)}>
  <path d="M-195-185 H195 V186 H-195Z" fill="#E9DEB5" stroke="#284A40" strokeWidth="9"/>
  <Label x={0} y={-135} t={variance?'BUDGET / ACTUAL':'FINANCIAL STATEMENT'} size={variance?23:20}/>
- {[0,1,2,3,4].map(i=><g key={i} transform={'translate('+mix(-80,0,e(reveal*100,i*12,i*12+35))+' 0)'} opacity={reveal*100>i*12?1:0}>
+ {[0,1,2,3,4].map(i=><g key={i} transform={'translate('+mix(-80,0,travel(reveal*100,i*12,i*12+35))+' 0)'} opacity={reveal*100>i*12?1:0}>
   <path d={'M-161 '+(-85+i*44)+' H160'} stroke="#B4AF88" strokeWidth="3"/><rect x="-154" y={-108+i*44} width={57+i*10} height="13" fill="#68866A"/>
   <rect x="-16" y={-108+i*44} width={71} height="13" fill="#A9966B"/><rect x="87" y={-108+i*44} width={i===2&&variance?47:61} height="13" fill={i===2&&variance?'#C06A4D':'#689472'}/>
  </g>)}
@@ -340,11 +339,11 @@ const Statement:React.FC<{x:number;y:number;s?:number;reveal?:number;variance?:n
  <path d={'M74 156 H'+mix(75,158,reveal)} stroke="#3D7656" strokeWidth="14"/>
  </g>;
 const Finance:React.FC<{f:number;cut:number}>=({f,cut})=>{
- const q=io(f,-5,cut===0?51:cut===1?64:65),late=io(f,7,68);
+ const q=travel(f,-5,cut===0?51:cut===1?64:65),late=travel(f,7,68);
  return <><Svg z={15}><Desk x={508} y={687} w={827}/>
   {cut===0?<g transform={tr(487,419,mix(.64,2.21,q),mix(-13,0,q))}><Prop kind="ledger" x={0} y={0}/></g>:
    <><Statement x={cut===2?mix(571,465,q):mix(1135,584,q)} y={cut===2?mix(536,355,q):mix(318,424,q)} s={cut===2?1.22:1.49} reveal={q} variance={cut===2?1:0}/>
-    {cut===1?<g transform={tr(mix(162,257,q),mix(507,418,q),1,mix(-11,0,q))}><path d="M-78-167 H78 V163 H-78Z" fill="#36564B" stroke="#CCA666" strokeWidth="8"/>{Array.from({length:8},(_,i)=><g key={i}><path d={'M-61 '+(-130+i*36)+' H59'} stroke="#BDAC77" strokeWidth="6"/><rect x={mix(-59,12,e(f,i*5-3,i*5+19))} y={-142+i*36} width="35" height="24" rx="6" fill={i%2?'#DAA65D':'#81AC8A'}/></g>)}</g>:
+    {cut===1?<g transform={tr(mix(162,257,q),mix(507,418,q),1,mix(-11,0,q))}><path d="M-78-167 H78 V163 H-78Z" fill="#36564B" stroke="#CCA666" strokeWidth="8"/>{Array.from({length:8},(_,i)=><g key={i}><path d={'M-61 '+(-130+i*36)+' H59'} stroke="#BDAC77" strokeWidth="6"/><rect x={mix(-59,12,travel(f,i*5-3,i*5+19))} y={-142+i*36} width="35" height="24" rx="6" fill={i%2?'#DAA65D':'#81AC8A'}/></g>)}</g>:
      <><rect x={mix(541,461,q)} y={mix(395,286,q)} width="160" height="41" rx="7" fill="none" stroke="#BF6D48" strokeWidth="7"/><Prop kind="lens" x={mix(329,577,late)} y={mix(481,321,late)+kick(f,42,14)} s={1.46}/></>}
    </>}
  </Svg><Sprite f={f} x={cut===2?mix(172,333,q):mix(316,405,q)} y={750} size={279} i={3} rot={mix(-13,9,q)} stern={q<.8?1:0} cheer={q>.9?1:0} gaze={1}/></>;
@@ -354,17 +353,17 @@ const ContractSheet:React.FC<{f:number;x:number;y:number;s?:number;tabs?:boolean
  <path d="M-198-182 H198 V183 H-198Z" fill="#E9D7AF" stroke="#744A3C" strokeWidth="8"/>
  <Label x={0} y={-131} t="CONTRACT" size={29}/>
  {Array.from({length:7},(_,i)=><path key={i} d={'M-164 '+(-86+i*32)+' H'+(i===6?45:157)} stroke={i===3?'#9D5F4C':'#A89E7D'} strokeWidth="9"/>)}
- {tabs&&Array.from({length:9},(_,i)=><g key={i} transform={'translate('+mix(-28,0,e(f,i*3-4,i*3+15))+' 0)'}><path d={'M198 '+(-156+i*34)+' h32 v27 h-32'} fill={colors[i%5]}/></g>)}
+ {tabs&&Array.from({length:9},(_,i)=><g key={i} transform={'translate('+mix(-28,0,travel(f,i*3-4,i*3+15))+' 0)'}><path d={'M198 '+(-156+i*34)+' h32 v27 h-32'} fill={colors[i%5]}/></g>)}
  </g>;
 const Legal:React.FC<{f:number;cut:number}>=({f,cut})=>{
- const q=io(f,-4,cut===0?45:cut===1?56:52),late=io(f,10,cut===2?52:57);
+ const q=travel(f,-4,cut===0?45:cut===1?56:52),late=travel(f,10,cut===2?52:57);
  return <><Svg z={16}><Desk x={510} y={707} w={830} c="#B18E68"/>
   {cut===0?<g transform={'translate(0 '+mix(-84,0,q)+')'}><ContractSheet f={f} x={510} y={419} s={mix(.69,1.21,q)}/><path d="M250 192 H770 M250 644 H770" stroke="#AB774E" strokeWidth="22" strokeLinecap="round"/></g>:
    cut===1?<><ContractSheet f={f} x={mix(688,414,q)} y={mix(503,357,q)} s={1.19} tabs/><Prop kind="lens" x={mix(316,618,q)+Math.sin(q*Math.PI*2)*32} y={mix(411,358,q)-Math.sin(q*Math.PI)*54} s={1.39}/>
     <path d={'M349 449 H'+mix(352,672,late)} stroke="#B65640" strokeWidth="7"/>
    </>:<><ContractSheet f={f} x={mix(412,237,q)} y={mix(449,349,q)} s={.83}/><Prop kind="brief" x={mix(955,683,q)} y={mix(298,425,q)} s={1.43}/>
-    {[0,1,2].map(i=>{const t=io(f,i*10-3,i*10+24);return <path key={i} d={'M'+mix(370,625,t)+' '+mix(335+i*28,400+i*38,t)+' h'+mix(65,116,t)} stroke={i===1?'#B5654E':'#9D9068'} strokeWidth="13"/>;})}
-    <g transform={tr(716,531+kick(f,37,12),1)}><circle r={mix(0,35,e(f,32,41))} fill="#AA4F3D"/><path d="M-17 0 L-5 12 L19-15" fill="none" stroke="#F1D2A0" strokeWidth="7" opacity={e(f,37,46)}/></g>
+    {[0,1,2].map(i=>{const t=travel(f,i*10-3,i*10+24);return <path key={i} d={'M'+mix(370,625,t)+' '+mix(335+i*28,400+i*38,t)+' h'+mix(65,116,t)} stroke={i===1?'#B5654E':'#9D9068'} strokeWidth="13"/>;})}
+    <g transform={tr(716,531+kick(f,37,12),1)}><circle r={mix(0,35,travel(f,32,41))} fill="#AA4F3D"/><path d="M-17 0 L-5 12 L19-15" fill="none" stroke="#F1D2A0" strokeWidth="7" opacity={travel(f,37,46)}/></g>
    </>}
  </Svg><Sprite f={f} x={cut===2?mix(319,523,q):mix(872,738,q)} y={753} size={cut===0?284:276} i={4} rot={mix(13,-9,q)} stern={q<.8?1:0} cheer={q>.9?1:0} gaze={-1}/></>;
 };
@@ -377,12 +376,12 @@ const Suit:React.FC<{x:number;y:number;s?:number;fit?:number;f:number}>=({x,y,s=
  {[[-116,-34],[-49,36],[62,84],[149,40]].map(([xx,yy],i)=><g key={i} transform={tr(xx,yy,1,kick(f,10+i*8,13))}><rect x="-24" y="-17" width="48" height="34" rx="3" fill={colors[i]}/><path d="M-13-4 H13 M-13 6 H7" stroke="#ECDDAD" strokeWidth="5"/></g>)}
  </g>;
 const Turn:React.FC<{f:number}>=({f})=>{
- const q=e(f,-3,29),late=io(f,20,50);
+ const q=travel(f,-3,29),late=travel(f,20,50);
  return <><Sprite f={f} x={mix(478,518,q)} y={761} size={383} plain rot={mix(-8,0,q)} stern={1} gaze={0}/>
   <Svg z={45}><path d={'M664 512 L'+mix(697,787,q)+' '+mix(525,465,q)} stroke={CLAY} strokeWidth="41" strokeLinecap="square"/><Prop kind="brief" x={mix(128,225,late)} y={mix(603,391,late)} s={1.01} r={mix(-20,-5,late)}/></Svg></>;
 };
 const Tailor:React.FC<{f:number}>=({f})=>{
- const q=io(f,-8,37),fall=io(f,9,98),react=io(f,25,96);
+ const q=travel(f,-8,37),fall=travel(f,9,98),react=travel(f,25,96);
  return <><Svg z={15}><path d="M205 183 H825 M267 181 V758 M765 181 V758" stroke="#BC9E71" strokeWidth="14"/><path d="M499 155 V207 L365 277 H637 L499 207" fill="none" stroke="#B99B69" strokeWidth="11"/>
   <g transform={'rotate('+mix(-25,96,fall)+' 506 694)'}><Suit f={f} x={mix(505,345,fall)} y={mix(103,438,q)+fall*247} s={mix(.91,1.87,fall)} fit={0}/></g>
   <g transform={tr(688,mix(220,367,q),1,kick(f,35,17))}><path d="M-39-28 H38 V35 H-39 L-50 1Z" fill="#E4BF7D" stroke="#67564B" strokeWidth="5"/><Label x={0} y={16} t="50" size={38}/></g>
@@ -390,11 +389,11 @@ const Tailor:React.FC<{f:number}>=({f})=>{
  </>;
 };
 const Custom:React.FC<{f:number;cut:number}>=({f,cut})=>{
- const q=io(f,-4,cut===0?79:80),late=io(f,25,82);
+ const q=travel(f,-4,cut===0?79:80),late=travel(f,25,82);
  if(cut===0)return <><Svg z={15}><Desk x={505} y={704} w={883}/><path d="M267 178 H871 V571 H267Z" fill="#112C37" stroke="#709E9D" strokeWidth="13"/><path d="M291 224 H847" stroke="#416B70" strokeWidth="3"/>
   <Label x={315} y={209} t="CLAUDE CODE" anchor="start" size={25} c="#D6CAAA"/>
   <Label x={322} y={279} t="Rewrite for my business" anchor="start" size={25} c="#E5D3A6"/>
-  {['Audience','Brand voice','Workflow','Review rules'].map((t,i)=><g key={t} opacity={e(f,i*12,24+i*12)}><Label x={326} y={332+i*51} t={t} anchor="start" size={23} c="#A1C8B7"/><path d={'M546 '+(325+i*51)+' H'+mix(548,813,e(f,i*12+5,27+i*12))} stroke={i%2?'#BBA66E':'#649C94'} strokeWidth="11"/></g>)}
+  {['Audience','Brand voice','Workflow','Review rules'].map((t,i)=><g key={t} opacity={travel(f,i*12,24+i*12)}><Label x={326} y={332+i*51} t={t} anchor="start" size={23} c="#A1C8B7"/><path d={'M546 '+(325+i*51)+' H'+mix(548,813,travel(f,i*12+5,27+i*12))} stroke={i%2?'#BBA66E':'#649C94'} strokeWidth="11"/></g>)}
   <rect x={826} y={315+Math.min(3,Math.floor(Math.max(0,f)/17))*51} width={7} height={18} fill='#DFC47F' opacity={f%17<11?.95:.28}/>
   <Prop kind="brief" x={mix(128,592,q)} y={mix(564,350,q)+arc(q,76)} s={mix(.76,1.90,q)} r={mix(-17,0,q)}/>
  </Svg><Sprite f={f} x={mix(278,473,late)} y={765} size={289} plain rot={mix(-9,13,q)} stern={1}/></>;
@@ -402,7 +401,7 @@ const Custom:React.FC<{f:number;cut:number}>=({f,cut})=>{
   <g transform={tr(mix(272,432,q),mix(366,410,q),mix(1.53,.72,q),mix(-17,0,q))}><Suit f={f} x={0} y={0} fit={q}/></g>
   <Prop kind="brief" x={mix(955,679,q)} y={mix(247,406,q)+arc(q,85)} s={mix(.75,1.25,q)} r={mix(24,0,q)}/>
   <path d={'M293 492 L'+mix(295,443,late)+' '+mix(490,317,late)} stroke="#E5BF73" strokeWidth="10" strokeDasharray="12 7"/>
-  <path d="M652 511 L679 538 L740 472" stroke="#4F9B72" strokeWidth="16" fill="none" opacity={e(f,49,64)}/>
+  <path d="M652 511 L679 538 L740 472" stroke="#4F9B72" strokeWidth="16" fill="none" opacity={travel(f,49,64)}/>
  </Svg><Sprite f={f} x={mix(226,523,q)} y={754} size={289} plain rot={mix(-15,6,q)} cheer={q>.9?1:0} stern={q<.9?1:0}/>
  </>;
 };
@@ -410,10 +409,10 @@ const Team:React.FC<{f:number}>=({f})=>{
  const pos=[[172,447],[415,447],[770,446],[278,709],[745,709]];
  return <><Svg z={10}><path d="M80 516 H929" stroke="#142E37" strokeWidth="17"/><path d="M478 138 V516" stroke="#537D82" strokeWidth="13"/>
   <Desk x={506} y={689} w={413} c="#CEAA73"/>
-  {pos.map(([x,y],i)=><g key={i}><path d={'M'+(x-99)+' '+(y-70)+' H'+(x+99)+' V'+(y-49)+' H'+(x-99)+'Z'} fill="#A89671"/><Prop kind={tasks[i]} x={x+89} y={i<3?y-9:y-96} s={.54} r={mix(-15,0,e(f,i*8-3,27+i*8))}/></g>)}
+  {pos.map(([x,y],i)=><g key={i}><path d={'M'+(x-99)+' '+(y-70)+' H'+(x+99)+' V'+(y-49)+' H'+(x-99)+'Z'} fill="#A89671"/><Prop kind={tasks[i]} x={x+89} y={i<3?y-9:y-96} s={.54} r={mix(-15,0,travel(f,i*8-3,27+i*8))}/></g>)}
  </Svg>
- {pos.map(([x,y],i)=>{const q=io(f,i*7-6,38+i*7),give=io(f,20+i*7,80+i*7);return <Sprite key={i} f={f+i*17} x={x+give*(i%2?92:-92)} y={mix(y+183,y+(i<3?63:0),q)} size={i<3?194:212} i={i} rot={mix(-9,9,give)} stern={give<.8?1:0} cheer={give>.8?1:0}/>;})}
- <Svg z={47}>{pos.map(([x,y],i)=>{const q=io(f,i*10-6,61+i*10);return <g key={i} transform={tr(mix(x,426+i*40,q),mix(y-40,551-i*5,q)+arc(q,118),mix(.66,.47,q),mix(i%2?-18:18,0,q))}>
+ {pos.map(([x,y],i)=>{const q=travel(f,i*7-6,38+i*7),give=travel(f,20+i*7,80+i*7);return <Sprite key={i} f={f+i*17} x={x+give*(i%2?92:-92)} y={mix(y+183,y+(i<3?63:0),q)} size={i<3?194:212} i={i} rot={mix(-9,9,give)} stern={give<.8?1:0} cheer={give>.8?1:0}/>;})}
+ <Svg z={47}>{pos.map(([x,y],i)=>{const q=travel(f,i*10-6,61+i*10);return <g key={i} transform={tr(mix(x,426+i*40,q),mix(y-40,551-i*5,q)+arc(q,118),mix(.66,.47,q),mix(i%2?-18:18,0,q))}>
   {i===0?<Poster x={0} y={0} reveal={1}/>:i===1?<Prop kind="phone" x={0} y={0}/>:i===2?<Website x={0} y={0} s={.6} fresh={1}/>:i===3?<Statement x={0} y={0} s={.73}/>:<ContractSheet f={100} x={0} y={0} s={.73}/>}
  </g>;})}</Svg>
  <Svg z={52}><Prop kind='brief' x={mix(927,520,p(f,50,109))} y={mix(212,432,p(f,50,109))+arc(p(f,50,109),88)} s={mix(.72,1.57,p(f,50,109))} r={mix(25,-3,p(f,50,109))}/></Svg>
@@ -421,14 +420,14 @@ const Team:React.FC<{f:number}>=({f})=>{
  </>;
 };
 const Cta:React.FC<{f:number}>=({f})=>{
- const q=io(f,-7,39),late=io(f,40,113);
- return <><Svg z={15}><Desk x={509} y={708} w={799}/><g transform={tr(mix(847,546,io(f,-7,111)),mix(318,444,io(f,-7,111)),mix(.48,1.28,io(f,-7,111)),mix(19,-3,io(f,-7,111)))}>
+ const q=travel(f,-7,39),late=travel(f,40,113);
+ return <><Svg z={15}><Desk x={509} y={708} w={799}/><g transform={tr(mix(847,546,travel(f,-7,111)),mix(318,444,travel(f,-7,111)),mix(.48,1.28,travel(f,-7,111)),mix(19,-3,travel(f,-7,111)))}>
   <path d="M-231-152 H231 V152 H-231Z" fill="#EAD7A9" stroke="#456F64" strokeWidth="12"/>
   <Label x={0} y={-67} t="YOUR AI TEAM" size={35}/><path d="M-173-36 H173" stroke="#AD9D78" strokeWidth="5"/>
   <Label x={0} y={28} t="DEPARTMENT" size={51} c="#A75433"/>
   <Label x={0} y={97} t="SETUP GUIDE" size={26}/></g>
   <Prop kind="brief" x={mix(287,548,late)} y={mix(552,641,late)+arc(late,80)} s={.45} r={mix(-20,0,late)}/>
- </Svg><Sprite f={f} x={mix(153,287,io(f,-5,111))} y={mix(730,765,io(f,-5,111))} size={mix(258,315,io(f,-5,111))} plain rot={mix(-11,8,q)} cheer={q>.8?1:0}/>
+ </Svg><Sprite f={f} x={mix(153,287,travel(f,-5,111))} y={mix(730,765,travel(f,-5,111))} size={mix(258,315,travel(f,-5,111))} plain rot={mix(-11,8,q)} cheer={q>.8?1:0}/>
  </>;
 };
 
@@ -436,13 +435,13 @@ const typeSet:Record<string,SetKind>={hook:'studio',office:'office',skill:'workb
 export const DeptRebuild:React.FC=()=>{
  const root=useCurrentFrame();let row:typeof REBUILD_SHOTS[number]=REBUILD_SHOTS[0];
  for(const candidate of REBUILD_SHOTS)if(root>=candidate[0])row=candidate;
- const [at,,kind,cut]=row,f=actionFrame(at,root-at);
+ const [at,,kind,cut]=row,f=root-at;
  const set: SetKind=kind==='office'&&cut===1?'table':kind==='social'&&cut===1?'edit':typeSet[kind];
- const camera=kind==='hook'&&cut===0?1+.055*e(f,-1,20):1;
+ const camera=kind==='hook'&&cut===0?1+.055*travel(f,-1,20):1;
  const props={f,cut};
- return <Panel><PerformanceCtx.Provider value={{f,kind,cut}}><div style={{position:'absolute',inset:0,zIndex:1,transformOrigin:'50% 55%',transform:'scale('+camera+')'}}>
+ return <Panel><ActingCtx.Provider value={{f,kind,cut}}><div style={{position:'absolute',inset:0,zIndex:1,transformOrigin:'50% 55%',transform:'scale('+camera+')'}}>
   <Set kind={set} f={f}/>
   {kind==='hook'?<Hook {...props}/>:kind==='office'?<Office {...props}/>:kind==='skill'?<Skill {...props}/>:kind==='marketing'?<Marketing {...props}/>:kind==='social'?<Social {...props}/>:kind==='gateway'?<Gateway {...props}/>:kind==='design'?<Design {...props}/>:kind==='finance'?<Finance {...props}/>:kind==='legal'?<Legal {...props}/>:kind==='turn'?<Turn f={f}/>:kind==='tailor'?<Tailor f={f}/>:kind==='custom'?<Custom {...props}/>:kind==='team'?<Team f={f}/>:<Cta f={f}/>}
   <Foreground kind={set}/>
- </div></PerformanceCtx.Provider></Panel>;
+ </div></ActingCtx.Provider></Panel>;
 };

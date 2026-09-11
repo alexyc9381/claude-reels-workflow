@@ -1,6 +1,6 @@
 ---
 name: alex-department-source-and-motion-proof
-description: DEPARTMENT recreation rejection, varied action speeds, detailed sprite performance, source parity, safe moving bounds and honest audio verification
+description: DEPARTMENT recreation rejection, steady individual movements at different speeds, detailed sprite performance, source parity, safe moving bounds and honest audio verification
 metadata:
   type: workflow_learning
   source: DEPARTMENT revision and measured review on 2026-09-11
@@ -58,21 +58,21 @@ A hook's first mechanism needs a consequence before it feels finished: overload
 leads to a catch, then useful work. This is the production interpretation of Alex's
 repeated requests for immediate, anticipatory interest; it is not a retention claim.
 
-## Uniform easing is predictable too
+## Correction: different speeds between movements, not speed ramps within one
 
-Alex then asked for detailed animation throughout and explicitly rejected using the
-same motion speed across the video as predictable and boring. Vary the timing of
-the operation itself: a catch accelerates, a weighted object resists then releases,
-and an inspection deliberately slows before a quick correction. Changing the
-whole video playback speed would also change the narration and does not answer this.
+Alex rejected the pushed timing interpretation: “it randomly slows down then speeds
+up.” His clarification is that different objects and animations should have different
+speeds, while an individual movement should not change speed halfway through.
 
-Each of the 31 actions now has its own monotone timing curve, preserving scene and
-voice boundaries. Original Claude walking strides, work leans, eye leads and recoil
-have staggered phases; they are task actions, not one synchronized bob. Secondary
-shutter, lens-path and typing details follow the operation. Retiming a visual event
-requires retiming its sound through the inverse curve. Check the rendered result,
-including every-frame continuity, because a slow segment can create an idle interval.
-This implementation is a response to the feedback, not a record of user acceptance.
+The previous advice to create monotone scene timing curves and inverse-map sound
+was an assistant misinterpretation. It has been withdrawn. Do not retrieve that
+rejected implementation as a preference or reuse its shared action-clock ramps.
+
+Use the real timeline. Give each object/action its own fixed movement duration and
+staggered start: a short shutter action, a longer paper feed, a different character
+stride. Keep each travel continuous and steady. Distinct anticipation, contact and
+reaction are separate actions; they do not justify arbitrarily slowing and speeding
+the entire scene. Keep the sound on those actual event frames.
 
 ## Resolve the source before revising a delivered movie
 

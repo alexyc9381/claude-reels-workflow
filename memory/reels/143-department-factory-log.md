@@ -310,6 +310,8 @@ dependency graph. Shared SlopKit chrome and the original Mascot anatomy are reta
    sheet now has a separate weighted placement. The v8 source render passes all
    31 scene floors with median 9.04; final encoded-file checks follow below.
 
+### Historical rejected speed-ramp pass — not guidance
+
 8. Full decoded-frame QA caught 16 quiet frames at SKILL FILE's tail and 13 at the
    storefront head; action travel was extended into those intervals. Alex then
    explicitly called the repeated speed predictable and boring. The next performance
@@ -349,3 +351,12 @@ dependency graph. Shared SlopKit chrome and the original Mascot anatomy are reta
   media. The canonical current board, indexed rejection/timing learnings and complete
   DEPARTMENT registry row are included or linked. No creative acceptance, audience
   retention result or human listening check is claimed by these technical results.
+
+### User correction: withdraw shared speed ramps
+
+Alex explicitly rejected the pushed interpretation because the animation randomly
+slowed down and sped up. Different objects/animations should have different fixed
+speeds; an individual movement should not change speed halfway through. The prior
+scene-clock and inverse-sound advice is withdrawn, and its implementation removed.
+The current source uses real local frames and per-object fixed travel durations.
+This correction supersedes the historical speed-ramp review and its technical passes.

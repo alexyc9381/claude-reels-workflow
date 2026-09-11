@@ -1,5 +1,4 @@
 import {Cue,db} from './SoundKit';
-import {performanceSoundFrame} from './DeptPerformance';
 /* New actions, new soundtrack choreography. Explicit rows keep the delivered
    event inventory inspectable. [root frame, file, dB, duration, playback rate]. */
 export const REBUILD_SOUND_EVENTS: Array<[number,string,number,number,number]>=[
@@ -46,5 +45,5 @@ export const REBUILD_SOUND_EVENTS: Array<[number,string,number,number,number]>=[
  [2016,'paper.wav',-18,.30,.86],[2041,'chair_knock.wav',-14,.30,.94],[2067,'mallet_tap.wav',-14,.20,.95],
 ];
 export const DEPT_REBUILD_SFX:Cue[]=REBUILD_SOUND_EVENTS.map(([frame,src,gain,dur,rate])=>({
- at:performanceSoundFrame(frame)/30,src,v:db(gain),dur,rate,lead:frame===0?0:2,
+ at:frame/30,src,v:db(gain),dur,rate,lead:frame===0?0:2,
 }));

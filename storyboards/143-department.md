@@ -76,10 +76,8 @@ Technical scores remain separate from the creative assessment and user acceptanc
 
 ## Latest motion-direction correction
 
-Alex rejected uniform motion speed as predictable. The action clocks in
-[DeptPerformance.ts](../video/src/DeptPerformance.ts) define separate anticipation,
-drive, inspection and follow-through timing for all 31 shots. Narration, captions
-and cut boundaries remain unchanged. The SFX timeline uses the inverse action map.
-Walking legs have actual stride phases; work leans, eye leads and recoil vary by
-role and operation. Camera shutter aperture, finance/legal lens paths and the
-Claude Code typing cursor are operation-specific secondary actions.
+Alex rejected the scene-wide speed curves: movements randomly slowed down and sped
+up. Those curves are removed. Each object/action now uses its own fixed duration
+on the real timeline. Travel stays steady; a shutter, a paper feed, a stride and a
+curtain movement may differ in speed and start time. Contact/reaction are separate
+motions. No shared scene clock or inverse sound map is used.
