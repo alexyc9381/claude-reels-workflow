@@ -74,10 +74,28 @@ Sound is rewritten against these actions rather than inheriting the old factory'
 Review the opening and 3–7s handoff as motion; native frames expose geometry/collision defects.
 Technical scores remain separate from the creative assessment and user acceptance.
 
-## Latest motion-direction correction
+## Active performance revision: natural action speed
 
-Alex rejected the scene-wide speed curves: movements randomly slowed down and sped
-up. Those curves are removed. Each object/action now uses its own fixed duration
-on the real timeline. Travel stays steady; a shutter, a paper feed, a stride and a
-curtain movement may differ in speed and start time. Contact/reaction are separate
-motions. No shared scene clock or inverse sound map is used.
+Both the shared speed-ramp pass and the slow linear replacement were rejected.
+No scene clock warp is restored. The new timing uses short operations, a physical
+contact/result, then another useful operation. Narration and scene boundaries stay.
+The intervals below describe this revision, not a new universal timing system.
+
+| Section | New performance and construction detail |
+|---|---|
+| Hook | Fast alternating juggling flights, staggered 10-frame catches, quick poster placement then unroll, megaphone call and result confirmation |
+| Office / shared brief | Short staggered arrivals and role-specific work producing outputs; a bound book lands, opens and reveals five separately timed department chapters |
+| Skill / apply | File placed quickly; instruction rows revealed; pencil pulled and tested; three brush strokes create the result, then it is checked |
+| Marketing | Three roller passes, sequential awning and poster reveals, quick art strokes and individual copy lines; roller handle and fabric/rod details |
+| Content | Clapper closes, Claude jumps for shutter, photo feeds and is lifted; scissors/splice operate on film; finished reel makes discrete swipes and a tap |
+| Design | Curtain hauled on visible pulleys, wireframe drawn while Claude approaches the work; separate pencil strokes, caliper alignment and palette use; identical sites arrive then stack for comparison; stencil peels, layout recomposes and a mobile preview is pulled out for testing |
+| Finance | Three page turns; eight short bead moves reconcile rows; lens checks three positions, selects variance and raises an exception note |
+| Legal | Contract unrolls, tabs index it, lens inspections lead to a marked clause; evidence rows transfer separately and a physical stamp seals the brief |
+| Customization | Oversized suit drops/spills/collapses and Claude dodges, then measures; code stays readable while lines are rewritten; two scissor cuts lead to fitting and testing |
+| Payoff / guide | Five quick staggered transfers, final brief assembled/opened; guide lands quickly, role tabs extend, brief is delivered, binding opens and guide is handed forward |
+
+Quiet construction detail varies by setting: storefront masonry/awnings/planters,
+shoot lights/cables/floor marks, edit film cans, drafting rulers/swatches/drawers,
+archive bindings/cabinets, code controls/keyboard. Original Claude anatomy is kept;
+external hand-link geometry and generic automatic recoil are removed. Feet are
+aligned to the rig's actual foot baseline, not its padded SVG bounds.

@@ -1,6 +1,6 @@
 # Reel Build Learnings
 
-See [DEPARTMENT source and motion proof](memory/alex-department-source-and-motion-proof.md) for Alex’s explicit recreation rejection, whole-film concept revision, different steady speeds between objects/actions (mid-action speed ramps explicitly rejected), source/render mismatch, physical follow-through, moving safe bounds and expanded cue verification. Technical passes are not creative approval.
+See [DEPARTMENT source and motion proof](memory/alex-department-source-and-motion-proof.md) for Alex’s explicit recreation rejection, whole-film concept revision, natural action durations and complete operations (both shared speed ramps and stretched slow glides rejected), source/render mismatch, physical follow-through, moving safe bounds and expanded cue verification. Technical passes are not creative approval.
 
 Hard-won rules from building the Claude reels. Every entry below cost a revision cycle, a failed
 render, or a re-record. Read the section that matches what you are about to do.

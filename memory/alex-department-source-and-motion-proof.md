@@ -1,6 +1,6 @@
 ---
 name: alex-department-source-and-motion-proof
-description: DEPARTMENT recreation rejection, steady individual movements at different speeds, detailed sprite performance, source parity, safe moving bounds and honest audio verification
+description: DEPARTMENT recreation rejection, natural action timing, short complete operations, detailed sprite performance, source parity, safe moving bounds and honest audio verification
 metadata:
   type: workflow_learning
   source: DEPARTMENT revision and measured review on 2026-09-11
@@ -68,11 +68,37 @@ The previous advice to create monotone scene timing curves and inverse-map sound
 was an assistant misinterpretation. It has been withdrawn. Do not retrieve that
 rejected implementation as a preference or reuse its shared action-clock ramps.
 
-Use the real timeline. Give each object/action its own fixed movement duration and
-staggered start: a short shutter action, a longer paper feed, a different character
-stride. Keep each travel continuous and steady. Distinct anticipation, contact and
-reaction are separate actions; they do not justify arbitrarily slowing and speeding
-the entire scene. Keep the sound on those actual event frames.
+Use the real timeline and time sound to the actual action. Different operations can
+take different amounts of time. Do not drive every object from one scene-wide
+speed curve.
+
+## Follow-up rejection: steady but slow is still wrong
+
+Alex then rejected the replacement: most motion was “wayyyy too slow,” did not look
+natural, and needed more detail, interest and stronger animation. The correction
+above had removed the speed ramps while preserving 40–118-frame slides and grows.
+That was an assistant implementation error, not an accepted pacing preference.
+
+Judge duration against the action: closing a clapper, catching a tool, painting a
+stroke and hauling a curtain have different physical rhythms. A long linear glide
+is not more natural just because its speed is constant. The user rejected arbitrary
+mid-action speed ramps; that is not a ban on gravity, contact, recoil or normal
+physical follow-through. Avoid translating the clarification into rigid linearity
+everywhere.
+
+Replace one stretched move with a complete sequence of purposeful operations. In
+this revision the proposed examples are a quick clapper closure, a jump and shutter,
+then an actual print feed and pickup; or a sleeve cut, a second cut, fitting and a
+visible test. These are implementation examples, not universal frame-count gates or
+proof of approval. The remaining narration time needs another consequential action,
+not a slower arrival or unrelated motion.
+
+Add detail that explains construction and operation: paper hinges, roller handles,
+scissor blades, moving abacus beads, camera aperture/print transport, fabric seams,
+rope/pulley contact and keyed controls. Use the original sprite anatomy and timed
+gaze, stance, effort and expression changes. Generic recoil applied independently
+of the visible task is not a performance. Review the rendered action at normal
+playback speed before describing it as natural; metrics cannot settle this judgment.
 
 ## Resolve the source before revising a delivered movie
 

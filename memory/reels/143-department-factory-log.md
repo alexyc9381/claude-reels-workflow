@@ -362,7 +362,7 @@ scene-clock and inverse-sound advice is withdrawn, and its implementation remove
 The current source uses real local frames and per-object fixed travel durations.
 This correction supersedes the historical speed-ramp review and its technical passes.
 
-### Corrected steady-motion delivery checks
+### Historical checks — subsequently rejected steady-motion delivery
 
 - The final encoded correction uses real local frames with fixed travel durations
   for each object/action. Shared time warps and inverse sound mapping are removed.
@@ -378,3 +378,81 @@ This correction supersedes the historical speed-ramp review and its technical pa
   limited BT.709 with AAC 48kHz; the range and matrix are converted during encoding.
 - These checks establish technical integrity only; they do not establish creative
   approval, audience retention, or a human listening check.
+
+### Active revision: natural action speed, September 11 follow-up
+
+Alex rejected the steady-motion delivery as too slow, unnatural and insufficiently
+detailed/interesting. The previous correction removed scene speed ramps but kept
+long 40–118-frame translations. This is a separate defect; neither the 9.30 motion
+score nor the steady-travel rule makes it acceptable.
+
+Implemented change: replace stretched scene-length travel with short, physically
+plausible operations and a sequence of consequences: arrival, useful operation,
+contact, result, reaction. Author each object's timing directly, preserve original
+sprite anatomy and narration, add construction/operation detail, then review short
+normal-speed probes before the full export. No shared time warp is being restored.
+
+#### Internal moving-draft reviews
+
+- v14 replaced long travel with short per-object actions and removed automatic
+  scene-independent recoil. It was not delivered: shortened moves left weak
+  follow-through, crowding in the hook, and quiet regions in the atelier/guide.
+  Its motion audit reported 20/31 floor failures and median5.52.
+- v15 refined the hook spacing, made the illustrated retail campaign recognizable,
+  unfurled the actual poster material, added large inspection detail, handled cloth
+  as a collapsed pile, kept the code rewrite readable and opened the guide into
+  pages. It was not delivered: 16/31 motion floors failed, median5.90.
+- v16 enlarged individual operators and gave them work-position locomotion with
+  matching walking gait, instead of generic idle/recoil. Widened the paint surface,
+  opened the code screen quickly and clarified the reconciliation handoff. It was
+  not delivered: 7/31 floors failed, median6.93. Native/full-film review continued.
+- v17 strengthens the hook's primary result, unfolds the shared plan in separate
+  stages, makes the responsive test visible and hands out the custom brief only
+  after the rewrite completes. Technical checks and creative review are separate.
+- v18 replaces the shared-plan abstraction with a bound department book, improves
+  the hook handoff, fixes roller-to-hand contact and clips arriving UI inside its
+  browser. Its two floor failures were shared brief5.55 and start design5.54;
+  median7.06. It was not delivered.
+- v19 gives the book a quick physical placement and clearer operator action, and
+  frames the design setup more closely. Its remaining scene floor was start
+  design5.92. The decoded trace found 16 quiet frames in the atelier and identical
+  template tail, and 14 after recomposition. It was not delivered.
+- v20 draws the wireframe, stacks the identical sites for comparison and pulls out
+  an actual mobile preview. All 31 scene floors passed; median7.07 remained below
+  the documented9.0 target. The every-frame check still found the atelier's
+  16-frame near-still tail. It was not delivered.
+- v21 makes the atelier operator walk into position for the next drawing action,
+  connecting the wireframe reveal to the following shot. This addresses the last
+  decoded pause without slowing down an earlier operation or adding a shared
+  speed curve. Final measurements are recorded below after the encoded check.
+
+The cup/pastry campaign is an illustrative retail-work example drawn in SVG, not a
+claim about Alex's business or an external brand. The original source voice, caption
+timing and selected music remain unchanged. New motion/source reports supersede
+older rejected-pass reports only when the corresponding render is checked.
+
+#### Encoded natural-action revision — v21
+
+- Final picture: 1080×1920, 30fps, 2132 frames / 71.0667s. Actual full BT.601 to
+  limited BT.709 conversion, H.264/yuv420p and AAC48kHz. Original voice, captions,
+  and selected music are unchanged; contact sounds follow the new actions.
+- All31 per-scene motion floors pass. Weakest: DISTINCT RESULT6.03. Median7.07
+  remains below the documented9.0 motion-density target; this is explicitly not an
+  all-benchmarks pass. The previous9.30 edit was rejected as slow, so long glides
+  or unrelated motion were not reinstated to raise this number.
+- Every2132 frames decoded. Longest near-still panel run is12 frames, at the mobile
+  result, matching the12-frame bar. Frame0→1 MAD8.44. The atelier, template and
+  recomposition pauses found in earlier drafts were replaced with useful actions.
+- Delivery verifier9/9; caption text matches the known script.106 SFX layers across
+  105 starts,14 source files; actual separate SFX stem and expanded inventory
+  measured. Full-mix energy at105/105 starts is not proof of effect audibility by
+  itself. Mix spectral balance:36.8% above2kHz and9.7% below250Hz, both in band.
+- Look blocking checks pass: frame0 luma169.0, body saturation67.0%, black p10=26.5.
+  Header-pill11.9% and body luma107.8 remain reported advisories.
+- Inspected native frames and full-film midpoint sheets, plus sampled normal-speed
+  browser playback across the hook, work scenes, design and customization. Four
+  native source/package frames match exactly:0,930,1150,1968. The isolated package
+  contains eight transitive sources and its own required public media.
+- The guidance is linked from CLAUDE.md, MEMORY.md, animation craft and build
+  learnings; the registry/index check passes. These are production findings, not
+  a record of user creative acceptance, measured retention or human listening.
