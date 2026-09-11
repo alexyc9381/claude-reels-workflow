@@ -1,0 +1,685 @@
+{
+  "variant": "assembly",
+  "duration": 44.8,
+  "cue_count": 67,
+  "cue_rate": 1.4955357142857144,
+  "voice_RMS_dB": -20.334563018137096,
+  "music_RMS_dB": -34.36125183105469,
+  "sfx_RMS_dB": -32.01721256178063,
+  "peak_prelimit": 0.9091192679479718,
+  "music_source": "User house soundtrack: Another Day Of Sun instrumental",
+  "music_source_offset_seconds": 137.41,
+  "music_source_end_seconds": 182.21,
+  "cues": [
+    {
+      "seconds": 0.0,
+      "frame": 0,
+      "name": "impact",
+      "role": "hero",
+      "action": "Keyboard halves already converge around AI core",
+      "gain_db": -2.99,
+      "sfx_A120_db": -24.73,
+      "tail_s": 0.64
+    },
+    {
+      "seconds": 0.0,
+      "frame": 0,
+      "name": "lever",
+      "role": "texture",
+      "action": "Claude drives assembly mechanism",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 0.5,
+      "frame": 15,
+      "name": "paper",
+      "role": "texture",
+      "action": "Keyboard halves approach socket",
+      "gain_db": -16.27,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 0.9,
+      "frame": 27,
+      "name": "thock",
+      "role": "hero",
+      "action": "Keyboard halves connect",
+      "gain_db": -3.07,
+      "sfx_A120_db": -29.81,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 1.1,
+      "frame": 33,
+      "name": "key",
+      "role": "support",
+      "action": "Processor locks into laptop",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 1.3333,
+      "frame": 40,
+      "name": "lever",
+      "role": "texture",
+      "action": "Laptop lid opens",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 1.9,
+      "frame": 57,
+      "name": "unlock",
+      "role": "support",
+      "action": "Assembled computer powers on",
+      "gain_db": -23.49,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.28
+    },
+    {
+      "seconds": 2.3,
+      "frame": 69,
+      "name": "lever",
+      "role": "texture",
+      "action": "Claude jumps as processing nodes unfold",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 2.9333,
+      "frame": 88,
+      "name": "thock",
+      "role": "texture",
+      "action": "Claude lands beside active laptop",
+      "gain_db": -9.26,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 3.3333,
+      "frame": 100,
+      "name": "lever",
+      "role": "texture",
+      "action": "Processor turns and locks",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 4.1667,
+      "frame": 125,
+      "name": "pickup",
+      "role": "texture",
+      "action": "Packets travel to connected nodes",
+      "gain_db": -25.32,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.33
+    },
+    {
+      "seconds": 5.0,
+      "frame": 150,
+      "name": "paper",
+      "role": "support",
+      "action": "Display opens into actual LM Studio website",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 5.7333,
+      "frame": 172,
+      "name": "key",
+      "role": "support",
+      "action": "OS menu, OS selection, and installer Download click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 6.3667,
+      "frame": 191,
+      "name": "key",
+      "role": "support",
+      "action": "OS menu, OS selection, and installer Download click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 7.1,
+      "frame": 213,
+      "name": "key",
+      "role": "support",
+      "action": "OS menu, OS selection, and installer Download click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 8.3333,
+      "frame": 250,
+      "name": "paper",
+      "role": "support",
+      "action": "installed LM Studio app opens",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 9.5667,
+      "frame": 287,
+      "name": "key",
+      "role": "support",
+      "action": "model-search and original-source navigation click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 10.2333,
+      "frame": 307,
+      "name": "key",
+      "role": "support",
+      "action": "model-search and original-source navigation click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 11.6333,
+      "frame": 349,
+      "name": "key",
+      "role": "support",
+      "action": "model-search and original-source navigation click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 12.5,
+      "frame": 375,
+      "name": "key",
+      "role": "support",
+      "action": "model-search and original-source navigation click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 13.0,
+      "frame": 390,
+      "name": "key",
+      "role": "support",
+      "action": "model-search and original-source navigation click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 10.4,
+      "frame": 312,
+      "name": "terminal",
+      "role": "texture",
+      "action": "query characters enter the actual search box",
+      "gain_db": -9.72,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 10.6667,
+      "frame": 320,
+      "name": "terminal",
+      "role": "texture",
+      "action": "query characters enter the actual search box",
+      "gain_db": -9.72,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 10.9333,
+      "frame": 328,
+      "name": "terminal",
+      "role": "texture",
+      "action": "query characters enter the actual search box",
+      "gain_db": -9.72,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 14.0333,
+      "frame": 421,
+      "name": "key",
+      "role": "support",
+      "action": "cursor selects the spoken quantization option",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 14.5667,
+      "frame": 437,
+      "name": "key",
+      "role": "support",
+      "action": "cursor selects the spoken quantization option",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 15.3333,
+      "frame": 460,
+      "name": "key",
+      "role": "support",
+      "action": "cursor selects the spoken quantization option",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 16.0667,
+      "frame": 482,
+      "name": "key",
+      "role": "support",
+      "action": "cursor selects the spoken quantization option",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 17.5333,
+      "frame": 526,
+      "name": "key",
+      "role": "support",
+      "action": "open and select the real compression dropdown",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 18.8,
+      "frame": 564,
+      "name": "key",
+      "role": "support",
+      "action": "open and select the real compression dropdown",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 20.0,
+      "frame": 600,
+      "name": "key",
+      "role": "support",
+      "action": "open and select the real compression dropdown",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 20.8,
+      "frame": 624,
+      "name": "key",
+      "role": "support",
+      "action": "open and select the real compression dropdown",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 22.4333,
+      "frame": 673,
+      "name": "key",
+      "role": "support",
+      "action": "compare the available memory estimates",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 23.6333,
+      "frame": 709,
+      "name": "key",
+      "role": "support",
+      "action": "compare the available memory estimates",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 26.8,
+      "frame": 804,
+      "name": "paper",
+      "role": "support",
+      "action": "move from too-large 27B to the 1.7B model used on this Mac",
+      "gain_db": -12.27,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.25
+    },
+    {
+      "seconds": 28.0667,
+      "frame": 842,
+      "name": "key",
+      "role": "support",
+      "action": "actual model Download click",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 29.9333,
+      "frame": 898,
+      "name": "unlock",
+      "role": "hero",
+      "action": "actual download completes",
+      "gain_db": -18.49,
+      "sfx_A120_db": -27.0,
+      "tail_s": 0.28
+    },
+    {
+      "seconds": 30.8333,
+      "frame": 925,
+      "name": "key",
+      "role": "support",
+      "action": "close search and click My Models",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 31.6333,
+      "frame": 949,
+      "name": "key",
+      "role": "support",
+      "action": "close search and click My Models",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 33.6,
+      "frame": 1008,
+      "name": "key",
+      "role": "support",
+      "action": "select model, click cog, then Use in New Chat",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 34.9,
+      "frame": 1047,
+      "name": "key",
+      "role": "support",
+      "action": "select model, click cog, then Use in New Chat",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 36.3,
+      "frame": 1089,
+      "name": "key",
+      "role": "support",
+      "action": "select model, click cog, then Use in New Chat",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 37.5333,
+      "frame": 1126,
+      "name": "unlock",
+      "role": "hero",
+      "action": "the local model is ready",
+      "gain_db": -18.49,
+      "sfx_A120_db": -27.0,
+      "tail_s": 0.28
+    },
+    {
+      "seconds": 38.4333,
+      "frame": 1153,
+      "name": "key",
+      "role": "support",
+      "action": "click the chat input",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 38.6333,
+      "frame": 1159,
+      "name": "terminal",
+      "role": "texture",
+      "action": "real prompt text is entered",
+      "gain_db": -9.72,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 38.9667,
+      "frame": 1169,
+      "name": "terminal",
+      "role": "texture",
+      "action": "real prompt text is entered",
+      "gain_db": -9.72,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 39.3333,
+      "frame": 1180,
+      "name": "terminal",
+      "role": "texture",
+      "action": "real prompt text is entered",
+      "gain_db": -9.72,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.44
+    },
+    {
+      "seconds": 39.9,
+      "frame": 1197,
+      "name": "key",
+      "role": "support",
+      "action": "click Send",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 40.9,
+      "frame": 1227,
+      "name": "pickup",
+      "role": "support",
+      "action": "camera resolves onto the generated Python function",
+      "gain_db": -21.32,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.33
+    },
+    {
+      "seconds": 43.7889,
+      "frame": 1314,
+      "name": "key",
+      "role": "support",
+      "action": "illustrated comment field and arrow press",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 44.2111,
+      "frame": 1326,
+      "name": "key",
+      "role": "support",
+      "action": "illustrated comment field and arrow press",
+      "gain_db": -8.6,
+      "sfx_A120_db": -32.0,
+      "tail_s": 0.075
+    },
+    {
+      "seconds": 44.3889,
+      "frame": 1332,
+      "name": "unlock",
+      "role": "hero",
+      "action": "Claude reacts to the completed setup",
+      "gain_db": -18.49,
+      "sfx_A120_db": -27.0,
+      "tail_s": 0.28
+    },
+    {
+      "seconds": 14.5667,
+      "frame": 437,
+      "name": "thock",
+      "role": "texture",
+      "action": "Claude lands on the selected quantization step",
+      "gain_db": -9.26,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 15.3333,
+      "frame": 460,
+      "name": "thock",
+      "role": "texture",
+      "action": "Claude lands on the selected quantization step",
+      "gain_db": -9.26,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 16.0667,
+      "frame": 482,
+      "name": "thock",
+      "role": "texture",
+      "action": "Claude lands on the selected quantization step",
+      "gain_db": -9.26,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 18.5667,
+      "frame": 557,
+      "name": "lever",
+      "role": "texture",
+      "action": "Claude drives the precision press",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 20.5667,
+      "frame": 617,
+      "name": "lever",
+      "role": "texture",
+      "action": "Claude drives the precision press",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 31.6333,
+      "frame": 949,
+      "name": "lever",
+      "role": "texture",
+      "action": "the miniature model drawer opens",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 34.3,
+      "frame": 1029,
+      "name": "lever",
+      "role": "texture",
+      "action": "Claude turns the connected model crank",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 35.6333,
+      "frame": 1069,
+      "name": "lever",
+      "role": "texture",
+      "action": "Claude turns the connected model crank",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 36.9333,
+      "frame": 1108,
+      "name": "lever",
+      "role": "texture",
+      "action": "Claude turns the connected model crank",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 41.6,
+      "frame": 1248,
+      "name": "thock",
+      "role": "texture",
+      "action": "Claude lands after the actual code result",
+      "gain_db": -9.26,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 43.9222,
+      "frame": 1318,
+      "name": "lever",
+      "role": "texture",
+      "action": "Claude launches toward the comment arrow",
+      "gain_db": -11.53,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.187
+    },
+    {
+      "seconds": 44.5,
+      "frame": 1335,
+      "name": "thock",
+      "role": "texture",
+      "action": "Claude lands after pressing the illustrated arrow",
+      "gain_db": -9.26,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.16
+    },
+    {
+      "seconds": 28.6333,
+      "frame": 859,
+      "name": "pickup",
+      "role": "texture",
+      "action": "Claude receives a packet at the captured download-progress change",
+      "gain_db": -25.32,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.33
+    },
+    {
+      "seconds": 29.0667,
+      "frame": 872,
+      "name": "pickup",
+      "role": "texture",
+      "action": "Claude receives a packet at the captured download-progress change",
+      "gain_db": -25.32,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.33
+    },
+    {
+      "seconds": 29.4333,
+      "frame": 883,
+      "name": "pickup",
+      "role": "texture",
+      "action": "Claude receives a packet at the captured download-progress change",
+      "gain_db": -25.32,
+      "sfx_A120_db": -36.0,
+      "tail_s": 0.33
+    }
+  ]
+}

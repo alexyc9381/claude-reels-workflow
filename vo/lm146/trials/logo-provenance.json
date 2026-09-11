@@ -1,0 +1,8 @@
+{
+  "source": "https://huggingface.co/spaces/Qwen/Qwen3-Demo/resolve/main/assets/qwen.png",
+  "official_reference": "https://huggingface.co/spaces/Qwen/Qwen3-Demo/blob/main/ui_components/logo.py",
+  "asset": "video/public/lm146/qwen-official.png",
+  "sha256": "50660a07fbe5578cc31d452aaf543eb24b8884ccd44c114a68acd18532d380cf",
+  "format": "600x600 RGBA PNG",
+  "treatment": "Unchanged original image, scaled proportionally. Used on both processor modules and the Assembly display processor."
+}

@@ -1,0 +1,27 @@
+{
+  "all_matched": true,
+  "frames": {
+    "plug:0": true,
+    "plug:118": true,
+    "plug:195": true,
+    "assembly:0": true,
+    "assembly:118": true,
+    "assembly:195": true
+  },
+  "composition_duration": 1344,
+  "fps": 30,
+  "source_hashes": {
+    "video/src/fonts.ts": "e0b22b7b893cd5a1e3717afd45d1eb11f12289440b0abd0478fa0d4e65843fee",
+    "video/src/ClaudeLM146Reel.tsx": "5bb8260d636725ca5fcf50bc030d44e963ce9792e4f43f96f55235fa5c2f0efd",
+    "video/src/LM146Hook.tsx": "ae62acaabf74535cbb934da0bc4e116ec0cdc0e2f881b1acc7429a37585a0995",
+    "video/src/lm146-cover-index.tsx": "b08ff278dc95a5c27bda029808ff8c37297165c20fc28cf2fa9c2e3fc6bc87e4",
+    "video/src/LM146AnimationKit.tsx": "7a210a972ba9330854de286642da2c01f7cbec623a36daa18a463ff613573946",
+    "video/src/LM146TrialHooks.tsx": "97eaad7a06b937fa5a72c1b197403ad9f2b42de41846d971c7e4b6e55a1aa967",
+    "video/src/LM146Cover.tsx": "9325aaecb8e7ad85ff2f7d4b6b57c558825d64cbf048c9e006bc2a76d2bded9f",
+    "video/src/SlopKit.tsx": "7e76e7d06dc10feb744607c49a7bb1825f87caa6e67084f86d08679aecca66f5",
+    "video/src/lm146-index.tsx": "585ab20d93de54ca7ae2b63a553660ddb8850aef3b6f10c4c8da2cb166131631",
+    "video/src/data/edl_lm146.json": "b1a9915775ca5f4448f8e4ebd93cefcf098efbeadb55a861b350470eb0958e1a",
+    "video/src/data/words_lm146.json": "6cafbe8f31e9f074ef2c77e0a95527dd2fcb5ac827d31087cb5b17af845f9a02"
+  },
+  "logo_sha256": "50660a07fbe5578cc31d452aaf543eb24b8884ccd44c114a68acd18532d380cf"
+}

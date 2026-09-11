@@ -183,3 +183,29 @@ R25 makes the middle readable and active (2–3s bucket14.74; 3–4s5.28), but i
 Delivery replaces the existing MP4, editable ZIP and notes file IDs in 146 - LM. The cover, post caption, subtitles, actual demonstration and published guide remain unchanged.
 
 Standalone source3.3.0 bundles as1080×1920 /1344frames, and its frame1 is pixel-identical to the main source. ZIP integrity and file checksums were verified.
+
+
+## Trial B/C brief — two additional hooks
+
+User explicitly requests two additional trial reels with different hooks and different sections of the existing soundtrack, uploaded to the same146 - LM subfolder with clear filenames. Preserve R26 as the control. Create Trial B Plug-In (horizontal model cartridge feeds into a desktop computer, then Claude activates its keyboard) and Trial C Assembly (laptop pieces converge around an AI core, then the lid opens and the computer activates). These are distinct mechanisms and compositions, not grade/crop variations. Both use the original Claude and exact all-caps title, immediate subject motion and slight push, illustration through five seconds, a shared-geometry handoff before the originalf172 click, and the same44.800s narration/demo/CTA. Music passages are disjoint from the control13.95–58.75s: candidate source onsets74.22s and137.41s, selected from audible rising transients in the original228.57s instrumental. Each hook has its own Foley map; the body cue times remain.
+
+Measurement scope: run opening look/motion per cut and compare matched hook frames visually. Record both hook-only and full-reel dHash results honestly. The later body is intentionally the same for the hook experiment, so whole-reel hash similarity is expected; do not degrade or alter the actual demo to force a hash score, and do not claim any platform duplicate-detection guarantee. Names:146-LM-Trial-B-Plug-In.mp4 and146-LM-Trial-C-Assembly.mp4. Additional source archive and mapping notes carry their identities, music offsets and review results.
+
+
+### Trial hook production and revisions
+
+- Built two independent mechanisms around the same narration and native demo: B feeds a processor horizontally into a desktop; C assembles a laptop and unfolds its processing network. Both move before the camera push and preserve the original Claude palette and shared header/progress system.
+- R1 review: B's module was obscured by its display and its first-frame luma was 122.5; C's entering keyboard parts extended off the stage. R2 moved the module in front, used the lighter dormant display, advanced the boot response and brought the keyboard parts inside the stage. B's preview motion rose from 6.43 to 7.94; C's to 6.73.
+- User asked for the real Qwen logo. Retrieved the unchanged 600×600 transparent mark from the official Qwen3 demo, placed it on both modules, and gave C a larger square logo reveal in the processing network. Source and SHA-256 are in `vo/lm146/trials/logo-provenance.json`.
+- R3 full audit caught B's 18-frame near-static interval at 3.8–4.3 seconds despite passing average hook motion. R4 enlarges the code reply and adds Claude's reaction jump/landing at frames 113–133, with matched Foley. Its probe reduces the longest near-static interval to 3 frames. This was a physical-action fix, not background motion added to hide a pause.
+- B uses source music 74.22–119.02 seconds; C uses 137.41–182.21 seconds. Control remains 13.95–58.75. No tempo stretching. Middle-section spectrogram correlations are recorded, rather than comparing envelopes driven by identical fades.
+- Both use 67 cues. The 55 original demo/CTA events are preserved. The picture and audio still stop at exactly 44.800 seconds after “setup.”
+- Standalone package verification reproduces B and C at frames 0, 118 and 195 exactly. The packaged SFX audit normalizes relative paths; no thresholds or audio measurements are changed. A disk-space interruption was resolved by deleting only this task's untracked generated preview bundles, then rerunning B's export.
+
+### Final trial checks
+
+- plug: 7,771,486 bytes; hook luma 155.26, first-5 motion 8.32; hook                      8.07      0.070       3     20%  ok; loudness -17.18 LUFS, true peak -1.31 dBTP. Technical 9/9 and 67/67 declared cues pass; H.264, TV-range YUV420p, BT.709, stereo 48 kHz AAC, 1344 frames, video/audio/container all 44.800 seconds, faststart verified.
+- assembly: 7,955,079 bytes; hook luma 168.69, first-5 motion 7.34; hook                      7.18      0.114       9     12%  ok; loudness -17.19 LUFS, true peak -1.31 dBTP. Technical 9/9 and 67/67 declared cues pass; H.264, TV-range YUV420p, BT.709, stereo 48 kHz AAC, 1344 frames, video/audio/container all 44.800 seconds, faststart verified.
+- Both hook motion scenes pass; the shared demo retains six inherited low-motion scene warnings and median 4.55 vs the house animation reference of 9. The demo focus is intentional, so these do not get disguised as an all-creative-gates pass. The title-plate detector warning uses legacy geometry; title and cursor remain visually checked at phone size.
+- Matched hook dHash: A/B mean 22.83 min 15, A/C 24.00 min 15, B/C 24.83 min 13. Whole-reel min remains zero because the demo is shared. No assertion about Instagram duplicate matching or retention follows from this metric.
+- Existing control MP4 SHA-256 remains ed62b354741a1333c044f52616c540e29afd69fe0685eeb447559d94b1fc96b7.

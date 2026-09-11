@@ -1,0 +1,22 @@
+{
+  "plug": {
+    "frame195_pixel_identical_to_control": true,
+    "first_movement_before_zoom": "linear part travel from frame 0",
+    "no_recording_through_frame": 150,
+    "portal_settles_frame": 169,
+    "first_native_click_frame": 172,
+    "end_frame_exclusive": 1344,
+    "end_seconds": 44.8,
+    "revision": "r4: Qwen logo and continuous reply/reaction beat"
+  },
+  "assembly": {
+    "frame195_pixel_identical_to_control": true,
+    "first_movement_before_zoom": "linear part travel from frame 0",
+    "no_recording_through_frame": 150,
+    "portal_settles_frame": 169,
+    "first_native_click_frame": 172,
+    "end_frame_exclusive": 1344,
+    "end_seconds": 44.8,
+    "revision": "r3 with official Qwen logo"
+  }
+}

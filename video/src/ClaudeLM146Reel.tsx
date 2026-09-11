@@ -4,6 +4,7 @@ import {Bg,KaraokeCaption,Mascot,ProgressBar} from './SlopKit';
 import {DemoHeader,DemoSet,DemoCompanion} from './LM146AnimationKit';
 import {inter} from './fonts';
 import {LM146Hook,hookPortal} from './LM146Hook';
+import {LM146TrialHook,trialPortal,TrialHookVariant} from './LM146TrialHooks';
 import words from './data/words_lm146.json';
 import edl from './data/edl_lm146.json';
 
@@ -37,7 +38,7 @@ const Cursor:React.FC<{x:number;y:number;f:number;clicks:number[];size?:number}>
  </div>;
 };
 
-type ScreenProps={scene?:string;f:number;states:[number,string][];cameras:CameraKey[];points:Point[];clicks:number[];height?:number;top?:number;video?:{name:string;start:number;end?:number;offset?:number;rate?:number;max:number};width?:number;left?:number;border?:boolean};
+type ScreenProps={variant?:TrialHookVariant;scene?:string;f:number;states:[number,string][];cameras:CameraKey[];points:Point[];clicks:number[];height?:number;top?:number;video?:{name:string;start:number;end?:number;offset?:number;rate?:number;max:number};width?:number;left?:number;border?:boolean};
 const CloseupScreen:React.FC<ScreenProps>=({f,states,cameras,points,clicks,height=850,top=415,video,width=1012,left=34,border=true})=>{
  const cam=cameraAt(f,cameras),s=width/cam[2],point=sample(f,points),name=stateAt(f,states);
  const browser=name.startsWith('2')&&Number(name.slice(0,2))>=20&&Number(name.slice(0,2))<=23;
@@ -62,7 +63,7 @@ const Screen:React.FC<ScreenProps>=(props)=>{
  const play=video&&f>=video.start&&(video.end===undefined||f<video.end);
  const source=(style:React.CSSProperties)=>play?<Freeze frame={Math.min(video.max,Math.max(0,Math.floor((f-video.start)*(video.rate||1)+(video.offset||0))))}><OffthreadVideo src={asset(video.name)} muted style={style}/></Freeze>:<div style={{...style,height:Number(style.width)*sh/sw}}><Img src={name==='official'?staticFile('lm146/official-model38-last.png'):asset(name+'.png')} style={{width:'100%',display:'block'}}/>{name==='43-q6-menu'&&<div style={{position:'absolute',left:(788/sw*100)+'%',top:(308/sh*100)+'%',width:(93/sw*100)+'%',height:(62/sh*100)+'%',overflow:'hidden'}}><Img src={asset(name+'.png')} style={{position:'absolute',width:(sw/93*100)+'%',maxWidth:'none',left:(-903/93*100)+'%',top:(-308/62*100)+'%'}}/></div>}</div>;
  const rootF=useCurrentFrame(),intro=scene==='download'&&rootF<173;
- const portal=intro?hookPortal(rootF):{left:122,top:476,width:836,height:504,radius:22};
+ const portal=intro?(props.variant?trialPortal(rootF,props.variant):hookPortal(rootF)):{left:122,top:476,width:836,height:504,radius:22};
  const reveal=intro?ease(rootF,150,160):1,lens=intro?ease(rootF,162,173):1;
  const overviewScale=portal.width/836;
  const zoom=650/fw;
@@ -91,7 +92,7 @@ const CTA:React.FC<{f:number}>=({f:frame})=>{
  <div style={{opacity:1-ease(f,25,32)}}><Cursor x={pos[0]} y={pos[1]} f={f} clicks={[4,23]}/></div><div style={{position:'absolute',left:667,top:1010,transform:`translateY(${20*ease(f,3,7)*(1-ease(f,8,11))-310*Math.sin(Math.PI*ease(f,10,36))}px) rotate(${-9*Math.sin(Math.PI*ease(f,10,36))}deg)`}}><Mascot lf={f+26} size={292} nodAmp={0} gaze={-7} stern={f<12?.45:0} shock={.55*ease(f,21,24)*(1-ease(f,25,31))} cheer={ease(f,36,44)}/></div></>;
 };
 
-export const ClaudeLM146Reel:React.FC=()=>{
+export const ClaudeLM146Reel:React.FC<{variant?:TrialHookVariant}>=({variant})=>{
  const f=useCurrentFrame();let idx=edl.findIndex((e,i)=>f>=Math.round(e.start*30)&&(i===edl.length-1||f<Math.round(edl[i+1].start*30)));if(idx<0)idx=0;
  const scene=edl[idx].name,lf=f-at(scene);let states:[number,string][]=[],cameras:CameraKey[]=[],points:Point[]=[],clicks:number[]=[],height=850,top=415,success=9999,video:ScreenProps['video'];
  if(scene==='download'){
@@ -142,9 +143,9 @@ export const ClaudeLM146Reel:React.FC=()=>{
  return <AbsoluteFill style={{fontFamily:inter.fontFamily}}><Bg/>
  <div style={{position:'absolute',inset:0,zIndex:300,transform:'translateY(-48px)',pointerEvents:'none'}}><ProgressBar/></div>
  {f<170?<div style={{position:'absolute',inset:0,zIndex:200,pointerEvents:'none'}}><div style={{opacity:1-ease(f,150,159)}}><DemoHeader scene="hook" f={f}/></div>{f>=150&&<div style={{opacity:ease(f,159,168)}}><DemoHeader scene="download" f={f-150}/></div>}</div>:<DemoHeader scene={scene} f={lf}/>}
- {f<170&&<LM146Hook f={f}/>}
- {scene==='hook'?null:scene==='cta'?<CTA f={lf}/>:<><Screen scene={scene} f={lf} states={states} cameras={cameras} points={points} clicks={clicks} height={height} top={top} video={video}/><div style={{opacity:scene==='download'?ease(f,165,176):1}}><DemoCompanion scene={scene} f={lf} clicks={clicks} success={success}/></div></>}
+ {f<170&&(variant?<LM146TrialHook variant={variant} f={f}/>:<LM146Hook f={f}/>)}
+ {scene==='hook'?null:scene==='cta'?<CTA f={lf}/>:<><Screen variant={variant} scene={scene} f={lf} states={states} cameras={cameras} points={points} clicks={clicks} height={height} top={top} video={video}/><div style={{opacity:scene==='download'?ease(f,165,176):1}}><DemoCompanion scene={scene} f={lf} clicks={clicks} success={success}/></div></>}
  {scene==='fit'&&lf>=45&&lf<94&&<div style={{position:'absolute',left:62,top:1052,fontSize:27,lineHeight:1.2,fontWeight:650,color:'#EDF1F8'}}>This Mac: smaller 1.7B model.</div>}
- <KaraokeCaption words={words} top={1475}/><Audio src={staticFile('lm146/master.wav')}/>
+ <KaraokeCaption words={words} top={1475}/><Audio src={staticFile(variant?`lm146/trials/${variant}/master.wav`:'lm146/master.wav')}/>
  </AbsoluteFill>;
 };

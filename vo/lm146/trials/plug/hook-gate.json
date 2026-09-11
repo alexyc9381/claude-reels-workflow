@@ -1,0 +1,18 @@
+{
+  "crop": "crop=1012:930:34:490",
+  "luma": 155.2575225830078,
+  "motion_first5": 8.321565145254135,
+  "per_second": [
+    6.676950323581695,
+    7.2301307916641235,
+    11.007092189788818,
+    7.185981804132462,
+    9.507670617103576
+  ],
+  "luma_bar": 140,
+  "motion_bar": 4,
+  "shots_authored": 1,
+  "action_phases": 5,
+  "passed_measured_bars": true,
+  "note": "Continuous staged hook with physical actions; shot count is not falsely represented as three cuts."
+}
