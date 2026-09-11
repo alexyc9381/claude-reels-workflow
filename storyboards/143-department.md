@@ -99,3 +99,26 @@ shoot lights/cables/floor marks, edit film cans, drafting rulers/swatches/drawer
 archive bindings/cabinets, code controls/keyboard. Original Claude anatomy is kept;
 external hand-link geometry and generic automatic recoil are removed. Feet are
 aligned to the rig's actual foot baseline, not its padded SVG bounds.
+
+## Claude identity and source references — September 11 follow-up
+
+The opening promise is now BUILD YOUR CLAUDE TEAM. An authentic large Claude-logo
+tile moves through the juggling/catch action; Claude remains visible in the catch
+sign, produced campaign and working office. The first skill explanation also names
+Claude. The intent is immediate audience recognition beyond a small header mark.
+
+Designed GitHub source cards use the real mark and exact owner/repo, verified from
+the linked repositories. These are not screenshots or invented repository metrics.
+
+| Frames | Spoken introduction | Source shown |
+|---|---|---|
+| 533–608 | Here's a collection… | coreyhaines31/marketingskills |
+| 695–773 | This is a pack… | charlie947/social-media-skills |
+| 987–1094 | Two I like… UI UX Pro | nextlevelbuilder/ui-ux-pro-max-skill |
+| 1023–1094 | …and Taste | Leonxlnx/taste-skill |
+| 1290–1356 | So this Claude plugin… | anthropics/knowledge-work-plugins → finance/skills |
+| 1473–1539 | This Claude plugin… | anthropics/knowledge-work-plugins → legal/skills |
+
+Cards enter over9 frames and leave over8; the readable portion stays stable while
+the existing work continues below it. Voice, soundtrack, captions, scene boundaries
+and natural action timings are unchanged by this identity pass.

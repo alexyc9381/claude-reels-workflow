@@ -1,6 +1,6 @@
 ---
 name: alex-department-source-and-motion-proof
-description: DEPARTMENT recreation rejection, natural action timing, short complete operations, detailed sprite performance, source parity, safe moving bounds and honest audio verification
+description: DEPARTMENT audience recognition, prominent Claude identity, narration-timed GitHub source cards, recreation rejection, natural action timing, sprite performance and source parity
 metadata:
   type: workflow_learning
   source: DEPARTMENT revision and measured review on 2026-09-11
@@ -14,6 +14,35 @@ Read with [Alex's LM corrections](alex-lm-hooks-demo-and-delivery.md),
 
 These are production findings and interpretations of Alex's requested changes.
 They are not new user quotations or measured audience-retention results.
+
+## Audience recognition: the viewer must know this is for Claude users
+
+Alex rejected the natural-action revision because a Claude user or AI enthusiast
+could still read the opening as a general business cartoon. He asked for recognizable
+Claude logos throughout the beginning and a real repo image or logo/source card
+when the narration introduces the repository. Activity and detailed tools did not
+solve subject recognition. The tiny header mark and orange sprite were insufficient.
+
+This repeated the existing rule in [Claude-specific motion and voice](alex-claude-motion-and-voice.md),
+especially points2,10 and13. Do not treat merely loading that rule or adding a corner
+logo as implementing it. Inspect the muted opening at phone size: the actual Claude
+mark must be prominent in the main action, and the promise should explicitly name
+Claude when that is the audience. Preserve the metaphor's clear actions, but connect
+its objects to the product and its outputs so the viewer need not infer the subject.
+
+For source introductions, match the reference to the exact spoken pack/tool, using
+the verified owner/repo and selected subfolder. In DEPARTMENT the recording says
+“collection,” “pack,” and “Claude plugin”; there is no literal “this repo” token to
+search for. Marketing, social, both design packs, finance and legal each need their
+own source identity. A GitHub logo alone does not identify which repository is meant.
+The finance and legal entries share a repository but show distinct selected folders.
+
+Use an actual captured page or a clearly designed source card with the authentic
+GitHub mark and exact identity. Do not invent screenshot chrome, stars or download
+counts. Enter quickly, then allow a readable interval while useful action continues
+underneath. Keep faces and captions clear. Readability takes precedence over moving
+the card continuously to improve a pixel-motion score. This is a recognition and
+provenance correction, not measured evidence of retention or creative acceptance.
 
 ## Explicit rejection after delivery: a recreation is not an improvement
 

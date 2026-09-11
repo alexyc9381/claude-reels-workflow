@@ -101,9 +101,9 @@ export const Reel: React.FC<{ quiet?: boolean }> = ({ quiet = false }) => {
    — the one frame guaranteed to be seen, and the feed thumbnail.
    ====================================================================== */
 const BANDS = [
-  { from: L.S0,  big: "BUILD YOUR AI TEAM",     hot: "5 FREE SKILL PACKS" },
-  { from: L.S1,  big: "ONE FREE PACK",         hot: "PER DEPARTMENT" },
-  { from: L.S2,  big: "A SKILL IS ONE FILE",   hot: "SKILL.md" },
+  { from: L.S0,  big: "BUILD YOUR CLAUDE TEAM", hot: "5 FREE SKILL PACKS" },
+  { from: L.S1,  big: "FREE CLAUDE SKILLS",     hot: "FOR EVERY DEPARTMENT" },
+  { from: L.S2,  big: "A CLAUDE SKILL IS ONE FILE", hot: "SKILL.md" },
   { from: L.S3,  big: "45+ MARKETING SKILLS",   hot: "AD CREATIVES · COPYWRITING" },
   { from: L.S5,  big: "17 SOCIAL SKILLS",      hot: "SCRIPTS · THUMBNAILS · IDS" },
   { from: L.S6,  big: "BETTER DESIGN",         hot: "WEBSITES · PRODUCTS · BRANDS" },

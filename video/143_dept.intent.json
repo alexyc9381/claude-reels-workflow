@@ -1120,5 +1120,59 @@
     }
   ],
   "caption_source": "vo/dept143/verified-clean-words.json",
-  "revision": "Correction: shared speed ramps removed; steady per-object movements at distinct fixed durations on the real timeline"
+  "revision": "Correction: shared speed ramps removed; steady per-object movements at distinct fixed durations on the real timeline",
+  "reference_cards": [
+    {
+      "from_frame": 533,
+      "to_frame_exclusive": 609,
+      "owner": "coreyhaines31",
+      "repo": "marketingskills",
+      "folder_label": "skills / SKILL.md",
+      "verified_url": "https://github.com/coreyhaines31/marketingskills"
+    },
+    {
+      "from_frame": 695,
+      "to_frame_exclusive": 774,
+      "owner": "charlie947",
+      "repo": "social-media-skills",
+      "folder_label": "17 social media skills",
+      "verified_url": "https://github.com/charlie947/social-media-skills"
+    },
+    {
+      "from_frame": 987,
+      "to_frame_exclusive": 1095,
+      "owner": "nextlevelbuilder",
+      "repo": "ui-ux-pro-max-skill",
+      "folder_label": "",
+      "verified_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"
+    },
+    {
+      "from_frame": 1023,
+      "to_frame_exclusive": 1095,
+      "owner": "Leonxlnx",
+      "repo": "taste-skill",
+      "folder_label": "",
+      "verified_url": "https://github.com/Leonxlnx/taste-skill"
+    },
+    {
+      "from_frame": 1290,
+      "to_frame_exclusive": 1357,
+      "owner": "anthropics",
+      "repo": "knowledge-work-plugins",
+      "folder_label": "finance / skills",
+      "verified_url": "https://github.com/anthropics/knowledge-work-plugins/tree/main/finance"
+    },
+    {
+      "from_frame": 1473,
+      "to_frame_exclusive": 1540,
+      "owner": "anthropics",
+      "repo": "knowledge-work-plugins",
+      "folder_label": "legal / skills",
+      "verified_url": "https://github.com/anthropics/knowledge-work-plugins/tree/main/legal"
+    }
+  ],
+  "identity_assets": [
+    "logos_official/claude.svg",
+    "logos_official/github.svg"
+  ]
 }

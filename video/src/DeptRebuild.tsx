@@ -25,6 +25,14 @@ const Label:React.FC<{x:number;y:number;t:string;size?:number;c?:string;anchor?:
 
 type PropKind='megaphone'|'phone'|'pencil'|'ledger'|'gavel'|'camera'|'file'|'brief'|'brush'|'lens'|'palette'|'caliper';
 const tasks:PropKind[]=['megaphone','phone','pencil','ledger','gavel'];
+// Use the actual marks, not a substitute sun or a generic agent icon.
+const BrandMark:React.FC<{kind:'claude'|'github';x:number;y:number;size:number}>=({kind,x,y,size})=>
+ <foreignObject x={x} y={y} width={size} height={size}><Img src={staticFile('logos_official/'+kind+'.svg')} style={{width:size,height:size,display:'block'}}/></foreignObject>;
+const ClaudeTile:React.FC<{x:number;y:number;s?:number;r?:number}>=({x,y,s=1,r=0})=><g transform={tr(x,y,s,r)}>
+ <rect x='-97' y='-114' width='194' height='228' rx='22' fill='#F6EEE1' stroke='#A87455' strokeWidth='7'/><path d='M-82-98 H82' stroke='#FFFFFF' strokeWidth='5'/>
+ <BrandMark kind='claude' x={-73} y={-88} size={146}/><Label x={0} y={93} t='Claude' size={37}/></g>;
+const ClaudeSign:React.FC<{x:number;y:number;s?:number}>=({x,y,s=1})=><g transform={tr(x,y,s)}>
+ <rect x='-183' y='-44' width='366' height='88' rx='15' fill='#F5EBDD' stroke='#AA805A' strokeWidth='5'/><BrandMark kind='claude' x={-162} y={-31} size={62}/><Label x={28} y={17} t='Claude skills' size={40}/></g>;
 const juggle=(f:number,i:number)=>{
  const span=[30,27,34,31,28][i],phase=((f+3+i*7)%span)/span;
  const back=Math.floor((f+3+i*7)/span)%2,flight=back?1-phase:phase;
@@ -226,20 +234,21 @@ const Hook:React.FC<{f:number;cut:number}>=({f,cut})=>{
  if(cut===0){
   const x=pose(f,[[0,474],[7,514],[13,493],[21,550],[28,512],[35,479],[43,540]]);
   return <><Svg z={15}><Desk x={514} y={727} w={790} c='#D7BB83'/>
-   {tasks.map((k,i)=>{const a=juggle(f,i);return <Prop key={k} kind={k} x={a.x} y={a.y} s={[.86,.79,.83,.75,.82][i]} r={a.r}/>;})}
+   {tasks.map((k,i)=>{const a=juggle(f,i);return i===1?<ClaudeTile key={k} x={a.x} y={a.y} s={.92} r={a.r}/>:<Prop key={k} kind={k} x={a.x} y={a.y} s={[.86,.79,.83,.75,.82][i]} r={a.r}/>;})}
    {[7,21,35].map((at,i)=><ContactMarks key={at} f={f} at={at} x={i%2?682:332} y={546}/>)}
   </Svg><Sprite f={f} x={x} y={713} size={340} i={0} rot={pose(f,[[0,-9],[7,12],[13,-6],[21,16],[28,-9],[35,-13],[43,11]])} hit={Math.max(0,kick(f,7,.7)+kick(f,21,.8)+kick(f,35,.65))} stern={f<28?.8:0} shock={f>=28?1:0} cheer={.25+effort(f,8,10)*.6} gaze={f%14<7?-1:1}/></>;
  }
  if(cut===1){
   const xs=[145,326,507,688,869];
   return <><Svg z={15}><Desk x={506} y={743} w={880} c='#C9AE78'/>
-   {tasks.map((k,i)=>{const start=i*7-3,q=travel(f,start,start+10),a=juggle(44,i);return <g key={k}><Prop kind={k} x={mix(a.x,xs[i]+48,q)} y={mix(a.y,624,q)+arc(q,60)+kick(f,start+10,7)} s={mix(.84,.62,q)} r={mix(a.r,0,q)+kick(f,start+10,8)}/><ContactMarks f={f} at={start+10} x={xs[i]+48} y={614}/></g>;})}
+   <ClaudeSign x={506} y={207} s={1.32}/>
+   {tasks.map((k,i)=>{const start=i*7-3,q=travel(f,start,start+10),a=juggle(44,i);const tx=mix(a.x,xs[i]+48,q),ty=mix(a.y,624,q)+arc(q,60)+kick(f,start+10,7),rr=mix(a.r,0,q)+kick(f,start+10,8);return <g key={k}>{i===1?<ClaudeTile x={tx} y={ty} s={mix(.92,.48,q)} r={rr}/>:<Prop kind={k} x={tx} y={ty} s={mix(.84,.62,q)} r={rr}/>}<ContactMarks f={f} at={start+10} x={xs[i]+48} y={614}/></g>;})}
   </Svg>{xs.map((x,i)=>{const start=i*7-5,q=travel(f,start,start+9),caught=f>=i*7+7;return <Sprite key={i} f={f+i*9} x={x} y={mix(880,690,q)+arc(q,40)} size={206} i={i} rot={mix(i%2?16:-16,0,q)+kick(f,i*7+7,6)} hit={Math.max(0,kick(f,i*7+7,.8))} cheer={caught?.55:0} stern={caught?0:.7} gaze={caught?0:i<2?1:-1}/>;})}</>;
  }
  const speakerX=pose(f,[[0,180],[8,256],[23,256],[34,371],[46,371],[54,405]]),lift=travel(f,-2,11),unroll=.2+.8*travel(f,0,17),call=effort(f,28,13),finish=travel(f,39,49);
  const positions=[[786,365],[880,497],[766,643]];
  return <><Svg z={14}><Desk x={529} y={699} w={837} c='#CFB781'/>
-  <g transform={tr(mix(755,552,lift),mix(263,430,lift),2.00,kick(f,11,3))}><Poster x={0} y={0} reveal={unroll}/><path d='M-126-164 H126' stroke='#674B31' strokeWidth='13'/><path d='M-126 164 H126' stroke='#674B31' strokeWidth='10'/></g>
+  <g transform={tr(mix(755,552,lift),mix(263,430,lift),2.00,kick(f,11,3))}><Poster x={0} y={0} reveal={unroll}/><g opacity={travel(f,-2,8)}><rect x='-108' y='-150' width='216' height='57' rx='7' fill='#F5EBDD'/><BrandMark kind='claude' x={-97} y={-142} size={41}/><Label x={22} y={-110} t='Claude' size={32}/></g><path d='M-126-164 H126' stroke='#674B31' strokeWidth='13'/><path d='M-126 164 H126' stroke='#674B31' strokeWidth='10'/></g>
   {positions.map(([x,y],i)=><g key={i}><path d={'M'+(x-102)+' '+(y+3)+' H'+(x+71)+' V'+(y+21)+' H'+(x-102)+'Z'} fill='#AD945F' stroke='#5D6350' strokeWidth='5'/><path d={'M'+(x-85)+' '+(y+21)+' V743 M'+(x+55)+' '+(y+21)+' V743'} stroke='#636751' strokeWidth='9'/><Prop kind={tasks[i+1]} x={x+42} y={y-101} s={.47} r={-effort(f,18+i*9,9)*23}/></g>)}
   <Prop kind='phone' x={654} y={mix(847,537,travel(f,22,34))} s={1.18} r={mix(14,-8,travel(f,22,34))}/><Prop kind='megaphone' x={speakerX+85+call*12} y={556-call*15} s={.9} r={-11-call*13}/>
   {[0,1,2].map(i=><path key={i} d={'M'+(speakerX+157+i*18)+' '+(512-i*11)+' Q'+(speakerX+184+i*22)+' 548 '+(speakerX+157+i*18)+' '+(583+i*11)} stroke='#BF8743' strokeWidth='6' fill='none' opacity={f>=29+i*3&&f<43?1:0}/>)}
@@ -258,7 +267,7 @@ const Office:React.FC<{f:number;cut:number}>=({f,cut})=>{
  </g></Svg><Sprite f={f} x={pose(f,[[0,954],[11,803],[54,803],[64,682],[74,707]])} y={781} size={319} plain walk={moving(f,[[0,954],[11,803],[54,803],[64,682],[74,707]])} rot={-effort(f,10,12)*8+effort(f,63,11)*9} cheer={f>63?.8:0} gaze={-1}/></>;
  }
  const pos=[[199,402],[484,433],[793,400],[327,698],[711,698]];
- return <><Svg z={10}><path d='M51 484 H962 V509 H51Z M470 168 V501' stroke='#162D36' strokeWidth='12'/><path d='M62 487 H262 V721 H62 M952 487 H834 V721 H952' fill='none' stroke='#779A94' strokeWidth='12'/>
+ return <><Svg z={10}><ClaudeSign x={505} y={164} s={.95}/><path d='M51 484 H962 V509 H51Z M470 214 V501' stroke='#162D36' strokeWidth='12'/><path d='M62 487 H262 V721 H62 M952 487 H834 V721 H952' fill='none' stroke='#779A94' strokeWidth='12'/>
   {[535,586,637,688].map(y=><path key={y} d={'M62 '+y+' H262 M834 '+y+' H952'} stroke='#799890' strokeWidth='7'/>)}
   {pos.map(([x,y],i)=>{const at=26+i*11,w=effort(f,at,12);return <g key={i}><Desk x={x} y={y+54} w={i<3?245:292} c={i%2?'#B48C65':'#BAAD7D'}/><Prop kind={tasks[i]} x={x+63-w*38} y={y-77-w*26} s={.62} r={-w*[32,-18,47,-12,38][i]}/><ContactMarks f={f} at={at+7} x={x+20} y={y-30}/><g opacity={travel(f,at+6,at+12)}><path d={'M'+(x-51)+' '+(y+6)+' H'+(x+42)+' v23 h-93Z'} fill={PAPER}/>{[0,1,2].map(j=><path key={j} d={'M'+(x-39)+' '+(y+12+j*6)+' H'+(x+18+j*7)} stroke={colors[i]} strokeWidth='4'/>)}</g></g>;})}
  </Svg>{pos.map(([x,y],i)=>{const q=travel(f,i*7-3,i*7+7),at=26+i*11,w=effort(f,at,12);return <Sprite key={i} f={f} x={mix(x-250,x-35,q)+w*22} y={y+(i<3?76:30)} size={i<3?218:246} i={i} walk={q<1?1:0} rot={-7*w+kick(f,i*7+7,4)} hit={Math.max(0,kick(f,i*7+7,.55))} cheer={f>at+12?.5:0} stern={w>.1?.8:0} gaze={1}/>;})}</>;
@@ -497,6 +506,28 @@ const Cta:React.FC<{f:number}>=({f})=>{
  </Svg><Sprite f={f} x={mix(168,284,travel(f,-2,9))} y={754} size={294} plain rot={effort(f,27,12)*11-effort(f,68,12)*7+effort(f,106,10)*8} walk={f<9?1:0} cheer={f>39?.8:.3} gaze={1}/></>;
 };
 
+// These are designed source cards, not fabricated browser screenshots. Names and
+// selected subfolders are verified against the linked repositories in the guide.
+export const DEPT_REPO_CARDS=[
+ {from:533,to:609,owner:'coreyhaines31',repo:'marketingskills',folder:'skills / SKILL.md',url:'https://github.com/coreyhaines31/marketingskills'},
+ {from:695,to:774,owner:'charlie947',repo:'social-media-skills',folder:'17 social media skills',url:'https://github.com/charlie947/social-media-skills'},
+ {from:987,to:1095,owner:'nextlevelbuilder',repo:'ui-ux-pro-max-skill',folder:'',url:'https://github.com/nextlevelbuilder/ui-ux-pro-max-skill',compact:true,y:132},
+ {from:1023,to:1095,owner:'Leonxlnx',repo:'taste-skill',folder:'',url:'https://github.com/Leonxlnx/taste-skill',compact:true,y:316},
+ {from:1290,to:1357,owner:'anthropics',repo:'knowledge-work-plugins',folder:'finance / skills',url:'https://github.com/anthropics/knowledge-work-plugins/tree/main/finance'},
+ {from:1473,to:1540,owner:'anthropics',repo:'knowledge-work-plugins',folder:'legal / skills',url:'https://github.com/anthropics/knowledge-work-plugins/tree/main/legal'},
+];
+const RepoCards:React.FC<{root:number}>=({root})=><Svg z={55}>{DEPT_REPO_CARDS.filter(c=>root>=c.from&&root<c.to).map(c=>{
+ const local=root-c.from,arrive=travel(local,0,9),leave=travel(root,c.to-8,c.to),h=c.compact?172:283;
+ return <g key={c.url} transform={'translate(74 '+((c.y??145)+mix(-64,0,arrive)-64*leave)+')'} opacity={Math.min(arrive,1-leave)} style={{filter:'drop-shadow(0px 12px 7px rgba(10,19,22,.32))'}}>
+  <rect width='864' height={h} rx='20' fill='#F7F3E9' stroke='#243B46' strokeWidth='5'/><path d='M22 77 H842' stroke='#D0D4C9' strokeWidth='3'/>
+  <BrandMark kind='github' x={24} y={18} size={45}/><Label x={87} y={53} t='GitHub' size={34} anchor='start'/>
+  <BrandMark kind='claude' x={636} y={22} size={37}/><Label x={687} y={50} t='Claude skills' size={26} anchor='start'/>
+  <Label x={29} y={c.compact?109:122} t={c.owner+' /'} size={c.compact?29:35} c='#4B6269' anchor='start'/>
+  <Label x={29} y={c.compact?151:184} t={c.repo} size={c.compact?41:c.repo.length>21?49:56} anchor='start'/>
+  {!c.compact&&<><path d='M28 209 H836' stroke='#D0D4C9' strokeWidth='2'/><path d='M31 236 v23 h29 v-19 h-15 l-6-7 h-8Z' fill='#BD9A58'/><Label x={78} y={256} t={c.folder} size={33} c='#3A5960' anchor='start'/><path d='M789 235 l14 12 -14 12 M772 235 l-14 12 14 12' stroke='#357258' strokeWidth='5' fill='none'/></>}
+ </g>;
+})}</Svg>;
+
 const typeSet:Record<string,SetKind>={hook:'studio',office:'office',skill:'workbench',marketing:'street',social:'shoot',gateway:'atelier',design:'design',finance:'finance',legal:'legal',turn:'workbench',tailor:'tailor',custom:'code',team:'office',cta:'studio'};
 export const DeptRebuild:React.FC=()=>{
  const root=useCurrentFrame();let row:typeof REBUILD_SHOTS[number]=REBUILD_SHOTS[0];
@@ -508,6 +539,6 @@ export const DeptRebuild:React.FC=()=>{
  return <Panel><div style={{position:'absolute',inset:0,zIndex:1,transformOrigin:'50% 55%',transform:'scale('+camera+')'}}>
   <Set kind={set} f={f}/><SetDetails kind={set}/>
   {kind==='hook'?<Hook {...props}/>:kind==='office'?<Office {...props}/>:kind==='skill'?<Skill {...props}/>:kind==='marketing'?<Marketing {...props}/>:kind==='social'?<Social {...props}/>:kind==='gateway'?<Gateway {...props}/>:kind==='design'?<Design {...props}/>:kind==='finance'?<Finance {...props}/>:kind==='legal'?<Legal {...props}/>:kind==='turn'?<Turn f={f}/>:kind==='tailor'?<Tailor f={f}/>:kind==='custom'?<Custom {...props}/>:kind==='team'?<Team f={f}/>:<Cta f={f}/>}
-  <Foreground kind={set}/>
+  <Foreground kind={set}/><RepoCards root={root}/>
  </div></Panel>;
 };

@@ -1,6 +1,6 @@
 # ANIMATION QUALITY — why the first pass is never good enough, and what actually fixes it
 
-Revision case study: [DEPARTMENT source and motion proof](../memory/alex-department-source-and-motion-proof.md). Includes Alex’s explicit rejection of a recreation: review the scene concepts throughout, not only motion scores. The latest correction rejects both shared speed ramps and the slow linear replacement: author short, natural operations and consequential follow-through at object-specific timings. Read alongside the indexed LM feedback when a hook moves but its cause and payoff are unclear.
+Revision case study: [DEPARTMENT source and motion proof](../memory/alex-department-source-and-motion-proof.md). Includes Alex’s explicit rejection of a recreation: review the scene concepts throughout, not only motion scores. The latest correction rejects both shared speed ramps and the slow linear replacement: author short, natural operations and consequential follow-through at object-specific timings. Read alongside the indexed LM feedback when a hook moves but its cause and payoff are unclear. Latest follow-up: prominent Claude audience recognition and narration-timed GitHub source cards.
 
 **LM follow-up:** [frame-zero action, post-action continuity and demo legibility](../memory/alex-lm-hooks-demo-and-delivery.md).
 Read before interpreting “faster hook”, “more animation”, “show the setup” or “too close to the edge”.

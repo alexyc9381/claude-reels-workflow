@@ -456,3 +456,38 @@ older rejected-pass reports only when the corresponding render is checked.
 - The guidance is linked from CLAUDE.md, MEMORY.md, animation craft and build
   learnings; the registry/index check passes. These are production findings, not
   a record of user creative acceptance, measured retention or human listening.
+
+### Claude audience identity and source references — v22
+
+Alex said the animation still did not identify its audience as Claude users/AI
+enthusiasts. He requested prominent Claude logos in the beginning and repository
+images or source cards when the voice introduces the resources. This is a failure
+of subject recognition despite the previous action/detail work. The existing
+September7 Claude-identity rule already said a small header mark was insufficient.
+
+The hook now explicitly says BUILD YOUR CLAUDE TEAM and uses the real Claude mark
+on a large moving tile, the catch sign, the produced campaign and working office.
+The first skill explanation also names Claude. Six designed GitHub cards show the
+actual owners/repositories, with finance and legal's distinct selected folders.
+Timing follows the voice's collection/pack/plugin introductions, not an imagined
+literal “this repo” token. Source identities were rechecked on the public GitHub
+pages linked by the existing guide. No repository screenshot or star count is invented.
+
+Native frames0,22,68,118,179,561,730,1050,1323,1501 were reviewed for recognition,
+readability and overlap. The cards leave faces and captions visible and hold briefly
+for reading while the work continues below. The original voice, music, caption and
+action timings are unchanged. New marks are packaged as their existing SVG assets.
+
+Final encoded checks:2132frames,1080×1920,30fps,71.0667s; limitedBT.709 H.264/yuv420p
+and AAC48kHz after actual range/matrix conversion. All31 scene floors pass, weakest
+DISTINCT RESULT6.04; median7.58 remains below the9.0 density target, explicitly not
+an all-benchmarks pass. Every-frame near-still maximum12 matches the12-frame bar;
+frame0→1 MAD9.60. Delivery verifier9/9, look blocking checks pass (hook170.4,
+body saturation62.9%, black p10=26.5). Header-pill9.2% and body-luma115.0 remain
+reported advisories. Unchanged sound has106layers/105starts,14assets; balance36.8%
+above2kHz and9.7% below250Hz. These measurements do not establish user acceptance.
+
+Isolated-package native frames0,561,1050,1501 match the source bundle exactly.
+The package contains eight transitive sources, the required media and both brand
+SVGs, with a timestamped source-card map and asset hashes. The reusable correction
+is indexed from CLAUDE.md, MEMORY.md, animation craft and build learnings.
