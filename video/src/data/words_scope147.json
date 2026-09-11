@@ -1,0 +1,1237 @@
+[
+{
+"start": 0.0,
+"end": 0.12,
+"word": " This"
+},
+{
+"start": 0.12,
+"end": 0.4,
+"word": " is"
+},
+{
+"start": 0.4,
+"end": 0.54,
+"word": " the"
+},
+{
+"start": 0.54,
+"end": 0.68,
+"word": " shape"
+},
+{
+"start": 0.615,
+"end": 0.74,
+"word": " of"
+},
+{
+"start": 0.74,
+"end": 0.94,
+"word": " AI"
+},
+{
+"start": 0.94,
+"end": 1.22,
+"word": " writing."
+},
+{
+"start": 1.52,
+"end": 1.58,
+"word": " And"
+},
+{
+"start": 1.595,
+"end": 1.84,
+"word": " this"
+},
+{
+"start": 1.76,
+"end": 1.98,
+"word": " is"
+},
+{
+"start": 1.98,
+"end": 2.12,
+"word": " the"
+},
+{
+"start": 2.12,
+"end": 2.28,
+"word": " shape"
+},
+{
+"start": 2.25,
+"end": 2.47,
+"word": " of"
+},
+{
+"start": 2.47,
+"end": 2.67,
+"word": " human"
+},
+{
+"start": 2.73,
+"end": 3.11,
+"word": " writing."
+},
+{
+"start": 3.64,
+"end": 3.68,
+"word": " Researchers"
+},
+{
+"start": 3.715,
+"end": 4.02,
+"word": " figured"
+},
+{
+"start": 4.02,
+"end": 4.18,
+"word": " out"
+},
+{
+"start": 4.095,
+"end": 4.22,
+"word": " how"
+},
+{
+"start": 4.22,
+"end": 4.34,
+"word": " to"
+},
+{
+"start": 4.34,
+"end": 4.48,
+"word": " tell"
+},
+{
+"start": 4.55,
+"end": 4.63,
+"word": " them"
+},
+{
+"start": 4.63,
+"end": 4.89,
+"word": " apart"
+},
+{
+"start": 4.89,
+"end": 5.13,
+"word": " without"
+},
+{
+"start": 5.18,
+"end": 5.38,
+"word": " reading"
+},
+{
+"start": 5.38,
+"end": 5.58,
+"word": " a"
+},
+{
+"start": 5.58,
+"end": 5.86,
+"word": " single"
+},
+{
+"start": 5.82,
+"end": 6.12,
+"word": " word,"
+},
+{
+"start": 6.24,
+"end": 6.3,
+"word": " and"
+},
+{
+"start": 6.315,
+"end": 6.42,
+"word": " they're"
+},
+{
+"start": 6.39,
+"end": 6.51,
+"word": " right"
+},
+{
+"start": 6.51,
+"end": 6.95,
+"word": " 93%"
+},
+{
+"start": 7.31,
+"end": 7.43,
+"word": " of"
+},
+{
+"start": 7.43,
+"end": 7.55,
+"word": " the"
+},
+{
+"start": 7.55,
+"end": 7.81,
+"word": " time."
+},
+{
+"start": 8.09,
+"end": 8.19,
+"word": " So"
+},
+{
+"start": 8.19,
+"end": 8.31,
+"word": " a"
+},
+{
+"start": 8.31,
+"end": 8.41,
+"word": " team"
+},
+{
+"start": 8.385,
+"end": 8.47,
+"word": " from"
+},
+{
+"start": 8.47,
+"end": 8.77,
+"word": " Maryland"
+},
+{
+"start": 8.77,
+"end": 8.97,
+"word": " and"
+},
+{
+"start": 8.97,
+"end": 9.13,
+"word": " Google"
+},
+{
+"start": 9.15,
+"end": 9.45,
+"word": " DeepMind"
+},
+{
+"start": 9.45,
+"end": 9.65,
+"word": " ran"
+},
+{
+"start": 9.65,
+"end": 10.61,
+"word": " 61,000"
+},
+{
+"start": 10.64,
+"end": 10.96,
+"word": " stories"
+},
+{
+"start": 10.96,
+"end": 11.18,
+"word": " through"
+},
+{
+"start": 11.18,
+"end": 11.24,
+"word": " a"
+},
+{
+"start": 11.255,
+"end": 11.52,
+"word": " detector"
+},
+{
+"start": 11.44,
+"end": 11.64,
+"word": " and"
+},
+{
+"start": 11.64,
+"end": 11.8,
+"word": " found"
+},
+{
+"start": 11.8,
+"end": 11.92,
+"word": " the"
+},
+{
+"start": 11.92,
+"end": 12.16,
+"word": " giveaway"
+},
+{
+"start": 12.13,
+"end": 12.31,
+"word": " had"
+},
+{
+"start": 12.31,
+"end": 12.57,
+"word": " nothing"
+},
+{
+"start": 12.57,
+"end": 12.75,
+"word": " to"
+},
+{
+"start": 12.75,
+"end": 12.87,
+"word": " do"
+},
+{
+"start": 13.01,
+"end": 13.15,
+"word": " with"
+},
+{
+"start": 13.15,
+"end": 13.36,
+"word": " em"
+},
+{
+"start": 13.36,
+"end": 13.57,
+"word": " dashes"
+},
+{
+"start": 13.435,
+"end": 13.7,
+"word": " or"
+},
+{
+"start": 13.7,
+"end": 13.82,
+"word": " the"
+},
+{
+"start": 13.82,
+"end": 14.02,
+"word": " word"
+},
+{
+"start": 14.33,
+"end": 14.79,
+"word": " delve."
+},
+{
+"start": 14.77,
+"end": 14.81,
+"word": " It"
+},
+{
+"start": 14.845,
+"end": 14.91,
+"word": " was"
+},
+{
+"start": 14.92,
+"end": 15.15,
+"word": " actually"
+},
+{
+"start": 15.25,
+"end": 15.39,
+"word": " the"
+},
+{
+"start": 15.39,
+"end": 15.71,
+"word": " structure"
+},
+{
+"start": 15.62,
+"end": 15.82,
+"word": " of"
+},
+{
+"start": 15.82,
+"end": 15.94,
+"word": " the"
+},
+{
+"start": 15.94,
+"end": 16.16,
+"word": " story"
+},
+{
+"start": 16.16,
+"end": 16.48,
+"word": " itself."
+},
+{
+"start": 16.86,
+"end": 16.9,
+"word": " So"
+},
+{
+"start": 16.935,
+"end": 17.06,
+"word": " AI"
+},
+{
+"start": 17.06,
+"end": 17.24,
+"word": " writing"
+},
+{
+"start": 17.24,
+"end": 17.42,
+"word": " is"
+},
+{
+"start": 17.42,
+"end": 17.62,
+"word": " too"
+},
+{
+"start": 17.62,
+"end": 17.84,
+"word": " clean."
+},
+{
+"start": 17.72,
+"end": 17.76,
+"word": " It"
+},
+{
+"start": 17.795,
+"end": 17.88,
+"word": " has"
+},
+{
+"start": 17.88,
+"end": 18.1,
+"word": " no"
+},
+{
+"start": 18.11,
+"end": 18.55,
+"word": " tangents,"
+},
+{
+"start": 18.73,
+"end": 18.87,
+"word": " nothing"
+},
+{
+"start": 18.87,
+"end": 19.25,
+"word": " unresolved,"
+},
+{
+"start": 19.6,
+"end": 19.66,
+"word": " and"
+},
+{
+"start": 19.675,
+"end": 19.76,
+"word": " it"
+},
+{
+"start": 19.76,
+"end": 20.0,
+"word": " always"
+},
+{
+"start": 19.84,
+"end": 20.08,
+"word": " spells"
+},
+{
+"start": 20.08,
+"end": 20.28,
+"word": " out"
+},
+{
+"start": 20.28,
+"end": 20.42,
+"word": " the"
+},
+{
+"start": 20.42,
+"end": 20.66,
+"word": " outcome"
+},
+{
+"start": 20.81,
+"end": 21.05,
+"word": " for"
+},
+{
+"start": 21.05,
+"end": 21.13,
+"word": " you"
+},
+{
+"start": 21.13,
+"end": 21.31,
+"word": " because"
+},
+{
+"start": 21.205,
+"end": 21.36,
+"word": " it"
+},
+{
+"start": 21.36,
+"end": 21.62,
+"word": " doesn't"
+},
+{
+"start": 21.62,
+"end": 21.86,
+"word": " trust"
+},
+{
+"start": 21.8,
+"end": 21.98,
+"word": " you"
+},
+{
+"start": 21.98,
+"end": 22.08,
+"word": " to"
+},
+{
+"start": 22.08,
+"end": 22.4,
+"word": " understand"
+},
+{
+"start": 22.55,
+"end": 22.83,
+"word": " it."
+},
+{
+"start": 22.97,
+"end": 23.05,
+"word": " And"
+},
+{
+"start": 23.05,
+"end": 23.21,
+"word": " get"
+},
+{
+"start": 23.21,
+"end": 23.45,
+"word": " this,"
+},
+{
+"start": 23.49,
+"end": 23.71,
+"word": " researchers"
+},
+{
+"start": 23.71,
+"end": 24.09,
+"word": " found"
+},
+{
+"start": 24.09,
+"end": 24.25,
+"word": " that"
+},
+{
+"start": 24.35,
+"end": 24.53,
+"word": " AI"
+},
+{
+"start": 24.53,
+"end": 25.17,
+"word": " over-explains"
+},
+{
+"start": 25.17,
+"end": 25.41,
+"word": " themes"
+},
+{
+"start": 25.43,
+"end": 25.99,
+"word": " 77%"
+},
+{
+"start": 26.37,
+"end": 26.57,
+"word": " of"
+},
+{
+"start": 26.57,
+"end": 26.67,
+"word": " the"
+},
+{
+"start": 26.67,
+"end": 26.87,
+"word": " time,"
+},
+{
+"start": 26.77,
+"end": 26.91,
+"word": " and"
+},
+{
+"start": 26.91,
+"end": 27.19,
+"word": " every"
+},
+{
+"start": 27.19,
+"end": 27.37,
+"word": " model"
+},
+{
+"start": 27.7,
+"end": 27.9,
+"word": " does"
+},
+{
+"start": 27.9,
+"end": 28.04,
+"word": " it"
+},
+{
+"start": 28.04,
+"end": 28.26,
+"word": " differently."
+},
+{
+"start": 28.36,
+"end": 28.72,
+"word": " For"
+},
+{
+"start": 28.72,
+"end": 29.12,
+"word": " example,"
+},
+{
+"start": 29.46,
+"end": 29.5,
+"word": " Claude"
+},
+{
+"start": 29.535,
+"end": 29.575,
+"word": " barely"
+},
+{
+"start": 29.61,
+"end": 29.69,
+"word": " ever"
+},
+{
+"start": 29.69,
+"end": 29.91,
+"word": " lets"
+},
+{
+"start": 30.1,
+"end": 30.42,
+"word": " tension"
+},
+{
+"start": 30.42,
+"end": 30.82,
+"word": " build,"
+},
+{
+"start": 31.06,
+"end": 31.16,
+"word": " while"
+},
+{
+"start": 31.135,
+"end": 31.49,
+"word": " GPT"
+},
+{
+"start": 31.49,
+"end": 31.95,
+"word": " always"
+},
+{
+"start": 31.95,
+"end": 32.31,
+"word": " reaches"
+},
+{
+"start": 32.23,
+"end": 32.45,
+"word": " for"
+},
+{
+"start": 32.45,
+"end": 32.69,
+"word": " gossip"
+},
+{
+"start": 32.69,
+"end": 33.143,
+"word": " constantly,"
+},
+{
+"start": 33.11,
+"end": 33.564,
+"word": " and"
+},
+{
+"start": 33.564,
+"end": 34.017,
+"word": " Gemini"
+},
+{
+"start": 34.017,
+"end": 34.237,
+"word": " always"
+},
+{
+"start": 34.3,
+"end": 34.48,
+"word": " has"
+},
+{
+"start": 34.48,
+"end": 34.64,
+"word": " this"
+},
+{
+"start": 34.64,
+"end": 34.9,
+"word": " weird"
+},
+{
+"start": 34.93,
+"end": 35.39,
+"word": " gravitational"
+},
+{
+"start": 35.39,
+"end": 35.81,
+"word": " pull"
+},
+{
+"start": 35.81,
+"end": 36.11,
+"word": " towards"
+},
+{
+"start": 36.05,
+"end": 36.37,
+"word": " dark"
+},
+{
+"start": 36.37,
+"end": 36.73,
+"word": " settings."
+},
+{
+"start": 36.94,
+"end": 37.08,
+"word": " So"
+},
+{
+"start": 37.08,
+"end": 37.14,
+"word": " I"
+},
+{
+"start": 37.155,
+"end": 37.24,
+"word": " took"
+},
+{
+"start": 37.23,
+"end": 37.37,
+"word": " the"
+},
+{
+"start": 37.37,
+"end": 37.55,
+"word": " full"
+},
+{
+"start": 37.55,
+"end": 37.79,
+"word": " research"
+},
+{
+"start": 38.04,
+"end": 38.34,
+"word": " paper,"
+},
+{
+"start": 38.42,
+"end": 38.6,
+"word": " put"
+},
+{
+"start": 38.495,
+"end": 38.56,
+"word": " it"
+},
+{
+"start": 38.57,
+"end": 38.68,
+"word": " in"
+},
+{
+"start": 38.68,
+"end": 38.84,
+"word": " Claude,"
+},
+{
+"start": 38.82,
+"end": 38.96,
+"word": " and"
+},
+{
+"start": 38.96,
+"end": 39.16,
+"word": " told"
+},
+{
+"start": 39.17,
+"end": 39.27,
+"word": " it"
+},
+{
+"start": 39.27,
+"end": 39.35,
+"word": " to"
+},
+{
+"start": 39.35,
+"end": 39.49,
+"word": " read"
+},
+{
+"start": 39.425,
+"end": 39.65,
+"word": " every"
+},
+{
+"start": 39.65,
+"end": 39.95,
+"word": " finding"
+},
+{
+"start": 40.04,
+"end": 40.22,
+"word": " as"
+},
+{
+"start": 40.22,
+"end": 40.34,
+"word": " a"
+},
+{
+"start": 40.34,
+"end": 40.48,
+"word": " rule"
+},
+{
+"start": 40.51,
+"end": 40.69,
+"word": " it"
+},
+{
+"start": 40.69,
+"end": 40.77,
+"word": " can"
+},
+{
+"start": 40.79,
+"end": 41.03,
+"word": " never"
+},
+{
+"start": 41.03,
+"end": 41.29,
+"word": " break"
+},
+{
+"start": 41.29,
+"end": 41.47,
+"word": " while"
+},
+{
+"start": 41.46,
+"end": 41.76,
+"word": " writing."
+},
+{
+"start": 42.08,
+"end": 42.24,
+"word": " Then"
+},
+{
+"start": 42.24,
+"end": 42.4,
+"word": " I"
+},
+{
+"start": 42.4,
+"end": 42.6,
+"word": " opened"
+},
+{
+"start": 42.53,
+"end": 42.79,
+"word": " Skill"
+},
+{
+"start": 42.79,
+"end": 43.05,
+"word": " Creator"
+},
+{
+"start": 43.0,
+"end": 43.12,
+"word": " in"
+},
+{
+"start": 43.12,
+"end": 43.2,
+"word": " the"
+},
+{
+"start": 43.2,
+"end": 43.42,
+"word": " same"
+},
+{
+"start": 43.3,
+"end": 43.58,
+"word": " chat,"
+},
+{
+"start": 43.64,
+"end": 43.82,
+"word": " turned"
+},
+{
+"start": 43.92,
+"end": 44.14,
+"word": " all"
+},
+{
+"start": 44.14,
+"end": 44.22,
+"word": " of"
+},
+{
+"start": 44.22,
+"end": 44.3,
+"word": " it"
+},
+{
+"start": 44.3,
+"end": 44.46,
+"word": " into"
+},
+{
+"start": 44.54,
+"end": 44.68,
+"word": " a"
+},
+{
+"start": 44.68,
+"end": 44.94,
+"word": " permanent"
+},
+{
+"start": 44.94,
+"end": 45.3,
+"word": " skill,"
+},
+{
+"start": 45.27,
+"end": 45.41,
+"word": " and"
+},
+{
+"start": 45.41,
+"end": 45.53,
+"word": " gave"
+},
+{
+"start": 45.53,
+"end": 45.61,
+"word": " it"
+},
+{
+"start": 45.61,
+"end": 45.71,
+"word": " a"
+},
+{
+"start": 45.71,
+"end": 45.83,
+"word": " name"
+},
+{
+"start": 46.12,
+"end": 46.4,
+"word": " called"
+},
+{
+"start": 46.4,
+"end": 46.68,
+"word": " Human"
+},
+{
+"start": 46.475,
+"end": 46.67,
+"word": " Scope."
+},
+{
+"start": 46.99,
+"end": 47.09,
+"word": " So"
+},
+{
+"start": 47.09,
+"end": 47.29,
+"word": " now"
+},
+{
+"start": 47.29,
+"end": 47.49,
+"word": " whenever"
+},
+{
+"start": 47.6,
+"end": 47.78,
+"word": " I"
+},
+{
+"start": 47.78,
+"end": 48.04,
+"word": " type"
+},
+{
+"start": 48.04,
+"end": 48.26,
+"word": " slash"
+},
+{
+"start": 48.115,
+"end": 48.29,
+"word": " human"
+},
+{
+"start": 48.29,
+"end": 48.61,
+"word": " scope"
+},
+{
+"start": 48.61,
+"end": 48.85,
+"word": " before"
+},
+{
+"start": 48.9,
+"end": 49.16,
+"word": " any"
+},
+{
+"start": 49.16,
+"end": 49.38,
+"word": " writing"
+},
+{
+"start": 49.38,
+"end": 49.7,
+"word": " task,"
+},
+{
+"start": 50.03,
+"end": 50.11,
+"word": " Claude"
+},
+{
+"start": 50.11,
+"end": 50.33,
+"word": " already"
+},
+{
+"start": 50.33,
+"end": 50.55,
+"word": " knows"
+},
+{
+"start": 50.68,
+"end": 50.82,
+"word": " what"
+},
+{
+"start": 50.82,
+"end": 51.0,
+"word": " human"
+},
+{
+"start": 51.0,
+"end": 51.24,
+"word": " writing"
+},
+{
+"start": 51.26,
+"end": 51.64,
+"word": " actually"
+},
+{
+"start": 51.64,
+"end": 51.84,
+"word": " looks"
+},
+{
+"start": 51.84,
+"end": 52.04,
+"word": " like"
+},
+{
+"start": 51.915,
+"end": 51.955,
+"word": " and"
+},
+{
+"start": 51.99,
+"end": 52.05,
+"word": " what"
+},
+{
+"start": 52.065,
+"end": 52.19,
+"word": " to"
+},
+{
+"start": 52.19,
+"end": 52.41,
+"word": " stop"
+},
+{
+"start": 52.48,
+"end": 52.76,
+"word": " doing."
+},
+{
+"start": 53.03,
+"end": 53.15,
+"word": " The"
+},
+{
+"start": 53.15,
+"end": 53.35,
+"word": " paper"
+},
+{
+"start": 53.35,
+"end": 53.51,
+"word": " is"
+},
+{
+"start": 53.51,
+"end": 53.69,
+"word": " called"
+},
+{
+"start": 53.585,
+"end": 54.07,
+"word": " StoryScope."
+},
+{
+"start": 54.14,
+"end": 54.18,
+"word": " And"
+},
+{
+"start": 54.215,
+"end": 54.26,
+"word": " if"
+},
+{
+"start": 54.29,
+"end": 54.33,
+"word": " you"
+},
+{
+"start": 54.365,
+"end": 54.405,
+"word": " want"
+},
+{
+"start": 54.44,
+"end": 54.56,
+"word": " the"
+},
+{
+"start": 54.56,
+"end": 54.68,
+"word": " link"
+},
+{
+"start": 54.68,
+"end": 54.84,
+"word": " to"
+},
+{
+"start": 54.84,
+"end": 54.96,
+"word": " read"
+},
+{
+"start": 54.915,
+"end": 54.99,
+"word": " it,"
+},
+{
+"start": 54.99,
+"end": 55.15,
+"word": " plus"
+},
+{
+"start": 55.15,
+"end": 55.33,
+"word": " the"
+},
+{
+"start": 55.33,
+"end": 55.51,
+"word": " Claude"
+},
+{
+"start": 55.6,
+"end": 55.74,
+"word": " skill"
+},
+{
+"start": 55.74,
+"end": 55.86,
+"word": " I"
+},
+{
+"start": 55.86,
+"end": 56.02,
+"word": " made,"
+},
+{
+"start": 56.19,
+"end": 56.41,
+"word": " comment"
+},
+{
+"start": 56.41,
+"end": 56.73,
+"word": " SCOPE."
+}
+]

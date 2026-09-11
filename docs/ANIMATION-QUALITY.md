@@ -1525,3 +1525,8 @@ Remove redundant slogans and footer commentary rather than increasing reading lo
 
 These improvements supplement the hook-to-body and audible-SFX rules in §28. Neither a more
 detailed background nor a passing per-scene score establishes interest or a full benchmark pass.
+
+
+## 30. SCOPE: retention cliffs need a semantic review, not extra idle motion
+
+See [the 39s/55s teardown](../memory/alex-scope-retention-39s-55s.md). Before shipping a revised loss point, require: (1) a rendered strip starting 2–3 seconds before it; (2) a visible actor action and changed result, not just a moving container; (3) a readable keyword from CTA entry; (4) native safe-bounds review through peak motion; (5) updated audio contacts and finished-file gates. State what is observed, what is hypothesized, and what needs post-publication analytics. Keep technical motion thresholds unchanged, but never label a numeric pass creative approval or recovered retention. A terminal loss at 96% duration and a mid-video loss at 68% require different interpretation.

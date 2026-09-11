@@ -53,7 +53,7 @@ def norm(s):
 
 # Verified naming aliases for the same reel. DEPARTMENT's source abbreviation and
 # number-first log otherwise create three disconnected registry entries.
-REEL_ALIASES = {"dept143": "department", "143department": "department"}
+REEL_ALIASES = {"dept143": "department", "143department": "department", "147scope": "scope"}
 
 # ---- gather the three scattered sources --------------------------------------
 def scan_reels():
@@ -77,6 +77,11 @@ def scan_reels():
                 continue
             disp = m.group(1)
             touch(norm(disp), code=f"video/src/{f}", name=disp)
+
+    # SCOPE has a dedicated registerRoot entrypoint rather than a Claude*Reel file.
+    scope_entry = "video/src/scope-147-index.tsx"
+    if keep(scope_entry) and os.path.isfile(rp(scope_entry)):
+        touch("scope", code=scope_entry, name="SCOPE")
 
     # log: memory/reels/<name>-factory-log.md
     d = rp("memory", "reels")
