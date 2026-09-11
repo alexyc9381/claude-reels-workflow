@@ -1,5 +1,8 @@
 # ANIMATION QUALITY — why the first pass is never good enough, and what actually fixes it
 
+**LM follow-up:** [frame-zero action, post-action continuity and demo legibility](../memory/alex-lm-hooks-demo-and-delivery.md).
+Read before interpreting “faster hook”, “more animation”, “show the setup” or “too close to the edge”.
+
 **Status:** the craft doc. Read before authoring scenes, and again when a reel comes back as
 *"boring"*, *"not interesting enough"*, *"they don't actually do movements"* or *"I'm not getting
 anything from the animations"*.

@@ -10,6 +10,10 @@ render, or a re-record. Read the section that matches what you are about to do.
 
 ## Index
 
+**September 11, 2026 — [LM hook, demo and delivery feedback](memory/alex-lm-hooks-demo-and-delivery.md):**
+read before opening animation, screen tutorials, trial variants or final delivery. Each correction
+includes its reason and verification; the five-second demo handoff and exact title are LM-specific.
+
 | # | Section | Read before you… |
 |---|---------|------------------|
 | 1 | [Colour & style](#1-colour--style) | pick any colour, shadow or background |

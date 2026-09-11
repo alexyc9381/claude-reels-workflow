@@ -1,6 +1,8 @@
 # THE OPEN — building a pattern-interrupt first five seconds
 
 **Status:** process doc. Read before authoring scene 0 of any reel.
+**Latest correction:** [LM frame-zero action and post-action continuity](../memory/alex-lm-hooks-demo-and-delivery.md).
+The subject must already move independently of the opening zoom; keep identity and text readable.
 **Companion doc:** [`MEASURING.md`](MEASURING.md) — how to measure frame 0 ink and band motion
 so the score means something.
 **Companion rules:** `memory/reel-multishot-structure.md` · `memory/reel-motion-hierarchy.md` ·
@@ -415,7 +417,9 @@ frame 0 caught it 13 frames into a flip, showing blank half-rolled cells where
 the price should be. A pre-seeded counter has to be seeded far enough back to
 have **settled**: `at = -40` renders a clean `$04,800` on frame 0.
 
-> ⛔ Every animated element that exists at frame 0 needs its start pushed back
-> far enough to be **finished**, not merely started.
+> ⛔ Identity text and counters that must be read at frame 0 need their entrance settled.
+> This does **not** require working mechanisms or Claude's action to finish before frame 0.
+> [Alex's LM correction](../memory/alex-lm-hooks-demo-and-delivery.md) explicitly requires subject
+> motion already underway, independently of the camera push. Keep the result readable while it moves.
 
 ---
