@@ -1,0 +1,28 @@
+{
+  "loading": {
+    "duration": 3.9820000000000007,
+    "first": {
+      "t": 19.463,
+      "file": "00027.png"
+    },
+    "last": {
+      "t": 23.295,
+      "file": "00066.png"
+    },
+    "capture": "models-to-chat",
+    "start": 19.2
+  },
+  "response": {
+    "duration": 7.225000000000001,
+    "first": {
+      "t": 14.298,
+      "file": "00015.png"
+    },
+    "last": {
+      "t": 21.373,
+      "file": "00089.png"
+    },
+    "capture": "chat-final",
+    "start": 14.23
+  }
+}

@@ -1,73 +1,174 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Freeze, Img, OffthreadVideo, interpolate, Easing, staticFile, useCurrentFrame, spring} from 'remotion';
-import {Bg, HookHeader, ProgressBar, KaraokeCaption, Mascot} from './SlopKit';
-import {inter, fraunces} from './fonts';
+import {AbsoluteFill,Audio,Freeze,Img,OffthreadVideo,Easing,interpolate,staticFile,useCurrentFrame} from 'remotion';
+import {Bg,KaraokeCaption,Mascot} from './SlopKit';
+import {inter,fraunces} from './fonts';
 import words from './data/words_lm146.json';
 import edl from './data/edl_lm146.json';
-import capture from '../public/lm146/capture-manifest.json';
-const FPS=30, C='#D97757', V='#6544EB', NAVY='#111C2F', GREEN='#398F68';
+
+const PURPLE='#6241E9', INK='#171E2D', CLAY='#D97757';
 const ease=(f:number,a:number,b:number)=>interpolate(f,[a,b],[0,1],{extrapolateLeft:'clamp',extrapolateRight:'clamp',easing:Easing.inOut(Easing.cubic)});
-const mix=(a:number,b:number,p:number)=>a+(b-a)*p;
-const step=(name:string)=>edl.find(e=>e.name===name)!;
-const at=(name:string)=>Math.round(step(name).start*30);
-const ends=(name:string)=>Math.round(step(name).end*30);
-const file=(s:string)=>staticFile('lm146/'+s);
-type Rect=[number,number,number];
-// All imagery below is captured from the real app or the official website.
-// Camera crops are editorial; no labels, responses, warnings, or UI values are altered.
-const Footage:React.FC<{name:string; local:number; cam:Rect; to?:Rect; move?:[number,number]; offset?:number; rate?:number; still?:boolean;height?:number}>=({name,local,cam,to,move=[0,35],offset=0,rate=1,still=false,height=650})=>{
- const p=ease(local,move[0],move[1]);const r=cam.map((v,i)=>mix(v,(to||cam)[i],p)) as Rect;const s=964/r[2];
- const max=Math.max(0,Math.floor(((capture as any)[name]?.seconds||1)*30)-3);
- const sourceFrame=Math.min(max,Math.max(0,Math.floor(local*rate+offset*30)));
- const style:React.CSSProperties={position:'absolute',left:-r[0]*s,top:-r[1]*s,width:(name.startsWith('website')||name.startsWith('official-model')?1280:1200)*s,maxWidth:'none'};
- return <div style={{position:'absolute',left:24,top:94,width:964,height,overflow:'hidden',borderRadius:22,background:'#fff',boxShadow:'0 16px 32px #0004'}}>{still?<Img src={file(name+'-last.png')} style={style}/>:<Freeze frame={sourceFrame}><OffthreadVideo src={file(name+'.mp4')} muted style={style}/></Freeze>}</div>;
+const lerp=(a:number,b:number,p:number)=>a+(b-a)*p;
+const at=(name:string)=>Math.round(edl.find(e=>e.name===name)!.start*30);
+const asset=(name:string)=>staticFile('lm146/r5/'+name);
+type Camera=[number,number,number];
+type Point=[number,number,number];
+type CameraKey=[number,Camera];
+const sample=(f:number,keys:Point[])=>{
+ let i=0;while(i<keys.length-1&&f>=keys[i+1][0])i++;
+ const a=keys[i],b=keys[Math.min(i+1,keys.length-1)];const p=a===b?0:ease(f,a[0],b[0]);
+ return [lerp(a[1],b[1],p),lerp(a[2],b[2],p)];
 };
-const Frame:React.FC<{title:string;number:string;children:React.ReactNode;tag?:string}>=({title,number,children,tag})=><div style={{position:'absolute',left:34,top:500,width:1012,height:790,borderRadius:38,background:'linear-gradient(145deg,#17253D,#0B1423)',boxShadow:'0 32px 65px #17253d55, inset 0 2px 0 #ffffff33',border:'2px solid #25364F',overflow:'hidden'}}><div style={{position:'absolute',left:30,top:29,display:'flex',alignItems:'center',gap:17,color:'white',fontFamily:inter.fontFamily,fontWeight:700,fontSize:28}}><span style={{background:V,borderRadius:12,padding:'6px 12px',fontSize:22}}>{number}</span>{title}</div><div style={{position:'absolute',right:34,top:38,fontFamily:inter.fontFamily,fontSize:19,color:'#BED0E8',letterSpacing:1.3}}>{tag||'LM STUDIO'}</div>{children}<div style={{position:'absolute',left:34,bottom:15,fontFamily:inter.fontFamily,fontSize:15,letterSpacing:1.3,color:'#8DA0BC'}}>REAL SCREEN CAPTURE</div></div>;
-const ContactRing:React.FC<{f:number;x:number;y:number;color?:string}>=({f,x,y,color=C})=>{const p=ease(f,0,15);return f>=0&&f<18?<div style={{position:'absolute',left:x-34,top:y-34,width:68,height:68,borderRadius:'50%',border:`5px solid ${color}`,opacity:1-p,transform:`scale(${.4+p*1.3})`}}/>:null;};
-const Hook:React.FC=()=>{
- const f=useCurrentFrame();const travel=ease(f,12,48), impact=Math.exp(-Math.max(0,f-48)/9)*Math.sin(Math.max(0,f-48)*.65);const zoom=f<36?1+.045*ease(f,0,36):1.13+.035*ease(f,36,88);
- const modelX=mix(392,587,travel), modelY=mix(120,449,travel), modelSize=mix(310,138,travel);
- const bodyX=mix(71,245,ease(f,5,40));const crouch=ease(f,3,10)*(1-ease(f,12,24));const reaction=ease(f,50,60);
- return <div style={{position:'absolute',left:34,top:500,width:1012,height:790,borderRadius:38,overflow:'hidden',background:'radial-gradient(ellipse at 65% 33%,#FAF7FF 0%,#EBE9F7 40%,#DDE7E7 100%)',border:'2px solid #F9F7F0',boxShadow:'0 30px 65px #17253d44'}}>
-  <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(#8274aa12 1px,transparent 1px),linear-gradient(90deg,#8274aa12 1px,transparent 1px)',backgroundSize:'44px 44px',maskImage:'linear-gradient(transparent,#000)'}}/>
-  <div style={{position:'absolute',left:38,top:30,fontFamily:inter.fontFamily,fontWeight:800,fontSize:24,color:V,letterSpacing:2}}>QWEN3.8-27B</div>
-  <div style={{position:'absolute',inset:0,transform:`scale(${zoom})`,transformOrigin:'55% 57%'}}>
-   <div style={{position:'absolute',left:347,top:346,width:534,height:286,border:'15px solid #273044',borderRadius:27,background:'#fff',boxShadow:'0 26px 44px #29354a44',transform:`translateY(${impact*5}px)`}}>
-    <div style={{position:'absolute',top:17,left:22,fontFamily:inter.fontFamily,fontSize:20,fontWeight:700,color:'#79718F'}}>YOUR COMPUTER</div>
-    <div style={{position:'absolute',left:220,top:89,width:160,height:118,borderRadius:20,border:`3px ${reaction>.2?'solid':'dashed'} ${reaction>.2?GREEN:'#BCB5D4'}`,background:reaction>.2?'#E5F3EC':'#F0ECF9'}}/>
-    {reaction>.05&&<div style={{position:'absolute',left:37,right:37,bottom:18,display:'flex',justifyContent:'center',gap:12,color:GREEN,fontFamily:inter.fontFamily,fontSize:23,fontWeight:800,opacity:reaction}}><span>✓</span>LOCAL AI</div>}
-   </div>
-   <div style={{position:'absolute',left:310,top:630,width:610,height:34,borderRadius:'4px 4px 45px 45px',background:'linear-gradient(#9AA6B6,#697990)',boxShadow:'0 27px 24px #35435333'}}/>
-   <div style={{position:'absolute',left:475,top:480,width:91,height:56,borderRadius:12,background:reaction>.2?GREEN:V,boxShadow:'0 6px 0 #3A286D',transform:`translateY(${ease(f,36,40)*(1-ease(f,43,50))*5}px)`,display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontFamily:inter.fontFamily,fontSize:18,fontWeight:850}}>{reaction>.2?'✓':'LOAD'}</div>
-   <div style={{position:'absolute',left:505,top:630,width:206,height:12,background:'#58657B',borderRadius:'0 0 20px 20px'}}/>
-   <div style={{position:'absolute',left:bodyX+16,top:643,width:240,height:32,borderRadius:'50%',background:'#4D405F24',filter:'blur(8px)',transform:`scaleX(${1+crouch*.12})`}}/>
-   <div style={{position:'absolute',left:bodyX,top:351+22*crouch-12*reaction,transform:`rotate(${mix(-8,5,ease(f,12,40))*(1-reaction)}deg) scaleY(${1-.12*crouch})`,transformOrigin:'50% 95%'}}><Mascot lf={f+24} size={315} nodAmp={0} gaze={7*(1-reaction)} stern={crouch*.65} shock={f<50?.08:.55*(1-ease(f,58,72))} cheer={reaction*.88}/></div>
-   <div style={{position:'absolute',left:modelX,top:modelY,width:modelSize,height:modelSize*.78,borderRadius:28,background:'linear-gradient(145deg,#8B73FF,#5636D6)',boxShadow:`${10*(1-travel)}px ${16*(1-travel)+5}px 0 #3D278D, 0 25px 38px #6746d455`,border:'3px solid #C1B0FF',transform:`rotate(${mix(-8,0,travel)+impact*2}deg)`,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',color:'#fff'}}><span style={{fontFamily:inter.fontFamily,fontSize:mix(93,44,travel),fontWeight:900,lineHeight:1}}>27B</span><span style={{fontFamily:inter.fontFamily,fontSize:mix(23,12,travel),letterSpacing:2,fontWeight:700,marginTop:10}}>PARAMETERS</span></div>
-   <ContactRing f={f-48} x={658} y={505} color={V}/>
-  </div>
-  <div style={{position:'absolute',bottom:35,left:0,right:0,textAlign:'center',fontFamily:inter.fontFamily,fontWeight:750,fontSize:30,color:'#403851',opacity:ease(f,55,67)}}>Find the version your machine can run.</div>
+const cameraAt=(f:number,keys:CameraKey[]):Camera=>{
+ let i=0;while(i<keys.length-1&&f>=keys[i+1][0])i++;
+ const a=keys[i],b=keys[Math.min(i+1,keys.length-1)],p=a===b?0:ease(f,a[0],b[0]);
+ return a[1].map((v,j)=>lerp(v,b[1][j],p)) as Camera;
+};
+const stateAt=(f:number,keys:[number,string][])=>{let i=0;while(i<keys.length-1&&f>=keys[i+1][0])i++;return keys[i][1];};
+const pressAt=(f:number,clicks:number[])=>Math.max(0,...clicks.map(c=>ease(f,c-3,c)*(1-ease(f,c,c+6))));
+
+// Editorial cursor enhancement over unaltered captures. The tip is the true hit point.
+// Cursor travel, click compression and rings share the exact frame of each recorded action.
+const Cursor:React.FC<{x:number;y:number;f:number;clicks:number[];size?:number}>=({x,y,f,clicks,size=64})=>{
+ const press=pressAt(f,clicks);return <div style={{position:'absolute',left:x,top:y,width:size,height:size*1.3,pointerEvents:'none',zIndex:20}}>
+ {clicks.map(c=>{const age=f-c;if(age<0||age>18)return null;const p=age/18;return <div key={c} style={{position:'absolute',left:-47,top:-47,width:94,height:94,border:'5px solid '+PURPLE,borderRadius:'50%',opacity:1-p,transform:`scale(${.2+p})`,background:`rgba(98,65,233,${.13*(1-p)})`}}/>;})}
+ <svg width={size} height={size*1.3} viewBox="0 0 40 52" style={{overflow:'visible',filter:'drop-shadow(1px 3px 4px #0005)',transform:`scale(${1-.2*press})`,transformOrigin:'0 0'}}><path d="M2 2 L2 39 L12 30 L20 48 L28 44 L20 27 L34 27 Z" fill="#171E2D" stroke="white" strokeWidth="3.2" strokeLinejoin="round"/></svg>
  </div>;
 };
-const QuantScale:React.FC<{f:number}>=({f})=>{const p=ease(f,7,94);return <div style={{position:'absolute',left:252,top:1330,right:60}}><div style={{display:'flex',justifyContent:'space-between',fontFamily:inter.fontFamily,fontWeight:800,fontSize:29,color:'#383041'}}><span>SMALLER FILE</span><span>MORE PRECISION</span></div><div style={{height:15,background:'#D4CFE2',borderRadius:20,marginTop:17,position:'relative'}}><div style={{height:15,width:`${25+p*75}%`,background:`linear-gradient(90deg,${V},${C})`,borderRadius:20}}/><div style={{position:'absolute',left:`${10+p*82}%`,top:-8,width:31,height:31,borderRadius:'50%',background:C,border:'4px solid white',boxShadow:'0 4px 10px #0002'}}/></div><div style={{display:'flex',justifyContent:'space-between',fontFamily:inter.fontFamily,fontSize:23,color:'#716978',marginTop:10}}><span>4-bit</span><span>8-bit</span></div></div>;};
-const SideNote:React.FC<{text:string;detail?:string;f:number;success?:boolean;quant?:boolean}>=({text,detail,f,success,quant})=>{
- const anticipate=ease(f,0,8)*(1-ease(f,9,17));const settle=ease(f,17,28);
- return <><div style={{position:'absolute',left:51,top:1291,transform:`translateY(${-8*settle+7*anticipate}px) rotate(${(-5*anticipate+3*settle)}deg)`}}><Mascot lf={f+26} size={170} nodAmp={0} gaze={5} stern={anticipate*.55} shock={success?.45*(1-ease(f,15,26)):.04} cheer={success?settle*.7:.2}/></div>{quant?<QuantScale f={f}/>:<div style={{position:'absolute',left:248,right:65,top:1321,fontFamily:inter.fontFamily}}><div style={{fontWeight:850,fontSize:33,color:success?GREEN:'#332D3C',lineHeight:1.17}}>{text}</div>{detail&&<div style={{marginTop:10,fontWeight:500,fontSize:23,color:'#7A7280',lineHeight:1.25}}>{detail}</div>}</div>}</>;
+
+type ScreenProps={f:number;states:[number,string][];cameras:CameraKey[];points:Point[];clicks:number[];height?:number;top?:number;video?:{name:string;start:number;end?:number;offset?:number;rate?:number;max:number};width?:number;left?:number;border?:boolean};
+const CloseupScreen:React.FC<ScreenProps>=({f,states,cameras,points,clicks,height=850,top=415,video,width=1012,left=34,border=true})=>{
+ const cam=cameraAt(f,cameras),s=width/cam[2],point=sample(f,points),name=stateAt(f,states);
+ const browser=name.startsWith('2')&&Number(name.slice(0,2))>=20&&Number(name.slice(0,2))<=23;
+ const srcWidth=browser||name==='official'?1280:1200;
+ const style:React.CSSProperties={position:'absolute',left:-cam[0]*s,top:-cam[1]*s,width:srcWidth*s,maxWidth:'none'};
+ const isVideo=video&&f>=video.start&&(video.end===undefined||f<video.end);
+ return <div style={{position:'absolute',left,top,width,height,borderRadius:26,background:'white',overflow:'hidden',boxShadow:border?'0 24px 60px #24263c36, 0 0 0 5px #17243C':undefined}}>
+ {isVideo?<Freeze frame={Math.min(video.max,Math.max(0,Math.floor((f-video.start)*(video.rate||1)+(video.offset||0))))}><OffthreadVideo muted src={asset(video.name)} style={style}/></Freeze>:<Img src={name==='official'?staticFile('lm146/official-model38-last.png'):asset(name+'.png')} style={style}/>}
+ <Cursor x={(point[0]-cam[0])*s} y={(point[1]-cam[1])*s} f={f} clicks={clicks}/>
+ </div>;
 };
-const CTA:React.FC=()=>{const f=useCurrentFrame()-at('cta');const p=spring({fps:30,frame:f,config:{damping:17,stiffness:180}});const press=ease(f,6,13)*(1-ease(f,14,20));return <div style={{position:'absolute',left:34,top:500,width:1012,height:790,borderRadius:38,overflow:'hidden',background:'radial-gradient(ellipse at 55% 36%,#FFFFFF,#E8E4F2)',boxShadow:'0 30px 65px #17253d44'}}><div style={{position:'absolute',left:100,top:80,fontFamily:inter.fontFamily,fontWeight:800,fontSize:45,color:'#302A3C'}}>Your local AI setup.</div><div style={{position:'absolute',left:120,top:210,width:770,height:212,borderRadius:32,background:'#FFF',border:'3px solid #D7CFE4',boxShadow:'0 22px 45px #49356925',transform:`scale(${.94+.06*p})`,display:'flex',alignItems:'center',justifyContent:'center',gap:28}}><span style={{fontFamily:inter.fontFamily,fontSize:49,fontWeight:700,color:'#312A3E'}}>Comment</span><div style={{padding:'16px 32px',background:V,color:'white',borderRadius:23,fontFamily:inter.fontFamily,fontSize:84,fontWeight:900,transform:`translateY(${press*8}px) scale(${1-press*.04})`,boxShadow:`0 ${9-press*7}px 0 #382184`}}>LM</div></div><div style={{position:'absolute',left:630,top:425,transform:`translateY(${press*10}px)`}}><Mascot lf={f+26} size={244} nodAmp={0} gaze={-6} cheer={ease(f,18,29)} shock={.4*(1-ease(f,14,23))}/></div><div style={{position:'absolute',left:115,top:510,fontFamily:inter.fontFamily,fontSize:31,fontWeight:650,lineHeight:1.65,color:'#635A73'}}><div>01 Install LM Studio</div><div>02 Pick a model that fits</div><div>03 Start a local chat</div></div><ContactRing f={f-14} x={665} y={330} color={V}/></div>;};
+
+// Overview preserves navigation context; the lower lens makes the actual hit target readable.
+// Both views use the same source frame and pointer path. This is magnification, not a UI remake.
+const Screen:React.FC<ScreenProps>=(props)=>{
+ if(props.border===false)return <CloseupScreen {...props}/>;
+ const {f,states,points,clicks,video}=props,name=stateAt(f,states),pt=sample(f,points);
+ const browser=(name.startsWith('2')&&Number(name.slice(0,2))>=20&&Number(name.slice(0,2))<=23)||name==='official';
+ const sw=browser?1280:1200,sh=browser?720:760,oy=browser?0:40;
+ const bscale=884/sw,fw=355,fh=315/760*fw;
+ const fx=Math.max(0,Math.min(sw-fw,pt[0]-fw*.47)),fy=Math.max(oy,Math.min(sh-fh,pt[1]-fh*.43));
+ const play=video&&f>=video.start&&(video.end===undefined||f<video.end);
+ const source=(style:React.CSSProperties)=>play?<Freeze frame={Math.min(video.max,Math.max(0,Math.floor((f-video.start)*(video.rate||1)+(video.offset||0))))}><OffthreadVideo src={asset(video.name)} muted style={style}/></Freeze>:<div style={{...style,height:Number(style.width)*sh/sw}}><Img src={name==='official'?staticFile('lm146/official-model38-last.png'):asset(name+'.png')} style={{width:'100%',display:'block'}}/>{name==='43-q6-menu'&&<div style={{position:'absolute',left:(788/sw*100)+'%',top:(308/sh*100)+'%',width:(93/sw*100)+'%',height:(62/sh*100)+'%',overflow:'hidden'}}><Img src={asset(name+'.png')} style={{position:'absolute',width:(sw/93*100)+'%',maxWidth:'none',left:(-903/93*100)+'%',top:(-308/62*100)+'%'}}/></div>}</div>;
+ const zoom=760/fw;
+ return <>
+  <div style={{position:'absolute',left:34,top:400,width:1012,height:1020,borderRadius:37,background:'radial-gradient(ellipse at 45% 0%,#354D77 0%,#182B4A 46%,#0E1B30 100%)',boxShadow:'0 29px 60px #17243C45,inset 0 2px 0 #FFFFFF33',border:'2px solid #445D82'}}><div style={{position:'absolute',left:0,right:0,bottom:0,height:302,borderRadius:'0 0 37px 37px',background:'linear-gradient(#111E3480,#0A1527)',borderTop:'1px solid #7B90AD28'}}/></div>
+  <div style={{position:'absolute',left:98,top:436,width:884,height:534,borderRadius:22,overflow:'hidden',background:'#fff',boxShadow:'0 20px 36px #050E1C80,0 0 0 2px #DFE6F033'}}>
+   {source({position:'absolute',width:884,top:-oy*bscale,left:0,maxWidth:'none'})}
+   <div style={{position:'absolute',left:fx*bscale,top:(fy-oy)*bscale,width:fw*bscale,height:fh*bscale,border:'3px solid #6241E9',borderRadius:9,background:'#6241E908',boxShadow:'0 0 0 1px #ffffff90'}}/>
+   <Cursor x={pt[0]*bscale} y={(pt[1]-oy)*bscale} f={f} clicks={clicks} size={46}/>
+  </div>
+  <div style={{position:'absolute',left:58,top:1092,width:760,height:315,borderRadius:23,overflow:'hidden',background:'#fff',boxShadow:'0 17px 35px #17243C2B,0 0 0 4px #6241E9'}}>
+   {source({position:'absolute',left:-fx*zoom,top:-fy*zoom,width:sw*zoom,maxWidth:'none'})}
+   <Cursor x={(pt[0]-fx)*zoom} y={(pt[1]-fy)*zoom} f={f} clicks={clicks} size={57}/>
+  </div>
+ </>;
+};
+
+// Original rig only. The body anticipates a click, follows the cursor, absorbs contact,
+// then looks at the result. No extra arms, opaque props over the face, or perpetual bobbing.
+const EdgeClaude:React.FC<{f:number;clicks:number[];success?:number;side?:'left'|'right'}>=({f,clicks,success=9999,side='right'})=>{
+ const next=clicks.find(c=>c>=f-18)??-100;const u=f-next;
+ const pre=ease(u,-12,-5)*(1-ease(u,-4,1));const hit=ease(u,0,3)*(1-ease(u,4,14));
+ const win=ease(f,success,success+12),walk=ease(f,1,20);
+ const x=(side==='right'?803:48)+(side==='right'?42:-42)*(1-walk);
+ return <div style={{position:'absolute',left:x,top:1266,transform:`translateY(${pre*13-hit*19-win*10}px) rotate(${(side==='right'?-1:1)*(pre*7-hit*5)}deg) scale(${1+pre*.04},${1-pre*.11+hit*.07})`,transformOrigin:'50% 90%'}}>
+ <div style={{position:'absolute',left:45,top:166,width:138,height:18,borderRadius:'50%',background:'#21273E20',filter:'blur(5px)',transform:`scaleX(${1+pre*.15})`}}/>
+ <Mascot lf={f+22} size={220} nodAmp={0} gaze={side==='right'?-7:7} stern={pre*.7} shock={hit*.62} cheer={win*.8}/>
+ </div>;
+};
+
+const Hook:React.FC=()=>{
+ const f=useCurrentFrame(),trigger=22,p=pressAt(f,[trigger]);
+ const pre=ease(f,5,13)*(1-ease(f,14,21));const travel=ease(f,14,22),recover=ease(f,24,37);
+ const into=ease(f,38,55),zoom=1+.045*ease(f,0,16);
+ if(f>=55)return <>
+  <Screen f={f} states={[[55,'06-5bit'],[83,'41-source-url'],[101,'official']]} cameras={[[55,[493,82,620]],[77,[492,261,620]],[100,[492,261,620]],[101,[0,77,540]],[118,[0,77,635]],[145,[0,87,635]]]} points={[[55,782,295],[78,682,645],[83,682,645],[92,765,592],[95,765,592],[100,765,592],[101,254,118],[119,218,115],[145,238,115]]} clicks={[83,95]} />
+  <EdgeClaude f={f-55} clicks={[28,40]} success={48}/>
+ </>;
+ return <div style={{position:'absolute',inset:0,transform:`scale(${zoom})`,transformOrigin:'50% 52%'}}>
+  <div style={{position:'absolute',left:64,top:178,fontFamily:fraunces.fontFamily,fontSize:79,lineHeight:1.02,fontWeight:750,color:INK,opacity:1-into}}>Qwen3.8</div>
+  <div style={{position:'absolute',left:56,top:280,fontFamily:inter.fontFamily,fontSize:250,fontWeight:900,letterSpacing:-18,lineHeight:.96,color:PURPLE,opacity:1-into}}>27B</div>
+  <div style={{position:'absolute',left:65,top:1340,width:950,height:24,borderRadius:'50%',background:'#25264822',filter:'blur(13px)',opacity:1-into}}/>
+  <div style={{position:'absolute',left:lerp(184,34,into),top:lerp(655,415,into),width:lerp(806,1012,into),height:lerp(560,850,into),borderRadius:30,background:'#192339',border:`${lerp(17,0,into)}px solid #192339`,boxShadow:'0 26px 44px #19233940',overflow:'hidden'}}>
+   <Screen f={f} states={[[0,'05-4bit'],[22,'06-5bit']]} cameras={[[0,[90,78,1025]],[22,[90,78,1025]],[38,[90,78,1025]],[55,[493,82,620]]]} points={[[0,484,457],[9,452,448],[21,276,408],[22,276,408],[34,279,406],[55,782,295]]} clicks={[22]} width={lerp(772,1012,into)} height={lerp(526,850,into)} left={0} top={0} border={false}/>
+  </div>
+  <div style={{position:'absolute',left:142,top:1214,width:890,height:38,borderRadius:'4px 4px 45px 45px',background:'linear-gradient(#BFC6D3,#737F96)',boxShadow:'0 20px 34px #19233935',opacity:1-into}}><div style={{margin:'0 auto',width:270,height:11,borderRadius:'0 0 12px 12px',background:'#526077'}}/></div>
+  <div style={{position:'absolute',left:328,top:1057,width:116,height:156,borderRadius:'55px 55px 35px 35px',background:'linear-gradient(135deg,#fff,#C0C7D4)',border:'4px solid #202E46',transform:`translateY(${p*9}px) scaleY(${1-p*.1})`,boxShadow:`0 ${15-p*10}px 0 #637089`,opacity:1-into}}><div style={{position:'absolute',top:0,left:54,width:3,height:70,background:'#47546B'}}/><div style={{position:'absolute',top:20,left:45,width:19,height:33,borderRadius:10,background:PURPLE}}/></div>
+  <div style={{position:'absolute',left:lerp(6,73,travel)-17*pre-15*recover,top:936+18*pre-9*recover,transform:`rotate(${-8*pre+8*travel*(1-recover)}deg) scale(${1+.05*pre},${1-.11*pre})`,transformOrigin:'50% 95%',opacity:1-into}}><Mascot lf={f+22} size={312} nodAmp={0} gaze={7} stern={pre*.85} shock={.58*ease(f,23,28)*(1-ease(f,29,37))} cheer={.65*recover}/></div>
+ </div>;
+};
+
+const CTA:React.FC<{f:number}>=({f})=>{
+ const p=pressAt(f,[23]);const pos=sample(f,[[0,600,958],[4,351,830],[9,351,830],[20,925,836],[23,925,836],[36,950,855],[56,950,855]]);
+ return <><div style={{position:'absolute',left:65,top:336,fontFamily:fraunces.fontFamily,fontSize:92,fontWeight:750,lineHeight:1.04,color:INK}}>Comment <span style={{color:PURPLE}}>LM</span><br/>for the setup.</div>
+ <div style={{position:'absolute',left:76,top:720,width:928,height:260,background:'#fff',border:'5px solid #192339',borderRadius:36,boxShadow:'0 23px 50px #2129412a',display:'flex',alignItems:'center',paddingLeft:60,fontFamily:inter.fontFamily,fontSize:104,fontWeight:850,color:INK,transform:`translateY(${p*8}px)`}}>{f>=9?'L':''}{f>=14?'M':''}<span style={{height:109,width:5,background:PURPLE,marginLeft:9,opacity:f<30?1:0}}/><div style={{position:'absolute',right:40,top:66,width:110,height:110,borderRadius:'50%',background:PURPLE,color:'white',textAlign:'center',fontSize:85,lineHeight:'103px'}}>↑</div></div>
+ <Cursor x={pos[0]} y={pos[1]} f={f} clicks={[4,23]}/><div style={{position:'absolute',left:667,top:1010,transform:`translateY(${-36*ease(f,23,31)*(1-ease(f,32,44))}px)`}}><Mascot lf={f+26} size={292} nodAmp={0} gaze={-7} stern={f<12?.45:0} shock={.55*ease(f,21,24)*(1-ease(f,25,31))} cheer={ease(f,29,42)}/></div></>;
+};
+
 export const ClaudeLM146Reel:React.FC=()=>{
- const f=useCurrentFrame();let idx=edl.findIndex((e,i)=>f>=Math.round(e.start*30)&&(i===edl.length-1||f<Math.round(edl[i+1].start*30)));if(idx<0)idx=0;const scene=edl[idx].name;const lf=f-at(scene);
- let big='LOCAL AI, STEP BY STEP', hot='ON YOUR COMPUTER.';
- let title='',number='',name='',cam:Rect=[0,0,1200],to:Rect|undefined,local=lf,offset=0,rate=1,still=false,height=650,move:[number,number]=[0,35],tag='LM STUDIO';let note='',detail='',success=false,quant=false;
- if(scene==='hook'){big='27 BILLION PARAMETERS';hot='ON YOUR COMPUTER.';}
- if(scene==='download'){big='START WITH LM STUDIO';hot='A FREE LOCAL AI APP.';title='Download the app';number='01';name=lf<51?'website-detail':'website-os';local=lf<51?lf:lf-51;cam=[173,68,820];to=[176,77,690];note='lmstudio.ai/download';detail='Choose LM Studio for your operating system.';tag='OFFICIAL WEBSITE';}
- if(scene==='search'){big='FIND YOUR MODEL';hot='CHECK THE SOURCE.';title=lf<81?'Search Qwen3.8-27B':'Verify the original model';number='02';name=lf<81?'search38':'official-model38';local=lf<81?lf:lf-81;rate=lf<81?6:1;offset=lf<81?.4:0;cam=lf<81?[85,78,1025]:[0,69,775];to=lf<81?[91,82,530]:[4,75,745];note=lf<81?'Search: Qwen3.8-27B':'Original model: Qwen';detail=lf<81?'Choose a compatible GGUF download.':'GGUF files are community conversions.';tag=lf<81?'LM STUDIO':'HUGGING FACE';}
- if(scene==='quant'){big='4, 5, 6 OR 8 BIT?';hot='PICK YOUR QUANTIZATION.';title='Compare the download options';number='03';name='search38';still=true;cam=[102,170,390];height=155;const qtimes=[0,13,26,44];const ys=[170,386,314,242];let j=0;while(j<3&&lf>=qtimes[j+1])j++;const prev=Math.max(0,j-1);cam=[102,ys[j],390];note=['4-bit','5-bit','6-bit','8-bit'][j]+' quantization';detail='Same model family. Different file sizes.';}
- if(scene==='compression'||scene==='best'){big=scene==='compression'?'QUANTIZATION = COMPRESSION':'CHOOSE WHAT FITS';hot=scene==='compression'?'SIZE VS. PRECISION.':'KEEP MORE PRECISION.';title='Balance size and compression';number='03';name='quant38';still=true;cam=scene==='compression'?[520,324,580]:[520,356,575];to=scene==='compression'?[524,332,574]:[524,360,570];quant=scene==='compression';note='Use the least compressed option that fits.';detail='Leave room for the app and context, too.';}
- if(scene==='fit'){big='WILL IT RUN ON YOUR MAC?';hot='CHECK BEFORE DOWNLOADING.';title=lf<99?'Read the hardware estimate':'Pick a model that fits';number='04';name=lf<99?'fit38':'download-model';local=lf<99?lf:lf-99;cam=lf<99?[510,280,590]:[510,270,590];to=lf<99?[520,310,570]:[515,280,580];note=lf<99?'27B: “Likely too large” on this Mac':'1.7B demo: fits this Mac';detail=lf<99?'Your available memory determines the fit.':'Smaller community model used for the live chat.';success=lf>=99;}
- if(scene==='models'){big='OPEN YOUR DOWNLOADED MODEL';hot='GO TO MY MODELS.';title='Open My Models';number='05';name='my-models';height=350;cam=[0,28,1200];to=[41,34,1155];note='Live demo: Qwen3 • 1.7B uncensored';detail='The chat demo uses this smaller community variant.';}
- if(scene==='load'){big='ONE MODEL. A NEW CHAT.';hot='LOAD IT LOCALLY.';title=lf<70?'Open the model settings':'Use in New Chat';number='05';name=lf<95?'model-config':'use-new-chat';local=lf<95?lf:lf-95;offset=lf<95?0:3.48;move=[0,30];cam=lf<95?[330,35,870]:[327,38,530];to=lf<95?[843,35,350]:[335,38,510];note='Qwen3 • 1.7B uncensored';detail='Model settings → Use in New Chat';success=lf>100;}
- if(scene==='chat'){big='NOW CHAT WITH LOCAL AI';hot='THINK. WRITE. CODE.';title=lf<67?'Reasoning locally':'Code generated on this Mac';number='05';name=lf<67?'chat-response':'code-final';local=lf<67?lf:lf-67;cam=lf<67?[149,155,865]:[155,223,440];to=lf<67?[151,183,810]:[157,235,415];rate=lf<67?8:1;offset=lf<67?2:0;note='Live demo: Qwen3 • 1.7B uncensored';detail=lf<67?'Recording shown at 8× speed.':'Actual local output. No cloud inference.';success=true;tag=lf<67?'8× SPEED':'LOCAL RESPONSE';}
- if(scene==='cta'){big='WANT THE SETUP?';hot='COMMENT “LM”.';}
- return <AbsoluteFill style={{fontFamily:inter.fontFamily}}><Bg/><div style={{position:'absolute',top:116,left:55,right:55,display:'flex',alignItems:'center',justifyContent:'space-between',fontSize:25,fontWeight:750,letterSpacing:3,color:'#7F746C'}}><span>LOCAL AI • PRACTICAL DEMO</span><span style={{fontSize:21,letterSpacing:1}}>QWEN × LM STUDIO</span></div><ProgressBar/><HookHeader big={big} hot={hot} f={100}/>{scene==='hook'?(lf<90?<Hook/>:<><Frame title="Meet Qwen3.8-27B" number="27B" tag="OFFICIAL MODEL"><Footage name="official-model38" local={lf-90} cam={[0,69,775]} to={[4,75,745]}/></Frame><SideNote text="27 billion language parameters" detail="Choose a version that fits your hardware." f={lf-90}/></>):scene==='cta'?<CTA/>:<><Frame title={title} number={number} tag={tag}><Footage name={name} local={local} cam={cam} to={to} offset={offset} rate={rate} still={still} height={height} move={move}/>{scene==='models'&&<div style={{position:'absolute',left:42,right:42,top:515,fontFamily:inter.fontFamily,color:'white'}}><div style={{color:'#ADBED8',fontSize:23,letterSpacing:2,marginBottom:25}}>THREE CLICKS TO A LOCAL CHAT</div><div style={{display:'flex',gap:18,alignItems:'center'}}>{['My Models','Settings','New Chat'].map((x,i)=><React.Fragment key={x}>{i>0&&<span style={{color:'#A697F2',fontSize:34}}>→</span>}<div style={{background:i===0?V:'#23344F',padding:'23px 18px',borderRadius:18,fontWeight:800,fontSize:29,opacity:.55+.45*ease(lf,i*13,i*13+12)}}>{x}</div></React.Fragment>)}</div></div>}{scene==='quant'&&<div style={{position:'absolute',top:464,left:44,right:44,fontFamily:inter.fontFamily}}><div style={{fontSize:22,color:'#AEBFD6',letterSpacing:2,marginBottom:26}}>CHOOSE A COMPRESSION LEVEL</div><div style={{display:'flex',gap:17}}>{[4,5,6,8].map((x,i)=>{const active=lf>=[0,13,26,44][i]&&(i===3||lf<[0,13,26,44][i+1]);return <div key={x} style={{flex:1,padding:'23px 0',borderRadius:24,textAlign:'center',background:active?V:'#24334B',transform:`translateY(${active?-7:0}px)`,boxShadow:active?'0 8px 0 #3E268D':'none',color:active?'#FFF':'#899AB5'}}><span style={{fontSize:66,fontWeight:900}}>{x}</span><div style={{fontSize:23,fontWeight:650}}>BIT</div></div>})}</div></div>}</Frame><SideNote text={note} detail={detail} f={lf} success={success} quant={quant}/></>}
- <KaraokeCaption words={words} top={1475}/><div style={{position:'absolute',left:60,right:60,top:1735,height:2,background:'#B9AC9936'}}/><div style={{position:'absolute',left:60,right:60,top:1764,fontSize:21,color:'#8D8176',letterSpacing:1.5,fontWeight:650,display:'flex',justifyContent:'space-between'}}><span>NO CLOUD REQUIRED FOR LOCAL CHAT</span><span>COMMENT LM</span></div><Audio src={file('master.wav')}/></AbsoluteFill>;
+ const f=useCurrentFrame();let idx=edl.findIndex((e,i)=>f>=Math.round(e.start*30)&&(i===edl.length-1||f<Math.round(edl[i+1].start*30)));if(idx<0)idx=0;
+ const scene=edl[idx].name,lf=f-at(scene);let heading='',states:[number,string][]=[],cameras:CameraKey[]=[],points:Point[]=[],clicks:number[]=[],height=850,top=415,success=9999,video:ScreenProps['video'];
+ if(scene==='download'){
+  heading='Download LM Studio.';states=[[0,'20-website'],[24,'21-website-os'],[43,'22-website-selected'],[65,'23-website-clicked'],[102,'01-app']];
+  cameras=[[0,[175,12,680]],[18,[175,18,565]],[44,[175,85,550]],[66,[182,180,470]],[91,[182,170,510]],[101,[182,170,510]],[102,[0,50,640]],[124,[0,50,560]]];
+  points=[[0,814,397],[21,373,230],[24,373,230],[39,342,277],[43,342,277],[61,364,298],[65,364,298],[90,395,312],[101,395,312],[102,569,343],[124,303,264]];clicks=[24,43,65];
+ }
+ if(scene==='search'){
+  heading='Search Qwen3.8.';states=[[0,'01-app'],[15,'02-search-open'],[38,'q1'],[46,'q2'],[54,'q3'],[60,'04-results'],[77,'06-5bit'],[103,'41-source-url'],[125,'official']];
+  cameras=[[0,[0,50,560]],[13,[0,50,560]],[28,[90,80,443]],[67,[90,80,443]],[77,[90,80,443]],[99,[487,260,635]],[124,[487,260,635]],[125,[0,77,590]],[144,[0,77,640]]];
+  points=[[0,300,259],[12,20,162],[15,20,162],[31,245,110],[35,245,110],[60,263,193],[72,276,408],[77,276,408],[98,683,645],[103,683,645],[115,765,592],[118,765,592],[124,765,592],[125,225,116],[144,236,118]];clicks=[15,35,77,103,118];
+ }
+ if(scene==='quant'){
+  heading='Choose the quantization.';states=[[0,'05-4bit'],[20,'06-5bit'],[43,'07-6bit'],[65,'08-8bit']];
+  cameras=[[0,[99,162,395]],[18,[99,178,395]],[40,[99,200,395]],[65,[99,169,395]],[84,[99,162,395]]];
+  points=[[0,294,195],[4,294,195],[16,287,408],[20,287,408],[38,283,336],[43,283,336],[60,282,264],[65,282,264],[84,301,264]];clicks=[4,20,43,65];
+ }
+ if(scene==='compression'){
+  heading='Compression changes precision.';states=[[0,'09-gguf'],[25,'10-gguf-options'],[63,'11-q6-fit'],[99,'43-q6-menu'],[123,'12-q8-fit']];
+  cameras=[[0,[510,275,590]],[24,[510,298,590]],[39,[657,385,436]],[62,[657,385,436]],[63,[653,321,440]],[88,[520,298,575]],[100,[520,298,575]],[115,[657,385,436]],[122,[657,385,436]],[123,[653,321,440]],[153,[653,317,440]]];
+  points=[[0,901,496],[20,828,343],[25,828,343],[55,700,456],[63,700,456],[75,730,343],[90,833,343],[99,833,343],[117,698,488],[123,698,488],[135,730,343],[153,737,343]];clicks=[25,63,99,123];
+ }
+ if(scene==='best'){
+  heading='Choose what your computer can run.';states=[[0,'11-q6-fit'],[17,'43-q6-menu'],[53,'11-q6-fit']];
+  cameras=[[0,[653,317,440]],[16,[520,307,570]],[17,[655,379,437]],[44,[655,379,437]],[53,[513,325,570]],[70,[520,350,570]],[98,[520,350,570]]];
+  points=[[0,982,343],[13,829,343],[17,829,343],[28,982,487],[44,1002,455],[53,700,456],[77,666,385],[98,638,385]];clicks=[17,53];
+ }
+ if(scene==='fit'){
+  heading='Check the hardware estimate.';states=[[0,'11-q6-fit'],[45,'15-small-ready'],[83,'16-downloading'],[100,'17-download-progress'],[113,'18-download-done'],[124,'24-download-complete'],[139,'25-downloaded']];
+  cameras=[[0,[520,350,570]],[19,[520,342,400]],[44,[520,342,400]],[45,[497,88,610]],[68,[521,300,571]],[82,[740,310,348]],[103,[868,323,220]],[139,[868,323,220]],[152,[838,301,256]]];
+  points=[[0,638,385],[19,604,385],[41,620,385],[45,638,353],[65,606,353],[78,983,353],[83,983,353],[99,981,354],[124,989,354],[152,992,354]];clicks=[83];success=139;
+ }
+ if(scene==='models'){
+  heading='Open My Models.';states=[[0,'25-downloaded'],[11,'26-before-my-models'],[35,'27-my-models']];
+  cameras=[[0,[838,301,256]],[5,[905,79,211]],[10,[905,79,211]],[11,[0,50,530]],[35,[0,50,530]],[56,[43,54,530]],[78,[54,100,457]]];
+  points=[[0,995,353],[8,1085,109],[11,1085,109],[30,20,128],[35,20,128],[53,246,149],[81,272,150]];clicks=[11,35];height=670;
+ }
+ if(scene==='load'){
+  heading='Use in New Chat.';states=[[0,'27-my-models'],[12,'28-model-selected'],[51,'29-model-cog'],[93,'30-chat-loaded'],[130,'31-chat-ready']];
+  cameras=[[0,[54,100,457]],[14,[54,100,457]],[32,[741,50,459]],[50,[858,69,340]],[51,[841,50,354]],[78,[865,74,320]],[92,[865,74,320]],[93,[430,50,370]],[117,[430,50,370]],[129,[430,50,370]],[130,[137,630,730]],[149,[137,638,630]]];
+  points=[[0,272,150],[12,272,150],[19,312,150],[45,1158,150],[51,1158,150],[77,952,100],[93,952,100],[101,651,85],[129,651,85],[130,651,85],[149,286,675]];clicks=[12,51,93];success=130;height=850;video={name:'loading.mp4',start:93,end:130,offset:66,rate:1.3,max:116};
+ }
+ if(scene==='chat'){
+  heading='Chat with the model.';states=[[0,'36-chat-empty'],[15,'37-prompt-start'],[25,'38-prompt-middle'],[36,'39-prompt-full'],[61,'40-code-result']];
+  cameras=[[0,[137,638,630]],[23,[137,638,710]],[36,[310,637,770]],[51,[858,644,250]],[53,[858,644,250]],[54,[144,91,965]],[67,[144,91,965]],[83,[153,225,433]],[108,[153,225,433]],[127,[156,256,427]],[164,[156,256,427]]];
+  points=[[0,286,675],[9,286,675],[39,373,675],[48,1076,719],[53,1076,719],[54,1076,719],[70,263,289],[83,245,289],[125,235,305],[164,275,305]];clicks=[9,53];success=95;video={name:'response.mp4',start:54,rate:2.25,max:195};
+ }
+ const title=scene==='hook'?(f<55?'':'On your computer.'):heading;
+ return <AbsoluteFill style={{fontFamily:inter.fontFamily}}><Bg/>
+ <div style={{position:'absolute',left:58,right:58,top:112,height:7,borderRadius:6,background:'#C3BBAD66',overflow:'hidden'}}><div style={{height:'100%',width:`${f/1367*100}%`,background:CLAY}}/></div>
+ {title&&<div style={{position:'absolute',left:60,right:58,top:188,fontFamily:fraunces.fontFamily,fontSize:scene==='compression'||scene==='best'?70:82,fontWeight:750,lineHeight:1.06,letterSpacing:-2.5,color:INK}}>{title}</div>}
+ {scene==='hook'?<Hook/>:scene==='cta'?<CTA f={lf}/>:<><Screen f={lf} states={states} cameras={cameras} points={points} clicks={clicks} height={height} top={top} video={video}/><EdgeClaude f={lf} clicks={clicks} success={success}/></>}
+ {scene==='fit'&&lf>=45&&lf<94&&<div style={{position:'absolute',left:62,top:1046,fontSize:27,lineHeight:1.2,fontWeight:650,color:'#EDF1F8'}}>This Mac: smaller 1.7B model.</div>}
+ <KaraokeCaption words={words} top={1475}/><Audio src={staticFile('lm146/master.wav')}/>
+ </AbsoluteFill>;
 };

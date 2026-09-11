@@ -12,15 +12,34 @@ def active(x):
 v=load(R/'vo/lm146/final-vo.wav');vo=np.zeros((N,2));vo[:len(v)]=v
 music=load(R/'vo/lm146/music-source.mp3')[round(13.95*SR):round(13.95*SR)+N];music*=10**((db(aw(vo))-14-db(aw(music)))/20)
 t=np.arange(N)/SR;music*=np.minimum(1,t/.012)[:,None];music*=np.clip((DUR-t)/.45,0,1)[:,None]
-bank=P/'sfx';bank.mkdir(exist_ok=True);prev=Path('/Users/allyy/Documents/Codex/2026-09-09/i-have-attached-the-voice-over/work/setup-reel/video/public/sfx/setup145')
-for name in ['impact','lever','thock','unlock','key','paper','terminal','pickup']:
- shutil.copy2(prev/(name+'.wav'),bank/(name+'.wav'))
+bank=P/'sfx'
+missing=[name for name in ['impact','lever','thock','unlock','key','paper','terminal','pickup'] if not (bank/(name+'.wav')).exists()]
+if missing:raise FileNotFoundError('Restore video/public/lm146/sfx from LM146-Source.zip: '+', '.join(missing))
 E=json.loads((R/'vo/lm146/edl.json').read_text());S={x['name']:round(x['start']*30)/30 for x in E}
-cues=[(0,'impact','hero','opening model block and immediate camera push'),(.4,'lever','support','Claude starts pushing the model'),(1.2,'paper','support','hook punches into the physical load action'),(3.,'paper','support','official Qwen3.8 model proof appears'),(1.6,'thock','hero','model reaches laptop'),(1.9,'unlock','support','local AI state lights up')]
-def c(scene,delta,name,action,role='support'):cues.append((S[scene]+delta,name,role,action))
-c('download',0,'paper','official download page appears');c('download',1.85,'key','operating system choices open');c('search',.2,'key','Qwen search is entered');c('search',.33,'terminal','matching model result resolves');c('search',2.7,'paper','official Qwen model card appears');c('quant',0,'thock','quantization close-up lands')
-for d in [.43,.87,1.47]:c('quant',d,'key','camera follows the next spoken bit-depth option','texture')
-c('compression',.5,'lever','size versus precision scale begins');c('compression',3.1,'pickup','precision end of scale settles','texture');c('best',0,'paper','higher precision options come into focus');c('fit',0,'thock','hardware estimate close-up');c('fit',3.3,'unlock','smaller model shows a positive fit','hero');c('models',.4,'key','My Models opens');c('load',.4,'key','model configuration opens');c('load',3.17,'thock','Use in New Chat is selected');c('load',3.45,'terminal','model loads locally');c('chat',.05,'terminal','local model reasoning appears');c('chat',2.23,'unlock','formatted Python code is shown','hero');c('cta',0,'paper','setup comment card appears');c('cta',.47,'thock','LM button press');c('cta',.77,'unlock','Claude celebrates completed setup','hero')
+cues=[(0,'impact','hero','opening computer and immediate push'),(14/30,'lever','support','Claude anticipates and travels toward the mouse'),(22/30,'thock','hero','Claude contacts and presses the mouse'),(38/30,'paper','support','camera enters the actual model window')]
+def c(scene,frame,name,action,role='support'):cues.append((S[scene]+frame/30,name,role,action))
+for f in [83,95]:c('hook',f,'key','original-model URL and Open in browser click')
+c('hook',101,'paper','official Qwen source opens')
+for f in [24,43,65]:c('download',f,'key','OS menu, OS selection, and installer Download click')
+c('download',102,'paper','installed LM Studio app opens')
+for f in [15,35,77,103,118]:c('search',f,'key','model-search and original-source navigation click')
+for f in [40,48,56]:c('search',f,'terminal','query characters enter the actual search box','texture')
+for f in [4,20,43,65]:c('quant',f,'key','cursor selects the spoken quantization option')
+for f in [25,63,99,123]:c('compression',f,'key','open and select the real compression dropdown')
+for f in [17,53]:c('best',f,'key','compare the available memory estimates')
+c('fit',45,'paper','move from too-large 27B to the 1.7B model used on this Mac')
+c('fit',83,'key','actual model Download click')
+c('fit',139,'unlock','actual download completes','hero')
+for f in [11,35]:c('models',f,'key','close search and click My Models')
+for f in [12,51,93]:c('load',f,'key','select model, click cog, then Use in New Chat')
+c('load',130,'unlock','the local model is ready','hero')
+c('chat',9,'key','click the chat input')
+for f in [15,25,36]:c('chat',f,'terminal','real prompt text is entered','texture')
+c('chat',53,'key','click Send')
+c('chat',83,'pickup','camera resolves onto the generated Python function')
+c('cta',0,'paper','comment call to action arrives')
+for f in [4,23]:c('cta',f,'key','illustrated comment field and arrow press')
+c('cta',31,'unlock','Claude reacts to the completed setup','hero')
 sfx=np.zeros((N,2));report=[]
 for i,(sec,name,role,action) in enumerate(cues):
  x=load(bank/(name+'.wav'));target=-24 if sec==0 else {'hero':-27,'support':-32,'texture':-36}[role];gain=target-active(aw(x));gain=min(gain,-7-20*np.log10(max(abs(x).max(),1e-9)));x*=10**(gain/20);start=round(sec*SR);nn=min(len(x),N-start);sfx[start:start+nn]+=x[:nn]
@@ -28,4 +47,4 @@ for i,(sec,name,role,action) in enumerate(cues):
  report.append({'seconds':round(sec,4),'frame':round(sec*30),'name':name,'role':role,'action':action,'gain_db':round(float(gain),2),'sfx_A120_db':round(float(active(aw(x))),2),'tail_s':round(len(x)/SR,3)})
 save(P/'voice.wav',vo);save(P/'music.wav',music);save(P/'sfx.wav',sfx);save(R/'vo/lm146/prelimit.wav',vo+music+sfx)
 subprocess.run([str(F),'-y','-v','error','-i',str(R/'vo/lm146/prelimit.wav'),'-af','alimiter=limit=0.86:attack=2:release=50:level=false:latency=true','-c:a','pcm_s16le',str(P/'master.wav')],check=True)
-r={'duration':DUR,'cue_count':len(cues),'cue_rate':len(cues)/DUR,'voice_RMS_dB':float(db(vo)),'music_RMS_dB':float(db(music)),'sfx_RMS_dB':float(db(sfx)),'peak_prelimit':float(abs(vo+music+sfx).max()),'music_source':'User house soundtrack: Another Day Of Sun instrumental; 13.95s source offset','cues':report};(R/'vo/lm146/sound-report.json').write_text(json.dumps(r,indent=2));(R/'vo/lm146/intent.json').write_text(json.dumps({'sfx_cues_s':[x['seconds'] for x in report],'music_bed':str(P/'music.wav'),'words_json':str(R/'video/src/data/words_lm146.json'),'script':(R/'vo/lm146/canon.txt').read_text()},indent=2));print(json.dumps({k:v for k,v in r.items() if k!='cues'},indent=2))
+r={'duration':DUR,'cue_count':len(cues),'cue_rate':len(cues)/DUR,'voice_RMS_dB':float(db(vo)),'music_RMS_dB':float(db(music)),'sfx_RMS_dB':float(db(sfx)),'peak_prelimit':float(abs(vo+music+sfx).max()),'music_source':'User house soundtrack: Another Day Of Sun instrumental; 13.95s source offset','cues':report};(R/'vo/lm146/sound-report.json').write_text(json.dumps(r,indent=2));(R/'vo/lm146/intent.json').write_text(json.dumps({'sfx_cues_s':[x['seconds'] for x in report],'music_bed':str((P/'music.wav').relative_to(R)),'words_json':'video/src/data/words_lm146.json','script':(R/'vo/lm146/canon.txt').read_text()},indent=2));print(json.dumps({k:v for k,v in r.items() if k!='cues'},indent=2))

@@ -1,0 +1,17 @@
+
+  scene                   MOTION  top share DEADRUN    HOLD  verdict
+  ----------------------------------------------------------------------------
+  hook                      7.25      0.060       6     16%  ok
+  download                  3.94      0.167      12     15%  STATIC
+  search                    7.94      0.121       3     12%  ok
+  quant                     9.78      0.148       3     17%  ok
+  compression               4.24      0.140       6     12%  STATIC
+  best                      3.99      0.140       6     11%  STATIC
+  fit                       1.48      0.132      24     12%  STATIC· DEAD 24f
+  models                    3.87      0.127       3     19%  STATIC
+  load                      3.14      0.104      21     12%  STATIC· DEAD 21f
+  chat                      2.53      0.122      18     12%  STATIC· DEAD 18f
+  cta                       1.29      0.198      15     11%  STATIC· DEAD 15f
+  ----------------------------------------------------------------------------
+  median motion 3.94  (bar 9.00, approved reel 81 = 9.82)
+  scenes failing: 8/11
