@@ -1,0 +1,80 @@
+{
+  "picture_frames": 1344,
+  "fps": 30,
+  "end_seconds": 44.8,
+  "prior_end_seconds": 45.6,
+  "voice_source_seconds": 44.8408333333,
+  "voice_release_note": "5ms RMS windows: final substantial release at 44.750\u201344.765s; low-level consonant decay through approximately 44.800s. Only final 40.8ms quiet tail omitted.",
+  "final_taper_ms": 5,
+  "opening_samples": [
+    {
+      "frame": 0,
+      "chip_y_before_camera": 588.32,
+      "wheel_degrees": 21.6,
+      "handle_x": 302.80894056446994,
+      "handle_y": 1009.2750178926129
+    },
+    {
+      "frame": 1,
+      "chip_y_before_camera": 597.1420689655173,
+      "wheel_degrees": 30.53793103448276,
+      "handle_x": 305.5482811850468,
+      "handle_y": 1003.6756532529234
+    },
+    {
+      "frame": 3,
+      "chip_y_before_camera": 614.7862068965517,
+      "wheel_degrees": 48.413793103448285,
+      "handle_x": 313.45015311237984,
+      "handle_y": 994.081684033958
+    },
+    {
+      "frame": 7,
+      "chip_y_before_camera": 650.0744827586207,
+      "wheel_degrees": 84.1655172413793,
+      "handle_x": 335.9337985785645,
+      "handle_y": 984.207211633258
+    },
+    {
+      "frame": 14,
+      "chip_y_before_camera": 711.8289655172414,
+      "wheel_degrees": 146.73103448275864,
+      "handle_x": 373.44418476396584,
+      "handle_y": 1002.0571992336047
+    },
+    {
+      "frame": 30,
+      "chip_y_before_camera": 852.9820689655173,
+      "wheel_degrees": 289.73793103448276,
+      "handle_x": 326.4912616722413,
+      "handle_y": 1061.6498869691816
+    },
+    {
+      "frame": 52,
+      "chip_y_before_camera": 1047.0675862068965,
+      "wheel_degrees": 486.3724137931035,
+      "handle_x": 363.7212514203739,
+      "handle_y": 991.7928232989693
+    },
+    {
+      "frame": 64,
+      "chip_y_before_camera": 1100.0,
+      "wheel_degrees": 540.0,
+      "handle_x": 380.0,
+      "handle_y": 1024.0
+    }
+  ],
+  "first_frame_subject_delta_before_camera": {
+    "chip_descent_px": 8.822068965517246,
+    "wheel_degrees": 8.937931034482759,
+    "hand_travel_px": 6.233528006173349
+  },
+  "CTA_rate": 1.5,
+  "CTA_reaction_complete_seconds": 44.67777777777778,
+  "last_sfx_tail_seconds": 44.6689,
+  "unchanged_body_crop_34_490_1012_930": {
+    "149": true,
+    "195": true,
+    "1082": true
+  }
+}

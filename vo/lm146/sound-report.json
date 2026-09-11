@@ -1,11 +1,11 @@
 {
-  "duration": 45.6,
-  "cue_count": 68,
-  "cue_rate": 1.4912280701754386,
-  "voice_RMS_dB": -20.41142341275634,
-  "music_RMS_dB": -34.41543960571289,
-  "sfx_RMS_dB": -32.05855498270461,
-  "peak_prelimit": 0.9185648835264146,
+  "duration": 44.8,
+  "cue_count": 67,
+  "cue_rate": 1.4955357142857144,
+  "voice_RMS_dB": -20.334563018137096,
+  "music_RMS_dB": -34.15119171142578,
+  "sfx_RMS_dB": -32.01800437111067,
+  "peak_prelimit": 0.9178789735306054,
   "music_source": "User house soundtrack: Another Day Of Sun instrumental; 13.95s source offset",
   "cues": [
     {
@@ -13,14 +13,14 @@
       "frame": 0,
       "name": "impact",
       "role": "hero",
-      "action": "AI chip and Claude on the first frame with immediate camera push",
+      "action": "Claude is already cranking and lowering the AI chip as the camera starts its push",
       "gain_db": -2.99,
       "sfx_A120_db": -24.73,
       "tail_s": 0.64
     },
     {
-      "seconds": 0.3,
-      "frame": 9,
+      "seconds": 0.0,
+      "frame": 0,
       "name": "lever",
       "role": "texture",
       "action": "Claude cranks the hoist; the attached AI chip descends",
@@ -499,18 +499,8 @@
       "tail_s": 0.33
     },
     {
-      "seconds": 43.7,
-      "frame": 1311,
-      "name": "paper",
-      "role": "support",
-      "action": "comment call to action arrives",
-      "gain_db": -12.27,
-      "sfx_A120_db": -32.0,
-      "tail_s": 0.25
-    },
-    {
-      "seconds": 43.8333,
-      "frame": 1315,
+      "seconds": 43.7889,
+      "frame": 1314,
       "name": "key",
       "role": "support",
       "action": "illustrated comment field and arrow press",
@@ -519,8 +509,8 @@
       "tail_s": 0.075
     },
     {
-      "seconds": 44.4667,
-      "frame": 1334,
+      "seconds": 44.2111,
+      "frame": 1326,
       "name": "key",
       "role": "support",
       "action": "illustrated comment field and arrow press",
@@ -529,8 +519,8 @@
       "tail_s": 0.075
     },
     {
-      "seconds": 44.7333,
-      "frame": 1342,
+      "seconds": 44.3889,
+      "frame": 1332,
       "name": "unlock",
       "role": "hero",
       "action": "Claude reacts to the completed setup",
@@ -639,8 +629,8 @@
       "tail_s": 0.16
     },
     {
-      "seconds": 44.0333,
-      "frame": 1321,
+      "seconds": 43.9222,
+      "frame": 1318,
       "name": "lever",
       "role": "texture",
       "action": "Claude launches toward the comment arrow",
@@ -649,8 +639,8 @@
       "tail_s": 0.187
     },
     {
-      "seconds": 44.9,
-      "frame": 1347,
+      "seconds": 44.5,
+      "frame": 1335,
       "name": "thock",
       "role": "texture",
       "action": "Claude lands after pressing the illustrated arrow",

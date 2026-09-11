@@ -82,7 +82,9 @@ const Screen:React.FC<ScreenProps>=(props)=>{
  </>;
 };
 
-const CTA:React.FC<{f:number}>=({f})=>{
+const CTA:React.FC<{f:number}>=({f:frame})=>{
+ // Finish the comment action before the final spoken word, with no outro hold.
+ const f=frame*1.5;
  const p=pressAt(f,[23]);const pos=sample(f,[[0,600,958],[4,351,830],[9,351,830],[20,925,836],[23,925,836],[36,950,855],[56,950,855]]);
  return <>
  <div style={{position:'absolute',left:76,top:720,width:928,height:260,background:'#fff',border:'5px solid #192339',borderRadius:36,boxShadow:'0 23px 50px #2129412a',display:'flex',alignItems:'center',paddingLeft:60,fontFamily:inter.fontFamily,fontSize:104,fontWeight:850,color:INK,transform:`translateY(${p*8-68*ease(f,25,43)}px) scale(${1-.055*ease(f,25,43)})`}}>{f>=9?'L':''}{f>=14?'M':''}<span style={{height:109,width:5,background:PURPLE,marginLeft:9,opacity:f<30?1:0}}/><div style={{position:'absolute',right:40,top:66,width:110,height:110,borderRadius:'50%',background:PURPLE,color:'white',textAlign:'center',fontSize:85,lineHeight:'103px'}}>{f<28?'↑':'✓'}</div></div>

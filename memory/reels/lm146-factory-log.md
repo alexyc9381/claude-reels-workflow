@@ -132,3 +132,25 @@ Final video is 7,838,659 bytes, H.264 yuv420p / TV range / BT.709, 1080×1920 at
 - Look: body saturation 35.7% ≥34%; black point p10 26.3 ≤35. Report-only body luma 166.2 and header-plate warning remain.
 - All scenes meet the ≤12-frame dead-run limit. The stricter overall motion audit still fails: median 4.36 vs9, 8/11 scenes below the scene target. The hook passes its dedicated opening gate but its 4.23 scene-average motion remains under the separate 6.0 scene threshold. No all-gates-passed claim.
 - Frames 195 and 1082 are pixel-identical to R16 before final video encoding, confirming the later demonstration staging is preserved. Final decoded hook and loading frames were visually inspected. The 7.5s opening movie was replayed through the website handoff; intermediate hook and transition frames were inspected at full resolution.
+
+
+## R23 revision brief
+
+User asks for real subject animation from the first frame, already underway during the opening zoom, and an immediate cut at the last spoken “setup”. The existing hoist has a nine-frame delay plus a cubic slow start. Replace that with an in-progress crank at nonzero velocity, preserving the f64 chip arrival and all subsequent handoff events. The same motion driver must move the hand, wheel, cable and chip. The 48kHz voice release drops after 44.76s; low-level consonant decay remains through about 44.80s. End picture and mixed audio at 44.800s (1344 frames), with only a 5ms anti-click audio taper. Compress the illustrated CTA action so its press, landing and response finish before that cut. Review first-frame motion separately from camera scale, plus the complete new ending, then re-render and replace the existing Drive deliverables.
+
+
+### R23 result and delivery checks
+
+The hoist begins at 4% progress, with immediate nonzero cable velocity and 21.6° of crank rotation already established. From frame 0 to 1, before camera scaling, the chip descends 8.82px, the wheel turns 8.94°, and the connected hand moves 6.23px. Claude starts with the working expression active. The cable brakes smoothly over f52–64 into the same socket contact. Later hook and source-capture events retain their timings. Stage crops at f149, f195 and f1082 are pixel-identical to R22 before encoding.
+
+The final word is measured from the original processed voice, including its consonant release. Picture and audio now both have an exact 44.800s duration; 1344 video frames. The original 45.6s padded ending is removed. The final CTA performance and cursor run at 1.5× so the press, landing and response complete by 44.678s. All declared SFX tails end by 44.669s; the redundant CTA entry accent is removed. Final sound uses 67 cues (1.496/sec), and only a 5ms anti-click taper at the cut. Original source voice and 1.03× narration speed are retained.
+
+- Final exported MP4: 7,799,037 bytes; H.264, yuv420p, TV range, BT.709; 1080×1920 at 30fps; AAC stereo 48kHz. Both streams and the container end at 44.800s. Stream-copy faststart and exact-duration muxing follow the Remotion render; moov precedes mdat.
+- verify_reel: 9/9 checks pass, 67/67 cues, audio at 40ms, voice and music at 0, continuous music, 0.04s dead audio tail. Caption checks here cover canonical text and monotonicity, not a newly measured full word-drift audit.
+- SFX bank: eight files pass. Final loudness: -17.14 LUFS, LRA 2.10, true peak -1.31 dBFS.
+- Hook: luma 171.68 ≥140; first-five-second motion 4.498 ≥4.0. First-second motion rises from 4.450 to 5.901. The 3–4s and 4–5s buckets remain 4.686 and 6.992.
+- Look: body saturation 35.8% ≥34%; p10 26.3 ≤35. Report-only body luma 166.2 and hook-plate warning remain.
+- Every scene meets the ≤12-frame dead-run limit; CTA now has only 3 dead frames. Strict scene motion remains below target: median 4.41 vs 9; 7/11 scenes below 6. The hook passes its dedicated opening gate but its separate scene score is 4.34. No all-gates-passed claim.
+- Full-resolution first-frame/early motion and final CTA samples were inspected. Browser playback covered the 0–7s opening into the actual website and 42s through the immediate ending. The final setup word remains identifiable in a short-clip transcription; exact cut timing is based on the waveform, not ASR word times.
+
+Standalone source package 3.2.0 bundles successfully as 1080×1920 / 1344 frames. Its rendered frame1 is pixel-identical to the main source render. The archive passes ZIP integrity validation and contains SHA-256 checksums.

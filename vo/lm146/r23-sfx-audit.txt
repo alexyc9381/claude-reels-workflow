@@ -1,0 +1,17 @@
+sfx_audit · 8 distinct cues
+
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/impact.wav dur  0.64s  attack     2ms  >2kHz  13.9%  <250Hz  47.6%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/key.wav dur  0.07s  attack     1ms  >2kHz  21.5%  <250Hz  18.9%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/lever.wav dur  0.19s  attack     8ms  >2kHz   5.0%  <250Hz  52.1%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/paper.wav dur  0.25s  attack     8ms  >2kHz   8.1%  <250Hz   2.7%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/pickup.wav dur  0.33s  attack     8ms  >2kHz   0.6%  <250Hz   0.6%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/terminal.wav dur  0.44s  attack     8ms  >2kHz   6.2%  <250Hz   2.8%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/thock.wav dur  0.16s  attack     2ms  >2kHz   5.4%  <250Hz  74.3%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/unlock.wav dur  0.28s  attack     9ms  >2kHz  11.6%  <250Hz   1.1%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/key.wav used 29x  >2kHz  21.5%  ok
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/lever.wav used 11x  >2kHz   5.0%  ok
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/pickup.wav used  5x  >2kHz   0.6%  ok
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/terminal.wav used  6x  >2kHz   6.2%  ok
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/thock.wav used  7x  >2kHz   5.4%  ok
+
+clean — no hiss beds, no air swells, no named air.

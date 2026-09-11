@@ -1,0 +1,22 @@
+{
+  "crop": "crop=1012:930:34:490",
+  "luma": 171.68386840820312,
+  "motion_first5": 4.497862568497657,
+  "per_second": [
+    5.900804424285889,
+    2.7581516027450563,
+    2.1517375856637955,
+    4.6862544298171995,
+    6.9923647999763485
+  ],
+  "luma_bar": 140,
+  "motion_bar": 4,
+  "shots_authored": 1,
+  "authored_actions": [
+    "hoist and seat chip",
+    "power and mouse press",
+    "Claude leaps into computer",
+    "continuous illustrated-screen to real-website handoff"
+  ],
+  "passed": true
+}

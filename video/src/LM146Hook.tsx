@@ -21,16 +21,22 @@ const Wheel:React.FC<{angle:number}>=({angle})=><g transform={`translate(340 102
  <circle r="15" fill={PAPER} stroke={INK} strokeWidth="5"/><circle cx="-40" cy="0" r="14" fill={CLAY} stroke={PAPER} strokeWidth="5"/>
 </g>;
 
+// Already in motion on frame 0. Constant cable speed, then a smooth brake into
+// the existing f64 socket contact; the camera is an independent driver.
+export const hookCrankProgress=(f:number)=>{
+ const t=Math.max(0,Math.min(f,64)),brake=Math.max(0,t-52);
+ return .04+(.96/58)*(t-brake*brake/24);
+};
 export const LM146Hook:React.FC<{f:number}>=({f})=>{
  const portal=hookLocalPortal(f),handoff=E(f,126,169),gone=E(f,128,153),screenFade=1-E(f,150,161);
- const lower=E(f,9,64),seat=E(f,64,76),retract=E(f,76,104),wake=E(f,67,83);
+ const lower=hookCrankProgress(f),seat=E(f,64,76),retract=E(f,76,104),wake=E(f,67,83);
  const turn=540*lower,rad=turn*Math.PI/180,hx=340-40*Math.cos(rad),hy=1024-40*Math.sin(rad);
  const mouseMove=E(f,70,87),press=E(f,84,90)*(1-E(f,92,101));
  const jump=E(f,96,124),size=mix(280,208,jump),armX=280*179/200,armY=280*99/200;
  const x=mix(mix(hx-armX,244,mouseMove),576,jump);
  const crouch=E(f,91,95)*(1-E(f,96,101)),land=E(f,124,128)*(1-E(f,129,136));
  const y=mix(mix(hy-armY,986,mouseMove)+8*press+18*crouch,806,jump)-155*Math.sin(Math.PI*jump)+14*land;
- const effort=E(f,0,8)*(1-E(f,64,74));
+ const effort=1-E(f,64,74);
  const zoom=1+.043*E(f,0,14)*(1-E(f,100,126));
  const chipY=mix(567,1100,lower),chipScale=1.3-.85*seat;
  return <div style={{position:'absolute',inset:0,pointerEvents:'none'}}>
