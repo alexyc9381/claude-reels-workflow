@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill,Audio,Freeze,Img,OffthreadVideo,Easing,interpolate,staticFile,useCurrentFrame} from 'remotion';
-import {Bg,KaraokeCaption,Mascot} from './SlopKit';
+import {Bg,KaraokeCaption,Mascot,ProgressBar} from './SlopKit';
+import {DemoHeader,DemoSet,DemoCompanion} from './LM146AnimationKit';
 import {inter,fraunces} from './fonts';
 import words from './data/words_lm146.json';
 import edl from './data/edl_lm146.json';
@@ -35,7 +36,7 @@ const Cursor:React.FC<{x:number;y:number;f:number;clicks:number[];size?:number}>
  </div>;
 };
 
-type ScreenProps={f:number;states:[number,string][];cameras:CameraKey[];points:Point[];clicks:number[];height?:number;top?:number;video?:{name:string;start:number;end?:number;offset?:number;rate?:number;max:number};width?:number;left?:number;border?:boolean};
+type ScreenProps={scene?:string;f:number;states:[number,string][];cameras:CameraKey[];points:Point[];clicks:number[];height?:number;top?:number;video?:{name:string;start:number;end?:number;offset?:number;rate?:number;max:number};width?:number;left?:number;border?:boolean};
 const CloseupScreen:React.FC<ScreenProps>=({f,states,cameras,points,clicks,height=850,top=415,video,width=1012,left=34,border=true})=>{
  const cam=cameraAt(f,cameras),s=width/cam[2],point=sample(f,points),name=stateAt(f,states);
  const browser=name.startsWith('2')&&Number(name.slice(0,2))>=20&&Number(name.slice(0,2))<=23;
@@ -52,123 +53,108 @@ const CloseupScreen:React.FC<ScreenProps>=({f,states,cameras,points,clicks,heigh
 // Both views use the same source frame and pointer path. This is magnification, not a UI remake.
 const Screen:React.FC<ScreenProps>=(props)=>{
  if(props.border===false)return <CloseupScreen {...props}/>;
- const {f,states,points,clicks,video}=props,name=stateAt(f,states),pt=sample(f,points);
+ const {f,states,points,clicks,video,scene='hook'}=props,name=stateAt(f,states),pt=sample(f,points);
  const browser=(name.startsWith('2')&&Number(name.slice(0,2))>=20&&Number(name.slice(0,2))<=23)||name==='official';
  const sw=browser?1280:1200,sh=browser?720:760,oy=browser?0:40;
- const bscale=884/sw,fw=355,fh=315/760*fw;
+ const bscale=836/sw,fw=355,fh=306/650*fw;
  const fx=Math.max(0,Math.min(sw-fw,pt[0]-fw*.47)),fy=Math.max(oy,Math.min(sh-fh,pt[1]-fh*.43));
  const play=video&&f>=video.start&&(video.end===undefined||f<video.end);
  const source=(style:React.CSSProperties)=>play?<Freeze frame={Math.min(video.max,Math.max(0,Math.floor((f-video.start)*(video.rate||1)+(video.offset||0))))}><OffthreadVideo src={asset(video.name)} muted style={style}/></Freeze>:<div style={{...style,height:Number(style.width)*sh/sw}}><Img src={name==='official'?staticFile('lm146/official-model38-last.png'):asset(name+'.png')} style={{width:'100%',display:'block'}}/>{name==='43-q6-menu'&&<div style={{position:'absolute',left:(788/sw*100)+'%',top:(308/sh*100)+'%',width:(93/sw*100)+'%',height:(62/sh*100)+'%',overflow:'hidden'}}><Img src={asset(name+'.png')} style={{position:'absolute',width:(sw/93*100)+'%',maxWidth:'none',left:(-903/93*100)+'%',top:(-308/62*100)+'%'}}/></div>}</div>;
- const zoom=760/fw;
+ const zoom=650/fw;
  return <>
-  <div style={{position:'absolute',left:34,top:400,width:1012,height:1020,borderRadius:37,background:'radial-gradient(ellipse at 45% 0%,#354D77 0%,#182B4A 46%,#0E1B30 100%)',boxShadow:'0 29px 60px #17243C45,inset 0 2px 0 #FFFFFF33',border:'2px solid #445D82'}}><div style={{position:'absolute',left:0,right:0,bottom:0,height:302,borderRadius:'0 0 37px 37px',background:'linear-gradient(#111E3480,#0A1527)',borderTop:'1px solid #7B90AD28'}}/></div>
-  <div style={{position:'absolute',left:98,top:436,width:884,height:534,borderRadius:22,overflow:'hidden',background:'#fff',boxShadow:'0 20px 36px #050E1C80,0 0 0 2px #DFE6F033'}}>
-   {source({position:'absolute',width:884,top:-oy*bscale,left:0,maxWidth:'none'})}
+  <DemoSet scene={scene} f={f} clicks={clicks}/>
+  <div style={{position:'absolute',left:122,top:scene==='hook'?508:476,width:836,height:504,borderRadius:22,overflow:'hidden',background:'#fff',boxShadow:'0 20px 36px #050E1C80,0 0 0 2px #DFE6F033'}}>
+   {source({position:'absolute',width:836,top:-oy*bscale,left:0,maxWidth:'none'})}
    <div style={{position:'absolute',left:fx*bscale,top:(fy-oy)*bscale,width:fw*bscale,height:fh*bscale,border:'3px solid #6241E9',borderRadius:9,background:'#6241E908',boxShadow:'0 0 0 1px #ffffff90'}}/>
    <Cursor x={pt[0]*bscale} y={(pt[1]-oy)*bscale} f={f} clicks={clicks} size={46}/>
   </div>
-  <div style={{position:'absolute',left:58,top:1092,width:760,height:315,borderRadius:23,overflow:'hidden',background:'#fff',boxShadow:'0 17px 35px #17243C2B,0 0 0 4px #6241E9'}}>
+  <div style={{position:'absolute',left:58,top:1104,width:650,height:306,borderRadius:23,overflow:'hidden',background:'#fff',boxShadow:'0 17px 35px #17243C2B,0 0 0 4px #6241E9'}}>
    {source({position:'absolute',left:-fx*zoom,top:-fy*zoom,width:sw*zoom,maxWidth:'none'})}
    <Cursor x={(pt[0]-fx)*zoom} y={(pt[1]-fy)*zoom} f={f} clicks={clicks} size={57}/>
   </div>
  </>;
 };
 
-// Original rig only. The body anticipates a click, follows the cursor, absorbs contact,
-// then looks at the result. No extra arms, opaque props over the face, or perpetual bobbing.
-const EdgeClaude:React.FC<{f:number;clicks:number[];success?:number;side?:'left'|'right'}>=({f,clicks,success=9999,side='right'})=>{
- const next=clicks.find(c=>c>=f-18)??-100;const u=f-next;
- const pre=ease(u,-12,-5)*(1-ease(u,-4,1));const hit=ease(u,0,3)*(1-ease(u,4,14));
- const win=ease(f,success,success+12),walk=ease(f,1,20);
- const x=(side==='right'?803:48)+(side==='right'?42:-42)*(1-walk);
- return <div style={{position:'absolute',left:x,top:1266,transform:`translateY(${pre*13-hit*19-win*10}px) rotate(${(side==='right'?-1:1)*(pre*7-hit*5)}deg) scale(${1+pre*.04},${1-pre*.11+hit*.07})`,transformOrigin:'50% 90%'}}>
- <div style={{position:'absolute',left:45,top:166,width:138,height:18,borderRadius:'50%',background:'#21273E20',filter:'blur(5px)',transform:`scaleX(${1+pre*.15})`}}/>
- <Mascot lf={f+22} size={220} nodAmp={0} gaze={side==='right'?-7:7} stern={pre*.7} shock={hit*.62} cheer={win*.8}/>
- </div>;
-};
-
 const Hook:React.FC=()=>{
  const f=useCurrentFrame(),trigger=22,p=pressAt(f,[trigger]);
  const pre=ease(f,5,13)*(1-ease(f,14,21));const travel=ease(f,14,22),recover=ease(f,24,37);
- const into=ease(f,38,55),zoom=1+.045*ease(f,0,16);
+ const into=ease(f,38,55),zoom=1+.045*ease(f,0,16)*(1-into);
  if(f>=55)return <>
   <Screen f={f} states={[[55,'06-5bit'],[83,'41-source-url'],[101,'official']]} cameras={[[55,[493,82,620]],[77,[492,261,620]],[100,[492,261,620]],[101,[0,77,540]],[118,[0,77,635]],[145,[0,87,635]]]} points={[[55,782,295],[78,682,645],[83,682,645],[92,765,592],[95,765,592],[100,765,592],[101,254,118],[119,218,115],[145,238,115]]} clicks={[83,95]} />
-  <EdgeClaude f={f-55} clicks={[28,40]} success={48}/>
+  <DemoCompanion scene="hook" f={f} clicks={[83,95]} success={101}/>
  </>;
  return <div style={{position:'absolute',inset:0,transform:`scale(${zoom})`,transformOrigin:'50% 52%'}}>
-  <div style={{position:'absolute',left:64,top:178,fontFamily:fraunces.fontFamily,fontSize:79,lineHeight:1.02,fontWeight:750,color:INK,opacity:1-into}}>Qwen3.8</div>
-  <div style={{position:'absolute',left:56,top:280,fontFamily:inter.fontFamily,fontSize:250,fontWeight:900,letterSpacing:-18,lineHeight:.96,color:PURPLE,opacity:1-into}}>27B</div>
-  <div style={{position:'absolute',left:65,top:1340,width:950,height:24,borderRadius:'50%',background:'#25264822',filter:'blur(13px)',opacity:1-into}}/>
-  <div style={{position:'absolute',left:lerp(184,34,into),top:lerp(655,415,into),width:lerp(806,1012,into),height:lerp(560,850,into),borderRadius:30,background:'#192339',border:`${lerp(17,0,into)}px solid #192339`,boxShadow:'0 26px 44px #19233940',overflow:'hidden'}}>
-   <Screen f={f} states={[[0,'05-4bit'],[22,'06-5bit']]} cameras={[[0,[90,78,1025]],[22,[90,78,1025]],[38,[90,78,1025]],[55,[493,82,620]]]} points={[[0,484,457],[9,452,448],[21,276,408],[22,276,408],[34,279,406],[55,782,295]]} clicks={[22]} width={lerp(772,1012,into)} height={lerp(526,850,into)} left={0} top={0} border={false}/>
+  <div style={{position:'absolute',inset:0,opacity:into}}><DemoSet scene="hook" f={f} clicks={[22]}/></div>
+  <div style={{position:'absolute',left:65,top:1285,width:950,height:24,borderRadius:'50%',background:'#25264822',filter:'blur(13px)',opacity:1-into}}/>
+  <div style={{position:'absolute',left:lerp(184,122,into),top:lerp(600,508,into),width:lerp(806,836,into),height:lerp(560,504,into),borderRadius:30,background:'#192339',border:`${lerp(17,0,into)}px solid #192339`,boxShadow:'0 26px 44px #19233940',overflow:'hidden'}}>
+   <Screen f={f} states={[[0,'05-4bit'],[22,'06-5bit']]} cameras={[[0,[90,78,1025]],[22,[90,78,1025]],[38,[90,78,1025]],[55,[0,40,1200]]]} points={[[0,484,457],[9,452,448],[21,276,408],[22,276,408],[34,279,406],[55,782,295]]} clicks={[22]} width={lerp(772,836,into)} height={lerp(526,504,into)} left={0} top={0} border={false}/>
   </div>
-  <div style={{position:'absolute',left:142,top:1214,width:890,height:38,borderRadius:'4px 4px 45px 45px',background:'linear-gradient(#BFC6D3,#737F96)',boxShadow:'0 20px 34px #19233935',opacity:1-into}}><div style={{margin:'0 auto',width:270,height:11,borderRadius:'0 0 12px 12px',background:'#526077'}}/></div>
-  <div style={{position:'absolute',left:328,top:1057,width:116,height:156,borderRadius:'55px 55px 35px 35px',background:'linear-gradient(135deg,#fff,#C0C7D4)',border:'4px solid #202E46',transform:`translateY(${p*9}px) scaleY(${1-p*.1})`,boxShadow:`0 ${15-p*10}px 0 #637089`,opacity:1-into}}><div style={{position:'absolute',top:0,left:54,width:3,height:70,background:'#47546B'}}/><div style={{position:'absolute',top:20,left:45,width:19,height:33,borderRadius:10,background:PURPLE}}/></div>
-  <div style={{position:'absolute',left:lerp(6,73,travel)-17*pre-15*recover,top:936+18*pre-9*recover,transform:`rotate(${-8*pre+8*travel*(1-recover)}deg) scale(${1+.05*pre},${1-.11*pre})`,transformOrigin:'50% 95%',opacity:1-into}}><Mascot lf={f+22} size={312} nodAmp={0} gaze={7} stern={pre*.85} shock={.58*ease(f,23,28)*(1-ease(f,29,37))} cheer={.65*recover}/></div>
+  <div style={{position:'absolute',left:142,top:1159,width:890,height:38,borderRadius:'4px 4px 45px 45px',background:'linear-gradient(#BFC6D3,#737F96)',boxShadow:'0 20px 34px #19233935',opacity:1-into}}><div style={{margin:'0 auto',width:270,height:11,borderRadius:'0 0 12px 12px',background:'#526077'}}/></div>
+  <div style={{position:'absolute',left:328,top:1002,width:116,height:156,borderRadius:'55px 55px 35px 35px',background:'linear-gradient(135deg,#fff,#C0C7D4)',border:'4px solid #202E46',transform:`translateY(${p*9}px) scaleY(${1-p*.1})`,boxShadow:`0 ${15-p*10}px 0 #637089`,opacity:1-into}}><div style={{position:'absolute',top:0,left:54,width:3,height:70,background:'#47546B'}}/><div style={{position:'absolute',top:20,left:45,width:19,height:33,borderRadius:10,background:PURPLE}}/></div>
+  <div style={{position:'absolute',left:lerp(6,73,travel)-17*pre-15*recover,top:881+18*pre-9*recover,transform:`rotate(${-8*pre+8*travel*(1-recover)}deg) scale(${1+.05*pre},${1-.11*pre})`,transformOrigin:'50% 95%',opacity:1-into}}><Mascot lf={f+22} size={312} nodAmp={0} gaze={7} stern={pre*.85} shock={.58*ease(f,23,28)*(1-ease(f,29,37))} cheer={.65*recover}/></div>
  </div>;
 };
 
 const CTA:React.FC<{f:number}>=({f})=>{
  const p=pressAt(f,[23]);const pos=sample(f,[[0,600,958],[4,351,830],[9,351,830],[20,925,836],[23,925,836],[36,950,855],[56,950,855]]);
- return <><div style={{position:'absolute',left:65,top:336,fontFamily:fraunces.fontFamily,fontSize:92,fontWeight:750,lineHeight:1.04,color:INK}}>Comment <span style={{color:PURPLE}}>LM</span><br/>for the setup.</div>
- <div style={{position:'absolute',left:76,top:720,width:928,height:260,background:'#fff',border:'5px solid #192339',borderRadius:36,boxShadow:'0 23px 50px #2129412a',display:'flex',alignItems:'center',paddingLeft:60,fontFamily:inter.fontFamily,fontSize:104,fontWeight:850,color:INK,transform:`translateY(${p*8}px)`}}>{f>=9?'L':''}{f>=14?'M':''}<span style={{height:109,width:5,background:PURPLE,marginLeft:9,opacity:f<30?1:0}}/><div style={{position:'absolute',right:40,top:66,width:110,height:110,borderRadius:'50%',background:PURPLE,color:'white',textAlign:'center',fontSize:85,lineHeight:'103px'}}>↑</div></div>
- <Cursor x={pos[0]} y={pos[1]} f={f} clicks={[4,23]}/><div style={{position:'absolute',left:667,top:1010,transform:`translateY(${-36*ease(f,23,31)*(1-ease(f,32,44))}px)`}}><Mascot lf={f+26} size={292} nodAmp={0} gaze={-7} stern={f<12?.45:0} shock={.55*ease(f,21,24)*(1-ease(f,25,31))} cheer={ease(f,29,42)}/></div></>;
+ return <>
+ <div style={{position:'absolute',left:76,top:720,width:928,height:260,background:'#fff',border:'5px solid #192339',borderRadius:36,boxShadow:'0 23px 50px #2129412a',display:'flex',alignItems:'center',paddingLeft:60,fontFamily:inter.fontFamily,fontSize:104,fontWeight:850,color:INK,transform:`translateY(${p*8-68*ease(f,25,43)}px) scale(${1-.055*ease(f,25,43)})`}}>{f>=9?'L':''}{f>=14?'M':''}<span style={{height:109,width:5,background:PURPLE,marginLeft:9,opacity:f<30?1:0}}/><div style={{position:'absolute',right:40,top:66,width:110,height:110,borderRadius:'50%',background:PURPLE,color:'white',textAlign:'center',fontSize:85,lineHeight:'103px'}}>{f<28?'↑':'✓'}</div></div>
+ <div style={{opacity:1-ease(f,25,32)}}><Cursor x={pos[0]} y={pos[1]} f={f} clicks={[4,23]}/></div><div style={{position:'absolute',left:667,top:1010,transform:`translateY(${20*ease(f,3,7)*(1-ease(f,8,11))-310*Math.sin(Math.PI*ease(f,10,36))}px) rotate(${-9*Math.sin(Math.PI*ease(f,10,36))}deg)`}}><Mascot lf={f+26} size={292} nodAmp={0} gaze={-7} stern={f<12?.45:0} shock={.55*ease(f,21,24)*(1-ease(f,25,31))} cheer={ease(f,36,44)}/></div></>;
 };
 
 export const ClaudeLM146Reel:React.FC=()=>{
  const f=useCurrentFrame();let idx=edl.findIndex((e,i)=>f>=Math.round(e.start*30)&&(i===edl.length-1||f<Math.round(edl[i+1].start*30)));if(idx<0)idx=0;
- const scene=edl[idx].name,lf=f-at(scene);let heading='',states:[number,string][]=[],cameras:CameraKey[]=[],points:Point[]=[],clicks:number[]=[],height=850,top=415,success=9999,video:ScreenProps['video'];
+ const scene=edl[idx].name,lf=f-at(scene);let states:[number,string][]=[],cameras:CameraKey[]=[],points:Point[]=[],clicks:number[]=[],height=850,top=415,success=9999,video:ScreenProps['video'];
  if(scene==='download'){
-  heading='Download LM Studio.';states=[[0,'20-website'],[24,'21-website-os'],[43,'22-website-selected'],[65,'23-website-clicked'],[102,'01-app']];
+  states=[[0,'20-website'],[24,'21-website-os'],[43,'22-website-selected'],[65,'23-website-clicked'],[102,'01-app']];
   cameras=[[0,[175,12,680]],[18,[175,18,565]],[44,[175,85,550]],[66,[182,180,470]],[91,[182,170,510]],[101,[182,170,510]],[102,[0,50,640]],[124,[0,50,560]]];
   points=[[0,814,397],[21,373,230],[24,373,230],[39,342,277],[43,342,277],[61,364,298],[65,364,298],[90,395,312],[101,395,312],[102,569,343],[124,303,264]];clicks=[24,43,65];
  }
  if(scene==='search'){
-  heading='Search Qwen3.8.';states=[[0,'01-app'],[15,'02-search-open'],[38,'q1'],[46,'q2'],[54,'q3'],[60,'04-results'],[77,'06-5bit'],[103,'41-source-url'],[125,'official']];
+  states=[[0,'01-app'],[15,'02-search-open'],[38,'q1'],[46,'q2'],[54,'q3'],[60,'04-results'],[77,'06-5bit'],[103,'41-source-url'],[125,'official']];
   cameras=[[0,[0,50,560]],[13,[0,50,560]],[28,[90,80,443]],[67,[90,80,443]],[77,[90,80,443]],[99,[487,260,635]],[124,[487,260,635]],[125,[0,77,590]],[144,[0,77,640]]];
   points=[[0,300,259],[12,20,162],[15,20,162],[31,245,110],[35,245,110],[60,263,193],[72,276,408],[77,276,408],[98,683,645],[103,683,645],[115,765,592],[118,765,592],[124,765,592],[125,225,116],[144,236,118]];clicks=[15,35,77,103,118];
  }
  if(scene==='quant'){
-  heading='Choose the quantization.';states=[[0,'05-4bit'],[20,'06-5bit'],[43,'07-6bit'],[65,'08-8bit']];
+  states=[[0,'05-4bit'],[20,'06-5bit'],[43,'07-6bit'],[65,'08-8bit']];
   cameras=[[0,[99,162,395]],[18,[99,178,395]],[40,[99,200,395]],[65,[99,169,395]],[84,[99,162,395]]];
   points=[[0,294,195],[4,294,195],[16,287,408],[20,287,408],[38,283,336],[43,283,336],[60,282,264],[65,282,264],[84,301,264]];clicks=[4,20,43,65];
  }
  if(scene==='compression'){
-  heading='Compression changes precision.';states=[[0,'09-gguf'],[25,'10-gguf-options'],[63,'11-q6-fit'],[99,'43-q6-menu'],[123,'12-q8-fit']];
+  states=[[0,'09-gguf'],[25,'10-gguf-options'],[63,'11-q6-fit'],[99,'43-q6-menu'],[123,'12-q8-fit']];
   cameras=[[0,[510,275,590]],[24,[510,298,590]],[39,[657,385,436]],[62,[657,385,436]],[63,[653,321,440]],[88,[520,298,575]],[100,[520,298,575]],[115,[657,385,436]],[122,[657,385,436]],[123,[653,321,440]],[153,[653,317,440]]];
   points=[[0,901,496],[20,828,343],[25,828,343],[55,700,456],[63,700,456],[75,730,343],[90,833,343],[99,833,343],[117,698,488],[123,698,488],[135,730,343],[153,737,343]];clicks=[25,63,99,123];
  }
  if(scene==='best'){
-  heading='Choose what your computer can run.';states=[[0,'11-q6-fit'],[17,'43-q6-menu'],[53,'11-q6-fit']];
+  states=[[0,'11-q6-fit'],[17,'43-q6-menu'],[53,'11-q6-fit']];
   cameras=[[0,[653,317,440]],[16,[520,307,570]],[17,[655,379,437]],[44,[655,379,437]],[53,[513,325,570]],[70,[520,350,570]],[98,[520,350,570]]];
   points=[[0,982,343],[13,829,343],[17,829,343],[28,982,487],[44,1002,455],[53,700,456],[77,666,385],[98,638,385]];clicks=[17,53];
  }
  if(scene==='fit'){
-  heading='Check the hardware estimate.';states=[[0,'11-q6-fit'],[45,'15-small-ready'],[83,'16-downloading'],[100,'17-download-progress'],[113,'18-download-done'],[124,'24-download-complete'],[139,'25-downloaded']];
+  states=[[0,'11-q6-fit'],[45,'15-small-ready'],[83,'16-downloading'],[100,'17-download-progress'],[113,'18-download-done'],[124,'24-download-complete'],[139,'25-downloaded']];
   cameras=[[0,[520,350,570]],[19,[520,342,400]],[44,[520,342,400]],[45,[497,88,610]],[68,[521,300,571]],[82,[740,310,348]],[103,[868,323,220]],[139,[868,323,220]],[152,[838,301,256]]];
   points=[[0,638,385],[19,604,385],[41,620,385],[45,638,353],[65,606,353],[78,983,353],[83,983,353],[99,981,354],[124,989,354],[152,992,354]];clicks=[83];success=139;
  }
  if(scene==='models'){
-  heading='Open My Models.';states=[[0,'25-downloaded'],[11,'26-before-my-models'],[35,'27-my-models']];
+  states=[[0,'25-downloaded'],[11,'26-before-my-models'],[35,'27-my-models']];
   cameras=[[0,[838,301,256]],[5,[905,79,211]],[10,[905,79,211]],[11,[0,50,530]],[35,[0,50,530]],[56,[43,54,530]],[78,[54,100,457]]];
   points=[[0,995,353],[8,1085,109],[11,1085,109],[30,20,128],[35,20,128],[53,246,149],[81,272,150]];clicks=[11,35];height=670;
  }
  if(scene==='load'){
-  heading='Use in New Chat.';states=[[0,'27-my-models'],[12,'28-model-selected'],[51,'29-model-cog'],[93,'30-chat-loaded'],[130,'31-chat-ready']];
+  states=[[0,'27-my-models'],[12,'28-model-selected'],[51,'29-model-cog'],[93,'30-chat-loaded'],[130,'31-chat-ready']];
   cameras=[[0,[54,100,457]],[14,[54,100,457]],[32,[741,50,459]],[50,[858,69,340]],[51,[841,50,354]],[78,[865,74,320]],[92,[865,74,320]],[93,[430,50,370]],[117,[430,50,370]],[129,[430,50,370]],[130,[137,630,730]],[149,[137,638,630]]];
   points=[[0,272,150],[12,272,150],[19,312,150],[45,1158,150],[51,1158,150],[77,952,100],[93,952,100],[101,651,85],[129,651,85],[130,651,85],[149,286,675]];clicks=[12,51,93];success=130;height=850;video={name:'loading.mp4',start:93,end:130,offset:66,rate:1.3,max:116};
  }
  if(scene==='chat'){
-  heading='Chat with the model.';states=[[0,'36-chat-empty'],[15,'37-prompt-start'],[25,'38-prompt-middle'],[36,'39-prompt-full'],[61,'40-code-result']];
+  states=[[0,'36-chat-empty'],[15,'37-prompt-start'],[25,'38-prompt-middle'],[36,'39-prompt-full'],[61,'40-code-result']];
   cameras=[[0,[137,638,630]],[23,[137,638,710]],[36,[310,637,770]],[51,[858,644,250]],[53,[858,644,250]],[54,[144,91,965]],[67,[144,91,965]],[83,[153,225,433]],[108,[153,225,433]],[127,[156,256,427]],[164,[156,256,427]]];
   points=[[0,286,675],[9,286,675],[39,373,675],[48,1076,719],[53,1076,719],[54,1076,719],[70,263,289],[83,245,289],[125,235,305],[164,275,305]];clicks=[9,53];success=95;video={name:'response.mp4',start:54,rate:2.25,max:195};
  }
- const title=scene==='hook'?(f<55?'':'On your computer.'):heading;
  return <AbsoluteFill style={{fontFamily:inter.fontFamily}}><Bg/>
- <div style={{position:'absolute',left:58,right:58,top:112,height:7,borderRadius:6,background:'#C3BBAD66',overflow:'hidden'}}><div style={{height:'100%',width:`${f/1367*100}%`,background:CLAY}}/></div>
- {title&&<div style={{position:'absolute',left:60,right:58,top:188,fontFamily:fraunces.fontFamily,fontSize:scene==='compression'||scene==='best'?70:82,fontWeight:750,lineHeight:1.06,letterSpacing:-2.5,color:INK}}>{title}</div>}
- {scene==='hook'?<Hook/>:scene==='cta'?<CTA f={lf}/>:<><Screen f={lf} states={states} cameras={cameras} points={points} clicks={clicks} height={height} top={top} video={video}/><EdgeClaude f={lf} clicks={clicks} success={success}/></>}
- {scene==='fit'&&lf>=45&&lf<94&&<div style={{position:'absolute',left:62,top:1046,fontSize:27,lineHeight:1.2,fontWeight:650,color:'#EDF1F8'}}>This Mac: smaller 1.7B model.</div>}
+ <div style={{position:'absolute',inset:0,zIndex:300,transform:'translateY(-48px)',pointerEvents:'none'}}><ProgressBar/></div>
+ <DemoHeader scene={scene} f={lf}/>
+ {scene==='hook'?<Hook/>:scene==='cta'?<CTA f={lf}/>:<><Screen scene={scene} f={lf} states={states} cameras={cameras} points={points} clicks={clicks} height={height} top={top} video={video}/><DemoCompanion scene={scene} f={lf} clicks={clicks} success={success}/></>}
+ {scene==='fit'&&lf>=45&&lf<94&&<div style={{position:'absolute',left:62,top:1052,fontSize:27,lineHeight:1.2,fontWeight:650,color:'#EDF1F8'}}>This Mac: smaller 1.7B model.</div>}
  <KaraokeCaption words={words} top={1475}/><Audio src={staticFile('lm146/master.wav')}/>
  </AbsoluteFill>;
 };

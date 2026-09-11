@@ -1,6 +1,6 @@
 # LM146: original voice, real LM Studio demo
 
-> R4 below is historical and was rejected by the user. The current deliverable is R10; see the revision record at the end.
+> R4 below is historical and was rejected by the user. R10 is also superseded. The current revision is R16; see the final record at the end.
 
 ## Source and scope
 User commissioned a finished reel from LM sep 10.m4a, specifically prioritizing real screen recording over elaborate animation. Original Drive ID: 1Vqil5y0781zDzYW72oW3VjbPZtKimfFD. Source duration 150.14s; edited narration 44.83s at the house 1.03x, delivered picture 45.60s. User supplied the script and topic; no new topic-selection or viral-performance claim is made.
@@ -71,3 +71,37 @@ Screen sources are CUA screenshot streams of actual browser/native interactions.
 Replace the existing MP4, source ZIP and notes in the existing 146 - LM Drive folder, preserving file IDs. Cover, caption and subtitles use their existing file IDs. Heavy media lives in the Drive source archive; GitHub stores code, storyboard, narration edit, cue map and validation records.
 
 The setup guide and four-page downloadable DOCX were updated to the same Q4_K_M download and word-count prompt. Git commit d44846b on chenmedialabs main; production deployment dpl_Ba14UVft74YdGG5Ni7iNCgPn9dMF. The unlocked article text was checked for Q4_K_M, 1.11GB and the prompt; the downloaded DOCX is byte-identical to the reviewed build input. Guide: https://chen.media/guides/run-qwen3-8-locally-with-lm-studio
+
+
+## R11 revision brief (September 10 follow-up)
+
+User requested more interesting animation and mini-Claude performance, the standard progress system, and replacement of the top-left text. Planned changes: restore the actual SlopKit ProgressBar and centered SectionHeader/HookHeader; preserve actual UI/cursor choreography; replace generic edge bob/tilt with scene-specific tool actions (magnifier, quantization staircase, compression press, download catch, model drawer, loading crank, keyboard and result reaction). Every movement should terminate in a result. Secondary props stay outside/behind the readable app and magnifier. Review short motion before final render, then audit the updated output without changing thresholds.
+
+
+## R12–R15 execution and visual review
+
+R11 implemented the actual shared `SlopKit.ProgressBar`, `SectionHeader` and `HookHeader`. The custom thin bar and top-left serif headings are gone. `LM146AnimationKit.tsx` gives each scene an authored original-sprite action: magnifier search, quantization stair climb, precision press, balance, drive catch, model drawer, connected crank, keyboard/result presentation, and a physical CTA leap/press/landing. The source recording and cursor events retain their original timings.
+
+R12 moved the shared retention rail upward by 48px so its moving score badge remains unobstructed. Hook UI begins below the taller shared hero card. The loading sprite's hand follows the actual crank handle position; its effort and release use the same authored mechanism. Code brackets were lifted above the face. Full motion review covered the quantization, compression, hardware and loading sequence.
+
+R13 corrected balance geometry so the hardware analogy stays outside Claude's face. The miniature chips use neutral processor cores rather than misleading success checkmarks. Twelve low-level mechanical cues accompany the newly authored contacts and movements.
+
+R14 added a warning double-take, three packet catches matching the actual captured download-progress states, and a final presentation hop. Three more soft packet cues bring the final map to 63 cues / 45.6s = 1.38/sec. The original voice, narration edit and house music source are unchanged.
+
+R15 gives the magnifier additional clearance from the sprite's head and keeps the first quantization-step arm outside the magnified capture. Source-code review and full-resolution frames check facial clearance, hand-to-tool contact, UI control readability, rail/header separation and the hook transition. Remotion bundles and renders the revised source successfully; a standalone TypeScript compiler was not installed, so no separate tsc pass is claimed.
+
+Current final audit results follow below. The stage crop is 1012×930 at (34,490), excluding the shared header, retention rail and captions. The original thresholds are unchanged. The earlier R10 is remeasured over the identical geometry for comparison.
+
+
+### R16 final finish and validation
+
+The R15 color audit exposed a pale surround: 30.5% saturation and black-point p10 40.4. R16 deepens the scene-specific stock/shadows and reduces the context overview from 884×534 to 836×504. The detailed 650px control lens stays unchanged. The hero laptop-to-overview transition is updated to the same exact target geometry. This fixes the surrounding set without recoloring any native UI.
+
+- Final look gate passes: body saturation 35.7% against 34%; p10 28.4 against 35. Frame-0 luma 213.9 against 140. Body luma 168.3 and the merged bright-plate warning are reported, not blocking.
+- Hook gate passes: first-five-second motion 8.54 against 4.0; three authored stages remain physical mouse action, real app and original-model source proof.
+- All nine audio/caption/export checks pass. 63/63 cues fire; voice at 0, audio at 40ms, continuous music and 0.08s dead tail. SFX audit exits 0. Integrated loudness -17.1 LUFS, LRA 2.1 LU, true peak -1.3 dBFS.
+- The DEADRUN bar now passes in every scene: longest is 12 frames. This resolves the earlier fit/load/chat/CTA failures of 24/21/18/15 frames.
+- The strict pixel-motion bar is still unmet: median 4.33 against 9.0, eight scenes below 6.0. Weakest scene: fit, 2.18. R10 remeasured over the identical crop also has median 4.33. Do not claim a median-motion lift or all-gates approval. The actual gains are distinct sprite jobs, readable causal contacts, standard chrome, stronger color/contrast, and the removal of long dead runs.
+- Full-resolution frames reviewed across all scene types, plus motion playback of the 24.5s quantization-to-loading segment and the 20.4s hardware-to-CTA segment. Late checks cover magnifier/face clearance, first-step/capture separation and final set contrast. Remotion render succeeds.
+
+Delivery uses the same Drive MP4, ZIP and notes IDs; GitHub carries the updated code and records, and the source ZIP carries all native captures, the original voice, audio stems, tools and final audits. The linked guide remains unchanged because the real download/model/prompt sequence is unchanged.

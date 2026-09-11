@@ -277,3 +277,8 @@ Related: [[alex-claude-motion-and-voice]] · [[reel-chassis-cinematic-not-abstra
 [[reel-motion-hierarchy]] · [[one-prop-five-scenes]] · [[sfx-root-timeline-trap]].
 Operational checks: [animation craft](../docs/ANIMATION-QUALITY.md),
 [sound design](../docs/SOUND-DESIGN.md), [storyboard contract](../storyboards/STORYBOARD-SPEC.md).
+
+
+## LM September 10: standard chrome and active mini-Claude
+
+Alex explicitly rejected the custom thin progress line and top-left text, and requested more interesting mini-Claude animation beyond the screen recording. Use the actual shared ProgressBar and centered SectionHeader/HookHeader system, with enough clearance for the moving score. Keep the visible cursor and real setup process. Give the mini sprite distinct jobs and expressions tied to demonstrated actions; do not treat a small generic nod/recoil as the full performance. Remove unrelated branding/footer text. The R16 implementation is a revision, not evidence of user approval.

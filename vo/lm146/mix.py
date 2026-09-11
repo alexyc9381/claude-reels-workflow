@@ -40,6 +40,15 @@ c('chat',83,'pickup','camera resolves onto the generated Python function')
 c('cta',0,'paper','comment call to action arrives')
 for f in [4,23]:c('cta',f,'key','illustrated comment field and arrow press')
 c('cta',31,'unlock','Claude reacts to the completed setup','hero')
+# R14: low-level Foley for the newly authored physical sprite actions.
+for f in [20,43,65]:c('quant',f,'thock','Claude lands on the selected quantization step','texture')
+for f in [56,116]:c('compression',f,'lever','Claude drives the precision press','texture')
+c('models',35,'lever','the miniature model drawer opens','texture')
+for f in [33,73,112]:c('load',f,'lever','Claude turns the connected model crank','texture')
+c('chat',104,'thock','Claude lands after the actual code result','texture')
+c('cta',10,'lever','Claude launches toward the comment arrow','texture')
+c('cta',36,'thock','Claude lands after pressing the illustrated arrow','texture')
+for f in [100,113,124]:c('fit',f,'pickup','Claude receives a packet at the captured download-progress change','texture')
 sfx=np.zeros((N,2));report=[]
 for i,(sec,name,role,action) in enumerate(cues):
  x=load(bank/(name+'.wav'));target=-24 if sec==0 else {'hero':-27,'support':-32,'texture':-36}[role];gain=target-active(aw(x));gain=min(gain,-7-20*np.log10(max(abs(x).max(),1e-9)));x*=10**(gain/20);start=round(sec*SR);nn=min(len(x),N-start);sfx[start:start+nn]+=x[:nn]

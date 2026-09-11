@@ -1,0 +1,83 @@
+sfx_audit · 8 distinct cues
+
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/impact.wav dur  0.64s  attack     2ms  >2kHz  13.9%  <250Hz  47.6%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/key.wav dur  0.07s  attack     1ms  >2kHz  21.5%  <250Hz  18.9%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/lever.wav dur  0.19s  attack     8ms  >2kHz   5.0%  <250Hz  52.1%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/paper.wav dur  0.25s  attack     8ms  >2kHz   8.1%  <250Hz   2.7%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/pickup.wav dur  0.33s  attack     8ms  >2kHz   0.6%  <250Hz   0.6%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/terminal.wav dur  0.44s  attack     8ms  >2kHz   6.2%  <250Hz   2.8%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/thock.wav dur  0.16s  attack     2ms  >2kHz   5.4%  <250Hz  74.3%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/unlock.wav dur  0.28s  attack     9ms  >2kHz  11.6%  <250Hz   1.1%
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/key.wav used 30x  >2kHz  21.5%  ok
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/lever.wav used  8x  >2kHz   5.0%  ok
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/paper.wav used  5x  >2kHz   8.1%  ok
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/terminal.wav used  6x  >2kHz   6.2%  ok
+     /Users/allyy/Documents/Codex/2026-09-10/i-have-attached-the-voice-over/work/lm-reel/video/public/lm146/sfx/thock.wav used  6x  >2kHz   5.4%  ok
+
+
+  PERCEIVED LEVEL — 63 explicit cues, loudest first
+
+      at file                    set dB   A-wtd  tier
+   29.93 unlock                  -18.5  -26.4  HERO
+   37.53 unlock                  -18.5  -26.4  HERO
+   44.73 unlock                  -18.5  -26.4  HERO
+    0.00 impact                   -3.0  -26.6  HERO
+    0.73 thock                    -3.1  -28.0  HERO
+    2.77 key                      -8.6  -29.0  HERO
+    3.17 key                      -8.6  -29.0  HERO
+    5.73 key                      -8.6  -29.0  HERO
+    6.37 key                      -8.6  -29.0  HERO
+    7.10 key                      -8.6  -29.0  HERO
+    9.57 key                      -8.6  -29.0  HERO
+   10.23 key                      -8.6  -29.0  HERO
+   11.63 key                      -8.6  -29.0  HERO
+   12.50 key                      -8.6  -29.0  HERO
+   13.00 key                      -8.6  -29.0  HERO
+   14.03 key                      -8.6  -29.0  HERO
+   14.57 key                      -8.6  -29.0  HERO
+   15.33 key                      -8.6  -29.0  HERO
+   16.07 key                      -8.6  -29.0  HERO
+   17.53 key                      -8.6  -29.0  HERO
+   18.80 key                      -8.6  -29.0  HERO
+   20.00 key                      -8.6  -29.0  HERO
+   20.80 key                      -8.6  -29.0  HERO
+   22.43 key                      -8.6  -29.0  HERO
+   23.63 key                      -8.6  -29.0  HERO
+   28.07 key                      -8.6  -29.0  HERO
+   30.83 key                      -8.6  -29.0  HERO
+   31.63 key                      -8.6  -29.0  HERO
+   33.60 key                      -8.6  -29.0  HERO
+   34.90 key                      -8.6  -29.0  HERO
+   36.30 key                      -8.6  -29.0  HERO
+   38.43 key                      -8.6  -29.0  HERO
+   39.90 key                      -8.6  -29.0  HERO
+   43.83 key                      -8.6  -29.0  HERO
+   44.47 key                      -8.6  -29.0  HERO
+   40.90 pickup                  -21.3  -30.4  HERO
+    0.47 lever                    -7.5  -30.9  HERO
+    1.27 paper                   -12.3  -32.2  HERO
+    3.37 paper                   -12.3  -32.2  HERO
+    8.33 paper                   -12.3  -32.2  HERO
+   26.80 paper                   -12.3  -32.2  HERO
+   43.70 paper                   -12.3  -32.2  HERO
+   14.57 thock                    -9.3  -34.2  HERO
+   15.33 thock                    -9.3  -34.2  HERO
+   16.07 thock                    -9.3  -34.2  HERO
+   41.60 thock                    -9.3  -34.2  HERO
+   44.90 thock                    -9.3  -34.2  HERO
+   28.63 pickup                  -25.3  -34.4  HERO
+   29.07 pickup                  -25.3  -34.4  HERO
+   29.43 pickup                  -25.3  -34.4  HERO
+   18.57 lever                   -11.5  -34.9  SUPPORT
+   20.57 lever                   -11.5  -34.9  SUPPORT
+   31.63 lever                   -11.5  -34.9  SUPPORT
+   34.30 lever                   -11.5  -34.9  SUPPORT
+   35.63 lever                   -11.5  -34.9  SUPPORT
+   36.93 lever                   -11.5  -34.9  SUPPORT
+   44.03 lever                   -11.5  -34.9  SUPPORT
+   10.40 terminal                 -9.7  -38.6  SUPPORT
+   10.67 terminal                 -9.7  -38.6  SUPPORT
+   10.93 terminal                 -9.7  -38.6  SUPPORT
+   38.63 terminal                 -9.7  -38.6  SUPPORT
+   38.97 terminal                 -9.7  -38.6  SUPPORT
+   39.33 terminal                 -9.7  -38.6  SUPPORT
