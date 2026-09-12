@@ -2,7 +2,9 @@
 
 September 11, 2026. Full-film revision of V10, not a replacement editing system. Active engine remains Remotion. `editVersion: v9` selects the established renderer; **it no longer implies that the audio EDL is unchanged**. The current manifest, V11 audit and source commit are authoritative.
 
-Target: `outputs/higgsfield-replacement-edit-v11.mp4`, 1920×1080/30, 13,808 frames / 7:40.27, six chapters. Full-export validation is pending while the render runs. This is a review version, not measured retention improvement, creative approval or publication.
+Completed full export: `outputs/higgsfield-replacement-edit-v11.mp4`, 161,963,938 bytes, 1920×1080/30, 13,808 frames / 7:40.27, six chapters. [Export validation](verification/export-v11.json) passes: full picture/audio decode, current-source chunk receipts, exact duration/chapters and one stereo 48k AAC track. Final audio measures −16.57 LUFS integrated and −1.07 dBTP. This is a review version, not measured retention improvement, creative approval or publication.
+
+Source fingerprint: `d69cf0bbd1e70ac33e3e6f03f5e3511f3b22948f6d86644da16ac707f7cd4dd0`. All six picture chunks are freshly rendered; no V10 picture chunk is inherited. The updated source and indexed notes are saved in GitHub. The local editable delivery is described in [the V11 Mac handoff](OTHER-MAC-HANDOFF-V11.md).
 
 ## This feedback round
 
@@ -29,6 +31,8 @@ User timestamps refer to V10. Earlier scenes retain their times; late sections m
 - [V11 source/geometry test](tools/test-v11.mjs): exact source deltas, unchanged camera offsets, frame-mapped plates, privacy, all typing-window corners, six chapters, unique scene dispatch, bonus/compare clearance and TS/TSX syntax.
 - [V11 audit](tools/audit-v11.mjs) regenerates current chapters and [timeline](v11-timeline.json). V9/V10 artifacts remain historical; do not run an old audit to overwrite current chapters.
 - Source-window ASR checks the bridge, retained first reaction, retake removal and last word. It is supporting evidence, not full human listening approval. Encoded checks must be run after rendering as well.
+- [Encoded join checks](verification/joins-v11.json) now pass: one complete “Wow… First of all…” sequence, no “cut” marker in the checked retake-removal passage, and the final “get set up in minutes” retained. No full human listening approval is claimed.
+- Six final encoded contact sheets inspected: opening (1, 9, 13, 15.5, 18, 22); setup (129, 145, 157, 159, 163, 165); rooftop (277, 278, 279, 280, 281, 297); restored playback (367, 369, 371, 373, 375, 378); demo/typing (191, 202, 225, 258, 318, 347); bonus/reveal/closing (412, 443, 455, 459). Confirmed the full jump through landing, source privacy, input-box clearance, absence of the former bonus/detail collision and large reveal identities.
 - Sampled entry/action/payoff proofs inspected. Corrections include facecam/caption clearance, file-label separation, planted actor/reader alignment and eliminating the gift/detail collision.
 - All V11 picture chunks must be newly rendered. The dependency fingerprint now includes the imported short-form `WorldKit.tsx` as well as the YouTube sources and media.
 - [Validator](tools/validate-v11-export.mjs): current source receipts, all-frame decode, duration, chapters, one stereo AAC stream, loudness/true peak. V11 audio must differ from V9 because this revision repairs source speech and cue timing.

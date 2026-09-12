@@ -1,0 +1,34 @@
+{
+  "method": "Local short-window ASR; supports but does not replace human listening approval",
+  "sourceMode": false,
+  "results": [
+    {
+      "id": "bridge",
+      "start": 353.8666666666667,
+      "end": 367.8666666666667,
+      "text": "the same for just one sentence here.\n And so all I had to do is take the exact same prompt\n and the skill ran it through multiple different AI models\n at the exact same time.\n And this is what we got for the first generation.\n And this is using Vio.",
+      "retakeCandidate": false
+    },
+    {
+      "id": "playback-reaction",
+      "start": 374.56666666666666,
+      "end": 382.56666666666666,
+      "text": "Wow, this is super crazy good.\n First of all, this is super interesting how we see all of these cars floating in the background.",
+      "retakeCandidate": false
+    },
+    {
+      "id": "retake-removal",
+      "start": 419.5,
+      "end": 428.8,
+      "text": "real movie while we hear the realistic sound effects like the grunting when he\n jumps as well as a sound effect when he falls down onto the ground and we also\n hear all of the individual rain sounds",
+      "retakeCandidate": false
+    },
+    {
+      "id": "ending",
+      "start": 451.7,
+      "end": 460.26666666666665,
+      "text": "And so all you need to do to get set up is use this prompting routing file.\n I dropped the exact file we use today in the description below.\n Copy and paste it into cloud and get set up in minutes.",
+      "retakeCandidate": false
+    }
+  ]
+}
