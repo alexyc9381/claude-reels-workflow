@@ -1,0 +1,20 @@
+[
+  {
+    "filename": "145_SETUP_trial_B_magnetic_selection.mp4",
+    "frames": 848,
+    "duration_seconds": 28.266666666666666,
+    "composition": "SetupTrialB",
+    "format": "1080x1920 H264 30fps BT709; AAC stereo",
+    "bytes": 9303633,
+    "sha256": "a022668db22c6253ef2c7a817d6e1ef2586cb8c6c6ed7d6b5848e9221f92c3bb"
+  },
+  {
+    "filename": "145_SETUP_trial_C_tool_relay.mp4",
+    "frames": 848,
+    "duration_seconds": 28.266666666666666,
+    "composition": "SetupTrialC",
+    "format": "1080x1920 H264 30fps BT709; AAC stereo",
+    "bytes": 9031337,
+    "sha256": "5aa49e85283b5160ff176dc1e7538b36c389b3f4d8e5de4729e9457fe1773f03"
+  }
+]

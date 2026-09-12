@@ -1,0 +1,977 @@
+[
+{
+"start": 0.0,
+"end": 0.26,
+"word": " Everyone"
+},
+{
+"start": 0.26,
+"end": 0.6,
+"word": " uploading"
+},
+{
+"start": 0.6,
+"end": 1.02,
+"word": " PDFs"
+},
+{
+"start": 1.0,
+"end": 1.12,
+"word": " to"
+},
+{
+"start": 1.12,
+"end": 1.22,
+"word": " Claude"
+},
+{
+"start": 1.22,
+"end": 1.34,
+"word": " is"
+},
+{
+"start": 1.34,
+"end": 1.62,
+"word": " basically"
+},
+{
+"start": 1.62,
+"end": 1.92,
+"word": " wasting"
+},
+{
+"start": 1.92,
+"end": 2.14,
+"word": " all"
+},
+{
+"start": 2.14,
+"end": 2.28,
+"word": " their"
+},
+{
+"start": 2.28,
+"end": 2.5,
+"word": " tokens"
+},
+{
+"start": 2.46,
+"end": 2.68,
+"word": " and"
+},
+{
+"start": 2.68,
+"end": 3.04,
+"word": " Microsoft"
+},
+{
+"start": 3.04,
+"end": 3.24,
+"word": " has"
+},
+{
+"start": 3.29,
+"end": 3.41,
+"word": " a"
+},
+{
+"start": 3.41,
+"end": 3.57,
+"word": " free"
+},
+{
+"start": 3.57,
+"end": 3.81,
+"word": " fix."
+},
+{
+"start": 4.03,
+"end": 4.19,
+"word": " So"
+},
+{
+"start": 4.19,
+"end": 4.39,
+"word": " every"
+},
+{
+"start": 4.39,
+"end": 4.57,
+"word": " time"
+},
+{
+"start": 4.63,
+"end": 4.75,
+"word": " you"
+},
+{
+"start": 4.75,
+"end": 4.91,
+"word": " upload"
+},
+{
+"start": 4.91,
+"end": 5.33,
+"word": " a"
+},
+{
+"start": 5.33,
+"end": 5.37,
+"word": " PDF,"
+},
+{
+"start": 5.5,
+"end": 5.54,
+"word": " Claude"
+},
+{
+"start": 5.575,
+"end": 5.66,
+"word": " has"
+},
+{
+"start": 5.66,
+"end": 5.78,
+"word": " to"
+},
+{
+"start": 5.78,
+"end": 6.06,
+"word": " process"
+},
+{
+"start": 6.04,
+"end": 6.22,
+"word": " the"
+},
+{
+"start": 6.22,
+"end": 6.54,
+"word": " entire"
+},
+{
+"start": 6.54,
+"end": 6.78,
+"word": " thing,"
+},
+{
+"start": 6.96,
+"end": 7.0,
+"word": " the"
+},
+{
+"start": 7.035,
+"end": 7.3,
+"word": " formatting,"
+},
+{
+"start": 7.5,
+"end": 7.54,
+"word": " the"
+},
+{
+"start": 7.575,
+"end": 7.76,
+"word": " broken"
+},
+{
+"start": 7.75,
+"end": 8.07,
+"word": " tables,"
+},
+{
+"start": 8.23,
+"end": 8.29,
+"word": " the"
+},
+{
+"start": 8.305,
+"end": 8.53,
+"word": " images,"
+},
+{
+"start": 8.67,
+"end": 8.75,
+"word": " and"
+},
+{
+"start": 8.75,
+"end": 8.83,
+"word": " all"
+},
+{
+"start": 8.83,
+"end": 8.93,
+"word": " the"
+},
+{
+"start": 8.93,
+"end": 9.27,
+"word": " extra"
+},
+{
+"start": 9.27,
+"end": 9.47,
+"word": " junk"
+},
+{
+"start": 9.47,
+"end": 9.69,
+"word": " inside"
+},
+{
+"start": 9.69,
+"end": 9.91,
+"word": " the"
+},
+{
+"start": 9.91,
+"end": 10.13,
+"word": " file."
+},
+{
+"start": 10.34,
+"end": 10.5,
+"word": " Each"
+},
+{
+"start": 10.5,
+"end": 10.8,
+"word": " PDF"
+},
+{
+"start": 10.8,
+"end": 11.04,
+"word": " page"
+},
+{
+"start": 11.05,
+"end": 11.23,
+"word": " can"
+},
+{
+"start": 11.23,
+"end": 11.53,
+"word": " consume"
+},
+{
+"start": 11.53,
+"end": 11.81,
+"word": " between"
+},
+{
+"start": 11.81,
+"end": 12.07,
+"word": " fifteen"
+},
+{
+"start": 12.07,
+"end": 12.47,
+"word": " hundred"
+},
+{
+"start": 12.47,
+"end": 12.87,
+"word": " to"
+},
+{
+"start": 12.87,
+"end": 13.17,
+"word": " three"
+},
+{
+"start": 13.22,
+"end": 13.54,
+"word": " thousand"
+},
+{
+"start": 13.54,
+"end": 13.8,
+"word": " tokens,"
+},
+{
+"start": 13.86,
+"end": 13.96,
+"word": " so"
+},
+{
+"start": 13.96,
+"end": 14.04,
+"word": " a"
+},
+{
+"start": 14.04,
+"end": 14.28,
+"word": " twenty"
+},
+{
+"start": 14.32,
+"end": 14.46,
+"word": " page"
+},
+{
+"start": 14.46,
+"end": 14.8,
+"word": " document"
+},
+{
+"start": 14.72,
+"end": 14.94,
+"word": " can"
+},
+{
+"start": 14.94,
+"end": 15.08,
+"word": " burn"
+},
+{
+"start": 15.08,
+"end": 15.2,
+"word": " up"
+},
+{
+"start": 15.28,
+"end": 15.4,
+"word": " to"
+},
+{
+"start": 15.4,
+"end": 15.82,
+"word": " seventy"
+},
+{
+"start": 15.82,
+"end": 16.26,
+"word": " thousand"
+},
+{
+"start": 16.23,
+"end": 16.55,
+"word": " tokens"
+},
+{
+"start": 16.55,
+"end": 16.71,
+"word": " in"
+},
+{
+"start": 16.71,
+"end": 16.85,
+"word": " one"
+},
+{
+"start": 16.85,
+"end": 17.11,
+"word": " shot."
+},
+{
+"start": 17.35,
+"end": 17.49,
+"word": " And"
+},
+{
+"start": 17.49,
+"end": 17.67,
+"word": " that's"
+},
+{
+"start": 17.67,
+"end": 17.89,
+"word": " before"
+},
+{
+"start": 17.84,
+"end": 17.96,
+"word": " you"
+},
+{
+"start": 17.96,
+"end": 18.12,
+"word": " even"
+},
+{
+"start": 18.12,
+"end": 18.3,
+"word": " ask"
+},
+{
+"start": 18.35,
+"end": 18.59,
+"word": " a"
+},
+{
+"start": 18.59,
+"end": 18.81,
+"word": " single"
+},
+{
+"start": 18.81,
+"end": 19.23,
+"word": " question."
+},
+{
+"start": 19.51,
+"end": 19.65,
+"word": " So"
+},
+{
+"start": 19.65,
+"end": 19.77,
+"word": " the"
+},
+{
+"start": 19.77,
+"end": 19.91,
+"word": " fix"
+},
+{
+"start": 19.93,
+"end": 20.07,
+"word": " is"
+},
+{
+"start": 20.07,
+"end": 20.31,
+"word": " simple."
+},
+{
+"start": 20.51,
+"end": 20.69,
+"word": " It's"
+},
+{
+"start": 20.69,
+"end": 20.85,
+"word": " called"
+},
+{
+"start": 20.85,
+"end": 21.29,
+"word": " MarkItDown,"
+},
+{
+"start": 21.4,
+"end": 21.48,
+"word": " a"
+},
+{
+"start": 21.48,
+"end": 21.66,
+"word": " free"
+},
+{
+"start": 21.66,
+"end": 22.04,
+"word": " Microsoft"
+},
+{
+"start": 22.0,
+"end": 22.26,
+"word": " tool"
+},
+{
+"start": 22.26,
+"end": 22.42,
+"word": " with"
+},
+{
+"start": 22.42,
+"end": 22.56,
+"word": " over"
+},
+{
+"start": 22.57,
+"end": 22.754,
+"word": " a"
+},
+{
+"start": 22.754,
+"end": 22.938,
+"word": " hundred"
+},
+{
+"start": 22.938,
+"end": 23.122,
+"word": " and"
+},
+{
+"start": 23.122,
+"end": 23.306,
+"word": " ten"
+},
+{
+"start": 23.346,
+"end": 23.53,
+"word": " thousand"
+},
+{
+"start": 23.53,
+"end": 23.67,
+"word": " stars"
+},
+{
+"start": 23.67,
+"end": 23.91,
+"word": " on"
+},
+{
+"start": 23.91,
+"end": 24.01,
+"word": " GitHub."
+},
+{
+"start": 24.31,
+"end": 24.39,
+"word": " It"
+},
+{
+"start": 24.39,
+"end": 24.55,
+"word": " takes"
+},
+{
+"start": 24.55,
+"end": 24.75,
+"word": " almost"
+},
+{
+"start": 24.79,
+"end": 25.03,
+"word": " any"
+},
+{
+"start": 25.03,
+"end": 25.31,
+"word": " file,"
+},
+{
+"start": 25.45,
+"end": 25.93,
+"word": " PDFs,"
+},
+{
+"start": 26.05,
+"end": 26.11,
+"word": " Word"
+},
+{
+"start": 26.125,
+"end": 26.31,
+"word": " docs,"
+},
+{
+"start": 26.49,
+"end": 26.67,
+"word": " Excel"
+},
+{
+"start": 26.67,
+"end": 26.87,
+"word": " sheets,"
+},
+{
+"start": 27.05,
+"end": 27.35,
+"word": " PowerPoints,"
+},
+{
+"start": 27.45,
+"end": 27.49,
+"word": " or"
+},
+{
+"start": 27.525,
+"end": 27.65,
+"word": " even"
+},
+{
+"start": 27.65,
+"end": 27.93,
+"word": " YouTube"
+},
+{
+"start": 27.93,
+"end": 28.19,
+"word": " videos"
+},
+{
+"start": 28.19,
+"end": 28.35,
+"word": " and"
+},
+{
+"start": 28.35,
+"end": 28.63,
+"word": " converts"
+},
+{
+"start": 28.63,
+"end": 28.85,
+"word": " them"
+},
+{
+"start": 28.85,
+"end": 29.01,
+"word": " into"
+},
+{
+"start": 29.01,
+"end": 29.29,
+"word": " clean"
+},
+{
+"start": 29.34,
+"end": 29.66,
+"word": " Markdown"
+},
+{
+"start": 29.66,
+"end": 30.0,
+"word": " text."
+},
+{
+"start": 30.32,
+"end": 30.36,
+"word": " So"
+},
+{
+"start": 30.395,
+"end": 30.52,
+"word": " this"
+},
+{
+"start": 30.52,
+"end": 30.66,
+"word": " can"
+},
+{
+"start": 30.6,
+"end": 30.82,
+"word": " reduce"
+},
+{
+"start": 30.82,
+"end": 31.02,
+"word": " your"
+},
+{
+"start": 31.02,
+"end": 31.18,
+"word": " token"
+},
+{
+"start": 31.21,
+"end": 31.43,
+"word": " usage"
+},
+{
+"start": 31.43,
+"end": 31.59,
+"word": " by"
+},
+{
+"start": 31.59,
+"end": 31.71,
+"word": " up"
+},
+{
+"start": 31.77,
+"end": 31.93,
+"word": " to"
+},
+{
+"start": 31.93,
+"end": 32.23,
+"word": " seventy"
+},
+{
+"start": 32.23,
+"end": 32.59,
+"word": " percent,"
+},
+{
+"start": 32.59,
+"end": 32.81,
+"word": " and"
+},
+{
+"start": 32.81,
+"end": 32.91,
+"word": " Claude"
+},
+{
+"start": 32.91,
+"end": 33.09,
+"word": " can"
+},
+{
+"start": 33.03,
+"end": 33.19,
+"word": " give"
+},
+{
+"start": 33.19,
+"end": 33.41,
+"word": " better"
+},
+{
+"start": 33.41,
+"end": 33.65,
+"word": " answers"
+},
+{
+"start": 33.68,
+"end": 33.98,
+"word": " because"
+},
+{
+"start": 33.98,
+"end": 34.32,
+"word": " Markdown"
+},
+{
+"start": 34.33,
+"end": 34.45,
+"word": " is"
+},
+{
+"start": 34.45,
+"end": 34.55,
+"word": " a"
+},
+{
+"start": 34.55,
+"end": 34.79,
+"word": " format"
+},
+{
+"start": 34.9,
+"end": 35.04,
+"word": " AI"
+},
+{
+"start": 35.04,
+"end": 35.26,
+"word": " models"
+},
+{
+"start": 35.22,
+"end": 35.66,
+"word": " understand"
+},
+{
+"start": 35.66,
+"end": 36.14,
+"word": " extremely"
+},
+{
+"start": 36.14,
+"end": 36.52,
+"word": " well."
+},
+{
+"start": 36.86,
+"end": 37.04,
+"word": " Plus,"
+},
+{
+"start": 37.2,
+"end": 37.52,
+"word": " MarkItDown"
+},
+{
+"start": 37.52,
+"end": 37.74,
+"word": " comes"
+},
+{
+"start": 37.73,
+"end": 37.89,
+"word": " with"
+},
+{
+"start": 37.89,
+"end": 37.99,
+"word": " an"
+},
+{
+"start": 37.99,
+"end": 38.31,
+"word": " MCP"
+},
+{
+"start": 38.33,
+"end": 38.69,
+"word": " server."
+},
+{
+"start": 38.94,
+"end": 39.0,
+"word": " That"
+},
+{
+"start": 39.015,
+"end": 39.12,
+"word": " means"
+},
+{
+"start": 39.12,
+"end": 39.24,
+"word": " when"
+},
+{
+"start": 39.25,
+"end": 39.35,
+"word": " you"
+},
+{
+"start": 39.35,
+"end": 39.55,
+"word": " connect"
+},
+{
+"start": 39.6,
+"end": 39.7,
+"word": " it"
+},
+{
+"start": 39.7,
+"end": 39.82,
+"word": " to"
+},
+{
+"start": 39.82,
+"end": 40.0,
+"word": " Claude"
+},
+{
+"start": 40.0,
+"end": 40.3,
+"word": " Desktop,"
+},
+{
+"start": 40.46,
+"end": 40.5,
+"word": " it"
+},
+{
+"start": 40.535,
+"end": 40.62,
+"word": " can"
+},
+{
+"start": 40.62,
+"end": 41.02,
+"word": " automatically"
+},
+{
+"start": 41.02,
+"end": 41.44,
+"word": " convert"
+},
+{
+"start": 41.44,
+"end": 41.68,
+"word": " any"
+},
+{
+"start": 41.63,
+"end": 41.89,
+"word": " file"
+},
+{
+"start": 41.89,
+"end": 42.03,
+"word": " you"
+},
+{
+"start": 42.03,
+"end": 42.21,
+"word": " upload"
+},
+{
+"start": 42.15,
+"end": 42.37,
+"word": " to"
+},
+{
+"start": 42.37,
+"end": 42.47,
+"word": " a"
+},
+{
+"start": 42.47,
+"end": 42.81,
+"word": " .md"
+},
+{
+"start": 42.88,
+"end": 43.26,
+"word": " file."
+},
+{
+"start": 43.4,
+"end": 43.5,
+"word": " If"
+},
+{
+"start": 43.5,
+"end": 43.6,
+"word": " you"
+},
+{
+"start": 43.6,
+"end": 43.7,
+"word": " want"
+},
+{
+"start": 43.8,
+"end": 43.94,
+"word": " the"
+},
+{
+"start": 43.94,
+"end": 44.12,
+"word": " link"
+},
+{
+"start": 44.12,
+"end": 44.26,
+"word": " and"
+},
+{
+"start": 44.26,
+"end": 44.4,
+"word": " full"
+},
+{
+"start": 44.335,
+"end": 44.49,
+"word": " guide,"
+},
+{
+"start": 44.61,
+"end": 44.67,
+"word": " just"
+},
+{
+"start": 44.685,
+"end": 44.91,
+"word": " follow"
+},
+{
+"start": 44.97,
+"end": 45.09,
+"word": " and"
+},
+{
+"start": 45.09,
+"end": 45.33,
+"word": " comment"
+},
+{
+"start": 45.33,
+"end": 45.59,
+"word": " X."
+}
+]

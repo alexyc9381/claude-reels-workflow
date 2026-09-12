@@ -1,0 +1,14 @@
+word_caption_audit · x144_vo.wav · 195 words · lead 0.05s
+------------------------------------------------------------------------------------------------
+⚠ STORED END IS INSIDE THE WORD (measured from the audio):
+    [ 45] file.            stored end 10.130  true end 10.216      86 ms short
+    [ 72] shot.            stored end 17.110  true end 17.151      41 ms short
+    [ 81] question.        stored end 19.230  true end 19.436     206 ms short
+    [ 86] simple.          stored end 20.310  true end 20.461     151 ms short
+    [103] GitHub.          stored end 24.010  true end 24.176     166 ms short
+    [125] text.            stored end 30.000  true end 30.126     126 ms short
+    [153] well.            stored end 36.520  true end 36.641     121 ms short
+    [160] server.          stored end 38.690  true end 38.816     126 ms short
+    [181] file.            stored end 43.260  true end 43.341      81 ms short
+
+✅ every word's caption line is still on screen when the word finishes.

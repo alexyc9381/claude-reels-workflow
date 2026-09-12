@@ -1,0 +1,376 @@
+{
+  "frames": 848,
+  "hook_frames": 109,
+  "body_audio_sample_identical": true,
+  "voice_unchanged": true,
+  "cues": [
+    {
+      "frame": 0,
+      "asset": "impact",
+      "gain_db": -4.999848365783691,
+      "action": "opening launch"
+    },
+    {
+      "frame": 8,
+      "asset": "paper",
+      "gain_db": -13.276555712045553,
+      "action": "Claude launches packet"
+    },
+    {
+      "frame": 35,
+      "asset": "lever",
+      "gain_db": -8.03914115094208,
+      "action": "three stations deploy"
+    },
+    {
+      "frame": 44,
+      "asset": "clank",
+      "gain_db": -5.08479118347168,
+      "action": "clamp compresses packet"
+    },
+    {
+      "frame": 53,
+      "asset": "terminal",
+      "gain_db": -6.232650940931286,
+      "action": "visibility lens reveals strip"
+    },
+    {
+      "frame": 63,
+      "asset": "key",
+      "gain_db": -9.109621142850564,
+      "action": "access key turns"
+    },
+    {
+      "frame": 70,
+      "asset": "unlock",
+      "gain_db": -24.000478245223487,
+      "action": "gate opens"
+    },
+    {
+      "frame": 76,
+      "asset": "thock",
+      "gain_db": -5.771942317708998,
+      "action": "completed relay lifts Claude"
+    },
+    {
+      "frame": 84,
+      "asset": "pickup",
+      "gain_db": -21.82549404253632,
+      "action": "rank crown arrives"
+    },
+    {
+      "frame": 91,
+      "asset": "coin",
+      "gain_db": -13.683591012608879,
+      "action": "rank glint"
+    },
+    {
+      "frame": 99,
+      "asset": "paper",
+      "gain_db": -13.276555712045553,
+      "action": "handoff toward first tool"
+    }
+  ],
+  "body_cues": [
+    {
+      "frame": 117,
+      "asset": "paper",
+      "gain_db": -13.276555712045553,
+      "action": "ribbon feeds into press"
+    },
+    {
+      "frame": 130,
+      "asset": "clank",
+      "gain_db": -8.01369420626256,
+      "action": "Headroom press takes load"
+    },
+    {
+      "frame": 144,
+      "asset": "ratchet",
+      "gain_db": -13.992953679087428,
+      "action": "compression crank starts"
+    },
+    {
+      "frame": 160,
+      "asset": "gear",
+      "gain_db": -11.443250498634804,
+      "action": "press advances"
+    },
+    {
+      "frame": 172,
+      "asset": "thock",
+      "gain_db": -5.08479118347168,
+      "action": "jaws compress ribbon"
+    },
+    {
+      "frame": 187,
+      "asset": "pickup",
+      "gain_db": -22.32549404253632,
+      "action": "compact ribbon launches"
+    },
+    {
+      "frame": 203,
+      "asset": "thock",
+      "gain_db": -6.271942317708998,
+      "action": "Claude catches compact input"
+    },
+    {
+      "frame": 231,
+      "asset": "unlock",
+      "gain_db": -22.000478245223487,
+      "action": "same-answer bulbs light"
+    },
+    {
+      "frame": 236,
+      "asset": "coin",
+      "gain_db": -13.683591012608879,
+      "action": "ten input tokens appear"
+    },
+    {
+      "frame": 254,
+      "asset": "key",
+      "gain_db": -13.609621142850564,
+      "action": "two tokens pay for result"
+    },
+    {
+      "frame": 269,
+      "asset": "coin",
+      "gain_db": -9.683591012608879,
+      "action": "first spent token arrives"
+    },
+    {
+      "frame": 274,
+      "asset": "coin",
+      "gain_db": -13.683591012608879,
+      "action": "second spent token arrives"
+    },
+    {
+      "frame": 280,
+      "asset": "coin",
+      "gain_db": -9.683591012608879,
+      "action": "saved tokens return"
+    },
+    {
+      "frame": 288,
+      "asset": "coin",
+      "gain_db": -13.683591012608879,
+      "action": "saved tokens return"
+    },
+    {
+      "frame": 296,
+      "asset": "coin",
+      "gain_db": -13.683591012608879,
+      "action": "saved tokens return"
+    },
+    {
+      "frame": 305,
+      "asset": "coin",
+      "gain_db": -9.683591012608879,
+      "action": "last tokens reach savings pouch"
+    },
+    {
+      "frame": 307,
+      "asset": "lever",
+      "gain_db": -12.53914115094208,
+      "action": "pouch cinches"
+    },
+    {
+      "frame": 326,
+      "asset": "pickup",
+      "gain_db": -22.32549404253632,
+      "action": "Claude lifts savings"
+    },
+    {
+      "frame": 340,
+      "asset": "thock",
+      "gain_db": -10.271942317708998,
+      "action": "pouch settles in hand"
+    },
+    {
+      "frame": 350,
+      "asset": "lever",
+      "gain_db": -12.53914115094208,
+      "action": "HUD visibility lever arrives"
+    },
+    {
+      "frame": 369,
+      "asset": "lever",
+      "gain_db": -8.53914115094208,
+      "action": "Claude pulls visibility lever"
+    },
+    {
+      "frame": 383,
+      "asset": "clank",
+      "gain_db": -5.08479118347168,
+      "action": "shutters open"
+    },
+    {
+      "frame": 401,
+      "asset": "thock",
+      "gain_db": -6.271942317708998,
+      "action": "live strip locks beneath prompt"
+    },
+    {
+      "frame": 424,
+      "asset": "gear",
+      "gain_db": -7.443250498634804,
+      "action": "context needle travels"
+    },
+    {
+      "frame": 440,
+      "asset": "thock",
+      "gain_db": -10.271942317708998,
+      "action": "context needle settles"
+    },
+    {
+      "frame": 450,
+      "asset": "paper",
+      "gain_db": -13.276555712045553,
+      "action": "read opens source book"
+    },
+    {
+      "frame": 471,
+      "asset": "key",
+      "gain_db": -9.609621142850564,
+      "action": "pencil starts editing"
+    },
+    {
+      "frame": 493,
+      "asset": "terminal",
+      "gain_db": -10.732650940931286,
+      "action": "edited path completes"
+    },
+    {
+      "frame": 504,
+      "asset": "lever",
+      "gain_db": -8.53914115094208,
+      "action": "search lens scans evidence"
+    },
+    {
+      "frame": 522,
+      "asset": "pickup",
+      "gain_db": -22.32549404253632,
+      "action": "matching evidence is selected"
+    },
+    {
+      "frame": 544,
+      "asset": "thock",
+      "gain_db": -6.271942317708998,
+      "action": "match reaches supervisor"
+    },
+    {
+      "frame": 566,
+      "asset": "key",
+      "gain_db": -9.609621142850564,
+      "action": "AIsa key arrives"
+    },
+    {
+      "frame": 595,
+      "asset": "lever",
+      "gain_db": -8.53914115094208,
+      "action": "API key turns"
+    },
+    {
+      "frame": 610,
+      "asset": "unlock",
+      "gain_db": -22.000478245223487,
+      "action": "access gate opens"
+    },
+    {
+      "frame": 619,
+      "asset": "paper",
+      "gain_db": -13.276555712045553,
+      "action": "one prompt plane launches"
+    },
+    {
+      "frame": 634,
+      "asset": "pickup",
+      "gain_db": -26.32549404253632,
+      "action": "prompt enters live-source map"
+    },
+    {
+      "frame": 654,
+      "asset": "gear",
+      "gain_db": -7.443250498634804,
+      "action": "Similarweb traffic station opens"
+    },
+    {
+      "frame": 667,
+      "asset": "chain",
+      "gain_db": -10.207554306908321,
+      "action": "visitor stream travels to competitor"
+    },
+    {
+      "frame": 681,
+      "asset": "lever",
+      "gain_db": -8.53914115094208,
+      "action": "Semrush lens scans"
+    },
+    {
+      "frame": 703,
+      "asset": "pickup",
+      "gain_db": -19.82549404253632,
+      "action": "keyword opportunity appears"
+    },
+    {
+      "frame": 719,
+      "asset": "key",
+      "gain_db": -13.609621142850564,
+      "action": "live source evidence travels"
+    },
+    {
+      "frame": 729,
+      "asset": "paper",
+      "gain_db": -13.276555712045553,
+      "action": "evidence joins report"
+    },
+    {
+      "frame": 748,
+      "asset": "gear",
+      "gain_db": -11.443250498634804,
+      "action": "bound report unfolds"
+    },
+    {
+      "frame": 760,
+      "asset": "paper",
+      "gain_db": -13.276555712045553,
+      "action": "report pages open"
+    },
+    {
+      "frame": 778,
+      "asset": "unlock",
+      "gain_db": -22.000478245223487,
+      "action": "report completes"
+    },
+    {
+      "frame": 793,
+      "asset": "key",
+      "gain_db": -7.109621142850564,
+      "action": "three-tool keyring thrown"
+    },
+    {
+      "frame": 809,
+      "asset": "coin",
+      "gain_db": -9.683591012608879,
+      "action": "ring catches"
+    },
+    {
+      "frame": 815,
+      "asset": "clank",
+      "gain_db": -8.01369420626256,
+      "action": "attachments jingle"
+    },
+    {
+      "frame": 824,
+      "asset": "terminal",
+      "gain_db": -6.732650940931286,
+      "action": "SETUP comment confirms"
+    },
+    {
+      "frame": 840,
+      "asset": "coin",
+      "gain_db": -13.683591012608879,
+      "action": "keyring settles"
+    }
+  ]
+}

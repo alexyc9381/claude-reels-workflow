@@ -281,3 +281,12 @@ Related: [[alex-claude-motion-and-voice]] · [[reel-chassis-cinematic-not-abstra
 [[reel-motion-hierarchy]] · [[one-prop-five-scenes]] · [[sfx-root-timeline-trap]].
 Operational checks: [animation craft](../docs/ANIMATION-QUALITY.md),
 [sound design](../docs/SOUND-DESIGN.md), [storyboard contract](../storyboards/STORYBOARD-SPEC.md).
+
+
+## September 11: specific X retention loss around 22 seconds
+
+Alex subsequently identified a hard loss near 22s and requested an animation revision from
+that area onward. Read the [focused teardown and correction](alex-x144-retention-22s.md):
+solution-to-social-proof value gap, continuous conversion, brief stars, useful format
+consequences, active Desktop/output ending, and two SETUP hook-only trials. This adds a
+specific reported loss point; it does not establish causality or approve the earlier pacing.

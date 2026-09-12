@@ -1,0 +1,627 @@
+[
+ {
+  "start": 0.0,
+  "end": 0.04,
+  "word": " There"
+ },
+ {
+  "start": 0.075,
+  "end": 0.115,
+  "word": " are"
+ },
+ {
+  "start": 0.15,
+  "end": 0.22,
+  "word": " over"
+ },
+ {
+  "start": 0.225,
+  "end": 0.73,
+  "word": " 300"
+ },
+ {
+  "start": 0.73,
+  "end": 0.91,
+  "word": " Claude"
+ },
+ {
+  "start": 0.91,
+  "end": 1.19,
+  "word": " plugins,"
+ },
+ {
+  "start": 1.3,
+  "end": 1.38,
+  "word": " but"
+ },
+ {
+  "start": 1.38,
+  "end": 1.6,
+  "word": " these"
+ },
+ {
+  "start": 1.6,
+  "end": 1.88,
+  "word": " three"
+ },
+ {
+  "start": 1.91,
+  "end": 2.07,
+  "word": " make"
+ },
+ {
+  "start": 2.07,
+  "end": 2.21,
+  "word": " you"
+ },
+ {
+  "start": 2.21,
+  "end": 2.33,
+  "word": " a"
+ },
+ {
+  "start": 2.33,
+  "end": 2.47,
+  "word": " top"
+ },
+ {
+  "start": 2.47,
+  "end": 2.69,
+  "word": " 1%"
+ },
+ {
+  "start": 2.69,
+  "end": 3.19,
+  "word": " Claude"
+ },
+ {
+  "start": 3.19,
+  "end": 3.561,
+  "word": " user."
+ },
+ {
+  "start": 3.58,
+  "end": 3.68,
+  "word": " The"
+ },
+ {
+  "start": 3.68,
+  "end": 3.84,
+  "word": " first"
+ },
+ {
+  "start": 3.84,
+  "end": 3.96,
+  "word": " one"
+ },
+ {
+  "start": 3.96,
+  "end": 4.08,
+  "word": " is"
+ },
+ {
+  "start": 4.08,
+  "end": 4.22,
+  "word": " called"
+ },
+ {
+  "start": 4.22,
+  "end": 4.666,
+  "word": " Headroom."
+ },
+ {
+  "start": 4.71,
+  "end": 4.81,
+  "word": " It"
+ },
+ {
+  "start": 4.81,
+  "end": 5.11,
+  "word": " compresses"
+ },
+ {
+  "start": 5.11,
+  "end": 5.29,
+  "word": " your"
+ },
+ {
+  "start": 5.29,
+  "end": 5.63,
+  "word": " entire"
+ },
+ {
+  "start": 5.63,
+  "end": 5.91,
+  "word": " prompt"
+ },
+ {
+  "start": 5.91,
+  "end": 6.25,
+  "word": " before"
+ },
+ {
+  "start": 6.25,
+  "end": 6.47,
+  "word": " sending"
+ },
+ {
+  "start": 6.47,
+  "end": 6.61,
+  "word": " it"
+ },
+ {
+  "start": 6.61,
+  "end": 6.75,
+  "word": " to"
+ },
+ {
+  "start": 6.75,
+  "end": 7.031,
+  "word": " Claude."
+ },
+ {
+  "start": 7.05,
+  "end": 7.17,
+  "word": " So"
+ },
+ {
+  "start": 7.17,
+  "end": 7.45,
+  "word": " basically"
+ },
+ {
+  "start": 7.45,
+  "end": 7.61,
+  "word": " you"
+ },
+ {
+  "start": 7.61,
+  "end": 7.71,
+  "word": " get"
+ },
+ {
+  "start": 7.73,
+  "end": 7.83,
+  "word": " the"
+ },
+ {
+  "start": 7.83,
+  "end": 8.07,
+  "word": " same"
+ },
+ {
+  "start": 8.07,
+  "end": 8.34,
+  "word": " answer"
+ },
+ {
+  "start": 8.34,
+  "end": 8.52,
+  "word": " for"
+ },
+ {
+  "start": 8.52,
+  "end": 8.72,
+  "word": " 80%"
+ },
+ {
+  "start": 9.0,
+  "end": 9.16,
+  "word": " less"
+ },
+ {
+  "start": 9.17,
+  "end": 9.49,
+  "word": " tokens"
+ },
+ {
+  "start": 9.49,
+  "end": 9.69,
+  "word": " and"
+ },
+ {
+  "start": 9.69,
+  "end": 9.73,
+  "word": " it"
+ },
+ {
+  "start": 9.765,
+  "end": 9.83,
+  "word": " has"
+ },
+ {
+  "start": 9.84,
+  "end": 9.98,
+  "word": " over"
+ },
+ {
+  "start": 9.98,
+  "end": 10.88,
+  "word": " 66,000"
+ },
+ {
+  "start": 10.88,
+  "end": 11.08,
+  "word": " stars"
+ },
+ {
+  "start": 11.09,
+  "end": 11.27,
+  "word": " on"
+ },
+ {
+  "start": 11.27,
+  "end": 11.576,
+  "word": " GitHub."
+ },
+ {
+  "start": 11.66,
+  "end": 11.76,
+  "word": " The"
+ },
+ {
+  "start": 11.76,
+  "end": 11.98,
+  "word": " second"
+ },
+ {
+  "start": 11.98,
+  "end": 12.26,
+  "word": " plugin"
+ },
+ {
+  "start": 12.26,
+  "end": 12.4,
+  "word": " is"
+ },
+ {
+  "start": 12.4,
+  "end": 12.58,
+  "word": " Claude"
+ },
+ {
+  "start": 12.58,
+  "end": 12.886,
+  "word": " HUD."
+ },
+ {
+  "start": 12.97,
+  "end": 13.07,
+  "word": " It's"
+ },
+ {
+  "start": 13.07,
+  "end": 13.19,
+  "word": " a"
+ },
+ {
+  "start": 13.19,
+  "end": 13.35,
+  "word": " live"
+ },
+ {
+  "start": 13.35,
+  "end": 13.55,
+  "word": " bar"
+ },
+ {
+  "start": 13.55,
+  "end": 13.71,
+  "word": " under"
+ },
+ {
+  "start": 13.71,
+  "end": 13.87,
+  "word": " your"
+ },
+ {
+  "start": 13.87,
+  "end": 14.03,
+  "word": " prompt"
+ },
+ {
+  "start": 14.03,
+  "end": 14.31,
+  "word": " showing"
+ },
+ {
+  "start": 14.31,
+  "end": 14.67,
+  "word": " context"
+ },
+ {
+  "start": 14.67,
+  "end": 14.89,
+  "word": " left,"
+ },
+ {
+  "start": 15.0,
+  "end": 15.08,
+  "word": " what"
+ },
+ {
+  "start": 15.08,
+  "end": 15.26,
+  "word": " tools"
+ },
+ {
+  "start": 15.26,
+  "end": 15.4,
+  "word": " are"
+ },
+ {
+  "start": 15.43,
+  "end": 15.57,
+  "word": " running,"
+ },
+ {
+  "start": 15.67,
+  "end": 15.79,
+  "word": " which"
+ },
+ {
+  "start": 15.79,
+  "end": 16.05,
+  "word": " agents"
+ },
+ {
+  "start": 16.09,
+  "end": 16.23,
+  "word": " are"
+ },
+ {
+  "start": 16.23,
+  "end": 16.45,
+  "word": " working"
+ },
+ {
+  "start": 16.53,
+  "end": 16.61,
+  "word": " so"
+ },
+ {
+  "start": 16.61,
+  "end": 16.69,
+  "word": " you"
+ },
+ {
+  "start": 16.69,
+  "end": 16.89,
+  "word": " stop"
+ },
+ {
+  "start": 16.89,
+  "end": 17.15,
+  "word": " guessing"
+ },
+ {
+  "start": 17.15,
+  "end": 17.35,
+  "word": " what"
+ },
+ {
+  "start": 17.35,
+  "end": 17.47,
+  "word": " your"
+ },
+ {
+  "start": 17.47,
+  "end": 17.71,
+  "word": " Claude"
+ },
+ {
+  "start": 17.71,
+  "end": 17.84,
+  "word": " agent"
+ },
+ {
+  "start": 17.84,
+  "end": 18.04,
+  "word": " is"
+ },
+ {
+  "start": 18.04,
+  "end": 18.38,
+  "word": " actually"
+ },
+ {
+  "start": 18.38,
+  "end": 18.811,
+  "word": " doing."
+ },
+ {
+  "start": 18.85,
+  "end": 18.93,
+  "word": " The"
+ },
+ {
+  "start": 18.93,
+  "end": 19.07,
+  "word": " third"
+ },
+ {
+  "start": 19.07,
+  "end": 19.25,
+  "word": " is"
+ },
+ {
+  "start": 19.25,
+  "end": 19.666,
+  "word": " AIsa."
+ },
+ {
+  "start": 19.68,
+  "end": 19.8,
+  "word": " With"
+ },
+ {
+  "start": 19.8,
+  "end": 20.04,
+  "word": " one"
+ },
+ {
+  "start": 20.04,
+  "end": 20.24,
+  "word": " API"
+ },
+ {
+  "start": 20.24,
+  "end": 20.46,
+  "word": " key"
+ },
+ {
+  "start": 20.46,
+  "end": 20.58,
+  "word": " and"
+ },
+ {
+  "start": 20.58,
+  "end": 20.72,
+  "word": " one"
+ },
+ {
+  "start": 20.73,
+  "end": 20.97,
+  "word": " prompt,"
+ },
+ {
+  "start": 21.09,
+  "end": 21.15,
+  "word": " your"
+ },
+ {
+  "start": 21.165,
+  "end": 21.26,
+  "word": " agent"
+ },
+ {
+  "start": 21.26,
+  "end": 21.42,
+  "word": " can"
+ },
+ {
+  "start": 21.42,
+  "end": 21.66,
+  "word": " access"
+ },
+ {
+  "start": 21.66,
+  "end": 21.9,
+  "word": " websites"
+ },
+ {
+  "start": 21.95,
+  "end": 22.21,
+  "word": " like"
+ },
+ {
+  "start": 22.21,
+  "end": 22.65,
+  "word": " Similarweb,"
+ },
+ {
+  "start": 22.81,
+  "end": 23.03,
+  "word": " Semrush"
+ },
+ {
+  "start": 23.15,
+  "end": 23.25,
+  "word": " and"
+ },
+ {
+  "start": 23.25,
+  "end": 23.45,
+  "word": " other"
+ },
+ {
+  "start": 23.45,
+  "end": 23.67,
+  "word": " live"
+ },
+ {
+  "start": 23.67,
+  "end": 23.89,
+  "word": " data"
+ },
+ {
+  "start": 23.89,
+  "end": 24.25,
+  "word": " APIs"
+ },
+ {
+  "start": 24.25,
+  "end": 24.47,
+  "word": " to"
+ },
+ {
+  "start": 24.47,
+  "end": 24.69,
+  "word": " research"
+ },
+ {
+  "start": 24.7,
+  "end": 25.16,
+  "word": " competitors"
+ },
+ {
+  "start": 25.16,
+  "end": 25.46,
+  "word": " and"
+ },
+ {
+  "start": 25.46,
+  "end": 25.62,
+  "word": " build"
+ },
+ {
+  "start": 25.66,
+  "end": 26.04,
+  "word": " reports"
+ },
+ {
+  "start": 26.04,
+  "end": 26.41,
+  "word": " instantly."
+ },
+ {
+  "start": 26.41,
+  "end": 26.81,
+  "word": " Comment"
+ },
+ {
+  "start": 26.99,
+  "end": 27.27,
+  "word": " SETUP"
+ },
+ {
+  "start": 27.35,
+  "end": 27.39,
+  "word": " and"
+ },
+ {
+  "start": 27.425,
+  "end": 27.465,
+  "word": " I'll"
+ },
+ {
+  "start": 27.5,
+  "end": 27.57,
+  "word": " send"
+ },
+ {
+  "start": 27.575,
+  "end": 27.71,
+  "word": " you"
+ },
+ {
+  "start": 27.71,
+  "end": 27.87,
+  "word": " all"
+ },
+ {
+  "start": 27.87,
+  "end": 28.05,
+  "word": " three."
+ }
+]
