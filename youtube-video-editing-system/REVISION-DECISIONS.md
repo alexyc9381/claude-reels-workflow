@@ -112,7 +112,11 @@ Latest follow-up (V10): Alex supplied and explicitly confirmed the newest Dreami
 
 ## Precedence summary
 
-### V13 refinement
+### V14 opening refinement (later feedback takes precedence)
+
+Alex considered animated details beneath the opening videos, then explicitly replaced that with larger video panels and a center-overlay facecam. Use the available area for footage, not more decorative props. Preserve blind identities until the ending. Follow with an unmistakable cost comparison using the recorded $100/month and 10¢/generation examples, visibly different units and estimate qualifiers. Do not silently upgrade recorded claims into verified current prices or equal-setting per-video savings. [V14 implementation, evidence and verification](projects/higgsfield-replacement/REVISION-V14.md).
+
+### Preserved V13 refinement
 
 Keep the entire V12 footage/audio EDL. Replace competing credential overlays with one sequential teaching surface; fixed format typography beats shaking/stacked zooms. Circle badges below videos replace corner LEFT/RIGHT labels; the reveal counter belongs on the center seam. One facecam perimeter timer finishes at the next hook scene. Faster intro action requires linked visible consequences, not random shapes or rushed footage. Roadmap labels remain separate from Claude's path; each contact owns its glow/sound. Copy/paste follow-along and closing explicitly name the FREE setup in the description. A grounded operator drives the gate. Seedance 2.5 is the user's requested schematic highlight. Coding-agent logos do not establish universal package compatibility; inspect the real download first. [Implementation and verification status](projects/higgsfield-replacement/REVISION-V13.md).
 

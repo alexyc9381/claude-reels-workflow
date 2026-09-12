@@ -28,7 +28,8 @@ const sourceHash=digest.digest('hex'),renderDir=path.join(work,'chunks-'+sourceH
 assert.equal(readFileSync(path.join(renderDir,'audio-contract.txt'),'utf8').trim(),audioContract(base),'Soundtrack receipt must match the current source EDL and cue schedule');
 assert.equal(readFileSync(path.join(renderDir,'dialogue-design-mix.wav.complete'),'utf8').trim(),sourceHash);
 const equivalentChunks=[];
-for(let from=0;from<frames;from+=2700){const to=Math.min(from+2699,frames-1),receipt=JSON.parse(readFileSync(path.join(renderDir,`picture-${from}-${to}.mp4.complete`)));assert.equal(receipt.hash,sourceHash);assert.equal(receipt.from,from);assert.equal(receipt.to,to);if(receipt.inheritedFrom){const proof=JSON.parse(readFileSync(path.join(work,'revision-v10/cache-proof.json')));assert.equal(proof.sourceHash,sourceHash);assert.equal(proof.priorSourceHash,receipt.inheritedFrom);assert.equal(proof.otherInputsIdentical,true);assert.ok(!proof.affected.some(r=>r.from<=to&&r.to>=from));equivalentChunks.push({from,to,priorSourceHash:receipt.inheritedFrom});}}
+if(revision==='v14')execFileSync(process.execPath,[path.join(project,'tools/prepare-v14-cache.mjs'),'--check-only'],{stdio:'ignore'});
+for(let from=0;from<frames;from+=2700){const to=Math.min(from+2699,frames-1),receipt=JSON.parse(readFileSync(path.join(renderDir,`picture-${from}-${to}.mp4.complete`)));assert.equal(receipt.hash,sourceHash);assert.equal(receipt.from,from);assert.equal(receipt.to,to);if(receipt.inheritedFrom){const proof=JSON.parse(readFileSync(path.join(work,revision==='v14'?'revision-v14/cache-proof.json':'revision-v10/cache-proof.json')));assert.equal(proof.sourceHash,sourceHash);assert.equal(proof.priorSourceHash,receipt.inheritedFrom);assert.equal(proof.otherInputsIdentical,true);assert.ok(!proof.affected.some(r=>r.from<=to&&r.to>=from));equivalentChunks.push({from,to,priorSourceHash:receipt.inheritedFrom});}}
 console.log('Metadata passed; decoding all picture and audio frames.');
 execFileSync(ff,['-v','error','-xerror','-i',output,'-map','0:v:0','-map','0:a:0','-f','null','-'],{stdio:'inherit'});
 console.log('Decode passed; measuring finished AAC loudness.');
@@ -43,5 +44,16 @@ const priorAudio=path.join(base,'outputs/higgsfield-replacement-edit-v9.mp4');
 result.audioMatchesV9Packets=existsSync(priorAudio)?result.audioPacketHash===audioHash(priorAudio):null;
 if(existsSync(priorAudio))assert.equal(result.audioMatchesV9Packets,false,'V12 must contain repaired narration and new source-anchored sound design');
 result.currentAudioContractVerified=true;
-assert.equal(equivalentChunks.length,0,'V12 reframes the whole screen and requires fresh picture chunks');
+if(revision==='v14'){
+ assert.ok([0,5].includes(equivalentChunks.length),'V14 is either fresh or uses the five proven-unaffected chunks');
+ const priorV13=path.join(base,'outputs/higgsfield-replacement-edit-v13.mp4');
+ result.audioMatchesV13Packets=null;result.unchangedPictureAfter20Seconds=null;
+ if(existsSync(priorV13)){
+  result.audioMatchesV13Packets=result.audioPacketHash===audioHash(priorV13);
+  assert.equal(result.audioMatchesV13Packets,true,'V14 is picture-only; retain the exact V13 soundtrack');
+  const tailHash=file=>execFileSync(ff,['-v','error','-i',file,'-map','0:v:0','-vf','select=gte(n\\,600)','-vsync','0','-f','hash','-hash','sha256','-'],{encoding:'utf8'}).trim();
+  result.unchangedPictureAfter20Seconds=tailHash(output)===tailHash(priorV13);
+  assert.equal(result.unchangedPictureAfter20Seconds,true,'Every decoded picture frame after the new opening must equal V13');
+ }
+}else assert.equal(equivalentChunks.length,0,'V12/V13 require fresh picture chunks');
 writeFileSync(path.join(base,`work/higgsfield-replacement/revision-${revision}/export-validation.json`),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));

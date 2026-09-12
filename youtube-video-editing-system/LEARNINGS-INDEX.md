@@ -1,6 +1,6 @@
 # YouTube editing — indexed learning library
 
-Current: [V13 purposeful intro and cleaner teaching](projects/higgsfield-replacement/REVISION-V13.md), [unchanged source timeline](projects/higgsfield-replacement/v13-timeline.json), [V13 Mac handoff + resume prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V13.md). Earlier records below are preserved history. Final render/approval status lives in the revision record.
+Current: [V14 larger opening and cost contrast](projects/higgsfield-replacement/REVISION-V14.md), [unchanged source timeline](projects/higgsfield-replacement/v13-timeline.json), [V14 Mac handoff + resume prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V14.md). [V13](projects/higgsfield-replacement/REVISION-V13.md) and earlier records are preserved history. Final render/approval status lives in the revision record.
 
 Preserved V12: [numbered comparison and guided inspection](projects/higgsfield-replacement/REVISION-V12.md), [source/timestamp audit](projects/higgsfield-replacement/revision-v12-audit.json).
 
@@ -13,7 +13,7 @@ This is the handoff index for the complete September 10–11 system-building and
 ## Current production contract
 
 - [Current direction](CURRENT-DIRECTION.md): engine, source audio, framing, typography, white glass, original 2D cast, action hierarchy, unique scenes, sound, retention, privacy and full delivery.
-- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V13.
+- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V14.
 - [Approval versus review](APPROVED-ANIMATION-SYSTEM.md): v11 short-study approval and later full-film overrides.
 - [Canonical memory](../memory/youtube-video-editing-system.md): compact entry for future tasks; indexed from memory/MEMORY.md and the root repository map.
 

@@ -1,6 +1,10 @@
-# Reproduce Higgsfield Replacement V13
+# Reproduce Higgsfield Replacement V14
 
-V13 is current. From the task/handoff root:
+V14 is current. See [REVISION-V14.md](REVISION-V14.md) for the exact opening-only change, optional proven-cache optimization and its limits. From the task/handoff root, run `tools/test-v14.mjs` using the full project path below; render with `REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v14.mp4`; validate with `REVIEW_REVISION=v14`. Use the same `render-low-storage.mjs` and `validate-v12-export.mjs` entry points. On the original workstation `prepare-v14-cache.mjs` reuses proven-unaffected V13 picture/audio; on a new Mac skip that optimization and render fresh. Historical comparison checks explicitly report null when the prior export is unavailable.
+
+## Historical V13 commands
+
+V13 baseline commands, from the task/handoff root:
 
 ```sh
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/test-v13.mjs

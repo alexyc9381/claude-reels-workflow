@@ -29,7 +29,38 @@ export const EditRoom:React.FC<{t:number;children:React.ReactNode}>=({t,children
 
 /** Calendar pages print an annual receipt. A physical pass is scanned and the
  * three model-vault doors open in response. No unrelated coins or machines. */
+// V14_COST_BEGIN — intro-only replacement; shared room and later scenes stay unchanged.
 export const AccessPriceV11:React.FC<{duration:number;brandAt:number}>=({duration,brandAt})=>{
+ const t=clock(),arrive=easeOut(t,0,.42),paid=e(t,.25,.6),load=e(t,.65,.55),send=e(t,1.3,.55),settle=e(t,2,.45);
+ return <EditRoom t={t}>
+  <Glass x={145} y={126} w={655} h={592} t={t} frost={.84}>
+   <Label x={37} y={30} size={34} color={C.orange} style={{opacity:1-easeOut(t,brandAt,.15)}}>Monthly platform plan</Label>
+   <At x={35} y={22} style={{opacity:easeOut(t,brandAt,.15)}}><Logo name="higgsfield.jpg" size={58}/><Label x={78} y={8} size={38}>Higgsfield</Label></At>
+   <div style={{position:'absolute',left:34,top:108,width:584,height:426,overflow:'hidden',borderRadius:19,background:'#E5D8C5'}}>
+    {[2,1,0].map(i=><div key={i} style={{position:'absolute',left:18+i*7,top:18+i*9,width:533,height:368,borderRadius:13,background:i?'#E7D9C4':'#FFFCF6',border:'2px solid white',boxShadow:'0 10px 23px #563B272B',transform:`translateY(${(1-paid)*(80+i*23)}px)`}}>
+     {i===0&&<><Label x={28} y={25} size={27} color={C.orange}>Subscription example</Label><Label x={24} y={57} size={157} style={{fontWeight:850,letterSpacing:-8}}>$100</Label><Label x={34} y={235} size={43}>per month</Label><div style={{position:'absolute',left:33,top:310,display:'flex',gap:9}}>{Array.from({length:12},(_,j)=><div key={j} style={{width:30,height:23,borderRadius:5,background:C.clay,opacity:.22+.78*e(t,.5+j*.09,.17),transform:`translateY(${12*(1-e(t,.5+j*.09,.17))}px)`}}/>)}</div></>}
+    </div>)}
+   </div>
+   <Label x={43} y={548} size={26} color={C.orange}>Recurring plan · includes credits</Label>
+  </Glass>
+  <Glass x={963} y={126} w={786} h={592} t={t} frost={.84}>
+   <At x={34} y={25}><Logo name="claude.png" size={57}/><Label x={79} y={7} size={38}>Your Claude skill</Label></At>
+   <At x={39+send*64} y={139-Math.sin(send*Math.PI)*33} style={{opacity:load,transform:`rotate(${-8*(1-send)}deg)`}}><SkillFile t={t} size={129}/><Label x={7} y={174} size={23} color={C.orange}>FREE skill</Label></At>
+   <Label x={260} y={111} size={180} color={C.teal} style={{fontWeight:850,letterSpacing:-7,opacity:arrive,transform:`translateY(${29*(1-arrive)}px)`}}>10¢</Label>
+   <Label x={266} y={304} size={39}>per generation*</Label>
+   <div style={{position:'absolute',left:36,top:410,width:714,height:111,borderRadius:19,background:'#E9EFE6',border:'2px solid #FFF',overflow:'hidden'}}>
+    <Label x={25} y={20} size={29} color={C.teal}>Pay for the model call</Label><Label x={25} y={66} size={25}>No extra subscription for this skill</Label>
+    <svg width="714" height="111" style={{position:'absolute',inset:0,pointerEvents:'none'}}><path d="M519 57H673" stroke="#A4C3B7" strokeWidth="3"/><circle cx={519+154*send} cy="57" r={13-4*settle} fill={C.orange} opacity={load}/></svg>
+   </div>
+   <Label x={42} y={548} size={25} color={C.teal}>*Example estimate · model costs vary</Label>
+  </Glass>
+  <Actor t={t} x={794+send*12} y={576} size={167} role="operator" look={1} reach={send} lift={load*.6} contact={1.85} happy={settle>.95}/>
+  <Label x={157} y={810} size={30} color={C.teal}>Monthly commitment → pay per use</Label>
+  <Label x={157} y={871} size={24} style={{width:1200}}>Recorded price examples · not a matched per-video quote</Label>
+ </EditRoom>;
+};
+// V14_COST_END
+const ArchivedAccessPriceV11:React.FC<{duration:number;brandAt:number}>=({duration,brandAt})=>{
  const t=clock(),u=t/duration,print=e(u,.01,.14),scan=e(u,.22,.085),open=e(u,.34,.29),arrive=e(u,.01,.13);
  return <EditRoom t={t}>
   <Glass x={134} y={139} w={543} h={558} t={t} frost={.7}>

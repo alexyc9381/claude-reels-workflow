@@ -1,0 +1,25 @@
+{
+  "revision": "V14",
+  "baselineCommit": "09cbc1ebf44af01d766d71d2aafcd3e923c16268",
+  "sourceHash": "cbe572a8ed295e52fb5ba2b81fa100c0558785f8ae566c84037c20f003c0496c",
+  "priorSourceHash": "c4e4dbb9d8af94d37236539b2b4262acb1c0283052f1b9b73adc396bd7172598",
+  "otherInputsIdentical": true,
+  "changedSourceFiles": [
+    "ScenesV11.tsx",
+    "StoryScenesV10.tsx",
+    "YouTubeV9.tsx"
+  ],
+  "affected": [
+    {
+      "from": 0,
+      "to": 449
+    }
+  ],
+  "freshRender": [
+    {
+      "from": 0,
+      "to": 599
+    }
+  ],
+  "reason": "Exact reverse-patch equality proves only opening comparison geometry/presenter and intro-only price component differ. EDL, assets, later components and audio contract unchanged."
+}

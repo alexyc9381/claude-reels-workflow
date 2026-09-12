@@ -1,0 +1,15 @@
+import './test-v13.mjs';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
+const root=process.cwd(),repo=path.join(root,'work/repos/claude-reels-workflow'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const proof=JSON.parse(execFileSync(process.execPath,[path.join(project,'tools/prepare-v14-cache.mjs'),'--check-only'],{encoding:'utf8'}));
+assert.deepEqual(proof.affected,[{from:0,to:449}]);
+const story=readFileSync(path.join(repo,'video/src/youtube/StoryScenesV10.tsx'),'utf8'),presenter=readFileSync(path.join(repo,'video/src/youtube/YouTubeV9.tsx'),'utf8'),cost=readFileSync(path.join(repo,'video/src/youtube/ScenesV11.tsx'),'utf8').split('// V14_COST_END')[0].split('// V14_COST_BEGIN')[1];
+assert.match(story,/left:opening\?32\+i\*940/);assert.match(story,/width:opening\?916:938,height:opening\?1016:742/);
+assert.equal(1920-(32+940+916),32);assert.equal(972-(32+916),24);assert.ok(2*916*1016/(1920*1080)>.89);
+assert.match(presenter,/const t=useTime\(\),p=1;/);assert.match(presenter,/openingScale\(row.from\/30\+t\)/);
+assert.match(cost,/Subscription example/);assert.match(cost,/per month/);assert.match(cost,/per generation/);assert.match(cost,/model costs vary/);assert.match(cost,/not a matched per-video quote/);assert.doesNotMatch(cost,/1000.?[×x]|1,000.?[×x]/);
+assert.ok(794+12+167<963+42,'Actor must clear the explanatory text');
+console.log('PASS V14: ~90% opening panel coverage, symmetric spacing, center-overlay facecam from frame zero, preserved blind reveal and qualified price contrast; all later picture/audio proven unchanged.');

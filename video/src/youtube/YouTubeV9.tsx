@@ -121,11 +121,11 @@ export const v9Cues:Cue[]=[
 ];
 export const chapterTitles=['Why use the models directly?','Connect fal.ai + Claude','Make your first video','Review the results','The reveal + next step'];
 const Presenter:React.FC<{row:ReturnType<typeof roughTimeline>[number];intro:boolean;timerEnd:number}>=({row,intro,timerEnd})=>{
- const t=useTime(),p=row.id==='s001'?easeInOut(t,0,.38):1;
+ const t=useTime(),p=1; // V14: compare from frame zero; facecam is already over the center seam.
  const comparison=intro||['s038','s042','s043'].includes(row.id);
  const b={x:lerp(28,comparison?780:1435,p),y:lerp(16,comparison?789:748,p),w:lerp(1864,comparison?360:400,p),h:lerp(1048,comparison?256:281,p)};
  const cropW=lerp(intro?1340:1480,1300,p),cropX=lerp(intro?165:110,150,p),cropY=lerp(25,0,p),s=b.w/cropW;
- return <div style={{position:'absolute',left:b.x,top:b.y,width:b.w,height:b.h,overflow:'hidden',borderRadius:lerp(24,29,p),border:'3px solid #FFF4DF',boxShadow:'0 14px 30px #50372445',transform:`perspective(1800px) rotate(${-7*Math.sin(p*Math.PI)}deg)`}}><CameraPlate source={row.cameraPlateSource??'v7/presenter-background.mp4'} start={row.cameraPlateStart??row.from} length={row.cameraPlateDuration} style={{position:'absolute',width:1920*s,height:1080*s,left:-cropX*s,top:-cropY*s,transform:`scale(${intro?openingScale(t)*(1-p)+p:1})`,transformOrigin:'50% 42%'}}/>{intro&&<FaceTimerV13 width={b.w} height={b.h} progress={(row.from/30+t)/timerEnd}/>}</div>;
+ return <div style={{position:'absolute',left:b.x,top:b.y,width:b.w,height:b.h,overflow:'hidden',borderRadius:lerp(24,29,p),border:'3px solid #FFF4DF',boxShadow:'0 14px 30px #50372445',transform:`perspective(1800px) rotate(${-7*Math.sin(p*Math.PI)}deg)`}}><CameraPlate source={row.cameraPlateSource??'v7/presenter-background.mp4'} start={row.cameraPlateStart??row.from} length={row.cameraPlateDuration} style={{position:'absolute',width:1920*s,height:1080*s,left:-cropX*s,top:-cropY*s,transform:`scale(${intro?openingScale(row.from/30+t):1})`,transformOrigin:'50% 42%'}}/>{intro&&<FaceTimerV13 width={b.w} height={b.h} progress={(row.from/30+t)/timerEnd}/>}</div>;
 };
 export const YouTubePolish:React.FC<{manifest:M}>=({manifest:m})=>{
  const rows=roughTimeline(m),f=useCurrentFrame(),fps=m.fps,find=(id:string)=>rows.find(r=>r.id===id)!,scenes=fullScenes(m),active=inFullScene(m,f),row=rows.find(r=>f>=r.from&&f<r.from+r.duration);

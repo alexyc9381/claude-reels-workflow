@@ -11,6 +11,8 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Narrative and retention
 
+- V14 opening takes precedence: maximize the two actual clips with slim outer margins and a small seam; facecam overlays the lower center from frame zero. No decorative area beneath the opening clips. Keep 1/2 badges inside their lower centers and preserve the blind reveal. The subsequent price scene clearly contrasts the recorded subscription example against the per-generation estimate, with units and caveats; do not imply free generation, universally current prices or a matched 1,000× saving.
+
 - V13: one credential teaching surface; no competing checklist/definition during the protected demonstration. Keep format-card text stationary and do not stack zooms that shimmer recorded text.
 - V13: circular 1/2 identities below the comparison videos, a center-seam reveal countdown and an orange facecam perimeter timer ending at the hook scene boundary. No LEFT/RIGHT wording on the badges.
 - V13: faster consequential intro actions, protected roadmap labels with contact-linked glow/sound, a visible free follow-along copy/paste payoff, operator-driven gate and explicit Seedance 2.5 selection. Preserve the underlying EDL and actual result playback.

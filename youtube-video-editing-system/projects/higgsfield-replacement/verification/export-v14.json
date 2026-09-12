@@ -1,0 +1,79 @@
+{
+  "output": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/outputs/higgsfield-replacement-edit-v14.mp4",
+  "bytes": 162207469,
+  "duration": 457.1,
+  "frames": 13713,
+  "width": 1920,
+  "height": 1080,
+  "fps": "30/1",
+  "sourceHash": "cbe572a8ed295e52fb5ba2b81fa100c0558785f8ae566c84037c20f003c0496c",
+  "allPictureChunksMatchCurrentSource": true,
+  "audio": {
+    "codec": "aac",
+    "sampleRate": "48000",
+    "channels": 2,
+    "lufs": -16.56,
+    "truePeak": -1.24,
+    "lra": 5.1
+  },
+  "chapters": [
+    {
+      "title": "Can you tell the difference?",
+      "seconds": 0
+    },
+    {
+      "title": "Why use the models directly?",
+      "seconds": 36.567
+    },
+    {
+      "title": "Connect fal.ai and Claude",
+      "seconds": 124.1
+    },
+    {
+      "title": "Make your first video",
+      "seconds": 207.667
+    },
+    {
+      "title": "Review and compare the results",
+      "seconds": 297.333
+    },
+    {
+      "title": "The reveal and next step",
+      "seconds": 429.4
+    }
+  ],
+  "decodePassed": true,
+  "fullHumanListeningReview": false,
+  "verifiedEquivalentReusedChunks": [
+    {
+      "from": 2700,
+      "to": 5399,
+      "priorSourceHash": "c4e4dbb9d8af94d37236539b2b4262acb1c0283052f1b9b73adc396bd7172598"
+    },
+    {
+      "from": 5400,
+      "to": 8099,
+      "priorSourceHash": "c4e4dbb9d8af94d37236539b2b4262acb1c0283052f1b9b73adc396bd7172598"
+    },
+    {
+      "from": 8100,
+      "to": 10799,
+      "priorSourceHash": "c4e4dbb9d8af94d37236539b2b4262acb1c0283052f1b9b73adc396bd7172598"
+    },
+    {
+      "from": 10800,
+      "to": 13499,
+      "priorSourceHash": "c4e4dbb9d8af94d37236539b2b4262acb1c0283052f1b9b73adc396bd7172598"
+    },
+    {
+      "from": 13500,
+      "to": 13712,
+      "priorSourceHash": "c4e4dbb9d8af94d37236539b2b4262acb1c0283052f1b9b73adc396bd7172598"
+    }
+  ],
+  "audioPacketHash": "SHA256=891ba117ca07071441e18f00a3fc355b7d4157c4ec91802c683dcdcb98d51a20",
+  "audioMatchesV9Packets": false,
+  "currentAudioContractVerified": true,
+  "audioMatchesV13Packets": true,
+  "unchangedPictureAfter20Seconds": true
+}

@@ -1,0 +1,19 @@
+{
+  "revision": "V14",
+  "sourceHash": "cbe572a8ed295e52fb5ba2b81fa100c0558785f8ae566c84037c20f003c0496c",
+  "mp4Sha256": "517b491c72d86c382d13784ef87fd975504ad0ee0843d75592ce0f246cdcc427",
+  "method": "Targeted Remotion proof frames, followed by sampled frames extracted from the complete encoded V14 MP4.",
+  "encodedSeconds": [0, 1, 3, 5, 9, 14],
+  "checks": [
+    "Both opening clips fill tall panels with consistent outer margins and center gap.",
+    "Facecam is a lower-center overlay at frame zero, not a full-screen obstruction.",
+    "Circular 1/2 identities are legible; neither clip's brand or price spoils the blind reveal.",
+    "Clip perimeter strokes and face timer remain visible; same real media plays.",
+    "Large subscription/per-generation example figures are readable in separate panels.",
+    "Monthly units, model-cost estimate qualifier and includes-credits context are visible.",
+    "Claude was repositioned during proof review to clear all price-panel explanatory text. Final encoded frame at 14 seconds confirms clearance."
+  ],
+  "pricingEvidence": "Original recorded examples; not proof of current universal prices or matched A/B output costs.",
+  "fullHumanListeningReview": false,
+  "creativeApproval": "Pending Alex review"
+}
