@@ -16,8 +16,8 @@ const Brand:React.FC<{x:number;y:number;name:string;text:string;size?:number}>=(
 const Subscription:React.FC<{t:number;w:number;limited?:number}>=({t,w,limited=0})=><div style={{width:w,height:w*.79,position:'relative',transform:`rotate(${-1.5+limited*1.5}deg)`}}>
  <svg width={w} height={w*.79} viewBox="0 0 650 514"><defs><linearGradient id="v17-paper" x2="1" y2="1"><stop stopColor="#FFFDF6"/><stop offset="1" stopColor="#EAD9B9"/></linearGradient></defs><path d="M28 39H603L627 68V479L602 465L578 481L554 465L530 481L506 465L482 481L458 465L434 481L410 465L386 481L362 465L338 481L314 465L290 481L266 465L242 481L218 465L194 481L170 465L146 481L122 465L98 481L74 465L50 481L28 465Z" fill="url(#v17-paper)" stroke="#FFFFFF" strokeWidth="6"/><path d="M28 40H601L627 68V158H28Z" fill="#BED474"/><path d="M68 172H584" stroke="#D6B58B" strokeWidth="3"/>{[95,552].map(x=><path key={x} d={`M${x} 17V75`} stroke="#607B47" strokeWidth="18" strokeLinecap="round"/>)}<path d="M557 83C587 83 602 96 602 117C602 133 591 144 576 144M576 144L587 132M576 144L590 151" fill="none" stroke="#4A6538" strokeWidth="6"/></svg>
  <div style={{position:'absolute',left:w*.106,top:w*.116,fontSize:w*.058,fontWeight:800}}>Subscription</div>
- <div style={{position:'absolute',left:0,top:w*.295,width:w,textAlign:'center',fontSize:w*.215,fontWeight:850,letterSpacing:-5,opacity:1-limited}}>$100<span style={{display:'block',fontSize:w*.053,letterSpacing:0}}>/ month · plan example</span></div>
- <div style={{position:'absolute',left:0,top:w*.215,width:w,textAlign:'center',opacity:limited}}><div style={{fontSize:w*.32,fontWeight:750,lineHeight:1.1}}>∞</div><div style={{fontSize:w*.07,fontWeight:800}}>“Unlimited”?</div></div>
+ <div style={{position:'absolute',left:0,top:w*.295,width:w,textAlign:'center',fontSize:w*.215,fontWeight:850,letterSpacing:-5,opacity:Math.max(0,1-limited*2)}}>$100<span style={{display:'block',fontSize:w*.053,letterSpacing:0}}>/ month · plan example</span></div>
+ <div style={{position:'absolute',left:0,top:w*.215,width:w,textAlign:'center',opacity:Math.max(0,(limited-.5)*2)}}><div style={{fontSize:w*.32,fontWeight:750,lineHeight:1.1}}>∞</div><div style={{fontSize:w*.07,fontWeight:800}}>“Unlimited”?</div></div>
 </div>;
 
 /** 47.17–58.60: the recorded VO turns from direct model access to advertised
@@ -26,11 +26,11 @@ const Subscription:React.FC<{t:number;w:number;limited?:number}>=({t,w,limited=0
 export const WrapperV17:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),limited=e(t,4.45,.45),route=e(t,.22,.7),narrow=e(t,5.15,1.1),stop=e(t,9.2,.45);
  const pressure=[7.2,8.25,9.3].reduce((v,at)=>v+Math.sin(e(t,at,.54)*Math.PI),0);
- const gap=lerp(356,77,narrow)+pressure*27,queue=limited;
+ const gap=lerp(356,77,narrow)+pressure*27,queue=e(t,4.62,.18);
  return <Stage t={t}>
   <Brand x={180} y={103} name="higgsfield.jpg" text="Higgsfield" size={125}/>
   <At x={160} y={282} style={{transform:`translateY(${-9*settle(t,4.9)}px)`}}><Subscription t={t} w={550} limited={limited}/></At>
-  <div style={{position:'absolute',inset:0,opacity:1-limited}}>
+  <div style={{position:'absolute',inset:0,opacity:1-e(t,4.38,.18)}}>
    <Brand x={895} y={109} name="fal.png" text="Direct model access"/>
    {['seedance.png','google.png','hailuo.png'].map((name,i)=><At key={name} x={815+i*315} y={300-18*settle(t,.6+i*.23)} style={{opacity:easeOut(t,.35+i*.18,.22)}}><div style={{padding:25,borderRadius:36,background:'linear-gradient(120deg,#FFFDF4,#D5E4D9)',border:'4px solid white',boxShadow:'0 22px 32px #3C533523'}}><Logo name={name} size={170}/></div><Label x={i===0?-4:65} y={247} size={34}>{['Seedance 2.5','Veo','Hailuo'][i]}</Label></At>)}
    <svg width="1920" height="1080" style={{position:'absolute',inset:0}}><path d="M666 727C785 727 838 612 967 604H1550" fill="none" stroke="#FFF9ED" strokeWidth="22"/><path d="M666 727C785 727 838 612 967 604H1550" fill="none" stroke={C.teal} strokeWidth="9" pathLength="1" strokeDasharray="1" strokeDashoffset={1-route}/></svg>
@@ -54,7 +54,8 @@ export const WrapperV17:React.FC<{duration:number}>=({duration})=>{
  * direct model access. Marker tip and X progress share the same time driver. */
 export const DirectRouteV17:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),a=e(t,.38,.46),b=e(t,1.02,.46),clear=e(t,2.6,.5),budget=e(t,3.18,.64),pick=e(t,4.4,.45),submit=e(t,6.2,.48),output=e(t,7.1,.4);
- const tip=t<1.02?{x:lerp(679,1080,a),y:lerp(343,670,a)}:{x:lerp(1090,680,b),y:lerp(338,667,b)};
+ const penLift=e(t,.84,.18);
+ const tip=t<.84?{x:lerp(679,1080,a),y:lerp(343,670,a)}:t<1.02?{x:lerp(1080,1090,penLift),y:lerp(670,338,penLift)-Math.sin(penLift*Math.PI)*35}:{x:lerp(1090,680,b),y:lerp(338,667,b)};
  const ax=tip.x-330,ay=tip.y-160,angle=-42,rad=angle*Math.PI/180,hand={x:ax+(166+26*Math.cos(rad))*1.7,y:ay+(99+26*Math.sin(rad))*1.7};
  return <Stage t={t}>
   <div style={{position:'absolute',inset:0,opacity:1-clear,transform:`translateX(${-650*clear}px)`}}>

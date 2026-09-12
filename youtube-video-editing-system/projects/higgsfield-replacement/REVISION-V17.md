@@ -17,7 +17,7 @@ The V16 roadmap, existing guide, later tutorial, comparisons/reveal, ending and 
 
 ## Source grounding and limits
 
-`s010` uses OBS353.8–365.24: direct model access, then “unlimited” generations being limited. `r-direct` uses389.2–401.4: instead of a subscription, direct generation spend. `r-features` uses413.94–422.19: best features gated into an expensive plan. These original source ranges and all camera-plate clocks remain unchanged.
+`s010` uses OBS 353.8–365.24: direct model access, then “unlimited” generations being limited. `r-direct` uses 389.2–401.4: instead of a subscription, direct generation spend. `r-features` uses 413.94–422.19: best features gated into an expensive plan. These original source ranges and all camera-plate clocks remain unchanged.
 
 The X, request bottleneck, budget route and premium vault are conceptual illustrations, not a real cancellation recording, exact platform UI, measured quotas, guaranteed feature parity or a fabricated transaction. Existing $100/month and ~10¢/generation are differently scoped illustrative claims, not a matched cost-per-video study. Do not infer that generation is free or that the skill bypasses billing. The actual thumbnail is supplied; exact title still pending.
 
@@ -30,6 +30,7 @@ The X, request bottleneck, budget route and premium vault are conceptual illustr
 - Re-read the actual source sentence before replacing a timestamped animation. At54s the mechanism is usage limits, not a generic model-bank tour.
 - Use different mechanisms for adjacent ideas: bottleneck, cancellation stroke, premium-access vault. Share rigs/materials, not complete choreography.
 - Media clipping wrappers must be positioned: an absolutely placed video without a relative parent can defeat the intended bounds. Check transitions and overlap frames, not only settled frames.
+- Connect separate strokes with an explicit pen-lift arc. Returning to a second stroke's starting point must not teleport the tool or its character.
 - No underline/divider through invoice text; reserve presenter space. Visible object interaction may intentionally overlap its target, but must resolve to a readable payoff.
 
 ## Reproduction / verification
@@ -44,6 +45,16 @@ REVIEW_CONCURRENCY=1 REVIEW_SUBCHUNK_FRAMES=300 REVIEW_OUTPUT=outputs/higgsfield
 REVIEW_REVISION=v17 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/validate-v12-export.mjs
 ```
 
-On the original workstation only, `prepare-v17-cache.mjs` may precede rendering: exact source reversal proves changes bounded to frames0–709 and1415–2370, re-renders0–2699 conservatively, and adopts only V16 chunks starting2700+. Audio reuse requires the unchanged full audio contract. On a new Mac render fresh; historical export equality checks report null when V16 is unavailable.
+On the original workstation only, `prepare-v17-cache.mjs` may precede rendering: exact source reversal proves changes bounded to frames 0–709 and 1415–2370, re-renders 0–2699 conservatively, and adopts only V16 chunks starting 2700+. Audio reuse requires the unchanged full audio contract. On a new Mac render fresh; historical export equality checks report null when V16 is unavailable.
 
-Status: source tests and two visual still passes completed; full export/encoded review/verification pending. This is not user creative approval or a claim of full human listening review. Final machine receipt will be `verification-v17.json`.
+An optional local transition/pen-lift refinement is also proven by `prepare-v17-pen-cache.mjs` against first-pass commit `f651777d660662bcecd554d69cfda039048fae09`: clear the outgoing price/model layer before the limits layer enters near 52s, and replace the six-frame inter-stroke teleport with a smooth arc. Only the 50–60s part is freshly rendered. Exact source reversal permits the other completed V17 parts to be reused. This optimization is not required on another Mac.
+
+Status: complete full V17 export, source tests, two visual still passes, encoded bottleneck/vault/X/transition sequences and a 384px-wide opening check completed. Full picture/audio decode passed. Machine receipt: [verification-v17.json](verification-v17.json).
+
+- 1920×1080, 30fps, 13,713 frames, 457.1 seconds; 165,581,479 bytes; six unchanged chapters.
+- Audio: −16.56 LUFS, −1.24 dBTP; AAC packets byte-identical to V16.
+- Every decoded picture frame after 90 seconds matches V16; current-source/cache and transition/pen-lift proofs passed.
+- Final source fingerprint: `5537958341657d8da289a8ad23993a45fafd0f41b0f19546dcd3a211c8f7623e`.
+- The renderer now creates a missing output directory on a fresh Mac; no picture/audio change from this portability fix.
+
+This is not user creative approval or a claim of full human listening review. V16 and previous handoff folders remain preserved. Full MP4 is outside Git at `outputs/higgsfield-replacement-edit-v17.mp4`; the editable working-media handoff is separate from the video.

@@ -114,6 +114,7 @@ for(let from=0;from<composition.durationInFrames;from+=2700){
 const list=path.join(dir,'concat.txt');writeFileSync(list,chunks.map(p=>`file '${p.replaceAll("'","'\\''")}'`).join('\n')+'\n');
 const bin=path.join(video,'node_modules/@remotion/compositor-darwin-arm64');
 const output=path.resolve(process.env.REVIEW_OUTPUT||path.join(base,'outputs/higgsfield-replacement-edit-'+(inputProps.manifest.editVersion||'v3')+'.mp4'));
+mkdirSync(path.dirname(output),{recursive:true}); // Fresh Mac handoffs may not have an outputs directory yet.
 console.log('Muxing Remotion picture with continuous dialogue/design soundtrack');
 const chapterMeta=path.join(project,'chapters.ffmetadata');
 // Remotion's reduced FFmpeg build omits the ffmetadata demuxer. Use the installed full build for chapter muxing.

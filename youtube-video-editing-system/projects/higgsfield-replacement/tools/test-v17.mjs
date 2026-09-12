@@ -10,6 +10,8 @@ const read=n=>readFileSync(path.join(repo,'video/src/youtube',n),'utf8'),source=
 for(const name of ['WrapperV17','DirectRouteV17','FeatureGateV17'])assert.ok(source.includes('export const '+name));
 assert.doesNotMatch(source,/Math\.random|Date\.now|setTimeout|<Audio/);
 assert.match(source,/tip\.x/);assert.match(source,/strokeDashoffset=\{1-a\}/);assert.match(source,/strokeDashoffset=\{1-b\}/);
+assert.match(source,/penLift=e\(t,\.84,\.18\)/);assert.match(source,/transformOrigin:'528px 92.5px'/);
+for(const i of [0,1]){const clipX=32+i*940,badgeX=408+i*940;assert.ok(badgeX>=clipX+24&&badgeX+164<=clipX+916-24);assert.ok(852+164<=28+1016-24);assert.ok(i?badgeX>1140:badgeX+164<780);}
 assert.match(source,/gap=lerp\(356,77,narrow\)\+pressure\*27/);assert.match(source,/pressure\*19/);
 assert.match(source,/Premium plan/);assert.match(source,/keyX=lerp\(656,682,insert\)/);assert.match(source,/Seedance 2.5/);
 assert.match(read('ScenesV16.tsx'),/opacity:bold\?1:easeOut/);assert.match(read('ScenesV16.tsx'),/brisk\?\.08:\.16/);
