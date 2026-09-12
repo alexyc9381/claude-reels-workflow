@@ -1,5 +1,7 @@
 # Visual-first explanations and intro promise
 
+V18: hierarchy takes priority over adding moving parts. Restore the large-to-small presenter entrance, use one input/mechanism/result chain, and light one roadmap destination at a time. Borrow short-form acting and causal timing without importing dark portrait framing or serif typography. [Scope and transfer evidence](projects/higgsfield-replacement/REVISION-V18.md).
+
 V17: inspect at small-player scale. Make opening identities large without reducing real footage. Keep the relevant company visible throughout its scene; compress purposeful movement, not speech. Match the actual clause before choosing the mechanism: usage limits → bottleneck, subscription rejection → Claude-authored X, expensive-plan access → premium-key vault. Couple interacting props to one clock and protect text/media bounds during transitions. [V17 implementation](projects/higgsfield-replacement/REVISION-V17.md).
 
 V16 correction: large graphics alone are insufficient. Remove long qualification footers and pixelated proof crops that destroy hierarchy. Put essential claim units beside their values; retain detailed evidence notes separately. A three-second roadmap can own the full frame, with one shared arrival clock driving actor, prop, glow and contact sound. The thumbnail is now supplied: `/REPLACE`, 10¢ and Claude over Higgsfield. Ask for the missing exact title, not the thumbnail again. See [V16](projects/higgsfield-replacement/REVISION-V16.md).

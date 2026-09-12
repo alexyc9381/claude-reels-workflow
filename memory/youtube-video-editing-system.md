@@ -1,5 +1,7 @@
 # No Code Alex YouTube editing system
 
+Current: [V18](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V18.md). Latest request overrides small-face-from-frame-zero: large opening presenter moves to the bottom-center inset by1.6s. First30s get clearer cost/skill/map hierarchy; 38–43s says skip to2:03. Preserve V17 later scenes and all EDL/audio/privacy. [V18 Mac handoff](../youtube-video-editing-system/projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V18.md). Older current labels below are historical where they conflict.
+
 Current: [V17](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V17.md). Opening-only 164px badges / 104px numerals; persistent larger Higgsfield in the cost scene; brisk skill action; narration-matched usage bottleneck, Claude drawing a subscription X, and premium-access vault at47–79s. Keep large connected mechanisms, not unrelated ornament. Entire source EDL/audio and later tutorial preserved. [V17 Mac handoff](../youtube-video-editing-system/projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V17.md).
 
 Preserved [V16](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V16.md): reject the long Recorded examples footer and blurry early command crop. Full-screen roadmap with contact-linked key/camera/comparison responses and existing quiet sounds. Thumbnail received (`/REPLACE`, 10¢, Claude over Higgsfield); exact title pending.

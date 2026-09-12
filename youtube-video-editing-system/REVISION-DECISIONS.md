@@ -1,5 +1,7 @@
 # Conversation decision ledger
 
+Latest V18 (September12): Alex restores the larger opening face moving into the bottom inset, requests a38s skip-to2:03 cue and narrows animation revisions to the first30s. This overrides V14/V17's small-face-from-frame-zero. Rebuild cost, skill-workspace-output and roadmap hierarchy using original short-form acting/causal principles; preserve later edits and the soundtrack. [Implementation, references and review limits](projects/higgsfield-replacement/REVISION-V18.md).
+
 September 10–11, 2026. This index preserves the learning trajectory from the full No Code Alex YouTube-system conversation. Times in feedback identify the **review version the user saw**, not permanent positions. Use segment IDs and the current motion map to locate a beat after an edit. “Implemented” describes code/edit work, not new creative approval.
 
 ## System discovery and reusable transfers

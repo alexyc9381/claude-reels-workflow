@@ -1,4 +1,8 @@
-# Reproduce Higgsfield Replacement V17
+# Reproduce Higgsfield Replacement V18
+
+V18 is current. Use `test-v18.mjs`, `REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v18.mp4`, and `REVIEW_REVISION=v18` with the existing renderer/validator below. [V18 exact commands](REVISION-V18.md). Optional original-workstation `prepare-v18-cache.mjs` proves safe reuse after50s; new Mac renders fresh. The validator compares OBS soundtrack packets and every decoded picture frame after50s against V17 when available.
+
+## Historical V17
 
 V17 is current. Use `tools/test-v17.mjs`, `REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v17.mp4` with the existing `render-low-storage.mjs`, and `REVIEW_REVISION=v17` with `validate-v12-export.mjs`. [V17 request map and exact commands](REVISION-V17.md). Optional `prepare-v17-cache.mjs` proves only the first90seconds need fresh rendering on the original workstation. New Mac: render fresh. Narration/EDL/audio are unchanged from V16. Validation checks full decode, duration/chapters, current-source receipts, audio identity against V16 and decoded picture identity after90seconds when the prior export exists.
 

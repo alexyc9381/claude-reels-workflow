@@ -1,0 +1,17 @@
+import './test-v13.mjs';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
+const repo=path.join(process.cwd(),'work/repos/claude-reels-workflow'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const proof=JSON.parse(execFileSync(process.execPath,[path.join(project,'tools/prepare-v18-cache.mjs'),'--check-only'],{encoding:'utf8'}));
+assert.deepEqual(proof.affected,[{from:0,to:809},{from:1140,to:1289}]);
+const source=readFileSync(path.join(repo,'video/src/youtube/ScenesV18.tsx'),'utf8');
+assert.doesNotMatch(source,/Math\.random|Date\.now|setTimeout|<Audio/);
+for(const name of ['CostV18','ProductionV18','RoadmapV18','TutorialSkipV18'])assert.ok(source.includes('export const '+name));
+for(const tag of source.match(/<OffthreadVideo[\s\S]*?\/>/g)||[])assert.match(tag,/\bmuted\b/);
+assert.match(source,/Skip to tutorial/);assert.match(source,/2:03 →/);
+assert.match(source,/position:'relative',width:w,height:h/);
+assert.ok(111+1010<1195,'Chapter and skip cue do not overlap');
+assert.ok(1195+595<1920-100,'Skip cue safe margin');
+console.log('PASS V18: scoped intro and skip cue; original audio/EDL/privacy; original rig; real muted clips; seek-safe motion; unchanged V17 tail source.');

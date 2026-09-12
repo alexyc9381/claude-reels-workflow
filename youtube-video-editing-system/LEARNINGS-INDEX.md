@@ -1,5 +1,7 @@
 # YouTube editing — indexed learning library
 
+Latest: [V18 presenter-first intro and hierarchy](projects/higgsfield-replacement/REVISION-V18.md), [V18 editable Mac handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V18.md). Large-to-small opening, clear cost/workflow/map actions and a 0:38 skip-to-2:03 cue. Earlier entries below are history where they conflict.
+
 Latest: [V17 small-preview identities and purposeful early explainers](projects/higgsfield-replacement/REVISION-V17.md), [V17 Mac handoff + next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V17.md). Large opening numbers, persistent Higgsfield cost identity, brisk workflow, usage bottleneck, Claude's subscription X and premium vault. Source EDL/audio and later tutorial stay unchanged. Thumbnail received; title still pending.
 
 Preserved: [V16 large uncluttered actions and reactive roadmap](projects/higgsfield-replacement/REVISION-V16.md), [V16 Mac handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V16.md). The full-screen roadmap stays current; V17 refines cost/workflow pacing and replaces the later early explainers.

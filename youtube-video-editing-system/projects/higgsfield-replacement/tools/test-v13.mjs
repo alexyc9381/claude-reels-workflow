@@ -26,7 +26,7 @@ assert.ok(cues.some(c=>c.id==='s034'&&c.feature==='hair'));assert.ok(cues.some(c
 assert.match(read('StoryScenesV10.tsx'),/data-choice-number=\{i\+1\}/);assert.doesNotMatch(read('StoryScenesV10.tsx'),/RIGHT ·|LEFT ·/);assert.match(read('ScenesV9.tsx'),/OutroV9=InstallFinaleV12/);
 assert.ok(!cues.some(c=>c.id==='s016'&&c.kind==='definition'),'Only one credential teaching surface');
 assert.match(polish,/CredentialSequence=CredentialV13/);assert.match(polish,/<RevealCountdownV13/);assert.match(polish,/<PlaybackStartV13/);assert.match(polish,/<FaceTimerV13/);
-assert.match(read('ScenesV9.tsx'),/FeatureVault=(FeatureGateV13|FeatureGateV17)/);assert.match(read('ScenesV9.tsx'),/GuideV9=(FollowAlongV13|GuideV15)/);assert.match(read('ScenesV9.tsx'),/RoadmapV9=(RoadmapV13|RoadmapV15|RoadmapV16)/);
+assert.match(read('ScenesV9.tsx'),/FeatureVault=(FeatureGateV13|FeatureGateV17)/);assert.match(read('ScenesV9.tsx'),/GuideV9=(FollowAlongV13|GuideV15)/);assert.match(read('ScenesV9.tsx'),/RoadmapV9=(RoadmapV13|RoadmapV15|RoadmapV16|RoadmapV18)/);
 assert.match(read('ScenesV13.tsx'),/data-stable-format-label/);assert.match(read('ScenesV13.tsx'),/FREE setup · description below/);assert.match(read('ScenesV12.tsx'),/FREE setup · description below/);
 assert.doesNotMatch(read('typing-focus.ts'),/s023:/);assert.doesNotMatch(read('RoughCut.tsx').split('const Screen:')[0],/s023:/);
 assert.match(read('StoryScenesV10.tsx'),/Seedance 2.5/);assert.match(read('StoryScenesV10.tsx'),/strokeDashoffset=\{i===2\?1-choose:1\}/);
