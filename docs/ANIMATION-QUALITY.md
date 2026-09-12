@@ -1530,3 +1530,16 @@ detailed background nor a passing per-scene score establishes interest or a full
 ## 30. SCOPE: retention cliffs need a semantic review, not extra idle motion
 
 See [the 39s/55s teardown](../memory/alex-scope-retention-39s-55s.md). Before shipping a revised loss point, require: (1) a rendered strip starting 2–3 seconds before it; (2) a visible actor action and changed result, not just a moving container; (3) a readable keyword from CTA entry; (4) native safe-bounds review through peak motion; (5) updated audio contacts and finished-file gates. State what is observed, what is hypothesized, and what needs post-publication analytics. Keep technical motion thresholds unchanged, but never label a numeric pass creative approval or recovered retention. A terminal loss at 96% duration and a mid-video loss at 68% require different interpretation.
+
+
+## 31. X144: do not pause useful progress to introduce the solution
+
+The [22-second X144 review](../memory/alex-x144-retention-22s.md) found a repository/FREE/stars
+showcase followed by another setup before conversion. Treat the reported retention cliff as
+a hypothesis to investigate, not proof that one prop caused it. Start the fix before the
+cliff: let the converter work during the name/proof line, keep stars secondary and brief,
+carry operation through the format list, and give Claude an actual output handoff. Review
+the remaining Desktop/CTA sequence for the same arrival-and-hold defect. Preserve the voice;
+retime contact sounds. Passing technical gates is neither creative approval nor recovered
+retention. Hook-only trials may intentionally share the body; compare their events, not just
+whole-video hash distance.

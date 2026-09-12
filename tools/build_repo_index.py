@@ -105,6 +105,12 @@ def scan_reels():
                     key = bare
             touch(key, log=f"memory/reels/{f}", name=m.group(1))
 
+    # Verified standalone entry point: this reel predates the Claude<Name>Reel
+    # filename convention. Index its real source instead of reporting code-in-Drive.
+    setup_entry = "video/src/Setup145FlatProbes.tsx"
+    if keep(setup_entry) and os.path.isfile(rp(*setup_entry.split("/"))):
+        touch("setup145", code=setup_entry, name="setup145")
+
     # storyboard: storyboards/<number>-<name>.md   (number is the reel's canonical id)
     d = rp("storyboards")
     if os.path.isdir(d):
@@ -160,7 +166,8 @@ def scan_reels():
     GENERIC = {"words", "captions", "timeline"}
     d = rp("video", "src", "data")
     if os.path.isdir(d):
-        datafiles = [f for f in sorted(os.listdir(d)) if f.endswith(".json")]
+        datafiles = [f for f in sorted(os.listdir(d))
+                     if f.endswith(".json") and not f.endswith("-logo-paths.json")]
         for key, r in reels.items():
             if not key:
                 continue

@@ -1,5 +1,7 @@
 # THE OPEN — building a pattern-interrupt first five seconds
 
+**Standing presentation rules:** [ALL CAPS headers](../memory/reel-header-all-caps.md) and [no creator watermarks](../memory/reel-no-watermarks.md).
+
 **Status:** process doc. Read before authoring scene 0 of any reel.
 **Latest correction:** [LM frame-zero action and post-action continuity](../memory/alex-lm-hooks-demo-and-delivery.md).
 The subject must already move independently of the opening zoom; keep identity and text readable.

@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 117,
-    "reels_total": 162,
-    "factory_logs": 78,
-    "storyboards": 79,
-    "caption_jsons": 127,
-    "memory_md": 246,
+    "reels_with_code": 119,
+    "reels_total": 164,
+    "factory_logs": 80,
+    "storyboards": 81,
+    "caption_jsons": 131,
+    "memory_md": 251,
     "creators": 8,
     "packs": 3
   },
@@ -609,6 +609,8 @@
         "video/src/data/words_scope147.json",
         "video/src/data/words_seo.json",
         "video/src/data/words_serena.json",
+        "video/src/data/words_setup145.json",
+        "video/src/data/words_setup145_r8.json",
         "video/src/data/words_sharp.json",
         "video/src/data/words_simulate.json",
         "video/src/data/words_site.json",
@@ -628,7 +630,8 @@
         "video/src/data/words_video.json",
         "video/src/data/words_web.json",
         "video/src/data/words_words.json",
-        "video/src/data/words_worthy.json"
+        "video/src/data/words_worthy.json",
+        "video/src/data/words_x144.json"
       ]
     },
     {
@@ -1824,6 +1827,29 @@
       "storyboard": "storyboards/143-department.md",
       "captions": [
         "video/src/data/words_dept143.json"
+      ]
+    },
+    {
+      "key": "x144",
+      "name": "x144",
+      "number": 144,
+      "code": "video/src/ClaudeX144Reel.tsx",
+      "log": "memory/reels/x144-factory-log.md",
+      "storyboard": "storyboards/144-x144.md",
+      "captions": [
+        "video/src/data/words_x144.json"
+      ]
+    },
+    {
+      "key": "setup145",
+      "name": "setup145",
+      "number": 145,
+      "code": "video/src/Setup145FlatProbes.tsx",
+      "log": "memory/reels/setup145-factory-log.md",
+      "storyboard": "storyboards/145-setup145.md",
+      "captions": [
+        "video/src/data/words_setup145.json",
+        "video/src/data/words_setup145_r8.json"
       ]
     },
     {

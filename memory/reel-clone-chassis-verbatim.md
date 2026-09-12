@@ -7,6 +7,8 @@ metadata:
   originSessionId: f882962d-28c5-45a7-9d94-823ce95b54b2
 ---
 
+**September 11, 2026 standing correction:** [Headers are ALL CAPS](reel-header-all-caps.md); [creator watermarks are forbidden](reel-no-watermarks.md). These explicit user instructions override conflicting historical examples and clone-chrome advice below. Keep case-sensitive commands in separate code/UI content rather than rewriting command syntax as a headline.
+
 # Clone the reel chassis verbatim — never reinvent the style
 
 ⛔ STANDING. When building a new Claude/AI reel component, do NOT author the chrome from scratch. Clone the actual reference reel's `.tsx` file (`cp`) and swap ONLY: the scene bodies, `words_*.json` import, `L` scene-onset array, `CUT`/duration, keyword strings, VO filename, and the component name/exports. Keep every chrome helper **byte-identical**: `Bg`, `Captions`, `ProgressBar`, `Mascot` (+costumes), `Panel`/`PanelShell`, `Sfx`, fonts (`fraunces`/`inter`/`mono`), background music, the zoom/punch main, white-flash.

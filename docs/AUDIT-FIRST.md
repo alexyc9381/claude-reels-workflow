@@ -67,6 +67,8 @@ subject kept saying the opening was weak. **"Too boring" is often ABSENCE, not
 quality.**
 
 ### D. Every header against the word list
+Check [ALL CAPS and exact supplied headline](../memory/reel-header-all-caps.md), then inspect full-frame opening, body and ending for [forbidden creator watermarks](../memory/reel-no-watermarks.md). The panel crop cannot prove the chrome is clean.
+
 For each shot, print the header beside the words spoken in its own window, and
 beside the whole transcript.
 

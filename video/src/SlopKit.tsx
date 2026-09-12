@@ -494,13 +494,9 @@ const KaraokeCaptionInner: React.FC<{ words: CapWord[]; fps?: number; top?: numb
   );
 };
 
-// @handle chip above the panel
-export const Handle: React.FC = () => (
-  <div style={{ position: "absolute", left: 46, top: 210, display: "flex", alignItems: "center", gap: 10, zIndex: 46 }}>
-    <div style={{ width: 30, height: 30, borderRadius: "50%", background: grad(GOLD, CLAY) }} />
-    <div style={{ fontFamily: inter.fontFamily, fontWeight: 800, fontSize: 22, color: INK }}>@nocodealex</div>
-  </div>
-);
+// Retired by Alex on 2026-09-11: no creator watermarks on reels.
+// Preserve the export for existing imports; see memory/reel-no-watermarks.md.
+export const Handle: React.FC = () => null;
 
 // house karaoke caption (a single hook line, one word highlighted hot)
 export const Caption: React.FC<{ words: string[]; hot?: number; top?: number }> = ({ words, hot = -1, top = 1236 }) => (
