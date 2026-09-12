@@ -48,3 +48,8 @@ Final delivered cut: 1080×1920, 30fps, 34.3s, H.264 BT.709 with stereo AAC. The
 - [Posting caption](https://drive.google.com/file/d/1gap5cMtBjqqaHeABg6CeB6sj7jw_-HR5/view)
 
 The source repository is code/text only. The media archive retains the user's music, audio stems and genuine creator image. The installation machine is illustrative; technical/specification claims are explained in the guide rather than validated by the reel's dramatic headline.
+
+
+## Follow-up: two hook variants
+
+Alex then asked for two different hooks following the same NoCodeAlex system. MAGNET uses lateral tool consolidation; ZIPPER opens the room vertically and brings a workforce forward in depth. The original SNAP export is retained. Both new files run the complete existing body from 3.4s, with independent opening contact cues and the identical body master PCM. Reviews corrected capture order, hand/prop attachment, forehead occlusion, silhouette framing and late-scene entry drivers. [Detailed hook storyboard and review](evidence/ecc151/hooks/STORYBOARD.md); [delivery and checks](evidence/ecc151/hooks/delivery.json); [source](../../video/src/ecc151/README.md#two-additional-hooks-magnet-and-zipper). No user preference between these new cuts or measured retention result is recorded.

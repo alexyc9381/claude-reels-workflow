@@ -1,0 +1,26 @@
+{
+  "variant": "zipper",
+  "body_pcm_identical_from_s": 3.4,
+  "headline": "REPLACE ALL ENGINEERS / 1 REPO",
+  "vo_source_unchanged": true,
+  "early_name_mask_preserved": true,
+  "hook_cues": 12,
+  "loudness": {
+    "input_i": "-16.05",
+    "input_tp": "-1.73",
+    "input_lra": "2.10",
+    "input_thresh": "-26.05",
+    "output_i": "-15.87",
+    "output_tp": "-1.80",
+    "output_lra": "2.10",
+    "output_thresh": "-25.87",
+    "normalization_type": "dynamic",
+    "target_offset": "-0.13"
+  },
+  "atoms": {
+    "ftyp": 0,
+    "moov": 32,
+    "free": 38845,
+    "mdat": 38853
+  }
+}

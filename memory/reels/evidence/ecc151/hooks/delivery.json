@@ -1,0 +1,26 @@
+{
+  "videos": [
+    {
+      "variant": "magnet",
+      "composition": "ECC151B",
+      "drive_url": "https://drive.google.com/file/d/1jy2-ydBSNvT_XI2H4L6jq89KhA0BZMuY/view",
+      "bytes": 22215938,
+      "sha256": "99fd4d0eb431090967c4c9827d7d6c9141d4709214582529daf6f0a475f51320",
+      "duration_s": 34.3,
+      "hook_end_s": 3.4
+    },
+    {
+      "variant": "zipper",
+      "composition": "ECC151C",
+      "drive_url": "https://drive.google.com/file/d/1-rk4h8rfpd4v3O8KMryyTwifHv2pTqJD/view",
+      "bytes": 22259809,
+      "sha256": "3cab25dd1f4600ccb72b30b670e5a211da44dcbd8c76452d01251a2ab2f85622",
+      "duration_s": 34.3,
+      "hook_end_s": 3.4
+    }
+  ],
+  "editable_source": "https://drive.google.com/file/d/1tdHkRIm_WrfQY3W7tdwsJQpG-ijEmH6l/view",
+  "archive_sha256": "46ac7b771c8dbd72479f3870b6255da6a623daf2c2e76124b421c93c304c740b",
+  "original_snap_unchanged": true,
+  "creative_approval_not_yet_received": true
+}

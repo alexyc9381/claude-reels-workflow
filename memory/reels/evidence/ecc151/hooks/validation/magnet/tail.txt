@@ -1,0 +1,21 @@
+
+scene_tail_audit · 151_Claude-ECC_Hook-B-Magnet.mp4
+  ⛔ a scene MEAN cannot see where inside the scene the motion was.
+
+  scene        mean     Q1     Q2     Q3     Q4   TAIL   verdict
+  --------------------------------------------------------------------
+  MAGNET      13.00   8.08  11.42  16.10  16.01   1.23   ok
+  TEAM        14.59  18.16   7.18  14.72  18.92   1.30   ok
+  ATTACK      11.38  17.68   7.12   9.38  12.38   1.09   ok
+  REPO        14.20  23.91  12.58   5.86  14.73   1.04   ok
+  CREATOR     14.52  13.15  17.75  16.10  11.07   0.76   ok
+  INSTALL     10.19  14.34   7.68   7.22  11.63   1.14   ok
+  PLAN        13.49  15.95   7.77   5.74  24.82   1.84   ok
+  BUILD       16.64   9.08  13.79  16.56  27.12   1.63   ok
+  SECURE      11.58   7.35  12.17  12.86  13.71   1.18   ok
+  TEST        11.64  12.10  13.31   7.38  13.76   1.18   ok
+  ASSEMBLE    11.76  21.91  11.53   6.72   7.68   0.65   fading
+  PUBLIC      18.03  20.01  25.46   6.41  19.81   1.10   ok
+  CTA          8.14  14.23   2.58   7.47   9.35   1.15   ok
+  --------------------------------------------------------------------
+  scenes that stall in their last quarter: 0/13
