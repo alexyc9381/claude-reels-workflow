@@ -122,11 +122,14 @@ const muxBinary=existsSync(chapterMeta)?(process.env.REVIEW_FFMPEG||execFileSync
 const metadataArgs=existsSync(chapterMeta)?['-i',chapterMeta]:[];
 const chapterArgs=existsSync(chapterMeta)?['-map_metadata','2','-map_chapters','2']:[];
 console.log('Measuring continuous mix for two-pass dialogue normalization');
-const analysis=spawnSync(muxBinary,['-hide_banner','-i',audio,'-af','loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json','-f','null','-'],{encoding:'utf8',maxBuffer:5e6});
+const truePeakTarget=Number(process.env.REVIEW_TRUE_PEAK||-1.5);
+if(!Number.isFinite(truePeakTarget)||truePeakTarget> -1||truePeakTarget< -4)throw Error('REVIEW_TRUE_PEAK must be from -4 to -1 dBTP');
+const analysis=spawnSync(muxBinary,['-hide_banner','-i',audio,'-af',`loudnorm=I=-16:TP=${truePeakTarget}:LRA=11:print_format=json`,'-f','null','-'],{encoding:'utf8',maxBuffer:5e6});
 if(analysis.status!==0)throw Error('Audio loudness analysis failed');
 const measured=JSON.parse(analysis.stderr.match(/\{\s*"input_i"[\s\S]*?\}/)[0]);
 writeFileSync(path.join(dir,'premaster-levels.json'),JSON.stringify(measured,null,2));
-const norm=`loudnorm=I=-16:TP=-1.5:LRA=11:measured_I=${measured.input_i}:measured_TP=${measured.input_tp}:measured_LRA=${measured.input_lra}:measured_thresh=${measured.input_thresh}:offset=${measured.target_offset}:linear=false`;
+const norm=`loudnorm=I=-16:TP=${truePeakTarget}:LRA=11:measured_I=${measured.input_i}:measured_TP=${measured.input_tp}:measured_LRA=${measured.input_lra}:measured_thresh=${measured.input_thresh}:offset=${measured.target_offset}:linear=false`;
+writeFileSync(path.join(dir,'mastering-settings.json'),JSON.stringify({sourceHash:hash,targetLUFS:-16,truePeakTarget,LRA:11,codec:'aac',sampleRate:48000,bitrate:320000},null,2));
 // Loudnorm may append a short filter tail; cap the mux to the exact picture
 // clock so the requested final-word cut cannot acquire a frozen extra frame.
 await new Promise((resolve,reject)=>{const p=spawn(muxBinary,['-v','error','-y','-f','concat','-safe','0','-i',list,'-i',audio,...metadataArgs,'-map','0:v:0','-map','1:a:0',...chapterArgs,'-c:v','copy','-af',norm,'-ar','48000','-c:a','aac','-b:a','320k','-t',String(composition.durationInFrames/composition.fps),'-movflags','+faststart',output],{env:{...process.env,DYLD_LIBRARY_PATH:bin},stdio:'inherit'});p.on('error',reject);p.on('exit',c=>c===0?resolve():reject(Error('Final mux failed '+c)));});

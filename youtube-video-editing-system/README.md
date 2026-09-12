@@ -1,5 +1,7 @@
 # No Code Alex YouTube editing system
 
+Current: [V19 character-led intro revision](projects/higgsfield-replacement/REVISION-V19.md), [editable Mac handoff / next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V19.md), [reproduction](projects/higgsfield-replacement/REPRODUCE.md). V18 scene design was rejected; V19 uses separated cost spotlights, animated skill-to-shot, up/down Connect→Load skill→Generate with dings, opening countdown and targeted1:04/7:34 revisions. Preserve source narration/EDL; SFX change. Earlier current labels below are history where conflicting.
+
 The Remotion-based 16:9 system for No Code Alex long-form tutorials, explainers and course-derived editing. Separate from the short-form reel factory and archived Matchtern style.
 
 ## Start here

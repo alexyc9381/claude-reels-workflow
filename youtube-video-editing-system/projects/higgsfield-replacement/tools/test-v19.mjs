@@ -1,0 +1,20 @@
+import './test-v13.mjs';
+import assert from 'node:assert/strict';
+import {readFileSync,existsSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow'),src=path.join(repo,'video/src/youtube'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const s=readFileSync(path.join(src,'ScenesV19.tsx'),'utf8');
+assert.doesNotMatch(s,/Math\.random|Date\.now|setTimeout|OffthreadVideo|Plan example|Estimate ·/);
+assert.match(s,/\/ month/);assert.match(s,/\/ generation/);assert.match(s,/\['Connect','Load skill','Generate'\]/);assert.match(s,/roadmapBeatsV13.map/);
+assert.match(s,/fill="none" stroke="#FFFDF6"/,'No implicit black SVG fill');
+assert.match(s,/opacity:1-e\(u,4\.4,\.25\)/);assert.match(s,/opacity:easeOut\(u,4\.65,\.2\)/,'Shot starts after camera has cleared');
+assert.match(s,/strokeDashoffset=\{1-first\}/);assert.match(s,/strokeDashoffset=\{1-second\}/,'Independent stroke clocks avoid SVG subpath dash reset');
+assert.ok(s.indexOf('x={410+release*440+catchP*233}')>s.indexOf('x={1115} y={499}'),'Held closing file renders above the archivist');
+for(const n of [...s.matchAll(/name="([^"]+)"/g)].map(m=>m[1]).filter(n=>/\.(png|jpg|svg)$/.test(n)))assert.ok(existsSync(path.join(base,'work/higgsfield-replacement/public/v3',n)),n);
+const host=readFileSync(path.join(src,'YouTubeV9.tsx'),'utf8');assert.match(host,/roadmapBeatsV13\)add\(b\+u\*d,'roadmap-ding',\.55,1\.2\)/);assert.match(host,/s.name==='roadmap-ding'\?'v3\/glass.wav'/);
+const oldNarration=execFileSync('git',['show','4f2f7b160e89039cf93d02dffe11ddc343772539:video/src/youtube/RoughCut.tsx'],{cwd:repo});assert.deepEqual(readFileSync(path.join(src,'RoughCut.tsx')),oldNarration);
+const proof=JSON.parse(execFileSync(process.execPath,[path.join(project,'tools/prepare-v19-cache.mjs'),'--check-only'],{encoding:'utf8'}));assert.equal(proof.narrationAndEDLIdentical,true);
+for(let u=0;u<=1;u+=.005){const x=325+1270*u,y=610-170*Math.sin(u*Math.PI*2);assert.ok(x-112>=100&&x+112<=1820);assert.ok(y-138>180&&y+86<900);}
+for(const t of [1.6,2.6,3.6])assert.equal(3-Math.floor(t-1.6),[3,2,1][Math.round(t-1.6)]);
+console.log('PASS V19: original narration/EDL/privacy; scoped scenes; blind opening countdown; muted comparison; non-footage production; synchronized three-stop route/dings; logo assets present.');

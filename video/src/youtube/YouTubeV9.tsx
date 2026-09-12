@@ -160,20 +160,23 @@ export const soundEvents=(m:M)=>{
  const add=(at:number,name:string,gain=.16,duration=.8)=>ev.push({at:Math.round(at*fps),name,gain,duration});
  const at=(id:string)=>find(id).from/fps;
  add(.12,'servo',.14);add(.45,'paper',.12);add(4,'latch',.13);
+ for(const seconds of [1.6,2.6,3.6])add(seconds,'click',.075,.3);
  for(const s of fullScenes(m)){
   const d=s.duration/fps,b=s.from/fps;
   const beat=(u:number,span:number,name:string,gain=.13,start=b)=>add(start+u*span,name,gain,.65);
   const schedules:Record<string,[number,string][]>={studio:[[.18,'paper'],[.45,'click'],[.72,'shutter'],[.875,'latch']],roadmap:[[.08,'zip'],[.45,'paper'],[.8,'latch']],guide:[[.22,'paper'],[.52,'servo'],[.81,'latch']],wrapper:[[.08,'servo'],[.25,'land'],[.55,'paper']],download:[[.23,'paper'],[.38,'land'],[.69,'zip']],skill:[[.11,'paper'],[.29,'click'],[.48,'servo'],[.75,'paper'],[.9,'latch']],outro:[[.19,'paper'],[.2375,'whip'],[.4,'land'],[.59,'zip'],[.75,'typing']],compare:[[.08,'shutter'],[.89,'paper']]};
   if(s.kind==='hook'){
-   const q=s.b!,span=d-q;beat(.01,span,'paper',.09,b+q);beat(.22,span,'click',.09,b+q);for(const u of [.34,.46,.58])beat(u,span,'latch',.065,b+q);beat(.72,span,'paper',.075,b+q);
+   const q=s.b!,span=d-q;beat(.01,span,'paper',.09,b+q);for(const seconds of [.4,1.55,2.7])add(b+s.c!+seconds,'paper',.09,.8);
+  }else if(s.kind==='studio'){
+   add(b+.12,'paper',.10);add(b+2.84,'servo',.07);add(b+4.4,'shutter',.11);add(b+6.75,'latch',.08);
   }else if(s.kind==='roadmap'){
-   for(const u of roadmapBeatsV13)beat(u,d,'latch',.07);
+   for(const u of roadmapBeatsV13)add(b+u*d,'roadmap-ding',.55,1.2);
   }else if(s.kind==='guide'){
    beat(.1,d,'click',.07);beat(.24,d,'paper',.07);beat(.43,d,'click',.07);beat(.59,d,'latch',.065);
   }else if(s.kind==='outro'){
-   beat(.05,d,'paper',.09);beat(1.65/8.56,d,'zip',.075);beat(3.1/8.56,d,'paper',.09);beat(4.1/8.56,d,'latch',.08);beat(4.45/8.56,d,'typing',.055);beat(5.45/8.56,d,'paper',.07);
+   beat(.05,d,'paper',.09);add(450+.17*7.1,'paper',.10);add(450+.31*7.1,'land',.09);add(450+.65*7.1,'latch',.1);
   }else if(s.kind==='direct'){
-   for(const [u,n] of [[.06,'latch'],[.19,'zip'],[.295,'paper'],[.34,'click'],[.69,'click'],[.82,'shutter']] as const)beat(u,s.a!,n,.075);
+   for(const [u,n] of [[.04,'paper'],[.19,'latch'],[.25,'zip'],[.51,'click'],[.61,'shutter']] as const)beat(u,s.a!,n,.075);
    beat(.14,d-s.a!,'land',.08,b+s.a!);beat(.26,d-s.a!,'servo',.075,b+s.a!);beat(.55,d-s.a!,'latch',.075,b+s.a!);
   }else for(const [fraction,name] of schedules[s.kind]??[])beat(fraction,d,name,name==='typing'?.075:.12);
  }
@@ -202,7 +205,7 @@ export const YouTubeSound:React.FC<{manifest:M}>=({manifest:m})=>{
  ];
  return <>
   {music.map((s,i)=><Sequence key={i} from={s.from} durationInFrames={s.to-s.from}><Audio data-audio-role="music" src={staticFile('v4/'+s.name+'.wav')} startFrom={s.start*fps} volume={f=>s.gain*easeOut(f/fps,0,.18)*(1-easeInOut(f/fps,(s.to-s.from)/fps-.45,.45))}/></Sequence>)}
-  {soundEvents(m).map((s,i)=><Sequence key={i} from={s.at} durationInFrames={Math.max(1,Math.min(Math.round(s.duration*fps),end-s.at))}><Audio data-audio-role="design-sfx" src={staticFile('v4/'+s.name+'.wav')} volume={s.gain}/></Sequence>)}
+  {soundEvents(m).map((s,i)=><Sequence key={i} from={s.at} durationInFrames={Math.max(1,Math.min(Math.round(s.duration*fps),end-s.at))}><Audio data-audio-role="design-sfx" src={staticFile(s.name==='roadmap-ding'?'v3/glass.wav':'v4/'+s.name+'.wav')} volume={s.gain}/></Sequence>)}
   <Sequence from={find('s043').from+108} durationInFrames={45}><Audio data-audio-role="design-sfx" src={staticFile('v9/celebrate-v12.wav')} volume={.16}/></Sequence>
  </>;
 };

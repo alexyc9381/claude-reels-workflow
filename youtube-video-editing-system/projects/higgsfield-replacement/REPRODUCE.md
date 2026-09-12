@@ -1,4 +1,16 @@
-# Reproduce Higgsfield Replacement V18
+# Reproduce Higgsfield Replacement V19
+
+V19 is current. From the task/handoff root:
+
+```sh
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/test-v19.mjs
+REVIEW_CONCURRENCY=1 REVIEW_SUBCHUNK_FRAMES=300 REVIEW_TRUE_PEAK=-2.5 REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v19.mp4 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/render-low-storage.mjs
+REVIEW_REVISION=v19 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/validate-v12-export.mjs
+```
+
+Original workstation only: optionally run `tools/prepare-v19-cache.mjs` to prove/reuse unchanged V18 picture ranges. New Mac renders fresh. V19 changes SFX, not the OBS narration source/EDL. Validation compares the unchanged90–450s picture region when the prior export is available. See [V19 direction](REVISION-V19.md) and [Mac handoff](OTHER-MAC-HANDOFF-V19.md).
+
+## Historical V18
 
 V18 is current. Use `test-v18.mjs`, `REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v18.mp4`, and `REVIEW_REVISION=v18` with the existing renderer/validator below. [V18 exact commands](REVISION-V18.md). Optional original-workstation `prepare-v18-cache.mjs` proves safe reuse after50s; new Mac renders fresh. The validator compares OBS soundtrack packets and every decoded picture frame after50s against V17 when available.
 

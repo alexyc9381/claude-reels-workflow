@@ -19,7 +19,7 @@ export const audioContract=(base=process.cwd())=>{
   ...(code.includes('roadmapBeatsV13')?{roadmapBeats:readFileSync(path.join(src,'ScenesV13.tsx'),'utf8').match(/export const roadmapBeatsV13=\[[^\]]+\]/)?.[0]}:{}),
   obs:{bytes:statSync(path.join(work,'public/obs.mp4')).size},
   ...(v7?{narration:readFileSync(path.join(src,'RoughCut.tsx'),'utf8').slice(readFileSync(path.join(src,'RoughCut.tsx'),'utf8').indexOf('export const RoughCut:'))}:{}),
-  assets:['v4',...(v9?['v9']:[])].flatMap(folder=>readdirSync(path.join(work,'public',folder)).filter(n=>/\.(wav|mp3)$/.test(n)).sort().map(n=>[folder+'/'+n,createHash('sha256').update(readFileSync(path.join(work,'public',folder,n))).digest('hex')]))};
+  assets:['v4',...(v9?['v3','v9']:[])].flatMap(folder=>readdirSync(path.join(work,'public',folder)).filter(n=>/\.(wav|mp3)$/.test(n)).sort().map(n=>[folder+'/'+n,createHash('sha256').update(readFileSync(path.join(work,'public',folder,n))).digest('hex')]))};
  return createHash('sha256').update(JSON.stringify(contract)).digest('hex');
 };
 if(process.argv[1]?.endsWith('audio-contract.mjs'))console.log(audioContract());

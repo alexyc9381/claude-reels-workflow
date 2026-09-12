@@ -1,5 +1,11 @@
 # Visual-first explanations and intro promise
 
+## V19: scenes, not collections of tokens
+
+Latest feedback rejects the V18 result-footage insert during the production explainer. Keep that section animated. Build a practical scene with a subject, a prop, an action and a visible consequence. Separate competing ideas spatially; shift the key light when narration shifts subjects. Reuse original 2D character roles, not the exact same full animation. Make details reinforce the action: calendar turns mean recurring billing, a tracking shot means camera direction, a drawer release means a downloadable file. Avoid auxiliary cards and qualification footers in these intro scenes; record pricing limits in notes.
+
+For the opening, attention can come from large real videos, subtle alternate focus and a seam countdown—not more unrelated ornament. The up/down roadmap contains Connect, Load skill and Generate; each stop responds visually and audibly on the same frame clock. More motion is not permission for vibrating type, random prop drift or obscuring the face/video/price units. Review at small-player size and inspect action contact frames. [V19 implementation and limits](projects/higgsfield-replacement/REVISION-V19.md).
+
 V18: hierarchy takes priority over adding moving parts. Restore the large-to-small presenter entrance, use one input/mechanism/result chain, and light one roadmap destination at a time. Borrow short-form acting and causal timing without importing dark portrait framing or serif typography. [Scope and transfer evidence](projects/higgsfield-replacement/REVISION-V18.md).
 
 V17: inspect at small-player scale. Make opening identities large without reducing real footage. Keep the relevant company visible throughout its scene; compress purposeful movement, not speech. Match the actual clause before choosing the mechanism: usage limits → bottleneck, subscription rejection → Claude-authored X, expensive-plan access → premium-key vault. Couple interacting props to one clock and protect text/media bounds during transitions. [V17 implementation](projects/higgsfield-replacement/REVISION-V17.md).

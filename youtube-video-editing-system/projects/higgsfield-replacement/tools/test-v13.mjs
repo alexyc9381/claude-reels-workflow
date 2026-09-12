@@ -17,16 +17,16 @@ const polish=read('YouTubeV9.tsx'),cues=evaluate(polish.slice(polish.indexOf('ex
 const fullScenes=evaluate(polish.slice(polish.indexOf('export const fullScenes='),polish.indexOf('const Definition:')),{roughTimeline:timing.roughTimeline}).fullScenes;
 const beats=read('ScenesV13.tsx').match(/export const roadmapBeatsV13=\[([^\]]+)\]/)[1].split(',').map(Number);
 const soundEvents=evaluate(polish.slice(polish.indexOf('export const soundEvents='),polish.indexOf('export const YouTubeSound:')),{roughTimeline:timing.roughTimeline,roughChapters:timing.roughChapters,fullScenes,v9Cues:cues,roadmapBeatsV13:beats}).soundEvents(m);
-for(const hit of soundEvents){assert.ok(hit.at>=0&&hit.at<13713);assert.ok(hit.gain>0&&hit.gain<=.16);assert.ok(hit.duration>0);assert.ok(existsSync(path.join(base,'work/higgsfield-replacement/public/v4',hit.name+'.wav')));}
-for(const phase of beats)assert.ok(soundEvents.some(hit=>hit.at===Math.round((get('s006').from/30+phase*get('s006').duration/30)*30)&&hit.name==='latch'));
+for(const hit of soundEvents){assert.ok(hit.at>=0&&hit.at<13713);assert.ok(hit.gain>0&&hit.gain<=(hit.name==='roadmap-ding'?.55:.16));assert.ok(hit.duration>0);assert.ok(existsSync(path.join(base,'work/higgsfield-replacement/public',hit.name==='roadmap-ding'?'v3/glass.wav':'v4/'+hit.name+'.wav')));}
+for(const phase of beats)assert.ok(soundEvents.some(hit=>hit.at===Math.round((get('s006').from/30+phase*get('s006').duration/30)*30)&&['latch','roadmap-ding'].includes(hit.name)));
 assert.ok(soundEvents.some(hit=>hit.at===Math.round((get('s033').from/30+12.93)*30)&&hit.name==='click'));
 for(const c of cues)assert.ok(get(c.id).duration>c.offset*m.fps);
 assert.ok(cues.some(c=>c.id==='s033'&&c.title==='Generated with Veo'));
 assert.ok(cues.some(c=>c.id==='s034'&&c.feature==='hair'));assert.ok(cues.some(c=>c.id==='s035'&&c.feature==='fabric'));
-assert.match(read('StoryScenesV10.tsx'),/data-choice-number=\{i\+1\}/);assert.doesNotMatch(read('StoryScenesV10.tsx'),/RIGHT ·|LEFT ·/);assert.match(read('ScenesV9.tsx'),/OutroV9=InstallFinaleV12/);
+assert.match(read('StoryScenesV10.tsx'),/data-choice-number=\{i\+1\}/);assert.doesNotMatch(read('StoryScenesV10.tsx'),/RIGHT ·|LEFT ·/);assert.match(read('ScenesV9.tsx'),/OutroV9=(InstallFinaleV12|OutroV19)/);
 assert.ok(!cues.some(c=>c.id==='s016'&&c.kind==='definition'),'Only one credential teaching surface');
 assert.match(polish,/CredentialSequence=CredentialV13/);assert.match(polish,/<RevealCountdownV13/);assert.match(polish,/<PlaybackStartV13/);assert.match(polish,/<FaceTimerV13/);
-assert.match(read('ScenesV9.tsx'),/FeatureVault=(FeatureGateV13|FeatureGateV17)/);assert.match(read('ScenesV9.tsx'),/GuideV9=(FollowAlongV13|GuideV15)/);assert.match(read('ScenesV9.tsx'),/RoadmapV9=(RoadmapV13|RoadmapV15|RoadmapV16|RoadmapV18)/);
+assert.match(read('ScenesV9.tsx'),/FeatureVault=(FeatureGateV13|FeatureGateV17)/);assert.match(read('ScenesV9.tsx'),/GuideV9=(FollowAlongV13|GuideV15)/);assert.match(read('ScenesV9.tsx'),/RoadmapV9=(RoadmapV13|RoadmapV15|RoadmapV16|RoadmapV18|RoadmapV19)/);
 assert.match(read('ScenesV13.tsx'),/data-stable-format-label/);assert.match(read('ScenesV13.tsx'),/FREE setup · description below/);assert.match(read('ScenesV12.tsx'),/FREE setup · description below/);
 assert.doesNotMatch(read('typing-focus.ts'),/s023:/);assert.doesNotMatch(read('RoughCut.tsx').split('const Screen:')[0],/s023:/);
 assert.match(read('StoryScenesV10.tsx'),/Seedance 2.5/);assert.match(read('StoryScenesV10.tsx'),/strokeDashoffset=\{i===2\?1-choose:1\}/);

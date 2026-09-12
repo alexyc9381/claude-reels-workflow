@@ -1,0 +1,98 @@
+{
+  "output": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/outputs/higgsfield-replacement-edit-v19.mp4",
+  "bytes": 160625864,
+  "duration": 457.1,
+  "frames": 13713,
+  "width": 1920,
+  "height": 1080,
+  "fps": "30/1",
+  "sourceHash": "623503bbad5872d820d279485f5e93dad414e863f49165033c0c73a915c6aa43",
+  "allPictureChunksMatchCurrentSource": true,
+  "audio": {
+    "codec": "aac",
+    "sampleRate": "48000",
+    "channels": 2,
+    "lufs": -16.83,
+    "truePeak": -2.09,
+    "lra": 4.7
+  },
+  "chapters": [
+    {
+      "title": "Can you tell the difference?",
+      "seconds": 0
+    },
+    {
+      "title": "Why use the models directly?",
+      "seconds": 36.567
+    },
+    {
+      "title": "Connect fal.ai and Claude",
+      "seconds": 124.1
+    },
+    {
+      "title": "Make your first video",
+      "seconds": 207.667
+    },
+    {
+      "title": "Review and compare the results",
+      "seconds": 297.333
+    },
+    {
+      "title": "The reveal and next step",
+      "seconds": 429.4
+    }
+  ],
+  "decodePassed": true,
+  "fullHumanListeningReview": false,
+  "verifiedEquivalentReusedChunks": [
+    {
+      "from": 2700,
+      "to": 5399,
+      "priorSourceHash": "c1968e13c52a67f1cfebc82615626b54adffb29f6a85d0f7447154f7a8cebdbd"
+    },
+    {
+      "from": 5400,
+      "to": 8099,
+      "priorSourceHash": "c1968e13c52a67f1cfebc82615626b54adffb29f6a85d0f7447154f7a8cebdbd"
+    },
+    {
+      "from": 8100,
+      "to": 10799,
+      "priorSourceHash": "c1968e13c52a67f1cfebc82615626b54adffb29f6a85d0f7447154f7a8cebdbd"
+    },
+    {
+      "from": 10800,
+      "to": 13499,
+      "priorSourceHash": "c1968e13c52a67f1cfebc82615626b54adffb29f6a85d0f7447154f7a8cebdbd"
+    }
+  ],
+  "audioPacketHash": "SHA256=31dd0a76390178e52d1a539df1f425f100c7b6d1ef1c6228eabaff834f6f75fd",
+  "audioMatchesV9Packets": false,
+  "currentAudioContractVerified": true,
+  "mastering": {
+    "sourceHash": "623503bbad5872d820d279485f5e93dad414e863f49165033c0c73a915c6aa43",
+    "targetLUFS": -16,
+    "truePeakTarget": -2.5,
+    "LRA": 11,
+    "codec": "aac",
+    "sampleRate": 48000,
+    "bitrate": 320000
+  },
+  "narrationAndEDLUnchangedFromV18": true,
+  "audioMatchesV18Packets": false,
+  "unchangedPicture90Through450Seconds": true,
+  "unchangedPremasterAudio90Through450Seconds": true,
+  "visualQA": {
+    "reviewed": [
+      "opening encoded motion contact sheet at small-player size",
+      "cost scene price-unit clearance",
+      "production camera-to-shot transition clearance",
+      "up/down roadmap encoded motion contact sheet",
+      "two-stroke pointer contact frames",
+      "held closing file above actor and uncropped bonus ribbon",
+      "final encoded closing contact sheet"
+    ],
+    "creativeApproval": false,
+    "retentionMeasured": false
+  }
+}

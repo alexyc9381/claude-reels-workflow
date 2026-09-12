@@ -1,5 +1,9 @@
 # Conversation decision ledger
 
+## September 12 — V19 takes precedence
+
+Alex rejected V18's clutter, static-looking cost/workflow scenes and roadmap. Latest action: focus0–30s, plus specifically1:04 and7:34. Preserve large presenter→bottom-center inset, add subtle alternating A/B zoom and center3–2–1. Two cost bays, real Higgsfield/Claude identities, a lime editorial billing sprite and narration-led spotlights. Remove visible “Plan example” and “Estimate · varies by model”; factual caveats persist in docs. Remove the production example-video insert. Restore up/down Connect→Load skill→Generate route with three audible dings/contact flashes. Improve direct-model and final description-file scenes. Original OBS narration, EDL, privacy and chapters unchanged; new SFX are permitted and implemented. General scene quality direction is durable, but only listed ranges are claimed rebuilt. [Full V19 record](projects/higgsfield-replacement/REVISION-V19.md).
+
 Latest V18 (September12): Alex restores the larger opening face moving into the bottom inset, requests a38s skip-to2:03 cue and narrows animation revisions to the first30s. This overrides V14/V17's small-face-from-frame-zero. Rebuild cost, skill-workspace-output and roadmap hierarchy using original short-form acting/causal principles; preserve later edits and the soundtrack. [Implementation, references and review limits](projects/higgsfield-replacement/REVISION-V18.md).
 
 September 10–11, 2026. This index preserves the learning trajectory from the full No Code Alex YouTube-system conversation. Times in feedback identify the **review version the user saw**, not permanent positions. Use segment IDs and the current motion map to locate a beat after an edit. “Implemented” describes code/edit work, not new creative approval.
