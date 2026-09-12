@@ -5,9 +5,10 @@ V12 is current. Run from the task/handoff root:
 ```sh
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/test-v12.mjs
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/audit-v12.mjs
-REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v12.mp4 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/render-low-storage.mjs
+REVIEW_CONCURRENCY=1 REVIEW_SUBCHUNK_FRAMES=600 REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v12.mp4 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/render-low-storage.mjs
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/validate-v12-export.mjs
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/transcribe-v12-joins.mjs
+python3 work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/verify-v12-audio.py
 ```
 
 `ScenesV12.tsx` adds source-clock detail lenses, event countdowns, a right-side crown and visual FREE BONUS ending. The original crown sound lives in `public/v9/celebrate-v12.wav`, is included in the handoff and can be recreated with `tools/build-sfx-v12.mjs`. The audio fingerprint includes v9 sound hashes. Current cuts and chapter times are in `revision-v12-audit.json`; do not run an old audit over them. The historical instructions below remain for provenance only.

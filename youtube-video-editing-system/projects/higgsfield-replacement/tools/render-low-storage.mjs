@@ -91,7 +91,23 @@ for(let from=0;from<composition.durationInFrames;from+=2700){
  if(existsSync(outputLocation+'.complete')){console.log('Reusing verified completed chunk',from,to);continue;}
  console.log('Rendering picture frames',from,to);
  let last=-1;
- await renderMedia({...shared,codec:'h264',outputLocation,frameRange:[from,to],muted:true,crf:19,imageFormat:'jpeg',jpegQuality:90,onProgress:p=>{const step=Math.floor(p.progress*10);if(step!==last){last=step;console.log(`Chunk ${from}: ${step*10}%`);}}});
+ const subchunk=Number(process.env.REVIEW_SUBCHUNK_FRAMES||2700);
+ if(!Number.isInteger(subchunk)||subchunk<30||subchunk>2700)throw Error('REVIEW_SUBCHUNK_FRAMES must be an integer from 30 to 2700');
+ if(subchunk<to-from+1){
+  // Bound temporary JPEG storage. Source frame clocks remain absolute; audio
+  // is still the separately rendered continuous WAV, never per-part AAC.
+  const parts=[];const partDir=path.join(dir,'bounded-parts');mkdirSync(partDir,{recursive:true});
+  for(let a=from;a<=to;a+=subchunk){
+   const b=Math.min(a+subchunk-1,to),part=path.join(partDir,`picture-${a}-${b}.mp4`);parts.push(part);
+   if(existsSync(part+'.complete')){const receipt=JSON.parse(readFileSync(part+'.complete'));if(receipt.hash!==hash||receipt.from!==a||receipt.to!==b)throw Error('Mismatched bounded-part receipt');console.log('Reusing bounded part',a,b);continue;}
+   console.log('Rendering bounded part',a,b);
+   await renderMedia({...shared,codec:'h264',outputLocation:part,frameRange:[a,b],muted:true,crf:19,imageFormat:'jpeg',jpegQuality:90});
+   writeFileSync(part+'.complete',JSON.stringify({hash,from:a,to:b}));console.log('Completed bounded part',a,b);
+  }
+  const list=path.join(partDir,`concat-${from}-${to}.txt`);writeFileSync(list,parts.map(p=>`file '${p.replaceAll("'","'\\''")}'`).join('\n')+'\n');
+  const ff=process.env.REVIEW_FFMPEG||execFileSync('python3',['-c','import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())'],{encoding:'utf8'}).trim();
+  execFileSync(ff,['-v','error','-y','-f','concat','-safe','0','-i',list,'-c','copy','-an',outputLocation]);
+ }else await renderMedia({...shared,codec:'h264',outputLocation,frameRange:[from,to],muted:true,crf:19,imageFormat:'jpeg',jpegQuality:90,onProgress:p=>{const step=Math.floor(p.progress*10);if(step!==last){last=step;console.log(`Chunk ${from}: ${step*10}%`);}}});
  writeFileSync(outputLocation+'.complete',JSON.stringify({hash,from,to}));
  console.log('Completed chunk',from,to);
 }

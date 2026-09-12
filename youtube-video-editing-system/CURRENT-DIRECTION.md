@@ -80,4 +80,4 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Navigation
 
-[LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) · [REVISION-DECISIONS.md](REVISION-DECISIONS.md) · [Higgsfield V11](projects/higgsfield-replacement/REVISION-V11.md) · [Historical approval boundaries](APPROVED-ANIMATION-SYSTEM.md)
+[LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) · [REVISION-DECISIONS.md](REVISION-DECISIONS.md) · [Higgsfield V12](projects/higgsfield-replacement/REVISION-V12.md) · [Historical approval boundaries](APPROVED-ANIMATION-SYSTEM.md)

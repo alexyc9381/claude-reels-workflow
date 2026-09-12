@@ -1,8 +1,17 @@
 from PIL import Image, ImageDraw
 from pathlib import Path
 import sys
+import subprocess
+import imageio_ffmpeg
 root=Path.cwd()/"work/higgsfield-replacement/revision-v12/proofs"
-files=[root/f"polish-{s}.png" for s in sys.argv[1:]] if len(sys.argv)>1 else sorted(root.glob('polish-*.png'),key=lambda p:float(p.stem.split('-')[-1]))
+args=sys.argv[1:]
+encoded='--encoded' in args
+if encoded:
+ args.remove('--encoded');source=Path.cwd()/args.pop(0);offset=float(args.pop(0))
+ root=root.parent/'encoded';root.mkdir(exist_ok=True)
+ for s in args:
+  subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(),'-v','error','-y','-ss',str(float(s)-offset),'-i',str(source),'-frames:v','1',str(root/f'polish-{s}.png')],check=True)
+files=[root/f"polish-{s}.png" for s in args] if args else sorted(root.glob('polish-*.png'),key=lambda p:float(p.stem.split('-')[-1]))
 out=Image.new('RGB',(1280,388*((len(files)+1)//2)), '#F5EFE3')
 d=ImageDraw.Draw(out)
 for i,p in enumerate(files):
