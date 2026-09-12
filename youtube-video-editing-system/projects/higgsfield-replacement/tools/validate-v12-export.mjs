@@ -45,6 +45,12 @@ result.audioMatchesV9Packets=existsSync(priorAudio)?result.audioPacketHash===aud
 if(existsSync(priorAudio))assert.equal(result.audioMatchesV9Packets,false,'V12 must contain repaired narration and new source-anchored sound design');
 result.currentAudioContractVerified=true;
 if(revision==='v18'){
+ const transitionProof=path.join(work,'revision-v18/transition-cache-proof.json');
+ if(existsSync(transitionProof)){
+  assert.equal(JSON.parse(readFileSync(transitionProof)).sourceHash,sourceHash);
+  execFileSync(process.execPath,[path.join(project,'tools/prepare-v18-transition-cache.mjs'),'--check-only'],{stdio:'ignore'});
+  result.workspaceTransitionRefinementVerified=true;
+ }
  assert.ok([0,5].includes(equivalentChunks.length),'V18 permits fresh render or proven-unaffected tail');
  const priorV17=path.join(base,'outputs/higgsfield-replacement-edit-v17.mp4');
  result.audioMatchesV17Packets=null;result.unchangedPictureAfter50Seconds=null;

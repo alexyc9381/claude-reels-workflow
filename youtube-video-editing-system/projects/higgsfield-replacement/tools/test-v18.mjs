@@ -12,6 +12,9 @@ for(const name of ['CostV18','ProductionV18','RoadmapV18','TutorialSkipV18'])ass
 for(const tag of source.match(/<OffthreadVideo[\s\S]*?\/>/g)||[])assert.match(tag,/\bmuted\b/);
 assert.match(source,/Skip to tutorial/);assert.match(source,/2:03 →/);
 assert.match(source,/position:'relative',width:w,height:h/);
+assert.match(source,/opacity:Math.max\(0,1-output\*2\)/);
+assert.match(source,/opacity:Math.max\(0,\(output-\.5\)\*2\)/);
+for(let p=0;p<=1;p+=.01)assert.equal(Math.max(0,1-p*2)*Math.max(0,(p-.5)*2),0,'Workspace and result never crossfade over each other');
 assert.ok(111+1010<1195,'Chapter and skip cue do not overlap');
 assert.ok(1195+595<1920-100,'Skip cue safe margin');
 console.log('PASS V18: scoped intro and skip cue; original audio/EDL/privacy; original rig; real muted clips; seek-safe motion; unchanged V17 tail source.');

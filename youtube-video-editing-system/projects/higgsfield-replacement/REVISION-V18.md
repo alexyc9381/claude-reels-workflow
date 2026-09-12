@@ -26,7 +26,9 @@ No EDL, camera source, privacy mask, speech, music, SFX schedule, tutorial, late
 
 ## Review and limits
 
-Initial still review caught a facecam travel frame dipping below the canvas and previews lacking a positioned clipping parent. Corrected both; separated cost qualifier and preview; removed the residual roadmap file once loaded. Inspected entrance, transition, price, workspace, output, roadmap arrivals and skip cue at full-frame scale. Technical validation and encoded review results are recorded in `verification-v18.json` when complete.
+Delivered full V18: 1920×1080,30fps,13713frames,457.1seconds,163971909bytes. Current-source receipts and full audio/video decode pass;6chapter markers match. AAC measures−16.56LUFS/−1.24dBTP. Audio packets are identical toV17; every decoded picture frame after50s is identical toV17. Final source fingerprint: `c1968e13c52a67f1cfebc82615626b54adffb29f6a85d0f7447154f7a8cebdbd`. [Machine receipt](verification-v18.json).
+
+Initial still review caught a facecam travel frame dipping below the canvas and previews lacking a positioned clipping parent. Corrected both; separated cost qualifier and preview; removed the residual roadmap file once loaded. Encoded sequence review then caught workspace text showing through the expanding video. Complementary exit/entry opacity envelopes now clear the workspace before the result becomes visible. Re-rendered the transition including its frame600 boundary. Inspected entrance, transition, price, workspace, output, roadmap arrivals and skip cue at full-frame and small-player scales. Technical validation and encoded review results are recorded in `verification-v18.json` when complete.
 
 No claim of measured retention improvement, final creative approval or full human listening approval. The comparison assets remain the user-confirmed sources. Monthly plan example and per-generation estimate are different units, not a measured savings ratio. No new price verification or feature-parity claim. The thumbnail is supplied; exact title remains missing and is not a blocker for this scoped edit.
 
@@ -39,5 +41,7 @@ REVIEW_REVISION=v18 node work/repos/claude-reels-workflow/youtube-video-editing-
 ```
 
 Original workstation only: `prepare-v18-cache.mjs` proves the unchanged V17 source tail through exact source reversal before reusing it. Fresh picture range 0–1499; original soundtrack preserved by its audio contract. On another Mac, skip cache preparation and render fresh. Historical-export identity checks report null if V17 is unavailable. Do not run historical version-specific source tests against a newer revision.
+
+Optional `prepare-v18-transition-cache.mjs` proves the subsequent opacity-only refinement against the committed first V18 source, with frames300–899 rendered again. Historical first-pass code is retained in Git; it is not a separate creatively approved delivery.
 
 Output: `outputs/higgsfield-replacement-edit-v18.mp4`. Editable local package: `Documents/NoCodeAlex-Higgsfield-V18-Editing-Handoff`; see [handoff](OTHER-MAC-HANDOFF-V18.md). No Drive upload or publication implied.

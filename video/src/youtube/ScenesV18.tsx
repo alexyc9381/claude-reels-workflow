@@ -42,7 +42,7 @@ export const CostV18:React.FC<{duration:number;brandAt:number;bold?:boolean}>=({
 export const ProductionV18:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),u=t/duration,carry=e(u,0,.18),insert=e(u,.18,.10),output=e(u,.48,.10),save=e(u,.83,.09),contact=duration*.28;
  return <Stage t={t}>
-  <div style={{position:'absolute',inset:0,opacity:1-output,transform:`translateX(${-100*output}px)`}}>
+  <div style={{position:'absolute',inset:0,opacity:Math.max(0,1-output*2),transform:`translateX(${-100*output}px)`}}>
    <At x={185+carry*290+insert*425} y={307-Math.sin(carry*Math.PI)*70-insert*37} style={{transform:`rotate(${-10+carry*10}deg) scale(${1-insert*.62})`,opacity:1-e(u,.275,.012)}}><SkillFile t={t} size={330}/></At>
    <Actor t={t} x={100+carry*315} y={618} size={340} role="courier" walk={Math.sin(carry*Math.PI)} lift={.86} reach={insert} look={1} contact={contact}/>
    <Glass x={790} y={170} w={895} h={545} t={t} frost={.58} style={{transform:`translateY(${-12*settle(t,contact)}px)`}}>
@@ -52,7 +52,7 @@ export const ProductionV18:React.FC<{duration:number}>=({duration})=>{
    </Glass>
    <Glow t={t} at={contact} x={995} y={440}/>
   </div>
-  <At x={lerp(830,160,output)} y={lerp(332,137,output)} style={{opacity:output,transform:`scale(${lerp(.48,1,output)})`,transformOrigin:'0 0'}}>
+  <At x={lerp(830,160,output)} y={lerp(332,137,output)} style={{opacity:Math.max(0,(output-.5)*2),transform:`scale(${lerp(.48,1,output)})`,transformOrigin:'0 0'}}>
    <div style={{width:1580,height:741,padding:12,borderRadius:35,background:'linear-gradient(120deg,#FFFDF6,#D4E2D4)',boxShadow:'0 25px 65px #633B292D'}}><Clip w={1572} h={729}/></div>
    <At x={30} y={29}><Logo name="fal.png" size={85}/></At>
   </At>
