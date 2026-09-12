@@ -1557,3 +1557,7 @@ fail to entice the viewer. Review frames 0/4/8/13/20/28 and the 0.25–1.0s inte
 immediate, readable event and consequence, followed by another useful beat. Keep faces and
 labels clear through peak travel, retime physical Foley, and preserve the later narration
 payoffs. More pixel motion is diagnostic evidence, not a predicted retention gain.
+
+## X144 follow-up: continuity must not become sameness
+
+[The revised ending was explicitly rejected](../memory/alex-x144-ending-motion-rejection.md) despite numeric passes. A converter operating across three scenes was still one repetitive composition. Preserve the task thread through distinct operations, stage short complete actions with consequences, and recheck every later scene when feedback says “throughout.” Match each format to its spoken onset and use different physical structures, not PDF label swaps.

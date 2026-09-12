@@ -92,3 +92,9 @@ in the production record so the comparison is reproducible.
 
 Alex said they lacked enough beginning motion and a pattern interrupt. They were not
 approved winners. See the [first-second teardown and revised events](alex-setup-first-second-pattern-interrupt.md). The shared body remains the control.
+
+## Follow-up: X R3 was also rejected
+
+The continuous-converter revision remained too slow and visually uninteresting after 22 seconds.
+It is not an approved winner. See the [full-ending teardown and revised rule](alex-x144-ending-motion-rejection.md).
+Causal continuity must not become a long repeated composition.

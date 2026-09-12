@@ -1,0 +1,10 @@
+{
+  "prepared_voice_byte_identical": true,
+  "caption_data_byte_identical": true,
+  "mixed_audio_through_frame_616_byte_identical": true,
+  "opening_video_source": "original-master.mp4 frames 0\u2013616; final H264 re-encode",
+  "revised_frames": [
+    617,
+    1369
+  ]
+}
