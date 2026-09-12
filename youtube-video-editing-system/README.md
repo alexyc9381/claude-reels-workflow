@@ -7,7 +7,7 @@ The Remotion-based 16:9 system for No Code Alex long-form tutorials, explainers 
 1. [CURRENT-DIRECTION.md](CURRENT-DIRECTION.md) — authoritative current choices and conflict resolution.
 2. [LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) — find every decision, revision, source contract and QA record.
 3. [REVISION-DECISIONS.md](REVISION-DECISIONS.md) — full conversation learning ledger, including superseded requests.
-4. [Higgsfield Replacement v9](projects/higgsfield-replacement/REVISION-V9.md) — current full-video review revision.
+4. [Higgsfield Replacement v10](projects/higgsfield-replacement/REVISION-V10.md) — current full-video review revision: footage-first comparisons and source-led scenes.
 5. [REPRODUCE.md](projects/higgsfield-replacement/REPRODUCE.md) — current renderer/test commands and source prerequisites.
 
 **Remotion, not Supereditor. OBS is sole recorded narration; Sony is muted.** White glass, Manrope, original 2D Claude, meaningful action and protected screen legibility. The current film does **not** include the CGI pet. Old references requesting CGI or serif type are historical; the exact original CGI remains preserved for separately authorized use.

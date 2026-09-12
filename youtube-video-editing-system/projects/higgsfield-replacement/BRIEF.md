@@ -2,9 +2,9 @@
 
 ## Current revision — September 11, 2026
 
-**V9 full-film review, 7:41.53, Remotion.** See [REVISION-V9.md](REVISION-V9.md), [REPRODUCE.md](REPRODUCE.md) and [current direction](../../CURRENT-DIRECTION.md). OBS is sole recorded narration; 2D Claude remains, CGI companion is removed. New action-led graphics, targeted audio joins, shortened recap and guide teaser are implemented; export/QA state is tracked in the revision record. A comparison asset, cost/claim evidence, optional/new pickups and bonus identity remain publication inputs.
+**V10 full-film review, 7:41.53, Remotion.** See [REVISION-V10.md](REVISION-V10.md), [REPRODUCE.md](REPRODUCE.md) and [current direction](../../CURRENT-DIRECTION.md). OBS is sole recorded narration; 2D Claude remains, CGI companion is removed. Confirmed downloaded A is wired into enlarged comparisons; source-led scenes replace decorative props. The camera-direction bonus pack exists, and the camera-direction explanation needs no extra recording. V9 audio/EDL/chapters remain unchanged. Export/QA state is tracked in the revision record. Matched cost/settings evidence, public resource delivery, rights and final listening/creative approval remain publication checks.
 
-The paragraphs below are retained intake/v2/v3 history. Their old “current,” “next gates,” CGI and first-pass-only statements do not describe v9.
+The paragraphs below are retained intake/v2/v3 history. Their old “current,” “next gates,” CGI and first-pass-only statements do not describe v10.
 
 Status: v2 REVIEW EXPORT COMPLETE; v1 preserved. Restored OBS slides, right-side/recentered presenter, visible branded gradient, opening zoom, approved 2D explainer/definition cards, and original CGI companion. See ANIMATION-PASS-V2.md. Full decode and metadata checks passed. Four Sony clips aligned to OBS; timing remains 45 selected segments, 443.8 seconds and six chapters. See QA.md for verification scope and remaining publication gates.
 

@@ -1,6 +1,14 @@
 # Video QA record
 
-## v9 — completed full-film review export
+## v10 — completed full-film review export
+
+- Current delivery: `outputs/higgsfield-replacement-edit-v10.mp4`, 152,335,973 bytes, 13,846 frames, 1920×1080/30, 461.533333 seconds. Full fatal-error decode and all six embedded chapter checks pass. Source hash `99f052c5247d95e22cb0f84b4fd9978cc52e8fea4edc8794e1f1d3de2c3c9d09`.
+- Confirmed downloaded A plays in both enlarged comparisons; new source-led introduction/access scenes; no spinning film prop at the reveal; real camera-direction bonus preview in the ending. Final encoded opening/explainer/demo/ending frames inspected. Preserve separate creative and listening approval.
+- Full audio packets match V9 exactly; OBS remains sole recorded speech, new A and Sony are muted. AAC measurement −16.57 LUFS / −0.97 dBTP. No new words, soundtrack replacement or EDL change.
+- Evidence: [export](verification/export-v10.json), [exact middle-chunk reuse proof](verification/cache-v10.json), [source provenance](provenance/higgsfield-comparison.json), [revision map](REVISION-V10.md). Earlier V9 source/audio verification below remains relevant to the unchanged EDL.
+- The A clip and bonus are supplied, and camera direction is handled visually. Remaining gates: matched model/settings/cost evidence, public bonus delivery, rights/attribution and Alex's final review. Media/old exports remain intact outside Git.
+
+## v9 — historical completed full-film review export
 
 - Current delivery: `outputs/higgsfield-replacement-edit-v9.mp4`, 145,252,775 bytes, 13,846 H.264 frames, 1920×1080/30, 461.533333 seconds. Full fatal-error decode and six embedded chapter checks pass. Every picture chunk matches source hash `1856c4ba087e6e6d1295f9f1243b8f86a0f1654e939ed69575887e2d3aa6a2e5`.
 - Final 48 kHz stereo AAC: −16.57 LUFS, −0.97 dBTP estimated true peak, 4.9 LU range. Thirteen OBS-to-final waveform samples pass, maximum lag 0.3125 ms, aligned correlation 0.9431–0.9958. Sony remains muted.

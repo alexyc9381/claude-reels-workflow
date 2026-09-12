@@ -26,7 +26,7 @@ measured **creator style packs**. Clone it, `npm install`, and you're developing
 Every subsystem has its own `README.md` (same skeleton). The map with a task-router is [`CLAUDE.md`](CLAUDE.md);
 the full subsystem list is there. The highlights:
 
-- [`No Code Alex YouTube editing system`](youtube-video-editing-system/README.md) — Remotion long-form editing, [current direction](youtube-video-editing-system/CURRENT-DIRECTION.md), [indexed conversation learnings](youtube-video-editing-system/LEARNINGS-INDEX.md), and [Higgsfield v9](youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V9.md). Separate from the short-form pipeline below.
+- [`No Code Alex YouTube editing system`](youtube-video-editing-system/README.md) — Remotion long-form editing, [current direction](youtube-video-editing-system/CURRENT-DIRECTION.md), [indexed conversation learnings](youtube-video-editing-system/LEARNINGS-INDEX.md), and [Higgsfield v10](youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V10.md). Separate from the short-form pipeline below.
 
 - [`video/`](video/) — the Remotion project: every reel's `.tsx`, `Root.tsx` (registers them), word-timed
   caption JSONs, and the small visual assets (audio/video gitignored).

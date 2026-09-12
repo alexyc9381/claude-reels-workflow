@@ -1,0 +1,18 @@
+{
+  "role": "comparison A / left",
+  "source": "/Users/alexchensmacmini/Downloads/dreamina-2026-09-11-7528-a man in a torn jacket leaping across th....mp4",
+  "staged": "v9/higgsfield-comparison.mp4",
+  "bytes": 8506324,
+  "sha256": "2f9299b6af613604c5738bfcf22525175836f85f245525af0220957d77063721",
+  "width": 1280,
+  "height": 720,
+  "videoSeconds": 4.016667,
+  "containerSeconds": 4.063991,
+  "videoFrames": 97,
+  "containerMetadataSource": "dreamina",
+  "userConfirmation": "Alex explicitly confirmed this exact filename as the comparison clip downloaded through Higgsfield on 2026-09-11.",
+  "placement": ["Opening A/B question", "Closing left/right comparison and identity reveal"],
+  "playback": "First 4 seconds at normal speed, 120-frame presentation loop at 30fps; same loop duration as B. Embedded source audio muted. No color grading.",
+  "framing": "938x742 side-by-side panes. A bounded horizontal object-position follows the subject. Original source preserved uncropped.",
+  "limitations": "User confirmation establishes intended identity, not independent verification of generating service, matched model/settings, ownership or price. B remains the existing real later recorded result; the 10-cent cost match is not independently proven."
+}

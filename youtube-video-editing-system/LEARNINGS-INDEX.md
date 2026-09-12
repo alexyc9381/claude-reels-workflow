@@ -1,11 +1,13 @@
 # YouTube editing — indexed learning library
 
+Latest: [V10 footage-first comparisons and source-led scenes](projects/higgsfield-replacement/REVISION-V10.md), [confirmed Higgsfield comparison source](projects/higgsfield-replacement/provenance/higgsfield-comparison.json), [Camera-Direction Prompt Pack](resources/camera-direction-prompt-pack.md). These refinements supersede the earlier placeholder and unspecified-bonus status.
+
 This is the handoff index for the complete September 10–11 system-building and Higgsfield revision conversation. Start with current rules, then consult the dated evidence. Historical requests do not silently override later decisions.
 
 ## Current production contract
 
 - [Current direction](CURRENT-DIRECTION.md): engine, source audio, framing, typography, white glass, original 2D cast, action hierarchy, unique scenes, sound, retention, privacy and full delivery.
-- [Conversation decision ledger](REVISION-DECISIONS.md): all request clusters, timestamped issues, corrections and precedence, from initial repository discovery through v9.
+- [Conversation decision ledger](REVISION-DECISIONS.md): all request clusters, timestamped issues, corrections and precedence, from initial repository discovery through v10.
 - [Approval versus review](APPROVED-ANIMATION-SYSTEM.md): v11 short-study approval and later full-film overrides.
 - [Canonical memory](../memory/youtube-video-editing-system.md): compact entry for future tasks; indexed from memory/MEMORY.md and the root repository map.
 

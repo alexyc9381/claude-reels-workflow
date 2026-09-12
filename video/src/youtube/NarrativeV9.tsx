@@ -1,4 +1,5 @@
 import React from 'react';
+import {BonusPackV10} from './StoryScenesV10';
 import {AbsoluteFill,useCurrentFrame,useVideoConfig} from 'remotion';
 import {easeInOut as e,easeOut} from './glass-motion';
 import {Actor,World,Glass,Label,Logo,SkillFile,Key,CameraIcon,Lens,C,clamp,lerp,visible,typeOn} from './YouTubeV8Primitives';
@@ -83,9 +84,5 @@ export const CredentialSequence:React.FC<{duration:number}>=({duration})=>{
 };
 
 export const ComingUp:React.FC<{duration:number}>=({duration})=>{
- const t=clock(),p=easeOut(t,0,.35),deliver=e(t,.55,1.35);
- return <AbsoluteFill style={{opacity:visible(t,duration)}}><Glass x={113} y={795} w={1002} h={196} t={t} frost={.7} style={{transform:`translateY(${(1-p)*55}px)`}}>
-  <Actor t={t} x={17+18*deliver} y={15} size={165} role="courier" reach={deliver} lift={.65} contact={1.9}/><At x={144+40*deliver} y={62-17*Math.sin(deliver*Math.PI)}><SkillFile t={t} size={81}/></At>
-  <Label x={293} y={26} size={29} color={C.orange}>COMING UP</Label><Label x={293} y={78} size={39}>Your free guide + skill file</Label><Label x={293} y={135} size={24} color={C.teal}>The exact next step, after the reveal</Label>
- </Glass></AbsoluteFill>;
+ const t=clock();return <AbsoluteFill style={{opacity:visible(t,duration)}}><BonusPackV10 t={t} compact/></AbsoluteFill>;
 };

@@ -121,7 +121,8 @@ export const v9Cues:Cue[]=[
 export const chapterTitles=['Why use the models directly?','Connect fal.ai + Claude','Make your first video','Review the results','The reveal + next step'];
 const Presenter:React.FC<{row:ReturnType<typeof roughTimeline>[number];intro:boolean}>=({row,intro})=>{
  const t=useTime(),p=row.id==='s001'?easeInOut(t,0,.38):1;
- const b={x:lerp(28,intro?740:1435,p),y:lerp(16,intro?737:748,p),w:lerp(1864,intro?440:400,p),h:lerp(1048,intro?300:281,p)};
+ const comparison=intro||['s038','s042','s043'].includes(row.id);
+ const b={x:lerp(28,comparison?780:1435,p),y:lerp(16,comparison?789:748,p),w:lerp(1864,comparison?360:400,p),h:lerp(1048,comparison?256:281,p)};
  const cropW=lerp(intro?1340:1480,1300,p),cropX=lerp(intro?165:110,150,p),cropY=lerp(25,0,p),s=b.w/cropW;
  return <div style={{position:'absolute',left:b.x,top:b.y,width:b.w,height:b.h,overflow:'hidden',borderRadius:lerp(24,29,p),border:'3px solid #FFF4DF',boxShadow:'0 14px 30px #50372445',transform:`perspective(1800px) rotate(${-7*Math.sin(p*Math.PI)}deg)`}}><CameraPlate source={row.cameraPlateSource??'v7/presenter-background.mp4'} start={row.cameraPlateStart??row.from} length={row.cameraPlateDuration} style={{position:'absolute',width:1920*s,height:1080*s,left:-cropX*s,top:-cropY*s,transform:`scale(${intro?openingScale(t)*(1-p)+p:1})`,transformOrigin:'50% 42%'}}/></div>;
 };
@@ -139,7 +140,7 @@ export const YouTubePolish:React.FC<{manifest:M}>=({manifest:m})=>{
   <Sequence from={find('s038').from+Math.round(5.1*fps)} durationInFrames={Math.round(4.5*fps)}><ComingUp duration={4.5}/></Sequence>
   <Sequence from={laterFrom} durationInFrames={laterTo-laterFrom}><LaterCue duration={(laterTo-laterFrom)/fps} timestamp={stamp}/></Sequence>
   {active&&row&&<Sequence from={row.from} durationInFrames={row.duration}><Presenter row={row} intro={['s001','s002'].includes(row.id)}/></Sequence>}
-  {roughChapters(m).slice(1).map((c,i)=><Sequence key={c.frame} from={c.frame} durationInFrames={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)}><Chapter duration={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)/fps} step={i+1} title={chapterTitles[i]}/></Sequence>)}
+  {roughChapters(m).slice(1).map((c,i)=>i===4?null:<Sequence key={c.frame} from={c.frame} durationInFrames={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)}><Chapter duration={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)/fps} step={i+1} title={chapterTitles[i]}/></Sequence>)}
  </>;
 };
 

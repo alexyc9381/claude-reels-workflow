@@ -1,0 +1,32 @@
+{
+  "sourceHash": "99f052c5247d95e22cb0f84b4fd9978cc52e8fea4edc8794e1f1d3de2c3c9d09",
+  "priorSourceHash": "1856c4ba087e6e6d1295f9f1243b8f86a0f1654e939ed69575887e2d3aa6a2e5",
+  "baselineCommit": "5f2e5ea91290dd3ddfb2ec3223bc1952bc6dc552",
+  "otherInputsIdentical": true,
+  "affected": [
+    {
+      "from": 0,
+      "to": 2699
+    },
+    {
+      "from": 13016,
+      "to": 13845
+    }
+  ],
+  "inherited": [
+    {
+      "from": 2700,
+      "to": 5399
+    },
+    {
+      "from": 5400,
+      "to": 8099
+    },
+    {
+      "from": 8100,
+      "to": 10799
+    }
+  ],
+  "audioContract": "8c7fa017f9fa5a12bc94f09dbf1206a88c1a0c1b3258f8d381270128820187bc",
+  "method": "Exact baseline asset/code hash, unchanged EDL, unchanged middle scene bodies and dependencies, changed presenter/bonus/chapter branches confined to opening or closing."
+}

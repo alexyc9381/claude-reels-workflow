@@ -14,11 +14,13 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 - Start from what Alex actually said. Preserve useful teaching, context, caveats, natural phrase tails and bridges. Do not manufacture a punchier claim by joining unrelated takes.
 - Remove retakes, spoken editor markers, accidental dead air and explicitly requested repetition. A whole-file transcript saying no “cut” is not proof; inspect short original-source windows and final joins.
 - Keep the opening comparison large and immediate; first five seconds especially active, first fifteen brisk. Action and curiosity take priority over labels and generic scene titles. Never reveal the answer before the question earns it.
+- Latest comparison refinement: **less surrounding animation, more actual video**. Enlarge both A/B panes, keep the presenter secondary, and remove decorative film reels, lenses, pedestals and cast choreography. Let the footage supply motion. Use the same confirmed A/B identities in opening and reveal; keep a newly supplied asset's source metadata and user confirmation in provenance.
 - A later teaser uses **playing** result footage, moderate blur, readable black type on white glass and the original reaction. No “Wait until you see this” badge or teaser progress bar.
 - A roadmap should be an actual traversable route with meaningful stops. Chapters are complete tasks, shown through PART cards and final-timeline scrub timestamps, not arbitrary durations.
 - Explain each new concept with a different beginning → action → payoff. Remove a visual that does not support the sentence. Do not fill every moment simply to satisfy a motion count.
 - A retention audit is editorial judgment, not measured audience retention. Keep unresolved proof/claim gaps and proposed pickups separate from animation polish. Do not erase useful content to hit a shorter runtime.
-- Late tutorial completion is a possible exit point: tease the real next useful resource before the reveal/CTA. Do not promise an unspecified bonus. The current film can mention its free guide and existing skill file; a distinct bonus awaits its actual identity.
+- Late tutorial completion is a possible exit point: tease the real next useful resource before the reveal/CTA. Do not promise an unspecified bonus. Show an identified resource that actually exists, and confirm its delivery link before publishing.
+- V10 resolves that bonus: the [Camera-Direction Prompt Pack](resources/camera-direction-prompt-pack.md) now exists, with six shot recipes and a reusable brief. Link the actual download in the eventual description. A camera-direction explanation can be conveyed visually; do not require a new VO recording when the user accepts an on-screen explanation.
 
 ## Framing and readability
 
@@ -33,6 +35,7 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 ## Art direction and motion
 
 - Mature, polished, cinematic, professional—not childlike toy factories. More interesting means stronger concepts, recognizable objects, purposeful mechanisms and detailed scenes, not more arbitrary rectangles, circles or checkmarks.
+- **Abstract is allowed; arbitrary is not.** Trace each scene to the exact spoken clause. “One skill,” “same prompt/models,” and “saved to your computer” need distinct causal actions, not one generic mechanism running through all three. A spinning film icon or unrelated rack/lens cluster is not a scene. Preserve this distinction for future videos, not only this revision.
 - **Manrope sans-serif** for authored long-form graphics. No serif fallback, Fraunces display headings, unexplained schematic labels, persistent “No Code Alex / How it works” headers or slogan subheaders.
 - **White translucent optical glass only.** Warm orange rim, reflected highlights, readable pale fill, restrained refraction/blur, light/shadow separation. No black glass. Black/dark type on pale surfaces; examine the actual dark/light footage underneath.
 - Orange/cream lead. Teal, blue, mint and gold support hierarchy. Preserve the original orange sprite identity. No competing abstract slab/ribbon; an oval stage is acceptable. Populated sets should support the workflow, not obstruct text.
@@ -70,4 +73,4 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Navigation
 
-[LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) · [REVISION-DECISIONS.md](REVISION-DECISIONS.md) · [Higgsfield v9](projects/higgsfield-replacement/REVISION-V9.md) · [Historical approval boundaries](APPROVED-ANIMATION-SYSTEM.md)
+[LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) · [REVISION-DECISIONS.md](REVISION-DECISIONS.md) · [Higgsfield v10](projects/higgsfield-replacement/REVISION-V10.md) · [Historical approval boundaries](APPROVED-ANIMATION-SYSTEM.md)

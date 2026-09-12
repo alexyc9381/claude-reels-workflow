@@ -4,6 +4,8 @@ September 10–11, 2026. This index preserves the learning trajectory from the f
 
 ## System discovery and reusable transfers
 
+Latest follow-up (V10): Alex supplied and explicitly confirmed the newest Dreamina-named download as comparison A from Higgsfield. Replaced opening/reveal placeholders, enlarged footage, reduced comparison props, removed spinning film reels, and rebuilt the introduction around the spoken skill → prompt/model → saved-file sequence. The requested bonus is now an actual six-recipe camera-direction prompt pack. The camera-direction addition is visual, not fabricated speech. Future direction: abstract scenes must remain causally tied to narration; a collection of animated shapes is not sufficient. See [V10](projects/higgsfield-replacement/REVISION-V10.md).
+
 | Request / discovery | Decision and durable lesson | Evidence / current destination |
 |---|---|---|
 | Find long-form guidelines in No Code Alex, not Matchtern | Establish a separate No Code Alex YouTube subsystem; archived Matchtern style remains historical | README; memory/archive/matchtern-longform-video-style.md |
