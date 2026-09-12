@@ -16,15 +16,18 @@ export const SHOTS=[
  {at:31.05,name:'gossip',big:'GPT reaches for',hot:'gossip',component:S.Gossip},
  {at:33.8,name:'dark',big:'Gemini goes',hot:'dark',component:S.Dark},
  {at:37.14,name:'paper',big:'Turn findings into',hot:'rules',component:S.ResearchUI},
+ {at:41,name:'bind',big:'Keep the rule.',hot:'Every time.',component:S.Bind},
  {at:42.07,name:'skill',big:'Make it a',hot:'permanent skill',component:S.SkillUI},
+ {at:44.3,name:'library',big:'Save it once.',hot:'Human Scope',component:S.Library},
  {at:47.06,name:'command',big:'One command.',hot:'Every writing task.',component:S.Command},
+ {at:48.57,name:'activate',big:'Load the skill.',hot:'Start writing.',component:S.Activate},
  {at:50.07,name:'transform',big:'Let the story',hot:'breathe',component:S.Transform},
  {at:53.07,name:'cta',big:'Get the paper',hot:'+ Human Scope',component:S.CTA},
 ];
-export const TOTAL=1710;
+export const TOTAL=1705;
 export const Reel:React.FC=()=>{
  const f=useCurrentFrame();const i=SHOTS.reduce((a,s,j)=>f>=Math.round(s.at*30)?j:a,0);const shot=SHOTS[i];const local=f-Math.round(shot.at*30);const Scene=shot.component;
- const moves:Record<string,[number,number,number,string]>={paper:[35,110,1.19,'60% 51%'],cta:[0,116,1.07,'60% 56%'],dark:[0,99,1.12,'67% 51%'],tension:[10,65,1.17,'52% 46%'],clean:[36,54,1.15,'63% 45%'],detector:[5,126,1.075,'52% 46%'],tokens:[16,125,1.20,'55% 48%'],explain:[28,45,1.12,'61% 46%'],themes:[10,130,1.20,'64% 46%'],skill:[45,98,1.16,'64% 43%'],command:[18,66,1.16,'58% 44%'],gossip:[57,23,1.13,'75% 50%'],transform:[35,42,1.11,'64% 48%']};
+ const moves:Record<string,[number,number,number,string]>={skill:[0,65,1.09,'60% 55%'],transform:[0,88,1.10,'50% 55%'],cta:[0,111,1.08,'55% 53%'],paper:[35,110,1.19,'60% 51%'],dark:[0,99,1.12,'67% 51%'],tension:[10,65,1.17,'52% 46%'],clean:[36,54,1.15,'63% 45%'],detector:[5,126,1.075,'52% 46%'],tokens:[16,125,1.20,'55% 48%'],explain:[28,45,1.12,'61% 46%'],themes:[10,130,1.20,'64% 46%'],gossip:[57,23,1.13,'75% 50%'],};
  const move=moves[shot.name]; const scale=shot.name==='tokens'?1+Math.min(1,Math.max(0,(local-10)/147))*.20:move?S.e(local,move[0],move[1],1,move[2]):1;
  let big=shot.big,hot=shot.hot;
  if(i===0&&local>=53){big='The shape of';hot='human writing';}

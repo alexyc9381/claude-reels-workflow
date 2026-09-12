@@ -196,43 +196,85 @@ export const ResearchUI=({f}:{f:number})=>{
  <Hero f={f} x={81+e(f,0,36,0,39)+e(f,95,39,0,34)} y={506+press*14-react*22} size={235} turn={1} mood={f<76?'read':f<97?'shock':'happy'} tilt={press*12-react*9} sy={1-press*.07+react*.04}/>
  </Set>;
 };
-export const SkillUI=({f}:{f:number})=>{
- const saved=e(f,96,17);return <Set f={f} world="row"><Desk/>
-<UI title="Create a reusable writing skill" f={f} enter={500}><P x={29} y={85} w={236} h={354} style={{background:'#e8e5d7',borderRadius:13}}><Label x={23} y={22} size={23} color="#5b645c">TOOLS</Label><P x={10} y={81} w={217} h={58} style={{background:f>16?'#c7e2cf':'#f4f0e7',border:'2px solid #839c86',borderRadius:9}}><Label x={15} y={17} size={23} color={C.ink}>Skill Creator</Label></P><Label x={24} y={178} size={21} color="#7b7e71">Read findings</Label><Label x={24} y={220} size={21} color="#7b7e71">Write instructions</Label><Label x={24} y={263} size={21} color="#47775b" style={{opacity:saved}}>✓ Save skill</Label></P>
-<P x={305+e(f,35,29,380,0)-e(f,120,27,0,52)} y={89+e(f,35,29,80,0)+e(f,120,27,0,26)} w={495} h={358} style={{background:'#fffdf5',border:'3px solid #b8b9a5',borderRadius:15,opacity:e(f,33,12),transform:`scale(${e(f,120,27,1,.87)})`,transformOrigin:'50% 100%',boxShadow:'9px 10px 0 #2647331a'}}><Label x={26} y={20} size={20} color="#607365">SKILL.md</Label><Label x={26} y={64} size={42} color={C.ink}>{f>84?'Human Scope':'Writing rules'}</Label>{['Preserve narrative tension','Show meaning through action','Review over-explanation'].map((s,i)=><Label key={s} x={27+e(f,48+i*11,18,140,0)} y={139+i*48} size={23} color="#5b6e61" style={{opacity:e(f,48+i*11,10)}}>• {s}</Label>)}<P x={239} y={283} w={191} h={44} style={{opacity:saved,background:'#356e52',borderRadius:8}}><Label x={19} y={10} size={21}>✓ SKILL SAVED</Label></P></P>
-<Label x={370} y={448} size={22} color="#3b6a54" style={{opacity:e(f,125,15)}}>ADDED TO YOUR SKILL LIBRARY</Label><P x={166+e(f,4,15,140,0)+e(f,107,14,0,485)} y={160+e(f,107,14,0,240)} style={{transform:'rotate(-20deg)',fontSize:37,color:C.ink}}>➤</P></UI>
-<Hero f={f} x={115} y={527} size={217} turn={1} mood={f>99?'happy':'read'} tilt={(e(f,100,8)-e(f,115,10))*-7}/>
-</Set>;
+
+const SkillFile=({x,y,f,w=280,rot=0}:{x:number,y:number,f:number,w?:number,rot?:number})=><P x={x} y={y} w={w} h={w*1.18} style={{background:'#e4edce',border:'6px solid #77a18a',borderRadius:15,boxShadow:'10px 15px 0 #091c2a66',transform:`rotate(${rot}deg)`}}><Mark file="claude.svg" x={w*.34} y={23} size={w*.23}/><Label x={25} y={w*.46} size={w*.14} color={C.ink}>Human<br/>Scope</Label><Label x={25} y={w*.93} size={22} color="#48664e">SKILL.md</Label></P>;
+export const Bind=({f}:{f:number})=>{
+ const squeeze=e(f,2,12), release=e(f,17,14), lean=e(f,0,8)-e(f,15,12);
+ return <Set f={f} world="backlot"><Desk/>
+ <Label x={116} y={153} size={28} color={C.gold}>KEEP THE RULE. EVERY TIME.</Label>
+ <Svg><path d="M270 240V614H897V240" fill="none" stroke="#78634f" strokeWidth="20"/><path d="M240 620H930" stroke="#ba9460" strokeWidth="22"/></Svg>
+ {[0,1,2].map(i=><P key={i} x={299+release*150} y={285+i*(92-squeeze*65)-release*63} w={490} h={88} style={{background:[C.cream,C.gold,C.mint][i],border:'5px solid #586555',borderRadius:10,transform:`rotate(${(1-squeeze)*(i-1)*7-release*8}deg)`,boxShadow:'0 12px 0 #101d2555'}}><Label x={20} y={24} size={28} color={C.ink}>{['TENSION','SUBTEXT','LOOSE ENDS'][i]}</Label></P>)}
+ <Svg><path d={`M${287+release*150} ${246+squeeze*62-release*63}h525v${280-squeeze*191}`} fill="none" stroke="#c07753" strokeWidth="20" strokeLinecap="round"/></Svg>
+ <Hero f={f} x={93+e(f,0,15,0,82)} y={468+lean*24} size={272} turn={1} tilt={lean*17} sy={1-lean*.08} mood={f>17?'happy':'stern'}/>
+ </Set>;
 };
-export const Command=({f}:{f:number})=><Set f={f} world="kerbside"><UI title="Claude Code · /human-scope" f={f} enter={-370}>
-<Label x={58} y={100} size={30} color={C.ink}>What are we writing?</Label>
-<P x={49} y={170} w={734} h={226} style={{background:'#fffef9',border:'3px solid #73958a',borderRadius:20,boxShadow:'0 7px 0 #71938330'}}>
-<Label x={25} y={26} size={44} color="#396c57">{'/human-scope'.slice(0,Math.round(e(f,0,29,1,12)))}<span style={{opacity:f<37?1:0}}>▌</span></Label>
-<Label x={27} y={102} size={27} color={C.ink} style={{opacity:e(f,37,12)}}>Write the opening of my story.</Label>
-<P x={660} y={151-e(f,75,6,0,4)} w={49} h={49} style={{background:'#36684f',borderRadius:14}}><Label x={13} y={8} size={30}>↑</Label></P></P>
-<Label x={74} y={427} size={25} color="#36684f" style={{opacity:e(f,66,10)}}>✓ Human Scope is ready</Label></UI>
-<Hero f={f} x={110} y={522} size={224} turn={1} mood={f>62?'happy':undefined} tilt={(e(f,52,8)-e(f,69,12))*8}/>
-</Set>;
-export const Transform=({f}:{f:number})=><Set f={f} world="plaza">
-<Label x={94} y={154} size={36} color={C.gold}>MAKE ROOM FOR THE STORY.</Label><Route f={f} color={C.mint}/>
-<Svg><rect x={484+e(f,10,18,0,285)} y={380+e(f,10,18,0,210)} width="70" height="45" rx="8" fill="#a9937c" transform={`rotate(${e(f,10,18,0,65)} 520 405)`} opacity={1-e(f,27,13)}/></Svg>
-{[0,1,2].map(i=><P key={i} x={260+e(f,13+i*12,49,0,[60,335,485][i])} y={350+e(f,13+i*12,49,0,[122,-151,160][i])} w={132} h={103} style={{background:[C.cream,C.gold,C.mint][i],border:'5px solid #31565c',borderRadius:8,transform:`rotate(${e(f,13+i*12,49,0,[-7,5,9][i])}deg)`,opacity:e(f,13+i*12,6)}}><Label x={13} y={20} size={22} color={C.ink}>{['Unsaid','Rising stakes','Still open'][i]}</Label><P x={13} y={69} w={80} h={5} style={{background:'#6d8c7e'}}/></P>)}<Label x={515} y={216} size={25} color={C.gold} style={{opacity:e(f,28,15)}}>TENSION</Label><Label x={341} y={617} size={25} color={C.gold} style={{opacity:e(f,48,12)}}>SUBTEXT</Label><Label x={726} y={642} size={24} color={C.mint} style={{opacity:e(f,65,12)}}>LOOSE ENDS</Label>
-<Hero f={f} x={81+e(f,9,25,0,42)} y={501} size={237} mood={f>36?'happy':'stern'} turn={1} tilt={(e(f,5,9)-e(f,22,14))*10}/>
-</Set>;
+export const SkillUI=({f}:{f:number})=>{
+ const load=e(f,0,20), strike=e(f,26,9)-e(f,38,13), out=e(f,45,20);
+ const recoil=(e(f,33,3)-e(f,39,8));
+ return <Set f={f} world="depot"><Desk/>
+ <Label x={117} y={148} size={31} color={C.gold}>SKILL CREATOR</Label>
+ <Svg><path d="M388 199H823V239H788V556H826V600H383V556H419V239H388Z" fill="#486774" stroke="#90a5a2" strokeWidth="9"/><path d="M382 606H846" stroke="#172736" strokeWidth="27"/><path d="M595 190V286" stroke="#aab8a8" strokeWidth="30"/></Svg>
+ {[0,1,2].map(i=><P key={i} x={120+load*329+out*260} y={346+i*27-out*91} w={293} h={124} style={{background:[C.cream,C.gold,C.mint][i],border:'5px solid #547263',borderRadius:8,transform:`rotate(${(1-load)*(i-1)*10+out*8}deg)`,opacity:f<45?1:0}}><Label x={24} y={29} size={27} color={C.ink}>{['TENSION','SUBTEXT','LOOSE ENDS'][i]}</Label></P>)}
+ <P x={442+out*150} y={354-out*102} style={{opacity:f>=45?1:0,transform:`scale(${.68+out*.32})`,transformOrigin:'0 0'}}><SkillFile x={0} y={0} w={280} f={f} rot={out*7}/></P>
+ <P x={439} y={260+strike*121} w={320} h={85} style={{background:'#ba7853',border:'8px solid #e1b785',borderRadius:13,boxShadow:'0 13px 0 #17323b'}}><Label x={30} y={22} size={29}>BUILD THE SKILL</Label></P>
+ <Svg><path d="M320 450H395V397" fill="none" stroke="#d5a958" strokeWidth="18"/><g transform={`translate(327 451) rotate(${load*95+strike*38})`}><circle r="59" fill="#263e48" stroke="#9cb49f" strokeWidth="9"/><path d="M-48 0H48M0-48V48" stroke="#789886" strokeWidth="9"/><circle cx="38" cy="-36" r="16" fill={C.gold}/></g></Svg>
+ <Hero f={f} x={76+load*20-out*16} y={447+strike*24-recoil*14} size={270} turn={1} mood={out>.2?'happy':'stern'} tilt={load*8+strike*13-out*12} sy={1-strike*.10}/>
+ </Set>;
+};
+export const Library=({f}:{f:number})=>{
+ const open=e(f,0,18), seat=e(f,17,22), close=e(f,42,18), name=e(f,56,19);
+ return <Set f={f} world="row"><Desk/>
+ <Label x={111} y={151} size={29} color={C.gold}>SAVE IT ONCE.</Label>
+ <Svg><path d="M370 209H879V628H370Z" fill="#566c60" stroke="#b4bda0" strokeWidth="10"/><path d="M403 243H845V553H403Z" fill="#142a2d"/><path d="M394 578H854" stroke="#273e39" strokeWidth="18"/></Svg>
+ <P x={198+seat*273} y={222-seat*15+close*204} style={{transform:`scale(${1-close*.43}) rotate(${-12+seat*12}deg)`,transformOrigin:'50% 60%',opacity:f<61?1:0}}><SkillFile x={0} y={0} w={273} f={f}/></P>
+ <P x={333-open*42+close*42} y={398+open*95-close*95} w={517} h={188} style={{background:'#71907c',border:'8px solid #b2c3a3',borderRadius:12,boxShadow:'0 20px 0 #102526'}}><P x={189} y={60} w={145} h={32} style={{background:'#1e3c37',border:'5px solid #d3bb7b',borderRadius:8}}/></P>
+ <P x={400-name*43} y={260-name*20} w={444+name*57} h={155} style={{background:C.gold,border:'7px solid #c4934e',borderRadius:14,opacity:e(f,57,8),transform:`rotate(${(e(f,57,5)-e(f,66,8))*-5}deg)`,boxShadow:'0 13px 0 #173128'}}><Label x={26} y={19} size={21} color="#745127">YOUR PERMANENT SKILL</Label><Label x={25} y={62} size={47} color={C.ink}>Human Scope</Label></P>
+ <Hero f={f} x={94+seat*33+close*50-name*35} y={464+(e(f,39,8)-e(f,54,10))*22} size={270} turn={1} mood={f>59?'happy':f>39?'stern':'read'} tilt={(e(f,36,9)-e(f,52,11))*15-name*8}/>
+ </Set>;
+};
+export const Command=({f}:{f:number})=>{
+ const key=e(f,1,15), hit=e(f,31,6)-e(f,39,7), send=e(f,35,10);
+ return <Set f={f} world="kerbside"><Desk/>
+ <Label x={116} y={154} size={28} color={C.mint}>CLAUDE CODE</Label>
+ <P x={272-key*22+send*67} y={269+hit*23-send*100} w={582} h={238} style={{background:'#f4ead6',border:'9px solid #b09a73',borderRadius:24,boxShadow:`0 ${24-hit*18}px 0 #695138`,transform:`rotate(${-5+key*5+send*7}deg) scale(${1-send*.12})`}}><Label x={34} y={42} size={49} color="#35664d">{'/human-scope'.slice(0,Math.round(e(f,0,18,1,12)))}</Label><Label x={35} y={136} size={29} color={C.ink}>Write my story.</Label><Label x={455} y={126} size={49} color="#7c663b">↵</Label></P>
+ <Hero f={f} x={98+e(f,12,23,0,104)} y={474-(e(f,17,7)-e(f,28,7))*48+hit*23} size={281} turn={1} mood={f>32?'happy':'stern'} tilt={(e(f,13,8)-e(f,32,9))*-13+hit*12} sy={1-hit*.12}/>
+ <Svg><path d="M349 566H786" stroke={C.mint} strokeWidth="11" pathLength="1" strokeDasharray="1" strokeDashoffset={1-e(f,35,10)}/><path d="M766 546L790 566 766 586" fill="none" stroke={C.mint} strokeWidth="9" opacity={send}/></Svg>
+ </Set>;
+};
+export const Activate=({f}:{f:number})=>{
+ const insert=e(f,0,18), gate=e(f,19,15), feed=e(f,24,21);
+ return <Set f={f} world="depot"><Desk/>
+ <Label x={113} y={151} size={29} color={C.gold}>SKILL → EVERY WRITING TASK</Label>
+ <Svg><path d="M407 225H584V628H407Z" fill="#3c6973" stroke="#83afa6" strokeWidth="9"/><path d="M453 251V486H540V251" fill="#112c33"/><path d={`M620 ${290-gate*115}V${539-gate*115}`} stroke="#a1aa8d" strokeWidth="27"/><path d="M577 480H916V562H577Z" fill="#51746f" stroke="#97a98d" strokeWidth="6"/>{[0,1,2,3].map(i=><g key={i} transform={`translate(${615+i*85} 531) rotate(${feed*280})`}><circle r="19" fill="#173634" stroke="#b7c5a1" strokeWidth="5"/><path d="M-11 0H11" stroke="#bdab75" strokeWidth="5"/></g>)}</Svg>
+ <P x={110+insert*331} y={243-insert*63} style={{transform:`scale(${1-insert*.6}) rotate(${-10+insert*10}deg)`,transformOrigin:'0 0',opacity:1-e(f,24,9)}}><SkillFile x={0} y={0} w={283} f={f}/></P>
+ {[0,1,2].map(i=><Paper key={i} x={640+feed*170-i*23} y={286+i*26-feed*39} w={160} rot={feed*(i-1)*12}/>)}
+ <P x={438} y={317} w={118} h={76} style={{background:f>18?C.mint:'#1c3d40',borderRadius:12}}><Label x={19} y={19} size={31} color={C.ink}>{f>18?'ON':'...'}</Label></P>
+ <Hero f={f} x={88+insert*77-gate*37} y={474+(e(f,10,8)-e(f,24,10))*17} size={268} turn={1} mood={f>20?'happy':'stern'} tilt={insert*13-gate*20}/>
+ </Set>;
+};
+export const Transform=({f}:{f:number})=>{
+ const spread=e(f,0,23), pull=e(f,23,21), branch=e(f,45,38);
+ return <Set f={f} world="plaza"><Desk/>
+ <Label x={119} y={151} size={30} color={C.gold}>LET THE STORY BREATHE.</Label>
+ <Svg><path d={`M520 594L${491-spread*260} ${577-spread*23}V${272-spread*53}Q370 231 520 271Z`} fill="#f1e5c9" stroke="#b8a680" strokeWidth="8"/><path d={`M520 594L${548+spread*325} ${577-spread*23}V${272-spread*53}Q690 231 520 271Z`} fill="#fff1d4" stroke="#b8a680" strokeWidth="8"/><path d="M520 276V589" stroke="#b49b72" strokeWidth="8"/>
+ <path d={`M257 349H768`} stroke="#b87255" strokeWidth="22" opacity={1-pull}/><path d={`M257 401H768`} stroke="#b87255" strokeWidth="22" opacity={1-pull}/>
+ <path d={`M267 480H386L470 ${480-branch*131}L553 ${480-branch*53}L661 ${480-branch*185}L801 ${480-branch*115}`} fill="none" stroke="#3e7d65" strokeWidth="13" strokeLinejoin="round" pathLength="1" strokeDasharray="1" strokeDashoffset={1-e(f,24,43)}/>
+ <path d={`M553 ${480-branch*53}V540H689M386 480V${480-branch*152}H289`} fill="none" stroke="#b99545" strokeWidth="10" strokeDasharray="11 7" opacity={branch}/></Svg>
+ <P x={286+pull*540} y={320+pull*182} w={430} h={119} style={{background:'#b86c50',border:'7px solid #dcac80',borderRadius:12,opacity:1-e(f,39,11),transform:`rotate(${pull*31}deg)`}}><Label x={24} y={35} size={29}>EXPLAIN EVERYTHING</Label></P>
+ {f>=44&&<P x={520} y={265} w={349} h={315} style={{transform:`perspective(1100px) rotateY(${e(f,44,38,-165,0)}deg)`,transformOrigin:'0 50%',backfaceVisibility:'visible',background:'#f5e7c6',border:'5px solid #b8a680',clipPath:'polygon(0 0,100% 0,100% 94%,0 100%)'}}><svg viewBox="0 0 349 315"><path d="M17 208L94 155 164 201 236 96 318 136M164 201V267H257" fill="none" stroke="#39785f" strokeWidth="12" strokeLinejoin="round"/>{[45,74].map(y=><path key={y} d={`M25 ${y}H296`} stroke="#b6a787" strokeWidth="6"/>)}</svg></P>}
+ <Hero f={f} x={84+pull*115-branch*59} y={476+(e(f,20,7)-e(f,33,11))*25-(e(f,57,7)-e(f,68,11))*28} size={270} turn={1} mood={f>44?'happy':'stern'} tilt={pull*17-branch*24}/>
+ <Label x={443} y={620} size={28} color={C.mint} style={{opacity:e(f,58,12),transform:`translateX(${e(f,58,23,45,0)}px)`}}>Tension. Subtext. Possibility.</Label>
+ </Set>;
+};
 export const CTA=({f}:{f:number})=>{
- // Keep the action readable from the first frame; assemble its two promised assets.
- const paper=e(f,0,35), skill=e(f,46,25), deliver=e(f,83,24);
- const hit=e(f,98,4)-e(f,104,10), press=e(f,88,5)-e(f,97,9);
+ const paper=e(f,0,25), skill=e(f,34,28), carry=e(f,64,23), stamp=e(f,96,5)-e(f,104,8);
  return <Set f={f} world="marquee"><Desk/>
- <P x={363-deliver*22} y={250-deliver*25} w={464} h={313} style={{transform:`scale(${1+deliver*.09})`,transformOrigin:'50% 90%'}}>
- <Svg><path d="M70 280V162Q70 148 84 148H352L400 197H916Q940 197 940 220V630H70Z" fill="#405966" stroke="#8ca19b" strokeWidth="8"/></Svg>
- <P x={-163+paper*151} y={-98+paper*29+deliver*-10} w={246} h={319} style={{transform:`rotate(${-13+paper*7-deliver*3}deg)`,boxShadow:'9px 13px 0 #07172555'}}><Pic file="paper.png" x={0} y={0} w={246} h={319}/></P>
- <P x={376-skill*157} y={-97+skill*53-deliver*4} w={228} h={279} style={{background:'#d6e7be',border:'5px solid #719a79',borderRadius:12,transform:`rotate(${-15+skill*22}deg) scale(${.92+skill*.08})`,opacity:e(f,37,10),boxShadow:'8px 11px 0 #07172566'}}><Mark file="claude.svg" x={76} y={21} size={55}/><Label x={22} y={114} size={35} color={C.ink}>Human<br/>Scope</Label><Label x={24} y={214} size={22} color="#45694e">SKILL.md</Label></P>
- <P x={-20} y={180+hit*5} w={483} h={143} style={{background:'#477681',border:'6px solid #93b5ac',borderRadius:'9px 9px 22px 22px',boxShadow:'0 15px 0 #0c2333'}}><Label x={21} y={20} size={25}>STORYSCOPE + HUMAN SCOPE</Label><Label x={21} y={68} size={34} color={C.gold}>{f<72?'PAPER + WRITING SKILL':'YOUR RESEARCH TOOLKIT'}</Label></P>
- <P x={317} y={143} w={114} h={49} style={{opacity:e(f,74,10),background:C.mint,borderRadius:7,transform:`rotate(${-7+hit*8}deg)`}}><Label x={16} y={12} size={22} color={C.ink}>READY</Label></P>
- </P>
- <P x={355} y={613-e(f,0,22,27,0)} w={524} h={104} style={{background:C.gold,border:'5px solid #bd8a40',borderRadius:18,boxShadow:'0 11px 0 #0b132c',transform:`scale(${1+hit*.035})`}}><Label x={24} y={14} size={22} color="#694b23">COMMENT</Label><Label x={23} y={42} size={47} color={C.ink}>SCOPE</Label><P x={370-e(f,86,16,0,11)} y={18} w={108} h={59} style={{borderRadius:12,background:'#234b45',transform:`translateY(${press*5}px)`}}><svg viewBox="0 0 108 59"><path d="M24 30H80M60 13L80 30 60 47" fill="none" stroke={C.cream} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/></svg></P></P>
- <P x={258} y={655+press*8} w={73} h={24} style={{background:C.clay,borderBottom:'8px solid #8d4f3e',borderRadius:'50%'}}/>
- <Hero f={f} x={75+e(f,0,28,0,20)+e(f,70,24,0,7)} y={505+press*15-hit*29} size={242} turn={1} mood={f<40?'read':f<71?'shock':'happy'} tilt={(e(f,44,7)-e(f,57,12))*-10+press*12-hit*7} sy={1-press*.08+hit*.05}/>
+ <Label x={117} y={147} size={28} color={C.gold}>THE PAPER + THE SKILL</Label>
+ <P x={247+carry*42} y={260-carry*32} w={602} h={291} style={{background:'#325e68',border:'9px solid #a4b8a3',borderRadius:16,boxShadow:'0 20px 0 #0d2335'}}/>
+ <P x={103+paper*204+carry*42} y={186+paper*45-carry*32} style={{transform:`rotate(${-15+paper*10}deg)`}}><Pic file="paper.png" x={0} y={0} w={250} h={324}/></P>
+ <P x={655-skill*69+carry*42} y={143+skill*77-carry*32} style={{opacity:e(f,30,8),transform:`scale(${.85+skill*.15}) rotate(${-13+skill*20}deg)`,transformOrigin:'50% 100%'}}><SkillFile x={0} y={0} f={f} w={235}/></P>
+ <P x={246+carry*42} y={439-carry*32} w={604} h={149} style={{background:'#567e7b',border:'8px solid #a4b8a3',borderRadius:'8px 8px 17px 17px',transform:`scaleY(${1-stamp*.09})`,transformOrigin:'50% 100%'}}><Label x={28} y={25} size={25}>STORYSCOPE + HUMAN SCOPE</Label><Label x={28} y={69} size={37} color={C.gold}>Ready for your next story.</Label></P>
+ <P x={410-e(f,90,19,0,45)} y={622-e(f,90,19,0,30)+stamp*6} w={464+e(f,90,19,0,62)} h={97} style={{background:C.gold,border:'6px solid #be8e40',borderRadius:17,boxShadow:'0 12px 0 #0b2033',transform:`rotate(${(e(f,90,6)-e(f,101,9))*-3}deg)`}}><Label x={23} y={12} size={22} color="#755526">COMMENT</Label><Label x={22} y={40} size={44+e(f,90,19,0,9)} color={C.ink}>SCOPE</Label><Label x={353} y={31} size={32} color="#3f6550">→</Label></P>
+ <Hero f={f} x={75+paper*36+skill*50-carry*77} y={487+(e(f,50,7)-e(f,64,11))*22-(e(f,95,5)-e(f,104,8))*30} size={252} turn={1} mood={f>63?'happy':f>30?'stern':'read'} tilt={paper*10-skill*5-carry*12+stamp*8}/>
  </Set>;
 };

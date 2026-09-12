@@ -20,3 +20,8 @@ Media remains in the existing faceless Drive reel folder; the original is preser
 [Revised MP4](https://drive.google.com/file/d/1bLo7nlMuoxiYTdyhlZJ9proIaEOMdjv8/view), 21,354,750 bytes. Drive MD5 `68c0f261aa35933a79ef6e43a97b73e7` matches the local release.
 
 [Reel folder](https://drive.google.com/drive/folders/1BnetpHlYDGCCgO5JleKB1u0VlvX10bHJ) contains the original and the separately named revision. The standalone revised source archive is named `SCOPE-Remotion-retention-v2.zip`. See [the final review](147-scope-retention-review.md) for numeric results and their limits.
+
+
+## V2 rejected; v3 replaces the complete ending
+
+Alex rejected the isolated retention repairs and specified the run from 41 seconds onward, including 44 seconds and the ending. See [the corrected diagnosis and seven-part action map](../alex-scope-ending-rebuild.md). V3 replaces the entire run and ends at 56.833s after the actual final word. Earlier numerical passes are historical and not creative approval.
