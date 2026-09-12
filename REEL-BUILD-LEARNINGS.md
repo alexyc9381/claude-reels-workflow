@@ -1,5 +1,7 @@
 # Reel Build Learnings
 
+See [DEPARTMENT source and motion proof](memory/alex-department-source-and-motion-proof.md) for Alex’s explicit recreation rejection, whole-film concept revision, natural action durations and complete operations (both shared speed ramps and stretched slow glides rejected), source/render mismatch, physical follow-through, moving safe bounds and expanded cue verification. Technical passes are not creative approval. Latest follow-up: prominent Claude audience recognition and narration-timed GitHub source cards.
+
 Hard-won rules from building the Claude reels. Every entry below cost a revision cycle, a failed
 render, or a re-record. Read the section that matches what you are about to do.
 
@@ -9,6 +11,10 @@ render, or a re-record. Read the section that matches what you are about to do.
 ---
 
 ## Index
+
+**September 11, 2026 — [LM hook, demo and delivery feedback](memory/alex-lm-hooks-demo-and-delivery.md):**
+read before opening animation, screen tutorials, trial variants or final delivery. Each correction
+includes its reason and verification; the five-second demo handoff and exact title are LM-specific.
 
 | # | Section | Read before you… |
 |---|---------|------------------|

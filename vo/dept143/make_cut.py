@@ -1,6 +1,10 @@
-import subprocess, json, os
-FF = os.path.expanduser("~/Library/Python/3.9/lib/python/site-packages/imageio_ffmpeg/binaries/ffmpeg-macos-aarch64-v7.1")
-BASE = os.path.expanduser("~/Downloads/claude-reels-workflow/vo/dept143")
+import subprocess, json, os, shutil
+from pathlib import Path
+FF = os.environ.get("FFMPEG") or shutil.which("ffmpeg")
+if not FF:
+    import imageio_ffmpeg
+    FF = imageio_ffmpeg.get_ffmpeg_exe()
+BASE = str(Path(__file__).resolve().parent)
 SRC = f"{BASE}/dept_raw48.wav"; W = f"{BASE}/work"; os.makedirs(W, exist_ok=True)
 # (chunk_index, gap_after_seconds) -- last good take of every line
 KEEP = [(0,0.14),(1,0.16),(11,0.20),(12,0.14),(15,0.22),(16,0.22),(17,0.16),(19,0.14),

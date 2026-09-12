@@ -1,234 +1,1178 @@
 {
- "vo_onset_max_s": 0.15,
- "audio_onset_max_s": 0.15,
- "music_onset_max_s": 0.15,
- "ends_tight_max_s": 0.6,
- "max_short_word_s": 0.8,
- "caption_drift_tol_s": 0.12,
- "scenes": [
-  {
-   "name": "HOOK-A",
-   "t": 0.0
-  },
-  {
-   "name": "HOOK-B",
-   "t": 3.067
-  },
-  {
-   "name": "DEPTS-A",
-   "t": 4.8
-  },
-  {
-   "name": "DEPTS-B",
-   "t": 7.933
-  },
-  {
-   "name": "SKILL-A",
-   "t": 10.433
-  },
-  {
-   "name": "SKILL-B",
-   "t": 13.333
-  },
-  {
-   "name": "MKT",
-   "t": 16.033
-  },
-  {
-   "name": "PACK-A",
-   "t": 17.667
-  },
-  {
-   "name": "PACK-B",
-   "t": 19.867
-  },
-  {
-   "name": "SOC-A",
-   "t": 21.9
-  },
-  {
-   "name": "SOC-B",
-   "t": 24.0
-  },
-  {
-   "name": "SOC-C",
-   "t": 26.667
-  },
-  {
-   "name": "GATE-A",
-   "t": 28.867
-  },
-  {
-   "name": "GATE-B",
-   "t": 31.333
-  },
-  {
-   "name": "TWO",
-   "t": 32.9
-  },
-  {
-   "name": "GEN-A",
-   "t": 34.867
-  },
-  {
-   "name": "GEN-B",
-   "t": 37.333
-  },
-  {
-   "name": "GEN-C",
-   "t": 39.333
-  },
-  {
-   "name": "FIN",
-   "t": 41.167
-  },
-  {
-   "name": "LED-A",
-   "t": 42.933
-  },
-  {
-   "name": "LED-B",
-   "t": 45.167
-  },
-  {
-   "name": "LEGAL",
-   "t": 47.5
-  },
-  {
-   "name": "CON-A",
-   "t": 49.067
-  },
-  {
-   "name": "CON-B",
-   "t": 51.0
-  },
-  {
-   "name": "MOST",
-   "t": 52.8
-  },
-  {
-   "name": "HEAP",
-   "t": 54.567
-  },
-  {
-   "name": "REW-A",
-   "t": 57.9
-  },
-  {
-   "name": "REW-B",
-   "t": 60.667
-  },
-  {
-   "name": "TEAM",
-   "t": 63.467
-  },
-  {
-   "name": "CTA",
-   "t": 67.1
-  }
- ],
- "sfx_cues_s": [
-  0.0,
-  0.6,
-  0.733,
-  1.667,
-  1.867,
-  3.067,
-  3.267,
-  3.733,
-  4.8,
-  5.267,
-  5.867,
-  6.467,
-  7.067,
-  7.667,
-  7.933,
-  8.4,
-  9.2,
-  10.433,
-  10.633,
-  13.333,
-  13.933,
-  14.667,
-  15.533,
-  16.033,
-  16.8,
-  17.667,
-  17.8,
-  18.333,
-  19.267,
-  19.867,
-  20.6,
-  21.267,
-  21.9,
-  22.4,
-  23.2,
-  24.0,
-  24.333,
-  24.933,
-  25.533,
-  26.667,
-  27.2,
-  28.0,
-  28.867,
-  30.0,
-  30.733,
-  31.333,
-  32.9,
-  33.067,
-  33.533,
-  34.867,
-  35.2,
-  35.933,
-  36.667,
-  37.333,
-  37.533,
-  38.0,
-  39.333,
-  39.6,
-  41.167,
-  42.933,
-  43.333,
-  44.333,
-  45.167,
-  45.2,
-  45.467,
-  45.933,
-  46.667,
-  47.133,
-  47.5,
-  49.067,
-  49.4,
-  50.267,
-  50.867,
-  51.0,
-  51.133,
-  51.667,
-  52.4,
-  52.8,
-  54.567,
-  55.067,
-  56.067,
-  56.6,
-  56.8,
-  57.9,
-  58.167,
-  59.133,
-  59.6,
-  60.667,
-  61.067,
-  61.733,
-  62.333,
-  62.6,
-  62.867,
-  63.467,
-  64.0,
-  64.8,
-  65.6,
-  67.1,
-  67.333,
-  67.733,
-  68.133,
-  68.533
- ]
+  "vo_onset_max_s": 0.15,
+  "audio_onset_max_s": 0.15,
+  "music_onset_max_s": 0.15,
+  "ends_tight_max_s": 0.6,
+  "max_short_word_s": 0.8,
+  "caption_drift_tol_s": 0.12,
+  "scenes": [
+    {
+      "name": "OVERLOAD",
+      "start_s": 0,
+      "end_s": 1.4666666666666666
+    },
+    {
+      "name": "CATCH",
+      "start_s": 1.4666666666666666,
+      "end_s": 2.933333333333333
+    },
+    {
+      "name": "REDIRECT",
+      "start_s": 2.933333333333333,
+      "end_s": 4.8
+    },
+    {
+      "name": "SPECIALISTS",
+      "start_s": 4.8,
+      "end_s": 7.933333333333334
+    },
+    {
+      "name": "SHARED BRIEF",
+      "start_s": 7.933333333333334,
+      "end_s": 10.433333333333334
+    },
+    {
+      "name": "SKILL FILE",
+      "start_s": 10.433333333333334,
+      "end_s": 13.333333333333334
+    },
+    {
+      "name": "APPLY SKILL",
+      "start_s": 13.333333333333334,
+      "end_s": 16.033333333333335
+    },
+    {
+      "name": "PAINT CAMPAIGN",
+      "start_s": 16.033333333333335,
+      "end_s": 17.666666666666668
+    },
+    {
+      "name": "STOREFRONT",
+      "start_s": 17.666666666666668,
+      "end_s": 19.866666666666667
+    },
+    {
+      "name": "COPY AND CREATIVE",
+      "start_s": 19.866666666666667,
+      "end_s": 21.9
+    },
+    {
+      "name": "SHOOT",
+      "start_s": 21.9,
+      "end_s": 24
+    },
+    {
+      "name": "EDIT",
+      "start_s": 24,
+      "end_s": 26.666666666666668
+    },
+    {
+      "name": "FINISHED REEL",
+      "start_s": 26.666666666666668,
+      "end_s": 28.866666666666667
+    },
+    {
+      "name": "OPEN ATELIER",
+      "start_s": 28.866666666666667,
+      "end_s": 31.333333333333332
+    },
+    {
+      "name": "START DESIGN",
+      "start_s": 31.333333333333332,
+      "end_s": 32.9
+    },
+    {
+      "name": "DESIGN TOOLS",
+      "start_s": 32.9,
+      "end_s": 34.86666666666667
+    },
+    {
+      "name": "SAME TEMPLATE",
+      "start_s": 34.86666666666667,
+      "end_s": 37.333333333333336
+    },
+    {
+      "name": "RECOMPOSE",
+      "start_s": 37.333333333333336,
+      "end_s": 39.333333333333336
+    },
+    {
+      "name": "DISTINCT RESULT",
+      "start_s": 39.333333333333336,
+      "end_s": 41.166666666666664
+    },
+    {
+      "name": "OPEN LEDGER",
+      "start_s": 41.166666666666664,
+      "end_s": 42.93333333333333
+    },
+    {
+      "name": "RECONCILE",
+      "start_s": 42.93333333333333,
+      "end_s": 45.166666666666664
+    },
+    {
+      "name": "FIND VARIANCE",
+      "start_s": 45.166666666666664,
+      "end_s": 47.5
+    },
+    {
+      "name": "OPEN CONTRACT",
+      "start_s": 47.5,
+      "end_s": 49.06666666666667
+    },
+    {
+      "name": "INSPECT CLAUSE",
+      "start_s": 49.06666666666667,
+      "end_s": 51
+    },
+    {
+      "name": "BUILD BRIEF",
+      "start_s": 51,
+      "end_s": 52.8
+    },
+    {
+      "name": "THE REAL POINT",
+      "start_s": 52.8,
+      "end_s": 54.56666666666667
+    },
+    {
+      "name": "ONE SIZE FAILS",
+      "start_s": 54.56666666666667,
+      "end_s": 57.9
+    },
+    {
+      "name": "REWRITE",
+      "start_s": 57.9,
+      "end_s": 60.666666666666664
+    },
+    {
+      "name": "FIT AND TEST",
+      "start_s": 60.666666666666664,
+      "end_s": 63.46666666666667
+    },
+    {
+      "name": "WORKING TEAM",
+      "start_s": 63.46666666666667,
+      "end_s": 67.1
+    },
+    {
+      "name": "GUIDE HANDOFF",
+      "start_s": 67.1,
+      "end_s": 71.06666666666666
+    }
+  ],
+  "sfx_cues_s": [
+    0.0,
+    0.23333333333333334,
+    0.7,
+    1.7,
+    1.9333333333333333,
+    2.1666666666666665,
+    2.4,
+    3.3,
+    3.7333333333333334,
+    4.566666666666666,
+    5.033333333333333,
+    5.966666666666667,
+    6.333333333333333,
+    7.066666666666666,
+    7.8,
+    8.3,
+    9.033333333333333,
+    9.9,
+    10.833333333333334,
+    11.4,
+    12.333333333333334,
+    12.933333333333334,
+    13.733333333333333,
+    14.766666666666667,
+    15.466666666666667,
+    15.8,
+    16.033333333333335,
+    16.533333333333335,
+    17.066666666666666,
+    18.0,
+    18.466666666666665,
+    19.133333333333333,
+    20.233333333333334,
+    20.866666666666667,
+    21.666666666666668,
+    22.066666666666666,
+    22.433333333333334,
+    23.233333333333334,
+    23.766666666666666,
+    24.333333333333332,
+    24.8,
+    25.433333333333334,
+    26.166666666666668,
+    27.0,
+    27.466666666666665,
+    28.1,
+    28.5,
+    29.233333333333334,
+    29.966666666666665,
+    30.566666666666666,
+    31.633333333333333,
+    32.233333333333334,
+    32.766666666666666,
+    33.56666666666667,
+    34.0,
+    34.6,
+    35.13333333333333,
+    35.766666666666666,
+    36.4,
+    37.766666666666666,
+    38.36666666666667,
+    39.03333333333333,
+    39.666666666666664,
+    40.266666666666666,
+    40.766666666666666,
+    41.46666666666667,
+    42.03333333333333,
+    42.6,
+    43.266666666666666,
+    43.96666666666667,
+    44.766666666666666,
+    45.46666666666667,
+    46.733333333333334,
+    47.36666666666667,
+    47.86666666666667,
+    48.3,
+    49.333333333333336,
+    49.93333333333333,
+    50.833333333333336,
+    51.3,
+    52.0,
+    52.63333333333333,
+    52.93333333333333,
+    53.63333333333333,
+    54.9,
+    55.43333333333333,
+    56.233333333333334,
+    56.733333333333334,
+    58.233333333333334,
+    58.833333333333336,
+    59.766666666666666,
+    60.5,
+    61.4,
+    62.03333333333333,
+    62.833333333333336,
+    63.333333333333336,
+    63.833333333333336,
+    64.83333333333333,
+    65.83333333333333,
+    66.46666666666667,
+    66.96666666666667,
+    67.46666666666667,
+    68.36666666666666,
+    69.63333333333334,
+    70.53333333333333
+  ],
+  "sfx_inventory": [
+    {
+      "at": 0.0,
+      "src": "thock.wav",
+      "gain_db": -12.0,
+      "dur": 0.16,
+      "rate": 0.83,
+      "lead": 0
+    },
+    {
+      "at": 0.0,
+      "src": "sub.wav",
+      "gain_db": -22.0,
+      "dur": 0.42,
+      "rate": 0.77,
+      "lead": 0
+    },
+    {
+      "at": 0.23333333333333334,
+      "src": "twang.wav",
+      "gain_db": -20.0,
+      "dur": 0.5,
+      "rate": 1.12,
+      "lead": 2
+    },
+    {
+      "at": 0.7,
+      "src": "c_bump.wav",
+      "gain_db": -23.0,
+      "dur": 0.09,
+      "rate": 0.92,
+      "lead": 2
+    },
+    {
+      "at": 1.7,
+      "src": "impact.wav",
+      "gain_db": -19.0,
+      "dur": 0.62,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 1.9333333333333333,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 1.12,
+      "lead": 2
+    },
+    {
+      "at": 2.1666666666666665,
+      "src": "c_stomp.wav",
+      "gain_db": -24.0,
+      "dur": 0.12,
+      "rate": 0.85,
+      "lead": 2
+    },
+    {
+      "at": 2.4,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 1.03,
+      "lead": 2
+    },
+    {
+      "at": 3.3,
+      "src": "blip3.wav",
+      "gain_db": -23.0,
+      "dur": 0.22,
+      "rate": 0.98,
+      "lead": 2
+    },
+    {
+      "at": 3.7333333333333334,
+      "src": "paper.wav",
+      "gain_db": -20.0,
+      "dur": 0.3,
+      "rate": 0.9,
+      "lead": 2
+    },
+    {
+      "at": 4.566666666666666,
+      "src": "blip5.wav",
+      "gain_db": -23.0,
+      "dur": 0.22,
+      "rate": 1.05,
+      "lead": 2
+    },
+    {
+      "at": 5.033333333333333,
+      "src": "impact.wav",
+      "gain_db": -21.0,
+      "dur": 0.62,
+      "rate": 1.04,
+      "lead": 2
+    },
+    {
+      "at": 5.966666666666667,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 0.98,
+      "lead": 2
+    },
+    {
+      "at": 6.333333333333333,
+      "src": "blip1.wav",
+      "gain_db": -23.0,
+      "dur": 0.22,
+      "rate": 0.94,
+      "lead": 2
+    },
+    {
+      "at": 7.066666666666666,
+      "src": "mallet_tap.wav",
+      "gain_db": -15.0,
+      "dur": 0.2,
+      "rate": 1.12,
+      "lead": 2
+    },
+    {
+      "at": 7.8,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 1.08,
+      "lead": 2
+    },
+    {
+      "at": 8.3,
+      "src": "paper.wav",
+      "gain_db": -19.0,
+      "dur": 0.3,
+      "rate": 0.87,
+      "lead": 2
+    },
+    {
+      "at": 9.033333333333333,
+      "src": "blip3.wav",
+      "gain_db": -24.0,
+      "dur": 0.22,
+      "rate": 1.07,
+      "lead": 2
+    },
+    {
+      "at": 9.9,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 0.9,
+      "lead": 2
+    },
+    {
+      "at": 10.833333333333334,
+      "src": "paper.wav",
+      "gain_db": -18.0,
+      "dur": 0.3,
+      "rate": 0.85,
+      "lead": 2
+    },
+    {
+      "at": 11.4,
+      "src": "blip1.wav",
+      "gain_db": -23.0,
+      "dur": 0.22,
+      "rate": 0.92,
+      "lead": 2
+    },
+    {
+      "at": 12.333333333333334,
+      "src": "twang.wav",
+      "gain_db": -21.0,
+      "dur": 0.5,
+      "rate": 1.0,
+      "lead": 2
+    },
+    {
+      "at": 12.933333333333334,
+      "src": "thock.wav",
+      "gain_db": -19.0,
+      "dur": 0.16,
+      "rate": 1.07,
+      "lead": 2
+    },
+    {
+      "at": 13.733333333333333,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 14.766666666666667,
+      "src": "paper.wav",
+      "gain_db": -21.0,
+      "dur": 0.3,
+      "rate": 0.75,
+      "lead": 2
+    },
+    {
+      "at": 15.466666666666667,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 15.8,
+      "src": "blip5.wav",
+      "gain_db": -23.0,
+      "dur": 0.22,
+      "rate": 1.1,
+      "lead": 2
+    },
+    {
+      "at": 16.033333333333335,
+      "src": "thock.wav",
+      "gain_db": -18.0,
+      "dur": 0.16,
+      "rate": 0.82,
+      "lead": 2
+    },
+    {
+      "at": 16.533333333333335,
+      "src": "paper.wav",
+      "gain_db": -21.0,
+      "dur": 0.3,
+      "rate": 0.8,
+      "lead": 2
+    },
+    {
+      "at": 17.066666666666666,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 18.0,
+      "src": "twang.wav",
+      "gain_db": -20.0,
+      "dur": 0.5,
+      "rate": 0.84,
+      "lead": 2
+    },
+    {
+      "at": 18.466666666666665,
+      "src": "paper.wav",
+      "gain_db": -20.0,
+      "dur": 0.3,
+      "rate": 0.79,
+      "lead": 2
+    },
+    {
+      "at": 19.133333333333333,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 0.9,
+      "lead": 2
+    },
+    {
+      "at": 20.233333333333334,
+      "src": "paper.wav",
+      "gain_db": -21.0,
+      "dur": 0.3,
+      "rate": 0.77,
+      "lead": 2
+    },
+    {
+      "at": 20.866666666666667,
+      "src": "key.wav",
+      "gain_db": -29.0,
+      "dur": 0.04,
+      "rate": 0.94,
+      "lead": 2
+    },
+    {
+      "at": 21.666666666666668,
+      "src": "thock.wav",
+      "gain_db": -19.0,
+      "dur": 0.16,
+      "rate": 1.04,
+      "lead": 2
+    },
+    {
+      "at": 22.066666666666666,
+      "src": "thock.wav",
+      "gain_db": -15.0,
+      "dur": 0.16,
+      "rate": 1.12,
+      "lead": 2
+    },
+    {
+      "at": 22.433333333333334,
+      "src": "key.wav",
+      "gain_db": -27.0,
+      "dur": 0.04,
+      "rate": 1.04,
+      "lead": 2
+    },
+    {
+      "at": 23.233333333333334,
+      "src": "paper.wav",
+      "gain_db": -20,
+      "dur": 0.3,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 23.766666666666666,
+      "src": "thock.wav",
+      "gain_db": -20,
+      "dur": 0.16,
+      "rate": 1.05,
+      "lead": 2
+    },
+    {
+      "at": 24.333333333333332,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 0.96,
+      "lead": 2
+    },
+    {
+      "at": 24.8,
+      "src": "paper.wav",
+      "gain_db": -21.0,
+      "dur": 0.3,
+      "rate": 0.83,
+      "lead": 2
+    },
+    {
+      "at": 25.433333333333334,
+      "src": "mallet_tap.wav",
+      "gain_db": -15.0,
+      "dur": 0.2,
+      "rate": 0.96,
+      "lead": 2
+    },
+    {
+      "at": 26.166666666666668,
+      "src": "blip2.wav",
+      "gain_db": -23.0,
+      "dur": 0.22,
+      "rate": 1.08,
+      "lead": 2
+    },
+    {
+      "at": 27.0,
+      "src": "blip3.wav",
+      "gain_db": -24.0,
+      "dur": 0.22,
+      "rate": 0.99,
+      "lead": 2
+    },
+    {
+      "at": 27.466666666666665,
+      "src": "mallet_tap.wav",
+      "gain_db": -15.0,
+      "dur": 0.2,
+      "rate": 1.03,
+      "lead": 2
+    },
+    {
+      "at": 28.1,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 1.1,
+      "lead": 2
+    },
+    {
+      "at": 28.5,
+      "src": "thock.wav",
+      "gain_db": -20,
+      "dur": 0.16,
+      "rate": 1.07,
+      "lead": 2
+    },
+    {
+      "at": 29.233333333333334,
+      "src": "twang.wav",
+      "gain_db": -21.0,
+      "dur": 0.5,
+      "rate": 0.83,
+      "lead": 2
+    },
+    {
+      "at": 29.966666666666665,
+      "src": "paper.wav",
+      "gain_db": -21.0,
+      "dur": 0.3,
+      "rate": 0.74,
+      "lead": 2
+    },
+    {
+      "at": 30.566666666666666,
+      "src": "thock.wav",
+      "gain_db": -18.0,
+      "dur": 0.16,
+      "rate": 0.85,
+      "lead": 2
+    },
+    {
+      "at": 31.633333333333333,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 0.95,
+      "lead": 2
+    },
+    {
+      "at": 32.233333333333334,
+      "src": "paper.wav",
+      "gain_db": -21.0,
+      "dur": 0.3,
+      "rate": 0.81,
+      "lead": 2
+    },
+    {
+      "at": 32.766666666666666,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 1.03,
+      "lead": 2
+    },
+    {
+      "at": 33.56666666666667,
+      "src": "thock.wav",
+      "gain_db": -19.0,
+      "dur": 0.16,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 34.0,
+      "src": "blip2.wav",
+      "gain_db": -24.0,
+      "dur": 0.22,
+      "rate": 0.98,
+      "lead": 2
+    },
+    {
+      "at": 34.6,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 1.05,
+      "lead": 2
+    },
+    {
+      "at": 35.13333333333333,
+      "src": "paper.wav",
+      "gain_db": -19.0,
+      "dur": 0.3,
+      "rate": 0.92,
+      "lead": 2
+    },
+    {
+      "at": 35.766666666666666,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 36.4,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 0.84,
+      "lead": 2
+    },
+    {
+      "at": 37.766666666666666,
+      "src": "paper.wav",
+      "gain_db": -17.0,
+      "dur": 0.3,
+      "rate": 0.84,
+      "lead": 2
+    },
+    {
+      "at": 38.36666666666667,
+      "src": "twang.wav",
+      "gain_db": -21.0,
+      "dur": 0.5,
+      "rate": 0.9,
+      "lead": 2
+    },
+    {
+      "at": 39.03333333333333,
+      "src": "thock.wav",
+      "gain_db": -18.0,
+      "dur": 0.16,
+      "rate": 1.08,
+      "lead": 2
+    },
+    {
+      "at": 39.666666666666664,
+      "src": "blip5.wav",
+      "gain_db": -23.0,
+      "dur": 0.22,
+      "rate": 1.03,
+      "lead": 2
+    },
+    {
+      "at": 40.266666666666666,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 0.94,
+      "lead": 2
+    },
+    {
+      "at": 40.766666666666666,
+      "src": "mallet_tap.wav",
+      "gain_db": -15.0,
+      "dur": 0.2,
+      "rate": 1.09,
+      "lead": 2
+    },
+    {
+      "at": 41.46666666666667,
+      "src": "paper.wav",
+      "gain_db": -18.0,
+      "dur": 0.3,
+      "rate": 0.73,
+      "lead": 2
+    },
+    {
+      "at": 42.03333333333333,
+      "src": "thock.wav",
+      "gain_db": -19.0,
+      "dur": 0.16,
+      "rate": 0.82,
+      "lead": 2
+    },
+    {
+      "at": 42.6,
+      "src": "blip1.wav",
+      "gain_db": -24.0,
+      "dur": 0.22,
+      "rate": 0.87,
+      "lead": 2
+    },
+    {
+      "at": 43.266666666666666,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 0.88,
+      "lead": 2
+    },
+    {
+      "at": 43.96666666666667,
+      "src": "mallet_tap.wav",
+      "gain_db": -15.0,
+      "dur": 0.2,
+      "rate": 0.93,
+      "lead": 2
+    },
+    {
+      "at": 44.766666666666666,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 1.05,
+      "lead": 2
+    },
+    {
+      "at": 45.46666666666667,
+      "src": "paper.wav",
+      "gain_db": -21.0,
+      "dur": 0.3,
+      "rate": 0.92,
+      "lead": 2
+    },
+    {
+      "at": 46.733333333333334,
+      "src": "blip2.wav",
+      "gain_db": -24.0,
+      "dur": 0.22,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 47.36666666666667,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 1.01,
+      "lead": 2
+    },
+    {
+      "at": 47.86666666666667,
+      "src": "paper.wav",
+      "gain_db": -18.0,
+      "dur": 0.3,
+      "rate": 0.77,
+      "lead": 2
+    },
+    {
+      "at": 48.3,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 0.85,
+      "lead": 2
+    },
+    {
+      "at": 49.333333333333336,
+      "src": "mallet_tap.wav",
+      "gain_db": -15.0,
+      "dur": 0.2,
+      "rate": 0.91,
+      "lead": 2
+    },
+    {
+      "at": 49.93333333333333,
+      "src": "blip1.wav",
+      "gain_db": -24.0,
+      "dur": 0.22,
+      "rate": 1.05,
+      "lead": 2
+    },
+    {
+      "at": 50.833333333333336,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 0.93,
+      "lead": 2
+    },
+    {
+      "at": 51.3,
+      "src": "paper.wav",
+      "gain_db": -20.0,
+      "dur": 0.3,
+      "rate": 0.87,
+      "lead": 2
+    },
+    {
+      "at": 52.0,
+      "src": "mallet_tap.wav",
+      "gain_db": -15.0,
+      "dur": 0.2,
+      "rate": 1.12,
+      "lead": 2
+    },
+    {
+      "at": 52.63333333333333,
+      "src": "c_bump.wav",
+      "gain_db": -23.0,
+      "dur": 0.09,
+      "rate": 0.73,
+      "lead": 2
+    },
+    {
+      "at": 52.93333333333333,
+      "src": "thock.wav",
+      "gain_db": -18.0,
+      "dur": 0.16,
+      "rate": 0.72,
+      "lead": 2
+    },
+    {
+      "at": 53.63333333333333,
+      "src": "paper.wav",
+      "gain_db": -21.0,
+      "dur": 0.3,
+      "rate": 0.86,
+      "lead": 2
+    },
+    {
+      "at": 54.9,
+      "src": "twang.wav",
+      "gain_db": -20.0,
+      "dur": 0.5,
+      "rate": 0.73,
+      "lead": 2
+    },
+    {
+      "at": 55.43333333333333,
+      "src": "impact.wav",
+      "gain_db": -18.0,
+      "dur": 0.62,
+      "rate": 0.84,
+      "lead": 2
+    },
+    {
+      "at": 56.233333333333334,
+      "src": "c_bump.wav",
+      "gain_db": -23.0,
+      "dur": 0.09,
+      "rate": 0.74,
+      "lead": 2
+    },
+    {
+      "at": 56.733333333333334,
+      "src": "sub.wav",
+      "gain_db": -21.0,
+      "dur": 0.42,
+      "rate": 0.65,
+      "lead": 2
+    },
+    {
+      "at": 58.233333333333334,
+      "src": "paper.wav",
+      "gain_db": -20.0,
+      "dur": 0.3,
+      "rate": 0.93,
+      "lead": 2
+    },
+    {
+      "at": 58.833333333333336,
+      "src": "key.wav",
+      "gain_db": -28.0,
+      "dur": 0.04,
+      "rate": 0.94,
+      "lead": 2
+    },
+    {
+      "at": 59.766666666666666,
+      "src": "key.wav",
+      "gain_db": -29.0,
+      "dur": 0.04,
+      "rate": 1.05,
+      "lead": 2
+    },
+    {
+      "at": 60.5,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 1.02,
+      "lead": 2
+    },
+    {
+      "at": 61.4,
+      "src": "paper.wav",
+      "gain_db": -20.0,
+      "dur": 0.3,
+      "rate": 0.9,
+      "lead": 2
+    },
+    {
+      "at": 62.03333333333333,
+      "src": "thock.wav",
+      "gain_db": -19.0,
+      "dur": 0.16,
+      "rate": 0.95,
+      "lead": 2
+    },
+    {
+      "at": 62.833333333333336,
+      "src": "blip5.wav",
+      "gain_db": -23.0,
+      "dur": 0.22,
+      "rate": 1.05,
+      "lead": 2
+    },
+    {
+      "at": 63.333333333333336,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 0.94,
+      "lead": 2
+    },
+    {
+      "at": 63.833333333333336,
+      "src": "impact.wav",
+      "gain_db": -21.0,
+      "dur": 0.62,
+      "rate": 1.08,
+      "lead": 2
+    },
+    {
+      "at": 64.83333333333333,
+      "src": "paper.wav",
+      "gain_db": -20.0,
+      "dur": 0.3,
+      "rate": 0.94,
+      "lead": 2
+    },
+    {
+      "at": 65.83333333333333,
+      "src": "thock.wav",
+      "gain_db": -20.0,
+      "dur": 0.16,
+      "rate": 1.04,
+      "lead": 2
+    },
+    {
+      "at": 66.46666666666667,
+      "src": "blip3.wav",
+      "gain_db": -24.0,
+      "dur": 0.22,
+      "rate": 1.0,
+      "lead": 2
+    },
+    {
+      "at": 66.96666666666667,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 0.95,
+      "lead": 2
+    },
+    {
+      "at": 67.46666666666667,
+      "src": "paper.wav",
+      "gain_db": -18.0,
+      "dur": 0.3,
+      "rate": 0.86,
+      "lead": 2
+    },
+    {
+      "at": 68.36666666666666,
+      "src": "chair_knock.wav",
+      "gain_db": -14.0,
+      "dur": 0.3,
+      "rate": 0.94,
+      "lead": 2
+    },
+    {
+      "at": 69.63333333333334,
+      "src": "mallet_tap.wav",
+      "gain_db": -14.0,
+      "dur": 0.2,
+      "rate": 0.95,
+      "lead": 2
+    },
+    {
+      "at": 70.53333333333333,
+      "src": "paper.wav",
+      "gain_db": -20,
+      "dur": 0.3,
+      "rate": 0.88,
+      "lead": 2
+    }
+  ],
+  "caption_source": "vo/dept143/verified-clean-words.json",
+  "revision": "Correction: shared speed ramps removed; steady per-object movements at distinct fixed durations on the real timeline",
+  "reference_cards": [
+    {
+      "from_frame": 533,
+      "to_frame_exclusive": 609,
+      "owner": "coreyhaines31",
+      "repo": "marketingskills",
+      "folder_label": "skills / SKILL.md",
+      "verified_url": "https://github.com/coreyhaines31/marketingskills"
+    },
+    {
+      "from_frame": 695,
+      "to_frame_exclusive": 774,
+      "owner": "charlie947",
+      "repo": "social-media-skills",
+      "folder_label": "17 social media skills",
+      "verified_url": "https://github.com/charlie947/social-media-skills"
+    },
+    {
+      "from_frame": 987,
+      "to_frame_exclusive": 1095,
+      "owner": "nextlevelbuilder",
+      "repo": "ui-ux-pro-max-skill",
+      "folder_label": "",
+      "verified_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill"
+    },
+    {
+      "from_frame": 1023,
+      "to_frame_exclusive": 1095,
+      "owner": "Leonxlnx",
+      "repo": "taste-skill",
+      "folder_label": "",
+      "verified_url": "https://github.com/Leonxlnx/taste-skill"
+    },
+    {
+      "from_frame": 1290,
+      "to_frame_exclusive": 1357,
+      "owner": "anthropics",
+      "repo": "knowledge-work-plugins",
+      "folder_label": "finance / skills",
+      "verified_url": "https://github.com/anthropics/knowledge-work-plugins/tree/main/finance"
+    },
+    {
+      "from_frame": 1473,
+      "to_frame_exclusive": 1540,
+      "owner": "anthropics",
+      "repo": "knowledge-work-plugins",
+      "folder_label": "legal / skills",
+      "verified_url": "https://github.com/anthropics/knowledge-work-plugins/tree/main/legal"
+    }
+  ],
+  "identity_assets": [
+    "logos_official/claude.svg",
+    "logos_official/github.svg"
+  ]
 }

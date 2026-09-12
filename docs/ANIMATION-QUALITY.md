@@ -1,5 +1,10 @@
 # ANIMATION QUALITY — why the first pass is never good enough, and what actually fixes it
 
+Revision case study: [DEPARTMENT source and motion proof](../memory/alex-department-source-and-motion-proof.md). Includes Alex’s explicit rejection of a recreation: review the scene concepts throughout, not only motion scores. The latest correction rejects both shared speed ramps and the slow linear replacement: author short, natural operations and consequential follow-through at object-specific timings. Read alongside the indexed LM feedback when a hook moves but its cause and payoff are unclear. Latest follow-up: prominent Claude audience recognition and narration-timed GitHub source cards.
+
+**LM follow-up:** [frame-zero action, post-action continuity and demo legibility](../memory/alex-lm-hooks-demo-and-delivery.md).
+Read before interpreting “faster hook”, “more animation”, “show the setup” or “too close to the edge”.
+
 **Status:** the craft doc. Read before authoring scenes, and again when a reel comes back as
 *"boring"*, *"not interesting enough"*, *"they don't actually do movements"* or *"I'm not getting
 anything from the animations"*.
@@ -1501,3 +1506,27 @@ The cinematic-place rule still applies; it is not a ban on abstraction. Motion/c
 remain checks of execution. Do not satisfy them with decorative activity or claim they
 establish audience engagement. For the parallel sound failure, use
 [`SOUND-DESIGN.md`](SOUND-DESIGN.md) §18.
+
+
+## 29. SETUP: polish the setting and the performance together
+
+Alex's follow-up asked for X-level visual detail, stronger animation in every scene, varied
+backgrounds, and removal of the redundant “More plugins ≠ more useful” hook line. Read the
+[indexed SETUP learning](../memory/alex-setup-2d-detail-and-performance.md) before applying it.
+X is now an explicit reference for detail; its earlier retention problems still stand.
+
+Use layered 2D sets, practical light, deep shadows and material-specific construction details
+while preserving the hero silhouette. Give the operation a cause and a result: moving gears,
+locking bolts or evidence transfers should follow the task, not serve as perpetual decoration.
+Let Claude perform and react through the original rig; keep role/costume selection separate
+from staggered animation clocks. Inspect faces, labels and contact through motion at phone size.
+The top-1% line needs an earned visual payoff; the three hook tools need distinct activations.
+Remove redundant slogans and footer commentary rather than increasing reading load.
+
+These improvements supplement the hook-to-body and audible-SFX rules in §28. Neither a more
+detailed background nor a passing per-scene score establishes interest or a full benchmark pass.
+
+
+## 30. SCOPE: retention cliffs need a semantic review, not extra idle motion
+
+See [the 39s/55s teardown](../memory/alex-scope-retention-39s-55s.md). Before shipping a revised loss point, require: (1) a rendered strip starting 2–3 seconds before it; (2) a visible actor action and changed result, not just a moving container; (3) a readable keyword from CTA entry; (4) native safe-bounds review through peak motion; (5) updated audio contacts and finished-file gates. State what is observed, what is hypothesized, and what needs post-publication analytics. Keep technical motion thresholds unchanged, but never label a numeric pass creative approval or recovered retention. A terminal loss at 96% duration and a mid-video loss at 68% require different interpretation.

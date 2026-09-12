@@ -1,17 +1,19 @@
-Comment DEPARTMENT and I'll send you the setup guide with every link.
+Comment "DEPARTMENT" and I'll DM you the setup guide with the skill links and customization prompts. Follow so the DM lands 📩
 
-You do not need to hire a marketing person, a social person, a designer, a finance person and a lawyer to run a one person business. There are free Claude skill packs for all five.
+👇 READ BELOW, this is what makes the setup useful:
 
-A skill is just a markdown file. It gives your agent the knowledge and the workflow for one specific job.
+Your AI team starts with a useful workflow:
 
-01 MARKETING - one pack, 45 skills, ad creatives through to copywriting
-02 SOCIAL - 17 skills for scripts, thumbnails, content IDs, the whole content line
-03 DESIGN - UI UX Pro and Taste, so what you build stops looking like everything else AI makes
-04 FINANCE - 8 skills for financial statements and variance analysis
-05 LEGAL - 9 skills for contracts and legal briefs
+• Marketing: copywriting, ads and conversion
+• Social: scripts, thumbnails and content planning
+• Design: UI UX Pro Max and Taste
+• Finance: statements and variance analysis
+• Legal: contract review and briefing
 
-Here is the part almost everyone skips. Do not install fifty skills and expect your business to run itself. Give the skill to your agent in Claude Code and tell it to rewrite the playbook around your actual business, your brand and the way you already work.
+The step that matters: customize the skills around your business, brand and how you work. Then test one task before adding more.
 
-That is when it stops being a folder of prompts and starts feeling like your own team.
+The skill libraries are free; Claude usage may require a paid plan. The marketing library has grown beyond the 45 mentioned in the recording. Finance and legal outputs need professional review.
 
-Comment DEPARTMENT for the setup guide.
+Comment "DEPARTMENT" for the full setup guide.
+
+#ClaudeAI #ClaudeCode #AITools #Solopreneur #AIWorkflow

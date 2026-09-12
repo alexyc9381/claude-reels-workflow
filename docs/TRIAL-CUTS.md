@@ -1,6 +1,9 @@
 # TRIAL CUTS — making 3 cuts of one reel that IG will not flag
 
 **Status:** the method doc. Read before delivering more than one cut of a reel.
+**LM follow-up:** [different mechanisms, soundtrack windows and honest checks](../memory/alex-lm-hooks-demo-and-delivery.md).
+User-requested hook-only trials may share a body. Report opening and whole-video comparisons separately;
+no dHash score establishes Instagram uniqueness or distribution performance.
 **Companion:** `memory/reel-trial-variants.md` ranks the levers; this adds the
 **measurement**, and the discovery that the ranking alone was not enough.
 
