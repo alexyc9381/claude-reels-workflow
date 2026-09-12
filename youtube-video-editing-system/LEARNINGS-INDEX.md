@@ -2,6 +2,8 @@
 
 Latest: [V10 footage-first comparisons and source-led scenes](projects/higgsfield-replacement/REVISION-V10.md), [confirmed Higgsfield comparison source](projects/higgsfield-replacement/provenance/higgsfield-comparison.json), [Camera-Direction Prompt Pack](resources/camera-direction-prompt-pack.md). These refinements supersede the earlier placeholder and unspecified-bonus status.
 
+[Other-Mac editable handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF.md): complete source/Git history and working media, checksum verification, Mac launcher, and resume prompt. Keep raw editable packages private; a playable export alone is not an editing handoff.
+
 This is the handoff index for the complete September 10–11 system-building and Higgsfield revision conversation. Start with current rules, then consult the dated evidence. Historical requests do not silently override later decisions.
 
 ## Current production contract
