@@ -22,6 +22,8 @@ answers *"what makes an animation actually good"*, with the numbers that proved 
 
 ## 0. The eight ways an animation is "not good enough"
 
+**OC case study:** [action, contact and consequences](../memory/alex-oc-action-and-ending-revisions.md). The floating tool pod was rejected again after revision; the replacement performs actual construction. The shield breaks progressively, and the CTA launches while the keyword is revealed late. Use this alongside the contact/deformation checks below.
+
 They look like one complaint and they are eight different defects with eight different fixes. Getting
 the diagnosis right is most of the work — see [`MEASURING.md`](MEASURING.md) and
 [`AUDIT-FIRST.md`](AUDIT-FIRST.md).

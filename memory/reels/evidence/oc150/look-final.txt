@@ -1,0 +1,10 @@
+look_audit · OC-Sep-12-Final.mp4
+------------------------------------------------------------------------------
+  ✓ HOOK_LUMA    176.0                  panel luma at frame 0 >= 140 (THE-OPEN law 1 — and this is the ONLY place that law applies)
+  ✓ BODY_SAT     67.9%                  saturated-pixel share >= 34% (AGENCY 57.9 · the pale run 10-15)
+  ✓ BODY_BLACK   p10 33.4               black point (luma p10) <= 35 (AGENCY 25.0 · the pale run 51-72)
+  ✓ HOOK_PLATE   20.6% at y197          warns, never blocks
+  · BODY_LUMA                      99.3 reported, not gated
+  · DEPTH                         160.9 row-luma spread — REPORTED ONLY, see the header. Check by eye: is there a mass cropped by the panel edge, in front of the action?
+------------------------------------------------------------------------------
+  ✅ the look holds.

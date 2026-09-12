@@ -1,0 +1,13 @@
+{
+  "voice_source_duration": 19.90175,
+  "measured_last_5ms_window_above_minus40_dbfs": 19.865,
+  "render_end": 19.866666666666667,
+  "frame_count": 596,
+  "music_ends": 19.73,
+  "sfx_end": 19.77,
+  "voice_end_fade_ms": 3,
+  "oc_reveal_frame": 582,
+  "oc_reveal_second": 19.4,
+  "oc_visible_seconds": 0.4666666666666667,
+  "note": "Keep the final C consonant; cut at the nearest 30 fps boundary, with no end-card hold or auxiliary audio tail."
+}

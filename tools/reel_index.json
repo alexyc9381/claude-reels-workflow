@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 120,
-    "reels_total": 165,
-    "factory_logs": 80,
-    "storyboards": 82,
-    "caption_jsons": 132,
-    "memory_md": 257,
+    "reels_with_code": 121,
+    "reels_total": 166,
+    "factory_logs": 81,
+    "storyboards": 83,
+    "caption_jsons": 133,
+    "memory_md": 259,
     "creators": 8,
     "packs": 3
   },
@@ -1861,6 +1861,17 @@
       "storyboard": "storyboards/147-scope.md",
       "captions": [
         "video/src/data/words_scope147.json"
+      ]
+    },
+    {
+      "key": "oc",
+      "name": "oc",
+      "number": 150,
+      "code": "video/src/ClaudeOCReel.tsx",
+      "log": "memory/reels/oc-factory-log.md",
+      "storyboard": "storyboards/150-oc.md",
+      "captions": [
+        "video/src/data/words_oc.json"
       ]
     },
     {

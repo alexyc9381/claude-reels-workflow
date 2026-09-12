@@ -1,0 +1,482 @@
+[
+ {
+  "word": " Everyone's",
+  "start": 0,
+  "end": 0.44
+ },
+ {
+  "word": " arguing",
+  "start": 0.44,
+  "end": 0.7
+ },
+ {
+  "word": " over",
+  "start": 0.7,
+  "end": 0.87
+ },
+ {
+  "word": " which",
+  "start": 0.87,
+  "end": 1.15
+ },
+ {
+  "word": " AI",
+  "start": 1.15,
+  "end": 1.39
+ },
+ {
+  "word": " model",
+  "start": 1.39,
+  "end": 1.57
+ },
+ {
+  "word": " is",
+  "start": 1.57,
+  "end": 1.71
+ },
+ {
+  "word": " best,",
+  "start": 1.71,
+  "end": 1.93
+ },
+ {
+  "word": " but",
+  "start": 2.06,
+  "end": 2.18
+ },
+ {
+  "word": " you",
+  "start": 2.18,
+  "end": 2.26
+ },
+ {
+  "word": " can",
+  "start": 2.26,
+  "end": 2.295
+ },
+ {
+  "word": " literally",
+  "start": 2.295,
+  "end": 2.53
+ },
+ {
+  "word": " make",
+  "start": 2.53,
+  "end": 2.71
+ },
+ {
+  "word": " them",
+  "start": 2.85,
+  "end": 2.97
+ },
+ {
+  "word": " argue",
+  "start": 2.97,
+  "end": 3.19
+ },
+ {
+  "word": " with",
+  "start": 3.19,
+  "end": 3.33
+ },
+ {
+  "word": " each",
+  "start": 3.33,
+  "end": 3.44
+ },
+ {
+  "word": " other",
+  "start": 3.44,
+  "end": 3.6
+ },
+ {
+  "word": " giving",
+  "start": 3.6,
+  "end": 3.8
+ },
+ {
+  "word": " you",
+  "start": 3.8,
+  "end": 3.96
+ },
+ {
+  "word": " ten",
+  "start": 3.96,
+  "end": 4.2
+ },
+ {
+  "word": " times",
+  "start": 4.24,
+  "end": 4.52
+ },
+ {
+  "word": " better",
+  "start": 4.52,
+  "end": 4.7
+ },
+ {
+  "word": " results",
+  "start": 4.7,
+  "end": 5.0
+ },
+ {
+  "word": " by",
+  "start": 5.0,
+  "end": 5.16
+ },
+ {
+  "word": " using",
+  "start": 5.16,
+  "end": 5.36
+ },
+ {
+  "word": " the",
+  "start": 5.36,
+  "end": 5.52
+ },
+ {
+  "word": " Octopus",
+  "start": 5.52,
+  "end": 5.89
+ },
+ {
+  "word": " plugin.",
+  "start": 5.89,
+  "end": 6.21
+ },
+ {
+  "word": " So",
+  "start": 6.31,
+  "end": 6.37
+ },
+ {
+  "word": " it",
+  "start": 6.37,
+  "end": 6.43
+ },
+ {
+  "word": " lets",
+  "start": 6.43,
+  "end": 6.51
+ },
+ {
+  "word": " you",
+  "start": 6.57,
+  "end": 6.67
+ },
+ {
+  "word": " bring",
+  "start": 6.67,
+  "end": 6.79
+ },
+ {
+  "word": " multiple",
+  "start": 6.79,
+  "end": 7.14
+ },
+ {
+  "word": " AI",
+  "start": 7.14,
+  "end": 7.34
+ },
+ {
+  "word": " models",
+  "start": 7.34,
+  "end": 7.6
+ },
+ {
+  "word": " into",
+  "start": 7.6,
+  "end": 7.8
+ },
+ {
+  "word": " Claude",
+  "start": 7.9,
+  "end": 8.12
+ },
+ {
+  "word": " Code",
+  "start": 8.12,
+  "end": 8.36
+ },
+ {
+  "word": " to",
+  "start": 8.36,
+  "end": 8.52
+ },
+ {
+  "word": " challenge",
+  "start": 8.52,
+  "end": 8.76
+ },
+ {
+  "word": " each",
+  "start": 8.83,
+  "end": 8.97
+ },
+ {
+  "word": " other's",
+  "start": 8.97,
+  "end": 9.23
+ },
+ {
+  "word": " work",
+  "start": 9.23,
+  "end": 9.3
+ },
+ {
+  "word": " before",
+  "start": 9.3,
+  "end": 9.54
+ },
+ {
+  "word": " you",
+  "start": 9.54,
+  "end": 9.72
+ },
+ {
+  "word": " ship",
+  "start": 9.72,
+  "end": 9.84
+ },
+ {
+  "word": " it.",
+  "start": 9.84,
+  "end": 10.02
+ },
+ {
+  "word": " And",
+  "start": 10.03,
+  "end": 10.09
+ },
+ {
+  "word": " here's",
+  "start": 10.09,
+  "end": 10.37
+ },
+ {
+  "word": " what",
+  "start": 10.37,
+  "end": 10.405
+ },
+ {
+  "word": " it",
+  "start": 10.405,
+  "end": 10.52
+ },
+ {
+  "word": " actually",
+  "start": 10.52,
+  "end": 10.84
+ },
+ {
+  "word": " does",
+  "start": 10.84,
+  "end": 11.12
+ },
+ {
+  "word": " for",
+  "start": 11.3,
+  "end": 11.46
+ },
+ {
+  "word": " you.",
+  "start": 11.46,
+  "end": 11.63
+ },
+ {
+  "word": " Building",
+  "start": 11.63,
+  "end": 11.83
+ },
+ {
+  "word": " a",
+  "start": 11.83,
+  "end": 11.99
+ },
+ {
+  "word": " feature?",
+  "start": 11.99,
+  "end": 12.27
+ },
+ {
+  "word": " Have",
+  "start": 12.45,
+  "end": 12.57
+ },
+ {
+  "word": " them",
+  "start": 12.57,
+  "end": 12.69
+ },
+ {
+  "word": " compare",
+  "start": 12.69,
+  "end": 12.9
+ },
+ {
+  "word": " approaches",
+  "start": 12.9,
+  "end": 13.3
+ },
+ {
+  "word": " before",
+  "start": 13.3,
+  "end": 13.6
+ },
+ {
+  "word": " you",
+  "start": 13.6,
+  "end": 13.7
+ },
+ {
+  "word": " spend",
+  "start": 13.7,
+  "end": 13.82
+ },
+ {
+  "word": " a",
+  "start": 13.82,
+  "end": 13.92
+ },
+ {
+  "word": " week",
+  "start": 13.92,
+  "end": 14.02
+ },
+ {
+  "word": " building",
+  "start": 14.02,
+  "end": 14.3
+ },
+ {
+  "word": " the",
+  "start": 14.3,
+  "end": 14.46
+ },
+ {
+  "word": " wrong",
+  "start": 14.46,
+  "end": 14.58
+ },
+ {
+  "word": " one.",
+  "start": 14.58,
+  "end": 14.931
+ },
+ {
+  "word": " Getting",
+  "start": 15.04,
+  "end": 15.14
+ },
+ {
+  "word": " ready",
+  "start": 15.14,
+  "end": 15.32
+ },
+ {
+  "word": " to",
+  "start": 15.32,
+  "end": 15.44
+ },
+ {
+  "word": " launch?",
+  "start": 15.44,
+  "end": 15.68
+ },
+ {
+  "word": " Have",
+  "start": 15.83,
+  "end": 15.91
+ },
+ {
+  "word": " them",
+  "start": 15.91,
+  "end": 16.03
+ },
+ {
+  "word": " try",
+  "start": 16.03,
+  "end": 16.15
+ },
+ {
+  "word": " to",
+  "start": 16.2,
+  "end": 16.28
+ },
+ {
+  "word": " hack",
+  "start": 16.28,
+  "end": 16.5
+ },
+ {
+  "word": " your",
+  "start": 16.5,
+  "end": 16.62
+ },
+ {
+  "word": " app",
+  "start": 16.62,
+  "end": 16.74
+ },
+ {
+  "word": " and",
+  "start": 16.76,
+  "end": 16.9
+ },
+ {
+  "word": " find",
+  "start": 16.9,
+  "end": 17.04
+ },
+ {
+  "word": " vulnerabilities",
+  "start": 17.04,
+  "end": 17.47
+ },
+ {
+  "word": " first.",
+  "start": 17.47,
+  "end": 18.016
+ },
+ {
+  "word": " For",
+  "start": 18.13,
+  "end": 18.19
+ },
+ {
+  "word": " the",
+  "start": 18.19,
+  "end": 18.31
+ },
+ {
+  "word": " free",
+  "start": 18.31,
+  "end": 18.52
+ },
+ {
+  "word": " link",
+  "start": 18.52,
+  "end": 18.7
+ },
+ {
+  "word": " and",
+  "start": 18.7,
+  "end": 18.82
+ },
+ {
+  "word": " setup,",
+  "start": 18.82,
+  "end": 19.04
+ },
+ {
+  "word": " comment",
+  "start": 19.21,
+  "end": 19.31
+ },
+ {
+  "word": " OC.",
+  "start": 19.31,
+  "end": 19.866666666666667
+ }
+]

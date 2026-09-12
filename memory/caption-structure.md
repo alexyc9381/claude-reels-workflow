@@ -30,3 +30,7 @@ metadata:
 > #hashtags
 
 Still GATE THE HOW ([[gate-the-how-in-scripts]]): the caption body teaches the what/why/when + shareable context (e.g. the public model-tier/pricing cheat-sheet) but the exact copy-paste PROMPTS stay in the DM'd guide, so there's still a reason to comment. ZERO em/en dashes ([[no-em-dashes-in-copy]]). Pairs with [[lead-magnet-docs]] (the guide the CTA promises).
+
+## OC correction on September 12 2026
+
+The initially delivered OC caption incorrectly opened with value and buried the CTA. The [corrected caption](../lead-magnets/150-oc-caption.txt) is the reusable formatting example: comment CTA as the first non-empty line, READ BELOW as the next, blank lines between paragraphs, numbered value points, repeated named-guide CTA, then hashtags. Check the actual uploaded text, not just an in-memory draft. The final caption is 1,244 characters, with no em/en dashes; the article holds the copyable commands. See the [OC revision record](reels/oc-factory-log.md).
