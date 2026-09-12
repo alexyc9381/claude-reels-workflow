@@ -1,6 +1,16 @@
 # Video QA record
 
-## v7 — completed full-film review export
+## v9 — completed full-film review export
+
+- Current delivery: `outputs/higgsfield-replacement-edit-v9.mp4`, 145,252,775 bytes, 13,846 H.264 frames, 1920×1080/30, 461.533333 seconds. Full fatal-error decode and six embedded chapter checks pass. Every picture chunk matches source hash `1856c4ba087e6e6d1295f9f1243b8f86a0f1654e939ed69575887e2d3aa6a2e5`.
+- Final 48 kHz stereo AAC: −16.57 LUFS, −0.97 dBTP estimated true peak, 4.9 LU range. Thirteen OBS-to-final waveform samples pass, maximum lag 0.3125 ms, aligned correlation 0.9431–0.9958. Sony remains muted.
+- Final short-join ASR retains the repaired “Or option B,” Seedance transition, “Second of all,” comparison question and closing “minutes.” No standalone `cut` in those five windows. Not an exhaustive human listening review.
+- Source checks pass: 47 source selections, ten full-scene slots, thirty support cues, 91 quiet SFX events, original camera offsets, no CGI, safe focused typing corners, privacy masks, deterministic source and exact authorized EDL delta from v8.
+- Reviewed actual encoded samples across the opening, middle and ending, including the camera-direction illustration replacing the mismatched result card and the complete final throw/catch/install action. Preserved real screen content; no claim that an illustrated miniature is generated proof footage.
+- Machine evidence: [export](verification/export-v9.json), [source alignment](verification/audio-sync-v9.json), [final joins](verification/final-joins-v9.json). Full request matrix: [REVISION-V9.md](REVISION-V9.md). Remaining user recordings/assets, claim clarification, rights and creative/listening sign-off: [RETENTION-AND-PICKUPS.md](RETENTION-AND-PICKUPS.md).
+- Historical records below describe their own versions; their old “no push” or prior CGI status is not current. V9 source and indexed learnings are saved to GitHub. Media and previous exports remain local and intact.
+
+## Historical v7 — completed full-film review export
 
 - Final file: `outputs/higgsfield-replacement-edit-v7.mp4`, 149,103,492 bytes; exactly 473 seconds, 14,190 H.264 frames at 1920×1080/30. All picture/audio frames decode with fatal-error handling. Six embedded chapter names/times match the EDL. Every picture chunk matches current source hash `33a8f9794d0f0529cf297d921a25e4a5b816f275a41fca05c4ca9c90b76787d6`.
 - Final AAC: stereo 48 kHz, −16.57 LUFS integrated, −0.91 dBTP estimated true peak, 4.8 LU range. Ten final-file OBS comparisons pass: maximum lag 0.3125 ms, aligned correlation 0.942–1.000. The final mux caps output to exactly 473 seconds, removing the 100 ms audio-filter tail without shortening the picture or intended closing word.

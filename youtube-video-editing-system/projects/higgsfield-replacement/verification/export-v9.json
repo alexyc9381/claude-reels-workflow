@@ -1,0 +1,48 @@
+{
+  "output": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/outputs/higgsfield-replacement-edit-v9.mp4",
+  "bytes": 145252775,
+  "duration": 461.533333,
+  "frames": 13846,
+  "width": 1920,
+  "height": 1080,
+  "fps": "30/1",
+  "sourceHash": "1856c4ba087e6e6d1295f9f1243b8f86a0f1654e939ed69575887e2d3aa6a2e5",
+  "allPictureChunksMatchCurrentSource": true,
+  "audio": {
+    "codec": "aac",
+    "sampleRate": "48000",
+    "channels": 2,
+    "lufs": -16.57,
+    "truePeak": -0.97,
+    "lra": 4.9
+  },
+  "chapters": [
+    {
+      "title": "Can you tell the difference?",
+      "seconds": 0
+    },
+    {
+      "title": "Why use the models directly?",
+      "seconds": 36.567
+    },
+    {
+      "title": "Connect fal.ai and Claude",
+      "seconds": 124.1
+    },
+    {
+      "title": "Make your first video",
+      "seconds": 207.667
+    },
+    {
+      "title": "Review and compare the results",
+      "seconds": 297.333
+    },
+    {
+      "title": "The reveal and next step",
+      "seconds": 433.867
+    }
+  ],
+  "decodePassed": true,
+  "fullHumanListeningReview": false,
+  "verifiedEquivalentReusedChunks": []
+}

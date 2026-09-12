@@ -1,6 +1,6 @@
 # V9 — action, source-join and retention revision
 
-September 11, 2026. **Full-length Remotion review; export/QA in progress.** Not new creative approval and not a published video. Previous outputs and source recordings remain intact.
+September 11, 2026. **Full-length Remotion review exported; machine checks and sampled visual QA passed.** Not new creative/listening approval and not a published video. Previous outputs and source recordings remain intact.
 
 ## Current cut
 
@@ -43,8 +43,15 @@ Active graph: `video/src/youtube-roughcut.tsx` → `RoughCut.tsx` → `YouTubeV9
 
 - `tools/test-v9.mjs` passes EDL delta lock, source bounds, original camera offsets, plate source/hash/coverage, one-frame boundary allowance, privacy masks, muted video, deterministic TS/TSX parsing, unique scene identities and all focused input-box corners.
 - Reviewed rendered frames across the opening, guide, wrapper/direct/gating, keys, skill, pro tip, options, chase, camera direction, coming-up and final throw/catch/result. Corrected guide label/sprite overlap, skill caption/facecam overlap, pro-tip/input overlap and source-model mismatch before full render.
-- Targeted source ASR and silence-boundary diagnostics informed phrase edits. They are not a full listening verdict. Final source-to-export waveform checks, short final-join ASR, full decode and loudness/chapter checks are recorded after export.
+- Delivered `outputs/higgsfield-replacement-edit-v9.mp4`: 145,252,775 bytes; exactly 13,846 frames, 1920×1080/30, 461.533333 seconds. Full audio/video fatal-error decode passed, all six embedded chapters match, and all six picture chunks match current source hash `1856c4ba087e6e6d1295f9f1243b8f86a0f1654e939ed69575887e2d3aa6a2e5`. [Export evidence](verification/export-v9.json).
+- Final AAC is 48 kHz stereo, −16.57 LUFS integrated, −0.97 dBTP estimated true peak, 4.9 LU range. Thirteen final-file OBS waveform samples pass: maximum absolute lag 0.3125 ms; aligned correlations 0.9431–0.9958. This is sampled audio alignment, not a full listening or optical lip-sync verdict. [Audio evidence](verification/audio-sync-v9.json).
+- Final-file short-window ASR retains “Or option B…”, “And now let's take a look…”, “Second of all…”, the shortened “Can you spot the difference?” transition and closing “minutes.” No standalone `cut` detected in these five windows; proper-noun ASR errors are analysis only. [Join evidence](verification/final-joins-v9.json).
+- Encoded visual samples span opening, guides, keys, skill, pro tip, source-model options, chase, camera direction, late results, coming-up/reveal and the final lift → throw → catch → install → first-shot payoff. Full delivery includes the revised middle and ending, not only an intro pilot.
 - Video/motion/audio skills informed causal choreography, boundary handling, source-clock safety and verification; the explicit Remotion engine choice remained authoritative.
+
+## Repository delivery
+
+Current direction, learning index, decision ledger, complete revision sources/history and reproducible tools were pushed to `main` at `2535a41`, preserving newer unrelated remote reel work through normal merges. Final QA evidence is committed in the follow-up delivery commit. Large original media and rendered MP4s remain local; GitHub holds code, documentation and metadata, not the video binary. No source media or older export was deleted.
 
 ## Pending publication inputs
 
