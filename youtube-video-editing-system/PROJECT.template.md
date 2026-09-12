@@ -9,7 +9,8 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 - Audience:
 - One-sentence promise:
 - Format: tutorial | explainer | case study | recorded build | other
-- Target duration:
+- Visual mode by section: footage-led | voiceover-explainer | mixed (separate from the assembly profile)
+- Target duration (only a hard limit when Alex specifies one; otherwise let the complete story determine it):
 - Resolution and fps:
 - CTA:
 - Delivery destination:
@@ -17,6 +18,12 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 - Explicit exclusions:
 
 ## Sources
+
+- Editor: Remotion (not Supereditor).
+- For OBS + Sony recordings: OBS-only editorial audio; camera clips always muted.
+- Record per-camera offset and drift checks at beginning/middle/end. Filenames are not sync evidence.
+- Flag camera speech without OBS coverage; never silently replace the audio master.
+- First rough-cut gate: coherent story + synchronized footage before animation, music or SFX.
 
 | source | path or URL | role | duration | usable? | notes |
 |---|---|---|---:|---|---|
@@ -26,9 +33,9 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 
 - Source FPS:
 - Output FPS:
-- Maximum untouched non-speech gap: 0.50s by default
-- Voice-onset padding: 0.10s by default
-- Voice-release padding: 0.18s by default
+- Silence-detection threshold / review candidates (never an automatic maximum for demonstrations):
+- Voice-onset padding: review starting point 0.15–0.25s; adjust to the actual phoneme and nearby retakes
+- Voice-release padding: review starting point 0.20–0.35s; adjust to the actual phoneme and nearby retakes
 - Teaching pause restoration: off | 0.35s at approved sentence ends
 - Per-recording paths reset and checked: yes | no
 - Final acoustic marker sweep: pending | pass | fail
@@ -42,6 +49,10 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 
 ## Paper edit
 
+Follow `CONTENT-PRESERVATION.md`. Audit the entire source before treating the current selects as complete. Keep a timecoded disposition for each useful unique idea, including claim-review and pickup-needed material. Recover good original explanation before asking Alex to re-record it. VAD and ASR timestamps are inspection aids, not final cut authority.
+
+Chapter plan: name sections around complete viewer tasks or concepts; retain natural spoken bridges, a concise payoff and breathing room at boundaries. Record source boundaries and derive output-relative chapter timestamps from the EDL after each revision. First pass uses markers only; chapter-card animation belongs to the later graphics pass. Do not split mid-explanation merely to achieve equal chapter lengths.
+
 | section | start target | purpose | spoken beat/select | proof or demonstration | cut if missing |
 |---|---:|---|---|---|---|
 | Hook | 0:00 | Earn the next minute | | | yes |
@@ -54,6 +65,38 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 | time/line | visual | purpose | source/evidence | mode | status |
 |---|---|---|---|---|---|
 | | | clarify/prove/orient/compare/demonstrate/reset | | overlay/cutaway/screen/footage | |
+
+## Voiceover explainer beat map (when applicable)
+
+Follow `VOICEOVER-EXPLAINER-MODE.md`. Use final edited VO times; update after narration edits. This is an authoring plan, not a new manifest schema.
+
+- What the viewer should understand:
+- Narration file/version and corrected transcript:
+- Concrete example and factual sources:
+- Likely misunderstanding to resolve:
+- Foreground safe area / aligned groups / focal priority:
+- Motion verbs, ease families and build–hold–resolve rhythm:
+
+| VO in–out / exact line | visual state → meaningful change | what persists | labels / reading hold | Claude action / reaction | justified SFX cue |
+|---|---|---|---|---|---|
+| | | | | | |
+
+- [ ] Representative narrated passage reviewed before full animation build.
+- [ ] Viewer can explain the mechanism, not just recognize the term.
+- [ ] SFX mixed under the real VO; audition loudness not reused.
+
+## Sound target and cue plan
+
+Follow `SOUND-DESIGN-PRINCIPLES.md`; effects are optional, not a checklist to fill.
+
+| event / exact contact time | material / job | source + provenance | envelope / pitch / cleanup | layers / gain / pan / depth | VO conflict / decision |
+|---|---|---|---|---|---|
+| | | | | | |
+
+- [ ] Each layer has a distinct purpose; quiet reading holds remain quiet.
+- [ ] Shared visual/audio contact times, fades and finite tails verified.
+- [ ] Actual VO mix reviewed in stereo, mono and on small speakers.
+- [ ] Level-matched A/B and final combined-export loudness/peak checks complete.
 
 ## Edit decisions
 
@@ -75,6 +118,9 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 - [ ] Resolution, frame rate, and duration match the brief.
 - [ ] No missing, stale, or offline media.
 - [ ] Picture and sound were built from the same frame-based EDL.
+- [ ] Every useful unique source idea is accounted for in the content-disposition ledger.
+- [ ] Full spoken starts/ends and all edited joins were auditioned; no isolated automatic fragments.
+- [ ] Missing prerequisites/payoffs are restored or explicitly assigned a pickup.
 - [ ] Final acoustic marker sweep is fresh and clean.
 - [ ] Long silent/high-motion spans were visually reviewed before deletion.
 - [ ] On-screen and spoken privacy sweeps are complete.

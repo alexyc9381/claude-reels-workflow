@@ -1,0 +1,47 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {runInNewContext} from 'node:vm';
+import {createRequire} from 'node:module';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const project=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const repo=path.resolve(project,'../../..'),video=path.join(repo,'video');
+const base=process.cwd(),work=path.join(base,'work/higgsfield-replacement');
+const require=createRequire(path.join(video,'package.json'));
+const {transformSync}=require('esbuild');
+const current=JSON.parse(readFileSync(path.join(project,'roughcut.props.json'))).manifest;
+const before=JSON.parse(readFileSync(path.join(work,'revision-v2/roughcut-v1.props.json'))).manifest;
+assert.deepEqual(current.cameras,before.cameras,'Camera offsets must not silently change');
+assert.deepEqual(current.segments.map(s=>[s.id,s.start,s.end]),before.segments.map(s=>[s.id,s.start,s.end]),'Audio EDL unchanged');
+assert.equal(current.segments.length,45);
+for(const id of ['s008','s009','s010','s011','s012','s013'])assert.equal(current.segments.find(s=>s.id===id).layout,'screen-presenter');
+for(const id of ['s016','s028'])assert.equal(current.segments.find(s=>s.id===id).layout,'presenter','Sensitive screen stays hidden');
+const assembly=readFileSync(path.join(video,'src/youtube/RoughCut.tsx'),'utf8');
+const polish=readFileSync(path.join(video,'src/youtube/YouTubePolish.tsx'),'utf8');
+assert.equal((assembly.match(/<Audio /g)||[]).length,1);
+assert.match(assembly,/<Audio src=\{staticFile\(m.obs.source\)\}/);
+assert.doesNotMatch(polish,/<Audio\b/);
+assert.match(assembly,/left:1400,top:660,width:440,height:354/);
+assert.match(assembly,/objectPosition:'30% 42%'/);
+assert.doesNotMatch(polish,/Date\.now|Math\.random|setTimeout|requestAnimationFrame/);
+const expression=polish.match(/export const openingScale=.*?;/)[0];
+const js=transformSync(expression.replace('export ',''),{loader:'ts'}).code;
+const easeOut=(t,start,duration)=>1-Math.pow(1-Math.max(0,Math.min(1,(t-start)/duration)),4);
+const scale=runInNewContext(js+';openingScale',{Math,easeOut});
+assert.equal(scale(0),1);
+assert.ok(Math.abs(scale(4.5)-1.065)<1e-6);
+let previous=1,lastVelocity=Infinity;
+for(let f=1;f<=135;f++){
+ const current=scale(f/30),velocity=current-previous;
+ assert.ok(current>=previous&&current<=1.066);
+ assert.ok(velocity<=lastVelocity+1e-10,'Opening zoom decelerates continuously');
+ previous=current;lastVelocity=velocity;
+}
+assert.equal(createHash('sha256').update(readFileSync(path.join(work,'public/cube.mov'))).digest('hex'),'0e9263ca447bb7e652bba4d1fcce7fb54e047d8024ad236e5c25530b773973aa');
+let frame=0,seconds=0;const rows=current.segments.map(s=>{seconds+=s.end-s.start;const end=Math.round(seconds*current.fps);const row={...s,from:frame,duration:end-frame};frame=end;return row;});
+assert.equal(frame,13314);
+const get=id=>rows.find(s=>s.id===id);
+const cues=[['opening zoom',0,135],['CGI shoulder',get('s004').from,get('s004').duration],['2D pipeline',get('s005').from,get('s005').duration],['API key',get('s016').from+15,180],['Skill',get('s018').from,get('s018').duration],['budget',get('s024').from+Math.round((1249.35-get('s024').start)*30),105],['CGI result',get('s029').from+15,165]];
+for(const [name,from,duration] of cues){assert.ok(from>=0&&from+duration<=frame,name);console.log(name,(from/30).toFixed(3),((from+duration)/30).toFixed(3));}
+console.log('PASS: unchanged sync/audio EDL, restored slides, protected screens, right crop, decelerating 6.5% zoom, original CGI identity, cue bounds and deterministic motion.');

@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import path from 'node:path';
+const project=path.resolve('work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement');
+const props=JSON.parse(readFileSync('work/higgsfield-replacement/revision-v5/roughcut.props.json'));
+props.manifest.editVersion='v5';
+props.manifest.segments.find(s=>s.id==='r-teaser').reason='Complete original reaction excerpt, 1992.43–1996.82; moderate teaser blur; no synthetic speech';
+writeFileSync(path.join(project,'roughcut.props.json'),JSON.stringify(props,null,2));
+const rows=JSON.parse(readFileSync('work/higgsfield-replacement/revision-v5/v4-timeline.json'));
+writeFileSync(path.join(project,'v5-timeline.json'),JSON.stringify(rows,null,2));
+console.log('v5 design revision: editorial source ranges, camera sync and chapter times unchanged.');

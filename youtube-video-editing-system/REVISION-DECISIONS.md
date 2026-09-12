@@ -1,0 +1,111 @@
+# Conversation decision ledger
+
+September 10–11, 2026. This index preserves the learning trajectory from the full No Code Alex YouTube-system conversation. Times in feedback identify the **review version the user saw**, not permanent positions. Use segment IDs and the current motion map to locate a beat after an edit. “Implemented” describes code/edit work, not new creative approval.
+
+## System discovery and reusable transfers
+
+| Request / discovery | Decision and durable lesson | Evidence / current destination |
+|---|---|---|
+| Find long-form guidelines in No Code Alex, not Matchtern | Establish a separate No Code Alex YouTube subsystem; archived Matchtern style remains historical | README; memory/archive/matchtern-longform-video-style.md |
+| Inspect course editing, recover screen/voice cleanup | Transfer voice-driven EDL, measured silence policy, explicit hard cuts, silent-demo review, privacy, chrome crop, module boundaries and QA—not course-specific visual austerity | TRANSFER-LOG.md; course/screen/talking-head profiles |
+| Name the system | No Code Alex YouTube editing system | CURRENT-DIRECTION.md |
+| Add more Remotion editing modes | Shared core plus course, screen demo, talking head, and narration-led explainer mode; not an automatic generator for arbitrary concepts | profiles.ts; VOICEOVER-EXPLAINER-MODE.md |
+| Save the approved study into the workflow | Retain DispatchExplainerSound v11 as an approved short example, not approval of every subsequent full film | APPROVED-ANIMATION-SYSTEM.md; original explainer entry |
+| Never use a super editor | Remotion authors timing/picture/graphics; FFmpeg supports ingest, inspection and final mux | REPRODUCE.md |
+
+## Brand, visual hierarchy and character evolution
+
+| Feedback cluster | Current resolution / lesson |
+|---|---|
+| Large screen over gradient; smaller but substantial rounded facecam | Maximize readable screen area; use right inset, independent inset/full crops and source-first framing |
+| Opening zoom should be quick then slow | Fast onset followed by gentle settle, scoped to opening presenter—not time-remapping the original speech |
+| Apple-like premium easing, motion graphics, definition overlays | Optical white glass, considered ease/contact timing, minimal labels, distinct component families; premium is not a spring applied to everything |
+| “CGI already exists; not something to recreate” | Preserve the exact confirmed ChenBuildsAI `cube.mov`; custom shader/2D variants are not that asset |
+| Wrong cube reference, check ChenBuildsAI, then confirmation | Source lineage/checksum recorded in ORIGINAL-CGI-AND-BRAND.md; no new character substituted |
+| Body bounce, reactions, better movement/SFX | Existing 2D rig gains purposeful gesture, gaze, blink, anticipation, impact/rebound and follow-through; do not freeze at touchdown |
+| Glass font/color wrong; orange brand; black translucency considered | Later white-only request supersedes black glass; later sans-serif request supersedes Fraunces for this full film |
+| Glass too standard | Visible white material, warm edge, reflection, finite sheen, depth, contrast against real footage; avoid dark glass and flat generic cards |
+| Sprites should integrate with explainers | Give them an actual job and object interaction; reuse anatomy and role outfits rather than a passive mascot floating beside every card |
+| First sample text-heavy, linear and cluttered | Remove diagram jargon such as exception path, schematic example, Repair/Check Again and persistent channel/title labels; show mechanisms graphically |
+| Too small and centered as one tiny card | Use a substantial landscape stage, multiple purposeful components and transformation/handoffs |
+| Next version scattered / near edges | Center and group the larger scene with safe margins; scale is not permission to put content at every edge |
+| Basic lines/shapes/squares; boring static backgrounds | Build recognizable environments and working props. More ornament on the same rectangle is not a better concept |
+| More concurrent moving parts | Overlap related jobs while retaining one lead action. Do not make all other actors freeze until the hero finishes |
+| Odd abstract shape disliked, oval okay | Reject pleated slab/ribbon, retain a clean oval or grounded stage; protect readable content |
+| More character / different outfits | Later explicit request permits existing courier, archivist and operator costumes; supersedes the intervening blanket no-costume restriction |
+| Bigger, exaggerated, colorful, fast-paced | Large readable payloads, purposeful travel and stronger main reactions; subordinate motion and sound stay quieter |
+| More hierarchical | Source → action → result; use attention priority rather than equal-weight scatter |
+| No asymmetric single large eye | Same aperture for both eyes; retain expressive gaze/blink/recovery |
+| Remove CGI from this film | Current composition has no 3D pet. Preserve original asset for future separately authorized uses |
+| Do not repeat animations | Share materials/rigs, not complete scene choreography. Distinct action identities and payoff states in the motion map |
+
+## Recording, sync and story continuity
+
+| Feedback cluster | Resolution / durable rule |
+|---|---|
+| Use Drive Claude Reels / YouTube / Higgsfield Replacement / Raw, plus connected Sony camera | Inventory actual media, verify coverage and sizes, preserve originals; paths/source metadata in BRIEF and sync-evidence |
+| Clap for sync; always OBS sound | Camera offsets measured against OBS. Sony audio is diagnostic only and never enters the final mix |
+| First pass coherent story, no graphics yet; chapter sections | Source-led assembly before polish. Later explicit graphics request lifts the first-pass-only gate |
+| OBS slides absent after intro | Restore correct OBS ranges; don't use presenter-only layout through the teaching slides |
+| Too much useful original content cut | CONTENT-PRESERVATION.md; restore context and bridges. No arbitrary duration cap or aggressive silence policy that deletes explanations |
+| Missing Higgsfield / manufactured early platform-replacement line | Restore the named setup from real source speech. Do not invent an introduction or conflate takes to manufacture a claim |
+| Sentence/word tails cut around 0:45, 1:02 and later | Revisit source boundary and short-window speech evidence; protect entire phonemes, natural breath and meaning |
+| “Cut cut” around 2:22 / 2:30 / 4:27 | Remove source retake windows; short acoustic checks plus final mix review. A no-marker full transcript is insufficient proof |
+| Awkward pause around 5:46 | Distinguish useful generated playback from a waiting face. Preserve proof while hiding unhelpful silent facecam |
+| Duplicate skill instructions around 3:00 / 3:03 and unnatural 3:02 | Preserve complete no-code/download clause, remove duplicate take, retain upload continuation; use OBS only |
+| Dead space around 0:31 | Shorten actual teaser/next-line source gaps, not merely animate over the silence |
+| Cut billing detour around 5:11 | Explicitly remove s028; keep the clean “alright, let's take a look” results entry |
+| J-cuts requested | Screen-picture handoffs around cuts without moving narration relative to the speaking face; don't claim a full dialogue-overlap edit where only picture changed |
+| Stop on final word | End at completed source word and cap mux to exact picture duration; avoid encoder/filter tail becoming a frozen ending |
+| Latest “or” glitch ~4:41 | v9 trims s026 before its stray conjunction and moves s027 into the clean next option |
+| Latest transition glitch ~6:35 | v9 tightens wind-tail/Seedance-entry source bounds, without switching audio sources |
+| Latest clipped sentence start ~7:01 | v9 restores earlier OBS lead-in to “Second of all…” and generates a matching short person-matted camera plate |
+| Remove recap starting “Do you remember…” until “Can you spot the difference?” | v9 removes s039–s041 and trims s042 to keep the question; all other useful source ranges locked by delta tests |
+
+## Full-film graphics and screen-specific corrections
+
+| Feedback / old review time | Current treatment / reference |
+|---|---|
+| Fast hook first 5/15 seconds; larger videos; possible center face | Wide A/B frames, bottom-center opening facecam, four-second aura, quick inspection/checkout action; A remains an explicitly authorized placeholder |
+| 9/11/14/15/16/17/18/20/22-second graphics too basic or kid-like | Professional sans-serif, real product marks, pricing invoice, model/request/result stages and distinct mechanics; v9 increases functional motion. Artistic approval remains Alex's |
+| $100/month and 10¢ overlap or repeated $100 with no story | Separate units/zones and an invoice print/pull/payoff. These graphics are not evidence of verified costs; publication needs the matched result receipt |
+| Remove “Can you tell,” “Keep your guess,” “What am I paying for,” “One skill. Your models” | Do not restore rejected generic headers/slogans |
+| Roadmap ~0:26 too much like cards | Route with connect/create/compare landmarks and a moving traveler |
+| Later teaser longer, playable, blur adjusted; remove wait badge/bar | Actual result loop, complete original reaction, moderate blur, no wait badge or progress bar |
+| Latest ~0:30 type must be black | v9 black text on white glass verified in rendered frame |
+| Full face → small face at ~0:29–0:30 a hard cut | Shared facecam geometry travels/twists into right inset; continuous recording clock |
+| More left crop in front-on intro | Narrower centered opening crop; separate from full-frame bed removal and inset torso preservation |
+| ~0:34–0:35 skill handoff lacks beginning/end | v9 guide opens, demonstrates a shot, repacks tools into the skill and hands off to courier |
+| ~0:51 covering content; ~1:02 right side empty; ~1:04 static | Dedicated wrapper/direct-model/feature-gating stages, populated model area, new action when narration changes |
+| Definitions should overlay demo; no unnecessary full-face cut ~2:04 | Retain OBS beneath definition cards; enlarge useful terms and orange perimeter countdown |
+| ~1:58 and ~2:01 fix coming later | Single source-anchored reminder with final-timeline timestamp; no duplicate popup at 2:01/2:03 |
+| ~2:27 oversized, irrelevant helper | v9 removes s015 request-response wrapper overlay |
+| ~2:40 make key setup informational | v9 create/copy/secure credential sequence. Redacted private source stays hidden; no invented key-configuration location |
+| ~2:49 / 2:54 / 2:58 slow/basic skill scene | Separate download pickup and instruction-kit → directed shot → Claude install scenes |
+| Show download/upload when spoken (~3:05), sprite involvement | Persistent skill-file identity, actual transfer/install action; no repeated closing scene |
+| ~3:18 enlarge actual text | Synchronized OBS crop in a glass text lens, introduced by Claude; not unrelated stock video or replacement typing |
+| ~3:42 overlays need actual glass; ~3:44 typing Claude | White optical surface, live typing/action motif; preserve the active input field and move facecam/helpers aside |
+| ~3:45 / 3:47 pro tip | v9 larger bold PRO TIP and exact “Guide the camera like a movie director”; camera miniature above—not over—the typing field |
+| ~4:16 animation doesn't match model options | v9 displays recorded Wan 2.2 / Hailuo 2.3 / LTX 2.3 choices and 10¢ / 49¢ / 53¢ estimates; no generic $1 dial or wrong Google/Seedance options |
+| ~4:41 generic checks, disruptive | v9 compact rooftop-chase miniature with camera/pursuit progression; no approval-checkmark scene |
+| ~5:18 automatic camera movement plus user direction | v9 visual default→manual direction cue. New spoken sentence awaits Alex's OBS pickup; no cloned voice |
+| ~5:21 inset video mismatches main result | Supporting cards contain no substitute result loop. Annotate actual OBS playback; illustrative miniatures are clearly graphics |
+| Chapters ~5:16 and elsewhere need branded character | PART navigation with original 2D cast, optical glass and meaningful titles; six embedded chapters retimed after each EDL edit |
+| ~7:19 coming-up retention cue | v9 bottom-left free-guide + existing skill teaser before CTA; distinct bonus remains unspecified and is not falsely promised |
+| ~7:28 / ending need big explainer and file action | Full comparison + larger closing carry/wind-up/throw/catch/import/command/directed-result payoff, with inset presenter |
+
+## Sound-design and delivery learning
+
+| Feedback / event | Rule / action |
+|---|---|
+| Premium SFX audition, then “too loud vs VO” | Preserve audition as history; lower production gains and check against real OBS dialogue |
+| Supplied nine sound-design fundamentals | Adapted purpose/envelope/pitch/layers/simplicity/cleaning/tone/size/movement/depth. Do not transplant example kick-drum settings as mandatory video rules |
+| No sound design / too many dings / plain opening music | Varied tactile action cues and finite musical sections; no bell-per-card. Actual stems and listening matter more than event counts |
+| “Where is video? Why only intro?” | Full-timeline source edits plus complete MP4 handoff. Never call a hook proof the final deliverable |
+| Multiple revision rounds ignored | Source-anchored request ledger, unique scene map, explicit pending items and version-specific tests; historical instructions clearly marked superseded |
+| User asks if pickups would help | Offer short OBS voiceover scripts for exact factual/clarity gaps; do not demand re-recording the whole film |
+| User asks to document/index/push everything | This ledger, current direction, project revisions, source/asset provenance, reproduction and validation records are committed together; no raw media or credentials |
+
+## Precedence summary
+
+White glass beats earlier black-glass consideration. Manrope beats earlier serif studies for this film. Later costume request beats intervening no-costume cap. CGI removal beats earlier recurring-pet request. Current full-video request beats the original rough-cut-only gate. Explicit latest recap deletion beats default content preservation **only for that named passage**. Review completion does not equal creative approval or video publication.

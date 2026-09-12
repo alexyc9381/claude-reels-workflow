@@ -1,0 +1,301 @@
+{
+  "version": "v8",
+  "duration": 473,
+  "sourceTrimsUnchanged": true,
+  "scenes": [
+    {
+      "id": "s001",
+      "action": "hook",
+      "start": 0,
+      "end": 15
+    },
+    {
+      "id": "s004",
+      "action": "studio",
+      "start": 15,
+      "end": 23.666666666666668
+    },
+    {
+      "id": "s006",
+      "action": "roadmap",
+      "start": 23.666666666666668,
+      "end": 27
+    },
+    {
+      "id": "s007",
+      "action": "guide",
+      "start": 30.933333333333334,
+      "end": 36.56666666666667
+    },
+    {
+      "id": "s010",
+      "action": "wrapper",
+      "start": 47.166666666666664,
+      "end": 58.6
+    },
+    {
+      "id": "r-direct",
+      "action": "direct",
+      "start": 58.6,
+      "end": 79.03333333333333
+    },
+    {
+      "id": "s017",
+      "action": "download",
+      "start": 169.33333333333334,
+      "end": 173.6
+    },
+    {
+      "id": "s018",
+      "action": "skill",
+      "start": 173.6,
+      "end": 185
+    },
+    {
+      "id": "s038",
+      "action": "compare",
+      "start": 432.46666666666664,
+      "end": 458.6666666666667
+    },
+    {
+      "id": "s044",
+      "action": "outro",
+      "start": 464.43333333333334,
+      "end": 473
+    }
+  ],
+  "supports": [
+    {
+      "id": "s009:0.2",
+      "action": "definition / Wrapper",
+      "start": 40.56666666666667,
+      "end": 46.46666666666667
+    },
+    {
+      "id": "s011:1",
+      "action": "brand / fal.ai",
+      "start": 80.03333333333333,
+      "end": 84.63333333333333
+    },
+    {
+      "id": "s011:8",
+      "action": "definition / API",
+      "start": 87.03333333333333,
+      "end": 92.33333333333333
+    },
+    {
+      "id": "s012:7.5",
+      "action": "result-archive-tray",
+      "start": 101.76666666666667,
+      "end": 106.76666666666667
+    },
+    {
+      "id": "s014:3.8",
+      "action": "brand / fal.ai",
+      "start": 127.89999999999999,
+      "end": 131.89999999999998
+    },
+    {
+      "id": "s015:7",
+      "action": "request-response-plug",
+      "start": 139.93333333333334,
+      "end": 147.43333333333334
+    },
+    {
+      "id": "s016:0",
+      "action": "keys / keys",
+      "start": 151,
+      "end": 166.33333333333334
+    },
+    {
+      "id": "s016:3.2",
+      "action": "definition / API key",
+      "start": 154.2,
+      "end": 160.5
+    },
+    {
+      "id": "s020:1.5",
+      "action": "command-keyboard",
+      "start": 186.5,
+      "end": 192.9
+    },
+    {
+      "id": "s020:9.8",
+      "action": "lens / lens",
+      "start": 194.8,
+      "end": 200
+    },
+    {
+      "id": "s021:4.5",
+      "action": "definition / Prompt",
+      "start": 212.16666666666666,
+      "end": 217.16666666666666
+    },
+    {
+      "id": "s021:13",
+      "action": "orbit-camera-rig",
+      "start": 220.66666666666666,
+      "end": 227.16666666666666
+    },
+    {
+      "id": "s021:25",
+      "action": "three-shot-contact-sheet",
+      "start": 232.66666666666666,
+      "end": 238.06666666666666
+    },
+    {
+      "id": "s023:0.5",
+      "action": "variable-aperture-frame",
+      "start": 243.4,
+      "end": 249.4
+    },
+    {
+      "id": "s024:1.5",
+      "action": "budget-stop-dial",
+      "start": 251.93333333333334,
+      "end": 259.23333333333335
+    },
+    {
+      "id": "s025:0",
+      "action": "brand / Hailuo",
+      "start": 263.3333333333333,
+      "end": 266.3333333333333
+    },
+    {
+      "id": "s026:3",
+      "action": "definition / Storyboard",
+      "start": 269.3666666666667,
+      "end": 275.1666666666667
+    },
+    {
+      "id": "s026:10.2",
+      "action": "shot-editing-strip",
+      "start": 276.56666666666666,
+      "end": 281.6
+    },
+    {
+      "id": "s027:2",
+      "action": "brief-approval-stamp",
+      "start": 283.6,
+      "end": 289.6
+    },
+    {
+      "id": "s027:10",
+      "action": "brand / Choose the direction",
+      "start": 291.6,
+      "end": 296.40000000000003
+    },
+    {
+      "id": "s029:0.2",
+      "action": "brand / First result",
+      "start": 297.93333333333334,
+      "end": 301.03333333333336
+    },
+    {
+      "id": "s030:4",
+      "action": "source-camera-follow",
+      "start": 316.43333333333334,
+      "end": 321.43333333333334
+    },
+    {
+      "id": "s030:17",
+      "action": "wind-impact-performance",
+      "start": 329.43333333333334,
+      "end": 336.43333333333334
+    },
+    {
+      "id": "s030:30",
+      "action": "lens-dolly-stage",
+      "start": 342.43333333333334,
+      "end": 347.8333333333333
+    },
+    {
+      "id": "s031:0.6",
+      "action": "definition / Creative direction",
+      "start": 348.53333333333336,
+      "end": 355.03333333333336
+    },
+    {
+      "id": "s032:0.2",
+      "action": "brand / Same prompt. New model.",
+      "start": 356.5,
+      "end": 360.6
+    },
+    {
+      "id": "s035:0.5",
+      "action": "movement-trace",
+      "start": 389.96666666666664,
+      "end": 394.46666666666664
+    },
+    {
+      "id": "s036:0.5",
+      "action": "brand / Seedance",
+      "start": 395.96666666666664,
+      "end": 399.66666666666663
+    },
+    {
+      "id": "s036:16",
+      "action": "continuity-inspector",
+      "start": 411.46666666666664,
+      "end": 417.16666666666663
+    },
+    {
+      "id": "s037:1.4",
+      "action": "foley-mixing-console",
+      "start": 422.09999999999997,
+      "end": 428.09999999999997
+    },
+    {
+      "id": "r-outlook:0.4",
+      "action": "brand / Create with the models",
+      "start": 459.06666666666666,
+      "end": 463.8666666666667
+    }
+  ],
+  "chapters": [
+    {
+      "title": "Can you tell the difference?",
+      "frame": 0,
+      "seconds": 0
+    },
+    {
+      "title": "Why use the models directly?",
+      "frame": 1097,
+      "seconds": 36.56666666666667
+    },
+    {
+      "title": "Connect fal.ai and Claude",
+      "frame": 3723,
+      "seconds": 124.1
+    },
+    {
+      "title": "Make your first video",
+      "frame": 6230,
+      "seconds": 207.66666666666666
+    },
+    {
+      "title": "Review and compare the results",
+      "frame": 8932,
+      "seconds": 297.73333333333335
+    },
+    {
+      "title": "The reveal and next step",
+      "frame": 12974,
+      "seconds": 432.46666666666664
+    }
+  ],
+  "retention": "Editorial risk assessment only; no audience analytics",
+  "reviewVideoInsetPolicy": "No unrelated video in supporting result callouts",
+  "originalA": "Still placeholder; required before publishing",
+  "sharedGrammar": [
+    "Manrope",
+    "white optical glass",
+    "Claude2D outfits",
+    "chapter and definition navigation"
+  ],
+  "motionRules": [
+    "svg-icon-enrichment",
+    "control-target-sync",
+    "reactive-displacement"
+  ]
+}

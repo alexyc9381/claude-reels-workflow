@@ -1,0 +1,120 @@
+{
+  "duration": 17,
+  "sampleRate": 48000,
+  "masterGain": 0.65,
+  "intent": "Quiet, tactile white glass; one dominant action at a time; no music or VO in this preview.",
+  "assets": {
+    "glide": {
+      "attack": 0.055,
+      "release": 0.15,
+      "cutoff": 3000,
+      "highpass": 180
+    },
+    "tap": {
+      "attack": 0.008,
+      "release": 0.09,
+      "cutoff": 3300,
+      "highpass": 220
+    },
+    "glass": {
+      "max": 1.15,
+      "attack": 0.028,
+      "release": 0.4,
+      "cutoff": 4100,
+      "highpass": 420
+    },
+    "land": {
+      "attack": 0.009,
+      "release": 0.11,
+      "cutoff": 1100,
+      "highpass": 100
+    }
+  },
+  "cues": [
+    {
+      "at": 0.2,
+      "sound": "glide",
+      "gain": 0.33,
+      "pan": 0,
+      "purpose": "record entrance"
+    },
+    {
+      "at": 2.9,
+      "sound": "glide",
+      "gain": 0.4,
+      "pan": 0,
+      "panEnd": -0.15,
+      "panDuration": 0.72,
+      "purpose": "open source compartment"
+    },
+    {
+      "at": 6.65,
+      "sound": "land",
+      "gain": 0.65,
+      "pan": 0.03,
+      "purpose": "body weight at exact foot contact"
+    },
+    {
+      "at": 6.66,
+      "sound": "tap",
+      "gain": 0.33,
+      "pan": 0.03,
+      "purpose": "same-contact control click, second layer 10ms later"
+    },
+    {
+      "at": 7.1,
+      "sound": "tap",
+      "gain": 0.25,
+      "pan": -0.22,
+      "purpose": "envelope seal releases"
+    },
+    {
+      "at": 7.8,
+      "sound": "glide",
+      "gain": 0.25,
+      "pan": -0.22,
+      "purpose": "supplied reply lifts"
+    },
+    {
+      "at": 9.15,
+      "sound": "glide",
+      "gain": 0.4,
+      "pan": -0.22,
+      "panEnd": -0.03,
+      "panDuration": 1.1,
+      "purpose": "reply follows image direction with modest width"
+    },
+    {
+      "at": 10.25,
+      "sound": "tap",
+      "gain": 0.42,
+      "pan": -0.03,
+      "purpose": "reply docks into email socket"
+    },
+    {
+      "at": 12.1,
+      "sound": "glide",
+      "gain": 0.34,
+      "pan": 0.16,
+      "panEnd": 0,
+      "panDuration": 0.72,
+      "purpose": "record returns to center"
+    },
+    {
+      "at": 13.65,
+      "sound": "tap",
+      "gain": 0.3,
+      "pan": 0.1,
+      "purpose": "filing tab engages"
+    },
+    {
+      "at": 13.665,
+      "sound": "glass",
+      "gain": 0.25,
+      "pan": 0.1,
+      "reflectionMs": 45,
+      "reflectionGain": 0.06,
+      "purpose": "restrained glass resonance, 15ms offset; short depth tail"
+    }
+  ]
+}

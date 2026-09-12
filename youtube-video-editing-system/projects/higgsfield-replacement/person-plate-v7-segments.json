@@ -1,0 +1,302 @@
+[
+  {
+    "id": "s001",
+    "start": 17.17,
+    "from": 0,
+    "duration": 132
+  },
+  {
+    "id": "s002",
+    "start": 40.17,
+    "from": 132,
+    "duration": 88
+  },
+  {
+    "id": "s003",
+    "start": 54.67,
+    "from": 220,
+    "duration": 100
+  },
+  {
+    "id": "r-higgsfield",
+    "start": 79.01,
+    "from": 320,
+    "duration": 130
+  },
+  {
+    "id": "s004",
+    "start": 115.81,
+    "from": 450,
+    "duration": 86
+  },
+  {
+    "id": "s005",
+    "start": 124.84,
+    "from": 536,
+    "duration": 174
+  },
+  {
+    "id": "s006",
+    "start": 148.73,
+    "from": 710,
+    "duration": 100
+  },
+  {
+    "id": "r-teaser",
+    "start": 1992.43,
+    "from": 810,
+    "duration": 118
+  },
+  {
+    "id": "s007",
+    "start": 242,
+    "from": 928,
+    "duration": 169
+  },
+  {
+    "id": "s008",
+    "start": 306.04,
+    "from": 1097,
+    "duration": 114
+  },
+  {
+    "id": "s009",
+    "start": 338.17,
+    "from": 1211,
+    "duration": 204
+  },
+  {
+    "id": "s010",
+    "start": 353.8,
+    "from": 1415,
+    "duration": 343
+  },
+  {
+    "id": "r-direct",
+    "start": 389.2,
+    "from": 1758,
+    "duration": 366
+  },
+  {
+    "id": "r-features",
+    "start": 413.94,
+    "from": 2124,
+    "duration": 247
+  },
+  {
+    "id": "s011",
+    "start": 502.52,
+    "from": 2371,
+    "duration": 457
+  },
+  {
+    "id": "s012",
+    "start": 521.13,
+    "from": 2828,
+    "duration": 383
+  },
+  {
+    "id": "s013",
+    "start": 599.4,
+    "from": 3211,
+    "duration": 429
+  },
+  {
+    "id": "r-safety",
+    "start": 627.32,
+    "from": 3640,
+    "duration": 83
+  },
+  {
+    "id": "s014",
+    "start": 753.07,
+    "from": 3723,
+    "duration": 265
+  },
+  {
+    "id": "s015",
+    "start": 778.9,
+    "from": 3988,
+    "duration": 542
+  },
+  {
+    "id": "s016",
+    "start": 800.46,
+    "from": 4530,
+    "duration": 460
+  },
+  {
+    "id": "s017",
+    "start": 932.76,
+    "from": 4990,
+    "duration": 218
+  },
+  {
+    "id": "s018",
+    "start": 961.73,
+    "from": 5208,
+    "duration": 144
+  },
+  {
+    "id": "r-no-code",
+    "start": 972.2,
+    "from": 5352,
+    "duration": 136
+  },
+  {
+    "id": "s019",
+    "start": 985,
+    "from": 5488,
+    "duration": 153
+  },
+  {
+    "id": "s020",
+    "start": 995.48,
+    "from": 5641,
+    "duration": 680
+  },
+  {
+    "id": "s021",
+    "start": 1034.7,
+    "from": 6321,
+    "duration": 1057
+  },
+  {
+    "id": "s023",
+    "start": 1081.08,
+    "from": 7378,
+    "duration": 226
+  },
+  {
+    "id": "s024",
+    "start": 1246.45,
+    "from": 7604,
+    "duration": 387
+  },
+  {
+    "id": "s025",
+    "start": 1266.2,
+    "from": 7991,
+    "duration": 91
+  },
+  {
+    "id": "s026",
+    "start": 1286.72,
+    "from": 8082,
+    "duration": 457
+  },
+  {
+    "id": "s027",
+    "start": 1313.02,
+    "from": 8539,
+    "duration": 484
+  },
+  {
+    "id": "s029",
+    "start": 1526.43,
+    "from": 9023,
+    "duration": 441
+  },
+  {
+    "id": "s030",
+    "start": 1541.1,
+    "from": 9464,
+    "duration": 1065
+  },
+  {
+    "id": "s031",
+    "start": 1612.18,
+    "from": 10529,
+    "duration": 251
+  },
+  {
+    "id": "s032",
+    "start": 1805.32,
+    "from": 10780,
+    "duration": 140
+  },
+  {
+    "id": "s033",
+    "start": 1849.13,
+    "from": 10920,
+    "duration": 440
+  },
+  {
+    "id": "s034",
+    "start": 1873.3,
+    "from": 11360,
+    "duration": 415
+  },
+  {
+    "id": "s035",
+    "start": 1892.02,
+    "from": 11775,
+    "duration": 180
+  },
+  {
+    "id": "s036",
+    "start": 1981.23,
+    "from": 11955,
+    "duration": 757
+  },
+  {
+    "id": "s037",
+    "start": 2017.6,
+    "from": 12712,
+    "duration": 353
+  },
+  {
+    "id": "s038",
+    "start": 2151.54,
+    "from": 13065,
+    "duration": 195
+  },
+  {
+    "id": "s039",
+    "start": 2166.1,
+    "from": 13260,
+    "duration": 87
+  },
+  {
+    "id": "s040",
+    "start": 2173.77,
+    "from": 13347,
+    "duration": 78
+  },
+  {
+    "id": "s041",
+    "start": 2205.93,
+    "from": 13425,
+    "duration": 135
+  },
+  {
+    "id": "s042",
+    "start": 2220.75,
+    "from": 13560,
+    "duration": 131
+  },
+  {
+    "id": "s043",
+    "start": 2269.26,
+    "from": 13691,
+    "duration": 160
+  },
+  {
+    "id": "r-outlook",
+    "start": 2329.73,
+    "from": 13851,
+    "duration": 173
+  },
+  {
+    "id": "s044",
+    "start": 2442.85,
+    "from": 14024,
+    "duration": 109
+  },
+  {
+    "id": "s045",
+    "start": 2454.08,
+    "from": 14133,
+    "duration": 148
+  }
+]

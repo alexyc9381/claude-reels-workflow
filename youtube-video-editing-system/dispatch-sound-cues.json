@@ -1,0 +1,124 @@
+{
+  "duration": 7,
+  "sampleRate": 48000,
+  "masterGain": 0.65,
+  "assets": {
+    "glide": {
+      "attack": 0.055,
+      "release": 0.15,
+      "cutoff": 3000,
+      "highpass": 180
+    },
+    "tap": {
+      "attack": 0.008,
+      "release": 0.09,
+      "cutoff": 3300,
+      "highpass": 220
+    },
+    "glass": {
+      "max": 1.15,
+      "attack": 0.028,
+      "release": 0.4,
+      "cutoff": 4100,
+      "highpass": 420
+    },
+    "land": {
+      "attack": 0.009,
+      "release": 0.11,
+      "cutoff": 1100,
+      "highpass": 100
+    }
+  },
+  "cues": [
+    {
+      "at": 0.05882352941176471,
+      "sound": "glide",
+      "gain": 0.22,
+      "pan": 0,
+      "purpose": "scene entrance"
+    },
+    {
+      "at": 0.8529411764705882,
+      "sound": "land",
+      "gain": 0.48,
+      "pan": -0.2,
+      "purpose": "courier lands and opens source"
+    },
+    {
+      "at": 0.911764705882353,
+      "sound": "glide",
+      "gain": 0.3,
+      "pan": -0.2,
+      "purpose": "letter reveal"
+    },
+    {
+      "at": 1.5705882352941176,
+      "sound": "tap",
+      "gain": 0.3,
+      "pan": -0.15,
+      "purpose": "stamp plate contacts letter; postmark appears"
+    },
+    {
+      "at": 1.823529411764706,
+      "sound": "tap",
+      "gain": 0.22,
+      "pan": -0.16,
+      "purpose": "letter settles for carry"
+    },
+    {
+      "at": 2.882352941176471,
+      "sound": "glide",
+      "gain": 0.4,
+      "pan": -0.1,
+      "purpose": "letter toss",
+      "panEnd": 0.08,
+      "panDuration": 0.4705882352941177
+    },
+    {
+      "at": 3.3529411764705883,
+      "sound": "land",
+      "gain": 0.43,
+      "pan": 0.08,
+      "purpose": "receiver catch"
+    },
+    {
+      "at": 3.441176470588235,
+      "sound": "glide",
+      "gain": 0.18,
+      "pan": 0.13,
+      "purpose": "book unfolds and intake deploys"
+    },
+    {
+      "at": 3.9117647058823533,
+      "sound": "glide",
+      "gain": 0.29,
+      "pan": 0.08,
+      "purpose": "letter feeds through intake",
+      "panEnd": 0.18,
+      "panDuration": 0.5882352941176471
+    },
+    {
+      "at": 4.5,
+      "sound": "tap",
+      "gain": 0.4,
+      "pan": 0.18,
+      "purpose": "email docks"
+    },
+    {
+      "at": 4.764705882352941,
+      "sound": "glass",
+      "gain": 0.23,
+      "pan": 0.1,
+      "purpose": "record resolves",
+      "reflectionMs": 45,
+      "reflectionGain": 0.06
+    },
+    {
+      "at": 5.0588235294117645,
+      "sound": "tap",
+      "gain": 0.15,
+      "pan": 0.2,
+      "purpose": "bookmark latch settles"
+    }
+  ]
+}

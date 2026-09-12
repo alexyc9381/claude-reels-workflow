@@ -1,0 +1,157 @@
+[
+  {
+    "id": "C0004",
+    "source": "C0004-1080.mp4",
+    "duration": 733.2325,
+    "obsOffsetSeconds": -5.232875,
+    "dialogueChecks": [
+      {
+        "cameraSeconds": 45,
+        "offsetSeconds": -5.23375,
+        "waveformCorrelation": 0.5484249698689025
+      },
+      {
+        "cameraSeconds": 180,
+        "offsetSeconds": -5.233375,
+        "waveformCorrelation": 0.4964694186841066
+      },
+      {
+        "cameraSeconds": 500,
+        "offsetSeconds": -5.232375,
+        "waveformCorrelation": 0.5046760699475141
+      },
+      {
+        "cameraSeconds": 698,
+        "offsetSeconds": -5.231875,
+        "waveformCorrelation": 0.5527253765396528
+      }
+    ],
+    "acceptedDriftSeconds": 0.001875000000000071,
+    "clapPeakCandidate": {
+      "obsSeconds": 0.966875,
+      "cameraSeconds": 6.276875,
+      "differenceSeconds": -5.31,
+      "note": "Peak in announced clap window; visually inspect hand contact before claiming optical sync approval."
+    }
+  },
+  {
+    "id": "C0005",
+    "source": "C0005-1080.mp4",
+    "duration": 754.754,
+    "obsOffsetSeconds": 729.47290625,
+    "dialogueChecks": [
+      {
+        "cameraSeconds": 45,
+        "offsetSeconds": 729.4724375,
+        "waveformCorrelation": 0.6291486397723989
+      },
+      {
+        "cameraSeconds": 180,
+        "offsetSeconds": 729.472375,
+        "waveformCorrelation": 0.4852323540979333
+      },
+      {
+        "cameraSeconds": 300,
+        "offsetSeconds": 729.4726875,
+        "waveformCorrelation": 0.6187379965600729
+      },
+      {
+        "cameraSeconds": 530,
+        "offsetSeconds": 729.473125,
+        "waveformCorrelation": 0.5472664629315828
+      },
+      {
+        "cameraSeconds": 570,
+        "offsetSeconds": 729.47325,
+        "waveformCorrelation": 0.4712183870019685
+      },
+      {
+        "cameraSeconds": 705,
+        "offsetSeconds": 729.4738125,
+        "waveformCorrelation": 0.5089070166551651
+      }
+    ],
+    "acceptedDriftSeconds": 0.0014374999999517968,
+    "clapPeakCandidate": {
+      "obsSeconds": 741.7770625,
+      "cameraSeconds": 12.3686875,
+      "differenceSeconds": 729.408375,
+      "note": "Peak in announced clap window; visually inspect hand contact before claiming optical sync approval."
+    }
+  },
+  {
+    "id": "C0006",
+    "source": "C0006-1080.mp4",
+    "duration": 278.278,
+    "obsOffsetSeconds": 1494.9025625,
+    "dialogueChecks": [
+      {
+        "cameraSeconds": 45,
+        "offsetSeconds": 1494.9024375,
+        "waveformCorrelation": 0.5538637446143313
+      },
+      {
+        "cameraSeconds": 100,
+        "offsetSeconds": 1494.9025625,
+        "waveformCorrelation": 0.5391781983264663
+      },
+      {
+        "cameraSeconds": 170,
+        "offsetSeconds": 1494.9025625,
+        "waveformCorrelation": 0.5300934976857059
+      },
+      {
+        "cameraSeconds": 180,
+        "offsetSeconds": 1494.902625,
+        "waveformCorrelation": 0.43728897437487874
+      }
+    ],
+    "acceptedDriftSeconds": 0.00018750000003819878,
+    "clapPeakCandidate": {
+      "obsSeconds": 1501.3168125,
+      "cameraSeconds": 6.3993125,
+      "differenceSeconds": 1494.9175,
+      "note": "Peak in announced clap window; visually inspect hand contact before claiming optical sync approval."
+    }
+  },
+  {
+    "id": "C0007",
+    "source": "C0007-1080.mp4",
+    "duration": 701.701,
+    "obsOffsetSeconds": 1767.51075,
+    "dialogueChecks": [
+      {
+        "cameraSeconds": 45,
+        "offsetSeconds": 1767.5106875,
+        "waveformCorrelation": 0.5873348732010738
+      },
+      {
+        "cameraSeconds": 180,
+        "offsetSeconds": 1767.5106875,
+        "waveformCorrelation": 0.49012665933330474
+      },
+      {
+        "cameraSeconds": 300,
+        "offsetSeconds": 1767.51075,
+        "waveformCorrelation": 0.52236412607745
+      },
+      {
+        "cameraSeconds": 500,
+        "offsetSeconds": 1767.511625,
+        "waveformCorrelation": 0.5554987911932459
+      },
+      {
+        "cameraSeconds": 650,
+        "offsetSeconds": 1767.5128125,
+        "waveformCorrelation": 0.5612056030665049
+      }
+    ],
+    "acceptedDriftSeconds": 0.002125000000205546,
+    "clapPeakCandidate": {
+      "obsSeconds": 1781.4186875,
+      "cameraSeconds": 13.99325,
+      "differenceSeconds": 1767.4254375,
+      "note": "Peak in announced clap window; visually inspect hand contact before claiming optical sync approval."
+    }
+  }
+]

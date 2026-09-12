@@ -6,14 +6,19 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-const [src, dest] = process.argv.slice(2);
+const [src, dest, specPath] = process.argv.slice(2);
 if (!src || !dest)
   throw new Error("Supply resolved SFX directory and output directory");
 const out = resolve(dest);
 mkdirSync(out, { recursive: true });
 const spec = JSON.parse(
   readFileSync(
-    join(dirname(fileURLToPath(import.meta.url)), "../glass-sound-cues.json"),
+    specPath
+      ? resolve(specPath)
+      : join(
+          dirname(fileURLToPath(import.meta.url)),
+          "../glass-sound-cues.json",
+        ),
     "utf8",
   ),
 );
@@ -116,6 +121,7 @@ const assets = {},
     assets: {},
   };
 for (const [name, cfg] of Object.entries(configs)) {
+  Object.assign(cfg, spec.assets?.[name] ?? {});
   const source = join(src, cfg.source),
     input = decode(source);
   // Remove only leading near-silence, preserving the recorded attack.
@@ -131,7 +137,7 @@ for (const [name, cfg] of Object.entries(configs)) {
     dc = 0,
     peak = 0;
   const alpha = 1 - Math.exp((-2 * Math.PI * cfg.cutoff) / sr),
-    highpass = 1 - Math.exp((-2 * Math.PI * 70) / sr);
+    highpass = 1 - Math.exp((-2 * Math.PI * (cfg.highpass ?? 70)) / sr);
   for (let i = 0; i < n; i++) {
     const p = start + i * cfg.speed,
       j = Math.floor(p),
@@ -139,10 +145,10 @@ for (const [name, cfg] of Object.entries(configs)) {
       x = (input[j] ?? 0) * (1 - f) + (input[j + 1] ?? 0) * f;
     dc += highpass * (x - dc);
     low += alpha * (x - dc - low);
-    const attack = Math.min(1, i / (sr * 0.008)),
+    const attack = Math.min(1, i / (sr * (cfg.attack ?? 0.008))),
       release = Math.min(
         1,
-        (n - 1 - i) / (sr * (name === "glass" ? 0.25 : 0.07)),
+        (n - 1 - i) / (sr * (cfg.release ?? (name === "glass" ? 0.25 : 0.07))),
       );
     data[i] =
       low *
@@ -168,15 +174,32 @@ const mix = [
 ];
 for (const cue of spec.cues) {
   const data = assets[cue.sound],
-    at = Math.round(cue.at * sr),
-    p = ((cue.pan + 1) * Math.PI) / 4;
+    at = Math.round(cue.at * sr);
+  if (!data || at < 0 || at >= mix[0].length)
+    throw new Error("Invalid sound cue");
   for (let i = 0; i < data.length && at + i < mix[0].length; i++) {
-    mix[0][at + i] += data[i] * cue.gain * Math.cos(p);
-    mix[1][at + i] += data[i] * cue.gain * Math.sin(p);
+    const u = Math.max(
+      0,
+      Math.min(1, i / (sr * (cue.panDuration ?? data.length / sr))),
+    );
+    const ease = u ** 3 * (u * (6 * u - 15) + 10);
+    const pan = cue.pan + ((cue.panEnd ?? cue.pan) - cue.pan) * ease;
+    const p = ((pan + 1) * Math.PI) / 4;
+    const sample = data[i] * cue.gain;
+    mix[0][at + i] += sample * Math.cos(p);
+    mix[1][at + i] += sample * Math.sin(p);
+    // One low-level, symmetric room reflection: depth without Haas widening.
+    const delay = Math.round(((cue.reflectionMs ?? 0) * sr) / 1000);
+    if (delay > 0 && at + i + delay < mix[0].length) {
+      mix[0][at + i + delay] +=
+        sample * (cue.reflectionGain ?? 0) * Math.cos(p);
+      mix[1][at + i + delay] +=
+        sample * (cue.reflectionGain ?? 0) * Math.sin(p);
+    }
   }
 }
 // Audition gain: no voice in this review. Reduce this bus for narrated edits.
-const masterGain = 2;
+const masterGain = spec.masterGain ?? 2;
 let peak = 0,
   sum = 0;
 for (const c of mix)

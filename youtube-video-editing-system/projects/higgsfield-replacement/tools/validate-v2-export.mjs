@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow');
+const project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const bin=path.join(repo,'video/node_modules/@remotion/compositor-darwin-arm64');
+const output=path.join(base,'outputs/higgsfield-replacement-edit-v2.mp4');
+const ffmpeg=execFileSync('python3',['-c','import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())'],{encoding:'utf8'}).trim();
+const meta=JSON.parse(execFileSync(path.join(bin,'ffprobe'),['-v','error','-show_streams','-show_format','-show_chapters','-of','json',output],{encoding:'utf8',env:{...process.env,DYLD_LIBRARY_PATH:bin}}));
+const video=meta.streams.find(s=>s.codec_type==='video'),audios=meta.streams.filter(s=>s.codec_type==='audio');
+assert.equal(video.width,1920);assert.equal(video.height,1080);assert.equal(video.r_frame_rate,'30/1');assert.equal(Number(video.nb_frames),13314);
+assert.equal(audios.length,1);assert.equal(audios[0].sample_rate,'48000');assert.equal(audios[0].channels,2);
+assert.ok(Math.abs(Number(meta.format.duration)-443.8)<.05);
+const chapters=JSON.parse(readFileSync(path.join(project,'chapters.json')));
+const rows=Array.isArray(chapters)?chapters:chapters.chapters;
+assert.equal(meta.chapters.length,6);
+for(let i=0;i<6;i++){
+ const expected=rows[i];
+ assert.equal(meta.chapters[i].tags.title,expected.title);
+ assert.ok(Math.abs(Number(meta.chapters[i].start_time)-(expected.outputSeconds??expected.seconds))<.0011);
+}
+console.log('Metadata passed; decoding full picture and soundtrack');
+execFileSync(ffmpeg,['-v','error','-xerror','-i',output,'-map','0:v:0','-map','0:a:0','-f','null','-'],{stdio:'inherit'});
+const audioHash=file=>createHash('sha256').update(execFileSync(ffmpeg,['-v','error','-i',file,'-map','0:a:0','-c:a','copy','-f','adts','pipe:1'],{maxBuffer:50e6})).digest('hex');
+const previousAudioHash=audioHash(path.join(base,'outputs/higgsfield-replacement-first-pass-v1.mp4'));
+const currentAudioHash=audioHash(output);
+const result={output,bytes:Number(meta.format.size),duration:Number(meta.format.duration),frames:Number(video.nb_frames),width:video.width,height:video.height,fps:video.r_frame_rate,audio:{codec:audios[0].codec_name,sampleRate:audios[0].sample_rate,channels:audios[0].channels},chapters:meta.chapters.map(c=>({title:c.tags.title,seconds:Number(c.start_time)})),decodePassed:true,encodedAudioMatchesV1:previousAudioHash===currentAudioHash,currentAudioHash,previousAudioHash};
+writeFileSync(path.join(base,'work/higgsfield-replacement/revision-v2/export-validation.json'),JSON.stringify(result,null,2));
+console.log(JSON.stringify(result,null,2));

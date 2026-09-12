@@ -242,6 +242,10 @@ export const SpriteActor: React.FC<{
   opacity?: number;
   pose?: SpriteLandingPose;
   face?: FacePose;
+  gait?: { phase: number; amount: number };
+  outfit?: "courier" | "archivist" | "operator";
+  gesture?: number;
+  colorful?: boolean;
 }> = ({
   t,
   x,
@@ -253,6 +257,10 @@ export const SpriteActor: React.FC<{
   opacity = 1,
   pose = restingSprite(),
   face,
+  gait,
+  outfit,
+  gesture,
+  colorful,
 }) => (
   <div
     style={{
@@ -292,6 +300,10 @@ export const SpriteActor: React.FC<{
         cheer={cheer}
         armSwing={pose.armSwing}
         face={face}
+        gait={gait}
+        outfit={outfit}
+        gesture={gesture}
+        colorful={colorful}
       />
     </div>
   </div>

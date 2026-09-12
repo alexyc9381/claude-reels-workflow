@@ -1,0 +1,31 @@
+;FFMETADATA1
+[CHAPTER]
+TIMEBASE=1/30
+START=0
+END=1097
+title=Can you tell the difference?
+[CHAPTER]
+TIMEBASE=1/30
+START=1097
+END=3723
+title=Why use the models directly?
+[CHAPTER]
+TIMEBASE=1/30
+START=3723
+END=6230
+title=Connect fal.ai and Claude
+[CHAPTER]
+TIMEBASE=1/30
+START=6230
+END=8920
+title=Make your first video
+[CHAPTER]
+TIMEBASE=1/30
+START=8920
+END=13016
+title=Review and compare the results
+[CHAPTER]
+TIMEBASE=1/30
+START=13016
+END=13846
+title=The reveal and next step

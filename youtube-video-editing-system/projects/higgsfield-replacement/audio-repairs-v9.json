@@ -1,0 +1,80 @@
+{
+  "version": "v9",
+  "source": "OBS only",
+  "boundaryMethod": "Original-take ASR plus silence boundaries; final listening review still required",
+  "changes": [
+    {
+      "id": "s026",
+      "before": {
+        "start": 1286.72,
+        "end": 1301.95
+      },
+      "after": {
+        "start": 1286.72,
+        "end": 1301.7
+      }
+    },
+    {
+      "id": "s027",
+      "before": {
+        "start": 1313.02,
+        "end": 1329.17
+      },
+      "after": {
+        "start": 1313.2,
+        "end": 1329.17
+      }
+    },
+    {
+      "id": "s035",
+      "before": {
+        "start": 1892.02,
+        "end": 1898.04
+      },
+      "after": {
+        "start": 1892.02,
+        "end": 1898.01
+      }
+    },
+    {
+      "id": "s036",
+      "before": {
+        "start": 1981.23,
+        "end": 2006.45
+      },
+      "after": {
+        "start": 1981.33,
+        "end": 2006.45
+      }
+    },
+    {
+      "id": "s037",
+      "before": {
+        "start": 2017.6,
+        "end": 2029.37
+      },
+      "after": {
+        "start": 2015.65,
+        "end": 2029.37
+      }
+    },
+    {
+      "id": "s042",
+      "before": {
+        "start": 2220.75,
+        "end": 2225.1
+      },
+      "after": {
+        "start": 2223.6,
+        "end": 2225.1
+      }
+    }
+  ],
+  "removed": [
+    "s039",
+    "s040",
+    "s041"
+  ],
+  "unchanged": "Every other source range, camera offset, source file and narration order is preserved",
+  "pendingVoiceover": "The skill builds camera movement into the generation by default. You can also direct it yourself to match your vision."
+}

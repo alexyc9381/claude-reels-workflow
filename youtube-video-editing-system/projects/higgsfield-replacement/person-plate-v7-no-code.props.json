@@ -1,0 +1,7 @@
+{
+  "manifest": {
+    "fps": 30,
+    "cameras": [{"id": "C0005", "source": "C0005-1080.mp4", "obsOffsetSeconds": 729.47290625}],
+    "segments": [{"id": "r-no-code", "start": 972.2, "end": 977.5333333333333, "camera": "C0005"}]
+  }
+}

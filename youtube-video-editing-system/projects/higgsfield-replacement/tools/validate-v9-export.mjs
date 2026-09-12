@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import {execFileSync,spawnSync} from 'node:child_process';
+import {readFileSync,writeFileSync,readdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow');
+const project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const bin=path.join(repo,'video/node_modules/@remotion/compositor-darwin-arm64');
+const output=path.join(base,'outputs/higgsfield-replacement-edit-v9.mp4');
+const ff='/Users/alexchensmacmini/Library/Python/3.9/lib/python/site-packages/imageio_ffmpeg/binaries/ffmpeg-macos-aarch64-v7.1';
+const meta=JSON.parse(execFileSync(path.join(bin,'ffprobe'),['-v','error','-show_streams','-show_format','-show_chapters','-of','json',output],{encoding:'utf8',env:{...process.env,DYLD_LIBRARY_PATH:bin}}));
+const v=meta.streams.find(s=>s.codec_type==='video'),a=meta.streams.filter(s=>s.codec_type==='audio');
+const props=JSON.parse(readFileSync(path.join(project,'roughcut.props.json'))),m=props.manifest;
+const frames=Math.round(m.segments.reduce((sum,s)=>sum+s.end-s.start,0)*m.fps);
+assert.equal(m.editVersion,'v9');assert.equal(v.width,1920);assert.equal(v.height,1080);assert.equal(v.r_frame_rate,'30/1');assert.equal(Number(v.nb_frames),frames);
+assert.equal(a.length,1);assert.equal(a[0].sample_rate,'48000');assert.equal(a[0].channels,2);assert.ok(Math.abs(Number(meta.format.duration)-frames/m.fps)<.08);
+const chapters=JSON.parse(readFileSync(path.join(project,'chapters.json')));assert.equal(meta.chapters.length,chapters.length);
+for(let i=0;i<chapters.length;i++){assert.equal(meta.chapters[i].tags.title,chapters[i].title);assert.ok(Math.abs(Number(meta.chapters[i].start_time)-chapters[i].seconds)<.002);}
+const work=path.join(base,'work/higgsfield-replacement'),src=path.join(repo,'video/src/youtube');
+const digest=createHash('sha256').update(JSON.stringify(props));
+for(const name of readdirSync(src).filter(n=>/\.tsx?$/.test(n)).sort())digest.update(name).update(readFileSync(path.join(src,name)));
+for(const name of ['cube.mov','pipeline-result.jpg'])digest.update(readFileSync(path.join(work,'public',name)));
+for(const folder of ['v3','v4','v7','v9'])for(const name of readdirSync(path.join(work,'public',folder)).sort())digest.update(name).update(readFileSync(path.join(work,'public',folder,name)));
+const sourceHash=digest.digest('hex'),renderDir=path.join(work,'chunks-'+sourceHash.slice(0,10));
+const equivalentChunks=[];
+for(let from=0;from<frames;from+=2700){const to=Math.min(from+2699,frames-1),receipt=JSON.parse(readFileSync(path.join(renderDir,`picture-${from}-${to}.mp4.complete`)));assert.equal(receipt.hash,sourceHash);assert.equal(receipt.from,from);assert.equal(receipt.to,to);if(receipt.inheritedFrom){const proof=JSON.parse(readFileSync(path.join(work,'revision-v9/collision-cache-proof.json')));assert.equal(proof.sourceHash,sourceHash);assert.equal(proof.priorSourceHash,receipt.inheritedFrom);assert.equal(proof.otherInputsIdentical,true);assert.ok(!proof.affected.some(r=>r.from<=to&&r.to>=from));equivalentChunks.push({from,to,priorSourceHash:receipt.inheritedFrom});}}
+console.log('Metadata passed; decoding all picture and audio frames.');
+execFileSync(ff,['-v','error','-xerror','-i',output,'-map','0:v:0','-map','0:a:0','-f','null','-'],{stdio:'inherit'});
+console.log('Decode passed; measuring finished AAC loudness.');
+const levels=spawnSync(ff,['-hide_banner','-i',output,'-vn','-af','loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json','-f','null','-'],{encoding:'utf8',maxBuffer:5e6});
+assert.equal(levels.status,0);const loudness=JSON.parse(levels.stderr.match(/\{\s*"input_i"[\s\S]*?\}/)[0]);
+assert.ok(Number(loudness.input_tp)<=-.8);assert.ok(Number(loudness.input_i)>=-18&&Number(loudness.input_i)<=-14);
+const result={output,bytes:Number(meta.format.size),duration:Number(meta.format.duration),frames,width:v.width,height:v.height,fps:v.r_frame_rate,sourceHash,allPictureChunksMatchCurrentSource:true,audio:{codec:a[0].codec_name,sampleRate:a[0].sample_rate,channels:a[0].channels,lufs:Number(loudness.input_i),truePeak:Number(loudness.input_tp),lra:Number(loudness.input_lra)},chapters:meta.chapters.map(c=>({title:c.tags.title,seconds:Number(c.start_time)})),decodePassed:true,fullHumanListeningReview:false};
+result.verifiedEquivalentReusedChunks=equivalentChunks;
+writeFileSync(path.join(base,'work/higgsfield-replacement/revision-v9/export-validation.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));

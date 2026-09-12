@@ -1,5 +1,7 @@
 # Sound + 2D facial reactions (v6)
 
+This v6 palette audition is preserved. The current explainer's quieter, action-specific mix and Alex's supplied sound-design reference are documented in [SOUND-DESIGN-PRINCIPLES.md](SOUND-DESIGN-PRINCIPLES.md). Do not confuse v6's audition gain with a narrated production default.
+
 Alex requested an audible sound-design pass alongside the glass animation and facial reactions in Claude. This pass changes the **2D sprite only**; the confirmed original glowing `cube.mov` is untouched.
 
 ## Facial vocabulary
@@ -39,6 +41,7 @@ The silent `WhiteGlass` composition remains available. `WhiteGlassSound` plays t
 
 ## Review and production boundary
 
+- Alex's listening feedback: the effects work for now as an audition, but are too loud relative to VO. Preserve v6 for reference; do not carry its master gain of 2 into a narrated edit. Mix a reduced SFX bus against the actual leveled narration and check speech intelligibility cue by cue.
 - Stereo 48kHz sound audition, 1080p30/24-second picture. Audition mix master gain is 2, sample peak approximately −10.25 dBFS; it deliberately has room below clipping.
 - Automated checks cover expression continuity and bounds, deterministic seeking, landing transforms, and asset/mix generation. Visual expression sheet and sampled reaction frames are reviewed. Measurements verify signal/timing, **not** subjective listening approval.
 - This is a no-dialogue audition. For narrated production, lower the SFX bus and evaluate under the real voice. No automatic dialogue ducking, final loudness approval, or music bed is claimed.

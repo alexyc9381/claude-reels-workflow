@@ -1,0 +1,128 @@
+[
+  {
+    "file": "paper.wav",
+    "title": "paper flip 3.wav",
+    "creator": "gynation",
+    "license": "cc0-1.0",
+    "source": "https://freesound.org/people/gynation/sounds/82379",
+    "duration_s": 0.5,
+    "provenance": "User library manifest",
+    "sha256": "cedd44f07011cfd1021b14544aa2db7d8190898e6170bfbeaa0ff4dec711003c",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "servo.wav",
+    "source": "/Users/alexchensmacmini/Downloads/brand-system/public/sfx/servo.mp3",
+    "provenance": "Existing user brand-system SFX; check original library license before external publication",
+    "sha256": "d0c2c234eda5fc93610f0608112ba907a203824a3085cb4f5a6b89f0a392793f",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "assemble.wav",
+    "title": "Defective Push Toggle Switch",
+    "creator": "cookies+policy",
+    "license": "cc0-1.0",
+    "source": "https://freesound.org/people/cookies+policy/sounds/556629",
+    "duration_s": 0.713,
+    "provenance": "User library manifest",
+    "sha256": "0667e5408661d75203b21fd8077bc234d96e3b5d0521990318043b6369f2490b",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "whip.wav",
+    "title": "Swosh swoosh whoosh air sound, free, high quality",
+    "creator": "qubodup",
+    "license": "cc0-1.0",
+    "source": "https://freesound.org/people/qubodup/sounds/60026",
+    "duration_s": 0.49,
+    "provenance": "User library manifest",
+    "sha256": "3478110a811138076233b82a9f7b5112062776a0c3742fc73753655ba98b9a46",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "click.wav",
+    "source": "/Users/alexchensmacmini/Downloads/brand-system/public/sfx/click.mp3",
+    "provenance": "Existing user brand-system SFX; check original library license before external publication",
+    "sha256": "8587debfe183bb9e6d613a3efbb683a817596f993a44b39196a170e7b5419b57",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "typing.wav",
+    "source": "/Users/alexchensmacmini/Downloads/brand-system/public/sfx/typing.mp3",
+    "provenance": "Existing user brand-system SFX; check original library license before external publication",
+    "sha256": "dd8da014e1e9f14b6edbf6aca4c95402aae8b7faec7f2040905d3d1200556d42",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "latch.wav",
+    "source": "/Users/alexchensmacmini/Downloads/brand-system/public/sfx/latch.mp3",
+    "provenance": "Existing user brand-system SFX; check original library license before external publication",
+    "sha256": "b0d56e350c34ca0280522364aa15e90baa06a78248399d98f8a9a895554abf43",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "shutter.wav",
+    "source": "/Users/alexchensmacmini/Downloads/brand-system/public/sfx/shutter.mp3",
+    "provenance": "Existing user brand-system SFX; check original library license before external publication",
+    "sha256": "948cf884c81c40c495495864fc10409d8854cdd5822daa234e395f45804aaf9f",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "land.wav",
+    "title": "LowHit_01.wav",
+    "creator": "Faulkin",
+    "license": "cc0-1.0",
+    "source": "https://freesound.org/people/Faulkin/sounds/336495",
+    "duration_s": 0.163,
+    "provenance": "User library manifest",
+    "sha256": "1d40ecfc547dcb893f1d9ef3d52dc5ce3b719a86b213aefc527e11264be18b93",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "zip.wav",
+    "title": "Zipper Zip",
+    "creator": "uEffects",
+    "license": "cc0-1.0",
+    "source": "https://freesound.org/people/uEffects/sounds/324659",
+    "duration_s": 0.61,
+    "provenance": "User library manifest",
+    "sha256": "b4a2847a2f1e7cd1d82e0312f5d041529594fa2d82d5500dbeb0c1d67d313e7e",
+    "treatment": "Short material-specific transient, HP150/LP6500, softened attack, finite release, quiet premix"
+  },
+  {
+    "file": "chase.wav",
+    "title": "Chase Pulse Faster",
+    "creator": "Kevin MacLeod",
+    "source": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Chase%20Pulse%20Faster.mp3",
+    "isrc": "USUAN1100384",
+    "license": "CC BY 4.0; attribution required",
+    "licenseSource": "https://incompetech.com/music/royalty-free/licenses/",
+    "sha256": "8547c199e1555118e862754640d865ca8983f0b99f5443bd16ae047dc1e8b6ac",
+    "treatment": "HP65; broad -4/-5 dB VO-band carve, quiet premix; finite section fades"
+  },
+  {
+    "file": "tension.wav",
+    "title": "Hitman",
+    "creator": "Kevin MacLeod",
+    "source": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Hitman.mp3",
+    "isrc": "USUAN1300013",
+    "license": "CC BY 4.0; attribution required",
+    "licenseSource": "https://incompetech.com/music/royalty-free/licenses/",
+    "sha256": "592697cad097b649daefff431ed612ef6ebf6348581cc26af11fcfbadddc04a9",
+    "treatment": "HP65; broad -4/-5 dB VO-band carve, quiet premix; finite section fades"
+  },
+  {
+    "file": "claude-result.mp4",
+    "source": "obs.mp4, 1988–1992 seconds",
+    "provenance": "User-recorded generated-video playback; muted excerpt, crop 1920×960 then scale 1280×640",
+    "sha256": "07657e235ac7adc14b5fb57a59b2b4cae21a926862ded83557a96228a7f7cfee"
+  },
+  {
+    "file": "claude-cgi-review.mov",
+    "source": "../cube.mov",
+    "source_sha256": "0e9263ca447bb7e652bba4d1fcce7fb54e047d8024ad236e5c25530b773973aa",
+    "sha256": "4d5cf5530966a67a59ca6bd1eb9ebd52850e63568eaf2c2e8d7dcb692c495073",
+    "provenance": "384px review proxy of the confirmed original ChenBuildsAI ProRes alpha animation, all 90 frames retained; original untouched",
+    "treatment": "Lanczos downsample from 1024 to 384, ProRes4444 alpha. Above the maximum 235px display size. No character redesign."
+  }
+]

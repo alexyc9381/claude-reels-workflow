@@ -1,0 +1,18 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createRequire} from 'node:module';
+import {runInNewContext} from 'node:vm';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement'),src=path.join(repo,'video/src/youtube');
+const require=createRequire(path.join(repo,'video/package.json')),{transformSync}=require('esbuild');
+const read=n=>readFileSync(path.join(src,n),'utf8');
+const evaluate=(code,scope={})=>{const box={module:{exports:{}},...scope};runInNewContext(transformSync(code,{loader:'ts',format:'cjs'}).code,box);return box.module.exports;};
+const m=JSON.parse(readFileSync(path.join(project,'roughcut.props.json'))).manifest;
+const timing=evaluate(read('roughcut-timing.ts')),code=read('YouTubeV8.tsx');
+const rows=timing.roughTimeline(m),full=evaluate(code.slice(code.indexOf('export const fullScenes='),code.indexOf('const Definition:')),{roughTimeline:timing.roughTimeline}).fullScenes(m);
+const cues=evaluate(code.slice(code.indexOf('export const v8Cues:'),code.indexOf('export const chapterTitles'))).v8Cues;
+const s=read('SupportingScenesV8.tsx'),motifs=evaluate(s.slice(s.indexOf('export const supportMotifs:'),s.indexOf('export const Support:'))).supportMotifs;
+const scenes=full.map(s=>({id:s.id,action:s.kind,start:s.from/m.fps,end:(s.from+s.duration)/m.fps}));
+const supports=cues.map(c=>{const r=rows.find(r=>r.id===c.id),start=r.from/m.fps+c.offset;return {id:c.id+':'+c.offset,action:motifs[c.id+':'+c.offset]??c.kind+' / '+(c.title??c.kind),start,end:Math.min(start+c.seconds,(r.from+r.duration)/m.fps)};});
+const report={version:'v8',duration:473,sourceTrimsUnchanged:true,scenes,supports,chapters:timing.roughChapters(m),retention:'Editorial risk assessment only; no audience analytics',reviewVideoInsetPolicy:'No unrelated video in supporting result callouts',originalA:'Still placeholder; required before publishing',sharedGrammar:['Manrope','white optical glass','Claude2D outfits','chapter and definition navigation'],motionRules:['svg-icon-enrichment','control-target-sync','reactive-displacement']};
+writeFileSync(path.join(project,'motion-map-v8.json'),JSON.stringify(report,null,2));
+console.log(JSON.stringify({scenes:scenes.length,cues:supports.length,duplicateFullSceneActions:scenes.length-new Set(scenes.map(s=>s.action)).size,sourceTrimsUnchanged:true},null,2));

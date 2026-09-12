@@ -1,55 +1,40 @@
 # No Code Alex YouTube editing system
 
-## Purpose
-
-This subsystem holds the text-first production contract for 16:9 @nocodealex YouTube videos. It keeps long-form work separate from the Instagram reel factory and from the retired Matchtern VSL style.
+The Remotion-based 16:9 system for No Code Alex long-form tutorials, explainers and course-derived editing. Separate from the short-form reel factory and archived Matchtern style.
 
 ## Start here
 
-Latest sound/reaction preview: [SOUND-AND-FACIAL-REACTIONS.md](SOUND-AND-FACIAL-REACTIONS.md), using the `WhiteGlassSound` composition. The confirmed CGI asset remains unchanged.
+1. [CURRENT-DIRECTION.md](CURRENT-DIRECTION.md) — authoritative current choices and conflict resolution.
+2. [LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) — find every decision, revision, source contract and QA record.
+3. [REVISION-DECISIONS.md](REVISION-DECISIONS.md) — full conversation learning ledger, including superseded requests.
+4. [Higgsfield Replacement v9](projects/higgsfield-replacement/REVISION-V9.md) — current full-video review revision.
+5. [REPRODUCE.md](projects/higgsfield-replacement/REPRODUCE.md) — current renderer/test commands and source prerequisites.
 
-Current direction: [WHITE-GLASS-AND-SPRITE.md](WHITE-GLASS-AND-SPRITE.md). White-only optical glass and purposeful 2D Claude choreography; preview via `video/src/youtube-white-glass-preview.tsx`. Alex confirmed the original CGI in [ORIGINAL-CGI-AND-BRAND.md](ORIGINAL-CGI-AND-BRAND.md); keep that exact asset for footage.
+**Remotion, not Supereditor. OBS is sole recorded narration; Sony is muted.** White glass, Manrope, original 2D Claude, meaningful action and protected screen legibility. The current film does **not** include the CGI pet. Old references requesting CGI or serif type are historical; the exact original CGI remains preserved for separately authorized use.
 
-Read [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editing-system.md), then copy [`PROJECT.template.md`](PROJECT.template.md) into a per-video planning folder before touching the edit.
+The approved short animation reference is DispatchExplainerSound v11, not a blanket approval of later full-film revisions. See [approval boundaries](APPROVED-ANIMATION-SYSTEM.md). Do not deliver a hook-only preview for a full-video request.
 
-## Layout
+## System map
 
-| path | what |
+| Area | Entry |
 |---|---|
-| `README.md` | subsystem map and boundary |
-| `PROJECT.template.md` | required brief, paper edit, graphics plan, and ship gate for one video |
-| `TRANSFER-LOG.md` | what was recovered from the 2026-08 OBS course editor and what was deliberately not promoted |
-| `VISUAL-SYSTEM.md` | screen/presenter framing, opening push, definition cards, premium motion, resolution |
-| `CGI-AND-CHARACTER.md` | original sprite lineage, articulated 3D actions, tracking/mattes, sound, preview commands |
-| `GLASS-AND-GLOW.md` | glowing CGI correction, preserved flat option, six glass component studies |
-| `COURSE-EDITING-PROFILE.md` | follow-along course and lesson rules |
-| `SCREEN-DEMO-PROFILE.md` | screen-led tutorial and software-demo rules |
-| `TALKING-HEAD-PROFILE.md` | presenter-led YouTube rules |
-| `edit.schema.json` | frame-based contract consumed by Remotion |
-| `tools/build_edl.py` | voice-activity + hard-cut maps to a deterministic edit manifest |
-| `tools/project.input.example.json` | copyable analysis-to-EDL input with no shoot-specific timestamps |
-| `projects/<slug>/` | future text/code artifacts for an individual video; never raw media or renders |
+| Course-editor elements transferred | [TRANSFER-LOG.md](TRANSFER-LOG.md) |
+| Preserve useful narration and restore context | [CONTENT-PRESERVATION.md](CONTENT-PRESERVATION.md) |
+| New project template | [PROJECT.template.md](PROJECT.template.md) |
+| Screen/demo framing and focus safety | [SCREEN-DEMO-PROFILE.md](SCREEN-DEMO-PROFILE.md) |
+| Course or presenter-first profiles | [COURSE-EDITING-PROFILE.md](COURSE-EDITING-PROFILE.md), [TALKING-HEAD-PROFILE.md](TALKING-HEAD-PROFILE.md) |
+| Narration-led explanations | [VOICEOVER-EXPLAINER-MODE.md](VOICEOVER-EXPLAINER-MODE.md) |
+| Adapted sound reference | [SOUND-DESIGN-PRINCIPLES.md](SOUND-DESIGN-PRINCIPLES.md) |
+| Original character/source lineage | [ORIGINAL-CGI-AND-BRAND.md](ORIGINAL-CGI-AND-BRAND.md) |
+| Historical visual studies | [EXPLAINER-PREVIEW.md](EXPLAINER-PREVIEW.md), [history](history/) |
+| Active project sources and verification | [projects/higgsfield-replacement](projects/higgsfield-replacement/) |
+| Active Remotion entry | [youtube-roughcut.tsx](../video/src/youtube-roughcut.tsx) |
+| Memory entry | [youtube-video-editing-system.md](../memory/youtube-video-editing-system.md) |
 
-## Conventions
+## Storage and safety
 
-- Name projects with a stable lowercase slug.
-- Keep raw footage, music, generated media, caches, and renders outside Git.
-- Record source paths and checksums in the project file instead of copying heavy assets here.
-- A reference is evidence, not permission to silently copy another brand's style.
-- New standing rules belong in a single-topic memory note and must be linked from `memory/MEMORY.md`.
+Keep original recordings, private keys, caches, generated media and final exports outside Git. Store source identities, checksums, manifests, code and compact validation reports here. Never reuse a previous shoot's source timestamps or framing coordinates as defaults. Hash render inputs; reusing a render/audio cache requires input equivalence, not a familiar filename.
 
-## Gotchas
+Course edits use voice activity, not raw energy. Preserve useful silent screen activity. Derived chapters follow the current EDL. Check whole words, retake markers, source privacy, active input-box clearance, end word and the actual full export. Record remaining publication inputs and creative/listening approval separately.
 
-- The external folder historically named `matchtern-longform` became shared Remotion infrastructure for many NoCodeAlex reels. Its name is legacy; it is not the active Matchtern long-form style.
-- Do not apply 9:16 caption density, safe zones, or reel pacing to a 16:9 timeline by default.
-- Do not lock a permanent house style from one draft. Record a rule only after Alex approves it or repeated evidence supports it.
-
-The September 10 requirements are recorded in `VISUAL-SYSTEM.md`; the rendered examples are the first implementation, awaiting visual feedback. Use the isolated `video/src/youtube-preview.tsx` entry for this system. It avoids unrelated missing short-form imports in the legacy shared root.
-
-## Related
-
-- [`../memory/youtube-video-editing-system.md`](../memory/youtube-video-editing-system.md) — canonical rules
-- [`../memory/video-editing-toolchain.md`](../memory/video-editing-toolchain.md) — transcription, Remotion, and FFmpeg tooling
-- [`../video/`](../video/) — shared Remotion codebase
-- [`../video/src/youtube/`](../video/src/youtube/) — reusable Remotion assembly component and profile presets
-- [`../memory/archive/matchtern-longform-video-style.md`](../memory/archive/matchtern-longform-video-style.md) — retired historical style
+The full pre-v9 README is retained in [history/README-PRE-V9.md](history/README-PRE-V9.md), so the early experiments and their original status are not lost.

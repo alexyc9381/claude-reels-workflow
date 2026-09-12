@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {execFileSync,spawnSync} from 'node:child_process';
+import {readFileSync,writeFileSync} from 'node:fs';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow');
+const project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const bin=path.join(repo,'video/node_modules/@remotion/compositor-darwin-arm64');
+const output=path.join(base,'outputs/higgsfield-replacement-edit-v3.mp4');
+const ffmpeg='/Users/alexchensmacmini/Library/Python/3.9/lib/python/site-packages/imageio_ffmpeg/binaries/ffmpeg-macos-aarch64-v7.1';
+const meta=JSON.parse(execFileSync(path.join(bin,'ffprobe'),['-v','error','-show_streams','-show_format','-show_chapters','-of','json',output],{encoding:'utf8',env:{...process.env,DYLD_LIBRARY_PATH:bin}}));
+const v=meta.streams.find(s=>s.codec_type==='video'),a=meta.streams.filter(s=>s.codec_type==='audio');
+const m=JSON.parse(readFileSync(path.join(project,'roughcut.props.json'))).manifest;
+const expectedFrames=Math.round(m.segments.reduce((sum,s)=>sum+s.end-s.start,0)*m.fps);
+assert.equal(v.width,1920);assert.equal(v.height,1080);assert.equal(v.r_frame_rate,'30/1');assert.equal(Number(v.nb_frames),expectedFrames);
+assert.equal(a.length,1);assert.equal(a[0].sample_rate,'48000');assert.equal(a[0].channels,2);
+assert.ok(Math.abs(Number(meta.format.duration)-expectedFrames/m.fps)<.08);
+const chapters=JSON.parse(readFileSync(path.join(project,'chapters.json')));assert.equal(meta.chapters.length,chapters.length);
+for(let i=0;i<chapters.length;i++){assert.equal(meta.chapters[i].tags.title,chapters[i].title);assert.ok(Math.abs(Number(meta.chapters[i].start_time)-chapters[i].seconds)<.002);}
+console.log('Metadata passed; decoding the full video/audio.');
+execFileSync(ffmpeg,['-v','error','-xerror','-i',output,'-map','0:v:0','-map','0:a:0','-f','null','-'],{stdio:'inherit'});
+console.log('Decode passed; measuring delivery loudness/peak.');
+const levels=spawnSync(ffmpeg,['-hide_banner','-i',output,'-vn','-af','loudnorm=I=-16:TP=-1.5:LRA=11:print_format=json','-f','null','-'],{encoding:'utf8',maxBuffer:5e6});
+assert.equal(levels.status,0);const loudness=JSON.parse(levels.stderr.match(/\{\s*"input_i"[\s\S]*?\}/)[0]);
+assert.ok(Number(loudness.input_tp)<=-.8,'AAC true peak must stay below clipping');
+const result={output,bytes:Number(meta.format.size),duration:Number(meta.format.duration),frames:Number(v.nb_frames),width:v.width,height:v.height,fps:v.r_frame_rate,audio:{codec:a[0].codec_name,sampleRate:a[0].sample_rate,channels:a[0].channels,lufs:Number(loudness.input_i),truePeak:Number(loudness.input_tp),lra:Number(loudness.input_lra)},chapters:meta.chapters.map(c=>({title:c.tags.title,seconds:Number(c.start_time)})),decodePassed:true,fullHumanListeningReview:false};
+writeFileSync(path.join(base,'work/higgsfield-replacement/revision-v3/export-validation.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));

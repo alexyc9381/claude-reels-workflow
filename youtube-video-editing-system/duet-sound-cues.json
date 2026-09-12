@@ -1,0 +1,26 @@
+{
+  "duration": 13,
+  "sampleRate": 48000,
+  "masterGain": 0.65,
+  "assets": {
+    "glide": {"attack": 0.055, "release": 0.15, "cutoff": 3000, "highpass": 180},
+    "tap": {"attack": 0.008, "release": 0.09, "cutoff": 3300, "highpass": 220},
+    "glass": {"max": 1.15, "attack": 0.028, "release": 0.4, "cutoff": 4100, "highpass": 420},
+    "land": {"attack": 0.009, "release": 0.11, "cutoff": 1100, "highpass": 100}
+  },
+  "cues": [
+    {"at": 0.1,"sound":"glide","gain":0.28,"pan":0,"purpose":"short scene entrance"},
+    {"at": 1.45,"sound":"land","gain":0.48,"pan":-0.2,"purpose":"retriever lands and opens envelope"},
+    {"at": 1.46,"sound":"tap","gain":0.28,"pan":-0.2,"purpose":"envelope seal detail at contact"},
+    {"at": 1.55,"sound":"glide","gain":0.30,"pan":-0.2,"purpose":"reply rises out of glass envelope"},
+    {"at": 3.1,"sound":"tap","gain":0.22,"pan":-0.16,"purpose":"reply settles onto carrying position"},
+    {"at": 4.9,"sound":"glide","gain":0.40,"pan":-0.1,"panEnd":0.08,"panDuration":0.8,"purpose":"letter toss moves between partners"},
+    {"at": 5.7,"sound":"land","gain":0.43,"pan":0.08,"purpose":"receiver catches letter with recoil"},
+    {"at": 6.65,"sound":"glide","gain":0.29,"pan":0.08,"panEnd":0.18,"panDuration":1,"purpose":"receiver feeds reply into contact field"},
+    {"at": 7.65,"sound":"tap","gain":0.40,"pan":0.18,"purpose":"actual email slot docking"},
+    {"at": 7.8,"sound":"glide","gain":0.28,"pan":0.13,"purpose":"identity leaf unfolds"},
+    {"at": 8.9,"sound":"glass","gain":0.23,"pan":0.10,"reflectionMs":45,"reflectionGain":0.06,"purpose":"completed contact rests open"},
+    {"at": 9.95,"sound":"land","gain":0.28,"pan":-0.06,"purpose":"first partner celebration landing"},
+    {"at": 10.25,"sound":"land","gain":0.32,"pan":0.08,"purpose":"second partner celebration landing"}
+  ]
+}

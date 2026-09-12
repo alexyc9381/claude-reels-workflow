@@ -1,0 +1,42 @@
+{
+  "manifest": {
+    "fps": 30,
+    "cameras": [
+      {
+        "id": "C0004",
+        "source": "C0004-1080.mp4",
+        "duration": 733.2325,
+        "obsOffsetSeconds": -5.232875
+      },
+      {
+        "id": "C0005",
+        "source": "C0005-1080.mp4",
+        "duration": 754.754,
+        "obsOffsetSeconds": 729.47290625
+      },
+      {
+        "id": "C0006",
+        "source": "C0006-1080.mp4",
+        "duration": 278.278,
+        "obsOffsetSeconds": 1494.9025625
+      },
+      {
+        "id": "C0007",
+        "source": "C0007-1080.mp4",
+        "duration": 701.701,
+        "obsOffsetSeconds": 1767.51075
+      }
+    ],
+    "segments": [
+      {
+        "id": "s037",
+        "start": 2015.65,
+        "end": 2029.37,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "Specific sound and environment observations"
+      }
+    ]
+  }
+}

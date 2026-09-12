@@ -1,0 +1,396 @@
+{
+  "version": "v9",
+  "duration": 461.53333333333336,
+  "frames": 13846,
+  "sourceAudio": "OBS only",
+  "scenes": [
+    {
+      "id": "s001",
+      "from": 0,
+      "duration": 450,
+      "kind": "hook",
+      "a": 4.4,
+      "b": 7.333333333333333,
+      "c": 10.666666666666666,
+      "start": 0,
+      "end": 15,
+      "beats": [
+        "Large A/B screens open together",
+        "Sprites inspect; timed aura resolves; invoice is printed and compared",
+        "Question is established before naming Higgsfield"
+      ]
+    },
+    {
+      "id": "s004",
+      "from": 450,
+      "duration": 260,
+      "kind": "studio",
+      "start": 15,
+      "end": 23.666666666666668,
+      "beats": [
+        "Typed /fal-video request",
+        "Model selector drives iris and scanning preview; courier collects result",
+        "Saved video artifact"
+      ]
+    },
+    {
+      "id": "s006",
+      "from": 710,
+      "duration": 100,
+      "kind": "roadmap",
+      "start": 23.666666666666668,
+      "end": 27,
+      "beats": [
+        "Connected route with three concrete landmarks",
+        "Courier crosses connect/create/compare stops",
+        "Destination reached, teaser begins"
+      ]
+    },
+    {
+      "id": "s007",
+      "from": 928,
+      "duration": 169,
+      "kind": "guide",
+      "start": 30.933333333333334,
+      "end": 36.56666666666667,
+      "beats": [
+        "Guide opens into a directed miniature set",
+        "Tools deploy and perform a shot",
+        "Tools repack into a carried skill"
+      ]
+    },
+    {
+      "id": "s010",
+      "from": 1415,
+      "duration": 343,
+      "kind": "wrapper",
+      "start": 47.166666666666664,
+      "end": 58.6,
+      "beats": [
+        "Visible interface covers underlying model optics",
+        "Shell lifts; model mechanisms engage; allowance decreases",
+        "Viewer sees wrapper and limitations separately"
+      ]
+    },
+    {
+      "id": "r-direct",
+      "from": 1758,
+      "duration": 613,
+      "kind": "direct",
+      "a": 12.2,
+      "start": 58.6,
+      "end": 79.03333333333333,
+      "beats": [
+        "Request workstation faces populated model racks",
+        "Connection engages, request selects a model, courier receives result",
+        "Feature-gating vault separately opens another access route"
+      ]
+    },
+    {
+      "id": "s017",
+      "from": 5080,
+      "duration": 128,
+      "kind": "download",
+      "start": 169.33333333333334,
+      "end": 173.6,
+      "beats": [
+        "Skill link in the description",
+        "File leaves source, lands in tray; courier approaches",
+        "Collected download ready to import"
+      ]
+    },
+    {
+      "id": "s018",
+      "from": 5208,
+      "duration": 342,
+      "kind": "skill",
+      "a": 8.933333333333334,
+      "start": 173.6,
+      "end": 185,
+      "beats": [
+        "Kit contains model and connection instructions",
+        "Director operates a pursuit shot; instructions consolidate",
+        "File enters Claude and the command is typed"
+      ]
+    },
+    {
+      "id": "s038",
+      "from": 13016,
+      "duration": 400,
+      "kind": "compare",
+      "a": 8,
+      "start": 433.8666666666667,
+      "end": 447.2,
+      "beats": [
+        "Two large comparison surfaces",
+        "Short retained question; identities unfold at the spoken reveal",
+        "No repeated recap; free-guide teaser bridges to closing"
+      ]
+    },
+    {
+      "id": "s044",
+      "from": 13589,
+      "duration": 257,
+      "kind": "outro",
+      "start": 452.96666666666664,
+      "end": 461.53333333333336,
+      "beats": [
+        "Courier holds downloadable skill",
+        "Anticipate, throw, catch, import, type command",
+        "Directed shot appears in Claude workspace"
+      ]
+    }
+  ],
+  "supports": [
+    {
+      "id": "s009:0.2",
+      "kind": "definition",
+      "title": "Wrapper",
+      "start": 40.56666666666667,
+      "end": 46.46666666666667
+    },
+    {
+      "id": "s011:1",
+      "kind": "brand",
+      "title": "fal.ai",
+      "start": 80.03333333333333,
+      "end": 84.63333333333333
+    },
+    {
+      "id": "s011:8",
+      "kind": "definition",
+      "title": "API",
+      "start": 87.03333333333333,
+      "end": 92.33333333333333
+    },
+    {
+      "id": "s012:7.5",
+      "kind": "saved",
+      "start": 101.76666666666667,
+      "end": 106.76666666666667
+    },
+    {
+      "id": "s014:3.8",
+      "kind": "brand",
+      "title": "fal.ai",
+      "start": 127.89999999999999,
+      "end": 131.89999999999998
+    },
+    {
+      "id": "s016:0",
+      "kind": "keys",
+      "start": 151,
+      "end": 166.33333333333334
+    },
+    {
+      "id": "s016:3.2",
+      "kind": "definition",
+      "title": "API key",
+      "start": 154.2,
+      "end": 160.5
+    },
+    {
+      "id": "s020:1.5",
+      "kind": "typing",
+      "start": 186.5,
+      "end": 192.9
+    },
+    {
+      "id": "s020:9.8",
+      "kind": "lens",
+      "start": 194.8,
+      "end": 200
+    },
+    {
+      "id": "s021:4.5",
+      "kind": "definition",
+      "title": "Prompt",
+      "start": 212.16666666666666,
+      "end": 217.16666666666666
+    },
+    {
+      "id": "s021:13",
+      "kind": "protip",
+      "start": 220.66666666666666,
+      "end": 227.16666666666666
+    },
+    {
+      "id": "s021:25",
+      "kind": "storyboard",
+      "start": 232.66666666666666,
+      "end": 238.06666666666666
+    },
+    {
+      "id": "s023:0.5",
+      "kind": "format",
+      "start": 243.4,
+      "end": 249.4
+    },
+    {
+      "id": "s024:1.5",
+      "kind": "budget",
+      "start": 251.93333333333334,
+      "end": 259.23333333333335
+    },
+    {
+      "id": "s025:0",
+      "kind": "brand",
+      "title": "Hailuo",
+      "start": 263.3333333333333,
+      "end": 266.3333333333333
+    },
+    {
+      "id": "s026:3",
+      "kind": "definition",
+      "title": "Storyboard",
+      "start": 269.3666666666667,
+      "end": 275.1666666666667
+    },
+    {
+      "id": "s026:10.2",
+      "kind": "storyboard",
+      "start": 276.56666666666666,
+      "end": 281.1666666666667
+    },
+    {
+      "id": "s027:0.25",
+      "kind": "chase",
+      "start": 281.5833333333333,
+      "end": 289.5833333333333
+    },
+    {
+      "id": "s027:10",
+      "kind": "brand",
+      "title": "Choose the direction",
+      "start": 291.3333333333333,
+      "end": 296.1333333333333
+    },
+    {
+      "id": "s029:0.2",
+      "kind": "brand",
+      "title": "First result",
+      "start": 297.5333333333333,
+      "end": 300.6333333333333
+    },
+    {
+      "id": "s030:4",
+      "kind": "direction",
+      "start": 316,
+      "end": 325
+    },
+    {
+      "id": "s030:17",
+      "kind": "sound",
+      "start": 329,
+      "end": 336
+    },
+    {
+      "id": "s030:30",
+      "kind": "protip",
+      "start": 342,
+      "end": 347.4
+    },
+    {
+      "id": "s031:0.6",
+      "kind": "definition",
+      "title": "Creative direction",
+      "start": 348.1333333333334,
+      "end": 354.6333333333334
+    },
+    {
+      "id": "s032:0.2",
+      "kind": "brand",
+      "title": "Same prompt. New model.",
+      "start": 356.06666666666666,
+      "end": 360.1666666666667
+    },
+    {
+      "id": "s035:0.5",
+      "kind": "detail",
+      "start": 389.53333333333336,
+      "end": 394.03333333333336
+    },
+    {
+      "id": "s036:0.5",
+      "kind": "brand",
+      "title": "Seedance",
+      "start": 395.53333333333336,
+      "end": 399.23333333333335
+    },
+    {
+      "id": "s036:16",
+      "kind": "detail",
+      "start": 411.03333333333336,
+      "end": 416.73333333333335
+    },
+    {
+      "id": "s037:1.4",
+      "kind": "sound",
+      "start": 421.5333333333333,
+      "end": 427.5333333333333
+    },
+    {
+      "id": "r-outlook:0.4",
+      "kind": "brand",
+      "title": "Create with the models",
+      "start": 447.59999999999997,
+      "end": 452.4
+    }
+  ],
+  "chapters": [
+    {
+      "title": "Can you tell the difference?",
+      "frame": 0,
+      "seconds": 0
+    },
+    {
+      "title": "Why use the models directly?",
+      "frame": 1097,
+      "seconds": 36.56666666666667
+    },
+    {
+      "title": "Connect fal.ai and Claude",
+      "frame": 3723,
+      "seconds": 124.1
+    },
+    {
+      "title": "Make your first video",
+      "frame": 6230,
+      "seconds": 207.66666666666666
+    },
+    {
+      "title": "Review and compare the results",
+      "frame": 8920,
+      "seconds": 297.3333333333333
+    },
+    {
+      "title": "The reveal and next step",
+      "frame": 13016,
+      "seconds": 433.8666666666667
+    }
+  ],
+  "oneFramePlateHolds": [
+    {
+      "id": "s027",
+      "frames": 1,
+      "reason": "Cumulative frame rounding; hold final valid frame instead of sampling next shot"
+    },
+    {
+      "id": "s030",
+      "frames": 1,
+      "reason": "Cumulative frame rounding; hold final valid frame instead of sampling next shot"
+    },
+    {
+      "id": "s033",
+      "frames": 1,
+      "reason": "Cumulative frame rounding; hold final valid frame instead of sampling next shot"
+    }
+  ],
+  "pending": [
+    "Actual comparison A",
+    "Matched B cost evidence",
+    "Camera-movement OBS voiceover pickup",
+    "Bonus-resource identity and asset",
+    "Creative and human listening approval"
+  ]
+}

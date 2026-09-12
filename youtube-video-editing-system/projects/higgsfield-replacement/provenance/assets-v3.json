@@ -1,0 +1,79 @@
+[
+  {
+    "name": "higgsfield.jpg",
+    "source": "/Users/alexchensmacmini/Downloads/brand-system/public/swaplogos/Higgsfield.jpg",
+    "note": "Existing user brand-system Higgsfield logo",
+    "bytes": 38028,
+    "sha256": "1bcda1aaaad2c4f3a7e15fd079913054f879ac5ed170ad9a7fadc45fc018cea4"
+  },
+  {
+    "name": "hailuo.png",
+    "source": "/Users/alexchensmacmini/Downloads/brand-system/public/swaplogos/src_hailuo.png",
+    "note": "Existing user brand-system Hailuo logo",
+    "bytes": 3241,
+    "sha256": "df8ea9bf91bcecd15e0967732cbd4104881ab87396f978f224c20f6e0d1f444f"
+  },
+  {
+    "name": "claude.png",
+    "source": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/work/repos/claude-reels-workflow/video/public/claude_logo.png",
+    "note": "Existing user Claude mark",
+    "bytes": 8626,
+    "sha256": "c0a9c85cc121d130eda23880c35d81642e6423a6a256e37b2e1dc7730889b0d7"
+  },
+  {
+    "name": "google.png",
+    "source": "/Users/alexchensmacmini/Downloads/brand-system/public/logos/google.png",
+    "note": "Existing user Google mark; used for Google Veo",
+    "bytes": 9359,
+    "sha256": "ec91f8765a42b45acf0de8d78272a411177495b48a9e9109dba1418955e111ff"
+  },
+  {
+    "name": "glide.wav",
+    "source": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/work/preview-public/sfx-dispatch/glide.wav",
+    "note": "Approved No Code Alex dispatch SFX; quiet dialogue mix",
+    "bytes": 55886,
+    "sha256": "0f13582879a9028d4378f77a73b76f8dfa808ea0ab4809ac5da4383d2d02aca2"
+  },
+  {
+    "name": "glass.wav",
+    "source": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/work/preview-public/sfx-dispatch/glass.wav",
+    "note": "Approved No Code Alex dispatch SFX; quiet dialogue mix",
+    "bytes": 110444,
+    "sha256": "bcae4c388a49d6ea1706bb5cabea6eb94c5242bbb16b947613a6dfd51c8e72aa"
+  },
+  {
+    "name": "land.wav",
+    "source": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/work/preview-public/sfx-dispatch/land.wav",
+    "note": "Approved No Code Alex dispatch SFX; quiet dialogue mix",
+    "bytes": 34604,
+    "sha256": "a3385379057d58261527c1b67b2199ca07afc853125614e29affcc40afc5bd60"
+  },
+  {
+    "name": "tap.wav",
+    "source": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/work/preview-public/sfx-dispatch/tap.wav",
+    "note": "Approved No Code Alex dispatch SFX; quiet dialogue mix",
+    "bytes": 23084,
+    "sha256": "034924c586dcaa1a2a6be994e5f3bd29b2868b0299d3d0ce3d0934ba33e15cf1"
+  },
+  {
+    "name": "fal.png",
+    "source": "https://fal.ai/apple-touch-icon.png",
+    "note": "Official fal.ai site touch icon",
+    "bytes": 2348,
+    "sha256": "78b67eb609cd7f519a0491e6a3c8e5153869c64bfaa475a77edac0bb922bd38e"
+  },
+  {
+    "name": "seedance.png",
+    "source": "https://static.higgsfield.ai/explore/image-generate-block/seedance-logo.png",
+    "note": "Model mark served by Higgsfield official site",
+    "bytes": 5703,
+    "sha256": "97455e3ce09f25262ddc4fe2b6e5e275fe9ce8e6f8a16ad0a6cbbd7b70347c31"
+  },
+  {
+    "name": "cipher.mp3",
+    "source": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Cipher2.mp3",
+    "note": "Cipher — Kevin MacLeod (incompetech.com), CC BY 4.0; excerpt, fades and dialogue-first gain",
+    "bytes": 9252699,
+    "sha256": "d3d0614535a61d748e2fd8d5117fc4d781022a7624794802a2462d8af3fdd522"
+  }
+]
