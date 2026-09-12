@@ -62,6 +62,8 @@ Chapter plan: name sections around complete viewer tasks or concepts; retain nat
 
 ## Graphics plan
 
+Read CURRENT-DIRECTION.md and LEARNINGS-INDEX.md. Give every explanatory scene a unique beginning → action → payoff; record its primary job, supporting jobs, protected UI/face area, final state and material SFX. Shared rigs are reusable; replayed whole scenes are not. Do not promise a bonus until the actual resource exists. New spoken claims need recorded VO or source evidence, not an invented edit.
+
 | time/line | visual | purpose | source/evidence | mode | status |
 |---|---|---|---|---|---|
 | | | clarify/prove/orient/compare/demonstrate/reset | | overlay/cutaway/screen/footage | |

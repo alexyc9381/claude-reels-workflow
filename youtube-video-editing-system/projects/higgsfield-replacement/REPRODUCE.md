@@ -27,6 +27,8 @@ node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higg
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/audit-v9.mjs
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/render-low-storage.mjs
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/validate-v9-export.mjs
+python3 work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/verify-v9-audio.py
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/transcribe-v9-joins.mjs
 ```
 
 audit-v9 regenerates the motion map, source/output timeline, chapter JSON, FFmetadata and copyable YouTube chapter list. Re-run it after any EDL change, then review chapter meaning.
