@@ -1,0 +1,14 @@
+{
+  "url": "https://chen.media/guides/claude-octopus-setup-guide",
+  "keyword": "OC",
+  "commit": "fbaa42d81c92e4ee0240a228c1a5e0392f91f2fb",
+  "deployment": "dpl_AjDFgio8YTYYgn3PFPWWd4r2aM7G",
+  "apex_status": 200,
+  "www_status": 200,
+  "download_status": 200,
+  "download_matches": true,
+  "download_sha256": "226f8b3b44fb01bc97e022f8196d4b21372062bff14c7ab26080ae0b558134cb",
+  "caption_characters": 1244,
+  "caption_bytes": 1250,
+  "link_file_bytes": 251
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "Early repository reveal, 7.85\u20139.7s, including anticipatory caption display",
+  "source_word": {
+    "start": 7.86,
+    "end": 8.35,
+    "word": " ECC"
+  },
+  "display_word": "\u2022\u2022\u2022",
+  "header": [
+    "ONE POWERFUL REPO",
+    "FREE ON GITHUB"
+  ],
+  "review": "Inspected rendered phone sequence at 7.55, 7.9, 8.2, 8.6, 9.1 and 9.6 seconds. No ECC text or expanded repository name appears in these frames.",
+  "audio": "Existing voice retained; this request changes the on-screen name only."
+}

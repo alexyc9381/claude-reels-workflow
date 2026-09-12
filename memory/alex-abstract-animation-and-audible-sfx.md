@@ -290,3 +290,7 @@ that area onward. Read the [focused teardown and correction](alex-x144-retention
 solution-to-social-proof value gap, continuous conversion, brief stars, useful format
 consequences, active Desktop/output ending, and two SETUP hook-only trials. This adds a
 specific reported loss point; it does not establish causality or approve the earlier pacing.
+
+## ECC follow-up: secondary action and finished outcomes
+
+September 12 feedback adds working background sprites, a complete beginning/operation/ending instead of conductor bouncing, an operated phone that withholds the early repository name, and a whole-reel search for similar quiet spots. Read [[alex-ecc-continuous-action-and-reveal-gating]] for exact scope and the final examples.

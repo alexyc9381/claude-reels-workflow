@@ -1,0 +1,18 @@
+{
+  "note": "Rebuilt through canonical ECC151 entry after namespacing static assets. Media restored from SHA-verified Drive source archive. Compared to decoded delivered MP4; includes H264/YUV conversion error.",
+  "remotion": "4.0.370",
+  "frames": [
+    {
+      "frame": 123,
+      "mean_RGB_error_of_255": 4.2001797196502055
+    },
+    {
+      "frame": 333,
+      "mean_RGB_error_of_255": 3.5916253536522635
+    },
+    {
+      "frame": 1000,
+      "mean_RGB_error_of_255": 3.6710709233539096
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+
+  scene                   MOTION  top share DEADRUN    HOLD  verdict
+  ----------------------------------------------------------------------------
+  SNAP                     14.53      0.070       3     18%  ok
+  TEAM                     14.74      0.072       0     23%  ok
+  ATTACK                   11.37      0.124       0     43%  ok
+  REPO                     14.20      0.100       0     22%  ok
+  CREATOR                  14.52      0.078       0     29%  ok
+  INSTALL                  10.19      0.087       6     12%  ok
+  PLAN                     13.49      0.079       0     23%  ok
+  BUILD                    16.64      0.086       0     21%  ok
+  SECURE                   11.58      0.088       0     30%  ok
+  TEST                     11.64      0.087       0     29%  ok
+  ASSEMBLE                 11.76      0.081       0     14%  ok
+  PUBLIC                   18.03      0.076       0     18%  ok
+  CTA                       8.14      0.099       0     28%  ok
+  ----------------------------------------------------------------------------
+  median motion 13.49  (bar 9.00, approved reel 81 = 9.82)
+  scenes failing: 0/13

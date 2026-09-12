@@ -15,6 +15,11 @@ Before this existed, every magnet was produced by a throwaway build script in a 
 meant the next reel started from nothing. See [`../memory/reel-lead-magnet-builder.md`](../memory/reel-lead-magnet-builder.md).
 
 ## Start here
+
+**OC article and caption reference.**
+
+[150 OC article text](150-oc-article.md) records the published article, including copyable command blocks. Its canonical publishing source lives in the chenmedialabs repo, not in this folder's plain-text builder. [150 OC caption](150-oc-caption.txt) is the corrected comment-first post copy. See the [revision log](../memory/reels/oc-factory-log.md) for the live article and verified Drive links.
+
 ```bash
 python3 ../tools/make_lead_magnet.py 82-boris.txt "BORIS - The 3 Things 99 Percent Get Wrong.docx"
 ```

@@ -37,3 +37,7 @@ display face; a command rendered in a serif reads as a theme, not as a string yo
 type. Same test for any label a scene puts on screen: could a viewer who muted the
 video tell which Claude feature this scene is about? Related: [[reel-hook-header]],
 [[gate-the-how-in-scripts]], [[reel-draw-dont-stack]].
+
+## ECC follow-up: intentional early name withholding
+
+September 12: Alex explicitly hid ECC around 8s. The replacement header names the benefit/free repository without spelling the product name; the illustration and anticipatory caption must also withhold it. This does not remove later names or alter the spoken audio. See [[alex-ecc-continuous-action-and-reveal-gating]].

@@ -1,0 +1,14 @@
+
+  scene                   MOTION  top share DEADRUN    HOLD  verdict
+  ----------------------------------------------------------------------------
+  Hook                     14.83      0.099       0     57%  ok
+  Council                   9.50      0.104       0     19%  ok
+  Plugin                   11.38      0.092       0     60%  ok
+  Review                    6.84      0.124       0     24%  ok
+  Build                     8.93      0.080       0     12%  ok
+  Architecture              6.45      0.132       0     15%  ok
+  Security                 14.26      0.078       0     23%  ok
+  CTA                       9.40      0.116       0     18%  ok
+  ----------------------------------------------------------------------------
+  median motion 9.50  (bar 9.00, approved reel 81 = 9.82)
+  scenes failing: 0/8

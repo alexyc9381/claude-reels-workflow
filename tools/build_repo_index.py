@@ -172,6 +172,9 @@ def scan_reels():
             if not key:
                 continue
             for f in datafiles:
+                # OC is a two-letter keyword; substring matching also hits UNLOCK/AUTO C.
+                if (key == "oc" or f == "words_oc.json") and not (key == "oc" and f == "words_oc.json"):
+                    continue
                 stem = f[:-5]  # drop .json
                 if norm(stem) in GENERIC or not keep(f"video/src/data/{f}"):
                     continue

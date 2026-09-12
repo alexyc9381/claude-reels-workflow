@@ -12,6 +12,8 @@ render, or a re-record. Read the section that matches what you are about to do.
 
 ## Index
 
+**September 12, 2026: [OC action and ending revisions](memory/alex-oc-action-and-ending-revisions.md).** Repeated random-shape rejection requires a new depicted action; smashing must accumulate damage. Keep OC-specific late keyword timing separate from other reels, and complete the comment-first caption and live article.
+
 **September 11, 2026 — [LM hook, demo and delivery feedback](memory/alex-lm-hooks-demo-and-delivery.md):**
 read before opening animation, screen tutorials, trial variants or final delivery. Each correction
 includes its reason and verification; the five-second demo handoff and exact title are LM-specific.

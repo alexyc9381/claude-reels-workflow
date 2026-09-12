@@ -9,6 +9,11 @@ metadata:
 
 # ⛔⛔ HIERARCHY OVER DENSITY — one subject moves at a time
 
+## September 12 qualification: working secondary actors
+
+Alex explicitly requested active background specialists at 4s in ECC, then asked for similar opportunities throughout the reel. Read [[alex-ecc-continuous-action-and-reveal-gating]] before applying the older literal single-mover/one-ambient-element contract below. Preserve one clear primary event, but permit subordinate, staggered task motion: typing, inspection, handoffs, catching and operating tools. Do not freeze the workforce in the name of hierarchy, and do not replace meaningful work with random jitter. The requested short opening push also applies to ECC; do not infer continuous camera drift.
+
+
 > Alex, reel 66 v3: *"the quality of the animation just isn't good... it's too chaotic. It should be more
 > hierarchical. Everything's just moving way too fast as I'm speaking, I can't even see what's going on.
 > Each animation is moving way too fast. I don't even know what's going on in some of these scenes. It's

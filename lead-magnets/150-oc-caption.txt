@@ -1,0 +1,28 @@
+Comment "OC" and I'll DM you the Claude Octopus Setup Guide, free. Follow so the DM lands 📩
+
+👇 READ BELOW, this is what wouldn't fit in the video:
+
+The useful part of AI arguing is the blind spot it exposes.
+
+One model proposes a plan. An independent perspective challenges its assumptions. You get something specific to test before it becomes a bug in your app.
+
+Here are three places to use it:
+
+1. Architecture decisions
+Compare two approaches against your actual constraints before you commit to a build.
+
+2. Code review
+Look for concrete failure cases and missed requirements in the changes you just made.
+
+3. Security checks
+Challenge the trust boundaries, then verify the findings and test the fixes.
+
+The part people miss: installing the plugin does not automatically make every prompt a multi-model debate. You need to start the workflow and check which providers actually contributed.
+
+The plugin is open source. Provider usage can still count against your subscriptions or API budget.
+
+Save this for your next build. The guide includes the install commands, first council prompt, and copy-and-paste build, review and security prompts.
+
+Comment "OC" and I'll send you the full setup guide.
+
+#ClaudeCode #AItools #VibeCoding #AIAgents

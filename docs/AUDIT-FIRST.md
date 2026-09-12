@@ -1,5 +1,7 @@
 # AUDIT FIRST — how to stop spending rounds on one instance of a class
 
+**ECC revision follow-up (September 12):** when the note is “more motion,” [audit background jobs, completed actions, name-reveal surfaces and the entire requested span](../memory/alex-ecc-continuous-action-and-reveal-gating.md). Working secondary actors can coexist with one primary event. The [revision record](../memory/reels/ecc-revision-record.md) documents where a numerically passing cut was still rejected.
+
 Harvested from reel 86 **ARMY** (Aug 2026), which took roughly nine rounds of
 feedback to ship. Most of those rounds were avoidable, and the pattern is the
 same one every time.

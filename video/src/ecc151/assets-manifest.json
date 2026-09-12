@@ -1,0 +1,103 @@
+{
+  "archive_url": "https://drive.google.com/file/d/1xZvbn-TS0pvoA23IUHQs-XiZ5XOuqnOi/view",
+  "archive_sha256": "850947c6aa9a39205a97a401b8aeb575b32f3392e1941330623332c4abd4f993",
+  "archive_prefix": "ECC_Remotion_Source/video/public/",
+  "destination": "video/public/ecc151",
+  "files": [
+    {
+      "path": "150_ec_bed.wav",
+      "bytes": 6585644,
+      "sha256": "a5418b9c11b685dd1dcdabd3e417e21109d51c4b14464943ae623eb2df1e765d"
+    },
+    {
+      "path": "150_ec_master.wav",
+      "bytes": 9878502,
+      "sha256": "7eb3be5e197bab8d4c450845c88069516a11e6544a2f2e2c914547f6d6ff8a67"
+    },
+    {
+      "path": "150_ec_script.txt",
+      "bytes": 804,
+      "sha256": "b266c237a64f1d233741974149dfb86d7d785d25e08339c2bbeed80d1fa0b3e6"
+    },
+    {
+      "path": "150_ec_sfx.wav",
+      "bytes": 6585644,
+      "sha256": "058317887e6da123e61ab5e6e6ef0b8d67a04328a462c37d3d4c0026da2c7688"
+    },
+    {
+      "path": "150_ec_vo.wav",
+      "bytes": 3290272,
+      "sha256": "5d1605e1de43bcc5ebe2d7a33fb19acb4f9bfe91ae33d0aeb3f87184777ce4b0"
+    },
+    {
+      "path": "affaan-hackathon.png",
+      "bytes": 1181423,
+      "sha256": "eb0a032f22c7b8f0e0dccdf7a326f2c396989b1e30914e11b4400e2b357f4503"
+    },
+    {
+      "path": "claude_logo.png",
+      "bytes": 8626,
+      "sha256": "c0a9c85cc121d130eda23880c35d81642e6423a6a256e37b2e1dc7730889b0d7"
+    },
+    {
+      "path": "ecc-plan-demo.mp4",
+      "bytes": 438847,
+      "sha256": "b975ad03c6d5196bbd0d322ad4ab3ea52a6a4945ba17e70dbc70efce4e51b3ea"
+    },
+    {
+      "path": "ecc-repo-readme.png",
+      "bytes": 119097,
+      "sha256": "d378f46842b4e2b5274ef41555b8cfc92d572ab6a0e12c53f693de9bf0be0126"
+    },
+    {
+      "path": "logos/claude.svg",
+      "bytes": 1936,
+      "sha256": "5119ef950a0d648b3fd62865791e73f07f32e18ddab84e4f21160f8c641c0f5f"
+    },
+    {
+      "path": "logos/codex.svg",
+      "bytes": 1360,
+      "sha256": "dde8b3563a40d55af25e3fb2509864d16ae214b0260748d294e2d011f2a6907c"
+    },
+    {
+      "path": "logos/github.svg",
+      "bytes": 837,
+      "sha256": "476ba7aa67b86da7d6e7567b08a4bf0eb1a2fd28da5fc243f8ee39a2f1ea6773"
+    },
+    {
+      "path": "logos/githubactions.svg",
+      "bytes": 1742,
+      "sha256": "68e27a7570b9e0f18a1f85d84d211f3328d845dfac8ce7e101ec16576c67db5b"
+    },
+    {
+      "path": "logos/javascript.svg",
+      "bytes": 974,
+      "sha256": "c9be35a7a861ebe80ae4ee706d05004b99ee59fc63db69da6dcc10776718434b"
+    },
+    {
+      "path": "logos/jest.svg",
+      "bytes": 2700,
+      "sha256": "531ee43921c1895fbe6a6554bb774fc07f077ec122b734c1452af8ec77141954"
+    },
+    {
+      "path": "logos/openai.png",
+      "bytes": 16197,
+      "sha256": "bfc668250cba2cd8709c63ea01ec9eb674973829b55f54d3cf69aef2bd100c10"
+    },
+    {
+      "path": "logos/python.svg",
+      "bytes": 1518,
+      "sha256": "ad9468e1c4903f73ae7eebfbe980f0f727a10db695be3d914e7d8bd25356a862"
+    },
+    {
+      "path": "logos/react.svg",
+      "bytes": 2926,
+      "sha256": "ab9136a1a4a8be72ac6743e1bdd1912d878bd68d57787ea7a6c6838e3b23c01c"
+    },
+    {
+      "path": "logos/typescript.svg",
+      "bytes": 1294,
+      "sha256": "7f023e8d1e767370306ec9437d2de5d5af97491d6208dd7799a3808a7c10a36a"
+    }
+  ]
+}
