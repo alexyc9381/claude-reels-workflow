@@ -25,3 +25,8 @@ Media remains in the existing faceless Drive reel folder; the original is preser
 ## V2 rejected; v3 replaces the complete ending
 
 Alex rejected the isolated retention repairs and specified the run from 41 seconds onward, including 44 seconds and the ending. See [the corrected diagnosis and seven-part action map](../alex-scope-ending-rebuild.md). V3 replaces the entire run and ends at 56.833s after the actual final word. Earlier numerical passes are historical and not creative approval.
+
+
+### v4 — enforce the repeated ALL CAPS header instruction
+
+User rejected mixed-case headers in v3. Uppercase every SCOPE main/scene header, including the human-writing and story-structure changes inside scenes. Shared HookHeader and SectionHeader now enforce the standing capitalization rule. Preserve v3 motion, audio, captions, and 1705-frame endpoint. Validate rendered header fit before delivery.

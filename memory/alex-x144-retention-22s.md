@@ -86,3 +86,9 @@ See [three hooks, one body](three-cuts-three-hooks.md) and
 A rendered revision is a testable response to the hypothesis. Only subsequent audience
 analytics can show whether retention improved. Keep the original and revised identifiers
 in the production record so the comparison is reproducible.
+
+
+## Follow-up: first SETUP trial hooks were rejected
+
+Alex said they lacked enough beginning motion and a pattern interrupt. They were not
+approved winners. See the [first-second teardown and revised events](alex-setup-first-second-pattern-interrupt.md). The shared body remains the control.

@@ -1,5 +1,5 @@
 
-verify_reel · B-full-v3.mp4
+verify_reel · B-full.mp4
 ------------------------------------------------------------------------
   ✓ AUDIO_AT_0        40ms                   any sound must be audible by 150ms of frame 0
   ✓ VO_ONSET_0        0.000s                 first spoken word starts at ~0.00s
@@ -9,7 +9,7 @@ verify_reel · B-full-v3.mp4
   ✓ VO_NO_FLUB        0 flagged              no short word held absurdly long (warn)
   ✓ CAPTION_DRIFT     monotonic              caption word starts must be monotonic (full drift gate = caption-sync-gate) (warn)
   ✓ CAPTION_TEXT      match                  caption text == the known VO script (catches whisper 'cloud'/dropped words)
-  ✓ SFX_CUES          61/61 fire             audible energy at each declared cue
+  ✓ SFX_CUES          63/63 fire             audible energy at each declared cue
 ------------------------------------------------------------------------
   9/9 checks passed
 

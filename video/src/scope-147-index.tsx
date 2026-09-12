@@ -32,6 +32,6 @@ export const Reel:React.FC=()=>{
  let big=shot.big,hot=shot.hot;
  if(i===0&&local>=53){big='The shape of';hot='human writing';}
  if(i===4&&local>99){big='It’s the';hot='story structure';}
- return <AbsoluteFill><Bg/><Audio src={staticFile('scope147/mix.wav')}/><ProgressBar/><Panel><div style={{position:"absolute",inset:0,transform:`scale(${scale})`,transformOrigin:move?move[3]:"center"}}><Scene f={local}/></div></Panel><HookHeader big={big} hot={hot} f={30}/><KaraokeCaption words={words}/></AbsoluteFill>;
+ return <AbsoluteFill><Bg/><Audio src={staticFile('scope147/mix.wav')}/><ProgressBar/><Panel><div style={{position:"absolute",inset:0,transform:`scale(${scale})`,transformOrigin:move?move[3]:"center"}}><Scene f={local}/></div></Panel><HookHeader big={big.toUpperCase()} hot={hot.toUpperCase()} f={30}/><KaraokeCaption words={words}/></AbsoluteFill>;
 };
 registerRoot(()=> <Composition id="scope-147" component={Reel} durationInFrames={TOTAL} fps={30} width={1080} height={1920}/>);

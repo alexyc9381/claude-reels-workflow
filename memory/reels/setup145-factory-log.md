@@ -9,6 +9,10 @@ metadata:
 
 # SETUP145 — additional hook trials
 
+**Current delivery: immediate-motion revision.** Alex rejected the first versions for too
+little beginning motion and no enticing pattern interrupt. The same Drive links below now
+serve the revised full reels. [First-second teardown](../alex-setup-first-second-pattern-interrupt.md).
+
 - [Trial B: magnetic selection](https://drive.google.com/file/d/1jsuCab1C1HUki0BGd-mvgNCpYvL21ykb/view).
 - [Trial C: tool relay](https://drive.google.com/file/d/1g_pLHpfn8x29JUfLtVmXj7iqYJDj5c_Q/view).
 - [Editable trial source](https://drive.google.com/file/d/1a4xfSIAfcjUnKKgYoUx-o0iwOnJr07hT/view).
@@ -36,7 +40,7 @@ Both trials pass type checking, full-file decode, dimension/frame-count checks, 
 caption-tail check, and 9/9 export checks. Every scene clears the per-scene motion floor;
 no scene has a >12-frame dead run or a flagged tail stall.
 
-Whole-reel median motion remains below the separate reference target of 9: B 7.86, C 7.33.
+Whole-reel median motion remains below the separate reference target of 9: B 7.86, C 7.87.
 That is recorded, not relabeled as a full benchmark pass. The request is for different hooks,
 so the existing comparison body was retained. The candidates have not been selected by the
 user or shown to improve retention. No platform duplicate-detection guarantee is made.
@@ -53,3 +57,22 @@ C's anticipation pose inward to keep Claude's full silhouette visible.
 [Manifest](../../vo/setup145-trials/render-manifest.json) ·
 [QA evidence](../../vo/setup145-trials/qa) ·
 [Indexed learning](../alex-x144-retention-22s.md#setup-two-hook-only-trials-from-the-same-request).
+
+
+## Immediate-motion revision
+
+B now opens on a large eight-frame magnet sweep, plug capture and a visible drag/plant
+reaction from Claude. C launches at frame 4, compresses around 0.5s, and proceeds through
+visibility/access before docking the three tools into a hero array. The existing camera
+push is unchanged. Hook mean motion increased to 11.96 (B) and 8.76 (C); first-second
+measurements and the 0.25–1.0s interval are recorded in the linked teardown. These are
+motion diagnostics, not engagement multipliers or user approval.
+
+Both full videos still pass 9/9 export checks, look checks, every per-scene motion floor
+and tail/dead-run checks. Revised-hook Foley audits and full-mix spectral balance pass.
+The static *full-bank* audit retains the inherited repeated-bright-coin warning (11/10
+uses across the full B/C timeline); the body audio and its cue counts were intentionally
+preserved. See the clearly named advisory logs alongside the changed-hook checks.
+
+The source archive includes the final mixed WAVs, updated hook source, per-hook contact
+maps, first-second comparison, rendered-output manifest and current QA evidence.

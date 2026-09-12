@@ -1,14 +1,14 @@
 {
-  "B-full-v3.mp4": {
+  "B-full.mp4": {
     "body_frames": 739,
     "mean_absolute_pixel_delta_8bit": 0.0,
     "max_frame_mean_delta": 0.0,
     "note": "Independent H264 encodes can differ slightly; shared body code and timing are unchanged."
   },
-  "C-full-v6.mp4": {
+  "C-full.mp4": {
     "body_frames": 739,
-    "mean_absolute_pixel_delta_8bit": 0.21086141320993224,
-    "max_frame_mean_delta": 0.2956661522633745,
+    "mean_absolute_pixel_delta_8bit": 0.21084230232713544,
+    "max_frame_mean_delta": 0.2965149176954732,
     "note": "Independent H264 encodes can differ slightly; shared body code and timing are unchanged."
   }
 }

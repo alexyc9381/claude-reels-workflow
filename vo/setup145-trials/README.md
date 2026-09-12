@@ -17,3 +17,10 @@ intentionally unchanged. No claim of platform duplicate-detection avoidance is m
 The repository look and per-scene checks are run on full outputs. The existing shared
 body does not reach the separate whole-reel median-motion benchmark of 9; do not claim a
 full benchmark pass or quietly rewrite the control body to raise that number.
+
+
+The initial trials were rejected for weak beginning motion. Current files use an immediate
+magnet sweep/catch/drag in B and a frame-4 launch in C. See the indexed first-second learning
+and `first-second-comparison.json`; camera timing is unchanged. `qa/*-hook-sfx.log` measures
+the revised contacts. `qa/*-full-bank-advisory.log` records the inherited repeated-coin
+warning in the preserved body; do not report it as a clean full-bank pass.

@@ -8,19 +8,31 @@
       "frame": 0,
       "asset": "impact",
       "gain_db": -4.999848365783691,
-      "action": "opening push"
+      "action": "large magnet sweeps immediately"
     },
     {
-      "frame": 4,
-      "asset": "gear",
-      "gain_db": -11.443250498634804,
-      "action": "magnet begins pulling"
+      "frame": 7,
+      "asset": "clank",
+      "gain_db": -5.08479118347168,
+      "action": "magnet catches plug swarm"
+    },
+    {
+      "frame": 13,
+      "asset": "chain",
+      "gain_db": -10.207554306908321,
+      "action": "rope pulls Claude across floor"
+    },
+    {
+      "frame": 24,
+      "asset": "thock",
+      "gain_db": -5.771942317708998,
+      "action": "Claude plants feet"
     },
     {
       "frame": 34,
       "asset": "lever",
       "gain_db": -8.03914115094208,
-      "action": "Claude yanks rope"
+      "action": "Claude reclaims magnet"
     },
     {
       "frame": 43,

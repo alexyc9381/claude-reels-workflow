@@ -1,0 +1,50 @@
+{
+  "B_before": {
+    "first_1s_mean_delta": 3.8717925548553467,
+    "first_250ms_mean_delta": 8.75955581665039,
+    "250ms_to_1s_mean_delta": 2.3842132091522217,
+    "quarters": [
+      8.074,
+      2.825,
+      2.167,
+      1.949
+    ],
+    "note": "30fps panel-only grayscale change. Camera timing is unchanged; these describe motion, not predicted retention."
+  },
+  "C_before": {
+    "first_1s_mean_delta": 3.742609977722168,
+    "first_250ms_mean_delta": 9.116602897644043,
+    "250ms_to_1s_mean_delta": 2.1070473194122314,
+    "quarters": [
+      8.184,
+      2.167,
+      2.558,
+      1.172
+    ],
+    "note": "30fps panel-only grayscale change. Camera timing is unchanged; these describe motion, not predicted retention."
+  },
+  "B_after": {
+    "first_1s_mean_delta": 10.63904094696045,
+    "first_250ms_mean_delta": 18.9110107421875,
+    "250ms_to_1s_mean_delta": 8.121484756469727,
+    "quarters": [
+      17.179,
+      7.251,
+      9.43,
+      7.14
+    ],
+    "note": "30fps panel-only grayscale change. Camera timing is unchanged; these describe motion, not predicted retention."
+  },
+  "C_after": {
+    "first_1s_mean_delta": 8.467334747314453,
+    "first_250ms_mean_delta": 19.448583602905273,
+    "250ms_to_1s_mean_delta": 5.125216484069824,
+    "quarters": [
+      19.183,
+      7.09,
+      3.198,
+      3.557
+    ],
+    "note": "30fps panel-only grayscale change. Camera timing is unchanged; these describe motion, not predicted retention."
+  }
+}
