@@ -79,6 +79,8 @@ optional even though nobody asks for them:
 
 ## ⛔ Before the first scene is authored
 
+Apply [ALL CAPS headers](../memory/reel-header-all-caps.md) and [no creator watermarks](../memory/reel-no-watermarks.md), including inherited chrome. Preserve any exact headline Alex supplies.
+
 Read [`ANIMATION-QUALITY.md`](ANIMATION-QUALITY.md). Its §3 test (write the VO line beside each
 shot and ask what the picture ADDS) and §2 (name the EVENT in each scene: before state, trigger,
 travel, arrival) are storyboard-time checks. Both defects they catch — containers, and text

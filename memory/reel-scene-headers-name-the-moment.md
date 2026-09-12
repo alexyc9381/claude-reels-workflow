@@ -5,6 +5,8 @@ metadata:
   type: feedback
 ---
 
+**September 11, 2026 standing correction:** [Headers are ALL CAPS](reel-header-all-caps.md); [creator watermarks are forbidden](reel-no-watermarks.md). These explicit user instructions override conflicting historical examples and clone-chrome advice below. Keep case-sensitive commands in separate code/UI content rather than rewriting command syntax as a headline.
+
 Every scene header must name **what the VO is saying at that exact moment** — the
 command, the feature, the claim. Never the set, the room, or the theme.
 
