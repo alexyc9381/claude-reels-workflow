@@ -1,11 +1,11 @@
 
-scene_tail_audit · C-full-v6.mp4
+scene_tail_audit · C-full.mp4
   ⛔ a scene MEAN cannot see where inside the scene the motion was.
 
   scene        mean     Q1     Q2     Q3     Q4   TAIL   verdict
   --------------------------------------------------------------------
-  S0           7.33   7.30   4.55   7.49   9.98   1.36   ok
-  S1           6.18   6.22   7.61   5.67   5.16   0.83   ok
+  S0           8.76  13.84   7.19   4.14   9.88   1.13   ok
+  S1           6.18   6.22   7.61   5.68   5.16   0.83   ok
   S2           9.38  10.82   8.62   7.85  10.23   1.09   ok
   S3           6.25   4.59   5.74   5.95   8.44   1.35   ok
   S4           7.87   8.70   7.64   7.57   7.65   0.97   ok

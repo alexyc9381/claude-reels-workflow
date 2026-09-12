@@ -8,43 +8,61 @@
       "frame": 0,
       "asset": "impact",
       "gain_db": -4.999848365783691,
-      "action": "opening launch"
+      "action": "oversized packet and charged launcher"
     },
     {
-      "frame": 8,
-      "asset": "paper",
-      "gain_db": -13.276555712045553,
-      "action": "Claude launches packet"
-    },
-    {
-      "frame": 35,
+      "frame": 4,
       "asset": "lever",
       "gain_db": -8.03914115094208,
-      "action": "three stations deploy"
+      "action": "packet fires"
     },
     {
-      "frame": 44,
+      "frame": 6,
+      "asset": "paper",
+      "gain_db": -13.276555712045553,
+      "action": "packet crosses foreground"
+    },
+    {
+      "frame": 15,
       "asset": "clank",
       "gain_db": -5.08479118347168,
       "action": "clamp compresses packet"
     },
     {
-      "frame": 53,
+      "frame": 25,
       "asset": "terminal",
       "gain_db": -6.232650940931286,
       "action": "visibility lens reveals strip"
     },
     {
-      "frame": 63,
+      "frame": 31,
       "asset": "key",
       "gain_db": -9.109621142850564,
       "action": "access key turns"
     },
     {
-      "frame": 70,
+      "frame": 38,
       "asset": "unlock",
       "gain_db": -24.000478245223487,
       "action": "gate opens"
+    },
+    {
+      "frame": 49,
+      "asset": "thock",
+      "gain_db": -5.771942317708998,
+      "action": "compression tool docks"
+    },
+    {
+      "frame": 59,
+      "asset": "terminal",
+      "gain_db": -6.232650940931286,
+      "action": "visibility tool docks"
+    },
+    {
+      "frame": 69,
+      "asset": "key",
+      "gain_db": -9.109621142850564,
+      "action": "access tool docks"
     },
     {
       "frame": 76,

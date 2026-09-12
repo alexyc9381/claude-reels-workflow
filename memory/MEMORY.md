@@ -23,6 +23,7 @@
 - [Claude reel topic engine](claude-reel-topic-engine.md) · [Fable idea backlog](fable-idea-backlog.md) — ranked next ideas + kill-list
 
 ## ⛔ Standing build/visual rules
+- [⛔ SETUP: immediate first-second event, not preparation](alex-setup-first-second-pattern-interrupt.md) — first B/C trials were rejected despite numeric passes. Review 0–0.25s and 0.25–1s separately; large causal sweep/launch, visible reaction and next useful beat, with matched Foley. A zoom cannot substitute for subject action.
 - [⛔ NO reel watermarks](reel-no-watermarks.md) — never render nocodealex/@nocodealex or replacement creator branding; overrides cloned chrome; inspect full-frame corners.
 - [⛔ Reel headers ALWAYS ALL CAPS](reel-header-all-caps.md) — preserve Alex’s exact headline; UNLAZY 148: MAKE CLAUDE 10X BETTER 1 PROMPT.
 - [SCOPE: previous revision rejected; rebuild the entire 41s-to-end sequence](alex-scope-ending-rebuild.md) — a fix at two timestamps left the intervening scenes untouched. Replace the full stated span with distinct actions and consequences; minimum motion checks are not creative approval; cut on the actual final VO consonant, with no outro hold.

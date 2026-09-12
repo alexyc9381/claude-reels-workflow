@@ -1547,3 +1547,13 @@ whole-video hash distance.
 ## 32. SCOPE correction: a timestamp can identify the start of an entire rejected run
 
 The first SCOPE retention pass was rejected despite passing minimum per-scene checks. When feedback says “starting from 41 seconds,” audit and revise every scene from that point through the next payoff or ending. Enumerate actual replacements. A nearby demonstration or improved outro does not repair an untouched tutorial block. For “cut immediately after SCOPE,” derive the endpoint from the original VO waveform and the output frame boundary. See [the superseding teardown](../memory/alex-scope-ending-rebuild.md).
+
+
+## 33. SETUP: inspect the first second before the whole-hook average
+
+The [trial-hook rejection](../memory/alex-setup-first-second-pattern-interrupt.md) showed
+that an opening zoom plus small preparation movements could pass full-hook checks and still
+fail to entice the viewer. Review frames 0/4/8/13/20/28 and the 0.25–1.0s interval: require an
+immediate, readable event and consequence, followed by another useful beat. Keep faces and
+labels clear through peak travel, retime physical Foley, and preserve the later narration
+payoffs. More pixel motion is diagnostic evidence, not a predicted retention gain.
