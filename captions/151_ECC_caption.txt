@@ -1,0 +1,19 @@
+Comment “ECC” and I’ll send you the GitHub link + install guide 👇
+
+👇 READ BELOW
+
+ECC gives your coding agent a library of specialists, reusable skills, and workflows for building software.
+
+Use it to:
+• Plan a feature before changing the code
+• Build with the skills that match your stack
+• Review the app for security issues
+• Run meaningful tests and check real coverage
+
+The repository is free and public. Your coding agent and model access are separate, and the work still needs review. The 80% coverage figure is a target, not an automatic guarantee.
+
+Start with one small feature. Let the agent plan it, build it, check it, and show you the evidence.
+
+Comment “ECC” for the official repo and the step-by-step setup.
+
+#ClaudeCode #Codex #AItools #AIcoding #OpenSource #BuildWithAI

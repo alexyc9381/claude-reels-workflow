@@ -116,3 +116,7 @@ frame · register/genre shift (the viewer realises they misread what they were l
 
 Pairs with [[reel-motion-hierarchy]] (sequential events ≠ an interrupt; both are needed) and the
 character-theatre rule above.
+
+## ECC follow-up: opening only
+
+September 12: preserve the exact requested opening `REPLACE ALL ENGINEERS / 1 REPO`, then change the header with each narrated scene. Do not repeat the hook headline throughout the body. See [[alex-ecc-continuous-action-and-reveal-gating]].

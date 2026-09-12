@@ -39,3 +39,6 @@ out/
 # tools/<reel>_capture.mjs and tools/<reel>_frames.mjs; 179MB for reel 124 alone
 video/public/*/frames/
 video/public/web124/
+
+# ECC 151 media is restored from the final Drive source archive.
+video/public/ecc151/

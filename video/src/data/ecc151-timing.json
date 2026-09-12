@@ -1,0 +1,742 @@
+[
+ {
+  "start": 0.0,
+  "end": 0.22,
+  "word": " One"
+ },
+ {
+  "start": 0.22,
+  "end": 0.56,
+  "word": " developer"
+ },
+ {
+  "start": 0.56,
+  "end": 0.635,
+  "word": " just"
+ },
+ {
+  "start": 0.635,
+  "end": 0.675,
+  "word": " gave"
+ },
+ {
+  "start": 0.71,
+  "end": 0.93,
+  "word": " everyone"
+ },
+ {
+  "start": 0.93,
+  "end": 1.09,
+  "word": " the"
+ },
+ {
+  "start": 1.09,
+  "end": 1.29,
+  "word": " power"
+ },
+ {
+  "start": 1.32,
+  "end": 1.44,
+  "word": " to"
+ },
+ {
+  "start": 1.44,
+  "end": 1.72,
+  "word": " replace"
+ },
+ {
+  "start": 1.72,
+  "end": 2.02,
+  "word": " every"
+ },
+ {
+  "start": 2.02,
+  "end": 2.34,
+  "word": " engineer"
+ },
+ {
+  "start": 2.34,
+  "end": 3.12,
+  "word": " alive."
+ },
+ {
+  "start": 3.12,
+  "end": 3.48,
+  "word": " 63"
+ },
+ {
+  "start": 3.48,
+  "end": 3.78,
+  "word": " AI"
+ },
+ {
+  "start": 3.78,
+  "end": 4.04,
+  "word": " agents,"
+ },
+ {
+  "start": 4.42,
+  "end": 4.86,
+  "word": " 249"
+ },
+ {
+  "start": 4.86,
+  "end": 5.32,
+  "word": " skills,"
+ },
+ {
+  "start": 5.45,
+  "end": 5.49,
+  "word": " and"
+ },
+ {
+  "start": 5.525,
+  "end": 5.65,
+  "word": " an"
+ },
+ {
+  "start": 5.65,
+  "end": 5.725,
+  "word": " AI"
+ },
+ {
+  "start": 5.725,
+  "end": 5.9,
+  "word": " that"
+ },
+ {
+  "start": 5.9,
+  "end": 6.06,
+  "word": " hacks"
+ },
+ {
+  "start": 6.06,
+  "end": 6.2,
+  "word": " its"
+ },
+ {
+  "start": 6.2,
+  "end": 6.36,
+  "word": " own"
+ },
+ {
+  "start": 6.36,
+  "end": 6.54,
+  "word": " code"
+ },
+ {
+  "start": 6.57,
+  "end": 6.81,
+  "word": " before"
+ },
+ {
+  "start": 6.81,
+  "end": 7.11,
+  "word": " hackers"
+ },
+ {
+  "start": 7.11,
+  "end": 7.471,
+  "word": " can."
+ },
+ {
+  "start": 7.56,
+  "end": 7.72,
+  "word": " It's"
+ },
+ {
+  "start": 7.72,
+  "end": 7.86,
+  "word": " called"
+ },
+ {
+  "start": 7.86,
+  "end": 8.35,
+  "word": " ECC"
+ },
+ {
+  "start": 8.35,
+  "end": 8.51,
+  "word": " and"
+ },
+ {
+  "start": 8.51,
+  "end": 8.71,
+  "word": " it's"
+ },
+ {
+  "start": 8.71,
+  "end": 8.83,
+  "word": " free"
+ },
+ {
+  "start": 8.98,
+  "end": 9.16,
+  "word": " on"
+ },
+ {
+  "start": 9.16,
+  "end": 9.34,
+  "word": " GitHub."
+ },
+ {
+  "start": 9.49,
+  "end": 9.59,
+  "word": " This"
+ },
+ {
+  "start": 9.59,
+  "end": 9.71,
+  "word": " guy"
+ },
+ {
+  "start": 9.71,
+  "end": 9.87,
+  "word": " built"
+ },
+ {
+  "start": 9.89,
+  "end": 9.97,
+  "word": " it"
+ },
+ {
+  "start": 9.97,
+  "end": 10.09,
+  "word": " in"
+ },
+ {
+  "start": 10.09,
+  "end": 10.23,
+  "word": " 10"
+ },
+ {
+  "start": 10.24,
+  "end": 10.4,
+  "word": " months"
+ },
+ {
+  "start": 10.4,
+  "end": 10.52,
+  "word": " and"
+ },
+ {
+  "start": 10.52,
+  "end": 10.6,
+  "word": " it"
+ },
+ {
+  "start": 10.6,
+  "end": 10.68,
+  "word": " just"
+ },
+ {
+  "start": 10.68,
+  "end": 10.82,
+  "word": " got"
+ },
+ {
+  "start": 10.82,
+  "end": 11.72,
+  "word": " 240,000"
+ },
+ {
+  "start": 11.72,
+  "end": 12.386,
+  "word": " stars."
+ },
+ {
+  "start": 12.41,
+  "end": 12.47,
+  "word": " And"
+ },
+ {
+  "start": 12.485,
+  "end": 12.73,
+  "word": " here's"
+ },
+ {
+  "start": 12.73,
+  "end": 12.805,
+  "word": " how"
+ },
+ {
+  "start": 12.805,
+  "end": 12.845,
+  "word": " you"
+ },
+ {
+  "start": 12.88,
+  "end": 12.94,
+  "word": " install"
+ },
+ {
+  "start": 12.955,
+  "end": 13.12,
+  "word": " it."
+ },
+ {
+  "start": 13.36,
+  "end": 13.46,
+  "word": " Just"
+ },
+ {
+  "start": 13.46,
+  "end": 13.64,
+  "word": " open"
+ },
+ {
+  "start": 13.64,
+  "end": 13.78,
+  "word": " your"
+ },
+ {
+  "start": 13.78,
+  "end": 13.9,
+  "word": " favorite"
+ },
+ {
+  "start": 13.9,
+  "end": 14.06,
+  "word": " code"
+ },
+ {
+  "start": 14.06,
+  "end": 14.3,
+  "word": " editor,"
+ },
+ {
+  "start": 14.44,
+  "end": 14.54,
+  "word": " Claude"
+ },
+ {
+  "start": 14.54,
+  "end": 14.72,
+  "word": " Code,"
+ },
+ {
+  "start": 14.72,
+  "end": 15.06,
+  "word": " Codex,"
+ },
+ {
+  "start": 15.3,
+  "end": 15.38,
+  "word": " type"
+ },
+ {
+  "start": 15.43,
+  "end": 15.59,
+  "word": " this"
+ },
+ {
+  "start": 15.59,
+  "end": 15.85,
+  "word": " prompt"
+ },
+ {
+  "start": 15.85,
+  "end": 15.99,
+  "word": " and"
+ },
+ {
+  "start": 15.99,
+  "end": 16.15,
+  "word": " you're"
+ },
+ {
+  "start": 16.15,
+  "end": 16.571,
+  "word": " done."
+ },
+ {
+  "start": 16.61,
+  "end": 16.71,
+  "word": " Now"
+ },
+ {
+  "start": 16.71,
+  "end": 16.97,
+  "word": " here's"
+ },
+ {
+  "start": 16.97,
+  "end": 17.045,
+  "word": " what"
+ },
+ {
+  "start": 17.045,
+  "end": 17.085,
+  "word": " it"
+ },
+ {
+  "start": 17.12,
+  "end": 17.16,
+  "word": " does"
+ },
+ {
+  "start": 17.195,
+  "end": 17.26,
+  "word": " for"
+ },
+ {
+  "start": 17.27,
+  "end": 17.4,
+  "word": " you."
+ },
+ {
+  "start": 17.57,
+  "end": 17.67,
+  "word": " Say"
+ },
+ {
+  "start": 17.67,
+  "end": 17.91,
+  "word": " plan"
+ },
+ {
+  "start": 17.91,
+  "end": 18.0,
+  "word": " this"
+ },
+ {
+  "start": 18.0,
+  "end": 18.24,
+  "word": " feature"
+ },
+ {
+  "start": 18.24,
+  "end": 18.38,
+  "word": " and"
+ },
+ {
+  "start": 18.38,
+  "end": 18.52,
+  "word": " one"
+ },
+ {
+  "start": 18.64,
+  "end": 18.82,
+  "word": " agent"
+ },
+ {
+  "start": 18.82,
+  "end": 19.16,
+  "word": " designs"
+ },
+ {
+  "start": 19.16,
+  "end": 19.521,
+  "word": " it."
+ },
+ {
+  "start": 19.56,
+  "end": 19.7,
+  "word": " Say"
+ },
+ {
+  "start": 19.7,
+  "end": 19.86,
+  "word": " build"
+ },
+ {
+  "start": 19.86,
+  "end": 19.98,
+  "word": " it"
+ },
+ {
+  "start": 19.98,
+  "end": 20.08,
+  "word": " and"
+ },
+ {
+  "start": 20.34,
+  "end": 20.44,
+  "word": " it"
+ },
+ {
+  "start": 20.44,
+  "end": 20.6,
+  "word": " writes"
+ },
+ {
+  "start": 20.6,
+  "end": 20.74,
+  "word": " the"
+ },
+ {
+  "start": 20.74,
+  "end": 20.815,
+  "word": " code"
+ },
+ {
+  "start": 20.815,
+  "end": 20.855,
+  "word": " in"
+ },
+ {
+  "start": 20.89,
+  "end": 21.02,
+  "word": " whatever"
+ },
+ {
+  "start": 21.02,
+  "end": 21.3,
+  "word": " language"
+ },
+ {
+  "start": 21.41,
+  "end": 21.61,
+  "word": " you"
+ },
+ {
+  "start": 21.61,
+  "end": 21.921,
+  "word": " want."
+ },
+ {
+  "start": 21.97,
+  "end": 22.05,
+  "word": " Say"
+ },
+ {
+  "start": 22.05,
+  "end": 22.32,
+  "word": " secure"
+ },
+ {
+  "start": 22.32,
+  "end": 22.5,
+  "word": " it"
+ },
+ {
+  "start": 22.5,
+  "end": 22.58,
+  "word": " and"
+ },
+ {
+  "start": 22.89,
+  "end": 23.03,
+  "word": " it"
+ },
+ {
+  "start": 23.03,
+  "end": 23.19,
+  "word": " hacks"
+ },
+ {
+  "start": 23.19,
+  "end": 23.33,
+  "word": " your"
+ },
+ {
+  "start": 23.33,
+  "end": 23.405,
+  "word": " app"
+ },
+ {
+  "start": 23.405,
+  "end": 23.445,
+  "word": " and"
+ },
+ {
+  "start": 23.48,
+  "end": 23.52,
+  "word": " finds"
+ },
+ {
+  "start": 23.555,
+  "end": 23.595,
+  "word": " the"
+ },
+ {
+  "start": 23.63,
+  "end": 23.98,
+  "word": " vulnerabilities"
+ },
+ {
+  "start": 24.06,
+  "end": 24.34,
+  "word": " before"
+ },
+ {
+  "start": 24.34,
+  "end": 24.64,
+  "word": " any"
+ },
+ {
+  "start": 24.64,
+  "end": 24.83,
+  "word": " hacker"
+ },
+ {
+  "start": 24.83,
+  "end": 25.03,
+  "word": " can"
+ },
+ {
+  "start": 25.03,
+  "end": 25.21,
+  "word": " find"
+ },
+ {
+  "start": 25.21,
+  "end": 25.696,
+  "word": " them."
+ },
+ {
+  "start": 25.75,
+  "end": 25.93,
+  "word": " Say"
+ },
+ {
+  "start": 25.93,
+  "end": 26.005,
+  "word": " test"
+ },
+ {
+  "start": 26.005,
+  "end": 26.16,
+  "word": " it"
+ },
+ {
+  "start": 26.16,
+  "end": 26.22,
+  "word": " and"
+ },
+ {
+  "start": 26.28,
+  "end": 26.36,
+  "word": " it"
+ },
+ {
+  "start": 26.36,
+  "end": 26.52,
+  "word": " runs"
+ },
+ {
+  "start": 26.52,
+  "end": 26.87,
+  "word": " tests"
+ },
+ {
+  "start": 26.87,
+  "end": 27.15,
+  "word": " until"
+ },
+ {
+  "start": 27.15,
+  "end": 27.49,
+  "word": " coverage"
+ },
+ {
+  "start": 27.49,
+  "end": 27.65,
+  "word": " hits"
+ },
+ {
+  "start": 27.77,
+  "end": 28.551,
+  "word": " 80%."
+ },
+ {
+  "start": 28.56,
+  "end": 29.0,
+  "word": " 249"
+ },
+ {
+  "start": 29.0,
+  "end": 29.42,
+  "word": " skills"
+ },
+ {
+  "start": 29.42,
+  "end": 29.6,
+  "word": " and"
+ },
+ {
+  "start": 29.6,
+  "end": 29.72,
+  "word": " 63"
+ },
+ {
+  "start": 29.72,
+  "end": 30.28,
+  "word": " specialists,"
+ },
+ {
+  "start": 30.52,
+  "end": 30.84,
+  "word": " OpenAI"
+ },
+ {
+  "start": 30.84,
+  "end": 30.98,
+  "word": " and"
+ },
+ {
+  "start": 30.98,
+  "end": 31.34,
+  "word": " Anthropic"
+ },
+ {
+  "start": 31.42,
+  "end": 31.52,
+  "word": " are"
+ },
+ {
+  "start": 31.52,
+  "end": 31.74,
+  "word": " hiding"
+ },
+ {
+  "start": 31.74,
+  "end": 32.261,
+  "word": " this."
+ },
+ {
+  "start": 32.27,
+  "end": 32.33,
+  "word": " For"
+ },
+ {
+  "start": 32.345,
+  "end": 32.47,
+  "word": " the"
+ },
+ {
+  "start": 32.47,
+  "end": 32.56,
+  "word": " GitHub"
+ },
+ {
+  "start": 32.56,
+  "end": 32.7,
+  "word": " link"
+ },
+ {
+  "start": 32.7,
+  "end": 32.82,
+  "word": " and"
+ },
+ {
+  "start": 32.82,
+  "end": 33.06,
+  "word": " install"
+ },
+ {
+  "start": 33.15,
+  "end": 33.37,
+  "word": " guide,"
+ },
+ {
+  "start": 33.49,
+  "end": 33.59,
+  "word": " comment"
+ },
+ {
+  "start": 33.59,
+  "end": 33.87,
+  "word": " ECC."
+ }
+]

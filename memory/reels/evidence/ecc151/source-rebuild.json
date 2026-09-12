@@ -1,0 +1,21 @@
+{
+  "note": "Frames rebuilt from the standalone source using the installed pinned dependencies. Compared against decoded final export. RGB error includes YUV conversion and H264 compression.",
+  "frames": [
+    {
+      "frame": 123,
+      "mean_RGB_error_of_255": 4.2001797196502055
+    },
+    {
+      "frame": 333,
+      "mean_RGB_error_of_255": 3.5916253536522635
+    },
+    {
+      "frame": 748,
+      "mean_RGB_error_of_255": 3.683593589248971
+    },
+    {
+      "frame": 830,
+      "mean_RGB_error_of_255": 3.608389435442387
+    }
+  ]
+}

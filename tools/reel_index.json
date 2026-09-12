@@ -1,11 +1,11 @@
 {
   "counts": {
-    "reels_with_code": 119,
-    "reels_total": 164,
+    "reels_with_code": 120,
+    "reels_total": 165,
     "factory_logs": 80,
-    "storyboards": 81,
-    "caption_jsons": 131,
-    "memory_md": 255,
+    "storyboards": 82,
+    "caption_jsons": 132,
+    "memory_md": 257,
     "creators": 8,
     "packs": 3
   },
@@ -1861,6 +1861,17 @@
       "storyboard": "storyboards/147-scope.md",
       "captions": [
         "video/src/data/words_scope147.json"
+      ]
+    },
+    {
+      "key": "ecc",
+      "name": "ecc",
+      "number": 151,
+      "code": "video/src/ClaudeECCReel.tsx",
+      "log": null,
+      "storyboard": "storyboards/151-ecc.md",
+      "captions": [
+        "video/src/data/ecc151-timing.json"
       ]
     }
   ]

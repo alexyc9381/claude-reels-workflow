@@ -3,10 +3,11 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 119 reels with code · 80 factory logs · 81 storyboards · 131 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 120 reels with code · 80 factory logs · 82 storyboards · 132 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
+| 151 | **ECC** | [✓](video/src/ClaudeECCReel.tsx) | [1](video/src/data/ecc151-timing.json) | · | [✓](storyboards/151-ecc.md) | code, no log |
 | 147 | **SCOPE** | [✓](video/src/scope-147-index.tsx) | [1](video/src/data/words_scope147.json) | [✓](memory/reels/147-scope-factory-log.md) | [✓](storyboards/147-scope.md) | built |
 | 145 | **SETUP145** | [✓](video/src/Setup145FlatProbes.tsx) | [2](video/src/data/words_setup145.json) | [✓](memory/reels/setup145-factory-log.md) | [✓](storyboards/145-setup145.md) | built |
 | 144 | **X144** | [✓](video/src/ClaudeX144Reel.tsx) | [1](video/src/data/words_x144.json) | [✓](memory/reels/x144-factory-log.md) | [✓](storyboards/144-x144.md) | built |
