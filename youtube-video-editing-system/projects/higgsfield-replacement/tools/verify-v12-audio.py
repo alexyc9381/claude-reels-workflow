@@ -1,5 +1,5 @@
 """Sampled source-to-export synchronization; not a human listening review."""
-import json, subprocess, sys
+import json, subprocess, sys, os, re
 from pathlib import Path
 import numpy as np
 from scipy.signal import correlate, correlation_lags
@@ -7,7 +7,9 @@ from scipy.signal import correlate, correlation_lags
 base=Path.cwd()
 work=base/'work/higgsfield-replacement'
 project=base/'work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement'
-candidate=Path(sys.argv[1]) if len(sys.argv)>1 else base/'outputs/higgsfield-replacement-edit-v12.mp4'
+revision=os.environ.get('REVIEW_REVISION','v12')
+assert re.fullmatch(r'v\d+',revision)
+candidate=Path(sys.argv[1]) if len(sys.argv)>1 else base/f'outputs/higgsfield-replacement-edit-{revision}.mp4'
 report='premix-sync-validation.json' if len(sys.argv)>1 else 'audio-sync-validation.json'
 m=json.loads((project/'roughcut.props.json').read_text())['manifest']
 ff='/Users/alexchensmacmini/Library/Python/3.9/lib/python/site-packages/imageio_ffmpeg/binaries/ffmpeg-macos-aarch64-v7.1'
@@ -46,5 +48,5 @@ for output_time in [50,86,145,194,229,273,282,326,386,396,418.8,423,440.7,443,45
     results.append(record);print(record)
     assert abs(lag)<=320, 'Narration lag exceeds 20 ms'
     assert aligned>.85, 'Aligned source correlation unexpectedly low'
-(work/'revision-v12'/report).write_text(json.dumps(results,indent=2))
+(work/f'revision-{revision}'/report).write_text(json.dumps(results,indent=2))
 print('PASS: 15 sampled OBS-to-delivery checks, lag <=20 ms; no assertion of full listening review.')

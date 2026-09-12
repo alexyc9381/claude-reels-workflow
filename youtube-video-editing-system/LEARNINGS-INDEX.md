@@ -1,6 +1,8 @@
 # YouTube editing — indexed learning library
 
-Current: [V12 numbered comparison and guided inspection](projects/higgsfield-replacement/REVISION-V12.md), [V12 source/timestamp audit](projects/higgsfield-replacement/revision-v12-audit.json), [V12 Mac handoff + resume prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V12.md). Earlier records below are preserved history. Final render/approval status lives in the revision record.
+Current: [V13 purposeful intro and cleaner teaching](projects/higgsfield-replacement/REVISION-V13.md), [unchanged source timeline](projects/higgsfield-replacement/v13-timeline.json), [V13 Mac handoff + resume prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V13.md). Earlier records below are preserved history. Final render/approval status lives in the revision record.
+
+Preserved V12: [numbered comparison and guided inspection](projects/higgsfield-replacement/REVISION-V12.md), [source/timestamp audit](projects/higgsfield-replacement/revision-v12-audit.json).
 
 Previous revision: [V11 active scenes and complete playback](projects/higgsfield-replacement/REVISION-V11.md), [V11 source/timestamp audit](projects/higgsfield-replacement/revision-v11-audit.json), [confirmed Higgsfield comparison source](projects/higgsfield-replacement/provenance/higgsfield-comparison.json), [Camera-Direction Prompt Pack](resources/camera-direction-prompt-pack.md). V10 remains a preserved baseline. The bonus now has an earlier gift treatment and a real countdown; this does not restore the rejected intro-teaser progress bar.
 
@@ -11,7 +13,7 @@ This is the handoff index for the complete September 10–11 system-building and
 ## Current production contract
 
 - [Current direction](CURRENT-DIRECTION.md): engine, source audio, framing, typography, white glass, original 2D cast, action hierarchy, unique scenes, sound, retention, privacy and full delivery.
-- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V12.
+- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V13.
 - [Approval versus review](APPROVED-ANIMATION-SYSTEM.md): v11 short-study approval and later full-film overrides.
 - [Canonical memory](../memory/youtube-video-editing-system.md): compact entry for future tasks; indexed from memory/MEMORY.md and the root repository map.
 

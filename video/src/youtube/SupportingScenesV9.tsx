@@ -4,6 +4,7 @@ import {easeOut,easeInOut as e} from './glass-motion';
 import {Glass,Actor,Label,Lens,Logo,SkillFile,CameraIcon,Key,C,visible,typeOn,clamp} from './YouTubeV8Primitives';
 import {ShotStage} from './NarrativeV9';
 import {RooftopBeatV11} from './ScenesV11';
+import {FormatV13} from './ScenesV13';
 export {TextLens,LaterCue} from './SupportingScenesV7';
 export type SupportKind='typing'|'budget'|'storyboard'|'format'|'saved'|'wrapper'|'sound'|'detail'|'protip'|'chase'|'direction';
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
@@ -20,6 +21,7 @@ export const Support:React.FC<{duration:number;kind:SupportKind;cueId:string}>=(
  const t=useCurrentFrame()/useVideoConfig().fps,show=visible(t,duration),p=easeOut(t,.04,.35),motif=supportMotifs[cueId];
  const shell=(content:React.ReactNode,x=132,y=214,w=1065,h=380)=> <AbsoluteFill data-motif={motif} style={{opacity:show}}><Glass x={x} y={y} w={w} h={h} t={t} frost={.65} style={{transform:`translateY(${(1-p)*36}px) perspective(1800px) rotateX(${(1-p)*7}deg)`}}>{content}</Glass></AbsoluteFill>;
  if(cueId==='s026:10.2')return <RooftopBeatV11 duration={duration}/>;
+ if(kind==='format')return <FormatV13 duration={duration}/>;
  if(kind==='chase'){
   const run=e(t,.25,duration-1.1);
   return shell(<><At x={18} y={18}><ShotStage t={t} w={568} mode="chase" progress={run}/></At><Label x={622} y={31} size={35} color={C.orange}>B · The chase</Label><Label x={623} y={95} size={29}>Rooftops</Label><Label x={623} y={142} size={29}>Pursuit</Label><Label x={623} y={189} size={29}>Following camera</Label><Actor t={t} x={933} y={63} size={165} role="operator" look={-1} reach={run} contact={duration-.7}/></>,130,641,1117,319);
@@ -55,7 +57,6 @@ export const Support:React.FC<{duration:number;kind:SupportKind;cueId:string}>=(
  }
  if(kind==='wrapper')return shell(<><Label x={32} y={26} size={36} color={C.orange}>Request ↔ response</Label><At x={31} y={107}><Logo name="claude.png" size={126}/></At><At x={743} y={107}><Logo name="fal.png" size={126}/></At><svg width="560" height="132" style={{position:'absolute',left:174,top:106}}><path d="M0 38H533M0 98H533" stroke="#267D7860" strokeWidth="7"/>{[0,1].map(i=><rect key={i} x={i?(1-e(t,1.8,1.6))*500:e(t,.4,1.3)*500} y={i?83:23} width="35" height="30" rx="9" fill={i?C.teal:C.orange}/>)}</svg><Actor t={t} x={865} y={180} size={180} role="operator" look={-1} reach={1}/><Label x={32} y={306} size={28}>Claude asks. The model generates.</Label></>);
 
- if(kind==='format'){const q=e(t,.6,2.4);return shell(<><Label x={32} y={25} size={37} color={C.orange}>Choose the frame before generating</Label><svg width="684" height="236" style={{position:'absolute',left:33,top:100}}><rect x="30" y="14" width="353" height="198" rx="16" fill="#FFFFFF55" stroke={C.teal} strokeWidth="4"/><rect x={30+121*q} y="14" width={353-242*q} height="198" rx="16" fill="#E8AD3827" stroke={C.orange} strokeWidth="4"/><text x="445" y="91" fontSize="37" fill={C.teal}>16:9</text><text x="445" y="159" fontSize="37" fill={C.orange}>9:16</text></svg><Actor t={t} x={767} y={136} size={231} role="operator" look={-1} reach={q}/></>);}
  if(kind==='saved'){const q=e(t,.5,2);return shell(<><Label x={32} y={27} size={39} color={C.orange}>Keep the generated file</Label><At x={82+q*492} y={117-Math.sin(q*Math.PI)*75} style={{transform:`rotate(${-8+q*14}deg) scale(${1-q*.25})`}}><SkillFile t={t} size={137} label="video"/></At><At x={586} y={227}><svg width="241" height="115"><path d="M5 22L35 2H86L108 22H231V107H5Z" fill="#8DC7B3A0" stroke="#FFF" strokeWidth="4"/></svg></At><Actor t={t} x={850} y={140} size={204} role="courier" look={-1} lift={q*.7} contact={2.5}/></>);}
  return shell(<><Label x={31} y={26} size={35} color={C.orange}>Voice · ambience · impact</Label><svg width="755" height="149" style={{position:'absolute',left:34,top:94}}>{[0,1,2].map(j=><g key={j} transform={`translate(${j*250},0)`}><path d="M0 18H220M0 82H220M0 142H220" stroke="#FFFFFFA0" strokeWidth="3"/>{Array.from({length:12},(_,i)=><rect key={i} x={i*18} y={90-40*Math.abs(Math.sin(t*(3+j)+i))} width="8" height={14+55*Math.abs(Math.sin(t*(3+j)+i))} rx="4" fill={[C.orange,C.teal,C.blue][j]}/>)}<rect x={33+Math.sin(t+j)*17} y="112" width="40" height="18" rx="5" fill="#FFF" stroke={C.orange} strokeWidth="2"/></g>)}</svg><Actor t={t} x={840} y={69} size={205} role="operator" look={-1} reach={.6+.12*Math.sin(t*5)}/></>,132,711,1080,267);
 };

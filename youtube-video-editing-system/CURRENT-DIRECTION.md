@@ -11,6 +11,11 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Narrative and retention
 
+- V13: one credential teaching surface; no competing checklist/definition during the protected demonstration. Keep format-card text stationary and do not stack zooms that shimmer recorded text.
+- V13: circular 1/2 identities below the comparison videos, a center-seam reveal countdown and an orange facecam perimeter timer ending at the hook scene boundary. No LEFT/RIGHT wording on the badges.
+- V13: faster consequential intro actions, protected roadmap labels with contact-linked glow/sound, a visible free follow-along copy/paste payoff, operator-driven gate and explicit Seedance 2.5 selection. Preserve the underlying EDL and actual result playback.
+- V13: explicitly say FREE setup in the description. Claude Code/Codex/Cursor may be shown as coding-agent destinations; do not claim a universally compatible installer or all-model support without the actual skill and verification. Setup varies by agent.
+
 - V12: opening choices are **1 and 2**. Compact result/reveal countdowns follow actual editorial events. Crown the creator's chosen right-hand Claude result after its identity is spoken, with one restrained celebration sound—not a general model-superiority claim.
 - V12: source-synchronized detail crops and reviewed drawing/pointing paths follow the recorded playback, including pauses/restarts. Explicitly identify Veo. Preserve useful VO when hiding a lip-lick or other awkward expression.
 - V12 closing: one dominant installation task; subordinate image-led **FREE BONUS** with the actual camera recipes and guide. Quicker causal actions throughout explainers must preserve narration pace and useful teaching.
@@ -80,4 +85,4 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Navigation
 
-[LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) · [REVISION-DECISIONS.md](REVISION-DECISIONS.md) · [Higgsfield V12](projects/higgsfield-replacement/REVISION-V12.md) · [Historical approval boundaries](APPROVED-ANIMATION-SYSTEM.md)
+[LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) · [REVISION-DECISIONS.md](REVISION-DECISIONS.md) · [Higgsfield V13](projects/higgsfield-replacement/REVISION-V13.md) · [Historical approval boundaries](APPROVED-ANIMATION-SYSTEM.md)

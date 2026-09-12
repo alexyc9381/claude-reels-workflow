@@ -6,6 +6,7 @@ import {GuideSequence,SkillSequence,ShotStage} from './NarrativeV9';
 import {ComparisonV10,AccessPriceV10,PromptToFileV10,InterfaceCutawayV10,VideoFileV10,BonusPackV10,DirectRouteV10,FeatureGateV10} from './StoryScenesV10';
 import {AccessPriceV11,InstallFinaleV11} from './ScenesV11';
 import {InstallFinaleV12} from './ScenesV12';
+import {FeatureGateV13,FollowAlongV13,RoadmapV13} from './ScenesV13';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 const Desk:React.FC<{x:number;y:number;w:number}>=({x,y,w})=><At x={x} y={y}><svg width={w} height="235"><path d={`M45 40V215M${w-45} 40V215`} stroke="#315F7966" strokeWidth="13"/><path d={`M0 15L45 0H${w-45}L${w} 15V40H0Z`} fill="#FFF8EC" stroke="#FFFFFF" strokeWidth="3"/><path d={`M0 40H${w}`} stroke={C.orange+'77'} strokeWidth="4"/></svg></At>;
@@ -21,7 +22,7 @@ export const DirectV9:React.FC<{duration:number;featuresAt:number}>=({duration,f
  const t=clock();return t<featuresAt?<ModelRoom duration={featuresAt}/>:<Sequence from={Math.round(featuresAt*30)}><FeatureVault duration={duration-featuresAt}/></Sequence>;
 };
 const ModelRoom=DirectRouteV10;
-const FeatureVault=FeatureGateV10;
+const FeatureVault=FeatureGateV13;
 
 export const DownloadV9:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),u=t*5/duration,release=e(u,.35,.8),fall=e(u,1.15,.75),take=e(u,2.2,1.25);
@@ -48,7 +49,7 @@ const ArchivedOutroV9:React.FC<{duration:number}>=({duration})=>{
  </World>;
 };
 
-export const RoadmapV9:React.FC<{duration:number}>=({duration})=>{
+const ArchivedRoadmapV9:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),p=e(t,.12,duration-.5),r=(a:number)=>({x:255+a*1320,y:572-Math.sin(a*Math.PI*2)*195}),v=r(p);
  const d=Array.from({length:90},(_,i)=>{const q=r(i/89);return `${i?'L':'M'}${q.x} ${q.y}`}).join(' ');
  return <World t={t} setting="map"><svg width="1920" height="1080" style={{position:'absolute',inset:0}}><path d={d} fill="none" stroke="#315F7920" strokeWidth="104" transform="translate(0,17)" strokeLinecap="round"/><path d={d} fill="none" stroke="#FFFFFFD0" strokeWidth="95" strokeLinecap="round"/><path d={d} fill="none" stroke="#D2724E77" strokeWidth="3" strokeDasharray="16 13"/><path d={d} fill="none" stroke={C.orange} strokeWidth="8" pathLength="1" strokeDasharray="1" strokeDashoffset={1-p}/></svg>{[.06,.49,.92].map((a,i)=>{const q=r(a);return <At key={i} x={q.x-98} y={q.y-226}><Pedestal x={-16} y={155} w={256} t={t}/><At x={30} y={-10}>{i===0?<Key t={t} size={143}/>:i===1?<Lens t={t} size={149}/>:<VideoFileV10 w={168}/>}</At><Label x={-12} y={235} size={33}>{['01 · Connect','02 · Create','03 · Compare'][i]}</Label></At>;})}<Actor t={t} x={v.x-100} y={v.y-96} size={205} role="courier" walk={Math.sin(p*Math.PI)} look={1}/><At x={863} y={101} style={{opacity:e(t,.3,.3)}}><ShotStage t={t} w={330} mode="orbit" progress={p}/></At><At x={304} y={768}><Logo name="fal.png" size={78}/></At></World>;
@@ -56,6 +57,7 @@ export const RoadmapV9:React.FC<{duration:number}>=({duration})=>{
 
 export const CompareV9:React.FC<{duration:number;revealAt:number}>=({revealAt})=><ComparisonV10 revealAt={revealAt}/>;
 
-export const GuideV9=GuideSequence;
+export const RoadmapV9=RoadmapV13;
+export const GuideV9=FollowAlongV13;
 export const SkillV9=SkillSequence;
 export const OutroV9=InstallFinaleV12;

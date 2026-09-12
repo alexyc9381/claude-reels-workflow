@@ -7,7 +7,8 @@ import {audioContract} from './audio-contract.mjs';
 const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow');
 const project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
 const bin=path.join(repo,'video/node_modules/@remotion/compositor-darwin-arm64');
-const output=path.join(base,'outputs/higgsfield-replacement-edit-v12.mp4');
+const revision=process.env.REVIEW_REVISION||'v12';assert.match(revision,/^v\d+$/);
+const output=path.join(base,`outputs/higgsfield-replacement-edit-${revision}.mp4`);
 const ff='/Users/alexchensmacmini/Library/Python/3.9/lib/python/site-packages/imageio_ffmpeg/binaries/ffmpeg-macos-aarch64-v7.1';
 const meta=JSON.parse(execFileSync(path.join(bin,'ffprobe'),['-v','error','-show_streams','-show_format','-show_chapters','-of','json',output],{encoding:'utf8',env:{...process.env,DYLD_LIBRARY_PATH:bin}}));
 const v=meta.streams.find(s=>s.codec_type==='video'),a=meta.streams.filter(s=>s.codec_type==='audio');
@@ -43,4 +44,4 @@ result.audioMatchesV9Packets=existsSync(priorAudio)?result.audioPacketHash===aud
 if(existsSync(priorAudio))assert.equal(result.audioMatchesV9Packets,false,'V12 must contain repaired narration and new source-anchored sound design');
 result.currentAudioContractVerified=true;
 assert.equal(equivalentChunks.length,0,'V12 reframes the whole screen and requires fresh picture chunks');
-writeFileSync(path.join(base,'work/higgsfield-replacement/revision-v12/export-validation.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
+writeFileSync(path.join(base,`work/higgsfield-replacement/revision-${revision}/export-validation.json`),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));

@@ -1,6 +1,20 @@
-# Reproduce Higgsfield Replacement V12
+# Reproduce Higgsfield Replacement V13
 
-V12 is current. Run from the task/handoff root:
+V13 is current. From the task/handoff root:
+
+```sh
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/test-v13.mjs
+REVIEW_CONCURRENCY=1 REVIEW_SUBCHUNK_FRAMES=600 REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v13.mp4 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/render-low-storage.mjs
+REVIEW_REVISION=v13 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/validate-v12-export.mjs
+REVIEW_REVISION=v13 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/transcribe-v12-joins.mjs
+REVIEW_REVISION=v13 python3 work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/verify-v12-audio.py
+```
+
+The V12-named verification/package utilities now accept `REVIEW_REVISION=v13`; their default remains V12 for historical use. V13's entire manifest equals `roughcut-v12-baseline.props.json`, and `v13-timeline.json` preserves all chapter/source clocks. Do not rerun an older audit over current source files. `ScenesV13.tsx` owns the new credential, format, free follow-along, gate, roadmap, timer and cursor/reveal components. Brand SVGs in `public/v3` are included in the source fingerprint and portable media manifest. See REVISION-V13.md for verification and compatibility limits.
+
+## Historical V12 commands
+
+V12 baseline commands (historical):
 
 ```sh
 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/test-v12.mjs

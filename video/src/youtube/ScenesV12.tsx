@@ -4,6 +4,7 @@ import {easeInOut as e,easeOut} from './glass-motion';
 import {Actor,Glass,Label,Logo,SkillFile,CameraIcon,C,lerp,clamp,visible} from './YouTubeV8Primitives';
 import {EditRoom} from './ScenesV11';
 import {bodyFont} from './cinematic-brand';
+import {AgentDestinationsV13} from './ScenesV13';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 
@@ -47,10 +48,10 @@ export const DetailLensV12:React.FC<{duration:number;source:string;start:number;
 export const InstallFinaleV12:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),u=t*8.56/duration,grab=e(u,.2,.5),carry=e(u,.85,1.1),drop=e(u,2.05,.6),ready=e(u,2.75,.4),gift=e(u,3.5,.55);
  return <EditRoom t={t}>
-  <Label x={153} y={92} size={52} style={{fontWeight:850}}>Make your next video.</Label>
+  <Label x={153} y={92} size={52} style={{fontWeight:850}}>FREE setup · description below ↓</Label>
   <Glass x={141} y={194} w={1590} h={461} t={t} frost={.56}>
    <At x={101} y={108} style={{opacity:1-drop,transform:`translate(${carry*550}px,${-Math.sin(carry*Math.PI)*100-drop*35}px) scale(${1-drop*.4}) rotate(${-6*grab+6*drop}deg)`}}><SkillFile t={t} size={188}/></At>
-   <Label x={47} y={352} size={29} color={C.orange}>Download the skill ↓</Label>
+   <Label x={47} y={352} size={29} color={C.orange}>Get the free workflow ↓</Label>
    <Actor t={t} x={269+carry*242} y={205} size={183} role="courier" look={1} reach={grab} lift={grab*(1-drop)} walk={Math.sin(carry*Math.PI)} contact={2.65*duration/8.56}/>
    <div style={{position:'absolute',left:690,top:28,width:858,height:397,borderRadius:24,background:'linear-gradient(125deg,#FFFFFFD9,#E7ECE6AA)',border:'2px solid #FFF',boxShadow:'inset 2px 2px 15px #FFF,0 12px 28px #53654F20'}}>
     <At x={27} y={25}><Logo name="claude.png" size={71}/><Label x={103} y={12} size={38}>Claude</Label></At>
@@ -59,6 +60,7 @@ export const InstallFinaleV12:React.FC<{duration:number}>=({duration})=>{
     <Label x={31} y={326} size={28} color={C.teal} style={{opacity:ready}}>Installed. Ready for your brief.</Label>
    </div>
   </Glass>
+  <AgentDestinationsV13 t={t-.25} x={164} y={657} compact/>
   <Glass x={141} y={705} w={1190} h={307} t={t} frost={.62} style={{transform:`translateY(${26*(1-gift)}px)`}}>
    <Label x={25} y={21} size={29} color={C.orange} style={{fontWeight:900}}>FREE BONUS</Label><Label x={250} y={21} size={29}>Six camera recipes + setup guide</Label>
    {['Push in','Orbit','Follow','Reveal','Lock off','Crane'].map((name,i)=>{const a=e(u,3.5+i*.1,.45),move=e(u,4.25+i*.22,1.2),x=23+i*192;return <At key={name} x={x} y={79} style={{opacity:.3+.7*a,transform:`translateY(${22*(1-a)}px)`}}>

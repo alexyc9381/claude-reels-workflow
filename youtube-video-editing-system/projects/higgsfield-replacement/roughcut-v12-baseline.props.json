@@ -1,0 +1,577 @@
+{
+  "manifest": {
+    "version": 1,
+    "fps": 30,
+    "obs": {
+      "source": "obs.mp4",
+      "duration": 2467.5
+    },
+    "cameras": [
+      {
+        "id": "C0004",
+        "source": "C0004-1080.mp4",
+        "duration": 733.2325,
+        "obsOffsetSeconds": -5.232875
+      },
+      {
+        "id": "C0005",
+        "source": "C0005-1080.mp4",
+        "duration": 754.754,
+        "obsOffsetSeconds": 729.47290625
+      },
+      {
+        "id": "C0006",
+        "source": "C0006-1080.mp4",
+        "duration": 278.278,
+        "obsOffsetSeconds": 1494.9025625
+      },
+      {
+        "id": "C0007",
+        "source": "C0007-1080.mp4",
+        "duration": 701.701,
+        "obsOffsetSeconds": 1767.51075
+      }
+    ],
+    "segments": [
+      {
+        "id": "s001",
+        "start": 17.17,
+        "end": 21.57,
+        "camera": "C0004",
+        "layout": "presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Clean A/B hook; v4 phrase-boundary repair"
+      },
+      {
+        "id": "s002",
+        "start": 40.17,
+        "end": 43.1,
+        "camera": "C0004",
+        "layout": "presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Keep the reveal promise; v4 phrase-boundary repair"
+      },
+      {
+        "id": "s003",
+        "start": 54.67,
+        "end": 58.02,
+        "camera": "C0004",
+        "layout": "presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Why investigate pricing; v4 phrase-boundary repair"
+      },
+      {
+        "id": "r-higgsfield",
+        "start": 79.01,
+        "end": 83.34,
+        "camera": "C0004",
+        "layout": "presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Restore named Higgsfield setup before the pronoun their; original price claim pending publication review; v4 phrase-boundary repair"
+      },
+      {
+        "id": "s004",
+        "start": 115.81,
+        "end": 118.65,
+        "camera": "C0004",
+        "layout": "presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Introduce the replacement skill; v4 phrase-boundary repair"
+      },
+      {
+        "id": "s005",
+        "start": 124.84,
+        "end": 130.66,
+        "camera": "C0004",
+        "layout": "presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Route to models and keep output; v4 phrase-boundary repair"
+      },
+      {
+        "id": "s006",
+        "start": 148.73,
+        "end": 152.06,
+        "camera": "C0004",
+        "layout": "presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Promise the setup walkthrough; v4 phrase-boundary repair"
+      },
+      {
+        "id": "r-teaser",
+        "start": 1992.43,
+        "end": 1996.37,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Complete original reaction excerpt, 1992.43–1996.82; moderate teaser blur; no synthetic speech; v6 remove 450 ms trailing dead air, preserve spoken reaction tail",
+        "teaser": true
+      },
+      {
+        "id": "s007",
+        "start": 242,
+        "end": 247.63333333333333,
+        "camera": "C0004",
+        "layout": "presenter",
+        "chapter": "Can you tell the difference?",
+        "reason": "Free guide and clean opening bridge; v6 remove 133 ms leading dead air, retain complete follow-along sentence"
+      },
+      {
+        "id": "s008",
+        "start": 306.04,
+        "end": 309.85,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Restore recorded X-ray slide at start of explanation"
+      },
+      {
+        "id": "s009",
+        "start": 338.17,
+        "end": 344.94,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Recorded wrapper slide and matching live annotation; Direct access explanation with recorded arrows"
+      },
+      {
+        "id": "s010",
+        "start": 353.8,
+        "end": 365.24,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Recorded wrapper slide and matching live annotation; Direct access explanation with recorded arrows"
+      },
+      {
+        "id": "r-direct",
+        "start": 389.2,
+        "end": 401.4,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Restore complete subscription-budget/direct-access explanation"
+      },
+      {
+        "id": "r-features",
+        "start": 413.94,
+        "end": 422.19,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Restore feature-gating setup"
+      },
+      {
+        "id": "s011",
+        "start": 502.52,
+        "end": 517.76,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Restore fal.ai key slide with direct model access explanation"
+      },
+      {
+        "id": "s012",
+        "start": 521.13,
+        "end": 533.88,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Recorded key slide and live annotations linking models to Claude"
+      },
+      {
+        "id": "s013",
+        "start": 599.4,
+        "end": 613.7,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Restore illustrative spending-warning slide; not an actual billing screen"
+      },
+      {
+        "id": "r-safety",
+        "start": 627.32,
+        "end": 630.08,
+        "camera": "C0004",
+        "layout": "screen-presenter",
+        "chapter": "Why use the models directly?",
+        "reason": "Restore spending-warning bridge; provider cap remains a pickup gate"
+      },
+      {
+        "id": "s014",
+        "start": 753.07,
+        "end": 761.9,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Connect fal.ai and Claude",
+        "reason": "Later clean account setup take; finish on click on it"
+      },
+      {
+        "id": "s015",
+        "start": 778.9,
+        "end": 796.99,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Connect fal.ai and Claude",
+        "reason": "Create an account and find models"
+      },
+      {
+        "id": "s016",
+        "start": 800.46,
+        "end": 815.77,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Connect fal.ai and Claude",
+        "reason": "API-key steps; hide credential screen entirely; v4 phrase-boundary repair",
+        "screenRedaction": "credentials"
+      },
+      {
+        "id": "s017",
+        "start": 932.76,
+        "end": 940.04,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Connect fal.ai and Claude",
+        "reason": "Download the linked skill",
+        "screenRedaction": "credentials"
+      },
+      {
+        "id": "s018",
+        "start": 961.73,
+        "end": 966.52,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Connect fal.ai and Claude",
+        "reason": "Plain-language definition of a skill"
+      },
+      {
+        "id": "r-no-code",
+        "start": 972.2,
+        "end": 977.5333333333333,
+        "camera": "C0005",
+        "layout": "presenter",
+        "chapter": "Connect fal.ai and Claude",
+        "reason": "Restore no-additional-code reassurance; boundary audition ends after code and before you just have; v7 preserve whole original code/download clause"
+      },
+      {
+        "id": "s019",
+        "start": 987,
+        "end": 988.2833333333333,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Connect fal.ai and Claude",
+        "reason": "Upload the skill; v4 phrase-boundary repair; v7 clean and-upload continuation; omit repeated setup, trailing silence and next-take Now"
+      },
+      {
+        "id": "s020",
+        "start": 995.48,
+        "end": 1018.14,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Connect fal.ai and Claude",
+        "reason": "Invoke skill and choose clip from scratch"
+      },
+      {
+        "id": "s021",
+        "start": 1034.7,
+        "end": 1069.93,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Make your first video",
+        "reason": "Begin a concrete generation example; Cyberpunk example prompt"
+      },
+      {
+        "id": "s023",
+        "start": 1081.08,
+        "end": 1088.62,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Make your first video",
+        "reason": "Duration and format"
+      },
+      {
+        "id": "s024",
+        "start": 1246.45,
+        "end": 1259.33,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Make your first video",
+        "reason": "Explicit one-dollar budget and model options"
+      },
+      {
+        "id": "s025",
+        "start": 1266.2,
+        "end": 1269.25,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Make your first video",
+        "reason": "Choose Hailuo; remove duplicate earlier take"
+      },
+      {
+        "id": "s026",
+        "start": 1286.72,
+        "end": 1301.7,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Make your first video",
+        "reason": "Show proposed story A; v7 start at clean it proposed phrase, preserve final word tail"
+      },
+      {
+        "id": "s027",
+        "start": 1313.2,
+        "end": 1329.17,
+        "camera": "C0005",
+        "layout": "screen-presenter",
+        "chapter": "Make your first video",
+        "reason": "Clean story B alternative; Select story A"
+      },
+      {
+        "id": "s029",
+        "start": 1526.43,
+        "end": 1541.1,
+        "camera": "C0006",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "First result and reaction"
+      },
+      {
+        "id": "s030",
+        "start": 1541.1,
+        "end": 1576.63,
+        "camera": "C0006",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "Concrete observations on the result"
+      },
+      {
+        "id": "s031",
+        "start": 1612.18,
+        "end": 1620.53,
+        "camera": "C0006",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "More deliberate prompting can refine direction"
+      },
+      {
+        "id": "s033",
+        "start": 1849.13,
+        "end": 1863.8,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "Same prompt across models and first playback; remove duplicate reaction"
+      },
+      {
+        "id": "r-veo-playthrough",
+        "start": 1863.8,
+        "end": 1870.82,
+        "layout": "screen",
+        "chapter": "Review and compare the results",
+        "reason": "V11 restore continuous OBS Veo playback through landing and the first complete clean reaction; omit the following retake. No waiting face or unrelated overlay."
+      },
+      {
+        "id": "s034",
+        "start": 1874.98,
+        "end": 1887.11,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "V11 continue at First of all after the restored first Wow reaction; omit repeated Wow line."
+      },
+      {
+        "id": "s035",
+        "start": 1892.02,
+        "end": 1897.94,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "V12 trim silent tail only; presenter exits before lip-lick while OBS wind observation remains complete."
+      },
+      {
+        "id": "s036",
+        "start": 1981.33,
+        "end": 2002.96,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "V12 keep complete Seedance playback, reaction and signs detail; omit repeated realism praise before the sound observation."
+      },
+      {
+        "id": "s037",
+        "start": 2017.2,
+        "end": 2029.37,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "V12 retain one clean complete second-of-all sound observation; both earlier aborted takes excluded."
+      },
+      {
+        "id": "s038",
+        "start": 2151.54,
+        "end": 2158.04,
+        "camera": "C0007",
+        "layout": "presenter",
+        "chapter": "The reveal and next step",
+        "reason": "Return to the opening comparison"
+      },
+      {
+        "id": "s042",
+        "start": 2223.6,
+        "end": 2225.1,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "The reveal and next step",
+        "reason": "Identify the skill example"
+      },
+      {
+        "id": "s043",
+        "start": 2269.26,
+        "end": 2274.59,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "The reveal and next step",
+        "reason": "Clean A/B reveal"
+      },
+      {
+        "id": "r-outlook",
+        "start": 2329.73,
+        "end": 2335.5,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "The reveal and next step",
+        "reason": "Restore closing opinion before the practical next step"
+      },
+      {
+        "id": "s044",
+        "start": 2442.85,
+        "end": 2446.48,
+        "camera": "C0007",
+        "layout": "presenter",
+        "chapter": "The reveal and next step",
+        "reason": "One practical next step"
+      },
+      {
+        "id": "s045",
+        "start": 2454.08,
+        "end": 2459.03,
+        "camera": "C0007",
+        "layout": "presenter",
+        "chapter": "The reveal and next step",
+        "reason": "Clean description-link CTA; v4 phrase-boundary repair"
+      }
+    ],
+    "editVersion": "v9",
+    "cameraPlate": {
+      "source": "v7/presenter-background.mp4",
+      "sha256": "bf0beee90379ab63ed4b9f24ec00ca7ca6cc84125f68998edb67f6433b18645e",
+      "starts": {
+        "s001": 0,
+        "s002": 132,
+        "s003": 220,
+        "r-higgsfield": 320,
+        "s004": 450,
+        "s005": 536,
+        "s006": 710,
+        "r-teaser": 810,
+        "s007": 928,
+        "s008": 1097,
+        "s009": 1211,
+        "s010": 1415,
+        "r-direct": 1758,
+        "r-features": 2124,
+        "s011": 2371,
+        "s012": 2828,
+        "s013": 3211,
+        "r-safety": 3640,
+        "s014": 3723,
+        "s015": 3988,
+        "s016": 4530,
+        "s017": 4990,
+        "s018": 5208,
+        "r-no-code": 0,
+        "s019": 5548,
+        "s020": 5641,
+        "s021": 6321,
+        "s023": 7378,
+        "s024": 7604,
+        "s025": 7991,
+        "s026": 8082,
+        "s027": 8544,
+        "s029": 9023,
+        "s030": 9464,
+        "s031": 10529,
+        "s032": 10780,
+        "s033": 10920,
+        "s034": 11410,
+        "s035": 11775,
+        "s036": 11958,
+        "s037": 47,
+        "s038": 13065,
+        "s039": 13260,
+        "s040": 13347,
+        "s041": 13425,
+        "s042": 13645,
+        "s043": 13691,
+        "r-outlook": 13851,
+        "s044": 14024,
+        "s045": 14133
+      },
+      "sources": {
+        "r-no-code": "v7/no-code-complete.mp4",
+        "s037": "v9/second-of-all.mp4"
+      },
+      "sourceHashes": {
+        "v7/no-code-complete.mp4": "7593500b37e9cae34c579c46ea72d782d935a74d574bc49ede36d61b6d24d21c",
+        "v9/second-of-all.mp4": "4c9eec9bb5c207c251cbd7bac2b140484b5159037d52dcfe7770ab50ae6d7669"
+      },
+      "lengths": {
+        "s001": 132,
+        "s002": 88,
+        "s003": 100,
+        "r-higgsfield": 130,
+        "s004": 86,
+        "s005": 174,
+        "s006": 100,
+        "r-teaser": 118,
+        "s007": 169,
+        "s008": 114,
+        "s009": 204,
+        "s010": 343,
+        "r-direct": 366,
+        "r-features": 247,
+        "s011": 457,
+        "s012": 383,
+        "s013": 429,
+        "r-safety": 83,
+        "s014": 265,
+        "s015": 542,
+        "s016": 460,
+        "s017": 218,
+        "s018": 144,
+        "r-no-code": 160,
+        "s019": 93,
+        "s020": 680,
+        "s021": 1057,
+        "s023": 226,
+        "s024": 387,
+        "s025": 91,
+        "s026": 457,
+        "s027": 479,
+        "s029": 441,
+        "s030": 1065,
+        "s031": 251,
+        "s032": 140,
+        "s033": 440,
+        "s034": 365,
+        "s035": 180,
+        "s036": 754,
+        "s037": 365,
+        "s038": 195,
+        "s042": 46,
+        "s043": 160,
+        "r-outlook": 173,
+        "s044": 109,
+        "s045": 148
+      }
+    }
+  }
+}

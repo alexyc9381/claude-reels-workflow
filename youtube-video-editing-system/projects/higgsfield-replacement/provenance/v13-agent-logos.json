@@ -1,0 +1,9 @@
+{
+  "revision": "V13",
+  "method": "Reuse existing repository assets unchanged; no fresh logo generation or network retrieval",
+  "assets": [
+    {"entity": "Codex", "repositorySource": "video/public/logos_official/codex.svg", "workingAsset": "public/v3/codex.svg", "sha256": "dde8b3563a40d55af25e3fb2509864d16ae214b0260748d294e2d011f2a6907c"},
+    {"entity": "Cursor", "repositorySource": "video/public/logos_official/cursor.svg", "workingAsset": "public/v3/cursor.svg", "sha256": "c483c02f78eb2619778fdd959e72a9adfac4844854472cd2653d4cbfd60e4d71"}
+  ],
+  "scope": "Brand identity as coding-agent workflow destinations; not evidence of verified compatibility of the user's actual downloadable generation skill"
+}

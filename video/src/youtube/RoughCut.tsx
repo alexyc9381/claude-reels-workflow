@@ -13,7 +13,7 @@ const full={x:28,y:16,w:1864,h:1048}, inset={x:1380,y:678,w:460,h:326};
 const targets:Record<string,{x:number;y:number;z:number;at:number;hold:number}>={
  s014:{x:840,y:410,z:1.12,at:3.2,hold:3},s015:{x:1000,y:480,z:1.15,at:5,hold:7},
  s020:{x:1040,y:550,z:1.20,at:4,hold:11},s021:{x:1070,y:505,z:1.12,at:9,hold:16},
- s023:{x:1090,y:560,z:1.16,at:1,hold:4.8},s024:{x:1110,y:520,z:1.16,at:3.5,hold:6},
+ s024:{x:1110,y:520,z:1.16,at:3.5,hold:6},
  s026:{x:1080,y:500,z:1.12,at:4,hold:8},s027:{x:1080,y:570,z:1.12,at:5,hold:7},
  s029:{x:1030,y:510,z:1.13,at:3,hold:8},s036:{x:1030,y:525,z:1.12,at:6,hold:12},
 };

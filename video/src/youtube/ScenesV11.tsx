@@ -4,6 +4,7 @@ import {Surface, Occluder, PALETTES} from '../WorldKit';
 import {bodyFont} from './cinematic-brand';
 import {easeInOut as e, easeOut} from './glass-motion';
 import {Actor, Glass, Label, Logo, SkillFile, Key, CameraIcon, C, clamp, lerp, visible, BrandedBackground} from './YouTubeV8Primitives';
+import {ShotStage} from './NarrativeV9';
 
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
@@ -29,7 +30,7 @@ export const EditRoom:React.FC<{t:number;children:React.ReactNode}>=({t,children
 /** Calendar pages print an annual receipt. A physical pass is scanned and the
  * three model-vault doors open in response. No unrelated coins or machines. */
 export const AccessPriceV11:React.FC<{duration:number;brandAt:number}>=({duration,brandAt})=>{
- const t=clock(),u=t/duration,print=e(u,.04,.31),scan=e(u,.37,.14),open=e(u,.55,.29),arrive=e(u,.04,.24);
+ const t=clock(),u=t/duration,print=e(u,.01,.14),scan=e(u,.22,.085),open=e(u,.34,.29),arrive=e(u,.01,.13);
  return <EditRoom t={t}>
   <Glass x={134} y={139} w={543} h={558} t={t} frost={.7}>
    <Label x={31} y={28} size={28} color={C.orange}>RECURRING ACCESS</Label>
@@ -44,11 +45,12 @@ export const AccessPriceV11:React.FC<{duration:number;brandAt:number}>=({duratio
   <Glass x={816} y={136} w={928} h={559} t={t} frost={.48}>
    <At x={32} y={25} style={{opacity:easeOut(t,brandAt,.2)}}><Logo name="higgsfield.jpg" size={79}/><Label x={105} y={20} size={39}>Higgsfield</Label></At>
    {[['hailuo.png','Hailuo'],['google.png','Google'],['seedance.png','Seedance']].map(([logo,name],i)=>{
-    const door=e(u,.55+i*.045,.22);return <At key={name} x={31+i*297} y={148}>
+    const door=e(u,.34+i*.12,.10),flash=Math.sin(door*Math.PI);return <At key={name} x={31+i*297} y={148}>
      <div style={{width:271,height:332,borderRadius:21,overflow:'hidden',background:'linear-gradient(145deg,#316B65,#173E3D)',boxShadow:'inset 0 8px 23px #10292370',position:'relative'}}>
-      <div style={{position:'absolute',inset:20,border:'1px solid #ABC9B8',borderRadius:14}}/>
-      <At x={68} y={92} style={{transform:`translateY(${(1-door)*55}px) scale(${.9+.1*door})`}}><Logo name={logo} size={131}/></At>
-      <Label x={30} y={263} size={27} color="#FFF7E6" style={{width:211,textAlign:'center'}}>{name}</Label>
+      <div style={{position:'absolute',inset:20,border:'1px solid #ABC9B8',borderRadius:14,boxShadow:`inset 0 0 ${flash*70}px #FCE7A1`}}/>
+      <At x={94} y={28} style={{transform:`translateY(${(1-door)*55}px) scale(${.9+.1*door})`}}><Logo name={logo} size={84}/></At>
+      <At x={19} y={143}><ShotStage t={t+i*.2} w={233} mode={i===0?'jump':i===1?'orbit':'chase'} progress={e(u,.46+i*.1,.22)}/></At>
+      <Label x={30} y={282} size={27} color="#FFF7E6" style={{width:211,textAlign:'center'}}>{name}</Label>
       <div style={{position:'absolute',inset:0,background:'linear-gradient(110deg,#EEE4D4,#FFFDF5 47%,#D6BFA3)',transform:`translateY(${-105*door}%)`,borderBottom:'7px solid '+C.clay}}>
        {Array.from({length:10},(_,j)=><div key={j} style={{position:'absolute',left:0,right:0,top:14+j*30,height:2,background:'#A2805E30'}}/>)}
        <svg width="271" height="332"><path d="M113 173V140a24 24 0 0 1 48 0v33" fill="none" stroke={C.orange} strokeWidth="8"/><rect x="98" y="166" width="80" height="58" rx="11" fill={C.orange}/><circle cx="138" cy="189" r="6" fill="#FFF9ED"/></svg>
@@ -58,9 +60,10 @@ export const AccessPriceV11:React.FC<{duration:number;brandAt:number}>=({duratio
    })}
   </Glass>
   <At x={700} y={552}><svg width="115" height="216"><path d="M35 75H83V208H35Z" fill="#C3AB8E"/><rect x="5" y="6" width="103" height="105" rx="18" fill="#FFF9ED" stroke="#B09878" strokeWidth="3"/><rect x="24" y="29" width="65" height="58" rx="8" fill={scan>.95?C.teal:'#684E36'}/><path d="M35 58H81" stroke="#FFF4DC" strokeWidth="3"/></svg></At>
-  <Actor t={t} x={430+arrive*126} y={520} size={235} role="archivist" look={1} walk={Math.sin(arrive*Math.PI)} reach={scan} lift={scan*.65} contact={duration*.52}/>
+  <Actor t={t} x={430+arrive*126} y={520} size={235} role="archivist" look={1} walk={Math.sin(arrive*Math.PI)} reach={scan} lift={scan*.65} contact={duration*.307}/>
   <At x={lerp(538,701,scan)} y={lerp(646,585,scan)-Math.sin(scan*Math.PI)*18} style={{transform:`rotate(${-14+scan*14}deg)`,opacity:arrive}}><div style={{width:111,height:74,borderRadius:10,background:'#FFF8E9',border:'3px solid '+C.clay,boxShadow:'0 8px 20px #54381E35'}}><div style={{height:19,marginTop:14,background:C.orange}}/><div style={{margin:'11px 13px',height:5,background:'#B3997A'}}/></div></At>
-  <Label x={887} y={714} size={31} color={C.teal} style={{opacity:open}}>Access to the models underneath</Label>
+  <svg width="1920" height="1080" style={{position:'absolute',inset:0,pointerEvents:'none'}}>{[0,1,2].map(i=>{const q=e(u,.32+i*.12,.11),r=e(u,.78+i*.045,.075);return <g key={i}><path d={`M757 603C792 779 ${1015+i*296} 799 ${1015+i*296} 610`} fill="none" stroke={i===1?C.teal:C.orange} strokeWidth="3" pathLength="1" strokeDasharray="1" strokeDashoffset={1-q} opacity={q*(1-r)*.75}/><circle cx={1015+i*296} cy={lerp(668,608,q)} r={5+5*Math.sin(q*Math.PI)} fill="#FFE3B0" opacity={q*(1-r)}/></g>;})}</svg>
+  <div style={{position:'absolute',left:194,top:727,width:440,height:93,borderRadius:18,background:'#FFF8E9',border:'2px solid #FFFFFF',boxShadow:'0 12px 28px #5A3C2024',opacity:e(u,.72,.08),transform:`translateY(${32*(1-e(u,.72,.08))}px)`}}><Label x={22} y={24} size={32} color={C.orange}>Recurring subscription</Label></div>
  </EditRoom>;
 };
 

@@ -5,6 +5,7 @@ import {easeInOut as e,easeOut} from './glass-motion';
 import {Actor,Glass,Label,Logo,SkillFile,C,lerp,clamp,BrandedBackground} from './YouTubeV8Primitives';
 import {EditRoom} from './ScenesV11';
 import {WinnerCrownV12} from './ScenesV12';
+import {AgentDestinationsV13,CursorV13} from './ScenesV13';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 
@@ -18,10 +19,10 @@ export const ComparisonV10:React.FC<{revealAt?:number;opening?:boolean}>=({revea
  return <AbsoluteFill data-video-first-comparison style={{background:'#F2EBE1',fontFamily:bodyFont}}>
   {[0,1].map(i=><div key={i} style={{position:'absolute',left:12+i*958,top:24,width:938,height:742,overflow:'hidden',borderRadius:18,boxShadow:'0 10px 30px #40281B25'}}>
    <Loop durationInFrames={120}><OffthreadVideo data-comparison-side={i?'B':'A'} src={staticFile(i?'v4/claude-result.mp4':'v9/higgsfield-comparison.mp4')} muted style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:`${i?50:aPosition}% 50%`}}/></Loop>
-   <div style={{position:'absolute',left:24,top:24,background:'#FFF8EEF2',padding:'9px 21px',borderRadius:12,fontSize:opening?44:31,fontWeight:850,color:C.ink}}>{opening?(i?'2':'1'):(i?'RIGHT · 2':'LEFT · 1')}</div>
    {opening&&<svg width="938" height="742" style={{position:'absolute',inset:0,pointerEvents:'none',opacity:1-easeOut(t,4,.2)}}><rect x="4" y="4" width="930" height="734" rx="16" fill="none" stroke={C.clay} strokeWidth="5" pathLength="1" strokeDasharray="1" strokeDashoffset={1-clamp(t/4)}/></svg>}
   </div>)}
-  {!opening&&[0,1].map(i=><At key={i} x={i?1255:130} y={789} style={{opacity:reveal,transform:`translateY(${18*(1-reveal)}px)`}}><Logo name={i?'claude.png':'higgsfield.jpg'} size={98}/><Label x={121} y={25} size={44}>{i?'Claude':'Higgsfield'}</Label></At>)}
+  {[0,1].map(i=><div data-choice-number={i+1} key={i} style={{position:'absolute',left:437+i*958,top:789,width:88,height:88,borderRadius:'50%',display:'grid',placeItems:'center',background:'#FFF9EF',border:'3px solid '+C.orange,boxShadow:'0 8px 20px #50331C20',fontSize:49,fontWeight:850,color:C.ink}}>{i+1}</div>)}
+  {!opening&&[0,1].map(i=><At key={i} x={i?1280:304} y={900} style={{opacity:reveal,transform:`translateY(${18*(1-reveal)}px)`}}><Logo name={i?'claude.png':'higgsfield.jpg'} size={77}/><Label x={98} y={18} size={40}>{i?'Claude':'Higgsfield'}</Label></At>)}
   {!opening&&t>=revealAt+3.6&&<WinnerCrownV12 t={t-revealAt-3.6}/>}
  </AbsoluteFill>;
 };
@@ -58,7 +59,7 @@ export const AccessPriceV10:React.FC<{duration:number;brandAt:number}>=({duratio
 /** Narration clock: 0–2.84 one skill; 2.84–6.04 same prompt/models;
  * 6.04–8.66 saved on computer. Each object keeps its identity through the action. */
 export const PromptToFileV10:React.FC<{duration:number}>=({duration})=>{
- const t=clock(),u=t*8.66/duration,load=e(u,.15,.65),send=e(u,2.85,.65),model=e(u,4.15,.55),save=e(u,6.02,.7);
+ const t=clock(),u=t*8.66/duration,load=e(u,.05,.38),send=e(u,2.85,.45),model=e(u,4.45,.4),save=e(u,6.02,.55);
  const outX=lerp(1100,1084,save),outY=lerp(274,258,save),outW=lerp(540,480,save);
  return <Stage>
   <Glass x={133} y={136} w={786} h={568} t={t} frost={.55}>
@@ -68,14 +69,17 @@ export const PromptToFileV10:React.FC<{duration:number}>=({duration})=>{
   </Glass>
   <Glass x={1034} y={136} w={713} h={568} t={t} frost={.4}>
    <At x={28} y={24}><Logo name="fal.png" size={66}/><Label x={100} y={15} size={35}>{u<6.02?'Model access':save<.95?'Saving your video…':'Saved on your computer'}</Label></At>
-   <div style={{position:'absolute',left:32,top:135,display:'flex',gap:38,opacity:1-model}}>{['hailuo.png','google.png','seedance.png'].map((l,i)=><div key={l} style={{padding:17,borderRadius:19,border:'3px solid #FFFFFF',background:'#FFF9EE',transform:`translateY(${-18*e(u,3.9+i*.18,.3)}px)`}}><Logo name={l} size={115}/></div>)}</div>
+   <div style={{position:'absolute',left:32,top:135,display:'flex',gap:38,opacity:1-model}}>{['hailuo.png','google.png','seedance.png'].map((l,i)=>{const hit=e(u,3.2+i*.25,.19);return <div key={l} style={{padding:17,borderRadius:19,border:'3px solid #FFFFFF',background:'#FFF9EE',boxShadow:`0 0 ${hit*29}px #DC935588`,transform:`translateY(${-24*Math.sin(hit*Math.PI)}px) scale(${1+.08*Math.sin(hit*Math.PI)})`}}><Logo name={l} size={115}/></div>;})}</div>
    <div style={{position:'absolute',left:32,top:480,right:32,height:60,borderRadius:18,background:'#E4EBDD',opacity:save}}><Label x={23} y={15} size={27} color={C.teal}>Downloads / rooftop-jump.mp4</Label></div>
   </Glass>
   <At x={lerp(457,1154,send)} y={lerp(346,374,send)-Math.sin(send*Math.PI)*120} style={{opacity:send*(1-model),transform:`rotate(${-5+send*5}deg)`}}><div style={{padding:'24px 34px',borderRadius:18,background:'#FFF9EE',border:'2px solid '+C.clay,boxShadow:'0 18px 35px #40281B25',fontSize:31,fontWeight:700}}>Same prompt</div></At>
   <At x={outX} y={outY} style={{opacity:model,transform:`scale(${.78+.22*model})`,transformOrigin:'50% 50%'}}><VideoFileV10 w={outW}/></At>
-  <Actor t={t} x={281+load*43} y={739} size={213} role="operator" look={1} reach={send} lift={load*.65} contact={1.4}/>
-  <Actor t={t+.2} x={1205-save*107} y={695} size={218} role="courier" look={-1} lift={save*.75} reach={save} contact={7.4}/>
-  <Label x={618} y={880} size={36} color={C.teal}>{u<2.84?'One skill':u<6.02?'Same prompt. Direct model access.':'Your generated video → your files'}</Label>
+  <Actor t={t} x={712+load*25} y={610} size={171} role="operator" look={1} reach={send} lift={load*.65} contact={.5}/>
+  <Actor t={t+.2} x={1215-save*180} y={653} size={161} role="courier" look={-1} lift={save*.75} reach={save} walk={Math.sin(save*Math.PI)} contact={6.57}/>
+  <CursorV13 x={737} y={408} press={load}/>
+  <svg width="1920" height="1080" style={{position:'absolute',inset:0,pointerEvents:'none',opacity:send*(1-model)}}>{[0,1,2].map(i=><path key={i} d={`M887 367C974 367 970 ${330+i*30} ${1110+i*175} 340`} fill="none" stroke={i%2?C.teal:C.orange} strokeWidth="4" pathLength="1" strokeDasharray="1" strokeDashoffset={1-e(u,2.95+i*.12,.36)}/>)}</svg>
+  <AgentDestinationsV13 t={t-.3} x={156} y={830} compact/>
+  <Label x={156} y={925} size={32} color={C.teal}>{u<2.84?'One reusable workflow':u<6.02?'Same prompt → model → video':'Your video. Saved on your computer.'}</Label>
  </Stage>;
 };
 
@@ -109,19 +113,19 @@ export const BonusPackV10:React.FC<{t:number;compact?:boolean}>=({t,compact=fals
  * A reusable brief bypasses the subscription desk and lands in fal's request
  * composer; no quantity/pricing or output-from-every-model claim is invented. */
 export const DirectRouteV10:React.FC<{duration:number}>=({duration})=>{
- const t=clock(),u=t/duration,bypass=e(u,.06,.09),deliver=e(u,.19,.105),open=e(u,.32,.08),choose=e(u,.51,.08),submit=e(u,.69,.07),returning=e(u,.82,.08);
+ const t=clock(),u=t/duration,bypass=e(u,.06,.09),deliver=e(u,.19,.105),open=e(u,.32,.08),choose=e(u,.34,.08),submit=e(u,.69,.07),returning=e(u,.82,.08);
  return <Stage>
   <Glass x={162} y={161} w={701} h={443} t={t} frost={.6} style={{opacity:1-bypass*.65,transform:`translateY(${-bypass*80}px) scale(${1-bypass*.1})`,transformOrigin:'top left'}}><At x={30} y={26}><Logo name="higgsfield.jpg" size={65}/><Label x={120} y={14} size={36}>Subscription access</Label></At><Label x={39} y={155} size={81} color={C.orange}>$100<span style={{fontSize:30}}> / month</span></Label><Label x={42} y={328} size={29}>A recurring platform plan</Label></Glass>
   <Glass x={996} y={153} w={761} h={521} t={t} frost={.5}>
    <At x={30} y={28}><Logo name="fal.png" size={77}/><Label x={110} y={16} size={37}>Go directly to the models</Label></At>
    <div style={{position:'absolute',left:33,top:143,width:695,height:197,borderRadius:20,background:'#FFF8EE'}}><Label x={25} y={26} size={29} color={C.teal}>{u>.75?'Request sent':u>.31?'Prompt received':'Your prompt'}</Label><div style={{position:'absolute',left:25,top:82,fontSize:31,lineHeight:1.35,opacity:e(u,.29,.045)}}>A man leaps between rooftops.<div>Follow the jump.</div></div><div style={{position:'absolute',right:20,bottom:19,opacity:choose,background:C.teal,color:'#FFF8EB',padding:'5px 13px',borderRadius:12,fontSize:29,transform:`scale(${1-.12*Math.sin(submit*Math.PI)})`}}>↑</div></div>
-   <At x={49} y={377}>{['hailuo.png','google.png','seedance.png'].map((l,i)=><At key={l} x={i*229} y={0} style={{transform:`translateY(${(1-e(u,.32+i*.025,.055))*45-choose*(i===0?9:0)}px) scale(${i===0?1+choose*.12:1-choose*.07})`,opacity:open*(i===0?1:1-choose*.4)}}><Logo name={l} size={96}/><svg width="116" height="116" style={{position:'absolute',left:-10,top:-10}}><rect x="2" y="2" width="112" height="112" rx="25" fill="none" stroke={C.orange} strokeWidth="3" pathLength="1" strokeDasharray="1" strokeDashoffset={i===0?1-choose:1}/></svg></At>)}</At>
+   <At x={49} y={359}>{['hailuo.png','google.png','seedance.png'].map((l,i)=><At key={l} x={i*229} y={0} style={{transform:`translateY(${(1-e(u,.32+i*.025,.055))*45-choose*(i===2?9:0)}px) scale(${i===2?1+choose*.12:1-choose*.07})`,opacity:open*(i===2?1:1-choose*.4)}}><Logo name={l} size={96}/><svg width="116" height="116" style={{position:'absolute',left:-10,top:-10}}><rect x="2" y="2" width="112" height="112" rx="25" fill="none" stroke={C.orange} strokeWidth="3" pathLength="1" strokeDasharray="1" strokeDashoffset={i===2?1-choose:1}/></svg><Label x={i===2?-44:-3} y={115} size={i===2?25:24} color={i===2?C.orange:C.teal} style={{fontWeight:i===2?850:650}}>{['Hailuo','Veo','Seedance 2.5'][i]}</Label></At>)}</At>
   </Glass>
   <div style={{position:'absolute',left:217,top:706,width:975,height:8,background:'#D2724E45',borderRadius:5}}><div style={{height:8,background:C.orange,width:`${deliver*100}%`,borderRadius:5}}/></div>
   <Actor t={t} x={236+deliver*590} y={570} size={236} role="courier" walk={Math.sin(deliver*Math.PI)} look={1} lift={.65} reach={deliver} contact={duration*.81}/>
   <At x={421+deliver*598} y={597-deliver*279-Math.sin(deliver*Math.PI)*60} style={{opacity:1-e(u,.29,.045),transform:`rotate(${-8+deliver*8}deg)`}}><SkillFile t={t} size={153} label="prompt"/></At>
   <At x={330} y={302} style={{opacity:returning,transform:`translate(${(1-returning)*510}px,${(1-returning)*100}px) scale(${.78+.22*returning})`}}><VideoFileV10 w={348}/></At>
-  <Actor t={t+.25} x={1455} y={616} size={177} role="operator" look={-1} reach={choose} lift={submit*.55} contact={duration*.76} happy={returning>.8}/>
+  <Actor t={t+.25} x={1680} y={560} size={124} role="operator" look={-1} reach={choose} lift={submit*.55} contact={duration*.76} happy={returning>.8}/>
   <At x={211} y={839}><Logo name="claude.png" size={68}/><Label x={96} y={12} size={39} color={C.teal}>Keep the workflow. Change the route.</Label></At>
  </Stage>;
 };
