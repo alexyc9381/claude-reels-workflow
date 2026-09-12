@@ -14,11 +14,6 @@ const Shot:React.FC<{i:number,dur:number}>=({i,dur})=>{
  // headers and captions stay anchored in the original house chassis.
  if(i===0){const pull=ease(f,19,35),fix=ease(f,81,95);scale=1+.09*pull-.055*fix;x=-32*pull+22*fix;}
  if(i===5){const receipt=ease(f,42,57);scale=1+.11*receipt;x=-31*receipt;y=-11*receipt;}
- if(i===7){const work=ease(f,0,8);scale=1+.035*work;}
- if(i===11){const answer=ease(f,68,84);scale=1+.035*answer;}
-
- if(i===15){scale=1+.11*ease(f,19,35);y=-5*ease(f,19,35);}
-
  return <Panel><div style={{position:'absolute',inset:0,transform:`translate(${x}px,${y}px) scale(${scale})`,transformOrigin:'50% 53%'}}><Body f={f} dur={dur}/></div></Panel>
 };
 export const X144Reel:React.FC<{silent?:boolean}>=({silent=false})=>{const f=useCurrentFrame();let index=0;L.forEach((x,i)=>{if(f>=x)index=i});return <AbsoluteFill><Bg/>{!silent&&<Audio src={staticFile('x144_mix.wav')}/>}{L.map((start,i)=><Sequence key={i} from={start} durationInFrames={(L[i+1]??X144_TOTAL)-start}><Shot i={i} dur={(L[i+1]??X144_TOTAL)-start}/></Sequence>)}<ProgressBar/><KaraokeCaption words={words} fps={30} top={1268}/><HookHeader big={headers[index][0]} hot={headers[index][1]} f={f-L[index]+15}/></AbsoluteFill>};

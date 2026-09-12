@@ -23,6 +23,7 @@
 - [Claude reel topic engine](claude-reel-topic-engine.md) · [Fable idea backlog](fable-idea-backlog.md) — ranked next ideas + kill-list
 
 ## ⛔ Standing build/visual rules
+- [⛔ X144: revised ending still rejected as slow and repetitive](alex-x144-ending-motion-rejection.md) — change the whole post-22-second sequence; a conveyor spanning multiple lines is still one composition. Distinct short operations, word-aligned format geometry, expressive Claude and consequential handoffs; R3 technical passes were not approval.
 - [⛔ SETUP: immediate first-second event, not preparation](alex-setup-first-second-pattern-interrupt.md) — first B/C trials were rejected despite numeric passes. Review 0–0.25s and 0.25–1s separately; large causal sweep/launch, visible reaction and next useful beat, with matched Foley. A zoom cannot substitute for subject action.
 - [⛔ NO reel watermarks](reel-no-watermarks.md) — never render nocodealex/@nocodealex or replacement creator branding; overrides cloned chrome; inspect full-frame corners.
 - [⛔ Reel headers ALWAYS ALL CAPS](reel-header-all-caps.md) — ALL reels and revisions; repeated after SCOPE v3. Shared header enforces uppercase; inspect every rendered header for case and fit. Preserve supplied wording.

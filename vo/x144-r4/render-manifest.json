@@ -1,0 +1,16 @@
+{
+  "filename": "144_X_22s_retention_revision.mp4",
+  "revision": "R4 complete post-22-second action rebuild",
+  "frames": 1370,
+  "duration_seconds": 45.666666666666664,
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "format": "H264 yuv420p limited-range BT709, AAC stereo, faststart",
+  "bytes": 16130963,
+  "sha256": "6fb9c66418834458b4e7b58f9e3320c981c2aa0e7f7fff7735e28315dd148baf",
+  "revised_frames": [
+    617,
+    1369
+  ]
+}

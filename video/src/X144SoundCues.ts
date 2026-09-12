@@ -28,47 +28,41 @@ export const X144_SOUND_CUES = [
   { at: 18.5333, src: "x144/key.wav", gainDb: -15.61, rate: 1 }, // question still unsent
   { at: 19.6333, src: "x144/unlock.wav", gainDb: -26.028, rate: 1.08 }, // fix opens
   { at: 19.9667, src: "x144/pickup.wav", gainDb: -24.305, rate: 1.12 }, // fix revealed
-  { at: 20.8333, src: "x144/lever.wav", gainDb: -10.039, rate: 1 }, // Claude feeds the converter
-  { at: 21.5000, src: "x144/clank.wav", gainDb: -5.085, rate: 1 }, // first clean output emerges
-  { at: 22.1333, src: "x144/paper.wav", gainDb: -14.777, rate: 1 }, // structure fills output
-  { at: 23.0000, src: "x144/ratchet.wav", gainDb: -19.993, rate: 1 }, // second sample passes
-  { at: 23.3667, src: "x144/key.wav", gainDb: -15.61, rate: 1 }, // brief GitHub proof
-  { at: 23.4667, src: "x144/thock.wav", gainDb: -8.085, rate: 1 }, // Claude catches clean output
-  { at: 24.1667, src: "x144/paper.wav", gainDb: -14.777, rate: 1 }, // continuous input feed
-  { at: 24.2000, src: "x144/paper.wav", gainDb: -14.777, rate: 1 }, // Claude carries output into format handoff
-  { at: 25.2000, src: "x144/paper.wav", gainDb: -14.841, rate: 0.96 }, // named format enters operating converter
-  { at: 25.8000, src: "x144/key.wav", gainDb: -15.61, rate: 1.0 }, // format joins structured output
-  { at: 25.8000, src: "x144/paper.wav", gainDb: -14.729, rate: 1.01 }, // named format enters operating converter
-  { at: 26.2667, src: "x144/paper.wav", gainDb: -14.617, rate: 1.06 }, // named format enters operating converter
-  { at: 26.4000, src: "x144/key.wav", gainDb: -15.7, rate: 1.06 }, // format joins structured output
-  { at: 26.8000, src: "x144/paper.wav", gainDb: -14.495, rate: 1.1099999999999999 }, // named format enters operating converter
-  { at: 26.8667, src: "x144/key.wav", gainDb: -15.806, rate: 1.12 }, // format joins structured output
-  { at: 27.4000, src: "x144/key.wav", gainDb: -15.902, rate: 1.18 }, // format joins structured output
-  { at: 27.4000, src: "x144/paper.wav", gainDb: -14.371, rate: 1.16 }, // named format enters operating converter
-  { at: 28.0000, src: "x144/key.wav", gainDb: -15.988, rate: 1.24 }, // format joins structured output
-  { at: 28.6333, src: "x144/pickup.wav", gainDb: -19.648, rate: 1.08 }, // finished Markdown pulls forward
-  { at: 29.4333, src: "x144/paper.wav", gainDb: -14.777, rate: 1 }, // readable output settles
-  { at: 29.8333, src: "x144/lever.wav", gainDb: -10.039, rate: 1 }, // output moves into token-saving comparison
-  { at: 30.6000, src: "x144/thock.wav", gainDb: -5.083, rate: 0.86 }, // loaded platform lands
-  { at: 31.8333, src: "x144/unlock.wav", gainDb: -21.39, rate: 0.91 }, // ballast release
-  { at: 32.4667, src: "x144/pickup.wav", gainDb: -24.485, rate: 1.18 }, // lighter input catches
-  { at: 33.4333, src: "x144/key.wav", gainDb: -11.11, rate: 1.0 }, // structured evidence travels to answer
-  { at: 33.8667, src: "x144/key.wav", gainDb: -11.306, rate: 1.12 }, // structured evidence travels to answer
-  { at: 34.3000, src: "x144/key.wav", gainDb: -11.488, rate: 1.24 }, // structured evidence travels to answer
-  { at: 34.7667, src: "x144/clank.wav", gainDb: -8.085, rate: 1 }, // evidence route locks
-  { at: 35.6000, src: "x144/pickup.wav", gainDb: -19.711, rate: 1.1 }, // clear answer resolves
-  { at: 36.3000, src: "x144/paper.wav", gainDb: -19.277, rate: 1 }, // answer handed onward
-  { at: 37.1000, src: "x144/lever.wav", gainDb: -10.039, rate: 1 }, // plug approaches
-  { at: 38.0667, src: "x144/clank.wav", gainDb: -5.085, rate: 0.9 }, // MCP seats
-  { at: 38.3667, src: "x144/terminal.wav", gainDb: -13.085, rate: 1 }, // connection live
-  { at: 39.1333, src: "x144/paper.wav", gainDb: -14.777, rate: 1 }, // file thrown into Claude
-  { at: 39.7000, src: "x144/thock.wav", gainDb: -8.085, rate: 1 }, // upload seats
-  { at: 40.5000, src: "x144/terminal.wav", gainDb: -8.233, rate: 1 }, // MCP call runs
-  { at: 41.4000, src: "x144/pickup.wav", gainDb: -19.711, rate: 1.1 }, // conversion completes
-  { at: 42.3000, src: "x144/paper.wav", gainDb: -14.777, rate: 1 }, // Markdown opens in same interaction
-  { at: 43.0333, src: "x144/paper.wav", gainDb: -14.777, rate: 1 }, // finished file handed toward guide
-  { at: 43.8333, src: "x144/thock.wav", gainDb: -8.085, rate: 1 }, // guide lands
-  { at: 44.5333, src: "x144/paper.wav", gainDb: -14.777, rate: 1 }, // guide opens
-  { at: 45.3000, src: "x144/key.wav", gainDb: -11.11, rate: 1 }, // X typed
-  { at: 45.4000, src: "x144/pickup.wav", gainDb: -24.475, rate: 1.17 }, // comment sends
+  { at: 20.9333, src: "x144/thock.wav", gainDb: -8.083, rate: 0.93 }, // bulky input seats in press
+  { at: 21.3333, src: "x144/clank.wav", gainDb: -5.085, rate: 0.9 }, // opposing jaws strip outer formatting
+  { at: 21.9333, src: "x144/paper.wav", gainDb: -14.52, rate: 1.1 }, // intact semantic core ejects
+  { at: 22.7333, src: "x144/pickup.wav", gainDb: -24.026, rate: 1.05 }, // Claude catches clean core
+  { at: 23.7000, src: "x144/lever.wav", gainDb: -14.505, rate: 1.1 }, // core sent to next station
+  { at: 24.8333, src: "x144/ratchet.wav", gainDb: -15.385, rate: 1.03 }, // format rotor takes first input
+  { at: 25.7667, src: "x144/paper.wav", gainDb: -14.705, rate: 1.02 }, // PDF turns into structured segments
+  { at: 26.2667, src: "x144/key.wav", gainDb: -10.862, rate: 0.91 }, // Word sheet stack feeds rotor
+  { at: 26.8000, src: "x144/gear.wav", gainDb: -9.642, rate: 1.1 }, // spreadsheet accordion folds into structure
+  { at: 27.3333, src: "x144/thock.wav", gainDb: -8.608, rate: 1.13 }, // slide fan joins output
+  { at: 27.9333, src: "x144/terminal.wav", gainDb: -8.286, rate: 1.08 }, // filmstrip becomes transcript structure
+  { at: 28.6000, src: "x144/paper.wav", gainDb: -14.705, rate: 1.02 }, // semantic strips join binding spine
+  { at: 29.1333, src: "x144/clank.wav", gainDb: -5.079, rate: 1.06 }, // roller binds the structured output
+  { at: 29.6333, src: "x144/pickup.wav", gainDb: -24.148, rate: 1.08 }, // Markdown unfolds
+  { at: 30.2000, src: "x144/paper.wav", gainDb: -19.205, rate: 1.02 }, // Markdown handoff
+  { at: 30.5333, src: "x144/thock.wav", gainDb: -8.083, rate: 0.86 }, // loaded token rack lands
+  { at: 31.3333, src: "x144/unlock.wav", gainDb: -21.427, rate: 0.94 }, // token rack unlatches
+  { at: 31.7333, src: "x144/coin.wav", gainDb: -11.29, rate: 0.95 }, // unused input tokens return
+  { at: 32.1333, src: "x144/lever.wav", gainDb: -10.008, rate: 1.06 }, // freed input gate swings open
+  { at: 33.1333, src: "x144/thock.wav", gainDb: -8.083, rate: 0.96 }, // unstructured key meets resistance
+  { at: 34.0667, src: "x144/key.wav", gainDb: -11.244, rate: 1.08 }, // heading table and list teeth align
+  { at: 34.5667, src: "x144/lever.wav", gainDb: -10.005, rate: 1.1 }, // structured key enters Claude chamber
+  { at: 35.0333, src: "x144/unlock.wav", gainDb: -21.512, rate: 1.04 }, // structured input unlocks chamber
+  { at: 36.0667, src: "x144/pickup.wav", gainDb: -24.211, rate: 1.1 }, // clearer answer emerges toward Claude
+  { at: 37.2000, src: "x144/chain.wav", gainDb: -8.085, rate: 1.0 }, // MCP cable snaps into approach
+  { at: 37.7000, src: "x144/clank.wav", gainDb: -5.082, rate: 0.91 }, // MCP connector locks
+  { at: 38.3000, src: "x144/terminal.wav", gainDb: -8.257, rate: 1.04 }, // structured payload crosses connection
+  { at: 39.3000, src: "x144/thock.wav", gainDb: -8.084, rate: 1.03 }, // file upload seats in Claude
+  { at: 39.9000, src: "x144/key.wav", gainDb: -11.213, rate: 1.07 }, // MCP operation engages
+  { at: 41.0333, src: "x144/gear.wav", gainDb: -9.69, rate: 1.11 }, // automatic conversion completes
+  { at: 42.0667, src: "x144/pickup.wav", gainDb: -19.805, rate: 1.12 }, // Markdown opens inside Claude
+  { at: 42.5333, src: "x144/paper.wav", gainDb: -14.565, rate: 1.08 }, // structured rows seat
+  { at: 43.1333, src: "x144/paper.wav", gainDb: -19.428, rate: 0.92 }, // finished output transfers toward guide
+  { at: 43.8667, src: "x144/thock.wav", gainDb: -8.085, rate: 1.0 }, // guide lands
+  { at: 44.4000, src: "x144/paper.wav", gainDb: -14.495, rate: 1.11 }, // guide opens
+  { at: 45.2667, src: "x144/key.wav", gainDb: -11.2, rate: 1.06 }, // X comment sends
+  { at: 45.5333, src: "x144/pickup.wav", gainDb: -24.376, rate: 1.14 }, // guide dispatch completes
 ];

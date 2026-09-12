@@ -1,0 +1,130 @@
+[
+  {
+    "name": "DRAIN",
+    "start": 0.0,
+    "end": 4.066667,
+    "vo": "Everyone uploading PDFs to Claude is basically wasting all their tokens and Microsoft has a free fix.",
+    "start_frame": 0,
+    "end_frame_exclusive": 122
+  },
+  {
+    "name": "WHOLE",
+    "start": 4.066667,
+    "end": 7.033333,
+    "vo": "So every time you upload a PDF, Claude has to process the entire thing.",
+    "start_frame": 122,
+    "end_frame_exclusive": 211
+  },
+  {
+    "name": "HIDDEN_LOAD",
+    "start": 7.033333,
+    "end": 10.366667,
+    "vo": "The formatting, the broken tables, the images, and all the extra junk inside the file.",
+    "start_frame": 211,
+    "end_frame_exclusive": 311
+  },
+  {
+    "name": "TURBINE",
+    "start": 10.366667,
+    "end": 13.933333,
+    "vo": "Each PDF page can consume between fifteen hundred to three thousand tokens.",
+    "start_frame": 311,
+    "end_frame_exclusive": 418
+  },
+  {
+    "name": "DOMINO",
+    "start": 13.933333,
+    "end": 17.366667,
+    "vo": "So a twenty page document can burn up to seventy thousand tokens in one shot.",
+    "start_frame": 418,
+    "end_frame_exclusive": 521
+  },
+  {
+    "name": "BEFORE_ASK",
+    "start": 17.366667,
+    "end": 19.533333,
+    "vo": "And that's before you even ask a single question.",
+    "start_frame": 521,
+    "end_frame_exclusive": 586
+  },
+  {
+    "name": "UNLOCK",
+    "start": 19.533333,
+    "end": 20.566667,
+    "vo": "So the fix is simple.",
+    "start_frame": 586,
+    "end_frame_exclusive": 617
+  },
+  {
+    "name": "STARS",
+    "start": 20.566667,
+    "end": 24.366667,
+    "vo": "It's called MarkItDown, a free Microsoft tool with over a hundred and ten thousand stars on GitHub.",
+    "start_frame": 617,
+    "end_frame_exclusive": 731
+  },
+  {
+    "name": "FORMATS",
+    "start": 24.366667,
+    "end": 28.266667,
+    "vo": "It takes almost any file, PDFs, Word docs, Excel sheets, PowerPoints, or even YouTube videos.",
+    "start_frame": 731,
+    "end_frame_exclusive": 848
+  },
+  {
+    "name": "LOOM",
+    "start": 28.266667,
+    "end": 30.233333,
+    "vo": "And converts them into clean Markdown text.",
+    "start_frame": 848,
+    "end_frame_exclusive": 907
+  },
+  {
+    "name": "BALLAST",
+    "start": 30.233333,
+    "end": 32.666667,
+    "vo": "So this can reduce your token usage by up to seventy percent.",
+    "start_frame": 907,
+    "end_frame_exclusive": 980
+  },
+  {
+    "name": "FOCUS",
+    "start": 32.666667,
+    "end": 36.766667,
+    "vo": "And Claude can give better answers because Markdown is a format AI models understand extremely well.",
+    "start_frame": 980,
+    "end_frame_exclusive": 1103
+  },
+  {
+    "name": "MCP",
+    "start": 36.766667,
+    "end": 38.933333,
+    "vo": "Plus, MarkItDown comes with an MCP server.",
+    "start_frame": 1103,
+    "end_frame_exclusive": 1168
+  },
+  {
+    "name": "DESKTOP",
+    "start": 38.933333,
+    "end": 41.5,
+    "vo": "That means when you connect it to Claude Desktop, it can automatically convert any file",
+    "start_frame": 1168,
+    "end_frame_exclusive": 1245
+  },
+  {
+    "name": "MD_RESULT",
+    "start": 41.5,
+    "end": 43.466667,
+    "vo": "You upload to a .md file.",
+    "start_frame": 1245,
+    "end_frame_exclusive": 1304
+  },
+  {
+    "name": "CTA",
+    "start": 43.466667,
+    "end": 45.666667,
+    "vo": "If you want the link and full guide, just follow and comment X.",
+    "start_frame": 1304,
+    "end_frame_exclusive": 1370
+  }
+]

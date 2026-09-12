@@ -1,0 +1,79 @@
+[
+  {
+    "take": 0,
+    "source_start": 0.875,
+    "source_end": 4.985,
+    "output_start": 0.0,
+    "output_end": 3.9902912621359223
+  },
+  {
+    "take": 1,
+    "source_start": 6.985,
+    "source_end": 13.385,
+    "output_start": 4.072815533980583,
+    "output_end": 10.286407766990292
+  },
+  {
+    "take": 2,
+    "source_start": 19.875,
+    "source_end": 26.995,
+    "output_start": 10.36893203883495,
+    "output_end": 17.281553398058254
+  },
+  {
+    "take": 3,
+    "source_start": 30.42,
+    "source_end": 32.58,
+    "output_start": 17.364077669902915,
+    "output_end": 19.46116504854369
+  },
+  {
+    "take": 4,
+    "source_start": 34.8,
+    "source_end": 35.785,
+    "output_start": 19.54368932038835,
+    "output_end": 20.499999999999996
+  },
+  {
+    "take": 5,
+    "source_start": 36.5,
+    "source_end": 40.32,
+    "output_start": 20.582524271844658,
+    "output_end": 24.291262135922327
+  },
+  {
+    "take": 6,
+    "source_start": 45.9,
+    "source_end": 51.86,
+    "output_start": 24.37378640776699,
+    "output_end": 30.160194174757283
+  },
+  {
+    "take": 7,
+    "source_start": 71.305,
+    "source_end": 77.94,
+    "output_start": 30.24271844660194,
+    "output_end": 36.68446601941747
+  },
+  {
+    "take": 8,
+    "source_start": 81.05,
+    "source_end": 83.2,
+    "output_start": 36.76699029126213,
+    "output_end": 38.85436893203884
+  },
+  {
+    "take": 9,
+    "source_start": 90.3,
+    "source_end": 94.89,
+    "output_start": 38.93689320388349,
+    "output_end": 43.39320388349515
+  },
+  {
+    "take": 10,
+    "source_start": 102.35,
+    "source_end": 104.59,
+    "output_start": 43.47572815533981,
+    "output_end": 45.650485436893206
+  }
+]
