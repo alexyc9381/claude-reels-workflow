@@ -1,0 +1,11 @@
+# Continue the Higgsfield edit from V16
+
+Transfer the complete `Documents/NoCodeAlex-Higgsfield-V16-Editing-Handoff` folder to your other Mac. It includes the editable Git checkout/history/bundle, working media, dependency lockfile, full reference video, checksums and these notes. No Drive upload is claimed.
+
+Double-click `START-EDITING.command`, or run `node restore.mjs`. First launch needs compatible Node.js (22+ recommended), Git, dependency-download internet and at least 10 GB free disk. The launcher verifies files without overwriting edits and opens `HiggsfieldRoughCut` in Remotion. The other Mac itself has not been tested.
+
+## Next-chat prompt
+
+> Continue my No Code Alex Higgsfield YouTube edit from V16 in this folder. Read youtube-video-editing-system/CURRENT-DIRECTION.md, LEARNINGS-INDEX.md and projects/higgsfield-replacement/REVISION-V16.md. Review reference/higgsfield-replacement-edit-v16.mp4. Keep Remotion, not Supereditor; editVersion v9 is only the renderer selector. V16 replaces the price, early workflow and roadmap scenes with larger, less cluttered actions. Do not restore the long Recorded examples footer or blurry command crop. The original 2D Claude carries/inserts the skill; real OBS output then fills the stage. Full-screen roadmap arrivals drive key/camera/comparison actions, glow and the existing quiet contact cues. Keep all later V15 footage/audio repairs, OBS-only narration, complete words/results, private-key masks, correct blind comparison identities, white glass, Manrope and FREE setup/bonus. No CGI. The supplied thumbnail promises Claude replacing Higgsfield for a low per-generation cost; exact title is still needed, not the thumbnail again. Do not claim feature parity, equal cost units or free generation. Keep revisions indexed, source pushed and full exports separately versioned.
+
+Working media may contain private information; keep the editable folder private. Camera-card 4K originals and native dependencies/caches are not included or required for the existing 1080p edit. The separate global fal-video generation skill/private provider configuration is not included. On a new Mac render fresh rather than relying on historical picture caches. Download delivery, licensing, cost evidence and final creative/listening approval remain publication checks.

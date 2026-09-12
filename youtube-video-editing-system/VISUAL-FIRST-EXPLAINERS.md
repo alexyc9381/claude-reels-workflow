@@ -1,5 +1,7 @@
 # Visual-first explanations and intro promise
 
+V16 correction: large graphics alone are insufficient. Remove long qualification footers and pixelated proof crops that destroy hierarchy. Put essential claim units beside their values; retain detailed evidence notes separately. A three-second roadmap can own the full frame, with one shared arrival clock driving actor, prop, glow and contact sound. The thumbnail is now supplied: `/REPLACE`, 10¢ and Claude over Higgsfield. Ask for the missing exact title, not the thumbnail again. See [V16](projects/higgsfield-replacement/REVISION-V16.md).
+
 Latest direction, September 12, 2026. Applies to future No Code Alex YouTube scene design; it does not certify that every historical scene has been rebuilt.
 
 ## Graphic storytelling

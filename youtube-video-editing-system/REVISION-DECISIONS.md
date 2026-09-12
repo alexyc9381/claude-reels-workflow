@@ -112,6 +112,10 @@ Latest follow-up (V10): Alex supplied and explicitly confirmed the newest Dreami
 
 ## Precedence summary
 
+### V16 declutter and arrival reactions
+
+Alex rejected the price qualifications as clutter, the 17s command crop as poor animation, and the roadmap as too weak/small. Remove long footer copy; retain essential price units and one adjacent estimate label. Increase the original actor and purposeful prop scale, create visible carry/insert/activate/output actions, and give each roadmap stop a specific response plus bounded contact glow synchronized to the existing quiet cues. A generic layout, whole-frame ambient motion or successful source test is not proof the creative request is satisfied. Inspect exact arrival/recovery frames and actual playback. [V16](projects/higgsfield-replacement/REVISION-V16.md) records what changed and what did not. The supplied `/REPLACE` / 10¢ Claude-versus-Higgsfield thumbnail sets a replacement/cost promise; its visual packaging has not yet been implemented in the first five seconds.
+
 ### V15 visual-first and packaging refinement
 
 Alex rejected paragraph-heavy first-minute scenes and asked for more graphical, fast-paced, meaningful animation in the No Code Alex style. V15 replaces five first-minute scenes with calendar/request, real workflow preview, traversable roadmap, copy/paste guidebook and model-sleeve actions. Real Higgsfield and Claude logos are required in the second scene; an editorial branded counterpart does not replace either official mark or the original 2D Claude rig. Later tutorial/reveal/ending remain V14, not silently claimed rebuilt.

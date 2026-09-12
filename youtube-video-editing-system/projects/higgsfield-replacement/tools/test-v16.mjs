@@ -1,0 +1,18 @@
+import './test-v13.mjs';
+import assert from 'node:assert/strict';
+import {readFileSync,existsSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const proof=JSON.parse(execFileSync(process.execPath,[path.join(project,'tools/prepare-v16-cache.mjs'),'--check-only'],{encoding:'utf8',maxBuffer:5e6}));
+assert.deepEqual(proof.affected,[{from:220,to:809}]);
+const source=readFileSync(path.join(repo,'video/src/youtube/ScenesV16.tsx'),'utf8');
+for(const name of ['CostV16','ProductionV16','RoadmapV16'])assert.ok(source.includes('export const '+name));
+assert.doesNotMatch(source,/Recorded examples|Monthly plan ≠|start=\{1008\}|Math\.random|Date\.now|setTimeout|<Audio/);
+assert.match(source,/Estimate · varies by model/);assert.match(source,/\/ month/);assert.match(source,/\/ generation/);
+assert.match(source,/roadmapBeatsV13\.map/);assert.match(source,/at=\{beats\[0\]\}/);assert.match(source,/at=\{beats\[1\]\}/);assert.match(source,/at=\{beats\[2\]\}/);
+assert.match(source,/CinemaCamera/);assert.match(source,/TwinResults/);assert.match(source,/size=\{350\}/);assert.match(source,/size=\{356\}/);
+for(const tag of source.match(/<OffthreadVideo[\s\S]*?\/>/g)||[])assert.match(tag,/\bmuted\b/);
+for(const name of ['obs.mp4','v9/higgsfield-comparison.mp4','v4/claude-result.mp4'])assert.ok(existsSync(path.join(base,'work/higgsfield-replacement/public',name)));
+const host=readFileSync(path.join(repo,'video/src/youtube/YouTubeV9.tsx'),'utf8');assert.match(host,/row\.id!=='s006'/);
+console.log('PASS V16: original EDL/privacy/audio, three targeted scene replacements, no long price footer, large original actors, real media, three shared contact clocks and clean full-screen roadmap.');

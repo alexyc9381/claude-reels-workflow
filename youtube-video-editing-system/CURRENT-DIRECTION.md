@@ -11,6 +11,8 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Narrative and retention
 
+- V16 takes precedence for the three rejected intro scenes: remove the long price footers, use large character/prop actions instead of blurry enlarged command screenshots, and make roadmap stops actively respond to Claude's arrival. The roadmap owns the full frame for its 3.333s, with key/socket, detailed camera and real comparison outputs. Keep short adjacent price units/estimate qualifiers. [V16 scope and sound-contact clocks](projects/higgsfield-replacement/REVISION-V16.md). Thumbnail has now been supplied; exact title remains missing. Do not claim early illustrated skill insertion is a recorded invocation.
+
 - V15: favor graphic-led actions over paragraphs, especially in the first minute. Use real Higgsfield and Claude logos in the second scene and the original No Code Alex 2D rig. Show actual recorded workflow evidence early, clearly labeled as condensed; do not equate animation with proof. Obtain the exact title and thumbnail before certifying a first-five-second packaging match. [Visual-first and audio-off review rules](VISUAL-FIRST-EXPLAINERS.md).
 
 - V14 opening takes precedence: maximize the two actual clips with slim outer margins and a small seam; facecam overlays the lower center from frame zero. No decorative area beneath the opening clips. Keep 1/2 badges inside their lower centers and preserve the blind reveal. The subsequent price scene clearly contrasts the recorded subscription example against the per-generation estimate, with units and caveats; do not imply free generation, universally current prices or a matched 1,000× saving.

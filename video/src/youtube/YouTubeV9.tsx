@@ -147,7 +147,7 @@ export const YouTubePolish:React.FC<{manifest:M}>=({manifest:m})=>{
   <Sequence from={find('s043').from-3*fps} durationInFrames={3*fps}><RevealCountdownV13/></Sequence>
   <Sequence from={find('s033').from+Math.round(10.1*fps)} durationInFrames={99}><PlaybackStartV13 duration={3.3}/></Sequence>
   <Sequence from={laterFrom} durationInFrames={laterTo-laterFrom}><LaterCue duration={(laterTo-laterFrom)/fps} timestamp={stamp}/></Sequence>
-  {active&&row&&<Sequence from={row.from} durationInFrames={row.duration}><Presenter row={row} intro={['s001','s002'].includes(row.id)} timerEnd={find('s003').from/fps-1/fps}/></Sequence>}
+  {active&&row&&row.id!=='s006'&&<Sequence from={row.from} durationInFrames={row.duration}><Presenter row={row} intro={['s001','s002'].includes(row.id)} timerEnd={find('s003').from/fps-1/fps}/></Sequence>}
   {roughChapters(m).slice(1).map((c,i)=>i===4?null:<Sequence key={c.frame} from={c.frame} durationInFrames={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)}><Chapter duration={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)/fps} step={i+1} title={chapterTitles[i]}/></Sequence>)}
  </>;
 };
