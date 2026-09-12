@@ -34,6 +34,9 @@ export const inFullScene=(m:M,frame:number)=>fullScenes(m).some(s=>frame>=s.from
 
 const Definition:React.FC<{duration:number;term:string;meaning:string}>=({duration,term,meaning})=>{
  const t=useTime(),p=pop(t,0),variant=term==='Wrapper'?0:term==='API'?1:term==='API key'?2:term==='Prompt'?3:term==='Storyboard'?4:5;
+ // V15_WRAPPER_BEGIN — the recorded slide already explains this term.
+ if(term==='Wrapper')return <AbsoluteFill style={{opacity:visible(t,duration),fontFamily:bodyFont}}><Glass x={110} y={876} w={434} h={115} t={t} frost={.7} style={{transform:`translateY(${45*(1-p)}px)`}}><div style={{position:'absolute',left:20,top:21}}><Logo name="higgsfield.jpg" size={65}/></div><div style={{position:'absolute',left:110,top:31,fontSize:36,fontWeight:750,color:C.ink}}>The interface</div></Glass></AbsoluteFill>;
+ // V15_WRAPPER_END
  return <AbsoluteFill style={{opacity:visible(t,duration),fontFamily:bodyFont,color:C.ink}}>
   <Glass x={110} y={780} w={1150} h={220} t={t} frost={.86} style={{transform:`translate(${(1-p)*(variant%2?-70:0)}px,${(1-p)*(variant%2?0:70)}px) perspective(1800px) rotateY(${(1-p)*(variant-2)*2}deg)`}}>
    <div style={{position:'absolute',left:34,top:22,fontFamily:displayFont,fontWeight:650,letterSpacing:-.8,fontSize:49,color:C.orange,lineHeight:1.05}}>{term}</div>

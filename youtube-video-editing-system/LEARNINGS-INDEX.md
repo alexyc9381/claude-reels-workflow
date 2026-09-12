@@ -1,6 +1,6 @@
 # YouTube editing — indexed learning library
 
-Current: [V14 larger opening and cost contrast](projects/higgsfield-replacement/REVISION-V14.md), [unchanged source timeline](projects/higgsfield-replacement/v13-timeline.json), [V14 Mac handoff + resume prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V14.md). [V13](projects/higgsfield-replacement/REVISION-V13.md) and earlier records are preserved history. Final render/approval status lives in the revision record.
+Current: [V15 visual-first intro and real workflow proof](projects/higgsfield-replacement/REVISION-V15.md), [visual-first / title-thumbnail continuity rules](VISUAL-FIRST-EXPLAINERS.md), [unchanged source timeline](projects/higgsfield-replacement/v13-timeline.json), [V15 Mac handoff + resume prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V15.md). [V14](projects/higgsfield-replacement/REVISION-V14.md), [V13](projects/higgsfield-replacement/REVISION-V13.md) and earlier records are preserved history. Final render/approval status lives in the revision record.
 
 Preserved V12: [numbered comparison and guided inspection](projects/higgsfield-replacement/REVISION-V12.md), [source/timestamp audit](projects/higgsfield-replacement/revision-v12-audit.json).
 
@@ -13,7 +13,7 @@ This is the handoff index for the complete September 10–11 system-building and
 ## Current production contract
 
 - [Current direction](CURRENT-DIRECTION.md): engine, source audio, framing, typography, white glass, original 2D cast, action hierarchy, unique scenes, sound, retention, privacy and full delivery.
-- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V14.
+- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V15.
 - [Approval versus review](APPROVED-ANIMATION-SYSTEM.md): v11 short-study approval and later full-film overrides.
 - [Canonical memory](../memory/youtube-video-editing-system.md): compact entry for future tasks; indexed from memory/MEMORY.md and the root repository map.
 

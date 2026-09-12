@@ -112,6 +112,12 @@ Latest follow-up (V10): Alex supplied and explicitly confirmed the newest Dreami
 
 ## Precedence summary
 
+### V15 visual-first and packaging refinement
+
+Alex rejected paragraph-heavy first-minute scenes and asked for more graphical, fast-paced, meaningful animation in the No Code Alex style. V15 replaces five first-minute scenes with calendar/request, real workflow preview, traversable roadmap, copy/paste guidebook and model-sleeve actions. Real Higgsfield and Claude logos are required in the second scene; an editorial branded counterpart does not replace either official mark or the original 2D Claude rig. Later tutorial/reveal/ending remain V14, not silently claimed rebuilt.
+
+The plot promise should receive early actual evidence: condensed OBS command, prompt entry and generated playback, not only an animated mechanism. Final title and thumbnail are still needed to verify exact alignment. For silent first-five-second viewing, propose the thumbnail coming to life with the same large clip layout, colors and identities. Preserve blind 1/2 clips; avoid clip-linked brand/price labels before the reveal. [Implementation](projects/higgsfield-replacement/REVISION-V15.md), [reusable rules and packaging options](VISUAL-FIRST-EXPLAINERS.md).
+
 ### V14 opening refinement (later feedback takes precedence)
 
 Alex considered animated details beneath the opening videos, then explicitly replaced that with larger video panels and a center-overlay facecam. Use the available area for footage, not more decorative props. Preserve blind identities until the ending. Follow with an unmistakable cost comparison using the recorded $100/month and 10¢/generation examples, visibly different units and estimate qualifiers. Do not silently upgrade recorded claims into verified current prices or equal-setting per-video savings. [V14 implementation, evidence and verification](projects/higgsfield-replacement/REVISION-V14.md).
