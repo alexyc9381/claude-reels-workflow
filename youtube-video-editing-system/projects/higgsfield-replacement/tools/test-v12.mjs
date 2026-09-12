@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import {readFileSync,readdirSync,existsSync} from 'node:fs';
+import {createRequire} from 'node:module';
+import {runInNewContext} from 'node:vm';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement'),src=path.join(repo,'video/src/youtube');
+const require=createRequire(path.join(repo,'video/package.json')),{transformSync}=require('esbuild'),read=n=>readFileSync(path.join(src,n),'utf8');
+const evaluate=(code,scope={})=>{const box={module:{exports:{}},...scope};runInNewContext(transformSync(code,{loader:'ts',format:'cjs'}).code,box);return box.module.exports;};
+const m=JSON.parse(readFileSync(path.join(project,'roughcut.props.json'))).manifest,old=JSON.parse(readFileSync(path.join(project,'roughcut-v11-baseline.props.json'))).manifest;
+const timing=evaluate(read('roughcut-timing.ts')),rows=timing.roughTimeline(m),before=timing.roughTimeline(old),get=id=>rows.find(r=>r.id===id);
+assert.deepEqual(m.cameras,old.cameras);assert.deepEqual(m.obs,old.obs);assert.equal(rows.length,47);assert.equal(timing.roughChapters(m).length,6);
+for(const r of rows){const b=before.find(b=>b.id===r.id);assert.ok(r.duration>0);if(!['s035','s036','s037'].includes(r.id)){assert.equal(r.start,b.start);assert.equal(r.end,b.end);}if(r.cameraSource){assert.equal(r.cameraPlateSource,b.cameraPlateSource);assert.ok(Math.abs((r.cameraPlateStart-b.cameraPlateStart)/m.fps-(r.start-b.start))<1/m.fps);assert.ok(r.duration<=r.cameraPlateDuration+1);assert.ok(existsSync(path.join(base,'work/higgsfield-replacement/public',r.cameraPlateSource)));}}
+assert.equal(get('s035').end,1897.94);assert.equal(get('s036').end,2002.96);assert.equal(get('s037').start,2017.2);assert.equal(get('r-veo-playthrough').end,1870.82);assert.equal(get('s045').end,2459.03);
+for(const id of ['s016','s017'])assert.equal(get(id).screenRedaction,'credentials');
+const polish=read('YouTubeV9.tsx'),cues=evaluate(polish.slice(polish.indexOf('export const v9Cues:'),polish.indexOf('export const chapterTitles'))).v9Cues;
+for(const c of cues)assert.ok(get(c.id).duration>c.offset*m.fps);
+assert.ok(cues.some(c=>c.id==='s033'&&c.title==='Generated with Veo'));
+assert.ok(cues.some(c=>c.id==='s034'&&c.feature==='hair'));assert.ok(cues.some(c=>c.id==='s035'&&c.feature==='fabric'));
+assert.match(read('StoryScenesV10.tsx'),/opening\?\(i\?'2':'1'\)/);assert.match(read('ScenesV9.tsx'),/OutroV9=InstallFinaleV12/);
+assert.match(read('ScenesV12.tsx'),/FREE BONUS/);assert.match(read('ScenesV12.tsx'),/data-synchronized-detail/);assert.match(read('ScenesV12.tsx'),/data-winner="claude-right"/);
+assert.match(polish,/find\('s029'\).from-3\*fps/);assert.match(polish,/find\('s043'\).from-3\*fps/);assert.match(polish,/find\('s043'\).from\+108/);
+assert.match(read('RoughCut.tsx'),/data-audio-role="obs-narration" src=\{staticFile\(m.obs.source\)\}/);
+assert.match(read('RoughCut.tsx'),/data-privacy-mask/);assert.match(read('YouTubeV8Primitives.tsx'),/symmetric-eyes/);
+for(const n of ['RoughCut.tsx','StoryScenesV10.tsx','ScenesV12.tsx'])for(const tag of read(n).match(/<OffthreadVideo[\s\S]*?\/>/g)||[])assert.match(tag,/\bmuted\b/);
+for(const file of readdirSync(src).filter(n=>/\.tsx?$/.test(n)))transformSync(read(file),{loader:file.endsWith('tsx')?'tsx':'ts'});
+assert.doesNotMatch(read('ScenesV12.tsx'),/Math.random|Date.now|setTimeout/);
+console.log('PASS V12: scoped source trims, camera clock, complete playback, OBS-only audio, privacy, six chapters, numbered comparison, Veo, source-frame lenses, countdown/reveal anchors and TS/TSX parsing.');

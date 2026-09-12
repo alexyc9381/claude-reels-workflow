@@ -11,6 +11,10 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Narrative and retention
 
+- V12: opening choices are **1 and 2**. Compact result/reveal countdowns follow actual editorial events. Crown the creator's chosen right-hand Claude result after its identity is spoken, with one restrained celebration sound—not a general model-superiority claim.
+- V12: source-synchronized detail crops and reviewed drawing/pointing paths follow the recorded playback, including pauses/restarts. Explicitly identify Veo. Preserve useful VO when hiding a lip-lick or other awkward expression.
+- V12 closing: one dominant installation task; subordinate image-led **FREE BONUS** with the actual camera recipes and guide. Quicker causal actions throughout explainers must preserve narration pace and useful teaching.
+
 - V11 feedback refines (rather than reverses) footage-first direction: more purposeful motion in the intro/explainer scenes, but keep real A/B clips dominant. Restore complete generated playback through its final action. An earlier gift-style teaser with a truthful countdown is now requested for the real prompt-pack bonus; the ban on a progress bar applies to the **intro reaction teaser**, not this later bonus cue.
 
 - Start from what Alex actually said. Preserve useful teaching, context, caveats, natural phrase tails and bridges. Do not manufacture a punchier claim by joining unrelated takes.

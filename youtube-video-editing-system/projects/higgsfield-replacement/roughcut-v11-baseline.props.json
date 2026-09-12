@@ -380,29 +380,29 @@
       {
         "id": "s035",
         "start": 1892.02,
-        "end": 1897.94,
+        "end": 1898.01,
         "camera": "C0007",
         "layout": "screen-presenter",
         "chapter": "Review and compare the results",
-        "reason": "V12 trim silent tail only; presenter exits before lip-lick while OBS wind observation remains complete."
+        "reason": "Fabric motion observation"
       },
       {
         "id": "s036",
         "start": 1981.33,
-        "end": 2002.96,
+        "end": 2006.45,
         "camera": "C0007",
         "layout": "screen-presenter",
         "chapter": "Review and compare the results",
-        "reason": "V12 keep complete Seedance playback, reaction and signs detail; omit repeated realism praise before the sound observation."
+        "reason": "Second model playback and clean detail-comparison take"
       },
       {
         "id": "s037",
-        "start": 2017.2,
+        "start": 2017.58,
         "end": 2029.37,
         "camera": "C0007",
         "layout": "screen-presenter",
         "chapter": "Review and compare the results",
-        "reason": "V12 retain one clean complete second-of-all sound observation; both earlier aborted takes excluded."
+        "reason": "V11 omit retake-adjacent Second of all lead-in; begin with the complete We hear the realistic sound effects clause."
       },
       {
         "id": "s038",
@@ -504,7 +504,7 @@
         "s034": 11410,
         "s035": 11775,
         "s036": 11958,
-        "s037": 47,
+        "s037": 58,
         "s038": 13065,
         "s039": 13260,
         "s040": 13347,
@@ -564,7 +564,7 @@
         "s034": 365,
         "s035": 180,
         "s036": 754,
-        "s037": 365,
+        "s037": 354,
         "s038": 195,
         "s042": 46,
         "s043": 160,

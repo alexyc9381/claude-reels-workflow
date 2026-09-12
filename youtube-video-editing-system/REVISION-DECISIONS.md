@@ -112,4 +112,8 @@ Latest follow-up (V10): Alex supplied and explicitly confirmed the newest Dreami
 
 ## Precedence summary
 
+### V12 refinement
+
+Opening comparisons now use **1 / 2**. Faster source-aligned action beats replace prolonged transfers in the prompt, route, gate, guide and skill explainers. A small result countdown and a separate reveal countdown target actual timeline events. Veo is named explicitly. Hair/fabric crops use synchronized OBS frames with reviewed source-region paths and a 2D Claude inspector. The lip-lick is removed visually without deleting the wind sentence; repeated realism praise is removed while the signs/sound observations remain. Crown and one quiet original celebratory sound follow the right-hand Claude identity reveal. Closing hierarchy is one installation action over subordinate image-led **FREE BONUS** resources. [Exact implementation and verification status](projects/higgsfield-replacement/REVISION-V12.md).
+
 White glass beats earlier black-glass consideration. Manrope beats earlier serif studies for this film. Later costume request beats intervening no-costume cap. CGI removal beats earlier recurring-pet request. Current full-video request beats the original rough-cut-only gate. Explicit latest recap deletion beats default content preservation **only for that named passage**. Review completion does not equal creative approval or video publication.

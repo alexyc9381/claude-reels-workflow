@@ -31,7 +31,7 @@ export const ShotStage:React.FC<{t:number;w?:number;mode?:'orbit'|'chase'|'jump'
 /** A different physical job from the closing throw: an accordion field guide
  * opens, its tools perform a shot, and the completed instructions are packed. */
 export const GuideSequence:React.FC<{duration:number}>=({duration})=>{
- const t=clock(),u=t/duration,open=e(u,.02,.17),deploy=e(u,.17,.2),shot=e(u,.35,.36),pack=e(u,.75,.17),carry=e(u,.88,.1);
+ const t=clock(),u=t/duration,open=e(u,.02,.09),deploy=e(u,.14,.11),shot=e(u,.29,.27),pack=e(u,.64,.105),carry=e(u,.83,.08);
  const ax=190+deploy*85+carry*100,fx=lerp(704,1450,pack),fy=lerp(598,582,pack)-Math.sin(pack*Math.PI)*105;
  return <World t={t} setting="archive">
   <Glass x={408} y={178} w={1125} h={501} t={t} frost={.35} style={{transform:`perspective(1800px) rotateX(${(1-open)*24}deg) scale(${.92+.08*open})`}}>
@@ -51,7 +51,7 @@ export const GuideSequence:React.FC<{duration:number}>=({duration})=>{
 /** Instruction kit → directed shot → installed skill. The middle beat is a
  * miniature set so the audience sees what 'instructions' actually control. */
 export const SkillSequence:React.FC<{duration:number;importAt:number}>=({duration,importAt})=>{
- const t=clock(),u=t/duration,unfold=e(u,.02,.12),select=e(u,.16,.17),direct=e(u,.33,.23),pack=e(u,.59,.13),install=e(u,.74,.16),ready=e(u,.91,.06);
+ const t=clock(),u=t/duration,unfold=e(u,.02,.07),select=e(u,.16,.085),direct=e(u,.30,.15),pack=e(u,.55,.085),install=e(u,.72,.095),ready=e(u,.86,.04);
  const fx=lerp(265,1388,install),fy=lerp(481,410,install)-Math.sin(install*Math.PI)*147;
  return <World t={t} setting="studio">
   <Glass x={134} y={148} w={574} h={491} t={t} frost={.48}><At x={28} y={29}><Logo name="fal.png" size={72}/><Label x={110} y={16} size={36}>Instruction kit</Label></At>

@@ -15,8 +15,7 @@ const targets:Record<string,{x:number;y:number;z:number;at:number;hold:number}>=
  s020:{x:1040,y:550,z:1.20,at:4,hold:11},s021:{x:1070,y:505,z:1.12,at:9,hold:16},
  s023:{x:1090,y:560,z:1.16,at:1,hold:4.8},s024:{x:1110,y:520,z:1.16,at:3.5,hold:6},
  s026:{x:1080,y:500,z:1.12,at:4,hold:8},s027:{x:1080,y:570,z:1.12,at:5,hold:7},
- s029:{x:1030,y:510,z:1.13,at:3,hold:8},s034:{x:1060,y:540,z:1.13,at:2,hold:8},
- s035:{x:1030,y:550,z:1.14,at:1,hold:3.5},s036:{x:1030,y:525,z:1.12,at:6,hold:12},
+ s029:{x:1030,y:510,z:1.13,at:3,hold:8},s036:{x:1030,y:525,z:1.12,at:6,hold:12},
 };
 const Screen:React.FC<{m:RoughCutManifest;s:Row;sourceStart?:number;t:number}>=({m,s,sourceStart=s.start,t})=>{
  const q=targets[s.id],a=q?easeInOut(t,q.at,.8)*(1-easeInOut(t,q.at+q.hold,.8)):0;
@@ -54,7 +53,7 @@ const FootageSegment:React.FC<{m:RoughCutManifest;s:Row;previous?:Row;next?:Row}
  const cropW=mix(1480,1300,p),cropX=mix(110,150,p),cropY=mix(25,0,p),scale=b.w/cropW;
  const open=s.id==='s001'?openingScale(t):1;
  // Let the result own the screen during silent playback, rather than a waiting face.
- const cameraOpacity=s.id==='s033'?1-easeInOut(t,9.6,.35):s.id==='s029'?1-easeInOut(t,3.5,.35)*(1-easeInOut(t,9.6,.35)):1;
+ const cameraOpacity=s.id==='s035'?1-easeInOut(t,4.65,.22):s.id==='s033'?1-easeInOut(t,9.6,.35):s.id==='s029'?1-easeInOut(t,3.5,.35)*(1-easeInOut(t,9.6,.35)):1;
  // Four-frame J-cut of OBS picture only: never desynchronize speaking camera.
  const jcut=!!previous&&s.layout!=='presenter'&&previous.layout!=='presenter'&&!s.screenRedaction&&!previous.screenRedaction&&!s.teaser&&!previous.teaser&&Math.abs(s.start-previous.end)>.3;
  return <AbsoluteFill>

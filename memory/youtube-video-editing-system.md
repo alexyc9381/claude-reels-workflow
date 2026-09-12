@@ -1,5 +1,7 @@
 # No Code Alex YouTube editing system
 
+Current film revision: [V12](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V12.md). Explicit 1/2 comparison, faster consequential explainer beats, small real-event countdowns, Veo attribution, source-frame hair/fabric inspection with Claude, picture-only lip-lick removal, single signs/sound review, right-side crown and quiet celebration, hierarchical image-led FREE BONUS ending. Preserve earlier rules; check revision verification status. [Portable Mac resume prompt](../youtube-video-editing-system/projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V12.md).
+
 Canonical entry: [current direction](../youtube-video-editing-system/CURRENT-DIRECTION.md). Full indexed conversation learnings: [learning index](../youtube-video-editing-system/LEARNINGS-INDEX.md) and [decision ledger](../youtube-video-editing-system/REVISION-DECISIONS.md).
 
 ## Standing rules

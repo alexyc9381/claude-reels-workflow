@@ -7,6 +7,7 @@ import {Support,LaterCue,TextLens,type SupportKind} from './SupportingScenesV9';
 import {typingFocus} from './typing-focus';
 import {CameraPlate} from './CameraPlate';
 import {SetupChecklistV11,CredentialV11,BonusTeaserV11} from './ScenesV11';
+import {ResultCountdownV12,DetailLensV12} from './ScenesV12';
 const CredentialSequence=CredentialV11;
 import {C,clamp,lerp,pop,visible,Glass,Logo,Actor,Key,Film,ProgressBorder,BrandedBackground} from './YouTubeV8Primitives';
 import {HookV9,ProductionV9,RoadmapV9,GuideV9,WrapperV9,DirectV9,DownloadV9,SkillV9,CompareV9,OutroV9} from './ScenesV9';
@@ -86,7 +87,7 @@ const Teaser:React.FC<{duration:number}>=({duration})=>{
  </AbsoluteFill>;
 };
 
-type Cue={id:string;offset:number;seconds:number;kind:'definition'|'brand'|SupportKind|'keys'|'lens';title?:string;text?:string;logo?:string};
+type Cue={id:string;offset:number;seconds:number;kind:'definition'|'brand'|SupportKind|'keys'|'lens'|'detail-lens';feature?:'hair'|'fabric'|'signs';title?:string;text?:string;logo?:string};
 export const v9Cues:Cue[]=[
  {id:'s009',offset:.2,seconds:5.9,kind:'definition',title:'Wrapper',text:'An interface built on top of other models.'},
  {id:'s011',offset:1,seconds:4.6,kind:'brand',title:'fal.ai',text:'Direct access to the models',logo:'fal.png'},
@@ -105,14 +106,15 @@ export const v9Cues:Cue[]=[
  {id:'s026',offset:3,seconds:5.8,kind:'definition',title:'Storyboard',text:'The shots that tell your story, in order.'},
  {id:'s026',offset:10.2,seconds:4.6,kind:'storyboard'},
  {id:'s027',offset:.25,seconds:8,kind:'chase'},
- {id:'s027',offset:10,seconds:4.8,kind:'brand',title:'Choose the direction',text:'Review before rendering',logo:'claude.png'},
+ {id:'s027',offset:9,seconds:3,kind:'brand',title:'Choose the direction',text:'Review before rendering',logo:'claude.png'},
  {id:'s029',offset:.2,seconds:3.1,kind:'brand',title:'First result',logo:'hailuo.png'},
  {id:'s030',offset:4,seconds:9,kind:'direction'},
  {id:'s030',offset:17,seconds:7,kind:'sound'},
  {id:'s030',offset:30,seconds:5.4,kind:'protip'},
  {id:'s031',offset:.6,seconds:6.5,kind:'definition',title:'Creative direction',text:'Refine the camera, movement and mood.'},
- {id:'s033',offset:.2,seconds:4.1,kind:'brand',title:'Same prompt. New model.',logo:'google.png'},
- {id:'s035',offset:.5,seconds:4.5,kind:'detail'},
+ {id:'s033',offset:.2,seconds:4.1,kind:'brand',title:'Generated with Veo',text:'Google Veo · same prompt',logo:'google.png'},
+ {id:'s034',offset:6.4,seconds:4.4,kind:'detail-lens',feature:'hair'},
+ {id:'s035',offset:.5,seconds:4.5,kind:'detail-lens',feature:'fabric'},
  {id:'s036',offset:.5,seconds:3.7,kind:'brand',title:'Seedance',logo:'seedance.png'},
  {id:'s037',offset:1.4,seconds:6,kind:'sound'},
  {id:'r-outlook',offset:.4,seconds:4.8,kind:'brand',title:'Create with the models',text:'Keep the workflow in your hands',logo:'claude.png'},
@@ -134,10 +136,12 @@ export const YouTubePolish:React.FC<{manifest:M}>=({manifest:m})=>{
   {scenes.map(s=><Sequence key={s.id} from={s.from} durationInFrames={s.duration}>{s.kind==='hook'?<HookV9 duration={s.duration/fps} guessAt={s.a!} whyAt={s.b!} higgsAt={s.c!}/>:s.kind==='studio'?<ProductionV9 duration={s.duration/fps}/>:s.kind==='roadmap'?<RoadmapV9 duration={s.duration/fps}/>:s.kind==='direct'?<DirectV9 duration={s.duration/fps} featuresAt={s.a!}/>:s.kind==='wrapper'?<WrapperV9 duration={s.duration/fps}/>:s.kind==='download'?<DownloadV9 duration={s.duration/fps}/>:s.kind==='guide'?<GuideV9 duration={s.duration/fps}/>:s.kind==='outro'?<OutroV9 duration={s.duration/fps}/>:s.kind==='skill'?<SkillV9 duration={s.duration/fps} importAt={s.a!}/>:<CompareV9 duration={s.duration/fps} revealAt={s.a!}/>}</Sequence>)}
   <Sequence from={find('r-teaser').from} durationInFrames={find('r-teaser').duration}><Teaser duration={find('r-teaser').duration/fps}/></Sequence>
   <AbsoluteFill>
-   {v9Cues.map((c,i)=>{const r=find(c.id),d=Math.min(Math.round(c.seconds*fps),r.duration-Math.round(c.offset*fps)),lift=['definition','typing','sound'].includes(c.kind)?focus:0;return <Sequence key={i} from={r.from+Math.round(c.offset*fps)} durationInFrames={d}><AbsoluteFill style={{transform:`translateY(${-450*lift}px) scale(${1-.12*lift})`,transformOrigin:'120px 0'}}>{c.kind==='lens'?<TextLens duration={d/fps} source={m.obs.source} start={Math.round((r.start+c.offset)*fps)}/>:c.kind==='definition'?<Definition duration={d/fps} term={c.title!} meaning={c.text!}/>:c.kind==='brand'?<Brand avoidRaisedCamera={c.id==='s025'||c.id==='s027'} duration={d/fps} logo={c.logo!} title={c.title!} text={c.text}/>:c.kind==='keys'?<CredentialSequence duration={d/fps}/>:<Support duration={d/fps} kind={c.kind} cueId={`${c.id}:${c.offset}`}/>}</AbsoluteFill></Sequence>;})}
+   {v9Cues.map((c,i)=>{const r=find(c.id),d=Math.min(Math.round(c.seconds*fps),r.duration-Math.round(c.offset*fps)),lift=['definition','typing','sound'].includes(c.kind)?focus:0;return <Sequence key={i} from={r.from+Math.round(c.offset*fps)} durationInFrames={d}><AbsoluteFill style={{transform:`translateY(${-450*lift}px) scale(${1-.12*lift})`,transformOrigin:'120px 0'}}>{c.kind==='detail-lens'?<DetailLensV12 duration={d/fps} source={m.obs.source} start={Math.round(r.start*fps)+Math.round(c.offset*fps)} feature={c.feature!}/>:c.kind==='lens'?<TextLens duration={d/fps} source={m.obs.source} start={Math.round((r.start+c.offset)*fps)}/>:c.kind==='definition'?<Definition duration={d/fps} term={c.title!} meaning={c.text!}/>:c.kind==='brand'?<Brand avoidRaisedCamera={c.id==='s025'||c.id==='s027'} duration={d/fps} logo={c.logo!} title={c.title!} text={c.text}/>:c.kind==='keys'?<CredentialSequence duration={d/fps}/>:<Support duration={d/fps} kind={c.kind} cueId={`${c.id}:${c.offset}`}/>}</AbsoluteFill></Sequence>;})}
   </AbsoluteFill>
   <Sequence from={find('s014').from+135} durationInFrames={find('s016').from+find('s016').duration-find('s014').from-135}><SetupChecklistV11 duration={(find('s016').from+find('s016').duration-find('s014').from-135)/fps} accountAt={(find('s015').from-find('s014').from-135)/fps} keysAt={(find('s016').from-find('s014').from-135)/fps}/></Sequence>
   <Sequence from={find('s036').from+Math.round(14*fps)} durationInFrames={Math.round(8*fps)}><BonusTeaserV11 duration={8} secondsToBonus={(find('s044').from-find('s036').from)/fps-14}/></Sequence>
+  <Sequence from={find('s029').from-3*fps} durationInFrames={3*fps}><ResultCountdownV12/></Sequence>
+  <Sequence from={find('s043').from-3*fps} durationInFrames={3*fps}><ResultCountdownV12 label="The reveal in" comparison/></Sequence>
   <Sequence from={laterFrom} durationInFrames={laterTo-laterFrom}><LaterCue duration={(laterTo-laterFrom)/fps} timestamp={stamp}/></Sequence>
   {active&&row&&<Sequence from={row.from} durationInFrames={row.duration}><Presenter row={row} intro={['s001','s002'].includes(row.id)}/></Sequence>}
   {roughChapters(m).slice(1).map((c,i)=>i===4?null:<Sequence key={c.frame} from={c.frame} durationInFrames={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)}><Chapter duration={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)/fps} step={i+1} title={chapterTitles[i]}/></Sequence>)}
@@ -159,8 +163,8 @@ export const soundEvents=(m:M)=>{
   }else if(s.kind==='outro'){
    beat(.05,d,'paper',.09);beat(1.65/8.56,d,'zip',.075);beat(3.1/8.56,d,'paper',.09);beat(4.1/8.56,d,'latch',.08);beat(4.45/8.56,d,'typing',.055);beat(5.45/8.56,d,'paper',.07);
   }else if(s.kind==='direct'){
-   beat(2.3/9,s.a!,'latch');beat(5.2/9,s.a!,'click');beat(7/9,s.a!,'paper');
-   beat(3.3/8,d-s.a!,'land',.12,b+s.a!);beat(4.8/8,d-s.a!,'servo',.12,b+s.a!);
+   for(const [u,n] of [[.06,'latch'],[.19,'zip'],[.295,'paper'],[.51,'click'],[.69,'click'],[.82,'shutter']] as const)beat(u,s.a!,n,.075);
+   beat(.05,d-s.a!,'land',.08,b+s.a!);beat(.38,d-s.a!,'servo',.075,b+s.a!);
   }else for(const [fraction,name] of schedules[s.kind]??[])beat(fraction,d,name,name==='typing'?.075:.12);
  }
  for(const c of v9Cues)add(at(c.id)+c.offset+.12,c.kind==='typing'?'typing':c.kind==='lens'?'servo':c.kind==='keys'?'click':'paper',c.kind==='typing'?.09:.13,c.kind==='typing'?1.9:.8);
@@ -169,6 +173,7 @@ export const soundEvents=(m:M)=>{
  add(at('s026')+10.2+4.6*.28,'whip',.06);add(at('s026')+10.2+4.6*.72,'land',.08);
  add(at('s027')+1.2,'servo',.09);add(at('s027')+5.1,'whip',.075);
  add(at('s030')+7.5,'click',.10);add(at('s036')+14.45,'paper',.08);add(at('s036')+15,'latch',.06);
+ for(const id of ['s029','s043'])for(let n=3;n>0;n--)add(at(id)-n,'click',.075,.24);
  for(const c of roughChapters(m).slice(1)){add(c.seconds,'zip',.16);add(c.seconds+.37,'paper',.13);}
  for(let i=1;i<rows.length;i++)if(rows[i].layout==='screen-presenter'&&rows[i-1].layout==='presenter'&&!rows[i].teaser)add(rows[i].from/fps-.3,'whip',.14);
  return ev.filter(e=>e.at<rows.at(-1)!.from+rows.at(-1)!.duration);
@@ -187,5 +192,6 @@ export const YouTubeSound:React.FC<{manifest:M}>=({manifest:m})=>{
  return <>
   {music.map((s,i)=><Sequence key={i} from={s.from} durationInFrames={s.to-s.from}><Audio data-audio-role="music" src={staticFile('v4/'+s.name+'.wav')} startFrom={s.start*fps} volume={f=>s.gain*easeOut(f/fps,0,.18)*(1-easeInOut(f/fps,(s.to-s.from)/fps-.45,.45))}/></Sequence>)}
   {soundEvents(m).map((s,i)=><Sequence key={i} from={s.at} durationInFrames={Math.max(1,Math.min(Math.round(s.duration*fps),end-s.at))}><Audio data-audio-role="design-sfx" src={staticFile('v4/'+s.name+'.wav')} volume={s.gain}/></Sequence>)}
+  <Sequence from={find('s043').from+108} durationInFrames={45}><Audio data-audio-role="design-sfx" src={staticFile('v9/celebrate-v12.wav')} volume={.16}/></Sequence>
  </>;
 };

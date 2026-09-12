@@ -5,6 +5,7 @@ import {Actor,World,Glass,Label,Logo,Film,SkillFile,Key,CameraIcon,Lens,Monitor,
 import {GuideSequence,SkillSequence,ShotStage} from './NarrativeV9';
 import {ComparisonV10,AccessPriceV10,PromptToFileV10,InterfaceCutawayV10,VideoFileV10,BonusPackV10,DirectRouteV10,FeatureGateV10} from './StoryScenesV10';
 import {AccessPriceV11,InstallFinaleV11} from './ScenesV11';
+import {InstallFinaleV12} from './ScenesV12';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 const Desk:React.FC<{x:number;y:number;w:number}>=({x,y,w})=><At x={x} y={y}><svg width={w} height="235"><path d={`M45 40V215M${w-45} 40V215`} stroke="#315F7966" strokeWidth="13"/><path d={`M0 15L45 0H${w-45}L${w} 15V40H0Z`} fill="#FFF8EC" stroke="#FFFFFF" strokeWidth="3"/><path d={`M0 40H${w}`} stroke={C.orange+'77'} strokeWidth="4"/></svg></At>;
@@ -57,4 +58,4 @@ export const CompareV9:React.FC<{duration:number;revealAt:number}>=({revealAt})=
 
 export const GuideV9=GuideSequence;
 export const SkillV9=SkillSequence;
-export const OutroV9=InstallFinaleV11;
+export const OutroV9=InstallFinaleV12;

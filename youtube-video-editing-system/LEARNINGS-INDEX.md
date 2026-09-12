@@ -1,5 +1,7 @@
 # YouTube editing — indexed learning library
 
+Current: [V12 numbered comparison and guided inspection](projects/higgsfield-replacement/REVISION-V12.md), [V12 source/timestamp audit](projects/higgsfield-replacement/revision-v12-audit.json), [V12 Mac handoff + resume prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V12.md). Earlier records below are preserved history. Final render/approval status lives in the revision record.
+
 Latest: [V11 active scenes and complete playback](projects/higgsfield-replacement/REVISION-V11.md), [V11 source/timestamp audit](projects/higgsfield-replacement/revision-v11-audit.json), [confirmed Higgsfield comparison source](projects/higgsfield-replacement/provenance/higgsfield-comparison.json), [Camera-Direction Prompt Pack](resources/camera-direction-prompt-pack.md). V10 remains a preserved baseline. The bonus now has an earlier gift treatment and a real countdown; this does not restore the rejected intro-teaser progress bar.
 
 [Other-Mac editable handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF.md): complete source/Git history and working media, checksum verification, Mac launcher, and resume prompt. Keep raw editable packages private; a playable export alone is not an editing handoff.
@@ -29,7 +31,7 @@ This is the handoff index for the complete September 10–11 system-building and
 | Premium sound principles from supplied article | [SOUND-DESIGN-PRINCIPLES](SOUND-DESIGN-PRINCIPLES.md), [sound/facial audition history](SOUND-AND-FACIAL-REACTIONS.md) |
 | Narration-led visual-first explanations | [VOICEOVER-EXPLAINER-MODE](VOICEOVER-EXPLAINER-MODE.md) |
 | Proof versus illustration, A/B placeholder, cost and setup gaps | [Retention and pickups](projects/higgsfield-replacement/RETENTION-AND-PICKUPS.md) |
-| Current full timeline / chapters | [V11 timeline](projects/higgsfield-replacement/v11-timeline.json), [chapters](projects/higgsfield-replacement/chapters.json), [YouTube timestamps](projects/higgsfield-replacement/youtube-chapters.txt) |
+| Current full timeline / chapters | [V12 timeline](projects/higgsfield-replacement/v12-timeline.json), [chapters](projects/higgsfield-replacement/chapters.json), [YouTube timestamps](projects/higgsfield-replacement/youtube-chapters.txt) |
 | Render, testing, sync and resource-safe export | [REPRODUCE](projects/higgsfield-replacement/REPRODUCE.md), [test-v9](projects/higgsfield-replacement/tools/test-v9.mjs), [validate-v9-export](projects/higgsfield-replacement/tools/validate-v9-export.mjs) |
 | Source music/SFX/result/plate provenance | [Media ledgers](projects/higgsfield-replacement/provenance/), [current manifest](projects/higgsfield-replacement/roughcut.props.json) |
 
