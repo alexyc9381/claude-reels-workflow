@@ -298,7 +298,7 @@ export const SectionHeader: React.FC<{ f?: number; badge: React.ReactNode; l1: R
     <div style={{ position: "absolute", left: 0, right: 0, top: 322, display: "flex", justifyContent: "center", zIndex: 200, opacity: Math.min(1, settle), transform: `translateY(${(1 - settle) * -16}px) scale(${0.9 + settle * 0.1})` }}>
       <div style={{ display: "inline-flex", alignItems: "center", gap: hero ? 18 : 15, padding: hero ? "18px 40px 18px 18px" : "12px 28px 12px 12px", borderRadius: hero ? 32 : 28, background: "linear-gradient(180deg,#FFFFFF,#F4EEE2)", border: hero ? "4px solid #ECE5D6" : "3px solid #ECE5D6", boxShadow: "0 26px 56px -14px rgba(20,26,45,0.55), inset 0 2px 0 rgba(255,255,255,0.95)" }}>
         <div style={{ width: hero ? 124 : 78, height: hero ? 124 : 78, borderRadius: hero ? 28 : 18, background: badgeBg || "linear-gradient(158deg,#E7896A,#C5603C)", border: `3px solid ${badgeBorder || "#F3C7B4"}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: hero ? 56 : 42, boxShadow: "0 8px 18px -6px rgba(197,96,60,0.55), inset 0 2px 0 rgba(255,255,255,0.4)", overflow: "hidden" }}>{badge}</div>
-        <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.0, gap: hero ? 3 : 0 }}>
+        <div style={{ display: "flex", flexDirection: "column", textTransform: "uppercase", lineHeight: 1.0, gap: hero ? 3 : 0 }}>
           <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: size, color: INK, letterSpacing: "-0.015em", whiteSpace: "nowrap" }}>{l1}</span>
           <span style={{ fontFamily: inter.fontFamily, fontWeight: 900, fontSize: size, color: INK, letterSpacing: "-0.015em", whiteSpace: "nowrap" }}>{l2}</span>
         </div>
@@ -313,6 +313,9 @@ export const HookHeader: React.FC<{ big: string; hot: string; f?: number }> = ({
      off the panel — "THE MAN WHO BUILT CLAUDE CODE" (29) was clipped mid-word on
      the very first frame. Scale to the longer of the two lines rather than
      re-checking a character budget by hand every time the wording changes. */
+  // Standing rule: every reel header is ALL CAPS, including reused sentence-case copy.
+  big = big.toUpperCase();
+  hot = hot.toUpperCase();
   const longest = Math.max(big.length, hot.length);
   const size = Math.round(Math.max(38, Math.min(56, 56 * 22 / longest)));
   return (
