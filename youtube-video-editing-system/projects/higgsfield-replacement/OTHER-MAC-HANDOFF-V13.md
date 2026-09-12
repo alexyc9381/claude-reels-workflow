@@ -12,4 +12,6 @@ Double-click `START-EDITING.command`, or run `node restore.mjs` in this folder. 
 
 The complete working OBS master and four 1080p Sony proxies are included, along with privacy/blur plates, logos, sound assets and confirmed comparison clips. Camera-card 4K originals, native dependencies and render caches are not needed or shipped. Raw footage may contain private information: keep the folder private. `reference/higgsfield-replacement-edit-v13.mp4` is the review, not a replacement for editable source.
 
+The original generation skill was located separately at `~/.claude/skills/fal-video` on the source Mac. Its standalone runner and offline tests were inspected; see `verification/fal-backend-v13.json`. That global skill directory and private provider configuration are not part of the editing-media package. Native agent setup and the public download remain separately verified before publication.
+
 See REPRODUCE.md for full chaptered, mixed rendering and executable discovery on a new Mac. Public links, exact downloadable-skill compatibility, comparison claims, licensing and Alex's full creative/listening review remain separate publication checks.

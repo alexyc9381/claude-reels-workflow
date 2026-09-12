@@ -1,6 +1,6 @@
 # V13 — purposeful intro motion and cleaner teaching
 
-September 12, 2026. Existing Remotion composition, not a new editing system. Status: source implemented; targeted proof frames reviewed; full export/encoded verification pending. V12 export and editable package remain preserved.
+September 12, 2026. Existing Remotion composition, not a new editing system. Status: full V13 export complete; source checks, full decode, chapters, loudness and sampled encoded narration sync passed. Targeted encoded picture frames reviewed. V12 export and editable package remain preserved. Alex's final creative/listening approval is still required.
 
 ## Request → implementation
 
@@ -17,7 +17,7 @@ September 12, 2026. Existing Remotion composition, not a new editing system. Sta
 | Seedance 2.5 at ~1:03 | Direct-model selection explicitly highlights and labels **Seedance 2.5** (user-requested wording), rather than another logo. Selection is visible near 1:03. Model names in schematic scenes are not proof of the exact model/version or price used by any A/B result. |
 | Roadmap labels obscured at ~0:25 | Labels move above the three action stations, outside Claude's travel path. Each station contact drives its own rim glow, material response and quiet latch accent; no continuous ding loop. |
 | Center reveal countdown / round choices | One countdown circle at the center seam; circular **1 / 2** badges centered underneath each video. Remove LEFT/RIGHT wording. Preserve correct A/B media, brand identities and right-side winner crown. |
-| Claude Code, Codex, Cursor in intro/end | Reuse repository brand marks in the early workflow, follow-along and ending. Present them as coding-agent workflow destinations, not “all AI models” or a tested universal installer. The actual downloadable generation skill was not found in this checkout; asked Alex for it to verify compatibility. Follow-along explicitly says setup varies by agent. |
+| Claude Code, Codex, Cursor in intro/end | Reuse repository brand marks in the early workflow, follow-along and ending. Found the installed `fal-video` skill in `~/.claude/skills/fal-video`; its standalone standard-library Python runner and offline checks support a shared backend, not a Claude-only implementation. No native installation or paid generation was tested across all three agents. Follow-along explicitly says setup varies by agent; no “all AI models” promise. |
 
 ## Timing and sources
 
@@ -27,10 +27,21 @@ September 12, 2026. Existing Remotion composition, not a new editing system. Sta
 - Cursor timing was grounded in encoded V12 imagery: frames remain stationary through ~368.8s and move strongly at 368.9s. No pause is falsely labeled as generation time.
 - Existing `video/public/logos_official/{codex,cursor}.svg` copied unchanged into working `public/v3`. Media package includes them; source originals remain in Git. No newly generated/redrawn logos or downloaded voice recording.
 - New sound cues reuse the existing ledgered sound library at restrained gains. Roadmap hit times are included in the audio-cache contract. One continuous soundtrack is encoded at final mux, never per picture chunk.
+- Local skill inspection is recorded in [backend verification](verification/fal-backend-v13.json). Ran only `falrun.py --help` and offline `selftest.py`; all 13 pricing fixtures, routing and local rate-table checks passed. No account keys/config/ledger were printed, no funded API job was submitted, and the installed skill was not modified. This does not verify current provider prices, a universal importer, or every AI model.
 
 ## Verification
 
-`tools/test-v13.mjs` checks unchanged V12 manifest/camera clocks, complete playback/end word, privacy, OBS-only audio, muted comparisons, single credential surface, stable format text, number badges/countdown, free CTA and TS/TSX parsing. Targeted proof frames cover all changed windows. Full export, encoded audio joins, loudness/decode, source-to-AAC sync and final encoded visual checks must pass before delivery. No claim of exhaustive human listening or creative approval.
+The full render encountered ENOSPC after completing its first 90-second picture chunk and continuous mix. Those verified outputs were preserved. Eleven inactive temporary JPEG directories from prior renders of this same project were visually/structurally checked, confirmed unused, and removed (roughly 1.3 GB total; regenerable, not source footage or deliveries). Rendering resumed with 300-frame temporary batches, unchanged source fingerprint and full-resolution settings.
+
+`tools/test-v13.mjs` passed: unchanged V12 manifest/camera clocks, complete playback/end word, privacy, OBS-only audio, muted comparisons, single credential surface, stable format text, number badges/countdown, free CTA, actual sound-cue schedule and TS/TSX parsing. This is not a TypeScript typecheck.
+
+Full export: `outputs/higgsfield-replacement-edit-v13.mp4`, **160,987,856 bytes**, **13,713 frames / 457.10 seconds**, **1920×1080 / 30 fps**, six verified chapters. Every picture chunk matches the current V13 source; no V12 picture chunks were substituted. All picture/audio frames decoded without error. Finished stereo 48 kHz AAC measured **−16.56 LUFS**, **−1.24 dBTP**, **5.1 LU LRA**. All 15 sampled OBS-to-AAC comparisons passed, with maximum absolute measured lag **0.3125 ms**. Four short-window ASR checks contain no `cut` retake candidates; transcription is machine evidence, not full human listening approval.
+
+- MP4 SHA-256: `afba7815726a4d751dd98512b62e45b5ff5a54500e24f4759206b5abed30dfc9`
+- Source fingerprint: `c4e4dbb9d8af94d37236539b2b4262acb1c0283052f1b9b73adc396bd7172598`
+- Reports: [export](verification/export-v13.json), [audio sync](verification/audio-sync-v13.json), [joins](verification/joins-v13.json), [sampled encoded visuals](verification/visual-v13.json).
+
+Encoded visual samples checked the continuous hook timer, circular identities, unobscured roadmap, copy/paste/free setup sequence, Seedance selection, gate opening, single protected credential surface, fixed-position format text, cursor-to-playback event, preserved landing/detail lens, centered reveal/correct winner and ending through the final frame. Sampled frame inspection and numerical checks do not establish exhaustive human listening, universal agent compatibility, or audience-retention improvement.
 
 ## Learnings to retain
 

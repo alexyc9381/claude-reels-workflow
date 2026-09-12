@@ -1,0 +1,24 @@
+{
+  "revision": "V13",
+  "sourceHash": "c4e4dbb9d8af94d37236539b2b4262acb1c0283052f1b9b73adc396bd7172598",
+  "mp4Sha256": "afba7815726a4d751dd98512b62e45b5ff5a54500e24f4759206b5abed30dfc9",
+  "method": "Inspected sampled frames extracted from completed V13 H.264 picture parts. Final MP4 stream-copies those verified current-source chunks. Proof stills and source timing checks supplement encoded samples.",
+  "checks": [
+    {"seconds": [0, 0.4, 1, 3, 5, 7.3], "result": "Large actual A/B footage, round identities, continuous facecam perimeter timer completing before the next scene."},
+    {"seconds": [12, 14, 21], "result": "Illustrated model cabinets and prompt-to-result states progress; crossing receipt caption removed; coding-agent marks visible."},
+    {"seconds": [24.1, 25.3, 26.7], "result": "Roadmap labels sit above Claude's action path; distinct contact states at connect/create/compare stations."},
+    {"seconds": [29, 32, 34, 35.5], "result": "Playing teaser retained; free follow-along instructions copy, travel and appear in agent prompt; setup-variation qualifier visible."},
+    {"seconds": [63.5, 73.2, 74.5, 77], "result": "Seedance 2.5 label and selection unobscured; grounded Claude operates linked opening gate; settings revealed."},
+    {"seconds": [125, 129, 151.5, 155, 159, 160.8, 165, 168], "result": "Checklist ends before credential illustration; one create/copy/private-storage teaching surface; real credentials stay hidden."},
+    {"seconds": [193, 198, 224, 227], "result": "Prompt lens and camera-direction tip retained without covering the active typing field."},
+    {"seconds": [243.5, 244, 245, 246, 248], "result": "Format heading and labels have fixed positions while framing example changes; competing whole-screen zoom removed."},
+    {"seconds": [291, 293, 295, 321, 325, 329], "result": "Small result countdown retained; camera-direction callout is an illustration, not a mismatched video insert; real result footage remains dominant."},
+    {"seconds": [366, 367, 368.7, 368.9, 369.5, 371, 375, 379], "result": "Cursor arrives, presses play immediately before movement, clears; full generated jump and landing precede commentary."},
+    {"seconds": [384, 386, 389], "result": "Hair inset corresponds to underlying result frame and clears after explanation."},
+    {"seconds": [434.5, 435.5, 436.5, 437.3, 439, 441.3], "result": "Central 3/2/1 reveal circle; circular 1/2 identities beneath each video; no LEFT/RIGHT labels; brands and right-side winner crown correct."},
+    {"seconds": [449, 450.5, 452, 455, 457.06], "result": "FREE setup in description headline, coding-agent marks, installed-workflow state and visual FREE BONUS remain visible through ending."}
+  ],
+  "fullFrameByFrameHumanReview": false,
+  "fullHumanListeningReview": false,
+  "creativeApproval": "Pending Alex's review"
+}

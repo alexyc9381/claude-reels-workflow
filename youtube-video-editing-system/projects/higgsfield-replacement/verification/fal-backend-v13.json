@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-12",
+  "sourceDirectory": "~/.claude/skills/fal-video",
+  "hashes": {
+    "SKILL.md": "dbc135d7c773380a2f45b1b632b6f5e9c430a2d26ec6cc3ca21ac8b09037f7fd",
+    "scripts/falrun.py": "c019bff7dc1034328b8a0359671275b4ffe1ae38bc7e29f33983f5575c9b9e33",
+    "scripts/selftest.py": "2fbf451fc2bd90d0ed9c457974cfa01b7c3e578c4392a7fe7e33517d92452d07"
+  },
+  "runner": "Python 3.8+, standard library; local CLI with provider API calls, not an agent-specific SDK",
+  "checks": {"helpExitCode": 0, "offlineSelftestExitCode": 0, "pricingFixturesPassed": 13, "routingPassed": true, "localByteplusTableCheckPassed": true},
+  "notPerformed": ["paid generation", "live provider-pricing verification", "native installation across Claude Code/Codex/Cursor", "all-model support validation"],
+  "secretValuesReadOrPrinted": false,
+  "installedSkillModified": false,
+  "claimBoundary": "Shared CLI backend supports coding-agent destinations with suitable tool access and per-agent setup; not proof of a universal installer or every model's compatibility"
+}

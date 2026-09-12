@@ -14,6 +14,12 @@ for(const r of rows){const b=before.find(b=>b.id===r.id);assert.ok(r.duration>0)
 assert.equal(get('s035').end,1897.94);assert.equal(get('s036').end,2002.96);assert.equal(get('s037').start,2017.2);assert.equal(get('r-veo-playthrough').end,1870.82);assert.equal(get('s045').end,2459.03);
 for(const id of ['s016','s017'])assert.equal(get(id).screenRedaction,'credentials');
 const polish=read('YouTubeV9.tsx'),cues=evaluate(polish.slice(polish.indexOf('export const v9Cues:'),polish.indexOf('export const chapterTitles'))).v9Cues;
+const fullScenes=evaluate(polish.slice(polish.indexOf('export const fullScenes='),polish.indexOf('const Definition:')),{roughTimeline:timing.roughTimeline}).fullScenes;
+const beats=read('ScenesV13.tsx').match(/export const roadmapBeatsV13=\[([^\]]+)\]/)[1].split(',').map(Number);
+const soundEvents=evaluate(polish.slice(polish.indexOf('export const soundEvents='),polish.indexOf('export const YouTubeSound:')),{roughTimeline:timing.roughTimeline,roughChapters:timing.roughChapters,fullScenes,v9Cues:cues,roadmapBeatsV13:beats}).soundEvents(m);
+for(const hit of soundEvents){assert.ok(hit.at>=0&&hit.at<13713);assert.ok(hit.gain>0&&hit.gain<=.16);assert.ok(hit.duration>0);assert.ok(existsSync(path.join(base,'work/higgsfield-replacement/public/v4',hit.name+'.wav')));}
+for(const phase of beats)assert.ok(soundEvents.some(hit=>hit.at===Math.round((get('s006').from/30+phase*get('s006').duration/30)*30)&&hit.name==='latch'));
+assert.ok(soundEvents.some(hit=>hit.at===Math.round((get('s033').from/30+12.93)*30)&&hit.name==='click'));
 for(const c of cues)assert.ok(get(c.id).duration>c.offset*m.fps);
 assert.ok(cues.some(c=>c.id==='s033'&&c.title==='Generated with Veo'));
 assert.ok(cues.some(c=>c.id==='s034'&&c.feature==='hair'));assert.ok(cues.some(c=>c.id==='s035'&&c.feature==='fabric'));
