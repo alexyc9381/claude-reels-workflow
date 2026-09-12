@@ -1,3 +1,7 @@
+# Status: this first retention revision was rejected
+
+Alex found the 41s-to-end run still boring. See [the full ending rebuild and corrected rules](alex-scope-ending-rebuild.md). The following is the earlier diagnostic record, not evidence of an approved or successful edit.
+
 # SCOPE: 39s and 55s retention revision
 
 ## Evidence and limits

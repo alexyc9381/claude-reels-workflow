@@ -1543,3 +1543,7 @@ the remaining Desktop/CTA sequence for the same arrival-and-hold defect. Preserv
 retime contact sounds. Passing technical gates is neither creative approval nor recovered
 retention. Hook-only trials may intentionally share the body; compare their events, not just
 whole-video hash distance.
+
+## 32. SCOPE correction: a timestamp can identify the start of an entire rejected run
+
+The first SCOPE retention pass was rejected despite passing minimum per-scene checks. When feedback says “starting from 41 seconds,” audit and revise every scene from that point through the next payoff or ending. Enumerate actual replacements. A nearby demonstration or improved outro does not repair an untouched tutorial block. For “cut immediately after SCOPE,” derive the endpoint from the original VO waveform and the output frame boundary. See [the superseding teardown](../memory/alex-scope-ending-rebuild.md).

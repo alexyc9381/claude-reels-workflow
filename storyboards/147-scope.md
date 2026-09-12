@@ -1,7 +1,7 @@
 # 147 · SCOPE · StoryScope
 
 **Logline:** Claude uncovers the shape behind AI fiction, then turns the paper into a reusable editorial skill.
-**Format:** 1080×1920 / 30 fps / 57.00s. Original narration edited for retakes, x1.03 once. Original SlopKit chassis and Mascot, Remotion only.
+**Format:** 1080×1920 / 30 fps / 56.833s for ending rebuild v3. Original narration edited for retakes, x1.03 once. Original SlopKit chassis and Mascot, Remotion only.
 **Arc:** unexpected visual evidence → research credibility → structural failure → three distinct model habits → practical skill → comment SCOPE.
 **Villain rule:** over-neat, over-explained fiction, represented by a rigid illuminated rail. It collapses tension and seals every branch.
 **Cast:** house Claude, author photographs (Jenna Russell, Rishanth Rajendhran, Mohit Iyyer), model logos. No invented team photograph.
@@ -85,3 +85,8 @@ TAKEAWAY: comment SCOPE for the actual paper plus reusable skill.
 The preceding dark-settings shot receives a modest approach toward its gravitational subject so the transition into the research demonstration retains momentum. Earlier hook changes and narration timing remain intact.
 
 Review: first preview exposed header/keyword overlaps; corrected before full-size review. Second review found insufficient meaningful activity during the rewrite, so a visible removal gesture and consequence-driven handoff were added. See SCOPE-retention-learnings.md and the final review report for evidence, limitations, and delivery checks.
+
+
+## Superseding ending rebuild v3
+
+The prior retention pass was rejected. All scenes from 41s through the end are replaced; see [the full action map and learnings](../memory/alex-scope-ending-rebuild.md). The previous timeline tables are historical for the earlier cuts. V3 ends at frame 1705 exclusive (56.833s), immediately after the last audible consonant of SCOPE, with no added end hold.
