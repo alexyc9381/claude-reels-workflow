@@ -21,7 +21,7 @@ export const ComparisonV10:React.FC<{revealAt?:number;opening?:boolean}>=({revea
    <Loop durationInFrames={120}><OffthreadVideo data-comparison-side={i?'B':'A'} src={staticFile(i?'v4/claude-result.mp4':'v9/higgsfield-comparison.mp4')} muted style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:`${i?50:aPosition}% 50%`}}/></Loop>
    {opening&&<svg width="916" height="1016" style={{position:'absolute',inset:0,pointerEvents:'none',opacity:1-easeOut(t,4,.2)}}><rect x="4" y="4" width="908" height="1008" rx="16" fill="none" stroke={C.clay} strokeWidth="5" pathLength="1" strokeDasharray="1" strokeDashoffset={1-clamp(t/4)}/></svg>}
   </div>)}
-  {[0,1].map(i=><div data-choice-number={i+1} key={i} style={{position:'absolute',left:opening?446+i*940:437+i*958,top:opening?924:789,width:88,height:88,borderRadius:'50%',display:'grid',placeItems:'center',background:'#FFF9EF',border:'3px solid '+C.orange,boxShadow:'0 8px 20px #50331C20',fontSize:49,fontWeight:850,color:C.ink}}>{i+1}</div>)}
+  {[0,1].map(i=><div data-choice-number={i+1} key={i} style={{position:'absolute',left:opening?408+i*940:437+i*958,top:opening?852:789,width:opening?164:88,height:opening?164:88,borderRadius:'50%',display:'grid',placeItems:'center',background:'#FFF9EF',border:(opening?'5px':'3px')+' solid '+C.orange,boxShadow:'0 8px 20px #50331C20',fontSize:opening?104:49,fontWeight:850,color:C.ink}}>{i+1}</div>)}
   {!opening&&[0,1].map(i=><At key={i} x={i?1280:304} y={900} style={{opacity:reveal,transform:`translateY(${18*(1-reveal)}px)`}}><Logo name={i?'claude.png':'higgsfield.jpg'} size={77}/><Label x={98} y={18} size={40}>{i?'Claude':'Higgsfield'}</Label></At>)}
   {!opening&&t>=revealAt+3.6&&<WinnerCrownV12 t={t-revealAt-3.6}/>}
  </AbsoluteFill>;

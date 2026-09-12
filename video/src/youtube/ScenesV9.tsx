@@ -9,22 +9,23 @@ import {InstallFinaleV12} from './ScenesV12';
 import {FeatureGateV13,FollowAlongV13,RoadmapV13} from './ScenesV13';
 import {CostV15,ProductionV15,RoadmapV15,GuideV15,WrapperV15} from './ScenesV15';
 import {CostV16,ProductionV16,RoadmapV16} from './ScenesV16';
+import {WrapperV17,DirectRouteV17,FeatureGateV17} from './ScenesV17';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 const Desk:React.FC<{x:number;y:number;w:number}>=({x,y,w})=><At x={x} y={y}><svg width={w} height="235"><path d={`M45 40V215M${w-45} 40V215`} stroke="#315F7966" strokeWidth="13"/><path d={`M0 15L45 0H${w-45}L${w} 15V40H0Z`} fill="#FFF8EC" stroke="#FFFFFF" strokeWidth="3"/><path d={`M0 40H${w}`} stroke={C.orange+'77'} strokeWidth="4"/></svg></At>;
 
 export const HookV9:React.FC<{duration:number;guessAt:number;whyAt:number;higgsAt:number}>=({duration,whyAt,higgsAt})=>{
- const t=clock();return t>=whyAt?<Sequence from={Math.round(whyAt*30)}><CostV16 duration={duration-whyAt} brandAt={higgsAt-whyAt}/></Sequence>:<ComparisonV10 opening/>;
+ const t=clock();return t>=whyAt?<Sequence from={Math.round(whyAt*30)}><CostV16 duration={duration-whyAt} brandAt={higgsAt-whyAt} bold/></Sequence>:<ComparisonV10 opening/>;
 };
 
-export const ProductionV9=ProductionV16;
-export const WrapperV9=WrapperV15;
+export const ProductionV9:React.FC<{duration:number}>=({duration})=><ProductionV16 duration={duration} brisk/>;
+export const WrapperV9=WrapperV17;
 
 export const DirectV9:React.FC<{duration:number;featuresAt:number}>=({duration,featuresAt})=>{
  const t=clock();return t<featuresAt?<ModelRoom duration={featuresAt}/>:<Sequence from={Math.round(featuresAt*30)}><FeatureVault duration={duration-featuresAt}/></Sequence>;
 };
-const ModelRoom=DirectRouteV10;
-const FeatureVault=FeatureGateV13;
+const ModelRoom=DirectRouteV17;
+const FeatureVault=FeatureGateV17;
 
 export const DownloadV9:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),u=t*5/duration,release=e(u,.35,.8),fall=e(u,1.15,.75),take=e(u,2.2,1.25);

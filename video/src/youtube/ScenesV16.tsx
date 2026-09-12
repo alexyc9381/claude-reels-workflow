@@ -20,13 +20,13 @@ const Contact:React.FC<{t:number;at:number;x:number;y:number;color?:string;size?
 
 /** Physical billing strip and one large Claude operator. Essential price
  * units stay adjacent; long footer qualifications are deliberately removed. */
-export const CostV16:React.FC<{duration:number;brandAt:number}>=({duration,brandAt})=>{
- const t=clock(),u=t/duration,arrive=easeOut(t,.1,.45),send=e(u,.43,.22),release=e(u,.7,.16);
- const turns=[.34,.46,.58].map(v=>v*duration);
+export const CostV16:React.FC<{duration:number;brandAt:number;bold?:boolean}>=({duration,brandAt,bold=false})=>{
+ const t=clock(),u=t/duration,arrive=easeOut(t,.1,bold?.24:.45),send=e(u,bold?.14:.43,bold?.12:.22),release=e(u,bold?.32:.7,bold?.08:.16);
+ const turns=(bold?[.08,.24,.4,.56,.72,.88]:[.34,.46,.58]).map(v=>v*duration);
  const feed=turns.reduce((n,at)=>n+e(t,at,.32),0),r=turns.reduce((n,at)=>n+response(t,at),0);
  return <Stage t={t}>
-  <At x={160} y={122} style={{opacity:easeOut(t,brandAt,.12)}}><Logo name="higgsfield.jpg" size={108}/><Label x={134} y={27} size={51}>Higgsfield</Label></At>
-  <At x={1030} y={122}><Logo name="claude.png" size={108}/><Label x={133} y={27} size={51}>Claude skill</Label></At>
+  <At x={bold?224:160} y={bold?109:122} style={{opacity:bold?1:easeOut(t,brandAt,.12)}}><Logo name="higgsfield.jpg" size={bold?154:108}/><Label x={bold?178:134} y={bold?40:27} size={bold?62:51}>Higgsfield</Label></At>
+  <At x={1030} y={bold?109:122}><Logo name="claude.png" size={bold?142:108}/><Label x={bold?169:133} y={bold?42:27} size={bold?58:51}>Claude skill</Label></At>
   <At x={143-(1-arrive)*150} y={304} style={{transform:`perspective(1400px) rotateY(${8*(1-arrive)}deg)`}}>
    <svg width="655" height="540" viewBox="0 0 655 540">
     <defs><linearGradient id="v16-bill-metal" x2="0" y2="1"><stop stopColor="#F4F3D9"/><stop offset=".45" stopColor="#C3D46F"/><stop offset="1" stopColor="#9AAD4D"/></linearGradient></defs>
@@ -44,10 +44,11 @@ export const CostV16:React.FC<{duration:number;brandAt:number}>=({duration,brand
    </div>
   </At>
   <At x={1035} y={250} style={{transform:`translateY(${36*(1-arrive)}px)`,opacity:arrive}}><div style={{fontSize:170,lineHeight:1,fontWeight:800,letterSpacing:-8,color:C.teal}}>~10¢</div><div style={{fontSize:42,fontWeight:750,marginTop:17}}>/ generation</div><div style={{fontSize:28,color:'#5D7068',marginTop:10}}>Estimate · varies by model</div></At>
-  <Actor t={t} x={917+send*55} y={540} size={350} role="operator" walk={Math.sin(send*Math.PI)*.75} reach={send} lift={.75} look={1} contact={duration*.65} happy={release>.9}/>
-  <At x={1440+send*20} y={490-75*Math.sin(send*Math.PI)} style={{transform:`rotate(${-13+send*18}deg) scale(${1-release*.12})`,opacity:1-e(u,.64,.06)}}><SkillFile t={t} size={170}/></At>
-  <At x={1366} y={554} style={{opacity:release,transform:`scale(${.8+.2*release})`}}><Logo name="fal.png" size={146}/></At>
-  <Contact t={t} at={duration*.65} x={1400} y={618} size={270} color={C.teal}/>
+  <Actor t={t} x={917+send*55} y={540} size={350} role="operator" walk={Math.sin(send*Math.PI)*.75} reach={send} lift={.75} look={1} contact={duration*(bold?.3:.65)} happy={release>.9}/>
+  <At x={1440+send*20} y={490-75*Math.sin(send*Math.PI)} style={{transform:`rotate(${-13+send*18}deg) scale(${1-release*.12})`,opacity:1-e(u,bold?.28:.64,bold?.04:.06)}}><SkillFile t={t} size={170}/></At>
+  <At x={1366} y={554} style={{opacity:release*(bold?1-e(u,.46,.02):1),transform:`scale(${.8+.2*release})`}}><Logo name="fal.png" size={146}/></At>
+  <Contact t={t} at={duration*(bold?.3:.65)} x={1400} y={618} size={270} color={C.teal}/>
+  {bold&&<At x={1274} y={555} style={{opacity:e(u,.48,.04),transform:`translateX(${50*(1-e(u,.48,.06))}px)`}}><div style={{position:'relative',width:413,height:180,overflow:'hidden',borderRadius:24,border:'4px solid #FFF8EC',boxShadow:'0 17px 27px #40281B25'}}><Loop durationInFrames={120}><OffthreadVideo src={staticFile('v4/claude-result.mp4')} muted style={{width:'100%',height:'100%',objectFit:'cover'}}/></Loop></div></At>}
  </Stage>;
 };
 
@@ -71,19 +72,19 @@ const Output:React.FC<{start?:number;w:number;h:number}>=({start=1530,w,h})=><di
 
 /** Skill enters the original Claude rig's working bay; the model selection
  * answers that contact, then the result takes over the entire useful stage. */
-export const ProductionV16:React.FC<{duration:number}>=({duration})=>{
- const t=clock(),u=t/duration,carry=e(u,.02,.16),insert=e(u,.18,.16),model=e(u,.34,.14),reveal=e(u,.50,.055),save=e(u,.82,.12),gone=e(u,.475,.06);
- const contact=duration*.34;
+export const ProductionV16:React.FC<{duration:number;brisk?:boolean}>=({duration,brisk=false})=>{
+ const t=clock(),u=t/duration,carry=e(u,.02,brisk?.08:.16),insert=e(u,brisk?.10:.18,brisk?.09:.16),model=e(u,brisk?.22:.34,brisk?.07:.14),reveal=e(u,.50,brisk?.03:.055),save=e(u,.82,brisk?.06:.12),gone=e(u,.475,brisk?.03:.06);
+ const contact=duration*(brisk?.19:.34);
  return <Stage t={t}>
   <div style={{position:'absolute',inset:0,opacity:1-gone,transform:`translateX(${-160*gone}px)`}}>
-   <At x={180+carry*235+insert*300} y={271-Math.sin(carry*Math.PI)*65-insert*128} style={{transform:`rotate(${-9+carry*9+insert*90}deg) scale(${1-insert*.68})`,opacity:1-e(u,.332,.008)}}><SkillFile t={t} size={320}/></At>
+   <At x={180+carry*235+insert*300} y={271-Math.sin(carry*Math.PI)*65-insert*128} style={{transform:`rotate(${-9+carry*9+insert*90}deg) scale(${1-insert*.68})`,opacity:1-e(u,brisk?.19:.332,.008)}}><SkillFile t={t} size={320}/></At>
    <Actor t={t} x={100+carry*260} y={565} size={356} role="operator" walk={Math.sin(carry*Math.PI)} reach={insert} lift={.86} look={1} contact={contact}/>
    <At x={750} y={146} style={{transform:`translateY(${-12*response(t,contact)}px)`}}>
     <Glass x={0} y={0} w={960} h={490} t={t} frost={.45}>
      <At x={43} y={33}><Logo name="claude.png" size={105}/><Label x={134} y={19} size={58}>Claude</Label></At>
      <div style={{position:'absolute',left:48,top:206,width:856,height:30,borderRadius:20,background:'#66452F',boxShadow:'inset 0 5px 9px #281B1477',transform:`scaleY(${1+response(t,contact)*.2})`}}/>
      <div style={{position:'absolute',left:69,top:268,width:230,height:119,borderRadius:22,background:'#F4D5AA',boxShadow:'inset 0 2px 3px #FFF'}}><Label x={19} y={32} size={34}>/fal-video</Label></div>
-     {['seedance.png','google.png','hailuo.png'].map((logo,i)=><At key={logo} x={357+i*182} y={274} style={{transform:`translateY(${-22*impact(t,contact+.10+i*.12)}px) scale(${1+.12*impact(t,contact+.10+i*.12)})`,opacity:.32+.68*e(u,.34+i*.035,.035)}}><Logo name={logo} size={120}/></At>)}
+     {['seedance.png','google.png','hailuo.png'].map((logo,i)=><At key={logo} x={357+i*182} y={274} style={{transform:`translateY(${-22*impact(t,contact+.10+i*.12)}px) scale(${1+.12*impact(t,contact+.10+i*.12)})`,opacity:.32+.68*e(u,(brisk?.19:.34)+i*.035,.035)}}><Logo name={logo} size={120}/></At>)}
     </Glass>
    </At>
    <Contact t={t} at={contact} x={1140} y={384} size={530}/>

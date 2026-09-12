@@ -28,8 +28,8 @@ const sourceHash=digest.digest('hex'),renderDir=path.join(work,'chunks-'+sourceH
 assert.equal(readFileSync(path.join(renderDir,'audio-contract.txt'),'utf8').trim(),audioContract(base),'Soundtrack receipt must match the current source EDL and cue schedule');
 assert.equal(readFileSync(path.join(renderDir,'dialogue-design-mix.wav.complete'),'utf8').trim(),sourceHash);
 const equivalentChunks=[];
-if(['v14','v15','v16'].includes(revision))execFileSync(process.execPath,[path.join(project,`tools/prepare-${revision}-cache.mjs`),'--check-only'],{stdio:'ignore'});
-for(let from=0;from<frames;from+=2700){const to=Math.min(from+2699,frames-1),receipt=JSON.parse(readFileSync(path.join(renderDir,`picture-${from}-${to}.mp4.complete`)));assert.equal(receipt.hash,sourceHash);assert.equal(receipt.from,from);assert.equal(receipt.to,to);if(receipt.inheritedFrom){const proof=JSON.parse(readFileSync(path.join(work,['v14','v15','v16'].includes(revision)?`revision-${revision}/cache-proof.json`:'revision-v10/cache-proof.json')));assert.equal(proof.sourceHash,sourceHash);assert.equal(proof.priorSourceHash,receipt.inheritedFrom);assert.equal(proof.otherInputsIdentical,true);assert.ok(!proof.affected.some(r=>r.from<=to&&r.to>=from));equivalentChunks.push({from,to,priorSourceHash:receipt.inheritedFrom});}}
+if(['v14','v15','v16','v17'].includes(revision))execFileSync(process.execPath,[path.join(project,`tools/prepare-${revision}-cache.mjs`),'--check-only'],{stdio:'ignore'});
+for(let from=0;from<frames;from+=2700){const to=Math.min(from+2699,frames-1),receipt=JSON.parse(readFileSync(path.join(renderDir,`picture-${from}-${to}.mp4.complete`)));assert.equal(receipt.hash,sourceHash);assert.equal(receipt.from,from);assert.equal(receipt.to,to);if(receipt.inheritedFrom){const proof=JSON.parse(readFileSync(path.join(work,['v14','v15','v16','v17'].includes(revision)?`revision-${revision}/cache-proof.json`:'revision-v10/cache-proof.json')));assert.equal(proof.sourceHash,sourceHash);assert.equal(proof.priorSourceHash,receipt.inheritedFrom);assert.equal(proof.otherInputsIdentical,true);assert.ok(!proof.affected.some(r=>r.from<=to&&r.to>=from));equivalentChunks.push({from,to,priorSourceHash:receipt.inheritedFrom});}}
 console.log('Metadata passed; decoding all picture and audio frames.');
 execFileSync(ff,['-v','error','-xerror','-i',output,'-map','0:v:0','-map','0:a:0','-f','null','-'],{stdio:'inherit'});
 console.log('Decode passed; measuring finished AAC loudness.');
@@ -44,7 +44,16 @@ const priorAudio=path.join(base,'outputs/higgsfield-replacement-edit-v9.mp4');
 result.audioMatchesV9Packets=existsSync(priorAudio)?result.audioPacketHash===audioHash(priorAudio):null;
 if(existsSync(priorAudio))assert.equal(result.audioMatchesV9Packets,false,'V12 must contain repaired narration and new source-anchored sound design');
 result.currentAudioContractVerified=true;
-if(revision==='v16'){
+if(revision==='v17'){
+ assert.ok([0,5].includes(equivalentChunks.length),'V17 permits fresh render or proven-unaffected tail');
+ const priorV16=path.join(base,'outputs/higgsfield-replacement-edit-v16.mp4');
+ result.audioMatchesV16Packets=null;result.unchangedPictureAfter90Seconds=null;
+ if(existsSync(priorV16)){
+  result.audioMatchesV16Packets=result.audioPacketHash===audioHash(priorV16);assert.equal(result.audioMatchesV16Packets,true);
+  const tailHash=file=>execFileSync(ff,['-v','error','-i',file,'-map','0:v:0','-vf','select=gte(n\\,2700)','-vsync','0','-f','hash','-hash','sha256','-'],{encoding:'utf8'}).trim();
+  result.unchangedPictureAfter90Seconds=tailHash(output)===tailHash(priorV16);assert.equal(result.unchangedPictureAfter90Seconds,true);
+ }
+}else if(revision==='v16'){
  assert.ok([0,5].includes(equivalentChunks.length),'V16 permits fresh render or proven-unaffected tail');
  const priorV15=path.join(base,'outputs/higgsfield-replacement-edit-v15.mp4');
  result.audioMatchesV15Packets=null;result.unchangedPictureAfter40Seconds=null;

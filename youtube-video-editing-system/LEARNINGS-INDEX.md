@@ -1,6 +1,8 @@
 # YouTube editing — indexed learning library
 
-Latest: [V16 large uncluttered actions and reactive roadmap](projects/higgsfield-replacement/REVISION-V16.md), [V16 Mac handoff + next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V16.md). This supersedes V15's price/production/roadmap design; later picture/audio remains V15. Thumbnail received; title still pending.
+Latest: [V17 small-preview identities and purposeful early explainers](projects/higgsfield-replacement/REVISION-V17.md), [V17 Mac handoff + next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V17.md). Large opening numbers, persistent Higgsfield cost identity, brisk workflow, usage bottleneck, Claude's subscription X and premium vault. Source EDL/audio and later tutorial stay unchanged. Thumbnail received; title still pending.
+
+Preserved: [V16 large uncluttered actions and reactive roadmap](projects/higgsfield-replacement/REVISION-V16.md), [V16 Mac handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V16.md). The full-screen roadmap stays current; V17 refines cost/workflow pacing and replaces the later early explainers.
 
 Previous: [V15 visual-first intro and real workflow proof](projects/higgsfield-replacement/REVISION-V15.md), [visual-first / title-thumbnail continuity rules](VISUAL-FIRST-EXPLAINERS.md), [unchanged source timeline](projects/higgsfield-replacement/v13-timeline.json), [V15 Mac handoff + resume prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V15.md). [V14](projects/higgsfield-replacement/REVISION-V14.md), [V13](projects/higgsfield-replacement/REVISION-V13.md) and earlier records are preserved history. Final render/approval status lives in the revision record.
 

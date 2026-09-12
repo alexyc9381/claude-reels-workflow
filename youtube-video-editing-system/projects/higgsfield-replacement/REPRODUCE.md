@@ -1,4 +1,8 @@
-# Reproduce Higgsfield Replacement V16
+# Reproduce Higgsfield Replacement V17
+
+V17 is current. Use `tools/test-v17.mjs`, `REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v17.mp4` with the existing `render-low-storage.mjs`, and `REVIEW_REVISION=v17` with `validate-v12-export.mjs`. [V17 request map and exact commands](REVISION-V17.md). Optional `prepare-v17-cache.mjs` proves only the first90seconds need fresh rendering on the original workstation. New Mac: render fresh. Narration/EDL/audio are unchanged from V16. Validation checks full decode, duration/chapters, current-source receipts, audio identity against V16 and decoded picture identity after90seconds when the prior export exists.
+
+## Historical V16
 
 V16 is current. See [REVISION-V16.md](REVISION-V16.md) for the three intro scene replacements, optional proven-cache optimization and limits. From the task/handoff root, run `tools/test-v16.mjs` using the full project path below; render with `REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v16.mp4`; validate with `REVIEW_REVISION=v16`. Use the same `render-low-storage.mjs` and `validate-v12-export.mjs` entry points. On the original workstation `prepare-v16-cache.mjs` reuses proven-unaffected V15 picture/audio; on a new Mac skip that optimization and render fresh. Historical comparison checks explicitly report null when the prior export is unavailable. V16 tests require the bundled Git baseline and working assets, but not prior picture caches when using check-only mode.
 

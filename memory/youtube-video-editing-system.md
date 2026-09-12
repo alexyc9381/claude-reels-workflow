@@ -1,6 +1,8 @@
 # No Code Alex YouTube editing system
 
-Current: [V16](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V16.md). Long Recorded examples price footer and blurry early command crop are rejected. Bigger original actor/prop actions; full-screen three-stop roadmap with contact-linked key/camera/comparison responses and existing quiet sounds. Only 7.333–27s picture changes; later V15 and all audio remain. Thumbnail now received (`/REPLACE`, 10¢, Claude over Higgsfield), exact title pending. [V16 Mac handoff](../youtube-video-editing-system/projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V16.md).
+Current: [V17](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V17.md). Opening-only 164px badges / 104px numerals; persistent larger Higgsfield in the cost scene; brisk skill action; narration-matched usage bottleneck, Claude drawing a subscription X, and premium-access vault at47–79s. Keep large connected mechanisms, not unrelated ornament. Entire source EDL/audio and later tutorial preserved. [V17 Mac handoff](../youtube-video-editing-system/projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V17.md).
+
+Preserved [V16](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V16.md): reject the long Recorded examples footer and blurry early command crop. Full-screen roadmap with contact-linked key/camera/comparison responses and existing quiet sounds. Thumbnail received (`/REPLACE`, 10¢, Claude over Higgsfield); exact title pending.
 
 Previous: [V15](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V15.md) introduced first-minute price/production/roadmap/guide/wrapper graphics; the first three are superseded by V16. [Visual-first and title/thumbnail rules](../youtube-video-editing-system/VISUAL-FIRST-EXPLAINERS.md). Exact title was not supplied; the subsequently received thumbnail is recorded above.
 

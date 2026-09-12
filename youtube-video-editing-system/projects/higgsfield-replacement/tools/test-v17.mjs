@@ -1,0 +1,18 @@
+import './test-v13.mjs';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const proof=JSON.parse(execFileSync(process.execPath,[path.join(project,'tools/prepare-v17-cache.mjs'),'--check-only'],{encoding:'utf8',maxBuffer:5e6}));
+assert.deepEqual(proof.affected,[{from:0,to:709},{from:1415,to:2370}]);
+const read=n=>readFileSync(path.join(repo,'video/src/youtube',n),'utf8'),source=read('ScenesV17.tsx');
+for(const name of ['WrapperV17','DirectRouteV17','FeatureGateV17'])assert.ok(source.includes('export const '+name));
+assert.doesNotMatch(source,/Math\.random|Date\.now|setTimeout|<Audio/);
+assert.match(source,/tip\.x/);assert.match(source,/strokeDashoffset=\{1-a\}/);assert.match(source,/strokeDashoffset=\{1-b\}/);
+assert.match(source,/gap=lerp\(356,77,narrow\)\+pressure\*27/);assert.match(source,/pressure\*19/);
+assert.match(source,/Premium plan/);assert.match(source,/keyX=lerp\(656,682,insert\)/);assert.match(source,/Seedance 2.5/);
+assert.match(read('ScenesV16.tsx'),/opacity:bold\?1:easeOut/);assert.match(read('ScenesV16.tsx'),/brisk\?\.08:\.16/);
+assert.match(read('StoryScenesV10.tsx'),/fontSize:opening\?104:49/);
+for(const tag of source.match(/<OffthreadVideo[\s\S]*?\/>/g)||[])assert.match(tag,/\bmuted\b/);
+console.log('PASS V17: original EDL/audio/privacy, opening-only large numbers, persistent cost logo, faster opted-in workflow, Claude-authored X, physically coupled bottleneck and premium gate, muted footage, TS/TSX parsing and unaffected-tail proof.');
