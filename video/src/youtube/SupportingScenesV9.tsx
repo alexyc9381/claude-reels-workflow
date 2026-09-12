@@ -3,6 +3,7 @@ import {AbsoluteFill,useCurrentFrame,useVideoConfig} from 'remotion';
 import {easeOut,easeInOut as e} from './glass-motion';
 import {Glass,Actor,Label,Lens,Logo,SkillFile,CameraIcon,Key,C,visible,typeOn,clamp} from './YouTubeV8Primitives';
 import {ShotStage} from './NarrativeV9';
+import {RooftopBeatV11} from './ScenesV11';
 export {TextLens,LaterCue} from './SupportingScenesV7';
 export type SupportKind='typing'|'budget'|'storyboard'|'format'|'saved'|'wrapper'|'sound'|'detail'|'protip'|'chase'|'direction';
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
@@ -11,13 +12,14 @@ const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSPr
 export const supportMotifs:Record<string,string>={
  's010:1':'interface-shell-cutaway','s012:7.5':'result-archive-tray','s015:7':'request-response-plug',
  's020:1.5':'command-keyboard','s021:13':'orbit-camera-rig','s021:25':'three-shot-contact-sheet',
- 's023:0.5':'variable-aperture-frame','s024:1.5':'model-option-selection','s026:10.2':'shot-editing-strip',
+ 's023:0.5':'variable-aperture-frame','s024:1.5':'model-option-selection','s026:10.2':'rooftop-approach-flight-landing',
  's027:0.25':'rooftop-chase-camera','s030:4':'automatic-to-directed-camera','s030:17':'wind-impact-performance',
  's030:30':'lens-dolly-stage','s035:0.5':'movement-trace','s036:16':'continuity-inspector','s037:1.4':'foley-mixing-console',
 };
 export const Support:React.FC<{duration:number;kind:SupportKind;cueId:string}>=({duration,kind,cueId})=>{
  const t=useCurrentFrame()/useVideoConfig().fps,show=visible(t,duration),p=easeOut(t,.04,.35),motif=supportMotifs[cueId];
  const shell=(content:React.ReactNode,x=132,y=214,w=1065,h=380)=> <AbsoluteFill data-motif={motif} style={{opacity:show}}><Glass x={x} y={y} w={w} h={h} t={t} frost={.65} style={{transform:`translateY(${(1-p)*36}px) perspective(1800px) rotateX(${(1-p)*7}deg)`}}>{content}</Glass></AbsoluteFill>;
+ if(cueId==='s026:10.2')return <RooftopBeatV11 duration={duration}/>;
  if(kind==='chase'){
   const run=e(t,.25,duration-1.1);
   return shell(<><At x={18} y={18}><ShotStage t={t} w={568} mode="chase" progress={run}/></At><Label x={622} y={31} size={35} color={C.orange}>B · The chase</Label><Label x={623} y={95} size={29}>Rooftops</Label><Label x={623} y={142} size={29}>Pursuit</Label><Label x={623} y={189} size={29}>Following camera</Label><Actor t={t} x={933} y={63} size={165} role="operator" look={-1} reach={run} contact={duration-.7}/></>,130,641,1117,319);

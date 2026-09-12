@@ -24,7 +24,7 @@ export const roughTimeline = (m: RoughCutManifest) => {
     seconds+=s.end-s.start;
     const endFrame=Math.round(seconds*m.fps), duration=endFrame-frame;
     if(duration<1)throw Error(`Sub-frame segment: ${s.id}`);
-    const cameraPlateStart=m.cameraPlate?.starts[s.id];
+    const cameraPlateStart=m.cameraPlate?.starts[s.id]??(s.layout==='screen'?0:undefined);
     if(m.cameraPlate&&!Number.isInteger(cameraPlateStart))throw Error(`Missing camera plate mapping: ${s.id}`);
     const cameraPlateSource=m.cameraPlate?.sources?.[s.id]??m.cameraPlate?.source;
     const cameraPlateDuration=m.cameraPlate?.lengths?.[s.id];

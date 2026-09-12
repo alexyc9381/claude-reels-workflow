@@ -352,6 +352,15 @@
         "reason": "More deliberate prompting can refine direction"
       },
       {
+        "id": "s032",
+        "start": 1805.32,
+        "end": 1810,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "Introduce the detail comparison"
+      },
+      {
         "id": "s033",
         "start": 1849.13,
         "end": 1863.8,
@@ -361,21 +370,13 @@
         "reason": "Same prompt across models and first playback; remove duplicate reaction"
       },
       {
-        "id": "r-veo-playthrough",
-        "start": 1863.8,
-        "end": 1870.82,
-        "layout": "screen",
-        "chapter": "Review and compare the results",
-        "reason": "V11 restore continuous OBS Veo playback through landing and the first complete clean reaction; omit the following retake. No waiting face or unrelated overlay."
-      },
-      {
         "id": "s034",
-        "start": 1874.98,
+        "start": 1873.3,
         "end": 1887.11,
         "camera": "C0007",
         "layout": "screen-presenter",
         "chapter": "Review and compare the results",
-        "reason": "V11 continue at First of all after the restored first Wow reaction; omit repeated Wow line."
+        "reason": "Clean visual-detail reaction"
       },
       {
         "id": "s035",
@@ -397,12 +398,12 @@
       },
       {
         "id": "s037",
-        "start": 2017.58,
+        "start": 2015.65,
         "end": 2029.37,
         "camera": "C0007",
         "layout": "screen-presenter",
         "chapter": "Review and compare the results",
-        "reason": "V11 omit retake-adjacent Second of all lead-in; begin with the complete We hear the realistic sound effects clause."
+        "reason": "Specific sound and environment observations"
       },
       {
         "id": "s038",
@@ -501,10 +502,10 @@
         "s031": 10529,
         "s032": 10780,
         "s033": 10920,
-        "s034": 11410,
+        "s034": 11360,
         "s035": 11775,
         "s036": 11958,
-        "s037": 58,
+        "s037": 0,
         "s038": 13065,
         "s039": 13260,
         "s040": 13347,
@@ -561,10 +562,10 @@
         "s031": 251,
         "s032": 140,
         "s033": 440,
-        "s034": 365,
+        "s034": 415,
         "s035": 180,
         "s036": 754,
-        "s037": 354,
+        "s037": 412,
         "s038": 195,
         "s042": 46,
         "s043": 160,

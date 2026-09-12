@@ -1,6 +1,6 @@
 # YouTube editing — indexed learning library
 
-Latest: [V10 footage-first comparisons and source-led scenes](projects/higgsfield-replacement/REVISION-V10.md), [confirmed Higgsfield comparison source](projects/higgsfield-replacement/provenance/higgsfield-comparison.json), [Camera-Direction Prompt Pack](resources/camera-direction-prompt-pack.md). These refinements supersede the earlier placeholder and unspecified-bonus status.
+Latest: [V11 active scenes and complete playback](projects/higgsfield-replacement/REVISION-V11.md), [V11 source/timestamp audit](projects/higgsfield-replacement/revision-v11-audit.json), [confirmed Higgsfield comparison source](projects/higgsfield-replacement/provenance/higgsfield-comparison.json), [Camera-Direction Prompt Pack](resources/camera-direction-prompt-pack.md). V10 remains a preserved baseline. The bonus now has an earlier gift treatment and a real countdown; this does not restore the rejected intro-teaser progress bar.
 
 [Other-Mac editable handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF.md): complete source/Git history and working media, checksum verification, Mac launcher, and resume prompt. Keep raw editable packages private; a playable export alone is not an editing handoff.
 
@@ -9,7 +9,7 @@ This is the handoff index for the complete September 10–11 system-building and
 ## Current production contract
 
 - [Current direction](CURRENT-DIRECTION.md): engine, source audio, framing, typography, white glass, original 2D cast, action hierarchy, unique scenes, sound, retention, privacy and full delivery.
-- [Conversation decision ledger](REVISION-DECISIONS.md): all request clusters, timestamped issues, corrections and precedence, from initial repository discovery through v10.
+- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V11.
 - [Approval versus review](APPROVED-ANIMATION-SYSTEM.md): v11 short-study approval and later full-film overrides.
 - [Canonical memory](../memory/youtube-video-editing-system.md): compact entry for future tasks; indexed from memory/MEMORY.md and the root repository map.
 
@@ -29,7 +29,7 @@ This is the handoff index for the complete September 10–11 system-building and
 | Premium sound principles from supplied article | [SOUND-DESIGN-PRINCIPLES](SOUND-DESIGN-PRINCIPLES.md), [sound/facial audition history](SOUND-AND-FACIAL-REACTIONS.md) |
 | Narration-led visual-first explanations | [VOICEOVER-EXPLAINER-MODE](VOICEOVER-EXPLAINER-MODE.md) |
 | Proof versus illustration, A/B placeholder, cost and setup gaps | [Retention and pickups](projects/higgsfield-replacement/RETENTION-AND-PICKUPS.md) |
-| Current full timeline / chapters | [v9 timeline](projects/higgsfield-replacement/v9-timeline.json), [chapters](projects/higgsfield-replacement/chapters.json), [YouTube timestamps](projects/higgsfield-replacement/youtube-chapters.txt) |
+| Current full timeline / chapters | [V11 timeline](projects/higgsfield-replacement/v11-timeline.json), [chapters](projects/higgsfield-replacement/chapters.json), [YouTube timestamps](projects/higgsfield-replacement/youtube-chapters.txt) |
 | Render, testing, sync and resource-safe export | [REPRODUCE](projects/higgsfield-replacement/REPRODUCE.md), [test-v9](projects/higgsfield-replacement/tools/test-v9.mjs), [validate-v9-export](projects/higgsfield-replacement/tools/validate-v9-export.mjs) |
 | Source music/SFX/result/plate provenance | [Media ledgers](projects/higgsfield-replacement/provenance/), [current manifest](projects/higgsfield-replacement/roughcut.props.json) |
 

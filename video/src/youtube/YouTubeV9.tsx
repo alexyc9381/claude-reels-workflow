@@ -6,7 +6,8 @@ import {easeOut,easeInOut} from './glass-motion';
 import {Support,LaterCue,TextLens,type SupportKind} from './SupportingScenesV9';
 import {typingFocus} from './typing-focus';
 import {CameraPlate} from './CameraPlate';
-import {CredentialSequence,ComingUp} from './NarrativeV9';
+import {SetupChecklistV11,CredentialV11,BonusTeaserV11} from './ScenesV11';
+const CredentialSequence=CredentialV11;
 import {C,clamp,lerp,pop,visible,Glass,Logo,Actor,Key,Film,ProgressBorder,BrandedBackground} from './YouTubeV8Primitives';
 import {HookV9,ProductionV9,RoadmapV9,GuideV9,WrapperV9,DirectV9,DownloadV9,SkillV9,CompareV9,OutroV9} from './ScenesV9';
 export {BrandedBackground};
@@ -91,7 +92,6 @@ export const v9Cues:Cue[]=[
  {id:'s011',offset:1,seconds:4.6,kind:'brand',title:'fal.ai',text:'Direct access to the models',logo:'fal.png'},
  {id:'s011',offset:8,seconds:5.3,kind:'definition',title:'API',text:'How one app requests work from another.'},
  {id:'s012',offset:7.5,seconds:5,kind:'saved'},
- {id:'s014',offset:3.8,seconds:4,kind:'brand',title:'fal.ai',text:'Create your account',logo:'fal.png'},
  {id:'s016',offset:0,seconds:15.9,kind:'keys'},
  {id:'s016',offset:3.2,seconds:6.3,kind:'definition',title:'API key',text:'Your private access credential. Keep it secret.'},
  {id:'s020',offset:1.5,seconds:6.4,kind:'typing'},
@@ -111,10 +111,9 @@ export const v9Cues:Cue[]=[
  {id:'s030',offset:17,seconds:7,kind:'sound'},
  {id:'s030',offset:30,seconds:5.4,kind:'protip'},
  {id:'s031',offset:.6,seconds:6.5,kind:'definition',title:'Creative direction',text:'Refine the camera, movement and mood.'},
- {id:'s032',offset:.2,seconds:4.1,kind:'brand',title:'Same prompt. New model.',logo:'google.png'},
+ {id:'s033',offset:.2,seconds:4.1,kind:'brand',title:'Same prompt. New model.',logo:'google.png'},
  {id:'s035',offset:.5,seconds:4.5,kind:'detail'},
  {id:'s036',offset:.5,seconds:3.7,kind:'brand',title:'Seedance',logo:'seedance.png'},
- {id:'s036',offset:16,seconds:5.7,kind:'detail'},
  {id:'s037',offset:1.4,seconds:6,kind:'sound'},
  {id:'r-outlook',offset:.4,seconds:4.8,kind:'brand',title:'Create with the models',text:'Keep the workflow in your hands',logo:'claude.png'},
 ];
@@ -137,7 +136,8 @@ export const YouTubePolish:React.FC<{manifest:M}>=({manifest:m})=>{
   <AbsoluteFill>
    {v9Cues.map((c,i)=>{const r=find(c.id),d=Math.min(Math.round(c.seconds*fps),r.duration-Math.round(c.offset*fps)),lift=['definition','typing','sound'].includes(c.kind)?focus:0;return <Sequence key={i} from={r.from+Math.round(c.offset*fps)} durationInFrames={d}><AbsoluteFill style={{transform:`translateY(${-450*lift}px) scale(${1-.12*lift})`,transformOrigin:'120px 0'}}>{c.kind==='lens'?<TextLens duration={d/fps} source={m.obs.source} start={Math.round((r.start+c.offset)*fps)}/>:c.kind==='definition'?<Definition duration={d/fps} term={c.title!} meaning={c.text!}/>:c.kind==='brand'?<Brand avoidRaisedCamera={c.id==='s025'||c.id==='s027'} duration={d/fps} logo={c.logo!} title={c.title!} text={c.text}/>:c.kind==='keys'?<CredentialSequence duration={d/fps}/>:<Support duration={d/fps} kind={c.kind} cueId={`${c.id}:${c.offset}`}/>}</AbsoluteFill></Sequence>;})}
   </AbsoluteFill>
-  <Sequence from={find('s038').from+Math.round(5.1*fps)} durationInFrames={Math.round(4.5*fps)}><ComingUp duration={4.5}/></Sequence>
+  <Sequence from={find('s014').from+135} durationInFrames={find('s016').from+find('s016').duration-find('s014').from-135}><SetupChecklistV11 duration={(find('s016').from+find('s016').duration-find('s014').from-135)/fps} accountAt={(find('s015').from-find('s014').from-135)/fps} keysAt={(find('s016').from-find('s014').from-135)/fps}/></Sequence>
+  <Sequence from={find('s036').from+Math.round(14*fps)} durationInFrames={Math.round(8*fps)}><BonusTeaserV11 duration={8} secondsToBonus={(find('s044').from-find('s036').from)/fps-14}/></Sequence>
   <Sequence from={laterFrom} durationInFrames={laterTo-laterFrom}><LaterCue duration={(laterTo-laterFrom)/fps} timestamp={stamp}/></Sequence>
   {active&&row&&<Sequence from={row.from} durationInFrames={row.duration}><Presenter row={row} intro={['s001','s002'].includes(row.id)}/></Sequence>}
   {roughChapters(m).slice(1).map((c,i)=>i===4?null:<Sequence key={c.frame} from={c.frame} durationInFrames={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)}><Chapter duration={Math.min(132,rows.find(r=>r.from===c.frame)!.duration)/fps} step={i+1} title={chapterTitles[i]}/></Sequence>)}
@@ -155,7 +155,9 @@ export const soundEvents=(m:M)=>{
   const beat=(u:number,span:number,name:string,gain=.13,start=b)=>add(start+u*span,name,gain,.65);
   const schedules:Record<string,[number,string][]>={studio:[[.18,'paper'],[.45,'click'],[.72,'shutter'],[.875,'latch']],roadmap:[[.08,'zip'],[.45,'paper'],[.8,'latch']],guide:[[.22,'paper'],[.52,'servo'],[.81,'latch']],wrapper:[[.08,'servo'],[.25,'land'],[.55,'paper']],download:[[.23,'paper'],[.38,'land'],[.69,'zip']],skill:[[.11,'paper'],[.29,'click'],[.48,'servo'],[.75,'paper'],[.9,'latch']],outro:[[.19,'paper'],[.2375,'whip'],[.4,'land'],[.59,'zip'],[.75,'typing']],compare:[[.08,'shutter'],[.89,'paper']]};
   if(s.kind==='hook'){
-   const q=s.b!,span=d-q;beat(1.5/7.6,span,'servo',.13,b+q);beat(3/7.6,span,'paper',.13,b+q);beat(4.1/7.6,span,'land',.12,b+q);
+   const q=s.b!,span=d-q;beat(.06,span,'paper',.09,b+q);beat(.37,span,'click',.09,b+q);beat(.52,span,'latch',.10,b+q);beat(.55,span,'servo',.085,b+q);
+  }else if(s.kind==='outro'){
+   beat(.05,d,'paper',.09);beat(1.65/8.56,d,'zip',.075);beat(3.1/8.56,d,'paper',.09);beat(4.1/8.56,d,'latch',.08);beat(4.45/8.56,d,'typing',.055);beat(5.45/8.56,d,'paper',.07);
   }else if(s.kind==='direct'){
    beat(2.3/9,s.a!,'latch');beat(5.2/9,s.a!,'click');beat(7/9,s.a!,'paper');
    beat(3.3/8,d-s.a!,'land',.12,b+s.a!);beat(4.8/8,d-s.a!,'servo',.12,b+s.a!);
@@ -163,9 +165,10 @@ export const soundEvents=(m:M)=>{
  }
  for(const c of v9Cues)add(at(c.id)+c.offset+.12,c.kind==='typing'?'typing':c.kind==='lens'?'servo':c.kind==='keys'?'click':'paper',c.kind==='typing'?.09:.13,c.kind==='typing'?1.9:.8);
  add(at('s013')+8.12,'paper',.13);
- for(const [x,name] of [[5.3,'click'],[9.6,'paper'],[13.3,'servo'],[14.8,'latch']] as const)add(at('s016')+x,name,.12);
+ for(const [x,name] of [[4.7,'click'],[9.2,'paper'],[11.4,'servo'],[14.1,'latch']] as const)add(at('s016')+x,name,.08);
+ add(at('s026')+10.2+4.6*.28,'whip',.06);add(at('s026')+10.2+4.6*.72,'land',.08);
  add(at('s027')+1.2,'servo',.09);add(at('s027')+5.1,'whip',.075);
- add(at('s030')+7.5,'click',.10);add(at('s038')+5.25,'paper',.10);
+ add(at('s030')+7.5,'click',.10);add(at('s036')+14.45,'paper',.08);add(at('s036')+15,'latch',.06);
  for(const c of roughChapters(m).slice(1)){add(c.seconds,'zip',.16);add(c.seconds+.37,'paper',.13);}
  for(let i=1;i<rows.length;i++)if(rows[i].layout==='screen-presenter'&&rows[i-1].layout==='presenter'&&!rows[i].teaser)add(rows[i].from/fps-.3,'whip',.14);
  return ev.filter(e=>e.at<rows.at(-1)!.from+rows.at(-1)!.duration);

@@ -16,6 +16,7 @@ const digest=createHash('sha256').update(JSON.stringify(inputProps));
 if(process.env.REVIEW_GL)digest.update('chromium-gl:'+process.env.REVIEW_GL);
 if(process.env.REVIEW_BROWSER)digest.update('chromium-browser:'+process.env.REVIEW_BROWSER);
 for(const name of readdirSync(path.join(video,'src/youtube')).filter(n=>/\.tsx?$/.test(n)).sort())digest.update(name).update(readFileSync(path.join(video,'src/youtube',name)));
+digest.update('WorldKit.tsx').update(readFileSync(path.join(video,'src/WorldKit.tsx')));
 for(const name of ['cube.mov','pipeline-result.jpg'])digest.update(readFileSync(path.join(work,'public',name)));
 for(const name of readdirSync(path.join(work,'public/v3')).sort())digest.update(name).update(readFileSync(path.join(work,'public/v3',name)));
 if(['v4','v5','v6','v7','v8','v9'].includes(inputProps.manifest.editVersion))for(const name of readdirSync(path.join(work,'public/v4')).sort())digest.update(name).update(readFileSync(path.join(work,'public/v4',name)));

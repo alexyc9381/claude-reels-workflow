@@ -3,6 +3,7 @@ import {AbsoluteFill,Loop,OffthreadVideo,staticFile,useCurrentFrame,useVideoConf
 import {bodyFont} from './cinematic-brand';
 import {easeInOut as e,easeOut} from './glass-motion';
 import {Actor,Glass,Label,Logo,SkillFile,C,lerp,clamp,BrandedBackground} from './YouTubeV8Primitives';
+import {EditRoom} from './ScenesV11';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 
@@ -19,11 +20,11 @@ export const ComparisonV10:React.FC<{revealAt?:number;opening?:boolean}>=({revea
    <div style={{position:'absolute',left:24,top:24,background:'#FFF8EEE8',padding:'8px 17px',borderRadius:10,fontSize:31,fontWeight:750,color:C.ink}}>{opening?(i?'B':'A'):(i?'RIGHT':'LEFT')}</div>
    {opening&&<svg width="938" height="742" style={{position:'absolute',inset:0,pointerEvents:'none',opacity:1-easeOut(t,4,.2)}}><rect x="4" y="4" width="930" height="734" rx="16" fill="none" stroke={C.clay} strokeWidth="5" pathLength="1" strokeDasharray="1" strokeDashoffset={1-clamp(t/4)}/></svg>}
   </div>)}
-  {!opening&&[0,1].map(i=><At key={i} x={i?1255:130} y={789} style={{opacity:reveal,transform:`translateY(${18*(1-reveal)}px)`}}><Logo name={i?'claude.png':'higgsfield.jpg'} size={55}/><Label x={77} y={8} size={36}>{i?'Claude':'Higgsfield'}</Label></At>)}
+  {!opening&&[0,1].map(i=><At key={i} x={i?1255:130} y={789} style={{opacity:reveal,transform:`translateY(${18*(1-reveal)}px)`}}><Logo name={i?'claude.png':'higgsfield.jpg'} size={98}/><Label x={121} y={25} size={44}>{i?'Claude':'Higgsfield'}</Label></At>)}
  </AbsoluteFill>;
 };
 
-const Stage:React.FC<{children:React.ReactNode}>=({children})=><AbsoluteFill style={{fontFamily:bodyFont,color:C.ink,overflow:'hidden'}}><BrandedBackground t={clock()}/><div style={{position:'absolute',left:90,right:90,top:86,bottom:118,borderRadius:44,background:'linear-gradient(140deg,#FFFBF4DD,#F4E6D2AA)',boxShadow:'inset 0 2px 0 #FFF,0 35px 90px #69422516'}}/>{children}</AbsoluteFill>;
+const Stage:React.FC<{children:React.ReactNode}>=({children})=><EditRoom t={clock()}>{children}</EditRoom>;
 
 /** A specific saved MP4, not an anonymous geometric token. */
 export const VideoFileV10:React.FC<{w?:number;playing?:boolean}>=({w=300,playing=true})=><div style={{width:w,borderRadius:17,overflow:'hidden',background:'#FFF9EE',boxShadow:'0 13px 30px #40281B24',border:'2px solid #FFFFFF'}}>

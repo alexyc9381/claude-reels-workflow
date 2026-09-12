@@ -1,0 +1,552 @@
+{
+  "version": "V11",
+  "frames": 13808,
+  "duration": 460.26666666666665,
+  "sourceAudio": "OBS only",
+  "removed": [
+    {
+      "id": "s032",
+      "start": 1805.32,
+      "end": 1810,
+      "camera": "C0007",
+      "layout": "screen-presenter",
+      "chapter": "Review and compare the results",
+      "reason": "Introduce the detail comparison",
+      "from": 10676,
+      "duration": 140,
+      "cameraSource": "C0007-1080.mp4",
+      "cameraStart": 37.80925000000002,
+      "cameraPlateStart": 10780,
+      "cameraPlateSource": "v7/presenter-background.mp4",
+      "cameraPlateDuration": 140
+    }
+  ],
+  "changes": [
+    {
+      "id": "r-veo-playthrough",
+      "current": {
+        "id": "r-veo-playthrough",
+        "start": 1863.8,
+        "end": 1870.82,
+        "layout": "screen",
+        "chapter": "Review and compare the results",
+        "reason": "V11 restore continuous OBS Veo playback through landing and the first complete clean reaction; omit the following retake. No waiting face or unrelated overlay.",
+        "from": 11116,
+        "duration": 211,
+        "cameraStart": 0,
+        "cameraPlateStart": 0,
+        "cameraPlateSource": "v7/presenter-background.mp4"
+      }
+    },
+    {
+      "id": "s034",
+      "old": {
+        "id": "s034",
+        "start": 1873.3,
+        "end": 1887.11,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "Clean visual-detail reaction",
+        "from": 11257,
+        "duration": 414,
+        "cameraSource": "C0007-1080.mp4",
+        "cameraStart": 105.78925000000004,
+        "cameraPlateStart": 11360,
+        "cameraPlateSource": "v7/presenter-background.mp4",
+        "cameraPlateDuration": 415
+      },
+      "current": {
+        "id": "s034",
+        "start": 1874.98,
+        "end": 1887.11,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "V11 continue at First of all after the restored first Wow reaction; omit repeated Wow line.",
+        "from": 11327,
+        "duration": 364,
+        "cameraSource": "C0007-1080.mp4",
+        "cameraStart": 107.4692500000001,
+        "cameraPlateStart": 11410,
+        "cameraPlateSource": "v7/presenter-background.mp4",
+        "cameraPlateDuration": 365
+      }
+    },
+    {
+      "id": "s037",
+      "old": {
+        "id": "s037",
+        "start": 2015.65,
+        "end": 2029.37,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "Specific sound and environment observations",
+        "from": 12604,
+        "duration": 412,
+        "cameraSource": "C0007-1080.mp4",
+        "cameraStart": 248.13925000000017,
+        "cameraPlateStart": 0,
+        "cameraPlateSource": "v9/second-of-all.mp4",
+        "cameraPlateDuration": 412
+      },
+      "current": {
+        "id": "s037",
+        "start": 2017.58,
+        "end": 2029.37,
+        "camera": "C0007",
+        "layout": "screen-presenter",
+        "chapter": "Review and compare the results",
+        "reason": "V11 omit retake-adjacent Second of all lead-in; begin with the complete We hear the realistic sound effects clause.",
+        "from": 12624,
+        "duration": 354,
+        "cameraSource": "C0007-1080.mp4",
+        "cameraStart": 250.06925,
+        "cameraPlateStart": 58,
+        "cameraPlateSource": "v9/second-of-all.mp4",
+        "cameraPlateDuration": 354
+      }
+    }
+  ],
+  "timestampMap": [
+    {
+      "id": "s001",
+      "oldOutputSeconds": 0,
+      "newOutputSeconds": 0,
+      "source": [
+        17.17,
+        21.57
+      ]
+    },
+    {
+      "id": "s002",
+      "oldOutputSeconds": 4.4,
+      "newOutputSeconds": 4.4,
+      "source": [
+        40.17,
+        43.1
+      ]
+    },
+    {
+      "id": "s003",
+      "oldOutputSeconds": 7.333333333333333,
+      "newOutputSeconds": 7.333333333333333,
+      "source": [
+        54.67,
+        58.02
+      ]
+    },
+    {
+      "id": "r-higgsfield",
+      "oldOutputSeconds": 10.666666666666666,
+      "newOutputSeconds": 10.666666666666666,
+      "source": [
+        79.01,
+        83.34
+      ]
+    },
+    {
+      "id": "s004",
+      "oldOutputSeconds": 15,
+      "newOutputSeconds": 15,
+      "source": [
+        115.81,
+        118.65
+      ]
+    },
+    {
+      "id": "s005",
+      "oldOutputSeconds": 17.866666666666667,
+      "newOutputSeconds": 17.866666666666667,
+      "source": [
+        124.84,
+        130.66
+      ]
+    },
+    {
+      "id": "s006",
+      "oldOutputSeconds": 23.666666666666668,
+      "newOutputSeconds": 23.666666666666668,
+      "source": [
+        148.73,
+        152.06
+      ]
+    },
+    {
+      "id": "r-teaser",
+      "oldOutputSeconds": 27,
+      "newOutputSeconds": 27,
+      "source": [
+        1992.43,
+        1996.37
+      ]
+    },
+    {
+      "id": "s007",
+      "oldOutputSeconds": 30.933333333333334,
+      "newOutputSeconds": 30.933333333333334,
+      "source": [
+        242,
+        247.63333333333333
+      ]
+    },
+    {
+      "id": "s008",
+      "oldOutputSeconds": 36.56666666666667,
+      "newOutputSeconds": 36.56666666666667,
+      "source": [
+        306.04,
+        309.85
+      ]
+    },
+    {
+      "id": "s009",
+      "oldOutputSeconds": 40.36666666666667,
+      "newOutputSeconds": 40.36666666666667,
+      "source": [
+        338.17,
+        344.94
+      ]
+    },
+    {
+      "id": "s010",
+      "oldOutputSeconds": 47.166666666666664,
+      "newOutputSeconds": 47.166666666666664,
+      "source": [
+        353.8,
+        365.24
+      ]
+    },
+    {
+      "id": "r-direct",
+      "oldOutputSeconds": 58.6,
+      "newOutputSeconds": 58.6,
+      "source": [
+        389.2,
+        401.4
+      ]
+    },
+    {
+      "id": "r-features",
+      "oldOutputSeconds": 70.8,
+      "newOutputSeconds": 70.8,
+      "source": [
+        413.94,
+        422.19
+      ]
+    },
+    {
+      "id": "s011",
+      "oldOutputSeconds": 79.03333333333333,
+      "newOutputSeconds": 79.03333333333333,
+      "source": [
+        502.52,
+        517.76
+      ]
+    },
+    {
+      "id": "s012",
+      "oldOutputSeconds": 94.26666666666667,
+      "newOutputSeconds": 94.26666666666667,
+      "source": [
+        521.13,
+        533.88
+      ]
+    },
+    {
+      "id": "s013",
+      "oldOutputSeconds": 107.03333333333333,
+      "newOutputSeconds": 107.03333333333333,
+      "source": [
+        599.4,
+        613.7
+      ]
+    },
+    {
+      "id": "r-safety",
+      "oldOutputSeconds": 121.33333333333333,
+      "newOutputSeconds": 121.33333333333333,
+      "source": [
+        627.32,
+        630.08
+      ]
+    },
+    {
+      "id": "s014",
+      "oldOutputSeconds": 124.1,
+      "newOutputSeconds": 124.1,
+      "source": [
+        753.07,
+        761.9
+      ]
+    },
+    {
+      "id": "s015",
+      "oldOutputSeconds": 132.93333333333334,
+      "newOutputSeconds": 132.93333333333334,
+      "source": [
+        778.9,
+        796.99
+      ]
+    },
+    {
+      "id": "s016",
+      "oldOutputSeconds": 151,
+      "newOutputSeconds": 151,
+      "source": [
+        800.46,
+        815.77
+      ]
+    },
+    {
+      "id": "s017",
+      "oldOutputSeconds": 166.33333333333334,
+      "newOutputSeconds": 166.33333333333334,
+      "source": [
+        932.76,
+        940.04
+      ]
+    },
+    {
+      "id": "s018",
+      "oldOutputSeconds": 173.6,
+      "newOutputSeconds": 173.6,
+      "source": [
+        961.73,
+        966.52
+      ]
+    },
+    {
+      "id": "r-no-code",
+      "oldOutputSeconds": 178.4,
+      "newOutputSeconds": 178.4,
+      "source": [
+        972.2,
+        977.5333333333333
+      ]
+    },
+    {
+      "id": "s019",
+      "oldOutputSeconds": 183.73333333333332,
+      "newOutputSeconds": 183.73333333333332,
+      "source": [
+        987,
+        988.2833333333333
+      ]
+    },
+    {
+      "id": "s020",
+      "oldOutputSeconds": 185,
+      "newOutputSeconds": 185,
+      "source": [
+        995.48,
+        1018.14
+      ]
+    },
+    {
+      "id": "s021",
+      "oldOutputSeconds": 207.66666666666666,
+      "newOutputSeconds": 207.66666666666666,
+      "source": [
+        1034.7,
+        1069.93
+      ]
+    },
+    {
+      "id": "s023",
+      "oldOutputSeconds": 242.9,
+      "newOutputSeconds": 242.9,
+      "source": [
+        1081.08,
+        1088.62
+      ]
+    },
+    {
+      "id": "s024",
+      "oldOutputSeconds": 250.43333333333334,
+      "newOutputSeconds": 250.43333333333334,
+      "source": [
+        1246.45,
+        1259.33
+      ]
+    },
+    {
+      "id": "s025",
+      "oldOutputSeconds": 263.3333333333333,
+      "newOutputSeconds": 263.3333333333333,
+      "source": [
+        1266.2,
+        1269.25
+      ]
+    },
+    {
+      "id": "s026",
+      "oldOutputSeconds": 266.3666666666667,
+      "newOutputSeconds": 266.3666666666667,
+      "source": [
+        1286.72,
+        1301.7
+      ]
+    },
+    {
+      "id": "s027",
+      "oldOutputSeconds": 281.3333333333333,
+      "newOutputSeconds": 281.3333333333333,
+      "source": [
+        1313.2,
+        1329.17
+      ]
+    },
+    {
+      "id": "s029",
+      "oldOutputSeconds": 297.3333333333333,
+      "newOutputSeconds": 297.3333333333333,
+      "source": [
+        1526.43,
+        1541.1
+      ]
+    },
+    {
+      "id": "s030",
+      "oldOutputSeconds": 312,
+      "newOutputSeconds": 312,
+      "source": [
+        1541.1,
+        1576.63
+      ]
+    },
+    {
+      "id": "s031",
+      "oldOutputSeconds": 347.53333333333336,
+      "newOutputSeconds": 347.53333333333336,
+      "source": [
+        1612.18,
+        1620.53
+      ]
+    },
+    {
+      "id": "s033",
+      "oldOutputSeconds": 360.53333333333336,
+      "newOutputSeconds": 355.8666666666667,
+      "source": [
+        1849.13,
+        1863.8
+      ]
+    },
+    {
+      "id": "r-veo-playthrough",
+      "oldOutputSeconds": null,
+      "newOutputSeconds": 370.53333333333336,
+      "source": [
+        1863.8,
+        1870.82
+      ]
+    },
+    {
+      "id": "s034",
+      "oldOutputSeconds": 375.23333333333335,
+      "newOutputSeconds": 377.56666666666666,
+      "source": [
+        1874.98,
+        1887.11
+      ]
+    },
+    {
+      "id": "s035",
+      "oldOutputSeconds": 389.03333333333336,
+      "newOutputSeconds": 389.7,
+      "source": [
+        1892.02,
+        1898.01
+      ]
+    },
+    {
+      "id": "s036",
+      "oldOutputSeconds": 395.03333333333336,
+      "newOutputSeconds": 395.6666666666667,
+      "source": [
+        1981.33,
+        2006.45
+      ]
+    },
+    {
+      "id": "s037",
+      "oldOutputSeconds": 420.1333333333333,
+      "newOutputSeconds": 420.8,
+      "source": [
+        2017.58,
+        2029.37
+      ]
+    },
+    {
+      "id": "s038",
+      "oldOutputSeconds": 433.8666666666667,
+      "newOutputSeconds": 432.6,
+      "source": [
+        2151.54,
+        2158.04
+      ]
+    },
+    {
+      "id": "s042",
+      "oldOutputSeconds": 440.3666666666667,
+      "newOutputSeconds": 439.1,
+      "source": [
+        2223.6,
+        2225.1
+      ]
+    },
+    {
+      "id": "s043",
+      "oldOutputSeconds": 441.8666666666667,
+      "newOutputSeconds": 440.6,
+      "source": [
+        2269.26,
+        2274.59
+      ]
+    },
+    {
+      "id": "r-outlook",
+      "oldOutputSeconds": 447.2,
+      "newOutputSeconds": 445.93333333333334,
+      "source": [
+        2329.73,
+        2335.5
+      ]
+    },
+    {
+      "id": "s044",
+      "oldOutputSeconds": 452.96666666666664,
+      "newOutputSeconds": 451.7,
+      "source": [
+        2442.85,
+        2446.48
+      ]
+    },
+    {
+      "id": "s045",
+      "oldOutputSeconds": 456.6,
+      "newOutputSeconds": 455.3333333333333,
+      "source": [
+        2454.08,
+        2459.03
+      ]
+    }
+  ],
+  "bonus": {
+    "starts": 409.6666666666667,
+    "ends": 417.6666666666667,
+    "payoff": 451.7
+  },
+  "oneFramePlateHolds": [
+    {
+      "id": "s027",
+      "frames": 1
+    },
+    {
+      "id": "s030",
+      "frames": 1
+    }
+  ]
+}

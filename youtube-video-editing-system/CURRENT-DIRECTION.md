@@ -11,6 +11,8 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Narrative and retention
 
+- V11 feedback refines (rather than reverses) footage-first direction: more purposeful motion in the intro/explainer scenes, but keep real A/B clips dominant. Restore complete generated playback through its final action. An earlier gift-style teaser with a truthful countdown is now requested for the real prompt-pack bonus; the ban on a progress bar applies to the **intro reaction teaser**, not this later bonus cue.
+
 - Start from what Alex actually said. Preserve useful teaching, context, caveats, natural phrase tails and bridges. Do not manufacture a punchier claim by joining unrelated takes.
 - Remove retakes, spoken editor markers, accidental dead air and explicitly requested repetition. A whole-file transcript saying no “cut” is not proof; inspect short original-source windows and final joins.
 - Keep the opening comparison large and immediate; first five seconds especially active, first fifteen brisk. Action and curiosity take priority over labels and generic scene titles. Never reveal the answer before the question earns it.
@@ -25,6 +27,7 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 ## Framing and readability
 
 - Large screen recording over a branded cream/orange gradient; maximize readable UI inside landscape safe margins. Measure and remove the source menu/time bar and Dock; never crop the typing box off-screen.
+- Current Higgsfield screen viewport is x=24, y=47, w=1872 (height follows the measured source crop). Footage may use this wider area; graphic safe margins remain separate. Setup steps should stay visible without covering the active UI. Source changes must advance existing camera-plate offsets independently of output chapter time.
 - Substantial rounded facecam on the **right**, except the opening comparison's bottom-center presenter. Full-face and inset framing are independent. Full-frame crop hides the bed; inset retains torso and centers the face. Latest front-facing intro request crops more from the left.
 - Opening face push accelerates quickly then gently settles. Full-face → demo uses shared geometry: slight twist/scale and travel down to the right inset, with playback continuous across the handoff.
 - Blur the **room**, not the face. Use per-frame person segmentation or a verified mask; no fixed oval pretending to track the subject. Do not repeatedly intensify blur without checking its boundary and skin detail.
@@ -73,4 +76,4 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Navigation
 
-[LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) · [REVISION-DECISIONS.md](REVISION-DECISIONS.md) · [Higgsfield v10](projects/higgsfield-replacement/REVISION-V10.md) · [Historical approval boundaries](APPROVED-ANIMATION-SYSTEM.md)
+[LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) · [REVISION-DECISIONS.md](REVISION-DECISIONS.md) · [Higgsfield V11](projects/higgsfield-replacement/REVISION-V11.md) · [Historical approval boundaries](APPROVED-ANIMATION-SYSTEM.md)

@@ -1,4 +1,21 @@
-# Reproduce Higgsfield Replacement v10
+# Reproduce Higgsfield Replacement V11
+
+V11 supersedes the V10 commands below. From the task/handoff root:
+
+```sh
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/test-v11.mjs
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/audit-v11.mjs
+REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v11.mp4 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/render-low-storage.mjs
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/validate-v11-export.mjs
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/transcribe-v11-joins.mjs
+python3 work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/contact-v11.py --encoded
+```
+
+V11 imports `ScenesV11.tsx` and `WorldKit.tsx`; both affect picture. The renderer selector remains `editVersion: v9`, but the **V11 EDL and soundtrack are changed**. Do not apply V10 cache reuse or the old V9-audio-equality gate. The V11 validator checks the actual audio contract; comparison with historical V9 AAC is optional when that old export is available. Screen-only restored playback needs no presenter plate. Changed face-source starts have explicitly shifted plate offsets. See [revision record](REVISION-V11.md).
+
+The local handoff includes working media and Git source; it does not include render caches, the Whisper model or installed native dependencies. On a new Mac adapt local FFmpeg, ffprobe, Whisper and Chromium executable paths in QA scripts. `restore.mjs` installs platform-matching Remotion dependencies. Raw camera-card 4K originals are not required for this 1080p edit and are not in the handoff.
+
+## Historical V10 reproduction details
 
 Active composition: video/src/youtube-roughcut.tsx, HiggsfieldRoughCut. RoughCut.tsx imports YouTubeV9. Current manifest is roughcut.props.json. **Do not run older build-v2…v7 scripts over it** unless deliberately restoring the entire matching old revision.
 

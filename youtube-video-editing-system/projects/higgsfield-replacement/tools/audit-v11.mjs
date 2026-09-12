@@ -1,0 +1,16 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createRequire} from 'node:module';
+import {runInNewContext} from 'node:vm';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement'),src=path.join(repo,'video/src/youtube');
+const require=createRequire(path.join(repo,'video/package.json')),{transformSync}=require('esbuild');
+const box={module:{exports:{}}};runInNewContext(transformSync(readFileSync(path.join(src,'roughcut-timing.ts'),'utf8'),{loader:'ts',format:'cjs'}).code,box);
+const {roughTimeline,roughChapters}=box.module.exports;
+const m=JSON.parse(readFileSync(path.join(project,'roughcut.props.json'))).manifest,old=JSON.parse(readFileSync(path.join(project,'roughcut-v10-baseline.props.json'))).manifest;
+const rows=roughTimeline(m),before=roughTimeline(old),chapters=roughChapters(m),frames=rows.at(-1).from+rows.at(-1).duration;
+const changes=rows.filter(r=>{const b=before.find(x=>x.id===r.id);return !b||b.start!==r.start||b.end!==r.end;}).map(r=>({id:r.id,old:before.find(b=>b.id===r.id),current:r}));
+const report={version:'V11',frames,duration:frames/m.fps,sourceAudio:'OBS only',removed:before.filter(b=>!rows.some(r=>r.id===b.id)),changes,timestampMap:rows.map(r=>({id:r.id,oldOutputSeconds:before.find(b=>b.id===r.id)?.from/m.fps,newOutputSeconds:r.from/m.fps,source:[r.start,r.end]})),bonus:{starts:rows.find(r=>r.id==='s036').from/m.fps+14,ends:rows.find(r=>r.id==='s036').from/m.fps+22,payoff:rows.find(r=>r.id==='s044').from/m.fps},oneFramePlateHolds:rows.filter(r=>r.cameraSource&&r.duration>r.cameraPlateDuration).map(r=>({id:r.id,frames:r.duration-r.cameraPlateDuration}))};
+for(const [name,data] of [['v11-timeline.json',rows],['revision-v11-audit.json',report],['chapters.json',chapters]])writeFileSync(path.join(project,name),JSON.stringify(data,null,2)+'\n');
+writeFileSync(path.join(project,'chapters.ffmetadata'),';FFMETADATA1\n'+chapters.map((c,i)=>`[CHAPTER]\nTIMEBASE=1/${m.fps}\nSTART=${c.frame}\nEND=${chapters[i+1]?.frame??frames}\ntitle=${c.title}\n`).join(''));
+writeFileSync(path.join(project,'youtube-chapters.txt'),chapters.map(c=>`${Math.floor(c.seconds/60)}:${String(Math.floor(c.seconds%60)).padStart(2,'0')} ${c.title}`).join('\n')+'\n');
+console.log(JSON.stringify(report,null,2));

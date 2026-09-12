@@ -1,4 +1,8 @@
-# Continue editing V10 on another Mac
+# Other-Mac handoff
+
+Current: [V11 local editable handoff and resume prompt](OTHER-MAC-HANDOFF-V11.md). The user canceled the upload request in favor of local files. V10's Drive upload language below is historical planning, **not evidence that the source ZIP or MP4 was successfully uploaded**. Use the local folder and the V11 instructions.
+
+## Historical V10 instructions
 
 The editable handoff is separate from the playable MP4. It contains a complete Git bundle of this repository, the exact current working media, dependency lockfile (inside Git), source timeline, Remotion scenes, brand assets, sound, background-blurred camera plates and all indexed revision notes. No source depends on the first Mac's user directory.
 

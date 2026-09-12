@@ -3,7 +3,7 @@ import {easeInOut} from './glass-motion';
 /** Source-pixel bounds measured from the actual 1920×1080 OBS recording. */
 export const inputBounds={left:680,top:907,right:1500,bottom:998};
 export const sourceCrop={left:0,top:32,right:1920,bottom:1002};
-export const screenViewport={x:80,y:78,w:1760,h:1760*(1002-32)/1920};
+export const screenViewport={x:24,y:47,w:1872,h:1872*(1002-32)/1920};
 const windows:Record<string,{at:number;hold:number;zoom:number}>={
  s020:{at:14,hold:6,zoom:1.55},s021:{at:10,hold:22,zoom:1.7},
  s023:{at:.4,hold:5.8,zoom:1.6},s024:{at:3,hold:7.5,zoom:1.6},
