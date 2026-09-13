@@ -2,9 +2,9 @@
 """Restore only the checksum-verified ECC media into its isolated public directory."""
 from pathlib import Path
 import argparse, hashlib, json, zipfile
-p=argparse.ArgumentParser(description=__doc__);p.add_argument('archive',type=Path);a=p.parse_args()
+p=argparse.ArgumentParser(description=__doc__);p.add_argument('archive',type=Path);p.add_argument('--hooks',action='store_true',help='Restore the two-hook archive and its additional stems');a=p.parse_args()
 root=Path(__file__).resolve().parents[1]
-m=json.loads((root/'video/src/ecc151/assets-manifest.json').read_text())
+m=json.loads((root/('video/src/ecc151/hooks-assets-manifest.json' if a.hooks else 'video/src/ecc151/assets-manifest.json')).read_text())
 if hashlib.sha256(a.archive.read_bytes()).hexdigest()!=m['archive_sha256']:raise SystemExit('Archive checksum differs; use the linked final source ZIP.')
 dest=root/m['destination'];pending=[]
 with zipfile.ZipFile(a.archive) as z:

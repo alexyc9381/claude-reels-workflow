@@ -1,0 +1,558 @@
+[
+  {
+    "at": 0,
+    "src": "ratchet.wav",
+    "peak_dbfs": -19,
+    "dur": 0.38,
+    "why": "operator braces and lifts magnet",
+    "source_trim_s": 0.0039791666666666664
+  },
+  {
+    "at": 0.2,
+    "src": "am/gear-mech.wav",
+    "peak_dbfs": -23,
+    "dur": 0.53,
+    "why": "magnet engages",
+    "source_trim_s": 0.0
+  },
+  {
+    "at": 0.9666666666666667,
+    "src": "metal_ping.wav",
+    "peak_dbfs": -21,
+    "dur": 0.22,
+    "why": "blueprint captures",
+    "source_trim_s": 0.003958333333333334
+  },
+  {
+    "at": 1.2666666666666666,
+    "src": "thock.wav",
+    "peak_dbfs": -18,
+    "dur": 0.19,
+    "why": "laptop captures",
+    "source_trim_s": 0.0
+  },
+  {
+    "at": 1.5666666666666667,
+    "src": "am/coin-drop.wav",
+    "peak_dbfs": -19,
+    "dur": 0.2,
+    "why": "testing tool captures",
+    "source_trim_s": 0.0
+  },
+  {
+    "at": 1.6,
+    "src": "am/lights-on.wav",
+    "peak_dbfs": -22,
+    "dur": 0.39,
+    "why": "GitHub core energizes",
+    "source_trim_s": 0.0
+  },
+  {
+    "at": 1.6666666666666667,
+    "src": "sub.wav",
+    "peak_dbfs": -22,
+    "dur": 0.38,
+    "why": "core forms",
+    "source_trim_s": 0.0
+  },
+  {
+    "at": 2.1666666666666665,
+    "src": "coin_slide.wav",
+    "peak_dbfs": -22,
+    "dur": 0.38,
+    "why": "operator lifts core",
+    "source_trim_s": 0.0253125
+  },
+  {
+    "at": 2.7333333333333334,
+    "src": "ticket_click.wav",
+    "peak_dbfs": -22,
+    "dur": 0.17,
+    "why": "operator steps forward",
+    "source_trim_s": 0.0039791666666666664
+  },
+  {
+    "at": 2.966666666666667,
+    "src": "thock.wav",
+    "peak_dbfs": -23,
+    "dur": 0.17,
+    "why": "first specialist follows",
+    "source_trim_s": 0.0
+  },
+  {
+    "at": 3.2,
+    "src": "ticket_click.wav",
+    "peak_dbfs": -24,
+    "dur": 0.15,
+    "why": "next specialist follows",
+    "source_trim_s": 0.0039791666666666664
+  },
+  {
+    "at": 3.45,
+    "src": "am/keys-macbook.wav",
+    "peak_dbfs": -27,
+    "rate": 1,
+    "dur": 0.91,
+    "source_trim_s": 0.0,
+    "why": "background specialists type"
+  },
+  {
+    "at": 3.98,
+    "src": "am/paper-slide.wav",
+    "peak_dbfs": -23,
+    "rate": 1,
+    "dur": 0.33,
+    "source_trim_s": 0.0,
+    "why": "background blueprint inspection"
+  },
+  {
+    "at": 4.26,
+    "src": "ticket_click.wav",
+    "peak_dbfs": -26,
+    "rate": 1,
+    "dur": 0.15,
+    "source_trim_s": 0.0039791666666666664,
+    "why": "background tool handoff"
+  },
+  {
+    "at": 3.8,
+    "src": "thock.wav",
+    "peak_dbfs": -16,
+    "rate": 1.04,
+    "dur": 0.17,
+    "source_trim_s": 0.0,
+    "why": "team lands"
+  },
+  {
+    "at": 4.2,
+    "src": "am/gear-mech.wav",
+    "peak_dbfs": -17,
+    "rate": 1,
+    "dur": 0.4,
+    "source_trim_s": 0.0,
+    "why": "skill case lid pulls open"
+  },
+  {
+    "at": 4.73,
+    "src": "am/page-turn.wav",
+    "peak_dbfs": -16,
+    "rate": 1,
+    "dur": 0.39,
+    "source_trim_s": 0.0,
+    "why": "skill cards burst from case"
+  },
+  {
+    "at": 5.7,
+    "src": "am/keys-macbook.wav",
+    "peak_dbfs": -20,
+    "rate": 1,
+    "dur": 1.2,
+    "source_trim_s": 0.0,
+    "why": "Claude types rapidly"
+  },
+  {
+    "at": 6.867,
+    "src": "am/keys-macbook.wav",
+    "peak_dbfs": -22,
+    "rate": 1,
+    "dur": 0.93,
+    "source_trim_s": 0.0,
+    "why": "continued typing"
+  },
+  {
+    "at": 6.767,
+    "src": "am/error-take.wav",
+    "peak_dbfs": -23,
+    "rate": 1,
+    "dur": 0.3,
+    "source_trim_s": 0.0,
+    "why": "code scan exposes bug"
+  },
+  {
+    "at": 7.95,
+    "src": "am/gear-mech.wav",
+    "peak_dbfs": -18,
+    "rate": 1,
+    "dur": 0.57,
+    "source_trim_s": 0.0,
+    "why": "creator portrait rail pulls"
+  },
+  {
+    "at": 8.5,
+    "src": "am/click-mouse.wav",
+    "peak_dbfs": -12,
+    "rate": 1,
+    "dur": 0.14,
+    "source_trim_s": 0.0,
+    "why": "Claude taps phone"
+  },
+  {
+    "at": 8.85,
+    "src": "am/paper-slide.wav",
+    "peak_dbfs": -20,
+    "rate": 1,
+    "dur": 0.38,
+    "source_trim_s": 0.0,
+    "why": "phone interface swipes"
+  },
+  {
+    "at": 9.483,
+    "src": "am/unlock.wav",
+    "peak_dbfs": -21,
+    "rate": 1,
+    "dur": 0.2,
+    "source_trim_s": 0.0,
+    "why": "phone interface unlocks"
+  },
+  {
+    "at": 9.75,
+    "src": "am/page-turn.wav",
+    "peak_dbfs": -17,
+    "rate": 1,
+    "dur": 0.59,
+    "source_trim_s": 0.0,
+    "why": "calendar pages flip"
+  },
+  {
+    "at": 10.7,
+    "src": "am/coin-spin.wav",
+    "peak_dbfs": -23,
+    "rate": 1,
+    "dur": 0.7,
+    "source_trim_s": 0.0,
+    "why": "GitHub stars collect"
+  },
+  {
+    "at": 10.967,
+    "src": "am/coin-spin.wav",
+    "peak_dbfs": -25,
+    "rate": 1,
+    "dur": 0.43,
+    "source_trim_s": 0.0,
+    "why": "professor tosses a star into collector"
+  },
+  {
+    "at": 11.5,
+    "src": "am/coin-drop.wav",
+    "peak_dbfs": -23,
+    "rate": 1,
+    "dur": 0.4,
+    "source_trim_s": 0.0,
+    "why": "star coins enter counter"
+  },
+  {
+    "at": 12.1,
+    "src": "pickup_chime.wav",
+    "peak_dbfs": -24,
+    "rate": 1,
+    "dur": 0.28,
+    "source_trim_s": 0.004145833333333333,
+    "why": "240K count lands"
+  },
+  {
+    "at": 12.7,
+    "src": "am/gear-mech.wav",
+    "peak_dbfs": -16,
+    "rate": 1,
+    "dur": 0.45,
+    "source_trim_s": 0.0,
+    "why": "editor opens"
+  },
+  {
+    "at": 13.53,
+    "src": "coin_slide.wav",
+    "peak_dbfs": -17,
+    "rate": 1,
+    "dur": 0.42,
+    "source_trim_s": 0.0253125,
+    "why": "ECC cartridge feeds into editor"
+  },
+  {
+    "at": 14.0,
+    "src": "thock.wav",
+    "peak_dbfs": -17,
+    "rate": 1,
+    "dur": 0.19,
+    "source_trim_s": 0.0,
+    "why": "ECC cartridge locks"
+  },
+  {
+    "at": 14.57,
+    "src": "knife_switch.wav",
+    "peak_dbfs": -19,
+    "rate": 1,
+    "dur": 0.2,
+    "source_trim_s": 0.0,
+    "why": "installation lever engages"
+  },
+  {
+    "at": 14.93,
+    "src": "am/keys-macbook.wav",
+    "peak_dbfs": -20,
+    "rate": 1,
+    "dur": 1.36,
+    "source_trim_s": 0.0,
+    "why": "long setup prompt typed"
+  },
+  {
+    "at": 16.367,
+    "src": "thock.wav",
+    "peak_dbfs": -16,
+    "rate": 1,
+    "dur": 0.17,
+    "source_trim_s": 0.0,
+    "why": "setup return"
+  },
+  {
+    "at": 16.56,
+    "src": "pickup_chime.wav",
+    "peak_dbfs": -24,
+    "rate": 1,
+    "dur": 0.25,
+    "source_trim_s": 0.004145833333333333,
+    "why": "prompt submitted"
+  },
+  {
+    "at": 16.77,
+    "src": "am/paper-slide.wav",
+    "peak_dbfs": -15,
+    "rate": 1,
+    "dur": 0.68,
+    "source_trim_s": 0.0,
+    "why": "design board unfolds"
+  },
+  {
+    "at": 17.24,
+    "src": "am/marker-stroke.wav",
+    "peak_dbfs": -19,
+    "rate": 1,
+    "dur": 1.2,
+    "source_trim_s": 0.0,
+    "why": "designer draws feature"
+  },
+  {
+    "at": 18.45,
+    "src": "am/marker-stroke.wav",
+    "peak_dbfs": -21,
+    "rate": 1,
+    "dur": 0.55,
+    "source_trim_s": 0.0,
+    "why": "designer finishes detail"
+  },
+  {
+    "at": 19.34,
+    "src": "gold_stamp.wav",
+    "peak_dbfs": -20,
+    "rate": 1,
+    "dur": 0.25,
+    "source_trim_s": 0.0039791666666666664,
+    "why": "plan becomes app"
+  },
+  {
+    "at": 20.23,
+    "src": "thock.wav",
+    "peak_dbfs": -15,
+    "rate": 1,
+    "dur": 0.15,
+    "source_trim_s": 0.0,
+    "why": "hero module docks"
+  },
+  {
+    "at": 20.9,
+    "src": "ticket_click.wav",
+    "peak_dbfs": -17,
+    "rate": 1.04,
+    "dur": 0.14,
+    "source_trim_s": 0.0037708333333333335,
+    "why": "cards module docks"
+  },
+  {
+    "at": 21.56,
+    "src": "metal_ping.wav",
+    "peak_dbfs": -21,
+    "rate": 0.96,
+    "dur": 0.23,
+    "source_trim_s": 0.004166666666666667,
+    "why": "verification module docks"
+  },
+  {
+    "at": 22.23,
+    "src": "am/gear-stutter.wav",
+    "peak_dbfs": -20,
+    "rate": 1,
+    "dur": 0.75,
+    "source_trim_s": 0.0,
+    "why": "security drill works"
+  },
+  {
+    "at": 23.13,
+    "src": "ceramic_crack.wav",
+    "peak_dbfs": -17,
+    "rate": 1,
+    "dur": 0.22,
+    "source_trim_s": 0.0039791666666666664,
+    "why": "fault splits app"
+  },
+  {
+    "at": 23.8,
+    "src": "am/gear-mech.wav",
+    "peak_dbfs": -18,
+    "rate": 1,
+    "dur": 0.45,
+    "source_trim_s": 0.0,
+    "why": "app opens"
+  },
+  {
+    "at": 24.53,
+    "src": "coin_slide.wav",
+    "peak_dbfs": -18,
+    "rate": 1,
+    "dur": 0.24,
+    "source_trim_s": 0.0253125,
+    "why": "bug enters capture"
+  },
+  {
+    "at": 25.09,
+    "src": "ticket_click.wav",
+    "peak_dbfs": -22,
+    "rate": 1.04,
+    "dur": 0.15,
+    "source_trim_s": 0.0037708333333333335,
+    "why": "assistant locks captured bug cart"
+  },
+  {
+    "at": 25.06,
+    "src": "knife_switch.wav",
+    "peak_dbfs": -17,
+    "rate": 1,
+    "dur": 0.19,
+    "source_trim_s": 0.0,
+    "why": "shield seals app"
+  },
+  {
+    "at": 25.56,
+    "src": "metal_ping.wav",
+    "peak_dbfs": -20,
+    "rate": 1,
+    "dur": 0.22,
+    "source_trim_s": 0.003958333333333334,
+    "why": "attack deflected"
+  },
+  {
+    "at": 26.12,
+    "src": "ratchet.wav",
+    "peak_dbfs": -19,
+    "rate": 1,
+    "dur": 0.45,
+    "source_trim_s": 0.0039791666666666664,
+    "why": "test press feeds app"
+  },
+  {
+    "at": 26.783,
+    "src": "impact_deep.wav",
+    "peak_dbfs": -16,
+    "rate": 1,
+    "dur": 0.35,
+    "source_trim_s": 0.0,
+    "why": "test press strikes bugs"
+  },
+  {
+    "at": 27.0,
+    "src": "am/gear-mech.wav",
+    "peak_dbfs": -23,
+    "rate": 1,
+    "dur": 0.94,
+    "source_trim_s": 0.0,
+    "why": "Claude cranks coverage press"
+  },
+  {
+    "at": 28.016,
+    "src": "pickup_chime.wav",
+    "peak_dbfs": -22,
+    "rate": 1,
+    "dur": 0.25,
+    "source_trim_s": 0.004145833333333333,
+    "why": "coverage target reached"
+  },
+  {
+    "at": 28.82,
+    "src": "am/paper-slide.wav",
+    "peak_dbfs": -18,
+    "rate": 1,
+    "dur": 0.45,
+    "source_trim_s": 0.0,
+    "why": "designer feeds first ECC page"
+  },
+  {
+    "at": 29.05,
+    "src": "am/page-turn.wav",
+    "peak_dbfs": -19,
+    "rate": 1,
+    "dur": 0.39,
+    "source_trim_s": 0.0,
+    "why": "coder feeds second ECC page"
+  },
+  {
+    "at": 29.28,
+    "src": "am/paper-slide.wav",
+    "peak_dbfs": -19,
+    "rate": 1,
+    "dur": 0.43,
+    "source_trim_s": 0.0,
+    "why": "tester feeds final ECC page"
+  },
+  {
+    "at": 30.317,
+    "src": "gold_stamp.wav",
+    "peak_dbfs": -19,
+    "rate": 1,
+    "dur": 0.25,
+    "source_trim_s": 0.0039791666666666664,
+    "why": "ECC binder closes and is presented"
+  },
+  {
+    "at": 30.9,
+    "src": "am/cloth-shiver.wav",
+    "peak_dbfs": -19,
+    "rate": 1,
+    "dur": 0.72,
+    "source_trim_s": 0.00175,
+    "why": "Claude pulls cover away"
+  },
+  {
+    "at": 31.67,
+    "src": "am/unlock.wav",
+    "peak_dbfs": -19,
+    "rate": 1,
+    "dur": 0.3,
+    "source_trim_s": 0.0,
+    "why": "public GitHub repo revealed"
+  },
+  {
+    "at": 32.64,
+    "src": "coin_slide.wav",
+    "peak_dbfs": -15,
+    "rate": 1,
+    "dur": 0.4,
+    "source_trim_s": 0.0253125,
+    "why": "large comment plaque enters"
+  },
+  {
+    "at": 33.43,
+    "src": "am/snap.wav",
+    "peak_dbfs": -16,
+    "rate": 1,
+    "dur": 0.2,
+    "source_trim_s": 0.0,
+    "why": "ending gauntlet snap"
+  },
+  {
+    "at": 33.6,
+    "src": "am/click-mouse.wav",
+    "peak_dbfs": -12,
+    "rate": 1,
+    "dur": 0.14,
+    "source_trim_s": 0.0,
+    "why": "ECC comment click"
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "variant": "magnet",
+      "frame": 0,
+      "repo_render_vs_final_encoded_rgb_mae": 3.6135923032407407
+    },
+    {
+      "variant": "zipper",
+      "frame": 0,
+      "repo_render_vs_final_encoded_rgb_mae": 3.5744192065329217
+    }
+  ],
+  "expected_difference": "Final delivery applies BT.601 full-range to BT.709 limited-range conversion and H.264 compression."
+}
