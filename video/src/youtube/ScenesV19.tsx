@@ -5,6 +5,7 @@ import {easeInOut as e,easeOut} from './glass-motion';
 import {bodyFont} from './cinematic-brand';
 import {roadmapBeatsV13} from './ScenesV13';
 import {InstallFinaleV12} from './ScenesV12';
+export {Set,Light,Contact,HiggsSprite,Shot,CineCamera};
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 const recoil=(t:number,at:number)=>t<at?0:Math.sin((t-at)*18)*Math.exp(-(t-at)*7);

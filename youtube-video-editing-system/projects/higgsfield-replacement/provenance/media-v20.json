@@ -1,0 +1,26 @@
+[
+  {
+    "source": "v9/higgsfield-comparison.mp4",
+    "target": "v9/intro-higgsfield-v20.mp4",
+    "correction": "eq=gamma=1.12:brightness=0.006:contrast=1.02:gamma_weight=0.55",
+    "sourceSHA256": "2f9299b6af613604c5738bfcf22525175836f85f245525af0220957d77063721",
+    "targetSHA256": "0fee29925e9aeaa9fedd4baad7aa2fb7e6304898328cb93b3b529d992c732073",
+    "scope": "Opening ComparisonV10 only; normal playback; muted; original comparison assets unchanged"
+  },
+  {
+    "source": "v4/claude-result.mp4",
+    "target": "v9/intro-claude-v20.mp4",
+    "correction": "eq=gamma=1.12:brightness=0.006:contrast=1.02:gamma_weight=0.55",
+    "sourceSHA256": "07657e235ac7adc14b5fb57a59b2b4cae21a926862ded83557a96228a7f7cfee",
+    "targetSHA256": "929bec40f0d6991fb0e631482d964017b05829c3a46537c7d22857d3657bc774",
+    "scope": "Opening ComparisonV10 only; normal playback; muted; original comparison assets unchanged"
+  },
+  {
+    "source": "https://higgsfield.ai/",
+    "target": "v9/higgsfield-page-v20.png",
+    "kind": "Actual homepage screenshot, not a recording or fabricated UI",
+    "captured": "2026-09-12",
+    "account": "Signed out; cookie notice and promotion strip dismissed; no private data",
+    "sha256": "c2335a28403f8319fbe874cb8bab99233093ffa75a0ba0925ce8d8563f3cca58"
+  }
+]

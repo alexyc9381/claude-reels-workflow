@@ -5,6 +5,7 @@ import {Glass,Actor,Label,Lens,Logo,SkillFile,CameraIcon,Key,C,visible,typeOn,cl
 import {ShotStage} from './NarrativeV9';
 import {RooftopBeatV11} from './ScenesV11';
 import {FormatV13} from './ScenesV13';
+import {ShotPlanV20} from './ScenesV20';
 export {TextLens,LaterCue} from './SupportingScenesV7';
 export type SupportKind='typing'|'budget'|'storyboard'|'format'|'saved'|'wrapper'|'sound'|'detail'|'protip'|'chase'|'direction';
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
@@ -21,6 +22,7 @@ export const Support:React.FC<{duration:number;kind:SupportKind;cueId:string}>=(
  const t=useCurrentFrame()/useVideoConfig().fps,show=visible(t,duration),p=easeOut(t,.04,.35),motif=supportMotifs[cueId];
  const shell=(content:React.ReactNode,x=132,y=214,w=1065,h=380)=> <AbsoluteFill data-motif={motif} style={{opacity:show}}><Glass x={x} y={y} w={w} h={h} t={t} frost={.65} style={{transform:`translateY(${(1-p)*36}px) perspective(1800px) rotateX(${(1-p)*7}deg)`}}>{content}</Glass></AbsoluteFill>;
  if(cueId==='s026:10.2')return <RooftopBeatV11 duration={duration}/>;
+ if(cueId==='s021:25')return shell(<ShotPlanV20 t={t} duration={duration}/>,132,218,1065,403);
  if(kind==='format')return <FormatV13 duration={duration}/>;
  if(kind==='chase'){
   const run=e(t,.25,duration-1.1);

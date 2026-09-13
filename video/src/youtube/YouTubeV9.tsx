@@ -173,11 +173,18 @@ export const soundEvents=(m:M)=>{
    for(const u of roadmapBeatsV13)add(b+u*d,'roadmap-ding',.55,1.2);
   }else if(s.kind==='guide'){
    beat(.1,d,'click',.07);beat(.24,d,'paper',.07);beat(.43,d,'click',.07);beat(.59,d,'latch',.065);
+  }else if(s.kind==='wrapper'){
+   beat(.04,d,'servo',.075);beat(.21,d,'shutter',.065);beat(.49,d,'servo',.065);beat(.61,d,'latch',.075);
+  }else if(s.kind==='download'){
+   beat(.07,d,'paper',.075);beat(.38,d,'land',.08);beat(.54,d,'latch',.075);
+  }else if(s.kind==='skill'){
+   add(b+.35,'paper',.075);add(b+1.1,'servo',.07);add(b+4.6,'latch',.075);
+   add(b+5.5,'zip',.065);add(b+s.a!-.7,'paper',.075);add(b+s.a!,'latch',.085);
   }else if(s.kind==='outro'){
    beat(.05,d,'paper',.09);add(450+.17*7.1,'paper',.10);add(450+.31*7.1,'land',.09);add(450+.65*7.1,'latch',.1);
   }else if(s.kind==='direct'){
    for(const [u,n] of [[.04,'paper'],[.19,'latch'],[.25,'zip'],[.51,'click'],[.61,'shutter']] as const)beat(u,s.a!,n,.075);
-   beat(.14,d-s.a!,'land',.08,b+s.a!);beat(.26,d-s.a!,'servo',.075,b+s.a!);beat(.55,d-s.a!,'latch',.075,b+s.a!);
+   beat(.29,d-s.a!,'land',.08,b+s.a!);beat(.52,d-s.a!,'servo',.075,b+s.a!);beat(.65,d-s.a!,'latch',.075,b+s.a!);beat(.74,d-s.a!,'servo',.065,b+s.a!);
   }else for(const [fraction,name] of schedules[s.kind]??[])beat(fraction,d,name,name==='typing'?.075:.12);
  }
  for(const c of v9Cues)add(at(c.id)+c.offset+.12,c.kind==='typing'?'typing':c.kind==='lens'?'servo':c.kind==='keys'?'click':'paper',c.kind==='typing'?.09:.13,c.kind==='typing'?1.9:.8);

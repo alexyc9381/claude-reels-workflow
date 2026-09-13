@@ -1,5 +1,7 @@
 # YouTube editing — indexed learning library
 
+Latest: [V20 understandable worlds and purposeful motion](projects/higgsfield-replacement/REVISION-V20.md), [V20 Mac source handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V20.md). Opening identities move to the top; countdown is a distinct shutter tile; equal intro-only brightness adjustment. Unified skill workstation, actual homepage, landscape journey, simple FREE setup action, distinct facade/direct/vault mechanisms and reactive file/shot-plan scenes. Earlier latest/current labels are historical where they conflict.
+
 Latest: [V19 character-led scenes, spotlight hierarchy and reactive roadmap](projects/higgsfield-replacement/REVISION-V19.md), [V19 editable Mac handoff and next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V19.md). V18's cost/workspace/example/map design was rejected. Preserve the presenter transition; replace those scenes with staged character actions, no production example footage, and Connect → Load skill → Generate with audible arrivals. Specific later revisions near1:04 and7:34; all other source cuts/narration preserved. Earlier “latest/current” entries are history where they conflict.
 
 Latest: [V18 presenter-first intro and hierarchy](projects/higgsfield-replacement/REVISION-V18.md), [V18 editable Mac handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V18.md). Large-to-small opening, clear cost/workflow/map actions and a 0:38 skip-to-2:03 cue. Earlier entries below are history where they conflict.
