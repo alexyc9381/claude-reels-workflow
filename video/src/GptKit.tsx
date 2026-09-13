@@ -2,32 +2,19 @@ import React from "react";
 import { Easing, interpolate } from "remotion";
 
 /* ===========================================================================
-   GPT KIT — THE CHATGPT MASCOT.
+   GPT KIT — THE CHATGPT SPRITE.
 
    Alex: *"you know how we have a Claude sprite icon for our videos... I want a
    ChatGPT sort of sprite icon for this character since I'm gonna be making
-   ChatGPT videos soon."* And then, on the first attempt: *"for the Claude
-   sprite the thing about it is that it doesn't just look like the Claude logo,
-   it's quite interesting and is kind of like a mascot for it."*
+   ChatGPT videos soon."* And: *"for the Claude sprite the thing about it is
+   that it doesn't just look like the Claude logo, it's quite interesting and is
+   kind of like a mascot for it."*
 
-   ⭐⭐⭐ THAT SECOND NOTE IS THE WHOLE DESIGN, AND THE FIRST ATTEMPT FAILED IT.
-   The Claude sprite carries NO Anthropic mark anywhere on it. It is a chunky
-   four-legged clay critter, and its Claude-ness is the clay orange and the
-   personality — nothing else. So the first pass here, which was the house
-   `GoogleSprite` move (recolour the same body, float the OpenAI knot above its
-   head on a badge), was wrong by construction: it produces a Claude sprite
-   WEARING a ChatGPT logo, not a ChatGPT mascot.
-
-   ⭐ SO THE MARK BECAME THE BODY. This creature's body IS the OpenAI knot —
-   its real six-lobed silhouette, with the weave showing through as a tonal
-   emboss. There is no logo pasted on it anywhere, exactly as there is no
-   Anthropic logo on the Claude one. It reads as ChatGPT because of its SHAPE
-   and its GREEN, which is the same trick the Claude sprite plays with clay.
-
-   ⛔ AND IT IS STILL THE SAME SPECIES. Four stubby legs, two side arms, two
-      ink eyes, the same hop / blink / gaze / cheer / shock rig, the same feet
-      line at 0.917 x size. Stand it next to a Claude sprite and it reads as a
-      sibling, which is the point — the reels put them in the same frame.
+   ⭐⭐⭐ THE MARK IS THE BODY. This creature's body IS the OpenAI knot — its real
+   six-lobed silhouette, with the weave showing through. No logo is pasted on it
+   anywhere, exactly as there is no Anthropic logo on the Claude one. It reads as
+   ChatGPT because of its SHAPE and its COLOUR, the same trick the Claude sprite
+   plays with clay.
 
    ⭐ THE GEOMETRY IS TRACED, NOT DRAWN. Standing rule: real logos, never
    invented glyphs. The knot is six interlocking strokes forming seven counters
@@ -37,26 +24,65 @@ import { Easing, interpolate } from "remotion";
 
        IoU 98.38%   ·   area ratio 100.30%   ·   all 7 counters present
 
-   ⛔ WHY NOT THE PNG. `openai.png` is 600x600 8-bit GREYSCALE WITH NO ALPHA —
+   ---------------------------------------------------------------------------
+   ⛔⛔⛔ THE FOUR THINGS THAT WERE MEASURED, NOT GUESSED. Every one of them cost
+   a render. Do not "simplify" any of them back.
+
+   1. THE BODY IS WHITE, NOT GREEN. The first ship was a green body (#2E9E7F)
+      with the weave as a 24%-alpha tonal emboss, and it read as a green blob —
+      Alex: *"it should just be like a Claude kind of thing but for ChatGPT."*
+      The mark people actually recognise is the WHITE knot, so white body +
+      opaque weave is what makes it legible as ChatGPT at a glance.
+
+   2. THE WEAVE IS GREEN, NOT BLACK. A near-black weave is the most faithful
+      version of the logo and it ATE THE FACE: the #151312 eye ink has no value
+      gap against a black weave, the eyes vanish, and the face stops performing
+      — which is the one thing the sprite is for. `WEAVE` is OpenAI green
+      (#10A37F): still a ChatGPT signal, and it leaves the eyes the darkest
+      thing on the body.
+
+   3. A LIMB MUST ROOT AT THE BODY'S CENTRE, NOT ITS EDGE. The body BOX is
+      x 31..169, but that is the box, NOT the silhouette — the knot only reaches
+      x=31 at the ONE y where its lobe is widest. Arms drawn from x=8 to x=34
+      had zero overlap at their own y and visibly FLOATED (Alex: *"the hands
+      need to be like not floating right now they're not attached"*). Every limb
+      here starts at x=100, dead centre under the knot, and is drawn BEFORE the
+      body so the silhouette crops the joint. It cannot open a gap at any pose.
+
+   4. THE CHEER PIVOTS AT THE SHOULDER. Rotating the arm about a point out at
+      x=140 swung the hands SIDEWAYS past the ears and read as earmuffs. Pivot
+      at the root (x=100) and the hand travels UP. 40 degrees; past ~50 it
+      starts to read as rabbit ears.
+
+   ⛔ AND TWO THAT CARRIED OVER FROM THE GREEN BUILD:
+
+   5. THE COUNTERS CANNOT BE THE EYES. The knot's two upper counters sit at
+      (35.5, 24.8) and (64.6, 24.9), very nearly mirror-symmetric and 24.8% down
+      the body, where the Claude sprite's eyes sit at 25.5%. It looks on paper
+      like the logo's own negative space should become the face. Rendered, those
+      counters are big diagonal lozenges that merge into one black bar and read
+      as a VISOR. Ink rects in the Claude positions are what works.
+
+   6. WHY NOT THE PNG. `openai.png` is 600x600 8-bit GREYSCALE WITH NO ALPHA —
       a black knot on an opaque white square. It cannot be a body, cannot be
       tinted, and drops in as a white tile. A path does all three.
 
-   ⛔⛔ THE TWO DESIGN FACTS THAT WERE MEASURED, NOT GUESSED — both cost a
-      render to find, so do not "simplify" them back:
+   ---------------------------------------------------------------------------
+   ⛔ IT IS A DARK-SET CHARACTER. A white body on a cream or white set is
+      invisible. On a light set pass `tint={GPT_SLATE}` — and check it, because
+      a dark body brings back defect 2 above.
 
-      1. THE COUNTERS CANNOT BE THE EYES. The knot's two upper counters sit at
-         (35.5, 24.8) and (64.6, 24.9) — very nearly mirror-symmetric, and 24.8%
-         down the body where the Claude sprite's eyes sit at 25.5%. It looks on
-         paper like the logo's own negative space should become the face. It
-         does not: rendered, those counters are big diagonal lozenges that merge
-         into one black bar and read as a VISOR, not two eyes. Ink rects in the
-         Claude positions are what works.
+   ⛔ NO COSTUME LEVERS. The twelve costumes (wizard, chef, cop, professor…) are
+      the CLAUDE cast's identity. A toque on this character makes it read as the
+      Claude cast in fancy dress. Expressions are rig and carry over; costumes
+      are identity and do not.
 
-      2. THE LIMBS ARE DRAWN BEHIND THE BODY. Claude's body is a hard rect so
-         its legs can sit in front and butt against a flat edge. This body is
-         round, so front-drawn legs either float off the curve or need a fudge
-         per leg. Behind the body, the silhouette crops each leg itself and they
-         emerge at the right length for free.
+   ⛔ IT IS STILL THE SAME SPECIES as the Claude sprite — four stubby legs, two
+      side arms, two ink eyes, the same hop / blink / gaze / cheer / shock rig,
+      the same feet line at 0.917 x size. Stand it next to a Claude sprite and
+      it reads as a sibling, which is the point: the reels put them in one frame.
+
+   PREVIEW:  npx remotion still src/GptKitLab.tsx GptKitSheet out/GPT_KIT.png --frame=28
    ========================================================================= */
 
 /* ---------------------------------------------------------------------------
@@ -186,21 +212,11 @@ export const OpenAIKnot: React.FC<{ x: number; y: number; s: number; f?: number;
 };
 
 /* ===========================================================================
-   THE PALETTE.
-   ⛔ NOT THE PURE BRAND VALUE. Same reason `G_TINTS` clays Google's blue down
-      from #4285F4: a pure #10A37F body is a plastic toy standing in a clay
-      world. This is ChatGPT green pulled toward the house matte.
-   ⛔⛔ AND THE MONOCHROME OPENAI BLACK IS NOT A BODY COLOUR. It was rendered
-      and rejected on sight: at OpenAI's brand black the #151312 eye ink has
-      almost no value gap against the head, the eyes disappear, and the face
-      stops performing — which is the one thing the sprite is for. `GPT_SLATE`
-      below is as dark as this body goes, and it is for a night/silhouette set,
-      never the default.
+   THE PALETTE. See defects 1 and 2 in the header before changing any of these.
    ========================================================================= */
-export const GPT_GREEN = "#2E9E7F";      // the body — the signature, and the default
-export const GPT_GREEN_LIT = "#40B393";  // the top rim light
-export const GPT_SLATE = "#4A4744";      // ⛔ dark set only — see the warning above
-export const GPT_WEAVE = "rgba(20,70,58,0.24)";  // the counters, as a tonal emboss
+export const GPT_WHITE = "#FFFFFF";      // the body — the signature, and the default
+export const GPT_WEAVE = "#10A37F";      // the counters — OpenAI green, keeps the eyes readable
+export const GPT_SLATE = "#4A4744";      // ⛔ light/night sets only — re-check the face if you use it
 export const OPENAI_GREEN = "#10A37F", OPENAI_INK = "#0D0D0D";  // marks only, never the body
 const EYE = "#151312";
 
@@ -224,21 +240,32 @@ const INNER_T = `translate(${CXc} ${CYc + 3}) scale(0.965) translate(${-CXc} ${-
     one groundline: feet at 0.917 x size, head top at 0.220, open eyes at 0.350. */
 export const HEAD_TOP = 0.220, EYES_OPEN = 0.350, FEET = 0.917;
 
+/* ---------------------------------------------------------------------------
+   THE TAPERED LIMB — chosen over mitten / ribbon / claw / split / thumbed /
+   wristed paws on a five-up sheet. It is ONE continuous shape: thin at the
+   shoulder, fat at the hand, no seam at the wrist, so there is no small detail
+   to dissolve at scroll-past size. `s` is +1 for the right arm, -1 for the left.
+   ⛔ `rootX` is 100 by design — see defect 3 in the header.
+   ------------------------------------------------------------------------ */
+const Arm: React.FC<{ s: number; y: number; lift: number; c: string }> = ({ s, y, lift, c }) => {
+  const rootX = 100, tipX = 100 + s * 76, t = tipX + s * 4;
+  return (
+    <g transform={`rotate(${-s * lift * 40} ${rootX} ${y + 10})`}>
+      <path d={`M ${rootX} ${y + 2} L ${t} ${y - 6} L ${t} ${y + 26} L ${rootX} ${y + 18} Z`} fill={c} />
+      <circle cx={t} cy={y + 10} r={16} fill={c} />
+    </g>
+  );
+};
+
 /* ===========================================================================
    THE MASCOT. Same animation rig as `SlopKit`'s Mascot — hop, squash, blink,
    gaze, leg lift, cheer, shock — so it performs like a sibling.
-
-   ⛔ NO COSTUME LEVERS. The twelve costumes (wizard, chef, cop, professor…) are
-      the CLAUDE cast's identity. A toque on this character makes it read as the
-      Claude cast in fancy dress. Expressions are rig, and those carry over;
-      costumes are identity, and those do not.
    ========================================================================= */
 export const GptMascot: React.FC<{ lf: number; size?: number; gaze?: number; nodAmp?: number;
   nodSpeed?: number; shock?: number; cheer?: number; stern?: number; xeyes?: number; tint?: string }> =
   ({ lf, size = 250, gaze = 0, nodAmp = 3.5, nodSpeed = 10, shock = 0, cheer = 0,
      stern = 0, xeyes = 0, tint }) => {
-  const C = tint || GPT_GREEN;
-  const LIT = tint ? tint : GPT_GREEN_LIT;
+  const C = tint || GPT_WHITE;
   const hopP = Math.max(0, Math.sin(lf / (nodSpeed * 0.6)));
   const hop = hopP * nodAmp * 2.2 * (1 - shock);
   const squash = 1 - hopP * 0.045 * (1 - shock) + shock * 0.03;
@@ -250,28 +277,26 @@ export const GptMascot: React.FC<{ lf: number; size?: number; gaze?: number; nod
   const eyeH = (26 + shock * 16) * blink * (1 - stern * 0.5);
   const jump = shock > 0.05 ? Math.max(0, 1 - Math.abs(shock - 0.35) * 4) * 42 : 0;
   const legLift = (i: number) => (shock > 0.3 ? 0 : Math.max(0, Math.sin(lf / (nodSpeed * 0.6) + i * Math.PI)) * 7);
-  const armY = 86 - hop * 0.4 - cheer * 26;
+  const armY = 88 - hop * 0.4;
   const wide = shock > 0.4 ? 4 : 0, shx = shock > 0.4 ? 2 : 0;
   return (
     <div style={{ width: size, height: size, position: "relative",
       transform: `translateY(${-hop - jump}px) scaleY(${squash})`, transformOrigin: "50% 100%" }}>
       {/* ⛔ no `shapeRendering="crispEdges"` here. The Claude sprite can use it
           because it is all axis-aligned rects; this body is curved and crisp
-          edges would staircase the whole silhouette. The rect limbs stay sharp
+          edges would staircase the whole silhouette. The rect legs stay sharp
           on their own. */}
       <svg viewBox="0 0 200 200" width={size} height={size} style={{ overflow: "visible" }}>
-        {/* ---- limbs FIRST: the round body crops them (see the header) ---- */}
+        {/* ---- limbs FIRST: the round body crops them (defect 3 in the header) ---- */}
         <rect x={60}  y={125 - legLift(0)} width={17} height={59} fill={C} />
         <rect x={82}  y={125 - legLift(1)} width={17} height={59} fill={C} />
         <rect x={118} y={125 - legLift(0)} width={17} height={59} fill={C} />
         <rect x={140} y={125 - legLift(1)} width={17} height={59} fill={C} />
-        <rect x={8 - cheer * 4} y={armY} width={26} height={26} fill={C}
-          transform={cheer > 0.2 ? `rotate(${-cheer * 28} 21 ${armY + 13})` : undefined} />
-        <rect x={166 + cheer * 4} y={armY} width={26} height={26} fill={C}
-          transform={cheer > 0.2 ? `rotate(${cheer * 28} 179 ${armY + 13})` : undefined} />
+        <Arm s={-1} y={armY} lift={cheer} c={C} />
+        <Arm s={1}  y={armY} lift={cheer} c={C} />
 
-        {/* ---- the knot AS the body: lit shell, inner surface, woven counters ---- */}
-        <path d={BLOSSOM_D} transform={OUTER_T} fill={LIT} />
+        {/* ---- the knot AS the body: shell, inner surface, woven counters ---- */}
+        <path d={BLOSSOM_D} transform={OUTER_T} fill={C} />
         <path d={BLOSSOM_D} transform={INNER_T} fill={C} />
         {KNOT_COUNTERS.map((d, i) => (
           <path key={"w" + i} d={d} transform={INNER_T} fill={GPT_WEAVE} />

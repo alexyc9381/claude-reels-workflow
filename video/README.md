@@ -12,6 +12,8 @@ Open `src/Root.tsx` first — it registers every reel as a `<Composition>` (id, 
 | `src/index.ts` | entry — `registerRoot(RemotionRoot)` |
 | `src/Root.tsx` | registers every `<Composition>`; the master reel index |
 | `src/Claude<Name>Reel.tsx` | one file per reel (e.g. `ClaudeSimulateReel.tsx`, `ClaudeFactoryReel.tsx`); the scene bodies + VO/SFX/caption wiring |
+| `src/GptKit.tsx` | ⭐ the **ChatGPT sprite** — `GptMascot` (rig), `GptSprite` (placed, action loops), `OpenAIKnot` (the mark). White knot body + green weave; same rig, sightline and feet line as the Claude `Mascot`, so both cast in one frame. Read its header before changing a colour or a limb: six defects are recorded there, each one cost a render |
+| `src/GptKitLab.tsx` | the contact sheet for `GptKit` (poses · squint test · beside Claude). Standalone `registerRoot`: `npx remotion still src/GptKitLab.tsx GptKitSheet out/GPT_KIT.png --frame=28` |
 | `src/components/` | shared building blocks — `Captions.tsx`, `Scenes.tsx`, `Overlays.tsx`, `primitives.tsx`, `fx.tsx`, `Watermark.tsx`, `dataviz.tsx` |
 | `src/data/words_<keyword>.json` | word-level caption timings (`{word,start,end,line}`) per reel, from whisper |
 | `src/data/duck_<keyword>.json` | per-frame VO sidechain-duck envelopes |
@@ -29,6 +31,10 @@ Open `src/Root.tsx` first — it registers every reel as a `<Composition>` (id, 
 - `node_modules` is a **symlink into `../../matchtern-longform/video/node_modules`** — not self-contained; if that sibling repo is gone, reinstall.
 - Scene bodies are **panel-local (0..792), not Sequence-wrapped**, so `<Sfx at={}>` is ROOT-timeline seconds and `over()` starts are FRAMES — the two classic traps. See memory `reel-build-gotchas`, `sfx-root-timeline-trap`.
 - `Easing.quint/quart` **do not exist in Remotion** — use `poly(5)`/`poly(4)` (memory `posts-factory-log`).
+- ⛔ **`src/Root.tsx` does not bundle in this repo.** It imports 19 reel files that live only in the Drive
+  engine zip / the sibling `matchtern-longform` project (`ClaudeCallbackReel`, `Claude59CarouselReel`,
+  `StyleLab`, …), so `remotion still src/index.ts <id>` fails on a module-not-found before it renders
+  anything. To preview a shared component, give it its own `registerRoot` entry file — see `src/GptKitLab.tsx`.
 - Many `V2/V3/V5` and non-`ClaudeReel` files (`GregStyle*`, `Matchtern*`, `DesignSamples`) are experiments/other projects — confirm against `Root.tsx` before assuming a file is a live reel.
 
 ## Related
