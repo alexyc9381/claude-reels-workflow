@@ -31,7 +31,7 @@ This is the handoff index for the complete September 10–11 system-building and
 ## Current production contract
 
 - [Current direction](CURRENT-DIRECTION.md): engine, source audio, framing, typography, white glass, original 2D cast, action hierarchy, unique scenes, sound, retention, privacy and full delivery.
-- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V15.
+- [Conversation decision ledger](REVISION-DECISIONS.md): request clusters, timestamped issues, corrections and precedence through V23.
 - [Approval versus review](APPROVED-ANIMATION-SYSTEM.md): v11 short-study approval and later full-film overrides.
 - [Canonical memory](../memory/youtube-video-editing-system.md): compact entry for future tasks; indexed from memory/MEMORY.md and the root repository map.
 

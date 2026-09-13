@@ -1,6 +1,6 @@
 # No Code Alex YouTube editing system
 
-Current: [V19 character-led intro revision](projects/higgsfield-replacement/REVISION-V19.md), [editable Mac handoff / next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V19.md), [reproduction](projects/higgsfield-replacement/REPRODUCE.md). V18 scene design was rejected; V19 uses separated cost spotlights, animated skill-to-shot, up/down Connect→Load skill→Generate with dings, opening countdown and targeted1:04/7:34 revisions. Preserve source narration/EDL; SFX change. Earlier current labels below are history where conflicting.
+Current: [V23 narration-matched scenes and larger webcam](projects/higgsfield-replacement/REVISION-V23.md), [editable Mac handoff / next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V23.md), [reproduction](projects/higgsfield-replacement/REPRODUCE.md). Preserve the improved V22 direction. Add recognizable model marks, hundreds of illustrated outputs, a source-timed private-key walkthrough, quiet reaction/playback sound and 20%-larger insets. [Causal animation decisions](CAUSAL-ANIMATION-DECISIONS.md) explains the reasoning. Current-source tests and the eventual export receipt are separate from creative approval. Older revisions remain indexed history.
 
 The Remotion-based 16:9 system for No Code Alex long-form tutorials, explainers and course-derived editing. Separate from the short-form reel factory and archived Matchtern style.
 
@@ -9,7 +9,7 @@ The Remotion-based 16:9 system for No Code Alex long-form tutorials, explainers 
 1. [CURRENT-DIRECTION.md](CURRENT-DIRECTION.md) — authoritative current choices and conflict resolution.
 2. [LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) — find every decision, revision, source contract and QA record.
 3. [REVISION-DECISIONS.md](REVISION-DECISIONS.md) — full conversation learning ledger, including superseded requests.
-4. [Higgsfield Replacement V18](projects/higgsfield-replacement/REVISION-V18.md) — large-to-small presenter opening, clearer cost/workflow/map hierarchy and a 0:38 tutorial skip cue. Later V17 scenes/audio preserved.
+4. [Higgsfield Replacement V23](projects/higgsfield-replacement/REVISION-V23.md) — exact current changes, timeline, verification and delivery state.
 5. [REPRODUCE.md](projects/higgsfield-replacement/REPRODUCE.md) — current renderer/test commands and source prerequisites.
 
 **Remotion, not Supereditor. OBS is sole recorded narration; Sony is muted.** White glass, Manrope, original 2D Claude, meaningful action and protected screen legibility. The current film does **not** include the CGI pet. Old references requesting CGI or serif type are historical; the exact original CGI remains preserved for separately authorized use.
@@ -21,6 +21,7 @@ The approved short animation reference is DispatchExplainerSound v11, not a blan
 | Area | Entry |
 |---|---|
 | Course-editor elements transferred | [TRANSFER-LOG.md](TRANSFER-LOG.md) |
+| Why choose an animation concept or reject an alternative? | [CAUSAL-ANIMATION-DECISIONS.md](CAUSAL-ANIMATION-DECISIONS.md) |
 | Preserve useful narration and restore context | [CONTENT-PRESERVATION.md](CONTENT-PRESERVATION.md) |
 | New project template | [PROJECT.template.md](PROJECT.template.md) |
 | Screen/demo framing and focus safety | [SCREEN-DEMO-PROFILE.md](SCREEN-DEMO-PROFILE.md) |

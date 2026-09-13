@@ -2,7 +2,7 @@
 
 Copy this entire folder to your other Mac, not just the reference movie. It contains editable Remotion source and Git history, dependency lockfile, working media, full V23 MP4, checksums, launcher and this prompt. No Drive upload is claimed.
 
-Double-click START-EDITING.command or run `node restore.mjs` from the folder. Requires Node.js22+, Git, internet for first dependency install and at least10GB free. Restoration checks every packaged asset and preserves existing edits. The other physical Mac has not been tested.
+Double-click START-EDITING.command or run `node restore.mjs` from the folder. Requires Node.js 22+, Git, internet for first dependency install and at least 10 GB free. Restoration checks every packaged asset and preserves existing edits. The other physical Mac has not been tested.
 
 ## Next-chat prompt
 
@@ -12,4 +12,4 @@ Double-click START-EDITING.command or run `node restore.mjs` from the folder. Re
 
 The source bundle restores to work/repos/claude-reels-workflow. Working media lives in work/higgsfield-replacement/public. Exact export commands are in the project's REPRODUCE.md; local render/QA paths may need adapting for your Mac.
 
-This is the complete working1080p edit, not the raw4K camera card, node_modules, render caches or private provider configuration. Same-volume media may be hardlinked: create a new derivative file instead of modifying an original in place. Existing V22 folders/movies remain preserved.
+This is the complete working 1080p edit, not the raw 4K camera card, node_modules, render caches or private provider configuration. Same-volume media may be hardlinked: create a new derivative file instead of modifying an original in place. Existing V22 folders/movies remain preserved.

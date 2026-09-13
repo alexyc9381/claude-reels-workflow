@@ -1,0 +1,122 @@
+{
+  "output": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/outputs/higgsfield-replacement-edit-v23.mp4",
+  "bytes": 165341091,
+  "duration": 456.933333,
+  "frames": 13708,
+  "width": 1920,
+  "height": 1080,
+  "fps": "30/1",
+  "sourceHash": "cd37c8e9ce787ec8f868d042d1bf9ec19bd767df4711a854f59db97b17c9e2ba",
+  "allPictureChunksMatchCurrentSource": true,
+  "audio": {
+    "codec": "aac",
+    "sampleRate": "48000",
+    "channels": 2,
+    "lufs": -16.83,
+    "truePeak": -2.02,
+    "lra": 4.8
+  },
+  "chapters": [
+    {
+      "title": "Can you tell the difference?",
+      "seconds": 0
+    },
+    {
+      "title": "Why use the models directly?",
+      "seconds": 36.567
+    },
+    {
+      "title": "Connect fal.ai and Claude",
+      "seconds": 124.1
+    },
+    {
+      "title": "Make your first video",
+      "seconds": 207.667
+    },
+    {
+      "title": "Review and compare the results",
+      "seconds": 297.333
+    },
+    {
+      "title": "The reveal and next step",
+      "seconds": 429.233
+    }
+  ],
+  "decodePassed": true,
+  "fullHumanListeningReview": false,
+  "verifiedEquivalentReusedChunks": [],
+  "audioPacketHash": "SHA256=354904234fb25a4ae720e272917afcf37ead843df3712f9b4ef5ce9492b63f08",
+  "audioMatchesV9Packets": false,
+  "currentAudioContractVerified": true,
+  "mastering": {
+    "sourceHash": "cd37c8e9ce787ec8f868d042d1bf9ec19bd767df4711a854f59db97b17c9e2ba",
+    "targetLUFS": -16,
+    "truePeakTarget": -2.5,
+    "LRA": 11,
+    "codec": "aac",
+    "sampleRate": 48000,
+    "bitrate": 320000
+  },
+  "baselineCommit": "016dcbe",
+  "narrationImplementationAndSyncMapsUnchanged": true,
+  "edlDelta": {
+    "segment": "s030",
+    "removedTailFrames": 5,
+    "reason": "Nonverbal tail only; spoken side-turn covered with screen cutaway"
+  },
+  "audioMatchesV22Packets": false,
+  "sha256": "8977d1ddc78d86003bd5e4119fc88e3c7aa9c17a48c3cff10420eedf82bf3927",
+  "visualQA": {
+    "encodedChunkFramesInspectedSeconds": [
+      25.5,
+      35.5,
+      55,
+      74,
+      140,
+      202,
+      225,
+      255,
+      305.333333,
+      343.666667,
+      435,
+      455
+    ],
+    "pilotFramesInspectedSeconds": [
+      3,
+      14.2,
+      68,
+      160.5,
+      165.1,
+      168.4,
+      305.3,
+      343.6,
+      455.8
+    ],
+    "privateKeyPilot": "18.27-second preview; nine-frame motion strip and detailed state proofs inspected",
+    "checks": [
+      "Five real model/provider marks have readable contrasting tiles and labels.",
+      "Hundreds-of-videos contact sheet no longer obscures Claude or price.",
+      "Synthetic private-key flow advances through create/copy/store; real credential surface remains opaque.",
+      "20%-larger webcam preserves source crop, tutorial input-box clearance, chapter labels and ending resource/brand text.",
+      "Reaction countdown stays small; source side-turn is hidden by the screen cutaway while words remain.",
+      "A/B playback remains large with the resized presenter below the clips."
+    ],
+    "allFramesVisuallyReviewed": false,
+    "userCreativeApproval": false
+  },
+  "premasterSpotChecks": {
+    "basis": "Matched output times after five-frame trim; V22 samples offset by 5/30 second. Volume detection is not a listening review.",
+    "playback371to374": {
+      "v22MeanDB": -51.5,
+      "v23MeanDB": -42.3,
+      "v22PeakDB": -44,
+      "v23PeakDB": -26.6
+    },
+    "reaction375to377": {
+      "v22MeanDB": -27.4,
+      "v23MeanDB": -27.4,
+      "v22PeakDB": -2.9,
+      "v23PeakDB": -2.9
+    }
+  }
+}

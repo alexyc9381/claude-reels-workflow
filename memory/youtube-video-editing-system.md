@@ -44,7 +44,7 @@ Canonical entry: [current direction](../youtube-video-editing-system/CURRENT-DIR
 - Deliver the full rendered video, not only the hook. Inspect current-source output, audio joins, end word, chapters and screen clearance.
 - Code/docs/manifests in Git; raw private media and exports outside Git. Push does not mean publish video.
 
-## Current project
+## Historical V11 project summary
 
 [Higgsfield Replacement V11](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V11.md): new access/credential/rooftop/installation scenes; original role outfits and short-form WorldKit depth; persistent fal.ai checklist; larger OBS viewport; larger A/B reveal logos; earlier gift-style bonus with truthful countdown. Restore the full Veo landing and first reaction, remove repeated bridge/reaction and retake-adjacent lead-in. **V11 changes audio/EDL**, although the renderer selector intentionally remains editVersion v9. Current source/timestamp audit and V11 tests are authoritative, not the historical V9 timeline. Real six-recipe bonus remains present. No CGI, synthetic narration or footage substitution. Review status is recorded in the revision document; a successful render is not creative approval.
 

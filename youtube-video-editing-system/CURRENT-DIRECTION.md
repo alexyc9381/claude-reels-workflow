@@ -1,6 +1,6 @@
 # Current No Code Alex YouTube direction
 
-Consolidated September 11, 2026 from Alex's full system-building and Higgsfield revision conversation. This is the current editorial contract. A user-requested direction is not proof that a particular render has received creative approval. New explicit feedback takes precedence over this document; record that change in the decision ledger.
+Consolidated through September 12, 2026 from Alex's full system-building and Higgsfield revision conversation. This is the current editorial contract. A user-requested direction is not proof that a particular render has received creative approval. New explicit feedback takes precedence over this document; record that change in the decision ledger.
 
 ## Scope and engine
 
