@@ -1,7 +1,7 @@
 
   scene                   MOTION  top share DEADRUN    HOLD  verdict
   ----------------------------------------------------------------------------
-  MAGNET                   14.03      0.074       0     21%  ok
+  MAGNET                   13.89      0.075       0     21%  ok
   TEAM                     14.67      0.071       0     23%  ok
   ATTACK                   11.38      0.124       0     43%  ok
   REPO                     14.20      0.100       0     22%  ok

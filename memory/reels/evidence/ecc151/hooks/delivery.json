@@ -4,26 +4,28 @@
       "variant": "magnet",
       "composition": "ECC151B",
       "drive_url": "https://drive.google.com/file/d/1jy2-ydBSNvT_XI2H4L6jq89KhA0BZMuY/view",
-      "bytes": 22374302,
-      "sha256": "6cc5b6e2e83d6f58324f155ff1e7f1c76d9f5526e2bd28b25e9e5bfd42c6cf48",
+      "bytes": 22354178,
+      "sha256": "b537cafb9731361273902380ad0fdc4d47ca15c9037f235b64da46d82cce945c",
       "duration_s": 34.3,
       "hook_end_s": 3.4,
-      "frame_zero_claude_identity": true
+      "frame_zero_claude_identity": true,
+      "logo_only": true
     },
     {
       "variant": "zipper",
       "composition": "ECC151C",
       "drive_url": "https://drive.google.com/file/d/1-rk4h8rfpd4v3O8KMryyTwifHv2pTqJD/view",
-      "bytes": 22329925,
-      "sha256": "d641cb5c60a94bd6b71aa53efb3b1d2aa4b85bd793ef2d074aaa365de7c73484",
+      "bytes": 22269998,
+      "sha256": "249baedee94e228af81d4e7a0c501fdbb07b06eab0282de963a7b6d59615bf51",
       "duration_s": 34.3,
       "hook_end_s": 3.4,
-      "frame_zero_claude_identity": true
+      "frame_zero_claude_identity": true,
+      "logo_only": true
     }
   ],
   "editable_source": "https://drive.google.com/file/d/1tdHkRIm_WrfQY3W7tdwsJQpG-ijEmH6l/view",
-  "archive_sha256": "c044b0d19be7f9f63f5f848cbfbae91b0018d8d340c7cf80868aaa556a8f1094",
+  "archive_sha256": "a00a2fc5b26f3a52a132dda15de142b1cbbb6e68cbd17e2db4278384f4dd9a3d",
   "original_snap_unchanged": true,
   "creative_approval_not_yet_received": true,
-  "revision": "Prominent official Claude mark plus CLAUDE label on each operated prop from frame zero."
+  "revision": "Official Claude logo alone on each operated prop from frame zero. CLAUDE text labels removed."
 }

@@ -1,12 +1,12 @@
 
   scene                   MOTION  top share DEADRUN    HOLD  verdict
   ----------------------------------------------------------------------------
-  ZIPPER                   10.47      0.119       0     21%  ok
+  ZIPPER                   10.45      0.119       0     21%  ok
   TEAM                     15.40      0.067       0     23%  ok
-  ATTACK                   11.37      0.124       0     43%  ok
+  ATTACK                   11.38      0.124       0     43%  ok
   REPO                     14.20      0.100       0     22%  ok
   CREATOR                  14.52      0.078       0     29%  ok
-  INSTALL                  10.19      0.087       3     12%  ok
+  INSTALL                  10.19      0.087       6     12%  ok
   PLAN                     13.49      0.079       0     23%  ok
   BUILD                    16.64      0.086       0     21%  ok
   SECURE                   11.58      0.088       0     30%  ok

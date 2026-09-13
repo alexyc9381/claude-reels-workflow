@@ -58,3 +58,8 @@ Alex then asked for two different hooks following the same NoCodeAlex system. MA
 ### Frame-zero Claude identity correction
 
 Alex clarified that both hooks must identify Claude from frame 0 to signal audience relevance. Added the official Claude logo and CLAUDE label directly to the operated magnet and zipper pull, with no delayed entrance. The larger zipper plate clears the headline from the opening frame. The existing headline, two mechanisms, audio timing and shared body remain intact. Replaced the two existing Drive files and refreshed their source archive. This implements the requested audience signal; no audience-selection results are claimed.
+
+
+### Logo-only clarification
+
+Alex removed the CLAUDE text treatment: both hooks now use only the official logo on the operated prop. The mark is enlarged and centered in the same housing, present from frame zero. The previous text-label treatment is superseded. Both existing Drive videos and the source archive were updated in place.
