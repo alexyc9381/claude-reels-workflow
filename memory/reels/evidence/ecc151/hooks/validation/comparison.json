@@ -15,32 +15,32 @@
         "magnet"
       ],
       "hook_0_to_3_4_mean_hamming": 22.764705882352942,
-      "hook_min_hamming": 13,
-      "whole_reel_mean_hamming": 2.546511627906977,
-      "body_from_4s_mean_hamming": 0.3223684210526316,
-      "body_from_4s_pixel_mae": 0.4083798057154605
+      "hook_min_hamming": 14,
+      "whole_reel_mean_hamming": 2.5406976744186047,
+      "body_from_4s_mean_hamming": 0.3092105263157895,
+      "body_from_4s_pixel_mae": 0.41221140008223683
     },
     {
       "pair": [
         "snap",
         "zipper"
       ],
-      "hook_0_to_3_4_mean_hamming": 31.470588235294116,
+      "hook_0_to_3_4_mean_hamming": 31.294117647058822,
       "hook_min_hamming": 25,
-      "whole_reel_mean_hamming": 3.366279069767442,
-      "body_from_4s_mean_hamming": 0.26973684210526316,
-      "body_from_4s_pixel_mae": 0.46485929790296054
+      "whole_reel_mean_hamming": 3.436046511627907,
+      "body_from_4s_mean_hamming": 0.3684210526315789,
+      "body_from_4s_pixel_mae": 0.469723906935307
     },
     {
       "pair": [
         "magnet",
         "zipper"
       ],
-      "hook_0_to_3_4_mean_hamming": 31.764705882352942,
+      "hook_0_to_3_4_mean_hamming": 31.470588235294116,
       "hook_min_hamming": 27,
-      "whole_reel_mean_hamming": 3.377906976744186,
-      "body_from_4s_mean_hamming": 0.2631578947368421,
-      "body_from_4s_pixel_mae": 0.4077051637883772
+      "whole_reel_mean_hamming": 3.2906976744186047,
+      "body_from_4s_mean_hamming": 0.20394736842105263,
+      "body_from_4s_pixel_mae": 0.3105987013432018
     }
   ]
 }

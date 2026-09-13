@@ -1,14 +1,10 @@
 {
-  "request": "Claude must be signalled from frame zero for audience relevance.",
-  "implemented": "Official Claude mark and CLAUDE label attached to both primary props, fully opaque at frame 0; inherited header mark retained.",
+  "request": "Show only the Claude logo, without the CLAUDE text label, from frame zero.",
+  "implemented": "Centered, enlarged official Claude mark on both primary props; no CLAUDE text on the plates. Fully opaque at frame 0. Inherited header mark retained.",
   "reviewed_frames": [
-    0,
-    24,
-    48,
-    72,
-    96
+    0
   ],
-  "review": "Full-frame and phone-size checks: identity readable in the opening; plate follows operated prop; header and later GitHub payoff retained.",
+  "review": "Both encoded first frames checked at phone size. Unchanged plate geometry and motion; logo enlarged from 104 to 124 px. Text removed from shared ClaudePlate component.",
   "logo_sha256": "5119ef950a0d648b3fd62865791e73f07f32e18ddab84e4f21160f8c641c0f5f",
   "preview_in_archive": "ECC_Remotion_Source/hooks/preview-frame0.jpg",
   "audience_outcome_measured": false

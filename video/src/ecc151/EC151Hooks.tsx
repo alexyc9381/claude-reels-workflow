@@ -6,7 +6,7 @@ import {Logo} from './EC150Revision';
 
 // Identity is fully visible from frame zero, on the operated prop rather than
 // waiting for the later GitHub payoff. This is an audience signal, not a fade-in.
-const ClaudePlate:React.FC<{x:number;y:number}>=({x,y})=><div style={{position:'absolute',left:x,top:y,width:190,height:162,boxSizing:'border-box',background:'#FFF9EC',border:'5px solid #385448',borderRadius:22,boxShadow:'0 7px 0 #263D39'}}><Img src={staticFile('logos/claude.svg')} style={{position:'absolute',left:38,top:7,width:104,height:104}}/><div style={{position:'absolute',left:0,right:0,top:113,textAlign:'center',fontSize:31,lineHeight:'36px',fontWeight:900,letterSpacing:-.7,color:'#733E2C'}}>CLAUDE</div>{[12,162].map(left=><div key={left} style={{position:'absolute',left,top:12,width:7,height:7,borderRadius:'50%',background:'#BCA97D'}}/>)}</div>;
+const ClaudePlate:React.FC<{x:number;y:number}>=({x,y})=><div style={{position:'absolute',left:x,top:y,width:190,height:162,boxSizing:'border-box',background:'#FFF9EC',border:'5px solid #385448',borderRadius:22,boxShadow:'0 7px 0 #263D39'}}><Img src={staticFile('logos/claude.svg')} style={{position:'absolute',left:28,top:14,width:124,height:124}}/>{[12,162].map(left=><div key={left} style={{position:'absolute',left,top:12,width:7,height:7,borderRadius:'50%',background:'#BCA97D'}}/>)}</div>;
 
 // Hook B: lateral attraction → consolidation → a powered operator takes control.
 // Each tool has a source, a curved path, a contact, and a visible destination.
