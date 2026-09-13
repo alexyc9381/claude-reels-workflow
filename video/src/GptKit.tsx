@@ -54,6 +54,18 @@ import { Easing, interpolate } from "remotion";
       at the root (x=100) and the hand travels UP. 40 degrees; past ~50 it
       starts to read as rabbit ears.
 
+   7. THE KNOT MUST DOMINATE THE SILHOUETTE. Alex, on the first white ship:
+      *"idk if this is like immediate someone seeing its chatgpt."* He was right.
+      Rendered at 104px and then BLURRED — which is what a thumb-scroll actually
+      delivers — the body read as a white blob with a green smudge and the
+      spiral was gone, because roughly a third of the sprite's area was legs and
+      arms, and no part of a leg carries a brand signal. Growing the body
+      138->164 wide (110->131 tall) and slimming the limbs (legs 17->14, reach
+      76->66, hand r16->13) moves that area to the only part that says ChatGPT,
+      and the spiral survives the blur. ⛔ Measured against a darker weave on
+      the same sheet: the SIZE change did more than the colour change. Keep the
+      weave at OpenAI green (defect 2) and buy recognition with area instead.
+
    ⛔ AND TWO THAT CARRIED OVER FROM THE GREEN BUILD:
 
    5. THE COUNTERS CANNOT BE THE EYES. The knot's two upper counters sit at
@@ -227,7 +239,7 @@ const EYE = "#151312";
    in a shared frame.   BY = 70 - BH * 0.248   (0.248 = the counters' own height
    fraction, i.e. the mark's natural "eye line").
    ------------------------------------------------------------------------ */
-export const BW = 138, BH = 110, BX = 100 - BW / 2, BY = 70 - BH * 0.248;
+export const BW = 164, BH = 131, BX = 100 - BW / 2, BY = 70 - BH * 0.248;
 const CXc = 100, CYc = BY + BH / 2;
 /** maps the 0..100 mark into the 200-unit body box. */
 const OUTER_T = `translate(${BX} ${BY}) scale(${BW / 100} ${BH / 100})`;
@@ -248,11 +260,11 @@ export const HEAD_TOP = 0.220, EYES_OPEN = 0.350, FEET = 0.917;
    ⛔ `rootX` is 100 by design — see defect 3 in the header.
    ------------------------------------------------------------------------ */
 const Arm: React.FC<{ s: number; y: number; lift: number; c: string }> = ({ s, y, lift, c }) => {
-  const rootX = 100, tipX = 100 + s * 76, t = tipX + s * 4;
+  const rootX = 100, tipX = 100 + s * 66, t = tipX + s * 4;
   return (
     <g transform={`rotate(${-s * lift * 40} ${rootX} ${y + 10})`}>
-      <path d={`M ${rootX} ${y + 2} L ${t} ${y - 6} L ${t} ${y + 26} L ${rootX} ${y + 18} Z`} fill={c} />
-      <circle cx={t} cy={y + 10} r={16} fill={c} />
+      <path d={`M ${rootX} ${y + 3} L ${t} ${y - 4} L ${t} ${y + 24} L ${rootX} ${y + 17} Z`} fill={c} />
+      <circle cx={t} cy={y + 10} r={13} fill={c} />
     </g>
   );
 };
@@ -288,10 +300,10 @@ export const GptMascot: React.FC<{ lf: number; size?: number; gaze?: number; nod
           on their own. */}
       <svg viewBox="0 0 200 200" width={size} height={size} style={{ overflow: "visible" }}>
         {/* ---- limbs FIRST: the round body crops them (defect 3 in the header) ---- */}
-        <rect x={60}  y={125 - legLift(0)} width={17} height={59} fill={C} />
-        <rect x={82}  y={125 - legLift(1)} width={17} height={59} fill={C} />
-        <rect x={118} y={125 - legLift(0)} width={17} height={59} fill={C} />
-        <rect x={140} y={125 - legLift(1)} width={17} height={59} fill={C} />
+        <rect x={61.5}  y={125 - legLift(0)} width={14} height={59} fill={C} />
+        <rect x={83.5}  y={125 - legLift(1)} width={14} height={59} fill={C} />
+        <rect x={119.5} y={125 - legLift(0)} width={14} height={59} fill={C} />
+        <rect x={141.5} y={125 - legLift(1)} width={14} height={59} fill={C} />
         <Arm s={-1} y={armY} lift={cheer} c={C} />
         <Arm s={1}  y={armY} lift={cheer} c={C} />
 
