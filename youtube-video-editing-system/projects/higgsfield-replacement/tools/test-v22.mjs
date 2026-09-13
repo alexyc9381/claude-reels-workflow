@@ -21,6 +21,7 @@ assert.match(scene,/role="archivist"/);assert.match(scene,/role="courier"/);asse
 assert.match(scene,/whiteSpace:'nowrap'/);assert.doesNotMatch(scene,/Ready for your first prompt|Math.random|Date.now|setTimeout/);
 assert.match(read('ScenesV9.tsx'),/ProductionV9=ProductionV22/);assert.match(read('ScenesV9.tsx'),/GuideV9=GuideV22/);assert.match(read('ScenesV9.tsx'),/OutroV9=OutroV22/);
 assert.match(read('ScenesV9.tsx'),/CostV22 as CostV20/);assert.match(scene,/Two connected cost mechanisms/);assert.match(read('YouTubeV8Primitives.tsx'),/data-character-separation="ink-rim"/);
+assert.match(scene,/data-price-block="per-generation"/);assert.match(scene,/x=\{1021\} y=\{812\}/);assert.match(scene,/width:345,textAlign:'center'/);assert.match(scene,/fontSize:28,lineHeight:1.15,marginTop:6/);
 assert.match(read('ScenesV9.tsx'),/FeatureVault=VaultV20/);
 assert.match(read('ScenesV21.tsx'),/<OctopusV22/);assert.match(read('ScenesV21.tsx'),/globalSeconds<31\?30:0/);
 assert.match(read('SupportingScenesV9.tsx'),/<SavedOverlayV22/);assert.match(read('SupportingScenesV9.tsx'),/<MixOverlayV22/);

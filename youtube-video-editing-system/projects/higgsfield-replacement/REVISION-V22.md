@@ -38,6 +38,8 @@ Rendered proofs caught and corrected: clipped laptop text (replaced with prompt-
 
 ## Verification and delivery
 
+Price-format follow-up: the 10¢ block previously crowded the curved platform boundary. It is now a fixed345px centered group at(1021,812), with a74px numeral row, subordinate31px approximation symbol, and28px unit label separated by6px. Explicit line heights and tabular numerals remove inherited metric ambiguity. Rendered frames at7.5s and14.6s were inspected for platform/facecam clearance; this is a typographic correction, not a changed price claim.
+
 Source baseline: 4d40d78 (verified full V21). test-v22.mjs includes inherited EDL/OBS/privacy/frame-clock tests, source equality for protected files, equal intro-grade/original media hashes, scene wiring and quiet contact clocks. All V22 picture chunks must be freshly rendered because the background changes across the film; do not seed the V21 picture cache.
 
 Full render/validation is in progress. Expected output: outputs/higgsfield-replacement-edit-v22.mp4, 457.1s / 13713 frames / 1920×1080 / 30fps / six chapters. Machine completion evidence will be recorded in verification-v22.json, then the local source/media handoff is packaged.
