@@ -1,0 +1,205 @@
+{
+  "output": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/outputs/higgsfield-replacement-edit-v21.mp4",
+  "bytes": 160301025,
+  "duration": 457.1,
+  "frames": 13713,
+  "width": 1920,
+  "height": 1080,
+  "fps": "30/1",
+  "sourceHash": "4e6f366773adafacf24ea47558d2bcaa7fa5ddd7fae7edf191b11ad772fdd714",
+  "allPictureChunksMatchCurrentSource": true,
+  "audio": {
+    "codec": "aac",
+    "sampleRate": "48000",
+    "channels": 2,
+    "lufs": -16.82,
+    "truePeak": -2.09,
+    "lra": 4.7
+  },
+  "chapters": [
+    {
+      "title": "Can you tell the difference?",
+      "seconds": 0
+    },
+    {
+      "title": "Why use the models directly?",
+      "seconds": 36.567
+    },
+    {
+      "title": "Connect fal.ai and Claude",
+      "seconds": 124.1
+    },
+    {
+      "title": "Make your first video",
+      "seconds": 207.667
+    },
+    {
+      "title": "Review and compare the results",
+      "seconds": 297.333
+    },
+    {
+      "title": "The reveal and next step",
+      "seconds": 429.4
+    }
+  ],
+  "decodePassed": true,
+  "fullHumanListeningReview": false,
+  "verifiedEquivalentReusedChunks": [
+    {
+      "from": 2700,
+      "to": 5399,
+      "priorSourceHash": "2df0bdc2cc75ac3abed95e3facc51f02b3d35089e0b13fecaca3bb3654df3905"
+    },
+    {
+      "from": 8100,
+      "to": 10799,
+      "priorSourceHash": "2df0bdc2cc75ac3abed95e3facc51f02b3d35089e0b13fecaca3bb3654df3905"
+    },
+    {
+      "from": 10800,
+      "to": 13499,
+      "priorSourceHash": "2df0bdc2cc75ac3abed95e3facc51f02b3d35089e0b13fecaca3bb3654df3905"
+    },
+    {
+      "from": 13500,
+      "to": 13712,
+      "priorSourceHash": "2df0bdc2cc75ac3abed95e3facc51f02b3d35089e0b13fecaca3bb3654df3905"
+    }
+  ],
+  "audioPacketHash": "SHA256=d95243dd9158f4ccfe9d674d8e5a9015d22c11311152d3974092748687a43606",
+  "audioMatchesV9Packets": false,
+  "currentAudioContractVerified": true,
+  "mastering": {
+    "sourceHash": "4e6f366773adafacf24ea47558d2bcaa7fa5ddd7fae7edf191b11ad772fdd714",
+    "targetLUFS": -16,
+    "truePeakTarget": -2.5,
+    "LRA": 11,
+    "codec": "aac",
+    "sampleRate": 48000,
+    "bitrate": 320000
+  },
+  "narrationAndEDLUnchangedFromBaseline": "53192c6",
+  "verifiedReusedParts": [
+    {
+      "from": 2700,
+      "to": 5399,
+      "bounded": false,
+      "sha256": "f179e74db2cc334eff9bb9a1f4475e395d0b755402f1b08ff2cf036e23d6d6d6"
+    },
+    {
+      "from": 8100,
+      "to": 10799,
+      "bounded": false,
+      "sha256": "07c2eb97243a5925bc8b1674a5b4efc01859ab26b978a7568e6c85125451ecbf"
+    },
+    {
+      "from": 10800,
+      "to": 13499,
+      "bounded": false,
+      "sha256": "1dd7eefa02fa255d90ae16f287b0f4b236ba4f78fbd1ec7da2d8f81045cc2d05"
+    },
+    {
+      "from": 13500,
+      "to": 13712,
+      "bounded": false,
+      "sha256": "d1c464340349c26e378262b4adafbf0acf41a3ac5b37e0252006c9334c1692a6"
+    },
+    {
+      "from": 1200,
+      "to": 1499,
+      "bounded": true,
+      "sha256": "3abab157c33b4a35f66ef28741dd4d521a90ac64fde390f8d597f296fa1ccae4"
+    },
+    {
+      "from": 1500,
+      "to": 1799,
+      "bounded": true,
+      "sha256": "f193add53cd1b273d33ca59cf0d9ee5aaa7a62a538fdb9c6730e42c2d80cec9b"
+    },
+    {
+      "from": 1800,
+      "to": 2099,
+      "bounded": true,
+      "sha256": "a6b1c83895edfee36f236fbe24535548d8ba7751f143d81831c7f52b84327f2e"
+    },
+    {
+      "from": 2100,
+      "to": 2399,
+      "bounded": true,
+      "sha256": "99be443f7836f017f9e74847e79a708c66e206a775ec5994dae618edf7db0a55"
+    },
+    {
+      "from": 2400,
+      "to": 2699,
+      "bounded": true,
+      "sha256": "8d0b6c3fecdedc5b70f84bf88c95c598ab09619746c639726ceee2bcb3a38b1e"
+    },
+    {
+      "from": 5700,
+      "to": 5999,
+      "bounded": true,
+      "sha256": "e786566579a92d662de82a6708f1825510e66a6664ac15b1d622a45a8c815082"
+    },
+    {
+      "from": 6000,
+      "to": 6299,
+      "bounded": true,
+      "sha256": "6d61d589d8cf42de3615d1d5af231d0909bc9aade6cd627cd4da8b191c52a0b8"
+    },
+    {
+      "from": 6300,
+      "to": 6599,
+      "bounded": true,
+      "sha256": "695f99745c2da5889275767ad7b065ca85113955ef444e291178bea761f01681"
+    },
+    {
+      "from": 6600,
+      "to": 6899,
+      "bounded": true,
+      "sha256": "fff1524c6bfe43fb61573901c7f6b7437d54a53a52a768a1c0546c4105ff59ef"
+    },
+    {
+      "from": 7200,
+      "to": 7499,
+      "bounded": true,
+      "sha256": "d7401a1cb7b0dfe7f3da9fba688ef7352a0533cadbf21882192b14dc4e49a52b"
+    },
+    {
+      "from": 7500,
+      "to": 7799,
+      "bounded": true,
+      "sha256": "563efcff27f33d81812b6b1c2db7247e7c67ac4bec72319a53bb92ffded5fb72"
+    },
+    {
+      "from": 7800,
+      "to": 8099,
+      "bounded": true,
+      "sha256": "c3cd5085e4659236195b9cdd8c957f46ac48ddf3232953968106fe08beb8b6b5"
+    }
+  ],
+  "audioMatchesV19Packets": false,
+  "unchangedPictureAfter270Seconds": true,
+  "outputSHA256": "c2bfc5a3ae7560b0f1a94ecf0004588cad3c5e21c90ba4c2abbdc26990e835f6",
+  "sourceTests": [
+    "test-v13.mjs: PASS",
+    "test-v21.mjs: PASS"
+  ],
+  "visualQA": {
+    "correctedCropSeconds": [
+      0,
+      7,
+      27.4
+    ],
+    "openingBrightnessSeconds": [
+      2
+    ],
+    "costSceneSequenceFromExport": [
+      7.5,
+      15
+    ],
+    "roadmapSeconds": [
+      25.5
+    ],
+    "scope": "Sampled rendered frames and export action contact sheet, not full human listening or creative approval."
+  }
+}

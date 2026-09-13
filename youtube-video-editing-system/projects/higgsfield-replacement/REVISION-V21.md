@@ -29,6 +29,8 @@ Opening large face still moves to the bottom-center inset. Top 1/2 badges and di
 
 ## Verification and delivery
 
+Completed: the full 457.1-second V21 export passes complete video/audio decode, source-receipt and chapter checks. AAC measures -16.82 LUFS and -2.09 dBTP. Decoded pictures after270s exactly match the preserved V19 tail; V20 later changed scenes before that point remain included. Export action frames were inspected from7.5–15s in addition to source-rendered framing/roadmap proofs. SHA256: c2bfc5a3ae7560b0f1a94ecf0004588cad3c5e21c90ba4c2abbdc26990e835f6. See [machine verification](verification-v21.json); full human listening and creative approval are not claimed.
+
 At source freeze, TS/TSX parsing and inherited EDL/privacy/OBS-only regression tests pass. Corrected framing, brighter opening, impact/ending and top labels were inspected in rendered stills. Full export, loudness/decode checks and local editable package are tracked by verification-v21.json when completed; a successful render does not mean human creative approval or full listening review.
 
 Expected full output: outputs/higgsfield-replacement-edit-v21.mp4 (457.1s, 13713 frames, 1920×1080, 30fps). Local handoff: Documents/NoCodeAlex-Higgsfield-V21-Editing-Handoff. No Drive upload is claimed.
