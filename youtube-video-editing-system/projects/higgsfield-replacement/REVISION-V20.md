@@ -2,14 +2,16 @@
 
 September 12, 2026. Supersedes conflicting V19 scene direction. Delivery version V20; `editVersion: v9` remains the renderer selector. This is an implementation/review record, not Alex's creative approval.
 
+Same-turn correction after showing the roadmap still: Alex rejected the forest clutter. Trees, hills, cabins and bridge are removed. Keep the clean curved route, three detailed functional stops and timed reactions. Higgsfield now scrolls downward through an actual full-page capture, rather than holding the original single viewport. These corrections override forest/landscape wording in earlier V20 notes and previews.
+
 ## Implemented scene direction
 
 | Final time | Beginning → action → changed state |
 |---|---|
 | 0:00–0:07 | Preserve large presenter shrinking to bottom-center; large blind videos. Move 164px 1/2 badges to top. Distinct central shutter-tile 3–2–1, alternating subtle clip punch-ins and existing perimeter timers. Identical conservative shadow lift on both clips, intro only. |
 | 0:07–0:15 | Separate lit cost workbenches: Higgsfield's recurring calendar turns/stamps; Claude operator loads a reusable instruction cartridge into one unified workstation. Prices retain monthly versus per-generation units. |
-| 0:15–0:24 | Actual signed-out Higgsfield homepage contracts beside one skill file; then shared prompt/models feed a camera action, drawn result and local-save payoff. Homepage is a screenshot, not a fabricated UI or live recording. No generated-example footage in this explainer. |
-| 0:24–0:27 | Claude travels a sage/cream landscape route through a fal gate, Claude workshop and camera lookout. Three arrivals trigger their corresponding response, glow and existing quiet glass dings. |
+| 0:15–0:24 | Actual signed-out Higgsfield page scrolls from top into features beside one skill file; then shared prompt/models feed a camera action, drawn result and local-save payoff. This is an animated viewport over a full-page screenshot, not fabricated UI or live browser recording. No generated-example footage in this explainer. |
+| 0:24–0:27 | Claude travels a clean cream/orange curved route: fal gate, Claude instruction dock and camera. Three arrivals trigger corresponding responses, glow and quiet glass dings. No forest, buildings, hills or bridge. |
 | 0:31–0:37 | One FREE setup task: copy the skill command into Claude. Remove competing book/camera props and duplicate files. Preserve description and agent-destination context. |
 | 0:47–0:59 | Lift the branded platform facade; reveal actual model marks and engine stations, then queue outputs at a closing usage gate. No repeated $100 paper scene. |
 | 0:59–1:11 | Claude crosses out a subscription turnstile, connects a direct cable to the Seedance camera and sends a per-generation coin; a result emerges. |
@@ -23,7 +25,7 @@ The 27–31s reaction teaser, skip-to-2:03 cue, narration, full EDL, camera offs
 ## Durable learning
 
 - **Simple concept, detailed execution.** One understandable job can have rich staging, connected secondary mechanisms, lighting, contact, recoil and payoff. Unrelated prop inventory is not sophistication.
-- **Worlds need purpose.** A landscape roadmap contains three functional destinations; a workstation groups file, instruction, operator and result. Avoid scattered satellites.
+- **Worlds need purpose, not scenery for its own sake.** The rejected forest added clutter. The cleaner roadmap keeps only three functional destinations; a workstation groups file, instruction, operator and result. Avoid scattered satellites.
 - **Fast means successive meaningful events.** Anticipate → move → touch → react → complete; do not replace progression with idle oscillation or randomized clutter. Allow readable holds after a payoff.
 - Keep object identity through a handoff. Draw the carried object above the receiving actor when it must remain visible; remove duplicate static props.
 - Abstract scenes still have to explain the narrated clause with audio off. “Skill” means reusable instructions, not a new model or a magically free API.

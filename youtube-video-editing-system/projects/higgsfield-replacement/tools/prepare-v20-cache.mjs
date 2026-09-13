@@ -27,7 +27,7 @@ assert.equal(host.slice(host.indexOf('export const YouTubeSound:')),oldHost.slic
 let comparison=text(current,'StoryScenesV10.tsx'),oldComparison=text(old,'StoryScenesV10.tsx');
 for(const marker of ['data-comparison-side','data-choice-number','data-opening-countdown'])comparison=comparison.replace(comparison.split('\n').find(l=>l.includes(marker)),oldComparison.split('\n').find(l=>l.includes(marker)));
 assert.equal(comparison,oldComparison,'Only opening media/badges/countdown line changes');
-const newMedia=['higgsfield-page-v20.png','intro-claude-v20.mp4','intro-higgsfield-v20.mp4','media-v20-ledger.json'];
+const newMedia=['higgsfield-page-v20.png','higgsfield-scroll-v20.png','intro-claude-v20.mp4','intro-higgsfield-v20.mp4','media-v20-ledger.json'];
 const fingerprint=(read,files,baseline=false)=>{const h=createHash('sha256').update(JSON.stringify(JSON.parse(read(props))));for(const n of files)h.update(n).update(read('video/src/youtube/'+n));h.update('WorldKit.tsx').update(read('video/src/WorldKit.tsx'));for(const n of ['cube.mov','pipeline-result.jpg'])h.update(readFileSync(path.join(work,'public',n)));for(const folder of ['v3','v4','v7','v9'])for(const n of readdirSync(path.join(work,'public',folder)).sort()){if(baseline&&folder==='v9'&&newMedia.includes(n))continue;h.update(n).update(readFileSync(path.join(work,'public',folder,n)));}return h.digest('hex');};
 const priorSourceHash=fingerprint(old,oldNames,true),sourceHash=fingerprint(current,names);
 assert.equal(priorSourceHash,'623503bbad5872d820d279485f5e93dad414e863f49165033c0c73a915c6aa43','All original media fingerprints must match V19');

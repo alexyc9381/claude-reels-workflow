@@ -16,5 +16,6 @@ for(const [source,target] of [['v9/higgsfield-comparison.mp4','v9/intro-higgsfie
  entries.push({source,target,correction,sourceSHA256:createHash('sha256').update(readFileSync(src)).digest('hex'),targetSHA256:createHash('sha256').update(readFileSync(dst)).digest('hex'),scope:'Opening ComparisonV10 only; normal playback; muted; original comparison assets unchanged'});
 }
 entries.push({source:'https://higgsfield.ai/',target:'v9/higgsfield-page-v20.png',kind:'Actual homepage screenshot, not a recording or fabricated UI',captured:'2026-09-12',account:'Signed out; cookie notice and promotion strip dismissed; no private data',sha256:createHash('sha256').update(readFileSync(path.join(pub,'v9/higgsfield-page-v20.png'))).digest('hex')});
+entries.push({source:'https://higgsfield.ai/',target:'v9/higgsfield-scroll-v20.png',kind:'Actual full-page screenshot with a deterministic animated downward viewport scroll; not a live browser recording',captured:'2026-09-12',account:'Signed out; captured at scrollY 0 after visiting lower content to load media',width:1265,height:12113,sha256:createHash('sha256').update(readFileSync(path.join(pub,'v9/higgsfield-scroll-v20.png'))).digest('hex')});
 writeFileSync(path.join(pub,'v9/media-v20-ledger.json'),JSON.stringify(entries,null,2)+'\n');
 console.log(entries);

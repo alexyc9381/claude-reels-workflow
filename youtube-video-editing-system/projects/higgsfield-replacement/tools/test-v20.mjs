@@ -10,7 +10,7 @@ assert.doesNotMatch(s,/Math\.random|Date\.now|setTimeout|OffthreadVideo|Concept 
 for(const name of ['Cost','Production','Roadmap','Guide','Wrapper','Direct','Vault','Skill','ShotPlan'])assert.match(s,new RegExp('export const '+name+'V20'));
 assert.match(s,/Reusable instructions/);assert.match(s,/Claude skill/);assert.doesNotMatch(s,/Claude Scale/i);
 assert.equal((s.match(/>\$100</g)||[]).length,1,'Recurring subscription price belongs only to cost scene');
-assert.match(s,/higgsfield-page-v20.png/);assert.match(s,/roadmapBeatsV13/);assert.match(s,/routeV20/);assert.match(s,/minimal/);
+assert.match(s,/higgsfield-scroll-v20.png/);assert.match(s,/data-homepage-scroll/);assert.match(s,/data-clean-roadmap/);assert.doesNotMatch(s,/<Tree|trail-land|footbridge/);assert.match(s,/roadmapBeatsV13/);assert.match(s,/routeV20/);assert.match(s,/minimal/);
 assert.match(comparison,/top:opening\?62:789/);assert.match(comparison,/shutter-not-circle/);
 assert.match(comparison,/opening\?\(i\?'v9\/intro-claude-v20.mp4':'v9\/intro-higgsfield-v20.mp4'\)/);
 for(const t of [1.6,2.6,3.6])assert.equal(3-Math.floor(t-1.6),[3,2,1][Math.round(t-1.6)]);

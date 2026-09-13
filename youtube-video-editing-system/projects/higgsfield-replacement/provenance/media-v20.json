@@ -22,5 +22,15 @@
     "captured": "2026-09-12",
     "account": "Signed out; cookie notice and promotion strip dismissed; no private data",
     "sha256": "c2335a28403f8319fbe874cb8bab99233093ffa75a0ba0925ce8d8563f3cca58"
+  },
+  {
+    "source": "https://higgsfield.ai/",
+    "target": "v9/higgsfield-scroll-v20.png",
+    "kind": "Actual full-page screenshot with a deterministic animated downward viewport scroll; not a live browser recording",
+    "captured": "2026-09-12",
+    "account": "Signed out; captured at scrollY 0 after visiting lower content to load media",
+    "width": 1265,
+    "height": 12113,
+    "sha256": "ad6ab6f35d530070e308182d7d1bdfd63349b83eef1a2cedd208ae669fc9ee30"
   }
 ]

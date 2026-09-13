@@ -11,6 +11,8 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Narrative and retention
 
+- **Latest V20 correction:** remove forest clutter (trees/hills/cabins/bridge); keep a clean curved route and three detailed working props with synchronized arrival reactions. Animate a downward scroll through the actual Higgsfield page capture. Rich detail belongs to the explanation, not unrelated scenery.
+
 - **V20 supersedes conflicting V19 design:** top opening 1/2 badges, shutter-tile countdown, equal conservative intro-only shadow lift; unified skill workbench and actual homepage capture; three-stop landscape journey; one copy/paste FREE setup concept. Distinct platform facade/conveyor, direct cable, large key/vault, glowing file handoff/import and Claude shot planning. Simple concepts with detailed causal actions, not random prop inventory. Narration/EDL unchanged; specific quiet SFX updated. [V20 scope and limits](projects/higgsfield-replacement/REVISION-V20.md).
 
 - **V19 supersedes the rejected V18 scene design:** separate cost bays and narration-led spotlights, editorial Higgsfield billing sprite alongside original Claude, no example footage in the production explainer, and an up/down Connect → Load skill → Generate roadmap with three timed glass dings. Preserve large-to-small presenter and add a blind opening center countdown plus alternating subtle video zooms. Specifically revise the direct-model scene near1:04 and description CTA near7:34; do not claim every later scene was rebuilt. Remove visible plan/estimate qualification labels as requested while retaining factual caveats in notes. SFX change; OBS narration/EDL do not. [V19 detailed direction and limits](projects/higgsfield-replacement/REVISION-V19.md).

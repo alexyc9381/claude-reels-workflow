@@ -56,7 +56,7 @@ export const ProductionV20:React.FC<{duration:number}>=({duration})=>{
  return <Set t={t}><Light x={610} power={.45}/><Light x={1360} power={.65}/>
   <div style={{position:'absolute',inset:0,opacity:1-next}}>
    <At x={143} y={113} style={{display:'flex',gap:23,alignItems:'center'}}><Logo name="higgsfield.jpg" size={100}/><span style={{fontSize:49,fontWeight:800}}>Higgsfield</span></At>
-   <At x={137} y={287} style={{width:890,height:504,border:'5px solid #FFF9EC',borderRadius:22,overflow:'hidden',boxShadow:'0 25px 40px #50371930',transform:`perspective(1500px) rotateY(${-9*replace}deg) translateX(${-80*replace}px) scale(${1-.14*replace})`,transformOrigin:'0 50%',opacity:1-.4*replace}}><Img src={staticFile('v9/higgsfield-page-v20.png')} style={{width:'100%',height:'100%',objectFit:'cover'}}/></At>
+   <At x={137} y={287} style={{width:890,height:504,border:'5px solid #FFF9EC',borderRadius:22,overflow:'hidden',boxShadow:'0 25px 40px #50371930',transform:`perspective(1500px) rotateY(${-5*replace}deg) translateX(${-38*replace}px) scale(${1-.07*replace})`,transformOrigin:'0 50%'}}><Img data-homepage-scroll src={staticFile('v9/higgsfield-scroll-v20.png')} style={{width:'100%',height:'auto',display:'block',transform:`translateY(${-920*e(u,.22,2.35)}px)`}}/></At>
    <At x={1195} y={290} style={{transform:`translateY(${72*(1-replace)}px) scale(${.85+.15*replace})`,opacity:easeOut(u,.12,.25)}}><SkillFile t={t} size={295}/></At>
    <Title x={1120} y={165} size={57}>One Claude skill</Title>
    <Actor t={t} x={982} y={535} size={272} role="operator" reach={replace} lift={replace*.7} look={1} contact={1.5} happy={replace>.9}/>
@@ -76,23 +76,18 @@ export const ProductionV20:React.FC<{duration:number}>=({duration})=>{
  </Set>;
 };
 
-const Tree:React.FC<{x:number;y:number;s:number;warm?:boolean}>=({x,y,s,warm=false})=><g transform={`translate(${x} ${y}) scale(${s})`}><ellipse cy="142" rx="49" ry="12" fill="#6B74531C"/><path d="M0 80V140" stroke="#9F8156" strokeWidth="13"/><path d="M0-80L-54 34H-35L-68 90H68L34 34H53Z" fill={warm?'#D7AF75':'#97AF90'}/><path d="M0-80V90H68L34 34H53Z" fill={warm?'#BD945D':'#779B7C'}/></g>;
 export const routeV20=(p:number)=>({x:330+1260*p,y:625-170*Math.sin(p*Math.PI*2)});
-/** A tiny trail-world: unlock trailhead → load at the workshop → film at the
- * lookout. Trees frame the route, never obscure a stop or introduce a side plot. */
+/** Clean three-stop route. Detail belongs to the working props, not scenery. */
 export const RoadmapV20:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),beats=roadmapBeatsV13.map(n=>n*duration),p=e(t,beats[0],beats[2]-beats[0]),v=routeV20(p);
  const route=(end:number)=>Array.from({length:121},(_,i)=>{const q=routeV20(end*i/120);return `${i?'L':'M'}${q.x} ${q.y}`}).join(' ');
- return <AbsoluteFill style={{background:'linear-gradient(#FFF9ED,#E5E9D1)',fontFamily:bodyFont,color:C.ink}}>
-  <svg width="1920" height="1080" style={{position:'absolute',inset:0}}><defs><linearGradient id="trail-land" x2="0" y2="1"><stop stopColor="#DBE5C6"/><stop offset="1" stopColor="#F6E4BE"/></linearGradient></defs><path d="M0 480Q340 239 692 383Q1030 180 1375 340Q1660 239 1920 377V1080H0Z" fill="url(#trail-land)"/><path d="M0 956Q430 858 659 954Q1080 848 1490 948L1920 885V1080H0Z" fill="#ACC2A3" opacity=".4"/>
-   {[{x:109,y:372,s:.7},{x:181,y:346,s:1},{x:632,y:267,s:.9},{x:1280,y:224,s:.8},{x:1740,y:341,s:1},{x:1810,y:389,s:.65},{x:192,y:891,s:.65},{x:1244,y:914,s:.6}].map((q,i)=><Tree key={i} {...q} warm={i%3===0}/>)}
-   <path d={route(1)} fill="none" stroke="#9D845637" strokeWidth="112" strokeLinecap="round" transform="translate(0 15)"/><path d={route(1)} fill="none" stroke="#FFF9E7" strokeWidth="95" strokeLinecap="round"/><path d={route(p)} fill="none" stroke="#EBA35D" strokeWidth="15" strokeLinecap="round"/>
-   {/* A footbridge follows the middle bend, a physical part of the journey. */}
-   <g transform="translate(1120 713) rotate(24)">{[0,1,2,3,4,5].map(i=><path key={i} d={`M${i*23} -39V39`} stroke="#D4B584" strokeWidth="19"/>)}<path d="M-10-51H139M-10 51H139" stroke="#8D7957" strokeWidth="5"/></g>
+ return <AbsoluteFill data-clean-roadmap style={{background:'radial-gradient(ellipse at 50% 46%,#FFFFFF 0%,#FFF6E8 57%,#EED7BD 100%)',fontFamily:bodyFont,color:C.ink}}>
+  <svg width="1920" height="1080" style={{position:'absolute',inset:0}}>
+   <path d={route(1)} fill="none" stroke="#A9794528" strokeWidth="72" strokeLinecap="round" transform="translate(0 10)"/><path d={route(1)} fill="none" stroke="#FFFFFF" strokeWidth="66" strokeLinecap="round"/><path d={route(1)} fill="none" stroke="#EAD7BD" strokeWidth="4" strokeDasharray="2 18" strokeLinecap="round"/><path d={route(p)} fill="none" stroke="#E99A4B" strokeWidth="13" strokeLinecap="round"/>
   </svg>
   {[0,.5,1].map((q,i)=>{const a=routeV20(q),on=easeOut(t,beats[i],.17),x=a.x-164,y=i===1?154:283;return <React.Fragment key={i}>
    <At x={x} y={y} style={{width:328,height:263,transform:`translateY(${-9*recoil(t,beats[i])}px)`}}>
-    <svg width="328" height="263"><path d="M20 75L164 3L308 75V252H20Z" fill="#ECEAD4" stroke="#FFFCEE" strokeWidth="5"/><path d="M4 82L164 1L324 82" stroke="#8C9A73" strokeWidth="15" fill="none" strokeLinejoin="round"/><path d="M45 252V113H281V252" fill="#D1DBB9"/><path d="M15 257H313" stroke="#9EA582" strokeWidth="9"/>{[60,257].map(z=><path key={z} d={`M${z} 125V245`} stroke="#B4BC98" strokeWidth="9"/>)}</svg>
+    <svg width="328" height="263"><ellipse cx="164" cy="246" rx="155" ry="16" fill="#A58C6623"/><path d="M14 216V234C14 260 314 260 314 234V216" fill="#E4DDD0" stroke="#FFFDF5" strokeWidth="3"/><ellipse cx="164" cy="216" rx="150" ry="25" fill="#FFFDF5" stroke={on>.5?'#E7A05A':'#D9D0BE'} strokeWidth="4"/><path d="M46 217Q164 238 282 217" fill="none" stroke="#E9C78F" strokeWidth="3"/>{i===1&&<><path d="M62 63H267V192H62Z" fill="#EEE8D9" stroke="#FFFFFF" strokeWidth="4"/><path d="M91 194H236" stroke="#788B80" strokeWidth="12" strokeLinecap="round"/><circle cx="244" cy="80" r="6" fill={on>.5?'#6FAE72':'#D2BD8D'}/></>}</svg>
     {i===0?<><At x={119} y={102}><Logo name="fal.png" size={89}/></At><svg width="328" height="263" style={{position:'absolute',inset:0}}><g transform={`rotate(${-80*on} 45 211)`}><path d="M45 211H282" stroke="#AB8761" strokeWidth="17"/><path d="M68 204L87 217M115 204L134 217M165 204L184 217M215 204L234 217" stroke="#FFF5D3" strokeWidth="10"/></g></svg></>:i===1?<><At x={119} y={99}><Logo name="claude.png" size={86}/></At><At x={69+on*61} y={173-on*41} style={{opacity:1-on*.9,transform:`scale(${1-on*.35})`}}><SkillFile t={t} size={85}/></At></>:<At x={37} y={71}><CineCamera t={t} shoot={on} w={251}/></At>}
     <ChargeV20 t={t} at={beats[i]} x={164} y={141} size={265}/>
    </At>
