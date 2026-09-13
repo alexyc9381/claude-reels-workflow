@@ -42,6 +42,8 @@ Price-format follow-up: the 10¢ block previously crowded the curved platform bo
 
 Source baseline: 4d40d78 (verified full V21). test-v22.mjs includes inherited EDL/OBS/privacy/frame-clock tests, source equality for protected files, equal intro-grade/original media hashes, scene wiring and quiet contact clocks. All V22 picture chunks must be freshly rendered because the background changes across the film; do not seed the V21 picture cache.
 
-Full render/validation is in progress. Expected output: outputs/higgsfield-replacement-edit-v22.mp4, 457.1s / 13713 frames / 1920×1080 / 30fps / six chapters. Machine completion evidence will be recorded in verification-v22.json, then the local source/media handoff is packaged.
+Full render and machine validation passed: outputs/higgsfield-replacement-edit-v22.mp4, 457.1s / 13713 frames / 1920×1080 / 30fps / six chapters. All picture chunks are fresh and match source d59336de37811220f20228e3c2e12b94056537d9234e3fdb8cf087de423190d7. Complete picture/audio decode passed; finished AAC measured −16.83 LUFS and −2.08 dBTP. OBS narration/EDL remain unchanged from 4d40d78. Evidence: verification-v22.json. Movie SHA256: fec99d8618c3c1b3e490942258e4a33637fd143c400be3661ffa606596e81d6a.
+
+Representative rendered frames inspected at 3, 7.5, 14.6, 22.5, 35.6, 74, 140, 423.7 and 456 seconds, including the corrected price in the actual picture chunk and the closing frame in the assembled export. No full human listening pass or every-frame visual review is claimed. Local source/media packaging follows the clean source/verification commit; no Drive upload is claimed.
 
 Retain claims caveats: monthly subscription and estimated per-generation costs are different units, illustrations are not recorded workflow proof, and agent logos are not evidence of universal installer compatibility. Exact title, final description links, rights/claim clearance and creative approval remain publication tasks. No Drive upload is claimed.

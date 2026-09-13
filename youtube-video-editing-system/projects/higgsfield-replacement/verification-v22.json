@@ -1,0 +1,85 @@
+{
+  "output": "/Users/alexchensmacmini/Documents/Codex/2026-09-10/inside-of-my-notecode-alex-github/outputs/higgsfield-replacement-edit-v22.mp4",
+  "bytes": 161374589,
+  "duration": 457.1,
+  "frames": 13713,
+  "width": 1920,
+  "height": 1080,
+  "fps": "30/1",
+  "sourceHash": "d59336de37811220f20228e3c2e12b94056537d9234e3fdb8cf087de423190d7",
+  "allPictureChunksMatchCurrentSource": true,
+  "audio": {
+    "codec": "aac",
+    "sampleRate": "48000",
+    "channels": 2,
+    "lufs": -16.83,
+    "truePeak": -2.08,
+    "lra": 4.7
+  },
+  "chapters": [
+    {
+      "title": "Can you tell the difference?",
+      "seconds": 0
+    },
+    {
+      "title": "Why use the models directly?",
+      "seconds": 36.567
+    },
+    {
+      "title": "Connect fal.ai and Claude",
+      "seconds": 124.1
+    },
+    {
+      "title": "Make your first video",
+      "seconds": 207.667
+    },
+    {
+      "title": "Review and compare the results",
+      "seconds": 297.333
+    },
+    {
+      "title": "The reveal and next step",
+      "seconds": 429.4
+    }
+  ],
+  "decodePassed": true,
+  "fullHumanListeningReview": false,
+  "verifiedEquivalentReusedChunks": [],
+  "audioPacketHash": "SHA256=187099462d34795286b40afbadbf06f752df8ce688a61384162a295548df20e8",
+  "audioMatchesV9Packets": false,
+  "currentAudioContractVerified": true,
+  "mastering": {
+    "sourceHash": "d59336de37811220f20228e3c2e12b94056537d9234e3fdb8cf087de423190d7",
+    "targetLUFS": -16,
+    "truePeakTarget": -2.5,
+    "LRA": 11,
+    "codec": "aac",
+    "sampleRate": 48000,
+    "bitrate": 320000
+  },
+  "narrationAndEDLUnchangedFromBaseline": "4d40d78",
+  "audioMatchesV21Packets": false,
+  "sha256": "fec99d8618c3c1b3e490942258e4a33637fd143c400be3661ffa606596e81d6a",
+  "visualQA": {
+    "representativeRenderedFramesInspectedSeconds": [
+      3,
+      7.5,
+      14.6,
+      22.5,
+      35.6,
+      74,
+      140,
+      423.7,
+      456
+    ],
+    "checks": [
+      "Centered price and unit clear the platform edge and facecam",
+      "Pale actor field and fine silhouette rim preserve original sprite color",
+      "Saved file lands inside laptop folder",
+      "Tutorial remains large with unchanged facecam framing",
+      "Closing bonus and destination logos stay clear of facecam"
+    ],
+    "allFramesVisuallyReviewed": false,
+    "userCreativeApproval": false
+  }
+}
