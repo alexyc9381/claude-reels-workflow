@@ -5,6 +5,7 @@ import {easeInOut as e,easeOut} from './glass-motion';
 import {bodyFont} from './cinematic-brand';
 import {Set,Shot,CineCamera} from './ScenesV19';
 import {ProductionV20,ChargeV20} from './ScenesV20';
+import {ModelLineupV23} from './ScenesV23';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 const Text:React.FC<{x:number;y:number;children:React.ReactNode;size?:number;color?:string}>=({x,y,children,size=43,color=C.ink})=><At x={x} y={y} style={{fontFamily:bodyFont,fontSize:size,fontWeight:800,color:color===C.orange?'#82390F':color,lineHeight:1.15,whiteSpace:'nowrap'}}>{children}</At>;
@@ -48,6 +49,7 @@ export const CostV22:React.FC<{duration:number;brandAt:number;bold?:boolean}>=({
   <At x={lerp(1240,1493,pay)} y={lerp(844,490,pay)-Math.sin(pay*Math.PI)*65} style={{opacity:ready*(1-e(u,4.87,.15)),transform:'rotate('+(pay*130)+'deg)'}}><svg width="79" height="79"><circle cx="39" cy="39" r="35" fill="#EDC87D" stroke="#80643C" strokeWidth="4"/><circle cx="39" cy="39" r="27" fill="none" stroke="#FFF4D0" strokeWidth="3"/><text x="39" y="50" textAnchor="middle" fontFamily={bodyFont} fontSize="30" fontWeight="850" fill="#72512B">¢</text></svg></At>
   <At x={lerp(1579,1357,deliver)} y={lerp(563,407,deliver)} style={{opacity:deliver,transform:'scale('+(0.42+deliver*.58)+')',transformOrigin:'50% 50%',padding:11,background:'#EEF1D9',border:'4px solid #FFFDF0',borderRadius:17,boxShadow:'0 16px 30px #324E362B'}}><Shot p={e(u,5.44,1.7)} w={348}/></At>
   <ChargeV20 t={u} at={1.58} x={489} y={643} size={300}/><ChargeV20 t={u} at={4.15} x={1450} y={507} size={235}/><ChargeV20 t={u} at={4.88} x={1680} y={612} size={270}/>
+  <ModelLineupV23 t={u} at={5.7}/>
  </Set>;
 };
 

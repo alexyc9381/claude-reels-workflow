@@ -22,10 +22,10 @@ title=Make your first video
 [CHAPTER]
 TIMEBASE=1/30
 START=8920
-END=12882
+END=12877
 title=Review and compare the results
 [CHAPTER]
 TIMEBASE=1/30
-START=12882
-END=13713
+START=12877
+END=13708
 title=The reveal and next step

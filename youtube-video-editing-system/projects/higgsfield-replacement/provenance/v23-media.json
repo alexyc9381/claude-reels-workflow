@@ -1,0 +1,63 @@
+{
+  "revision": "V23",
+  "copies": [
+    {
+      "source": "video/public/logos_official/kling.png",
+      "target": "v9/kling-v23.png",
+      "sha256": "86a4261e984bcdf1cddbffe6cbc660b64023b421fdb2f9933db0b84a5a062377",
+      "provenance": "Existing tracked repository mark; reused unmodified. Not newly independently licensed or vendor-certified."
+    },
+    {
+      "source": "video/public/logos_official/runway.svg",
+      "target": "v9/runway-v23.svg",
+      "sha256": "ef0fbd9493bef73b1db7d69910078fbc90024780e4e326d33107983ebd66a4e0",
+      "provenance": "Existing tracked repository mark; reused unmodified. Not newly independently licensed or vendor-certified."
+    }
+  ],
+  "reused": [
+    {
+      "file": "v3/seedance.png",
+      "sha256": "97455e3ce09f25262ddc4fe2b6e5e275fe9ce8e6f8a16ad0a6cbbd7b70347c31"
+    },
+    {
+      "file": "v3/google.png",
+      "sha256": "ec91f8765a42b45acf0de8d78272a411177495b48a9e9109dba1418955e111ff"
+    },
+    {
+      "file": "v3/hailuo.png",
+      "sha256": "df8ea9bf91bcecd15e0967732cbd4104881ab87396f978f224c20f6e0d1f444f"
+    },
+    {
+      "file": "v4/chase.wav",
+      "sha256": "8547c199e1555118e862754640d865ca8983f0b99f5443bd16ae047dc1e8b6ac"
+    },
+    {
+      "file": "v4/click.wav",
+      "sha256": "8587debfe183bb9e6d613a3efbb683a817596f993a44b39196a170e7b5419b57"
+    },
+    {
+      "file": "v4/whip.wav",
+      "sha256": "3478110a811138076233b82a9f7b5112062776a0c3742fc73753655ba98b9a46"
+    },
+    {
+      "file": "v4/land.wav",
+      "sha256": "1d40ecfc547dcb893f1d9ef3d52dc5ce3b719a86b213aefc527e11264be18b93"
+    },
+    {
+      "file": "v4/shutter.wav",
+      "sha256": "948cf884c81c40c495495864fc10409d8854cdd5822daa234e395f45804aaf9f"
+    },
+    {
+      "file": "v4/paper.wav",
+      "sha256": "cedd44f07011cfd1021b14544aa2db7d8190898e6170bfbeaa0ff4dec711003c"
+    },
+    {
+      "file": "v4/latch.wav",
+      "sha256": "b0d56e350c34ca0280522364aa15e90baa06a78248399d98f8a9a895554abf43"
+    }
+  ],
+  "logoScope": "Representative video-model identities. Google is a provider mark for Veo; not a promise of exhaustive model support.",
+  "audioProvenance": "See assets-v4.json for original provenance and licensing. Chase Pulse Faster by Kevin MacLeod requires attribution. V23 reuses its existing VO-band carve with a local reaction duck; air and landing sounds are editorial, not generated-video native audio.",
+  "generatedVisuals": "Synthetic masked API UI, illustrated contact-sheet videos and folder are code-native Remotion/SVG scene elements. No actual credential, new voice or downloaded generated media.",
+  "services": "No newly connected or paid media service."
+}

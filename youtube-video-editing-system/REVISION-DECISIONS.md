@@ -1,5 +1,11 @@
 # Conversation decision ledger
 
+## September 12 — V23: preserve the improved direction; align each beat to speech
+
+Alex: animations are “a lot better.” This is directional feedback on V22, not blanket approval of V23. Requested real video-model logos at “standard AI models”; many outputs for “hundreds of videos”; complete replacement of static2:38–2:49 credential instruction; visible privacy explanation; reaction countdown near5:03; remove side-turn near5:47; sound during quiet6:14 playback; approximately20% larger webcam. Requested indexed rationale as well as revisions.
+
+Decisions: one ordered model strip, one accumulating video contact sheet, one synthetic private-key workflow with source-word clocks, and one restrained reaction countdown. Enlarge inset geometry without tighter crop; check collisions. Preserve spoken content with a camera cutaway; remove five nonverbal tail frames only. Existing carved music plus finite motion/landing sounds support playback and recede for narration. These are editorial sound additions, not proof that the model generated them. [V23 implementation/QA](projects/higgsfield-replacement/REVISION-V23.md), [durable reasoning](CAUSAL-ANIMATION-DECISIONS.md).
+
 ## September 12 — V22 is current
 
 Follow-up: orange made the clay sprite hard to see; cost scene still looked scattered and text-led. Stop the obsolete in-progress render, lighten the actor field, add subtle dark silhouette separation to the unchanged rig, and replace loose cost/UI labels with two physical bases and a cross-stage defeat→skill→camera→result sequence. Do not interpret a brand-color request as permission to sacrifice contrast.

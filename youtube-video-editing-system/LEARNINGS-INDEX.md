@@ -1,5 +1,7 @@
 # YouTube editing — indexed learning library
 
+Current work: [V23 narration-matched quantity, private steps and larger webcam](projects/higgsfield-replacement/REVISION-V23.md), [editable Mac handoff and next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V23.md). Alex positively assessed V22's animation direction; V23 is a targeted continuation. **Start with [Causal animation decisions: the why](CAUSAL-ANIMATION-DECISIONS.md)** for narration/quantity/order, physical actions, hierarchy, real marks, character contrast, face/evidence balance, privacy and purposeful audio. Source edits are not render verification or creative approval.
+
 Latest V22 follow-up: the initial saturated orange masked Claude and the cost layout remained scattered. Use lighter warm actor fields/stronger orange edges, ink silhouette separation, and two connected physical cost bases instead of detached text/UI fragments. The full source, review limits and current completion state are in the V22 record.
 
 Current: [V22 warm whole-film environment and character-led actions](projects/higgsfield-replacement/REVISION-V22.md), [V22 editable Mac handoff and prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V22.md). Octopus emblem, mechanical stopwatch, generate/save, copy/install, coordinated later roles and closing bonus; source cuts/narration intact. Read exact scope rather than assuming every old overlay was rebuilt. Earlier latest/current labels are historical where they conflict.
@@ -37,6 +39,8 @@ This is the handoff index for the complete September 10–11 system-building and
 
 | Topic | Read |
 |---|---|
+| Why choose a scene, what changed and what to avoid next time? | [Causal animation decisions](CAUSAL-ANIMATION-DECISIONS.md), [V23 storyboard](projects/higgsfield-replacement/STORYBOARD-V23.md) |
+| “Hundreds” must look like hundreds / key instructions must follow spoken steps | [V23](projects/higgsfield-replacement/REVISION-V23.md), [ScenesV23](../video/src/youtube/ScenesV23.tsx) |
 | What transferred from the course workflow? | [TRANSFER-LOG](TRANSFER-LOG.md) |
 | Too much source content removed / clipped words / retake markers | [CONTENT-PRESERVATION](CONTENT-PRESERVATION.md), [v9 source repairs](projects/higgsfield-replacement/audio-repairs-v9.json) |
 | OBS/Sony clap sync and source inventory | [BRIEF](projects/higgsfield-replacement/BRIEF.md), [sync evidence](projects/higgsfield-replacement/sync-evidence.json) |
@@ -49,8 +53,8 @@ This is the handoff index for the complete September 10–11 system-building and
 | Premium sound principles from supplied article | [SOUND-DESIGN-PRINCIPLES](SOUND-DESIGN-PRINCIPLES.md), [sound/facial audition history](SOUND-AND-FACIAL-REACTIONS.md) |
 | Narration-led visual-first explanations | [VOICEOVER-EXPLAINER-MODE](VOICEOVER-EXPLAINER-MODE.md) |
 | Proof versus illustration, A/B placeholder, cost and setup gaps | [Retention and pickups](projects/higgsfield-replacement/RETENTION-AND-PICKUPS.md) |
-| Current full timeline / chapters | [V12 timeline](projects/higgsfield-replacement/v12-timeline.json), [chapters](projects/higgsfield-replacement/chapters.json), [YouTube timestamps](projects/higgsfield-replacement/youtube-chapters.txt) |
-| Render, testing, sync and resource-safe export | [REPRODUCE](projects/higgsfield-replacement/REPRODUCE.md), [test-v9](projects/higgsfield-replacement/tools/test-v9.mjs), [validate-v9-export](projects/higgsfield-replacement/tools/validate-v9-export.mjs) |
+| Current full timeline / chapters | [V23 timeline](projects/higgsfield-replacement/v23-timeline.json), [chapters](projects/higgsfield-replacement/chapters.json), [YouTube timestamps](projects/higgsfield-replacement/youtube-chapters.txt) |
+| Render, testing, sync and resource-safe export | [REPRODUCE](projects/higgsfield-replacement/REPRODUCE.md), [test-v23](projects/higgsfield-replacement/tools/test-v23.mjs), [revision-aware export validator](projects/higgsfield-replacement/tools/validate-v12-export.mjs) |
 | Source music/SFX/result/plate provenance | [Media ledgers](projects/higgsfield-replacement/provenance/), [current manifest](projects/higgsfield-replacement/roughcut.props.json) |
 
 ## Revision archive

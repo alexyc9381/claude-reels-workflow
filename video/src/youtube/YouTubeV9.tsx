@@ -11,7 +11,8 @@ import {TutorialSkipV18} from './ScenesV18';
 import {SetupChecklistV11,CredentialV11,BonusTeaserV11} from './ScenesV11';
 import {ResultCountdownV12,DetailLensV12} from './ScenesV12';
 import {CredentialV13,FaceTimerV13,RevealCountdownV13,PlaybackStartV13,roadmapBeatsV13} from './ScenesV13';
-const CredentialSequence=CredentialV13;
+import {CredentialV23} from './ScenesV23';
+const CredentialSequence=CredentialV23;
 import {C,clamp,lerp,pop,visible,Glass,Logo,Actor,Key,Film,ProgressBorder,BrandedBackground} from './YouTubeV8Primitives';
 import {HookV9,ProductionV9,RoadmapV9,GuideV9,WrapperV9,DirectV9,DownloadV9,SkillV9,CompareV9,OutroV9} from './ScenesV9';
 export {BrandedBackground};
@@ -128,7 +129,7 @@ export const chapterTitles=['Why use the models directly?','Connect fal.ai + Cla
 const Presenter:React.FC<{row:ReturnType<typeof roughTimeline>[number];intro:boolean;timerEnd:number}>=({row,intro,timerEnd})=>{
  const t=useTime(),p=intro?easeInOut(row.from/30+t,.55,1.05):1; // V18: large face, then continuous move to the bottom inset; global clock survives the cut.
  const comparison=intro||['s038','s042','s043'].includes(row.id);
- const b={x:lerp(28,comparison?780:1435,p),y:lerp(16,comparison?789:748,p)-(intro?55*Math.sin(p*Math.PI):0),w:lerp(1864,comparison?360:400,p),h:lerp(1048,comparison?256:281,p)};
+ const b={x:lerp(28,comparison?744:1355,p),y:lerp(16,comparison?737.8:691.8,p)-(intro?55*Math.sin(p*Math.PI):0),w:lerp(1864,comparison?432:480,p),h:lerp(1048,comparison?307.2:337.2,p)};
  const cropW=lerp(intro?1340:1480,1300,p),cropX=introCropV21(row.from/30+t,lerp(intro?165:110,150,p)),cropY=lerp(25,0,p),s=b.w/cropW;
  return <div style={{position:'absolute',left:b.x,top:b.y,width:b.w,height:b.h,overflow:'hidden',borderRadius:lerp(24,29,p),border:'3px solid #FFF4DF',boxShadow:'0 14px 30px #50372445',transform:`perspective(1800px) rotate(${(intro?-2:-7)*Math.sin(p*Math.PI)}deg)`}}><CameraPlate source={row.cameraPlateSource??'v7/presenter-background.mp4'} start={row.cameraPlateStart??row.from} length={row.cameraPlateDuration} style={{position:'absolute',width:1920*s,height:1080*s,left:-cropX*s,top:-cropY*s,transform:`scale(${intro?openingScale(row.from/30+t):1})`,transformOrigin:'50% 42%'}}/>{intro&&<FaceTimerV13 width={b.w} height={b.h} progress={(row.from/30+t)/timerEnd}/>}</div>;
 };
@@ -142,11 +143,12 @@ export const YouTubePolish:React.FC<{manifest:M}>=({manifest:m})=>{
   <Sequence from={find('r-teaser').from} durationInFrames={find('r-teaser').duration}><Teaser duration={find('r-teaser').duration/fps}/></Sequence>
   <Sequence from={38*fps} durationInFrames={5*fps}><TutorialSkipV18/></Sequence>
   <AbsoluteFill>
-   {v9Cues.map((c,i)=>{const r=find(c.id),d=Math.min(Math.round(c.seconds*fps),r.duration-Math.round(c.offset*fps)),lift=['definition','typing','sound'].includes(c.kind)?focus:0;return <Sequence key={i} from={r.from+Math.round(c.offset*fps)} durationInFrames={d}><AbsoluteFill style={{transform:`translateY(${-450*lift}px) scale(${1-.12*lift})`,transformOrigin:'120px 0'}}>{c.kind==='detail-lens'?<DetailLensV12 duration={d/fps} source={m.obs.source} start={Math.round(r.start*fps)+Math.round(c.offset*fps)} feature={c.feature!}/>:c.kind==='lens'?<TextLens duration={d/fps} source={m.obs.source} start={Math.round((r.start+c.offset)*fps)}/>:c.kind==='definition'?<Definition duration={d/fps} term={c.title!} meaning={c.text!}/>:c.kind==='brand'?<Brand avoidRaisedCamera={c.id==='s025'||c.id==='s027'} duration={d/fps} logo={c.logo!} title={c.title!} text={c.text}/>:c.kind==='keys'?<CredentialSequence duration={d/fps}/>:<Support duration={d/fps} kind={c.kind} cueId={`${c.id}:${c.offset}`}/>}</AbsoluteFill></Sequence>;})}
+   {v9Cues.map((c,i)=>{const r=find(c.id),d=c.kind==='keys'?find('s017').from+3*fps-r.from:Math.min(Math.round(c.seconds*fps),r.duration-Math.round(c.offset*fps)),lift=['definition','typing','sound'].includes(c.kind)?focus:0;return <Sequence key={i} from={r.from+Math.round(c.offset*fps)} durationInFrames={d}><AbsoluteFill style={{transform:`translateY(${-450*lift}px) scale(${1-.12*lift})`,transformOrigin:'120px 0'}}>{c.kind==='detail-lens'?<DetailLensV12 duration={d/fps} source={m.obs.source} start={Math.round(r.start*fps)+Math.round(c.offset*fps)} feature={c.feature!}/>:c.kind==='lens'?<TextLens duration={d/fps} source={m.obs.source} start={Math.round((r.start+c.offset)*fps)}/>:c.kind==='definition'?<Definition duration={d/fps} term={c.title!} meaning={c.text!}/>:c.kind==='brand'?<Brand avoidRaisedCamera={c.id==='s025'||c.id==='s027'} duration={d/fps} logo={c.logo!} title={c.title!} text={c.text}/>:c.kind==='keys'?<CredentialSequence duration={d/fps}/>:<Support duration={d/fps} kind={c.kind} cueId={`${c.id}:${c.offset}`}/>}</AbsoluteFill></Sequence>;})}
   </AbsoluteFill>
   <Sequence from={find('s014').from+135} durationInFrames={find('s016').from-find('s014').from-135}><SetupChecklistV11 duration={(find('s016').from-find('s014').from-135)/fps} accountAt={(find('s015').from-find('s014').from-135)/fps} keysAt={(find('s016').from-find('s014').from-135)/fps}/></Sequence>
   <Sequence from={find('s036').from+Math.round(14*fps)} durationInFrames={Math.round(8*fps)}><BonusTeaserV11 duration={8} secondsToBonus={(find('s044').from-find('s036').from)/fps-14}/></Sequence>
   <Sequence from={find('s029').from-3*fps} durationInFrames={3*fps}><ResultCountdownV12/></Sequence>
+  <Sequence from={find('s029').from+Math.round(6.7*fps)} durationInFrames={3*fps}><ResultCountdownV12 label="Reaction in"/></Sequence>
   <Sequence from={find('s043').from-3*fps} durationInFrames={3*fps}><RevealCountdownV13/></Sequence>
   <Sequence from={find('s033').from+Math.round(10.1*fps)} durationInFrames={99}><PlaybackStartV13 duration={3.3}/></Sequence>
   <Sequence from={laterFrom} durationInFrames={laterTo-laterFrom}><LaterCue duration={(laterTo-laterFrom)/fps} timestamp={stamp}/></Sequence>
@@ -191,7 +193,10 @@ export const soundEvents=(m:M)=>{
  for(const c of v9Cues)add(at(c.id)+c.offset+.12,c.kind==='typing'?'typing':c.kind==='lens'?'servo':c.kind==='keys'?'click':'paper',c.kind==='typing'?.09:.13,c.kind==='typing'?1.9:.8);
  for(const c of v9Cues.filter(c=>c.kind==='saved'))add(at(c.id)+c.offset+c.seconds*.62,'latch',.055,.4);
  add(at('s013')+8.12,'paper',.13);
- for(const [x,name] of [[4.7,'click'],[9.2,'paper'],[11.4,'servo'],[14.1,'latch']] as const)add(at('s016')+x,name,.08);
+ for(const [x,name] of [[5.2,'click'],[8.9,'click'],[12.05,'latch'],[13.45,'paper'],[15.15,'latch']] as const)add(at('s016')+x,name,.065);
+ for(const x of [6.7,7.7,8.7])add(at('s029')+x,'click',.065,.24);
+ for(const [x,name,gain] of [[.7,'whip',.085],[3.1,'whip',.075],[4.1,'land',.12]] as const)add(at('r-veo-playthrough')+x,name,gain,.6);
+ for(const x of [5.9,6.8,7.7,8.6])add(at('r-direct')+x,'shutter',.045,.4);
  add(at('s026')+10.2+4.6*.28,'whip',.06);add(at('s026')+10.2+4.6*.72,'land',.08);
  add(at('s027')+1.2,'servo',.09);add(at('s027')+5.1,'whip',.075);
  add(at('s030')+7.5,'click',.10);add(at('s036')+14.45,'paper',.08);add(at('s036')+15,'latch',.06);
@@ -214,6 +219,7 @@ export const YouTubeSound:React.FC<{manifest:M}>=({manifest:m})=>{
  ];
  return <>
   {music.map((s,i)=><Sequence key={i} from={s.from} durationInFrames={s.to-s.from}><Audio data-audio-role="music" src={staticFile('v4/'+s.name+'.wav')} startFrom={s.start*fps} volume={f=>s.gain*easeOut(f/fps,0,.18)*(1-easeInOut(f/fps,(s.to-s.from)/fps-.45,.45))}/></Sequence>)}
+  <Sequence from={find('r-veo-playthrough').from} durationInFrames={find('r-veo-playthrough').duration}><Audio data-audio-role="music" src={staticFile('v4/chase.wav')} startFrom={58*fps} volume={f=>.14*easeOut(f/fps,0,.32)*(1-.86*easeInOut(f/fps,4.35,.45))*(1-easeInOut(f/fps,6.45,.55))}/></Sequence>
   {soundEvents(m).map((s,i)=><Sequence key={i} from={s.at} durationInFrames={Math.max(1,Math.min(Math.round(s.duration*fps),end-s.at))}><Audio data-audio-role="design-sfx" src={staticFile(s.name==='roadmap-ding'?'v3/glass.wav':'v4/'+s.name+'.wav')} volume={s.gain}/></Sequence>)}
   <Sequence from={find('s043').from+108} durationInFrames={45}><Audio data-audio-role="design-sfx" src={staticFile('v9/celebrate-v12.wav')} volume={.16}/></Sequence>
  </>;

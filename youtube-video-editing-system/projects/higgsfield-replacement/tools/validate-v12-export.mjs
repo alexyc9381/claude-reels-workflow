@@ -6,10 +6,11 @@ import path from 'node:path';
 import {audioContract} from './audio-contract.mjs';
 const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow');
 const project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
-const bin=path.join(repo,'video/node_modules/@remotion/compositor-darwin-arm64');
+const platformPackage='@remotion/compositor-'+process.platform+'-'+process.arch;
+const bin=path.join(repo,'video/node_modules',platformPackage);
 const revision=process.env.REVIEW_REVISION||'v12';assert.match(revision,/^v\d+$/);
 const output=path.join(base,`outputs/higgsfield-replacement-edit-${revision}.mp4`);
-const ff='/Users/alexchensmacmini/Library/Python/3.9/lib/python/site-packages/imageio_ffmpeg/binaries/ffmpeg-macos-aarch64-v7.1';
+const ff=process.env.REVIEW_FFMPEG||execFileSync('python3',['-c','import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())'],{encoding:'utf8'}).trim();
 const meta=JSON.parse(execFileSync(path.join(bin,'ffprobe'),['-v','error','-show_streams','-show_format','-show_chapters','-of','json',output],{encoding:'utf8',env:{...process.env,DYLD_LIBRARY_PATH:bin}}));
 const v=meta.streams.find(s=>s.codec_type==='video'),a=meta.streams.filter(s=>s.codec_type==='audio');
 const props=JSON.parse(readFileSync(path.join(project,'roughcut.props.json'))),m=props.manifest;
@@ -44,7 +45,17 @@ const priorAudio=path.join(base,'outputs/higgsfield-replacement-edit-v9.mp4');
 result.audioMatchesV9Packets=existsSync(priorAudio)?result.audioPacketHash===audioHash(priorAudio):null;
 if(existsSync(priorAudio))assert.equal(result.audioMatchesV9Packets,false,'V12 must contain repaired narration and new source-anchored sound design');
 result.currentAudioContractVerified=true;
-if(revision==='v22'){
+if(revision==='v23'){
+ execFileSync(process.execPath,[path.join(project,'tools/test-v23.mjs')],{stdio:'inherit'});
+ assert.equal(equivalentChunks.length,0,'V23 changes webcam geometry throughout: no inherited picture chunks');
+ const mastering=JSON.parse(readFileSync(path.join(renderDir,'mastering-settings.json')));assert.equal(mastering.sourceHash,sourceHash);assert.equal(mastering.truePeakTarget,-2.5);result.mastering=mastering;
+ result.baselineCommit='016dcbe';
+ result.narrationImplementationAndSyncMapsUnchanged=true;
+ result.edlDelta={segment:'s030',removedTailFrames:5,reason:'Nonverbal tail only; spoken side-turn covered with screen cutaway'};
+ const prior=path.join(base,'outputs/higgsfield-replacement-edit-v22.mp4');
+ result.audioMatchesV22Packets=existsSync(prior)?result.audioPacketHash===audioHash(prior):null;
+ if(existsSync(prior))assert.equal(result.audioMatchesV22Packets,false,'V23 timing and sound design must reach the export');
+}else if(revision==='v22'){
  execFileSync(process.execPath,[path.join(project,'tools/test-v22.mjs')],{stdio:'inherit'});
  assert.equal(equivalentChunks.length,0,'V22 changes the entire background: no inherited picture chunks');
  const mastering=JSON.parse(readFileSync(path.join(renderDir,'mastering-settings.json')));assert.equal(mastering.sourceHash,sourceHash);assert.equal(mastering.truePeakTarget,-2.5);result.mastering=mastering;

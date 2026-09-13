@@ -1,0 +1,12 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createRequire} from 'node:module';
+import {runInNewContext} from 'node:vm';
+import path from 'node:path';
+const base=process.cwd(),repo=path.join(base,'work/repos/claude-reels-workflow'),project=path.join(repo,'youtube-video-editing-system/projects/higgsfield-replacement');
+const require=createRequire(path.join(repo,'video/package.json')),{transformSync}=require('esbuild'),box={module:{exports:{}}};
+runInNewContext(transformSync(readFileSync(path.join(repo,'video/src/youtube/roughcut-timing.ts'),'utf8'),{loader:'ts',format:'cjs'}).code,box);
+const m=JSON.parse(readFileSync(path.join(project,'roughcut.props.json'))).manifest,rows=box.module.exports.roughTimeline(m),chapters=box.module.exports.roughChapters(m),end=rows.at(-1).from+rows.at(-1).duration;
+writeFileSync(path.join(project,'v23-timeline.json'),JSON.stringify(rows,null,2)+'\n');
+writeFileSync(path.join(project,'chapters.json'),JSON.stringify(chapters,null,2)+'\n');
+writeFileSync(path.join(project,'chapters.ffmetadata'),';FFMETADATA1\n'+chapters.map((c,i)=>`[CHAPTER]\nTIMEBASE=1/${m.fps}\nSTART=${c.frame}\nEND=${chapters[i+1]?.frame??end}\ntitle=${c.title}\n`).join(''));
+console.log('Exported V23 timeline and exact chapter frame metadata:',end);

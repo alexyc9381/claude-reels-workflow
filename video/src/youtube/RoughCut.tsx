@@ -10,7 +10,7 @@ import {introCropV21} from './ScenesV21';
 
 type Row=ReturnType<typeof roughTimeline>[number];
 const mix=(a:number,b:number,p:number)=>a+(b-a)*p;
-const full={x:28,y:16,w:1864,h:1048}, inset={x:1380,y:678,w:460,h:326};
+const full={x:28,y:16,w:1864,h:1048}, inset={x:1288,y:612.8,w:552,h:391.2};
 const targets:Record<string,{x:number;y:number;z:number;at:number;hold:number}>={
  s014:{x:840,y:410,z:1.12,at:3.2,hold:3},s015:{x:1000,y:480,z:1.15,at:5,hold:7},
  s020:{x:1040,y:550,z:1.20,at:4,hold:11},s021:{x:1070,y:505,z:1.12,at:9,hold:16},
@@ -46,7 +46,7 @@ const FootageSegment:React.FC<{m:RoughCutManifest;s:Row;previous?:Row;next?:Row}
  if(enter)p=easeInOut(t+.4,0,1);
  if(s.teaser)p=1;
  const focus=typingFocus(s.id,t).strength;
- const b={x:mix(full.x,inset.x,p),y:mix(full.y,inset.y-553*focus,p),w:mix(full.w,inset.w,p),h:mix(full.h,inset.h,p)};
+ const b={x:mix(full.x,inset.x,p),y:mix(full.y,inset.y-487.8*focus,p),w:mix(full.w,inset.w,p),h:mix(full.h,inset.h,p)};
  const angle=p>0&&p<1?-5*Math.sin(Math.PI*p):0;
  const showNext=leave&&t>=d-.4;
  const screen=s.layout!=='presenter'?s:showNext?next:undefined;
@@ -54,7 +54,7 @@ const FootageSegment:React.FC<{m:RoughCutManifest;s:Row;previous?:Row;next?:Row}
  const cropW=mix(1480,1300,p),cropX=introCropV21((s.from+f)/m.fps,mix(110,150,p)),cropY=mix(25,0,p),scale=b.w/cropW;
  const open=s.id==='s001'?openingScale(t):1;
  // Let the result own the screen during silent playback, rather than a waiting face.
- const cameraOpacity=s.id==='s035'?1-easeInOut(t,4.65,.22):s.id==='s033'?1-easeInOut(t,9.6,.35):s.id==='s029'?1-easeInOut(t,3.5,.35)*(1-easeInOut(t,9.6,.35)):1;
+ const cameraOpacity=s.id==='s030'&&t>=30?0:s.id==='s035'?1-easeInOut(t,4.65,.22):s.id==='s033'?1-easeInOut(t,9.6,.35):s.id==='s029'?1-easeInOut(t,3.5,.35)*(1-easeInOut(t,9.6,.35)):1;
  // Four-frame J-cut of OBS picture only: never desynchronize speaking camera.
  const jcut=!!previous&&s.layout!=='presenter'&&previous.layout!=='presenter'&&!s.screenRedaction&&!previous.screenRedaction&&!s.teaser&&!previous.teaser&&Math.abs(s.start-previous.end)>.3;
  return <AbsoluteFill>

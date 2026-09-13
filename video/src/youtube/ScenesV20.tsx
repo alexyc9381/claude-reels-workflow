@@ -1,4 +1,5 @@
 import React from 'react';
+import {HundredsV23} from './ScenesV23';
 import {AbsoluteFill,Img,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
 import {Actor,Glass,Logo,SkillFile,Lens,C,lerp,clamp} from './YouTubeV8Primitives';
 import {easeInOut as e,easeOut} from './glass-motion';
@@ -147,10 +148,9 @@ export const DirectV20:React.FC<{duration:number}>=({duration})=>{
   <Actor t={t} x={737+plug*118} y={562} size={284} role="operator" look={plug>.1?1:-1} reach={plug} lift={.6+fund*.2} walk={Math.sin(plug*Math.PI)} contact={duration*.38} happy={shoot>.8}/>
   <svg width="1920" height="1080" style={{position:'absolute',inset:0,opacity:e(u,.20,.04)}}><path d={`M1039 733Q1102 879 1201 773L${lerp(1134,1217,plug)} ${lerp(712,631,plug)}`} stroke="#697D60" strokeWidth="13" fill="none"/><g transform={`translate(${lerp(1124,1207,plug)} ${lerp(697,616,plug)}) rotate(-10)`}><path d="M0 0H56V34H0Z" fill="#D9BA78" stroke="#FFF3CE" strokeWidth="3"/><path d="M56 8H77M56 26H77" stroke="#809275" strokeWidth="6"/></g></svg>
   <At x={lerp(940,1310,fund)} y={lerp(593,412,fund)-Math.sin(fund*Math.PI)*100} style={{opacity:plug*(1-e(u,.52,.04)),transform:`rotate(${fund*120}deg)`}}><Coin size={91}/></At>
-  <At x={1029} y={317} style={{opacity:shoot,transform:`translateY(${60*(1-shoot)}px)`}}><div style={{padding:14,border:'3px solid white',borderRadius:23,background:'#E9EED8',boxShadow:'0 25px 33px #33452630'}}><Shot p={shoot} w={658}/></div></At>
+  <HundredsV23 t={t} at={5.45}/>
   <Title x={1070} y={248} size={35} color={C.teal}>Pay per generation</Title>
   <ChargeV20 t={t} at={duration*.38} x={1218} y={631}/>
-  <ReceiverV22 t={t} duration={duration} kind="direct"/>
  </Set>;
 };
 

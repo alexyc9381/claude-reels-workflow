@@ -1,4 +1,21 @@
-# Reproduce Higgsfield Replacement V19
+# Reproduce Higgsfield Replacement V23
+
+V23 is current. From the task/handoff root, after restoring working media and installing video dependencies:
+
+```sh
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/prepare-v23-media.mjs --check-only
+node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/test-v23.mjs
+REVIEW_CONCURRENCY=3 REVIEW_SUBCHUNK_FRAMES=300 REVIEW_TRUE_PEAK=-2.5 REVIEW_OUTPUT=outputs/higgsfield-replacement-edit-v23.mp4 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/render-low-storage.mjs
+REVIEW_REVISION=v23 node work/repos/claude-reels-workflow/youtube-video-editing-system/projects/higgsfield-replacement/tools/validate-v12-export.mjs
+```
+
+No inherited V22 picture chunks: webcam geometry changes throughout. Current EDL is five frames shorter; OBS narration implementation and source/camera sync mappings are otherwise unchanged. Test V23 against bundled Git baseline016dcbe. The validator still has its historical filename, but REVIEW_REVISION selects the V23 assertions. It checks full decode, exact13708frames, current-source receipts, current audio contract,48kHz stereo AAC, true peak/loudness and six embedded chapter clocks.
+
+On another Mac, use the launcher to install platform dependencies. Set REVIEW_FFMPEG to a local full FFmpeg build for rendering/validation (or install imageio-ffmpeg in the Python environment). The validator resolves the installed Remotion compositor package from the local architecture instead of hardcoding the original workstation's username. The renderer still targets the Apple-silicon bundled Chromium by default; on Intel Mac set REVIEW_BROWSER to the installed compatible Chromium executable. Optional regeneration: export-v23-timeline.mjs writes the timeline and exact chapter metadata from the manifest without overwriting it. Prepare-v23-media.mjs only copies two tracked marks when absent and refuses differing targets.
+
+See [V23 decisions](REVISION-V23.md), [current timeline](v23-timeline.json), [media receipt](provenance/v23-media.json) and [Mac handoff](OTHER-MAC-HANDOFF-V23.md). Preserve the licensing/claim gates in the earlier records.
+
+## Historical V19
 
 V19 is current. From the task/handoff root:
 
