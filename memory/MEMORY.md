@@ -142,7 +142,7 @@
 - [Lead-magnet .docx builder](reel-lead-magnet-builder.md) — `tools/make_lead_magnet.py`, zero-dependency OOXML (python-docx is NOT installed); hard-fails on em-dashes, on a Matchtern footer, and on a missing keyword line
 
 ## YouTube
-- [⛔ YouTube video editing system](youtube-video-editing-system.md) — canonical NoCodeAlex 16:9: Remotion, OBS-only audio, full-word/content preservation, white glass/Manrope, meaningful nonrepeated 2D scenes, safe screen/camera framing. [Full learning index](../youtube-video-editing-system/LEARNINGS-INDEX.md) · [conversation decision ledger](../youtube-video-editing-system/REVISION-DECISIONS.md) · [Higgsfield v9](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V9.md). Do not inherit retired Matchtern style or superseded CGI/serif rules.
+- [⛔ YouTube video editing system](youtube-video-editing-system.md) — canonical NoCodeAlex 16:9: Remotion, OBS-only audio, full-word/content preservation, white glass/Manrope, meaningful nonrepeated 2D scenes, safe screen/camera framing. [Full learning index](../youtube-video-editing-system/LEARNINGS-INDEX.md) · [conversation decision ledger](../youtube-video-editing-system/REVISION-DECISIONS.md) · [editing retrospective](../youtube-video-editing-system/projects/higgsfield-replacement/EDITING-RETROSPECTIVE.md) · [Higgsfield V23](../youtube-video-editing-system/projects/higgsfield-replacement/REVISION-V23.md). Do not inherit retired Matchtern style or superseded CGI/serif rules.
 
 ## Matchtern
 - [Design system](matchtern-design-system.md) — brand colors, fonts, logo, copy rules

@@ -1,5 +1,9 @@
 # Conversation decision ledger
 
+## September 13 — consolidate and index the editing learnings
+
+Alex asked to ensure the video-editing lessons are pushed and properly indexed. Existing records already preserve the request history through V23. Added the [editing retrospective](projects/higgsfield-replacement/EDITING-RETROSPECTIVE.md) to make the repeated failures, current choices, causal rationale, delivery lessons and next-edit gates easy to reuse. Corrected root and memory navigation that still linked V10/V9 as the project entry. Added post-export chapter/publication/handoff distinctions. This is documentation only; no new render, upload, creative approval or retention result is claimed.
+
 ## September 12 — V23: preserve the improved direction; align each beat to speech
 
 Alex: animations are “a lot better.” This is directional feedback on V22, not blanket approval of V23. Requested real video-model logos at “standard AI models”; many outputs for “hundreds of videos”; complete replacement of static2:38–2:49 credential instruction; visible privacy explanation; reaction countdown near5:03; remove side-turn near5:47; sound during quiet6:14 playback; approximately20% larger webcam. Requested indexed rationale as well as revisions.

@@ -6,6 +6,8 @@ The Remotion-based 16:9 system for No Code Alex long-form tutorials, explainers 
 
 ## Start here
 
+For the distilled end-to-end lessons and next-edit checklist, read the [Higgsfield editing retrospective](projects/higgsfield-replacement/EDITING-RETROSPECTIVE.md).
+
 1. [CURRENT-DIRECTION.md](CURRENT-DIRECTION.md) — authoritative current choices and conflict resolution.
 2. [LEARNINGS-INDEX.md](LEARNINGS-INDEX.md) — find every decision, revision, source contract and QA record.
 3. [REVISION-DECISIONS.md](REVISION-DECISIONS.md) — full conversation learning ledger, including superseded requests.

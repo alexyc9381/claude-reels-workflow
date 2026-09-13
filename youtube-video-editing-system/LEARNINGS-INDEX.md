@@ -1,5 +1,7 @@
 # YouTube editing — indexed learning library
 
+September 13 consolidation: [Editing retrospective and next-project review gates](projects/higgsfield-replacement/EDITING-RETROSPECTIVE.md). This is the compact starting point for the full process: repeated failures, final decisions, rationale, handoff and publication lessons. V23 is the latest verified full export; older version notices below are preserved history, not competing current instructions.
+
 Current work: [V23 narration-matched quantity, private steps and larger webcam](projects/higgsfield-replacement/REVISION-V23.md), [editable Mac handoff and next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V23.md). Alex positively assessed V22's animation direction; V23 is a targeted continuation. **Start with [Causal animation decisions: the why](CAUSAL-ANIMATION-DECISIONS.md)** for narration/quantity/order, physical actions, hierarchy, real marks, character contrast, face/evidence balance, privacy and purposeful audio. Source edits are not render verification or creative approval.
 
 Latest V22 follow-up: the initial saturated orange masked Claude and the cost layout remained scattered. Use lighter warm actor fields/stronger orange edges, ink silhouette separation, and two connected physical cost bases instead of detached text/UI fragments. The full source, review limits and current completion state are in the V22 record.
