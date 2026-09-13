@@ -22,6 +22,7 @@ Alex's explicit September 13 instructions apply to the ChatGPT account:
 - Prepare six reusable **audio-and-video** clips from the recording session. Alex initially said seven, then confirmed this session contains **six** scripts. Audio-only splits do not satisfy this request. Preserve uncropped framing in the reusable synchronized masters and save a source cut/sync map for later edits.
 - **Do not speed up or slow down the speaking or camera footage to fit animations.** Use 1.0× playback; adapt the animation timeline to the selected recording. This explicit request overrides the older 1.03× VO advice for these recordings.
 - Use the Google Drive connector to retrieve the files, not browser automation. The September 13 session uses `Faceless - ChatGPT` and `7 REELS VO CHATGPT.m4a`.
+- UNLAZY revision feedback, September 13: keep the exact hook headline, then change the top header/subheader for each section. Remove redundant small explanatory banners inside scenes. Check actual waveform onset, not only transcript timestamps, so there is no silent lead-in. Prefer acted, varied silhouettes to repeated large text rectangles, and keep the comment CTA developing through the final spoken words.
 - All-caps headers and no-watermark rules still apply. The UNLAZY ChatGPT headline is **MAKE CHATGPT 10X BETTER 1 PROMPT**.
 
 Implementation coordinates and blur strength depend on the actual footage and must be visually checked; the reference image is not authorization to obscure the existing animation.
