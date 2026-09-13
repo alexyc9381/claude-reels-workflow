@@ -20,6 +20,8 @@ Motion guidance used: press-release-spring, cursor-drag/lockstep, and counting-d
 
 ## Timeline and delivery
 
+Post-delivery chapter-copy revision: Alex requested simpler “Why…” / “Step 1…” labels. youtube-chapters.txt now uses concise description-ready titles with unchanged timestamps. This copy-only revision does not alter the verified V23 MP4's embedded chapter names, on-screen labels or existing handoff bundle.
+
 456.933333s /13708frames /30fps /1920×1080. Six chapter identities retained; the final chapter shifts five frames earlier. YouTube display timestamps remain0:00,0:36,2:04,3:27,4:57,7:09. chapters.json is the precise frame source; youtube-chapters.txt is the pasteable list.
 
 Full V23 exported and verified: outputs/higgsfield-replacement-edit-v23.mp4, 165,341,091 bytes, 456.933333 seconds, 13,708 frames. Every picture chunk was freshly rendered from source hash cd37c8e9ce787ec8f868d042d1bf9ec19bd767df4711a854f59db97b17c9e2ba; no inherited V22 picture. Full picture/audio decode passed. Finished stereo 48 kHz AAC measured −16.83 LUFS and −2.02 dBTP. All six embedded chapter names/clocks match the current manifest. [Verification receipt](verification-v23.json) includes the movie SHA256, sample-frame review and premaster sound comparison.

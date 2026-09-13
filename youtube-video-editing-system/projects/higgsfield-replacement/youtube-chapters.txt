@@ -1,6 +1,6 @@
-0:00 Can you tell the difference?
-0:36 Why use the models directly?
-2:04 Connect fal.ai and Claude
-3:27 Make your first video
-4:57 Review and compare the results
-7:09 The reveal and next step
+0:00 The challenge
+0:36 Why replace Higgsfield?
+2:04 Step 1: Set up
+3:27 Step 2: Generate your video
+4:57 Step 3: Review the results
+7:09 The reveal + free setup
