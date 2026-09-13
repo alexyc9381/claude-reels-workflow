@@ -1,9 +1,9 @@
 
   scene                   MOTION  top share DEADRUN    HOLD  verdict
   ----------------------------------------------------------------------------
-  MAGNET                   13.00      0.080       0     18%  ok
-  TEAM                     14.59      0.072       0     23%  ok
-  ATTACK                   11.38      0.123       0     43%  ok
+  MAGNET                   14.03      0.074       0     21%  ok
+  TEAM                     14.67      0.071       0     23%  ok
+  ATTACK                   11.38      0.124       0     43%  ok
   REPO                     14.20      0.100       0     22%  ok
   CREATOR                  14.52      0.078       0     29%  ok
   INSTALL                  10.19      0.087       6     12%  ok
@@ -15,5 +15,5 @@
   PUBLIC                   18.03      0.076       0     18%  ok
   CTA                       8.14      0.099       0     28%  ok
   ----------------------------------------------------------------------------
-  median motion 13.00  (bar 9.00, approved reel 81 = 9.82)
+  median motion 13.49  (bar 9.00, approved reel 81 = 9.82)
   scenes failing: 0/13

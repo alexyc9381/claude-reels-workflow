@@ -1,0 +1,15 @@
+{
+  "request": "Claude must be signalled from frame zero for audience relevance.",
+  "implemented": "Official Claude mark and CLAUDE label attached to both primary props, fully opaque at frame 0; inherited header mark retained.",
+  "reviewed_frames": [
+    0,
+    24,
+    48,
+    72,
+    96
+  ],
+  "review": "Full-frame and phone-size checks: identity readable in the opening; plate follows operated prop; header and later GitHub payoff retained.",
+  "logo_sha256": "5119ef950a0d648b3fd62865791e73f07f32e18ddab84e4f21160f8c641c0f5f",
+  "preview_in_archive": "ECC_Remotion_Source/hooks/preview-frame0.jpg",
+  "audience_outcome_measured": false
+}

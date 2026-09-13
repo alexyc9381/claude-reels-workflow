@@ -4,6 +4,10 @@ import {Img} from 'remotion';
 import {Actor,Burst,E,O,P,Set,Tool,pulse,recoil} from './EC150Kit';
 import {Logo} from './EC150Revision';
 
+// Identity is fully visible from frame zero, on the operated prop rather than
+// waiting for the later GitHub payoff. This is an audience signal, not a fade-in.
+const ClaudePlate:React.FC<{x:number;y:number}>=({x,y})=><div style={{position:'absolute',left:x,top:y,width:190,height:162,boxSizing:'border-box',background:'#FFF9EC',border:'5px solid #385448',borderRadius:22,boxShadow:'0 7px 0 #263D39'}}><Img src={staticFile('logos/claude.svg')} style={{position:'absolute',left:38,top:7,width:104,height:104}}/><div style={{position:'absolute',left:0,right:0,top:113,textAlign:'center',fontSize:31,lineHeight:'36px',fontWeight:900,letterSpacing:-.7,color:'#733E2C'}}>CLAUDE</div>{[12,162].map(left=><div key={left} style={{position:'absolute',left,top:12,width:7,height:7,borderRadius:'50%',background:'#BCA97D'}}/>)}</div>;
+
 // Hook B: lateral attraction → consolidation → a powered operator takes control.
 // Each tool has a source, a curved path, a contact, and a visible destination.
 export const MagnetHook:React.FC<{f:number}>=({f})=>{
@@ -25,7 +29,7 @@ export const MagnetHook:React.FC<{f:number}>=({f})=>{
     <Actor x={hx} y={hy} s={hs} f={f} costume="suit" lean={hl} gaze={9-launch*10} shock={recoilF} stern={wind*(1-charge)+charge*.7} cheer={charge*.65} squash={recoilF*.65} glowEyes={charge} capeC="#AD493C"/>
     {/* A tracked bent arm attaches the operator to the magnet's rear grip. */}
     <P w={1012} h={792} z={57}><svg width="1012" height="792"><path d={`M${armX} ${armY+5}Q${mx-60+handoff*230} ${my+320-handoff*12} ${handX} ${handY+5}`} fill="none" stroke="#733B2D" strokeWidth="43" strokeLinecap="round"/><path d={`M${armX} ${armY}Q${mx-60+handoff*230} ${my+310-handoff*12} ${handX} ${handY}`} fill="none" stroke="#D97757" strokeWidth="31" strokeLinecap="round"/></svg></P>
-    <P x={mx} y={my} w={360} h={374} z={58} rot={-13+wind*13-pull*7+lift*27-launch*19} style={{transformOrigin:'12% 64%'}}><svg viewBox="0 0 360 374" style={{overflow:'visible'}}><defs><linearGradient id="magmetal"><stop stopColor="#F7D99E"/><stop offset=".48" stopColor="#BA683F"/><stop offset="1" stopColor="#E5A068"/></linearGradient></defs><path d="M329 47H168C-20 47-20 322 168 322H329V222H167C104 222 104 147 167 147H329Z" fill="#482E2E" transform="translate(0 12)"/><path d="M329 37H168C-20 37-20 312 168 312H329V212H167C104 212 104 137 167 137H329Z" fill="url(#magmetal)" stroke="#3E3A31" strokeWidth="9"/><path d="M326 37H263V137H326ZM326 212H263V312H326Z" fill="#DFE4DA" stroke="#435C5C" strokeWidth="8"/><path d="M53 151V215" stroke="#F8D49A" strokeWidth="12" strokeLinecap="round"/>{charge>0&&<path d={`M317 123L${292+Math.sin(f)*17} 167L338 182L307 228`} stroke="#FFF0A3" strokeWidth="13" fill="none" opacity={1-lift}/>}</svg></P>
+    <P x={mx} y={my} w={360} h={374} z={58} rot={-13+wind*13-pull*7+lift*27-launch*19} style={{transformOrigin:'12% 64%'}}><svg viewBox="0 0 360 374" style={{overflow:'visible'}}><defs><linearGradient id="magmetal"><stop stopColor="#F7D99E"/><stop offset=".48" stopColor="#BA683F"/><stop offset="1" stopColor="#E5A068"/></linearGradient></defs><path d="M329 47H168C-20 47-20 322 168 322H329V222H167C104 222 104 147 167 147H329Z" fill="#482E2E" transform="translate(0 12)"/><path d="M329 37H168C-20 37-20 312 168 312H329V212H167C104 212 104 137 167 137H329Z" fill="url(#magmetal)" stroke="#3E3A31" strokeWidth="9"/><path d="M326 37H263V137H326ZM326 212H263V312H326Z" fill="#DFE4DA" stroke="#435C5C" strokeWidth="8"/><path d="M53 151V215" stroke="#F8D49A" strokeWidth="12" strokeLinecap="round"/>{charge>0&&<path d={`M317 123L${292+Math.sin(f)*17} 167L338 182L307 228`} stroke="#FFF0A3" strokeWidth="13" fill="none" opacity={1-lift}/>}</svg><ClaudePlate x={-20} y={83}/></P>
     {charge>0&&<>
       <P x={416+lift*210+launch*30} y={235-lift*86+launch*55} w={185+lift*42+launch*80} h={185+lift*42+launch*80} z={65} scale={O(f,47,59,.25,1)} rot={-12+lift*18-launch*18} style={{filter:`drop-shadow(0 0 ${22+Math.sin(f*.5)*6}px #F6D97C)`}}><Logo s={185+lift*42+launch*80}/></P>
       {[0,1,2].map(i=>{const en=O(f,65+i*5,78+i*5),run=E(f,84+i*3,108+i*3);return <P key={i} w={1012} h={792} z={25+i} style={{opacity:en,transform:`translateY(${(1-en)*60}px)`}}><Actor x={700+i*69+run*(i-1)*207} y={646-i*86+run*285} s={150+en*20+run*110} f={f+i*5} costume={['prof','constr','cop'][i]} lean={en*10+run*(i-1)*19} gaze={-6+run*8} cheer={en} glowEyes={en*.65} walk={1} z={25+i}/><P x={690+i*69} y={627-i*86} w={100} h={11} z={23} style={{background:'#FADEA1',opacity:(1-run)*en,filter:'blur(8px)'}}/></P>})}
@@ -37,7 +41,7 @@ export const MagnetHook:React.FC<{f:number}>=({f})=>{
 // Hook C: a vertical pull peels the room open; a workforce then advances in depth.
 // The zipper slider, operator hand, teeth and peeled panels share one driver.
 export const ZipperHook:React.FC<{f:number}>=({f})=>{
-  const drag=E(f,-11,43), zipY=205+drag*455, open=O(f,-2,55), back=E(f,46,67), rush=E(f,69,106);
+  const drag=E(f,-11,43), zipY=235+drag*425, open=O(f,-2,55), back=E(f,46,67), rush=E(f,69,106);
   const heroX=725+drag*12+back*141,heroY=548+drag*183-back*11;
   const hs=320+drag*30-back*60,hl=-19-drag*14+back*47-rush*12,hr=hl*Math.PI/180;
   const armX=heroX+hs*(-.33*Math.cos(hr)+.47*Math.sin(hr)),armY=heroY+hs*(-.33*Math.sin(hr)-.47*Math.cos(hr));
@@ -65,7 +69,7 @@ export const ZipperHook:React.FC<{f:number}>=({f})=>{
     <Actor x={heroX} y={heroY} s={hs} f={f} costume="glasses" lean={hl} gaze={-9} stern={1-open} shock={pulse(f,31,17)} cheer={open*.9} squash={pulse(f,35,16)*.6} z={40}/>
     {/* The pulling hand is tracked to the tab throughout the vertical stroke. */}
     <P w={1012} h={792} z={42}><svg width="1012" height="792"><path d={`M${armX} ${armY+5}Q${595+back*144} ${350+drag*334} ${wristX} ${wristY+7}`} fill="none" stroke="#703B2E" strokeWidth="39" strokeLinecap="round"/><path d={`M${armX} ${armY}Q${595+back*144} ${342+drag*334} ${wristX} ${wristY}`} fill="none" stroke="#D97757" strokeWidth="28" strokeLinecap="round"/></svg></P>
-    <P x={442+back*237} y={zipY-87-back*41} w={130} h={207} z={43} rot={-8+drag*12+back*57}><svg viewBox="0 0 130 207"><path d="M31 10H98L123 89L99 116H29L7 89Z" fill="#D7AF65" stroke="#554E37" strokeWidth="8"/><rect x="27" y="51" width="77" height="143" rx="29" fill="#F0D49A" stroke="#554E37" strokeWidth="8"/><rect x="45" y="137" width="40" height="38" rx="10" fill="#80633B"/></svg><Img src={staticFile('logos/github.svg')} style={{position:'absolute',left:40,top:61,width:53,height:53}}/></P>
+    <P x={442+back*237} y={zipY-87-back*41} w={130} h={207} z={43} rot={-8+drag*12+back*57}><svg viewBox="0 0 130 207"><path d="M31 10H98L123 89L99 116H29L7 89Z" fill="#D7AF65" stroke="#554E37" strokeWidth="8"/><rect x="27" y="51" width="77" height="143" rx="29" fill="#F0D49A" stroke="#554E37" strokeWidth="8"/><rect x="45" y="137" width="40" height="38" rx="10" fill="#80633B"/></svg><ClaudePlate x={-30} y={-32}/></P>
     <Burst f={f} at={43} x={506} y={688} r={113}/>
     {/* Once the zip finishes, the middle specialist catches the repository seal
         and leads the advancing crew into the unchanged team scene. */}

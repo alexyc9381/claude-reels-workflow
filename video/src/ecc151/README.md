@@ -43,3 +43,6 @@ September 12 follow-up: two new full-length versions with distinct visual openin
 Restore the new archive with `python3 tools/restore_ecc151_assets.py '/path/to/ECC - Two Hook Variants - Editable Source.zip' --hooks`. It includes the unchanged base assets and additional masters/stems, all checksum verified into the same isolated directory. Render via `src/ecc-151-index.tsx` with composition `ECC151B` or `ECC151C`, then finalize using `tools/finalize_ecc151.py NATIVE.mp4 --output OUTPUT.mp4 --hook magnet` (or `--hook zipper`).
 
 `EC151Hooks.tsx` owns the new choreography. The master audio is sample-identical to the original from 3.4 seconds; the opening uses clean voice/music/effect stems and matched contact cues. Hook-only and full-reel hash differences are reported separately; the shared body is intentional and no retention claim is made.
+
+
+The latest hook revision makes Claude explicit from frame zero: both primary props carry the official mark and a readable CLAUDE label. See the frame-zero audience signal section of the hook storyboard and standing feedback section 9. The same video and source Drive links serve this revision.

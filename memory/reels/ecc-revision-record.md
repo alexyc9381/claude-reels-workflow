@@ -53,3 +53,8 @@ The source repository is code/text only. The media archive retains the user's mu
 ## Follow-up: two hook variants
 
 Alex then asked for two different hooks following the same NoCodeAlex system. MAGNET uses lateral tool consolidation; ZIPPER opens the room vertically and brings a workforce forward in depth. The original SNAP export is retained. Both new files run the complete existing body from 3.4s, with independent opening contact cues and the identical body master PCM. Reviews corrected capture order, hand/prop attachment, forehead occlusion, silhouette framing and late-scene entry drivers. [Detailed hook storyboard and review](evidence/ecc151/hooks/STORYBOARD.md); [delivery and checks](evidence/ecc151/hooks/delivery.json); [source](../../video/src/ecc151/README.md#two-additional-hooks-magnet-and-zipper). No user preference between these new cuts or measured retention result is recorded.
+
+
+### Frame-zero Claude identity correction
+
+Alex clarified that both hooks must identify Claude from frame 0 to signal audience relevance. Added the official Claude logo and CLAUDE label directly to the operated magnet and zipper pull, with no delayed entrance. The larger zipper plate clears the headline from the opening frame. The existing headline, two mechanisms, audio timing and shared body remain intact. Replaced the two existing Drive files and refreshed their source archive. This implements the requested audience signal; no audience-selection results are claimed.

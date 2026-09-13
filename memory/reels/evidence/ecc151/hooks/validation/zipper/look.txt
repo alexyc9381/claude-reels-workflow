@@ -1,9 +1,9 @@
 look_audit · 151_Claude-ECC_Hook-C-Zipper.mp4
 ------------------------------------------------------------------------------
-  ✓ HOOK_LUMA    194.3                  panel luma at frame 0 >= 140 (THE-OPEN law 1 — and this is the ONLY place that law applies)
-  ✓ BODY_SAT     69.5%                  saturated-pixel share >= 34% (AGENCY 57.9 · the pale run 10-15)
+  ✓ HOOK_LUMA    195.4                  panel luma at frame 0 >= 140 (THE-OPEN law 1 — and this is the ONLY place that law applies)
+  ✓ BODY_SAT     69.4%                  saturated-pixel share >= 34% (AGENCY 57.9 · the pale run 10-15)
   ✓ BODY_BLACK   p10 24.8               black point (luma p10) <= 35 (AGENCY 25.0 · the pale run 51-72)
-  ⚠ HOOK_PLATE   64.4% at y0  = HEADER PILL no claim plate of its own at frame 0 — warns, never blocks
+  ⚠ HOOK_PLATE   62.4% at y0  = HEADER PILL no claim plate of its own at frame 0 — warns, never blocks
   · BODY_LUMA                      98.2 reported, not gated
   · DEPTH                         156.8 row-luma spread — REPORTED ONLY, see the header. Check by eye: is there a mass cropped by the panel edge, in front of the action?
 ------------------------------------------------------------------------------

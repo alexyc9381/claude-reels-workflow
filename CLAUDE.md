@@ -27,7 +27,7 @@ change that adds/removes a reel, log, storyboard, caption, memory file, creator,
 
 | I want to… | Go to |
 |---|---|
-| **apply ECC feedback: idle sprites, early name reveal, or bouncing instead of a finished action** | [`memory/alex-ecc-continuous-action-and-reveal-gating.md`](memory/alex-ecc-continuous-action-and-reveal-gating.md) → [revision record](memory/reels/ecc-revision-record.md) → [source](video/src/ecc151/README.md) |
+| **apply ECC feedback: frame-zero Claude identity, idle sprites, early name reveal, or unfinished actions** | [`memory/alex-ecc-continuous-action-and-reveal-gating.md`](memory/alex-ecc-continuous-action-and-reveal-gating.md) → [revision record](memory/reels/ecc-revision-record.md) → [source](video/src/ecc151/README.md) |
 | **apply OC feedback: random shapes, weak smash or boring CTA** | [OC action and ending revisions](memory/alex-oc-action-and-ending-revisions.md) — consequential scene replacements, expressive octopus/Claude, late reveal across all text surfaces, exact spoken endpoint, and complete caption/article delivery |
 | **apply LM feedback to hooks, tutorials or trial delivery** | [`memory/alex-lm-hooks-demo-and-delivery.md`](memory/alex-lm-hooks-demo-and-delivery.md) — frame-zero subject action, no post-action pause, visible cursor and real setup, safe framing, expressive Claude, useful text only and verified final files |
 | **start a new reel** | [`docs/KICKOFF-PROMPT.md`](docs/KICKOFF-PROMPT.md) — the canonical opening message, clause by clause: what each part triggers, the three transcription errors it always has, and what it does NOT say and therefore still has to be checked |

@@ -7,7 +7,7 @@ There is no early ECC text reveal. These are creative alternatives, not measured
 
 ## B — MAGNET: lateral consolidation
 
-- 0.00–0.20: Claude immediately braces and lifts an oversized horseshoe magnet. Three engineering tools are visible in separate workstations. Brief inherited camera push.
+- 0.00–0.20: Claude immediately braces and lifts an oversized horseshoe magnet carrying the official Claude mark and a large CLAUDE label, fully visible from frame zero. Three engineering tools are visible in separate workstations. Brief inherited camera push.
 - 0.20–1.57: blueprint, coding laptop and testing flask leave their stations on staggered curved paths. Each has a separate capture contact; the emptied workstations dissolve after capture.
 - 1.60–2.17: all tools have arrived before the GitHub core forms. The room darkens, Claude eyes power up; the operating hand transfers from the magnet to the core.
 - 2.17–3.40: Claude raises the consolidated core and steps forward. Three empowered specialists follow with staggered forward launches into the existing busy workshop scene.
@@ -15,7 +15,7 @@ There is no early ECC text reveal. These are creative alternatives, not measured
 
 ## C — ZIPPER: vertical opening, then advance in depth
 
-- 0.00–0.80: a Claude operator is already gripping a giant GitHub zipper tab. He pulls downward; both sides of the room peel apart with tracked zipper teeth and window halves.
+- 0.00–0.80: a Claude operator is already gripping a giant zipper tab carrying the official Claude mark and a large CLAUDE label, fully visible from frame zero. He pulls downward; both sides of the room peel apart with tracked zipper teeth and window halves.
 - 0.80–1.43: the opening reveals a five-specialist workforce. Their expressions change as the eyes power up in sequence. The slider reaches its physical end stop.
 - 1.43–2.37: the operator takes the detached tab aside, clearing the center. The front specialist receives the GitHub seal; the team steps toward the opening.
 - 2.37–3.40: the leader crosses in front of the zipper threshold and the others advance behind him, feeding the existing workshop cut.
@@ -48,3 +48,8 @@ Audio master files contain the exact original PCM after 3.4s. The replacement op
 - memory/reel-motion-hierarchy.md (including ECC qualification)
 
 Distinct mechanisms and choreography establish the creative difference. Hash distances and motion scores are review diagnostics, not proof of audience response.
+
+
+## Frame-zero audience signal revision
+
+Alex specified that hook scenes must signal Claude immediately so the intended audience can recognize relevance before the payoff. A mascot or the small shared header badge alone was insufficient for this request. Both operated props now carry an opaque, high-contrast official Claude mark plus CLAUDE text at frame 0, with no entrance delay. The zipper starts slightly lower so the entire identity plate clears the headline. The later GitHub result remains intact. Full-frame first-frame checks verified visibility and legibility; no audience retention or filtering outcome has been measured.

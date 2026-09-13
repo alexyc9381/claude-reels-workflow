@@ -1,6 +1,6 @@
 ---
 name: alex-ecc-continuous-action-and-reveal-gating
-description: "September 12 ECC feedback: active hook consequences, working background sprites, complete nonrepeated actions, operated graphics, scene-specific headers, early visual name withholding, matched sound and whole-reel revision review. Read when Alex asks for more motion or rejects bouncing/logos/static crowds."
+description: "September 12 ECC feedback: Claude identity from frame zero, active hook consequences, working background sprites, complete nonrepeated actions, operated graphics, scene-specific headers, early visual name withholding, matched sound and whole-reel revision review. Read when Alex asks for more motion or rejects bouncing/logos/static crowds."
 metadata:
   node_type: memory
   type: feedback
@@ -78,3 +78,10 @@ Run the applicable final encoded motion/tail, look, sound, caption and export ch
 ## 8. Finish the complete delivery
 
 Update the same canonical Drive video, refresh the editable source, and verify server metadata. The guide is a live chen.media article with a working download; the posting caption must be in the video's actual Drive folder. Check existing artifacts before creating duplicates. The revision record links the verified delivery and guide.
+
+
+## 9. Claude-targeted hooks identify Claude from frame zero
+
+Alex's follow-up on the MAGNET and ZIPPER variants: the hook must signal Claude immediately, for example through the logo, so the intended audience recognizes the topic and the unintended audience can scroll away. This is the desired audience-selection behavior, not a measured result.
+
+For these Claude-targeted hooks, make an official Claude mark prominent in the main visual at frame 0. Use a readable CLAUDE label when the symbol or mascot alone is too ambiguous. The shared header badge and a later power-up do not satisfy this request by themselves. Integrate the identity into the operated object, keep it fully opaque from the first frame, and verify at phone size and through the opening action. Preserve the requested headline and the later GitHub payoff. ECC's implemented examples are a branded magnet housing and a larger branded zipper pull. The repo name ECC can still remain visually withheld in its separately requested early reveal scene.
