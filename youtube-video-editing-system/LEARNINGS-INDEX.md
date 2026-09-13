@@ -1,5 +1,7 @@
 # YouTube editing — indexed learning library
 
+Latest V22 follow-up: the initial saturated orange masked Claude and the cost layout remained scattered. Use lighter warm actor fields/stronger orange edges, ink silhouette separation, and two connected physical cost bases instead of detached text/UI fragments. The full source, review limits and current completion state are in the V22 record.
+
 Current: [V22 warm whole-film environment and character-led actions](projects/higgsfield-replacement/REVISION-V22.md), [V22 editable Mac handoff and prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V22.md). Octopus emblem, mechanical stopwatch, generate/save, copy/install, coordinated later roles and closing bonus; source cuts/narration intact. Read exact scope rather than assuming every old overlay was rebuilt. Earlier latest/current labels are historical where they conflict.
 
 Latest V20 follow-up: the forest preview was rejected. Final direction is a clean route with three functional stops, no forest/buildings/bridge. Actual Higgsfield page capture scrolls downward. [Updated V20 record](projects/higgsfield-replacement/REVISION-V20.md) takes precedence over initial landscape wording below.

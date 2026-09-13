@@ -167,7 +167,7 @@ export const soundEvents=(m:M)=>{
   const beat=(u:number,span:number,name:string,gain=.13,start=b)=>add(start+u*span,name,gain,.65);
   const schedules:Record<string,[number,string][]>={studio:[[.18,'paper'],[.45,'click'],[.72,'shutter'],[.875,'latch']],roadmap:[[.08,'zip'],[.45,'paper'],[.8,'latch']],guide:[[.22,'paper'],[.52,'servo'],[.81,'latch']],wrapper:[[.08,'servo'],[.25,'land'],[.55,'paper']],download:[[.23,'paper'],[.38,'land'],[.69,'zip']],skill:[[.11,'paper'],[.29,'click'],[.48,'servo'],[.75,'paper'],[.9,'latch']],outro:[[.19,'paper'],[.2375,'whip'],[.4,'land'],[.59,'zip'],[.75,'typing']],compare:[[.08,'shutter'],[.89,'paper']]};
   if(s.kind==='hook'){
-   const q=s.b!,span=d-q;for(const [u,n,g] of [[.38,'zip',.07],[1.58,'land',.09],[3,'paper',.065],[3.84,'latch',.065],[4.88,'shutter',.08],[6.55,'latch',.065]] as const)add(b+q+u*span/7.6667,n,g,.65);
+   const q=s.b!,span=d-q;for(const [u,n,g] of [[.38,'zip',.07],[1.58,'land',.09],[2.02,'zip',.055],[3.52,'land',.055],[3.55,'paper',.055],[4.15,'latch',.065],[4.88,'shutter',.08]] as const)add(b+q+u*span/7.6667,n,g,.65);
   }else if(s.kind==='studio'){
    add(b+.12,'paper',.10);add(b+2.84,'servo',.07);add(b+4.4,'shutter',.11);add(b+6.75,'paper',.055);add(b+7.17,'latch',.065);
   }else if(s.kind==='roadmap'){

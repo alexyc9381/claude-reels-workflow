@@ -13,7 +13,7 @@ export const Actor:React.FC<{t:number;x:number;y:number;size?:number;role?:strin
  const aperture=(happy?.77:1)*(phase<.13?1-.9*Math.sin(phase/.13*Math.PI):1),breath=.005*Math.sin(t*2.2);
  return <div data-claude-2d="symmetric-eyes" data-outfit={role} style={{position:'absolute',left:x,top:y,width:size,height:size,opacity}}>
   <div style={{position:'absolute',left:size*.08,top:size*.91,width:size*.84,height:size*.075,borderRadius:'50%',background:C.ink+'28',filter:'blur(8px)',transform:`scaleX(${1+Math.abs(shock)*.15})`}}/>
-  <div style={{transform:`translateY(${-Math.abs(Math.sin(gait))*8*move+shock*9}px) rotate(${lean+Math.sin(gait)*2*move-shock*5}deg) scale(${1+shock*.055+breath},${1-shock*.07-breath})`,transformOrigin:'50% 92%'}}>
+  <div data-character-separation="ink-rim" style={{filter:'drop-shadow(1px 0 0 #493B2B) drop-shadow(-1px 0 0 #493B2B) drop-shadow(0 1px 0 #493B2B) drop-shadow(0 -1px 0 #493B2B) drop-shadow(0 3px 2px #FFF3D8)',transform:`translateY(${-Math.abs(Math.sin(gait))*8*move+shock*9}px) rotate(${lean+Math.sin(gait)*2*move-shock*5}deg) scale(${1+shock*.055+breath},${1-shock*.07-breath})`,transformOrigin:'50% 92%'}}>
    <Claude2D frame={Math.round(t*30)} size={size} outfit={role as Outfit} colorful gesture={Math.sin(t*2)*.16+move*.3} face={{leftOpen:aperture,rightOpen:aperture,gazeX:look*4,gazeY:-clamp(lift)*2,happy:happy?1:0}} gait={{phase:gait,amount:move}} leftArmAngle={-clamp(lift)*62-Math.sin(gait)*move*15} rightArmAngle={-clamp(reach)*70-clamp(lift)*45+Math.sin(gait)*move*15}/>
   </div>
  </div>;

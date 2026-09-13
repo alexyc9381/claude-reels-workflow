@@ -2,6 +2,8 @@
 
 ## September 12 — V22 is current
 
+Follow-up: orange made the clay sprite hard to see; cost scene still looked scattered and text-led. Stop the obsolete in-progress render, lighten the actor field, add subtle dark silhouette separation to the unchanged rig, and replace loose cost/UI labels with two physical bases and a cross-stage defeat→skill→camera→result sequence. Do not interpret a brand-color request as permission to sacrifice contrast.
+
 Alex rejects the plain white environment and lime blob, asks for an octopus-like icon, an actual countdown object and more action throughout—not only the intro. Implement orange/peach backgrounds globally, eight curling tentacles around a clear emblem, a mechanical stopwatch, actual generation-to-Downloads action, FREE copy/install handoff and distinct closing download/install/bonus actions. Give multiple Claudes concrete receiving/operating jobs in later scenes and compact save/mix overlays. Retain the specifically liked1:13 vault. Motion should represent spoken verbs with a changed outcome, not turn labels into jitter or cover the tutorial. [V22 implementation and bounded scope](projects/higgsfield-replacement/REVISION-V22.md). Quiet new contact clocks; OBS narration, EDL, privacy, chapter and tutorial camera contracts unchanged.
 
 ## September 12 — V21 preserved history

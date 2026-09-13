@@ -2,9 +2,12 @@
 
 September 12, 2026. Supersedes V21's scalloped lime mascot, rectangular countdown and production/copy/closing scene designs. Retains the original No Code Alex Remotion role rig.
 
+Latest follow-up takes precedence: Alex found the first orange version low-contrast and the cost scene still scattered. That in-progress full render was stopped before delivery. The current cost scene is rebuilt as two physical bases, with prices/units attached to each base and only brand identities overhead. Claude crosses to defeat the octopus, returns carrying the skill, feeds it to a camera, supplies a small coin and generates a result. Removed the loose command/model/Reusable instructions UI in this scene. Strong orange now stays nearer the periphery, with a lighter peach/ivory actor field and fine dark silhouette rims across the original 2D role sprites. Original clay identity is unchanged. The generation/save trajectory was also corrected so the file lands inside the laptop folder, not below the screen.
+
 ## Implemented scope
 
 - Whole-film shared backgrounds: orange/peach radial light fields with restrained drifting illumination. No full white empty stage, forest or new abstract slab. White remains on glass, borders and actual recorded websites. This is behind the video, not an orange grade over camera or result pixels.
+- Contrast is functional: stage floor lightened, strongest orange moved away from character silhouettes, and a thin ink rim separates the original terracotta rig without recoloring it or adding a white sticker border.
 - Opening 1.6–4.6s: a mechanical stopwatch with crown/plunger, bezel ticks, moving hand, draining arc and 3/2/1. Top 1/2 identities, large face→bottom-center transition and equally brightened opening examples remain.
 - 7.333–15s: a distinct eight-tentacle octopus emblem replaces the rejected blob. Dome, separated curling arms and equal eyes; limbs brace/recoil during Claude's existing thumbnail-matching defeat. This is an editorial mascot bearing the real Higgsfield mark, not a newly discovered official mascot.
 - 15–23.667s: preserve the actual website capture scroll, then operator→camera→illustrated result→courier→computer Downloads. The moving result stays coupled to its courier and finishes as a saved video.mp4. The laptop's thumbnail and folder have separate readable space.
@@ -23,7 +26,7 @@ This does not claim every pre-existing overlay was completely redesigned. Other 
 
 OBS remains the only recorded narration. No voice clone or new spoken pickup, no Sony/example audio, no EDL/source trim/camera sync/privacy/chapter changes. V21 intro grade derivatives and intro-only face crop remain; tutorial crop is untouched.
 
-New quiet contacts: generation paper drop at scene+6.75s, folder latch at+7.17s; saved-overlay latch at 62%; closing paper/pickup/landing/install/bonus contacts at 6/22/48/63/85%. Gains 0.055–0.065 for the new hits. Existing countdown clicks and quieter roadmap dings remain. Music/narration mixing implementation is unchanged; no new EQ/carve/voice processing is claimed.
+New quiet contacts: cost-scene leap/landing/return/file feed/shutter at0.38/1.58/2.02/3.52/3.55/4.15/4.88s on its local7.6667s clock; generation paper drop at scene+6.75s, folder latch at+7.17s; saved-overlay latch at 62%; closing paper/pickup/landing/install/bonus contacts at 6/22/48/63/85%. New soft transfer hits use gains0.055–0.065. Existing countdown clicks and quieter roadmap dings remain. Music/narration mixing implementation is unchanged; no new EQ/carve/voice processing is claimed.
 
 ## Direction and QA learning
 

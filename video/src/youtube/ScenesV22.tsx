@@ -29,6 +29,28 @@ export const OctopusV22:React.FC<{t:number;hit:number;size?:number}>=({t,hit,siz
  </svg>;
 };
 
+/** Two connected cost mechanisms. Prices belong to the physical bases;
+ * no floating price/command/model label cloud. */
+export const CostV22:React.FC<{duration:number;brandAt:number;bold?:boolean}>=({duration})=>{
+ const t=clock(),u=t*7.6667/duration,flight=e(u,.38,1.2),home=e(u,2.02,1.5),lift=e(u,2.15,.48),send=e(u,3.55,.6),ready=e(u,4.15,.25),pay=e(u,4.4,.48),shoot=e(u,4.88,.55),deliver=e(u,5.44,1.0);
+ const x=lerp(lerp(1050,332,flight),1075,home),y=lerp(lerp(475,340,flight)-Math.sin(flight*Math.PI)*195,465,home)-Math.sin(home*Math.PI)*130;
+ const platform=(x:number,y:number,w:number,accent:string)=><At x={x} y={y}><svg width={w} height="242" viewBox={'0 0 '+w+' 242'}><defs><linearGradient id={'base-'+x} x2="0" y2="1"><stop stopColor="#FCF2DA"/><stop offset="1" stopColor="#C9BDA2"/></linearGradient></defs><path d={'M0 42Q'+w/2+' -38 '+w+' 42V194Q'+w/2+' 254 0 194Z'} fill={'url(#base-'+x+')'} stroke="#FFF8E6" strokeWidth="5"/><path d={'M5 54Q'+w/2+' 113 '+(w-5)+' 54'} fill="none" stroke={accent} strokeWidth="8"/>{[0,1,2].map(i=><circle key={i} cx={w-38} cy={101+i*29} r="7" fill={u>4.15+i*.22?accent:'#BCB7A3'}/>)}</svg></At>;
+ return <Set t={t}>
+  <At x={203} y={144} style={{display:'flex',alignItems:'center',gap:24}}><Logo name="higgsfield.jpg" size={103}/><span style={{fontSize:62,fontWeight:850}}>Higgsfield</span></At>
+  <At x={1056} y={144} style={{display:'flex',alignItems:'center',gap:24}}><Logo name="claude.png" size={103}/><span style={{fontSize:62,fontWeight:850}}>Claude skill</span></At>
+  {platform(152,752,674,'#829D43')}{platform(973,721,753,'#437D6C')}
+  <At x={213} y={304}><OctopusV22 t={u} hit={1.58} size={570}/></At>
+  <At x={248} y={831} style={{display:'flex',alignItems:'baseline',gap:15,fontWeight:850,color:'#293422',whiteSpace:'nowrap'}}><span style={{fontSize:84}}>$100</span><span style={{fontSize:36}}>/ month</span></At>
+  <At x={1012} y={782} style={{lineHeight:1.05,fontWeight:850,color:'#275E4C',whiteSpace:'nowrap'}}><span style={{fontSize:87}}>~10¢</span><div style={{fontSize:29,marginTop:-4}}>per generation</div></At>
+  <At x={1372} y={466} style={{opacity:1-deliver,transform:'translateY('+(-7*recoil(u,4.15))+'px)'}}><CineCamera t={u} shoot={shoot} w={356}/><svg width="356" height="95" style={{position:'absolute',top:-9,left:0}}><path d="M29 55V5H127V55" fill="#E9DBB7" stroke="#668471" strokeWidth="5"/><path d="M43 18H111" stroke="#617A62" strokeWidth="7"/><path d="M22 61H137" stroke="#668471" strokeWidth="9"/></svg></At>
+  <Actor t={u} x={x} y={y} size={310} role="operator" walk={Math.sin(flight*Math.PI)+Math.sin(home*Math.PI)} lift={.2+lift*.8*(1-ready*.65)} reach={send} look={u<1.58?-1:1} contact={u<3.52?1.58:3.52} happy={u>1.9} lean={-12*Math.sin(flight*Math.PI)+8*Math.sin(home*Math.PI)}/>
+  <At x={lerp(x+224,1397,send)} y={lerp(y-46,370,send)-Math.sin(send*Math.PI)*105} style={{opacity:lift*(1-ready),transform:'rotate('+(-9+send*9)+'deg) scale('+(1-send*.42)+')',transformOrigin:'50% 100%'}}><SkillFile t={t} size={151}/></At>
+  <At x={lerp(1240,1493,pay)} y={lerp(844,490,pay)-Math.sin(pay*Math.PI)*65} style={{opacity:ready*(1-e(u,4.87,.15)),transform:'rotate('+(pay*130)+'deg)'}}><svg width="79" height="79"><circle cx="39" cy="39" r="35" fill="#EDC87D" stroke="#80643C" strokeWidth="4"/><circle cx="39" cy="39" r="27" fill="none" stroke="#FFF4D0" strokeWidth="3"/><text x="39" y="50" textAnchor="middle" fontFamily={bodyFont} fontSize="30" fontWeight="850" fill="#72512B">¢</text></svg></At>
+  <At x={lerp(1579,1357,deliver)} y={lerp(563,407,deliver)} style={{opacity:deliver,transform:'scale('+(0.42+deliver*.58)+')',transformOrigin:'50% 50%',padding:11,background:'#EEF1D9',border:'4px solid #FFFDF0',borderRadius:17,boxShadow:'0 16px 30px #324E362B'}}><Shot p={e(u,5.44,1.7)} w={348}/></At>
+  <ChargeV20 t={u} at={1.58} x={489} y={643} size={300}/><ChargeV20 t={u} at={4.15} x={1450} y={507} size={235}/><ChargeV20 t={u} at={4.88} x={1680} y={612} size={270}/>
+ </Set>;
+};
+
 /** A physical stopwatch, not another choice badge or number in a card. */
 export const StopwatchV22:React.FC<{t:number}>=({t})=>{
  const u=t-1.6,p=clamp(u/3),tick=Math.max(0,u)%1,press=Math.sin(clamp(tick/.17)*Math.PI);
@@ -74,7 +96,7 @@ export const ProductionV22:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),u=t*8.6667/duration;
  if(u<2.7)return <ProductionV20 duration={duration}/>;
  const enter=e(u,2.7,.35),aim=e(u,2.84,.55),shoot=e(u,4.4,.65),carry=e(u,6.04,.71),drop=e(u,6.75,.42),close=e(u,7.17,.48);
- const actorX=lerp(711,1105,carry),actorY=601-8*Math.sin(carry*Math.PI),fileX=carry<1?actorX+134:lerp(1239,1460,drop),fileY=carry<1?actorY-143:458+drop*88;
+const actorX=lerp(711,1105,carry),actorY=601-8*Math.sin(carry*Math.PI),fileX=carry<1?actorX+134:lerp(1239,1418,drop),fileY=carry<1?actorY-143:lerp(458,350,drop);
  return <Set t={t}>
   <At x={135} y={107} style={{display:'flex',gap:24,alignItems:'center'}}><Logo name="claude.png" size={93}/><span style={{fontSize:56,fontWeight:800}}>Your prompt → your video</span></At>
   <div style={{opacity:enter}}>

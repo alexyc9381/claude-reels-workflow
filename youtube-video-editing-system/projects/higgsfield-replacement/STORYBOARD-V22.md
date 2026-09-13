@@ -10,6 +10,8 @@ Keep dominant real videos and initial large face. Warm orange gradient in the na
 
 ## Frame 2 — Rival mascot
 
+Follow-up override: two physical bases organize the prices and actors; no loose command/model text or Reusable instructions card. Claude jumps across, defeats the octopus, returns to its base, feeds the skill into a camera, pays a small coin and produces a result. Lighter actor field + thin dark silhouette rim preserves contrast; strong orange stays peripheral.
+
 status: implemented; representative frames inspected; full export validation pending
 src: video/src/youtube/ScenesV22.tsx
 Replace scalloped blob with a compact octopus emblem: dome head, eight distinct curling limbs, clear negative space and official Higgsfield mark. Editorial mascot, not an official logo. Retain Claude's leap/defeat and skill-to-result arc. Limbs brace, fan and recover at contact; no continuous unrelated wobble.
