@@ -6,6 +6,7 @@ import {easeOut,easeInOut} from './glass-motion';
 import {Support,LaterCue,TextLens,type SupportKind} from './SupportingScenesV9';
 import {typingFocus} from './typing-focus';
 import {CameraPlate} from './CameraPlate';
+import {introCropV21} from './ScenesV21';
 import {TutorialSkipV18} from './ScenesV18';
 import {SetupChecklistV11,CredentialV11,BonusTeaserV11} from './ScenesV11';
 import {ResultCountdownV12,DetailLensV12} from './ScenesV12';
@@ -128,7 +129,7 @@ const Presenter:React.FC<{row:ReturnType<typeof roughTimeline>[number];intro:boo
  const t=useTime(),p=intro?easeInOut(row.from/30+t,.55,1.05):1; // V18: large face, then continuous move to the bottom inset; global clock survives the cut.
  const comparison=intro||['s038','s042','s043'].includes(row.id);
  const b={x:lerp(28,comparison?780:1435,p),y:lerp(16,comparison?789:748,p)-(intro?55*Math.sin(p*Math.PI):0),w:lerp(1864,comparison?360:400,p),h:lerp(1048,comparison?256:281,p)};
- const cropW=lerp(intro?1340:1480,1300,p),cropX=lerp(intro?165:110,150,p),cropY=lerp(25,0,p),s=b.w/cropW;
+ const cropW=lerp(intro?1340:1480,1300,p),cropX=introCropV21(row.from/30+t,lerp(intro?165:110,150,p)),cropY=lerp(25,0,p),s=b.w/cropW;
  return <div style={{position:'absolute',left:b.x,top:b.y,width:b.w,height:b.h,overflow:'hidden',borderRadius:lerp(24,29,p),border:'3px solid #FFF4DF',boxShadow:'0 14px 30px #50372445',transform:`perspective(1800px) rotate(${(intro?-2:-7)*Math.sin(p*Math.PI)}deg)`}}><CameraPlate source={row.cameraPlateSource??'v7/presenter-background.mp4'} start={row.cameraPlateStart??row.from} length={row.cameraPlateDuration} style={{position:'absolute',width:1920*s,height:1080*s,left:-cropX*s,top:-cropY*s,transform:`scale(${intro?openingScale(row.from/30+t):1})`,transformOrigin:'50% 42%'}}/>{intro&&<FaceTimerV13 width={b.w} height={b.h} progress={(row.from/30+t)/timerEnd}/>}</div>;
 };
 export const YouTubePolish:React.FC<{manifest:M}>=({manifest:m})=>{
@@ -166,11 +167,11 @@ export const soundEvents=(m:M)=>{
   const beat=(u:number,span:number,name:string,gain=.13,start=b)=>add(start+u*span,name,gain,.65);
   const schedules:Record<string,[number,string][]>={studio:[[.18,'paper'],[.45,'click'],[.72,'shutter'],[.875,'latch']],roadmap:[[.08,'zip'],[.45,'paper'],[.8,'latch']],guide:[[.22,'paper'],[.52,'servo'],[.81,'latch']],wrapper:[[.08,'servo'],[.25,'land'],[.55,'paper']],download:[[.23,'paper'],[.38,'land'],[.69,'zip']],skill:[[.11,'paper'],[.29,'click'],[.48,'servo'],[.75,'paper'],[.9,'latch']],outro:[[.19,'paper'],[.2375,'whip'],[.4,'land'],[.59,'zip'],[.75,'typing']],compare:[[.08,'shutter'],[.89,'paper']]};
   if(s.kind==='hook'){
-   const q=s.b!,span=d-q;beat(.01,span,'paper',.09,b+q);for(const seconds of [.4,1.55,2.7])add(b+s.c!+seconds,'paper',.09,.8);
+   const q=s.b!,span=d-q;for(const [u,n,g] of [[.38,'zip',.07],[1.58,'land',.09],[3,'paper',.065],[3.84,'latch',.065],[4.88,'shutter',.08],[6.55,'latch',.065]] as const)add(b+q+u*span/7.6667,n,g,.65);
   }else if(s.kind==='studio'){
    add(b+.12,'paper',.10);add(b+2.84,'servo',.07);add(b+4.4,'shutter',.11);add(b+6.75,'latch',.08);
   }else if(s.kind==='roadmap'){
-   for(const u of roadmapBeatsV13)add(b+u*d,'roadmap-ding',.55,1.2);
+   for(const u of roadmapBeatsV13)add(b+u*d,'roadmap-ding',.24,1.2);
   }else if(s.kind==='guide'){
    beat(.1,d,'click',.07);beat(.24,d,'paper',.07);beat(.43,d,'click',.07);beat(.59,d,'latch',.065);
   }else if(s.kind==='wrapper'){

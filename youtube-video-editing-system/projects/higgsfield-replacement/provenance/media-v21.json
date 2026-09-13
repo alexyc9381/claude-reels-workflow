@@ -1,0 +1,18 @@
+[
+  {
+    "source": "v9/higgsfield-comparison.mp4",
+    "target": "v9/intro-higgsfield-v21.mp4",
+    "correction": "eq=gamma=1.28:brightness=0.018:contrast=1.08:gamma_weight=0.65:saturation=1.04",
+    "sourceSHA256": "2f9299b6af613604c5738bfcf22525175836f85f245525af0220957d77063721",
+    "targetSHA256": "d17b5414be9a2f462db3c4f1e67e57179dd5f2b8340a4add16de5ae56079d970",
+    "scope": "Identical stronger brightness/contrast for opening only; originals and final A/B unchanged; muted normal-speed four-second loop"
+  },
+  {
+    "source": "v4/claude-result.mp4",
+    "target": "v9/intro-claude-v21.mp4",
+    "correction": "eq=gamma=1.28:brightness=0.018:contrast=1.08:gamma_weight=0.65:saturation=1.04",
+    "sourceSHA256": "07657e235ac7adc14b5fb57a59b2b4cae21a926862ded83557a96228a7f7cfee",
+    "targetSHA256": "8002b27e9b58a4f2af017951c91e1a1cb5556f2aaca0ebf8a6a6a2a2b20848c4",
+    "scope": "Identical stronger brightness/contrast for opening only; originals and final A/B unchanged; muted normal-speed four-second loop"
+  }
+]

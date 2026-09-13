@@ -1,5 +1,9 @@
 # Conversation decision ledger
 
+## September 12 — V21 is current
+
+Alex requested stronger intro brightness/contrast; a squiggly Higgsfield mascot with a thumbnail-matching defeat by Claude around8–9s; a finite action/change-of-state in the14s scene; top-positioned STEP1–3 labels aligned with tutorial chapters; quieter dings; intro-only left-edge crop with tutorial framing untouched. Implemented in V21. V20's latest clean-route/no-forest correction and downward scroll of the actual website capture remain. V20 was superseded before a full export was delivered. [V21 implementation, limits and verification](projects/higgsfield-replacement/REVISION-V21.md). This preserves the user's distinction between richer purposeful motion and unrelated scene clutter.
+
 ## September 12 — V19 takes precedence
 
 Alex rejected V18's clutter, static-looking cost/workflow scenes and roadmap. Latest action: focus0–30s, plus specifically1:04 and7:34. Preserve large presenter→bottom-center inset, add subtle alternating A/B zoom and center3–2–1. Two cost bays, real Higgsfield/Claude identities, a lime editorial billing sprite and narration-led spotlights. Remove visible “Plan example” and “Estimate · varies by model”; factual caveats persist in docs. Remove the production example-video insert. Restore up/down Connect→Load skill→Generate route with three audible dings/contact flashes. Improve direct-model and final description-file scenes. Original OBS narration, EDL, privacy and chapters unchanged; new SFX are permitted and implemented. General scene quality direction is durable, but only listed ranges are claimed rebuilt. [Full V19 record](projects/higgsfield-replacement/REVISION-V19.md).

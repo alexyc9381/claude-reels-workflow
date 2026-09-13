@@ -11,6 +11,8 @@ Consolidated September 11, 2026 from Alex's full system-building and Higgsfield 
 
 ## Narrative and retention
 
+- **V21 is current:** stronger identical opening-only brightness/contrast; intro-only face centering before31s, never tutorial; squiggly editorial Higgsfield mascot defeated by Claude around8.9s, followed by a causal skill/load/generate/save sequence. Top STEP1–3 labels match tutorial chapter cards, dings ~7.2dB quieter. Preserve the clean route (no forest) and actual webpage scroll, plus other V20 full-scene revisions. [V21 scope, caveats and verification](projects/higgsfield-replacement/REVISION-V21.md). V20 intro preview is superseded; no complete V20 delivery was made.
+
 - **Latest V20 correction:** remove forest clutter (trees/hills/cabins/bridge); keep a clean curved route and three detailed working props with synchronized arrival reactions. Animate a downward scroll through the actual Higgsfield page capture. Rich detail belongs to the explanation, not unrelated scenery.
 
 - **V20 supersedes conflicting V19 design:** top opening 1/2 badges, shutter-tile countdown, equal conservative intro-only shadow lift; unified skill workbench and actual homepage capture; three-stop landscape journey; one copy/paste FREE setup concept. Distinct platform facade/conveyor, direct cable, large key/vault, glowing file handoff/import and Claude shot planning. Simple concepts with detailed causal actions, not random prop inventory. Narration/EDL unchanged; specific quiet SFX updated. [V20 scope and limits](projects/higgsfield-replacement/REVISION-V20.md).

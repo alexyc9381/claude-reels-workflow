@@ -6,6 +6,7 @@ import {easeInOut} from './glass-motion';
 import {bodyFont} from './brand';
 import {typingFocus,screenTransform,screenViewport,sourceCrop} from './typing-focus';
 import {CameraPlate} from './CameraPlate';
+import {introCropV21} from './ScenesV21';
 
 type Row=ReturnType<typeof roughTimeline>[number];
 const mix=(a:number,b:number,p:number)=>a+(b-a)*p;
@@ -50,7 +51,7 @@ const FootageSegment:React.FC<{m:RoughCutManifest;s:Row;previous?:Row;next?:Row}
  const showNext=leave&&t>=d-.4;
  const screen=s.layout!=='presenter'?s:showNext?next:undefined;
  // Full presenter hides bed; inset is separately centered with more torso retained.
- const cropW=mix(1480,1300,p),cropX=mix(110,150,p),cropY=mix(25,0,p),scale=b.w/cropW;
+ const cropW=mix(1480,1300,p),cropX=introCropV21((s.from+f)/m.fps,mix(110,150,p)),cropY=mix(25,0,p),scale=b.w/cropW;
  const open=s.id==='s001'?openingScale(t):1;
  // Let the result own the screen during silent playback, rather than a waiting face.
  const cameraOpacity=s.id==='s035'?1-easeInOut(t,4.65,.22):s.id==='s033'?1-easeInOut(t,9.6,.35):s.id==='s029'?1-easeInOut(t,3.5,.35)*(1-easeInOut(t,9.6,.35)):1;

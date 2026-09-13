@@ -51,6 +51,8 @@ This is the handoff index for the complete September 10–11 system-building and
 
 ## Revision archive
 
+Latest: [V21 — brighter opening, causal rivalry scene, top chapter-matched steps, quiet dings and intro-only crop](projects/higgsfield-replacement/REVISION-V21.md). [Complete editable Mac handoff instructions and next-chat prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V21.md). V20 preview was superseded before full export.
+
 | Stage | Record |
 |---|---|
 | Initial source selection and paper edit | [PAPER-EDIT](projects/higgsfield-replacement/PAPER-EDIT.md), [selects](projects/higgsfield-replacement/selects.json) |
