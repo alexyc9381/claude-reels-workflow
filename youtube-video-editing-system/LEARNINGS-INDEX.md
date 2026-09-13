@@ -1,5 +1,7 @@
 # YouTube editing — indexed learning library
 
+Current: [V22 warm whole-film environment and character-led actions](projects/higgsfield-replacement/REVISION-V22.md), [V22 editable Mac handoff and prompt](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V22.md). Octopus emblem, mechanical stopwatch, generate/save, copy/install, coordinated later roles and closing bonus; source cuts/narration intact. Read exact scope rather than assuming every old overlay was rebuilt. Earlier latest/current labels are historical where they conflict.
+
 Latest V20 follow-up: the forest preview was rejected. Final direction is a clean route with three functional stops, no forest/buildings/bridge. Actual Higgsfield page capture scrolls downward. [Updated V20 record](projects/higgsfield-replacement/REVISION-V20.md) takes precedence over initial landscape wording below.
 
 Latest: [V20 understandable worlds and purposeful motion](projects/higgsfield-replacement/REVISION-V20.md), [V20 Mac source handoff](projects/higgsfield-replacement/OTHER-MAC-HANDOFF-V20.md). Opening identities move to the top; countdown is a distinct shutter tile; equal intro-only brightness adjustment. Unified skill workstation, actual homepage, landscape journey, simple FREE setup action, distinct facade/direct/vault mechanisms and reactive file/shot-plan scenes. Earlier latest/current labels are historical where they conflict.

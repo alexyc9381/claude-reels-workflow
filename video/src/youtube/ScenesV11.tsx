@@ -14,7 +14,7 @@ const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSPr
 export const EditRoom:React.FC<{t:number;children:React.ReactNode}>=({t,children})=><AbsoluteFill style={{fontFamily:bodyFont,color:C.ink,overflow:'hidden'}}>
  <BrandedBackground t={t}/>
  <svg width="1920" height="1080" style={{position:'absolute',inset:0}}>
-  <defs><linearGradient id="v11-room" x2="0" y2="1"><stop stopColor="#FFF8EE"/><stop offset="1" stopColor="#E8C9A9"/></linearGradient><linearGradient id="v11-floor"><stop stopColor="#C1A888"/><stop offset=".5" stopColor="#FBF0DC"/><stop offset="1" stopColor="#D5B697"/></linearGradient></defs>
+  <defs><linearGradient id="v11-room" x2="0" y2="1"><stop stopColor="#F5C090"/><stop offset="1" stopColor="#DD8F5D"/></linearGradient><linearGradient id="v11-floor"><stop stopColor="#C1A888"/><stop offset=".5" stopColor="#EFBB88"/><stop offset="1" stopColor="#D5B697"/></linearGradient></defs>
   <path d="M0 0H1920V736H0Z" fill="url(#v11-room)"/>
   <path d="M0 736H1920V1080H0Z" fill="url(#v11-floor)"/>
   <path d="M0 735H1920" stroke="#FFFFFF" strokeWidth="5"/>

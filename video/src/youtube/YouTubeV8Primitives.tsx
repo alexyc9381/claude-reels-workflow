@@ -35,7 +35,7 @@ export const World:React.FC<{t:number;children:React.ReactNode;setting?:'studio'
  const warm=setting==='checkout',archive=setting==='archive',k=setting==='gallery'?1:setting==='map'?2:0;
  return <AbsoluteFill style={{fontFamily:bodyFont,color:C.ink,overflow:'hidden'}}><BrandedBackground t={t}/>
   <svg width="1920" height="1080" style={{position:'absolute',inset:0}}>
-   <defs><linearGradient id="v8-wall" x2="0" y2="1"><stop stopColor="#FFFFFFB0"/><stop offset="1" stopColor={warm?'#D2724E55':'#8DC7B335'}/></linearGradient><linearGradient id="v8-floor" x2="0" y2="1"><stop stopColor="#FFFFFFC0"/><stop offset="1" stopColor="#ECE9E255"/></linearGradient></defs>
+   <defs><linearGradient id="v8-wall" x2="0" y2="1"><stop stopColor="#F5B97950"/><stop offset="1" stopColor={warm?'#D2724E55':'#8DC7B335'}/></linearGradient><linearGradient id="v8-floor" x2="0" y2="1"><stop stopColor="#F5C29480"/><stop offset="1" stopColor="#C9814D55"/></linearGradient></defs>
    <path d="M76 73H1844V604Q1844 749 1700 764H220Q76 749 76 604Z" fill="url(#v8-wall)" stroke="#FFFFFF" strokeWidth="3"/>
    <path d="M76 606Q76 770 240 775H1680Q1844 770 1844 606L1920 1080H0Z" fill="url(#v8-floor)"/>
    {[0,1,2,3,4,5,6,7].map(i=><g key={i} opacity=".36"><path d={`M${100+i*36} 99V615Q${100+i*36} 670 ${130+i*36} 699`} stroke="#B8501F" strokeWidth="2" fill="none"/><path d={`M${1810-i*36} 99V615Q${1810-i*36} 670 ${1780-i*36} 699`} stroke="#267D78" strokeWidth="2" fill="none"/></g>)}

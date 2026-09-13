@@ -6,6 +6,7 @@ import {Actor,Glass,Label,Logo,SkillFile,C,lerp,clamp,BrandedBackground} from '.
 import {EditRoom} from './ScenesV11';
 import {WinnerCrownV12} from './ScenesV12';
 import {AgentDestinationsV13,CursorV13} from './ScenesV13';
+import {StopwatchV22} from './ScenesV22';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 
@@ -16,13 +17,13 @@ export const ComparisonV10:React.FC<{revealAt?:number;opening?:boolean}>=({revea
  const t=clock(),phase=t%4,reveal=easeOut(t,revealAt,.3);
  // Follow the actor within A's original framing, not a fake motion or zoom.
  const aPosition=phase<1?48:phase<2.2?lerp(48,32,e(phase,1,1.2)):lerp(32,85,e(phase,2.2,1.1));
- return <AbsoluteFill data-video-first-comparison style={{background:'#F2EBE1',fontFamily:bodyFont}}>
+ return <AbsoluteFill data-video-first-comparison style={{fontFamily:bodyFont}}><BrandedBackground t={t}/>
   {[0,1].map(i=><div key={i} style={{position:'absolute',left:opening?32+i*940:12+i*958,top:opening?28:24,width:opening?916:938,height:opening?1016:742,overflow:'hidden',borderRadius:18,boxShadow:'0 10px 30px #40281B25'}}>
    <Loop durationInFrames={120}><OffthreadVideo data-comparison-side={i?'B':'A'} src={staticFile(opening?(i?'v9/intro-claude-v21.mp4':'v9/intro-higgsfield-v21.mp4'):(i?'v4/claude-result.mp4':'v9/higgsfield-comparison.mp4'))} muted style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:`${i?50:aPosition}% 50%`,...(opening?{transform:`scale(${1+.065*(e(t,i?2.8:1.6,.32)-e(t,i?3.65:2.45,.38))})`}:{})}}/></Loop>
    {opening&&<svg width="916" height="1016" style={{position:'absolute',inset:0,pointerEvents:'none',opacity:1-easeOut(t,4,.2)}}><rect x="4" y="4" width="908" height="1008" rx="16" fill="none" stroke={C.clay} strokeWidth="5" pathLength="1" strokeDasharray="1" strokeDashoffset={1-clamp(t/4)}/></svg>}
   </div>)}
   {[0,1].map(i=><div data-choice-number={i+1} key={i} style={{position:'absolute',left:opening?408+i*940:437+i*958,top:opening?62:789,width:opening?164:88,height:opening?164:88,borderRadius:'50%',display:'grid',placeItems:'center',background:'#FFF9EF',border:(opening?'5px':'3px')+' solid '+C.orange,boxShadow:'0 8px 20px #50331C20',fontSize:opening?104:49,fontWeight:850,color:C.ink}}>{i+1}</div>)}
-  {opening&&t>=1.6&&t<4.6&&<div data-opening-countdown data-countdown-language="shutter-not-circle" style={{position:'absolute',left:886,top:405,width:148,height:216,borderRadius:15,background:'#FFFAF0',border:'3px solid #E6C294',boxShadow:'0 14px 35px #15181360',overflow:'hidden',display:'grid',placeItems:'center',fontSize:132,lineHeight:1,fontWeight:850,color:C.ink}}><div style={{transform:`translateY(${20*(1-easeOut((t-1.6)%1,0,.16))}px)`,opacity:easeOut((t-1.6)%1,0,.08)}}>{3-Math.floor(t-1.6)}</div><div style={{position:'absolute',left:12,right:12,bottom:13,height:7,borderRadius:2,background:'#DCCBAE'}}><div style={{height:'100%',background:C.orange,transform:`scaleX(${1-(t-1.6)%1})`,transformOrigin:'left'}}/></div><div style={{position:'absolute',top:0,left:0,right:0,height:108,background:'#E9BD83',transform:`translateY(${-110*easeOut((t-1.6)%1,0,.16)}%)`}}/></div>}
+  {opening&&t>=1.6&&t<4.6&&<StopwatchV22 t={t}/>}
   {!opening&&[0,1].map(i=><At key={i} x={i?1280:304} y={900} style={{opacity:reveal,transform:`translateY(${18*(1-reveal)}px)`}}><Logo name={i?'claude.png':'higgsfield.jpg'} size={77}/><Label x={98} y={18} size={40}>{i?'Claude':'Higgsfield'}</Label></At>)}
   {!opening&&t>=revealAt+3.6&&<WinnerCrownV12 t={t-revealAt-3.6}/>}
  </AbsoluteFill>;

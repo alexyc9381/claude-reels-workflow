@@ -6,6 +6,8 @@ import {bodyFont} from './cinematic-brand';
 import {Set,Light,Shot,CineCamera} from './ScenesV19';
 import {ChargeV20} from './ScenesV20';
 import {roadmapBeatsV13} from './ScenesV13';
+import {OctopusV22} from './ScenesV22';
+import {AtmosphereV22} from './AtmosphereV22';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 const Text:React.FC<{x:number;y:number;children:React.ReactNode;size?:number;color?:string}>=({x,y,children,size=45,color=C.ink})=><At x={x} y={y} style={{fontSize:size,fontWeight:800,color,lineHeight:1.12}}>{children}</At>;
@@ -42,7 +44,7 @@ export const CostV21:React.FC<{duration:number;brandAt:number;bold?:boolean}>=({
   <At x={1101} y={112} style={{display:'flex',gap:23,alignItems:'center'}}><Logo name="claude.png" size={114}/><span style={{fontSize:57,fontWeight:850}}>Claude skill</span></At>
   <Text x={182} y={297} size={125}>$100</Text><Text x={200} y={436} size={39}>/ month</Text>
   <Text x={1116} y={280} size={114} color="#2D7956">~10¢</Text><Text x={1453} y={349} size={33}>/ generation</Text>
-  <At x={455} y={440}><SquiggleV21 t={u} hit={land}/></At>
+  <At x={455} y={440}><OctopusV22 t={u} hit={land}/></At>
   <At x={1093} y={429} style={{width:670,height:304,borderRadius:24,border:'4px solid white',background:'linear-gradient(135deg,#FFFEF5,#ECE9D9)',boxShadow:'0 18px 30px #57381824',transform:`translateY(${-7*recoil(u,3.84)}px)`}}>
    <At x={25} y={24}><Logo name="claude.png" size={69}/></At><Text x={117} y={29} size={35}>Reusable instructions</Text>
    <svg width="670" height="304" style={{position:'absolute',inset:0}}><path d="M54 131V242H280" fill="none" stroke="#DBD8C8" strokeWidth="12" strokeLinecap="round"/><path d="M54 131V242H280" pathLength="1" strokeDasharray="1" strokeDashoffset={1-select} fill="none" stroke="#DEA053" strokeWidth="7" strokeLinecap="round"/><path d="M39 134H141" stroke="#7B8977" strokeWidth="12" strokeLinecap="round"/></svg>
@@ -62,7 +64,7 @@ export const CostV21:React.FC<{duration:number;brandAt:number;bold?:boolean}>=({
 export const RoadmapV21:React.FC<{duration:number}>=({duration})=>{
  const t=clock(),beats=roadmapBeatsV13.map(n=>n*duration),p=e(t,beats[0],beats[2]-beats[0]);
  const route=(q:number)=>({x:320+1280*q,y:710-105*Math.sin(q*Math.PI*2)}),v=route(p),line=(end:number)=>Array.from({length:100},(_,i)=>{const q=route(end*i/99);return `${i?'L':'M'}${q.x} ${q.y}`}).join(' ');
- return <AbsoluteFill data-clean-roadmap style={{background:'radial-gradient(ellipse at 50% 45%,#FFF 0%,#FFF6E9 60%,#ECD2B3 100%)',fontFamily:bodyFont,color:C.ink}}>
+ return <AbsoluteFill data-clean-roadmap style={{fontFamily:bodyFont,color:C.ink}}><AtmosphereV22 t={t}/>
   <svg width="1920" height="1080" style={{position:'absolute',inset:0}}><path d={line(1)} fill="none" stroke="#BA936334" strokeWidth="75" strokeLinecap="round" transform="translate(0 9)"/><path d={line(1)} fill="none" stroke="white" strokeWidth="69" strokeLinecap="round"/><path d={line(p)} fill="none" stroke="#E8A157" strokeWidth="14" strokeLinecap="round"/></svg>
   {[0,1,2].map(i=>{const on=easeOut(t,beats[i],.16),x=120+i*640;return <React.Fragment key={i}>
    <At x={x} y={102} style={{width:400,textAlign:'center'}}><div style={{fontSize:45,fontWeight:850,color:C.orange}}>STEP {i+1}</div><div style={{fontSize:43,fontWeight:850,lineHeight:1.17,marginTop:13}}>{roadmapTitlesV21[i]}</div></At>

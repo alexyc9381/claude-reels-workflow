@@ -5,6 +5,7 @@ import {easeInOut as e,easeOut} from './glass-motion';
 import {bodyFont} from './cinematic-brand';
 import {Set,Light,Contact,HiggsSprite,Shot,CineCamera} from './ScenesV19';
 import {roadmapBeatsV13} from './ScenesV13';
+import {ReceiverV22} from './ScenesV22';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 const recoil=(t:number,at:number)=>t<at?0:Math.sin((t-at)*19)*Math.exp(-(t-at)*7);
@@ -123,11 +124,12 @@ export const WrapperV20:React.FC<{duration:number}>=({duration})=>{
     <At x={80} y={99}><Logo name="higgsfield.jpg" size={173}/></At><Title x={304} y={115} size={89}>Higgsfield</Title><svg width="1384" height="476" style={{position:'absolute',inset:0}}><path d="M0 420H1384" stroke="#A8BA6D" strokeWidth="20"/><path d="M957 125H1278V334H957Z" fill="#F8F5D9" stroke="#90A768" strokeWidth="5"/><path d="M1005 282L1075 207L1127 242L1219 164" stroke="#90A768" strokeWidth="12" fill="none"/></svg>
    </div>
   </At>
-  <At x={289} y={768}><svg width="1223" height="159"><path d="M0 48H1180" stroke="#526E5C" strokeWidth="54" strokeLinecap="round"/><path d="M0 25H1180" stroke="#B8C9A4" strokeWidth="8"/>{Array.from({length:22},(_,i)=><circle key={i} cx={i*54} cy="51" r="13" fill="#C5CDAE" stroke="#FFF4D7" strokeWidth="3"/>)}<path d="M58 72V151M1054 72V151" stroke="#677D65" strokeWidth="13"/></svg></At>
+  <At x={289} y={768}><svg width="1223" height="159"><path d="M0 48H1180" stroke="#526E5C" strokeWidth="54" strokeLinecap="round"/><path d="M0 25H1180" stroke="#B8C9A4" strokeWidth="8"/>{Array.from({length:22},(_,i)=><g key={i}><circle cx={i*54} cy="51" r="13" fill="#C5CDAE" stroke="#FFF4D7" strokeWidth="3"/><path d={"M"+(i*54-8)+" 51h16"} transform={"rotate("+(t*140)+" "+(i*54)+" 51)"} stroke="#6B7D5B" strokeWidth="3"/></g>)}<path d="M58 72V151M1054 72V151" stroke="#677D65" strokeWidth="13"/></svg></At>
   {[0,1,2].map(i=>{const go=e(u,.21+i*.048,.15),q=e(u,.48+i*.045,.13);return <At key={i} x={lerp(445+i*300,1007-i*133,limited)+go*95+q*10} y={659} style={{opacity:lift,transform:`translateY(${-8*recoil(t,duration*(.61+i*.045))}px)`}}><div style={{padding:7,borderRadius:11,background:'#FFFAE9',border:'2px solid #FFF',boxShadow:'0 12px 18px #34493124'}}><Shot p={clamp(deliver*1.3-i*.15)} w={182}/></div></At>;})}
   <At x={1334} y={544} style={{opacity:limited}}><svg width="332" height="270"><path d="M16 266V33H310V266" stroke="#607D66" strokeWidth="22" fill="none"/><g transform={`translate(0 ${-178*(1-close)})`}><path d="M27 37H300V230H27Z" fill="#DAB882" stroke="#FFF9E5" strokeWidth="5"/>{[0,1,2,3,4].map(i=><path key={i} d={`M37 ${65+i*34}H287`} stroke="#AF8D5B" strokeWidth="6"/>)}</g><circle cx="313" cy="36" r="13" fill="#B86536"/></svg></At>
   <div style={{opacity:lift}}><Title x={330} y={117} size={54}>{limited>.5?'“Unlimited” still has limits':'The models underneath'}</Title></div>
   <Actor t={t} x={73+lift*38} y={577} size={278} role="operator" look={1} lift={lift*(1-limited)*.85} reach={1} contact={duration*.19}/>
+  <ReceiverV22 t={t} duration={duration} kind="wrapper"/>
  </Set>;
 };
 
@@ -148,6 +150,7 @@ export const DirectV20:React.FC<{duration:number}>=({duration})=>{
   <At x={1029} y={317} style={{opacity:shoot,transform:`translateY(${60*(1-shoot)}px)`}}><div style={{padding:14,border:'3px solid white',borderRadius:23,background:'#E9EED8',boxShadow:'0 25px 33px #33452630'}}><Shot p={shoot} w={658}/></div></At>
   <Title x={1070} y={248} size={35} color={C.teal}>Pay per generation</Title>
   <ChargeV20 t={t} at={duration*.38} x={1218} y={631}/>
+  <ReceiverV22 t={t} duration={duration} kind="direct"/>
  </Set>;
 };
 
@@ -194,6 +197,7 @@ export const SkillV20:React.FC<{duration:number;importAt:number}>=({duration,imp
   <At x={lerp(905,1100,load)} y={lerp(446,569,load)-Math.sin(load*Math.PI)*110} style={{opacity:compile*(1-ready),transform:`translateY(${-20*e(t,5.6,.4)+20*e(t,6.3,.4)}px) rotate(${-9+load*9}deg) scale(${1-load*.35})`}}><SkillFile t={t} size={230}/></At>
   <ChargeV20 t={t} at={4.6} x={863} y={504} size={405}/><ChargeV20 t={t} at={importAt} x={1130} y={568} size={420}/>
   <div style={{opacity:compile}}><Title x={186} y={880} size={42} color={C.orange}>Upload into Claude</Title></div>
+  <ReceiverV22 t={t} duration={duration} kind="skill"/>
  </Set>;
 };
 

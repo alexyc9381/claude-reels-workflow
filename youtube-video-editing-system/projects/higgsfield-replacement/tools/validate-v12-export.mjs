@@ -44,7 +44,15 @@ const priorAudio=path.join(base,'outputs/higgsfield-replacement-edit-v9.mp4');
 result.audioMatchesV9Packets=existsSync(priorAudio)?result.audioPacketHash===audioHash(priorAudio):null;
 if(existsSync(priorAudio))assert.equal(result.audioMatchesV9Packets,false,'V12 must contain repaired narration and new source-anchored sound design');
 result.currentAudioContractVerified=true;
-if(revision==='v20'||revision==='v21'){
+if(revision==='v22'){
+ execFileSync(process.execPath,[path.join(project,'tools/test-v22.mjs')],{stdio:'inherit'});
+ assert.equal(equivalentChunks.length,0,'V22 changes the entire background: no inherited picture chunks');
+ const mastering=JSON.parse(readFileSync(path.join(renderDir,'mastering-settings.json')));assert.equal(mastering.sourceHash,sourceHash);assert.equal(mastering.truePeakTarget,-2.5);result.mastering=mastering;
+ result.narrationAndEDLUnchangedFromBaseline='4d40d78';
+ const prior=path.join(base,'outputs/higgsfield-replacement-edit-v21.mp4');
+ result.audioMatchesV21Packets=existsSync(prior)?result.audioPacketHash===audioHash(prior):null;
+ if(existsSync(prior))assert.equal(result.audioMatchesV21Packets,false,'New save/closing contact clocks must reach the export');
+}else if(revision==='v20'||revision==='v21'){
  const mastering=JSON.parse(readFileSync(path.join(renderDir,'mastering-settings.json')));assert.equal(mastering.sourceHash,sourceHash);assert.equal(mastering.truePeakTarget,-2.5);result.mastering=mastering;
  assert.ok([0,revision==='v21'?4:3].includes(equivalentChunks.length));
  const proof=JSON.parse(execFileSync(process.execPath,[path.join(project,`tools/prepare-${revision}-cache.mjs`),'--check-only'],{encoding:'utf8'}));assert.equal(proof.narrationAndEDLIdentical,true);result.narrationAndEDLUnchangedFromBaseline=proof.baselineCommit;

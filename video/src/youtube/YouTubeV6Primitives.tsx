@@ -11,12 +11,8 @@ export const lerp=(a:number,b:number,p:number)=>a+(b-a)*p;
 export const visible=(t:number,d:number)=>easeOut(t,0,.16)*(1-easeInOut(t,d-.24,.24));
 // Analytic damped spring: no hard landing, state and velocity remain seek-safe.
 export const pop=(t:number,at=0,speed=13)=>{const u=Math.max(0,t-at);return t<at?0:1-Math.exp(-speed*u)*(Math.cos(speed*.67*u)+1.493*Math.sin(speed*.67*u));};
-export const BrandedBackground:React.FC<{t:number}>=({t})=><AbsoluteFill style={{background:'linear-gradient(120deg,#F3EFE9 0%,#F4E2D1 57%,#D99675 100%)',overflow:'hidden'}}>
- <AbsoluteFill data-background-depth="soft" style={{filter:'blur(22px)',transform:'scale(1.06)'}}>
-  <AbsoluteFill style={{background:`radial-gradient(ellipse at ${24+Math.sin(t*.13)*5}% 20%,#FFFFFFEF,transparent 64%),radial-gradient(ellipse at 88% ${78+Math.sin(t*.17)*4}%,#C9603B65,transparent 60%)`}}/>
-  {[0,1,2].map(i=><div key={i} style={{position:'absolute',left:260+i*570+Math.sin(t*.16)*16,top:-150,width:180,height:1450,transform:'rotate(24deg)',background:'linear-gradient(90deg,transparent,#FFFFFF55,transparent)',borderRight:'3px solid #FFFFFF65'}}/>)}
- </AbsoluteFill>
-</AbsoluteFill>;
+export {AtmosphereV22 as BrandedBackground} from './AtmosphereV22';
+import {AtmosphereV22 as BrandedBackground} from './AtmosphereV22';
 export const Glass:React.FC<{x:number;y:number;w:number;h:number;t:number;children?:React.ReactNode;style?:React.CSSProperties;frost?:number}>=({x,y,w,h,t,children,style,frost=.55})=><WhiteGlassSurface x={x} y={y} width={w} height={h} t={t} radius={32} frost={frost} studioRefraction={false} style={{fontFamily:bodyFont,fontWeight:500,...style}}>{children}</WhiteGlassSurface>;
 export const Logo:React.FC<{name:string;size?:number}>=({name,size=76})=><Img src={staticFile('v3/'+name)} style={{width:size,height:size,objectFit:'contain',borderRadius:size*.18,background:name==='seedance.png'?C.orange:undefined,padding:name==='seedance.png'?size*.14:0,boxSizing:'border-box'}}/>;
 // Scene actions carry the explanation. Alex explicitly removed standalone headers.

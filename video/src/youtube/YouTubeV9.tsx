@@ -169,7 +169,7 @@ export const soundEvents=(m:M)=>{
   if(s.kind==='hook'){
    const q=s.b!,span=d-q;for(const [u,n,g] of [[.38,'zip',.07],[1.58,'land',.09],[3,'paper',.065],[3.84,'latch',.065],[4.88,'shutter',.08],[6.55,'latch',.065]] as const)add(b+q+u*span/7.6667,n,g,.65);
   }else if(s.kind==='studio'){
-   add(b+.12,'paper',.10);add(b+2.84,'servo',.07);add(b+4.4,'shutter',.11);add(b+6.75,'latch',.08);
+   add(b+.12,'paper',.10);add(b+2.84,'servo',.07);add(b+4.4,'shutter',.11);add(b+6.75,'paper',.055);add(b+7.17,'latch',.065);
   }else if(s.kind==='roadmap'){
    for(const u of roadmapBeatsV13)add(b+u*d,'roadmap-ding',.24,1.2);
   }else if(s.kind==='guide'){
@@ -182,13 +182,14 @@ export const soundEvents=(m:M)=>{
    add(b+.35,'paper',.075);add(b+1.1,'servo',.07);add(b+4.6,'latch',.075);
    add(b+5.5,'zip',.065);add(b+s.a!-.7,'paper',.075);add(b+s.a!,'latch',.085);
   }else if(s.kind==='outro'){
-   beat(.05,d,'paper',.09);add(450+.17*7.1,'paper',.10);add(450+.31*7.1,'land',.09);add(450+.65*7.1,'latch',.1);
+   beat(.06,d,'paper',.065);beat(.22,d,'paper',.065);beat(.48,d,'land',.065);beat(.63,d,'latch',.065);beat(.85,d,'paper',.055);
   }else if(s.kind==='direct'){
    for(const [u,n] of [[.04,'paper'],[.19,'latch'],[.25,'zip'],[.51,'click'],[.61,'shutter']] as const)beat(u,s.a!,n,.075);
    beat(.29,d-s.a!,'land',.08,b+s.a!);beat(.52,d-s.a!,'servo',.075,b+s.a!);beat(.65,d-s.a!,'latch',.075,b+s.a!);beat(.74,d-s.a!,'servo',.065,b+s.a!);
   }else for(const [fraction,name] of schedules[s.kind]??[])beat(fraction,d,name,name==='typing'?.075:.12);
  }
  for(const c of v9Cues)add(at(c.id)+c.offset+.12,c.kind==='typing'?'typing':c.kind==='lens'?'servo':c.kind==='keys'?'click':'paper',c.kind==='typing'?.09:.13,c.kind==='typing'?1.9:.8);
+ for(const c of v9Cues.filter(c=>c.kind==='saved'))add(at(c.id)+c.offset+c.seconds*.62,'latch',.055,.4);
  add(at('s013')+8.12,'paper',.13);
  for(const [x,name] of [[4.7,'click'],[9.2,'paper'],[11.4,'servo'],[14.1,'latch']] as const)add(at('s016')+x,name,.08);
  add(at('s026')+10.2+4.6*.28,'whip',.06);add(at('s026')+10.2+4.6*.72,'land',.08);

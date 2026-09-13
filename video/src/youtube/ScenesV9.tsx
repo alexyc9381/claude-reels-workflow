@@ -14,6 +14,7 @@ import {CostV18,ProductionV18,RoadmapV18} from './ScenesV18';
 import {CostV19,ProductionV19,RoadmapV19,DirectRouteV19,OutroV19} from './ScenesV19';
 import {ProductionV20,GuideV20,DirectV20,WrapperV20,VaultV20,SkillV20,ChargeV20} from './ScenesV20';
 import {CostV21 as CostV20,RoadmapV21 as RoadmapV20} from './ScenesV21';
+import {ProductionV22,GuideV22,OutroV22} from './ScenesV22';
 const clock=()=>useCurrentFrame()/useVideoConfig().fps;
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
 const Desk:React.FC<{x:number;y:number;w:number}>=({x,y,w})=><At x={x} y={y}><svg width={w} height="235"><path d={`M45 40V215M${w-45} 40V215`} stroke="#315F7966" strokeWidth="13"/><path d={`M0 15L45 0H${w-45}L${w} 15V40H0Z`} fill="#FFF8EC" stroke="#FFFFFF" strokeWidth="3"/><path d={`M0 40H${w}`} stroke={C.orange+'77'} strokeWidth="4"/></svg></At>;
@@ -22,7 +23,7 @@ export const HookV9:React.FC<{duration:number;guessAt:number;whyAt:number;higgsA
  const t=clock();return t>=whyAt?<Sequence from={Math.round(whyAt*30)}><CostV20 duration={duration-whyAt} brandAt={higgsAt-whyAt} bold/></Sequence>:<ComparisonV10 opening/>;
 };
 
-export const ProductionV9=ProductionV20;
+export const ProductionV9=ProductionV22;
 export const WrapperV9=WrapperV20;
 
 export const DirectV9:React.FC<{duration:number;featuresAt:number}>=({duration,featuresAt})=>{
@@ -32,12 +33,12 @@ const ModelRoom=DirectV20;
 const FeatureVault=VaultV20;
 
 export const DownloadV9:React.FC<{duration:number}>=({duration})=>{
- const t=clock(),u=t*5/duration,release=e(u,.35,.55),fall=e(u,.9,1),take=e(u,2.0,.7);
+ const t=clock(),u=t*5/duration,release=e(u,.35,.55),fall=e(u,.9,1),take=e(u,2.0,.7),carry=e(u,2.8,1.65);
  return <World t={t} setting="archive"><Desk x={204} y={697} w={1454}/>
   <Glass x={256} y={180} w={685} h={417} t={t} frost={.48}><Label x={40} y={32} size={38}>Video description</Label><At x={43} y={124}><SkillFile t={t} size={137}/><Label x={189} y={20} size={36}>fal-video.skill</Label><Label x={190} y={89} size={29} color={C.orange}>Download ↓</Label></At><div style={{position:'absolute',left:30,right:30,bottom:28,height:5,background:'#267D7833'}}/></Glass>
   <At x={1020} y={454}><svg width="465" height="253"><path d="M18 68L66 18H369L438 68V218H18Z" fill="#ECE9E2" stroke="#FFF" strokeWidth="4"/><path d="M19 79H438V207H19Z" fill="#FFFFFF9C"/><path d="M90 94L147 155H300L357 94" fill="none" stroke={C.teal} strokeWidth="9"/><path d="M44 227H412" stroke="#B8501F50" strokeWidth="5"/></svg></At>
-  <Actor t={t} x={1476-170*take} y={459} size={266} role="courier" walk={Math.sin(take*Math.PI)} look={-1} lift={fall*.75} reach={1} contact={1.9*duration/5} happy={take>.8}/>
-  <At x={682+release*386+take*193} y={288+fall*243-Math.sin(take*Math.PI)*60} style={{transform:`rotate(${-6+take*13}deg) scale(${1-take*.2})`}}><SkillFile t={t} size={174}/></At>
+  <Actor t={t} x={1476-170*take-300*carry} y={459} size={266} role="courier" walk={Math.sin(take*Math.PI)+Math.sin(carry*Math.PI)} look={-1} lift={fall*.75} reach={1} contact={1.9*duration/5} happy={take>.8}/>
+  <At x={682+release*386+take*193-300*carry} y={288+fall*243-Math.sin(take*Math.PI)*60-12*Math.sin(carry*Math.PI)} style={{transform:`rotate(${-6+take*13}deg) scale(${1-take*.2})`}}><SkillFile t={t} size={174}/></At>
   <ChargeV20 t={t} at={1.9*duration/5} x={1220} y={576} size={440}/>
   <ChargeV20 t={t} at={2.7*duration/5} x={1340} y={602} size={360}/>
   <At x={268} y={795}><Logo name="claude.png" size={70}/><Label x={105} y={12} size={40}>Ready for your Claude project</Label></At>
@@ -67,6 +68,6 @@ const ArchivedRoadmapV9:React.FC<{duration:number}>=({duration})=>{
 export const CompareV9:React.FC<{duration:number;revealAt:number}>=({revealAt})=><ComparisonV10 revealAt={revealAt}/>;
 
 export const RoadmapV9=RoadmapV20;
-export const GuideV9=GuideV20;
+export const GuideV9=GuideV22;
 export const SkillV9=SkillV20;
-export const OutroV9=OutroV19;
+export const OutroV9=OutroV22;

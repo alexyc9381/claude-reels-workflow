@@ -6,6 +6,7 @@ import {ShotStage} from './NarrativeV9';
 import {RooftopBeatV11} from './ScenesV11';
 import {FormatV13} from './ScenesV13';
 import {ShotPlanV20} from './ScenesV20';
+import {SavedOverlayV22,MixOverlayV22} from './ScenesV22';
 export {TextLens,LaterCue} from './SupportingScenesV7';
 export type SupportKind='typing'|'budget'|'storyboard'|'format'|'saved'|'wrapper'|'sound'|'detail'|'protip'|'chase'|'direction';
 const At:React.FC<{x:number;y:number;children:React.ReactNode;style?:React.CSSProperties}>=({x,y,children,style})=><div style={{position:'absolute',left:x,top:y,...style}}>{children}</div>;
@@ -24,6 +25,8 @@ export const Support:React.FC<{duration:number;kind:SupportKind;cueId:string}>=(
  if(cueId==='s026:10.2')return <RooftopBeatV11 duration={duration}/>;
  if(cueId==='s021:25')return shell(<ShotPlanV20 t={t} duration={duration}/>,132,218,1065,403);
  if(kind==='format')return <FormatV13 duration={duration}/>;
+ if(kind==='saved')return shell(<div style={{position:'relative',width:1065,height:380,transform:'scale(.9)',transformOrigin:'0 0'}}><SavedOverlayV22 t={t} duration={duration}/></div>,132,635,959,342);
+ if(kind==='sound'&&cueId==='s037:1.4')return shell(<MixOverlayV22 t={t} duration={duration}/>,132,687,1080,296);
  if(kind==='chase'){
   const run=e(t,.25,duration-1.1);
   return shell(<><At x={18} y={18}><ShotStage t={t} w={568} mode="chase" progress={run}/></At><Label x={622} y={31} size={35} color={C.orange}>B · The chase</Label><Label x={623} y={95} size={29}>Rooftops</Label><Label x={623} y={142} size={29}>Pursuit</Label><Label x={623} y={189} size={29}>Following camera</Label><Actor t={t} x={933} y={63} size={165} role="operator" look={-1} reach={run} contact={duration-.7}/></>,130,641,1117,319);

@@ -1,6 +1,10 @@
 # Conversation decision ledger
 
-## September 12 — V21 is current
+## September 12 — V22 is current
+
+Alex rejects the plain white environment and lime blob, asks for an octopus-like icon, an actual countdown object and more action throughout—not only the intro. Implement orange/peach backgrounds globally, eight curling tentacles around a clear emblem, a mechanical stopwatch, actual generation-to-Downloads action, FREE copy/install handoff and distinct closing download/install/bonus actions. Give multiple Claudes concrete receiving/operating jobs in later scenes and compact save/mix overlays. Retain the specifically liked1:13 vault. Motion should represent spoken verbs with a changed outcome, not turn labels into jitter or cover the tutorial. [V22 implementation and bounded scope](projects/higgsfield-replacement/REVISION-V22.md). Quiet new contact clocks; OBS narration, EDL, privacy, chapter and tutorial camera contracts unchanged.
+
+## September 12 — V21 preserved history
 
 Alex requested stronger intro brightness/contrast; a squiggly Higgsfield mascot with a thumbnail-matching defeat by Claude around8–9s; a finite action/change-of-state in the14s scene; top-positioned STEP1–3 labels aligned with tutorial chapters; quieter dings; intro-only left-edge crop with tutorial framing untouched. Implemented in V21. V20's latest clean-route/no-forest correction and downward scroll of the actual website capture remain. V20 was superseded before a full export was delivered. [V21 implementation, limits and verification](projects/higgsfield-replacement/REVISION-V21.md). This preserves the user's distinction between richer purposeful motion and unrelated scene clutter.
 
