@@ -79,6 +79,8 @@ optional even though nobody asks for them:
 
 ## ⛔ Before the first scene is authored
 
+For the ChatGPT account, apply [face placement, slight background blur, separate-VO sync and original-speed recording rules](../memory/chatgpt-face-camera-and-separate-vo.md).
+
 Apply [ALL CAPS headers](../memory/reel-header-all-caps.md) and [no creator watermarks](../memory/reel-no-watermarks.md), including inherited chrome. Preserve any exact headline Alex supplies.
 
 Read [`ANIMATION-QUALITY.md`](ANIMATION-QUALITY.md). Its §3 test (write the VO line beside each
