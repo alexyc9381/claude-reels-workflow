@@ -13,6 +13,8 @@ Alex's explicit September 13 instructions apply to the ChatGPT account:
 
 - Integrate his camera footage at the bottom of the frame. His supplied reference establishes the general arrangement, but he explicitly wants the face lower to leave room for the animation. Keep the animation, headline, captions and face readable together.
 - Add **slight background blur**, keeping his face sharp. This is background treatment, not blur over the whole camera image.
+- September 13 refinement: crop more of the camera sides and lower torso; use a narrower rounded background with just a little hair peeking above its top edge, following the supplied reference. Keep the face low below animation and captions.
+- Tighten distracting between-sentence pauses, especially after the hook sentence, by removing silence from camera and VO together. Preserve consonants, natural word endings and original playback speed; do not create a rushed or clipped delivery.
 - Use the separately recorded voiceover as the delivered speech track. Camera audio is only a synchronization reference, never the delivered voice.
 - Use spoken script numbers and “three, two, one, mark” cues, then verify synchronization against the performance. Remove markers, false starts and rejected takes by making identical time cuts in camera and external VO.
 - Prepare six reusable **audio-and-video** clips from the recording session. Alex initially said seven, then confirmed this session contains **six** scripts. Audio-only splits do not satisfy this request. Preserve uncropped framing in the reusable synchronized masters and save a source cut/sync map for later edits.
