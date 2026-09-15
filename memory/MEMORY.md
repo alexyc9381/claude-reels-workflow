@@ -4,6 +4,11 @@
 - [🧊 Claude Code freeze = transcript bloat](claude-code-freeze-transcript-bloat.md) — reel sessions embed images → 150MB+ transcripts; archive them, stop using ~/Downloads as project root
 - [💀 "Random crash" = macOS jetsam OOM](claude-crash-jetsam-oom.md) — not a crash: 8.9GB claude + 54 MCP procs on a 16GB mini. Trigger = xhigh + workflow fan-outs. Never conflate crash / freeze / wifi
 
+## ChatGPT account
+
+- [ChatGPT format and post index](../chatgpt/README.md).
+- [CODES phone-demo learnings](../chatgpt/variants/codes-phone-demo.md): final camera, headers, captions, sound, sprite crowning, timing, and article delivery rules.
+
 ## ⛔ Standing script/topic rules (load before any script work)
 - [⛔⛔ NEVER browser agents on Instagram + RATE DISCIPLINE](no-browser-agents-instagram.md) — ABSOLUTE: no chrome/Playwright/computer-use on IG ever; use ig_scan.py or yt-dlp. + budget the handle list, STOP on first `feed failed`, exhaust on-disk data before any API call
 - [⛔⛔ FACTORY LOG FIRST](factory-log-first.md) — open the reel log at STAGE 0, before the first idea. Never retroactive. No comp = no entry · CAPTURE BEFORE CLAIM
@@ -23,7 +28,7 @@
 - [Claude reel topic engine](claude-reel-topic-engine.md) · [Fable idea backlog](fable-idea-backlog.md) — ranked next ideas + kill-list
 
 ## ⛔ Standing build/visual rules
-- [⛔ ChatGPT face + separate VO at original speed](chatgpt-face-camera-and-separate-vo.md) — face low beneath animation, slight blur with sharp subject, remove the blue shoulder-background object, camera/external-VO sync, six reusable paired masters; distinct ChatGPT role outfits and tools; CODES handheld phone/UI variant; no speech/video speed changes; Drive connector only.
+- [⛔ ChatGPT face + separate VO at original speed](chatgpt-face-camera-and-separate-vo.md) — face low beneath animation, slight blur with sharp subject, remove the blue shoulder-background object, camera/external-VO sync, six reusable paired masters; distinct ChatGPT role outfits and tools; [CODES final variant](../chatgpt/variants/codes-phone-demo.md) overrides blur/music/header defaults; no speech/video speed changes; Drive connector only.
 - [⛔ ECC: continuous action, working crowds and gated early reveal](alex-ecc-continuous-action-and-reveal-gating.md) — September 12: prominent Claude identity from frame zero, hook consequences through 3s, background sprites with jobs, operated graphics, complete nonrepeated actions, scene-specific headers, early visual name masking, matched sound and whole-reel review. Qualifies the older literal single-mover rule; hierarchy still governs. [Revision record](reels/ecc-revision-record.md) · [source](../video/src/ecc151/README.md).
 - [⛔ OC: replace random shapes with actions and consequences](alex-oc-action-and-ending-revisions.md) — expressive fighting hook, concrete build, progressive shield/lock destruction, OC-specific late keyword reveal and exact final consonant cut; SVG preloads, comment-first caption and live article delivery.
 - [⛔ X144: revised ending still rejected as slow and repetitive](alex-x144-ending-motion-rejection.md) — change the whole post-22-second sequence; a conveyor spanning multiple lines is still one composition. Distinct short operations, word-aligned format geometry, expressive Claude and consequential handoffs; R3 technical passes were not approval.
@@ -117,7 +122,7 @@
 - [⭐ SIMULATE](reels/simulate-factory-log.md) — reel 65 SHIPPED 2026-07-18 (delivered to Drive as `65 - SIMULATE`; the log's old "reel 62" was stale, 62 is TAKES). Claude simulates your idea (corner-cafe story). ⭐ The heavily-iterated one: grounding/spacing laws, dead-air measurement, 6 takes → 19 SHOTS, de-glow + palette, wardrobe upgrade, VO 1.04x retime. Read before any visual-overhaul round
 - [TOOL](reels/tool-factory-log.md) — reel 65 first pass 2026-07-18 (wireframe). ⚠️ arrived PRE-LOCKED as an Alex VO so Stages 0-4 never ran — NOT a gated ship. ⭐ per-cue SFX volumes do NOT transfer between reels
 - [⭐ JARVIS](reels/jarvis-factory-log.md) — reel 62 candidate, Stage 0 only. Biggest keyword-gated comp ever sourced (32.43x); lives or dies on R10
-- [⛔ CODES](reels/codes-factory-log.md) — KILLED at Stage 1 (rules 10+8). ⭐ salvaged 7 verified non-obvious Claude features for a future artifact-first reveal
+- [⛔ Claude CODES concept (separate from ChatGPT CODE)](reels/codes-factory-log.md) — KILLED at Stage 1 (rules 10+8). ⭐ salvaged 7 verified non-obvious Claude features for a future artifact-first reveal
 - [CALLBACK](reels/callback-factory-log.md) — resume beats the ATS bot; CLEAN gated SHIP, the workflow's objective top script
 - [⛔ FOREMAN](reels/foreman-factory-log.md) — KILLED: the worked example of a gate pass EXPIRING when a rule is added
 - [BRAND](reels/brand-factory-log.md) — nicksaraev replica; caps at believability 7 · [BALL](reels/pokeball-factory-log.md) 52 · [SKILLS](reels/skills-mario-remake.md) 51 (+theme-remake method)
