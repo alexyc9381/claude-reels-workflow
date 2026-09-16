@@ -1,0 +1,30 @@
+{
+  "157_Claude-J.mp4": {
+    "bytes": 9979469,
+    "sha256": "81786d444f588df9caddabf67f9ce3681d6365fd2609c865b3bdbd043a54ca2d"
+  },
+  "157_J_caption.txt": {
+    "bytes": 845,
+    "sha256": "0d62dc93cfffe08d36d3af87ea759857884a88cfb8d9ce08e0feb6bd39c83bd9"
+  },
+  "157_J_Editable.zip": {
+    "bytes": 33421416,
+    "sha256": "cb6e02508e7ee1fd6bcd583983ad37a1656e6bed05c22492fa3c0af50cb33b51"
+  },
+  "157_J_TRIAL_Dodge.mp4": {
+    "bytes": 9742266,
+    "sha256": "5d035e27e27444ee8017c1da1d5960fd044ab81771492c2cefa05f79c43c810b"
+  },
+  "157_J_subtitles.srt": {
+    "bytes": 2711,
+    "sha256": "4c9c7959470f0db6fa7efb32a3cc9c9c0ba4322111de6001e16716a1680217ff"
+  },
+  "157_J_Review.md": {
+    "bytes": 2651,
+    "sha256": "65eee0fbc320dbeac6264b17db08cbe7294a4816d3f43e3a3aa88a759e4c90cf"
+  },
+  "157_J_TRIAL_Cartridge.mp4": {
+    "bytes": 9311123,
+    "sha256": "2cc6020b4329fd63c0e160c4c4efe5c2d0da6445c1cd0b57a7c3d60b1aeffbfc"
+  }
+}

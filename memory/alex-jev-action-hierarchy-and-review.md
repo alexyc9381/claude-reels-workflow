@@ -8,6 +8,8 @@ metadata:
 
 # JEV: change the subject, not just the pixels
 
+**Scope:** this note is JEV-155 (42.2s, keyword JEV). The separate [J-157 / J VO sep 16 lessons](alex-j157-causal-animation-and-trials.md) cover a 32.1s narration that explicitly opens on DOOM, keyword J. Do not transfer this reel's footage exclusion or exact timing to that different voiceover.
+
 Alex repeatedly rejected the opening, the founder beat near 9s and the time/cost beat near 33s even after motion checks passed. A photograph tilting, small paper moving on a board, a pulsing brain, or background drift did not make the main action interesting. The fix was to change the depicted operation and its visible consequence. This is user feedback, not measured retention data. Revision 9 was delivered; Alex has not explicitly approved its creative quality.
 
 [Full revision record](reels/jev-revision-record.md) · [final storyboard](../storyboards/155-jev.md) · [technical evidence](reels/evidence/jev155/README.md).

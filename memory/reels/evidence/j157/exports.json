@@ -1,0 +1,50 @@
+{
+  "main": {
+    "bytes": 9979469,
+    "duration": "32.100000",
+    "opening_audio_lag_seconds": 0.0,
+    "video": {
+      "codec_name": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1",
+      "color_range": "tv",
+      "color_space": "bt709",
+      "nb_frames": "963"
+    }
+  },
+  "cartridge": {
+    "bytes": 9311123,
+    "duration": "32.100000",
+    "opening_audio_lag_seconds": 0.0,
+    "video": {
+      "codec_name": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1",
+      "color_range": "tv",
+      "color_space": "bt709",
+      "nb_frames": "963"
+    }
+  },
+  "dodge": {
+    "bytes": 9742266,
+    "duration": "32.100000",
+    "opening_audio_lag_seconds": 0.0,
+    "video": {
+      "codec_name": "h264",
+      "profile": "High",
+      "width": 1080,
+      "height": 1920,
+      "pix_fmt": "yuv420p",
+      "r_frame_rate": "30/1",
+      "color_range": "tv",
+      "color_space": "bt709",
+      "nb_frames": "963"
+    }
+  }
+}

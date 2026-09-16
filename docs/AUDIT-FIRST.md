@@ -1,5 +1,7 @@
 # AUDIT FIRST — how to stop spending rounds on one instance of a class
 
+**J-157 follow-up:** [review actual contact and state changes](../memory/alex-j157-causal-animation-and-trials.md#iteration-must-catch-actual-defects) across the entire requested sequence, then carry the last corrected body and matching audio into every full trial. Rendered contact sheets expose clipping/masking/continuity defects but cannot replace normal-speed playback.
+
 **JEV follow-up (September 16):** [Run the JEV review contract](../memory/alex-jev-action-hierarchy-and-review.md#review-contract) before sending a revision: inspect first-second subject action, the completed-action handoff, narration/graphic agreement, prop contact and face clearance, fixed caption width and all CTA surfaces. Repeated feedback at the same timestamp requires a new diagnosis, not more jitter. [Rejection and delivery record](../memory/reels/jev-revision-record.md).
 
 **ECC revision follow-up (September 12):** when the note is “more motion,” [audit background jobs, completed actions, name-reveal surfaces and the entire requested span](../memory/alex-ecc-continuous-action-and-reveal-gating.md). Working secondary actors can coexist with one primary event. The [revision record](../memory/reels/ecc-revision-record.md) documents where a numerically passing cut was still rejected.

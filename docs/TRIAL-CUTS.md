@@ -1,6 +1,7 @@
 # TRIAL CUTS — making 3 cuts of one reel that IG will not flag
 
 **Status:** the method doc. Read before delivering more than one cut of a reel.
+**J-157 delivery example:** [three complete reels, different hooks and matching sound](../memory/alex-j157-causal-animation-and-trials.md#two-additional-trials-means-usable-full-reels). Keep final body corrections consistent across cuts, report shared-body hash results honestly, and distinguish a visual-only experiment from variants that also change music. Cartridge retained a failed hook-motion score; this is quality debt, not an approved trial template.
 **LM follow-up:** [different mechanisms, soundtrack windows and honest checks](../memory/alex-lm-hooks-demo-and-delivery.md).
 User-requested hook-only trials may share a body. Report opening and whole-video comparisons separately;
 no dHash score establishes Instagram uniqueness or distribution performance.

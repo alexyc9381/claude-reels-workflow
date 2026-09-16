@@ -112,3 +112,7 @@ inp.dispatchEvent(new Event('input',{bubbles:true}));
 
 Related: [[web124-reel]] · [[feedback_reels_deliver_drive_only]] ·
 [[feedback_cover_png_goes_to_drive]] · [[reels_125plus_on_matchtern_drive]].
+
+## September 16, J-157: direct-upload fallback verified
+
+The mounted replacement timed out; launching Drive showed “Google Drive cannot start” and a macOS File Provider error. The signed-in browser upload succeeded using **Replace existing items**, creating Version 2 for the main MP4 and editable ZIP while preserving the canonical main ID and sharing. Two full trial MP4s went into Trial Reels. Browser showed six uploads complete and main metadata 1080×1920, 00:32, 9.5 MB. This is a verified fallback for that session, not proof the local sync domain was repaired. Do not equate upload completion with processed preview playback. See [J-157 delivery record](reels/j157-revision-record.md#claims-and-delivery).

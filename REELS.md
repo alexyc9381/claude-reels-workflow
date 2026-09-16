@@ -3,10 +3,11 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 121 reels with code · 81 factory logs · 84 storyboards · 133 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 121 reels with code · 81 factory logs · 85 storyboards · 133 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
+| 157 | **J** | · | [4](video/src/data/duck_jarvis1.json) | · | [✓](storyboards/157-j.md) | storyboard-only |
 | 155 | **JEV** | · | · | · | [✓](storyboards/155-jev.md) | storyboard-only |
 | 151 | **ECC** | [✓](video/src/ClaudeECCReel.tsx) | [1](video/src/data/ecc151-timing.json) | · | [✓](storyboards/151-ecc.md) | code, no log |
 | 150 | **OC** | [✓](video/src/ClaudeOCReel.tsx) | [1](video/src/data/words_oc.json) | [✓](memory/reels/oc-factory-log.md) | [✓](storyboards/150-oc.md) | built |
