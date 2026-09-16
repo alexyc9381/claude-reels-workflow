@@ -344,6 +344,7 @@ hand-patched mishears + raw whisper starts): `python3 tools/build_captions.py FI
 3. **If tempo was uniform**, divide times by the factor. **If tempo was piecewise, transcribe the FINAL wav and align to it** (self-consistent, no division assumption).
 4. Write `$V/src/data/words_<reel>.json` = `[{start,end,word}]` (leading space on `word`).
 5. Never end a caption line on a dangling word (i/a/the/to/of/and/you). **Never ship raw whisper text.**
+6. **JEV correction, September 16:** keep a fixed readable caption font; measure the actual font including active-word scale. Split long groups instead of shrinking. In the JEV format cap at three words; regroup dangling/orphan words without adding a fourth. Assert full word coverage, width, spoken tails and CTA reveal timing before rendering. [Caption rule](memory/jev-caption-size-and-visual-feedback.md).
 
 ## C5. Timeline
 `L[]` = the onset of each beat's **first word**, read from the caption JSON by **pattern-matching the beat opener**
@@ -351,7 +352,9 @@ hand-patched mishears + raw whisper starts): `python3 tools/build_captions.py FI
 ⛔ Re-derive `L`, `CUT`, **and `durationInFrames` together** every time the VO changes, or you ship dead air.
 
 ## C6. Clone the chassis + author scenes → `memory/reel-clone-chassis-verbatim.md`
-⛔ **Clone the closest existing reel; chrome (captions/progress-bar/mascot/fonts) stays byte-identical. Swap only scene bodies.**
+**Before scene authoring:** load [JEV action and review rules](memory/alex-jev-action-hierarchy-and-review.md). Pair each spoken beat with a recognizable hero, verb, anticipation, outcome and handoff. A logo on a rectangle, photo tilt or brain pulse does not by itself depict a model advantage.
+
+⛔ **Clone the closest existing reel; chrome (captions/progress-bar/mascot/fonts) stays byte-identical. Swap only scene bodies.** Explicit user corrections take precedence: do not preserve an inherited caption-shrinking bug to satisfy this cloning rule; apply C4 and verify the actual rendered caption track.
 
 | Style | Chassis | Use for |
 |---|---|---|
@@ -398,6 +401,8 @@ for t in 0.4 2 4.4 6.4 9.6 13.5 20 27 32.6 37.5 45.6; do
   ⛔ **NO emoji pictographs** as on-screen content (draw shaded shapes) · **NO low-opacity content** (solid + readable; low opacity only for background depth) · **NO overlapping components** · **ONE cinematic hero per scene** — when a reel feels "off", the fix is **declutter + polish**, never *add more*.
 
 **Loop:** grid → critic → overhaul workflow → splice → re-render → re-grid. Until D-A and D-B pass everywhere.
+
+**JEV correction, September 16:** action must already be underway at frame zero; do not wait until frame 15 to begin. Review the first second separately, then the 2–7s handoff and every reported body interval at normal speed with audio. Inspect native-size frames for prop contact, face clearance and the dominant subject changing state. A completed reveal that freezes until the next scene is not a finished beat. Repeated rejection requires changing the mechanism; passing pixel-motion checks cannot overrule it. Use the [review contract](memory/alex-jev-action-hierarchy-and-review.md#review-contract), and record whether evidence is sampled frames or complete playback. Do not label either as user creative approval.
 
 ## D2. SOUND DESIGN PASS → `memory/reel-sfx-pass.md`
 > Alex, reel 52: *"I need to see better SFX sound design throughout to take it one level higher."*

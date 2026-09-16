@@ -1,0 +1,30 @@
+[
+  {
+    "phrase": "right now.",
+    "stored_end": 5.901,
+    "measured_end": 5.921,
+    "switch": 6.09,
+    "uncovered_ms": 0
+  },
+  {
+    "phrase": "The founder's name",
+    "stored_end": 8.81,
+    "measured_end": 9.041,
+    "switch": 9.03,
+    "uncovered_ms": 11.0
+  },
+  {
+    "phrase": "are using AI",
+    "stored_end": 14.5,
+    "measured_end": 14.761,
+    "switch": 14.75,
+    "uncovered_ms": 11.0
+  },
+  {
+    "phrase": "suspicious",
+    "stored_end": 22.08,
+    "measured_end": 22.271,
+    "switch": 22.26,
+    "uncovered_ms": 11.0
+  }
+]

@@ -12,6 +12,8 @@ render, or a re-record. Read the section that matches what you are about to do.
 
 ## Index
 
+**September 16, 2026: [JEV action, hierarchy and review](memory/alex-jev-action-hierarchy-and-review.md).** Passing motion gates did not prevent repeated hook rejection. Rebuild the dominant operation, carry the result into a consequence, preserve prop contact and large captions, and gate the CTA across all surfaces. [Full timestamped revision record](memory/reels/jev-revision-record.md).
+
 **September 12, 2026: [OC action and ending revisions](memory/alex-oc-action-and-ending-revisions.md).** Repeated random-shape rejection requires a new depicted action; smashing must accumulate damage. Keep OC-specific late keyword timing separate from other reels, and complete the comment-first caption and live article.
 
 **September 11, 2026 — [LM hook, demo and delivery feedback](memory/alex-lm-hooks-demo-and-delivery.md):**

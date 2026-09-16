@@ -1,0 +1,45 @@
+{
+  "revision": "v9",
+  "drive_video": "https://drive.google.com/file/d/1j-uKgTZlSQJMv5q0-7NkrUjweJ4hlJ_k/view",
+  "files": {
+    "JEV-editable-project.zip": {
+      "bytes": 27811658,
+      "sha256": "1614071c5ddd24ed1667ea5c1fed5945396d623834251387af282d287bdeba1e"
+    },
+    "JEV-storyboard.md": {
+      "bytes": 5476,
+      "sha256": "1349307b413bcea73b360de5e4201a25d080add6d06b39221ac217c6ef3549ab"
+    },
+    "JEV-review-notes.md": {
+      "bytes": 3469,
+      "sha256": "f0c8353ac8dd39fc08cedd2d6add651cf10bfc0a85fcb775f30784c89ec4fd94"
+    },
+    "JEV-cover.jpg": {
+      "bytes": 157571,
+      "sha256": "b4ca956dd3c65f4d91c64f5a002fccc737dc4c73ec5c467b06b9903e54b68871"
+    },
+    "155_JEV_Sep16_Refined.mp4": {
+      "bytes": 19859718,
+      "sha256": "3a44fe8bf9af2a767645981de9bf8e9e05e4154724a1992e0805755852504cd5"
+    },
+    "155_JEV_Sep16.srt": {
+      "bytes": 3790,
+      "sha256": "4872ca3380a12244524ea550149f550b2ad0b1aafba89beef23f950094999cb1"
+    }
+  },
+  "motion_scenes_passed": 18,
+  "audio_offset_ms": 0,
+  "reel_checks_passed": 9,
+  "visual_review": "Independent final sampled-frame review: no material blocker. Not user creative approval.",
+  "drive_verified": {
+    "video_version": 9,
+    "video_modified": "5:07 AM",
+    "video_size": "18.9 MB",
+    "companion_uploads_complete": 5,
+    "source_zip_version": 9,
+    "storyboard_version": 9,
+    "notes_version": 9,
+    "cover_version": 9,
+    "srt_version": 8
+  }
+}
