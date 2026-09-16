@@ -13,3 +13,5 @@ Review evidence is sampled frames and technical measurements, not a claim of com
 Second pass: moved the start flag clear of the portrait; replaced the pennant with unlettered finish tape at waist level, contact at frame80 and separation at frame82. Short elastic/cloth accents follow those exact events.
 
 Final technical checks: 9/9 verify_reel checks; 87/87 declared cue windows have energy; no failures in 18-scene motion audit; frame-zero luma148.6, all blocking look checks pass. Claim-plate heuristic warns (separate internal plate absent); top headline remains visible and no duplicate proof card was reintroduced. 0ms measured audio offset versus master, 42.2s/1266frames, and 1157 common-body packets identical to A/B/C. Root inspected the final color-adjusted frame at native size.
+
+Follow-up: enlarged ChatGPT and Claude runner logo heads by 50% (linear size), preserving gait, track and timing. Native frame20 checked for logo clarity and right-edge clearance. User also flagged the header screenshot without specifying the desired correction; header clarification remains pending, and its text/layout were preserved in this revision.
