@@ -23,7 +23,7 @@ measured **creator style packs**. Clone it, `npm install`, and you're developing
 
 ## ChatGPT account
 
-[ChatGPT formats and post index](chatgpt/README.md) includes the [CODES handheld phone-demo variant](chatgpt/variants/codes-phone-demo.md), its final revision rules and delivery links.
+[ChatGPT formats and post index](chatgpt/README.md) includes the [CODES handheld phone-demo variant](chatgpt/variants/codes-phone-demo.md) and [STUDENT offer-demo learnings](chatgpt/variants/student-offer-demo.md), with scoped editing rules and delivery references.
 
 ## What's here
 

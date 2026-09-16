@@ -9,6 +9,8 @@
 - [ChatGPT format and post index](../chatgpt/README.md).
 - [CODES phone-demo learnings](../chatgpt/variants/codes-phone-demo.md): final camera, headers, captions, sound, sprite crowning, timing, and article delivery rules.
 
+- [STUDENT offer-demo learnings](../chatgpt/variants/student-offer-demo.md): native asset dimensions and sharpness, distinct real product views, measured highlights, real keyboard Foley, word-safe paired cuts, opening-only camera push, active sprite/reward/calendar actions and verified Drive delivery. Overrides CODES camera and typing defaults for STUDENT.
+
 ## ⛔ Standing script/topic rules (load before any script work)
 - [⛔⛔ NEVER browser agents on Instagram + RATE DISCIPLINE](no-browser-agents-instagram.md) — ABSOLUTE: no chrome/Playwright/computer-use on IG ever; use ig_scan.py or yt-dlp. + budget the handle list, STOP on first `feed failed`, exhaust on-disk data before any API call
 - [⛔⛔ FACTORY LOG FIRST](factory-log-first.md) — open the reel log at STAGE 0, before the first idea. Never retroactive. No comp = no entry · CAPTURE BEFORE CLAIM
