@@ -1,0 +1,1684 @@
+{
+  "frames": 11057,
+  "fps": 29.97002997002997,
+  "durationSeconds": 368.9352333333333,
+  "cuts": [
+    {
+      "start": 221,
+      "end": 225,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.501383
+    },
+    {
+      "start": 562,
+      "end": 567,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.537029
+    },
+    {
+      "start": 1184,
+      "end": 1188,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.476599
+    },
+    {
+      "start": 1275,
+      "end": 1279,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.499637
+    },
+    {
+      "start": 1390,
+      "end": 1394,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.513923
+    },
+    {
+      "start": 1535,
+      "end": 1542,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.577823
+    },
+    {
+      "start": 1654,
+      "end": 1659,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.516576
+    },
+    {
+      "start": 1826,
+      "end": 1830,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.500952
+    },
+    {
+      "start": 2033,
+      "end": 2042,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.658186
+    },
+    {
+      "start": 2210,
+      "end": 2216,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.532948
+    },
+    {
+      "start": 2333,
+      "end": 2342,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.647415
+    },
+    {
+      "start": 2462,
+      "end": 2468,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.541497
+    },
+    {
+      "start": 2832,
+      "end": 2836,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.493673
+    },
+    {
+      "start": 3467,
+      "end": 3470,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.483469
+    },
+    {
+      "start": 3558,
+      "end": 3567,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.674921
+    },
+    {
+      "start": 3967,
+      "end": 3979,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.742902
+    },
+    {
+      "start": 4108,
+      "end": 4117,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.651338
+    },
+    {
+      "start": 5685,
+      "end": 5690,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.516916
+    },
+    {
+      "start": 5845,
+      "end": 5850,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.535442
+    },
+    {
+      "start": 6269,
+      "end": 6274,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.51966
+    },
+    {
+      "start": 6366,
+      "end": 6370,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.477846
+    },
+    {
+      "start": 6751,
+      "end": 6756,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.505193
+    },
+    {
+      "start": 7879,
+      "end": 7887,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.608277
+    },
+    {
+      "start": 8935,
+      "end": 8943,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.617959
+    },
+    {
+      "start": 8990,
+      "end": 9047,
+      "reason": "false start and spoken cut cut"
+    },
+    {
+      "start": 9566,
+      "end": 9572,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.565011
+    },
+    {
+      "start": 9841,
+      "end": 9849,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.6061
+    },
+    {
+      "start": 10689,
+      "end": 10697,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.612177
+    },
+    {
+      "start": 10784,
+      "end": 10788,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.481905
+    },
+    {
+      "start": 10896,
+      "end": 10911,
+      "reason": "silent gap",
+      "originalGapSeconds": 0.83873
+    }
+  ],
+  "spans": [
+    {
+      "oldStart": 0,
+      "newStart": 0,
+      "duration": 221,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 225,
+      "newStart": 221,
+      "duration": 337,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 567,
+      "newStart": 558,
+      "duration": 617,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 1188,
+      "newStart": 1175,
+      "duration": 87,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 1279,
+      "newStart": 1262,
+      "duration": 111,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 1394,
+      "newStart": 1373,
+      "duration": 141,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 1542,
+      "newStart": 1514,
+      "duration": 112,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 1659,
+      "newStart": 1626,
+      "duration": 167,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 1830,
+      "newStart": 1793,
+      "duration": 203,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 2042,
+      "newStart": 1996,
+      "duration": 168,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 2216,
+      "newStart": 2164,
+      "duration": 117,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 2342,
+      "newStart": 2281,
+      "duration": 120,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 2468,
+      "newStart": 2401,
+      "duration": 364,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 2836,
+      "newStart": 2765,
+      "duration": 631,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 3470,
+      "newStart": 3396,
+      "duration": 88,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 3567,
+      "newStart": 3484,
+      "duration": 400,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 3979,
+      "newStart": 3884,
+      "duration": 129,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 4117,
+      "newStart": 4013,
+      "duration": 1568,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 5690,
+      "newStart": 5581,
+      "duration": 155,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 5850,
+      "newStart": 5736,
+      "duration": 419,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 6274,
+      "newStart": 6155,
+      "duration": 92,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 6370,
+      "newStart": 6247,
+      "duration": 218,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 6588,
+      "newStart": 6465,
+      "duration": 8,
+      "kind": "restore-slow"
+    },
+    {
+      "oldStart": 6588,
+      "newStart": 6473,
+      "duration": 163,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 6756,
+      "newStart": 6636,
+      "duration": 1123,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 7887,
+      "newStart": 7759,
+      "duration": 473,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 8365,
+      "newStart": 8232,
+      "duration": 570,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 8943,
+      "newStart": 8802,
+      "duration": 47,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 9047,
+      "newStart": 8849,
+      "duration": 519,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 9572,
+      "newStart": 9368,
+      "duration": 269,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 9849,
+      "newStart": 9637,
+      "duration": 155,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 10006,
+      "newStart": 9792,
+      "duration": 62,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 10071,
+      "newStart": 9854,
+      "duration": 618,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 10697,
+      "newStart": 10472,
+      "duration": 87,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 10788,
+      "newStart": 10559,
+      "duration": 108,
+      "kind": "normal"
+    },
+    {
+      "oldStart": 10911,
+      "newStart": 10667,
+      "duration": 240,
+      "kind": "normal"
+    }
+  ],
+  "restoredSlowFrames": 8,
+  "sourceMatchGain": 3.0327793075632825,
+  "mixGain": 0.977106794537825,
+  "newSoundCues": [
+    {
+      "oldFrame": 591,
+      "kind": "tone",
+      "gain": 0.052
+    },
+    {
+      "oldFrame": 612,
+      "kind": "tone",
+      "gain": 0.052
+    },
+    {
+      "oldFrame": 633,
+      "kind": "tone",
+      "gain": 0.052
+    },
+    {
+      "oldFrame": 654,
+      "kind": "tone",
+      "gain": 0.052
+    },
+    {
+      "oldFrame": 5623,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 5686,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 5845,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 5954,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 6035,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 6141,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 6274,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 6370,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 6498,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 6760,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 7007,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 7244,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 7425,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 7638,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 7805,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 7884,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 7978,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 8077,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 8230,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 8366,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 8473,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 8591,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 8749,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 9033,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 9256,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 9392,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 9567,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 9665,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 9850,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 10008,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 10118,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 10325,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 10532,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 10785,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 10903,
+      "kind": "slide",
+      "gain": 0.024
+    },
+    {
+      "oldFrame": 5890,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 6141,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 6240,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 6320,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 7460,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 7512,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 7702,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 7805,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 7884,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 8230,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 9600,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 9680,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 10008,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 10967,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 11076,
+      "kind": "latch",
+      "gain": 0.045
+    },
+    {
+      "oldFrame": 6173,
+      "kind": "key",
+      "gain": 0.013057903502504688
+    },
+    {
+      "oldFrame": 6178,
+      "kind": "key",
+      "gain": 0.01856192962541978
+    },
+    {
+      "oldFrame": 6183,
+      "kind": "key",
+      "gain": 0.021412769736846634
+    },
+    {
+      "oldFrame": 6188,
+      "kind": "key",
+      "gain": 0.01911293867618488
+    },
+    {
+      "oldFrame": 6193,
+      "kind": "key",
+      "gain": 0.020015364327614183
+    },
+    {
+      "oldFrame": 6198,
+      "kind": "key",
+      "gain": 0.021727772644691553
+    },
+    {
+      "oldFrame": 6203,
+      "kind": "key",
+      "gain": 0.020782826836180542
+    },
+    {
+      "oldFrame": 6208,
+      "kind": "key",
+      "gain": 0.01344776422356696
+    },
+    {
+      "oldFrame": 6213,
+      "kind": "key",
+      "gain": 0.02191798923720703
+    },
+    {
+      "oldFrame": 6218,
+      "kind": "key",
+      "gain": 0.02029848891417213
+    },
+    {
+      "oldFrame": 6223,
+      "kind": "key",
+      "gain": 0.018464881573886906
+    },
+    {
+      "oldFrame": 6228,
+      "kind": "key",
+      "gain": 0.012134947666716545
+    },
+    {
+      "oldFrame": 6233,
+      "kind": "key",
+      "gain": 0.016643831449211458
+    },
+    {
+      "oldFrame": 7645,
+      "kind": "key",
+      "gain": 0.018251408191026147
+    },
+    {
+      "oldFrame": 7649,
+      "kind": "key",
+      "gain": 0.014160237074807533
+    },
+    {
+      "oldFrame": 7653,
+      "kind": "key",
+      "gain": 0.015432660564438917
+    },
+    {
+      "oldFrame": 7657,
+      "kind": "key",
+      "gain": 0.013539035451408488
+    },
+    {
+      "oldFrame": 7661,
+      "kind": "key",
+      "gain": 0.015071718855562364
+    },
+    {
+      "oldFrame": 7665,
+      "kind": "key",
+      "gain": 0.021844728071823916
+    },
+    {
+      "oldFrame": 7669,
+      "kind": "key",
+      "gain": 0.019188840192995653
+    },
+    {
+      "oldFrame": 7673,
+      "kind": "key",
+      "gain": 0.020948302308559187
+    },
+    {
+      "oldFrame": 7677,
+      "kind": "key",
+      "gain": 0.018468268748069006
+    },
+    {
+      "oldFrame": 7681,
+      "kind": "key",
+      "gain": 0.013716350767767232
+    },
+    {
+      "oldFrame": 7685,
+      "kind": "key",
+      "gain": 0.015642972184289648
+    },
+    {
+      "oldFrame": 7689,
+      "kind": "key",
+      "gain": 0.020870885332861907
+    },
+    {
+      "oldFrame": 7693,
+      "kind": "key",
+      "gain": 0.013266352489823783
+    },
+    {
+      "oldFrame": 7697,
+      "kind": "key",
+      "gain": 0.021058390155994453
+    },
+    {
+      "oldFrame": 7836,
+      "kind": "key",
+      "gain": 0.01630501187336045
+    },
+    {
+      "oldFrame": 7840,
+      "kind": "key",
+      "gain": 0.0188781606469511
+    },
+    {
+      "oldFrame": 7844,
+      "kind": "key",
+      "gain": 0.015156354098382532
+    },
+    {
+      "oldFrame": 7848,
+      "kind": "key",
+      "gain": 0.018273436618368718
+    },
+    {
+      "oldFrame": 7852,
+      "kind": "key",
+      "gain": 0.01890002868743047
+    },
+    {
+      "oldFrame": 7856,
+      "kind": "key",
+      "gain": 0.01633486303538813
+    },
+    {
+      "oldFrame": 7860,
+      "kind": "key",
+      "gain": 0.019466093188280686
+    },
+    {
+      "oldFrame": 7864,
+      "kind": "key",
+      "gain": 0.018477188452105154
+    },
+    {
+      "oldFrame": 7868,
+      "kind": "key",
+      "gain": 0.018263010693870662
+    },
+    {
+      "oldFrame": 7872,
+      "kind": "key",
+      "gain": 0.020878450768594802
+    },
+    {
+      "oldFrame": 7876,
+      "kind": "key",
+      "gain": 0.015858487806648572
+    },
+    {
+      "oldFrame": 7880,
+      "kind": "key",
+      "gain": 0.015146765924746971
+    },
+    {
+      "oldFrame": 7893,
+      "kind": "key",
+      "gain": 0.018790805659439476
+    },
+    {
+      "oldFrame": 7896,
+      "kind": "key",
+      "gain": 0.012391728674558759
+    },
+    {
+      "oldFrame": 7899,
+      "kind": "key",
+      "gain": 0.012872816708953743
+    },
+    {
+      "oldFrame": 7902,
+      "kind": "key",
+      "gain": 0.019469092457190453
+    },
+    {
+      "oldFrame": 7905,
+      "kind": "key",
+      "gain": 0.01934040560364899
+    },
+    {
+      "oldFrame": 7908,
+      "kind": "key",
+      "gain": 0.019927196086952724
+    },
+    {
+      "oldFrame": 7911,
+      "kind": "key",
+      "gain": 0.017380842290880286
+    },
+    {
+      "oldFrame": 7914,
+      "kind": "key",
+      "gain": 0.014571173340964689
+    },
+    {
+      "oldFrame": 7917,
+      "kind": "key",
+      "gain": 0.020645862199254017
+    },
+    {
+      "oldFrame": 7920,
+      "kind": "key",
+      "gain": 0.017023787764520796
+    },
+    {
+      "oldFrame": 7923,
+      "kind": "key",
+      "gain": 0.01966044357709127
+    },
+    {
+      "oldFrame": 7926,
+      "kind": "key",
+      "gain": 0.0219860849252435
+    },
+    {
+      "oldFrame": 7929,
+      "kind": "key",
+      "gain": 0.012581243915791098
+    },
+    {
+      "oldFrame": 7932,
+      "kind": "key",
+      "gain": 0.013450058750907063
+    },
+    {
+      "oldFrame": 7935,
+      "kind": "key",
+      "gain": 0.02170533293218054
+    },
+    {
+      "oldFrame": 7938,
+      "kind": "key",
+      "gain": 0.013103633165935064
+    },
+    {
+      "oldFrame": 7941,
+      "kind": "key",
+      "gain": 0.013701775088079625
+    },
+    {
+      "oldFrame": 7944,
+      "kind": "key",
+      "gain": 0.020563598025038314
+    },
+    {
+      "oldFrame": 7947,
+      "kind": "key",
+      "gain": 0.01637903344423886
+    },
+    {
+      "oldFrame": 7950,
+      "kind": "key",
+      "gain": 0.019666283907811076
+    },
+    {
+      "oldFrame": 7953,
+      "kind": "key",
+      "gain": 0.015974203859218716
+    },
+    {
+      "oldFrame": 7956,
+      "kind": "key",
+      "gain": 0.01888677819467377
+    },
+    {
+      "oldFrame": 7959,
+      "kind": "key",
+      "gain": 0.02067706677761341
+    },
+    {
+      "oldFrame": 7962,
+      "kind": "key",
+      "gain": 0.01606865475882589
+    },
+    {
+      "oldFrame": 7965,
+      "kind": "key",
+      "gain": 0.014892753941780348
+    },
+    {
+      "oldFrame": 7968,
+      "kind": "key",
+      "gain": 0.021769189285661617
+    },
+    {
+      "oldFrame": 8490,
+      "kind": "key",
+      "gain": 0.0173901737051316
+    },
+    {
+      "oldFrame": 8493,
+      "kind": "key",
+      "gain": 0.01836093628085561
+    },
+    {
+      "oldFrame": 8496,
+      "kind": "key",
+      "gain": 0.01618437103162123
+    },
+    {
+      "oldFrame": 8499,
+      "kind": "key",
+      "gain": 0.02030063323272068
+    },
+    {
+      "oldFrame": 8502,
+      "kind": "key",
+      "gain": 0.018908633329054608
+    },
+    {
+      "oldFrame": 8505,
+      "kind": "key",
+      "gain": 0.015449936773349954
+    },
+    {
+      "oldFrame": 8508,
+      "kind": "key",
+      "gain": 0.013102093778959588
+    },
+    {
+      "oldFrame": 9047,
+      "kind": "key",
+      "gain": 0.014663859485225918
+    },
+    {
+      "oldFrame": 9052,
+      "kind": "key",
+      "gain": 0.01385903229096583
+    },
+    {
+      "oldFrame": 9057,
+      "kind": "key",
+      "gain": 0.016345904645838526
+    },
+    {
+      "oldFrame": 9062,
+      "kind": "key",
+      "gain": 0.017804928454984943
+    },
+    {
+      "oldFrame": 9067,
+      "kind": "key",
+      "gain": 0.01931980909391479
+    },
+    {
+      "oldFrame": 9072,
+      "kind": "key",
+      "gain": 0.01912887427670154
+    },
+    {
+      "oldFrame": 9077,
+      "kind": "key",
+      "gain": 0.02203613839825019
+    },
+    {
+      "oldFrame": 9082,
+      "kind": "key",
+      "gain": 0.021289114893155093
+    },
+    {
+      "oldFrame": 9087,
+      "kind": "key",
+      "gain": 0.020160607171291787
+    },
+    {
+      "oldFrame": 9092,
+      "kind": "key",
+      "gain": 0.019012966140668875
+    },
+    {
+      "oldFrame": 9097,
+      "kind": "key",
+      "gain": 0.015101723959258512
+    },
+    {
+      "oldFrame": 9085,
+      "kind": "key",
+      "gain": 0.020434939064938557
+    },
+    {
+      "oldFrame": 9090,
+      "kind": "key",
+      "gain": 0.02195548770155526
+    },
+    {
+      "oldFrame": 9095,
+      "kind": "key",
+      "gain": 0.01832493575426581
+    },
+    {
+      "oldFrame": 9100,
+      "kind": "key",
+      "gain": 0.01433555968381547
+    },
+    {
+      "oldFrame": 9105,
+      "kind": "key",
+      "gain": 0.017978338497552655
+    },
+    {
+      "oldFrame": 9110,
+      "kind": "key",
+      "gain": 0.019434670841159282
+    },
+    {
+      "oldFrame": 9115,
+      "kind": "key",
+      "gain": 0.019382759169014857
+    },
+    {
+      "oldFrame": 9120,
+      "kind": "key",
+      "gain": 0.02062548835917942
+    },
+    {
+      "oldFrame": 9125,
+      "kind": "key",
+      "gain": 0.012953746023417074
+    },
+    {
+      "oldFrame": 9130,
+      "kind": "key",
+      "gain": 0.013040919318332105
+    },
+    {
+      "oldFrame": 9135,
+      "kind": "key",
+      "gain": 0.013721349946834358
+    },
+    {
+      "oldFrame": 9140,
+      "kind": "key",
+      "gain": 0.017309649972695143
+    },
+    {
+      "oldFrame": 9145,
+      "kind": "key",
+      "gain": 0.01272317450401659
+    },
+    {
+      "oldFrame": 9134,
+      "kind": "key",
+      "gain": 0.01625399154308007
+    },
+    {
+      "oldFrame": 9139,
+      "kind": "key",
+      "gain": 0.012959864585217565
+    },
+    {
+      "oldFrame": 9144,
+      "kind": "key",
+      "gain": 0.01898402557722725
+    },
+    {
+      "oldFrame": 9149,
+      "kind": "key",
+      "gain": 0.022030497584362613
+    },
+    {
+      "oldFrame": 9154,
+      "kind": "key",
+      "gain": 0.012937490147089413
+    },
+    {
+      "oldFrame": 9159,
+      "kind": "key",
+      "gain": 0.0198396603952753
+    },
+    {
+      "oldFrame": 9164,
+      "kind": "key",
+      "gain": 0.017282891167971024
+    },
+    {
+      "oldFrame": 9169,
+      "kind": "key",
+      "gain": 0.021620081639896815
+    },
+    {
+      "oldFrame": 9174,
+      "kind": "key",
+      "gain": 0.016653000451693923
+    },
+    {
+      "oldFrame": 9179,
+      "kind": "key",
+      "gain": 0.01244436887474882
+    },
+    {
+      "oldFrame": 9184,
+      "kind": "key",
+      "gain": 0.02116366794826586
+    },
+    {
+      "oldFrame": 9189,
+      "kind": "key",
+      "gain": 0.013287653445228803
+    },
+    {
+      "oldFrame": 9194,
+      "kind": "key",
+      "gain": 0.012097652010077998
+    },
+    {
+      "oldFrame": 9860,
+      "kind": "key",
+      "gain": 0.01866941400811576
+    },
+    {
+      "oldFrame": 9865,
+      "kind": "key",
+      "gain": 0.018302310498168294
+    },
+    {
+      "oldFrame": 9870,
+      "kind": "key",
+      "gain": 0.012249480315557285
+    },
+    {
+      "oldFrame": 9875,
+      "kind": "key",
+      "gain": 0.015049150769037215
+    },
+    {
+      "oldFrame": 9880,
+      "kind": "key",
+      "gain": 0.01741760504421335
+    },
+    {
+      "oldFrame": 9885,
+      "kind": "key",
+      "gain": 0.01603656970460699
+    },
+    {
+      "oldFrame": 9890,
+      "kind": "key",
+      "gain": 0.02201252960088407
+    },
+    {
+      "oldFrame": 9895,
+      "kind": "key",
+      "gain": 0.013427912935540806
+    },
+    {
+      "oldFrame": 9900,
+      "kind": "key",
+      "gain": 0.017054369073245403
+    },
+    {
+      "oldFrame": 9905,
+      "kind": "key",
+      "gain": 0.020796764558929415
+    },
+    {
+      "oldFrame": 9910,
+      "kind": "key",
+      "gain": 0.02024140183441107
+    },
+    {
+      "oldFrame": 9915,
+      "kind": "key",
+      "gain": 0.01657388041915907
+    },
+    {
+      "oldFrame": 9920,
+      "kind": "key",
+      "gain": 0.01359376565126301
+    },
+    {
+      "oldFrame": 9925,
+      "kind": "key",
+      "gain": 0.01648125390857932
+    },
+    {
+      "oldFrame": 9930,
+      "kind": "key",
+      "gain": 0.020782329502319022
+    },
+    {
+      "oldFrame": 9935,
+      "kind": "key",
+      "gain": 0.017414891873141856
+    },
+    {
+      "oldFrame": 9940,
+      "kind": "key",
+      "gain": 0.0218496757843241
+    },
+    {
+      "oldFrame": 9945,
+      "kind": "key",
+      "gain": 0.013592757773533809
+    },
+    {
+      "oldFrame": 9950,
+      "kind": "key",
+      "gain": 0.014862266641388611
+    },
+    {
+      "oldFrame": 9955,
+      "kind": "key",
+      "gain": 0.01624418569583127
+    },
+    {
+      "oldFrame": 9960,
+      "kind": "key",
+      "gain": 0.018687476857660857
+    },
+    {
+      "oldFrame": 9965,
+      "kind": "key",
+      "gain": 0.017683883446835205
+    },
+    {
+      "oldFrame": 9970,
+      "kind": "key",
+      "gain": 0.019409373157554453
+    },
+    {
+      "oldFrame": 9975,
+      "kind": "key",
+      "gain": 0.012195317738686394
+    },
+    {
+      "oldFrame": 10911,
+      "kind": "key",
+      "gain": 0.02018912459832553
+    },
+    {
+      "oldFrame": 10915,
+      "kind": "key",
+      "gain": 0.01951238834637979
+    },
+    {
+      "oldFrame": 10919,
+      "kind": "key",
+      "gain": 0.01671699310338632
+    },
+    {
+      "oldFrame": 10923,
+      "kind": "key",
+      "gain": 0.016624568353238542
+    },
+    {
+      "oldFrame": 10927,
+      "kind": "key",
+      "gain": 0.019570463445279622
+    },
+    {
+      "oldFrame": 10931,
+      "kind": "key",
+      "gain": 0.01891968153317773
+    },
+    {
+      "oldFrame": 10935,
+      "kind": "key",
+      "gain": 0.02032433333902573
+    },
+    {
+      "oldFrame": 10939,
+      "kind": "key",
+      "gain": 0.01719613620599495
+    },
+    {
+      "oldFrame": 10943,
+      "kind": "key",
+      "gain": 0.019894768773845044
+    },
+    {
+      "oldFrame": 10947,
+      "kind": "key",
+      "gain": 0.012237279897718913
+    },
+    {
+      "oldFrame": 10951,
+      "kind": "key",
+      "gain": 0.01312788177433327
+    },
+    {
+      "oldFrame": 10955,
+      "kind": "key",
+      "gain": 0.01617708805177562
+    },
+    {
+      "oldFrame": 6096,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 6106,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 6116,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 6380,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 7750,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 7757,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 7764,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 7810,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 7820,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 7830,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 7994,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 8260,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 8282,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 8304,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 8520,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 8534,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 8548,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 9310,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 9331,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 9352,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 9760,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 10100,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 10121,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 10142,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 10250,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 10980,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 10998,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 11016,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 11030,
+      "kind": "stamp",
+      "gain": 0.038
+    },
+    {
+      "oldFrame": 5669,
+      "kind": "stamp",
+      "gain": 0.032
+    },
+    {
+      "oldFrame": 5708,
+      "kind": "stamp",
+      "gain": 0.032
+    },
+    {
+      "oldFrame": 5747,
+      "kind": "stamp",
+      "gain": 0.032
+    },
+    {
+      "oldFrame": 5780,
+      "kind": "stamp",
+      "gain": 0.032
+    },
+    {
+      "oldFrame": 5807,
+      "kind": "stamp",
+      "gain": 0.032
+    },
+    {
+      "oldFrame": 8340,
+      "kind": "stamp",
+      "gain": 0.032
+    },
+    {
+      "oldFrame": 8424,
+      "kind": "stamp",
+      "gain": 0.032
+    },
+    {
+      "oldFrame": 8595,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8599,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8603,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8607,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8611,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8615,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8619,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8623,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8627,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8631,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 8635,
+      "kind": "latch",
+      "gain": 0.028
+    },
+    {
+      "oldFrame": 5574,
+      "kind": "stamp",
+      "gain": 0.052
+    },
+    {
+      "oldFrame": 6958,
+      "kind": "stamp",
+      "gain": 0.052
+    },
+    {
+      "oldFrame": 8984,
+      "kind": "stamp",
+      "gain": 0.052
+    }
+  ],
+  "v3AdditionalCuts": [
+    {
+      "start": 8232,
+      "end": 8237,
+      "gap": [
+        274.554,
+        274.961
+      ],
+      "reason": "additional pause trim from V3 review"
+    },
+    {
+      "start": 9797,
+      "end": 9799,
+      "gap": [
+        326.785,
+        327.087
+      ],
+      "reason": "additional pause trim from V3 review"
+    },
+    {
+      "start": 9861,
+      "end": 9864,
+      "gap": [
+        328.905,
+        329.25
+      ],
+      "reason": "additional pause trim from V3 review"
+    }
+  ],
+  "outroFrames": 150
+}

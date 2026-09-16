@@ -1,0 +1,6 @@
+import React from 'react';
+import {interpolate,Easing} from 'remotion';
+const ink='#292822',clay='#C97355',paper='#F4F1EA';
+export const progress=(f:number,a:number,b:number)=>interpolate(f,[a,b],[0,1],{extrapolateLeft:'clamp',extrapolateRight:'clamp',easing:Easing.bezier(.16,.84,.22,1)});
+export const Mouse=({x,y,press=0}:{x:number;y:number;press?:number})=><div style={{position:'absolute',left:x,top:y,pointerEvents:'none',zIndex:10}}>{press>0&&press<1&&<div style={{position:'absolute',left:-30*press,top:-30*press,width:60*press,height:60*press,border:'3px solid '+clay,borderRadius:'50%',opacity:1-press}}/>}<svg width="42" height="52" viewBox="0 0 35 46" style={{filter:'drop-shadow(0 3px 4px #0004)'}}><path d="M2 2v34l9-8 8 16 8-4-9-15 14-1z" fill={ink} stroke="white" strokeWidth="2"/></svg></div>;
+export const Outline=({f,start,x=2,y=2,w=1106,h=638}:{f:number;start:number;x?:number;y?:number;w?:number;h?:number})=><svg width="1110" height="642" style={{position:'absolute',inset:0,pointerEvents:'none',zIndex:5}}><rect x={x} y={y} width={w} height={h} rx="21" fill="none" stroke={clay} strokeWidth="4" pathLength="1" strokeDasharray="1" strokeDashoffset={1-progress(f,start,start+28)} opacity={1-.65*progress(f,start+58,start+86)}/></svg>;

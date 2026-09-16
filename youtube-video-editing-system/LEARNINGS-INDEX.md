@@ -1,3 +1,7 @@
+# September 15 — new default adopted
+
+[Claude Beginners retrospective](projects/claude-beginners/LEARNINGS.md) · [current contract](CURRENT-DIRECTION.md) · [source](projects/claude-beginners/README.md). Supersedes older conflicting defaults. No silent animated outro; description-only resource CTA, no trial requirement in video. Existing V7 unchanged.
+
 # YouTube editing — indexed learning library
 
 September 13 consolidation: [Editing retrospective and next-project review gates](projects/higgsfield-replacement/EDITING-RETROSPECTIVE.md). This is the compact starting point for the full process: repeated failures, final decisions, rationale, handoff and publication lessons. V23 is the latest verified full export; older version notices below are preserved history, not competing current instructions.

@@ -1,3 +1,5 @@
+> **YouTube default updated September 15:** use the [Claude Beginners system](youtube-video-editing-system/CURRENT-DIRECTION.md). No animation-only outro; video resource CTA points to the description without trial wording. [Reusable code and learnings](youtube-video-editing-system/projects/claude-beginners/README.md).
+
 # Claude Reels — Workflow (code + brain)
 
 The version-controlled half of a Greg-Isenberg-style AI/Claude Instagram-reel system: the **code** (a

@@ -1,0 +1,1329 @@
+{
+  "version": 1,
+  "profile": "talking-head",
+  "source": "voice.m4a",
+  "sourceFps": 29.97002997002997,
+  "outputFps": 29.97002997002997,
+  "segments": [
+    {
+      "sourceStartFrame": 1247,
+      "sourceEndFrame": 1324,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Most people use Claude like a basic search engine.",
+      "phraseId": 2,
+      "cameraStartFrame": 1721
+    },
+    {
+      "sourceStartFrame": 1481,
+      "sourceEndFrame": 1633,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "They type a simple question and get back a generic wall of text, but this is a massive waste of its potential.",
+      "phraseId": 3,
+      "cameraStartFrame": 1955
+    },
+    {
+      "sourceStartFrame": 1870,
+      "sourceEndFrame": 1980,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "In this video, I'm going to take you from complete beginner to pro at Claude.",
+      "phraseId": 4,
+      "cameraStartFrame": 2344
+    },
+    {
+      "sourceStartFrame": 5112,
+      "sourceEndFrame": 5342,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "You will stop typing basic prompts, and I will show you the hidden features to generate working apps, automate your daily research, and stop getting surface -level responses from Claude.",
+      "phraseId": 24,
+      "cameraStartFrame": 5586
+    },
+    {
+      "sourceStartFrame": 5948,
+      "sourceEndFrame": 6067,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "We will walk through the exact AI model you should pick for every single task.",
+      "phraseId": 30,
+      "cameraStartFrame": 6422
+    },
+    {
+      "sourceStartFrame": 6702,
+      "sourceEndFrame": 6832,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Then, I will show you the artifacts feature so you can build interactive tools right inside your browser.",
+      "phraseId": 37,
+      "cameraStartFrame": 7176
+    },
+    {
+      "sourceStartFrame": 6952,
+      "sourceEndFrame": 7064,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "I also put together a free prompt cheat sheet so you can copy my exact steps.",
+      "phraseId": 38,
+      "cameraStartFrame": 7426
+    },
+    {
+      "sourceStartFrame": 7268,
+      "sourceEndFrame": 7311,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But you need to be careful.",
+      "phraseId": 39,
+      "cameraStartFrame": 7742
+    },
+    {
+      "sourceStartFrame": 9439,
+      "sourceEndFrame": 9573,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "If you pick the wrong model for tasks, you will burn through your usage limit and run out of usage for hours.",
+      "phraseId": 58,
+      "cameraStartFrame": 9913
+    },
+    {
+      "sourceStartFrame": 9691,
+      "sourceEndFrame": 9781,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And I will show you how to avoid that trap right now, let's get into it.",
+      "phraseId": 59,
+      "cameraStartFrame": 10165
+    },
+    {
+      "sourceStartFrame": 10226,
+      "sourceEndFrame": 10314,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Now the model you choose decides how smart the AI is.",
+      "phraseId": 64,
+      "cameraStartFrame": 10700
+    },
+    {
+      "sourceStartFrame": 10518,
+      "sourceEndFrame": 10592,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Think of it like choosing who to hire for a job.",
+      "phraseId": 69,
+      "cameraStartFrame": 10992
+    },
+    {
+      "sourceStartFrame": 10814,
+      "sourceEndFrame": 10855,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Haiku is your beginner.",
+      "phraseId": 72,
+      "cameraStartFrame": 11288
+    },
+    {
+      "sourceStartFrame": 12043,
+      "sourceEndFrame": 12186,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "It's crazy fast, cheap, and perfect for tasks like making a PDF or cleaning up a lead list.",
+      "phraseId": 79,
+      "cameraStartFrame": 12517
+    },
+    {
+      "sourceStartFrame": 12382,
+      "sourceEndFrame": 12505,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Sonnet is your reliable worker, so start 90 % of your tasks here.",
+      "phraseId": 82,
+      "cameraStartFrame": 12856
+    },
+    {
+      "sourceStartFrame": 12812,
+      "sourceEndFrame": 12935,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "It's your daily workhorse and handles most of your tasks like writing and coding perfectly.",
+      "phraseId": 85,
+      "cameraStartFrame": 13286
+    },
+    {
+      "sourceStartFrame": 13214,
+      "sourceEndFrame": 13261,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But Opus is your expert.",
+      "phraseId": 88,
+      "cameraStartFrame": 13688
+    },
+    {
+      "sourceStartFrame": 13704,
+      "sourceEndFrame": 13834,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Save it for harder coding tasks or big choices where you need the smartest brain in the room.",
+      "phraseId": 95,
+      "cameraStartFrame": 14178
+    },
+    {
+      "sourceStartFrame": 14111,
+      "sourceEndFrame": 14194,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And finally, Fable is your top expert.",
+      "phraseId": 96,
+      "cameraStartFrame": 14585
+    },
+    {
+      "sourceStartFrame": 14944,
+      "sourceEndFrame": 15117,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Use it for deep research and bigger projects where you need Claude to plan a reason and execute multiple steps on its own.",
+      "phraseId": 103,
+      "cameraStartFrame": 15418
+    },
+    {
+      "sourceStartFrame": 15420,
+      "sourceEndFrame": 15539,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Now that you've chosen the right model, here's how you actually control how hard they work.",
+      "phraseId": 108,
+      "cameraStartFrame": 15894
+    },
+    {
+      "sourceStartFrame": 16367,
+      "sourceEndFrame": 16501,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Now, when you type a prompt and hit enter, Claude comes up with the first decent answer he can think of.",
+      "phraseId": 111,
+      "cameraStartFrame": 16841
+    },
+    {
+      "sourceStartFrame": 17034,
+      "sourceEndFrame": 17150,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Look right next to the model selector and you will see a small button that controls the AI's effort.",
+      "phraseId": 116,
+      "cameraStartFrame": 17508
+    },
+    {
+      "sourceStartFrame": 17719,
+      "sourceEndFrame": 17820,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Click it and the slider lets you choose between faster and smarter.",
+      "phraseId": 120,
+      "cameraStartFrame": 18193
+    },
+    {
+      "sourceStartFrame": 18045,
+      "sourceEndFrame": 18194,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So the effort slider here controls how much time the AI spends thinking about your problem.",
+      "phraseId": 121,
+      "cameraStartFrame": 18519
+    },
+    {
+      "sourceStartFrame": 19111,
+      "sourceEndFrame": 19254,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "If you're on Opus 5 but have low effort, it's like giving an expert 5 minutes to just glance at your work.",
+      "phraseId": 128,
+      "cameraStartFrame": 19585
+    },
+    {
+      "sourceStartFrame": 19344,
+      "sourceEndFrame": 19423,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "They know what to do, but they only give it a quick read.",
+      "phraseId": 129,
+      "cameraStartFrame": 19818
+    },
+    {
+      "sourceStartFrame": 20012,
+      "sourceEndFrame": 20129,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But tracking opus to Mac is like giving the same expert the whole afternoon.",
+      "phraseId": 134,
+      "cameraStartFrame": 20486
+    },
+    {
+      "sourceStartFrame": 20787,
+      "sourceEndFrame": 20952,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "It costs 50 % more, but Claude takes its time, searches for problems you might have missed, and challenges your assumptions.",
+      "phraseId": 139,
+      "cameraStartFrame": 21261
+    },
+    {
+      "sourceStartFrame": 23941,
+      "sourceEndFrame": 24070,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But be careful, max effort burns through your message limits fast and the responses take much longer.",
+      "phraseId": 180,
+      "cameraStartFrame": 24415
+    },
+    {
+      "sourceStartFrame": 24556,
+      "sourceEndFrame": 24657,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So, don't waste it on basic summaries or simple reformatting.",
+      "phraseId": 186,
+      "cameraStartFrame": 25030
+    },
+    {
+      "sourceStartFrame": 26983,
+      "sourceEndFrame": 27154,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Save it for complicated problems, hard coding tasks, or situations where getting it wrong can cost you real time and money.",
+      "phraseId": 210,
+      "cameraStartFrame": 27457
+    },
+    {
+      "sourceStartFrame": 28320,
+      "sourceEndFrame": 28443,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Now let's talk about one of the most powerful Claude tools that you're probably not using.",
+      "phraseId": 211,
+      "cameraStartFrame": 28794
+    },
+    {
+      "sourceStartFrame": 29446,
+      "sourceEndFrame": 29560,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Before this artifacts feature, Claude would just spit out a massive block of code.",
+      "phraseId": 213,
+      "cameraStartFrame": 29920
+    },
+    {
+      "sourceStartFrame": 30449,
+      "sourceEndFrame": 30588,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "You had to copy it, open a coding app, and figure out how to host it along with all of these other issues.",
+      "phraseId": 222,
+      "cameraStartFrame": 30923
+    },
+    {
+      "sourceStartFrame": 30842,
+      "sourceEndFrame": 30948,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Artifacts let you build the software and tools right inside your browser.",
+      "phraseId": 225,
+      "cameraStartFrame": 31316
+    },
+    {
+      "sourceStartFrame": 31179,
+      "sourceEndFrame": 31324,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "For example, I drag a raw data file into Claude Intel to build a real analytics dashboard.",
+      "phraseId": 228,
+      "cameraStartFrame": 31653
+    },
+    {
+      "sourceStartFrame": 31516,
+      "sourceEndFrame": 31617,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "I don't have to write a single line of code in the chat window splits in half.",
+      "phraseId": 229,
+      "cameraStartFrame": 31990
+    },
+    {
+      "sourceStartFrame": 32084,
+      "sourceEndFrame": 32193,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "In 10 seconds, a fully interactive app renders live on my screen.",
+      "phraseId": 232,
+      "cameraStartFrame": 32558
+    },
+    {
+      "sourceStartFrame": 32656,
+      "sourceEndFrame": 32756,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "I can hover over the charts, click the buttons, and test the UI immediately.",
+      "phraseId": 239,
+      "cameraStartFrame": 33130
+    },
+    {
+      "sourceStartFrame": 33306,
+      "sourceEndFrame": 33422,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And if I want to change the layout, I can just tell Claude it and we'll make the updates in real time.",
+      "phraseId": 244,
+      "cameraStartFrame": 33780
+    },
+    {
+      "sourceStartFrame": 33673,
+      "sourceEndFrame": 33800,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "You can build calculators, landing pages, interactive presentations in minutes.",
+      "phraseId": 245,
+      "cameraStartFrame": 34147
+    },
+    {
+      "sourceStartFrame": 34346,
+      "sourceEndFrame": 34488,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "You can even publish your artifacts as public web links so anyone can view them without an account.",
+      "phraseId": 248,
+      "cameraStartFrame": 34820
+    },
+    {
+      "sourceStartFrame": 34701,
+      "sourceEndFrame": 34750,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But this is just the beginning.",
+      "phraseId": 249,
+      "cameraStartFrame": 35175
+    },
+    {
+      "sourceStartFrame": 35341,
+      "sourceEndFrame": 35515,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But the real power of Claude unlocks when you tell Claude to remember your voice and data across every conversation.",
+      "phraseId": 254,
+      "cameraStartFrame": 35815
+    },
+    {
+      "sourceStartFrame": 36056,
+      "sourceEndFrame": 36242,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But if you don't set up your workspace correctly, you will spend hours every single day just repeating your instructions over and over again.",
+      "phraseId": 257,
+      "cameraStartFrame": 36530
+    },
+    {
+      "sourceStartFrame": 36578,
+      "sourceEndFrame": 36700,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So, I'll show you the exact folder structure you need to stop repeating yourself next.",
+      "phraseId": 258,
+      "cameraStartFrame": 37052
+    },
+    {
+      "sourceStartFrame": 39423,
+      "sourceEndFrame": 39535,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "If you use the standard chat window, Claude meshes your information with all of the other chats.",
+      "phraseId": 266,
+      "cameraStartFrame": 39897
+    },
+    {
+      "sourceStartFrame": 39669,
+      "sourceEndFrame": 39828,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So, Project Folders are the solution. Think of Project Folders as a long -term memory for Claude.",
+      "phraseId": 267,
+      "cameraStartFrame": 40143
+    },
+    {
+      "sourceStartFrame": 39947,
+      "sourceEndFrame": 40056,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "To get started, I click on the projects tab on the left and create a new workspace.",
+      "phraseId": 268,
+      "cameraStartFrame": 40421
+    },
+    {
+      "sourceStartFrame": 40433,
+      "sourceEndFrame": 40514,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Now that we're in, this is where you build your knowledge base.",
+      "phraseId": 269,
+      "cameraStartFrame": 40907
+    },
+    {
+      "sourceStartFrame": 41137,
+      "sourceEndFrame": 41243,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "I can drag in all of my PDFs, my brand voice, and my previous template.",
+      "phraseId": 275.5,
+      "cameraStartFrame": 41611
+    },
+    {
+      "sourceStartFrame": 41370,
+      "sourceEndFrame": 41503,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "I can even set custom instructions, so Claude responds in the same format every single time.",
+      "phraseId": 276,
+      "cameraStartFrame": 41844
+    },
+    {
+      "sourceStartFrame": 41747,
+      "sourceEndFrame": 41843,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Now, anyone on my team can open this workspace and generate content.",
+      "phraseId": 277,
+      "cameraStartFrame": 42221
+    },
+    {
+      "sourceStartFrame": 42513,
+      "sourceEndFrame": 42641,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And Claude pulls from the exact documents we uploaded and you never have to train it twice.",
+      "phraseId": 279,
+      "cameraStartFrame": 42987
+    },
+    {
+      "sourceStartFrame": 42808,
+      "sourceEndFrame": 42898,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But dragging and dropping documents is so slow.",
+      "phraseId": 280,
+      "cameraStartFrame": 43282
+    },
+    {
+      "sourceStartFrame": 43303,
+      "sourceEndFrame": 43475,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "If a client sends you a new document, you shouldn't have to download it and then upload it every single time.",
+      "phraseId": 287,
+      "cameraStartFrame": 43777
+    },
+    {
+      "sourceStartFrame": 44516,
+      "sourceEndFrame": 44714,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So, to fix this, I'll show you how to plug Claude directly with your Google Drive, Gmail, and all of your other apps to fix this exact problem.",
+      "phraseId": 290,
+      "cameraStartFrame": 44990
+    },
+    {
+      "sourceStartFrame": 46696,
+      "sourceEndFrame": 46982,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Now, let's be honest, your most important files aren't just all sitting on your desktop. They're scattered across all of your favorite apps like Google Drive, Gmail, Notion, and so much more.",
+      "phraseId": 298,
+      "cameraStartFrame": 47170
+    },
+    {
+      "sourceStartFrame": 47164,
+      "sourceEndFrame": 47345,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And instead of searching for them manually, you can use connectors to give Claude direct access to all of these apps.",
+      "phraseId": 299,
+      "cameraStartFrame": 47638
+    },
+    {
+      "sourceStartFrame": 47703,
+      "sourceEndFrame": 47834,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So I go to my settings here, and to get started, I connect both my Gmail and my Google Drive.",
+      "phraseId": 304,
+      "cameraStartFrame": 48177
+    },
+    {
+      "sourceStartFrame": 48580,
+      "sourceEndFrame": 48662,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And this completely changes how you work.",
+      "phraseId": 305,
+      "cameraStartFrame": 49054
+    },
+    {
+      "sourceStartFrame": 49017,
+      "sourceEndFrame": 49149,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "For instance, you can just open Claude, tell it to find the latest pricing proposal from a vendor.",
+      "phraseId": 306,
+      "cameraStartFrame": 49491
+    },
+    {
+      "sourceStartFrame": 49638,
+      "sourceEndFrame": 49752,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "It can scan your Gmail inbox, find the exact thread, and summarize the deal.",
+      "phraseId": 315,
+      "cameraStartFrame": 50112
+    },
+    {
+      "sourceStartFrame": 50076,
+      "sourceEndFrame": 50170,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "I can even ask it to write an email pushing back on the timeline.",
+      "phraseId": 318,
+      "cameraStartFrame": 50550
+    },
+    {
+      "sourceStartFrame": 51315,
+      "sourceEndFrame": 51414,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So it gets the email ready in Gmail, so I can one -click send it in Drafts.",
+      "phraseId": 337,
+      "cameraStartFrame": 51789
+    },
+    {
+      "sourceStartFrame": 52193,
+      "sourceEndFrame": 52263,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And the drive connector is just as powerful.",
+      "phraseId": 338,
+      "cameraStartFrame": 52667
+    },
+    {
+      "sourceStartFrame": 53113,
+      "sourceEndFrame": 53332,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "It can interact with all of the files in your drive so you can ask Claude to pull from your last meeting's meeting notes, or summarize all of the last quarter's planning docs.",
+      "phraseId": 347,
+      "cameraStartFrame": 53587
+    },
+    {
+      "sourceStartFrame": 53486,
+      "sourceEndFrame": 53593,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And it reads the live files directly from your Google Workspace.",
+      "phraseId": 348,
+      "cameraStartFrame": 53960
+    },
+    {
+      "sourceStartFrame": 53792,
+      "sourceEndFrame": 53910,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So you get the exact answers you need without ever opening another tab.",
+      "phraseId": 349,
+      "cameraStartFrame": 54266
+    },
+    {
+      "sourceStartFrame": 54219,
+      "sourceEndFrame": 54377,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And there are hundreds of other Claude connectors to help you cross all of your work, like marketing, finance, and so much more.",
+      "phraseId": 351,
+      "cameraStartFrame": 54693
+    },
+    {
+      "sourceStartFrame": 55783,
+      "sourceEndFrame": 55971,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But there's one more step to master. Once all of your files are connected, you need to automate your most repetitive tasks so they run on autopilot.",
+      "phraseId": 357,
+      "cameraStartFrame": 56257
+    },
+    {
+      "sourceStartFrame": 56058,
+      "sourceEndFrame": 56105,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Let's look into that right now.",
+      "phraseId": 358,
+      "cameraStartFrame": 56532
+    },
+    {
+      "sourceStartFrame": 56567,
+      "sourceEndFrame": 56839,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So, you've just connected your live files to Claude, but you're still telling it what to do every single day and prompting it. This is so inefficient.",
+      "phraseId": 359,
+      "cameraStartFrame": 57041
+    },
+    {
+      "sourceStartFrame": 57135,
+      "sourceEndFrame": 57271,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And if you want to completely automate a repetitive workflow, you need to use Claude Skills.",
+      "phraseId": 360,
+      "cameraStartFrame": 57609
+    },
+    {
+      "sourceStartFrame": 57777,
+      "sourceEndFrame": 57952,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And the skill is basically just a saved set of instructions that tells Claude how to handle a task step by step.",
+      "phraseId": 365,
+      "cameraStartFrame": 58251
+    },
+    {
+      "sourceStartFrame": 58702,
+      "sourceEndFrame": 58800,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And to get started, I go to my settings and then click customize.",
+      "phraseId": 370,
+      "cameraStartFrame": 59176
+    },
+    {
+      "sourceStartFrame": 59470,
+      "sourceEndFrame": 59595,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Then I go to my Skills tab and upload my own custom weekly report as a zip file.",
+      "phraseId": 377,
+      "cameraStartFrame": 59944
+    },
+    {
+      "sourceStartFrame": 60024,
+      "sourceEndFrame": 60084,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And this changes everything.",
+      "phraseId": 380,
+      "cameraStartFrame": 60498
+    },
+    {
+      "sourceStartFrame": 60996,
+      "sourceEndFrame": 61154,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "Instead of writing a massive prompt every Friday, I just go to Claude and type one sentence telling it to run my report skill.",
+      "phraseId": 388,
+      "cameraStartFrame": 61470
+    },
+    {
+      "sourceStartFrame": 61964,
+      "sourceEndFrame": 62021,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "The skill automatically triggers.",
+      "phraseId": 389,
+      "cameraStartFrame": 62438
+    },
+    {
+      "sourceStartFrame": 64086,
+      "sourceEndFrame": 64293,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And Claude collects completed tasks from my work folders, lists new client emails, and formats everything into a clean, beautiful document.",
+      "phraseId": 404,
+      "cameraStartFrame": 64560
+    },
+    {
+      "sourceStartFrame": 65020,
+      "sourceEndFrame": 65280,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So it follows my rules every single time and all you need to do is just tell AI once, save it as a skill, and it follows those instructions as the skill every single time.",
+      "phraseId": 407,
+      "cameraStartFrame": 65494
+    },
+    {
+      "sourceStartFrame": 67756,
+      "sourceEndFrame": 67914,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So now you know how to pick the right model, build custom apps through Claude Artifacts, and automate your entire workflow.",
+      "phraseId": 425,
+      "cameraStartFrame": 68230
+    },
+    {
+      "sourceStartFrame": 67989,
+      "sourceEndFrame": 68084,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "But, you still need the exact prompts to make this work.",
+      "phraseId": 426,
+      "cameraStartFrame": 68463
+    },
+    {
+      "sourceStartFrame": 68405,
+      "sourceEndFrame": 68523,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "So I put all of the specific instructions we covered today into a Claude cheat sheet.",
+      "phraseId": 428,
+      "cameraStartFrame": 68879
+    },
+    {
+      "sourceStartFrame": 69806,
+      "sourceEndFrame": 69976,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "It even includes bonuses like this one that automated my skill creation process and saves me hours each week.",
+      "phraseId": 430,
+      "cameraStartFrame": 70280
+    },
+    {
+      "sourceStartFrame": 70071,
+      "sourceEndFrame": 70149,
+      "reason": "Reviewed complete take; source order preserved",
+      "label": "And you can copy and paste it straight into your workspace.",
+      "phraseId": 431,
+      "cameraStartFrame": 70545
+    }
+  ],
+  "overlays": [],
+  "analysis": {
+    "sourceDurationSeconds": 2364.395102,
+    "keptSeconds": 372.906,
+    "removedSeconds": 1991.489,
+    "pauseMax": 0.0,
+    "head": 0.18,
+    "tail": 0.25,
+    "hardCuts": [
+      {
+        "start": 0,
+        "end": 41.58,
+        "kind": "setup",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 44.2,
+        "end": 49.39,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 54.52,
+        "end": 62.39,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 66.08,
+        "end": 170.56,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 178.28,
+        "end": 198.44,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 202.46,
+        "end": 223.62,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 227.98,
+        "end": 231.95000000000002,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 235.72,
+        "end": 242.5,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 243.98,
+        "end": 314.93,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 319.44,
+        "end": 323.33,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 326.38,
+        "end": 341.2,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 344.17999999999995,
+        "end": 350.94,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 353.43999999999994,
+        "end": 360.8,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 362.21,
+        "end": 401.82,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 406.64,
+        "end": 413.12,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 417.28,
+        "end": 427.48,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 431.64,
+        "end": 440.90000000000003,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 442.51,
+        "end": 457.24,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 461.64,
+        "end": 470.82,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 473.61999999999995,
+        "end": 498.6,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 504.41999999999996,
+        "end": 514.5,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 518.5,
+        "end": 546.0999999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 550.6,
+        "end": 568.3399999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 572.28,
+        "end": 591.1899999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 594.64,
+        "end": 602.0699999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 607.1,
+        "end": 637.64,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 642.4599999999999,
+        "end": 645.4399999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 648.1,
+        "end": 667.6999999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 671.68,
+        "end": 693.56,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 699.14,
+        "end": 798.8,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 803.18,
+        "end": 819.3199999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 822.74,
+        "end": 900.31,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 906.0799999999999,
+        "end": 944.92,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 949.0799999999999,
+        "end": 982.5,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 986.3399999999999,
+        "end": 1015.9599999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1020.66,
+        "end": 1029.08,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1032.66,
+        "end": 1040.33,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1045.2,
+        "end": 1051.55,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1054.98,
+        "end": 1070.5,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1074.2,
+        "end": 1089.61,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1092.98,
+        "end": 1111.3,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1115.22,
+        "end": 1123.53,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1127.84,
+        "end": 1145.98,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1150.78,
+        "end": 1157.83,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1159.52,
+        "end": 1179.18,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1185.04,
+        "end": 1203.06,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1209.32,
+        "end": 1220.46,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1224.6000000000001,
+        "end": 1315.3999999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1319.18,
+        "end": 1323.6,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1328.96,
+        "end": 1332.88,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1336.58,
+        "end": 1349.08,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1351.86,
+        "end": 1372.6,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1376.18,
+        "end": 1380.37,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1384.84,
+        "end": 1392.95,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1396.1999999999998,
+        "end": 1418.5,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1422.82,
+        "end": 1428.34,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1431.3999999999999,
+        "end": 1444.87,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1450.66,
+        "end": 1485.34,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1491.98,
+        "end": 1558.07,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1567.6499999999999,
+        "end": 1573.68,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1579.78,
+        "end": 1591.68,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1596.08,
+        "end": 1620.93,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1623.72,
+        "end": 1635.5,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1639.98,
+        "end": 1656.22,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1660.08,
+        "end": 1670.84,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1674.04,
+        "end": 1712.18,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1715.56,
+        "end": 1741.47,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1743.8799999999999,
+        "end": 1772.18,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1779.54,
+        "end": 1784.6200000000001,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1788.24,
+        "end": 1794.84,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1798.82,
+        "end": 1809.1,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1814.42,
+        "end": 1861.26,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1867.6,
+        "end": 1870.46,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1872.08,
+        "end": 1887.42,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1896.56,
+        "end": 1906.3999999999999,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1910.98,
+        "end": 1927.81,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1933.7,
+        "end": 1958.68,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1962.0,
+        "end": 1984.31,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 1988.52,
+        "end": 2002.78,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2004.84,
+        "end": 2035.2,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2040.52,
+        "end": 2067.5,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2069.46,
+        "end": 2138.3,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2145.28,
+        "end": 2169.48,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2178.2000000000003,
+        "end": 2260.78,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2266.0800000000004,
+        "end": 2268.5600000000004,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2271.76,
+        "end": 2282.42,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2286.4,
+        "end": 2329.1800000000003,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2334.88,
+        "end": 2338.0,
+        "kind": "retake-or-dead-space",
+        "reason": "Unselected retries/markers/waits between reviewed complete takes; see source disposition ledger."
+      },
+      {
+        "start": 2340.6800000000003,
+        "end": 2364.395102,
+        "kind": "editor-instructions",
+        "reason": "Recording-end discussion and trailing setup, after completed final CTA."
+      }
+    ]
+  },
+  "sourceWidth": 1920,
+  "sourceHeight": 1080,
+  "sync": {
+    "cameraOffsetSeconds": 15.81762012196729,
+    "cameraClockRate": 0.9999966706086166,
+    "formula": "cameraSeconds = cameraOffsetSeconds + voiceSeconds * cameraClockRate",
+    "measuredPoints": 9,
+    "maxResidualMilliseconds": 0.25867272518098616,
+    "checks": [
+      {
+        "cameraAt": 45,
+        "obsAt": 29.182375,
+        "obsMinusCamera": -15.817625,
+        "envelopeCorrelation": 0.9434423424692265
+      },
+      {
+        "cameraAt": 100,
+        "obsAt": 84.1826875,
+        "obsMinusCamera": -15.8173125,
+        "envelopeCorrelation": 0.941197156175808
+      },
+      {
+        "cameraAt": 180,
+        "obsAt": 164.183,
+        "obsMinusCamera": -15.817,
+        "envelopeCorrelation": 0.9188748287731993
+      },
+      {
+        "cameraAt": 240,
+        "obsAt": 224.1830625,
+        "obsMinusCamera": -15.8169375,
+        "envelopeCorrelation": 0.9576426425030894
+      },
+      {
+        "cameraAt": 300,
+        "obsAt": 284.1831875,
+        "obsMinusCamera": -15.8168125,
+        "envelopeCorrelation": 0.9212797932476516
+      },
+      {
+        "cameraAt": 500,
+        "obsAt": 484.1839375,
+        "obsMinusCamera": -15.8160625,
+        "envelopeCorrelation": 0.9198931390545069
+      },
+      {
+        "cameraAt": 650,
+        "obsAt": 634.18475,
+        "obsMinusCamera": -15.81525,
+        "envelopeCorrelation": 0.9235911443926169
+      },
+      {
+        "cameraAt": 1191.44,
+        "obsAt": 1175.626375,
+        "obsMinusCamera": -15.813625,
+        "envelopeCorrelation": 0.9223950253365071
+      },
+      {
+        "cameraAt": 2347.88,
+        "obsAt": 2332.0700625,
+        "obsMinusCamera": -15.8099375,
+        "envelopeCorrelation": 0.8652988446825778
+      }
+    ],
+    "status": "waveform measured; visual lip-sync review pending"
+  },
+  "sourceIdentities": {
+    "camera": "/Volumes/Untitled/PRIVATE/M4ROOT/CLIP/C0012.MP4",
+    "voice": "/Users/alexchensmacmini/Downloads/Claude For Beginners Sep 15.m4a",
+    "cameraOriginalBytes": 30736793474
+  }
+}

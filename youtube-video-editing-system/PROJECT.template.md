@@ -12,7 +12,10 @@ Status: INTAKE | PAPER EDIT | ASSEMBLY | GRAPHICS | MIX | REVIEW | APPROVED
 - Visual mode by section: footage-led | voiceover-explainer | mixed (separate from the assembly profile)
 - Target duration (only a hard limit when Alex specifies one; otherwise let the complete story determine it):
 - Resolution and fps:
-- CTA:
+- CTA: resource in description; no trial condition in video
+- Last spoken word/end frame (no animation-only tail):
+- Visual system: Claude Beginners; read CURRENT-DIRECTION.md
+- Speech master (external VO or OBS, verify per shoot):
 - Delivery destination:
 - Reference videos and what each reference contributes:
 - Explicit exclusions:

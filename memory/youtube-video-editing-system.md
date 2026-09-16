@@ -1,3 +1,7 @@
+# YouTube default update — September 15, 2026
+
+Use [Claude Beginners current direction](../youtube-video-editing-system/CURRENT-DIRECTION.md) for future YouTube edits. Warm cream/ink/clay Remotion system, active sprites, concrete narrated actions, aligned cursors, module navigation and full-film sound design. End with speech: never append animation-only footage. Video CTA says resource in description, never start a trial. The existing V7 is intentionally unchanged. Older conflicting defaults below are historical.
+
 # No Code Alex YouTube editing system
 
 September 13 documentation consolidation: [Higgsfield editing retrospective](../youtube-video-editing-system/projects/higgsfield-replacement/EDITING-RETROSPECTIVE.md) distills recurring failures, final choices, reasons and next-edit review gates. V23 remains the verified full export; no new render in this update. Current description chapters are simpler than the embedded titles. Full handoff and Drive-upload verification are separate; no successful Drive upload was confirmed. Retention ideas are hypotheses, not measured uplift.

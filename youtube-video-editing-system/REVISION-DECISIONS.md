@@ -1,3 +1,7 @@
+# September 15 — new default adopted
+
+[Claude Beginners retrospective](projects/claude-beginners/LEARNINGS.md) · [current contract](CURRENT-DIRECTION.md) · [source](projects/claude-beginners/README.md). Supersedes older conflicting defaults. No silent animated outro; description-only resource CTA, no trial requirement in video. Existing V7 unchanged.
+
 # Conversation decision ledger
 
 ## September 13 — consolidate and index the editing learnings

@@ -1,0 +1,30 @@
+{
+  "name": "claude-beginners-first-cut",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.tsx",
+    "render": "remotion render src/index.tsx ClaudeBeginnersFirstCut",
+    "preview:opening": "remotion studio src/opening-preview.tsx",
+    "render:opening": "node system/render-opening-preview.mjs",
+    "preview:opening10": "remotion studio src/opening-preview-10s.tsx",
+    "render:opening10": "node system/render-opening-preview.mjs --ten",
+    "preview:openingV2": "remotion studio src/opening-preview-v2.tsx",
+    "render:openingV2": "node system/render-opening-preview.mjs --v2",
+    "preview:opening30": "remotion studio src/opening-preview-30s.tsx",
+    "render:opening30": "node system/render-opening-preview.mjs --thirty --sound-v2",
+    "preview:opening60": "remotion studio src/opening-preview-60s.tsx",
+    "render:opening60": "node system/render-opening-preview.mjs --sixty",
+    "preview:half": "remotion studio src/half-preview.tsx",
+    "render:half": "node system/render-half.mjs --render-only",
+    "preview:half-actions": "remotion studio src/half-actions-preview.tsx",
+    "render:half-actions": "node system/render-half-actions.mjs --render-only --resume",
+    "preview:full": "remotion studio src/v7-full.tsx",
+    "render:full": "node system/render-v7.mjs --render-only"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.370",
+    "remotion": "4.0.370",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  }
+}

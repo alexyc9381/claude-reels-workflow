@@ -1,0 +1,66 @@
+{
+  "output": "/Users/alexchensmacmini/Documents/Codex/2026-09-15/right-now-what-i-need-you-2/outputs/Claude-Full-Animated-V7-Preview.mp4",
+  "decode": "passed",
+  "frames": 11057,
+  "videoDurationSeconds": 368.9352333333333,
+  "frameTimestampMaxErrorSeconds": 3.3333338933516643e-07,
+  "continuousAudio": true,
+  "audio": {
+    "input_i": "-16.88",
+    "input_tp": "-1.50",
+    "input_lra": "3.00",
+    "input_thresh": "-27.32",
+    "output_i": "-16.22",
+    "output_tp": "-1.50",
+    "output_lra": "2.80",
+    "output_thresh": "-26.62",
+    "normalization_type": "dynamic",
+    "target_offset": "0.22"
+  },
+  "media": {
+    "programs": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1920,
+        "height": 1080,
+        "avg_frame_rate": "30000/1001",
+        "start_time": "0.000000",
+        "duration": "368.935233",
+        "nb_frames": "11057",
+        "side_data_list": [
+          {}
+        ]
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "start_time": "0.000000",
+        "duration": "368.935011",
+        "nb_frames": "15890"
+      }
+    ],
+    "format": {
+      "duration": "368.936000",
+      "size": "120529132"
+    }
+  },
+  "reviewedFrames": [
+    0,
+    12,
+    45,
+    59,
+    61,
+    63,
+    65,
+    68,
+    72,
+    78
+  ],
+  "sourceTiming": "Unchanged V5/V6 timing map and audio mix; only opening camera treatment changed.",
+  "exportVisualQA": "Inspected export frames 0,12,30,59,61,65,70,78: wider subject, bed excluded, full-screen hold and transition intact.",
+  "desktopFile": "/Users/alexchensmacmini/Desktop/Claude Beginners - YouTube/Claude Beginners - Final V7.mp4",
+  "desktopCopyVerified": true
+}

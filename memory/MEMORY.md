@@ -1,3 +1,7 @@
+# YouTube default update — September 15, 2026
+
+Use [Claude Beginners current direction](../youtube-video-editing-system/CURRENT-DIRECTION.md) for future YouTube edits. Warm cream/ink/clay Remotion system, active sprites, concrete narrated actions, aligned cursors, module navigation and full-film sound design. End with speech: never append animation-only footage. Video CTA says resource in description, never start a trial. The existing V7 is intentionally unchanged. Older conflicting defaults below are historical.
+
 # Memory Index
 
 - [📶 Mac mini "bad internet"](mac-mini-wifi-not-claude.md) — 2.4GHz Wi-Fi, NOT Claude. Fix: Ethernet → 5GHz SSID → DNS 1.1.1.1

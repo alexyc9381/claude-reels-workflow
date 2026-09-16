@@ -1,0 +1,16 @@
+import React from 'react';
+import {AbsoluteFill,Img,staticFile,useCurrentFrame} from 'remotion';
+import {progress as p,Mouse,Outline} from './interaction-polish';
+import {Mascot} from './PreviewMascot';
+const ink='#292822',paper='#F4F1EA',clay='#C97355';
+export const CommunityReminder=()=>{const f=useCurrentFrame();if(f<10785)return null;return <div style={{position:'absolute',left:80,right:80,bottom:24,height:67,background:ink,color:paper,borderRadius:14,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 30px',fontFamily:'Arial',fontSize:28,opacity:p(f,10785,10796),zIndex:101}}><span><b style={{color:'#E7B496'}}>Claude Academy</b> · Prompt pack included with your free trial</span><b>Link in description ↓</b></div>};
+export const CommunityEndCard=()=>{const f=useCurrentFrame(),enter=p(f,0,12);return <AbsoluteFill style={{background:paper,fontFamily:'Arial',color:ink,overflow:'hidden'}}>
+<div style={{position:'absolute',left:95,top:73,fontSize:28,letterSpacing:4,color:clay}}>CLAUDE ACADEMY</div>
+<div style={{position:'absolute',left:95,top:152,fontFamily:'Georgia',fontSize:100,lineHeight:1.06,letterSpacing:-3}}>Make these workflows<br/>your own.</div>
+<div style={{position:'absolute',left:95,top:397,width:1080,height:372,borderRadius:24,overflow:'hidden',border:'2px solid #CDB89A',background:'#FFFCF7',transform:`translateY(${(1-enter)*35}px)`,opacity:enter}}>
+{['Join the community','Start your free trial','Get the prompt pack'].map((label,i)=>{const a=p(f,10+i*15,21+i*15);return <div key={label} style={{position:'absolute',left:28,top:25+i*113,width:1018,height:92,borderRadius:15,background:i===2?'#E1E8D7':'#EFE5D5',display:'flex',alignItems:'center',gap:24,padding:'0 24px',boxSizing:'border-box',transform:`translateX(${(1-a)*65}px)`,opacity:a}}><span style={{width:51,height:51,borderRadius:26,background:i===2?'#97AE84':clay,color:'white',display:'grid',placeItems:'center',fontSize:29}}>{i+1}</span><span style={{fontSize:39}}>{label}</span><span style={{marginLeft:'auto',fontSize:37,color:'#6D8559',opacity:p(f,23+i*15,30+i*15)}}>✓</span></div>})}
+</div>
+<div style={{position:'absolute',right:95,top:145,width:535,height:600,background:ink,color:paper,borderRadius:28,padding:40,boxSizing:'border-box',transform:`rotate(${2*(1-enter)}deg)`}}><div style={{fontSize:22,color:'#E7B496',letterSpacing:2}}>YOUR VIDEO COMPANION</div><div style={{fontFamily:'Georgia',fontSize:62,lineHeight:1.08,marginTop:26}}>Claude Beginners<br/>Prompt Pack</div><div style={{marginTop:32,fontSize:28,lineHeight:1.9}}>12 practical prompts<br/>Project setup checklist<br/>Bonus Skill builder</div><div style={{position:'absolute',right:26,bottom:27}}><Mascot lf={f} size={153} outfit="shirt" nodAmp={1}/></div><div style={{position:'absolute',left:39,bottom:54,color:'#E7B496',fontSize:24}}>Included in your trial</div></div>
+<div style={{position:'absolute',left:95,right:95,bottom:101,height:104,borderRadius:19,background:clay,color:'white',display:'flex',alignItems:'center',justifyContent:'center',fontSize:51,fontWeight:600}}>school.chen.media/claude-beginners</div>
+<div style={{position:'absolute',left:95,bottom:48,fontSize:25,color:'#756B5D'}}>Link in the description · Trial terms and membership price are shown on the page.</div>
+</AbsoluteFill>};

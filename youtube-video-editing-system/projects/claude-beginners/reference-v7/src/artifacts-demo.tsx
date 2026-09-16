@@ -1,0 +1,32 @@
+import React from 'react';
+import {interpolate,Easing} from 'remotion';
+const ink='#292822',clay='#C97355',paper='#F4F1EA';
+const p=(f:number,a:number,b:number)=>interpolate(f,[a,b],[0,1],{extrapolateLeft:'clamp',extrapolateRight:'clamp',easing:Easing.bezier(.16,.84,.22,1)});
+const ArtifactContents=({f}:{f:number})=>{const upload=p(f,8,38),built=p(f,65,115),hover=p(f,138,155)*(1-p(f,192,202)),layout=p(f,210,238),publish=p(f,274,283);return <div style={{position:'absolute',inset:0,background:'#FFFEFA',border:'2px solid #C9BEAF',borderRadius:24,overflow:'hidden',boxShadow:'0 20px 50px #30261915',fontFamily:'Arial',color:ink}}>
+ <div style={{height:64,background:ink,display:'flex',alignItems:'center',padding:'0 25px',gap:10}}>{[clay,'#CEBA99','#91A28D'].map(c=><span key={c} style={{width:12,height:12,borderRadius:20,background:c}}/>)}<span style={{color:paper,fontSize:22,marginLeft:20}}>Claude / Sales analytics</span><span style={{marginLeft:'auto',color:'#CDBA9F',fontSize:17}}>ARTIFACT PREVIEW</span></div>
+ <div style={{position:'absolute',left:0,top:64,width:310,bottom:0,background:'#F1EEE7',borderRight:'1px solid #D5CBBD',padding:23,boxSizing:'border-box'}}>
+  <div style={{fontFamily:'Georgia',fontSize:29,marginBottom:23}}>Let’s build it.</div><div style={{padding:17,background:'#E9DAC9',borderRadius:15,fontSize:23,lineHeight:1.3}}>Turn this CSV into an interactive sales dashboard.</div>
+  <div style={{marginTop:20,border:'2px dashed '+clay,padding:15,borderRadius:12,background:'#FFFCF7',opacity:upload}}><span style={{fontSize:26,color:clay}}>▤ </span><span style={{fontSize:21}}>sales.csv</span><div style={{fontSize:17,marginTop:7,color:'#83735F'}}>240 rows · uploaded ✓</div></div>
+  <div style={{marginTop:24,fontSize:21,color:'#7B6E5C',opacity:p(f,43,64)}}>{built<.98?'Building your dashboard…':'Your dashboard is ready.'}</div>
+  <div style={{marginTop:23,opacity:p(f,202,216),background:'#E9DAC9',padding:16,borderRadius:13,fontSize:22}}>Move the chart above the metrics.</div>
+  <div style={{position:'absolute',left:20,right:20,bottom:24,border:'1px solid #CCBEAA',borderRadius:15,padding:'16px 13px',color:'#8D806E',fontSize:20}}>Reply to Claude <span style={{float:'right',color:clay}}>↑</span></div>
+ </div>
+ <div style={{position:'absolute',left:333,top:87,right:25,display:'flex',alignItems:'center',fontSize:23}}><b>Sales overview</b><span style={{marginLeft:'auto',background:publish>.5?'#91A28D':clay,color:'white',padding:'10px 19px',borderRadius:9,fontSize:18}}>{publish>.5?'✓ Link copied':'Publish ↗'}</span></div>
+ <div style={{position:'absolute',left:334,top:150,right:25,bottom:26,background:'#F8F6F1',borderRadius:13,overflow:'hidden'}}>
+  <div style={{position:'absolute',inset:24,opacity:1-built,fontFamily:'monospace',fontSize:22,color:'#8C7059',lineHeight:1.8}}>{['const dashboard = createApp({','  data: sales.csv,','  metrics: [revenue, orders],','  chart: interactive,','  filters: monthly','});'].map((s,i)=><div key={s} style={{opacity:p(f,42+i*7,50+i*7)}}>{s}</div>)}</div>
+  <div style={{opacity:built,transform:`translateY(${(1-built)*35}px)`}}>
+   <div style={{position:'absolute',left:20,top:19+layout*292,right:20,display:'flex',gap:12}}>{[['$48.2k','REVENUE'],['240','ORDERS'],['18.6%','GROWTH']].map(([v,label],i)=><div key={label} style={{flex:1,height:96,background:i===0?'#ECD0BA':'#E9E5DC',borderRadius:10,padding:15,boxSizing:'border-box'}}><div style={{fontSize:13,letterSpacing:1.5,color:'#7E6D58'}}>{label}</div><div style={{fontSize:35,marginTop:7}}>{v}</div></div>)}</div>
+   <div style={{position:'absolute',left:20,right:20,top:136-layout*116,height:260,border:'1px solid #DAD2C5',borderRadius:12,background:'white',overflow:'hidden'}}>
+    <div style={{position:'absolute',left:18,top:15,fontSize:20}}>Monthly revenue</div><div style={{position:'absolute',right:15,top:12,padding:'5px 12px',background:'#F0EBE2',borderRadius:7,fontSize:15}}>Last 6 months ▾</div>
+    <svg width="100%" height="260" viewBox="0 0 685 260">{[89,144,199].map(y=><path key={y} d={`M30 ${y}h625`} stroke="#E8E2D8" strokeWidth="1"/>)}{[70,107,93,138,158,183].map((h,i)=><g key={i}><rect x={47+i*103} y={216-h*p(f,78+i*5,103+i*5)} width="57" height={h*p(f,78+i*5,103+i*5)} rx="6" fill={i===4&&hover>.1?clay:i===5?'#BB8066':'#DCC0A6'}/><text x={75+i*103} y="243" textAnchor="middle" fontSize="15" fill="#807360">{['Jan','Feb','Mar','Apr','May','Jun'][i]}</text></g>)}</svg>
+    <div style={{position:'absolute',left:381,top:39,background:ink,color:'white',padding:'10px 17px',borderRadius:8,fontSize:19,opacity:hover,transform:`translateY(${(1-hover)*8}px)`}}>May · $8,900</div>
+   </div>
+   <div style={{position:'absolute',left:21,top:415,right:20,display:'flex',fontSize:18,color:'#88745D',justifyContent:'space-between'}}><span>Updated from sales.csv</span><span style={{color:'#73836B'}}>● Live preview</span></div>
+  </div>
+ </div>
+ <div style={{position:'absolute',left:395-upload*340,top:205+upload*82,padding:15,background:clay,color:'white',borderRadius:13,fontSize:24,transform:`rotate(${-8+upload*8}deg)`,opacity:1-p(f,33,40)}}>▤ sales.csv</div>
+ <svg width="41" height="51" viewBox="0 0 35 46" style={{position:'absolute',left:f<=40?475-upload*340:interpolate(f,[40,125,155,192,202,215,238,270],[135,700,845,845,240,240,900,1010],{extrapolateLeft:'clamp',extrapolateRight:'clamp'}),top:f<=40?230+upload*82:interpolate(f,[40,125,155,192,202,215,238,270],[312,430,370,370,505,505,315,118],{extrapolateLeft:'clamp',extrapolateRight:'clamp'}),filter:'drop-shadow(0 3px 4px #0003)'}}><path d="M2 2v34l9-8 8 16 8-4-9-15 14-1z" fill={ink} stroke="white" strokeWidth="2"/></svg>
+ {publish>.01&&<div style={{position:'absolute',left:458,top:262,background:ink,color:paper,borderRadius:18,padding:'27px 40px',fontSize:29,boxShadow:'0 14px 36px #0003',opacity:publish,transform:`translateY(${(1-publish)*20}px)`}}>✓ Your app has a shareable link.</div>}
+</div>};
+
+export const ArtifactDemo=({f}:{f:number})=>{const focus=p(f,132,151)*(1-p(f,188,207));return <div style={{position:'absolute',inset:0,overflow:'hidden',borderRadius:24}}><div style={{position:'absolute',inset:0,transform:`scale(${1+.16*focus})`,transformOrigin:'77% 56%'}}><ArtifactContents f={f}/><svg width="1110" height="642" style={{position:'absolute',inset:0,pointerEvents:'none'}}><ellipse cx="855" cy="357" rx="68" ry="117" fill="none" stroke="#C97355" strokeWidth="4" pathLength="1" strokeDasharray="1" strokeDashoffset={1-p(f,157,184)} opacity={1-p(f,190,204)} transform="rotate(-6 855 357)"/></svg></div></div>};
