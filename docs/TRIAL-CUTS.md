@@ -4,6 +4,8 @@
 **LM follow-up:** [different mechanisms, soundtrack windows and honest checks](../memory/alex-lm-hooks-demo-and-delivery.md).
 User-requested hook-only trials may share a body. Report opening and whole-video comparisons separately;
 no dHash score establishes Instagram uniqueness or distribution performance.
+**Controlled hook experiment:** [JEV-001 plan and blank tracker](../analytics/experiments/JEV-001/README.md). Keep the body fixed when testing opening mechanisms; do not change it to chase perceptual-hash distance.
+
 **Companion:** `memory/reel-trial-variants.md` ranks the levers; this adds the
 **measurement**, and the discovery that the ranking alone was not enough.
 

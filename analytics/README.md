@@ -30,3 +30,7 @@ Open `pull_ig_insights.py` — it's the puller that fetches IG insights via the 
 - [`../script-factory/`](../script-factory/) — the pipeline whose POST-PUBLISH AUTOPSY consumes this data; see memory `script-factory-pipeline`.
 - [`../memory/MEMORY.md`](../memory/MEMORY.md) — rules index; per-reel factory logs hold the Stage-4 predictions this loop scores against.
 - [`../docs/CONVENTIONS.md`](../docs/CONVENTIONS.md) — the shared README skeleton and naming rules.
+
+## Hook-family experiments
+
+[JEV-001: hatch, zipper and balloon](experiments/JEV-001/README.md) includes the controlled-edit design, posting rotation, age-matched blank tracker, and promotion criteria. Results are pending; tracking is not connected.

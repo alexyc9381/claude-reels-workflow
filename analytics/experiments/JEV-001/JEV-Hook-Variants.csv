@@ -1,0 +1,4 @@
+experiment_id,variant_id,family,filename,duration_s,hook_end_s,status
+JEV-001,A,hinged_access_reveal,155_JEV_Hook-A_Hatch.mp4,42.2,3.633333,prepared_not_posted
+JEV-001,B,progressive_zipper_reveal,155_JEV_Hook-B_Zipper.mp4,42.2,3.633333,prepared_not_posted
+JEV-001,C,balloon_pressure_release,155_JEV_Hook-C_Balloon.mp4,42.2,3.633333,prepared_not_posted
