@@ -30,3 +30,10 @@ Alex rejected the isolated retention repairs and specified the run from 41 secon
 ### v4 — enforce the repeated ALL CAPS header instruction
 
 User rejected mixed-case headers in v3. Uppercase every SCOPE main/scene header, including the human-writing and story-structure changes inside scenes. Shared HookHeader and SectionHeader now enforce the standing capitalization rule. Preserve v3 motion, audio, captions, and 1705-frame endpoint. Validate rendered header fit before delivery.
+
+
+### September 15 — persistence check
+
+Confirmed both the ending-rebuild and ALL CAPS commits are present in remote main. Consolidated the whole thread's reusable lessons in [the SCOPE learning](../alex-scope-ending-rebuild.md), including spoken-word timing, the precise count-up request, full-sequence revision scope, final-consonant cut, and the repeated capitalization rule.
+
+The delivered [v4 MP4](https://drive.google.com/file/d/1XnqEKJN2wwUfbbSCwZFCSvJhy9m273cH/view) was verified on September 11. All 21 header states were inspected for uppercase and fit; the final encode has 1705 frames and passed 9/9 ship checks. These checks do not establish user approval or a retention improvement.

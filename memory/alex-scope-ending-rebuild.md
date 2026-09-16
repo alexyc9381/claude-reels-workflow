@@ -32,3 +32,14 @@ The mechanisms illustrate the workflow; they are not represented as actual produ
 6. Re-time sound with the new action map. Verify the final encoded duration and file, not only source constants or transcript timing.
 
 No new retention measurements are available. These revisions address the explicit creative feedback; retention improvement remains unmeasured.
+
+## Standing lessons consolidated September 15
+
+Alex explicitly requested that the learnings from this thread be remembered and pushed. Read this together with [the ALL CAPS header rule](reel-header-all-caps.md) before future reel work and revisions.
+
+- **Every main and scene header is ALL CAPS.** This includes within-scene text changes and revisions whose primary request concerns something else. Preserve wording, check uppercase text for fit, and do not uppercase narration or karaoke captions automatically. V3 missed an already recorded rule; v4 corrected all 21 rendered header states. Shared header enforcement supplements memory.
+- **Match the demonstrated event to the spoken word.** In the opening comparison, shift the magnifying glass on “this,” leaving the preceding side visible long enough to read. Do not anticipate away the object the voice is still discussing.
+- **Turn statistics into a readable event.** For this reel's “93% of the time” beat, the requested treatment is a 0–93.2% count-up with a synchronized ding and green confirmation at the endpoint. Preserve the precise statistic. This is the SCOPE treatment, not a requirement to put counters in every reel.
+- **Replace an entire rejected run.** Starting at 41s meant all following scenes, not just the earlier reported 39s and 55s points. Use distinct actions, meaningful consequences, expressive Claude performance and readable visual hierarchy; idle motion and zoom alone do not satisfy the feedback.
+- **End on the actual spoken keyword.** Inspect the final consonant and snap to the next frame boundary; SCOPE ends at 56.833s without an outro hold.
+- **Keep evidence honest.** The 39s/55s losses were user-reported. The visual explanations are hypotheses, and technical checks do not prove recovered retention or creative approval.
