@@ -53,7 +53,7 @@ The recognizable ChatGPT sprite must do work: reach toward a real field, scan a 
 2. Inspect full-resolution highlight frames, graphic sharpness and crop, header centering, caption safe zones, sprite contact and the final action. Check the entire duration of moving overlays, not one thumbnail.
 3. Listen specifically for complete word onsets/tails, keyboard identity and audibility, varied opening effects and residual gaps. Technical gates supplement this review; earlier passes did not catch wrong highlight positions or the disliked synthetic keyboard sound.
 4. Keep source-time and delivered-time mappings, paired cuts, original VO and camera, audio builder, source assets and revision notes in the editable source ZIP. Wait for encoding to finish and verify full decode, duration, sync and loudness before packaging.
-5. Update the existing MP4 and source ZIP through the Google Drive connector, then read back metadata and verify sizes. Do not use browser automation for Drive. If no connector tools are exposed, report the upload as pending; do not equate a local export with Drive delivery.
+5. Update the existing MP4 and source ZIP through the Google Drive connector, then read back metadata and verify sizes. Do not use browser automation for Drive. The user also authorized the Google Drive desktop app: overwrite the existing synced files, verify local hashes, and wait until the app explicitly reports Successfully uploaded for each file. A local copy or a generic Up to date indicator before the upload begins is not delivery. If neither route completes, report the upload as pending.
 6. Publish and verify the promised article and commit its source. Re-check current offer terms before future reuse; this reel's price, deadline and eligibility are not evergreen facts.
 
 ## Reference and status at documentation time
@@ -65,6 +65,6 @@ Latest local delivery revision 10 / render v15: 1080x1920, 30fps, 1104 frames / 
 - [Post folder](https://drive.google.com/drive/folders/1sNQnOxaafxz-mf5Bf8ru-MxqiWWfQxu1)
 - [Student offer article](https://chen.media/guides/chatgpt-student-offer), publishing source recorded at `alexyc9381/chenmedialabs` commit `1a62ce0`.
 
-As of this documentation update, revision 10 is local and its upload is pending: the last recorded Drive revision is 3. The connection discovery still reports Google Drive not installed for this task. Verify fresh remote metadata after upload before calling those links current.
+Revision 10 was uploaded through the Google Drive desktop app after explicit user authorization. Both existing synced files matched the local export SHA-256 hashes, and the desktop app subsequently reported Successfully uploaded and Synced for the MP4 and source ZIP. Connector metadata readback was unavailable; completion was verified through the desktop app.
 
 [ChatGPT index](../README.md) · [CODES baseline](codes-phone-demo.md) · [General camera and external-VO rules](../../memory/chatgpt-face-camera-and-separate-vo.md)
