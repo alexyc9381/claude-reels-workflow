@@ -57,3 +57,7 @@ JEV's “up to 200× faster / 400× cheaper” visuals reference TypeSafe's sele
 Revision 9: 1080×1920, 30fps, 42.2s; 84px Fraunces captions, 890px width budget including active-word lift, max three words, 190 words in 80 groups. The packaged `build_captions.py` regenerates captions/SRT and asserts coverage/width/timing before render. Earlier caption helpers that shrink to fit must not be reused unchanged. Port the checks to the next project's actual font/layout.
 
 The final delivery needed full-range → limited-range BT.709 conversion and a measured 42.6667ms audio trim for that render path. Measure a new render's offset before applying any correction; do not copy the trim blindly. See [[jev-hook-performance-first]], [[jev-caption-size-and-visual-feedback]], [[reel-motion-hierarchy]], [[reel-declutter-single-hero]] and [[caption-sync-gate]].
+
+## Header correction: preserve the house component
+
+Alex clarified that the JEV hook header was wrong because it had become plain text instead of the usual upper-video design. Changing headline words is not permission to replace the chrome. Use the existing `SectionHeader` hero treatment: rounded cream plate, raised white Claude logo badge, dark top line, clay second line, ALL CAPS. Fit and position it so the plate does not cover the hero/face. Keep the same treatment across hook variants. The racetrack ChatGPT and Claude logo heads were also enlarged by 50% after explicit feedback. These are editing preferences, not measured performance findings.
