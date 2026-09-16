@@ -56,3 +56,9 @@ Tracking is prepared, not connected to live accounts and not scheduled. Once pos
 ## Shared opening header
 
 All three versions use “200X FASTER + CHEAPER / THAN CHATGPT · CLAUDE” from frame 0 through frame 108. A smaller line scopes this as “UP TO · TYPESAFE’S SELECTED-TASK CLAIM.” The header is constant across variants, so this round does not isolate headline wording.
+
+## Added challenger D: racetrack overtake
+
+D depicts ChatGPT and Claude running while JEV accelerates past with a Doppler ZOOM. This is an illustrative speed metaphor, not a timed benchmark. It changes the same first 109 frames and hook Foley only; header, narration, music, captions and body match A/B/C. It has no collected results.
+
+If testing all four families, use four comparable posting slots per topic and rotate orders A–B–D–C, B–C–A–D, C–D–B–A, D–A–C–B, then repeat that cycle across eight topics. Do not mix this four-arm protocol with the earlier three-arm six-order schedule. Evaluate each platform separately using the same primary metric chosen before posting. Treat at least six of eight matched-topic wins plus median ≥3 percentage-point primary-metric lift (or the declared 10% watch-time proxy) without consistent downstream loss as a practical promotion rule, not statistical proof. If A/B/C are already posted, log D as a later challenger with the timing confound.

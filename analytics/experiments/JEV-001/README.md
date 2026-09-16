@@ -12,3 +12,9 @@
 - Test separately by platform at 24h, 72h, and 7d. Repeat hook families across six topics and rotate order before promoting a winner. Posting times, organic exposure and repeated audience are confounds.
 
 [Experiment assets and editable project](https://drive.google.com/drive/u/0/folders/1Pkl7_MkfTaQfarkP0kQ70Iti8_hsS8WV)
+
+## Added D: racetrack challenger
+
+User requested a running race with ChatGPT and Claude and a JEV overtake with a ZOOM sound. Added D using the same opening-only boundary and unchanged shared header/body. Physical gait is visible immediately; JEV winds up, passes both runners, breaks a finish tape and continues out. An initial floating performance pennant was removed because it repeated the header and covered JEV; the start flag was moved clear of the founder. The ZOOM is a deterministic stereo Doppler cue synchronized to acceleration and passing. Track paint was revised after the frame-zero brightness check, retaining dark runner outlines and body shading.
+
+A fresh critic reviewed the frame strip and selected native frames, with no remaining material visual blockers after the action fixes. This is sampled-frame evidence, not full-speed human audiovisual review or user approval. The tracker adds D rows, and the plan distinguishes a four-arm rotation from the previous three-arm protocol. No posts or performance results have been collected.
