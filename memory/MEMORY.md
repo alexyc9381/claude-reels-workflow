@@ -10,6 +10,8 @@ Use [Claude Beginners current direction](../youtube-video-editing-system/CURRENT
 
 ## ChatGPT account
 
+- [MARKETING agent-team learnings](../chatgpt/variants/marketing-agent-team.md): distinct active hook events, narration-gated specialists, original soundtrack from 8s at frame zero, word-safe paired cuts, late MAR reveal across every surface, CTA-first caption and one final video plus caption in Drive.
+
 - [ChatGPT format and post index](../chatgpt/README.md).
 - [CODES phone-demo learnings](../chatgpt/variants/codes-phone-demo.md): final camera, headers, captions, sound, sprite crowning, timing, and article delivery rules.
 
