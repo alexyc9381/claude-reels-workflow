@@ -1,0 +1,29 @@
+sfx_audit · 18 distinct cues
+
+     bell-ding.wav          dur  0.55s  attack    29ms  >2kHz  92.5%  <250Hz   0.0%
+     bubble-pop.wav         dur  0.12s  attack    10ms  >2kHz   8.7%  <250Hz   2.1%
+     chain.wav              dur  0.56s  attack    97ms  >2kHz  36.5%  <250Hz  26.6%
+     check-pop.wav          dur  0.63s  attack     4ms  >2kHz  32.6%  <250Hz   2.5%
+     gear-stutter.wav       dur  0.55s  attack   125ms  >2kHz  26.4%  <250Hz  33.7%
+     impact_deep.wav        dur  0.94s  attack    34ms  >2kHz   0.4%  <250Hz  92.4%
+     lamp-switch.wav        dur  0.78s  attack    69ms  >2kHz  59.9%  <250Hz  22.3%
+  ⛔ mechanical-keys.wav    dur  0.64s  attack   383ms  >2kHz  64.5%  <250Hz   3.5%  AIR
+     mechanism.wav          dur  0.61s  attack    73ms  >2kHz  39.0%  <250Hz  20.8%
+     message-ping.wav       dur  0.37s  attack    28ms  >2kHz   2.1%  <250Hz   7.7%
+     metal-clack.wav        dur  0.13s  attack    16ms  >2kHz  32.0%  <250Hz   1.6%
+     mouse-deep.wav         dur  0.07s  attack    19ms  >2kHz  87.3%  <250Hz   1.9%
+     positive-chime.wav     dur  1.70s  attack    71ms  >2kHz   2.2%  <250Hz  16.4%
+  ⛔ robot-chatter.wav      dur  1.11s  attack   340ms  >2kHz  12.0%  <250Hz  35.3%  SWELL-316ms
+     robot-jam.wav          dur  0.78s  attack   102ms  >2kHz  22.2%  <250Hz  15.6%
+     servo-motor.wav        dur  1.20s  attack    54ms  >2kHz  18.3%  <250Hz  21.8%
+     thock.wav              dur  0.19s  attack     9ms  >2kHz   0.5%  <250Hz  92.9%
+     unlock.wav             dur  0.87s  attack    26ms  >2kHz  22.0%  <250Hz   0.3%
+     bubble-pop.wav         used  7x  >2kHz   8.7%  ok
+     gear-stutter.wav       used  5x  >2kHz  26.4%  ok
+  ⛔ mechanical-keys.wav    used  6x  >2kHz  64.5%  SLAP
+     metal-clack.wav        used  5x  >2kHz  32.0%  ok
+     positive-chime.wav     used 10x  >2kHz   2.2%  ok
+     servo-motor.wav        used  6x  >2kHz  18.3%  ok
+     thock.wav              used  6x  >2kHz   0.5%  ok
+
+FLAGGED: mechanical-keys.wav (AIR), robot-chatter.wav (SWELL-316ms), mechanical-keys.wav (SLAP (6x, 64% bright))

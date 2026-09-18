@@ -12,6 +12,8 @@ render, or a re-record. Read the section that matches what you are about to do.
 
 ## Index
 
+**September 18, 2026: [JOB 139 → 159: actions, sound and delivery](memory/alex-job-hook-action-sound-and-delivery.md).** Why a reveal needs another operation, why generic graphics remain boring, how to make fast motion causal, when realistic UI versus a physical metaphor helps, how to compare audible Foley stems and verify a requested music passage, how to gate a late keyword across captions, and how explicit new-number delivery differs from a revision. [Feedback ledger and evidence](memory/reels/job159-revision-record.md).
+
 **September 16, 2026: [J-157 causal animation and trial lessons](memory/alex-j157-causal-animation-and-trials.md).** Replace weak concepts across the body; stage anticipation/contact/result, preserve real assets and sprite performance, fix hierarchy and contact geometry, carry final body corrections to every trial, and never treat disclosed gate failures as approved exceptions. Distinct from JEV-155.
 
 **September 16, 2026: [JEV action, hierarchy and review](memory/alex-jev-action-hierarchy-and-review.md).** Passing motion gates did not prevent repeated hook rejection. Rebuild the dominant operation, carry the result into a consequence, preserve prop contact and large captions, and gate the CTA across all surfaces. [Full timestamped revision record](memory/reels/jev-revision-record.md).

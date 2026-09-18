@@ -1,5 +1,7 @@
 # Sound Design — the house system
 
+**JOB follow-up:** [action-specific robot/keyboard sounds, stem comparisons and music source offset](../memory/alex-job-hook-action-sound-and-delivery.md#6-sound-must-identify-the-action-and-be-audible-against-the-other-stems). Requested 8.000s source offset at frame zero, disclosed source-specific spectral flags, and no subjective listening claim. These do not relax named air/whoosh bans or establish universal gains.
+
 How every reel gets its audio. Implemented in [`video/src/SoundKit.tsx`](../video/src/SoundKit.tsx);
 reference wiring in [`video/src/OpenReel.tsx`](../video/src/OpenReel.tsx) (reel 79 OPEN).
 

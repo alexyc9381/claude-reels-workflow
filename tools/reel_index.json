@@ -1,11 +1,11 @@
 {
   "counts": {
     "reels_with_code": 121,
-    "reels_total": 168,
+    "reels_total": 169,
     "factory_logs": 81,
-    "storyboards": 85,
+    "storyboards": 86,
     "caption_jsons": 133,
-    "memory_md": 267,
+    "memory_md": 269,
     "creators": 8,
     "packs": 3
   },
@@ -1907,6 +1907,15 @@
         "video/src/data/words_jobs.json",
         "video/src/data/words_judge132.json"
       ]
+    },
+    {
+      "key": "job",
+      "name": "job",
+      "number": 159,
+      "code": null,
+      "log": null,
+      "storyboard": "storyboards/159-job.md",
+      "captions": []
     }
   ]
 }

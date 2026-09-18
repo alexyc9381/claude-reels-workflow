@@ -1,0 +1,13 @@
+# Audio review and explicit keyboard exception
+
+The music's 8.000-second start is independently decoded from the original MP3 and compared sample-for-sample with the first three seconds of the prepared unfiltered source window. This checks the actual chosen music passage, not just a configuration value.
+
+Sound sources are the user's AM Creator library plus the existing low thock/deep-impact files. Multi-variation files are separated at silent gaps. Mechanical/UI lead-ins are trimmed to align the contact; decay tails are retained. The sequence uses 66 action cues across 46.8 seconds, below 1.5 cues/second. Every cue's source, timing, level, excerpt, playback rate and retained tail is recorded. The SFX stem, music stem and pre-limited master are measured separately; cue energy in the full mix is not treated as proof of audibility.
+
+The legacy SFX audit flags **mechanical-keys.wav** for AIR and SLAP. This is the actual `Keyboard 04 - Mechanical.wav` recording, used in different short excerpts on six visible typing/keyboard actions. Its loudest stroke occurs later within a multi-stroke recording, so the audit's peak-based attack metric does not represent a single air swell. The requested crisp mechanical typing intentionally retains high-frequency keystrokes. The user's explicit request for loud mechanical typing takes precedence over suppressing this detail to clear the brightness heuristic. The original report is included without altering its thresholds or labeling it a clean pass. No named air/whoosh sample is used.
+
+Per-file contact, tail, spectrum, density, clipping and source checks were performed. A subjective listening test and small-speaker playback were not available; signal checks cannot establish subjective sound quality.
+
+The added robot chatter is an excerpt of AM Creator UI 31 Robot Error. Its multi-note synthetic phrase peaks later than its first note, so the legacy peak-based SWELL check flags it. It has 35.3% energy below 250 Hz and 12.0% above 2 kHz; this is the specifically requested robotic vocalization, not a named air/whoosh source. This exception is disclosed, and the unchanged audit is retained. Servo and metal contact recordings were made darker and aligned to their initial contacts to avoid bright repeated slaps. The sustained scanner recording was rejected and is not used in the mix.
+
+For this revision, hook contacts move to the faster stomp/launch; setup uses cartridge lift, insertion, engine activation and deployment; the ending uses book landing/opening, a physical link throw and catch, and a late CTA chime. The original robot mix and the user-requested music passage remain. Subjective playback was not performed.

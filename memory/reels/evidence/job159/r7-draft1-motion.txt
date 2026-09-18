@@ -1,0 +1,54 @@
+
+  scene                   MOTION  top share DEADRUN    HOLD  verdict
+  ----------------------------------------------------------------------------
+  hook                     17.05      0.067       3     13%  ok
+  kit                      15.63      0.074       0     32%  ok
+  post                      9.99      0.087       9     15%  ok
+  comment                  13.58      0.070       0     21%  ok
+  reply                    11.67      0.078       0     25%  ok
+  profile                  17.19      0.069       0     18%  ok
+  week                     15.43      0.075       0     20%  ok
+  plan                      8.46      0.095       6     16%  ok
+  robot                     6.69      0.145      12     11%  ok
+  human                     7.57      0.093       0     12%  ok
+  dash                      9.81      0.121       0     17%  ok
+  words                    13.27      0.088       0     21%  ok
+  checks                    5.34      0.088       9     12%  STATIC
+  rogue                     6.78      0.078      12     13%  ok
+  yes                       7.05      0.111       3     13%  ok
+  review                   10.97      0.097       6     20%  ok
+  install                   7.50      0.080       6     13%  ok
+  ask                      11.03      0.077      12     14%  ok
+  cta                       7.62      0.078      12     14%  ok
+  ----------------------------------------------------------------------------
+  median motion 9.99  (bar 9.00, approved reel 81 = 9.82)
+  scenes failing: 1/19
+
+
+scene_tail_audit · draft1.mp4
+  ⛔ a scene MEAN cannot see where inside the scene the motion was.
+
+  scene        mean     Q1     Q2     Q3     Q4   TAIL   verdict
+  --------------------------------------------------------------------
+  hook        17.05  19.16  23.52  13.96  11.46   0.67   fading
+  kit         15.63  30.30  13.13  11.52   9.34   0.60   fading
+  post         9.99  13.57   4.38   3.44  18.56   1.86   ok
+  comment     13.58  36.97   3.95   9.40   8.80   0.65   fading
+  reply       11.67  26.51   3.35   9.60   7.23   0.62   fading
+  profile     17.19  44.00  12.36   6.60  14.74   0.86   ok
+  week        15.43  39.72   7.57   6.38  14.12   0.92   ok
+  plan         8.46  11.83   3.32   6.82  12.28   1.45   ok
+  robot        6.69   6.97   7.74   6.90   5.16   0.77   ok
+  human        7.57   9.24   7.83   7.45   6.02   0.80   ok
+  dash         9.81  11.40  11.50   5.67  10.65   1.09   ok
+  words       13.27  17.53   8.52  12.75  14.30   1.08   ok
+  checks       5.34   7.90   2.83   5.55   5.09   0.95   ok
+  rogue        6.78  14.00   6.87   6.62   0.52   0.08   STALLS — arrives then sits
+  yes          7.05   5.31   4.82   9.26   8.53   1.21   ok
+  review      10.97  21.83   7.50   4.57  10.13   0.92   ok
+  install      7.50  17.34   3.47   1.55   8.12   1.08   ok
+  ask         11.03  15.08   2.60   5.81  19.44   1.76   ok
+  cta          7.62  17.26   1.30   4.69   8.34   1.09   ok
+  --------------------------------------------------------------------
+  scenes that stall in their last quarter: 1/19
+  ⛔ rogue

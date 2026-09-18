@@ -1,0 +1,80 @@
+[
+  {
+    "name": "159_JOB_Setup.png",
+    "size": 717482,
+    "sha256": "a85929dd5d255af8700b82c5404f828df37fefac6201c64e95f5e30e20588b48",
+    "md5": "c265b6affba2bd8eef1fa30f585f6e72"
+  },
+  {
+    "name": "159_JOB_Hook.png",
+    "size": 856926,
+    "sha256": "26e6d3108ecd20e39affc0199db8b186bac1e639ae301a00ec3ba56c5604d139",
+    "md5": "49c5b43f77e27127c4f80801010b477c"
+  },
+  {
+    "name": "159_JOB_Storyboard.md",
+    "size": 2157,
+    "sha256": "820d8298c1620d8d1e257a10e8762eaddd3c4ccb083c4130df19e794d0c2837c",
+    "md5": "e2b5b9e5020e549441528af8e07537af"
+  },
+  {
+    "name": "159_JOB_Scene_Overview.jpg",
+    "size": 523470,
+    "sha256": "34a0f3ee28fbec7b08bbbfdcfd5120ea4139760d1512a2f900ffbc0e0fba0eae",
+    "md5": "f5294f0f25b109255c2a17998f7137d5"
+  },
+  {
+    "name": "159_JOB_Links.txt",
+    "size": 588,
+    "sha256": "39c194006bd22a718e63e07cb1d8681a0ea0357f615f86867c598aff47dfbb51",
+    "md5": "864be505a887411c1d3799f5a7c7c833"
+  },
+  {
+    "name": "159_JOB_Transcript.txt",
+    "size": 1267,
+    "sha256": "96364a51cd957194375c5e17475d23ab2818348105c2b1e1459b0554f3591495",
+    "md5": "933b44129a3e9590ac4236db7c658a37"
+  },
+  {
+    "name": "159_JOB_Captions.srt",
+    "size": 4385,
+    "sha256": "28cca70768485504055cfb517e3a2d8b7ed23266cebe6af233a448ad60a28083",
+    "md5": "98e48d2bdb2e7794bb0542439ccd5d06"
+  },
+  {
+    "name": "159_JOB_Edit_Notes.md",
+    "size": 3110,
+    "sha256": "16cd190d2792d8d0b5a0216637014654d0a2699697a4118b611a3c4ee4bd2353",
+    "md5": "538249d5e3a6a42aa655681699b5dbc0"
+  },
+  {
+    "name": "159_JOB.mp4",
+    "size": 16574179,
+    "sha256": "57f4cb9765597a39d5e8d6def06fe79fbf7902ca40b6d551794afd238610cc17",
+    "md5": "1bd5e303fec6df7c40ed6faa92493fe9"
+  },
+  {
+    "name": "159_JOB_caption.txt",
+    "size": 1012,
+    "sha256": "af5935929aeb9493336031ca99f320a47993b3aa8393cadcbc813e44de0af2c1",
+    "md5": "8c90587be4f91a8897c74eefdc29d8a1"
+  },
+  {
+    "name": "159_JOB_Editable_Source.zip",
+    "size": 21087415,
+    "sha256": "1ec429db98d64bee1c336a43b9e5ef94cab71f75e8174014801acfaef3546303",
+    "md5": "2439884e95a845a7981332ed1cfcb625"
+  },
+  {
+    "name": "159_JOB_Ending.png",
+    "size": 748879,
+    "sha256": "96a145588f747198649618482202c930d0af79f7d7cf35d7e831d492101a88cf",
+    "md5": "c2abbb238ace329331a56f3b833ee17e"
+  },
+  {
+    "name": "SHA256SUMS.txt",
+    "size": 1039,
+    "sha256": "e17c5c5e6215c2b511928191d90bb30745c8ed8bf8b0dc1131a22fe2a854c0d8",
+    "md5": "394e0d53a76bffad6961f817bf46d7cb"
+  }
+]

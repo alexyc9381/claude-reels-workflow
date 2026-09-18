@@ -1,0 +1,13 @@
+{
+  "duration": 46.78941666666667,
+  "music_source_start_s": 8.0,
+  "sfx_events": 66,
+  "cue_rate_per_second": 1.4105753972141135,
+  "distinct_effects": 18,
+  "voice_rms_db": -16.196040271736262,
+  "music_rms_db": -29.4674794092726,
+  "sfx_rms_db": -31.678213074009356,
+  "premaster_peak": 1.093065757589701,
+  "sfx_peak": 0.3658365436860236,
+  "review_limit": "File, signal, source-tail and contact checks; no subjective small-speaker listening test."
+}

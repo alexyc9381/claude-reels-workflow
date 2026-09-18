@@ -58,3 +58,10 @@ MP4 already existed; the response led him toward the source folder instead of th
 
 This clarification changes delivery presentation, not the user's sharing permissions or
 which folders should be public. Keep existing organization and sharing unless instructed.
+
+
+## Explicit new-number delivery — JOB September 18
+
+[JOB 139 → 159 record](reels/job159-revision-record.md): Alex explicitly requested a **new numbered video** after R8 delivery. Check the actual destination account and numbered parent, discover the latest number and check the next name for collision. Here latest 158 led to `159 - JOB/159_JOB.mp4`; the final video/source bytes stayed unchanged, supporting files were renamed, and checksum names were regenerated. Keep the earlier delivery unless deletion is separately authorized. This is an exception triggered by an explicit request, not permission to create a new folder on every routine revision.
+
+Local copy completion is not completed sync. JOB checked synced DriveFS metadata read-only for remote IDs and matching byte sizes/MD5 on all 13 files; that is not an independent remote re-download or preview-playback test. State the actual verification method. Lead with the standalone video, source archive second.

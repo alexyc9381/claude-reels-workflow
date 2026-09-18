@@ -1,0 +1,33 @@
+{
+  "scene_start_s": 44.52,
+  "reveal_animation_start_s": 45.82,
+  "caption_guard": "JOB suppressed for t < 45.82; other caption words unchanged",
+  "frames": [
+    {
+      "frame": 1351,
+      "time_s": 45.03333333333333,
+      "sha256": "badd1ef5386524b0ba295b8b14f3d82803f1a748c7c03e3beb3e99021cfee75d"
+    },
+    {
+      "frame": 1374,
+      "time_s": 45.8,
+      "sha256": "a1d4ed97588d43e267536104228a15186a4d3307f3ebea9a3bcfd5c6c04d70fb"
+    },
+    {
+      "frame": 1376,
+      "time_s": 45.86666666666667,
+      "sha256": "e10b18dbe424865230bf043a9d9668bba4292123863d27f2cf753af237417819"
+    },
+    {
+      "frame": 1386,
+      "time_s": 46.2,
+      "sha256": "0f4406c8c0545138b79ffe784a7ac699292d4ad73cb72bfb4db8fe913ea20e13"
+    },
+    {
+      "frame": 1400,
+      "time_s": 46.666666666666664,
+      "sha256": "25a7b25423d37c2a54cb6b7a10e018b90e76af9817172f8ac48f866bd6fe0262"
+    }
+  ],
+  "visual_review": "No JOB visible in the panel or captions at 45.03s or 45.80s. Reveal begins low in frame after 45.82s; CTA readable by 46.20s, retained through final shot."
+}

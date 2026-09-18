@@ -175,6 +175,11 @@ def scan_reels():
                 # OC is a two-letter keyword; substring matching also hits UNLOCK/AUTO C.
                 if (key == "oc" or f == "words_oc.json") and not (key == "oc" and f == "words_oc.json"):
                     continue
+                # JOB (159, previously 139) is distinct from JOBS (92).
+                # Its current caption data lives in the delivered source archive;
+                # do not imply that words_jobs.json belongs to this new reel.
+                if key == "job" and f != "words_job.json":
+                    continue
                 stem = f[:-5]  # drop .json
                 if norm(stem) in GENERIC or not keep(f"video/src/data/{f}"):
                     continue

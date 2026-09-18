@@ -1,0 +1,9 @@
+{
+  "music_source_offset_s": 8,
+  "independent_pcm_match": true,
+  "comparison_samples_per_channel": 144000,
+  "event_tails_truncated": 0,
+  "cues": 66,
+  "distinct_effects": 18,
+  "review_limit": "Objective source/stem checks; subjective playback and small-speaker audition not performed."
+}

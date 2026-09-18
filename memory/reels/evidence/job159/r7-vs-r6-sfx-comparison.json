@@ -1,0 +1,17 @@
+{
+  "whole": {
+    "previous_rms_db": -36.07015945014965,
+    "revised_rms_db": -31.493675266488943,
+    "increase_db": 4.57648418366071
+  },
+  "rebuilt_sequence": {
+    "previous_rms_db": -39.85089433221513,
+    "revised_rms_db": -31.857304916780848,
+    "increase_db": 7.993589415434279
+  },
+  "hook": {
+    "previous_rms_db": -31.433077684783186,
+    "revised_rms_db": -27.62277998653588,
+    "increase_db": 3.8102976982473074
+  }
+}

@@ -2,6 +2,8 @@
 
 **Standing presentation rules:** [ALL CAPS headers](../memory/reel-header-all-caps.md) and [no creator watermarks](../memory/reel-no-watermarks.md).
 
+**JOB follow-up:** [a zipper reveal needs an operated-tool payoff and a continuing tail](../memory/alex-job-hook-action-sound-and-delivery.md#1-the-hook-needs-a-second-event-not-a-label-for-the-spoken-line). Fast keyboard contact and damped impact shake do not excuse an idle last quarter; inspect both separately.
+
 **Status:** process doc. Read before authoring scene 0 of any reel.
 **Latest correction:** [LM frame-zero action and post-action continuity](../memory/alex-lm-hooks-demo-and-delivery.md).
 The subject must already move independently of the opening zoom; keep identity and text readable.

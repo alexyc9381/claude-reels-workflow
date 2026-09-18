@@ -1,0 +1,10 @@
+look_audit · 139_JOB_Hook_Setup_Finale_Revision.mp4
+------------------------------------------------------------------------------
+  ✓ HOOK_LUMA    184.9                  panel luma at frame 0 >= 140 (THE-OPEN law 1 — and this is the ONLY place that law applies)
+  ✓ BODY_SAT     59.2%                  saturated-pixel share >= 34% (AGENCY 57.9 · the pale run 10-15)
+  ✓ BODY_BLACK   p10 28.6               black point (luma p10) <= 35 (AGENCY 25.0 · the pale run 51-72)
+  ✓ HOOK_PLATE   27.8% at y140          warns, never blocks
+  · BODY_LUMA                     106.9 reported, not gated   ⚠ outside AGENCY's body range 70-105
+  · DEPTH                         165.0 row-luma spread — REPORTED ONLY, see the header. Check by eye: is there a mass cropped by the panel edge, in front of the action?
+------------------------------------------------------------------------------
+  ✅ the look holds.
