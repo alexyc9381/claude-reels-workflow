@@ -1,0 +1,61 @@
+{
+  "method": "DriveFS synced metadata, read-only; not independent remote re-download or preview playback",
+  "folder_id": "13wO20SRZY5enhyoYQe6r5DRSl_C5gdYC",
+  "files": [
+    {
+      "name": "161_SPLIT.mp4",
+      "id": "1gQeklpFFcgzPIZW5M3kCGpBV8Q6tufh-",
+      "size": 10563500,
+      "mime_type": "video/mp4",
+      "size_matches": true,
+      "md5_matches": true,
+      "uploaded": true
+    },
+    {
+      "name": "161_SPLIT_Caption.txt",
+      "id": "1Gzyzas1COtTXRt_dr2fpIf_T4LvaQiOV",
+      "size": 888,
+      "mime_type": "text/plain",
+      "size_matches": true,
+      "md5_matches": true,
+      "uploaded": true
+    },
+    {
+      "name": "161_SPLIT_Guide.docx",
+      "id": "1vLutJFSESwZEw2M764Pv5TtCWjt-49e3",
+      "size": 10829,
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "size_matches": true,
+      "md5_matches": true,
+      "uploaded": true
+    },
+    {
+      "name": "161_SPLIT_Review_Notes.md",
+      "id": "1TBOz20hEwy7KwUCyik70TJWJ8Y_VrdP1",
+      "size": 3005,
+      "mime_type": "text/markdown",
+      "size_matches": true,
+      "md5_matches": true,
+      "uploaded": true
+    },
+    {
+      "name": "161_SPLIT_SHA256SUMS.txt",
+      "id": "1PbfaGPlEQPa-_Jk2MkN-1TmR23OI2yNs",
+      "size": 434,
+      "mime_type": "text/plain",
+      "size_matches": true,
+      "md5_matches": true,
+      "uploaded": true
+    },
+    {
+      "name": "161_SPLIT_Source.zip",
+      "id": "1oS79VYI6ZU39hF9PQaV7lc-cLPdQGoHi",
+      "size": 17819636,
+      "mime_type": "application/zip",
+      "size_matches": true,
+      "md5_matches": true,
+      "uploaded": true
+    }
+  ],
+  "verified": true
+}

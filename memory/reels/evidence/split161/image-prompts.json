@@ -1,0 +1,34 @@
+{
+  "technique": "Generated still background plates + separately authored React/SVG/Remotion foreground motion",
+  "generator": "built-in image_gen",
+  "prompts": [
+    {
+      "name": "workshop",
+      "prompt": "Use case: illustration-story. Asset type: layered animation BACKGROUND PLATE for a warm stylized illustrated animation about AI coding partners. Create one landscape 4:3 hand-painted inventor workshop environment, richly crafted storybook / editorial animation look, tactile wood grain, worn teal enamel, brass metal, deep navy shadows, warm amber sunlight from arched side window. Camera straight on slightly looking down, perspective depth. IMPORTANT composition: central 65% from x20%-85%, y20%-82% must be a clear open stage with quiet deep teal backwall, where separate animated characters and machinery will be composited. Detailed physical scenery ONLY around edges: small vise and coiled wire at far bottom right foreground, hanging spanners, curled sketches, jointed desk lamp far upper right, tool rack far left, round pressure gauge and shelves. Thick foreground wooden workbench edge cropped at bottom. In the upper central 20% leave quiet space for header overlay. This is NOT a finished scene, no central hero objects, NO characters, NO logos, NO text, no diagrams, no UI, no rectangular card array. Clear hierarchy, subdued peripheral detail, real object silhouettes, clean painterly shading, crisp enough for animation, avoid photographic realism. Wide 4:3 composition."
+    },
+    {
+      "name": "drafting",
+      "prompt": "Use case: illustration-story. Asset type: BACKGROUND PLATE for animated characters drawing and reviewing a tangible invention. Single landscape 4:3 elevated oblique view of a richly painted draughtsman's wooden workbench, warm walnut, navy and petrol-teal shadows, terracotta and golden highlights, muted cream. The center 70% of the frame is an EMPTY clear wooden tabletop (from x18%-86%, y26%-84%) where a large separate animated drawing will be composited. Along outer edges only: architect's brass compass, curled tracing paper, coffee cup with ring stain at far upper right, jar of pencils, metal ruler diagonal near bottom-right edge, mechanical desk lamp in far top-left. Show real woodgrain, scuffs, bevels, paper curls, contact shadows, dimensional editorial illustration / storybook craft. A quiet dark background above table upper20% for header overlay. Empty foreground left for composited orange Claude character. NO characters, no existing blueprint in center, no written text, no logos, no UI, no diagram nodes, no central clutter. Consistent with cinematic 2D painted workshop animation, not photoreal. 4:3."
+    },
+    {
+      "name": "engine",
+      "prompt": "Use case: stylized-concept. Asset type: transparent cutout prop to be independently animated in an explainer, ONE object only. A beautifully detailed whimsical compact computer ENGINE / electric motor: cream cast-metal housing, teal rounded rear casing, brass copper coils, black cooling fins, visible little screw heads, three braided cables curling around the base, sturdy feet. 3/4 front view, facing slightly left, isolated fully visible with padding. Central front has a LARGE circular dark navy vent with radial turbine blades and brass ring; small blank enamel badge on upper housing for later overlay of real logo. Sophisticated hand-painted editorial illustration, tactile material shading and crisp clean silhouette, warm amber/teal palette, grounded 2.5D lighting from upper left, not flat geometric icon. It should be unmistakably a tangible mechanical machine, not a box or document card. No human or mascot, no text, no logos, no sparks, no background scenery. Genuinely TRANSPARENT background with alpha, no checkerboard pattern, no opaque background or ground plane. Square composition."
+    }
+  ],
+  "assets": [
+    {
+      "name": "workshop",
+      "source_archive_path": "SPLIT161/public/art/workshop.png",
+      "status": "retained; mostly static scenery"
+    },
+    {
+      "name": "drafting",
+      "source_archive_path": "SPLIT161/public/art/drafting.png",
+      "status": "retained; mostly static scenery"
+    },
+    {
+      "name": "engine",
+      "status": "rejected; replaced with code-native Motor prop; not in current source archive"
+    }
+  ]
+}

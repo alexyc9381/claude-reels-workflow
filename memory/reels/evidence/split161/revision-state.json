@@ -1,0 +1,33 @@
+{
+  "revision": "V26 soundtrack starts at song position 8.00 seconds",
+  "video_sha256": "602bd6a3044109634ebc3d46d5055bec7a419804c694badc532d189b64c80754",
+  "video_checks": "V25 picture stream and source unchanged; visual checks remain valid",
+  "audio_checks": [
+    [
+      "sfx-final.txt",
+      0
+    ],
+    [
+      "ship-final.txt",
+      0
+    ],
+    [
+      "audio-integrity-final.txt",
+      0
+    ],
+    [
+      "decode-final.txt",
+      0
+    ],
+    [
+      "probe-final.json",
+      0
+    ],
+    [
+      "loudness-final.txt",
+      0
+    ]
+  ],
+  "all_blocking_checks_pass": true,
+  "human_full_playback_or_listening_performed": false
+}

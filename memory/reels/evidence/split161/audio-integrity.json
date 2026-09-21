@@ -1,0 +1,15 @@
+{
+  "master_to_AAC_snr_db": 41.32003454935065,
+  "aligned_sample_count": 1073600,
+  "voice_first_5ms_window_above_minus_42_dbfs_seconds": 0.03,
+  "voice_onset_within_first_video_frame": true,
+  "voice_first_50ms_rms_dbfs": -39.36399685921999,
+  "voice_first_250ms_rms_dbfs": -17.583858314608776,
+  "music_first_250ms_rms_dbfs": -38.26807421430543,
+  "effects_cues": 40,
+  "effects_cues_above_minus_60_dbfs": 40,
+  "quietest_effect_window_dbfs": -43.71491318546607,
+  "master_sha256": "f5f8bd028eb4016dc2eb40b4c97bc39571bb40b8faefd36d85cc02cffea51acd",
+  "video_sha256": "602bd6a3044109634ebc3d46d5055bec7a419804c694badc532d189b64c80754",
+  "onset_caveat": "Waveform onset is corroborated by trimmed clean-voice transcription, not inferred from full-mix energy or stored word timing alone."
+}

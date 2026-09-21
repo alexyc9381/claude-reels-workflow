@@ -1,0 +1,13 @@
+{
+  "revision": "V26 soundtrack at 8 seconds",
+  "comparison": "V25 delivered source and encoded video",
+  "video_stream_sha256": "SHA256=6eb7b79edf1aab253e8137886bb0ab56a4af8d21d5cd773c4bd37636968864f8",
+  "video_stream_unchanged": true,
+  "unchanged_stems": {
+    "voice.wav": true,
+    "effects.wav": true
+  },
+  "all_scene_caption_and_character_source_unchanged": true,
+  "music_source_offset_seconds": 8.0,
+  "music_reel_start_seconds": 0.0
+}

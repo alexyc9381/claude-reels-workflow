@@ -3,12 +3,13 @@
 The **style layer**: which full look-and-feel + audio skin to apply on top of the shared script/VO/caption chassis, and the non-waivable overhaul loop every reel runs before delivery. Touch this when picking how a reel *looks* (not what it says) or when deciding a first render is "done."
 
 ## Start here
-[`STYLES.md`](STYLES.md) — the one-screen menu; pick ONE style per reel (default Cinematic Blueprint, or Game-World for listicles). Then [`PRODUCTION-LOOP.md`](PRODUCTION-LOOP.md), which governs how any render gets torn apart and re-rendered until it ships. The base house style itself lives in [`../CLAUDE-REELS-PLAYBOOK.md`](../CLAUDE-REELS-PLAYBOOK.md).
+[`STYLES.md`](STYLES.md) — the one-screen menu; pick ONE style per reel (default Cinematic Blueprint, or Game-World for listicles). The [illustrated-plates alternative](illustrated-plates.md) is available when explicitly selected; it does not change either default. Then [`PRODUCTION-LOOP.md`](PRODUCTION-LOOP.md), which governs how any render gets torn apart and re-rendered until it ships. The base house style itself lives in [`../CLAUDE-REELS-PLAYBOOK.md`](../CLAUDE-REELS-PLAYBOOK.md).
 
 ## Layout
 | path | what |
 |---|---|
 | `STYLES.md` | the style menu — table of styles, pick-one rule, how to add a new style |
+| `illustrated-plates.md` | optional generated scenery + authored 2D recipe; SPLIT 161 revisions, prompts and source links; not the default |
 | `PRODUCTION-LOOP.md` | the wireframe→critic→fix loop, the two gates, the three hard floors, stop condition |
 | `game-world-remake.md` | full replicable pack for the Game-World style (ref build: reel 51 SKILLS as Super Mario) — exact chassis values, world/HUD/mascot/prop recipes, re-theme swap block |
 
@@ -20,7 +21,8 @@ The **style layer**: which full look-and-feel + audio skin to apply on top of th
 ## Gotchas
 - **The first full render is a WIREFRAME, never a deliverable** — shipping it wastes the topic. `PRODUCTION-LOOP.md` is not waivable; deadlines cut the *number* of loops, never to zero.
 - **Don't mix a style with the wrong topic.** Game-World reads as *fun* — wrong for somber/credibility/money reels; default to Cinematic Blueprint when unsure.
-- **The three hard floors are blocking, not nice-to-have** (alive backgrounds ≥3–4 animated layers · dressed pop-culture sprite · ≥1 reference per scene). "Background is plain" / "boring sprite" / "nothing fit" = auto-fail.
+- The explicitly selected [illustrated-plates alternative](illustrated-plates.md) permits mostly still generated scenery with purposeful foreground action; do not force animated background layers for this recipe. Its selection does not waive output or review gates.
+- **For the existing animated-world styles, the three hard floors are blocking, not nice-to-have** (alive backgrounds ≥3–4 animated layers · dressed pop-culture sprite · ≥1 reference per scene). "Background is plain" / "boring sprite" / "nothing fit" = auto-fail.
 - **Rendering is the only real gate** — `npx tsc` means nothing here; overlaps and dead air only appear in pixels. Fresh critic every round, judging the render not the code.
 
 ## Related

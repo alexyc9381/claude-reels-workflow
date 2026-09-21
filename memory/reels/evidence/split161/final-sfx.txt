@@ -1,0 +1,20 @@
+sfx_audit · 12 distinct cues
+
+     boot.wav               dur  0.56s  attack   143ms  >2kHz   0.3%  <250Hz  19.9%
+     chime.wav              dur  0.33s  attack     4ms  >2kHz   0.6%  <250Hz   0.4%
+     click.wav              dur  0.12s  attack     9ms  >2kHz  14.2%  <250Hz   3.8%
+     keys.wav               dur  0.44s  attack     2ms  >2kHz  55.9%  <250Hz   6.4%
+     latch.wav              dur  0.18s  attack    11ms  >2kHz  23.7%  <250Hz   0.2%
+     metal.wav              dur  0.22s  attack     7ms  >2kHz  56.4%  <250Hz  24.3%
+     paper.wav              dur  0.17s  attack     9ms  >2kHz  53.2%  <250Hz   8.3%
+     pencil.wav             dur  0.27s  attack     9ms  >2kHz  91.9%  <250Hz   1.0%
+     snap.wav               dur  0.17s  attack     9ms  >2kHz  83.9%  <250Hz   0.9%
+     stamp.wav              dur  0.24s  attack     9ms  >2kHz  21.0%  <250Hz   4.5%
+     terminal.wav           dur  0.09s  attack     9ms  >2kHz   0.7%  <250Hz   3.7%
+     thock.wav              dur  0.16s  attack     5ms  >2kHz   0.7%  <250Hz  89.2%
+     click.wav              used  7x  >2kHz  14.2%  ok
+     latch.wav              used  6x  >2kHz  23.7%  ok
+
+  BALANCE  >2kHz  37.6% (band 24.1-49.7)  OK
+           <250Hz  10.7% (band 9.5-14.5)  OK
+clean — no hiss beds, no air swells, no named air.

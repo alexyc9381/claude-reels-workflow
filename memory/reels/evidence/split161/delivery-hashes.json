@@ -1,0 +1,38 @@
+[
+  {
+    "name": "161_SPLIT.mp4",
+    "size": 10563500,
+    "md5": "035f1df29c388d447ef27da6aa0ce57c",
+    "sha256": "602bd6a3044109634ebc3d46d5055bec7a419804c694badc532d189b64c80754"
+  },
+  {
+    "name": "161_SPLIT_Caption.txt",
+    "size": 888,
+    "md5": "6da5376d6c09c5f88b9a032d9e298d55",
+    "sha256": "e845c26899722c8ebdff2f10bb82ae8f8065f2c9b4c9ab99df998a212eb66f09"
+  },
+  {
+    "name": "161_SPLIT_Guide.docx",
+    "size": 10829,
+    "md5": "403278b28f48cc70a0f1b0de6ec1cd5e",
+    "sha256": "05e7e3665f1f531152b8a4e1d2d361812fd90552dd8a55fe5f3fe2635bbff6b3"
+  },
+  {
+    "name": "161_SPLIT_Review_Notes.md",
+    "size": 3005,
+    "md5": "380231264f32151ce54fe9974248d548",
+    "sha256": "6a6e6c7092b84c75ae050409815156274f5747cb420a591115610ec041ef9e70"
+  },
+  {
+    "name": "161_SPLIT_SHA256SUMS.txt",
+    "size": 434,
+    "md5": "9efabeea937c0a29e3df1474d7e1556f",
+    "sha256": "82032d3ff8ec09ac174b59e64d72658df17e35697470b68c0b4d46da9b7794f6"
+  },
+  {
+    "name": "161_SPLIT_Source.zip",
+    "size": 17819636,
+    "md5": "454f4793551e3486ba9b8105287b9e9e",
+    "sha256": "831553c74772093de23f0e4b3af47283415e5762d048935bb793bec62ed5a09f"
+  }
+]

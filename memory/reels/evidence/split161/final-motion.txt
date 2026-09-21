@@ -1,0 +1,15 @@
+
+  scene                   MOTION  top share DEADRUN    HOLD  verdict
+  ----------------------------------------------------------------------------
+  opening                  17.40      0.061       3     16%  ok
+  install                  15.70      0.060       0     45%  ok
+  hosts                    15.37      0.076       0     50%  ok
+  route                     9.54      0.135       0     14%  ok
+  plan_review               7.60      0.103       0     17%  ok
+  workshop_loop             9.97      0.075       0     15%  ok
+  self                     13.90      0.108       0     17%  ok
+  payoff                    6.13      0.091       9     11%  ok
+  cta                      10.11      0.080       3     18%  ok
+  ----------------------------------------------------------------------------
+  median motion 10.11  (bar 9.00, approved reel 81 = 9.82)
+  scenes failing: 0/9
