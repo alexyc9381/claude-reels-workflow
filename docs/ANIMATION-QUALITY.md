@@ -1,5 +1,7 @@
 # ANIMATION QUALITY — why the first pass is never good enough, and what actually fixes it
 
+**September 21 faceless default:** [No live-action, stock or UGC B-roll](../memory/alex-faceless-no-live-action-broll.md). This overrides historical B-roll suggestions and measurements below for faceless reels. Replace filmed inserts with meaningful authored action; real logos and useful UI remain allowed.
+
 **JOB-159 case study:** [hook consequences, narrated operations and late reward](../memory/alex-job-hook-action-sound-and-delivery.md). Repeated rejection after numeric passes required a new third-quarter sequence, a physical installation concept, faster keyboard contact plus follow-through, professional photo avatars and a guide/link lead-in before the keyword. Includes causes, contact defects, failed draft evidence and source-specific limits.
 
 **J-157 case study:** [richer mechanisms and complete outcomes](../memory/alex-j157-causal-animation-and-trials.md). Every named body beat required a new depicted operation or purposeful emphasis. Review cup/tool/stamp contact, continuous phase handoffs, articulated robot work, escalating pizza arrivals and safe bounds. [Revision record](../memory/reels/j157-revision-record.md) retains the failed motion thresholds; delivery is not approval or a waiver.
