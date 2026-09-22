@@ -1,0 +1,837 @@
+[
+  {
+    "file": "selector_spin.wav",
+    "duration": 1.27,
+    "layers": [
+      {
+        "source": "ratchet.wav",
+        "at": 0.0,
+        "rate": 1.55,
+        "gain": 0.65,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.023805083208536554,
+        "rate": 1.4892307692307694,
+        "gain": 0.3932307692307693,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.06640397806410149,
+        "rate": 1.4284615384615384,
+        "gain": 0.38646153846153847,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.1210066285246597,
+        "rate": 1.3676923076923078,
+        "gain": 0.3796923076923077,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.1852330556507536,
+        "rate": 1.306923076923077,
+        "gain": 0.3729230769230769,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.25771833106095615,
+        "rate": 1.2461538461538462,
+        "gain": 0.36615384615384616,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.33754645744237083,
+        "rate": 1.1853846153846155,
+        "gain": 0.3593846153846154,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.4240477889485072,
+        "rate": 1.1246153846153846,
+        "gain": 0.3526153846153846,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.5167052623352415,
+        "rate": 1.0638461538461539,
+        "gain": 0.34584615384615386,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.6151040943076442,
+        "rate": 1.003076923076923,
+        "gain": 0.3390769230769231,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.718902019899331,
+        "rate": 0.9423076923076923,
+        "gain": 0.3323076923076923,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.8278103992945383,
+        "rate": 0.8815384615384615,
+        "gain": 0.32553846153846155,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.9415815672335268,
+        "rate": 0.8207692307692308,
+        "gain": 0.31876923076923075,
+        "lowpass": 1700
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 1.06,
+        "rate": 0.7600000000000001,
+        "gain": 0.31200000000000006,
+        "lowpass": 1700
+      },
+      {
+        "source": "gear.wav",
+        "at": 0,
+        "rate": 0.78,
+        "gain": 0.25,
+        "lowpass": 1500
+      },
+      {
+        "source": "latch.wav",
+        "at": 1.08,
+        "rate": 0.93,
+        "gain": 0.42,
+        "lowpass": 1900
+      }
+    ]
+  },
+  {
+    "file": "browse_wheel.wav",
+    "duration": 1.68,
+    "layers": [
+      {
+        "source": "ratchet.wav",
+        "at": 0.0,
+        "rate": 2.75,
+        "gain": 0.65,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.020394545305007578,
+        "rate": 2.702777777777778,
+        "gain": 0.396,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.056890325784511434,
+        "rate": 2.6555555555555554,
+        "gain": 0.392,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.10367009205695234,
+        "rate": 2.6083333333333334,
+        "gain": 0.388,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.15869484312911694,
+        "rate": 2.561111111111111,
+        "gain": 0.384,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.22079520297029595,
+        "rate": 2.513888888888889,
+        "gain": 0.38,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.2891864085727955,
+        "rate": 2.466666666666667,
+        "gain": 0.376,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.36329475379012055,
+        "rate": 2.4194444444444443,
+        "gain": 0.372,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.4426772546736141,
+        "rate": 2.3722222222222222,
+        "gain": 0.36800000000000005,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.5269785536458165,
+        "rate": 2.325,
+        "gain": 0.36400000000000005,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.615905421806745,
+        "rate": 2.2777777777777777,
+        "gain": 0.36000000000000004,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.7092105725685789,
+        "rate": 2.2305555555555556,
+        "gain": 0.35600000000000004,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.8066818235030542,
+        "rate": 2.1833333333333336,
+        "gain": 0.35200000000000004,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.9081345288285193,
+        "rate": 2.136111111111111,
+        "gain": 0.34800000000000003,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 1.0134061137342012,
+        "rate": 2.088888888888889,
+        "gain": 0.34400000000000003,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 1.1223520149794066,
+        "rate": 2.0416666666666665,
+        "gain": 0.34,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 1.234842594386817,
+        "rate": 1.9944444444444445,
+        "gain": 0.336,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 1.3507607446720604,
+        "rate": 1.9472222222222224,
+        "gain": 0.332,
+        "lowpass": 4200
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 1.47,
+        "rate": 1.9,
+        "gain": 0.32800000000000007,
+        "lowpass": 4200
+      },
+      {
+        "source": "click.wav",
+        "at": 0,
+        "rate": 1.6,
+        "gain": 0.12,
+        "lowpass": 4000
+      },
+      {
+        "source": "latch.wav",
+        "at": 1.49,
+        "rate": 1.8,
+        "gain": 0.27,
+        "lowpass": 4000
+      }
+    ],
+    "post_highpass_hz": 260,
+    "post_lowpass_hz": 2600
+  },
+  {
+    "file": "skill_folder_open.wav",
+    "duration": 0.8,
+    "layers": [
+      {
+        "source": "latch.wav",
+        "at": 0,
+        "rate": 1.25,
+        "gain": 0.38,
+        "lowpass": 3200
+      },
+      {
+        "source": "page_turn.wav",
+        "at": 0.025,
+        "rate": 1.18,
+        "gain": 0.62,
+        "lowpass": 3600
+      },
+      {
+        "source": "paper.wav",
+        "at": 0.08,
+        "rate": 1.3,
+        "gain": 0.35,
+        "lowpass": 3200
+      },
+      {
+        "source": "keys.wav",
+        "at": 0.24,
+        "rate": 1.25,
+        "gain": 0.24,
+        "lowpass": 3200
+      }
+    ]
+  },
+  {
+    "file": "suit_assemble.wav",
+    "duration": 0.84,
+    "layers": [
+      {
+        "source": "metal.wav",
+        "at": 0,
+        "rate": 1.35,
+        "gain": 0.37,
+        "lowpass": 3000
+      },
+      {
+        "source": "boot.wav",
+        "at": 0.025,
+        "rate": 1.4,
+        "gain": 0.42,
+        "lowpass": 3500
+      },
+      {
+        "source": "latch.wav",
+        "at": 0.18,
+        "rate": 1.35,
+        "gain": 0.2,
+        "lowpass": 3000
+      },
+      {
+        "source": "chime.wav",
+        "at": 0.27,
+        "rate": 1.3,
+        "gain": 0.14,
+        "lowpass": 3500
+      }
+    ]
+  },
+  {
+    "file": "module_lock.wav",
+    "duration": 0.31,
+    "layers": [
+      {
+        "source": "latch.wav",
+        "at": 0,
+        "rate": 0.88,
+        "gain": 0.64,
+        "lowpass": 2200
+      },
+      {
+        "source": "metal.wav",
+        "at": 0.035,
+        "rate": 1.14,
+        "gain": 0.22,
+        "lowpass": 1800
+      }
+    ]
+  },
+  {
+    "file": "core_ignite.wav",
+    "duration": 0.76,
+    "layers": [
+      {
+        "source": "boot.wav",
+        "at": 0,
+        "rate": 0.92,
+        "gain": 0.61,
+        "lowpass": 2100
+      },
+      {
+        "source": "gear.wav",
+        "at": 0.03,
+        "rate": 0.87,
+        "gain": 0.24,
+        "lowpass": 1800
+      },
+      {
+        "source": "chime.wav",
+        "at": 0.16,
+        "rate": 1.12,
+        "gain": 0.14,
+        "lowpass": 2400
+      }
+    ]
+  },
+  {
+    "file": "robot_energize.wav",
+    "duration": 0.87,
+    "layers": [
+      {
+        "source": "boot.wav",
+        "at": 0,
+        "rate": 0.76,
+        "gain": 0.65,
+        "lowpass": 2200
+      },
+      {
+        "source": "metal.wav",
+        "at": 0.03,
+        "rate": 0.8,
+        "gain": 0.19,
+        "lowpass": 2100
+      },
+      {
+        "source": "chime.wav",
+        "at": 0.1,
+        "rate": 1.12,
+        "gain": 0.18,
+        "lowpass": 2400
+      },
+      {
+        "source": "gear.wav",
+        "at": 0.3,
+        "rate": 1.15,
+        "gain": 0.13,
+        "lowpass": 1600
+      }
+    ]
+  },
+  {
+    "file": "chat_recall.wav",
+    "duration": 0.4,
+    "layers": [
+      {
+        "source": "terminal.wav",
+        "at": 0,
+        "rate": 0.78,
+        "gain": 0.47,
+        "lowpass": 2400
+      },
+      {
+        "source": "latch.wav",
+        "at": 0.04,
+        "rate": 1.5,
+        "gain": 0.22,
+        "lowpass": 2000
+      },
+      {
+        "source": "terminal.wav",
+        "at": 0.17,
+        "rate": 1.12,
+        "gain": 0.14,
+        "lowpass": 2200
+      }
+    ]
+  },
+  {
+    "file": "folder_unfold.wav",
+    "duration": 0.52,
+    "layers": [
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.4,
+        "gain": 0.55,
+        "lowpass": 1800
+      },
+      {
+        "source": "page_turn.wav",
+        "at": 0,
+        "rate": 0.85,
+        "gain": 0.8,
+        "lowpass": 3000
+      },
+      {
+        "source": "paper.wav",
+        "at": 0.005,
+        "rate": 0.84,
+        "gain": 0.68,
+        "lowpass": 2400
+      },
+      {
+        "source": "snap.wav",
+        "at": 0.29,
+        "rate": 1.08,
+        "gain": 0.4,
+        "lowpass": 2200
+      }
+    ]
+  },
+  {
+    "file": "memory_store.wav",
+    "duration": 0.62,
+    "layers": [
+      {
+        "source": "gear.wav",
+        "at": 0,
+        "rate": 1.15,
+        "gain": 0.65,
+        "lowpass": 2000
+      },
+      {
+        "source": "terminal.wav",
+        "at": 0.16,
+        "rate": 0.95,
+        "gain": 0.18,
+        "lowpass": 2200
+      },
+      {
+        "source": "chime.wav",
+        "at": 0.25,
+        "rate": 0.87,
+        "gain": 0.16,
+        "lowpass": 2200
+      }
+    ]
+  },
+  {
+    "file": "launch_motor.wav",
+    "duration": 0.68,
+    "layers": [
+      {
+        "source": "boot.wav",
+        "at": 0,
+        "rate": 0.88,
+        "gain": 0.6,
+        "lowpass": 1800
+      },
+      {
+        "source": "gear.wav",
+        "at": 0.09,
+        "rate": 0.78,
+        "gain": 0.2,
+        "lowpass": 1300
+      },
+      {
+        "source": "latch.wav",
+        "at": 0.05,
+        "rate": 0.73,
+        "gain": 0.18,
+        "lowpass": 1800
+      }
+    ]
+  },
+  {
+    "file": "skill_post.wav",
+    "duration": 0.37,
+    "layers": [
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.12,
+        "gain": 0.35,
+        "lowpass": 1700
+      },
+      {
+        "source": "keys.wav",
+        "at": 0.01,
+        "rate": 1.45,
+        "gain": 0.5,
+        "lowpass": 2600
+      },
+      {
+        "source": "terminal.wav",
+        "at": 0.18,
+        "rate": 1.3,
+        "gain": 0.15,
+        "lowpass": 2400
+      }
+    ]
+  },
+  {
+    "file": "catalog_flutter.wav",
+    "duration": 0.46,
+    "layers": [
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.4,
+        "gain": 0.9,
+        "lowpass": 2200
+      },
+      {
+        "source": "page_turn.wav",
+        "at": 0,
+        "rate": 1.6,
+        "gain": 0.5,
+        "lowpass": 2700
+      },
+      {
+        "source": "paper.wav",
+        "at": 0.08,
+        "rate": 1.8,
+        "gain": 0.4,
+        "lowpass": 3000
+      },
+      {
+        "source": "page_turn.wav",
+        "at": 0.2,
+        "rate": 1.85,
+        "gain": 0.35,
+        "lowpass": 3200
+      },
+      {
+        "source": "keys.wav",
+        "at": 0.32,
+        "rate": 1.5,
+        "gain": 0.2,
+        "lowpass": 2600
+      }
+    ]
+  },
+  {
+    "file": "pack_build.wav",
+    "duration": 0.47,
+    "layers": [
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.35,
+        "gain": 0.65,
+        "lowpass": 2400
+      },
+      {
+        "source": "keys.wav",
+        "at": 0.04,
+        "rate": 1.7,
+        "gain": 0.3,
+        "lowpass": 3000
+      },
+      {
+        "source": "boot.wav",
+        "at": 0.12,
+        "rate": 1.4,
+        "gain": 0.26,
+        "lowpass": 2400
+      }
+    ]
+  },
+  {
+    "file": "pack_check.wav",
+    "duration": 0.47,
+    "layers": [
+      {
+        "source": "snap.wav",
+        "at": 0,
+        "rate": 1.4,
+        "gain": 0.45,
+        "lowpass": 3000
+      },
+      {
+        "source": "ratchet.wav",
+        "at": 0.04,
+        "rate": 1.8,
+        "gain": 0.3,
+        "lowpass": 2600
+      },
+      {
+        "source": "latch.wav",
+        "at": 0.18,
+        "rate": 1.8,
+        "gain": 0.3,
+        "lowpass": 2800
+      }
+    ]
+  },
+  {
+    "file": "pack_memory.wav",
+    "duration": 0.58,
+    "layers": [
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.65,
+        "gain": 0.46,
+        "lowpass": 2200
+      },
+      {
+        "source": "paper.wav",
+        "at": 0,
+        "rate": 1.6,
+        "gain": 0.45,
+        "lowpass": 3000
+      },
+      {
+        "source": "terminal.wav",
+        "at": 0.05,
+        "rate": 1.4,
+        "gain": 0.33,
+        "lowpass": 2600
+      },
+      {
+        "source": "chime.wav",
+        "at": 0.18,
+        "rate": 1.6,
+        "gain": 0.09,
+        "lowpass": 2400
+      }
+    ]
+  },
+  {
+    "file": "power_bite.wav",
+    "duration": 0.44,
+    "layers": [
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.8,
+        "gain": 0.5,
+        "lowpass": 2500
+      },
+      {
+        "source": "paper.wav",
+        "at": 0.015,
+        "rate": 2.4,
+        "gain": 0.6,
+        "lowpass": 2800
+      },
+      {
+        "source": "snap.wav",
+        "at": 0.07,
+        "rate": 1.9,
+        "gain": 0.2,
+        "lowpass": 2600
+      },
+      {
+        "source": "terminal.wav",
+        "at": 0.16,
+        "rate": 0.85,
+        "gain": 0.23,
+        "lowpass": 1800
+      }
+    ]
+  },
+  {
+    "file": "armor_bloom.wav",
+    "duration": 0.78,
+    "layers": [
+      {
+        "source": "metal.wav",
+        "at": 0,
+        "rate": 1.35,
+        "gain": 0.33,
+        "lowpass": 3000
+      },
+      {
+        "source": "boot.wav",
+        "at": 0.035,
+        "rate": 1.45,
+        "gain": 0.6,
+        "lowpass": 2600
+      },
+      {
+        "source": "latch.wav",
+        "at": 0.15,
+        "rate": 1.35,
+        "gain": 0.3,
+        "lowpass": 2900
+      },
+      {
+        "source": "latch.wav",
+        "at": 0.25,
+        "rate": 1.8,
+        "gain": 0.2,
+        "lowpass": 3000
+      },
+      {
+        "source": "chime.wav",
+        "at": 0.31,
+        "rate": 1.25,
+        "gain": 0.08,
+        "lowpass": 2400
+      }
+    ]
+  },
+  {
+    "file": "select_one.wav",
+    "duration": 0.3,
+    "layers": [
+      {
+        "source": "snap.wav",
+        "at": 0,
+        "rate": 1.25,
+        "gain": 0.4,
+        "lowpass": 2400
+      },
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.35,
+        "gain": 0.65,
+        "lowpass": 2200
+      }
+    ]
+  },
+  {
+    "file": "select_two.wav",
+    "duration": 0.3,
+    "layers": [
+      {
+        "source": "latch.wav",
+        "at": 0,
+        "rate": 1.65,
+        "gain": 0.42,
+        "lowpass": 2500
+      },
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.55,
+        "gain": 0.46,
+        "lowpass": 2200
+      }
+    ]
+  },
+  {
+    "file": "select_three.wav",
+    "duration": 0.35,
+    "layers": [
+      {
+        "source": "terminal.wav",
+        "at": 0,
+        "rate": 1.55,
+        "gain": 0.34,
+        "lowpass": 2400
+      },
+      {
+        "source": "thock.wav",
+        "at": 0,
+        "rate": 1.8,
+        "gain": 0.44,
+        "lowpass": 2200
+      },
+      {
+        "source": "chime.wav",
+        "at": 0.05,
+        "rate": 1.35,
+        "gain": 0.07,
+        "lowpass": 2000
+      }
+    ]
+  }
+]

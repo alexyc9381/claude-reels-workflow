@@ -1,0 +1,70 @@
+sfx_audit · 28 distinct cues
+
+     armor_bloom.wav        dur  0.78s  attack    39ms  >2kHz  12.7%  <250Hz   9.6%
+     boot.wav               dur  0.56s  attack   143ms  >2kHz   0.3%  <250Hz  19.9%
+     browse_wheel.wav       dur  1.68s  attack     5ms  >2kHz  10.0%  <250Hz  13.4%
+     catalog_flutter.wav    dur  0.46s  attack    13ms  >2kHz  18.9%  <250Hz  39.3%
+     chat_recall.wav        dur  0.40s  attack    12ms  >2kHz   2.0%  <250Hz   5.9%
+     click.wav              dur  0.12s  attack     9ms  >2kHz  14.2%  <250Hz   3.8%
+     core_ignite.wav        dur  0.76s  attack    77ms  >2kHz   1.9%  <250Hz  31.1%
+     folder_unfold.wav      dur  0.52s  attack    16ms  >2kHz  16.5%  <250Hz  27.0%
+     gear.wav               dur  0.32s  attack     7ms  >2kHz  44.6%  <250Hz  29.8%
+     keys.wav               dur  0.44s  attack     2ms  >2kHz  55.9%  <250Hz   6.4%
+     latch.wav              dur  0.18s  attack    11ms  >2kHz  23.7%  <250Hz   0.2%
+     launch_motor.wav       dur  0.68s  attack   174ms  >2kHz   0.8%  <250Hz  33.5%
+     memory_store.wav       dur  0.62s  attack    75ms  >2kHz   9.0%  <250Hz  41.9%
+     metal.wav              dur  0.22s  attack     7ms  >2kHz  56.4%  <250Hz  24.3%
+     module_lock.wav        dur  0.31s  attack    41ms  >2kHz  12.1%  <250Hz  28.2%
+     pack_build.wav         dur  0.47s  attack     6ms  >2kHz   4.1%  <250Hz  30.5%
+     pack_check.wav         dur  0.47s  attack    45ms  >2kHz  36.8%  <250Hz  17.3%
+     pack_memory.wav        dur  0.58s  attack    56ms  >2kHz  23.1%  <250Hz  17.8%
+     pencil.wav             dur  0.27s  attack     9ms  >2kHz  91.9%  <250Hz   1.0%
+     power_bite.wav         dur  0.44s  attack    20ms  >2kHz  24.3%  <250Hz  10.3%
+     robot_energize.wav     dur  0.87s  attack    95ms  >2kHz   4.1%  <250Hz  34.2%
+     select_one.wav         dur  0.30s  attack     9ms  >2kHz  19.1%  <250Hz  62.4%
+     select_three.wav       dur  0.35s  attack     7ms  >2kHz   1.0%  <250Hz   8.0%
+     select_two.wav         dur  0.30s  attack     8ms  >2kHz   6.9%  <250Hz  47.6%
+     selector_spin.wav      dur  1.27s  attack     6ms  >2kHz   5.8%  <250Hz  53.0%
+     skill_post.wav         dur  0.37s  attack    13ms  >2kHz  11.5%  <250Hz  38.9%
+     snap.wav               dur  0.17s  attack     9ms  >2kHz  83.9%  <250Hz   0.9%
+     thock.wav              dur  0.16s  attack     5ms  >2kHz   0.7%  <250Hz  89.2%
+
+
+  PERCEIVED LEVEL — 35 explicit cues, loudest first
+
+      at file                    set dB   A-wtd  tier
+    1.92 select_three             -5.0  -31.2  HERO
+    1.48 select_one               -6.0  -31.8  HERO
+    0.60 pack_build              -11.0  -32.1  HERO
+    0.00 catalog_flutter          -7.0  -32.7  HERO
+   11.42 pencil                  -13.0  -33.1  HERO
+    4.68 browse_wheel             -4.0  -33.2  HERO
+    4.10 click                   -12.0  -33.8  HERO
+   13.34 robot_energize          -10.0  -33.8  HERO
+    9.36 armor_bloom             -11.0  -34.0  HERO
+    9.15 power_bite              -10.0  -34.0  HERO
+   21.41 skill_post               -6.0  -34.2  HERO
+    1.70 select_two               -6.0  -34.5  HERO
+   12.43 click                   -13.0  -34.8  SUPPORT
+    6.62 folder_unfold            -6.0  -35.5  SUPPORT
+   17.64 folder_unfold            -6.0  -35.5  SUPPORT
+   12.94 metal                   -15.0  -36.1  SUPPORT
+    0.72 pack_memory             -11.0  -36.3  SUPPORT
+    0.66 pack_check               -9.0  -36.3  SUPPORT
+   17.26 chat_recall             -10.0  -36.4  SUPPORT
+   15.17 memory_store            -12.0  -36.5  SUPPORT
+   12.20 latch                   -12.0  -36.9  SUPPORT
+    7.84 boot                    -16.0  -37.2  SUPPORT
+    7.68 module_lock             -12.0  -37.6  SUPPORT
+   11.85 snap                    -10.0  -37.7  SUPPORT
+   16.63 latch                   -13.0  -37.9  SUPPORT
+   14.72 core_ignite             -16.0  -38.4  SUPPORT
+    0.29 module_lock             -13.0  -38.6  SUPPORT
+   18.95 launch_motor            -16.0  -39.0  SUPPORT
+   18.30 module_lock             -14.0  -39.6  SUPPORT
+   20.78 module_lock             -14.0  -39.6  SUPPORT
+   11.12 gear                    -13.0  -40.4  TEXTURE
+    9.82 thock                   -12.0  -41.3  TEXTURE
+    3.47 keys                     -9.0  -41.8  TEXTURE
+   16.17 thock                   -13.0  -42.3  TEXTURE
+   20.02 selector_spin           -15.0  -45.6  TEXTURE

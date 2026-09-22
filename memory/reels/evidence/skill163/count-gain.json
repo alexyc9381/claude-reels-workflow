@@ -1,0 +1,23 @@
+[
+  {
+    "src": "sfx/select_one.wav",
+    "at": 1.48,
+    "before_db": -12,
+    "after_db": -6,
+    "increase_db": 6
+  },
+  {
+    "src": "sfx/select_two.wav",
+    "at": 1.7,
+    "before_db": -12,
+    "after_db": -6,
+    "increase_db": 6
+  },
+  {
+    "src": "sfx/select_three.wav",
+    "at": 1.92,
+    "before_db": -11,
+    "after_db": -5,
+    "increase_db": 6
+  }
+]

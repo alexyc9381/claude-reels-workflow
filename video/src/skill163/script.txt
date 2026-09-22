@@ -1,0 +1,8 @@
+Claude has over 90,000 skills, but you only need three of them.
+First is the Anthropic Skills Library.
+You just say what you're building, and it will look through its entire skills library, find the best matching ones, and even install them for you.
+The second is Superpowers.
+You just give it one task, and it forces Claude to slow down, properly plan, and check its own work, so you get ten X better outputs.
+The third is Claude-Mem.
+This gives Claude memory across every session, so he remembers your chats and files, and you never have to re-explain anything ever again.
+For a list of 100 free skills, comment SKILL.

@@ -1,0 +1,11 @@
+
+  scene                   MOTION  top share DEADRUN    HOLD  verdict
+  ----------------------------------------------------------------------------
+  hook                     19.34      0.090       0     20%  ok
+  library                  11.03      0.091       6     13%  ok
+  superpowers               9.07      0.096       3     12%  ok
+  memory                    7.35      0.093       9     14%  ok
+  cta                      10.89      0.121       9     16%  ok
+  ----------------------------------------------------------------------------
+  median motion 10.89  (bar 9.00, approved reel 81 = 9.82)
+  scenes failing: 0/5

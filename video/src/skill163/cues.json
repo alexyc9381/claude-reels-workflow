@@ -1,0 +1,247 @@
+[
+  {
+    "at": 0,
+    "src": "sfx/catalog_flutter.wav",
+    "gain_db": -7,
+    "duration": 0.46,
+    "why": "large illustrated skill files shuffle through catalog"
+  },
+  {
+    "at": 0.6,
+    "src": "sfx/pack_build.wav",
+    "gain_db": -11,
+    "duration": 0.47,
+    "why": "app-building pack bursts upward"
+  },
+  {
+    "at": 0.66,
+    "src": "sfx/pack_check.wav",
+    "gain_db": -9,
+    "duration": 0.47,
+    "why": "code-checking pack snaps into light"
+  },
+  {
+    "at": 0.72,
+    "src": "sfx/pack_memory.wav",
+    "gain_db": -11,
+    "duration": 0.58,
+    "why": "memory pack unfurls in violet light"
+  },
+  {
+    "at": 0.29,
+    "src": "sfx/module_lock.wav",
+    "gain_db": -13,
+    "duration": 0.31,
+    "why": "Claude grabs the leading skill before the fast recoil"
+  },
+  {
+    "at": 1.48,
+    "src": "sfx/select_one.wav",
+    "gain_db": -6,
+    "duration": 0.3,
+    "why": "first skill lifts and locks count one"
+  },
+  {
+    "at": 1.7,
+    "src": "sfx/select_two.wav",
+    "gain_db": -6,
+    "duration": 0.3,
+    "why": "second skill lifts and locks count two"
+  },
+  {
+    "at": 1.92,
+    "src": "sfx/select_three.wav",
+    "gain_db": -5,
+    "duration": 0.35,
+    "why": "third skill locks on spoken three"
+  },
+  {
+    "at": 3.47,
+    "src": "sfx/keys.wav",
+    "gain_db": -9,
+    "duration": 0.44,
+    "why": "task typed"
+  },
+  {
+    "at": 4.1,
+    "src": "sfx/click.wav",
+    "gain_db": -12,
+    "duration": 0.1158125,
+    "why": "search activated"
+  },
+  {
+    "at": 4.683333,
+    "src": "sfx/browse_wheel.wav",
+    "gain_db": -4,
+    "duration": 1.68,
+    "why": "file reel spins with decelerating teeth"
+  },
+  {
+    "at": 6.62,
+    "src": "sfx/folder_unfold.wav",
+    "gain_db": -6,
+    "duration": 0.52,
+    "why": "matching skill extracted"
+  },
+  {
+    "at": 7.68,
+    "src": "sfx/module_lock.wav",
+    "gain_db": -12,
+    "duration": 0.31,
+    "why": "matching skill installed"
+  },
+  {
+    "at": 7.84,
+    "src": "sfx/boot.wav",
+    "gain_db": -16,
+    "duration": 0.56,
+    "why": "website assembles"
+  },
+  {
+    "at": 9.15,
+    "src": "sfx/power_bite.wav",
+    "gain_db": -10,
+    "duration": 0.44,
+    "why": "Claude consumes glowing skill power-up"
+  },
+  {
+    "at": 9.363333,
+    "src": "sfx/armor_bloom.wav",
+    "gain_db": -11,
+    "duration": 0.78,
+    "why": "consumed skill ignites armor and cape"
+  },
+  {
+    "at": 9.82,
+    "src": "sfx/thock.wav",
+    "gain_db": -12,
+    "duration": 0.16,
+    "why": "one task received"
+  },
+  {
+    "at": 11.12,
+    "src": "sfx/gear.wav",
+    "gain_db": -13,
+    "duration": 0.32,
+    "why": "loose parts decelerate"
+  },
+  {
+    "at": 11.42,
+    "src": "sfx/pencil.wav",
+    "gain_db": -13,
+    "duration": 0.2687291666666667,
+    "why": "robot plan starts drawing"
+  },
+  {
+    "at": 11.85,
+    "src": "sfx/snap.wav",
+    "gain_db": -10,
+    "duration": 0.1656875,
+    "why": "head and body assembly"
+  },
+  {
+    "at": 12.2,
+    "src": "sfx/latch.wav",
+    "gain_db": -12,
+    "duration": 0.18177083333333333,
+    "why": "limbs seat"
+  },
+  {
+    "at": 12.43,
+    "src": "sfx/click.wav",
+    "gain_db": -13,
+    "duration": 0.1158125,
+    "why": "inspection lens engages"
+  },
+  {
+    "at": 12.94,
+    "src": "sfx/metal.wav",
+    "gain_db": -15,
+    "duration": 0.22,
+    "why": "faulty gear repaired"
+  },
+  {
+    "at": 13.34,
+    "src": "sfx/robot_energize.wav",
+    "gain_db": -10,
+    "duration": 0.87,
+    "why": "ten-X core and eyes light up"
+  },
+  {
+    "at": 14.72,
+    "src": "sfx/core_ignite.wav",
+    "gain_db": -16,
+    "duration": 0.76,
+    "why": "Claude-Mem brain lights"
+  },
+  {
+    "at": 15.17,
+    "src": "sfx/memory_store.wav",
+    "gain_db": -12,
+    "duration": 0.62,
+    "why": "chat and project context enters brain"
+  },
+  {
+    "at": 16.17,
+    "src": "sfx/thock.wav",
+    "gain_db": -13,
+    "duration": 0.16,
+    "why": "first session closes"
+  },
+  {
+    "at": 16.63,
+    "src": "sfx/latch.wav",
+    "gain_db": -13,
+    "duration": 0.18177083333333333,
+    "why": "next session opens"
+  },
+  {
+    "at": 17.26,
+    "src": "sfx/chat_recall.wav",
+    "gain_db": -10,
+    "duration": 0.4,
+    "why": "speech bubbles recall chat"
+  },
+  {
+    "at": 17.64,
+    "src": "sfx/folder_unfold.wav",
+    "gain_db": -6,
+    "duration": 0.52,
+    "why": "project folder opens"
+  },
+  {
+    "at": 18.3,
+    "src": "sfx/module_lock.wav",
+    "gain_db": -14,
+    "duration": 0.31,
+    "why": "rocket resumes assembly"
+  },
+  {
+    "at": 18.95,
+    "src": "sfx/launch_motor.wav",
+    "gain_db": -16,
+    "duration": 0.68,
+    "why": "remembered rocket launches"
+  },
+  {
+    "at": 20.02,
+    "src": "sfx/selector_spin.wav",
+    "gain_db": -15,
+    "duration": 1.27,
+    "why": "hundred-skill collection gathers"
+  },
+  {
+    "at": 20.78,
+    "src": "sfx/module_lock.wav",
+    "gain_db": -14,
+    "duration": 0.31,
+    "why": "skill pack delivered"
+  },
+  {
+    "at": 21.405,
+    "src": "sfx/skill_post.wav",
+    "gain_db": -6,
+    "duration": 0.37,
+    "why": "large SKILL comment arrives"
+  }
+]

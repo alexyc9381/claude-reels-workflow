@@ -3,10 +3,11 @@
 
 Every reel unioned across its three scattered homes (code / factory log / storyboard) plus captions, so *what exists for a given reel* is answerable at a glance. **Generated** — never hand-edit; run `python3 tools/build_repo_index.py`.
 
-**In this repo:** 121 reels with code · 81 factory logs · 88 storyboards · 133 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
+**In this repo:** 122 reels with code · 81 factory logs · 89 storyboards · 133 caption files. Reel code and finished media for older reels live in the Drive zip / the sibling `matchtern-longform` project — a `log-only` row is normal, not missing data.
 
 | # | Reel | Code | Captions | Factory log | Storyboard | Status |
 |---|------|------|----------|-------------|------------|--------|
+| 163 | **SKILL** | [✓](video/src/skill163/src/index.tsx) | [1](video/src/skill163/src/words.json) | · | [✓](storyboards/163-skill.md) | code, no log |
 | 162 | **PROMPT** | · | · | · | [✓](storyboards/162-prompt.md) | storyboard-only |
 | 161 | **SPLIT** | · | · | · | [✓](storyboards/161-split.md) | storyboard-only |
 | 159 | **JOB** | · | · | · | [✓](storyboards/159-job.md) | storyboard-only |

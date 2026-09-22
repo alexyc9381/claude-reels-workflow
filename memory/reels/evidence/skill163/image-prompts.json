@@ -1,0 +1,25 @@
+{
+  "mode": "built-in image_gen",
+  "prompts": [
+    {
+      "key": "skill-vault",
+      "prompt": "Use case: stylized-concept. Asset type: illustrated BACKGROUND PLATE for a Claude AI skills reel, horizontal 4:3. A fresh cinematic skill-server vault: sculpted warm ivory architectural arches, a softly luminous pale jade central wall, deep petrol teal server cartridge racks at the extreme left and right edges, small copper data conduits and porcelain control knobs at the perimeter, low warm sandstone working platform along the bottom fifth. Eye-level slight downward camera, tactile painted animation-film style, detailed material edges, confident daylight with a warm key from upper left. Center 75% is calm bright negative space reserved for separately animated Claude character and large SKILL.md files. Avoid a library, bookshelves, wood workshop, drafting table. No characters, brains, writing, letters, numbers, logos, foreground machines, screens or central hero props. No vignette. Background scenery only, not a finished scene."
+    },
+    {
+      "key": "skill-foundry",
+      "prompt": "Use case: stylized-concept. Asset type: illustrated BACKGROUND PLATE for an AI skill selection reel, horizontal 4:3. A new beautiful miniature software fabrication room, ivory ceramic wall with recessed emerald channels, curved copper delivery rails only at left and right perimeter, translucent jade drawers with no text on the far edges, broad clear ochre stone counter along the bottom fifth, high clerestory daylight. Distinct from a library or traditional wood workshop. Painterly animation-film concept art with tactile material definition, balanced warm light and deep petrol corners. Straight-on camera, central 75% open and quiet for composited character and large UI. No central hero object, no characters, writing, text, logos, letters, numbers, books, screens, monitors or dramatic spotlight. Scene background only."
+    },
+    {
+      "key": "superpowers-lab",
+      "prompt": "Use case: stylized-concept. Asset type: illustrated BACKGROUND PLATE for 'Superpowers' planning/building/checking AI animation, horizontal 4:3. An inventive bright superhero engineering hangar, sunlit cream curved structural ribs, petrol teal enamel sidewalls, tall rounded gold power conduits framing the extreme edges, tiny suspended mechanical tools at side perimeter, luminous warm ivory open central wall, broad substantial pale brass assembly dais along bottom fifth. Tactile hand-painted cinematic concept art, surprising elegant architecture, dimensional metal and ceramic, warm daylight. Straight-on waist-height camera. Keep middle 75% clear and light so a separately animated orange Claude sprite and a robot assembly dominate. NO characters, robots, foreground tools, screens, stop signs, books, text, logos, symbols, writing, letters, numbers, central ring, portal, pedestal or central hero asset. No dark vignette."
+    },
+    {
+      "key": "memory-observatory",
+      "prompt": "Use case: stylized-concept. Asset type: NEW illustrated BACKGROUND PLATE for Claude-Mem persistent-memory animation, horizontal 4:3. A cinematic memory observatory, pale lavender and porcelain arched architecture, luminous opaline panels, deep indigo alcoves at extreme edges containing tiny amber glass memory capsules, rose-gold conduit lines at the perimeter, a quiet broad lilac stone work surface at bottom fifth. Elegant tactile painterly animation-film look, soft bright morning light through high windows, subtle prismatic reflections, distinct from a library and from a wood workshop. Straight-on camera, center 75% is clean calm light negative space for a large glowing brain on top of an orange Claude and separately animated chat/file objects. NO brain, characters, people, robot, screens, text, logos, letters, numbers, floating icons, books, central machines. Background only."
+    },
+    {
+      "key": "skill-dispatch",
+      "prompt": "Use case: stylized-concept. Asset type: NEW illustrated BACKGROUND PLATE for an AI skills pack delivery finale, horizontal 4:3. A delightful premium digital dispatch studio, warm apricot and creamy porcelain architecture, pale mint insets, copper parcel rails curving along extreme left and right edges, bright overhead skylight, finely detailed small sorting drawers at periphery, broad clear ivory counter along bottom fifth. Painterly cinematic animation-film materials, rich brass details, strong warm daylight and petrol shadow accents. Central 75% stays clean and light for a separately animated collection of skill files converging into a large downloadable pack. Distinct from an old wood workshop or bookshelves. No parcels, gift boxes, books, characters, screens, logos, text, numbers, letters or central hero object. Scenery only."
+    }
+  ]
+}

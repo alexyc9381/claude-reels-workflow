@@ -1,0 +1,106 @@
+{
+  "revision": "Exact hook headline and indexed revision lessons",
+  "verified_at_utc": "2026-09-22T02:03:35.443449+00:00",
+  "video": {
+    "folder_id": "1G_AzPlPFNNjcopHJD-ivSAezrMbtaC8m",
+    "name": "163_SKILL.mp4",
+    "id": "1HpPWopdzfOfJQvmRnst_C4RHy5qQqOOR",
+    "size": 8440214,
+    "sha256": "acbfaa3b919950d6708ff1376f3d861b1d9cb759253dd4921ee388d3422081e5",
+    "md5": "1861e6fd69a904a917aae93da1c82d37",
+    "public_download_matches": true
+  },
+  "files": [
+    {
+      "Path": "163_SKILL.mp4",
+      "Name": "163_SKILL.mp4",
+      "Size": 8440214,
+      "MimeType": "video/mp4",
+      "ModTime": "2026-09-22T02:01:32.972Z",
+      "IsDir": false,
+      "Hashes": {
+        "md5": "1861e6fd69a904a917aae93da1c82d37",
+        "sha1": "2fe8d8160ce32666188d4808ae02a81db484249a",
+        "sha256": "acbfaa3b919950d6708ff1376f3d861b1d9cb759253dd4921ee388d3422081e5"
+      },
+      "ID": "1HpPWopdzfOfJQvmRnst_C4RHy5qQqOOR"
+    },
+    {
+      "Path": "163_SKILL.srt",
+      "Name": "163_SKILL.srt",
+      "Size": 2073,
+      "MimeType": "application/x-subrip",
+      "ModTime": "2026-09-21T09:30:38.339Z",
+      "IsDir": false,
+      "Hashes": {
+        "md5": "1ef6bac64385dbb8b07c314feed3e2ab",
+        "sha1": "200fab815e9fff4ac294eaa79f5899c3e3203461",
+        "sha256": "2afdea7b53eb49cba1129565e5a2c7d007da44edd46659992a97d6ca8e02f231"
+      },
+      "ID": "1N-4m05zOPqfxKBW45nTO2QJarDH4APCb"
+    },
+    {
+      "Path": "163_SKILL_caption.txt",
+      "Name": "163_SKILL_caption.txt",
+      "Size": 1168,
+      "MimeType": "text/plain",
+      "ModTime": "2026-09-21T09:30:38.244Z",
+      "IsDir": false,
+      "Hashes": {
+        "md5": "986d249edf45b53b4bb10574065aef10",
+        "sha1": "4873eafa721c6218c0a7296f0ffeb2b6150d68db",
+        "sha256": "f77e13a2a81e3d448cdefadba40233c367195e44ee0eeaf5906f6a5be073ef04"
+      },
+      "ID": "1B1Z27W9nk3i9hqMnXWrGrbKFwvc_I73u"
+    },
+    {
+      "Path": "163_SKILL_guide.txt",
+      "Name": "163_SKILL_guide.txt",
+      "Size": 235,
+      "MimeType": "text/plain",
+      "ModTime": "2026-09-21T09:42:55.008Z",
+      "IsDir": false,
+      "Hashes": {
+        "md5": "a295ff975eb9c93e2f97c9a2dab398b5",
+        "sha1": "239b366a121b6701ee038bf6ecb0ef9338e4ddef",
+        "sha256": "58077d2f022a4732d5dad25f825ebfefd56a4f1d88f749892a2e498bcafe7334"
+      },
+      "ID": "1MAvZV4mJk8VI9GoHReg9feUXncwyD0N0"
+    },
+    {
+      "Path": "163_SKILL_source.zip",
+      "Name": "163_SKILL_source.zip",
+      "Size": 27747964,
+      "MimeType": "application/zip",
+      "ModTime": "2026-09-22T02:02:51.659Z",
+      "IsDir": false,
+      "Hashes": {
+        "md5": "98e6a49036d0fd73abdb325747e05e72",
+        "sha1": "3372adc46def742f9bf592c323f14cb70db147b1",
+        "sha256": "189dda2c35d889e02e4e4e8200d036164e8a787131b6b0f31849a583b5098c4c"
+      },
+      "ID": "1nsLZz4-SAEThy5L9G8OH4Ri-a1hllRXE"
+    }
+  ],
+  "guide": "https://chen.media/guides/100-free-claude-skills-and-setup",
+  "guide_commit": "e7b917263a7af7d477b1d7eded3fd3f4ff21007c",
+  "all_files_verified": true,
+  "canonical_ids_preserved": true,
+  "exactly_one_mp4_in_folder": true,
+  "qa": {
+    "checks": {
+      "motion": 0,
+      "look": 0,
+      "verify": 0,
+      "hook": 0,
+      "sfx": 0,
+      "decode": 0
+    },
+    "scene_motion": "5/5 pass; see packaged motion report",
+    "audio_caption_checks": "9/9 pass",
+    "sfx": "35 events; three count accents raised 6dB; material/spectral checks pass; stem comparison recorded",
+    "visual_review": "Hook/header frames reviewed; all scene animation code verified unchanged",
+    "continuous_listening_pass": false,
+    "source_zip_integrity": "All source checksums verified; matching final export hash"
+  }
+}

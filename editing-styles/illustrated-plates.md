@@ -55,4 +55,6 @@ The [exact three SPLIT prompts and asset outcomes](../memory/reels/evidence/spli
 
 ## Reuse and evidence
 
+For the subsequent SKILL 163 feedback, read [hook clarity, active browsing and sound lessons](../memory/alex-skill-hook-clarity-action-and-sound.md) and its [revision ledger](../memory/reels/skill163-revision-record.md). Use fresh subject-specific scenery; a detailed plate cannot rescue tiny skills, clutter or pauses between actions.
+
 [Reusable revision lessons](../memory/alex-split-illustrated-plates-and-revisions.md) · [feedback ledger](../memory/reels/split161-revision-record.md) · [final storyboard](../storyboards/161-split.md) · [text evidence](../memory/reels/evidence/split161/README.md) · [complete editable source on Drive](https://drive.google.com/file/d/1oS79VYI6ZU39hF9PQaV7lc-cLPdQGoHi/view).

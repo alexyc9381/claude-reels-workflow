@@ -1,0 +1,8 @@
+{
+  "src/Scenes.tsx": "f51ce6c861a244c112076a11226c2c02e295dd67cf55ac775d7f558e3d84a4b7",
+  "src/groups.json": "e1c1ae2e2ed6db2a822d582ff0cfe2105c4b2ea11b89d10e25d76da6e0d99574",
+  "src/words.json": "d9b8e340b20320a91e40832a5006becea54bfba4d17e67973803d7af2c237cfb",
+  "public/master.wav": "9b4bcc6618aa421256e27cf2363fca7c5ac9bff94235ab3997a58ad7e8c0ca17",
+  "public/voice.wav": "a5e6161ba245970d870326c8d33cfcbc5cc36deca33af723b9bd4f3e3f0937bc",
+  "public/music.wav": "9deabcaeb16f470536864877e7ec5fbcbfa54e6854cbebf8c8b75ae26b602201"
+}

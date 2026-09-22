@@ -1,0 +1,643 @@
+[
+  [
+    {
+      "word": "Claude",
+      "start": 0,
+      "end": 0.16
+    },
+    {
+      "word": "has",
+      "start": 0.16,
+      "end": 0.28
+    },
+    {
+      "word": "over",
+      "start": 0.28,
+      "end": 0.46
+    }
+  ],
+  [
+    {
+      "word": "90,000",
+      "start": 0.46,
+      "end": 1.02
+    },
+    {
+      "word": "skills,",
+      "start": 1.02,
+      "end": 1.26
+    },
+    {
+      "word": "but",
+      "start": 1.42,
+      "end": 1.48
+    }
+  ],
+  [
+    {
+      "word": "you",
+      "start": 1.48,
+      "end": 1.58
+    },
+    {
+      "word": "only",
+      "start": 1.58,
+      "end": 1.72
+    },
+    {
+      "word": "need",
+      "start": 1.72,
+      "end": 1.92
+    }
+  ],
+  [
+    {
+      "word": "three",
+      "start": 1.92,
+      "end": 2.16
+    },
+    {
+      "word": "of",
+      "start": 2.16,
+      "end": 2.24
+    },
+    {
+      "word": "them.",
+      "start": 2.24,
+      "end": 2.42
+    }
+  ],
+  [
+    {
+      "word": "First",
+      "start": 2.62,
+      "end": 2.7
+    },
+    {
+      "word": "is",
+      "start": 2.7,
+      "end": 2.84
+    }
+  ],
+  [
+    {
+      "word": "the",
+      "start": 2.84,
+      "end": 2.94
+    },
+    {
+      "word": "Anthropic",
+      "start": 2.94,
+      "end": 3.3
+    },
+    {
+      "word": "Skills",
+      "start": 3.3,
+      "end": 3.46
+    }
+  ],
+  [
+    {
+      "word": "Library.",
+      "start": 3.46,
+      "end": 3.86
+    }
+  ],
+  [
+    {
+      "word": "You",
+      "start": 4.0,
+      "end": 4.06
+    },
+    {
+      "word": "just",
+      "start": 4.06,
+      "end": 4.2
+    },
+    {
+      "word": "say",
+      "start": 4.2,
+      "end": 4.38
+    }
+  ],
+  [
+    {
+      "word": "what",
+      "start": 4.38,
+      "end": 4.48
+    },
+    {
+      "word": "you're",
+      "start": 4.48,
+      "end": 4.62
+    }
+  ],
+  [
+    {
+      "word": "building,",
+      "start": 4.62,
+      "end": 4.82
+    },
+    {
+      "word": "and",
+      "start": 4.96,
+      "end": 4.99
+    },
+    {
+      "word": "it",
+      "start": 4.985,
+      "end": 5.06
+    }
+  ],
+  [
+    {
+      "word": "will",
+      "start": 5.06,
+      "end": 5.16
+    },
+    {
+      "word": "look",
+      "start": 5.16,
+      "end": 5.3
+    },
+    {
+      "word": "through",
+      "start": 5.3,
+      "end": 5.42
+    }
+  ],
+  [
+    {
+      "word": "its",
+      "start": 5.42,
+      "end": 5.52
+    },
+    {
+      "word": "entire",
+      "start": 5.52,
+      "end": 5.88
+    },
+    {
+      "word": "skills",
+      "start": 5.88,
+      "end": 6.16
+    }
+  ],
+  [
+    {
+      "word": "library,",
+      "start": 6.16,
+      "end": 6.48
+    },
+    {
+      "word": "find",
+      "start": 6.54,
+      "end": 6.7
+    },
+    {
+      "word": "the",
+      "start": 6.7,
+      "end": 6.84
+    }
+  ],
+  [
+    {
+      "word": "best",
+      "start": 6.84,
+      "end": 6.98
+    },
+    {
+      "word": "matching",
+      "start": 6.98,
+      "end": 7.32
+    },
+    {
+      "word": "ones,",
+      "start": 7.32,
+      "end": 7.48
+    }
+  ],
+  [
+    {
+      "word": "and",
+      "start": 7.52,
+      "end": 7.6
+    },
+    {
+      "word": "even",
+      "start": 7.6,
+      "end": 7.74
+    },
+    {
+      "word": "install",
+      "start": 7.74,
+      "end": 8.1
+    }
+  ],
+  [
+    {
+      "word": "them",
+      "start": 8.1,
+      "end": 8.24
+    },
+    {
+      "word": "for",
+      "start": 8.24,
+      "end": 8.42
+    },
+    {
+      "word": "you.",
+      "start": 8.42,
+      "end": 8.54
+    }
+  ],
+  [
+    {
+      "word": "The",
+      "start": 8.64,
+      "end": 8.74
+    },
+    {
+      "word": "second",
+      "start": 8.74,
+      "end": 8.94
+    }
+  ],
+  [
+    {
+      "word": "is",
+      "start": 8.94,
+      "end": 9.1
+    },
+    {
+      "word": "Superpowers.",
+      "start": 9.1,
+      "end": 9.5
+    }
+  ],
+  [
+    {
+      "word": "You",
+      "start": 9.6,
+      "end": 9.66
+    },
+    {
+      "word": "just",
+      "start": 9.66,
+      "end": 9.78
+    },
+    {
+      "word": "give",
+      "start": 9.78,
+      "end": 9.92
+    }
+  ],
+  [
+    {
+      "word": "it",
+      "start": 9.92,
+      "end": 10.02
+    },
+    {
+      "word": "one",
+      "start": 10.02,
+      "end": 10.16
+    },
+    {
+      "word": "task,",
+      "start": 10.16,
+      "end": 10.42
+    }
+  ],
+  [
+    {
+      "word": "and",
+      "start": 10.52,
+      "end": 10.56
+    },
+    {
+      "word": "it",
+      "start": 10.56,
+      "end": 10.68
+    },
+    {
+      "word": "forces",
+      "start": 10.68,
+      "end": 10.86
+    }
+  ],
+  [
+    {
+      "word": "Claude",
+      "start": 10.86,
+      "end": 11.1
+    },
+    {
+      "word": "to",
+      "start": 11.1,
+      "end": 11.22
+    },
+    {
+      "word": "slow",
+      "start": 11.22,
+      "end": 11.4
+    }
+  ],
+  [
+    {
+      "word": "down,",
+      "start": 11.4,
+      "end": 11.6
+    },
+    {
+      "word": "properly",
+      "start": 11.68,
+      "end": 11.92
+    }
+  ],
+  [
+    {
+      "word": "plan,",
+      "start": 11.92,
+      "end": 12.26
+    },
+    {
+      "word": "and",
+      "start": 12.34,
+      "end": 12.42
+    },
+    {
+      "word": "check",
+      "start": 12.42,
+      "end": 12.56
+    }
+  ],
+  [
+    {
+      "word": "its",
+      "start": 12.56,
+      "end": 12.7
+    },
+    {
+      "word": "own",
+      "start": 12.7,
+      "end": 12.84
+    },
+    {
+      "word": "work,",
+      "start": 12.84,
+      "end": 12.98
+    }
+  ],
+  [
+    {
+      "word": "so",
+      "start": 12.98,
+      "end": 13.14
+    },
+    {
+      "word": "you",
+      "start": 13.14,
+      "end": 13.22
+    },
+    {
+      "word": "get",
+      "start": 13.22,
+      "end": 13.34
+    }
+  ],
+  [
+    {
+      "word": "ten",
+      "start": 13.34,
+      "end": 13.52
+    },
+    {
+      "word": "X",
+      "start": 13.52,
+      "end": 13.7
+    },
+    {
+      "word": "better",
+      "start": 13.7,
+      "end": 13.88
+    }
+  ],
+  [
+    {
+      "word": "outputs.",
+      "start": 13.88,
+      "end": 14.18
+    }
+  ],
+  [
+    {
+      "word": "The",
+      "start": 14.4,
+      "end": 14.46
+    },
+    {
+      "word": "third",
+      "start": 14.46,
+      "end": 14.58
+    }
+  ],
+  [
+    {
+      "word": "is",
+      "start": 14.58,
+      "end": 14.72
+    },
+    {
+      "word": "Claude-Mem.",
+      "start": 14.72,
+      "end": 15.04
+    }
+  ],
+  [
+    {
+      "word": "This",
+      "start": 15.2,
+      "end": 15.32
+    },
+    {
+      "word": "gives",
+      "start": 15.32,
+      "end": 15.48
+    },
+    {
+      "word": "Claude",
+      "start": 15.48,
+      "end": 15.68
+    }
+  ],
+  [
+    {
+      "word": "memory",
+      "start": 15.68,
+      "end": 15.86
+    },
+    {
+      "word": "across",
+      "start": 15.86,
+      "end": 16.12
+    }
+  ],
+  [
+    {
+      "word": "every",
+      "start": 16.12,
+      "end": 16.42
+    },
+    {
+      "word": "session,",
+      "start": 16.42,
+      "end": 16.64
+    },
+    {
+      "word": "so",
+      "start": 16.78,
+      "end": 16.86
+    }
+  ],
+  [
+    {
+      "word": "he",
+      "start": 16.86,
+      "end": 16.94
+    },
+    {
+      "word": "remembers",
+      "start": 16.94,
+      "end": 17.1
+    },
+    {
+      "word": "your",
+      "start": 17.1,
+      "end": 17.26
+    }
+  ],
+  [
+    {
+      "word": "chats",
+      "start": 17.26,
+      "end": 17.46
+    },
+    {
+      "word": "and",
+      "start": 17.46,
+      "end": 17.64
+    },
+    {
+      "word": "files,",
+      "start": 17.64,
+      "end": 17.86
+    }
+  ],
+  [
+    {
+      "word": "and",
+      "start": 17.98,
+      "end": 18.02
+    },
+    {
+      "word": "you",
+      "start": 18.02,
+      "end": 18.1
+    },
+    {
+      "word": "never",
+      "start": 18.1,
+      "end": 18.3
+    }
+  ],
+  [
+    {
+      "word": "have",
+      "start": 18.3,
+      "end": 18.52
+    },
+    {
+      "word": "to",
+      "start": 18.52,
+      "end": 18.64
+    },
+    {
+      "word": "re-explain",
+      "start": 18.64,
+      "end": 19.0
+    }
+  ],
+  [
+    {
+      "word": "anything",
+      "start": 19.0,
+      "end": 19.32
+    },
+    {
+      "word": "ever",
+      "start": 19.32,
+      "end": 19.52
+    }
+  ],
+  [
+    {
+      "word": "again.",
+      "start": 19.52,
+      "end": 19.8
+    }
+  ],
+  [
+    {
+      "word": "For",
+      "start": 19.94,
+      "end": 20.04
+    },
+    {
+      "word": "a",
+      "start": 20.04,
+      "end": 20.14
+    },
+    {
+      "word": "list",
+      "start": 20.14,
+      "end": 20.2
+    }
+  ],
+  [
+    {
+      "word": "of",
+      "start": 20.2,
+      "end": 20.36
+    },
+    {
+      "word": "100",
+      "start": 20.36,
+      "end": 20.66
+    },
+    {
+      "word": "free",
+      "start": 20.66,
+      "end": 20.9
+    }
+  ],
+  [
+    {
+      "word": "skills,",
+      "start": 20.9,
+      "end": 21.14
+    },
+    {
+      "word": "comment",
+      "start": 21.38,
+      "end": 21.41
+    }
+  ],
+  [
+    {
+      "word": "SKILL.",
+      "start": 21.404999999999998,
+      "end": 21.75
+    }
+  ]
+]

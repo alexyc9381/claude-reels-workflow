@@ -1,0 +1,20 @@
+{
+  "name": "nocodealex-skill-163",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.tsx",
+    "render": "remotion render src/index.tsx SKILL163 raw.mp4 --concurrency=2 --crf=18"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.370",
+    "remotion": "4.0.370",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}

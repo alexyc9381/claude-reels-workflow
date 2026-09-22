@@ -161,6 +161,14 @@ def scan_reels():
             if r["number"] is None or num >= r["number"]:
                 r["number"] = num
 
+    # SKILL 163 is a standalone project, distinct from the older SKILL 106.
+    skill_entry = "video/src/skill163/src/index.tsx"
+    if keep(skill_entry) and os.path.isfile(rp(skill_entry)):
+        r = touch("skill163", code=skill_entry, name="SKILL", number=163)
+        skill_words = "video/src/skill163/src/words.json"
+        if keep(skill_words) and os.path.isfile(rp(skill_words)):
+            r["captions"].append(skill_words)
+
     # captions: join ONLY when the data filename literally names the reel (e.g. words_roots.json).
     # Generic files (words.json / captions.json) belong to no single reel — never force-join them.
     GENERIC = {"words", "captions", "timeline"}
