@@ -1,0 +1,22 @@
+{
+  "revision": 8,
+  "originalMasterUnchanged": false,
+  "sharedBodyStartsFrame": 133,
+  "sharedDownloadChanged": true,
+  "alternateOpeningSourceUnchanged": true,
+  "alternateMixPreserved": true,
+  "identicalToPriorSource": [
+    "src/BrowserClear.tsx",
+    "src/ClashMode.tsx",
+    "src/CleanRace.tsx",
+    "src/Finale.tsx",
+    "src/SlopKit.tsx",
+    "src/words.json",
+    "src/caption-lines.json",
+    "src/HookVending.tsx",
+    "src/HookCoaster.tsx",
+    "public/voice.wav"
+  ],
+  "fps": 30,
+  "durationFrames": 634
+}

@@ -50,7 +50,7 @@ Browser playback at 1× with audio enabled was observed at start/completion; nat
 ## Canonical delivered artifacts
 
 - [FILE folder](https://drive.google.com/drive/u/0/folders/1eB4AWS5ir1Xn6SZLrc8TXTYMSGd2HJhG)
-- [R7 master](https://drive.google.com/file/d/1tMcDwWziagAcb-mJ2bRPhxdyW94HIkgt/view), SHA256 `c43699537651757a3b18abbef4ec71b32986ec39ecdc9e78910b3b48283a08c0`
+- [Canonical master (now R8)](https://drive.google.com/file/d/1tMcDwWziagAcb-mJ2bRPhxdyW94HIkgt/view), historical R7 SHA256 `c43699537651757a3b18abbef4ec71b32986ec39ecdc9e78910b3b48283a08c0`; current R8 hash is in the delivery evidence
 - [Vending full reel](https://drive.google.com/file/d/19KwmQycfHR54ksJY1wnJpvzWkklqvUOV/view)
 - [Switchyard full reel](https://drive.google.com/file/d/1L-GKkuaZXXgMsMNitfsd4_LXDM4Wc_hP/view)
 - [Editable source](https://drive.google.com/file/d/1iD_6KKc87YwAZ6rmC_zDSv-N6xwHw1lU/view)
@@ -60,3 +60,18 @@ Browser playback at 1× with audio enabled was observed at start/completion; nat
 The article existed before this edit. A live response and title were verified; no new article deployment or correction was made. Known older wording about response speed and privacy was not newly validated. Source documentation distinguishes free interface from possible provider charges, local history from hosted requests, exactly 60 options at the recorded snapshot and five fixed Classic presets. Removing overlays did not turn those limitations into supported absolute claims.
 
 [Lightweight review/evidence](evidence/file165/README.md). Heavy assets and source remain in Drive. This log is retrospective documentation of the chat, not a claim that every preproduction step was recorded before the original build.
+
+
+## R8 follow-up: zero subscriptions and the 6-second pause
+
+**User feedback:** the yellow beat around 4s only converged logos and did not meaningfully animate “with zero AI subscriptions”; around 6s the animation paused. R8 was delivered September 22. The subsequent request was to save revisions and reasons to main, not an explicit creative approval.
+
+**Hook tail, 3.0–4.433s:** `src/SubscriptionTail.tsx` replaces the main hook's last convergence. Claude pulls an APP PLAN ticket against a retaining peg. The tear follows “zero” (3.50–3.74s) and “subscriptions” (3.74–4.236s), with four real model logos released through the gap and continuing to travel. The ticket concerns the app-plan requirement, not provider billing. We kept the cartoon world and original whole sprite; no new anatomy. Internal iterations aligned the seam, reduced off-frame pull, removed a hand-jumping shock, and accelerated the early logo fan for recognition at 4.0–4.2s.
+
+**Download, 4.433–7.233s:** `src/Access.tsx` now bridges the former pull-to-open hold. Wind-up starts around 5.80s with visible strain, hand-attached tab rotation/compression and folds; browser opening remains on “open” at 6.14s. Four named model cards arrive and settle through the end of the scene. A thin initial hinge projection was changed to a smooth 43-degree sinusoidal hinge arc. The goal was sustained causal action without obscuring the file-to-browser relationship or delaying the spoken action.
+
+**Sound and preservation:** main ticket Foley moved to 3.74s using the existing paper unroll source. `public/mix-alternate.wav` preserves the prior alternate opening mix; `production/build_audio.py --alternate` reproduces it. Both alternate full reels received the Download change, while their opening source remained unchanged. Voice, caption source, original SlopKit and scenes after Download stayed byte-identical to the preceding source archive. No new explanatory footers, generated artwork, voice treatment or narration retiming.
+
+**Review:** storyboard critique and sampled author-frame critique passed. The critic explicitly excluded the final hinge revision and final-master playback. Root checked final-master frames at 4.0, 6.0, 6.14 and 7.0s. Normal-speed browser start/completion with audio enabled was observed; this is not continuous subjective listening. All seven master scenes passed motion diagnostics (Hook 26.59, Download 13.99, median 9.92), global look passed with the existing header warning, and ship checks passed 9/9 with 32/32 cue windows. Both variants passed motion and ship checks. Main measured −21.47 LUFS / −1.45 dBTP. These are diagnostics, not retention claims.
+
+**Delivery:** master, Vending, Switchyard and editable ZIP were replaced in place under their existing Drive IDs. `Article-link.txt` was added with the existing live FILE article. All five cloud files matched server size/hash metadata, and their updated listing was visible in Drive. Current output hashes, source ZIP hash, review scope and diagnostics are preserved in [R8 evidence](evidence/file165/README.md). Historical R7 hashes above no longer describe the mutable canonical Drive master.

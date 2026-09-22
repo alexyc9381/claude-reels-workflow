@@ -29,6 +29,24 @@ This records Alex's September 21–22 FILE conversation. It concerns the new 21.
 | Claude needs better motion and expression | Assign a job, directed gaze, effort, surprise and recovery. Preserve the original sprite anatomy. Position controls at the existing hand and compensate for intrinsic squash/jump; catches must remain attached during carry. | Inspect contact at press, release, catch and follow-through. A file floating near a hand is not a catch; signs floating off their rails are not a working mechanism. |
 | Remove bottom explanatory text, including “illustrated, not a speed benchmark” | Explicitly remove the small explanatory strips across all active scenes, retaining main headlines and spoken captions. Preserve relevant source qualifications in the README/guide, without adding replacement overlays. | This is an explicit FILE override of earlier footer guidance, not permission to invent results or suppress necessary context in unrelated work. Check every scene, not only the quoted footer. |
 
+## R8: choose motion for the clause, and fill the interval between actions
+
+Alex rejected the yellow hook tail at about 4 seconds because the models merely converged into one logo during “with zero AI subscriptions.” He also reported a pause around 6 seconds. These are new rejections after the earlier delivery, not approval of R7.
+
+| Diagnosis | Revised choice | Why and how to review |
+|---|---|---|
+| Logo convergence depicts collection, not the absence of a subscription requirement | Original Claude pulls an APP PLAN ticket against a retaining peg, tears it on “zero subscriptions,” and releases four large authentic model identities through the opening | Give the clause a readable obstacle, effort and consequence. The same convergence remains appropriate at “in one place” later: an action is right or wrong in relation to the spoken meaning, not universally good or bad. |
+| The file pull finished around 5.84s while browser opening waited until 6.14s | Add visible spring wind-up from about 5.80s: Claude strains, the hand-attached file compresses/rotates with accordion folds, then hinges open on “open”; named model cards arrive and settle afterward | Board the interval between completed actions. Anticipation should visibly load the next action; a background loop or generic bob would leave the main subject idle. Keep the narration timing instead of moving the opening early merely to hide the gap. |
+| Extra sprite shock and excessive pull made contact and framing less convincing in internal review | Reduce the pull, align the intact ticket seam, retain the whole original sprite, remove the jump-producing shock and fan the logos earlier | More motion is not always a better performance. Preserve visible hand contact, face/body readability and the recognizable object throughout the load/release/follow-through. |
+| A near-edge-on browser hinge read as a thin projection/snap | Use a smoother, shallower hinge arc that retains the browser's visible mass | Inspect intermediate native frames as well as endpoints. A correct final browser does not prove that the unfold reads. |
+| Shared Download defect also exists in alternate full reels | Re-render both alternatives with the shared fix while preserving their distinct opening source and original alternate mix | Define preservation at the correct scope. Body changes must reach all delivered variants; hook-specific Foley changes should not silently alter unrelated hook trials. |
+
+The ticket is a FILE-specific metaphor, not a new default prop or proof of free model usage. “No app subscription” does not establish free provider API calls; do not animate cancelled provider bills, waived usage fees or free credits. Preserve useful functional setup cues (here, API key or local endpoint) without reinstating the rejected footer strips.
+
+Sound follows the revised physical event: the main hook's earlier key-turn cue was replaced with paper-release Foley at 3.74s. The alternatives retained their original mix. Do not leave an old cue attached to a removed action just because the full mix still passes a cue-energy check.
+
+**Review scope:** fresh storyboard critique and sampled visual critique passed; the critic did not inspect the final hinge adjustment or the final master. Root separately inspected final-master frames at 4.0, 6.0, 6.14 and 7.0 seconds. Browser progression was observed at normal-speed start/completion with audio enabled, not continuously assessed by a human listener. Technical passes and delivery remain distinct from Alex's creative approval or retention evidence. [R8 record and evidence](reels/file165-revision-record.md#r8-follow-up-zero-subscriptions-and-the-6-second-pause).
+
 ## Two layers of the many-models beat
 
 Identity and quantity need different staging. The large leaders answer “which models?” The grouped smaller marks answer “how many options?” One shared receiving browser answers “where?” Keep those jobs distinct and timed to the narration. Fourteen authentic brand assets were reused for model options, not presented as fifty distinct companies. The verified catalogue had exactly 60 options at the recorded source snapshot; counts are not evergreen.
@@ -37,7 +55,7 @@ The outgoing browser at 10.467 seconds matched the incoming scene's position, sh
 
 ## Alternative hooks must test different actions
 
-Alex delegated choosing and building two alternatives. This authorized completing both; another concept-selection approval round was not necessary. We held voice, headline, captions, sound and all scenes after frame 133 constant so the visual opening could be compared.
+Alex delegated choosing and building two alternatives. This authorized completing both; another concept-selection approval round was not necessary. At the original variant delivery, we held voice, headline, captions, sound and all scenes after frame 133 constant so the visual opening could be compared. R8 subsequently updated the shared Download scene in all three reels; only the main hook received the new ticket action and sound.
 
 - **AI vending machine:** the stocked cabinet is the hero. Claude operates its lever, large logo tokens roll down a chute, then an HTML download file ejects and is caught/carried. A proposed final model-to-browser collection was rejected internally because S3 already does that operation.
 - **Model switchyard:** original proposal used rollercoaster carriages. Fresh critique rejected it as too similar to the body race. Suspended logo signs on overhead switching rails use a different silhouette and mechanism. Claude operates one selector and extracts a download tab while the signs continue moving.

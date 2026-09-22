@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Article-link.txt",
+    "bytes": 178,
+    "sha256": "a4dac96f8282de69272ab845f4e8ad720d80c3e921a40ff18e7dba25f010bfd7",
+    "md5": "dead69d79bbb26caf700addc47816ec9",
+    "driveLocalVerified": true,
+    "serverMetadataVerified": true,
+    "id": "1HJJf5C0wghJmb2arjGt_MMXNZxpH8leB"
+  },
+  {
+    "name": "165_FILE_Editing_Master.mp4",
+    "bytes": 10763309,
+    "sha256": "c96efd7a67530ec14f0c06c8e8245eb2ec6a1ae4d4420ebf2be4a9cf14ed7b46",
+    "md5": "d4deac7787a0ca42e51f1dcd1c3c3e9c",
+    "driveLocalVerified": true,
+    "serverMetadataVerified": true,
+    "id": "1tMcDwWziagAcb-mJ2bRPhxdyW94HIkgt"
+  },
+  {
+    "name": "165_FILE_Hook_02_Vending.mp4",
+    "bytes": 9680310,
+    "sha256": "dd26b87743725a6b11879bfe53c2a8021aa7155f95aa6b7d575c9632033a201d",
+    "md5": "96b6b89be1e51641d39190609b12c924",
+    "driveLocalVerified": true,
+    "serverMetadataVerified": true,
+    "id": "19KwmQycfHR54ksJY1wnJpvzWkklqvUOV"
+  },
+  {
+    "name": "165_FILE_Hook_03_Switchyard.mp4",
+    "bytes": 10411910,
+    "sha256": "6173f48f07f9170cc809504660fbc283ca454ffd32cf46ce2cd34742534b13ea",
+    "md5": "32c56825b3f2e6e5ff1832785f983be1",
+    "driveLocalVerified": true,
+    "serverMetadataVerified": true,
+    "id": "1L-GKkuaZXXgMsMNitfsd4_LXDM4Wc_hP"
+  },
+  {
+    "name": "165_FILE_Source.zip",
+    "bytes": 51911647,
+    "sha256": "b4da28f73dd6a6a087d6d1f2abf5a303c64a13b757281a7d4aaa40de0c51ee63",
+    "md5": "59bb0cc17f8b3bd6ffcd574441582e12",
+    "driveLocalVerified": true,
+    "serverMetadataVerified": true,
+    "id": "1iD_6KKc87YwAZ6rmC_zDSv-N6xwHw1lU"
+  }
+]

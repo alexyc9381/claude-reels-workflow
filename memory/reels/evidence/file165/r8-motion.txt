@@ -1,0 +1,13 @@
+
+  scene                   MOTION  top share DEADRUN    HOLD  verdict
+  ----------------------------------------------------------------------------
+  Hook                     26.59      0.069       0     14%  ok
+  Download                 13.99      0.084      12     14%  ok
+  Models                    9.22      0.094       0     12%  ok
+  History                   9.13      0.068       6     16%  ok
+  Prompt                   13.67      0.115       3     17%  ok
+  Race                      8.17      0.109       0     35%  ok
+  CTA                       9.92      0.113       0     23%  ok
+  ----------------------------------------------------------------------------
+  median motion 9.92  (bar 9.00, approved reel 81 = 9.82)
+  scenes failing: 0/7
