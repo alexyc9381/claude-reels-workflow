@@ -4,6 +4,8 @@ Use [Claude Beginners current direction](../youtube-video-editing-system/CURRENT
 
 # Memory Index
 
+- [Required article + Drive delivery check](../lead-magnets/README.md#required-final-delivery-check-office-164-september-22-2026): OFFICE 164 was missing its article. Verify a live chen.media guide and cloud Article-link.txt before declaring a faceless post complete; no DOCX delivery.
+
 - [📶 Mac mini "bad internet"](mac-mini-wifi-not-claude.md) — 2.4GHz Wi-Fi, NOT Claude. Fix: Ethernet → 5GHz SSID → DNS 1.1.1.1
 - [🧊 Claude Code freeze = transcript bloat](claude-code-freeze-transcript-bloat.md) — reel sessions embed images → 150MB+ transcripts; archive them, stop using ~/Downloads as project root
 - [💀 "Random crash" = macOS jetsam OOM](claude-crash-jetsam-oom.md) — not a crash: 8.9GB claude + 54 MCP procs on a 16GB mini. Trigger = xhigh + workflow fan-outs. Never conflate crash / freeze / wifi
