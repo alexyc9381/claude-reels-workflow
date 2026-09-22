@@ -1,0 +1,18 @@
+{
+  "identicalToPriorSource": [
+    "src/Access.tsx",
+    "src/BrowserClear.tsx",
+    "src/ClashMode.tsx",
+    "src/CleanRace.tsx",
+    "src/Finale.tsx",
+    "src/SlopKit.tsx",
+    "src/words.json",
+    "src/caption-lines.json",
+    "public/mix.wav",
+    "public/voice.wav"
+  ],
+  "originalMasterUnchanged": true,
+  "bodyStartsFrame": 133,
+  "fps": 30,
+  "durationFrames": 634
+}

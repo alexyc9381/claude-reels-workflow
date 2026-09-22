@@ -34,3 +34,7 @@ Still GATE THE HOW ([[gate-the-how-in-scripts]]): the caption body teaches the w
 ## OC correction on September 12 2026
 
 The initially delivered OC caption incorrectly opened with value and buried the CTA. The [corrected caption](../lead-magnets/150-oc-caption.txt) is the reusable formatting example: comment CTA as the first non-empty line, READ BELOW as the next, blank lines between paragraphs, numbered value points, repeated named-guide CTA, then hashtags. Check the actual uploaded text, not just an in-memory draft. The final caption is 1,244 characters, with no em/en dashes; the article holds the copyable commands. See the [OC revision record](reels/oc-factory-log.md).
+
+## FILE 165 correction on September 22, 2026
+
+A CTA-first line alone did not pass: the delivered FILE copy omitted READ BELOW, numbered value points and the repeated named-guide CTA. Check the entire structure, including the follow reminder and quoted keyword, against the actual cloud file. [Corrected FILE caption](../lead-magnets/165-file-caption.txt) and [revision record](reels/file165-revision-record.md). Posting-caption fixes are distinct from on-screen subtitle edits; identify which artifact the conversation refers to. Update the caption inside the source ZIP too.

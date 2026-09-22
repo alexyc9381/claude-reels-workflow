@@ -227,6 +227,8 @@ The short version (full process, gate and worked example in the doc):
   Recognizable is only half of it — a theme the viewer cannot connect to the audio works against
   the hook. Put the literal thing (real UI, the actual command) on screen alongside it.
 
+FILE 165 follow-up: read [the feedback-to-decision record](memory/alex-file165-semantic-motion-and-cartoon-worlds.md) before fixing a dull logo/file hook or a many-models beat. More marks must depict the spoken relationship; three cuts and passing metrics alone do not establish comprehension. Preserve original sprite contact and a continuing consequence.
+
 ## B1. Beat-map + one card per scene
 Split the final VO by its `L[]` onsets. One scene = one VO line = one idea. Per card:
 **LINE+DUR · THE ONE TAKEAWAY · STORY metaphor + WHY (+ ≥1 rejected alternative) · PROOF (real UI + the number)

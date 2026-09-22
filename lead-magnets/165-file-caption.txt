@@ -1,0 +1,22 @@
+Comment "FILE" and I'll DM you the one-file AI setup guide. Follow so the DM lands 📩
+
+👇 READ BELOW for what this one-file AI workspace actually does:
+
+ChatGPT, Claude, Gemini and Grok in one browser interface. The useful part is being able to compare different answers to the same question.
+
+1. Keep your models in one place.
+The interface has 60 model options, so you can switch between models without bouncing between separate chat websites.
+
+2. Compare answers side by side.
+The mode shown as Clash Mode in the reel uses five preset model and prompt combinations. Use it to compare ideas, spot differences and choose the answer that fits your task.
+
+3. Open the interface in your browser.
+The app is a single HTML file. You connect your own provider or local endpoint to use the models. The guide walks through the setup.
+
+A detail worth knowing: the interface is free, but provider usage can cost. Chat history stays in your browser; hosted-model requests still go to your provider.
+
+Save this for your next AI workflow upgrade.
+
+Comment "FILE" and I'll send you the one-file AI setup guide.
+
+#AITools #ClaudeAI #ChatGPT #Gemini #NoCodeAlex

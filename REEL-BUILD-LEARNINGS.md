@@ -1,5 +1,7 @@
 # Reel Build Learnings
 
+**September 22, 2026: [FILE 165 decisions and reasons](memory/alex-file165-semantic-motion-and-cartoon-worlds.md).** Animate the narrated relationship, not just a logo count; cartoon backgrounds must support an operated hero; contact and the last second matter; distinct hook variants must not repeat the body race/collection. Explicit footer removal is scoped to FILE. [Revision history](memory/reels/file165-revision-record.md).
+
 See [DEPARTMENT source and motion proof](memory/alex-department-source-and-motion-proof.md) for Alex’s explicit recreation rejection, whole-film concept revision, natural action durations and complete operations (both shared speed ramps and stretched slow glides rejected), source/render mismatch, physical follow-through, moving safe bounds and expanded cue verification. Technical passes are not creative approval. Latest follow-up: prominent Claude audience recognition and narration-timed GitHub source cards.
 
 Hard-won rules from building the Claude reels. Every entry below cost a revision cycle, a failed

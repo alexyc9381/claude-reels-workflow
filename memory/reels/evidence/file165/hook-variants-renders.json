@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Vending",
+    "file": "165_FILE_Hook_02_Vending.mp4",
+    "bytes": 9531964,
+    "sha256": "5d29dbabccd71033822f4de13d1a35aa43d8c3daafbfae253cc96784a76d59e1",
+    "decodedAudioSHA256": "889d1edb96ccc997a230cecac4baa37be69a748fa02143a2d3e71ab3aa30b69f"
+  },
+  {
+    "name": "Switchyard",
+    "file": "165_FILE_Hook_03_Switchyard.mp4",
+    "bytes": 10252467,
+    "sha256": "c2705b01b7d7da39aa773f8ac9616767630316eb7b6310209b59052d1d3a3531",
+    "decodedAudioSHA256": "889d1edb96ccc997a230cecac4baa37be69a748fa02143a2d3e71ab3aa30b69f"
+  }
+]
