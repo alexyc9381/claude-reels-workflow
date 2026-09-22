@@ -1,34 +1,34 @@
 ---
 name: alex-prompt162-opening-color-music-header
-description: "PROMPT 162 R7/R8: reject dull orange opening scenery, separate source music offset from video start, preserve exact STOP PROMPTING FROM SCRATCH header and verify delivery per artifact."
+description: "Learn the reasoning behind revision feedback: diagnose visual interest and hierarchy, choose an intentional musical passage, and make hook language topic-specific. PROMPT162 colors, timestamps and copy are historical examples, not future defaults."
 metadata:
   node_type: memory
   date: 2026-09-21
   reel: 162
 ---
 
-# PROMPT 162: opening color, music cue and exact header
+# Learn the decision behind the revision
 
-Read when editing PROMPT 162 or applying feedback about dull/orange openings, wrong musical passages or supplied header wording. [Revision record](reels/prompt162-revision-record.md) · [source and evidence](reels/evidence/prompt162/README.md).
+**Alex's explicit clarification:** remember WHY he requested a change, not the specific fix as a rule for future videos. In particular, future openings do not need to be brighter blue and teal. The previous index summaries overemphasized the implementation even though the body included a scope caveat; this note and its entry points replace that emphasis.
 
-## Explicit user corrections
+## How to translate feedback into future decisions
 
-- Opening at 0:00 was “dull and very orange” and not visually interesting. Recolor the environment to create separation from orange Claude rather than keeping wall, clock, desk and paper in similar tan/orange hues.
-- Music must begin at **8.000 seconds into the original soundtrack**, play from **video 0.000**, and continue thereafter at original speed. Do not delay the bed until video 0:08 or add eight seconds to an already trimmed stem. Supersedes this reel’s previous 13.95-second source cue.
-- Header must say **STOP PROMPTING FROM SCRATCH**, displayed as `STOP PROMPTING` / `FROM SCRATCH`, all caps. Supersedes `STOP WRITING` / `FROM SCRATCH`. Preserve the supplied verb exactly.
+Record the perceived problem, the intended viewer experience, and the reasoning for a response. Keep the chosen implementation in the reel's historical ledger. On the next project, diagnose its actual scene and choose an appropriate solution; do not copy a previous palette, timestamp or sentence automatically. Distinguish explicit user direction from our interpretation of its creative rationale.
 
-## Implemented treatment and scope
+| Feedback in this reel | Reasoning to carry forward | How to apply it next time |
+|---|---|---|
+| Opening felt dull, excessively orange and uninteresting | The issue was the overall visual experience. Our diagnosis was that similar warm colors across subject, room and props weakened separation and interest. Color should support a compelling focal hierarchy and the scene's mood. | Assess the actual frame: what draws the eye, what blends together, and whether the color relationships support the action. Adjust hue, value, saturation or their distribution where needed. Warm, cool, dark or bright treatments can all work. Neither blue/teal nor higher brightness is a standing requirement. |
+| Background music was at the wrong spot; Alex specified a different source passage | Musical-section choice matters, independently of the track name or volume. The passage should support the opening's pace and emotional energy. The exact creative reason for preferring this passage was not stated; do not invent a beat-sync rationale. | Choose/listen to the relevant passage against the edit and honor any supplied cue. Distinguish source-song time from video time, preserve continuity, and verify audible onset and voice balance. Eight seconds is this correction's cue, not a universal music start offset. |
+| Replace “STOP WRITING” with “STOP PROMPTING” | Our interpretation: a hook should name the specific activity and promise so viewers immediately recognize the topic. “Writing” is broad; “prompting” identifies the AI task here. | Write concise, topic-specific hook language. When Alex supplies exact wording, preserve it and check rendered fit. Do not reuse this reel's sentence on unrelated subjects. |
 
-R7 uses a brighter blue/teal room, teal desk, cobalt clock casing and pale mint clock face/paper. Original orange Claude, character motion, clock/press mechanism and transition remain. These colors are an implemented response to this reel’s feedback, **not a mandate to make every reel blue** or a user-approved global palette. Cream chassis and existing caption styling remain.
+These are decision principles, not a fixed recipe. A complaint about dullness does not automatically mean “make everything brighter,” and passing color/motion metrics does not demonstrate that the opening is compelling.
 
-R8 changes only the hook header text after R7. Voice, effects, captions, timing, later scenes and the 8-second cue remain unchanged. The hook spans frames 0–101 at 30 fps; total 934 frames (31.1333 seconds), 1080×1920.
+## Keeping revisions focused and verifiable
 
-## Reusable checks
+For a narrow correction, preserve unrelated voice, timing, captions and actions. Review the changed experience in the rendered output. For music, inspect the isolated bed as well as the mix: a clip positioned at video zero can still be inaudible there. Verify each uploaded artifact independently; a current MP4 does not prove the source ZIP is current.
 
-1. Judge the actual opening frame and moving transition, not saturation or luma alone. Separate orange subject from the set; do not indiscriminately boost the whole film.
-2. Retrieve the original soundtrack before moving its source cue. Rebuild music beneath unchanged voice/effects and keep source offset and timeline start as separate explicit fields.
-3. Solo/measure the new music stem. First attempt here recovered gain from unnormalized audio and left the new passage too quiet (440ms onset). Normalizing/carving the selected passage before applying the timeline ducking restored 20ms measured onset and continuous music. Merely placing audio at frame zero does not establish audibility.
-4. Inspect longer replacement headers at rendered size. Here the existing component accommodated the text without a separate font/layout change.
-5. Verify each Drive artifact independently. Final MP4 R8 uploaded and independently downloaded byte-identical; R8 source ZIP/notes were locally ready but their uploads hit Drive quota. Never report a video upload as proof that its source ZIP also updated.
+## Historical implementation, not future direction
 
-No explicit creative approval, retention improvement or subjective listening result was supplied. See [[reel-header-all-caps]], [[soundtrack-onset-at-zero]] and [[alex-split-illustrated-plates-and-revisions]] for related scoped rules.
+The exact R7/R8 colors, 8.000-second source cue, header wording, source patch and delivery state belong in the [PROMPT162 revision record](reels/prompt162-revision-record.md), [scene map](../storyboards/162-prompt.md) and [evidence](reels/evidence/prompt162/README.md). They document how this particular correction was implemented, not creative approval, retention results or new defaults for future reels.
+
+Related: [[reel-header-all-caps]] · [[soundtrack-onset-at-zero]] · [[feedback_repeated_note_means_wrong_object]].

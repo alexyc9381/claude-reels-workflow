@@ -12,7 +12,7 @@ render, or a re-record. Read the section that matches what you are about to do.
 
 ## Index
 
-**September 21: [PROMPT 162 opening color, music cue and exact header](memory/alex-prompt162-opening-color-music-header.md).** Distinguish dull same-hue staging from subject identity; distinguish song source time from video start; preserve supplied header wording; verify video and source uploads independently. [R7/R8 evidence](memory/reels/prompt162-revision-record.md).
+**September 21: [Remember the reasoning, not the specific fix](memory/alex-prompt162-opening-color-music-header.md).** Alex explicitly corrected the earlier emphasis on implementation: carry forward how to diagnose visual interest/hierarchy, musical-section fit and topic-specific hook wording. Choose solutions from each new scene; previous palettes, source offsets and sentences are historical examples. [PROMPT162 ledger](memory/reels/prompt162-revision-record.md).
 
 **September 18, 2026: [JOB 139 → 159: actions, sound and delivery](memory/alex-job-hook-action-sound-and-delivery.md).** Why a reveal needs another operation, why generic graphics remain boring, how to make fast motion causal, when realistic UI versus a physical metaphor helps, how to compare audible Foley stems and verify a requested music passage, how to gate a late keyword across captions, and how explicit new-number delivery differs from a revision. [Feedback ledger and evidence](memory/reels/job159-revision-record.md).
 
