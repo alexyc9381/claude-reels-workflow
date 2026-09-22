@@ -12,6 +12,8 @@ render, or a re-record. Read the section that matches what you are about to do.
 
 ## Index
 
+**September 21: [PROMPT 162 opening color, music cue and exact header](memory/alex-prompt162-opening-color-music-header.md).** Distinguish dull same-hue staging from subject identity; distinguish song source time from video start; preserve supplied header wording; verify video and source uploads independently. [R7/R8 evidence](memory/reels/prompt162-revision-record.md).
+
 **September 18, 2026: [JOB 139 → 159: actions, sound and delivery](memory/alex-job-hook-action-sound-and-delivery.md).** Why a reveal needs another operation, why generic graphics remain boring, how to make fast motion causal, when realistic UI versus a physical metaphor helps, how to compare audible Foley stems and verify a requested music passage, how to gate a late keyword across captions, and how explicit new-number delivery differs from a revision. [Feedback ledger and evidence](memory/reels/job159-revision-record.md).
 
 **September 16, 2026: [J-157 causal animation and trial lessons](memory/alex-j157-causal-animation-and-trials.md).** Replace weak concepts across the body; stage anticipation/contact/result, preserve real assets and sprite performance, fix hierarchy and contact geometry, carry final body corrections to every trial, and never treat disclosed gate failures as approved exceptions. Distinct from JEV-155.

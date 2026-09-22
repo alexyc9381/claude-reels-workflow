@@ -1,0 +1,9 @@
+{
+  "revision": "r8-header",
+  "header": "STOP PROMPTING FROM SCRATCH",
+  "frames": 934,
+  "music_source_offset_seconds": 8.0,
+  "video_sha256": "6be9c28852a87d47ce765106488a20d2d7723592f16ab3e07cee037cd749b315",
+  "visual_header_check": "pass",
+  "audio_unchanged_from_r7": true
+}

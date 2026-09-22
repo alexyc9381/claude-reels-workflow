@@ -1,0 +1,91 @@
+--- a/src/DeadlineHook.tsx
++++ b/src/DeadlineHook.tsx
+@@ -1,7 +1,7 @@
+ import React from 'react';
+ import {AbsoluteFill} from 'remotion';
+ import {P,T,E,S,PULSE,Clay,Logo,settle} from './Kit';
+-const INK='#112A35',IV='#FFF0CF',GOLD='#E2B267';
++const INK='#102B48',IV='#F6FCF5',GOLD='#FFD565';
+ 
+ // A finite threat, failed brace and release. The clock is a weight on the work, not a decorative timer.
+ export function DeadlineHook({t,archive}:{t:number,archive:React.ReactNode}){
+@@ -11,44 +11,44 @@
+  return <AbsoluteFill style={{transform:`scale(${1+.035*S(t,0,.8)})`,transformOrigin:'49% 48%'}}>
+  {archive}
+  <P w={1012} h={792} style={{transform:`translateX(${-1100*reveal+7*settle(t,1.46,1)}px)`,opacity:1-E(t,2.06,.05)}}>
+- <AbsoluteFill style={{background:'#EDD7AD'}}/>
++ <AbsoluteFill style={{background:'#A9D9E8'}}/>
+  <svg width="1012" height="792" style={{position:'absolute'}}>
+- <defs><linearGradient id="pressureWall" x2="1" y2="1"><stop stopColor="#FFF1CB"/><stop offset="1" stopColor="#CBA374"/></linearGradient></defs>
+- <path d="M0 0H1012V680H0Z" fill="url(#pressureWall)"/><path d="M0 680H1012V792H0Z" fill="#213F46"/>
+- <path d="M52 174H293V437H52Z" fill="#DBBC88" stroke="#AA885E" strokeWidth="9"/><path d="M66 188H278V421H66Z" fill="#F9E9BF"/>
+- <path d="M66 344L278 229M66 375L278 260" stroke="#E8CDA0" strokeWidth="11"/>
+- <path d="M433 142V700M905 142V700" stroke="#B79A6E" strokeWidth="30"/><path d="M436 142V700M907 142V700" stroke="#F6E0AF" strokeWidth="9"/>
+- {[0,1,2,3,4,5,6].map(i=><path key={i} d={`M422 ${180+i*76}h24M894 ${180+i*76}h24`} stroke="#795F4C" strokeWidth="8"/>)}
+- <path d="M0 682H1012" stroke="#856B52" strokeWidth="12"/>{[0,1,2,3,4,5].map(i=><path key={i} d={`M${i*217} 682L${i*250-85} 792`} stroke="#71877A" strokeWidth="4"/>)}
++ <defs><linearGradient id="pressureWall" x2="1" y2="1"><stop stopColor="#C6EEF0"/><stop offset="1" stopColor="#6F9DD1"/></linearGradient></defs>
++ <path d="M0 0H1012V680H0Z" fill="url(#pressureWall)"/><path d="M0 680H1012V792H0Z" fill="#183B61"/>
++ <path d="M52 174H293V437H52Z" fill="#437DAA" stroke="#26517F" strokeWidth="9"/><path d="M66 188H278V421H66Z" fill="#E0F8FF"/>
++ <path d="M66 344L278 229M66 375L278 260" stroke="#B6E7F8" strokeWidth="11"/>
++ <path d="M433 142V700M905 142V700" stroke="#3E6B98" strokeWidth="30"/><path d="M436 142V700M907 142V700" stroke="#BDE7F6" strokeWidth="9"/>
++ {[0,1,2,3,4,5,6].map(i=><path key={i} d={`M422 ${180+i*76}h24M894 ${180+i*76}h24`} stroke="#274C78" strokeWidth="8"/>)}
++ <path d="M0 682H1012" stroke="#2B648C" strokeWidth="12"/>{[0,1,2,3,4,5].map(i=><path key={i} d={`M${i*217} 682L${i*250-85} 792`} stroke="#5285A9" strokeWidth="4"/>)}
+  {/* A cast shadow grows as the weight approaches its actual contact surface. */}
+  <ellipse cx="658" cy="654" rx={180+105*S(t,0,1.4)} ry={12+15*S(t,0,1.4)} fill="#1A293B" opacity={.13+.28*S(t,0,1.4)}/>
+- <path d={`M334 644L882 644L949 ${688+19*hit}H283Z`} fill="#C99A65" stroke={INK} strokeWidth="8"/><path d={`M306 ${689+19*hit}H930V714H306Z`} fill="#6F5144"/>
++ <path d={`M334 644L882 644L949 ${688+19*hit}H283Z`} fill="#3EAFA8" stroke={INK} strokeWidth="8"/><path d={`M306 ${689+19*hit}H930V714H306Z`} fill="#165476"/>
+  <path d={`M332 713L${325-20*hit} 792M905 713L${910+20*hit} 792`} stroke={INK} strokeWidth="23"/>
+- <path d={`M440 669Q626 ${668+42*hit} 864 669`} fill="none" stroke="#FFDA90" strokeWidth="9"/>
++ <path d={`M440 669Q626 ${668+42*hit} 864 669`} fill="none" stroke="#BDF7E7" strokeWidth="9"/>
+  </svg>
+  {/* The visible unfinished prompt is the thing at risk. */}
+- <P x={402-38*PULSE(t,.55,.65)} y={548} w={458} h={104} style={{background:IV,border:'6px solid #9D8057',borderRadius:9,transform:`rotate(${-4+7*hit}deg) scaleY(${1-.78*E(t,1.40,.12)})`,transformOrigin:'50% 100%',overflow:'hidden',opacity:1-E(t,1.48,.12)}}>
+- <T x={20} y={13} w={413} size={21} c="#98744F">WRITING FROM SCRATCH</T><T x={20} y={50} w={413} size={32} c={INK}>{'Write a launch email…'.slice(0,9+Math.floor(12*E(t,0,.86)))}<span style={{color:'#BA6146'}}>|</span></T></P>
++ <P x={402-38*PULSE(t,.55,.65)} y={548} w={458} h={104} style={{background:IV,border:'6px solid #3D7E9A',borderRadius:9,transform:`rotate(${-4+7*hit}deg) scaleY(${1-.78*E(t,1.40,.12)})`,transformOrigin:'50% 100%',overflow:'hidden',opacity:1-E(t,1.48,.12)}}>
++ <T x={20} y={13} w={413} size={21} c="#376985">WRITING FROM SCRATCH</T><T x={20} y={50} w={413} size={32} c={INK}>{'Write a launch email…'.slice(0,9+Math.floor(12*E(t,0,.86)))}<span style={{color:'#D95E53'}}>|</span></T></P>
+  {/* Giant descending clock/press: immediate movement, catch, accelerating final drop. */}
+  <svg width="1012" height="792" style={{position:'absolute'}}>
+- <path d={`M572 100V${cy-153}M762 100V${cy-153}`} stroke="#77614E" strokeWidth="14" strokeDasharray="16 10" strokeDashoffset={drop}/>
++ <path d={`M572 100V${cy-153}M762 100V${cy-153}`} stroke="#315578" strokeWidth="14" strokeDasharray="16 10" strokeDashoffset={drop}/>
+  <g transform={`translate(${cx} ${cy}) rotate(${-3*strain+2*hit})`}>
+- <path d="M-178-49H178V171H-178Z" fill="#A77C50" stroke={INK} strokeWidth="9"/>
+- <path d="M-209 142H209V172H-209Z" fill="#375A60" stroke={INK} strokeWidth="10"/>
+- <path d="M-196 153H196" stroke="#F7DA9F" strokeWidth="7"/>
+- <circle r="159" fill="#C78E50" stroke={INK} strokeWidth="13"/><circle r="137" fill="#FFF0C6" stroke="#F8D78B" strokeWidth="9"/>
+- {Array.from({length:12},(_,i)=><path key={i} d="M0-120V-103" stroke="#A88256" strokeWidth="7" transform={`rotate(${i*30})`}/>)}
+- <path d="M0 0L0-90" stroke="#BA674B" strokeWidth="12" strokeLinecap="round" transform={`rotate(${20+255*S(t,0,1.34)})`}/><path d="M0 0L-64-36" stroke={INK} strokeWidth="10" strokeLinecap="round"/><circle r="12" fill={INK}/>
+- <path d="M-98 20H98V82H-98Z" fill="#FFF0C6"/>
++ <path d="M-178-49H178V171H-178Z" fill="#397AA9" stroke={INK} strokeWidth="9"/>
++ <path d="M-209 142H209V172H-209Z" fill="#1C4E82" stroke={INK} strokeWidth="10"/>
++ <path d="M-196 153H196" stroke="#8DE4DE" strokeWidth="7"/>
++ <circle r="159" fill="#267BC1" stroke={INK} strokeWidth="13"/><circle r="137" fill="#F6FCF5" stroke="#91DBEF" strokeWidth="9"/>
++ {Array.from({length:12},(_,i)=><path key={i} d="M0-120V-103" stroke="#487699" strokeWidth="7" transform={`rotate(${i*30})`}/>)}
++ <path d="M0 0L0-90" stroke="#D85B51" strokeWidth="12" strokeLinecap="round" transform={`rotate(${20+255*S(t,0,1.34)})`}/><path d="M0 0L-64-36" stroke={INK} strokeWidth="10" strokeLinecap="round"/><circle r="12" fill={INK}/>
++ <path d="M-98 20H98V82H-98Z" fill="#F6FCF5"/>
+  </g>
+  </svg>
+  <T x={cx-142} y={cy+24} w={284} size={50} c={INK} style={{textAlign:'center',transform:`rotate(${-3*strain+2*hit}deg)`}}>20 MIN</T>
+  {/* Fixed original arms meet the lever at elbow height; the body supplies effort/recoil. */}
+- <svg width="1012" height="792" style={{position:'absolute'}}><path d="M307 677H442V703H307Z" fill="#385B5D" stroke={INK} strokeWidth="7"/><circle cx="397" cy="671" r="25" fill={GOLD} stroke={INK} strokeWidth="7"/><path d={`M397 671L${leverX} ${leverY}`} stroke={INK} strokeWidth="17" strokeLinecap="round"/><path d={`M397 665L${leverX} ${leverY}`} stroke="#BBA679" strokeWidth="7"/><circle cx={leverX} cy={leverY} r="22" fill="#C5684B" stroke={INK} strokeWidth="6"/></svg>
++ <svg width="1012" height="792" style={{position:'absolute'}}><path d="M307 677H442V703H307Z" fill="#267C9E" stroke={INK} strokeWidth="7"/><circle cx="397" cy="671" r="25" fill={GOLD} stroke={INK} strokeWidth="7"/><path d={`M397 671L${leverX} ${leverY}`} stroke={INK} strokeWidth="17" strokeLinecap="round"/><path d={`M397 665L${leverX} ${leverY}`} stroke="#A8DBE8" strokeWidth="7"/><circle cx={leverX} cy={leverY} r="22" fill="#E56A5E" stroke={INK} strokeWidth="6"/></svg>
+  <Clay t={t*2.8} x={actorX} y={actorY} size={374} role="author" gaze={t<.98?7:-3} stern={1-E(t,1.06,.22)} shock={.72*PULSE(t,.14,.45)+.8*PULSE(t,1.21,.39)} cheer={.8*escape} sx={1+.075*strain} sy={1-.06*strain} rot={-13*strain+21*escape-7*PULSE(t,1.46,.22)}/>
+  {/* The pen rides the writing hand, then springs free with the last failed draft. */}
+- <P x={356-27*strain-112*escape} y={550+10*strain-82*PULSE(t,1.36,.34)} w={158} h={32} style={{transform:`rotate(${-22+12*strain-48*escape}deg)`,transformOrigin:'7% 50%',opacity:1-E(t,1.54,.12)}}><svg width="158" height="32"><path d="M0 3H118L151 16L118 29H0Z" fill="#DEAB59" stroke={INK} strokeWidth="5"/><path d="M118 3L151 16L118 29Z" fill={IV}/><path d="M140 12L153 16L140 21" fill={INK}/><path d="M12 4V28" stroke="#F5D7A0" strokeWidth="8"/></svg></P>
+- {t>1.43&&[0,1,2,3,4,5].map(i=>{const p=E(t,1.43,.3);return <P key={i} x={548+(i-2.5)*103*p} y={643-(50+i%3*28)*Math.sin(p*Math.PI)+40*p} w={40} h={25} style={{background:i%2?IV:'#C8A66F',border:'3px solid #936F4D',opacity:1-E(t,1.68,.15),transform:`rotate(${i*30+170*p}deg)`}}/>})}
+- <P x={51} y={202} w={236} h={107} style={{background:'#F9E8BE',border:'6px solid #B19365',borderRadius:18,transform:`rotate(${-6+settle(t,.2,2)}deg)`}}><P x={15} y={22}><Logo name="claude" size={56}/></P><T x={84} y={21} w={132} size={24} c={INK}>DRAFT 07<br/>STILL STUCK</T></P>
++ <P x={356-27*strain-112*escape} y={550+10*strain-82*PULSE(t,1.36,.34)} w={158} h={32} style={{transform:`rotate(${-22+12*strain-48*escape}deg)`,transformOrigin:'7% 50%',opacity:1-E(t,1.54,.12)}}><svg width="158" height="32"><path d="M0 3H118L151 16L118 29H0Z" fill="#FFE16D" stroke={INK} strokeWidth="5"/><path d="M118 3L151 16L118 29Z" fill={IV}/><path d="M140 12L153 16L140 21" fill={INK}/><path d="M12 4V28" stroke="#FFF4BB" strokeWidth="8"/></svg></P>
++ {t>1.43&&[0,1,2,3,4,5].map(i=>{const p=E(t,1.43,.3);return <P key={i} x={548+(i-2.5)*103*p} y={643-(50+i%3*28)*Math.sin(p*Math.PI)+40*p} w={40} h={25} style={{background:i%2?IV:'#A8D8EB',border:'3px solid #467EA7',opacity:1-E(t,1.68,.15),transform:`rotate(${i*30+170*p}deg)`}}/>})}
++ <P x={51} y={202} w={236} h={107} style={{background:'#EAF9F4',border:'6px solid #47849E',borderRadius:18,transform:`rotate(${-6+settle(t,.2,2)}deg)`}}><P x={15} y={22}><Logo name="claude" size={56}/></P><T x={84} y={21} w={132} size={24} c={INK}>DRAFT 07<br/>STILL STUCK</T></P>
+  </P></AbsoluteFill>
+ }
+--- a/src/index.tsx
++++ b/src/index.tsx
+@@ -5,7 +5,7 @@
+ import groups from './groups.json';
+ import * as Scenes from './Scenes';
+ export const SCENES=[
+- {a:0,b:102,id:'hook',h:['STOP WRITING','FROM SCRATCH'],C:Scenes.Hook},
++ {a:0,b:102,id:'hook',h:['STOP PROMPTING','FROM SCRATCH'],C:Scenes.Hook},
+  {a:102,b:191,id:'library',h:['AN OPEN SOURCE','PROMPT LIBRARY'],C:Scenes.Library},
+  {a:191,b:246,id:'tasks_a',h:['A STARTING POINT','FOR YOUR TASK'],C:Scenes.TasksA},
+  {a:246,b:306,id:'tasks_b',h:['IMAGES, AGENTS','AND MORE'],C:Scenes.TasksB},

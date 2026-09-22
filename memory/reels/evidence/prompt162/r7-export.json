@@ -1,0 +1,24 @@
+{
+  "revision": "r7",
+  "source_offset_seconds": 8.0,
+  "timeline_start_seconds": 0.0,
+  "decoded_peak": 0.58193039894104,
+  "clipped_samples": 0,
+  "max_adjacent_step": 0.3160139322280884,
+  "duration_seconds": 31.133333333333333,
+  "sha256": "2c0812e5b2493d16e37a5a748a38e10a448e1a5f99574b9eb3b5e224b06c0673",
+  "full_decode": "pass",
+  "unchanged_files": [
+    "public/voice.wav",
+    "public/effects.wav",
+    "src/Scenes.tsx",
+    "src/R5Scenes.tsx",
+    "src/index.tsx",
+    "src/SlopKit.tsx",
+    "src/Kit.tsx",
+    "src/words.json",
+    "src/groups.json",
+    "cues.json",
+    "timing.json"
+  ]
+}

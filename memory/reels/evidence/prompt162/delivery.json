@@ -1,0 +1,26 @@
+{
+  "record": "PROMPT162 R8",
+  "video": {
+    "drive_id": "1MkDaaWyHTdjGL4tOZUdKvBPl0LzfIqWF",
+    "verified_by": "upload response hash and independent download equality"
+  },
+  "source_zip": {
+    "drive_id": "1PXaryflBZkF-uXOLZgOZrIw0fcbdk-iT",
+    "remote_last_confirmed_revision": "R7",
+    "r8_upload_status": "blocked by shared Drive API quota"
+  },
+  "files": {
+    "162_PROMPT_Final.mp4": {
+      "bytes": 11644649,
+      "sha256": "6be9c28852a87d47ce765106488a20d2d7723592f16ab3e07cee037cd749b315"
+    },
+    "162_PROMPT_Editable_Source.zip": {
+      "bytes": 24726053,
+      "sha256": "382a7d53a7eaf1dd13a862b408a614ec03b4843dbb8ae04cc0f0c41d53976853"
+    },
+    "162_PROMPT_Edit_Notes.md": {
+      "bytes": 1957,
+      "sha256": "705f32772ab766f142dc6393adf80fa68572c60bab88c2335e814cfbc754e693"
+    }
+  }
+}

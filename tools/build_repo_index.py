@@ -180,6 +180,10 @@ def scan_reels():
                 # do not imply that words_jobs.json belongs to this new reel.
                 if key == "job" and f != "words_job.json":
                     continue
+                # PROMPT 162 is distinct from the older PROMPTS/PROMPTSV2 reels.
+                # Current captions live in its source ZIP, not those older JSONs.
+                if key == "prompt" and f not in {"words_prompt.json", "words_prompt162.json"}:
+                    continue
                 stem = f[:-5]  # drop .json
                 if norm(stem) in GENERIC or not keep(f"video/src/data/{f}"):
                     continue
