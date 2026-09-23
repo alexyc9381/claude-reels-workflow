@@ -1,5 +1,25 @@
 [
   {
+    "path": "WIN.intent.json",
+    "bytes": 2772,
+    "sha256": "f06a7f2d009f91f8043eb0d15c6d926626f4c026d590791f817025b6a51525de"
+  },
+  {
+    "path": "package-lock.json",
+    "bytes": 93936,
+    "sha256": "c47981f76f09b2f2240ba8409d8f943b82640a023b92270b3d02221d21608e02"
+  },
+  {
+    "path": "package.json",
+    "bytes": 311,
+    "sha256": "f4db2fd80e3eecba9c0ba0bcda0b0a63132e91a1f96f4df99bd3ef7cb83ae489"
+  },
+  {
+    "path": "script.txt",
+    "bytes": 803,
+    "sha256": "7f1d1b2e5f899e20c56b15273b054227eabd82b88bb1b6321632f4c00efc1510"
+  },
+  {
     "path": "src/AdventureScenes.tsx",
     "bytes": 9423,
     "sha256": "17cf61dfded90251a86875cc12783f82727092c0a3b010eb48efca0ddb41e085"
@@ -145,6 +165,11 @@
     "sha256": "6756214fc83d5f02ebd30a6da94e7c579c4bdbeb87c2a3f8c21c68b16471affe"
   },
   {
+    "path": "src/TrialHooks.tsx",
+    "bytes": 8270,
+    "sha256": "583814ab0c797eaa7b5cb228e699ec3fc27ecafd029c133a0dfa4070701a2ac2"
+  },
+  {
     "path": "src/WorldKit.tsx",
     "bytes": 23121,
     "sha256": "ef5bc8d30eeac588ff283c5e8e76a50162e7759b7d7f0001cbbb8ba8ea3c0517"
@@ -191,8 +216,8 @@
   },
   {
     "path": "src/index.tsx",
-    "bytes": 2617,
-    "sha256": "972f113f5b2fdd371fd311db5f585a1735d988111720be0e9d5f46d42fb6d40e"
+    "bytes": 3131,
+    "sha256": "9889cea2876d09720731f197c1556b59d78b3bb1df7827d8a8ef263a74aed5f3"
   },
   {
     "path": "src/supporting-review-index.tsx",
@@ -203,5 +228,30 @@
     "path": "src/words.json",
     "bytes": 9566,
     "sha256": "6e773dcd12476c8b995faa3cf588a843e90be206fad22da69de8a09ac3c4dbef"
+  },
+  {
+    "path": "tools/gen-surprise-sfx.py",
+    "bytes": 2908,
+    "sha256": "d02739de42692036501b30707d5341a0afd564086eb8936d13998a0cd52cec2d"
+  },
+  {
+    "path": "tools/mix-continuous-v5.py",
+    "bytes": 2864,
+    "sha256": "240f8848c01cd5cf9243773af07c4cd96dc510118e8bb23abe8046ea4c015e4e"
+  },
+  {
+    "path": "tools/mix-pacing-v6.py",
+    "bytes": 3635,
+    "sha256": "74a30cc46411507461ffa172bb24680f2dd82aa583d0d7d7285dfd9bc26eef77"
+  },
+  {
+    "path": "tools/mix-surprise-v4.py",
+    "bytes": 6055,
+    "sha256": "9e83caf2a525da5b1bc343393ff98f7c4e8df65ba9e4c4426fd661ada4ea474c"
+  },
+  {
+    "path": "tools/mix-trials.py",
+    "bytes": 1961,
+    "sha256": "0be8929210127bfed09cb6d5e000cdd39c72ade3eafbcc61dddb517d77581446"
   }
 ]

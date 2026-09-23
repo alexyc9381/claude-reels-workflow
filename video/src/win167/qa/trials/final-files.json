@@ -1,0 +1,12 @@
+{
+  "B": {
+    "name": "outputs/B - Survival Snap - FULL.mp4",
+    "sha256": "963ee5975f77214d66eb783d9fdab815d9f3d8624e493a4073d0687495bba874",
+    "bytes": 9869443
+  },
+  "C": {
+    "name": "outputs/C - Inheritance Slingshot - FULL.mp4",
+    "sha256": "d97429c0f91b6de20c2dae31066ed45ee053606e4b1a9a30263af3f9701749ed",
+    "bytes": 9831072
+  }
+}

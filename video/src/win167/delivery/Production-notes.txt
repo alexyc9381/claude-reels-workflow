@@ -12,7 +12,15 @@ Suggested reply text: Here's The Darwin Loop Guide: https://chen.media/guides/da
 Caption copy describes the planned comment-to-DM offer. No new automatic DM integration was configured in this delivery.
 
 Video: 1080x1920, 30fps, 826 frames, 27.533 seconds, H.264/Rec.709, AAC stereo.
-Source: WIN_Editable_Source.zip in 02 - Source and notes. Matching local copy: WIN_Editable_Source_Pacing_Claude.zip. Restore WIN167, run npm ci, then npm run studio or npm run render. All media, fonts, current caption, article link and system cover are included. See README.md and qa/ for audio rebuild and final encode details.
+Source: WIN_Editable_Source.zip in 02 - Source and notes. Matching local copy: WIN_Editable_Source_Trials.zip. Restore WIN167, run npm ci, then npm run studio or npm run render. All media, fonts, current caption, article link and system cover are included. See README.md and qa/ for audio rebuild and final encode details.
 GitHub edits and reusable lessons: https://github.com/alexyc9381/claude-reels-workflow/tree/main/video/src/win167
 
 Latest motion rule: keep meaningful subject/prop action active through each cut; review the last0.7seconds of every scene, including CTA. Keep readable outcomes, planted contact and unobstructed faces.
+
+Additional full-length trial reels:
+B - Survival Snap - FULL.mp4: adaptation escapes a closing flytrap.
+C - Inheritance Slingshot - FULL.mp4: inherited spring boots launch a stronger descendant from the family tree.
+Both: 27.533 seconds; only first92frames and corresponding SFX change. The approved VO, captions and subsequent body stay fixed. Use the same Caption.txt, Cover.png and Article-link.txt.
+Folder: https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ
+Source compositions: WIN-B and WIN-C. Trial QA and blank results tracker: qa/trials/.
+New hooks pass motion threshold with zero measured dead runs. Existing shared-body motion flags are documented. Visual comparison is descriptive, not a guarantee of Instagram distribution. No trial has been posted and no results have been measured.

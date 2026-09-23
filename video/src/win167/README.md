@@ -4,7 +4,7 @@ Editable source and editorial evidence for the September 22 pacing, earlier anno
 
 ## Start here
 
-Open [src/index.tsx](src/index.tsx) for the active scene order and [revision record](../../../memory/reels/win167-revision-record.md) for the feedback-to-edit rationale. Restore the matching `public/` folder from the separately delivered `WIN_Editable_Source_Pacing_Claude.zip`, then run `npm ci` and `npm run render`. The local archive contains this project plus all media; Git intentionally contains code/text only.
+Open [src/index.tsx](src/index.tsx) for the active scene order and [revision record](../../../memory/reels/win167-revision-record.md) for the feedback-to-edit rationale. Restore the matching `public/` folder from the separately delivered `WIN_Editable_Source_Trials.zip`, then run `npm ci` and `npm run render`. The local archive contains this project plus all media; Git intentionally contains code/text only.
 
 ## Layout
 
@@ -26,8 +26,14 @@ For the delivered Rec.709 MP4, render first, then normalize Remotion's full-rang
 
 The current approved delivery render is `WIN_Revised_Pacing_Claude.mp4`, published as `WIN-167 - FINAL.mp4`. The phrase at 7.867–9.233s now lasts until 9.533s; captions and later cuts shift by 0.300s. Boris arrow begins at 4.693s. `MutationWorkshop` replaces the slow gear-drop scene; three distinct Claude descendants change and use their inherited/new abilities. Official Claude imagery is added to scene props. See `qa/pacing-v6-review.md` for this revision’s scoped verification. The earlier independent [scene-ending review](qa/continuous-tail-review.md) evaluates the final 0.7 seconds of all12 scenes; audio was checked programmatically for timing, preservation and clipping, without an independent subjective-listening claim. Alex said “great” and explicitly requested this pacing/Claude revision be pushed to Drive with the caption and cover. Independent QA is still not a measured engagement result. The 1000→0 token display is illustrative; 20X is supplied copy, not a measured benchmark.
 
-Restore this revision from the [canonical Drive archive](https://drive.google.com/file/d/1js5R5NkDRomYasor5HJyeJYRX-rakts4/view), named `WIN_Editable_Source.zip`, or the matching local `WIN_Editable_Source_Pacing_Claude.zip`. Verify `qa/media-manifest.json`; it includes the revised 826-frame master and caption timeline. The posting copy, article link and handoff notes are in `delivery/`; the source ZIP also contains the system cover. Recorded words and canonical SlopKit anatomy were preserved. The requested VO pacing correction deliberately retimes the chat phrase and shifts subsequent captions/cuts; other spoken segments retain their existing tempo. Earlier source modules are retained for reference, not all used in the final edit.
+Restore this revision from the [canonical Drive archive](https://drive.google.com/file/d/1js5R5NkDRomYasor5HJyeJYRX-rakts4/view), named `WIN_Editable_Source.zip`, or the matching local `WIN_Editable_Source_Trials.zip`. Verify `qa/media-manifest.json`; it includes the revised 826-frame master and caption timeline. The posting copy, article link and handoff notes are in `delivery/`; the source ZIP also contains the system cover. Recorded words and canonical SlopKit anatomy were preserved. The requested VO pacing correction deliberately retimes the chat phrase and shifts subsequent captions/cuts; other spoken segments retain their existing tempo. Earlier source modules are retained for reference, not all used in the final edit.
 
 ## Related
 
 [Reusable lessons](../../../memory/alex-win167-causal-surprise-and-variant-readability.md) · [revision record](../../../memory/reels/win167-revision-record.md) · [independent visual review](qa/continuous-tail-review.md) · [audio review](qa/surprise-v4-audio-review.md) · [canonical packet](https://drive.google.com/drive/folders/1ebQwHREXHOqumPKgIPuVCC_QS53nT3Bt).
+
+## Additional hook trials
+
+Compositions `WIN-B` (Survival Snap) and `WIN-C` (Inheritance Slingshot) are full 826-frame alternatives. Render with `npx remotion render src/index.tsx WIN-B B-native.mp4 --codec=h264 --crf=18 --concurrency=2` (or WIN-C). Apply the Rec.709 normalization above and mux the matching `public/master-trial-B.wav` or `master-trial-C.wav`. The approved `WIN` default remains unchanged. `src/TrialHooks.tsx` contains the two opening concepts; frames92 onward use the same body. `python3 tools/mix-trials.py` rebuilds the trial audio without modifying the approved master. See `qa/trials/review.md`, cue ledgers, comparison results and blank results tracker.
+
+[Full trial reels in Drive](https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ). Both use the existing caption, cover and live article.

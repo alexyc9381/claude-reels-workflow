@@ -75,6 +75,16 @@
     "sha256": "21b5594d578ee8707867f148e4b34bbd4746fc7b64d45b688f06dd49b3613acc"
   },
   {
+    "path": "public/master-trial-B.wav",
+    "bytes": 5286444,
+    "sha256": "80fa1d37244921d0261f2af9c47dd8be34f7c1753abe036309a24b6c56884634"
+  },
+  {
+    "path": "public/master-trial-C.wav",
+    "bytes": 5286444,
+    "sha256": "573de8a7d7c775146ab37fac8695a2d171e6c48d508be33b8aaa9ad4f4237241"
+  },
+  {
     "path": "public/master.wav",
     "bytes": 5228844,
     "sha256": "3c8a8d078d52c0e9ff9f08abbe16e74d1f1c7e0e46a88abbe24ede06ba93da0e"
