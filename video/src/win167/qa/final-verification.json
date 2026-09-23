@@ -9,6 +9,6 @@
   "look_check": "blocking thresholds pass",
   "motion_diagnostic": "2/12 below mean threshold; disclosed in review",
   "audio_peak_dbfs": -2.168747901916504,
-  "user_creative_approval": "pending",
-  "canonical_drive_replaced": false
+  "user_creative_approval": "Alex: great; requested Drive delivery with caption and cover",
+  "canonical_drive_replaced": "Verify against pacing-v6 Drive delivery receipt"
 }

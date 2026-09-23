@@ -1,0 +1,55 @@
+{
+  "root": "1ebQwHREXHOqumPKgIPuVCC_QS53nT3Bt",
+  "video_name": "WIN-167 - FINAL.mp4",
+  "source_name": "WIN_Editable_Source.zip",
+  "article_url": "https://chen.media/guides/darwin-loop-evolve-the-winner",
+  "article_http_status": 200,
+  "keyword": "WIN",
+  "email_gate_verified": true,
+  "files": [
+    {
+      "id": "1e1Ncu7ug_tvrfoTx559YSwwlmvLJ4nC3",
+      "name": "WIN_Revised_Pacing_Claude.mp4",
+      "bytes": 10585560,
+      "sha256": "4e9c6400dcceab8ed5933ab1a0b43392d3a16fdcb5a29c19946c17049742d4ce",
+      "matches": true
+    },
+    {
+      "id": "1aVd-KD8YQ49tG-Ld2Cx8kaSC2yq8T5JR",
+      "name": "Caption.txt",
+      "bytes": 1405,
+      "sha256": "03d4b7549af4de907a0192e6dbcdb3382635cd9a56e0114e15685cc81dbf7807",
+      "matches": true
+    },
+    {
+      "id": "1aJD2h9xYYh5amNY7ujj9fC01jsFF2MZa",
+      "name": "WIN_cover.png",
+      "bytes": 390985,
+      "sha256": "24c49fcbfe7c09fffa4dcfb6dde4ca7ef07682d6947ae17190e91d51eb930f06",
+      "matches": true
+    },
+    {
+      "id": "1mDlbtYsP5uqjcFlugzS2ybqWq1vlz22N",
+      "name": "Article-link.txt",
+      "bytes": 134,
+      "sha256": "347fad1c3ba40b706cf30187ebcafb7bbe37f8a1924a22248e13e01e62a60bd0",
+      "matches": true
+    },
+    {
+      "id": "1js5R5NkDRomYasor5HJyeJYRX-rakts4",
+      "name": "WIN_Editable_Source_Pacing_Claude.zip",
+      "bytes": 44467130,
+      "sha256": "54fe7fdb1d5c9f93aebf72ac051445497c4b4b8c05b4864308eba744bc6fecf0",
+      "matches": true,
+      "parent": "1fGrS2LI8I1WSMsAGgCtbffdFkC4eCawt"
+    },
+    {
+      "id": "1pdlHC7lJKrwK32e5JYO-0iMExDTAmJ_7",
+      "name": "Production-notes.txt",
+      "bytes": 1423,
+      "sha256": "b2791b3d4cd7085813b724f71d9b2a94f839bd4190697d9671221d98835f5b28",
+      "matches": true,
+      "parent": "1fGrS2LI8I1WSMsAGgCtbffdFkC4eCawt"
+    }
+  ]
+}

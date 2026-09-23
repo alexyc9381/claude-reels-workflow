@@ -1,6 +1,6 @@
 # Pacing and Claude revision: scoped review
 
-This review was performed by the editing agent, not an independent critic. The current preview is WIN_Revised_Pacing_Claude.mp4 (826 frames, 27.533s). No user creative approval is asserted. Canonical Drive still holds the prior continuous-motion release.
+This review was performed by the editing agent, not an independent critic. The current preview is WIN_Revised_Pacing_Claude.mp4 (826 frames, 27.533s). This review preceded Alex’s “great” and explicit request to deliver the revision. The subsequent Drive handoff is tracked by its delivery receipt, separate from these visual/audio findings.
 
 ## Requested changes
 
