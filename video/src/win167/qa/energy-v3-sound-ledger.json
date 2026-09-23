@@ -1,0 +1,1006 @@
+{
+  "metrics": {
+    "duration": 27.233333333333334,
+    "sample_rate": 48000,
+    "channels": 2,
+    "peak_before_gain": 0.7790451049804688,
+    "peak_after_gain": 0.7790451049804688,
+    "gain_applied": 1,
+    "clipped_samples": 0,
+    "mapped_cues": 75,
+    "inherited_hook_cues": 18,
+    "distinct_sound_assets_including_hook": 37,
+    "designed_onset_clusters": 60,
+    "designed_onset_density_per_s": 2.2031823745410035,
+    "new_risers": 0,
+    "voice_rms": 0.08492100238800049,
+    "additional_sfx_rms": 0.012612619437277317,
+    "audition_limit": "Timing, waveform and levels checked programmatically against animation cue contract. No claim of subjective real-time listening.",
+    "hook_audio_identical_to_previous": true,
+    "Boris_audio_identical_to_previous": true
+  },
+  "cues": [
+    {
+      "at": 0.3,
+      "src": "v2-rubber-compress.wav",
+      "peak_dbfs": -23,
+      "duration": 0.18,
+      "why": "Large Claude compresses under the descending book",
+      "pan": 0
+    },
+    {
+      "at": 0.49,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -25,
+      "duration": 0.22,
+      "why": "Immediate elastic recovery after the slam",
+      "pan": 0
+    },
+    {
+      "at": 3.12,
+      "src": "page_turn.wav",
+      "peak_dbfs": -24,
+      "duration": 0.2273,
+      "why": "Prompt book opens",
+      "pan": 0
+    },
+    {
+      "at": 3.2067,
+      "src": "v3-zap-1.wav",
+      "peak_dbfs": -27,
+      "duration": 0.19,
+      "why": "Darwin quill energizes the prompt book \u2014 pitched attack",
+      "pan": 0
+    },
+    {
+      "at": 3.207,
+      "src": "v2-bud-1.wav",
+      "peak_dbfs": -23,
+      "duration": 0.2,
+      "why": "Candidate emerges from prompt",
+      "pan": -0.7
+    },
+    {
+      "at": 3.327,
+      "src": "v2-bud-2.wav",
+      "peak_dbfs": -23,
+      "duration": 0.2,
+      "why": "Candidate emerges from prompt",
+      "pan": 0.0
+    },
+    {
+      "at": 3.447,
+      "src": "v2-bud-3.wav",
+      "peak_dbfs": -23,
+      "duration": 0.2,
+      "why": "Candidate emerges from prompt",
+      "pan": 0.7
+    },
+    {
+      "at": 4.1,
+      "src": "v2-soft-snap.wav",
+      "peak_dbfs": -27,
+      "duration": 0.13,
+      "why": "Three candidates settle visibly",
+      "pan": 0
+    },
+    {
+      "at": 5.6,
+      "src": "v2-ink-draw.wav",
+      "peak_dbfs": -28,
+      "duration": 0.24,
+      "why": "Arrow is drawn toward Boris",
+      "pan": 0
+    },
+    {
+      "at": 5.63,
+      "src": "v2-soft-snap.wav",
+      "peak_dbfs": -26,
+      "duration": 0.13,
+      "why": "Claude corner logo pops into place",
+      "pan": 0
+    },
+    {
+      "at": 6.9733,
+      "src": "v3-paper-flurry.wav",
+      "peak_dbfs": -25,
+      "duration": 0.25,
+      "why": "Pages fan visibly from Darwin book",
+      "pan": 0
+    },
+    {
+      "at": 7.3633,
+      "src": "v3-power-spark.wav",
+      "peak_dbfs": -26,
+      "duration": 0.17,
+      "why": "Book crest ink stamp locks",
+      "pan": 0
+    },
+    {
+      "at": 7.3633,
+      "src": "thock.wav",
+      "peak_dbfs": -27,
+      "duration": 0.14,
+      "why": "Stamp physical contact under the ink mark",
+      "pan": 0
+    },
+    {
+      "at": 7.91,
+      "src": "v2-bud-1.wav",
+      "peak_dbfs": -27,
+      "duration": 0.16,
+      "why": "Reply bubble is expelled",
+      "pan": 0.7
+    },
+    {
+      "at": 8.11,
+      "src": "v2-bud-2.wav",
+      "peak_dbfs": -27,
+      "duration": 0.16,
+      "why": "Reply bubble is expelled",
+      "pan": 0.7
+    },
+    {
+      "at": 8.31,
+      "src": "v2-bud-3.wav",
+      "peak_dbfs": -27,
+      "duration": 0.16,
+      "why": "Reply bubble is expelled",
+      "pan": 0.7
+    },
+    {
+      "at": 8.5667,
+      "src": "lever.wav",
+      "peak_dbfs": -23,
+      "duration": 0.19,
+      "why": "Darwin lever latch contacts",
+      "pan": 0
+    },
+    {
+      "at": 8.6367,
+      "src": "v3-power-spark.wav",
+      "peak_dbfs": -25,
+      "duration": 0.17,
+      "why": "Visible cable pulse reaches reversal mechanism",
+      "pan": 0
+    },
+    {
+      "at": 8.8567,
+      "src": "v2-machine-reverse.wav",
+      "peak_dbfs": -24,
+      "duration": 0.25,
+      "why": "Replies reverse into the suction mouth",
+      "pan": 0
+    },
+    {
+      "at": 8.8567,
+      "src": "v3-paper-flurry.wav",
+      "peak_dbfs": -28,
+      "duration": 0.21,
+      "why": "Paper flurry follows suction collapse",
+      "pan": 0
+    },
+    {
+      "at": 9.3533,
+      "src": "step.wav",
+      "peak_dbfs": -26,
+      "duration": 0.17,
+      "why": "First candidate steps off",
+      "pan": 0
+    },
+    {
+      "at": 9.8033,
+      "src": "v2-fall-whistle.wav",
+      "peak_dbfs": -25,
+      "duration": 0.35,
+      "why": "First candidate falls short",
+      "pan": -0.4
+    },
+    {
+      "at": 10.0333,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -25,
+      "duration": 0.28,
+      "why": "Second candidate jumps",
+      "pan": 0
+    },
+    {
+      "at": 10.5833,
+      "src": "v2-fall-whistle.wav",
+      "peak_dbfs": -26,
+      "duration": 0.33,
+      "why": "Second candidate also falls short",
+      "pan": 0.1
+    },
+    {
+      "at": 10.7633,
+      "src": "v2-spring-load.wav",
+      "peak_dbfs": -24,
+      "duration": 0.33,
+      "why": "Gold springs visibly compress",
+      "pan": 0
+    },
+    {
+      "at": 11.0933,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -21,
+      "duration": 0.34,
+      "why": "Spring winner releases toward the far ledge",
+      "pan": 0
+    },
+    {
+      "at": 11.0933,
+      "src": "v3-impact-ripple.wav",
+      "peak_dbfs": -29,
+      "duration": 0.23,
+      "why": "Spring launch spreads a local pressure ripple",
+      "pan": 0
+    },
+    {
+      "at": 11.8633,
+      "src": "thock.wav",
+      "peak_dbfs": -23,
+      "duration": 0.16,
+      "why": "Winning feet contact the far ledge",
+      "pan": 0.65
+    },
+    {
+      "at": 11.8633,
+      "src": "deep-contact.wav",
+      "peak_dbfs": -30,
+      "duration": 0.16,
+      "why": "Quiet low body gives the successful landing weight",
+      "pan": 0.65
+    },
+    {
+      "at": 11.8633,
+      "src": "v3-impact-ripple.wav",
+      "peak_dbfs": -28,
+      "duration": 0.24,
+      "why": "Winning feet send out a landing ripple",
+      "pan": 0.65
+    },
+    {
+      "at": 11.9733,
+      "src": "v2-winner-bell.wav",
+      "peak_dbfs": -24,
+      "duration": 0.42,
+      "why": "Winning identity is retained",
+      "pan": 0
+    },
+    {
+      "at": 13.0333,
+      "src": "page_turn.wav",
+      "peak_dbfs": -26,
+      "duration": 0.2273,
+      "why": "Three-line prompt scroll moves into view",
+      "pan": 0
+    },
+    {
+      "at": 13.5633,
+      "src": "v2-ink-draw.wav",
+      "peak_dbfs": -25,
+      "duration": 0.24,
+      "why": "Darwin underlines EVOLVE",
+      "pan": 0
+    },
+    {
+      "at": 13.9033,
+      "src": "v3-wand-charge.wav",
+      "peak_dbfs": -29,
+      "duration": 0.26,
+      "why": "Feather tip builds a brief visible charge",
+      "pan": 0
+    },
+    {
+      "at": 14.1633,
+      "src": "v3-zap-2.wav",
+      "peak_dbfs": -23,
+      "duration": 0.19,
+      "why": "Quill lightning contacts the kept winner \u2014 pitched attack",
+      "pan": 0.2
+    },
+    {
+      "at": 14.1633,
+      "src": "v3-zap-body.wav",
+      "peak_dbfs": -28,
+      "duration": 0.24,
+      "why": "Quill lightning contacts the kept winner \u2014 low contact body",
+      "pan": 0.2
+    },
+    {
+      "at": 14.1793,
+      "src": "v3-zap-crackle.wav",
+      "peak_dbfs": -30,
+      "duration": 0.145,
+      "why": "Quill lightning contacts the kept winner \u2014 brief discharge texture",
+      "pan": 0.2
+    },
+    {
+      "at": 14.8433,
+      "src": "v3-zap-1.wav",
+      "peak_dbfs": -25,
+      "duration": 0.19,
+      "why": "Quill lightning charges the left descendant \u2014 pitched attack",
+      "pan": -0.6
+    },
+    {
+      "at": 15.0033,
+      "src": "v3-zap-3.wav",
+      "peak_dbfs": -25,
+      "duration": 0.19,
+      "why": "Energy relays from left descendant to right \u2014 pitched attack",
+      "pan": 0.6
+    },
+    {
+      "at": 15.1333,
+      "src": "v3-impact-ripple.wav",
+      "peak_dbfs": -25,
+      "duration": 0.3,
+      "why": "All inherited spring boots react against the floor",
+      "pan": 0
+    },
+    {
+      "at": 16.2533,
+      "src": "gear.wav",
+      "peak_dbfs": -28,
+      "duration": 0.24,
+      "why": "Rig begins lowering the upgrades",
+      "pan": 0
+    },
+    {
+      "at": 16.7033,
+      "src": "v3-zap-1.wav",
+      "peak_dbfs": -27,
+      "duration": 0.18,
+      "why": "Upgrade connector 1 makes contact \u2014 pitched attack",
+      "pan": -0.65
+    },
+    {
+      "at": 16.7633,
+      "src": "v3-zap-2.wav",
+      "peak_dbfs": -27,
+      "duration": 0.18,
+      "why": "Upgrade connector 2 makes contact \u2014 pitched attack",
+      "pan": 0.0
+    },
+    {
+      "at": 16.8233,
+      "src": "v3-zap-3.wav",
+      "peak_dbfs": -27,
+      "duration": 0.18,
+      "why": "Upgrade connector 3 makes contact \u2014 pitched attack",
+      "pan": 0.65
+    },
+    {
+      "at": 17.0333,
+      "src": "v2-ski-brake.wav",
+      "peak_dbfs": -27,
+      "duration": 0.21,
+      "why": "Skis give a short side-sliding demonstration",
+      "pan": -0.7
+    },
+    {
+      "at": 17.3033,
+      "src": "paper.wav",
+      "peak_dbfs": -28,
+      "duration": 0.1722,
+      "why": "Glider fabric opens for its lift",
+      "pan": 0
+    },
+    {
+      "at": 17.5733,
+      "src": "v2-rocket-burst.wav",
+      "peak_dbfs": -27,
+      "duration": 0.4,
+      "why": "Rocket descendant demonstrates thrust",
+      "pan": 0.7
+    },
+    {
+      "at": 19.21,
+      "src": "v2-ski-brake.wav",
+      "peak_dbfs": -24,
+      "duration": 0.28,
+      "why": "Skier brakes at the canyon edge",
+      "pan": -0.7
+    },
+    {
+      "at": 19.28,
+      "src": "v2-spring-load.wav",
+      "peak_dbfs": -26,
+      "duration": 0.35,
+      "why": "Rocket winner loads its inherited springs",
+      "pan": 0
+    },
+    {
+      "at": 19.74,
+      "src": "v2-rocket-burst.wav",
+      "peak_dbfs": -22,
+      "duration": 0.62,
+      "why": "Rockets ignite at visible takeoff",
+      "pan": 0
+    },
+    {
+      "at": 19.74,
+      "src": "shell-crack.wav",
+      "peak_dbfs": -27,
+      "duration": 0.0833,
+      "why": "Ice fractures under the launch force",
+      "pan": 0
+    },
+    {
+      "at": 19.74,
+      "src": "v3-zap-body.wav",
+      "peak_dbfs": -31,
+      "duration": 0.22,
+      "why": "Rocket launch compresses the ice beneath it",
+      "pan": 0
+    },
+    {
+      "at": 19.8,
+      "src": "v2-fall-whistle.wav",
+      "peak_dbfs": -28,
+      "duration": 0.32,
+      "why": "Glider drops into the canyon",
+      "pan": 0.1
+    },
+    {
+      "at": 20.73,
+      "src": "thock.wav",
+      "peak_dbfs": -23,
+      "duration": 0.16,
+      "why": "Rocket winner lands on the distant ledge",
+      "pan": 0.7
+    },
+    {
+      "at": 20.75,
+      "src": "v3-impact-ripple.wav",
+      "peak_dbfs": -29,
+      "duration": 0.23,
+      "why": "Rocket winner landing ripple",
+      "pan": 0.7
+    },
+    {
+      "at": 20.88,
+      "src": "v2-winner-bell.wav",
+      "peak_dbfs": -25,
+      "duration": 0.4,
+      "why": "New winner star settles",
+      "pan": 0
+    },
+    {
+      "at": 21.52,
+      "src": "v2-coin-chink.wav",
+      "peak_dbfs": -27.0,
+      "duration": 0.18,
+      "why": "Token coin enters the machine",
+      "pan": 0.4
+    },
+    {
+      "at": 21.69,
+      "src": "v2-coin-chink.wav",
+      "peak_dbfs": -26.3,
+      "duration": 0.18,
+      "why": "Token coin enters the machine",
+      "pan": 0.4
+    },
+    {
+      "at": 21.86,
+      "src": "v2-coin-chink.wav",
+      "peak_dbfs": -25.6,
+      "duration": 0.18,
+      "why": "Token coin enters the machine",
+      "pan": 0.4
+    },
+    {
+      "at": 22.02,
+      "src": "v3-power-spark.wav",
+      "peak_dbfs": -26,
+      "duration": 0.17,
+      "why": "Token circuit illuminates with a short current pulse",
+      "pan": 0
+    },
+    {
+      "at": 22.03,
+      "src": "v2-coin-chink.wav",
+      "peak_dbfs": -24.9,
+      "duration": 0.18,
+      "why": "Token coin enters the machine",
+      "pan": 0.4
+    },
+    {
+      "at": 22.35,
+      "src": "v3-flight-puff.wav",
+      "peak_dbfs": -26,
+      "duration": 0.23,
+      "why": "Pressure valve releases a compact low soft puff",
+      "pan": 0
+    },
+    {
+      "at": 22.35,
+      "src": "v2-rubber-compress.wav",
+      "peak_dbfs": -27,
+      "duration": 0.21,
+      "why": "Chamber and Claude react to the pressure pop",
+      "pan": 0
+    },
+    {
+      "at": 22.82,
+      "src": "pencil.wav",
+      "peak_dbfs": -27,
+      "duration": 0.32,
+      "why": "Initial draft is presented",
+      "pan": 0
+    },
+    {
+      "at": 23.19,
+      "src": "v3-wand-charge.wav",
+      "peak_dbfs": -29,
+      "duration": 0.22,
+      "why": "Recap quill tip prepares to pass the winning trait",
+      "pan": 0
+    },
+    {
+      "at": 23.42,
+      "src": "v3-zap-1.wav",
+      "peak_dbfs": -25,
+      "duration": 0.19,
+      "why": "Winning spring trait is passed onto the next step \u2014 pitched attack",
+      "pan": -0.2
+    },
+    {
+      "at": 24.3,
+      "src": "v3-zap-3.wav",
+      "peak_dbfs": -24,
+      "duration": 0.19,
+      "why": "Final upgrade energizes the evolved Claude \u2014 pitched attack",
+      "pan": 0.5
+    },
+    {
+      "at": 24.3,
+      "src": "v3-zap-body.wav",
+      "peak_dbfs": -29,
+      "duration": 0.24,
+      "why": "Final upgrade energizes the evolved Claude \u2014 low contact body",
+      "pan": 0.5
+    },
+    {
+      "at": 24.316,
+      "src": "v3-zap-crackle.wav",
+      "peak_dbfs": -31,
+      "duration": 0.145,
+      "why": "Final upgrade energizes the evolved Claude \u2014 brief discharge texture",
+      "pan": 0.5
+    },
+    {
+      "at": 24.84,
+      "src": "v2-winner-bell.wav",
+      "peak_dbfs": -27,
+      "duration": 0.35,
+      "why": "Evolved version resolves",
+      "pan": 0
+    },
+    {
+      "at": 25.16,
+      "src": "v2-rocket-burst.wav",
+      "peak_dbfs": -25,
+      "duration": 0.59,
+      "why": "Final evolved Claude lifts off",
+      "pan": 0
+    },
+    {
+      "at": 25.78,
+      "src": "thock.wav",
+      "peak_dbfs": -25,
+      "duration": 0.16,
+      "why": "Final version lands",
+      "pan": 0
+    },
+    {
+      "at": 26.6467,
+      "src": "thock.wav",
+      "peak_dbfs": -25,
+      "duration": 0.18,
+      "why": "WIN book stamp lands",
+      "pan": 0
+    },
+    {
+      "at": 26.6467,
+      "src": "v3-zap-body.wav",
+      "peak_dbfs": -31,
+      "duration": 0.22,
+      "why": "Small low body beneath the physical book contact",
+      "pan": 0
+    },
+    {
+      "at": 26.8667,
+      "src": "paper.wav",
+      "peak_dbfs": -28,
+      "duration": 0.18,
+      "why": "Book pages settle after contact",
+      "pan": 0
+    }
+  ],
+  "inherited_hook_cues": [
+    {
+      "file": "gear.wav",
+      "time": 0.04,
+      "peak_db": -23,
+      "duration": 0.25
+    },
+    {
+      "file": "gear.wav",
+      "time": 0.53,
+      "peak_db": -21,
+      "duration": 0.22
+    },
+    {
+      "file": "thock.wav",
+      "time": 0.47,
+      "peak_db": -15,
+      "duration": 0.16
+    },
+    {
+      "file": "vine-boom.wav",
+      "time": 0.47,
+      "peak_db": -20,
+      "duration": 0.65
+    },
+    {
+      "file": "thock.wav",
+      "time": 0.68,
+      "peak_db": -20,
+      "duration": 0.14
+    },
+    {
+      "file": "magic-level.wav",
+      "time": 0.68,
+      "peak_db": -23,
+      "duration": 0.3
+    },
+    {
+      "file": "thock.wav",
+      "time": 1.12,
+      "peak_db": -18,
+      "duration": 0.14
+    },
+    {
+      "file": "magic-level.wav",
+      "time": 1.12,
+      "peak_db": -21,
+      "duration": 0.3
+    },
+    {
+      "file": "thock.wav",
+      "time": 1.57,
+      "peak_db": -16,
+      "duration": 0.14
+    },
+    {
+      "file": "huh.wav",
+      "time": 0.77,
+      "peak_db": -22,
+      "duration": 0.28
+    },
+    {
+      "file": "magic-level.wav",
+      "time": 1.57,
+      "peak_db": -18,
+      "duration": 1.18
+    },
+    {
+      "file": "vine-boom.wav",
+      "time": 2.03,
+      "peak_db": -15,
+      "duration": 0.85
+    },
+    {
+      "file": "correct.wav",
+      "time": 2.4,
+      "peak_db": -24,
+      "duration": 0.65
+    },
+    {
+      "file": "gear.wav",
+      "time": 2.1,
+      "peak_db": -20,
+      "duration": 0.32
+    },
+    {
+      "file": "shell-crack.wav",
+      "time": 1.57,
+      "peak_db": -19,
+      "duration": 0.25
+    },
+    {
+      "file": "shell-crack.wav",
+      "time": 2.02,
+      "peak_db": -15,
+      "duration": 0.35
+    },
+    {
+      "file": "paper.wav",
+      "time": 2.15,
+      "peak_db": -20,
+      "duration": 0.6
+    },
+    {
+      "file": "page_turn.wav",
+      "time": 2.36,
+      "peak_db": -22,
+      "duration": 0.45
+    }
+  ],
+  "provenance": {
+    "v2-rubber-compress": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.22
+    },
+    "v2-spring-rebound": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.34
+    },
+    "v2-spring-load": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.35
+    },
+    "v2-fall-whistle": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.38
+    },
+    "v2-ski-brake": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.28
+    },
+    "v2-coin-chink": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.23
+    },
+    "v2-gulp": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.25
+    },
+    "v2-rocket-burst": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.62
+    },
+    "v2-ink-draw": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.24
+    },
+    "v2-soft-snap": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.13
+    },
+    "v2-bud-1": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.25
+    },
+    "v2-bud-2": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.25
+    },
+    "v2-bud-3": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.25
+    },
+    "v2-winner-bell": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.52
+    },
+    "v2-machine-reverse": {
+      "source": "Original deterministic NumPy synthesis",
+      "duration": 0.28
+    },
+    "v3-zap-1": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.19,
+      "peak": 0.84
+    },
+    "v3-zap-2": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.19,
+      "peak": 0.84
+    },
+    "v3-zap-3": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.19,
+      "peak": 0.84
+    },
+    "v3-zap-body": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.24,
+      "peak": 0.84
+    },
+    "v3-zap-crackle": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.145,
+      "peak": 0.84
+    },
+    "v3-wand-charge": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.28,
+      "peak": 0.84
+    },
+    "v3-impact-ripple": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.31,
+      "peak": 0.84
+    },
+    "v3-paper-flurry": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.25,
+      "peak": 0.84
+    },
+    "v3-power-spark": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.17,
+      "peak": 0.84
+    },
+    "v3-flight-puff": {
+      "source": "Original deterministic NumPy/SciPy synthesis, seed 150922",
+      "duration": 0.23,
+      "peak": 0.84
+    }
+  },
+  "per_second_levels": [
+    {
+      "second": 0,
+      "sfx_rms": 0.016287341713905334,
+      "voice_rms": 0.0972553938627243
+    },
+    {
+      "second": 1,
+      "sfx_rms": 0.0,
+      "voice_rms": 0.08102189004421234
+    },
+    {
+      "second": 2,
+      "sfx_rms": 0.0,
+      "voice_rms": 0.09858987480401993
+    },
+    {
+      "second": 3,
+      "sfx_rms": 0.014009240083396435,
+      "voice_rms": 0.0779755711555481
+    },
+    {
+      "second": 4,
+      "sfx_rms": 0.0032169721089303493,
+      "voice_rms": 0.0722392201423645
+    },
+    {
+      "second": 5,
+      "sfx_rms": 0.005059218965470791,
+      "voice_rms": 0.07518263906240463
+    },
+    {
+      "second": 6,
+      "sfx_rms": 0.001308532664552331,
+      "voice_rms": 0.058873411267995834
+    },
+    {
+      "second": 7,
+      "sfx_rms": 0.010713675990700722,
+      "voice_rms": 0.0722719058394432
+    },
+    {
+      "second": 8,
+      "sfx_rms": 0.01277304906398058,
+      "voice_rms": 0.1101696640253067
+    },
+    {
+      "second": 9,
+      "sfx_rms": 0.017937351018190384,
+      "voice_rms": 0.07205907255411148
+    },
+    {
+      "second": 10,
+      "sfx_rms": 0.0279620960354805,
+      "voice_rms": 0.06013887748122215
+    },
+    {
+      "second": 11,
+      "sfx_rms": 0.024154959246516228,
+      "voice_rms": 0.05753199756145477
+    },
+    {
+      "second": 12,
+      "sfx_rms": 0.006984238978475332,
+      "voice_rms": 0.06694155931472778
+    },
+    {
+      "second": 13,
+      "sfx_rms": 0.006411422044038773,
+      "voice_rms": 0.11379990726709366
+    },
+    {
+      "second": 14,
+      "sfx_rms": 0.010174009948968887,
+      "voice_rms": 0.0853593647480011
+    },
+    {
+      "second": 15,
+      "sfx_rms": 0.008852853439748287,
+      "voice_rms": 0.0792296752333641
+    },
+    {
+      "second": 16,
+      "sfx_rms": 0.007273460738360882,
+      "voice_rms": 0.10709435492753983
+    },
+    {
+      "second": 17,
+      "sfx_rms": 0.00866028107702732,
+      "voice_rms": 0.0931638777256012
+    },
+    {
+      "second": 18,
+      "sfx_rms": 0.0,
+      "voice_rms": 0.08980536460876465
+    },
+    {
+      "second": 19,
+      "sfx_rms": 0.022483425214886665,
+      "voice_rms": 0.11077536642551422
+    },
+    {
+      "second": 20,
+      "sfx_rms": 0.019362732768058777,
+      "voice_rms": 0.09325490146875381
+    },
+    {
+      "second": 21,
+      "sfx_rms": 0.006152763497084379,
+      "voice_rms": 0.0854140892624855
+    },
+    {
+      "second": 22,
+      "sfx_rms": 0.012046976014971733,
+      "voice_rms": 0.07584653794765472
+    },
+    {
+      "second": 23,
+      "sfx_rms": 0.007511477917432785,
+      "voice_rms": 0.0933331772685051
+    },
+    {
+      "second": 24,
+      "sfx_rms": 0.008674990385770798,
+      "voice_rms": 0.09837906807661057
+    },
+    {
+      "second": 25,
+      "sfx_rms": 0.01335345022380352,
+      "voice_rms": 0.0607493594288826
+    },
+    {
+      "second": 26,
+      "sfx_rms": 0.009740453213453293,
+      "voice_rms": 0.06939847767353058
+    },
+    {
+      "second": 27,
+      "sfx_rms": 0.000524390721693635,
+      "voice_rms": 0.04938795417547226
+    }
+  ],
+  "replaced_previous_onsets": [
+    7.19,
+    7.43,
+    8.43,
+    8.65,
+    9.07,
+    22.08,
+    22.25,
+    26.3,
+    26.72,
+    14.2033,
+    14.3333,
+    15.0833,
+    16.7533,
+    23.43,
+    24.31
+  ],
+  "existing_asset_provenance": "All other assets pre-existing in this project."
+}

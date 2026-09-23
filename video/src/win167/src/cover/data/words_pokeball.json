@@ -1,0 +1,1262 @@
+[
+ {
+  "word": "Everyone's",
+  "start": 0.254,
+  "end": 0.638
+ },
+ {
+  "word": "waiting",
+  "start": 0.638,
+  "end": 0.754
+ },
+ {
+  "word": "for",
+  "start": 0.754,
+  "end": 0.965
+ },
+ {
+  "word": "Fable",
+  "start": 0.965,
+  "end": 1.158
+ },
+ {
+  "word": "6",
+  "start": 1.158,
+  "end": 1.292
+ },
+ {
+  "word": "to",
+  "start": 1.292,
+  "end": 1.446
+ },
+ {
+  "word": "drop.",
+  "start": 1.446,
+  "end": 1.677
+ },
+ {
+  "word": "Almost",
+  "start": 1.908,
+  "end": 2.119
+ },
+ {
+  "word": "nobody",
+  "start": 2.119,
+  "end": 2.6
+ },
+ {
+  "word": "realizes",
+  "start": 2.6,
+  "end": 2.965
+ },
+ {
+  "word": "you",
+  "start": 2.965,
+  "end": 3.215
+ },
+ {
+  "word": "can",
+  "start": 3.215,
+  "end": 3.369
+ },
+ {
+  "word": "build",
+  "start": 3.369,
+  "end": 3.6
+ },
+ {
+  "word": "it",
+  "start": 3.6,
+  "end": 3.677
+ },
+ {
+  "word": "yourself",
+  "start": 3.677,
+  "end": 4.004
+ },
+ {
+  "word": "right",
+  "start": 4.004,
+  "end": 4.292
+ },
+ {
+  "word": "now",
+  "start": 4.292,
+  "end": 4.523
+ },
+ {
+  "word": "and",
+  "start": 4.523,
+  "end": 4.658
+ },
+ {
+  "word": "it",
+  "start": 4.658,
+  "end": 4.715
+ },
+ {
+  "word": "gets",
+  "start": 4.715,
+  "end": 4.869
+ },
+ {
+  "word": "scary",
+  "start": 4.869,
+  "end": 5.254
+ },
+ {
+  "word": "close.",
+  "start": 5.254,
+  "end": 5.658
+ },
+ {
+  "word": "Out",
+  "start": 5.965,
+  "end": 6.138
+ },
+ {
+  "word": "of",
+  "start": 6.138,
+  "end": 6.215
+ },
+ {
+  "word": "the",
+  "start": 6.215,
+  "end": 6.312
+ },
+ {
+  "word": "box,",
+  "start": 6.312,
+  "end": 6.542
+ },
+ {
+  "word": "Claude",
+  "start": 6.735,
+  "end": 6.792
+ },
+ {
+  "word": "forgets",
+  "start": 6.792,
+  "end": 7.1
+ },
+ {
+  "word": "everything",
+  "start": 7.1,
+  "end": 7.504
+ },
+ {
+  "word": "the",
+  "start": 7.504,
+  "end": 7.638
+ },
+ {
+  "word": "second",
+  "start": 7.638,
+  "end": 7.888
+ },
+ {
+  "word": "you",
+  "start": 7.888,
+  "end": 8.062
+ },
+ {
+  "word": "close",
+  "start": 8.062,
+  "end": 8.235
+ },
+ {
+  "word": "the",
+  "start": 8.235,
+  "end": 8.388
+ },
+ {
+  "word": "chat.",
+  "start": 8.388,
+  "end": 8.562
+ },
+ {
+  "word": "It",
+  "start": 8.792,
+  "end": 8.946
+ },
+ {
+  "word": "gets",
+  "start": 8.946,
+  "end": 9.081
+ },
+ {
+  "word": "stuck",
+  "start": 9.081,
+  "end": 9.312
+ },
+ {
+  "word": "the",
+  "start": 9.312,
+  "end": 9.446
+ },
+ {
+  "word": "moment",
+  "start": 9.446,
+  "end": 9.696
+ },
+ {
+  "word": "it",
+  "start": 9.696,
+  "end": 9.908
+ },
+ {
+  "word": "needs",
+  "start": 9.908,
+  "end": 10.023
+ },
+ {
+  "word": "a",
+  "start": 10.023,
+  "end": 10.177
+ },
+ {
+  "word": "tool",
+  "start": 10.177,
+  "end": 10.35
+ },
+ {
+  "word": "it",
+  "start": 10.35,
+  "end": 10.485
+ },
+ {
+  "word": "doesn't",
+  "start": 10.485,
+  "end": 10.696
+ },
+ {
+  "word": "have,",
+  "start": 10.696,
+  "end": 10.965
+ },
+ {
+  "word": "and",
+  "start": 11.196,
+  "end": 11.408
+ },
+ {
+  "word": "it",
+  "start": 11.408,
+  "end": 11.523
+ },
+ {
+  "word": "works",
+  "start": 11.523,
+  "end": 11.696
+ },
+ {
+  "word": "one",
+  "start": 11.696,
+  "end": 12.023
+ },
+ {
+  "word": "task",
+  "start": 12.023,
+  "end": 12.35
+ },
+ {
+  "word": "at",
+  "start": 12.35,
+  "end": 12.485
+ },
+ {
+  "word": "a",
+  "start": 12.485,
+  "end": 12.6
+ },
+ {
+  "word": "time",
+  "start": 12.6,
+  "end": 12.831
+ },
+ {
+  "word": "alone.",
+  "start": 12.831,
+  "end": 13.158
+ },
+ {
+  "word": "That's",
+  "start": 13.408,
+  "end": 13.677
+ },
+ {
+  "word": "not",
+  "start": 13.677,
+  "end": 13.773
+ },
+ {
+  "word": "a",
+  "start": 13.773,
+  "end": 13.908
+ },
+ {
+  "word": "model",
+  "start": 13.908,
+  "end": 14.158
+ },
+ {
+  "word": "problem,",
+  "start": 14.158,
+  "end": 14.465
+ },
+ {
+  "word": "it's",
+  "start": 14.619,
+  "end": 14.908
+ },
+ {
+  "word": "just",
+  "start": 14.908,
+  "end": 15.023
+ },
+ {
+  "word": "missing",
+  "start": 15.023,
+  "end": 15.331
+ },
+ {
+  "word": "everything",
+  "start": 15.331,
+  "end": 15.754
+ },
+ {
+  "word": "around",
+  "start": 15.754,
+  "end": 16.042
+ },
+ {
+  "word": "it.",
+  "start": 16.042,
+  "end": 16.273
+ },
+ {
+  "word": "So",
+  "start": 16.446,
+  "end": 16.638
+ },
+ {
+  "word": "you",
+  "start": 16.638,
+  "end": 16.696
+ },
+ {
+  "word": "stop",
+  "start": 16.696,
+  "end": 16.927
+ },
+ {
+  "word": "waiting",
+  "start": 16.927,
+  "end": 17.1
+ },
+ {
+  "word": "for",
+  "start": 17.1,
+  "end": 17.369
+ },
+ {
+  "word": "a",
+  "start": 17.369,
+  "end": 17.465
+ },
+ {
+  "word": "smarter",
+  "start": 17.465,
+  "end": 17.696
+ },
+ {
+  "word": "model,",
+  "start": 17.696,
+  "end": 17.965
+ },
+ {
+  "word": "and",
+  "start": 18.119,
+  "end": 18.138
+ },
+ {
+  "word": "you",
+  "start": 18.138,
+  "end": 18.235
+ },
+ {
+  "word": "build",
+  "start": 18.235,
+  "end": 18.369
+ },
+ {
+  "word": "a",
+  "start": 18.369,
+  "end": 18.485
+ },
+ {
+  "word": "smarter",
+  "start": 18.485,
+  "end": 18.831
+ },
+ {
+  "word": "system",
+  "start": 18.831,
+  "end": 19.254
+ },
+ {
+  "word": "around",
+  "start": 19.254,
+  "end": 19.485
+ },
+ {
+  "word": "this",
+  "start": 19.485,
+  "end": 19.677
+ },
+ {
+  "word": "one.",
+  "start": 19.677,
+  "end": 19.908
+ },
+ {
+  "word": "You",
+  "start": 20.081,
+  "end": 20.235
+ },
+ {
+  "word": "give",
+  "start": 20.235,
+  "end": 20.35
+ },
+ {
+  "word": "it",
+  "start": 20.35,
+  "end": 20.465
+ },
+ {
+  "word": "memory,",
+  "start": 20.465,
+  "end": 20.677
+ },
+ {
+  "word": "a",
+  "start": 20.869,
+  "end": 20.927
+ },
+ {
+  "word": "second",
+  "start": 20.927,
+  "end": 21.158
+ },
+ {
+  "word": "brain",
+  "start": 21.158,
+  "end": 21.35
+ },
+ {
+  "word": "that",
+  "start": 21.35,
+  "end": 21.465
+ },
+ {
+  "word": "remembers",
+  "start": 21.465,
+  "end": 21.715
+ },
+ {
+  "word": "every",
+  "start": 21.715,
+  "end": 22.062
+ },
+ {
+  "word": "project",
+  "start": 22.062,
+  "end": 22.427
+ },
+ {
+  "word": "and",
+  "start": 22.427,
+  "end": 22.6
+ },
+ {
+  "word": "everything",
+  "start": 22.6,
+  "end": 22.888
+ },
+ {
+  "word": "about",
+  "start": 22.888,
+  "end": 23.177
+ },
+ {
+  "word": "you",
+  "start": 23.177,
+  "end": 23.35
+ },
+ {
+  "word": "for",
+  "start": 23.35,
+  "end": 23.523
+ },
+ {
+  "word": "good.",
+  "start": 23.523,
+  "end": 23.735
+ },
+ {
+  "word": "You",
+  "start": 23.898,
+  "end": 24.186
+ },
+ {
+  "word": "wire",
+  "start": 24.186,
+  "end": 24.455
+ },
+ {
+  "word": "it",
+  "start": 24.455,
+  "end": 24.628
+ },
+ {
+  "word": "into",
+  "start": 24.628,
+  "end": 24.763
+ },
+ {
+  "word": "MCP",
+  "start": 24.763,
+  "end": 25.09
+ },
+ {
+  "word": "so",
+  "start": 25.09,
+  "end": 25.417
+ },
+ {
+  "word": "it",
+  "start": 25.417,
+  "end": 25.532
+ },
+ {
+  "word": "can",
+  "start": 25.532,
+  "end": 25.628
+ },
+ {
+  "word": "reach",
+  "start": 25.628,
+  "end": 25.782
+ },
+ {
+  "word": "your",
+  "start": 25.782,
+  "end": 25.975
+ },
+ {
+  "word": "files,",
+  "start": 25.975,
+  "end": 26.225
+ },
+ {
+  "word": "your",
+  "start": 26.359,
+  "end": 26.417
+ },
+ {
+  "word": "apps,",
+  "start": 26.417,
+  "end": 26.648
+ },
+ {
+  "word": "and",
+  "start": 26.763,
+  "end": 26.936
+ },
+ {
+  "word": "the",
+  "start": 26.936,
+  "end": 27.052
+ },
+ {
+  "word": "internet,",
+  "start": 27.052,
+  "end": 27.321
+ },
+ {
+  "word": "and",
+  "start": 27.436,
+  "end": 27.667
+ },
+ {
+  "word": "the",
+  "start": 27.667,
+  "end": 27.782
+ },
+ {
+  "word": "moment",
+  "start": 27.782,
+  "end": 27.936
+ },
+ {
+  "word": "a",
+  "start": 27.936,
+  "end": 28.167
+ },
+ {
+  "word": "tool",
+  "start": 28.167,
+  "end": 28.263
+ },
+ {
+  "word": "doesn't",
+  "start": 28.263,
+  "end": 28.552
+ },
+ {
+  "word": "exist,",
+  "start": 28.552,
+  "end": 28.898
+ },
+ {
+  "word": "it",
+  "start": 29.109,
+  "end": 29.282
+ },
+ {
+  "word": "writes",
+  "start": 29.282,
+  "end": 29.475
+ },
+ {
+  "word": "the",
+  "start": 29.475,
+  "end": 29.667
+ },
+ {
+  "word": "tool",
+  "start": 29.667,
+  "end": 29.84
+ },
+ {
+  "word": "itself.",
+  "start": 29.84,
+  "end": 30.128
+ },
+ {
+  "word": "You",
+  "start": 30.475,
+  "end": 30.609
+ },
+ {
+  "word": "give",
+  "start": 30.609,
+  "end": 30.744
+ },
+ {
+  "word": "it",
+  "start": 30.744,
+  "end": 30.859
+ },
+ {
+  "word": "a",
+  "start": 30.859,
+  "end": 30.917
+ },
+ {
+  "word": "team",
+  "start": 30.917,
+  "end": 31.109
+ },
+ {
+  "word": "of",
+  "start": 31.109,
+  "end": 31.244
+ },
+ {
+  "word": "sub",
+  "start": 31.244,
+  "end": 31.455
+ },
+ {
+  "word": "-agents,",
+  "start": 31.455,
+  "end": 31.667
+ },
+ {
+  "word": "one",
+  "start": 32.013,
+  "end": 32.244
+ },
+ {
+  "word": "lead",
+  "start": 32.244,
+  "end": 32.571
+ },
+ {
+  "word": "Claude",
+  "start": 32.571,
+  "end": 32.859
+ },
+ {
+  "word": "running",
+  "start": 32.859,
+  "end": 33.167
+ },
+ {
+  "word": "20",
+  "start": 33.167,
+  "end": 33.513
+ },
+ {
+  "word": "specialists",
+  "start": 33.513,
+  "end": 33.898
+ },
+ {
+  "word": "at",
+  "start": 33.898,
+  "end": 34.225
+ },
+ {
+  "word": "once,",
+  "start": 34.225,
+  "end": 34.513
+ },
+ {
+  "word": "in",
+  "start": 34.686,
+  "end": 34.859
+ },
+ {
+  "word": "a",
+  "start": 34.859,
+  "end": 34.936
+ },
+ {
+  "word": "loop",
+  "start": 34.936,
+  "end": 35.071
+ },
+ {
+  "word": "that",
+  "start": 35.071,
+  "end": 35.244
+ },
+ {
+  "word": "never",
+  "start": 35.244,
+  "end": 35.475
+ },
+ {
+  "word": "stops,",
+  "start": 35.475,
+  "end": 35.821
+ },
+ {
+  "word": "capturing",
+  "start": 35.994,
+  "end": 36.186
+ },
+ {
+  "word": "its",
+  "start": 36.186,
+  "end": 36.378
+ },
+ {
+  "word": "own",
+  "start": 36.378,
+  "end": 36.552
+ },
+ {
+  "word": "mistakes",
+  "start": 36.552,
+  "end": 36.859
+ },
+ {
+  "word": "and",
+  "start": 36.859,
+  "end": 37.09
+ },
+ {
+  "word": "fixing",
+  "start": 37.09,
+  "end": 37.34
+ },
+ {
+  "word": "them",
+  "start": 37.34,
+  "end": 37.628
+ },
+ {
+  "word": "before",
+  "start": 37.628,
+  "end": 37.994
+ },
+ {
+  "word": "you",
+  "start": 37.994,
+  "end": 38.167
+ },
+ {
+  "word": "ever",
+  "start": 38.167,
+  "end": 38.417
+ },
+ {
+  "word": "see",
+  "start": 38.417,
+  "end": 38.648
+ },
+ {
+  "word": "them.",
+  "start": 38.648,
+  "end": 38.917
+ },
+ {
+  "word": "Now",
+  "start": 39.51,
+  "end": 39.69
+ },
+ {
+  "word": "here's",
+  "start": 39.69,
+  "end": 39.86
+ },
+ {
+  "word": "the",
+  "start": 39.86,
+  "end": 39.99
+ },
+ {
+  "word": "part",
+  "start": 39.99,
+  "end": 40.14
+ },
+ {
+  "word": "that",
+  "start": 40.17,
+  "end": 40.33
+ },
+ {
+  "word": "gets",
+  "start": 40.37,
+  "end": 40.51
+ },
+ {
+  "word": "you.",
+  "start": 40.51,
+  "end": 40.64
+ },
+ {
+  "word": "Put",
+  "start": 40.782,
+  "end": 40.936
+ },
+ {
+  "word": "a",
+  "start": 40.936,
+  "end": 41.013
+ },
+ {
+  "word": "real",
+  "start": 41.013,
+  "end": 41.205
+ },
+ {
+  "word": "task",
+  "start": 41.205,
+  "end": 41.475
+ },
+ {
+  "word": "in",
+  "start": 41.475,
+  "end": 41.667
+ },
+ {
+  "word": "front",
+  "start": 41.667,
+  "end": 41.782
+ },
+ {
+  "word": "of",
+  "start": 41.782,
+  "end": 41.917
+ },
+ {
+  "word": "plain",
+  "start": 41.917,
+  "end": 42.186
+ },
+ {
+  "word": "Claude",
+  "start": 42.186,
+  "end": 42.455
+ },
+ {
+  "word": "and",
+  "start": 42.455,
+  "end": 42.571
+ },
+ {
+  "word": "in",
+  "start": 42.571,
+  "end": 42.686
+ },
+ {
+  "word": "front",
+  "start": 42.686,
+  "end": 42.802
+ },
+ {
+  "word": "of",
+  "start": 42.802,
+  "end": 42.917
+ },
+ {
+  "word": "this",
+  "start": 42.917,
+  "end": 43.09
+ },
+ {
+  "word": "system.",
+  "start": 43.09,
+  "end": 43.436
+ },
+ {
+  "word": "Plain",
+  "start": 43.744,
+  "end": 44.013
+ },
+ {
+  "word": "Claude",
+  "start": 44.013,
+  "end": 44.302
+ },
+ {
+  "word": "chokes",
+  "start": 44.302,
+  "end": 44.609
+ },
+ {
+  "word": "halfway.",
+  "start": 44.609,
+  "end": 44.917
+ },
+ {
+  "word": "This",
+  "start": 45.244,
+  "end": 45.513
+ },
+ {
+  "word": "system",
+  "start": 45.513,
+  "end": 45.84
+ },
+ {
+  "word": "plans",
+  "start": 45.84,
+  "end": 46.205
+ },
+ {
+  "word": "it,",
+  "start": 46.205,
+  "end": 46.398
+ },
+ {
+  "word": "splits",
+  "start": 46.494,
+  "end": 46.686
+ },
+ {
+  "word": "it",
+  "start": 46.686,
+  "end": 46.821
+ },
+ {
+  "word": "across",
+  "start": 46.821,
+  "end": 47.071
+ },
+ {
+  "word": "the",
+  "start": 47.071,
+  "end": 47.263
+ },
+ {
+  "word": "team,",
+  "start": 47.263,
+  "end": 47.494
+ },
+ {
+  "word": "fixes",
+  "start": 47.84,
+  "end": 48.013
+ },
+ {
+  "word": "its",
+  "start": 48.013,
+  "end": 48.225
+ },
+ {
+  "word": "own",
+  "start": 48.225,
+  "end": 48.436
+ },
+ {
+  "word": "bugs,",
+  "start": 48.436,
+  "end": 48.705
+ },
+ {
+  "word": "and",
+  "start": 48.878,
+  "end": 48.936
+ },
+ {
+  "word": "shifts",
+  "start": 48.936,
+  "end": 49.128
+ },
+ {
+  "word": "the",
+  "start": 49.128,
+  "end": 49.321
+ },
+ {
+  "word": "whole",
+  "start": 49.321,
+  "end": 49.648
+ },
+ {
+  "word": "thing",
+  "start": 49.648,
+  "end": 49.936
+ },
+ {
+  "word": "overnight.",
+  "start": 49.936,
+  "end": 50.34
+ },
+ {
+  "word": "It's",
+  "start": 50.505,
+  "end": 50.775
+ },
+ {
+  "word": "the",
+  "start": 50.775,
+  "end": 50.89
+ },
+ {
+  "word": "same",
+  "start": 50.89,
+  "end": 51.275
+ },
+ {
+  "word": "model",
+  "start": 51.275,
+  "end": 51.582
+ },
+ {
+  "word": "underneath.",
+  "start": 51.582,
+  "end": 51.948
+ },
+ {
+  "word": "This",
+  "start": 52.275,
+  "end": 52.409
+ },
+ {
+  "word": "system",
+  "start": 52.409,
+  "end": 52.698
+ },
+ {
+  "word": "you",
+  "start": 52.698,
+  "end": 52.813
+ },
+ {
+  "word": "built",
+  "start": 52.813,
+  "end": 53.025
+ },
+ {
+  "word": "around",
+  "start": 53.025,
+  "end": 53.275
+ },
+ {
+  "word": "it",
+  "start": 53.275,
+  "end": 53.486
+ },
+ {
+  "word": "is",
+  "start": 53.486,
+  "end": 53.621
+ },
+ {
+  "word": "the",
+  "start": 53.621,
+  "end": 53.775
+ },
+ {
+  "word": "entire",
+  "start": 53.775,
+  "end": 54.178
+ },
+ {
+  "word": "difference,",
+  "start": 54.178,
+  "end": 54.582
+ },
+ {
+  "word": "and",
+  "start": 54.967,
+  "end": 55.121
+ },
+ {
+  "word": "it",
+  "start": 55.121,
+  "end": 55.448
+ },
+ {
+  "word": "already",
+  "start": 55.448,
+  "end": 55.621
+ },
+ {
+  "word": "runs",
+  "start": 55.621,
+  "end": 55.928
+ },
+ {
+  "word": "like",
+  "start": 55.928,
+  "end": 56.121
+ },
+ {
+  "word": "a",
+  "start": 56.121,
+  "end": 56.255
+ },
+ {
+  "word": "version",
+  "start": 56.255,
+  "end": 56.409
+ },
+ {
+  "word": "of",
+  "start": 56.409,
+  "end": 56.582
+ },
+ {
+  "word": "Claude",
+  "start": 56.582,
+  "end": 56.794
+ },
+ {
+  "word": "that",
+  "start": 56.794,
+  "end": 56.948
+ },
+ {
+  "word": "isn't",
+  "start": 56.948,
+  "end": 57.332
+ },
+ {
+  "word": "out",
+  "start": 57.332,
+  "end": 57.505
+ },
+ {
+  "word": "yet.",
+  "start": 57.505,
+  "end": 57.717
+ },
+ {
+  "word": "The",
+  "start": 57.837,
+  "end": 58.068
+ },
+ {
+  "word": "exact",
+  "start": 58.068,
+  "end": 58.395
+ },
+ {
+  "word": "setup",
+  "start": 58.395,
+  "end": 58.722
+ },
+ {
+  "word": "is",
+  "start": 58.722,
+  "end": 58.895
+ },
+ {
+  "word": "the",
+  "start": 58.895,
+  "end": 59.029
+ },
+ {
+  "word": "whole",
+  "start": 59.029,
+  "end": 59.26
+ },
+ {
+  "word": "trick.",
+  "start": 59.26,
+  "end": 59.51
+ },
+ {
+  "word": "Comment",
+  "start": 59.818,
+  "end": 60.048
+ },
+ {
+  "word": "ball",
+  "start": 60.048,
+  "end": 60.356
+ },
+ {
+  "word": "and",
+  "start": 60.356,
+  "end": 60.529
+ },
+ {
+  "word": "I'll",
+  "start": 60.529,
+  "end": 60.606
+ },
+ {
+  "word": "send",
+  "start": 60.606,
+  "end": 60.722
+ },
+ {
+  "word": "you",
+  "start": 60.722,
+  "end": 60.837
+ },
+ {
+  "word": "the",
+  "start": 60.837,
+  "end": 60.914
+ },
+ {
+  "word": "full",
+  "start": 60.914,
+  "end": 61.164
+ },
+ {
+  "word": "setup.",
+  "start": 61.164,
+  "end": 61.375
+ }
+]

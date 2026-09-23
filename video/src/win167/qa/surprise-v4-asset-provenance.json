@@ -1,0 +1,32 @@
+{
+  "v4-binding-creak.wav": {
+    "source": "Original deterministic NumPy/SciPy synthesis, seed 221844",
+    "duration": 0.38,
+    "peak": 0.84
+  },
+  "v4-book-rupture.wav": {
+    "source": "Original edit of project assets paper.wav, shell-crack.wav, deep-contact.wav; onset layering and playback-rate variation",
+    "duration": 0.42,
+    "peak": 0.84
+  },
+  "v4-launch-twang.wav": {
+    "source": "Original deterministic NumPy/SciPy synthesis, seed 221844",
+    "duration": 0.25,
+    "peak": 0.84
+  },
+  "v4-arrow-boing.wav": {
+    "source": "Original deterministic NumPy/SciPy synthesis, seed 221844",
+    "duration": 0.15,
+    "peak": 0.84
+  },
+  "v4-coin-cascade.wav": {
+    "source": "Original deterministic sine-resonator coin synthesis, five accelerating contacts",
+    "duration": 0.23,
+    "peak": 0.84
+  },
+  "v4-ember-pop.wav": {
+    "source": "Original deterministic NumPy/SciPy synthesis, seed 221844",
+    "duration": 0.23,
+    "peak": 0.84
+  }
+}

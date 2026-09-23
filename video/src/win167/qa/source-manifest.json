@@ -1,0 +1,197 @@
+[
+  {
+    "path": "src/AdventureScenes.tsx",
+    "bytes": 9423,
+    "sha256": "17cf61dfded90251a86875cc12783f82727092c0a3b010eb48efca0ddb41e085"
+  },
+  {
+    "path": "src/BodyScenes.tsx",
+    "bytes": 12093,
+    "sha256": "19c4996542c23aab0168a62d4b319b4e05c0b2fb316efed147617dda639f6030"
+  },
+  {
+    "path": "src/BorisLarge.tsx",
+    "bytes": 2720,
+    "sha256": "53c166753288b08da80c008d13569e70e99c7d443936b0af02a777cb34838598"
+  },
+  {
+    "path": "src/CityActionScenes.tsx",
+    "bytes": 6465,
+    "sha256": "d0da72eca313a5d2dc2b1b506691549e6e0381779afb2ce82e309b7804e509e7"
+  },
+  {
+    "path": "src/ClearKit.tsx",
+    "bytes": 7059,
+    "sha256": "7c1bd97b8e24d787b9ef53b038e1531e41ea0321d86662082e4b6fca4aee639a"
+  },
+  {
+    "path": "src/ClearScenes.tsx",
+    "bytes": 8629,
+    "sha256": "55dfd6c59299be9111cae0e4fae93219396c6ff8d7993a495608ecf763b89552"
+  },
+  {
+    "path": "src/CueAudit.ts",
+    "bytes": 2952,
+    "sha256": "5f4cf0ef2c7f48843a39566ff16f1016a668ea377d92fe5a9cb7740fee19846a"
+  },
+  {
+    "path": "src/DarwinBossHook.tsx",
+    "bytes": 6999,
+    "sha256": "e83ed6f44a305902aa7a9b301f19e2960d1e70bea3aa5ddf8d31b5212118ee6e"
+  },
+  {
+    "path": "src/DarwinKit.tsx",
+    "bytes": 12249,
+    "sha256": "649f08058a35cce8604a6b7c05ccc342376708f7380748349565190fe02de92d"
+  },
+  {
+    "path": "src/DarwinScenes.tsx",
+    "bytes": 14557,
+    "sha256": "726d795227024a21d893900dbb7cfd68e340f40f92100411b267e096ab92025d"
+  },
+  {
+    "path": "src/DramaticBuildScene.tsx",
+    "bytes": 3469,
+    "sha256": "c0afb876b6e7661ab992ab018491e53ff40d9e5ff721f916b265aabd2cb9a2df"
+  },
+  {
+    "path": "src/DramaticPayoffScenes.tsx",
+    "bytes": 11060,
+    "sha256": "df1cadb35a269a690da2e027c6e5e127bb91471d90bac0f2583ff74c30e52f9e"
+  },
+  {
+    "path": "src/EnergyFX.tsx",
+    "bytes": 2733,
+    "sha256": "c22dfb75d70e602cbd46ad1bba73c899920c9cc54b3f6ded885e68178c9d255a"
+  },
+  {
+    "path": "src/EvolutionActionScenes.tsx",
+    "bytes": 15542,
+    "sha256": "f6f30caf0540ea697c92a5a333ad72158db60c2efd8411a7f93c82e5a2797fde"
+  },
+  {
+    "path": "src/EvolutionKit.tsx",
+    "bytes": 12860,
+    "sha256": "044f13637a18c1ede62dfed5ef8124fc1a144b4790dae6bbd6149691c9096469"
+  },
+  {
+    "path": "src/EvolutionScenes.tsx",
+    "bytes": 12102,
+    "sha256": "a114916c32040f55451827c38d6037a5ef27977cb7c518c1569679c296be187c"
+  },
+  {
+    "path": "src/FinchAssets.tsx",
+    "bytes": 12349,
+    "sha256": "d30244bf6c504f75a62571b02dc5ea244b9141abf0f0a67b2d455d05f0ed0a58"
+  },
+  {
+    "path": "src/FinchScenes.tsx",
+    "bytes": 11420,
+    "sha256": "377eda1bf2ed5cd9c26d65a3577f204c0999a4cbc38856bd58a3e1a40cedaeb1"
+  },
+  {
+    "path": "src/Kit.tsx",
+    "bytes": 12745,
+    "sha256": "3f6ea119372aa549f90d159f77c12ef1244c099e2d589284dc58c839549b837c"
+  },
+  {
+    "path": "src/LineageScenes.tsx",
+    "bytes": 14912,
+    "sha256": "eeb98062e953be778bac31818c3a77f6aa22b7f492c099c429b8a5e842488201"
+  },
+  {
+    "path": "src/MotionScenes.tsx",
+    "bytes": 179,
+    "sha256": "ffaea7a4135ebe8360dd27b584f159aa7ddc7306d219b1d9ceeb5c83af14e0b2"
+  },
+  {
+    "path": "src/NaturalWorld.tsx",
+    "bytes": 17840,
+    "sha256": "afa7438f7caa87522a1523f8c6fe1ae2cd839cccbfcd7b26cd6eccdb2ccfd424"
+  },
+  {
+    "path": "src/Scenes.tsx",
+    "bytes": 19227,
+    "sha256": "f67c89649f857365b8220891acf9ce69451b2bbb9522ce00f397d99bed4a3f0b"
+  },
+  {
+    "path": "src/SelectionScenes.tsx",
+    "bytes": 14679,
+    "sha256": "8ecf55106e4dab376cbba35c291301c389807ac0464bcb83f8f5640254ce08fd"
+  },
+  {
+    "path": "src/SlopKit.tsx",
+    "bytes": 58119,
+    "sha256": "3b95e1e8386a46ad764e0483f08af74c35f590d328a9a59506b3f9744d05cd11"
+  },
+  {
+    "path": "src/Species.tsx",
+    "bytes": 5829,
+    "sha256": "88d6ded61ca6085119b8f4b7ea99933835ec8879d287e31879b7e0fb94704ec4"
+  },
+  {
+    "path": "src/SupportingActionScenes.tsx",
+    "bytes": 16870,
+    "sha256": "351556755dfd9e0081ae23f07cda342ff5468908109b64485bfd3d25d4f71cea"
+  },
+  {
+    "path": "src/WorldKit.tsx",
+    "bytes": 23121,
+    "sha256": "ef5bc8d30eeac588ff283c5e8e76a50162e7759b7d7f0001cbbb8ba8ea3c0517"
+  },
+  {
+    "path": "src/cover/CarouselConcepts.tsx",
+    "bytes": 115013,
+    "sha256": "096f954e2f60e60624d8b69b28b645a326ed80e1158a453cb2a34d7b3aa0254e"
+  },
+  {
+    "path": "src/cover/ClaudePokeballReel.tsx",
+    "bytes": 337259,
+    "sha256": "189fb8b2b35c785f8a94bbd4647814e40ca9ec9f2c98662e4410545421d84a7b"
+  },
+  {
+    "path": "src/cover/ReelCovers.tsx",
+    "bytes": 67342,
+    "sha256": "6f8e10506a8e9010c8557fe5db2125e61efc9e684b3b08187a040d9d0309da21"
+  },
+  {
+    "path": "src/cover/WINCover.tsx",
+    "bytes": 2340,
+    "sha256": "3a48153a06cf9f4671fda4396f38bd508c8eb67220ada637bde69e1fb8ce9346"
+  },
+  {
+    "path": "src/cover/data/words_pokeball.json",
+    "bytes": 15063,
+    "sha256": "916c8d173f6b5113620c3bc6f54e13c5dd2de7e9b220f34bd5ab697577312993"
+  },
+  {
+    "path": "src/cover/fonts.ts",
+    "bytes": 94,
+    "sha256": "dd58be1f8614df2b7602cf149b06f31e4afa019f9fa3d899fe3337dfd37e18f9"
+  },
+  {
+    "path": "src/fonts.ts",
+    "bytes": 305,
+    "sha256": "6c5d102211d6fb53c3bfe36c0851dd49d65d4da23fa801ff017015328e537f4d"
+  },
+  {
+    "path": "src/hook-concept-index.tsx",
+    "bytes": 745,
+    "sha256": "d62e66ab18d8617bdddb073b4db4e37fa5cd8af0d033c6915f6a90570e9df5c6"
+  },
+  {
+    "path": "src/index.tsx",
+    "bytes": 2472,
+    "sha256": "21274b806d790fd5f49d023ccced7719a4e9aa87a63a8db0c0e57bb986d17fff"
+  },
+  {
+    "path": "src/supporting-review-index.tsx",
+    "bytes": 484,
+    "sha256": "b2ad2f48b2a2b66f2b79370f1865d6cb42982762450902a4bd416b8a9435a798"
+  },
+  {
+    "path": "src/words.json",
+    "bytes": 8330,
+    "sha256": "694f5df71fe7c0f5ef8f64d664bafceeb236c1e4f48edc98b904b560ba884fcf"
+  }
+]

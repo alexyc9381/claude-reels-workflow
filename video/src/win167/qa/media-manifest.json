@@ -1,0 +1,347 @@
+[
+  {
+    "path": "public/bed-processed.wav",
+    "bytes": 5228878,
+    "sha256": "5ed0b175a39cdd2931b1f7b6c6f12c874065e2435ddcf167bec74a5c39e5189c"
+  },
+  {
+    "path": "public/boris-boss.mp4",
+    "bytes": 481571,
+    "sha256": "e07f1cea116e443b822274b296a18d484e4cc5d6ee3ecac52b45b051d8eb86d4"
+  },
+  {
+    "path": "public/boris-large.mp4",
+    "bytes": 1107982,
+    "sha256": "ce789b93398893632c07829037cdecbc4cd7f135db43e62ffeb2c6fefaf7d059"
+  },
+  {
+    "path": "public/boris-stage.mp4",
+    "bytes": 751588,
+    "sha256": "74f68688e461dd863cf80201bc7e237d0530a8e87e68ea9acfacf18e4bf470b6"
+  },
+  {
+    "path": "public/claude_logo.png",
+    "bytes": 8626,
+    "sha256": "c0a9c85cc121d130eda23880c35d81642e6423a6a256e37b2e1dc7730889b0d7"
+  },
+  {
+    "path": "public/effects.wav",
+    "bytes": 5228844,
+    "sha256": "dce7b00878e02ce25a900b18472d402bb3fbb6dde0ba9aaafe41c1e970c191a8"
+  },
+  {
+    "path": "public/fonts/Fraunces.woff2",
+    "bytes": 36620,
+    "sha256": "7f9d191d999336d3b9790afa72e1358e50a13b06d4f289341e92a311967a80f9"
+  },
+  {
+    "path": "public/fonts/Inter.woff2",
+    "bytes": 48256,
+    "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+  },
+  {
+    "path": "public/hook-clear.wav",
+    "bytes": 588844,
+    "sha256": "15ad417041bc027337c122f496e2eeb44d77e227eb20873aa272d46f3f9bd93b"
+  },
+  {
+    "path": "public/hook-concept.wav",
+    "bytes": 435244,
+    "sha256": "2d4fb27202e9a3052599e4db9f62ef08885823eabe1111e62e8180843d0d34e1"
+  },
+  {
+    "path": "public/hook-unfaded.wav",
+    "bytes": 588844,
+    "sha256": "4b6b965e5534a9e7095f6377cdca3c8b5c272e308f2262cf8f092961a37c0e4d"
+  },
+  {
+    "path": "public/master-hook.wav",
+    "bytes": 5228844,
+    "sha256": "0b2fe0da06731aa91c0143120b20ea4ca67f5c7bd6f9dd7306aac76ad1b82e8b"
+  },
+  {
+    "path": "public/master-overhaul.wav",
+    "bytes": 5228844,
+    "sha256": "7a504797cf3cd11efd77829469c229761269cf8acddfeacdac06db47d8f5b16a"
+  },
+  {
+    "path": "public/master.wav",
+    "bytes": 5228844,
+    "sha256": "3c8a8d078d52c0e9ff9f08abbe16e74d1f1c7e0e46a88abbe24ede06ba93da0e"
+  },
+  {
+    "path": "public/music-source.mp3",
+    "bytes": 5486478,
+    "sha256": "21958d0224b25d769667f57af9734d2616157800fd023b78f399661e7c78bce8"
+  },
+  {
+    "path": "public/music.wav",
+    "bytes": 5228844,
+    "sha256": "51cd65cb89058507473ffb1cf7fbdadf03f5134f54d7843e644e8bbfa643bffb"
+  },
+  {
+    "path": "public/sfx/copy.wav",
+    "bytes": 16044,
+    "sha256": "623bc600e2647b64d026806b4979e9801dd7780b3962ab32b990529100e74ae4"
+  },
+  {
+    "path": "public/sfx/correct.wav",
+    "bytes": 376412,
+    "sha256": "ee40b583b3d32d76201430bd4367cf186096171da5010f297fa54b574d2fd7b0"
+  },
+  {
+    "path": "public/sfx/deep-contact.wav",
+    "bytes": 30764,
+    "sha256": "77a73437b6a8e3892e0893967484f90da21d790a422d39c637ed8d3c8781ed1c"
+  },
+  {
+    "path": "public/sfx/gear.wav",
+    "bytes": 61484,
+    "sha256": "5f3f55be74fe54d6b079a8fccd7f1d20f8d73042fceae4aeec18137d00301bce"
+  },
+  {
+    "path": "public/sfx/huh.wav",
+    "bytes": 55212,
+    "sha256": "8edca64ebc3437331efc56b913822958f70f00bf71548966dab28b5ab5ab17c7"
+  },
+  {
+    "path": "public/sfx/latch.wav",
+    "bytes": 34944,
+    "sha256": "ce9e3e2719c65ca6abd08a69ecce04e2d2e394c8e85fd859079d15139786c878"
+  },
+  {
+    "path": "public/sfx/lever.wav",
+    "bytes": 80684,
+    "sha256": "16bb33b0ac8b45475d699c767837628213392c3a8ac99d8bd7c10c3de0aaccc6"
+  },
+  {
+    "path": "public/sfx/magic-level.wav",
+    "bytes": 241344,
+    "sha256": "5ea7ed8d11567b3da394b38bf9f143dcdc9176787157eeee07a12511dd441f80"
+  },
+  {
+    "path": "public/sfx/metal.wav",
+    "bytes": 42284,
+    "sha256": "7f3b3d7b8f03a42fc91f56855114e6a56b86823601a4e667cc2e3de25cd4fbee"
+  },
+  {
+    "path": "public/sfx/module.wav",
+    "bytes": 23084,
+    "sha256": "efd5044d9400875efe15dc32dc72c4204fbd031edf06228660e7962da9c25c86"
+  },
+  {
+    "path": "public/sfx/page_turn.wav",
+    "bytes": 43688,
+    "sha256": "37052920da39fc90d0f8d4a91104c639c9a98591f63761efcc756533d704ca7f"
+  },
+  {
+    "path": "public/sfx/paper.wav",
+    "bytes": 33108,
+    "sha256": "78dbdc00d5bd0391af13df655dfec5b9915d241ed057439f69118e38c6601627"
+  },
+  {
+    "path": "public/sfx/pencil.wav",
+    "bytes": 74924,
+    "sha256": "d99abdd501c748934dbc45a4664b193744f8800dc8eb60c690651a60327944e5"
+  },
+  {
+    "path": "public/sfx/selector.wav",
+    "bytes": 96044,
+    "sha256": "fafd422ecb846f32ffa0ae02dc9432b31b37d90f88b12d515405be2be62e7091"
+  },
+  {
+    "path": "public/sfx/shell-crack.wav",
+    "bytes": 16078,
+    "sha256": "b2236f162f20f548675e127313d7acf1e5dc7f3f5408ae68e89d3dbd8ba224c9"
+  },
+  {
+    "path": "public/sfx/step.wav",
+    "bytes": 57644,
+    "sha256": "0ff8919ccf6d884f6d438bc3f084028e5fe478c78e45dae4c532f715d8e5b85e"
+  },
+  {
+    "path": "public/sfx/switch.wav",
+    "bytes": 26924,
+    "sha256": "00663cfb942b39fb15b0b1fb3636f79b1284b641817d20d6e058d0fe812885aa"
+  },
+  {
+    "path": "public/sfx/thock.wav",
+    "bytes": 30764,
+    "sha256": "111eb5d2f4b47be36c0f479989e2287ee8449e2a547bba0387f7c108b58b0f03"
+  },
+  {
+    "path": "public/sfx/typing.wav",
+    "bytes": 126798,
+    "sha256": "5a9b8f55924d2828e23e9a6b49ed1f0cefe726fef86412796894a72e605eb66f"
+  },
+  {
+    "path": "public/sfx/v2-bud-1.wav",
+    "bytes": 24044,
+    "sha256": "88750c04a5aaa3c2acfafcd89718385efc030abd24a9bcd9186c045f2518fc5f"
+  },
+  {
+    "path": "public/sfx/v2-bud-2.wav",
+    "bytes": 24044,
+    "sha256": "374727ac1275e8765ca2ddaa7a448e8b0661bfefece773643d4689f1e2863959"
+  },
+  {
+    "path": "public/sfx/v2-bud-3.wav",
+    "bytes": 24044,
+    "sha256": "2f6c9b3d8c94b55821d8cb1d753f4ef0a176a2a472da48e18581a04551539b23"
+  },
+  {
+    "path": "public/sfx/v2-coin-chink.wav",
+    "bytes": 22124,
+    "sha256": "44a54d914232f45ff74c6eb4c53139b69df37e725a38109fb96c316533c5437c"
+  },
+  {
+    "path": "public/sfx/v2-fall-whistle.wav",
+    "bytes": 36524,
+    "sha256": "9cb28921298054ddc8a60c5ee48627148e98f2c50e4c4baa0f5c6836999a81e8"
+  },
+  {
+    "path": "public/sfx/v2-gulp.wav",
+    "bytes": 24044,
+    "sha256": "92abb0496d66d5c55522fc86e7321b3fe222eae8c402724a9d8ff7e2cfb4ede5"
+  },
+  {
+    "path": "public/sfx/v2-ink-draw.wav",
+    "bytes": 23084,
+    "sha256": "3049f5ff138f8f9390187815be14c32b4af2057e737a77d2fe2d5e6f896bdbc0"
+  },
+  {
+    "path": "public/sfx/v2-machine-reverse.wav",
+    "bytes": 26924,
+    "sha256": "c26dc3d30a291f540c280ee646169d60c55fb30d45acd2982cba28b1b383dcc1"
+  },
+  {
+    "path": "public/sfx/v2-rocket-burst.wav",
+    "bytes": 59564,
+    "sha256": "3c349580a9d9abb4db7a505743ea19754e338473f5bbe9f0646afc6841f14a74"
+  },
+  {
+    "path": "public/sfx/v2-rubber-compress.wav",
+    "bytes": 21164,
+    "sha256": "1d73066ba4155551169ba168746156e957a3df4e1f8d74db8b8ddb7077ead95a"
+  },
+  {
+    "path": "public/sfx/v2-ski-brake.wav",
+    "bytes": 26924,
+    "sha256": "d900f0d040b9eff541bb2fcdb28c244225aa62742df19a7476a5d6f9be5f6f61"
+  },
+  {
+    "path": "public/sfx/v2-soft-snap.wav",
+    "bytes": 12524,
+    "sha256": "1225c05182239cfa54a7a405d9eb5d40a05410f84dd3e130058500486edf0d0a"
+  },
+  {
+    "path": "public/sfx/v2-spring-load.wav",
+    "bytes": 33644,
+    "sha256": "bbc65f7850a897f5c9379bdbbda11a094ecae46bf9a920d31f51d3d9fc7af783"
+  },
+  {
+    "path": "public/sfx/v2-spring-rebound.wav",
+    "bytes": 32684,
+    "sha256": "087e2fdb9b5ad00dded6a81793457307226be407ccfefef0a4a977d85cfc0a7e"
+  },
+  {
+    "path": "public/sfx/v2-winner-bell.wav",
+    "bytes": 49964,
+    "sha256": "79623a807b33fd9dd5aa9ccd58295918067d8c1d2a6c38f824f421f0de79721d"
+  },
+  {
+    "path": "public/sfx/v3-flight-puff.wav",
+    "bytes": 22124,
+    "sha256": "509025eb2e1636f12339b136d2a8ec007fd9dfee326bbf2c367fe80bd748951d"
+  },
+  {
+    "path": "public/sfx/v3-impact-ripple.wav",
+    "bytes": 29804,
+    "sha256": "e9405074f5b2db89bad15656f60e362050d6e78c73543890a875d64045bff322"
+  },
+  {
+    "path": "public/sfx/v3-paper-flurry.wav",
+    "bytes": 24044,
+    "sha256": "703be29099d8ff68e691bb8937542ab41e357c91a3025b927906c93e20ee19d9"
+  },
+  {
+    "path": "public/sfx/v3-power-spark.wav",
+    "bytes": 16364,
+    "sha256": "09a6b9aba8648bc522bec2fed062db390ebccf184b0b3e1088647a4afe3cebf1"
+  },
+  {
+    "path": "public/sfx/v3-wand-charge.wav",
+    "bytes": 26924,
+    "sha256": "360af815a0ef3e2b1e6ac65adefa22cb88a2c52e85b10f0c690ee098db6b6e84"
+  },
+  {
+    "path": "public/sfx/v3-zap-1.wav",
+    "bytes": 18284,
+    "sha256": "8edb1431eff52a3bfc2e244ef0e8370d701ea2632c33626a7240f28c340ce5ec"
+  },
+  {
+    "path": "public/sfx/v3-zap-2.wav",
+    "bytes": 18284,
+    "sha256": "438106bda4d4260d14fba530921004380fcd0bbf2b098aa8c45ec1b7477d5415"
+  },
+  {
+    "path": "public/sfx/v3-zap-3.wav",
+    "bytes": 18284,
+    "sha256": "77f265795b8e1076d64b6649212d34e195ce14bb25f59e9c3091015495f9ee3b"
+  },
+  {
+    "path": "public/sfx/v3-zap-body.wav",
+    "bytes": 23084,
+    "sha256": "71f8c46f4f94d10c67e81e36b9ffdedd4d661e29ff0159a2323aa1d8b63300e9"
+  },
+  {
+    "path": "public/sfx/v3-zap-crackle.wav",
+    "bytes": 13964,
+    "sha256": "bd8b984478626e3caf09afae8eaaf37d39d0d1e46199d168f5057a6052cfbbcc"
+  },
+  {
+    "path": "public/sfx/v4-arrow-boing.wav",
+    "bytes": 14444,
+    "sha256": "a3beafe0ce191ace0412ffc1f3fd04fe8aafe6f86677901ac33bb81179d70ac9"
+  },
+  {
+    "path": "public/sfx/v4-binding-creak.wav",
+    "bytes": 36524,
+    "sha256": "9fbe9b3f4031dfea9da2af7fbf7247dacbfa3bb2fd23ea375f091a0d6abfbd39"
+  },
+  {
+    "path": "public/sfx/v4-book-rupture.wav",
+    "bytes": 40364,
+    "sha256": "8f42e9ee9b9a1a4ae07950a20815714042111b62016b5e96a8d209247b7b3e59"
+  },
+  {
+    "path": "public/sfx/v4-coin-cascade.wav",
+    "bytes": 22124,
+    "sha256": "031f581e54545ea6937c545331cfc6bcf12c67f9016e019044c7aacfdb5d705e"
+  },
+  {
+    "path": "public/sfx/v4-ember-pop.wav",
+    "bytes": 22124,
+    "sha256": "a8a3d70cb89f2cb7d3df06ef09c4419548b8a4475e8ab29c9c0ed9a26562032a"
+  },
+  {
+    "path": "public/sfx/v4-launch-twang.wav",
+    "bytes": 24044,
+    "sha256": "e971ea9109561fbc01adf11d1da64a8830bb0b8bda96b8f8096dbfbdd023b55d"
+  },
+  {
+    "path": "public/sfx/vine-boom.wav",
+    "bytes": 225492,
+    "sha256": "d9f5268bc3db3fd26505ef80d9ce3053b2e2fc10033cb8b34aa2c4b8fe4bd15c"
+  },
+  {
+    "path": "public/voice-mixed.wav",
+    "bytes": 5228844,
+    "sha256": "856245e2b3b1faa5cf4108f98e8a795d717099a72ac509836a7306c39b214bf7"
+  },
+  {
+    "path": "public/voice.wav",
+    "bytes": 2613168,
+    "sha256": "69fb4eb1f4c5a33bdf07a7f93edd01227c6b3e1aa26e18758badcb3edfdebb17"
+  }
+]

@@ -1,0 +1,727 @@
+[
+ {
+  "start": 0.0,
+  "end": 0.16,
+  "word": "There's"
+ },
+ {
+  "start": 0.16,
+  "end": 0.24,
+  "word": "a"
+ },
+ {
+  "start": 0.24,
+  "end": 0.4,
+  "word": "new"
+ },
+ {
+  "start": 0.4,
+  "end": 0.6,
+  "word": "prompting"
+ },
+ {
+  "start": 0.6,
+  "end": 0.86,
+  "word": "technique"
+ },
+ {
+  "start": 0.86,
+  "end": 1.02,
+  "word": "that's"
+ },
+ {
+  "start": 1.02,
+  "end": 1.08,
+  "word": "been"
+ },
+ {
+  "start": 1.08,
+  "end": 1.38,
+  "word": "blowing"
+ },
+ {
+  "start": 1.38,
+  "end": 1.72,
+  "word": "people's"
+ },
+ {
+  "start": 1.72,
+  "end": 1.84,
+  "word": "minds"
+ },
+ {
+  "start": 1.84,
+  "end": 2.02,
+  "word": "this"
+ },
+ {
+  "start": 2.02,
+  "end": 2.226,
+  "word": "week."
+ },
+ {
+  "start": 2.3,
+  "end": 2.38,
+  "word": "You"
+ },
+ {
+  "start": 2.38,
+  "end": 2.48,
+  "word": "can"
+ },
+ {
+  "start": 2.48,
+  "end": 2.62,
+  "word": "build"
+ },
+ {
+  "start": 2.62,
+  "end": 3.12,
+  "word": "entire"
+ },
+ {
+  "start": 3.12,
+  "end": 3.38,
+  "word": "apps"
+ },
+ {
+  "start": 3.38,
+  "end": 3.5,
+  "word": "and"
+ },
+ {
+  "start": 3.5,
+  "end": 3.72,
+  "word": "websites"
+ },
+ {
+  "start": 3.72,
+  "end": 3.86,
+  "word": "in"
+ },
+ {
+  "start": 3.86,
+  "end": 4.0,
+  "word": "a"
+ },
+ {
+  "start": 4.0,
+  "end": 4.22,
+  "word": "single"
+ },
+ {
+  "start": 4.22,
+  "end": 4.48,
+  "word": "prompt"
+ },
+ {
+  "start": 4.48,
+  "end": 4.62,
+  "word": "and"
+ },
+ {
+  "start": 4.62,
+  "end": 4.76,
+  "word": "even"
+ },
+ {
+  "start": 4.76,
+  "end": 4.92,
+  "word": "the"
+ },
+ {
+  "start": 4.92,
+  "end": 5.1,
+  "word": "creators"
+ },
+ {
+  "start": 5.1,
+  "end": 5.3,
+  "word": "of"
+ },
+ {
+  "start": 5.3,
+  "end": 5.42,
+  "word": "Claude"
+ },
+ {
+  "start": 5.42,
+  "end": 5.6,
+  "word": "think"
+ },
+ {
+  "start": 5.6,
+  "end": 5.76,
+  "word": "this"
+ },
+ {
+  "start": 5.76,
+  "end": 5.84,
+  "word": "is"
+ },
+ {
+  "start": 5.84,
+  "end": 6.0,
+  "word": "the"
+ },
+ {
+  "start": 6.0,
+  "end": 6.24,
+  "word": "future"
+ },
+ {
+  "start": 6.24,
+  "end": 6.38,
+  "word": "of"
+ },
+ {
+  "start": 6.38,
+  "end": 6.631,
+  "word": "AI."
+ },
+ {
+  "start": 6.76,
+  "end": 6.92,
+  "word": "It's"
+ },
+ {
+  "start": 6.92,
+  "end": 7.06,
+  "word": "called"
+ },
+ {
+  "start": 7.06,
+  "end": 7.2,
+  "word": "the"
+ },
+ {
+  "start": 7.2,
+  "end": 7.46,
+  "word": "Darwin"
+ },
+ {
+  "start": 7.46,
+  "end": 7.66,
+  "word": "Loop."
+ },
+ {
+  "start": 7.9,
+  "end": 8.08,
+  "word": "Instead"
+ },
+ {
+  "start": 8.08,
+  "end": 8.18,
+  "word": "of"
+ },
+ {
+  "start": 8.18,
+  "end": 8.3,
+  "word": "doing"
+ },
+ {
+  "start": 8.3,
+  "end": 8.42,
+  "word": "the"
+ },
+ {
+  "start": 8.42,
+  "end": 8.58,
+  "word": "normal"
+ },
+ {
+  "start": 8.58,
+  "end": 8.74,
+  "word": "back"
+ },
+ {
+  "start": 8.74,
+  "end": 8.84,
+  "word": "and"
+ },
+ {
+  "start": 8.84,
+  "end": 8.98,
+  "word": "forth"
+ },
+ {
+  "start": 8.98,
+  "end": 9.18,
+  "word": "chat,"
+ },
+ {
+  "start": 9.24,
+  "end": 9.28,
+  "word": "you"
+ },
+ {
+  "start": 9.28,
+  "end": 9.42,
+  "word": "give"
+ },
+ {
+  "start": 9.42,
+  "end": 9.56,
+  "word": "Claude"
+ },
+ {
+  "start": 9.56,
+  "end": 9.72,
+  "word": "a"
+ },
+ {
+  "start": 9.72,
+  "end": 9.88,
+  "word": "task"
+ },
+ {
+  "start": 9.88,
+  "end": 10.0,
+  "word": "and"
+ },
+ {
+  "start": 10.0,
+  "end": 10.12,
+  "word": "have"
+ },
+ {
+  "start": 10.12,
+  "end": 10.22,
+  "word": "it"
+ },
+ {
+  "start": 10.22,
+  "end": 10.42,
+  "word": "test"
+ },
+ {
+  "start": 10.42,
+  "end": 10.58,
+  "word": "three"
+ },
+ {
+  "start": 10.58,
+  "end": 10.92,
+  "word": "approaches"
+ },
+ {
+  "start": 10.92,
+  "end": 11.08,
+  "word": "and"
+ },
+ {
+  "start": 11.08,
+  "end": 11.34,
+  "word": "improve"
+ },
+ {
+  "start": 11.34,
+  "end": 11.52,
+  "word": "the"
+ },
+ {
+  "start": 11.52,
+  "end": 11.74,
+  "word": "best"
+ },
+ {
+  "start": 11.74,
+  "end": 11.98,
+  "word": "one"
+ },
+ {
+  "start": 11.98,
+  "end": 12.22,
+  "word": "each"
+ },
+ {
+  "start": 12.22,
+  "end": 12.54,
+  "word": "round."
+ },
+ {
+  "start": 12.7,
+  "end": 12.78,
+  "word": "But"
+ },
+ {
+  "start": 12.78,
+  "end": 12.94,
+  "word": "the"
+ },
+ {
+  "start": 12.94,
+  "end": 13.16,
+  "word": "secret"
+ },
+ {
+  "start": 13.16,
+  "end": 13.44,
+  "word": "sauce"
+ },
+ {
+  "start": 13.44,
+  "end": 13.54,
+  "word": "is"
+ },
+ {
+  "start": 13.54,
+  "end": 13.7,
+  "word": "the"
+ },
+ {
+  "start": 13.7,
+  "end": 13.86,
+  "word": "third"
+ },
+ {
+  "start": 13.86,
+  "end": 13.98,
+  "word": "line"
+ },
+ {
+  "start": 13.98,
+  "end": 14.06,
+  "word": "of"
+ },
+ {
+  "start": 14.06,
+  "end": 14.18,
+  "word": "the"
+ },
+ {
+  "start": 14.18,
+  "end": 14.38,
+  "word": "prompt"
+ },
+ {
+  "start": 14.38,
+  "end": 14.52,
+  "word": "where"
+ },
+ {
+  "start": 14.52,
+  "end": 14.58,
+  "word": "you"
+ },
+ {
+  "start": 14.58,
+  "end": 14.7,
+  "word": "tell"
+ },
+ {
+  "start": 14.7,
+  "end": 14.9,
+  "word": "Claude"
+ },
+ {
+  "start": 14.9,
+  "end": 15.08,
+  "word": "to"
+ },
+ {
+  "start": 15.08,
+  "end": 15.3,
+  "word": "evolve"
+ },
+ {
+  "start": 15.3,
+  "end": 15.48,
+  "word": "the"
+ },
+ {
+  "start": 15.48,
+  "end": 15.691,
+  "word": "winner."
+ },
+ {
+  "start": 15.84,
+  "end": 15.92,
+  "word": "The"
+ },
+ {
+  "start": 15.92,
+  "end": 16.08,
+  "word": "agents"
+ },
+ {
+  "start": 16.08,
+  "end": 16.3,
+  "word": "take"
+ },
+ {
+  "start": 16.3,
+  "end": 16.44,
+  "word": "your"
+ },
+ {
+  "start": 16.44,
+  "end": 16.66,
+  "word": "favorite"
+ },
+ {
+  "start": 16.66,
+  "end": 16.9,
+  "word": "version"
+ },
+ {
+  "start": 16.9,
+  "end": 17.06,
+  "word": "and"
+ },
+ {
+  "start": 17.06,
+  "end": 17.22,
+  "word": "create"
+ },
+ {
+  "start": 17.22,
+  "end": 17.48,
+  "word": "three"
+ },
+ {
+  "start": 17.48,
+  "end": 17.88,
+  "word": "improved"
+ },
+ {
+  "start": 17.88,
+  "end": 18.586,
+  "word": "variations."
+ },
+ {
+  "start": 18.7,
+  "end": 18.78,
+  "word": "So"
+ },
+ {
+  "start": 18.78,
+  "end": 18.86,
+  "word": "you"
+ },
+ {
+  "start": 18.86,
+  "end": 19.14,
+  "word": "repeat"
+ },
+ {
+  "start": 19.14,
+  "end": 19.28,
+  "word": "the"
+ },
+ {
+  "start": 19.28,
+  "end": 19.4,
+  "word": "loop"
+ },
+ {
+  "start": 19.4,
+  "end": 19.62,
+  "word": "picking"
+ },
+ {
+  "start": 19.62,
+  "end": 19.84,
+  "word": "winners"
+ },
+ {
+  "start": 19.84,
+  "end": 20.06,
+  "word": "each"
+ },
+ {
+  "start": 20.06,
+  "end": 20.24,
+  "word": "round"
+ },
+ {
+  "start": 20.24,
+  "end": 20.42,
+  "word": "until"
+ },
+ {
+  "start": 20.42,
+  "end": 20.5,
+  "word": "you"
+ },
+ {
+  "start": 20.5,
+  "end": 20.58,
+  "word": "get"
+ },
+ {
+  "start": 20.58,
+  "end": 20.7,
+  "word": "the"
+ },
+ {
+  "start": 20.7,
+  "end": 20.9,
+  "word": "best"
+ },
+ {
+  "start": 20.9,
+  "end": 21.296,
+  "word": "answer."
+ },
+ {
+  "start": 21.42,
+  "end": 21.48,
+  "word": "But"
+ },
+ {
+  "start": 21.48,
+  "end": 21.62,
+  "word": "this"
+ },
+ {
+  "start": 21.62,
+  "end": 21.88,
+  "word": "burns"
+ },
+ {
+  "start": 21.88,
+  "end": 22.06,
+  "word": "through"
+ },
+ {
+  "start": 22.06,
+  "end": 22.34,
+  "word": "tokens"
+ },
+ {
+  "start": 22.34,
+  "end": 22.6,
+  "word": "fast"
+ },
+ {
+  "start": 22.6,
+  "end": 22.76,
+  "word": "so"
+ },
+ {
+  "start": 22.76,
+  "end": 22.84,
+  "word": "you"
+ },
+ {
+  "start": 22.84,
+  "end": 22.96,
+  "word": "should"
+ },
+ {
+  "start": 22.96,
+  "end": 23.12,
+  "word": "start"
+ },
+ {
+  "start": 23.12,
+  "end": 23.22,
+  "word": "with"
+ },
+ {
+  "start": 23.22,
+  "end": 23.34,
+  "word": "a"
+ },
+ {
+  "start": 23.34,
+  "end": 23.58,
+  "word": "basic"
+ },
+ {
+  "start": 23.58,
+  "end": 23.82,
+  "word": "first"
+ },
+ {
+  "start": 23.82,
+  "end": 24.04,
+  "word": "draft"
+ },
+ {
+  "start": 24.04,
+  "end": 24.18,
+  "word": "and"
+ },
+ {
+  "start": 24.18,
+  "end": 24.28,
+  "word": "then"
+ },
+ {
+  "start": 24.28,
+  "end": 24.44,
+  "word": "trigger"
+ },
+ {
+  "start": 24.44,
+  "end": 24.58,
+  "word": "the"
+ },
+ {
+  "start": 24.58,
+  "end": 24.78,
+  "word": "Darwin"
+ },
+ {
+  "start": 24.78,
+  "end": 24.92,
+  "word": "Loop"
+ },
+ {
+  "start": 24.92,
+  "end": 25.08,
+  "word": "to"
+ },
+ {
+  "start": 25.08,
+  "end": 25.32,
+  "word": "improve"
+ },
+ {
+  "start": 25.32,
+  "end": 25.52,
+  "word": "the"
+ },
+ {
+  "start": 25.52,
+  "end": 25.68,
+  "word": "final"
+ },
+ {
+  "start": 25.68,
+  "end": 26.04,
+  "word": "result."
+ },
+ {
+  "start": 26.04,
+  "end": 26.34,
+  "word": "Comment"
+ },
+ {
+  "start": 26.34,
+  "end": 26.54,
+  "word": "WIN"
+ },
+ {
+  "start": 26.54,
+  "end": 26.7,
+  "word": "for"
+ },
+ {
+  "start": 26.7,
+  "end": 26.8,
+  "word": "the"
+ },
+ {
+  "start": 26.8,
+  "end": 26.94,
+  "word": "free"
+ },
+ {
+  "start": 26.94,
+  "end": 27.12,
+  "word": "guide."
+ }
+]

@@ -1,0 +1,1 @@
+{"name":"nocodealex-win","version":"1.0.0","private":true,"scripts":{"studio":"remotion studio src/index.tsx","render":"remotion render src/index.tsx WIN WIN_Final.mp4 --codec=h264 --crf=18 --concurrency=2"},"dependencies":{"@remotion/cli":"4.0.370","react":"19.2.0","react-dom":"19.2.0","remotion":"4.0.370"}}
