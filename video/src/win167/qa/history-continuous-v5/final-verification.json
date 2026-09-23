@@ -1,0 +1,17 @@
+{
+  "file": "WIN_Full_Reel_Continuous_Motion.mp4",
+  "sha256": "e3807a133a1f0a568442e9499f8922d2680d0adc9f9d98b8ac07901592cb7437",
+  "source_matches_reviewed_project": true,
+  "source_files": 39,
+  "visual_gate": "Independent continuous-tail-review.md; all12 final scene spans reviewed",
+  "audio_gate": {
+    "duration": 27.233333333333334,
+    "peak_dbfs": -2.1693434011751367,
+    "clipped_samples": 0,
+    "new_cues": 14,
+    "voice_timing_unchanged": true,
+    "subjective_listening": "not independently certified"
+  },
+  "user_creative_approval": "pending",
+  "canonical_drive_replaced": false
+}

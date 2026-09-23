@@ -10,8 +10,8 @@ import {OffthreadVideo, Img, staticFile} from 'remotion';
  * sharpening, washed-out overlays, source audio, or additional camera zoom.
  */
 export function Boris({t}: {t: number}) {
-  const cue=5.60-139/30,draw=S(t,cue,.24),pop=E(t,cue,.21),bounce=pulse(t,cue+.19,.28);
-  const beat=pulse(t,cue+.27,.29)+.72*pulse(t,cue+.67,.29)+.9*pulse(t,cue+.98,.34);const ax=-18*beat,ay=13*beat;
+  const cue=.06,draw=S(t,cue,.24),pop=E(t,cue,.21),bounce=pulse(t,cue+.19,.28);
+  const beat=pulse(t,cue+.27,.29)+.72*pulse(t,cue+.68,.29)+.9*pulse(t,cue+1.25,.34)+.7*pulse(t,cue+1.78,.25);const ax=-18*beat,ay=13*beat;
   return <div style={{position:'absolute',inset:0,background:'#102532'}}>
     <svg width="1012" height="792" style={{position:'absolute',inset:0}}>
       <path d="M0 0H1012V124H0Z" fill="#193845"/>

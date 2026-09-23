@@ -1,0 +1,7 @@
+{
+  "untouched_leading_voice_max_error": 4.7206878662109375e-05,
+  "untouched_following_voice_max_error": 4.744529724121094e-05,
+  "max_allowed_pcm_error": 6.103515625e-05,
+  "original_words_unchanged": true,
+  "comparison": "Identical ffmpeg stereo decode channel layout; accommodates PCM requantization."
+}

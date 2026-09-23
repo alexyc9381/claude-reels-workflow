@@ -1,17 +1,14 @@
 {
-  "file": "WIN_Full_Reel_Continuous_Motion.mp4",
-  "sha256": "e3807a133a1f0a568442e9499f8922d2680d0adc9f9d98b8ac07901592cb7437",
+  "file": "WIN_Revised_Pacing_Claude.mp4",
+  "sha256": "4e9c6400dcceab8ed5933ab1a0b43392d3a16fdcb5a29c19946c17049742d4ce",
   "source_matches_reviewed_project": true,
-  "source_files": 39,
-  "visual_gate": "Independent continuous-tail-review.md; all12 final scene spans reviewed",
-  "audio_gate": {
-    "duration": 27.233333333333334,
-    "peak_dbfs": -2.1693434011751367,
-    "clipped_samples": 0,
-    "new_cues": 14,
-    "voice_timing_unchanged": true,
-    "subjective_listening": "not independently certified"
-  },
+  "frames": 826,
+  "duration": 27.533333333333335,
+  "visual_review": "pacing-v6-review.md; editing-agent sampled review",
+  "ship_check": "9/9 pass; caption drift checks ordering only",
+  "look_check": "blocking thresholds pass",
+  "motion_diagnostic": "2/12 below mean threshold; disclosed in review",
+  "audio_peak_dbfs": -2.168747901916504,
   "user_creative_approval": "pending",
   "canonical_drive_replaced": false
 }

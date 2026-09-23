@@ -61,7 +61,7 @@ export function Draft({t}:{t:number}){
    <path d="M59 188L13 688M954 165l43 534M53 186Q260 218 410 168" stroke="#1B293A" strokeWidth="35" fill="none"/>
    <path d="M64 199q89 51 138 44M950 177q-86 94-173 100" stroke="#59645D" strokeWidth="18" fill="none"/>
    {[0,1,2].map(i=><g key={i} transform={`translate(${71+i*52} ${290+i*86}) rotate(${-28+i*17})`}><path d="M0 0Q76-58 121-22Q71 26 0 0" fill="#4B655C"/><path d="M0 0l99-21" stroke="#829180" strokeWidth="4"/></g>)}
-   <path d="M0 670Q271 610 515 660Q747 599 1012 651V792H0Z" fill="#182D39"/><path d="M27 679Q305 628 484 675" stroke="#708578" strokeWidth="9" fill="none"/>
+   <path d="M0 670Q271 610 515 660Q747 599 1012 651V792H0Z" fill="#0E202B"/><path d="M27 679Q305 628 484 675" stroke="#708578" strokeWidth="9" fill="none"/>
    <path d="M410 641L849 632 888 680H373Z" fill="#9DAB93" stroke="#253A41" strokeWidth="9"/><path d="M375 679H888V727H375Z" fill="#516D67"/><path d="M412 695H839" stroke="#C9C9A8" strokeWidth="8"/>
    <ellipse cx="659" cy="653" rx={102+91*grow} ry={20+8*land} fill="#0A23315C"/>
   </svg>

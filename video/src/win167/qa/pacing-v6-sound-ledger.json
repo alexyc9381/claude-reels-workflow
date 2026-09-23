@@ -1,0 +1,806 @@
+{
+  "frames": 826,
+  "duration": 27.533333333333335,
+  "changed_voice_range_original": [
+    7.866666666666666,
+    9.233333333333333
+  ],
+  "changed_voice_range_new": [
+    7.866666666666666,
+    9.533333333333333
+  ],
+  "local_tempo_relative_previous": 0.82,
+  "source_tempo_in_changed_phrase": 0.8446000000000001,
+  "added_seconds": 0.3,
+  "pitch_preserved": true,
+  "peak_dbfs": -2.168747901916504,
+  "clipped_samples": 0,
+  "cues": [
+    {
+      "at": 0.3,
+      "src": "v2-rubber-compress.wav",
+      "peak_dbfs": -23,
+      "duration": 0.18,
+      "why": "Large Claude compresses under the descending book",
+      "pan": 0
+    },
+    {
+      "at": 0.49,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -25,
+      "duration": 0.22,
+      "why": "Immediate elastic recovery after the slam",
+      "pan": 0
+    },
+    {
+      "at": 3.066667,
+      "src": "v4-binding-creak.wav",
+      "peak_dbfs": -29,
+      "duration": 0.32,
+      "why": "Closed prompt book strains against the emerging generation",
+      "pan": 0
+    },
+    {
+      "at": 3.256667,
+      "src": "v3-zap-1.wav",
+      "peak_dbfs": -26,
+      "duration": 0.18,
+      "why": "Quill energy enters the binding",
+      "pan": 0
+    },
+    {
+      "at": 3.396667,
+      "src": "v4-book-rupture.wav",
+      "peak_dbfs": -23,
+      "duration": 0.42,
+      "why": "Binding bursts: paper tear, dry crack and low book body",
+      "pan": 0
+    },
+    {
+      "at": 3.426667,
+      "src": "v4-launch-twang.wav",
+      "peak_dbfs": -28,
+      "duration": 0.25,
+      "why": "First Claude launches from the rupture",
+      "pan": -0.7
+    },
+    {
+      "at": 3.536667,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -29,
+      "duration": 0.2,
+      "why": "Second launch separates from the first",
+      "pan": 0.7
+    },
+    {
+      "at": 4.086667,
+      "src": "deep-contact.wav",
+      "peak_dbfs": -23,
+      "duration": 0.16,
+      "why": "Large foreground Claude lands with weight",
+      "pan": 0
+    },
+    {
+      "at": 4.086667,
+      "src": "v2-rubber-compress.wav",
+      "peak_dbfs": -26,
+      "duration": 0.21,
+      "why": "Large Claude visibly compresses at landing",
+      "pan": 0
+    },
+    {
+      "at": 4.286667,
+      "src": "v3-paper-flurry.wav",
+      "peak_dbfs": -31,
+      "duration": 0.25,
+      "why": "Loose pages fall after the landing",
+      "pan": 0
+    },
+    {
+      "at": 4.446667,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -29,
+      "duration": 0.17,
+      "why": "Book release landing powers the next launch",
+      "cut": 4.633333
+    },
+    {
+      "at": 4.96,
+      "src": "v4-arrow-boing.wav",
+      "peak_dbfs": -31,
+      "duration": 0.14,
+      "why": "Early pointer jab at Boris; includes continued late cue"
+    },
+    {
+      "at": 5.37,
+      "src": "v4-arrow-boing.wav",
+      "peak_dbfs": -33,
+      "duration": 0.14,
+      "why": "Early pointer jab at Boris; includes continued late cue"
+    },
+    {
+      "at": 5.6,
+      "src": "v2-ink-draw.wav",
+      "peak_dbfs": -28,
+      "duration": 0.24,
+      "why": "Arrow is drawn toward Boris",
+      "pan": 0
+    },
+    {
+      "at": 5.63,
+      "src": "v2-soft-snap.wav",
+      "peak_dbfs": -26,
+      "duration": 0.13,
+      "why": "Claude corner logo pops into place",
+      "pan": 0
+    },
+    {
+      "at": 5.94,
+      "src": "v4-arrow-boing.wav",
+      "peak_dbfs": -32,
+      "duration": 0.14,
+      "why": "Early pointer jab at Boris; includes continued late cue"
+    },
+    {
+      "at": 6.47,
+      "src": "v4-arrow-boing.wav",
+      "peak_dbfs": -34,
+      "duration": 0.14,
+      "why": "Early pointer jab at Boris; includes continued late cue"
+    },
+    {
+      "at": 6.9733,
+      "src": "v3-paper-flurry.wav",
+      "peak_dbfs": -25,
+      "duration": 0.25,
+      "why": "Pages fan visibly from Darwin book",
+      "pan": 0
+    },
+    {
+      "at": 7.3633,
+      "src": "v3-power-spark.wav",
+      "peak_dbfs": -26,
+      "duration": 0.17,
+      "why": "Book crest ink stamp locks",
+      "pan": 0
+    },
+    {
+      "at": 7.3633,
+      "src": "thock.wav",
+      "peak_dbfs": -27,
+      "duration": 0.14,
+      "why": "Stamp physical contact under the ink mark",
+      "pan": 0
+    },
+    {
+      "at": 7.526667,
+      "src": "page_turn.wav",
+      "peak_dbfs": -31,
+      "duration": 0.2273125,
+      "why": "Sealed book opens to reveal inherited variations",
+      "cut": 7.866667
+    },
+    {
+      "at": 7.919512195121952,
+      "src": "v2-bud-1.wav",
+      "peak_dbfs": -27,
+      "duration": 0.1951219512195122,
+      "why": "Reply bubble is expelled",
+      "pan": 0.7
+    },
+    {
+      "at": 8.16341463414634,
+      "src": "v2-bud-2.wav",
+      "peak_dbfs": -27,
+      "duration": 0.1951219512195122,
+      "why": "Reply bubble is expelled",
+      "pan": 0.7
+    },
+    {
+      "at": 8.407317073170733,
+      "src": "v2-bud-3.wav",
+      "peak_dbfs": -27,
+      "duration": 0.1951219512195122,
+      "why": "Reply bubble is expelled",
+      "pan": 0.7
+    },
+    {
+      "at": 8.720365853658537,
+      "src": "lever.wav",
+      "peak_dbfs": -23,
+      "duration": 0.23170731707317074,
+      "why": "Darwin lever latch contacts",
+      "pan": 0
+    },
+    {
+      "at": 8.805731707317072,
+      "src": "v3-power-spark.wav",
+      "peak_dbfs": -25,
+      "duration": 0.2073170731707317,
+      "why": "Visible cable pulse reaches reversal mechanism",
+      "pan": 0
+    },
+    {
+      "at": 9.074024390243903,
+      "src": "v2-machine-reverse.wav",
+      "peak_dbfs": -24,
+      "duration": 0.3048780487804878,
+      "why": "Replies reverse into the suction mouth",
+      "pan": 0
+    },
+    {
+      "at": 9.074024390243903,
+      "src": "v3-paper-flurry.wav",
+      "peak_dbfs": -28,
+      "duration": 0.25609756097560976,
+      "why": "Paper flurry follows suction collapse",
+      "pan": 0
+    },
+    {
+      "at": 9.232520731707318,
+      "src": "step.wav",
+      "peak_dbfs": -31,
+      "duration": 0.21951219512195122,
+      "why": "Freed Claude steps away from chat machine",
+      "cut": 9.233333
+    },
+    {
+      "at": 9.653300000000002,
+      "src": "step.wav",
+      "peak_dbfs": -26,
+      "duration": 0.17,
+      "why": "First candidate steps off",
+      "pan": 0
+    },
+    {
+      "at": 10.1033,
+      "src": "v2-fall-whistle.wav",
+      "peak_dbfs": -25,
+      "duration": 0.35,
+      "why": "First candidate falls short",
+      "pan": -0.4
+    },
+    {
+      "at": 10.333300000000001,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -25,
+      "duration": 0.28,
+      "why": "Second candidate jumps",
+      "pan": 0
+    },
+    {
+      "at": 10.8833,
+      "src": "v2-fall-whistle.wav",
+      "peak_dbfs": -26,
+      "duration": 0.33,
+      "why": "Second candidate also falls short",
+      "pan": 0.1
+    },
+    {
+      "at": 11.0633,
+      "src": "v2-spring-load.wav",
+      "peak_dbfs": -24,
+      "duration": 0.33,
+      "why": "Gold springs visibly compress",
+      "pan": 0
+    },
+    {
+      "at": 11.3933,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -21,
+      "duration": 0.34,
+      "why": "Spring winner releases toward the far ledge",
+      "pan": 0
+    },
+    {
+      "at": 11.3933,
+      "src": "v3-impact-ripple.wav",
+      "peak_dbfs": -29,
+      "duration": 0.23,
+      "why": "Spring launch spreads a local pressure ripple",
+      "pan": 0
+    },
+    {
+      "at": 12.163300000000001,
+      "src": "thock.wav",
+      "peak_dbfs": -23,
+      "duration": 0.16,
+      "why": "Winning feet contact the far ledge",
+      "pan": 0.65
+    },
+    {
+      "at": 12.163300000000001,
+      "src": "deep-contact.wav",
+      "peak_dbfs": -30,
+      "duration": 0.16,
+      "why": "Quiet low body gives the successful landing weight",
+      "pan": 0.65
+    },
+    {
+      "at": 12.163300000000001,
+      "src": "v3-impact-ripple.wav",
+      "peak_dbfs": -28,
+      "duration": 0.24,
+      "why": "Winning feet send out a landing ripple",
+      "pan": 0.65
+    },
+    {
+      "at": 12.2733,
+      "src": "v2-winner-bell.wav",
+      "peak_dbfs": -24,
+      "duration": 0.42,
+      "why": "Winning identity is retained",
+      "pan": 0
+    },
+    {
+      "at": 12.633333,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -28,
+      "duration": 0.3,
+      "why": "Winner starts the next leap into selection",
+      "cut": 12.733333
+    },
+    {
+      "at": 13.333300000000001,
+      "src": "page_turn.wav",
+      "peak_dbfs": -26,
+      "duration": 0.2273,
+      "why": "Three-line prompt scroll moves into view",
+      "pan": 0
+    },
+    {
+      "at": 13.8633,
+      "src": "v2-ink-draw.wav",
+      "peak_dbfs": -25,
+      "duration": 0.24,
+      "why": "Darwin underlines EVOLVE",
+      "pan": 0
+    },
+    {
+      "at": 14.2033,
+      "src": "v3-wand-charge.wav",
+      "peak_dbfs": -29,
+      "duration": 0.26,
+      "why": "Feather tip builds a brief visible charge",
+      "pan": 0
+    },
+    {
+      "at": 14.4633,
+      "src": "v3-zap-2.wav",
+      "peak_dbfs": -23,
+      "duration": 0.19,
+      "why": "Quill lightning contacts the kept winner \u2014 pitched attack",
+      "pan": 0.2
+    },
+    {
+      "at": 14.4633,
+      "src": "v3-zap-body.wav",
+      "peak_dbfs": -28,
+      "duration": 0.24,
+      "why": "Quill lightning contacts the kept winner \u2014 low contact body",
+      "pan": 0.2
+    },
+    {
+      "at": 14.4793,
+      "src": "v3-zap-crackle.wav",
+      "peak_dbfs": -30,
+      "duration": 0.145,
+      "why": "Quill lightning contacts the kept winner \u2014 brief discharge texture",
+      "pan": 0.2
+    },
+    {
+      "at": 15.1433,
+      "src": "v3-zap-1.wav",
+      "peak_dbfs": -25,
+      "duration": 0.19,
+      "why": "Quill lightning charges the left descendant \u2014 pitched attack",
+      "pan": -0.6
+    },
+    {
+      "at": 15.3033,
+      "src": "v3-zap-3.wav",
+      "peak_dbfs": -25,
+      "duration": 0.19,
+      "why": "Energy relays from left descendant to right \u2014 pitched attack",
+      "pan": 0.6
+    },
+    {
+      "at": 15.433300000000001,
+      "src": "v3-impact-ripple.wav",
+      "peak_dbfs": -25,
+      "duration": 0.3,
+      "why": "All inherited spring boots react against the floor",
+      "pan": 0
+    },
+    {
+      "at": 15.773333000000001,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -29,
+      "duration": 0.31,
+      "why": "Inherited boots launch descendants into the workshop",
+      "cut": 15.833333
+    },
+    {
+      "at": 16.35333333333333,
+      "src": "v3-zap-1.wav",
+      "peak_dbfs": -28,
+      "duration": 0.2,
+      "why": "Claude core transfers a distinct upgrade"
+    },
+    {
+      "at": 16.39333333333333,
+      "src": "latch.wav",
+      "peak_dbfs": -29,
+      "duration": 0.12,
+      "why": "Upgrade locks onto descendant"
+    },
+    {
+      "at": 16.633333333333333,
+      "src": "v3-zap-2.wav",
+      "peak_dbfs": -28,
+      "duration": 0.2,
+      "why": "Claude core transfers a distinct upgrade"
+    },
+    {
+      "at": 16.673333333333332,
+      "src": "latch.wav",
+      "peak_dbfs": -29,
+      "duration": 0.12,
+      "why": "Upgrade locks onto descendant"
+    },
+    {
+      "at": 16.913333333333334,
+      "src": "v3-zap-1.wav",
+      "peak_dbfs": -28,
+      "duration": 0.2,
+      "why": "Claude core transfers a distinct upgrade"
+    },
+    {
+      "at": 16.953333333333333,
+      "src": "latch.wav",
+      "peak_dbfs": -29,
+      "duration": 0.12,
+      "why": "Upgrade locks onto descendant"
+    },
+    {
+      "at": 17.153333333333332,
+      "src": "v2-ski-brake.wav",
+      "peak_dbfs": -27,
+      "duration": 0.25,
+      "why": "Blue skis carve a ramp and continue sliding"
+    },
+    {
+      "at": 17.28333333333333,
+      "src": "v3-paper-flurry.wav",
+      "peak_dbfs": -30,
+      "duration": 0.2,
+      "why": "Purple glider snaps open and lifts"
+    },
+    {
+      "at": 17.583333333333332,
+      "src": "v4-ember-pop.wav",
+      "peak_dbfs": -27,
+      "duration": 0.2,
+      "why": "Rocket ignition sputters and compresses orange Claude"
+    },
+    {
+      "at": 18.233333333333334,
+      "src": "shell-crack.wav",
+      "peak_dbfs": -26,
+      "duration": 0.18,
+      "why": "Rocket launch breaks its bench rail"
+    },
+    {
+      "at": 18.233333333333334,
+      "src": "v2-rocket-burst.wav",
+      "peak_dbfs": -27,
+      "duration": 0.4,
+      "why": "Orange rockets sustain upward thrust"
+    },
+    {
+      "at": 19.51,
+      "src": "v2-ski-brake.wav",
+      "peak_dbfs": -24,
+      "duration": 0.28,
+      "why": "Skier brakes at the canyon edge",
+      "pan": -0.7
+    },
+    {
+      "at": 19.580000000000002,
+      "src": "v2-spring-load.wav",
+      "peak_dbfs": -26,
+      "duration": 0.35,
+      "why": "Rocket winner loads its inherited springs",
+      "pan": 0
+    },
+    {
+      "at": 20.04,
+      "src": "v2-rocket-burst.wav",
+      "peak_dbfs": -22,
+      "duration": 0.62,
+      "why": "Rockets ignite at visible takeoff",
+      "pan": 0
+    },
+    {
+      "at": 20.04,
+      "src": "shell-crack.wav",
+      "peak_dbfs": -27,
+      "duration": 0.0833,
+      "why": "Ice fractures under the launch force",
+      "pan": 0
+    },
+    {
+      "at": 20.04,
+      "src": "v3-zap-body.wav",
+      "peak_dbfs": -31,
+      "duration": 0.22,
+      "why": "Rocket launch compresses the ice beneath it",
+      "pan": 0
+    },
+    {
+      "at": 20.1,
+      "src": "v2-fall-whistle.wav",
+      "peak_dbfs": -28,
+      "duration": 0.32,
+      "why": "Glider drops into the canyon",
+      "pan": 0.1
+    },
+    {
+      "at": 21.03,
+      "src": "thock.wav",
+      "peak_dbfs": -23,
+      "duration": 0.16,
+      "why": "Rocket winner lands on the distant ledge",
+      "pan": 0.7
+    },
+    {
+      "at": 21.05,
+      "src": "v3-impact-ripple.wav",
+      "peak_dbfs": -29,
+      "duration": 0.23,
+      "why": "Rocket winner landing ripple",
+      "pan": 0.7
+    },
+    {
+      "at": 21.18,
+      "src": "v2-winner-bell.wav",
+      "peak_dbfs": -25,
+      "duration": 0.4,
+      "why": "New winner star settles",
+      "pan": 0
+    },
+    {
+      "at": 21.23,
+      "src": "shell-crack.wav",
+      "peak_dbfs": -29,
+      "duration": 0.08333333333333333,
+      "why": "Successful landing cracks the snow ledge",
+      "cut": 21.4
+    },
+    {
+      "at": 21.39,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -28,
+      "duration": 0.25,
+      "why": "Winner springs away from the cracking ledge",
+      "cut": 21.4
+    },
+    {
+      "at": 21.86,
+      "src": "latch.wav",
+      "peak_dbfs": -26,
+      "duration": 0.16,
+      "why": "Furnace intake latch opens",
+      "pan": 0
+    },
+    {
+      "at": 21.86,
+      "src": "v2-machine-reverse.wav",
+      "peak_dbfs": -29,
+      "duration": 0.22,
+      "why": "Intake pulls the visible token stack inward",
+      "pan": 0
+    },
+    {
+      "at": 22.080000000000002,
+      "src": "v4-coin-cascade.wav",
+      "peak_dbfs": -27.0,
+      "duration": 0.23,
+      "why": "Accelerating token cascade 1 follows the collapsing stack",
+      "pan": 0.3
+    },
+    {
+      "at": 22.220000000000002,
+      "src": "v4-coin-cascade.wav",
+      "peak_dbfs": -26.2,
+      "duration": 0.23,
+      "why": "Accelerating token cascade 2 follows the collapsing stack",
+      "pan": 0.3
+    },
+    {
+      "at": 22.37,
+      "src": "v4-coin-cascade.wav",
+      "peak_dbfs": -25.4,
+      "duration": 0.23,
+      "why": "Accelerating token cascade 3 follows the collapsing stack",
+      "pan": 0.3
+    },
+    {
+      "at": 22.43,
+      "src": "v4-ember-pop.wav",
+      "peak_dbfs": -29,
+      "duration": 0.23,
+      "why": "Consumed tokens break into glowing ash",
+      "pan": 0
+    },
+    {
+      "at": 22.64,
+      "src": "v2-coin-chink.wav",
+      "peak_dbfs": -26,
+      "duration": 0.14,
+      "why": "Last remaining token rings against the intake",
+      "pan": 0
+    },
+    {
+      "at": 22.740000000000002,
+      "src": "v2-gulp.wav",
+      "peak_dbfs": -25,
+      "duration": 0.24,
+      "why": "Last token swallowed as the counter empties",
+      "pan": 0
+    },
+    {
+      "at": 22.76,
+      "src": "v4-ember-pop.wav",
+      "peak_dbfs": -30,
+      "duration": 0.22,
+      "why": "Empty furnace spits ash and Claude recoils",
+      "cut": 22.7
+    },
+    {
+      "at": 22.77,
+      "src": "v4-ember-pop.wav",
+      "peak_dbfs": -29,
+      "duration": 0.22,
+      "why": "Final ash pops after the token supply reaches zero",
+      "pan": 0
+    },
+    {
+      "at": 23.27,
+      "src": "v3-zap-2.wav",
+      "peak_dbfs": -25,
+      "duration": 0.19,
+      "why": "Darwin casts at the paper draft",
+      "pan": 0
+    },
+    {
+      "at": 23.38,
+      "src": "v3-paper-flurry.wav",
+      "peak_dbfs": -25,
+      "duration": 0.25,
+      "why": "Paper wraps around the draft to form a cocoon",
+      "pan": 0
+    },
+    {
+      "at": 23.89,
+      "src": "latch.wav",
+      "peak_dbfs": -25,
+      "duration": 0.15,
+      "why": "Cocoon seam seals",
+      "pan": 0
+    },
+    {
+      "at": 24.18,
+      "src": "v4-binding-creak.wav",
+      "peak_dbfs": -27,
+      "duration": 0.32,
+      "why": "First inner bulge strains the paper shell",
+      "pan": 0
+    },
+    {
+      "at": 24.63,
+      "src": "v4-binding-creak.wav",
+      "peak_dbfs": -25,
+      "duration": 0.28,
+      "why": "Larger second bulge raises pressure",
+      "pan": 0
+    },
+    {
+      "at": 24.63,
+      "src": "shell-crack.wav",
+      "peak_dbfs": -27,
+      "duration": 0.0833,
+      "why": "Visible fracture accompanies the larger bulge",
+      "pan": 0
+    },
+    {
+      "at": 25.13,
+      "src": "v4-book-rupture.wav",
+      "peak_dbfs": -23,
+      "duration": 0.42,
+      "why": "Evolved Claude ruptures the paper cocoon",
+      "pan": 0
+    },
+    {
+      "at": 25.13,
+      "src": "v3-zap-body.wav",
+      "peak_dbfs": -28,
+      "duration": 0.24,
+      "why": "Low body supports the transformation rupture",
+      "pan": 0
+    },
+    {
+      "at": 25.650000000000002,
+      "src": "deep-contact.wav",
+      "peak_dbfs": -23,
+      "duration": 0.16,
+      "why": "Large evolved Claude lands",
+      "pan": 0
+    },
+    {
+      "at": 25.650000000000002,
+      "src": "v2-rubber-compress.wav",
+      "peak_dbfs": -26,
+      "duration": 0.21,
+      "why": "Hero compresses and recovers after landing",
+      "pan": 0
+    },
+    {
+      "at": 25.96,
+      "src": "v2-winner-bell.wav",
+      "peak_dbfs": -28,
+      "duration": 0.35,
+      "why": "Resolved evolved hero holds the completed trait",
+      "pan": 0
+    },
+    {
+      "at": 26.09,
+      "src": "v2-rocket-burst.wav",
+      "peak_dbfs": -30,
+      "duration": 0.32,
+      "why": "Evolved hero ignites rockets after landing",
+      "cut": 26.166667
+    },
+    {
+      "at": 26.19,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -31,
+      "duration": 0.22,
+      "why": "Evolved boots push off toward the next cut",
+      "cut": 26.166667
+    },
+    {
+      "at": 26.9467,
+      "src": "thock.wav",
+      "peak_dbfs": -25,
+      "duration": 0.18,
+      "why": "WIN book stamp lands",
+      "pan": 0
+    },
+    {
+      "at": 26.9467,
+      "src": "v3-zap-body.wav",
+      "peak_dbfs": -31,
+      "duration": 0.22,
+      "why": "Small low body beneath the physical book contact",
+      "pan": 0
+    },
+    {
+      "at": 27.166700000000002,
+      "src": "paper.wav",
+      "peak_dbfs": -28,
+      "duration": 0.18,
+      "why": "Book pages settle after contact",
+      "pan": 0
+    },
+    {
+      "at": 27.196667,
+      "src": "paper.wav",
+      "peak_dbfs": -34,
+      "duration": 0.17220833333333332,
+      "why": "CTA book advances toward the viewer through the end",
+      "cut": 27.233333
+    }
+  ],
+  "verification_limit": "Signal and authored cue timing checks, not independent subjective listening."
+}

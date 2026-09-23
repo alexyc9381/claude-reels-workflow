@@ -25,11 +25,6 @@
     "sha256": "c0a9c85cc121d130eda23880c35d81642e6423a6a256e37b2e1dc7730889b0d7"
   },
   {
-    "path": "public/effects-v6.wav",
-    "bytes": 5286444,
-    "sha256": "b14dc64d045afee581850ad8fb2eb3ca716dffeda1169f4e8e78dc962c610fec"
-  },
-  {
     "path": "public/effects.wav",
     "bytes": 5228844,
     "sha256": "dce7b00878e02ce25a900b18472d402bb3fbb6dde0ba9aaafe41c1e970c191a8"
@@ -71,8 +66,8 @@
   },
   {
     "path": "public/master-overhaul.wav",
-    "bytes": 5286444,
-    "sha256": "21b5594d578ee8707867f148e4b34bbd4746fc7b64d45b688f06dd49b3613acc"
+    "bytes": 5228844,
+    "sha256": "507ff30441783083030799d2b0d080d6baee54af9f6ed49ae64435150d8b895c"
   },
   {
     "path": "public/master.wav",
@@ -83,11 +78,6 @@
     "path": "public/music-source.mp3",
     "bytes": 5486478,
     "sha256": "21958d0224b25d769667f57af9734d2616157800fd023b78f399661e7c78bce8"
-  },
-  {
-    "path": "public/music-v6.wav",
-    "bytes": 5286444,
-    "sha256": "b33e491b16429e7ab582a839751f03e9259afa6f4ad98e03fa4e987ceb10406d"
   },
   {
     "path": "public/music.wav",
@@ -353,11 +343,6 @@
     "path": "public/voice-mixed.wav",
     "bytes": 5228844,
     "sha256": "856245e2b3b1faa5cf4108f98e8a795d717099a72ac509836a7306c39b214bf7"
-  },
-  {
-    "path": "public/voice-v6.wav",
-    "bytes": 5286444,
-    "sha256": "8c562b1eee51b06a96ba7e727e4cff93fd0e9795b6af2f6d75a2c16470460757"
   },
   {
     "path": "public/voice.wav",

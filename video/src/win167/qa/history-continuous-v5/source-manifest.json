@@ -11,18 +11,13 @@
   },
   {
     "path": "src/BorisLarge.tsx",
-    "bytes": 2762,
-    "sha256": "fac6169d276506b1334e812f61592ea62ec81c73481704bc03067a57d9643d34"
+    "bytes": 2744,
+    "sha256": "82ebf03ffcb87be406da1b4602767bfeca8157cceeda300c673d3b5e3e5ae730"
   },
   {
     "path": "src/CityActionScenes.tsx",
     "bytes": 6465,
     "sha256": "d0da72eca313a5d2dc2b1b506691549e6e0381779afb2ce82e309b7804e509e7"
-  },
-  {
-    "path": "src/ClaudeContext.tsx",
-    "bytes": 829,
-    "sha256": "238274de971af805c5e52b614f9254928b738a0b4fe45bcb7a80817fe8cc6c5a"
   },
   {
     "path": "src/ClearKit.tsx",
@@ -62,7 +57,7 @@
   {
     "path": "src/DramaticPayoffScenes.tsx",
     "bytes": 12287,
-    "sha256": "f9a5b5bf6da276d5e461698f52863cf811657752f0d8c24a60e333aff7d254c1"
+    "sha256": "43ba09c8cf8b0ad29732df587cc08138d16c700e51fcfe1a0b52fbd2825732cc"
   },
   {
     "path": "src/EnergyFX.tsx",
@@ -110,11 +105,6 @@
     "sha256": "ffaea7a4135ebe8360dd27b584f159aa7ddc7306d219b1d9ceeb5c83af14e0b2"
   },
   {
-    "path": "src/MutationWorkshop.tsx",
-    "bytes": 4715,
-    "sha256": "1e6fe6ff94ea138bca851b43a39a71444dd73ced638a1d591a3511a330746c8a"
-  },
-  {
     "path": "src/NaturalWorld.tsx",
     "bytes": 17840,
     "sha256": "afa7438f7caa87522a1523f8c6fe1ae2cd839cccbfcd7b26cd6eccdb2ccfd424"
@@ -142,7 +132,7 @@
   {
     "path": "src/SupportingActionScenes.tsx",
     "bytes": 16927,
-    "sha256": "6756214fc83d5f02ebd30a6da94e7c579c4bdbeb87c2a3f8c21c68b16471affe"
+    "sha256": "0b4805f4b4098171bd01cc2f92cc18429192e7dcff5f7956e8ac0576ec5d295f"
   },
   {
     "path": "src/WorldKit.tsx",
@@ -191,8 +181,8 @@
   },
   {
     "path": "src/index.tsx",
-    "bytes": 2617,
-    "sha256": "972f113f5b2fdd371fd311db5f585a1735d988111720be0e9d5f46d42fb6d40e"
+    "bytes": 2472,
+    "sha256": "21274b806d790fd5f49d023ccced7719a4e9aa87a63a8db0c0e57bb986d17fff"
   },
   {
     "path": "src/supporting-review-index.tsx",
@@ -201,7 +191,7 @@
   },
   {
     "path": "src/words.json",
-    "bytes": 9566,
-    "sha256": "6e773dcd12476c8b995faa3cf588a843e90be206fad22da69de8a09ac3c4dbef"
+    "bytes": 8330,
+    "sha256": "694f5df71fe7c0f5ef8f64d664bafceeb236c1e4f48edc98b904b560ba884fcf"
   }
 ]
