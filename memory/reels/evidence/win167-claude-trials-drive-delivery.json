@@ -1,0 +1,38 @@
+{
+  "root": "1ebQwHREXHOqumPKgIPuVCC_QS53nT3Bt",
+  "alternatives": "1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ",
+  "files": [
+    {
+      "id": "1u3AcAQ3-q7oRH4S1Ond0P3i1wuCB4pBK",
+      "name": "B - Claude Selection - FULL.mp4",
+      "parent": "1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ",
+      "bytes": 9850932,
+      "sha256": "c050ca5f5b0ad6d32648bd8f5a27ef9034b4ca879c6a1652b29c9cdf05dce7f8",
+      "matches": true
+    },
+    {
+      "id": "1LNfypAnbWwsWLyusaOTForAY8qo0eE4A",
+      "name": "C - Claude Rewrite - FULL.mp4",
+      "parent": "1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ",
+      "bytes": 9802592,
+      "sha256": "cf5028b9a4ffda7693dbae05c368dab1a0df1ff8a52f229e5d0d5e1523671cb5",
+      "matches": true
+    },
+    {
+      "id": "1js5R5NkDRomYasor5HJyeJYRX-rakts4",
+      "name": "WIN_Editable_Source_Trials.zip",
+      "parent": "1fGrS2LI8I1WSMsAGgCtbffdFkC4eCawt",
+      "bytes": 52077553,
+      "sha256": "4ccb1d3619b82fef61b820a76750b30679177980c2f659ef7b3413deee1cdd4e",
+      "matches": true
+    },
+    {
+      "id": "1pdlHC7lJKrwK32e5JYO-0iMExDTAmJ_7",
+      "name": "Production-notes.txt",
+      "parent": "1fGrS2LI8I1WSMsAGgCtbffdFkC4eCawt",
+      "bytes": 2469,
+      "sha256": "21f542f832587c72b0fbbdec1442825cdb4e26ddfe8fa58787e41a7c636bb653",
+      "matches": true
+    }
+  ]
+}

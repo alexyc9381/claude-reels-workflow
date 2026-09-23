@@ -32,8 +32,10 @@ Restore this revision from the [canonical Drive archive](https://drive.google.co
 
 [Reusable lessons](../../../memory/alex-win167-causal-surprise-and-variant-readability.md) · [revision record](../../../memory/reels/win167-revision-record.md) · [independent visual review](qa/continuous-tail-review.md) · [audio review](qa/surprise-v4-audio-review.md) · [canonical packet](https://drive.google.com/drive/folders/1ebQwHREXHOqumPKgIPuVCC_QS53nT3Bt).
 
-## Additional hook trials
+## Revised hook trials
 
-Compositions `WIN-B` (Survival Snap) and `WIN-C` (Inheritance Slingshot) are full 826-frame alternatives. Render with `npx remotion render src/index.tsx WIN-B B-native.mp4 --codec=h264 --crf=18 --concurrency=2` (or WIN-C). Apply the Rec.709 normalization above and mux the matching `public/master-trial-B.wav` or `master-trial-C.wav`. The approved `WIN` default remains unchanged. `src/TrialHooks.tsx` contains the two opening concepts; frames92 onward use the same body. `python3 tools/mix-trials.py` rebuilds the trial audio without modifying the approved master. See `qa/trials/review.md`, cue ledgers, comparison results and blank results tracker.
+Alex rejected the initial flytrap and family-tree trial concepts as unclear and insufficiently connected to Claude. They are preserved as historical modules/evidence, not current recommendations.
 
-[Full trial reels in Drive](https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ). Both use the existing caption, cover and live article.
+Compositions `WIN-B` (Claude Selection) and `WIN-C` (Claude Rewrite) are full 826-frame alternatives. Render with `npx remotion render src/index.tsx WIN-B B-native.mp4 --codec=h264 --crf=18 --concurrency=2` (or WIN-C). Apply the Rec.709 normalization above and mux the matching `public/master-trial-B.wav` or `master-trial-C.wav`. The approved `WIN` default remains unchanged. `src/ClaudeTrialHooks.tsx` contains current opening concepts; frames92 onward share the approved body. `python3 tools/mix-trials.py` rebuilds current trial audio without modifying the approved master. See `qa/trials/review.md`, cue ledgers, comparison results and blank tracker.
+
+[Full revised trials in Drive](https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ). Both use the existing caption, cover and live article.

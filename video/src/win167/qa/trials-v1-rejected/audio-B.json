@@ -1,0 +1,67 @@
+{
+  "cues": [
+    {
+      "seconds": 0.02,
+      "asset": "v4-binding-creak.wav",
+      "gain": 0.16
+    },
+    {
+      "seconds": 0.21,
+      "asset": "v2-soft-snap.wav",
+      "gain": 0.24
+    },
+    {
+      "seconds": 0.23,
+      "asset": "v2-rubber-compress.wav",
+      "gain": 0.16
+    },
+    {
+      "seconds": 0.55,
+      "asset": "v3-wand-charge.wav",
+      "gain": 0.12
+    },
+    {
+      "seconds": 0.66,
+      "asset": "v3-zap-1.wav",
+      "gain": 0.15
+    },
+    {
+      "seconds": 0.88,
+      "asset": "v2-spring-load.wav",
+      "gain": 0.19
+    },
+    {
+      "seconds": 1.18,
+      "asset": "v4-launch-twang.wav",
+      "gain": 0.18
+    },
+    {
+      "seconds": 1.29,
+      "asset": "v3-flight-puff.wav",
+      "gain": 0.11
+    },
+    {
+      "seconds": 2.01,
+      "asset": "deep-contact.wav",
+      "gain": 0.23
+    },
+    {
+      "seconds": 2.17,
+      "asset": "paper.wav",
+      "gain": 0.13
+    },
+    {
+      "seconds": 2.41,
+      "asset": "v2-spring-load.wav",
+      "gain": 0.14
+    },
+    {
+      "seconds": 2.67,
+      "asset": "v2-spring-rebound.wav",
+      "gain": 0.17
+    }
+  ],
+  "hook_peak_dbfs": -3.3570674784268184,
+  "body_pcm_identical": true,
+  "shared_body_from_frame": 92
+}

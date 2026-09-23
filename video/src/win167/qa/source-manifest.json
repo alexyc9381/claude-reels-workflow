@@ -45,6 +45,11 @@
     "sha256": "238274de971af805c5e52b614f9254928b738a0b4fe45bcb7a80817fe8cc6c5a"
   },
   {
+    "path": "src/ClaudeTrialHooks.tsx",
+    "bytes": 9215,
+    "sha256": "efbdf0a7a449f1dbbd3cc965c44b9388e3e7e577ce91a0eb90674648eb72f888"
+  },
+  {
     "path": "src/ClearKit.tsx",
     "bytes": 7059,
     "sha256": "7c1bd97b8e24d787b9ef53b038e1531e41ea0321d86662082e4b6fca4aee639a"
@@ -216,8 +221,8 @@
   },
   {
     "path": "src/index.tsx",
-    "bytes": 3131,
-    "sha256": "9889cea2876d09720731f197c1556b59d78b3bb1df7827d8a8ef263a74aed5f3"
+    "bytes": 3129,
+    "sha256": "d4df88d9f056c4086acbc036ffc043051f0d3996a7160708889c8f6a8a4e5337"
   },
   {
     "path": "src/supporting-review-index.tsx",
@@ -251,7 +256,7 @@
   },
   {
     "path": "tools/mix-trials.py",
-    "bytes": 1961,
-    "sha256": "0be8929210127bfed09cb6d5e000cdd39c72ade3eafbcc61dddb517d77581446"
+    "bytes": 1948,
+    "sha256": "8a132d4bb434b0866566af18d7a21424fe15fe3e7de745ef6e4f02026221fe80"
   }
 ]

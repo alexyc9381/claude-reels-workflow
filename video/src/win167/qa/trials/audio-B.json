@@ -1,67 +1,72 @@
 {
   "cues": [
     {
-      "seconds": 0.02,
-      "asset": "v4-binding-creak.wav",
-      "gain": 0.16
-    },
-    {
-      "seconds": 0.21,
-      "asset": "v2-soft-snap.wav",
-      "gain": 0.24
-    },
-    {
-      "seconds": 0.23,
-      "asset": "v2-rubber-compress.wav",
-      "gain": 0.16
-    },
-    {
-      "seconds": 0.55,
-      "asset": "v3-wand-charge.wav",
-      "gain": 0.12
-    },
-    {
-      "seconds": 0.66,
-      "asset": "v3-zap-1.wav",
+      "seconds": 0.0,
+      "asset": "typing.wav",
       "gain": 0.15
     },
     {
-      "seconds": 0.88,
-      "asset": "v2-spring-load.wav",
-      "gain": 0.19
-    },
-    {
-      "seconds": 1.18,
-      "asset": "v4-launch-twang.wav",
-      "gain": 0.18
-    },
-    {
-      "seconds": 1.29,
-      "asset": "v3-flight-puff.wav",
-      "gain": 0.11
-    },
-    {
-      "seconds": 2.01,
-      "asset": "deep-contact.wav",
+      "seconds": 0.3,
+      "asset": "thock.wav",
       "gain": 0.23
     },
     {
-      "seconds": 2.17,
-      "asset": "paper.wav",
+      "seconds": 0.34,
+      "asset": "v2-fall-whistle.wav",
+      "gain": 0.1
+    },
+    {
+      "seconds": 0.66,
+      "asset": "metal.wav",
+      "gain": 0.18
+    },
+    {
+      "seconds": 0.7,
+      "asset": "v2-soft-snap.wav",
+      "gain": 0.16
+    },
+    {
+      "seconds": 0.99,
+      "asset": "selector.wav",
+      "gain": 0.22
+    },
+    {
+      "seconds": 1.02,
+      "asset": "v3-zap-1.wav",
       "gain": 0.13
     },
     {
-      "seconds": 2.41,
+      "seconds": 1.24,
+      "asset": "v3-power-spark.wav",
+      "gain": 0.16
+    },
+    {
+      "seconds": 1.78,
+      "asset": "deep-contact.wav",
+      "gain": 0.21
+    },
+    {
+      "seconds": 2.03,
+      "asset": "copy.wav",
+      "gain": 0.19
+    },
+    {
+      "seconds": 2.16,
+      "asset": "v2-bud-3.wav",
+      "gain": 0.16
+    },
+    {
+      "seconds": 2.44,
       "asset": "v2-spring-load.wav",
-      "gain": 0.14
+      "gain": 0.12
     },
     {
       "seconds": 2.67,
-      "asset": "v2-spring-rebound.wav",
+      "asset": "v4-launch-twang.wav",
       "gain": 0.17
     }
   ],
-  "hook_peak_dbfs": -3.3570674784268184,
+  "hook_peak_dbfs": -2.7770946123848543,
   "body_pcm_identical": true,
   "shared_body_from_frame": 92
 }

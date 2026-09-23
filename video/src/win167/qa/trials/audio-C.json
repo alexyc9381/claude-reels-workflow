@@ -1,62 +1,67 @@
 {
   "cues": [
     {
-      "seconds": 0.01,
-      "asset": "v3-wand-charge.wav",
-      "gain": 0.1
+      "seconds": 0.0,
+      "asset": "typing.wav",
+      "gain": 0.13
     },
     {
-      "seconds": 0.12,
+      "seconds": 0.13,
+      "asset": "v2-rubber-compress.wav",
+      "gain": 0.16
+    },
+    {
+      "seconds": 0.34,
+      "asset": "shell-crack.wav",
+      "gain": 0.2
+    },
+    {
+      "seconds": 0.69,
       "asset": "v3-zap-2.wav",
       "gain": 0.14
     },
     {
-      "seconds": 0.4,
-      "asset": "v2-bud-1.wav",
-      "gain": 0.18
+      "seconds": 0.78,
+      "asset": "selector.wav",
+      "gain": 0.14
     },
     {
-      "seconds": 0.75,
-      "asset": "v2-bud-3.wav",
-      "gain": 0.17
+      "seconds": 1.04,
+      "asset": "v4-book-rupture.wav",
+      "gain": 0.22
     },
     {
-      "seconds": 1.1,
-      "asset": "v4-binding-creak.wav",
-      "gain": 0.18
+      "seconds": 1.26,
+      "asset": "v3-power-spark.wav",
+      "gain": 0.12
     },
     {
-      "seconds": 1.22,
-      "asset": "v2-spring-load.wav",
-      "gain": 0.17
-    },
-    {
-      "seconds": 1.48,
-      "asset": "v4-launch-twang.wav",
-      "gain": 0.19
-    },
-    {
-      "seconds": 1.68,
-      "asset": "v3-flight-puff.wav",
-      "gain": 0.1
-    },
-    {
-      "seconds": 2.1,
+      "seconds": 1.59,
       "asset": "deep-contact.wav",
-      "gain": 0.23
+      "gain": 0.22
+    },
+    {
+      "seconds": 2.15,
+      "asset": "v3-zap-3.wav",
+      "gain": 0.14
+    },
+    {
+      "seconds": 2.17,
+      "asset": "thock.wav",
+      "gain": 0.2
     },
     {
       "seconds": 2.38,
       "asset": "v2-spring-load.wav",
-      "gain": 0.15
+      "gain": 0.12
     },
     {
-      "seconds": 2.67,
-      "asset": "v2-spring-rebound.wav",
-      "gain": 0.18
+      "seconds": 2.55,
+      "asset": "v4-launch-twang.wav",
+      "gain": 0.17
     }
   ],
-  "hook_peak_dbfs": -3.2418779882781754,
+  "hook_peak_dbfs": -3.59019728100413,
   "body_pcm_identical": true,
   "shared_body_from_frame": 92
 }
