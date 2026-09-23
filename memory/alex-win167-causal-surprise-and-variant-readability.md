@@ -49,3 +49,7 @@ When staging crushing or lifting, drive prop position and body squash from the s
 ## Rejected yellow costume
 
 Alex explicitly disliked the evolved Claude's yellow outfit in Pressure Trial/Draft Avalanche. Remove the gold crown, angular chest plate and bulky yellow gloves; do not carry this costume into future Claude reels. Keep the recognizable terracotta silhouette and uncovered face. A small functional prop or restrained wrist detail may carry the transformation/inheritance cue; these cream/teal paper wraps are the current revision, not an approved default. This feedback concerns the outfit, not all yellow scene props or every evolution concept.
+
+## The evolved sprite needs a visible before/after
+
+After removing the yellow costume, Alex said the plain orange Claude still lacked interest and suggested a color change. Removing an unwanted outfit does not mean making the evolved hero visually identical to its earlier state. Use an obvious body-color transformation, a stronger expressive release or another clearly readable character change while retaining the Claude silhouette. Do not rely solely on tiny inherited accessories. Teal with dark edges and a confident grin is the current implementation for review, not an approved universal palette. Keep descendants distinct at a glance and check contrast against the current set.
