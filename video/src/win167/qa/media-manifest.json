@@ -55,6 +55,11 @@
     "sha256": "4b6b965e5534a9e7095f6377cdca3c8b5c272e308f2262cf8f092961a37c0e4d"
   },
   {
+    "path": "public/master-dramatic-base.wav",
+    "bytes": 5228844,
+    "sha256": "7a504797cf3cd11efd77829469c229761269cf8acddfeacdac06db47d8f5b16a"
+  },
+  {
     "path": "public/master-hook.wav",
     "bytes": 5228844,
     "sha256": "0b2fe0da06731aa91c0143120b20ea4ca67f5c7bd6f9dd7306aac76ad1b82e8b"
@@ -62,7 +67,7 @@
   {
     "path": "public/master-overhaul.wav",
     "bytes": 5228844,
-    "sha256": "7a504797cf3cd11efd77829469c229761269cf8acddfeacdac06db47d8f5b16a"
+    "sha256": "507ff30441783083030799d2b0d080d6baee54af9f6ed49ae64435150d8b895c"
   },
   {
     "path": "public/master.wav",

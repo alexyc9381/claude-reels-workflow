@@ -109,7 +109,9 @@ export function Variations({t}:{t:number}){
 /** A genuinely new arena: inherited springs meet a much wider canyon. Rocket variant wins. */
 export function Repeat({t}:{t:number}){
  const run=S(t,.08,.48),brake=pulse(t,.51,.36),glide=S(t,.48,.74),drop=S(t,1.05,.5),compress=pulse(t,.58,.46),launch=S(t,1.02,1.03),land=pulse(t,2.03,.31),flag=E(t,2.18,.32);
- const hx=-240+458*S(t,.48,.35)+523*launch,hy=310-135*arc(t,1.02,1.03)+23*land;
+ // The landing cracks its ledge; the winner must relaunch rather than hold a victory pose.
+ const crack=S(t,2.20,.12),reload=pulse(t,2.22,.24),escape=Math.max(0,t-2.38),kick=escape*escape;
+ const hx=-240+458*S(t,.48,.35)+523*launch-1350*kick,hy=310-135*arc(t,1.02,1.03)+23*land+16*reload-1400*kick;
  return <P x={0} y={0} w={1012} h={792} style={{overflow:'hidden',background:'#B8D6DD'}}>
   <svg width="1012" height="792" style={{position:'absolute',inset:0}}>
    <path d="M0 170H1012V792H0Z" fill="#A3C9D1"/><circle cx="779" cy="257" r="61" fill="#E5E7D1"/>
@@ -117,6 +119,7 @@ export function Repeat({t}:{t:number}){
    <path d="M97 236l-38 90 43-12 25 34 34-26M607 247l-34 103 38-18 37 21 24-20M872 258l-28 80 43-16 22 21" fill="#D8E2D9"/>
    <path d="M0 561L370 551V792H0M706 551L1012 527V792H700Z" fill="#2E516A"/>
    <path d="M0 545L377 540 363 579 0 589ZM701 542L1012 518V570L696 586Z" fill="#E7EADC" stroke="#608B9C" strokeWidth="5"/>
+   <path d="M748 538l22 22-20 22 27 16-12 30" stroke="#294B60" strokeWidth="10" fill="none" opacity={crack}/>
    <path d="M39 604l69 117 51-91 33 146M241 601l-18 105 70-39M729 613l51 119 52-135M908 601l-15 140" stroke="#47768B" strokeWidth="25" fill="none"/>
    <path d="M390 777Q510 732 689 767" fill="none" stroke="#7EAFC0" strokeWidth="32"/>
    {[0,1,2,3,4,5].map(i=><path key={i} d={`M${420+i*42} ${633+(i*31+t*53)%124}l-10 16`} stroke="#E7EADF" strokeWidth="4"/>)}
@@ -131,12 +134,14 @@ export function Repeat({t}:{t:number}){
    <path d="M307 552l-24 6m32-16-19-3" stroke="#EFF1DF" strokeWidth="8" opacity={brake}/>
    {t>1.02&&t<2.05&&<g><path d={`M${hx+37} ${hy+176}l-37 103 54-49 6 54 28-107M${hx+165} ${hy+174}l-20 107 48-67 17 40 2-81`} fill="#E9B957"/><path d={`M${hx+43} ${hy+179}l-18 56 34-45M${hx+176} ${hy+177}l-13 57 32-55`} stroke="#FBEAC2" strokeWidth="14"/></g>}
   </svg>
-  <Sprite t={t} x={hx} y={hy} s={222} role={2} tint="#D78657" boots={1} gear={3} squash={compress*.9+land*.6} rot={-14*arc(t,1.02,1.03)} cheer={launch*.9}/>
+  <Sprite t={t} x={hx} y={hy} s={222} role={2} tint="#D78657" boots={1} gear={3} squash={compress*.9+land*.6+reload*.85} rot={-14*arc(t,1.02,1.03)+40*escape} cheer={launch*.9}/>
   <svg width="1012" height="792" style={{position:'absolute',inset:0,pointerEvents:'none'}}>
    <path d="M291 546l32 12-9 15 26 13-10 18" stroke="#35556B" strokeWidth="7" fill="none" opacity={E(t,1.02,.12)}/>
    {[0,1,2,3].map(i=><path key={i} d="M-9-7l19-4 8 14-22 6Z" fill="#DFE8E1" stroke="#6C96A4" strokeWidth="3" opacity={pulse(t,1.04,.7)} transform={`translate(${325+(i-1.5)*44*E(t,1.04,.7)} ${552-57*arc(t,1.04,.7)+i*13}) rotate(${i*42+t*90})`}/>)}
    <Charge t={t} at={.72} x={327} y={536} dur={.30}/><Impact t={t} at={1.04} x={327} y={551} s={1.5}/><Puff t={t} at={1.05} x={299} y={551} color="#DDE9E4" s={1.2}/><Impact t={t} at={2.05} x={846} y={552} s={1.5}/>{t>1.08&&t<1.8&&<path d={`M${hx+62} ${hy+231}q-33 80-109 128M${hx+174} ${hy+231}q-26 83-81 127`} stroke="#F2D18A" strokeWidth="7" fill="none" opacity={.6} strokeDasharray="18 14"/>}<Spark t={t} at={1.04} x={327} y={542}/><Spark t={t} at={2.05} x={846} y={552}/>
-   <g transform={`translate(856 ${390-35*flag}) scale(${flag})`}><path d="M0 0l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3Z" fill="#E6B84F" stroke="#FFF0BF" strokeWidth="5"/></g>
+   <Impact t={t} at={2.23} x={767} y={552} s={.9}/><Impact t={t} at={2.39} x={846} y={552} s={1.4}/><Puff t={t} at={2.40} x={849} y={554} s={1.5} color="#DDE9E4"/>
+   {t>2.38&&<g><path d={`M${hx+27} ${hy+173}l-26 ${40+180*escape} 28-22 17 28 22-${58+140*escape}M${hx+185} ${hy+173}l-15 ${49+180*escape} 25-28 18 34 10-${64+140*escape}`} fill="#E9B957"/><path d={`M${hx+39} ${hy+178}l1 ${29+110*escape}M${hx+194} ${hy+178}l0 ${33+110*escape}`} stroke="#FFF0C1" strokeWidth="10"/></g>}
+   <g transform={`translate(${715-240*kick} ${390-35*flag-600*kick}) scale(${flag})`}><path d="M0 0l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3Z" fill="#E6B84F" stroke="#FFF0BF" strokeWidth="5"/></g>
    <path d="M0 733L240 709l130 83H0M747 744l265-58v106H706Z" fill="#203E56"/>
   </svg>
  </P>

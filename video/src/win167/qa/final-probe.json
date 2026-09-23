@@ -33,7 +33,7 @@
       "start_time": "0.000000",
       "duration_ts": 418304,
       "duration": "27.233333",
-      "bit_rate": "2605121",
+      "bit_rate": "2791430",
       "bits_per_raw_sample": "8",
       "nb_frames": "817",
       "disposition": {
@@ -77,7 +77,7 @@
       "start_time": "0.000000",
       "duration_ts": 1307184,
       "duration": "27.233000",
-      "bit_rate": "255985",
+      "bit_rate": "256448",
       "nb_frames": "1278",
       "disposition": {
         "default": 1,
@@ -101,15 +101,15 @@
     }
   ],
   "format": {
-    "filename": "WIN_Full_Reel_Dramatic_Evolution.mp4",
+    "filename": "WIN_Full_Reel_Continuous_Motion.mp4",
     "nb_streams": 2,
     "nb_programs": 0,
     "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
     "format_long_name": "QuickTime / MOV",
     "start_time": "0.000000",
     "duration": "27.234000",
-    "size": "9771420",
-    "bit_rate": "2870359",
+    "size": "10407060",
+    "bit_rate": "3057078",
     "probe_score": 100,
     "tags": {
       "major_brand": "isom",

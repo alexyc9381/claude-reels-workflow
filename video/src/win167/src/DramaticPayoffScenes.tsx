@@ -11,6 +11,8 @@ function Coin({x,y,r=27,rot=0,burn=0}:{x:number,y:number,r?:number,rot?:number,b
 /** The visible resource disappears into fire; no growth/reward metaphor can obscure the cost. */
 export function Tokens({t}:{t:number}){
  const empty=S(t,.16,.91),jaw=pulse(t,.19,.77),last=S(t,.88,.2),catchMiss=pulse(t,.88,.24);
+ // The empty furnace coughs its residue back: visible cost continues into the cut.
+ const cough=Math.max(0,t-1.06),backwash=pulse(t,1.08,.38),recoil=Math.max(0,t-1.10);
  const shake=3*pulse(t,.38,.7)*Math.sin(t*74),flame=1+.10*Math.sin(t*36)+.28*pulse(t,.47,.5);
  return <P w={1012} h={792} style={{overflow:'hidden',background:'#293643'}}>
   <svg width="1012" height="792" style={svgStyle}>
@@ -39,17 +41,19 @@ export function Tokens({t}:{t:number}){
   </svg>
   <P x={172} y={186} w={379} h={98} style={{background:'#132730',border:'7px solid #B89A64',borderRadius:12,display:'flex',alignItems:'center',justifyContent:'center',gap:18,fontFamily:'Inter',color:'#F8E1A5'}}><span style={{fontSize:23,fontWeight:800}}>TOKENS</span><span style={{fontSize:65,fontWeight:900,fontVariantNumeric:'tabular-nums',color:empty>.75?'#F39679':'#F8E1A5'}}>{Math.max(0,Math.round((1000*(1-empty))/10)*10)}</span></P>
   <P x={181} y={301} w={363} h={17} style={{background:'#142A33',borderRadius:8,overflow:'hidden'}}><div style={{width:`${100*(1-empty)}%`,height:'100%',background:empty>.72?'#D76547':'#ECC466'}}/></P>
-  <Sprite t={t} x={174+67*catchMiss} y={476-15*catchMiss} s={219} role={3} tint="#A4B3AE" rot={8+17*catchMiss} shock={.6+.4*empty} cheer={catchMiss*.85}/>
-  <svg width="1012" height="792" style={svgStyle}><Impact t={t} at={1.04} x={788} y={480} s={1.15} color="#F7C77A"/><Puff t={t} at={1.08} x={760} y={644} color="#A9A49C" s={1.3}/></svg>
+  <Sprite t={t} x={174+67*catchMiss-250*recoil} y={476-15*catchMiss+25*backwash} s={219} role={3} tint="#A4B3AE" rot={8+17*catchMiss-24*backwash} shock={.6+.4*empty} cheer={catchMiss*.85}/>
+  <svg width="1012" height="792" style={svgStyle}><Impact t={t} at={1.04} x={788} y={480} s={1.15} color="#F7C77A"/><Puff t={t} at={1.08} x={760} y={644} color="#A9A49C" s={1.3}/>{t>1.06&&Array.from({length:9},(_,i)=><g key={`backwash-${i}`} transform={`translate(${777-cough*(1050+i*43)} ${552+(i%3-1)*29-120*cough+680*cough*cough}) rotate(${i*37+cough*260})`}><path d="M-12-8l23-3 8 12-24 8Z" fill={i%2?"#B6ADA0":"#766F6A"} stroke="#3E4548" strokeWidth="3"/></g>)}</svg>
  </P>
 }
 
 /** Draft becomes a chrysalis: two withheld breakouts, then a larger evolved body sheds its old skin. */
 export function Draft({t}:{t:number}){
  const cast=pulse(t,.20,.47),wrap=S(t,.30,.6),seal=S(t,.75,.23),feint1=pulse(t,1.02,.35),feint2=pulse(t,1.43,.46),burst=E(t,2.13,.38),grow=S(t,2.13,.49),land=pulse(t,2.63,.3),resolve=S(t,2.96,.4);
+ // The landing loads the evolved boots; rockets reignite before a second accelerating takeoff.
+ const reload=pulse(t,2.96,.28),ignition=Math.max(0,t-3.09),flight=Math.max(0,t-3.18),jet=flight*flight;
  const pressure=feint1*.08+feint2*.15,shake=(feint1*3+feint2*7)*Math.sin(t*72),size=220+178*grow;
- const heroX=655-size*.5,heroY=649-size*1.04-42*arc(t,2.13,.52)+12*land;
- const darwin={x:45,y:327,s:347,rot:-4+12*cast-5*feint2+6*land,think:1-grow,cheer:grow*.85,cast};
+ const heroX=655-size*.5+230*jet,heroY=649-size*1.04-42*arc(t,2.13,.52)+12*land+17*reload-1450*jet;
+ const darwin={x:45,y:327,s:347,rot:-4+12*cast-5*feint2+6*land-16*ignition,think:1-grow,cheer:grow*.85,cast};
  const tip=quillTip(darwin);
  return <P w={1012} h={792} style={{overflow:'hidden',background:'#242A3E'}}>
   <svg width="1012" height="792" style={svgStyle}>
@@ -63,8 +67,10 @@ export function Draft({t}:{t:number}){
   </svg>
   <Darwin t={t} {...darwin} tool="quill" gaze={1} shock={feint2*.7}/>
   <P x={0} y={0} w={1012} h={792} style={{opacity:1-seal}}><Sprite t={t} x={548} y={433} s={220} role={3} tint="#D9C9A5" shock={wrap*.8}/><svg width="1012" height="792" style={svgStyle}><path d="M603 547l109-7 9 61-44-6-67 15Z" fill="#F0DDB6" stroke="#8D765D" strokeWidth="5"/><path d="M622 555l7 40M644 552l7 40M672 550l7 37M694 552l5 32" stroke="#B9A17C" strokeWidth="4"/></svg></P>
-  {t>2.13&&<Sprite t={t} x={heroX} y={heroY} s={size} role={2} tint="#D99856" boots={1} gear={3} cheer={grow*.9} squash={land*.9} rot={-6*(1-grow)+2*resolve}/>}
+  {t>2.13&&<Sprite t={t} x={heroX} y={heroY} s={size} role={2} tint="#D99856" boots={1} gear={3} cheer={grow*.9} squash={land*.9+reload*.85} rot={-6*(1-grow)+2*resolve-34*flight}/>}
   <svg width="1012" height="792" style={svgStyle}>
+   {t>3.09&&<g>{[.12,.86].map((px,i)=><g key={px} transform={`translate(${heroX+size*px} ${heroY+size*.77})`}><path d={`M-23 0L${-34-i*9} ${37+ignition*160}l28-23 15 ${32+ignition*170} 14-49 24 17L24 0Z`} fill="#E4AC46" stroke="#5D4A39" strokeWidth="4"/><path d={`M-10 4L0 ${24+ignition*130} 12 5`} fill="#FFF0B9"/></g>)}</g>}
+   <Impact t={t} at={3.19} x={655} y={652} s={1.7}/><Puff t={t} at={3.19} x={548} y={654} s={1.6}/><Puff t={t} at={3.22} x={773} y={654} s={1.6}/>
    <g transform={`translate(${655+shake} 469) scale(${(1+pressure)*(0.67+.33*wrap)} ${1-pressure*.6})`} opacity={wrap}>
     {/* A wrapped fist and heel deform opposite sides: separate attempts to escape, not a global wobble. */}
     {feint1>.001&&<g><path d={`M92-151L${139+108*feint1}-151V-134H${159+108*feint1}V-82H${139+108*feint1}V-67H94Z`} fill="#D3C191" stroke="#384D48" strokeWidth="8" strokeLinejoin="round"/><path d={`M${130+93*feint1}-145V-76M${146+101*feint1}-125V-90`} stroke="#F2DFAB" strokeWidth="10"/><path d={`M103-124H${143+108*feint1}M105-101H${143+108*feint1}`} stroke="#919876" strokeWidth="8"/></g>}

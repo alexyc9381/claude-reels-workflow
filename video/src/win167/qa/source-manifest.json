@@ -11,8 +11,8 @@
   },
   {
     "path": "src/BorisLarge.tsx",
-    "bytes": 2720,
-    "sha256": "53c166753288b08da80c008d13569e70e99c7d443936b0af02a777cb34838598"
+    "bytes": 2744,
+    "sha256": "82ebf03ffcb87be406da1b4602767bfeca8157cceeda300c673d3b5e3e5ae730"
   },
   {
     "path": "src/CityActionScenes.tsx",
@@ -36,8 +36,8 @@
   },
   {
     "path": "src/DarwinBossHook.tsx",
-    "bytes": 6999,
-    "sha256": "e83ed6f44a305902aa7a9b301f19e2960d1e70bea3aa5ddf8d31b5212118ee6e"
+    "bytes": 7104,
+    "sha256": "829de240278dcb4b010bcf01ecb2ec1c309d64fcd3e44678cf78608270cddaf2"
   },
   {
     "path": "src/DarwinKit.tsx",
@@ -51,13 +51,13 @@
   },
   {
     "path": "src/DramaticBuildScene.tsx",
-    "bytes": 3469,
-    "sha256": "c0afb876b6e7661ab992ab018491e53ff40d9e5ff721f916b265aabd2cb9a2df"
+    "bytes": 3927,
+    "sha256": "5edca678c80fd9e6d959a6309449c671f1faecf5a76eafc76e73864405ebb7ce"
   },
   {
     "path": "src/DramaticPayoffScenes.tsx",
-    "bytes": 11060,
-    "sha256": "df1cadb35a269a690da2e027c6e5e127bb91471d90bac0f2583ff74c30e52f9e"
+    "bytes": 12287,
+    "sha256": "43ba09c8cf8b0ad29732df587cc08138d16c700e51fcfe1a0b52fbd2825732cc"
   },
   {
     "path": "src/EnergyFX.tsx",
@@ -66,8 +66,8 @@
   },
   {
     "path": "src/EvolutionActionScenes.tsx",
-    "bytes": 15542,
-    "sha256": "f6f30caf0540ea697c92a5a333ad72158db60c2efd8411a7f93c82e5a2797fde"
+    "bytes": 16398,
+    "sha256": "e3535949b5d365dd3d490d8851437f0cecf34018d4e0a36a63d9fbdb4f889ac3"
   },
   {
     "path": "src/EvolutionKit.tsx",
@@ -96,8 +96,8 @@
   },
   {
     "path": "src/LineageScenes.tsx",
-    "bytes": 14912,
-    "sha256": "eeb98062e953be778bac31818c3a77f6aa22b7f492c099c429b8a5e842488201"
+    "bytes": 17003,
+    "sha256": "b896f90d04b1901ec132fb4762033adfae65a7cc1dd03f5feee2b003439fc50e"
   },
   {
     "path": "src/MotionScenes.tsx",
@@ -116,8 +116,8 @@
   },
   {
     "path": "src/SelectionScenes.tsx",
-    "bytes": 14679,
-    "sha256": "8ecf55106e4dab376cbba35c291301c389807ac0464bcb83f8f5640254ce08fd"
+    "bytes": 15624,
+    "sha256": "53899da0b81eba51045e273729c562fcca52918dfd1bfa5ac99dbaa3d0375eb4"
   },
   {
     "path": "src/SlopKit.tsx",
@@ -131,8 +131,8 @@
   },
   {
     "path": "src/SupportingActionScenes.tsx",
-    "bytes": 16870,
-    "sha256": "351556755dfd9e0081ae23f07cda342ff5468908109b64485bfd3d25d4f71cea"
+    "bytes": 16927,
+    "sha256": "0b4805f4b4098171bd01cc2f92cc18429192e7dcff5f7956e8ac0576ec5d295f"
   },
   {
     "path": "src/WorldKit.tsx",

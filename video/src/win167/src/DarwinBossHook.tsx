@@ -11,11 +11,11 @@ export function DarwinBossHook({t}:{t:number}){
  const wind=S(t,0,.22),slam=S(t,.22,.25),hit=pulse(t,.47,.25);
  const rebound=pulse(t,.49,.19),lean=pulse(t,.57,.42);
  const k1=pulse(t,.65,.38),k2=pulse(t,1.09,.40),k3=pulse(t,1.54,.44);
- const reveal=S(t,1.98,.35),settle=pulse(t,2.32,.39),front=S(t,3.08,.72);
+ const reveal=S(t,1.98,.35),settle=pulse(t,2.32,.39),front=S(t,2.58,.80),coil=pulse(t,2.55,.27),step=Math.max(0,t-2.79)/.40;
  const knock=28*rebound+72*k1+98*k2+126*k3;
  const mutation=Math.max(k1,k2,k3);
  const tint=t<.65?undefined:t<1.09?"#71B9B2":t<1.54?"#A28BCC":"#E7B24C";
- const size=336+159*reveal+18*settle+28*front,base=704;
+ const size=336+159*reveal+18*settle+28*front,base=704+18*coil-62*step*step;
  const by=mix(275-45*wind,525,slam)-knock-295*reveal-18*settle-12*front;
  const squash=mix(clamp((base-(by+153))/(size*.70)),1,reveal);
  const br=-3*rebound+3*k1-4*k2+5*k3-3*reveal+2*settle;
@@ -23,7 +23,7 @@ export function DarwinBossHook({t}:{t:number}){
  const camera=1+.025*wind+.045*S(t,.49,1.35)-.03*reveal+.045*front;
  return <P x={0} y={0} w={1012} h={792} style={{overflow:'hidden',transform:`translate(${7*hit*Math.sin(t*93)}px,${9*hit*Math.sin(t*77)+7*settle*Math.sin(t*61)}px) scale(${camera})`,transformOrigin:'62% 65%'}}><Set t={t}/>
  <svg width="1012" height="792" style={{position:'absolute',inset:0}}><path d="M364 704H969V728H364Z" fill="#193949"/><path d="M364 704l24-20H948l21 20Z" fill="#789A9D"/><ellipse cx="665" cy="700" rx={82+95*reveal} ry="15" fill="#142D3D70"/></svg>
- <P x={0} y={0} w={1012} h={792} style={{opacity:1}}><Agent x={665-size/2} y={base-size*.92} s={size} t={t} brace={1.3} tint={tint} squash={squash} win={reveal} fall={1-reveal} rot={-3*settle}/></P>
+ <P x={0} y={0} w={1012} h={792} style={{opacity:1}}><Agent x={665-size/2+32*step*step} y={base-size*.92} s={size} t={t} brace={1.3} tint={tint} squash={squash*(1-.13*coil)} win={reveal} fall={1-reveal} rot={-3*settle-8*step}/></P>
  <Darwin t={t} x={-24+44*reveal+5*k2+19*lean} y={132-18*wind+27*slam-19*reveal-10*k3} s={ds} gaze={1} think={1-S(t,.65,.2)} shock={Math.max(k1,k2,k3,reveal)} cheer={0} rot={-4*wind+6*slam+9*lean+br-13*reveal-9*settle+8*Math.sin(Math.max(0,t-2.35)*9)*Math.exp(-Math.max(0,t-2.35)*1.3)*reveal}/>
 
  {[0,1].map(side=><div key={side} style={{position:'absolute',inset:0,opacity:1-S(t,2.48,.24),transform:`translate(${(side?1:-1)*190*reveal}px,${-130*reveal}px) rotate(${(side?1:-1)*22*reveal}deg)`,transformOrigin:`${side?850:480}px ${by+100}px`,clipPath:side?'polygon(66% 0,100% 0,100% 100%,66% 100%)':'polygon(0 0,66% 0,66% 100%,0 100%)'}}><TestBook x={362+70*(1-slam)-15*reveal} y={by} w={622-70*(1-slam)+32*reveal+14*front} rot={br}/></div>)}

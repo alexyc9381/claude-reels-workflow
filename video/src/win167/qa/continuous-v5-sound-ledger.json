@@ -1,0 +1,125 @@
+{
+  "base": "public/master-dramatic-base.wav",
+  "cues": [
+    {
+      "at": 4.446667,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -29,
+      "duration": 0.17,
+      "why": "Book release landing powers the next launch",
+      "cut": 4.633333
+    },
+    {
+      "at": 6.546667,
+      "src": "v4-arrow-boing.wav",
+      "peak_dbfs": -33,
+      "duration": 0.14,
+      "why": "Final restrained pointer jab through Boris cut",
+      "cut": 6.733333
+    },
+    {
+      "at": 7.526667,
+      "src": "page_turn.wav",
+      "peak_dbfs": -31,
+      "duration": 0.2273125,
+      "why": "Sealed book opens to reveal inherited variations",
+      "cut": 7.866667
+    },
+    {
+      "at": 8.986667,
+      "src": "step.wav",
+      "peak_dbfs": -31,
+      "duration": 0.18,
+      "why": "Freed Claude steps away from chat machine",
+      "cut": 9.233333
+    },
+    {
+      "at": 12.333333,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -28,
+      "duration": 0.3,
+      "why": "Winner starts the next leap into selection",
+      "cut": 12.733333
+    },
+    {
+      "at": 15.473333,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -29,
+      "duration": 0.31,
+      "why": "Inherited boots launch descendants into the workshop",
+      "cut": 15.833333
+    },
+    {
+      "at": 17.933333,
+      "src": "v2-ski-brake.wav",
+      "peak_dbfs": -32,
+      "duration": 0.22,
+      "why": "Blue ski variation departs across the bench",
+      "cut": 18.7
+    },
+    {
+      "at": 18.133333,
+      "src": "v2-rocket-burst.wav",
+      "peak_dbfs": -30,
+      "duration": 0.35,
+      "why": "Orange variant uses its rocket upgrade",
+      "cut": 18.7
+    },
+    {
+      "at": 20.93,
+      "src": "shell-crack.wav",
+      "peak_dbfs": -29,
+      "duration": 0.08333333333333333,
+      "why": "Successful landing cracks the snow ledge",
+      "cut": 21.4
+    },
+    {
+      "at": 21.09,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -28,
+      "duration": 0.25,
+      "why": "Winner springs away from the cracking ledge",
+      "cut": 21.4
+    },
+    {
+      "at": 22.46,
+      "src": "v4-ember-pop.wav",
+      "peak_dbfs": -30,
+      "duration": 0.22,
+      "why": "Empty furnace spits ash and Claude recoils",
+      "cut": 22.7
+    },
+    {
+      "at": 25.79,
+      "src": "v2-rocket-burst.wav",
+      "peak_dbfs": -30,
+      "duration": 0.32,
+      "why": "Evolved hero ignites rockets after landing",
+      "cut": 26.166667
+    },
+    {
+      "at": 25.89,
+      "src": "v2-spring-rebound.wav",
+      "peak_dbfs": -31,
+      "duration": 0.22,
+      "why": "Evolved boots push off toward the next cut",
+      "cut": 26.166667
+    },
+    {
+      "at": 26.896667,
+      "src": "paper.wav",
+      "peak_dbfs": -34,
+      "duration": 0.17220833333333332,
+      "why": "CTA book advances toward the viewer through the end",
+      "cut": 27.233333
+    }
+  ],
+  "metrics": {
+    "duration": 27.233333333333334,
+    "peak_dbfs": -2.1693434011751367,
+    "clipped_samples": 0,
+    "new_cues": 14,
+    "voice_timing_unchanged": true,
+    "subjective_listening": "not independently certified"
+  }
+}

@@ -14,17 +14,19 @@ export function Build({t}:{t:number}){const draw=E(t,-.1,.58),phone=S(t,.82,1.31
 <Key x={294} y={540} s={103} press={tap}/>
 </NaturalWorld>}
 export function Reveal({t}:{t:number}){
- const show=E(t,0,.59),name=E(t,.46,.16),fan=pulse(t,.18,.48),stamp=pulse(t,.61,.29),crest=S(t,.60,.37);
- const bx=553-101*show,by=372-198*show-44*E(t,.64,.4);
+ const show=E(t,0,.59),name=E(t,.46,.16),fan=pulse(t,.18,.48),stamp=pulse(t,.61,.29),crest=S(t,.60,.37),offer=Math.max(0,t-.77)/.49;
+ const bx=553-101*show-36*offer*offer,by=372-198*show-44*E(t,.64,.4)+24*offer;
  return <NaturalWorld kind="cabin" t={t}><Branch x={572} y={587} w={375}/>
- {/* Pages flare from the moving spine, then settle before the cover receives its seal. */}
- {[0,1,2,3,4].map(i=><P key={i} x={bx+15} y={by+12} w={361} h={461} style={{transform:`rotate(${-16+17*show+(i+1)*5.4*fan}deg)`,transformOrigin:'3% 80%',background:i%2?'#EBDCB9':'#BEA77C',border:'3px solid #766B4F'}}/>)}
- <BookCover x={bx} y={by+7*stamp} w={380} h={485} title={name>.01?'DARWIN':''} bottom={name>.01?'LOOP':''} tilt={-16+17*show-2*stamp}>
+ {/* The seal completes while the cover opens; cut during the page reveal. */}
+ {[0,1,2,3,4].map(i=><P key={i} x={bx+15} y={by+12} w={361} h={461} style={{transform:`rotate(${-16+17*show+(i+1)*5.4*fan-10*offer}deg)`,transformOrigin:'3% 80%',background:i%2?'#EBDCB9':'#BEA77C',border:'3px solid #766B4F'}}/>)}
+ <P x={bx+10} y={by+10} w={367} h={472} style={{background:'#ECDDAB',border:'6px solid #7E7759',transform:'rotate(1deg)'}}><svg viewBox="0 0 367 472"><path d="M50 54H306M50 78H261M183 143V215M77 270V215H290V270M183 215V270" fill="none" stroke="#677C60" strokeWidth="9"/>{[[148,109],[43,281],[149,281],[255,281]].map(([x,y],i)=><g key={i} transform={`translate(${x} ${y})`}><path d="M0 0h69v53H0M-10 17h10m69 0h10M15 53v17M51 53v17" fill={i?'#78A391':'#D18860'} stroke="#355A4F" strokeWidth="5"/><path d="M18 16v13M47 16v13" stroke="#243F36" strokeWidth="6"/></g>)}<path d="M49 387H305M49 410H279" stroke="#BBA47B" strokeWidth="6"/></svg></P>
+ <P w={1012} h={792} style={{transform:`perspective(950px) rotateY(${-92*offer}deg)`,transformOrigin:`${bx}px ${by+250}px`}}>
+ <BookCover x={bx} y={by+7*stamp} w={380} h={485} title={name>.01?'DARWIN':''} bottom={name>.01?'LOOP':''} tilt={-16+17*show-2*stamp-10*offer}>
  <svg viewBox="0 0 360 430" width="100%" height="100%" style={{position:'absolute',inset:0,pointerEvents:'none'}}>
  <circle cx="186" cy="250" r="77" fill="none" stroke="#DAC087" strokeWidth="4" pathLength="1" strokeDasharray={`${crest} 1`} transform="rotate(-90 186 250)"/>
  {[0,1,2,3,4,5].map(i=>{const a=i*Math.PI/3,q=S(t,.62,.34);return <path key={i} d={`M${186+Math.cos(a)*(83+q*20)} ${250+Math.sin(a)*(83+q*20)}l${Math.cos(a)*12} ${Math.sin(a)*12}`} stroke="#E5C88C" strokeWidth="4" opacity={stamp}/>})}
- </svg></BookCover>
- <Darwin t={t} x={19+72*show-9*stamp} y={323-42*show+9*stamp} s={379} rot={-10+15*show+8*pulse(t,.64,.42)} gaze={1} cheer={show*.75}/>
+ </svg></BookCover></P>
+ <Darwin t={t} x={19+72*show-9*stamp+27*offer} y={323-42*show+9*stamp} s={379} rot={-10+15*show+8*pulse(t,.64,.42)+12*offer} gaze={1} cheer={show*.75}/>
  </NaturalWorld>
 }
 export function Chat({t}:{t:number}){const p=E(t,0,.55),stop=E(t,.66,.42);return <NaturalWorld kind="greenhouse" t={t}>
@@ -39,16 +41,16 @@ export function ThirdLine({t}:{t:number}){const enter=E(t,0,.6),pull=S(t,.71,.92
 <Darwin t={t} x={82+303*enter-303*pull} y={308+40*(1-enter)+110*S(t,1.67,.53)} s={309} gaze={1} think={1-write} cheer={E(t,1.76,.64)*.6} rot={-3*pulse(t,.71,.92)+write*4}/>
 </NaturalWorld>}
 export function CTA({t}:{t:number}){
- const show=E(t,0,.48),impact=pulse(t,.48,.25),settle=pulse(t,.73,.25),rays=S(t,.48,.40);
- const bx=626-152*show,by=360-199*show+10*impact-3*settle;
+ const show=E(t,0,.48),impact=pulse(t,.48,.25),settle=pulse(t,.73,.25),rays=S(t,.48,.40),offer=Math.max(0,t-.65)/.60;
+ const bx=626-152*show-54*offer*offer,by=360-199*show+10*impact-3*settle-18*offer;
  return <NaturalWorld kind="fossil" t={t}>
  <svg width="1012" height="792" style={{position:'absolute',inset:0,pointerEvents:'none'}}>
  {/* Broad impression rays originate at the book's edges, leaving title and faces clear. */}
  {[0,1,2,3,4,5].map(i=>{const a=(-60+i*24)*Math.PI/180;return <path key={i} d={`M${650+Math.cos(a)*218} ${412+Math.sin(a)*200}l${Math.cos(a)*(16+29*rays)} ${Math.sin(a)*(16+29*rays)}`} stroke="#E8C785" strokeWidth={9*(1-rays)+3} opacity={pulse(t,.48,.47)} strokeLinecap="round"/>})}
  <ellipse cx="651" cy="678" rx={110+154*rays} ry={9+14*rays} fill="none" stroke="#DDC391" strokeWidth={8*(1-rays)} opacity={pulse(t,.48,.48)}/>
  </svg>
- <P w={1012} h={792} style={{transform:`scale(${1+.035*impact-.01*settle})`,transformOrigin:'65% 65%'}}><BookCover x={bx} y={by} w={348} h={493} title="WIN" bottom="" tilt={-15+18*show-3*impact}/></P>
- <Darwin t={t} x={38+34*show-13*impact} y={326-20*pulse(t,.55,.42)+7*impact} s={381} rot={-8+12*show-7*impact+3*settle} gaze={1} shock={impact*.3} cheer={show*.8}/>
+ <P w={1012} h={792} style={{transform:`scale(${1+.035*impact-.01*settle})`,transformOrigin:'65% 65%'}}><BookCover x={bx} y={by} w={348+174*offer} h={493+174*offer} title="WIN" bottom="" tilt={-15+18*show-3*impact-7*offer}/></P>
+ <Darwin t={t} x={38+34*show-13*impact+44*offer} y={326-20*pulse(t,.55,.42)+7*impact} s={381} rot={-8+12*show-7*impact+3*settle+12*offer} gaze={1} shock={impact*.3} cheer={show*.8}/>
  </NaturalWorld>
 }
 

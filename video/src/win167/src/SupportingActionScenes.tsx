@@ -10,7 +10,7 @@ function Bubble({x,y,s=1,rot=0}:{x:number,y:number,s?:number,rot?:number}){retur
 
 /** 1.367 s: runaway physical replies bury Claude; Darwin throws the machine into reverse. */
 export function Chat({t}:{t:number}){
- const yank=S(t,.56,.24),reverse=S(t,.97,.31),hit=pulse(t,.97,.25),struggle=pulse(t,.08,.63),shake=Math.sin(t*58)*(1-yank)*3;
+ const yank=S(t,.56,.24),reverse=S(t,.97,.31),hit=pulse(t,.97,.25),struggle=pulse(t,.08,.63),exit=Math.max(0,t-1.08)/.39,shake=Math.sin(t*58)*(1-yank)*3;
  return <P w={1012} h={792} style={{overflow:'hidden',transform:`translateY(${hit*Math.sin(t*71)*3}px) scale(${1+.025*S(t,0,1.36)})`,transformOrigin:'63% 64%'}}><Room t={t} kind="engine"/>
  <svg width="1012" height="792" style={{position:'absolute',inset:0}}>
   <path d="M435 683H963V713H435Z" fill="#D4AE76" stroke="#273344" strokeWidth="9"/>
@@ -19,7 +19,7 @@ export function Chat({t}:{t:number}){
   <path d={`M806 652Q695 ${716-60*yank} 504 621L${446-57*yank} ${466+68*yank}`} fill="none" stroke="#B29464" strokeWidth="5"/>
  </svg>
  <Darwin t={t} x={-19-24*yank} y={239+13*yank-8*hit} s={477} gaze={1} think={1-yank} cheer={.1+.6*yank} rot={5-12*yank}/>
- <Actor t={t} x={483+7*Math.sin(t*34)*struggle+21*reverse-19*pulse(t,.97,.27)} y={457+35*S(t,.1,.47)-29*reverse-18*pulse(t,1.04,.31)} s={217} role="suit" rot={-5+8*Math.sin(t*25)*struggle+7*reverse-12*pulse(t,.97,.27)} cheer={.3+.65*reverse} stern={1-reverse}/>
+ <Actor t={t} x={483+7*Math.sin(t*34)*struggle+21*reverse-19*pulse(t,.97,.27)-83*exit*exit} y={457+35*S(t,.1,.47)-29*reverse-18*pulse(t,1.04,.31)-36*exit} s={217} role="suit" rot={-5+8*Math.sin(t*25)*struggle+7*reverse-12*pulse(t,.97,.27)-17*exit} cheer={.3+.65*reverse} stern={1-reverse}/>
  <P x={753+shake} y={296-6*hit} w={238} h={369} style={{transform:`rotate(${-2*hit}deg)`,filter:'drop-shadow(0 12px 0 #202A3D60)'}}><svg viewBox="0 0 238 369">
   <path d="M22 21H210L225 48V344H5V48Z" fill="#315B65" stroke="#1D3544" strokeWidth="10"/><path d="M25 14H207V59H25Z" fill="#E6BA72" stroke="#594837" strokeWidth="7"/>
   <path d="M46 33H188" stroke="#6A503B" strokeWidth="6"/><rect x="39" y="88" width="150" height="111" rx="14" fill="#172F3C" stroke="#AD9470" strokeWidth="7"/>
