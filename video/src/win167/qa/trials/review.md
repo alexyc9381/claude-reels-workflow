@@ -1,9 +1,16 @@
-# WIN167 — distinct evolved Claude
+# WIN167 — narration-aligned trial openings
 
-Alex said the plain orange successor still lacked interest and suggested changing its color. Both current hook heroes now visibly transform from orange through a brief mint phase into teal. A rising mint strip accompanies the color change within the body. Dark teal side shading and a restrained cream edge keep the familiar six-limb silhouette distinct from the sets. The face transitions from strain to a larger confident grin, and the arms finish in an asymmetric raised pose. Blue/purple descendants remain visually different. The successful draft drawings use teal to anticipate the transformation.
+Latest feedback: opening actions did not correspond to the spoken words. Replaced selection/pressure/draft destruction during the introductory sentence with a prompt authored/submitted and a causal idea/reaction. B uses typing and cursor travel; C uses a physical prompt scroll and a reaction relayed to Darwin. Both keep recognizable Claude with an orange→mint→teal change and no rejected yellow costume.
 
-The rejected gold crown, chest plate and oversized gloves remain removed. The small cream wrist wraps remain as a secondary inherited detail. The body color and expression now carry the before/after difference instead of relying on those small wraps alone. This color choice is the current proposal, not a user-approved standing palette.
+The first boundary moves from frame92 to69, exactly2.300s at “You can build.” One paper prompt unfolds into the readable app by3.12s and website by3.50s. The common prompt remains visible under both on “in a single prompt.” Replaced the contradictory THREE APPROACHES header with APPS + WEBSITES. B’s second review added visible typing/cursor travel before submission. Inspect semantic-cues.json and native/phone temporal boards; word correspondence is a separate gate from pixel-motion metrics.
 
-Scene timing, major contact beats, narration, SFX, music, captions and the approved shared body are fixed. All source-media hashes are unchanged. The new color change aligns with the existing press-reversal and page-fold sounds. Review the phone-size temporal grids for the orange-to-teal transition, confident release, body contrast and distinct descendants. Basic caption verification checks ordering and text, not forced alignment; cue-energy checks do not certify subjective mix quality. Existing shared-body motion flags are retained in the reports. No technical metric establishes creative approval or retention performance.
+Scope: revised B/C visuals and SFX through frame138 only. Approved A, caption timing, full spoken recording, music and subsequent body are unchanged. Audio PCM from frame139 is identical to the approved master; mix peak below−3dBFS. The shared original cover/caption/article pointer hashes are unchanged. No social posting.
 
-Earlier plain-orange hook QA is archived separately; earlier code is retained in Git history and uploaded versions remain in Drive history. Both current full MP4s, source archive and notes replace the existing IDs. No social posting is performed.
+Both full exports:1080×1920,30fps,826frames,27.533s,Rec.709,H.264,AAC256k. Nine basic verifier checks and blocking look checks pass. Basic caption check verifies order/text, not forced alignment; cue-energy check does not certify subjective audio listening. TypeScript compiler is not installed in this project; Remotion bundle/render succeeded for both compositions. Hook motion B6.01,C6.84 with zero measured dead runs; build motion13.79/13.87 with9 measured low-motion frames. Existing shared-body Boris/test flags remain. Body-luma/plate warnings are reported in look output. Technical passes do not establish creative approval or retention performance.
+
+Opening-only dHash comparison now ends at2.25s (before shared construction):
+- A-B: mean15.30, minimum9
+- A-C: mean20.10, minimum16
+- B-C: mean18.00, minimum13
+
+Shared body similarity is intentional; these values do not predict Instagram distribution. Historical v5 QA is retained separately as semantic-mismatch evidence. Current alternative names: Prompt Breakthrough and Idea Cascade.

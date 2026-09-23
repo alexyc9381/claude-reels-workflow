@@ -36,8 +36,8 @@
   },
   {
     "path": "src/CinematicTrialHooks.tsx",
-    "bytes": 13033,
-    "sha256": "27a6861908161545d099fa26bcf52dd4bfb4825b0d4225ac44c76b81259744e6"
+    "bytes": 13040,
+    "sha256": "71dd6923847b7e0c34aa7b0dd058a41cdfc81063ae5fae53b0c909837849348f"
   },
   {
     "path": "src/CityActionScenes.tsx",
@@ -145,6 +145,11 @@
     "sha256": "1e6fe6ff94ea138bca851b43a39a71444dd73ced638a1d591a3511a330746c8a"
   },
   {
+    "path": "src/NarrationAlignedScenes.tsx",
+    "bytes": 9272,
+    "sha256": "31771a0a9a3bf2c21e8973df871cc2baf163e1d27dad923f783d9eae5e470ea7"
+  },
+  {
     "path": "src/NaturalWorld.tsx",
     "bytes": 17840,
     "sha256": "afa7438f7caa87522a1523f8c6fe1ae2cd839cccbfcd7b26cd6eccdb2ccfd424"
@@ -226,8 +231,8 @@
   },
   {
     "path": "src/index.tsx",
-    "bytes": 3130,
-    "sha256": "3322f29d41c602ea4e9369f87a6c2c98d57dcff9c301055ebeaf2b233112a247"
+    "bytes": 3326,
+    "sha256": "8b532430c26f0a038010b7b8f94bbef5c84115f7093e85a15ac80a0c49caece0"
   },
   {
     "path": "src/supporting-review-index.tsx",
@@ -261,7 +266,7 @@
   },
   {
     "path": "tools/mix-trials.py",
-    "bytes": 2003,
-    "sha256": "c3ff6c995446c8ca78e2cbe63c64481538138e9738598b3733691fb81ef06198"
+    "bytes": 1886,
+    "sha256": "71cecf768334f3a1d2790fdf7f57b84425fba821e911975d2bd58000643b3311"
   }
 ]

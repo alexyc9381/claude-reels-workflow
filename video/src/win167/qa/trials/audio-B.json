@@ -1,82 +1,87 @@
 {
   "cues": [
     {
-      "seconds": 0,
-      "asset": "lever.wav",
-      "gain": 0.16
-    },
-    {
-      "seconds": 0.12,
-      "asset": "gear.wav",
-      "gain": 0.18
-    },
-    {
-      "seconds": 0.4,
-      "asset": "deep-contact.wav",
-      "gain": 0.27
-    },
-    {
-      "seconds": 0.44,
-      "asset": "v2-rubber-compress.wav",
-      "gain": 0.21
-    },
-    {
-      "seconds": 0.7,
+      "seconds": 0.06,
       "asset": "paper.wav",
-      "gain": 0.16
+      "gain": 0.12
     },
     {
-      "seconds": 0.89,
-      "asset": "v2-soft-snap.wav",
-      "gain": 0.16
-    },
-    {
-      "seconds": 1.1,
-      "asset": "v4-binding-creak.wav",
-      "gain": 0.19
-    },
-    {
-      "seconds": 1.39,
-      "asset": "metal.wav",
-      "gain": 0.19
-    },
-    {
-      "seconds": 1.62,
-      "asset": "v2-machine-reverse.wav",
-      "gain": 0.13
-    },
-    {
-      "seconds": 1.89,
-      "asset": "v4-book-rupture.wav",
-      "gain": 0.25
-    },
-    {
-      "seconds": 2.05,
-      "asset": "v3-paper-flurry.wav",
-      "gain": 0.13
-    },
-    {
-      "seconds": 2.2,
-      "asset": "thock.wav",
-      "gain": 0.23
-    },
-    {
-      "seconds": 2.35,
+      "seconds": 0.3,
       "asset": "copy.wav",
-      "gain": 0.18
+      "gain": 0.09
     },
     {
-      "seconds": 2.46,
+      "seconds": 0.59,
+      "asset": "copy.wav",
+      "gain": 0.1
+    },
+    {
+      "seconds": 0.86,
+      "asset": "latch.wav",
+      "gain": 0.2
+    },
+    {
+      "seconds": 1.08,
+      "asset": "v2-soft-snap.wav",
+      "gain": 0.24
+    },
+    {
+      "seconds": 1.26,
       "asset": "v2-bud-3.wav",
       "gain": 0.14
     },
     {
-      "seconds": 2.7,
-      "asset": "step.wav",
-      "gain": 0.19
+      "seconds": 1.72,
+      "asset": "page_turn.wav",
+      "gain": 0.1
+    },
+    {
+      "seconds": 2.08,
+      "asset": "paper.wav",
+      "gain": 0.12
+    },
+    {
+      "seconds": 2.31,
+      "asset": "page_turn.wav",
+      "gain": 0.18
+    },
+    {
+      "seconds": 2.71,
+      "asset": "v4-binding-creak.wav",
+      "gain": 0.15
+    },
+    {
+      "seconds": 3.1,
+      "asset": "thock.wav",
+      "gain": 0.17
+    },
+    {
+      "seconds": 3.18,
+      "asset": "paper.wav",
+      "gain": 0.13
+    },
+    {
+      "seconds": 3.49,
+      "asset": "v2-soft-snap.wav",
+      "gain": 0.17
+    },
+    {
+      "seconds": 3.8,
+      "asset": "copy.wav",
+      "gain": 0.12
+    },
+    {
+      "seconds": 4.06,
+      "asset": "latch.wav",
+      "gain": 0.12
+    },
+    {
+      "seconds": 4.36,
+      "asset": "paper.wav",
+      "gain": 0.12
     }
   ],
-  "hook_peak_dbfs": -2.4148706215550257,
+  "hook_peak_dbfs": -3.543056894540536,
   "body_pcm_identical": true,
-  "shared_body_from_frame": 92
+  "shared_body_from_frame": 139
 }

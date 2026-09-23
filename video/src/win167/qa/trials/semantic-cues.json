@@ -1,0 +1,54 @@
+{
+  "scope": "B/C frames 0\u2013138; approved A and body from 139 are unchanged",
+  "voice_and_caption_timing": "unchanged",
+  "cues": [
+    {
+      "speech": "new prompting technique",
+      "seconds": [
+        0.24,
+        0.86
+      ],
+      "visual": "B: prompt typed then submitted; C: physical prompt scroll unrolls then submits"
+    },
+    {
+      "speech": "blowing people\u2019s minds",
+      "seconds": [
+        1.08,
+        1.84
+      ],
+      "visual": "Submit causes Claude thought bubble/bulb, widened eyes and raised arms; C carries surprise to Darwin"
+    },
+    {
+      "speech": "You can build entire",
+      "seconds": [
+        2.3,
+        3.12
+      ],
+      "visual": "Cut exactly on You; single prompt opens paper connections, folds begin constructing outputs"
+    },
+    {
+      "speech": "apps",
+      "seconds": [
+        3.12,
+        3.38
+      ],
+      "visual": "Phone app reaches full readable open state at 3.12"
+    },
+    {
+      "speech": "websites",
+      "seconds": [
+        3.5,
+        3.72
+      ],
+      "visual": "Website reaches full readable open state at 3.50"
+    },
+    {
+      "speech": "in a single prompt",
+      "seconds": [
+        3.72,
+        4.48
+      ],
+      "visual": "Both complete interfaces remain connected to one prompt, contents continue building through cut"
+    }
+  ]
+}

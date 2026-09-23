@@ -34,8 +34,8 @@ Restore this revision from the [canonical Drive archive](https://drive.google.co
 
 ## Revised hook trials
 
-Alex rejected the prior trial concepts as unclear or too simple. Historical modules and qa/trials-v1-rejected and qa/trials-v2-rejected retain the earlier work.
+Current `WIN-B` (Prompt Breakthrough) and `WIN-C` (Idea Cascade) are full 826-frame alternatives. `src/NarrationAlignedScenes.tsx` contains the current openings and shared app/website construction. B/C cut at frame69 on “You can build”; frame139 onward preserves the approved body. A keeps its prior frame92 cut and approved modules. The exported Actor helper is visually unchanged for historical hooks.
 
-Compositions `WIN-B` (Pressure Trial) and `WIN-C` (Draft Avalanche) are full 826-frame alternatives. Render with `npx remotion render src/index.tsx WIN-B B-native.mp4 --codec=h264 --crf=18 --concurrency=2` (or WIN-C). Apply the Rec.709 normalization above and mux the matching `public/master-trial-B.wav` or `master-trial-C.wav`. `src/CinematicTrialHooks.tsx` contains the current hooks. Frames92 onward share the approved body. `python3 tools/mix-trials.py` rebuilds trial audio without changing the approved master. See `qa/trials/review.md`, cue ledgers, comparison results and blank tracker.
+Render `npx remotion render src/index.tsx WIN-B B-native.mp4 --codec=h264 --crf=18 --concurrency=2` (or WIN-C), apply the Rec.709 normalization above and mux `public/master-trial-B.wav` or `master-trial-C.wav`. `python3 tools/mix-trials.py` rebuilds trial SFX through frame138; voice, captions and PCM from frame139 stay fixed. Exact speech-to-action mapping: `qa/trials/semantic-cues.json`. Review/technical evidence and a blank posting-results tracker are in the same directory. Earlier concepts remain historical, including `qa/trials-v5-semantic-mismatch`.
 
-[Full revised trials in Drive](https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ). Both use the existing caption, cover and live article. These revisions remain subject to creative review.
+[Full revised trials in Drive](https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ). Existing caption, cover and article remain applicable. These are revisions for creative review; no performance results or approval are implied.

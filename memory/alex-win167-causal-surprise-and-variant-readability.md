@@ -53,3 +53,11 @@ Alex explicitly disliked the evolved Claude's yellow outfit in Pressure Trial/Dr
 ## The evolved sprite needs a visible before/after
 
 After removing the yellow costume, Alex said the plain orange Claude still lacked interest and suggested a color change. Removing an unwanted outfit does not mean making the evolved hero visually identical to its earlier state. Use an obvious body-color transformation, a stronger expressive release or another clearly readable character change while retaining the Claude silhouette. Do not rely solely on tiny inherited accessories. Teal with dark edges and a confident grin is the current implementation for review, not an approved universal palette. Keep descendants distinct at a glance and check contrast against the current set.
+
+## Narration must determine the action and its timing
+
+Alex then flagged that some animations, especially the opening, did not correspond to the spoken narration. Pressure/selection and avalanche/rewrite may relate to the overall Darwin theme, but they do not depict the introductory sentence about a new prompting technique. Do not place later test/selection mechanics under an introduction solely because they are more elaborate. The prior build scene also said THREE APPROACHES while the voice said apps and websites; typography and visible nouns must agree with that sentence.
+
+Map each spoken action/noun to a visual event before choreography: introducing a prompt → author/submit a prompt; “blowing people’s minds” → a reaction caused by that submission; “build” → construction; “apps”/“websites” → distinguishable completed outputs; “single prompt” → both outputs trace back to one input. Cut on the actual sentence start, not an inherited scene boundary. Keep visual anticipation before the word and the recognizable payoff on the word. Readable cause and effect take precedence over theme-only spectacle.
+
+Current B/C revision uses a 2.300s opening and paper unfolding into app/website outputs through4.633s; A remains unchanged. The original voice/caption timing is preserved. New cue ledgers and exact word/action maps document this scoped correction. A passing technical check is still not creative approval, and this revision is not a claim that every later metaphor has been newly approved.

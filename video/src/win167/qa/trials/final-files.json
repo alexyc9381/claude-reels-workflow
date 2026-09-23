@@ -1,12 +1,12 @@
 {
   "B": {
-    "name": "outputs/B - Pressure Trial - FULL.mp4",
-    "sha256": "0ba4b85402f2c2cc2a06e9dfed085aaf60d05f72048de84125b4919923eda20c",
-    "bytes": 9943472
+    "name": "outputs/B - Prompt Breakthrough - FULL.mp4",
+    "sha256": "d3fb84491418b51268d0aacec8bafb390fffff54da31ab69e8354adf39679f30",
+    "bytes": 8982896
   },
   "C": {
-    "name": "outputs/C - Draft Avalanche - FULL.mp4",
-    "sha256": "11ba8944646cf62ac70129d765c7dd48af2a73e6028bb69b4152db30578aaab3",
-    "bytes": 9920080
+    "name": "outputs/C - Idea Cascade - FULL.mp4",
+    "sha256": "3e3767fdee43213437c6b2c18631672f384c7dc709bcf9d54f7b7cf20fd609a5",
+    "bytes": 8988053
   }
 }

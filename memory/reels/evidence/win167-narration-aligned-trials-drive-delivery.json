@@ -1,0 +1,38 @@
+{
+  "root": "1ebQwHREXHOqumPKgIPuVCC_QS53nT3Bt",
+  "alternatives": "1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ",
+  "files": [
+    {
+      "id": "1u3AcAQ3-q7oRH4S1Ond0P3i1wuCB4pBK",
+      "name": "B - Prompt Breakthrough - FULL.mp4",
+      "parent": "1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ",
+      "bytes": 8982896,
+      "sha256": "d3fb84491418b51268d0aacec8bafb390fffff54da31ab69e8354adf39679f30",
+      "matches": true
+    },
+    {
+      "id": "1LNfypAnbWwsWLyusaOTForAY8qo0eE4A",
+      "name": "C - Idea Cascade - FULL.mp4",
+      "parent": "1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ",
+      "bytes": 8988053,
+      "sha256": "3e3767fdee43213437c6b2c18631672f384c7dc709bcf9d54f7b7cf20fd609a5",
+      "matches": true
+    },
+    {
+      "id": "1js5R5NkDRomYasor5HJyeJYRX-rakts4",
+      "name": "WIN_Editable_Source_Trials.zip",
+      "parent": "1fGrS2LI8I1WSMsAGgCtbffdFkC4eCawt",
+      "bytes": 52132577,
+      "sha256": "1ef76595db4c1eee56ba28b690315aabd6f372d80f556d32b9cbe3aa097863fd",
+      "matches": true
+    },
+    {
+      "id": "1pdlHC7lJKrwK32e5JYO-0iMExDTAmJ_7",
+      "name": "Production-notes.txt",
+      "parent": "1fGrS2LI8I1WSMsAGgCtbffdFkC4eCawt",
+      "bytes": 2731,
+      "sha256": "f48d8e30190d513a40417f1af263bc598d7515e0c224b76427d8eee88d249579",
+      "matches": true
+    }
+  ]
+}

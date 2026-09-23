@@ -1,0 +1,9 @@
+# WIN167 — distinct evolved Claude
+
+Alex said the plain orange successor still lacked interest and suggested changing its color. Both current hook heroes now visibly transform from orange through a brief mint phase into teal. A rising mint strip accompanies the color change within the body. Dark teal side shading and a restrained cream edge keep the familiar six-limb silhouette distinct from the sets. The face transitions from strain to a larger confident grin, and the arms finish in an asymmetric raised pose. Blue/purple descendants remain visually different. The successful draft drawings use teal to anticipate the transformation.
+
+The rejected gold crown, chest plate and oversized gloves remain removed. The small cream wrist wraps remain as a secondary inherited detail. The body color and expression now carry the before/after difference instead of relying on those small wraps alone. This color choice is the current proposal, not a user-approved standing palette.
+
+Scene timing, major contact beats, narration, SFX, music, captions and the approved shared body are fixed. All source-media hashes are unchanged. The new color change aligns with the existing press-reversal and page-fold sounds. Review the phone-size temporal grids for the orange-to-teal transition, confident release, body contrast and distinct descendants. Basic caption verification checks ordering and text, not forced alignment; cue-energy checks do not certify subjective mix quality. Existing shared-body motion flags are retained in the reports. No technical metric establishes creative approval or retention performance.
+
+Earlier plain-orange hook QA is archived separately; earlier code is retained in Git history and uploaded versions remain in Drive history. Both current full MP4s, source archive and notes replace the existing IDs. No social posting is performed.

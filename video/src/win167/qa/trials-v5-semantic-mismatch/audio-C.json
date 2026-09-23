@@ -1,0 +1,72 @@
+{
+  "cues": [
+    {
+      "seconds": 0,
+      "asset": "v3-paper-flurry.wav",
+      "gain": 0.18
+    },
+    {
+      "seconds": 0.16,
+      "asset": "page_turn.wav",
+      "gain": 0.16
+    },
+    {
+      "seconds": 0.39,
+      "asset": "deep-contact.wav",
+      "gain": 0.26
+    },
+    {
+      "seconds": 0.44,
+      "asset": "v2-rubber-compress.wav",
+      "gain": 0.18
+    },
+    {
+      "seconds": 0.78,
+      "asset": "paper.wav",
+      "gain": 0.2
+    },
+    {
+      "seconds": 1.08,
+      "asset": "v2-soft-snap.wav",
+      "gain": 0.19
+    },
+    {
+      "seconds": 1.2,
+      "asset": "latch.wav",
+      "gain": 0.16
+    },
+    {
+      "seconds": 1.38,
+      "asset": "v4-binding-creak.wav",
+      "gain": 0.19
+    },
+    {
+      "seconds": 1.78,
+      "asset": "v4-book-rupture.wav",
+      "gain": 0.25
+    },
+    {
+      "seconds": 1.98,
+      "asset": "v3-paper-flurry.wav",
+      "gain": 0.17
+    },
+    {
+      "seconds": 2.2,
+      "asset": "thock.wav",
+      "gain": 0.2
+    },
+    {
+      "seconds": 2.28,
+      "asset": "copy.wav",
+      "gain": 0.15
+    },
+    {
+      "seconds": 2.62,
+      "asset": "step.wav",
+      "gain": 0.2
+    }
+  ],
+  "hook_peak_dbfs": -2.512569440983903,
+  "body_pcm_identical": true,
+  "shared_body_from_frame": 92
+}
