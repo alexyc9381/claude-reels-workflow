@@ -5,6 +5,6 @@ look_audit · B - Pressure Trial - FULL.mp4
   ✓ BODY_BLACK   p10 34.7               black point (luma p10) <= 35 (AGENCY 25.0 · the pale run 51-72)
   ⚠ HOOK_PLATE   7.1% at y0  = HEADER PILL no claim plate of its own at frame 0 — warns, never blocks
   · BODY_LUMA                     111.1 reported, not gated   ⚠ outside AGENCY's body range 70-105
-  · DEPTH                         168.5 row-luma spread — REPORTED ONLY, see the header. Check by eye: is there a mass cropped by the panel edge, in front of the action?
+  · DEPTH                         168.4 row-luma spread — REPORTED ONLY, see the header. Check by eye: is there a mass cropped by the panel edge, in front of the action?
 ------------------------------------------------------------------------------
   ✅ the look holds.

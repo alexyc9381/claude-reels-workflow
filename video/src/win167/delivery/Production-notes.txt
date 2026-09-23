@@ -18,9 +18,10 @@ GitHub edits and reusable lessons: https://github.com/alexyc9381/claude-reels-wo
 Latest motion rule: keep meaningful subject/prop action active through each cut; review the last0.7seconds of every scene, including CTA. Keep readable outcomes, planted contact and unobstructed faces.
 
 Revised full-length trial reels:
-B - Pressure Trial - FULL.mp4: three Claude attempts face a giant press; the retained survivor braces, splits the machine and passes reinforced armor to its descendants.
-C - Draft Avalanche - FULL.mp4: a rejected draft pile crushes Claude; retained pages fold into armor, enabling a punch-through and an improved successor.
+B - Pressure Trial - FULL.mp4: three Claude attempts face a giant press; the retained survivor braces, splits the machine and passes small cream wrist wraps to its descendants.
+C - Draft Avalanche - FULL.mp4: a rejected draft pile crushes Claude; retained pages fold into cream wrist wraps, enabling a punch-through and an improved successor.
 The earlier flytrap/tree and simple Claude Selection/Rewrite concepts were rejected. Historical source/QA remain in the archive and Git; earlier uploads remain in Drive version history.
+Costume revision: removed the yellow crown, breastplate and oversized gold gloves. Claude keeps its orange silhouette and face, with small cream/teal paper wraps at the wrists.
 Both: 27.533 seconds; first92frames and corresponding SFX change. Approved VO, captions and subsequent body stay fixed. Use the same Caption.txt, Cover.png and Article-link.txt.
 Folder: https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ
 Source compositions: WIN-B and WIN-C; current hooks in src/CinematicTrialHooks.tsx. Trial QA and blank results tracker: qa/trials/.
