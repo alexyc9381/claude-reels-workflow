@@ -1,0 +1,255 @@
+{
+  "opening_cues": [
+    {
+      "asset": "single-dry-chime",
+      "time_s": 0,
+      "start_s": 0.0,
+      "end_s": 0.13,
+      "level_dbfs_before_bus": -15,
+      "reason": "Bright first-frame headline accent",
+      "role": "foreground",
+      "band_hz": null
+    },
+    {
+      "asset": "camera-snap",
+      "time_s": 0,
+      "start_s": 0.0,
+      "end_s": 0.075,
+      "level_dbfs_before_bus": -18,
+      "reason": "Crisp dry attack under the first-frame accent",
+      "role": "attack",
+      "band_hz": [
+        850,
+        6200
+      ]
+    },
+    {
+      "asset": "physical-landing",
+      "time_s": 0,
+      "start_s": 0.0,
+      "end_s": 0.135,
+      "level_dbfs_before_bus": -19.5,
+      "reason": "Compact body gives the already-loaded model cluster weight",
+      "role": "body",
+      "band_hz": [
+        100,
+        700
+      ]
+    },
+    {
+      "asset": "ratchet-windup",
+      "time_s": 0.105,
+      "start_s": 0.105,
+      "end_s": 0.13,
+      "level_dbfs_before_bus": -25,
+      "reason": "Brief rattle of the loaded source before its release",
+      "role": "detail",
+      "band_hz": [
+        850,
+        5800
+      ]
+    },
+    {
+      "asset": "ratchet-windup",
+      "time_s": 0.16,
+      "start_s": 0.16,
+      "end_s": 0.185,
+      "level_dbfs_before_bus": -24,
+      "reason": "Brief rattle of the loaded source before its release",
+      "role": "detail",
+      "band_hz": [
+        850,
+        5800
+      ]
+    },
+    {
+      "asset": "ratchet-windup",
+      "time_s": 0.198,
+      "start_s": 0.198,
+      "end_s": 0.223,
+      "level_dbfs_before_bus": -23,
+      "reason": "Brief rattle of the loaded source before its release",
+      "role": "detail",
+      "band_hz": [
+        850,
+        5800
+      ]
+    },
+    {
+      "asset": "metal-latch",
+      "time_s": 0.24,
+      "start_s": 0.22027083333333333,
+      "end_s": 0.31027083333333333,
+      "level_dbfs_before_bus": -16.5,
+      "reason": "Source releases the fleet",
+      "role": "foreground",
+      "band_hz": [
+        400,
+        6500
+      ]
+    },
+    {
+      "asset": "air-whoosh",
+      "time_s": 0.48,
+      "start_s": 0.277875,
+      "end_s": 0.567875,
+      "level_dbfs_before_bus": -19,
+      "reason": "OpenAI sweeps into the foreground and toward the right",
+      "role": "movement",
+      "band_hz": null
+    },
+    {
+      "asset": "device-tap",
+      "time_s": 0.48,
+      "start_s": 0.4734791666666667,
+      "end_s": 0.5534791666666666,
+      "level_dbfs_before_bus": -22.5,
+      "reason": "Small dry edge on OpenAI reaching its maximum foreground size",
+      "role": "detail",
+      "band_hz": [
+        1800,
+        6500
+      ]
+    },
+    {
+      "asset": "cloth-turn",
+      "time_s": 0.63,
+      "start_s": 0.5764375,
+      "end_s": 0.7164375,
+      "level_dbfs_before_bus": -23,
+      "reason": "Brief passing texture as OpenAI leaves the near foreground",
+      "role": "movement",
+      "band_hz": null
+    },
+    {
+      "asset": "paper-slide",
+      "time_s": 0.82,
+      "start_s": 0.82,
+      "end_s": 0.97,
+      "level_dbfs_before_bus": -22,
+      "reason": "Claude token changes direction toward its largest foreground pose",
+      "role": "movement",
+      "band_hz": null
+    },
+    {
+      "asset": "page-flip",
+      "time_s": 0.96,
+      "start_s": 0.9195416666666667,
+      "end_s": 1.0495416666666666,
+      "level_dbfs_before_bus": -17,
+      "reason": "Dry paper-like snap on Claude turning face-on",
+      "role": "foreground",
+      "band_hz": null
+    },
+    {
+      "asset": "hand-wood-slide",
+      "time_s": 0.96,
+      "start_s": 0.9413125,
+      "end_s": 1.0063125,
+      "level_dbfs_before_bus": -24,
+      "reason": "Low tactile body underneath the same token turn",
+      "role": "body",
+      "band_hz": [
+        130,
+        800
+      ]
+    },
+    {
+      "asset": "micro-glitch",
+      "time_s": 1.1,
+      "start_s": 1.1,
+      "end_s": 1.145,
+      "level_dbfs_before_bus": -25,
+      "reason": "The studio background switches to the portal",
+      "role": "detail",
+      "band_hz": [
+        800,
+        5500
+      ]
+    },
+    {
+      "asset": "zipper-fast",
+      "time_s": 1.25,
+      "start_s": 1.1847083333333333,
+      "end_s": 1.3347083333333334,
+      "level_dbfs_before_bus": -21,
+      "reason": "Short textured zip follows Gemini moving forward and right",
+      "role": "movement",
+      "band_hz": null
+    },
+    {
+      "asset": "plastic-click",
+      "time_s": 1.35,
+      "start_s": 1.3405625,
+      "end_s": 1.4015625,
+      "level_dbfs_before_bus": -19.5,
+      "reason": "Gemini reaches its largest foreground size",
+      "role": "foreground",
+      "band_hz": [
+        650,
+        6500
+      ]
+    },
+    {
+      "asset": "physical-landing",
+      "time_s": 1.4,
+      "start_s": 1.3770416666666667,
+      "end_s": 1.5070416666666666,
+      "level_dbfs_before_bus": -18.5,
+      "reason": "OpenAI compresses into its seated position",
+      "role": "foreground",
+      "band_hz": [
+        100,
+        1800
+      ]
+    },
+    {
+      "asset": "soft-typewriter",
+      "time_s": 1.58,
+      "start_s": 1.5743125,
+      "end_s": 1.6063125,
+      "level_dbfs_before_bus": -26,
+      "reason": "One small detent for the spreading background model row",
+      "role": "detail",
+      "band_hz": [
+        1000,
+        6500
+      ]
+    },
+    {
+      "asset": "servo-move",
+      "time_s": 1.72,
+      "start_s": 1.6910208333333334,
+      "end_s": 1.8510208333333333,
+      "level_dbfs_before_bus": -22.5,
+      "reason": "Short mechanical turn follows Grok rotating toward the viewer",
+      "role": "movement",
+      "band_hz": null
+    },
+    {
+      "asset": "stamp-contact",
+      "time_s": 1.85,
+      "start_s": 1.8359791666666667,
+      "end_s": 1.9259791666666666,
+      "level_dbfs_before_bus": -18.5,
+      "reason": "Dry contact accent on Grok reaching the foreground",
+      "role": "foreground",
+      "band_hz": null
+    },
+    {
+      "asset": "plastic-click",
+      "time_s": 2.02,
+      "start_s": 2.0016041666666666,
+      "end_s": 2.0816041666666667,
+      "level_dbfs_before_bus": -22,
+      "reason": "Claude finishes seating before the longer riser",
+      "role": "detail",
+      "band_hz": null
+    }
+  ],
+  "opening_replaced_through_s": 2.12,
+  "later_stem": "clear-action-sfx.wav",
+  "full_stem": "punchy-action-sfx.wav",
+  "source_manifest": "../catalog.json",
+  "status": "Historical FILE audition ledger; use examples/file165-opening.json for the portable renderer."
+}
