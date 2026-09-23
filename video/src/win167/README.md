@@ -34,8 +34,8 @@ Restore this revision from the [canonical Drive archive](https://drive.google.co
 
 ## Revised hook trials
 
-Alex rejected the initial flytrap and family-tree trial concepts as unclear and insufficiently connected to Claude. They are preserved as historical modules/evidence, not current recommendations.
+Alex rejected the prior trial concepts as unclear or too simple. Historical modules and qa/trials-v1-rejected and qa/trials-v2-rejected retain the earlier work.
 
-Compositions `WIN-B` (Claude Selection) and `WIN-C` (Claude Rewrite) are full 826-frame alternatives. Render with `npx remotion render src/index.tsx WIN-B B-native.mp4 --codec=h264 --crf=18 --concurrency=2` (or WIN-C). Apply the Rec.709 normalization above and mux the matching `public/master-trial-B.wav` or `master-trial-C.wav`. The approved `WIN` default remains unchanged. `src/ClaudeTrialHooks.tsx` contains current opening concepts; frames92 onward share the approved body. `python3 tools/mix-trials.py` rebuilds current trial audio without modifying the approved master. See `qa/trials/review.md`, cue ledgers, comparison results and blank tracker.
+Compositions `WIN-B` (Pressure Trial) and `WIN-C` (Draft Avalanche) are full 826-frame alternatives. Render with `npx remotion render src/index.tsx WIN-B B-native.mp4 --codec=h264 --crf=18 --concurrency=2` (or WIN-C). Apply the Rec.709 normalization above and mux the matching `public/master-trial-B.wav` or `master-trial-C.wav`. `src/CinematicTrialHooks.tsx` contains the current hooks. Frames92 onward share the approved body. `python3 tools/mix-trials.py` rebuilds trial audio without changing the approved master. See `qa/trials/review.md`, cue ledgers, comparison results and blank tracker.
 
-[Full revised trials in Drive](https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ). Both use the existing caption, cover and live article.
+[Full revised trials in Drive](https://drive.google.com/drive/folders/1nLxtxjLaHAJbE000brn8iqsmOZa28bCZ). Both use the existing caption, cover and live article. These revisions remain subject to creative review.

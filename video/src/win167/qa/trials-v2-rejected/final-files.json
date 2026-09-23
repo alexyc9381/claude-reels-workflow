@@ -1,0 +1,12 @@
+{
+  "B": {
+    "name": "outputs/B - Claude Selection - FULL.mp4",
+    "sha256": "c050ca5f5b0ad6d32648bd8f5a27ef9034b4ca879c6a1652b29c9cdf05dce7f8",
+    "bytes": 9850932
+  },
+  "C": {
+    "name": "outputs/C - Claude Rewrite - FULL.mp4",
+    "sha256": "cf5028b9a4ffda7693dbae05c368dab1a0df1ff8a52f229e5d0d5e1523671cb5",
+    "bytes": 9802592
+  }
+}

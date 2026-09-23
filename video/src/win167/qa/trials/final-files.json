@@ -1,12 +1,12 @@
 {
   "B": {
-    "name": "outputs/B - Claude Selection - FULL.mp4",
-    "sha256": "c050ca5f5b0ad6d32648bd8f5a27ef9034b4ca879c6a1652b29c9cdf05dce7f8",
-    "bytes": 9850932
+    "name": "outputs/B - Pressure Trial - FULL.mp4",
+    "sha256": "97cee3d1b767f73eb0880780827b0a8aa22ea3d1cc075de3f5b82c6afc7a0389",
+    "bytes": 10003877
   },
   "C": {
-    "name": "outputs/C - Claude Rewrite - FULL.mp4",
-    "sha256": "cf5028b9a4ffda7693dbae05c368dab1a0df1ff8a52f229e5d0d5e1523671cb5",
-    "bytes": 9802592
+    "name": "outputs/C - Draft Avalanche - FULL.mp4",
+    "sha256": "2aeac5d16c1b369f4fec774de4feaf0299ba1232472705d8fec8efe3d5f888ae",
+    "bytes": 9944492
   }
 }

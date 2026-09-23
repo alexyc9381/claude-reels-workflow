@@ -35,6 +35,11 @@
     "sha256": "fac6169d276506b1334e812f61592ea62ec81c73481704bc03067a57d9643d34"
   },
   {
+    "path": "src/CinematicTrialHooks.tsx",
+    "bytes": 12420,
+    "sha256": "d1d132ecbd12a9278b1f96d59399e700a1ad5420e42e2eaaea4fe10ef33a14a5"
+  },
+  {
     "path": "src/CityActionScenes.tsx",
     "bytes": 6465,
     "sha256": "d0da72eca313a5d2dc2b1b506691549e6e0381779afb2ce82e309b7804e509e7"
@@ -221,8 +226,8 @@
   },
   {
     "path": "src/index.tsx",
-    "bytes": 3129,
-    "sha256": "d4df88d9f056c4086acbc036ffc043051f0d3996a7160708889c8f6a8a4e5337"
+    "bytes": 3130,
+    "sha256": "3322f29d41c602ea4e9369f87a6c2c98d57dcff9c301055ebeaf2b233112a247"
   },
   {
     "path": "src/supporting-review-index.tsx",
@@ -256,7 +261,7 @@
   },
   {
     "path": "tools/mix-trials.py",
-    "bytes": 1948,
-    "sha256": "8a132d4bb434b0866566af18d7a21424fe15fe3e7de745ef6e4f02026221fe80"
+    "bytes": 2003,
+    "sha256": "c3ff6c995446c8ca78e2cbe63c64481538138e9738598b3733691fb81ef06198"
   }
 ]

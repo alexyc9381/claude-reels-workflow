@@ -33,7 +33,7 @@
       "start_time": "0.000000",
       "duration_ts": 422912,
       "duration": "27.533333",
-      "bit_rate": "2582445",
+      "bit_rate": "2623498",
       "bits_per_raw_sample": "8",
       "nb_frames": "826",
       "disposition": {
@@ -77,7 +77,7 @@
       "start_time": "0.000000",
       "duration_ts": 1321584,
       "duration": "27.533000",
-      "bit_rate": "256475",
+      "bit_rate": "256652",
       "nb_frames": "1292",
       "disposition": {
         "default": 1,
@@ -101,15 +101,15 @@
     }
   ],
   "format": {
-    "filename": "outputs/C - Claude Rewrite - FULL.mp4",
+    "filename": "outputs/C - Draft Avalanche - FULL.mp4",
     "nb_streams": 2,
     "nb_programs": 0,
     "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
     "format_long_name": "QuickTime / MOV",
     "start_time": "0.000000",
     "duration": "27.534000",
-    "size": "9802592",
-    "bit_rate": "2848141",
+    "size": "9944492",
+    "bit_rate": "2889370",
     "probe_score": 100,
     "tags": {
       "major_brand": "isom",

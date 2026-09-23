@@ -6,8 +6,8 @@ p=Path(sys.argv[1] if len(sys.argv)>1 else str(Path(__file__).resolve().parents[
 sr,master=wavfile.read(p/'master-overhaul.wav');cut=92*1600
 _,vo=wavfile.read(p/'voice-v6.wav');_,music=wavfile.read(p/'music-v6.wav')
 cues={
-'B':[(.0,'typing',.15),(.3,'thock',.23),(.34,'v2-fall-whistle',.10),(.66,'metal',.18),(.7,'v2-soft-snap',.16),(.99,'selector',.22),(1.02,'v3-zap-1',.13),(1.24,'v3-power-spark',.16),(1.78,'deep-contact',.21),(2.03,'copy',.19),(2.16,'v2-bud-3',.16),(2.44,'v2-spring-load',.12),(2.67,'v4-launch-twang',.17)],
-'C':[(.0,'typing',.13),(.13,'v2-rubber-compress',.16),(.34,'shell-crack',.2),(.69,'v3-zap-2',.14),(.78,'selector',.14),(1.04,'v4-book-rupture',.22),(1.26,'v3-power-spark',.12),(1.59,'deep-contact',.22),(2.15,'v3-zap-3',.14),(2.17,'thock',.2),(2.38,'v2-spring-load',.12),(2.55,'v4-launch-twang',.17)]}
+'B':[(0,'lever',.16),(.12,'gear',.18),(.4,'deep-contact',.27),(.44,'v2-rubber-compress',.21),(.7,'paper',.16),(.89,'v2-soft-snap',.16),(1.1,'v4-binding-creak',.19),(1.39,'metal',.19),(1.62,'v2-machine-reverse',.13),(1.89,'v4-book-rupture',.25),(2.05,'v3-paper-flurry',.13),(2.2,'thock',.23),(2.35,'copy',.18),(2.46,'v2-bud-3',.14),(2.7,'step',.19)],
+'C':[(0,'v3-paper-flurry',.18),(.16,'page_turn',.16),(.39,'deep-contact',.26),(.44,'v2-rubber-compress',.18),(.78,'paper',.2),(1.08,'v2-soft-snap',.19),(1.2,'latch',.16),(1.38,'v4-binding-creak',.19),(1.78,'v4-book-rupture',.25),(1.98,'v3-paper-flurry',.17),(2.2,'thock',.2),(2.28,'copy',.15),(2.62,'step',.2)]}
 for key,rows in cues.items():
  hook=vo[:cut].astype(np.float64)/32768+music[:cut].astype(np.float64)/32768
  ledger=[]
