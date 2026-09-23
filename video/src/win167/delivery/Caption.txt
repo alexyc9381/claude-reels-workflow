@@ -1,0 +1,26 @@
+Comment "WIN" and I'll DM you The Darwin Loop Guide. Follow so the DM lands 📩
+
+👇 READ BELOW if Claude's first answer is close, but not quite there.
+
+Instead of asking for another random rewrite, give the next round a stronger starting point.
+
+1. Create three distinct approaches.
+Give Claude one clear task and a small set of criteria. The options should differ in a useful way, not just swap a few words.
+
+2. Pick the strongest baseline.
+Compare the actual results. Keep what works, name what is weak, and choose the version you want to improve.
+
+3. Evolve the winner.
+Build the next three variations from that selected version. Preserve its strengths and give each variation a specific improvement to make.
+
+That's the Darwin Loop pattern in this reel: create, select, refine.
+
+The name describes this workflow. It isn't a special Anthropic command, and a prompt does not guarantee a finished production app. You can start in one Claude conversation; separate agents are optional.
+
+Start with a basic draft and one refinement round. More candidates and more reviews can use more tokens, so check usage before extending the loop.
+
+The guide includes the copyable three-line prompt, a follow-up selection prompt, a small Claude Code example, and a checklist for deciding when to stop.
+
+Comment "WIN" for The Darwin Loop Guide.
+
+#ClaudeAI #ClaudeCode #AIAgents #PromptEngineering #NoCode #AIWorkflow

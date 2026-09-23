@@ -1,0 +1,45 @@
+[
+  {
+    "id": "1e1Ncu7ug_tvrfoTx559YSwwlmvLJ4nC3",
+    "local": "outputs/WIN_Full_Reel_Continuous_Motion.mp4",
+    "bytes": 10407060,
+    "sha256": "e3807a133a1f0a568442e9499f8922d2680d0adc9f9d98b8ac07901592cb7437",
+    "matches": true
+  },
+  {
+    "id": "1aJD2h9xYYh5amNY7ujj9fC01jsFF2MZa",
+    "local": "outputs/WIN_cover.png",
+    "bytes": 390985,
+    "sha256": "24c49fcbfe7c09fffa4dcfb6dde4ca7ef07682d6947ae17190e91d51eb930f06",
+    "matches": true
+  },
+  {
+    "id": "1aVd-KD8YQ49tG-Ld2Cx8kaSC2yq8T5JR",
+    "local": "outputs/WIN_caption.txt",
+    "bytes": 1405,
+    "sha256": "03d4b7549af4de907a0192e6dbcdb3382635cd9a56e0114e15685cc81dbf7807",
+    "matches": true
+  },
+  {
+    "id": "1mDlbtYsP5uqjcFlugzS2ybqWq1vlz22N",
+    "local": "outputs/Article-link.txt",
+    "bytes": 134,
+    "sha256": "347fad1c3ba40b706cf30187ebcafb7bbe37f8a1924a22248e13e01e62a60bd0",
+    "matches": true
+  },
+  {
+    "id": "1js5R5NkDRomYasor5HJyeJYRX-rakts4",
+    "bytes": 37216044,
+    "sha256": "9fabde32f2b9d34d8d96842b1ca083a1650d4b8170fd594f69f89e4a020011cb",
+    "matches": true,
+    "parent": "1fGrS2LI8I1WSMsAGgCtbffdFkC4eCawt"
+  },
+  {
+    "id": "1pdlHC7lJKrwK32e5JYO-0iMExDTAmJ_7",
+    "local": "outputs/Production-notes.txt",
+    "bytes": 1242,
+    "sha256": "0f77bd985060cf6730c00f245b5d225e272fee005acebe85021bab6e84faaab6",
+    "matches": true,
+    "parent": "1fGrS2LI8I1WSMsAGgCtbffdFkC4eCawt"
+  }
+]

@@ -24,9 +24,9 @@ For the delivered Rec.709 MP4, render first, then normalize Remotion's full-rang
 
 ## Gotchas
 
-The current local preview is `WIN_Full_Reel_Continuous_Motion.mp4`. The independent [scene-ending review](qa/continuous-tail-review.md) evaluates the final 0.7 seconds of all12 scenes; audio was checked programmatically for timing, preservation and clipping, without an independent subjective-listening claim. User creative approval is pending. The 1000→0 token display is illustrative; 20X is supplied copy, not a measured benchmark.
+The current local preview is `WIN_Full_Reel_Continuous_Motion.mp4`. The independent [scene-ending review](qa/continuous-tail-review.md) evaluates the final 0.7 seconds of all12 scenes; audio was checked programmatically for timing, preservation and clipping, without an independent subjective-listening claim. Alex requested this revision be pushed to Drive. Independent QA is still not a measured engagement result. The 1000→0 token display is illustrative; 20X is supplied copy, not a measured benchmark.
 
-The existing canonical Drive video/source ZIP is an older cut. This source publication and local editable archive do not imply that Drive has been replaced. Restore only matching media and verify hashes. Original voice, caption timing and canonical SlopKit anatomy were preserved. Earlier source modules are retained for reference, not all used in the final edit.
+This release is the current canonical Drive handoff. Restore matching media from the [editable source archive](https://drive.google.com/file/d/1js5R5NkDRomYasor5HJyeJYRX-rakts4/view) and verify hashes. The posting copy, article link and handoff notes are in `delivery/`; the source ZIP also contains the system cover. Original voice, caption timing and canonical SlopKit anatomy were preserved. Earlier source modules are retained for reference, not all used in the final edit.
 
 ## Related
 
