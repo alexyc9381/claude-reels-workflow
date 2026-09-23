@@ -1,0 +1,16 @@
+{
+  "version": "Punchy action",
+  "opening_layers": 20,
+  "first_frame_layers": 3,
+  "opening_sfx_to_speech_db": -9.000000000288317,
+  "first_2s_sfx_change_from_clear_db": 4.985723594665767,
+  "first_100ms_sfx_change_from_clear_db": 6.111569982120667,
+  "riser_and_audio_from_2_12_s_pcm_unchanged": true,
+  "voice_unchanged": true,
+  "music_unchanged": true,
+  "video_hash": "SHA256=acb49db50cf536c5139012df5578fdd7b043563bea112c1aff5e832294339342",
+  "encoded_true_peak_dbfs": -1.599915623664856,
+  "full_decode": "passed",
+  "bus_trim_db": 4.580633646198436,
+  "listening_note": "Technical timing, signal and playback checks; creative preference requires user audition."
+}

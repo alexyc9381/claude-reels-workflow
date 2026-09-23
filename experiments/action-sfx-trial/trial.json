@@ -1,0 +1,57 @@
+{
+  "id": "action-sfx-v0",
+  "status": "experimental",
+  "enabled_by_default": false,
+  "approved_as_house_default": false,
+  "planned_video_count": 3,
+  "promotion_requires": "Alex explicitly approves after listening and reviewing trial results; never promote automatically.",
+  "videos": [
+    {
+      "slot": 1,
+      "reel": null,
+      "status": "not_selected",
+      "render": null,
+      "feedback": null,
+      "metrics": null
+    },
+    {
+      "slot": 2,
+      "reel": null,
+      "status": "not_selected",
+      "render": null,
+      "feedback": null,
+      "metrics": null
+    },
+    {
+      "slot": 3,
+      "reel": null,
+      "status": "not_selected",
+      "render": null,
+      "feedback": null,
+      "metrics": null
+    }
+  ],
+  "reference_audition": {
+    "reel": "FILE 165",
+    "version": "Punchy action",
+    "status": "candidate_not_approved"
+  },
+  "review_fields": [
+    "0_to_2s_interest",
+    "voice_clarity",
+    "contextual_action_match",
+    "timbre_variety",
+    "riser_payoff",
+    "fatigue",
+    "keep_change_remove"
+  ],
+  "analytics_fields": [
+    "views",
+    "measurement_window",
+    "2s_retention_if_available",
+    "4s_retention_if_available",
+    "average_watch_time",
+    "completion_rate"
+  ],
+  "analytics_note": "Record unavailable metrics as null. Different posts have topic/audience/distribution confounds; no causal lift claim from three posts."
+}

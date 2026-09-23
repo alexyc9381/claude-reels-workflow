@@ -51,6 +51,10 @@ the full subsystem list is there. The highlights:
 
 [Illustrated plates + authored 2D animation](editing-styles/illustrated-plates.md) combines generated scenery with independently animated Claude characters, props and real logos. [SPLIT 161 lessons and revision record](memory/reels/split161-revision-record.md) preserve the rejected attempts and the final music correction. This is an alternative explicitly requested by Alex, **not a replacement for the default reel or YouTube system**.
 
+## Experimental sound trials
+
+[Action SFX trial](experiments/action-sfx-trial/README.md) is an opt-in candidate for three selected reels: layered first-frame hits, contextual Foley and payoff-timed risers. **Unapproved and disabled by default.** It does not replace the house sound system; review with Alex before any promotion.
+
 ## Setup on a new account
 
 ```bash

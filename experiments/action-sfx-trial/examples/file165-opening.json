@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "experimental": true,
+  "name": "FILE 165 Punchy opening, portable trial",
+  "duration_s": 2.12,
+  "opening_until_s": 2.12,
+  "mix": {
+    "opening_margin_db": -9,
+    "body_margin_db": -14
+  },
+  "cues": [
+    {
+      "asset": "single-dry-chime",
+      "source_start_s": 0,
+      "duration_s": 0.13,
+      "at_s": 0,
+      "peak_dbfs": -15,
+      "reason": "Bright first-frame headline accent",
+      "role": "foreground",
+      "anchor": "start",
+      "pan": 0,
+      "gesture": "frame-zero"
+    },
+    {
+      "asset": "camera-snap",
+      "source_start_s": 0.118,
+      "duration_s": 0.075,
+      "at_s": 0,
+      "peak_dbfs": -18,
+      "reason": "Crisp dry attack under the first-frame accent",
+      "role": "attack",
+      "anchor": "start",
+      "pan": 0,
+      "gesture": "frame-zero",
+      "band_hz": [
+        850,
+        6200
+      ]
+    },
+    {
+      "asset": "physical-landing",
+      "source_start_s": 0.08,
+      "duration_s": 0.135,
+      "at_s": 0,
+      "peak_dbfs": -19.5,
+      "reason": "Compact body gives the already-loaded model cluster weight",
+      "role": "body",
+      "anchor": "start",
+      "pan": 0,
+      "gesture": "frame-zero",
+      "band_hz": [
+        100,
+        700
+      ]
+    },
+    {
+      "asset": "ratchet-windup",
+      "source_start_s": 0.088,
+      "duration_s": 0.025,
+      "at_s": 0.105,
+      "peak_dbfs": -25,
+      "reason": "Brief rattle of the loaded source before its release",
+      "role": "detail",
+      "anchor": "start",
+      "pan": 0,
+      "gesture": "source-release",
+      "band_hz": [
+        850,
+        5800
+      ]
+    },
+    {
+      "asset": "ratchet-windup",
+      "source_start_s": 0.088,
+      "duration_s": 0.025,
+      "at_s": 0.16,
+      "peak_dbfs": -24,
+      "reason": "Brief rattle of the loaded source before its release",
+      "role": "detail",
+      "anchor": "start",
+      "pan": 0,
+      "gesture": "source-release",
+      "band_hz": [
+        850,
+        5800
+      ]
+    },
+    {
+      "asset": "ratchet-windup",
+      "source_start_s": 0.088,
+      "duration_s": 0.025,
+      "at_s": 0.198,
+      "peak_dbfs": -23,
+      "reason": "Brief rattle of the loaded source before its release",
+      "role": "detail",
+      "anchor": "start",
+      "pan": 0,
+      "gesture": "source-release",
+      "band_hz": [
+        850,
+        5800
+      ]
+    },
+    {
+      "asset": "metal-latch",
+      "source_start_s": 0.187,
+      "duration_s": 0.09,
+      "at_s": 0.24,
+      "peak_dbfs": -16.5,
+      "reason": "Source releases the fleet",
+      "role": "foreground",
+      "anchor": "peak",
+      "pan": 0,
+      "gesture": "source-release",
+      "band_hz": [
+        400,
+        6500
+      ]
+    },
+    {
+      "asset": "air-whoosh",
+      "source_start_s": 0.51,
+      "duration_s": 0.29,
+      "at_s": 0.48,
+      "peak_dbfs": -19,
+      "reason": "OpenAI sweeps into the foreground and toward the right",
+      "role": "movement",
+      "anchor": "peak",
+      "pan": 0.2,
+      "gesture": "openai-sweep"
+    },
+    {
+      "asset": "device-tap",
+      "source_start_s": 0,
+      "duration_s": 0.08,
+      "at_s": 0.48,
+      "peak_dbfs": -22.5,
+      "reason": "Small dry edge on OpenAI reaching its maximum foreground size",
+      "role": "detail",
+      "anchor": "peak",
+      "pan": 0,
+      "gesture": "openai-sweep",
+      "band_hz": [
+        1800,
+        6500
+      ]
+    },
+    {
+      "asset": "cloth-turn",
+      "source_start_s": 0.12,
+      "duration_s": 0.14,
+      "at_s": 0.63,
+      "peak_dbfs": -23,
+      "reason": "Brief passing texture as OpenAI leaves the near foreground",
+      "role": "movement",
+      "anchor": "peak",
+      "pan": 0.2,
+      "gesture": "openai-sweep"
+    },
+    {
+      "asset": "paper-slide",
+      "source_start_s": 0.285,
+      "duration_s": 0.15,
+      "at_s": 0.82,
+      "peak_dbfs": -22,
+      "reason": "Claude token changes direction toward its largest foreground pose",
+      "role": "movement",
+      "anchor": "start",
+      "pan": -0.12,
+      "gesture": "claude-turn"
+    },
+    {
+      "asset": "page-flip",
+      "source_start_s": 0.104,
+      "duration_s": 0.13,
+      "at_s": 0.96,
+      "peak_dbfs": -17,
+      "reason": "Dry paper-like snap on Claude turning face-on",
+      "role": "foreground",
+      "anchor": "peak",
+      "pan": -0.12,
+      "gesture": "claude-turn"
+    },
+    {
+      "asset": "hand-wood-slide",
+      "source_start_s": 0.117,
+      "duration_s": 0.065,
+      "at_s": 0.96,
+      "peak_dbfs": -24,
+      "reason": "Low tactile body underneath the same token turn",
+      "role": "body",
+      "anchor": "peak",
+      "pan": 0,
+      "gesture": "claude-turn",
+      "band_hz": [
+        130,
+        800
+      ]
+    },
+    {
+      "asset": "micro-glitch",
+      "source_start_s": 0.19,
+      "duration_s": 0.045,
+      "at_s": 1.1,
+      "peak_dbfs": -25,
+      "reason": "The studio background switches to the portal",
+      "role": "detail",
+      "anchor": "start",
+      "pan": 0,
+      "gesture": "portal-change",
+      "band_hz": [
+        800,
+        5500
+      ]
+    },
+    {
+      "asset": "zipper-fast",
+      "source_start_s": 0.2,
+      "duration_s": 0.15,
+      "at_s": 1.25,
+      "peak_dbfs": -21,
+      "reason": "Short textured zip follows Gemini moving forward and right",
+      "role": "movement",
+      "anchor": "peak",
+      "pan": 0.16,
+      "gesture": "gemini-arrival"
+    },
+    {
+      "asset": "plastic-click",
+      "source_start_s": 0.009,
+      "duration_s": 0.061,
+      "at_s": 1.35,
+      "peak_dbfs": -19.5,
+      "reason": "Gemini reaches its largest foreground size",
+      "role": "foreground",
+      "anchor": "peak",
+      "pan": 0,
+      "gesture": "gemini-arrival",
+      "band_hz": [
+        650,
+        6500
+      ]
+    },
+    {
+      "asset": "physical-landing",
+      "source_start_s": 0.058,
+      "duration_s": 0.13,
+      "at_s": 1.4,
+      "peak_dbfs": -18.5,
+      "reason": "OpenAI compresses into its seated position",
+      "role": "foreground",
+      "anchor": "peak",
+      "pan": 0,
+      "gesture": "openai-seat",
+      "band_hz": [
+        100,
+        1800
+      ]
+    },
+    {
+      "asset": "soft-typewriter",
+      "source_start_s": 0.015,
+      "duration_s": 0.032,
+      "at_s": 1.58,
+      "peak_dbfs": -26,
+      "reason": "One small detent for the spreading background model row",
+      "role": "detail",
+      "anchor": "peak",
+      "pan": 0,
+      "gesture": "row-fan",
+      "band_hz": [
+        1000,
+        6500
+      ]
+    },
+    {
+      "asset": "servo-move",
+      "source_start_s": 0.195,
+      "duration_s": 0.16,
+      "at_s": 1.72,
+      "peak_dbfs": -22.5,
+      "reason": "Short mechanical turn follows Grok rotating toward the viewer",
+      "role": "movement",
+      "anchor": "peak",
+      "pan": -0.12,
+      "gesture": "grok-arrival"
+    },
+    {
+      "asset": "stamp-contact",
+      "source_start_s": 0.052,
+      "duration_s": 0.09,
+      "at_s": 1.85,
+      "peak_dbfs": -18.5,
+      "reason": "Dry contact accent on Grok reaching the foreground",
+      "role": "foreground",
+      "anchor": "peak",
+      "pan": 0,
+      "gesture": "grok-arrival"
+    },
+    {
+      "asset": "plastic-click",
+      "source_start_s": 0,
+      "duration_s": 0.08,
+      "at_s": 2.02,
+      "peak_dbfs": -22,
+      "reason": "Claude finishes seating before the longer riser",
+      "role": "detail",
+      "anchor": "peak",
+      "pan": 0,
+      "gesture": "claude-seat"
+    }
+  ]
+}
